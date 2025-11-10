@@ -73,7 +73,7 @@ class MibCompilerTool:
                 if file_path.suffix.lower() in extensions:
                     try:
                         with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                            first_chunk = f.read(1024)
+                            first_chunk = f.read(2048)
                             if 'DEFINITIONS ::= BEGIN' in first_chunk:
                                 mib_files.append(file_path)
                     except Exception as e:
