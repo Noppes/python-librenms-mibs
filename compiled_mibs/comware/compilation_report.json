@@ -1,19 +1,11 @@
 {
-  "timestamp": "2025-10-02T11:33:29.282232",
+  "timestamp": "2026-05-29T09:24:20.132466",
   "stats": {
-    "total": 186,
-    "compiled": 169,
-    "failed": 13,
-    "skipped": 4,
+    "total": 270,
+    "compiled": 254,
+    "failed": 5,
+    "skipped": 11,
     "errors": [
-      {
-        "mib": "HH3C-8021PAE-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "HH3C-DHCPSNOOP-MIB",
-        "error": "unprocessed"
-      },
       {
         "mib": "HH3C-FC-ZONE-SERVER-MIB",
         "error": "unprocessed"
@@ -27,38 +19,14 @@
         "error": "unprocessed"
       },
       {
-        "mib": "HH3C-MPLS-BGP-VPN-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "HH3C-REDUNDANCY-POWER-MIB",
-        "error": "missing"
-      },
-      {
         "mib": "HH3C-RBAC-MIB",
         "error": "'int' object has no attribute 'split'"
       },
       {
         "mib": "HH3C-SPB-MIB",
         "error": "unprocessed"
-      },
-      {
-        "mib": "HH3C-LswARP-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "HH3C-LswDHCP-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "HH3C-LswMix-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "HH3C-LswSMON-MIB",
-        "error": "missing"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

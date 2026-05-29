@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\radlan\RADLAN-SYSLOG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:22:43 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -103,10 +100,6 @@ if 'mibBuilder' not in globals():
     "TextualConvention",
     "TruthValue")
 
-(DisplayString,) = mibBuilder.importSymbols(
-    "SNMPv2-TC-v1",
-    "DisplayString")
-
 
 # MODULE-IDENTITY
 
@@ -115,7 +108,8 @@ rlSyslog = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     rlSyslog.setRevisions(
-        ("2003-09-22 00:00",)
+        ("2006-02-12 00:00",
+         "2003-09-22 00:00")
     )
 
 
@@ -621,6 +615,248 @@ rlSyslogCacheTotalMessages = _RlSyslogCacheTotalMessages_Object(
 rlSyslogCacheTotalMessages.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rlSyslogCacheTotalMessages.setStatus("current")
+_RlSyslogAggregationEnable_Type = TruthValue
+_RlSyslogAggregationEnable_Object = MibScalar
+rlSyslogAggregationEnable = _RlSyslogAggregationEnable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 14),
+    _RlSyslogAggregationEnable_Type()
+)
+rlSyslogAggregationEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogAggregationEnable.setStatus("current")
+
+
+class _RlSyslogAggregationAgingTime_Type(Unsigned32):
+    """Custom type rlSyslogAggregationAgingTime based on Unsigned32"""
+    defaultValue = 300
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(15, 3600),
+    )
+
+
+_RlSyslogAggregationAgingTime_Type.__name__ = "Unsigned32"
+_RlSyslogAggregationAgingTime_Object = MibScalar
+rlSyslogAggregationAgingTime = _RlSyslogAggregationAgingTime_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 15),
+    _RlSyslogAggregationAgingTime_Type()
+)
+rlSyslogAggregationAgingTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogAggregationAgingTime.setStatus("current")
+
+
+class _RlSyslogMinLogToWebSeverity_Type(RlSyslogSeverity):
+    """Custom type rlSyslogMinLogToWebSeverity based on RlSyslogSeverity"""
+    defaultValue = 6
+
+
+_RlSyslogMinLogToWebSeverity_Type.__name__ = "RlSyslogSeverity"
+_RlSyslogMinLogToWebSeverity_Object = MibScalar
+rlSyslogMinLogToWebSeverity = _RlSyslogMinLogToWebSeverity_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 16),
+    _RlSyslogMinLogToWebSeverity_Type()
+)
+rlSyslogMinLogToWebSeverity.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogMinLogToWebSeverity.setStatus("current")
+
+
+class _RlSyslogAlarmFlag_Type(TruthValue):
+    """Custom type rlSyslogAlarmFlag based on TruthValue"""
+    defaultValue = 2
+
+
+_RlSyslogAlarmFlag_Type.__name__ = "TruthValue"
+_RlSyslogAlarmFlag_Object = MibScalar
+rlSyslogAlarmFlag = _RlSyslogAlarmFlag_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 17),
+    _RlSyslogAlarmFlag_Type()
+)
+rlSyslogAlarmFlag.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogAlarmFlag.setStatus("current")
+
+
+class _RlSyslogOriginId_Type(Integer32):
+    """Custom type rlSyslogOriginId based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 1),
+          ("hostname", 2),
+          ("ip", 3),
+          ("ipv6", 4),
+          ("string", 5))
+    )
+
+
+_RlSyslogOriginId_Type.__name__ = "Integer32"
+_RlSyslogOriginId_Object = MibScalar
+rlSyslogOriginId = _RlSyslogOriginId_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 18),
+    _RlSyslogOriginId_Type()
+)
+rlSyslogOriginId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogOriginId.setStatus("current")
+
+
+class _RlSyslogOriginIdString_Type(DisplayString):
+    """Custom type rlSyslogOriginIdString based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 160),
+    )
+
+
+_RlSyslogOriginIdString_Type.__name__ = "DisplayString"
+_RlSyslogOriginIdString_Object = MibScalar
+rlSyslogOriginIdString = _RlSyslogOriginIdString_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 19),
+    _RlSyslogOriginIdString_Type()
+)
+rlSyslogOriginIdString.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogOriginIdString.setStatus("current")
+
+
+class _RlSyslogHeaderSendingEnabled_Type(TruthValue):
+    """Custom type rlSyslogHeaderSendingEnabled based on TruthValue"""
+    defaultValue = 1
+
+
+_RlSyslogHeaderSendingEnabled_Type.__name__ = "TruthValue"
+_RlSyslogHeaderSendingEnabled_Object = MibScalar
+rlSyslogHeaderSendingEnabled = _RlSyslogHeaderSendingEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 20),
+    _RlSyslogHeaderSendingEnabled_Type()
+)
+rlSyslogHeaderSendingEnabled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSyslogHeaderSendingEnabled.setStatus("current")
+_RlSyslogCountersPerSeverityTable_Object = MibTable
+rlSyslogCountersPerSeverityTable = _RlSyslogCountersPerSeverityTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21)
+)
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityTable.setStatus("current")
+_RlSyslogCountersPerSeverityEntry_Object = MibTableRow
+rlSyslogCountersPerSeverityEntry = _RlSyslogCountersPerSeverityEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1)
+)
+rlSyslogCountersPerSeverityEntry.setIndexNames(
+    (0, "RADLAN-SYSLOG-MIB", "rlSyslogCountersPerSeverityIndex"),
+)
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityEntry.setStatus("current")
+
+
+class _RlSyslogCountersPerSeverityIndex_Type(Integer32):
+    """Custom type rlSyslogCountersPerSeverityIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            1
+        )
+    )
+    namedValues = NamedValues(
+        ("static", 1)
+    )
+
+
+_RlSyslogCountersPerSeverityIndex_Type.__name__ = "Integer32"
+_RlSyslogCountersPerSeverityIndex_Object = MibTableColumn
+rlSyslogCountersPerSeverityIndex = _RlSyslogCountersPerSeverityIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 1),
+    _RlSyslogCountersPerSeverityIndex_Type()
+)
+rlSyslogCountersPerSeverityIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityIndex.setStatus("current")
+_RlSyslogCountersPerSeverityEmergencyCounter_Type = Counter32
+_RlSyslogCountersPerSeverityEmergencyCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityEmergencyCounter = _RlSyslogCountersPerSeverityEmergencyCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 2),
+    _RlSyslogCountersPerSeverityEmergencyCounter_Type()
+)
+rlSyslogCountersPerSeverityEmergencyCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityEmergencyCounter.setStatus("current")
+_RlSyslogCountersPerSeverityAlertCounter_Type = Counter32
+_RlSyslogCountersPerSeverityAlertCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityAlertCounter = _RlSyslogCountersPerSeverityAlertCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 3),
+    _RlSyslogCountersPerSeverityAlertCounter_Type()
+)
+rlSyslogCountersPerSeverityAlertCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityAlertCounter.setStatus("current")
+_RlSyslogCountersPerSeverityCriticalCounter_Type = Counter32
+_RlSyslogCountersPerSeverityCriticalCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityCriticalCounter = _RlSyslogCountersPerSeverityCriticalCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 4),
+    _RlSyslogCountersPerSeverityCriticalCounter_Type()
+)
+rlSyslogCountersPerSeverityCriticalCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityCriticalCounter.setStatus("current")
+_RlSyslogCountersPerSeverityErrorCounter_Type = Counter32
+_RlSyslogCountersPerSeverityErrorCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityErrorCounter = _RlSyslogCountersPerSeverityErrorCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 5),
+    _RlSyslogCountersPerSeverityErrorCounter_Type()
+)
+rlSyslogCountersPerSeverityErrorCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityErrorCounter.setStatus("current")
+_RlSyslogCountersPerSeverityWarningCounter_Type = Counter32
+_RlSyslogCountersPerSeverityWarningCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityWarningCounter = _RlSyslogCountersPerSeverityWarningCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 6),
+    _RlSyslogCountersPerSeverityWarningCounter_Type()
+)
+rlSyslogCountersPerSeverityWarningCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityWarningCounter.setStatus("current")
+_RlSyslogCountersPerSeverityNoticeCounter_Type = Counter32
+_RlSyslogCountersPerSeverityNoticeCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityNoticeCounter = _RlSyslogCountersPerSeverityNoticeCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 7),
+    _RlSyslogCountersPerSeverityNoticeCounter_Type()
+)
+rlSyslogCountersPerSeverityNoticeCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityNoticeCounter.setStatus("current")
+_RlSyslogCountersPerSeverityInfoCounter_Type = Counter32
+_RlSyslogCountersPerSeverityInfoCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityInfoCounter = _RlSyslogCountersPerSeverityInfoCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 8),
+    _RlSyslogCountersPerSeverityInfoCounter_Type()
+)
+rlSyslogCountersPerSeverityInfoCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityInfoCounter.setStatus("current")
+_RlSyslogCountersPerSeverityDebugCounter_Type = Counter32
+_RlSyslogCountersPerSeverityDebugCounter_Object = MibTableColumn
+rlSyslogCountersPerSeverityDebugCounter = _RlSyslogCountersPerSeverityDebugCounter_Object(
+    (1, 3, 6, 1, 4, 1, 89, 82, 2, 21, 1, 9),
+    _RlSyslogCountersPerSeverityDebugCounter_Type()
+)
+rlSyslogCountersPerSeverityDebugCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSyslogCountersPerSeverityDebugCounter.setStatus("current")
 _RlSyslogPhaseOneTests_ObjectIdentity = ObjectIdentity
 rlSyslogPhaseOneTests = _RlSyslogPhaseOneTests_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 89, 82, 3)
@@ -749,6 +985,24 @@ mibBuilder.exportSymbols(
        "rlSyslogFileMessagesIgnored": rlSyslogFileMessagesIgnored,
        "rlSyslogFileMessagesLogged": rlSyslogFileMessagesLogged,
        "rlSyslogCacheTotalMessages": rlSyslogCacheTotalMessages,
+       "rlSyslogAggregationEnable": rlSyslogAggregationEnable,
+       "rlSyslogAggregationAgingTime": rlSyslogAggregationAgingTime,
+       "rlSyslogMinLogToWebSeverity": rlSyslogMinLogToWebSeverity,
+       "rlSyslogAlarmFlag": rlSyslogAlarmFlag,
+       "rlSyslogOriginId": rlSyslogOriginId,
+       "rlSyslogOriginIdString": rlSyslogOriginIdString,
+       "rlSyslogHeaderSendingEnabled": rlSyslogHeaderSendingEnabled,
+       "rlSyslogCountersPerSeverityTable": rlSyslogCountersPerSeverityTable,
+       "rlSyslogCountersPerSeverityEntry": rlSyslogCountersPerSeverityEntry,
+       "rlSyslogCountersPerSeverityIndex": rlSyslogCountersPerSeverityIndex,
+       "rlSyslogCountersPerSeverityEmergencyCounter": rlSyslogCountersPerSeverityEmergencyCounter,
+       "rlSyslogCountersPerSeverityAlertCounter": rlSyslogCountersPerSeverityAlertCounter,
+       "rlSyslogCountersPerSeverityCriticalCounter": rlSyslogCountersPerSeverityCriticalCounter,
+       "rlSyslogCountersPerSeverityErrorCounter": rlSyslogCountersPerSeverityErrorCounter,
+       "rlSyslogCountersPerSeverityWarningCounter": rlSyslogCountersPerSeverityWarningCounter,
+       "rlSyslogCountersPerSeverityNoticeCounter": rlSyslogCountersPerSeverityNoticeCounter,
+       "rlSyslogCountersPerSeverityInfoCounter": rlSyslogCountersPerSeverityInfoCounter,
+       "rlSyslogCountersPerSeverityDebugCounter": rlSyslogCountersPerSeverityDebugCounter,
        "rlSyslogPhaseOneTests": rlSyslogPhaseOneTests,
        "rlSyslogPhaseOneTestGenerator": rlSyslogPhaseOneTestGenerator}
 )

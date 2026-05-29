@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\axis\AXIS-VIDEO-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:20:45 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -707,6 +704,319 @@ storageDisruptionDetected = _StorageDisruptionDetected_Object(
 storageDisruptionDetected.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     storageDisruptionDetected.setStatus("current")
+_Raid_ObjectIdentity = ObjectIdentity
+raid = _Raid_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10)
+)
+_RaidTable_Object = MibTable
+raidTable = _RaidTable_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 1)
+)
+if mibBuilder.loadTexts:
+    raidTable.setStatus("current")
+_RaidEntry_Object = MibTableRow
+raidEntry = _RaidEntry_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 1, 1)
+)
+raidEntry.setIndexNames(
+    (0, "AXIS-VIDEO-MIB", "raidId"),
+)
+if mibBuilder.loadTexts:
+    raidEntry.setStatus("current")
+
+
+class _RaidId_Type(Unsigned32):
+    """Custom type raidId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_RaidId_Type.__name__ = "Unsigned32"
+_RaidId_Object = MibTableColumn
+raidId = _RaidId_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 1, 1, 1),
+    _RaidId_Type()
+)
+raidId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    raidId.setStatus("current")
+
+
+class _RaidStatus_Type(Integer32):
+    """Custom type raidStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("active", 1),
+          ("degraded", 2),
+          ("syncing", 3),
+          ("failure", 4))
+    )
+
+
+_RaidStatus_Type.__name__ = "Integer32"
+_RaidStatus_Object = MibTableColumn
+raidStatus = _RaidStatus_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 1, 1, 2),
+    _RaidStatus_Type()
+)
+raidStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    raidStatus.setStatus("current")
+_RaidComponentTable_Object = MibTable
+raidComponentTable = _RaidComponentTable_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 2)
+)
+if mibBuilder.loadTexts:
+    raidComponentTable.setStatus("current")
+_RaidComponentEntry_Object = MibTableRow
+raidComponentEntry = _RaidComponentEntry_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 2, 1)
+)
+raidComponentEntry.setIndexNames(
+    (0, "AXIS-VIDEO-MIB", "raidId"),
+    (0, "AXIS-VIDEO-MIB", "raidComponentId"),
+)
+if mibBuilder.loadTexts:
+    raidComponentEntry.setStatus("current")
+
+
+class _RaidComponentId_Type(Unsigned32):
+    """Custom type raidComponentId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_RaidComponentId_Type.__name__ = "Unsigned32"
+_RaidComponentId_Object = MibTableColumn
+raidComponentId = _RaidComponentId_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 2, 1, 1),
+    _RaidComponentId_Type()
+)
+raidComponentId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    raidComponentId.setStatus("current")
+
+
+class _RaidComponentName_Type(SnmpAdminString):
+    """Custom type raidComponentName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_RaidComponentName_Type.__name__ = "SnmpAdminString"
+_RaidComponentName_Object = MibTableColumn
+raidComponentName = _RaidComponentName_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 2, 1, 2),
+    _RaidComponentName_Type()
+)
+raidComponentName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    raidComponentName.setStatus("current")
+
+
+class _RaidComponentStatus_Type(Integer32):
+    """Custom type raidComponentStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("connected", 1),
+          ("spare", 2),
+          ("missing", 3))
+    )
+
+
+_RaidComponentStatus_Type.__name__ = "Integer32"
+_RaidComponentStatus_Object = MibTableColumn
+raidComponentStatus = _RaidComponentStatus_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 10, 2, 1, 3),
+    _RaidComponentStatus_Type()
+)
+raidComponentStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    raidComponentStatus.setStatus("current")
+_BasicDeviceInfo_ObjectIdentity = ObjectIdentity
+basicDeviceInfo = _BasicDeviceInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100)
+)
+_MemoryInfo_ObjectIdentity = ObjectIdentity
+memoryInfo = _MemoryInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 1)
+)
+
+
+class _DeviceMemoryUtilization_Type(Unsigned32):
+    """Custom type deviceMemoryUtilization based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_DeviceMemoryUtilization_Type.__name__ = "Unsigned32"
+_DeviceMemoryUtilization_Object = MibScalar
+deviceMemoryUtilization = _DeviceMemoryUtilization_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 1, 1),
+    _DeviceMemoryUtilization_Type()
+)
+deviceMemoryUtilization.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceMemoryUtilization.setStatus("current")
+_DeviceMemoryTotal_Type = Unsigned32
+_DeviceMemoryTotal_Object = MibScalar
+deviceMemoryTotal = _DeviceMemoryTotal_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 1, 2),
+    _DeviceMemoryTotal_Type()
+)
+deviceMemoryTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceMemoryTotal.setStatus("current")
+_DeviceMemoryUsed_Type = Unsigned32
+_DeviceMemoryUsed_Object = MibScalar
+deviceMemoryUsed = _DeviceMemoryUsed_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 1, 3),
+    _DeviceMemoryUsed_Type()
+)
+deviceMemoryUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceMemoryUsed.setStatus("current")
+_FlashInfo_ObjectIdentity = ObjectIdentity
+flashInfo = _FlashInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 2)
+)
+
+
+class _DeviceFlashUtilization_Type(Unsigned32):
+    """Custom type deviceFlashUtilization based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_DeviceFlashUtilization_Type.__name__ = "Unsigned32"
+_DeviceFlashUtilization_Object = MibScalar
+deviceFlashUtilization = _DeviceFlashUtilization_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 2, 1),
+    _DeviceFlashUtilization_Type()
+)
+deviceFlashUtilization.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceFlashUtilization.setStatus("current")
+_DeviceFlashTotal_Type = Unsigned32
+_DeviceFlashTotal_Object = MibScalar
+deviceFlashTotal = _DeviceFlashTotal_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 2, 2),
+    _DeviceFlashTotal_Type()
+)
+deviceFlashTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceFlashTotal.setStatus("current")
+_DeviceFlashUsed_Type = Unsigned32
+_DeviceFlashUsed_Object = MibScalar
+deviceFlashUsed = _DeviceFlashUsed_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 2, 3),
+    _DeviceFlashUsed_Type()
+)
+deviceFlashUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceFlashUsed.setStatus("current")
+_CpuInfo_ObjectIdentity = ObjectIdentity
+cpuInfo = _CpuInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 3)
+)
+
+
+class _DeviceCpuUtilization_Type(Unsigned32):
+    """Custom type deviceCpuUtilization based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_DeviceCpuUtilization_Type.__name__ = "Unsigned32"
+_DeviceCpuUtilization_Object = MibScalar
+deviceCpuUtilization = _DeviceCpuUtilization_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 3, 1),
+    _DeviceCpuUtilization_Type()
+)
+deviceCpuUtilization.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceCpuUtilization.setStatus("current")
+_DeviceSystemLoad_Type = SnmpAdminString
+_DeviceSystemLoad_Object = MibScalar
+deviceSystemLoad = _DeviceSystemLoad_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 3, 2),
+    _DeviceSystemLoad_Type()
+)
+deviceSystemLoad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceSystemLoad.setStatus("current")
+_DeviceUptime_Type = TimeTicks
+_DeviceUptime_Object = MibScalar
+deviceUptime = _DeviceUptime_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 4),
+    _DeviceUptime_Type()
+)
+deviceUptime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceUptime.setStatus("current")
+_DeviceSoftware_Type = SnmpAdminString
+_DeviceSoftware_Object = MibScalar
+deviceSoftware = _DeviceSoftware_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 5),
+    _DeviceSoftware_Type()
+)
+deviceSoftware.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceSoftware.setStatus("current")
+_DeviceSerialNumber_Type = SnmpAdminString
+_DeviceSerialNumber_Object = MibScalar
+deviceSerialNumber = _DeviceSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 6),
+    _DeviceSerialNumber_Type()
+)
+deviceSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceSerialNumber.setStatus("current")
+_DeviceManufacturer_Type = SnmpAdminString
+_DeviceManufacturer_Object = MibScalar
+deviceManufacturer = _DeviceManufacturer_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 7),
+    _DeviceManufacturer_Type()
+)
+deviceManufacturer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceManufacturer.setStatus("current")
+_DeviceModel_Type = SnmpAdminString
+_DeviceModel_Object = MibScalar
+deviceModel = _DeviceModel_Object(
+    (1, 3, 6, 1, 4, 1, 368, 4, 1, 100, 8),
+    _DeviceModel_Type()
+)
+deviceModel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    deviceModel.setStatus("current")
 _VideoNotifications_ObjectIdentity = ObjectIdentity
 videoNotifications = _VideoNotifications_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 368, 4, 2)
@@ -771,6 +1081,9 @@ videoObjectGroup.setObjects(
         ("AXIS-VIDEO-MIB", "casingStatus"),
         ("AXIS-VIDEO-MIB", "storageDisruptionDetected"),
         ("AXIS-VIDEO-MIB", "storageName"),
+        ("AXIS-VIDEO-MIB", "raidStatus"),
+        ("AXIS-VIDEO-MIB", "raidComponentName"),
+        ("AXIS-VIDEO-MIB", "raidComponentStatus"),
         ("AXIS-VIDEO-MIB", "alarmID"),
         ("AXIS-VIDEO-MIB", "alarmName"),
         ("AXIS-VIDEO-MIB", "alarmText"))
@@ -807,6 +1120,38 @@ storageGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     storageGroup.setStatus("current")
+
+raidGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 368, 4, 3, 1, 6)
+)
+raidGroup.setObjects(
+      *(("AXIS-VIDEO-MIB", "raidStatus"),
+        ("AXIS-VIDEO-MIB", "raidComponentName"),
+        ("AXIS-VIDEO-MIB", "raidComponentStatus"))
+)
+if mibBuilder.loadTexts:
+    raidGroup.setStatus("current")
+
+basicDeviceInfoGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 368, 4, 3, 1, 7)
+)
+basicDeviceInfoGroup.setObjects(
+      *(("AXIS-VIDEO-MIB", "deviceMemoryUtilization"),
+        ("AXIS-VIDEO-MIB", "deviceMemoryTotal"),
+        ("AXIS-VIDEO-MIB", "deviceMemoryUsed"),
+        ("AXIS-VIDEO-MIB", "deviceFlashTotal"),
+        ("AXIS-VIDEO-MIB", "deviceFlashUsed"),
+        ("AXIS-VIDEO-MIB", "deviceFlashUtilization"),
+        ("AXIS-VIDEO-MIB", "deviceCpuUtilization"),
+        ("AXIS-VIDEO-MIB", "deviceSystemLoad"),
+        ("AXIS-VIDEO-MIB", "deviceUptime"),
+        ("AXIS-VIDEO-MIB", "deviceSoftware"),
+        ("AXIS-VIDEO-MIB", "deviceSerialNumber"),
+        ("AXIS-VIDEO-MIB", "deviceManufacturer"),
+        ("AXIS-VIDEO-MIB", "deviceModel"))
+)
+if mibBuilder.loadTexts:
+    basicDeviceInfoGroup.setStatus("current")
 
 
 # Notification objects
@@ -895,7 +1240,8 @@ videoComplianceRev2.setObjects(
         ("AXIS-VIDEO-MIB", "videoSignalStatus"),
         ("AXIS-VIDEO-MIB", "audioSignalStatus"),
         ("AXIS-VIDEO-MIB", "casingGroup"),
-        ("AXIS-VIDEO-MIB", "storageGroup"))
+        ("AXIS-VIDEO-MIB", "storageGroup"),
+        ("AXIS-VIDEO-MIB", "raidGroup"))
 )
 if mibBuilder.loadTexts:
     videoComplianceRev2.setStatus(
@@ -944,6 +1290,33 @@ mibBuilder.exportSymbols(
        "storageId": storageId,
        "storageName": storageName,
        "storageDisruptionDetected": storageDisruptionDetected,
+       "raid": raid,
+       "raidTable": raidTable,
+       "raidEntry": raidEntry,
+       "raidId": raidId,
+       "raidStatus": raidStatus,
+       "raidComponentTable": raidComponentTable,
+       "raidComponentEntry": raidComponentEntry,
+       "raidComponentId": raidComponentId,
+       "raidComponentName": raidComponentName,
+       "raidComponentStatus": raidComponentStatus,
+       "basicDeviceInfo": basicDeviceInfo,
+       "memoryInfo": memoryInfo,
+       "deviceMemoryUtilization": deviceMemoryUtilization,
+       "deviceMemoryTotal": deviceMemoryTotal,
+       "deviceMemoryUsed": deviceMemoryUsed,
+       "flashInfo": flashInfo,
+       "deviceFlashUtilization": deviceFlashUtilization,
+       "deviceFlashTotal": deviceFlashTotal,
+       "deviceFlashUsed": deviceFlashUsed,
+       "cpuInfo": cpuInfo,
+       "deviceCpuUtilization": deviceCpuUtilization,
+       "deviceSystemLoad": deviceSystemLoad,
+       "deviceUptime": deviceUptime,
+       "deviceSoftware": deviceSoftware,
+       "deviceSerialNumber": deviceSerialNumber,
+       "deviceManufacturer": deviceManufacturer,
+       "deviceModel": deviceModel,
        "videoNotifications": videoNotifications,
        "videoNotificationPrefix": videoNotificationPrefix,
        "alarmNew": alarmNew,
@@ -959,6 +1332,8 @@ mibBuilder.exportSymbols(
        "tempSensorGroup": tempSensorGroup,
        "casingGroup": casingGroup,
        "storageGroup": storageGroup,
+       "raidGroup": raidGroup,
+       "basicDeviceInfoGroup": basicDeviceInfoGroup,
        "videoCompliances": videoCompliances,
        "videoCompliance": videoCompliance,
        "videoComplianceRev2": videoComplianceRev2}

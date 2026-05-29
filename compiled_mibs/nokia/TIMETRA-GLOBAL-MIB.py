@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-GLOBAL-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:13 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -193,6 +190,10 @@ timetraDCCapModule = _TimetraDCCapModule_ObjectIdentity(
 _TimetraMGCapModule_ObjectIdentity = ObjectIdentity
 timetraMGCapModule = _TimetraMGCapModule_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 1, 1, 4, 7)
+)
+_TimetraAGCapModule_ObjectIdentity = ObjectIdentity
+timetraAGCapModule = _TimetraAGCapModule_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 1, 4, 8)
 )
 _AlcatelCommonMIBModules_ObjectIdentity = ObjectIdentity
 alcatelCommonMIBModules = _AlcatelCommonMIBModules_ObjectIdentity(
@@ -388,6 +389,78 @@ tmnxModelIXRr6dlReg = _TmnxModelIXRr6dlReg_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     tmnxModelIXRr6dlReg.setStatus("current")
+_TmnxModelSR1xDDReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1xDDReg = _TmnxModelSR1xDDReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 34)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1xDDReg.setStatus("current")
+_TmnxModelSR1DDHFReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1DDHFReg = _TmnxModelSR1DDHFReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 35)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1DDHFReg.setStatus("current")
+_TmnxModelSR1DDReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1DDReg = _TmnxModelSR1DDReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 36)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1DDReg.setStatus("current")
+_TmnxModelSR1SReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1SReg = _TmnxModelSR1SReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 37)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1SReg.setStatus("current")
+_TmnxModelSR1SHFReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1SHFReg = _TmnxModelSR1SHFReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 38)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1SHFReg.setStatus("current")
+_TmnxModelSR1xSReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1xSReg = _TmnxModelSR1xSReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 39)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1xSReg.setStatus("current")
+_TmnxModelSR1seReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR1seReg = _TmnxModelSR1seReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 40)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR1seReg.setStatus("current")
+_TmnxModelSR2seReg_ObjectIdentity = ObjectIdentity
+tmnxModelSR2seReg = _TmnxModelSR2seReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 44)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSR2seReg.setStatus("current")
+_TmnxModelIXRe2Reg_ObjectIdentity = ObjectIdentity
+tmnxModelIXRe2Reg = _TmnxModelIXRe2Reg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 45)
+)
+if mibBuilder.loadTexts:
+    tmnxModelIXRe2Reg.setStatus("current")
+_TmnxModelIXRe2cReg_ObjectIdentity = ObjectIdentity
+tmnxModelIXRe2cReg = _TmnxModelIXRe2cReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 46)
+)
+if mibBuilder.loadTexts:
+    tmnxModelIXRe2cReg.setStatus("current")
+_TmnxModelDMS1DDHFReg_ObjectIdentity = ObjectIdentity
+tmnxModelDMS1DDHFReg = _TmnxModelDMS1DDHFReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 47)
+)
+if mibBuilder.loadTexts:
+    tmnxModelDMS1DDHFReg.setStatus("current")
+_TmnxModelSAR1Reg_ObjectIdentity = ObjectIdentity
+tmnxModelSAR1Reg = _TmnxModelSAR1Reg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 1, 3, 50)
+)
+if mibBuilder.loadTexts:
+    tmnxModelSAR1Reg.setStatus("current")
 _TimetraServiceSwitches_ObjectIdentity = ObjectIdentity
 timetraServiceSwitches = _TimetraServiceSwitches_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 1, 6)
@@ -826,6 +899,7 @@ mibBuilder.exportSymbols(
        "timetraSROSCapModule": timetraSROSCapModule,
        "timetraDCCapModule": timetraDCCapModule,
        "timetraMGCapModule": timetraMGCapModule,
+       "timetraAGCapModule": timetraAGCapModule,
        "alcatelCommonMIBModules": alcatelCommonMIBModules,
        "timetraServiceRouters": timetraServiceRouters,
        "tmnxModelSR1Reg": tmnxModelSR1Reg,
@@ -859,6 +933,18 @@ mibBuilder.exportSymbols(
        "tmnxModelIXRecReg": tmnxModelIXRecReg,
        "tmnxModelIXRr6dReg": tmnxModelIXRr6dReg,
        "tmnxModelIXRr6dlReg": tmnxModelIXRr6dlReg,
+       "tmnxModelSR1xDDReg": tmnxModelSR1xDDReg,
+       "tmnxModelSR1DDHFReg": tmnxModelSR1DDHFReg,
+       "tmnxModelSR1DDReg": tmnxModelSR1DDReg,
+       "tmnxModelSR1SReg": tmnxModelSR1SReg,
+       "tmnxModelSR1SHFReg": tmnxModelSR1SHFReg,
+       "tmnxModelSR1xSReg": tmnxModelSR1xSReg,
+       "tmnxModelSR1seReg": tmnxModelSR1seReg,
+       "tmnxModelSR2seReg": tmnxModelSR2seReg,
+       "tmnxModelIXRe2Reg": tmnxModelIXRe2Reg,
+       "tmnxModelIXRe2cReg": tmnxModelIXRe2cReg,
+       "tmnxModelDMS1DDHFReg": tmnxModelDMS1DDHFReg,
+       "tmnxModelSAR1Reg": tmnxModelSAR1Reg,
        "timetraServiceSwitches": timetraServiceSwitches,
        "tmnxModelESS1Reg": tmnxModelESS1Reg,
        "tmnxModelESS4Reg": tmnxModelESS4Reg,

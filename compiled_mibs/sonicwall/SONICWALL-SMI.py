@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\sonicwall\SONICWALL-SMI
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:28:44 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -161,6 +158,12 @@ sonicwallCDP = _SonicwallCDP_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     sonicwallCDP.setStatus("current")
+_SonicwallSMA_ObjectIdentity = ObjectIdentity
+sonicwallSMA = _SonicwallSMA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 8741, 8)
+)
+if mibBuilder.loadTexts:
+    sonicwallSMA.setStatus("current")
 
 # Managed Objects groups
 
@@ -188,5 +191,6 @@ mibBuilder.exportSymbols(
        "sonicwallEmailSec": sonicwallEmailSec,
        "sonicwallDataCenter": sonicwallDataCenter,
        "sonicwallSSLVPN": sonicwallSSLVPN,
-       "sonicwallCDP": sonicwallCDP}
+       "sonicwallCDP": sonicwallCDP,
+       "sonicwallSMA": sonicwallSMA}
 )

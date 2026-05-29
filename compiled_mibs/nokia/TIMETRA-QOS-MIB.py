@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-QOS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:14 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -156,7 +153,6 @@ if 'mibBuilder' not in globals():
  TBurstSize,
  TBurstSizeBytes,
  TCIRRate,
- TClassBurstLimit,
  TDEProfile,
  TDEValue,
  TDEWredSlopeProfile,
@@ -164,14 +160,17 @@ if 'mibBuilder' not in globals():
  TDSCPNameOrEmpty,
  TDSCPValue,
  TEgrDynPolicerIdOrNone,
- TEgressHsmdaCounterIdOrZero,
- TEgressHsmdaPerPacketOffset,
+ TEgrDynQueueIdOrNone,
  TEgressHsmdaQueueId,
  TEgressPerPacketOffset,
  TEgressPolicerId,
  TEgressPolicerIdOrNone,
  TEgressProfile,
  TEgressProfileOrNone,
+ TEgressQBurstLimDelayTime,
+ TEgressQDelayPercent,
+ TEgressQDelayTime,
+ TEgressQMaxDataTrans,
  TEgressQPerPacketOffset,
  TEgressQueueId,
  TEntryId,
@@ -186,20 +185,11 @@ if 'mibBuilder' not in globals():
  THPolPIRRate,
  THPolVirtualScheCIRRate,
  THPolVirtualSchePIRRate,
- THSMDABurstSizeBytes,
- THSMDAQueueBurstLimit,
  THsPirRate,
  THsSchedulerPolicyGroupId,
  THsSchedulerPolicyWeight,
  THsmdaCIRKRate,
  THsmdaPIRKRate,
- THsmdaPIRMRate,
- THsmdaPolicyIncludeQueues,
- THsmdaPolicyScheduleClass,
- THsmdaSchedulerPolicyGroupId,
- THsmdaWeight,
- THsmdaWeightClass,
- THsmdaWrrWeight,
  TIPFilterType,
  TIcmpTypeOrNone,
  TIngClassRemarkType,
@@ -265,15 +255,13 @@ if 'mibBuilder' not in globals():
  TRatePercent,
  TRateType,
  TRemarkType,
- TSapEgressPolicyID,
- TSapIngressPolicyID,
  TTcpUdpPort,
  TTcpUdpPortOperator,
  TWeight,
  TWredSlopeProfile,
  TmnxAdminStateUpDown,
  TmnxEgrPolicerStatMode,
- TmnxEnabledDisabledAdminState,
+ TmnxEnabledDisabled,
  TmnxHigh32,
  TmnxIngPolicerStatMode,
  TmnxInternalSchedWeightMode,
@@ -303,7 +291,6 @@ if 'mibBuilder' not in globals():
     "TBurstSize",
     "TBurstSizeBytes",
     "TCIRRate",
-    "TClassBurstLimit",
     "TDEProfile",
     "TDEValue",
     "TDEWredSlopeProfile",
@@ -311,14 +298,17 @@ if 'mibBuilder' not in globals():
     "TDSCPNameOrEmpty",
     "TDSCPValue",
     "TEgrDynPolicerIdOrNone",
-    "TEgressHsmdaCounterIdOrZero",
-    "TEgressHsmdaPerPacketOffset",
+    "TEgrDynQueueIdOrNone",
     "TEgressHsmdaQueueId",
     "TEgressPerPacketOffset",
     "TEgressPolicerId",
     "TEgressPolicerIdOrNone",
     "TEgressProfile",
     "TEgressProfileOrNone",
+    "TEgressQBurstLimDelayTime",
+    "TEgressQDelayPercent",
+    "TEgressQDelayTime",
+    "TEgressQMaxDataTrans",
     "TEgressQPerPacketOffset",
     "TEgressQueueId",
     "TEntryId",
@@ -333,20 +323,11 @@ if 'mibBuilder' not in globals():
     "THPolPIRRate",
     "THPolVirtualScheCIRRate",
     "THPolVirtualSchePIRRate",
-    "THSMDABurstSizeBytes",
-    "THSMDAQueueBurstLimit",
     "THsPirRate",
     "THsSchedulerPolicyGroupId",
     "THsSchedulerPolicyWeight",
     "THsmdaCIRKRate",
     "THsmdaPIRKRate",
-    "THsmdaPIRMRate",
-    "THsmdaPolicyIncludeQueues",
-    "THsmdaPolicyScheduleClass",
-    "THsmdaSchedulerPolicyGroupId",
-    "THsmdaWeight",
-    "THsmdaWeightClass",
-    "THsmdaWrrWeight",
     "TIPFilterType",
     "TIcmpTypeOrNone",
     "TIngClassRemarkType",
@@ -412,15 +393,13 @@ if 'mibBuilder' not in globals():
     "TRatePercent",
     "TRateType",
     "TRemarkType",
-    "TSapEgressPolicyID",
-    "TSapIngressPolicyID",
     "TTcpUdpPort",
     "TTcpUdpPortOperator",
     "TWeight",
     "TWredSlopeProfile",
     "TmnxAdminStateUpDown",
     "TmnxEgrPolicerStatMode",
-    "TmnxEnabledDisabledAdminState",
+    "TmnxEnabledDisabled",
     "TmnxHigh32",
     "TmnxIngPolicerStatMode",
     "TmnxInternalSchedWeightMode",
@@ -975,7 +954,13 @@ class _TSapIngressPlcrAlloc_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11)
         )
     )
     namedValues = NamedValues(
@@ -983,7 +968,13 @@ class _TSapIngressPlcrAlloc_Type(Integer32):
           ("per-fc", 2),
           ("per-fc-unicast-multipoint", 3),
           ("per-fc-unicast-multicast", 4),
-          ("per-fc-unicast-broadcast-unknown-multicast", 5))
+          ("per-fc-unicast-broadcast-unknown-multicast", 5),
+          ("per-2-fc-unicast-multipoint", 6),
+          ("per-2-fc-unicast-multicast", 7),
+          ("per-4-fc-unicast-multipoint", 8),
+          ("per-4-fc-unicast-multicast", 9),
+          ("per-2-fc", 10),
+          ("per-4-fc", 11))
     )
 
 
@@ -2724,7 +2715,7 @@ tSapIngressMacCriteriaAtmVci = _TSapIngressMacCriteriaAtmVci_Object(
 )
 tSapIngressMacCriteriaAtmVci.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tSapIngressMacCriteriaAtmVci.setStatus("current")
+    tSapIngressMacCriteriaAtmVci.setStatus("obsolete")
 
 
 class _TSapIngressMacCritInnerTagValue_Type(QTagFullRangeOrNone):
@@ -4745,6 +4736,34 @@ tSapIngPolicerSchedCIRWeight = _TSapIngPolicerSchedCIRWeight_Object(
 tSapIngPolicerSchedCIRWeight.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSapIngPolicerSchedCIRWeight.setStatus("current")
+
+
+class _TSapIngPolicerAlgoType_Type(Integer32):
+    """Custom type tSapIngPolicerAlgoType based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("trtcmDs", 1),
+          ("trtcmDsCoupled", 2))
+    )
+
+
+_TSapIngPolicerAlgoType_Type.__name__ = "Integer32"
+_TSapIngPolicerAlgoType_Object = MibTableColumn
+tSapIngPolicerAlgoType = _TSapIngPolicerAlgoType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 3, 12, 1, 35),
+    _TSapIngPolicerAlgoType_Type()
+)
+tSapIngPolicerAlgoType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapIngPolicerAlgoType.setStatus("current")
 _TSapIngPolicyNameTable_Object = MibTable
 tSapIngPolicyNameTable = _TSapIngPolicyNameTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 3, 13)
@@ -4760,7 +4779,7 @@ tSapIngPolicyNameEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     tSapIngPolicyNameEntry.setStatus("current")
-_TSapIngPolicyNameId_Type = TSapIngressPolicyID
+_TSapIngPolicyNameId_Type = TAnyQosPolicyID
 _TSapIngPolicyNameId_Object = MibTableColumn
 tSapIngPolicyNameId = _TSapIngPolicyNameId_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 3, 13, 1, 1),
@@ -5093,24 +5112,6 @@ tSapEgressLastChanged = _TSapEgressLastChanged_Object(
 tSapEgressLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapEgressLastChanged.setStatus("current")
-
-
-class _TSapEgressHsmdaPacketOffset_Type(TEgressHsmdaPerPacketOffset):
-    """Custom type tSapEgressHsmdaPacketOffset based on TEgressHsmdaPerPacketOffset"""
-    defaultValue = 0
-
-
-_TSapEgressHsmdaPacketOffset_Type.__name__ = "TEgressHsmdaPerPacketOffset"
-_TSapEgressHsmdaPacketOffset_Object = MibTableColumn
-tSapEgressHsmdaPacketOffset = _TSapEgressHsmdaPacketOffset_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 1, 1, 6),
-    _TSapEgressHsmdaPacketOffset_Type()
-)
-tSapEgressHsmdaPacketOffset.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaPacketOffset.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaPacketOffset.setUnits("bytes")
 _TSapEgressMatchCriteria_Type = TMatchCriteria
 _TSapEgressMatchCriteria_Object = MibTableColumn
 tSapEgressMatchCriteria = _TSapEgressMatchCriteria_Object(
@@ -5120,43 +5121,6 @@ tSapEgressMatchCriteria = _TSapEgressMatchCriteria_Object(
 tSapEgressMatchCriteria.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapEgressMatchCriteria.setStatus("current")
-
-
-class _TSapEgressHsmdaWrrPolicy_Type(TNamedItemOrEmpty):
-    """Custom type tSapEgressHsmdaWrrPolicy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TSapEgressHsmdaWrrPolicy_Type.__name__ = "TNamedItemOrEmpty"
-_TSapEgressHsmdaWrrPolicy_Object = MibTableColumn
-tSapEgressHsmdaWrrPolicy = _TSapEgressHsmdaWrrPolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 1, 1, 8),
-    _TSapEgressHsmdaWrrPolicy_Type()
-)
-tSapEgressHsmdaWrrPolicy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaWrrPolicy.setStatus("obsolete")
-
-
-class _TSapEgressHsmdaLowBrstMaxCls_Type(Unsigned32):
-    """Custom type tSapEgressHsmdaLowBrstMaxCls based on Unsigned32"""
-    defaultValue = 8
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TSapEgressHsmdaLowBrstMaxCls_Type.__name__ = "Unsigned32"
-_TSapEgressHsmdaLowBrstMaxCls_Object = MibTableColumn
-tSapEgressHsmdaLowBrstMaxCls = _TSapEgressHsmdaLowBrstMaxCls_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 1, 1, 9),
-    _TSapEgressHsmdaLowBrstMaxCls_Type()
-)
-tSapEgressHsmdaLowBrstMaxCls.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaLowBrstMaxCls.setStatus("obsolete")
 
 
 class _TSapEgressPolicyName_Type(TLNamedItemOrEmpty):
@@ -5274,6 +5238,45 @@ tSapEgressHsAttachPlcy = _TSapEgressHsAttachPlcy_Object(
 tSapEgressHsAttachPlcy.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSapEgressHsAttachPlcy.setStatus("current")
+
+
+class _TSapEgressUsePolResMrkDot1pInner_Type(TruthValue):
+    """Custom type tSapEgressUsePolResMrkDot1pInner based on TruthValue"""
+    defaultValue = 2
+
+
+_TSapEgressUsePolResMrkDot1pInner_Type.__name__ = "TruthValue"
+_TSapEgressUsePolResMrkDot1pInner_Object = MibTableColumn
+tSapEgressUsePolResMrkDot1pInner = _TSapEgressUsePolResMrkDot1pInner_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 1, 1, 17),
+    _TSapEgressUsePolResMrkDot1pInner_Type()
+)
+tSapEgressUsePolResMrkDot1pInner.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressUsePolResMrkDot1pInner.setStatus("current")
+
+
+class _TSapEgressHwAggShapQsQSetSize_Type(Integer32):
+    """Custom type tSapEgressHwAggShapQsQSetSize based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(2, 8),
+    )
+
+
+_TSapEgressHwAggShapQsQSetSize_Type.__name__ = "Integer32"
+_TSapEgressHwAggShapQsQSetSize_Object = MibTableColumn
+tSapEgressHwAggShapQsQSetSize = _TSapEgressHwAggShapQsQSetSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 1, 1, 18),
+    _TSapEgressHwAggShapQsQSetSize_Type()
+)
+tSapEgressHwAggShapQsQSetSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressHwAggShapQsQSetSize.setStatus("current")
 _TSapEgressQueueTable_Object = MibTable
 tSapEgressQueueTable = _TSapEgressQueueTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2)
@@ -6208,6 +6211,113 @@ if mibBuilder.loadTexts:
     tSapEgressQueueFirBurstLimit.setStatus("current")
 if mibBuilder.loadTexts:
     tSapEgressQueueFirBurstLimit.setUnits("bytes")
+_TSapEgressQueueDescr_Type = TItemDescription
+_TSapEgressQueueDescr_Object = MibTableColumn
+tSapEgressQueueDescr = _TSapEgressQueueDescr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 53),
+    _TSapEgressQueueDescr_Type()
+)
+tSapEgressQueueDescr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueDescr.setStatus("current")
+
+
+class _TSapEgressQueueMaxDataTransmit_Type(TEgressQMaxDataTrans):
+    """Custom type tSapEgressQueueMaxDataTransmit based on TEgressQMaxDataTrans"""
+    defaultValue = -1
+
+
+_TSapEgressQueueMaxDataTransmit_Type.__name__ = "TEgressQMaxDataTrans"
+_TSapEgressQueueMaxDataTransmit_Object = MibTableColumn
+tSapEgressQueueMaxDataTransmit = _TSapEgressQueueMaxDataTransmit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 54),
+    _TSapEgressQueueMaxDataTransmit_Type()
+)
+tSapEgressQueueMaxDataTransmit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueMaxDataTransmit.setStatus("current")
+if mibBuilder.loadTexts:
+    tSapEgressQueueMaxDataTransmit.setUnits("bytes")
+
+
+class _TSapEgressQueueCBSDelayTime_Type(TEgressQDelayTime):
+    """Custom type tSapEgressQueueCBSDelayTime based on TEgressQDelayTime"""
+    defaultValue = -1
+
+
+_TSapEgressQueueCBSDelayTime_Type.__name__ = "TEgressQDelayTime"
+_TSapEgressQueueCBSDelayTime_Object = MibTableColumn
+tSapEgressQueueCBSDelayTime = _TSapEgressQueueCBSDelayTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 55),
+    _TSapEgressQueueCBSDelayTime_Type()
+)
+tSapEgressQueueCBSDelayTime.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueCBSDelayTime.setStatus("current")
+
+
+class _TSapEgressQueueMBSDelayTime_Type(TEgressQDelayTime):
+    """Custom type tSapEgressQueueMBSDelayTime based on TEgressQDelayTime"""
+    defaultValue = -1
+
+
+_TSapEgressQueueMBSDelayTime_Type.__name__ = "TEgressQDelayTime"
+_TSapEgressQueueMBSDelayTime_Object = MibTableColumn
+tSapEgressQueueMBSDelayTime = _TSapEgressQueueMBSDelayTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 56),
+    _TSapEgressQueueMBSDelayTime_Type()
+)
+tSapEgressQueueMBSDelayTime.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueMBSDelayTime.setStatus("current")
+
+
+class _TSapEgressQueueCBSDelayPercent_Type(TEgressQDelayPercent):
+    """Custom type tSapEgressQueueCBSDelayPercent based on TEgressQDelayPercent"""
+    defaultValue = -1
+
+
+_TSapEgressQueueCBSDelayPercent_Type.__name__ = "TEgressQDelayPercent"
+_TSapEgressQueueCBSDelayPercent_Object = MibTableColumn
+tSapEgressQueueCBSDelayPercent = _TSapEgressQueueCBSDelayPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 57),
+    _TSapEgressQueueCBSDelayPercent_Type()
+)
+tSapEgressQueueCBSDelayPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueCBSDelayPercent.setStatus("current")
+
+
+class _TSapEgressQueueMBSDelayPercent_Type(TEgressQDelayPercent):
+    """Custom type tSapEgressQueueMBSDelayPercent based on TEgressQDelayPercent"""
+    defaultValue = -1
+
+
+_TSapEgressQueueMBSDelayPercent_Type.__name__ = "TEgressQDelayPercent"
+_TSapEgressQueueMBSDelayPercent_Object = MibTableColumn
+tSapEgressQueueMBSDelayPercent = _TSapEgressQueueMBSDelayPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 58),
+    _TSapEgressQueueMBSDelayPercent_Type()
+)
+tSapEgressQueueMBSDelayPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueMBSDelayPercent.setStatus("current")
+
+
+class _TSapEgressQueueBurstLimDelayTime_Type(TEgressQBurstLimDelayTime):
+    """Custom type tSapEgressQueueBurstLimDelayTime based on TEgressQBurstLimDelayTime"""
+    defaultValue = 0
+
+
+_TSapEgressQueueBurstLimDelayTime_Type.__name__ = "TEgressQBurstLimDelayTime"
+_TSapEgressQueueBurstLimDelayTime_Object = MibTableColumn
+tSapEgressQueueBurstLimDelayTime = _TSapEgressQueueBurstLimDelayTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 2, 1, 59),
+    _TSapEgressQueueBurstLimDelayTime_Type()
+)
+tSapEgressQueueBurstLimDelayTime.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressQueueBurstLimDelayTime.setStatus("current")
 _TSapEgressFCTable_Object = MibTable
 tSapEgressFCTable = _TSapEgressFCTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 3)
@@ -6283,22 +6393,6 @@ tSapEgressFCLastChanged = _TSapEgressFCLastChanged_Object(
 tSapEgressFCLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapEgressFCLastChanged.setStatus("current")
-
-
-class _TSapEgressFCHsmdaQueue_Type(TEgressHsmdaQueueId):
-    """Custom type tSapEgressFCHsmdaQueue based on TEgressHsmdaQueueId"""
-    defaultValue = 0
-
-
-_TSapEgressFCHsmdaQueue_Type.__name__ = "TEgressHsmdaQueueId"
-_TSapEgressFCHsmdaQueue_Object = MibTableColumn
-tSapEgressFCHsmdaQueue = _TSapEgressFCHsmdaQueue_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 3, 1, 6),
-    _TSapEgressFCHsmdaQueue_Type()
-)
-tSapEgressFCHsmdaQueue.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressFCHsmdaQueue.setStatus("obsolete")
 
 
 class _TSapEgressFCDot1PHsmdaProfile_Type(TruthValue):
@@ -6525,22 +6619,6 @@ if mibBuilder.loadTexts:
     tSapEgressFCPortQGrpQueue.setStatus("current")
 
 
-class _TSapEgressFCHsmdaQueuePortQGrpQ_Type(TruthValue):
-    """Custom type tSapEgressFCHsmdaQueuePortQGrpQ based on TruthValue"""
-    defaultValue = 2
-
-
-_TSapEgressFCHsmdaQueuePortQGrpQ_Type.__name__ = "TruthValue"
-_TSapEgressFCHsmdaQueuePortQGrpQ_Object = MibTableColumn
-tSapEgressFCHsmdaQueuePortQGrpQ = _TSapEgressFCHsmdaQueuePortQGrpQ_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 3, 1, 21),
-    _TSapEgressFCHsmdaQueuePortQGrpQ_Type()
-)
-tSapEgressFCHsmdaQueuePortQGrpQ.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressFCHsmdaQueuePortQGrpQ.setStatus("obsolete")
-
-
 class _TSapEgressFCOuterTagDot1PInProf_Type(Dot1PPriority):
     """Custom type tSapEgressFCOuterTagDot1PInProf based on Dot1PPriority"""
     defaultValue = -1
@@ -6731,6 +6809,22 @@ tSapEgressFCExceedProfPrec = _TSapEgressFCExceedProfPrec_Object(
 tSapEgressFCExceedProfPrec.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSapEgressFCExceedProfPrec.setStatus("current")
+
+
+class _TSapEgressFCInnerTagDot1PExcdPrf_Type(Dot1PPriority):
+    """Custom type tSapEgressFCInnerTagDot1PExcdPrf based on Dot1PPriority"""
+    defaultValue = -1
+
+
+_TSapEgressFCInnerTagDot1PExcdPrf_Type.__name__ = "Dot1PPriority"
+_TSapEgressFCInnerTagDot1PExcdPrf_Object = MibTableColumn
+tSapEgressFCInnerTagDot1PExcdPrf = _TSapEgressFCInnerTagDot1PExcdPrf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 3, 1, 34),
+    _TSapEgressFCInnerTagDot1PExcdPrf_Type()
+)
+tSapEgressFCInnerTagDot1PExcdPrf.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgressFCInnerTagDot1PExcdPrf.setStatus("current")
 _TSapEgressHsmdaQueueTable_Object = MibTable
 tSapEgressHsmdaQueueTable = _TSapEgressHsmdaQueueTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4)
@@ -6766,15 +6860,6 @@ tSapEgressHsmdaQueue = _TSapEgressHsmdaQueue_Object(
 tSapEgressHsmdaQueue.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     tSapEgressHsmdaQueue.setStatus("current")
-_TSapEgressHsmdaQueueRowStatus_Type = RowStatus
-_TSapEgressHsmdaQueueRowStatus_Object = MibTableColumn
-tSapEgressHsmdaQueueRowStatus = _TSapEgressHsmdaQueueRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 2),
-    _TSapEgressHsmdaQueueRowStatus_Type()
-)
-tSapEgressHsmdaQueueRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueRowStatus.setStatus("obsolete")
 
 
 class _TSapEgressHsmdaQueueCIRAdaptn_Type(TAdaptationRule):
@@ -6793,40 +6878,6 @@ if mibBuilder.loadTexts:
     tSapEgressHsmdaQueueCIRAdaptn.setStatus("obsolete")
 
 
-class _TSapEgressHsmdaQueuePIRAdaptn_Type(TAdaptationRule):
-    """Custom type tSapEgressHsmdaQueuePIRAdaptn based on TAdaptationRule"""
-    defaultValue = 3
-
-
-_TSapEgressHsmdaQueuePIRAdaptn_Type.__name__ = "TAdaptationRule"
-_TSapEgressHsmdaQueuePIRAdaptn_Object = MibTableColumn
-tSapEgressHsmdaQueuePIRAdaptn = _TSapEgressHsmdaQueuePIRAdaptn_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 4),
-    _TSapEgressHsmdaQueuePIRAdaptn_Type()
-)
-tSapEgressHsmdaQueuePIRAdaptn.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueuePIRAdaptn.setStatus("obsolete")
-
-
-class _TSapEgressHsmdaQueueAdminPIR_Type(THsmdaPIRKRate):
-    """Custom type tSapEgressHsmdaQueueAdminPIR based on THsmdaPIRKRate"""
-    defaultValue = -1
-
-
-_TSapEgressHsmdaQueueAdminPIR_Type.__name__ = "THsmdaPIRKRate"
-_TSapEgressHsmdaQueueAdminPIR_Object = MibTableColumn
-tSapEgressHsmdaQueueAdminPIR = _TSapEgressHsmdaQueueAdminPIR_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 5),
-    _TSapEgressHsmdaQueueAdminPIR_Type()
-)
-tSapEgressHsmdaQueueAdminPIR.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueAdminPIR.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueAdminPIR.setUnits("kilobps")
-
-
 class _TSapEgressHsmdaQueueAdminCIR_Type(THsmdaCIRKRate):
     """Custom type tSapEgressHsmdaQueueAdminCIR based on THsmdaCIRKRate"""
     defaultValue = 0
@@ -6843,83 +6894,6 @@ if mibBuilder.loadTexts:
     tSapEgressHsmdaQueueAdminCIR.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tSapEgressHsmdaQueueAdminCIR.setUnits("kilobps")
-
-
-class _TSapEgressHsmdaQueueSlopePolicy_Type(TNamedItem):
-    """Custom type tSapEgressHsmdaQueueSlopePolicy based on TNamedItem"""
-    defaultValue = OctetString("default")
-
-
-_TSapEgressHsmdaQueueSlopePolicy_Type.__name__ = "TNamedItem"
-_TSapEgressHsmdaQueueSlopePolicy_Object = MibTableColumn
-tSapEgressHsmdaQueueSlopePolicy = _TSapEgressHsmdaQueueSlopePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 7),
-    _TSapEgressHsmdaQueueSlopePolicy_Type()
-)
-tSapEgressHsmdaQueueSlopePolicy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueSlopePolicy.setStatus("obsolete")
-_TSapEgressHsmdaQueueLastChanged_Type = TimeStamp
-_TSapEgressHsmdaQueueLastChanged_Object = MibTableColumn
-tSapEgressHsmdaQueueLastChanged = _TSapEgressHsmdaQueueLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 8),
-    _TSapEgressHsmdaQueueLastChanged_Type()
-)
-tSapEgressHsmdaQueueLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueLastChanged.setStatus("obsolete")
-
-
-class _TSapEgressHsmdaQueueWrrWeight_Type(THsmdaWrrWeight):
-    """Custom type tSapEgressHsmdaQueueWrrWeight based on THsmdaWrrWeight"""
-    defaultValue = 1
-
-
-_TSapEgressHsmdaQueueWrrWeight_Type.__name__ = "THsmdaWrrWeight"
-_TSapEgressHsmdaQueueWrrWeight_Object = MibTableColumn
-tSapEgressHsmdaQueueWrrWeight = _TSapEgressHsmdaQueueWrrWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 9),
-    _TSapEgressHsmdaQueueWrrWeight_Type()
-)
-tSapEgressHsmdaQueueWrrWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueWrrWeight.setStatus("obsolete")
-
-
-class _TSapEgressHsmdaQueueMBS_Type(THSMDABurstSizeBytes):
-    """Custom type tSapEgressHsmdaQueueMBS based on THSMDABurstSizeBytes"""
-    defaultValue = -1
-
-
-_TSapEgressHsmdaQueueMBS_Type.__name__ = "THSMDABurstSizeBytes"
-_TSapEgressHsmdaQueueMBS_Object = MibTableColumn
-tSapEgressHsmdaQueueMBS = _TSapEgressHsmdaQueueMBS_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 10),
-    _TSapEgressHsmdaQueueMBS_Type()
-)
-tSapEgressHsmdaQueueMBS.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueMBS.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueMBS.setUnits("bytes")
-
-
-class _TSapEgressHsmdaQueueBurstLimit_Type(THSMDAQueueBurstLimit):
-    """Custom type tSapEgressHsmdaQueueBurstLimit based on THSMDAQueueBurstLimit"""
-    defaultValue = -1
-
-
-_TSapEgressHsmdaQueueBurstLimit_Type.__name__ = "THSMDAQueueBurstLimit"
-_TSapEgressHsmdaQueueBurstLimit_Object = MibTableColumn
-tSapEgressHsmdaQueueBurstLimit = _TSapEgressHsmdaQueueBurstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 4, 1, 11),
-    _TSapEgressHsmdaQueueBurstLimit_Type()
-)
-tSapEgressHsmdaQueueBurstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueBurstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueBurstLimit.setUnits("bytes")
 _TSapEgressDSCPTable_Object = MibTable
 tSapEgressDSCPTable = _TSapEgressDSCPTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 5)
@@ -6963,22 +6937,6 @@ tSapEgressDSCPLastChanged = _TSapEgressDSCPLastChanged_Object(
 tSapEgressDSCPLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapEgressDSCPLastChanged.setStatus("current")
-
-
-class _TSapEgressDSCPHsmdaCntrOverride_Type(TEgressHsmdaCounterIdOrZero):
-    """Custom type tSapEgressDSCPHsmdaCntrOverride based on TEgressHsmdaCounterIdOrZero"""
-    defaultValue = 0
-
-
-_TSapEgressDSCPHsmdaCntrOverride_Type.__name__ = "TEgressHsmdaCounterIdOrZero"
-_TSapEgressDSCPHsmdaCntrOverride_Object = MibTableColumn
-tSapEgressDSCPHsmdaCntrOverride = _TSapEgressDSCPHsmdaCntrOverride_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 5, 1, 4),
-    _TSapEgressDSCPHsmdaCntrOverride_Type()
-)
-tSapEgressDSCPHsmdaCntrOverride.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressDSCPHsmdaCntrOverride.setStatus("obsolete")
 
 
 class _TSapEgressDSCPfc_Type(TFCNameOrEmpty):
@@ -7054,22 +7012,6 @@ tSapEgressPrecLastChanged = _TSapEgressPrecLastChanged_Object(
 tSapEgressPrecLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapEgressPrecLastChanged.setStatus("current")
-
-
-class _TSapEgressPrecHsmdaCntrOverride_Type(TEgressHsmdaCounterIdOrZero):
-    """Custom type tSapEgressPrecHsmdaCntrOverride based on TEgressHsmdaCounterIdOrZero"""
-    defaultValue = 0
-
-
-_TSapEgressPrecHsmdaCntrOverride_Type.__name__ = "TEgressHsmdaCounterIdOrZero"
-_TSapEgressPrecHsmdaCntrOverride_Object = MibTableColumn
-tSapEgressPrecHsmdaCntrOverride = _TSapEgressPrecHsmdaCntrOverride_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 6, 1, 4),
-    _TSapEgressPrecHsmdaCntrOverride_Type()
-)
-tSapEgressPrecHsmdaCntrOverride.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgressPrecHsmdaCntrOverride.setStatus("obsolete")
 
 
 class _TSapEgressPrecFC_Type(TFCNameOrEmpty):
@@ -7198,22 +7140,6 @@ tSapEgrIPCritDescription = _TSapEgrIPCritDescription_Object(
 tSapEgrIPCritDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSapEgrIPCritDescription.setStatus("current")
-
-
-class _TSapEgrIPCritActionHsmdaCntrOvr_Type(TEgressHsmdaCounterIdOrZero):
-    """Custom type tSapEgrIPCritActionHsmdaCntrOvr based on TEgressHsmdaCounterIdOrZero"""
-    defaultValue = 0
-
-
-_TSapEgrIPCritActionHsmdaCntrOvr_Type.__name__ = "TEgressHsmdaCounterIdOrZero"
-_TSapEgrIPCritActionHsmdaCntrOvr_Object = MibTableColumn
-tSapEgrIPCritActionHsmdaCntrOvr = _TSapEgrIPCritActionHsmdaCntrOvr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 7, 1, 6),
-    _TSapEgrIPCritActionHsmdaCntrOvr_Type()
-)
-tSapEgrIPCritActionHsmdaCntrOvr.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tSapEgrIPCritActionHsmdaCntrOvr.setStatus("obsolete")
 
 
 class _TSapEgrIPCritSourceIpAddrType_Type(InetAddressType):
@@ -7642,6 +7568,43 @@ tSapEgrIPCritActionPolicerUseFCQ = _TSapEgrIPCritActionPolicerUseFCQ_Object(
 tSapEgrIPCritActionPolicerUseFCQ.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSapEgrIPCritActionPolicerUseFCQ.setStatus("current")
+_TSapEgrIPCritQFI_Type = Unsigned32
+_TSapEgrIPCritQFI_Object = MibTableColumn
+tSapEgrIPCritQFI = _TSapEgrIPCritQFI_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 7, 1, 32),
+    _TSapEgrIPCritQFI_Type()
+)
+tSapEgrIPCritQFI.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tSapEgrIPCritQFI.setStatus("current")
+
+
+class _TSapEgrIPCritRQI_Type(Integer32):
+    """Custom type tSapEgrIPCritRQI based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("noRQI", 0),
+          ("true", 1),
+          ("false", 2))
+    )
+
+
+_TSapEgrIPCritRQI_Type.__name__ = "Integer32"
+_TSapEgrIPCritRQI_Object = MibTableColumn
+tSapEgrIPCritRQI = _TSapEgrIPCritRQI_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 7, 1, 33),
+    _TSapEgrIPCritRQI_Type()
+)
+tSapEgrIPCritRQI.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tSapEgrIPCritRQI.setStatus("current")
 _TSapEgrPolicerTable_Object = MibTable
 tSapEgrPolicerTable = _TSapEgrPolicerTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 8)
@@ -8377,7 +8340,7 @@ tSapEgrPolicyNameEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     tSapEgrPolicyNameEntry.setStatus("current")
-_TSapEgrPolicyNameId_Type = TSapEgressPolicyID
+_TSapEgrPolicyNameId_Type = TAnyQosPolicyID
 _TSapEgrPolicyNameId_Object = MibTableColumn
 tSapEgrPolicyNameId = _TSapEgrPolicyNameId_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 9, 1, 1),
@@ -8717,6 +8680,259 @@ tSapEgrDynamicPolicerStatMode = _TSapEgrDynamicPolicerStatMode_Object(
 tSapEgrDynamicPolicerStatMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSapEgrDynamicPolicerStatMode.setStatus("current")
+
+
+class _TSapEgrDynamicQueueInsertPoint_Type(TEgrDynQueueIdOrNone):
+    """Custom type tSapEgrDynamicQueueInsertPoint based on TEgrDynQueueIdOrNone"""
+    defaultValue = 0
+
+
+_TSapEgrDynamicQueueInsertPoint_Type.__name__ = "TEgrDynQueueIdOrNone"
+_TSapEgrDynamicQueueInsertPoint_Object = MibTableColumn
+tSapEgrDynamicQueueInsertPoint = _TSapEgrDynamicQueueInsertPoint_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 16),
+    _TSapEgrDynamicQueueInsertPoint_Type()
+)
+tSapEgrDynamicQueueInsertPoint.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueInsertPoint.setStatus("current")
+
+
+class _TSapEgrDynamicQueueInsertSize_Type(TEgrDynQueueIdOrNone):
+    """Custom type tSapEgrDynamicQueueInsertSize based on TEgrDynQueueIdOrNone"""
+    defaultValue = 0
+
+
+_TSapEgrDynamicQueueInsertSize_Type.__name__ = "TEgrDynQueueIdOrNone"
+_TSapEgrDynamicQueueInsertSize_Object = MibTableColumn
+tSapEgrDynamicQueueInsertSize = _TSapEgrDynamicQueueInsertSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 17),
+    _TSapEgrDynamicQueueInsertSize_Type()
+)
+tSapEgrDynamicQueueInsertSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueInsertSize.setStatus("current")
+_TSapEgrDynamicQueueNbrInsert_Type = Unsigned32
+_TSapEgrDynamicQueueNbrInsert_Object = MibTableColumn
+tSapEgrDynamicQueueNbrInsert = _TSapEgrDynamicQueueNbrInsert_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 18),
+    _TSapEgrDynamicQueueNbrInsert_Type()
+)
+tSapEgrDynamicQueueNbrInsert.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueNbrInsert.setStatus("current")
+
+
+class _TSapEgrDynamicQueuePktOffset_Type(TEgressPerPacketOffset):
+    """Custom type tSapEgrDynamicQueuePktOffset based on TEgressPerPacketOffset"""
+    defaultValue = 0
+
+
+_TSapEgrDynamicQueuePktOffset_Type.__name__ = "TEgressPerPacketOffset"
+_TSapEgrDynamicQueuePktOffset_Object = MibTableColumn
+tSapEgrDynamicQueuePktOffset = _TSapEgrDynamicQueuePktOffset_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 19),
+    _TSapEgrDynamicQueuePktOffset_Type()
+)
+tSapEgrDynamicQueuePktOffset.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueuePktOffset.setStatus("current")
+
+
+class _TSapEgrDynamicQueueMBS_Type(TBurstSizeBytes):
+    """Custom type tSapEgrDynamicQueueMBS based on TBurstSizeBytes"""
+    defaultValue = -1
+
+
+_TSapEgrDynamicQueueMBS_Type.__name__ = "TBurstSizeBytes"
+_TSapEgrDynamicQueueMBS_Object = MibTableColumn
+tSapEgrDynamicQueueMBS = _TSapEgrDynamicQueueMBS_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 20),
+    _TSapEgrDynamicQueueMBS_Type()
+)
+tSapEgrDynamicQueueMBS.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueMBS.setStatus("current")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueMBS.setUnits("bytes")
+
+
+class _TSapEgrDynamicQueueCBS_Type(TBurstSize):
+    """Custom type tSapEgrDynamicQueueCBS based on TBurstSize"""
+    defaultValue = -1
+
+
+_TSapEgrDynamicQueueCBS_Type.__name__ = "TBurstSize"
+_TSapEgrDynamicQueueCBS_Object = MibTableColumn
+tSapEgrDynamicQueueCBS = _TSapEgrDynamicQueueCBS_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 21),
+    _TSapEgrDynamicQueueCBS_Type()
+)
+tSapEgrDynamicQueueCBS.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueCBS.setStatus("current")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueCBS.setUnits("bytes")
+
+
+class _TSapEgrDynamicQueueParent_Type(TNamedItemOrEmpty):
+    """Custom type tSapEgrDynamicQueueParent based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TSapEgrDynamicQueueParent_Type.__name__ = "TNamedItemOrEmpty"
+_TSapEgrDynamicQueueParent_Object = MibTableColumn
+tSapEgrDynamicQueueParent = _TSapEgrDynamicQueueParent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 22),
+    _TSapEgrDynamicQueueParent_Type()
+)
+tSapEgrDynamicQueueParent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueParent.setStatus("current")
+
+
+class _TSapEgrDynamicQueueLevel_Type(TLevel):
+    """Custom type tSapEgrDynamicQueueLevel based on TLevel"""
+    defaultValue = 1
+
+
+_TSapEgrDynamicQueueLevel_Type.__name__ = "TLevel"
+_TSapEgrDynamicQueueLevel_Object = MibTableColumn
+tSapEgrDynamicQueueLevel = _TSapEgrDynamicQueueLevel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 23),
+    _TSapEgrDynamicQueueLevel_Type()
+)
+tSapEgrDynamicQueueLevel.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueLevel.setStatus("current")
+
+
+class _TSapEgrDynamicQueueWeight_Type(TWeight):
+    """Custom type tSapEgrDynamicQueueWeight based on TWeight"""
+    defaultValue = 1
+
+
+_TSapEgrDynamicQueueWeight_Type.__name__ = "TWeight"
+_TSapEgrDynamicQueueWeight_Object = MibTableColumn
+tSapEgrDynamicQueueWeight = _TSapEgrDynamicQueueWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 24),
+    _TSapEgrDynamicQueueWeight_Type()
+)
+tSapEgrDynamicQueueWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueWeight.setStatus("current")
+
+
+class _TSapEgrDynamicQueueCIRLevel_Type(TLevelOrDefault):
+    """Custom type tSapEgrDynamicQueueCIRLevel based on TLevelOrDefault"""
+    defaultValue = 0
+
+
+_TSapEgrDynamicQueueCIRLevel_Type.__name__ = "TLevelOrDefault"
+_TSapEgrDynamicQueueCIRLevel_Object = MibTableColumn
+tSapEgrDynamicQueueCIRLevel = _TSapEgrDynamicQueueCIRLevel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 25),
+    _TSapEgrDynamicQueueCIRLevel_Type()
+)
+tSapEgrDynamicQueueCIRLevel.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueCIRLevel.setStatus("current")
+
+
+class _TSapEgrDynamicQueueCIRWeight_Type(TWeight):
+    """Custom type tSapEgrDynamicQueueCIRWeight based on TWeight"""
+    defaultValue = 1
+
+
+_TSapEgrDynamicQueueCIRWeight_Type.__name__ = "TWeight"
+_TSapEgrDynamicQueueCIRWeight_Object = MibTableColumn
+tSapEgrDynamicQueueCIRWeight = _TSapEgrDynamicQueueCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 26),
+    _TSapEgrDynamicQueueCIRWeight_Type()
+)
+tSapEgrDynamicQueueCIRWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueCIRWeight.setStatus("current")
+
+
+class _TSapEgrDynamicQueueUsePortParent_Type(TruthValue):
+    """Custom type tSapEgrDynamicQueueUsePortParent based on TruthValue"""
+    defaultValue = 2
+
+
+_TSapEgrDynamicQueueUsePortParent_Type.__name__ = "TruthValue"
+_TSapEgrDynamicQueueUsePortParent_Object = MibTableColumn
+tSapEgrDynamicQueueUsePortParent = _TSapEgrDynamicQueueUsePortParent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 27),
+    _TSapEgrDynamicQueueUsePortParent_Type()
+)
+tSapEgrDynamicQueueUsePortParent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueueUsePortParent.setStatus("current")
+
+
+class _TSapEgrDynamicQueuePortLvl_Type(TLevel):
+    """Custom type tSapEgrDynamicQueuePortLvl based on TLevel"""
+    defaultValue = 1
+
+
+_TSapEgrDynamicQueuePortLvl_Type.__name__ = "TLevel"
+_TSapEgrDynamicQueuePortLvl_Object = MibTableColumn
+tSapEgrDynamicQueuePortLvl = _TSapEgrDynamicQueuePortLvl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 28),
+    _TSapEgrDynamicQueuePortLvl_Type()
+)
+tSapEgrDynamicQueuePortLvl.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueuePortLvl.setStatus("current")
+
+
+class _TSapEgrDynamicQueuePortWght_Type(TWeight):
+    """Custom type tSapEgrDynamicQueuePortWght based on TWeight"""
+    defaultValue = 1
+
+
+_TSapEgrDynamicQueuePortWght_Type.__name__ = "TWeight"
+_TSapEgrDynamicQueuePortWght_Object = MibTableColumn
+tSapEgrDynamicQueuePortWght = _TSapEgrDynamicQueuePortWght_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 29),
+    _TSapEgrDynamicQueuePortWght_Type()
+)
+tSapEgrDynamicQueuePortWght.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueuePortWght.setStatus("current")
+
+
+class _TSapEgrDynamicQueuePortCIRLvl_Type(TLevelOrDefault):
+    """Custom type tSapEgrDynamicQueuePortCIRLvl based on TLevelOrDefault"""
+    defaultValue = 0
+
+
+_TSapEgrDynamicQueuePortCIRLvl_Type.__name__ = "TLevelOrDefault"
+_TSapEgrDynamicQueuePortCIRLvl_Object = MibTableColumn
+tSapEgrDynamicQueuePortCIRLvl = _TSapEgrDynamicQueuePortCIRLvl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 30),
+    _TSapEgrDynamicQueuePortCIRLvl_Type()
+)
+tSapEgrDynamicQueuePortCIRLvl.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueuePortCIRLvl.setStatus("current")
+
+
+class _TSapEgrDynamicQueuePortCIRWght_Type(TWeight):
+    """Custom type tSapEgrDynamicQueuePortCIRWght based on TWeight"""
+    defaultValue = 0
+
+
+_TSapEgrDynamicQueuePortCIRWght_Type.__name__ = "TWeight"
+_TSapEgrDynamicQueuePortCIRWght_Object = MibTableColumn
+tSapEgrDynamicQueuePortCIRWght = _TSapEgrDynamicQueuePortCIRWght_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 14, 1, 31),
+    _TSapEgrDynamicQueuePortCIRWght_Type()
+)
+tSapEgrDynamicQueuePortCIRWght.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSapEgrDynamicQueuePortCIRWght.setStatus("current")
 _TSapEgressHsWrrGrpTable_Object = MibTable
 tSapEgressHsWrrGrpTable = _TSapEgressHsWrrGrpTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 4, 15)
@@ -10748,6 +10964,38 @@ tNetworkEgrIPCritDstPortList = _TNetworkEgrIPCritDstPortList_Object(
 tNetworkEgrIPCritDstPortList.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tNetworkEgrIPCritDstPortList.setStatus("current")
+
+
+class _TNetworkEgrIPCritSrcIpPrefixList_Type(TNamedItemOrEmpty):
+    """Custom type tNetworkEgrIPCritSrcIpPrefixList based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TNetworkEgrIPCritSrcIpPrefixList_Type.__name__ = "TNamedItemOrEmpty"
+_TNetworkEgrIPCritSrcIpPrefixList_Object = MibTableColumn
+tNetworkEgrIPCritSrcIpPrefixList = _TNetworkEgrIPCritSrcIpPrefixList_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 5, 12, 1, 30),
+    _TNetworkEgrIPCritSrcIpPrefixList_Type()
+)
+tNetworkEgrIPCritSrcIpPrefixList.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tNetworkEgrIPCritSrcIpPrefixList.setStatus("current")
+
+
+class _TNetworkEgrIPCritDstIpPrefixList_Type(TNamedItemOrEmpty):
+    """Custom type tNetworkEgrIPCritDstIpPrefixList based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TNetworkEgrIPCritDstIpPrefixList_Type.__name__ = "TNamedItemOrEmpty"
+_TNetworkEgrIPCritDstIpPrefixList_Object = MibTableColumn
+tNetworkEgrIPCritDstIpPrefixList = _TNetworkEgrIPCritDstIpPrefixList_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 5, 12, 1, 31),
+    _TNetworkEgrIPCritDstIpPrefixList_Type()
+)
+tNetworkEgrIPCritDstIpPrefixList.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tNetworkEgrIPCritDstIpPrefixList.setStatus("current")
 _TNetIngPlcyTable_Object = MibTable
 tNetIngPlcyTable = _TNetIngPlcyTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 5, 13)
@@ -10849,13 +11097,21 @@ class _TNetIngPlcyPlcrAlloc_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5,
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
         *(("none", 1),
           ("per-fc", 2),
-          ("per-fc-unicast-multicast", 3))
+          ("per-fc-unicast-multicast", 3),
+          ("per-2-fc-unicast-multicast", 4),
+          ("per-4-fc-unicast-multicast", 5),
+          ("per-2-fc", 6),
+          ("per-4-fc", 7))
     )
 
 
@@ -11009,7 +11265,7 @@ class _TNetIngPlcyPolicerPIRLo_Type(TmnxLow32):
 
     subtypeSpec = TmnxLow32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(144, 1000000000),
+        ValueRangeConstraint(1, 1000000000),
         ValueRangeConstraint(4294967295, 4294967295),
     )
 
@@ -11166,6 +11422,34 @@ tNetIngPlcyPolicerLastChanged = _TNetIngPlcyPolicerLastChanged_Object(
 tNetIngPlcyPolicerLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tNetIngPlcyPolicerLastChanged.setStatus("current")
+
+
+class _TNetIngPolicerAlgoType_Type(Integer32):
+    """Custom type tNetIngPolicerAlgoType based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("trtcmDs", 1),
+          ("trtcmDsCoupled", 2))
+    )
+
+
+_TNetIngPolicerAlgoType_Type.__name__ = "Integer32"
+_TNetIngPolicerAlgoType_Object = MibTableColumn
+tNetIngPolicerAlgoType = _TNetIngPolicerAlgoType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 5, 15, 1, 16),
+    _TNetIngPolicerAlgoType_Type()
+)
+tNetIngPolicerAlgoType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tNetIngPolicerAlgoType.setStatus("current")
 _TNetworkQueueObjects_ObjectIdentity = ObjectIdentity
 tNetworkQueueObjects = _TNetworkQueueObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6)
@@ -11228,38 +11512,6 @@ tNetworkQueuePolicyLastChanged = _TNetworkQueuePolicyLastChanged_Object(
 tNetworkQueuePolicyLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tNetworkQueuePolicyLastChanged.setStatus("current")
-
-
-class _TNetworkQueuePolicyEHWrrPlcy_Type(TNamedItemOrEmpty):
-    """Custom type tNetworkQueuePolicyEHWrrPlcy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TNetworkQueuePolicyEHWrrPlcy_Type.__name__ = "TNamedItemOrEmpty"
-_TNetworkQueuePolicyEHWrrPlcy_Object = MibTableColumn
-tNetworkQueuePolicyEHWrrPlcy = _TNetworkQueuePolicyEHWrrPlcy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 1, 1, 9),
-    _TNetworkQueuePolicyEHWrrPlcy_Type()
-)
-tNetworkQueuePolicyEHWrrPlcy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tNetworkQueuePolicyEHWrrPlcy.setStatus("obsolete")
-
-
-class _TNetworkQueuePolicyEHPktBOffst_Type(TEgressHsmdaPerPacketOffset):
-    """Custom type tNetworkQueuePolicyEHPktBOffst based on TEgressHsmdaPerPacketOffset"""
-    defaultValue = 0
-
-
-_TNetworkQueuePolicyEHPktBOffst_Type.__name__ = "TEgressHsmdaPerPacketOffset"
-_TNetworkQueuePolicyEHPktBOffst_Object = MibTableColumn
-tNetworkQueuePolicyEHPktBOffst = _TNetworkQueuePolicyEHPktBOffst_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 1, 1, 10),
-    _TNetworkQueuePolicyEHPktBOffst_Type()
-)
-tNetworkQueuePolicyEHPktBOffst.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tNetworkQueuePolicyEHPktBOffst.setStatus("obsolete")
 
 
 class _TNetworkQueuePolicyHsAttachPlcy_Type(TNamedItem):
@@ -11918,176 +12170,6 @@ tNetworkQueueFCLastChanged = _TNetworkQueueFCLastChanged_Object(
 tNetworkQueueFCLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tNetworkQueueFCLastChanged.setStatus("current")
-
-
-class _TNetworkQueueFCEgrHsmdaQueue_Type(TQueueId):
-    """Custom type tNetworkQueueFCEgrHsmdaQueue based on TQueueId"""
-    subtypeSpec = TQueueId.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TNetworkQueueFCEgrHsmdaQueue_Type.__name__ = "TQueueId"
-_TNetworkQueueFCEgrHsmdaQueue_Object = MibTableColumn
-tNetworkQueueFCEgrHsmdaQueue = _TNetworkQueueFCEgrHsmdaQueue_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 3, 1, 8),
-    _TNetworkQueueFCEgrHsmdaQueue_Type()
-)
-tNetworkQueueFCEgrHsmdaQueue.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tNetworkQueueFCEgrHsmdaQueue.setStatus("obsolete")
-_TNetworkEgrHsmdaQueueTable_Object = MibTable
-tNetworkEgrHsmdaQueueTable = _TNetworkEgrHsmdaQueueTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4)
-)
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueTable.setStatus("obsolete")
-_TNetworkEgrHsmdaQueueEntry_Object = MibTableRow
-tNetworkEgrHsmdaQueueEntry = _TNetworkEgrHsmdaQueueEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1)
-)
-tNetworkEgrHsmdaQueueEntry.setIndexNames(
-    (0, "TIMETRA-QOS-MIB", "tNetworkQueuePolicy"),
-    (0, "TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueue"),
-)
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueEntry.setStatus("current")
-
-
-class _TNetworkEgrHsmdaQueue_Type(TEgressHsmdaQueueId):
-    """Custom type tNetworkEgrHsmdaQueue based on TEgressHsmdaQueueId"""
-    subtypeSpec = TEgressHsmdaQueueId.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TNetworkEgrHsmdaQueue_Type.__name__ = "TEgressHsmdaQueueId"
-_TNetworkEgrHsmdaQueue_Object = MibTableColumn
-tNetworkEgrHsmdaQueue = _TNetworkEgrHsmdaQueue_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 1),
-    _TNetworkEgrHsmdaQueue_Type()
-)
-tNetworkEgrHsmdaQueue.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueue.setStatus("current")
-
-
-class _TNetworkEgrHsmdaQueuePIRPercent_Type(Unsigned32):
-    """Custom type tNetworkEgrHsmdaQueuePIRPercent based on Unsigned32"""
-    defaultValue = 10000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_TNetworkEgrHsmdaQueuePIRPercent_Type.__name__ = "Unsigned32"
-_TNetworkEgrHsmdaQueuePIRPercent_Object = MibTableColumn
-tNetworkEgrHsmdaQueuePIRPercent = _TNetworkEgrHsmdaQueuePIRPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 2),
-    _TNetworkEgrHsmdaQueuePIRPercent_Type()
-)
-tNetworkEgrHsmdaQueuePIRPercent.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueuePIRPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueuePIRPercent.setUnits("centipercent")
-
-
-class _TNetworkEgrHsmdaQueuePIRAdaptn_Type(TAdaptationRule):
-    """Custom type tNetworkEgrHsmdaQueuePIRAdaptn based on TAdaptationRule"""
-    defaultValue = 3
-
-
-_TNetworkEgrHsmdaQueuePIRAdaptn_Type.__name__ = "TAdaptationRule"
-_TNetworkEgrHsmdaQueuePIRAdaptn_Object = MibTableColumn
-tNetworkEgrHsmdaQueuePIRAdaptn = _TNetworkEgrHsmdaQueuePIRAdaptn_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 3),
-    _TNetworkEgrHsmdaQueuePIRAdaptn_Type()
-)
-tNetworkEgrHsmdaQueuePIRAdaptn.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueuePIRAdaptn.setStatus("obsolete")
-
-
-class _TNetworkEgrHsmdaQueueWrrWeight_Type(THsmdaWrrWeight):
-    """Custom type tNetworkEgrHsmdaQueueWrrWeight based on THsmdaWrrWeight"""
-    defaultValue = 1
-
-
-_TNetworkEgrHsmdaQueueWrrWeight_Type.__name__ = "THsmdaWrrWeight"
-_TNetworkEgrHsmdaQueueWrrWeight_Object = MibTableColumn
-tNetworkEgrHsmdaQueueWrrWeight = _TNetworkEgrHsmdaQueueWrrWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 4),
-    _TNetworkEgrHsmdaQueueWrrWeight_Type()
-)
-tNetworkEgrHsmdaQueueWrrWeight.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueWrrWeight.setStatus("obsolete")
-
-
-class _TNetworkEgrHsmdaQueueMBS_Type(THSMDABurstSizeBytes):
-    """Custom type tNetworkEgrHsmdaQueueMBS based on THSMDABurstSizeBytes"""
-    defaultValue = -1
-
-
-_TNetworkEgrHsmdaQueueMBS_Type.__name__ = "THSMDABurstSizeBytes"
-_TNetworkEgrHsmdaQueueMBS_Object = MibTableColumn
-tNetworkEgrHsmdaQueueMBS = _TNetworkEgrHsmdaQueueMBS_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 5),
-    _TNetworkEgrHsmdaQueueMBS_Type()
-)
-tNetworkEgrHsmdaQueueMBS.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueMBS.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueMBS.setUnits("bytes")
-
-
-class _TNetworkEgrHsmdaQueueSlopePolicy_Type(TNamedItem):
-    """Custom type tNetworkEgrHsmdaQueueSlopePolicy based on TNamedItem"""
-    defaultValue = OctetString("default")
-
-
-_TNetworkEgrHsmdaQueueSlopePolicy_Type.__name__ = "TNamedItem"
-_TNetworkEgrHsmdaQueueSlopePolicy_Object = MibTableColumn
-tNetworkEgrHsmdaQueueSlopePolicy = _TNetworkEgrHsmdaQueueSlopePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 6),
-    _TNetworkEgrHsmdaQueueSlopePolicy_Type()
-)
-tNetworkEgrHsmdaQueueSlopePolicy.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueSlopePolicy.setStatus("obsolete")
-_TNetworkEgrHsmdaQueueLastChanged_Type = TimeStamp
-_TNetworkEgrHsmdaQueueLastChanged_Object = MibTableColumn
-tNetworkEgrHsmdaQueueLastChanged = _TNetworkEgrHsmdaQueueLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 7),
-    _TNetworkEgrHsmdaQueueLastChanged_Type()
-)
-tNetworkEgrHsmdaQueueLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueLastChanged.setStatus("obsolete")
-
-
-class _TNetworkEgrHsmdaQueueBurstLimit_Type(THSMDAQueueBurstLimit):
-    """Custom type tNetworkEgrHsmdaQueueBurstLimit based on THSMDAQueueBurstLimit"""
-    defaultValue = -1
-
-
-_TNetworkEgrHsmdaQueueBurstLimit_Type.__name__ = "THSMDAQueueBurstLimit"
-_TNetworkEgrHsmdaQueueBurstLimit_Object = MibTableColumn
-tNetworkEgrHsmdaQueueBurstLimit = _TNetworkEgrHsmdaQueueBurstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 4, 1, 8),
-    _TNetworkEgrHsmdaQueueBurstLimit_Type()
-)
-tNetworkEgrHsmdaQueueBurstLimit.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueBurstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueBurstLimit.setUnits("bytes")
 _TNetworkQueueHsWrrGrpTable_Object = MibTable
 tNetworkQueueHsWrrGrpTable = _TNetworkQueueHsWrrGrpTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 6, 5)
@@ -13376,61 +13458,6 @@ if mibBuilder.loadTexts:
     tQosEgrQGroupDescr.setStatus("current")
 
 
-class _TQosEgrQGroupHsmdaPacketOffset_Type(TEgressHsmdaPerPacketOffset):
-    """Custom type tQosEgrQGroupHsmdaPacketOffset based on TEgressHsmdaPerPacketOffset"""
-    defaultValue = 0
-
-
-_TQosEgrQGroupHsmdaPacketOffset_Type.__name__ = "TEgressHsmdaPerPacketOffset"
-_TQosEgrQGroupHsmdaPacketOffset_Object = MibTableColumn
-tQosEgrQGroupHsmdaPacketOffset = _TQosEgrQGroupHsmdaPacketOffset_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 6, 1, 5),
-    _TQosEgrQGroupHsmdaPacketOffset_Type()
-)
-tQosEgrQGroupHsmdaPacketOffset.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrQGroupHsmdaPacketOffset.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tQosEgrQGroupHsmdaPacketOffset.setUnits("bytes")
-
-
-class _TQosEgrQGroupHsmdaWrrPolicy_Type(TNamedItemOrEmpty):
-    """Custom type tQosEgrQGroupHsmdaWrrPolicy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TQosEgrQGroupHsmdaWrrPolicy_Type.__name__ = "TNamedItemOrEmpty"
-_TQosEgrQGroupHsmdaWrrPolicy_Object = MibTableColumn
-tQosEgrQGroupHsmdaWrrPolicy = _TQosEgrQGroupHsmdaWrrPolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 6, 1, 6),
-    _TQosEgrQGroupHsmdaWrrPolicy_Type()
-)
-tQosEgrQGroupHsmdaWrrPolicy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrQGroupHsmdaWrrPolicy.setStatus("obsolete")
-
-
-class _TQosEgrQGroupHsmdaLowBrstMaxCls_Type(Unsigned32):
-    """Custom type tQosEgrQGroupHsmdaLowBrstMaxCls based on Unsigned32"""
-    defaultValue = 8
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TQosEgrQGroupHsmdaLowBrstMaxCls_Type.__name__ = "Unsigned32"
-_TQosEgrQGroupHsmdaLowBrstMaxCls_Object = MibTableColumn
-tQosEgrQGroupHsmdaLowBrstMaxCls = _TQosEgrQGroupHsmdaLowBrstMaxCls_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 6, 1, 7),
-    _TQosEgrQGroupHsmdaLowBrstMaxCls_Type()
-)
-tQosEgrQGroupHsmdaLowBrstMaxCls.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrQGroupHsmdaLowBrstMaxCls.setStatus("obsolete")
-
-
 class _TQosEgrQGroupQsHqosManageable_Type(TruthValue):
     """Custom type tQosEgrQGroupQsHqosManageable based on TruthValue"""
     defaultValue = 1
@@ -13461,6 +13488,29 @@ tQosEgrQGroupHsAttachPlcy = _TQosEgrQGroupHsAttachPlcy_Object(
 tQosEgrQGroupHsAttachPlcy.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tQosEgrQGroupHsAttachPlcy.setStatus("current")
+
+
+class _TQosEgrQGrpHwAggShapQsQSetSize_Type(Integer32):
+    """Custom type tQosEgrQGrpHwAggShapQsQSetSize based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(2, 8),
+    )
+
+
+_TQosEgrQGrpHwAggShapQsQSetSize_Type.__name__ = "Integer32"
+_TQosEgrQGrpHwAggShapQsQSetSize_Object = MibTableColumn
+tQosEgrQGrpHwAggShapQsQSetSize = _TQosEgrQGrpHwAggShapQsQSetSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 6, 1, 10),
+    _TQosEgrQGrpHwAggShapQsQSetSize_Type()
+)
+tQosEgrQGrpHwAggShapQsQSetSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosEgrQGrpHwAggShapQsQSetSize.setStatus("current")
 _TQosEgrQueueTable_Object = MibTable
 tQosEgrQueueTable = _TQosEgrQueueTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 7)
@@ -14256,6 +14306,67 @@ tQosEgrQueueHsAltClssPool = _TQosEgrQueueHsAltClssPool_Object(
 tQosEgrQueueHsAltClssPool.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tQosEgrQueueHsAltClssPool.setStatus("current")
+
+
+class _TQosEgrQueueAggShaperWeight_Type(Unsigned32):
+    """Custom type tQosEgrQueueAggShaperWeight based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_TQosEgrQueueAggShaperWeight_Type.__name__ = "Unsigned32"
+_TQosEgrQueueAggShaperWeight_Object = MibTableColumn
+tQosEgrQueueAggShaperWeight = _TQosEgrQueueAggShaperWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 7, 1, 47),
+    _TQosEgrQueueAggShaperWeight_Type()
+)
+tQosEgrQueueAggShaperWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosEgrQueueAggShaperWeight.setStatus("current")
+
+
+class _TQosEgrQueueSchedClass_Type(Unsigned32):
+    """Custom type tQosEgrQueueSchedClass based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 6),
+    )
+
+
+_TQosEgrQueueSchedClass_Type.__name__ = "Unsigned32"
+_TQosEgrQueueSchedClass_Object = MibTableColumn
+tQosEgrQueueSchedClass = _TQosEgrQueueSchedClass_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 7, 1, 48),
+    _TQosEgrQueueSchedClass_Type()
+)
+tQosEgrQueueSchedClass.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosEgrQueueSchedClass.setStatus("current")
+
+
+class _TQosEgrQueueFirBurstLimit_Type(TFirBurstLimit):
+    """Custom type tQosEgrQueueFirBurstLimit based on TFirBurstLimit"""
+    defaultValue = -1
+
+
+_TQosEgrQueueFirBurstLimit_Type.__name__ = "TFirBurstLimit"
+_TQosEgrQueueFirBurstLimit_Object = MibTableColumn
+tQosEgrQueueFirBurstLimit = _TQosEgrQueueFirBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 7, 1, 49),
+    _TQosEgrQueueFirBurstLimit_Type()
+)
+tQosEgrQueueFirBurstLimit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosEgrQueueFirBurstLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    tQosEgrQueueFirBurstLimit.setUnits("bytes")
 _TQosEgrQGroupFCTable_Object = MibTable
 tQosEgrQGroupFCTable = _TQosEgrQGroupFCTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 8)
@@ -14315,161 +14426,6 @@ tQosEgrQGroupFCQueue = _TQosEgrQGroupFCQueue_Object(
 tQosEgrQGroupFCQueue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tQosEgrQGroupFCQueue.setStatus("current")
-_TQosEgrHsmdaQueueTable_Object = MibTable
-tQosEgrHsmdaQueueTable = _TQosEgrHsmdaQueueTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9)
-)
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueTable.setStatus("obsolete")
-_TQosEgrHsmdaQueueEntry_Object = MibTableRow
-tQosEgrHsmdaQueueEntry = _TQosEgrHsmdaQueueEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1)
-)
-tQosEgrHsmdaQueueEntry.setIndexNames(
-    (0, "TIMETRA-QOS-MIB", "tQosEgrQGroupName"),
-    (0, "TIMETRA-QOS-MIB", "tQosEgrHsmdaQueue"),
-)
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueEntry.setStatus("current")
-
-
-class _TQosEgrHsmdaQueue_Type(TEgressHsmdaQueueId):
-    """Custom type tQosEgrHsmdaQueue based on TEgressHsmdaQueueId"""
-    subtypeSpec = TEgressHsmdaQueueId.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TQosEgrHsmdaQueue_Type.__name__ = "TEgressHsmdaQueueId"
-_TQosEgrHsmdaQueue_Object = MibTableColumn
-tQosEgrHsmdaQueue = _TQosEgrHsmdaQueue_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 1),
-    _TQosEgrHsmdaQueue_Type()
-)
-tQosEgrHsmdaQueue.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueue.setStatus("current")
-_TQosEgrHsmdaQueueRowStatus_Type = RowStatus
-_TQosEgrHsmdaQueueRowStatus_Object = MibTableColumn
-tQosEgrHsmdaQueueRowStatus = _TQosEgrHsmdaQueueRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 2),
-    _TQosEgrHsmdaQueueRowStatus_Type()
-)
-tQosEgrHsmdaQueueRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueRowStatus.setStatus("obsolete")
-_TQosEgrHsmdaQueueLastChanged_Type = TimeStamp
-_TQosEgrHsmdaQueueLastChanged_Object = MibTableColumn
-tQosEgrHsmdaQueueLastChanged = _TQosEgrHsmdaQueueLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 3),
-    _TQosEgrHsmdaQueueLastChanged_Type()
-)
-tQosEgrHsmdaQueueLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueLastChanged.setStatus("obsolete")
-
-
-class _TQosEgrHsmdaQueuePIRAdaptn_Type(TAdaptationRule):
-    """Custom type tQosEgrHsmdaQueuePIRAdaptn based on TAdaptationRule"""
-    defaultValue = 3
-
-
-_TQosEgrHsmdaQueuePIRAdaptn_Type.__name__ = "TAdaptationRule"
-_TQosEgrHsmdaQueuePIRAdaptn_Object = MibTableColumn
-tQosEgrHsmdaQueuePIRAdaptn = _TQosEgrHsmdaQueuePIRAdaptn_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 4),
-    _TQosEgrHsmdaQueuePIRAdaptn_Type()
-)
-tQosEgrHsmdaQueuePIRAdaptn.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueuePIRAdaptn.setStatus("obsolete")
-
-
-class _TQosEgrHsmdaQueueAdminPIR_Type(THsmdaPIRKRate):
-    """Custom type tQosEgrHsmdaQueueAdminPIR based on THsmdaPIRKRate"""
-    defaultValue = -1
-
-
-_TQosEgrHsmdaQueueAdminPIR_Type.__name__ = "THsmdaPIRKRate"
-_TQosEgrHsmdaQueueAdminPIR_Object = MibTableColumn
-tQosEgrHsmdaQueueAdminPIR = _TQosEgrHsmdaQueueAdminPIR_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 5),
-    _TQosEgrHsmdaQueueAdminPIR_Type()
-)
-tQosEgrHsmdaQueueAdminPIR.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueAdminPIR.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueAdminPIR.setUnits("kilobps")
-
-
-class _TQosEgrHsmdaQueueSlopePolicy_Type(TNamedItem):
-    """Custom type tQosEgrHsmdaQueueSlopePolicy based on TNamedItem"""
-    defaultValue = OctetString("default")
-
-
-_TQosEgrHsmdaQueueSlopePolicy_Type.__name__ = "TNamedItem"
-_TQosEgrHsmdaQueueSlopePolicy_Object = MibTableColumn
-tQosEgrHsmdaQueueSlopePolicy = _TQosEgrHsmdaQueueSlopePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 6),
-    _TQosEgrHsmdaQueueSlopePolicy_Type()
-)
-tQosEgrHsmdaQueueSlopePolicy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueSlopePolicy.setStatus("obsolete")
-
-
-class _TQosEgrHsmdaQueueWrrWeight_Type(THsmdaWrrWeight):
-    """Custom type tQosEgrHsmdaQueueWrrWeight based on THsmdaWrrWeight"""
-    defaultValue = 1
-
-
-_TQosEgrHsmdaQueueWrrWeight_Type.__name__ = "THsmdaWrrWeight"
-_TQosEgrHsmdaQueueWrrWeight_Object = MibTableColumn
-tQosEgrHsmdaQueueWrrWeight = _TQosEgrHsmdaQueueWrrWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 7),
-    _TQosEgrHsmdaQueueWrrWeight_Type()
-)
-tQosEgrHsmdaQueueWrrWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueWrrWeight.setStatus("obsolete")
-
-
-class _TQosEgrHsmdaQueueMBS_Type(THSMDABurstSizeBytes):
-    """Custom type tQosEgrHsmdaQueueMBS based on THSMDABurstSizeBytes"""
-    defaultValue = -1
-
-
-_TQosEgrHsmdaQueueMBS_Type.__name__ = "THSMDABurstSizeBytes"
-_TQosEgrHsmdaQueueMBS_Object = MibTableColumn
-tQosEgrHsmdaQueueMBS = _TQosEgrHsmdaQueueMBS_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 8),
-    _TQosEgrHsmdaQueueMBS_Type()
-)
-tQosEgrHsmdaQueueMBS.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueMBS.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueMBS.setUnits("bytes")
-
-
-class _TQosEgrHsmdaQueueBurstLimit_Type(THSMDAQueueBurstLimit):
-    """Custom type tQosEgrHsmdaQueueBurstLimit based on THSMDAQueueBurstLimit"""
-    defaultValue = -1
-
-
-_TQosEgrHsmdaQueueBurstLimit_Type.__name__ = "THSMDAQueueBurstLimit"
-_TQosEgrHsmdaQueueBurstLimit_Object = MibTableColumn
-tQosEgrHsmdaQueueBurstLimit = _TQosEgrHsmdaQueueBurstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 9, 1, 9),
-    _TQosEgrHsmdaQueueBurstLimit_Type()
-)
-tQosEgrHsmdaQueueBurstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueBurstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tQosEgrHsmdaQueueBurstLimit.setUnits("bytes")
 _TQosEgrQGroupHsWrrGrpTable_Object = MibTable
 tQosEgrQGroupHsWrrGrpTable = _TQosEgrQGroupHsWrrGrpTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 10)
@@ -14617,6 +14573,61 @@ tQosEgrQGroupHsWrrGrpClassWeight = _TQosEgrQGroupHsWrrGrpClassWeight_Object(
 tQosEgrQGroupHsWrrGrpClassWeight.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tQosEgrQGroupHsWrrGrpClassWeight.setStatus("current")
+_TQosEgrQueueSchdClssElvTable_Object = MibTable
+tQosEgrQueueSchdClssElvTable = _TQosEgrQueueSchdClssElvTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 11)
+)
+if mibBuilder.loadTexts:
+    tQosEgrQueueSchdClssElvTable.setStatus("current")
+_TQosEgrQueueSchdClssElvEntry_Object = MibTableRow
+tQosEgrQueueSchdClssElvEntry = _TQosEgrQueueSchdClssElvEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 11, 1)
+)
+tQosEgrQueueSchdClssElvEntry.setIndexNames(
+    (0, "TIMETRA-QOS-MIB", "tQosEgrQGroupName"),
+    (0, "TIMETRA-QOS-MIB", "tQosEgrQueueSchedClass"),
+)
+if mibBuilder.loadTexts:
+    tQosEgrQueueSchdClssElvEntry.setStatus("current")
+_TQosEgrQueueSchdClssElvRowStatus_Type = RowStatus
+_TQosEgrQueueSchdClssElvRowStatus_Object = MibTableColumn
+tQosEgrQueueSchdClssElvRowStatus = _TQosEgrQueueSchdClssElvRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 11, 1, 2),
+    _TQosEgrQueueSchdClssElvRowStatus_Type()
+)
+tQosEgrQueueSchdClssElvRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosEgrQueueSchdClssElvRowStatus.setStatus("current")
+_TQosEgrQSchdClssElvLastChanged_Type = TimeStamp
+_TQosEgrQSchdClssElvLastChanged_Object = MibTableColumn
+tQosEgrQSchdClssElvLastChanged = _TQosEgrQSchdClssElvLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 11, 1, 3),
+    _TQosEgrQSchdClssElvLastChanged_Type()
+)
+tQosEgrQSchdClssElvLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosEgrQSchdClssElvLastChanged.setStatus("current")
+
+
+class _TQosEgrQueueSchdClssElvWght_Type(Unsigned32):
+    """Custom type tQosEgrQueueSchdClssElvWght based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8),
+    )
+
+
+_TQosEgrQueueSchdClssElvWght_Type.__name__ = "Unsigned32"
+_TQosEgrQueueSchdClssElvWght_Object = MibTableColumn
+tQosEgrQueueSchdClssElvWght = _TQosEgrQueueSchdClssElvWght_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 7, 11, 1, 4),
+    _TQosEgrQueueSchdClssElvWght_Type()
+)
+tQosEgrQueueSchdClssElvWght.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosEgrQueueSchdClssElvWght.setStatus("current")
 _TSlopeObjects_ObjectIdentity = ObjectIdentity
 tSlopeObjects = _TSlopeObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10)
@@ -15016,257 +15027,6 @@ tSlopeHighPlusMaxProbability = _TSlopeHighPlusMaxProbability_Object(
 tSlopeHighPlusMaxProbability.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSlopeHighPlusMaxProbability.setStatus("current")
-_THsmdaSlopePolicyTable_Object = MibTable
-tHsmdaSlopePolicyTable = _THsmdaSlopePolicyTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2)
-)
-if mibBuilder.loadTexts:
-    tHsmdaSlopePolicyTable.setStatus("obsolete")
-_THsmdaSlopePolicyEntry_Object = MibTableRow
-tHsmdaSlopePolicyEntry = _THsmdaSlopePolicyEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1)
-)
-tHsmdaSlopePolicyEntry.setIndexNames(
-    (0, "TIMETRA-QOS-MIB", "tHsmdaSlopePolicyName"),
-)
-if mibBuilder.loadTexts:
-    tHsmdaSlopePolicyEntry.setStatus("current")
-_THsmdaSlopePolicyName_Type = TNamedItem
-_THsmdaSlopePolicyName_Object = MibTableColumn
-tHsmdaSlopePolicyName = _THsmdaSlopePolicyName_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 1),
-    _THsmdaSlopePolicyName_Type()
-)
-tHsmdaSlopePolicyName.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tHsmdaSlopePolicyName.setStatus("current")
-_THsmdaSlopePolicyRowStatus_Type = RowStatus
-_THsmdaSlopePolicyRowStatus_Object = MibTableColumn
-tHsmdaSlopePolicyRowStatus = _THsmdaSlopePolicyRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 2),
-    _THsmdaSlopePolicyRowStatus_Type()
-)
-tHsmdaSlopePolicyRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopePolicyRowStatus.setStatus("obsolete")
-_THsmdaSlopeLastChanged_Type = TimeStamp
-_THsmdaSlopeLastChanged_Object = MibTableColumn
-tHsmdaSlopeLastChanged = _THsmdaSlopeLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 3),
-    _THsmdaSlopeLastChanged_Type()
-)
-tHsmdaSlopeLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLastChanged.setStatus("obsolete")
-
-
-class _THsmdaSlopeDescription_Type(TItemDescription):
-    """Custom type tHsmdaSlopeDescription based on TItemDescription"""
-    defaultValue = OctetString("")
-
-
-_THsmdaSlopeDescription_Type.__name__ = "TItemDescription"
-_THsmdaSlopeDescription_Object = MibTableColumn
-tHsmdaSlopeDescription = _THsmdaSlopeDescription_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 4),
-    _THsmdaSlopeDescription_Type()
-)
-tHsmdaSlopeDescription.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeDescription.setStatus("obsolete")
-
-
-class _THsmdaSlopeQueueMbs_Type(Unsigned32):
-    """Custom type tHsmdaSlopeQueueMbs based on Unsigned32"""
-    defaultValue = 16800
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 500000),
-    )
-
-
-_THsmdaSlopeQueueMbs_Type.__name__ = "Unsigned32"
-_THsmdaSlopeQueueMbs_Object = MibTableColumn
-tHsmdaSlopeQueueMbs = _THsmdaSlopeQueueMbs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 5),
-    _THsmdaSlopeQueueMbs_Type()
-)
-tHsmdaSlopeQueueMbs.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeQueueMbs.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeQueueMbs.setUnits("bytes")
-
-
-class _THsmdaSlopeHiAdminStatus_Type(TmnxEnabledDisabledAdminState):
-    """Custom type tHsmdaSlopeHiAdminStatus based on TmnxEnabledDisabledAdminState"""
-    defaultValue = 1
-
-
-_THsmdaSlopeHiAdminStatus_Type.__name__ = "TmnxEnabledDisabledAdminState"
-_THsmdaSlopeHiAdminStatus_Object = MibTableColumn
-tHsmdaSlopeHiAdminStatus = _THsmdaSlopeHiAdminStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 6),
-    _THsmdaSlopeHiAdminStatus_Type()
-)
-tHsmdaSlopeHiAdminStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiAdminStatus.setStatus("obsolete")
-
-
-class _THsmdaSlopeHiStartDepth_Type(Unsigned32):
-    """Custom type tHsmdaSlopeHiStartDepth based on Unsigned32"""
-    defaultValue = 10000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaSlopeHiStartDepth_Type.__name__ = "Unsigned32"
-_THsmdaSlopeHiStartDepth_Object = MibTableColumn
-tHsmdaSlopeHiStartDepth = _THsmdaSlopeHiStartDepth_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 7),
-    _THsmdaSlopeHiStartDepth_Type()
-)
-tHsmdaSlopeHiStartDepth.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiStartDepth.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiStartDepth.setUnits("centipercent")
-
-
-class _THsmdaSlopeHiMaxDepth_Type(Unsigned32):
-    """Custom type tHsmdaSlopeHiMaxDepth based on Unsigned32"""
-    defaultValue = 10000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaSlopeHiMaxDepth_Type.__name__ = "Unsigned32"
-_THsmdaSlopeHiMaxDepth_Object = MibTableColumn
-tHsmdaSlopeHiMaxDepth = _THsmdaSlopeHiMaxDepth_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 8),
-    _THsmdaSlopeHiMaxDepth_Type()
-)
-tHsmdaSlopeHiMaxDepth.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiMaxDepth.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiMaxDepth.setUnits("centipercent")
-
-
-class _THsmdaSlopeHiMaxProbability_Type(Unsigned32):
-    """Custom type tHsmdaSlopeHiMaxProbability based on Unsigned32"""
-    defaultValue = 10000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaSlopeHiMaxProbability_Type.__name__ = "Unsigned32"
-_THsmdaSlopeHiMaxProbability_Object = MibTableColumn
-tHsmdaSlopeHiMaxProbability = _THsmdaSlopeHiMaxProbability_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 9),
-    _THsmdaSlopeHiMaxProbability_Type()
-)
-tHsmdaSlopeHiMaxProbability.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiMaxProbability.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeHiMaxProbability.setUnits("centipercent")
-
-
-class _THsmdaSlopeLoAdminStatus_Type(TmnxEnabledDisabledAdminState):
-    """Custom type tHsmdaSlopeLoAdminStatus based on TmnxEnabledDisabledAdminState"""
-    defaultValue = 1
-
-
-_THsmdaSlopeLoAdminStatus_Type.__name__ = "TmnxEnabledDisabledAdminState"
-_THsmdaSlopeLoAdminStatus_Object = MibTableColumn
-tHsmdaSlopeLoAdminStatus = _THsmdaSlopeLoAdminStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 10),
-    _THsmdaSlopeLoAdminStatus_Type()
-)
-tHsmdaSlopeLoAdminStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoAdminStatus.setStatus("obsolete")
-
-
-class _THsmdaSlopeLoStartDepth_Type(Unsigned32):
-    """Custom type tHsmdaSlopeLoStartDepth based on Unsigned32"""
-    defaultValue = 9000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaSlopeLoStartDepth_Type.__name__ = "Unsigned32"
-_THsmdaSlopeLoStartDepth_Object = MibTableColumn
-tHsmdaSlopeLoStartDepth = _THsmdaSlopeLoStartDepth_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 11),
-    _THsmdaSlopeLoStartDepth_Type()
-)
-tHsmdaSlopeLoStartDepth.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoStartDepth.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoStartDepth.setUnits("centipercent")
-
-
-class _THsmdaSlopeLoMaxDepth_Type(Unsigned32):
-    """Custom type tHsmdaSlopeLoMaxDepth based on Unsigned32"""
-    defaultValue = 9000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaSlopeLoMaxDepth_Type.__name__ = "Unsigned32"
-_THsmdaSlopeLoMaxDepth_Object = MibTableColumn
-tHsmdaSlopeLoMaxDepth = _THsmdaSlopeLoMaxDepth_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 12),
-    _THsmdaSlopeLoMaxDepth_Type()
-)
-tHsmdaSlopeLoMaxDepth.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoMaxDepth.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoMaxDepth.setUnits("centipercent")
-
-
-class _THsmdaSlopeLoMaxProbability_Type(Unsigned32):
-    """Custom type tHsmdaSlopeLoMaxProbability based on Unsigned32"""
-    defaultValue = 10000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaSlopeLoMaxProbability_Type.__name__ = "Unsigned32"
-_THsmdaSlopeLoMaxProbability_Object = MibTableColumn
-tHsmdaSlopeLoMaxProbability = _THsmdaSlopeLoMaxProbability_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 10, 2, 1, 13),
-    _THsmdaSlopeLoMaxProbability_Type()
-)
-tHsmdaSlopeLoMaxProbability.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoMaxProbability.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSlopeLoMaxProbability.setUnits("centipercent")
 _TSchedulerObjects_ObjectIdentity = ObjectIdentity
 tSchedulerObjects = _TSchedulerObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12)
@@ -16976,709 +16736,34 @@ tPortSchedPlcyHQosAlgorithm = _TPortSchedPlcyHQosAlgorithm_Object(
 tPortSchedPlcyHQosAlgorithm.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tPortSchedPlcyHQosAlgorithm.setStatus("current")
-_THsmdaSchedulerPlcyTable_Object = MibTable
-tHsmdaSchedulerPlcyTable = _THsmdaSchedulerPlcyTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4)
-)
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyTable.setStatus("obsolete")
-_THsmdaSchedulerPlcyEntry_Object = MibTableRow
-tHsmdaSchedulerPlcyEntry = _THsmdaSchedulerPlcyEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1)
-)
-tHsmdaSchedulerPlcyEntry.setIndexNames(
-    (0, "TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyName"),
-)
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyEntry.setStatus("current")
-_THsmdaSchedulerPlcyName_Type = TNamedItem
-_THsmdaSchedulerPlcyName_Object = MibTableColumn
-tHsmdaSchedulerPlcyName = _THsmdaSchedulerPlcyName_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 1),
-    _THsmdaSchedulerPlcyName_Type()
-)
-tHsmdaSchedulerPlcyName.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyName.setStatus("current")
-_THsmdaSchedulerPlcyRowStatus_Type = RowStatus
-_THsmdaSchedulerPlcyRowStatus_Object = MibTableColumn
-tHsmdaSchedulerPlcyRowStatus = _THsmdaSchedulerPlcyRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 2),
-    _THsmdaSchedulerPlcyRowStatus_Type()
-)
-tHsmdaSchedulerPlcyRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyRowStatus.setStatus("obsolete")
-_THsmdaSchedulerPlcyDescription_Type = TItemDescription
-_THsmdaSchedulerPlcyDescription_Object = MibTableColumn
-tHsmdaSchedulerPlcyDescription = _THsmdaSchedulerPlcyDescription_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 3),
-    _THsmdaSchedulerPlcyDescription_Type()
-)
-tHsmdaSchedulerPlcyDescription.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyDescription.setStatus("obsolete")
 
 
-class _THsmdaSchedulerPlcyMaxRate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyMaxRate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyMaxRate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyMaxRate_Object = MibTableColumn
-tHsmdaSchedulerPlcyMaxRate = _THsmdaSchedulerPlcyMaxRate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 4),
-    _THsmdaSchedulerPlcyMaxRate_Type()
-)
-tHsmdaSchedulerPlcyMaxRate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyMaxRate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyMaxRate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl1Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl1Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl1Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl1Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl1Rate = _THsmdaSchedulerPlcyLvl1Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 5),
-    _THsmdaSchedulerPlcyLvl1Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl1Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl1Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl1Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl1GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl1GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl1GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl1GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl1GrpId = _THsmdaSchedulerPlcyLvl1GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 6),
-    _THsmdaSchedulerPlcyLvl1GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl1GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl1GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl1WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl1WgtInGrp based on THsmdaWeight"""
+class _TPortSchedPlcyAccountingMode_Type(Integer32):
+    """Custom type tPortSchedPlcyAccountingMode based on Integer32"""
     defaultValue = 1
 
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 1),
+          ("separate-below-cir", 2))
+    )
 
-_THsmdaSchedulerPlcyLvl1WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl1WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl1WgtInGrp = _THsmdaSchedulerPlcyLvl1WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 7),
-    _THsmdaSchedulerPlcyLvl1WgtInGrp_Type()
+
+_TPortSchedPlcyAccountingMode_Type.__name__ = "Integer32"
+_TPortSchedPlcyAccountingMode_Object = MibTableColumn
+tPortSchedPlcyAccountingMode = _TPortSchedPlcyAccountingMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 3, 1, 57),
+    _TPortSchedPlcyAccountingMode_Type()
 )
-tHsmdaSchedulerPlcyLvl1WgtInGrp.setMaxAccess("read-create")
+tPortSchedPlcyAccountingMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl1WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl2Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl2Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl2Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl2Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl2Rate = _THsmdaSchedulerPlcyLvl2Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 8),
-    _THsmdaSchedulerPlcyLvl2Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl2Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl2Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl2Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl2GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl2GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl2GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl2GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl2GrpId = _THsmdaSchedulerPlcyLvl2GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 9),
-    _THsmdaSchedulerPlcyLvl2GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl2GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl2GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl2WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl2WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl2WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl2WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl2WgtInGrp = _THsmdaSchedulerPlcyLvl2WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 10),
-    _THsmdaSchedulerPlcyLvl2WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl2WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl2WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl3Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl3Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl3Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl3Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl3Rate = _THsmdaSchedulerPlcyLvl3Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 11),
-    _THsmdaSchedulerPlcyLvl3Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl3Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl3Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl3Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl3GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl3GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl3GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl3GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl3GrpId = _THsmdaSchedulerPlcyLvl3GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 12),
-    _THsmdaSchedulerPlcyLvl3GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl3GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl3GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl3WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl3WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl3WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl3WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl3WgtInGrp = _THsmdaSchedulerPlcyLvl3WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 13),
-    _THsmdaSchedulerPlcyLvl3WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl3WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl3WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl4Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl4Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl4Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl4Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl4Rate = _THsmdaSchedulerPlcyLvl4Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 14),
-    _THsmdaSchedulerPlcyLvl4Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl4Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl4Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl4Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl4GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl4GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl4GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl4GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl4GrpId = _THsmdaSchedulerPlcyLvl4GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 15),
-    _THsmdaSchedulerPlcyLvl4GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl4GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl4GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl4WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl4WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl4WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl4WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl4WgtInGrp = _THsmdaSchedulerPlcyLvl4WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 16),
-    _THsmdaSchedulerPlcyLvl4WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl4WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl4WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl5Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl5Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl5Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl5Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl5Rate = _THsmdaSchedulerPlcyLvl5Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 17),
-    _THsmdaSchedulerPlcyLvl5Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl5Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl5Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl5Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl5GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl5GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl5GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl5GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl5GrpId = _THsmdaSchedulerPlcyLvl5GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 18),
-    _THsmdaSchedulerPlcyLvl5GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl5GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl5GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl5WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl5WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl5WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl5WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl5WgtInGrp = _THsmdaSchedulerPlcyLvl5WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 19),
-    _THsmdaSchedulerPlcyLvl5WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl5WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl5WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl6Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl6Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl6Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl6Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl6Rate = _THsmdaSchedulerPlcyLvl6Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 20),
-    _THsmdaSchedulerPlcyLvl6Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl6Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl6Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl6Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl6GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl6GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl6GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl6GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl6GrpId = _THsmdaSchedulerPlcyLvl6GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 21),
-    _THsmdaSchedulerPlcyLvl6GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl6GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl6GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl6WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl6WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl6WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl6WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl6WgtInGrp = _THsmdaSchedulerPlcyLvl6WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 22),
-    _THsmdaSchedulerPlcyLvl6WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl6WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl6WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl7Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl7Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl7Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl7Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl7Rate = _THsmdaSchedulerPlcyLvl7Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 23),
-    _THsmdaSchedulerPlcyLvl7Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl7Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl7Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl7Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl7GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl7GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl7GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl7GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl7GrpId = _THsmdaSchedulerPlcyLvl7GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 24),
-    _THsmdaSchedulerPlcyLvl7GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl7GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl7GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl7WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl7WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl7WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl7WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl7WgtInGrp = _THsmdaSchedulerPlcyLvl7WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 25),
-    _THsmdaSchedulerPlcyLvl7WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl7WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl7WgtInGrp.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl8Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyLvl8Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl8Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyLvl8Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl8Rate = _THsmdaSchedulerPlcyLvl8Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 26),
-    _THsmdaSchedulerPlcyLvl8Rate_Type()
-)
-tHsmdaSchedulerPlcyLvl8Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl8Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl8Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyLvl8GrpId_Type(THsmdaSchedulerPolicyGroupId):
-    """Custom type tHsmdaSchedulerPlcyLvl8GrpId based on THsmdaSchedulerPolicyGroupId"""
-    defaultValue = 0
-
-
-_THsmdaSchedulerPlcyLvl8GrpId_Type.__name__ = "THsmdaSchedulerPolicyGroupId"
-_THsmdaSchedulerPlcyLvl8GrpId_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl8GrpId = _THsmdaSchedulerPlcyLvl8GrpId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 27),
-    _THsmdaSchedulerPlcyLvl8GrpId_Type()
-)
-tHsmdaSchedulerPlcyLvl8GrpId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl8GrpId.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyLvl8WgtInGrp_Type(THsmdaWeight):
-    """Custom type tHsmdaSchedulerPlcyLvl8WgtInGrp based on THsmdaWeight"""
-    defaultValue = 1
-
-
-_THsmdaSchedulerPlcyLvl8WgtInGrp_Type.__name__ = "THsmdaWeight"
-_THsmdaSchedulerPlcyLvl8WgtInGrp_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl8WgtInGrp = _THsmdaSchedulerPlcyLvl8WgtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 28),
-    _THsmdaSchedulerPlcyLvl8WgtInGrp_Type()
-)
-tHsmdaSchedulerPlcyLvl8WgtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl8WgtInGrp.setStatus("obsolete")
-_THsmdaSchedulerPlcyLastChanged_Type = TimeStamp
-_THsmdaSchedulerPlcyLastChanged_Object = MibTableColumn
-tHsmdaSchedulerPlcyLastChanged = _THsmdaSchedulerPlcyLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 29),
-    _THsmdaSchedulerPlcyLastChanged_Type()
-)
-tHsmdaSchedulerPlcyLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLastChanged.setStatus("obsolete")
-
-
-class _THsmdaSchedulerPlcyGrp1Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyGrp1Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyGrp1Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyGrp1Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyGrp1Rate = _THsmdaSchedulerPlcyGrp1Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 30),
-    _THsmdaSchedulerPlcyGrp1Rate_Type()
-)
-tHsmdaSchedulerPlcyGrp1Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp1Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp1Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyGrp2Rate_Type(THsmdaPIRMRate):
-    """Custom type tHsmdaSchedulerPlcyGrp2Rate based on THsmdaPIRMRate"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyGrp2Rate_Type.__name__ = "THsmdaPIRMRate"
-_THsmdaSchedulerPlcyGrp2Rate_Object = MibTableColumn
-tHsmdaSchedulerPlcyGrp2Rate = _THsmdaSchedulerPlcyGrp2Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 31),
-    _THsmdaSchedulerPlcyGrp2Rate_Type()
-)
-tHsmdaSchedulerPlcyGrp2Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp2Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp2Rate.setUnits("megabps")
-
-
-class _THsmdaSchedulerPlcyBrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyBrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyBrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyBrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyBrstLimit = _THsmdaSchedulerPlcyBrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 32),
-    _THsmdaSchedulerPlcyBrstLimit_Type()
-)
-tHsmdaSchedulerPlcyBrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyBrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyBrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyGrp1BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyGrp1BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyGrp1BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyGrp1BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyGrp1BrstLimit = _THsmdaSchedulerPlcyGrp1BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 33),
-    _THsmdaSchedulerPlcyGrp1BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyGrp1BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp1BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp1BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyGrp2BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyGrp2BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyGrp2BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyGrp2BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyGrp2BrstLimit = _THsmdaSchedulerPlcyGrp2BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 34),
-    _THsmdaSchedulerPlcyGrp2BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyGrp2BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp2BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyGrp2BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl1BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl1BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl1BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl1BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl1BrstLimit = _THsmdaSchedulerPlcyLvl1BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 35),
-    _THsmdaSchedulerPlcyLvl1BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl1BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl1BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl1BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl2BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl2BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl2BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl2BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl2BrstLimit = _THsmdaSchedulerPlcyLvl2BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 36),
-    _THsmdaSchedulerPlcyLvl2BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl2BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl2BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl2BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl3BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl3BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl3BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl3BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl3BrstLimit = _THsmdaSchedulerPlcyLvl3BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 37),
-    _THsmdaSchedulerPlcyLvl3BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl3BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl3BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl3BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl4BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl4BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl4BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl4BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl4BrstLimit = _THsmdaSchedulerPlcyLvl4BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 38),
-    _THsmdaSchedulerPlcyLvl4BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl4BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl4BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl4BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl5BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl5BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl5BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl5BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl5BrstLimit = _THsmdaSchedulerPlcyLvl5BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 39),
-    _THsmdaSchedulerPlcyLvl5BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl5BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl5BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl5BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl6BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl6BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl6BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl6BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl6BrstLimit = _THsmdaSchedulerPlcyLvl6BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 40),
-    _THsmdaSchedulerPlcyLvl6BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl6BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl6BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl6BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl7BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl7BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl7BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl7BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl7BrstLimit = _THsmdaSchedulerPlcyLvl7BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 41),
-    _THsmdaSchedulerPlcyLvl7BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl7BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl7BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl7BrstLimit.setUnits("bytes")
-
-
-class _THsmdaSchedulerPlcyLvl8BrstLimit_Type(TClassBurstLimit):
-    """Custom type tHsmdaSchedulerPlcyLvl8BrstLimit based on TClassBurstLimit"""
-    defaultValue = -1
-
-
-_THsmdaSchedulerPlcyLvl8BrstLimit_Type.__name__ = "TClassBurstLimit"
-_THsmdaSchedulerPlcyLvl8BrstLimit_Object = MibTableColumn
-tHsmdaSchedulerPlcyLvl8BrstLimit = _THsmdaSchedulerPlcyLvl8BrstLimit_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 4, 1, 42),
-    _THsmdaSchedulerPlcyLvl8BrstLimit_Type()
-)
-tHsmdaSchedulerPlcyLvl8BrstLimit.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl8BrstLimit.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaSchedulerPlcyLvl8BrstLimit.setUnits("bytes")
+    tPortSchedPlcyAccountingMode.setStatus("current")
 _TPortSchPlcyGrpTable_Object = MibTable
 tPortSchPlcyGrpTable = _TPortSchPlcyGrpTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 5)
@@ -18737,6 +17822,22 @@ tPortQosPlcyQueuePirWeight = _TPortQosPlcyQueuePirWeight_Object(
 tPortQosPlcyQueuePirWeight.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tPortQosPlcyQueuePirWeight.setStatus("current")
+
+
+class _TPortQosPlcyQueueLowLatency_Type(TmnxEnabledDisabled):
+    """Custom type tPortQosPlcyQueueLowLatency based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_TPortQosPlcyQueueLowLatency_Type.__name__ = "TmnxEnabledDisabled"
+_TPortQosPlcyQueueLowLatency_Object = MibTableColumn
+tPortQosPlcyQueueLowLatency = _TPortQosPlcyQueueLowLatency_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 10, 1, 11),
+    _TPortQosPlcyQueueLowLatency_Type()
+)
+tPortQosPlcyQueueLowLatency.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortQosPlcyQueueLowLatency.setStatus("current")
 _TPortQosPlcyWrrWeightsTable_Object = MibTable
 tPortQosPlcyWrrWeightsTable = _TPortQosPlcyWrrWeightsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 11)
@@ -19265,6 +18366,7 @@ class _TQMgmtPlcyPortSpeed_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
         ValueRangeConstraint(10, 10),
         ValueRangeConstraint(25, 25),
         ValueRangeConstraint(40, 40),
@@ -19406,6 +18508,34 @@ tVlanQosPlcyPktByteOffset = _TVlanQosPlcyPktByteOffset_Object(
 tVlanQosPlcyPktByteOffset.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tVlanQosPlcyPktByteOffset.setStatus("current")
+
+
+class _TVlanQosPlcyQAllocMode_Type(Integer32):
+    """Custom type tVlanQosPlcyQAllocMode based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("four-queue", 1),
+          ("eight-queue", 2))
+    )
+
+
+_TVlanQosPlcyQAllocMode_Type.__name__ = "Integer32"
+_TVlanQosPlcyQAllocMode_Object = MibTableColumn
+tVlanQosPlcyQAllocMode = _TVlanQosPlcyQAllocMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 13, 1, 8),
+    _TVlanQosPlcyQAllocMode_Type()
+)
+tVlanQosPlcyQAllocMode.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tVlanQosPlcyQAllocMode.setStatus("current")
 _TVlanQosPlcyCirWtProfTable_Object = MibTable
 tVlanQosPlcyCirWtProfTable = _TVlanQosPlcyCirWtProfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 14)
@@ -19692,6 +18822,22 @@ tVlanQosPlcyQueueSchedPriority = _TVlanQosPlcyQueueSchedPriority_Object(
 tVlanQosPlcyQueueSchedPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tVlanQosPlcyQueueSchedPriority.setStatus("current")
+
+
+class _TVlanQosPlcyQueueLowLatency_Type(TmnxEnabledDisabled):
+    """Custom type tVlanQosPlcyQueueLowLatency based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_TVlanQosPlcyQueueLowLatency_Type.__name__ = "TmnxEnabledDisabled"
+_TVlanQosPlcyQueueLowLatency_Object = MibTableColumn
+tVlanQosPlcyQueueLowLatency = _TVlanQosPlcyQueueLowLatency_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 15, 1, 13),
+    _TVlanQosPlcyQueueLowLatency_Type()
+)
+tVlanQosPlcyQueueLowLatency.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tVlanQosPlcyQueueLowLatency.setStatus("current")
 _TPortQosPlcyFCTable_Object = MibTable
 tPortQosPlcyFCTable = _TPortQosPlcyFCTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 16)
@@ -19792,6 +18938,272 @@ tVlanQosPlcyFCQueue = _TVlanQosPlcyFCQueue_Object(
 tVlanQosPlcyFCQueue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tVlanQosPlcyFCQueue.setStatus("current")
+_TSharedPolicersPolicerTable_Object = MibTable
+tSharedPolicersPolicerTable = _TSharedPolicersPolicerTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18)
+)
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerTable.setStatus("current")
+_TSharedPolicersPolicerEntry_Object = MibTableRow
+tSharedPolicersPolicerEntry = _TSharedPolicersPolicerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1)
+)
+tSharedPolicersPolicerEntry.setIndexNames(
+    (0, "TIMETRA-QOS-MIB", "tSharedPolicersPolicerName"),
+)
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerEntry.setStatus("current")
+_TSharedPolicersPolicerName_Type = TNamedItem
+_TSharedPolicersPolicerName_Object = MibTableColumn
+tSharedPolicersPolicerName = _TSharedPolicersPolicerName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 1),
+    _TSharedPolicersPolicerName_Type()
+)
+tSharedPolicersPolicerName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerName.setStatus("current")
+_TSharedPolicersPolicerRowStatus_Type = RowStatus
+_TSharedPolicersPolicerRowStatus_Object = MibTableColumn
+tSharedPolicersPolicerRowStatus = _TSharedPolicersPolicerRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 2),
+    _TSharedPolicersPolicerRowStatus_Type()
+)
+tSharedPolicersPolicerRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerRowStatus.setStatus("current")
+
+
+class _TSharedPolicersPolicerMBS_Type(Integer32):
+    """Custom type tSharedPolicersPolicerMBS based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(128, 4194304),
+    )
+
+
+_TSharedPolicersPolicerMBS_Type.__name__ = "Integer32"
+_TSharedPolicersPolicerMBS_Object = MibTableColumn
+tSharedPolicersPolicerMBS = _TSharedPolicersPolicerMBS_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 3),
+    _TSharedPolicersPolicerMBS_Type()
+)
+tSharedPolicersPolicerMBS.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerMBS.setStatus("current")
+
+
+class _TSharedPolicersPolicerCBS_Type(Integer32):
+    """Custom type tSharedPolicersPolicerCBS based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(128, 4194304),
+    )
+
+
+_TSharedPolicersPolicerCBS_Type.__name__ = "Integer32"
+_TSharedPolicersPolicerCBS_Object = MibTableColumn
+tSharedPolicersPolicerCBS = _TSharedPolicersPolicerCBS_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 4),
+    _TSharedPolicersPolicerCBS_Type()
+)
+tSharedPolicersPolicerCBS.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerCBS.setStatus("current")
+
+
+class _TSharedPolicersPolicerPIRHi_Type(TmnxHigh32):
+    """Custom type tSharedPolicersPolicerPIRHi based on TmnxHigh32"""
+    defaultValue = 4294967295
+
+    subtypeSpec = TmnxHigh32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(4294967295, 4294967295),
+    )
+
+
+_TSharedPolicersPolicerPIRHi_Type.__name__ = "TmnxHigh32"
+_TSharedPolicersPolicerPIRHi_Object = MibTableColumn
+tSharedPolicersPolicerPIRHi = _TSharedPolicersPolicerPIRHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 5),
+    _TSharedPolicersPolicerPIRHi_Type()
+)
+tSharedPolicersPolicerPIRHi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerPIRHi.setStatus("current")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerPIRHi.setUnits("kilobps")
+
+
+class _TSharedPolicersPolicerPIRLo_Type(TmnxLow32):
+    """Custom type tSharedPolicersPolicerPIRLo based on TmnxLow32"""
+    defaultValue = 4294967295
+
+    subtypeSpec = TmnxLow32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 400000000),
+        ValueRangeConstraint(4294967295, 4294967295),
+    )
+
+
+_TSharedPolicersPolicerPIRLo_Type.__name__ = "TmnxLow32"
+_TSharedPolicersPolicerPIRLo_Object = MibTableColumn
+tSharedPolicersPolicerPIRLo = _TSharedPolicersPolicerPIRLo_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 6),
+    _TSharedPolicersPolicerPIRLo_Type()
+)
+tSharedPolicersPolicerPIRLo.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerPIRLo.setStatus("current")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerPIRLo.setUnits("kilobps")
+
+
+class _TSharedPolicersPolicerCIRHi_Type(TmnxHigh32):
+    """Custom type tSharedPolicersPolicerCIRHi based on TmnxHigh32"""
+    defaultValue = 4294967295
+
+    subtypeSpec = TmnxHigh32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(4294967295, 4294967295),
+    )
+
+
+_TSharedPolicersPolicerCIRHi_Type.__name__ = "TmnxHigh32"
+_TSharedPolicersPolicerCIRHi_Object = MibTableColumn
+tSharedPolicersPolicerCIRHi = _TSharedPolicersPolicerCIRHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 7),
+    _TSharedPolicersPolicerCIRHi_Type()
+)
+tSharedPolicersPolicerCIRHi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerCIRHi.setStatus("current")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerCIRHi.setUnits("kilobps")
+
+
+class _TSharedPolicersPolicerCIRLo_Type(TmnxLow32):
+    """Custom type tSharedPolicersPolicerCIRLo based on TmnxLow32"""
+    defaultValue = 4294967295
+
+    subtypeSpec = TmnxLow32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 400000000),
+        ValueRangeConstraint(4294967295, 4294967295),
+    )
+
+
+_TSharedPolicersPolicerCIRLo_Type.__name__ = "TmnxLow32"
+_TSharedPolicersPolicerCIRLo_Object = MibTableColumn
+tSharedPolicersPolicerCIRLo = _TSharedPolicersPolicerCIRLo_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 8),
+    _TSharedPolicersPolicerCIRLo_Type()
+)
+tSharedPolicersPolicerCIRLo.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerCIRLo.setStatus("current")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerCIRLo.setUnits("kilobps")
+_TSharedPolicersPolicerLstChangd_Type = TimeStamp
+_TSharedPolicersPolicerLstChangd_Object = MibTableColumn
+tSharedPolicersPolicerLstChangd = _TSharedPolicersPolicerLstChangd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 9),
+    _TSharedPolicersPolicerLstChangd_Type()
+)
+tSharedPolicersPolicerLstChangd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tSharedPolicersPolicerLstChangd.setStatus("current")
+
+
+class _TSharedPolicersStatMode_Type(Integer32):
+    """Custom type tSharedPolicersStatMode based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no-stats", 1),
+          ("offered-profile-with-discards", 10))
+    )
+
+
+_TSharedPolicersStatMode_Type.__name__ = "Integer32"
+_TSharedPolicersStatMode_Object = MibTableColumn
+tSharedPolicersStatMode = _TSharedPolicersStatMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 10),
+    _TSharedPolicersStatMode_Type()
+)
+tSharedPolicersStatMode.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersStatMode.setStatus("current")
+
+
+class _TSharedPolicersAlgoType_Type(Integer32):
+    """Custom type tSharedPolicersAlgoType based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("trtcmDs", 1),
+          ("trtcmDsCoupled", 2))
+    )
+
+
+_TSharedPolicersAlgoType_Type.__name__ = "Integer32"
+_TSharedPolicersAlgoType_Object = MibTableColumn
+tSharedPolicersAlgoType = _TSharedPolicersAlgoType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 11),
+    _TSharedPolicersAlgoType_Type()
+)
+tSharedPolicersAlgoType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersAlgoType.setStatus("current")
+
+
+class _TSharedPolicersAssociationType_Type(Integer32):
+    """Custom type tSharedPolicersAssociationType based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("qos", 1),
+          ("filter", 2))
+    )
+
+
+_TSharedPolicersAssociationType_Type.__name__ = "Integer32"
+_TSharedPolicersAssociationType_Object = MibTableColumn
+tSharedPolicersAssociationType = _TSharedPolicersAssociationType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 12, 18, 1, 12),
+    _TSharedPolicersAssociationType_Type()
+)
+tSharedPolicersAssociationType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSharedPolicersAssociationType.setStatus("current")
 _TQosTimeStampObjects_ObjectIdentity = ObjectIdentity
 tQosTimeStampObjects = _TQosTimeStampObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20)
@@ -20065,7 +19477,7 @@ tAtmTdpTableLastChanged = _TAtmTdpTableLastChanged_Object(
 )
 tAtmTdpTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tAtmTdpTableLastChanged.setStatus("current")
+    tAtmTdpTableLastChanged.setStatus("obsolete")
 _TSharedQueuePolicyTableLastChanged_Type = TimeStamp
 _TSharedQueuePolicyTableLastChanged_Object = MibScalar
 tSharedQueuePolicyTableLastChanged = _TSharedQueuePolicyTableLastChanged_Object(
@@ -20102,60 +19514,6 @@ tSapIngressIPv6CriteriaTableLastChanged = _TSapIngressIPv6CriteriaTableLastChang
 tSapIngressIPv6CriteriaTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapIngressIPv6CriteriaTableLastChanged.setStatus("current")
-_TSapIngrHsmdaQueueTblLastChngd_Type = TimeStamp
-_TSapIngrHsmdaQueueTblLastChngd_Object = MibScalar
-tSapIngrHsmdaQueueTblLastChngd = _TSapIngrHsmdaQueueTblLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 67),
-    _TSapIngrHsmdaQueueTblLastChngd_Type()
-)
-tSapIngrHsmdaQueueTblLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tSapIngrHsmdaQueueTblLastChngd.setStatus("obsolete")
-_TSapEgrHsmdaQueueTblLastChngd_Type = TimeStamp
-_TSapEgrHsmdaQueueTblLastChngd_Object = MibScalar
-tSapEgrHsmdaQueueTblLastChngd = _TSapEgrHsmdaQueueTblLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 68),
-    _TSapEgrHsmdaQueueTblLastChngd_Type()
-)
-tSapEgrHsmdaQueueTblLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tSapEgrHsmdaQueueTblLastChngd.setStatus("obsolete")
-_THsmdaSchedPlcyTblLastChngd_Type = TimeStamp
-_THsmdaSchedPlcyTblLastChngd_Object = MibScalar
-tHsmdaSchedPlcyTblLastChngd = _THsmdaSchedPlcyTblLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 69),
-    _THsmdaSchedPlcyTblLastChngd_Type()
-)
-tHsmdaSchedPlcyTblLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaSchedPlcyTblLastChngd.setStatus("obsolete")
-_THsmdaSchedPlcyGrpTblLastChngd_Type = TimeStamp
-_THsmdaSchedPlcyGrpTblLastChngd_Object = MibScalar
-tHsmdaSchedPlcyGrpTblLastChngd = _THsmdaSchedPlcyGrpTblLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 70),
-    _THsmdaSchedPlcyGrpTblLastChngd_Type()
-)
-tHsmdaSchedPlcyGrpTblLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaSchedPlcyGrpTblLastChngd.setStatus("obsolete")
-_THsmdaPoolPlcyTblLastChngd_Type = TimeStamp
-_THsmdaPoolPlcyTblLastChngd_Object = MibScalar
-tHsmdaPoolPlcyTblLastChngd = _THsmdaPoolPlcyTblLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 71),
-    _THsmdaPoolPlcyTblLastChngd_Type()
-)
-tHsmdaPoolPlcyTblLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaPoolPlcyTblLastChngd.setStatus("obsolete")
-_THsmdaSlopePolicyTableLastChanged_Type = TimeStamp
-_THsmdaSlopePolicyTableLastChanged_Object = MibScalar
-tHsmdaSlopePolicyTableLastChanged = _THsmdaSlopePolicyTableLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 72),
-    _THsmdaSlopePolicyTableLastChanged_Type()
-)
-tHsmdaSlopePolicyTableLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaSlopePolicyTableLastChanged.setStatus("obsolete")
 _TNamedPoolPolicyTableLastChanged_Type = TimeStamp
 _TNamedPoolPolicyTableLastChanged_Object = MibScalar
 tNamedPoolPolicyTableLastChanged = _TNamedPoolPolicyTableLastChanged_Object(
@@ -20182,7 +19540,7 @@ tMcMlpppIngrProfTableLastChanged = _TMcMlpppIngrProfTableLastChanged_Object(
 )
 tMcMlpppIngrProfTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrProfTableLastChanged.setStatus("current")
+    tMcMlpppIngrProfTableLastChanged.setStatus("obsolete")
 _TMcMlpppIngrClassTableLastChanged_Type = TimeStamp
 _TMcMlpppIngrClassTableLastChanged_Object = MibScalar
 tMcMlpppIngrClassTableLastChanged = _TMcMlpppIngrClassTableLastChanged_Object(
@@ -20191,7 +19549,7 @@ tMcMlpppIngrClassTableLastChanged = _TMcMlpppIngrClassTableLastChanged_Object(
 )
 tMcMlpppIngrClassTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrClassTableLastChanged.setStatus("current")
+    tMcMlpppIngrClassTableLastChanged.setStatus("obsolete")
 _TMcMlpppEgrProfTableLastChanged_Type = TimeStamp
 _TMcMlpppEgrProfTableLastChanged_Object = MibScalar
 tMcMlpppEgrProfTableLastChanged = _TMcMlpppEgrProfTableLastChanged_Object(
@@ -20200,7 +19558,7 @@ tMcMlpppEgrProfTableLastChanged = _TMcMlpppEgrProfTableLastChanged_Object(
 )
 tMcMlpppEgrProfTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrProfTableLastChanged.setStatus("current")
+    tMcMlpppEgrProfTableLastChanged.setStatus("obsolete")
 _TMcMlpppEgrClassTableLastChanged_Type = TimeStamp
 _TMcMlpppEgrClassTableLastChanged_Object = MibScalar
 tMcMlpppEgrClassTableLastChanged = _TMcMlpppEgrClassTableLastChanged_Object(
@@ -20209,7 +19567,7 @@ tMcMlpppEgrClassTableLastChanged = _TMcMlpppEgrClassTableLastChanged_Object(
 )
 tMcMlpppEgrClassTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassTableLastChanged.setStatus("current")
+    tMcMlpppEgrClassTableLastChanged.setStatus("obsolete")
 _TMcMlpppEgrFCTableLastChanged_Type = TimeStamp
 _TMcMlpppEgrFCTableLastChanged_Object = MibScalar
 tMcMlpppEgrFCTableLastChanged = _TMcMlpppEgrFCTableLastChanged_Object(
@@ -20218,7 +19576,7 @@ tMcMlpppEgrFCTableLastChanged = _TMcMlpppEgrFCTableLastChanged_Object(
 )
 tMcMlpppEgrFCTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrFCTableLastChanged.setStatus("current")
+    tMcMlpppEgrFCTableLastChanged.setStatus("obsolete")
 _TMcFrIngrProfTableLastChanged_Type = TimeStamp
 _TMcFrIngrProfTableLastChanged_Object = MibScalar
 tMcFrIngrProfTableLastChanged = _TMcFrIngrProfTableLastChanged_Object(
@@ -20227,7 +19585,7 @@ tMcFrIngrProfTableLastChanged = _TMcFrIngrProfTableLastChanged_Object(
 )
 tMcFrIngrProfTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrIngrProfTableLastChanged.setStatus("current")
+    tMcFrIngrProfTableLastChanged.setStatus("obsolete")
 _TMcFrIngrClassTableLastChanged_Type = TimeStamp
 _TMcFrIngrClassTableLastChanged_Object = MibScalar
 tMcFrIngrClassTableLastChanged = _TMcFrIngrClassTableLastChanged_Object(
@@ -20236,7 +19594,7 @@ tMcFrIngrClassTableLastChanged = _TMcFrIngrClassTableLastChanged_Object(
 )
 tMcFrIngrClassTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrIngrClassTableLastChanged.setStatus("current")
+    tMcFrIngrClassTableLastChanged.setStatus("obsolete")
 _TMcFrEgrProfTableLastChanged_Type = TimeStamp
 _TMcFrEgrProfTableLastChanged_Object = MibScalar
 tMcFrEgrProfTableLastChanged = _TMcFrEgrProfTableLastChanged_Object(
@@ -20245,7 +19603,7 @@ tMcFrEgrProfTableLastChanged = _TMcFrEgrProfTableLastChanged_Object(
 )
 tMcFrEgrProfTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrEgrProfTableLastChanged.setStatus("current")
+    tMcFrEgrProfTableLastChanged.setStatus("obsolete")
 _TMcFrEgrClassTableLastChanged_Type = TimeStamp
 _TMcFrEgrClassTableLastChanged_Object = MibScalar
 tMcFrEgrClassTableLastChanged = _TMcFrEgrClassTableLastChanged_Object(
@@ -20254,7 +19612,7 @@ tMcFrEgrClassTableLastChanged = _TMcFrEgrClassTableLastChanged_Object(
 )
 tMcFrEgrClassTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrEgrClassTableLastChanged.setStatus("current")
+    tMcFrEgrClassTableLastChanged.setStatus("obsolete")
 _TSapIngressLspExpTableLastChange_Type = TimeStamp
 _TSapIngressLspExpTableLastChange_Object = MibScalar
 tSapIngressLspExpTableLastChange = _TSapIngressLspExpTableLastChange_Object(
@@ -20336,24 +19694,6 @@ tPortSchPlcyLvlGrpTblLastChgd = _TPortSchPlcyLvlGrpTblLastChgd_Object(
 tPortSchPlcyLvlGrpTblLastChgd.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tPortSchPlcyLvlGrpTblLastChgd.setStatus("obsolete")
-_THsmdaWrrPolicyTblLastChgd_Type = TimeStamp
-_THsmdaWrrPolicyTblLastChgd_Object = MibScalar
-tHsmdaWrrPolicyTblLastChgd = _THsmdaWrrPolicyTblLastChgd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 93),
-    _THsmdaWrrPolicyTblLastChgd_Type()
-)
-tHsmdaWrrPolicyTblLastChgd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyTblLastChgd.setStatus("obsolete")
-_TNetworkEgrHsmdaQueueTblLastChgd_Type = TimeStamp
-_TNetworkEgrHsmdaQueueTblLastChgd_Object = MibScalar
-tNetworkEgrHsmdaQueueTblLastChgd = _TNetworkEgrHsmdaQueueTblLastChgd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 94),
-    _TNetworkEgrHsmdaQueueTblLastChgd_Type()
-)
-tNetworkEgrHsmdaQueueTblLastChgd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tNetworkEgrHsmdaQueueTblLastChgd.setStatus("obsolete")
 _TSapIngPolicyNameTableLastChgd_Type = TimeStamp
 _TSapIngPolicyNameTableLastChgd_Object = MibScalar
 tSapIngPolicyNameTableLastChgd = _TSapIngPolicyNameTableLastChgd_Object(
@@ -20552,15 +19892,6 @@ tSapEgrIPCritTableLastChanged = _TSapEgrIPCritTableLastChanged_Object(
 tSapEgrIPCritTableLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tSapEgrIPCritTableLastChanged.setStatus("current")
-_TSapEgressHsmdaQueueTblLstChngd_Type = TimeStamp
-_TSapEgressHsmdaQueueTblLstChngd_Object = MibScalar
-tSapEgressHsmdaQueueTblLstChngd = _TSapEgressHsmdaQueueTblLstChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 118),
-    _TSapEgressHsmdaQueueTblLstChngd_Type()
-)
-tSapEgressHsmdaQueueTblLstChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tSapEgressHsmdaQueueTblLstChngd.setStatus("obsolete")
 _TNetworkQueueHsWrrGrpTblLstChgd_Type = TimeStamp
 _TNetworkQueueHsWrrGrpTblLstChgd_Object = MibScalar
 tNetworkQueueHsWrrGrpTblLstChgd = _TNetworkQueueHsWrrGrpTblLstChgd_Object(
@@ -20786,6 +20117,24 @@ tQosHwAggShapSchClassTblLastChgd = _TQosHwAggShapSchClassTblLastChgd_Object(
 tQosHwAggShapSchClassTblLastChgd.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tQosHwAggShapSchClassTblLastChgd.setStatus("current")
+_TIngClassPlcyPrecTblLastChanged_Type = TimeStamp
+_TIngClassPlcyPrecTblLastChanged_Object = MibScalar
+tIngClassPlcyPrecTblLastChanged = _TIngClassPlcyPrecTblLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 144),
+    _TIngClassPlcyPrecTblLastChanged_Type()
+)
+tIngClassPlcyPrecTblLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecTblLastChanged.setStatus("current")
+_TDscpFCMapPrecTblLastChanged_Type = TimeStamp
+_TDscpFCMapPrecTblLastChanged_Object = MibScalar
+tDscpFCMapPrecTblLastChanged = _TDscpFCMapPrecTblLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 20, 145),
+    _TDscpFCMapPrecTblLastChanged_Type()
+)
+tDscpFCMapPrecTblLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecTblLastChanged.setStatus("current")
 _TAtmTdpObjects_ObjectIdentity = ObjectIdentity
 tAtmTdpObjects = _TAtmTdpObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 21)
@@ -20795,7 +20144,7 @@ tAtmTdpTable = _TAtmTdpTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 21, 1)
 )
 if mibBuilder.loadTexts:
-    tAtmTdpTable.setStatus("current")
+    tAtmTdpTable.setStatus("obsolete")
 _TAtmTdpEntry_Object = MibTableRow
 tAtmTdpEntry = _TAtmTdpEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 21, 1, 1)
@@ -20823,7 +20172,7 @@ tAtmTdpIndex = _TAtmTdpIndex_Object(
 )
 tAtmTdpIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tAtmTdpIndex.setStatus("current")
+    tAtmTdpIndex.setStatus("obsolete")
 
 
 class _TAtmTdpSir_Type(Unsigned32):
@@ -20842,7 +20191,7 @@ tAtmTdpSir = _TAtmTdpSir_Object(
 )
 tAtmTdpSir.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpSir.setStatus("current")
+    tAtmTdpSir.setStatus("obsolete")
 
 
 class _TAtmTdpPir_Type(Unsigned32):
@@ -20861,7 +20210,7 @@ tAtmTdpPir = _TAtmTdpPir_Object(
 )
 tAtmTdpPir.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpPir.setStatus("current")
+    tAtmTdpPir.setStatus("obsolete")
 
 
 class _TAtmTdpMbs_Type(Unsigned32):
@@ -20880,7 +20229,7 @@ tAtmTdpMbs = _TAtmTdpMbs_Object(
 )
 tAtmTdpMbs.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpMbs.setStatus("current")
+    tAtmTdpMbs.setStatus("obsolete")
 
 
 class _TAtmTdpMir_Type(Unsigned32):
@@ -20899,7 +20248,7 @@ tAtmTdpMir = _TAtmTdpMir_Object(
 )
 tAtmTdpMir.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpMir.setStatus("current")
+    tAtmTdpMir.setStatus("obsolete")
 
 
 class _TAtmTdpShaping_Type(Integer32):
@@ -20925,7 +20274,7 @@ tAtmTdpShaping = _TAtmTdpShaping_Object(
 )
 tAtmTdpShaping.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpShaping.setStatus("current")
+    tAtmTdpShaping.setStatus("obsolete")
 
 
 class _TAtmTdpServCat_Type(AtmServiceCategory):
@@ -20941,7 +20290,7 @@ tAtmTdpServCat = _TAtmTdpServCat_Object(
 )
 tAtmTdpServCat.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpServCat.setStatus("current")
+    tAtmTdpServCat.setStatus("obsolete")
 _TAtmTdpDescription_Type = TItemDescription
 _TAtmTdpDescription_Object = MibTableColumn
 tAtmTdpDescription = _TAtmTdpDescription_Object(
@@ -20950,7 +20299,7 @@ tAtmTdpDescription = _TAtmTdpDescription_Object(
 )
 tAtmTdpDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpDescription.setStatus("current")
+    tAtmTdpDescription.setStatus("obsolete")
 _TAtmTdpLastChanged_Type = TimeStamp
 _TAtmTdpLastChanged_Object = MibTableColumn
 tAtmTdpLastChanged = _TAtmTdpLastChanged_Object(
@@ -20959,7 +20308,7 @@ tAtmTdpLastChanged = _TAtmTdpLastChanged_Object(
 )
 tAtmTdpLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tAtmTdpLastChanged.setStatus("current")
+    tAtmTdpLastChanged.setStatus("obsolete")
 _TAtmTdpRowStatus_Type = RowStatus
 _TAtmTdpRowStatus_Object = MibTableColumn
 tAtmTdpRowStatus = _TAtmTdpRowStatus_Object(
@@ -20968,7 +20317,7 @@ tAtmTdpRowStatus = _TAtmTdpRowStatus_Object(
 )
 tAtmTdpRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpRowStatus.setStatus("current")
+    tAtmTdpRowStatus.setStatus("obsolete")
 _TAtmTdpDescrType_Type = TAtmTdpDescrType
 _TAtmTdpDescrType_Object = MibTableColumn
 tAtmTdpDescrType = _TAtmTdpDescrType_Object(
@@ -20977,7 +20326,7 @@ tAtmTdpDescrType = _TAtmTdpDescrType_Object(
 )
 tAtmTdpDescrType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpDescrType.setStatus("current")
+    tAtmTdpDescrType.setStatus("obsolete")
 
 
 class _TAtmTdpCdvt_Type(Unsigned32):
@@ -20996,7 +20345,7 @@ tAtmTdpCdvt = _TAtmTdpCdvt_Object(
 )
 tAtmTdpCdvt.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpCdvt.setStatus("current")
+    tAtmTdpCdvt.setStatus("obsolete")
 
 
 class _TAtmTdpPolicing_Type(Integer32):
@@ -21022,7 +20371,7 @@ tAtmTdpPolicing = _TAtmTdpPolicing_Object(
 )
 tAtmTdpPolicing.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpPolicing.setStatus("current")
+    tAtmTdpPolicing.setStatus("obsolete")
 
 
 class _TAtmTdpCLPTagging_Type(Integer32):
@@ -21050,7 +20399,7 @@ tAtmTdpCLPTagging = _TAtmTdpCLPTagging_Object(
 )
 tAtmTdpCLPTagging.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpCLPTagging.setStatus("current")
+    tAtmTdpCLPTagging.setStatus("obsolete")
 
 
 class _TAtmTdpWeight_Type(Integer32):
@@ -21069,7 +20418,7 @@ tAtmTdpWeight = _TAtmTdpWeight_Object(
 )
 tAtmTdpWeight.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAtmTdpWeight.setStatus("current")
+    tAtmTdpWeight.setStatus("obsolete")
 
 
 class _TAtmTdpIndexNext_Type(Integer32):
@@ -21088,7 +20437,7 @@ tAtmTdpIndexNext = _TAtmTdpIndexNext_Object(
 )
 tAtmTdpIndexNext.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tAtmTdpIndexNext.setStatus("current")
+    tAtmTdpIndexNext.setStatus("obsolete")
 _TAtmTdpsMaxSupported_Type = Integer32
 _TAtmTdpsMaxSupported_Object = MibScalar
 tAtmTdpsMaxSupported = _TAtmTdpsMaxSupported_Object(
@@ -21097,7 +20446,7 @@ tAtmTdpsMaxSupported = _TAtmTdpsMaxSupported_Object(
 )
 tAtmTdpsMaxSupported.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tAtmTdpsMaxSupported.setStatus("current")
+    tAtmTdpsMaxSupported.setStatus("obsolete")
 _TAtmTdpsCurrentlyConfigured_Type = Integer32
 _TAtmTdpsCurrentlyConfigured_Object = MibScalar
 tAtmTdpsCurrentlyConfigured = _TAtmTdpsCurrentlyConfigured_Object(
@@ -21106,7 +20455,7 @@ tAtmTdpsCurrentlyConfigured = _TAtmTdpsCurrentlyConfigured_Object(
 )
 tAtmTdpsCurrentlyConfigured.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tAtmTdpsCurrentlyConfigured.setStatus("current")
+    tAtmTdpsCurrentlyConfigured.setStatus("obsolete")
 _TPoolObjects_ObjectIdentity = ObjectIdentity
 tPoolObjects = _TPoolObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22)
@@ -21471,572 +20820,6 @@ if mibBuilder.loadTexts:
     tQ1NamedPoolRedAlrmThresh.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tQ1NamedPoolRedAlrmThresh.setUnits("percent")
-_THsmdaPoolPolicyTable_Object = MibTable
-tHsmdaPoolPolicyTable = _THsmdaPoolPolicyTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3)
-)
-if mibBuilder.loadTexts:
-    tHsmdaPoolPolicyTable.setStatus("obsolete")
-_THsmdaPoolPolicyEntry_Object = MibTableRow
-tHsmdaPoolPolicyEntry = _THsmdaPoolPolicyEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1)
-)
-tHsmdaPoolPolicyEntry.setIndexNames(
-    (0, "TIMETRA-QOS-MIB", "tHsmdaPoolPolicyName"),
-)
-if mibBuilder.loadTexts:
-    tHsmdaPoolPolicyEntry.setStatus("current")
-_THsmdaPoolPolicyName_Type = TNamedItem
-_THsmdaPoolPolicyName_Object = MibTableColumn
-tHsmdaPoolPolicyName = _THsmdaPoolPolicyName_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 1),
-    _THsmdaPoolPolicyName_Type()
-)
-tHsmdaPoolPolicyName.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tHsmdaPoolPolicyName.setStatus("current")
-_THsmdaPoolPolicyRowStatus_Type = RowStatus
-_THsmdaPoolPolicyRowStatus_Object = MibTableColumn
-tHsmdaPoolPolicyRowStatus = _THsmdaPoolPolicyRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 2),
-    _THsmdaPoolPolicyRowStatus_Type()
-)
-tHsmdaPoolPolicyRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolPolicyRowStatus.setStatus("obsolete")
-_THsmdaPoolLastChanged_Type = TimeStamp
-_THsmdaPoolLastChanged_Object = MibTableColumn
-tHsmdaPoolLastChanged = _THsmdaPoolLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 3),
-    _THsmdaPoolLastChanged_Type()
-)
-tHsmdaPoolLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaPoolLastChanged.setStatus("obsolete")
-
-
-class _THsmdaPoolDescription_Type(TItemDescription):
-    """Custom type tHsmdaPoolDescription based on TItemDescription"""
-    defaultValue = OctetString("")
-
-
-_THsmdaPoolDescription_Type.__name__ = "TItemDescription"
-_THsmdaPoolDescription_Object = MibTableColumn
-tHsmdaPoolDescription = _THsmdaPoolDescription_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 4),
-    _THsmdaPoolDescription_Type()
-)
-tHsmdaPoolDescription.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolDescription.setStatus("obsolete")
-
-
-class _THsmdaPoolSystemReserve_Type(Unsigned32):
-    """Custom type tHsmdaPoolSystemReserve based on Unsigned32"""
-    defaultValue = 1000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(100, 3000),
-    )
-
-
-_THsmdaPoolSystemReserve_Type.__name__ = "Unsigned32"
-_THsmdaPoolSystemReserve_Object = MibTableColumn
-tHsmdaPoolSystemReserve = _THsmdaPoolSystemReserve_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 5),
-    _THsmdaPoolSystemReserve_Type()
-)
-tHsmdaPoolSystemReserve.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolSystemReserve.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolSystemReserve.setUnits("centipercent")
-
-
-class _THsmdaPoolRoot1AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot1AllocWeight based on TWeight"""
-    defaultValue = 75
-
-    subtypeSpec = TWeight.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 100),
-    )
-
-
-_THsmdaPoolRoot1AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot1AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot1AllocWeight = _THsmdaPoolRoot1AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 6),
-    _THsmdaPoolRoot1AllocWeight_Type()
-)
-tHsmdaPoolRoot1AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot1AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot2AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot2AllocWeight based on TWeight"""
-    defaultValue = 25
-
-
-_THsmdaPoolRoot2AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot2AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot2AllocWeight = _THsmdaPoolRoot2AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 7),
-    _THsmdaPoolRoot2AllocWeight_Type()
-)
-tHsmdaPoolRoot2AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot2AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot3AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot3AllocWeight based on TWeight"""
-    defaultValue = 0
-
-
-_THsmdaPoolRoot3AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot3AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot3AllocWeight = _THsmdaPoolRoot3AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 8),
-    _THsmdaPoolRoot3AllocWeight_Type()
-)
-tHsmdaPoolRoot3AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot3AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot4AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot4AllocWeight based on TWeight"""
-    defaultValue = 0
-
-
-_THsmdaPoolRoot4AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot4AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot4AllocWeight = _THsmdaPoolRoot4AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 9),
-    _THsmdaPoolRoot4AllocWeight_Type()
-)
-tHsmdaPoolRoot4AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot4AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot5AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot5AllocWeight based on TWeight"""
-    defaultValue = 0
-
-
-_THsmdaPoolRoot5AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot5AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot5AllocWeight = _THsmdaPoolRoot5AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 10),
-    _THsmdaPoolRoot5AllocWeight_Type()
-)
-tHsmdaPoolRoot5AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot5AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot6AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot6AllocWeight based on TWeight"""
-    defaultValue = 0
-
-
-_THsmdaPoolRoot6AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot6AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot6AllocWeight = _THsmdaPoolRoot6AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 11),
-    _THsmdaPoolRoot6AllocWeight_Type()
-)
-tHsmdaPoolRoot6AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot6AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot7AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot7AllocWeight based on TWeight"""
-    defaultValue = 0
-
-
-_THsmdaPoolRoot7AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot7AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot7AllocWeight = _THsmdaPoolRoot7AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 12),
-    _THsmdaPoolRoot7AllocWeight_Type()
-)
-tHsmdaPoolRoot7AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot7AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolRoot8AllocWeight_Type(TWeight):
-    """Custom type tHsmdaPoolRoot8AllocWeight based on TWeight"""
-    defaultValue = 0
-
-
-_THsmdaPoolRoot8AllocWeight_Type.__name__ = "TWeight"
-_THsmdaPoolRoot8AllocWeight_Object = MibTableColumn
-tHsmdaPoolRoot8AllocWeight = _THsmdaPoolRoot8AllocWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 13),
-    _THsmdaPoolRoot8AllocWeight_Type()
-)
-tHsmdaPoolRoot8AllocWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolRoot8AllocWeight.setStatus("obsolete")
-
-
-class _THsmdaPoolClass1Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass1Parent based on Unsigned32"""
-    defaultValue = 1
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass1Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass1Parent_Object = MibTableColumn
-tHsmdaPoolClass1Parent = _THsmdaPoolClass1Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 14),
-    _THsmdaPoolClass1Parent_Type()
-)
-tHsmdaPoolClass1Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass1Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass1AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass1AllocPercent based on Unsigned32"""
-    defaultValue = 4000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass1AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass1AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass1AllocPercent = _THsmdaPoolClass1AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 15),
-    _THsmdaPoolClass1AllocPercent_Type()
-)
-tHsmdaPoolClass1AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass1AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass1AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass2Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass2Parent based on Unsigned32"""
-    defaultValue = 1
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass2Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass2Parent_Object = MibTableColumn
-tHsmdaPoolClass2Parent = _THsmdaPoolClass2Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 16),
-    _THsmdaPoolClass2Parent_Type()
-)
-tHsmdaPoolClass2Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass2Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass2AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass2AllocPercent based on Unsigned32"""
-    defaultValue = 3500
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass2AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass2AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass2AllocPercent = _THsmdaPoolClass2AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 17),
-    _THsmdaPoolClass2AllocPercent_Type()
-)
-tHsmdaPoolClass2AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass2AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass2AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass3Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass3Parent based on Unsigned32"""
-    defaultValue = 1
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass3Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass3Parent_Object = MibTableColumn
-tHsmdaPoolClass3Parent = _THsmdaPoolClass3Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 18),
-    _THsmdaPoolClass3Parent_Type()
-)
-tHsmdaPoolClass3Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass3Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass3AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass3AllocPercent based on Unsigned32"""
-    defaultValue = 3000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass3AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass3AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass3AllocPercent = _THsmdaPoolClass3AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 19),
-    _THsmdaPoolClass3AllocPercent_Type()
-)
-tHsmdaPoolClass3AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass3AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass3AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass4Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass4Parent based on Unsigned32"""
-    defaultValue = 1
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass4Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass4Parent_Object = MibTableColumn
-tHsmdaPoolClass4Parent = _THsmdaPoolClass4Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 20),
-    _THsmdaPoolClass4Parent_Type()
-)
-tHsmdaPoolClass4Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass4Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass4AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass4AllocPercent based on Unsigned32"""
-    defaultValue = 2500
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass4AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass4AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass4AllocPercent = _THsmdaPoolClass4AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 21),
-    _THsmdaPoolClass4AllocPercent_Type()
-)
-tHsmdaPoolClass4AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass4AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass4AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass5Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass5Parent based on Unsigned32"""
-    defaultValue = 1
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass5Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass5Parent_Object = MibTableColumn
-tHsmdaPoolClass5Parent = _THsmdaPoolClass5Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 22),
-    _THsmdaPoolClass5Parent_Type()
-)
-tHsmdaPoolClass5Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass5Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass5AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass5AllocPercent based on Unsigned32"""
-    defaultValue = 2000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass5AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass5AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass5AllocPercent = _THsmdaPoolClass5AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 23),
-    _THsmdaPoolClass5AllocPercent_Type()
-)
-tHsmdaPoolClass5AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass5AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass5AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass6Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass6Parent based on Unsigned32"""
-    defaultValue = 2
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass6Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass6Parent_Object = MibTableColumn
-tHsmdaPoolClass6Parent = _THsmdaPoolClass6Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 24),
-    _THsmdaPoolClass6Parent_Type()
-)
-tHsmdaPoolClass6Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass6Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass6AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass6AllocPercent based on Unsigned32"""
-    defaultValue = 5000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass6AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass6AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass6AllocPercent = _THsmdaPoolClass6AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 25),
-    _THsmdaPoolClass6AllocPercent_Type()
-)
-tHsmdaPoolClass6AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass6AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass6AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass7Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass7Parent based on Unsigned32"""
-    defaultValue = 2
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass7Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass7Parent_Object = MibTableColumn
-tHsmdaPoolClass7Parent = _THsmdaPoolClass7Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 26),
-    _THsmdaPoolClass7Parent_Type()
-)
-tHsmdaPoolClass7Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass7Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass7AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass7AllocPercent based on Unsigned32"""
-    defaultValue = 4000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass7AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass7AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass7AllocPercent = _THsmdaPoolClass7AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 27),
-    _THsmdaPoolClass7AllocPercent_Type()
-)
-tHsmdaPoolClass7AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass7AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass7AllocPercent.setUnits("centipercent")
-
-
-class _THsmdaPoolClass8Parent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass8Parent based on Unsigned32"""
-    defaultValue = 2
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_THsmdaPoolClass8Parent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass8Parent_Object = MibTableColumn
-tHsmdaPoolClass8Parent = _THsmdaPoolClass8Parent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 28),
-    _THsmdaPoolClass8Parent_Type()
-)
-tHsmdaPoolClass8Parent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass8Parent.setStatus("obsolete")
-
-
-class _THsmdaPoolClass8AllocPercent_Type(Unsigned32):
-    """Custom type tHsmdaPoolClass8AllocPercent based on Unsigned32"""
-    defaultValue = 3000
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10000),
-    )
-
-
-_THsmdaPoolClass8AllocPercent_Type.__name__ = "Unsigned32"
-_THsmdaPoolClass8AllocPercent_Object = MibTableColumn
-tHsmdaPoolClass8AllocPercent = _THsmdaPoolClass8AllocPercent_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 22, 3, 1, 29),
-    _THsmdaPoolClass8AllocPercent_Type()
-)
-tHsmdaPoolClass8AllocPercent.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass8AllocPercent.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tHsmdaPoolClass8AllocPercent.setUnits("centipercent")
 _TMcMlpppIngressObjects_ObjectIdentity = ObjectIdentity
 tMcMlpppIngressObjects = _TMcMlpppIngressObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 23)
@@ -22046,7 +20829,7 @@ tMcMlpppIngrProfTable = _TMcMlpppIngrProfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 23, 1)
 )
 if mibBuilder.loadTexts:
-    tMcMlpppIngrProfTable.setStatus("current")
+    tMcMlpppIngrProfTable.setStatus("obsolete")
 _TMcMlpppIngrProfEntry_Object = MibTableRow
 tMcMlpppIngrProfEntry = _TMcMlpppIngrProfEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 23, 1, 1)
@@ -22074,7 +20857,7 @@ tMcMlpppIngrProfIndex = _TMcMlpppIngrProfIndex_Object(
 )
 tMcMlpppIngrProfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrProfIndex.setStatus("current")
+    tMcMlpppIngrProfIndex.setStatus("obsolete")
 
 
 class _TMcMlpppIngrProfDescription_Type(TItemDescription):
@@ -22090,7 +20873,7 @@ tMcMlpppIngrProfDescription = _TMcMlpppIngrProfDescription_Object(
 )
 tMcMlpppIngrProfDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrProfDescription.setStatus("current")
+    tMcMlpppIngrProfDescription.setStatus("obsolete")
 _TMcMlpppIngrProfLastChanged_Type = TimeStamp
 _TMcMlpppIngrProfLastChanged_Object = MibTableColumn
 tMcMlpppIngrProfLastChanged = _TMcMlpppIngrProfLastChanged_Object(
@@ -22099,7 +20882,7 @@ tMcMlpppIngrProfLastChanged = _TMcMlpppIngrProfLastChanged_Object(
 )
 tMcMlpppIngrProfLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrProfLastChanged.setStatus("current")
+    tMcMlpppIngrProfLastChanged.setStatus("obsolete")
 _TMcMlpppIngrProfRowStatus_Type = RowStatus
 _TMcMlpppIngrProfRowStatus_Object = MibTableColumn
 tMcMlpppIngrProfRowStatus = _TMcMlpppIngrProfRowStatus_Object(
@@ -22108,13 +20891,13 @@ tMcMlpppIngrProfRowStatus = _TMcMlpppIngrProfRowStatus_Object(
 )
 tMcMlpppIngrProfRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrProfRowStatus.setStatus("current")
+    tMcMlpppIngrProfRowStatus.setStatus("obsolete")
 _TMcMlpppIngrClassTable_Object = MibTable
 tMcMlpppIngrClassTable = _TMcMlpppIngrClassTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 23, 2)
 )
 if mibBuilder.loadTexts:
-    tMcMlpppIngrClassTable.setStatus("current")
+    tMcMlpppIngrClassTable.setStatus("obsolete")
 _TMcMlpppIngrClassEntry_Object = MibTableRow
 tMcMlpppIngrClassEntry = _TMcMlpppIngrClassEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 23, 2, 1)
@@ -22133,7 +20916,7 @@ tMcMlpppIngrClassIndex = _TMcMlpppIngrClassIndex_Object(
 )
 tMcMlpppIngrClassIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrClassIndex.setStatus("current")
+    tMcMlpppIngrClassIndex.setStatus("obsolete")
 
 
 class _TMcMlpppIngrClassReassemblyTmout_Type(Unsigned32):
@@ -22152,7 +20935,7 @@ tMcMlpppIngrClassReassemblyTmout = _TMcMlpppIngrClassReassemblyTmout_Object(
 )
 tMcMlpppIngrClassReassemblyTmout.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrClassReassemblyTmout.setStatus("current")
+    tMcMlpppIngrClassReassemblyTmout.setStatus("obsolete")
 _TMcMlpppIngrClassLastChanged_Type = TimeStamp
 _TMcMlpppIngrClassLastChanged_Object = MibTableColumn
 tMcMlpppIngrClassLastChanged = _TMcMlpppIngrClassLastChanged_Object(
@@ -22161,7 +20944,7 @@ tMcMlpppIngrClassLastChanged = _TMcMlpppIngrClassLastChanged_Object(
 )
 tMcMlpppIngrClassLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppIngrClassLastChanged.setStatus("current")
+    tMcMlpppIngrClassLastChanged.setStatus("obsolete")
 _TMcMlpppEgressObjects_ObjectIdentity = ObjectIdentity
 tMcMlpppEgressObjects = _TMcMlpppEgressObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24)
@@ -22171,7 +20954,7 @@ tMcMlpppEgrProfTable = _TMcMlpppEgrProfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24, 1)
 )
 if mibBuilder.loadTexts:
-    tMcMlpppEgrProfTable.setStatus("current")
+    tMcMlpppEgrProfTable.setStatus("obsolete")
 _TMcMlpppEgrProfEntry_Object = MibTableRow
 tMcMlpppEgrProfEntry = _TMcMlpppEgrProfEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24, 1, 1)
@@ -22199,7 +20982,7 @@ tMcMlpppEgrProfIndex = _TMcMlpppEgrProfIndex_Object(
 )
 tMcMlpppEgrProfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrProfIndex.setStatus("current")
+    tMcMlpppEgrProfIndex.setStatus("obsolete")
 
 
 class _TMcMlpppEgrProfDescription_Type(TItemDescription):
@@ -22215,7 +20998,7 @@ tMcMlpppEgrProfDescription = _TMcMlpppEgrProfDescription_Object(
 )
 tMcMlpppEgrProfDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrProfDescription.setStatus("current")
+    tMcMlpppEgrProfDescription.setStatus("obsolete")
 _TMcMlpppEgrProfLastChanged_Type = TimeStamp
 _TMcMlpppEgrProfLastChanged_Object = MibTableColumn
 tMcMlpppEgrProfLastChanged = _TMcMlpppEgrProfLastChanged_Object(
@@ -22224,7 +21007,7 @@ tMcMlpppEgrProfLastChanged = _TMcMlpppEgrProfLastChanged_Object(
 )
 tMcMlpppEgrProfLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrProfLastChanged.setStatus("current")
+    tMcMlpppEgrProfLastChanged.setStatus("obsolete")
 _TMcMlpppEgrProfRowStatus_Type = RowStatus
 _TMcMlpppEgrProfRowStatus_Object = MibTableColumn
 tMcMlpppEgrProfRowStatus = _TMcMlpppEgrProfRowStatus_Object(
@@ -22233,13 +21016,13 @@ tMcMlpppEgrProfRowStatus = _TMcMlpppEgrProfRowStatus_Object(
 )
 tMcMlpppEgrProfRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrProfRowStatus.setStatus("current")
+    tMcMlpppEgrProfRowStatus.setStatus("obsolete")
 _TMcMlpppEgrClassTable_Object = MibTable
 tMcMlpppEgrClassTable = _TMcMlpppEgrClassTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24, 3)
 )
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassTable.setStatus("current")
+    tMcMlpppEgrClassTable.setStatus("obsolete")
 _TMcMlpppEgrClassEntry_Object = MibTableRow
 tMcMlpppEgrClassEntry = _TMcMlpppEgrClassEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24, 3, 1)
@@ -22258,7 +21041,7 @@ tMcMlpppEgrClassIndex = _TMcMlpppEgrClassIndex_Object(
 )
 tMcMlpppEgrClassIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassIndex.setStatus("current")
+    tMcMlpppEgrClassIndex.setStatus("obsolete")
 
 
 class _TMcMlpppEgrClassMir_Type(Unsigned32):
@@ -22278,7 +21061,7 @@ tMcMlpppEgrClassMir = _TMcMlpppEgrClassMir_Object(
 )
 tMcMlpppEgrClassMir.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassMir.setStatus("current")
+    tMcMlpppEgrClassMir.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tMcMlpppEgrClassMir.setUnits("percent")
 
@@ -22300,7 +21083,7 @@ tMcMlpppEgrClassWeight = _TMcMlpppEgrClassWeight_Object(
 )
 tMcMlpppEgrClassWeight.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassWeight.setStatus("current")
+    tMcMlpppEgrClassWeight.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tMcMlpppEgrClassWeight.setUnits("percent")
 
@@ -22321,7 +21104,7 @@ tMcMlpppEgrClassMaxSize = _TMcMlpppEgrClassMaxSize_Object(
 )
 tMcMlpppEgrClassMaxSize.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassMaxSize.setStatus("current")
+    tMcMlpppEgrClassMaxSize.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tMcMlpppEgrClassMaxSize.setUnits("milliseconds")
 _TMcMlpppEgrClassLastChanged_Type = TimeStamp
@@ -22332,13 +21115,13 @@ tMcMlpppEgrClassLastChanged = _TMcMlpppEgrClassLastChanged_Object(
 )
 tMcMlpppEgrClassLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrClassLastChanged.setStatus("current")
+    tMcMlpppEgrClassLastChanged.setStatus("obsolete")
 _TMcMlpppEgrFCTable_Object = MibTable
 tMcMlpppEgrFCTable = _TMcMlpppEgrFCTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24, 4)
 )
 if mibBuilder.loadTexts:
-    tMcMlpppEgrFCTable.setStatus("current")
+    tMcMlpppEgrFCTable.setStatus("obsolete")
 _TMcMlpppEgrFCEntry_Object = MibTableRow
 tMcMlpppEgrFCEntry = _TMcMlpppEgrFCEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 24, 4, 1)
@@ -22357,7 +21140,7 @@ tMcMlpppEgrFCName = _TMcMlpppEgrFCName_Object(
 )
 tMcMlpppEgrFCName.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrFCName.setStatus("current")
+    tMcMlpppEgrFCName.setStatus("obsolete")
 
 
 class _TMcMlpppEgrFCClass_Type(Unsigned32):
@@ -22376,7 +21159,7 @@ tMcMlpppEgrFCClass = _TMcMlpppEgrFCClass_Object(
 )
 tMcMlpppEgrFCClass.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrFCClass.setStatus("current")
+    tMcMlpppEgrFCClass.setStatus("obsolete")
 _TMcMlpppEgrFCLastChanged_Type = TimeStamp
 _TMcMlpppEgrFCLastChanged_Object = MibTableColumn
 tMcMlpppEgrFCLastChanged = _TMcMlpppEgrFCLastChanged_Object(
@@ -22385,7 +21168,7 @@ tMcMlpppEgrFCLastChanged = _TMcMlpppEgrFCLastChanged_Object(
 )
 tMcMlpppEgrFCLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcMlpppEgrFCLastChanged.setStatus("current")
+    tMcMlpppEgrFCLastChanged.setStatus("obsolete")
 _TMcFrIngressObjects_ObjectIdentity = ObjectIdentity
 tMcFrIngressObjects = _TMcFrIngressObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 25)
@@ -22395,7 +21178,7 @@ tMcFrIngrProfTable = _TMcFrIngrProfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 25, 1)
 )
 if mibBuilder.loadTexts:
-    tMcFrIngrProfTable.setStatus("current")
+    tMcFrIngrProfTable.setStatus("obsolete")
 _TMcFrIngrProfEntry_Object = MibTableRow
 tMcFrIngrProfEntry = _TMcFrIngrProfEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 25, 1, 1)
@@ -22423,7 +21206,7 @@ tMcFrIngrProfIndex = _TMcFrIngrProfIndex_Object(
 )
 tMcFrIngrProfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcFrIngrProfIndex.setStatus("current")
+    tMcFrIngrProfIndex.setStatus("obsolete")
 
 
 class _TMcFrIngrProfDescription_Type(TItemDescription):
@@ -22439,7 +21222,7 @@ tMcFrIngrProfDescription = _TMcFrIngrProfDescription_Object(
 )
 tMcFrIngrProfDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcFrIngrProfDescription.setStatus("current")
+    tMcFrIngrProfDescription.setStatus("obsolete")
 _TMcFrIngrProfLastChanged_Type = TimeStamp
 _TMcFrIngrProfLastChanged_Object = MibTableColumn
 tMcFrIngrProfLastChanged = _TMcFrIngrProfLastChanged_Object(
@@ -22448,7 +21231,7 @@ tMcFrIngrProfLastChanged = _TMcFrIngrProfLastChanged_Object(
 )
 tMcFrIngrProfLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrIngrProfLastChanged.setStatus("current")
+    tMcFrIngrProfLastChanged.setStatus("obsolete")
 _TMcFrIngrProfRowStatus_Type = RowStatus
 _TMcFrIngrProfRowStatus_Object = MibTableColumn
 tMcFrIngrProfRowStatus = _TMcFrIngrProfRowStatus_Object(
@@ -22457,13 +21240,13 @@ tMcFrIngrProfRowStatus = _TMcFrIngrProfRowStatus_Object(
 )
 tMcFrIngrProfRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcFrIngrProfRowStatus.setStatus("current")
+    tMcFrIngrProfRowStatus.setStatus("obsolete")
 _TMcFrIngrClassTable_Object = MibTable
 tMcFrIngrClassTable = _TMcFrIngrClassTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 25, 2)
 )
 if mibBuilder.loadTexts:
-    tMcFrIngrClassTable.setStatus("current")
+    tMcFrIngrClassTable.setStatus("obsolete")
 _TMcFrIngrClassEntry_Object = MibTableRow
 tMcFrIngrClassEntry = _TMcFrIngrClassEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 25, 2, 1)
@@ -22482,7 +21265,7 @@ tMcFrIngrClassIndex = _TMcFrIngrClassIndex_Object(
 )
 tMcFrIngrClassIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcFrIngrClassIndex.setStatus("current")
+    tMcFrIngrClassIndex.setStatus("obsolete")
 
 
 class _TMcFrIngrClassReassemblyTmout_Type(Unsigned32):
@@ -22501,7 +21284,7 @@ tMcFrIngrClassReassemblyTmout = _TMcFrIngrClassReassemblyTmout_Object(
 )
 tMcFrIngrClassReassemblyTmout.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcFrIngrClassReassemblyTmout.setStatus("current")
+    tMcFrIngrClassReassemblyTmout.setStatus("obsolete")
 _TMcFrIngrClassLastChanged_Type = TimeStamp
 _TMcFrIngrClassLastChanged_Object = MibTableColumn
 tMcFrIngrClassLastChanged = _TMcFrIngrClassLastChanged_Object(
@@ -22510,7 +21293,7 @@ tMcFrIngrClassLastChanged = _TMcFrIngrClassLastChanged_Object(
 )
 tMcFrIngrClassLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrIngrClassLastChanged.setStatus("current")
+    tMcFrIngrClassLastChanged.setStatus("obsolete")
 _TMcFrEgressObjects_ObjectIdentity = ObjectIdentity
 tMcFrEgressObjects = _TMcFrEgressObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 26)
@@ -22520,7 +21303,7 @@ tMcFrEgrProfTable = _TMcFrEgrProfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 26, 1)
 )
 if mibBuilder.loadTexts:
-    tMcFrEgrProfTable.setStatus("current")
+    tMcFrEgrProfTable.setStatus("obsolete")
 _TMcFrEgrProfEntry_Object = MibTableRow
 tMcFrEgrProfEntry = _TMcFrEgrProfEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 26, 1, 1)
@@ -22548,7 +21331,7 @@ tMcFrEgrProfIndex = _TMcFrEgrProfIndex_Object(
 )
 tMcFrEgrProfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcFrEgrProfIndex.setStatus("current")
+    tMcFrEgrProfIndex.setStatus("obsolete")
 
 
 class _TMcFrEgrProfDescription_Type(TItemDescription):
@@ -22564,7 +21347,7 @@ tMcFrEgrProfDescription = _TMcFrEgrProfDescription_Object(
 )
 tMcFrEgrProfDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcFrEgrProfDescription.setStatus("current")
+    tMcFrEgrProfDescription.setStatus("obsolete")
 _TMcFrEgrProfLastChanged_Type = TimeStamp
 _TMcFrEgrProfLastChanged_Object = MibTableColumn
 tMcFrEgrProfLastChanged = _TMcFrEgrProfLastChanged_Object(
@@ -22573,7 +21356,7 @@ tMcFrEgrProfLastChanged = _TMcFrEgrProfLastChanged_Object(
 )
 tMcFrEgrProfLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrEgrProfLastChanged.setStatus("current")
+    tMcFrEgrProfLastChanged.setStatus("obsolete")
 _TMcFrEgrProfRowStatus_Type = RowStatus
 _TMcFrEgrProfRowStatus_Object = MibTableColumn
 tMcFrEgrProfRowStatus = _TMcFrEgrProfRowStatus_Object(
@@ -22582,13 +21365,13 @@ tMcFrEgrProfRowStatus = _TMcFrEgrProfRowStatus_Object(
 )
 tMcFrEgrProfRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tMcFrEgrProfRowStatus.setStatus("current")
+    tMcFrEgrProfRowStatus.setStatus("obsolete")
 _TMcFrEgrClassTable_Object = MibTable
 tMcFrEgrClassTable = _TMcFrEgrClassTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 26, 3)
 )
 if mibBuilder.loadTexts:
-    tMcFrEgrClassTable.setStatus("current")
+    tMcFrEgrClassTable.setStatus("obsolete")
 _TMcFrEgrClassEntry_Object = MibTableRow
 tMcFrEgrClassEntry = _TMcFrEgrClassEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 26, 3, 1)
@@ -22607,7 +21390,7 @@ tMcFrEgrClassIndex = _TMcFrEgrClassIndex_Object(
 )
 tMcFrEgrClassIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tMcFrEgrClassIndex.setStatus("current")
+    tMcFrEgrClassIndex.setStatus("obsolete")
 
 
 class _TMcFrEgrClassMir_Type(Unsigned32):
@@ -22627,7 +21410,7 @@ tMcFrEgrClassMir = _TMcFrEgrClassMir_Object(
 )
 tMcFrEgrClassMir.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcFrEgrClassMir.setStatus("current")
+    tMcFrEgrClassMir.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tMcFrEgrClassMir.setUnits("percent")
 
@@ -22649,7 +21432,7 @@ tMcFrEgrClassWeight = _TMcFrEgrClassWeight_Object(
 )
 tMcFrEgrClassWeight.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcFrEgrClassWeight.setStatus("current")
+    tMcFrEgrClassWeight.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tMcFrEgrClassWeight.setUnits("percent")
 
@@ -22670,7 +21453,7 @@ tMcFrEgrClassMaxSize = _TMcFrEgrClassMaxSize_Object(
 )
 tMcFrEgrClassMaxSize.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tMcFrEgrClassMaxSize.setStatus("current")
+    tMcFrEgrClassMaxSize.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tMcFrEgrClassMaxSize.setUnits("milliseconds")
 _TMcFrEgrClassLastChanged_Type = TimeStamp
@@ -22681,7 +21464,7 @@ tMcFrEgrClassLastChanged = _TMcFrEgrClassLastChanged_Object(
 )
 tMcFrEgrClassLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tMcFrEgrClassLastChanged.setStatus("current")
+    tMcFrEgrClassLastChanged.setStatus("obsolete")
 _TQosPolicerObjects_ObjectIdentity = ObjectIdentity
 tQosPolicerObjects = _TQosPolicerObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 27)
@@ -24317,7 +23100,7 @@ tAdvCfgSampleInterval = _TAdvCfgSampleInterval_Object(
 )
 tAdvCfgSampleInterval.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tAdvCfgSampleInterval.setStatus("current")
+    tAdvCfgSampleInterval.setStatus("obsolete")
 
 
 class _TAdvCfgFastStart_Type(TruthValue):
@@ -24658,109 +23441,38 @@ if mibBuilder.loadTexts:
     tAdvCfgAbvOffADelConHiTierRPrcnt.setStatus("current")
 if mibBuilder.loadTexts:
     tAdvCfgAbvOffADelConHiTierRPrcnt.setUnits("centipercent")
+
+
+class _TAdvCfgAvgFrameOverheadMode_Type(Integer32):
+    """Custom type tAdvCfgAvgFrameOverheadMode based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("auto", 1),
+          ("from-queue", 2))
+    )
+
+
+_TAdvCfgAvgFrameOverheadMode_Type.__name__ = "Integer32"
+_TAdvCfgAvgFrameOverheadMode_Object = MibTableColumn
+tAdvCfgAvgFrameOverheadMode = _TAdvCfgAvgFrameOverheadMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 27, 6, 1, 32),
+    _TAdvCfgAvgFrameOverheadMode_Type()
+)
+tAdvCfgAvgFrameOverheadMode.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tAdvCfgAvgFrameOverheadMode.setStatus("current")
 _TWrrObjects_ObjectIdentity = ObjectIdentity
 tWrrObjects = _TWrrObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28)
 )
-_THsmdaWrrPolicyTable_Object = MibTable
-tHsmdaWrrPolicyTable = _THsmdaWrrPolicyTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1)
-)
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyTable.setStatus("obsolete")
-_THsmdaWrrPolicyEntry_Object = MibTableRow
-tHsmdaWrrPolicyEntry = _THsmdaWrrPolicyEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1)
-)
-tHsmdaWrrPolicyEntry.setIndexNames(
-    (0, "TIMETRA-QOS-MIB", "tHsmdaWrrPolicyName"),
-)
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyEntry.setStatus("current")
-_THsmdaWrrPolicyName_Type = TNamedItem
-_THsmdaWrrPolicyName_Object = MibTableColumn
-tHsmdaWrrPolicyName = _THsmdaWrrPolicyName_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 1),
-    _THsmdaWrrPolicyName_Type()
-)
-tHsmdaWrrPolicyName.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyName.setStatus("current")
-_THsmdaWrrPolicyRowStatus_Type = RowStatus
-_THsmdaWrrPolicyRowStatus_Object = MibTableColumn
-tHsmdaWrrPolicyRowStatus = _THsmdaWrrPolicyRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 2),
-    _THsmdaWrrPolicyRowStatus_Type()
-)
-tHsmdaWrrPolicyRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyRowStatus.setStatus("obsolete")
-_THsmdaWrrPolicyLastChanged_Type = TimeStamp
-_THsmdaWrrPolicyLastChanged_Object = MibTableColumn
-tHsmdaWrrPolicyLastChanged = _THsmdaWrrPolicyLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 3),
-    _THsmdaWrrPolicyLastChanged_Type()
-)
-tHsmdaWrrPolicyLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyLastChanged.setStatus("obsolete")
-_THsmdaWrrPolicyDescription_Type = TItemDescription
-_THsmdaWrrPolicyDescription_Object = MibTableColumn
-tHsmdaWrrPolicyDescription = _THsmdaWrrPolicyDescription_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 4),
-    _THsmdaWrrPolicyDescription_Type()
-)
-tHsmdaWrrPolicyDescription.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyDescription.setStatus("obsolete")
-
-
-class _THsmdaWrrPolicyIncludeQueues_Type(THsmdaPolicyIncludeQueues):
-    """Custom type tHsmdaWrrPolicyIncludeQueues based on THsmdaPolicyIncludeQueues"""
-    defaultValue = 1
-
-
-_THsmdaWrrPolicyIncludeQueues_Type.__name__ = "THsmdaPolicyIncludeQueues"
-_THsmdaWrrPolicyIncludeQueues_Object = MibTableColumn
-tHsmdaWrrPolicyIncludeQueues = _THsmdaWrrPolicyIncludeQueues_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 5),
-    _THsmdaWrrPolicyIncludeQueues_Type()
-)
-tHsmdaWrrPolicyIncludeQueues.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyIncludeQueues.setStatus("obsolete")
-
-
-class _THsmdaWrrPolicySchedUsingClass_Type(THsmdaPolicyScheduleClass):
-    """Custom type tHsmdaWrrPolicySchedUsingClass based on THsmdaPolicyScheduleClass"""
-    defaultValue = 1
-
-
-_THsmdaWrrPolicySchedUsingClass_Type.__name__ = "THsmdaPolicyScheduleClass"
-_THsmdaWrrPolicySchedUsingClass_Object = MibTableColumn
-tHsmdaWrrPolicySchedUsingClass = _THsmdaWrrPolicySchedUsingClass_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 6),
-    _THsmdaWrrPolicySchedUsingClass_Type()
-)
-tHsmdaWrrPolicySchedUsingClass.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicySchedUsingClass.setStatus("obsolete")
-
-
-class _THsmdaWrrPolicyAggWeightAtClass_Type(THsmdaWeightClass):
-    """Custom type tHsmdaWrrPolicyAggWeightAtClass based on THsmdaWeightClass"""
-    defaultValue = 1
-
-
-_THsmdaWrrPolicyAggWeightAtClass_Type.__name__ = "THsmdaWeightClass"
-_THsmdaWrrPolicyAggWeightAtClass_Object = MibTableColumn
-tHsmdaWrrPolicyAggWeightAtClass = _THsmdaWrrPolicyAggWeightAtClass_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 28, 1, 1, 7),
-    _THsmdaWrrPolicyAggWeightAtClass_Type()
-)
-tHsmdaWrrPolicyAggWeightAtClass.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tHsmdaWrrPolicyAggWeightAtClass.setStatus("obsolete")
 _TQosDCObjects_ObjectIdentity = ObjectIdentity
 tQosDCObjects = _TQosDCObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 29)
@@ -27528,6 +26240,81 @@ tIngClassPlcyLspExpLastChanged = _TIngClassPlcyLspExpLastChanged_Object(
 tIngClassPlcyLspExpLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tIngClassPlcyLspExpLastChanged.setStatus("current")
+_TIngClassPlcyPrecFCTable_Object = MibTable
+tIngClassPlcyPrecFCTable = _TIngClassPlcyPrecFCTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5)
+)
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecFCTable.setStatus("current")
+_TIngClassPlcyPrecFCEntry_Object = MibTableRow
+tIngClassPlcyPrecFCEntry = _TIngClassPlcyPrecFCEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5, 1)
+)
+tIngClassPlcyPrecFCEntry.setIndexNames(
+    (0, "TIMETRA-QOS-MIB", "tIngClassPlcyName"),
+    (0, "TIMETRA-QOS-MIB", "tIngClassPlcyPrecValue"),
+)
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecFCEntry.setStatus("current")
+_TIngClassPlcyPrecValue_Type = TPrecValue
+_TIngClassPlcyPrecValue_Object = MibTableColumn
+tIngClassPlcyPrecValue = _TIngClassPlcyPrecValue_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5, 1, 1),
+    _TIngClassPlcyPrecValue_Type()
+)
+tIngClassPlcyPrecValue.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecValue.setStatus("current")
+_TIngClassPlcyPrecRowStatus_Type = RowStatus
+_TIngClassPlcyPrecRowStatus_Object = MibTableColumn
+tIngClassPlcyPrecRowStatus = _TIngClassPlcyPrecRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5, 1, 2),
+    _TIngClassPlcyPrecRowStatus_Type()
+)
+tIngClassPlcyPrecRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecRowStatus.setStatus("current")
+
+
+class _TIngClassPlcyPrecFC_Type(TNamedItemOrEmpty):
+    """Custom type tIngClassPlcyPrecFC based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TIngClassPlcyPrecFC_Type.__name__ = "TNamedItemOrEmpty"
+_TIngClassPlcyPrecFC_Object = MibTableColumn
+tIngClassPlcyPrecFC = _TIngClassPlcyPrecFC_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5, 1, 3),
+    _TIngClassPlcyPrecFC_Type()
+)
+tIngClassPlcyPrecFC.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecFC.setStatus("current")
+
+
+class _TIngClassPlcyPrecProfile_Type(TWredSlopeProfile):
+    """Custom type tIngClassPlcyPrecProfile based on TWredSlopeProfile"""
+    defaultValue = 1
+
+
+_TIngClassPlcyPrecProfile_Type.__name__ = "TWredSlopeProfile"
+_TIngClassPlcyPrecProfile_Object = MibTableColumn
+tIngClassPlcyPrecProfile = _TIngClassPlcyPrecProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5, 1, 4),
+    _TIngClassPlcyPrecProfile_Type()
+)
+tIngClassPlcyPrecProfile.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecProfile.setStatus("current")
+_TIngClassPlcyPrecLastChanged_Type = TimeStamp
+_TIngClassPlcyPrecLastChanged_Object = MibTableColumn
+tIngClassPlcyPrecLastChanged = _TIngClassPlcyPrecLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 36, 5, 1, 5),
+    _TIngClassPlcyPrecLastChanged_Type()
+)
+tIngClassPlcyPrecLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tIngClassPlcyPrecLastChanged.setStatus("current")
 _TQosFpResourcePolicyObjects_ObjectIdentity = ObjectIdentity
 tQosFpResourcePolicyObjects = _TQosFpResourcePolicyObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37)
@@ -27647,6 +26434,38 @@ if mibBuilder.loadTexts:
     tQosFpResPlcyHwAggShapSubs.setStatus("current")
 
 
+class _TQosFpResPlcyHwAggShapSaps_Type(TruthValue):
+    """Custom type tQosFpResPlcyHwAggShapSaps based on TruthValue"""
+    defaultValue = 2
+
+
+_TQosFpResPlcyHwAggShapSaps_Type.__name__ = "TruthValue"
+_TQosFpResPlcyHwAggShapSaps_Object = MibTableColumn
+tQosFpResPlcyHwAggShapSaps = _TQosFpResPlcyHwAggShapSaps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 8),
+    _TQosFpResPlcyHwAggShapSaps_Type()
+)
+tQosFpResPlcyHwAggShapSaps.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyHwAggShapSaps.setStatus("current")
+
+
+class _TQosFpResPlcyHwAggShapQGroups_Type(TruthValue):
+    """Custom type tQosFpResPlcyHwAggShapQGroups based on TruthValue"""
+    defaultValue = 2
+
+
+_TQosFpResPlcyHwAggShapQGroups_Type.__name__ = "TruthValue"
+_TQosFpResPlcyHwAggShapQGroups_Object = MibTableColumn
+tQosFpResPlcyHwAggShapQGroups = _TQosFpResPlcyHwAggShapQGroups_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 9),
+    _TQosFpResPlcyHwAggShapQGroups_Type()
+)
+tQosFpResPlcyHwAggShapQGroups.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyHwAggShapQGroups.setStatus("current")
+
+
 class _TQosFpResPlcyPortsHqosMode_Type(Integer32):
     """Custom type tQosFpResPlcyPortsHqosMode based on Integer32"""
     defaultValue = 1
@@ -27673,6 +26492,240 @@ tQosFpResPlcyPortsHqosMode = _TQosFpResPlcyPortsHqosMode_Object(
 tQosFpResPlcyPortsHqosMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tQosFpResPlcyPortsHqosMode.setStatus("current")
+
+
+class _TQosFpResPlcyNonAggShaperQs_Type(Unsigned32):
+    """Custom type tQosFpResPlcyNonAggShaperQs based on Unsigned32"""
+    defaultValue = 8192
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2048, 262144),
+    )
+
+
+_TQosFpResPlcyNonAggShaperQs_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyNonAggShaperQs_Object = MibTableColumn
+tQosFpResPlcyNonAggShaperQs = _TQosFpResPlcyNonAggShaperQs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 11),
+    _TQosFpResPlcyNonAggShaperQs_Type()
+)
+tQosFpResPlcyNonAggShaperQs.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyNonAggShaperQs.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize2Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize2Wt based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize2Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize2Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize2Wt = _TQosFpResPlcyQueueSetSize2Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 12),
+    _TQosFpResPlcyQueueSetSize2Wt_Type()
+)
+tQosFpResPlcyQueueSetSize2Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize2Wt.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize3Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize3Wt based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize3Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize3Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize3Wt = _TQosFpResPlcyQueueSetSize3Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 13),
+    _TQosFpResPlcyQueueSetSize3Wt_Type()
+)
+tQosFpResPlcyQueueSetSize3Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize3Wt.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize4Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize4Wt based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize4Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize4Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize4Wt = _TQosFpResPlcyQueueSetSize4Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 14),
+    _TQosFpResPlcyQueueSetSize4Wt_Type()
+)
+tQosFpResPlcyQueueSetSize4Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize4Wt.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize5Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize5Wt based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize5Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize5Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize5Wt = _TQosFpResPlcyQueueSetSize5Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 15),
+    _TQosFpResPlcyQueueSetSize5Wt_Type()
+)
+tQosFpResPlcyQueueSetSize5Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize5Wt.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize6Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize6Wt based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize6Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize6Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize6Wt = _TQosFpResPlcyQueueSetSize6Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 16),
+    _TQosFpResPlcyQueueSetSize6Wt_Type()
+)
+tQosFpResPlcyQueueSetSize6Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize6Wt.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize7Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize7Wt based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize7Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize7Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize7Wt = _TQosFpResPlcyQueueSetSize7Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 17),
+    _TQosFpResPlcyQueueSetSize7Wt_Type()
+)
+tQosFpResPlcyQueueSetSize7Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize7Wt.setStatus("current")
+
+
+class _TQosFpResPlcyQueueSetSize8Wt_Type(Unsigned32):
+    """Custom type tQosFpResPlcyQueueSetSize8Wt based on Unsigned32"""
+    defaultValue = 100
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TQosFpResPlcyQueueSetSize8Wt_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyQueueSetSize8Wt_Object = MibTableColumn
+tQosFpResPlcyQueueSetSize8Wt = _TQosFpResPlcyQueueSetSize8Wt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 18),
+    _TQosFpResPlcyQueueSetSize8Wt_Type()
+)
+tQosFpResPlcyQueueSetSize8Wt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyQueueSetSize8Wt.setStatus("current")
+
+
+class _TQosFpResPlcyDfltQSetSizeSubs_Type(Unsigned32):
+    """Custom type tQosFpResPlcyDfltQSetSizeSubs based on Unsigned32"""
+    defaultValue = 8
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(2, 8),
+    )
+
+
+_TQosFpResPlcyDfltQSetSizeSubs_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyDfltQSetSizeSubs_Object = MibTableColumn
+tQosFpResPlcyDfltQSetSizeSubs = _TQosFpResPlcyDfltQSetSizeSubs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 19),
+    _TQosFpResPlcyDfltQSetSizeSubs_Type()
+)
+tQosFpResPlcyDfltQSetSizeSubs.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyDfltQSetSizeSubs.setStatus("current")
+
+
+class _TQosFpResPlcyDfltQSetSizeSaps_Type(Unsigned32):
+    """Custom type tQosFpResPlcyDfltQSetSizeSaps based on Unsigned32"""
+    defaultValue = 8
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(2, 8),
+    )
+
+
+_TQosFpResPlcyDfltQSetSizeSaps_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyDfltQSetSizeSaps_Object = MibTableColumn
+tQosFpResPlcyDfltQSetSizeSaps = _TQosFpResPlcyDfltQSetSizeSaps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 20),
+    _TQosFpResPlcyDfltQSetSizeSaps_Type()
+)
+tQosFpResPlcyDfltQSetSizeSaps.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyDfltQSetSizeSaps.setStatus("current")
+
+
+class _TQosFpResPlcyDfltQSetSizeQGroups_Type(Unsigned32):
+    """Custom type tQosFpResPlcyDfltQSetSizeQGroups based on Unsigned32"""
+    defaultValue = 8
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(2, 8),
+    )
+
+
+_TQosFpResPlcyDfltQSetSizeQGroups_Type.__name__ = "Unsigned32"
+_TQosFpResPlcyDfltQSetSizeQGroups_Object = MibTableColumn
+tQosFpResPlcyDfltQSetSizeQGroups = _TQosFpResPlcyDfltQSetSizeQGroups_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 37, 1, 1, 21),
+    _TQosFpResPlcyDfltQSetSizeQGroups_Type()
+)
+tQosFpResPlcyDfltQSetSizeQGroups.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tQosFpResPlcyDfltQSetSizeQGroups.setStatus("current")
 _TQosPortListObjects_ObjectIdentity = ObjectIdentity
 tQosPortListObjects = _TQosPortListObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 38)
@@ -27933,15 +26986,15 @@ if mibBuilder.loadTexts:
     tLagNtwkAggQosEgrQStatsEntry.setStatus("current")
 
 
-class _TNtwkEgressQueueIndex_Type(TEgressQueueId):
-    """Custom type tNtwkEgressQueueIndex based on TEgressQueueId"""
-    subtypeSpec = TEgressQueueId.subtypeSpec
+class _TNtwkEgressQueueIndex_Type(TQueueId):
+    """Custom type tNtwkEgressQueueIndex based on TQueueId"""
+    subtypeSpec = TQueueId.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
+        ValueRangeConstraint(1, 16),
     )
 
 
-_TNtwkEgressQueueIndex_Type.__name__ = "TEgressQueueId"
+_TNtwkEgressQueueIndex_Type.__name__ = "TQueueId"
 _TNtwkEgressQueueIndex_Object = MibTableColumn
 tNtwkEgressQueueIndex = _TNtwkEgressQueueIndex_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 41, 1, 1),
@@ -28656,6 +27709,81 @@ tDscpFCMapDscpLastChanged = _TDscpFCMapDscpLastChanged_Object(
 tDscpFCMapDscpLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tDscpFCMapDscpLastChanged.setStatus("current")
+_TDscpFCMapPrecTable_Object = MibTable
+tDscpFCMapPrecTable = _TDscpFCMapPrecTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3)
+)
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecTable.setStatus("current")
+_TDscpFCMapPrecEntry_Object = MibTableRow
+tDscpFCMapPrecEntry = _TDscpFCMapPrecEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3, 1)
+)
+tDscpFCMapPrecEntry.setIndexNames(
+    (0, "TIMETRA-QOS-MIB", "tDscpFCMapName"),
+    (0, "TIMETRA-QOS-MIB", "tDscpFCMapPrecValue"),
+)
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecEntry.setStatus("current")
+_TDscpFCMapPrecValue_Type = TPrecValue
+_TDscpFCMapPrecValue_Object = MibTableColumn
+tDscpFCMapPrecValue = _TDscpFCMapPrecValue_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3, 1, 1),
+    _TDscpFCMapPrecValue_Type()
+)
+tDscpFCMapPrecValue.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecValue.setStatus("current")
+_TDscpFCMapPrecRowStatus_Type = RowStatus
+_TDscpFCMapPrecRowStatus_Object = MibTableColumn
+tDscpFCMapPrecRowStatus = _TDscpFCMapPrecRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3, 1, 2),
+    _TDscpFCMapPrecRowStatus_Type()
+)
+tDscpFCMapPrecRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecRowStatus.setStatus("current")
+
+
+class _TDscpFCMapPrecFC_Type(TNamedItemOrEmpty):
+    """Custom type tDscpFCMapPrecFC based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TDscpFCMapPrecFC_Type.__name__ = "TNamedItemOrEmpty"
+_TDscpFCMapPrecFC_Object = MibTableColumn
+tDscpFCMapPrecFC = _TDscpFCMapPrecFC_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3, 1, 3),
+    _TDscpFCMapPrecFC_Type()
+)
+tDscpFCMapPrecFC.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecFC.setStatus("current")
+
+
+class _TDscpFCMapPrecProfile_Type(TWredSlopeProfile):
+    """Custom type tDscpFCMapPrecProfile based on TWredSlopeProfile"""
+    defaultValue = 1
+
+
+_TDscpFCMapPrecProfile_Type.__name__ = "TWredSlopeProfile"
+_TDscpFCMapPrecProfile_Object = MibTableColumn
+tDscpFCMapPrecProfile = _TDscpFCMapPrecProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3, 1, 4),
+    _TDscpFCMapPrecProfile_Type()
+)
+tDscpFCMapPrecProfile.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecProfile.setStatus("current")
+_TDscpFCMapPrecLastChanged_Type = TimeStamp
+_TDscpFCMapPrecLastChanged_Object = MibTableColumn
+tDscpFCMapPrecLastChanged = _TDscpFCMapPrecLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 44, 3, 1, 5),
+    _TDscpFCMapPrecLastChanged_Type()
+)
+tDscpFCMapPrecLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecLastChanged.setStatus("current")
 _TLspExpFCMapObjects_ObjectIdentity = ObjectIdentity
 tLspExpFCMapObjects = _TLspExpFCMapObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 45)
@@ -29342,6 +28470,79 @@ tFCLspExpMapFCLastChanged = _TFCLspExpMapFCLastChanged_Object(
 tFCLspExpMapFCLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tFCLspExpMapFCLastChanged.setStatus("current")
+_TQosIngSharedPlcrStatsTable_Object = MibTable
+tQosIngSharedPlcrStatsTable = _TQosIngSharedPlcrStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49)
+)
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrStatsTable.setStatus("current")
+_TQosIngSharedPlcrStatsEntry_Object = MibTableRow
+tQosIngSharedPlcrStatsEntry = _TQosIngSharedPlcrStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1)
+)
+tQosIngSharedPlcrStatsEntry.setIndexNames(
+    (0, "TIMETRA-QOS-MIB", "tSharedPolicersPolicerName"),
+)
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrStatsEntry.setStatus("current")
+_TQosIngSharedPlcrFwdInProfPkts_Type = Counter64
+_TQosIngSharedPlcrFwdInProfPkts_Object = MibTableColumn
+tQosIngSharedPlcrFwdInProfPkts = _TQosIngSharedPlcrFwdInProfPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1, 1),
+    _TQosIngSharedPlcrFwdInProfPkts_Type()
+)
+tQosIngSharedPlcrFwdInProfPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrFwdInProfPkts.setStatus("current")
+_TQosIngSharedPlcrFwdInProfOcts_Type = Counter64
+_TQosIngSharedPlcrFwdInProfOcts_Object = MibTableColumn
+tQosIngSharedPlcrFwdInProfOcts = _TQosIngSharedPlcrFwdInProfOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1, 2),
+    _TQosIngSharedPlcrFwdInProfOcts_Type()
+)
+tQosIngSharedPlcrFwdInProfOcts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrFwdInProfOcts.setStatus("current")
+_TQosIngSharedPlcrFwdOutProfPkts_Type = Counter64
+_TQosIngSharedPlcrFwdOutProfPkts_Object = MibTableColumn
+tQosIngSharedPlcrFwdOutProfPkts = _TQosIngSharedPlcrFwdOutProfPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1, 3),
+    _TQosIngSharedPlcrFwdOutProfPkts_Type()
+)
+tQosIngSharedPlcrFwdOutProfPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrFwdOutProfPkts.setStatus("current")
+_TQosIngSharedPlcrFwdOutProfOcts_Type = Counter64
+_TQosIngSharedPlcrFwdOutProfOcts_Object = MibTableColumn
+tQosIngSharedPlcrFwdOutProfOcts = _TQosIngSharedPlcrFwdOutProfOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1, 4),
+    _TQosIngSharedPlcrFwdOutProfOcts_Type()
+)
+tQosIngSharedPlcrFwdOutProfOcts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrFwdOutProfOcts.setStatus("current")
+_TQosIngSharedPlcrDrpExdProfPkts_Type = Counter64
+_TQosIngSharedPlcrDrpExdProfPkts_Object = MibTableColumn
+tQosIngSharedPlcrDrpExdProfPkts = _TQosIngSharedPlcrDrpExdProfPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1, 5),
+    _TQosIngSharedPlcrDrpExdProfPkts_Type()
+)
+tQosIngSharedPlcrDrpExdProfPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrDrpExdProfPkts.setStatus("current")
+_TQosIngSharedPlcrDrpExdProfOcts_Type = Counter64
+_TQosIngSharedPlcrDrpExdProfOcts_Object = MibTableColumn
+tQosIngSharedPlcrDrpExdProfOcts = _TQosIngSharedPlcrDrpExdProfOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 49, 1, 6),
+    _TQosIngSharedPlcrDrpExdProfOcts_Type()
+)
+tQosIngSharedPlcrDrpExdProfOcts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tQosIngSharedPlcrDrpExdProfOcts.setStatus("current")
+_TQosPreClassifierObjects_ObjectIdentity = ObjectIdentity
+tQosPreClassifierObjects = _TQosPreClassifierObjects_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 16, 50)
+)
 _TQosNotifyPrefix_ObjectIdentity = ObjectIdentity
 tQosNotifyPrefix = _TQosNotifyPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 16)
@@ -29917,45 +29118,9 @@ tmnxQosHsmdaV6v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 23)
 )
 tmnxQosHsmdaV6v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyMaxRate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp2Rate"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCHsmdaQueue"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCDot1PHsmdaProfile"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueRowStatus"),
+      *(("TIMETRA-QOS-MIB", "tSapEgressFCDot1PHsmdaProfile"),
         ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueCIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminPIR"),
         ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminCIR"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaPacketOffset"),
         ("TIMETRA-QOS-MIB", "tSapIngressDefFCHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapIngressDot1pHsmdaCntrOvr"),
@@ -29972,63 +29137,14 @@ tmnxQosHsmdaV6v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueAdminCIR"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueSlopePolicy"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueuePoliced"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolSystemReserve"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot1AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot2AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot3AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot4AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot5AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot6AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot7AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot8AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeQueueMbs"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tSapIngrHsmdaQueueTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tSapEgrHsmdaQueueTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyGrpTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyTableLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapIngressIPCritHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapEgressDSCPRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapEgressDSCPLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPHsmdaCntrOverride"),
         ("TIMETRA-QOS-MIB", "tSapEgressPrecRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapEgressPrecLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecHsmdaCntrOverride"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritDescription"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpAddrType"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpAddr"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpMask"),
@@ -30044,8 +29160,7 @@ tmnxQosHsmdaV6v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestPortOperator"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritDSCP"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritFragment"),
-        ("TIMETRA-QOS-MIB", "tSapEgressMatchCriteria"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaPacketOffset"))
+        ("TIMETRA-QOS-MIB", "tSapEgressMatchCriteria"))
 )
 if mibBuilder.loadTexts:
     tmnxQosHsmdaV6v0Group.setStatus("obsolete")
@@ -30073,7 +29188,7 @@ tmnxQosAtmTdpV5v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tAtmTdpTableLastChanged"))
 )
 if mibBuilder.loadTexts:
-    tmnxQosAtmTdpV5v0Group.setStatus("current")
+    tmnxQosAtmTdpV5v0Group.setStatus("obsolete")
 
 tmnxQosSapIngressV6v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 25)
@@ -30357,7 +29472,7 @@ tmnxQosMcMlpppIngrGroup.setObjects(
         ("TIMETRA-QOS-MIB", "tMcMlpppIngrClassTableLastChanged"))
 )
 if mibBuilder.loadTexts:
-    tmnxQosMcMlpppIngrGroup.setStatus("current")
+    tmnxQosMcMlpppIngrGroup.setStatus("obsolete")
 
 tmnxQosMcMlpppEgrGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 32)
@@ -30377,7 +29492,7 @@ tmnxQosMcMlpppEgrGroup.setObjects(
         ("TIMETRA-QOS-MIB", "tMcMlpppEgrFCTableLastChanged"))
 )
 if mibBuilder.loadTexts:
-    tmnxQosMcMlpppEgrGroup.setStatus("current")
+    tmnxQosMcMlpppEgrGroup.setStatus("obsolete")
 
 tmnxQosQueueObjGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 33)
@@ -30531,44 +29646,8 @@ tmnxQosHsmdaV7v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 36)
 )
 tmnxQosHsmdaV7v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyMaxRate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp2Rate"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCHsmdaQueue"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueCIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminPIR"),
+      *(("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueCIRAdaptn"),
         ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminCIR"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaPacketOffset"),
         ("TIMETRA-QOS-MIB", "tSapIngressDefFCHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapIngressDot1pHsmdaCntrOvr"),
@@ -30585,63 +29664,14 @@ tmnxQosHsmdaV7v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueAdminCIR"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueSlopePolicy"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueuePoliced"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolSystemReserve"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot1AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot2AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot3AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot4AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot5AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot6AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot7AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot8AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeQueueMbs"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tSapIngrHsmdaQueueTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tSapEgrHsmdaQueueTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyGrpTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyTableLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapIngressIPCritHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapEgressDSCPRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapEgressDSCPLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPHsmdaCntrOverride"),
         ("TIMETRA-QOS-MIB", "tSapEgressPrecRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapEgressPrecLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecHsmdaCntrOverride"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritDescription"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpAddrType"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpAddr"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpMask"),
@@ -30658,7 +29688,6 @@ tmnxQosHsmdaV7v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritDSCP"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritFragment"),
         ("TIMETRA-QOS-MIB", "tSapEgressMatchCriteria"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaPacketOffset"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionFC"),
         ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionProfile"),
         ("TIMETRA-QOS-MIB", "tSapEgressDSCPfc"),
@@ -30676,7 +29705,7 @@ tmnxQosSapAtmV7v0Group.setObjects(
     ("TIMETRA-QOS-MIB", "tSapIngressMacCriteriaAtmVci")
 )
 if mibBuilder.loadTexts:
-    tmnxQosSapAtmV7v0Group.setStatus("current")
+    tmnxQosSapAtmV7v0Group.setStatus("obsolete")
 
 tmnxQosMcFrIngrGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 38)
@@ -30691,7 +29720,7 @@ tmnxQosMcFrIngrGroup.setObjects(
         ("TIMETRA-QOS-MIB", "tMcFrIngrClassTableLastChanged"))
 )
 if mibBuilder.loadTexts:
-    tmnxQosMcFrIngrGroup.setStatus("current")
+    tmnxQosMcFrIngrGroup.setStatus("obsolete")
 
 tmnxQosMcFrEgrGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 39)
@@ -30708,7 +29737,7 @@ tmnxQosMcFrEgrGroup.setObjects(
         ("TIMETRA-QOS-MIB", "tMcFrEgrClassTableLastChanged"))
 )
 if mibBuilder.loadTexts:
-    tmnxQosMcFrEgrGroup.setStatus("current")
+    tmnxQosMcFrEgrGroup.setStatus("obsolete")
 
 tmnxQosSapEgrQWredGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 40)
@@ -31175,46 +30204,7 @@ tmnxQosAtmTdpV9v0Group.setObjects(
     ("TIMETRA-QOS-MIB", "tAtmTdpWeight")
 )
 if mibBuilder.loadTexts:
-    tmnxQosAtmTdpV9v0Group.setStatus("current")
-
-tmnxQosHsmdaV9v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 56)
-)
-tmnxQosHsmdaV9v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyTblLastChgd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyIncludeQueues"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicySchedUsingClass"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyAggWeightAtClass"),
-        ("TIMETRA-QOS-MIB", "tNetworkQueuePolicyEHWrrPlcy"),
-        ("TIMETRA-QOS-MIB", "tNetworkQueuePolicyEHPktBOffst"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueTblLastChgd"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueuePIRPercent"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueWrrWeight"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueMBS"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaLowBrstMaxCls"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaWrrPolicy"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueWrrWeight"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueMBS"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueBurstLimit"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueBurstLimit"))
-)
-if mibBuilder.loadTexts:
-    tmnxQosHsmdaV9v0Group.setStatus("obsolete")
-
-tmnxQosNetworkV9v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 57)
-)
-tmnxQosNetworkV9v0Group.setObjects(
-    ("TIMETRA-QOS-MIB", "tNetworkQueueFCEgrHsmdaQueue")
-)
-if mibBuilder.loadTexts:
-    tmnxQosNetworkV9v0Group.setStatus("obsolete")
+    tmnxQosAtmTdpV9v0Group.setStatus("obsolete")
 
 tmnxQosNamedPoolV9v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 58)
@@ -31383,147 +30373,7 @@ tmnxQosAdvConfigV10v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tAdvCfgDecOnly"))
 )
 if mibBuilder.loadTexts:
-    tmnxQosAdvConfigV10v0Group.setStatus("current")
-
-tmnxQosHsmdaV10v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 65)
-)
-tmnxQosHsmdaV10v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyMaxRate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp2Rate"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCHsmdaQueue"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminPIR"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueCIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueAdminPIR"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueAdminCIR"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueuePoliced"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolSystemReserve"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot1AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot2AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot3AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot4AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot5AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot6AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot7AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot8AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tSapEgrHsmdaQueueTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyGrpTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyTableLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPHsmdaCntrOverride"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecHsmdaCntrOverride"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDescription"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionHsmdaCntrOvr"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpAddrType"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpAddr"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourceIpMask"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestIpAddrType"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestIpAddr"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestIpMask"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritProtocol"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourcePortValue1"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourcePortValue2"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritSourcePortOperator"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestPortValue1"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestPortValue2"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDestPortOperator"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritDSCP"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritFragment"),
-        ("TIMETRA-QOS-MIB", "tSapEgressMatchCriteria"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaPacketOffset"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionFC"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionProfile"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPfc"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPprofile"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecFC"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecProfile"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyBrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp1BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp2BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8BrstLimit"))
-)
-if mibBuilder.loadTexts:
-    tmnxQosHsmdaV10v0Group.setStatus("obsolete")
+    tmnxQosAdvConfigV10v0Group.setStatus("obsolete")
 
 tmnxQosNetworkV10v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 66)
@@ -31665,8 +30515,7 @@ tmnxQosHsmdaObsoletedV10v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 69)
 )
 tmnxQosHsmdaObsoletedV10v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tHsmdaSlopeQueueMbs"),
-        ("TIMETRA-QOS-MIB", "tSapIngressHsmdaPacketOffset"),
+      *(("TIMETRA-QOS-MIB", "tSapIngressHsmdaPacketOffset"),
         ("TIMETRA-QOS-MIB", "tSapIngressFCHsmdaQueue"),
         ("TIMETRA-QOS-MIB", "tSapIngressFCHsmdaMCastQueue"),
         ("TIMETRA-QOS-MIB", "tSapIngressFCHsmdaBCastQueue"),
@@ -31678,7 +30527,6 @@ tmnxQosHsmdaObsoletedV10v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tSapIngressIPCritHsmdaCntrOvr"),
         ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueCIRAdaptn"),
         ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminCIR"),
-        ("TIMETRA-QOS-MIB", "tSapIngrHsmdaQueueTblLastChngd"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueRowStatus"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapIngressHsmdaQueueCIRAdaptn"),
@@ -31700,26 +30548,6 @@ tmnxSapEgressFCV11v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSapEgressFCV11v0Group.setStatus("current")
-
-tmnxQosHsmdaV11v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 71)
-)
-tmnxQosHsmdaV11v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tQosEgrQGroupHsmdaPacketOffset"),
-        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsmdaWrrPolicy"),
-        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsmdaLowBrstMaxCls"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueRowStatus"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueAdminPIR"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueWrrWeight"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueMBS"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueBurstLimit"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCHsmdaQueuePortQGrpQ"))
-)
-if mibBuilder.loadTexts:
-    tmnxQosHsmdaV11v0Group.setStatus("obsolete")
 
 tmnxQosSchedulerRateV11v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 2, 72)
@@ -32540,8 +31368,7 @@ tmnxQosTimeStampGroup = ObjectGroup(
 tmnxQosTimeStampGroup.setObjects(
       *(("TIMETRA-QOS-MIB", "tSapEgressPrecTableLastChanged"),
         ("TIMETRA-QOS-MIB", "tSapEgressDSCPTableLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritTableLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueTblLstChngd"))
+        ("TIMETRA-QOS-MIB", "tSapEgrIPCritTableLastChanged"))
 )
 if mibBuilder.loadTexts:
     tmnxQosTimeStampGroup.setStatus("current")
@@ -33983,6 +32810,8 @@ tQosFpV21v0Group = ObjectGroup(
 tQosFpV21v0Group.setObjects(
       *(("TIMETRA-QOS-MIB", "tQosFpResPlcyAggShapAutoCreate"),
         ("TIMETRA-QOS-MIB", "tQosFpResPlcyHwAggShapSubs"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyHwAggShapSaps"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyHwAggShapQGroups"),
         ("TIMETRA-QOS-MIB", "tQosFpResPlcyPortsHqosMode"),
         ("TIMETRA-QOS-MIB", "tSapEgressQueueAggShaperWeight"),
         ("TIMETRA-QOS-MIB", "tSapEgressQueueSchedClass"),
@@ -34006,7 +32835,13 @@ tQosFpV21v0Group.setObjects(
         ("TIMETRA-QOS-MIB", "tQosHwAggShaperSchClassGroupName"),
         ("TIMETRA-QOS-MIB", "tQosHwAggShaperSchClassGroupWght"),
         ("TIMETRA-QOS-MIB", "tQosHwAggShapSchClassTblLastChgd"),
-        ("TIMETRA-QOS-MIB", "tSapEgressQueueFirBurstLimit"))
+        ("TIMETRA-QOS-MIB", "tQosEgrQueueAggShaperWeight"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQueueSchedClass"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQueueSchdClssElvRowStatus"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQSchdClssElvLastChanged"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQueueSchdClssElvWght"),
+        ("TIMETRA-QOS-MIB", "tSapEgressQueueFirBurstLimit"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQueueFirBurstLimit"))
 )
 if mibBuilder.loadTexts:
     tQosFpV21v0Group.setStatus("current")
@@ -34034,145 +32869,6 @@ tNtwkLagAggrStatsV21v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tNtwkLagAggrStatsV21v0Group.setStatus("current")
-
-tQosObsoleteObjV21v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 42)
-)
-tQosObsoleteObjV21v0Group.setObjects(
-      *(("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyMaxRate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8GrpId"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8WgtInGrp"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp1Rate"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp2Rate"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCHsmdaQueue"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueRowStatus"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueAdminPIR"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolSystemReserve"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot1AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot2AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot3AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot4AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot5AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot6AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot7AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolRoot8AllocWeight"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass1AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass2AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass3AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass4AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass5AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass6AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass7AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8Parent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolClass8AllocPercent"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeHiMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoAdminStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoStartDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxDepth"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopeLoMaxProbability"),
-        ("TIMETRA-QOS-MIB", "tSapEgrHsmdaQueueTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedPlcyGrpTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaPoolPlcyTblLastChngd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSlopePolicyTableLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressDSCPHsmdaCntrOverride"),
-        ("TIMETRA-QOS-MIB", "tSapEgressPrecHsmdaCntrOverride"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaPacketOffset"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyBrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp1BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyGrp2BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl1BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl2BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl3BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl4BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl5BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl6BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl7BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaSchedulerPlcyLvl8BrstLimit"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyTblLastChgd"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyRowStatus"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyLastChanged"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyDescription"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyIncludeQueues"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicySchedUsingClass"),
-        ("TIMETRA-QOS-MIB", "tHsmdaWrrPolicyAggWeightAtClass"),
-        ("TIMETRA-QOS-MIB", "tNetworkQueuePolicyEHWrrPlcy"),
-        ("TIMETRA-QOS-MIB", "tNetworkQueuePolicyEHPktBOffst"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueTblLastChgd"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueuePIRPercent"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueWrrWeight"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueMBS"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaLowBrstMaxCls"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaWrrPolicy"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueWrrWeight"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueMBS"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueBurstLimit"),
-        ("TIMETRA-QOS-MIB", "tNetworkEgrHsmdaQueueBurstLimit"),
-        ("TIMETRA-QOS-MIB", "tNetworkQueueFCEgrHsmdaQueue"),
-        ("TIMETRA-QOS-MIB", "tSapEgressHsmdaQueueTblLstChngd"),
-        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsmdaPacketOffset"),
-        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsmdaWrrPolicy"),
-        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsmdaLowBrstMaxCls"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueRowStatus"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueLastChanged"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueuePIRAdaptn"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueAdminPIR"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueSlopePolicy"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueWrrWeight"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueMBS"),
-        ("TIMETRA-QOS-MIB", "tQosEgrHsmdaQueueBurstLimit"),
-        ("TIMETRA-QOS-MIB", "tSapEgressFCHsmdaQueuePortQGrpQ"),
-        ("TIMETRA-QOS-MIB", "tSapEgrIPCritActionHsmdaCntrOvr"))
-)
-if mibBuilder.loadTexts:
-    tQosObsoleteObjV21v0Group.setStatus("current")
 
 tQosObjV21v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 43)
@@ -34335,6 +33031,349 @@ tQosEnhancedSched22v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tQosEnhancedSched22v0Group.setStatus("current")
+
+tmnxQosFlowBasedRulesV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 51)
+)
+tmnxQosFlowBasedRulesV22v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueInsertPoint"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueInsertSize"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueNbrInsert"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueuePktOffset"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueMBS"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueCBS"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueParent"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueLevel"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueWeight"),
+        ("TIMETRA-QOS-MIB", "tSapEgressQueueDescr"),
+        ("TIMETRA-QOS-MIB", "tSapEgrIPCritQFI"),
+        ("TIMETRA-QOS-MIB", "tSapEgrIPCritRQI"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosFlowBasedRulesV22v0Group.setStatus("current")
+
+tmnxSharedPolicersV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 52)
+)
+tmnxSharedPolicersV22v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSharedPolicersPolicerRowStatus"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerMBS"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerCBS"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerPIRHi"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerPIRLo"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerCIRHi"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerCIRLo"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersPolicerLstChangd"),
+        ("TIMETRA-QOS-MIB", "tSharedPolicersStatMode"),
+        ("TIMETRA-QOS-MIB", "tQosIngSharedPlcrFwdInProfPkts"),
+        ("TIMETRA-QOS-MIB", "tQosIngSharedPlcrFwdInProfOcts"),
+        ("TIMETRA-QOS-MIB", "tQosIngSharedPlcrFwdOutProfPkts"),
+        ("TIMETRA-QOS-MIB", "tQosIngSharedPlcrFwdOutProfOcts"),
+        ("TIMETRA-QOS-MIB", "tQosIngSharedPlcrDrpExdProfPkts"),
+        ("TIMETRA-QOS-MIB", "tQosIngSharedPlcrDrpExdProfOcts"))
+)
+if mibBuilder.loadTexts:
+    tmnxSharedPolicersV22v0Group.setStatus("current")
+
+tQosFpV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 53)
+)
+tQosFpV22v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tQosFpResPlcyNonAggShaperQs"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize2Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize3Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize4Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize5Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize6Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize7Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyQueueSetSize8Wt"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyDfltQSetSizeSubs"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyDfltQSetSizeSaps"),
+        ("TIMETRA-QOS-MIB", "tQosFpResPlcyDfltQSetSizeQGroups"))
+)
+if mibBuilder.loadTexts:
+    tQosFpV22v0Group.setStatus("current")
+
+tmnxQosSapEgressQV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 54)
+)
+tmnxQosSapEgressQV23v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tSapEgressQueueMaxDataTransmit")
+)
+if mibBuilder.loadTexts:
+    tmnxQosSapEgressQV23v0Group.setStatus("current")
+
+tmnxQosPortSched23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 55)
+)
+tmnxQosPortSched23v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tVlanQosPlcyQueueLowLatency")
+)
+if mibBuilder.loadTexts:
+    tmnxQosPortSched23v0Group.setStatus("current")
+
+tQosObsoleteObjV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 56)
+)
+tQosObsoleteObjV23v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tAtmTdpSir"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpPir"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpMbs"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpMir"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpShaping"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpServCat"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpLastChanged"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpDescription"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpRowStatus"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpDescrType"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpCdvt"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpPolicing"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpCLPTagging"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpIndexNext"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpsMaxSupported"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpsCurrentlyConfigured"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tAtmTdpWeight"),
+        ("TIMETRA-QOS-MIB", "tSapIngressMacCriteriaAtmVci"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrProfTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrClassTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrProfDescription"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrProfLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrProfRowStatus"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrClassMir"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrClassWeight"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrClassMaxSize"),
+        ("TIMETRA-QOS-MIB", "tMcFrEgrClassLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrProfDescription"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrProfLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrProfRowStatus"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrProfTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrClassReassemblyTmout"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrClassLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcFrIngrClassTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrProfDescription"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrProfLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrProfRowStatus"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrProfTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrClassReassemblyTmout"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrClassLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppIngrClassTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrProfDescription"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrProfLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrProfRowStatus"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrProfTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrClassMir"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrClassWeight"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrClassMaxSize"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrClassLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrClassTableLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrFCClass"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrFCLastChanged"),
+        ("TIMETRA-QOS-MIB", "tMcMlpppEgrFCTableLastChanged"))
+)
+if mibBuilder.loadTexts:
+    tQosObsoleteObjV23v0Group.setStatus("current")
+
+tSapEgressInDot1PEgRemrk23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 57)
+)
+tSapEgressInDot1PEgRemrk23v0Grp.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSapEgressUsePolResMrkDot1pInner"),
+        ("TIMETRA-QOS-MIB", "tSapEgressFCInnerTagDot1PExcdPrf"))
+)
+if mibBuilder.loadTexts:
+    tSapEgressInDot1PEgRemrk23v0Grp.setStatus("current")
+
+tmnxQosPortQosPlcyV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 58)
+)
+tmnxQosPortQosPlcyV23v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tPortQosPlcyQueueLowLatency")
+)
+if mibBuilder.loadTexts:
+    tmnxQosPortQosPlcyV23v0Group.setStatus("current")
+
+tNetworkEgrIpPrefixListV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 59)
+)
+tNetworkEgrIpPrefixListV23v0Grp.setObjects(
+      *(("TIMETRA-QOS-MIB", "tNetworkEgrIPCritSrcIpPrefixList"),
+        ("TIMETRA-QOS-MIB", "tNetworkEgrIPCritDstIpPrefixList"))
+)
+if mibBuilder.loadTexts:
+    tNetworkEgrIpPrefixListV23v0Grp.setStatus("current")
+
+tQosSapEgrHwAggShapV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 60)
+)
+tQosSapEgrHwAggShapV23v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tSapEgressHwAggShapQsQSetSize")
+)
+if mibBuilder.loadTexts:
+    tQosSapEgrHwAggShapV23v0Group.setStatus("current")
+
+tmnxQosFlowBasedRulesV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 61)
+)
+tmnxQosFlowBasedRulesV23v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueCIRLevel"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueCIRWeight"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueueUsePortParent"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueuePortLvl"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueuePortWght"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueuePortCIRLvl"),
+        ("TIMETRA-QOS-MIB", "tSapEgrDynamicQueuePortCIRWght"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosFlowBasedRulesV23v0Group.setStatus("current")
+
+tIngressClassPlcyPrecGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 62)
+)
+tIngressClassPlcyPrecGroup.setObjects(
+      *(("TIMETRA-QOS-MIB", "tIngClassPlcyPrecRowStatus"),
+        ("TIMETRA-QOS-MIB", "tIngClassPlcyPrecFC"),
+        ("TIMETRA-QOS-MIB", "tIngClassPlcyPrecProfile"),
+        ("TIMETRA-QOS-MIB", "tIngClassPlcyPrecLastChanged"),
+        ("TIMETRA-QOS-MIB", "tIngClassPlcyPrecTblLastChanged"))
+)
+if mibBuilder.loadTexts:
+    tIngressClassPlcyPrecGroup.setStatus("current")
+
+tDscpFCMapPrecGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 63)
+)
+tDscpFCMapPrecGroup.setObjects(
+      *(("TIMETRA-QOS-MIB", "tDscpFCMapPrecRowStatus"),
+        ("TIMETRA-QOS-MIB", "tDscpFCMapPrecFC"),
+        ("TIMETRA-QOS-MIB", "tDscpFCMapPrecProfile"),
+        ("TIMETRA-QOS-MIB", "tDscpFCMapPrecLastChanged"),
+        ("TIMETRA-QOS-MIB", "tDscpFCMapPrecTblLastChanged"))
+)
+if mibBuilder.loadTexts:
+    tDscpFCMapPrecGroup.setStatus("current")
+
+tAdvCfgPolicyV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 64)
+)
+tAdvCfgPolicyV24v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tAdvCfgAvgFrameOverheadMode")
+)
+if mibBuilder.loadTexts:
+    tAdvCfgPolicyV24v0Group.setStatus("current")
+
+tmnxQosSapEgrQDlyTimeV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 65)
+)
+tmnxQosSapEgrQDlyTimeV24v0Grp.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSapEgressQueueCBSDelayTime"),
+        ("TIMETRA-QOS-MIB", "tSapEgressQueueMBSDelayTime"),
+        ("TIMETRA-QOS-MIB", "tSapEgressQueueBurstLimDelayTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosSapEgrQDlyTimeV24v0Grp.setStatus("current")
+
+tmnxQosSapEgrQDlyPrcntV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 66)
+)
+tmnxQosSapEgrQDlyPrcntV24v0Grp.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSapEgressQueueCBSDelayPercent"),
+        ("TIMETRA-QOS-MIB", "tSapEgressQueueMBSDelayPercent"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosSapEgrQDlyPrcntV24v0Grp.setStatus("current")
+
+tQosSapEgrHwAggShapV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 67)
+)
+tQosSapEgrHwAggShapV24v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tQosEgrQGrpHwAggShapQsQSetSize")
+)
+if mibBuilder.loadTexts:
+    tQosSapEgrHwAggShapV24v0Group.setStatus("current")
+
+tQosVlanQosQAllocV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 68)
+)
+tQosVlanQosQAllocV24v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tVlanQosPlcyQAllocMode")
+)
+if mibBuilder.loadTexts:
+    tQosVlanQosQAllocV24v0Group.setStatus("current")
+
+tQosObsoleteObjV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 69)
+)
+tQosObsoleteObjV25v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tAdvCfgSampleInterval")
+)
+if mibBuilder.loadTexts:
+    tQosObsoleteObjV25v0Group.setStatus("current")
+
+tmnxQosAdvConfigV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 70)
+)
+tmnxQosAdvConfigV25v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tAdvCfgPolicyTblLastChgd"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgPolicyRowStatus"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgLastChanged"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgDescription"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgChildAdmnPirPrcnt"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgChildAdminRate"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgOMGranPirPrcnt"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgOMGranRate"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgMaxDecPirPrcnt"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgMaxDecRate"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgHiRateHoldTime"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgTimeAvgFactor"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgFastStart"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgFastStop"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgAbvOffCapPirPrcnt"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgAbvOffCapRate"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgBWDGranPirPrcnt"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgBWDGranRate"),
+        ("TIMETRA-QOS-MIB", "tQosEgrPolicerAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tQosIngPolicerAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQueueAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tQosIngQueueAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tSapEgrPolicerAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tSapIngPolicerAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tSapEgressQueueAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tSapIngressQueueAdvCfgPolicy"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgMinOnly"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgDecOnly"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosAdvConfigV25v0Group.setStatus("current")
+
+tQosPortSchedPlcyModeV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 71)
+)
+tQosPortSchedPlcyModeV25v0Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tPortSchedPlcyAccountingMode")
+)
+if mibBuilder.loadTexts:
+    tQosPortSchedPlcyModeV25v0Group.setStatus("current")
+
+tmnxQosPolicersV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 72)
+)
+tmnxQosPolicersV25v0Group.setObjects(
+      *(("TIMETRA-QOS-MIB", "tSharedPolicersAlgoType"),
+        ("TIMETRA-QOS-MIB", "tSapIngPolicerAlgoType"),
+        ("TIMETRA-QOS-MIB", "tNetIngPolicerAlgoType"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosPolicersV25v0Group.setStatus("current")
+
+tmnxQosPolicersV25v7Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 73)
+)
+tmnxQosPolicersV25v7Group.setObjects(
+    ("TIMETRA-QOS-MIB", "tSharedPolicersAssociationType")
+)
+if mibBuilder.loadTexts:
+    tmnxQosPolicersV25v7Group.setStatus("current")
 
 
 # Notification objects
@@ -34663,7 +33702,6 @@ tmnxQos77x0V9v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV7v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
@@ -34671,7 +33709,6 @@ tmnxQos77x0V9v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV7v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34710,7 +33747,6 @@ tmnxQos7450V10v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34741,15 +33777,12 @@ tmnxQos77x0V10v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV7v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34774,7 +33807,6 @@ tmnxQos77x0V10v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"))
 )
 if mibBuilder.loadTexts:
@@ -34795,7 +33827,6 @@ tmnxQos7450V11v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34812,7 +33843,6 @@ tmnxQos7450V11v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV11v0Group"))
 )
@@ -34831,14 +33861,11 @@ tmnxQos77x0V11v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV7v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34863,11 +33890,9 @@ tmnxQos77x0V11v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV11v0Group"))
 )
@@ -34889,7 +33914,6 @@ tmnxQos7450V12v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34906,7 +33930,6 @@ tmnxQos7450V12v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
@@ -34933,14 +33956,11 @@ tmnxQos77x0V12v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV7v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -34965,11 +33985,9 @@ tmnxQos77x0V12v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
@@ -34997,7 +34015,6 @@ tmnxQos7450V13v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV7v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -35013,7 +34030,6 @@ tmnxQos7450V13v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
@@ -35050,14 +34066,11 @@ tmnxQos77x0V13v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV7v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosQueueV4v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -35081,11 +34094,9 @@ tmnxQos77x0V13v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosPolicerSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosParentLocV12v0Group"),
@@ -35121,7 +34132,6 @@ tmnxQos7450V14v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -35135,7 +34145,6 @@ tmnxQos7450V14v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosPolicyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
@@ -35179,13 +34188,10 @@ tmnxQos77x0V14v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosFCGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV8v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -35207,11 +34213,9 @@ tmnxQos77x0V14v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosQueueGrpPolcrV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosParentLocV12v0Group"),
@@ -35252,13 +34256,10 @@ tmnxQosV15v0Compliance.setObjects(
       *(("TIMETRA-QOS-MIB", "tmnxQosGlobalGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosDSCPGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosFCGroup"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -35279,11 +34280,9 @@ tmnxQosV15v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosQueueGrpPolcrV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
@@ -35365,13 +34364,10 @@ tmnxQosV19v0Compliance.setObjects(
       *(("TIMETRA-QOS-MIB", "tmnxQosGlobalGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosDSCPGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosFCGroup"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNamedPoolPolicyV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
@@ -35392,11 +34388,9 @@ tmnxQosV19v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosQueueGrpPolcrV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
@@ -35470,13 +34464,10 @@ tmnxQosV20v0Compliance.setObjects(
       *(("TIMETRA-QOS-MIB", "tmnxQosGlobalGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosDSCPGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosFCGroup"),
-        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV5v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAtmTdpV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV9v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppIngrGroup"),
         ("TIMETRA-QOS-MIB", "tmnxQosMcMlpppEgrGroup"),
@@ -35495,11 +34486,9 @@ tmnxQosV20v0Compliance.setObjects(
         ("TIMETRA-QOS-MIB", "tmnxQosQueueGrpPolcrV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
-        ("TIMETRA-QOS-MIB", "tmnxQosHsmdaV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
         ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
@@ -35701,7 +34690,7 @@ tmnxQosV21v0Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxQosV21v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxQosV22v0Compliance = ModuleCompliance(
@@ -35709,10 +34698,265 @@ tmnxQosV22v0Compliance = ModuleCompliance(
 )
 tmnxQosV22v0Compliance.setObjects(
       *(("TIMETRA-QOS-MIB", "tQosSapIngHqosPol22v0Group"),
-        ("TIMETRA-QOS-MIB", "tQosEnhancedSched22v0Group"))
+        ("TIMETRA-QOS-MIB", "tQosEnhancedSched22v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFlowBasedRulesV22v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxSharedPolicersV22v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosFpV22v0Group"))
 )
 if mibBuilder.loadTexts:
     tmnxQosV22v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxQosV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 1, 34)
+)
+tmnxQosV23v0Compliance.setObjects(
+      *(("TIMETRA-QOS-MIB", "tmnxQosGlobalGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosDSCPGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFCGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosQGrpFCGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicerV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosQGrpV8v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosBurstLimitGroup"),
+        ("TIMETRA-QOS-MIB", "tQosFCQGrpFC8v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosMacCritVidFltrV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicyV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueGrpPolcrV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosParentLocV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosParentLocEsmV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngIPMacCritV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPlcyV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrPlcrV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkIngFCV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosAdvCfgPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFlowBasedRulesV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosMatchListV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosIngressPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrIPCritV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortSchedPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortSchPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrIpCritGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgressQueuePlcrGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxSapIngressIPCritGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgrQGrpGroup"),
+        ("TIMETRA-QOS-MIB", "tQosSapIngEgrV14v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxSlopePolicyV14v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueDropTailGroup"),
+        ("TIMETRA-QOS-MIB", "tHsSchedPolicyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsSchedPolicySchedClassGroup"),
+        ("TIMETRA-QOS-MIB", "tHsSchedPolicyGroupGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPoolPolicyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPoolPolicyRootPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPoolPolicyMidPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPortPoolPolicyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPortPoolClassPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPortPoolAltClassPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsAttachPlcyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsAttachPlcyWrrGrpGroup"),
+        ("TIMETRA-QOS-MIB", "tHsAttachPlcyQueueGroup"),
+        ("TIMETRA-QOS-MIB", "tNetworkQueuePolicyHsGroup"),
+        ("TIMETRA-QOS-MIB", "tSapEgressHsGroup"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueRateGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPostPolicerMappingGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQGrpRedirectListGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosTimeStampGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgressV15v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicerV15v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosNetworkPlcyNameV15v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkEgrPlcyV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosMdAutoIdV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueFIRRateV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQCIRNonProfV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tNetworkIngIpPrefixListV16v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosFpResourcePolicyV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosFourWredSlopesV19v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPortSchedHQoSAlgoV19v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPercentRateV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosSapIpPrefixListV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosNetworkV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueObjV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosSharedQueueV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPortListV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosVlanQosPlcyPIRV20Group"),
+        ("TIMETRA-QOS-MIB", "tQosSapIngIPCriteriaV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngPlcrCntV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tNetIngressPlcyGroupV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPktByteOffsetV20Group"),
+        ("TIMETRA-QOS-MIB", "tQosNetEgrPortListV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQueueMgmtPlcyV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tNtwkLagAggrStatsV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosObjV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosIngClassPlcyFcMapV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosEgrRmrkPlcyFcMapV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosIngClassPlcyV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosFcDot1pMapInOutV21v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosNetIngPortListV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgressQV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortSched23v0Group"),
+        ("TIMETRA-QOS-MIB", "tSapEgressInDot1PEgRemrk23v0Grp"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortQosPlcyV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tNetworkEgrIpPrefixListV23v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosSapEgrHwAggShapV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFlowBasedRulesV23v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosV23v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxQosV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 1, 35)
+)
+tmnxQosV24v0Compliance.setObjects(
+      *(("TIMETRA-QOS-MIB", "tIngressClassPlcyPrecGroup"),
+        ("TIMETRA-QOS-MIB", "tDscpFCMapPrecGroup"),
+        ("TIMETRA-QOS-MIB", "tAdvCfgPolicyV24v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrQDlyTimeV24v0Grp"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrQDlyPrcntV24v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosSapEgrHwAggShapV24v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosVlanQosQAllocV24v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxQosV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 16, 1, 36)
+)
+tmnxQosV25v0Compliance.setObjects(
+      *(("TIMETRA-QOS-MIB", "tmnxQosGlobalGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosDSCPGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFCGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSlopeGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIpv6FilterR4r0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFrameBasedV6v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosQGrpFCGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicerV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosQGrpV8v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosBurstLimitGroup"),
+        ("TIMETRA-QOS-MIB", "tQosFCQGrpFC8v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosMacCritVidFltrV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV9v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicyV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueGrpPolcrV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgrReClassifyV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV10v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkV11v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxSapEgressFCV11v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSchedulerRateV11v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrFCDot1pDEV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIPCritExtV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosParentLocV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosParentLocEsmV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngIPMacCritV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPlcyV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrPlcrV12v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkIngFCV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosAdvCfgPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFlowBasedRulesV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosMatchListV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosIngressPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrIPCritV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortSchedPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortSchPlcyV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgrIpCritGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSchedulerV13v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgressQueuePlcrGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxSapIngressIPCritGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgrQGrpGroup"),
+        ("TIMETRA-QOS-MIB", "tQosSapIngEgrV14v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxSlopePolicyV14v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueDropTailGroup"),
+        ("TIMETRA-QOS-MIB", "tHsSchedPolicyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsSchedPolicySchedClassGroup"),
+        ("TIMETRA-QOS-MIB", "tHsSchedPolicyGroupGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPoolPolicyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPoolPolicyRootPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPoolPolicyMidPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPortPoolPolicyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPortPoolClassPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsPortPoolAltClassPoolGroup"),
+        ("TIMETRA-QOS-MIB", "tHsAttachPlcyGroup"),
+        ("TIMETRA-QOS-MIB", "tHsAttachPlcyWrrGrpGroup"),
+        ("TIMETRA-QOS-MIB", "tHsAttachPlcyQueueGroup"),
+        ("TIMETRA-QOS-MIB", "tNetworkQueuePolicyHsGroup"),
+        ("TIMETRA-QOS-MIB", "tSapEgressHsGroup"),
+        ("TIMETRA-QOS-MIB", "tQosEgrQGroupHsGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueRateGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPostPolicerMappingGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQGrpRedirectListGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosTimeStampGroup"),
+        ("TIMETRA-QOS-MIB", "tmnxQosEgressV15v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicerV15v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosNetworkPlcyNameV15v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosNetworkEgrPlcyV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosMdAutoIdV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueFIRRateV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQCIRNonProfV16v0Group"),
+        ("TIMETRA-QOS-MIB", "tNetworkIngIpPrefixListV16v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosFpResourcePolicyV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosFourWredSlopesV19v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPortSchedHQoSAlgoV19v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPercentRateV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosSapIpPrefixListV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgressV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngressV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosNetworkV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosQueueObjV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosSharedQueueV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPortListV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosVlanQosPlcyPIRV20Group"),
+        ("TIMETRA-QOS-MIB", "tQosSapIngIPCriteriaV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapIngPlcrCntV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tNetIngressPlcyGroupV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPktByteOffsetV20Group"),
+        ("TIMETRA-QOS-MIB", "tQosNetEgrPortListV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tQueueMgmtPlcyV20v0Group"),
+        ("TIMETRA-QOS-MIB", "tNtwkLagAggrStatsV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosObjV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosIngClassPlcyFcMapV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosEgrRmrkPlcyFcMapV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosIngClassPlcyV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosFcDot1pMapInOutV21v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosNetIngPortListV21v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosSapEgressQV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortSched23v0Group"),
+        ("TIMETRA-QOS-MIB", "tSapEgressInDot1PEgRemrk23v0Grp"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPortQosPlcyV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tNetworkEgrIpPrefixListV23v0Grp"),
+        ("TIMETRA-QOS-MIB", "tQosSapEgrHwAggShapV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosFlowBasedRulesV23v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosAdvConfigV25v0Group"),
+        ("TIMETRA-QOS-MIB", "tQosPortSchedPlcyModeV25v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicersV25v0Group"),
+        ("TIMETRA-QOS-MIB", "tmnxQosPolicersV25v7Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxQosV25v0Compliance.setStatus(
         "current"
     )
 
@@ -35834,6 +35078,9 @@ mibBuilder.exportSymbols(
        "tQosFpResPlcyV21v0Compliances": tQosFpResPlcyV21v0Compliances,
        "tmnxQosV21v0Compliance": tmnxQosV21v0Compliance,
        "tmnxQosV22v0Compliance": tmnxQosV22v0Compliance,
+       "tmnxQosV23v0Compliance": tmnxQosV23v0Compliance,
+       "tmnxQosV24v0Compliance": tmnxQosV24v0Compliance,
+       "tmnxQosV25v0Compliance": tmnxQosV25v0Compliance,
        "tmnxQosGroups": tmnxQosGroups,
        "tmnxQosGlobalGroup": tmnxQosGlobalGroup,
        "tmnxQosDSCPGroup": tmnxQosDSCPGroup,
@@ -35883,8 +35130,6 @@ mibBuilder.exportSymbols(
        "tmnxQosSapIngressV9v0Group": tmnxQosSapIngressV9v0Group,
        "tmnxQosPolicerV9v0Group": tmnxQosPolicerV9v0Group,
        "tmnxQosAtmTdpV9v0Group": tmnxQosAtmTdpV9v0Group,
-       "tmnxQosHsmdaV9v0Group": tmnxQosHsmdaV9v0Group,
-       "tmnxQosNetworkV9v0Group": tmnxQosNetworkV9v0Group,
        "tmnxQosNamedPoolV9v0Group": tmnxQosNamedPoolV9v0Group,
        "tmnxQosHsmdaObsoletedV9v0Group": tmnxQosHsmdaObsoletedV9v0Group,
        "tmnxQosPolicyV10v0Group": tmnxQosPolicyV10v0Group,
@@ -35892,13 +35137,11 @@ mibBuilder.exportSymbols(
        "tmnxQosEgrReClassifyV10v0Group": tmnxQosEgrReClassifyV10v0Group,
        "tmnxQosPolicerSlopeGroup": tmnxQosPolicerSlopeGroup,
        "tmnxQosAdvConfigV10v0Group": tmnxQosAdvConfigV10v0Group,
-       "tmnxQosHsmdaV10v0Group": tmnxQosHsmdaV10v0Group,
        "tmnxQosNetworkV10v0Group": tmnxQosNetworkV10v0Group,
        "tmnxQosNetworkV11v0Group": tmnxQosNetworkV11v0Group,
        "tmnxQosSapIngressV10v0Group": tmnxQosSapIngressV10v0Group,
        "tmnxQosHsmdaObsoletedV10v0Group": tmnxQosHsmdaObsoletedV10v0Group,
        "tmnxSapEgressFCV11v0Group": tmnxSapEgressFCV11v0Group,
-       "tmnxQosHsmdaV11v0Group": tmnxQosHsmdaV11v0Group,
        "tmnxQosSchedulerRateV11v0Group": tmnxQosSchedulerRateV11v0Group,
        "tmnxQosSchedulerV11v0Group": tmnxQosSchedulerV11v0Group,
        "tmnxQosSchedObsoletedV11v0Group": tmnxQosSchedObsoletedV11v0Group,
@@ -36013,7 +35256,6 @@ mibBuilder.exportSymbols(
        "tQueueMgmtPlcyV20v0Group": tQueueMgmtPlcyV20v0Group,
        "tQosFpV21v0Group": tQosFpV21v0Group,
        "tNtwkLagAggrStatsV21v0Group": tNtwkLagAggrStatsV21v0Group,
-       "tQosObsoleteObjV21v0Group": tQosObsoleteObjV21v0Group,
        "tQosObjV21v0Group": tQosObjV21v0Group,
        "tQosIngClassPlcyFcMapV21v0Group": tQosIngClassPlcyFcMapV21v0Group,
        "tQosEgrRmrkPlcyFcMapV21v0Group": tQosEgrRmrkPlcyFcMapV21v0Group,
@@ -36022,6 +35264,29 @@ mibBuilder.exportSymbols(
        "tQosNetIngPortListV21v0Group": tQosNetIngPortListV21v0Group,
        "tQosSapIngHqosPol22v0Group": tQosSapIngHqosPol22v0Group,
        "tQosEnhancedSched22v0Group": tQosEnhancedSched22v0Group,
+       "tmnxQosFlowBasedRulesV22v0Group": tmnxQosFlowBasedRulesV22v0Group,
+       "tmnxSharedPolicersV22v0Group": tmnxSharedPolicersV22v0Group,
+       "tQosFpV22v0Group": tQosFpV22v0Group,
+       "tmnxQosSapEgressQV23v0Group": tmnxQosSapEgressQV23v0Group,
+       "tmnxQosPortSched23v0Group": tmnxQosPortSched23v0Group,
+       "tQosObsoleteObjV23v0Group": tQosObsoleteObjV23v0Group,
+       "tSapEgressInDot1PEgRemrk23v0Grp": tSapEgressInDot1PEgRemrk23v0Grp,
+       "tmnxQosPortQosPlcyV23v0Group": tmnxQosPortQosPlcyV23v0Group,
+       "tNetworkEgrIpPrefixListV23v0Grp": tNetworkEgrIpPrefixListV23v0Grp,
+       "tQosSapEgrHwAggShapV23v0Group": tQosSapEgrHwAggShapV23v0Group,
+       "tmnxQosFlowBasedRulesV23v0Group": tmnxQosFlowBasedRulesV23v0Group,
+       "tIngressClassPlcyPrecGroup": tIngressClassPlcyPrecGroup,
+       "tDscpFCMapPrecGroup": tDscpFCMapPrecGroup,
+       "tAdvCfgPolicyV24v0Group": tAdvCfgPolicyV24v0Group,
+       "tmnxQosSapEgrQDlyTimeV24v0Grp": tmnxQosSapEgrQDlyTimeV24v0Grp,
+       "tmnxQosSapEgrQDlyPrcntV24v0Grp": tmnxQosSapEgrQDlyPrcntV24v0Grp,
+       "tQosSapEgrHwAggShapV24v0Group": tQosSapEgrHwAggShapV24v0Group,
+       "tQosVlanQosQAllocV24v0Group": tQosVlanQosQAllocV24v0Group,
+       "tQosObsoleteObjV25v0Group": tQosObsoleteObjV25v0Group,
+       "tmnxQosAdvConfigV25v0Group": tmnxQosAdvConfigV25v0Group,
+       "tQosPortSchedPlcyModeV25v0Group": tQosPortSchedPlcyModeV25v0Group,
+       "tmnxQosPolicersV25v0Group": tmnxQosPolicersV25v0Group,
+       "tmnxQosPolicersV25v7Group": tmnxQosPolicersV25v7Group,
        "tQosObjects": tQosObjects,
        "tDSCPObjects": tDSCPObjects,
        "tDSCPNameTable": tDSCPNameTable,
@@ -36302,6 +35567,7 @@ mibBuilder.exportSymbols(
        "tSapIngPolicerSchedWeight": tSapIngPolicerSchedWeight,
        "tSapIngPolicerSchedCIRLevel": tSapIngPolicerSchedCIRLevel,
        "tSapIngPolicerSchedCIRWeight": tSapIngPolicerSchedCIRWeight,
+       "tSapIngPolicerAlgoType": tSapIngPolicerAlgoType,
        "tSapIngPolicyNameTable": tSapIngPolicyNameTable,
        "tSapIngPolicyNameEntry": tSapIngPolicyNameEntry,
        "tSapIngPolicyNameId": tSapIngPolicyNameId,
@@ -36332,10 +35598,7 @@ mibBuilder.exportSymbols(
        "tSapEgressScope": tSapEgressScope,
        "tSapEgressDescription": tSapEgressDescription,
        "tSapEgressLastChanged": tSapEgressLastChanged,
-       "tSapEgressHsmdaPacketOffset": tSapEgressHsmdaPacketOffset,
        "tSapEgressMatchCriteria": tSapEgressMatchCriteria,
-       "tSapEgressHsmdaWrrPolicy": tSapEgressHsmdaWrrPolicy,
-       "tSapEgressHsmdaLowBrstMaxCls": tSapEgressHsmdaLowBrstMaxCls,
        "tSapEgressPolicyName": tSapEgressPolicyName,
        "tSapEgressEthernetCtag": tSapEgressEthernetCtag,
        "tSapEgressParentLocation": tSapEgressParentLocation,
@@ -36343,6 +35606,8 @@ mibBuilder.exportSymbols(
        "tSapEgressIsPolicyActive": tSapEgressIsPolicyActive,
        "tSapEgressPostPlcrMappingPlcy": tSapEgressPostPlcrMappingPlcy,
        "tSapEgressHsAttachPlcy": tSapEgressHsAttachPlcy,
+       "tSapEgressUsePolResMrkDot1pInner": tSapEgressUsePolResMrkDot1pInner,
+       "tSapEgressHwAggShapQsQSetSize": tSapEgressHwAggShapQsQSetSize,
        "tSapEgressQueueTable": tSapEgressQueueTable,
        "tSapEgressQueueEntry": tSapEgressQueueEntry,
        "tSapEgressQueueIndex": tSapEgressQueueIndex,
@@ -36397,6 +35662,13 @@ mibBuilder.exportSymbols(
        "tSapEgressQueueAggShaperWeight": tSapEgressQueueAggShaperWeight,
        "tSapEgressQueueSchedClass": tSapEgressQueueSchedClass,
        "tSapEgressQueueFirBurstLimit": tSapEgressQueueFirBurstLimit,
+       "tSapEgressQueueDescr": tSapEgressQueueDescr,
+       "tSapEgressQueueMaxDataTransmit": tSapEgressQueueMaxDataTransmit,
+       "tSapEgressQueueCBSDelayTime": tSapEgressQueueCBSDelayTime,
+       "tSapEgressQueueMBSDelayTime": tSapEgressQueueMBSDelayTime,
+       "tSapEgressQueueCBSDelayPercent": tSapEgressQueueCBSDelayPercent,
+       "tSapEgressQueueMBSDelayPercent": tSapEgressQueueMBSDelayPercent,
+       "tSapEgressQueueBurstLimDelayTime": tSapEgressQueueBurstLimDelayTime,
        "tSapEgressFCTable": tSapEgressFCTable,
        "tSapEgressFCEntry": tSapEgressFCEntry,
        "tSapEgressFCName": tSapEgressFCName,
@@ -36404,7 +35676,6 @@ mibBuilder.exportSymbols(
        "tSapEgressFCQueue": tSapEgressFCQueue,
        "tSapEgressFCDot1PValue": tSapEgressFCDot1PValue,
        "tSapEgressFCLastChanged": tSapEgressFCLastChanged,
-       "tSapEgressFCHsmdaQueue": tSapEgressFCHsmdaQueue,
        "tSapEgressFCDot1PHsmdaProfile": tSapEgressFCDot1PHsmdaProfile,
        "tSapEgressFCDot1PInProfile": tSapEgressFCDot1PInProfile,
        "tSapEgressFCDot1POutProfile": tSapEgressFCDot1POutProfile,
@@ -36419,7 +35690,6 @@ mibBuilder.exportSymbols(
        "tSapEgressFCQGrpFC": tSapEgressFCQGrpFC,
        "tSapEgressFCQGrpInstanceId": tSapEgressFCQGrpInstanceId,
        "tSapEgressFCPortQGrpQueue": tSapEgressFCPortQGrpQueue,
-       "tSapEgressFCHsmdaQueuePortQGrpQ": tSapEgressFCHsmdaQueuePortQGrpQ,
        "tSapEgressFCOuterTagDot1PInProf": tSapEgressFCOuterTagDot1PInProf,
        "tSapEgressFCOuterTagDot1POutProf": tSapEgressFCOuterTagDot1POutProf,
        "tSapEgressFCInnerTagDot1PInProf": tSapEgressFCInnerTagDot1PInProf,
@@ -36432,25 +35702,17 @@ mibBuilder.exportSymbols(
        "tSapEgressFCOuterDot1PExcdProf": tSapEgressFCOuterDot1PExcdProf,
        "tSapEgressFCExceedProfDscp": tSapEgressFCExceedProfDscp,
        "tSapEgressFCExceedProfPrec": tSapEgressFCExceedProfPrec,
+       "tSapEgressFCInnerTagDot1PExcdPrf": tSapEgressFCInnerTagDot1PExcdPrf,
        "tSapEgressHsmdaQueueTable": tSapEgressHsmdaQueueTable,
        "tSapEgressHsmdaQueueEntry": tSapEgressHsmdaQueueEntry,
        "tSapEgressHsmdaQueue": tSapEgressHsmdaQueue,
-       "tSapEgressHsmdaQueueRowStatus": tSapEgressHsmdaQueueRowStatus,
        "tSapEgressHsmdaQueueCIRAdaptn": tSapEgressHsmdaQueueCIRAdaptn,
-       "tSapEgressHsmdaQueuePIRAdaptn": tSapEgressHsmdaQueuePIRAdaptn,
-       "tSapEgressHsmdaQueueAdminPIR": tSapEgressHsmdaQueueAdminPIR,
        "tSapEgressHsmdaQueueAdminCIR": tSapEgressHsmdaQueueAdminCIR,
-       "tSapEgressHsmdaQueueSlopePolicy": tSapEgressHsmdaQueueSlopePolicy,
-       "tSapEgressHsmdaQueueLastChanged": tSapEgressHsmdaQueueLastChanged,
-       "tSapEgressHsmdaQueueWrrWeight": tSapEgressHsmdaQueueWrrWeight,
-       "tSapEgressHsmdaQueueMBS": tSapEgressHsmdaQueueMBS,
-       "tSapEgressHsmdaQueueBurstLimit": tSapEgressHsmdaQueueBurstLimit,
        "tSapEgressDSCPTable": tSapEgressDSCPTable,
        "tSapEgressDSCPEntry": tSapEgressDSCPEntry,
        "tSapEgressDSCP": tSapEgressDSCP,
        "tSapEgressDSCPRowStatus": tSapEgressDSCPRowStatus,
        "tSapEgressDSCPLastChanged": tSapEgressDSCPLastChanged,
-       "tSapEgressDSCPHsmdaCntrOverride": tSapEgressDSCPHsmdaCntrOverride,
        "tSapEgressDSCPfc": tSapEgressDSCPfc,
        "tSapEgressDSCPprofile": tSapEgressDSCPprofile,
        "tSapEgressPrecTable": tSapEgressPrecTable,
@@ -36458,7 +35720,6 @@ mibBuilder.exportSymbols(
        "tSapEgressPrecValue": tSapEgressPrecValue,
        "tSapEgressPrecRowStatus": tSapEgressPrecRowStatus,
        "tSapEgressPrecLastChanged": tSapEgressPrecLastChanged,
-       "tSapEgressPrecHsmdaCntrOverride": tSapEgressPrecHsmdaCntrOverride,
        "tSapEgressPrecFC": tSapEgressPrecFC,
        "tSapEgressPrecProfile": tSapEgressPrecProfile,
        "tSapEgrIPCritTable": tSapEgrIPCritTable,
@@ -36468,7 +35729,6 @@ mibBuilder.exportSymbols(
        "tSapEgrIPCritRowStatus": tSapEgrIPCritRowStatus,
        "tSapEgrIPCritLastChanged": tSapEgrIPCritLastChanged,
        "tSapEgrIPCritDescription": tSapEgrIPCritDescription,
-       "tSapEgrIPCritActionHsmdaCntrOvr": tSapEgrIPCritActionHsmdaCntrOvr,
        "tSapEgrIPCritSourceIpAddrType": tSapEgrIPCritSourceIpAddrType,
        "tSapEgrIPCritSourceIpAddr": tSapEgrIPCritSourceIpAddr,
        "tSapEgrIPCritSourceIpMask": tSapEgrIPCritSourceIpMask,
@@ -36494,6 +35754,8 @@ mibBuilder.exportSymbols(
        "tSapEgrIPCritActionPortQGrpQueue": tSapEgrIPCritActionPortQGrpQueue,
        "tSapEgrIPCritActionQueue": tSapEgrIPCritActionQueue,
        "tSapEgrIPCritActionPolicerUseFCQ": tSapEgrIPCritActionPolicerUseFCQ,
+       "tSapEgrIPCritQFI": tSapEgrIPCritQFI,
+       "tSapEgrIPCritRQI": tSapEgrIPCritRQI,
        "tSapEgrPolicerTable": tSapEgrPolicerTable,
        "tSapEgrPolicerEntry": tSapEgrPolicerEntry,
        "tSapEgrPolicerId": tSapEgrPolicerId,
@@ -36567,6 +35829,22 @@ mibBuilder.exportSymbols(
        "tSapEgrDynamicPolicerLevel": tSapEgrDynamicPolicerLevel,
        "tSapEgrDynamicPolicerWeight": tSapEgrDynamicPolicerWeight,
        "tSapEgrDynamicPolicerStatMode": tSapEgrDynamicPolicerStatMode,
+       "tSapEgrDynamicQueueInsertPoint": tSapEgrDynamicQueueInsertPoint,
+       "tSapEgrDynamicQueueInsertSize": tSapEgrDynamicQueueInsertSize,
+       "tSapEgrDynamicQueueNbrInsert": tSapEgrDynamicQueueNbrInsert,
+       "tSapEgrDynamicQueuePktOffset": tSapEgrDynamicQueuePktOffset,
+       "tSapEgrDynamicQueueMBS": tSapEgrDynamicQueueMBS,
+       "tSapEgrDynamicQueueCBS": tSapEgrDynamicQueueCBS,
+       "tSapEgrDynamicQueueParent": tSapEgrDynamicQueueParent,
+       "tSapEgrDynamicQueueLevel": tSapEgrDynamicQueueLevel,
+       "tSapEgrDynamicQueueWeight": tSapEgrDynamicQueueWeight,
+       "tSapEgrDynamicQueueCIRLevel": tSapEgrDynamicQueueCIRLevel,
+       "tSapEgrDynamicQueueCIRWeight": tSapEgrDynamicQueueCIRWeight,
+       "tSapEgrDynamicQueueUsePortParent": tSapEgrDynamicQueueUsePortParent,
+       "tSapEgrDynamicQueuePortLvl": tSapEgrDynamicQueuePortLvl,
+       "tSapEgrDynamicQueuePortWght": tSapEgrDynamicQueuePortWght,
+       "tSapEgrDynamicQueuePortCIRLvl": tSapEgrDynamicQueuePortCIRLvl,
+       "tSapEgrDynamicQueuePortCIRWght": tSapEgrDynamicQueuePortCIRWght,
        "tSapEgressHsWrrGrpTable": tSapEgressHsWrrGrpTable,
        "tSapEgressHsWrrGrpEntry": tSapEgressHsWrrGrpEntry,
        "tSapEgressHsWrrGrpId": tSapEgressHsWrrGrpId,
@@ -36715,6 +35993,8 @@ mibBuilder.exportSymbols(
        "tNetworkEgrIPCritIcmpType": tNetworkEgrIPCritIcmpType,
        "tNetworkEgrIPCritSrcPortList": tNetworkEgrIPCritSrcPortList,
        "tNetworkEgrIPCritDstPortList": tNetworkEgrIPCritDstPortList,
+       "tNetworkEgrIPCritSrcIpPrefixList": tNetworkEgrIPCritSrcIpPrefixList,
+       "tNetworkEgrIPCritDstIpPrefixList": tNetworkEgrIPCritDstIpPrefixList,
        "tNetIngPlcyTable": tNetIngPlcyTable,
        "tNetIngPlcyEntry": tNetIngPlcyEntry,
        "tNetIngPlcyName": tNetIngPlcyName,
@@ -36745,6 +36025,7 @@ mibBuilder.exportSymbols(
        "tNetIngPlcyPolicerCIRAdaptation": tNetIngPlcyPolicerCIRAdaptation,
        "tNetIngPlcyPolicerPIRAdaptation": tNetIngPlcyPolicerPIRAdaptation,
        "tNetIngPlcyPolicerLastChanged": tNetIngPlcyPolicerLastChanged,
+       "tNetIngPolicerAlgoType": tNetIngPolicerAlgoType,
        "tNetworkQueueObjects": tNetworkQueueObjects,
        "tNetworkQueuePolicyTable": tNetworkQueuePolicyTable,
        "tNetworkQueuePolicyEntry": tNetworkQueuePolicyEntry,
@@ -36752,8 +36033,6 @@ mibBuilder.exportSymbols(
        "tNetworkQueuePolicyRowStatus": tNetworkQueuePolicyRowStatus,
        "tNetworkQueuePolicyDescription": tNetworkQueuePolicyDescription,
        "tNetworkQueuePolicyLastChanged": tNetworkQueuePolicyLastChanged,
-       "tNetworkQueuePolicyEHWrrPlcy": tNetworkQueuePolicyEHWrrPlcy,
-       "tNetworkQueuePolicyEHPktBOffst": tNetworkQueuePolicyEHPktBOffst,
        "tNetworkQueuePolicyHsAttachPlcy": tNetworkQueuePolicyHsAttachPlcy,
        "tNetworkQueueTable": tNetworkQueueTable,
        "tNetworkQueueEntry": tNetworkQueueEntry,
@@ -36796,17 +36075,6 @@ mibBuilder.exportSymbols(
        "tNetworkQueueFC": tNetworkQueueFC,
        "tNetworkQueueFCMCast": tNetworkQueueFCMCast,
        "tNetworkQueueFCLastChanged": tNetworkQueueFCLastChanged,
-       "tNetworkQueueFCEgrHsmdaQueue": tNetworkQueueFCEgrHsmdaQueue,
-       "tNetworkEgrHsmdaQueueTable": tNetworkEgrHsmdaQueueTable,
-       "tNetworkEgrHsmdaQueueEntry": tNetworkEgrHsmdaQueueEntry,
-       "tNetworkEgrHsmdaQueue": tNetworkEgrHsmdaQueue,
-       "tNetworkEgrHsmdaQueuePIRPercent": tNetworkEgrHsmdaQueuePIRPercent,
-       "tNetworkEgrHsmdaQueuePIRAdaptn": tNetworkEgrHsmdaQueuePIRAdaptn,
-       "tNetworkEgrHsmdaQueueWrrWeight": tNetworkEgrHsmdaQueueWrrWeight,
-       "tNetworkEgrHsmdaQueueMBS": tNetworkEgrHsmdaQueueMBS,
-       "tNetworkEgrHsmdaQueueSlopePolicy": tNetworkEgrHsmdaQueueSlopePolicy,
-       "tNetworkEgrHsmdaQueueLastChanged": tNetworkEgrHsmdaQueueLastChanged,
-       "tNetworkEgrHsmdaQueueBurstLimit": tNetworkEgrHsmdaQueueBurstLimit,
        "tNetworkQueueHsWrrGrpTable": tNetworkQueueHsWrrGrpTable,
        "tNetworkQueueHsWrrGrpEntry": tNetworkQueueHsWrrGrpEntry,
        "tNetworkQueueHsWrrGrpId": tNetworkQueueHsWrrGrpId,
@@ -36896,11 +36164,9 @@ mibBuilder.exportSymbols(
        "tQosEgrQGroupRowStatus": tQosEgrQGroupRowStatus,
        "tQosEgrQGroupLastChanged": tQosEgrQGroupLastChanged,
        "tQosEgrQGroupDescr": tQosEgrQGroupDescr,
-       "tQosEgrQGroupHsmdaPacketOffset": tQosEgrQGroupHsmdaPacketOffset,
-       "tQosEgrQGroupHsmdaWrrPolicy": tQosEgrQGroupHsmdaWrrPolicy,
-       "tQosEgrQGroupHsmdaLowBrstMaxCls": tQosEgrQGroupHsmdaLowBrstMaxCls,
        "tQosEgrQGroupQsHqosManageable": tQosEgrQGroupQsHqosManageable,
        "tQosEgrQGroupHsAttachPlcy": tQosEgrQGroupHsAttachPlcy,
+       "tQosEgrQGrpHwAggShapQsQSetSize": tQosEgrQGrpHwAggShapQsQSetSize,
        "tQosEgrQueueTable": tQosEgrQueueTable,
        "tQosEgrQueueEntry": tQosEgrQueueEntry,
        "tQosEgrQueue": tQosEgrQueue,
@@ -36947,23 +36213,15 @@ mibBuilder.exportSymbols(
        "tQosEgrQueueHsClassWeight": tQosEgrQueueHsClassWeight,
        "tQosEgrQueueHsWredQSlopePlcy": tQosEgrQueueHsWredQSlopePlcy,
        "tQosEgrQueueHsAltClssPool": tQosEgrQueueHsAltClssPool,
+       "tQosEgrQueueAggShaperWeight": tQosEgrQueueAggShaperWeight,
+       "tQosEgrQueueSchedClass": tQosEgrQueueSchedClass,
+       "tQosEgrQueueFirBurstLimit": tQosEgrQueueFirBurstLimit,
        "tQosEgrQGroupFCTable": tQosEgrQGroupFCTable,
        "tQosEgrQGroupFCEntry": tQosEgrQGroupFCEntry,
        "tQosEgrQGroupFCName": tQosEgrQGroupFCName,
        "tQosEgrQGroupFCRowStatus": tQosEgrQGroupFCRowStatus,
        "tQosEgrQGroupFCLastChanged": tQosEgrQGroupFCLastChanged,
        "tQosEgrQGroupFCQueue": tQosEgrQGroupFCQueue,
-       "tQosEgrHsmdaQueueTable": tQosEgrHsmdaQueueTable,
-       "tQosEgrHsmdaQueueEntry": tQosEgrHsmdaQueueEntry,
-       "tQosEgrHsmdaQueue": tQosEgrHsmdaQueue,
-       "tQosEgrHsmdaQueueRowStatus": tQosEgrHsmdaQueueRowStatus,
-       "tQosEgrHsmdaQueueLastChanged": tQosEgrHsmdaQueueLastChanged,
-       "tQosEgrHsmdaQueuePIRAdaptn": tQosEgrHsmdaQueuePIRAdaptn,
-       "tQosEgrHsmdaQueueAdminPIR": tQosEgrHsmdaQueueAdminPIR,
-       "tQosEgrHsmdaQueueSlopePolicy": tQosEgrHsmdaQueueSlopePolicy,
-       "tQosEgrHsmdaQueueWrrWeight": tQosEgrHsmdaQueueWrrWeight,
-       "tQosEgrHsmdaQueueMBS": tQosEgrHsmdaQueueMBS,
-       "tQosEgrHsmdaQueueBurstLimit": tQosEgrHsmdaQueueBurstLimit,
        "tQosEgrQGroupHsWrrGrpTable": tQosEgrQGroupHsWrrGrpTable,
        "tQosEgrQGroupHsWrrGrpEntry": tQosEgrQGroupHsWrrGrpEntry,
        "tQosEgrQGroupHsWrrGrpId": tQosEgrQGroupHsWrrGrpId,
@@ -36973,6 +36231,11 @@ mibBuilder.exportSymbols(
        "tQosEgrQGroupHsWrrGrpRatePercent": tQosEgrQGroupHsWrrGrpRatePercent,
        "tQosEgrQGroupHsWrrGrpPIRAdaption": tQosEgrQGroupHsWrrGrpPIRAdaption,
        "tQosEgrQGroupHsWrrGrpClassWeight": tQosEgrQGroupHsWrrGrpClassWeight,
+       "tQosEgrQueueSchdClssElvTable": tQosEgrQueueSchdClssElvTable,
+       "tQosEgrQueueSchdClssElvEntry": tQosEgrQueueSchdClssElvEntry,
+       "tQosEgrQueueSchdClssElvRowStatus": tQosEgrQueueSchdClssElvRowStatus,
+       "tQosEgrQSchdClssElvLastChanged": tQosEgrQSchdClssElvLastChanged,
+       "tQosEgrQueueSchdClssElvWght": tQosEgrQueueSchdClssElvWght,
        "tSlopeObjects": tSlopeObjects,
        "tSlopePolicyTable": tSlopePolicyTable,
        "tSlopePolicyEntry": tSlopePolicyEntry,
@@ -36997,21 +36260,6 @@ mibBuilder.exportSymbols(
        "tSlopeHighPlusStartAverage": tSlopeHighPlusStartAverage,
        "tSlopeHighPlusMaxAverage": tSlopeHighPlusMaxAverage,
        "tSlopeHighPlusMaxProbability": tSlopeHighPlusMaxProbability,
-       "tHsmdaSlopePolicyTable": tHsmdaSlopePolicyTable,
-       "tHsmdaSlopePolicyEntry": tHsmdaSlopePolicyEntry,
-       "tHsmdaSlopePolicyName": tHsmdaSlopePolicyName,
-       "tHsmdaSlopePolicyRowStatus": tHsmdaSlopePolicyRowStatus,
-       "tHsmdaSlopeLastChanged": tHsmdaSlopeLastChanged,
-       "tHsmdaSlopeDescription": tHsmdaSlopeDescription,
-       "tHsmdaSlopeQueueMbs": tHsmdaSlopeQueueMbs,
-       "tHsmdaSlopeHiAdminStatus": tHsmdaSlopeHiAdminStatus,
-       "tHsmdaSlopeHiStartDepth": tHsmdaSlopeHiStartDepth,
-       "tHsmdaSlopeHiMaxDepth": tHsmdaSlopeHiMaxDepth,
-       "tHsmdaSlopeHiMaxProbability": tHsmdaSlopeHiMaxProbability,
-       "tHsmdaSlopeLoAdminStatus": tHsmdaSlopeLoAdminStatus,
-       "tHsmdaSlopeLoStartDepth": tHsmdaSlopeLoStartDepth,
-       "tHsmdaSlopeLoMaxDepth": tHsmdaSlopeLoMaxDepth,
-       "tHsmdaSlopeLoMaxProbability": tHsmdaSlopeLoMaxProbability,
        "tSchedulerObjects": tSchedulerObjects,
        "tSchedulerPolicyTable": tSchedulerPolicyTable,
        "tSchedulerPolicyEntry": tSchedulerPolicyEntry,
@@ -37107,50 +36355,7 @@ mibBuilder.exportSymbols(
        "tPortSchedPlcyMaxRate": tPortSchedPlcyMaxRate,
        "tPortSchedPlcyMonThresholdPrcnt": tPortSchedPlcyMonThresholdPrcnt,
        "tPortSchedPlcyHQosAlgorithm": tPortSchedPlcyHQosAlgorithm,
-       "tHsmdaSchedulerPlcyTable": tHsmdaSchedulerPlcyTable,
-       "tHsmdaSchedulerPlcyEntry": tHsmdaSchedulerPlcyEntry,
-       "tHsmdaSchedulerPlcyName": tHsmdaSchedulerPlcyName,
-       "tHsmdaSchedulerPlcyRowStatus": tHsmdaSchedulerPlcyRowStatus,
-       "tHsmdaSchedulerPlcyDescription": tHsmdaSchedulerPlcyDescription,
-       "tHsmdaSchedulerPlcyMaxRate": tHsmdaSchedulerPlcyMaxRate,
-       "tHsmdaSchedulerPlcyLvl1Rate": tHsmdaSchedulerPlcyLvl1Rate,
-       "tHsmdaSchedulerPlcyLvl1GrpId": tHsmdaSchedulerPlcyLvl1GrpId,
-       "tHsmdaSchedulerPlcyLvl1WgtInGrp": tHsmdaSchedulerPlcyLvl1WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl2Rate": tHsmdaSchedulerPlcyLvl2Rate,
-       "tHsmdaSchedulerPlcyLvl2GrpId": tHsmdaSchedulerPlcyLvl2GrpId,
-       "tHsmdaSchedulerPlcyLvl2WgtInGrp": tHsmdaSchedulerPlcyLvl2WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl3Rate": tHsmdaSchedulerPlcyLvl3Rate,
-       "tHsmdaSchedulerPlcyLvl3GrpId": tHsmdaSchedulerPlcyLvl3GrpId,
-       "tHsmdaSchedulerPlcyLvl3WgtInGrp": tHsmdaSchedulerPlcyLvl3WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl4Rate": tHsmdaSchedulerPlcyLvl4Rate,
-       "tHsmdaSchedulerPlcyLvl4GrpId": tHsmdaSchedulerPlcyLvl4GrpId,
-       "tHsmdaSchedulerPlcyLvl4WgtInGrp": tHsmdaSchedulerPlcyLvl4WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl5Rate": tHsmdaSchedulerPlcyLvl5Rate,
-       "tHsmdaSchedulerPlcyLvl5GrpId": tHsmdaSchedulerPlcyLvl5GrpId,
-       "tHsmdaSchedulerPlcyLvl5WgtInGrp": tHsmdaSchedulerPlcyLvl5WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl6Rate": tHsmdaSchedulerPlcyLvl6Rate,
-       "tHsmdaSchedulerPlcyLvl6GrpId": tHsmdaSchedulerPlcyLvl6GrpId,
-       "tHsmdaSchedulerPlcyLvl6WgtInGrp": tHsmdaSchedulerPlcyLvl6WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl7Rate": tHsmdaSchedulerPlcyLvl7Rate,
-       "tHsmdaSchedulerPlcyLvl7GrpId": tHsmdaSchedulerPlcyLvl7GrpId,
-       "tHsmdaSchedulerPlcyLvl7WgtInGrp": tHsmdaSchedulerPlcyLvl7WgtInGrp,
-       "tHsmdaSchedulerPlcyLvl8Rate": tHsmdaSchedulerPlcyLvl8Rate,
-       "tHsmdaSchedulerPlcyLvl8GrpId": tHsmdaSchedulerPlcyLvl8GrpId,
-       "tHsmdaSchedulerPlcyLvl8WgtInGrp": tHsmdaSchedulerPlcyLvl8WgtInGrp,
-       "tHsmdaSchedulerPlcyLastChanged": tHsmdaSchedulerPlcyLastChanged,
-       "tHsmdaSchedulerPlcyGrp1Rate": tHsmdaSchedulerPlcyGrp1Rate,
-       "tHsmdaSchedulerPlcyGrp2Rate": tHsmdaSchedulerPlcyGrp2Rate,
-       "tHsmdaSchedulerPlcyBrstLimit": tHsmdaSchedulerPlcyBrstLimit,
-       "tHsmdaSchedulerPlcyGrp1BrstLimit": tHsmdaSchedulerPlcyGrp1BrstLimit,
-       "tHsmdaSchedulerPlcyGrp2BrstLimit": tHsmdaSchedulerPlcyGrp2BrstLimit,
-       "tHsmdaSchedulerPlcyLvl1BrstLimit": tHsmdaSchedulerPlcyLvl1BrstLimit,
-       "tHsmdaSchedulerPlcyLvl2BrstLimit": tHsmdaSchedulerPlcyLvl2BrstLimit,
-       "tHsmdaSchedulerPlcyLvl3BrstLimit": tHsmdaSchedulerPlcyLvl3BrstLimit,
-       "tHsmdaSchedulerPlcyLvl4BrstLimit": tHsmdaSchedulerPlcyLvl4BrstLimit,
-       "tHsmdaSchedulerPlcyLvl5BrstLimit": tHsmdaSchedulerPlcyLvl5BrstLimit,
-       "tHsmdaSchedulerPlcyLvl6BrstLimit": tHsmdaSchedulerPlcyLvl6BrstLimit,
-       "tHsmdaSchedulerPlcyLvl7BrstLimit": tHsmdaSchedulerPlcyLvl7BrstLimit,
-       "tHsmdaSchedulerPlcyLvl8BrstLimit": tHsmdaSchedulerPlcyLvl8BrstLimit,
+       "tPortSchedPlcyAccountingMode": tPortSchedPlcyAccountingMode,
        "tPortSchPlcyGrpTable": tPortSchPlcyGrpTable,
        "tPortSchPlcyGrpEntry": tPortSchPlcyGrpEntry,
        "tPortSchPlcyGrpName": tPortSchPlcyGrpName,
@@ -37219,6 +36424,7 @@ mibBuilder.exportSymbols(
        "tPortQosPlcyQueuePIR": tPortQosPlcyQueuePIR,
        "tPortQosPlcyQueueCIR": tPortQosPlcyQueueCIR,
        "tPortQosPlcyQueuePirWeight": tPortQosPlcyQueuePirWeight,
+       "tPortQosPlcyQueueLowLatency": tPortQosPlcyQueueLowLatency,
        "tPortQosPlcyWrrWeightsTable": tPortQosPlcyWrrWeightsTable,
        "tPortQosPlcyWrrWeightsEntry": tPortQosPlcyWrrWeightsEntry,
        "tPortQosPlcyWrrWeightsId": tPortQosPlcyWrrWeightsId,
@@ -37260,6 +36466,7 @@ mibBuilder.exportSymbols(
        "tVlanQosPlcyLastChanged": tVlanQosPlcyLastChanged,
        "tVlanQosPlcyStatMode": tVlanQosPlcyStatMode,
        "tVlanQosPlcyPktByteOffset": tVlanQosPlcyPktByteOffset,
+       "tVlanQosPlcyQAllocMode": tVlanQosPlcyQAllocMode,
        "tVlanQosPlcyCirWtProfTable": tVlanQosPlcyCirWtProfTable,
        "tVlanQosPlcyCirWtProfEntry": tVlanQosPlcyCirWtProfEntry,
        "tVlanQosPlcyCirWtProfId": tVlanQosPlcyCirWtProfId,
@@ -37278,6 +36485,7 @@ mibBuilder.exportSymbols(
        "tVlanQosPlcyQueueCIR": tVlanQosPlcyQueueCIR,
        "tVlanQosPlcyQueuePirWeight": tVlanQosPlcyQueuePirWeight,
        "tVlanQosPlcyQueueSchedPriority": tVlanQosPlcyQueueSchedPriority,
+       "tVlanQosPlcyQueueLowLatency": tVlanQosPlcyQueueLowLatency,
        "tPortQosPlcyFCTable": tPortQosPlcyFCTable,
        "tPortQosPlcyFCEntry": tPortQosPlcyFCEntry,
        "tPortQosPlcyFCName": tPortQosPlcyFCName,
@@ -37288,6 +36496,20 @@ mibBuilder.exportSymbols(
        "tVlanQosPlcyFCName": tVlanQosPlcyFCName,
        "tVlanQosPlcyFCRowStatus": tVlanQosPlcyFCRowStatus,
        "tVlanQosPlcyFCQueue": tVlanQosPlcyFCQueue,
+       "tSharedPolicersPolicerTable": tSharedPolicersPolicerTable,
+       "tSharedPolicersPolicerEntry": tSharedPolicersPolicerEntry,
+       "tSharedPolicersPolicerName": tSharedPolicersPolicerName,
+       "tSharedPolicersPolicerRowStatus": tSharedPolicersPolicerRowStatus,
+       "tSharedPolicersPolicerMBS": tSharedPolicersPolicerMBS,
+       "tSharedPolicersPolicerCBS": tSharedPolicersPolicerCBS,
+       "tSharedPolicersPolicerPIRHi": tSharedPolicersPolicerPIRHi,
+       "tSharedPolicersPolicerPIRLo": tSharedPolicersPolicerPIRLo,
+       "tSharedPolicersPolicerCIRHi": tSharedPolicersPolicerCIRHi,
+       "tSharedPolicersPolicerCIRLo": tSharedPolicersPolicerCIRLo,
+       "tSharedPolicersPolicerLstChangd": tSharedPolicersPolicerLstChangd,
+       "tSharedPolicersStatMode": tSharedPolicersStatMode,
+       "tSharedPolicersAlgoType": tSharedPolicersAlgoType,
+       "tSharedPolicersAssociationType": tSharedPolicersAssociationType,
        "tQosTimeStampObjects": tQosTimeStampObjects,
        "tQosDomainLastChanged": tQosDomainLastChanged,
        "tDSCPNameTableLastChanged": tDSCPNameTableLastChanged,
@@ -37323,12 +36545,6 @@ mibBuilder.exportSymbols(
        "tSharedQueueTableLastChanged": tSharedQueueTableLastChanged,
        "tSharedQueueFCTableLastChanged": tSharedQueueFCTableLastChanged,
        "tSapIngressIPv6CriteriaTableLastChanged": tSapIngressIPv6CriteriaTableLastChanged,
-       "tSapIngrHsmdaQueueTblLastChngd": tSapIngrHsmdaQueueTblLastChngd,
-       "tSapEgrHsmdaQueueTblLastChngd": tSapEgrHsmdaQueueTblLastChngd,
-       "tHsmdaSchedPlcyTblLastChngd": tHsmdaSchedPlcyTblLastChngd,
-       "tHsmdaSchedPlcyGrpTblLastChngd": tHsmdaSchedPlcyGrpTblLastChngd,
-       "tHsmdaPoolPlcyTblLastChngd": tHsmdaPoolPlcyTblLastChngd,
-       "tHsmdaSlopePolicyTableLastChanged": tHsmdaSlopePolicyTableLastChanged,
        "tNamedPoolPolicyTableLastChanged": tNamedPoolPolicyTableLastChanged,
        "tQ1NamedPoolTableLastChanged": tQ1NamedPoolTableLastChanged,
        "tMcMlpppIngrProfTableLastChanged": tMcMlpppIngrProfTableLastChanged,
@@ -37349,8 +36565,6 @@ mibBuilder.exportSymbols(
        "tQosEgrQGroupFCTableLastChanged": tQosEgrQGroupFCTableLastChanged,
        "tPortSchPlcyGrpTblLastChgd": tPortSchPlcyGrpTblLastChgd,
        "tPortSchPlcyLvlGrpTblLastChgd": tPortSchPlcyLvlGrpTblLastChgd,
-       "tHsmdaWrrPolicyTblLastChgd": tHsmdaWrrPolicyTblLastChgd,
-       "tNetworkEgrHsmdaQueueTblLastChgd": tNetworkEgrHsmdaQueueTblLastChgd,
        "tSapIngPolicyNameTableLastChgd": tSapIngPolicyNameTableLastChgd,
        "tSapEgrPolicyNameTableLastChgd": tSapEgrPolicyNameTableLastChgd,
        "tQosIngPolicerTableLastChanged": tQosIngPolicerTableLastChanged,
@@ -37373,7 +36587,6 @@ mibBuilder.exportSymbols(
        "tSapEgressPrecTableLastChanged": tSapEgressPrecTableLastChanged,
        "tSapEgressDSCPTableLastChanged": tSapEgressDSCPTableLastChanged,
        "tSapEgrIPCritTableLastChanged": tSapEgrIPCritTableLastChanged,
-       "tSapEgressHsmdaQueueTblLstChngd": tSapEgressHsmdaQueueTblLstChngd,
        "tNetworkQueueHsWrrGrpTblLstChgd": tNetworkQueueHsWrrGrpTblLstChgd,
        "tSapEgressHsWrrGrpTblLstChgd": tSapEgressHsWrrGrpTblLstChgd,
        "tQosEgrQGroupHsWrrGrpTblLstChgd": tQosEgrQGroupHsWrrGrpTblLstChgd,
@@ -37399,6 +36612,8 @@ mibBuilder.exportSymbols(
        "tQosHwAggShapSchPlcyTblLastChgd": tQosHwAggShapSchPlcyTblLastChgd,
        "tQosHwAggShapedSchGrpTblLastChgd": tQosHwAggShapedSchGrpTblLastChgd,
        "tQosHwAggShapSchClassTblLastChgd": tQosHwAggShapSchClassTblLastChgd,
+       "tIngClassPlcyPrecTblLastChanged": tIngClassPlcyPrecTblLastChanged,
+       "tDscpFCMapPrecTblLastChanged": tDscpFCMapPrecTblLastChanged,
        "tAtmTdpObjects": tAtmTdpObjects,
        "tAtmTdpTable": tAtmTdpTable,
        "tAtmTdpEntry": tAtmTdpEntry,
@@ -37445,37 +36660,6 @@ mibBuilder.exportSymbols(
        "tQ1NamedPoolResvCbsAmbrAlrmMax": tQ1NamedPoolResvCbsAmbrAlrmMax,
        "tQ1NamedPoolAmbrAlrmThresh": tQ1NamedPoolAmbrAlrmThresh,
        "tQ1NamedPoolRedAlrmThresh": tQ1NamedPoolRedAlrmThresh,
-       "tHsmdaPoolPolicyTable": tHsmdaPoolPolicyTable,
-       "tHsmdaPoolPolicyEntry": tHsmdaPoolPolicyEntry,
-       "tHsmdaPoolPolicyName": tHsmdaPoolPolicyName,
-       "tHsmdaPoolPolicyRowStatus": tHsmdaPoolPolicyRowStatus,
-       "tHsmdaPoolLastChanged": tHsmdaPoolLastChanged,
-       "tHsmdaPoolDescription": tHsmdaPoolDescription,
-       "tHsmdaPoolSystemReserve": tHsmdaPoolSystemReserve,
-       "tHsmdaPoolRoot1AllocWeight": tHsmdaPoolRoot1AllocWeight,
-       "tHsmdaPoolRoot2AllocWeight": tHsmdaPoolRoot2AllocWeight,
-       "tHsmdaPoolRoot3AllocWeight": tHsmdaPoolRoot3AllocWeight,
-       "tHsmdaPoolRoot4AllocWeight": tHsmdaPoolRoot4AllocWeight,
-       "tHsmdaPoolRoot5AllocWeight": tHsmdaPoolRoot5AllocWeight,
-       "tHsmdaPoolRoot6AllocWeight": tHsmdaPoolRoot6AllocWeight,
-       "tHsmdaPoolRoot7AllocWeight": tHsmdaPoolRoot7AllocWeight,
-       "tHsmdaPoolRoot8AllocWeight": tHsmdaPoolRoot8AllocWeight,
-       "tHsmdaPoolClass1Parent": tHsmdaPoolClass1Parent,
-       "tHsmdaPoolClass1AllocPercent": tHsmdaPoolClass1AllocPercent,
-       "tHsmdaPoolClass2Parent": tHsmdaPoolClass2Parent,
-       "tHsmdaPoolClass2AllocPercent": tHsmdaPoolClass2AllocPercent,
-       "tHsmdaPoolClass3Parent": tHsmdaPoolClass3Parent,
-       "tHsmdaPoolClass3AllocPercent": tHsmdaPoolClass3AllocPercent,
-       "tHsmdaPoolClass4Parent": tHsmdaPoolClass4Parent,
-       "tHsmdaPoolClass4AllocPercent": tHsmdaPoolClass4AllocPercent,
-       "tHsmdaPoolClass5Parent": tHsmdaPoolClass5Parent,
-       "tHsmdaPoolClass5AllocPercent": tHsmdaPoolClass5AllocPercent,
-       "tHsmdaPoolClass6Parent": tHsmdaPoolClass6Parent,
-       "tHsmdaPoolClass6AllocPercent": tHsmdaPoolClass6AllocPercent,
-       "tHsmdaPoolClass7Parent": tHsmdaPoolClass7Parent,
-       "tHsmdaPoolClass7AllocPercent": tHsmdaPoolClass7AllocPercent,
-       "tHsmdaPoolClass8Parent": tHsmdaPoolClass8Parent,
-       "tHsmdaPoolClass8AllocPercent": tHsmdaPoolClass8AllocPercent,
        "tMcMlpppIngressObjects": tMcMlpppIngressObjects,
        "tMcMlpppIngrProfTable": tMcMlpppIngrProfTable,
        "tMcMlpppIngrProfEntry": tMcMlpppIngrProfEntry,
@@ -37656,16 +36840,8 @@ mibBuilder.exportSymbols(
        "tAdvCfgAbvOffADeltaConsAggRPrcnt": tAdvCfgAbvOffADeltaConsAggRPrcnt,
        "tAdvCfgAbvOffAUnConsHiTierRPrcnt": tAdvCfgAbvOffAUnConsHiTierRPrcnt,
        "tAdvCfgAbvOffADelConHiTierRPrcnt": tAdvCfgAbvOffADelConHiTierRPrcnt,
+       "tAdvCfgAvgFrameOverheadMode": tAdvCfgAvgFrameOverheadMode,
        "tWrrObjects": tWrrObjects,
-       "tHsmdaWrrPolicyTable": tHsmdaWrrPolicyTable,
-       "tHsmdaWrrPolicyEntry": tHsmdaWrrPolicyEntry,
-       "tHsmdaWrrPolicyName": tHsmdaWrrPolicyName,
-       "tHsmdaWrrPolicyRowStatus": tHsmdaWrrPolicyRowStatus,
-       "tHsmdaWrrPolicyLastChanged": tHsmdaWrrPolicyLastChanged,
-       "tHsmdaWrrPolicyDescription": tHsmdaWrrPolicyDescription,
-       "tHsmdaWrrPolicyIncludeQueues": tHsmdaWrrPolicyIncludeQueues,
-       "tHsmdaWrrPolicySchedUsingClass": tHsmdaWrrPolicySchedUsingClass,
-       "tHsmdaWrrPolicyAggWeightAtClass": tHsmdaWrrPolicyAggWeightAtClass,
        "tQosDCObjects": tQosDCObjects,
        "tQosDCTimeStampObjs": tQosDCTimeStampObjs,
        "tQosDCObjs": tQosDCObjs,
@@ -37892,6 +37068,13 @@ mibBuilder.exportSymbols(
        "tIngClassPlcyLspExpFC": tIngClassPlcyLspExpFC,
        "tIngClassPlcyLspExpProfile": tIngClassPlcyLspExpProfile,
        "tIngClassPlcyLspExpLastChanged": tIngClassPlcyLspExpLastChanged,
+       "tIngClassPlcyPrecFCTable": tIngClassPlcyPrecFCTable,
+       "tIngClassPlcyPrecFCEntry": tIngClassPlcyPrecFCEntry,
+       "tIngClassPlcyPrecValue": tIngClassPlcyPrecValue,
+       "tIngClassPlcyPrecRowStatus": tIngClassPlcyPrecRowStatus,
+       "tIngClassPlcyPrecFC": tIngClassPlcyPrecFC,
+       "tIngClassPlcyPrecProfile": tIngClassPlcyPrecProfile,
+       "tIngClassPlcyPrecLastChanged": tIngClassPlcyPrecLastChanged,
        "tQosFpResourcePolicyObjects": tQosFpResourcePolicyObjects,
        "tQosFpResourcePolicyTable": tQosFpResourcePolicyTable,
        "tQosFpResourcePolicyEntry": tQosFpResourcePolicyEntry,
@@ -37902,7 +37085,20 @@ mibBuilder.exportSymbols(
        "tQosFpResPlcyQIngPrcntOfTotal": tQosFpResPlcyQIngPrcntOfTotal,
        "tQosFpResPlcyAggShapAutoCreate": tQosFpResPlcyAggShapAutoCreate,
        "tQosFpResPlcyHwAggShapSubs": tQosFpResPlcyHwAggShapSubs,
+       "tQosFpResPlcyHwAggShapSaps": tQosFpResPlcyHwAggShapSaps,
+       "tQosFpResPlcyHwAggShapQGroups": tQosFpResPlcyHwAggShapQGroups,
        "tQosFpResPlcyPortsHqosMode": tQosFpResPlcyPortsHqosMode,
+       "tQosFpResPlcyNonAggShaperQs": tQosFpResPlcyNonAggShaperQs,
+       "tQosFpResPlcyQueueSetSize2Wt": tQosFpResPlcyQueueSetSize2Wt,
+       "tQosFpResPlcyQueueSetSize3Wt": tQosFpResPlcyQueueSetSize3Wt,
+       "tQosFpResPlcyQueueSetSize4Wt": tQosFpResPlcyQueueSetSize4Wt,
+       "tQosFpResPlcyQueueSetSize5Wt": tQosFpResPlcyQueueSetSize5Wt,
+       "tQosFpResPlcyQueueSetSize6Wt": tQosFpResPlcyQueueSetSize6Wt,
+       "tQosFpResPlcyQueueSetSize7Wt": tQosFpResPlcyQueueSetSize7Wt,
+       "tQosFpResPlcyQueueSetSize8Wt": tQosFpResPlcyQueueSetSize8Wt,
+       "tQosFpResPlcyDfltQSetSizeSubs": tQosFpResPlcyDfltQSetSizeSubs,
+       "tQosFpResPlcyDfltQSetSizeSaps": tQosFpResPlcyDfltQSetSizeSaps,
+       "tQosFpResPlcyDfltQSetSizeQGroups": tQosFpResPlcyDfltQSetSizeQGroups,
        "tQosPortListObjects": tQosPortListObjects,
        "tQosPortListTable": tQosPortListTable,
        "tQosPortListEntry": tQosPortListEntry,
@@ -37994,6 +37190,13 @@ mibBuilder.exportSymbols(
        "tDscpFCMapDscpFC": tDscpFCMapDscpFC,
        "tDscpFCMapDscpProfile": tDscpFCMapDscpProfile,
        "tDscpFCMapDscpLastChanged": tDscpFCMapDscpLastChanged,
+       "tDscpFCMapPrecTable": tDscpFCMapPrecTable,
+       "tDscpFCMapPrecEntry": tDscpFCMapPrecEntry,
+       "tDscpFCMapPrecValue": tDscpFCMapPrecValue,
+       "tDscpFCMapPrecRowStatus": tDscpFCMapPrecRowStatus,
+       "tDscpFCMapPrecFC": tDscpFCMapPrecFC,
+       "tDscpFCMapPrecProfile": tDscpFCMapPrecProfile,
+       "tDscpFCMapPrecLastChanged": tDscpFCMapPrecLastChanged,
        "tLspExpFCMapObjects": tLspExpFCMapObjects,
        "tLspExpFCMapTable": tLspExpFCMapTable,
        "tLspExpFCMapEntry": tLspExpFCMapEntry,
@@ -38058,6 +37261,15 @@ mibBuilder.exportSymbols(
        "tFCLspExpMapFCLspExpInProfile": tFCLspExpMapFCLspExpInProfile,
        "tFCLspExpMapFCLspExpOutProfile": tFCLspExpMapFCLspExpOutProfile,
        "tFCLspExpMapFCLastChanged": tFCLspExpMapFCLastChanged,
+       "tQosIngSharedPlcrStatsTable": tQosIngSharedPlcrStatsTable,
+       "tQosIngSharedPlcrStatsEntry": tQosIngSharedPlcrStatsEntry,
+       "tQosIngSharedPlcrFwdInProfPkts": tQosIngSharedPlcrFwdInProfPkts,
+       "tQosIngSharedPlcrFwdInProfOcts": tQosIngSharedPlcrFwdInProfOcts,
+       "tQosIngSharedPlcrFwdOutProfPkts": tQosIngSharedPlcrFwdOutProfPkts,
+       "tQosIngSharedPlcrFwdOutProfOcts": tQosIngSharedPlcrFwdOutProfOcts,
+       "tQosIngSharedPlcrDrpExdProfPkts": tQosIngSharedPlcrDrpExdProfPkts,
+       "tQosIngSharedPlcrDrpExdProfOcts": tQosIngSharedPlcrDrpExdProfOcts,
+       "tQosPreClassifierObjects": tQosPreClassifierObjects,
        "tQosNotifyPrefix": tQosNotifyPrefix,
        "tQosNotifications": tQosNotifications}
 )

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:29 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -142,7 +139,8 @@ alcatelIND1IPMIB = ModuleIdentity(
 if mibBuilder.loadTexts:
     alcatelIND1IPMIB.setRevisions(
         ("2009-09-12 00:00",
-         "2007-06-11 00:00")
+         "2007-06-11 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -253,12 +251,14 @@ class _AlaIpDirectedBroadcast_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(0,
-              1)
+              1,
+              2)
         )
     )
     namedValues = NamedValues(
         *(("off", 0),
-          ("on", 1))
+          ("on", 1),
+          ("controlled", 2))
     )
 
 
@@ -297,6 +297,38 @@ alaIpClearArpFilter = _AlaIpClearArpFilter_Object(
 alaIpClearArpFilter.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpClearArpFilter.setStatus("current")
+
+
+class _AlaIpDualHashMode_Type(Integer32):
+    """Custom type alaIpDualHashMode based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2),
+          ("enabledRebootRequired", 3),
+          ("disabledRebootRequired", 4))
+    )
+
+
+_AlaIpDualHashMode_Type.__name__ = "Integer32"
+_AlaIpDualHashMode_Object = MibScalar
+alaIpDualHashMode = _AlaIpDualHashMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 1, 5),
+    _AlaIpDualHashMode_Type()
+)
+alaIpDualHashMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIpDualHashMode.setStatus("current")
 _AlaIpNetToMediaTable_Object = MibTable
 alaIpNetToMediaTable = _AlaIpNetToMediaTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 2)
@@ -771,6 +803,303 @@ alaDoSArpPoisonRowStatus = _AlaDoSArpPoisonRowStatus_Object(
 alaDoSArpPoisonRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaDoSArpPoisonRowStatus.setStatus("current")
+
+
+class _AlaDoSIpAntiSpoof_Type(Integer32):
+    """Custom type alaDoSIpAntiSpoof based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDoSIpAntiSpoof_Type.__name__ = "Integer32"
+_AlaDoSIpAntiSpoof_Object = MibScalar
+alaDoSIpAntiSpoof = _AlaDoSIpAntiSpoof_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 12),
+    _AlaDoSIpAntiSpoof_Type()
+)
+alaDoSIpAntiSpoof.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDoSIpAntiSpoof.setStatus("current")
+
+
+class _AlaDoSArpAntiSpoof_Type(Integer32):
+    """Custom type alaDoSArpAntiSpoof based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDoSArpAntiSpoof_Type.__name__ = "Integer32"
+_AlaDoSArpAntiSpoof_Object = MibScalar
+alaDoSArpAntiSpoof = _AlaDoSArpAntiSpoof_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 13),
+    _AlaDoSArpAntiSpoof_Type()
+)
+alaDoSArpAntiSpoof.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDoSArpAntiSpoof.setStatus("current")
+
+
+class _AlaDosAntiGlobalSpoofCountReset_Type(Integer32):
+    """Custom type alaDosAntiGlobalSpoofCountReset based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaDosAntiGlobalSpoofCountReset_Type.__name__ = "Integer32"
+_AlaDosAntiGlobalSpoofCountReset_Object = MibScalar
+alaDosAntiGlobalSpoofCountReset = _AlaDosAntiGlobalSpoofCountReset_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 14),
+    _AlaDosAntiGlobalSpoofCountReset_Type()
+)
+alaDosAntiGlobalSpoofCountReset.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDosAntiGlobalSpoofCountReset.setStatus("current")
+_AlaDoSAntiSpoofTable_Object = MibTable
+alaDoSAntiSpoofTable = _AlaDoSAntiSpoofTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15)
+)
+if mibBuilder.loadTexts:
+    alaDoSAntiSpoofTable.setStatus("current")
+_AlaDoSAntiSpoofEntry_Object = MibTableRow
+alaDoSAntiSpoofEntry = _AlaDoSAntiSpoofEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1)
+)
+alaDoSAntiSpoofEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IP-MIB", "alaDoSAntiSpoofIpAddrType"),
+    (0, "ALCATEL-IND1-IP-MIB", "alaDoSAntiSpoofIpAddr"),
+)
+if mibBuilder.loadTexts:
+    alaDoSAntiSpoofEntry.setStatus("current")
+_AlaDoSAntiSpoofIpAddrType_Type = InetAddressType
+_AlaDoSAntiSpoofIpAddrType_Object = MibTableColumn
+alaDoSAntiSpoofIpAddrType = _AlaDoSAntiSpoofIpAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 1),
+    _AlaDoSAntiSpoofIpAddrType_Type()
+)
+alaDoSAntiSpoofIpAddrType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaDoSAntiSpoofIpAddrType.setStatus("current")
+_AlaDoSAntiSpoofIpAddr_Type = InetAddress
+_AlaDoSAntiSpoofIpAddr_Object = MibTableColumn
+alaDoSAntiSpoofIpAddr = _AlaDoSAntiSpoofIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 2),
+    _AlaDoSAntiSpoofIpAddr_Type()
+)
+alaDoSAntiSpoofIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDoSAntiSpoofIpAddr.setStatus("current")
+
+
+class _AlaDoSAntiSpoofVlan_Type(Integer32):
+    """Custom type alaDoSAntiSpoofVlan based on Integer32"""
+    defaultValue = 0
+
+
+_AlaDoSAntiSpoofVlan_Type.__name__ = "Integer32"
+_AlaDoSAntiSpoofVlan_Object = MibTableColumn
+alaDoSAntiSpoofVlan = _AlaDoSAntiSpoofVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 3),
+    _AlaDoSAntiSpoofVlan_Type()
+)
+alaDoSAntiSpoofVlan.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDoSAntiSpoofVlan.setStatus("current")
+
+
+class _AlaDoSAntiSpoofStatus_Type(Integer32):
+    """Custom type alaDoSAntiSpoofStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDoSAntiSpoofStatus_Type.__name__ = "Integer32"
+_AlaDoSAntiSpoofStatus_Object = MibTableColumn
+alaDoSAntiSpoofStatus = _AlaDoSAntiSpoofStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 4),
+    _AlaDoSAntiSpoofStatus_Type()
+)
+alaDoSAntiSpoofStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDoSAntiSpoofStatus.setStatus("current")
+
+
+class _AlaDosAntiSpoofArpOnly_Type(Integer32):
+    """Custom type alaDosAntiSpoofArpOnly based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDosAntiSpoofArpOnly_Type.__name__ = "Integer32"
+_AlaDosAntiSpoofArpOnly_Object = MibTableColumn
+alaDosAntiSpoofArpOnly = _AlaDosAntiSpoofArpOnly_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 5),
+    _AlaDosAntiSpoofArpOnly_Type()
+)
+alaDosAntiSpoofArpOnly.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDosAntiSpoofArpOnly.setStatus("current")
+
+
+class _AlaDosAntiSpoofCountReset_Type(Integer32):
+    """Custom type alaDosAntiSpoofCountReset based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaDosAntiSpoofCountReset_Type.__name__ = "Integer32"
+_AlaDosAntiSpoofCountReset_Object = MibTableColumn
+alaDosAntiSpoofCountReset = _AlaDosAntiSpoofCountReset_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 6),
+    _AlaDosAntiSpoofCountReset_Type()
+)
+alaDosAntiSpoofCountReset.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDosAntiSpoofCountReset.setStatus("current")
+_AlaDosAntiSpoofMac_Type = MacAddress
+_AlaDosAntiSpoofMac_Object = MibTableColumn
+alaDosAntiSpoofMac = _AlaDosAntiSpoofMac_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 7),
+    _AlaDosAntiSpoofMac_Type()
+)
+alaDosAntiSpoofMac.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDosAntiSpoofMac.setStatus("current")
+_AlaDosAntiSpoofSlot_Type = Integer32
+_AlaDosAntiSpoofSlot_Object = MibTableColumn
+alaDosAntiSpoofSlot = _AlaDosAntiSpoofSlot_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 8),
+    _AlaDosAntiSpoofSlot_Type()
+)
+alaDosAntiSpoofSlot.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDosAntiSpoofSlot.setStatus("current")
+_AlaDosAntiSpoofPort_Type = Integer32
+_AlaDosAntiSpoofPort_Object = MibTableColumn
+alaDosAntiSpoofPort = _AlaDosAntiSpoofPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 15, 1, 9),
+    _AlaDosAntiSpoofPort_Type()
+)
+alaDosAntiSpoofPort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDosAntiSpoofPort.setStatus("current")
+
+
+class _AlaDoSArpProtect_Type(Integer32):
+    """Custom type alaDoSArpProtect based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDoSArpProtect_Type.__name__ = "Integer32"
+_AlaDoSArpProtect_Object = MibScalar
+alaDoSArpProtect = _AlaDoSArpProtect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 16),
+    _AlaDoSArpProtect_Type()
+)
+alaDoSArpProtect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDoSArpProtect.setStatus("current")
+
+
+class _AlaDosStatsClear_Type(Integer32):
+    """Custom type alaDosStatsClear based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaDosStatsClear_Type.__name__ = "Integer32"
+_AlaDosStatsClear_Object = MibScalar
+alaDosStatsClear = _AlaDosStatsClear_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 3, 17),
+    _AlaDosStatsClear_Type()
+)
+alaDosStatsClear.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDosStatsClear.setStatus("current")
 _IpNetToMediaAugTable_Object = MibTable
 ipNetToMediaAugTable = _IpNetToMediaAugTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 4)
@@ -1110,7 +1439,7 @@ alaIpArpFilterVlan = _AlaIpArpFilterVlan_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 11, 1, 3),
     _AlaIpArpFilterVlan_Type()
 )
-alaIpArpFilterVlan.setMaxAccess("read-create")
+alaIpArpFilterVlan.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaIpArpFilterVlan.setStatus("current")
 
@@ -1363,7 +1692,7 @@ class _AlaIpInterfaceName_Type(DisplayString):
     """Custom type alaIpInterfaceName based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 20),
+        ValueSizeConstraint(1, 32),
     )
 
 
@@ -1389,7 +1718,7 @@ alaIpInterfaceAddress = _AlaIpInterfaceAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 2),
     _AlaIpInterfaceAddress_Type()
 )
-alaIpInterfaceAddress.setMaxAccess("read-create")
+alaIpInterfaceAddress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceAddress.setStatus("current")
 
@@ -1405,7 +1734,7 @@ alaIpInterfaceMask = _AlaIpInterfaceMask_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 3),
     _AlaIpInterfaceMask_Type()
 )
-alaIpInterfaceMask.setMaxAccess("read-create")
+alaIpInterfaceMask.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceMask.setStatus("current")
 
@@ -1433,7 +1762,7 @@ alaIpInterfaceAdminState = _AlaIpInterfaceAdminState_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 4),
     _AlaIpInterfaceAdminState_Type()
 )
-alaIpInterfaceAdminState.setMaxAccess("read-create")
+alaIpInterfaceAdminState.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceAdminState.setStatus("current")
 
@@ -1469,7 +1798,7 @@ alaIpInterfaceDeviceType = _AlaIpInterfaceDeviceType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 5),
     _AlaIpInterfaceDeviceType_Type()
 )
-alaIpInterfaceDeviceType.setMaxAccess("read-create")
+alaIpInterfaceDeviceType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceDeviceType.setStatus("current")
 
@@ -1490,7 +1819,7 @@ alaIpInterfaceVlanID = _AlaIpInterfaceVlanID_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 6),
     _AlaIpInterfaceVlanID_Type()
 )
-alaIpInterfaceVlanID.setMaxAccess("read-create")
+alaIpInterfaceVlanID.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceVlanID.setStatus("current")
 
@@ -1518,7 +1847,7 @@ alaIpInterfaceIpForward = _AlaIpInterfaceIpForward_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 7),
     _AlaIpInterfaceIpForward_Type()
 )
-alaIpInterfaceIpForward.setMaxAccess("read-create")
+alaIpInterfaceIpForward.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceIpForward.setStatus("current")
 
@@ -1546,7 +1875,7 @@ alaIpInterfaceEncap = _AlaIpInterfaceEncap_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 8),
     _AlaIpInterfaceEncap_Type()
 )
-alaIpInterfaceEncap.setMaxAccess("read-create")
+alaIpInterfaceEncap.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceEncap.setStatus("current")
 
@@ -1562,7 +1891,7 @@ alaIpInterfaceMtu = _AlaIpInterfaceMtu_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 9),
     _AlaIpInterfaceMtu_Type()
 )
-alaIpInterfaceMtu.setMaxAccess("read-create")
+alaIpInterfaceMtu.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceMtu.setStatus("current")
 
@@ -1590,7 +1919,7 @@ alaIpInterfaceLocalProxyArp = _AlaIpInterfaceLocalProxyArp_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 10),
     _AlaIpInterfaceLocalProxyArp_Type()
 )
-alaIpInterfaceLocalProxyArp.setMaxAccess("read-create")
+alaIpInterfaceLocalProxyArp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceLocalProxyArp.setStatus("current")
 
@@ -1618,7 +1947,7 @@ alaIpInterfacePrimCfg = _AlaIpInterfacePrimCfg_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 11),
     _AlaIpInterfacePrimCfg_Type()
 )
-alaIpInterfacePrimCfg.setMaxAccess("read-create")
+alaIpInterfacePrimCfg.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfacePrimCfg.setStatus("current")
 
@@ -1735,7 +2064,7 @@ alaIpInterfaceRemoteAddr = _AlaIpInterfaceRemoteAddr_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 17),
     _AlaIpInterfaceRemoteAddr_Type()
 )
-alaIpInterfaceRemoteAddr.setMaxAccess("read-create")
+alaIpInterfaceRemoteAddr.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceRemoteAddr.setStatus("current")
 _AlaIpInterfaceTunnelSrcAddressType_Type = InetAddressType
@@ -1744,7 +2073,7 @@ alaIpInterfaceTunnelSrcAddressType = _AlaIpInterfaceTunnelSrcAddressType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 18),
     _AlaIpInterfaceTunnelSrcAddressType_Type()
 )
-alaIpInterfaceTunnelSrcAddressType.setMaxAccess("read-create")
+alaIpInterfaceTunnelSrcAddressType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceTunnelSrcAddressType.setStatus("current")
 _AlaIpInterfaceTunnelSrc_Type = InetAddress
@@ -1753,7 +2082,7 @@ alaIpInterfaceTunnelSrc = _AlaIpInterfaceTunnelSrc_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 19),
     _AlaIpInterfaceTunnelSrc_Type()
 )
-alaIpInterfaceTunnelSrc.setMaxAccess("read-create")
+alaIpInterfaceTunnelSrc.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceTunnelSrc.setStatus("current")
 _AlaIpInterfaceTunnelDstAddressType_Type = InetAddressType
@@ -1762,7 +2091,7 @@ alaIpInterfaceTunnelDstAddressType = _AlaIpInterfaceTunnelDstAddressType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 20),
     _AlaIpInterfaceTunnelDstAddressType_Type()
 )
-alaIpInterfaceTunnelDstAddressType.setMaxAccess("read-create")
+alaIpInterfaceTunnelDstAddressType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceTunnelDstAddressType.setStatus("current")
 _AlaIpInterfaceTunnelDst_Type = InetAddress
@@ -1771,7 +2100,7 @@ alaIpInterfaceTunnelDst = _AlaIpInterfaceTunnelDst_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 21),
     _AlaIpInterfaceTunnelDst_Type()
 )
-alaIpInterfaceTunnelDst.setMaxAccess("read-create")
+alaIpInterfaceTunnelDst.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceTunnelDst.setStatus("current")
 
@@ -1801,7 +2130,7 @@ alaIpInterfaceDhcpStatus = _AlaIpInterfaceDhcpStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 22),
     _AlaIpInterfaceDhcpStatus_Type()
 )
-alaIpInterfaceDhcpStatus.setMaxAccess("read-create")
+alaIpInterfaceDhcpStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceDhcpStatus.setStatus("current")
 
@@ -1829,7 +2158,7 @@ alaIpInterfaceDhcpIpRelease = _AlaIpInterfaceDhcpIpRelease_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 23),
     _AlaIpInterfaceDhcpIpRelease_Type()
 )
-alaIpInterfaceDhcpIpRelease.setMaxAccess("read-create")
+alaIpInterfaceDhcpIpRelease.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceDhcpIpRelease.setStatus("current")
 
@@ -1857,7 +2186,7 @@ alaIpInterfaceDhcpIpRenew = _AlaIpInterfaceDhcpIpRenew_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 24),
     _AlaIpInterfaceDhcpIpRenew_Type()
 )
-alaIpInterfaceDhcpIpRenew.setMaxAccess("read-create")
+alaIpInterfaceDhcpIpRenew.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceDhcpIpRenew.setStatus("current")
 
@@ -1876,9 +2205,168 @@ alaIpInterfaceDhcpOption60String = _AlaIpInterfaceDhcpOption60String_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 25),
     _AlaIpInterfaceDhcpOption60String_Type()
 )
-alaIpInterfaceDhcpOption60String.setMaxAccess("read-create")
+alaIpInterfaceDhcpOption60String.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIpInterfaceDhcpOption60String.setStatus("current")
+
+
+class _AlaIpInterfaceLocalHostDirectedBroadcast_Type(Integer32):
+    """Custom type alaIpInterfaceLocalHostDirectedBroadcast based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaIpInterfaceLocalHostDirectedBroadcast_Type.__name__ = "Integer32"
+_AlaIpInterfaceLocalHostDirectedBroadcast_Object = MibTableColumn
+alaIpInterfaceLocalHostDirectedBroadcast = _AlaIpInterfaceLocalHostDirectedBroadcast_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 26),
+    _AlaIpInterfaceLocalHostDirectedBroadcast_Type()
+)
+alaIpInterfaceLocalHostDirectedBroadcast.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIpInterfaceLocalHostDirectedBroadcast.setStatus("current")
+
+
+class _AlaIpInterfaceRtrPortIfIndex_Type(Unsigned32):
+    """Custom type alaIpInterfaceRtrPortIfIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1001, 4294967295),
+    )
+
+
+_AlaIpInterfaceRtrPortIfIndex_Type.__name__ = "Unsigned32"
+_AlaIpInterfaceRtrPortIfIndex_Object = MibTableColumn
+alaIpInterfaceRtrPortIfIndex = _AlaIpInterfaceRtrPortIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 27),
+    _AlaIpInterfaceRtrPortIfIndex_Type()
+)
+alaIpInterfaceRtrPortIfIndex.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIpInterfaceRtrPortIfIndex.setStatus("current")
+
+
+class _AlaIpInterfaceRtrPortType_Type(Integer32):
+    """Custom type alaIpInterfaceRtrPortType based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("untagged", 1),
+          ("tagged", 2))
+    )
+
+
+_AlaIpInterfaceRtrPortType_Type.__name__ = "Integer32"
+_AlaIpInterfaceRtrPortType_Object = MibTableColumn
+alaIpInterfaceRtrPortType = _AlaIpInterfaceRtrPortType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 28),
+    _AlaIpInterfaceRtrPortType_Type()
+)
+alaIpInterfaceRtrPortType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIpInterfaceRtrPortType.setStatus("current")
+
+
+class _AlaIpInterfaceVipAddress_Type(IpAddress):
+    """Custom type alaIpInterfaceVipAddress based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaIpInterfaceVipAddress_Type.__name__ = "IpAddress"
+_AlaIpInterfaceVipAddress_Object = MibTableColumn
+alaIpInterfaceVipAddress = _AlaIpInterfaceVipAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 29),
+    _AlaIpInterfaceVipAddress_Type()
+)
+alaIpInterfaceVipAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIpInterfaceVipAddress.setStatus("current")
+
+
+class _AlaIpInterfaceDhcpVsiAcceptFilterString_Type(DisplayString):
+    """Custom type alaIpInterfaceDhcpVsiAcceptFilterString based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_AlaIpInterfaceDhcpVsiAcceptFilterString_Type.__name__ = "DisplayString"
+_AlaIpInterfaceDhcpVsiAcceptFilterString_Object = MibTableColumn
+alaIpInterfaceDhcpVsiAcceptFilterString = _AlaIpInterfaceDhcpVsiAcceptFilterString_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 30),
+    _AlaIpInterfaceDhcpVsiAcceptFilterString_Type()
+)
+alaIpInterfaceDhcpVsiAcceptFilterString.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIpInterfaceDhcpVsiAcceptFilterString.setStatus("current")
+
+
+class _AlaIpInterfaceCVlanID_Type(Integer32):
+    """Custom type alaIpInterfaceCVlanID based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4094),
+    )
+
+
+_AlaIpInterfaceCVlanID_Type.__name__ = "Integer32"
+_AlaIpInterfaceCVlanID_Object = MibTableColumn
+alaIpInterfaceCVlanID = _AlaIpInterfaceCVlanID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 31),
+    _AlaIpInterfaceCVlanID_Type()
+)
+alaIpInterfaceCVlanID.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIpInterfaceCVlanID.setStatus("current")
+
+
+class _AlaIpInterfaceDhcpServerPreference_Type(Integer32):
+    """Custom type alaIpInterfaceDhcpServerPreference based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIpInterfaceDhcpServerPreference_Type.__name__ = "Integer32"
+_AlaIpInterfaceDhcpServerPreference_Object = MibTableColumn
+alaIpInterfaceDhcpServerPreference = _AlaIpInterfaceDhcpServerPreference_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 14, 1, 32),
+    _AlaIpInterfaceDhcpServerPreference_Type()
+)
+alaIpInterfaceDhcpServerPreference.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIpInterfaceDhcpServerPreference.setStatus("current")
 _AlaIpItfConfigTable_Object = MibTable
 alaIpItfConfigTable = _AlaIpItfConfigTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 15)
@@ -1900,7 +2388,7 @@ class _AlaIpItfConfigName_Type(DisplayString):
     """Custom type alaIpItfConfigName based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 20),
+        ValueSizeConstraint(1, 32),
     )
 
 
@@ -2129,6 +2617,332 @@ alaIpDhcpClientLeaseExpires = _AlaIpDhcpClientLeaseExpires_Object(
 alaIpDhcpClientLeaseExpires.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaIpDhcpClientLeaseExpires.setStatus("current")
+_AlaIpDirectedBroadcastCtrlTable_Object = MibTable
+alaIpDirectedBroadcastCtrlTable = _AlaIpDirectedBroadcastCtrlTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20)
+)
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlTable.setStatus("current")
+_AlaIpDirectedBroadcastCtrlEntry_Object = MibTableRow
+alaIpDirectedBroadcastCtrlEntry = _AlaIpDirectedBroadcastCtrlEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1)
+)
+alaIpDirectedBroadcastCtrlEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlSrcAddr"),
+    (0, "ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlSrcMask"),
+    (0, "ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlDstAddr"),
+    (0, "ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlDstMask"),
+    (0, "ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlVlanID"),
+)
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlEntry.setStatus("current")
+
+
+class _AlaIpDirectedBroadcastCtrlSrcAddr_Type(IpAddress):
+    """Custom type alaIpDirectedBroadcastCtrlSrcAddr based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaIpDirectedBroadcastCtrlSrcAddr_Type.__name__ = "IpAddress"
+_AlaIpDirectedBroadcastCtrlSrcAddr_Object = MibTableColumn
+alaIpDirectedBroadcastCtrlSrcAddr = _AlaIpDirectedBroadcastCtrlSrcAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1, 1),
+    _AlaIpDirectedBroadcastCtrlSrcAddr_Type()
+)
+alaIpDirectedBroadcastCtrlSrcAddr.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlSrcAddr.setStatus("current")
+
+
+class _AlaIpDirectedBroadcastCtrlSrcMask_Type(IpAddress):
+    """Custom type alaIpDirectedBroadcastCtrlSrcMask based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaIpDirectedBroadcastCtrlSrcMask_Type.__name__ = "IpAddress"
+_AlaIpDirectedBroadcastCtrlSrcMask_Object = MibTableColumn
+alaIpDirectedBroadcastCtrlSrcMask = _AlaIpDirectedBroadcastCtrlSrcMask_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1, 2),
+    _AlaIpDirectedBroadcastCtrlSrcMask_Type()
+)
+alaIpDirectedBroadcastCtrlSrcMask.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlSrcMask.setStatus("current")
+
+
+class _AlaIpDirectedBroadcastCtrlDstAddr_Type(IpAddress):
+    """Custom type alaIpDirectedBroadcastCtrlDstAddr based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaIpDirectedBroadcastCtrlDstAddr_Type.__name__ = "IpAddress"
+_AlaIpDirectedBroadcastCtrlDstAddr_Object = MibTableColumn
+alaIpDirectedBroadcastCtrlDstAddr = _AlaIpDirectedBroadcastCtrlDstAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1, 3),
+    _AlaIpDirectedBroadcastCtrlDstAddr_Type()
+)
+alaIpDirectedBroadcastCtrlDstAddr.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlDstAddr.setStatus("current")
+
+
+class _AlaIpDirectedBroadcastCtrlDstMask_Type(IpAddress):
+    """Custom type alaIpDirectedBroadcastCtrlDstMask based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaIpDirectedBroadcastCtrlDstMask_Type.__name__ = "IpAddress"
+_AlaIpDirectedBroadcastCtrlDstMask_Object = MibTableColumn
+alaIpDirectedBroadcastCtrlDstMask = _AlaIpDirectedBroadcastCtrlDstMask_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1, 4),
+    _AlaIpDirectedBroadcastCtrlDstMask_Type()
+)
+alaIpDirectedBroadcastCtrlDstMask.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlDstMask.setStatus("current")
+
+
+class _AlaIpDirectedBroadcastCtrlVlanID_Type(Integer32):
+    """Custom type alaIpDirectedBroadcastCtrlVlanID based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4094),
+    )
+
+
+_AlaIpDirectedBroadcastCtrlVlanID_Type.__name__ = "Integer32"
+_AlaIpDirectedBroadcastCtrlVlanID_Object = MibTableColumn
+alaIpDirectedBroadcastCtrlVlanID = _AlaIpDirectedBroadcastCtrlVlanID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1, 5),
+    _AlaIpDirectedBroadcastCtrlVlanID_Type()
+)
+alaIpDirectedBroadcastCtrlVlanID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlVlanID.setStatus("current")
+_AlaIpDirectedBroadcastCtrlRowStatus_Type = RowStatus
+_AlaIpDirectedBroadcastCtrlRowStatus_Object = MibTableColumn
+alaIpDirectedBroadcastCtrlRowStatus = _AlaIpDirectedBroadcastCtrlRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 20, 1, 6),
+    _AlaIpDirectedBroadcastCtrlRowStatus_Type()
+)
+alaIpDirectedBroadcastCtrlRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlRowStatus.setStatus("current")
+_AlaZeroConfConfig_ObjectIdentity = ObjectIdentity
+alaZeroConfConfig = _AlaZeroConfConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 21)
+)
+if mibBuilder.loadTexts:
+    alaZeroConfConfig.setStatus("current")
+
+
+class _AlaZeroConfMdnsAdminStatus_Type(Integer32):
+    """Custom type alaZeroConfMdnsAdminStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaZeroConfMdnsAdminStatus_Type.__name__ = "Integer32"
+_AlaZeroConfMdnsAdminStatus_Object = MibScalar
+alaZeroConfMdnsAdminStatus = _AlaZeroConfMdnsAdminStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 21, 1),
+    _AlaZeroConfMdnsAdminStatus_Type()
+)
+alaZeroConfMdnsAdminStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaZeroConfMdnsAdminStatus.setStatus("current")
+
+
+class _AlaZeroConfSsdpAdminStatus_Type(Integer32):
+    """Custom type alaZeroConfSsdpAdminStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaZeroConfSsdpAdminStatus_Type.__name__ = "Integer32"
+_AlaZeroConfSsdpAdminStatus_Object = MibScalar
+alaZeroConfSsdpAdminStatus = _AlaZeroConfSsdpAdminStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 21, 2),
+    _AlaZeroConfSsdpAdminStatus_Type()
+)
+alaZeroConfSsdpAdminStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaZeroConfSsdpAdminStatus.setStatus("current")
+
+
+class _AlaZeroConfMode_Type(Integer32):
+    """Custom type alaZeroConfMode based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("tunnel", 1),
+          ("gateway", 2))
+    )
+
+
+_AlaZeroConfMode_Type.__name__ = "Integer32"
+_AlaZeroConfMode_Object = MibScalar
+alaZeroConfMode = _AlaZeroConfMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 21, 3),
+    _AlaZeroConfMode_Type()
+)
+alaZeroConfMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaZeroConfMode.setStatus("current")
+
+
+class _AlaZeroConfTunnelMode_Type(Integer32):
+    """Custom type alaZeroConfTunnelMode based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 1),
+          ("standard", 2))
+    )
+
+
+_AlaZeroConfTunnelMode_Type.__name__ = "Integer32"
+_AlaZeroConfTunnelMode_Object = MibScalar
+alaZeroConfTunnelMode = _AlaZeroConfTunnelMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 21, 4),
+    _AlaZeroConfTunnelMode_Type()
+)
+alaZeroConfTunnelMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaZeroConfTunnelMode.setStatus("current")
+_AlaZeroConfResponderIpAddr_Type = IpAddress
+_AlaZeroConfResponderIpAddr_Object = MibScalar
+alaZeroConfResponderIpAddr = _AlaZeroConfResponderIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 21, 5),
+    _AlaZeroConfResponderIpAddr_Type()
+)
+alaZeroConfResponderIpAddr.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaZeroConfResponderIpAddr.setStatus("current")
+_AlaZeroConfGatewayVlanTable_Object = MibTable
+alaZeroConfGatewayVlanTable = _AlaZeroConfGatewayVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 22)
+)
+if mibBuilder.loadTexts:
+    alaZeroConfGatewayVlanTable.setStatus("current")
+_AlaZeroConfGatewayVlanEntry_Object = MibTableRow
+alaZeroConfGatewayVlanEntry = _AlaZeroConfGatewayVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 22, 1)
+)
+alaZeroConfGatewayVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IP-MIB", "alaZeroConfGatewayVlan"),
+)
+if mibBuilder.loadTexts:
+    alaZeroConfGatewayVlanEntry.setStatus("current")
+
+
+class _AlaZeroConfGatewayVlan_Type(Unsigned32):
+    """Custom type alaZeroConfGatewayVlan based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_AlaZeroConfGatewayVlan_Type.__name__ = "Unsigned32"
+_AlaZeroConfGatewayVlan_Object = MibTableColumn
+alaZeroConfGatewayVlan = _AlaZeroConfGatewayVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 22, 1, 1),
+    _AlaZeroConfGatewayVlan_Type()
+)
+alaZeroConfGatewayVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaZeroConfGatewayVlan.setStatus("current")
+_AlaZeroConfGatewayVlanRowStatus_Type = RowStatus
+_AlaZeroConfGatewayVlanRowStatus_Object = MibTableColumn
+alaZeroConfGatewayVlanRowStatus = _AlaZeroConfGatewayVlanRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 22, 1, 2),
+    _AlaZeroConfGatewayVlanRowStatus_Type()
+)
+alaZeroConfGatewayVlanRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaZeroConfGatewayVlanRowStatus.setStatus("current")
+_AlaZeroConfAccessVlanTable_Object = MibTable
+alaZeroConfAccessVlanTable = _AlaZeroConfAccessVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 23)
+)
+if mibBuilder.loadTexts:
+    alaZeroConfAccessVlanTable.setStatus("current")
+_AlaZeroConfAccessVlanEntry_Object = MibTableRow
+alaZeroConfAccessVlanEntry = _AlaZeroConfAccessVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 23, 1)
+)
+alaZeroConfAccessVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IP-MIB", "alaZeroConfAccessVlan"),
+)
+if mibBuilder.loadTexts:
+    alaZeroConfAccessVlanEntry.setStatus("current")
+
+
+class _AlaZeroConfAccessVlan_Type(Unsigned32):
+    """Custom type alaZeroConfAccessVlan based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_AlaZeroConfAccessVlan_Type.__name__ = "Unsigned32"
+_AlaZeroConfAccessVlan_Object = MibTableColumn
+alaZeroConfAccessVlan = _AlaZeroConfAccessVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 23, 1, 1),
+    _AlaZeroConfAccessVlan_Type()
+)
+alaZeroConfAccessVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaZeroConfAccessVlan.setStatus("current")
+_AlaZeroConfAccessVlanRowStatus_Type = RowStatus
+_AlaZeroConfAccessVlanRowStatus_Object = MibTableColumn
+alaZeroConfAccessVlanRowStatus = _AlaZeroConfAccessVlanRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 1, 23, 1, 2),
+    _AlaZeroConfAccessVlanRowStatus_Type()
+)
+alaZeroConfAccessVlanRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaZeroConfAccessVlanRowStatus.setStatus("current")
 _AlcatelIND1IPMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1IPMIBConformance = _AlcatelIND1IPMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2)
@@ -2164,7 +2978,12 @@ class _PktDropType_Type(Integer32):
               5,
               6,
               7,
-              8)
+              8,
+              9,
+              10,
+              11,
+              12,
+              13)
         )
     )
     namedValues = NamedValues(
@@ -2176,7 +2995,12 @@ class _PktDropType_Type(Integer32):
           ("bgpTriggeredUserPortDisable", 5),
           ("ospfTriggeredUserPortDisable", 6),
           ("ripTriggeredUserPortDisable", 7),
-          ("vrrpTriggeredUserPortDisable", 8))
+          ("vrrpTriggeredUserPortDisable", 8),
+          ("dhcpserverTriggeredUserPortDisable", 9),
+          ("pimTriggeredUserPortDisable", 10),
+          ("dvmrpTriggeredUserPortDisable", 11),
+          ("isisTriggeredUserPortDisable", 12),
+          ("dns-replyTriggeredUserPortDisable", 13))
     )
 
 
@@ -2246,7 +3070,8 @@ alaIpConfigGroup.setObjects(
       *(("ALCATEL-IND1-IP-MIB", "alaIpClearArpCache"),
         ("ALCATEL-IND1-IP-MIB", "alaIpArpTimeout"),
         ("ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcast"),
-        ("ALCATEL-IND1-IP-MIB", "alaIpClearArpFilter"))
+        ("ALCATEL-IND1-IP-MIB", "alaIpClearArpFilter"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpDualHashMode"))
 )
 if mibBuilder.loadTexts:
     alaIpConfigGroup.setStatus("current")
@@ -2261,7 +3086,32 @@ alaIpDoSGroup.setObjects(
         ("ALCATEL-IND1-IP-MIB", "alaDoSSlot"),
         ("ALCATEL-IND1-IP-MIB", "alaDoSPort"),
         ("ALCATEL-IND1-IP-MIB", "alaDoSStatus"),
-        ("ALCATEL-IND1-IP-MIB", "alaDoSDetectedCounter"))
+        ("ALCATEL-IND1-IP-MIB", "alaDoSDetectedCounter"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSARPRate"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSArpPoisonDetected"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSArpPoisonRowStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPingRate"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPortScanClosePortPenalty"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPortScanDecay"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPortScanTcpOpenPortPenalty"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPortScanThreshold"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPortScanTotalPenalty"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSPortScanUdpOpenPortPenalty"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSTrapCntl"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSType"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSIpAntiSpoof"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSArpAntiSpoof"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosAntiGlobalSpoofCountReset"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSAntiSpoofIpAddr"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSAntiSpoofVlan"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSAntiSpoofStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosAntiSpoofArpOnly"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosAntiSpoofCountReset"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosAntiSpoofMac"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosAntiSpoofSlot"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosAntiSpoofPort"),
+        ("ALCATEL-IND1-IP-MIB", "alaDoSArpProtect"),
+        ("ALCATEL-IND1-IP-MIB", "alaDosStatsClear"))
 )
 if mibBuilder.loadTexts:
     alaIpDoSGroup.setStatus("current")
@@ -2274,7 +3124,12 @@ alaIpNetToMediaDpGroup.setObjects(
         ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaDpaIpType"),
         ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaDpaIp"),
         ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaDpaSlot"),
-        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaDpaPort"))
+        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaDpaPort"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaAuth"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaName"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaPhysAddress"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaProxy"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaVrrp"))
 )
 if mibBuilder.loadTexts:
     alaIpNetToMediaDpGroup.setStatus("current")
@@ -2291,6 +3146,168 @@ alaIpDhcpHostIdentifierGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     alaIpDhcpHostIdentifierGroup.setStatus("current")
+
+alaIcmpGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 5)
+)
+alaIcmpGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIcmpAllMsgStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaIcmpCtrlCode"),
+        ("ALCATEL-IND1-IP-MIB", "alaIcmpCtrlType"),
+        ("ALCATEL-IND1-IP-MIB", "alaIcmpCtrlStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaIcmpCtrlPktGap"))
+)
+if mibBuilder.loadTexts:
+    alaIcmpGroup.setStatus("current")
+
+alaIpArpFilterGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 6)
+)
+alaIpArpFilterGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIpArpFilterVlan"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpArpFilterMode"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpArpFilterType"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpArpFilterRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaIpArpFilterGroup.setStatus("current")
+
+alaIpInterfaceGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 7)
+)
+alaIpInterfaceGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIpInterfaceName"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceAddress"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceMask"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceAdminState"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDeviceType"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceVlanID"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceIpForward"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceEncap"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceMtu"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceLocalProxyArp"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfacePrimCfg"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceOperState"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceOperReason"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceRouterMac"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceBcastAddr"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfacePrimAct"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceRemoteAddr"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceTunnelSrcAddressType"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceTunnelSrc"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceTunnelDstAddressType"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceTunnelDst"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDhcpStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDhcpIpRelease"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDhcpIpRenew"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDhcpOption60String"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceLocalHostDirectedBroadcast"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDhcpVsiAcceptFilterString"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceCVlanID"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceDhcpServerPreference"))
+)
+if mibBuilder.loadTexts:
+    alaIpInterfaceGroup.setStatus("current")
+
+alaIpItfConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 9)
+)
+alaIpItfConfigGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIpItfConfigRowStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpItfConfigIfIndex"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpItfConfigName"))
+)
+if mibBuilder.loadTexts:
+    alaIpItfConfigGroup.setStatus("current")
+
+alaIpManagedIntfGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 10)
+)
+alaIpManagedIntfGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIpManagedIntfName"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpManagedRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaIpManagedIntfGroup.setStatus("current")
+
+alaIpPortServiceGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 11)
+)
+alaIpPortServiceGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIpPortServicePort"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpPortServiceStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpServicePort"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpServiceStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpServiceType"))
+)
+if mibBuilder.loadTexts:
+    alaIpPortServiceGroup.setStatus("current")
+
+alaIpRouteSumGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 12)
+)
+alaIpRouteSumGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaIpRouteCount"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpRouteProtocol"))
+)
+if mibBuilder.loadTexts:
+    alaIpRouteSumGroup.setStatus("current")
+
+alaIpMiscGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 13)
+)
+alaIpMiscGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "ipCidrRouteScope"),
+        ("ALCATEL-IND1-IP-MIB", "ipNetToMediaName"),
+        ("ALCATEL-IND1-IP-MIB", "ipNetToMediaPort"),
+        ("ALCATEL-IND1-IP-MIB", "ipNetToMediaSlot"),
+        ("ALCATEL-IND1-IP-MIB", "pktDropCount"),
+        ("ALCATEL-IND1-IP-MIB", "pktDropFrag"),
+        ("ALCATEL-IND1-IP-MIB", "pktDropIfIndex"),
+        ("ALCATEL-IND1-IP-MIB", "pktDropType"))
+)
+if mibBuilder.loadTexts:
+    alaIpMiscGroup.setStatus("current")
+
+alaIpDirectedBroadcastCtrlGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 14)
+)
+alaIpDirectedBroadcastCtrlGroup.setObjects(
+    ("ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaIpDirectedBroadcastCtrlGroup.setStatus("current")
+
+alaZeroConfConfGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 15)
+)
+alaZeroConfConfGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaZeroConfMdnsAdminStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfSsdpAdminStatus"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfMode"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfTunnelMode"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfResponderIpAddr"))
+)
+if mibBuilder.loadTexts:
+    alaZeroConfConfGroup.setStatus("current")
+
+alaZeroConfGatewayVlanGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 16)
+)
+alaZeroConfGatewayVlanGroup.setObjects(
+    ("ALCATEL-IND1-IP-MIB", "alaZeroConfGatewayVlanRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaZeroConfGatewayVlanGroup.setStatus("current")
+
+alaZeroConfAccessVlanGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 17)
+)
+alaZeroConfAccessVlanGroup.setObjects(
+    ("ALCATEL-IND1-IP-MIB", "alaZeroConfAccessVlanRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaZeroConfAccessVlanGroup.setStatus("current")
 
 
 # Notification objects
@@ -2336,6 +3353,19 @@ if mibBuilder.loadTexts:
 
 # Notifications groups
 
+alaIpInterfaceTrapsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 23, 1, 2, 2, 8)
+)
+alaIpInterfaceTrapsGroup.setObjects(
+      *(("ALCATEL-IND1-IP-MIB", "alaDoSTrap"),
+        ("ALCATEL-IND1-IP-MIB", "pktDrop"),
+        ("ALCATEL-IND1-IP-MIB", "arpMaxLimitReached"))
+)
+if mibBuilder.loadTexts:
+    alaIpInterfaceTrapsGroup.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -2349,7 +3379,19 @@ alaIpCompliance.setObjects(
       *(("ALCATEL-IND1-IP-MIB", "alaIpConfigGroup"),
         ("ALCATEL-IND1-IP-MIB", "alaIpDoSGroup"),
         ("ALCATEL-IND1-IP-MIB", "alaIpNetToMediaDpGroup"),
-        ("ALCATEL-IND1-IP-MIB", "alaIpDhcpHostIdentifierGroup"))
+        ("ALCATEL-IND1-IP-MIB", "alaIpDhcpHostIdentifierGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIcmpGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpArpFilterGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpInterfaceGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpItfConfigGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpManagedIntfGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpPortServiceGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpRouteSumGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpMiscGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaIpDirectedBroadcastCtrlGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfConfGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfGatewayVlanGroup"),
+        ("ALCATEL-IND1-IP-MIB", "alaZeroConfAccessVlanGroup"))
 )
 if mibBuilder.loadTexts:
     alaIpCompliance.setStatus(
@@ -2369,6 +3411,7 @@ mibBuilder.exportSymbols(
        "alaIpArpTimeout": alaIpArpTimeout,
        "alaIpDirectedBroadcast": alaIpDirectedBroadcast,
        "alaIpClearArpFilter": alaIpClearArpFilter,
+       "alaIpDualHashMode": alaIpDualHashMode,
        "alaIpNetToMediaTable": alaIpNetToMediaTable,
        "alaIpNetToMediaEntry": alaIpNetToMediaEntry,
        "alaIpNetToMediaPhysAddress": alaIpNetToMediaPhysAddress,
@@ -2401,6 +3444,22 @@ mibBuilder.exportSymbols(
        "alaDoSArpPoisonIpAddr": alaDoSArpPoisonIpAddr,
        "alaDoSArpPoisonDetected": alaDoSArpPoisonDetected,
        "alaDoSArpPoisonRowStatus": alaDoSArpPoisonRowStatus,
+       "alaDoSIpAntiSpoof": alaDoSIpAntiSpoof,
+       "alaDoSArpAntiSpoof": alaDoSArpAntiSpoof,
+       "alaDosAntiGlobalSpoofCountReset": alaDosAntiGlobalSpoofCountReset,
+       "alaDoSAntiSpoofTable": alaDoSAntiSpoofTable,
+       "alaDoSAntiSpoofEntry": alaDoSAntiSpoofEntry,
+       "alaDoSAntiSpoofIpAddrType": alaDoSAntiSpoofIpAddrType,
+       "alaDoSAntiSpoofIpAddr": alaDoSAntiSpoofIpAddr,
+       "alaDoSAntiSpoofVlan": alaDoSAntiSpoofVlan,
+       "alaDoSAntiSpoofStatus": alaDoSAntiSpoofStatus,
+       "alaDosAntiSpoofArpOnly": alaDosAntiSpoofArpOnly,
+       "alaDosAntiSpoofCountReset": alaDosAntiSpoofCountReset,
+       "alaDosAntiSpoofMac": alaDosAntiSpoofMac,
+       "alaDosAntiSpoofSlot": alaDosAntiSpoofSlot,
+       "alaDosAntiSpoofPort": alaDosAntiSpoofPort,
+       "alaDoSArpProtect": alaDoSArpProtect,
+       "alaDosStatsClear": alaDosStatsClear,
        "ipNetToMediaAugTable": ipNetToMediaAugTable,
        "ipNetToMediaAugEntry": ipNetToMediaAugEntry,
        "ipNetToMediaSlot": ipNetToMediaSlot,
@@ -2467,6 +3526,13 @@ mibBuilder.exportSymbols(
        "alaIpInterfaceDhcpIpRelease": alaIpInterfaceDhcpIpRelease,
        "alaIpInterfaceDhcpIpRenew": alaIpInterfaceDhcpIpRenew,
        "alaIpInterfaceDhcpOption60String": alaIpInterfaceDhcpOption60String,
+       "alaIpInterfaceLocalHostDirectedBroadcast": alaIpInterfaceLocalHostDirectedBroadcast,
+       "alaIpInterfaceRtrPortIfIndex": alaIpInterfaceRtrPortIfIndex,
+       "alaIpInterfaceRtrPortType": alaIpInterfaceRtrPortType,
+       "alaIpInterfaceVipAddress": alaIpInterfaceVipAddress,
+       "alaIpInterfaceDhcpVsiAcceptFilterString": alaIpInterfaceDhcpVsiAcceptFilterString,
+       "alaIpInterfaceCVlanID": alaIpInterfaceCVlanID,
+       "alaIpInterfaceDhcpServerPreference": alaIpInterfaceDhcpServerPreference,
        "alaIpItfConfigTable": alaIpItfConfigTable,
        "alaIpItfConfigEntry": alaIpItfConfigEntry,
        "alaIpItfConfigName": alaIpItfConfigName,
@@ -2494,6 +3560,28 @@ mibBuilder.exportSymbols(
        "alaIpDhcpHostName": alaIpDhcpHostName,
        "alaIpDhcpClientLeaseObtained": alaIpDhcpClientLeaseObtained,
        "alaIpDhcpClientLeaseExpires": alaIpDhcpClientLeaseExpires,
+       "alaIpDirectedBroadcastCtrlTable": alaIpDirectedBroadcastCtrlTable,
+       "alaIpDirectedBroadcastCtrlEntry": alaIpDirectedBroadcastCtrlEntry,
+       "alaIpDirectedBroadcastCtrlSrcAddr": alaIpDirectedBroadcastCtrlSrcAddr,
+       "alaIpDirectedBroadcastCtrlSrcMask": alaIpDirectedBroadcastCtrlSrcMask,
+       "alaIpDirectedBroadcastCtrlDstAddr": alaIpDirectedBroadcastCtrlDstAddr,
+       "alaIpDirectedBroadcastCtrlDstMask": alaIpDirectedBroadcastCtrlDstMask,
+       "alaIpDirectedBroadcastCtrlVlanID": alaIpDirectedBroadcastCtrlVlanID,
+       "alaIpDirectedBroadcastCtrlRowStatus": alaIpDirectedBroadcastCtrlRowStatus,
+       "alaZeroConfConfig": alaZeroConfConfig,
+       "alaZeroConfMdnsAdminStatus": alaZeroConfMdnsAdminStatus,
+       "alaZeroConfSsdpAdminStatus": alaZeroConfSsdpAdminStatus,
+       "alaZeroConfMode": alaZeroConfMode,
+       "alaZeroConfTunnelMode": alaZeroConfTunnelMode,
+       "alaZeroConfResponderIpAddr": alaZeroConfResponderIpAddr,
+       "alaZeroConfGatewayVlanTable": alaZeroConfGatewayVlanTable,
+       "alaZeroConfGatewayVlanEntry": alaZeroConfGatewayVlanEntry,
+       "alaZeroConfGatewayVlan": alaZeroConfGatewayVlan,
+       "alaZeroConfGatewayVlanRowStatus": alaZeroConfGatewayVlanRowStatus,
+       "alaZeroConfAccessVlanTable": alaZeroConfAccessVlanTable,
+       "alaZeroConfAccessVlanEntry": alaZeroConfAccessVlanEntry,
+       "alaZeroConfAccessVlan": alaZeroConfAccessVlan,
+       "alaZeroConfAccessVlanRowStatus": alaZeroConfAccessVlanRowStatus,
        "alcatelIND1IPMIBConformance": alcatelIND1IPMIBConformance,
        "alcatelIND1IPMIBCompliances": alcatelIND1IPMIBCompliances,
        "alaIpCompliance": alaIpCompliance,
@@ -2502,6 +3590,19 @@ mibBuilder.exportSymbols(
        "alaIpDoSGroup": alaIpDoSGroup,
        "alaIpNetToMediaDpGroup": alaIpNetToMediaDpGroup,
        "alaIpDhcpHostIdentifierGroup": alaIpDhcpHostIdentifierGroup,
+       "alaIcmpGroup": alaIcmpGroup,
+       "alaIpArpFilterGroup": alaIpArpFilterGroup,
+       "alaIpInterfaceGroup": alaIpInterfaceGroup,
+       "alaIpInterfaceTrapsGroup": alaIpInterfaceTrapsGroup,
+       "alaIpItfConfigGroup": alaIpItfConfigGroup,
+       "alaIpManagedIntfGroup": alaIpManagedIntfGroup,
+       "alaIpPortServiceGroup": alaIpPortServiceGroup,
+       "alaIpRouteSumGroup": alaIpRouteSumGroup,
+       "alaIpMiscGroup": alaIpMiscGroup,
+       "alaIpDirectedBroadcastCtrlGroup": alaIpDirectedBroadcastCtrlGroup,
+       "alaZeroConfConfGroup": alaZeroConfConfGroup,
+       "alaZeroConfGatewayVlanGroup": alaZeroConfGatewayVlanGroup,
+       "alaZeroConfAccessVlanGroup": alaZeroConfAccessVlanGroup,
        "trafficEvents": trafficEvents,
        "pktDrop": pktDrop,
        "trafficEventTrapObjs": trafficEventTrapObjs,

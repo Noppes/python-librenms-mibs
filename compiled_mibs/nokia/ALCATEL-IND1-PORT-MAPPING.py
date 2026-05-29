@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-PORT-MAPPING
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:57 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-PORT-MAPPING
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,7 @@ alcatelIND1PortMappingMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1PortMappingMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -262,9 +259,9 @@ pmapSessionUnknownUnicastFloodStatus = _PmapSessionUnknownUnicastFloodStatus_Obj
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 33, 1, 1, 1, 1, 1, 5),
     _PmapSessionUnknownUnicastFloodStatus_Type()
 )
-pmapSessionUnknownUnicastFloodStatus.setMaxAccess("read-create")
+pmapSessionUnknownUnicastFloodStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    pmapSessionUnknownUnicastFloodStatus.setStatus("current")
+    pmapSessionUnknownUnicastFloodStatus.setStatus("obsolete")
 
 
 class _PmapSessionDynProxyARP_Type(Integer32):

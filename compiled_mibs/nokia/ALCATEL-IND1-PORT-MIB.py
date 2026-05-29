@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-PORT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:58 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-PORT-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -51,13 +48,19 @@ if 'mibBuilder' not in globals():
     "cmmEsmDrvTraps",
     "softentIND1Port")
 
-(ifInErrors,
+(InterfaceIndex,
+ ifInErrors,
  ifIndex,
  ifOutErrors) = mibBuilder.importSymbols(
     "IF-MIB",
+    "InterfaceIndex",
     "ifInErrors",
     "ifIndex",
     "ifOutErrors")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -103,13 +106,19 @@ if 'mibBuilder' not in globals():
     "Unsigned32",
     "iso")
 
-(DisplayString,
+(DateAndTime,
+ DisplayString,
  PhysAddress,
- TextualConvention) = mibBuilder.importSymbols(
+ RowStatus,
+ TextualConvention,
+ TimeStamp) = mibBuilder.importSymbols(
     "SNMPv2-TC",
+    "DateAndTime",
     "DisplayString",
     "PhysAddress",
-    "TextualConvention")
+    "RowStatus",
+    "TextualConvention",
+    "TimeStamp")
 
 
 # MODULE-IDENTITY
@@ -119,7 +128,8 @@ alcatelIND1PortMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1PortMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2009-09-07 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -127,6 +137,44 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class AlaDBType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("kf2SfpPlusDB", 1),
+          ("kf2HDMIStackingDB", 2),
+          ("kf2RJ45DB", 3),
+          ("kf2SfpDB", 4))
+    )
+
+
+
+class EsmDBType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("sfpPlusDaughterModule", 1),
+          ("cx4StackingModule", 2))
+    )
 
 
 
@@ -161,6 +209,146 @@ esmDrvTrapDrops = _EsmDrvTrapDrops_Object(
 esmDrvTrapDrops.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     esmDrvTrapDrops.setStatus("current")
+_AlaDyingGaspSlot_Type = Integer32
+_AlaDyingGaspSlot_Object = MibScalar
+alaDyingGaspSlot = _AlaDyingGaspSlot_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 1, 2),
+    _AlaDyingGaspSlot_Type()
+)
+alaDyingGaspSlot.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDyingGaspSlot.setStatus("current")
+
+
+class _AlaDyingGaspPowerSupplyType_Type(Integer32):
+    """Custom type alaDyingGaspPowerSupplyType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("primary", 1),
+          ("backup", 2),
+          ("none", 3))
+    )
+
+
+_AlaDyingGaspPowerSupplyType_Type.__name__ = "Integer32"
+_AlaDyingGaspPowerSupplyType_Object = MibScalar
+alaDyingGaspPowerSupplyType = _AlaDyingGaspPowerSupplyType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 1, 3),
+    _AlaDyingGaspPowerSupplyType_Type()
+)
+alaDyingGaspPowerSupplyType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDyingGaspPowerSupplyType.setStatus("current")
+_AlaDyingGaspTime_Type = DateAndTime
+_AlaDyingGaspTime_Object = MibScalar
+alaDyingGaspTime = _AlaDyingGaspTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 1, 4),
+    _AlaDyingGaspTime_Type()
+)
+alaDyingGaspTime.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDyingGaspTime.setStatus("current")
+
+
+class _EsmPortViolationValue_Type(Integer32):
+    """Custom type esmPortViolationValue based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              11)
+        )
+    )
+    namedValues = NamedValues(
+        *(("bEniSecurityBlockPortNone", 0),
+          ("bEniSecurityBlockPortENI", 1),
+          ("bEniSecurityBlockPortSTP", 2),
+          ("bEniSecurityBlockPortLPSS", 3),
+          ("bEniSecurityBlockPortQoS", 4),
+          ("bEniSecurityBlockPortUDLD", 5),
+          ("bEniSecurityBlockPortETHBLK", 6),
+          ("bEniSecurityBlockPortLFP", 11))
+    )
+
+
+_EsmPortViolationValue_Type.__name__ = "Integer32"
+_EsmPortViolationValue_Object = MibScalar
+esmPortViolationValue = _EsmPortViolationValue_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 1, 5),
+    _EsmPortViolationValue_Type()
+)
+esmPortViolationValue.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    esmPortViolationValue.setStatus("current")
+
+
+class _EsmStormViolationThresholdNotificationType_Type(Integer32):
+    """Custom type esmStormViolationThresholdNotificationType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("clearViolation", 1),
+          ("hiAlarm", 2),
+          ("lowAlarm", 3))
+    )
+
+
+_EsmStormViolationThresholdNotificationType_Type.__name__ = "Integer32"
+_EsmStormViolationThresholdNotificationType_Object = MibScalar
+esmStormViolationThresholdNotificationType = _EsmStormViolationThresholdNotificationType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 1, 6),
+    _EsmStormViolationThresholdNotificationType_Type()
+)
+esmStormViolationThresholdNotificationType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    esmStormViolationThresholdNotificationType.setStatus("current")
+
+
+class _EsmStormViolationThresholdTrafficType_Type(Integer32):
+    """Custom type esmStormViolationThresholdTrafficType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("broadcast", 1),
+          ("multicast", 2),
+          ("uunicast", 3))
+    )
+
+
+_EsmStormViolationThresholdTrafficType_Type.__name__ = "Integer32"
+_EsmStormViolationThresholdTrafficType_Object = MibScalar
+esmStormViolationThresholdTrafficType = _EsmStormViolationThresholdTrafficType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 1, 7),
+    _EsmStormViolationThresholdTrafficType_Type()
+)
+esmStormViolationThresholdTrafficType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    esmStormViolationThresholdTrafficType.setStatus("current")
 _PhysicalPort_ObjectIdentity = ObjectIdentity
 physicalPort = _PhysicalPort_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2)
@@ -362,13 +550,15 @@ class _EsmPortMaxFloodRate_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("mbps", 1),
           ("percentage", 2),
-          ("pps", 3))
+          ("pps", 3),
+          ("default", 4))
     )
 
 
@@ -390,12 +580,14 @@ class _EsmPortFloodMcastEnable_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(1,
+            *(0,
+              1,
               2)
         )
     )
     namedValues = NamedValues(
-        *(("enableMulticastFlood", 1),
+        *(("enableFlood", 0),
+          ("enableMulticastFlood", 1),
           ("disableMulticastFlood", 2))
     )
 
@@ -713,12 +905,21 @@ if mibBuilder.loadTexts:
 class _EsmPortViolationBitMap_Type(Bits):
     """Custom type esmPortViolationBitMap based on Bits"""
     namedValues = NamedValues(
-        *(("bEniSecurityBlockPortENI", 0),
+        *(("bEniSecurityBlockPortNONE", 0),
           ("bEniSecurityBlockPortSTP", 1),
-          ("bEniSecurityBlockPortSL", 2),
-          ("bEniSecurityBlockPortQoS", 3),
+          ("bEniSecurityBlockPortLPS-S", 2),
+          ("bEniSecurityBlockPortQos", 3),
           ("bEniSecurityBlockPortUDLD", 4),
-          ("bEniSecurityBlockPortETHBLK", 5))
+          ("bEniSecurityBlockPortETHBLK", 5),
+          ("bEniSecurityBlockPortNISUP", 6),
+          ("bEniSecurityBlockPortLLDP", 7),
+          ("bEniSecurityBlockPortRFP", 8),
+          ("bEniSecurityBlockPortLinkMon", 9),
+          ("bEniSecurityBlockPortLFP", 10),
+          ("bEniSecurityBlockPortLPSD", 11),
+          ("bEniSecurityBlockPortSTROM", 12),
+          ("bEniSecurityBlockPortLBD", 13),
+          ("bEniSecurityBlockPortSTP-S", 14))
     )
 
 _EsmPortViolationBitMap_Type.__name__ = "Bits"
@@ -816,13 +1017,15 @@ class _EsmPortMaxUnknownUcastFloodRate_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("mbps", 1),
           ("percentage", 2),
-          ("pps", 3))
+          ("pps", 3),
+          ("default", 4))
     )
 
 
@@ -846,13 +1049,15 @@ class _EsmPortMaxMcastFloodRate_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("mbps", 1),
           ("percentage", 2),
-          ("pps", 3))
+          ("pps", 3),
+          ("default", 4))
     )
 
 
@@ -911,6 +1116,259 @@ esmPortCfgSFPType = _EsmPortCfgSFPType_Object(
 esmPortCfgSFPType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     esmPortCfgSFPType.setStatus("current")
+
+
+class _EsmPortWaitToRestoreTimer_Type(Integer32):
+    """Custom type esmPortWaitToRestoreTimer based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 300),
+    )
+
+
+_EsmPortWaitToRestoreTimer_Type.__name__ = "Integer32"
+_EsmPortWaitToRestoreTimer_Object = MibTableColumn
+esmPortWaitToRestoreTimer = _EsmPortWaitToRestoreTimer_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 33),
+    _EsmPortWaitToRestoreTimer_Type()
+)
+esmPortWaitToRestoreTimer.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmPortWaitToRestoreTimer.setStatus("current")
+_EsmPortMinFloodRateLimit_Type = Integer32
+_EsmPortMinFloodRateLimit_Object = MibTableColumn
+esmPortMinFloodRateLimit = _EsmPortMinFloodRateLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 34),
+    _EsmPortMinFloodRateLimit_Type()
+)
+esmPortMinFloodRateLimit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmPortMinFloodRateLimit.setStatus("current")
+_EsmPortMinMcastFloodRateLimit_Type = Integer32
+_EsmPortMinMcastFloodRateLimit_Object = MibTableColumn
+esmPortMinMcastFloodRateLimit = _EsmPortMinMcastFloodRateLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 35),
+    _EsmPortMinMcastFloodRateLimit_Type()
+)
+esmPortMinMcastFloodRateLimit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmPortMinMcastFloodRateLimit.setStatus("current")
+
+
+class _EsmPortFloodThresholdAction_Type(Integer32):
+    """Custom type esmPortFloodThresholdAction based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("trap", 1),
+          ("shutdown", 2))
+    )
+
+
+_EsmPortFloodThresholdAction_Type.__name__ = "Integer32"
+_EsmPortFloodThresholdAction_Object = MibTableColumn
+esmPortFloodThresholdAction = _EsmPortFloodThresholdAction_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 36),
+    _EsmPortFloodThresholdAction_Type()
+)
+esmPortFloodThresholdAction.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmPortFloodThresholdAction.setStatus("current")
+
+
+class _EsmPortMcastThresholdAction_Type(Integer32):
+    """Custom type esmPortMcastThresholdAction based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("trap", 1),
+          ("shutdown", 2))
+    )
+
+
+_EsmPortMcastThresholdAction_Type.__name__ = "Integer32"
+_EsmPortMcastThresholdAction_Object = MibTableColumn
+esmPortMcastThresholdAction = _EsmPortMcastThresholdAction_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 37),
+    _EsmPortMcastThresholdAction_Type()
+)
+esmPortMcastThresholdAction.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmPortMcastThresholdAction.setStatus("current")
+
+
+class _EsmPortFlood_Type(Integer32):
+    """Custom type esmPortFlood based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("normal", 0),
+          ("storm", 1))
+    )
+
+
+_EsmPortFlood_Type.__name__ = "Integer32"
+_EsmPortFlood_Object = MibTableColumn
+esmPortFlood = _EsmPortFlood_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 38),
+    _EsmPortFlood_Type()
+)
+esmPortFlood.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPortFlood.setStatus("current")
+
+
+class _EsmPortMCastStorm_Type(Integer32):
+    """Custom type esmPortMCastStorm based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("normal", 0),
+          ("storm", 1))
+    )
+
+
+_EsmPortMCastStorm_Type.__name__ = "Integer32"
+_EsmPortMCastStorm_Object = MibTableColumn
+esmPortMCastStorm = _EsmPortMCastStorm_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 39),
+    _EsmPortMCastStorm_Type()
+)
+esmPortMCastStorm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPortMCastStorm.setStatus("current")
+
+
+class _EsmPortCfgEeeStatus_Type(Integer32):
+    """Custom type esmPortCfgEeeStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2),
+          ("na", 3))
+    )
+
+
+_EsmPortCfgEeeStatus_Type.__name__ = "Integer32"
+_EsmPortCfgEeeStatus_Object = MibTableColumn
+esmPortCfgEeeStatus = _EsmPortCfgEeeStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 40),
+    _EsmPortCfgEeeStatus_Type()
+)
+esmPortCfgEeeStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmPortCfgEeeStatus.setStatus("current")
+
+
+class _EsmPortCfgEeeAutoNegState_Type(Integer32):
+    """Custom type esmPortCfgEeeAutoNegState based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("speed10", 1),
+          ("speed100", 2),
+          ("unknown", 3),
+          ("speed1000", 4),
+          ("na", 5))
+    )
+
+
+_EsmPortCfgEeeAutoNegState_Type.__name__ = "Integer32"
+_EsmPortCfgEeeAutoNegState_Object = MibTableColumn
+esmPortCfgEeeAutoNegState = _EsmPortCfgEeeAutoNegState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 41),
+    _EsmPortCfgEeeAutoNegState_Type()
+)
+esmPortCfgEeeAutoNegState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPortCfgEeeAutoNegState.setStatus("current")
+
+
+class _EsmPortCfgEeeCapability_Type(Integer32):
+    """Custom type esmPortCfgEeeCapability based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("speed10", 1),
+          ("speed100", 2),
+          ("speed100Speed1000", 3),
+          ("speed1000", 4),
+          ("na", 5))
+    )
+
+
+_EsmPortCfgEeeCapability_Type.__name__ = "Integer32"
+_EsmPortCfgEeeCapability_Object = MibTableColumn
+esmPortCfgEeeCapability = _EsmPortCfgEeeCapability_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 1, 1, 42),
+    _EsmPortCfgEeeCapability_Type()
+)
+esmPortCfgEeeCapability.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPortCfgEeeCapability.setStatus("current")
 _AlcetherStatsTable_Object = MibTable
 alcetherStatsTable = _AlcetherStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 2)
@@ -2256,25 +2714,1522 @@ esmPortSavedMode = _EsmPortSavedMode_Object(
 esmPortSavedMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     esmPortSavedMode.setStatus("current")
+_EsmTdrPortTable_Object = MibTable
+esmTdrPortTable = _EsmTdrPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7)
+)
+if mibBuilder.loadTexts:
+    esmTdrPortTable.setStatus("current")
+_EsmTdrPortEntry_Object = MibTableRow
+esmTdrPortEntry = _EsmTdrPortEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1)
+)
+esmTdrPortEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    esmTdrPortEntry.setStatus("current")
 
 
-class _EsmE2EFlowVlan_Type(Integer32):
-    """Custom type esmE2EFlowVlan based on Integer32"""
+class _EsmTdrPortCableState_Type(Integer32):
+    """Custom type esmTdrPortCableState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 4094),
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 0),
+          ("open", 1),
+          ("short", 2),
+          ("openShort", 3),
+          ("crossTalk", 4),
+          ("unknown", 5),
+          ("impedanceMismatch", 6),
+          ("shortWithPair1", 7),
+          ("shortWithPair2", 8),
+          ("shortWithPair3", 9),
+          ("shortWithPair4", 10))
     )
 
 
-_EsmE2EFlowVlan_Type.__name__ = "Integer32"
-_EsmE2EFlowVlan_Object = MibScalar
-esmE2EFlowVlan = _EsmE2EFlowVlan_Object(
-    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 3),
-    _EsmE2EFlowVlan_Type()
+_EsmTdrPortCableState_Type.__name__ = "Integer32"
+_EsmTdrPortCableState_Object = MibTableColumn
+esmTdrPortCableState = _EsmTdrPortCableState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 1),
+    _EsmTdrPortCableState_Type()
 )
-esmE2EFlowVlan.setMaxAccess("read-write")
+esmTdrPortCableState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    esmE2EFlowVlan.setStatus("current")
+    esmTdrPortCableState.setStatus("current")
+_EsmTdrPortValidPairs_Type = Unsigned32
+_EsmTdrPortValidPairs_Object = MibTableColumn
+esmTdrPortValidPairs = _EsmTdrPortValidPairs_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 2),
+    _EsmTdrPortValidPairs_Type()
+)
+esmTdrPortValidPairs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortValidPairs.setStatus("current")
+
+
+class _EsmTdrPortPair1State_Type(Integer32):
+    """Custom type esmTdrPortPair1State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 0),
+          ("open", 1),
+          ("short", 2),
+          ("openShort", 3),
+          ("crossTalk", 4),
+          ("unknown", 5),
+          ("impedanceMismatch", 6),
+          ("shortWithPair1", 7),
+          ("shortWithPair2", 8),
+          ("shortWithPair3", 9),
+          ("shortWithPair4", 10))
+    )
+
+
+_EsmTdrPortPair1State_Type.__name__ = "Integer32"
+_EsmTdrPortPair1State_Object = MibTableColumn
+esmTdrPortPair1State = _EsmTdrPortPair1State_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 3),
+    _EsmTdrPortPair1State_Type()
+)
+esmTdrPortPair1State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair1State.setStatus("current")
+_EsmTdrPortPair1Length_Type = Unsigned32
+_EsmTdrPortPair1Length_Object = MibTableColumn
+esmTdrPortPair1Length = _EsmTdrPortPair1Length_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 4),
+    _EsmTdrPortPair1Length_Type()
+)
+esmTdrPortPair1Length.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair1Length.setStatus("current")
+
+
+class _EsmTdrPortPair2State_Type(Integer32):
+    """Custom type esmTdrPortPair2State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 0),
+          ("open", 1),
+          ("short", 2),
+          ("openShort", 3),
+          ("crossTalk", 4),
+          ("unknown", 5),
+          ("impedanceMismatch", 6),
+          ("shortWithPair1", 7),
+          ("shortWithPair2", 8),
+          ("shortWithPair3", 9),
+          ("shortWithPair4", 10))
+    )
+
+
+_EsmTdrPortPair2State_Type.__name__ = "Integer32"
+_EsmTdrPortPair2State_Object = MibTableColumn
+esmTdrPortPair2State = _EsmTdrPortPair2State_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 5),
+    _EsmTdrPortPair2State_Type()
+)
+esmTdrPortPair2State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair2State.setStatus("current")
+_EsmTdrPortPair2Length_Type = Unsigned32
+_EsmTdrPortPair2Length_Object = MibTableColumn
+esmTdrPortPair2Length = _EsmTdrPortPair2Length_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 6),
+    _EsmTdrPortPair2Length_Type()
+)
+esmTdrPortPair2Length.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair2Length.setStatus("current")
+
+
+class _EsmTdrPortPair3State_Type(Integer32):
+    """Custom type esmTdrPortPair3State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 0),
+          ("open", 1),
+          ("short", 2),
+          ("openShort", 3),
+          ("crossTalk", 4),
+          ("unknown", 5),
+          ("impedanceMismatch", 6),
+          ("shortWithPair1", 7),
+          ("shortWithPair2", 8),
+          ("shortWithPair3", 9),
+          ("shortWithPair4", 10))
+    )
+
+
+_EsmTdrPortPair3State_Type.__name__ = "Integer32"
+_EsmTdrPortPair3State_Object = MibTableColumn
+esmTdrPortPair3State = _EsmTdrPortPair3State_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 7),
+    _EsmTdrPortPair3State_Type()
+)
+esmTdrPortPair3State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair3State.setStatus("current")
+_EsmTdrPortPair3Length_Type = Unsigned32
+_EsmTdrPortPair3Length_Object = MibTableColumn
+esmTdrPortPair3Length = _EsmTdrPortPair3Length_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 8),
+    _EsmTdrPortPair3Length_Type()
+)
+esmTdrPortPair3Length.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair3Length.setStatus("current")
+
+
+class _EsmTdrPortPair4State_Type(Integer32):
+    """Custom type esmTdrPortPair4State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 0),
+          ("open", 1),
+          ("short", 2),
+          ("openShort", 3),
+          ("crossTalk", 4),
+          ("unknown", 5),
+          ("impedanceMismatch", 6),
+          ("shortWithPair1", 7),
+          ("shortWithPair2", 8),
+          ("shortWithPair3", 9),
+          ("shortWithPair4", 10))
+    )
+
+
+_EsmTdrPortPair4State_Type.__name__ = "Integer32"
+_EsmTdrPortPair4State_Object = MibTableColumn
+esmTdrPortPair4State = _EsmTdrPortPair4State_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 9),
+    _EsmTdrPortPair4State_Type()
+)
+esmTdrPortPair4State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair4State.setStatus("current")
+_EsmTdrPortPair4Length_Type = Unsigned32
+_EsmTdrPortPair4Length_Object = MibTableColumn
+esmTdrPortPair4Length = _EsmTdrPortPair4Length_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 10),
+    _EsmTdrPortPair4Length_Type()
+)
+esmTdrPortPair4Length.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortPair4Length.setStatus("current")
+_EsmTdrPortFuzzLength_Type = Unsigned32
+_EsmTdrPortFuzzLength_Object = MibTableColumn
+esmTdrPortFuzzLength = _EsmTdrPortFuzzLength_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 11),
+    _EsmTdrPortFuzzLength_Type()
+)
+esmTdrPortFuzzLength.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortFuzzLength.setStatus("current")
+
+
+class _EsmTdrPortTest_Type(Integer32):
+    """Custom type esmTdrPortTest based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("off", 0),
+          ("on", 1),
+          ("extendedOn", 2))
+    )
+
+
+_EsmTdrPortTest_Type.__name__ = "Integer32"
+_EsmTdrPortTest_Object = MibTableColumn
+esmTdrPortTest = _EsmTdrPortTest_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 12),
+    _EsmTdrPortTest_Type()
+)
+esmTdrPortTest.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmTdrPortTest.setStatus("current")
+
+
+class _EsmTdrClearStats_Type(Integer32):
+    """Custom type esmTdrClearStats based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1),
+          ("extendedReset", 2))
+    )
+
+
+_EsmTdrClearStats_Type.__name__ = "Integer32"
+_EsmTdrClearStats_Object = MibTableColumn
+esmTdrClearStats = _EsmTdrClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 13),
+    _EsmTdrClearStats_Type()
+)
+esmTdrClearStats.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmTdrClearStats.setStatus("current")
+
+
+class _EsmTdrResult_Type(Integer32):
+    """Custom type esmTdrResult based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("success", 0),
+          ("fail", 1),
+          ("unknown", 2))
+    )
+
+
+_EsmTdrResult_Type.__name__ = "Integer32"
+_EsmTdrResult_Object = MibTableColumn
+esmTdrResult = _EsmTdrResult_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 14),
+    _EsmTdrResult_Type()
+)
+esmTdrResult.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrResult.setStatus("current")
+
+
+class _EsmTdrPortExtSwapTypeChannel1_Type(Integer32):
+    """Custom type esmTdrPortExtSwapTypeChannel1 based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("straightcable", 0),
+          ("crossovercable", 1),
+          ("swapnotapplicable", 2))
+    )
+
+
+_EsmTdrPortExtSwapTypeChannel1_Type.__name__ = "Integer32"
+_EsmTdrPortExtSwapTypeChannel1_Object = MibTableColumn
+esmTdrPortExtSwapTypeChannel1 = _EsmTdrPortExtSwapTypeChannel1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 15),
+    _EsmTdrPortExtSwapTypeChannel1_Type()
+)
+esmTdrPortExtSwapTypeChannel1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtSwapTypeChannel1.setStatus("current")
+
+
+class _EsmTdrPortExtSwapTypeChannel2_Type(Integer32):
+    """Custom type esmTdrPortExtSwapTypeChannel2 based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("straightcable", 0),
+          ("crossovercable", 1),
+          ("swapnotapplicable", 2))
+    )
+
+
+_EsmTdrPortExtSwapTypeChannel2_Type.__name__ = "Integer32"
+_EsmTdrPortExtSwapTypeChannel2_Object = MibTableColumn
+esmTdrPortExtSwapTypeChannel2 = _EsmTdrPortExtSwapTypeChannel2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 16),
+    _EsmTdrPortExtSwapTypeChannel2_Type()
+)
+esmTdrPortExtSwapTypeChannel2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtSwapTypeChannel2.setStatus("current")
+
+
+class _EsmTdrPortExtPolaritySwapPair1_Type(Integer32):
+    """Custom type esmTdrPortExtPolaritySwapPair1 based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("positivepolarity", 0),
+          ("negativepolarity", 1),
+          ("polaritynotapplicable", 2))
+    )
+
+
+_EsmTdrPortExtPolaritySwapPair1_Type.__name__ = "Integer32"
+_EsmTdrPortExtPolaritySwapPair1_Object = MibTableColumn
+esmTdrPortExtPolaritySwapPair1 = _EsmTdrPortExtPolaritySwapPair1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 17),
+    _EsmTdrPortExtPolaritySwapPair1_Type()
+)
+esmTdrPortExtPolaritySwapPair1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtPolaritySwapPair1.setStatus("current")
+
+
+class _EsmTdrPortExtPolaritySwapPair2_Type(Integer32):
+    """Custom type esmTdrPortExtPolaritySwapPair2 based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("positivepolarity", 0),
+          ("negativepolarity", 1),
+          ("polaritynotapplicable", 2))
+    )
+
+
+_EsmTdrPortExtPolaritySwapPair2_Type.__name__ = "Integer32"
+_EsmTdrPortExtPolaritySwapPair2_Object = MibTableColumn
+esmTdrPortExtPolaritySwapPair2 = _EsmTdrPortExtPolaritySwapPair2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 18),
+    _EsmTdrPortExtPolaritySwapPair2_Type()
+)
+esmTdrPortExtPolaritySwapPair2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtPolaritySwapPair2.setStatus("current")
+
+
+class _EsmTdrPortExtPolaritySwapPair3_Type(Integer32):
+    """Custom type esmTdrPortExtPolaritySwapPair3 based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("positivepolarity", 0),
+          ("negativepolarity", 1),
+          ("polaritynotapplicable", 2))
+    )
+
+
+_EsmTdrPortExtPolaritySwapPair3_Type.__name__ = "Integer32"
+_EsmTdrPortExtPolaritySwapPair3_Object = MibTableColumn
+esmTdrPortExtPolaritySwapPair3 = _EsmTdrPortExtPolaritySwapPair3_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 19),
+    _EsmTdrPortExtPolaritySwapPair3_Type()
+)
+esmTdrPortExtPolaritySwapPair3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtPolaritySwapPair3.setStatus("current")
+
+
+class _EsmTdrPortExtPolaritySwapPair4_Type(Integer32):
+    """Custom type esmTdrPortExtPolaritySwapPair4 based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("positivepolarity", 0),
+          ("negativepolarity", 1),
+          ("polaritynotapplicable", 2))
+    )
+
+
+_EsmTdrPortExtPolaritySwapPair4_Type.__name__ = "Integer32"
+_EsmTdrPortExtPolaritySwapPair4_Object = MibTableColumn
+esmTdrPortExtPolaritySwapPair4 = _EsmTdrPortExtPolaritySwapPair4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 20),
+    _EsmTdrPortExtPolaritySwapPair4_Type()
+)
+esmTdrPortExtPolaritySwapPair4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtPolaritySwapPair4.setStatus("current")
+_EsmTdrPortExtSkewPair1_Type = Unsigned32
+_EsmTdrPortExtSkewPair1_Object = MibTableColumn
+esmTdrPortExtSkewPair1 = _EsmTdrPortExtSkewPair1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 21),
+    _EsmTdrPortExtSkewPair1_Type()
+)
+esmTdrPortExtSkewPair1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtSkewPair1.setStatus("current")
+_EsmTdrPortExtSkewPair2_Type = Unsigned32
+_EsmTdrPortExtSkewPair2_Object = MibTableColumn
+esmTdrPortExtSkewPair2 = _EsmTdrPortExtSkewPair2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 22),
+    _EsmTdrPortExtSkewPair2_Type()
+)
+esmTdrPortExtSkewPair2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtSkewPair2.setStatus("current")
+_EsmTdrPortExtSkewPair3_Type = Unsigned32
+_EsmTdrPortExtSkewPair3_Object = MibTableColumn
+esmTdrPortExtSkewPair3 = _EsmTdrPortExtSkewPair3_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 23),
+    _EsmTdrPortExtSkewPair3_Type()
+)
+esmTdrPortExtSkewPair3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtSkewPair3.setStatus("current")
+_EsmTdrPortExtSkewPair4_Type = Unsigned32
+_EsmTdrPortExtSkewPair4_Object = MibTableColumn
+esmTdrPortExtSkewPair4 = _EsmTdrPortExtSkewPair4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 24),
+    _EsmTdrPortExtSkewPair4_Type()
+)
+esmTdrPortExtSkewPair4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtSkewPair4.setStatus("current")
+_EsmTdrPortExtAccurateCableLenPair1_Type = Unsigned32
+_EsmTdrPortExtAccurateCableLenPair1_Object = MibTableColumn
+esmTdrPortExtAccurateCableLenPair1 = _EsmTdrPortExtAccurateCableLenPair1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 25),
+    _EsmTdrPortExtAccurateCableLenPair1_Type()
+)
+esmTdrPortExtAccurateCableLenPair1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtAccurateCableLenPair1.setStatus("current")
+_EsmTdrPortExtAccurateCableLenPair2_Type = Unsigned32
+_EsmTdrPortExtAccurateCableLenPair2_Object = MibTableColumn
+esmTdrPortExtAccurateCableLenPair2 = _EsmTdrPortExtAccurateCableLenPair2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 26),
+    _EsmTdrPortExtAccurateCableLenPair2_Type()
+)
+esmTdrPortExtAccurateCableLenPair2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtAccurateCableLenPair2.setStatus("current")
+_EsmTdrPortExtAccurateCableLenPair3_Type = Unsigned32
+_EsmTdrPortExtAccurateCableLenPair3_Object = MibTableColumn
+esmTdrPortExtAccurateCableLenPair3 = _EsmTdrPortExtAccurateCableLenPair3_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 27),
+    _EsmTdrPortExtAccurateCableLenPair3_Type()
+)
+esmTdrPortExtAccurateCableLenPair3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtAccurateCableLenPair3.setStatus("current")
+_EsmTdrPortExtAccurateCableLenPair4_Type = Unsigned32
+_EsmTdrPortExtAccurateCableLenPair4_Object = MibTableColumn
+esmTdrPortExtAccurateCableLenPair4 = _EsmTdrPortExtAccurateCableLenPair4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 28),
+    _EsmTdrPortExtAccurateCableLenPair4_Type()
+)
+esmTdrPortExtAccurateCableLenPair4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtAccurateCableLenPair4.setStatus("current")
+
+
+class _EsmTdrPortExtDownshiftStatus_Type(Integer32):
+    """Custom type esmTdrPortExtDownshiftStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("nodownshift", 0),
+          ("downshiftoccurs", 1),
+          ("notapplicable", 2))
+    )
+
+
+_EsmTdrPortExtDownshiftStatus_Type.__name__ = "Integer32"
+_EsmTdrPortExtDownshiftStatus_Object = MibTableColumn
+esmTdrPortExtDownshiftStatus = _EsmTdrPortExtDownshiftStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 29),
+    _EsmTdrPortExtDownshiftStatus_Type()
+)
+esmTdrPortExtDownshiftStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPortExtDownshiftStatus.setStatus("current")
+
+
+class _EsmTdrExtResult_Type(Integer32):
+    """Custom type esmTdrExtResult based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("success", 0),
+          ("fail", 1),
+          ("unknown", 2))
+    )
+
+
+_EsmTdrExtResult_Type.__name__ = "Integer32"
+_EsmTdrExtResult_Object = MibTableColumn
+esmTdrExtResult = _EsmTdrExtResult_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 30),
+    _EsmTdrExtResult_Type()
+)
+esmTdrExtResult.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrExtResult.setStatus("current")
+_EsmTdrCableLen_Type = Unsigned32
+_EsmTdrCableLen_Object = MibTableColumn
+esmTdrCableLen = _EsmTdrCableLen_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 31),
+    _EsmTdrCableLen_Type()
+)
+esmTdrCableLen.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrCableLen.setStatus("current")
+_EsmTdrPhyType_Type = Unsigned32
+_EsmTdrPhyType_Object = MibTableColumn
+esmTdrPhyType = _EsmTdrPhyType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 7, 1, 32),
+    _EsmTdrPhyType_Type()
+)
+esmTdrPhyType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmTdrPhyType.setStatus("current")
+_AlaLinkMonConfigTable_Object = MibTable
+alaLinkMonConfigTable = _AlaLinkMonConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 8)
+)
+if mibBuilder.loadTexts:
+    alaLinkMonConfigTable.setStatus("current")
+_AlaLinkMonConfigEntry_Object = MibTableRow
+alaLinkMonConfigEntry = _AlaLinkMonConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 8, 1)
+)
+alaLinkMonConfigEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    alaLinkMonConfigEntry.setStatus("current")
+
+
+class _AlaLinkMonStatus_Type(Integer32):
+    """Custom type alaLinkMonStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disable", 0),
+          ("enable", 1))
+    )
+
+
+_AlaLinkMonStatus_Type.__name__ = "Integer32"
+_AlaLinkMonStatus_Object = MibTableColumn
+alaLinkMonStatus = _AlaLinkMonStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 8, 1, 1),
+    _AlaLinkMonStatus_Type()
+)
+alaLinkMonStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaLinkMonStatus.setStatus("current")
+
+
+class _AlaLinkMonTimeWindow_Type(Integer32):
+    """Custom type alaLinkMonTimeWindow based on Integer32"""
+    defaultValue = 300
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3600),
+    )
+
+
+_AlaLinkMonTimeWindow_Type.__name__ = "Integer32"
+_AlaLinkMonTimeWindow_Object = MibTableColumn
+alaLinkMonTimeWindow = _AlaLinkMonTimeWindow_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 8, 1, 2),
+    _AlaLinkMonTimeWindow_Type()
+)
+alaLinkMonTimeWindow.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaLinkMonTimeWindow.setStatus("current")
+
+
+class _AlaLinkMonLinkFlapThreshold_Type(Integer32):
+    """Custom type alaLinkMonLinkFlapThreshold based on Integer32"""
+    defaultValue = 5
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2, 10),
+    )
+
+
+_AlaLinkMonLinkFlapThreshold_Type.__name__ = "Integer32"
+_AlaLinkMonLinkFlapThreshold_Object = MibTableColumn
+alaLinkMonLinkFlapThreshold = _AlaLinkMonLinkFlapThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 8, 1, 3),
+    _AlaLinkMonLinkFlapThreshold_Type()
+)
+alaLinkMonLinkFlapThreshold.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaLinkMonLinkFlapThreshold.setStatus("current")
+
+
+class _AlaLinkMonLinkErrorThreshold_Type(Integer32):
+    """Custom type alaLinkMonLinkErrorThreshold based on Integer32"""
+    defaultValue = 5
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_AlaLinkMonLinkErrorThreshold_Type.__name__ = "Integer32"
+_AlaLinkMonLinkErrorThreshold_Object = MibTableColumn
+alaLinkMonLinkErrorThreshold = _AlaLinkMonLinkErrorThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 8, 1, 4),
+    _AlaLinkMonLinkErrorThreshold_Type()
+)
+alaLinkMonLinkErrorThreshold.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaLinkMonLinkErrorThreshold.setStatus("current")
+_AlaLinkMonStatsTable_Object = MibTable
+alaLinkMonStatsTable = _AlaLinkMonStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9)
+)
+if mibBuilder.loadTexts:
+    alaLinkMonStatsTable.setStatus("current")
+_AlaLinkMonStatsEntry_Object = MibTableRow
+alaLinkMonStatsEntry = _AlaLinkMonStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1)
+)
+alaLinkMonStatsEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    alaLinkMonStatsEntry.setStatus("current")
+
+
+class _AlaLinkMonStatsClearStats_Type(Integer32):
+    """Custom type alaLinkMonStatsClearStats based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaLinkMonStatsClearStats_Type.__name__ = "Integer32"
+_AlaLinkMonStatsClearStats_Object = MibTableColumn
+alaLinkMonStatsClearStats = _AlaLinkMonStatsClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 1),
+    _AlaLinkMonStatsClearStats_Type()
+)
+alaLinkMonStatsClearStats.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsClearStats.setStatus("current")
+
+
+class _AlaLinkMonStatsPortState_Type(Integer32):
+    """Custom type alaLinkMonStatsPortState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("up", 1),
+          ("down", 2),
+          ("shutdown", 3))
+    )
+
+
+_AlaLinkMonStatsPortState_Type.__name__ = "Integer32"
+_AlaLinkMonStatsPortState_Object = MibTableColumn
+alaLinkMonStatsPortState = _AlaLinkMonStatsPortState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 2),
+    _AlaLinkMonStatsPortState_Type()
+)
+alaLinkMonStatsPortState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsPortState.setStatus("current")
+_AlaLinkMonStatsCurrentLinkFlaps_Type = Counter64
+_AlaLinkMonStatsCurrentLinkFlaps_Object = MibTableColumn
+alaLinkMonStatsCurrentLinkFlaps = _AlaLinkMonStatsCurrentLinkFlaps_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 3),
+    _AlaLinkMonStatsCurrentLinkFlaps_Type()
+)
+alaLinkMonStatsCurrentLinkFlaps.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsCurrentLinkFlaps.setStatus("current")
+_AlaLinkMonStatsCurrentErrorFrames_Type = Counter64
+_AlaLinkMonStatsCurrentErrorFrames_Object = MibTableColumn
+alaLinkMonStatsCurrentErrorFrames = _AlaLinkMonStatsCurrentErrorFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 4),
+    _AlaLinkMonStatsCurrentErrorFrames_Type()
+)
+alaLinkMonStatsCurrentErrorFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsCurrentErrorFrames.setStatus("current")
+_AlaLinkMonStatsCurrentCRCErrors_Type = Counter64
+_AlaLinkMonStatsCurrentCRCErrors_Object = MibTableColumn
+alaLinkMonStatsCurrentCRCErrors = _AlaLinkMonStatsCurrentCRCErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 5),
+    _AlaLinkMonStatsCurrentCRCErrors_Type()
+)
+alaLinkMonStatsCurrentCRCErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsCurrentCRCErrors.setStatus("current")
+_AlaLinkMonStatsCurrentLostFrames_Type = Counter64
+_AlaLinkMonStatsCurrentLostFrames_Object = MibTableColumn
+alaLinkMonStatsCurrentLostFrames = _AlaLinkMonStatsCurrentLostFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 6),
+    _AlaLinkMonStatsCurrentLostFrames_Type()
+)
+alaLinkMonStatsCurrentLostFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsCurrentLostFrames.setStatus("current")
+_AlaLinkMonStatsCurrentAlignErrors_Type = Counter64
+_AlaLinkMonStatsCurrentAlignErrors_Object = MibTableColumn
+alaLinkMonStatsCurrentAlignErrors = _AlaLinkMonStatsCurrentAlignErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 7),
+    _AlaLinkMonStatsCurrentAlignErrors_Type()
+)
+alaLinkMonStatsCurrentAlignErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsCurrentAlignErrors.setStatus("current")
+_AlaLinkMonStatsCurrentLinkErrors_Type = Counter64
+_AlaLinkMonStatsCurrentLinkErrors_Object = MibTableColumn
+alaLinkMonStatsCurrentLinkErrors = _AlaLinkMonStatsCurrentLinkErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 8),
+    _AlaLinkMonStatsCurrentLinkErrors_Type()
+)
+alaLinkMonStatsCurrentLinkErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsCurrentLinkErrors.setStatus("current")
+_AlaLinkMonStatsTotalLinkFlaps_Type = Counter64
+_AlaLinkMonStatsTotalLinkFlaps_Object = MibTableColumn
+alaLinkMonStatsTotalLinkFlaps = _AlaLinkMonStatsTotalLinkFlaps_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 9),
+    _AlaLinkMonStatsTotalLinkFlaps_Type()
+)
+alaLinkMonStatsTotalLinkFlaps.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsTotalLinkFlaps.setStatus("current")
+_AlaLinkMonStatsTotalLinkErrors_Type = Counter64
+_AlaLinkMonStatsTotalLinkErrors_Object = MibTableColumn
+alaLinkMonStatsTotalLinkErrors = _AlaLinkMonStatsTotalLinkErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 9, 1, 10),
+    _AlaLinkMonStatsTotalLinkErrors_Type()
+)
+alaLinkMonStatsTotalLinkErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLinkMonStatsTotalLinkErrors.setStatus("current")
+_AlaLFPGroupTable_Object = MibTable
+alaLFPGroupTable = _AlaLFPGroupTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10)
+)
+if mibBuilder.loadTexts:
+    alaLFPGroupTable.setStatus("current")
+_AlaLFPGroupEntry_Object = MibTableRow
+alaLFPGroupEntry = _AlaLFPGroupEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10, 1)
+)
+alaLFPGroupEntry.setIndexNames(
+    (0, "ALCATEL-IND1-PORT-MIB", "alaLFPGroupId"),
+)
+if mibBuilder.loadTexts:
+    alaLFPGroupEntry.setStatus("current")
+
+
+class _AlaLFPGroupId_Type(Integer32):
+    """Custom type alaLFPGroupId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8),
+    )
+
+
+_AlaLFPGroupId_Type.__name__ = "Integer32"
+_AlaLFPGroupId_Object = MibTableColumn
+alaLFPGroupId = _AlaLFPGroupId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10, 1, 1),
+    _AlaLFPGroupId_Type()
+)
+alaLFPGroupId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaLFPGroupId.setStatus("current")
+
+
+class _AlaLFPGroupAdminStatus_Type(Integer32):
+    """Custom type alaLFPGroupAdminStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disable", 0),
+          ("enable", 1))
+    )
+
+
+_AlaLFPGroupAdminStatus_Type.__name__ = "Integer32"
+_AlaLFPGroupAdminStatus_Object = MibTableColumn
+alaLFPGroupAdminStatus = _AlaLFPGroupAdminStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10, 1, 2),
+    _AlaLFPGroupAdminStatus_Type()
+)
+alaLFPGroupAdminStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaLFPGroupAdminStatus.setStatus("current")
+
+
+class _AlaLFPGroupOperStatus_Type(Integer32):
+    """Custom type alaLFPGroupOperStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("down", 0),
+          ("up", 1))
+    )
+
+
+_AlaLFPGroupOperStatus_Type.__name__ = "Integer32"
+_AlaLFPGroupOperStatus_Object = MibTableColumn
+alaLFPGroupOperStatus = _AlaLFPGroupOperStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10, 1, 3),
+    _AlaLFPGroupOperStatus_Type()
+)
+alaLFPGroupOperStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLFPGroupOperStatus.setStatus("current")
+
+
+class _AlaLFPGroupWaitToShutdown_Type(Integer32):
+    """Custom type alaLFPGroupWaitToShutdown based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 300),
+    )
+
+
+_AlaLFPGroupWaitToShutdown_Type.__name__ = "Integer32"
+_AlaLFPGroupWaitToShutdown_Object = MibTableColumn
+alaLFPGroupWaitToShutdown = _AlaLFPGroupWaitToShutdown_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10, 1, 4),
+    _AlaLFPGroupWaitToShutdown_Type()
+)
+alaLFPGroupWaitToShutdown.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaLFPGroupWaitToShutdown.setStatus("current")
+_AlaLFPGroupRowStatus_Type = RowStatus
+_AlaLFPGroupRowStatus_Object = MibTableColumn
+alaLFPGroupRowStatus = _AlaLFPGroupRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 10, 1, 5),
+    _AlaLFPGroupRowStatus_Type()
+)
+alaLFPGroupRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaLFPGroupRowStatus.setStatus("current")
+_AlaLFPConfigTable_Object = MibTable
+alaLFPConfigTable = _AlaLFPConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 11)
+)
+if mibBuilder.loadTexts:
+    alaLFPConfigTable.setStatus("current")
+_AlaLFPConfigEntry_Object = MibTableRow
+alaLFPConfigEntry = _AlaLFPConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 11, 1)
+)
+alaLFPConfigEntry.setIndexNames(
+    (0, "ALCATEL-IND1-PORT-MIB", "alaLFPGroupId"),
+    (0, "ALCATEL-IND1-PORT-MIB", "alaLFPConfigPort"),
+)
+if mibBuilder.loadTexts:
+    alaLFPConfigEntry.setStatus("current")
+_AlaLFPConfigPort_Type = InterfaceIndex
+_AlaLFPConfigPort_Object = MibTableColumn
+alaLFPConfigPort = _AlaLFPConfigPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 11, 1, 1),
+    _AlaLFPConfigPort_Type()
+)
+alaLFPConfigPort.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaLFPConfigPort.setStatus("current")
+
+
+class _AlaLFPConfigPortType_Type(Integer32):
+    """Custom type alaLFPConfigPortType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("destination", 1),
+          ("source", 2))
+    )
+
+
+_AlaLFPConfigPortType_Type.__name__ = "Integer32"
+_AlaLFPConfigPortType_Object = MibTableColumn
+alaLFPConfigPortType = _AlaLFPConfigPortType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 11, 1, 2),
+    _AlaLFPConfigPortType_Type()
+)
+alaLFPConfigPortType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaLFPConfigPortType.setStatus("current")
+_AlaLFPConfigRowStatus_Type = RowStatus
+_AlaLFPConfigRowStatus_Object = MibTableColumn
+alaLFPConfigRowStatus = _AlaLFPConfigRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 11, 1, 3),
+    _AlaLFPConfigRowStatus_Type()
+)
+alaLFPConfigRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaLFPConfigRowStatus.setStatus("current")
+_EsmSlotInfoTable_Object = MibTable
+esmSlotInfoTable = _EsmSlotInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 12)
+)
+if mibBuilder.loadTexts:
+    esmSlotInfoTable.setStatus("current")
+_EsmSlotInfoEntry_Object = MibTableRow
+esmSlotInfoEntry = _EsmSlotInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 12, 1)
+)
+esmSlotInfoEntry.setIndexNames(
+    (0, "ALCATEL-IND1-PORT-MIB", "esmSlotNumber"),
+)
+if mibBuilder.loadTexts:
+    esmSlotInfoEntry.setStatus("current")
+_EsmSlotNumber_Type = Integer32
+_EsmSlotNumber_Object = MibTableColumn
+esmSlotNumber = _EsmSlotNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 12, 1, 1),
+    _EsmSlotNumber_Type()
+)
+esmSlotNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmSlotNumber.setStatus("current")
+_EsmNumberOfUserPorts_Type = Integer32
+_EsmNumberOfUserPorts_Object = MibTableColumn
+esmNumberOfUserPorts = _EsmNumberOfUserPorts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 12, 1, 2),
+    _EsmNumberOfUserPorts_Type()
+)
+esmNumberOfUserPorts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmNumberOfUserPorts.setStatus("current")
+_EsmPtpStatsTable_Object = MibTable
+esmPtpStatsTable = _EsmPtpStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13)
+)
+if mibBuilder.loadTexts:
+    esmPtpStatsTable.setStatus("current")
+_EsmPtpStatsEntry_Object = MibTableRow
+esmPtpStatsEntry = _EsmPtpStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1)
+)
+esmPtpStatsEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    esmPtpStatsEntry.setStatus("current")
+_EsmPtpStatsIngPtpv2_Type = Unsigned32
+_EsmPtpStatsIngPtpv2_Object = MibTableColumn
+esmPtpStatsIngPtpv2 = _EsmPtpStatsIngPtpv2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 1),
+    _EsmPtpStatsIngPtpv2_Type()
+)
+esmPtpStatsIngPtpv2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsIngPtpv2.setStatus("current")
+_EsmPtpStatsIngPtpv1_Type = Unsigned32
+_EsmPtpStatsIngPtpv1_Object = MibTableColumn
+esmPtpStatsIngPtpv1 = _EsmPtpStatsIngPtpv1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 2),
+    _EsmPtpStatsIngPtpv1_Type()
+)
+esmPtpStatsIngPtpv1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsIngPtpv1.setStatus("current")
+_EsmPtpStatsIngPtpDrop_Type = Unsigned32
+_EsmPtpStatsIngPtpDrop_Object = MibTableColumn
+esmPtpStatsIngPtpDrop = _EsmPtpStatsIngPtpDrop_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 3),
+    _EsmPtpStatsIngPtpDrop_Type()
+)
+esmPtpStatsIngPtpDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsIngPtpDrop.setStatus("current")
+_EsmPtpStatsIngPtpPigBag_Type = Unsigned32
+_EsmPtpStatsIngPtpPigBag_Object = MibTableColumn
+esmPtpStatsIngPtpPigBag = _EsmPtpStatsIngPtpPigBag_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 4),
+    _EsmPtpStatsIngPtpPigBag_Type()
+)
+esmPtpStatsIngPtpPigBag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsIngPtpPigBag.setStatus("current")
+_EsmPtpStatsEgrPtpv2_Type = Unsigned32
+_EsmPtpStatsEgrPtpv2_Object = MibTableColumn
+esmPtpStatsEgrPtpv2 = _EsmPtpStatsEgrPtpv2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 5),
+    _EsmPtpStatsEgrPtpv2_Type()
+)
+esmPtpStatsEgrPtpv2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsEgrPtpv2.setStatus("current")
+_EsmPtpStatsEgrPtpv1_Type = Unsigned32
+_EsmPtpStatsEgrPtpv1_Object = MibTableColumn
+esmPtpStatsEgrPtpv1 = _EsmPtpStatsEgrPtpv1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 6),
+    _EsmPtpStatsEgrPtpv1_Type()
+)
+esmPtpStatsEgrPtpv1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsEgrPtpv1.setStatus("current")
+_EsmPtpStatsEgrPtpDrop_Type = Unsigned32
+_EsmPtpStatsEgrPtpDrop_Object = MibTableColumn
+esmPtpStatsEgrPtpDrop = _EsmPtpStatsEgrPtpDrop_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 7),
+    _EsmPtpStatsEgrPtpDrop_Type()
+)
+esmPtpStatsEgrPtpDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsEgrPtpDrop.setStatus("current")
+_EsmPtpStatsEgrPtpUpdateRes_Type = Unsigned32
+_EsmPtpStatsEgrPtpUpdateRes_Object = MibTableColumn
+esmPtpStatsEgrPtpUpdateRes = _EsmPtpStatsEgrPtpUpdateRes_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 13, 1, 8),
+    _EsmPtpStatsEgrPtpUpdateRes_Type()
+)
+esmPtpStatsEgrPtpUpdateRes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmPtpStatsEgrPtpUpdateRes.setStatus("current")
+_EsmStackPortTable_Object = MibTable
+esmStackPortTable = _EsmStackPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14)
+)
+if mibBuilder.loadTexts:
+    esmStackPortTable.setStatus("current")
+_EsmStackPortConfEntry_Object = MibTableRow
+esmStackPortConfEntry = _EsmStackPortConfEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1)
+)
+esmStackPortConfEntry.setIndexNames(
+    (0, "ALCATEL-IND1-PORT-MIB", "esmStackPortIfIndex"),
+)
+if mibBuilder.loadTexts:
+    esmStackPortConfEntry.setStatus("current")
+_EsmStackPortIfIndex_Type = InterfaceIndex
+_EsmStackPortIfIndex_Object = MibTableColumn
+esmStackPortIfIndex = _EsmStackPortIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 1),
+    _EsmStackPortIfIndex_Type()
+)
+esmStackPortIfIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortIfIndex.setStatus("current")
+_EsmStackPortSlotNum_Type = Integer32
+_EsmStackPortSlotNum_Object = MibTableColumn
+esmStackPortSlotNum = _EsmStackPortSlotNum_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 2),
+    _EsmStackPortSlotNum_Type()
+)
+esmStackPortSlotNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortSlotNum.setStatus("current")
+_EsmStackPortInOctets_Type = Counter64
+_EsmStackPortInOctets_Object = MibTableColumn
+esmStackPortInOctets = _EsmStackPortInOctets_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 3),
+    _EsmStackPortInOctets_Type()
+)
+esmStackPortInOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInOctets.setStatus("current")
+_EsmStackPortOutOctets_Type = Counter64
+_EsmStackPortOutOctets_Object = MibTableColumn
+esmStackPortOutOctets = _EsmStackPortOutOctets_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 4),
+    _EsmStackPortOutOctets_Type()
+)
+esmStackPortOutOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutOctets.setStatus("current")
+_EsmStackPortInUcastPkts_Type = Counter64
+_EsmStackPortInUcastPkts_Object = MibTableColumn
+esmStackPortInUcastPkts = _EsmStackPortInUcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 5),
+    _EsmStackPortInUcastPkts_Type()
+)
+esmStackPortInUcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInUcastPkts.setStatus("current")
+_EsmStackPortOutUcastPkts_Type = Counter64
+_EsmStackPortOutUcastPkts_Object = MibTableColumn
+esmStackPortOutUcastPkts = _EsmStackPortOutUcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 6),
+    _EsmStackPortOutUcastPkts_Type()
+)
+esmStackPortOutUcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutUcastPkts.setStatus("current")
+_EsmStackPortInMulticastPkts_Type = Counter64
+_EsmStackPortInMulticastPkts_Object = MibTableColumn
+esmStackPortInMulticastPkts = _EsmStackPortInMulticastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 7),
+    _EsmStackPortInMulticastPkts_Type()
+)
+esmStackPortInMulticastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInMulticastPkts.setStatus("current")
+_EsmStackPortOutMulticastPkts_Type = Counter64
+_EsmStackPortOutMulticastPkts_Object = MibTableColumn
+esmStackPortOutMulticastPkts = _EsmStackPortOutMulticastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 8),
+    _EsmStackPortOutMulticastPkts_Type()
+)
+esmStackPortOutMulticastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutMulticastPkts.setStatus("current")
+_EsmStackPortInBroadcastPkts_Type = Counter64
+_EsmStackPortInBroadcastPkts_Object = MibTableColumn
+esmStackPortInBroadcastPkts = _EsmStackPortInBroadcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 9),
+    _EsmStackPortInBroadcastPkts_Type()
+)
+esmStackPortInBroadcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInBroadcastPkts.setStatus("current")
+_EsmStackPortOutBroadcastPkts_Type = Counter64
+_EsmStackPortOutBroadcastPkts_Object = MibTableColumn
+esmStackPortOutBroadcastPkts = _EsmStackPortOutBroadcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 10),
+    _EsmStackPortOutBroadcastPkts_Type()
+)
+esmStackPortOutBroadcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutBroadcastPkts.setStatus("current")
+_EsmStackPortInPauseFrames_Type = Counter64
+_EsmStackPortInPauseFrames_Object = MibTableColumn
+esmStackPortInPauseFrames = _EsmStackPortInPauseFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 11),
+    _EsmStackPortInPauseFrames_Type()
+)
+esmStackPortInPauseFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInPauseFrames.setStatus("current")
+_EsmStackPortOutPauseFrames_Type = Counter64
+_EsmStackPortOutPauseFrames_Object = MibTableColumn
+esmStackPortOutPauseFrames = _EsmStackPortOutPauseFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 12),
+    _EsmStackPortOutPauseFrames_Type()
+)
+esmStackPortOutPauseFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutPauseFrames.setStatus("current")
+_EsmStackPortStatsAlignmentErrors_Type = Counter64
+_EsmStackPortStatsAlignmentErrors_Object = MibTableColumn
+esmStackPortStatsAlignmentErrors = _EsmStackPortStatsAlignmentErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 13),
+    _EsmStackPortStatsAlignmentErrors_Type()
+)
+esmStackPortStatsAlignmentErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortStatsAlignmentErrors.setStatus("current")
+_EsmStackPortStatsFCSErrors_Type = Counter64
+_EsmStackPortStatsFCSErrors_Object = MibTableColumn
+esmStackPortStatsFCSErrors = _EsmStackPortStatsFCSErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 14),
+    _EsmStackPortStatsFCSErrors_Type()
+)
+esmStackPortStatsFCSErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortStatsFCSErrors.setStatus("current")
+_EsmStackPortInErrors_Type = Counter64
+_EsmStackPortInErrors_Object = MibTableColumn
+esmStackPortInErrors = _EsmStackPortInErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 15),
+    _EsmStackPortInErrors_Type()
+)
+esmStackPortInErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInErrors.setStatus("current")
+_EsmStackPortOutErrors_Type = Counter64
+_EsmStackPortOutErrors_Object = MibTableColumn
+esmStackPortOutErrors = _EsmStackPortOutErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 16),
+    _EsmStackPortOutErrors_Type()
+)
+esmStackPortOutErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutErrors.setStatus("current")
+_EsmStackPortInDiscards_Type = Counter64
+_EsmStackPortInDiscards_Object = MibTableColumn
+esmStackPortInDiscards = _EsmStackPortInDiscards_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 17),
+    _EsmStackPortInDiscards_Type()
+)
+esmStackPortInDiscards.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortInDiscards.setStatus("current")
+_EsmStackPortOutDiscards_Type = Counter64
+_EsmStackPortOutDiscards_Object = MibTableColumn
+esmStackPortOutDiscards = _EsmStackPortOutDiscards_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 18),
+    _EsmStackPortOutDiscards_Type()
+)
+esmStackPortOutDiscards.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortOutDiscards.setStatus("current")
+_EsmStackPortTxCollisions_Type = Counter64
+_EsmStackPortTxCollisions_Object = MibTableColumn
+esmStackPortTxCollisions = _EsmStackPortTxCollisions_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 19),
+    _EsmStackPortTxCollisions_Type()
+)
+esmStackPortTxCollisions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortTxCollisions.setStatus("current")
+_EsmStackPortRxUndersizePkts_Type = Counter64
+_EsmStackPortRxUndersizePkts_Object = MibTableColumn
+esmStackPortRxUndersizePkts = _EsmStackPortRxUndersizePkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 20),
+    _EsmStackPortRxUndersizePkts_Type()
+)
+esmStackPortRxUndersizePkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortRxUndersizePkts.setStatus("current")
+_EsmStackPortTxUndersizePkts_Type = Counter64
+_EsmStackPortTxUndersizePkts_Object = MibTableColumn
+esmStackPortTxUndersizePkts = _EsmStackPortTxUndersizePkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 21),
+    _EsmStackPortTxUndersizePkts_Type()
+)
+esmStackPortTxUndersizePkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortTxUndersizePkts.setStatus("current")
+_EsmStackPortRxOversizePkts_Type = Counter64
+_EsmStackPortRxOversizePkts_Object = MibTableColumn
+esmStackPortRxOversizePkts = _EsmStackPortRxOversizePkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 22),
+    _EsmStackPortRxOversizePkts_Type()
+)
+esmStackPortRxOversizePkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortRxOversizePkts.setStatus("current")
+_EsmStackPortTxOversizePkts_Type = Counter64
+_EsmStackPortTxOversizePkts_Object = MibTableColumn
+esmStackPortTxOversizePkts = _EsmStackPortTxOversizePkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 23),
+    _EsmStackPortTxOversizePkts_Type()
+)
+esmStackPortTxOversizePkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortTxOversizePkts.setStatus("current")
+
+
+class _EsmStackPortAutoSpeed_Type(Integer32):
+    """Custom type esmStackPortAutoSpeed based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("speed100", 1),
+          ("speed10", 2),
+          ("speedAuto", 3),
+          ("unknown", 4),
+          ("speed1000", 5),
+          ("speed10000", 6))
+    )
+
+
+_EsmStackPortAutoSpeed_Type.__name__ = "Integer32"
+_EsmStackPortAutoSpeed_Object = MibTableColumn
+esmStackPortAutoSpeed = _EsmStackPortAutoSpeed_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 24),
+    _EsmStackPortAutoSpeed_Type()
+)
+esmStackPortAutoSpeed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    esmStackPortAutoSpeed.setStatus("current")
+
+
+class _EsmStackPortClearStats_Type(Integer32):
+    """Custom type esmStackPortClearStats based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_EsmStackPortClearStats_Type.__name__ = "Integer32"
+_EsmStackPortClearStats_Object = MibTableColumn
+esmStackPortClearStats = _EsmStackPortClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 2, 14, 1, 25),
+    _EsmStackPortClearStats_Type()
+)
+esmStackPortClearStats.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmStackPortClearStats.setStatus("current")
 _DdmConfiguration_ObjectIdentity = ObjectIdentity
 ddmConfiguration = _DdmConfiguration_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 4)
@@ -2425,11 +4380,17 @@ class _EsmViolationRecoveryNotificationType_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            1
+            *(1,
+              2,
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
-        ("clearViolation", 1)
+        *(("clearViolation", 1),
+          ("recoveryTimer", 2),
+          ("adminRecovery", 3),
+          ("lfpRecovery", 4))
     )
 
 
@@ -2442,6 +4403,202 @@ esmViolationRecoveryNotificationType = _EsmViolationRecoveryNotificationType_Obj
 esmViolationRecoveryNotificationType.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     esmViolationRecoveryNotificationType.setStatus("current")
+
+
+class _EsmViolationRecoveryMaximum_Type(Integer32):
+    """Custom type esmViolationRecoveryMaximum based on Integer32"""
+    defaultValue = 10
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 50),
+    )
+
+
+_EsmViolationRecoveryMaximum_Type.__name__ = "Integer32"
+_EsmViolationRecoveryMaximum_Object = MibScalar
+esmViolationRecoveryMaximum = _EsmViolationRecoveryMaximum_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 5, 4),
+    _EsmViolationRecoveryMaximum_Type()
+)
+esmViolationRecoveryMaximum.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    esmViolationRecoveryMaximum.setStatus("current")
+_AlaPortViolationRecoveryTable_Object = MibTable
+alaPortViolationRecoveryTable = _AlaPortViolationRecoveryTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 5, 5)
+)
+if mibBuilder.loadTexts:
+    alaPortViolationRecoveryTable.setStatus("current")
+_AlaPortViolationRecoveryEntry_Object = MibTableRow
+alaPortViolationRecoveryEntry = _AlaPortViolationRecoveryEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 5, 5, 1)
+)
+alaPortViolationRecoveryEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    alaPortViolationRecoveryEntry.setStatus("current")
+
+
+class _AlaPortViolationRecoveryTime_Type(Integer32):
+    """Custom type alaPortViolationRecoveryTime based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 600),
+    )
+
+
+_AlaPortViolationRecoveryTime_Type.__name__ = "Integer32"
+_AlaPortViolationRecoveryTime_Object = MibTableColumn
+alaPortViolationRecoveryTime = _AlaPortViolationRecoveryTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 5, 5, 1, 1),
+    _AlaPortViolationRecoveryTime_Type()
+)
+alaPortViolationRecoveryTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPortViolationRecoveryTime.setStatus("current")
+
+
+class _AlaPortViolationRecoveryMaximum_Type(Integer32):
+    """Custom type alaPortViolationRecoveryMaximum based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 50),
+    )
+
+
+_AlaPortViolationRecoveryMaximum_Type.__name__ = "Integer32"
+_AlaPortViolationRecoveryMaximum_Object = MibTableColumn
+alaPortViolationRecoveryMaximum = _AlaPortViolationRecoveryMaximum_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 5, 5, 1, 2),
+    _AlaPortViolationRecoveryMaximum_Type()
+)
+alaPortViolationRecoveryMaximum.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPortViolationRecoveryMaximum.setStatus("current")
+_EsmDBChangeRebootReqdMIBObjects_ObjectIdentity = ObjectIdentity
+esmDBChangeRebootReqdMIBObjects = _EsmDBChangeRebootReqdMIBObjects_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 6)
+)
+_AlaEsmOldDb_Type = EsmDBType
+_AlaEsmOldDb_Object = MibScalar
+alaEsmOldDb = _AlaEsmOldDb_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 6, 1),
+    _AlaEsmOldDb_Type()
+)
+alaEsmOldDb.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaEsmOldDb.setStatus("current")
+_AlaEsmNewDb_Type = EsmDBType
+_AlaEsmNewDb_Object = MibScalar
+alaEsmNewDb = _AlaEsmNewDb_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 6, 2),
+    _AlaEsmNewDb_Type()
+)
+alaEsmNewDb.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaEsmNewDb.setStatus("current")
+
+
+class _AlaEsmModuleChangeString_Type(SnmpAdminString):
+    """Custom type alaEsmModuleChangeString based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 128),
+    )
+
+
+_AlaEsmModuleChangeString_Type.__name__ = "SnmpAdminString"
+_AlaEsmModuleChangeString_Object = MibScalar
+alaEsmModuleChangeString = _AlaEsmModuleChangeString_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 6, 3),
+    _AlaEsmModuleChangeString_Type()
+)
+alaEsmModuleChangeString.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaEsmModuleChangeString.setStatus("current")
+_EsmStormThresholdViolation_ObjectIdentity = ObjectIdentity
+esmStormThresholdViolation = _EsmStormThresholdViolation_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 7)
+)
+_AlaDBChangeMIBObjects_ObjectIdentity = ObjectIdentity
+alaDBChangeMIBObjects = _AlaDBChangeMIBObjects_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 8)
+)
+_AlaOldDb_Type = AlaDBType
+_AlaOldDb_Object = MibScalar
+alaOldDb = _AlaOldDb_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 8, 1),
+    _AlaOldDb_Type()
+)
+alaOldDb.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaOldDb.setStatus("current")
+_AlaNewDb_Type = AlaDBType
+_AlaNewDb_Object = MibScalar
+alaNewDb = _AlaNewDb_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 8, 2),
+    _AlaNewDb_Type()
+)
+alaNewDb.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaNewDb.setStatus("current")
+
+
+class _AlaModuleChangeString_Type(SnmpAdminString):
+    """Custom type alaModuleChangeString based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 128),
+    )
+
+
+_AlaModuleChangeString_Type.__name__ = "SnmpAdminString"
+_AlaModuleChangeString_Object = MibScalar
+alaModuleChangeString = _AlaModuleChangeString_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 8, 3),
+    _AlaModuleChangeString_Type()
+)
+alaModuleChangeString.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaModuleChangeString.setStatus("current")
+_PtpConfiguration_ObjectIdentity = ObjectIdentity
+ptpConfiguration = _PtpConfiguration_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 9)
+)
+
+
+class _PtpConfig_Type(Integer32):
+    """Custom type ptpConfig based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_PtpConfig_Type.__name__ = "Integer32"
+_PtpConfig_Object = MibScalar
+ptpConfig = _PtpConfig_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 1, 9, 1),
+    _PtpConfig_Type()
+)
+ptpConfig.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ptpConfig.setStatus("current")
 _AlcatelIND1PortMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1PortMIBConformance = _AlcatelIND1PortMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2)
@@ -2461,7 +4618,9 @@ esmConfMIBGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 1)
 )
 esmConfMIBGroup.setObjects(
-      *(("ALCATEL-IND1-PORT-MIB", "esmPortCfgSpeed"),
+      *(("ALCATEL-IND1-PORT-MIB", "esmPortSlot"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortIF"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgSpeed"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortCfgDuplexMode"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortCfgIFG"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortPauseSlotTime"),
@@ -2471,14 +4630,29 @@ esmConfMIBGroup.setObjects(
         ("ALCATEL-IND1-PORT-MIB", "esmPortCfgAutoNegotiation"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortCfgCrossover"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortCfgFlow"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortOperationalHybridType"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortFloodUnknownUcastEnable"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortMaxUnknownUcastFloodRate"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortMaxMcastFloodRate"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortViolationClearAll"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortFloodBcastEnable"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortMaxFloodRateLimit"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortMaxUnknownUcastFloodRateLimit"),
         ("ALCATEL-IND1-PORT-MIB", "esmPortMaxMcastFloodRateLimit"),
-        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgSFPType"))
+        ("ALCATEL-IND1-PORT-MIB", "esmPortMinMcastFloodRateLimit"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortFloodThresholdAction"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortMcastThresholdAction"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortFlood"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortMCastStorm"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortViolationClearAll"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgSFPType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortWaitToRestoreTimer"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgEeeStatus"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgEeeAutoNegState"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgEeeCapability"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgLongEnable"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgMMUDynamicCellSetLimit"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgMMULowWaterMarkCellSetLimit"))
 )
 if mibBuilder.loadTexts:
     esmConfMIBGroup.setStatus("current")
@@ -2594,7 +4768,8 @@ ddmConfigGroup = ObjectGroup(
 )
 ddmConfigGroup.setObjects(
       *(("ALCATEL-IND1-PORT-MIB", "ddmConfig"),
-        ("ALCATEL-IND1-PORT-MIB", "ddmTrapConfig"))
+        ("ALCATEL-IND1-PORT-MIB", "ddmTrapConfig"),
+        ("ALCATEL-IND1-PORT-MIB", "ddmNotificationType"))
 )
 if mibBuilder.loadTexts:
     ddmConfigGroup.setStatus("current")
@@ -2604,10 +4779,222 @@ violationRecoveryGroup = ObjectGroup(
 )
 violationRecoveryGroup.setObjects(
       *(("ALCATEL-IND1-PORT-MIB", "esmViolationRecoveryTrap"),
-        ("ALCATEL-IND1-PORT-MIB", "esmViolationRecoveryTime"))
+        ("ALCATEL-IND1-PORT-MIB", "esmViolationRecoveryTime"),
+        ("ALCATEL-IND1-PORT-MIB", "esmViolationRecoveryNotificationType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmViolationRecoveryMaximum"))
 )
 if mibBuilder.loadTexts:
     violationRecoveryGroup.setStatus("current")
+
+esmTdrGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 12)
+)
+esmTdrGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "esmTdrPortCableState"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortValidPairs"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair1State"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair1Length"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair2State"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair2Length"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair3State"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair3Length"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair4State"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortPair4Length"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortFuzzLength"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortTest"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrClearStats"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrResult"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtSwapTypeChannel1"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtSwapTypeChannel2"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtPolaritySwapPair1"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtPolaritySwapPair2"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtPolaritySwapPair3"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtPolaritySwapPair4"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtSkewPair1"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtSkewPair2"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtSkewPair3"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtSkewPair4"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtAccurateCableLenPair1"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtAccurateCableLenPair2"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtAccurateCableLenPair3"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtAccurateCableLenPair4"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPortExtDownshiftStatus"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrExtResult"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrCableLen"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrPhyType"))
+)
+if mibBuilder.loadTexts:
+    esmTdrGroup.setStatus("current")
+
+alaEsmDBObjGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 13)
+)
+alaEsmDBObjGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaEsmOldDb"),
+        ("ALCATEL-IND1-PORT-MIB", "alaEsmNewDb"),
+        ("ALCATEL-IND1-PORT-MIB", "alaEsmModuleChangeString"))
+)
+if mibBuilder.loadTexts:
+    alaEsmDBObjGroup.setStatus("current")
+
+alaLinkMonConfigMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 15)
+)
+alaLinkMonConfigMIBGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatus"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonTimeWindow"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonLinkFlapThreshold"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonLinkErrorThreshold"))
+)
+if mibBuilder.loadTexts:
+    alaLinkMonConfigMIBGroup.setStatus("current")
+
+alaLinkMonStatsMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 16)
+)
+alaLinkMonStatsMIBGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsClearStats"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsPortState"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsCurrentLinkFlaps"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsCurrentErrorFrames"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsCurrentCRCErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsCurrentLostFrames"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsCurrentAlignErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsCurrentLinkErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsTotalLinkFlaps"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsTotalLinkErrors"))
+)
+if mibBuilder.loadTexts:
+    alaLinkMonStatsMIBGroup.setStatus("current")
+
+alaLFPGroupMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 17)
+)
+alaLFPGroupMIBGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaLFPGroupId"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPGroupAdminStatus"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPGroupOperStatus"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPGroupWaitToShutdown"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPGroupRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaLFPGroupMIBGroup.setStatus("current")
+
+alaLFPConfigMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 18)
+)
+alaLFPConfigMIBGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaLFPConfigPort"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPConfigPortType"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPConfigRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaLFPConfigMIBGroup.setStatus("current")
+
+alaPortViolationRecoveryMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 19)
+)
+alaPortViolationRecoveryMIBGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaPortViolationRecoveryTime"),
+        ("ALCATEL-IND1-PORT-MIB", "alaPortViolationRecoveryMaximum"))
+)
+if mibBuilder.loadTexts:
+    alaPortViolationRecoveryMIBGroup.setStatus("current")
+
+esmSlotInfoGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 20)
+)
+esmSlotInfoGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "esmSlotNumber"),
+        ("ALCATEL-IND1-PORT-MIB", "esmNumberOfUserPorts"))
+)
+if mibBuilder.loadTexts:
+    esmSlotInfoGroup.setStatus("current")
+
+esmConfTrapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 21)
+)
+esmConfTrapGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "esmDrvTrapDrops"),
+        ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspPowerSupplyType"),
+        ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspSlot"),
+        ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspTime"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortViolationValue"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStormViolationThresholdNotificationType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStormViolationThresholdTrafficType"))
+)
+if mibBuilder.loadTexts:
+    esmConfTrapGroup.setStatus("current")
+
+alcether10GigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 22)
+)
+alcether10GigGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "alcether10GigPrimary")
+)
+if mibBuilder.loadTexts:
+    alcether10GigGroup.setStatus("current")
+
+esmHybridConfGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 23)
+)
+esmHybridConfGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgCrossover"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgDuplexMode"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgFlow"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgInactiveType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgSFPType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgRuntEnable"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgRuntSize"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgSpeed"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgHybridActiveType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortCfgHybridMode"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridPortCfgAutoNegotiation"))
+)
+if mibBuilder.loadTexts:
+    esmHybridConfGroup.setStatus("current")
+
+esmStackPortConfMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 28)
+)
+esmStackPortConfMIBGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "esmStackPortIfIndex"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortSlotNum"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInOctets"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutOctets"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInUcastPkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutUcastPkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInMulticastPkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutMulticastPkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInBroadcastPkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutBroadcastPkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInPauseFrames"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutPauseFrames"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortStatsAlignmentErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortStatsFCSErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutErrors"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortInDiscards"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortOutDiscards"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortTxCollisions"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortRxUndersizePkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortTxUndersizePkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortRxOversizePkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortTxOversizePkts"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortAutoSpeed"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortClearStats"))
+)
+if mibBuilder.loadTexts:
+    esmStackPortConfMIBGroup.setStatus("current")
+
+ptpConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 29)
+)
+ptpConfigGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "ptpConfig")
+)
+if mibBuilder.loadTexts:
+    ptpConfigGroup.setStatus("current")
 
 
 # Notification objects
@@ -2689,6 +5076,44 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+alaEsmKite2eDBChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 0, 3)
+)
+alaEsmKite2eDBChange.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaEsmOldDb"),
+        ("ALCATEL-IND1-PORT-MIB", "alaEsmNewDb"),
+        ("ALCATEL-IND1-PORT-MIB", "alaEsmModuleChangeString"))
+)
+if mibBuilder.loadTexts:
+    alaEsmKite2eDBChange.setStatus(
+        "current"
+    )
+
+esmPortViolation = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 0, 4)
+)
+esmPortViolation.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("ALCATEL-IND1-PORT-MIB", "esmPortViolationValue"))
+)
+if mibBuilder.loadTexts:
+    esmPortViolation.setStatus(
+        "current"
+    )
+
+alaDBChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 0, 5)
+)
+alaDBChange.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaOldDb"),
+        ("ALCATEL-IND1-PORT-MIB", "alaNewDb"),
+        ("ALCATEL-IND1-PORT-MIB", "alaModuleChangeString"))
+)
+if mibBuilder.loadTexts:
+    alaDBChange.setStatus(
+        "current"
+    )
+
 esmDrvTrapDropsLink = NotificationType(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 6, 0, 1)
 )
@@ -2704,14 +5129,29 @@ if mibBuilder.loadTexts:
         "current"
     )
 
-e2eStackTopoChangeTrap = NotificationType(
-    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 6, 0, 2)
+alaDyingGaspTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 6, 0, 3)
 )
-e2eStackTopoChangeTrap.setObjects(
-    ("ALCATEL-IND1-PORT-MIB", "esmE2EFlowVlan")
+alaDyingGaspTrap.setObjects(
+      *(("ALCATEL-IND1-PORT-MIB", "alaDyingGaspSlot"),
+        ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspPowerSupplyType"),
+        ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspTime"))
 )
 if mibBuilder.loadTexts:
-    e2eStackTopoChangeTrap.setStatus(
+    alaDyingGaspTrap.setStatus(
+        "current"
+    )
+
+esmStormThresholdViolationStatus = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 6, 0, 4)
+)
+esmStormThresholdViolationStatus.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStormViolationThresholdNotificationType"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStormViolationThresholdTrafficType"))
+)
+if mibBuilder.loadTexts:
+    esmStormThresholdViolationStatus.setStatus(
         "current"
     )
 
@@ -2755,6 +5195,61 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+alaDyingGaspNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 11)
+)
+alaDyingGaspNotificationGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspTrap")
+)
+if mibBuilder.loadTexts:
+    alaDyingGaspNotificationGroup.setStatus(
+        "current"
+    )
+
+alsEsmDBChangeNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 14)
+)
+alsEsmDBChangeNotificationGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "alaEsmKite2eDBChange")
+)
+if mibBuilder.loadTexts:
+    alsEsmDBChangeNotificationGroup.setStatus(
+        "current"
+    )
+
+esmPortViolationNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 24)
+)
+esmPortViolationNotificationGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "esmPortViolation")
+)
+if mibBuilder.loadTexts:
+    esmPortViolationNotificationGroup.setStatus(
+        "current"
+    )
+
+esmDrvDyingGaspNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 25)
+)
+esmDrvDyingGaspNotificationGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspTrap")
+)
+if mibBuilder.loadTexts:
+    esmDrvDyingGaspNotificationGroup.setStatus(
+        "current"
+    )
+
+esmStormThresholdViolationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 2, 26)
+)
+esmStormThresholdViolationGroup.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "esmStormThresholdViolationStatus")
+)
+if mibBuilder.loadTexts:
+    esmStormThresholdViolationGroup.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -2772,7 +5267,22 @@ esmConfPortCompliance.setObjects(
         ("ALCATEL-IND1-PORT-MIB", "ddmConfigGroup"),
         ("ALCATEL-IND1-PORT-MIB", "ddmNotificationsGroup"),
         ("ALCATEL-IND1-PORT-MIB", "violationRecoveryGroup"),
-        ("ALCATEL-IND1-PORT-MIB", "violationNotificationsGroup"))
+        ("ALCATEL-IND1-PORT-MIB", "violationNotificationsGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaDyingGaspNotificationGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "esmDrvDyingGaspNotificationGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaPortViolationRecoveryMIBGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "esmConfTrapGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "esmTdrGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaEsmDBObjGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alsEsmDBChangeNotificationGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonConfigMIBGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPGroupMIBGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLFPConfigMIBGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alcether10GigGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "esmHybridConfGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStormThresholdViolationGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "ptpConfigGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "esmStackPortConfMIBGroup"))
 )
 if mibBuilder.loadTexts:
     esmConfPortCompliance.setStatus(
@@ -2783,10 +5293,22 @@ alcEtherStatsCompliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 1, 2)
 )
 alcEtherStatsCompliance.setObjects(
-    ("ALCATEL-IND1-PORT-MIB", "alcEtherStatsMIBGroup")
+      *(("ALCATEL-IND1-PORT-MIB", "alcEtherStatsMIBGroup"),
+        ("ALCATEL-IND1-PORT-MIB", "alaLinkMonStatsMIBGroup"))
 )
 if mibBuilder.loadTexts:
     alcEtherStatsCompliance.setStatus(
+        "current"
+    )
+
+esmSlotInfoCompliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 5, 1, 2, 1, 3)
+)
+esmSlotInfoCompliance.setObjects(
+    ("ALCATEL-IND1-PORT-MIB", "esmSlotInfoGroup")
+)
+if mibBuilder.loadTexts:
+    esmSlotInfoCompliance.setStatus(
         "current"
     )
 
@@ -2795,7 +5317,9 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "ALCATEL-IND1-PORT-MIB",
-    **{"alcatelIND1PortMIB": alcatelIND1PortMIB,
+    **{"AlaDBType": AlaDBType,
+       "EsmDBType": EsmDBType,
+       "alcatelIND1PortMIB": alcatelIND1PortMIB,
        "alcatelIND1PortNotifications": alcatelIND1PortNotifications,
        "ddmNotifications": ddmNotifications,
        "ddmTemperatureThresholdViolated": ddmTemperatureThresholdViolated,
@@ -2805,9 +5329,18 @@ mibBuilder.exportSymbols(
        "ddmRxPowerThresholdViolated": ddmRxPowerThresholdViolated,
        "esmViolationNotifications": esmViolationNotifications,
        "esmViolationRecoveryTimeout": esmViolationRecoveryTimeout,
+       "alaEsmKite2eDBChange": alaEsmKite2eDBChange,
+       "esmPortViolation": esmPortViolation,
+       "alaDBChange": alaDBChange,
        "alcatelIND1PortMIBObjects": alcatelIND1PortMIBObjects,
        "esmConfTrap": esmConfTrap,
        "esmDrvTrapDrops": esmDrvTrapDrops,
+       "alaDyingGaspSlot": alaDyingGaspSlot,
+       "alaDyingGaspPowerSupplyType": alaDyingGaspPowerSupplyType,
+       "alaDyingGaspTime": alaDyingGaspTime,
+       "esmPortViolationValue": esmPortViolationValue,
+       "esmStormViolationThresholdNotificationType": esmStormViolationThresholdNotificationType,
+       "esmStormViolationThresholdTrafficType": esmStormViolationThresholdTrafficType,
        "physicalPort": physicalPort,
        "esmConfTable": esmConfTable,
        "esmConfEntry": esmConfEntry,
@@ -2843,6 +5376,16 @@ mibBuilder.exportSymbols(
        "esmPortMaxUnknownUcastFloodRateLimit": esmPortMaxUnknownUcastFloodRateLimit,
        "esmPortMaxMcastFloodRateLimit": esmPortMaxMcastFloodRateLimit,
        "esmPortCfgSFPType": esmPortCfgSFPType,
+       "esmPortWaitToRestoreTimer": esmPortWaitToRestoreTimer,
+       "esmPortMinFloodRateLimit": esmPortMinFloodRateLimit,
+       "esmPortMinMcastFloodRateLimit": esmPortMinMcastFloodRateLimit,
+       "esmPortFloodThresholdAction": esmPortFloodThresholdAction,
+       "esmPortMcastThresholdAction": esmPortMcastThresholdAction,
+       "esmPortFlood": esmPortFlood,
+       "esmPortMCastStorm": esmPortMCastStorm,
+       "esmPortCfgEeeStatus": esmPortCfgEeeStatus,
+       "esmPortCfgEeeAutoNegState": esmPortCfgEeeAutoNegState,
+       "esmPortCfgEeeCapability": esmPortCfgEeeCapability,
        "alcetherStatsTable": alcetherStatsTable,
        "alcetherStatsEntry": alcetherStatsEntry,
        "alcetherClearStats": alcetherClearStats,
@@ -2934,7 +5477,111 @@ mibBuilder.exportSymbols(
        "esmPortModeIndex": esmPortModeIndex,
        "esmPortRunningMode": esmPortRunningMode,
        "esmPortSavedMode": esmPortSavedMode,
-       "esmE2EFlowVlan": esmE2EFlowVlan,
+       "esmTdrPortTable": esmTdrPortTable,
+       "esmTdrPortEntry": esmTdrPortEntry,
+       "esmTdrPortCableState": esmTdrPortCableState,
+       "esmTdrPortValidPairs": esmTdrPortValidPairs,
+       "esmTdrPortPair1State": esmTdrPortPair1State,
+       "esmTdrPortPair1Length": esmTdrPortPair1Length,
+       "esmTdrPortPair2State": esmTdrPortPair2State,
+       "esmTdrPortPair2Length": esmTdrPortPair2Length,
+       "esmTdrPortPair3State": esmTdrPortPair3State,
+       "esmTdrPortPair3Length": esmTdrPortPair3Length,
+       "esmTdrPortPair4State": esmTdrPortPair4State,
+       "esmTdrPortPair4Length": esmTdrPortPair4Length,
+       "esmTdrPortFuzzLength": esmTdrPortFuzzLength,
+       "esmTdrPortTest": esmTdrPortTest,
+       "esmTdrClearStats": esmTdrClearStats,
+       "esmTdrResult": esmTdrResult,
+       "esmTdrPortExtSwapTypeChannel1": esmTdrPortExtSwapTypeChannel1,
+       "esmTdrPortExtSwapTypeChannel2": esmTdrPortExtSwapTypeChannel2,
+       "esmTdrPortExtPolaritySwapPair1": esmTdrPortExtPolaritySwapPair1,
+       "esmTdrPortExtPolaritySwapPair2": esmTdrPortExtPolaritySwapPair2,
+       "esmTdrPortExtPolaritySwapPair3": esmTdrPortExtPolaritySwapPair3,
+       "esmTdrPortExtPolaritySwapPair4": esmTdrPortExtPolaritySwapPair4,
+       "esmTdrPortExtSkewPair1": esmTdrPortExtSkewPair1,
+       "esmTdrPortExtSkewPair2": esmTdrPortExtSkewPair2,
+       "esmTdrPortExtSkewPair3": esmTdrPortExtSkewPair3,
+       "esmTdrPortExtSkewPair4": esmTdrPortExtSkewPair4,
+       "esmTdrPortExtAccurateCableLenPair1": esmTdrPortExtAccurateCableLenPair1,
+       "esmTdrPortExtAccurateCableLenPair2": esmTdrPortExtAccurateCableLenPair2,
+       "esmTdrPortExtAccurateCableLenPair3": esmTdrPortExtAccurateCableLenPair3,
+       "esmTdrPortExtAccurateCableLenPair4": esmTdrPortExtAccurateCableLenPair4,
+       "esmTdrPortExtDownshiftStatus": esmTdrPortExtDownshiftStatus,
+       "esmTdrExtResult": esmTdrExtResult,
+       "esmTdrCableLen": esmTdrCableLen,
+       "esmTdrPhyType": esmTdrPhyType,
+       "alaLinkMonConfigTable": alaLinkMonConfigTable,
+       "alaLinkMonConfigEntry": alaLinkMonConfigEntry,
+       "alaLinkMonStatus": alaLinkMonStatus,
+       "alaLinkMonTimeWindow": alaLinkMonTimeWindow,
+       "alaLinkMonLinkFlapThreshold": alaLinkMonLinkFlapThreshold,
+       "alaLinkMonLinkErrorThreshold": alaLinkMonLinkErrorThreshold,
+       "alaLinkMonStatsTable": alaLinkMonStatsTable,
+       "alaLinkMonStatsEntry": alaLinkMonStatsEntry,
+       "alaLinkMonStatsClearStats": alaLinkMonStatsClearStats,
+       "alaLinkMonStatsPortState": alaLinkMonStatsPortState,
+       "alaLinkMonStatsCurrentLinkFlaps": alaLinkMonStatsCurrentLinkFlaps,
+       "alaLinkMonStatsCurrentErrorFrames": alaLinkMonStatsCurrentErrorFrames,
+       "alaLinkMonStatsCurrentCRCErrors": alaLinkMonStatsCurrentCRCErrors,
+       "alaLinkMonStatsCurrentLostFrames": alaLinkMonStatsCurrentLostFrames,
+       "alaLinkMonStatsCurrentAlignErrors": alaLinkMonStatsCurrentAlignErrors,
+       "alaLinkMonStatsCurrentLinkErrors": alaLinkMonStatsCurrentLinkErrors,
+       "alaLinkMonStatsTotalLinkFlaps": alaLinkMonStatsTotalLinkFlaps,
+       "alaLinkMonStatsTotalLinkErrors": alaLinkMonStatsTotalLinkErrors,
+       "alaLFPGroupTable": alaLFPGroupTable,
+       "alaLFPGroupEntry": alaLFPGroupEntry,
+       "alaLFPGroupId": alaLFPGroupId,
+       "alaLFPGroupAdminStatus": alaLFPGroupAdminStatus,
+       "alaLFPGroupOperStatus": alaLFPGroupOperStatus,
+       "alaLFPGroupWaitToShutdown": alaLFPGroupWaitToShutdown,
+       "alaLFPGroupRowStatus": alaLFPGroupRowStatus,
+       "alaLFPConfigTable": alaLFPConfigTable,
+       "alaLFPConfigEntry": alaLFPConfigEntry,
+       "alaLFPConfigPort": alaLFPConfigPort,
+       "alaLFPConfigPortType": alaLFPConfigPortType,
+       "alaLFPConfigRowStatus": alaLFPConfigRowStatus,
+       "esmSlotInfoTable": esmSlotInfoTable,
+       "esmSlotInfoEntry": esmSlotInfoEntry,
+       "esmSlotNumber": esmSlotNumber,
+       "esmNumberOfUserPorts": esmNumberOfUserPorts,
+       "esmPtpStatsTable": esmPtpStatsTable,
+       "esmPtpStatsEntry": esmPtpStatsEntry,
+       "esmPtpStatsIngPtpv2": esmPtpStatsIngPtpv2,
+       "esmPtpStatsIngPtpv1": esmPtpStatsIngPtpv1,
+       "esmPtpStatsIngPtpDrop": esmPtpStatsIngPtpDrop,
+       "esmPtpStatsIngPtpPigBag": esmPtpStatsIngPtpPigBag,
+       "esmPtpStatsEgrPtpv2": esmPtpStatsEgrPtpv2,
+       "esmPtpStatsEgrPtpv1": esmPtpStatsEgrPtpv1,
+       "esmPtpStatsEgrPtpDrop": esmPtpStatsEgrPtpDrop,
+       "esmPtpStatsEgrPtpUpdateRes": esmPtpStatsEgrPtpUpdateRes,
+       "esmStackPortTable": esmStackPortTable,
+       "esmStackPortConfEntry": esmStackPortConfEntry,
+       "esmStackPortIfIndex": esmStackPortIfIndex,
+       "esmStackPortSlotNum": esmStackPortSlotNum,
+       "esmStackPortInOctets": esmStackPortInOctets,
+       "esmStackPortOutOctets": esmStackPortOutOctets,
+       "esmStackPortInUcastPkts": esmStackPortInUcastPkts,
+       "esmStackPortOutUcastPkts": esmStackPortOutUcastPkts,
+       "esmStackPortInMulticastPkts": esmStackPortInMulticastPkts,
+       "esmStackPortOutMulticastPkts": esmStackPortOutMulticastPkts,
+       "esmStackPortInBroadcastPkts": esmStackPortInBroadcastPkts,
+       "esmStackPortOutBroadcastPkts": esmStackPortOutBroadcastPkts,
+       "esmStackPortInPauseFrames": esmStackPortInPauseFrames,
+       "esmStackPortOutPauseFrames": esmStackPortOutPauseFrames,
+       "esmStackPortStatsAlignmentErrors": esmStackPortStatsAlignmentErrors,
+       "esmStackPortStatsFCSErrors": esmStackPortStatsFCSErrors,
+       "esmStackPortInErrors": esmStackPortInErrors,
+       "esmStackPortOutErrors": esmStackPortOutErrors,
+       "esmStackPortInDiscards": esmStackPortInDiscards,
+       "esmStackPortOutDiscards": esmStackPortOutDiscards,
+       "esmStackPortTxCollisions": esmStackPortTxCollisions,
+       "esmStackPortRxUndersizePkts": esmStackPortRxUndersizePkts,
+       "esmStackPortTxUndersizePkts": esmStackPortTxUndersizePkts,
+       "esmStackPortRxOversizePkts": esmStackPortRxOversizePkts,
+       "esmStackPortTxOversizePkts": esmStackPortTxOversizePkts,
+       "esmStackPortAutoSpeed": esmStackPortAutoSpeed,
+       "esmStackPortClearStats": esmStackPortClearStats,
        "ddmConfiguration": ddmConfiguration,
        "ddmConfig": ddmConfig,
        "ddmTrapConfig": ddmTrapConfig,
@@ -2943,10 +5590,27 @@ mibBuilder.exportSymbols(
        "esmViolationRecoveryTrap": esmViolationRecoveryTrap,
        "esmViolationRecoveryTime": esmViolationRecoveryTime,
        "esmViolationRecoveryNotificationType": esmViolationRecoveryNotificationType,
+       "esmViolationRecoveryMaximum": esmViolationRecoveryMaximum,
+       "alaPortViolationRecoveryTable": alaPortViolationRecoveryTable,
+       "alaPortViolationRecoveryEntry": alaPortViolationRecoveryEntry,
+       "alaPortViolationRecoveryTime": alaPortViolationRecoveryTime,
+       "alaPortViolationRecoveryMaximum": alaPortViolationRecoveryMaximum,
+       "esmDBChangeRebootReqdMIBObjects": esmDBChangeRebootReqdMIBObjects,
+       "alaEsmOldDb": alaEsmOldDb,
+       "alaEsmNewDb": alaEsmNewDb,
+       "alaEsmModuleChangeString": alaEsmModuleChangeString,
+       "esmStormThresholdViolation": esmStormThresholdViolation,
+       "alaDBChangeMIBObjects": alaDBChangeMIBObjects,
+       "alaOldDb": alaOldDb,
+       "alaNewDb": alaNewDb,
+       "alaModuleChangeString": alaModuleChangeString,
+       "ptpConfiguration": ptpConfiguration,
+       "ptpConfig": ptpConfig,
        "alcatelIND1PortMIBConformance": alcatelIND1PortMIBConformance,
        "alcatelIND1PortMIBCompliances": alcatelIND1PortMIBCompliances,
        "esmConfPortCompliance": esmConfPortCompliance,
        "alcEtherStatsCompliance": alcEtherStatsCompliance,
+       "esmSlotInfoCompliance": esmSlotInfoCompliance,
        "alcatelIND1PortMIBGroups": alcatelIND1PortMIBGroups,
        "esmConfMIBGroup": esmConfMIBGroup,
        "esmDetectedConfMIBGroup": esmDetectedConfMIBGroup,
@@ -2958,6 +5622,25 @@ mibBuilder.exportSymbols(
        "ddmNotificationsGroup": ddmNotificationsGroup,
        "violationRecoveryGroup": violationRecoveryGroup,
        "violationNotificationsGroup": violationNotificationsGroup,
+       "alaDyingGaspNotificationGroup": alaDyingGaspNotificationGroup,
+       "esmTdrGroup": esmTdrGroup,
+       "alaEsmDBObjGroup": alaEsmDBObjGroup,
+       "alsEsmDBChangeNotificationGroup": alsEsmDBChangeNotificationGroup,
+       "alaLinkMonConfigMIBGroup": alaLinkMonConfigMIBGroup,
+       "alaLinkMonStatsMIBGroup": alaLinkMonStatsMIBGroup,
+       "alaLFPGroupMIBGroup": alaLFPGroupMIBGroup,
+       "alaLFPConfigMIBGroup": alaLFPConfigMIBGroup,
+       "alaPortViolationRecoveryMIBGroup": alaPortViolationRecoveryMIBGroup,
+       "esmSlotInfoGroup": esmSlotInfoGroup,
+       "esmConfTrapGroup": esmConfTrapGroup,
+       "alcether10GigGroup": alcether10GigGroup,
+       "esmHybridConfGroup": esmHybridConfGroup,
+       "esmPortViolationNotificationGroup": esmPortViolationNotificationGroup,
+       "esmDrvDyingGaspNotificationGroup": esmDrvDyingGaspNotificationGroup,
+       "esmStormThresholdViolationGroup": esmStormThresholdViolationGroup,
+       "esmStackPortConfMIBGroup": esmStackPortConfMIBGroup,
+       "ptpConfigGroup": ptpConfigGroup,
        "esmDrvTrapDropsLink": esmDrvTrapDropsLink,
-       "e2eStackTopoChangeTrap": e2eStackTopoChangeTrap}
+       "alaDyingGaspTrap": alaDyingGaspTrap,
+       "esmStormThresholdViolationStatus": esmStormThresholdViolationStatus}
 )

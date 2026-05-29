@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ruckus\RUCKUS-SZ-CONFIG-WLAN-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:23:46 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -133,6 +130,10 @@ if 'mibBuilder' not in globals():
 ruckusSZConfigWLANMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 25053, 1, 4, 2, 2)
 )
+if mibBuilder.loadTexts:
+    ruckusSZConfigWLANMIB.setRevisions(
+        ("2020-06-15 11:00",)
+    )
 
 
 # Types definitions
@@ -257,7 +258,8 @@ class _RuckusSZConfigWLANWLANServiceType_Type(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -266,7 +268,8 @@ class _RuckusSZConfigWLANWLANServiceType_Type(Integer32):
           ("guest", 3),
           ("webauth", 4),
           ("hotspot20", 5),
-          ("hotspot20-osen", 6))
+          ("hotspot20-osen", 6),
+          ("weChat", 7))
     )
 
 
@@ -290,13 +293,15 @@ class _RuckusSZConfigWLANAuthentication_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("open", 1),
           ("eap", 2),
-          ("mac-address", 3))
+          ("mac-address", 3),
+          ("eapMacAddress", 4))
     )
 
 
@@ -322,7 +327,10 @@ class _RuckusSZConfigWLANEncryption_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6,
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
@@ -330,7 +338,10 @@ class _RuckusSZConfigWLANEncryption_Type(Integer32):
           ("wpa-Mixed", 2),
           ("wep-64", 3),
           ("wep-128", 4),
-          ("none-enc", 5))
+          ("none-enc", 5),
+          ("wpa3", 6),
+          ("wpa2Wpa3Mixed", 7),
+          ("owe", 8))
     )
 
 
@@ -395,13 +406,15 @@ class _RuckusSZConfigWLANWPACipherType_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("aes", 1),
           ("tkipaes", 2),
-          ("null", 3))
+          ("null", 3),
+          ("aesGCMP256", 4))
     )
 
 
@@ -434,6 +447,26 @@ ruckusSZConfigWLANWPAKey = _RuckusSZConfigWLANWPAKey_Object(
 ruckusSZConfigWLANWPAKey.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     ruckusSZConfigWLANWPAKey.setStatus("current")
+
+
+class _RuckusSZConfigWLANSAEPassphrase_Type(OctetString):
+    """Custom type ruckusSZConfigWLANSAEPassphrase based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 63),
+        ValueSizeConstraint(64, 64),
+    )
+
+
+_RuckusSZConfigWLANSAEPassphrase_Type.__name__ = "OctetString"
+_RuckusSZConfigWLANSAEPassphrase_Object = MibTableColumn
+ruckusSZConfigWLANSAEPassphrase = _RuckusSZConfigWLANSAEPassphrase_Object(
+    (1, 3, 6, 1, 4, 1, 25053, 1, 4, 2, 2, 1, 1, 1, 1, 23),
+    _RuckusSZConfigWLANSAEPassphrase_Type()
+)
+ruckusSZConfigWLANSAEPassphrase.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ruckusSZConfigWLANSAEPassphrase.setStatus("current")
 
 
 class _RuckusSZConfigWLANWirelessClientIsolation_Type(Integer32):
@@ -643,6 +676,7 @@ mibBuilder.exportSymbols(
        "ruckusSZConfigWLANWEPKey": ruckusSZConfigWLANWEPKey,
        "ruckusSZConfigWLANWPACipherType": ruckusSZConfigWLANWPACipherType,
        "ruckusSZConfigWLANWPAKey": ruckusSZConfigWLANWPAKey,
+       "ruckusSZConfigWLANSAEPassphrase": ruckusSZConfigWLANSAEPassphrase,
        "ruckusSZConfigWLANWirelessClientIsolation": ruckusSZConfigWLANWirelessClientIsolation,
        "ruckusSZConfigWLANZeroITActivation": ruckusSZConfigWLANZeroITActivation,
        "ruckusSZConfigWLANServicePriority": ruckusSZConfigWLANServicePriority,

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\BROCADE-PRODUCTS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:21:54 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,11 +104,15 @@ brocadeProductsMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     brocadeProductsMIB.setRevisions(
-        ("2012-02-03 00:00",
+        ("2018-05-29 12:00",
+         "2017-12-07 00:00",
+         "2017-01-05 00:00",
+         "2016-12-26 00:00",
+         "2016-06-28 00:00",
+         "2014-10-07 14:05",
          "2013-11-21 00:00",
          "2013-09-25 13:00",
-         "2014-10-07 14:05",
-         "2015-08-11 13:05")
+         "2012-02-03 00:00")
     )
 
 
@@ -164,6 +165,26 @@ _Vdx8770S16_ObjectIdentity = ObjectIdentity
 vdx8770S16 = _Vdx8770S16_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 3, 3, 1, 1002)
 )
+_Slx9850S4_ObjectIdentity = ObjectIdentity
+slx9850S4 = _Slx9850S4_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1588, 3, 3, 1, 2000)
+)
+_Slx9850S8_ObjectIdentity = ObjectIdentity
+slx9850S8 = _Slx9850S8_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1588, 3, 3, 1, 2001)
+)
+_Slx9240_ObjectIdentity = ObjectIdentity
+slx9240 = _Slx9240_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1588, 3, 3, 1, 3000)
+)
+_Slx9140_ObjectIdentity = ObjectIdentity
+slx9140 = _Slx9140_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1588, 3, 3, 1, 3001)
+)
+_Slx9540_ObjectIdentity = ObjectIdentity
+slx9540 = _Slx9540_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1588, 3, 3, 1, 4000)
+)
 
 # Managed Objects groups
 
@@ -194,5 +215,10 @@ mibBuilder.exportSymbols(
        "vdx6940S144": vdx6940S144,
        "vdx8770S4": vdx8770S4,
        "vdx8770S8": vdx8770S8,
-       "vdx8770S16": vdx8770S16}
+       "vdx8770S16": vdx8770S16,
+       "slx9850S4": slx9850S4,
+       "slx9850S8": slx9850S8,
+       "slx9240": slx9240,
+       "slx9140": slx9140,
+       "slx9540": slx9540}
 )

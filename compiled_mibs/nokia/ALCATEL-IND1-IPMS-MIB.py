@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IPMS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:32 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IPMS-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,7 @@ alcatelIND1IPMSMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1IPMSMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -758,7 +755,7 @@ alaIpmsStaticNeighborIGMPVersion = _AlaIpmsStaticNeighborIGMPVersion_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 18, 1, 1, 4, 1, 1, 4),
     _AlaIpmsStaticNeighborIGMPVersion_Type()
 )
-alaIpmsStaticNeighborIGMPVersion.setMaxAccess("read-write")
+alaIpmsStaticNeighborIGMPVersion.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIpmsStaticNeighborIGMPVersion.setStatus("current")
 _AlaIpmsStaticNeighborRowStatus_Type = RowStatus
@@ -767,7 +764,7 @@ alaIpmsStaticNeighborRowStatus = _AlaIpmsStaticNeighborRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 18, 1, 1, 4, 1, 1, 5),
     _AlaIpmsStaticNeighborRowStatus_Type()
 )
-alaIpmsStaticNeighborRowStatus.setMaxAccess("read-write")
+alaIpmsStaticNeighborRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIpmsStaticNeighborRowStatus.setStatus("current")
 _AlaIpmsQuerier_ObjectIdentity = ObjectIdentity
@@ -955,7 +952,7 @@ alaIpmsStaticQuerierIGMPVersion = _AlaIpmsStaticQuerierIGMPVersion_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 18, 1, 1, 6, 1, 1, 4),
     _AlaIpmsStaticQuerierIGMPVersion_Type()
 )
-alaIpmsStaticQuerierIGMPVersion.setMaxAccess("read-write")
+alaIpmsStaticQuerierIGMPVersion.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIpmsStaticQuerierIGMPVersion.setStatus("current")
 _AlaIpmsStaticQuerierRowStatus_Type = RowStatus
@@ -964,7 +961,7 @@ alaIpmsStaticQuerierRowStatus = _AlaIpmsStaticQuerierRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 18, 1, 1, 6, 1, 1, 5),
     _AlaIpmsStaticQuerierRowStatus_Type()
 )
-alaIpmsStaticQuerierRowStatus.setMaxAccess("read-write")
+alaIpmsStaticQuerierRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIpmsStaticQuerierRowStatus.setStatus("current")
 _AlaIpmsSource_ObjectIdentity = ObjectIdentity
@@ -1740,6 +1737,15 @@ alaIpmsPolicyGroup.setObjects(
 if mibBuilder.loadTexts:
     alaIpmsPolicyGroup.setStatus("current")
 
+alaIpmsStaticMemberGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 18, 1, 2, 2, 10)
+)
+alaIpmsStaticMemberGroup.setObjects(
+    ("ALCATEL-IND1-IPMS-MIB", "alaIpmsStaticMemberRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaIpmsStaticMemberGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1764,7 +1770,8 @@ alaIpmsCompliance.setObjects(
         ("ALCATEL-IND1-IPMS-MIB", "alaIpmsStaticQuerier"),
         ("ALCATEL-IND1-IPMS-MIB", "alaIpmsSource"),
         ("ALCATEL-IND1-IPMS-MIB", "alaIpmsForward"),
-        ("ALCATEL-IND1-IPMS-MIB", "alaIpmsPolicy"))
+        ("ALCATEL-IND1-IPMS-MIB", "alaIpmsPolicy"),
+        ("ALCATEL-IND1-IPMS-MIB", "alaIpmsStaticMember"))
 )
 if mibBuilder.loadTexts:
     alaIpmsCompliance.setStatus(
@@ -1903,5 +1910,6 @@ mibBuilder.exportSymbols(
        "alaIpmsStaticQuerierGroup": alaIpmsStaticQuerierGroup,
        "alaIpmsSourceGroup": alaIpmsSourceGroup,
        "alaIpmsForwardGroup": alaIpmsForwardGroup,
-       "alaIpmsPolicyGroup": alaIpmsPolicyGroup}
+       "alaIpmsPolicyGroup": alaIpmsPolicyGroup,
+       "alaIpmsStaticMemberGroup": alaIpmsStaticMemberGroup}
 )

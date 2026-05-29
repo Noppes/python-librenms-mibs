@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\vmware\VMWARE-AGENTCAP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:34:15 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,9 @@ vmwAgentCapabilityMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     vmwAgentCapabilityMIB.setRevisions(
-        ("2008-10-27 00:00",)
+        ("2012-07-13 00:00",
+         "2010-10-18 00:00",
+         "2008-10-27 00:00")
     )
 
 
@@ -158,6 +157,26 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwESX50x = AgentCapabilities(
+    (1, 3, 6, 1, 4, 1, 6876, 70, 1, 1, 3)
+)
+if mibBuilder.loadTexts:
+    vmwESX50x.setProductRelease("5.0.x")
+if mibBuilder.loadTexts:
+    vmwESX50x.setStatus(
+        "current"
+    )
+
+vmwESX51x = AgentCapabilities(
+    (1, 3, 6, 1, 4, 1, 6876, 70, 1, 1, 4)
+)
+if mibBuilder.loadTexts:
+    vmwESX51x.setProductRelease("5.1.x")
+if mibBuilder.loadTexts:
+    vmwESX51x.setStatus(
+        "current"
+    )
+
 
 # Module compliance
 
@@ -169,5 +188,7 @@ mibBuilder.exportSymbols(
     **{"vmwAgentCapabilityMIB": vmwAgentCapabilityMIB,
        "vmwEsxCapability": vmwEsxCapability,
        "vmwESX40x": vmwESX40x,
-       "vmwESX41x": vmwESX41x}
+       "vmwESX41x": vmwESX41x,
+       "vmwESX50x": vmwESX50x,
+       "vmwESX51x": vmwESX51x}
 )

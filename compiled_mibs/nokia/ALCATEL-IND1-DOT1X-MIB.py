@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-DOT1X-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:13 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-DOT1X-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -129,8 +126,7 @@ alcatelIND1Dot1XMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1Dot1XMIB.setRevisions(
-        ("2010-02-10 00:00",
-         "2007-04-03 00:00")
+        ("2019-10-07 00:00",)
     )
 
 
@@ -168,7 +164,8 @@ class ALADot1xClassificationPolicyType(TextualConvention, Integer32):
               19,
               20,
               21,
-              22)
+              22,
+              29)
         )
     )
     namedValues = NamedValues(
@@ -194,7 +191,8 @@ class ALADot1xClassificationPolicyType(TextualConvention, Integer32):
           ("userConfigUNP", 19),
           ("aaaRuleUNP", 20),
           ("aaaAuthSvrDownUNP", 21),
-          ("aaaAuthSvrDownBlock", 22))
+          ("aaaAuthSvrDownBlock", 22),
+          ("aaaAuthSvrDownVpUnp", 29))
     )
 
 
@@ -295,8 +293,24 @@ class ALADot1xDeviceType(TextualConvention, Integer32):
 
 
 
+class ALADot1xHicFlag(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+
 class AlaPassThroughStatus(TextualConvention, Integer32):
-    status = "obsolete"
+    status = "current"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -350,7 +364,7 @@ alaDot1xPortSlotNumber = _AlaDot1xPortSlotNumber_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 1),
     _AlaDot1xPortSlotNumber_Type()
 )
-alaDot1xPortSlotNumber.setMaxAccess("read-only")
+alaDot1xPortSlotNumber.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortSlotNumber.setStatus("deprecated")
 
@@ -369,7 +383,7 @@ alaDot1xPortPortNumber = _AlaDot1xPortPortNumber_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 2),
     _AlaDot1xPortPortNumber_Type()
 )
-alaDot1xPortPortNumber.setMaxAccess("read-only")
+alaDot1xPortPortNumber.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortPortNumber.setStatus("deprecated")
 _AlaDot1xPortMACAddress_Type = MacAddress
@@ -378,7 +392,7 @@ alaDot1xPortMACAddress = _AlaDot1xPortMACAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 3),
     _AlaDot1xPortMACAddress_Type()
 )
-alaDot1xPortMACAddress.setMaxAccess("read-only")
+alaDot1xPortMACAddress.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortMACAddress.setStatus("deprecated")
 
@@ -397,7 +411,7 @@ alaDot1xPortVlan = _AlaDot1xPortVlan_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 4),
     _AlaDot1xPortVlan_Type()
 )
-alaDot1xPortVlan.setMaxAccess("read-only")
+alaDot1xPortVlan.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortVlan.setStatus("deprecated")
 
@@ -416,7 +430,7 @@ alaDot1xPortProtocol = _AlaDot1xPortProtocol_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 5),
     _AlaDot1xPortProtocol_Type()
 )
-alaDot1xPortProtocol.setMaxAccess("read-only")
+alaDot1xPortProtocol.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortProtocol.setStatus("deprecated")
 _AlaDot1xPortUserName_Type = DisplayString
@@ -425,7 +439,7 @@ alaDot1xPortUserName = _AlaDot1xPortUserName_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 6),
     _AlaDot1xPortUserName_Type()
 )
-alaDot1xPortUserName.setMaxAccess("read-only")
+alaDot1xPortUserName.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortUserName.setStatus("deprecated")
 
@@ -467,7 +481,7 @@ alaDot1xPortState = _AlaDot1xPortState_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 7),
     _AlaDot1xPortState_Type()
 )
-alaDot1xPortState.setMaxAccess("read-only")
+alaDot1xPortState.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xPortState.setStatus("deprecated")
 _AlaDot1xSupplicantPolicyUsed_Type = ALADot1xClassificationPolicyType
@@ -476,9 +490,36 @@ alaDot1xSupplicantPolicyUsed = _AlaDot1xSupplicantPolicyUsed_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 8),
     _AlaDot1xSupplicantPolicyUsed_Type()
 )
-alaDot1xSupplicantPolicyUsed.setMaxAccess("read-only")
+alaDot1xSupplicantPolicyUsed.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaDot1xSupplicantPolicyUsed.setStatus("deprecated")
+_AlaDot1xAuthFailReason_Type = DisplayString
+_AlaDot1xAuthFailReason_Object = MibTableColumn
+alaDot1xAuthFailReason = _AlaDot1xAuthFailReason_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 9),
+    _AlaDot1xAuthFailReason_Type()
+)
+alaDot1xAuthFailReason.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaDot1xAuthFailReason.setStatus("deprecated")
+_AlaDot1xReAuthCount_Type = Integer32
+_AlaDot1xReAuthCount_Object = MibTableColumn
+alaDot1xReAuthCount = _AlaDot1xReAuthCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 10),
+    _AlaDot1xReAuthCount_Type()
+)
+alaDot1xReAuthCount.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaDot1xReAuthCount.setStatus("deprecated")
+_AlaDot1xLastSuccessTime_Type = DisplayString
+_AlaDot1xLastSuccessTime_Object = MibTableColumn
+alaDot1xLastSuccessTime = _AlaDot1xLastSuccessTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 1, 1, 11),
+    _AlaDot1xLastSuccessTime_Type()
+)
+alaDot1xLastSuccessTime.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaDot1xLastSuccessTime.setStatus("deprecated")
 _AlaDot1xPortLookupTable_Object = MibTable
 alaDot1xPortLookupTable = _AlaDot1xPortLookupTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 2)
@@ -731,6 +772,15 @@ alaDot1xMacSupplicantPolicyUsed = _AlaDot1xMacSupplicantPolicyUsed_Object(
 alaDot1xMacSupplicantPolicyUsed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xMacSupplicantPolicyUsed.setStatus("current")
+_AlaDot1xHicEnabledMAC_Type = ALADot1xHicFlag
+_AlaDot1xHicEnabledMAC_Object = MibTableColumn
+alaDot1xHicEnabledMAC = _AlaDot1xHicEnabledMAC_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 4, 1, 10),
+    _AlaDot1xHicEnabledMAC_Type()
+)
+alaDot1xHicEnabledMAC.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xHicEnabledMAC.setStatus("deprecated")
 _AlaDot1xNonSupplicantTable_Object = MibTable
 alaDot1xNonSupplicantTable = _AlaDot1xNonSupplicantTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 5)
@@ -829,6 +879,24 @@ alaDot1xAuthenticationStatus = _AlaDot1xAuthenticationStatus_Object(
 alaDot1xAuthenticationStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xAuthenticationStatus.setStatus("current")
+_AlaDot1xNonSupplicantHicEnabledMAC_Type = ALADot1xHicFlag
+_AlaDot1xNonSupplicantHicEnabledMAC_Object = MibTableColumn
+alaDot1xNonSupplicantHicEnabledMAC = _AlaDot1xNonSupplicantHicEnabledMAC_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 5, 1, 6),
+    _AlaDot1xNonSupplicantHicEnabledMAC_Type()
+)
+alaDot1xNonSupplicantHicEnabledMAC.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xNonSupplicantHicEnabledMAC.setStatus("current")
+_AlaDot1xNonSupplicantUserName_Type = DisplayString
+_AlaDot1xNonSupplicantUserName_Object = MibTableColumn
+alaDot1xNonSupplicantUserName = _AlaDot1xNonSupplicantUserName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 5, 1, 7),
+    _AlaDot1xNonSupplicantUserName_Type()
+)
+alaDot1xNonSupplicantUserName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xNonSupplicantUserName.setStatus("current")
 _AlaDot1xAuthPolicyTable_Object = MibTable
 alaDot1xAuthPolicyTable = _AlaDot1xAuthPolicyTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6)
@@ -967,6 +1035,300 @@ alaDot1xCPortalRetryCnt = _AlaDot1xCPortalRetryCnt_Object(
 alaDot1xCPortalRetryCnt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaDot1xCPortalRetryCnt.setStatus("current")
+
+
+class _AlaDot1xSupplicantBypass_Type(Integer32):
+    """Custom type alaDot1xSupplicantBypass based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xSupplicantBypass_Type.__name__ = "Integer32"
+_AlaDot1xSupplicantBypass_Object = MibTableColumn
+alaDot1xSupplicantBypass = _AlaDot1xSupplicantBypass_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 8),
+    _AlaDot1xSupplicantBypass_Type()
+)
+alaDot1xSupplicantBypass.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xSupplicantBypass.setStatus("current")
+
+
+class _AlaDot1xSBAllowEAP_Type(Integer32):
+    """Custom type alaDot1xSBAllowEAP based on Integer32"""
+    defaultValue = 4
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("pass", 1),
+          ("fail", 2),
+          ("noauth", 3),
+          ("none", 4))
+    )
+
+
+_AlaDot1xSBAllowEAP_Type.__name__ = "Integer32"
+_AlaDot1xSBAllowEAP_Object = MibTableColumn
+alaDot1xSBAllowEAP = _AlaDot1xSBAllowEAP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 9),
+    _AlaDot1xSBAllowEAP_Type()
+)
+alaDot1xSBAllowEAP.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xSBAllowEAP.setStatus("current")
+
+
+class _AlaDot1xCPortalInactivityLogout_Type(Integer32):
+    """Custom type alaDot1xCPortalInactivityLogout based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xCPortalInactivityLogout_Type.__name__ = "Integer32"
+_AlaDot1xCPortalInactivityLogout_Object = MibTableColumn
+alaDot1xCPortalInactivityLogout = _AlaDot1xCPortalInactivityLogout_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 10),
+    _AlaDot1xCPortalInactivityLogout_Type()
+)
+alaDot1xCPortalInactivityLogout.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xCPortalInactivityLogout.setStatus("current")
+
+
+class _AlaDot1xNonSuppSessTimeoutStatus_Type(Integer32):
+    """Custom type alaDot1xNonSuppSessTimeoutStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xNonSuppSessTimeoutStatus_Type.__name__ = "Integer32"
+_AlaDot1xNonSuppSessTimeoutStatus_Object = MibTableColumn
+alaDot1xNonSuppSessTimeoutStatus = _AlaDot1xNonSuppSessTimeoutStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 11),
+    _AlaDot1xNonSuppSessTimeoutStatus_Type()
+)
+alaDot1xNonSuppSessTimeoutStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xNonSuppSessTimeoutStatus.setStatus("current")
+
+
+class _AlaDot1xNonSuppSessTimeoutIntrvl_Type(Integer32):
+    """Custom type alaDot1xNonSuppSessTimeoutIntrvl based on Integer32"""
+    defaultValue = 43200
+
+
+_AlaDot1xNonSuppSessTimeoutIntrvl_Type.__name__ = "Integer32"
+_AlaDot1xNonSuppSessTimeoutIntrvl_Object = MibTableColumn
+alaDot1xNonSuppSessTimeoutIntrvl = _AlaDot1xNonSuppSessTimeoutIntrvl_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 12),
+    _AlaDot1xNonSuppSessTimeoutIntrvl_Type()
+)
+alaDot1xNonSuppSessTimeoutIntrvl.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xNonSuppSessTimeoutIntrvl.setStatus("current")
+
+
+class _AlaDot1xNonSuppSessTimeoutTrustRadStatus_Type(Integer32):
+    """Custom type alaDot1xNonSuppSessTimeoutTrustRadStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xNonSuppSessTimeoutTrustRadStatus_Type.__name__ = "Integer32"
+_AlaDot1xNonSuppSessTimeoutTrustRadStatus_Object = MibTableColumn
+alaDot1xNonSuppSessTimeoutTrustRadStatus = _AlaDot1xNonSuppSessTimeoutTrustRadStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 13),
+    _AlaDot1xNonSuppSessTimeoutTrustRadStatus_Type()
+)
+alaDot1xNonSuppSessTimeoutTrustRadStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xNonSuppSessTimeoutTrustRadStatus.setStatus("current")
+
+
+class _AlaDot1xSuppTrustRadiusEnabled_Type(Integer32):
+    """Custom type alaDot1xSuppTrustRadiusEnabled based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xSuppTrustRadiusEnabled_Type.__name__ = "Integer32"
+_AlaDot1xSuppTrustRadiusEnabled_Object = MibTableColumn
+alaDot1xSuppTrustRadiusEnabled = _AlaDot1xSuppTrustRadiusEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 14),
+    _AlaDot1xSuppTrustRadiusEnabled_Type()
+)
+alaDot1xSuppTrustRadiusEnabled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xSuppTrustRadiusEnabled.setStatus("current")
+
+
+class _AlaDot1xNonSupInactivityLogout_Type(Integer32):
+    """Custom type alaDot1xNonSupInactivityLogout based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xNonSupInactivityLogout_Type.__name__ = "Integer32"
+_AlaDot1xNonSupInactivityLogout_Object = MibTableColumn
+alaDot1xNonSupInactivityLogout = _AlaDot1xNonSupInactivityLogout_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 15),
+    _AlaDot1xNonSupInactivityLogout_Type()
+)
+alaDot1xNonSupInactivityLogout.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xNonSupInactivityLogout.setStatus("current")
+
+
+class _AlaDot1xPerPortAPModeStatus_Type(Integer32):
+    """Custom type alaDot1xPerPortAPModeStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xPerPortAPModeStatus_Type.__name__ = "Integer32"
+_AlaDot1xPerPortAPModeStatus_Object = MibTableColumn
+alaDot1xPerPortAPModeStatus = _AlaDot1xPerPortAPModeStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 16),
+    _AlaDot1xPerPortAPModeStatus_Type()
+)
+alaDot1xPerPortAPModeStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xPerPortAPModeStatus.setStatus("current")
+
+
+class _AlaDot1xPerPortForceL3Learning_Type(Integer32):
+    """Custom type alaDot1xPerPortForceL3Learning based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xPerPortForceL3Learning_Type.__name__ = "Integer32"
+_AlaDot1xPerPortForceL3Learning_Object = MibTableColumn
+alaDot1xPerPortForceL3Learning = _AlaDot1xPerPortForceL3Learning_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 17),
+    _AlaDot1xPerPortForceL3Learning_Type()
+)
+alaDot1xPerPortForceL3Learning.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xPerPortForceL3Learning.setStatus("current")
+
+
+class _AlaDot1xPerPortForceL3LearningPortBounce_Type(Integer32):
+    """Custom type alaDot1xPerPortForceL3LearningPortBounce based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xPerPortForceL3LearningPortBounce_Type.__name__ = "Integer32"
+_AlaDot1xPerPortForceL3LearningPortBounce_Object = MibTableColumn
+alaDot1xPerPortForceL3LearningPortBounce = _AlaDot1xPerPortForceL3LearningPortBounce_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 6, 1, 18),
+    _AlaDot1xPerPortForceL3LearningPortBounce_Type()
+)
+alaDot1xPerPortForceL3LearningPortBounce.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xPerPortForceL3LearningPortBounce.setStatus("current")
 _AlaDot1xCportalConfig_ObjectIdentity = ObjectIdentity
 alaDot1xCportalConfig = _AlaDot1xCportalConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 7)
@@ -1113,6 +1475,44 @@ alaDot1xCPortalDNSKeyword4 = _AlaDot1xCPortalDNSKeyword4_Object(
 alaDot1xCPortalDNSKeyword4.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaDot1xCPortalDNSKeyword4.setStatus("current")
+
+
+class _AlaDot1xCPortalProxyPort_Type(Integer32):
+    """Custom type alaDot1xCPortalProxyPort based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AlaDot1xCPortalProxyPort_Type.__name__ = "Integer32"
+_AlaDot1xCPortalProxyPort_Object = MibScalar
+alaDot1xCPortalProxyPort = _AlaDot1xCPortalProxyPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 7, 9),
+    _AlaDot1xCPortalProxyPort_Type()
+)
+alaDot1xCPortalProxyPort.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xCPortalProxyPort.setStatus("current")
+
+
+class _AlaDot1xCPortalRedirectString_Type(SnmpAdminString):
+    """Custom type alaDot1xCPortalRedirectString based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_AlaDot1xCPortalRedirectString_Type.__name__ = "SnmpAdminString"
+_AlaDot1xCPortalRedirectString_Object = MibScalar
+alaDot1xCPortalRedirectString = _AlaDot1xCPortalRedirectString_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 7, 10),
+    _AlaDot1xCPortalRedirectString_Type()
+)
+alaDot1xCPortalRedirectString.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xCPortalRedirectString.setStatus("current")
 _AlaDot1xDeviceStatusTable_Object = MibTable
 alaDot1xDeviceStatusTable = _AlaDot1xDeviceStatusTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8)
@@ -1138,7 +1538,7 @@ alaDot1xDeviceStatusMacQueryType = _AlaDot1xDeviceStatusMacQueryType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8, 1, 1),
     _AlaDot1xDeviceStatusMacQueryType_Type()
 )
-alaDot1xDeviceStatusMacQueryType.setMaxAccess("not-accessible")
+alaDot1xDeviceStatusMacQueryType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xDeviceStatusMacQueryType.setStatus("current")
 
@@ -1157,7 +1557,7 @@ alaDot1xDeviceStatusSlotNumber = _AlaDot1xDeviceStatusSlotNumber_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8, 1, 2),
     _AlaDot1xDeviceStatusSlotNumber_Type()
 )
-alaDot1xDeviceStatusSlotNumber.setMaxAccess("not-accessible")
+alaDot1xDeviceStatusSlotNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xDeviceStatusSlotNumber.setStatus("current")
 
@@ -1176,7 +1576,7 @@ alaDot1xDeviceStatusPortNumber = _AlaDot1xDeviceStatusPortNumber_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8, 1, 3),
     _AlaDot1xDeviceStatusPortNumber_Type()
 )
-alaDot1xDeviceStatusPortNumber.setMaxAccess("not-accessible")
+alaDot1xDeviceStatusPortNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xDeviceStatusPortNumber.setStatus("current")
 _AlaDot1xDeviceStatusMACAddress_Type = MacAddress
@@ -1185,7 +1585,7 @@ alaDot1xDeviceStatusMACAddress = _AlaDot1xDeviceStatusMACAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8, 1, 4),
     _AlaDot1xDeviceStatusMACAddress_Type()
 )
-alaDot1xDeviceStatusMACAddress.setMaxAccess("not-accessible")
+alaDot1xDeviceStatusMACAddress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xDeviceStatusMACAddress.setStatus("current")
 _AlaDot1xDeviceStatusDeviceType_Type = ALADot1xDeviceType
@@ -1194,7 +1594,7 @@ alaDot1xDeviceStatusDeviceType = _AlaDot1xDeviceStatusDeviceType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8, 1, 5),
     _AlaDot1xDeviceStatusDeviceType_Type()
 )
-alaDot1xDeviceStatusDeviceType.setMaxAccess("not-accessible")
+alaDot1xDeviceStatusDeviceType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xDeviceStatusDeviceType.setStatus("current")
 
@@ -1297,6 +1697,27 @@ alaDot1xDeviceStatusCaptivePortalUsed = _AlaDot1xDeviceStatusCaptivePortalUsed_O
 alaDot1xDeviceStatusCaptivePortalUsed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaDot1xDeviceStatusCaptivePortalUsed.setStatus("current")
+
+
+class _AlaDot1xDeviceStatusHicResult_Type(Integer32):
+    """Custom type alaDot1xDeviceStatusHicResult based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 9),
+    )
+
+
+_AlaDot1xDeviceStatusHicResult_Type.__name__ = "Integer32"
+_AlaDot1xDeviceStatusHicResult_Object = MibTableColumn
+alaDot1xDeviceStatusHicResult = _AlaDot1xDeviceStatusHicResult_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 8, 1, 16),
+    _AlaDot1xDeviceStatusHicResult_Type()
+)
+alaDot1xDeviceStatusHicResult.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xDeviceStatusHicResult.setStatus("current")
 _AlaDot1xAdminLogoutParams_ObjectIdentity = ObjectIdentity
 alaDot1xAdminLogoutParams = _AlaDot1xAdminLogoutParams_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 9)
@@ -1418,7 +1839,7 @@ class _AlaDot1xAuthSvrTimeoutReAuthPeriod_Type(Integer32):
     """Custom type alaDot1xAuthSvrTimeoutReAuthPeriod based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(30, 9999),
+        ValueRangeConstraint(30, 43200),
     )
 
 
@@ -1459,6 +1880,198 @@ alaDot1xAuthSvrTimeoutStatus = _AlaDot1xAuthSvrTimeoutStatus_Object(
 alaDot1xAuthSvrTimeoutStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaDot1xAuthSvrTimeoutStatus.setStatus("current")
+
+
+class _AlaDot1xAuthSvrTimeoutVoicePolicy_Type(DisplayString):
+    """Custom type alaDot1xAuthSvrTimeoutVoicePolicy based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 127),
+    )
+
+
+_AlaDot1xAuthSvrTimeoutVoicePolicy_Type.__name__ = "DisplayString"
+_AlaDot1xAuthSvrTimeoutVoicePolicy_Object = MibScalar
+alaDot1xAuthSvrTimeoutVoicePolicy = _AlaDot1xAuthSvrTimeoutVoicePolicy_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 4),
+    _AlaDot1xAuthSvrTimeoutVoicePolicy_Type()
+)
+alaDot1xAuthSvrTimeoutVoicePolicy.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xAuthSvrTimeoutVoicePolicy.setStatus("current")
+
+
+class _AlaDot1xAuthSvrPollingStatus_Type(Integer32):
+    """Custom type alaDot1xAuthSvrPollingStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDot1xAuthSvrPollingStatus_Type.__name__ = "Integer32"
+_AlaDot1xAuthSvrPollingStatus_Object = MibScalar
+alaDot1xAuthSvrPollingStatus = _AlaDot1xAuthSvrPollingStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 5),
+    _AlaDot1xAuthSvrPollingStatus_Type()
+)
+alaDot1xAuthSvrPollingStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xAuthSvrPollingStatus.setStatus("current")
+
+
+class _AlaDot1xAuthSvrDownMacPersistency_Type(Integer32):
+    """Custom type alaDot1xAuthSvrDownMacPersistency based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDot1xAuthSvrDownMacPersistency_Type.__name__ = "Integer32"
+_AlaDot1xAuthSvrDownMacPersistency_Object = MibScalar
+alaDot1xAuthSvrDownMacPersistency = _AlaDot1xAuthSvrDownMacPersistency_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 6),
+    _AlaDot1xAuthSvrDownMacPersistency_Type()
+)
+alaDot1xAuthSvrDownMacPersistency.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xAuthSvrDownMacPersistency.setStatus("current")
+_AlaDot1xDelayLearningPeriod_Type = Integer32
+_AlaDot1xDelayLearningPeriod_Object = MibScalar
+alaDot1xDelayLearningPeriod = _AlaDot1xDelayLearningPeriod_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 7),
+    _AlaDot1xDelayLearningPeriod_Type()
+)
+alaDot1xDelayLearningPeriod.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xDelayLearningPeriod.setStatus("current")
+
+
+class _AlaDot1xAPModeStatus_Type(Integer32):
+    """Custom type alaDot1xAPModeStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDot1xAPModeStatus_Type.__name__ = "Integer32"
+_AlaDot1xAPModeStatus_Object = MibScalar
+alaDot1xAPModeStatus = _AlaDot1xAPModeStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 8),
+    _AlaDot1xAPModeStatus_Type()
+)
+alaDot1xAPModeStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xAPModeStatus.setStatus("current")
+
+
+class _AlaDot1xEAPVersionStatus_Type(Integer32):
+    """Custom type alaDot1xEAPVersionStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaDot1xEAPVersionStatus_Type.__name__ = "Integer32"
+_AlaDot1xEAPVersionStatus_Object = MibScalar
+alaDot1xEAPVersionStatus = _AlaDot1xEAPVersionStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 9),
+    _AlaDot1xEAPVersionStatus_Type()
+)
+alaDot1xEAPVersionStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xEAPVersionStatus.setStatus("current")
+
+
+class _AlaDot1xForceL3Learning_Type(Integer32):
+    """Custom type alaDot1xForceL3Learning based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xForceL3Learning_Type.__name__ = "Integer32"
+_AlaDot1xForceL3Learning_Object = MibScalar
+alaDot1xForceL3Learning = _AlaDot1xForceL3Learning_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 10),
+    _AlaDot1xForceL3Learning_Type()
+)
+alaDot1xForceL3Learning.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xForceL3Learning.setStatus("current")
+
+
+class _AlaDot1xForceL3LearningPortBounce_Type(Integer32):
+    """Custom type alaDot1xForceL3LearningPortBounce based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDot1xForceL3LearningPortBounce_Type.__name__ = "Integer32"
+_AlaDot1xForceL3LearningPortBounce_Object = MibScalar
+alaDot1xForceL3LearningPortBounce = _AlaDot1xForceL3LearningPortBounce_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 10, 11),
+    _AlaDot1xForceL3LearningPortBounce_Type()
+)
+alaDot1xForceL3LearningPortBounce.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDot1xForceL3LearningPortBounce.setStatus("current")
 _AlaPassthroughConfig_ObjectIdentity = ObjectIdentity
 alaPassthroughConfig = _AlaPassthroughConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 11)
@@ -1471,7 +2084,7 @@ alaDot1xPassthroughStatus = _AlaDot1xPassthroughStatus_Object(
 )
 alaDot1xPassthroughStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    alaDot1xPassthroughStatus.setStatus("obsolete")
+    alaDot1xPassthroughStatus.setStatus("current")
 _AlaAvlanPassthroughStatus_Type = AlaPassThroughStatus
 _AlaAvlanPassthroughStatus_Object = MibScalar
 alaAvlanPassthroughStatus = _AlaAvlanPassthroughStatus_Object(
@@ -1480,7 +2093,497 @@ alaAvlanPassthroughStatus = _AlaAvlanPassthroughStatus_Object(
 )
 alaAvlanPassthroughStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    alaAvlanPassthroughStatus.setStatus("obsolete")
+    alaAvlanPassthroughStatus.setStatus("current")
+_AlaCportalPassthroughStatus_Type = AlaPassThroughStatus
+_AlaCportalPassthroughStatus_Object = MibScalar
+alaCportalPassthroughStatus = _AlaCportalPassthroughStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 11, 3),
+    _AlaCportalPassthroughStatus_Type()
+)
+alaCportalPassthroughStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaCportalPassthroughStatus.setStatus("current")
+_AlaKerberosPortTable_Object = MibTable
+alaKerberosPortTable = _AlaKerberosPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 12)
+)
+if mibBuilder.loadTexts:
+    alaKerberosPortTable.setStatus("current")
+_AlaKerberosPortEntry_Object = MibTableRow
+alaKerberosPortEntry = _AlaKerberosPortEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 12, 1)
+)
+alaKerberosPortEntry.setIndexNames(
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaKerberosPortIfIndex"),
+)
+if mibBuilder.loadTexts:
+    alaKerberosPortEntry.setStatus("current")
+_AlaKerberosPortIfIndex_Type = InterfaceIndex
+_AlaKerberosPortIfIndex_Object = MibTableColumn
+alaKerberosPortIfIndex = _AlaKerberosPortIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 12, 1, 1),
+    _AlaKerberosPortIfIndex_Type()
+)
+alaKerberosPortIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaKerberosPortIfIndex.setStatus("current")
+
+
+class _AlaKerberosPortStatus_Type(Integer32):
+    """Custom type alaKerberosPortStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaKerberosPortStatus_Type.__name__ = "Integer32"
+_AlaKerberosPortStatus_Object = MibTableColumn
+alaKerberosPortStatus = _AlaKerberosPortStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 12, 1, 2),
+    _AlaKerberosPortStatus_Type()
+)
+alaKerberosPortStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaKerberosPortStatus.setStatus("current")
+_AlaDot1xCrlUnpTable_Object = MibTable
+alaDot1xCrlUnpTable = _AlaDot1xCrlUnpTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13)
+)
+if mibBuilder.loadTexts:
+    alaDot1xCrlUnpTable.setStatus("current")
+_AlaDot1xCrlUnpEntry_Object = MibTableRow
+alaDot1xCrlUnpEntry = _AlaDot1xCrlUnpEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1)
+)
+alaDot1xCrlUnpEntry.setIndexNames(
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlIfIndex"),
+)
+if mibBuilder.loadTexts:
+    alaDot1xCrlUnpEntry.setStatus("current")
+_AlaDot1xCrlIfIndex_Type = InterfaceIndex
+_AlaDot1xCrlIfIndex_Object = MibTableColumn
+alaDot1xCrlIfIndex = _AlaDot1xCrlIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 1),
+    _AlaDot1xCrlIfIndex_Type()
+)
+alaDot1xCrlIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaDot1xCrlIfIndex.setStatus("current")
+
+
+class _AlaDot1xCrlIngBw_Type(Integer32):
+    """Custom type alaDot1xCrlIngBw based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 10485760),
+    )
+
+
+_AlaDot1xCrlIngBw_Type.__name__ = "Integer32"
+_AlaDot1xCrlIngBw_Object = MibTableColumn
+alaDot1xCrlIngBw = _AlaDot1xCrlIngBw_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 2),
+    _AlaDot1xCrlIngBw_Type()
+)
+alaDot1xCrlIngBw.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlIngBw.setStatus("current")
+
+
+class _AlaDot1xCrlEgrBw_Type(Integer32):
+    """Custom type alaDot1xCrlEgrBw based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 10485760),
+    )
+
+
+_AlaDot1xCrlEgrBw_Type.__name__ = "Integer32"
+_AlaDot1xCrlEgrBw_Object = MibTableColumn
+alaDot1xCrlEgrBw = _AlaDot1xCrlEgrBw_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 3),
+    _AlaDot1xCrlEgrBw_Type()
+)
+alaDot1xCrlEgrBw.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlEgrBw.setStatus("current")
+
+
+class _AlaDot1xCrlIngTypeFlag_Type(Integer32):
+    """Custom type alaDot1xCrlIngTypeFlag based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notapplicable", 0),
+          ("unp", 1),
+          ("qos", 2))
+    )
+
+
+_AlaDot1xCrlIngTypeFlag_Type.__name__ = "Integer32"
+_AlaDot1xCrlIngTypeFlag_Object = MibTableColumn
+alaDot1xCrlIngTypeFlag = _AlaDot1xCrlIngTypeFlag_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 4),
+    _AlaDot1xCrlIngTypeFlag_Type()
+)
+alaDot1xCrlIngTypeFlag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlIngTypeFlag.setStatus("current")
+
+
+class _AlaDot1xCrlEgrTypeFlag_Type(Integer32):
+    """Custom type alaDot1xCrlEgrTypeFlag based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notapplicable", 0),
+          ("unp", 1),
+          ("qos", 2))
+    )
+
+
+_AlaDot1xCrlEgrTypeFlag_Type.__name__ = "Integer32"
+_AlaDot1xCrlEgrTypeFlag_Object = MibTableColumn
+alaDot1xCrlEgrTypeFlag = _AlaDot1xCrlEgrTypeFlag_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 5),
+    _AlaDot1xCrlEgrTypeFlag_Type()
+)
+alaDot1xCrlEgrTypeFlag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlEgrTypeFlag.setStatus("current")
+
+
+class _AlaDot1xCrlDefDepth_Type(Integer32):
+    """Custom type alaDot1xCrlDefDepth based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 131072),
+    )
+
+
+_AlaDot1xCrlDefDepth_Type.__name__ = "Integer32"
+_AlaDot1xCrlDefDepth_Object = MibTableColumn
+alaDot1xCrlDefDepth = _AlaDot1xCrlDefDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 6),
+    _AlaDot1xCrlDefDepth_Type()
+)
+alaDot1xCrlDefDepth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlDefDepth.setStatus("current")
+
+
+class _AlaDot1xCrlIngProfile_Type(SnmpAdminString):
+    """Custom type alaDot1xCrlIngProfile based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AlaDot1xCrlIngProfile_Type.__name__ = "SnmpAdminString"
+_AlaDot1xCrlIngProfile_Object = MibTableColumn
+alaDot1xCrlIngProfile = _AlaDot1xCrlIngProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 7),
+    _AlaDot1xCrlIngProfile_Type()
+)
+alaDot1xCrlIngProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlIngProfile.setStatus("current")
+
+
+class _AlaDot1xCrlEgrProfile_Type(SnmpAdminString):
+    """Custom type alaDot1xCrlEgrProfile based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AlaDot1xCrlEgrProfile_Type.__name__ = "SnmpAdminString"
+_AlaDot1xCrlEgrProfile_Object = MibTableColumn
+alaDot1xCrlEgrProfile = _AlaDot1xCrlEgrProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 13, 1, 8),
+    _AlaDot1xCrlEgrProfile_Type()
+)
+alaDot1xCrlEgrProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaDot1xCrlEgrProfile.setStatus("current")
+_AlaRedirectByodHostTable_Object = MibTable
+alaRedirectByodHostTable = _AlaRedirectByodHostTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14)
+)
+if mibBuilder.loadTexts:
+    alaRedirectByodHostTable.setStatus("current")
+_AlaRedirectByodHostEntry_Object = MibTableRow
+alaRedirectByodHostEntry = _AlaRedirectByodHostEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1)
+)
+alaRedirectByodHostEntry.setIndexNames(
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodHostStateQueryType"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodHostStateSlotNumber"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodHostStatePortNumber"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodHostStateMacAddress"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodHostStateDeviceType"),
+)
+if mibBuilder.loadTexts:
+    alaRedirectByodHostEntry.setStatus("current")
+_AlaByodHostStateQueryType_Type = ALADot1xMacQueryType
+_AlaByodHostStateQueryType_Object = MibTableColumn
+alaByodHostStateQueryType = _AlaByodHostStateQueryType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1, 1),
+    _AlaByodHostStateQueryType_Type()
+)
+alaByodHostStateQueryType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodHostStateQueryType.setStatus("current")
+
+
+class _AlaByodHostStateSlotNumber_Type(Integer32):
+    """Custom type alaByodHostStateSlotNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_AlaByodHostStateSlotNumber_Type.__name__ = "Integer32"
+_AlaByodHostStateSlotNumber_Object = MibTableColumn
+alaByodHostStateSlotNumber = _AlaByodHostStateSlotNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1, 2),
+    _AlaByodHostStateSlotNumber_Type()
+)
+alaByodHostStateSlotNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodHostStateSlotNumber.setStatus("current")
+
+
+class _AlaByodHostStatePortNumber_Type(Integer32):
+    """Custom type alaByodHostStatePortNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 48),
+    )
+
+
+_AlaByodHostStatePortNumber_Type.__name__ = "Integer32"
+_AlaByodHostStatePortNumber_Object = MibTableColumn
+alaByodHostStatePortNumber = _AlaByodHostStatePortNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1, 3),
+    _AlaByodHostStatePortNumber_Type()
+)
+alaByodHostStatePortNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodHostStatePortNumber.setStatus("current")
+_AlaByodHostStateMacAddress_Type = MacAddress
+_AlaByodHostStateMacAddress_Object = MibTableColumn
+alaByodHostStateMacAddress = _AlaByodHostStateMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1, 4),
+    _AlaByodHostStateMacAddress_Type()
+)
+alaByodHostStateMacAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodHostStateMacAddress.setStatus("current")
+_AlaByodHostStateDeviceType_Type = ALADot1xDeviceType
+_AlaByodHostStateDeviceType_Object = MibTableColumn
+alaByodHostStateDeviceType = _AlaByodHostStateDeviceType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1, 5),
+    _AlaByodHostStateDeviceType_Type()
+)
+alaByodHostStateDeviceType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodHostStateDeviceType.setStatus("current")
+
+
+class _AlaByodHostProgressStatus_Type(SnmpAdminString):
+    """Custom type alaByodHostProgressStatus based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 31),
+    )
+
+
+_AlaByodHostProgressStatus_Type.__name__ = "SnmpAdminString"
+_AlaByodHostProgressStatus_Object = MibTableColumn
+alaByodHostProgressStatus = _AlaByodHostProgressStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 14, 1, 6),
+    _AlaByodHostProgressStatus_Type()
+)
+alaByodHostProgressStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodHostProgressStatus.setStatus("current")
+_AlaRedirectByodHostUnpTable_Object = MibTable
+alaRedirectByodHostUnpTable = _AlaRedirectByodHostUnpTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15)
+)
+if mibBuilder.loadTexts:
+    alaRedirectByodHostUnpTable.setStatus("current")
+_AlaRedirectByodHostUnpEntry_Object = MibTableRow
+alaRedirectByodHostUnpEntry = _AlaRedirectByodHostUnpEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1)
+)
+alaRedirectByodHostUnpEntry.setIndexNames(
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodClientMacQueryType"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodClientSlotNumber"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodClientPortNumber"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodClientMacAddress"),
+    (0, "ALCATEL-IND1-DOT1X-MIB", "alaByodClientDeviceType"),
+)
+if mibBuilder.loadTexts:
+    alaRedirectByodHostUnpEntry.setStatus("current")
+_AlaByodClientMacQueryType_Type = ALADot1xMacQueryType
+_AlaByodClientMacQueryType_Object = MibTableColumn
+alaByodClientMacQueryType = _AlaByodClientMacQueryType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 1),
+    _AlaByodClientMacQueryType_Type()
+)
+alaByodClientMacQueryType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodClientMacQueryType.setStatus("current")
+
+
+class _AlaByodClientSlotNumber_Type(Integer32):
+    """Custom type alaByodClientSlotNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_AlaByodClientSlotNumber_Type.__name__ = "Integer32"
+_AlaByodClientSlotNumber_Object = MibTableColumn
+alaByodClientSlotNumber = _AlaByodClientSlotNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 2),
+    _AlaByodClientSlotNumber_Type()
+)
+alaByodClientSlotNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodClientSlotNumber.setStatus("current")
+
+
+class _AlaByodClientPortNumber_Type(Integer32):
+    """Custom type alaByodClientPortNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 48),
+    )
+
+
+_AlaByodClientPortNumber_Type.__name__ = "Integer32"
+_AlaByodClientPortNumber_Object = MibTableColumn
+alaByodClientPortNumber = _AlaByodClientPortNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 3),
+    _AlaByodClientPortNumber_Type()
+)
+alaByodClientPortNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodClientPortNumber.setStatus("current")
+_AlaByodClientMacAddress_Type = MacAddress
+_AlaByodClientMacAddress_Object = MibTableColumn
+alaByodClientMacAddress = _AlaByodClientMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 4),
+    _AlaByodClientMacAddress_Type()
+)
+alaByodClientMacAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodClientMacAddress.setStatus("current")
+_AlaByodClientDeviceType_Type = ALADot1xDeviceType
+_AlaByodClientDeviceType_Object = MibTableColumn
+alaByodClientDeviceType = _AlaByodClientDeviceType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 5),
+    _AlaByodClientDeviceType_Type()
+)
+alaByodClientDeviceType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodClientDeviceType.setStatus("current")
+
+
+class _AlaByodPreviousUNP_Type(SnmpAdminString):
+    """Custom type alaByodPreviousUNP based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 31),
+    )
+
+
+_AlaByodPreviousUNP_Type.__name__ = "SnmpAdminString"
+_AlaByodPreviousUNP_Object = MibTableColumn
+alaByodPreviousUNP = _AlaByodPreviousUNP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 6),
+    _AlaByodPreviousUNP_Type()
+)
+alaByodPreviousUNP.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodPreviousUNP.setStatus("current")
+
+
+class _AlaByodNewUNP_Type(SnmpAdminString):
+    """Custom type alaByodNewUNP based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 31),
+    )
+
+
+_AlaByodNewUNP_Type.__name__ = "SnmpAdminString"
+_AlaByodNewUNP_Object = MibTableColumn
+alaByodNewUNP = _AlaByodNewUNP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 7),
+    _AlaByodNewUNP_Type()
+)
+alaByodNewUNP.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodNewUNP.setStatus("current")
+
+
+class _AlaByodCOAStatus_Type(SnmpAdminString):
+    """Custom type alaByodCOAStatus based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 31),
+    )
+
+
+_AlaByodCOAStatus_Type.__name__ = "SnmpAdminString"
+_AlaByodCOAStatus_Object = MibTableColumn
+alaByodCOAStatus = _AlaByodCOAStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 1, 15, 1, 8),
+    _AlaByodCOAStatus_Type()
+)
+alaByodCOAStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaByodCOAStatus.setStatus("current")
 _AlaIND1Dot1XMIBConformance_ObjectIdentity = ObjectIdentity
 alaIND1Dot1XMIBConformance = _AlaIND1Dot1XMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2)
@@ -1495,21 +2598,6 @@ if mibBuilder.loadTexts:
     alaIND1Dot1XMIBGroups.setStatus("current")
 
 # Managed Objects groups
-
-alaINDDot1XPortGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 1)
-)
-alaINDDot1XPortGroup.setObjects(
-      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortSlotNumber"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortPortNumber"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortMACAddress"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortVlan"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortProtocol"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortUserName"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortState"))
-)
-if mibBuilder.loadTexts:
-    alaINDDot1XPortGroup.setStatus("current")
 
 alaDot1xPortLookupGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 2)
@@ -1532,7 +2620,10 @@ alaINDDot1XPolicyGroup.setObjects(
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPollingCnt"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCaptivePortalPolicy"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalSessionLimit"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalRetryCnt"))
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalRetryCnt"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xSupplicantBypass"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xSBAllowEAP"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalInactivityLogout"))
 )
 if mibBuilder.loadTexts:
     alaINDDot1XPolicyGroup.setStatus("current")
@@ -1550,7 +2641,8 @@ alaINDDot1XDeviceStatusGroup.setObjects(
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDeviceStatusAuthResult"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDeviceStatusMacLearntState"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDeviceStatusTimeLearned"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDeviceStatusCaptivePortalUsed"))
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDeviceStatusCaptivePortalUsed"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDeviceStatusHicResult"))
 )
 if mibBuilder.loadTexts:
     alaINDDot1XDeviceStatusGroup.setStatus("current")
@@ -1561,7 +2653,15 @@ alaDot1xAuthSvrTimeoutGroup = ObjectGroup(
 alaDot1xAuthSvrTimeoutGroup.setObjects(
       *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutPolicy"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutReAuthPeriod"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutStatus"))
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutStatus"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutVoicePolicy"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrPollingStatus"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrDownMacPersistency"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xDelayLearningPeriod"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAPModeStatus"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xEAPVersionStatus"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xForceL3Learning"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xForceL3LearningPortBounce"))
 )
 if mibBuilder.loadTexts:
     alaDot1xAuthSvrTimeoutGroup.setStatus("current")
@@ -1571,10 +2671,117 @@ alaPassthroughConfigGroup = ObjectGroup(
 )
 alaPassthroughConfigGroup.setObjects(
       *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPassthroughStatus"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaAvlanPassthroughStatus"))
+        ("ALCATEL-IND1-DOT1X-MIB", "alaAvlanPassthroughStatus"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaCportalPassthroughStatus"))
 )
 if mibBuilder.loadTexts:
-    alaPassthroughConfigGroup.setStatus("obsolete")
+    alaPassthroughConfigGroup.setStatus("current")
+
+alaDot1xAdminLogoutParamsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 7)
+)
+alaDot1xAdminLogoutParamsGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAdminLogoutType"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAdminLogoutMacAddress"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAdminLogoutUserName"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAdminLogoutNetworkProfileName"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAdminLogoutInterfaceId"))
+)
+if mibBuilder.loadTexts:
+    alaDot1xAdminLogoutParamsGroup.setStatus("current")
+
+alaDot1xNonSupplicantEntryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 8)
+)
+alaDot1xNonSupplicantEntryGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xNonSupplicantIntfNum"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xNonSupplicantMACAddress"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xNonSupplicantVlanID"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xNonSupplicantPolicyUsed"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthenticationStatus"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xNonSupplicantHicEnabledMAC"))
+)
+if mibBuilder.loadTexts:
+    alaDot1xNonSupplicantEntryGroup.setStatus("current")
+
+alaDot1xCportalConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 9)
+)
+alaDot1xCportalConfigGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalIpAddress"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalProxyURL"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalPostAuthSuccessRedirectURL"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalPostAuthFailRedirectURL"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalDNSKeyword1"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalDNSKeyword2"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalDNSKeyword3"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalDNSKeyword4"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalProxyPort"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCPortalRedirectString"))
+)
+if mibBuilder.loadTexts:
+    alaDot1xCportalConfigGroup.setStatus("current")
+
+alaDot1xMacEntryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 10)
+)
+alaDot1xMacEntryGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacIfIndex"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xHicEnabledMAC"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacSlotNumber"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacPortNumber"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacVlan"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacProtocol"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacUserName"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacState"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacSupplicantPolicyUsed"))
+)
+if mibBuilder.loadTexts:
+    alaDot1xMacEntryGroup.setStatus("current")
+
+alaKerberosPortGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 11)
+)
+alaKerberosPortGroup.setObjects(
+    ("ALCATEL-IND1-DOT1X-MIB", "alaKerberosPortStatus")
+)
+if mibBuilder.loadTexts:
+    alaKerberosPortGroup.setStatus("current")
+
+alaDot1xCrlUnpStatusGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 12)
+)
+alaDot1xCrlUnpStatusGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlIngBw"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlEgrBw"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlIngTypeFlag"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlEgrTypeFlag"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlDefDepth"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlIngProfile"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlEgrProfile"))
+)
+if mibBuilder.loadTexts:
+    alaDot1xCrlUnpStatusGroup.setStatus("current")
+
+alaINDDot1XRedirectByodHostGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 13)
+)
+alaINDDot1XRedirectByodHostGroup.setObjects(
+    ("ALCATEL-IND1-DOT1X-MIB", "alaByodHostProgressStatus")
+)
+if mibBuilder.loadTexts:
+    alaINDDot1XRedirectByodHostGroup.setStatus("current")
+
+alaINDDot1XRedirectByodHostUnpGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 1, 14)
+)
+alaINDDot1XRedirectByodHostUnpGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaByodPreviousUNP"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaByodNewUNP"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaByodCOAStatus"))
+)
+if mibBuilder.loadTexts:
+    alaINDDot1XRedirectByodHostUnpGroup.setStatus("current")
 
 
 # Notification objects
@@ -1592,11 +2799,19 @@ alaIND1Dot1XMIBCompliances = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 30, 1, 2, 2)
 )
 alaIND1Dot1XMIBCompliances.setObjects(
-      *(("ALCATEL-IND1-DOT1X-MIB", "alaINDDot1XPortGroup"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortLookupGroup"),
+      *(("ALCATEL-IND1-DOT1X-MIB", "alaDot1xPortLookupGroup"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaINDDot1XPolicyGroup"),
         ("ALCATEL-IND1-DOT1X-MIB", "alaINDDot1XDeviceStatusGroup"),
-        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutGroup"))
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAuthSvrTimeoutGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaPassthroughConfigGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xAdminLogoutParamsGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xNonSupplicantEntryGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCportalConfigGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xMacEntryGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaKerberosPortGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaDot1xCrlUnpStatusGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaINDDot1XRedirectByodHostGroup"),
+        ("ALCATEL-IND1-DOT1X-MIB", "alaINDDot1XRedirectByodHostUnpGroup"))
 )
 if mibBuilder.loadTexts:
     alaIND1Dot1XMIBCompliances.setStatus(
@@ -1614,6 +2829,7 @@ mibBuilder.exportSymbols(
        "ALADot1xMacLearntState": ALADot1xMacLearntState,
        "ALADot1xMacQueryType": ALADot1xMacQueryType,
        "ALADot1xDeviceType": ALADot1xDeviceType,
+       "ALADot1xHicFlag": ALADot1xHicFlag,
        "AlaPassThroughStatus": AlaPassThroughStatus,
        "alcatelIND1Dot1XMIB": alcatelIND1Dot1XMIB,
        "alaIND1Dot1XMIBObjects": alaIND1Dot1XMIBObjects,
@@ -1627,6 +2843,9 @@ mibBuilder.exportSymbols(
        "alaDot1xPortUserName": alaDot1xPortUserName,
        "alaDot1xPortState": alaDot1xPortState,
        "alaDot1xSupplicantPolicyUsed": alaDot1xSupplicantPolicyUsed,
+       "alaDot1xAuthFailReason": alaDot1xAuthFailReason,
+       "alaDot1xReAuthCount": alaDot1xReAuthCount,
+       "alaDot1xLastSuccessTime": alaDot1xLastSuccessTime,
        "alaDot1xPortLookupTable": alaDot1xPortLookupTable,
        "alaDot1xPortLookupEntry": alaDot1xPortLookupEntry,
        "alaDot1xPortLookupSlotNumber": alaDot1xPortLookupSlotNumber,
@@ -1644,6 +2863,7 @@ mibBuilder.exportSymbols(
        "alaDot1xMacUserName": alaDot1xMacUserName,
        "alaDot1xMacState": alaDot1xMacState,
        "alaDot1xMacSupplicantPolicyUsed": alaDot1xMacSupplicantPolicyUsed,
+       "alaDot1xHicEnabledMAC": alaDot1xHicEnabledMAC,
        "alaDot1xNonSupplicantTable": alaDot1xNonSupplicantTable,
        "alaDot1xNonSupplicantEntry": alaDot1xNonSupplicantEntry,
        "alaDot1xNonSupplicantIntfNum": alaDot1xNonSupplicantIntfNum,
@@ -1651,6 +2871,8 @@ mibBuilder.exportSymbols(
        "alaDot1xNonSupplicantVlanID": alaDot1xNonSupplicantVlanID,
        "alaDot1xNonSupplicantPolicyUsed": alaDot1xNonSupplicantPolicyUsed,
        "alaDot1xAuthenticationStatus": alaDot1xAuthenticationStatus,
+       "alaDot1xNonSupplicantHicEnabledMAC": alaDot1xNonSupplicantHicEnabledMAC,
+       "alaDot1xNonSupplicantUserName": alaDot1xNonSupplicantUserName,
        "alaDot1xAuthPolicyTable": alaDot1xAuthPolicyTable,
        "alaDot1xAuthPolicyEntry": alaDot1xAuthPolicyEntry,
        "alaDot1xAuthPolicyIntfNumber": alaDot1xAuthPolicyIntfNumber,
@@ -1660,6 +2882,17 @@ mibBuilder.exportSymbols(
        "alaDot1xCaptivePortalPolicy": alaDot1xCaptivePortalPolicy,
        "alaDot1xCPortalSessionLimit": alaDot1xCPortalSessionLimit,
        "alaDot1xCPortalRetryCnt": alaDot1xCPortalRetryCnt,
+       "alaDot1xSupplicantBypass": alaDot1xSupplicantBypass,
+       "alaDot1xSBAllowEAP": alaDot1xSBAllowEAP,
+       "alaDot1xCPortalInactivityLogout": alaDot1xCPortalInactivityLogout,
+       "alaDot1xNonSuppSessTimeoutStatus": alaDot1xNonSuppSessTimeoutStatus,
+       "alaDot1xNonSuppSessTimeoutIntrvl": alaDot1xNonSuppSessTimeoutIntrvl,
+       "alaDot1xNonSuppSessTimeoutTrustRadStatus": alaDot1xNonSuppSessTimeoutTrustRadStatus,
+       "alaDot1xSuppTrustRadiusEnabled": alaDot1xSuppTrustRadiusEnabled,
+       "alaDot1xNonSupInactivityLogout": alaDot1xNonSupInactivityLogout,
+       "alaDot1xPerPortAPModeStatus": alaDot1xPerPortAPModeStatus,
+       "alaDot1xPerPortForceL3Learning": alaDot1xPerPortForceL3Learning,
+       "alaDot1xPerPortForceL3LearningPortBounce": alaDot1xPerPortForceL3LearningPortBounce,
        "alaDot1xCportalConfig": alaDot1xCportalConfig,
        "alaDot1xCPortalIpAddress": alaDot1xCPortalIpAddress,
        "alaDot1xCPortalProxyURL": alaDot1xCPortalProxyURL,
@@ -1669,6 +2902,8 @@ mibBuilder.exportSymbols(
        "alaDot1xCPortalDNSKeyword2": alaDot1xCPortalDNSKeyword2,
        "alaDot1xCPortalDNSKeyword3": alaDot1xCPortalDNSKeyword3,
        "alaDot1xCPortalDNSKeyword4": alaDot1xCPortalDNSKeyword4,
+       "alaDot1xCPortalProxyPort": alaDot1xCPortalProxyPort,
+       "alaDot1xCPortalRedirectString": alaDot1xCPortalRedirectString,
        "alaDot1xDeviceStatusTable": alaDot1xDeviceStatusTable,
        "alaDot1xDeviceStatusEntry": alaDot1xDeviceStatusEntry,
        "alaDot1xDeviceStatusMacQueryType": alaDot1xDeviceStatusMacQueryType,
@@ -1686,6 +2921,7 @@ mibBuilder.exportSymbols(
        "alaDot1xDeviceStatusMacLearntState": alaDot1xDeviceStatusMacLearntState,
        "alaDot1xDeviceStatusTimeLearned": alaDot1xDeviceStatusTimeLearned,
        "alaDot1xDeviceStatusCaptivePortalUsed": alaDot1xDeviceStatusCaptivePortalUsed,
+       "alaDot1xDeviceStatusHicResult": alaDot1xDeviceStatusHicResult,
        "alaDot1xAdminLogoutParams": alaDot1xAdminLogoutParams,
        "alaDot1xAdminLogoutType": alaDot1xAdminLogoutType,
        "alaDot1xAdminLogoutMacAddress": alaDot1xAdminLogoutMacAddress,
@@ -1696,16 +2932,64 @@ mibBuilder.exportSymbols(
        "alaDot1xAuthSvrTimeoutPolicy": alaDot1xAuthSvrTimeoutPolicy,
        "alaDot1xAuthSvrTimeoutReAuthPeriod": alaDot1xAuthSvrTimeoutReAuthPeriod,
        "alaDot1xAuthSvrTimeoutStatus": alaDot1xAuthSvrTimeoutStatus,
+       "alaDot1xAuthSvrTimeoutVoicePolicy": alaDot1xAuthSvrTimeoutVoicePolicy,
+       "alaDot1xAuthSvrPollingStatus": alaDot1xAuthSvrPollingStatus,
+       "alaDot1xAuthSvrDownMacPersistency": alaDot1xAuthSvrDownMacPersistency,
+       "alaDot1xDelayLearningPeriod": alaDot1xDelayLearningPeriod,
+       "alaDot1xAPModeStatus": alaDot1xAPModeStatus,
+       "alaDot1xEAPVersionStatus": alaDot1xEAPVersionStatus,
+       "alaDot1xForceL3Learning": alaDot1xForceL3Learning,
+       "alaDot1xForceL3LearningPortBounce": alaDot1xForceL3LearningPortBounce,
        "alaPassthroughConfig": alaPassthroughConfig,
        "alaDot1xPassthroughStatus": alaDot1xPassthroughStatus,
        "alaAvlanPassthroughStatus": alaAvlanPassthroughStatus,
+       "alaCportalPassthroughStatus": alaCportalPassthroughStatus,
+       "alaKerberosPortTable": alaKerberosPortTable,
+       "alaKerberosPortEntry": alaKerberosPortEntry,
+       "alaKerberosPortIfIndex": alaKerberosPortIfIndex,
+       "alaKerberosPortStatus": alaKerberosPortStatus,
+       "alaDot1xCrlUnpTable": alaDot1xCrlUnpTable,
+       "alaDot1xCrlUnpEntry": alaDot1xCrlUnpEntry,
+       "alaDot1xCrlIfIndex": alaDot1xCrlIfIndex,
+       "alaDot1xCrlIngBw": alaDot1xCrlIngBw,
+       "alaDot1xCrlEgrBw": alaDot1xCrlEgrBw,
+       "alaDot1xCrlIngTypeFlag": alaDot1xCrlIngTypeFlag,
+       "alaDot1xCrlEgrTypeFlag": alaDot1xCrlEgrTypeFlag,
+       "alaDot1xCrlDefDepth": alaDot1xCrlDefDepth,
+       "alaDot1xCrlIngProfile": alaDot1xCrlIngProfile,
+       "alaDot1xCrlEgrProfile": alaDot1xCrlEgrProfile,
+       "alaRedirectByodHostTable": alaRedirectByodHostTable,
+       "alaRedirectByodHostEntry": alaRedirectByodHostEntry,
+       "alaByodHostStateQueryType": alaByodHostStateQueryType,
+       "alaByodHostStateSlotNumber": alaByodHostStateSlotNumber,
+       "alaByodHostStatePortNumber": alaByodHostStatePortNumber,
+       "alaByodHostStateMacAddress": alaByodHostStateMacAddress,
+       "alaByodHostStateDeviceType": alaByodHostStateDeviceType,
+       "alaByodHostProgressStatus": alaByodHostProgressStatus,
+       "alaRedirectByodHostUnpTable": alaRedirectByodHostUnpTable,
+       "alaRedirectByodHostUnpEntry": alaRedirectByodHostUnpEntry,
+       "alaByodClientMacQueryType": alaByodClientMacQueryType,
+       "alaByodClientSlotNumber": alaByodClientSlotNumber,
+       "alaByodClientPortNumber": alaByodClientPortNumber,
+       "alaByodClientMacAddress": alaByodClientMacAddress,
+       "alaByodClientDeviceType": alaByodClientDeviceType,
+       "alaByodPreviousUNP": alaByodPreviousUNP,
+       "alaByodNewUNP": alaByodNewUNP,
+       "alaByodCOAStatus": alaByodCOAStatus,
        "alaIND1Dot1XMIBConformance": alaIND1Dot1XMIBConformance,
        "alaIND1Dot1XMIBGroups": alaIND1Dot1XMIBGroups,
-       "alaINDDot1XPortGroup": alaINDDot1XPortGroup,
        "alaDot1xPortLookupGroup": alaDot1xPortLookupGroup,
        "alaINDDot1XPolicyGroup": alaINDDot1XPolicyGroup,
        "alaINDDot1XDeviceStatusGroup": alaINDDot1XDeviceStatusGroup,
        "alaDot1xAuthSvrTimeoutGroup": alaDot1xAuthSvrTimeoutGroup,
        "alaPassthroughConfigGroup": alaPassthroughConfigGroup,
+       "alaDot1xAdminLogoutParamsGroup": alaDot1xAdminLogoutParamsGroup,
+       "alaDot1xNonSupplicantEntryGroup": alaDot1xNonSupplicantEntryGroup,
+       "alaDot1xCportalConfigGroup": alaDot1xCportalConfigGroup,
+       "alaDot1xMacEntryGroup": alaDot1xMacEntryGroup,
+       "alaKerberosPortGroup": alaKerberosPortGroup,
+       "alaDot1xCrlUnpStatusGroup": alaDot1xCrlUnpStatusGroup,
+       "alaINDDot1XRedirectByodHostGroup": alaINDDot1XRedirectByodHostGroup,
+       "alaINDDot1XRedirectByodHostUnpGroup": alaINDDot1XRedirectByodHostUnpGroup,
        "alaIND1Dot1XMIBCompliances": alaIND1Dot1XMIBCompliances}
 )

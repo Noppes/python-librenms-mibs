@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\stormshield\STORMSHIELD-VPNSA-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:29:19 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -95,20 +92,12 @@ if 'mibBuilder' not in globals():
     "PhysAddress",
     "TextualConvention")
 
-(stormshieldMIB,) = mibBuilder.importSymbols(
-    "STORMSHIELD-SMI-MIB",
-    "stormshieldMIB")
+(snsVPN,) = mibBuilder.importSymbols(
+    "STORMSHIELD-VPN-MIB",
+    "snsVPN")
 
 
 # MODULE-IDENTITY
-
-snsVPN = ModuleIdentity(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 1)
-)
-if mibBuilder.loadTexts:
-    snsVPN.setRevisions(
-        ("2017-02-20 00:00",)
-    )
 
 
 # Types definitions
@@ -154,28 +143,65 @@ snsVPNSAIndex = _SnsVPNSAIndex_Object(
 snsVPNSAIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsVPNSAIndex.setStatus("current")
-_SnsVPNIPSrc_Type = DisplayString
-_SnsVPNIPSrc_Object = MibTableColumn
-snsVPNIPSrc = _SnsVPNIPSrc_Object(
+_SnsVPNSARulename_Type = DisplayString
+_SnsVPNSARulename_Object = MibTableColumn
+snsVPNSARulename = _SnsVPNSARulename_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 2),
-    _SnsVPNIPSrc_Type()
+    _SnsVPNSARulename_Type()
 )
-snsVPNIPSrc.setMaxAccess("read-only")
+snsVPNSARulename.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNIPSrc.setStatus("current")
-_SnsVPNIPDst_Type = DisplayString
-_SnsVPNIPDst_Object = MibTableColumn
-snsVPNIPDst = _SnsVPNIPDst_Object(
+    snsVPNSARulename.setStatus("current")
+
+
+class _SnsVPNSAIKEIndex_Type(Integer32):
+    """Custom type snsVPNSAIKEIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_SnsVPNSAIKEIndex_Type.__name__ = "Integer32"
+_SnsVPNSAIKEIndex_Object = MibTableColumn
+snsVPNSAIKEIndex = _SnsVPNSAIKEIndex_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 3),
-    _SnsVPNIPDst_Type()
+    _SnsVPNSAIKEIndex_Type()
 )
-snsVPNIPDst.setMaxAccess("read-only")
+snsVPNSAIKEIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNIPDst.setStatus("current")
+    snsVPNSAIKEIndex.setStatus("current")
+_SnsVPNSAIKERulename_Type = DisplayString
+_SnsVPNSAIKERulename_Object = MibTableColumn
+snsVPNSAIKERulename = _SnsVPNSAIKERulename_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 4),
+    _SnsVPNSAIKERulename_Type()
+)
+snsVPNSAIKERulename.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAIKERulename.setStatus("current")
+_SnsVPNSAIPSrc_Type = DisplayString
+_SnsVPNSAIPSrc_Object = MibTableColumn
+snsVPNSAIPSrc = _SnsVPNSAIPSrc_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 5),
+    _SnsVPNSAIPSrc_Type()
+)
+snsVPNSAIPSrc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAIPSrc.setStatus("current")
+_SnsVPNSAIPDst_Type = DisplayString
+_SnsVPNSAIPDst_Object = MibTableColumn
+snsVPNSAIPDst = _SnsVPNSAIPDst_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 6),
+    _SnsVPNSAIPDst_Type()
+)
+snsVPNSAIPDst.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAIPDst.setStatus("current")
 
 
-class _SnsVPNType_Type(Integer32):
-    """Custom type snsVPNType based on Integer32"""
+class _SnsVPNSAType_Type(Integer32):
+    """Custom type snsVPNSAType based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -203,185 +229,211 @@ class _SnsVPNType_Type(Integer32):
     )
 
 
-_SnsVPNType_Type.__name__ = "Integer32"
-_SnsVPNType_Object = MibTableColumn
-snsVPNType = _SnsVPNType_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 4),
-    _SnsVPNType_Type()
-)
-snsVPNType.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snsVPNType.setStatus("current")
-
-
-class _SnsVPNMode_Type(Integer32):
-    """Custom type snsVPNMode based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1,
-              2)
-        )
-    )
-    namedValues = NamedValues(
-        *(("any", 0),
-          ("transport", 1),
-          ("tunnel", 2))
-    )
-
-
-_SnsVPNMode_Type.__name__ = "Integer32"
-_SnsVPNMode_Object = MibTableColumn
-snsVPNMode = _SnsVPNMode_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 5),
-    _SnsVPNMode_Type()
-)
-snsVPNMode.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snsVPNMode.setStatus("current")
-_SnsVPNSpi_Type = Unsigned32
-_SnsVPNSpi_Object = MibTableColumn
-snsVPNSpi = _SnsVPNSpi_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 6),
-    _SnsVPNSpi_Type()
-)
-snsVPNSpi.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snsVPNSpi.setStatus("current")
-_SnsVPNPeerSpi_Type = Unsigned32
-_SnsVPNPeerSpi_Object = MibTableColumn
-snsVPNPeerSpi = _SnsVPNPeerSpi_Object(
+_SnsVPNSAType_Type.__name__ = "Integer32"
+_SnsVPNSAType_Object = MibTableColumn
+snsVPNSAType = _SnsVPNSAType_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 7),
-    _SnsVPNPeerSpi_Type()
+    _SnsVPNSAType_Type()
 )
-snsVPNPeerSpi.setMaxAccess("read-only")
+snsVPNSAType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNPeerSpi.setStatus("current")
-_SnsVPNReqID_Type = Integer32
-_SnsVPNReqID_Object = MibTableColumn
-snsVPNReqID = _SnsVPNReqID_Object(
+    snsVPNSAType.setStatus("current")
+_SnsVPNSAMode_Type = DisplayString
+_SnsVPNSAMode_Object = MibTableColumn
+snsVPNSAMode = _SnsVPNSAMode_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 8),
-    _SnsVPNReqID_Type()
+    _SnsVPNSAMode_Type()
 )
-snsVPNReqID.setMaxAccess("read-only")
+snsVPNSAMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNReqID.setStatus("current")
-_SnsVPNEnc_Type = DisplayString
-_SnsVPNEnc_Object = MibTableColumn
-snsVPNEnc = _SnsVPNEnc_Object(
+    snsVPNSAMode.setStatus("current")
+
+
+class _SnsVPNSAEncap_Type(Integer32):
+    """Custom type snsVPNSAEncap based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 0),
+          ("yes", 1))
+    )
+
+
+_SnsVPNSAEncap_Type.__name__ = "Integer32"
+_SnsVPNSAEncap_Object = MibTableColumn
+snsVPNSAEncap = _SnsVPNSAEncap_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 9),
-    _SnsVPNEnc_Type()
+    _SnsVPNSAEncap_Type()
 )
-snsVPNEnc.setMaxAccess("read-only")
+snsVPNSAEncap.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNEnc.setStatus("current")
+    snsVPNSAEncap.setStatus("current")
 
 
-class _SnsVPNAuth_Type(Integer32):
-    """Custom type snsVPNAuth based on Integer32"""
+class _SnsVPNSAEsn_Type(Integer32):
+    """Custom type snsVPNSAEsn based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(0,
-              2,
-              3,
-              5,
-              6,
-              7,
-              249,
-              250,
-              251)
+              1)
         )
     )
     namedValues = NamedValues(
-        *(("none", 0),
-          ("hmac-md5", 2),
-          ("hmac-sha1", 3),
-          ("hmac-sha256", 5),
-          ("hmac-sha384", 6),
-          ("hmac-sha512", 7),
-          ("md5", 249),
-          ("sha", 250),
-          ("null", 251))
+        *(("no", 0),
+          ("yes", 1))
     )
 
 
-_SnsVPNAuth_Type.__name__ = "Integer32"
-_SnsVPNAuth_Object = MibTableColumn
-snsVPNAuth = _SnsVPNAuth_Object(
+_SnsVPNSAEsn_Type.__name__ = "Integer32"
+_SnsVPNSAEsn_Object = MibTableColumn
+snsVPNSAEsn = _SnsVPNSAEsn_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 10),
-    _SnsVPNAuth_Type()
+    _SnsVPNSAEsn_Type()
 )
-snsVPNAuth.setMaxAccess("read-only")
+snsVPNSAEsn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNAuth.setStatus("current")
-
-
-class _SnsVPNState_Type(Integer32):
-    """Custom type snsVPNState based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("larval", 0),
-          ("mature", 1),
-          ("dying", 2),
-          ("dead", 3))
-    )
-
-
-_SnsVPNState_Type.__name__ = "Integer32"
-_SnsVPNState_Object = MibTableColumn
-snsVPNState = _SnsVPNState_Object(
+    snsVPNSAEsn.setStatus("current")
+_SnsVPNSASpi_Type = Unsigned32
+_SnsVPNSASpi_Object = MibTableColumn
+snsVPNSASpi = _SnsVPNSASpi_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 11),
-    _SnsVPNState_Type()
+    _SnsVPNSASpi_Type()
 )
-snsVPNState.setMaxAccess("read-only")
+snsVPNSASpi.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNState.setStatus("current")
-_SnsVPNLifetime_Type = Counter64
-_SnsVPNLifetime_Object = MibTableColumn
-snsVPNLifetime = _SnsVPNLifetime_Object(
+    snsVPNSASpi.setStatus("current")
+_SnsVPNSAPeerSpi_Type = Unsigned32
+_SnsVPNSAPeerSpi_Object = MibTableColumn
+snsVPNSAPeerSpi = _SnsVPNSAPeerSpi_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 12),
-    _SnsVPNLifetime_Type()
+    _SnsVPNSAPeerSpi_Type()
 )
-snsVPNLifetime.setMaxAccess("read-only")
+snsVPNSAPeerSpi.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNLifetime.setStatus("current")
-_SnsVPNBytes_Type = Counter64
-_SnsVPNBytes_Object = MibTableColumn
-snsVPNBytes = _SnsVPNBytes_Object(
+    snsVPNSAPeerSpi.setStatus("current")
+_SnsVPNSAReqID_Type = Integer32
+_SnsVPNSAReqID_Object = MibTableColumn
+snsVPNSAReqID = _SnsVPNSAReqID_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 13),
-    _SnsVPNBytes_Type()
+    _SnsVPNSAReqID_Type()
 )
-snsVPNBytes.setMaxAccess("read-only")
+snsVPNSAReqID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNBytes.setStatus("current")
-_SnsVPNMaxLifetime_Type = Counter64
-_SnsVPNMaxLifetime_Object = MibTableColumn
-snsVPNMaxLifetime = _SnsVPNMaxLifetime_Object(
+    snsVPNSAReqID.setStatus("current")
+_SnsVPNSAEnc_Type = DisplayString
+_SnsVPNSAEnc_Object = MibTableColumn
+snsVPNSAEnc = _SnsVPNSAEnc_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 14),
-    _SnsVPNMaxLifetime_Type()
+    _SnsVPNSAEnc_Type()
 )
-snsVPNMaxLifetime.setMaxAccess("read-only")
+snsVPNSAEnc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNMaxLifetime.setStatus("current")
-_SnsVPNMaxBytes_Type = Counter64
-_SnsVPNMaxBytes_Object = MibTableColumn
-snsVPNMaxBytes = _SnsVPNMaxBytes_Object(
+    snsVPNSAEnc.setStatus("current")
+_SnsVPNSAAuth_Type = DisplayString
+_SnsVPNSAAuth_Object = MibTableColumn
+snsVPNSAAuth = _SnsVPNSAAuth_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 15),
-    _SnsVPNMaxBytes_Type()
+    _SnsVPNSAAuth_Type()
 )
-snsVPNMaxBytes.setMaxAccess("read-only")
+snsVPNSAAuth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsVPNMaxBytes.setStatus("current")
+    snsVPNSAAuth.setStatus("current")
+_SnsVPNSAPrf_Type = DisplayString
+_SnsVPNSAPrf_Object = MibTableColumn
+snsVPNSAPrf = _SnsVPNSAPrf_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 16),
+    _SnsVPNSAPrf_Type()
+)
+snsVPNSAPrf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAPrf.setStatus("current")
+_SnsVPNSAPfs_Type = DisplayString
+_SnsVPNSAPfs_Object = MibTableColumn
+snsVPNSAPfs = _SnsVPNSAPfs_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 17),
+    _SnsVPNSAPfs_Type()
+)
+snsVPNSAPfs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAPfs.setStatus("current")
+_SnsVPNSAState_Type = DisplayString
+_SnsVPNSAState_Object = MibTableColumn
+snsVPNSAState = _SnsVPNSAState_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 18),
+    _SnsVPNSAState_Type()
+)
+snsVPNSAState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAState.setStatus("current")
+_SnsVPNSABytesIn_Type = Counter64
+_SnsVPNSABytesIn_Object = MibTableColumn
+snsVPNSABytesIn = _SnsVPNSABytesIn_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 19),
+    _SnsVPNSABytesIn_Type()
+)
+snsVPNSABytesIn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSABytesIn.setStatus("current")
+_SnsVPNSABytesOut_Type = Counter64
+_SnsVPNSABytesOut_Object = MibTableColumn
+snsVPNSABytesOut = _SnsVPNSABytesOut_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 20),
+    _SnsVPNSABytesOut_Type()
+)
+snsVPNSABytesOut.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSABytesOut.setStatus("current")
+_SnsVPNSAPacketsIn_Type = Counter64
+_SnsVPNSAPacketsIn_Object = MibTableColumn
+snsVPNSAPacketsIn = _SnsVPNSAPacketsIn_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 21),
+    _SnsVPNSAPacketsIn_Type()
+)
+snsVPNSAPacketsIn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAPacketsIn.setStatus("current")
+_SnsVPNSAPacketsOut_Type = Counter64
+_SnsVPNSAPacketsOut_Object = MibTableColumn
+snsVPNSAPacketsOut = _SnsVPNSAPacketsOut_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 22),
+    _SnsVPNSAPacketsOut_Type()
+)
+snsVPNSAPacketsOut.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAPacketsOut.setStatus("current")
+_SnsVPNSALifetime_Type = Counter64
+_SnsVPNSALifetime_Object = MibTableColumn
+snsVPNSALifetime = _SnsVPNSALifetime_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 23),
+    _SnsVPNSALifetime_Type()
+)
+snsVPNSALifetime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSALifetime.setStatus("current")
+_SnsVPNSAMaxLifetime_Type = Counter64
+_SnsVPNSAMaxLifetime_Object = MibTableColumn
+snsVPNSAMaxLifetime = _SnsVPNSAMaxLifetime_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 24),
+    _SnsVPNSAMaxLifetime_Type()
+)
+snsVPNSAMaxLifetime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAMaxLifetime.setStatus("current")
+_SnsVPNSAGlobal_Type = Integer32
+_SnsVPNSAGlobal_Object = MibTableColumn
+snsVPNSAGlobal = _SnsVPNSAGlobal_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 1, 1, 1, 25),
+    _SnsVPNSAGlobal_Type()
+)
+snsVPNSAGlobal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsVPNSAGlobal.setStatus("current")
 
 # Managed Objects groups
 
@@ -402,22 +454,31 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "STORMSHIELD-VPNSA-MIB",
-    **{"snsVPN": snsVPN,
-       "snsVPNSATable": snsVPNSATable,
+    **{"snsVPNSATable": snsVPNSATable,
        "snsVPNSAEntry": snsVPNSAEntry,
        "snsVPNSAIndex": snsVPNSAIndex,
-       "snsVPNIPSrc": snsVPNIPSrc,
-       "snsVPNIPDst": snsVPNIPDst,
-       "snsVPNType": snsVPNType,
-       "snsVPNMode": snsVPNMode,
-       "snsVPNSpi": snsVPNSpi,
-       "snsVPNPeerSpi": snsVPNPeerSpi,
-       "snsVPNReqID": snsVPNReqID,
-       "snsVPNEnc": snsVPNEnc,
-       "snsVPNAuth": snsVPNAuth,
-       "snsVPNState": snsVPNState,
-       "snsVPNLifetime": snsVPNLifetime,
-       "snsVPNBytes": snsVPNBytes,
-       "snsVPNMaxLifetime": snsVPNMaxLifetime,
-       "snsVPNMaxBytes": snsVPNMaxBytes}
+       "snsVPNSARulename": snsVPNSARulename,
+       "snsVPNSAIKEIndex": snsVPNSAIKEIndex,
+       "snsVPNSAIKERulename": snsVPNSAIKERulename,
+       "snsVPNSAIPSrc": snsVPNSAIPSrc,
+       "snsVPNSAIPDst": snsVPNSAIPDst,
+       "snsVPNSAType": snsVPNSAType,
+       "snsVPNSAMode": snsVPNSAMode,
+       "snsVPNSAEncap": snsVPNSAEncap,
+       "snsVPNSAEsn": snsVPNSAEsn,
+       "snsVPNSASpi": snsVPNSASpi,
+       "snsVPNSAPeerSpi": snsVPNSAPeerSpi,
+       "snsVPNSAReqID": snsVPNSAReqID,
+       "snsVPNSAEnc": snsVPNSAEnc,
+       "snsVPNSAAuth": snsVPNSAAuth,
+       "snsVPNSAPrf": snsVPNSAPrf,
+       "snsVPNSAPfs": snsVPNSAPfs,
+       "snsVPNSAState": snsVPNSAState,
+       "snsVPNSABytesIn": snsVPNSABytesIn,
+       "snsVPNSABytesOut": snsVPNSABytesOut,
+       "snsVPNSAPacketsIn": snsVPNSAPacketsIn,
+       "snsVPNSAPacketsOut": snsVPNSAPacketsOut,
+       "snsVPNSALifetime": snsVPNSALifetime,
+       "snsVPNSAMaxLifetime": snsVPNSAMaxLifetime,
+       "snsVPNSAGlobal": snsVPNSAGlobal}
 )

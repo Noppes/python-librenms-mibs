@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-RADIUS-CLIENT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:50 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -44,6 +41,10 @@ if 'mibBuilder' not in globals():
     "ValueSizeConstraint")
 
 # Import SMI symbols from the MIBs this MIB depends on
+
+(PreferredSourceAddress,) = mibBuilder.importSymbols(
+    "CIENA-CES-MGMT-INTERFACE-MIB",
+    "PreferredSourceAddress")
 
 (cienaCesStatistics,) = mibBuilder.importSymbols(
     "CIENA-SMI",
@@ -121,7 +122,9 @@ cienaCesRadiusClientMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesRadiusClientMIB.setRevisions(
-        ("2016-02-17 00:00",
+        ("2017-06-07 00:00",
+         "2017-01-23 00:00",
+         "2016-02-17 00:00",
          "2015-07-22 00:00",
          "2015-06-22 00:00",
          "2014-06-12 00:00",
@@ -269,6 +272,22 @@ cienaCesRadiusClientSearchType = _CienaCesRadiusClientSearchType_Object(
 cienaCesRadiusClientSearchType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     cienaCesRadiusClientSearchType.setStatus("deprecated")
+
+
+class _CienaCesRadiusClientPreferredSourceAddress_Type(PreferredSourceAddress):
+    """Custom type cienaCesRadiusClientPreferredSourceAddress based on PreferredSourceAddress"""
+    defaultValue = 1
+
+
+_CienaCesRadiusClientPreferredSourceAddress_Type.__name__ = "PreferredSourceAddress"
+_CienaCesRadiusClientPreferredSourceAddress_Object = MibScalar
+cienaCesRadiusClientPreferredSourceAddress = _CienaCesRadiusClientPreferredSourceAddress_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 3, 3, 1, 1, 1, 8),
+    _CienaCesRadiusClientPreferredSourceAddress_Type()
+)
+cienaCesRadiusClientPreferredSourceAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cienaCesRadiusClientPreferredSourceAddress.setStatus("current")
 _CienaCesRadiusClientServer_ObjectIdentity = ObjectIdentity
 cienaCesRadiusClientServer = _CienaCesRadiusClientServer_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 3, 3, 1, 1, 2)
@@ -1984,6 +2003,7 @@ mibBuilder.exportSymbols(
        "cienaCesRadiusClientAuthKey": cienaCesRadiusClientAuthKey,
        "cienaCesRadiusClientAuthKeyUnset": cienaCesRadiusClientAuthKeyUnset,
        "cienaCesRadiusClientSearchType": cienaCesRadiusClientSearchType,
+       "cienaCesRadiusClientPreferredSourceAddress": cienaCesRadiusClientPreferredSourceAddress,
        "cienaCesRadiusClientServer": cienaCesRadiusClientServer,
        "cienaCesRadiusClientServerTable": cienaCesRadiusClientServerTable,
        "cienaCesRadiusClientServerEntry": cienaCesRadiusClientServerEntry,

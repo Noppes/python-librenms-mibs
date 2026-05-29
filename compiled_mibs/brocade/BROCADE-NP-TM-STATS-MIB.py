@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\BROCADE-NP-TM-STATS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:21:52 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,7 +120,13 @@ brocadeNPTMStatsMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     brocadeNPTMStatsMIB.setRevisions(
-        ("2011-11-18 00:00",
+        ("2013-04-25 00:00",
+         "2013-02-22 00:00",
+         "2013-02-11 00:00",
+         "2012-07-04 00:00",
+         "2012-05-18 00:00",
+         "2012-04-25 00:00",
+         "2011-11-18 00:00",
          "2011-09-28 00:00",
          "2010-09-02 00:00")
     )
@@ -138,6 +141,62 @@ if mibBuilder.loadTexts:
 
 # MIB Managed Objects in the order of their OIDs
 
+_BrcdNPTMMIBNotification_ObjectIdentity = ObjectIdentity
+brcdNPTMMIBNotification = _BrcdNPTMMIBNotification_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0)
+)
+_BrcdNPNotificationSupportTable_Object = MibTable
+brcdNPNotificationSupportTable = _BrcdNPNotificationSupportTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 5)
+)
+if mibBuilder.loadTexts:
+    brcdNPNotificationSupportTable.setStatus("current")
+_BrcdNPNotificationSupportEntry_Object = MibTableRow
+brcdNPNotificationSupportEntry = _BrcdNPNotificationSupportEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 5, 1)
+)
+brcdNPNotificationSupportEntry.setIndexNames(
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportSlotId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDeviceId"),
+)
+if mibBuilder.loadTexts:
+    brcdNPNotificationSupportEntry.setStatus("current")
+_BrcdNPNotificationSupportSlotId_Type = Unsigned32
+_BrcdNPNotificationSupportSlotId_Object = MibTableColumn
+brcdNPNotificationSupportSlotId = _BrcdNPNotificationSupportSlotId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 5, 1, 1),
+    _BrcdNPNotificationSupportSlotId_Type()
+)
+brcdNPNotificationSupportSlotId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPNotificationSupportSlotId.setStatus("current")
+_BrcdNPNotificationSupportDeviceId_Type = Unsigned32
+_BrcdNPNotificationSupportDeviceId_Object = MibTableColumn
+brcdNPNotificationSupportDeviceId = _BrcdNPNotificationSupportDeviceId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 5, 1, 2),
+    _BrcdNPNotificationSupportDeviceId_Type()
+)
+brcdNPNotificationSupportDeviceId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPNotificationSupportDeviceId.setStatus("current")
+_BrcdNPNotificationSupportDescription_Type = DisplayString
+_BrcdNPNotificationSupportDescription_Object = MibTableColumn
+brcdNPNotificationSupportDescription = _BrcdNPNotificationSupportDescription_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 5, 1, 3),
+    _BrcdNPNotificationSupportDescription_Type()
+)
+brcdNPNotificationSupportDescription.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    brcdNPNotificationSupportDescription.setStatus("current")
+_BrcdNPNotificationSupportErrorType_Type = DisplayString
+_BrcdNPNotificationSupportErrorType_Object = MibTableColumn
+brcdNPNotificationSupportErrorType = _BrcdNPNotificationSupportErrorType_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 5, 1, 4),
+    _BrcdNPNotificationSupportErrorType_Type()
+)
+brcdNPNotificationSupportErrorType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    brcdNPNotificationSupportErrorType.setStatus("current")
 _BrcdNPTMMIBObjects_ObjectIdentity = ObjectIdentity
 brcdNPTMMIBObjects = _BrcdNPTMMIBObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1)
@@ -645,6 +704,594 @@ brcdNPQosStatEgressBytes = _BrcdNPQosStatEgressBytes_Object(
 brcdNPQosStatEgressBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     brcdNPQosStatEgressBytes.setStatus("current")
+_BrcdNPBufferErrorTable_Object = MibTable
+brcdNPBufferErrorTable = _BrcdNPBufferErrorTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3)
+)
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorTable.setStatus("current")
+_BrcdNPBufferErrorEntry_Object = MibTableRow
+brcdNPBufferErrorEntry = _BrcdNPBufferErrorEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1)
+)
+brcdNPBufferErrorEntry.setIndexNames(
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPBufferErrorSlotId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPBufferErrorDeviceId"),
+)
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorEntry.setStatus("current")
+_BrcdNPBufferErrorSlotId_Type = Unsigned32
+_BrcdNPBufferErrorSlotId_Object = MibTableColumn
+brcdNPBufferErrorSlotId = _BrcdNPBufferErrorSlotId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 1),
+    _BrcdNPBufferErrorSlotId_Type()
+)
+brcdNPBufferErrorSlotId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorSlotId.setStatus("current")
+_BrcdNPBufferErrorDeviceId_Type = Unsigned32
+_BrcdNPBufferErrorDeviceId_Object = MibTableColumn
+brcdNPBufferErrorDeviceId = _BrcdNPBufferErrorDeviceId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 2),
+    _BrcdNPBufferErrorDeviceId_Type()
+)
+brcdNPBufferErrorDeviceId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorDeviceId.setStatus("current")
+_BrcdNPBufferErrorDescription_Type = DisplayString
+_BrcdNPBufferErrorDescription_Object = MibTableColumn
+brcdNPBufferErrorDescription = _BrcdNPBufferErrorDescription_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 3),
+    _BrcdNPBufferErrorDescription_Type()
+)
+brcdNPBufferErrorDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorDescription.setStatus("current")
+_BrcdNPBufferErrorIngressCurrentEvents_Type = Counter32
+_BrcdNPBufferErrorIngressCurrentEvents_Object = MibTableColumn
+brcdNPBufferErrorIngressCurrentEvents = _BrcdNPBufferErrorIngressCurrentEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 4),
+    _BrcdNPBufferErrorIngressCurrentEvents_Type()
+)
+brcdNPBufferErrorIngressCurrentEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorIngressCurrentEvents.setStatus("current")
+_BrcdNPBufferErrorIngressCumulativeEvents_Type = Counter32
+_BrcdNPBufferErrorIngressCumulativeEvents_Object = MibTableColumn
+brcdNPBufferErrorIngressCumulativeEvents = _BrcdNPBufferErrorIngressCumulativeEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 5),
+    _BrcdNPBufferErrorIngressCumulativeEvents_Type()
+)
+brcdNPBufferErrorIngressCumulativeEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorIngressCumulativeEvents.setStatus("current")
+_BrcdNPBufferErrorEgressCurrentEvents_Type = Counter32
+_BrcdNPBufferErrorEgressCurrentEvents_Object = MibTableColumn
+brcdNPBufferErrorEgressCurrentEvents = _BrcdNPBufferErrorEgressCurrentEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 6),
+    _BrcdNPBufferErrorEgressCurrentEvents_Type()
+)
+brcdNPBufferErrorEgressCurrentEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorEgressCurrentEvents.setStatus("current")
+_BrcdNPBufferErrorEgressCumulativeEvents_Type = Counter32
+_BrcdNPBufferErrorEgressCumulativeEvents_Object = MibTableColumn
+brcdNPBufferErrorEgressCumulativeEvents = _BrcdNPBufferErrorEgressCumulativeEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 3, 1, 7),
+    _BrcdNPBufferErrorEgressCumulativeEvents_Type()
+)
+brcdNPBufferErrorEgressCumulativeEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorEgressCumulativeEvents.setStatus("current")
+_BrcdNPCSRAMErrorTable_Object = MibTable
+brcdNPCSRAMErrorTable = _BrcdNPCSRAMErrorTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4)
+)
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorTable.setStatus("current")
+_BrcdNPCSRAMErrorEntry_Object = MibTableRow
+brcdNPCSRAMErrorEntry = _BrcdNPCSRAMErrorEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4, 1)
+)
+brcdNPCSRAMErrorEntry.setIndexNames(
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPCSRAMErrorSlotId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPCSRAMErrorDeviceId"),
+)
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorEntry.setStatus("current")
+_BrcdNPCSRAMErrorSlotId_Type = Unsigned32
+_BrcdNPCSRAMErrorSlotId_Object = MibTableColumn
+brcdNPCSRAMErrorSlotId = _BrcdNPCSRAMErrorSlotId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4, 1, 1),
+    _BrcdNPCSRAMErrorSlotId_Type()
+)
+brcdNPCSRAMErrorSlotId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorSlotId.setStatus("current")
+_BrcdNPCSRAMErrorDeviceId_Type = Unsigned32
+_BrcdNPCSRAMErrorDeviceId_Object = MibTableColumn
+brcdNPCSRAMErrorDeviceId = _BrcdNPCSRAMErrorDeviceId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4, 1, 2),
+    _BrcdNPCSRAMErrorDeviceId_Type()
+)
+brcdNPCSRAMErrorDeviceId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorDeviceId.setStatus("current")
+_BrcdNPCSRAMErrorDescription_Type = DisplayString
+_BrcdNPCSRAMErrorDescription_Object = MibTableColumn
+brcdNPCSRAMErrorDescription = _BrcdNPCSRAMErrorDescription_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4, 1, 3),
+    _BrcdNPCSRAMErrorDescription_Type()
+)
+brcdNPCSRAMErrorDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorDescription.setStatus("current")
+_BrcdNPCSRAMErrorCurrentEvents_Type = Counter32
+_BrcdNPCSRAMErrorCurrentEvents_Object = MibTableColumn
+brcdNPCSRAMErrorCurrentEvents = _BrcdNPCSRAMErrorCurrentEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4, 1, 4),
+    _BrcdNPCSRAMErrorCurrentEvents_Type()
+)
+brcdNPCSRAMErrorCurrentEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorCurrentEvents.setStatus("current")
+_BrcdNPCSRAMErrorCumulativeEvents_Type = Counter32
+_BrcdNPCSRAMErrorCumulativeEvents_Object = MibTableColumn
+brcdNPCSRAMErrorCumulativeEvents = _BrcdNPCSRAMErrorCumulativeEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 4, 1, 5),
+    _BrcdNPCSRAMErrorCumulativeEvents_Type()
+)
+brcdNPCSRAMErrorCumulativeEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorCumulativeEvents.setStatus("current")
+_BrcdNPLPMRAMErrorTable_Object = MibTable
+brcdNPLPMRAMErrorTable = _BrcdNPLPMRAMErrorTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5)
+)
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorTable.setStatus("current")
+_BrcdNPLPMRAMErrorEntry_Object = MibTableRow
+brcdNPLPMRAMErrorEntry = _BrcdNPLPMRAMErrorEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1)
+)
+brcdNPLPMRAMErrorEntry.setIndexNames(
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPLPMRAMErrorIndex"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPLPMRAMErrorSlotId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPLPMRAMErrorDeviceId"),
+)
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorEntry.setStatus("current")
+
+
+class _BrcdNPLPMRAMErrorIndex_Type(Unsigned32):
+    """Custom type brcdNPLPMRAMErrorIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4),
+    )
+
+
+_BrcdNPLPMRAMErrorIndex_Type.__name__ = "Unsigned32"
+_BrcdNPLPMRAMErrorIndex_Object = MibTableColumn
+brcdNPLPMRAMErrorIndex = _BrcdNPLPMRAMErrorIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 1),
+    _BrcdNPLPMRAMErrorIndex_Type()
+)
+brcdNPLPMRAMErrorIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorIndex.setStatus("current")
+_BrcdNPLPMRAMErrorSlotId_Type = Unsigned32
+_BrcdNPLPMRAMErrorSlotId_Object = MibTableColumn
+brcdNPLPMRAMErrorSlotId = _BrcdNPLPMRAMErrorSlotId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 2),
+    _BrcdNPLPMRAMErrorSlotId_Type()
+)
+brcdNPLPMRAMErrorSlotId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorSlotId.setStatus("current")
+_BrcdNPLPMRAMErrorDeviceId_Type = Unsigned32
+_BrcdNPLPMRAMErrorDeviceId_Object = MibTableColumn
+brcdNPLPMRAMErrorDeviceId = _BrcdNPLPMRAMErrorDeviceId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 3),
+    _BrcdNPLPMRAMErrorDeviceId_Type()
+)
+brcdNPLPMRAMErrorDeviceId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorDeviceId.setStatus("current")
+_BrcdNPLPMRAMErrorName_Type = DisplayString
+_BrcdNPLPMRAMErrorName_Object = MibTableColumn
+brcdNPLPMRAMErrorName = _BrcdNPLPMRAMErrorName_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 4),
+    _BrcdNPLPMRAMErrorName_Type()
+)
+brcdNPLPMRAMErrorName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorName.setStatus("current")
+_BrcdNPLPMRAMErrorDescription_Type = DisplayString
+_BrcdNPLPMRAMErrorDescription_Object = MibTableColumn
+brcdNPLPMRAMErrorDescription = _BrcdNPLPMRAMErrorDescription_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 5),
+    _BrcdNPLPMRAMErrorDescription_Type()
+)
+brcdNPLPMRAMErrorDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorDescription.setStatus("current")
+_BrcdNPLPMRAMErrorCurrentEvents_Type = Counter32
+_BrcdNPLPMRAMErrorCurrentEvents_Object = MibTableColumn
+brcdNPLPMRAMErrorCurrentEvents = _BrcdNPLPMRAMErrorCurrentEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 6),
+    _BrcdNPLPMRAMErrorCurrentEvents_Type()
+)
+brcdNPLPMRAMErrorCurrentEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorCurrentEvents.setStatus("current")
+_BrcdNPLPMRAMErrorCumulativeEvents_Type = Counter32
+_BrcdNPLPMRAMErrorCumulativeEvents_Object = MibTableColumn
+brcdNPLPMRAMErrorCumulativeEvents = _BrcdNPLPMRAMErrorCumulativeEvents_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 5, 1, 7),
+    _BrcdNPLPMRAMErrorCumulativeEvents_Type()
+)
+brcdNPLPMRAMErrorCumulativeEvents.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorCumulativeEvents.setStatus("current")
+_BrcdNPDebugStatTable_Object = MibTable
+brcdNPDebugStatTable = _BrcdNPDebugStatTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6)
+)
+if mibBuilder.loadTexts:
+    brcdNPDebugStatTable.setStatus("current")
+_BrcdNPDebugStatEntry_Object = MibTableRow
+brcdNPDebugStatEntry = _BrcdNPDebugStatEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1)
+)
+brcdNPDebugStatEntry.setIndexNames(
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPDebugStatSlotId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdNPDebugStatNPDeviceId"),
+)
+if mibBuilder.loadTexts:
+    brcdNPDebugStatEntry.setStatus("current")
+_BrcdNPDebugStatSlotId_Type = Unsigned32
+_BrcdNPDebugStatSlotId_Object = MibTableColumn
+brcdNPDebugStatSlotId = _BrcdNPDebugStatSlotId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 1),
+    _BrcdNPDebugStatSlotId_Type()
+)
+brcdNPDebugStatSlotId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatSlotId.setStatus("current")
+_BrcdNPDebugStatNPDeviceId_Type = Unsigned32
+_BrcdNPDebugStatNPDeviceId_Object = MibTableColumn
+brcdNPDebugStatNPDeviceId = _BrcdNPDebugStatNPDeviceId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 2),
+    _BrcdNPDebugStatNPDeviceId_Type()
+)
+brcdNPDebugStatNPDeviceId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatNPDeviceId.setStatus("current")
+_BrcdNPDebugStatDescription_Type = DisplayString
+_BrcdNPDebugStatDescription_Object = MibTableColumn
+brcdNPDebugStatDescription = _BrcdNPDebugStatDescription_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 3),
+    _BrcdNPDebugStatDescription_Type()
+)
+brcdNPDebugStatDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatDescription.setStatus("current")
+_BrcdNPDebugStatL2SourceAddrLearnDrop_Type = Counter64
+_BrcdNPDebugStatL2SourceAddrLearnDrop_Object = MibTableColumn
+brcdNPDebugStatL2SourceAddrLearnDrop = _BrcdNPDebugStatL2SourceAddrLearnDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 4),
+    _BrcdNPDebugStatL2SourceAddrLearnDrop_Type()
+)
+brcdNPDebugStatL2SourceAddrLearnDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatL2SourceAddrLearnDrop.setStatus("current")
+_BrcdNPDebugStatRateLimitVPLSLocalLearnDrop_Type = Counter64
+_BrcdNPDebugStatRateLimitVPLSLocalLearnDrop_Object = MibTableColumn
+brcdNPDebugStatRateLimitVPLSLocalLearnDrop = _BrcdNPDebugStatRateLimitVPLSLocalLearnDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 5),
+    _BrcdNPDebugStatRateLimitVPLSLocalLearnDrop_Type()
+)
+brcdNPDebugStatRateLimitVPLSLocalLearnDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatRateLimitVPLSLocalLearnDrop.setStatus("current")
+_BrcdNPDebugStatUnkownMPLSDrop_Type = Counter64
+_BrcdNPDebugStatUnkownMPLSDrop_Object = MibTableColumn
+brcdNPDebugStatUnkownMPLSDrop = _BrcdNPDebugStatUnkownMPLSDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 6),
+    _BrcdNPDebugStatUnkownMPLSDrop_Type()
+)
+brcdNPDebugStatUnkownMPLSDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatUnkownMPLSDrop.setStatus("current")
+_BrcdNPDebugStatDestAddrVCMiss_Type = Counter64
+_BrcdNPDebugStatDestAddrVCMiss_Object = MibTableColumn
+brcdNPDebugStatDestAddrVCMiss = _BrcdNPDebugStatDestAddrVCMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 7),
+    _BrcdNPDebugStatDestAddrVCMiss_Type()
+)
+brcdNPDebugStatDestAddrVCMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatDestAddrVCMiss.setStatus("current")
+_BrcdNPDebugStatRateLimitVPLSRemoteLearnDrop_Type = Counter64
+_BrcdNPDebugStatRateLimitVPLSRemoteLearnDrop_Object = MibTableColumn
+brcdNPDebugStatRateLimitVPLSRemoteLearnDrop = _BrcdNPDebugStatRateLimitVPLSRemoteLearnDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 8),
+    _BrcdNPDebugStatRateLimitVPLSRemoteLearnDrop_Type()
+)
+brcdNPDebugStatRateLimitVPLSRemoteLearnDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatRateLimitVPLSRemoteLearnDrop.setStatus("current")
+_BrcdNPDebugStatIPv4DestAddrVCMiss_Type = Counter64
+_BrcdNPDebugStatIPv4DestAddrVCMiss_Object = MibTableColumn
+brcdNPDebugStatIPv4DestAddrVCMiss = _BrcdNPDebugStatIPv4DestAddrVCMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 9),
+    _BrcdNPDebugStatIPv4DestAddrVCMiss_Type()
+)
+brcdNPDebugStatIPv4DestAddrVCMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv4DestAddrVCMiss.setStatus("current")
+_BrcdNPDebugStatIPv6DestAddrVCMiss_Type = Counter64
+_BrcdNPDebugStatIPv6DestAddrVCMiss_Object = MibTableColumn
+brcdNPDebugStatIPv6DestAddrVCMiss = _BrcdNPDebugStatIPv6DestAddrVCMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 10),
+    _BrcdNPDebugStatIPv6DestAddrVCMiss_Type()
+)
+brcdNPDebugStatIPv6DestAddrVCMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv6DestAddrVCMiss.setStatus("current")
+_BrcdNPDebugStatVPLSTx_Type = Counter64
+_BrcdNPDebugStatVPLSTx_Object = MibTableColumn
+brcdNPDebugStatVPLSTx = _BrcdNPDebugStatVPLSTx_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 11),
+    _BrcdNPDebugStatVPLSTx_Type()
+)
+brcdNPDebugStatVPLSTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatVPLSTx.setStatus("current")
+_BrcdNPDebugStatVLLTx_Type = Counter64
+_BrcdNPDebugStatVLLTx_Object = MibTableColumn
+brcdNPDebugStatVLLTx = _BrcdNPDebugStatVLLTx_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 12),
+    _BrcdNPDebugStatVLLTx_Type()
+)
+brcdNPDebugStatVLLTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatVLLTx.setStatus("current")
+_BrcdNPDebugStatUnknowL3VPNIngressDrop_Type = Counter64
+_BrcdNPDebugStatUnknowL3VPNIngressDrop_Object = MibTableColumn
+brcdNPDebugStatUnknowL3VPNIngressDrop = _BrcdNPDebugStatUnknowL3VPNIngressDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 13),
+    _BrcdNPDebugStatUnknowL3VPNIngressDrop_Type()
+)
+brcdNPDebugStatUnknowL3VPNIngressDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatUnknowL3VPNIngressDrop.setStatus("current")
+_BrcdNPDebugStatIPv6VPNTx_Type = Counter64
+_BrcdNPDebugStatIPv6VPNTx_Object = MibTableColumn
+brcdNPDebugStatIPv6VPNTx = _BrcdNPDebugStatIPv6VPNTx_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 14),
+    _BrcdNPDebugStatIPv6VPNTx_Type()
+)
+brcdNPDebugStatIPv6VPNTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv6VPNTx.setStatus("current")
+_BrcdNPDebugStatIPv4VPNTx_Type = Counter64
+_BrcdNPDebugStatIPv4VPNTx_Object = MibTableColumn
+brcdNPDebugStatIPv4VPNTx = _BrcdNPDebugStatIPv4VPNTx_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 15),
+    _BrcdNPDebugStatIPv4VPNTx_Type()
+)
+brcdNPDebugStatIPv4VPNTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv4VPNTx.setStatus("current")
+_BrcdNPDebugStatGREIPv4RxCount_Type = Counter64
+_BrcdNPDebugStatGREIPv4RxCount_Object = MibTableColumn
+brcdNPDebugStatGREIPv4RxCount = _BrcdNPDebugStatGREIPv4RxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 16),
+    _BrcdNPDebugStatGREIPv4RxCount_Type()
+)
+brcdNPDebugStatGREIPv4RxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREIPv4RxCount.setStatus("current")
+_BrcdNPDebugStatGREInvalidDrop_Type = Counter64
+_BrcdNPDebugStatGREInvalidDrop_Object = MibTableColumn
+brcdNPDebugStatGREInvalidDrop = _BrcdNPDebugStatGREInvalidDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 17),
+    _BrcdNPDebugStatGREInvalidDrop_Type()
+)
+brcdNPDebugStatGREInvalidDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREInvalidDrop.setStatus("current")
+_BrcdNPDebugStat6to4RxCount_Type = Counter64
+_BrcdNPDebugStat6to4RxCount_Object = MibTableColumn
+brcdNPDebugStat6to4RxCount = _BrcdNPDebugStat6to4RxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 18),
+    _BrcdNPDebugStat6to4RxCount_Type()
+)
+brcdNPDebugStat6to4RxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStat6to4RxCount.setStatus("current")
+_BrcdNPDebugStatGREEnfSourceIngressChkMiss_Type = Counter64
+_BrcdNPDebugStatGREEnfSourceIngressChkMiss_Object = MibTableColumn
+brcdNPDebugStatGREEnfSourceIngressChkMiss = _BrcdNPDebugStatGREEnfSourceIngressChkMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 19),
+    _BrcdNPDebugStatGREEnfSourceIngressChkMiss_Type()
+)
+brcdNPDebugStatGREEnfSourceIngressChkMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREEnfSourceIngressChkMiss.setStatus("current")
+_BrcdNPDebugStat6to4EnfSourceIngressChkMiss_Type = Counter64
+_BrcdNPDebugStat6to4EnfSourceIngressChkMiss_Object = MibTableColumn
+brcdNPDebugStat6to4EnfSourceIngressChkMiss = _BrcdNPDebugStat6to4EnfSourceIngressChkMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 20),
+    _BrcdNPDebugStat6to4EnfSourceIngressChkMiss_Type()
+)
+brcdNPDebugStat6to4EnfSourceIngressChkMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStat6to4EnfSourceIngressChkMiss.setStatus("current")
+_BrcdNPDebugStatGREMPLSRxCount_Type = Counter64
+_BrcdNPDebugStatGREMPLSRxCount_Object = MibTableColumn
+brcdNPDebugStatGREMPLSRxCount = _BrcdNPDebugStatGREMPLSRxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 21),
+    _BrcdNPDebugStatGREMPLSRxCount_Type()
+)
+brcdNPDebugStatGREMPLSRxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREMPLSRxCount.setStatus("current")
+_BrcdNPDebugStatGREIPv6RxCount_Type = Counter64
+_BrcdNPDebugStatGREIPv6RxCount_Object = MibTableColumn
+brcdNPDebugStatGREIPv6RxCount = _BrcdNPDebugStatGREIPv6RxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 22),
+    _BrcdNPDebugStatGREIPv6RxCount_Type()
+)
+brcdNPDebugStatGREIPv6RxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREIPv6RxCount.setStatus("current")
+_BrcdNPDebugStatPBBRxDropCount_Type = Counter64
+_BrcdNPDebugStatPBBRxDropCount_Object = MibTableColumn
+brcdNPDebugStatPBBRxDropCount = _BrcdNPDebugStatPBBRxDropCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 23),
+    _BrcdNPDebugStatPBBRxDropCount_Type()
+)
+brcdNPDebugStatPBBRxDropCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatPBBRxDropCount.setStatus("current")
+_BrcdNPDebugStatPBBTxCount_Type = Counter64
+_BrcdNPDebugStatPBBTxCount_Object = MibTableColumn
+brcdNPDebugStatPBBTxCount = _BrcdNPDebugStatPBBTxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 24),
+    _BrcdNPDebugStatPBBTxCount_Type()
+)
+brcdNPDebugStatPBBTxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatPBBTxCount.setStatus("current")
+_BrcdNPDebugStatIPv4DestAddrVCDrop_Type = Counter64
+_BrcdNPDebugStatIPv4DestAddrVCDrop_Object = MibTableColumn
+brcdNPDebugStatIPv4DestAddrVCDrop = _BrcdNPDebugStatIPv4DestAddrVCDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 25),
+    _BrcdNPDebugStatIPv4DestAddrVCDrop_Type()
+)
+brcdNPDebugStatIPv4DestAddrVCDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv4DestAddrVCDrop.setStatus("current")
+_BrcdNPDebugStatIPv6DestAddrVCDrop_Type = Counter64
+_BrcdNPDebugStatIPv6DestAddrVCDrop_Object = MibTableColumn
+brcdNPDebugStatIPv6DestAddrVCDrop = _BrcdNPDebugStatIPv6DestAddrVCDrop_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 26),
+    _BrcdNPDebugStatIPv6DestAddrVCDrop_Type()
+)
+brcdNPDebugStatIPv6DestAddrVCDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv6DestAddrVCDrop.setStatus("current")
+_BrcdNPDebugStatSourceAddrPortVLANMiss_Type = Counter64
+_BrcdNPDebugStatSourceAddrPortVLANMiss_Object = MibTableColumn
+brcdNPDebugStatSourceAddrPortVLANMiss = _BrcdNPDebugStatSourceAddrPortVLANMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 27),
+    _BrcdNPDebugStatSourceAddrPortVLANMiss_Type()
+)
+brcdNPDebugStatSourceAddrPortVLANMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatSourceAddrPortVLANMiss.setStatus("current")
+_BrcdNPDebugStatVPLSSourceAddrPortVLANMiss_Type = Counter64
+_BrcdNPDebugStatVPLSSourceAddrPortVLANMiss_Object = MibTableColumn
+brcdNPDebugStatVPLSSourceAddrPortVLANMiss = _BrcdNPDebugStatVPLSSourceAddrPortVLANMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 28),
+    _BrcdNPDebugStatVPLSSourceAddrPortVLANMiss_Type()
+)
+brcdNPDebugStatVPLSSourceAddrPortVLANMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatVPLSSourceAddrPortVLANMiss.setStatus("current")
+_BrcdNPDebugStatSourceAddrVCMiss_Type = Counter64
+_BrcdNPDebugStatSourceAddrVCMiss_Object = MibTableColumn
+brcdNPDebugStatSourceAddrVCMiss = _BrcdNPDebugStatSourceAddrVCMiss_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 29),
+    _BrcdNPDebugStatSourceAddrVCMiss_Type()
+)
+brcdNPDebugStatSourceAddrVCMiss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatSourceAddrVCMiss.setStatus("current")
+_BrcdNPDebugStatIPv4HWFwdCount_Type = Counter64
+_BrcdNPDebugStatIPv4HWFwdCount_Object = MibTableColumn
+brcdNPDebugStatIPv4HWFwdCount = _BrcdNPDebugStatIPv4HWFwdCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 30),
+    _BrcdNPDebugStatIPv4HWFwdCount_Type()
+)
+brcdNPDebugStatIPv4HWFwdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv4HWFwdCount.setStatus("current")
+_BrcdNPDebugStatIPv6HWFwdCount_Type = Counter64
+_BrcdNPDebugStatIPv6HWFwdCount_Object = MibTableColumn
+brcdNPDebugStatIPv6HWFwdCount = _BrcdNPDebugStatIPv6HWFwdCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 31),
+    _BrcdNPDebugStatIPv6HWFwdCount_Type()
+)
+brcdNPDebugStatIPv6HWFwdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatIPv6HWFwdCount.setStatus("current")
+_BrcdNPDebugStatMulticastRPFDropCount_Type = Counter64
+_BrcdNPDebugStatMulticastRPFDropCount_Object = MibTableColumn
+brcdNPDebugStatMulticastRPFDropCount = _BrcdNPDebugStatMulticastRPFDropCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 32),
+    _BrcdNPDebugStatMulticastRPFDropCount_Type()
+)
+brcdNPDebugStatMulticastRPFDropCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatMulticastRPFDropCount.setStatus("current")
+_BrcdNPDebugStatMPLSLsrTxCount_Type = Counter64
+_BrcdNPDebugStatMPLSLsrTxCount_Object = MibTableColumn
+brcdNPDebugStatMPLSLsrTxCount = _BrcdNPDebugStatMPLSLsrTxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 33),
+    _BrcdNPDebugStatMPLSLsrTxCount_Type()
+)
+brcdNPDebugStatMPLSLsrTxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatMPLSLsrTxCount.setStatus("current")
+_BrcdNPDebugStatGREIPv4TxCount_Type = Counter64
+_BrcdNPDebugStatGREIPv4TxCount_Object = MibTableColumn
+brcdNPDebugStatGREIPv4TxCount = _BrcdNPDebugStatGREIPv4TxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 34),
+    _BrcdNPDebugStatGREIPv4TxCount_Type()
+)
+brcdNPDebugStatGREIPv4TxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREIPv4TxCount.setStatus("current")
+_BrcdNPDebugStat6to4TxCount_Type = Counter64
+_BrcdNPDebugStat6to4TxCount_Object = MibTableColumn
+brcdNPDebugStat6to4TxCount = _BrcdNPDebugStat6to4TxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 35),
+    _BrcdNPDebugStat6to4TxCount_Type()
+)
+brcdNPDebugStat6to4TxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStat6to4TxCount.setStatus("current")
+_BrcdNPDebugStatMPLSRSVPTxCount_Type = Counter64
+_BrcdNPDebugStatMPLSRSVPTxCount_Object = MibTableColumn
+brcdNPDebugStatMPLSRSVPTxCount = _BrcdNPDebugStatMPLSRSVPTxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 36),
+    _BrcdNPDebugStatMPLSRSVPTxCount_Type()
+)
+brcdNPDebugStatMPLSRSVPTxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatMPLSRSVPTxCount.setStatus("current")
+_BrcdNPDebugStatGREMPLSTxCount_Type = Counter64
+_BrcdNPDebugStatGREMPLSTxCount_Object = MibTableColumn
+brcdNPDebugStatGREMPLSTxCount = _BrcdNPDebugStatGREMPLSTxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 37),
+    _BrcdNPDebugStatGREMPLSTxCount_Type()
+)
+brcdNPDebugStatGREMPLSTxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREMPLSTxCount.setStatus("current")
+_BrcdNPDebugStatGREIPv6TxCount_Type = Counter64
+_BrcdNPDebugStatGREIPv6TxCount_Object = MibTableColumn
+brcdNPDebugStatGREIPv6TxCount = _BrcdNPDebugStatGREIPv6TxCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 1, 6, 1, 38),
+    _BrcdNPDebugStatGREIPv6TxCount_Type()
+)
+brcdNPDebugStatGREIPv6TxCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdNPDebugStatGREIPv6TxCount.setStatus("current")
 _BrcdTMStatisticsInfo_ObjectIdentity = ObjectIdentity
 brcdTMStatisticsInfo = _BrcdTMStatisticsInfo_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2)
@@ -1879,11 +2526,270 @@ brcdTMDestUcastQStatTotalQDiscardBytes = _BrcdTMDestUcastQStatTotalQDiscardBytes
 brcdTMDestUcastQStatTotalQDiscardBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     brcdTMDestUcastQStatTotalQDiscardBytes.setStatus("current")
+_BrcdTMCpuAggrQStatsTable_Object = MibTable
+brcdTMCpuAggrQStatsTable = _BrcdTMCpuAggrQStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9)
+)
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsTable.setStatus("current")
+_BrcdTMCpuAggrQStatsEntry_Object = MibTableRow
+brcdTMCpuAggrQStatsEntry = _BrcdTMCpuAggrQStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1)
+)
+brcdTMCpuAggrQStatsEntry.setIndexNames(
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdTMCpuQStatsSlotId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdTMCpuQStatsTMDeviceId"),
+    (0, "BROCADE-NP-TM-STATS-MIB", "brcdTMCpuQStatsPriority"),
+)
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsEntry.setStatus("current")
+_BrcdTMCpuAggrQStatsDescription_Type = DisplayString
+_BrcdTMCpuAggrQStatsDescription_Object = MibTableColumn
+brcdTMCpuAggrQStatsDescription = _BrcdTMCpuAggrQStatsDescription_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 1),
+    _BrcdTMCpuAggrQStatsDescription_Type()
+)
+brcdTMCpuAggrQStatsDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsDescription.setStatus("current")
+_BrcdTMCpuAggrQStatsEnquePkts_Type = Counter64
+_BrcdTMCpuAggrQStatsEnquePkts_Object = MibTableColumn
+brcdTMCpuAggrQStatsEnquePkts = _BrcdTMCpuAggrQStatsEnquePkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 2),
+    _BrcdTMCpuAggrQStatsEnquePkts_Type()
+)
+brcdTMCpuAggrQStatsEnquePkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsEnquePkts.setStatus("current")
+_BrcdTMCpuAggrQStatsEnqueBytes_Type = Counter64
+_BrcdTMCpuAggrQStatsEnqueBytes_Object = MibTableColumn
+brcdTMCpuAggrQStatsEnqueBytes = _BrcdTMCpuAggrQStatsEnqueBytes_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 3),
+    _BrcdTMCpuAggrQStatsEnqueBytes_Type()
+)
+brcdTMCpuAggrQStatsEnqueBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsEnqueBytes.setStatus("current")
+_BrcdTMCpuAggrQStatsDequePkts_Type = Counter64
+_BrcdTMCpuAggrQStatsDequePkts_Object = MibTableColumn
+brcdTMCpuAggrQStatsDequePkts = _BrcdTMCpuAggrQStatsDequePkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 4),
+    _BrcdTMCpuAggrQStatsDequePkts_Type()
+)
+brcdTMCpuAggrQStatsDequePkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsDequePkts.setStatus("current")
+_BrcdTMCpuAggrQStatsDequeBytes_Type = Counter64
+_BrcdTMCpuAggrQStatsDequeBytes_Object = MibTableColumn
+brcdTMCpuAggrQStatsDequeBytes = _BrcdTMCpuAggrQStatsDequeBytes_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 5),
+    _BrcdTMCpuAggrQStatsDequeBytes_Type()
+)
+brcdTMCpuAggrQStatsDequeBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsDequeBytes.setStatus("current")
+_BrcdTMCpuAggrQStatsTotalQDiscardPkts_Type = Counter64
+_BrcdTMCpuAggrQStatsTotalQDiscardPkts_Object = MibTableColumn
+brcdTMCpuAggrQStatsTotalQDiscardPkts = _BrcdTMCpuAggrQStatsTotalQDiscardPkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 6),
+    _BrcdTMCpuAggrQStatsTotalQDiscardPkts_Type()
+)
+brcdTMCpuAggrQStatsTotalQDiscardPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsTotalQDiscardPkts.setStatus("current")
+_BrcdTMCpuAggrQStatsTotalQDiscardBytes_Type = Counter64
+_BrcdTMCpuAggrQStatsTotalQDiscardBytes_Object = MibTableColumn
+brcdTMCpuAggrQStatsTotalQDiscardBytes = _BrcdTMCpuAggrQStatsTotalQDiscardBytes_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 7),
+    _BrcdTMCpuAggrQStatsTotalQDiscardBytes_Type()
+)
+brcdTMCpuAggrQStatsTotalQDiscardBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsTotalQDiscardBytes.setStatus("current")
+_BrcdTMCpuAggrQStatsOldestDiscardPkts_Type = Counter64
+_BrcdTMCpuAggrQStatsOldestDiscardPkts_Object = MibTableColumn
+brcdTMCpuAggrQStatsOldestDiscardPkts = _BrcdTMCpuAggrQStatsOldestDiscardPkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 8),
+    _BrcdTMCpuAggrQStatsOldestDiscardPkts_Type()
+)
+brcdTMCpuAggrQStatsOldestDiscardPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsOldestDiscardPkts.setStatus("current")
+_BrcdTMCpuAggrQStatsOldestDiscardBytes_Type = Counter64
+_BrcdTMCpuAggrQStatsOldestDiscardBytes_Object = MibTableColumn
+brcdTMCpuAggrQStatsOldestDiscardBytes = _BrcdTMCpuAggrQStatsOldestDiscardBytes_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 9),
+    _BrcdTMCpuAggrQStatsOldestDiscardBytes_Type()
+)
+brcdTMCpuAggrQStatsOldestDiscardBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsOldestDiscardBytes.setStatus("current")
+_BrcdTMCpuAggrQStatsWREDDroppedPkts_Type = Counter64
+_BrcdTMCpuAggrQStatsWREDDroppedPkts_Object = MibTableColumn
+brcdTMCpuAggrQStatsWREDDroppedPkts = _BrcdTMCpuAggrQStatsWREDDroppedPkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 10),
+    _BrcdTMCpuAggrQStatsWREDDroppedPkts_Type()
+)
+brcdTMCpuAggrQStatsWREDDroppedPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsWREDDroppedPkts.setStatus("current")
+_BrcdTMCpuAggrQStatsWREDDroppedBytes_Type = Counter64
+_BrcdTMCpuAggrQStatsWREDDroppedBytes_Object = MibTableColumn
+brcdTMCpuAggrQStatsWREDDroppedBytes = _BrcdTMCpuAggrQStatsWREDDroppedBytes_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 2, 9, 1, 11),
+    _BrcdTMCpuAggrQStatsWREDDroppedBytes_Type()
+)
+brcdTMCpuAggrQStatsWREDDroppedBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdTMCpuAggrQStatsWREDDroppedBytes.setStatus("current")
+_BrcdNPGlobal_ObjectIdentity = ObjectIdentity
+brcdNPGlobal = _BrcdNPGlobal_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 3)
+)
+_BrcdNPIndex_Type = Unsigned32
+_BrcdNPIndex_Object = MibScalar
+brcdNPIndex = _BrcdNPIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 3, 1),
+    _BrcdNPIndex_Type()
+)
+brcdNPIndex.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    brcdNPIndex.setStatus("current")
+_BrcdNPLockupRecoveryCount_Type = Unsigned32
+_BrcdNPLockupRecoveryCount_Object = MibScalar
+brcdNPLockupRecoveryCount = _BrcdNPLockupRecoveryCount_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 1, 3, 2),
+    _BrcdNPLockupRecoveryCount_Type()
+)
+brcdNPLockupRecoveryCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    brcdNPLockupRecoveryCount.setStatus("current")
 
 # Managed Objects groups
 
 
 # Notification objects
+
+brcdNPBufferErrorIngressThresholdExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 1)
+)
+brcdNPBufferErrorIngressThresholdExceeded.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPBufferErrorDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPBufferErrorIngressCurrentEvents"))
+)
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorIngressThresholdExceeded.setStatus(
+        "current"
+    )
+
+brcdNPBufferErrorEgressThresholdExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 2)
+)
+brcdNPBufferErrorEgressThresholdExceeded.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPBufferErrorDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPBufferErrorEgressCurrentEvents"))
+)
+if mibBuilder.loadTexts:
+    brcdNPBufferErrorEgressThresholdExceeded.setStatus(
+        "current"
+    )
+
+brcdNPCSRAMErrorThresholdExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 3)
+)
+brcdNPCSRAMErrorThresholdExceeded.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPCSRAMErrorDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPCSRAMErrorCurrentEvents"))
+)
+if mibBuilder.loadTexts:
+    brcdNPCSRAMErrorThresholdExceeded.setStatus(
+        "current"
+    )
+
+brcdNPLPMRAMErrorThresholdExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 4)
+)
+brcdNPLPMRAMErrorThresholdExceeded.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPLPMRAMErrorName"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPLPMRAMErrorDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPLPMRAMErrorCurrentEvents"))
+)
+if mibBuilder.loadTexts:
+    brcdNPLPMRAMErrorThresholdExceeded.setStatus(
+        "current"
+    )
+
+brcdNPMemoryParityErrorTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 6)
+)
+brcdNPMemoryParityErrorTrap.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportErrorType"))
+)
+if mibBuilder.loadTexts:
+    brcdNPMemoryParityErrorTrap.setStatus(
+        "current"
+    )
+
+brcdNPMemoryMiscErrorTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 7)
+)
+brcdNPMemoryMiscErrorTrap.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportErrorType"))
+)
+if mibBuilder.loadTexts:
+    brcdNPMemoryMiscErrorTrap.setStatus(
+        "current"
+    )
+
+brcdNPBuffOverFlowErrorTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 8)
+)
+brcdNPBuffOverFlowErrorTrap.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportErrorType"))
+)
+if mibBuilder.loadTexts:
+    brcdNPBuffOverFlowErrorTrap.setStatus(
+        "current"
+    )
+
+brcdNPBuffUnderFlowErrorTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 9)
+)
+brcdNPBuffUnderFlowErrorTrap.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportErrorType"))
+)
+if mibBuilder.loadTexts:
+    brcdNPBuffUnderFlowErrorTrap.setStatus(
+        "current"
+    )
+
+brcdNPECCSingleErrorTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 10)
+)
+brcdNPECCSingleErrorTrap.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportErrorType"))
+)
+if mibBuilder.loadTexts:
+    brcdNPECCSingleErrorTrap.setStatus(
+        "current"
+    )
+
+brcdNPECCMultipleErrorTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 14, 2, 0, 11)
+)
+brcdNPECCMultipleErrorTrap.setObjects(
+      *(("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportDescription"),
+        ("BROCADE-NP-TM-STATS-MIB", "brcdNPNotificationSupportErrorType"))
+)
+if mibBuilder.loadTexts:
+    brcdNPECCMultipleErrorTrap.setStatus(
+        "current"
+    )
 
 
 # Notifications groups
@@ -1900,6 +2806,23 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "BROCADE-NP-TM-STATS-MIB",
     **{"brocadeNPTMStatsMIB": brocadeNPTMStatsMIB,
+       "brcdNPTMMIBNotification": brcdNPTMMIBNotification,
+       "brcdNPBufferErrorIngressThresholdExceeded": brcdNPBufferErrorIngressThresholdExceeded,
+       "brcdNPBufferErrorEgressThresholdExceeded": brcdNPBufferErrorEgressThresholdExceeded,
+       "brcdNPCSRAMErrorThresholdExceeded": brcdNPCSRAMErrorThresholdExceeded,
+       "brcdNPLPMRAMErrorThresholdExceeded": brcdNPLPMRAMErrorThresholdExceeded,
+       "brcdNPNotificationSupportTable": brcdNPNotificationSupportTable,
+       "brcdNPNotificationSupportEntry": brcdNPNotificationSupportEntry,
+       "brcdNPNotificationSupportSlotId": brcdNPNotificationSupportSlotId,
+       "brcdNPNotificationSupportDeviceId": brcdNPNotificationSupportDeviceId,
+       "brcdNPNotificationSupportDescription": brcdNPNotificationSupportDescription,
+       "brcdNPNotificationSupportErrorType": brcdNPNotificationSupportErrorType,
+       "brcdNPMemoryParityErrorTrap": brcdNPMemoryParityErrorTrap,
+       "brcdNPMemoryMiscErrorTrap": brcdNPMemoryMiscErrorTrap,
+       "brcdNPBuffOverFlowErrorTrap": brcdNPBuffOverFlowErrorTrap,
+       "brcdNPBuffUnderFlowErrorTrap": brcdNPBuffUnderFlowErrorTrap,
+       "brcdNPECCSingleErrorTrap": brcdNPECCSingleErrorTrap,
+       "brcdNPECCMultipleErrorTrap": brcdNPECCMultipleErrorTrap,
        "brcdNPTMMIBObjects": brcdNPTMMIBObjects,
        "brcdNPStatisticsInfo": brcdNPStatisticsInfo,
        "brcdNPStatsTable": brcdNPStatsTable,
@@ -1958,6 +2881,71 @@ mibBuilder.exportSymbols(
        "brcdNPQosStatIngressBytes": brcdNPQosStatIngressBytes,
        "brcdNPQosStatEgressPkts": brcdNPQosStatEgressPkts,
        "brcdNPQosStatEgressBytes": brcdNPQosStatEgressBytes,
+       "brcdNPBufferErrorTable": brcdNPBufferErrorTable,
+       "brcdNPBufferErrorEntry": brcdNPBufferErrorEntry,
+       "brcdNPBufferErrorSlotId": brcdNPBufferErrorSlotId,
+       "brcdNPBufferErrorDeviceId": brcdNPBufferErrorDeviceId,
+       "brcdNPBufferErrorDescription": brcdNPBufferErrorDescription,
+       "brcdNPBufferErrorIngressCurrentEvents": brcdNPBufferErrorIngressCurrentEvents,
+       "brcdNPBufferErrorIngressCumulativeEvents": brcdNPBufferErrorIngressCumulativeEvents,
+       "brcdNPBufferErrorEgressCurrentEvents": brcdNPBufferErrorEgressCurrentEvents,
+       "brcdNPBufferErrorEgressCumulativeEvents": brcdNPBufferErrorEgressCumulativeEvents,
+       "brcdNPCSRAMErrorTable": brcdNPCSRAMErrorTable,
+       "brcdNPCSRAMErrorEntry": brcdNPCSRAMErrorEntry,
+       "brcdNPCSRAMErrorSlotId": brcdNPCSRAMErrorSlotId,
+       "brcdNPCSRAMErrorDeviceId": brcdNPCSRAMErrorDeviceId,
+       "brcdNPCSRAMErrorDescription": brcdNPCSRAMErrorDescription,
+       "brcdNPCSRAMErrorCurrentEvents": brcdNPCSRAMErrorCurrentEvents,
+       "brcdNPCSRAMErrorCumulativeEvents": brcdNPCSRAMErrorCumulativeEvents,
+       "brcdNPLPMRAMErrorTable": brcdNPLPMRAMErrorTable,
+       "brcdNPLPMRAMErrorEntry": brcdNPLPMRAMErrorEntry,
+       "brcdNPLPMRAMErrorIndex": brcdNPLPMRAMErrorIndex,
+       "brcdNPLPMRAMErrorSlotId": brcdNPLPMRAMErrorSlotId,
+       "brcdNPLPMRAMErrorDeviceId": brcdNPLPMRAMErrorDeviceId,
+       "brcdNPLPMRAMErrorName": brcdNPLPMRAMErrorName,
+       "brcdNPLPMRAMErrorDescription": brcdNPLPMRAMErrorDescription,
+       "brcdNPLPMRAMErrorCurrentEvents": brcdNPLPMRAMErrorCurrentEvents,
+       "brcdNPLPMRAMErrorCumulativeEvents": brcdNPLPMRAMErrorCumulativeEvents,
+       "brcdNPDebugStatTable": brcdNPDebugStatTable,
+       "brcdNPDebugStatEntry": brcdNPDebugStatEntry,
+       "brcdNPDebugStatSlotId": brcdNPDebugStatSlotId,
+       "brcdNPDebugStatNPDeviceId": brcdNPDebugStatNPDeviceId,
+       "brcdNPDebugStatDescription": brcdNPDebugStatDescription,
+       "brcdNPDebugStatL2SourceAddrLearnDrop": brcdNPDebugStatL2SourceAddrLearnDrop,
+       "brcdNPDebugStatRateLimitVPLSLocalLearnDrop": brcdNPDebugStatRateLimitVPLSLocalLearnDrop,
+       "brcdNPDebugStatUnkownMPLSDrop": brcdNPDebugStatUnkownMPLSDrop,
+       "brcdNPDebugStatDestAddrVCMiss": brcdNPDebugStatDestAddrVCMiss,
+       "brcdNPDebugStatRateLimitVPLSRemoteLearnDrop": brcdNPDebugStatRateLimitVPLSRemoteLearnDrop,
+       "brcdNPDebugStatIPv4DestAddrVCMiss": brcdNPDebugStatIPv4DestAddrVCMiss,
+       "brcdNPDebugStatIPv6DestAddrVCMiss": brcdNPDebugStatIPv6DestAddrVCMiss,
+       "brcdNPDebugStatVPLSTx": brcdNPDebugStatVPLSTx,
+       "brcdNPDebugStatVLLTx": brcdNPDebugStatVLLTx,
+       "brcdNPDebugStatUnknowL3VPNIngressDrop": brcdNPDebugStatUnknowL3VPNIngressDrop,
+       "brcdNPDebugStatIPv6VPNTx": brcdNPDebugStatIPv6VPNTx,
+       "brcdNPDebugStatIPv4VPNTx": brcdNPDebugStatIPv4VPNTx,
+       "brcdNPDebugStatGREIPv4RxCount": brcdNPDebugStatGREIPv4RxCount,
+       "brcdNPDebugStatGREInvalidDrop": brcdNPDebugStatGREInvalidDrop,
+       "brcdNPDebugStat6to4RxCount": brcdNPDebugStat6to4RxCount,
+       "brcdNPDebugStatGREEnfSourceIngressChkMiss": brcdNPDebugStatGREEnfSourceIngressChkMiss,
+       "brcdNPDebugStat6to4EnfSourceIngressChkMiss": brcdNPDebugStat6to4EnfSourceIngressChkMiss,
+       "brcdNPDebugStatGREMPLSRxCount": brcdNPDebugStatGREMPLSRxCount,
+       "brcdNPDebugStatGREIPv6RxCount": brcdNPDebugStatGREIPv6RxCount,
+       "brcdNPDebugStatPBBRxDropCount": brcdNPDebugStatPBBRxDropCount,
+       "brcdNPDebugStatPBBTxCount": brcdNPDebugStatPBBTxCount,
+       "brcdNPDebugStatIPv4DestAddrVCDrop": brcdNPDebugStatIPv4DestAddrVCDrop,
+       "brcdNPDebugStatIPv6DestAddrVCDrop": brcdNPDebugStatIPv6DestAddrVCDrop,
+       "brcdNPDebugStatSourceAddrPortVLANMiss": brcdNPDebugStatSourceAddrPortVLANMiss,
+       "brcdNPDebugStatVPLSSourceAddrPortVLANMiss": brcdNPDebugStatVPLSSourceAddrPortVLANMiss,
+       "brcdNPDebugStatSourceAddrVCMiss": brcdNPDebugStatSourceAddrVCMiss,
+       "brcdNPDebugStatIPv4HWFwdCount": brcdNPDebugStatIPv4HWFwdCount,
+       "brcdNPDebugStatIPv6HWFwdCount": brcdNPDebugStatIPv6HWFwdCount,
+       "brcdNPDebugStatMulticastRPFDropCount": brcdNPDebugStatMulticastRPFDropCount,
+       "brcdNPDebugStatMPLSLsrTxCount": brcdNPDebugStatMPLSLsrTxCount,
+       "brcdNPDebugStatGREIPv4TxCount": brcdNPDebugStatGREIPv4TxCount,
+       "brcdNPDebugStat6to4TxCount": brcdNPDebugStat6to4TxCount,
+       "brcdNPDebugStatMPLSRSVPTxCount": brcdNPDebugStatMPLSRSVPTxCount,
+       "brcdNPDebugStatGREMPLSTxCount": brcdNPDebugStatGREMPLSTxCount,
+       "brcdNPDebugStatGREIPv6TxCount": brcdNPDebugStatGREIPv6TxCount,
        "brcdTMStatisticsInfo": brcdTMStatisticsInfo,
        "brcdTMStatisticsInfoGroup": brcdTMStatisticsInfoGroup,
        "brcdTMPortMappingMaxPorts": brcdTMPortMappingMaxPorts,
@@ -2089,5 +3077,21 @@ mibBuilder.exportSymbols(
        "brcdTMDestUcastQStatDequePkts": brcdTMDestUcastQStatDequePkts,
        "brcdTMDestUcastQStatDequeBytes": brcdTMDestUcastQStatDequeBytes,
        "brcdTMDestUcastQStatTotalQDiscardPkts": brcdTMDestUcastQStatTotalQDiscardPkts,
-       "brcdTMDestUcastQStatTotalQDiscardBytes": brcdTMDestUcastQStatTotalQDiscardBytes}
+       "brcdTMDestUcastQStatTotalQDiscardBytes": brcdTMDestUcastQStatTotalQDiscardBytes,
+       "brcdTMCpuAggrQStatsTable": brcdTMCpuAggrQStatsTable,
+       "brcdTMCpuAggrQStatsEntry": brcdTMCpuAggrQStatsEntry,
+       "brcdTMCpuAggrQStatsDescription": brcdTMCpuAggrQStatsDescription,
+       "brcdTMCpuAggrQStatsEnquePkts": brcdTMCpuAggrQStatsEnquePkts,
+       "brcdTMCpuAggrQStatsEnqueBytes": brcdTMCpuAggrQStatsEnqueBytes,
+       "brcdTMCpuAggrQStatsDequePkts": brcdTMCpuAggrQStatsDequePkts,
+       "brcdTMCpuAggrQStatsDequeBytes": brcdTMCpuAggrQStatsDequeBytes,
+       "brcdTMCpuAggrQStatsTotalQDiscardPkts": brcdTMCpuAggrQStatsTotalQDiscardPkts,
+       "brcdTMCpuAggrQStatsTotalQDiscardBytes": brcdTMCpuAggrQStatsTotalQDiscardBytes,
+       "brcdTMCpuAggrQStatsOldestDiscardPkts": brcdTMCpuAggrQStatsOldestDiscardPkts,
+       "brcdTMCpuAggrQStatsOldestDiscardBytes": brcdTMCpuAggrQStatsOldestDiscardBytes,
+       "brcdTMCpuAggrQStatsWREDDroppedPkts": brcdTMCpuAggrQStatsWREDDroppedPkts,
+       "brcdTMCpuAggrQStatsWREDDroppedBytes": brcdTMCpuAggrQStatsWREDDroppedBytes,
+       "brcdNPGlobal": brcdNPGlobal,
+       "brcdNPIndex": brcdNPIndex,
+       "brcdNPLockupRecoveryCount": brcdNPLockupRecoveryCount}
 )

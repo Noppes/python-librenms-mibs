@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-OSPF-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:52 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-OSPF-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -131,7 +128,7 @@ alcatelIND1OSPFMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1OSPFMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -414,7 +411,7 @@ alaOspfRedistProtoSubnets = _AlaOspfRedistProtoSubnets_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 10, 1, 2),
     _AlaOspfRedistProtoSubnets_Type()
 )
-alaOspfRedistProtoSubnets.setMaxAccess("read-write")
+alaOspfRedistProtoSubnets.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistProtoSubnets.setStatus("deprecated")
 
@@ -442,7 +439,7 @@ alaOspfRedistProtoMetricType = _AlaOspfRedistProtoMetricType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 10, 1, 3),
     _AlaOspfRedistProtoMetricType_Type()
 )
-alaOspfRedistProtoMetricType.setMaxAccess("read-write")
+alaOspfRedistProtoMetricType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistProtoMetricType.setStatus("deprecated")
 
@@ -463,7 +460,7 @@ alaOspfRedistProtoMetric = _AlaOspfRedistProtoMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 10, 1, 4),
     _AlaOspfRedistProtoMetric_Type()
 )
-alaOspfRedistProtoMetric.setMaxAccess("read-write")
+alaOspfRedistProtoMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistProtoMetric.setStatus("deprecated")
 
@@ -479,7 +476,7 @@ alaOspfRedistProtoStatus = _AlaOspfRedistProtoStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 10, 1, 5),
     _AlaOspfRedistProtoStatus_Type()
 )
-alaOspfRedistProtoStatus.setMaxAccess("read-write")
+alaOspfRedistProtoStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistProtoStatus.setStatus("deprecated")
 _AlaOspfRedistProtoRouteTag_Type = Counter32
@@ -1026,7 +1023,7 @@ alaOspfRedistRouteMetric = _AlaOspfRedistRouteMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 14, 1, 4),
     _AlaOspfRedistRouteMetric_Type()
 )
-alaOspfRedistRouteMetric.setMaxAccess("read-write")
+alaOspfRedistRouteMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistRouteMetric.setStatus("deprecated")
 
@@ -1056,7 +1053,7 @@ alaOspfRedistRouteControl = _AlaOspfRedistRouteControl_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 14, 1, 5),
     _AlaOspfRedistRouteControl_Type()
 )
-alaOspfRedistRouteControl.setMaxAccess("read-write")
+alaOspfRedistRouteControl.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistRouteControl.setStatus("deprecated")
 
@@ -1077,7 +1074,7 @@ alaOspfRedistRouteTagMatch = _AlaOspfRedistRouteTagMatch_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 14, 1, 6),
     _AlaOspfRedistRouteTagMatch_Type()
 )
-alaOspfRedistRouteTagMatch.setMaxAccess("read-write")
+alaOspfRedistRouteTagMatch.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistRouteTagMatch.setStatus("deprecated")
 
@@ -1105,7 +1102,7 @@ alaOspfRedistRouteEffect = _AlaOspfRedistRouteEffect_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 14, 1, 7),
     _AlaOspfRedistRouteEffect_Type()
 )
-alaOspfRedistRouteEffect.setMaxAccess("read-write")
+alaOspfRedistRouteEffect.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistRouteEffect.setStatus("deprecated")
 
@@ -1121,7 +1118,7 @@ alaOspfRedistRouteStatus = _AlaOspfRedistRouteStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 14, 1, 8),
     _AlaOspfRedistRouteStatus_Type()
 )
-alaOspfRedistRouteStatus.setMaxAccess("read-write")
+alaOspfRedistRouteStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfRedistRouteStatus.setStatus("deprecated")
 _AlaOspfIfMd5Table_Object = MibTable
@@ -1195,7 +1192,7 @@ alaOspfIfMd5Key = _AlaOspfIfMd5Key_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 3),
     _AlaOspfIfMd5Key_Type()
 )
-alaOspfIfMd5Key.setMaxAccess("read-write")
+alaOspfIfMd5Key.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5Key.setStatus("current")
 
@@ -1211,7 +1208,7 @@ alaOspfIfMd5KeyStartAccept = _AlaOspfIfMd5KeyStartAccept_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 4),
     _AlaOspfIfMd5KeyStartAccept_Type()
 )
-alaOspfIfMd5KeyStartAccept.setMaxAccess("read-write")
+alaOspfIfMd5KeyStartAccept.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5KeyStartAccept.setStatus("current")
 
@@ -1227,7 +1224,7 @@ alaOspfIfMd5KeyStopAccept = _AlaOspfIfMd5KeyStopAccept_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 5),
     _AlaOspfIfMd5KeyStopAccept_Type()
 )
-alaOspfIfMd5KeyStopAccept.setMaxAccess("read-write")
+alaOspfIfMd5KeyStopAccept.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5KeyStopAccept.setStatus("current")
 
@@ -1243,7 +1240,7 @@ alaOspfIfMd5KeyStartGenerate = _AlaOspfIfMd5KeyStartGenerate_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 6),
     _AlaOspfIfMd5KeyStartGenerate_Type()
 )
-alaOspfIfMd5KeyStartGenerate.setMaxAccess("read-write")
+alaOspfIfMd5KeyStartGenerate.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5KeyStartGenerate.setStatus("current")
 
@@ -1259,7 +1256,7 @@ alaOspfIfMd5KeyStopGenerate = _AlaOspfIfMd5KeyStopGenerate_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 7),
     _AlaOspfIfMd5KeyStopGenerate_Type()
 )
-alaOspfIfMd5KeyStopGenerate.setMaxAccess("read-write")
+alaOspfIfMd5KeyStopGenerate.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5KeyStopGenerate.setStatus("current")
 
@@ -1275,7 +1272,7 @@ alaOspfIfMd5RowStatus = _AlaOspfIfMd5RowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 8),
     _AlaOspfIfMd5RowStatus_Type()
 )
-alaOspfIfMd5RowStatus.setMaxAccess("read-write")
+alaOspfIfMd5RowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5RowStatus.setStatus("current")
 _AlaOspfIfMd5EncryptKey_Type = AlaAuthenticationEncryptKey
@@ -1284,7 +1281,7 @@ alaOspfIfMd5EncryptKey = _AlaOspfIfMd5EncryptKey_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 16, 1, 9),
     _AlaOspfIfMd5EncryptKey_Type()
 )
-alaOspfIfMd5EncryptKey.setMaxAccess("read-write")
+alaOspfIfMd5EncryptKey.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaOspfIfMd5EncryptKey.setStatus("current")
 _AlaOspfIfAugTable_Object = MibTable
@@ -2596,7 +2593,17 @@ alaOspfIfIpAddress = _AlaOspfIfIpAddress_Object(
 alaOspfIfIpAddress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaOspfIfIpAddress.setStatus("obsolete")
-_AlaOspfAddressLessIf_Type = Integer32
+
+
+class _AlaOspfAddressLessIf_Type(Integer32):
+    """Custom type alaOspfAddressLessIf based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_AlaOspfAddressLessIf_Type.__name__ = "Integer32"
 _AlaOspfAddressLessIf_Object = MibTableColumn
 alaOspfAddressLessIf = _AlaOspfAddressLessIf_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 37, 1, 2),
@@ -2773,6 +2780,34 @@ alaOspfBfdAllInterfaceStatus = _AlaOspfBfdAllInterfaceStatus_Object(
 alaOspfBfdAllInterfaceStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaOspfBfdAllInterfaceStatus.setStatus("current")
+
+
+class _AlaOspfOpaqueTransitCapability_Type(Integer32):
+    """Custom type alaOspfOpaqueTransitCapability based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaOspfOpaqueTransitCapability_Type.__name__ = "Integer32"
+_AlaOspfOpaqueTransitCapability_Object = MibScalar
+alaOspfOpaqueTransitCapability = _AlaOspfOpaqueTransitCapability_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 1, 44),
+    _AlaOspfOpaqueTransitCapability_Type()
+)
+alaOspfOpaqueTransitCapability.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaOspfOpaqueTransitCapability.setStatus("current")
 _AlaOspfDebugConfig_ObjectIdentity = ObjectIdentity
 alaOspfDebugConfig = _AlaOspfDebugConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 1, 2)
@@ -3687,7 +3722,12 @@ alaOspfMiscellaneousGroup.setObjects(
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfRouteNumber"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfMTUCheck"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfBfdStatus"),
-        ("ALCATEL-IND1-OSPF-MIB", "alaOspfBfdAllInterfaceStatus"))
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfBfdAllInterfaceStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAsBdrRtr"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDefaultOriginate"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDefaultOriginateMetric"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDefaultOriginateMetricType"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfOpaqueTransitCapability"))
 )
 if mibBuilder.loadTexts:
     alaOspfMiscellaneousGroup.setStatus("current")
@@ -3733,7 +3773,9 @@ alaOspfDebugGroup.setObjects(
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugSetup"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugTime"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugTm"),
-        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugAll"))
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugAll"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugHelper"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfDebugRestart"))
 )
 if mibBuilder.loadTexts:
     alaOspfDebugGroup.setStatus("current")
@@ -3790,6 +3832,19 @@ alaOspfRedistRouteGroup.setObjects(
 if mibBuilder.loadTexts:
     alaOspfRedistRouteGroup.setStatus("deprecated")
 
+alaOspfAreaInterfaceGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 7)
+)
+alaOspfAreaInterfaceGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfAddressLessIf"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfIpAddress"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfArea2WayNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaActiveVlinks"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaAttachedIntfs"))
+)
+if mibBuilder.loadTexts:
+    alaOspfAreaInterfaceGroup.setStatus("current")
+
 alaOspfIfMd5Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 8)
 )
@@ -3801,7 +3856,8 @@ alaOspfIfMd5Group.setObjects(
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5KeyStopAccept"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5KeyStartGenerate"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5KeyStopGenerate"),
-        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5RowStatus"))
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5RowStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5EncryptKey"))
 )
 if mibBuilder.loadTexts:
     alaOspfIfMd5Group.setStatus("current")
@@ -3823,6 +3879,137 @@ alaOspfGeneralGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     alaOspfGeneralGroup.setStatus("current")
+
+alaOspfAreaAggregateAugGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 10)
+)
+alaOspfAreaAggregateAugGroup.setObjects(
+    ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaAggregateMetric")
+)
+if mibBuilder.loadTexts:
+    alaOspfAreaAggregateAugGroup.setStatus("current")
+
+alaOspfAreaAugGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 11)
+)
+alaOspfAreaAugGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaExchNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaFullNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaIncrSpfRuns"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaInitNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaLastSpfRun"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaNssaElectedTranslatorRouterId"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaNssaImportSetPbit"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaNssaTranslatorRole"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaNssaTranslatorStabilityInterval"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaNssaTranslatorState"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaNumIntfs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaOperStatus"))
+)
+if mibBuilder.loadTexts:
+    alaOspfAreaAugGroup.setStatus("current")
+
+alaOspfExtLsdbAugGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 12)
+)
+alaOspfExtLsdbAugGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbFwdAddr"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbLength"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbMask"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbMetric"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbMetricType"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbProto"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbRouteTag"))
+)
+if mibBuilder.loadTexts:
+    alaOspfExtLsdbAugGroup.setStatus("current")
+
+alaOspfIfAugGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 13)
+)
+alaOspfIfAugGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfIf2WayNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfBdrRouterid"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfFullNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfBfdDrsOnly"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfBfdStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfDrRouterid"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfEncryptKey"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfExchNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfInitNbrs"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfIntfName"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfIpMask"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfLinkType"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMTU"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfOperStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfVlanId"))
+)
+if mibBuilder.loadTexts:
+    alaOspfIfAugGroup.setStatus("current")
+
+alaOspfNbrAugEntryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 14)
+)
+alaOspfNbrAugEntryGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrAreaId"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrBdrAddress"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrDrAddress"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrLastHello"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrMd5SeqNo"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrMode"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrPendingLSack"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrPendingLSreq"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrPendingLSupd"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrRestartHelperAge"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrRestartHelperExitReason"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrRestartHelperStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrType"))
+)
+if mibBuilder.loadTexts:
+    alaOspfNbrAugEntryGroup.setStatus("current")
+
+alaProtocolOspfGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 15)
+)
+alaProtocolOspfGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfOpaqueLsaSupport"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRFC1583Compatibility"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRedistProtoRouteTag"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfReferenceBandwidth"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartAge"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartExitReason"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartHelperStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartHelperStrictLSAChecking"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartHelperSupport"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartInitiate"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartInterval"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfRestartSupport"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfTrafficEngineeringSupport"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtIfEncryptKey"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtIfOperStatus"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrBdrAddr"))
+)
+if mibBuilder.loadTexts:
+    alaProtocolOspfGroup.setStatus("current")
+
+alaOspfVirtNbrAugGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 4, 1, 2, 1, 16)
+)
+alaOspfVirtNbrAugGroup.setObjects(
+      *(("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrDrAddr"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrLastHello"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrMd5SeqNo"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrMode"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrPendingLSack"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrPendingLSreq"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrPendingLSupd"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrRestartHelperAge"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrRestartHelperExitReason"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfVirtNbrRestartHelperStatus"))
+)
+if mibBuilder.loadTexts:
+    alaOspfVirtNbrAugGroup.setStatus("current")
 
 
 # Notification objects
@@ -3847,7 +4034,13 @@ alcatelIND1OSPFMIBCompliance.setObjects(
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfBdrRouterGroup"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfRedistRouteGroup"),
         ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfMd5Group"),
-        ("ALCATEL-IND1-OSPF-MIB", "alaOspfGeneralGroup"))
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfGeneralGroup"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaInterfaceGroup"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaAggregateAugGroup"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfAreaAugGroup"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfExtLsdbAugGroup"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfIfAugGroup"),
+        ("ALCATEL-IND1-OSPF-MIB", "alaOspfNbrAugEntryGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1OSPFMIBCompliance.setStatus(
@@ -4023,6 +4216,7 @@ mibBuilder.exportSymbols(
        "alaOspfDefaultOriginateMetric": alaOspfDefaultOriginateMetric,
        "alaOspfBfdStatus": alaOspfBfdStatus,
        "alaOspfBfdAllInterfaceStatus": alaOspfBfdAllInterfaceStatus,
+       "alaOspfOpaqueTransitCapability": alaOspfOpaqueTransitCapability,
        "alaOspfDebugConfig": alaOspfDebugConfig,
        "alaOspfDebugLevel": alaOspfDebugLevel,
        "alaOspfDebugError": alaOspfDebugError,
@@ -4070,8 +4264,16 @@ mibBuilder.exportSymbols(
        "alaOspfRouteGroup": alaOspfRouteGroup,
        "alaOspfBdrRouterGroup": alaOspfBdrRouterGroup,
        "alaOspfRedistRouteGroup": alaOspfRedistRouteGroup,
+       "alaOspfAreaInterfaceGroup": alaOspfAreaInterfaceGroup,
        "alaOspfIfMd5Group": alaOspfIfMd5Group,
        "alaOspfGeneralGroup": alaOspfGeneralGroup,
+       "alaOspfAreaAggregateAugGroup": alaOspfAreaAggregateAugGroup,
+       "alaOspfAreaAugGroup": alaOspfAreaAugGroup,
+       "alaOspfExtLsdbAugGroup": alaOspfExtLsdbAugGroup,
+       "alaOspfIfAugGroup": alaOspfIfAugGroup,
+       "alaOspfNbrAugEntryGroup": alaOspfNbrAugEntryGroup,
+       "alaProtocolOspfGroup": alaProtocolOspfGroup,
+       "alaOspfVirtNbrAugGroup": alaOspfVirtNbrAugGroup,
        "alcatelIND1OSPFMIBCompliances": alcatelIND1OSPFMIBCompliances,
        "alcatelIND1OSPFMIBCompliance": alcatelIND1OSPFMIBCompliance}
 )

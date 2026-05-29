@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\waystream\WAYSTREAM-PRODUCTS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:35:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,8 @@ wsProductsMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     wsProductsMIB.setRevisions(
-        ("2017-02-10 11:00",
+        ("2018-02-23 17:00",
+         "2017-02-10 11:00",
          "2015-04-08 14:52",
          "2012-09-24 14:35",
          "2012-02-02 15:30",
@@ -393,6 +391,22 @@ _Asr6126dc_ObjectIdentity = ObjectIdentity
 asr6126dc = _Asr6126dc_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9303, 1, 1, 63)
 )
+_Asr6226ac_ObjectIdentity = ObjectIdentity
+asr6226ac = _Asr6226ac_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 1, 78)
+)
+_Asr6226dc_ObjectIdentity = ObjectIdentity
+asr6226dc = _Asr6226dc_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 1, 79)
+)
+_Asr6326ac_ObjectIdentity = ObjectIdentity
+asr6326ac = _Asr6326ac_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 1, 80)
+)
+_Asr6326dc_ObjectIdentity = ObjectIdentity
+asr6326dc = _Asr6326dc_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 1, 81)
+)
 _Ipd_ObjectIdentity = ObjectIdentity
 ipd = _Ipd_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9303, 1, 2)
@@ -447,6 +461,22 @@ _Ms4126dc_ObjectIdentity = ObjectIdentity
 ms4126dc = _Ms4126dc_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9303, 1, 5, 67)
 )
+_Ms4226ac_ObjectIdentity = ObjectIdentity
+ms4226ac = _Ms4226ac_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 5, 82)
+)
+_Ms4226dc_ObjectIdentity = ObjectIdentity
+ms4226dc = _Ms4226dc_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 5, 83)
+)
+_Ms4326ac_ObjectIdentity = ObjectIdentity
+ms4326ac = _Ms4326ac_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 5, 84)
+)
+_Ms4326dc_ObjectIdentity = ObjectIdentity
+ms4326dc = _Ms4326dc_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 5, 85)
+)
 _Legacy2_ObjectIdentity = ObjectIdentity
 legacy2 = _Legacy2_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9303, 1, 6)
@@ -498,6 +528,16 @@ reserved3 = _Reserved3_ObjectIdentity(
 _Reserved4_ObjectIdentity = ObjectIdentity
 reserved4 = _Reserved4_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9303, 1, 7, 77)
+)
+_Ls_ObjectIdentity = ObjectIdentity
+ls = _Ls_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 8)
+)
+if mibBuilder.loadTexts:
+    ls.setStatus("current")
+_Ls2324_ObjectIdentity = ObjectIdentity
+ls2324 = _Ls2324_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9303, 1, 8, 1)
 )
 
 # Managed Objects groups
@@ -583,6 +623,10 @@ mibBuilder.exportSymbols(
        "asr6026dc": asr6026dc,
        "asr6126ac": asr6126ac,
        "asr6126dc": asr6126dc,
+       "asr6226ac": asr6226ac,
+       "asr6226dc": asr6226dc,
+       "asr6326ac": asr6326ac,
+       "asr6326dc": asr6326dc,
        "ipd": ipd,
        "ipd1116C": ipd1116C,
        "legacy1": legacy1,
@@ -595,6 +639,10 @@ mibBuilder.exportSymbols(
        "ms4026dc": ms4026dc,
        "ms4126ac": ms4126ac,
        "ms4126dc": ms4126dc,
+       "ms4226ac": ms4226ac,
+       "ms4226dc": ms4226dc,
+       "ms4326ac": ms4326ac,
+       "ms4326dc": ms4326dc,
        "legacy2": legacy2,
        "mpc": mpc,
        "mpc480se4818": mpc480se4818,
@@ -607,5 +655,7 @@ mibBuilder.exportSymbols(
        "reserved2": reserved2,
        "reserved3": reserved3,
        "reserved4": reserved4,
+       "ls": ls,
+       "ls2324": ls2324,
        "wsProductsMIB": wsProductsMIB}
 )

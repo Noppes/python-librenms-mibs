@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\fortinet\FORTINET-FORTIGATE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:51 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -989,6 +986,10 @@ fw50GS = _Fw50GS_ObjectIdentity(
 _Fg50GS_ObjectIdentity = ObjectIdentity
 fg50GS = _Fg50GS_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 101, 1, 463)
+)
+_Fwf60D_ObjectIdentity = ObjectIdentity
+fwf60D = _Fwf60D_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 101, 1, 626)
 )
 _Fwf60E_ObjectIdentity = ObjectIdentity
 fwf60E = _Fwf60E_ObjectIdentity(
@@ -19293,6 +19294,7 @@ mibBuilder.exportSymbols(
        "fgt51GP": fgt51GP,
        "fw50GS": fw50GS,
        "fg50GS": fg50GS,
+       "fwf60D": fwf60D,
        "fwf60E": fwf60E,
        "fgt61E": fgt61E,
        "fgt60E": fgt60E,

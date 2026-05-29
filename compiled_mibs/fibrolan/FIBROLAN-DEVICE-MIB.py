@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\fibrolan\FIBROLAN-DEVICE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:18 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,8 @@ flDevice = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     flDevice.setRevisions(
-        ("2016-07-15 00:00",
+        ("2019-10-24 00:00",
+         "2016-07-15 00:00",
          "2015-09-15 00:00",
          "2015-09-01 00:00",
          "2015-02-01 00:00",
@@ -457,7 +455,8 @@ class _FlDevicePsuAlarmStatus_Type(Integer32):
               2,
               4,
               8,
-              16)
+              16,
+              32)
         )
     )
     namedValues = NamedValues(
@@ -465,7 +464,8 @@ class _FlDevicePsuAlarmStatus_Type(Integer32):
           ("psuNotInstalled", 2),
           ("psuDown", 4),
           ("fanDown", 8),
-          ("singleFanDown", 16))
+          ("singleFanDown", 16),
+          ("singleFeedDown", 32))
     )
 
 

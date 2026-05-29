@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-DOT3-OAM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:14 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-DOT3-OAM-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -145,7 +142,8 @@ alcatelIND1Dot3OamMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1Dot3OamMIB.setRevisions(
-        ("2009-02-25 00:00",)
+        ("2009-02-25 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -614,7 +612,17 @@ alaDot3OamRetrieveRequestEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaDot3OamRetrieveRequestEntry.setStatus("current")
-_AlaDot3OamTransactionId_Type = Integer32
+
+
+class _AlaDot3OamTransactionId_Type(Integer32):
+    """Custom type alaDot3OamTransactionId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_AlaDot3OamTransactionId_Type.__name__ = "Integer32"
 _AlaDot3OamTransactionId_Object = MibTableColumn
 alaDot3OamTransactionId = _AlaDot3OamTransactionId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 52, 1, 1, 12, 1, 1, 1),

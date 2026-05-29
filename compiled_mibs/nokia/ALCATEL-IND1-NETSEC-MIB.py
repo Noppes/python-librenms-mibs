@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-NETSEC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:50 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-NETSEC-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,6 +114,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1NETSECMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 48, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1NETSECMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -1185,6 +1186,33 @@ alaNetSecGroupComplianceGroup.setObjects(
 if mibBuilder.loadTexts:
     alaNetSecGroupComplianceGroup.setStatus("current")
 
+alaNetSecMonitoringGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 48, 1, 2, 1, 10)
+)
+alaNetSecMonitoringGroup.setObjects(
+      *(("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalyCount"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalyLog"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalyPeriod"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalyQuarantine"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalySensitivity"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalyState"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroupAnomalyTrap"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortRangeGroupName"))
+)
+if mibBuilder.loadTexts:
+    alaNetSecMonitoringGroup.setStatus("current")
+
+alaNetSecPortTrapInfoGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 48, 1, 2, 1, 11)
+)
+alaNetSecPortTrapInfoGroup.setObjects(
+      *(("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortTrapInfoIfId"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortTrapInfoAnomaly"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortTrapInfoType"))
+)
+if mibBuilder.loadTexts:
+    alaNetSecPortTrapInfoGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1245,7 +1273,8 @@ alcatelIND1NETSECMIBCompliance.setObjects(
         ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortOpComplianceGroup"),
         ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecGroupOpComplianceGroup"),
         ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecGroupComplianceGroup"),
-        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortTrapsComplianceGroup"))
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecPortTrapsComplianceGroup"),
+        ("ALCATEL-IND1-NETSEC-MIB", "alaNetSecMonitoringGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1NETSECMIBCompliance.setStatus(
@@ -1349,6 +1378,8 @@ mibBuilder.exportSymbols(
        "alaNetSecPortOpComplianceGroup": alaNetSecPortOpComplianceGroup,
        "alaNetSecGroupOpComplianceGroup": alaNetSecGroupOpComplianceGroup,
        "alaNetSecGroupComplianceGroup": alaNetSecGroupComplianceGroup,
+       "alaNetSecMonitoringGroup": alaNetSecMonitoringGroup,
+       "alaNetSecPortTrapInfoGroup": alaNetSecPortTrapInfoGroup,
        "alcatelIND1NETSECMIBCompliances": alcatelIND1NETSECMIBCompliances,
        "alcatelIND1NETSECMIBCompliance": alcatelIND1NETSECMIBCompliance,
        "alaNetSecPortTrapsDesc": alaNetSecPortTrapsDesc,

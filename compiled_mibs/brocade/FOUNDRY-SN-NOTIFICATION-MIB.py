@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-NOTIFICATION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:18 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,6 +114,10 @@ if 'mibBuilder' not in globals():
     "FOUNDRY-SN-ROOT-MIB",
     "foundry")
 
+(snStackingGlobalMixedMode,) = mibBuilder.importSymbols(
+    "FOUNDRY-SN-STACKING-MIB",
+    "snStackingGlobalMixedMode")
+
 (snL4LinkVirtualInterface,
  snL4MaxSessionLimit,
  snL4TcpSynLimit,
@@ -146,14 +147,6 @@ if 'mibBuilder' not in globals():
 (wgPnPStatus,) = mibBuilder.importSymbols(
     "FOUNDRY-SN-WIRELESS-GROUP-MIB",
     "wgPnPStatus")
-
-(dot1agCfmMaNetName,
- dot1agCfmMdName,
- dot1agCfmMepDbRMepState) = mibBuilder.importSymbols(
-    "IEEE8021-CFM-MIB",
-    "dot1agCfmMaNetName",
-    "dot1agCfmMdName",
-    "dot1agCfmMepDbRMepState")
 
 (ifIndex,) = mibBuilder.importSymbols(
     "IF-MIB",
@@ -217,8 +210,8 @@ snTraps = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snTraps.setRevisions(
-        ("2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -889,9 +882,6 @@ if mibBuilder.loadTexts:
 
 snTrapDuplicateIp = NotificationType(
     (1, 3, 6, 1, 4, 1, 1991, 0, 56)
-)
-snTrapDuplicateIp.setObjects(
-    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
 )
 if mibBuilder.loadTexts:
     snTrapDuplicateIp.setStatus(
@@ -2144,48 +2134,48 @@ snTrapLicenseAdded = NotificationType(
     (1, 3, 6, 1, 4, 1, 1991, 0, 187)
 )
 snTrapLicenseAdded.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "fdryLicenseType"),
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
         ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
 )
 if mibBuilder.loadTexts:
     snTrapLicenseAdded.setStatus(
-        "current"
+        "deprecated"
     )
 
 snTrapLicenseRemoved = NotificationType(
     (1, 3, 6, 1, 4, 1, 1991, 0, 188)
 )
 snTrapLicenseRemoved.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "fdryLicenseType"),
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
         ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
 )
 if mibBuilder.loadTexts:
     snTrapLicenseRemoved.setStatus(
-        "current"
+        "deprecated"
     )
 
 snTrapLicenseExpires = NotificationType(
     (1, 3, 6, 1, 4, 1, 1991, 0, 189)
 )
 snTrapLicenseExpires.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "fdryLicenseType"),
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
         ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
 )
 if mibBuilder.loadTexts:
     snTrapLicenseExpires.setStatus(
-        "current"
+        "deprecated"
     )
 
 snTrapLicenseExpired = NotificationType(
     (1, 3, 6, 1, 4, 1, 1991, 0, 190)
 )
 snTrapLicenseExpired.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "fdryLicenseType"),
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
         ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
 )
 if mibBuilder.loadTexts:
     snTrapLicenseExpired.setStatus(
-        "current"
+        "deprecated"
     )
 
 snTrapUDLDCrcFailureDetected = NotificationType(
@@ -2197,61 +2187,6 @@ snTrapUDLDCrcFailureDetected.setObjects(
 )
 if mibBuilder.loadTexts:
     snTrapUDLDCrcFailureDetected.setStatus(
-        "current"
-    )
-
-snTrapDot1agCfmRemoteMEPAgeOut = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 192)
-)
-snTrapDot1agCfmRemoteMEPAgeOut.setObjects(
-      *(("IEEE8021-CFM-MIB", "dot1agCfmMdName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMaNetName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMepDbRMepState"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapDot1agCfmRemoteMEPAgeOut.setStatus(
-        "current"
-    )
-
-snTrapDot1agCfmRemoteMEPUp = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 193)
-)
-snTrapDot1agCfmRemoteMEPUp.setObjects(
-      *(("IEEE8021-CFM-MIB", "dot1agCfmMdName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMaNetName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMepDbRMepState"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapDot1agCfmRemoteMEPUp.setStatus(
-        "current"
-    )
-
-snTrapDot1agCfmDomainCrossConnection = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 194)
-)
-snTrapDot1agCfmDomainCrossConnection.setObjects(
-      *(("IEEE8021-CFM-MIB", "dot1agCfmMdName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMaNetName"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapDot1agCfmDomainCrossConnection.setStatus(
-        "current"
-    )
-
-snTrapDot1agCfmDuplicateMEPId = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 195)
-)
-snTrapDot1agCfmDuplicateMEPId.setObjects(
-      *(("IEEE8021-CFM-MIB", "dot1agCfmMdName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMaNetName"),
-        ("IEEE8021-CFM-MIB", "dot1agCfmMepDbRMepState"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapDot1agCfmDuplicateMEPId.setStatus(
         "current"
     )
 
@@ -2286,6 +2221,383 @@ snTrapMacMoveIntervalHistory.setObjects(
 )
 if mibBuilder.loadTexts:
     snTrapMacMoveIntervalHistory.setStatus(
+        "current"
+    )
+
+snTrapStackingMixedModeChanged = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 199)
+)
+snTrapStackingMixedModeChanged.setObjects(
+      *(("FOUNDRY-SN-STACKING-MIB", "snStackingGlobalMixedMode"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackingMixedModeChanged.setStatus(
+        "current"
+    )
+
+snTrapSysMonErrorDetect = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 200)
+)
+snTrapSysMonErrorDetect.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapSysMonErrorDetect.setStatus(
+        "current"
+    )
+
+snTrapMacNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 201)
+)
+snTrapMacNotification.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapMacNotification.setStatus(
+        "current"
+    )
+
+snTrapMacEventBufferFull = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 202)
+)
+snTrapMacEventBufferFull.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapMacEventBufferFull.setStatus(
+        "current"
+    )
+
+snTrapStpDesignatedGuardDetect = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 203)
+)
+snTrapStpDesignatedGuardDetect.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("FOUNDRY-SN-SWITCH-GROUP-MIB", "snVLanByPortCfgVLanId"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStpDesignatedGuardDetect.setStatus(
+        "current"
+    )
+
+snTrapStpDesignatedGuardDisable = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 204)
+)
+snTrapStpDesignatedGuardDisable.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("FOUNDRY-SN-SWITCH-GROUP-MIB", "snVLanByPortCfgVLanId"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStpDesignatedGuardDisable.setStatus(
+        "current"
+    )
+
+snTrapLicenseNNLLTrialNotify = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 205)
+)
+snTrapLicenseNNLLTrialNotify.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapLicenseNNLLTrialNotify.setStatus(
+        "deprecated"
+    )
+
+snTrapLicenseNNLLTrialExpiry = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 206)
+)
+snTrapLicenseNNLLTrialExpiry.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapLicenseNNLLTrialExpiry.setStatus(
+        "deprecated"
+    )
+
+snTrapLicenseNNLLNonCompliant = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 207)
+)
+snTrapLicenseNNLLNonCompliant.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapLicenseNNLLNonCompliant.setStatus(
+        "deprecated"
+    )
+
+snTrapLicenseNNLLDelete = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 208)
+)
+snTrapLicenseNNLLDelete.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapLicenseNNLLDelete.setStatus(
+        "deprecated"
+    )
+
+snTrapStackingShowStackConnect = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 209)
+)
+snTrapStackingShowStackConnect.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapStackingShowStackConnect.setStatus(
+        "current"
+    )
+
+snTrapStackingStandByChangedStandalone = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 210)
+)
+snTrapStackingStandByChangedStandalone.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackingStandByChangedStandalone.setStatus(
+        "current"
+    )
+
+snTrapBroadcastlimit = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 211)
+)
+snTrapBroadcastlimit.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapBroadcastlimit.setStatus(
+        "current"
+    )
+
+snTrapMulticastlimit = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 212)
+)
+snTrapMulticastlimit.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapMulticastlimit.setStatus(
+        "current"
+    )
+
+snTrapUnicastlimit = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 213)
+)
+snTrapUnicastlimit.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapUnicastlimit.setStatus(
+        "current"
+    )
+
+snTrapPsuFanStateChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 214)
+)
+snTrapPsuFanStateChange.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapPsuFanStateChange.setStatus(
+        "current"
+    )
+
+snTrapStackISSUSystemCompleted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 215)
+)
+snTrapStackISSUSystemCompleted.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapStackISSUSystemCompleted.setStatus(
+        "current"
+    )
+
+snTrapStackISSUSystemFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 216)
+)
+snTrapStackISSUSystemFailed.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapStackISSUSystemFailed.setStatus(
+        "current"
+    )
+
+snTrapStackISSUUnitCompleted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 217)
+)
+snTrapStackISSUUnitCompleted.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackISSUUnitCompleted.setStatus(
+        "current"
+    )
+
+snTrapStackISSUUnitFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 218)
+)
+snTrapStackISSUUnitFailed.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackISSUUnitFailed.setStatus(
+        "current"
+    )
+
+snTrapStackISSUSystemStart = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 219)
+)
+snTrapStackISSUSystemStart.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapStackISSUSystemStart.setStatus(
+        "current"
+    )
+
+snTrapStackingIgnoreShutdownTemperatureThresholdEnabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 220)
+)
+snTrapStackingIgnoreShutdownTemperatureThresholdEnabled.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackingIgnoreShutdownTemperatureThresholdEnabled.setStatus(
+        "current"
+    )
+
+snTrapStackingIgnoreShutdownTemperatureThresholdDisabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 221)
+)
+snTrapStackingIgnoreShutdownTemperatureThresholdDisabled.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackingIgnoreShutdownTemperatureThresholdDisabled.setStatus(
+        "current"
+    )
+
+snTrapGlobalBattleShortModeEnabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 222)
+)
+snTrapGlobalBattleShortModeEnabled.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapGlobalBattleShortModeEnabled.setStatus(
+        "current"
+    )
+
+snTrapGlobalBattleShortModeDisabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 223)
+)
+snTrapGlobalBattleShortModeDisabled.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapGlobalBattleShortModeDisabled.setStatus(
+        "current"
+    )
+
+snTrapStackSAUOptionChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 224)
+)
+snTrapStackSAUOptionChange.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackSAUOptionChange.setStatus(
+        "current"
+    )
+
+snTrapPMSProtectActivated = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 225)
+)
+snTrapPMSProtectActivated.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapPMSProtectActivated.setStatus(
+        "current"
+    )
+
+snTrapPMSProtectDeactivated = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 226)
+)
+snTrapPMSProtectDeactivated.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapPMSProtectDeactivated.setStatus(
+        "current"
+    )
+
+snTrapStackSAUOptionDeleted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 227)
+)
+snTrapStackSAUOptionDeleted.setObjects(
+      *(("FOUNDRY-SN-AGENT-MIB", "snChasUnitIndex"),
+        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
+)
+if mibBuilder.loadTexts:
+    snTrapStackSAUOptionDeleted.setStatus(
+        "current"
+    )
+
+snTrapStackCloudManagerConnected = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 228)
+)
+snTrapStackCloudManagerConnected.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapStackCloudManagerConnected.setStatus(
+        "current"
+    )
+
+snTrapStackCloudManagerDisconnected = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 229)
+)
+snTrapStackCloudManagerDisconnected.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapStackCloudManagerDisconnected.setStatus(
+        "current"
+    )
+
+snTrapManager2FactorAuthenticationEnabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 230)
+)
+snTrapManager2FactorAuthenticationEnabled.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapManager2FactorAuthenticationEnabled.setStatus(
+        "current"
+    )
+
+snTrapManager2FactorAuthenticationDisabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1991, 0, 231)
+)
+snTrapManager2FactorAuthenticationDisabled.setObjects(
+    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
+)
+if mibBuilder.loadTexts:
+    snTrapManager2FactorAuthenticationDisabled.setStatus(
         "current"
     )
 
@@ -2499,32 +2811,6 @@ if mibBuilder.loadTexts:
         "current"
     )
 
-snTrapSFMStatusChange = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1103)
-)
-snTrapSFMStatusChange.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "snAgentBrdIndex"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgentBrdModuleStatus"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapSFMStatusChange.setStatus(
-        "current"
-    )
-
-snTrapLPFabricStatusChange = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1104)
-)
-snTrapLPFabricStatusChange.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "snAgentBrdIndex"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgentBrdModuleStatus"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapLPFabricStatusChange.setStatus(
-        "current"
-    )
-
 snTrapChassisFanSpeedLow = NotificationType(
     (1, 3, 6, 1, 4, 1, 1991, 0, 1200)
 )
@@ -2632,82 +2918,6 @@ snTrapFIPSCryptoModuleFailure.setObjects(
 )
 if mibBuilder.loadTexts:
     snTrapFIPSCryptoModuleFailure.setStatus(
-        "current"
-    )
-
-snTrapLicense2PortNotSupported = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1213)
-)
-snTrapLicense2PortNotSupported.setObjects(
-    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
-)
-if mibBuilder.loadTexts:
-    snTrapLicense2PortNotSupported.setStatus(
-        "current"
-    )
-
-snTrapOpticalMonitoringOK = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1214)
-)
-snTrapOpticalMonitoringOK.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"),
-        ("IF-MIB", "ifIndex"))
-)
-if mibBuilder.loadTexts:
-    snTrapOpticalMonitoringOK.setStatus(
-        "current"
-    )
-
-snTrapSFMAccessOK = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1215)
-)
-snTrapSFMAccessOK.setObjects(
-    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
-)
-if mibBuilder.loadTexts:
-    snTrapSFMAccessOK.setStatus(
-        "current"
-    )
-
-snTrapUpgradeSingleCmdStart = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1216)
-)
-if mibBuilder.loadTexts:
-    snTrapUpgradeSingleCmdStart.setStatus(
-        "current"
-    )
-
-snTrapUpgradeSingleCmdDone = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1217)
-)
-snTrapUpgradeSingleCmdDone.setObjects(
-    ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage")
-)
-if mibBuilder.loadTexts:
-    snTrapUpgradeSingleCmdDone.setStatus(
-        "current"
-    )
-
-snTrapAutoUpgradeStart = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1218)
-)
-snTrapAutoUpgradeStart.setObjects(
-    ("FOUNDRY-SN-AGENT-MIB", "snAgentBrdIndex")
-)
-if mibBuilder.loadTexts:
-    snTrapAutoUpgradeStart.setStatus(
-        "current"
-    )
-
-snTrapAutoUpgradeDone = NotificationType(
-    (1, 3, 6, 1, 4, 1, 1991, 0, 1219)
-)
-snTrapAutoUpgradeDone.setObjects(
-      *(("FOUNDRY-SN-AGENT-MIB", "snAgentBrdIndex"),
-        ("FOUNDRY-SN-AGENT-MIB", "snAgGblTrapMessage"))
-)
-if mibBuilder.loadTexts:
-    snTrapAutoUpgradeDone.setStatus(
         "current"
     )
 
@@ -2897,13 +3107,42 @@ mibBuilder.exportSymbols(
        "snTrapLicenseExpires": snTrapLicenseExpires,
        "snTrapLicenseExpired": snTrapLicenseExpired,
        "snTrapUDLDCrcFailureDetected": snTrapUDLDCrcFailureDetected,
-       "snTrapDot1agCfmRemoteMEPAgeOut": snTrapDot1agCfmRemoteMEPAgeOut,
-       "snTrapDot1agCfmRemoteMEPUp": snTrapDot1agCfmRemoteMEPUp,
-       "snTrapDot1agCfmDomainCrossConnection": snTrapDot1agCfmDomainCrossConnection,
-       "snTrapDot1agCfmDuplicateMEPId": snTrapDot1agCfmDuplicateMEPId,
        "snTrapStackingStandbyElected": snTrapStackingStandbyElected,
        "snTrapMacMoveThresholdRate": snTrapMacMoveThresholdRate,
        "snTrapMacMoveIntervalHistory": snTrapMacMoveIntervalHistory,
+       "snTrapStackingMixedModeChanged": snTrapStackingMixedModeChanged,
+       "snTrapSysMonErrorDetect": snTrapSysMonErrorDetect,
+       "snTrapMacNotification": snTrapMacNotification,
+       "snTrapMacEventBufferFull": snTrapMacEventBufferFull,
+       "snTrapStpDesignatedGuardDetect": snTrapStpDesignatedGuardDetect,
+       "snTrapStpDesignatedGuardDisable": snTrapStpDesignatedGuardDisable,
+       "snTrapLicenseNNLLTrialNotify": snTrapLicenseNNLLTrialNotify,
+       "snTrapLicenseNNLLTrialExpiry": snTrapLicenseNNLLTrialExpiry,
+       "snTrapLicenseNNLLNonCompliant": snTrapLicenseNNLLNonCompliant,
+       "snTrapLicenseNNLLDelete": snTrapLicenseNNLLDelete,
+       "snTrapStackingShowStackConnect": snTrapStackingShowStackConnect,
+       "snTrapStackingStandByChangedStandalone": snTrapStackingStandByChangedStandalone,
+       "snTrapBroadcastlimit": snTrapBroadcastlimit,
+       "snTrapMulticastlimit": snTrapMulticastlimit,
+       "snTrapUnicastlimit": snTrapUnicastlimit,
+       "snTrapPsuFanStateChange": snTrapPsuFanStateChange,
+       "snTrapStackISSUSystemCompleted": snTrapStackISSUSystemCompleted,
+       "snTrapStackISSUSystemFailed": snTrapStackISSUSystemFailed,
+       "snTrapStackISSUUnitCompleted": snTrapStackISSUUnitCompleted,
+       "snTrapStackISSUUnitFailed": snTrapStackISSUUnitFailed,
+       "snTrapStackISSUSystemStart": snTrapStackISSUSystemStart,
+       "snTrapStackingIgnoreShutdownTemperatureThresholdEnabled": snTrapStackingIgnoreShutdownTemperatureThresholdEnabled,
+       "snTrapStackingIgnoreShutdownTemperatureThresholdDisabled": snTrapStackingIgnoreShutdownTemperatureThresholdDisabled,
+       "snTrapGlobalBattleShortModeEnabled": snTrapGlobalBattleShortModeEnabled,
+       "snTrapGlobalBattleShortModeDisabled": snTrapGlobalBattleShortModeDisabled,
+       "snTrapStackSAUOptionChange": snTrapStackSAUOptionChange,
+       "snTrapPMSProtectActivated": snTrapPMSProtectActivated,
+       "snTrapPMSProtectDeactivated": snTrapPMSProtectDeactivated,
+       "snTrapStackSAUOptionDeleted": snTrapStackSAUOptionDeleted,
+       "snTrapStackCloudManagerConnected": snTrapStackCloudManagerConnected,
+       "snTrapStackCloudManagerDisconnected": snTrapStackCloudManagerDisconnected,
+       "snTrapManager2FactorAuthenticationEnabled": snTrapManager2FactorAuthenticationEnabled,
+       "snTrapManager2FactorAuthenticationDisabled": snTrapManager2FactorAuthenticationDisabled,
        "snTrapChasFanOK": snTrapChasFanOK,
        "snTrapTemperatureOK": snTrapTemperatureOK,
        "snTrapCAMOverflow": snTrapCAMOverflow,
@@ -2923,8 +3162,6 @@ mibBuilder.exportSymbols(
        "snTrapSFMLinkDown": snTrapSFMLinkDown,
        "snTrapSFMLinkUp": snTrapSFMLinkUp,
        "snTrapSFMAccessError": snTrapSFMAccessError,
-       "snTrapSFMStatusChange": snTrapSFMStatusChange,
-       "snTrapLPFabricStatusChange": snTrapLPFabricStatusChange,
        "snTrapChassisFanSpeedLow": snTrapChassisFanSpeedLow,
        "snTrapChassisFanSpeedMedium": snTrapChassisFanSpeedMedium,
        "snTrapChassisFanSpeedMedHigh": snTrapChassisFanSpeedMedHigh,
@@ -2934,12 +3171,5 @@ mibBuilder.exportSymbols(
        "snTrapFIPSHostZeroized": snTrapFIPSHostZeroized,
        "snTrapFIPSSharedSecretZeroized": snTrapFIPSSharedSecretZeroized,
        "snTrapFIPSPOSTStatus": snTrapFIPSPOSTStatus,
-       "snTrapFIPSCryptoModuleFailure": snTrapFIPSCryptoModuleFailure,
-       "snTrapLicense2PortNotSupported": snTrapLicense2PortNotSupported,
-       "snTrapOpticalMonitoringOK": snTrapOpticalMonitoringOK,
-       "snTrapSFMAccessOK": snTrapSFMAccessOK,
-       "snTrapUpgradeSingleCmdStart": snTrapUpgradeSingleCmdStart,
-       "snTrapUpgradeSingleCmdDone": snTrapUpgradeSingleCmdDone,
-       "snTrapAutoUpgradeStart": snTrapAutoUpgradeStart,
-       "snTrapAutoUpgradeDone": snTrapAutoUpgradeDone}
+       "snTrapFIPSCryptoModuleFailure": snTrapFIPSCryptoModuleFailure}
 )

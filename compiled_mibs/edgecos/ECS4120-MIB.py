@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\edgecos\ECS4120-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:38:54 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -199,7 +196,7 @@ ecs4120MIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ecs4120MIB.setRevisions(
-        ("2023-09-28 00:00",)
+        ("2024-08-01 00:00",)
     )
 
 
@@ -3507,6 +3504,15 @@ trunkResetConfiguration = _TrunkResetConfiguration_Object(
 trunkResetConfiguration.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     trunkResetConfiguration.setStatus("current")
+_TrunkBandwidth_Type = Integer32
+_TrunkBandwidth_Object = MibTableColumn
+trunkBandwidth = _TrunkBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 3, 3, 1, 7),
+    _TrunkBandwidth_Type()
+)
+trunkBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    trunkBandwidth.setStatus("current")
 
 
 class _TrunkLinkDelayUp_Type(Integer32):
@@ -3520,7 +3526,7 @@ class _TrunkLinkDelayUp_Type(Integer32):
 _TrunkLinkDelayUp_Type.__name__ = "Integer32"
 _TrunkLinkDelayUp_Object = MibTableColumn
 trunkLinkDelayUp = _TrunkLinkDelayUp_Object(
-    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 3, 3, 1, 7),
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 3, 3, 1, 8),
     _TrunkLinkDelayUp_Type()
 )
 trunkLinkDelayUp.setMaxAccess("read-write")
@@ -3539,7 +3545,7 @@ class _TrunkLinkDelayDown_Type(Integer32):
 _TrunkLinkDelayDown_Type.__name__ = "Integer32"
 _TrunkLinkDelayDown_Object = MibTableColumn
 trunkLinkDelayDown = _TrunkLinkDelayDown_Object(
-    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 3, 3, 1, 8),
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 3, 3, 1, 9),
     _TrunkLinkDelayDown_Type()
 )
 trunkLinkDelayDown.setMaxAccess("read-write")
@@ -6643,6 +6649,53 @@ dhcpcIfVendorClassId = _DhcpcIfVendorClassId_Object(
 dhcpcIfVendorClassId.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dhcpcIfVendorClassId.setStatus("current")
+
+
+class _DhcpcIfHostnameMode_Type(Integer32):
+    """Custom type dhcpcIfHostnameMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notSpecify", 1),
+          ("text", 2),
+          ("hex", 3))
+    )
+
+
+_DhcpcIfHostnameMode_Type.__name__ = "Integer32"
+_DhcpcIfHostnameMode_Object = MibTableColumn
+dhcpcIfHostnameMode = _DhcpcIfHostnameMode_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 10, 11, 1, 1, 1, 1, 6),
+    _DhcpcIfHostnameMode_Type()
+)
+dhcpcIfHostnameMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dhcpcIfHostnameMode.setStatus("current")
+
+
+class _DhcpcIfHostname_Type(OctetString):
+    """Custom type dhcpcIfHostname based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 256),
+    )
+
+
+_DhcpcIfHostname_Type.__name__ = "OctetString"
+_DhcpcIfHostname_Object = MibTableColumn
+dhcpcIfHostname = _DhcpcIfHostname_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 10, 11, 1, 1, 1, 1, 7),
+    _DhcpcIfHostname_Type()
+)
+dhcpcIfHostname.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dhcpcIfHostname.setStatus("current")
 _DhcpRelay_ObjectIdentity = ObjectIdentity
 dhcpRelay = _DhcpRelay_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 10, 11, 2)
@@ -9678,6 +9731,44 @@ trapVarOwnerName = _TrapVarOwnerName_Object(
 trapVarOwnerName.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     trapVarOwnerName.setStatus("current")
+
+
+class _TrapSfpThresholdAlarmWarnThreshold_Type(DisplayString):
+    """Custom type trapSfpThresholdAlarmWarnThreshold based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 10),
+    )
+
+
+_TrapSfpThresholdAlarmWarnThreshold_Type.__name__ = "DisplayString"
+_TrapSfpThresholdAlarmWarnThreshold_Object = MibScalar
+trapSfpThresholdAlarmWarnThreshold = _TrapSfpThresholdAlarmWarnThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 14, 2, 85),
+    _TrapSfpThresholdAlarmWarnThreshold_Type()
+)
+trapSfpThresholdAlarmWarnThreshold.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    trapSfpThresholdAlarmWarnThreshold.setStatus("current")
+
+
+class _TrapSfpThresholdAlarmWarnValue_Type(DisplayString):
+    """Custom type trapSfpThresholdAlarmWarnValue based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 10),
+    )
+
+
+_TrapSfpThresholdAlarmWarnValue_Type.__name__ = "DisplayString"
+_TrapSfpThresholdAlarmWarnValue_Object = MibScalar
+trapSfpThresholdAlarmWarnValue = _TrapSfpThresholdAlarmWarnValue_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 14, 2, 86),
+    _TrapSfpThresholdAlarmWarnValue_Type()
+)
+trapSfpThresholdAlarmWarnValue.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    trapSfpThresholdAlarmWarnValue.setStatus("current")
 _AlarmMgt_ObjectIdentity = ObjectIdentity
 alarmMgt = _AlarmMgt_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 14, 5)
@@ -15029,7 +15120,19 @@ class _UserAuthMethod_Type(Integer32):
               12,
               13,
               14,
-              15)
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27)
         )
     )
     namedValues = NamedValues(
@@ -15047,7 +15150,19 @@ class _UserAuthMethod_Type(Integer32):
           ("tacacslocal", 12),
           ("tacacslocalradius", 13),
           ("tacacsradius", 14),
-          ("tacacsradiuslocal", 15))
+          ("tacacsradiuslocal", 15),
+          ("localradiusfallback", 16),
+          ("localradiustacacsfallback", 17),
+          ("localtacacsfallback", 18),
+          ("localtacacsradiusfallback", 19),
+          ("radiuslocalfallback", 20),
+          ("radiuslocaltacacsfallback", 21),
+          ("radiustacacsfallback", 22),
+          ("radiustacacslocalfallback", 23),
+          ("tacacslocalfallback", 24),
+          ("tacacslocalradiusfallback", 25),
+          ("tacacsradiusfallback", 26),
+          ("tacacsradiuslocalfallback", 27))
     )
 
 
@@ -21397,6 +21512,96 @@ dhcpSnoopPortVlanFlooding = _DhcpSnoopPortVlanFlooding_Object(
 dhcpSnoopPortVlanFlooding.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dhcpSnoopPortVlanFlooding.setStatus("current")
+
+
+class _DhcpSnoopPortInformationOptionRID_Type(Integer32):
+    """Custom type dhcpSnoopPortInformationOptionRID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("macHex", 1),
+          ("macAscii", 2),
+          ("ipHex", 3),
+          ("ipAscii", 4),
+          ("string", 5),
+          ("tr101IP", 6),
+          ("tr101Sysname", 7),
+          ("plus-port-description", 8),
+          ("port-description", 9))
+    )
+
+
+_DhcpSnoopPortInformationOptionRID_Type.__name__ = "Integer32"
+_DhcpSnoopPortInformationOptionRID_Object = MibTableColumn
+dhcpSnoopPortInformationOptionRID = _DhcpSnoopPortInformationOptionRID_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 46, 3, 1, 1, 8),
+    _DhcpSnoopPortInformationOptionRID_Type()
+)
+dhcpSnoopPortInformationOptionRID.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dhcpSnoopPortInformationOptionRID.setStatus("current")
+_DhcpSnoopPortInformationOptionRIDString_Type = OctetString
+_DhcpSnoopPortInformationOptionRIDString_Object = MibTableColumn
+dhcpSnoopPortInformationOptionRIDString = _DhcpSnoopPortInformationOptionRIDString_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 46, 3, 1, 1, 9),
+    _DhcpSnoopPortInformationOptionRIDString_Type()
+)
+dhcpSnoopPortInformationOptionRIDString.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dhcpSnoopPortInformationOptionRIDString.setStatus("current")
+_DhcpSnoopPortInformationOptionRIDTr101VlanField_Type = EnabledStatus
+_DhcpSnoopPortInformationOptionRIDTr101VlanField_Object = MibTableColumn
+dhcpSnoopPortInformationOptionRIDTr101VlanField = _DhcpSnoopPortInformationOptionRIDTr101VlanField_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 46, 3, 1, 1, 10),
+    _DhcpSnoopPortInformationOptionRIDTr101VlanField_Type()
+)
+dhcpSnoopPortInformationOptionRIDTr101VlanField.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dhcpSnoopPortInformationOptionRIDTr101VlanField.setStatus("current")
+
+
+class _DhcpSnoopPortInformationPolicy_Type(Integer32):
+    """Custom type dhcpSnoopPortInformationPolicy based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("drop", 1),
+          ("keep", 2),
+          ("replace", 3))
+    )
+
+
+_DhcpSnoopPortInformationPolicy_Type.__name__ = "Integer32"
+_DhcpSnoopPortInformationPolicy_Object = MibTableColumn
+dhcpSnoopPortInformationPolicy = _DhcpSnoopPortInformationPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 46, 3, 1, 1, 11),
+    _DhcpSnoopPortInformationPolicy_Type()
+)
+dhcpSnoopPortInformationPolicy.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dhcpSnoopPortInformationPolicy.setStatus("current")
 _DhcpSnoopBindings_ObjectIdentity = ObjectIdentity
 dhcpSnoopBindings = _DhcpSnoopBindings_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 1, 46, 4)
@@ -28382,7 +28587,9 @@ sfpThresholdAlarmWarnTrap = NotificationType(
 )
 sfpThresholdAlarmWarnTrap.setObjects(
       *(("ECS4120-MIB", "trapSfpThresholdAlarmWarnIfIndex"),
-        ("ECS4120-MIB", "trapSfpThresholdAlarmWarnType"))
+        ("ECS4120-MIB", "trapSfpThresholdAlarmWarnType"),
+        ("ECS4120-MIB", "trapSfpThresholdAlarmWarnThreshold"),
+        ("ECS4120-MIB", "trapSfpThresholdAlarmWarnValue"))
 )
 if mibBuilder.loadTexts:
     sfpThresholdAlarmWarnTrap.setStatus(
@@ -28573,6 +28780,38 @@ erpsInstanceEastRingPortStateChangeTrap.setObjects(
 )
 if mibBuilder.loadTexts:
     erpsInstanceEastRingPortStateChangeTrap.setStatus(
+        "current"
+    )
+
+smartpairPrimaryPortTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 2, 1, 0, 287)
+)
+if mibBuilder.loadTexts:
+    smartpairPrimaryPortTrap.setStatus(
+        "current"
+    )
+
+smartpairBackupPortTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 2, 1, 0, 288)
+)
+if mibBuilder.loadTexts:
+    smartpairBackupPortTrap.setStatus(
+        "current"
+    )
+
+sfpRxlosInterruptDisableTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 2, 1, 0, 289)
+)
+if mibBuilder.loadTexts:
+    sfpRxlosInterruptDisableTrap.setStatus(
+        "current"
+    )
+
+sfpRxlosInterruptEnableTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 259, 10, 1, 45, 2, 1, 0, 290)
+)
+if mibBuilder.loadTexts:
+    sfpRxlosInterruptEnableTrap.setStatus(
         "current"
     )
 
@@ -28826,6 +29065,7 @@ mibBuilder.exportSymbols(
        "trunkCreation": trunkCreation,
        "trunkStatus": trunkStatus,
        "trunkResetConfiguration": trunkResetConfiguration,
+       "trunkBandwidth": trunkBandwidth,
        "trunkLinkDelayUp": trunkLinkDelayUp,
        "trunkLinkDelayDown": trunkLinkDelayDown,
        "trunkBalanceMode": trunkBalanceMode,
@@ -29074,6 +29314,8 @@ mibBuilder.exportSymbols(
        "dhcpcIfIndex": dhcpcIfIndex,
        "dhcpcIfVendorClassIdMode": dhcpcIfVendorClassIdMode,
        "dhcpcIfVendorClassId": dhcpcIfVendorClassId,
+       "dhcpcIfHostnameMode": dhcpcIfHostnameMode,
+       "dhcpcIfHostname": dhcpcIfHostname,
        "dhcpRelay": dhcpRelay,
        "dhcpRelayRestart": dhcpRelayRestart,
        "dhcpRelayServerInetAddrTable": dhcpRelayServerInetAddrTable,
@@ -29300,6 +29542,8 @@ mibBuilder.exportSymbols(
        "trapDhcpServerMacAddress": trapDhcpServerMacAddress,
        "trapMacNotifyAction": trapMacNotifyAction,
        "trapVarOwnerName": trapVarOwnerName,
+       "trapSfpThresholdAlarmWarnThreshold": trapSfpThresholdAlarmWarnThreshold,
+       "trapSfpThresholdAlarmWarnValue": trapSfpThresholdAlarmWarnValue,
        "alarmMgt": alarmMgt,
        "alarmMajorType": alarmMajorType,
        "alarmMajorStatus": alarmMajorStatus,
@@ -30162,6 +30406,10 @@ mibBuilder.exportSymbols(
        "dhcpSnoopPortInformationOptionCIDTr101VlanField": dhcpSnoopPortInformationOptionCIDTr101VlanField,
        "dhcpSnoopPortMaxNumber": dhcpSnoopPortMaxNumber,
        "dhcpSnoopPortVlanFlooding": dhcpSnoopPortVlanFlooding,
+       "dhcpSnoopPortInformationOptionRID": dhcpSnoopPortInformationOptionRID,
+       "dhcpSnoopPortInformationOptionRIDString": dhcpSnoopPortInformationOptionRIDString,
+       "dhcpSnoopPortInformationOptionRIDTr101VlanField": dhcpSnoopPortInformationOptionRIDTr101VlanField,
+       "dhcpSnoopPortInformationPolicy": dhcpSnoopPortInformationPolicy,
        "dhcpSnoopBindings": dhcpSnoopBindings,
        "dhcpSnoopBindingsTable": dhcpSnoopBindingsTable,
        "dhcpSnoopBindingsEntry": dhcpSnoopBindingsEntry,
@@ -30741,6 +30989,10 @@ mibBuilder.exportSymbols(
        "erpsInstanceNodeStateChangeTrap": erpsInstanceNodeStateChangeTrap,
        "erpsInstanceWestRingPortStateChangeTrap": erpsInstanceWestRingPortStateChangeTrap,
        "erpsInstanceEastRingPortStateChangeTrap": erpsInstanceEastRingPortStateChangeTrap,
+       "smartpairPrimaryPortTrap": smartpairPrimaryPortTrap,
+       "smartpairBackupPortTrap": smartpairBackupPortTrap,
+       "sfpRxlosInterruptDisableTrap": sfpRxlosInterruptDisableTrap,
+       "sfpRxlosInterruptEnableTrap": sfpRxlosInterruptEnableTrap,
        "ecs4120-28t": ecs4120_28t,
        "ecs4120-28p": ecs4120_28p,
        "ecs4120-28f": ecs4120_28f,

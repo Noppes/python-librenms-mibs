@@ -1,11 +1,16 @@
 {
-  "timestamp": "2025-10-02T12:11:54.013514",
+  "timestamp": "2026-05-29T09:40:57.115706",
   "stats": {
     "total": 4,
-    "compiled": 3,
-    "failed": 0,
+    "compiled": 2,
+    "failed": 1,
     "skipped": 1,
-    "errors": []
+    "errors": [
+      {
+        "mib": "NETGEAR-SWITCHING-MIB",
+        "error": "unprocessed"
+      }
+    ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

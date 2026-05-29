@@ -1,18 +1,14 @@
 {
-  "timestamp": "2025-10-02T11:18:40.979507",
+  "timestamp": "2026-05-29T09:18:55.528483",
   "stats": {
-    "total": 49,
-    "compiled": 21,
-    "failed": 22,
-    "skipped": 6,
+    "total": 50,
+    "compiled": 36,
+    "failed": 10,
+    "skipped": 4,
     "errors": [
       {
         "mib": "ARRIS-D5-ALARM-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-CHANNEL-MODE-LOG-MIB",
-        "error": "failed"
+        "error": "unprocessed"
       },
       {
         "mib": "ARRIS-D5-DTI-EXT-MIB",
@@ -20,58 +16,18 @@
       },
       {
         "mib": "ARRIS-D5-DVB-EIS-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-DVB-PSIG-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-ENT-CHASSIS-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-ENT-SENSOR-THRESH-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-IP-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-LICENSE-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-QAM-EXT-MIB",
-        "error": "failed"
+        "error": "unprocessed"
       },
       {
         "mib": "ARRIS-D5-QAM-MIB",
-        "error": "failed"
+        "error": "unprocessed"
       },
       {
         "mib": "ARRIS-D5-QAM-POST-MIB",
-        "error": "failed"
+        "error": "unprocessed"
       },
       {
         "mib": "ARRIS-D5-SLOT-EXT-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-SOFTWARE-MGR-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-TEST-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-VIDEO-ERM-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-VIDEO-IP-BUNDLE-MIB",
         "error": "failed"
       },
       {
@@ -80,14 +36,10 @@
       },
       {
         "mib": "ARRIS-D5-VIDEO-SESSION-MIB",
-        "error": "failed"
+        "error": "unprocessed"
       },
       {
-        "mib": "ARRIS-D5-VIDEO-VIF-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ARRIS-D5-WAN-POST-MIB",
+        "mib": "CADANT-CMTS-EQUIPMENT-MIB",
         "error": "failed"
       },
       {
@@ -96,5 +48,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

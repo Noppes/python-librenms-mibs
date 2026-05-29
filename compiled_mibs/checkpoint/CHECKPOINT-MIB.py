@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\checkpoint\CHECKPOINT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:16 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,8 @@ checkpoint = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     checkpoint.setRevisions(
-        ("2013-12-26 13:09",)
+        ("2021-01-31 00:00",
+         "2013-12-26 13:09")
     )
 
 
@@ -127,10 +125,6 @@ products = _Products_ObjectIdentity(
 _Fw_ObjectIdentity = ObjectIdentity
 fw = _Fw_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1)
-)
-_FwTrapPrefix_ObjectIdentity = ObjectIdentity
-fwTrapPrefix = _FwTrapPrefix_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 0)
 )
 
 
@@ -225,7 +219,7 @@ fwLogged = _FwLogged_Object(
 fwLogged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwLogged.setStatus("current")
-_FwMajor_Type = Integer32
+_FwMajor_Type = Gauge32
 _FwMajor_Object = MibScalar
 fwMajor = _FwMajor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 8),
@@ -234,7 +228,7 @@ fwMajor = _FwMajor_Object(
 fwMajor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwMajor.setStatus("current")
-_FwMinor_Type = Integer32
+_FwMinor_Type = Gauge32
 _FwMinor_Object = MibScalar
 fwMinor = _FwMinor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 9),
@@ -262,25 +256,6 @@ fwProduct = _FwProduct_Object(
 fwProduct.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwProduct.setStatus("current")
-
-
-class _FwEvent_Type(DisplayString):
-    """Custom type fwEvent based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwEvent_Type.__name__ = "DisplayString"
-_FwEvent_Object = MibScalar
-fwEvent = _FwEvent_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 11),
-    _FwEvent_Type()
-)
-fwEvent.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    fwEvent.setStatus("current")
 _FwSICTrustState_Type = Unsigned32
 _FwSICTrustState_Object = MibScalar
 fwSICTrustState = _FwSICTrustState_Object(
@@ -309,7 +284,7 @@ fwProdName = _FwProdName_Object(
 fwProdName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwProdName.setStatus("current")
-_FwVerMajor_Type = Integer32
+_FwVerMajor_Type = Gauge32
 _FwVerMajor_Object = MibScalar
 fwVerMajor = _FwVerMajor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 22),
@@ -318,7 +293,7 @@ fwVerMajor = _FwVerMajor_Object(
 fwVerMajor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwVerMajor.setStatus("current")
-_FwVerMinor_Type = Integer32
+_FwVerMinor_Type = Gauge32
 _FwVerMinor_Object = MibScalar
 fwVerMinor = _FwVerMinor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 23),
@@ -417,7 +392,7 @@ fwIfIndex = _FwIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 5, 1, 1),
     _FwIfIndex_Type()
 )
-fwIfIndex.setMaxAccess("read-only")
+fwIfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     fwIfIndex.setStatus("current")
 _FwIfName_Type = DisplayString
@@ -519,17 +494,7 @@ fwLogOut = _FwLogOut_Object(
 fwLogOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwLogOut.setStatus("current")
-
-
-class _FwAcceptedTotal_Type(DisplayString):
-    """Custom type fwAcceptedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptedTotal_Type.__name__ = "DisplayString"
+_FwAcceptedTotal_Type = Counter64
 _FwAcceptedTotal_Object = MibScalar
 fwAcceptedTotal = _FwAcceptedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 6),
@@ -538,17 +503,67 @@ fwAcceptedTotal = _FwAcceptedTotal_Object(
 fwAcceptedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptedTotal.setStatus("current")
-
-
-class _FwAcceptedBytesTotal_Type(DisplayString):
-    """Custom type fwAcceptedBytesTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptedBytesTotal_Type.__name__ = "DisplayString"
+_FwIspTable_Object = MibTable
+fwIspTable = _FwIspTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7)
+)
+if mibBuilder.loadTexts:
+    fwIspTable.setStatus("current")
+_FwIspEntry_Object = MibTableRow
+fwIspEntry = _FwIspEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7, 1)
+)
+fwIspEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwIspIndex"),
+)
+if mibBuilder.loadTexts:
+    fwIspEntry.setStatus("current")
+_FwIspIndex_Type = Unsigned32
+_FwIspIndex_Object = MibTableColumn
+fwIspIndex = _FwIspIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7, 1, 1),
+    _FwIspIndex_Type()
+)
+fwIspIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwIspIndex.setStatus("current")
+_FwIspName_Type = DisplayString
+_FwIspName_Object = MibTableColumn
+fwIspName = _FwIspName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7, 1, 2),
+    _FwIspName_Type()
+)
+fwIspName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIspName.setStatus("current")
+_FwIspStatus_Type = DisplayString
+_FwIspStatus_Object = MibTableColumn
+fwIspStatus = _FwIspStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7, 1, 3),
+    _FwIspStatus_Type()
+)
+fwIspStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIspStatus.setStatus("current")
+_FwIspRole_Type = DisplayString
+_FwIspRole_Object = MibTableColumn
+fwIspRole = _FwIspRole_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7, 1, 4),
+    _FwIspRole_Type()
+)
+fwIspRole.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIspRole.setStatus("current")
+_Unknown_Type = Unsigned32
+_Unknown_Object = MibTableColumn
+unknown = _Unknown_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 7, 1, 5),
+    _Unknown_Type()
+)
+unknown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    unknown.setStatus("current")
+_FwAcceptedBytesTotal_Type = Counter64
 _FwAcceptedBytesTotal_Object = MibScalar
 fwAcceptedBytesTotal = _FwAcceptedBytesTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 8),
@@ -557,17 +572,7 @@ fwAcceptedBytesTotal = _FwAcceptedBytesTotal_Object(
 fwAcceptedBytesTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptedBytesTotal.setStatus("current")
-
-
-class _FwDroppedBytesTotal_Type(DisplayString):
-    """Custom type fwDroppedBytesTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwDroppedBytesTotal_Type.__name__ = "DisplayString"
+_FwDroppedBytesTotal_Type = Counter64
 _FwDroppedBytesTotal_Object = MibScalar
 fwDroppedBytesTotal = _FwDroppedBytesTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 9),
@@ -585,17 +590,7 @@ fwConnTableLimit = _FwConnTableLimit_Object(
 fwConnTableLimit.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwConnTableLimit.setStatus("current")
-
-
-class _FwLoggedTotal_Type(DisplayString):
-    """Custom type fwLoggedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwLoggedTotal_Type.__name__ = "DisplayString"
+_FwLoggedTotal_Type = Counter64
 _FwLoggedTotal_Object = MibScalar
 fwLoggedTotal = _FwLoggedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 13),
@@ -604,17 +599,7 @@ fwLoggedTotal = _FwLoggedTotal_Object(
 fwLoggedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwLoggedTotal.setStatus("current")
-
-
-class _FwRejectedTotal_Type(DisplayString):
-    """Custom type fwRejectedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwRejectedTotal_Type.__name__ = "DisplayString"
+_FwRejectedTotal_Type = Counter64
 _FwRejectedTotal_Object = MibScalar
 fwRejectedTotal = _FwRejectedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 14),
@@ -623,17 +608,7 @@ fwRejectedTotal = _FwRejectedTotal_Object(
 fwRejectedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwRejectedTotal.setStatus("current")
-
-
-class _FwRejectedBytesTotal_Type(DisplayString):
-    """Custom type fwRejectedBytesTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwRejectedBytesTotal_Type.__name__ = "DisplayString"
+_FwRejectedBytesTotal_Type = Counter64
 _FwRejectedBytesTotal_Object = MibScalar
 fwRejectedBytesTotal = _FwRejectedBytesTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 15),
@@ -642,17 +617,7 @@ fwRejectedBytesTotal = _FwRejectedBytesTotal_Object(
 fwRejectedBytesTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwRejectedBytesTotal.setStatus("current")
-
-
-class _FwDroppedTotal_Type(DisplayString):
-    """Custom type fwDroppedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwDroppedTotal_Type.__name__ = "DisplayString"
+_FwDroppedTotal_Type = Counter64
 _FwDroppedTotal_Object = MibScalar
 fwDroppedTotal = _FwDroppedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 16),
@@ -661,17 +626,7 @@ fwDroppedTotal = _FwDroppedTotal_Object(
 fwDroppedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwDroppedTotal.setStatus("current")
-
-
-class _FwAcceptedBytesRates_Type(DisplayString):
-    """Custom type fwAcceptedBytesRates based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptedBytesRates_Type.__name__ = "DisplayString"
+_FwAcceptedBytesRates_Type = Counter64
 _FwAcceptedBytesRates_Object = MibScalar
 fwAcceptedBytesRates = _FwAcceptedBytesRates_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 20),
@@ -680,17 +635,7 @@ fwAcceptedBytesRates = _FwAcceptedBytesRates_Object(
 fwAcceptedBytesRates.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptedBytesRates.setStatus("current")
-
-
-class _FwAcceptedPcktsRates_Type(DisplayString):
-    """Custom type fwAcceptedPcktsRates based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptedPcktsRates_Type.__name__ = "DisplayString"
+_FwAcceptedPcktsRates_Type = Counter64
 _FwAcceptedPcktsRates_Object = MibScalar
 fwAcceptedPcktsRates = _FwAcceptedPcktsRates_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 21),
@@ -699,17 +644,7 @@ fwAcceptedPcktsRates = _FwAcceptedPcktsRates_Object(
 fwAcceptedPcktsRates.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptedPcktsRates.setStatus("current")
-
-
-class _FwConnsRate_Type(DisplayString):
-    """Custom type fwConnsRate based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwConnsRate_Type.__name__ = "DisplayString"
+_FwConnsRate_Type = Integer32
 _FwConnsRate_Object = MibScalar
 fwConnsRate = _FwConnsRate_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 22),
@@ -718,28 +653,28 @@ fwConnsRate = _FwConnsRate_Object(
 fwConnsRate.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwConnsRate.setStatus("current")
-_FwIfTable64_Object = MibTable
-fwIfTable64 = _FwIfTable64_Object(
+_FwIf64Table_Object = MibTable
+fwIf64Table = _FwIf64Table_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25)
 )
 if mibBuilder.loadTexts:
-    fwIfTable64.setStatus("current")
-_FwIfEntry64_Object = MibTableRow
-fwIfEntry64 = _FwIfEntry64_Object(
+    fwIf64Table.setStatus("current")
+_FwIf64Entry_Object = MibTableRow
+fwIf64Entry = _FwIf64Entry_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1)
 )
-fwIfEntry64.setIndexNames(
+fwIf64Entry.setIndexNames(
     (0, "CHECKPOINT-MIB", "fwIfIndex64"),
 )
 if mibBuilder.loadTexts:
-    fwIfEntry64.setStatus("current")
+    fwIf64Entry.setStatus("current")
 _FwIfIndex64_Type = Unsigned32
 _FwIfIndex64_Object = MibTableColumn
 fwIfIndex64 = _FwIfIndex64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 1),
     _FwIfIndex64_Type()
 )
-fwIfIndex64.setMaxAccess("read-only")
+fwIfIndex64.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     fwIfIndex64.setStatus("current")
 _FwIfName64_Type = DisplayString
@@ -751,17 +686,7 @@ fwIfName64 = _FwIfName64_Object(
 fwIfName64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwIfName64.setStatus("current")
-
-
-class _FwAcceptPcktsIn64_Type(DisplayString):
-    """Custom type fwAcceptPcktsIn64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptPcktsIn64_Type.__name__ = "DisplayString"
+_FwAcceptPcktsIn64_Type = Counter64
 _FwAcceptPcktsIn64_Object = MibTableColumn
 fwAcceptPcktsIn64 = _FwAcceptPcktsIn64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 5),
@@ -770,17 +695,7 @@ fwAcceptPcktsIn64 = _FwAcceptPcktsIn64_Object(
 fwAcceptPcktsIn64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptPcktsIn64.setStatus("current")
-
-
-class _FwAcceptPcktsOut64_Type(DisplayString):
-    """Custom type fwAcceptPcktsOut64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptPcktsOut64_Type.__name__ = "DisplayString"
+_FwAcceptPcktsOut64_Type = Counter64
 _FwAcceptPcktsOut64_Object = MibTableColumn
 fwAcceptPcktsOut64 = _FwAcceptPcktsOut64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 6),
@@ -789,17 +704,7 @@ fwAcceptPcktsOut64 = _FwAcceptPcktsOut64_Object(
 fwAcceptPcktsOut64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptPcktsOut64.setStatus("current")
-
-
-class _FwAcceptBytesIn64_Type(DisplayString):
-    """Custom type fwAcceptBytesIn64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptBytesIn64_Type.__name__ = "DisplayString"
+_FwAcceptBytesIn64_Type = Counter64
 _FwAcceptBytesIn64_Object = MibTableColumn
 fwAcceptBytesIn64 = _FwAcceptBytesIn64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 7),
@@ -808,17 +713,7 @@ fwAcceptBytesIn64 = _FwAcceptBytesIn64_Object(
 fwAcceptBytesIn64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptBytesIn64.setStatus("current")
-
-
-class _FwAcceptBytesOut64_Type(DisplayString):
-    """Custom type fwAcceptBytesOut64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwAcceptBytesOut64_Type.__name__ = "DisplayString"
+_FwAcceptBytesOut64_Type = Counter64
 _FwAcceptBytesOut64_Object = MibTableColumn
 fwAcceptBytesOut64 = _FwAcceptBytesOut64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 8),
@@ -827,17 +722,7 @@ fwAcceptBytesOut64 = _FwAcceptBytesOut64_Object(
 fwAcceptBytesOut64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwAcceptBytesOut64.setStatus("current")
-
-
-class _FwDropPcktsIn64_Type(DisplayString):
-    """Custom type fwDropPcktsIn64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwDropPcktsIn64_Type.__name__ = "DisplayString"
+_FwDropPcktsIn64_Type = Counter64
 _FwDropPcktsIn64_Object = MibTableColumn
 fwDropPcktsIn64 = _FwDropPcktsIn64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 9),
@@ -846,17 +731,7 @@ fwDropPcktsIn64 = _FwDropPcktsIn64_Object(
 fwDropPcktsIn64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwDropPcktsIn64.setStatus("current")
-
-
-class _FwDropPcktsOut64_Type(DisplayString):
-    """Custom type fwDropPcktsOut64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwDropPcktsOut64_Type.__name__ = "DisplayString"
+_FwDropPcktsOut64_Type = Counter64
 _FwDropPcktsOut64_Object = MibTableColumn
 fwDropPcktsOut64 = _FwDropPcktsOut64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 10),
@@ -865,17 +740,7 @@ fwDropPcktsOut64 = _FwDropPcktsOut64_Object(
 fwDropPcktsOut64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwDropPcktsOut64.setStatus("current")
-
-
-class _FwRejectPcktsIn64_Type(DisplayString):
-    """Custom type fwRejectPcktsIn64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwRejectPcktsIn64_Type.__name__ = "DisplayString"
+_FwRejectPcktsIn64_Type = Counter64
 _FwRejectPcktsIn64_Object = MibTableColumn
 fwRejectPcktsIn64 = _FwRejectPcktsIn64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 11),
@@ -884,17 +749,7 @@ fwRejectPcktsIn64 = _FwRejectPcktsIn64_Object(
 fwRejectPcktsIn64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwRejectPcktsIn64.setStatus("current")
-
-
-class _FwRejectPcktsOut64_Type(DisplayString):
-    """Custom type fwRejectPcktsOut64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwRejectPcktsOut64_Type.__name__ = "DisplayString"
+_FwRejectPcktsOut64_Type = Counter64
 _FwRejectPcktsOut64_Object = MibTableColumn
 fwRejectPcktsOut64 = _FwRejectPcktsOut64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 12),
@@ -903,17 +758,7 @@ fwRejectPcktsOut64 = _FwRejectPcktsOut64_Object(
 fwRejectPcktsOut64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwRejectPcktsOut64.setStatus("current")
-
-
-class _FwLogIn64_Type(DisplayString):
-    """Custom type fwLogIn64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwLogIn64_Type.__name__ = "DisplayString"
+_FwLogIn64_Type = Counter64
 _FwLogIn64_Object = MibTableColumn
 fwLogIn64 = _FwLogIn64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 13),
@@ -922,17 +767,7 @@ fwLogIn64 = _FwLogIn64_Object(
 fwLogIn64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwLogIn64.setStatus("current")
-
-
-class _FwLogOut64_Type(DisplayString):
-    """Custom type fwLogOut64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_FwLogOut64_Type.__name__ = "DisplayString"
+_FwLogOut64_Type = Counter64
 _FwLogOut64_Object = MibTableColumn
 fwLogOut64 = _FwLogOut64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 25, 1, 14),
@@ -941,6 +776,15 @@ fwLogOut64 = _FwLogOut64_Object(
 fwLogOut64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwLogOut64.setStatus("current")
+_FwFullyUtilizedDrops_Type = Counter64
+_FwFullyUtilizedDrops_Object = MibScalar
+fwFullyUtilizedDrops = _FwFullyUtilizedDrops_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 25, 26),
+    _FwFullyUtilizedDrops_Type()
+)
+fwFullyUtilizedDrops.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwFullyUtilizedDrops.setStatus("current")
 _FwPerfStat_ObjectIdentity = ObjectIdentity
 fwPerfStat = _FwPerfStat_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26)
@@ -1521,7 +1365,7 @@ fwSS_http_proto = _FwSS_http_proto_Object(
 fwSS_http_proto.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_http_proto.setStatus("current")
-_FwSS_http_port_Type = Integer32
+_FwSS_http_port_Type = Gauge32
 _FwSS_http_port_Object = MibScalar
 fwSS_http_port = _FwSS_http_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 1, 3),
@@ -1530,7 +1374,7 @@ fwSS_http_port = _FwSS_http_port_Object(
 fwSS_http_port.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_http_port.setStatus("current")
-_FwSS_http_logical_port_Type = Integer32
+_FwSS_http_logical_port_Type = Gauge32
 _FwSS_http_logical_port_Object = MibScalar
 fwSS_http_logical_port = _FwSS_http_logical_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 1, 4),
@@ -2048,7 +1892,7 @@ fwSS_ftp_proto = _FwSS_ftp_proto_Object(
 fwSS_ftp_proto.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_ftp_proto.setStatus("current")
-_FwSS_ftp_port_Type = Integer32
+_FwSS_ftp_port_Type = Gauge32
 _FwSS_ftp_port_Object = MibScalar
 fwSS_ftp_port = _FwSS_ftp_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 2, 3),
@@ -2057,7 +1901,7 @@ fwSS_ftp_port = _FwSS_ftp_port_Object(
 fwSS_ftp_port.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_ftp_port.setStatus("current")
-_FwSS_ftp_logical_port_Type = Integer32
+_FwSS_ftp_logical_port_Type = Gauge32
 _FwSS_ftp_logical_port_Object = MibScalar
 fwSS_ftp_logical_port = _FwSS_ftp_logical_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 2, 4),
@@ -2404,7 +2248,7 @@ fwSS_telnet_proto = _FwSS_telnet_proto_Object(
 fwSS_telnet_proto.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_telnet_proto.setStatus("current")
-_FwSS_telnet_port_Type = Integer32
+_FwSS_telnet_port_Type = Gauge32
 _FwSS_telnet_port_Object = MibScalar
 fwSS_telnet_port = _FwSS_telnet_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 3, 3),
@@ -2413,7 +2257,7 @@ fwSS_telnet_port = _FwSS_telnet_port_Object(
 fwSS_telnet_port.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_telnet_port.setStatus("current")
-_FwSS_telnet_logical_port_Type = Integer32
+_FwSS_telnet_logical_port_Type = Gauge32
 _FwSS_telnet_logical_port_Object = MibScalar
 fwSS_telnet_logical_port = _FwSS_telnet_logical_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 3, 4),
@@ -2589,7 +2433,7 @@ fwSS_rlogin_proto = _FwSS_rlogin_proto_Object(
 fwSS_rlogin_proto.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_rlogin_proto.setStatus("current")
-_FwSS_rlogin_port_Type = Integer32
+_FwSS_rlogin_port_Type = Gauge32
 _FwSS_rlogin_port_Object = MibScalar
 fwSS_rlogin_port = _FwSS_rlogin_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 4, 3),
@@ -2598,7 +2442,7 @@ fwSS_rlogin_port = _FwSS_rlogin_port_Object(
 fwSS_rlogin_port.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_rlogin_port.setStatus("current")
-_FwSS_rlogin_logical_port_Type = Integer32
+_FwSS_rlogin_logical_port_Type = Gauge32
 _FwSS_rlogin_logical_port_Object = MibScalar
 fwSS_rlogin_logical_port = _FwSS_rlogin_logical_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 4, 4),
@@ -2842,7 +2686,7 @@ fwSS_smtp_proto = _FwSS_smtp_proto_Object(
 fwSS_smtp_proto.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_smtp_proto.setStatus("current")
-_FwSS_smtp_port_Type = Integer32
+_FwSS_smtp_port_Type = Gauge32
 _FwSS_smtp_port_Object = MibScalar
 fwSS_smtp_port = _FwSS_smtp_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 6, 3),
@@ -2851,7 +2695,7 @@ fwSS_smtp_port = _FwSS_smtp_port_Object(
 fwSS_smtp_port.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_smtp_port.setStatus("current")
-_FwSS_smtp_logical_port_Type = Integer32
+_FwSS_smtp_logical_port_Type = Gauge32
 _FwSS_smtp_logical_port_Object = MibScalar
 fwSS_smtp_logical_port = _FwSS_smtp_logical_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 6, 4),
@@ -3234,7 +3078,7 @@ fwSS_POP3_proto = _FwSS_POP3_proto_Object(
 fwSS_POP3_proto.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_POP3_proto.setStatus("current")
-_FwSS_POP3_port_Type = Integer32
+_FwSS_POP3_port_Type = Gauge32
 _FwSS_POP3_port_Object = MibScalar
 fwSS_POP3_port = _FwSS_POP3_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 7, 3),
@@ -3243,7 +3087,7 @@ fwSS_POP3_port = _FwSS_POP3_port_Object(
 fwSS_POP3_port.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSS_POP3_port.setStatus("current")
-_FwSS_POP3_logical_port_Type = Integer32
+_FwSS_POP3_logical_port_Type = Gauge32
 _FwSS_POP3_logical_port_Object = MibScalar
 fwSS_POP3_logical_port = _FwSS_POP3_logical_port_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 9, 7, 4),
@@ -3805,7 +3649,7 @@ _FwHmem64_ObjectIdentity = ObjectIdentity
 fwHmem64 = _FwHmem64_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12)
 )
-_FwHmem64_block_size_Type = DisplayString
+_FwHmem64_block_size_Type = Counter64
 _FwHmem64_block_size_Object = MibScalar
 fwHmem64_block_size = _FwHmem64_block_size_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 1),
@@ -3814,7 +3658,7 @@ fwHmem64_block_size = _FwHmem64_block_size_Object(
 fwHmem64_block_size.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_block_size.setStatus("current")
-_FwHmem64_requested_bytes_Type = DisplayString
+_FwHmem64_requested_bytes_Type = Counter64
 _FwHmem64_requested_bytes_Object = MibScalar
 fwHmem64_requested_bytes = _FwHmem64_requested_bytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 2),
@@ -3823,7 +3667,7 @@ fwHmem64_requested_bytes = _FwHmem64_requested_bytes_Object(
 fwHmem64_requested_bytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_requested_bytes.setStatus("current")
-_FwHmem64_initial_allocated_bytes_Type = DisplayString
+_FwHmem64_initial_allocated_bytes_Type = Counter64
 _FwHmem64_initial_allocated_bytes_Object = MibScalar
 fwHmem64_initial_allocated_bytes = _FwHmem64_initial_allocated_bytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 3),
@@ -3850,7 +3694,7 @@ fwHmem64_initial_allocated_pools = _FwHmem64_initial_allocated_pools_Object(
 fwHmem64_initial_allocated_pools.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_initial_allocated_pools.setStatus("current")
-_FwHmem64_current_allocated_bytes_Type = DisplayString
+_FwHmem64_current_allocated_bytes_Type = Counter64
 _FwHmem64_current_allocated_bytes_Object = MibScalar
 fwHmem64_current_allocated_bytes = _FwHmem64_current_allocated_bytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 6),
@@ -3877,7 +3721,7 @@ fwHmem64_current_allocated_pools = _FwHmem64_current_allocated_pools_Object(
 fwHmem64_current_allocated_pools.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_current_allocated_pools.setStatus("current")
-_FwHmem64_maximum_bytes_Type = DisplayString
+_FwHmem64_maximum_bytes_Type = Counter64
 _FwHmem64_maximum_bytes_Object = MibScalar
 fwHmem64_maximum_bytes = _FwHmem64_maximum_bytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 9),
@@ -3895,7 +3739,7 @@ fwHmem64_maximum_pools = _FwHmem64_maximum_pools_Object(
 fwHmem64_maximum_pools.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_maximum_pools.setStatus("current")
-_FwHmem64_bytes_used_Type = DisplayString
+_FwHmem64_bytes_used_Type = Counter64
 _FwHmem64_bytes_used_Object = MibScalar
 fwHmem64_bytes_used = _FwHmem64_bytes_used_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 11),
@@ -3913,7 +3757,7 @@ fwHmem64_blocks_used = _FwHmem64_blocks_used_Object(
 fwHmem64_blocks_used.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_blocks_used.setStatus("current")
-_FwHmem64_bytes_unused_Type = DisplayString
+_FwHmem64_bytes_unused_Type = Counter64
 _FwHmem64_bytes_unused_Object = MibScalar
 fwHmem64_bytes_unused = _FwHmem64_bytes_unused_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 13),
@@ -3931,7 +3775,7 @@ fwHmem64_blocks_unused = _FwHmem64_blocks_unused_Object(
 fwHmem64_blocks_unused.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_blocks_unused.setStatus("current")
-_FwHmem64_bytes_peak_Type = DisplayString
+_FwHmem64_bytes_peak_Type = Counter64
 _FwHmem64_bytes_peak_Object = MibScalar
 fwHmem64_bytes_peak = _FwHmem64_bytes_peak_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 15),
@@ -3958,7 +3802,7 @@ fwHmem64_bytes_internal_use = _FwHmem64_bytes_internal_use_Object(
 fwHmem64_bytes_internal_use.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwHmem64_bytes_internal_use.setStatus("current")
-_FwHmem64_number_of_items_Type = DisplayString
+_FwHmem64_number_of_items_Type = Counter64
 _FwHmem64_number_of_items_Object = MibScalar
 fwHmem64_number_of_items = _FwHmem64_number_of_items_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 26, 12, 18),
@@ -4024,7 +3868,7 @@ fwNetIfIndex = _FwNetIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 27, 1, 1),
     _FwNetIfIndex_Type()
 )
-fwNetIfIndex.setMaxAccess("read-only")
+fwNetIfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     fwNetIfIndex.setStatus("current")
 _FwNetIfName_Type = DisplayString
@@ -4178,7 +4022,7 @@ fwLSConnIndex = _FwLSConnIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 1, 30, 3, 1, 1),
     _FwLSConnIndex_Type()
 )
-fwLSConnIndex.setMaxAccess("read-only")
+fwLSConnIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     fwLSConnIndex.setStatus("current")
 _FwLSConnName_Type = DisplayString
@@ -4253,6 +4097,52 @@ fwLoggingHandlingRate = _FwLoggingHandlingRate_Object(
 fwLoggingHandlingRate.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwLoggingHandlingRate.setStatus("current")
+_FwInstancesCPU_ObjectIdentity = ObjectIdentity
+fwInstancesCPU = _FwInstancesCPU_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 31)
+)
+_FwInstancesCPUTable_Object = MibTable
+fwInstancesCPUTable = _FwInstancesCPUTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 31, 1)
+)
+if mibBuilder.loadTexts:
+    fwInstancesCPUTable.setStatus("current")
+_FwInstancesCPUEntry_Object = MibTableRow
+fwInstancesCPUEntry = _FwInstancesCPUEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 31, 1, 1)
+)
+fwInstancesCPUEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwInstancesCPUInstanceName"),
+)
+if mibBuilder.loadTexts:
+    fwInstancesCPUEntry.setStatus("current")
+_FwInstancesCPUInstanceName_Type = DisplayString
+_FwInstancesCPUInstanceName_Object = MibTableColumn
+fwInstancesCPUInstanceName = _FwInstancesCPUInstanceName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 31, 1, 1, 1),
+    _FwInstancesCPUInstanceName_Type()
+)
+fwInstancesCPUInstanceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwInstancesCPUInstanceName.setStatus("current")
+_FwInstancesCPUUsage_Type = Unsigned32
+_FwInstancesCPUUsage_Object = MibTableColumn
+fwInstancesCPUUsage = _FwInstancesCPUUsage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 31, 1, 1, 2),
+    _FwInstancesCPUUsage_Type()
+)
+fwInstancesCPUUsage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwInstancesCPUUsage.setStatus("current")
+_FwInstancesCPUTotal_Type = Unsigned32
+_FwInstancesCPUTotal_Object = MibScalar
+fwInstancesCPUTotal = _FwInstancesCPUTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 31, 2),
+    _FwInstancesCPUTotal_Type()
+)
+fwInstancesCPUTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwInstancesCPUTotal.setStatus("current")
 _Vpn_ObjectIdentity = ObjectIdentity
 vpn = _Vpn_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2)
@@ -4276,7 +4166,7 @@ cpvProdName = _CpvProdName_Object(
 cpvProdName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvProdName.setStatus("current")
-_CpvVerMajor_Type = Integer32
+_CpvVerMajor_Type = Gauge32
 _CpvVerMajor_Object = MibScalar
 cpvVerMajor = _CpvVerMajor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 2),
@@ -4285,7 +4175,7 @@ cpvVerMajor = _CpvVerMajor_Object(
 cpvVerMajor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvVerMajor.setStatus("current")
-_CpvVerMinor_Type = Integer32
+_CpvVerMinor_Type = Gauge32
 _CpvVerMinor_Object = MibScalar
 cpvVerMinor = _CpvVerMinor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 3),
@@ -4302,7 +4192,7 @@ _CpvStatistics_ObjectIdentity = ObjectIdentity
 cpvStatistics = _CpvStatistics_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 1)
 )
-_CpvEncPackets_Type = DisplayString
+_CpvEncPackets_Type = Counter64
 _CpvEncPackets_Object = MibScalar
 cpvEncPackets = _CpvEncPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 1, 1),
@@ -4311,7 +4201,7 @@ cpvEncPackets = _CpvEncPackets_Object(
 cpvEncPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvEncPackets.setStatus("current")
-_CpvDecPackets_Type = DisplayString
+_CpvDecPackets_Type = Counter64
 _CpvDecPackets_Object = MibScalar
 cpvDecPackets = _CpvDecPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 1, 2),
@@ -4324,7 +4214,7 @@ _CpvErrors_ObjectIdentity = ObjectIdentity
 cpvErrors = _CpvErrors_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 2)
 )
-_CpvErrOut_Type = DisplayString
+_CpvErrOut_Type = Counter64
 _CpvErrOut_Object = MibScalar
 cpvErrOut = _CpvErrOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 2, 1),
@@ -4333,7 +4223,7 @@ cpvErrOut = _CpvErrOut_Object(
 cpvErrOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvErrOut.setStatus("current")
-_CpvErrIn_Type = DisplayString
+_CpvErrIn_Type = Counter64
 _CpvErrIn_Object = MibScalar
 cpvErrIn = _CpvErrIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 2, 2),
@@ -4342,7 +4232,7 @@ cpvErrIn = _CpvErrIn_Object(
 cpvErrIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvErrIn.setStatus("current")
-_CpvErrIke_Type = DisplayString
+_CpvErrIke_Type = Counter64
 _CpvErrIke_Object = MibScalar
 cpvErrIke = _CpvErrIke_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 2, 3),
@@ -4351,7 +4241,7 @@ cpvErrIke = _CpvErrIke_Object(
 cpvErrIke.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvErrIke.setStatus("current")
-_CpvErrPolicy_Type = DisplayString
+_CpvErrPolicy_Type = Counter64
 _CpvErrPolicy_Object = MibScalar
 cpvErrPolicy = _CpvErrPolicy_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 4, 2, 4),
@@ -4368,7 +4258,7 @@ _CpvSaStatistics_ObjectIdentity = ObjectIdentity
 cpvSaStatistics = _CpvSaStatistics_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2)
 )
-_CpvCurrEspSAsIn_Type = DisplayString
+_CpvCurrEspSAsIn_Type = Counter64
 _CpvCurrEspSAsIn_Object = MibScalar
 cpvCurrEspSAsIn = _CpvCurrEspSAsIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 1),
@@ -4377,7 +4267,7 @@ cpvCurrEspSAsIn = _CpvCurrEspSAsIn_Object(
 cpvCurrEspSAsIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvCurrEspSAsIn.setStatus("current")
-_CpvTotalEspSAsIn_Type = DisplayString
+_CpvTotalEspSAsIn_Type = Counter64
 _CpvTotalEspSAsIn_Object = MibScalar
 cpvTotalEspSAsIn = _CpvTotalEspSAsIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 2),
@@ -4386,7 +4276,7 @@ cpvTotalEspSAsIn = _CpvTotalEspSAsIn_Object(
 cpvTotalEspSAsIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvTotalEspSAsIn.setStatus("current")
-_CpvCurrEspSAsOut_Type = DisplayString
+_CpvCurrEspSAsOut_Type = Counter64
 _CpvCurrEspSAsOut_Object = MibScalar
 cpvCurrEspSAsOut = _CpvCurrEspSAsOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 3),
@@ -4395,7 +4285,7 @@ cpvCurrEspSAsOut = _CpvCurrEspSAsOut_Object(
 cpvCurrEspSAsOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvCurrEspSAsOut.setStatus("current")
-_CpvTotalEspSAsOut_Type = DisplayString
+_CpvTotalEspSAsOut_Type = Counter64
 _CpvTotalEspSAsOut_Object = MibScalar
 cpvTotalEspSAsOut = _CpvTotalEspSAsOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 4),
@@ -4404,7 +4294,7 @@ cpvTotalEspSAsOut = _CpvTotalEspSAsOut_Object(
 cpvTotalEspSAsOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvTotalEspSAsOut.setStatus("current")
-_CpvCurrAhSAsIn_Type = DisplayString
+_CpvCurrAhSAsIn_Type = Counter64
 _CpvCurrAhSAsIn_Object = MibScalar
 cpvCurrAhSAsIn = _CpvCurrAhSAsIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 5),
@@ -4413,7 +4303,7 @@ cpvCurrAhSAsIn = _CpvCurrAhSAsIn_Object(
 cpvCurrAhSAsIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvCurrAhSAsIn.setStatus("current")
-_CpvTotalAhSAsIn_Type = DisplayString
+_CpvTotalAhSAsIn_Type = Counter64
 _CpvTotalAhSAsIn_Object = MibScalar
 cpvTotalAhSAsIn = _CpvTotalAhSAsIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 6),
@@ -4422,7 +4312,7 @@ cpvTotalAhSAsIn = _CpvTotalAhSAsIn_Object(
 cpvTotalAhSAsIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvTotalAhSAsIn.setStatus("current")
-_CpvCurrAhSAsOut_Type = DisplayString
+_CpvCurrAhSAsOut_Type = Counter64
 _CpvCurrAhSAsOut_Object = MibScalar
 cpvCurrAhSAsOut = _CpvCurrAhSAsOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 7),
@@ -4431,7 +4321,7 @@ cpvCurrAhSAsOut = _CpvCurrAhSAsOut_Object(
 cpvCurrAhSAsOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvCurrAhSAsOut.setStatus("current")
-_CpvTotalAhSAsOut_Type = DisplayString
+_CpvTotalAhSAsOut_Type = Counter64
 _CpvTotalAhSAsOut_Object = MibScalar
 cpvTotalAhSAsOut = _CpvTotalAhSAsOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 8),
@@ -4440,7 +4330,7 @@ cpvTotalAhSAsOut = _CpvTotalAhSAsOut_Object(
 cpvTotalAhSAsOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvTotalAhSAsOut.setStatus("current")
-_CpvMaxConncurEspSAsIn_Type = DisplayString
+_CpvMaxConncurEspSAsIn_Type = Counter64
 _CpvMaxConncurEspSAsIn_Object = MibScalar
 cpvMaxConncurEspSAsIn = _CpvMaxConncurEspSAsIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 9),
@@ -4449,7 +4339,7 @@ cpvMaxConncurEspSAsIn = _CpvMaxConncurEspSAsIn_Object(
 cpvMaxConncurEspSAsIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvMaxConncurEspSAsIn.setStatus("current")
-_CpvMaxConncurEspSAsOut_Type = DisplayString
+_CpvMaxConncurEspSAsOut_Type = Counter64
 _CpvMaxConncurEspSAsOut_Object = MibScalar
 cpvMaxConncurEspSAsOut = _CpvMaxConncurEspSAsOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 10),
@@ -4458,7 +4348,7 @@ cpvMaxConncurEspSAsOut = _CpvMaxConncurEspSAsOut_Object(
 cpvMaxConncurEspSAsOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvMaxConncurEspSAsOut.setStatus("current")
-_CpvMaxConncurAhSAsIn_Type = DisplayString
+_CpvMaxConncurAhSAsIn_Type = Counter64
 _CpvMaxConncurAhSAsIn_Object = MibScalar
 cpvMaxConncurAhSAsIn = _CpvMaxConncurAhSAsIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 11),
@@ -4467,7 +4357,7 @@ cpvMaxConncurAhSAsIn = _CpvMaxConncurAhSAsIn_Object(
 cpvMaxConncurAhSAsIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvMaxConncurAhSAsIn.setStatus("current")
-_CpvMaxConncurAhSAsOut_Type = DisplayString
+_CpvMaxConncurAhSAsOut_Type = Counter64
 _CpvMaxConncurAhSAsOut_Object = MibScalar
 cpvMaxConncurAhSAsOut = _CpvMaxConncurAhSAsOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 2, 12),
@@ -4480,7 +4370,7 @@ _CpvSaErrors_ObjectIdentity = ObjectIdentity
 cpvSaErrors = _CpvSaErrors_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3)
 )
-_CpvSaDecrErr_Type = DisplayString
+_CpvSaDecrErr_Type = Counter64
 _CpvSaDecrErr_Object = MibScalar
 cpvSaDecrErr = _CpvSaDecrErr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 1),
@@ -4489,7 +4379,7 @@ cpvSaDecrErr = _CpvSaDecrErr_Object(
 cpvSaDecrErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvSaDecrErr.setStatus("current")
-_CpvSaAuthErr_Type = DisplayString
+_CpvSaAuthErr_Type = Counter64
 _CpvSaAuthErr_Object = MibScalar
 cpvSaAuthErr = _CpvSaAuthErr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 2),
@@ -4498,7 +4388,7 @@ cpvSaAuthErr = _CpvSaAuthErr_Object(
 cpvSaAuthErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvSaAuthErr.setStatus("current")
-_CpvSaReplayErr_Type = DisplayString
+_CpvSaReplayErr_Type = Counter64
 _CpvSaReplayErr_Object = MibScalar
 cpvSaReplayErr = _CpvSaReplayErr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 3),
@@ -4507,7 +4397,7 @@ cpvSaReplayErr = _CpvSaReplayErr_Object(
 cpvSaReplayErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvSaReplayErr.setStatus("current")
-_CpvSaPolicyErr_Type = DisplayString
+_CpvSaPolicyErr_Type = Counter64
 _CpvSaPolicyErr_Object = MibScalar
 cpvSaPolicyErr = _CpvSaPolicyErr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 4),
@@ -4516,7 +4406,7 @@ cpvSaPolicyErr = _CpvSaPolicyErr_Object(
 cpvSaPolicyErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvSaPolicyErr.setStatus("current")
-_CpvSaOtherErrIn_Type = DisplayString
+_CpvSaOtherErrIn_Type = Counter64
 _CpvSaOtherErrIn_Object = MibScalar
 cpvSaOtherErrIn = _CpvSaOtherErrIn_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 5),
@@ -4525,7 +4415,7 @@ cpvSaOtherErrIn = _CpvSaOtherErrIn_Object(
 cpvSaOtherErrIn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvSaOtherErrIn.setStatus("current")
-_CpvSaOtherErrOut_Type = DisplayString
+_CpvSaOtherErrOut_Type = Counter64
 _CpvSaOtherErrOut_Object = MibScalar
 cpvSaOtherErrOut = _CpvSaOtherErrOut_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 6),
@@ -4534,7 +4424,7 @@ cpvSaOtherErrOut = _CpvSaOtherErrOut_Object(
 cpvSaOtherErrOut.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvSaOtherErrOut.setStatus("current")
-_CpvSaUnknownSpiErr_Type = DisplayString
+_CpvSaUnknownSpiErr_Type = Counter64
 _CpvSaUnknownSpiErr_Object = MibScalar
 cpvSaUnknownSpiErr = _CpvSaUnknownSpiErr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 3, 7),
@@ -4547,7 +4437,7 @@ _CpvIpsecStatistics_ObjectIdentity = ObjectIdentity
 cpvIpsecStatistics = _CpvIpsecStatistics_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4)
 )
-_CpvIpsecUdpEspEncPkts_Type = DisplayString
+_CpvIpsecUdpEspEncPkts_Type = Counter64
 _CpvIpsecUdpEspEncPkts_Object = MibScalar
 cpvIpsecUdpEspEncPkts = _CpvIpsecUdpEspEncPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 1),
@@ -4556,7 +4446,7 @@ cpvIpsecUdpEspEncPkts = _CpvIpsecUdpEspEncPkts_Object(
 cpvIpsecUdpEspEncPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecUdpEspEncPkts.setStatus("current")
-_CpvIpsecUdpEspDecPkts_Type = DisplayString
+_CpvIpsecUdpEspDecPkts_Type = Counter64
 _CpvIpsecUdpEspDecPkts_Object = MibScalar
 cpvIpsecUdpEspDecPkts = _CpvIpsecUdpEspDecPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 2),
@@ -4565,7 +4455,7 @@ cpvIpsecUdpEspDecPkts = _CpvIpsecUdpEspDecPkts_Object(
 cpvIpsecUdpEspDecPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecUdpEspDecPkts.setStatus("current")
-_CpvIpsecAhEncPkts_Type = DisplayString
+_CpvIpsecAhEncPkts_Type = Counter64
 _CpvIpsecAhEncPkts_Object = MibScalar
 cpvIpsecAhEncPkts = _CpvIpsecAhEncPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 3),
@@ -4574,7 +4464,7 @@ cpvIpsecAhEncPkts = _CpvIpsecAhEncPkts_Object(
 cpvIpsecAhEncPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecAhEncPkts.setStatus("current")
-_CpvIpsecAhDecPkts_Type = DisplayString
+_CpvIpsecAhDecPkts_Type = Counter64
 _CpvIpsecAhDecPkts_Object = MibScalar
 cpvIpsecAhDecPkts = _CpvIpsecAhDecPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 4),
@@ -4583,7 +4473,7 @@ cpvIpsecAhDecPkts = _CpvIpsecAhDecPkts_Object(
 cpvIpsecAhDecPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecAhDecPkts.setStatus("current")
-_CpvIpsecEspEncPkts_Type = DisplayString
+_CpvIpsecEspEncPkts_Type = Counter64
 _CpvIpsecEspEncPkts_Object = MibScalar
 cpvIpsecEspEncPkts = _CpvIpsecEspEncPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 5),
@@ -4592,7 +4482,7 @@ cpvIpsecEspEncPkts = _CpvIpsecEspEncPkts_Object(
 cpvIpsecEspEncPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecEspEncPkts.setStatus("current")
-_CpvIpsecEspDecPkts_Type = DisplayString
+_CpvIpsecEspDecPkts_Type = Counter64
 _CpvIpsecEspDecPkts_Object = MibScalar
 cpvIpsecEspDecPkts = _CpvIpsecEspDecPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 6),
@@ -4601,7 +4491,7 @@ cpvIpsecEspDecPkts = _CpvIpsecEspDecPkts_Object(
 cpvIpsecEspDecPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecEspDecPkts.setStatus("current")
-_CpvIpsecDecomprBytesBefore_Type = DisplayString
+_CpvIpsecDecomprBytesBefore_Type = Counter64
 _CpvIpsecDecomprBytesBefore_Object = MibScalar
 cpvIpsecDecomprBytesBefore = _CpvIpsecDecomprBytesBefore_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 7),
@@ -4610,7 +4500,7 @@ cpvIpsecDecomprBytesBefore = _CpvIpsecDecomprBytesBefore_Object(
 cpvIpsecDecomprBytesBefore.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecDecomprBytesBefore.setStatus("current")
-_CpvIpsecDecomprBytesAfter_Type = DisplayString
+_CpvIpsecDecomprBytesAfter_Type = Counter64
 _CpvIpsecDecomprBytesAfter_Object = MibScalar
 cpvIpsecDecomprBytesAfter = _CpvIpsecDecomprBytesAfter_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 8),
@@ -4619,7 +4509,7 @@ cpvIpsecDecomprBytesAfter = _CpvIpsecDecomprBytesAfter_Object(
 cpvIpsecDecomprBytesAfter.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecDecomprBytesAfter.setStatus("current")
-_CpvIpsecDecomprOverhead_Type = DisplayString
+_CpvIpsecDecomprOverhead_Type = Counter64
 _CpvIpsecDecomprOverhead_Object = MibScalar
 cpvIpsecDecomprOverhead = _CpvIpsecDecomprOverhead_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 9),
@@ -4628,7 +4518,7 @@ cpvIpsecDecomprOverhead = _CpvIpsecDecomprOverhead_Object(
 cpvIpsecDecomprOverhead.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecDecomprOverhead.setStatus("current")
-_CpvIpsecDecomprPkts_Type = DisplayString
+_CpvIpsecDecomprPkts_Type = Counter64
 _CpvIpsecDecomprPkts_Object = MibScalar
 cpvIpsecDecomprPkts = _CpvIpsecDecomprPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 10),
@@ -4637,7 +4527,7 @@ cpvIpsecDecomprPkts = _CpvIpsecDecomprPkts_Object(
 cpvIpsecDecomprPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecDecomprPkts.setStatus("current")
-_CpvIpsecDecomprErr_Type = DisplayString
+_CpvIpsecDecomprErr_Type = Counter64
 _CpvIpsecDecomprErr_Object = MibScalar
 cpvIpsecDecomprErr = _CpvIpsecDecomprErr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 11),
@@ -4646,7 +4536,7 @@ cpvIpsecDecomprErr = _CpvIpsecDecomprErr_Object(
 cpvIpsecDecomprErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecDecomprErr.setStatus("current")
-_CpvIpsecComprBytesBefore_Type = DisplayString
+_CpvIpsecComprBytesBefore_Type = Counter64
 _CpvIpsecComprBytesBefore_Object = MibScalar
 cpvIpsecComprBytesBefore = _CpvIpsecComprBytesBefore_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 12),
@@ -4655,7 +4545,7 @@ cpvIpsecComprBytesBefore = _CpvIpsecComprBytesBefore_Object(
 cpvIpsecComprBytesBefore.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecComprBytesBefore.setStatus("current")
-_CpvIpsecComprBytesAfter_Type = DisplayString
+_CpvIpsecComprBytesAfter_Type = Counter64
 _CpvIpsecComprBytesAfter_Object = MibScalar
 cpvIpsecComprBytesAfter = _CpvIpsecComprBytesAfter_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 13),
@@ -4664,7 +4554,7 @@ cpvIpsecComprBytesAfter = _CpvIpsecComprBytesAfter_Object(
 cpvIpsecComprBytesAfter.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecComprBytesAfter.setStatus("current")
-_CpvIpsecComprOverhead_Type = DisplayString
+_CpvIpsecComprOverhead_Type = Counter64
 _CpvIpsecComprOverhead_Object = MibScalar
 cpvIpsecComprOverhead = _CpvIpsecComprOverhead_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 14),
@@ -4673,7 +4563,7 @@ cpvIpsecComprOverhead = _CpvIpsecComprOverhead_Object(
 cpvIpsecComprOverhead.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecComprOverhead.setStatus("current")
-_CpvIpsecNonCompressibleBytes_Type = DisplayString
+_CpvIpsecNonCompressibleBytes_Type = Counter64
 _CpvIpsecNonCompressibleBytes_Object = MibScalar
 cpvIpsecNonCompressibleBytes = _CpvIpsecNonCompressibleBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 15),
@@ -4682,7 +4572,7 @@ cpvIpsecNonCompressibleBytes = _CpvIpsecNonCompressibleBytes_Object(
 cpvIpsecNonCompressibleBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecNonCompressibleBytes.setStatus("current")
-_CpvIpsecCompressiblePkts_Type = DisplayString
+_CpvIpsecCompressiblePkts_Type = Counter64
 _CpvIpsecCompressiblePkts_Object = MibScalar
 cpvIpsecCompressiblePkts = _CpvIpsecCompressiblePkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 16),
@@ -4691,7 +4581,7 @@ cpvIpsecCompressiblePkts = _CpvIpsecCompressiblePkts_Object(
 cpvIpsecCompressiblePkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecCompressiblePkts.setStatus("current")
-_CpvIpsecNonCompressiblePkts_Type = DisplayString
+_CpvIpsecNonCompressiblePkts_Type = Counter64
 _CpvIpsecNonCompressiblePkts_Object = MibScalar
 cpvIpsecNonCompressiblePkts = _CpvIpsecNonCompressiblePkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 17),
@@ -4700,7 +4590,7 @@ cpvIpsecNonCompressiblePkts = _CpvIpsecNonCompressiblePkts_Object(
 cpvIpsecNonCompressiblePkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecNonCompressiblePkts.setStatus("current")
-_CpvIpsecComprErrors_Type = DisplayString
+_CpvIpsecComprErrors_Type = Counter64
 _CpvIpsecComprErrors_Object = MibScalar
 cpvIpsecComprErrors = _CpvIpsecComprErrors_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 18),
@@ -4709,7 +4599,7 @@ cpvIpsecComprErrors = _CpvIpsecComprErrors_Object(
 cpvIpsecComprErrors.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecComprErrors.setStatus("current")
-_CpvIpsecEspEncBytes_Type = DisplayString
+_CpvIpsecEspEncBytes_Type = Counter64
 _CpvIpsecEspEncBytes_Object = MibScalar
 cpvIpsecEspEncBytes = _CpvIpsecEspEncBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 19),
@@ -4718,7 +4608,7 @@ cpvIpsecEspEncBytes = _CpvIpsecEspEncBytes_Object(
 cpvIpsecEspEncBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIpsecEspEncBytes.setStatus("current")
-_CpvIpsecEspDecBytes_Type = DisplayString
+_CpvIpsecEspDecBytes_Type = Counter64
 _CpvIpsecEspDecBytes_Object = MibScalar
 cpvIpsecEspDecBytes = _CpvIpsecEspDecBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 5, 4, 20),
@@ -4735,7 +4625,7 @@ _CpvFwzStatistics_ObjectIdentity = ObjectIdentity
 cpvFwzStatistics = _CpvFwzStatistics_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 6, 1)
 )
-_CpvFwzEncapsEncPkts_Type = DisplayString
+_CpvFwzEncapsEncPkts_Type = Counter64
 _CpvFwzEncapsEncPkts_Object = MibScalar
 cpvFwzEncapsEncPkts = _CpvFwzEncapsEncPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 6, 1, 1),
@@ -4744,7 +4634,7 @@ cpvFwzEncapsEncPkts = _CpvFwzEncapsEncPkts_Object(
 cpvFwzEncapsEncPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvFwzEncapsEncPkts.setStatus("current")
-_CpvFwzEncapsDecPkts_Type = DisplayString
+_CpvFwzEncapsDecPkts_Type = Counter64
 _CpvFwzEncapsDecPkts_Object = MibScalar
 cpvFwzEncapsDecPkts = _CpvFwzEncapsDecPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 6, 1, 2),
@@ -4775,7 +4665,7 @@ _CpvFwzErrors_ObjectIdentity = ObjectIdentity
 cpvFwzErrors = _CpvFwzErrors_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 6, 2)
 )
-_CpvFwzEncapsEncErrs_Type = DisplayString
+_CpvFwzEncapsEncErrs_Type = Counter64
 _CpvFwzEncapsEncErrs_Object = MibScalar
 cpvFwzEncapsEncErrs = _CpvFwzEncapsEncErrs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 6, 2, 1),
@@ -4784,7 +4674,7 @@ cpvFwzEncapsEncErrs = _CpvFwzEncapsEncErrs_Object(
 cpvFwzEncapsEncErrs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvFwzEncapsEncErrs.setStatus("current")
-_CpvFwzEncapsDecErrs_Type = DisplayString
+_CpvFwzEncapsDecErrs_Type = Counter64
 _CpvFwzEncapsDecErrs_Object = MibScalar
 cpvFwzEncapsDecErrs = _CpvFwzEncapsDecErrs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 6, 2, 2),
@@ -4859,7 +4749,7 @@ _CpvHwAccelStatistics_ObjectIdentity = ObjectIdentity
 cpvHwAccelStatistics = _CpvHwAccelStatistics_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2)
 )
-_CpvHwAccelEspEncPkts_Type = DisplayString
+_CpvHwAccelEspEncPkts_Type = Counter64
 _CpvHwAccelEspEncPkts_Object = MibScalar
 cpvHwAccelEspEncPkts = _CpvHwAccelEspEncPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 1),
@@ -4868,7 +4758,7 @@ cpvHwAccelEspEncPkts = _CpvHwAccelEspEncPkts_Object(
 cpvHwAccelEspEncPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelEspEncPkts.setStatus("current")
-_CpvHwAccelEspDecPkts_Type = DisplayString
+_CpvHwAccelEspDecPkts_Type = Counter64
 _CpvHwAccelEspDecPkts_Object = MibScalar
 cpvHwAccelEspDecPkts = _CpvHwAccelEspDecPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 2),
@@ -4877,7 +4767,7 @@ cpvHwAccelEspDecPkts = _CpvHwAccelEspDecPkts_Object(
 cpvHwAccelEspDecPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelEspDecPkts.setStatus("current")
-_CpvHwAccelEspEncBytes_Type = DisplayString
+_CpvHwAccelEspEncBytes_Type = Counter64
 _CpvHwAccelEspEncBytes_Object = MibScalar
 cpvHwAccelEspEncBytes = _CpvHwAccelEspEncBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 3),
@@ -4886,7 +4776,7 @@ cpvHwAccelEspEncBytes = _CpvHwAccelEspEncBytes_Object(
 cpvHwAccelEspEncBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelEspEncBytes.setStatus("current")
-_CpvHwAccelEspDecBytes_Type = DisplayString
+_CpvHwAccelEspDecBytes_Type = Counter64
 _CpvHwAccelEspDecBytes_Object = MibScalar
 cpvHwAccelEspDecBytes = _CpvHwAccelEspDecBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 4),
@@ -4895,7 +4785,7 @@ cpvHwAccelEspDecBytes = _CpvHwAccelEspDecBytes_Object(
 cpvHwAccelEspDecBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelEspDecBytes.setStatus("current")
-_CpvHwAccelAhEncPkts_Type = DisplayString
+_CpvHwAccelAhEncPkts_Type = Counter64
 _CpvHwAccelAhEncPkts_Object = MibScalar
 cpvHwAccelAhEncPkts = _CpvHwAccelAhEncPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 5),
@@ -4904,7 +4794,7 @@ cpvHwAccelAhEncPkts = _CpvHwAccelAhEncPkts_Object(
 cpvHwAccelAhEncPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelAhEncPkts.setStatus("current")
-_CpvHwAccelAhDecPkts_Type = DisplayString
+_CpvHwAccelAhDecPkts_Type = Counter64
 _CpvHwAccelAhDecPkts_Object = MibScalar
 cpvHwAccelAhDecPkts = _CpvHwAccelAhDecPkts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 6),
@@ -4913,7 +4803,7 @@ cpvHwAccelAhDecPkts = _CpvHwAccelAhDecPkts_Object(
 cpvHwAccelAhDecPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelAhDecPkts.setStatus("current")
-_CpvHwAccelAhEncBytes_Type = DisplayString
+_CpvHwAccelAhEncBytes_Type = Counter64
 _CpvHwAccelAhEncBytes_Object = MibScalar
 cpvHwAccelAhEncBytes = _CpvHwAccelAhEncBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 7),
@@ -4922,7 +4812,7 @@ cpvHwAccelAhEncBytes = _CpvHwAccelAhEncBytes_Object(
 cpvHwAccelAhEncBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvHwAccelAhEncBytes.setStatus("current")
-_CpvHwAccelAhDecBytes_Type = DisplayString
+_CpvHwAccelAhDecBytes_Type = Counter64
 _CpvHwAccelAhDecBytes_Object = MibScalar
 cpvHwAccelAhDecBytes = _CpvHwAccelAhDecBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 8, 2, 8),
@@ -4939,7 +4829,7 @@ _CpvIKEglobals_ObjectIdentity = ObjectIdentity
 cpvIKEglobals = _CpvIKEglobals_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1)
 )
-_CpvIKECurrSAs_Type = DisplayString
+_CpvIKECurrSAs_Type = Counter64
 _CpvIKECurrSAs_Object = MibScalar
 cpvIKECurrSAs = _CpvIKECurrSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 1),
@@ -4948,7 +4838,7 @@ cpvIKECurrSAs = _CpvIKECurrSAs_Object(
 cpvIKECurrSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKECurrSAs.setStatus("current")
-_CpvIKECurrInitSAs_Type = DisplayString
+_CpvIKECurrInitSAs_Type = Counter64
 _CpvIKECurrInitSAs_Object = MibScalar
 cpvIKECurrInitSAs = _CpvIKECurrInitSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 2),
@@ -4957,7 +4847,7 @@ cpvIKECurrInitSAs = _CpvIKECurrInitSAs_Object(
 cpvIKECurrInitSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKECurrInitSAs.setStatus("current")
-_CpvIKECurrRespSAs_Type = DisplayString
+_CpvIKECurrRespSAs_Type = Counter64
 _CpvIKECurrRespSAs_Object = MibScalar
 cpvIKECurrRespSAs = _CpvIKECurrRespSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 3),
@@ -4966,7 +4856,7 @@ cpvIKECurrRespSAs = _CpvIKECurrRespSAs_Object(
 cpvIKECurrRespSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKECurrRespSAs.setStatus("current")
-_CpvIKETotalSAs_Type = DisplayString
+_CpvIKETotalSAs_Type = Counter64
 _CpvIKETotalSAs_Object = MibScalar
 cpvIKETotalSAs = _CpvIKETotalSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 4),
@@ -4975,7 +4865,7 @@ cpvIKETotalSAs = _CpvIKETotalSAs_Object(
 cpvIKETotalSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalSAs.setStatus("current")
-_CpvIKETotalInitSAs_Type = DisplayString
+_CpvIKETotalInitSAs_Type = Counter64
 _CpvIKETotalInitSAs_Object = MibScalar
 cpvIKETotalInitSAs = _CpvIKETotalInitSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 5),
@@ -4984,7 +4874,7 @@ cpvIKETotalInitSAs = _CpvIKETotalInitSAs_Object(
 cpvIKETotalInitSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalInitSAs.setStatus("current")
-_CpvIKETotalRespSAs_Type = DisplayString
+_CpvIKETotalRespSAs_Type = Counter64
 _CpvIKETotalRespSAs_Object = MibScalar
 cpvIKETotalRespSAs = _CpvIKETotalRespSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 6),
@@ -4993,7 +4883,7 @@ cpvIKETotalRespSAs = _CpvIKETotalRespSAs_Object(
 cpvIKETotalRespSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalRespSAs.setStatus("current")
-_CpvIKETotalSAsAttempts_Type = DisplayString
+_CpvIKETotalSAsAttempts_Type = Counter64
 _CpvIKETotalSAsAttempts_Object = MibScalar
 cpvIKETotalSAsAttempts = _CpvIKETotalSAsAttempts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 7),
@@ -5002,7 +4892,7 @@ cpvIKETotalSAsAttempts = _CpvIKETotalSAsAttempts_Object(
 cpvIKETotalSAsAttempts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalSAsAttempts.setStatus("current")
-_CpvIKETotalSAsInitAttempts_Type = DisplayString
+_CpvIKETotalSAsInitAttempts_Type = Counter64
 _CpvIKETotalSAsInitAttempts_Object = MibScalar
 cpvIKETotalSAsInitAttempts = _CpvIKETotalSAsInitAttempts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 8),
@@ -5011,7 +4901,7 @@ cpvIKETotalSAsInitAttempts = _CpvIKETotalSAsInitAttempts_Object(
 cpvIKETotalSAsInitAttempts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalSAsInitAttempts.setStatus("current")
-_CpvIKETotalSAsRespAttempts_Type = DisplayString
+_CpvIKETotalSAsRespAttempts_Type = Counter64
 _CpvIKETotalSAsRespAttempts_Object = MibScalar
 cpvIKETotalSAsRespAttempts = _CpvIKETotalSAsRespAttempts_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 9),
@@ -5020,7 +4910,7 @@ cpvIKETotalSAsRespAttempts = _CpvIKETotalSAsRespAttempts_Object(
 cpvIKETotalSAsRespAttempts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalSAsRespAttempts.setStatus("current")
-_CpvIKEMaxConncurSAs_Type = DisplayString
+_CpvIKEMaxConncurSAs_Type = Counter64
 _CpvIKEMaxConncurSAs_Object = MibScalar
 cpvIKEMaxConncurSAs = _CpvIKEMaxConncurSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 10),
@@ -5029,7 +4919,7 @@ cpvIKEMaxConncurSAs = _CpvIKEMaxConncurSAs_Object(
 cpvIKEMaxConncurSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKEMaxConncurSAs.setStatus("current")
-_CpvIKEMaxConncurInitSAs_Type = DisplayString
+_CpvIKEMaxConncurInitSAs_Type = Counter64
 _CpvIKEMaxConncurInitSAs_Object = MibScalar
 cpvIKEMaxConncurInitSAs = _CpvIKEMaxConncurInitSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 11),
@@ -5038,7 +4928,7 @@ cpvIKEMaxConncurInitSAs = _CpvIKEMaxConncurInitSAs_Object(
 cpvIKEMaxConncurInitSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKEMaxConncurInitSAs.setStatus("current")
-_CpvIKEMaxConncurRespSAs_Type = DisplayString
+_CpvIKEMaxConncurRespSAs_Type = Counter64
 _CpvIKEMaxConncurRespSAs_Object = MibScalar
 cpvIKEMaxConncurRespSAs = _CpvIKEMaxConncurRespSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 1, 12),
@@ -5051,7 +4941,7 @@ _CpvIKEerrors_ObjectIdentity = ObjectIdentity
 cpvIKEerrors = _CpvIKEerrors_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 2)
 )
-_CpvIKETotalFailuresInit_Type = DisplayString
+_CpvIKETotalFailuresInit_Type = Counter64
 _CpvIKETotalFailuresInit_Object = MibScalar
 cpvIKETotalFailuresInit = _CpvIKETotalFailuresInit_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 2, 1),
@@ -5060,7 +4950,7 @@ cpvIKETotalFailuresInit = _CpvIKETotalFailuresInit_Object(
 cpvIKETotalFailuresInit.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKETotalFailuresInit.setStatus("current")
-_CpvIKENoResp_Type = DisplayString
+_CpvIKENoResp_Type = Counter64
 _CpvIKENoResp_Object = MibScalar
 cpvIKENoResp = _CpvIKENoResp_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 2, 2),
@@ -5069,7 +4959,7 @@ cpvIKENoResp = _CpvIKENoResp_Object(
 cpvIKENoResp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIKENoResp.setStatus("current")
-_CpvIKETotalFailuresResp_Type = DisplayString
+_CpvIKETotalFailuresResp_Type = Counter64
 _CpvIKETotalFailuresResp_Object = MibScalar
 cpvIKETotalFailuresResp = _CpvIKETotalFailuresResp_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 9, 2, 3),
@@ -5095,7 +4985,7 @@ cpvIPsecNICsNum = _CpvIPsecNICsNum_Object(
 cpvIPsecNICsNum.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIPsecNICsNum.setStatus("current")
-_CpvIPsecNICTotalDownLoadedSAs_Type = DisplayString
+_CpvIPsecNICTotalDownLoadedSAs_Type = Counter64
 _CpvIPsecNICTotalDownLoadedSAs_Object = MibScalar
 cpvIPsecNICTotalDownLoadedSAs = _CpvIPsecNICTotalDownLoadedSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 10, 1, 2),
@@ -5104,7 +4994,7 @@ cpvIPsecNICTotalDownLoadedSAs = _CpvIPsecNICTotalDownLoadedSAs_Object(
 cpvIPsecNICTotalDownLoadedSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIPsecNICTotalDownLoadedSAs.setStatus("current")
-_CpvIPsecNICCurrDownLoadedSAs_Type = DisplayString
+_CpvIPsecNICCurrDownLoadedSAs_Type = Counter64
 _CpvIPsecNICCurrDownLoadedSAs_Object = MibScalar
 cpvIPsecNICCurrDownLoadedSAs = _CpvIPsecNICCurrDownLoadedSAs_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 10, 1, 3),
@@ -5113,7 +5003,7 @@ cpvIPsecNICCurrDownLoadedSAs = _CpvIPsecNICCurrDownLoadedSAs_Object(
 cpvIPsecNICCurrDownLoadedSAs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIPsecNICCurrDownLoadedSAs.setStatus("current")
-_CpvIPsecNICDecrBytes_Type = DisplayString
+_CpvIPsecNICDecrBytes_Type = Counter64
 _CpvIPsecNICDecrBytes_Object = MibScalar
 cpvIPsecNICDecrBytes = _CpvIPsecNICDecrBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 10, 1, 4),
@@ -5122,7 +5012,7 @@ cpvIPsecNICDecrBytes = _CpvIPsecNICDecrBytes_Object(
 cpvIPsecNICDecrBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIPsecNICDecrBytes.setStatus("current")
-_CpvIPsecNICEncrBytes_Type = DisplayString
+_CpvIPsecNICEncrBytes_Type = Counter64
 _CpvIPsecNICEncrBytes_Object = MibScalar
 cpvIPsecNICEncrBytes = _CpvIPsecNICEncrBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 10, 1, 5),
@@ -5131,7 +5021,7 @@ cpvIPsecNICEncrBytes = _CpvIPsecNICEncrBytes_Object(
 cpvIPsecNICEncrBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIPsecNICEncrBytes.setStatus("current")
-_CpvIPsecNICDecrPackets_Type = DisplayString
+_CpvIPsecNICDecrPackets_Type = Counter64
 _CpvIPsecNICDecrPackets_Object = MibScalar
 cpvIPsecNICDecrPackets = _CpvIPsecNICDecrPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 10, 1, 6),
@@ -5140,7 +5030,7 @@ cpvIPsecNICDecrPackets = _CpvIPsecNICDecrPackets_Object(
 cpvIPsecNICDecrPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpvIPsecNICDecrPackets.setStatus("current")
-_CpvIPsecNICEncrPackets_Type = DisplayString
+_CpvIPsecNICEncrPackets_Type = Counter64
 _CpvIPsecNICEncrPackets_Object = MibScalar
 cpvIPsecNICEncrPackets = _CpvIPsecNICEncrPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 2, 10, 1, 7),
@@ -5296,7 +5186,7 @@ fgIfIndex = _FgIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 3, 9, 1, 1),
     _FgIfIndex_Type()
 )
-fgIfIndex.setMaxAccess("read-only")
+fgIfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     fgIfIndex.setStatus("current")
 _FgIfName_Type = DisplayString
@@ -5590,7 +5480,7 @@ haIfIndex = _HaIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 5, 12, 1, 1),
     _HaIfIndex_Type()
 )
-haIfIndex.setMaxAccess("read-only")
+haIfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     haIfIndex.setStatus("current")
 _HaIfName_Type = DisplayString
@@ -5756,7 +5646,7 @@ haClusterIpIndex = _HaClusterIpIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 5, 15, 1, 1),
     _HaClusterIpIndex_Type()
 )
-haClusterIpIndex.setMaxAccess("read-only")
+haClusterIpIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     haClusterIpIndex.setStatus("current")
 _HaClusterIpIfName_Type = DisplayString
@@ -5825,7 +5715,7 @@ haClusterSyncIndex = _HaClusterSyncIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 5, 16, 1, 1),
     _HaClusterSyncIndex_Type()
 )
-haClusterSyncIndex.setMaxAccess("read-only")
+haClusterSyncIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     haClusterSyncIndex.setStatus("current")
 _HaClusterSyncName_Type = DisplayString
@@ -5855,6 +5745,15 @@ haClusterSyncNetMask = _HaClusterSyncNetMask_Object(
 haClusterSyncNetMask.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     haClusterSyncNetMask.setStatus("current")
+_HaClusterXLFailover_Type = Integer32
+_HaClusterXLFailover_Object = MibScalar
+haClusterXLFailover = _HaClusterXLFailover_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 5, 17),
+    _HaClusterXLFailover_Type()
+)
+haClusterXLFailover.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    haClusterXLFailover.setStatus("current")
 _HaStatCode_Type = Integer32
 _HaStatCode_Object = MibScalar
 haStatCode = _HaStatCode_Object(
@@ -5934,7 +5833,7 @@ svnProdName = _SvnProdName_Object(
 svnProdName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnProdName.setStatus("current")
-_SvnProdVerMajor_Type = Integer32
+_SvnProdVerMajor_Type = Gauge32
 _SvnProdVerMajor_Object = MibScalar
 svnProdVerMajor = _SvnProdVerMajor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 2),
@@ -5943,7 +5842,7 @@ svnProdVerMajor = _SvnProdVerMajor_Object(
 svnProdVerMajor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnProdVerMajor.setStatus("current")
-_SvnProdVerMinor_Type = Integer32
+_SvnProdVerMinor_Type = Gauge32
 _SvnProdVerMinor_Object = MibScalar
 svnProdVerMinor = _SvnProdVerMinor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 3),
@@ -6092,7 +5991,7 @@ routingIndex = _RoutingIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 6, 1, 1),
     _RoutingIndex_Type()
 )
-routingIndex.setMaxAccess("read-only")
+routingIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     routingIndex.setStatus("current")
 _RoutingDest_Type = IpAddress
@@ -6233,7 +6132,7 @@ procIdleTime = _ProcIdleTime_Object(
 procIdleTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     procIdleTime.setStatus("current")
-_ProcUsage_Type = Integer32
+_ProcUsage_Type = Gauge32
 _ProcUsage_Object = MibScalar
 procUsage = _ProcUsage_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 2, 4),
@@ -6291,7 +6190,7 @@ diskQueue = _DiskQueue_Object(
 diskQueue.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     diskQueue.setStatus("current")
-_DiskPercent_Type = Integer32
+_DiskPercent_Type = Gauge32
 _DiskPercent_Object = MibScalar
 diskPercent = _DiskPercent_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 3, 3),
@@ -6300,17 +6199,7 @@ diskPercent = _DiskPercent_Object(
 diskPercent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     diskPercent.setStatus("current")
-
-
-class _DiskFreeTotal_Type(DisplayString):
-    """Custom type diskFreeTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_DiskFreeTotal_Type.__name__ = "DisplayString"
+_DiskFreeTotal_Type = Counter64
 _DiskFreeTotal_Object = MibScalar
 diskFreeTotal = _DiskFreeTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 3, 4),
@@ -6319,17 +6208,7 @@ diskFreeTotal = _DiskFreeTotal_Object(
 diskFreeTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     diskFreeTotal.setStatus("current")
-
-
-class _DiskFreeAvail_Type(DisplayString):
-    """Custom type diskFreeAvail based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_DiskFreeAvail_Type.__name__ = "DisplayString"
+_DiskFreeAvail_Type = Counter64
 _DiskFreeAvail_Object = MibScalar
 diskFreeAvail = _DiskFreeAvail_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 3, 5),
@@ -6338,17 +6217,7 @@ diskFreeAvail = _DiskFreeAvail_Object(
 diskFreeAvail.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     diskFreeAvail.setStatus("current")
-
-
-class _DiskTotal_Type(DisplayString):
-    """Custom type diskTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_DiskTotal_Type.__name__ = "DisplayString"
+_DiskTotal_Type = Counter64
 _DiskTotal_Object = MibScalar
 diskTotal = _DiskTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 3, 6),
@@ -6361,17 +6230,7 @@ _SvnMem64_ObjectIdentity = ObjectIdentity
 svnMem64 = _SvnMem64_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 4)
 )
-
-
-class _MemTotalVirtual64_Type(DisplayString):
-    """Custom type memTotalVirtual64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_MemTotalVirtual64_Type.__name__ = "DisplayString"
+_MemTotalVirtual64_Type = Counter64
 _MemTotalVirtual64_Object = MibScalar
 memTotalVirtual64 = _MemTotalVirtual64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 4, 1),
@@ -6380,17 +6239,7 @@ memTotalVirtual64 = _MemTotalVirtual64_Object(
 memTotalVirtual64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     memTotalVirtual64.setStatus("current")
-
-
-class _MemActiveVirtual64_Type(DisplayString):
-    """Custom type memActiveVirtual64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_MemActiveVirtual64_Type.__name__ = "DisplayString"
+_MemActiveVirtual64_Type = Counter64
 _MemActiveVirtual64_Object = MibScalar
 memActiveVirtual64 = _MemActiveVirtual64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 4, 2),
@@ -6399,17 +6248,7 @@ memActiveVirtual64 = _MemActiveVirtual64_Object(
 memActiveVirtual64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     memActiveVirtual64.setStatus("current")
-
-
-class _MemTotalReal64_Type(DisplayString):
-    """Custom type memTotalReal64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_MemTotalReal64_Type.__name__ = "DisplayString"
+_MemTotalReal64_Type = Counter64
 _MemTotalReal64_Object = MibScalar
 memTotalReal64 = _MemTotalReal64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 4, 3),
@@ -6418,17 +6257,7 @@ memTotalReal64 = _MemTotalReal64_Object(
 memTotalReal64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     memTotalReal64.setStatus("current")
-
-
-class _MemActiveReal64_Type(DisplayString):
-    """Custom type memActiveReal64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_MemActiveReal64_Type.__name__ = "DisplayString"
+_MemActiveReal64_Type = Counter64
 _MemActiveReal64_Object = MibScalar
 memActiveReal64 = _MemActiveReal64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 4, 4),
@@ -6437,17 +6266,7 @@ memActiveReal64 = _MemActiveReal64_Object(
 memActiveReal64.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     memActiveReal64.setStatus("current")
-
-
-class _MemFreeReal64_Type(DisplayString):
-    """Custom type memFreeReal64 based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_MemFreeReal64_Type.__name__ = "DisplayString"
+_MemFreeReal64_Type = Counter64
 _MemFreeReal64_Object = MibScalar
 memFreeReal64 = _MemFreeReal64_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 4, 5),
@@ -6495,7 +6314,7 @@ multiProcIndex = _MultiProcIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 5, 1, 1),
     _MultiProcIndex_Type()
 )
-multiProcIndex.setMaxAccess("read-only")
+multiProcIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     multiProcIndex.setStatus("current")
 _MultiProcUserTime_Type = Unsigned32
@@ -6573,7 +6392,7 @@ multiDiskIndex = _MultiDiskIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 1),
     _MultiDiskIndex_Type()
 )
-multiDiskIndex.setMaxAccess("read-only")
+multiDiskIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     multiDiskIndex.setStatus("current")
 _MultiDiskName_Type = DisplayString
@@ -6585,7 +6404,7 @@ multiDiskName = _MultiDiskName_Object(
 multiDiskName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     multiDiskName.setStatus("current")
-_MultiDiskSize_Type = DisplayString
+_MultiDiskSize_Type = Counter64
 _MultiDiskSize_Object = MibTableColumn
 multiDiskSize = _MultiDiskSize_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 3),
@@ -6594,7 +6413,7 @@ multiDiskSize = _MultiDiskSize_Object(
 multiDiskSize.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     multiDiskSize.setStatus("current")
-_MultiDiskUsed_Type = DisplayString
+_MultiDiskUsed_Type = Counter64
 _MultiDiskUsed_Object = MibTableColumn
 multiDiskUsed = _MultiDiskUsed_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 4),
@@ -6603,7 +6422,7 @@ multiDiskUsed = _MultiDiskUsed_Object(
 multiDiskUsed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     multiDiskUsed.setStatus("current")
-_MultiDiskFreeTotalBytes_Type = DisplayString
+_MultiDiskFreeTotalBytes_Type = Counter64
 _MultiDiskFreeTotalBytes_Object = MibTableColumn
 multiDiskFreeTotalBytes = _MultiDiskFreeTotalBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 5),
@@ -6612,7 +6431,7 @@ multiDiskFreeTotalBytes = _MultiDiskFreeTotalBytes_Object(
 multiDiskFreeTotalBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     multiDiskFreeTotalBytes.setStatus("current")
-_MultiDiskFreeTotalPercent_Type = Integer32
+_MultiDiskFreeTotalPercent_Type = Gauge32
 _MultiDiskFreeTotalPercent_Object = MibTableColumn
 multiDiskFreeTotalPercent = _MultiDiskFreeTotalPercent_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 6),
@@ -6621,7 +6440,7 @@ multiDiskFreeTotalPercent = _MultiDiskFreeTotalPercent_Object(
 multiDiskFreeTotalPercent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     multiDiskFreeTotalPercent.setStatus("current")
-_MultiDiskFreeAvailableBytes_Type = DisplayString
+_MultiDiskFreeAvailableBytes_Type = Counter64
 _MultiDiskFreeAvailableBytes_Object = MibTableColumn
 multiDiskFreeAvailableBytes = _MultiDiskFreeAvailableBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 7),
@@ -6630,7 +6449,7 @@ multiDiskFreeAvailableBytes = _MultiDiskFreeAvailableBytes_Object(
 multiDiskFreeAvailableBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     multiDiskFreeAvailableBytes.setStatus("current")
-_MultiDiskFreeAvailablePercent_Type = Integer32
+_MultiDiskFreeAvailablePercent_Type = Gauge32
 _MultiDiskFreeAvailablePercent_Object = MibTableColumn
 multiDiskFreeAvailablePercent = _MultiDiskFreeAvailablePercent_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 6, 1, 8),
@@ -6674,7 +6493,7 @@ raidVolumeIndex = _RaidVolumeIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 7, 1, 1, 1),
     _RaidVolumeIndex_Type()
 )
-raidVolumeIndex.setMaxAccess("read-only")
+raidVolumeIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     raidVolumeIndex.setStatus("current")
 _RaidVolumeID_Type = Integer32
@@ -6771,7 +6590,7 @@ raidDiskIndex = _RaidDiskIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 7, 2, 1, 1),
     _RaidDiskIndex_Type()
 )
-raidDiskIndex.setMaxAccess("read-only")
+raidDiskIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     raidDiskIndex.setStatus("current")
 _RaidDiskVolumeID_Type = Integer32
@@ -6938,7 +6757,7 @@ tempertureSensorIndex = _TempertureSensorIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 8, 1, 1, 1),
     _TempertureSensorIndex_Type()
 )
-tempertureSensorIndex.setMaxAccess("read-only")
+tempertureSensorIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     tempertureSensorIndex.setStatus("current")
 
@@ -7057,7 +6876,7 @@ fanSpeedSensorIndex = _FanSpeedSensorIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 8, 2, 1, 1),
     _FanSpeedSensorIndex_Type()
 )
-fanSpeedSensorIndex.setMaxAccess("read-only")
+fanSpeedSensorIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     fanSpeedSensorIndex.setStatus("current")
 
@@ -7176,7 +6995,7 @@ voltageSensorIndex = _VoltageSensorIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 8, 3, 1, 1),
     _VoltageSensorIndex_Type()
 )
-voltageSensorIndex.setMaxAccess("read-only")
+voltageSensorIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     voltageSensorIndex.setStatus("current")
 
@@ -7299,7 +7118,7 @@ powerSupplyIndex = _PowerSupplyIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 7, 9, 1, 1, 1),
     _PowerSupplyIndex_Type()
 )
-powerSupplyIndex.setMaxAccess("read-only")
+powerSupplyIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     powerSupplyIndex.setStatus("current")
 _PowerSupplyStatus_Type = DisplayString
@@ -7552,7 +7371,7 @@ licensingIndex = _LicensingIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 18, 1, 1, 1),
     _LicensingIndex_Type()
 )
-licensingIndex.setMaxAccess("read-only")
+licensingIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     licensingIndex.setStatus("current")
 _LicensingID_Type = Unsigned32
@@ -7820,7 +7639,7 @@ updatesInstalledIndex = _UpdatesInstalledIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 20, 7, 1, 1),
     _UpdatesInstalledIndex_Type()
 )
-updatesInstalledIndex.setMaxAccess("read-only")
+updatesInstalledIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     updatesInstalledIndex.setStatus("current")
 
@@ -7882,7 +7701,7 @@ updatesRecommendedIndex = _UpdatesRecommendedIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 20, 8, 1, 1),
     _UpdatesRecommendedIndex_Type()
 )
-updatesRecommendedIndex.setMaxAccess("read-only")
+updatesRecommendedIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     updatesRecommendedIndex.setStatus("current")
 
@@ -7964,7 +7783,7 @@ vdName = _VdName_Object(
 )
 vdName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vdName.setStatus("optional")
+    vdName.setStatus("current")
 
 
 class _VdType_Type(DisplayString):
@@ -7983,7 +7802,7 @@ vdType = _VdType_Object(
 )
 vdType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vdType.setStatus("optional")
+    vdType.setStatus("current")
 _CtxId_Type = Integer32
 _CtxId_Object = MibScalar
 ctxId = _CtxId_Object(
@@ -7992,7 +7811,20 @@ ctxId = _CtxId_Object(
 )
 ctxId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    ctxId.setStatus("optional")
+    ctxId.setStatus("current")
+_ArpTableInfo_ObjectIdentity = ObjectIdentity
+arpTableInfo = _ArpTableInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 22)
+)
+_ArpTableSize_Type = Counter32
+_ArpTableSize_Object = MibScalar
+arpTableSize = _ArpTableSize_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 22, 1),
+    _ArpTableSize_Type()
+)
+arpTableSize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    arpTableSize.setStatus("current")
 _SvnNetStat_ObjectIdentity = ObjectIdentity
 svnNetStat = _SvnNetStat_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50)
@@ -8018,7 +7850,7 @@ svnNetIfIndex = _SvnNetIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 1),
     _SvnNetIfIndex_Type()
 )
-svnNetIfIndex.setMaxAccess("read-only")
+svnNetIfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     svnNetIfIndex.setStatus("current")
 _SvnNetIfVsid_Type = Unsigned32
@@ -8102,17 +7934,7 @@ svnNetIfOperState = _SvnNetIfOperState_Object(
 svnNetIfOperState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfOperState.setStatus("current")
-
-
-class _SvnNetIfRXBytes_Type(DisplayString):
-    """Custom type svnNetIfRXBytes based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfRXBytes_Type.__name__ = "DisplayString"
+_SvnNetIfRXBytes_Type = Counter64
 _SvnNetIfRXBytes_Object = MibTableColumn
 svnNetIfRXBytes = _SvnNetIfRXBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 13),
@@ -8121,17 +7943,7 @@ svnNetIfRXBytes = _SvnNetIfRXBytes_Object(
 svnNetIfRXBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfRXBytes.setStatus("current")
-
-
-class _SvnNetIfRXDrops_Type(DisplayString):
-    """Custom type svnNetIfRXDrops based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfRXDrops_Type.__name__ = "DisplayString"
+_SvnNetIfRXDrops_Type = Counter64
 _SvnNetIfRXDrops_Object = MibTableColumn
 svnNetIfRXDrops = _SvnNetIfRXDrops_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 14),
@@ -8140,17 +7952,7 @@ svnNetIfRXDrops = _SvnNetIfRXDrops_Object(
 svnNetIfRXDrops.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfRXDrops.setStatus("current")
-
-
-class _SvnNetIfRXErrors_Type(DisplayString):
-    """Custom type svnNetIfRXErrors based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfRXErrors_Type.__name__ = "DisplayString"
+_SvnNetIfRXErrors_Type = Counter64
 _SvnNetIfRXErrors_Object = MibTableColumn
 svnNetIfRXErrors = _SvnNetIfRXErrors_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 15),
@@ -8159,17 +7961,7 @@ svnNetIfRXErrors = _SvnNetIfRXErrors_Object(
 svnNetIfRXErrors.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfRXErrors.setStatus("current")
-
-
-class _SvnNetIfRXPackets_Type(DisplayString):
-    """Custom type svnNetIfRXPackets based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfRXPackets_Type.__name__ = "DisplayString"
+_SvnNetIfRXPackets_Type = Counter64
 _SvnNetIfRXPackets_Object = MibTableColumn
 svnNetIfRXPackets = _SvnNetIfRXPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 16),
@@ -8178,17 +7970,7 @@ svnNetIfRXPackets = _SvnNetIfRXPackets_Object(
 svnNetIfRXPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfRXPackets.setStatus("current")
-
-
-class _SvnNetIfTXBytes_Type(DisplayString):
-    """Custom type svnNetIfTXBytes based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfTXBytes_Type.__name__ = "DisplayString"
+_SvnNetIfTXBytes_Type = Counter64
 _SvnNetIfTXBytes_Object = MibTableColumn
 svnNetIfTXBytes = _SvnNetIfTXBytes_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 17),
@@ -8197,17 +7979,7 @@ svnNetIfTXBytes = _SvnNetIfTXBytes_Object(
 svnNetIfTXBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfTXBytes.setStatus("current")
-
-
-class _SvnNetIfTXDrops_Type(DisplayString):
-    """Custom type svnNetIfTXDrops based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfTXDrops_Type.__name__ = "DisplayString"
+_SvnNetIfTXDrops_Type = Counter64
 _SvnNetIfTXDrops_Object = MibTableColumn
 svnNetIfTXDrops = _SvnNetIfTXDrops_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 18),
@@ -8216,17 +7988,7 @@ svnNetIfTXDrops = _SvnNetIfTXDrops_Object(
 svnNetIfTXDrops.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfTXDrops.setStatus("current")
-
-
-class _SvnNetIfTXErrors_Type(DisplayString):
-    """Custom type svnNetIfTXErrors based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfTXErrors_Type.__name__ = "DisplayString"
+_SvnNetIfTXErrors_Type = Counter64
 _SvnNetIfTXErrors_Object = MibTableColumn
 svnNetIfTXErrors = _SvnNetIfTXErrors_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 19),
@@ -8235,17 +7997,7 @@ svnNetIfTXErrors = _SvnNetIfTXErrors_Object(
 svnNetIfTXErrors.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svnNetIfTXErrors.setStatus("current")
-
-
-class _SvnNetIfTXPackets_Type(DisplayString):
-    """Custom type svnNetIfTXPackets based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_SvnNetIfTXPackets_Type.__name__ = "DisplayString"
+_SvnNetIfTXPackets_Type = Counter64
 _SvnNetIfTXPackets_Object = MibTableColumn
 svnNetIfTXPackets = _SvnNetIfTXPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 50, 1, 1, 20),
@@ -8275,7 +8027,7 @@ vsRoutingIndex = _VsRoutingIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 51, 1, 1),
     _VsRoutingIndex_Type()
 )
-vsRoutingIndex.setMaxAccess("read-only")
+vsRoutingIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     vsRoutingIndex.setStatus("current")
 _VsRoutingDest_Type = IpAddress
@@ -9746,7 +9498,881 @@ checkPoint5100 = _CheckPoint5100_Object(
 checkPoint5100.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     checkPoint5100.setStatus("current")
-_SvnServicePack_Type = Integer32
+
+
+class _CheckPointSmart_1405_Type(DisplayString):
+    """Custom type checkPointSmart_1405 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_1405_Type.__name__ = "DisplayString"
+_CheckPointSmart_1405_Object = MibScalar
+checkPointSmart_1405 = _CheckPointSmart_1405_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 73),
+    _CheckPointSmart_1405_Type()
+)
+checkPointSmart_1405.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_1405.setStatus("current")
+
+
+class _CheckPointSmart_1410_Type(DisplayString):
+    """Custom type checkPointSmart_1410 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_1410_Type.__name__ = "DisplayString"
+_CheckPointSmart_1410_Object = MibScalar
+checkPointSmart_1410 = _CheckPointSmart_1410_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 74),
+    _CheckPointSmart_1410_Type()
+)
+checkPointSmart_1410.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_1410.setStatus("current")
+
+
+class _CheckPointSmart_5050_Type(DisplayString):
+    """Custom type checkPointSmart_5050 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_5050_Type.__name__ = "DisplayString"
+_CheckPointSmart_5050_Object = MibScalar
+checkPointSmart_5050 = _CheckPointSmart_5050_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 75),
+    _CheckPointSmart_5050_Type()
+)
+checkPointSmart_5050.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_5050.setStatus("current")
+
+
+class _CheckPointSmart_525_Type(DisplayString):
+    """Custom type checkPointSmart_525 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_525_Type.__name__ = "DisplayString"
+_CheckPointSmart_525_Object = MibScalar
+checkPointSmart_525 = _CheckPointSmart_525_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 76),
+    _CheckPointSmart_525_Type()
+)
+checkPointSmart_525.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_525.setStatus("current")
+
+
+class _CheckPointSmart_5150_Type(DisplayString):
+    """Custom type checkPointSmart_5150 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_5150_Type.__name__ = "DisplayString"
+_CheckPointSmart_5150_Object = MibScalar
+checkPointSmart_5150 = _CheckPointSmart_5150_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 77),
+    _CheckPointSmart_5150_Type()
+)
+checkPointSmart_5150.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_5150.setStatus("current")
+
+
+class _CheckPoint23900_Type(DisplayString):
+    """Custom type checkPoint23900 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint23900_Type.__name__ = "DisplayString"
+_CheckPoint23900_Object = MibScalar
+checkPoint23900 = _CheckPoint23900_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 78),
+    _CheckPoint23900_Type()
+)
+checkPoint23900.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint23900.setStatus("current")
+
+
+class _CheckPoint6500_Type(DisplayString):
+    """Custom type checkPoint6500 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6500_Type.__name__ = "DisplayString"
+_CheckPoint6500_Object = MibScalar
+checkPoint6500 = _CheckPoint6500_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 79),
+    _CheckPoint6500_Type()
+)
+checkPoint6500.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6500.setStatus("current")
+
+
+class _CheckPoint6800_Type(DisplayString):
+    """Custom type checkPoint6800 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6800_Type.__name__ = "DisplayString"
+_CheckPoint6800_Object = MibScalar
+checkPoint6800 = _CheckPoint6800_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 80),
+    _CheckPoint6800_Type()
+)
+checkPoint6800.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6800.setStatus("current")
+
+
+class _CheckPoint16000T_Type(DisplayString):
+    """Custom type checkPoint16000T based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint16000T_Type.__name__ = "DisplayString"
+_CheckPoint16000T_Object = MibScalar
+checkPoint16000T = _CheckPoint16000T_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 81),
+    _CheckPoint16000T_Type()
+)
+checkPoint16000T.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint16000T.setStatus("current")
+
+
+class _CheckPoint26000_Type(DisplayString):
+    """Custom type checkPoint26000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint26000_Type.__name__ = "DisplayString"
+_CheckPoint26000_Object = MibScalar
+checkPoint26000 = _CheckPoint26000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 82),
+    _CheckPoint26000_Type()
+)
+checkPoint26000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint26000.setStatus("current")
+
+
+class _CheckPointSmart_625_Type(DisplayString):
+    """Custom type checkPointSmart_625 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_625_Type.__name__ = "DisplayString"
+_CheckPointSmart_625_Object = MibScalar
+checkPointSmart_625 = _CheckPointSmart_625_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 83),
+    _CheckPointSmart_625_Type()
+)
+checkPointSmart_625.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_625.setStatus("current")
+
+
+class _CheckPoint16000_Type(DisplayString):
+    """Custom type checkPoint16000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint16000_Type.__name__ = "DisplayString"
+_CheckPoint16000_Object = MibScalar
+checkPoint16000 = _CheckPoint16000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 84),
+    _CheckPoint16000_Type()
+)
+checkPoint16000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint16000.setStatus("current")
+
+
+class _CheckPoint26000T_Type(DisplayString):
+    """Custom type checkPoint26000T based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint26000T_Type.__name__ = "DisplayString"
+_CheckPoint26000T_Object = MibScalar
+checkPoint26000T = _CheckPoint26000T_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 85),
+    _CheckPoint26000T_Type()
+)
+checkPoint26000T.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint26000T.setStatus("current")
+
+
+class _CheckPoint3600_Type(DisplayString):
+    """Custom type checkPoint3600 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint3600_Type.__name__ = "DisplayString"
+_CheckPoint3600_Object = MibScalar
+checkPoint3600 = _CheckPoint3600_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 86),
+    _CheckPoint3600_Type()
+)
+checkPoint3600.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint3600.setStatus("current")
+
+
+class _CheckPoint3600T_Type(DisplayString):
+    """Custom type checkPoint3600T based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint3600T_Type.__name__ = "DisplayString"
+_CheckPoint3600T_Object = MibScalar
+checkPoint3600T = _CheckPoint3600T_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 87),
+    _CheckPoint3600T_Type()
+)
+checkPoint3600T.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint3600T.setStatus("current")
+
+
+class _CheckPoint6200B_Type(DisplayString):
+    """Custom type checkPoint6200B based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6200B_Type.__name__ = "DisplayString"
+_CheckPoint6200B_Object = MibScalar
+checkPoint6200B = _CheckPoint6200B_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 88),
+    _CheckPoint6200B_Type()
+)
+checkPoint6200B.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6200B.setStatus("current")
+
+
+class _CheckPoint6200P_Type(DisplayString):
+    """Custom type checkPoint6200P based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6200P_Type.__name__ = "DisplayString"
+_CheckPoint6200P_Object = MibScalar
+checkPoint6200P = _CheckPoint6200P_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 89),
+    _CheckPoint6200P_Type()
+)
+checkPoint6200P.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6200P.setStatus("current")
+
+
+class _CheckPoint6200T_Type(DisplayString):
+    """Custom type checkPoint6200T based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6200T_Type.__name__ = "DisplayString"
+_CheckPoint6200T_Object = MibScalar
+checkPoint6200T = _CheckPoint6200T_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 90),
+    _CheckPoint6200T_Type()
+)
+checkPoint6200T.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6200T.setStatus("current")
+
+
+class _CheckPoint6600_Type(DisplayString):
+    """Custom type checkPoint6600 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6600_Type.__name__ = "DisplayString"
+_CheckPoint6600_Object = MibScalar
+checkPoint6600 = _CheckPoint6600_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 91),
+    _CheckPoint6600_Type()
+)
+checkPoint6600.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6600.setStatus("current")
+
+
+class _CheckPoint6900_Type(DisplayString):
+    """Custom type checkPoint6900 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6900_Type.__name__ = "DisplayString"
+_CheckPoint6900_Object = MibScalar
+checkPoint6900 = _CheckPoint6900_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 92),
+    _CheckPoint6900_Type()
+)
+checkPoint6900.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6900.setStatus("current")
+
+
+class _CheckPoint16600HS_Type(DisplayString):
+    """Custom type checkPoint16600HS based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint16600HS_Type.__name__ = "DisplayString"
+_CheckPoint16600HS_Object = MibScalar
+checkPoint16600HS = _CheckPoint16600HS_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 93),
+    _CheckPoint16600HS_Type()
+)
+checkPoint16600HS.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint16600HS.setStatus("current")
+
+
+class _CheckPoint28600HS_Type(DisplayString):
+    """Custom type checkPoint28600HS based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint28600HS_Type.__name__ = "DisplayString"
+_CheckPoint28600HS_Object = MibScalar
+checkPoint28600HS = _CheckPoint28600HS_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 94),
+    _CheckPoint28600HS_Type()
+)
+checkPoint28600HS.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint28600HS.setStatus("current")
+
+
+class _CheckPoint6700_Type(DisplayString):
+    """Custom type checkPoint6700 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6700_Type.__name__ = "DisplayString"
+_CheckPoint6700_Object = MibScalar
+checkPoint6700 = _CheckPoint6700_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 95),
+    _CheckPoint6700_Type()
+)
+checkPoint6700.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6700.setStatus("current")
+
+
+class _CheckPoint7000_Type(DisplayString):
+    """Custom type checkPoint7000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint7000_Type.__name__ = "DisplayString"
+_CheckPoint7000_Object = MibScalar
+checkPoint7000 = _CheckPoint7000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 96),
+    _CheckPoint7000_Type()
+)
+checkPoint7000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint7000.setStatus("current")
+
+
+class _CheckPoint16200_Type(DisplayString):
+    """Custom type checkPoint16200 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint16200_Type.__name__ = "DisplayString"
+_CheckPoint16200_Object = MibScalar
+checkPoint16200 = _CheckPoint16200_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 97),
+    _CheckPoint16200_Type()
+)
+checkPoint16200.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint16200.setStatus("current")
+
+
+class _CheckPoint28000_Type(DisplayString):
+    """Custom type checkPoint28000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint28000_Type.__name__ = "DisplayString"
+_CheckPoint28000_Object = MibScalar
+checkPoint28000 = _CheckPoint28000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 98),
+    _CheckPoint28000_Type()
+)
+checkPoint28000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint28000.setStatus("current")
+
+
+class _CheckPoint6400_Type(DisplayString):
+    """Custom type checkPoint6400 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint6400_Type.__name__ = "DisplayString"
+_CheckPoint6400_Object = MibScalar
+checkPoint6400 = _CheckPoint6400_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 99),
+    _CheckPoint6400_Type()
+)
+checkPoint6400.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint6400.setStatus("current")
+
+
+class _CheckPoint3800_Type(DisplayString):
+    """Custom type checkPoint3800 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint3800_Type.__name__ = "DisplayString"
+_CheckPoint3800_Object = MibScalar
+checkPoint3800 = _CheckPoint3800_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 100),
+    _CheckPoint3800_Type()
+)
+checkPoint3800.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint3800.setStatus("current")
+
+
+class _CheckPointSmart_6000_L_Type(DisplayString):
+    """Custom type checkPointSmart_6000_L based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_6000_L_Type.__name__ = "DisplayString"
+_CheckPointSmart_6000_L_Object = MibScalar
+checkPointSmart_6000_L = _CheckPointSmart_6000_L_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 101),
+    _CheckPointSmart_6000_L_Type()
+)
+checkPointSmart_6000_L.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_6000_L.setStatus("current")
+
+
+class _CheckPointSmart_6000_XL_Type(DisplayString):
+    """Custom type checkPointSmart_6000_XL based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_6000_XL_Type.__name__ = "DisplayString"
+_CheckPointSmart_6000_XL_Object = MibScalar
+checkPointSmart_6000_XL = _CheckPointSmart_6000_XL_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 102),
+    _CheckPointSmart_6000_XL_Type()
+)
+checkPointSmart_6000_XL.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_6000_XL.setStatus("current")
+
+
+class _CheckPointSmart_600_S_Type(DisplayString):
+    """Custom type checkPointSmart_600_S based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_600_S_Type.__name__ = "DisplayString"
+_CheckPointSmart_600_S_Object = MibScalar
+checkPointSmart_600_S = _CheckPointSmart_600_S_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 103),
+    _CheckPointSmart_600_S_Type()
+)
+checkPointSmart_600_S.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_600_S.setStatus("current")
+
+
+class _CheckPointSmart_600_M_Type(DisplayString):
+    """Custom type checkPointSmart_600_M based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSmart_600_M_Type.__name__ = "DisplayString"
+_CheckPointSmart_600_M_Object = MibScalar
+checkPointSmart_600_M = _CheckPointSmart_600_M_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 104),
+    _CheckPointSmart_600_M_Type()
+)
+checkPointSmart_600_M.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSmart_600_M.setStatus("current")
+
+
+class _CheckPointSMB_1530_Type(DisplayString):
+    """Custom type checkPointSMB_1530 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1530_Type.__name__ = "DisplayString"
+_CheckPointSMB_1530_Object = MibScalar
+checkPointSMB_1530 = _CheckPointSMB_1530_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2000),
+    _CheckPointSMB_1530_Type()
+)
+checkPointSMB_1530.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1530.setStatus("current")
+
+
+class _CheckPointSMB_1550_Type(DisplayString):
+    """Custom type checkPointSMB_1550 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1550_Type.__name__ = "DisplayString"
+_CheckPointSMB_1550_Object = MibScalar
+checkPointSMB_1550 = _CheckPointSMB_1550_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2001),
+    _CheckPointSMB_1550_Type()
+)
+checkPointSMB_1550.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1550.setStatus("current")
+
+
+class _CheckPointSMB_1570_Type(DisplayString):
+    """Custom type checkPointSMB_1570 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1570_Type.__name__ = "DisplayString"
+_CheckPointSMB_1570_Object = MibScalar
+checkPointSMB_1570 = _CheckPointSMB_1570_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2002),
+    _CheckPointSMB_1570_Type()
+)
+checkPointSMB_1570.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1570.setStatus("current")
+
+
+class _CheckPointSMB_1570R_Type(DisplayString):
+    """Custom type checkPointSMB_1570R based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1570R_Type.__name__ = "DisplayString"
+_CheckPointSMB_1570R_Object = MibScalar
+checkPointSMB_1570R = _CheckPointSMB_1570R_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2003),
+    _CheckPointSMB_1570R_Type()
+)
+checkPointSMB_1570R.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1570R.setStatus("current")
+
+
+class _CheckPointSMB_1590_Type(DisplayString):
+    """Custom type checkPointSMB_1590 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1590_Type.__name__ = "DisplayString"
+_CheckPointSMB_1590_Object = MibScalar
+checkPointSMB_1590 = _CheckPointSMB_1590_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2004),
+    _CheckPointSMB_1590_Type()
+)
+checkPointSMB_1590.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1590.setStatus("current")
+
+
+class _CheckPointSMB_1600_Type(DisplayString):
+    """Custom type checkPointSMB_1600 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1600_Type.__name__ = "DisplayString"
+_CheckPointSMB_1600_Object = MibScalar
+checkPointSMB_1600 = _CheckPointSMB_1600_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2005),
+    _CheckPointSMB_1600_Type()
+)
+checkPointSMB_1600.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1600.setStatus("current")
+
+
+class _CheckPointSMB_1800_Type(DisplayString):
+    """Custom type checkPointSMB_1800 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointSMB_1800_Type.__name__ = "DisplayString"
+_CheckPointSMB_1800_Object = MibScalar
+checkPointSMB_1800 = _CheckPointSMB_1800_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 2006),
+    _CheckPointSMB_1800_Type()
+)
+checkPointSMB_1800.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointSMB_1800.setStatus("current")
+
+
+class _CheckPoint61000_Type(DisplayString):
+    """Custom type checkPoint61000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint61000_Type.__name__ = "DisplayString"
+_CheckPoint61000_Object = MibScalar
+checkPoint61000 = _CheckPoint61000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 3001),
+    _CheckPoint61000_Type()
+)
+checkPoint61000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint61000.setStatus("current")
+
+
+class _CheckPoint64000_Type(DisplayString):
+    """Custom type checkPoint64000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint64000_Type.__name__ = "DisplayString"
+_CheckPoint64000_Object = MibScalar
+checkPoint64000 = _CheckPoint64000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 3002),
+    _CheckPoint64000_Type()
+)
+checkPoint64000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint64000.setStatus("current")
+
+
+class _CheckPoint41000_Type(DisplayString):
+    """Custom type checkPoint41000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint41000_Type.__name__ = "DisplayString"
+_CheckPoint41000_Object = MibScalar
+checkPoint41000 = _CheckPoint41000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 3003),
+    _CheckPoint41000_Type()
+)
+checkPoint41000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint41000.setStatus("current")
+
+
+class _CheckPoint44000_Type(DisplayString):
+    """Custom type checkPoint44000 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPoint44000_Type.__name__ = "DisplayString"
+_CheckPoint44000_Object = MibScalar
+checkPoint44000 = _CheckPoint44000_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 3004),
+    _CheckPoint44000_Type()
+)
+checkPoint44000.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPoint44000.setStatus("current")
+
+
+class _CheckPointMHO140_Type(DisplayString):
+    """Custom type checkPointMHO140 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointMHO140_Type.__name__ = "DisplayString"
+_CheckPointMHO140_Object = MibScalar
+checkPointMHO140 = _CheckPointMHO140_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 4000),
+    _CheckPointMHO140_Type()
+)
+checkPointMHO140.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointMHO140.setStatus("current")
+
+
+class _CheckPointMHO170_Type(DisplayString):
+    """Custom type checkPointMHO170 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointMHO170_Type.__name__ = "DisplayString"
+_CheckPointMHO170_Object = MibScalar
+checkPointMHO170 = _CheckPointMHO170_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 4001),
+    _CheckPointMHO170_Type()
+)
+checkPointMHO170.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointMHO170.setStatus("current")
+
+
+class _CheckPointMHO175_Type(DisplayString):
+    """Custom type checkPointMHO175 based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_CheckPointMHO175_Type.__name__ = "DisplayString"
+_CheckPointMHO175_Object = MibScalar
+checkPointMHO175 = _CheckPointMHO175_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 6, 123, 1, 4002),
+    _CheckPointMHO175_Type()
+)
+checkPointMHO175.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    checkPointMHO175.setStatus("current")
+_SvnServicePack_Type = Gauge32
 _SvnServicePack_Object = MibScalar
 svnServicePack = _SvnServicePack_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 6, 999),
@@ -9844,7 +10470,7 @@ mgIndex = _MgIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 7, 7, 1, 1),
     _MgIndex_Type()
 )
-mgIndex.setMaxAccess("read-only")
+mgIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     mgIndex.setStatus("current")
 _MgClientName_Type = DisplayString
@@ -9962,7 +10588,7 @@ mglsGWIndex = _MglsGWIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 7, 14, 4, 1, 1),
     _MglsGWIndex_Type()
 )
-mglsGWIndex.setMaxAccess("read-only")
+mglsGWIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     mglsGWIndex.setStatus("current")
 _MglsGWIP_Type = DisplayString
@@ -10492,7 +11118,7 @@ dtpsProdName = _DtpsProdName_Object(
 dtpsProdName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dtpsProdName.setStatus("current")
-_DtpsVerMajor_Type = Integer32
+_DtpsVerMajor_Type = Gauge32
 _DtpsVerMajor_Object = MibScalar
 dtpsVerMajor = _DtpsVerMajor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 9, 2),
@@ -10501,7 +11127,7 @@ dtpsVerMajor = _DtpsVerMajor_Object(
 dtpsVerMajor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dtpsVerMajor.setStatus("current")
-_DtpsVerMinor_Type = Integer32
+_DtpsVerMinor_Type = Gauge32
 _DtpsVerMinor_Object = MibScalar
 dtpsVerMinor = _DtpsVerMinor_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 9, 3),
@@ -10528,7 +11154,7 @@ dtpsConnectedUsers = _DtpsConnectedUsers_Object(
 dtpsConnectedUsers.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dtpsConnectedUsers.setStatus("current")
-_DtpsStatCode_Type = Integer32
+_DtpsStatCode_Type = Gauge32
 _DtpsStatCode_Object = MibScalar
 dtpsStatCode = _DtpsStatCode_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 9, 101),
@@ -10655,7 +11281,7 @@ lsIndex = _LsIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 11, 7, 1, 1),
     _LsIndex_Type()
 )
-lsIndex.setMaxAccess("read-only")
+lsIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     lsIndex.setStatus("current")
 _LsClientName_Type = DisplayString
@@ -10746,7 +11372,7 @@ lsGWIndex = _LsGWIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 11, 14, 4, 1, 1),
     _LsGWIndex_Type()
 )
-lsGWIndex.setMaxAccess("read-only")
+lsGWIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     lsGWIndex.setStatus("current")
 _LsGWIP_Type = DisplayString
@@ -10921,7 +11547,7 @@ _Vsx_ObjectIdentity = ObjectIdentity
 vsx = _Vsx_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16)
 )
-_VsxVsSupported_Type = Unsigned32
+_VsxVsSupported_Type = Gauge32
 _VsxVsSupported_Object = MibScalar
 vsxVsSupported = _VsxVsSupported_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 11),
@@ -10930,7 +11556,7 @@ vsxVsSupported = _VsxVsSupported_Object(
 vsxVsSupported.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxVsSupported.setStatus("current")
-_VsxVsConfigured_Type = Unsigned32
+_VsxVsConfigured_Type = Gauge32
 _VsxVsConfigured_Object = MibScalar
 vsxVsConfigured = _VsxVsConfigured_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 12),
@@ -10939,7 +11565,7 @@ vsxVsConfigured = _VsxVsConfigured_Object(
 vsxVsConfigured.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxVsConfigured.setStatus("current")
-_VsxVsInstalled_Type = Unsigned32
+_VsxVsInstalled_Type = Gauge32
 _VsxVsInstalled_Object = MibScalar
 vsxVsInstalled = _VsxVsInstalled_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 13),
@@ -10948,15 +11574,24 @@ vsxVsInstalled = _VsxVsInstalled_Object(
 vsxVsInstalled.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxVsInstalled.setStatus("current")
-_VsxVrfConfigured_Type = Unsigned32
-_VsxVrfConfigured_Object = MibScalar
-vsxVrfConfigured = _VsxVrfConfigured_Object(
+_VsxVsidConfigured_Type = Unsigned32
+_VsxVsidConfigured_Object = MibScalar
+vsxVsidConfigured = _VsxVsidConfigured_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 14),
-    _VsxVrfConfigured_Type()
+    _VsxVsidConfigured_Type()
 )
-vsxVrfConfigured.setMaxAccess("read-only")
+vsxVsidConfigured.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxVrfConfigured.setStatus("current")
+    vsxVsidConfigured.setStatus("current")
+_VsxAllVSsConnsSum_Type = Unsigned32
+_VsxAllVSsConnsSum_Object = MibScalar
+vsxAllVSsConnsSum = _VsxAllVSsConnsSum_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 15),
+    _VsxAllVSsConnsSum_Type()
+)
+vsxAllVSsConnsSum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxAllVSsConnsSum.setStatus("current")
 _VsxStatus_ObjectIdentity = ObjectIdentity
 vsxStatus = _VsxStatus_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22)
@@ -10976,16 +11611,36 @@ vsxStatusEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     vsxStatusEntry.setStatus("current")
-_VsxStatusVSId_Type = Unsigned32
+
+
+class _VsxStatusVSId_Type(Integer32):
+    """Custom type vsxStatusVSId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 250),
+    )
+
+
+_VsxStatusVSId_Type.__name__ = "Integer32"
 _VsxStatusVSId_Object = MibTableColumn
 vsxStatusVSId = _VsxStatusVSId_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 1, 1, 1),
     _VsxStatusVSId_Type()
 )
-vsxStatusVSId.setMaxAccess("read-only")
+vsxStatusVSId.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     vsxStatusVSId.setStatus("current")
-_VsxStatusVRId_Type = Unsigned32
+
+
+class _VsxStatusVRId_Type(Integer32):
+    """Custom type vsxStatusVRId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 250),
+    )
+
+
+_VsxStatusVRId_Type.__name__ = "Integer32"
 _VsxStatusVRId_Object = MibTableColumn
 vsxStatusVRId = _VsxStatusVRId_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 1, 1, 2),
@@ -11067,7 +11722,7 @@ vsxStatusHAState = _VsxStatusHAState_Object(
 vsxStatusHAState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxStatusHAState.setStatus("current")
-_VsxStatusVSWeight_Type = Unsigned32
+_VsxStatusVSWeight_Type = Gauge32
 _VsxStatusVSWeight_Object = MibTableColumn
 vsxStatusVSWeight = _VsxStatusVSWeight_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 1, 1, 10),
@@ -11076,125 +11731,6 @@ vsxStatusVSWeight = _VsxStatusVSWeight_Object(
 vsxStatusVSWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxStatusVSWeight.setStatus("current")
-_VsxStatusCPUUsageTable_Object = MibTable
-vsxStatusCPUUsageTable = _VsxStatusCPUUsageTable_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2)
-)
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsageTable.setStatus("current")
-_VsxStatusCPUUsageEntry_Object = MibTableRow
-vsxStatusCPUUsageEntry = _VsxStatusCPUUsageEntry_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1)
-)
-vsxStatusCPUUsageEntry.setIndexNames(
-    (0, "CHECKPOINT-MIB", "vsxStatusVSId"),
-)
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsageEntry.setStatus("current")
-
-
-class _VsxStatusCPUUsage1sec_Type(Integer32):
-    """Custom type vsxStatusCPUUsage1sec based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsage1sec_Type.__name__ = "Integer32"
-_VsxStatusCPUUsage1sec_Object = MibTableColumn
-vsxStatusCPUUsage1sec = _VsxStatusCPUUsage1sec_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1, 1),
-    _VsxStatusCPUUsage1sec_Type()
-)
-vsxStatusCPUUsage1sec.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsage1sec.setStatus("current")
-
-
-class _VsxStatusCPUUsage10sec_Type(Integer32):
-    """Custom type vsxStatusCPUUsage10sec based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsage10sec_Type.__name__ = "Integer32"
-_VsxStatusCPUUsage10sec_Object = MibTableColumn
-vsxStatusCPUUsage10sec = _VsxStatusCPUUsage10sec_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1, 2),
-    _VsxStatusCPUUsage10sec_Type()
-)
-vsxStatusCPUUsage10sec.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsage10sec.setStatus("current")
-
-
-class _VsxStatusCPUUsage1min_Type(Integer32):
-    """Custom type vsxStatusCPUUsage1min based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsage1min_Type.__name__ = "Integer32"
-_VsxStatusCPUUsage1min_Object = MibTableColumn
-vsxStatusCPUUsage1min = _VsxStatusCPUUsage1min_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1, 3),
-    _VsxStatusCPUUsage1min_Type()
-)
-vsxStatusCPUUsage1min.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsage1min.setStatus("current")
-
-
-class _VsxStatusCPUUsage1hr_Type(Integer32):
-    """Custom type vsxStatusCPUUsage1hr based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsage1hr_Type.__name__ = "Integer32"
-_VsxStatusCPUUsage1hr_Object = MibTableColumn
-vsxStatusCPUUsage1hr = _VsxStatusCPUUsage1hr_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1, 4),
-    _VsxStatusCPUUsage1hr_Type()
-)
-vsxStatusCPUUsage1hr.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsage1hr.setStatus("current")
-
-
-class _VsxStatusCPUUsage24hr_Type(Integer32):
-    """Custom type vsxStatusCPUUsage24hr based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsage24hr_Type.__name__ = "Integer32"
-_VsxStatusCPUUsage24hr_Object = MibTableColumn
-vsxStatusCPUUsage24hr = _VsxStatusCPUUsage24hr_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1, 5),
-    _VsxStatusCPUUsage24hr_Type()
-)
-vsxStatusCPUUsage24hr.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsage24hr.setStatus("current")
-_VsxStatusCPUUsageVSId_Type = Unsigned32
-_VsxStatusCPUUsageVSId_Object = MibTableColumn
-vsxStatusCPUUsageVSId = _VsxStatusCPUUsageVSId_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 2, 1, 6),
-    _VsxStatusCPUUsageVSId_Type()
-)
-vsxStatusCPUUsageVSId.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    vsxStatusCPUUsageVSId.setStatus("current")
 _VsxStatusMemoryUsageTable_Object = MibTable
 vsxStatusMemoryUsageTable = _VsxStatusMemoryUsageTable_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 3)
@@ -11226,7 +11762,7 @@ vsxStatusMemoryUsageVSId = _VsxStatusMemoryUsageVSId_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 3, 1, 1),
     _VsxStatusMemoryUsageVSId_Type()
 )
-vsxStatusMemoryUsageVSId.setMaxAccess("read-only")
+vsxStatusMemoryUsageVSId.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     vsxStatusMemoryUsageVSId.setStatus("current")
 _VsxStatusMemoryUsageVSName_Type = DisplayString
@@ -11238,7 +11774,7 @@ vsxStatusMemoryUsageVSName = _VsxStatusMemoryUsageVSName_Object(
 vsxStatusMemoryUsageVSName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxStatusMemoryUsageVSName.setStatus("current")
-_VsxStatusMemoryUsage_Type = Unsigned32
+_VsxStatusMemoryUsage_Type = Counter64
 _VsxStatusMemoryUsage_Object = MibTableColumn
 vsxStatusMemoryUsage = _VsxStatusMemoryUsage_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 3, 1, 3),
@@ -11247,153 +11783,164 @@ vsxStatusMemoryUsage = _VsxStatusMemoryUsage_Object(
 vsxStatusMemoryUsage.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxStatusMemoryUsage.setStatus("current")
-_VsxStatusCPUUsagePerCPUTable_Object = MibTable
-vsxStatusCPUUsagePerCPUTable = _VsxStatusCPUUsagePerCPUTable_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4)
+_VsxStatusMemoryUsageVSMaxMem_Type = Counter64
+_VsxStatusMemoryUsageVSMaxMem_Object = MibTableColumn
+vsxStatusMemoryUsageVSMaxMem = _VsxStatusMemoryUsageVSMaxMem_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 3, 1, 4),
+    _VsxStatusMemoryUsageVSMaxMem_Type()
+)
+vsxStatusMemoryUsageVSMaxMem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxStatusMemoryUsageVSMaxMem.setStatus("current")
+_VsxStatusInterfacesTable_Object = MibTable
+vsxStatusInterfacesTable = _VsxStatusInterfacesTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5)
 )
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPUTable.setStatus("current")
-_VsxStatusCPUUsagePerCPUEntry_Object = MibTableRow
-vsxStatusCPUUsagePerCPUEntry = _VsxStatusCPUUsagePerCPUEntry_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1)
+    vsxStatusInterfacesTable.setStatus("current")
+_VsxStatusInterfacesEntry_Object = MibTableRow
+vsxStatusInterfacesEntry = _VsxStatusInterfacesEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1)
 )
-vsxStatusCPUUsagePerCPUEntry.setIndexNames(
-    (0, "CHECKPOINT-MIB", "vsxStatusCPUUsagePerCPUVSId"),
+vsxStatusInterfacesEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "vsxStatusInterfaceVSID"),
 )
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPUEntry.setStatus("current")
+    vsxStatusInterfacesEntry.setStatus("current")
 
 
-class _VsxStatusCPUUsagePerCPUVSId_Type(Integer32):
-    """Custom type vsxStatusCPUUsagePerCPUVSId based on Integer32"""
+class _VsxStatusInterfaceVSID_Type(Integer32):
+    """Custom type vsxStatusInterfaceVSID based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 250),
     )
 
 
-_VsxStatusCPUUsagePerCPUVSId_Type.__name__ = "Integer32"
-_VsxStatusCPUUsagePerCPUVSId_Object = MibTableColumn
-vsxStatusCPUUsagePerCPUVSId = _VsxStatusCPUUsagePerCPUVSId_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 1),
-    _VsxStatusCPUUsagePerCPUVSId_Type()
+_VsxStatusInterfaceVSID_Type.__name__ = "Integer32"
+_VsxStatusInterfaceVSID_Object = MibTableColumn
+vsxStatusInterfaceVSID = _VsxStatusInterfaceVSID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 1),
+    _VsxStatusInterfaceVSID_Type()
 )
-vsxStatusCPUUsagePerCPUVSId.setMaxAccess("read-only")
+vsxStatusInterfaceVSID.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPUVSId.setStatus("current")
-_VsxStatusCPUUsagePerCPUVSName_Type = DisplayString
-_VsxStatusCPUUsagePerCPUVSName_Object = MibTableColumn
-vsxStatusCPUUsagePerCPUVSName = _VsxStatusCPUUsagePerCPUVSName_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 2),
-    _VsxStatusCPUUsagePerCPUVSName_Type()
+    vsxStatusInterfaceVSID.setStatus("current")
+_VsxStatusInterfaceVSName_Type = DisplayString
+_VsxStatusInterfaceVSName_Object = MibTableColumn
+vsxStatusInterfaceVSName = _VsxStatusInterfaceVSName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 2),
+    _VsxStatusInterfaceVSName_Type()
 )
-vsxStatusCPUUsagePerCPUVSName.setMaxAccess("read-only")
+vsxStatusInterfaceVSName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPUVSName.setStatus("current")
-_VsxStatusCPUUsagePerCPUCoreNumber_Type = Integer32
-_VsxStatusCPUUsagePerCPUCoreNumber_Object = MibTableColumn
-vsxStatusCPUUsagePerCPUCoreNumber = _VsxStatusCPUUsagePerCPUCoreNumber_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 3),
-    _VsxStatusCPUUsagePerCPUCoreNumber_Type()
+    vsxStatusInterfaceVSName.setStatus("current")
+_VsxStatusInterfaceIfName_Type = DisplayString
+_VsxStatusInterfaceIfName_Object = MibTableColumn
+vsxStatusInterfaceIfName = _VsxStatusInterfaceIfName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 3),
+    _VsxStatusInterfaceIfName_Type()
 )
-vsxStatusCPUUsagePerCPUCoreNumber.setMaxAccess("read-only")
+vsxStatusInterfaceIfName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPUCoreNumber.setStatus("current")
+    vsxStatusInterfaceIfName.setStatus("current")
 
 
-class _VsxStatusCPUUsagePerCPU1sec_Type(Integer32):
-    """Custom type vsxStatusCPUUsagePerCPU1sec based on Integer32"""
+class _VsxStatusInterfaceAdminState_Type(Integer32):
+    """Custom type vsxStatusInterfaceAdminState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("up", 1),
+          ("down", 2))
     )
 
 
-_VsxStatusCPUUsagePerCPU1sec_Type.__name__ = "Integer32"
-_VsxStatusCPUUsagePerCPU1sec_Object = MibTableColumn
-vsxStatusCPUUsagePerCPU1sec = _VsxStatusCPUUsagePerCPU1sec_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 4),
-    _VsxStatusCPUUsagePerCPU1sec_Type()
+_VsxStatusInterfaceAdminState_Type.__name__ = "Integer32"
+_VsxStatusInterfaceAdminState_Object = MibTableColumn
+vsxStatusInterfaceAdminState = _VsxStatusInterfaceAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 4),
+    _VsxStatusInterfaceAdminState_Type()
 )
-vsxStatusCPUUsagePerCPU1sec.setMaxAccess("read-only")
+vsxStatusInterfaceAdminState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPU1sec.setStatus("current")
+    vsxStatusInterfaceAdminState.setStatus("current")
 
 
-class _VsxStatusCPUUsagePerCPU10sec_Type(Integer32):
-    """Custom type vsxStatusCPUUsagePerCPU10sec based on Integer32"""
+class _VsxStatusInterfaceOperState_Type(Integer32):
+    """Custom type vsxStatusInterfaceOperState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("up", 1),
+          ("down", 2))
     )
 
 
-_VsxStatusCPUUsagePerCPU10sec_Type.__name__ = "Integer32"
-_VsxStatusCPUUsagePerCPU10sec_Object = MibTableColumn
-vsxStatusCPUUsagePerCPU10sec = _VsxStatusCPUUsagePerCPU10sec_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 5),
-    _VsxStatusCPUUsagePerCPU10sec_Type()
+_VsxStatusInterfaceOperState_Type.__name__ = "Integer32"
+_VsxStatusInterfaceOperState_Object = MibTableColumn
+vsxStatusInterfaceOperState = _VsxStatusInterfaceOperState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 5),
+    _VsxStatusInterfaceOperState_Type()
 )
-vsxStatusCPUUsagePerCPU10sec.setMaxAccess("read-only")
+vsxStatusInterfaceOperState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPU10sec.setStatus("current")
-
-
-class _VsxStatusCPUUsagePerCPU1min_Type(Integer32):
-    """Custom type vsxStatusCPUUsagePerCPU1min based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsagePerCPU1min_Type.__name__ = "Integer32"
-_VsxStatusCPUUsagePerCPU1min_Object = MibTableColumn
-vsxStatusCPUUsagePerCPU1min = _VsxStatusCPUUsagePerCPU1min_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 6),
-    _VsxStatusCPUUsagePerCPU1min_Type()
+    vsxStatusInterfaceOperState.setStatus("current")
+_VsxStatusInterfaceRxBytes_Type = Counter64
+_VsxStatusInterfaceRxBytes_Object = MibTableColumn
+vsxStatusInterfaceRxBytes = _VsxStatusInterfaceRxBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 6),
+    _VsxStatusInterfaceRxBytes_Type()
 )
-vsxStatusCPUUsagePerCPU1min.setMaxAccess("read-only")
+vsxStatusInterfaceRxBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPU1min.setStatus("current")
-
-
-class _VsxStatusCPUUsagePerCPU1hour_Type(Integer32):
-    """Custom type vsxStatusCPUUsagePerCPU1hour based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsagePerCPU1hour_Type.__name__ = "Integer32"
-_VsxStatusCPUUsagePerCPU1hour_Object = MibTableColumn
-vsxStatusCPUUsagePerCPU1hour = _VsxStatusCPUUsagePerCPU1hour_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 7),
-    _VsxStatusCPUUsagePerCPU1hour_Type()
+    vsxStatusInterfaceRxBytes.setStatus("current")
+_VsxStatusInterfaceTxBytes_Type = Counter64
+_VsxStatusInterfaceTxBytes_Object = MibTableColumn
+vsxStatusInterfaceTxBytes = _VsxStatusInterfaceTxBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 7),
+    _VsxStatusInterfaceTxBytes_Type()
 )
-vsxStatusCPUUsagePerCPU1hour.setMaxAccess("read-only")
+vsxStatusInterfaceTxBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPU1hour.setStatus("current")
-
-
-class _VsxStatusCPUUsagePerCPU24hours_Type(Integer32):
-    """Custom type vsxStatusCPUUsagePerCPU24hours based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
-    )
-
-
-_VsxStatusCPUUsagePerCPU24hours_Type.__name__ = "Integer32"
-_VsxStatusCPUUsagePerCPU24hours_Object = MibTableColumn
-vsxStatusCPUUsagePerCPU24hours = _VsxStatusCPUUsagePerCPU24hours_Object(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 4, 1, 8),
-    _VsxStatusCPUUsagePerCPU24hours_Type()
+    vsxStatusInterfaceTxBytes.setStatus("current")
+_VsxStatusInterfaceOverallBytes_Type = Counter64
+_VsxStatusInterfaceOverallBytes_Object = MibTableColumn
+vsxStatusInterfaceOverallBytes = _VsxStatusInterfaceOverallBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 8),
+    _VsxStatusInterfaceOverallBytes_Type()
 )
-vsxStatusCPUUsagePerCPU24hours.setMaxAccess("read-only")
+vsxStatusInterfaceOverallBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vsxStatusCPUUsagePerCPU24hours.setStatus("current")
+    vsxStatusInterfaceOverallBytes.setStatus("current")
+_VsxStatusInterfaceRxErrors_Type = Counter64
+_VsxStatusInterfaceRxErrors_Object = MibTableColumn
+vsxStatusInterfaceRxErrors = _VsxStatusInterfaceRxErrors_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 9),
+    _VsxStatusInterfaceRxErrors_Type()
+)
+vsxStatusInterfaceRxErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxStatusInterfaceRxErrors.setStatus("current")
+_VsxStatusInterfaceTxErrors_Type = Counter64
+_VsxStatusInterfaceTxErrors_Object = MibTableColumn
+vsxStatusInterfaceTxErrors = _VsxStatusInterfaceTxErrors_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 22, 5, 1, 10),
+    _VsxStatusInterfaceTxErrors_Type()
+)
+vsxStatusInterfaceTxErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxStatusInterfaceTxErrors.setStatus("current")
 _VsxCounters_ObjectIdentity = ObjectIdentity
 vsxCounters = _VsxCounters_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23)
@@ -11413,7 +11960,17 @@ vsxCountersEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     vsxCountersEntry.setStatus("current")
-_VsxCountersVSId_Type = Unsigned32
+
+
+class _VsxCountersVSId_Type(Integer32):
+    """Custom type vsxCountersVSId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 250),
+    )
+
+
+_VsxCountersVSId_Type.__name__ = "Integer32"
 _VsxCountersVSId_Object = MibTableColumn
 vsxCountersVSId = _VsxCountersVSId_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 1),
@@ -11422,7 +11979,7 @@ vsxCountersVSId = _VsxCountersVSId_Object(
 vsxCountersVSId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersVSId.setStatus("current")
-_VsxCountersConnNum_Type = Unsigned32
+_VsxCountersConnNum_Type = Gauge32
 _VsxCountersConnNum_Object = MibTableColumn
 vsxCountersConnNum = _VsxCountersConnNum_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 2),
@@ -11431,7 +11988,7 @@ vsxCountersConnNum = _VsxCountersConnNum_Object(
 vsxCountersConnNum.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersConnNum.setStatus("current")
-_VsxCountersConnPeakNum_Type = Unsigned32
+_VsxCountersConnPeakNum_Type = Gauge32
 _VsxCountersConnPeakNum_Object = MibTableColumn
 vsxCountersConnPeakNum = _VsxCountersConnPeakNum_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 3),
@@ -11440,7 +11997,7 @@ vsxCountersConnPeakNum = _VsxCountersConnPeakNum_Object(
 vsxCountersConnPeakNum.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersConnPeakNum.setStatus("current")
-_VsxCountersConnTableLimit_Type = Unsigned32
+_VsxCountersConnTableLimit_Type = Gauge32
 _VsxCountersConnTableLimit_Object = MibTableColumn
 vsxCountersConnTableLimit = _VsxCountersConnTableLimit_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 4),
@@ -11449,17 +12006,7 @@ vsxCountersConnTableLimit = _VsxCountersConnTableLimit_Object(
 vsxCountersConnTableLimit.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersConnTableLimit.setStatus("current")
-
-
-class _VsxCountersPackets_Type(DisplayString):
-    """Custom type vsxCountersPackets based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersPackets_Type.__name__ = "DisplayString"
+_VsxCountersPackets_Type = Counter64
 _VsxCountersPackets_Object = MibTableColumn
 vsxCountersPackets = _VsxCountersPackets_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 5),
@@ -11468,17 +12015,7 @@ vsxCountersPackets = _VsxCountersPackets_Object(
 vsxCountersPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersPackets.setStatus("current")
-
-
-class _VsxCountersDroppedTotal_Type(DisplayString):
-    """Custom type vsxCountersDroppedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersDroppedTotal_Type.__name__ = "DisplayString"
+_VsxCountersDroppedTotal_Type = Counter64
 _VsxCountersDroppedTotal_Object = MibTableColumn
 vsxCountersDroppedTotal = _VsxCountersDroppedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 6),
@@ -11487,17 +12024,7 @@ vsxCountersDroppedTotal = _VsxCountersDroppedTotal_Object(
 vsxCountersDroppedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersDroppedTotal.setStatus("current")
-
-
-class _VsxCountersAcceptedTotal_Type(DisplayString):
-    """Custom type vsxCountersAcceptedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersAcceptedTotal_Type.__name__ = "DisplayString"
+_VsxCountersAcceptedTotal_Type = Counter64
 _VsxCountersAcceptedTotal_Object = MibTableColumn
 vsxCountersAcceptedTotal = _VsxCountersAcceptedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 7),
@@ -11506,17 +12033,7 @@ vsxCountersAcceptedTotal = _VsxCountersAcceptedTotal_Object(
 vsxCountersAcceptedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersAcceptedTotal.setStatus("current")
-
-
-class _VsxCountersRejectedTotal_Type(DisplayString):
-    """Custom type vsxCountersRejectedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersRejectedTotal_Type.__name__ = "DisplayString"
+_VsxCountersRejectedTotal_Type = Counter64
 _VsxCountersRejectedTotal_Object = MibTableColumn
 vsxCountersRejectedTotal = _VsxCountersRejectedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 8),
@@ -11525,17 +12042,7 @@ vsxCountersRejectedTotal = _VsxCountersRejectedTotal_Object(
 vsxCountersRejectedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersRejectedTotal.setStatus("current")
-
-
-class _VsxCountersBytesAcceptedTotal_Type(DisplayString):
-    """Custom type vsxCountersBytesAcceptedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersBytesAcceptedTotal_Type.__name__ = "DisplayString"
+_VsxCountersBytesAcceptedTotal_Type = Counter64
 _VsxCountersBytesAcceptedTotal_Object = MibTableColumn
 vsxCountersBytesAcceptedTotal = _VsxCountersBytesAcceptedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 9),
@@ -11544,17 +12051,7 @@ vsxCountersBytesAcceptedTotal = _VsxCountersBytesAcceptedTotal_Object(
 vsxCountersBytesAcceptedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersBytesAcceptedTotal.setStatus("current")
-
-
-class _VsxCountersBytesDroppedTotal_Type(DisplayString):
-    """Custom type vsxCountersBytesDroppedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersBytesDroppedTotal_Type.__name__ = "DisplayString"
+_VsxCountersBytesDroppedTotal_Type = Counter64
 _VsxCountersBytesDroppedTotal_Object = MibTableColumn
 vsxCountersBytesDroppedTotal = _VsxCountersBytesDroppedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 10),
@@ -11563,17 +12060,7 @@ vsxCountersBytesDroppedTotal = _VsxCountersBytesDroppedTotal_Object(
 vsxCountersBytesDroppedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersBytesDroppedTotal.setStatus("current")
-
-
-class _VsxCountersBytesRejectedTotal_Type(DisplayString):
-    """Custom type vsxCountersBytesRejectedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersBytesRejectedTotal_Type.__name__ = "DisplayString"
+_VsxCountersBytesRejectedTotal_Type = Counter64
 _VsxCountersBytesRejectedTotal_Object = MibTableColumn
 vsxCountersBytesRejectedTotal = _VsxCountersBytesRejectedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 11),
@@ -11582,17 +12069,7 @@ vsxCountersBytesRejectedTotal = _VsxCountersBytesRejectedTotal_Object(
 vsxCountersBytesRejectedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersBytesRejectedTotal.setStatus("current")
-
-
-class _VsxCountersLoggedTotal_Type(DisplayString):
-    """Custom type vsxCountersLoggedTotal based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_VsxCountersLoggedTotal_Type.__name__ = "DisplayString"
+_VsxCountersLoggedTotal_Type = Counter64
 _VsxCountersLoggedTotal_Object = MibTableColumn
 vsxCountersLoggedTotal = _VsxCountersLoggedTotal_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 12),
@@ -11601,24 +12078,7 @@ vsxCountersLoggedTotal = _VsxCountersLoggedTotal_Object(
 vsxCountersLoggedTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersLoggedTotal.setStatus("current")
-
-
-class _VsxCountersIsDataValid_Type(Integer32):
-    """Custom type vsxCountersIsDataValid based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1)
-        )
-    )
-    namedValues = NamedValues(
-        *(("invalid", 0),
-          ("valid", 1))
-    )
-
-
-_VsxCountersIsDataValid_Type.__name__ = "Integer32"
+_VsxCountersIsDataValid_Type = Integer32
 _VsxCountersIsDataValid_Object = MibTableColumn
 vsxCountersIsDataValid = _VsxCountersIsDataValid_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 1, 1, 13),
@@ -11627,6 +12087,132 @@ vsxCountersIsDataValid = _VsxCountersIsDataValid_Object(
 vsxCountersIsDataValid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vsxCountersIsDataValid.setStatus("current")
+_VsxCountersDropTable_Object = MibTable
+vsxCountersDropTable = _VsxCountersDropTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 2)
+)
+if mibBuilder.loadTexts:
+    vsxCountersDropTable.setStatus("current")
+_VsxCountersDropEntry_Object = MibTableRow
+vsxCountersDropEntry = _VsxCountersDropEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 2, 1)
+)
+vsxCountersDropEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "vsxStatusVSId"),
+)
+if mibBuilder.loadTexts:
+    vsxCountersDropEntry.setStatus("current")
+
+
+class _VsxCountersDropVSID_Type(Integer32):
+    """Custom type vsxCountersDropVSID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 250),
+    )
+
+
+_VsxCountersDropVSID_Type.__name__ = "Integer32"
+_VsxCountersDropVSID_Object = MibTableColumn
+vsxCountersDropVSID = _VsxCountersDropVSID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 2, 1, 1),
+    _VsxCountersDropVSID_Type()
+)
+vsxCountersDropVSID.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxCountersDropVSID.setStatus("current")
+_VsxCountersDropVsName_Type = DisplayString
+_VsxCountersDropVsName_Object = MibTableColumn
+vsxCountersDropVsName = _VsxCountersDropVsName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 2, 1, 2),
+    _VsxCountersDropVsName_Type()
+)
+vsxCountersDropVsName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxCountersDropVsName.setStatus("current")
+_VsxCountersDropCount_Type = Counter64
+_VsxCountersDropCount_Object = MibTableColumn
+vsxCountersDropCount = _VsxCountersDropCount_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 23, 2, 1, 3),
+    _VsxCountersDropCount_Type()
+)
+vsxCountersDropCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxCountersDropCount.setStatus("current")
+_VsxS2SIpsecTunnels_ObjectIdentity = ObjectIdentity
+vsxS2SIpsecTunnels = _VsxS2SIpsecTunnels_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 31)
+)
+_VsxS2SIpsecTunnelsTable_Object = MibTable
+vsxS2SIpsecTunnelsTable = _VsxS2SIpsecTunnelsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 31, 1)
+)
+if mibBuilder.loadTexts:
+    vsxS2SIpsecTunnelsTable.setStatus("current")
+_VsxS2SIpsecTunnelsEntry_Object = MibTableRow
+vsxS2SIpsecTunnelsEntry = _VsxS2SIpsecTunnelsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 31, 1, 1)
+)
+vsxS2SIpsecTunnelsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "vsxStatusVSId"),
+)
+if mibBuilder.loadTexts:
+    vsxS2SIpsecTunnelsEntry.setStatus("current")
+_VsxTunnelsVSidName_Type = DisplayString
+_VsxTunnelsVSidName_Object = MibTableColumn
+vsxTunnelsVSidName = _VsxTunnelsVSidName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 31, 1, 1, 1),
+    _VsxTunnelsVSidName_Type()
+)
+vsxTunnelsVSidName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxTunnelsVSidName.setStatus("current")
+_VsxS2SIpsecTunnelsCounter_Type = Unsigned32
+_VsxS2SIpsecTunnelsCounter_Object = MibTableColumn
+vsxS2SIpsecTunnelsCounter = _VsxS2SIpsecTunnelsCounter_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 31, 1, 1, 2),
+    _VsxS2SIpsecTunnelsCounter_Type()
+)
+vsxS2SIpsecTunnelsCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxS2SIpsecTunnelsCounter.setStatus("current")
+_VsxVSStateChanged_ObjectIdentity = ObjectIdentity
+vsxVSStateChanged = _VsxVSStateChanged_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 32)
+)
+_VsxVSStateChangedTable_Object = MibTable
+vsxVSStateChangedTable = _VsxVSStateChangedTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 32, 1)
+)
+if mibBuilder.loadTexts:
+    vsxVSStateChangedTable.setStatus("current")
+_VsxVSStateChangedEntry_Object = MibTableRow
+vsxVSStateChangedEntry = _VsxVSStateChangedEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 32, 1, 1)
+)
+vsxVSStateChangedEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "vsxStatusVSId"),
+)
+if mibBuilder.loadTexts:
+    vsxVSStateChangedEntry.setStatus("current")
+_VsxVSStateChangedVSIdName_Type = DisplayString
+_VsxVSStateChangedVSIdName_Object = MibTableColumn
+vsxVSStateChangedVSIdName = _VsxVSStateChangedVSIdName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 32, 1, 1, 1),
+    _VsxVSStateChangedVSIdName_Type()
+)
+vsxVSStateChangedVSIdName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxVSStateChangedVSIdName.setStatus("current")
+_VsxVSStateChangedChangeOccurred_Type = Unsigned32
+_VsxVSStateChangedChangeOccurred_Object = MibTableColumn
+vsxVSStateChangedChangeOccurred = _VsxVSStateChangedChangeOccurred_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 16, 32, 1, 1, 2),
+    _VsxVSStateChangedChangeOccurred_Type()
+)
+vsxVSStateChangedChangeOccurred.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsxVSStateChangedChangeOccurred.setStatus("current")
 _SmartDefense_ObjectIdentity = ObjectIdentity
 smartDefense = _SmartDefense_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 17)
@@ -12932,7 +13518,7 @@ aviEngineIndex = _AviEngineIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 1, 1, 1, 1),
     _AviEngineIndex_Type()
 )
-aviEngineIndex.setMaxAccess("read-only")
+aviEngineIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviEngineIndex.setStatus("current")
 _AviEngineName_Type = DisplayString
@@ -13041,7 +13627,7 @@ aviTopVirusesIndex = _AviTopVirusesIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 2, 1, 1, 1),
     _AviTopVirusesIndex_Type()
 )
-aviTopVirusesIndex.setMaxAccess("read-only")
+aviTopVirusesIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviTopVirusesIndex.setStatus("current")
 _AviTopVirusesName_Type = DisplayString
@@ -13087,7 +13673,7 @@ aviTopEverVirusesIndex = _AviTopEverVirusesIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 3, 1, 1, 1),
     _AviTopEverVirusesIndex_Type()
 )
-aviTopEverVirusesIndex.setMaxAccess("read-only")
+aviTopEverVirusesIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviTopEverVirusesIndex.setStatus("current")
 _AviTopEverVirusesName_Type = DisplayString
@@ -13164,7 +13750,7 @@ aviHTTPTopVirusesIndex = _AviHTTPTopVirusesIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 4, 1, 4, 1, 1),
     _AviHTTPTopVirusesIndex_Type()
 )
-aviHTTPTopVirusesIndex.setMaxAccess("read-only")
+aviHTTPTopVirusesIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviHTTPTopVirusesIndex.setStatus("current")
 _AviHTTPTopVirusesName_Type = DisplayString
@@ -13237,7 +13823,7 @@ aviFTPTopVirusesIndex = _AviFTPTopVirusesIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 4, 2, 4, 1, 1),
     _AviFTPTopVirusesIndex_Type()
 )
-aviFTPTopVirusesIndex.setMaxAccess("read-only")
+aviFTPTopVirusesIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviFTPTopVirusesIndex.setStatus("current")
 _AviFTPTopVirusesName_Type = DisplayString
@@ -13310,7 +13896,7 @@ aviSMTPTopVirusesIndex = _AviSMTPTopVirusesIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 4, 3, 4, 1, 1),
     _AviSMTPTopVirusesIndex_Type()
 )
-aviSMTPTopVirusesIndex.setMaxAccess("read-only")
+aviSMTPTopVirusesIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviSMTPTopVirusesIndex.setStatus("current")
 _AviSMTPTopVirusesName_Type = DisplayString
@@ -13383,7 +13969,7 @@ aviPOP3TopVirusesIndex = _AviPOP3TopVirusesIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 24, 4, 4, 4, 1, 1),
     _AviPOP3TopVirusesIndex_Type()
 )
-aviPOP3TopVirusesIndex.setMaxAccess("read-only")
+aviPOP3TopVirusesIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     aviPOP3TopVirusesIndex.setStatus("current")
 _AviPOP3TopVirusesName_Type = DisplayString
@@ -13532,7 +14118,7 @@ cpsemdCorrelationUnitIndex = _CpsemdCorrelationUnitIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 25, 1, 9, 1, 1),
     _CpsemdCorrelationUnitIndex_Type()
 )
-cpsemdCorrelationUnitIndex.setMaxAccess("read-only")
+cpsemdCorrelationUnitIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cpsemdCorrelationUnitIndex.setStatus("current")
 _CpsemdCorrelationUnitIP_Type = DisplayString
@@ -13659,7 +14245,7 @@ cpseadJobIndex = _CpseadJobIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 25, 2, 4, 1, 1),
     _CpseadJobIndex_Type()
 )
-cpseadJobIndex.setMaxAccess("read-only")
+cpseadJobIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cpseadJobIndex.setStatus("current")
 _CpseadJobID_Type = DisplayString
@@ -13938,7 +14524,7 @@ ufTopBlockedCatIndex = _UfTopBlockedCatIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 29, 2, 4, 1, 1),
     _UfTopBlockedCatIndex_Type()
 )
-ufTopBlockedCatIndex.setMaxAccess("read-only")
+ufTopBlockedCatIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     ufTopBlockedCatIndex.setStatus("current")
 _UfTopBlockedCatName_Type = DisplayString
@@ -13980,7 +14566,7 @@ ufTopBlockedSiteIndex = _UfTopBlockedSiteIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 29, 2, 5, 1, 1),
     _UfTopBlockedSiteIndex_Type()
 )
-ufTopBlockedSiteIndex.setMaxAccess("read-only")
+ufTopBlockedSiteIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     ufTopBlockedSiteIndex.setStatus("current")
 _UfTopBlockedSiteName_Type = DisplayString
@@ -14022,7 +14608,7 @@ ufTopBlockedUserIndex = _UfTopBlockedUserIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 29, 2, 6, 1, 1),
     _UfTopBlockedUserIndex_Type()
 )
-ufTopBlockedUserIndex.setMaxAccess("read-only")
+ufTopBlockedUserIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     ufTopBlockedUserIndex.setStatus("current")
 _UfTopBlockedUserName_Type = DisplayString
@@ -14434,7 +15020,7 @@ voipDOSSipRateLimitingTableIndex = _VoipDOSSipRateLimitingTableIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 31, 6, 1, 2, 1, 1),
     _VoipDOSSipRateLimitingTableIndex_Type()
 )
-voipDOSSipRateLimitingTableIndex.setMaxAccess("read-only")
+voipDOSSipRateLimitingTableIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     voipDOSSipRateLimitingTableIndex.setStatus("current")
 _VoipDOSSipRateLimitingTableIpAddress_Type = Integer32
@@ -14570,24 +15156,7 @@ _FwSXLGroup_ObjectIdentity = ObjectIdentity
 fwSXLGroup = _FwSXLGroup_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1)
 )
-
-
-class _FwSXLStatus_Type(Integer32):
-    """Custom type fwSXLStatus based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1)
-        )
-    )
-    namedValues = NamedValues(
-        *(("disabled", 0),
-          ("enabled", 1))
-    )
-
-
-_FwSXLStatus_Type.__name__ = "Integer32"
+_FwSXLStatus_Type = Gauge32
 _FwSXLStatus_Object = MibScalar
 fwSXLStatus = _FwSXLStatus_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 1),
@@ -14596,7 +15165,7 @@ fwSXLStatus = _FwSXLStatus_Object(
 fwSXLStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSXLStatus.setStatus("current")
-_FwSXLConnsExisting_Type = Integer32
+_FwSXLConnsExisting_Type = Gauge32
 _FwSXLConnsExisting_Object = MibScalar
 fwSXLConnsExisting = _FwSXLConnsExisting_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 2),
@@ -14605,7 +15174,7 @@ fwSXLConnsExisting = _FwSXLConnsExisting_Object(
 fwSXLConnsExisting.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSXLConnsExisting.setStatus("current")
-_FwSXLConnsAdded_Type = Integer32
+_FwSXLConnsAdded_Type = Gauge32
 _FwSXLConnsAdded_Object = MibScalar
 fwSXLConnsAdded = _FwSXLConnsAdded_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 3),
@@ -14614,7 +15183,7 @@ fwSXLConnsAdded = _FwSXLConnsAdded_Object(
 fwSXLConnsAdded.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSXLConnsAdded.setStatus("current")
-_FwSXLConnsDeleted_Type = Integer32
+_FwSXLConnsDeleted_Type = Gauge32
 _FwSXLConnsDeleted_Object = MibScalar
 fwSXLConnsDeleted = _FwSXLConnsDeleted_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 4),
@@ -14623,6 +15192,2708 @@ fwSXLConnsDeleted = _FwSXLConnsDeleted_Object(
 fwSXLConnsDeleted.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwSXLConnsDeleted.setStatus("current")
+_FwSXLStatistics_ObjectIdentity = ObjectIdentity
+fwSXLStatistics = _FwSXLStatistics_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5)
+)
+_FwSXLStatisticsAggregate_ObjectIdentity = ObjectIdentity
+fwSXLStatisticsAggregate = _FwSXLStatisticsAggregate_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1)
+)
+_FwSXLStatAggregateThroughputTable_Object = MibTable
+fwSXLStatAggregateThroughputTable = _FwSXLStatAggregateThroughputTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatAggregateThroughputTable.setStatus("current")
+_FwSXLStatAggregateThroughputEntry_Object = MibTableRow
+fwSXLStatAggregateThroughputEntry = _FwSXLStatAggregateThroughputEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1)
+)
+fwSXLStatAggregateThroughputEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLAggrThroughputIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatAggregateThroughputEntry.setStatus("current")
+_FwSXLAggrThroughputIndex_Type = Unsigned32
+_FwSXLAggrThroughputIndex_Object = MibTableColumn
+fwSXLAggrThroughputIndex = _FwSXLAggrThroughputIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 1),
+    _FwSXLAggrThroughputIndex_Type()
+)
+fwSXLAggrThroughputIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLAggrThroughputIndex.setStatus("current")
+_FwSXLAggrRxMbits_Type = Gauge32
+_FwSXLAggrRxMbits_Object = MibTableColumn
+fwSXLAggrRxMbits = _FwSXLAggrRxMbits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 2),
+    _FwSXLAggrRxMbits_Type()
+)
+fwSXLAggrRxMbits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrRxMbits.setStatus("current")
+_FwSXLAggrTxMbits_Type = Gauge32
+_FwSXLAggrTxMbits_Object = MibTableColumn
+fwSXLAggrTxMbits = _FwSXLAggrTxMbits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 3),
+    _FwSXLAggrTxMbits_Type()
+)
+fwSXLAggrTxMbits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrTxMbits.setStatus("current")
+_FwSXLAggrInboundKbitsPerSecond_Type = Counter64
+_FwSXLAggrInboundKbitsPerSecond_Object = MibTableColumn
+fwSXLAggrInboundKbitsPerSecond = _FwSXLAggrInboundKbitsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 4),
+    _FwSXLAggrInboundKbitsPerSecond_Type()
+)
+fwSXLAggrInboundKbitsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrInboundKbitsPerSecond.setStatus("current")
+_FwSXLAggrOutboundKbitsPerSecond_Type = Counter64
+_FwSXLAggrOutboundKbitsPerSecond_Object = MibTableColumn
+fwSXLAggrOutboundKbitsPerSecond = _FwSXLAggrOutboundKbitsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 5),
+    _FwSXLAggrOutboundKbitsPerSecond_Type()
+)
+fwSXLAggrOutboundKbitsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrOutboundKbitsPerSecond.setStatus("current")
+_FwSXLAggrInboundpacketsPerSecond_Type = Counter64
+_FwSXLAggrInboundpacketsPerSecond_Object = MibTableColumn
+fwSXLAggrInboundpacketsPerSecond = _FwSXLAggrInboundpacketsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 6),
+    _FwSXLAggrInboundpacketsPerSecond_Type()
+)
+fwSXLAggrInboundpacketsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrInboundpacketsPerSecond.setStatus("current")
+_FwSXLAggrOutboundpacketsPerSecond_Type = Counter64
+_FwSXLAggrOutboundpacketsPerSecond_Object = MibTableColumn
+fwSXLAggrOutboundpacketsPerSecond = _FwSXLAggrOutboundpacketsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 7),
+    _FwSXLAggrOutboundpacketsPerSecond_Type()
+)
+fwSXLAggrOutboundpacketsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrOutboundpacketsPerSecond.setStatus("current")
+_FwSXLAggrConnectionsPerSecond_Type = Counter64
+_FwSXLAggrConnectionsPerSecond_Object = MibTableColumn
+fwSXLAggrConnectionsPerSecond = _FwSXLAggrConnectionsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 8),
+    _FwSXLAggrConnectionsPerSecond_Type()
+)
+fwSXLAggrConnectionsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrConnectionsPerSecond.setStatus("current")
+_FwSXLAggrConcurrentConnections_Type = Counter64
+_FwSXLAggrConcurrentConnections_Object = MibTableColumn
+fwSXLAggrConcurrentConnections = _FwSXLAggrConcurrentConnections_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 1, 1, 9),
+    _FwSXLAggrConcurrentConnections_Type()
+)
+fwSXLAggrConcurrentConnections.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrConcurrentConnections.setStatus("current")
+_FwSXLStatAggregateNotificationsTable_Object = MibTable
+fwSXLStatAggregateNotificationsTable = _FwSXLStatAggregateNotificationsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatAggregateNotificationsTable.setStatus("current")
+_FwSXLStatAggregateNotificationsEntry_Object = MibTableRow
+fwSXLStatAggregateNotificationsEntry = _FwSXLStatAggregateNotificationsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2, 1)
+)
+fwSXLStatAggregateNotificationsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLAggrNotificationsIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatAggregateNotificationsEntry.setStatus("current")
+_FwSXLAggrNotificationsIndex_Type = Unsigned32
+_FwSXLAggrNotificationsIndex_Object = MibTableColumn
+fwSXLAggrNotificationsIndex = _FwSXLAggrNotificationsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2, 1, 1),
+    _FwSXLAggrNotificationsIndex_Type()
+)
+fwSXLAggrNotificationsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLAggrNotificationsIndex.setStatus("current")
+_FwSXLAggrPpak2FwNotificationsSuccessful_Type = Counter64
+_FwSXLAggrPpak2FwNotificationsSuccessful_Object = MibTableColumn
+fwSXLAggrPpak2FwNotificationsSuccessful = _FwSXLAggrPpak2FwNotificationsSuccessful_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2, 1, 2),
+    _FwSXLAggrPpak2FwNotificationsSuccessful_Type()
+)
+fwSXLAggrPpak2FwNotificationsSuccessful.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrPpak2FwNotificationsSuccessful.setStatus("current")
+_FwSXLAggrPpak2FwNotificationsFailure_Type = Counter64
+_FwSXLAggrPpak2FwNotificationsFailure_Object = MibTableColumn
+fwSXLAggrPpak2FwNotificationsFailure = _FwSXLAggrPpak2FwNotificationsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2, 1, 3),
+    _FwSXLAggrPpak2FwNotificationsFailure_Type()
+)
+fwSXLAggrPpak2FwNotificationsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrPpak2FwNotificationsFailure.setStatus("current")
+_FwSXLAggrFw2PpakNotificationsSuccessful_Type = Counter64
+_FwSXLAggrFw2PpakNotificationsSuccessful_Object = MibTableColumn
+fwSXLAggrFw2PpakNotificationsSuccessful = _FwSXLAggrFw2PpakNotificationsSuccessful_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2, 1, 4),
+    _FwSXLAggrFw2PpakNotificationsSuccessful_Type()
+)
+fwSXLAggrFw2PpakNotificationsSuccessful.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrFw2PpakNotificationsSuccessful.setStatus("current")
+_FwSXLAggrFw2PpakNotificationsFailure_Type = Counter64
+_FwSXLAggrFw2PpakNotificationsFailure_Object = MibTableColumn
+fwSXLAggrFw2PpakNotificationsFailure = _FwSXLAggrFw2PpakNotificationsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 2, 1, 5),
+    _FwSXLAggrFw2PpakNotificationsFailure_Type()
+)
+fwSXLAggrFw2PpakNotificationsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrFw2PpakNotificationsFailure.setStatus("current")
+_FwSXLStatAggregateDropsTable_Object = MibTable
+fwSXLStatAggregateDropsTable = _FwSXLStatAggregateDropsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatAggregateDropsTable.setStatus("current")
+_FwSXLStatAggregateDropsEntry_Object = MibTableRow
+fwSXLStatAggregateDropsEntry = _FwSXLStatAggregateDropsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1)
+)
+fwSXLStatAggregateDropsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLAggrDropsIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatAggregateDropsEntry.setStatus("current")
+_FwSXLAggrDropsIndex_Type = Unsigned32
+_FwSXLAggrDropsIndex_Object = MibTableColumn
+fwSXLAggrDropsIndex = _FwSXLAggrDropsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 1),
+    _FwSXLAggrDropsIndex_Type()
+)
+fwSXLAggrDropsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsIndex.setStatus("current")
+_FwSXLAggrDropsTotPackets_Type = Counter64
+_FwSXLAggrDropsTotPackets_Object = MibTableColumn
+fwSXLAggrDropsTotPackets = _FwSXLAggrDropsTotPackets_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 2),
+    _FwSXLAggrDropsTotPackets_Type()
+)
+fwSXLAggrDropsTotPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsTotPackets.setStatus("current")
+_FwSXLAggrDropsPxlDecision_Type = Integer32
+_FwSXLAggrDropsPxlDecision_Object = MibTableColumn
+fwSXLAggrDropsPxlDecision = _FwSXLAggrDropsPxlDecision_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 3),
+    _FwSXLAggrDropsPxlDecision_Type()
+)
+fwSXLAggrDropsPxlDecision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsPxlDecision.setStatus("current")
+_FwSXLAggrDropsFragmentationError_Type = Integer32
+_FwSXLAggrDropsFragmentationError_Object = MibTableColumn
+fwSXLAggrDropsFragmentationError = _FwSXLAggrDropsFragmentationError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 4),
+    _FwSXLAggrDropsFragmentationError_Type()
+)
+fwSXLAggrDropsFragmentationError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsFragmentationError.setStatus("current")
+_FwSXLAggrDropsF2FNotAllowed_Type = Integer32
+_FwSXLAggrDropsF2FNotAllowed_Object = MibTableColumn
+fwSXLAggrDropsF2FNotAllowed = _FwSXLAggrDropsF2FNotAllowed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 5),
+    _FwSXLAggrDropsF2FNotAllowed_Type()
+)
+fwSXLAggrDropsF2FNotAllowed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsF2FNotAllowed.setStatus("current")
+_FwSXLAggrDropsHeavyLoadTcpViolation_Type = Integer32
+_FwSXLAggrDropsHeavyLoadTcpViolation_Object = MibTableColumn
+fwSXLAggrDropsHeavyLoadTcpViolation = _FwSXLAggrDropsHeavyLoadTcpViolation_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 6),
+    _FwSXLAggrDropsHeavyLoadTcpViolation_Type()
+)
+fwSXLAggrDropsHeavyLoadTcpViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsHeavyLoadTcpViolation.setStatus("current")
+_FwSXLAggrDropsCorruptPacket_Type = Integer32
+_FwSXLAggrDropsCorruptPacket_Object = MibTableColumn
+fwSXLAggrDropsCorruptPacket = _FwSXLAggrDropsCorruptPacket_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 7),
+    _FwSXLAggrDropsCorruptPacket_Type()
+)
+fwSXLAggrDropsCorruptPacket.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsCorruptPacket.setStatus("current")
+_FwSXLAggrDropsHeavyLoadNewConnection_Type = Integer32
+_FwSXLAggrDropsHeavyLoadNewConnection_Object = MibTableColumn
+fwSXLAggrDropsHeavyLoadNewConnection = _FwSXLAggrDropsHeavyLoadNewConnection_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 8),
+    _FwSXLAggrDropsHeavyLoadNewConnection_Type()
+)
+fwSXLAggrDropsHeavyLoadNewConnection.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsHeavyLoadNewConnection.setStatus("current")
+_FwSXLAggrDropsClearPacketOnVPN_Type = Integer32
+_FwSXLAggrDropsClearPacketOnVPN_Object = MibTableColumn
+fwSXLAggrDropsClearPacketOnVPN = _FwSXLAggrDropsClearPacketOnVPN_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 9),
+    _FwSXLAggrDropsClearPacketOnVPN_Type()
+)
+fwSXLAggrDropsClearPacketOnVPN.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsClearPacketOnVPN.setStatus("current")
+_FwSXLAggrDropsEncryptionFailed_Type = Integer32
+_FwSXLAggrDropsEncryptionFailed_Object = MibTableColumn
+fwSXLAggrDropsEncryptionFailed = _FwSXLAggrDropsEncryptionFailed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 10),
+    _FwSXLAggrDropsEncryptionFailed_Type()
+)
+fwSXLAggrDropsEncryptionFailed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsEncryptionFailed.setStatus("current")
+_FwSXLAggrDropsDropTemplate_Type = Integer32
+_FwSXLAggrDropsDropTemplate_Object = MibTableColumn
+fwSXLAggrDropsDropTemplate = _FwSXLAggrDropsDropTemplate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 11),
+    _FwSXLAggrDropsDropTemplate_Type()
+)
+fwSXLAggrDropsDropTemplate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsDropTemplate.setStatus("current")
+_FwSXLAggrDropsDecryptionFailed_Type = Integer32
+_FwSXLAggrDropsDecryptionFailed_Object = MibTableColumn
+fwSXLAggrDropsDecryptionFailed = _FwSXLAggrDropsDecryptionFailed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 12),
+    _FwSXLAggrDropsDecryptionFailed_Type()
+)
+fwSXLAggrDropsDecryptionFailed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsDecryptionFailed.setStatus("current")
+_FwSXLAggrDropsOutboundConnNotFound_Type = Integer32
+_FwSXLAggrDropsOutboundConnNotFound_Object = MibTableColumn
+fwSXLAggrDropsOutboundConnNotFound = _FwSXLAggrDropsOutboundConnNotFound_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 13),
+    _FwSXLAggrDropsOutboundConnNotFound_Type()
+)
+fwSXLAggrDropsOutboundConnNotFound.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsOutboundConnNotFound.setStatus("current")
+_FwSXLAggrDropsInterfaceDown_Type = Integer32
+_FwSXLAggrDropsInterfaceDown_Object = MibTableColumn
+fwSXLAggrDropsInterfaceDown = _FwSXLAggrDropsInterfaceDown_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 14),
+    _FwSXLAggrDropsInterfaceDown_Type()
+)
+fwSXLAggrDropsInterfaceDown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsInterfaceDown.setStatus("current")
+_FwSXLAggrDropsClusterError_Type = Integer32
+_FwSXLAggrDropsClusterError_Object = MibTableColumn
+fwSXLAggrDropsClusterError = _FwSXLAggrDropsClusterError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 15),
+    _FwSXLAggrDropsClusterError_Type()
+)
+fwSXLAggrDropsClusterError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsClusterError.setStatus("current")
+_FwSXLAggrDropsXmlError_Type = Integer32
+_FwSXLAggrDropsXmlError_Object = MibTableColumn
+fwSXLAggrDropsXmlError = _FwSXLAggrDropsXmlError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 16),
+    _FwSXLAggrDropsXmlError_Type()
+)
+fwSXLAggrDropsXmlError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsXmlError.setStatus("current")
+_FwSXLAggrDropsAntiSpoofing_Type = Integer32
+_FwSXLAggrDropsAntiSpoofing_Object = MibTableColumn
+fwSXLAggrDropsAntiSpoofing = _FwSXLAggrDropsAntiSpoofing_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 17),
+    _FwSXLAggrDropsAntiSpoofing_Type()
+)
+fwSXLAggrDropsAntiSpoofing.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsAntiSpoofing.setStatus("current")
+_FwSXLAggrDropsSanityError_Type = Integer32
+_FwSXLAggrDropsSanityError_Object = MibTableColumn
+fwSXLAggrDropsSanityError = _FwSXLAggrDropsSanityError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 18),
+    _FwSXLAggrDropsSanityError_Type()
+)
+fwSXLAggrDropsSanityError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsSanityError.setStatus("current")
+_FwSXLAggrDropsQxlDecision_Type = Integer32
+_FwSXLAggrDropsQxlDecision_Object = MibTableColumn
+fwSXLAggrDropsQxlDecision = _FwSXLAggrDropsQxlDecision_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 19),
+    _FwSXLAggrDropsQxlDecision_Type()
+)
+fwSXLAggrDropsQxlDecision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsQxlDecision.setStatus("current")
+_FwSXLAggrDropsLoopPrevention_Type = Integer32
+_FwSXLAggrDropsLoopPrevention_Object = MibTableColumn
+fwSXLAggrDropsLoopPrevention = _FwSXLAggrDropsLoopPrevention_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 1, 3, 1, 20),
+    _FwSXLAggrDropsLoopPrevention_Type()
+)
+fwSXLAggrDropsLoopPrevention.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLAggrDropsLoopPrevention.setStatus("current")
+_FwSXLStatisticsHost_ObjectIdentity = ObjectIdentity
+fwSXLStatisticsHost = _FwSXLStatisticsHost_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2)
+)
+_FwSXLStatHostThroughputTable_Object = MibTable
+fwSXLStatHostThroughputTable = _FwSXLStatHostThroughputTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostThroughputTable.setStatus("current")
+_FwSXLStatHostThroughputEntry_Object = MibTableRow
+fwSXLStatHostThroughputEntry = _FwSXLStatHostThroughputEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1)
+)
+fwSXLStatHostThroughputEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLHostThroughputIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostThroughputEntry.setStatus("current")
+_FwSXLHostThroughputIndex_Type = Unsigned32
+_FwSXLHostThroughputIndex_Object = MibTableColumn
+fwSXLHostThroughputIndex = _FwSXLHostThroughputIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 1),
+    _FwSXLHostThroughputIndex_Type()
+)
+fwSXLHostThroughputIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLHostThroughputIndex.setStatus("current")
+_FwSXLHostRxMbits_Type = Gauge32
+_FwSXLHostRxMbits_Object = MibTableColumn
+fwSXLHostRxMbits = _FwSXLHostRxMbits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 2),
+    _FwSXLHostRxMbits_Type()
+)
+fwSXLHostRxMbits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostRxMbits.setStatus("current")
+_FwSXLHostTxMbits_Type = Gauge32
+_FwSXLHostTxMbits_Object = MibTableColumn
+fwSXLHostTxMbits = _FwSXLHostTxMbits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 3),
+    _FwSXLHostTxMbits_Type()
+)
+fwSXLHostTxMbits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostTxMbits.setStatus("current")
+_FwSXLHostInboundKbitsPerSecond_Type = Counter64
+_FwSXLHostInboundKbitsPerSecond_Object = MibTableColumn
+fwSXLHostInboundKbitsPerSecond = _FwSXLHostInboundKbitsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 4),
+    _FwSXLHostInboundKbitsPerSecond_Type()
+)
+fwSXLHostInboundKbitsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInboundKbitsPerSecond.setStatus("current")
+_FwSXLHostOutboundKbitsPerSecond_Type = Counter64
+_FwSXLHostOutboundKbitsPerSecond_Object = MibTableColumn
+fwSXLHostOutboundKbitsPerSecond = _FwSXLHostOutboundKbitsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 5),
+    _FwSXLHostOutboundKbitsPerSecond_Type()
+)
+fwSXLHostOutboundKbitsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostOutboundKbitsPerSecond.setStatus("current")
+_FwSXLHostInboundpacketsPerSecond_Type = Counter64
+_FwSXLHostInboundpacketsPerSecond_Object = MibTableColumn
+fwSXLHostInboundpacketsPerSecond = _FwSXLHostInboundpacketsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 6),
+    _FwSXLHostInboundpacketsPerSecond_Type()
+)
+fwSXLHostInboundpacketsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInboundpacketsPerSecond.setStatus("current")
+_FwSXLHostOutboundpacketsPerSecond_Type = Counter64
+_FwSXLHostOutboundpacketsPerSecond_Object = MibTableColumn
+fwSXLHostOutboundpacketsPerSecond = _FwSXLHostOutboundpacketsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 7),
+    _FwSXLHostOutboundpacketsPerSecond_Type()
+)
+fwSXLHostOutboundpacketsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostOutboundpacketsPerSecond.setStatus("current")
+_FwSXLHostConnectionsPerSecond_Type = Counter64
+_FwSXLHostConnectionsPerSecond_Object = MibTableColumn
+fwSXLHostConnectionsPerSecond = _FwSXLHostConnectionsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 8),
+    _FwSXLHostConnectionsPerSecond_Type()
+)
+fwSXLHostConnectionsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostConnectionsPerSecond.setStatus("current")
+_FwSXLHostConcurrentConnections_Type = Counter64
+_FwSXLHostConcurrentConnections_Object = MibTableColumn
+fwSXLHostConcurrentConnections = _FwSXLHostConcurrentConnections_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 1, 1, 9),
+    _FwSXLHostConcurrentConnections_Type()
+)
+fwSXLHostConcurrentConnections.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostConcurrentConnections.setStatus("current")
+_FwSXLStatHostNotificationsTable_Object = MibTable
+fwSXLStatHostNotificationsTable = _FwSXLStatHostNotificationsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostNotificationsTable.setStatus("current")
+_FwSXLStatHostNotificationsEntry_Object = MibTableRow
+fwSXLStatHostNotificationsEntry = _FwSXLStatHostNotificationsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2, 1)
+)
+fwSXLStatHostNotificationsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLHostNotificationsIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostNotificationsEntry.setStatus("current")
+_FwSXLHostNotificationsIndex_Type = Unsigned32
+_FwSXLHostNotificationsIndex_Object = MibTableColumn
+fwSXLHostNotificationsIndex = _FwSXLHostNotificationsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2, 1, 1),
+    _FwSXLHostNotificationsIndex_Type()
+)
+fwSXLHostNotificationsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLHostNotificationsIndex.setStatus("current")
+_FwSXLHostPpak2FwNotificationsSuccessful_Type = Counter64
+_FwSXLHostPpak2FwNotificationsSuccessful_Object = MibTableColumn
+fwSXLHostPpak2FwNotificationsSuccessful = _FwSXLHostPpak2FwNotificationsSuccessful_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2, 1, 2),
+    _FwSXLHostPpak2FwNotificationsSuccessful_Type()
+)
+fwSXLHostPpak2FwNotificationsSuccessful.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostPpak2FwNotificationsSuccessful.setStatus("current")
+_FwSXLHostPpak2FwNotificationsFailure_Type = Counter64
+_FwSXLHostPpak2FwNotificationsFailure_Object = MibTableColumn
+fwSXLHostPpak2FwNotificationsFailure = _FwSXLHostPpak2FwNotificationsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2, 1, 3),
+    _FwSXLHostPpak2FwNotificationsFailure_Type()
+)
+fwSXLHostPpak2FwNotificationsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostPpak2FwNotificationsFailure.setStatus("current")
+_FwSXLHostFw2PpakNotificationsSuccessful_Type = Counter64
+_FwSXLHostFw2PpakNotificationsSuccessful_Object = MibTableColumn
+fwSXLHostFw2PpakNotificationsSuccessful = _FwSXLHostFw2PpakNotificationsSuccessful_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2, 1, 4),
+    _FwSXLHostFw2PpakNotificationsSuccessful_Type()
+)
+fwSXLHostFw2PpakNotificationsSuccessful.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostFw2PpakNotificationsSuccessful.setStatus("current")
+_FwSXLHostFw2PpakNotificationsFailure_Type = Counter64
+_FwSXLHostFw2PpakNotificationsFailure_Object = MibTableColumn
+fwSXLHostFw2PpakNotificationsFailure = _FwSXLHostFw2PpakNotificationsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 2, 1, 5),
+    _FwSXLHostFw2PpakNotificationsFailure_Type()
+)
+fwSXLHostFw2PpakNotificationsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostFw2PpakNotificationsFailure.setStatus("current")
+_FwSXLStatHostDropsTable_Object = MibTable
+fwSXLStatHostDropsTable = _FwSXLStatHostDropsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostDropsTable.setStatus("current")
+_FwSXLStatHostDropsEntry_Object = MibTableRow
+fwSXLStatHostDropsEntry = _FwSXLStatHostDropsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1)
+)
+fwSXLStatHostDropsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLHostDropsIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostDropsEntry.setStatus("current")
+_FwSXLHostDropsIndex_Type = Unsigned32
+_FwSXLHostDropsIndex_Object = MibTableColumn
+fwSXLHostDropsIndex = _FwSXLHostDropsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 1),
+    _FwSXLHostDropsIndex_Type()
+)
+fwSXLHostDropsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsIndex.setStatus("current")
+_FwSXLHostDropsTotPackets_Type = Counter64
+_FwSXLHostDropsTotPackets_Object = MibTableColumn
+fwSXLHostDropsTotPackets = _FwSXLHostDropsTotPackets_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 2),
+    _FwSXLHostDropsTotPackets_Type()
+)
+fwSXLHostDropsTotPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsTotPackets.setStatus("current")
+_FwSXLHostDropsPxlDecision_Type = Integer32
+_FwSXLHostDropsPxlDecision_Object = MibTableColumn
+fwSXLHostDropsPxlDecision = _FwSXLHostDropsPxlDecision_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 3),
+    _FwSXLHostDropsPxlDecision_Type()
+)
+fwSXLHostDropsPxlDecision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsPxlDecision.setStatus("current")
+_FwSXLHostDropsFragmentationError_Type = Integer32
+_FwSXLHostDropsFragmentationError_Object = MibTableColumn
+fwSXLHostDropsFragmentationError = _FwSXLHostDropsFragmentationError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 4),
+    _FwSXLHostDropsFragmentationError_Type()
+)
+fwSXLHostDropsFragmentationError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsFragmentationError.setStatus("current")
+_FwSXLHostDropsF2FNotAllowed_Type = Integer32
+_FwSXLHostDropsF2FNotAllowed_Object = MibTableColumn
+fwSXLHostDropsF2FNotAllowed = _FwSXLHostDropsF2FNotAllowed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 5),
+    _FwSXLHostDropsF2FNotAllowed_Type()
+)
+fwSXLHostDropsF2FNotAllowed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsF2FNotAllowed.setStatus("current")
+_FwSXLHostDropsHeavyLoadTcpViolation_Type = Integer32
+_FwSXLHostDropsHeavyLoadTcpViolation_Object = MibTableColumn
+fwSXLHostDropsHeavyLoadTcpViolation = _FwSXLHostDropsHeavyLoadTcpViolation_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 6),
+    _FwSXLHostDropsHeavyLoadTcpViolation_Type()
+)
+fwSXLHostDropsHeavyLoadTcpViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsHeavyLoadTcpViolation.setStatus("current")
+_FwSXLHostDropsCorruptPacket_Type = Integer32
+_FwSXLHostDropsCorruptPacket_Object = MibTableColumn
+fwSXLHostDropsCorruptPacket = _FwSXLHostDropsCorruptPacket_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 7),
+    _FwSXLHostDropsCorruptPacket_Type()
+)
+fwSXLHostDropsCorruptPacket.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsCorruptPacket.setStatus("current")
+_FwSXLHostDropsHeavyLoadNewConnection_Type = Integer32
+_FwSXLHostDropsHeavyLoadNewConnection_Object = MibTableColumn
+fwSXLHostDropsHeavyLoadNewConnection = _FwSXLHostDropsHeavyLoadNewConnection_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 8),
+    _FwSXLHostDropsHeavyLoadNewConnection_Type()
+)
+fwSXLHostDropsHeavyLoadNewConnection.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsHeavyLoadNewConnection.setStatus("current")
+_FwSXLHostDropsClearPacketOnVPN_Type = Integer32
+_FwSXLHostDropsClearPacketOnVPN_Object = MibTableColumn
+fwSXLHostDropsClearPacketOnVPN = _FwSXLHostDropsClearPacketOnVPN_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 9),
+    _FwSXLHostDropsClearPacketOnVPN_Type()
+)
+fwSXLHostDropsClearPacketOnVPN.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsClearPacketOnVPN.setStatus("current")
+_FwSXLHostDropsEncryptionFailed_Type = Integer32
+_FwSXLHostDropsEncryptionFailed_Object = MibTableColumn
+fwSXLHostDropsEncryptionFailed = _FwSXLHostDropsEncryptionFailed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 10),
+    _FwSXLHostDropsEncryptionFailed_Type()
+)
+fwSXLHostDropsEncryptionFailed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsEncryptionFailed.setStatus("current")
+_FwSXLHostDropsDropTemplate_Type = Integer32
+_FwSXLHostDropsDropTemplate_Object = MibTableColumn
+fwSXLHostDropsDropTemplate = _FwSXLHostDropsDropTemplate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 11),
+    _FwSXLHostDropsDropTemplate_Type()
+)
+fwSXLHostDropsDropTemplate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsDropTemplate.setStatus("current")
+_FwSXLHostDropsDecryptionFailed_Type = Integer32
+_FwSXLHostDropsDecryptionFailed_Object = MibTableColumn
+fwSXLHostDropsDecryptionFailed = _FwSXLHostDropsDecryptionFailed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 12),
+    _FwSXLHostDropsDecryptionFailed_Type()
+)
+fwSXLHostDropsDecryptionFailed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsDecryptionFailed.setStatus("current")
+_FwSXLHostDropsOutboundConnNotFound_Type = Integer32
+_FwSXLHostDropsOutboundConnNotFound_Object = MibTableColumn
+fwSXLHostDropsOutboundConnNotFound = _FwSXLHostDropsOutboundConnNotFound_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 13),
+    _FwSXLHostDropsOutboundConnNotFound_Type()
+)
+fwSXLHostDropsOutboundConnNotFound.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsOutboundConnNotFound.setStatus("current")
+_FwSXLHostDropsInterfaceDown_Type = Integer32
+_FwSXLHostDropsInterfaceDown_Object = MibTableColumn
+fwSXLHostDropsInterfaceDown = _FwSXLHostDropsInterfaceDown_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 14),
+    _FwSXLHostDropsInterfaceDown_Type()
+)
+fwSXLHostDropsInterfaceDown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsInterfaceDown.setStatus("current")
+_FwSXLHostDropsClusterError_Type = Integer32
+_FwSXLHostDropsClusterError_Object = MibTableColumn
+fwSXLHostDropsClusterError = _FwSXLHostDropsClusterError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 15),
+    _FwSXLHostDropsClusterError_Type()
+)
+fwSXLHostDropsClusterError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsClusterError.setStatus("current")
+_FwSXLHostDropsXmlError_Type = Integer32
+_FwSXLHostDropsXmlError_Object = MibTableColumn
+fwSXLHostDropsXmlError = _FwSXLHostDropsXmlError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 16),
+    _FwSXLHostDropsXmlError_Type()
+)
+fwSXLHostDropsXmlError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsXmlError.setStatus("current")
+_FwSXLHostDropsAntiSpoofing_Type = Integer32
+_FwSXLHostDropsAntiSpoofing_Object = MibTableColumn
+fwSXLHostDropsAntiSpoofing = _FwSXLHostDropsAntiSpoofing_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 17),
+    _FwSXLHostDropsAntiSpoofing_Type()
+)
+fwSXLHostDropsAntiSpoofing.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsAntiSpoofing.setStatus("current")
+_FwSXLHostDropsSanityError_Type = Integer32
+_FwSXLHostDropsSanityError_Object = MibTableColumn
+fwSXLHostDropsSanityError = _FwSXLHostDropsSanityError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 18),
+    _FwSXLHostDropsSanityError_Type()
+)
+fwSXLHostDropsSanityError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsSanityError.setStatus("current")
+_FwSXLHostDropsQxlDecision_Type = Integer32
+_FwSXLHostDropsQxlDecision_Object = MibTableColumn
+fwSXLHostDropsQxlDecision = _FwSXLHostDropsQxlDecision_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 19),
+    _FwSXLHostDropsQxlDecision_Type()
+)
+fwSXLHostDropsQxlDecision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsQxlDecision.setStatus("current")
+_FwSXLHostDropsLoopPrevention_Type = Integer32
+_FwSXLHostDropsLoopPrevention_Object = MibTableColumn
+fwSXLHostDropsLoopPrevention = _FwSXLHostDropsLoopPrevention_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 3, 1, 20),
+    _FwSXLHostDropsLoopPrevention_Type()
+)
+fwSXLHostDropsLoopPrevention.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostDropsLoopPrevention.setStatus("current")
+_FwSXLStatHostInterfacesTable_Object = MibTable
+fwSXLStatHostInterfacesTable = _FwSXLStatHostInterfacesTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostInterfacesTable.setStatus("current")
+_FwSXLStatHostInterfacesEntry_Object = MibTableRow
+fwSXLStatHostInterfacesEntry = _FwSXLStatHostInterfacesEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1)
+)
+fwSXLStatHostInterfacesEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLHostInterfacesIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostInterfacesEntry.setStatus("current")
+_FwSXLHostInterfacesIndex_Type = Unsigned32
+_FwSXLHostInterfacesIndex_Object = MibTableColumn
+fwSXLHostInterfacesIndex = _FwSXLHostInterfacesIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 1),
+    _FwSXLHostInterfacesIndex_Type()
+)
+fwSXLHostInterfacesIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLHostInterfacesIndex.setStatus("current")
+_FwSXLHostInterface0Name_Type = DisplayString
+_FwSXLHostInterface0Name_Object = MibTableColumn
+fwSXLHostInterface0Name = _FwSXLHostInterface0Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 2),
+    _FwSXLHostInterface0Name_Type()
+)
+fwSXLHostInterface0Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface0Name.setStatus("current")
+_FwSXLHostInterface1Name_Type = DisplayString
+_FwSXLHostInterface1Name_Object = MibTableColumn
+fwSXLHostInterface1Name = _FwSXLHostInterface1Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 3),
+    _FwSXLHostInterface1Name_Type()
+)
+fwSXLHostInterface1Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface1Name.setStatus("current")
+_FwSXLHostInterface2Name_Type = DisplayString
+_FwSXLHostInterface2Name_Object = MibTableColumn
+fwSXLHostInterface2Name = _FwSXLHostInterface2Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 4),
+    _FwSXLHostInterface2Name_Type()
+)
+fwSXLHostInterface2Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface2Name.setStatus("current")
+_FwSXLHostInterface3Name_Type = DisplayString
+_FwSXLHostInterface3Name_Object = MibTableColumn
+fwSXLHostInterface3Name = _FwSXLHostInterface3Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 5),
+    _FwSXLHostInterface3Name_Type()
+)
+fwSXLHostInterface3Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface3Name.setStatus("current")
+_FwSXLHostInterface4Name_Type = DisplayString
+_FwSXLHostInterface4Name_Object = MibTableColumn
+fwSXLHostInterface4Name = _FwSXLHostInterface4Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 6),
+    _FwSXLHostInterface4Name_Type()
+)
+fwSXLHostInterface4Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface4Name.setStatus("current")
+_FwSXLHostInterface5Name_Type = DisplayString
+_FwSXLHostInterface5Name_Object = MibTableColumn
+fwSXLHostInterface5Name = _FwSXLHostInterface5Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 7),
+    _FwSXLHostInterface5Name_Type()
+)
+fwSXLHostInterface5Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface5Name.setStatus("current")
+_FwSXLHostInterface6Name_Type = DisplayString
+_FwSXLHostInterface6Name_Object = MibTableColumn
+fwSXLHostInterface6Name = _FwSXLHostInterface6Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 8),
+    _FwSXLHostInterface6Name_Type()
+)
+fwSXLHostInterface6Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface6Name.setStatus("current")
+_FwSXLHostInterface7Name_Type = DisplayString
+_FwSXLHostInterface7Name_Object = MibTableColumn
+fwSXLHostInterface7Name = _FwSXLHostInterface7Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 9),
+    _FwSXLHostInterface7Name_Type()
+)
+fwSXLHostInterface7Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface7Name.setStatus("current")
+_FwSXLHostInterface0Speed_Type = DisplayString
+_FwSXLHostInterface0Speed_Object = MibTableColumn
+fwSXLHostInterface0Speed = _FwSXLHostInterface0Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 10),
+    _FwSXLHostInterface0Speed_Type()
+)
+fwSXLHostInterface0Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface0Speed.setStatus("current")
+_FwSXLHostInterface1Speed_Type = DisplayString
+_FwSXLHostInterface1Speed_Object = MibTableColumn
+fwSXLHostInterface1Speed = _FwSXLHostInterface1Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 11),
+    _FwSXLHostInterface1Speed_Type()
+)
+fwSXLHostInterface1Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface1Speed.setStatus("current")
+_FwSXLHostInterface2Speed_Type = DisplayString
+_FwSXLHostInterface2Speed_Object = MibTableColumn
+fwSXLHostInterface2Speed = _FwSXLHostInterface2Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 12),
+    _FwSXLHostInterface2Speed_Type()
+)
+fwSXLHostInterface2Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface2Speed.setStatus("current")
+_FwSXLHostInterface3Speed_Type = DisplayString
+_FwSXLHostInterface3Speed_Object = MibTableColumn
+fwSXLHostInterface3Speed = _FwSXLHostInterface3Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 13),
+    _FwSXLHostInterface3Speed_Type()
+)
+fwSXLHostInterface3Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface3Speed.setStatus("current")
+_FwSXLHostInterface4Speed_Type = DisplayString
+_FwSXLHostInterface4Speed_Object = MibTableColumn
+fwSXLHostInterface4Speed = _FwSXLHostInterface4Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 14),
+    _FwSXLHostInterface4Speed_Type()
+)
+fwSXLHostInterface4Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface4Speed.setStatus("current")
+_FwSXLHostInterface5Speed_Type = DisplayString
+_FwSXLHostInterface5Speed_Object = MibTableColumn
+fwSXLHostInterface5Speed = _FwSXLHostInterface5Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 15),
+    _FwSXLHostInterface5Speed_Type()
+)
+fwSXLHostInterface5Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface5Speed.setStatus("current")
+_FwSXLHostInterface6Speed_Type = DisplayString
+_FwSXLHostInterface6Speed_Object = MibTableColumn
+fwSXLHostInterface6Speed = _FwSXLHostInterface6Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 16),
+    _FwSXLHostInterface6Speed_Type()
+)
+fwSXLHostInterface6Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface6Speed.setStatus("current")
+_FwSXLHostInterface7Speed_Type = DisplayString
+_FwSXLHostInterface7Speed_Object = MibTableColumn
+fwSXLHostInterface7Speed = _FwSXLHostInterface7Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 17),
+    _FwSXLHostInterface7Speed_Type()
+)
+fwSXLHostInterface7Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface7Speed.setStatus("current")
+_FwSXLHostInterface0State_Type = DisplayString
+_FwSXLHostInterface0State_Object = MibTableColumn
+fwSXLHostInterface0State = _FwSXLHostInterface0State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 18),
+    _FwSXLHostInterface0State_Type()
+)
+fwSXLHostInterface0State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface0State.setStatus("current")
+_FwSXLHostInterface1State_Type = DisplayString
+_FwSXLHostInterface1State_Object = MibTableColumn
+fwSXLHostInterface1State = _FwSXLHostInterface1State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 19),
+    _FwSXLHostInterface1State_Type()
+)
+fwSXLHostInterface1State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface1State.setStatus("current")
+_FwSXLHostInterface2State_Type = DisplayString
+_FwSXLHostInterface2State_Object = MibTableColumn
+fwSXLHostInterface2State = _FwSXLHostInterface2State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 20),
+    _FwSXLHostInterface2State_Type()
+)
+fwSXLHostInterface2State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface2State.setStatus("current")
+_FwSXLHostInterface3State_Type = DisplayString
+_FwSXLHostInterface3State_Object = MibTableColumn
+fwSXLHostInterface3State = _FwSXLHostInterface3State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 21),
+    _FwSXLHostInterface3State_Type()
+)
+fwSXLHostInterface3State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface3State.setStatus("current")
+_FwSXLHostInterface4State_Type = DisplayString
+_FwSXLHostInterface4State_Object = MibTableColumn
+fwSXLHostInterface4State = _FwSXLHostInterface4State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 22),
+    _FwSXLHostInterface4State_Type()
+)
+fwSXLHostInterface4State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface4State.setStatus("current")
+_FwSXLHostInterface5State_Type = DisplayString
+_FwSXLHostInterface5State_Object = MibTableColumn
+fwSXLHostInterface5State = _FwSXLHostInterface5State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 23),
+    _FwSXLHostInterface5State_Type()
+)
+fwSXLHostInterface5State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface5State.setStatus("current")
+_FwSXLHostInterface6State_Type = DisplayString
+_FwSXLHostInterface6State_Object = MibTableColumn
+fwSXLHostInterface6State = _FwSXLHostInterface6State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 24),
+    _FwSXLHostInterface6State_Type()
+)
+fwSXLHostInterface6State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface6State.setStatus("current")
+_FwSXLHostInterface7State_Type = DisplayString
+_FwSXLHostInterface7State_Object = MibTableColumn
+fwSXLHostInterface7State = _FwSXLHostInterface7State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 4, 1, 25),
+    _FwSXLHostInterface7State_Type()
+)
+fwSXLHostInterface7State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostInterface7State.setStatus("current")
+_FwSXLStatHostGeneralTable_Object = MibTable
+fwSXLStatHostGeneralTable = _FwSXLStatHostGeneralTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 5)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostGeneralTable.setStatus("current")
+_FwSXLStatHostGeneralEntry_Object = MibTableRow
+fwSXLStatHostGeneralEntry = _FwSXLStatHostGeneralEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 5, 1)
+)
+fwSXLStatHostGeneralEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLHostGeneralIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatHostGeneralEntry.setStatus("current")
+_FwSXLHostGeneralIndex_Type = Unsigned32
+_FwSXLHostGeneralIndex_Object = MibTableColumn
+fwSXLHostGeneralIndex = _FwSXLHostGeneralIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 5, 1, 1),
+    _FwSXLHostGeneralIndex_Type()
+)
+fwSXLHostGeneralIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLHostGeneralIndex.setStatus("current")
+_FwSXLHostState_Type = DisplayString
+_FwSXLHostState_Object = MibTableColumn
+fwSXLHostState = _FwSXLHostState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 2, 5, 1, 2),
+    _FwSXLHostState_Type()
+)
+fwSXLHostState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLHostState.setStatus("current")
+_FwSXLStatisticsFalcons_ObjectIdentity = ObjectIdentity
+fwSXLStatisticsFalcons = _FwSXLStatisticsFalcons_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3)
+)
+_FwSXLStatFalconsThroughputTable_Object = MibTable
+fwSXLStatFalconsThroughputTable = _FwSXLStatFalconsThroughputTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsThroughputTable.setStatus("current")
+_FwSXLStatFalconsThroughputEntry_Object = MibTableRow
+fwSXLStatFalconsThroughputEntry = _FwSXLStatFalconsThroughputEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1)
+)
+fwSXLStatFalconsThroughputEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLFalconsThroughputIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsThroughputEntry.setStatus("current")
+_FwSXLFalconsThroughputIndex_Type = Unsigned32
+_FwSXLFalconsThroughputIndex_Object = MibTableColumn
+fwSXLFalconsThroughputIndex = _FwSXLFalconsThroughputIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 1),
+    _FwSXLFalconsThroughputIndex_Type()
+)
+fwSXLFalconsThroughputIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLFalconsThroughputIndex.setStatus("current")
+_FwSXLFalconsRxMbits_Type = Integer32
+_FwSXLFalconsRxMbits_Object = MibTableColumn
+fwSXLFalconsRxMbits = _FwSXLFalconsRxMbits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 2),
+    _FwSXLFalconsRxMbits_Type()
+)
+fwSXLFalconsRxMbits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsRxMbits.setStatus("current")
+_FwSXLFalconsTxMbits_Type = Integer32
+_FwSXLFalconsTxMbits_Object = MibTableColumn
+fwSXLFalconsTxMbits = _FwSXLFalconsTxMbits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 3),
+    _FwSXLFalconsTxMbits_Type()
+)
+fwSXLFalconsTxMbits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsTxMbits.setStatus("current")
+
+
+class _FwSXLFalconsInboundKbitsPerSecond_Type(DisplayString):
+    """Custom type fwSXLFalconsInboundKbitsPerSecond based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsInboundKbitsPerSecond_Type.__name__ = "DisplayString"
+_FwSXLFalconsInboundKbitsPerSecond_Object = MibTableColumn
+fwSXLFalconsInboundKbitsPerSecond = _FwSXLFalconsInboundKbitsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 4),
+    _FwSXLFalconsInboundKbitsPerSecond_Type()
+)
+fwSXLFalconsInboundKbitsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInboundKbitsPerSecond.setStatus("current")
+
+
+class _FwSXLFalconsOutboundKbitsPerSecond_Type(DisplayString):
+    """Custom type fwSXLFalconsOutboundKbitsPerSecond based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsOutboundKbitsPerSecond_Type.__name__ = "DisplayString"
+_FwSXLFalconsOutboundKbitsPerSecond_Object = MibTableColumn
+fwSXLFalconsOutboundKbitsPerSecond = _FwSXLFalconsOutboundKbitsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 5),
+    _FwSXLFalconsOutboundKbitsPerSecond_Type()
+)
+fwSXLFalconsOutboundKbitsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsOutboundKbitsPerSecond.setStatus("current")
+
+
+class _FwSXLFalconsInboundpacketsPerSecond_Type(DisplayString):
+    """Custom type fwSXLFalconsInboundpacketsPerSecond based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsInboundpacketsPerSecond_Type.__name__ = "DisplayString"
+_FwSXLFalconsInboundpacketsPerSecond_Object = MibTableColumn
+fwSXLFalconsInboundpacketsPerSecond = _FwSXLFalconsInboundpacketsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 6),
+    _FwSXLFalconsInboundpacketsPerSecond_Type()
+)
+fwSXLFalconsInboundpacketsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInboundpacketsPerSecond.setStatus("current")
+
+
+class _FwSXLFalconsOutboundpacketsPerSecond_Type(DisplayString):
+    """Custom type fwSXLFalconsOutboundpacketsPerSecond based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsOutboundpacketsPerSecond_Type.__name__ = "DisplayString"
+_FwSXLFalconsOutboundpacketsPerSecond_Object = MibTableColumn
+fwSXLFalconsOutboundpacketsPerSecond = _FwSXLFalconsOutboundpacketsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 7),
+    _FwSXLFalconsOutboundpacketsPerSecond_Type()
+)
+fwSXLFalconsOutboundpacketsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsOutboundpacketsPerSecond.setStatus("current")
+
+
+class _FwSXLFalconsConnectionsPerSecond_Type(DisplayString):
+    """Custom type fwSXLFalconsConnectionsPerSecond based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsConnectionsPerSecond_Type.__name__ = "DisplayString"
+_FwSXLFalconsConnectionsPerSecond_Object = MibTableColumn
+fwSXLFalconsConnectionsPerSecond = _FwSXLFalconsConnectionsPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 8),
+    _FwSXLFalconsConnectionsPerSecond_Type()
+)
+fwSXLFalconsConnectionsPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsConnectionsPerSecond.setStatus("current")
+
+
+class _FwSXLFalconsConcurrentConnections_Type(DisplayString):
+    """Custom type fwSXLFalconsConcurrentConnections based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsConcurrentConnections_Type.__name__ = "DisplayString"
+_FwSXLFalconsConcurrentConnections_Object = MibTableColumn
+fwSXLFalconsConcurrentConnections = _FwSXLFalconsConcurrentConnections_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 1, 1, 9),
+    _FwSXLFalconsConcurrentConnections_Type()
+)
+fwSXLFalconsConcurrentConnections.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsConcurrentConnections.setStatus("current")
+_FwSXLStatFalconsNotificationsTable_Object = MibTable
+fwSXLStatFalconsNotificationsTable = _FwSXLStatFalconsNotificationsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsNotificationsTable.setStatus("current")
+_FwSXLStatFalconsNotificationsEntry_Object = MibTableRow
+fwSXLStatFalconsNotificationsEntry = _FwSXLStatFalconsNotificationsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2, 1)
+)
+fwSXLStatFalconsNotificationsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLFalconsNotificationsIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsNotificationsEntry.setStatus("current")
+_FwSXLFalconsNotificationsIndex_Type = Unsigned32
+_FwSXLFalconsNotificationsIndex_Object = MibTableColumn
+fwSXLFalconsNotificationsIndex = _FwSXLFalconsNotificationsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2, 1, 1),
+    _FwSXLFalconsNotificationsIndex_Type()
+)
+fwSXLFalconsNotificationsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLFalconsNotificationsIndex.setStatus("current")
+
+
+class _FwSXLFalconsPpak2FwNotificationsSuccessful_Type(DisplayString):
+    """Custom type fwSXLFalconsPpak2FwNotificationsSuccessful based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsPpak2FwNotificationsSuccessful_Type.__name__ = "DisplayString"
+_FwSXLFalconsPpak2FwNotificationsSuccessful_Object = MibTableColumn
+fwSXLFalconsPpak2FwNotificationsSuccessful = _FwSXLFalconsPpak2FwNotificationsSuccessful_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2, 1, 2),
+    _FwSXLFalconsPpak2FwNotificationsSuccessful_Type()
+)
+fwSXLFalconsPpak2FwNotificationsSuccessful.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsPpak2FwNotificationsSuccessful.setStatus("current")
+
+
+class _FwSXLFalconsPpak2FwNotificationsFailure_Type(DisplayString):
+    """Custom type fwSXLFalconsPpak2FwNotificationsFailure based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsPpak2FwNotificationsFailure_Type.__name__ = "DisplayString"
+_FwSXLFalconsPpak2FwNotificationsFailure_Object = MibTableColumn
+fwSXLFalconsPpak2FwNotificationsFailure = _FwSXLFalconsPpak2FwNotificationsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2, 1, 3),
+    _FwSXLFalconsPpak2FwNotificationsFailure_Type()
+)
+fwSXLFalconsPpak2FwNotificationsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsPpak2FwNotificationsFailure.setStatus("current")
+
+
+class _FwSXLFalconsFw2PpakNotificationsSuccessful_Type(DisplayString):
+    """Custom type fwSXLFalconsFw2PpakNotificationsSuccessful based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsFw2PpakNotificationsSuccessful_Type.__name__ = "DisplayString"
+_FwSXLFalconsFw2PpakNotificationsSuccessful_Object = MibTableColumn
+fwSXLFalconsFw2PpakNotificationsSuccessful = _FwSXLFalconsFw2PpakNotificationsSuccessful_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2, 1, 4),
+    _FwSXLFalconsFw2PpakNotificationsSuccessful_Type()
+)
+fwSXLFalconsFw2PpakNotificationsSuccessful.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsFw2PpakNotificationsSuccessful.setStatus("current")
+
+
+class _FwSXLFalconsFw2PpakNotificationsFailure_Type(DisplayString):
+    """Custom type fwSXLFalconsFw2PpakNotificationsFailure based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsFw2PpakNotificationsFailure_Type.__name__ = "DisplayString"
+_FwSXLFalconsFw2PpakNotificationsFailure_Object = MibTableColumn
+fwSXLFalconsFw2PpakNotificationsFailure = _FwSXLFalconsFw2PpakNotificationsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 2, 1, 5),
+    _FwSXLFalconsFw2PpakNotificationsFailure_Type()
+)
+fwSXLFalconsFw2PpakNotificationsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsFw2PpakNotificationsFailure.setStatus("current")
+_FwSXLStatFalconsDropsTable_Object = MibTable
+fwSXLStatFalconsDropsTable = _FwSXLStatFalconsDropsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsDropsTable.setStatus("current")
+_FwSXLStatFalconsDropsEntry_Object = MibTableRow
+fwSXLStatFalconsDropsEntry = _FwSXLStatFalconsDropsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1)
+)
+fwSXLStatFalconsDropsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLFalconsDropsIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsDropsEntry.setStatus("current")
+_FwSXLFalconsDropsIndex_Type = Unsigned32
+_FwSXLFalconsDropsIndex_Object = MibTableColumn
+fwSXLFalconsDropsIndex = _FwSXLFalconsDropsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 1),
+    _FwSXLFalconsDropsIndex_Type()
+)
+fwSXLFalconsDropsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsIndex.setStatus("current")
+
+
+class _FwSXLFalconsDropsTotPackets_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsTotPackets based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsTotPackets_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsTotPackets_Object = MibTableColumn
+fwSXLFalconsDropsTotPackets = _FwSXLFalconsDropsTotPackets_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 2),
+    _FwSXLFalconsDropsTotPackets_Type()
+)
+fwSXLFalconsDropsTotPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsTotPackets.setStatus("current")
+
+
+class _FwSXLFalconsDropsPxlDecision_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsPxlDecision based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsPxlDecision_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsPxlDecision_Object = MibTableColumn
+fwSXLFalconsDropsPxlDecision = _FwSXLFalconsDropsPxlDecision_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 3),
+    _FwSXLFalconsDropsPxlDecision_Type()
+)
+fwSXLFalconsDropsPxlDecision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsPxlDecision.setStatus("current")
+
+
+class _FwSXLFalconsDropsFragmentationError_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsFragmentationError based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsFragmentationError_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsFragmentationError_Object = MibTableColumn
+fwSXLFalconsDropsFragmentationError = _FwSXLFalconsDropsFragmentationError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 4),
+    _FwSXLFalconsDropsFragmentationError_Type()
+)
+fwSXLFalconsDropsFragmentationError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsFragmentationError.setStatus("current")
+
+
+class _FwSXLFalconsDropsF2FNotAllowed_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsF2FNotAllowed based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsF2FNotAllowed_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsF2FNotAllowed_Object = MibTableColumn
+fwSXLFalconsDropsF2FNotAllowed = _FwSXLFalconsDropsF2FNotAllowed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 5),
+    _FwSXLFalconsDropsF2FNotAllowed_Type()
+)
+fwSXLFalconsDropsF2FNotAllowed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsF2FNotAllowed.setStatus("current")
+
+
+class _FwSXLFalconsDropsHeavyLoadTcpViolation_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsHeavyLoadTcpViolation based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsHeavyLoadTcpViolation_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsHeavyLoadTcpViolation_Object = MibTableColumn
+fwSXLFalconsDropsHeavyLoadTcpViolation = _FwSXLFalconsDropsHeavyLoadTcpViolation_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 6),
+    _FwSXLFalconsDropsHeavyLoadTcpViolation_Type()
+)
+fwSXLFalconsDropsHeavyLoadTcpViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsHeavyLoadTcpViolation.setStatus("current")
+
+
+class _FwSXLFalconsDropsCorruptPacket_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsCorruptPacket based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsCorruptPacket_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsCorruptPacket_Object = MibTableColumn
+fwSXLFalconsDropsCorruptPacket = _FwSXLFalconsDropsCorruptPacket_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 7),
+    _FwSXLFalconsDropsCorruptPacket_Type()
+)
+fwSXLFalconsDropsCorruptPacket.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsCorruptPacket.setStatus("current")
+
+
+class _FwSXLFalconsDropsHeavyLoadNewConnection_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsHeavyLoadNewConnection based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsHeavyLoadNewConnection_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsHeavyLoadNewConnection_Object = MibTableColumn
+fwSXLFalconsDropsHeavyLoadNewConnection = _FwSXLFalconsDropsHeavyLoadNewConnection_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 8),
+    _FwSXLFalconsDropsHeavyLoadNewConnection_Type()
+)
+fwSXLFalconsDropsHeavyLoadNewConnection.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsHeavyLoadNewConnection.setStatus("current")
+
+
+class _FwSXLFalconsDropsClearPacketOnVPN_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsClearPacketOnVPN based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsClearPacketOnVPN_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsClearPacketOnVPN_Object = MibTableColumn
+fwSXLFalconsDropsClearPacketOnVPN = _FwSXLFalconsDropsClearPacketOnVPN_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 9),
+    _FwSXLFalconsDropsClearPacketOnVPN_Type()
+)
+fwSXLFalconsDropsClearPacketOnVPN.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsClearPacketOnVPN.setStatus("current")
+
+
+class _FwSXLFalconsDropsEncryptionFailed_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsEncryptionFailed based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsEncryptionFailed_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsEncryptionFailed_Object = MibTableColumn
+fwSXLFalconsDropsEncryptionFailed = _FwSXLFalconsDropsEncryptionFailed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 10),
+    _FwSXLFalconsDropsEncryptionFailed_Type()
+)
+fwSXLFalconsDropsEncryptionFailed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsEncryptionFailed.setStatus("current")
+
+
+class _FwSXLFalconsDropsDropTemplate_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsDropTemplate based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsDropTemplate_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsDropTemplate_Object = MibTableColumn
+fwSXLFalconsDropsDropTemplate = _FwSXLFalconsDropsDropTemplate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 11),
+    _FwSXLFalconsDropsDropTemplate_Type()
+)
+fwSXLFalconsDropsDropTemplate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsDropTemplate.setStatus("current")
+
+
+class _FwSXLFalconsDropsDecryptionFailed_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsDecryptionFailed based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsDecryptionFailed_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsDecryptionFailed_Object = MibTableColumn
+fwSXLFalconsDropsDecryptionFailed = _FwSXLFalconsDropsDecryptionFailed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 12),
+    _FwSXLFalconsDropsDecryptionFailed_Type()
+)
+fwSXLFalconsDropsDecryptionFailed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsDecryptionFailed.setStatus("current")
+
+
+class _FwSXLFalconsDropsOutboundConnNotFound_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsOutboundConnNotFound based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsOutboundConnNotFound_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsOutboundConnNotFound_Object = MibTableColumn
+fwSXLFalconsDropsOutboundConnNotFound = _FwSXLFalconsDropsOutboundConnNotFound_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 13),
+    _FwSXLFalconsDropsOutboundConnNotFound_Type()
+)
+fwSXLFalconsDropsOutboundConnNotFound.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsOutboundConnNotFound.setStatus("current")
+
+
+class _FwSXLFalconsDropsInterfaceDown_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsInterfaceDown based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsInterfaceDown_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsInterfaceDown_Object = MibTableColumn
+fwSXLFalconsDropsInterfaceDown = _FwSXLFalconsDropsInterfaceDown_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 14),
+    _FwSXLFalconsDropsInterfaceDown_Type()
+)
+fwSXLFalconsDropsInterfaceDown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsInterfaceDown.setStatus("current")
+
+
+class _FwSXLFalconsDropsClusterError_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsClusterError based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsClusterError_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsClusterError_Object = MibTableColumn
+fwSXLFalconsDropsClusterError = _FwSXLFalconsDropsClusterError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 15),
+    _FwSXLFalconsDropsClusterError_Type()
+)
+fwSXLFalconsDropsClusterError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsClusterError.setStatus("current")
+
+
+class _FwSXLFalconsDropsXmlError_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsXmlError based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsXmlError_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsXmlError_Object = MibTableColumn
+fwSXLFalconsDropsXmlError = _FwSXLFalconsDropsXmlError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 16),
+    _FwSXLFalconsDropsXmlError_Type()
+)
+fwSXLFalconsDropsXmlError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsXmlError.setStatus("current")
+
+
+class _FwSXLFalconsDropsAntiSpoofing_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsAntiSpoofing based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsAntiSpoofing_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsAntiSpoofing_Object = MibTableColumn
+fwSXLFalconsDropsAntiSpoofing = _FwSXLFalconsDropsAntiSpoofing_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 17),
+    _FwSXLFalconsDropsAntiSpoofing_Type()
+)
+fwSXLFalconsDropsAntiSpoofing.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsAntiSpoofing.setStatus("current")
+
+
+class _FwSXLFalconsDropsSanityError_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsSanityError based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsSanityError_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsSanityError_Object = MibTableColumn
+fwSXLFalconsDropsSanityError = _FwSXLFalconsDropsSanityError_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 18),
+    _FwSXLFalconsDropsSanityError_Type()
+)
+fwSXLFalconsDropsSanityError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsSanityError.setStatus("current")
+
+
+class _FwSXLFalconsDropsQxlDecision_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsQxlDecision based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsQxlDecision_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsQxlDecision_Object = MibTableColumn
+fwSXLFalconsDropsQxlDecision = _FwSXLFalconsDropsQxlDecision_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 19),
+    _FwSXLFalconsDropsQxlDecision_Type()
+)
+fwSXLFalconsDropsQxlDecision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsQxlDecision.setStatus("current")
+
+
+class _FwSXLFalconsDropsLoopPrevention_Type(DisplayString):
+    """Custom type fwSXLFalconsDropsLoopPrevention based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsDropsLoopPrevention_Type.__name__ = "DisplayString"
+_FwSXLFalconsDropsLoopPrevention_Object = MibTableColumn
+fwSXLFalconsDropsLoopPrevention = _FwSXLFalconsDropsLoopPrevention_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 3, 1, 20),
+    _FwSXLFalconsDropsLoopPrevention_Type()
+)
+fwSXLFalconsDropsLoopPrevention.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsDropsLoopPrevention.setStatus("current")
+_FwSXLStatFalconsInterfacesTable_Object = MibTable
+fwSXLStatFalconsInterfacesTable = _FwSXLStatFalconsInterfacesTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsInterfacesTable.setStatus("current")
+_FwSXLStatFalconsInterfacesEntry_Object = MibTableRow
+fwSXLStatFalconsInterfacesEntry = _FwSXLStatFalconsInterfacesEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1)
+)
+fwSXLStatFalconsInterfacesEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLFalconsInterfacesIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsInterfacesEntry.setStatus("current")
+_FwSXLFalconsInterfacesIndex_Type = Unsigned32
+_FwSXLFalconsInterfacesIndex_Object = MibTableColumn
+fwSXLFalconsInterfacesIndex = _FwSXLFalconsInterfacesIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 1),
+    _FwSXLFalconsInterfacesIndex_Type()
+)
+fwSXLFalconsInterfacesIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterfacesIndex.setStatus("current")
+_FwSXLFalconsInterface0Name_Type = DisplayString
+_FwSXLFalconsInterface0Name_Object = MibTableColumn
+fwSXLFalconsInterface0Name = _FwSXLFalconsInterface0Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 2),
+    _FwSXLFalconsInterface0Name_Type()
+)
+fwSXLFalconsInterface0Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface0Name.setStatus("current")
+_FwSXLFalconsInterface1Name_Type = DisplayString
+_FwSXLFalconsInterface1Name_Object = MibTableColumn
+fwSXLFalconsInterface1Name = _FwSXLFalconsInterface1Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 3),
+    _FwSXLFalconsInterface1Name_Type()
+)
+fwSXLFalconsInterface1Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface1Name.setStatus("current")
+_FwSXLFalconsInterface2Name_Type = DisplayString
+_FwSXLFalconsInterface2Name_Object = MibTableColumn
+fwSXLFalconsInterface2Name = _FwSXLFalconsInterface2Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 4),
+    _FwSXLFalconsInterface2Name_Type()
+)
+fwSXLFalconsInterface2Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface2Name.setStatus("current")
+_FwSXLFalconsInterface3Name_Type = DisplayString
+_FwSXLFalconsInterface3Name_Object = MibTableColumn
+fwSXLFalconsInterface3Name = _FwSXLFalconsInterface3Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 5),
+    _FwSXLFalconsInterface3Name_Type()
+)
+fwSXLFalconsInterface3Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface3Name.setStatus("current")
+_FwSXLFalconsInterface4Name_Type = DisplayString
+_FwSXLFalconsInterface4Name_Object = MibTableColumn
+fwSXLFalconsInterface4Name = _FwSXLFalconsInterface4Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 6),
+    _FwSXLFalconsInterface4Name_Type()
+)
+fwSXLFalconsInterface4Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface4Name.setStatus("current")
+_FwSXLFalconsInterface5Name_Type = DisplayString
+_FwSXLFalconsInterface5Name_Object = MibTableColumn
+fwSXLFalconsInterface5Name = _FwSXLFalconsInterface5Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 7),
+    _FwSXLFalconsInterface5Name_Type()
+)
+fwSXLFalconsInterface5Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface5Name.setStatus("current")
+_FwSXLFalconsInterface6Name_Type = DisplayString
+_FwSXLFalconsInterface6Name_Object = MibTableColumn
+fwSXLFalconsInterface6Name = _FwSXLFalconsInterface6Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 8),
+    _FwSXLFalconsInterface6Name_Type()
+)
+fwSXLFalconsInterface6Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface6Name.setStatus("current")
+_FwSXLFalconsInterface7Name_Type = DisplayString
+_FwSXLFalconsInterface7Name_Object = MibTableColumn
+fwSXLFalconsInterface7Name = _FwSXLFalconsInterface7Name_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 9),
+    _FwSXLFalconsInterface7Name_Type()
+)
+fwSXLFalconsInterface7Name.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface7Name.setStatus("current")
+_FwSXLFalconsInterface0Speed_Type = DisplayString
+_FwSXLFalconsInterface0Speed_Object = MibTableColumn
+fwSXLFalconsInterface0Speed = _FwSXLFalconsInterface0Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 10),
+    _FwSXLFalconsInterface0Speed_Type()
+)
+fwSXLFalconsInterface0Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface0Speed.setStatus("current")
+_FwSXLFalconsInterface1Speed_Type = DisplayString
+_FwSXLFalconsInterface1Speed_Object = MibTableColumn
+fwSXLFalconsInterface1Speed = _FwSXLFalconsInterface1Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 11),
+    _FwSXLFalconsInterface1Speed_Type()
+)
+fwSXLFalconsInterface1Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface1Speed.setStatus("current")
+_FwSXLFalconsInterface2Speed_Type = DisplayString
+_FwSXLFalconsInterface2Speed_Object = MibTableColumn
+fwSXLFalconsInterface2Speed = _FwSXLFalconsInterface2Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 12),
+    _FwSXLFalconsInterface2Speed_Type()
+)
+fwSXLFalconsInterface2Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface2Speed.setStatus("current")
+_FwSXLFalconsInterface3Speed_Type = DisplayString
+_FwSXLFalconsInterface3Speed_Object = MibTableColumn
+fwSXLFalconsInterface3Speed = _FwSXLFalconsInterface3Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 13),
+    _FwSXLFalconsInterface3Speed_Type()
+)
+fwSXLFalconsInterface3Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface3Speed.setStatus("current")
+_FwSXLFalconsInterface4Speed_Type = DisplayString
+_FwSXLFalconsInterface4Speed_Object = MibTableColumn
+fwSXLFalconsInterface4Speed = _FwSXLFalconsInterface4Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 14),
+    _FwSXLFalconsInterface4Speed_Type()
+)
+fwSXLFalconsInterface4Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface4Speed.setStatus("current")
+_FwSXLFalconsInterface5Speed_Type = DisplayString
+_FwSXLFalconsInterface5Speed_Object = MibTableColumn
+fwSXLFalconsInterface5Speed = _FwSXLFalconsInterface5Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 15),
+    _FwSXLFalconsInterface5Speed_Type()
+)
+fwSXLFalconsInterface5Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface5Speed.setStatus("current")
+_FwSXLFalconsInterface6Speed_Type = DisplayString
+_FwSXLFalconsInterface6Speed_Object = MibTableColumn
+fwSXLFalconsInterface6Speed = _FwSXLFalconsInterface6Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 16),
+    _FwSXLFalconsInterface6Speed_Type()
+)
+fwSXLFalconsInterface6Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface6Speed.setStatus("current")
+_FwSXLFalconsInterface7Speed_Type = DisplayString
+_FwSXLFalconsInterface7Speed_Object = MibTableColumn
+fwSXLFalconsInterface7Speed = _FwSXLFalconsInterface7Speed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 17),
+    _FwSXLFalconsInterface7Speed_Type()
+)
+fwSXLFalconsInterface7Speed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface7Speed.setStatus("current")
+_FwSXLFalconsInterface0State_Type = DisplayString
+_FwSXLFalconsInterface0State_Object = MibTableColumn
+fwSXLFalconsInterface0State = _FwSXLFalconsInterface0State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 18),
+    _FwSXLFalconsInterface0State_Type()
+)
+fwSXLFalconsInterface0State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface0State.setStatus("current")
+_FwSXLFalconsInterface1State_Type = DisplayString
+_FwSXLFalconsInterface1State_Object = MibTableColumn
+fwSXLFalconsInterface1State = _FwSXLFalconsInterface1State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 19),
+    _FwSXLFalconsInterface1State_Type()
+)
+fwSXLFalconsInterface1State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface1State.setStatus("current")
+_FwSXLFalconsInterface2State_Type = DisplayString
+_FwSXLFalconsInterface2State_Object = MibTableColumn
+fwSXLFalconsInterface2State = _FwSXLFalconsInterface2State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 20),
+    _FwSXLFalconsInterface2State_Type()
+)
+fwSXLFalconsInterface2State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface2State.setStatus("current")
+_FwSXLFalconsInterface3State_Type = DisplayString
+_FwSXLFalconsInterface3State_Object = MibTableColumn
+fwSXLFalconsInterface3State = _FwSXLFalconsInterface3State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 21),
+    _FwSXLFalconsInterface3State_Type()
+)
+fwSXLFalconsInterface3State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface3State.setStatus("current")
+_FwSXLFalconsInterface4State_Type = DisplayString
+_FwSXLFalconsInterface4State_Object = MibTableColumn
+fwSXLFalconsInterface4State = _FwSXLFalconsInterface4State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 22),
+    _FwSXLFalconsInterface4State_Type()
+)
+fwSXLFalconsInterface4State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface4State.setStatus("current")
+_FwSXLFalconsInterface5State_Type = DisplayString
+_FwSXLFalconsInterface5State_Object = MibTableColumn
+fwSXLFalconsInterface5State = _FwSXLFalconsInterface5State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 23),
+    _FwSXLFalconsInterface5State_Type()
+)
+fwSXLFalconsInterface5State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface5State.setStatus("current")
+_FwSXLFalconsInterface6State_Type = DisplayString
+_FwSXLFalconsInterface6State_Object = MibTableColumn
+fwSXLFalconsInterface6State = _FwSXLFalconsInterface6State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 24),
+    _FwSXLFalconsInterface6State_Type()
+)
+fwSXLFalconsInterface6State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface6State.setStatus("current")
+_FwSXLFalconsInterface7State_Type = DisplayString
+_FwSXLFalconsInterface7State_Object = MibTableColumn
+fwSXLFalconsInterface7State = _FwSXLFalconsInterface7State_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 4, 1, 25),
+    _FwSXLFalconsInterface7State_Type()
+)
+fwSXLFalconsInterface7State.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsInterface7State.setStatus("current")
+_FwSXLStatFalconsMemoryTable_Object = MibTable
+fwSXLStatFalconsMemoryTable = _FwSXLStatFalconsMemoryTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsMemoryTable.setStatus("current")
+_FwSXLStatFalconsMemoryEntry_Object = MibTableRow
+fwSXLStatFalconsMemoryEntry = _FwSXLStatFalconsMemoryEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1)
+)
+fwSXLStatFalconsMemoryEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLFalconsMemoryIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsMemoryEntry.setStatus("current")
+_FwSXLFalconsMemoryIndex_Type = Unsigned32
+_FwSXLFalconsMemoryIndex_Object = MibTableColumn
+fwSXLFalconsMemoryIndex = _FwSXLFalconsMemoryIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 1),
+    _FwSXLFalconsMemoryIndex_Type()
+)
+fwSXLFalconsMemoryIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLFalconsMemoryIndex.setStatus("current")
+
+
+class _FwSXLFalconsSxlTotMemory_Type(DisplayString):
+    """Custom type fwSXLFalconsSxlTotMemory based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsSxlTotMemory_Type.__name__ = "DisplayString"
+_FwSXLFalconsSxlTotMemory_Object = MibTableColumn
+fwSXLFalconsSxlTotMemory = _FwSXLFalconsSxlTotMemory_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 2),
+    _FwSXLFalconsSxlTotMemory_Type()
+)
+fwSXLFalconsSxlTotMemory.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsSxlTotMemory.setStatus("current")
+
+
+class _FwSXLFalconsSxlUsedMemory_Type(DisplayString):
+    """Custom type fwSXLFalconsSxlUsedMemory based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsSxlUsedMemory_Type.__name__ = "DisplayString"
+_FwSXLFalconsSxlUsedMemory_Object = MibTableColumn
+fwSXLFalconsSxlUsedMemory = _FwSXLFalconsSxlUsedMemory_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 3),
+    _FwSXLFalconsSxlUsedMemory_Type()
+)
+fwSXLFalconsSxlUsedMemory.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsSxlUsedMemory.setStatus("current")
+
+
+class _FwSXLFalconsSxlFreeMemory_Type(DisplayString):
+    """Custom type fwSXLFalconsSxlFreeMemory based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsSxlFreeMemory_Type.__name__ = "DisplayString"
+_FwSXLFalconsSxlFreeMemory_Object = MibTableColumn
+fwSXLFalconsSxlFreeMemory = _FwSXLFalconsSxlFreeMemory_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 4),
+    _FwSXLFalconsSxlFreeMemory_Type()
+)
+fwSXLFalconsSxlFreeMemory.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsSxlFreeMemory.setStatus("current")
+
+
+class _FwSXLFalconsPacketPoolTotMemory_Type(DisplayString):
+    """Custom type fwSXLFalconsPacketPoolTotMemory based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsPacketPoolTotMemory_Type.__name__ = "DisplayString"
+_FwSXLFalconsPacketPoolTotMemory_Object = MibTableColumn
+fwSXLFalconsPacketPoolTotMemory = _FwSXLFalconsPacketPoolTotMemory_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 5),
+    _FwSXLFalconsPacketPoolTotMemory_Type()
+)
+fwSXLFalconsPacketPoolTotMemory.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsPacketPoolTotMemory.setStatus("current")
+
+
+class _FwSXLFalconsPacketPoolUsedMemory_Type(DisplayString):
+    """Custom type fwSXLFalconsPacketPoolUsedMemory based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsPacketPoolUsedMemory_Type.__name__ = "DisplayString"
+_FwSXLFalconsPacketPoolUsedMemory_Object = MibTableColumn
+fwSXLFalconsPacketPoolUsedMemory = _FwSXLFalconsPacketPoolUsedMemory_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 6),
+    _FwSXLFalconsPacketPoolUsedMemory_Type()
+)
+fwSXLFalconsPacketPoolUsedMemory.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsPacketPoolUsedMemory.setStatus("current")
+
+
+class _FwSXLFalconsPacketPoolFreeMemory_Type(DisplayString):
+    """Custom type fwSXLFalconsPacketPoolFreeMemory based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsPacketPoolFreeMemory_Type.__name__ = "DisplayString"
+_FwSXLFalconsPacketPoolFreeMemory_Object = MibTableColumn
+fwSXLFalconsPacketPoolFreeMemory = _FwSXLFalconsPacketPoolFreeMemory_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 5, 1, 7),
+    _FwSXLFalconsPacketPoolFreeMemory_Type()
+)
+fwSXLFalconsPacketPoolFreeMemory.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsPacketPoolFreeMemory.setStatus("current")
+_FwSXLStatFalconsCpuTable_Object = MibTable
+fwSXLStatFalconsCpuTable = _FwSXLStatFalconsCpuTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsCpuTable.setStatus("current")
+_FwSXLStatFalconsCpuEntry_Object = MibTableRow
+fwSXLStatFalconsCpuEntry = _FwSXLStatFalconsCpuEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1)
+)
+fwSXLStatFalconsCpuEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLFalconsCpuIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsCpuEntry.setStatus("current")
+_FwSXLFalconsCpuIndex_Type = Unsigned32
+_FwSXLFalconsCpuIndex_Object = MibTableColumn
+fwSXLFalconsCpuIndex = _FwSXLFalconsCpuIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 1),
+    _FwSXLFalconsCpuIndex_Type()
+)
+fwSXLFalconsCpuIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpuIndex.setStatus("current")
+
+
+class _FwSXLFalconsCpu0Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu0Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu0Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu0Usage_Object = MibTableColumn
+fwSXLFalconsCpu0Usage = _FwSXLFalconsCpu0Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 2),
+    _FwSXLFalconsCpu0Usage_Type()
+)
+fwSXLFalconsCpu0Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu0Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu1Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu1Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu1Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu1Usage_Object = MibTableColumn
+fwSXLFalconsCpu1Usage = _FwSXLFalconsCpu1Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 3),
+    _FwSXLFalconsCpu1Usage_Type()
+)
+fwSXLFalconsCpu1Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu1Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu2Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu2Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu2Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu2Usage_Object = MibTableColumn
+fwSXLFalconsCpu2Usage = _FwSXLFalconsCpu2Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 4),
+    _FwSXLFalconsCpu2Usage_Type()
+)
+fwSXLFalconsCpu2Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu2Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu3Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu3Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu3Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu3Usage_Object = MibTableColumn
+fwSXLFalconsCpu3Usage = _FwSXLFalconsCpu3Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 5),
+    _FwSXLFalconsCpu3Usage_Type()
+)
+fwSXLFalconsCpu3Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu3Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu4Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu4Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu4Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu4Usage_Object = MibTableColumn
+fwSXLFalconsCpu4Usage = _FwSXLFalconsCpu4Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 6),
+    _FwSXLFalconsCpu4Usage_Type()
+)
+fwSXLFalconsCpu4Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu4Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu5Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu5Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu5Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu5Usage_Object = MibTableColumn
+fwSXLFalconsCpu5Usage = _FwSXLFalconsCpu5Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 7),
+    _FwSXLFalconsCpu5Usage_Type()
+)
+fwSXLFalconsCpu5Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu5Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu6Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu6Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu6Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu6Usage_Object = MibTableColumn
+fwSXLFalconsCpu6Usage = _FwSXLFalconsCpu6Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 8),
+    _FwSXLFalconsCpu6Usage_Type()
+)
+fwSXLFalconsCpu6Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu6Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu7Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu7Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu7Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu7Usage_Object = MibTableColumn
+fwSXLFalconsCpu7Usage = _FwSXLFalconsCpu7Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 9),
+    _FwSXLFalconsCpu7Usage_Type()
+)
+fwSXLFalconsCpu7Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu7Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu8Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu8Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu8Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu8Usage_Object = MibTableColumn
+fwSXLFalconsCpu8Usage = _FwSXLFalconsCpu8Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 10),
+    _FwSXLFalconsCpu8Usage_Type()
+)
+fwSXLFalconsCpu8Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu8Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu9Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu9Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu9Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu9Usage_Object = MibTableColumn
+fwSXLFalconsCpu9Usage = _FwSXLFalconsCpu9Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 11),
+    _FwSXLFalconsCpu9Usage_Type()
+)
+fwSXLFalconsCpu9Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu9Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu10Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu10Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu10Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu10Usage_Object = MibTableColumn
+fwSXLFalconsCpu10Usage = _FwSXLFalconsCpu10Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 12),
+    _FwSXLFalconsCpu10Usage_Type()
+)
+fwSXLFalconsCpu10Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu10Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu11Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu11Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu11Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu11Usage_Object = MibTableColumn
+fwSXLFalconsCpu11Usage = _FwSXLFalconsCpu11Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 13),
+    _FwSXLFalconsCpu11Usage_Type()
+)
+fwSXLFalconsCpu11Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu11Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu12Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu12Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu12Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu12Usage_Object = MibTableColumn
+fwSXLFalconsCpu12Usage = _FwSXLFalconsCpu12Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 14),
+    _FwSXLFalconsCpu12Usage_Type()
+)
+fwSXLFalconsCpu12Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu12Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu13Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu13Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu13Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu13Usage_Object = MibTableColumn
+fwSXLFalconsCpu13Usage = _FwSXLFalconsCpu13Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 15),
+    _FwSXLFalconsCpu13Usage_Type()
+)
+fwSXLFalconsCpu13Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu13Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu14Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu14Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu14Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu14Usage_Object = MibTableColumn
+fwSXLFalconsCpu14Usage = _FwSXLFalconsCpu14Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 16),
+    _FwSXLFalconsCpu14Usage_Type()
+)
+fwSXLFalconsCpu14Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu14Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu15Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu15Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu15Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu15Usage_Object = MibTableColumn
+fwSXLFalconsCpu15Usage = _FwSXLFalconsCpu15Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 17),
+    _FwSXLFalconsCpu15Usage_Type()
+)
+fwSXLFalconsCpu15Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu15Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu16Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu16Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu16Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu16Usage_Object = MibTableColumn
+fwSXLFalconsCpu16Usage = _FwSXLFalconsCpu16Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 18),
+    _FwSXLFalconsCpu16Usage_Type()
+)
+fwSXLFalconsCpu16Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu16Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu17Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu17Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu17Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu17Usage_Object = MibTableColumn
+fwSXLFalconsCpu17Usage = _FwSXLFalconsCpu17Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 19),
+    _FwSXLFalconsCpu17Usage_Type()
+)
+fwSXLFalconsCpu17Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu17Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu18Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu18Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu18Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu18Usage_Object = MibTableColumn
+fwSXLFalconsCpu18Usage = _FwSXLFalconsCpu18Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 20),
+    _FwSXLFalconsCpu18Usage_Type()
+)
+fwSXLFalconsCpu18Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu18Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu19Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu19Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu19Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu19Usage_Object = MibTableColumn
+fwSXLFalconsCpu19Usage = _FwSXLFalconsCpu19Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 21),
+    _FwSXLFalconsCpu19Usage_Type()
+)
+fwSXLFalconsCpu19Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu19Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu20Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu20Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu20Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu20Usage_Object = MibTableColumn
+fwSXLFalconsCpu20Usage = _FwSXLFalconsCpu20Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 22),
+    _FwSXLFalconsCpu20Usage_Type()
+)
+fwSXLFalconsCpu20Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu20Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu21Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu21Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu21Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu21Usage_Object = MibTableColumn
+fwSXLFalconsCpu21Usage = _FwSXLFalconsCpu21Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 23),
+    _FwSXLFalconsCpu21Usage_Type()
+)
+fwSXLFalconsCpu21Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu21Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu22Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu22Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu22Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu22Usage_Object = MibTableColumn
+fwSXLFalconsCpu22Usage = _FwSXLFalconsCpu22Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 24),
+    _FwSXLFalconsCpu22Usage_Type()
+)
+fwSXLFalconsCpu22Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu22Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu23Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu23Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu23Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu23Usage_Object = MibTableColumn
+fwSXLFalconsCpu23Usage = _FwSXLFalconsCpu23Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 25),
+    _FwSXLFalconsCpu23Usage_Type()
+)
+fwSXLFalconsCpu23Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu23Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu24Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu24Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu24Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu24Usage_Object = MibTableColumn
+fwSXLFalconsCpu24Usage = _FwSXLFalconsCpu24Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 26),
+    _FwSXLFalconsCpu24Usage_Type()
+)
+fwSXLFalconsCpu24Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu24Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu25Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu25Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu25Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu25Usage_Object = MibTableColumn
+fwSXLFalconsCpu25Usage = _FwSXLFalconsCpu25Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 27),
+    _FwSXLFalconsCpu25Usage_Type()
+)
+fwSXLFalconsCpu25Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu25Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu26Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu26Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu26Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu26Usage_Object = MibTableColumn
+fwSXLFalconsCpu26Usage = _FwSXLFalconsCpu26Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 28),
+    _FwSXLFalconsCpu26Usage_Type()
+)
+fwSXLFalconsCpu26Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu26Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu27Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu27Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu27Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu27Usage_Object = MibTableColumn
+fwSXLFalconsCpu27Usage = _FwSXLFalconsCpu27Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 29),
+    _FwSXLFalconsCpu27Usage_Type()
+)
+fwSXLFalconsCpu27Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu27Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu28Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu28Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu28Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu28Usage_Object = MibTableColumn
+fwSXLFalconsCpu28Usage = _FwSXLFalconsCpu28Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 30),
+    _FwSXLFalconsCpu28Usage_Type()
+)
+fwSXLFalconsCpu28Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu28Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu29Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu29Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu29Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu29Usage_Object = MibTableColumn
+fwSXLFalconsCpu29Usage = _FwSXLFalconsCpu29Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 31),
+    _FwSXLFalconsCpu29Usage_Type()
+)
+fwSXLFalconsCpu29Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu29Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu30Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu30Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu30Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu30Usage_Object = MibTableColumn
+fwSXLFalconsCpu30Usage = _FwSXLFalconsCpu30Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 32),
+    _FwSXLFalconsCpu30Usage_Type()
+)
+fwSXLFalconsCpu30Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu30Usage.setStatus("current")
+
+
+class _FwSXLFalconsCpu31Usage_Type(DisplayString):
+    """Custom type fwSXLFalconsCpu31Usage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_FwSXLFalconsCpu31Usage_Type.__name__ = "DisplayString"
+_FwSXLFalconsCpu31Usage_Object = MibTableColumn
+fwSXLFalconsCpu31Usage = _FwSXLFalconsCpu31Usage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 6, 1, 33),
+    _FwSXLFalconsCpu31Usage_Type()
+)
+fwSXLFalconsCpu31Usage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsCpu31Usage.setStatus("current")
+_FwSXLStatFalconsGeneralTable_Object = MibTable
+fwSXLStatFalconsGeneralTable = _FwSXLStatFalconsGeneralTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7)
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsGeneralTable.setStatus("current")
+_FwSXLStatFalconsGeneralEntry_Object = MibTableRow
+fwSXLStatFalconsGeneralEntry = _FwSXLStatFalconsGeneralEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7, 1)
+)
+fwSXLStatFalconsGeneralEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "fwSXLHostGeneralIndex"),
+)
+if mibBuilder.loadTexts:
+    fwSXLStatFalconsGeneralEntry.setStatus("current")
+_FwSXLFalconsGeneralIndex_Type = Unsigned32
+_FwSXLFalconsGeneralIndex_Object = MibTableColumn
+fwSXLFalconsGeneralIndex = _FwSXLFalconsGeneralIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7, 1, 1),
+    _FwSXLFalconsGeneralIndex_Type()
+)
+fwSXLFalconsGeneralIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsGeneralIndex.setStatus("current")
+_FwSXLFalconsState_Type = DisplayString
+_FwSXLFalconsState_Object = MibTableColumn
+fwSXLFalconsState = _FwSXLFalconsState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7, 1, 2),
+    _FwSXLFalconsState_Type()
+)
+fwSXLFalconsState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsState.setStatus("current")
+_FwSXLFalconsType_Type = DisplayString
+_FwSXLFalconsType_Object = MibTableColumn
+fwSXLFalconsType = _FwSXLFalconsType_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7, 1, 3),
+    _FwSXLFalconsType_Type()
+)
+fwSXLFalconsType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsType.setStatus("current")
+_FwSXLFalconsSerialNumber_Type = DisplayString
+_FwSXLFalconsSerialNumber_Object = MibTableColumn
+fwSXLFalconsSerialNumber = _FwSXLFalconsSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7, 1, 4),
+    _FwSXLFalconsSerialNumber_Type()
+)
+fwSXLFalconsSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsSerialNumber.setStatus("current")
+_FwSXLFalconsSlotNumber_Type = Integer32
+_FwSXLFalconsSlotNumber_Object = MibTableColumn
+fwSXLFalconsSlotNumber = _FwSXLFalconsSlotNumber_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 36, 1, 5, 3, 7, 1, 5),
+    _FwSXLFalconsSlotNumber_Type()
+)
+fwSXLFalconsSlotNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwSXLFalconsSlotNumber.setStatus("current")
 _IdentityAwareness_ObjectIdentity = ObjectIdentity
 identityAwareness = _IdentityAwareness_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 38)
@@ -14855,7 +18126,7 @@ identityAwarenessDistributedEnvTableIndex = _IdentityAwarenessDistributedEnvTabl
     (1, 3, 6, 1, 4, 1, 2620, 1, 38, 24, 1, 1),
     _IdentityAwarenessDistributedEnvTableIndex_Type()
 )
-identityAwarenessDistributedEnvTableIndex.setMaxAccess("read-only")
+identityAwarenessDistributedEnvTableIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     identityAwarenessDistributedEnvTableIndex.setStatus("current")
 _IdentityAwarenessDistributedEnvTableGwName_Type = DisplayString
@@ -14924,7 +18195,7 @@ identityAwarenessADQueryStatusTableIndex = _IdentityAwarenessADQueryStatusTableI
     (1, 3, 6, 1, 4, 1, 2620, 1, 38, 25, 1, 1),
     _IdentityAwarenessADQueryStatusTableIndex_Type()
 )
-identityAwarenessADQueryStatusTableIndex.setMaxAccess("read-only")
+identityAwarenessADQueryStatusTableIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     identityAwarenessADQueryStatusTableIndex.setStatus("current")
 _IdentityAwarenessADQueryStatusCurrStatus_Type = Integer32
@@ -15225,7 +18496,7 @@ thresholdActiveEventsIndex = _ThresholdActiveEventsIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 42, 7, 1, 1),
     _ThresholdActiveEventsIndex_Type()
 )
-thresholdActiveEventsIndex.setMaxAccess("read-only")
+thresholdActiveEventsIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     thresholdActiveEventsIndex.setStatus("current")
 _ThresholdActiveEventName_Type = DisplayString
@@ -15312,7 +18583,7 @@ thresholdDestinationIndex = _ThresholdDestinationIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 42, 8, 1, 1),
     _ThresholdDestinationIndex_Type()
 )
-thresholdDestinationIndex.setMaxAccess("read-only")
+thresholdDestinationIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     thresholdDestinationIndex.setStatus("current")
 _ThresholdDestinationName_Type = DisplayString
@@ -15381,7 +18652,7 @@ thresholdErrorIndex = _ThresholdErrorIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 42, 9, 1, 1),
     _ThresholdErrorIndex_Type()
 )
-thresholdErrorIndex.setMaxAccess("read-only")
+thresholdErrorIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     thresholdErrorIndex.setStatus("current")
 _ThresholdName_Type = DisplayString
@@ -15548,16 +18819,16 @@ _Dlp_ObjectIdentity = ObjectIdentity
 dlp = _Dlp_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 44)
 )
-_ExchangeAgents_ObjectIdentity = ObjectIdentity
-exchangeAgents = _ExchangeAgents_ObjectIdentity(
+_ExchangeAgentsStatus_ObjectIdentity = ObjectIdentity
+exchangeAgentsStatus = _ExchangeAgentsStatus_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 44, 1)
 )
-_ExchangeAgentsTable_Object = MibTable
-exchangeAgentsTable = _ExchangeAgentsTable_Object(
+_ExchangeAgentsStatusTable_Object = MibTable
+exchangeAgentsStatusTable = _ExchangeAgentsStatusTable_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 44, 1, 1)
 )
 if mibBuilder.loadTexts:
-    exchangeAgentsTable.setStatus("current")
+    exchangeAgentsStatusTable.setStatus("current")
 _ExchangeAgentsStatusEntry_Object = MibTableRow
 exchangeAgentsStatusEntry = _ExchangeAgentsStatusEntry_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 44, 1, 1, 1)
@@ -15573,7 +18844,7 @@ exchangeAgentsStatusTableIndex = _ExchangeAgentsStatusTableIndex_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 44, 1, 1, 1, 1),
     _ExchangeAgentsStatusTableIndex_Type()
 )
-exchangeAgentsStatusTableIndex.setMaxAccess("read-only")
+exchangeAgentsStatusTableIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     exchangeAgentsStatusTableIndex.setStatus("current")
 _ExchangeAgentName_Type = DisplayString
@@ -16194,6 +19465,3779 @@ amwStatusLongDesc = _AmwStatusLongDesc_Object(
 amwStatusLongDesc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     amwStatusLongDesc.setStatus("current")
+_Asg_ObjectIdentity = ObjectIdentity
+asg = _Asg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48)
+)
+
+
+class _AsgProductName_Type(DisplayString):
+    """Custom type asgProductName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgProductName_Type.__name__ = "DisplayString"
+_AsgProductName_Object = MibScalar
+asgProductName = _AsgProductName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 1),
+    _AsgProductName_Type()
+)
+asgProductName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProductName.setStatus("current")
+
+
+class _AsgVer_Type(DisplayString):
+    """Custom type asgVer based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgVer_Type.__name__ = "DisplayString"
+_AsgVer_Object = MibScalar
+asgVer = _AsgVer_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 2),
+    _AsgVer_Type()
+)
+asgVer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVer.setStatus("current")
+_AsgKernelVer_Type = DisplayString
+_AsgKernelVer_Object = MibScalar
+asgKernelVer = _AsgKernelVer_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 3),
+    _AsgKernelVer_Type()
+)
+asgKernelVer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgKernelVer.setStatus("current")
+_AsgBuildNum_Type = Unsigned32
+_AsgBuildNum_Object = MibScalar
+asgBuildNum = _AsgBuildNum_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 4),
+    _AsgBuildNum_Type()
+)
+asgBuildNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgBuildNum.setStatus("current")
+_AsgMaximumBladesPerChassis_Type = Unsigned32
+_AsgMaximumBladesPerChassis_Object = MibScalar
+asgMaximumBladesPerChassis = _AsgMaximumBladesPerChassis_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 7),
+    _AsgMaximumBladesPerChassis_Type()
+)
+asgMaximumBladesPerChassis.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgMaximumBladesPerChassis.setStatus("current")
+_AsgActiveBladesBitmask_Type = DisplayString
+_AsgActiveBladesBitmask_Object = MibScalar
+asgActiveBladesBitmask = _AsgActiveBladesBitmask_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 8),
+    _AsgActiveBladesBitmask_Type()
+)
+asgActiveBladesBitmask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgActiveBladesBitmask.setStatus("current")
+_AsgInstalledBladesBitmask_Type = DisplayString
+_AsgInstalledBladesBitmask_Object = MibScalar
+asgInstalledBladesBitmask = _AsgInstalledBladesBitmask_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 9),
+    _AsgInstalledBladesBitmask_Type()
+)
+asgInstalledBladesBitmask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgInstalledBladesBitmask.setStatus("current")
+_AsgInstalled_Type = DisplayString
+_AsgInstalled_Object = MibScalar
+asgInstalled = _AsgInstalled_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 10),
+    _AsgInstalled_Type()
+)
+asgInstalled.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgInstalled.setStatus("current")
+_AsgSystemUp_Type = DisplayString
+_AsgSystemUp_Object = MibScalar
+asgSystemUp = _AsgSystemUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 11),
+    _AsgSystemUp_Type()
+)
+asgSystemUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSystemUp.setStatus("current")
+
+
+class _AsgEvent_Type(DisplayString):
+    """Custom type asgEvent based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgEvent_Type.__name__ = "DisplayString"
+_AsgEvent_Object = MibScalar
+asgEvent = _AsgEvent_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 12),
+    _AsgEvent_Type()
+)
+asgEvent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgEvent.setStatus("current")
+
+
+class _AsgStatusCode_Type(DisplayString):
+    """Custom type asgStatusCode based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgStatusCode_Type.__name__ = "DisplayString"
+_AsgStatusCode_Object = MibScalar
+asgStatusCode = _AsgStatusCode_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 13),
+    _AsgStatusCode_Type()
+)
+asgStatusCode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgStatusCode.setStatus("current")
+
+
+class _AsgStatShort_Type(DisplayString):
+    """Custom type asgStatShort based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgStatShort_Type.__name__ = "DisplayString"
+_AsgStatShort_Object = MibScalar
+asgStatShort = _AsgStatShort_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 14),
+    _AsgStatShort_Type()
+)
+asgStatShort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgStatShort.setStatus("current")
+
+
+class _AsgStatLong_Type(DisplayString):
+    """Custom type asgStatLong based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgStatLong_Type.__name__ = "DisplayString"
+_AsgStatLong_Object = MibScalar
+asgStatLong = _AsgStatLong_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 15),
+    _AsgStatLong_Type()
+)
+asgStatLong.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgStatLong.setStatus("current")
+
+
+class _AsgSecureXLStatusBitmask_Type(DisplayString):
+    """Custom type asgSecureXLStatusBitmask based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSecureXLStatusBitmask_Type.__name__ = "DisplayString"
+_AsgSecureXLStatusBitmask_Object = MibScalar
+asgSecureXLStatusBitmask = _AsgSecureXLStatusBitmask_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 16),
+    _AsgSecureXLStatusBitmask_Type()
+)
+asgSecureXLStatusBitmask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSecureXLStatusBitmask.setStatus("current")
+_AsgAttachedBladesBitmask_Type = DisplayString
+_AsgAttachedBladesBitmask_Object = MibScalar
+asgAttachedBladesBitmask = _AsgAttachedBladesBitmask_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 17),
+    _AsgAttachedBladesBitmask_Type()
+)
+asgAttachedBladesBitmask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAttachedBladesBitmask.setStatus("current")
+_AsgIPv4PerformanceCounters_ObjectIdentity = ObjectIdentity
+asgIPv4PerformanceCounters = _AsgIPv4PerformanceCounters_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20)
+)
+_AsgThroughput_Type = DisplayString
+_AsgThroughput_Object = MibScalar
+asgThroughput = _AsgThroughput_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 1),
+    _AsgThroughput_Type()
+)
+asgThroughput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgThroughput.setStatus("current")
+_AsgConnectionRate_Type = DisplayString
+_AsgConnectionRate_Object = MibScalar
+asgConnectionRate = _AsgConnectionRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 2),
+    _AsgConnectionRate_Type()
+)
+asgConnectionRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgConnectionRate.setStatus("current")
+_AsgPacketRate_Type = DisplayString
+_AsgPacketRate_Object = MibScalar
+asgPacketRate = _AsgPacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 3),
+    _AsgPacketRate_Type()
+)
+asgPacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPacketRate.setStatus("current")
+_AsgConcurrConn_Type = DisplayString
+_AsgConcurrConn_Object = MibScalar
+asgConcurrConn = _AsgConcurrConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 4),
+    _AsgConcurrConn_Type()
+)
+asgConcurrConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgConcurrConn.setStatus("current")
+_AsgAccelConnectionRate_Type = DisplayString
+_AsgAccelConnectionRate_Object = MibScalar
+asgAccelConnectionRate = _AsgAccelConnectionRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 6),
+    _AsgAccelConnectionRate_Type()
+)
+asgAccelConnectionRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAccelConnectionRate.setStatus("current")
+_AsgNonAccelConnectionRate_Type = DisplayString
+_AsgNonAccelConnectionRate_Object = MibScalar
+asgNonAccelConnectionRate = _AsgNonAccelConnectionRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 7),
+    _AsgNonAccelConnectionRate_Type()
+)
+asgNonAccelConnectionRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNonAccelConnectionRate.setStatus("current")
+_AsgAccelConcurrConn_Type = DisplayString
+_AsgAccelConcurrConn_Object = MibScalar
+asgAccelConcurrConn = _AsgAccelConcurrConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 8),
+    _AsgAccelConcurrConn_Type()
+)
+asgAccelConcurrConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAccelConcurrConn.setStatus("current")
+_AsgNonAccelConcurrConn_Type = DisplayString
+_AsgNonAccelConcurrConn_Object = MibScalar
+asgNonAccelConcurrConn = _AsgNonAccelConcurrConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 9),
+    _AsgNonAccelConcurrConn_Type()
+)
+asgNonAccelConcurrConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNonAccelConcurrConn.setStatus("current")
+_AsgLoad_Type = DisplayString
+_AsgLoad_Object = MibScalar
+asgLoad = _AsgLoad_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 10),
+    _AsgLoad_Type()
+)
+asgLoad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgLoad.setStatus("current")
+_AsgAccelLoadAvg_Type = DisplayString
+_AsgAccelLoadAvg_Object = MibScalar
+asgAccelLoadAvg = _AsgAccelLoadAvg_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 11),
+    _AsgAccelLoadAvg_Type()
+)
+asgAccelLoadAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAccelLoadAvg.setStatus("current")
+_AsgAccelLoadMin_Type = DisplayString
+_AsgAccelLoadMin_Object = MibScalar
+asgAccelLoadMin = _AsgAccelLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 12),
+    _AsgAccelLoadMin_Type()
+)
+asgAccelLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAccelLoadMin.setStatus("current")
+_AsgAccelLoadMax_Type = DisplayString
+_AsgAccelLoadMax_Object = MibScalar
+asgAccelLoadMax = _AsgAccelLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 13),
+    _AsgAccelLoadMax_Type()
+)
+asgAccelLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAccelLoadMax.setStatus("current")
+_AsgInstancesLoadAvg_Type = DisplayString
+_AsgInstancesLoadAvg_Object = MibScalar
+asgInstancesLoadAvg = _AsgInstancesLoadAvg_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 14),
+    _AsgInstancesLoadAvg_Type()
+)
+asgInstancesLoadAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgInstancesLoadAvg.setStatus("current")
+_AsgInstancesLoadMin_Type = DisplayString
+_AsgInstancesLoadMin_Object = MibScalar
+asgInstancesLoadMin = _AsgInstancesLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 15),
+    _AsgInstancesLoadMin_Type()
+)
+asgInstancesLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgInstancesLoadMin.setStatus("current")
+_AsgInstancesLoadMax_Type = DisplayString
+_AsgInstancesLoadMax_Object = MibScalar
+asgInstancesLoadMax = _AsgInstancesLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 16),
+    _AsgInstancesLoadMax_Type()
+)
+asgInstancesLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgInstancesLoadMax.setStatus("current")
+_AsgVpnThroughput_Type = DisplayString
+_AsgVpnThroughput_Object = MibScalar
+asgVpnThroughput = _AsgVpnThroughput_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 17),
+    _AsgVpnThroughput_Type()
+)
+asgVpnThroughput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVpnThroughput.setStatus("current")
+_AsgVpnConn_Type = DisplayString
+_AsgVpnConn_Object = MibScalar
+asgVpnConn = _AsgVpnConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 18),
+    _AsgVpnConn_Type()
+)
+asgVpnConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVpnConn.setStatus("current")
+_AsgNatConnRate_Type = DisplayString
+_AsgNatConnRate_Object = MibScalar
+asgNatConnRate = _AsgNatConnRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 19),
+    _AsgNatConnRate_Type()
+)
+asgNatConnRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNatConnRate.setStatus("current")
+_AsgNatConn_Type = DisplayString
+_AsgNatConn_Object = MibScalar
+asgNatConn = _AsgNatConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 20),
+    _AsgNatConn_Type()
+)
+asgNatConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNatConn.setStatus("current")
+_AsgVsxCpu1MinAvg_Type = DisplayString
+_AsgVsxCpu1MinAvg_Object = MibScalar
+asgVsxCpu1MinAvg = _AsgVsxCpu1MinAvg_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 21),
+    _AsgVsxCpu1MinAvg_Type()
+)
+asgVsxCpu1MinAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVsxCpu1MinAvg.setStatus("current")
+_AsgPathDistTable_Object = MibTable
+asgPathDistTable = _AsgPathDistTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24)
+)
+if mibBuilder.loadTexts:
+    asgPathDistTable.setStatus("current")
+_AsgPathDistEntry_Object = MibTableRow
+asgPathDistEntry = _AsgPathDistEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1)
+)
+asgPathDistEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgPathDistIndex"),
+)
+if mibBuilder.loadTexts:
+    asgPathDistEntry.setStatus("current")
+_AsgPathDistIndex_Type = Unsigned32
+_AsgPathDistIndex_Object = MibTableColumn
+asgPathDistIndex = _AsgPathDistIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1, 1),
+    _AsgPathDistIndex_Type()
+)
+asgPathDistIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgPathDistIndex.setStatus("current")
+_AsgStatName_Type = DisplayString
+_AsgStatName_Object = MibTableColumn
+asgStatName = _AsgStatName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1, 2),
+    _AsgStatName_Type()
+)
+asgStatName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgStatName.setStatus("current")
+_AsgAccelPath_Type = DisplayString
+_AsgAccelPath_Object = MibTableColumn
+asgAccelPath = _AsgAccelPath_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1, 3),
+    _AsgAccelPath_Type()
+)
+asgAccelPath.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAccelPath.setStatus("current")
+_AsgMediumPath_Type = DisplayString
+_AsgMediumPath_Object = MibTableColumn
+asgMediumPath = _AsgMediumPath_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1, 4),
+    _AsgMediumPath_Type()
+)
+asgMediumPath.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgMediumPath.setStatus("current")
+_AsgFirewallPath_Type = DisplayString
+_AsgFirewallPath_Object = MibTableColumn
+asgFirewallPath = _AsgFirewallPath_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1, 5),
+    _AsgFirewallPath_Type()
+)
+asgFirewallPath.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgFirewallPath.setStatus("current")
+_AsgDropped_Type = DisplayString
+_AsgDropped_Object = MibTableColumn
+asgDropped = _AsgDropped_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 24, 1, 6),
+    _AsgDropped_Type()
+)
+asgDropped.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDropped.setStatus("current")
+_AsgCountersTable_Object = MibTable
+asgCountersTable = _AsgCountersTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25)
+)
+if mibBuilder.loadTexts:
+    asgCountersTable.setStatus("current")
+_AsgCountersEntry_Object = MibTableRow
+asgCountersEntry = _AsgCountersEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1)
+)
+asgCountersEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgCountersIndex"),
+)
+if mibBuilder.loadTexts:
+    asgCountersEntry.setStatus("current")
+_AsgCountersIndex_Type = Unsigned32
+_AsgCountersIndex_Object = MibTableColumn
+asgCountersIndex = _AsgCountersIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 1),
+    _AsgCountersIndex_Type()
+)
+asgCountersIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgCountersIndex.setStatus("current")
+_AsgCountersBladeId_Type = DisplayString
+_AsgCountersBladeId_Object = MibTableColumn
+asgCountersBladeId = _AsgCountersBladeId_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 2),
+    _AsgCountersBladeId_Type()
+)
+asgCountersBladeId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersBladeId.setStatus("current")
+_AsgCountersThroughput_Type = DisplayString
+_AsgCountersThroughput_Object = MibTableColumn
+asgCountersThroughput = _AsgCountersThroughput_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 3),
+    _AsgCountersThroughput_Type()
+)
+asgCountersThroughput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersThroughput.setStatus("current")
+_AsgCountersConnRate_Type = DisplayString
+_AsgCountersConnRate_Object = MibTableColumn
+asgCountersConnRate = _AsgCountersConnRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 4),
+    _AsgCountersConnRate_Type()
+)
+asgCountersConnRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersConnRate.setStatus("current")
+_AsgCountersPacketRate_Type = DisplayString
+_AsgCountersPacketRate_Object = MibTableColumn
+asgCountersPacketRate = _AsgCountersPacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 5),
+    _AsgCountersPacketRate_Type()
+)
+asgCountersPacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersPacketRate.setStatus("current")
+_AsgCountersConcurrConnNum_Type = DisplayString
+_AsgCountersConcurrConnNum_Object = MibTableColumn
+asgCountersConcurrConnNum = _AsgCountersConcurrConnNum_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 6),
+    _AsgCountersConcurrConnNum_Type()
+)
+asgCountersConcurrConnNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersConcurrConnNum.setStatus("current")
+_AsgCountersAccelLoadAverage_Type = DisplayString
+_AsgCountersAccelLoadAverage_Object = MibTableColumn
+asgCountersAccelLoadAverage = _AsgCountersAccelLoadAverage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 7),
+    _AsgCountersAccelLoadAverage_Type()
+)
+asgCountersAccelLoadAverage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersAccelLoadAverage.setStatus("current")
+_AsgCountersAccelLoadMin_Type = DisplayString
+_AsgCountersAccelLoadMin_Object = MibTableColumn
+asgCountersAccelLoadMin = _AsgCountersAccelLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 8),
+    _AsgCountersAccelLoadMin_Type()
+)
+asgCountersAccelLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersAccelLoadMin.setStatus("current")
+_AsgCountersAccelLoadMax_Type = DisplayString
+_AsgCountersAccelLoadMax_Object = MibTableColumn
+asgCountersAccelLoadMax = _AsgCountersAccelLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 9),
+    _AsgCountersAccelLoadMax_Type()
+)
+asgCountersAccelLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersAccelLoadMax.setStatus("current")
+_AsgCountersInstanceLoadAverage_Type = DisplayString
+_AsgCountersInstanceLoadAverage_Object = MibTableColumn
+asgCountersInstanceLoadAverage = _AsgCountersInstanceLoadAverage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 10),
+    _AsgCountersInstanceLoadAverage_Type()
+)
+asgCountersInstanceLoadAverage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersInstanceLoadAverage.setStatus("current")
+_AsgCountersInstanceLoadMin_Type = DisplayString
+_AsgCountersInstanceLoadMin_Object = MibTableColumn
+asgCountersInstanceLoadMin = _AsgCountersInstanceLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 11),
+    _AsgCountersInstanceLoadMin_Type()
+)
+asgCountersInstanceLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersInstanceLoadMin.setStatus("current")
+_AsgCountersInstanceLoadMax_Type = DisplayString
+_AsgCountersInstanceLoadMax_Object = MibTableColumn
+asgCountersInstanceLoadMax = _AsgCountersInstanceLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 25, 1, 12),
+    _AsgCountersInstanceLoadMax_Type()
+)
+asgCountersInstanceLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCountersInstanceLoadMax.setStatus("current")
+_AsgPeaksTable_Object = MibTable
+asgPeaksTable = _AsgPeaksTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26)
+)
+if mibBuilder.loadTexts:
+    asgPeaksTable.setStatus("current")
+_AsgPeaksEntry_Object = MibTableRow
+asgPeaksEntry = _AsgPeaksEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1)
+)
+asgPeaksEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgPeakIndex"),
+)
+if mibBuilder.loadTexts:
+    asgPeaksEntry.setStatus("current")
+_AsgPeakIndex_Type = Unsigned32
+_AsgPeakIndex_Object = MibTableColumn
+asgPeakIndex = _AsgPeakIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1, 1),
+    _AsgPeakIndex_Type()
+)
+asgPeakIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgPeakIndex.setStatus("current")
+_AsgPeakCriteria_Type = DisplayString
+_AsgPeakCriteria_Object = MibTableColumn
+asgPeakCriteria = _AsgPeakCriteria_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1, 2),
+    _AsgPeakCriteria_Type()
+)
+asgPeakCriteria.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPeakCriteria.setStatus("current")
+_AsgPeakName_Type = DisplayString
+_AsgPeakName_Object = MibTableColumn
+asgPeakName = _AsgPeakName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1, 3),
+    _AsgPeakName_Type()
+)
+asgPeakName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPeakName.setStatus("current")
+_AsgPeakValue_Type = DisplayString
+_AsgPeakValue_Object = MibTableColumn
+asgPeakValue = _AsgPeakValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1, 4),
+    _AsgPeakValue_Type()
+)
+asgPeakValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPeakValue.setStatus("current")
+_AsgPeakTimeStamp_Type = DisplayString
+_AsgPeakTimeStamp_Object = MibTableColumn
+asgPeakTimeStamp = _AsgPeakTimeStamp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1, 5),
+    _AsgPeakTimeStamp_Type()
+)
+asgPeakTimeStamp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPeakTimeStamp.setStatus("current")
+_AsgPeakUnits_Type = DisplayString
+_AsgPeakUnits_Object = MibTableColumn
+asgPeakUnits = _AsgPeakUnits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 26, 1, 6),
+    _AsgPeakUnits_Type()
+)
+asgPeakUnits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPeakUnits.setStatus("current")
+_AsgRulebase_ObjectIdentity = ObjectIdentity
+asgRulebase = _AsgRulebase_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 27)
+)
+_AsgAcceptedBytesTotal_Type = Integer32
+_AsgAcceptedBytesTotal_Object = MibScalar
+asgAcceptedBytesTotal = _AsgAcceptedBytesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 27, 1),
+    _AsgAcceptedBytesTotal_Type()
+)
+asgAcceptedBytesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgAcceptedBytesTotal.setStatus("current")
+_AsgDroppedBytesTotal_Type = Integer32
+_AsgDroppedBytesTotal_Object = MibScalar
+asgDroppedBytesTotal = _AsgDroppedBytesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 27, 2),
+    _AsgDroppedBytesTotal_Type()
+)
+asgDroppedBytesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDroppedBytesTotal.setStatus("current")
+_AsgRejectedTotal_Type = Integer32
+_AsgRejectedTotal_Object = MibScalar
+asgRejectedTotal = _AsgRejectedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 20, 27, 3),
+    _AsgRejectedTotal_Type()
+)
+asgRejectedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgRejectedTotal.setStatus("current")
+_AsgIPv6PerformanceCounters_ObjectIdentity = ObjectIdentity
+asgIPv6PerformanceCounters = _AsgIPv6PerformanceCounters_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21)
+)
+_AsgIPv6Throughput_Type = DisplayString
+_AsgIPv6Throughput_Object = MibScalar
+asgIPv6Throughput = _AsgIPv6Throughput_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 1),
+    _AsgIPv6Throughput_Type()
+)
+asgIPv6Throughput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6Throughput.setStatus("current")
+_AsgIPv6ConnectionRate_Type = DisplayString
+_AsgIPv6ConnectionRate_Object = MibScalar
+asgIPv6ConnectionRate = _AsgIPv6ConnectionRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 2),
+    _AsgIPv6ConnectionRate_Type()
+)
+asgIPv6ConnectionRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6ConnectionRate.setStatus("current")
+_AsgIPv6PacketRate_Type = DisplayString
+_AsgIPv6PacketRate_Object = MibScalar
+asgIPv6PacketRate = _AsgIPv6PacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 3),
+    _AsgIPv6PacketRate_Type()
+)
+asgIPv6PacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6PacketRate.setStatus("current")
+_AsgIPv6ConcurrConn_Type = DisplayString
+_AsgIPv6ConcurrConn_Object = MibScalar
+asgIPv6ConcurrConn = _AsgIPv6ConcurrConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 4),
+    _AsgIPv6ConcurrConn_Type()
+)
+asgIPv6ConcurrConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6ConcurrConn.setStatus("current")
+_AsgIPv6AccelConnectionRate_Type = DisplayString
+_AsgIPv6AccelConnectionRate_Object = MibScalar
+asgIPv6AccelConnectionRate = _AsgIPv6AccelConnectionRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 6),
+    _AsgIPv6AccelConnectionRate_Type()
+)
+asgIPv6AccelConnectionRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AccelConnectionRate.setStatus("current")
+_AsgIPv6NonAccelConnectionRate_Type = DisplayString
+_AsgIPv6NonAccelConnectionRate_Object = MibScalar
+asgIPv6NonAccelConnectionRate = _AsgIPv6NonAccelConnectionRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 7),
+    _AsgIPv6NonAccelConnectionRate_Type()
+)
+asgIPv6NonAccelConnectionRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6NonAccelConnectionRate.setStatus("current")
+_AsgIPv6AccelConcurrConn_Type = DisplayString
+_AsgIPv6AccelConcurrConn_Object = MibScalar
+asgIPv6AccelConcurrConn = _AsgIPv6AccelConcurrConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 8),
+    _AsgIPv6AccelConcurrConn_Type()
+)
+asgIPv6AccelConcurrConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AccelConcurrConn.setStatus("current")
+_AsgIPv6NonAccelConcurrConn_Type = DisplayString
+_AsgIPv6NonAccelConcurrConn_Object = MibScalar
+asgIPv6NonAccelConcurrConn = _AsgIPv6NonAccelConcurrConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 9),
+    _AsgIPv6NonAccelConcurrConn_Type()
+)
+asgIPv6NonAccelConcurrConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6NonAccelConcurrConn.setStatus("current")
+_AsgIPv6Load_Type = DisplayString
+_AsgIPv6Load_Object = MibScalar
+asgIPv6Load = _AsgIPv6Load_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 10),
+    _AsgIPv6Load_Type()
+)
+asgIPv6Load.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6Load.setStatus("current")
+_AsgIPv6AccelLoadAvg_Type = DisplayString
+_AsgIPv6AccelLoadAvg_Object = MibScalar
+asgIPv6AccelLoadAvg = _AsgIPv6AccelLoadAvg_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 11),
+    _AsgIPv6AccelLoadAvg_Type()
+)
+asgIPv6AccelLoadAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AccelLoadAvg.setStatus("current")
+_AsgIPv6AccelLoadMin_Type = DisplayString
+_AsgIPv6AccelLoadMin_Object = MibScalar
+asgIPv6AccelLoadMin = _AsgIPv6AccelLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 12),
+    _AsgIPv6AccelLoadMin_Type()
+)
+asgIPv6AccelLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AccelLoadMin.setStatus("current")
+_AsgIPv6AccelLoadMax_Type = DisplayString
+_AsgIPv6AccelLoadMax_Object = MibScalar
+asgIPv6AccelLoadMax = _AsgIPv6AccelLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 13),
+    _AsgIPv6AccelLoadMax_Type()
+)
+asgIPv6AccelLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AccelLoadMax.setStatus("current")
+_AsgIPv6InstancesLoadAvg_Type = DisplayString
+_AsgIPv6InstancesLoadAvg_Object = MibScalar
+asgIPv6InstancesLoadAvg = _AsgIPv6InstancesLoadAvg_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 14),
+    _AsgIPv6InstancesLoadAvg_Type()
+)
+asgIPv6InstancesLoadAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6InstancesLoadAvg.setStatus("current")
+_AsgIPv6InstancesLoadMin_Type = DisplayString
+_AsgIPv6InstancesLoadMin_Object = MibScalar
+asgIPv6InstancesLoadMin = _AsgIPv6InstancesLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 15),
+    _AsgIPv6InstancesLoadMin_Type()
+)
+asgIPv6InstancesLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6InstancesLoadMin.setStatus("current")
+_AsgIPv6InstancesLoadMax_Type = DisplayString
+_AsgIPv6InstancesLoadMax_Object = MibScalar
+asgIPv6InstancesLoadMax = _AsgIPv6InstancesLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 16),
+    _AsgIPv6InstancesLoadMax_Type()
+)
+asgIPv6InstancesLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6InstancesLoadMax.setStatus("current")
+_AsgIPv6VpnThroughput_Type = DisplayString
+_AsgIPv6VpnThroughput_Object = MibScalar
+asgIPv6VpnThroughput = _AsgIPv6VpnThroughput_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 17),
+    _AsgIPv6VpnThroughput_Type()
+)
+asgIPv6VpnThroughput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6VpnThroughput.setStatus("current")
+_AsgIPv6VpnConn_Type = DisplayString
+_AsgIPv6VpnConn_Object = MibScalar
+asgIPv6VpnConn = _AsgIPv6VpnConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 18),
+    _AsgIPv6VpnConn_Type()
+)
+asgIPv6VpnConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6VpnConn.setStatus("current")
+_AsgIPv6NatConnRate_Type = DisplayString
+_AsgIPv6NatConnRate_Object = MibScalar
+asgIPv6NatConnRate = _AsgIPv6NatConnRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 19),
+    _AsgIPv6NatConnRate_Type()
+)
+asgIPv6NatConnRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6NatConnRate.setStatus("current")
+_AsgIPv6NatConn_Type = DisplayString
+_AsgIPv6NatConn_Object = MibScalar
+asgIPv6NatConn = _AsgIPv6NatConn_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 20),
+    _AsgIPv6NatConn_Type()
+)
+asgIPv6NatConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6NatConn.setStatus("current")
+_AsgIPv6VsxCpu1MinAvg_Type = DisplayString
+_AsgIPv6VsxCpu1MinAvg_Object = MibScalar
+asgIPv6VsxCpu1MinAvg = _AsgIPv6VsxCpu1MinAvg_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 21),
+    _AsgIPv6VsxCpu1MinAvg_Type()
+)
+asgIPv6VsxCpu1MinAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6VsxCpu1MinAvg.setStatus("current")
+_AsgIPv6PathDistTable_Object = MibTable
+asgIPv6PathDistTable = _AsgIPv6PathDistTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24)
+)
+if mibBuilder.loadTexts:
+    asgIPv6PathDistTable.setStatus("current")
+_AsgIPv6PathDistEntry_Object = MibTableRow
+asgIPv6PathDistEntry = _AsgIPv6PathDistEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1)
+)
+asgIPv6PathDistEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgIPv6PathDistIndex"),
+)
+if mibBuilder.loadTexts:
+    asgIPv6PathDistEntry.setStatus("current")
+_AsgIPv6PathDistIndex_Type = Unsigned32
+_AsgIPv6PathDistIndex_Object = MibTableColumn
+asgIPv6PathDistIndex = _AsgIPv6PathDistIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1, 1),
+    _AsgIPv6PathDistIndex_Type()
+)
+asgIPv6PathDistIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgIPv6PathDistIndex.setStatus("current")
+_AsgIPv6StatName_Type = DisplayString
+_AsgIPv6StatName_Object = MibTableColumn
+asgIPv6StatName = _AsgIPv6StatName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1, 2),
+    _AsgIPv6StatName_Type()
+)
+asgIPv6StatName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6StatName.setStatus("current")
+_AsgIPv6AccelPath_Type = DisplayString
+_AsgIPv6AccelPath_Object = MibTableColumn
+asgIPv6AccelPath = _AsgIPv6AccelPath_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1, 3),
+    _AsgIPv6AccelPath_Type()
+)
+asgIPv6AccelPath.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AccelPath.setStatus("current")
+_AsgIPv6MediumPath_Type = DisplayString
+_AsgIPv6MediumPath_Object = MibTableColumn
+asgIPv6MediumPath = _AsgIPv6MediumPath_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1, 4),
+    _AsgIPv6MediumPath_Type()
+)
+asgIPv6MediumPath.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6MediumPath.setStatus("current")
+_AsgIPv6FirewallPath_Type = DisplayString
+_AsgIPv6FirewallPath_Object = MibTableColumn
+asgIPv6FirewallPath = _AsgIPv6FirewallPath_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1, 5),
+    _AsgIPv6FirewallPath_Type()
+)
+asgIPv6FirewallPath.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6FirewallPath.setStatus("current")
+_AsgIPv6Dropped_Type = DisplayString
+_AsgIPv6Dropped_Object = MibTableColumn
+asgIPv6Dropped = _AsgIPv6Dropped_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 24, 1, 6),
+    _AsgIPv6Dropped_Type()
+)
+asgIPv6Dropped.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6Dropped.setStatus("current")
+_AsgIPv6CountersTable_Object = MibTable
+asgIPv6CountersTable = _AsgIPv6CountersTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25)
+)
+if mibBuilder.loadTexts:
+    asgIPv6CountersTable.setStatus("current")
+_AsgIPv6CountersEntry_Object = MibTableRow
+asgIPv6CountersEntry = _AsgIPv6CountersEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1)
+)
+asgIPv6CountersEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgIPv6CountersIndex"),
+)
+if mibBuilder.loadTexts:
+    asgIPv6CountersEntry.setStatus("current")
+_AsgIPv6CountersIndex_Type = Unsigned32
+_AsgIPv6CountersIndex_Object = MibTableColumn
+asgIPv6CountersIndex = _AsgIPv6CountersIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 1),
+    _AsgIPv6CountersIndex_Type()
+)
+asgIPv6CountersIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgIPv6CountersIndex.setStatus("current")
+_AsgIPv6CountersBladeId_Type = DisplayString
+_AsgIPv6CountersBladeId_Object = MibTableColumn
+asgIPv6CountersBladeId = _AsgIPv6CountersBladeId_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 2),
+    _AsgIPv6CountersBladeId_Type()
+)
+asgIPv6CountersBladeId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersBladeId.setStatus("current")
+_AsgIPv6CountersThroughput_Type = DisplayString
+_AsgIPv6CountersThroughput_Object = MibTableColumn
+asgIPv6CountersThroughput = _AsgIPv6CountersThroughput_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 3),
+    _AsgIPv6CountersThroughput_Type()
+)
+asgIPv6CountersThroughput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersThroughput.setStatus("current")
+_AsgIPv6CountersConnRate_Type = DisplayString
+_AsgIPv6CountersConnRate_Object = MibTableColumn
+asgIPv6CountersConnRate = _AsgIPv6CountersConnRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 4),
+    _AsgIPv6CountersConnRate_Type()
+)
+asgIPv6CountersConnRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersConnRate.setStatus("current")
+_AsgIPv6CountersPacketRate_Type = DisplayString
+_AsgIPv6CountersPacketRate_Object = MibTableColumn
+asgIPv6CountersPacketRate = _AsgIPv6CountersPacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 5),
+    _AsgIPv6CountersPacketRate_Type()
+)
+asgIPv6CountersPacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersPacketRate.setStatus("current")
+_AsgIPv6CountersConcurrConnNum_Type = DisplayString
+_AsgIPv6CountersConcurrConnNum_Object = MibTableColumn
+asgIPv6CountersConcurrConnNum = _AsgIPv6CountersConcurrConnNum_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 6),
+    _AsgIPv6CountersConcurrConnNum_Type()
+)
+asgIPv6CountersConcurrConnNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersConcurrConnNum.setStatus("current")
+_AsgIPv6CountersAccelLoadAverage_Type = DisplayString
+_AsgIPv6CountersAccelLoadAverage_Object = MibTableColumn
+asgIPv6CountersAccelLoadAverage = _AsgIPv6CountersAccelLoadAverage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 7),
+    _AsgIPv6CountersAccelLoadAverage_Type()
+)
+asgIPv6CountersAccelLoadAverage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersAccelLoadAverage.setStatus("current")
+_AsgIPv6CountersAccelLoadMin_Type = DisplayString
+_AsgIPv6CountersAccelLoadMin_Object = MibTableColumn
+asgIPv6CountersAccelLoadMin = _AsgIPv6CountersAccelLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 8),
+    _AsgIPv6CountersAccelLoadMin_Type()
+)
+asgIPv6CountersAccelLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersAccelLoadMin.setStatus("current")
+_AsgIPv6CountersAccelLoadMax_Type = DisplayString
+_AsgIPv6CountersAccelLoadMax_Object = MibTableColumn
+asgIPv6CountersAccelLoadMax = _AsgIPv6CountersAccelLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 9),
+    _AsgIPv6CountersAccelLoadMax_Type()
+)
+asgIPv6CountersAccelLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersAccelLoadMax.setStatus("current")
+_AsgIPv6CountersInstanceLoadAverage_Type = DisplayString
+_AsgIPv6CountersInstanceLoadAverage_Object = MibTableColumn
+asgIPv6CountersInstanceLoadAverage = _AsgIPv6CountersInstanceLoadAverage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 10),
+    _AsgIPv6CountersInstanceLoadAverage_Type()
+)
+asgIPv6CountersInstanceLoadAverage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersInstanceLoadAverage.setStatus("current")
+_AsgIPv6CountersInstanceLoadMin_Type = DisplayString
+_AsgIPv6CountersInstanceLoadMin_Object = MibTableColumn
+asgIPv6CountersInstanceLoadMin = _AsgIPv6CountersInstanceLoadMin_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 11),
+    _AsgIPv6CountersInstanceLoadMin_Type()
+)
+asgIPv6CountersInstanceLoadMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersInstanceLoadMin.setStatus("current")
+_AsgIPv6CountersInstanceLoadMax_Type = DisplayString
+_AsgIPv6CountersInstanceLoadMax_Object = MibTableColumn
+asgIPv6CountersInstanceLoadMax = _AsgIPv6CountersInstanceLoadMax_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 25, 1, 12),
+    _AsgIPv6CountersInstanceLoadMax_Type()
+)
+asgIPv6CountersInstanceLoadMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6CountersInstanceLoadMax.setStatus("current")
+_AsgIPv6PeaksTable_Object = MibTable
+asgIPv6PeaksTable = _AsgIPv6PeaksTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26)
+)
+if mibBuilder.loadTexts:
+    asgIPv6PeaksTable.setStatus("current")
+_AsgIPv6PeaksEntry_Object = MibTableRow
+asgIPv6PeaksEntry = _AsgIPv6PeaksEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1)
+)
+asgIPv6PeaksEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgIPv6PeakIndex"),
+)
+if mibBuilder.loadTexts:
+    asgIPv6PeaksEntry.setStatus("current")
+_AsgIPv6PeakIndex_Type = Unsigned32
+_AsgIPv6PeakIndex_Object = MibTableColumn
+asgIPv6PeakIndex = _AsgIPv6PeakIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1, 1),
+    _AsgIPv6PeakIndex_Type()
+)
+asgIPv6PeakIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgIPv6PeakIndex.setStatus("current")
+_AsgIPv6PeakCriteria_Type = DisplayString
+_AsgIPv6PeakCriteria_Object = MibTableColumn
+asgIPv6PeakCriteria = _AsgIPv6PeakCriteria_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1, 2),
+    _AsgIPv6PeakCriteria_Type()
+)
+asgIPv6PeakCriteria.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6PeakCriteria.setStatus("current")
+_AsgIPv6PeakName_Type = DisplayString
+_AsgIPv6PeakName_Object = MibTableColumn
+asgIPv6PeakName = _AsgIPv6PeakName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1, 3),
+    _AsgIPv6PeakName_Type()
+)
+asgIPv6PeakName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6PeakName.setStatus("current")
+_AsgIPv6PeakValue_Type = DisplayString
+_AsgIPv6PeakValue_Object = MibTableColumn
+asgIPv6PeakValue = _AsgIPv6PeakValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1, 4),
+    _AsgIPv6PeakValue_Type()
+)
+asgIPv6PeakValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6PeakValue.setStatus("current")
+_AsgIPv6PeakTimeStamp_Type = DisplayString
+_AsgIPv6PeakTimeStamp_Object = MibTableColumn
+asgIPv6PeakTimeStamp = _AsgIPv6PeakTimeStamp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1, 5),
+    _AsgIPv6PeakTimeStamp_Type()
+)
+asgIPv6PeakTimeStamp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6PeakTimeStamp.setStatus("current")
+_AsgIPv6PeakUnits_Type = DisplayString
+_AsgIPv6PeakUnits_Object = MibTableColumn
+asgIPv6PeakUnits = _AsgIPv6PeakUnits_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 26, 1, 6),
+    _AsgIPv6PeakUnits_Type()
+)
+asgIPv6PeakUnits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6PeakUnits.setStatus("current")
+_AsgIPv6Rulebase_ObjectIdentity = ObjectIdentity
+asgIPv6Rulebase = _AsgIPv6Rulebase_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27)
+)
+_AsgIPv6AcceptedBytesTotalRate_Type = Integer32
+_AsgIPv6AcceptedBytesTotalRate_Object = MibScalar
+asgIPv6AcceptedBytesTotalRate = _AsgIPv6AcceptedBytesTotalRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 1),
+    _AsgIPv6AcceptedBytesTotalRate_Type()
+)
+asgIPv6AcceptedBytesTotalRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6AcceptedBytesTotalRate.setStatus("current")
+_AsgIPv6DroppedBytesTotalRate_Type = Integer32
+_AsgIPv6DroppedBytesTotalRate_Object = MibScalar
+asgIPv6DroppedBytesTotalRate = _AsgIPv6DroppedBytesTotalRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 2),
+    _AsgIPv6DroppedBytesTotalRate_Type()
+)
+asgIPv6DroppedBytesTotalRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6DroppedBytesTotalRate.setStatus("current")
+_AsgIPv6DroppedTotalRate_Type = Integer32
+_AsgIPv6DroppedTotalRate_Object = MibScalar
+asgIPv6DroppedTotalRate = _AsgIPv6DroppedTotalRate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 3),
+    _AsgIPv6DroppedTotalRate_Type()
+)
+asgIPv6DroppedTotalRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6DroppedTotalRate.setStatus("current")
+_AsgIPv6RulebaseTable_Object = MibTable
+asgIPv6RulebaseTable = _AsgIPv6RulebaseTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4)
+)
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseTable.setStatus("current")
+_AsgIPv6RulebaseEntry_Object = MibTableRow
+asgIPv6RulebaseEntry = _AsgIPv6RulebaseEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1)
+)
+asgIPv6RulebaseEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgIPv6RulebaseIndex"),
+)
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseEntry.setStatus("current")
+_AsgIPv6RulebaseIndex_Type = Unsigned32
+_AsgIPv6RulebaseIndex_Object = MibTableColumn
+asgIPv6RulebaseIndex = _AsgIPv6RulebaseIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 1),
+    _AsgIPv6RulebaseIndex_Type()
+)
+asgIPv6RulebaseIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseIndex.setStatus("current")
+_AsgIPv6RulebaseBladeId_Type = DisplayString
+_AsgIPv6RulebaseBladeId_Object = MibTableColumn
+asgIPv6RulebaseBladeId = _AsgIPv6RulebaseBladeId_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 2),
+    _AsgIPv6RulebaseBladeId_Type()
+)
+asgIPv6RulebaseBladeId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseBladeId.setStatus("current")
+_AsgIPv6RulebaseDroppedTotal_Type = Integer32
+_AsgIPv6RulebaseDroppedTotal_Object = MibTableColumn
+asgIPv6RulebaseDroppedTotal = _AsgIPv6RulebaseDroppedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 3),
+    _AsgIPv6RulebaseDroppedTotal_Type()
+)
+asgIPv6RulebaseDroppedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseDroppedTotal.setStatus("current")
+_AsgIPv6RulebaseAcceptedTotal_Type = Integer32
+_AsgIPv6RulebaseAcceptedTotal_Object = MibTableColumn
+asgIPv6RulebaseAcceptedTotal = _AsgIPv6RulebaseAcceptedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 4),
+    _AsgIPv6RulebaseAcceptedTotal_Type()
+)
+asgIPv6RulebaseAcceptedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseAcceptedTotal.setStatus("current")
+_AsgIPv6RulebaseRejectedTotal_Type = Integer32
+_AsgIPv6RulebaseRejectedTotal_Object = MibTableColumn
+asgIPv6RulebaseRejectedTotal = _AsgIPv6RulebaseRejectedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 5),
+    _AsgIPv6RulebaseRejectedTotal_Type()
+)
+asgIPv6RulebaseRejectedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseRejectedTotal.setStatus("current")
+_AsgIPv6RulebaseBytesDroppedTotal_Type = Integer32
+_AsgIPv6RulebaseBytesDroppedTotal_Object = MibTableColumn
+asgIPv6RulebaseBytesDroppedTotal = _AsgIPv6RulebaseBytesDroppedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 6),
+    _AsgIPv6RulebaseBytesDroppedTotal_Type()
+)
+asgIPv6RulebaseBytesDroppedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseBytesDroppedTotal.setStatus("current")
+_AsgIPv6RulebaseBytesAcceptedTotal_Type = Integer32
+_AsgIPv6RulebaseBytesAcceptedTotal_Object = MibTableColumn
+asgIPv6RulebaseBytesAcceptedTotal = _AsgIPv6RulebaseBytesAcceptedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 7),
+    _AsgIPv6RulebaseBytesAcceptedTotal_Type()
+)
+asgIPv6RulebaseBytesAcceptedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseBytesAcceptedTotal.setStatus("current")
+_AsgIPv6RulebaseBytesRejectedTotal_Type = Integer32
+_AsgIPv6RulebaseBytesRejectedTotal_Object = MibTableColumn
+asgIPv6RulebaseBytesRejectedTotal = _AsgIPv6RulebaseBytesRejectedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 21, 27, 4, 1, 8),
+    _AsgIPv6RulebaseBytesRejectedTotal_Type()
+)
+asgIPv6RulebaseBytesRejectedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgIPv6RulebaseBytesRejectedTotal.setStatus("current")
+_AsgHwMonitoring_ObjectIdentity = ObjectIdentity
+asgHwMonitoring = _AsgHwMonitoring_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22)
+)
+_AsgSensors_ObjectIdentity = ObjectIdentity
+asgSensors = _AsgSensors_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1)
+)
+_AsgSensorTable_Object = MibTable
+asgSensorTable = _AsgSensorTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1)
+)
+if mibBuilder.loadTexts:
+    asgSensorTable.setStatus("current")
+_AsgSensorEntry_Object = MibTableRow
+asgSensorEntry = _AsgSensorEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1)
+)
+asgSensorEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgSensorIndex"),
+)
+if mibBuilder.loadTexts:
+    asgSensorEntry.setStatus("current")
+_AsgSensorIndex_Type = Unsigned32
+_AsgSensorIndex_Object = MibTableColumn
+asgSensorIndex = _AsgSensorIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 1),
+    _AsgSensorIndex_Type()
+)
+asgSensorIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgSensorIndex.setStatus("current")
+
+
+class _AsgSensorName_Type(DisplayString):
+    """Custom type asgSensorName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorName_Type.__name__ = "DisplayString"
+_AsgSensorName_Object = MibTableColumn
+asgSensorName = _AsgSensorName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 2),
+    _AsgSensorName_Type()
+)
+asgSensorName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorName.setStatus("current")
+
+
+class _AsgSensorLocation_Type(DisplayString):
+    """Custom type asgSensorLocation based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorLocation_Type.__name__ = "DisplayString"
+_AsgSensorLocation_Object = MibTableColumn
+asgSensorLocation = _AsgSensorLocation_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 3),
+    _AsgSensorLocation_Type()
+)
+asgSensorLocation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorLocation.setStatus("current")
+
+
+class _AsgSensorCurrValue_Type(DisplayString):
+    """Custom type asgSensorCurrValue based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorCurrValue_Type.__name__ = "DisplayString"
+_AsgSensorCurrValue_Object = MibTableColumn
+asgSensorCurrValue = _AsgSensorCurrValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 4),
+    _AsgSensorCurrValue_Type()
+)
+asgSensorCurrValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorCurrValue.setStatus("current")
+
+
+class _AsgSensorMinValue_Type(DisplayString):
+    """Custom type asgSensorMinValue based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorMinValue_Type.__name__ = "DisplayString"
+_AsgSensorMinValue_Object = MibTableColumn
+asgSensorMinValue = _AsgSensorMinValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 5),
+    _AsgSensorMinValue_Type()
+)
+asgSensorMinValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorMinValue.setStatus("current")
+
+
+class _AsgSensorMaxValue_Type(DisplayString):
+    """Custom type asgSensorMaxValue based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorMaxValue_Type.__name__ = "DisplayString"
+_AsgSensorMaxValue_Object = MibTableColumn
+asgSensorMaxValue = _AsgSensorMaxValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 6),
+    _AsgSensorMaxValue_Type()
+)
+asgSensorMaxValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorMaxValue.setStatus("current")
+
+
+class _AsgSensorThreshold_Type(DisplayString):
+    """Custom type asgSensorThreshold based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorThreshold_Type.__name__ = "DisplayString"
+_AsgSensorThreshold_Object = MibTableColumn
+asgSensorThreshold = _AsgSensorThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 7),
+    _AsgSensorThreshold_Type()
+)
+asgSensorThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorThreshold.setStatus("current")
+
+
+class _AsgSensorUnit_Type(DisplayString):
+    """Custom type asgSensorUnit based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorUnit_Type.__name__ = "DisplayString"
+_AsgSensorUnit_Object = MibTableColumn
+asgSensorUnit = _AsgSensorUnit_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 8),
+    _AsgSensorUnit_Type()
+)
+asgSensorUnit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorUnit.setStatus("current")
+
+
+class _AsgSensorIdentity_Type(DisplayString):
+    """Custom type asgSensorIdentity based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorIdentity_Type.__name__ = "DisplayString"
+_AsgSensorIdentity_Object = MibTableColumn
+asgSensorIdentity = _AsgSensorIdentity_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 9),
+    _AsgSensorIdentity_Type()
+)
+asgSensorIdentity.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorIdentity.setStatus("current")
+
+
+class _AsgSensorStatus_Type(DisplayString):
+    """Custom type asgSensorStatus based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSensorStatus_Type.__name__ = "DisplayString"
+_AsgSensorStatus_Object = MibTableColumn
+asgSensorStatus = _AsgSensorStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 22, 1, 1, 1, 10),
+    _AsgSensorStatus_Type()
+)
+asgSensorStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSensorStatus.setStatus("current")
+_AsgResourceTable_Object = MibTable
+asgResourceTable = _AsgResourceTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23)
+)
+if mibBuilder.loadTexts:
+    asgResourceTable.setStatus("current")
+_AsgResourceEntry_Object = MibTableRow
+asgResourceEntry = _AsgResourceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1)
+)
+asgResourceEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgResourceIndex"),
+)
+if mibBuilder.loadTexts:
+    asgResourceEntry.setStatus("current")
+_AsgResourceIndex_Type = Unsigned32
+_AsgResourceIndex_Object = MibTableColumn
+asgResourceIndex = _AsgResourceIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 1),
+    _AsgResourceIndex_Type()
+)
+asgResourceIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgResourceIndex.setStatus("current")
+
+
+class _AsgResourceName_Type(DisplayString):
+    """Custom type asgResourceName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceName_Type.__name__ = "DisplayString"
+_AsgResourceName_Object = MibTableColumn
+asgResourceName = _AsgResourceName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 2),
+    _AsgResourceName_Type()
+)
+asgResourceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceName.setStatus("current")
+
+
+class _AsgResourceLocation_Type(DisplayString):
+    """Custom type asgResourceLocation based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceLocation_Type.__name__ = "DisplayString"
+_AsgResourceLocation_Object = MibTableColumn
+asgResourceLocation = _AsgResourceLocation_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 3),
+    _AsgResourceLocation_Type()
+)
+asgResourceLocation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceLocation.setStatus("current")
+
+
+class _AsgResourceCurrValue_Type(DisplayString):
+    """Custom type asgResourceCurrValue based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceCurrValue_Type.__name__ = "DisplayString"
+_AsgResourceCurrValue_Object = MibTableColumn
+asgResourceCurrValue = _AsgResourceCurrValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 4),
+    _AsgResourceCurrValue_Type()
+)
+asgResourceCurrValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceCurrValue.setStatus("current")
+
+
+class _AsgResourceThreshold_Type(DisplayString):
+    """Custom type asgResourceThreshold based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceThreshold_Type.__name__ = "DisplayString"
+_AsgResourceThreshold_Object = MibTableColumn
+asgResourceThreshold = _AsgResourceThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 5),
+    _AsgResourceThreshold_Type()
+)
+asgResourceThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceThreshold.setStatus("current")
+
+
+class _AsgResourceUnit_Type(DisplayString):
+    """Custom type asgResourceUnit based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceUnit_Type.__name__ = "DisplayString"
+_AsgResourceUnit_Object = MibTableColumn
+asgResourceUnit = _AsgResourceUnit_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 6),
+    _AsgResourceUnit_Type()
+)
+asgResourceUnit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceUnit.setStatus("current")
+
+
+class _AsgResourceTotalVal_Type(DisplayString):
+    """Custom type asgResourceTotalVal based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceTotalVal_Type.__name__ = "DisplayString"
+_AsgResourceTotalVal_Object = MibTableColumn
+asgResourceTotalVal = _AsgResourceTotalVal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 7),
+    _AsgResourceTotalVal_Type()
+)
+asgResourceTotalVal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceTotalVal.setStatus("current")
+
+
+class _AsgResourceTitle_Type(DisplayString):
+    """Custom type asgResourceTitle based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgResourceTitle_Type.__name__ = "DisplayString"
+_AsgResourceTitle_Object = MibTableColumn
+asgResourceTitle = _AsgResourceTitle_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 23, 1, 8),
+    _AsgResourceTitle_Type()
+)
+asgResourceTitle.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgResourceTitle.setStatus("current")
+_AsgProtocolTraffic_ObjectIdentity = ObjectIdentity
+asgProtocolTraffic = _AsgProtocolTraffic_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24)
+)
+_AsgProtocolTrafficTable_Object = MibTable
+asgProtocolTrafficTable = _AsgProtocolTrafficTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1)
+)
+if mibBuilder.loadTexts:
+    asgProtocolTrafficTable.setStatus("current")
+_AsgProtocolTrafficEntry_Object = MibTableRow
+asgProtocolTrafficEntry = _AsgProtocolTrafficEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1, 1)
+)
+asgProtocolTrafficEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgProtocolIndex"),
+)
+if mibBuilder.loadTexts:
+    asgProtocolTrafficEntry.setStatus("current")
+_AsgProtocolIndex_Type = Unsigned32
+_AsgProtocolIndex_Object = MibTableColumn
+asgProtocolIndex = _AsgProtocolIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1, 1, 1),
+    _AsgProtocolIndex_Type()
+)
+asgProtocolIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgProtocolIndex.setStatus("current")
+_AsgProtocolName_Type = DisplayString
+_AsgProtocolName_Object = MibTableColumn
+asgProtocolName = _AsgProtocolName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1, 1, 2),
+    _AsgProtocolName_Type()
+)
+asgProtocolName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProtocolName.setStatus("current")
+_AsgProtocolConns_Type = Integer32
+_AsgProtocolConns_Object = MibTableColumn
+asgProtocolConns = _AsgProtocolConns_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1, 1, 3),
+    _AsgProtocolConns_Type()
+)
+asgProtocolConns.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProtocolConns.setStatus("current")
+_AsgProtocolTotalPkts_Type = Integer32
+_AsgProtocolTotalPkts_Object = MibTableColumn
+asgProtocolTotalPkts = _AsgProtocolTotalPkts_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1, 1, 4),
+    _AsgProtocolTotalPkts_Type()
+)
+asgProtocolTotalPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProtocolTotalPkts.setStatus("current")
+_AsgProtocolTotalBytes_Type = Integer32
+_AsgProtocolTotalBytes_Object = MibTableColumn
+asgProtocolTotalBytes = _AsgProtocolTotalBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 24, 1, 1, 5),
+    _AsgProtocolTotalBytes_Type()
+)
+asgProtocolTotalBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProtocolTotalBytes.setStatus("current")
+_AsgServicesTraffic_ObjectIdentity = ObjectIdentity
+asgServicesTraffic = _AsgServicesTraffic_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25)
+)
+_AsgServiceTrafficTable_Object = MibTable
+asgServiceTrafficTable = _AsgServiceTrafficTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1)
+)
+if mibBuilder.loadTexts:
+    asgServiceTrafficTable.setStatus("current")
+_AsgServiceTrafficEntry_Object = MibTableRow
+asgServiceTrafficEntry = _AsgServiceTrafficEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1, 1)
+)
+asgServiceTrafficEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgServiceIndex"),
+)
+if mibBuilder.loadTexts:
+    asgServiceTrafficEntry.setStatus("current")
+_AsgServiceIndex_Type = Unsigned32
+_AsgServiceIndex_Object = MibTableColumn
+asgServiceIndex = _AsgServiceIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1, 1, 1),
+    _AsgServiceIndex_Type()
+)
+asgServiceIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgServiceIndex.setStatus("current")
+_AsgServiceName_Type = DisplayString
+_AsgServiceName_Object = MibTableColumn
+asgServiceName = _AsgServiceName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1, 1, 2),
+    _AsgServiceName_Type()
+)
+asgServiceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgServiceName.setStatus("current")
+_AsgServiceConns_Type = Integer32
+_AsgServiceConns_Object = MibTableColumn
+asgServiceConns = _AsgServiceConns_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1, 1, 3),
+    _AsgServiceConns_Type()
+)
+asgServiceConns.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgServiceConns.setStatus("current")
+_AsgServiceTotalPkts_Type = Integer32
+_AsgServiceTotalPkts_Object = MibTableColumn
+asgServiceTotalPkts = _AsgServiceTotalPkts_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1, 1, 4),
+    _AsgServiceTotalPkts_Type()
+)
+asgServiceTotalPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgServiceTotalPkts.setStatus("current")
+_AsgServiceTotalBytes_Type = Integer32
+_AsgServiceTotalBytes_Object = MibTableColumn
+asgServiceTotalBytes = _AsgServiceTotalBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 25, 1, 1, 5),
+    _AsgServiceTotalBytes_Type()
+)
+asgServiceTotalBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgServiceTotalBytes.setStatus("current")
+_AsgSetup_ObjectIdentity = ObjectIdentity
+asgSetup = _AsgSetup_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26)
+)
+_AsgNetIfTable_Object = MibTable
+asgNetIfTable = _AsgNetIfTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1)
+)
+if mibBuilder.loadTexts:
+    asgNetIfTable.setStatus("current")
+_AsgNetIfEntry_Object = MibTableRow
+asgNetIfEntry = _AsgNetIfEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1)
+)
+asgNetIfEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgNetIfIndex"),
+)
+if mibBuilder.loadTexts:
+    asgNetIfEntry.setStatus("current")
+_AsgNetIfIndex_Type = Unsigned32
+_AsgNetIfIndex_Object = MibTableColumn
+asgNetIfIndex = _AsgNetIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 1),
+    _AsgNetIfIndex_Type()
+)
+asgNetIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgNetIfIndex.setStatus("current")
+_AsgNetIfName_Type = DisplayString
+_AsgNetIfName_Object = MibTableColumn
+asgNetIfName = _AsgNetIfName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 2),
+    _AsgNetIfName_Type()
+)
+asgNetIfName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfName.setStatus("current")
+
+
+class _AsgNetIfIPv4Addr_Type(DisplayString):
+    """Custom type asgNetIfIPv4Addr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfIPv4Addr_Type.__name__ = "DisplayString"
+_AsgNetIfIPv4Addr_Object = MibTableColumn
+asgNetIfIPv4Addr = _AsgNetIfIPv4Addr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 3),
+    _AsgNetIfIPv4Addr_Type()
+)
+asgNetIfIPv4Addr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfIPv4Addr.setStatus("current")
+
+
+class _AsgNetIfIPv6Addr_Type(DisplayString):
+    """Custom type asgNetIfIPv6Addr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfIPv6Addr_Type.__name__ = "DisplayString"
+_AsgNetIfIPv6Addr_Object = MibTableColumn
+asgNetIfIPv6Addr = _AsgNetIfIPv6Addr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 4),
+    _AsgNetIfIPv6Addr_Type()
+)
+asgNetIfIPv6Addr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfIPv6Addr.setStatus("current")
+
+
+class _AsgNetIfMACAddr_Type(DisplayString):
+    """Custom type asgNetIfMACAddr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfMACAddr_Type.__name__ = "DisplayString"
+_AsgNetIfMACAddr_Object = MibTableColumn
+asgNetIfMACAddr = _AsgNetIfMACAddr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 5),
+    _AsgNetIfMACAddr_Type()
+)
+asgNetIfMACAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfMACAddr.setStatus("current")
+
+
+class _AsgNetIfInfo_Type(DisplayString):
+    """Custom type asgNetIfInfo based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfInfo_Type.__name__ = "DisplayString"
+_AsgNetIfInfo_Object = MibTableColumn
+asgNetIfInfo = _AsgNetIfInfo_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 6),
+    _AsgNetIfInfo_Type()
+)
+asgNetIfInfo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfInfo.setStatus("current")
+
+
+class _AsgNetIfState_Type(DisplayString):
+    """Custom type asgNetIfState based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfState_Type.__name__ = "DisplayString"
+_AsgNetIfState_Object = MibTableColumn
+asgNetIfState = _AsgNetIfState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 7),
+    _AsgNetIfState_Type()
+)
+asgNetIfState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfState.setStatus("current")
+
+
+class _AsgNetIfSpeed_Type(DisplayString):
+    """Custom type asgNetIfSpeed based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfSpeed_Type.__name__ = "DisplayString"
+_AsgNetIfSpeed_Object = MibTableColumn
+asgNetIfSpeed = _AsgNetIfSpeed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 8),
+    _AsgNetIfSpeed_Type()
+)
+asgNetIfSpeed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfSpeed.setStatus("current")
+
+
+class _AsgNetIfMTU_Type(DisplayString):
+    """Custom type asgNetIfMTU based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfMTU_Type.__name__ = "DisplayString"
+_AsgNetIfMTU_Object = MibTableColumn
+asgNetIfMTU = _AsgNetIfMTU_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 9),
+    _AsgNetIfMTU_Type()
+)
+asgNetIfMTU.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfMTU.setStatus("current")
+
+
+class _AsgNetIfDuplex_Type(DisplayString):
+    """Custom type asgNetIfDuplex based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfDuplex_Type.__name__ = "DisplayString"
+_AsgNetIfDuplex_Object = MibTableColumn
+asgNetIfDuplex = _AsgNetIfDuplex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 10),
+    _AsgNetIfDuplex_Type()
+)
+asgNetIfDuplex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfDuplex.setStatus("current")
+
+
+class _AsgNetIfRx_Type(DisplayString):
+    """Custom type asgNetIfRx based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfRx_Type.__name__ = "DisplayString"
+_AsgNetIfRx_Object = MibTableColumn
+asgNetIfRx = _AsgNetIfRx_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 11),
+    _AsgNetIfRx_Type()
+)
+asgNetIfRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfRx.setStatus("current")
+
+
+class _AsgNetIfTx_Type(DisplayString):
+    """Custom type asgNetIfTx based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgNetIfTx_Type.__name__ = "DisplayString"
+_AsgNetIfTx_Object = MibTableColumn
+asgNetIfTx = _AsgNetIfTx_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 26, 1, 1, 12),
+    _AsgNetIfTx_Type()
+)
+asgNetIfTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgNetIfTx.setStatus("current")
+_AsgProblemTable_Object = MibTable
+asgProblemTable = _AsgProblemTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27)
+)
+if mibBuilder.loadTexts:
+    asgProblemTable.setStatus("current")
+_AsgProblemEntry_Object = MibTableRow
+asgProblemEntry = _AsgProblemEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1)
+)
+asgProblemEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgProblemIndex"),
+)
+if mibBuilder.loadTexts:
+    asgProblemEntry.setStatus("current")
+_AsgProblemIndex_Type = Unsigned32
+_AsgProblemIndex_Object = MibTableColumn
+asgProblemIndex = _AsgProblemIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1, 1),
+    _AsgProblemIndex_Type()
+)
+asgProblemIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgProblemIndex.setStatus("current")
+_AsgProblemName_Type = DisplayString
+_AsgProblemName_Object = MibTableColumn
+asgProblemName = _AsgProblemName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1, 2),
+    _AsgProblemName_Type()
+)
+asgProblemName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProblemName.setStatus("current")
+_AsgProblemStatus_Type = DisplayString
+_AsgProblemStatus_Object = MibTableColumn
+asgProblemStatus = _AsgProblemStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1, 3),
+    _AsgProblemStatus_Type()
+)
+asgProblemStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProblemStatus.setStatus("current")
+_AsgProblemPriority_Type = Integer32
+_AsgProblemPriority_Object = MibTableColumn
+asgProblemPriority = _AsgProblemPriority_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1, 4),
+    _AsgProblemPriority_Type()
+)
+asgProblemPriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProblemPriority.setStatus("current")
+_AsgProblemVerified_Type = Integer32
+_AsgProblemVerified_Object = MibTableColumn
+asgProblemVerified = _AsgProblemVerified_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1, 5),
+    _AsgProblemVerified_Type()
+)
+asgProblemVerified.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProblemVerified.setStatus("current")
+_AsgProblemDescr_Type = DisplayString
+_AsgProblemDescr_Object = MibTableColumn
+asgProblemDescr = _AsgProblemDescr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 27, 1, 6),
+    _AsgProblemDescr_Type()
+)
+asgProblemDescr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgProblemDescr.setStatus("current")
+_AsgChassisInfo_ObjectIdentity = ObjectIdentity
+asgChassisInfo = _AsgChassisInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28)
+)
+
+
+class _AsgChassisMode_Type(DisplayString):
+    """Custom type asgChassisMode based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisMode_Type.__name__ = "DisplayString"
+_AsgChassisMode_Object = MibScalar
+asgChassisMode = _AsgChassisMode_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 1),
+    _AsgChassisMode_Type()
+)
+asgChassisMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisMode.setStatus("current")
+
+
+class _AsgChassisHAMode_Type(DisplayString):
+    """Custom type asgChassisHAMode based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisHAMode_Type.__name__ = "DisplayString"
+_AsgChassisHAMode_Object = MibScalar
+asgChassisHAMode = _AsgChassisHAMode_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 2),
+    _AsgChassisHAMode_Type()
+)
+asgChassisHAMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisHAMode.setStatus("current")
+_AsgSynchronization_ObjectIdentity = ObjectIdentity
+asgSynchronization = _AsgSynchronization_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3)
+)
+
+
+class _AsgSyncToActive_Type(DisplayString):
+    """Custom type asgSyncToActive based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSyncToActive_Type.__name__ = "DisplayString"
+_AsgSyncToActive_Object = MibScalar
+asgSyncToActive = _AsgSyncToActive_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 1),
+    _AsgSyncToActive_Type()
+)
+asgSyncToActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncToActive.setStatus("current")
+
+
+class _AsgSyncToStandby_Type(DisplayString):
+    """Custom type asgSyncToStandby based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgSyncToStandby_Type.__name__ = "DisplayString"
+_AsgSyncToStandby_Object = MibScalar
+asgSyncToStandby = _AsgSyncToStandby_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 2),
+    _AsgSyncToStandby_Type()
+)
+asgSyncToStandby.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncToStandby.setStatus("current")
+_AsgSyncExceptionsTable_Object = MibTable
+asgSyncExceptionsTable = _AsgSyncExceptionsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3)
+)
+if mibBuilder.loadTexts:
+    asgSyncExceptionsTable.setStatus("current")
+_AsgSyncExceptionsEntry_Object = MibTableRow
+asgSyncExceptionsEntry = _AsgSyncExceptionsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1)
+)
+asgSyncExceptionsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgSyncExceptionsIndex"),
+)
+if mibBuilder.loadTexts:
+    asgSyncExceptionsEntry.setStatus("current")
+_AsgSyncExceptionsIndex_Type = Unsigned32
+_AsgSyncExceptionsIndex_Object = MibTableColumn
+asgSyncExceptionsIndex = _AsgSyncExceptionsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 1),
+    _AsgSyncExceptionsIndex_Type()
+)
+asgSyncExceptionsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsIndex.setStatus("current")
+_AsgSyncExceptionsID_Type = Integer32
+_AsgSyncExceptionsID_Object = MibTableColumn
+asgSyncExceptionsID = _AsgSyncExceptionsID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 2),
+    _AsgSyncExceptionsID_Type()
+)
+asgSyncExceptionsID.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsID.setStatus("current")
+_AsgSyncExceptionsSource_Type = DisplayString
+_AsgSyncExceptionsSource_Object = MibTableColumn
+asgSyncExceptionsSource = _AsgSyncExceptionsSource_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 3),
+    _AsgSyncExceptionsSource_Type()
+)
+asgSyncExceptionsSource.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsSource.setStatus("current")
+_AsgSyncExceptionsSourceMask_Type = DisplayString
+_AsgSyncExceptionsSourceMask_Object = MibTableColumn
+asgSyncExceptionsSourceMask = _AsgSyncExceptionsSourceMask_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 4),
+    _AsgSyncExceptionsSourceMask_Type()
+)
+asgSyncExceptionsSourceMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsSourceMask.setStatus("current")
+_AsgSyncExceptionsDestination_Type = DisplayString
+_AsgSyncExceptionsDestination_Object = MibTableColumn
+asgSyncExceptionsDestination = _AsgSyncExceptionsDestination_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 5),
+    _AsgSyncExceptionsDestination_Type()
+)
+asgSyncExceptionsDestination.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsDestination.setStatus("current")
+_AsgSyncExceptionsDestinationMask_Type = DisplayString
+_AsgSyncExceptionsDestinationMask_Object = MibTableColumn
+asgSyncExceptionsDestinationMask = _AsgSyncExceptionsDestinationMask_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 6),
+    _AsgSyncExceptionsDestinationMask_Type()
+)
+asgSyncExceptionsDestinationMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsDestinationMask.setStatus("current")
+_AsgSyncExceptionsIpProtocol_Type = DisplayString
+_AsgSyncExceptionsIpProtocol_Object = MibTableColumn
+asgSyncExceptionsIpProtocol = _AsgSyncExceptionsIpProtocol_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 7),
+    _AsgSyncExceptionsIpProtocol_Type()
+)
+asgSyncExceptionsIpProtocol.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsIpProtocol.setStatus("current")
+_AsgSyncExceptionsSync_Type = DisplayString
+_AsgSyncExceptionsSync_Object = MibTableColumn
+asgSyncExceptionsSync = _AsgSyncExceptionsSync_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 8),
+    _AsgSyncExceptionsSync_Type()
+)
+asgSyncExceptionsSync.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsSync.setStatus("current")
+_AsgSyncExceptionsDelay_Type = DisplayString
+_AsgSyncExceptionsDelay_Object = MibTableColumn
+asgSyncExceptionsDelay = _AsgSyncExceptionsDelay_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 3, 3, 1, 9),
+    _AsgSyncExceptionsDelay_Type()
+)
+asgSyncExceptionsDelay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSyncExceptionsDelay.setStatus("current")
+_AsgChassisParamsTable_Object = MibTable
+asgChassisParamsTable = _AsgChassisParamsTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4)
+)
+if mibBuilder.loadTexts:
+    asgChassisParamsTable.setStatus("current")
+_AsgChassisParamsEntry_Object = MibTableRow
+asgChassisParamsEntry = _AsgChassisParamsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1)
+)
+asgChassisParamsEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgChassisParamsIndex"),
+)
+if mibBuilder.loadTexts:
+    asgChassisParamsEntry.setStatus("current")
+_AsgChassisParamsIndex_Type = Unsigned32
+_AsgChassisParamsIndex_Object = MibTableColumn
+asgChassisParamsIndex = _AsgChassisParamsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1, 1),
+    _AsgChassisParamsIndex_Type()
+)
+asgChassisParamsIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgChassisParamsIndex.setStatus("current")
+
+
+class _AsgChassisParamsID_Type(DisplayString):
+    """Custom type asgChassisParamsID based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisParamsID_Type.__name__ = "DisplayString"
+_AsgChassisParamsID_Object = MibTableColumn
+asgChassisParamsID = _AsgChassisParamsID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1, 2),
+    _AsgChassisParamsID_Type()
+)
+asgChassisParamsID.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisParamsID.setStatus("current")
+
+
+class _AsgChassisParamsStatus_Type(DisplayString):
+    """Custom type asgChassisParamsStatus based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisParamsStatus_Type.__name__ = "DisplayString"
+_AsgChassisParamsStatus_Object = MibTableColumn
+asgChassisParamsStatus = _AsgChassisParamsStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1, 3),
+    _AsgChassisParamsStatus_Type()
+)
+asgChassisParamsStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisParamsStatus.setStatus("current")
+
+
+class _AsgChassisParamsGrade_Type(DisplayString):
+    """Custom type asgChassisParamsGrade based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisParamsGrade_Type.__name__ = "DisplayString"
+_AsgChassisParamsGrade_Object = MibTableColumn
+asgChassisParamsGrade = _AsgChassisParamsGrade_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1, 4),
+    _AsgChassisParamsGrade_Type()
+)
+asgChassisParamsGrade.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisParamsGrade.setStatus("current")
+
+
+class _AsgChassisParamsMaxGrade_Type(DisplayString):
+    """Custom type asgChassisParamsMaxGrade based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisParamsMaxGrade_Type.__name__ = "DisplayString"
+_AsgChassisParamsMaxGrade_Object = MibTableColumn
+asgChassisParamsMaxGrade = _AsgChassisParamsMaxGrade_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1, 5),
+    _AsgChassisParamsMaxGrade_Type()
+)
+asgChassisParamsMaxGrade.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisParamsMaxGrade.setStatus("current")
+
+
+class _AsgChassisParamsUniqueIP_Type(DisplayString):
+    """Custom type asgChassisParamsUniqueIP based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgChassisParamsUniqueIP_Type.__name__ = "DisplayString"
+_AsgChassisParamsUniqueIP_Object = MibTableColumn
+asgChassisParamsUniqueIP = _AsgChassisParamsUniqueIP_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 4, 1, 6),
+    _AsgChassisParamsUniqueIP_Type()
+)
+asgChassisParamsUniqueIP.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgChassisParamsUniqueIP.setStatus("current")
+_AsgSGMTable_Object = MibTable
+asgSGMTable = _AsgSGMTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5)
+)
+if mibBuilder.loadTexts:
+    asgSGMTable.setStatus("current")
+_AsgSGMEntry_Object = MibTableRow
+asgSGMEntry = _AsgSGMEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5, 1)
+)
+asgSGMEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgSGMIndex"),
+)
+if mibBuilder.loadTexts:
+    asgSGMEntry.setStatus("current")
+_AsgSGMIndex_Type = Unsigned32
+_AsgSGMIndex_Object = MibTableColumn
+asgSGMIndex = _AsgSGMIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5, 1, 1),
+    _AsgSGMIndex_Type()
+)
+asgSGMIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgSGMIndex.setStatus("current")
+_AsgSGMID_Type = Integer32
+_AsgSGMID_Object = MibTableColumn
+asgSGMID = _AsgSGMID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5, 1, 2),
+    _AsgSGMID_Type()
+)
+asgSGMID.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSGMID.setStatus("current")
+_AsgSGMStatus_Type = DisplayString
+_AsgSGMStatus_Object = MibTableColumn
+asgSGMStatus = _AsgSGMStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5, 1, 3),
+    _AsgSGMStatus_Type()
+)
+asgSGMStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSGMStatus.setStatus("current")
+_AsgSGMProcess_Type = DisplayString
+_AsgSGMProcess_Object = MibTableColumn
+asgSGMProcess = _AsgSGMProcess_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5, 1, 4),
+    _AsgSGMProcess_Type()
+)
+asgSGMProcess.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSGMProcess.setStatus("current")
+_AsgSGMPolicyTime_Type = DisplayString
+_AsgSGMPolicyTime_Object = MibTableColumn
+asgSGMPolicyTime = _AsgSGMPolicyTime_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 5, 1, 5),
+    _AsgSGMPolicyTime_Type()
+)
+asgSGMPolicyTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgSGMPolicyTime.setStatus("current")
+_AsgFactorTable_Object = MibTable
+asgFactorTable = _AsgFactorTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 6)
+)
+if mibBuilder.loadTexts:
+    asgFactorTable.setStatus("current")
+_AsgFactorEntry_Object = MibTableRow
+asgFactorEntry = _AsgFactorEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 6, 1)
+)
+asgFactorEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgFactorIndex"),
+)
+if mibBuilder.loadTexts:
+    asgFactorEntry.setStatus("current")
+_AsgFactorIndex_Type = Unsigned32
+_AsgFactorIndex_Object = MibTableColumn
+asgFactorIndex = _AsgFactorIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 6, 1, 1),
+    _AsgFactorIndex_Type()
+)
+asgFactorIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgFactorIndex.setStatus("current")
+_AsgFactorName_Type = DisplayString
+_AsgFactorName_Object = MibTableColumn
+asgFactorName = _AsgFactorName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 6, 1, 2),
+    _AsgFactorName_Type()
+)
+asgFactorName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgFactorName.setStatus("current")
+_AsgFactorValue_Type = DisplayString
+_AsgFactorValue_Object = MibTableColumn
+asgFactorValue = _AsgFactorValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 6, 1, 3),
+    _AsgFactorValue_Type()
+)
+asgFactorValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgFactorValue.setStatus("current")
+_AsgPortPriorityTable_Object = MibTable
+asgPortPriorityTable = _AsgPortPriorityTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 7)
+)
+if mibBuilder.loadTexts:
+    asgPortPriorityTable.setStatus("current")
+_AsgPortPriorityEntry_Object = MibTableRow
+asgPortPriorityEntry = _AsgPortPriorityEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 7, 1)
+)
+asgPortPriorityEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgPortPriorityIndex"),
+)
+if mibBuilder.loadTexts:
+    asgPortPriorityEntry.setStatus("current")
+_AsgPortPriorityIndex_Type = Unsigned32
+_AsgPortPriorityIndex_Object = MibTableColumn
+asgPortPriorityIndex = _AsgPortPriorityIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 7, 1, 1),
+    _AsgPortPriorityIndex_Type()
+)
+asgPortPriorityIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgPortPriorityIndex.setStatus("current")
+_AsgPriorityPortName_Type = DisplayString
+_AsgPriorityPortName_Object = MibTableColumn
+asgPriorityPortName = _AsgPriorityPortName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 7, 1, 2),
+    _AsgPriorityPortName_Type()
+)
+asgPriorityPortName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPriorityPortName.setStatus("current")
+_AsgPortPriority_Type = DisplayString
+_AsgPortPriority_Object = MibTableColumn
+asgPortPriority = _AsgPortPriority_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 28, 7, 1, 3),
+    _AsgPortPriority_Type()
+)
+asgPortPriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgPortPriority.setStatus("current")
+_AsgCoresUtilTable_Object = MibTable
+asgCoresUtilTable = _AsgCoresUtilTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29)
+)
+if mibBuilder.loadTexts:
+    asgCoresUtilTable.setStatus("current")
+_AsgCoresUtilEntry_Object = MibTableRow
+asgCoresUtilEntry = _AsgCoresUtilEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1)
+)
+asgCoresUtilEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgCoreIndex"),
+)
+if mibBuilder.loadTexts:
+    asgCoresUtilEntry.setStatus("current")
+_AsgCoreIndex_Type = Unsigned32
+_AsgCoreIndex_Object = MibTableColumn
+asgCoreIndex = _AsgCoreIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 1),
+    _AsgCoreIndex_Type()
+)
+asgCoreIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgCoreIndex.setStatus("current")
+_AsgCoreRowTitle_Type = DisplayString
+_AsgCoreRowTitle_Object = MibTableColumn
+asgCoreRowTitle = _AsgCoreRowTitle_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 2),
+    _AsgCoreRowTitle_Type()
+)
+asgCoreRowTitle.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgCoreRowTitle.setStatus("current")
+_Blade1_Type = DisplayString
+_Blade1_Object = MibTableColumn
+blade1 = _Blade1_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 3),
+    _Blade1_Type()
+)
+blade1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade1.setStatus("current")
+_Blade2_Type = DisplayString
+_Blade2_Object = MibTableColumn
+blade2 = _Blade2_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 4),
+    _Blade2_Type()
+)
+blade2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade2.setStatus("current")
+_Blade3_Type = DisplayString
+_Blade3_Object = MibTableColumn
+blade3 = _Blade3_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 5),
+    _Blade3_Type()
+)
+blade3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade3.setStatus("current")
+_Blade4_Type = DisplayString
+_Blade4_Object = MibTableColumn
+blade4 = _Blade4_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 6),
+    _Blade4_Type()
+)
+blade4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade4.setStatus("current")
+_Blade5_Type = DisplayString
+_Blade5_Object = MibTableColumn
+blade5 = _Blade5_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 7),
+    _Blade5_Type()
+)
+blade5.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade5.setStatus("current")
+_Blade6_Type = DisplayString
+_Blade6_Object = MibTableColumn
+blade6 = _Blade6_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 8),
+    _Blade6_Type()
+)
+blade6.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade6.setStatus("current")
+_Blade7_Type = DisplayString
+_Blade7_Object = MibTableColumn
+blade7 = _Blade7_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 9),
+    _Blade7_Type()
+)
+blade7.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade7.setStatus("current")
+_Blade8_Type = DisplayString
+_Blade8_Object = MibTableColumn
+blade8 = _Blade8_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 10),
+    _Blade8_Type()
+)
+blade8.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade8.setStatus("current")
+_Blade9_Type = DisplayString
+_Blade9_Object = MibTableColumn
+blade9 = _Blade9_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 11),
+    _Blade9_Type()
+)
+blade9.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade9.setStatus("current")
+_Blade10_Type = DisplayString
+_Blade10_Object = MibTableColumn
+blade10 = _Blade10_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 12),
+    _Blade10_Type()
+)
+blade10.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade10.setStatus("current")
+_Blade11_Type = DisplayString
+_Blade11_Object = MibTableColumn
+blade11 = _Blade11_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 13),
+    _Blade11_Type()
+)
+blade11.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade11.setStatus("current")
+_Blade12_Type = DisplayString
+_Blade12_Object = MibTableColumn
+blade12 = _Blade12_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 14),
+    _Blade12_Type()
+)
+blade12.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade12.setStatus("current")
+_Blade13_Type = DisplayString
+_Blade13_Object = MibTableColumn
+blade13 = _Blade13_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 15),
+    _Blade13_Type()
+)
+blade13.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade13.setStatus("current")
+_Blade14_Type = DisplayString
+_Blade14_Object = MibTableColumn
+blade14 = _Blade14_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 16),
+    _Blade14_Type()
+)
+blade14.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade14.setStatus("current")
+_Blade15_Type = DisplayString
+_Blade15_Object = MibTableColumn
+blade15 = _Blade15_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 17),
+    _Blade15_Type()
+)
+blade15.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade15.setStatus("current")
+_Blade16_Type = DisplayString
+_Blade16_Object = MibTableColumn
+blade16 = _Blade16_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 18),
+    _Blade16_Type()
+)
+blade16.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade16.setStatus("current")
+_Blade17_Type = DisplayString
+_Blade17_Object = MibTableColumn
+blade17 = _Blade17_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 19),
+    _Blade17_Type()
+)
+blade17.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade17.setStatus("current")
+_Blade18_Type = DisplayString
+_Blade18_Object = MibTableColumn
+blade18 = _Blade18_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 20),
+    _Blade18_Type()
+)
+blade18.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade18.setStatus("current")
+_Blade19_Type = DisplayString
+_Blade19_Object = MibTableColumn
+blade19 = _Blade19_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 21),
+    _Blade19_Type()
+)
+blade19.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade19.setStatus("current")
+_Blade20_Type = DisplayString
+_Blade20_Object = MibTableColumn
+blade20 = _Blade20_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 22),
+    _Blade20_Type()
+)
+blade20.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade20.setStatus("current")
+_Blade21_Type = DisplayString
+_Blade21_Object = MibTableColumn
+blade21 = _Blade21_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 23),
+    _Blade21_Type()
+)
+blade21.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade21.setStatus("current")
+_Blade22_Type = DisplayString
+_Blade22_Object = MibTableColumn
+blade22 = _Blade22_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 24),
+    _Blade22_Type()
+)
+blade22.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade22.setStatus("current")
+_Blade23_Type = DisplayString
+_Blade23_Object = MibTableColumn
+blade23 = _Blade23_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 25),
+    _Blade23_Type()
+)
+blade23.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade23.setStatus("current")
+_Blade24_Type = DisplayString
+_Blade24_Object = MibTableColumn
+blade24 = _Blade24_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 26),
+    _Blade24_Type()
+)
+blade24.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade24.setStatus("current")
+_Blade25_Type = DisplayString
+_Blade25_Object = MibTableColumn
+blade25 = _Blade25_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 27),
+    _Blade25_Type()
+)
+blade25.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade25.setStatus("current")
+_Blade26_Type = DisplayString
+_Blade26_Object = MibTableColumn
+blade26 = _Blade26_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 28),
+    _Blade26_Type()
+)
+blade26.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade26.setStatus("current")
+_Blade27_Type = DisplayString
+_Blade27_Object = MibTableColumn
+blade27 = _Blade27_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 29),
+    _Blade27_Type()
+)
+blade27.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade27.setStatus("current")
+_Blade28_Type = DisplayString
+_Blade28_Object = MibTableColumn
+blade28 = _Blade28_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 30),
+    _Blade28_Type()
+)
+blade28.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade28.setStatus("current")
+_Blade29_Type = DisplayString
+_Blade29_Object = MibTableColumn
+blade29 = _Blade29_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 31),
+    _Blade29_Type()
+)
+blade29.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade29.setStatus("current")
+_Blade30_Type = DisplayString
+_Blade30_Object = MibTableColumn
+blade30 = _Blade30_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 32),
+    _Blade30_Type()
+)
+blade30.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade30.setStatus("current")
+_Blade31_Type = DisplayString
+_Blade31_Object = MibTableColumn
+blade31 = _Blade31_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 33),
+    _Blade31_Type()
+)
+blade31.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade31.setStatus("current")
+_Blade32_Type = DisplayString
+_Blade32_Object = MibTableColumn
+blade32 = _Blade32_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 34),
+    _Blade32_Type()
+)
+blade32.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade32.setStatus("current")
+_Blade33_Type = DisplayString
+_Blade33_Object = MibTableColumn
+blade33 = _Blade33_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 35),
+    _Blade33_Type()
+)
+blade33.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade33.setStatus("current")
+_Blade34_Type = DisplayString
+_Blade34_Object = MibTableColumn
+blade34 = _Blade34_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 36),
+    _Blade34_Type()
+)
+blade34.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade34.setStatus("current")
+_Blade35_Type = DisplayString
+_Blade35_Object = MibTableColumn
+blade35 = _Blade35_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 37),
+    _Blade35_Type()
+)
+blade35.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade35.setStatus("current")
+_Blade36_Type = DisplayString
+_Blade36_Object = MibTableColumn
+blade36 = _Blade36_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 38),
+    _Blade36_Type()
+)
+blade36.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade36.setStatus("current")
+_Blade37_Type = DisplayString
+_Blade37_Object = MibTableColumn
+blade37 = _Blade37_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 39),
+    _Blade37_Type()
+)
+blade37.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade37.setStatus("current")
+_Blade38_Type = DisplayString
+_Blade38_Object = MibTableColumn
+blade38 = _Blade38_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 40),
+    _Blade38_Type()
+)
+blade38.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade38.setStatus("current")
+_Blade39_Type = DisplayString
+_Blade39_Object = MibTableColumn
+blade39 = _Blade39_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 41),
+    _Blade39_Type()
+)
+blade39.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade39.setStatus("current")
+_Blade40_Type = DisplayString
+_Blade40_Object = MibTableColumn
+blade40 = _Blade40_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 42),
+    _Blade40_Type()
+)
+blade40.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade40.setStatus("current")
+_Blade41_Type = DisplayString
+_Blade41_Object = MibTableColumn
+blade41 = _Blade41_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 43),
+    _Blade41_Type()
+)
+blade41.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade41.setStatus("current")
+_Blade42_Type = DisplayString
+_Blade42_Object = MibTableColumn
+blade42 = _Blade42_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 44),
+    _Blade42_Type()
+)
+blade42.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade42.setStatus("current")
+_Blade43_Type = DisplayString
+_Blade43_Object = MibTableColumn
+blade43 = _Blade43_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 45),
+    _Blade43_Type()
+)
+blade43.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade43.setStatus("current")
+_Blade44_Type = DisplayString
+_Blade44_Object = MibTableColumn
+blade44 = _Blade44_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 46),
+    _Blade44_Type()
+)
+blade44.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade44.setStatus("current")
+_Blade45_Type = DisplayString
+_Blade45_Object = MibTableColumn
+blade45 = _Blade45_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 47),
+    _Blade45_Type()
+)
+blade45.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade45.setStatus("current")
+_Blade46_Type = DisplayString
+_Blade46_Object = MibTableColumn
+blade46 = _Blade46_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 48),
+    _Blade46_Type()
+)
+blade46.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade46.setStatus("current")
+_Blade47_Type = DisplayString
+_Blade47_Object = MibTableColumn
+blade47 = _Blade47_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 49),
+    _Blade47_Type()
+)
+blade47.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade47.setStatus("current")
+_Blade48_Type = DisplayString
+_Blade48_Object = MibTableColumn
+blade48 = _Blade48_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 29, 1, 50),
+    _Blade48_Type()
+)
+blade48.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    blade48.setStatus("current")
+_AsgVSX_ObjectIdentity = ObjectIdentity
+asgVSX = _AsgVSX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30)
+)
+_AsgVslsInfo_ObjectIdentity = ObjectIdentity
+asgVslsInfo = _AsgVslsInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20)
+)
+_AsgVslsSgmRatio_Type = Unsigned32
+_AsgVslsSgmRatio_Object = MibScalar
+asgVslsSgmRatio = _AsgVslsSgmRatio_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 1),
+    _AsgVslsSgmRatio_Type()
+)
+asgVslsSgmRatio.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsSgmRatio.setStatus("current")
+_AsgVslsSystemPrimaryChassis_Type = DisplayString
+_AsgVslsSystemPrimaryChassis_Object = MibScalar
+asgVslsSystemPrimaryChassis = _AsgVslsSystemPrimaryChassis_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 2),
+    _AsgVslsSystemPrimaryChassis_Type()
+)
+asgVslsSystemPrimaryChassis.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsSystemPrimaryChassis.setStatus("current")
+_AsgVslsStateTable_Object = MibTable
+asgVslsStateTable = _AsgVslsStateTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10)
+)
+if mibBuilder.loadTexts:
+    asgVslsStateTable.setStatus("current")
+_AsgVslsStateEntry_Object = MibTableRow
+asgVslsStateEntry = _AsgVslsStateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1)
+)
+asgVslsStateEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVslsVsid"),
+)
+if mibBuilder.loadTexts:
+    asgVslsStateEntry.setStatus("current")
+_AsgVslsVsid_Type = Unsigned32
+_AsgVslsVsid_Object = MibTableColumn
+asgVslsVsid = _AsgVslsVsid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 1),
+    _AsgVslsVsid_Type()
+)
+asgVslsVsid.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVslsVsid.setStatus("current")
+
+
+class _AsgVslsVsName_Type(DisplayString):
+    """Custom type asgVslsVsName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgVslsVsName_Type.__name__ = "DisplayString"
+_AsgVslsVsName_Object = MibTableColumn
+asgVslsVsName = _AsgVslsVsName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 2),
+    _AsgVslsVsName_Type()
+)
+asgVslsVsName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsName.setStatus("current")
+_AsgVslsVsPrimaryChassis_Type = Unsigned32
+_AsgVslsVsPrimaryChassis_Object = MibTableColumn
+asgVslsVsPrimaryChassis = _AsgVslsVsPrimaryChassis_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 3),
+    _AsgVslsVsPrimaryChassis_Type()
+)
+asgVslsVsPrimaryChassis.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsPrimaryChassis.setStatus("current")
+_AsgVslsVsActiveChassis_Type = Unsigned32
+_AsgVslsVsActiveChassis_Object = MibTableColumn
+asgVslsVsActiveChassis = _AsgVslsVsActiveChassis_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 4),
+    _AsgVslsVsActiveChassis_Type()
+)
+asgVslsVsActiveChassis.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsActiveChassis.setStatus("current")
+
+
+class _AsgVslsVsHealth_Type(DisplayString):
+    """Custom type asgVslsVsHealth based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgVslsVsHealth_Type.__name__ = "DisplayString"
+_AsgVslsVsHealth_Object = MibTableColumn
+asgVslsVsHealth = _AsgVslsVsHealth_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 5),
+    _AsgVslsVsHealth_Type()
+)
+asgVslsVsHealth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsHealth.setStatus("current")
+
+
+class _AsgVslsVsReason_Type(DisplayString):
+    """Custom type asgVslsVsReason based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AsgVslsVsReason_Type.__name__ = "DisplayString"
+_AsgVslsVsReason_Object = MibTableColumn
+asgVslsVsReason = _AsgVslsVsReason_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 6),
+    _AsgVslsVsReason_Type()
+)
+asgVslsVsReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsReason.setStatus("current")
+_AsgVslsVsChassis1InterfacesUp_Type = Unsigned32
+_AsgVslsVsChassis1InterfacesUp_Object = MibTableColumn
+asgVslsVsChassis1InterfacesUp = _AsgVslsVsChassis1InterfacesUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 7),
+    _AsgVslsVsChassis1InterfacesUp_Type()
+)
+asgVslsVsChassis1InterfacesUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis1InterfacesUp.setStatus("current")
+_AsgVslsVsChassis1InterfacesTotal_Type = Unsigned32
+_AsgVslsVsChassis1InterfacesTotal_Object = MibTableColumn
+asgVslsVsChassis1InterfacesTotal = _AsgVslsVsChassis1InterfacesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 8),
+    _AsgVslsVsChassis1InterfacesTotal_Type()
+)
+asgVslsVsChassis1InterfacesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis1InterfacesTotal.setStatus("current")
+_AsgVslsVsChassis1FwksUp_Type = Unsigned32
+_AsgVslsVsChassis1FwksUp_Object = MibTableColumn
+asgVslsVsChassis1FwksUp = _AsgVslsVsChassis1FwksUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 9),
+    _AsgVslsVsChassis1FwksUp_Type()
+)
+asgVslsVsChassis1FwksUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis1FwksUp.setStatus("current")
+_AsgVslsVsChassis1FwksTotal_Type = Unsigned32
+_AsgVslsVsChassis1FwksTotal_Object = MibTableColumn
+asgVslsVsChassis1FwksTotal = _AsgVslsVsChassis1FwksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 10),
+    _AsgVslsVsChassis1FwksTotal_Type()
+)
+asgVslsVsChassis1FwksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis1FwksTotal.setStatus("current")
+_AsgVslsVsChassis2InterfacesUp_Type = Unsigned32
+_AsgVslsVsChassis2InterfacesUp_Object = MibTableColumn
+asgVslsVsChassis2InterfacesUp = _AsgVslsVsChassis2InterfacesUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 21),
+    _AsgVslsVsChassis2InterfacesUp_Type()
+)
+asgVslsVsChassis2InterfacesUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis2InterfacesUp.setStatus("current")
+_AsgVslsVsChassis2InterfacesTotal_Type = Unsigned32
+_AsgVslsVsChassis2InterfacesTotal_Object = MibTableColumn
+asgVslsVsChassis2InterfacesTotal = _AsgVslsVsChassis2InterfacesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 22),
+    _AsgVslsVsChassis2InterfacesTotal_Type()
+)
+asgVslsVsChassis2InterfacesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis2InterfacesTotal.setStatus("current")
+_AsgVslsVsChassis2FwksUp_Type = Unsigned32
+_AsgVslsVsChassis2FwksUp_Object = MibTableColumn
+asgVslsVsChassis2FwksUp = _AsgVslsVsChassis2FwksUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 23),
+    _AsgVslsVsChassis2FwksUp_Type()
+)
+asgVslsVsChassis2FwksUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis2FwksUp.setStatus("current")
+_AsgVslsVsChassis2FwksTotal_Type = Unsigned32
+_AsgVslsVsChassis2FwksTotal_Object = MibTableColumn
+asgVslsVsChassis2FwksTotal = _AsgVslsVsChassis2FwksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 24),
+    _AsgVslsVsChassis2FwksTotal_Type()
+)
+asgVslsVsChassis2FwksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis2FwksTotal.setStatus("current")
+_AsgVslsVsChassis3InterfacesUp_Type = Unsigned32
+_AsgVslsVsChassis3InterfacesUp_Object = MibTableColumn
+asgVslsVsChassis3InterfacesUp = _AsgVslsVsChassis3InterfacesUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 31),
+    _AsgVslsVsChassis3InterfacesUp_Type()
+)
+asgVslsVsChassis3InterfacesUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis3InterfacesUp.setStatus("current")
+_AsgVslsVsChassis3InterfacesTotal_Type = Unsigned32
+_AsgVslsVsChassis3InterfacesTotal_Object = MibTableColumn
+asgVslsVsChassis3InterfacesTotal = _AsgVslsVsChassis3InterfacesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 32),
+    _AsgVslsVsChassis3InterfacesTotal_Type()
+)
+asgVslsVsChassis3InterfacesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis3InterfacesTotal.setStatus("current")
+_AsgVslsVsChassis3FwksUp_Type = Unsigned32
+_AsgVslsVsChassis3FwksUp_Object = MibTableColumn
+asgVslsVsChassis3FwksUp = _AsgVslsVsChassis3FwksUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 33),
+    _AsgVslsVsChassis3FwksUp_Type()
+)
+asgVslsVsChassis3FwksUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis3FwksUp.setStatus("current")
+_AsgVslsVsChassis3FwksTotal_Type = Unsigned32
+_AsgVslsVsChassis3FwksTotal_Object = MibTableColumn
+asgVslsVsChassis3FwksTotal = _AsgVslsVsChassis3FwksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 34),
+    _AsgVslsVsChassis3FwksTotal_Type()
+)
+asgVslsVsChassis3FwksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis3FwksTotal.setStatus("current")
+_AsgVslsVsChassis4InterfacesUp_Type = Unsigned32
+_AsgVslsVsChassis4InterfacesUp_Object = MibTableColumn
+asgVslsVsChassis4InterfacesUp = _AsgVslsVsChassis4InterfacesUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 41),
+    _AsgVslsVsChassis4InterfacesUp_Type()
+)
+asgVslsVsChassis4InterfacesUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis4InterfacesUp.setStatus("current")
+_AsgVslsVsChassis4InterfacesTotal_Type = Unsigned32
+_AsgVslsVsChassis4InterfacesTotal_Object = MibTableColumn
+asgVslsVsChassis4InterfacesTotal = _AsgVslsVsChassis4InterfacesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 42),
+    _AsgVslsVsChassis4InterfacesTotal_Type()
+)
+asgVslsVsChassis4InterfacesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis4InterfacesTotal.setStatus("current")
+_AsgVslsVsChassis4FwksUp_Type = Unsigned32
+_AsgVslsVsChassis4FwksUp_Object = MibTableColumn
+asgVslsVsChassis4FwksUp = _AsgVslsVsChassis4FwksUp_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 43),
+    _AsgVslsVsChassis4FwksUp_Type()
+)
+asgVslsVsChassis4FwksUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis4FwksUp.setStatus("current")
+_AsgVslsVsChassis4FwksTotal_Type = Unsigned32
+_AsgVslsVsChassis4FwksTotal_Object = MibTableColumn
+asgVslsVsChassis4FwksTotal = _AsgVslsVsChassis4FwksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 20, 10, 1, 44),
+    _AsgVslsVsChassis4FwksTotal_Type()
+)
+asgVslsVsChassis4FwksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVslsVsChassis4FwksTotal.setStatus("current")
+_AsgVSXConnInfo_ObjectIdentity = ObjectIdentity
+asgVSXConnInfo = _AsgVSXConnInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30)
+)
+_AsgVSXConnInfoTable_Object = MibTable
+asgVSXConnInfoTable = _AsgVSXConnInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXConnInfoTable.setStatus("current")
+_AsgVSXConnInfoEntry_Object = MibTableRow
+asgVSXConnInfoEntry = _AsgVSXConnInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1)
+)
+asgVSXConnInfoEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXConnInfoIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXConnInfoEntry.setStatus("current")
+_AsgVSXConnInfoIndex_Type = Unsigned32
+_AsgVSXConnInfoIndex_Object = MibTableColumn
+asgVSXConnInfoIndex = _AsgVSXConnInfoIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1, 1),
+    _AsgVSXConnInfoIndex_Type()
+)
+asgVSXConnInfoIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXConnInfoIndex.setStatus("current")
+_AsgVSXConnBladeID_Type = DisplayString
+_AsgVSXConnBladeID_Object = MibTableColumn
+asgVSXConnBladeID = _AsgVSXConnBladeID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1, 2),
+    _AsgVSXConnBladeID_Type()
+)
+asgVSXConnBladeID.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConnBladeID.setStatus("current")
+_AsgVSXIPver_Type = DisplayString
+_AsgVSXIPver_Object = MibTableColumn
+asgVSXIPver = _AsgVSXIPver_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1, 3),
+    _AsgVSXIPver_Type()
+)
+asgVSXIPver.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXIPver.setStatus("current")
+_AsgVSXConcurrentConns_Type = Counter64
+_AsgVSXConcurrentConns_Object = MibTableColumn
+asgVSXConcurrentConns = _AsgVSXConcurrentConns_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1, 4),
+    _AsgVSXConcurrentConns_Type()
+)
+asgVSXConcurrentConns.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConcurrentConns.setStatus("current")
+_AsgVSXPeakConns_Type = Counter64
+_AsgVSXPeakConns_Object = MibTableColumn
+asgVSXPeakConns = _AsgVSXPeakConns_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1, 5),
+    _AsgVSXPeakConns_Type()
+)
+asgVSXPeakConns.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXPeakConns.setStatus("current")
+_AsgVSXConnLimit_Type = DisplayString
+_AsgVSXConnLimit_Object = MibTableColumn
+asgVSXConnLimit = _AsgVSXConnLimit_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 10, 1, 6),
+    _AsgVSXConnLimit_Type()
+)
+asgVSXConnLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConnLimit.setStatus("current")
+_AsgVSXConnectionsNumberPerSystem_Type = Counter64
+_AsgVSXConnectionsNumberPerSystem_Object = MibScalar
+asgVSXConnectionsNumberPerSystem = _AsgVSXConnectionsNumberPerSystem_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 30, 20),
+    _AsgVSXConnectionsNumberPerSystem_Type()
+)
+asgVSXConnectionsNumberPerSystem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConnectionsNumberPerSystem.setStatus("current")
+_AsgVSXMemInfo_ObjectIdentity = ObjectIdentity
+asgVSXMemInfo = _AsgVSXMemInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 40)
+)
+_AsgVSXMemInfoTable_Object = MibTable
+asgVSXMemInfoTable = _AsgVSXMemInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 40, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXMemInfoTable.setStatus("current")
+_AsgVSXMemInfoEntry_Object = MibTableRow
+asgVSXMemInfoEntry = _AsgVSXMemInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 40, 10, 1)
+)
+asgVSXMemInfoEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXMemInfoIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXMemInfoEntry.setStatus("current")
+_AsgVSXMemInfoIndex_Type = Unsigned32
+_AsgVSXMemInfoIndex_Object = MibTableColumn
+asgVSXMemInfoIndex = _AsgVSXMemInfoIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 40, 10, 1, 1),
+    _AsgVSXMemInfoIndex_Type()
+)
+asgVSXMemInfoIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXMemInfoIndex.setStatus("current")
+_AsgVSXMemBladeid_Type = DisplayString
+_AsgVSXMemBladeid_Object = MibTableColumn
+asgVSXMemBladeid = _AsgVSXMemBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 40, 10, 1, 2),
+    _AsgVSXMemBladeid_Type()
+)
+asgVSXMemBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXMemBladeid.setStatus("current")
+_AsgVSXOverallMem_Type = Counter64
+_AsgVSXOverallMem_Object = MibTableColumn
+asgVSXOverallMem = _AsgVSXOverallMem_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 40, 10, 1, 3),
+    _AsgVSXOverallMem_Type()
+)
+asgVSXOverallMem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXOverallMem.setStatus("current")
+_AsgVSXCoreUtilInfo_ObjectIdentity = ObjectIdentity
+asgVSXCoreUtilInfo = _AsgVSXCoreUtilInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50)
+)
+_AsgVSXCoreUtilTable_Object = MibTable
+asgVSXCoreUtilTable = _AsgVSXCoreUtilTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXCoreUtilTable.setStatus("current")
+_AsgVSXCoreUtilEntry_Object = MibTableRow
+asgVSXCoreUtilEntry = _AsgVSXCoreUtilEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50, 10, 1)
+)
+asgVSXCoreUtilEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXCoreUtilIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXCoreUtilEntry.setStatus("current")
+_AsgVSXCoreUtilIndex_Type = Unsigned32
+_AsgVSXCoreUtilIndex_Object = MibTableColumn
+asgVSXCoreUtilIndex = _AsgVSXCoreUtilIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50, 10, 1, 1),
+    _AsgVSXCoreUtilIndex_Type()
+)
+asgVSXCoreUtilIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXCoreUtilIndex.setStatus("current")
+_AsgVSXCoreUtilBladeid_Type = DisplayString
+_AsgVSXCoreUtilBladeid_Object = MibTableColumn
+asgVSXCoreUtilBladeid = _AsgVSXCoreUtilBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50, 10, 1, 2),
+    _AsgVSXCoreUtilBladeid_Type()
+)
+asgVSXCoreUtilBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXCoreUtilBladeid.setStatus("current")
+_AsgVSXCoreUtilCPUID_Type = Integer32
+_AsgVSXCoreUtilCPUID_Object = MibTableColumn
+asgVSXCoreUtilCPUID = _AsgVSXCoreUtilCPUID_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50, 10, 1, 3),
+    _AsgVSXCoreUtilCPUID_Type()
+)
+asgVSXCoreUtilCPUID.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXCoreUtilCPUID.setStatus("current")
+_AsgVSXCoreUtilUsage_Type = DisplayString
+_AsgVSXCoreUtilUsage_Object = MibTableColumn
+asgVSXCoreUtilUsage = _AsgVSXCoreUtilUsage_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 50, 10, 1, 4),
+    _AsgVSXCoreUtilUsage_Type()
+)
+asgVSXCoreUtilUsage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXCoreUtilUsage.setStatus("current")
+_AsgVSXPacketRateInfo_ObjectIdentity = ObjectIdentity
+asgVSXPacketRateInfo = _AsgVSXPacketRateInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80)
+)
+_AsgVSXPacketRateTable_Object = MibTable
+asgVSXPacketRateTable = _AsgVSXPacketRateTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXPacketRateTable.setStatus("current")
+_AsgVSXPacketRateEntry_Object = MibTableRow
+asgVSXPacketRateEntry = _AsgVSXPacketRateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80, 10, 1)
+)
+asgVSXPacketRateEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXPacketRateIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXPacketRateEntry.setStatus("current")
+_AsgVSXPacketRateIndex_Type = Unsigned32
+_AsgVSXPacketRateIndex_Object = MibTableColumn
+asgVSXPacketRateIndex = _AsgVSXPacketRateIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80, 10, 1, 1),
+    _AsgVSXPacketRateIndex_Type()
+)
+asgVSXPacketRateIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXPacketRateIndex.setStatus("current")
+_AsgVSXRateBladeid_Type = DisplayString
+_AsgVSXRateBladeid_Object = MibTableColumn
+asgVSXRateBladeid = _AsgVSXRateBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80, 10, 1, 2),
+    _AsgVSXRateBladeid_Type()
+)
+asgVSXRateBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXRateBladeid.setStatus("current")
+_AsgVSXRateValue_Type = Counter64
+_AsgVSXRateValue_Object = MibTableColumn
+asgVSXRateValue = _AsgVSXRateValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80, 10, 1, 3),
+    _AsgVSXRateValue_Type()
+)
+asgVSXRateValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXRateValue.setStatus("current")
+_AsgVSXPacketRatePerSystem_Type = Counter64
+_AsgVSXPacketRatePerSystem_Object = MibScalar
+asgVSXPacketRatePerSystem = _AsgVSXPacketRatePerSystem_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 80, 20),
+    _AsgVSXPacketRatePerSystem_Type()
+)
+asgVSXPacketRatePerSystem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXPacketRatePerSystem.setStatus("current")
+_AsgVSXThroughputInfo_ObjectIdentity = ObjectIdentity
+asgVSXThroughputInfo = _AsgVSXThroughputInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90)
+)
+_AsgVSXThroughputTable_Object = MibTable
+asgVSXThroughputTable = _AsgVSXThroughputTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXThroughputTable.setStatus("current")
+_AsgVSXThroughputEntry_Object = MibTableRow
+asgVSXThroughputEntry = _AsgVSXThroughputEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90, 10, 1)
+)
+asgVSXThroughputEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXThroughputIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXThroughputEntry.setStatus("current")
+_AsgVSXThroughputIndex_Type = Unsigned32
+_AsgVSXThroughputIndex_Object = MibTableColumn
+asgVSXThroughputIndex = _AsgVSXThroughputIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90, 10, 1, 1),
+    _AsgVSXThroughputIndex_Type()
+)
+asgVSXThroughputIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXThroughputIndex.setStatus("current")
+_AsgVSXThroughputBladeid_Type = DisplayString
+_AsgVSXThroughputBladeid_Object = MibTableColumn
+asgVSXThroughputBladeid = _AsgVSXThroughputBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90, 10, 1, 2),
+    _AsgVSXThroughputBladeid_Type()
+)
+asgVSXThroughputBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXThroughputBladeid.setStatus("current")
+_AsgVSXThroughputValue_Type = Counter64
+_AsgVSXThroughputValue_Object = MibTableColumn
+asgVSXThroughputValue = _AsgVSXThroughputValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90, 10, 1, 3),
+    _AsgVSXThroughputValue_Type()
+)
+asgVSXThroughputValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXThroughputValue.setStatus("current")
+_AsgVSXThroughputPerSystem_Type = Counter64
+_AsgVSXThroughputPerSystem_Object = MibScalar
+asgVSXThroughputPerSystem = _AsgVSXThroughputPerSystem_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 90, 20),
+    _AsgVSXThroughputPerSystem_Type()
+)
+asgVSXThroughputPerSystem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerSystem.setStatus("current")
+_AsgVSXThroughputPerInterfaceInfo_ObjectIdentity = ObjectIdentity
+asgVSXThroughputPerInterfaceInfo = _AsgVSXThroughputPerInterfaceInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100)
+)
+_AsgVSXThroughputPerInterfaceTable_Object = MibTable
+asgVSXThroughputPerInterfaceTable = _AsgVSXThroughputPerInterfaceTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerInterfaceTable.setStatus("current")
+_AsgVSXThroughputPerInterfaceEntry_Object = MibTableRow
+asgVSXThroughputPerInterfaceEntry = _AsgVSXThroughputPerInterfaceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 10, 1)
+)
+asgVSXThroughputPerInterfaceEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXThroughputPerInterfaceIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerInterfaceEntry.setStatus("current")
+_AsgVSXThroughputPerInterfaceIndex_Type = Unsigned32
+_AsgVSXThroughputPerInterfaceIndex_Object = MibTableColumn
+asgVSXThroughputPerInterfaceIndex = _AsgVSXThroughputPerInterfaceIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 10, 1, 1),
+    _AsgVSXThroughputPerInterfaceIndex_Type()
+)
+asgVSXThroughputPerInterfaceIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerInterfaceIndex.setStatus("current")
+_AsgVSXThroughputPerInterfaceBladeid_Type = DisplayString
+_AsgVSXThroughputPerInterfaceBladeid_Object = MibTableColumn
+asgVSXThroughputPerInterfaceBladeid = _AsgVSXThroughputPerInterfaceBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 10, 1, 2),
+    _AsgVSXThroughputPerInterfaceBladeid_Type()
+)
+asgVSXThroughputPerInterfaceBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerInterfaceBladeid.setStatus("current")
+_AsgVSXThroughputPerInterfaceName_Type = DisplayString
+_AsgVSXThroughputPerInterfaceName_Object = MibTableColumn
+asgVSXThroughputPerInterfaceName = _AsgVSXThroughputPerInterfaceName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 10, 1, 3),
+    _AsgVSXThroughputPerInterfaceName_Type()
+)
+asgVSXThroughputPerInterfaceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerInterfaceName.setStatus("current")
+_AsgVSXThroughputPerInterfaceValue_Type = Counter64
+_AsgVSXThroughputPerInterfaceValue_Object = MibTableColumn
+asgVSXThroughputPerInterfaceValue = _AsgVSXThroughputPerInterfaceValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 10, 1, 4),
+    _AsgVSXThroughputPerInterfaceValue_Type()
+)
+asgVSXThroughputPerInterfaceValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXThroughputPerInterfaceValue.setStatus("current")
+_AsgVSXPerSystemThroughputPerInterfaceTable_Object = MibTable
+asgVSXPerSystemThroughputPerInterfaceTable = _AsgVSXPerSystemThroughputPerInterfaceTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 20)
+)
+if mibBuilder.loadTexts:
+    asgVSXPerSystemThroughputPerInterfaceTable.setStatus("current")
+_AsgVSXPerSystemThroughputPerInterfaceTableEntry_Object = MibTableRow
+asgVSXPerSystemThroughputPerInterfaceTableEntry = _AsgVSXPerSystemThroughputPerInterfaceTableEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 20, 1)
+)
+asgVSXPerSystemThroughputPerInterfaceTableEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXPerSystemThroughputIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXPerSystemThroughputPerInterfaceTableEntry.setStatus("current")
+_AsgVSXPerSystemThroughputIndex_Type = Unsigned32
+_AsgVSXPerSystemThroughputIndex_Object = MibTableColumn
+asgVSXPerSystemThroughputIndex = _AsgVSXPerSystemThroughputIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 20, 1, 1),
+    _AsgVSXPerSystemThroughputIndex_Type()
+)
+asgVSXPerSystemThroughputIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXPerSystemThroughputIndex.setStatus("current")
+_AsgVSXPerSystemThroughputPerInterfaceName_Type = DisplayString
+_AsgVSXPerSystemThroughputPerInterfaceName_Object = MibTableColumn
+asgVSXPerSystemThroughputPerInterfaceName = _AsgVSXPerSystemThroughputPerInterfaceName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 20, 1, 2),
+    _AsgVSXPerSystemThroughputPerInterfaceName_Type()
+)
+asgVSXPerSystemThroughputPerInterfaceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXPerSystemThroughputPerInterfaceName.setStatus("current")
+_AsgVSXPerSystemThroughputPerInterfaceValue_Type = Counter64
+_AsgVSXPerSystemThroughputPerInterfaceValue_Object = MibTableColumn
+asgVSXPerSystemThroughputPerInterfaceValue = _AsgVSXPerSystemThroughputPerInterfaceValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 100, 20, 1, 3),
+    _AsgVSXPerSystemThroughputPerInterfaceValue_Type()
+)
+asgVSXPerSystemThroughputPerInterfaceValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXPerSystemThroughputPerInterfaceValue.setStatus("current")
+_AsgVSXConnectionRateInfo_ObjectIdentity = ObjectIdentity
+asgVSXConnectionRateInfo = _AsgVSXConnectionRateInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120)
+)
+_AsgVSXConnectionRateTable_Object = MibTable
+asgVSXConnectionRateTable = _AsgVSXConnectionRateTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXConnectionRateTable.setStatus("current")
+_AsgVSXConnectionRateEntry_Object = MibTableRow
+asgVSXConnectionRateEntry = _AsgVSXConnectionRateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120, 10, 1)
+)
+asgVSXConnectionRateEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXConnectionRateIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXConnectionRateEntry.setStatus("current")
+_AsgVSXConnectionRateIndex_Type = Unsigned32
+_AsgVSXConnectionRateIndex_Object = MibTableColumn
+asgVSXConnectionRateIndex = _AsgVSXConnectionRateIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120, 10, 1, 1),
+    _AsgVSXConnectionRateIndex_Type()
+)
+asgVSXConnectionRateIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXConnectionRateIndex.setStatus("current")
+_AsgVSXConnectionRateBladeid_Type = DisplayString
+_AsgVSXConnectionRateBladeid_Object = MibTableColumn
+asgVSXConnectionRateBladeid = _AsgVSXConnectionRateBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120, 10, 1, 2),
+    _AsgVSXConnectionRateBladeid_Type()
+)
+asgVSXConnectionRateBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConnectionRateBladeid.setStatus("current")
+_AsgVSXConnectionRateValue_Type = Counter64
+_AsgVSXConnectionRateValue_Object = MibTableColumn
+asgVSXConnectionRateValue = _AsgVSXConnectionRateValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120, 10, 1, 3),
+    _AsgVSXConnectionRateValue_Type()
+)
+asgVSXConnectionRateValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConnectionRateValue.setStatus("current")
+_AsgVSXConnectionRatePerSystem_Type = Counter64
+_AsgVSXConnectionRatePerSystem_Object = MibScalar
+asgVSXConnectionRatePerSystem = _AsgVSXConnectionRatePerSystem_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 120, 20),
+    _AsgVSXConnectionRatePerSystem_Type()
+)
+asgVSXConnectionRatePerSystem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXConnectionRatePerSystem.setStatus("current")
+_AsgVSXVirtualMemoryInfo_ObjectIdentity = ObjectIdentity
+asgVSXVirtualMemoryInfo = _AsgVSXVirtualMemoryInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 130)
+)
+_AsgVSXVirtualMemoryTable_Object = MibTable
+asgVSXVirtualMemoryTable = _AsgVSXVirtualMemoryTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 130, 10)
+)
+if mibBuilder.loadTexts:
+    asgVSXVirtualMemoryTable.setStatus("current")
+_AsgVSXVirtualMemoryEntry_Object = MibTableRow
+asgVSXVirtualMemoryEntry = _AsgVSXVirtualMemoryEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 130, 10, 1)
+)
+asgVSXVirtualMemoryEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgVSXVirtualMemoryIndex"),
+)
+if mibBuilder.loadTexts:
+    asgVSXVirtualMemoryEntry.setStatus("current")
+_AsgVSXVirtualMemoryIndex_Type = Unsigned32
+_AsgVSXVirtualMemoryIndex_Object = MibTableColumn
+asgVSXVirtualMemoryIndex = _AsgVSXVirtualMemoryIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 130, 10, 1, 1),
+    _AsgVSXVirtualMemoryIndex_Type()
+)
+asgVSXVirtualMemoryIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgVSXVirtualMemoryIndex.setStatus("current")
+_AsgVSXVirtualMemoryBladeid_Type = DisplayString
+_AsgVSXVirtualMemoryBladeid_Object = MibTableColumn
+asgVSXVirtualMemoryBladeid = _AsgVSXVirtualMemoryBladeid_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 130, 10, 1, 2),
+    _AsgVSXVirtualMemoryBladeid_Type()
+)
+asgVSXVirtualMemoryBladeid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXVirtualMemoryBladeid.setStatus("current")
+_AsgVSXVirtualMemoryValue_Type = DisplayString
+_AsgVSXVirtualMemoryValue_Object = MibTableColumn
+asgVSXVirtualMemoryValue = _AsgVSXVirtualMemoryValue_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 30, 130, 10, 1, 3),
+    _AsgVSXVirtualMemoryValue_Type()
+)
+asgVSXVirtualMemoryValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgVSXVirtualMemoryValue.setStatus("current")
+_AsgDiagnostic_ObjectIdentity = ObjectIdentity
+asgDiagnostic = _AsgDiagnostic_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31)
+)
+_AsgDiagnosticTable_Object = MibTable
+asgDiagnosticTable = _AsgDiagnosticTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1)
+)
+if mibBuilder.loadTexts:
+    asgDiagnosticTable.setStatus("current")
+_AsgDiagnosticEntry_Object = MibTableRow
+asgDiagnosticEntry = _AsgDiagnosticEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1, 1)
+)
+asgDiagnosticEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "asgDiagnosticIndex"),
+)
+if mibBuilder.loadTexts:
+    asgDiagnosticEntry.setStatus("current")
+_AsgDiagnosticIndex_Type = Unsigned32
+_AsgDiagnosticIndex_Object = MibTableColumn
+asgDiagnosticIndex = _AsgDiagnosticIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1, 1, 1),
+    _AsgDiagnosticIndex_Type()
+)
+asgDiagnosticIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    asgDiagnosticIndex.setStatus("current")
+_AsgDiagnosticTestName_Type = DisplayString
+_AsgDiagnosticTestName_Object = MibTableColumn
+asgDiagnosticTestName = _AsgDiagnosticTestName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1, 1, 2),
+    _AsgDiagnosticTestName_Type()
+)
+asgDiagnosticTestName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDiagnosticTestName.setStatus("current")
+_AsgDiagnosticLastRun_Type = DisplayString
+_AsgDiagnosticLastRun_Object = MibTableColumn
+asgDiagnosticLastRun = _AsgDiagnosticLastRun_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1, 1, 3),
+    _AsgDiagnosticLastRun_Type()
+)
+asgDiagnosticLastRun.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDiagnosticLastRun.setStatus("current")
+_AsgDiagnosticResult_Type = DisplayString
+_AsgDiagnosticResult_Object = MibTableColumn
+asgDiagnosticResult = _AsgDiagnosticResult_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1, 1, 4),
+    _AsgDiagnosticResult_Type()
+)
+asgDiagnosticResult.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDiagnosticResult.setStatus("current")
+_AsgDiagnosticComment_Type = DisplayString
+_AsgDiagnosticComment_Object = MibTableColumn
+asgDiagnosticComment = _AsgDiagnosticComment_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 1, 1, 5),
+    _AsgDiagnosticComment_Type()
+)
+asgDiagnosticComment.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDiagnosticComment.setStatus("current")
+_AsgDiagSummary_Type = DisplayString
+_AsgDiagSummary_Object = MibScalar
+asgDiagSummary = _AsgDiagSummary_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 48, 31, 2),
+    _AsgDiagSummary_Type()
+)
+asgDiagSummary.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    asgDiagSummary.setStatus("current")
 _Te_ObjectIdentity = ObjectIdentity
 te = _Te_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 49)
@@ -16279,99 +23323,1112 @@ teStatusLongDesc = _TeStatusLongDesc_Object(
 teStatusLongDesc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     teStatusLongDesc.setStatus("current")
-_TreatExtarction_ObjectIdentity = ObjectIdentity
-treatExtarction = _TreatExtarction_ObjectIdentity(
+_ThreatExtraction_ObjectIdentity = ObjectIdentity
+threatExtraction = _ThreatExtraction_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50)
 )
-_TreatExtarctionSubscription_ObjectIdentity = ObjectIdentity
-treatExtarctionSubscription = _TreatExtarctionSubscription_ObjectIdentity(
+_ThreatExtractionSubscription_ObjectIdentity = ObjectIdentity
+threatExtractionSubscription = _ThreatExtractionSubscription_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 1)
 )
-_TreatExtarctionSubscriptionStatus_Type = DisplayString
-_TreatExtarctionSubscriptionStatus_Object = MibScalar
-treatExtarctionSubscriptionStatus = _TreatExtarctionSubscriptionStatus_Object(
+_ThreatExtractionSubscriptionStatus_Type = DisplayString
+_ThreatExtractionSubscriptionStatus_Object = MibScalar
+threatExtractionSubscriptionStatus = _ThreatExtractionSubscriptionStatus_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 1, 1),
-    _TreatExtarctionSubscriptionStatus_Type()
+    _ThreatExtractionSubscriptionStatus_Type()
 )
-treatExtarctionSubscriptionStatus.setMaxAccess("read-only")
+threatExtractionSubscriptionStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionSubscriptionStatus.setStatus("current")
-_TreatExtarctionSubscriptionExpDate_Type = DisplayString
-_TreatExtarctionSubscriptionExpDate_Object = MibScalar
-treatExtarctionSubscriptionExpDate = _TreatExtarctionSubscriptionExpDate_Object(
+    threatExtractionSubscriptionStatus.setStatus("current")
+_ThreatExtractionSubscriptionExpDate_Type = DisplayString
+_ThreatExtractionSubscriptionExpDate_Object = MibScalar
+threatExtractionSubscriptionExpDate = _ThreatExtractionSubscriptionExpDate_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 1, 2),
-    _TreatExtarctionSubscriptionExpDate_Type()
+    _ThreatExtractionSubscriptionExpDate_Type()
 )
-treatExtarctionSubscriptionExpDate.setMaxAccess("read-only")
+threatExtractionSubscriptionExpDate.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionSubscriptionExpDate.setStatus("current")
-_TreatExtarctionSubscriptionDesc_Type = DisplayString
-_TreatExtarctionSubscriptionDesc_Object = MibScalar
-treatExtarctionSubscriptionDesc = _TreatExtarctionSubscriptionDesc_Object(
+    threatExtractionSubscriptionExpDate.setStatus("current")
+_ThreatExtractionSubscriptionDesc_Type = DisplayString
+_ThreatExtractionSubscriptionDesc_Object = MibScalar
+threatExtractionSubscriptionDesc = _ThreatExtractionSubscriptionDesc_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 1, 3),
-    _TreatExtarctionSubscriptionDesc_Type()
+    _ThreatExtractionSubscriptionDesc_Type()
 )
-treatExtarctionSubscriptionDesc.setMaxAccess("read-only")
+threatExtractionSubscriptionDesc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionSubscriptionDesc.setStatus("current")
-_TreatExtarctionStatistics_ObjectIdentity = ObjectIdentity
-treatExtarctionStatistics = _TreatExtarctionStatistics_ObjectIdentity(
+    threatExtractionSubscriptionDesc.setStatus("current")
+_ThreatExtractionStatistics_ObjectIdentity = ObjectIdentity
+threatExtractionStatistics = _ThreatExtractionStatistics_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 2)
 )
-_TreatExtarctionTotalScannedAttachments_Type = Integer32
-_TreatExtarctionTotalScannedAttachments_Object = MibScalar
-treatExtarctionTotalScannedAttachments = _TreatExtarctionTotalScannedAttachments_Object(
+_ThreatExtractionTotalScannedAttachments_Type = Integer32
+_ThreatExtractionTotalScannedAttachments_Object = MibScalar
+threatExtractionTotalScannedAttachments = _ThreatExtractionTotalScannedAttachments_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 2, 1),
-    _TreatExtarctionTotalScannedAttachments_Type()
+    _ThreatExtractionTotalScannedAttachments_Type()
 )
-treatExtarctionTotalScannedAttachments.setMaxAccess("read-only")
+threatExtractionTotalScannedAttachments.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionTotalScannedAttachments.setStatus("current")
-_TreatExtarctionCleanedAttachments_Type = Integer32
-_TreatExtarctionCleanedAttachments_Object = MibScalar
-treatExtarctionCleanedAttachments = _TreatExtarctionCleanedAttachments_Object(
+    threatExtractionTotalScannedAttachments.setStatus("current")
+_ThreatExtractionCleanedAttachments_Type = Integer32
+_ThreatExtractionCleanedAttachments_Object = MibScalar
+threatExtractionCleanedAttachments = _ThreatExtractionCleanedAttachments_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 2, 2),
-    _TreatExtarctionCleanedAttachments_Type()
+    _ThreatExtractionCleanedAttachments_Type()
 )
-treatExtarctionCleanedAttachments.setMaxAccess("read-only")
+threatExtractionCleanedAttachments.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionCleanedAttachments.setStatus("current")
-_TreatExtarctionOriginalAttachmentsAccesses_Type = Integer32
-_TreatExtarctionOriginalAttachmentsAccesses_Object = MibScalar
-treatExtarctionOriginalAttachmentsAccesses = _TreatExtarctionOriginalAttachmentsAccesses_Object(
+    threatExtractionCleanedAttachments.setStatus("current")
+_ThreatExtractionOriginalAttachmentsAccesses_Type = Integer32
+_ThreatExtractionOriginalAttachmentsAccesses_Object = MibScalar
+threatExtractionOriginalAttachmentsAccesses = _ThreatExtractionOriginalAttachmentsAccesses_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 2, 3),
-    _TreatExtarctionOriginalAttachmentsAccesses_Type()
+    _ThreatExtractionOriginalAttachmentsAccesses_Type()
 )
-treatExtarctionOriginalAttachmentsAccesses.setMaxAccess("read-only")
+threatExtractionOriginalAttachmentsAccesses.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionOriginalAttachmentsAccesses.setStatus("current")
-_TreatExtarctionStatusCode_Type = Integer32
-_TreatExtarctionStatusCode_Object = MibScalar
-treatExtarctionStatusCode = _TreatExtarctionStatusCode_Object(
+    threatExtractionOriginalAttachmentsAccesses.setStatus("current")
+_ThreatExtractionStatusCode_Type = Integer32
+_ThreatExtractionStatusCode_Object = MibScalar
+threatExtractionStatusCode = _ThreatExtractionStatusCode_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 101),
-    _TreatExtarctionStatusCode_Type()
+    _ThreatExtractionStatusCode_Type()
 )
-treatExtarctionStatusCode.setMaxAccess("read-only")
+threatExtractionStatusCode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionStatusCode.setStatus("current")
-_TreatExtarctionStatusShortDesc_Type = DisplayString
-_TreatExtarctionStatusShortDesc_Object = MibScalar
-treatExtarctionStatusShortDesc = _TreatExtarctionStatusShortDesc_Object(
+    threatExtractionStatusCode.setStatus("current")
+_ThreatExtractionStatusShortDesc_Type = DisplayString
+_ThreatExtractionStatusShortDesc_Object = MibScalar
+threatExtractionStatusShortDesc = _ThreatExtractionStatusShortDesc_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 102),
-    _TreatExtarctionStatusShortDesc_Type()
+    _ThreatExtractionStatusShortDesc_Type()
 )
-treatExtarctionStatusShortDesc.setMaxAccess("read-only")
+threatExtractionStatusShortDesc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionStatusShortDesc.setStatus("current")
-_TreatExtarctionStatusLongDesc_Type = DisplayString
-_TreatExtarctionStatusLongDesc_Object = MibScalar
-treatExtarctionStatusLongDesc = _TreatExtarctionStatusLongDesc_Object(
+    threatExtractionStatusShortDesc.setStatus("current")
+_ThreatExtractionStatusLongDesc_Type = DisplayString
+_ThreatExtractionStatusLongDesc_Object = MibScalar
+threatExtractionStatusLongDesc = _ThreatExtractionStatusLongDesc_Object(
     (1, 3, 6, 1, 4, 1, 2620, 1, 50, 103),
-    _TreatExtarctionStatusLongDesc_Type()
+    _ThreatExtractionStatusLongDesc_Type()
 )
-treatExtarctionStatusLongDesc.setMaxAccess("read-only")
+threatExtractionStatusLongDesc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    treatExtarctionStatusLongDesc.setStatus("current")
+    threatExtractionStatusLongDesc.setStatus("current")
+_ThreatExtractionEngineVersion_Type = DisplayString
+_ThreatExtractionEngineVersion_Object = MibScalar
+threatExtractionEngineVersion = _ThreatExtractionEngineVersion_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 50, 104),
+    _ThreatExtractionEngineVersion_Type()
+)
+threatExtractionEngineVersion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    threatExtractionEngineVersion.setStatus("current")
+_VsecController_ObjectIdentity = ObjectIdentity
+vsecController = _VsecController_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52)
+)
+_VsecVsecStatus_Type = DisplayString
+_VsecVsecStatus_Object = MibScalar
+vsecVsecStatus = _VsecVsecStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 1),
+    _VsecVsecStatus_Type()
+)
+vsecVsecStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecVsecStatus.setStatus("current")
+_VsecNumberOfDisconnectedDataCenters_Type = Unsigned32
+_VsecNumberOfDisconnectedDataCenters_Object = MibScalar
+vsecNumberOfDisconnectedDataCenters = _VsecNumberOfDisconnectedDataCenters_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 2),
+    _VsecNumberOfDisconnectedDataCenters_Type()
+)
+vsecNumberOfDisconnectedDataCenters.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecNumberOfDisconnectedDataCenters.setStatus("current")
+_VsecTotalNumberOfDataCenters_Type = Unsigned32
+_VsecTotalNumberOfDataCenters_Object = MibScalar
+vsecTotalNumberOfDataCenters = _VsecTotalNumberOfDataCenters_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 3),
+    _VsecTotalNumberOfDataCenters_Type()
+)
+vsecTotalNumberOfDataCenters.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecTotalNumberOfDataCenters.setStatus("current")
+_VsecTotalNumberOfImportedDataCenterObjects_Type = Unsigned32
+_VsecTotalNumberOfImportedDataCenterObjects_Object = MibScalar
+vsecTotalNumberOfImportedDataCenterObjects = _VsecTotalNumberOfImportedDataCenterObjects_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 4),
+    _VsecTotalNumberOfImportedDataCenterObjects_Type()
+)
+vsecTotalNumberOfImportedDataCenterObjects.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecTotalNumberOfImportedDataCenterObjects.setStatus("current")
+_VsecTotalNumberOfGwWithDataCenterObjects_Type = Unsigned32
+_VsecTotalNumberOfGwWithDataCenterObjects_Object = MibScalar
+vsecTotalNumberOfGwWithDataCenterObjects = _VsecTotalNumberOfGwWithDataCenterObjects_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 5),
+    _VsecTotalNumberOfGwWithDataCenterObjects_Type()
+)
+vsecTotalNumberOfGwWithDataCenterObjects.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecTotalNumberOfGwWithDataCenterObjects.setStatus("current")
+_VsecDataCenterTable_Object = MibTable
+vsecDataCenterTable = _VsecDataCenterTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6)
+)
+if mibBuilder.loadTexts:
+    vsecDataCenterTable.setStatus("current")
+_VsecDataCenterEntry_Object = MibTableRow
+vsecDataCenterEntry = _VsecDataCenterEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1)
+)
+vsecDataCenterEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "vsecDataCenterIndex"),
+)
+if mibBuilder.loadTexts:
+    vsecDataCenterEntry.setStatus("current")
+_VsecDataCenterIndex_Type = Unsigned32
+_VsecDataCenterIndex_Object = MibTableColumn
+vsecDataCenterIndex = _VsecDataCenterIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1, 1),
+    _VsecDataCenterIndex_Type()
+)
+vsecDataCenterIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vsecDataCenterIndex.setStatus("current")
+_VsecDataCenterName_Type = DisplayString
+_VsecDataCenterName_Object = MibTableColumn
+vsecDataCenterName = _VsecDataCenterName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1, 2),
+    _VsecDataCenterName_Type()
+)
+vsecDataCenterName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecDataCenterName.setStatus("current")
+_VsecDataCenterType_Type = DisplayString
+_VsecDataCenterType_Object = MibTableColumn
+vsecDataCenterType = _VsecDataCenterType_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1, 3),
+    _VsecDataCenterType_Type()
+)
+vsecDataCenterType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecDataCenterType.setStatus("current")
+_VsecConnectionStatus_Type = DisplayString
+_VsecConnectionStatus_Object = MibTableColumn
+vsecConnectionStatus = _VsecConnectionStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1, 4),
+    _VsecConnectionStatus_Type()
+)
+vsecConnectionStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecConnectionStatus.setStatus("current")
+_VsecNumberOfImportedObjects_Type = Unsigned32
+_VsecNumberOfImportedObjects_Object = MibTableColumn
+vsecNumberOfImportedObjects = _VsecNumberOfImportedObjects_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1, 6),
+    _VsecNumberOfImportedObjects_Type()
+)
+vsecNumberOfImportedObjects.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecNumberOfImportedObjects.setStatus("current")
+_VsecNumberOfAutoUpdate_Type = Unsigned32
+_VsecNumberOfAutoUpdate_Object = MibTableColumn
+vsecNumberOfAutoUpdate = _VsecNumberOfAutoUpdate_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 6, 1, 7),
+    _VsecNumberOfAutoUpdate_Type()
+)
+vsecNumberOfAutoUpdate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecNumberOfAutoUpdate.setStatus("current")
+_VsecEnforcingGatewaysTable_Object = MibTable
+vsecEnforcingGatewaysTable = _VsecEnforcingGatewaysTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7)
+)
+if mibBuilder.loadTexts:
+    vsecEnforcingGatewaysTable.setStatus("current")
+_VsecEnforcingGatewayEntry_Object = MibTableRow
+vsecEnforcingGatewayEntry = _VsecEnforcingGatewayEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7, 1)
+)
+vsecEnforcingGatewayEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "vsecGatewayIndex"),
+)
+if mibBuilder.loadTexts:
+    vsecEnforcingGatewayEntry.setStatus("current")
+_VsecGatewayIndex_Type = Unsigned32
+_VsecGatewayIndex_Object = MibTableColumn
+vsecGatewayIndex = _VsecGatewayIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7, 1, 1),
+    _VsecGatewayIndex_Type()
+)
+vsecGatewayIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vsecGatewayIndex.setStatus("current")
+_VsecGatewayName_Type = DisplayString
+_VsecGatewayName_Object = MibTableColumn
+vsecGatewayName = _VsecGatewayName_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7, 1, 2),
+    _VsecGatewayName_Type()
+)
+vsecGatewayName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecGatewayName.setStatus("current")
+_VsecGatewayIP_Type = DisplayString
+_VsecGatewayIP_Object = MibTableColumn
+vsecGatewayIP = _VsecGatewayIP_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7, 1, 3),
+    _VsecGatewayIP_Type()
+)
+vsecGatewayIP.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecGatewayIP.setStatus("current")
+_VsecGatewayVersion_Type = DisplayString
+_VsecGatewayVersion_Object = MibTableColumn
+vsecGatewayVersion = _VsecGatewayVersion_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7, 1, 4),
+    _VsecGatewayVersion_Type()
+)
+vsecGatewayVersion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecGatewayVersion.setStatus("current")
+_VsecGatewayUpdateSucceeded_Type = DisplayString
+_VsecGatewayUpdateSucceeded_Object = MibTableColumn
+vsecGatewayUpdateSucceeded = _VsecGatewayUpdateSucceeded_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 52, 7, 1, 5),
+    _VsecGatewayUpdateSucceeded_Type()
+)
+vsecGatewayUpdateSucceeded.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vsecGatewayUpdateSucceeded.setStatus("current")
+_Ips_ObjectIdentity = ObjectIdentity
+ips = _Ips_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53)
+)
+_IpsStatus_Type = DisplayString
+_IpsStatus_Object = MibScalar
+ipsStatus = _IpsStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 1),
+    _IpsStatus_Type()
+)
+ipsStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsStatus.setStatus("current")
+_IpsUpdateStatusInfo_ObjectIdentity = ObjectIdentity
+ipsUpdateStatusInfo = _IpsUpdateStatusInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 11)
+)
+_IpsUpdateStatus_Type = DisplayString
+_IpsUpdateStatus_Object = MibScalar
+ipsUpdateStatus = _IpsUpdateStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 11, 1),
+    _IpsUpdateStatus_Type()
+)
+ipsUpdateStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsUpdateStatus.setStatus("current")
+_IpsUpdateDescription_Type = DisplayString
+_IpsUpdateDescription_Object = MibScalar
+ipsUpdateDescription = _IpsUpdateDescription_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 11, 2),
+    _IpsUpdateDescription_Type()
+)
+ipsUpdateDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsUpdateDescription.setStatus("current")
+_IpsNextUpdateDescription_Type = DisplayString
+_IpsNextUpdateDescription_Object = MibScalar
+ipsNextUpdateDescription = _IpsNextUpdateDescription_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 11, 3),
+    _IpsNextUpdateDescription_Type()
+)
+ipsNextUpdateDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsNextUpdateDescription.setStatus("current")
+_IpsDBVersion_Type = DisplayString
+_IpsDBVersion_Object = MibScalar
+ipsDBVersion = _IpsDBVersion_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 11, 4),
+    _IpsDBVersion_Type()
+)
+ipsDBVersion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsDBVersion.setStatus("current")
+_IpsState_Type = Unsigned32
+_IpsState_Object = MibScalar
+ipsState = _IpsState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 101),
+    _IpsState_Type()
+)
+ipsState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsState.setStatus("current")
+_IpsStateShortDesc_Type = DisplayString
+_IpsStateShortDesc_Object = MibScalar
+ipsStateShortDesc = _IpsStateShortDesc_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 102),
+    _IpsStateShortDesc_Type()
+)
+ipsStateShortDesc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsStateShortDesc.setStatus("current")
+_IpsStateLongDesc_Type = DisplayString
+_IpsStateLongDesc_Object = MibScalar
+ipsStateLongDesc = _IpsStateLongDesc_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 53, 103),
+    _IpsStateLongDesc_Type()
+)
+ipsStateLongDesc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipsStateLongDesc.setStatus("current")
+_HttpsInspection_ObjectIdentity = ObjectIdentity
+httpsInspection = _HttpsInspection_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54)
+)
+_HttpsInspectionStatus_Type = DisplayString
+_HttpsInspectionStatus_Object = MibScalar
+httpsInspectionStatus = _HttpsInspectionStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 1),
+    _HttpsInspectionStatus_Type()
+)
+httpsInspectionStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    httpsInspectionStatus.setStatus("current")
+_HttpsInspectionStatusDescription_Type = DisplayString
+_HttpsInspectionStatusDescription_Object = MibScalar
+httpsInspectionStatusDescription = _HttpsInspectionStatusDescription_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 2),
+    _HttpsInspectionStatusDescription_Type()
+)
+httpsInspectionStatusDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    httpsInspectionStatusDescription.setStatus("current")
+_HsmStatus_ObjectIdentity = ObjectIdentity
+hsmStatus = _HsmStatus_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3)
+)
+_HsmEnabled_Type = DisplayString
+_HsmEnabled_Object = MibScalar
+hsmEnabled = _HsmEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3, 1),
+    _HsmEnabled_Type()
+)
+hsmEnabled.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hsmEnabled.setStatus("current")
+_HsmEnabledDescription_Type = DisplayString
+_HsmEnabledDescription_Object = MibScalar
+hsmEnabledDescription = _HsmEnabledDescription_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3, 2),
+    _HsmEnabledDescription_Type()
+)
+hsmEnabledDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hsmEnabledDescription.setStatus("current")
+_HsmPartitionAccess_Type = DisplayString
+_HsmPartitionAccess_Object = MibScalar
+hsmPartitionAccess = _HsmPartitionAccess_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3, 3),
+    _HsmPartitionAccess_Type()
+)
+hsmPartitionAccess.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hsmPartitionAccess.setStatus("current")
+_HsmPartitionAccessDescription_Type = DisplayString
+_HsmPartitionAccessDescription_Object = MibScalar
+hsmPartitionAccessDescription = _HsmPartitionAccessDescription_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3, 4),
+    _HsmPartitionAccessDescription_Type()
+)
+hsmPartitionAccessDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hsmPartitionAccessDescription.setStatus("current")
+_OutboundStatus_Type = DisplayString
+_OutboundStatus_Object = MibScalar
+outboundStatus = _OutboundStatus_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3, 5),
+    _OutboundStatus_Type()
+)
+outboundStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    outboundStatus.setStatus("current")
+_OutboundStatusDescription_Type = DisplayString
+_OutboundStatusDescription_Object = MibScalar
+outboundStatusDescription = _OutboundStatusDescription_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 54, 3, 6),
+    _OutboundStatusDescription_Type()
+)
+outboundStatusDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    outboundStatusDescription.setStatus("current")
+_Mho_ObjectIdentity = ObjectIdentity
+mho = _Mho_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55)
+)
+_MhoPortsStatus_ObjectIdentity = ObjectIdentity
+mhoPortsStatus = _MhoPortsStatus_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1)
+)
+_MhoRxTable_Object = MibTable
+mhoRxTable = _MhoRxTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1)
+)
+if mibBuilder.loadTexts:
+    mhoRxTable.setStatus("current")
+_MhoRxEntry_Object = MibTableRow
+mhoRxEntry = _MhoRxEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1)
+)
+mhoRxEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "mhoRxPortIndex"),
+)
+if mibBuilder.loadTexts:
+    mhoRxEntry.setStatus("current")
+_MhoRxPortIndex_Type = Unsigned32
+_MhoRxPortIndex_Object = MibTableColumn
+mhoRxPortIndex = _MhoRxPortIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 1),
+    _MhoRxPortIndex_Type()
+)
+mhoRxPortIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    mhoRxPortIndex.setStatus("current")
+_MhoRxPortLabel_Type = DisplayString
+_MhoRxPortLabel_Object = MibTableColumn
+mhoRxPortLabel = _MhoRxPortLabel_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 2),
+    _MhoRxPortLabel_Type()
+)
+mhoRxPortLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxPortLabel.setStatus("current")
+_MhoRxUcast_Type = Counter64
+_MhoRxUcast_Object = MibTableColumn
+mhoRxUcast = _MhoRxUcast_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 3),
+    _MhoRxUcast_Type()
+)
+mhoRxUcast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxUcast.setStatus("current")
+_MhoRxMcast_Type = Counter64
+_MhoRxMcast_Object = MibTableColumn
+mhoRxMcast = _MhoRxMcast_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 4),
+    _MhoRxMcast_Type()
+)
+mhoRxMcast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxMcast.setStatus("current")
+_MhoRxBcast_Type = Counter64
+_MhoRxBcast_Object = MibTableColumn
+mhoRxBcast = _MhoRxBcast_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 5),
+    _MhoRxBcast_Type()
+)
+mhoRxBcast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBcast.setStatus("current")
+_MhoRxErr_Type = Counter64
+_MhoRxErr_Object = MibTableColumn
+mhoRxErr = _MhoRxErr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 6),
+    _MhoRxErr_Type()
+)
+mhoRxErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxErr.setStatus("current")
+_MhoRxFrames_Type = Counter64
+_MhoRxFrames_Object = MibTableColumn
+mhoRxFrames = _MhoRxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 7),
+    _MhoRxFrames_Type()
+)
+mhoRxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxFrames.setStatus("current")
+_MhoRxBytes_Type = Counter64
+_MhoRxBytes_Object = MibTableColumn
+mhoRxBytes = _MhoRxBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 8),
+    _MhoRxBytes_Type()
+)
+mhoRxBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBytes.setStatus("current")
+_MhoRxFcsErr_Type = Counter64
+_MhoRxFcsErr_Object = MibTableColumn
+mhoRxFcsErr = _MhoRxFcsErr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 1, 1, 9),
+    _MhoRxFcsErr_Type()
+)
+mhoRxFcsErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxFcsErr.setStatus("current")
+_MhoTxTable_Object = MibTable
+mhoTxTable = _MhoTxTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2)
+)
+if mibBuilder.loadTexts:
+    mhoTxTable.setStatus("current")
+_MhoTxEntry_Object = MibTableRow
+mhoTxEntry = _MhoTxEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1)
+)
+mhoTxEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "mhoTxPortIndex"),
+)
+if mibBuilder.loadTexts:
+    mhoTxEntry.setStatus("current")
+_MhoTxPortIndex_Type = Unsigned32
+_MhoTxPortIndex_Object = MibTableColumn
+mhoTxPortIndex = _MhoTxPortIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 1),
+    _MhoTxPortIndex_Type()
+)
+mhoTxPortIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    mhoTxPortIndex.setStatus("current")
+_MhoTxPortLabel_Type = DisplayString
+_MhoTxPortLabel_Object = MibTableColumn
+mhoTxPortLabel = _MhoTxPortLabel_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 2),
+    _MhoTxPortLabel_Type()
+)
+mhoTxPortLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxPortLabel.setStatus("current")
+_MhoTxUcast_Type = Counter64
+_MhoTxUcast_Object = MibTableColumn
+mhoTxUcast = _MhoTxUcast_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 3),
+    _MhoTxUcast_Type()
+)
+mhoTxUcast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxUcast.setStatus("current")
+_MhoTxMcast_Type = Counter64
+_MhoTxMcast_Object = MibTableColumn
+mhoTxMcast = _MhoTxMcast_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 4),
+    _MhoTxMcast_Type()
+)
+mhoTxMcast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxMcast.setStatus("current")
+_MhoTxBcast_Type = Counter64
+_MhoTxBcast_Object = MibTableColumn
+mhoTxBcast = _MhoTxBcast_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 5),
+    _MhoTxBcast_Type()
+)
+mhoTxBcast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxBcast.setStatus("current")
+_MhoTxErr_Type = Counter64
+_MhoTxErr_Object = MibTableColumn
+mhoTxErr = _MhoTxErr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 6),
+    _MhoTxErr_Type()
+)
+mhoTxErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxErr.setStatus("current")
+_MhoTxFrames_Type = Counter64
+_MhoTxFrames_Object = MibTableColumn
+mhoTxFrames = _MhoTxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 7),
+    _MhoTxFrames_Type()
+)
+mhoTxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxFrames.setStatus("current")
+_MhoTxBytes_Type = Counter64
+_MhoTxBytes_Object = MibTableColumn
+mhoTxBytes = _MhoTxBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 2, 1, 8),
+    _MhoTxBytes_Type()
+)
+mhoTxBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoTxBytes.setStatus("current")
+_MhoRxBuffTable_Object = MibTable
+mhoRxBuffTable = _MhoRxBuffTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3)
+)
+if mibBuilder.loadTexts:
+    mhoRxBuffTable.setStatus("current")
+_MhoRxBuffEntry_Object = MibTableRow
+mhoRxBuffEntry = _MhoRxBuffEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1)
+)
+mhoRxBuffEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "mhoRxBuffPortIndex"),
+)
+if mibBuilder.loadTexts:
+    mhoRxBuffEntry.setStatus("current")
+_MhoRxBuffPortIndex_Type = Unsigned32
+_MhoRxBuffPortIndex_Object = MibTableColumn
+mhoRxBuffPortIndex = _MhoRxBuffPortIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 1),
+    _MhoRxBuffPortIndex_Type()
+)
+mhoRxBuffPortIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    mhoRxBuffPortIndex.setStatus("current")
+_MhoRxBuffPortLabel_Type = DisplayString
+_MhoRxBuffPortLabel_Object = MibTableColumn
+mhoRxBuffPortLabel = _MhoRxBuffPortLabel_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 2),
+    _MhoRxBuffPortLabel_Type()
+)
+mhoRxBuffPortLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuffPortLabel.setStatus("current")
+_MhoRxBuff0Frames_Type = Counter64
+_MhoRxBuff0Frames_Object = MibTableColumn
+mhoRxBuff0Frames = _MhoRxBuff0Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 3),
+    _MhoRxBuff0Frames_Type()
+)
+mhoRxBuff0Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff0Frames.setStatus("current")
+_MhoRxBuff0Octet_Type = Counter64
+_MhoRxBuff0Octet_Object = MibTableColumn
+mhoRxBuff0Octet = _MhoRxBuff0Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 4),
+    _MhoRxBuff0Octet_Type()
+)
+mhoRxBuff0Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff0Octet.setStatus("current")
+_MhoRxBuff0Discard_Type = Counter64
+_MhoRxBuff0Discard_Object = MibTableColumn
+mhoRxBuff0Discard = _MhoRxBuff0Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 5),
+    _MhoRxBuff0Discard_Type()
+)
+mhoRxBuff0Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff0Discard.setStatus("current")
+_MhoRxBuff1Frames_Type = Counter64
+_MhoRxBuff1Frames_Object = MibTableColumn
+mhoRxBuff1Frames = _MhoRxBuff1Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 6),
+    _MhoRxBuff1Frames_Type()
+)
+mhoRxBuff1Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff1Frames.setStatus("current")
+_MhoRxBuff1Octet_Type = Counter64
+_MhoRxBuff1Octet_Object = MibTableColumn
+mhoRxBuff1Octet = _MhoRxBuff1Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 7),
+    _MhoRxBuff1Octet_Type()
+)
+mhoRxBuff1Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff1Octet.setStatus("current")
+_MhoRxBuff1Discard_Type = Counter64
+_MhoRxBuff1Discard_Object = MibTableColumn
+mhoRxBuff1Discard = _MhoRxBuff1Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 8),
+    _MhoRxBuff1Discard_Type()
+)
+mhoRxBuff1Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff1Discard.setStatus("current")
+_MhoRxBuff2Frames_Type = Counter64
+_MhoRxBuff2Frames_Object = MibTableColumn
+mhoRxBuff2Frames = _MhoRxBuff2Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 9),
+    _MhoRxBuff2Frames_Type()
+)
+mhoRxBuff2Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff2Frames.setStatus("current")
+_MhoRxBuff2Octet_Type = Counter64
+_MhoRxBuff2Octet_Object = MibTableColumn
+mhoRxBuff2Octet = _MhoRxBuff2Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 10),
+    _MhoRxBuff2Octet_Type()
+)
+mhoRxBuff2Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff2Octet.setStatus("current")
+_MhoRxBuff2Discard_Type = Counter64
+_MhoRxBuff2Discard_Object = MibTableColumn
+mhoRxBuff2Discard = _MhoRxBuff2Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 11),
+    _MhoRxBuff2Discard_Type()
+)
+mhoRxBuff2Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff2Discard.setStatus("current")
+_MhoRxBuff3Frames_Type = Counter64
+_MhoRxBuff3Frames_Object = MibTableColumn
+mhoRxBuff3Frames = _MhoRxBuff3Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 12),
+    _MhoRxBuff3Frames_Type()
+)
+mhoRxBuff3Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff3Frames.setStatus("current")
+_MhoRxBuff3Octet_Type = Counter64
+_MhoRxBuff3Octet_Object = MibTableColumn
+mhoRxBuff3Octet = _MhoRxBuff3Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 13),
+    _MhoRxBuff3Octet_Type()
+)
+mhoRxBuff3Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff3Octet.setStatus("current")
+_MhoRxBuff3Discard_Type = Counter64
+_MhoRxBuff3Discard_Object = MibTableColumn
+mhoRxBuff3Discard = _MhoRxBuff3Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 14),
+    _MhoRxBuff3Discard_Type()
+)
+mhoRxBuff3Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff3Discard.setStatus("current")
+_MhoRxBuff4Frames_Type = Counter64
+_MhoRxBuff4Frames_Object = MibTableColumn
+mhoRxBuff4Frames = _MhoRxBuff4Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 15),
+    _MhoRxBuff4Frames_Type()
+)
+mhoRxBuff4Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff4Frames.setStatus("current")
+_MhoRxBuff4Octet_Type = Counter64
+_MhoRxBuff4Octet_Object = MibTableColumn
+mhoRxBuff4Octet = _MhoRxBuff4Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 16),
+    _MhoRxBuff4Octet_Type()
+)
+mhoRxBuff4Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff4Octet.setStatus("current")
+_MhoRxBuff4Discard_Type = Counter64
+_MhoRxBuff4Discard_Object = MibTableColumn
+mhoRxBuff4Discard = _MhoRxBuff4Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 17),
+    _MhoRxBuff4Discard_Type()
+)
+mhoRxBuff4Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff4Discard.setStatus("current")
+_MhoRxBuff5Frames_Type = Counter64
+_MhoRxBuff5Frames_Object = MibTableColumn
+mhoRxBuff5Frames = _MhoRxBuff5Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 18),
+    _MhoRxBuff5Frames_Type()
+)
+mhoRxBuff5Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff5Frames.setStatus("current")
+_MhoRxBuff5Octet_Type = Counter64
+_MhoRxBuff5Octet_Object = MibTableColumn
+mhoRxBuff5Octet = _MhoRxBuff5Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 19),
+    _MhoRxBuff5Octet_Type()
+)
+mhoRxBuff5Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff5Octet.setStatus("current")
+_MhoRxBuff5Discard_Type = Counter64
+_MhoRxBuff5Discard_Object = MibTableColumn
+mhoRxBuff5Discard = _MhoRxBuff5Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 20),
+    _MhoRxBuff5Discard_Type()
+)
+mhoRxBuff5Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff5Discard.setStatus("current")
+_MhoRxBuff6Frames_Type = Counter64
+_MhoRxBuff6Frames_Object = MibTableColumn
+mhoRxBuff6Frames = _MhoRxBuff6Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 21),
+    _MhoRxBuff6Frames_Type()
+)
+mhoRxBuff6Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff6Frames.setStatus("current")
+_MhoRxBuff6Octet_Type = Counter64
+_MhoRxBuff6Octet_Object = MibTableColumn
+mhoRxBuff6Octet = _MhoRxBuff6Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 22),
+    _MhoRxBuff6Octet_Type()
+)
+mhoRxBuff6Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff6Octet.setStatus("current")
+_MhoRxBuff6Discard_Type = Counter64
+_MhoRxBuff6Discard_Object = MibTableColumn
+mhoRxBuff6Discard = _MhoRxBuff6Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 23),
+    _MhoRxBuff6Discard_Type()
+)
+mhoRxBuff6Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff6Discard.setStatus("current")
+_MhoRxBuff7Frames_Type = Counter64
+_MhoRxBuff7Frames_Object = MibTableColumn
+mhoRxBuff7Frames = _MhoRxBuff7Frames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 24),
+    _MhoRxBuff7Frames_Type()
+)
+mhoRxBuff7Frames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff7Frames.setStatus("current")
+_MhoRxBuff7Octet_Type = Counter64
+_MhoRxBuff7Octet_Object = MibTableColumn
+mhoRxBuff7Octet = _MhoRxBuff7Octet_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 25),
+    _MhoRxBuff7Octet_Type()
+)
+mhoRxBuff7Octet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff7Octet.setStatus("current")
+_MhoRxBuff7Discard_Type = Counter64
+_MhoRxBuff7Discard_Object = MibTableColumn
+mhoRxBuff7Discard = _MhoRxBuff7Discard_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 3, 1, 26),
+    _MhoRxBuff7Discard_Type()
+)
+mhoRxBuff7Discard.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoRxBuff7Discard.setStatus("current")
+_MhoStateTable_Object = MibTable
+mhoStateTable = _MhoStateTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4)
+)
+if mibBuilder.loadTexts:
+    mhoStateTable.setStatus("current")
+_MhoStateEntry_Object = MibTableRow
+mhoStateEntry = _MhoStateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4, 1)
+)
+mhoStateEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "mhoStatePortIndex"),
+)
+if mibBuilder.loadTexts:
+    mhoStateEntry.setStatus("current")
+_MhoStatePortIndex_Type = Unsigned32
+_MhoStatePortIndex_Object = MibTableColumn
+mhoStatePortIndex = _MhoStatePortIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4, 1, 1),
+    _MhoStatePortIndex_Type()
+)
+mhoStatePortIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    mhoStatePortIndex.setStatus("current")
+_MhoStatePortLabel_Type = DisplayString
+_MhoStatePortLabel_Object = MibTableColumn
+mhoStatePortLabel = _MhoStatePortLabel_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4, 1, 2),
+    _MhoStatePortLabel_Type()
+)
+mhoStatePortLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoStatePortLabel.setStatus("current")
+_MhoStateLinkState_Type = DisplayString
+_MhoStateLinkState_Object = MibTableColumn
+mhoStateLinkState = _MhoStateLinkState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4, 1, 3),
+    _MhoStateLinkState_Type()
+)
+mhoStateLinkState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoStateLinkState.setStatus("current")
+_MhoStateAdminState_Type = DisplayString
+_MhoStateAdminState_Object = MibTableColumn
+mhoStateAdminState = _MhoStateAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4, 1, 4),
+    _MhoStateAdminState_Type()
+)
+mhoStateAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoStateAdminState.setStatus("current")
+_MhoStateSpeed_Type = DisplayString
+_MhoStateSpeed_Object = MibTableColumn
+mhoStateSpeed = _MhoStateSpeed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 4, 1, 5),
+    _MhoStateSpeed_Type()
+)
+mhoStateSpeed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoStateSpeed.setStatus("current")
+_MhoSummaryTable_Object = MibTable
+mhoSummaryTable = _MhoSummaryTable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5)
+)
+if mibBuilder.loadTexts:
+    mhoSummaryTable.setStatus("current")
+_MhoSummaryEntry_Object = MibTableRow
+mhoSummaryEntry = _MhoSummaryEntry_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1)
+)
+mhoSummaryEntry.setIndexNames(
+    (0, "CHECKPOINT-MIB", "mhoSummaryPortIndex"),
+)
+if mibBuilder.loadTexts:
+    mhoSummaryEntry.setStatus("current")
+_MhoSummaryPortIndex_Type = Unsigned32
+_MhoSummaryPortIndex_Object = MibTableColumn
+mhoSummaryPortIndex = _MhoSummaryPortIndex_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 1),
+    _MhoSummaryPortIndex_Type()
+)
+mhoSummaryPortIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    mhoSummaryPortIndex.setStatus("current")
+_MhoSummaryPortLabel_Type = DisplayString
+_MhoSummaryPortLabel_Object = MibTableColumn
+mhoSummaryPortLabel = _MhoSummaryPortLabel_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 2),
+    _MhoSummaryPortLabel_Type()
+)
+mhoSummaryPortLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryPortLabel.setStatus("current")
+_MhoSummaryLinkState_Type = DisplayString
+_MhoSummaryLinkState_Object = MibTableColumn
+mhoSummaryLinkState = _MhoSummaryLinkState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 3),
+    _MhoSummaryLinkState_Type()
+)
+mhoSummaryLinkState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryLinkState.setStatus("current")
+_MhoSummaryAdminState_Type = DisplayString
+_MhoSummaryAdminState_Object = MibTableColumn
+mhoSummaryAdminState = _MhoSummaryAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 4),
+    _MhoSummaryAdminState_Type()
+)
+mhoSummaryAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryAdminState.setStatus("current")
+_MhoSummarySpeed_Type = DisplayString
+_MhoSummarySpeed_Object = MibTableColumn
+mhoSummarySpeed = _MhoSummarySpeed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 5),
+    _MhoSummarySpeed_Type()
+)
+mhoSummarySpeed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummarySpeed.setStatus("current")
+_MhoSummaryRxFcsErr_Type = Counter64
+_MhoSummaryRxFcsErr_Object = MibTableColumn
+mhoSummaryRxFcsErr = _MhoSummaryRxFcsErr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 6),
+    _MhoSummaryRxFcsErr_Type()
+)
+mhoSummaryRxFcsErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryRxFcsErr.setStatus("current")
+_MhoSummaryRxErr_Type = Counter64
+_MhoSummaryRxErr_Object = MibTableColumn
+mhoSummaryRxErr = _MhoSummaryRxErr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 7),
+    _MhoSummaryRxErr_Type()
+)
+mhoSummaryRxErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryRxErr.setStatus("current")
+_MhoSummaryRxFrames_Type = Counter64
+_MhoSummaryRxFrames_Object = MibTableColumn
+mhoSummaryRxFrames = _MhoSummaryRxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 8),
+    _MhoSummaryRxFrames_Type()
+)
+mhoSummaryRxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryRxFrames.setStatus("current")
+_MhoSummaryRxBytes_Type = Counter64
+_MhoSummaryRxBytes_Object = MibTableColumn
+mhoSummaryRxBytes = _MhoSummaryRxBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 9),
+    _MhoSummaryRxBytes_Type()
+)
+mhoSummaryRxBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryRxBytes.setStatus("current")
+_MhoSummaryTxErr_Type = Counter64
+_MhoSummaryTxErr_Object = MibTableColumn
+mhoSummaryTxErr = _MhoSummaryTxErr_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 10),
+    _MhoSummaryTxErr_Type()
+)
+mhoSummaryTxErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryTxErr.setStatus("current")
+_MhoSummaryTxFrames_Type = Counter64
+_MhoSummaryTxFrames_Object = MibTableColumn
+mhoSummaryTxFrames = _MhoSummaryTxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 11),
+    _MhoSummaryTxFrames_Type()
+)
+mhoSummaryTxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryTxFrames.setStatus("current")
+_MhoSummaryTxBytes_Type = Counter64
+_MhoSummaryTxBytes_Object = MibTableColumn
+mhoSummaryTxBytes = _MhoSummaryTxBytes_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 1, 5, 1, 12),
+    _MhoSummaryTxBytes_Type()
+)
+mhoSummaryTxBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoSummaryTxBytes.setStatus("current")
+_MhoAcls_ObjectIdentity = ObjectIdentity
+mhoAcls = _MhoAcls_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 2)
+)
+_MhoACLsUsed_Type = Counter64
+_MhoACLsUsed_Object = MibScalar
+mhoACLsUsed = _MhoACLsUsed_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 2, 1),
+    _MhoACLsUsed_Type()
+)
+mhoACLsUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoACLsUsed.setStatus("current")
+_MhoACLsTotal_Type = Counter64
+_MhoACLsTotal_Object = MibScalar
+mhoACLsTotal = _MhoACLsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 2, 2),
+    _MhoACLsTotal_Type()
+)
+mhoACLsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoACLsTotal.setStatus("current")
+_MhoACLsAvailable_Type = Counter64
+_MhoACLsAvailable_Object = MibScalar
+mhoACLsAvailable = _MhoACLsAvailable_Object(
+    (1, 3, 6, 1, 4, 1, 2620, 1, 55, 2, 3),
+    _MhoACLsAvailable_Type()
+)
+mhoACLsAvailable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mhoACLsAvailable.setStatus("current")
+_ChkpntMIBConformance_ObjectIdentity = ObjectIdentity
+chkpntMIBConformance = _ChkpntMIBConformance_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 2)
+)
+_ChkpntMIBCompliances_ObjectIdentity = ObjectIdentity
+chkpntMIBCompliances = _ChkpntMIBCompliances_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 1)
+)
+_ChkpntMIBGroups_ObjectIdentity = ObjectIdentity
+chkpntMIBGroups = _ChkpntMIBGroups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2)
+)
 _Tables_ObjectIdentity = ObjectIdentity
 tables = _Tables_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2620, 500)
@@ -16397,7 +24454,7 @@ raInternalIpAddr = _RaInternalIpAddr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 500, 9000, 1, 1),
     _RaInternalIpAddr_Type()
 )
-raInternalIpAddr.setMaxAccess("read-only")
+raInternalIpAddr.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     raInternalIpAddr.setStatus("current")
 _RaExternalIpAddr_Type = IpAddress
@@ -16409,32 +24466,7 @@ raExternalIpAddr = _RaExternalIpAddr_Object(
 raExternalIpAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     raExternalIpAddr.setStatus("current")
-
-
-class _RaUserState_Type(Integer32):
-    """Custom type raUserState based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(3,
-              4,
-              129,
-              130,
-              131,
-              132)
-        )
-    )
-    namedValues = NamedValues(
-        *(("active", 3),
-          ("destroy", 4),
-          ("idle", 129),
-          ("phase1", 130),
-          ("down", 131),
-          ("init", 132))
-    )
-
-
-_RaUserState_Type.__name__ = "Integer32"
+_RaUserState_Type = Integer32
 _RaUserState_Object = MibTableColumn
 raUserState = _RaUserState_Object(
     (1, 3, 6, 1, 4, 1, 2620, 500, 9000, 1, 20),
@@ -16599,7 +24631,7 @@ tunnelPeerIpAddr = _TunnelPeerIpAddr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 500, 9002, 1, 1),
     _TunnelPeerIpAddr_Type()
 )
-tunnelPeerIpAddr.setMaxAccess("read-only")
+tunnelPeerIpAddr.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     tunnelPeerIpAddr.setStatus("current")
 _TunnelPeerObjName_Type = DisplayString
@@ -16814,7 +24846,7 @@ permanentTunnelPeerIpAddr = _PermanentTunnelPeerIpAddr_Object(
     (1, 3, 6, 1, 4, 1, 2620, 500, 9003, 1, 1),
     _PermanentTunnelPeerIpAddr_Type()
 )
-permanentTunnelPeerIpAddr.setMaxAccess("read-only")
+permanentTunnelPeerIpAddr.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     permanentTunnelPeerIpAddr.setStatus("current")
 _PermanentTunnelPeerObjName_Type = DisplayString
@@ -16983,19 +25015,2208 @@ if mibBuilder.loadTexts:
 
 # Managed Objects groups
 
-
-# Notification objects
-
-fwTrap = NotificationType(
-    (1, 3, 6, 1, 4, 1, 2620, 1, 1, 0, 1)
+fwProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 1)
 )
-fwTrap.setObjects(
-    ("CHECKPOINT-MIB", "fwEvent")
+fwProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "fwPolicyName"),
+        ("CHECKPOINT-MIB", "fwInstallTime"),
+        ("CHECKPOINT-MIB", "fwNumConn"),
+        ("CHECKPOINT-MIB", "fwPeakNumConn"),
+        ("CHECKPOINT-MIB", "fwIspName"),
+        ("CHECKPOINT-MIB", "fwIspStatus"),
+        ("CHECKPOINT-MIB", "fwIspRole"),
+        ("CHECKPOINT-MIB", "unknown"),
+        ("CHECKPOINT-MIB", "fwIfName"),
+        ("CHECKPOINT-MIB", "fwAcceptPcktsIn"),
+        ("CHECKPOINT-MIB", "fwAcceptPcktsOut"),
+        ("CHECKPOINT-MIB", "fwAcceptBytesIn"),
+        ("CHECKPOINT-MIB", "fwAcceptBytesOut"),
+        ("CHECKPOINT-MIB", "fwDropPcktsIn"),
+        ("CHECKPOINT-MIB", "fwDropPcktsOut"),
+        ("CHECKPOINT-MIB", "fwRejectPcktsIn"),
+        ("CHECKPOINT-MIB", "fwRejectPcktsOut"),
+        ("CHECKPOINT-MIB", "fwLogIn"),
+        ("CHECKPOINT-MIB", "fwLogOut"),
+        ("CHECKPOINT-MIB", "fwConnTableLimit"),
+        ("CHECKPOINT-MIB", "fwAcceptedTotal"),
+        ("CHECKPOINT-MIB", "fwDroppedTotal"),
+        ("CHECKPOINT-MIB", "fwRejectedTotal"),
+        ("CHECKPOINT-MIB", "fwLoggedTotal"),
+        ("CHECKPOINT-MIB", "fwAcceptedBytesTotal"),
+        ("CHECKPOINT-MIB", "fwDroppedBytesTotal"),
+        ("CHECKPOINT-MIB", "fwRejectedBytesTotal"),
+        ("CHECKPOINT-MIB", "fwAcceptedBytesRates"),
+        ("CHECKPOINT-MIB", "fwAcceptedPcktsRates"),
+        ("CHECKPOINT-MIB", "fwConnsRate"),
+        ("CHECKPOINT-MIB", "fwIfName64"),
+        ("CHECKPOINT-MIB", "fwAcceptPcktsIn64"),
+        ("CHECKPOINT-MIB", "fwAcceptPcktsOut64"),
+        ("CHECKPOINT-MIB", "fwAcceptBytesIn64"),
+        ("CHECKPOINT-MIB", "fwAcceptBytesOut64"),
+        ("CHECKPOINT-MIB", "fwDropPcktsIn64"),
+        ("CHECKPOINT-MIB", "fwDropPcktsOut64"),
+        ("CHECKPOINT-MIB", "fwRejectPcktsIn64"),
+        ("CHECKPOINT-MIB", "fwRejectPcktsOut64"),
+        ("CHECKPOINT-MIB", "fwLogIn64"),
+        ("CHECKPOINT-MIB", "fwLogOut64"),
+        ("CHECKPOINT-MIB", "fwFullyUtilizedDrops"),
+        ("CHECKPOINT-MIB", "fwHmem-block-size"),
+        ("CHECKPOINT-MIB", "fwHmem-requested-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem-initial-allocated-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem-initial-allocated-blocks"),
+        ("CHECKPOINT-MIB", "fwHmem-initial-allocated-pools"),
+        ("CHECKPOINT-MIB", "fwHmem-current-allocated-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem-current-allocated-blocks"),
+        ("CHECKPOINT-MIB", "fwHmem-current-allocated-pools"),
+        ("CHECKPOINT-MIB", "fwHmem-maximum-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem-maximum-pools"),
+        ("CHECKPOINT-MIB", "fwHmem-bytes-used"),
+        ("CHECKPOINT-MIB", "fwHmem-blocks-used"),
+        ("CHECKPOINT-MIB", "fwHmem-bytes-unused"),
+        ("CHECKPOINT-MIB", "fwHmem-blocks-unused"),
+        ("CHECKPOINT-MIB", "fwHmem-bytes-peak"),
+        ("CHECKPOINT-MIB", "fwHmem-blocks-peak"),
+        ("CHECKPOINT-MIB", "fwHmem-bytes-internal-use"),
+        ("CHECKPOINT-MIB", "fwHmem-number-of-items"),
+        ("CHECKPOINT-MIB", "fwHmem-alloc-operations"),
+        ("CHECKPOINT-MIB", "fwHmem-free-operations"),
+        ("CHECKPOINT-MIB", "fwHmem-failed-alloc"),
+        ("CHECKPOINT-MIB", "fwHmem-failed-free"),
+        ("CHECKPOINT-MIB", "fwKmem-system-physical-mem"),
+        ("CHECKPOINT-MIB", "fwKmem-available-physical-mem"),
+        ("CHECKPOINT-MIB", "fwKmem-aix-heap-size"),
+        ("CHECKPOINT-MIB", "fwKmem-bytes-used"),
+        ("CHECKPOINT-MIB", "fwKmem-blocking-bytes-used"),
+        ("CHECKPOINT-MIB", "fwKmem-non-blocking-bytes-used"),
+        ("CHECKPOINT-MIB", "fwKmem-bytes-unused"),
+        ("CHECKPOINT-MIB", "fwKmem-bytes-peak"),
+        ("CHECKPOINT-MIB", "fwKmem-blocking-bytes-peak"),
+        ("CHECKPOINT-MIB", "fwKmem-non-blocking-bytes-peak"),
+        ("CHECKPOINT-MIB", "fwKmem-bytes-internal-use"),
+        ("CHECKPOINT-MIB", "fwKmem-number-of-items"),
+        ("CHECKPOINT-MIB", "fwKmem-alloc-operations"),
+        ("CHECKPOINT-MIB", "fwKmem-free-operations"),
+        ("CHECKPOINT-MIB", "fwKmem-failed-alloc"),
+        ("CHECKPOINT-MIB", "fwKmem-failed-free"),
+        ("CHECKPOINT-MIB", "fwInspect-packets"),
+        ("CHECKPOINT-MIB", "fwInspect-operations"),
+        ("CHECKPOINT-MIB", "fwInspect-lookups"),
+        ("CHECKPOINT-MIB", "fwInspect-record"),
+        ("CHECKPOINT-MIB", "fwInspect-extract"),
+        ("CHECKPOINT-MIB", "fwCookies-total"),
+        ("CHECKPOINT-MIB", "fwCookies-allocfwCookies-total"),
+        ("CHECKPOINT-MIB", "fwCookies-freefwCookies-total"),
+        ("CHECKPOINT-MIB", "fwCookies-dupfwCookies-total"),
+        ("CHECKPOINT-MIB", "fwCookies-getfwCookies-total"),
+        ("CHECKPOINT-MIB", "fwCookies-putfwCookies-total"),
+        ("CHECKPOINT-MIB", "fwCookies-lenfwCookies-total"),
+        ("CHECKPOINT-MIB", "fwChains-alloc"),
+        ("CHECKPOINT-MIB", "fwChains-free"),
+        ("CHECKPOINT-MIB", "fwFrag-fragments"),
+        ("CHECKPOINT-MIB", "fwFrag-expired"),
+        ("CHECKPOINT-MIB", "fwFrag-packets"),
+        ("CHECKPOINT-MIB", "fwUfpHitRatio"),
+        ("CHECKPOINT-MIB", "fwUfpInspected"),
+        ("CHECKPOINT-MIB", "fwUfpHits"),
+        ("CHECKPOINT-MIB", "fwSS-http-pid"),
+        ("CHECKPOINT-MIB", "fwSS-http-proto"),
+        ("CHECKPOINT-MIB", "fwSS-http-port"),
+        ("CHECKPOINT-MIB", "fwSS-http-logical-port"),
+        ("CHECKPOINT-MIB", "fwSS-http-max-avail-socket"),
+        ("CHECKPOINT-MIB", "fwSS-http-socket-in-use-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-socket-in-use-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-socket-in-use-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-auth-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-auth-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-auth-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-accepted-sess"),
+        ("CHECKPOINT-MIB", "fwSS-http-rejected-sess"),
+        ("CHECKPOINT-MIB", "fwSS-http-auth-failures"),
+        ("CHECKPOINT-MIB", "fwSS-http-ops-cvp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-ops-cvp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-ops-cvp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-ops-cvp-rej-sess"),
+        ("CHECKPOINT-MIB", "fwSS-http-ssl-encryp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-ssl-encryp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-ssl-encryp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-transp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-transp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-transp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-proxied-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-proxied-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-proxied-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-tunneled-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-tunneled-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-tunneled-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-ftp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-http-ftp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-http-ftp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-http-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-http-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-total"),
+        ("CHECKPOINT-MIB", "fwSS-http-scanned-total"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-total"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-URL-filter-category"),
+        ("CHECKPOINT-MIB", "fwSS-http-blocked-by-URL-block-list"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-URL-allow-list"),
+        ("CHECKPOINT-MIB", "fwSS-http-passed-by-URL-filter-category"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-pid"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-proto"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-port"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-logical-port"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-max-avail-socket"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-socket-in-use-max"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-socket-in-use-curr"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-socket-in-use-count"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-auth-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-auth-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-auth-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-accepted-sess"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-rejected-sess"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-auth-failures"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-ops-cvp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-ops-cvp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-ops-cvp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-ops-cvp-rej-sess"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-total"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-scanned-total"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-total"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-blocked-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-ftp-passed-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-pid"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-proto"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-port"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-logical-port"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-max-avail-socket"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-socket-in-use-max"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-socket-in-use-curr"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-socket-in-use-count"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-auth-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-auth-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-auth-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-accepted-sess"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-rejected-sess"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-auth-failures"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-telnet-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-pid"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-proto"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-port"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-logical-port"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-max-avail-socket"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-socket-in-use-max"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-socket-in-use-curr"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-socket-in-use-count"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-auth-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-auth-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-auth-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-accepted-sess"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-rejected-sess"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-auth-failures"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-rlogin-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-ufp-ops-ufp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-ufp-ops-ufp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-ufp-ops-ufp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-ufp-ops-ufp-rej-sess"),
+        ("CHECKPOINT-MIB", "fwSS-ufp-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-ufp-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-pid"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-proto"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-port"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-logical-port"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-max-avail-socket"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-socket-in-use-max"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-socket-in-use-curr"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-socket-in-use-count"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-auth-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-auth-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-auth-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-accepted-sess"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-rejected-sess"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-auth-failures"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-mail-max"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-mail-curr"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-mail-count"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-outgoing-mail-max"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-outgoing-mail-curr"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-outgoing-mail-count"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-max-mail-on-conn"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-total-mails"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-total"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-scanned-total"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-total"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-blocked-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-smtp-passed-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-pid"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-proto"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-port"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-logical-port"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-max-avail-socket"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-socket-in-use-max"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-socket-in-use-curr"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-socket-in-use-count"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-auth-sess-max"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-auth-sess-curr"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-auth-sess-count"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-accepted-sess"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-rejected-sess"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-auth-failures"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-mail-max"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-mail-curr"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-mail-count"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-outgoing-mail-max"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-outgoing-mail-curr"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-outgoing-mail-count"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-max-mail-on-conn"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-total-mails"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-time-stamp"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-is-alive"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-total"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-scanned-total"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-cnt"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-by-internal-error"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-total"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-blocked-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-POP3-passed-by-AV-settings"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked-by-av"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked"),
+        ("CHECKPOINT-MIB", "fwSS-total-scanned"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked-by-interal-error"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed-by-av"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed-by-file-type"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed-by-size-limit"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed-by-archive-limit"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed-by-interal-error"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed"),
+        ("CHECKPOINT-MIB", "fwSS-total-blocked-by-av-settings"),
+        ("CHECKPOINT-MIB", "fwSS-total-passed-by-av-settings"),
+        ("CHECKPOINT-MIB", "fwConnectionsStatConnectionsTcp"),
+        ("CHECKPOINT-MIB", "fwConnectionsStatConnectionsUdp"),
+        ("CHECKPOINT-MIB", "fwConnectionsStatConnectionsIcmp"),
+        ("CHECKPOINT-MIB", "fwConnectionsStatConnectionsOther"),
+        ("CHECKPOINT-MIB", "fwConnectionsStatConnections"),
+        ("CHECKPOINT-MIB", "fwConnectionsStatConnectionRate"),
+        ("CHECKPOINT-MIB", "fwHmem64-block-size"),
+        ("CHECKPOINT-MIB", "fwHmem64-requested-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem64-initial-allocated-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem64-initial-allocated-blocks"),
+        ("CHECKPOINT-MIB", "fwHmem64-initial-allocated-pools"),
+        ("CHECKPOINT-MIB", "fwHmem64-current-allocated-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem64-current-allocated-blocks"),
+        ("CHECKPOINT-MIB", "fwHmem64-current-allocated-pools"),
+        ("CHECKPOINT-MIB", "fwHmem64-maximum-bytes"),
+        ("CHECKPOINT-MIB", "fwHmem64-maximum-pools"),
+        ("CHECKPOINT-MIB", "fwHmem64-bytes-used"),
+        ("CHECKPOINT-MIB", "fwHmem64-blocks-used"),
+        ("CHECKPOINT-MIB", "fwHmem64-bytes-unused"),
+        ("CHECKPOINT-MIB", "fwHmem64-blocks-unused"),
+        ("CHECKPOINT-MIB", "fwHmem64-bytes-peak"),
+        ("CHECKPOINT-MIB", "fwHmem64-blocks-peak"),
+        ("CHECKPOINT-MIB", "fwHmem64-bytes-internal-use"),
+        ("CHECKPOINT-MIB", "fwHmem64-number-of-items"),
+        ("CHECKPOINT-MIB", "fwHmem64-alloc-operations"),
+        ("CHECKPOINT-MIB", "fwHmem64-free-operations"),
+        ("CHECKPOINT-MIB", "fwHmem64-failed-alloc"),
+        ("CHECKPOINT-MIB", "fwHmem64-failed-free"),
+        ("CHECKPOINT-MIB", "fwModuleState"),
+        ("CHECKPOINT-MIB", "fwFilterName"),
+        ("CHECKPOINT-MIB", "fwFilterDate"),
+        ("CHECKPOINT-MIB", "fwAccepted"),
+        ("CHECKPOINT-MIB", "fwRejected"),
+        ("CHECKPOINT-MIB", "fwDropped"),
+        ("CHECKPOINT-MIB", "fwLogged"),
+        ("CHECKPOINT-MIB", "fwMajor"),
+        ("CHECKPOINT-MIB", "fwMinor"),
+        ("CHECKPOINT-MIB", "fwProduct"),
+        ("CHECKPOINT-MIB", "fwSICTrustState"),
+        ("CHECKPOINT-MIB", "fwProdName"),
+        ("CHECKPOINT-MIB", "fwVerMajor"),
+        ("CHECKPOINT-MIB", "fwVerMinor"),
+        ("CHECKPOINT-MIB", "fwKernelBuild"),
+        ("CHECKPOINT-MIB", "fwNetIfName"),
+        ("CHECKPOINT-MIB", "fwNetIfIPAddr"),
+        ("CHECKPOINT-MIB", "fwNetIfNetmask"),
+        ("CHECKPOINT-MIB", "fwNetIfFlags"),
+        ("CHECKPOINT-MIB", "fwNetIfPeerName"),
+        ("CHECKPOINT-MIB", "fwNetIfRemoteIp"),
+        ("CHECKPOINT-MIB", "fwNetIfTopology"),
+        ("CHECKPOINT-MIB", "fwNetIfProxyName"),
+        ("CHECKPOINT-MIB", "fwNetIfSlaves"),
+        ("CHECKPOINT-MIB", "fwNetIfPorts"),
+        ("CHECKPOINT-MIB", "fwNetIfIPV6Addr"),
+        ("CHECKPOINT-MIB", "fwNetIfIPV6AddrLen"),
+        ("CHECKPOINT-MIB", "fwLSConnOverall"),
+        ("CHECKPOINT-MIB", "fwLSConnOverallDesc"),
+        ("CHECKPOINT-MIB", "fwLSConnName"),
+        ("CHECKPOINT-MIB", "fwLSConnState"),
+        ("CHECKPOINT-MIB", "fwLSConnStateDesc"),
+        ("CHECKPOINT-MIB", "fwLSConnSendRate"),
+        ("CHECKPOINT-MIB", "fwLocalLoggingDesc"),
+        ("CHECKPOINT-MIB", "fwLocalLoggingStat"),
+        ("CHECKPOINT-MIB", "fwLocalLoggingWriteRate"),
+        ("CHECKPOINT-MIB", "fwLoggingHandlingRate"),
+        ("CHECKPOINT-MIB", "fwInstancesCPUInstanceName"),
+        ("CHECKPOINT-MIB", "fwInstancesCPUUsage"),
+        ("CHECKPOINT-MIB", "fwInstancesCPUTotal"))
 )
 if mibBuilder.loadTexts:
-    fwTrap.setStatus(
-        "current"
-    )
+    fwProductsGroup.setStatus("current")
+
+vpnProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 2)
+)
+vpnProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "cpvEncPackets"),
+        ("CHECKPOINT-MIB", "cpvDecPackets"),
+        ("CHECKPOINT-MIB", "cpvErrOut"),
+        ("CHECKPOINT-MIB", "cpvErrIn"),
+        ("CHECKPOINT-MIB", "cpvErrIke"),
+        ("CHECKPOINT-MIB", "cpvErrPolicy"),
+        ("CHECKPOINT-MIB", "cpvCurrEspSAsIn"),
+        ("CHECKPOINT-MIB", "cpvTotalEspSAsIn"),
+        ("CHECKPOINT-MIB", "cpvCurrEspSAsOut"),
+        ("CHECKPOINT-MIB", "cpvTotalEspSAsOut"),
+        ("CHECKPOINT-MIB", "cpvCurrAhSAsIn"),
+        ("CHECKPOINT-MIB", "cpvTotalAhSAsIn"),
+        ("CHECKPOINT-MIB", "cpvCurrAhSAsOut"),
+        ("CHECKPOINT-MIB", "cpvTotalAhSAsOut"),
+        ("CHECKPOINT-MIB", "cpvMaxConncurEspSAsIn"),
+        ("CHECKPOINT-MIB", "cpvMaxConncurEspSAsOut"),
+        ("CHECKPOINT-MIB", "cpvMaxConncurAhSAsIn"),
+        ("CHECKPOINT-MIB", "cpvMaxConncurAhSAsOut"),
+        ("CHECKPOINT-MIB", "cpvSaDecrErr"),
+        ("CHECKPOINT-MIB", "cpvSaAuthErr"),
+        ("CHECKPOINT-MIB", "cpvSaReplayErr"),
+        ("CHECKPOINT-MIB", "cpvSaPolicyErr"),
+        ("CHECKPOINT-MIB", "cpvSaOtherErrIn"),
+        ("CHECKPOINT-MIB", "cpvSaOtherErrOut"),
+        ("CHECKPOINT-MIB", "cpvSaUnknownSpiErr"),
+        ("CHECKPOINT-MIB", "cpvIpsecUdpEspEncPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecUdpEspDecPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecAhEncPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecAhDecPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecEspEncPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecEspDecPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecDecomprBytesBefore"),
+        ("CHECKPOINT-MIB", "cpvIpsecDecomprBytesAfter"),
+        ("CHECKPOINT-MIB", "cpvIpsecDecomprOverhead"),
+        ("CHECKPOINT-MIB", "cpvIpsecDecomprPkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecDecomprErr"),
+        ("CHECKPOINT-MIB", "cpvIpsecComprBytesBefore"),
+        ("CHECKPOINT-MIB", "cpvIpsecComprBytesAfter"),
+        ("CHECKPOINT-MIB", "cpvIpsecComprOverhead"),
+        ("CHECKPOINT-MIB", "cpvIpsecNonCompressibleBytes"),
+        ("CHECKPOINT-MIB", "cpvIpsecCompressiblePkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecNonCompressiblePkts"),
+        ("CHECKPOINT-MIB", "cpvIpsecComprErrors"),
+        ("CHECKPOINT-MIB", "cpvIpsecEspEncBytes"),
+        ("CHECKPOINT-MIB", "cpvIpsecEspDecBytes"),
+        ("CHECKPOINT-MIB", "cpvFwzEncapsEncPkts"),
+        ("CHECKPOINT-MIB", "cpvFwzEncapsDecPkts"),
+        ("CHECKPOINT-MIB", "cpvFwzEncPkts"),
+        ("CHECKPOINT-MIB", "cpvFwzDecPkts"),
+        ("CHECKPOINT-MIB", "cpvFwzEncapsEncErrs"),
+        ("CHECKPOINT-MIB", "cpvFwzEncapsDecErrs"),
+        ("CHECKPOINT-MIB", "cpvFwzEncErrs"),
+        ("CHECKPOINT-MIB", "cpvFwzDecErrs"),
+        ("CHECKPOINT-MIB", "cpvHwAccelVendor"),
+        ("CHECKPOINT-MIB", "cpvHwAccelStatus"),
+        ("CHECKPOINT-MIB", "cpvHwAccelDriverMajorVer"),
+        ("CHECKPOINT-MIB", "cpvHwAccelDriverMinorVer"),
+        ("CHECKPOINT-MIB", "cpvHwAccelEspEncPkts"),
+        ("CHECKPOINT-MIB", "cpvHwAccelEspDecPkts"),
+        ("CHECKPOINT-MIB", "cpvHwAccelEspEncBytes"),
+        ("CHECKPOINT-MIB", "cpvHwAccelEspDecBytes"),
+        ("CHECKPOINT-MIB", "cpvHwAccelAhEncPkts"),
+        ("CHECKPOINT-MIB", "cpvHwAccelAhDecPkts"),
+        ("CHECKPOINT-MIB", "cpvHwAccelAhEncBytes"),
+        ("CHECKPOINT-MIB", "cpvHwAccelAhDecBytes"),
+        ("CHECKPOINT-MIB", "cpvIKECurrSAs"),
+        ("CHECKPOINT-MIB", "cpvIKECurrInitSAs"),
+        ("CHECKPOINT-MIB", "cpvIKECurrRespSAs"),
+        ("CHECKPOINT-MIB", "cpvIKETotalSAs"),
+        ("CHECKPOINT-MIB", "cpvIKETotalInitSAs"),
+        ("CHECKPOINT-MIB", "cpvIKETotalRespSAs"),
+        ("CHECKPOINT-MIB", "cpvIKETotalSAsAttempts"),
+        ("CHECKPOINT-MIB", "cpvIKETotalSAsInitAttempts"),
+        ("CHECKPOINT-MIB", "cpvIKETotalSAsRespAttempts"),
+        ("CHECKPOINT-MIB", "cpvIKEMaxConncurSAs"),
+        ("CHECKPOINT-MIB", "cpvIKEMaxConncurInitSAs"),
+        ("CHECKPOINT-MIB", "cpvIKEMaxConncurRespSAs"),
+        ("CHECKPOINT-MIB", "cpvIKETotalFailuresInit"),
+        ("CHECKPOINT-MIB", "cpvIKENoResp"),
+        ("CHECKPOINT-MIB", "cpvIKETotalFailuresResp"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICsNum"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICTotalDownLoadedSAs"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICCurrDownLoadedSAs"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICDecrBytes"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICEncrBytes"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICDecrPackets"),
+        ("CHECKPOINT-MIB", "cpvIPsecNICEncrPackets"),
+        ("CHECKPOINT-MIB", "cpvProdName"),
+        ("CHECKPOINT-MIB", "cpvVerMajor"),
+        ("CHECKPOINT-MIB", "cpvVerMinor"))
+)
+if mibBuilder.loadTexts:
+    vpnProductsGroup.setStatus("current")
+
+fgProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 3)
+)
+fgProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "fgProdName"),
+        ("CHECKPOINT-MIB", "fgVerMajor"),
+        ("CHECKPOINT-MIB", "fgVerMinor"),
+        ("CHECKPOINT-MIB", "fgVersionString"),
+        ("CHECKPOINT-MIB", "fgModuleKernelBuild"),
+        ("CHECKPOINT-MIB", "fgStrPolicyName"),
+        ("CHECKPOINT-MIB", "fgInstallTime"),
+        ("CHECKPOINT-MIB", "fgNumInterfaces"),
+        ("CHECKPOINT-MIB", "fgIfName"),
+        ("CHECKPOINT-MIB", "fgPolicyName"),
+        ("CHECKPOINT-MIB", "fgRateLimitIn"),
+        ("CHECKPOINT-MIB", "fgRateLimitOut"),
+        ("CHECKPOINT-MIB", "fgAvrRateIn"),
+        ("CHECKPOINT-MIB", "fgAvrRateOut"),
+        ("CHECKPOINT-MIB", "fgRetransPcktsIn"),
+        ("CHECKPOINT-MIB", "fgRetransPcktsOut"),
+        ("CHECKPOINT-MIB", "fgPendPcktsIn"),
+        ("CHECKPOINT-MIB", "fgPendPcktsOut"),
+        ("CHECKPOINT-MIB", "fgPendBytesIn"),
+        ("CHECKPOINT-MIB", "fgPendBytesOut"),
+        ("CHECKPOINT-MIB", "fgNumConnIn"),
+        ("CHECKPOINT-MIB", "fgNumConnOut"))
+)
+if mibBuilder.loadTexts:
+    fgProductsGroup.setStatus("current")
+
+haProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 4)
+)
+haProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "haProdName"),
+        ("CHECKPOINT-MIB", "haInstalled"),
+        ("CHECKPOINT-MIB", "haVerMajor"),
+        ("CHECKPOINT-MIB", "haVerMinor"),
+        ("CHECKPOINT-MIB", "haStarted"),
+        ("CHECKPOINT-MIB", "haState"),
+        ("CHECKPOINT-MIB", "haBlockState"),
+        ("CHECKPOINT-MIB", "haIdentifier"),
+        ("CHECKPOINT-MIB", "haProtoVersion"),
+        ("CHECKPOINT-MIB", "haWorkMode"),
+        ("CHECKPOINT-MIB", "haVersionSting"),
+        ("CHECKPOINT-MIB", "haClusterXLFailover"),
+        ("CHECKPOINT-MIB", "haStatCode"),
+        ("CHECKPOINT-MIB", "haStatShort"),
+        ("CHECKPOINT-MIB", "haStatLong"),
+        ("CHECKPOINT-MIB", "haServicePack"),
+        ("CHECKPOINT-MIB", "haIfName"),
+        ("CHECKPOINT-MIB", "haIP"),
+        ("CHECKPOINT-MIB", "haStatus"),
+        ("CHECKPOINT-MIB", "haVerified"),
+        ("CHECKPOINT-MIB", "haTrusted"),
+        ("CHECKPOINT-MIB", "haShared"),
+        ("CHECKPOINT-MIB", "haProblemIndex"),
+        ("CHECKPOINT-MIB", "haProblemName"),
+        ("CHECKPOINT-MIB", "haProblemStatus"),
+        ("CHECKPOINT-MIB", "haProblemPriority"),
+        ("CHECKPOINT-MIB", "haProblemVerified"),
+        ("CHECKPOINT-MIB", "haProblemDescr"),
+        ("CHECKPOINT-MIB", "haClusterIpIfName"),
+        ("CHECKPOINT-MIB", "haClusterIpAddr"),
+        ("CHECKPOINT-MIB", "haClusterIpNetMask"),
+        ("CHECKPOINT-MIB", "haClusterIpMemberNet"),
+        ("CHECKPOINT-MIB", "haClusterIpMemberNetMask"),
+        ("CHECKPOINT-MIB", "haClusterSyncName"),
+        ("CHECKPOINT-MIB", "haClusterSyncAddr"),
+        ("CHECKPOINT-MIB", "haClusterSyncNetMask"))
+)
+if mibBuilder.loadTexts:
+    haProductsGroup.setStatus("current")
+
+svnProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 5)
+)
+svnProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "svnVersion"),
+        ("CHECKPOINT-MIB", "svnBuild"),
+        ("CHECKPOINT-MIB", "osName"),
+        ("CHECKPOINT-MIB", "osMajorVer"),
+        ("CHECKPOINT-MIB", "osMinorVer"),
+        ("CHECKPOINT-MIB", "osBuildNum"),
+        ("CHECKPOINT-MIB", "osSPmajor"),
+        ("CHECKPOINT-MIB", "osSPminor"),
+        ("CHECKPOINT-MIB", "osVersionLevel"),
+        ("CHECKPOINT-MIB", "memTotalVirtual"),
+        ("CHECKPOINT-MIB", "memActiveVirtual"),
+        ("CHECKPOINT-MIB", "memTotalReal"),
+        ("CHECKPOINT-MIB", "memActiveReal"),
+        ("CHECKPOINT-MIB", "memFreeReal"),
+        ("CHECKPOINT-MIB", "memSwapsSec"),
+        ("CHECKPOINT-MIB", "memDiskTransfers"),
+        ("CHECKPOINT-MIB", "procUsrTime"),
+        ("CHECKPOINT-MIB", "procSysTime"),
+        ("CHECKPOINT-MIB", "procIdleTime"),
+        ("CHECKPOINT-MIB", "procUsage"),
+        ("CHECKPOINT-MIB", "procQueue"),
+        ("CHECKPOINT-MIB", "procInterrupts"),
+        ("CHECKPOINT-MIB", "procNum"),
+        ("CHECKPOINT-MIB", "diskTime"),
+        ("CHECKPOINT-MIB", "diskQueue"),
+        ("CHECKPOINT-MIB", "diskPercent"),
+        ("CHECKPOINT-MIB", "diskFreeTotal"),
+        ("CHECKPOINT-MIB", "diskFreeAvail"),
+        ("CHECKPOINT-MIB", "diskTotal"),
+        ("CHECKPOINT-MIB", "memTotalVirtual64"),
+        ("CHECKPOINT-MIB", "memActiveVirtual64"),
+        ("CHECKPOINT-MIB", "memTotalReal64"),
+        ("CHECKPOINT-MIB", "memActiveReal64"),
+        ("CHECKPOINT-MIB", "memFreeReal64"),
+        ("CHECKPOINT-MIB", "memSwapsSec64"),
+        ("CHECKPOINT-MIB", "memDiskTransfers64"),
+        ("CHECKPOINT-MIB", "multiProcUserTime"),
+        ("CHECKPOINT-MIB", "multiProcSystemTime"),
+        ("CHECKPOINT-MIB", "multiProcIdleTime"),
+        ("CHECKPOINT-MIB", "multiProcUsage"),
+        ("CHECKPOINT-MIB", "multiProcRunQueue"),
+        ("CHECKPOINT-MIB", "multiProcInterrupts"),
+        ("CHECKPOINT-MIB", "multiDiskName"),
+        ("CHECKPOINT-MIB", "multiDiskSize"),
+        ("CHECKPOINT-MIB", "multiDiskUsed"),
+        ("CHECKPOINT-MIB", "multiDiskFreeTotalBytes"),
+        ("CHECKPOINT-MIB", "multiDiskFreeTotalPercent"),
+        ("CHECKPOINT-MIB", "multiDiskFreeAvailableBytes"),
+        ("CHECKPOINT-MIB", "multiDiskFreeAvailablePercent"),
+        ("CHECKPOINT-MIB", "raidVolumeID"),
+        ("CHECKPOINT-MIB", "raidVolumeType"),
+        ("CHECKPOINT-MIB", "numOfDisksOnRaid"),
+        ("CHECKPOINT-MIB", "raidVolumeMaxLBA"),
+        ("CHECKPOINT-MIB", "raidVolumeState"),
+        ("CHECKPOINT-MIB", "raidVolumeFlags"),
+        ("CHECKPOINT-MIB", "raidVolumeSize"),
+        ("CHECKPOINT-MIB", "raidDiskVolumeID"),
+        ("CHECKPOINT-MIB", "raidDiskID"),
+        ("CHECKPOINT-MIB", "raidDiskNumber"),
+        ("CHECKPOINT-MIB", "raidDiskVendor"),
+        ("CHECKPOINT-MIB", "raidDiskProductID"),
+        ("CHECKPOINT-MIB", "raidDiskRevision"),
+        ("CHECKPOINT-MIB", "raidDiskMaxLBA"),
+        ("CHECKPOINT-MIB", "raidDiskState"),
+        ("CHECKPOINT-MIB", "raidDiskFlags"),
+        ("CHECKPOINT-MIB", "raidDiskSyncState"),
+        ("CHECKPOINT-MIB", "raidDiskSize"),
+        ("CHECKPOINT-MIB", "tempertureSensorName"),
+        ("CHECKPOINT-MIB", "tempertureSensorValue"),
+        ("CHECKPOINT-MIB", "tempertureSensorUnit"),
+        ("CHECKPOINT-MIB", "tempertureSensorType"),
+        ("CHECKPOINT-MIB", "tempertureSensorStatus"),
+        ("CHECKPOINT-MIB", "fanSpeedSensorName"),
+        ("CHECKPOINT-MIB", "fanSpeedSensorValue"),
+        ("CHECKPOINT-MIB", "fanSpeedSensorUnit"),
+        ("CHECKPOINT-MIB", "fanSpeedSensorType"),
+        ("CHECKPOINT-MIB", "fanSpeedSensorStatus"),
+        ("CHECKPOINT-MIB", "voltageSensorName"),
+        ("CHECKPOINT-MIB", "voltageSensorValue"),
+        ("CHECKPOINT-MIB", "voltageSensorUnit"),
+        ("CHECKPOINT-MIB", "voltageSensorType"),
+        ("CHECKPOINT-MIB", "voltageSensorStatus"),
+        ("CHECKPOINT-MIB", "powerSupplyStatus"),
+        ("CHECKPOINT-MIB", "svnApplianceSerialNumber"),
+        ("CHECKPOINT-MIB", "svnApplianceManufacturer"),
+        ("CHECKPOINT-MIB", "svnApplianceProductName"),
+        ("CHECKPOINT-MIB", "svnApplianceSeriesString"),
+        ("CHECKPOINT-MIB", "svnRouteModDest"),
+        ("CHECKPOINT-MIB", "svnRouteModMask"),
+        ("CHECKPOINT-MIB", "svnRouteModIfIndex"),
+        ("CHECKPOINT-MIB", "svnRouteModGateway"),
+        ("CHECKPOINT-MIB", "svnRouteModIfName"),
+        ("CHECKPOINT-MIB", "svnRouteModAction"),
+        ("CHECKPOINT-MIB", "svnLogDStat"),
+        ("CHECKPOINT-MIB", "svnUpdatesInfoBuild"),
+        ("CHECKPOINT-MIB", "svnUpdatesInfoStatus"),
+        ("CHECKPOINT-MIB", "svnUpdatesInfoConnection"),
+        ("CHECKPOINT-MIB", "svnUpdatesInfoAvailablePackages"),
+        ("CHECKPOINT-MIB", "svnUpdatesInfoAvailableRecommended"),
+        ("CHECKPOINT-MIB", "svnUpdatesInfoAvailableHotfixes"),
+        ("CHECKPOINT-MIB", "updatesInstalledName"),
+        ("CHECKPOINT-MIB", "updatesInstalledType"),
+        ("CHECKPOINT-MIB", "updatesRecommendedName"),
+        ("CHECKPOINT-MIB", "updatesRecommendedType"),
+        ("CHECKPOINT-MIB", "updatesRecommendedStatus"),
+        ("CHECKPOINT-MIB", "vdName"),
+        ("CHECKPOINT-MIB", "vdType"),
+        ("CHECKPOINT-MIB", "ctxId"),
+        ("CHECKPOINT-MIB", "svnProdName"),
+        ("CHECKPOINT-MIB", "svnProdVerMajor"),
+        ("CHECKPOINT-MIB", "svnProdVerMinor"),
+        ("CHECKPOINT-MIB", "routingDest"),
+        ("CHECKPOINT-MIB", "routingMask"),
+        ("CHECKPOINT-MIB", "routingGatweway"),
+        ("CHECKPOINT-MIB", "routingIntrfName"),
+        ("CHECKPOINT-MIB", "svnSysTime"),
+        ("CHECKPOINT-MIB", "svnUTCTimeOffset"),
+        ("CHECKPOINT-MIB", "svnSysStartTime"),
+        ("CHECKPOINT-MIB", "svnSysUniqId"),
+        ("CHECKPOINT-MIB", "svnWebUIPort"),
+        ("CHECKPOINT-MIB", "checkPointUTM-1450"),
+        ("CHECKPOINT-MIB", "checkPointUTM-11050"),
+        ("CHECKPOINT-MIB", "checkPointUTM-12050"),
+        ("CHECKPOINT-MIB", "checkPointUTM-1130"),
+        ("CHECKPOINT-MIB", "checkPointUTM-1270"),
+        ("CHECKPOINT-MIB", "checkPointUTM-1570"),
+        ("CHECKPOINT-MIB", "checkPointUTM-11070"),
+        ("CHECKPOINT-MIB", "checkPointUTM-12070"),
+        ("CHECKPOINT-MIB", "checkPointUTM-13070"),
+        ("CHECKPOINT-MIB", "checkPointPower-15070"),
+        ("CHECKPOINT-MIB", "checkPointPower-19070"),
+        ("CHECKPOINT-MIB", "checkPointPower-111000"),
+        ("CHECKPOINT-MIB", "checkPointSmart-15"),
+        ("CHECKPOINT-MIB", "checkPointSmart-125"),
+        ("CHECKPOINT-MIB", "checkPointSmart-150"),
+        ("CHECKPOINT-MIB", "checkPointSmart-1150"),
+        ("CHECKPOINT-MIB", "checkPointIP150"),
+        ("CHECKPOINT-MIB", "checkPointIP280"),
+        ("CHECKPOINT-MIB", "checkPointIP290"),
+        ("CHECKPOINT-MIB", "checkPointIP390"),
+        ("CHECKPOINT-MIB", "checkPointIP560"),
+        ("CHECKPOINT-MIB", "checkPointIP690"),
+        ("CHECKPOINT-MIB", "checkPointIP1280"),
+        ("CHECKPOINT-MIB", "checkPointIP2450"),
+        ("CHECKPOINT-MIB", "checkPointUNIVERGEUnifiedWall1000"),
+        ("CHECKPOINT-MIB", "checkPointUNIVERGEUnifiedWall2000"),
+        ("CHECKPOINT-MIB", "checkPointUNIVERGEUnifiedWall4000"),
+        ("CHECKPOINT-MIB", "checkPointUNIVERGEUnifiedWall100"),
+        ("CHECKPOINT-MIB", "checkPointDLP-19571"),
+        ("CHECKPOINT-MIB", "checkPointDLP-12571"),
+        ("CHECKPOINT-MIB", "checkPointIPS-12076"),
+        ("CHECKPOINT-MIB", "checkPointIPS-15076"),
+        ("CHECKPOINT-MIB", "checkPointIPS-19076"),
+        ("CHECKPOINT-MIB", "checkPoint2200"),
+        ("CHECKPOINT-MIB", "checkPoint4200"),
+        ("CHECKPOINT-MIB", "checkPoint4400"),
+        ("CHECKPOINT-MIB", "checkPoint4600"),
+        ("CHECKPOINT-MIB", "checkPoint4800"),
+        ("CHECKPOINT-MIB", "checkPointTE250"),
+        ("CHECKPOINT-MIB", "checkPoint12200"),
+        ("CHECKPOINT-MIB", "checkPoint12400"),
+        ("CHECKPOINT-MIB", "checkPoint12600"),
+        ("CHECKPOINT-MIB", "checkPointTE1000"),
+        ("CHECKPOINT-MIB", "checkPoint13500"),
+        ("CHECKPOINT-MIB", "checkPoint21400"),
+        ("CHECKPOINT-MIB", "checkPoint21600"),
+        ("CHECKPOINT-MIB", "checkPoint21700"),
+        ("CHECKPOINT-MIB", "checkPointVMware"),
+        ("CHECKPOINT-MIB", "checkPointOpenServer"),
+        ("CHECKPOINT-MIB", "checkPointSmart-1205"),
+        ("CHECKPOINT-MIB", "checkPointSmart-1210"),
+        ("CHECKPOINT-MIB", "checkPointSmart-1225"),
+        ("CHECKPOINT-MIB", "checkPointSmart-13050"),
+        ("CHECKPOINT-MIB", "checkPointSmart-13150"),
+        ("CHECKPOINT-MIB", "checkPoint13800"),
+        ("CHECKPOINT-MIB", "checkPoint21800"),
+        ("CHECKPOINT-MIB", "checkPointTE250X"),
+        ("CHECKPOINT-MIB", "checkPointTE1000X"),
+        ("CHECKPOINT-MIB", "checkPointTE2000X"),
+        ("CHECKPOINT-MIB", "checkPointTE100X"),
+        ("CHECKPOINT-MIB", "checkPoint23500"),
+        ("CHECKPOINT-MIB", "checkPoint23800"),
+        ("CHECKPOINT-MIB", "checkPoint15400"),
+        ("CHECKPOINT-MIB", "checkPoint15600"),
+        ("CHECKPOINT-MIB", "checkPoint3200"),
+        ("CHECKPOINT-MIB", "checkPoint5200"),
+        ("CHECKPOINT-MIB", "checkPoint5400"),
+        ("CHECKPOINT-MIB", "checkPoint5600"),
+        ("CHECKPOINT-MIB", "checkPoint5800"),
+        ("CHECKPOINT-MIB", "checkPoint5900"),
+        ("CHECKPOINT-MIB", "checkPoint3100"),
+        ("CHECKPOINT-MIB", "checkPoint5100"),
+        ("CHECKPOINT-MIB", "checkPointSmart-1405"),
+        ("CHECKPOINT-MIB", "checkPointSmart-1410"),
+        ("CHECKPOINT-MIB", "checkPointSmart-5050"),
+        ("CHECKPOINT-MIB", "checkPointSmart-525"),
+        ("CHECKPOINT-MIB", "checkPointSmart-5150"),
+        ("CHECKPOINT-MIB", "checkPoint23900"),
+        ("CHECKPOINT-MIB", "checkPoint6500"),
+        ("CHECKPOINT-MIB", "checkPoint6800"),
+        ("CHECKPOINT-MIB", "checkPoint16000T"),
+        ("CHECKPOINT-MIB", "checkPoint26000"),
+        ("CHECKPOINT-MIB", "checkPointSmart-625"),
+        ("CHECKPOINT-MIB", "checkPoint16000"),
+        ("CHECKPOINT-MIB", "checkPoint26000T"),
+        ("CHECKPOINT-MIB", "checkPoint61000"),
+        ("CHECKPOINT-MIB", "checkPoint64000"),
+        ("CHECKPOINT-MIB", "checkPoint41000"),
+        ("CHECKPOINT-MIB", "checkPoint44000"),
+        ("CHECKPOINT-MIB", "checkPoint3600"),
+        ("CHECKPOINT-MIB", "checkPoint3600T"),
+        ("CHECKPOINT-MIB", "checkPoint6200B"),
+        ("CHECKPOINT-MIB", "checkPoint6200P"),
+        ("CHECKPOINT-MIB", "checkPoint6200T"),
+        ("CHECKPOINT-MIB", "checkPoint6600"),
+        ("CHECKPOINT-MIB", "checkPoint6900"),
+        ("CHECKPOINT-MIB", "checkPoint16600HS"),
+        ("CHECKPOINT-MIB", "checkPoint28600HS"),
+        ("CHECKPOINT-MIB", "checkPoint6700"),
+        ("CHECKPOINT-MIB", "checkPoint7000"),
+        ("CHECKPOINT-MIB", "checkPoint16200"),
+        ("CHECKPOINT-MIB", "checkPoint28000"),
+        ("CHECKPOINT-MIB", "checkPoint6400"),
+        ("CHECKPOINT-MIB", "checkPoint3800"),
+        ("CHECKPOINT-MIB", "checkPointMHO140"),
+        ("CHECKPOINT-MIB", "checkPointMHO170"),
+        ("CHECKPOINT-MIB", "checkPointMHO175"),
+        ("CHECKPOINT-MIB", "licensingID"),
+        ("CHECKPOINT-MIB", "licensingBladeGUIOrder"),
+        ("CHECKPOINT-MIB", "licensingBladeName"),
+        ("CHECKPOINT-MIB", "licensingState"),
+        ("CHECKPOINT-MIB", "licensingExpirationDate"),
+        ("CHECKPOINT-MIB", "licensingImpact"),
+        ("CHECKPOINT-MIB", "licensingBladeActive"),
+        ("CHECKPOINT-MIB", "licensingTotalQuota"),
+        ("CHECKPOINT-MIB", "licensingUsedQuota"),
+        ("CHECKPOINT-MIB", "licensingAssetAccountId"),
+        ("CHECKPOINT-MIB", "licensingAssetPackageDescription"),
+        ("CHECKPOINT-MIB", "licensingAssetContainerCK"),
+        ("CHECKPOINT-MIB", "licensingAssetCKSignature"),
+        ("CHECKPOINT-MIB", "licensingAssetContainerSKU"),
+        ("CHECKPOINT-MIB", "licensingAssetSupportLevel"),
+        ("CHECKPOINT-MIB", "licensingAssetSupportExpiration"),
+        ("CHECKPOINT-MIB", "licensingAssetActivationStatus"),
+        ("CHECKPOINT-MIB", "svnConnectivity"),
+        ("CHECKPOINT-MIB", "svnNetIfVsid"),
+        ("CHECKPOINT-MIB", "svnNetIfName"),
+        ("CHECKPOINT-MIB", "svnNetIfAddress"),
+        ("CHECKPOINT-MIB", "svnNetIfMask"),
+        ("CHECKPOINT-MIB", "svnNetIfMTU"),
+        ("CHECKPOINT-MIB", "svnNetIfState"),
+        ("CHECKPOINT-MIB", "svnNetIfMAC"),
+        ("CHECKPOINT-MIB", "svnNetIfDescription"),
+        ("CHECKPOINT-MIB", "svnNetIfOperState"),
+        ("CHECKPOINT-MIB", "svnNetIfRXBytes"),
+        ("CHECKPOINT-MIB", "svnNetIfRXDrops"),
+        ("CHECKPOINT-MIB", "svnNetIfRXErrors"),
+        ("CHECKPOINT-MIB", "svnNetIfRXPackets"),
+        ("CHECKPOINT-MIB", "svnNetIfTXBytes"),
+        ("CHECKPOINT-MIB", "svnNetIfTXDrops"),
+        ("CHECKPOINT-MIB", "svnNetIfTXErrors"),
+        ("CHECKPOINT-MIB", "svnNetIfTXPackets"),
+        ("CHECKPOINT-MIB", "vsRoutingDest"),
+        ("CHECKPOINT-MIB", "vsRoutingMask"),
+        ("CHECKPOINT-MIB", "vsRoutingGateway"),
+        ("CHECKPOINT-MIB", "vsRoutingIntrfName"),
+        ("CHECKPOINT-MIB", "vsRoutingVsId"),
+        ("CHECKPOINT-MIB", "svnStatCode"),
+        ("CHECKPOINT-MIB", "svnStatShortDescr"),
+        ("CHECKPOINT-MIB", "svnStatLongDescr"),
+        ("CHECKPOINT-MIB", "svnServicePack"),
+        ("CHECKPOINT-MIB", "checkPointSmart-6000-L"),
+        ("CHECKPOINT-MIB", "checkPointSmart-6000-XL"),
+        ("CHECKPOINT-MIB", "checkPointSmart-600-S"),
+        ("CHECKPOINT-MIB", "checkPointSmart-600-M"))
+)
+if mibBuilder.loadTexts:
+    svnProductsGroup.setStatus("current")
+
+mngmtProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 6)
+)
+mngmtProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "mgProdName"),
+        ("CHECKPOINT-MIB", "mgVerMajor"),
+        ("CHECKPOINT-MIB", "mgVerMinor"),
+        ("CHECKPOINT-MIB", "mgBuildNumber"),
+        ("CHECKPOINT-MIB", "mgActiveStatus"),
+        ("CHECKPOINT-MIB", "mgFwmIsAlive"),
+        ("CHECKPOINT-MIB", "mgClientName"),
+        ("CHECKPOINT-MIB", "mgClientHost"),
+        ("CHECKPOINT-MIB", "mgClientDbLock"),
+        ("CHECKPOINT-MIB", "mgApplicationType"),
+        ("CHECKPOINT-MIB", "mgMgmtHAJournals"),
+        ("CHECKPOINT-MIB", "mgIsLicenseViolation"),
+        ("CHECKPOINT-MIB", "mgLicenseViolationMsg"),
+        ("CHECKPOINT-MIB", "mglsGWIP"),
+        ("CHECKPOINT-MIB", "mglsGWState"),
+        ("CHECKPOINT-MIB", "mglsGWLastLoginTime"),
+        ("CHECKPOINT-MIB", "mglsGWLogReceiveRate"),
+        ("CHECKPOINT-MIB", "mgStatCode"),
+        ("CHECKPOINT-MIB", "mgStatShortDescr"),
+        ("CHECKPOINT-MIB", "mgStatLongDescr"))
+)
+if mibBuilder.loadTexts:
+    mngmtProductsGroup.setStatus("current")
+
+wamProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 7)
+)
+wamProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "wamAcceptReq"),
+        ("CHECKPOINT-MIB", "wamRejectReq"),
+        ("CHECKPOINT-MIB", "wamPolicyName"),
+        ("CHECKPOINT-MIB", "wamPolicyUpdate"),
+        ("CHECKPOINT-MIB", "wamUagHost"),
+        ("CHECKPOINT-MIB", "wamUagIp"),
+        ("CHECKPOINT-MIB", "wamUagPort"),
+        ("CHECKPOINT-MIB", "wamUagNoQueries"),
+        ("CHECKPOINT-MIB", "wamUagLastQuery"),
+        ("CHECKPOINT-MIB", "wamOpenSessions"),
+        ("CHECKPOINT-MIB", "wamLastSession"),
+        ("CHECKPOINT-MIB", "wamProdName"),
+        ("CHECKPOINT-MIB", "wamVerMajor"),
+        ("CHECKPOINT-MIB", "wamVerMinor"),
+        ("CHECKPOINT-MIB", "wamState"),
+        ("CHECKPOINT-MIB", "wamName"),
+        ("CHECKPOINT-MIB", "wamStatCode"),
+        ("CHECKPOINT-MIB", "wamStatShortDescr"),
+        ("CHECKPOINT-MIB", "wamStatLongDescr"))
+)
+if mibBuilder.loadTexts:
+    wamProductsGroup.setStatus("current")
+
+dtpsProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 8)
+)
+dtpsProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "dtpsProdName"),
+        ("CHECKPOINT-MIB", "dtpsVerMajor"),
+        ("CHECKPOINT-MIB", "dtpsVerMinor"),
+        ("CHECKPOINT-MIB", "dtpsLicensedUsers"),
+        ("CHECKPOINT-MIB", "dtpsConnectedUsers"),
+        ("CHECKPOINT-MIB", "dtpsStatCode"),
+        ("CHECKPOINT-MIB", "dtpsStatShortDescr"),
+        ("CHECKPOINT-MIB", "dtpsStatLongDescr"))
+)
+if mibBuilder.loadTexts:
+    dtpsProductsGroup.setStatus("current")
+
+lsProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 9)
+)
+lsProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "lsProdName"),
+        ("CHECKPOINT-MIB", "lsVerMajor"),
+        ("CHECKPOINT-MIB", "lsVerMinor"),
+        ("CHECKPOINT-MIB", "lsBuildNumber"),
+        ("CHECKPOINT-MIB", "lsFwmIsAlive"),
+        ("CHECKPOINT-MIB", "lsGWIP"),
+        ("CHECKPOINT-MIB", "lsGWState"),
+        ("CHECKPOINT-MIB", "lsGWLastLoginTime"),
+        ("CHECKPOINT-MIB", "lsGWLogReceiveRate"),
+        ("CHECKPOINT-MIB", "lsStatCode"),
+        ("CHECKPOINT-MIB", "lsStatShortDescr"),
+        ("CHECKPOINT-MIB", "lsStatLongDescr"),
+        ("CHECKPOINT-MIB", "lsClientName"),
+        ("CHECKPOINT-MIB", "lsClientHost"),
+        ("CHECKPOINT-MIB", "lsClientDbLock"),
+        ("CHECKPOINT-MIB", "lsApplicationType"))
+)
+if mibBuilder.loadTexts:
+    lsProductsGroup.setStatus("current")
+
+vsxProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 10)
+)
+vsxProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "vsxVsSupported"),
+        ("CHECKPOINT-MIB", "vsxVsConfigured"),
+        ("CHECKPOINT-MIB", "vsxVsInstalled"),
+        ("CHECKPOINT-MIB", "vsxVsidConfigured"),
+        ("CHECKPOINT-MIB", "vsxAllVSsConnsSum"),
+        ("CHECKPOINT-MIB", "vsxStatusVRId"),
+        ("CHECKPOINT-MIB", "vsxStatusVsName"),
+        ("CHECKPOINT-MIB", "vsxStatusVsType"),
+        ("CHECKPOINT-MIB", "vsxStatusMainIP"),
+        ("CHECKPOINT-MIB", "vsxStatusPolicyName"),
+        ("CHECKPOINT-MIB", "vsxStatusVsPolicyType"),
+        ("CHECKPOINT-MIB", "vsxStatusSicTrustState"),
+        ("CHECKPOINT-MIB", "vsxStatusHAState"),
+        ("CHECKPOINT-MIB", "vsxStatusVSWeight"),
+        ("CHECKPOINT-MIB", "vsxStatusMemoryUsageVSName"),
+        ("CHECKPOINT-MIB", "vsxStatusMemoryUsage"),
+        ("CHECKPOINT-MIB", "vsxStatusMemoryUsageVSMaxMem"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceVSName"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceIfName"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceAdminState"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceOperState"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceRxBytes"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceTxBytes"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceOverallBytes"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceRxErrors"),
+        ("CHECKPOINT-MIB", "vsxStatusInterfaceTxErrors"),
+        ("CHECKPOINT-MIB", "vsxCountersVSId"),
+        ("CHECKPOINT-MIB", "vsxCountersConnNum"),
+        ("CHECKPOINT-MIB", "vsxCountersConnPeakNum"),
+        ("CHECKPOINT-MIB", "vsxCountersConnTableLimit"),
+        ("CHECKPOINT-MIB", "vsxCountersPackets"),
+        ("CHECKPOINT-MIB", "vsxCountersDroppedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersAcceptedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersRejectedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersBytesAcceptedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersBytesDroppedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersBytesRejectedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersLoggedTotal"),
+        ("CHECKPOINT-MIB", "vsxCountersIsDataValid"),
+        ("CHECKPOINT-MIB", "vsxCountersDropVSID"),
+        ("CHECKPOINT-MIB", "vsxCountersDropVsName"),
+        ("CHECKPOINT-MIB", "vsxCountersDropCount"),
+        ("CHECKPOINT-MIB", "raExternalIpAddr"),
+        ("CHECKPOINT-MIB", "raOfficeMode"),
+        ("CHECKPOINT-MIB", "raIkeOverTCP"),
+        ("CHECKPOINT-MIB", "raUseUDPEncap"),
+        ("CHECKPOINT-MIB", "raVisitorMode"),
+        ("CHECKPOINT-MIB", "raRouteTraffic"),
+        ("CHECKPOINT-MIB", "raCommunity"),
+        ("CHECKPOINT-MIB", "raTunnelEncAlgorithm"),
+        ("CHECKPOINT-MIB", "raTunnelAuthMethod"),
+        ("CHECKPOINT-MIB", "raLogonTime"),
+        ("CHECKPOINT-MIB", "tunnelPeerObjName"),
+        ("CHECKPOINT-MIB", "tunnelState"),
+        ("CHECKPOINT-MIB", "tunnelCommunity"),
+        ("CHECKPOINT-MIB", "tunnelNextHop"),
+        ("CHECKPOINT-MIB", "tunnelInterface"),
+        ("CHECKPOINT-MIB", "tunnelSourceIpAddr"),
+        ("CHECKPOINT-MIB", "tunnelLinkPriority"),
+        ("CHECKPOINT-MIB", "tunnelProbState"),
+        ("CHECKPOINT-MIB", "tunnelPeerType"),
+        ("CHECKPOINT-MIB", "tunnelType"),
+        ("CHECKPOINT-MIB", "permanentTunnelPeerObjName"),
+        ("CHECKPOINT-MIB", "permanentTunnelState"),
+        ("CHECKPOINT-MIB", "permanentTunnelCommunity"),
+        ("CHECKPOINT-MIB", "permanentTunnelNextHop"),
+        ("CHECKPOINT-MIB", "permanentTunnelInterface"),
+        ("CHECKPOINT-MIB", "permanentTunnelSourceIpAddr"),
+        ("CHECKPOINT-MIB", "permanentTunnelLinkPriority"),
+        ("CHECKPOINT-MIB", "permanentTunnelProbState"),
+        ("CHECKPOINT-MIB", "permanentTunnelPeerType"),
+        ("CHECKPOINT-MIB", "vsxTunnelsVSidName"),
+        ("CHECKPOINT-MIB", "vsxS2SIpsecTunnelsCounter"),
+        ("CHECKPOINT-MIB", "vsxVSStateChangedVSIdName"),
+        ("CHECKPOINT-MIB", "vsxVSStateChangedChangeOccurred"))
+)
+if mibBuilder.loadTexts:
+    vsxProductsGroup.setStatus("current")
+
+smartDefenseProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 11)
+)
+smartDefenseProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "asmSynatkSynAckTimeout"),
+        ("CHECKPOINT-MIB", "asmSynatkSynAckReset"),
+        ("CHECKPOINT-MIB", "asmSynatkModeChange"),
+        ("CHECKPOINT-MIB", "asmSynatkCurrentMode"),
+        ("CHECKPOINT-MIB", "asmSynatkNumberofunAckedSyns"),
+        ("CHECKPOINT-MIB", "smallPMTUNumberOfAttacks"),
+        ("CHECKPOINT-MIB", "smallPMTUValueOfMinimalMTUsize"),
+        ("CHECKPOINT-MIB", "sequenceVerifierInvalidAck"),
+        ("CHECKPOINT-MIB", "sequenceVerifierInvalidSequence"),
+        ("CHECKPOINT-MIB", "sequenceVerifierInvalidretransmit"),
+        ("CHECKPOINT-MIB", "numOfhostPortScan"),
+        ("CHECKPOINT-MIB", "numOfIpSweep"),
+        ("CHECKPOINT-MIB", "httpWorms"),
+        ("CHECKPOINT-MIB", "httpURLLengthViolation"),
+        ("CHECKPOINT-MIB", "httpHeaderLengthViolations"),
+        ("CHECKPOINT-MIB", "httpMaxHeaderReached"),
+        ("CHECKPOINT-MIB", "numOfHttpASCIIViolations"),
+        ("CHECKPOINT-MIB", "numOfHttpP2PHeaders"),
+        ("CHECKPOINT-MIB", "numOfCIFSworms"),
+        ("CHECKPOINT-MIB", "numOfCIFSNullSessions"),
+        ("CHECKPOINT-MIB", "numOfCIFSBlockedPopUps"),
+        ("CHECKPOINT-MIB", "numOfCIFSBlockedCommands"),
+        ("CHECKPOINT-MIB", "numOfCIFSPasswordLengthViolations"),
+        ("CHECKPOINT-MIB", "numOfP2POtherConAttempts"),
+        ("CHECKPOINT-MIB", "numOfP2PKazaaConAttempts"),
+        ("CHECKPOINT-MIB", "numOfP2PeMuleConAttempts"),
+        ("CHECKPOINT-MIB", "numOfGnutellaConAttempts"),
+        ("CHECKPOINT-MIB", "numOfP2PSkypeCon"),
+        ("CHECKPOINT-MIB", "numOfBitTorrentCon"))
+)
+if mibBuilder.loadTexts:
+    smartDefenseProductsGroup.setStatus("current")
+
+gxProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 12)
+)
+gxProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "gxProdName"),
+        ("CHECKPOINT-MIB", "gxProdVersion"),
+        ("CHECKPOINT-MIB", "gxCreateSinceInstall"),
+        ("CHECKPOINT-MIB", "gxActContxt"),
+        ("CHECKPOINT-MIB", "gxDropPlicyCreate"),
+        ("CHECKPOINT-MIB", "gxDropMalformedReqCreate"),
+        ("CHECKPOINT-MIB", "gxDropMalformedRespCreate"),
+        ("CHECKPOINT-MIB", "gxExpiredCreate"),
+        ("CHECKPOINT-MIB", "gxBadCauseCreate"),
+        ("CHECKPOINT-MIB", "gxSecondaryNsapiEntries"),
+        ("CHECKPOINT-MIB", "gxActv0v1PdnConns"),
+        ("CHECKPOINT-MIB", "gxTunnelApnsEntries"),
+        ("CHECKPOINT-MIB", "gxTunnelsEntries"),
+        ("CHECKPOINT-MIB", "gxDeleteSinceInstall"),
+        ("CHECKPOINT-MIB", "gxDropOutOfContxtDelete"),
+        ("CHECKPOINT-MIB", "gxDropMalformedReqDelete"),
+        ("CHECKPOINT-MIB", "gxDropMalformedRespDelete"),
+        ("CHECKPOINT-MIB", "gxExpiredDelete"),
+        ("CHECKPOINT-MIB", "gxBadCauseDelete"),
+        ("CHECKPOINT-MIB", "gxUpdateSinceInstall"),
+        ("CHECKPOINT-MIB", "gxDropOutOfContxtUpdate"),
+        ("CHECKPOINT-MIB", "gxDropMalformedReqUpdate"),
+        ("CHECKPOINT-MIB", "gxDropMalformedRespUpdate"),
+        ("CHECKPOINT-MIB", "gxExpiredUpdate"),
+        ("CHECKPOINT-MIB", "gxBadCauseUpdate"),
+        ("CHECKPOINT-MIB", "gxEchoSinceInstall"),
+        ("CHECKPOINT-MIB", "gxVnspSinceInstall"),
+        ("CHECKPOINT-MIB", "gxDropPolicyEcho"),
+        ("CHECKPOINT-MIB", "gxDropMalformedReqEcho"),
+        ("CHECKPOINT-MIB", "gxDropMalformedRespEcho"),
+        ("CHECKPOINT-MIB", "gxExpiredEcho"),
+        ("CHECKPOINT-MIB", "gxDropVnsp"),
+        ("CHECKPOINT-MIB", "gxGtpPathEntries"),
+        ("CHECKPOINT-MIB", "gxGpdu1MinAvgRate"),
+        ("CHECKPOINT-MIB", "gxDropOutOfContxtGpdu"),
+        ("CHECKPOINT-MIB", "gxDropAnti-spoofingGpdu"),
+        ("CHECKPOINT-MIB", "gxDropMs-MsGpdu"),
+        ("CHECKPOINT-MIB", "gxDropBadSeqGpdu"),
+        ("CHECKPOINT-MIB", "gxDropBadGpdu"),
+        ("CHECKPOINT-MIB", "gxGpduExpiredTunnel"),
+        ("CHECKPOINT-MIB", "gxInitiateSinceInstall"),
+        ("CHECKPOINT-MIB", "gxDropInitiationReq"),
+        ("CHECKPOINT-MIB", "gxDropInitiationResp"),
+        ("CHECKPOINT-MIB", "gxExpiredInitiateAct"),
+        ("CHECKPOINT-MIB", "gxGTPv2CreateSessionSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2CreateBearerSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredCreateSession"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredCreateBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedCreateSessionReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedCreateSessionResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedCreateBearerReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedCreateBearerResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyCreateSession"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyCreateBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2ActPDN"),
+        ("CHECKPOINT-MIB", "gxGTPv2ActDataBearers"),
+        ("CHECKPOINT-MIB", "gxGTPv2DeleteSessionSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2DeleteBearerSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredDeleteSession"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredDeleteBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedDeleteSessionReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedDeleteSessionResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedDeleteBearerReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedDeleteBearerResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyDeleteSession"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyDeleteBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2UpdateBearerSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredUpdateBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2ModifyBearerSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredModifyBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedUpdateBearerReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedUpdateBearerResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedModifyBearerReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedModifyBearerResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyUpdateBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyModifyBearer"),
+        ("CHECKPOINT-MIB", "gxGTPv2EchoSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2VnspSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2ExpiredEcho"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedEchoReq"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropMalformedEchoResp"),
+        ("CHECKPOINT-MIB", "gxGTPv2DropPolicyEcho"),
+        ("CHECKPOINT-MIB", "gxGTPv2ModifyBearerCmdSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2ModifyBearerFailIndSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2DeleteBearerCmdSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2DeleteBearerFailIndSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2BearerResourceCmdSinceInstall"),
+        ("CHECKPOINT-MIB", "gxGTPv2BearerResourceFailIndSinceInstall"),
+        ("CHECKPOINT-MIB", "gxProdVerMajor"),
+        ("CHECKPOINT-MIB", "gxProdVerMinor"),
+        ("CHECKPOINT-MIB", "gxBuild"))
+)
+if mibBuilder.loadTexts:
+    gxProductsGroup.setStatus("current")
+
+aviProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 13)
+)
+aviProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "aviEngineName"),
+        ("CHECKPOINT-MIB", "aviEngineVer"),
+        ("CHECKPOINT-MIB", "aviEngineDate"),
+        ("CHECKPOINT-MIB", "aviSignatureName"),
+        ("CHECKPOINT-MIB", "aviSignatureVer"),
+        ("CHECKPOINT-MIB", "aviSignatureDate"),
+        ("CHECKPOINT-MIB", "aviLastSigCheckTime"),
+        ("CHECKPOINT-MIB", "aviLastSigLocation"),
+        ("CHECKPOINT-MIB", "aviLastLicExp"),
+        ("CHECKPOINT-MIB", "aviTopVirusesName"),
+        ("CHECKPOINT-MIB", "aviTopVirusesCnt"),
+        ("CHECKPOINT-MIB", "aviTopEverVirusesName"),
+        ("CHECKPOINT-MIB", "aviTopEverVirusesCnt"),
+        ("CHECKPOINT-MIB", "aviHTTPState"),
+        ("CHECKPOINT-MIB", "aviHTTPLastVirusName"),
+        ("CHECKPOINT-MIB", "aviHTTPLastVirusTime"),
+        ("CHECKPOINT-MIB", "aviHTTPTopVirusesName"),
+        ("CHECKPOINT-MIB", "aviHTTPTopVirusesCnt"),
+        ("CHECKPOINT-MIB", "aviFTPState"),
+        ("CHECKPOINT-MIB", "aviFTPLastVirusName"),
+        ("CHECKPOINT-MIB", "aviFTPLastVirusTime"),
+        ("CHECKPOINT-MIB", "aviFTPTopVirusesName"),
+        ("CHECKPOINT-MIB", "aviFTPTopVirusesCnt"),
+        ("CHECKPOINT-MIB", "aviSMTPState"),
+        ("CHECKPOINT-MIB", "aviSMTPLastVirusName"),
+        ("CHECKPOINT-MIB", "aviSMTPLastVirusTime"),
+        ("CHECKPOINT-MIB", "aviSMTPTopVirusesName"),
+        ("CHECKPOINT-MIB", "aviSMTPTopVirusesCnt"),
+        ("CHECKPOINT-MIB", "aviPOP3State"),
+        ("CHECKPOINT-MIB", "aviPOP3LastVirusName"),
+        ("CHECKPOINT-MIB", "aviPOP3LastVirusTime"),
+        ("CHECKPOINT-MIB", "aviPOP3TopVirusesName"),
+        ("CHECKPOINT-MIB", "aviPOP3TopVirusesCnt"),
+        ("CHECKPOINT-MIB", "aviStatCode"),
+        ("CHECKPOINT-MIB", "aviStatShortDescr"),
+        ("CHECKPOINT-MIB", "aviStatLongDescr"))
+)
+if mibBuilder.loadTexts:
+    aviProductsGroup.setStatus("current")
+
+eventiaAnalyzerProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 14)
+)
+eventiaAnalyzerProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "cpsemdStatCode"),
+        ("CHECKPOINT-MIB", "cpsemdStatShortDescr"),
+        ("CHECKPOINT-MIB", "cpsemdStatLongDescr"),
+        ("CHECKPOINT-MIB", "cpsemdProcAlive"),
+        ("CHECKPOINT-MIB", "cpsemdNewEventsHandled"),
+        ("CHECKPOINT-MIB", "cpsemdUpdatesHandled"),
+        ("CHECKPOINT-MIB", "cpsemdLastEventTime"),
+        ("CHECKPOINT-MIB", "cpsemdCurrentDBSize"),
+        ("CHECKPOINT-MIB", "cpsemdDBCapacity"),
+        ("CHECKPOINT-MIB", "cpsemdNumEvents"),
+        ("CHECKPOINT-MIB", "cpsemdDBDiskSpace"),
+        ("CHECKPOINT-MIB", "cpsemdCorrelationUnitIP"),
+        ("CHECKPOINT-MIB", "cpsemdCorrelationUnitLastRcvdTime"),
+        ("CHECKPOINT-MIB", "cpsemdCorrelationUnitNumEventsRcvd"),
+        ("CHECKPOINT-MIB", "cpsemdConnectionDuration"),
+        ("CHECKPOINT-MIB", "cpsemdDBIsFull"),
+        ("CHECKPOINT-MIB", "cpseadStatCode"),
+        ("CHECKPOINT-MIB", "cpseadStatShortDescr"),
+        ("CHECKPOINT-MIB", "cpseadStatLongDescr"),
+        ("CHECKPOINT-MIB", "cpseadProcAlive"),
+        ("CHECKPOINT-MIB", "cpseadConnectedToSem"),
+        ("CHECKPOINT-MIB", "cpseadNumProcessedLogs"),
+        ("CHECKPOINT-MIB", "cpseadJobID"),
+        ("CHECKPOINT-MIB", "cpseadJobName"),
+        ("CHECKPOINT-MIB", "cpseadJobState"),
+        ("CHECKPOINT-MIB", "cpseadJobIsOnline"),
+        ("CHECKPOINT-MIB", "cpseadJobLogServer"),
+        ("CHECKPOINT-MIB", "cpseadJobDataType"),
+        ("CHECKPOINT-MIB", "cpseadConnectedToLogServer"),
+        ("CHECKPOINT-MIB", "cpseadNumAnalyzedLogs"),
+        ("CHECKPOINT-MIB", "cpseadFileName"),
+        ("CHECKPOINT-MIB", "cpseadFileCurrentPosition"),
+        ("CHECKPOINT-MIB", "cpseadStateDescriptionCode"),
+        ("CHECKPOINT-MIB", "cpseadStateDescription"),
+        ("CHECKPOINT-MIB", "cpseadNoFreeDiskSpace"))
+)
+if mibBuilder.loadTexts:
+    eventiaAnalyzerProductsGroup.setStatus("current")
+
+ufProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 15)
+)
+ufProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "ufEngineName"),
+        ("CHECKPOINT-MIB", "ufEngineVer"),
+        ("CHECKPOINT-MIB", "ufEngineDate"),
+        ("CHECKPOINT-MIB", "ufSignatureDate"),
+        ("CHECKPOINT-MIB", "ufSignatureVer"),
+        ("CHECKPOINT-MIB", "ufLastSigCheckTime"),
+        ("CHECKPOINT-MIB", "ufLastSigLocation"),
+        ("CHECKPOINT-MIB", "ufLastLicExp"),
+        ("CHECKPOINT-MIB", "ufIsMonitor"),
+        ("CHECKPOINT-MIB", "ufScannedCnt"),
+        ("CHECKPOINT-MIB", "ufBlockedCnt"),
+        ("CHECKPOINT-MIB", "ufTopBlockedCatName"),
+        ("CHECKPOINT-MIB", "ufTopBlockedCatCnt"),
+        ("CHECKPOINT-MIB", "ufTopBlockedSiteName"),
+        ("CHECKPOINT-MIB", "ufTopBlockedSiteCnt"),
+        ("CHECKPOINT-MIB", "ufTopBlockedUserName"),
+        ("CHECKPOINT-MIB", "ufTopBlockedUserCnt"),
+        ("CHECKPOINT-MIB", "ufStatCode"),
+        ("CHECKPOINT-MIB", "ufStatShortDescr"),
+        ("CHECKPOINT-MIB", "ufStatLongDescr"))
+)
+if mibBuilder.loadTexts:
+    ufProductsGroup.setStatus("current")
+
+msProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 16)
+)
+msProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "msProductName"),
+        ("CHECKPOINT-MIB", "msMajorVersion"),
+        ("CHECKPOINT-MIB", "msMinorVersion"),
+        ("CHECKPOINT-MIB", "msBuildNumber"),
+        ("CHECKPOINT-MIB", "msVersionStr"),
+        ("CHECKPOINT-MIB", "msSpamNumScannedEmails"),
+        ("CHECKPOINT-MIB", "msSpamNumSpamEmails"),
+        ("CHECKPOINT-MIB", "msSpamNumHandledSpamEmails"),
+        ("CHECKPOINT-MIB", "msSpamControlsSpamEngine"),
+        ("CHECKPOINT-MIB", "msSpamControlsIpRepuatation"),
+        ("CHECKPOINT-MIB", "msSpamControlsSPF"),
+        ("CHECKPOINT-MIB", "msSpamControlsDomainKeys"),
+        ("CHECKPOINT-MIB", "msSpamControlsRDNS"),
+        ("CHECKPOINT-MIB", "msSpamControlsRBL"),
+        ("CHECKPOINT-MIB", "msExpirationDate"),
+        ("CHECKPOINT-MIB", "msEngineVer"),
+        ("CHECKPOINT-MIB", "msEngineDate"),
+        ("CHECKPOINT-MIB", "msStatCode"),
+        ("CHECKPOINT-MIB", "msStatShortDescr"),
+        ("CHECKPOINT-MIB", "msStatLongDescr"),
+        ("CHECKPOINT-MIB", "msServicePack"))
+)
+if mibBuilder.loadTexts:
+    msProductsGroup.setStatus("current")
+
+voipProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 17)
+)
+voipProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "voipProductName"),
+        ("CHECKPOINT-MIB", "voipMajorVersion"),
+        ("CHECKPOINT-MIB", "voipMinorVersion"),
+        ("CHECKPOINT-MIB", "voipBuildNumber"),
+        ("CHECKPOINT-MIB", "voipVersionStr"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkReqInterval"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkReqConfThreshold"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkReqCurrentVal"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkRegInterval"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkRegConfThreshold"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkRegCurrentVal"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkCallInitInterval"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkCallInitConfThreshold"),
+        ("CHECKPOINT-MIB", "voipDOSSipNetworkCallInitICurrentVal"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableIpAddress"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableInterval"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableConfThreshold"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableNumDOSSipRequests"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableNumTrustedRequests"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableNumNonTrustedRequests"),
+        ("CHECKPOINT-MIB", "voipDOSSipRateLimitingTableNumRequestsfromServers"),
+        ("CHECKPOINT-MIB", "voipCACConcurrentCallsConfThreshold"),
+        ("CHECKPOINT-MIB", "voipCACConcurrentCallsCurrentVal"),
+        ("CHECKPOINT-MIB", "voipStatCode"),
+        ("CHECKPOINT-MIB", "voipStatShortDescr"),
+        ("CHECKPOINT-MIB", "voipStatLongDescr"),
+        ("CHECKPOINT-MIB", "voipServicePack"))
+)
+if mibBuilder.loadTexts:
+    voipProductsGroup.setStatus("current")
+
+identityAwarenessProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 18)
+)
+identityAwarenessProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "identityAwarenessProductName"),
+        ("CHECKPOINT-MIB", "identityAwarenessAuthUsers"),
+        ("CHECKPOINT-MIB", "identityAwarenessUnAuthUsers"),
+        ("CHECKPOINT-MIB", "identityAwarenessAuthUsersKerberos"),
+        ("CHECKPOINT-MIB", "identityAwarenessAuthMachKerberos"),
+        ("CHECKPOINT-MIB", "identityAwarenessAuthUsersPass"),
+        ("CHECKPOINT-MIB", "identityAwarenessAuthUsersADQuery"),
+        ("CHECKPOINT-MIB", "identityAwarenessAuthMachADQuery"),
+        ("CHECKPOINT-MIB", "identityAwarenessLoggedInAgent"),
+        ("CHECKPOINT-MIB", "identityAwarenessLoggedInCaptivePortal"),
+        ("CHECKPOINT-MIB", "identityAwarenessLoggedInADQuery"),
+        ("CHECKPOINT-MIB", "identityAwarenessAntiSpoffProtection"),
+        ("CHECKPOINT-MIB", "identityAwarenessSuccUserLoginKerberos"),
+        ("CHECKPOINT-MIB", "identityAwarenessSuccMachLoginKerberos"),
+        ("CHECKPOINT-MIB", "identityAwarenessSuccUserLoginPass"),
+        ("CHECKPOINT-MIB", "identityAwarenessSuccUserLoginADQuery"),
+        ("CHECKPOINT-MIB", "identityAwarenessSuccMachLoginADQuery"),
+        ("CHECKPOINT-MIB", "identityAwarenessUnSuccUserLoginKerberos"),
+        ("CHECKPOINT-MIB", "identityAwarenessUnSuccMachLoginKerberos"),
+        ("CHECKPOINT-MIB", "identityAwarenessUnSuccUserLoginPass"),
+        ("CHECKPOINT-MIB", "identityAwarenessSuccUserLDAP"),
+        ("CHECKPOINT-MIB", "identityAwarenessUnSuccUserLDAP"),
+        ("CHECKPOINT-MIB", "identityAwarenessDataTrans"),
+        ("CHECKPOINT-MIB", "identityAwarenessDistributedEnvTableGwName"),
+        ("CHECKPOINT-MIB", "identityAwarenessDistributedEnvTableDisconnections"),
+        ("CHECKPOINT-MIB", "identityAwarenessDistributedEnvTableBruteForceAtt"),
+        ("CHECKPOINT-MIB", "identityAwarenessDistributedEnvTableStatus"),
+        ("CHECKPOINT-MIB", "identityAwarenessDistributedEnvTableIsLocal"),
+        ("CHECKPOINT-MIB", "identityAwarenessADQueryStatusCurrStatus"),
+        ("CHECKPOINT-MIB", "identityAwarenessADQueryStatusDomainName"),
+        ("CHECKPOINT-MIB", "identityAwarenessADQueryStatusDomainIP"),
+        ("CHECKPOINT-MIB", "identityAwarenessADQueryStatusEvents"),
+        ("CHECKPOINT-MIB", "identityAwarenessRADIUSAccounting"),
+        ("CHECKPOINT-MIB", "identityAwarenessIdentityCollectorActiveDirectory"),
+        ("CHECKPOINT-MIB", "identityAwarenessIdentityCollectorCiscoISE"),
+        ("CHECKPOINT-MIB", "identityAwarenessTerminalServer"),
+        ("CHECKPOINT-MIB", "identityAwarenessRemoteAccess"),
+        ("CHECKPOINT-MIB", "identityAwarenessIdentityWebAPI"),
+        ("CHECKPOINT-MIB", "identityAwarenessStatus"),
+        ("CHECKPOINT-MIB", "identityAwarenessStatusShortDesc"),
+        ("CHECKPOINT-MIB", "identityAwarenessStatusLongDesc"))
+)
+if mibBuilder.loadTexts:
+    identityAwarenessProductsGroup.setStatus("current")
+
+applicationControlProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 19)
+)
+applicationControlProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "applicationControlSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "applicationControlSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "applicationControlSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "applicationControlUpdateStatus"),
+        ("CHECKPOINT-MIB", "applicationControlUpdateDesc"),
+        ("CHECKPOINT-MIB", "applicationControlNextUpdate"),
+        ("CHECKPOINT-MIB", "applicationControlVersion"),
+        ("CHECKPOINT-MIB", "applicationControlStatusCode"),
+        ("CHECKPOINT-MIB", "applicationControlStatusShortDesc"),
+        ("CHECKPOINT-MIB", "applicationControlStatusLongDesc"))
+)
+if mibBuilder.loadTexts:
+    applicationControlProductsGroup.setStatus("current")
+
+thresholdsProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 20)
+)
+thresholdsProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "thresholdPolicy"),
+        ("CHECKPOINT-MIB", "thresholdState"),
+        ("CHECKPOINT-MIB", "thresholdStateDesc"),
+        ("CHECKPOINT-MIB", "thresholdEnabled"),
+        ("CHECKPOINT-MIB", "thresholdActive"),
+        ("CHECKPOINT-MIB", "thresholdEventsSinceStartup"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventName"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventCategory"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventSeverity"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventSubject"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventSubjectValue"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventActivationTime"),
+        ("CHECKPOINT-MIB", "thresholdActiveEventState"),
+        ("CHECKPOINT-MIB", "thresholdDestinationName"),
+        ("CHECKPOINT-MIB", "thresholdDestinationType"),
+        ("CHECKPOINT-MIB", "thresholdSendingState"),
+        ("CHECKPOINT-MIB", "thresholdSendingStateDesc"),
+        ("CHECKPOINT-MIB", "thresholdAlertCount"),
+        ("CHECKPOINT-MIB", "thresholdName"),
+        ("CHECKPOINT-MIB", "thresholdThresholdOID"),
+        ("CHECKPOINT-MIB", "thresholdErrorDesc"),
+        ("CHECKPOINT-MIB", "thresholdErrorTime"))
+)
+if mibBuilder.loadTexts:
+    thresholdsProductsGroup.setStatus("current")
+
+advancedUrlFilteringProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 21)
+)
+advancedUrlFilteringProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "advancedUrlFilteringSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringUpdateStatus"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringUpdateDesc"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringNextUpdate"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringVersion"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringRADStatusCode"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringRADStatusDesc"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringStatusCode"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringStatusShortDesc"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringStatusLongDesc"))
+)
+if mibBuilder.loadTexts:
+    advancedUrlFilteringProductsGroup.setStatus("current")
+
+dlpProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 22)
+)
+dlpProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "exchangeAgentName"),
+        ("CHECKPOINT-MIB", "exchangeAgentStatus"),
+        ("CHECKPOINT-MIB", "exchangeAgentTotalMsg"),
+        ("CHECKPOINT-MIB", "exchangeAgentTotalScannedMsg"),
+        ("CHECKPOINT-MIB", "exchangeAgentDroppedMsg"),
+        ("CHECKPOINT-MIB", "exchangeAgentUpTime"),
+        ("CHECKPOINT-MIB", "exchangeAgentTimeSinceLastMsg"),
+        ("CHECKPOINT-MIB", "exchangeAgentQueueLen"),
+        ("CHECKPOINT-MIB", "exchangeQueueLen"),
+        ("CHECKPOINT-MIB", "exchangeAgentAvgTimePerMsg"),
+        ("CHECKPOINT-MIB", "exchangeAgentAvgTimePerScannedMsg"),
+        ("CHECKPOINT-MIB", "exchangeAgentVersion"),
+        ("CHECKPOINT-MIB", "exchangeCPUUsage"),
+        ("CHECKPOINT-MIB", "exchangeMemoryUsage"),
+        ("CHECKPOINT-MIB", "exchangeAgentPolicyTimeStamp"),
+        ("CHECKPOINT-MIB", "dlpVersionString"),
+        ("CHECKPOINT-MIB", "dlpLicenseStatus"),
+        ("CHECKPOINT-MIB", "dlpLdapStatus"),
+        ("CHECKPOINT-MIB", "dlpTotalScans"),
+        ("CHECKPOINT-MIB", "dlpSMTPScans"),
+        ("CHECKPOINT-MIB", "dlpSMTPIncidents"),
+        ("CHECKPOINT-MIB", "dlpLastSMTPScan"),
+        ("CHECKPOINT-MIB", "dlpNumQuarantined"),
+        ("CHECKPOINT-MIB", "dlpQrntMsgsSize"),
+        ("CHECKPOINT-MIB", "dlpSentEMails"),
+        ("CHECKPOINT-MIB", "dlpExpiredEMails"),
+        ("CHECKPOINT-MIB", "dlpDiscardEMails"),
+        ("CHECKPOINT-MIB", "dlpPostfixQLen"),
+        ("CHECKPOINT-MIB", "dlpPostfixErrors"),
+        ("CHECKPOINT-MIB", "dlpPostfixQOldMsg"),
+        ("CHECKPOINT-MIB", "dlpPostfixQMsgsSz"),
+        ("CHECKPOINT-MIB", "dlpPostfixQFreeSp"),
+        ("CHECKPOINT-MIB", "dlpQrntFreeSpace"),
+        ("CHECKPOINT-MIB", "dlpQrntStatus"),
+        ("CHECKPOINT-MIB", "dlpHttpScans"),
+        ("CHECKPOINT-MIB", "dlpHttpIncidents"),
+        ("CHECKPOINT-MIB", "dlpHttpLastScan"),
+        ("CHECKPOINT-MIB", "dlpFtpScans"),
+        ("CHECKPOINT-MIB", "dlpFtpIncidents"),
+        ("CHECKPOINT-MIB", "dlpFtpLastScan"),
+        ("CHECKPOINT-MIB", "dlpBypassStatus"),
+        ("CHECKPOINT-MIB", "dlpUserCheckClnts"),
+        ("CHECKPOINT-MIB", "dlpLastPolStatus"),
+        ("CHECKPOINT-MIB", "dlpStatusCode"),
+        ("CHECKPOINT-MIB", "dlpStatusShortDesc"),
+        ("CHECKPOINT-MIB", "dlpStatusLongDesc"))
+)
+if mibBuilder.loadTexts:
+    dlpProductsGroup.setStatus("current")
+
+amwProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 23)
+)
+amwProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "antiBotSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "antiBotSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "antiBotSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "antiVirusSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "antiVirusSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "antiVirusSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "antiSpamSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "antiSpamSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "antiSpamSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "amwABUpdateStatus"),
+        ("CHECKPOINT-MIB", "amwABUpdateDesc"),
+        ("CHECKPOINT-MIB", "amwABNextUpdate"),
+        ("CHECKPOINT-MIB", "amwABVersion"),
+        ("CHECKPOINT-MIB", "amwAVUpdateStatus"),
+        ("CHECKPOINT-MIB", "amwAVUpdateDesc"),
+        ("CHECKPOINT-MIB", "amwAVNextUpdate"),
+        ("CHECKPOINT-MIB", "amwAVVersion"),
+        ("CHECKPOINT-MIB", "amwStatusCode"),
+        ("CHECKPOINT-MIB", "amwStatusShortDesc"),
+        ("CHECKPOINT-MIB", "amwStatusLongDesc"))
+)
+if mibBuilder.loadTexts:
+    amwProductsGroup.setStatus("current")
+
+asgProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 24)
+)
+asgProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "asgProductName"),
+        ("CHECKPOINT-MIB", "asgVer"),
+        ("CHECKPOINT-MIB", "asgKernelVer"),
+        ("CHECKPOINT-MIB", "asgBuildNum"),
+        ("CHECKPOINT-MIB", "asgMaximumBladesPerChassis"),
+        ("CHECKPOINT-MIB", "asgActiveBladesBitmask"),
+        ("CHECKPOINT-MIB", "asgInstalledBladesBitmask"),
+        ("CHECKPOINT-MIB", "asgInstalled"),
+        ("CHECKPOINT-MIB", "asgSystemUp"),
+        ("CHECKPOINT-MIB", "asgEvent"),
+        ("CHECKPOINT-MIB", "asgStatusCode"),
+        ("CHECKPOINT-MIB", "asgStatShort"),
+        ("CHECKPOINT-MIB", "asgStatLong"),
+        ("CHECKPOINT-MIB", "asgSecureXLStatusBitmask"),
+        ("CHECKPOINT-MIB", "asgAttachedBladesBitmask"),
+        ("CHECKPOINT-MIB", "asgThroughput"),
+        ("CHECKPOINT-MIB", "asgConnectionRate"),
+        ("CHECKPOINT-MIB", "asgPacketRate"),
+        ("CHECKPOINT-MIB", "asgConcurrConn"),
+        ("CHECKPOINT-MIB", "asgAccelConnectionRate"),
+        ("CHECKPOINT-MIB", "asgNonAccelConnectionRate"),
+        ("CHECKPOINT-MIB", "asgAccelConcurrConn"),
+        ("CHECKPOINT-MIB", "asgNonAccelConcurrConn"),
+        ("CHECKPOINT-MIB", "asgLoad"),
+        ("CHECKPOINT-MIB", "asgAccelLoadAvg"),
+        ("CHECKPOINT-MIB", "asgAccelLoadMin"),
+        ("CHECKPOINT-MIB", "asgAccelLoadMax"),
+        ("CHECKPOINT-MIB", "asgInstancesLoadAvg"),
+        ("CHECKPOINT-MIB", "asgInstancesLoadMin"),
+        ("CHECKPOINT-MIB", "asgInstancesLoadMax"),
+        ("CHECKPOINT-MIB", "asgVpnThroughput"),
+        ("CHECKPOINT-MIB", "asgVpnConn"),
+        ("CHECKPOINT-MIB", "asgNatConnRate"),
+        ("CHECKPOINT-MIB", "asgNatConn"),
+        ("CHECKPOINT-MIB", "asgVsxCpu1MinAvg"),
+        ("CHECKPOINT-MIB", "asgStatName"),
+        ("CHECKPOINT-MIB", "asgAccelPath"),
+        ("CHECKPOINT-MIB", "asgMediumPath"),
+        ("CHECKPOINT-MIB", "asgFirewallPath"),
+        ("CHECKPOINT-MIB", "asgDropped"),
+        ("CHECKPOINT-MIB", "asgCountersBladeId"),
+        ("CHECKPOINT-MIB", "asgCountersThroughput"),
+        ("CHECKPOINT-MIB", "asgCountersConnRate"),
+        ("CHECKPOINT-MIB", "asgCountersPacketRate"),
+        ("CHECKPOINT-MIB", "asgCountersConcurrConnNum"),
+        ("CHECKPOINT-MIB", "asgCountersAccelLoadAverage"),
+        ("CHECKPOINT-MIB", "asgCountersAccelLoadMin"),
+        ("CHECKPOINT-MIB", "asgCountersAccelLoadMax"),
+        ("CHECKPOINT-MIB", "asgCountersInstanceLoadAverage"),
+        ("CHECKPOINT-MIB", "asgCountersInstanceLoadMin"),
+        ("CHECKPOINT-MIB", "asgCountersInstanceLoadMax"),
+        ("CHECKPOINT-MIB", "asgPeakCriteria"),
+        ("CHECKPOINT-MIB", "asgPeakName"),
+        ("CHECKPOINT-MIB", "asgPeakValue"),
+        ("CHECKPOINT-MIB", "asgPeakTimeStamp"),
+        ("CHECKPOINT-MIB", "asgPeakUnits"),
+        ("CHECKPOINT-MIB", "asgAcceptedBytesTotal"),
+        ("CHECKPOINT-MIB", "asgDroppedBytesTotal"),
+        ("CHECKPOINT-MIB", "asgRejectedTotal"),
+        ("CHECKPOINT-MIB", "asgIPv6Throughput"),
+        ("CHECKPOINT-MIB", "asgIPv6ConnectionRate"),
+        ("CHECKPOINT-MIB", "asgIPv6PacketRate"),
+        ("CHECKPOINT-MIB", "asgIPv6ConcurrConn"),
+        ("CHECKPOINT-MIB", "asgIPv6AccelConnectionRate"),
+        ("CHECKPOINT-MIB", "asgIPv6NonAccelConnectionRate"),
+        ("CHECKPOINT-MIB", "asgIPv6AccelConcurrConn"),
+        ("CHECKPOINT-MIB", "asgIPv6NonAccelConcurrConn"),
+        ("CHECKPOINT-MIB", "asgIPv6Load"),
+        ("CHECKPOINT-MIB", "asgIPv6AccelLoadAvg"),
+        ("CHECKPOINT-MIB", "asgIPv6AccelLoadMin"),
+        ("CHECKPOINT-MIB", "asgIPv6AccelLoadMax"),
+        ("CHECKPOINT-MIB", "asgIPv6InstancesLoadAvg"),
+        ("CHECKPOINT-MIB", "asgIPv6InstancesLoadMin"),
+        ("CHECKPOINT-MIB", "asgIPv6InstancesLoadMax"),
+        ("CHECKPOINT-MIB", "asgIPv6VpnThroughput"),
+        ("CHECKPOINT-MIB", "asgIPv6VpnConn"),
+        ("CHECKPOINT-MIB", "asgIPv6NatConnRate"),
+        ("CHECKPOINT-MIB", "asgIPv6NatConn"),
+        ("CHECKPOINT-MIB", "asgIPv6VsxCpu1MinAvg"),
+        ("CHECKPOINT-MIB", "asgIPv6StatName"),
+        ("CHECKPOINT-MIB", "asgIPv6AccelPath"),
+        ("CHECKPOINT-MIB", "asgIPv6MediumPath"),
+        ("CHECKPOINT-MIB", "asgIPv6FirewallPath"),
+        ("CHECKPOINT-MIB", "asgIPv6Dropped"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersBladeId"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersThroughput"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersConnRate"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersPacketRate"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersConcurrConnNum"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersAccelLoadAverage"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersAccelLoadMin"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersAccelLoadMax"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersInstanceLoadAverage"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersInstanceLoadMin"),
+        ("CHECKPOINT-MIB", "asgIPv6CountersInstanceLoadMax"),
+        ("CHECKPOINT-MIB", "asgIPv6PeakCriteria"),
+        ("CHECKPOINT-MIB", "asgIPv6PeakName"),
+        ("CHECKPOINT-MIB", "asgIPv6PeakValue"),
+        ("CHECKPOINT-MIB", "asgIPv6PeakTimeStamp"),
+        ("CHECKPOINT-MIB", "asgIPv6PeakUnits"),
+        ("CHECKPOINT-MIB", "asgIPv6AcceptedBytesTotalRate"),
+        ("CHECKPOINT-MIB", "asgIPv6DroppedBytesTotalRate"),
+        ("CHECKPOINT-MIB", "asgIPv6DroppedTotalRate"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseBladeId"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseDroppedTotal"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseAcceptedTotal"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseRejectedTotal"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseBytesDroppedTotal"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseBytesAcceptedTotal"),
+        ("CHECKPOINT-MIB", "asgIPv6RulebaseBytesRejectedTotal"),
+        ("CHECKPOINT-MIB", "asgSensorName"),
+        ("CHECKPOINT-MIB", "asgSensorLocation"),
+        ("CHECKPOINT-MIB", "asgSensorCurrValue"),
+        ("CHECKPOINT-MIB", "asgSensorMinValue"),
+        ("CHECKPOINT-MIB", "asgSensorMaxValue"),
+        ("CHECKPOINT-MIB", "asgSensorThreshold"),
+        ("CHECKPOINT-MIB", "asgSensorUnit"),
+        ("CHECKPOINT-MIB", "asgSensorIdentity"),
+        ("CHECKPOINT-MIB", "asgSensorStatus"),
+        ("CHECKPOINT-MIB", "asgResourceName"),
+        ("CHECKPOINT-MIB", "asgResourceLocation"),
+        ("CHECKPOINT-MIB", "asgResourceCurrValue"),
+        ("CHECKPOINT-MIB", "asgResourceThreshold"),
+        ("CHECKPOINT-MIB", "asgResourceUnit"),
+        ("CHECKPOINT-MIB", "asgResourceTotalVal"),
+        ("CHECKPOINT-MIB", "asgResourceTitle"),
+        ("CHECKPOINT-MIB", "asgProtocolName"),
+        ("CHECKPOINT-MIB", "asgProtocolConns"),
+        ("CHECKPOINT-MIB", "asgProtocolTotalPkts"),
+        ("CHECKPOINT-MIB", "asgProtocolTotalBytes"),
+        ("CHECKPOINT-MIB", "asgServiceName"),
+        ("CHECKPOINT-MIB", "asgServiceConns"),
+        ("CHECKPOINT-MIB", "asgServiceTotalPkts"),
+        ("CHECKPOINT-MIB", "asgServiceTotalBytes"),
+        ("CHECKPOINT-MIB", "asgNetIfName"),
+        ("CHECKPOINT-MIB", "asgNetIfIPv4Addr"),
+        ("CHECKPOINT-MIB", "asgNetIfIPv6Addr"),
+        ("CHECKPOINT-MIB", "asgNetIfMACAddr"),
+        ("CHECKPOINT-MIB", "asgNetIfInfo"),
+        ("CHECKPOINT-MIB", "asgNetIfState"),
+        ("CHECKPOINT-MIB", "asgNetIfSpeed"),
+        ("CHECKPOINT-MIB", "asgNetIfMTU"),
+        ("CHECKPOINT-MIB", "asgNetIfDuplex"),
+        ("CHECKPOINT-MIB", "asgNetIfRx"),
+        ("CHECKPOINT-MIB", "asgNetIfTx"),
+        ("CHECKPOINT-MIB", "asgProblemName"),
+        ("CHECKPOINT-MIB", "asgProblemStatus"),
+        ("CHECKPOINT-MIB", "asgProblemPriority"),
+        ("CHECKPOINT-MIB", "asgProblemVerified"),
+        ("CHECKPOINT-MIB", "asgProblemDescr"),
+        ("CHECKPOINT-MIB", "asgChassisMode"),
+        ("CHECKPOINT-MIB", "asgChassisHAMode"),
+        ("CHECKPOINT-MIB", "asgSyncToActive"),
+        ("CHECKPOINT-MIB", "asgSyncToStandby"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsID"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsSource"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsSourceMask"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsDestination"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsDestinationMask"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsIpProtocol"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsSync"),
+        ("CHECKPOINT-MIB", "asgSyncExceptionsDelay"),
+        ("CHECKPOINT-MIB", "asgChassisParamsID"),
+        ("CHECKPOINT-MIB", "asgChassisParamsStatus"),
+        ("CHECKPOINT-MIB", "asgChassisParamsGrade"),
+        ("CHECKPOINT-MIB", "asgChassisParamsMaxGrade"),
+        ("CHECKPOINT-MIB", "asgChassisParamsUniqueIP"),
+        ("CHECKPOINT-MIB", "asgSGMID"),
+        ("CHECKPOINT-MIB", "asgSGMStatus"),
+        ("CHECKPOINT-MIB", "asgSGMProcess"),
+        ("CHECKPOINT-MIB", "asgSGMPolicyTime"),
+        ("CHECKPOINT-MIB", "asgFactorName"),
+        ("CHECKPOINT-MIB", "asgFactorValue"),
+        ("CHECKPOINT-MIB", "asgPriorityPortName"),
+        ("CHECKPOINT-MIB", "asgPortPriority"),
+        ("CHECKPOINT-MIB", "asgCoreRowTitle"),
+        ("CHECKPOINT-MIB", "blade1"),
+        ("CHECKPOINT-MIB", "blade2"),
+        ("CHECKPOINT-MIB", "blade3"),
+        ("CHECKPOINT-MIB", "blade4"),
+        ("CHECKPOINT-MIB", "blade5"),
+        ("CHECKPOINT-MIB", "blade6"),
+        ("CHECKPOINT-MIB", "blade7"),
+        ("CHECKPOINT-MIB", "blade8"),
+        ("CHECKPOINT-MIB", "blade9"),
+        ("CHECKPOINT-MIB", "blade10"),
+        ("CHECKPOINT-MIB", "blade11"),
+        ("CHECKPOINT-MIB", "blade12"),
+        ("CHECKPOINT-MIB", "blade13"),
+        ("CHECKPOINT-MIB", "blade14"),
+        ("CHECKPOINT-MIB", "blade15"),
+        ("CHECKPOINT-MIB", "blade16"),
+        ("CHECKPOINT-MIB", "blade17"),
+        ("CHECKPOINT-MIB", "blade18"),
+        ("CHECKPOINT-MIB", "blade19"),
+        ("CHECKPOINT-MIB", "blade20"),
+        ("CHECKPOINT-MIB", "blade21"),
+        ("CHECKPOINT-MIB", "blade22"),
+        ("CHECKPOINT-MIB", "blade23"),
+        ("CHECKPOINT-MIB", "blade24"),
+        ("CHECKPOINT-MIB", "blade25"),
+        ("CHECKPOINT-MIB", "blade26"),
+        ("CHECKPOINT-MIB", "blade27"),
+        ("CHECKPOINT-MIB", "blade28"),
+        ("CHECKPOINT-MIB", "blade29"),
+        ("CHECKPOINT-MIB", "blade30"),
+        ("CHECKPOINT-MIB", "blade31"),
+        ("CHECKPOINT-MIB", "blade32"),
+        ("CHECKPOINT-MIB", "blade33"),
+        ("CHECKPOINT-MIB", "blade34"),
+        ("CHECKPOINT-MIB", "blade35"),
+        ("CHECKPOINT-MIB", "blade36"),
+        ("CHECKPOINT-MIB", "blade37"),
+        ("CHECKPOINT-MIB", "blade38"),
+        ("CHECKPOINT-MIB", "blade39"),
+        ("CHECKPOINT-MIB", "blade40"),
+        ("CHECKPOINT-MIB", "blade41"),
+        ("CHECKPOINT-MIB", "blade42"),
+        ("CHECKPOINT-MIB", "blade43"),
+        ("CHECKPOINT-MIB", "blade44"),
+        ("CHECKPOINT-MIB", "blade45"),
+        ("CHECKPOINT-MIB", "blade46"),
+        ("CHECKPOINT-MIB", "blade47"),
+        ("CHECKPOINT-MIB", "blade48"),
+        ("CHECKPOINT-MIB", "asgVslsSgmRatio"),
+        ("CHECKPOINT-MIB", "asgVslsSystemPrimaryChassis"),
+        ("CHECKPOINT-MIB", "asgVslsVsName"),
+        ("CHECKPOINT-MIB", "asgVslsVsPrimaryChassis"),
+        ("CHECKPOINT-MIB", "asgVslsVsActiveChassis"),
+        ("CHECKPOINT-MIB", "asgVslsVsHealth"),
+        ("CHECKPOINT-MIB", "asgVslsVsReason"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis1InterfacesUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis1InterfacesTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis1FwksUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis1FwksTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis2InterfacesUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis2InterfacesTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis2FwksUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis2FwksTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis3InterfacesUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis3InterfacesTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis3FwksUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis3FwksTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis4InterfacesUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis4InterfacesTotal"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis4FwksUp"),
+        ("CHECKPOINT-MIB", "asgVslsVsChassis4FwksTotal"),
+        ("CHECKPOINT-MIB", "asgVSXConnBladeID"),
+        ("CHECKPOINT-MIB", "asgVSXIPver"),
+        ("CHECKPOINT-MIB", "asgVSXConcurrentConns"),
+        ("CHECKPOINT-MIB", "asgVSXPeakConns"),
+        ("CHECKPOINT-MIB", "asgVSXConnLimit"),
+        ("CHECKPOINT-MIB", "asgVSXConnectionsNumberPerSystem"),
+        ("CHECKPOINT-MIB", "asgVSXMemBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXOverallMem"),
+        ("CHECKPOINT-MIB", "asgVSXCoreUtilBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXCoreUtilCPUID"),
+        ("CHECKPOINT-MIB", "asgVSXCoreUtilUsage"),
+        ("CHECKPOINT-MIB", "asgVSXRateBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXRateValue"),
+        ("CHECKPOINT-MIB", "asgVSXPacketRatePerSystem"),
+        ("CHECKPOINT-MIB", "asgVSXThroughputBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXThroughputValue"),
+        ("CHECKPOINT-MIB", "asgVSXThroughputPerSystem"),
+        ("CHECKPOINT-MIB", "asgVSXThroughputPerInterfaceBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXThroughputPerInterfaceName"),
+        ("CHECKPOINT-MIB", "asgVSXThroughputPerInterfaceValue"),
+        ("CHECKPOINT-MIB", "asgVSXPerSystemThroughputPerInterfaceName"),
+        ("CHECKPOINT-MIB", "asgVSXPerSystemThroughputPerInterfaceValue"),
+        ("CHECKPOINT-MIB", "asgVSXConnectionRateBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXConnectionRateValue"),
+        ("CHECKPOINT-MIB", "asgVSXConnectionRatePerSystem"),
+        ("CHECKPOINT-MIB", "asgVSXVirtualMemoryBladeid"),
+        ("CHECKPOINT-MIB", "asgVSXVirtualMemoryValue"),
+        ("CHECKPOINT-MIB", "asgDiagnosticTestName"),
+        ("CHECKPOINT-MIB", "asgDiagnosticLastRun"),
+        ("CHECKPOINT-MIB", "asgDiagnosticResult"),
+        ("CHECKPOINT-MIB", "asgDiagnosticComment"),
+        ("CHECKPOINT-MIB", "asgDiagSummary"))
+)
+if mibBuilder.loadTexts:
+    asgProductsGroup.setStatus("current")
+
+teProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 25)
+)
+teProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "teSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "teCloudSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "teSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "teSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "teUpdateStatus"),
+        ("CHECKPOINT-MIB", "teUpdateDesc"),
+        ("CHECKPOINT-MIB", "teStatusCode"),
+        ("CHECKPOINT-MIB", "teStatusShortDesc"),
+        ("CHECKPOINT-MIB", "teStatusLongDesc"))
+)
+if mibBuilder.loadTexts:
+    teProductsGroup.setStatus("current")
+
+threatExtractionProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 26)
+)
+threatExtractionProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "threatExtractionSubscriptionStatus"),
+        ("CHECKPOINT-MIB", "threatExtractionSubscriptionExpDate"),
+        ("CHECKPOINT-MIB", "threatExtractionSubscriptionDesc"),
+        ("CHECKPOINT-MIB", "threatExtractionTotalScannedAttachments"),
+        ("CHECKPOINT-MIB", "threatExtractionCleanedAttachments"),
+        ("CHECKPOINT-MIB", "threatExtractionOriginalAttachmentsAccesses"),
+        ("CHECKPOINT-MIB", "threatExtractionStatusCode"),
+        ("CHECKPOINT-MIB", "threatExtractionStatusShortDesc"),
+        ("CHECKPOINT-MIB", "threatExtractionStatusLongDesc"),
+        ("CHECKPOINT-MIB", "threatExtractionEngineVersion"))
+)
+if mibBuilder.loadTexts:
+    threatExtractionProductsGroup.setStatus("current")
+
+sxlProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 27)
+)
+sxlProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "fwSXLStatus"),
+        ("CHECKPOINT-MIB", "fwSXLConnsExisting"),
+        ("CHECKPOINT-MIB", "fwSXLConnsAdded"),
+        ("CHECKPOINT-MIB", "fwSXLConnsDeleted"),
+        ("CHECKPOINT-MIB", "fwSXLAggrRxMbits"),
+        ("CHECKPOINT-MIB", "fwSXLAggrTxMbits"),
+        ("CHECKPOINT-MIB", "fwSXLAggrInboundKbitsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLAggrOutboundKbitsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLAggrInboundpacketsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLAggrOutboundpacketsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLAggrConnectionsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLAggrConcurrentConnections"),
+        ("CHECKPOINT-MIB", "fwSXLAggrPpak2FwNotificationsSuccessful"),
+        ("CHECKPOINT-MIB", "fwSXLAggrPpak2FwNotificationsFailure"),
+        ("CHECKPOINT-MIB", "fwSXLAggrFw2PpakNotificationsSuccessful"),
+        ("CHECKPOINT-MIB", "fwSXLAggrFw2PpakNotificationsFailure"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsTotPackets"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsPxlDecision"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsFragmentationError"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsF2FNotAllowed"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsHeavyLoadTcpViolation"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsCorruptPacket"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsHeavyLoadNewConnection"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsClearPacketOnVPN"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsEncryptionFailed"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsDropTemplate"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsDecryptionFailed"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsOutboundConnNotFound"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsInterfaceDown"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsClusterError"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsXmlError"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsAntiSpoofing"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsSanityError"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsQxlDecision"),
+        ("CHECKPOINT-MIB", "fwSXLAggrDropsLoopPrevention"),
+        ("CHECKPOINT-MIB", "fwSXLHostRxMbits"),
+        ("CHECKPOINT-MIB", "fwSXLHostTxMbits"),
+        ("CHECKPOINT-MIB", "fwSXLHostInboundKbitsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLHostOutboundKbitsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLHostInboundpacketsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLHostOutboundpacketsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLHostConnectionsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLHostConcurrentConnections"),
+        ("CHECKPOINT-MIB", "fwSXLHostPpak2FwNotificationsSuccessful"),
+        ("CHECKPOINT-MIB", "fwSXLHostPpak2FwNotificationsFailure"),
+        ("CHECKPOINT-MIB", "fwSXLHostFw2PpakNotificationsSuccessful"),
+        ("CHECKPOINT-MIB", "fwSXLHostFw2PpakNotificationsFailure"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsTotPackets"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsPxlDecision"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsFragmentationError"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsF2FNotAllowed"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsHeavyLoadTcpViolation"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsCorruptPacket"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsHeavyLoadNewConnection"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsClearPacketOnVPN"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsEncryptionFailed"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsDropTemplate"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsDecryptionFailed"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsOutboundConnNotFound"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsInterfaceDown"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsClusterError"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsXmlError"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsAntiSpoofing"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsSanityError"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsQxlDecision"),
+        ("CHECKPOINT-MIB", "fwSXLHostDropsLoopPrevention"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface0Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface1Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface2Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface3Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface4Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface5Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface6Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface7Name"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface0Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface1Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface2Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface3Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface4Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface5Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface6Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface7Speed"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface0State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface1State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface2State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface3State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface4State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface5State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface6State"),
+        ("CHECKPOINT-MIB", "fwSXLHostInterface7State"),
+        ("CHECKPOINT-MIB", "fwSXLHostState"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsRxMbits"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsTxMbits"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInboundKbitsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsOutboundKbitsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInboundpacketsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsOutboundpacketsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsConnectionsPerSecond"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsConcurrentConnections"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsPpak2FwNotificationsSuccessful"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsPpak2FwNotificationsFailure"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsFw2PpakNotificationsSuccessful"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsFw2PpakNotificationsFailure"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsTotPackets"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsPxlDecision"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsFragmentationError"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsF2FNotAllowed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsHeavyLoadTcpViolation"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsCorruptPacket"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsHeavyLoadNewConnection"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsClearPacketOnVPN"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsEncryptionFailed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsDropTemplate"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsDecryptionFailed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsOutboundConnNotFound"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsInterfaceDown"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsClusterError"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsXmlError"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsAntiSpoofing"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsSanityError"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsQxlDecision"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsDropsLoopPrevention"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface0Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface1Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface2Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface3Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface4Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface5Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface6Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface7Name"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface0Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface1Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface2Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface3Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface4Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface5Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface6Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface7Speed"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface0State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface1State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface2State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface3State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface4State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface5State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface6State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsInterface7State"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsSxlTotMemory"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsSxlUsedMemory"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsSxlFreeMemory"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsPacketPoolTotMemory"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsPacketPoolUsedMemory"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsPacketPoolFreeMemory"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu0Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu1Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu2Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu3Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu4Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu5Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu6Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu7Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu8Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu9Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu10Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu11Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu12Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu13Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu14Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu15Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu16Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu17Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu18Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu19Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu20Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu21Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu22Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu23Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu24Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu25Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu26Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu27Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu28Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu29Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu30Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsCpu31Usage"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsGeneralIndex"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsState"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsType"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsSerialNumber"),
+        ("CHECKPOINT-MIB", "fwSXLFalconsSlotNumber"))
+)
+if mibBuilder.loadTexts:
+    sxlProductsGroup.setStatus("current")
+
+vsecControllerProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 28)
+)
+vsecControllerProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "vsecVsecStatus"),
+        ("CHECKPOINT-MIB", "vsecNumberOfDisconnectedDataCenters"),
+        ("CHECKPOINT-MIB", "vsecTotalNumberOfDataCenters"),
+        ("CHECKPOINT-MIB", "vsecTotalNumberOfImportedDataCenterObjects"),
+        ("CHECKPOINT-MIB", "vsecTotalNumberOfGwWithDataCenterObjects"),
+        ("CHECKPOINT-MIB", "vsecDataCenterName"),
+        ("CHECKPOINT-MIB", "vsecDataCenterType"),
+        ("CHECKPOINT-MIB", "vsecConnectionStatus"),
+        ("CHECKPOINT-MIB", "vsecNumberOfImportedObjects"),
+        ("CHECKPOINT-MIB", "vsecNumberOfAutoUpdate"),
+        ("CHECKPOINT-MIB", "vsecGatewayName"),
+        ("CHECKPOINT-MIB", "vsecGatewayIP"),
+        ("CHECKPOINT-MIB", "vsecGatewayVersion"),
+        ("CHECKPOINT-MIB", "vsecGatewayUpdateSucceeded"))
+)
+if mibBuilder.loadTexts:
+    vsecControllerProductsGroup.setStatus("current")
+
+ipsProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 29)
+)
+ipsProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "ipsStatus"),
+        ("CHECKPOINT-MIB", "ipsUpdateStatus"),
+        ("CHECKPOINT-MIB", "ipsUpdateDescription"),
+        ("CHECKPOINT-MIB", "ipsNextUpdateDescription"),
+        ("CHECKPOINT-MIB", "ipsDBVersion"),
+        ("CHECKPOINT-MIB", "ipsState"),
+        ("CHECKPOINT-MIB", "ipsStateShortDesc"),
+        ("CHECKPOINT-MIB", "ipsStateLongDesc"))
+)
+if mibBuilder.loadTexts:
+    ipsProductsGroup.setStatus("current")
+
+httpsInspectionProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 30)
+)
+httpsInspectionProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "httpsInspectionStatus"),
+        ("CHECKPOINT-MIB", "httpsInspectionStatusDescription"),
+        ("CHECKPOINT-MIB", "hsmEnabled"),
+        ("CHECKPOINT-MIB", "hsmEnabledDescription"),
+        ("CHECKPOINT-MIB", "hsmPartitionAccess"),
+        ("CHECKPOINT-MIB", "hsmPartitionAccessDescription"),
+        ("CHECKPOINT-MIB", "outboundStatus"),
+        ("CHECKPOINT-MIB", "outboundStatusDescription"))
+)
+if mibBuilder.loadTexts:
+    httpsInspectionProductsGroup.setStatus("current")
+
+mhoProductsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 2, 31)
+)
+mhoProductsGroup.setObjects(
+      *(("CHECKPOINT-MIB", "mhoRxPortLabel"),
+        ("CHECKPOINT-MIB", "mhoRxUcast"),
+        ("CHECKPOINT-MIB", "mhoRxMcast"),
+        ("CHECKPOINT-MIB", "mhoRxBcast"),
+        ("CHECKPOINT-MIB", "mhoRxErr"),
+        ("CHECKPOINT-MIB", "mhoRxFrames"),
+        ("CHECKPOINT-MIB", "mhoRxBytes"),
+        ("CHECKPOINT-MIB", "mhoRxFcsErr"),
+        ("CHECKPOINT-MIB", "mhoTxPortLabel"),
+        ("CHECKPOINT-MIB", "mhoTxUcast"),
+        ("CHECKPOINT-MIB", "mhoTxMcast"),
+        ("CHECKPOINT-MIB", "mhoTxBcast"),
+        ("CHECKPOINT-MIB", "mhoTxErr"),
+        ("CHECKPOINT-MIB", "mhoTxFrames"),
+        ("CHECKPOINT-MIB", "mhoTxBytes"),
+        ("CHECKPOINT-MIB", "mhoRxBuffPortLabel"),
+        ("CHECKPOINT-MIB", "mhoRxBuff0Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff0Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff0Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff1Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff1Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff1Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff2Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff2Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff2Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff3Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff3Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff3Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff4Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff4Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff4Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff5Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff5Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff5Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff6Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff6Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff6Discard"),
+        ("CHECKPOINT-MIB", "mhoRxBuff7Frames"),
+        ("CHECKPOINT-MIB", "mhoRxBuff7Octet"),
+        ("CHECKPOINT-MIB", "mhoRxBuff7Discard"),
+        ("CHECKPOINT-MIB", "mhoStatePortLabel"),
+        ("CHECKPOINT-MIB", "mhoStateLinkState"),
+        ("CHECKPOINT-MIB", "mhoStateAdminState"),
+        ("CHECKPOINT-MIB", "mhoStateSpeed"),
+        ("CHECKPOINT-MIB", "mhoSummaryPortLabel"),
+        ("CHECKPOINT-MIB", "mhoSummaryLinkState"),
+        ("CHECKPOINT-MIB", "mhoSummaryAdminState"),
+        ("CHECKPOINT-MIB", "mhoSummarySpeed"),
+        ("CHECKPOINT-MIB", "mhoSummaryRxFcsErr"),
+        ("CHECKPOINT-MIB", "mhoSummaryRxErr"),
+        ("CHECKPOINT-MIB", "mhoSummaryRxFrames"),
+        ("CHECKPOINT-MIB", "mhoSummaryRxBytes"),
+        ("CHECKPOINT-MIB", "mhoSummaryTxErr"),
+        ("CHECKPOINT-MIB", "mhoSummaryTxFrames"),
+        ("CHECKPOINT-MIB", "mhoSummaryTxBytes"),
+        ("CHECKPOINT-MIB", "mhoACLsUsed"),
+        ("CHECKPOINT-MIB", "mhoACLsTotal"),
+        ("CHECKPOINT-MIB", "mhoACLsAvailable"))
+)
+if mibBuilder.loadTexts:
+    mhoProductsGroup.setStatus("current")
+
+
+# Notification objects
 
 
 # Notifications groups
@@ -17006,6 +27227,47 @@ if mibBuilder.loadTexts:
 
 # Module compliance
 
+chkpntBasicCompliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 2620, 2, 1, 1)
+)
+chkpntBasicCompliance.setObjects(
+      *(("CHECKPOINT-MIB", "fwProductsGroup"),
+        ("CHECKPOINT-MIB", "vpnProductsGroup"),
+        ("CHECKPOINT-MIB", "fgProductsGroup"),
+        ("CHECKPOINT-MIB", "haProductsGroup"),
+        ("CHECKPOINT-MIB", "svnProductsGroup"),
+        ("CHECKPOINT-MIB", "mngmtProductsGroup"),
+        ("CHECKPOINT-MIB", "wamProductsGroup"),
+        ("CHECKPOINT-MIB", "dtpsProductsGroup"),
+        ("CHECKPOINT-MIB", "lsProductsGroup"),
+        ("CHECKPOINT-MIB", "vsxProductsGroup"),
+        ("CHECKPOINT-MIB", "smartDefenseProductsGroup"),
+        ("CHECKPOINT-MIB", "gxProductsGroup"),
+        ("CHECKPOINT-MIB", "aviProductsGroup"),
+        ("CHECKPOINT-MIB", "eventiaAnalyzerProductsGroup"),
+        ("CHECKPOINT-MIB", "ufProductsGroup"),
+        ("CHECKPOINT-MIB", "msProductsGroup"),
+        ("CHECKPOINT-MIB", "voipProductsGroup"),
+        ("CHECKPOINT-MIB", "identityAwarenessProductsGroup"),
+        ("CHECKPOINT-MIB", "applicationControlProductsGroup"),
+        ("CHECKPOINT-MIB", "thresholdsProductsGroup"),
+        ("CHECKPOINT-MIB", "advancedUrlFilteringProductsGroup"),
+        ("CHECKPOINT-MIB", "dlpProductsGroup"),
+        ("CHECKPOINT-MIB", "amwProductsGroup"),
+        ("CHECKPOINT-MIB", "asgProductsGroup"),
+        ("CHECKPOINT-MIB", "teProductsGroup"),
+        ("CHECKPOINT-MIB", "threatExtractionProductsGroup"),
+        ("CHECKPOINT-MIB", "sxlProductsGroup"),
+        ("CHECKPOINT-MIB", "vsecControllerProductsGroup"),
+        ("CHECKPOINT-MIB", "ipsProductsGroup"),
+        ("CHECKPOINT-MIB", "httpsInspectionProductsGroup"),
+        ("CHECKPOINT-MIB", "mhoProductsGroup"))
+)
+if mibBuilder.loadTexts:
+    chkpntBasicCompliance.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -17014,8 +27276,6 @@ mibBuilder.exportSymbols(
     **{"checkpoint": checkpoint,
        "products": products,
        "fw": fw,
-       "fwTrapPrefix": fwTrapPrefix,
-       "fwTrap": fwTrap,
        "fwModuleState": fwModuleState,
        "fwFilterName": fwFilterName,
        "fwFilterDate": fwFilterDate,
@@ -17026,7 +27286,6 @@ mibBuilder.exportSymbols(
        "fwMajor": fwMajor,
        "fwMinor": fwMinor,
        "fwProduct": fwProduct,
-       "fwEvent": fwEvent,
        "fwSICTrustState": fwSICTrustState,
        "fwProdName": fwProdName,
        "fwVerMajor": fwVerMajor,
@@ -17052,6 +27311,13 @@ mibBuilder.exportSymbols(
        "fwLogIn": fwLogIn,
        "fwLogOut": fwLogOut,
        "fwAcceptedTotal": fwAcceptedTotal,
+       "fwIspTable": fwIspTable,
+       "fwIspEntry": fwIspEntry,
+       "fwIspIndex": fwIspIndex,
+       "fwIspName": fwIspName,
+       "fwIspStatus": fwIspStatus,
+       "fwIspRole": fwIspRole,
+       "unknown": unknown,
        "fwAcceptedBytesTotal": fwAcceptedBytesTotal,
        "fwDroppedBytesTotal": fwDroppedBytesTotal,
        "fwConnTableLimit": fwConnTableLimit,
@@ -17062,8 +27328,8 @@ mibBuilder.exportSymbols(
        "fwAcceptedBytesRates": fwAcceptedBytesRates,
        "fwAcceptedPcktsRates": fwAcceptedPcktsRates,
        "fwConnsRate": fwConnsRate,
-       "fwIfTable64": fwIfTable64,
-       "fwIfEntry64": fwIfEntry64,
+       "fwIf64Table": fwIf64Table,
+       "fwIf64Entry": fwIf64Entry,
        "fwIfIndex64": fwIfIndex64,
        "fwIfName64": fwIfName64,
        "fwAcceptPcktsIn64": fwAcceptPcktsIn64,
@@ -17076,6 +27342,7 @@ mibBuilder.exportSymbols(
        "fwRejectPcktsOut64": fwRejectPcktsOut64,
        "fwLogIn64": fwLogIn64,
        "fwLogOut64": fwLogOut64,
+       "fwFullyUtilizedDrops": fwFullyUtilizedDrops,
        "fwPerfStat": fwPerfStat,
        "fwHmem": fwHmem,
        "fwHmem-block-size": fwHmem_block_size,
@@ -17448,6 +27715,12 @@ mibBuilder.exportSymbols(
        "fwLocalLoggingStat": fwLocalLoggingStat,
        "fwLocalLoggingWriteRate": fwLocalLoggingWriteRate,
        "fwLoggingHandlingRate": fwLoggingHandlingRate,
+       "fwInstancesCPU": fwInstancesCPU,
+       "fwInstancesCPUTable": fwInstancesCPUTable,
+       "fwInstancesCPUEntry": fwInstancesCPUEntry,
+       "fwInstancesCPUInstanceName": fwInstancesCPUInstanceName,
+       "fwInstancesCPUUsage": fwInstancesCPUUsage,
+       "fwInstancesCPUTotal": fwInstancesCPUTotal,
        "vpn": vpn,
        "cpvProdName": cpvProdName,
        "cpvVerMajor": cpvVerMajor,
@@ -17626,6 +27899,7 @@ mibBuilder.exportSymbols(
        "haClusterSyncName": haClusterSyncName,
        "haClusterSyncAddr": haClusterSyncAddr,
        "haClusterSyncNetMask": haClusterSyncNetMask,
+       "haClusterXLFailover": haClusterXLFailover,
        "haStatCode": haStatCode,
        "haStatShort": haStatShort,
        "haStatLong": haStatLong,
@@ -17822,6 +28096,8 @@ mibBuilder.exportSymbols(
        "vdName": vdName,
        "vdType": vdType,
        "ctxId": ctxId,
+       "arpTableInfo": arpTableInfo,
+       "arpTableSize": arpTableSize,
        "svnNetStat": svnNetStat,
        "svnNetIfTable": svnNetIfTable,
        "svnNetIfTableEntry": svnNetIfTableEntry,
@@ -17928,6 +28204,52 @@ mibBuilder.exportSymbols(
        "checkPoint5900": checkPoint5900,
        "checkPoint3100": checkPoint3100,
        "checkPoint5100": checkPoint5100,
+       "checkPointSmart-1405": checkPointSmart_1405,
+       "checkPointSmart-1410": checkPointSmart_1410,
+       "checkPointSmart-5050": checkPointSmart_5050,
+       "checkPointSmart-525": checkPointSmart_525,
+       "checkPointSmart-5150": checkPointSmart_5150,
+       "checkPoint23900": checkPoint23900,
+       "checkPoint6500": checkPoint6500,
+       "checkPoint6800": checkPoint6800,
+       "checkPoint16000T": checkPoint16000T,
+       "checkPoint26000": checkPoint26000,
+       "checkPointSmart-625": checkPointSmart_625,
+       "checkPoint16000": checkPoint16000,
+       "checkPoint26000T": checkPoint26000T,
+       "checkPoint3600": checkPoint3600,
+       "checkPoint3600T": checkPoint3600T,
+       "checkPoint6200B": checkPoint6200B,
+       "checkPoint6200P": checkPoint6200P,
+       "checkPoint6200T": checkPoint6200T,
+       "checkPoint6600": checkPoint6600,
+       "checkPoint6900": checkPoint6900,
+       "checkPoint16600HS": checkPoint16600HS,
+       "checkPoint28600HS": checkPoint28600HS,
+       "checkPoint6700": checkPoint6700,
+       "checkPoint7000": checkPoint7000,
+       "checkPoint16200": checkPoint16200,
+       "checkPoint28000": checkPoint28000,
+       "checkPoint6400": checkPoint6400,
+       "checkPoint3800": checkPoint3800,
+       "checkPointSmart-6000-L": checkPointSmart_6000_L,
+       "checkPointSmart-6000-XL": checkPointSmart_6000_XL,
+       "checkPointSmart-600-S": checkPointSmart_600_S,
+       "checkPointSmart-600-M": checkPointSmart_600_M,
+       "checkPointSMB-1530": checkPointSMB_1530,
+       "checkPointSMB-1550": checkPointSMB_1550,
+       "checkPointSMB-1570": checkPointSMB_1570,
+       "checkPointSMB-1570R": checkPointSMB_1570R,
+       "checkPointSMB-1590": checkPointSMB_1590,
+       "checkPointSMB-1600": checkPointSMB_1600,
+       "checkPointSMB-1800": checkPointSMB_1800,
+       "checkPoint61000": checkPoint61000,
+       "checkPoint64000": checkPoint64000,
+       "checkPoint41000": checkPoint41000,
+       "checkPoint44000": checkPoint44000,
+       "checkPointMHO140": checkPointMHO140,
+       "checkPointMHO170": checkPointMHO170,
+       "checkPointMHO175": checkPointMHO175,
        "svnServicePack": svnServicePack,
        "mngmt": mngmt,
        "mgProdName": mgProdName,
@@ -18049,7 +28371,8 @@ mibBuilder.exportSymbols(
        "vsxVsSupported": vsxVsSupported,
        "vsxVsConfigured": vsxVsConfigured,
        "vsxVsInstalled": vsxVsInstalled,
-       "vsxVrfConfigured": vsxVrfConfigured,
+       "vsxVsidConfigured": vsxVsidConfigured,
+       "vsxAllVSsConnsSum": vsxAllVSsConnsSum,
        "vsxStatus": vsxStatus,
        "vsxStatusTable": vsxStatusTable,
        "vsxStatusEntry": vsxStatusEntry,
@@ -18063,29 +28386,24 @@ mibBuilder.exportSymbols(
        "vsxStatusSicTrustState": vsxStatusSicTrustState,
        "vsxStatusHAState": vsxStatusHAState,
        "vsxStatusVSWeight": vsxStatusVSWeight,
-       "vsxStatusCPUUsageTable": vsxStatusCPUUsageTable,
-       "vsxStatusCPUUsageEntry": vsxStatusCPUUsageEntry,
-       "vsxStatusCPUUsage1sec": vsxStatusCPUUsage1sec,
-       "vsxStatusCPUUsage10sec": vsxStatusCPUUsage10sec,
-       "vsxStatusCPUUsage1min": vsxStatusCPUUsage1min,
-       "vsxStatusCPUUsage1hr": vsxStatusCPUUsage1hr,
-       "vsxStatusCPUUsage24hr": vsxStatusCPUUsage24hr,
-       "vsxStatusCPUUsageVSId": vsxStatusCPUUsageVSId,
        "vsxStatusMemoryUsageTable": vsxStatusMemoryUsageTable,
        "vsxStatusMemoryUsageEntry": vsxStatusMemoryUsageEntry,
        "vsxStatusMemoryUsageVSId": vsxStatusMemoryUsageVSId,
        "vsxStatusMemoryUsageVSName": vsxStatusMemoryUsageVSName,
        "vsxStatusMemoryUsage": vsxStatusMemoryUsage,
-       "vsxStatusCPUUsagePerCPUTable": vsxStatusCPUUsagePerCPUTable,
-       "vsxStatusCPUUsagePerCPUEntry": vsxStatusCPUUsagePerCPUEntry,
-       "vsxStatusCPUUsagePerCPUVSId": vsxStatusCPUUsagePerCPUVSId,
-       "vsxStatusCPUUsagePerCPUVSName": vsxStatusCPUUsagePerCPUVSName,
-       "vsxStatusCPUUsagePerCPUCoreNumber": vsxStatusCPUUsagePerCPUCoreNumber,
-       "vsxStatusCPUUsagePerCPU1sec": vsxStatusCPUUsagePerCPU1sec,
-       "vsxStatusCPUUsagePerCPU10sec": vsxStatusCPUUsagePerCPU10sec,
-       "vsxStatusCPUUsagePerCPU1min": vsxStatusCPUUsagePerCPU1min,
-       "vsxStatusCPUUsagePerCPU1hour": vsxStatusCPUUsagePerCPU1hour,
-       "vsxStatusCPUUsagePerCPU24hours": vsxStatusCPUUsagePerCPU24hours,
+       "vsxStatusMemoryUsageVSMaxMem": vsxStatusMemoryUsageVSMaxMem,
+       "vsxStatusInterfacesTable": vsxStatusInterfacesTable,
+       "vsxStatusInterfacesEntry": vsxStatusInterfacesEntry,
+       "vsxStatusInterfaceVSID": vsxStatusInterfaceVSID,
+       "vsxStatusInterfaceVSName": vsxStatusInterfaceVSName,
+       "vsxStatusInterfaceIfName": vsxStatusInterfaceIfName,
+       "vsxStatusInterfaceAdminState": vsxStatusInterfaceAdminState,
+       "vsxStatusInterfaceOperState": vsxStatusInterfaceOperState,
+       "vsxStatusInterfaceRxBytes": vsxStatusInterfaceRxBytes,
+       "vsxStatusInterfaceTxBytes": vsxStatusInterfaceTxBytes,
+       "vsxStatusInterfaceOverallBytes": vsxStatusInterfaceOverallBytes,
+       "vsxStatusInterfaceRxErrors": vsxStatusInterfaceRxErrors,
+       "vsxStatusInterfaceTxErrors": vsxStatusInterfaceTxErrors,
        "vsxCounters": vsxCounters,
        "vsxCountersTable": vsxCountersTable,
        "vsxCountersEntry": vsxCountersEntry,
@@ -18102,6 +28420,21 @@ mibBuilder.exportSymbols(
        "vsxCountersBytesRejectedTotal": vsxCountersBytesRejectedTotal,
        "vsxCountersLoggedTotal": vsxCountersLoggedTotal,
        "vsxCountersIsDataValid": vsxCountersIsDataValid,
+       "vsxCountersDropTable": vsxCountersDropTable,
+       "vsxCountersDropEntry": vsxCountersDropEntry,
+       "vsxCountersDropVSID": vsxCountersDropVSID,
+       "vsxCountersDropVsName": vsxCountersDropVsName,
+       "vsxCountersDropCount": vsxCountersDropCount,
+       "vsxS2SIpsecTunnels": vsxS2SIpsecTunnels,
+       "vsxS2SIpsecTunnelsTable": vsxS2SIpsecTunnelsTable,
+       "vsxS2SIpsecTunnelsEntry": vsxS2SIpsecTunnelsEntry,
+       "vsxTunnelsVSidName": vsxTunnelsVSidName,
+       "vsxS2SIpsecTunnelsCounter": vsxS2SIpsecTunnelsCounter,
+       "vsxVSStateChanged": vsxVSStateChanged,
+       "vsxVSStateChangedTable": vsxVSStateChangedTable,
+       "vsxVSStateChangedEntry": vsxVSStateChangedEntry,
+       "vsxVSStateChangedVSIdName": vsxVSStateChangedVSIdName,
+       "vsxVSStateChangedChangeOccurred": vsxVSStateChangedChangeOccurred,
        "smartDefense": smartDefense,
        "asmAttacks": asmAttacks,
        "asmLayer3": asmLayer3,
@@ -18474,6 +28807,239 @@ mibBuilder.exportSymbols(
        "fwSXLConnsExisting": fwSXLConnsExisting,
        "fwSXLConnsAdded": fwSXLConnsAdded,
        "fwSXLConnsDeleted": fwSXLConnsDeleted,
+       "fwSXLStatistics": fwSXLStatistics,
+       "fwSXLStatisticsAggregate": fwSXLStatisticsAggregate,
+       "fwSXLStatAggregateThroughputTable": fwSXLStatAggregateThroughputTable,
+       "fwSXLStatAggregateThroughputEntry": fwSXLStatAggregateThroughputEntry,
+       "fwSXLAggrThroughputIndex": fwSXLAggrThroughputIndex,
+       "fwSXLAggrRxMbits": fwSXLAggrRxMbits,
+       "fwSXLAggrTxMbits": fwSXLAggrTxMbits,
+       "fwSXLAggrInboundKbitsPerSecond": fwSXLAggrInboundKbitsPerSecond,
+       "fwSXLAggrOutboundKbitsPerSecond": fwSXLAggrOutboundKbitsPerSecond,
+       "fwSXLAggrInboundpacketsPerSecond": fwSXLAggrInboundpacketsPerSecond,
+       "fwSXLAggrOutboundpacketsPerSecond": fwSXLAggrOutboundpacketsPerSecond,
+       "fwSXLAggrConnectionsPerSecond": fwSXLAggrConnectionsPerSecond,
+       "fwSXLAggrConcurrentConnections": fwSXLAggrConcurrentConnections,
+       "fwSXLStatAggregateNotificationsTable": fwSXLStatAggregateNotificationsTable,
+       "fwSXLStatAggregateNotificationsEntry": fwSXLStatAggregateNotificationsEntry,
+       "fwSXLAggrNotificationsIndex": fwSXLAggrNotificationsIndex,
+       "fwSXLAggrPpak2FwNotificationsSuccessful": fwSXLAggrPpak2FwNotificationsSuccessful,
+       "fwSXLAggrPpak2FwNotificationsFailure": fwSXLAggrPpak2FwNotificationsFailure,
+       "fwSXLAggrFw2PpakNotificationsSuccessful": fwSXLAggrFw2PpakNotificationsSuccessful,
+       "fwSXLAggrFw2PpakNotificationsFailure": fwSXLAggrFw2PpakNotificationsFailure,
+       "fwSXLStatAggregateDropsTable": fwSXLStatAggregateDropsTable,
+       "fwSXLStatAggregateDropsEntry": fwSXLStatAggregateDropsEntry,
+       "fwSXLAggrDropsIndex": fwSXLAggrDropsIndex,
+       "fwSXLAggrDropsTotPackets": fwSXLAggrDropsTotPackets,
+       "fwSXLAggrDropsPxlDecision": fwSXLAggrDropsPxlDecision,
+       "fwSXLAggrDropsFragmentationError": fwSXLAggrDropsFragmentationError,
+       "fwSXLAggrDropsF2FNotAllowed": fwSXLAggrDropsF2FNotAllowed,
+       "fwSXLAggrDropsHeavyLoadTcpViolation": fwSXLAggrDropsHeavyLoadTcpViolation,
+       "fwSXLAggrDropsCorruptPacket": fwSXLAggrDropsCorruptPacket,
+       "fwSXLAggrDropsHeavyLoadNewConnection": fwSXLAggrDropsHeavyLoadNewConnection,
+       "fwSXLAggrDropsClearPacketOnVPN": fwSXLAggrDropsClearPacketOnVPN,
+       "fwSXLAggrDropsEncryptionFailed": fwSXLAggrDropsEncryptionFailed,
+       "fwSXLAggrDropsDropTemplate": fwSXLAggrDropsDropTemplate,
+       "fwSXLAggrDropsDecryptionFailed": fwSXLAggrDropsDecryptionFailed,
+       "fwSXLAggrDropsOutboundConnNotFound": fwSXLAggrDropsOutboundConnNotFound,
+       "fwSXLAggrDropsInterfaceDown": fwSXLAggrDropsInterfaceDown,
+       "fwSXLAggrDropsClusterError": fwSXLAggrDropsClusterError,
+       "fwSXLAggrDropsXmlError": fwSXLAggrDropsXmlError,
+       "fwSXLAggrDropsAntiSpoofing": fwSXLAggrDropsAntiSpoofing,
+       "fwSXLAggrDropsSanityError": fwSXLAggrDropsSanityError,
+       "fwSXLAggrDropsQxlDecision": fwSXLAggrDropsQxlDecision,
+       "fwSXLAggrDropsLoopPrevention": fwSXLAggrDropsLoopPrevention,
+       "fwSXLStatisticsHost": fwSXLStatisticsHost,
+       "fwSXLStatHostThroughputTable": fwSXLStatHostThroughputTable,
+       "fwSXLStatHostThroughputEntry": fwSXLStatHostThroughputEntry,
+       "fwSXLHostThroughputIndex": fwSXLHostThroughputIndex,
+       "fwSXLHostRxMbits": fwSXLHostRxMbits,
+       "fwSXLHostTxMbits": fwSXLHostTxMbits,
+       "fwSXLHostInboundKbitsPerSecond": fwSXLHostInboundKbitsPerSecond,
+       "fwSXLHostOutboundKbitsPerSecond": fwSXLHostOutboundKbitsPerSecond,
+       "fwSXLHostInboundpacketsPerSecond": fwSXLHostInboundpacketsPerSecond,
+       "fwSXLHostOutboundpacketsPerSecond": fwSXLHostOutboundpacketsPerSecond,
+       "fwSXLHostConnectionsPerSecond": fwSXLHostConnectionsPerSecond,
+       "fwSXLHostConcurrentConnections": fwSXLHostConcurrentConnections,
+       "fwSXLStatHostNotificationsTable": fwSXLStatHostNotificationsTable,
+       "fwSXLStatHostNotificationsEntry": fwSXLStatHostNotificationsEntry,
+       "fwSXLHostNotificationsIndex": fwSXLHostNotificationsIndex,
+       "fwSXLHostPpak2FwNotificationsSuccessful": fwSXLHostPpak2FwNotificationsSuccessful,
+       "fwSXLHostPpak2FwNotificationsFailure": fwSXLHostPpak2FwNotificationsFailure,
+       "fwSXLHostFw2PpakNotificationsSuccessful": fwSXLHostFw2PpakNotificationsSuccessful,
+       "fwSXLHostFw2PpakNotificationsFailure": fwSXLHostFw2PpakNotificationsFailure,
+       "fwSXLStatHostDropsTable": fwSXLStatHostDropsTable,
+       "fwSXLStatHostDropsEntry": fwSXLStatHostDropsEntry,
+       "fwSXLHostDropsIndex": fwSXLHostDropsIndex,
+       "fwSXLHostDropsTotPackets": fwSXLHostDropsTotPackets,
+       "fwSXLHostDropsPxlDecision": fwSXLHostDropsPxlDecision,
+       "fwSXLHostDropsFragmentationError": fwSXLHostDropsFragmentationError,
+       "fwSXLHostDropsF2FNotAllowed": fwSXLHostDropsF2FNotAllowed,
+       "fwSXLHostDropsHeavyLoadTcpViolation": fwSXLHostDropsHeavyLoadTcpViolation,
+       "fwSXLHostDropsCorruptPacket": fwSXLHostDropsCorruptPacket,
+       "fwSXLHostDropsHeavyLoadNewConnection": fwSXLHostDropsHeavyLoadNewConnection,
+       "fwSXLHostDropsClearPacketOnVPN": fwSXLHostDropsClearPacketOnVPN,
+       "fwSXLHostDropsEncryptionFailed": fwSXLHostDropsEncryptionFailed,
+       "fwSXLHostDropsDropTemplate": fwSXLHostDropsDropTemplate,
+       "fwSXLHostDropsDecryptionFailed": fwSXLHostDropsDecryptionFailed,
+       "fwSXLHostDropsOutboundConnNotFound": fwSXLHostDropsOutboundConnNotFound,
+       "fwSXLHostDropsInterfaceDown": fwSXLHostDropsInterfaceDown,
+       "fwSXLHostDropsClusterError": fwSXLHostDropsClusterError,
+       "fwSXLHostDropsXmlError": fwSXLHostDropsXmlError,
+       "fwSXLHostDropsAntiSpoofing": fwSXLHostDropsAntiSpoofing,
+       "fwSXLHostDropsSanityError": fwSXLHostDropsSanityError,
+       "fwSXLHostDropsQxlDecision": fwSXLHostDropsQxlDecision,
+       "fwSXLHostDropsLoopPrevention": fwSXLHostDropsLoopPrevention,
+       "fwSXLStatHostInterfacesTable": fwSXLStatHostInterfacesTable,
+       "fwSXLStatHostInterfacesEntry": fwSXLStatHostInterfacesEntry,
+       "fwSXLHostInterfacesIndex": fwSXLHostInterfacesIndex,
+       "fwSXLHostInterface0Name": fwSXLHostInterface0Name,
+       "fwSXLHostInterface1Name": fwSXLHostInterface1Name,
+       "fwSXLHostInterface2Name": fwSXLHostInterface2Name,
+       "fwSXLHostInterface3Name": fwSXLHostInterface3Name,
+       "fwSXLHostInterface4Name": fwSXLHostInterface4Name,
+       "fwSXLHostInterface5Name": fwSXLHostInterface5Name,
+       "fwSXLHostInterface6Name": fwSXLHostInterface6Name,
+       "fwSXLHostInterface7Name": fwSXLHostInterface7Name,
+       "fwSXLHostInterface0Speed": fwSXLHostInterface0Speed,
+       "fwSXLHostInterface1Speed": fwSXLHostInterface1Speed,
+       "fwSXLHostInterface2Speed": fwSXLHostInterface2Speed,
+       "fwSXLHostInterface3Speed": fwSXLHostInterface3Speed,
+       "fwSXLHostInterface4Speed": fwSXLHostInterface4Speed,
+       "fwSXLHostInterface5Speed": fwSXLHostInterface5Speed,
+       "fwSXLHostInterface6Speed": fwSXLHostInterface6Speed,
+       "fwSXLHostInterface7Speed": fwSXLHostInterface7Speed,
+       "fwSXLHostInterface0State": fwSXLHostInterface0State,
+       "fwSXLHostInterface1State": fwSXLHostInterface1State,
+       "fwSXLHostInterface2State": fwSXLHostInterface2State,
+       "fwSXLHostInterface3State": fwSXLHostInterface3State,
+       "fwSXLHostInterface4State": fwSXLHostInterface4State,
+       "fwSXLHostInterface5State": fwSXLHostInterface5State,
+       "fwSXLHostInterface6State": fwSXLHostInterface6State,
+       "fwSXLHostInterface7State": fwSXLHostInterface7State,
+       "fwSXLStatHostGeneralTable": fwSXLStatHostGeneralTable,
+       "fwSXLStatHostGeneralEntry": fwSXLStatHostGeneralEntry,
+       "fwSXLHostGeneralIndex": fwSXLHostGeneralIndex,
+       "fwSXLHostState": fwSXLHostState,
+       "fwSXLStatisticsFalcons": fwSXLStatisticsFalcons,
+       "fwSXLStatFalconsThroughputTable": fwSXLStatFalconsThroughputTable,
+       "fwSXLStatFalconsThroughputEntry": fwSXLStatFalconsThroughputEntry,
+       "fwSXLFalconsThroughputIndex": fwSXLFalconsThroughputIndex,
+       "fwSXLFalconsRxMbits": fwSXLFalconsRxMbits,
+       "fwSXLFalconsTxMbits": fwSXLFalconsTxMbits,
+       "fwSXLFalconsInboundKbitsPerSecond": fwSXLFalconsInboundKbitsPerSecond,
+       "fwSXLFalconsOutboundKbitsPerSecond": fwSXLFalconsOutboundKbitsPerSecond,
+       "fwSXLFalconsInboundpacketsPerSecond": fwSXLFalconsInboundpacketsPerSecond,
+       "fwSXLFalconsOutboundpacketsPerSecond": fwSXLFalconsOutboundpacketsPerSecond,
+       "fwSXLFalconsConnectionsPerSecond": fwSXLFalconsConnectionsPerSecond,
+       "fwSXLFalconsConcurrentConnections": fwSXLFalconsConcurrentConnections,
+       "fwSXLStatFalconsNotificationsTable": fwSXLStatFalconsNotificationsTable,
+       "fwSXLStatFalconsNotificationsEntry": fwSXLStatFalconsNotificationsEntry,
+       "fwSXLFalconsNotificationsIndex": fwSXLFalconsNotificationsIndex,
+       "fwSXLFalconsPpak2FwNotificationsSuccessful": fwSXLFalconsPpak2FwNotificationsSuccessful,
+       "fwSXLFalconsPpak2FwNotificationsFailure": fwSXLFalconsPpak2FwNotificationsFailure,
+       "fwSXLFalconsFw2PpakNotificationsSuccessful": fwSXLFalconsFw2PpakNotificationsSuccessful,
+       "fwSXLFalconsFw2PpakNotificationsFailure": fwSXLFalconsFw2PpakNotificationsFailure,
+       "fwSXLStatFalconsDropsTable": fwSXLStatFalconsDropsTable,
+       "fwSXLStatFalconsDropsEntry": fwSXLStatFalconsDropsEntry,
+       "fwSXLFalconsDropsIndex": fwSXLFalconsDropsIndex,
+       "fwSXLFalconsDropsTotPackets": fwSXLFalconsDropsTotPackets,
+       "fwSXLFalconsDropsPxlDecision": fwSXLFalconsDropsPxlDecision,
+       "fwSXLFalconsDropsFragmentationError": fwSXLFalconsDropsFragmentationError,
+       "fwSXLFalconsDropsF2FNotAllowed": fwSXLFalconsDropsF2FNotAllowed,
+       "fwSXLFalconsDropsHeavyLoadTcpViolation": fwSXLFalconsDropsHeavyLoadTcpViolation,
+       "fwSXLFalconsDropsCorruptPacket": fwSXLFalconsDropsCorruptPacket,
+       "fwSXLFalconsDropsHeavyLoadNewConnection": fwSXLFalconsDropsHeavyLoadNewConnection,
+       "fwSXLFalconsDropsClearPacketOnVPN": fwSXLFalconsDropsClearPacketOnVPN,
+       "fwSXLFalconsDropsEncryptionFailed": fwSXLFalconsDropsEncryptionFailed,
+       "fwSXLFalconsDropsDropTemplate": fwSXLFalconsDropsDropTemplate,
+       "fwSXLFalconsDropsDecryptionFailed": fwSXLFalconsDropsDecryptionFailed,
+       "fwSXLFalconsDropsOutboundConnNotFound": fwSXLFalconsDropsOutboundConnNotFound,
+       "fwSXLFalconsDropsInterfaceDown": fwSXLFalconsDropsInterfaceDown,
+       "fwSXLFalconsDropsClusterError": fwSXLFalconsDropsClusterError,
+       "fwSXLFalconsDropsXmlError": fwSXLFalconsDropsXmlError,
+       "fwSXLFalconsDropsAntiSpoofing": fwSXLFalconsDropsAntiSpoofing,
+       "fwSXLFalconsDropsSanityError": fwSXLFalconsDropsSanityError,
+       "fwSXLFalconsDropsQxlDecision": fwSXLFalconsDropsQxlDecision,
+       "fwSXLFalconsDropsLoopPrevention": fwSXLFalconsDropsLoopPrevention,
+       "fwSXLStatFalconsInterfacesTable": fwSXLStatFalconsInterfacesTable,
+       "fwSXLStatFalconsInterfacesEntry": fwSXLStatFalconsInterfacesEntry,
+       "fwSXLFalconsInterfacesIndex": fwSXLFalconsInterfacesIndex,
+       "fwSXLFalconsInterface0Name": fwSXLFalconsInterface0Name,
+       "fwSXLFalconsInterface1Name": fwSXLFalconsInterface1Name,
+       "fwSXLFalconsInterface2Name": fwSXLFalconsInterface2Name,
+       "fwSXLFalconsInterface3Name": fwSXLFalconsInterface3Name,
+       "fwSXLFalconsInterface4Name": fwSXLFalconsInterface4Name,
+       "fwSXLFalconsInterface5Name": fwSXLFalconsInterface5Name,
+       "fwSXLFalconsInterface6Name": fwSXLFalconsInterface6Name,
+       "fwSXLFalconsInterface7Name": fwSXLFalconsInterface7Name,
+       "fwSXLFalconsInterface0Speed": fwSXLFalconsInterface0Speed,
+       "fwSXLFalconsInterface1Speed": fwSXLFalconsInterface1Speed,
+       "fwSXLFalconsInterface2Speed": fwSXLFalconsInterface2Speed,
+       "fwSXLFalconsInterface3Speed": fwSXLFalconsInterface3Speed,
+       "fwSXLFalconsInterface4Speed": fwSXLFalconsInterface4Speed,
+       "fwSXLFalconsInterface5Speed": fwSXLFalconsInterface5Speed,
+       "fwSXLFalconsInterface6Speed": fwSXLFalconsInterface6Speed,
+       "fwSXLFalconsInterface7Speed": fwSXLFalconsInterface7Speed,
+       "fwSXLFalconsInterface0State": fwSXLFalconsInterface0State,
+       "fwSXLFalconsInterface1State": fwSXLFalconsInterface1State,
+       "fwSXLFalconsInterface2State": fwSXLFalconsInterface2State,
+       "fwSXLFalconsInterface3State": fwSXLFalconsInterface3State,
+       "fwSXLFalconsInterface4State": fwSXLFalconsInterface4State,
+       "fwSXLFalconsInterface5State": fwSXLFalconsInterface5State,
+       "fwSXLFalconsInterface6State": fwSXLFalconsInterface6State,
+       "fwSXLFalconsInterface7State": fwSXLFalconsInterface7State,
+       "fwSXLStatFalconsMemoryTable": fwSXLStatFalconsMemoryTable,
+       "fwSXLStatFalconsMemoryEntry": fwSXLStatFalconsMemoryEntry,
+       "fwSXLFalconsMemoryIndex": fwSXLFalconsMemoryIndex,
+       "fwSXLFalconsSxlTotMemory": fwSXLFalconsSxlTotMemory,
+       "fwSXLFalconsSxlUsedMemory": fwSXLFalconsSxlUsedMemory,
+       "fwSXLFalconsSxlFreeMemory": fwSXLFalconsSxlFreeMemory,
+       "fwSXLFalconsPacketPoolTotMemory": fwSXLFalconsPacketPoolTotMemory,
+       "fwSXLFalconsPacketPoolUsedMemory": fwSXLFalconsPacketPoolUsedMemory,
+       "fwSXLFalconsPacketPoolFreeMemory": fwSXLFalconsPacketPoolFreeMemory,
+       "fwSXLStatFalconsCpuTable": fwSXLStatFalconsCpuTable,
+       "fwSXLStatFalconsCpuEntry": fwSXLStatFalconsCpuEntry,
+       "fwSXLFalconsCpuIndex": fwSXLFalconsCpuIndex,
+       "fwSXLFalconsCpu0Usage": fwSXLFalconsCpu0Usage,
+       "fwSXLFalconsCpu1Usage": fwSXLFalconsCpu1Usage,
+       "fwSXLFalconsCpu2Usage": fwSXLFalconsCpu2Usage,
+       "fwSXLFalconsCpu3Usage": fwSXLFalconsCpu3Usage,
+       "fwSXLFalconsCpu4Usage": fwSXLFalconsCpu4Usage,
+       "fwSXLFalconsCpu5Usage": fwSXLFalconsCpu5Usage,
+       "fwSXLFalconsCpu6Usage": fwSXLFalconsCpu6Usage,
+       "fwSXLFalconsCpu7Usage": fwSXLFalconsCpu7Usage,
+       "fwSXLFalconsCpu8Usage": fwSXLFalconsCpu8Usage,
+       "fwSXLFalconsCpu9Usage": fwSXLFalconsCpu9Usage,
+       "fwSXLFalconsCpu10Usage": fwSXLFalconsCpu10Usage,
+       "fwSXLFalconsCpu11Usage": fwSXLFalconsCpu11Usage,
+       "fwSXLFalconsCpu12Usage": fwSXLFalconsCpu12Usage,
+       "fwSXLFalconsCpu13Usage": fwSXLFalconsCpu13Usage,
+       "fwSXLFalconsCpu14Usage": fwSXLFalconsCpu14Usage,
+       "fwSXLFalconsCpu15Usage": fwSXLFalconsCpu15Usage,
+       "fwSXLFalconsCpu16Usage": fwSXLFalconsCpu16Usage,
+       "fwSXLFalconsCpu17Usage": fwSXLFalconsCpu17Usage,
+       "fwSXLFalconsCpu18Usage": fwSXLFalconsCpu18Usage,
+       "fwSXLFalconsCpu19Usage": fwSXLFalconsCpu19Usage,
+       "fwSXLFalconsCpu20Usage": fwSXLFalconsCpu20Usage,
+       "fwSXLFalconsCpu21Usage": fwSXLFalconsCpu21Usage,
+       "fwSXLFalconsCpu22Usage": fwSXLFalconsCpu22Usage,
+       "fwSXLFalconsCpu23Usage": fwSXLFalconsCpu23Usage,
+       "fwSXLFalconsCpu24Usage": fwSXLFalconsCpu24Usage,
+       "fwSXLFalconsCpu25Usage": fwSXLFalconsCpu25Usage,
+       "fwSXLFalconsCpu26Usage": fwSXLFalconsCpu26Usage,
+       "fwSXLFalconsCpu27Usage": fwSXLFalconsCpu27Usage,
+       "fwSXLFalconsCpu28Usage": fwSXLFalconsCpu28Usage,
+       "fwSXLFalconsCpu29Usage": fwSXLFalconsCpu29Usage,
+       "fwSXLFalconsCpu30Usage": fwSXLFalconsCpu30Usage,
+       "fwSXLFalconsCpu31Usage": fwSXLFalconsCpu31Usage,
+       "fwSXLStatFalconsGeneralTable": fwSXLStatFalconsGeneralTable,
+       "fwSXLStatFalconsGeneralEntry": fwSXLStatFalconsGeneralEntry,
+       "fwSXLFalconsGeneralIndex": fwSXLFalconsGeneralIndex,
+       "fwSXLFalconsState": fwSXLFalconsState,
+       "fwSXLFalconsType": fwSXLFalconsType,
+       "fwSXLFalconsSerialNumber": fwSXLFalconsSerialNumber,
+       "fwSXLFalconsSlotNumber": fwSXLFalconsSlotNumber,
        "identityAwareness": identityAwareness,
        "identityAwarenessProductName": identityAwarenessProductName,
        "identityAwarenessAuthUsers": identityAwarenessAuthUsers,
@@ -18584,8 +29150,8 @@ mibBuilder.exportSymbols(
        "advancedUrlFilteringStatusShortDesc": advancedUrlFilteringStatusShortDesc,
        "advancedUrlFilteringStatusLongDesc": advancedUrlFilteringStatusLongDesc,
        "dlp": dlp,
-       "exchangeAgents": exchangeAgents,
-       "exchangeAgentsTable": exchangeAgentsTable,
+       "exchangeAgentsStatus": exchangeAgentsStatus,
+       "exchangeAgentsStatusTable": exchangeAgentsStatusTable,
        "exchangeAgentsStatusEntry": exchangeAgentsStatusEntry,
        "exchangeAgentsStatusTableIndex": exchangeAgentsStatusTableIndex,
        "exchangeAgentName": exchangeAgentName,
@@ -18660,6 +29226,398 @@ mibBuilder.exportSymbols(
        "amwStatusCode": amwStatusCode,
        "amwStatusShortDesc": amwStatusShortDesc,
        "amwStatusLongDesc": amwStatusLongDesc,
+       "asg": asg,
+       "asgProductName": asgProductName,
+       "asgVer": asgVer,
+       "asgKernelVer": asgKernelVer,
+       "asgBuildNum": asgBuildNum,
+       "asgMaximumBladesPerChassis": asgMaximumBladesPerChassis,
+       "asgActiveBladesBitmask": asgActiveBladesBitmask,
+       "asgInstalledBladesBitmask": asgInstalledBladesBitmask,
+       "asgInstalled": asgInstalled,
+       "asgSystemUp": asgSystemUp,
+       "asgEvent": asgEvent,
+       "asgStatusCode": asgStatusCode,
+       "asgStatShort": asgStatShort,
+       "asgStatLong": asgStatLong,
+       "asgSecureXLStatusBitmask": asgSecureXLStatusBitmask,
+       "asgAttachedBladesBitmask": asgAttachedBladesBitmask,
+       "asgIPv4PerformanceCounters": asgIPv4PerformanceCounters,
+       "asgThroughput": asgThroughput,
+       "asgConnectionRate": asgConnectionRate,
+       "asgPacketRate": asgPacketRate,
+       "asgConcurrConn": asgConcurrConn,
+       "asgAccelConnectionRate": asgAccelConnectionRate,
+       "asgNonAccelConnectionRate": asgNonAccelConnectionRate,
+       "asgAccelConcurrConn": asgAccelConcurrConn,
+       "asgNonAccelConcurrConn": asgNonAccelConcurrConn,
+       "asgLoad": asgLoad,
+       "asgAccelLoadAvg": asgAccelLoadAvg,
+       "asgAccelLoadMin": asgAccelLoadMin,
+       "asgAccelLoadMax": asgAccelLoadMax,
+       "asgInstancesLoadAvg": asgInstancesLoadAvg,
+       "asgInstancesLoadMin": asgInstancesLoadMin,
+       "asgInstancesLoadMax": asgInstancesLoadMax,
+       "asgVpnThroughput": asgVpnThroughput,
+       "asgVpnConn": asgVpnConn,
+       "asgNatConnRate": asgNatConnRate,
+       "asgNatConn": asgNatConn,
+       "asgVsxCpu1MinAvg": asgVsxCpu1MinAvg,
+       "asgPathDistTable": asgPathDistTable,
+       "asgPathDistEntry": asgPathDistEntry,
+       "asgPathDistIndex": asgPathDistIndex,
+       "asgStatName": asgStatName,
+       "asgAccelPath": asgAccelPath,
+       "asgMediumPath": asgMediumPath,
+       "asgFirewallPath": asgFirewallPath,
+       "asgDropped": asgDropped,
+       "asgCountersTable": asgCountersTable,
+       "asgCountersEntry": asgCountersEntry,
+       "asgCountersIndex": asgCountersIndex,
+       "asgCountersBladeId": asgCountersBladeId,
+       "asgCountersThroughput": asgCountersThroughput,
+       "asgCountersConnRate": asgCountersConnRate,
+       "asgCountersPacketRate": asgCountersPacketRate,
+       "asgCountersConcurrConnNum": asgCountersConcurrConnNum,
+       "asgCountersAccelLoadAverage": asgCountersAccelLoadAverage,
+       "asgCountersAccelLoadMin": asgCountersAccelLoadMin,
+       "asgCountersAccelLoadMax": asgCountersAccelLoadMax,
+       "asgCountersInstanceLoadAverage": asgCountersInstanceLoadAverage,
+       "asgCountersInstanceLoadMin": asgCountersInstanceLoadMin,
+       "asgCountersInstanceLoadMax": asgCountersInstanceLoadMax,
+       "asgPeaksTable": asgPeaksTable,
+       "asgPeaksEntry": asgPeaksEntry,
+       "asgPeakIndex": asgPeakIndex,
+       "asgPeakCriteria": asgPeakCriteria,
+       "asgPeakName": asgPeakName,
+       "asgPeakValue": asgPeakValue,
+       "asgPeakTimeStamp": asgPeakTimeStamp,
+       "asgPeakUnits": asgPeakUnits,
+       "asgRulebase": asgRulebase,
+       "asgAcceptedBytesTotal": asgAcceptedBytesTotal,
+       "asgDroppedBytesTotal": asgDroppedBytesTotal,
+       "asgRejectedTotal": asgRejectedTotal,
+       "asgIPv6PerformanceCounters": asgIPv6PerformanceCounters,
+       "asgIPv6Throughput": asgIPv6Throughput,
+       "asgIPv6ConnectionRate": asgIPv6ConnectionRate,
+       "asgIPv6PacketRate": asgIPv6PacketRate,
+       "asgIPv6ConcurrConn": asgIPv6ConcurrConn,
+       "asgIPv6AccelConnectionRate": asgIPv6AccelConnectionRate,
+       "asgIPv6NonAccelConnectionRate": asgIPv6NonAccelConnectionRate,
+       "asgIPv6AccelConcurrConn": asgIPv6AccelConcurrConn,
+       "asgIPv6NonAccelConcurrConn": asgIPv6NonAccelConcurrConn,
+       "asgIPv6Load": asgIPv6Load,
+       "asgIPv6AccelLoadAvg": asgIPv6AccelLoadAvg,
+       "asgIPv6AccelLoadMin": asgIPv6AccelLoadMin,
+       "asgIPv6AccelLoadMax": asgIPv6AccelLoadMax,
+       "asgIPv6InstancesLoadAvg": asgIPv6InstancesLoadAvg,
+       "asgIPv6InstancesLoadMin": asgIPv6InstancesLoadMin,
+       "asgIPv6InstancesLoadMax": asgIPv6InstancesLoadMax,
+       "asgIPv6VpnThroughput": asgIPv6VpnThroughput,
+       "asgIPv6VpnConn": asgIPv6VpnConn,
+       "asgIPv6NatConnRate": asgIPv6NatConnRate,
+       "asgIPv6NatConn": asgIPv6NatConn,
+       "asgIPv6VsxCpu1MinAvg": asgIPv6VsxCpu1MinAvg,
+       "asgIPv6PathDistTable": asgIPv6PathDistTable,
+       "asgIPv6PathDistEntry": asgIPv6PathDistEntry,
+       "asgIPv6PathDistIndex": asgIPv6PathDistIndex,
+       "asgIPv6StatName": asgIPv6StatName,
+       "asgIPv6AccelPath": asgIPv6AccelPath,
+       "asgIPv6MediumPath": asgIPv6MediumPath,
+       "asgIPv6FirewallPath": asgIPv6FirewallPath,
+       "asgIPv6Dropped": asgIPv6Dropped,
+       "asgIPv6CountersTable": asgIPv6CountersTable,
+       "asgIPv6CountersEntry": asgIPv6CountersEntry,
+       "asgIPv6CountersIndex": asgIPv6CountersIndex,
+       "asgIPv6CountersBladeId": asgIPv6CountersBladeId,
+       "asgIPv6CountersThroughput": asgIPv6CountersThroughput,
+       "asgIPv6CountersConnRate": asgIPv6CountersConnRate,
+       "asgIPv6CountersPacketRate": asgIPv6CountersPacketRate,
+       "asgIPv6CountersConcurrConnNum": asgIPv6CountersConcurrConnNum,
+       "asgIPv6CountersAccelLoadAverage": asgIPv6CountersAccelLoadAverage,
+       "asgIPv6CountersAccelLoadMin": asgIPv6CountersAccelLoadMin,
+       "asgIPv6CountersAccelLoadMax": asgIPv6CountersAccelLoadMax,
+       "asgIPv6CountersInstanceLoadAverage": asgIPv6CountersInstanceLoadAverage,
+       "asgIPv6CountersInstanceLoadMin": asgIPv6CountersInstanceLoadMin,
+       "asgIPv6CountersInstanceLoadMax": asgIPv6CountersInstanceLoadMax,
+       "asgIPv6PeaksTable": asgIPv6PeaksTable,
+       "asgIPv6PeaksEntry": asgIPv6PeaksEntry,
+       "asgIPv6PeakIndex": asgIPv6PeakIndex,
+       "asgIPv6PeakCriteria": asgIPv6PeakCriteria,
+       "asgIPv6PeakName": asgIPv6PeakName,
+       "asgIPv6PeakValue": asgIPv6PeakValue,
+       "asgIPv6PeakTimeStamp": asgIPv6PeakTimeStamp,
+       "asgIPv6PeakUnits": asgIPv6PeakUnits,
+       "asgIPv6Rulebase": asgIPv6Rulebase,
+       "asgIPv6AcceptedBytesTotalRate": asgIPv6AcceptedBytesTotalRate,
+       "asgIPv6DroppedBytesTotalRate": asgIPv6DroppedBytesTotalRate,
+       "asgIPv6DroppedTotalRate": asgIPv6DroppedTotalRate,
+       "asgIPv6RulebaseTable": asgIPv6RulebaseTable,
+       "asgIPv6RulebaseEntry": asgIPv6RulebaseEntry,
+       "asgIPv6RulebaseIndex": asgIPv6RulebaseIndex,
+       "asgIPv6RulebaseBladeId": asgIPv6RulebaseBladeId,
+       "asgIPv6RulebaseDroppedTotal": asgIPv6RulebaseDroppedTotal,
+       "asgIPv6RulebaseAcceptedTotal": asgIPv6RulebaseAcceptedTotal,
+       "asgIPv6RulebaseRejectedTotal": asgIPv6RulebaseRejectedTotal,
+       "asgIPv6RulebaseBytesDroppedTotal": asgIPv6RulebaseBytesDroppedTotal,
+       "asgIPv6RulebaseBytesAcceptedTotal": asgIPv6RulebaseBytesAcceptedTotal,
+       "asgIPv6RulebaseBytesRejectedTotal": asgIPv6RulebaseBytesRejectedTotal,
+       "asgHwMonitoring": asgHwMonitoring,
+       "asgSensors": asgSensors,
+       "asgSensorTable": asgSensorTable,
+       "asgSensorEntry": asgSensorEntry,
+       "asgSensorIndex": asgSensorIndex,
+       "asgSensorName": asgSensorName,
+       "asgSensorLocation": asgSensorLocation,
+       "asgSensorCurrValue": asgSensorCurrValue,
+       "asgSensorMinValue": asgSensorMinValue,
+       "asgSensorMaxValue": asgSensorMaxValue,
+       "asgSensorThreshold": asgSensorThreshold,
+       "asgSensorUnit": asgSensorUnit,
+       "asgSensorIdentity": asgSensorIdentity,
+       "asgSensorStatus": asgSensorStatus,
+       "asgResourceTable": asgResourceTable,
+       "asgResourceEntry": asgResourceEntry,
+       "asgResourceIndex": asgResourceIndex,
+       "asgResourceName": asgResourceName,
+       "asgResourceLocation": asgResourceLocation,
+       "asgResourceCurrValue": asgResourceCurrValue,
+       "asgResourceThreshold": asgResourceThreshold,
+       "asgResourceUnit": asgResourceUnit,
+       "asgResourceTotalVal": asgResourceTotalVal,
+       "asgResourceTitle": asgResourceTitle,
+       "asgProtocolTraffic": asgProtocolTraffic,
+       "asgProtocolTrafficTable": asgProtocolTrafficTable,
+       "asgProtocolTrafficEntry": asgProtocolTrafficEntry,
+       "asgProtocolIndex": asgProtocolIndex,
+       "asgProtocolName": asgProtocolName,
+       "asgProtocolConns": asgProtocolConns,
+       "asgProtocolTotalPkts": asgProtocolTotalPkts,
+       "asgProtocolTotalBytes": asgProtocolTotalBytes,
+       "asgServicesTraffic": asgServicesTraffic,
+       "asgServiceTrafficTable": asgServiceTrafficTable,
+       "asgServiceTrafficEntry": asgServiceTrafficEntry,
+       "asgServiceIndex": asgServiceIndex,
+       "asgServiceName": asgServiceName,
+       "asgServiceConns": asgServiceConns,
+       "asgServiceTotalPkts": asgServiceTotalPkts,
+       "asgServiceTotalBytes": asgServiceTotalBytes,
+       "asgSetup": asgSetup,
+       "asgNetIfTable": asgNetIfTable,
+       "asgNetIfEntry": asgNetIfEntry,
+       "asgNetIfIndex": asgNetIfIndex,
+       "asgNetIfName": asgNetIfName,
+       "asgNetIfIPv4Addr": asgNetIfIPv4Addr,
+       "asgNetIfIPv6Addr": asgNetIfIPv6Addr,
+       "asgNetIfMACAddr": asgNetIfMACAddr,
+       "asgNetIfInfo": asgNetIfInfo,
+       "asgNetIfState": asgNetIfState,
+       "asgNetIfSpeed": asgNetIfSpeed,
+       "asgNetIfMTU": asgNetIfMTU,
+       "asgNetIfDuplex": asgNetIfDuplex,
+       "asgNetIfRx": asgNetIfRx,
+       "asgNetIfTx": asgNetIfTx,
+       "asgProblemTable": asgProblemTable,
+       "asgProblemEntry": asgProblemEntry,
+       "asgProblemIndex": asgProblemIndex,
+       "asgProblemName": asgProblemName,
+       "asgProblemStatus": asgProblemStatus,
+       "asgProblemPriority": asgProblemPriority,
+       "asgProblemVerified": asgProblemVerified,
+       "asgProblemDescr": asgProblemDescr,
+       "asgChassisInfo": asgChassisInfo,
+       "asgChassisMode": asgChassisMode,
+       "asgChassisHAMode": asgChassisHAMode,
+       "asgSynchronization": asgSynchronization,
+       "asgSyncToActive": asgSyncToActive,
+       "asgSyncToStandby": asgSyncToStandby,
+       "asgSyncExceptionsTable": asgSyncExceptionsTable,
+       "asgSyncExceptionsEntry": asgSyncExceptionsEntry,
+       "asgSyncExceptionsIndex": asgSyncExceptionsIndex,
+       "asgSyncExceptionsID": asgSyncExceptionsID,
+       "asgSyncExceptionsSource": asgSyncExceptionsSource,
+       "asgSyncExceptionsSourceMask": asgSyncExceptionsSourceMask,
+       "asgSyncExceptionsDestination": asgSyncExceptionsDestination,
+       "asgSyncExceptionsDestinationMask": asgSyncExceptionsDestinationMask,
+       "asgSyncExceptionsIpProtocol": asgSyncExceptionsIpProtocol,
+       "asgSyncExceptionsSync": asgSyncExceptionsSync,
+       "asgSyncExceptionsDelay": asgSyncExceptionsDelay,
+       "asgChassisParamsTable": asgChassisParamsTable,
+       "asgChassisParamsEntry": asgChassisParamsEntry,
+       "asgChassisParamsIndex": asgChassisParamsIndex,
+       "asgChassisParamsID": asgChassisParamsID,
+       "asgChassisParamsStatus": asgChassisParamsStatus,
+       "asgChassisParamsGrade": asgChassisParamsGrade,
+       "asgChassisParamsMaxGrade": asgChassisParamsMaxGrade,
+       "asgChassisParamsUniqueIP": asgChassisParamsUniqueIP,
+       "asgSGMTable": asgSGMTable,
+       "asgSGMEntry": asgSGMEntry,
+       "asgSGMIndex": asgSGMIndex,
+       "asgSGMID": asgSGMID,
+       "asgSGMStatus": asgSGMStatus,
+       "asgSGMProcess": asgSGMProcess,
+       "asgSGMPolicyTime": asgSGMPolicyTime,
+       "asgFactorTable": asgFactorTable,
+       "asgFactorEntry": asgFactorEntry,
+       "asgFactorIndex": asgFactorIndex,
+       "asgFactorName": asgFactorName,
+       "asgFactorValue": asgFactorValue,
+       "asgPortPriorityTable": asgPortPriorityTable,
+       "asgPortPriorityEntry": asgPortPriorityEntry,
+       "asgPortPriorityIndex": asgPortPriorityIndex,
+       "asgPriorityPortName": asgPriorityPortName,
+       "asgPortPriority": asgPortPriority,
+       "asgCoresUtilTable": asgCoresUtilTable,
+       "asgCoresUtilEntry": asgCoresUtilEntry,
+       "asgCoreIndex": asgCoreIndex,
+       "asgCoreRowTitle": asgCoreRowTitle,
+       "blade1": blade1,
+       "blade2": blade2,
+       "blade3": blade3,
+       "blade4": blade4,
+       "blade5": blade5,
+       "blade6": blade6,
+       "blade7": blade7,
+       "blade8": blade8,
+       "blade9": blade9,
+       "blade10": blade10,
+       "blade11": blade11,
+       "blade12": blade12,
+       "blade13": blade13,
+       "blade14": blade14,
+       "blade15": blade15,
+       "blade16": blade16,
+       "blade17": blade17,
+       "blade18": blade18,
+       "blade19": blade19,
+       "blade20": blade20,
+       "blade21": blade21,
+       "blade22": blade22,
+       "blade23": blade23,
+       "blade24": blade24,
+       "blade25": blade25,
+       "blade26": blade26,
+       "blade27": blade27,
+       "blade28": blade28,
+       "blade29": blade29,
+       "blade30": blade30,
+       "blade31": blade31,
+       "blade32": blade32,
+       "blade33": blade33,
+       "blade34": blade34,
+       "blade35": blade35,
+       "blade36": blade36,
+       "blade37": blade37,
+       "blade38": blade38,
+       "blade39": blade39,
+       "blade40": blade40,
+       "blade41": blade41,
+       "blade42": blade42,
+       "blade43": blade43,
+       "blade44": blade44,
+       "blade45": blade45,
+       "blade46": blade46,
+       "blade47": blade47,
+       "blade48": blade48,
+       "asgVSX": asgVSX,
+       "asgVslsInfo": asgVslsInfo,
+       "asgVslsSgmRatio": asgVslsSgmRatio,
+       "asgVslsSystemPrimaryChassis": asgVslsSystemPrimaryChassis,
+       "asgVslsStateTable": asgVslsStateTable,
+       "asgVslsStateEntry": asgVslsStateEntry,
+       "asgVslsVsid": asgVslsVsid,
+       "asgVslsVsName": asgVslsVsName,
+       "asgVslsVsPrimaryChassis": asgVslsVsPrimaryChassis,
+       "asgVslsVsActiveChassis": asgVslsVsActiveChassis,
+       "asgVslsVsHealth": asgVslsVsHealth,
+       "asgVslsVsReason": asgVslsVsReason,
+       "asgVslsVsChassis1InterfacesUp": asgVslsVsChassis1InterfacesUp,
+       "asgVslsVsChassis1InterfacesTotal": asgVslsVsChassis1InterfacesTotal,
+       "asgVslsVsChassis1FwksUp": asgVslsVsChassis1FwksUp,
+       "asgVslsVsChassis1FwksTotal": asgVslsVsChassis1FwksTotal,
+       "asgVslsVsChassis2InterfacesUp": asgVslsVsChassis2InterfacesUp,
+       "asgVslsVsChassis2InterfacesTotal": asgVslsVsChassis2InterfacesTotal,
+       "asgVslsVsChassis2FwksUp": asgVslsVsChassis2FwksUp,
+       "asgVslsVsChassis2FwksTotal": asgVslsVsChassis2FwksTotal,
+       "asgVslsVsChassis3InterfacesUp": asgVslsVsChassis3InterfacesUp,
+       "asgVslsVsChassis3InterfacesTotal": asgVslsVsChassis3InterfacesTotal,
+       "asgVslsVsChassis3FwksUp": asgVslsVsChassis3FwksUp,
+       "asgVslsVsChassis3FwksTotal": asgVslsVsChassis3FwksTotal,
+       "asgVslsVsChassis4InterfacesUp": asgVslsVsChassis4InterfacesUp,
+       "asgVslsVsChassis4InterfacesTotal": asgVslsVsChassis4InterfacesTotal,
+       "asgVslsVsChassis4FwksUp": asgVslsVsChassis4FwksUp,
+       "asgVslsVsChassis4FwksTotal": asgVslsVsChassis4FwksTotal,
+       "asgVSXConnInfo": asgVSXConnInfo,
+       "asgVSXConnInfoTable": asgVSXConnInfoTable,
+       "asgVSXConnInfoEntry": asgVSXConnInfoEntry,
+       "asgVSXConnInfoIndex": asgVSXConnInfoIndex,
+       "asgVSXConnBladeID": asgVSXConnBladeID,
+       "asgVSXIPver": asgVSXIPver,
+       "asgVSXConcurrentConns": asgVSXConcurrentConns,
+       "asgVSXPeakConns": asgVSXPeakConns,
+       "asgVSXConnLimit": asgVSXConnLimit,
+       "asgVSXConnectionsNumberPerSystem": asgVSXConnectionsNumberPerSystem,
+       "asgVSXMemInfo": asgVSXMemInfo,
+       "asgVSXMemInfoTable": asgVSXMemInfoTable,
+       "asgVSXMemInfoEntry": asgVSXMemInfoEntry,
+       "asgVSXMemInfoIndex": asgVSXMemInfoIndex,
+       "asgVSXMemBladeid": asgVSXMemBladeid,
+       "asgVSXOverallMem": asgVSXOverallMem,
+       "asgVSXCoreUtilInfo": asgVSXCoreUtilInfo,
+       "asgVSXCoreUtilTable": asgVSXCoreUtilTable,
+       "asgVSXCoreUtilEntry": asgVSXCoreUtilEntry,
+       "asgVSXCoreUtilIndex": asgVSXCoreUtilIndex,
+       "asgVSXCoreUtilBladeid": asgVSXCoreUtilBladeid,
+       "asgVSXCoreUtilCPUID": asgVSXCoreUtilCPUID,
+       "asgVSXCoreUtilUsage": asgVSXCoreUtilUsage,
+       "asgVSXPacketRateInfo": asgVSXPacketRateInfo,
+       "asgVSXPacketRateTable": asgVSXPacketRateTable,
+       "asgVSXPacketRateEntry": asgVSXPacketRateEntry,
+       "asgVSXPacketRateIndex": asgVSXPacketRateIndex,
+       "asgVSXRateBladeid": asgVSXRateBladeid,
+       "asgVSXRateValue": asgVSXRateValue,
+       "asgVSXPacketRatePerSystem": asgVSXPacketRatePerSystem,
+       "asgVSXThroughputInfo": asgVSXThroughputInfo,
+       "asgVSXThroughputTable": asgVSXThroughputTable,
+       "asgVSXThroughputEntry": asgVSXThroughputEntry,
+       "asgVSXThroughputIndex": asgVSXThroughputIndex,
+       "asgVSXThroughputBladeid": asgVSXThroughputBladeid,
+       "asgVSXThroughputValue": asgVSXThroughputValue,
+       "asgVSXThroughputPerSystem": asgVSXThroughputPerSystem,
+       "asgVSXThroughputPerInterfaceInfo": asgVSXThroughputPerInterfaceInfo,
+       "asgVSXThroughputPerInterfaceTable": asgVSXThroughputPerInterfaceTable,
+       "asgVSXThroughputPerInterfaceEntry": asgVSXThroughputPerInterfaceEntry,
+       "asgVSXThroughputPerInterfaceIndex": asgVSXThroughputPerInterfaceIndex,
+       "asgVSXThroughputPerInterfaceBladeid": asgVSXThroughputPerInterfaceBladeid,
+       "asgVSXThroughputPerInterfaceName": asgVSXThroughputPerInterfaceName,
+       "asgVSXThroughputPerInterfaceValue": asgVSXThroughputPerInterfaceValue,
+       "asgVSXPerSystemThroughputPerInterfaceTable": asgVSXPerSystemThroughputPerInterfaceTable,
+       "asgVSXPerSystemThroughputPerInterfaceTableEntry": asgVSXPerSystemThroughputPerInterfaceTableEntry,
+       "asgVSXPerSystemThroughputIndex": asgVSXPerSystemThroughputIndex,
+       "asgVSXPerSystemThroughputPerInterfaceName": asgVSXPerSystemThroughputPerInterfaceName,
+       "asgVSXPerSystemThroughputPerInterfaceValue": asgVSXPerSystemThroughputPerInterfaceValue,
+       "asgVSXConnectionRateInfo": asgVSXConnectionRateInfo,
+       "asgVSXConnectionRateTable": asgVSXConnectionRateTable,
+       "asgVSXConnectionRateEntry": asgVSXConnectionRateEntry,
+       "asgVSXConnectionRateIndex": asgVSXConnectionRateIndex,
+       "asgVSXConnectionRateBladeid": asgVSXConnectionRateBladeid,
+       "asgVSXConnectionRateValue": asgVSXConnectionRateValue,
+       "asgVSXConnectionRatePerSystem": asgVSXConnectionRatePerSystem,
+       "asgVSXVirtualMemoryInfo": asgVSXVirtualMemoryInfo,
+       "asgVSXVirtualMemoryTable": asgVSXVirtualMemoryTable,
+       "asgVSXVirtualMemoryEntry": asgVSXVirtualMemoryEntry,
+       "asgVSXVirtualMemoryIndex": asgVSXVirtualMemoryIndex,
+       "asgVSXVirtualMemoryBladeid": asgVSXVirtualMemoryBladeid,
+       "asgVSXVirtualMemoryValue": asgVSXVirtualMemoryValue,
+       "asgDiagnostic": asgDiagnostic,
+       "asgDiagnosticTable": asgDiagnosticTable,
+       "asgDiagnosticEntry": asgDiagnosticEntry,
+       "asgDiagnosticIndex": asgDiagnosticIndex,
+       "asgDiagnosticTestName": asgDiagnosticTestName,
+       "asgDiagnosticLastRun": asgDiagnosticLastRun,
+       "asgDiagnosticResult": asgDiagnosticResult,
+       "asgDiagnosticComment": asgDiagnosticComment,
+       "asgDiagSummary": asgDiagSummary,
        "te": te,
        "teUpdateStatus": teUpdateStatus,
        "teUpdateDesc": teUpdateDesc,
@@ -18670,18 +29628,171 @@ mibBuilder.exportSymbols(
        "teStatusCode": teStatusCode,
        "teStatusShortDesc": teStatusShortDesc,
        "teStatusLongDesc": teStatusLongDesc,
-       "treatExtarction": treatExtarction,
-       "treatExtarctionSubscription": treatExtarctionSubscription,
-       "treatExtarctionSubscriptionStatus": treatExtarctionSubscriptionStatus,
-       "treatExtarctionSubscriptionExpDate": treatExtarctionSubscriptionExpDate,
-       "treatExtarctionSubscriptionDesc": treatExtarctionSubscriptionDesc,
-       "treatExtarctionStatistics": treatExtarctionStatistics,
-       "treatExtarctionTotalScannedAttachments": treatExtarctionTotalScannedAttachments,
-       "treatExtarctionCleanedAttachments": treatExtarctionCleanedAttachments,
-       "treatExtarctionOriginalAttachmentsAccesses": treatExtarctionOriginalAttachmentsAccesses,
-       "treatExtarctionStatusCode": treatExtarctionStatusCode,
-       "treatExtarctionStatusShortDesc": treatExtarctionStatusShortDesc,
-       "treatExtarctionStatusLongDesc": treatExtarctionStatusLongDesc,
+       "threatExtraction": threatExtraction,
+       "threatExtractionSubscription": threatExtractionSubscription,
+       "threatExtractionSubscriptionStatus": threatExtractionSubscriptionStatus,
+       "threatExtractionSubscriptionExpDate": threatExtractionSubscriptionExpDate,
+       "threatExtractionSubscriptionDesc": threatExtractionSubscriptionDesc,
+       "threatExtractionStatistics": threatExtractionStatistics,
+       "threatExtractionTotalScannedAttachments": threatExtractionTotalScannedAttachments,
+       "threatExtractionCleanedAttachments": threatExtractionCleanedAttachments,
+       "threatExtractionOriginalAttachmentsAccesses": threatExtractionOriginalAttachmentsAccesses,
+       "threatExtractionStatusCode": threatExtractionStatusCode,
+       "threatExtractionStatusShortDesc": threatExtractionStatusShortDesc,
+       "threatExtractionStatusLongDesc": threatExtractionStatusLongDesc,
+       "threatExtractionEngineVersion": threatExtractionEngineVersion,
+       "vsecController": vsecController,
+       "vsecVsecStatus": vsecVsecStatus,
+       "vsecNumberOfDisconnectedDataCenters": vsecNumberOfDisconnectedDataCenters,
+       "vsecTotalNumberOfDataCenters": vsecTotalNumberOfDataCenters,
+       "vsecTotalNumberOfImportedDataCenterObjects": vsecTotalNumberOfImportedDataCenterObjects,
+       "vsecTotalNumberOfGwWithDataCenterObjects": vsecTotalNumberOfGwWithDataCenterObjects,
+       "vsecDataCenterTable": vsecDataCenterTable,
+       "vsecDataCenterEntry": vsecDataCenterEntry,
+       "vsecDataCenterIndex": vsecDataCenterIndex,
+       "vsecDataCenterName": vsecDataCenterName,
+       "vsecDataCenterType": vsecDataCenterType,
+       "vsecConnectionStatus": vsecConnectionStatus,
+       "vsecNumberOfImportedObjects": vsecNumberOfImportedObjects,
+       "vsecNumberOfAutoUpdate": vsecNumberOfAutoUpdate,
+       "vsecEnforcingGatewaysTable": vsecEnforcingGatewaysTable,
+       "vsecEnforcingGatewayEntry": vsecEnforcingGatewayEntry,
+       "vsecGatewayIndex": vsecGatewayIndex,
+       "vsecGatewayName": vsecGatewayName,
+       "vsecGatewayIP": vsecGatewayIP,
+       "vsecGatewayVersion": vsecGatewayVersion,
+       "vsecGatewayUpdateSucceeded": vsecGatewayUpdateSucceeded,
+       "ips": ips,
+       "ipsStatus": ipsStatus,
+       "ipsUpdateStatusInfo": ipsUpdateStatusInfo,
+       "ipsUpdateStatus": ipsUpdateStatus,
+       "ipsUpdateDescription": ipsUpdateDescription,
+       "ipsNextUpdateDescription": ipsNextUpdateDescription,
+       "ipsDBVersion": ipsDBVersion,
+       "ipsState": ipsState,
+       "ipsStateShortDesc": ipsStateShortDesc,
+       "ipsStateLongDesc": ipsStateLongDesc,
+       "httpsInspection": httpsInspection,
+       "httpsInspectionStatus": httpsInspectionStatus,
+       "httpsInspectionStatusDescription": httpsInspectionStatusDescription,
+       "hsmStatus": hsmStatus,
+       "hsmEnabled": hsmEnabled,
+       "hsmEnabledDescription": hsmEnabledDescription,
+       "hsmPartitionAccess": hsmPartitionAccess,
+       "hsmPartitionAccessDescription": hsmPartitionAccessDescription,
+       "outboundStatus": outboundStatus,
+       "outboundStatusDescription": outboundStatusDescription,
+       "mho": mho,
+       "mhoPortsStatus": mhoPortsStatus,
+       "mhoRxTable": mhoRxTable,
+       "mhoRxEntry": mhoRxEntry,
+       "mhoRxPortIndex": mhoRxPortIndex,
+       "mhoRxPortLabel": mhoRxPortLabel,
+       "mhoRxUcast": mhoRxUcast,
+       "mhoRxMcast": mhoRxMcast,
+       "mhoRxBcast": mhoRxBcast,
+       "mhoRxErr": mhoRxErr,
+       "mhoRxFrames": mhoRxFrames,
+       "mhoRxBytes": mhoRxBytes,
+       "mhoRxFcsErr": mhoRxFcsErr,
+       "mhoTxTable": mhoTxTable,
+       "mhoTxEntry": mhoTxEntry,
+       "mhoTxPortIndex": mhoTxPortIndex,
+       "mhoTxPortLabel": mhoTxPortLabel,
+       "mhoTxUcast": mhoTxUcast,
+       "mhoTxMcast": mhoTxMcast,
+       "mhoTxBcast": mhoTxBcast,
+       "mhoTxErr": mhoTxErr,
+       "mhoTxFrames": mhoTxFrames,
+       "mhoTxBytes": mhoTxBytes,
+       "mhoRxBuffTable": mhoRxBuffTable,
+       "mhoRxBuffEntry": mhoRxBuffEntry,
+       "mhoRxBuffPortIndex": mhoRxBuffPortIndex,
+       "mhoRxBuffPortLabel": mhoRxBuffPortLabel,
+       "mhoRxBuff0Frames": mhoRxBuff0Frames,
+       "mhoRxBuff0Octet": mhoRxBuff0Octet,
+       "mhoRxBuff0Discard": mhoRxBuff0Discard,
+       "mhoRxBuff1Frames": mhoRxBuff1Frames,
+       "mhoRxBuff1Octet": mhoRxBuff1Octet,
+       "mhoRxBuff1Discard": mhoRxBuff1Discard,
+       "mhoRxBuff2Frames": mhoRxBuff2Frames,
+       "mhoRxBuff2Octet": mhoRxBuff2Octet,
+       "mhoRxBuff2Discard": mhoRxBuff2Discard,
+       "mhoRxBuff3Frames": mhoRxBuff3Frames,
+       "mhoRxBuff3Octet": mhoRxBuff3Octet,
+       "mhoRxBuff3Discard": mhoRxBuff3Discard,
+       "mhoRxBuff4Frames": mhoRxBuff4Frames,
+       "mhoRxBuff4Octet": mhoRxBuff4Octet,
+       "mhoRxBuff4Discard": mhoRxBuff4Discard,
+       "mhoRxBuff5Frames": mhoRxBuff5Frames,
+       "mhoRxBuff5Octet": mhoRxBuff5Octet,
+       "mhoRxBuff5Discard": mhoRxBuff5Discard,
+       "mhoRxBuff6Frames": mhoRxBuff6Frames,
+       "mhoRxBuff6Octet": mhoRxBuff6Octet,
+       "mhoRxBuff6Discard": mhoRxBuff6Discard,
+       "mhoRxBuff7Frames": mhoRxBuff7Frames,
+       "mhoRxBuff7Octet": mhoRxBuff7Octet,
+       "mhoRxBuff7Discard": mhoRxBuff7Discard,
+       "mhoStateTable": mhoStateTable,
+       "mhoStateEntry": mhoStateEntry,
+       "mhoStatePortIndex": mhoStatePortIndex,
+       "mhoStatePortLabel": mhoStatePortLabel,
+       "mhoStateLinkState": mhoStateLinkState,
+       "mhoStateAdminState": mhoStateAdminState,
+       "mhoStateSpeed": mhoStateSpeed,
+       "mhoSummaryTable": mhoSummaryTable,
+       "mhoSummaryEntry": mhoSummaryEntry,
+       "mhoSummaryPortIndex": mhoSummaryPortIndex,
+       "mhoSummaryPortLabel": mhoSummaryPortLabel,
+       "mhoSummaryLinkState": mhoSummaryLinkState,
+       "mhoSummaryAdminState": mhoSummaryAdminState,
+       "mhoSummarySpeed": mhoSummarySpeed,
+       "mhoSummaryRxFcsErr": mhoSummaryRxFcsErr,
+       "mhoSummaryRxErr": mhoSummaryRxErr,
+       "mhoSummaryRxFrames": mhoSummaryRxFrames,
+       "mhoSummaryRxBytes": mhoSummaryRxBytes,
+       "mhoSummaryTxErr": mhoSummaryTxErr,
+       "mhoSummaryTxFrames": mhoSummaryTxFrames,
+       "mhoSummaryTxBytes": mhoSummaryTxBytes,
+       "mhoAcls": mhoAcls,
+       "mhoACLsUsed": mhoACLsUsed,
+       "mhoACLsTotal": mhoACLsTotal,
+       "mhoACLsAvailable": mhoACLsAvailable,
+       "chkpntMIBConformance": chkpntMIBConformance,
+       "chkpntMIBCompliances": chkpntMIBCompliances,
+       "chkpntBasicCompliance": chkpntBasicCompliance,
+       "chkpntMIBGroups": chkpntMIBGroups,
+       "fwProductsGroup": fwProductsGroup,
+       "vpnProductsGroup": vpnProductsGroup,
+       "fgProductsGroup": fgProductsGroup,
+       "haProductsGroup": haProductsGroup,
+       "svnProductsGroup": svnProductsGroup,
+       "mngmtProductsGroup": mngmtProductsGroup,
+       "wamProductsGroup": wamProductsGroup,
+       "dtpsProductsGroup": dtpsProductsGroup,
+       "lsProductsGroup": lsProductsGroup,
+       "vsxProductsGroup": vsxProductsGroup,
+       "smartDefenseProductsGroup": smartDefenseProductsGroup,
+       "gxProductsGroup": gxProductsGroup,
+       "aviProductsGroup": aviProductsGroup,
+       "eventiaAnalyzerProductsGroup": eventiaAnalyzerProductsGroup,
+       "ufProductsGroup": ufProductsGroup,
+       "msProductsGroup": msProductsGroup,
+       "voipProductsGroup": voipProductsGroup,
+       "identityAwarenessProductsGroup": identityAwarenessProductsGroup,
+       "applicationControlProductsGroup": applicationControlProductsGroup,
+       "thresholdsProductsGroup": thresholdsProductsGroup,
+       "advancedUrlFilteringProductsGroup": advancedUrlFilteringProductsGroup,
+       "dlpProductsGroup": dlpProductsGroup,
+       "amwProductsGroup": amwProductsGroup,
+       "asgProductsGroup": asgProductsGroup,
+       "teProductsGroup": teProductsGroup,
+       "threatExtractionProductsGroup": threatExtractionProductsGroup,
+       "sxlProductsGroup": sxlProductsGroup,
+       "vsecControllerProductsGroup": vsecControllerProductsGroup,
+       "ipsProductsGroup": ipsProductsGroup,
+       "httpsInspectionProductsGroup": httpsInspectionProductsGroup,
+       "mhoProductsGroup": mhoProductsGroup,
        "tables": tables,
        "raUsersTable": raUsersTable,
        "raUsersEntry": raUsersEntry,

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-DOT11-ASSOCIATION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:02 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -137,7 +134,8 @@ ciscoDot11AssociationMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoDot11AssociationMIB.setRevisions(
-        ("2007-01-05 00:00",
+        ("2016-12-06 00:00",
+         "2007-01-05 00:00",
          "2006-06-12 00:00",
          "2005-03-08 00:00",
          "2004-11-28 00:00",
@@ -1146,6 +1144,134 @@ if mibBuilder.loadTexts:
     cDot11ClientMicMissingFrames.setStatus("current")
 if mibBuilder.loadTexts:
     cDot11ClientMicMissingFrames.setUnits("packet")
+_CiscoDot11StationTraps_ObjectIdentity = ObjectIdentity
+ciscoDot11StationTraps = _CiscoDot11StationTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 4)
+)
+_CiscoDot11StationInfoTable_Object = MibTable
+ciscoDot11StationInfoTable = _CiscoDot11StationInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5)
+)
+if mibBuilder.loadTexts:
+    ciscoDot11StationInfoTable.setStatus("current")
+_CiscoDot11StationInfoEntry_Object = MibTableRow
+ciscoDot11StationInfoEntry = _CiscoDot11StationInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1)
+)
+ciscoDot11StationInfoEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    ciscoDot11StationInfoEntry.setStatus("current")
+_ClientMacAddr_Type = MacAddress
+_ClientMacAddr_Object = MibTableColumn
+clientMacAddr = _ClientMacAddr_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 1),
+    _ClientMacAddr_Type()
+)
+clientMacAddr.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientMacAddr.setStatus("current")
+_ClientDeviceType_Type = CDot11ClientRoleClassType
+_ClientDeviceType_Object = MibTableColumn
+clientDeviceType = _ClientDeviceType_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 2),
+    _ClientDeviceType_Type()
+)
+clientDeviceType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientDeviceType.setStatus("current")
+_ClientDeviceName_Type = SnmpAdminString
+_ClientDeviceName_Object = MibTableColumn
+clientDeviceName = _ClientDeviceName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 3),
+    _ClientDeviceName_Type()
+)
+clientDeviceName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientDeviceName.setStatus("current")
+_ClientIpv4Address_Type = InetAddress
+_ClientIpv4Address_Object = MibTableColumn
+clientIpv4Address = _ClientIpv4Address_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 4),
+    _ClientIpv4Address_Type()
+)
+clientIpv4Address.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientIpv4Address.setStatus("current")
+_ClientIpv6Address_Type = InetAddress
+_ClientIpv6Address_Object = MibTableColumn
+clientIpv6Address = _ClientIpv6Address_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 5),
+    _ClientIpv6Address_Type()
+)
+clientIpv6Address.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientIpv6Address.setStatus("current")
+_ApMacAddr_Type = InetAddress
+_ApMacAddr_Object = MibTableColumn
+apMacAddr = _ApMacAddr_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 6),
+    _ApMacAddr_Type()
+)
+apMacAddr.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    apMacAddr.setStatus("current")
+_ApIpv4Address_Type = InetAddress
+_ApIpv4Address_Object = MibTableColumn
+apIpv4Address = _ApIpv4Address_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 7),
+    _ApIpv4Address_Type()
+)
+apIpv4Address.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    apIpv4Address.setStatus("current")
+_ApIpv6Address_Type = InetAddress
+_ApIpv6Address_Object = MibTableColumn
+apIpv6Address = _ApIpv6Address_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 8),
+    _ApIpv6Address_Type()
+)
+apIpv6Address.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    apIpv6Address.setStatus("current")
+
+
+class _ClientStationState_Type(Integer32):
+    """Custom type clientStationState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("associated", 1),
+          ("disAssociated", 2),
+          ("run", 3))
+    )
+
+
+_ClientStationState_Type.__name__ = "Integer32"
+_ClientStationState_Object = MibTableColumn
+clientStationState = _ClientStationState_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 9),
+    _ClientStationState_Type()
+)
+clientStationState.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientStationState.setStatus("current")
+_ClientDisassocReasonStr_Type = SnmpAdminString
+_ClientDisassocReasonStr_Object = MibTableColumn
+clientDisassocReasonStr = _ClientDisassocReasonStr_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 5, 1, 10),
+    _ClientDisassocReasonStr_Type()
+)
+clientDisassocReasonStr.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    clientDisassocReasonStr.setStatus("current")
 _CiscoDot11AssocMIBConformance_ObjectIdentity = ObjectIdentity
 ciscoDot11AssocMIBConformance = _CiscoDot11AssocMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 9, 273, 2)
@@ -1312,8 +1438,47 @@ ciscoDot11ClientNewAuthenGroup.setObjects(
 if mibBuilder.loadTexts:
     ciscoDot11ClientNewAuthenGroup.setStatus("current")
 
+ciscoDot11ClientStatusTrapsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 2, 2, 11)
+)
+ciscoDot11ClientStatusTrapsGroup.setObjects(
+      *(("CISCO-DOT11-ASSOCIATION-MIB", "clientMacAddr"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientDeviceType"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientDeviceName"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientIpv4Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientIpv6Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "apMacAddr"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "apIpv4Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "apIpv6Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientStationState"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientDisassocReasonStr"))
+)
+if mibBuilder.loadTexts:
+    ciscoDot11ClientStatusTrapsGroup.setStatus("current")
+
 
 # Notification objects
+
+ciscoDot11StationStatusTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 1, 4, 1)
+)
+ciscoDot11StationStatusTrap.setObjects(
+      *(("IF-MIB", "ifIndex"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientMacAddr"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientDeviceType"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientDeviceName"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientIpv4Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientIpv6Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "apMacAddr"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "apIpv4Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "apIpv6Address"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientStationState"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "clientDisassocReasonStr"))
+)
+if mibBuilder.loadTexts:
+    ciscoDot11StationStatusTrap.setStatus(
+        "current"
+    )
 
 
 # Notifications groups
@@ -1421,6 +1586,26 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+ciscoDot11AssocMIBComplianceRev6 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 9, 9, 273, 2, 1, 7)
+)
+ciscoDot11AssocMIBComplianceRev6.setObjects(
+      *(("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientConfigGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientAuthenGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientStatGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientInfoGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11IfAssocStatGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11IfCipherStatGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientConfigExtGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientNewAuthenGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ApAssocGlobalGroup"),
+        ("CISCO-DOT11-ASSOCIATION-MIB", "ciscoDot11ClientStatusTrapsGroup"))
+)
+if mibBuilder.loadTexts:
+    ciscoDot11AssocMIBComplianceRev6.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -1506,6 +1691,20 @@ mibBuilder.exportSymbols(
        "cDot11ClientWepErrors": cDot11ClientWepErrors,
        "cDot11ClientMicErrors": cDot11ClientMicErrors,
        "cDot11ClientMicMissingFrames": cDot11ClientMicMissingFrames,
+       "ciscoDot11StationTraps": ciscoDot11StationTraps,
+       "ciscoDot11StationStatusTrap": ciscoDot11StationStatusTrap,
+       "ciscoDot11StationInfoTable": ciscoDot11StationInfoTable,
+       "ciscoDot11StationInfoEntry": ciscoDot11StationInfoEntry,
+       "clientMacAddr": clientMacAddr,
+       "clientDeviceType": clientDeviceType,
+       "clientDeviceName": clientDeviceName,
+       "clientIpv4Address": clientIpv4Address,
+       "clientIpv6Address": clientIpv6Address,
+       "apMacAddr": apMacAddr,
+       "apIpv4Address": apIpv4Address,
+       "apIpv6Address": apIpv6Address,
+       "clientStationState": clientStationState,
+       "clientDisassocReasonStr": clientDisassocReasonStr,
        "ciscoDot11AssocMIBConformance": ciscoDot11AssocMIBConformance,
        "ciscoDot11AssocMIBCompliances": ciscoDot11AssocMIBCompliances,
        "ciscoDot11AssocMIBCompliance": ciscoDot11AssocMIBCompliance,
@@ -1514,6 +1713,7 @@ mibBuilder.exportSymbols(
        "ciscoDot11AssocMIBComplianceRev3": ciscoDot11AssocMIBComplianceRev3,
        "ciscoDot11AssocMIBComplianceRev4": ciscoDot11AssocMIBComplianceRev4,
        "ciscoDot11AssocMIBComplianceRev5": ciscoDot11AssocMIBComplianceRev5,
+       "ciscoDot11AssocMIBComplianceRev6": ciscoDot11AssocMIBComplianceRev6,
        "ciscoDot11AssocMIBGroups": ciscoDot11AssocMIBGroups,
        "ciscoDot11AssocGlobalGroup": ciscoDot11AssocGlobalGroup,
        "ciscoDot11ClientConfigGroup": ciscoDot11ClientConfigGroup,
@@ -1524,5 +1724,6 @@ mibBuilder.exportSymbols(
        "ciscoDot11IfCipherStatGroup": ciscoDot11IfCipherStatGroup,
        "ciscoDot11ClientAuthenGroup": ciscoDot11ClientAuthenGroup,
        "ciscoDot11ClientConfigExtGroup": ciscoDot11ClientConfigExtGroup,
-       "ciscoDot11ClientNewAuthenGroup": ciscoDot11ClientNewAuthenGroup}
+       "ciscoDot11ClientNewAuthenGroup": ciscoDot11ClientNewAuthenGroup,
+       "ciscoDot11ClientStatusTrapsGroup": ciscoDot11ClientStatusTrapsGroup}
 )

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-INLINE-POWER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:27 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-INLINE-POWER-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -56,6 +53,10 @@ if 'mibBuilder' not in globals():
     "POWER-ETHERNET-MIB",
     "pethMainPseEntry",
     "pethPsePortEntry")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -117,7 +118,11 @@ alcatelIND1INLINEPOWERMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1INLINEPOWERMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2009-09-24 00:00",
+         "2009-07-05 00:00",
+         "2009-04-16 00:00",
+         "2007-04-03 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -152,7 +157,7 @@ class _AlaPethPsePortPowerMaximum_Type(Integer32):
     """Custom type alaPethPsePortPowerMaximum based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(3000, 20000),
+        ValueRangeConstraint(3000, 75000),
     )
 
 
@@ -409,6 +414,79 @@ alaPethMainPseComboPort = _AlaPethMainPseComboPort_Object(
 alaPethMainPseComboPort.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaPethMainPseComboPort.setStatus("current")
+
+
+class _AlaPethMainPseHighResistorDetect_Type(Integer32):
+    """Custom type alaPethMainPseHighResistorDetect based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPethMainPseHighResistorDetect_Type.__name__ = "Integer32"
+_AlaPethMainPseHighResistorDetect_Object = MibTableColumn
+alaPethMainPseHighResistorDetect = _AlaPethMainPseHighResistorDetect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 2, 1, 7),
+    _AlaPethMainPseHighResistorDetect_Type()
+)
+alaPethMainPseHighResistorDetect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPethMainPseHighResistorDetect.setStatus("current")
+
+
+class _AlaPethMainPseDelayStartStatus_Type(Integer32):
+    """Custom type alaPethMainPseDelayStartStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPethMainPseDelayStartStatus_Type.__name__ = "Integer32"
+_AlaPethMainPseDelayStartStatus_Object = MibTableColumn
+alaPethMainPseDelayStartStatus = _AlaPethMainPseDelayStartStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 2, 1, 8),
+    _AlaPethMainPseDelayStartStatus_Type()
+)
+alaPethMainPseDelayStartStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPethMainPseDelayStartStatus.setStatus("current")
+
+
+class _AlaPethMainPseDelayStartValue_Type(Integer32):
+    """Custom type alaPethMainPseDelayStartValue based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(120, 600),
+    )
+
+
+_AlaPethMainPseDelayStartValue_Type.__name__ = "Integer32"
+_AlaPethMainPseDelayStartValue_Object = MibTableColumn
+alaPethMainPseDelayStartValue = _AlaPethMainPseDelayStartValue_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 2, 1, 9),
+    _AlaPethMainPseDelayStartValue_Type()
+)
+alaPethMainPseDelayStartValue.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPethMainPseDelayStartValue.setStatus("current")
+if mibBuilder.loadTexts:
+    alaPethMainPseDelayStartValue.setUnits("Seconds")
 _AlaPethNotificationObjects_ObjectIdentity = ObjectIdentity
 alaPethNotificationObjects = _AlaPethNotificationObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 3)
@@ -429,7 +507,7 @@ pethSourceSlot = _PethSourceSlot_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 3, 1),
     _PethSourceSlot_Type()
 )
-pethSourceSlot.setMaxAccess("read-only")
+pethSourceSlot.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     pethSourceSlot.setStatus("current")
 
@@ -448,9 +526,44 @@ pethSourcePort = _PethSourcePort_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 3, 2),
     _PethSourcePort_Type()
 )
-pethSourcePort.setMaxAccess("read-only")
+pethSourcePort.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     pethSourcePort.setStatus("current")
+
+
+class _PethSourcePortDetectionStatus_Type(Integer32):
+    """Custom type pethSourcePortDetectionStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("off", 1),
+          ("on", 2))
+    )
+
+
+_PethSourcePortDetectionStatus_Type.__name__ = "Integer32"
+_PethSourcePortDetectionStatus_Object = MibScalar
+pethSourcePortDetectionStatus = _PethSourcePortDetectionStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 3, 3),
+    _PethSourcePortDetectionStatus_Type()
+)
+pethSourcePortDetectionStatus.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    pethSourcePortDetectionStatus.setStatus("current")
+_PethSourcePortStatusChangeReason_Type = SnmpAdminString
+_PethSourcePortStatusChangeReason_Object = MibScalar
+pethSourcePortStatusChangeReason = _PethSourcePortStatusChangeReason_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 1, 3, 4),
+    _PethSourcePortStatusChangeReason_Type()
+)
+pethSourcePortStatusChangeReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    pethSourcePortStatusChangeReason.setStatus("current")
 _AlaPethConformance_ObjectIdentity = ObjectIdentity
 alaPethConformance = _AlaPethConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 2)
@@ -561,10 +674,21 @@ alaPethMainPseGroup.setObjects(
         ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPsePriorityDisconnect"),
         ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPseCapacitorDetect"),
         ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPsePriority"),
-        ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPseComboPort"))
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPseComboPort"),
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPowerRedundancy"))
 )
 if mibBuilder.loadTexts:
     alaPethMainPseGroup.setStatus("current")
+
+alaPethTrapObjGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 2, 2, 4)
+)
+alaPethTrapObjGroup.setObjects(
+      *(("ALCATEL-IND1-INLINE-POWER-MIB", "pethSourceSlot"),
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "pethSourcePort"))
+)
+if mibBuilder.loadTexts:
+    alaPethTrapObjGroup.setStatus("current")
 
 
 # Notification objects
@@ -584,7 +708,8 @@ pethPwrSupplyNotSupported = NotificationType(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 17, 0, 2)
 )
 pethPwrSupplyNotSupported.setObjects(
-    ("ALCATEL-IND1-INLINE-POWER-MIB", "pethSourceSlot")
+      *(("ALCATEL-IND1-INLINE-POWER-MIB", "pethSourceSlot"),
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "pethSourcePort"))
 )
 if mibBuilder.loadTexts:
     pethPwrSupplyNotSupported.setStatus(
@@ -593,6 +718,18 @@ if mibBuilder.loadTexts:
 
 
 # Notifications groups
+
+pethTrapsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 27, 1, 2, 2, 3)
+)
+pethTrapsGroup.setObjects(
+      *(("ALCATEL-IND1-INLINE-POWER-MIB", "pethPwrSupplyConflict"),
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "pethPwrSupplyNotSupported"))
+)
+if mibBuilder.loadTexts:
+    pethTrapsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -617,7 +754,8 @@ alaPethPseCompliance = ModuleCompliance(
 )
 alaPethPseCompliance.setObjects(
       *(("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethPsePortGroup"),
-        ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPseGroup"))
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "alaPethMainPseGroup"),
+        ("ALCATEL-IND1-INLINE-POWER-MIB", "pethTrapsGroup"))
 )
 if mibBuilder.loadTexts:
     alaPethPseCompliance.setStatus(
@@ -645,9 +783,14 @@ mibBuilder.exportSymbols(
        "alaPethMainPseCapacitorDetect": alaPethMainPseCapacitorDetect,
        "alaPethMainPsePriority": alaPethMainPsePriority,
        "alaPethMainPseComboPort": alaPethMainPseComboPort,
+       "alaPethMainPseHighResistorDetect": alaPethMainPseHighResistorDetect,
+       "alaPethMainPseDelayStartStatus": alaPethMainPseDelayStartStatus,
+       "alaPethMainPseDelayStartValue": alaPethMainPseDelayStartValue,
        "alaPethNotificationObjects": alaPethNotificationObjects,
        "pethSourceSlot": pethSourceSlot,
        "pethSourcePort": pethSourcePort,
+       "pethSourcePortDetectionStatus": pethSourcePortDetectionStatus,
+       "pethSourcePortStatusChangeReason": pethSourcePortStatusChangeReason,
        "alaPethConformance": alaPethConformance,
        "alaPethCompliances": alaPethCompliances,
        "alaPethCompliance": alaPethCompliance,
@@ -655,6 +798,8 @@ mibBuilder.exportSymbols(
        "alaPethGroups": alaPethGroups,
        "alaPethPsePortGroup": alaPethPsePortGroup,
        "alaPethMainPseGroup": alaPethMainPseGroup,
+       "pethTrapsGroup": pethTrapsGroup,
+       "alaPethTrapObjGroup": alaPethTrapObjGroup,
        "alaPethMain": alaPethMain,
        "alaPethMainTable": alaPethMainTable,
        "alaPethMainEntry": alaPethMainEntry,

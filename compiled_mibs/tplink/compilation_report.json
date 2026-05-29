@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-02T12:30:39.413912",
+  "timestamp": "2026-05-29T09:52:02.987038",
   "stats": {
-    "total": 20,
+    "total": 19,
     "compiled": 14,
     "failed": 2,
-    "skipped": 4,
+    "skipped": 3,
     "errors": [
       {
         "mib": "TPLINK-POWER-OVER-ETHERNET-MIB",
@@ -16,5 +16,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

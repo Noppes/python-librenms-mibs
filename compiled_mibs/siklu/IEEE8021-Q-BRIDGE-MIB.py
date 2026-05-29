@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\IEEE8021-Q-BRIDGE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:28:04 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -151,7 +148,9 @@ ieee8021QBridgeMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ieee8021QBridgeMib.setRevisions(
-        ("2011-12-12 00:00",
+        ("2018-06-28 00:00",
+         "2014-12-15 00:00",
+         "2011-12-12 00:00",
          "2011-02-27 00:00",
          "2008-10-15 00:00")
     )
@@ -1251,7 +1250,7 @@ ieee8021QBridgeLearningConstraintsTable = _Ieee8021QBridgeLearningConstraintsTab
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 4, 8)
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsTable.setStatus("current")
+    ieee8021QBridgeLearningConstraintsTable.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintsEntry_Object = MibTableRow
 ieee8021QBridgeLearningConstraintsEntry = _Ieee8021QBridgeLearningConstraintsEntry_Object(
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 4, 8, 1)
@@ -1262,7 +1261,7 @@ ieee8021QBridgeLearningConstraintsEntry.setIndexNames(
     (0, "IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeLearningConstraintsSet"),
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsEntry.setStatus("current")
+    ieee8021QBridgeLearningConstraintsEntry.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintsComponentId_Type = IEEE8021PbbComponentIdentifier
 _Ieee8021QBridgeLearningConstraintsComponentId_Object = MibTableColumn
 ieee8021QBridgeLearningConstraintsComponentId = _Ieee8021QBridgeLearningConstraintsComponentId_Object(
@@ -1271,7 +1270,7 @@ ieee8021QBridgeLearningConstraintsComponentId = _Ieee8021QBridgeLearningConstrai
 )
 ieee8021QBridgeLearningConstraintsComponentId.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsComponentId.setStatus("current")
+    ieee8021QBridgeLearningConstraintsComponentId.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintsVlan_Type = IEEE8021VlanIndex
 _Ieee8021QBridgeLearningConstraintsVlan_Object = MibTableColumn
 ieee8021QBridgeLearningConstraintsVlan = _Ieee8021QBridgeLearningConstraintsVlan_Object(
@@ -1280,7 +1279,7 @@ ieee8021QBridgeLearningConstraintsVlan = _Ieee8021QBridgeLearningConstraintsVlan
 )
 ieee8021QBridgeLearningConstraintsVlan.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsVlan.setStatus("current")
+    ieee8021QBridgeLearningConstraintsVlan.setStatus("deprecated")
 
 
 class _Ieee8021QBridgeLearningConstraintsSet_Type(Integer32):
@@ -1299,7 +1298,7 @@ ieee8021QBridgeLearningConstraintsSet = _Ieee8021QBridgeLearningConstraintsSet_O
 )
 ieee8021QBridgeLearningConstraintsSet.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsSet.setStatus("current")
+    ieee8021QBridgeLearningConstraintsSet.setStatus("deprecated")
 
 
 class _Ieee8021QBridgeLearningConstraintsType_Type(Integer32):
@@ -1325,7 +1324,7 @@ ieee8021QBridgeLearningConstraintsType = _Ieee8021QBridgeLearningConstraintsType
 )
 ieee8021QBridgeLearningConstraintsType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsType.setStatus("current")
+    ieee8021QBridgeLearningConstraintsType.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintsStatus_Type = RowStatus
 _Ieee8021QBridgeLearningConstraintsStatus_Object = MibTableColumn
 ieee8021QBridgeLearningConstraintsStatus = _Ieee8021QBridgeLearningConstraintsStatus_Object(
@@ -1334,13 +1333,13 @@ ieee8021QBridgeLearningConstraintsStatus = _Ieee8021QBridgeLearningConstraintsSt
 )
 ieee8021QBridgeLearningConstraintsStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsStatus.setStatus("current")
+    ieee8021QBridgeLearningConstraintsStatus.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintDefaultsTable_Object = MibTable
 ieee8021QBridgeLearningConstraintDefaultsTable = _Ieee8021QBridgeLearningConstraintDefaultsTable_Object(
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 4, 9)
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintDefaultsTable.setStatus("current")
+    ieee8021QBridgeLearningConstraintDefaultsTable.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintDefaultsEntry_Object = MibTableRow
 ieee8021QBridgeLearningConstraintDefaultsEntry = _Ieee8021QBridgeLearningConstraintDefaultsEntry_Object(
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 4, 9, 1)
@@ -1349,7 +1348,7 @@ ieee8021QBridgeLearningConstraintDefaultsEntry.setIndexNames(
     (0, "IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeLearningConstraintDefaultsComponentId"),
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintDefaultsEntry.setStatus("current")
+    ieee8021QBridgeLearningConstraintDefaultsEntry.setStatus("deprecated")
 _Ieee8021QBridgeLearningConstraintDefaultsComponentId_Type = IEEE8021PbbComponentIdentifier
 _Ieee8021QBridgeLearningConstraintDefaultsComponentId_Object = MibTableColumn
 ieee8021QBridgeLearningConstraintDefaultsComponentId = _Ieee8021QBridgeLearningConstraintDefaultsComponentId_Object(
@@ -1358,7 +1357,7 @@ ieee8021QBridgeLearningConstraintDefaultsComponentId = _Ieee8021QBridgeLearningC
 )
 ieee8021QBridgeLearningConstraintDefaultsComponentId.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintDefaultsComponentId.setStatus("current")
+    ieee8021QBridgeLearningConstraintDefaultsComponentId.setStatus("deprecated")
 
 
 class _Ieee8021QBridgeLearningConstraintDefaultsSet_Type(Integer32):
@@ -1377,7 +1376,7 @@ ieee8021QBridgeLearningConstraintDefaultsSet = _Ieee8021QBridgeLearningConstrain
 )
 ieee8021QBridgeLearningConstraintDefaultsSet.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintDefaultsSet.setStatus("current")
+    ieee8021QBridgeLearningConstraintDefaultsSet.setStatus("deprecated")
 
 
 class _Ieee8021QBridgeLearningConstraintDefaultsType_Type(Integer32):
@@ -1403,7 +1402,7 @@ ieee8021QBridgeLearningConstraintDefaultsType = _Ieee8021QBridgeLearningConstrai
 )
 ieee8021QBridgeLearningConstraintDefaultsType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintDefaultsType.setStatus("current")
+    ieee8021QBridgeLearningConstraintDefaultsType.setStatus("deprecated")
 _Ieee8021QBridgeProtocol_ObjectIdentity = ObjectIdentity
 ieee8021QBridgeProtocol = _Ieee8021QBridgeProtocol_ObjectIdentity(
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 5)
@@ -1621,18 +1620,18 @@ ieee8021QBridgeEgressVidXTable = _Ieee8021QBridgeEgressVidXTable_Object(
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 2)
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeEgressVidXTable.setStatus("current")
+    ieee8021QBridgeEgressVidXTable.setStatus("deprecated")
 _Ieee8021QBridgeEgressVidXEntry_Object = MibTableRow
 ieee8021QBridgeEgressVidXEntry = _Ieee8021QBridgeEgressVidXEntry_Object(
     (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 2, 1)
 )
 ieee8021QBridgeEgressVidXEntry.setIndexNames(
-    (0, "IEEE8021-Q-BRIDGE-MIB", "ieee8021BridgeBaseEgressPortComponentId"),
-    (0, "IEEE8021-Q-BRIDGE-MIB", "ieee8021BridgeEgressBasePort"),
+    (0, "IEEE8021-BRIDGE-MIB", "ieee8021BridgeBasePortComponentId"),
+    (0, "IEEE8021-BRIDGE-MIB", "ieee8021BridgeBasePort"),
     (0, "IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeEgressVidXRelayVid"),
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeEgressVidXEntry.setStatus("current")
+    ieee8021QBridgeEgressVidXEntry.setStatus("deprecated")
 _Ieee8021QBridgeEgressVidXRelayVid_Type = VlanId
 _Ieee8021QBridgeEgressVidXRelayVid_Object = MibTableColumn
 ieee8021QBridgeEgressVidXRelayVid = _Ieee8021QBridgeEgressVidXRelayVid_Object(
@@ -1641,7 +1640,7 @@ ieee8021QBridgeEgressVidXRelayVid = _Ieee8021QBridgeEgressVidXRelayVid_Object(
 )
 ieee8021QBridgeEgressVidXRelayVid.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeEgressVidXRelayVid.setStatus("current")
+    ieee8021QBridgeEgressVidXRelayVid.setStatus("deprecated")
 _Ieee8021QBridgeEgressVidXLocalVid_Type = VlanId
 _Ieee8021QBridgeEgressVidXLocalVid_Object = MibTableColumn
 ieee8021QBridgeEgressVidXLocalVid = _Ieee8021QBridgeEgressVidXLocalVid_Object(
@@ -1650,7 +1649,7 @@ ieee8021QBridgeEgressVidXLocalVid = _Ieee8021QBridgeEgressVidXLocalVid_Object(
 )
 ieee8021QBridgeEgressVidXLocalVid.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeEgressVidXLocalVid.setStatus("current")
+    ieee8021QBridgeEgressVidXLocalVid.setStatus("deprecated")
 _Ieee8021QBridgeEgressVidXRowStatus_Type = RowStatus
 _Ieee8021QBridgeEgressVidXRowStatus_Object = MibTableColumn
 ieee8021QBridgeEgressVidXRowStatus = _Ieee8021QBridgeEgressVidXRowStatus_Object(
@@ -1659,7 +1658,51 @@ ieee8021QBridgeEgressVidXRowStatus = _Ieee8021QBridgeEgressVidXRowStatus_Object(
 )
 ieee8021QBridgeEgressVidXRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    ieee8021QBridgeEgressVidXRowStatus.setStatus("current")
+    ieee8021QBridgeEgressVidXRowStatus.setStatus("deprecated")
+_Ieee8021QBridgeEgressVidXV2Table_Object = MibTable
+ieee8021QBridgeEgressVidXV2Table = _Ieee8021QBridgeEgressVidXV2Table_Object(
+    (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 3)
+)
+if mibBuilder.loadTexts:
+    ieee8021QBridgeEgressVidXV2Table.setStatus("current")
+_Ieee8021QBridgeEgressVidXV2Entry_Object = MibTableRow
+ieee8021QBridgeEgressVidXV2Entry = _Ieee8021QBridgeEgressVidXV2Entry_Object(
+    (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 3, 1)
+)
+ieee8021QBridgeEgressVidXV2Entry.setIndexNames(
+    (0, "IEEE8021-BRIDGE-MIB", "ieee8021BridgeBasePortComponentId"),
+    (0, "IEEE8021-BRIDGE-MIB", "ieee8021BridgeBasePort"),
+    (0, "IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeEgressVidXV2RelayVid"),
+)
+if mibBuilder.loadTexts:
+    ieee8021QBridgeEgressVidXV2Entry.setStatus("current")
+_Ieee8021QBridgeEgressVidXV2RelayVid_Type = VlanId
+_Ieee8021QBridgeEgressVidXV2RelayVid_Object = MibTableColumn
+ieee8021QBridgeEgressVidXV2RelayVid = _Ieee8021QBridgeEgressVidXV2RelayVid_Object(
+    (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 3, 1, 1),
+    _Ieee8021QBridgeEgressVidXV2RelayVid_Type()
+)
+ieee8021QBridgeEgressVidXV2RelayVid.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    ieee8021QBridgeEgressVidXV2RelayVid.setStatus("current")
+_Ieee8021QBridgeEgressVidXV2LocalVid_Type = VlanId
+_Ieee8021QBridgeEgressVidXV2LocalVid_Object = MibTableColumn
+ieee8021QBridgeEgressVidXV2LocalVid = _Ieee8021QBridgeEgressVidXV2LocalVid_Object(
+    (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 3, 1, 2),
+    _Ieee8021QBridgeEgressVidXV2LocalVid_Type()
+)
+ieee8021QBridgeEgressVidXV2LocalVid.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ieee8021QBridgeEgressVidXV2LocalVid.setStatus("current")
+_Ieee8021QBridgeEgressVidXV2RowStatus_Type = RowStatus
+_Ieee8021QBridgeEgressVidXV2RowStatus_Object = MibTableColumn
+ieee8021QBridgeEgressVidXV2RowStatus = _Ieee8021QBridgeEgressVidXV2RowStatus_Object(
+    (1, 3, 111, 2, 802, 1, 1, 4, 1, 6, 3, 1, 3),
+    _Ieee8021QBridgeEgressVidXV2RowStatus_Type()
+)
+ieee8021QBridgeEgressVidXV2RowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ieee8021QBridgeEgressVidXV2RowStatus.setStatus("current")
 _Ieee8021QBridgeConformance_ObjectIdentity = ObjectIdentity
 ieee8021QBridgeConformance = _Ieee8021QBridgeConformance_ObjectIdentity(
     (1, 3, 111, 2, 802, 1, 1, 4, 2)
@@ -1793,7 +1836,7 @@ ieee8021QBridgeLearningConstraintsGroup.setObjects(
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeLearningConstraintsStatus"))
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintsGroup.setStatus("current")
+    ieee8021QBridgeLearningConstraintsGroup.setStatus("deprecated")
 
 ieee8021QBridgeLearningConstraintDefaultGroup = ObjectGroup(
     (1, 3, 111, 2, 802, 1, 1, 4, 2, 1, 10)
@@ -1803,7 +1846,7 @@ ieee8021QBridgeLearningConstraintDefaultGroup.setObjects(
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeLearningConstraintDefaultsType"))
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeLearningConstraintDefaultGroup.setStatus("current")
+    ieee8021QBridgeLearningConstraintDefaultGroup.setStatus("deprecated")
 
 ieee8021QBridgeClassificationDeviceGroup = ObjectGroup(
     (1, 3, 111, 2, 802, 1, 1, 4, 2, 1, 11)
@@ -1867,7 +1910,17 @@ ieee8021QBridgeEgressVIDXGroup.setObjects(
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeEgressVidXRowStatus"))
 )
 if mibBuilder.loadTexts:
-    ieee8021QBridgeEgressVIDXGroup.setStatus("current")
+    ieee8021QBridgeEgressVIDXGroup.setStatus("deprecated")
+
+ieee8021QBridgeEgressVIDXV2Group = ObjectGroup(
+    (1, 3, 111, 2, 802, 1, 1, 4, 2, 1, 17)
+)
+ieee8021QBridgeEgressVIDXV2Group.setObjects(
+      *(("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeEgressVidXV2LocalVid"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeEgressVidXV2RowStatus"))
+)
+if mibBuilder.loadTexts:
+    ieee8021QBridgeEgressVIDXV2Group.setStatus("current")
 
 
 # Notification objects
@@ -1894,8 +1947,6 @@ ieee8021QBridgeCompliance.setObjects(
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeServiceRequirementsGroup"),
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeFdbStaticGroup"),
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeVlanStatisticsGroup"),
-        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeLearningConstraintsGroup"),
-        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeLearningConstraintDefaultGroup"),
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeClassificationDeviceGroup"),
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeClassificationPortGroup"),
         ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeCVlanPortGroup"),
@@ -1904,6 +1955,30 @@ ieee8021QBridgeCompliance.setObjects(
 )
 if mibBuilder.loadTexts:
     ieee8021QBridgeCompliance.setStatus(
+        "deprecated"
+    )
+
+ieee8021QBridgeComplianceV2 = ModuleCompliance(
+    (1, 3, 111, 2, 802, 1, 1, 4, 2, 2, 2)
+)
+ieee8021QBridgeComplianceV2.setObjects(
+      *(("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeBaseGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeVlanGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeVlanStaticGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgePortGroup2"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeFdbUnicastGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeFdbMulticastGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeServiceRequirementsGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeFdbStaticGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeVlanStatisticsGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeClassificationDeviceGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeClassificationPortGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeCVlanPortGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeVIDXGroup"),
+        ("IEEE8021-Q-BRIDGE-MIB", "ieee8021QBridgeEgressVIDXV2Group"))
+)
+if mibBuilder.loadTexts:
+    ieee8021QBridgeComplianceV2.setStatus(
         "current"
     )
 
@@ -2052,6 +2127,11 @@ mibBuilder.exportSymbols(
        "ieee8021QBridgeEgressVidXRelayVid": ieee8021QBridgeEgressVidXRelayVid,
        "ieee8021QBridgeEgressVidXLocalVid": ieee8021QBridgeEgressVidXLocalVid,
        "ieee8021QBridgeEgressVidXRowStatus": ieee8021QBridgeEgressVidXRowStatus,
+       "ieee8021QBridgeEgressVidXV2Table": ieee8021QBridgeEgressVidXV2Table,
+       "ieee8021QBridgeEgressVidXV2Entry": ieee8021QBridgeEgressVidXV2Entry,
+       "ieee8021QBridgeEgressVidXV2RelayVid": ieee8021QBridgeEgressVidXV2RelayVid,
+       "ieee8021QBridgeEgressVidXV2LocalVid": ieee8021QBridgeEgressVidXV2LocalVid,
+       "ieee8021QBridgeEgressVidXV2RowStatus": ieee8021QBridgeEgressVidXV2RowStatus,
        "ieee8021QBridgeConformance": ieee8021QBridgeConformance,
        "ieee8021QBridgeGroups": ieee8021QBridgeGroups,
        "ieee8021QBridgeBaseGroup": ieee8021QBridgeBaseGroup,
@@ -2070,6 +2150,8 @@ mibBuilder.exportSymbols(
        "ieee8021QBridgeCVlanPortGroup": ieee8021QBridgeCVlanPortGroup,
        "ieee8021QBridgeVIDXGroup": ieee8021QBridgeVIDXGroup,
        "ieee8021QBridgeEgressVIDXGroup": ieee8021QBridgeEgressVIDXGroup,
+       "ieee8021QBridgeEgressVIDXV2Group": ieee8021QBridgeEgressVIDXV2Group,
        "ieee8021QBridgeCompliances": ieee8021QBridgeCompliances,
-       "ieee8021QBridgeCompliance": ieee8021QBridgeCompliance}
+       "ieee8021QBridgeCompliance": ieee8021QBridgeCompliance,
+       "ieee8021QBridgeComplianceV2": ieee8021QBridgeComplianceV2}
 )

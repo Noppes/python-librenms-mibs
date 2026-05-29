@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\alpha\ALPHA-RESOURCE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:17:42 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,9 @@ alpha = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alpha.setRevisions(
-        ("2019-04-12 00:00",
+        ("2023-04-03 00:00",
+         "2019-11-15 00:00",
+         "2019-04-12 00:00",
          "2016-11-15 00:00",
          "2015-10-19 00:00",
          "2015-07-28 00:00",
@@ -479,15 +478,15 @@ if mibBuilder.loadTexts:
     dataListEntry.setStatus("current")
 
 
-class _DataListReference_Type(Unsigned32):
-    """Custom type dataListReference based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
+class _DataListReference_Type(OctetString):
+    """Custom type dataListReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4294967295),
+        ValueSizeConstraint(0, 32),
     )
 
 
-_DataListReference_Type.__name__ = "Unsigned32"
+_DataListReference_Type.__name__ = "OctetString"
 _DataListReference_Object = MibTableColumn
 dataListReference = _DataListReference_Object(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 2, 2, 1, 1),
@@ -575,15 +574,15 @@ if mibBuilder.loadTexts:
     dataEntry.setStatus("current")
 
 
-class _DataReference_Type(Unsigned32):
-    """Custom type dataReference based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
+class _DataReference_Type(OctetString):
+    """Custom type dataReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4294967295),
+        ValueSizeConstraint(0, 32),
     )
 
 
-_DataReference_Type.__name__ = "Unsigned32"
+_DataReference_Type.__name__ = "OctetString"
 _DataReference_Object = MibTableColumn
 dataReference = _DataReference_Object(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 3, 2, 1, 1),
@@ -651,15 +650,15 @@ if mibBuilder.loadTexts:
     configurationListEntry.setStatus("current")
 
 
-class _ConfigurationListReference_Type(Unsigned32):
-    """Custom type configurationListReference based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
+class _ConfigurationListReference_Type(OctetString):
+    """Custom type configurationListReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4294967295),
+        ValueSizeConstraint(0, 32),
     )
 
 
-_ConfigurationListReference_Type.__name__ = "Unsigned32"
+_ConfigurationListReference_Type.__name__ = "OctetString"
 _ConfigurationListReference_Object = MibTableColumn
 configurationListReference = _ConfigurationListReference_Object(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 4, 2, 1, 1),
@@ -747,15 +746,15 @@ if mibBuilder.loadTexts:
     configurationEntry.setStatus("current")
 
 
-class _ConfigurationReference_Type(Unsigned32):
-    """Custom type configurationReference based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
+class _ConfigurationReference_Type(OctetString):
+    """Custom type configurationReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4294967295),
+        ValueSizeConstraint(0, 32),
     )
 
 
-_ConfigurationReference_Type.__name__ = "Unsigned32"
+_ConfigurationReference_Type.__name__ = "OctetString"
 _ConfigurationReference_Object = MibTableColumn
 configurationReference = _ConfigurationReference_Object(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 5, 2, 1, 1),
@@ -823,15 +822,15 @@ if mibBuilder.loadTexts:
     commandListEntry.setStatus("current")
 
 
-class _CommandListReference_Type(Unsigned32):
-    """Custom type commandListReference based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
+class _CommandListReference_Type(OctetString):
+    """Custom type commandListReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4294967295),
+        ValueSizeConstraint(0, 32),
     )
 
 
-_CommandListReference_Type.__name__ = "Unsigned32"
+_CommandListReference_Type.__name__ = "OctetString"
 _CommandListReference_Object = MibTableColumn
 commandListReference = _CommandListReference_Object(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 6, 2, 1, 1),
@@ -891,15 +890,15 @@ if mibBuilder.loadTexts:
     commandEntry.setStatus("current")
 
 
-class _CommandReference_Type(Unsigned32):
-    """Custom type commandReference based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
+class _CommandReference_Type(OctetString):
+    """Custom type commandReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4294967295),
+        ValueSizeConstraint(0, 32),
     )
 
 
-_CommandReference_Type.__name__ = "Unsigned32"
+_CommandReference_Type.__name__ = "OctetString"
 _CommandReference_Object = MibTableColumn
 commandReference = _CommandReference_Object(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 7, 2, 1, 1),
@@ -1080,6 +1079,92 @@ alertTypeName = _AlertTypeName_Object(
 alertTypeName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alertTypeName.setStatus("current")
+_ConfigurationChoiceList_ObjectIdentity = ObjectIdentity
+configurationChoiceList = _ConfigurationChoiceList_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11)
+)
+_ConfigurationChoiceListCount_Type = Integer32
+_ConfigurationChoiceListCount_Object = MibScalar
+configurationChoiceListCount = _ConfigurationChoiceListCount_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11, 1),
+    _ConfigurationChoiceListCount_Type()
+)
+configurationChoiceListCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    configurationChoiceListCount.setStatus("current")
+_ConfigurationChoiceListTable_Object = MibTable
+configurationChoiceListTable = _ConfigurationChoiceListTable_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11, 2)
+)
+if mibBuilder.loadTexts:
+    configurationChoiceListTable.setStatus("current")
+_ConfigurationChoiceListEntry_Object = MibTableRow
+configurationChoiceListEntry = _ConfigurationChoiceListEntry_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11, 2, 1)
+)
+configurationChoiceListEntry.setIndexNames(
+    (0, "ALPHA-RESOURCE-MIB", "componentListType"),
+    (0, "ALPHA-RESOURCE-MIB", "configurationChoiceListReference"),
+)
+if mibBuilder.loadTexts:
+    configurationChoiceListEntry.setStatus("current")
+
+
+class _ConfigurationChoiceListReference_Type(OctetString):
+    """Custom type configurationChoiceListReference based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_ConfigurationChoiceListReference_Type.__name__ = "OctetString"
+_ConfigurationChoiceListReference_Object = MibTableColumn
+configurationChoiceListReference = _ConfigurationChoiceListReference_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11, 2, 1, 1),
+    _ConfigurationChoiceListReference_Type()
+)
+configurationChoiceListReference.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    configurationChoiceListReference.setStatus("current")
+
+
+class _ConfigurationChoiceListIndex_Type(Unsigned32):
+    """Custom type configurationChoiceListIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4294967295),
+    )
+
+
+_ConfigurationChoiceListIndex_Type.__name__ = "Unsigned32"
+_ConfigurationChoiceListIndex_Object = MibTableColumn
+configurationChoiceListIndex = _ConfigurationChoiceListIndex_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11, 2, 1, 2),
+    _ConfigurationChoiceListIndex_Type()
+)
+configurationChoiceListIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    configurationChoiceListIndex.setStatus("current")
+
+
+class _ConfigurationChoiceListName_Type(OctetString):
+    """Custom type configurationChoiceListName based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_ConfigurationChoiceListName_Type.__name__ = "OctetString"
+_ConfigurationChoiceListName_Object = MibTableColumn
+configurationChoiceListName = _ConfigurationChoiceListName_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 11, 2, 1, 3),
+    _ConfigurationChoiceListName_Type()
+)
+configurationChoiceListName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    configurationChoiceListName.setStatus("current")
 _ResourceConformance_ObjectIdentity = ObjectIdentity
 resourceConformance = _ResourceConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 7309, 5, 2, 100)
@@ -1217,6 +1302,17 @@ alphaAlertGroup.setObjects(
 if mibBuilder.loadTexts:
     alphaAlertGroup.setStatus("current")
 
+alphaConfigurationChoicesGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 2, 100, 1, 2, 11)
+)
+alphaConfigurationChoicesGroup.setObjects(
+      *(("ALPHA-RESOURCE-MIB", "configurationChoiceListCount"),
+        ("ALPHA-RESOURCE-MIB", "configurationChoiceListIndex"),
+        ("ALPHA-RESOURCE-MIB", "configurationChoiceListName"))
+)
+if mibBuilder.loadTexts:
+    alphaConfigurationChoicesGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1242,7 +1338,8 @@ resourceCompliance.setObjects(
         ("ALPHA-RESOURCE-MIB", "alphaCommandTypeGroup"),
         ("ALPHA-RESOURCE-MIB", "alphaCommandGroup"),
         ("ALPHA-RESOURCE-MIB", "alphaAlarmGroup"),
-        ("ALPHA-RESOURCE-MIB", "alphaAlertGroup"))
+        ("ALPHA-RESOURCE-MIB", "alphaAlertGroup"),
+        ("ALPHA-RESOURCE-MIB", "alphaConfigurationChoicesGroup"))
 )
 if mibBuilder.loadTexts:
     resourceCompliance.setStatus(
@@ -1340,6 +1437,13 @@ mibBuilder.exportSymbols(
        "alertTable": alertTable,
        "alertEntry": alertEntry,
        "alertTypeName": alertTypeName,
+       "configurationChoiceList": configurationChoiceList,
+       "configurationChoiceListCount": configurationChoiceListCount,
+       "configurationChoiceListTable": configurationChoiceListTable,
+       "configurationChoiceListEntry": configurationChoiceListEntry,
+       "configurationChoiceListReference": configurationChoiceListReference,
+       "configurationChoiceListIndex": configurationChoiceListIndex,
+       "configurationChoiceListName": configurationChoiceListName,
        "resourceConformance": resourceConformance,
        "resourceCompliances": resourceCompliances,
        "resourceCompliance": resourceCompliance,
@@ -1354,5 +1458,6 @@ mibBuilder.exportSymbols(
        "alphaCommandGroup": alphaCommandGroup,
        "alphaAlarmGroup": alphaAlarmGroup,
        "alphaAlertGroup": alphaAlertGroup,
+       "alphaConfigurationChoicesGroup": alphaConfigurationChoicesGroup,
        "simple": simple}
 )

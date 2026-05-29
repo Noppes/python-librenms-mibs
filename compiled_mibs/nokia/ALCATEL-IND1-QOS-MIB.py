@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-QOS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:15:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-QOS-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -119,6 +116,10 @@ if 'mibBuilder' not in globals():
 alaQoSMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1)
 )
+if mibBuilder.loadTexts:
+    alaQoSMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -687,6 +688,70 @@ alaQoSRuleNonRedCount = _AlaQoSRuleNonRedCount_Object(
 alaQoSRuleNonRedCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaQoSRuleNonRedCount.setStatus("current")
+
+
+class _AlaQoSRuleAccounting_Type(Integer32):
+    """Custom type alaQoSRuleAccounting based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSRuleAccounting_Type.__name__ = "Integer32"
+_AlaQoSRuleAccounting_Object = MibTableColumn
+alaQoSRuleAccounting = _AlaQoSRuleAccounting_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 1, 1, 30),
+    _AlaQoSRuleAccounting_Type()
+)
+alaQoSRuleAccounting.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSRuleAccounting.setStatus("current")
+_AlaQoSRulePacketRate_Type = Counter64
+_AlaQoSRulePacketRate_Object = MibTableColumn
+alaQoSRulePacketRate = _AlaQoSRulePacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 1, 1, 31),
+    _AlaQoSRulePacketRate_Type()
+)
+alaQoSRulePacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRulePacketRate.setStatus("current")
+_AlaQoSRuleAccPacketCount_Type = Counter64
+_AlaQoSRuleAccPacketCount_Object = MibTableColumn
+alaQoSRuleAccPacketCount = _AlaQoSRuleAccPacketCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 1, 1, 32),
+    _AlaQoSRuleAccPacketCount_Type()
+)
+alaQoSRuleAccPacketCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleAccPacketCount.setStatus("current")
+_AlaQoSRuleAccByteCount_Type = Counter64
+_AlaQoSRuleAccByteCount_Object = MibTableColumn
+alaQoSRuleAccByteCount = _AlaQoSRuleAccByteCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 1, 1, 33),
+    _AlaQoSRuleAccByteCount_Type()
+)
+alaQoSRuleAccByteCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleAccByteCount.setStatus("current")
+_AlaQoSRuleBitRate_Type = Counter64
+_AlaQoSRuleBitRate_Object = MibTableColumn
+alaQoSRuleBitRate = _AlaQoSRuleBitRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 1, 1, 34),
+    _AlaQoSRuleBitRate_Type()
+)
+alaQoSRuleBitRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleBitRate.setStatus("current")
 _AlaQoSAppliedRuleTable_Object = MibTable
 alaQoSAppliedRuleTable = _AlaQoSAppliedRuleTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 2)
@@ -1220,6 +1285,70 @@ alaQoSAppliedRuleNonRedCount = _AlaQoSAppliedRuleNonRedCount_Object(
 alaQoSAppliedRuleNonRedCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaQoSAppliedRuleNonRedCount.setStatus("current")
+
+
+class _AlaQoSAppliedRuleAccounting_Type(Integer32):
+    """Custom type alaQoSAppliedRuleAccounting based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSAppliedRuleAccounting_Type.__name__ = "Integer32"
+_AlaQoSAppliedRuleAccounting_Object = MibTableColumn
+alaQoSAppliedRuleAccounting = _AlaQoSAppliedRuleAccounting_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 2, 1, 30),
+    _AlaQoSAppliedRuleAccounting_Type()
+)
+alaQoSAppliedRuleAccounting.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRuleAccounting.setStatus("current")
+_AlaQoSAppliedRulePacketRate_Type = Counter64
+_AlaQoSAppliedRulePacketRate_Object = MibTableColumn
+alaQoSAppliedRulePacketRate = _AlaQoSAppliedRulePacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 2, 1, 31),
+    _AlaQoSAppliedRulePacketRate_Type()
+)
+alaQoSAppliedRulePacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRulePacketRate.setStatus("current")
+_AlaQoSAppliedRuleAccPacketCount_Type = Counter64
+_AlaQoSAppliedRuleAccPacketCount_Object = MibTableColumn
+alaQoSAppliedRuleAccPacketCount = _AlaQoSAppliedRuleAccPacketCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 2, 1, 32),
+    _AlaQoSAppliedRuleAccPacketCount_Type()
+)
+alaQoSAppliedRuleAccPacketCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRuleAccPacketCount.setStatus("current")
+_AlaQoSAppliedRuleAccByteCount_Type = Counter64
+_AlaQoSAppliedRuleAccByteCount_Object = MibTableColumn
+alaQoSAppliedRuleAccByteCount = _AlaQoSAppliedRuleAccByteCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 2, 1, 33),
+    _AlaQoSAppliedRuleAccByteCount_Type()
+)
+alaQoSAppliedRuleAccByteCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRuleAccByteCount.setStatus("current")
+_AlaQoSAppliedRuleBitRate_Type = Counter64
+_AlaQoSAppliedRuleBitRate_Object = MibTableColumn
+alaQoSAppliedRuleBitRate = _AlaQoSAppliedRuleBitRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 2, 1, 34),
+    _AlaQoSAppliedRuleBitRate_Type()
+)
+alaQoSAppliedRuleBitRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRuleBitRate.setStatus("current")
 _AlaQoSConditionTable_Object = MibTable
 alaQoSConditionTable = _AlaQoSConditionTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 3)
@@ -4022,6 +4151,64 @@ alaQoSConditionInnerSourceVlanGroupStatus = _AlaQoSConditionInnerSourceVlanGroup
 alaQoSConditionInnerSourceVlanGroupStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSConditionInnerSourceVlanGroupStatus.setStatus("current")
+
+
+class _AlaQoSConditionSIP_Type(Integer32):
+    """Custom type alaQoSConditionSIP based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("audio", 1),
+          ("video", 2),
+          ("other", 3))
+    )
+
+
+_AlaQoSConditionSIP_Type.__name__ = "Integer32"
+_AlaQoSConditionSIP_Object = MibTableColumn
+alaQoSConditionSIP = _AlaQoSConditionSIP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 3, 1, 123),
+    _AlaQoSConditionSIP_Type()
+)
+alaQoSConditionSIP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSConditionSIP.setStatus("current")
+
+
+class _AlaQoSConditionSIPStatus_Type(Integer32):
+    """Custom type alaQoSConditionSIPStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSConditionSIPStatus_Type.__name__ = "Integer32"
+_AlaQoSConditionSIPStatus_Object = MibTableColumn
+alaQoSConditionSIPStatus = _AlaQoSConditionSIPStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 3, 1, 124),
+    _AlaQoSConditionSIPStatus_Type()
+)
+alaQoSConditionSIPStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSConditionSIPStatus.setStatus("current")
 _AlaQoSAppliedConditionTable_Object = MibTable
 alaQoSAppliedConditionTable = _AlaQoSAppliedConditionTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 4)
@@ -6600,6 +6787,64 @@ alaQoSAppliedConditionInnerSourceVlanGroupStatus = _AlaQoSAppliedConditionInnerS
 alaQoSAppliedConditionInnerSourceVlanGroupStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSAppliedConditionInnerSourceVlanGroupStatus.setStatus("current")
+
+
+class _AlaQoSAppliedConditionSIP_Type(Integer32):
+    """Custom type alaQoSAppliedConditionSIP based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("audio", 1),
+          ("video", 2),
+          ("other", 3))
+    )
+
+
+_AlaQoSAppliedConditionSIP_Type.__name__ = "Integer32"
+_AlaQoSAppliedConditionSIP_Object = MibTableColumn
+alaQoSAppliedConditionSIP = _AlaQoSAppliedConditionSIP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 4, 1, 123),
+    _AlaQoSAppliedConditionSIP_Type()
+)
+alaQoSAppliedConditionSIP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedConditionSIP.setStatus("current")
+
+
+class _AlaQoSAppliedConditionSIPStatus_Type(Integer32):
+    """Custom type alaQoSAppliedConditionSIPStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSAppliedConditionSIPStatus_Type.__name__ = "Integer32"
+_AlaQoSAppliedConditionSIPStatus_Object = MibTableColumn
+alaQoSAppliedConditionSIPStatus = _AlaQoSAppliedConditionSIPStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 4, 1, 124),
+    _AlaQoSAppliedConditionSIPStatus_Type()
+)
+alaQoSAppliedConditionSIPStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedConditionSIPStatus.setStatus("current")
 _AlaQoSServiceTable_Object = MibTable
 alaQoSServiceTable = _AlaQoSServiceTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 5)
@@ -8369,6 +8614,32 @@ alaQoSPortGroupsStatus = _AlaQoSPortGroupsStatus_Object(
 alaQoSPortGroupsStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSPortGroupsStatus.setStatus("current")
+
+
+class _AlaQoSPortGroupsMode_Type(Integer32):
+    """Custom type alaQoSPortGroupsMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("split", 1),
+          ("nonSplit", 2))
+    )
+
+
+_AlaQoSPortGroupsMode_Type.__name__ = "Integer32"
+_AlaQoSPortGroupsMode_Object = MibTableColumn
+alaQoSPortGroupsMode = _AlaQoSPortGroupsMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 19, 1, 4),
+    _AlaQoSPortGroupsMode_Type()
+)
+alaQoSPortGroupsMode.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSPortGroupsMode.setStatus("current")
 _AlaQoSAppliedPortGroupsTable_Object = MibTable
 alaQoSAppliedPortGroupsTable = _AlaQoSAppliedPortGroupsTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 20)
@@ -8444,6 +8715,32 @@ alaQoSAppliedPortGroupsStatus = _AlaQoSAppliedPortGroupsStatus_Object(
 alaQoSAppliedPortGroupsStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaQoSAppliedPortGroupsStatus.setStatus("current")
+
+
+class _AlaQoSAppliedPortGroupsMode_Type(Integer32):
+    """Custom type alaQoSAppliedPortGroupsMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("split", 1),
+          ("nonSplit", 2))
+    )
+
+
+_AlaQoSAppliedPortGroupsMode_Type.__name__ = "Integer32"
+_AlaQoSAppliedPortGroupsMode_Object = MibTableColumn
+alaQoSAppliedPortGroupsMode = _AlaQoSAppliedPortGroupsMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 20, 1, 4),
+    _AlaQoSAppliedPortGroupsMode_Type()
+)
+alaQoSAppliedPortGroupsMode.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedPortGroupsMode.setStatus("current")
 _AlaQoSPortGroupTable_Object = MibTable
 alaQoSPortGroupTable = _AlaQoSPortGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 21)
@@ -10765,6 +11062,155 @@ alaQoSActionCounterColor = _AlaQoSActionCounterColor_Object(
 alaQoSActionCounterColor.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSActionCounterColor.setStatus("current")
+
+
+class _AlaQoSActionRTCPMonitor_Type(Integer32):
+    """Custom type alaQoSActionRTCPMonitor based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaQoSActionRTCPMonitor_Type.__name__ = "Integer32"
+_AlaQoSActionRTCPMonitor_Object = MibTableColumn
+alaQoSActionRTCPMonitor = _AlaQoSActionRTCPMonitor_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 27, 1, 78),
+    _AlaQoSActionRTCPMonitor_Type()
+)
+alaQoSActionRTCPMonitor.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSActionRTCPMonitor.setStatus("current")
+
+
+class _AlaQoSActionRTCPMonitorStatus_Type(Integer32):
+    """Custom type alaQoSActionRTCPMonitorStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSActionRTCPMonitorStatus_Type.__name__ = "Integer32"
+_AlaQoSActionRTCPMonitorStatus_Object = MibTableColumn
+alaQoSActionRTCPMonitorStatus = _AlaQoSActionRTCPMonitorStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 27, 1, 79),
+    _AlaQoSActionRTCPMonitorStatus_Type()
+)
+alaQoSActionRTCPMonitorStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSActionRTCPMonitorStatus.setStatus("current")
+_AlaQoSActionRTCPDSCP_Type = Integer32
+_AlaQoSActionRTCPDSCP_Object = MibTableColumn
+alaQoSActionRTCPDSCP = _AlaQoSActionRTCPDSCP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 27, 1, 80),
+    _AlaQoSActionRTCPDSCP_Type()
+)
+alaQoSActionRTCPDSCP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSActionRTCPDSCP.setStatus("current")
+
+
+class _AlaQoSActionRTCPDSCPStatus_Type(Integer32):
+    """Custom type alaQoSActionRTCPDSCPStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSActionRTCPDSCPStatus_Type.__name__ = "Integer32"
+_AlaQoSActionRTCPDSCPStatus_Object = MibTableColumn
+alaQoSActionRTCPDSCPStatus = _AlaQoSActionRTCPDSCPStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 27, 1, 81),
+    _AlaQoSActionRTCPDSCPStatus_Type()
+)
+alaQoSActionRTCPDSCPStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSActionRTCPDSCPStatus.setStatus("current")
+
+
+class _AlaQoSActionTrustDSCP_Type(Integer32):
+    """Custom type alaQoSActionTrustDSCP based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("yes", 1),
+          ("no", 2))
+    )
+
+
+_AlaQoSActionTrustDSCP_Type.__name__ = "Integer32"
+_AlaQoSActionTrustDSCP_Object = MibTableColumn
+alaQoSActionTrustDSCP = _AlaQoSActionTrustDSCP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 27, 1, 82),
+    _AlaQoSActionTrustDSCP_Type()
+)
+alaQoSActionTrustDSCP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSActionTrustDSCP.setStatus("current")
+
+
+class _AlaQoSActionTrustDSCPStatus_Type(Integer32):
+    """Custom type alaQoSActionTrustDSCPStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaQoSActionTrustDSCPStatus_Type.__name__ = "Integer32"
+_AlaQoSActionTrustDSCPStatus_Object = MibTableColumn
+alaQoSActionTrustDSCPStatus = _AlaQoSActionTrustDSCPStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 27, 1, 83),
+    _AlaQoSActionTrustDSCPStatus_Type()
+)
+alaQoSActionTrustDSCPStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSActionTrustDSCPStatus.setStatus("current")
 _AlaQoSAppliedActionTable_Object = MibTable
 alaQoSAppliedActionTable = _AlaQoSAppliedActionTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28)
@@ -12396,6 +12842,153 @@ alaQoSAppliedActionCounterColor = _AlaQoSAppliedActionCounterColor_Object(
 alaQoSAppliedActionCounterColor.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSAppliedActionCounterColor.setStatus("current")
+
+
+class _AlaQoSAppliedActionRTCPMonitor_Type(Integer32):
+    """Custom type alaQoSAppliedActionRTCPMonitor based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaQoSAppliedActionRTCPMonitor_Type.__name__ = "Integer32"
+_AlaQoSAppliedActionRTCPMonitor_Object = MibTableColumn
+alaQoSAppliedActionRTCPMonitor = _AlaQoSAppliedActionRTCPMonitor_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28, 1, 78),
+    _AlaQoSAppliedActionRTCPMonitor_Type()
+)
+alaQoSAppliedActionRTCPMonitor.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedActionRTCPMonitor.setStatus("current")
+
+
+class _AlaQoSAppliedActionRTCPMonitorStatus_Type(Integer32):
+    """Custom type alaQoSAppliedActionRTCPMonitorStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaQoSAppliedActionRTCPMonitorStatus_Type.__name__ = "Integer32"
+_AlaQoSAppliedActionRTCPMonitorStatus_Object = MibTableColumn
+alaQoSAppliedActionRTCPMonitorStatus = _AlaQoSAppliedActionRTCPMonitorStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28, 1, 79),
+    _AlaQoSAppliedActionRTCPMonitorStatus_Type()
+)
+alaQoSAppliedActionRTCPMonitorStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedActionRTCPMonitorStatus.setStatus("current")
+_AlaQoSAppliedActionRTCPDSCP_Type = Integer32
+_AlaQoSAppliedActionRTCPDSCP_Object = MibTableColumn
+alaQoSAppliedActionRTCPDSCP = _AlaQoSAppliedActionRTCPDSCP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28, 1, 80),
+    _AlaQoSAppliedActionRTCPDSCP_Type()
+)
+alaQoSAppliedActionRTCPDSCP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedActionRTCPDSCP.setStatus("current")
+
+
+class _AlaQoSAppliedActionRTCPDSCPStatus_Type(Integer32):
+    """Custom type alaQoSAppliedActionRTCPDSCPStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaQoSAppliedActionRTCPDSCPStatus_Type.__name__ = "Integer32"
+_AlaQoSAppliedActionRTCPDSCPStatus_Object = MibTableColumn
+alaQoSAppliedActionRTCPDSCPStatus = _AlaQoSAppliedActionRTCPDSCPStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28, 1, 81),
+    _AlaQoSAppliedActionRTCPDSCPStatus_Type()
+)
+alaQoSAppliedActionRTCPDSCPStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedActionRTCPDSCPStatus.setStatus("current")
+
+
+class _AlaQoSAppliedActionTrustDSCP_Type(Integer32):
+    """Custom type alaQoSAppliedActionTrustDSCP based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("yes", 1),
+          ("no", 2))
+    )
+
+
+_AlaQoSAppliedActionTrustDSCP_Type.__name__ = "Integer32"
+_AlaQoSAppliedActionTrustDSCP_Object = MibTableColumn
+alaQoSAppliedActionTrustDSCP = _AlaQoSAppliedActionTrustDSCP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28, 1, 82),
+    _AlaQoSAppliedActionTrustDSCP_Type()
+)
+alaQoSAppliedActionTrustDSCP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedActionTrustDSCP.setStatus("current")
+
+
+class _AlaQoSAppliedActionTrustDSCPStatus_Type(Integer32):
+    """Custom type alaQoSAppliedActionTrustDSCPStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaQoSAppliedActionTrustDSCPStatus_Type.__name__ = "Integer32"
+_AlaQoSAppliedActionTrustDSCPStatus_Object = MibTableColumn
+alaQoSAppliedActionTrustDSCPStatus = _AlaQoSAppliedActionTrustDSCPStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 28, 1, 83),
+    _AlaQoSAppliedActionTrustDSCPStatus_Type()
+)
+alaQoSAppliedActionTrustDSCPStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSAppliedActionTrustDSCPStatus.setStatus("current")
 _AlaQoSPortTable_Object = MibTable
 alaQoSPortTable = _AlaQoSPortTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 29)
@@ -16069,6 +16662,298 @@ alaQoSConfigStatsResetEgress = _AlaQoSConfigStatsResetEgress_Object(
 alaQoSConfigStatsResetEgress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaQoSConfigStatsResetEgress.setStatus("current")
+
+
+class _AlaQoSConfigForceYellowPriority_Type(Integer32):
+    """Custom type alaQoSConfigForceYellowPriority based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("pri0", 0),
+          ("pri1", 1),
+          ("pri2", 2),
+          ("pri3", 3),
+          ("pri4", 4),
+          ("pri5", 5),
+          ("pri6", 6),
+          ("pri7", 7),
+          ("disable", 8))
+    )
+
+
+_AlaQoSConfigForceYellowPriority_Type.__name__ = "Integer32"
+_AlaQoSConfigForceYellowPriority_Object = MibScalar
+alaQoSConfigForceYellowPriority = _AlaQoSConfigForceYellowPriority_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 56),
+    _AlaQoSConfigForceYellowPriority_Type()
+)
+alaQoSConfigForceYellowPriority.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaQoSConfigForceYellowPriority.setStatus("current")
+
+
+class _AlaQoSConfigMulticastRateLimit_Type(Integer32):
+    """Custom type alaQoSConfigMulticastRateLimit based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("pps128", 1),
+          ("pps256", 2),
+          ("pps512", 3),
+          ("pps1024", 4))
+    )
+
+
+_AlaQoSConfigMulticastRateLimit_Type.__name__ = "Integer32"
+_AlaQoSConfigMulticastRateLimit_Object = MibScalar
+alaQoSConfigMulticastRateLimit = _AlaQoSConfigMulticastRateLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 57),
+    _AlaQoSConfigMulticastRateLimit_Type()
+)
+alaQoSConfigMulticastRateLimit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaQoSConfigMulticastRateLimit.setStatus("current")
+
+
+class _AlaQoSConfigForceYellowDSCP_Type(Integer32):
+    """Custom type alaQoSConfigForceYellowDSCP based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64)
+        )
+    )
+    namedValues = NamedValues(
+        *(("pri0", 0),
+          ("pri1", 1),
+          ("pri2", 2),
+          ("pri3", 3),
+          ("pri4", 4),
+          ("pri5", 5),
+          ("pri6", 6),
+          ("pri7", 7),
+          ("pri8", 8),
+          ("pri9", 9),
+          ("pri10", 10),
+          ("pri11", 11),
+          ("pri12", 12),
+          ("pri13", 13),
+          ("pri14", 14),
+          ("pri15", 15),
+          ("pri16", 16),
+          ("pri17", 17),
+          ("pri18", 18),
+          ("pri19", 19),
+          ("pri20", 20),
+          ("pri21", 21),
+          ("pri22", 22),
+          ("pri23", 23),
+          ("pri24", 24),
+          ("pri25", 25),
+          ("pri26", 26),
+          ("pri27", 27),
+          ("pri28", 28),
+          ("pri29", 29),
+          ("pri30", 30),
+          ("pri31", 31),
+          ("pri32", 32),
+          ("pri33", 33),
+          ("pri34", 34),
+          ("pri35", 35),
+          ("pri36", 36),
+          ("pri37", 37),
+          ("pri38", 38),
+          ("pri39", 39),
+          ("pri40", 40),
+          ("pri51", 51),
+          ("pri52", 52),
+          ("pri53", 53),
+          ("pri54", 54),
+          ("pri55", 55),
+          ("pri56", 56),
+          ("pri57", 57),
+          ("pri58", 58),
+          ("pri59", 59),
+          ("pri60", 60),
+          ("pri61", 61),
+          ("pri62", 62),
+          ("pri63", 63),
+          ("disable", 64))
+    )
+
+
+_AlaQoSConfigForceYellowDSCP_Type.__name__ = "Integer32"
+_AlaQoSConfigForceYellowDSCP_Object = MibScalar
+alaQoSConfigForceYellowDSCP = _AlaQoSConfigForceYellowDSCP_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 59),
+    _AlaQoSConfigForceYellowDSCP_Type()
+)
+alaQoSConfigForceYellowDSCP.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaQoSConfigForceYellowDSCP.setStatus("current")
+_AlaQoSConfigUserportLinkShutdown_Type = Integer32
+_AlaQoSConfigUserportLinkShutdown_Object = MibScalar
+alaQoSConfigUserportLinkShutdown = _AlaQoSConfigUserportLinkShutdown_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 61),
+    _AlaQoSConfigUserportLinkShutdown_Type()
+)
+alaQoSConfigUserportLinkShutdown.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSConfigUserportLinkShutdown.setStatus("current")
+_AlaQoSConfigAppliedUserportLinkShutdown_Type = Integer32
+_AlaQoSConfigAppliedUserportLinkShutdown_Object = MibScalar
+alaQoSConfigAppliedUserportLinkShutdown = _AlaQoSConfigAppliedUserportLinkShutdown_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 62),
+    _AlaQoSConfigAppliedUserportLinkShutdown_Type()
+)
+alaQoSConfigAppliedUserportLinkShutdown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSConfigAppliedUserportLinkShutdown.setStatus("current")
+
+
+class _AlaQoSConfigNATFlush_Type(Integer32):
+    """Custom type alaQoSConfigNATFlush based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("yes", 1),
+          ("no", 2))
+    )
+
+
+_AlaQoSConfigNATFlush_Type.__name__ = "Integer32"
+_AlaQoSConfigNATFlush_Object = MibScalar
+alaQoSConfigNATFlush = _AlaQoSConfigNATFlush_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 63),
+    _AlaQoSConfigNATFlush_Type()
+)
+alaQoSConfigNATFlush.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaQoSConfigNATFlush.setStatus("current")
+
+
+class _AlaQoSConfigForceYellowUserPriority_Type(Integer32):
+    """Custom type alaQoSConfigForceYellowUserPriority based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("pri0", 0),
+          ("pri1", 1),
+          ("pri2", 2),
+          ("pri3", 3),
+          ("pri4", 4),
+          ("pri5", 5),
+          ("pri6", 6),
+          ("pri7", 7),
+          ("disable", 8))
+    )
+
+
+_AlaQoSConfigForceYellowUserPriority_Type.__name__ = "Integer32"
+_AlaQoSConfigForceYellowUserPriority_Object = MibScalar
+alaQoSConfigForceYellowUserPriority = _AlaQoSConfigForceYellowUserPriority_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 30, 64),
+    _AlaQoSConfigForceYellowUserPriority_Type()
+)
+alaQoSConfigForceYellowUserPriority.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaQoSConfigForceYellowUserPriority.setStatus("current")
 _AlaQoSStats_ObjectIdentity = ObjectIdentity
 alaQoSStats = _AlaQoSStats_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 31)
@@ -16340,7 +17225,17 @@ alaQoSQueueEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaQoSQueueEntry.setStatus("current")
-_AlaQoSQueueId_Type = Integer32
+
+
+class _AlaQoSQueueId_Type(Integer32):
+    """Custom type alaQoSQueueId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_AlaQoSQueueId_Type.__name__ = "Integer32"
 _AlaQoSQueueId_Object = MibTableColumn
 alaQoSQueueId = _AlaQoSQueueId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 32, 1, 1),
@@ -19382,7 +20277,17 @@ alaQoSImportEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaQoSImportEntry.setStatus("current")
-_AlaQoSImportIndex_Type = Integer32
+
+
+class _AlaQoSImportIndex_Type(Integer32):
+    """Custom type alaQoSImportIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_AlaQoSImportIndex_Type.__name__ = "Integer32"
 _AlaQoSImportIndex_Object = MibTableColumn
 alaQoSImportIndex = _AlaQoSImportIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 42, 1, 1),
@@ -19557,7 +20462,17 @@ alaQoSAppliedImportEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaQoSAppliedImportEntry.setStatus("current")
-_AlaQoSAppliedImportIndex_Type = Integer32
+
+
+class _AlaQoSAppliedImportIndex_Type(Integer32):
+    """Custom type alaQoSAppliedImportIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_AlaQoSAppliedImportIndex_Type.__name__ = "Integer32"
 _AlaQoSAppliedImportIndex_Object = MibTableColumn
 alaQoSAppliedImportIndex = _AlaQoSAppliedImportIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 43, 1, 1),
@@ -20085,6 +21000,42 @@ alaQoSRuleGroupStatus = _AlaQoSRuleGroupStatus_Object(
 alaQoSRuleGroupStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSRuleGroupStatus.setStatus("current")
+_AlaQoSRuleGroupPacketRate_Type = Counter64
+_AlaQoSRuleGroupPacketRate_Object = MibTableColumn
+alaQoSRuleGroupPacketRate = _AlaQoSRuleGroupPacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 46, 1, 7),
+    _AlaQoSRuleGroupPacketRate_Type()
+)
+alaQoSRuleGroupPacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleGroupPacketRate.setStatus("current")
+_AlaQoSRuleGroupBitRate_Type = Counter64
+_AlaQoSRuleGroupBitRate_Object = MibTableColumn
+alaQoSRuleGroupBitRate = _AlaQoSRuleGroupBitRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 46, 1, 8),
+    _AlaQoSRuleGroupBitRate_Type()
+)
+alaQoSRuleGroupBitRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleGroupBitRate.setStatus("current")
+_AlaQoSRuleGroupAccPacketCount_Type = Counter64
+_AlaQoSRuleGroupAccPacketCount_Object = MibTableColumn
+alaQoSRuleGroupAccPacketCount = _AlaQoSRuleGroupAccPacketCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 46, 1, 9),
+    _AlaQoSRuleGroupAccPacketCount_Type()
+)
+alaQoSRuleGroupAccPacketCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleGroupAccPacketCount.setStatus("current")
+_AlaQoSRuleGroupAccByteCount_Type = Counter64
+_AlaQoSRuleGroupAccByteCount_Object = MibTableColumn
+alaQoSRuleGroupAccByteCount = _AlaQoSRuleGroupAccByteCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 46, 1, 10),
+    _AlaQoSRuleGroupAccByteCount_Type()
+)
+alaQoSRuleGroupAccByteCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSRuleGroupAccByteCount.setStatus("current")
 _AlaQoSAppliedRuleGroupTable_Object = MibTable
 alaQoSAppliedRuleGroupTable = _AlaQoSAppliedRuleGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 47)
@@ -20184,6 +21135,42 @@ alaQoSAppliedRuleGroupStatus = _AlaQoSAppliedRuleGroupStatus_Object(
 alaQoSAppliedRuleGroupStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaQoSAppliedRuleGroupStatus.setStatus("current")
+_AlaQosAppliedRuleGroupPacketRate_Type = Counter64
+_AlaQosAppliedRuleGroupPacketRate_Object = MibTableColumn
+alaQosAppliedRuleGroupPacketRate = _AlaQosAppliedRuleGroupPacketRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 47, 1, 7),
+    _AlaQosAppliedRuleGroupPacketRate_Type()
+)
+alaQosAppliedRuleGroupPacketRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQosAppliedRuleGroupPacketRate.setStatus("current")
+_AlaQosAppliedRuleGroupBitRate_Type = Counter64
+_AlaQosAppliedRuleGroupBitRate_Object = MibTableColumn
+alaQosAppliedRuleGroupBitRate = _AlaQosAppliedRuleGroupBitRate_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 47, 1, 8),
+    _AlaQosAppliedRuleGroupBitRate_Type()
+)
+alaQosAppliedRuleGroupBitRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQosAppliedRuleGroupBitRate.setStatus("current")
+_AlaQoSAppliedRuleGroupAccPacketCount_Type = Counter64
+_AlaQoSAppliedRuleGroupAccPacketCount_Object = MibTableColumn
+alaQoSAppliedRuleGroupAccPacketCount = _AlaQoSAppliedRuleGroupAccPacketCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 47, 1, 9),
+    _AlaQoSAppliedRuleGroupAccPacketCount_Type()
+)
+alaQoSAppliedRuleGroupAccPacketCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRuleGroupAccPacketCount.setStatus("current")
+_AlaQoSAppliedRuleGroupAccByteCount_Type = Counter64
+_AlaQoSAppliedRuleGroupAccByteCount_Object = MibTableColumn
+alaQoSAppliedRuleGroupAccByteCount = _AlaQoSAppliedRuleGroupAccByteCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 47, 1, 10),
+    _AlaQoSAppliedRuleGroupAccByteCount_Type()
+)
+alaQoSAppliedRuleGroupAccByteCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSAppliedRuleGroupAccByteCount.setStatus("current")
 _AlaQoSVlanGroupsTable_Object = MibTable
 alaQoSVlanGroupsTable = _AlaQoSVlanGroupsTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 48)
@@ -20361,7 +21348,7 @@ class _AlaQoSVlanGroupVlan_Type(Integer32):
     """Custom type alaQoSVlanGroupVlan based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 16),
+        ValueRangeConstraint(0, 4095),
     )
 
 
@@ -20380,7 +21367,7 @@ class _AlaQoSVlanGroupVlanEnd_Type(Integer32):
     """Custom type alaQoSVlanGroupVlanEnd based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 16),
+        ValueRangeConstraint(0, 4095),
     )
 
 
@@ -20425,7 +21412,7 @@ class _AlaQoSAppliedVlanGroupVlan_Type(Integer32):
     """Custom type alaQoSAppliedVlanGroupVlan based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4095),
+        ValueRangeConstraint(0, 4095),
     )
 
 
@@ -20444,7 +21431,7 @@ class _AlaQoSAppliedVlanGroupVlanEnd_Type(Integer32):
     """Custom type alaQoSAppliedVlanGroupVlanEnd based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4095),
+        ValueRangeConstraint(0, 4095),
     )
 
 
@@ -20538,7 +21525,7 @@ class _AlaQoSHwLoopbackVlan_Type(Integer32):
     """Custom type alaQoSHwLoopbackVlan based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 4094),
+        ValueRangeConstraint(0, 4094),
     )
 
 
@@ -20623,6 +21610,383 @@ alaQoSHwLoopbackProfileRowStatus = _AlaQoSHwLoopbackProfileRowStatus_Object(
 alaQoSHwLoopbackProfileRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaQoSHwLoopbackProfileRowStatus.setStatus("current")
+_AlaQosHwLoopbackSapId_Type = Integer32
+_AlaQosHwLoopbackSapId_Object = MibTableColumn
+alaQosHwLoopbackSapId = _AlaQosHwLoopbackSapId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 52, 1, 9),
+    _AlaQosHwLoopbackSapId_Type()
+)
+alaQosHwLoopbackSapId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQosHwLoopbackSapId.setStatus("current")
+_AlaQoSQueueStatsTable_Object = MibTable
+alaQoSQueueStatsTable = _AlaQoSQueueStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53)
+)
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsTable.setStatus("current")
+_AlaQoSQueueStatsEntry_Object = MibTableRow
+alaQoSQueueStatsEntry = _AlaQoSQueueStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1)
+)
+alaQoSQueueStatsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsId"),
+)
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsEntry.setStatus("current")
+
+
+class _AlaQoSQueueStatsId_Type(Integer32):
+    """Custom type alaQoSQueueStatsId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_AlaQoSQueueStatsId_Type.__name__ = "Integer32"
+_AlaQoSQueueStatsId_Object = MibTableColumn
+alaQoSQueueStatsId = _AlaQoSQueueStatsId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 1),
+    _AlaQoSQueueStatsId_Type()
+)
+alaQoSQueueStatsId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsId.setStatus("current")
+
+
+class _AlaQoSQueueStatsSlot_Type(Integer32):
+    """Custom type alaQoSQueueStatsSlot based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_AlaQoSQueueStatsSlot_Type.__name__ = "Integer32"
+_AlaQoSQueueStatsSlot_Object = MibTableColumn
+alaQoSQueueStatsSlot = _AlaQoSQueueStatsSlot_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 2),
+    _AlaQoSQueueStatsSlot_Type()
+)
+alaQoSQueueStatsSlot.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsSlot.setStatus("current")
+
+
+class _AlaQoSQueueStatsPort_Type(Integer32):
+    """Custom type alaQoSQueueStatsPort based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_AlaQoSQueueStatsPort_Type.__name__ = "Integer32"
+_AlaQoSQueueStatsPort_Object = MibTableColumn
+alaQoSQueueStatsPort = _AlaQoSQueueStatsPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 3),
+    _AlaQoSQueueStatsPort_Type()
+)
+alaQoSQueueStatsPort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsPort.setStatus("current")
+
+
+class _AlaQoSQueueStatsTransmitQueue_Type(Integer32):
+    """Custom type alaQoSQueueStatsTransmitQueue based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AlaQoSQueueStatsTransmitQueue_Type.__name__ = "Integer32"
+_AlaQoSQueueStatsTransmitQueue_Object = MibTableColumn
+alaQoSQueueStatsTransmitQueue = _AlaQoSQueueStatsTransmitQueue_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 4),
+    _AlaQoSQueueStatsTransmitQueue_Type()
+)
+alaQoSQueueStatsTransmitQueue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsTransmitQueue.setStatus("current")
+
+
+class _AlaQoSQueueStatsPriority_Type(Integer32):
+    """Custom type alaQoSQueueStatsPriority based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("high", 1),
+          ("low", 2))
+    )
+
+
+_AlaQoSQueueStatsPriority_Type.__name__ = "Integer32"
+_AlaQoSQueueStatsPriority_Object = MibTableColumn
+alaQoSQueueStatsPriority = _AlaQoSQueueStatsPriority_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 5),
+    _AlaQoSQueueStatsPriority_Type()
+)
+alaQoSQueueStatsPriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsPriority.setStatus("current")
+_AlaQoSQueueStatsPacketsSent_Type = Counter32
+_AlaQoSQueueStatsPacketsSent_Object = MibTableColumn
+alaQoSQueueStatsPacketsSent = _AlaQoSQueueStatsPacketsSent_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 6),
+    _AlaQoSQueueStatsPacketsSent_Type()
+)
+alaQoSQueueStatsPacketsSent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsPacketsSent.setStatus("current")
+_AlaQoSQueueStatsPacketsDropped_Type = Counter32
+_AlaQoSQueueStatsPacketsDropped_Object = MibTableColumn
+alaQoSQueueStatsPacketsDropped = _AlaQoSQueueStatsPacketsDropped_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 7),
+    _AlaQoSQueueStatsPacketsDropped_Type()
+)
+alaQoSQueueStatsPacketsDropped.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsPacketsDropped.setStatus("current")
+_AlaQoSQueueStatsBytesSent_Type = Counter64
+_AlaQoSQueueStatsBytesSent_Object = MibTableColumn
+alaQoSQueueStatsBytesSent = _AlaQoSQueueStatsBytesSent_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 8),
+    _AlaQoSQueueStatsBytesSent_Type()
+)
+alaQoSQueueStatsBytesSent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsBytesSent.setStatus("current")
+_AlaQoSQueueStatsBytesDropped_Type = Counter64
+_AlaQoSQueueStatsBytesDropped_Object = MibTableColumn
+alaQoSQueueStatsBytesDropped = _AlaQoSQueueStatsBytesDropped_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 9),
+    _AlaQoSQueueStatsBytesDropped_Type()
+)
+alaQoSQueueStatsBytesDropped.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsBytesDropped.setStatus("current")
+_AlaQoSQueueStatsRateSent_Type = Counter64
+_AlaQoSQueueStatsRateSent_Object = MibTableColumn
+alaQoSQueueStatsRateSent = _AlaQoSQueueStatsRateSent_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 10),
+    _AlaQoSQueueStatsRateSent_Type()
+)
+alaQoSQueueStatsRateSent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsRateSent.setStatus("current")
+_AlaQoSQueueStatsRateDropped_Type = Counter64
+_AlaQoSQueueStatsRateDropped_Object = MibTableColumn
+alaQoSQueueStatsRateDropped = _AlaQoSQueueStatsRateDropped_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 53, 1, 11),
+    _AlaQoSQueueStatsRateDropped_Type()
+)
+alaQoSQueueStatsRateDropped.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSQueueStatsRateDropped.setStatus("current")
+_AlaQoSExtendedRuleTable_Object = MibTable
+alaQoSExtendedRuleTable = _AlaQoSExtendedRuleTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54)
+)
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleTable.setStatus("current")
+_AlaQoSExtendedRuleEntry_Object = MibTableRow
+alaQoSExtendedRuleEntry = _AlaQoSExtendedRuleEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1)
+)
+alaQoSExtendedRuleEntry.setIndexNames(
+    (0, "ALCATEL-IND1-QOS-MIB", "alaQoSRuleName"),
+    (0, "ALCATEL-IND1-QOS-MIB", "alaQoSExtendedRuleSlot"),
+    (0, "ALCATEL-IND1-QOS-MIB", "alaQoSExtendedRulePort"),
+)
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleEntry.setStatus("current")
+_AlaQoSExtendedRuleSlot_Type = Integer32
+_AlaQoSExtendedRuleSlot_Object = MibTableColumn
+alaQoSExtendedRuleSlot = _AlaQoSExtendedRuleSlot_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 1),
+    _AlaQoSExtendedRuleSlot_Type()
+)
+alaQoSExtendedRuleSlot.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleSlot.setStatus("current")
+_AlaQoSExtendedRulePort_Type = Integer32
+_AlaQoSExtendedRulePort_Object = MibTableColumn
+alaQoSExtendedRulePort = _AlaQoSExtendedRulePort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 2),
+    _AlaQoSExtendedRulePort_Type()
+)
+alaQoSExtendedRulePort.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRulePort.setStatus("current")
+_AlaQoSExtendedRuleMatches_Type = Counter32
+_AlaQoSExtendedRuleMatches_Object = MibTableColumn
+alaQoSExtendedRuleMatches = _AlaQoSExtendedRuleMatches_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 3),
+    _AlaQoSExtendedRuleMatches_Type()
+)
+alaQoSExtendedRuleMatches.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleMatches.setStatus("current")
+_AlaQoSExtendedRulePacketCount_Type = Counter64
+_AlaQoSExtendedRulePacketCount_Object = MibTableColumn
+alaQoSExtendedRulePacketCount = _AlaQoSExtendedRulePacketCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 4),
+    _AlaQoSExtendedRulePacketCount_Type()
+)
+alaQoSExtendedRulePacketCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRulePacketCount.setStatus("current")
+_AlaQoSExtendedRuleByteCount_Type = Counter64
+_AlaQoSExtendedRuleByteCount_Object = MibTableColumn
+alaQoSExtendedRuleByteCount = _AlaQoSExtendedRuleByteCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 5),
+    _AlaQoSExtendedRuleByteCount_Type()
+)
+alaQoSExtendedRuleByteCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleByteCount.setStatus("current")
+_AlaQoSExtendedRuleExcessPacketCount_Type = Counter64
+_AlaQoSExtendedRuleExcessPacketCount_Object = MibTableColumn
+alaQoSExtendedRuleExcessPacketCount = _AlaQoSExtendedRuleExcessPacketCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 6),
+    _AlaQoSExtendedRuleExcessPacketCount_Type()
+)
+alaQoSExtendedRuleExcessPacketCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleExcessPacketCount.setStatus("current")
+_AlaQoSExtendedRuleExcessByteCount_Type = Counter64
+_AlaQoSExtendedRuleExcessByteCount_Object = MibTableColumn
+alaQoSExtendedRuleExcessByteCount = _AlaQoSExtendedRuleExcessByteCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 7),
+    _AlaQoSExtendedRuleExcessByteCount_Type()
+)
+alaQoSExtendedRuleExcessByteCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleExcessByteCount.setStatus("current")
+_AlaQoSExtendedRuleGreenCount_Type = Counter64
+_AlaQoSExtendedRuleGreenCount_Object = MibTableColumn
+alaQoSExtendedRuleGreenCount = _AlaQoSExtendedRuleGreenCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 8),
+    _AlaQoSExtendedRuleGreenCount_Type()
+)
+alaQoSExtendedRuleGreenCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleGreenCount.setStatus("current")
+_AlaQoSExtendedRuleYellowCount_Type = Counter64
+_AlaQoSExtendedRuleYellowCount_Object = MibTableColumn
+alaQoSExtendedRuleYellowCount = _AlaQoSExtendedRuleYellowCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 9),
+    _AlaQoSExtendedRuleYellowCount_Type()
+)
+alaQoSExtendedRuleYellowCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleYellowCount.setStatus("current")
+_AlaQoSExtendedRuleRedCount_Type = Counter64
+_AlaQoSExtendedRuleRedCount_Object = MibTableColumn
+alaQoSExtendedRuleRedCount = _AlaQoSExtendedRuleRedCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 10),
+    _AlaQoSExtendedRuleRedCount_Type()
+)
+alaQoSExtendedRuleRedCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleRedCount.setStatus("current")
+_AlaQoSExtendedRuleNonGreenCount_Type = Counter64
+_AlaQoSExtendedRuleNonGreenCount_Object = MibTableColumn
+alaQoSExtendedRuleNonGreenCount = _AlaQoSExtendedRuleNonGreenCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 11),
+    _AlaQoSExtendedRuleNonGreenCount_Type()
+)
+alaQoSExtendedRuleNonGreenCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleNonGreenCount.setStatus("current")
+_AlaQoSExtendedRuleNonRedCount_Type = Counter64
+_AlaQoSExtendedRuleNonRedCount_Object = MibTableColumn
+alaQoSExtendedRuleNonRedCount = _AlaQoSExtendedRuleNonRedCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 54, 1, 12),
+    _AlaQoSExtendedRuleNonRedCount_Type()
+)
+alaQoSExtendedRuleNonRedCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaQoSExtendedRuleNonRedCount.setStatus("current")
+_AlaQoSDSCPTable_Object = MibTable
+alaQoSDSCPTable = _AlaQoSDSCPTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 55)
+)
+if mibBuilder.loadTexts:
+    alaQoSDSCPTable.setStatus("current")
+_AlaQoSDSCPEntry_Object = MibTableRow
+alaQoSDSCPEntry = _AlaQoSDSCPEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 55, 1)
+)
+alaQoSDSCPEntry.setIndexNames(
+    (0, "ALCATEL-IND1-QOS-MIB", "alaQoSDSCPEntryNumber"),
+)
+if mibBuilder.loadTexts:
+    alaQoSDSCPEntry.setStatus("current")
+_AlaQoSDSCPEntryNumber_Type = Integer32
+_AlaQoSDSCPEntryNumber_Object = MibTableColumn
+alaQoSDSCPEntryNumber = _AlaQoSDSCPEntryNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 55, 1, 1),
+    _AlaQoSDSCPEntryNumber_Type()
+)
+alaQoSDSCPEntryNumber.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaQoSDSCPEntryNumber.setStatus("current")
+_AlaQoSDSCPPriority_Type = Integer32
+_AlaQoSDSCPPriority_Object = MibTableColumn
+alaQoSDSCPPriority = _AlaQoSDSCPPriority_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 55, 1, 2),
+    _AlaQoSDSCPPriority_Type()
+)
+alaQoSDSCPPriority.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSDSCPPriority.setStatus("current")
+
+
+class _AlaQoSDSCPDropPrecedence_Type(Integer32):
+    """Custom type alaQoSDSCPDropPrecedence based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("low", 1),
+          ("medium", 2),
+          ("high", 3))
+    )
+
+
+_AlaQoSDSCPDropPrecedence_Type.__name__ = "Integer32"
+_AlaQoSDSCPDropPrecedence_Object = MibTableColumn
+alaQoSDSCPDropPrecedence = _AlaQoSDSCPDropPrecedence_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 55, 1, 3),
+    _AlaQoSDSCPDropPrecedence_Type()
+)
+alaQoSDSCPDropPrecedence.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSDSCPDropPrecedence.setStatus("current")
+_AlaQoSDSCPRowStatus_Type = RowStatus
+_AlaQoSDSCPRowStatus_Object = MibTableColumn
+alaQoSDSCPRowStatus = _AlaQoSDSCPRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 1, 55, 1, 4),
+    _AlaQoSDSCPRowStatus_Type()
+)
+alaQoSDSCPRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaQoSDSCPRowStatus.setStatus("current")
 _AlaQoSMIBConformance_ObjectIdentity = ObjectIdentity
 alaQoSMIBConformance = _AlaQoSMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2)
@@ -20675,7 +22039,12 @@ alaQoSMIBRuleObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleYellowCount"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleRedCount"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleNonGreenCount"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleNonRedCount"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleNonRedCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleAccounting"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRulePacketRate"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleAccPacketCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleAccByteCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleBitRate"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBRuleObjects.setStatus("current")
@@ -20711,7 +22080,12 @@ alaQoSMIBAppliedRuleObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleYellowCount"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleRedCount"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleNonGreenCount"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleNonRedCount"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleNonRedCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleAccounting"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRulePacketRate"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleAccPacketCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleAccByteCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleBitRate"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBAppliedRuleObjects.setStatus("current")
@@ -21571,6 +22945,7 @@ alaQoSMIBConfigObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigReset"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigStatsReset"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigFlush"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigNATFlush"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigDebug"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigServicingMode"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigLowPriorityWeight"),
@@ -21592,7 +22967,12 @@ alaQoSMIBConfigObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigQMPath"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigDEIMapping"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigDEIMarking"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigStatsResetEgress"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigStatsResetEgress"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigForceYellowPriority"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigUserportLinkShutdown"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigAppliedUserportLinkShutdown"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigForceYellowUserPriority"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSConfigForceYellowDSCP"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBConfigObjects.setStatus("current")
@@ -21749,7 +23129,11 @@ alaQoSMIBRuleGroupObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupCountType"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupPacketCount"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupByteCount"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupStatus"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupPacketRate"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupBitRate"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupAccPacketCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSRuleGroupAccByteCount"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBRuleGroupObjects.setStatus("current")
@@ -21762,7 +23146,11 @@ alaQoSMIBAppliedRuleGroupObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupCountType"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupPacketCount"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupByteCount"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupStatus"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQosAppliedRuleGroupPacketRate"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQosAppliedRuleGroupBitRate"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupAccPacketCount"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedRuleGroupAccByteCount"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBAppliedRuleGroupObjects.setStatus("current")
@@ -21815,10 +23203,175 @@ alaQoSMIBHwLoopBackProfileObjects.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSHwLoopbackPort"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSHwLoopbackType"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSHwLoopbackProfileStatus"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSHwLoopbackProfileRowStatus"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSHwLoopbackProfileRowStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQosHwLoopbackSapId"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBHwLoopBackProfileObjects.setStatus("current")
+
+alQosQueueStatsGroupObjects = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 44)
+)
+alQosQueueStatsGroupObjects.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsSlot"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsPort"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsTransmitQueue"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsPriority"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsPacketsSent"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsPacketsDropped"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsBytesSent"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsBytesDropped"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsRateSent"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSQueueStatsRateDropped"))
+)
+if mibBuilder.loadTexts:
+    alQosQueueStatsGroupObjects.setStatus("current")
+
+alaQoSAppliedImportGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 45)
+)
+alaQoSAppliedImportGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportPrecedence"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportPrefix"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportSlot"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportPort"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportPortend"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportPortgroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaQoSAppliedImportGroup.setStatus("current")
+
+alaQoSAppliedValidityPeriodGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 46)
+)
+alaQoSAppliedValidityPeriodGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodSource"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodDays"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodDaysStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodMonths"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodMonthsStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodHour"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodHourStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodEndHour"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodInterval"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodIntervalStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodEndInterval"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaQoSAppliedValidityPeriodGroup.setStatus("current")
+
+alaQoSImportGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 47)
+)
+alaQoSImportGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSImportPort"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportPortend"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportPortgroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportPrecedence"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportPrefix"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportRowStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportSlot"))
+)
+if mibBuilder.loadTexts:
+    alaQoSImportGroup.setStatus("current")
+
+alaQoSPortPdiGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 48)
+)
+alaQoSPortPdiGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP0"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP1"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP2"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP3"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP4"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP5"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP6"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityP7"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiPriorityType"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolClassification"))
+)
+if mibBuilder.loadTexts:
+    alaQoSPortPdiGroup.setStatus("current")
+
+alaQoSPortPriorityGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 49)
+)
+alaQoSPortPriorityGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP0"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP1"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP2"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP3"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP4"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP5"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP6"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolPriorityP7"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortProtocolRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaQoSPortPriorityGroup.setStatus("current")
+
+alaQoSSlotDscpGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 50)
+)
+alaQoSSlotDscpGroup.setObjects(
+    ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotDscpPriority")
+)
+if mibBuilder.loadTexts:
+    alaQoSSlotDscpGroup.setStatus("current")
+
+alaQoSSlotPcamGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 51)
+)
+alaQoSSlotPcamGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcam8023Enabled"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamDsap"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamEnable8023"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamEnableDsap"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamEnableEntry"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamEnableEthertype"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamEnableSsap"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamEthertype"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamProtocolNumber"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamSsap"))
+)
+if mibBuilder.loadTexts:
+    alaQoSSlotPcamGroup.setStatus("current")
+
+alaQoSSlotProtocolGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 52)
+)
+alaQoSSlotProtocolGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocol8023Enabled"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocolDsap"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocolEthertype"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocolRowStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocolSsap"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocolType"))
+)
+if mibBuilder.loadTexts:
+    alaQoSSlotProtocolGroup.setStatus("current")
+
+alaQoSValidityPeriodGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 22, 1, 2, 1, 53)
+)
+alaQoSValidityPeriodGroup.setObjects(
+      *(("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodDays"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodDaysStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodEndHour"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodEndInterval"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodHour"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodHourStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodInterval"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodIntervalStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodMonths"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodMonthsStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodRowStatus"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodSource"))
+)
+if mibBuilder.loadTexts:
+    alaQoSValidityPeriodGroup.setStatus("current")
 
 
 # Notification objects
@@ -21878,7 +23431,17 @@ alaQoSMIBCompliance.setObjects(
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedVlanGroupsObjects"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSVlanGroupObjects"),
         ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedVlanGroupObjects"),
-        ("ALCATEL-IND1-QOS-MIB", "alaQoSMIBHwLoopBackProfileObjects"))
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSMIBHwLoopBackProfileObjects"),
+        ("ALCATEL-IND1-QOS-MIB", "alQosQueueStatsGroupObjects"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedImportGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSAppliedValidityPeriodGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSImportGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPdiGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSPortPriorityGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotDscpGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotPcamGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSSlotProtocolGroup"),
+        ("ALCATEL-IND1-QOS-MIB", "alaQoSValidityPeriodGroup"))
 )
 if mibBuilder.loadTexts:
     alaQoSMIBCompliance.setStatus(
@@ -21923,6 +23486,11 @@ mibBuilder.exportSymbols(
        "alaQoSRuleRedCount": alaQoSRuleRedCount,
        "alaQoSRuleNonGreenCount": alaQoSRuleNonGreenCount,
        "alaQoSRuleNonRedCount": alaQoSRuleNonRedCount,
+       "alaQoSRuleAccounting": alaQoSRuleAccounting,
+       "alaQoSRulePacketRate": alaQoSRulePacketRate,
+       "alaQoSRuleAccPacketCount": alaQoSRuleAccPacketCount,
+       "alaQoSRuleAccByteCount": alaQoSRuleAccByteCount,
+       "alaQoSRuleBitRate": alaQoSRuleBitRate,
        "alaQoSAppliedRuleTable": alaQoSAppliedRuleTable,
        "alaQoSAppliedRuleEntry": alaQoSAppliedRuleEntry,
        "alaQoSAppliedRuleName": alaQoSAppliedRuleName,
@@ -21954,6 +23522,11 @@ mibBuilder.exportSymbols(
        "alaQoSAppliedRuleRedCount": alaQoSAppliedRuleRedCount,
        "alaQoSAppliedRuleNonGreenCount": alaQoSAppliedRuleNonGreenCount,
        "alaQoSAppliedRuleNonRedCount": alaQoSAppliedRuleNonRedCount,
+       "alaQoSAppliedRuleAccounting": alaQoSAppliedRuleAccounting,
+       "alaQoSAppliedRulePacketRate": alaQoSAppliedRulePacketRate,
+       "alaQoSAppliedRuleAccPacketCount": alaQoSAppliedRuleAccPacketCount,
+       "alaQoSAppliedRuleAccByteCount": alaQoSAppliedRuleAccByteCount,
+       "alaQoSAppliedRuleBitRate": alaQoSAppliedRuleBitRate,
        "alaQoSConditionTable": alaQoSConditionTable,
        "alaQoSConditionEntry": alaQoSConditionEntry,
        "alaQoSConditionName": alaQoSConditionName,
@@ -22078,6 +23651,8 @@ mibBuilder.exportSymbols(
        "alaQoSConditionSourceVlanGroupStatus": alaQoSConditionSourceVlanGroupStatus,
        "alaQoSConditionInnerSourceVlanGroup": alaQoSConditionInnerSourceVlanGroup,
        "alaQoSConditionInnerSourceVlanGroupStatus": alaQoSConditionInnerSourceVlanGroupStatus,
+       "alaQoSConditionSIP": alaQoSConditionSIP,
+       "alaQoSConditionSIPStatus": alaQoSConditionSIPStatus,
        "alaQoSAppliedConditionTable": alaQoSAppliedConditionTable,
        "alaQoSAppliedConditionEntry": alaQoSAppliedConditionEntry,
        "alaQoSAppliedConditionName": alaQoSAppliedConditionName,
@@ -22202,6 +23777,8 @@ mibBuilder.exportSymbols(
        "alaQoSAppliedConditionSourceVlanGroupStatus": alaQoSAppliedConditionSourceVlanGroupStatus,
        "alaQoSAppliedConditionInnerSourceVlanGroup": alaQoSAppliedConditionInnerSourceVlanGroup,
        "alaQoSAppliedConditionInnerSourceVlanGroupStatus": alaQoSAppliedConditionInnerSourceVlanGroupStatus,
+       "alaQoSAppliedConditionSIP": alaQoSAppliedConditionSIP,
+       "alaQoSAppliedConditionSIPStatus": alaQoSAppliedConditionSIPStatus,
        "alaQoSServiceTable": alaQoSServiceTable,
        "alaQoSServiceEntry": alaQoSServiceEntry,
        "alaQoSServiceName": alaQoSServiceName,
@@ -22313,11 +23890,13 @@ mibBuilder.exportSymbols(
        "alaQoSPortGroupsName": alaQoSPortGroupsName,
        "alaQoSPortGroupsSource": alaQoSPortGroupsSource,
        "alaQoSPortGroupsStatus": alaQoSPortGroupsStatus,
+       "alaQoSPortGroupsMode": alaQoSPortGroupsMode,
        "alaQoSAppliedPortGroupsTable": alaQoSAppliedPortGroupsTable,
        "alaQoSAppliedPortGroupsEntry": alaQoSAppliedPortGroupsEntry,
        "alaQoSAppliedPortGroupsName": alaQoSAppliedPortGroupsName,
        "alaQoSAppliedPortGroupsSource": alaQoSAppliedPortGroupsSource,
        "alaQoSAppliedPortGroupsStatus": alaQoSAppliedPortGroupsStatus,
+       "alaQoSAppliedPortGroupsMode": alaQoSAppliedPortGroupsMode,
        "alaQoSPortGroupTable": alaQoSPortGroupTable,
        "alaQoSPortGroupEntry": alaQoSPortGroupEntry,
        "alaQoSPortGroupSlot": alaQoSPortGroupSlot,
@@ -22431,6 +24010,12 @@ mibBuilder.exportSymbols(
        "alaQoSActionPBS": alaQoSActionPBS,
        "alaQoSActionPBSStatus": alaQoSActionPBSStatus,
        "alaQoSActionCounterColor": alaQoSActionCounterColor,
+       "alaQoSActionRTCPMonitor": alaQoSActionRTCPMonitor,
+       "alaQoSActionRTCPMonitorStatus": alaQoSActionRTCPMonitorStatus,
+       "alaQoSActionRTCPDSCP": alaQoSActionRTCPDSCP,
+       "alaQoSActionRTCPDSCPStatus": alaQoSActionRTCPDSCPStatus,
+       "alaQoSActionTrustDSCP": alaQoSActionTrustDSCP,
+       "alaQoSActionTrustDSCPStatus": alaQoSActionTrustDSCPStatus,
        "alaQoSAppliedActionTable": alaQoSAppliedActionTable,
        "alaQoSAppliedActionEntry": alaQoSAppliedActionEntry,
        "alaQoSAppliedActionName": alaQoSAppliedActionName,
@@ -22510,6 +24095,12 @@ mibBuilder.exportSymbols(
        "alaQoSAppliedActionPBS": alaQoSAppliedActionPBS,
        "alaQoSAppliedActionPBSStatus": alaQoSAppliedActionPBSStatus,
        "alaQoSAppliedActionCounterColor": alaQoSAppliedActionCounterColor,
+       "alaQoSAppliedActionRTCPMonitor": alaQoSAppliedActionRTCPMonitor,
+       "alaQoSAppliedActionRTCPMonitorStatus": alaQoSAppliedActionRTCPMonitorStatus,
+       "alaQoSAppliedActionRTCPDSCP": alaQoSAppliedActionRTCPDSCP,
+       "alaQoSAppliedActionRTCPDSCPStatus": alaQoSAppliedActionRTCPDSCPStatus,
+       "alaQoSAppliedActionTrustDSCP": alaQoSAppliedActionTrustDSCP,
+       "alaQoSAppliedActionTrustDSCPStatus": alaQoSAppliedActionTrustDSCPStatus,
        "alaQoSPortTable": alaQoSPortTable,
        "alaQoSPortEntry": alaQoSPortEntry,
        "alaQoSPortSlot": alaQoSPortSlot,
@@ -22706,6 +24297,13 @@ mibBuilder.exportSymbols(
        "alaQoSConfigDEIMapping": alaQoSConfigDEIMapping,
        "alaQoSConfigDEIMarking": alaQoSConfigDEIMarking,
        "alaQoSConfigStatsResetEgress": alaQoSConfigStatsResetEgress,
+       "alaQoSConfigForceYellowPriority": alaQoSConfigForceYellowPriority,
+       "alaQoSConfigMulticastRateLimit": alaQoSConfigMulticastRateLimit,
+       "alaQoSConfigForceYellowDSCP": alaQoSConfigForceYellowDSCP,
+       "alaQoSConfigUserportLinkShutdown": alaQoSConfigUserportLinkShutdown,
+       "alaQoSConfigAppliedUserportLinkShutdown": alaQoSConfigAppliedUserportLinkShutdown,
+       "alaQoSConfigNATFlush": alaQoSConfigNATFlush,
+       "alaQoSConfigForceYellowUserPriority": alaQoSConfigForceYellowUserPriority,
        "alaQoSStats": alaQoSStats,
        "alaQoSStatsL2Events": alaQoSStatsL2Events,
        "alaQoSStatsL2Matches": alaQoSStatsL2Matches,
@@ -22949,6 +24547,10 @@ mibBuilder.exportSymbols(
        "alaQoSRuleGroupPacketCount": alaQoSRuleGroupPacketCount,
        "alaQoSRuleGroupByteCount": alaQoSRuleGroupByteCount,
        "alaQoSRuleGroupStatus": alaQoSRuleGroupStatus,
+       "alaQoSRuleGroupPacketRate": alaQoSRuleGroupPacketRate,
+       "alaQoSRuleGroupBitRate": alaQoSRuleGroupBitRate,
+       "alaQoSRuleGroupAccPacketCount": alaQoSRuleGroupAccPacketCount,
+       "alaQoSRuleGroupAccByteCount": alaQoSRuleGroupAccByteCount,
        "alaQoSAppliedRuleGroupTable": alaQoSAppliedRuleGroupTable,
        "alaQoSAppliedRuleGroupEntry": alaQoSAppliedRuleGroupEntry,
        "alaQoSAppliedRuleGroupRuleName": alaQoSAppliedRuleGroupRuleName,
@@ -22957,6 +24559,10 @@ mibBuilder.exportSymbols(
        "alaQoSAppliedRuleGroupPacketCount": alaQoSAppliedRuleGroupPacketCount,
        "alaQoSAppliedRuleGroupByteCount": alaQoSAppliedRuleGroupByteCount,
        "alaQoSAppliedRuleGroupStatus": alaQoSAppliedRuleGroupStatus,
+       "alaQosAppliedRuleGroupPacketRate": alaQosAppliedRuleGroupPacketRate,
+       "alaQosAppliedRuleGroupBitRate": alaQosAppliedRuleGroupBitRate,
+       "alaQoSAppliedRuleGroupAccPacketCount": alaQoSAppliedRuleGroupAccPacketCount,
+       "alaQoSAppliedRuleGroupAccByteCount": alaQoSAppliedRuleGroupAccByteCount,
        "alaQoSVlanGroupsTable": alaQoSVlanGroupsTable,
        "alaQoSVlanGroupsEntry": alaQoSVlanGroupsEntry,
        "alaQoSVlanGroupsName": alaQoSVlanGroupsName,
@@ -22987,6 +24593,40 @@ mibBuilder.exportSymbols(
        "alaQoSHwLoopbackType": alaQoSHwLoopbackType,
        "alaQoSHwLoopbackProfileStatus": alaQoSHwLoopbackProfileStatus,
        "alaQoSHwLoopbackProfileRowStatus": alaQoSHwLoopbackProfileRowStatus,
+       "alaQosHwLoopbackSapId": alaQosHwLoopbackSapId,
+       "alaQoSQueueStatsTable": alaQoSQueueStatsTable,
+       "alaQoSQueueStatsEntry": alaQoSQueueStatsEntry,
+       "alaQoSQueueStatsId": alaQoSQueueStatsId,
+       "alaQoSQueueStatsSlot": alaQoSQueueStatsSlot,
+       "alaQoSQueueStatsPort": alaQoSQueueStatsPort,
+       "alaQoSQueueStatsTransmitQueue": alaQoSQueueStatsTransmitQueue,
+       "alaQoSQueueStatsPriority": alaQoSQueueStatsPriority,
+       "alaQoSQueueStatsPacketsSent": alaQoSQueueStatsPacketsSent,
+       "alaQoSQueueStatsPacketsDropped": alaQoSQueueStatsPacketsDropped,
+       "alaQoSQueueStatsBytesSent": alaQoSQueueStatsBytesSent,
+       "alaQoSQueueStatsBytesDropped": alaQoSQueueStatsBytesDropped,
+       "alaQoSQueueStatsRateSent": alaQoSQueueStatsRateSent,
+       "alaQoSQueueStatsRateDropped": alaQoSQueueStatsRateDropped,
+       "alaQoSExtendedRuleTable": alaQoSExtendedRuleTable,
+       "alaQoSExtendedRuleEntry": alaQoSExtendedRuleEntry,
+       "alaQoSExtendedRuleSlot": alaQoSExtendedRuleSlot,
+       "alaQoSExtendedRulePort": alaQoSExtendedRulePort,
+       "alaQoSExtendedRuleMatches": alaQoSExtendedRuleMatches,
+       "alaQoSExtendedRulePacketCount": alaQoSExtendedRulePacketCount,
+       "alaQoSExtendedRuleByteCount": alaQoSExtendedRuleByteCount,
+       "alaQoSExtendedRuleExcessPacketCount": alaQoSExtendedRuleExcessPacketCount,
+       "alaQoSExtendedRuleExcessByteCount": alaQoSExtendedRuleExcessByteCount,
+       "alaQoSExtendedRuleGreenCount": alaQoSExtendedRuleGreenCount,
+       "alaQoSExtendedRuleYellowCount": alaQoSExtendedRuleYellowCount,
+       "alaQoSExtendedRuleRedCount": alaQoSExtendedRuleRedCount,
+       "alaQoSExtendedRuleNonGreenCount": alaQoSExtendedRuleNonGreenCount,
+       "alaQoSExtendedRuleNonRedCount": alaQoSExtendedRuleNonRedCount,
+       "alaQoSDSCPTable": alaQoSDSCPTable,
+       "alaQoSDSCPEntry": alaQoSDSCPEntry,
+       "alaQoSDSCPEntryNumber": alaQoSDSCPEntryNumber,
+       "alaQoSDSCPPriority": alaQoSDSCPPriority,
+       "alaQoSDSCPDropPrecedence": alaQoSDSCPDropPrecedence,
+       "alaQoSDSCPRowStatus": alaQoSDSCPRowStatus,
        "alaQoSMIBConformance": alaQoSMIBConformance,
        "alaQoSMIBGroups": alaQoSMIBGroups,
        "alaQoSMIBRuleObjects": alaQoSMIBRuleObjects,
@@ -23032,6 +24672,16 @@ mibBuilder.exportSymbols(
        "alaQoSVlanGroupObjects": alaQoSVlanGroupObjects,
        "alaQoSAppliedVlanGroupObjects": alaQoSAppliedVlanGroupObjects,
        "alaQoSMIBHwLoopBackProfileObjects": alaQoSMIBHwLoopBackProfileObjects,
+       "alQosQueueStatsGroupObjects": alQosQueueStatsGroupObjects,
+       "alaQoSAppliedImportGroup": alaQoSAppliedImportGroup,
+       "alaQoSAppliedValidityPeriodGroup": alaQoSAppliedValidityPeriodGroup,
+       "alaQoSImportGroup": alaQoSImportGroup,
+       "alaQoSPortPdiGroup": alaQoSPortPdiGroup,
+       "alaQoSPortPriorityGroup": alaQoSPortPriorityGroup,
+       "alaQoSSlotDscpGroup": alaQoSSlotDscpGroup,
+       "alaQoSSlotPcamGroup": alaQoSSlotPcamGroup,
+       "alaQoSSlotProtocolGroup": alaQoSSlotProtocolGroup,
+       "alaQoSValidityPeriodGroup": alaQoSValidityPeriodGroup,
        "alaQoSMIBCompliances": alaQoSMIBCompliances,
        "alaQoSMIBCompliance": alaQoSMIBCompliance}
 )

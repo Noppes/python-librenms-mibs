@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-ENTITY-VENDORTYPE-OID-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:18 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -8052,6 +8049,10 @@ _CevChassisNCS540L6Z14GSysD_ObjectIdentity = ObjectIdentity
 cevChassisNCS540L6Z14GSysD = _CevChassisNCS540L6Z14GSysD_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2491)
 )
+_CevChassisC9200CX12P2XGH_ObjectIdentity = ObjectIdentity
+cevChassisC9200CX12P2XGH = _CevChassisC9200CX12P2XGH_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2492)
+)
 _CevChassisFpr3105td_ObjectIdentity = ObjectIdentity
 cevChassisFpr3105td = _CevChassisFpr3105td_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2493)
@@ -8383,6 +8384,42 @@ cevChassisC1131X8PLTEPWR = _CevChassisC1131X8PLTEPWR_ObjectIdentity(
 _CevChassisN9KC92348GCFX3_ObjectIdentity = ObjectIdentity
 cevChassisN9KC92348GCFX3 = _CevChassisN9KC92348GCFX3_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2652)
+)
+_CevChassisN9KC93320TCFX3P_ObjectIdentity = ObjectIdentity
+cevChassisN9KC93320TCFX3P = _CevChassisN9KC93320TCFX3P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2659)
+)
+_CevChassisC11318PWS_ObjectIdentity = ObjectIdentity
+cevChassisC11318PWS = _CevChassisC11318PWS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2661)
+)
+_CevChassisC1131X8PWS_ObjectIdentity = ObjectIdentity
+cevChassisC1131X8PWS = _CevChassisC1131X8PWS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2662)
+)
+_CevChassisC11318PLTEPWS_ObjectIdentity = ObjectIdentity
+cevChassisC11318PLTEPWS = _CevChassisC11318PLTEPWS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2663)
+)
+_CevChassisC1131X8PLTEPWS_ObjectIdentity = ObjectIdentity
+cevChassisC1131X8PLTEPWS = _CevChassisC1131X8PLTEPWS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2664)
+)
+_CevChassisC11318PWI_ObjectIdentity = ObjectIdentity
+cevChassisC11318PWI = _CevChassisC11318PWI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2665)
+)
+_CevChassisC1131X8PWI_ObjectIdentity = ObjectIdentity
+cevChassisC1131X8PWI = _CevChassisC1131X8PWI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2666)
+)
+_CevChassisC11318PLTEPWI_ObjectIdentity = ObjectIdentity
+cevChassisC11318PLTEPWI = _CevChassisC11318PLTEPWI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2667)
+)
+_CevChassisC1131X8PLTEPWI_ObjectIdentity = ObjectIdentity
+cevChassisC1131X8PLTEPWI = _CevChassisC1131X8PLTEPWI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 3, 2668)
 )
 _CevBackplane_ObjectIdentity = ObjectIdentity
 cevBackplane = _CevBackplane_ObjectIdentity(
@@ -12976,6 +13013,14 @@ _CevPowerSupplyDSCHV2000WI_ObjectIdentity = ObjectIdentity
 cevPowerSupplyDSCHV2000WI = _CevPowerSupplyDSCHV2000WI_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 6, 836)
 )
+_CevPowerSupplyNXAPAC1400WPI_ObjectIdentity = ObjectIdentity
+cevPowerSupplyNXAPAC1400WPI = _CevPowerSupplyNXAPAC1400WPI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 6, 841)
+)
+_CevPowerSupplyNXAPAC1400WPE_ObjectIdentity = ObjectIdentity
+cevPowerSupplyNXAPAC1400WPE = _CevPowerSupplyNXAPAC1400WPE_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 6, 842)
+)
 _CevPowerSupplyPWRC11900WHVT_ObjectIdentity = ObjectIdentity
 cevPowerSupplyPWRC11900WHVT = _CevPowerSupplyPWRC11900WHVT_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 6, 843)
@@ -14579,6 +14624,14 @@ cevFanC9610FAN = _CevFanC9610FAN_ObjectIdentity(
 _CevFanNXASFAN39CFMPI_ObjectIdentity = ObjectIdentity
 cevFanNXASFAN39CFMPI = _CevFanNXASFAN39CFMPI_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 7, 467)
+)
+_CevFanNXASFAN160CFM2PI_ObjectIdentity = ObjectIdentity
+cevFanNXASFAN160CFM2PI = _CevFanNXASFAN160CFM2PI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 7, 470)
+)
+_CevFanNXASFAN160CFM2PE_ObjectIdentity = ObjectIdentity
+cevFanNXASFAN160CFM2PE = _CevFanNXASFAN160CFM2PE_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 7, 471)
 )
 _CevFanCW9800MFanTray_ObjectIdentity = ObjectIdentity
 cevFanCW9800MFanTray = _CevFanCW9800MFanTray_ObjectIdentity(
@@ -17895,6 +17948,10 @@ cevModuleC9610SSD480GB = _CevModuleC9610SSD480GB_ObjectIdentity(
 _CevModuleN9KC92348GCFX3_ObjectIdentity = ObjectIdentity
 cevModuleN9KC92348GCFX3 = _CevModuleN9KC92348GCFX3_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 2, 837)
+)
+_CevModuleN9KC93320TCFX3P_ObjectIdentity = ObjectIdentity
+cevModuleN9KC93320TCFX3P = _CevModuleN9KC93320TCFX3P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 2, 838)
 )
 _CevModuleC36xxType_ObjectIdentity = ObjectIdentity
 cevModuleC36xxType = _CevModuleC36xxType_ObjectIdentity(
@@ -28980,6 +29037,10 @@ _CevSFP50GERI_ObjectIdentity = ObjectIdentity
 cevSFP50GERI = _CevSFP50GERI_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 51, 315)
 )
+_CevONSSCPTP1510_ObjectIdentity = ObjectIdentity
+cevONSSCPTP1510 = _CevONSSCPTP1510_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 51, 316)
+)
 _CevModuleONS15200Type_ObjectIdentity = ObjectIdentity
 cevModuleONS15200Type = _CevModuleONS15200Type_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 52)
@@ -34120,6 +34181,10 @@ _CevUCSFI6536FixedModule_ObjectIdentity = ObjectIdentity
 cevUCSFI6536FixedModule = _CevUCSFI6536FixedModule_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 80, 186)
 )
+_CevUCSXS9108100G_ObjectIdentity = ObjectIdentity
+cevUCSXS9108100G = _CevUCSXS9108100G_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 80, 188)
+)
 _CevModuleNexus1010Type_ObjectIdentity = ObjectIdentity
 cevModuleNexus1010Type = _CevModuleNexus1010Type_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 81)
@@ -36408,6 +36473,10 @@ _CevModuleISRAP1101AXR_ObjectIdentity = ObjectIdentity
 cevModuleISRAP1101AXR = _CevModuleISRAP1101AXR_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 96, 335)
 )
+_CevModuleIRM11004S8I_ObjectIdentity = ObjectIdentity
+cevModuleIRM11004S8I = _CevModuleIRM11004S8I_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 96, 341)
+)
 _CevModuleN77Type_ObjectIdentity = ObjectIdentity
 cevModuleN77Type = _CevModuleN77Type_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 97)
@@ -37655,6 +37724,10 @@ cevN9KC92348GCXFixedModule = _CevN9KC92348GCXFixedModule_ObjectIdentity(
 _CevN9KC9232EB1FixedModule_ObjectIdentity = ObjectIdentity
 cevN9KC9232EB1FixedModule = _CevN9KC9232EB1FixedModule_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 114, 9)
+)
+_CevN9KC92348GCFX3_ObjectIdentity = ObjectIdentity
+cevN9KC92348GCFX3 = _CevN9KC92348GCFX3_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 114, 11)
 )
 _CevModuleN9KType_ObjectIdentity = ObjectIdentity
 cevModuleN9KType = _CevModuleN9KType_ObjectIdentity(
@@ -39123,6 +39196,18 @@ cevQDDONSOLS = _CevQDDONSOLS_ObjectIdentity(
 _CevQDD400GSR4DOT2BD_ObjectIdentity = ObjectIdentity
 cevQDD400GSR4DOT2BD = _CevQDD400GSR4DOT2BD_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 139, 81)
+)
+_CevQDD400GDR4PLUS_ObjectIdentity = ObjectIdentity
+cevQDD400GDR4PLUS = _CevQDD400GDR4PLUS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 139, 82)
+)
+_CevONSQSFPOTDR_ObjectIdentity = ObjectIdentity
+cevONSQSFPOTDR = _CevONSQSFPOTDR_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 139, 83)
+)
+_CevQSFPDDZT5_ObjectIdentity = ObjectIdentity
+cevQSFPDDZT5 = _CevQSFPDDZT5_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 9, 139, 84)
 )
 _CevModuleNCS540LType_ObjectIdentity = ObjectIdentity
 cevModuleNCS540LType = _CevModuleNCS540LType_ObjectIdentity(
@@ -41087,6 +41172,10 @@ cevCat10001GbpsStack = _CevCat10001GbpsStack_ObjectIdentity(
 _CevIE9300Stack_ObjectIdentity = ObjectIdentity
 cevIE9300Stack = _CevIE9300Stack_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 11, 39)
+)
+_CevStackC9610RVirtualStack_ObjectIdentity = ObjectIdentity
+cevStackC9610RVirtualStack = _CevStackC9610RVirtualStack_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 12, 3, 1, 11, 41)
 )
 _CevMidplane_ObjectIdentity = ObjectIdentity
 cevMidplane = _CevMidplane_ObjectIdentity(
@@ -43111,6 +43200,7 @@ mibBuilder.exportSymbols(
        "cevChassisNCS57C148Q6Sys": cevChassisNCS57C148Q6Sys,
        "cevChassisUCSFI6536": cevChassisUCSFI6536,
        "cevChassisNCS540L6Z14GSysD": cevChassisNCS540L6Z14GSysD,
+       "cevChassisC9200CX12P2XGH": cevChassisC9200CX12P2XGH,
        "cevChassisFpr3105td": cevChassisFpr3105td,
        "cevChassisIE31004T2S": cevChassisIE31004T2S,
        "cevChassisIE31008T2C": cevChassisIE31008T2C,
@@ -43194,6 +43284,15 @@ mibBuilder.exportSymbols(
        "cevChassisC1131X8PLTEPWD": cevChassisC1131X8PLTEPWD,
        "cevChassisC1131X8PLTEPWR": cevChassisC1131X8PLTEPWR,
        "cevChassisN9KC92348GCFX3": cevChassisN9KC92348GCFX3,
+       "cevChassisN9KC93320TCFX3P": cevChassisN9KC93320TCFX3P,
+       "cevChassisC11318PWS": cevChassisC11318PWS,
+       "cevChassisC1131X8PWS": cevChassisC1131X8PWS,
+       "cevChassisC11318PLTEPWS": cevChassisC11318PLTEPWS,
+       "cevChassisC1131X8PLTEPWS": cevChassisC1131X8PLTEPWS,
+       "cevChassisC11318PWI": cevChassisC11318PWI,
+       "cevChassisC1131X8PWI": cevChassisC1131X8PWI,
+       "cevChassisC11318PLTEPWI": cevChassisC11318PLTEPWI,
+       "cevChassisC1131X8PLTEPWI": cevChassisC1131X8PLTEPWI,
        "cevBackplane": cevBackplane,
        "cevBackplaneAtm": cevBackplaneAtm,
        "cevBackplaneCat5500": cevBackplaneCat5500,
@@ -44342,6 +44441,8 @@ mibBuilder.exportSymbols(
        "cevPowerSupplyDSCAC1400WI": cevPowerSupplyDSCAC1400WI,
        "cevPowerSupplyDSCAC1400WE": cevPowerSupplyDSCAC1400WE,
        "cevPowerSupplyDSCHV2000WI": cevPowerSupplyDSCHV2000WI,
+       "cevPowerSupplyNXAPAC1400WPI": cevPowerSupplyNXAPAC1400WPI,
+       "cevPowerSupplyNXAPAC1400WPE": cevPowerSupplyNXAPAC1400WPE,
        "cevPowerSupplyPWRC11900WHVT": cevPowerSupplyPWRC11900WHVT,
        "cevPowerSupplyPWRCH1AC250W": cevPowerSupplyPWRCH1AC250W,
        "cevPowerSupplyPWRC11900WHVT2": cevPowerSupplyPWRC11900WHVT2,
@@ -44743,6 +44844,8 @@ mibBuilder.exportSymbols(
        "cevFanNCS1K14FAN": cevFanNCS1K14FAN,
        "cevFanC9610FAN": cevFanC9610FAN,
        "cevFanNXASFAN39CFMPI": cevFanNXASFAN39CFMPI,
+       "cevFanNXASFAN160CFM2PI": cevFanNXASFAN160CFM2PI,
+       "cevFanNXASFAN160CFM2PE": cevFanNXASFAN160CFM2PE,
        "cevFanCW9800MFanTray": cevFanCW9800MFanTray,
        "cevFanCW9800H1FanTray": cevFanCW9800H1FanTray,
        "cevFanCW9800H2FanTray": cevFanCW9800H2FanTray,
@@ -45572,6 +45675,7 @@ mibBuilder.exportSymbols(
        "cevModuleNCS1KMD32OCE": cevModuleNCS1KMD32OCE,
        "cevModuleC9610SSD480GB": cevModuleC9610SSD480GB,
        "cevModuleN9KC92348GCFX3": cevModuleN9KC92348GCFX3,
+       "cevModuleN9KC93320TCFX3P": cevModuleN9KC93320TCFX3P,
        "cevModuleC36xxType": cevModuleC36xxType,
        "cevPmCpm1e2w": cevPmCpm1e2w,
        "cevPmCpm2e2w": cevPmCpm2e2w,
@@ -48343,6 +48447,7 @@ mibBuilder.exportSymbols(
        "cevGLCFE100BXD": cevGLCFE100BXD,
        "cevGLCFE100BXU": cevGLCFE100BXU,
        "cevSFP50GERI": cevSFP50GERI,
+       "cevONSSCPTP1510": cevONSSCPTP1510,
        "cevModuleONS15200Type": cevModuleONS15200Type,
        "cevONS15252Clip": cevONS15252Clip,
        "cevONS15201Clip": cevONS15201Clip,
@@ -49628,6 +49733,7 @@ mibBuilder.exportSymbols(
        "cevUCSE1120DM3K9": cevUCSE1120DM3K9,
        "cevUCSFI64108": cevUCSFI64108,
        "cevUCSFI6536FixedModule": cevUCSFI6536FixedModule,
+       "cevUCSXS9108100G": cevUCSXS9108100G,
        "cevModuleNexus1010Type": cevModuleNexus1010Type,
        "cevNexus1010VSM": cevNexus1010VSM,
        "cevNexusN1KVSANam": cevNexusN1KVSANam,
@@ -50200,6 +50306,7 @@ mibBuilder.exportSymbols(
        "cevModuleISRAP1101AXF": cevModuleISRAP1101AXF,
        "cevModuleISRAP1101AXD": cevModuleISRAP1101AXD,
        "cevModuleISRAP1101AXR": cevModuleISRAP1101AXR,
+       "cevModuleIRM11004S8I": cevModuleIRM11004S8I,
        "cevModuleN77Type": cevModuleN77Type,
        "cevN77c7718Fab2": cevN77c7718Fab2,
        "cevN77c7710Fab2": cevN77c7710Fab2,
@@ -50512,6 +50619,7 @@ mibBuilder.exportSymbols(
        "cevN9KC9232CFixedModule": cevN9KC9232CFixedModule,
        "cevN9KC92348GCXFixedModule": cevN9KC92348GCXFixedModule,
        "cevN9KC9232EB1FixedModule": cevN9KC9232EB1FixedModule,
+       "cevN9KC92348GCFX3": cevN9KC92348GCFX3,
        "cevModuleN9KType": cevModuleN9KType,
        "cevN9KFabricExtenderConnectionCable": cevN9KFabricExtenderConnectionCable,
        "cevModuleFPRType": cevModuleFPRType,
@@ -50879,6 +50987,9 @@ mibBuilder.exportSymbols(
        "cevDP04QSDDER1": cevDP04QSDDER1,
        "cevQDDONSOLS": cevQDDONSOLS,
        "cevQDD400GSR4DOT2BD": cevQDD400GSR4DOT2BD,
+       "cevQDD400GDR4PLUS": cevQDD400GDR4PLUS,
+       "cevONSQSFPOTDR": cevONSQSFPOTDR,
+       "cevQSFPDDZT5": cevQSFPDDZT5,
        "cevModuleNCS540LType": cevModuleNCS540LType,
        "cevModuleNCS540L28Z4SysA": cevModuleNCS540L28Z4SysA,
        "cevModuleNCS540L28Z4SysD": cevModuleNCS540L28Z4SysD,
@@ -51370,6 +51481,7 @@ mibBuilder.exportSymbols(
        "cevCat100010GbpsStack": cevCat100010GbpsStack,
        "cevCat10001GbpsStack": cevCat10001GbpsStack,
        "cevIE9300Stack": cevIE9300Stack,
+       "cevStackC9610RVirtualStack": cevStackC9610RVirtualStack,
        "cevMidplane": cevMidplane,
        "cevMidplaneUmg9820": cevMidplaneUmg9820,
        "cevTCAMType": cevTCAMType,

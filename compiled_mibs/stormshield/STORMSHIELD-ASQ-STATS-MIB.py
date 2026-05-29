@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\stormshield\STORMSHIELD-ASQ-STATS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:28:59 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -504,6 +501,78 @@ snsASQStatsStatefulNatUnusable = _SnsASQStatsStatefulNatUnusable_Object(
 snsASQStatsStatefulNatUnusable.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsASQStatsStatefulNatUnusable.setStatus("current")
+_SnsASQStatsStatefulSctpAssoc_Type = Counter64
+_SnsASQStatsStatefulSctpAssoc_Object = MibScalar
+snsASQStatsStatefulSctpAssoc = _SnsASQStatsStatefulSctpAssoc_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 43),
+    _SnsASQStatsStatefulSctpAssoc_Type()
+)
+snsASQStatsStatefulSctpAssoc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulSctpAssoc.setStatus("current")
+_SnsASQStatsStatefulSctpPackets_Type = Counter64
+_SnsASQStatsStatefulSctpPackets_Object = MibScalar
+snsASQStatsStatefulSctpPackets = _SnsASQStatsStatefulSctpPackets_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 44),
+    _SnsASQStatsStatefulSctpPackets_Type()
+)
+snsASQStatsStatefulSctpPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulSctpPackets.setStatus("current")
+_SnsASQStatsStatefulSctpInBytes_Type = DisplayString
+_SnsASQStatsStatefulSctpInBytes_Object = MibScalar
+snsASQStatsStatefulSctpInBytes = _SnsASQStatsStatefulSctpInBytes_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 45),
+    _SnsASQStatsStatefulSctpInBytes_Type()
+)
+snsASQStatsStatefulSctpInBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulSctpInBytes.setStatus("current")
+_SnsASQStatsStatefulSctpOutBytes_Type = DisplayString
+_SnsASQStatsStatefulSctpOutBytes_Object = MibScalar
+snsASQStatsStatefulSctpOutBytes = _SnsASQStatsStatefulSctpOutBytes_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 46),
+    _SnsASQStatsStatefulSctpOutBytes_Type()
+)
+snsASQStatsStatefulSctpOutBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulSctpOutBytes.setStatus("current")
+_SnsASQStatsStatefulEtherstateConn_Type = Counter64
+_SnsASQStatsStatefulEtherstateConn_Object = MibScalar
+snsASQStatsStatefulEtherstateConn = _SnsASQStatsStatefulEtherstateConn_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 47),
+    _SnsASQStatsStatefulEtherstateConn_Type()
+)
+snsASQStatsStatefulEtherstateConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulEtherstateConn.setStatus("current")
+_SnsASQStatsStatefulEtherstatePackets_Type = Counter64
+_SnsASQStatsStatefulEtherstatePackets_Object = MibScalar
+snsASQStatsStatefulEtherstatePackets = _SnsASQStatsStatefulEtherstatePackets_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 48),
+    _SnsASQStatsStatefulEtherstatePackets_Type()
+)
+snsASQStatsStatefulEtherstatePackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulEtherstatePackets.setStatus("current")
+_SnsASQStatsStatefulEtherstateInBytes_Type = DisplayString
+_SnsASQStatsStatefulEtherstateInBytes_Object = MibScalar
+snsASQStatsStatefulEtherstateInBytes = _SnsASQStatsStatefulEtherstateInBytes_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 49),
+    _SnsASQStatsStatefulEtherstateInBytes_Type()
+)
+snsASQStatsStatefulEtherstateInBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulEtherstateInBytes.setStatus("current")
+_SnsASQStatsStatefulEtherstateOutBytes_Type = DisplayString
+_SnsASQStatsStatefulEtherstateOutBytes_Object = MibScalar
+snsASQStatsStatefulEtherstateOutBytes = _SnsASQStatsStatefulEtherstateOutBytes_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 12, 1, 50),
+    _SnsASQStatsStatefulEtherstateOutBytes_Type()
+)
+snsASQStatsStatefulEtherstateOutBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsASQStatsStatefulEtherstateOutBytes.setStatus("current")
 _SnsASQStatsGlobal_ObjectIdentity = ObjectIdentity
 snsASQStatsGlobal = _SnsASQStatsGlobal_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 11256, 1, 12, 2)
@@ -581,6 +650,14 @@ mibBuilder.exportSymbols(
        "snsASQStatsStatefulIcmpOutBytes": snsASQStatsStatefulIcmpOutBytes,
        "snsASQStatsStatefulHttpTimeoutRst": snsASQStatsStatefulHttpTimeoutRst,
        "snsASQStatsStatefulNatUnusable": snsASQStatsStatefulNatUnusable,
+       "snsASQStatsStatefulSctpAssoc": snsASQStatsStatefulSctpAssoc,
+       "snsASQStatsStatefulSctpPackets": snsASQStatsStatefulSctpPackets,
+       "snsASQStatsStatefulSctpInBytes": snsASQStatsStatefulSctpInBytes,
+       "snsASQStatsStatefulSctpOutBytes": snsASQStatsStatefulSctpOutBytes,
+       "snsASQStatsStatefulEtherstateConn": snsASQStatsStatefulEtherstateConn,
+       "snsASQStatsStatefulEtherstatePackets": snsASQStatsStatefulEtherstatePackets,
+       "snsASQStatsStatefulEtherstateInBytes": snsASQStatsStatefulEtherstateInBytes,
+       "snsASQStatsStatefulEtherstateOutBytes": snsASQStatsStatefulEtherstateOutBytes,
        "snsASQStatsGlobal": snsASQStatsGlobal,
        "snsASQStatsGlobalTimeSinceReset": snsASQStatsGlobalTimeSinceReset}
 )

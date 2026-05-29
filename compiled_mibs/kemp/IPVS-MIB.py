@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\kemp\IPVS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:08:09 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -69,10 +66,8 @@ if 'mibBuilder' not in globals():
  MibTable,
  MibTableRow,
  MibTableColumn,
- Opaque,
  TimeTicks,
  Unsigned32,
- enterprises,
  iso) = mibBuilder.importSymbols(
     "SNMPv2-SMI",
     "Bits",
@@ -89,23 +84,17 @@ if 'mibBuilder' not in globals():
     "MibTable",
     "MibTableRow",
     "MibTableColumn",
-    "Opaque",
     "TimeTicks",
     "Unsigned32",
-    "enterprises",
     "iso")
 
 (DisplayString,
  PhysAddress,
- TextualConvention,
- TimeInterval,
- TruthValue) = mibBuilder.importSymbols(
+ TextualConvention) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
-    "TextualConvention",
-    "TimeInterval",
-    "TruthValue")
+    "TextualConvention")
 
 
 # MODULE-IDENTITY
@@ -115,7 +104,7 @@ ipvs = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ipvs.setRevisions(
-        ("2011-12-01 00:00",)
+        ("2021-06-25 09:06",)
     )
 
 
@@ -139,29 +128,29 @@ vsEntry = _VsEntry_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 1, 1)
 )
 vsEntry.setIndexNames(
-    (0, "IPVS-MIB", "vSidx"),
+    (0, "IPVS-MIB", "vSIdx"),
 )
 if mibBuilder.loadTexts:
     vsEntry.setStatus("current")
 
 
-class _VSidx_Type(Integer32):
-    """Custom type vSidx based on Integer32"""
+class _VSIdx_Type(Integer32):
+    """Custom type vSIdx based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 1024),
     )
 
 
-_VSidx_Type.__name__ = "Integer32"
-_VSidx_Object = MibTableColumn
-vSidx = _VSidx_Object(
+_VSIdx_Type.__name__ = "Integer32"
+_VSIdx_Object = MibTableColumn
+vSIdx = _VSIdx_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 1, 1, 1),
-    _VSidx_Type()
+    _VSIdx_Type()
 )
-vSidx.setMaxAccess("read-only")
+vSIdx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSidx.setStatus("current")
+    vSIdx.setStatus("current")
 
 
 class _VSDesc_Type(OctetString):
@@ -226,15 +215,15 @@ vSOutBytes = _VSOutBytes_Object(
 vSOutBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vSOutBytes.setStatus("current")
-_VSActivConns_Type = Counter32
-_VSActivConns_Object = MibTableColumn
-vSActivConns = _VSActivConns_Object(
+_VSActiveConns_Type = Gauge32
+_VSActiveConns_Object = MibTableColumn
+vSActiveConns = _VSActiveConns_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 1, 1, 17),
-    _VSActivConns_Type()
+    _VSActiveConns_Type()
 )
-vSActivConns.setMaxAccess("read-only")
+vSActiveConns.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSActivConns.setStatus("current")
+    vSActiveConns.setStatus("current")
 _IpvsRSTable_Object = MibTable
 ipvsRSTable = _IpvsRSTable_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 2)
@@ -246,29 +235,29 @@ rsEntry = _RsEntry_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 2, 1)
 )
 rsEntry.setIndexNames(
-    (0, "IPVS-MIB", "rSidx"),
+    (0, "IPVS-MIB", "rSIdx"),
 )
 if mibBuilder.loadTexts:
     rsEntry.setStatus("current")
 
 
-class _RSidx_Type(Integer32):
-    """Custom type rSidx based on Integer32"""
+class _RSIdx_Type(Integer32):
+    """Custom type rSIdx based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 1024),
+        ValueRangeConstraint(0, 8192),
     )
 
 
-_RSidx_Type.__name__ = "Integer32"
-_RSidx_Object = MibTableColumn
-rSidx = _RSidx_Object(
+_RSIdx_Type.__name__ = "Integer32"
+_RSIdx_Object = MibTableColumn
+rSIdx = _RSIdx_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 2, 1, 1),
-    _RSidx_Type()
+    _RSIdx_Type()
 )
-rSidx.setMaxAccess("not-accessible")
+rSIdx.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    rSidx.setStatus("current")
+    rSIdx.setStatus("current")
 
 
 class _RSVSidx_Type(Integer32):
@@ -294,7 +283,7 @@ class _RSDesc_Type(OctetString):
     """Custom type rSDesc based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 1024),
+        ValueSizeConstraint(0, 8192),
     )
 
 
@@ -352,7 +341,7 @@ rSOutBytes = _RSOutBytes_Object(
 rSOutBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rSOutBytes.setStatus("current")
-_RSActiveConns_Type = Counter32
+_RSActiveConns_Type = Gauge32
 _RSActiveConns_Object = MibTableColumn
 rSActiveConns = _RSActiveConns_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 2, 1, 17),
@@ -370,7 +359,7 @@ rSInactiveConns = _RSInactiveConns_Object(
 rSInactiveConns.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rSInactiveConns.setStatus("current")
-_RSWeight_Type = Counter32
+_RSWeight_Type = Integer32
 _RSWeight_Object = MibTableColumn
 rSWeight = _RSWeight_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 2, 1, 19),
@@ -435,36 +424,36 @@ rsTotalEntry = _RsTotalEntry_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 8, 1)
 )
 rsTotalEntry.setIndexNames(
-    (0, "IPVS-MIB", "totRSidx"),
+    (0, "IPVS-MIB", "totRSIdx"),
 )
 if mibBuilder.loadTexts:
     rsTotalEntry.setStatus("current")
 
 
-class _TotRSidx_Type(Integer32):
-    """Custom type totRSidx based on Integer32"""
+class _TotRSIdx_Type(Integer32):
+    """Custom type totRSIdx based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 1024),
+        ValueRangeConstraint(0, 8192),
     )
 
 
-_TotRSidx_Type.__name__ = "Integer32"
-_TotRSidx_Object = MibTableColumn
-totRSidx = _TotRSidx_Object(
+_TotRSIdx_Type.__name__ = "Integer32"
+_TotRSIdx_Object = MibTableColumn
+totRSIdx = _TotRSIdx_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 8, 1, 1),
-    _TotRSidx_Type()
+    _TotRSIdx_Type()
 )
-totRSidx.setMaxAccess("read-only")
+totRSIdx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    totRSidx.setStatus("current")
+    totRSIdx.setStatus("current")
 
 
 class _TotRSDesc_Type(OctetString):
     """Custom type totRSDesc based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 1024),
+        ValueSizeConstraint(0, 8192),
     )
 
 
@@ -522,7 +511,7 @@ totRSOutBytes = _TotRSOutBytes_Object(
 totRSOutBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     totRSOutBytes.setStatus("current")
-_TotRSActiveConns_Type = Counter32
+_TotRSActiveConns_Type = Gauge32
 _TotRSActiveConns_Object = MibTableColumn
 totRSActiveConns = _TotRSActiveConns_Object(
     (1, 3, 6, 1, 4, 1, 12196, 12, 8, 1, 8),
@@ -563,17 +552,17 @@ mibBuilder.exportSymbols(
     **{"ipvs": ipvs,
        "ipvsVSTable": ipvsVSTable,
        "vsEntry": vsEntry,
-       "vSidx": vSidx,
+       "vSIdx": vSIdx,
        "vSDesc": vSDesc,
        "vSConns": vSConns,
        "vSInPkts": vSInPkts,
        "vSOutPkts": vSOutPkts,
        "vSInBytes": vSInBytes,
        "vSOutBytes": vSOutBytes,
-       "vSActivConns": vSActivConns,
+       "vSActiveConns": vSActiveConns,
        "ipvsRSTable": ipvsRSTable,
        "rsEntry": rsEntry,
-       "rSidx": rSidx,
+       "rSIdx": rSIdx,
        "rSVSidx": rSVSidx,
        "rSDesc": rSDesc,
        "rSConns": rSConns,
@@ -591,7 +580,7 @@ mibBuilder.exportSymbols(
        "outBytes": outBytes,
        "ipvsRSTotalTable": ipvsRSTotalTable,
        "rsTotalEntry": rsTotalEntry,
-       "totRSidx": totRSidx,
+       "totRSIdx": totRSIdx,
        "totRSDesc": totRSDesc,
        "totRSConns": totRSConns,
        "totRSInPkts": totRSInPkts,

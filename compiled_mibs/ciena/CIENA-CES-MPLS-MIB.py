@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-MPLS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:42 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -139,10 +136,16 @@ cienaCesMplsMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesMplsMIB.setRevisions(
-        ("2016-11-22 00:00",
+        ("2018-01-18 00:00",
+         "2017-09-15 00:00",
+         "2017-08-31 00:00",
+         "2017-06-07 00:00",
+         "2017-05-11 00:00",
+         "2017-05-03 00:00",
          "2016-11-17 00:00",
          "2016-10-21 00:00",
          "2016-10-12 00:00",
+         "2016-09-23 00:00",
          "2016-09-21 00:00",
          "2016-08-29 00:00",
          "2016-08-22 00:00",
@@ -363,7 +366,7 @@ class TunnelType(TextualConvention, Integer32):
 
 
 class TunnelAisFault(TextualConvention, Integer32):
-    status = "obsolete"
+    status = "deprecated"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -374,6 +377,26 @@ class TunnelAisFault(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("fault", 1),
           ("nofault", 2))
+    )
+
+
+
+class TunnelAisFaultReason(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("serviceFault", 2),
+          ("serviceDegrade", 3),
+          ("serviceFaultAndDegrade", 4))
     )
 
 
@@ -574,6 +597,22 @@ class MplsGlobalState(TextualConvention, Integer32):
         *(("enabled", 1),
           ("disabled", 2),
           ("notApplicable", 3))
+    )
+
+
+
+class ServiceDegradeState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("set", 1),
+          ("clear", 2))
     )
 
 
@@ -4747,12 +4786,21 @@ cienaCesGmplsDynamicIngressUniDirTunnelResourcePointer = _CienaCesGmplsDynamicIn
 cienaCesGmplsDynamicIngressUniDirTunnelResourcePointer.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cienaCesGmplsDynamicIngressUniDirTunnelResourcePointer.setStatus("current")
+_CienaCesGmplsDynamicIngressUniDirArHopIndex_Type = Unsigned32
+_CienaCesGmplsDynamicIngressUniDirArHopIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressUniDirArHopIndex = _CienaCesGmplsDynamicIngressUniDirArHopIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 3, 1, 28),
+    _CienaCesGmplsDynamicIngressUniDirArHopIndex_Type()
+)
+cienaCesGmplsDynamicIngressUniDirArHopIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressUniDirArHopIndex.setStatus("current")
 _CienaCesGmplsDynamicIngressCoroutedTunnelTable_Object = MibTable
 cienaCesGmplsDynamicIngressCoroutedTunnelTable = _CienaCesGmplsDynamicIngressCoroutedTunnelTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 4)
 )
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelTable.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelTable.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelEntry_Object = MibTableRow
 cienaCesGmplsDynamicIngressCoroutedTunnelEntry = _CienaCesGmplsDynamicIngressCoroutedTunnelEntry_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 4, 1)
@@ -4761,7 +4809,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelEntry.setIndexNames(
     (0, "CIENA-CES-MPLS-MIB", "cienaCesGmplsDynamicIngressCoroutedTunnelIndex"),
 )
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelEntry.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelEntry.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelIndex_Type(Unsigned32):
@@ -4780,7 +4828,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelIndex = _CienaCesGmplsDynamicIngressCor
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelIndex.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelIndex.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelName_Type(DisplayString):
@@ -4799,7 +4847,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelName = _CienaCesGmplsDynamicIngressCoro
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelName.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelName.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp_Type = IpAddress
 _CienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp = _CienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp_Object(
@@ -4808,7 +4856,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelNextHopIp.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr_Type = IpAddress
 _CienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr = _CienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr_Object(
@@ -4817,7 +4865,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelSrcIpAddr.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr_Type = IpAddress
 _CienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr = _CienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr_Object(
@@ -4826,7 +4874,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr = _CienaCesGmplsDynamicIngre
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelDestIpAddr.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelAdminState_Type = CienaGlobalState
 _CienaCesGmplsDynamicIngressCoroutedTunnelAdminState_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelAdminState = _CienaCesGmplsDynamicIngressCoroutedTunnelAdminState_Object(
@@ -4835,7 +4883,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAdminState = _CienaCesGmplsDynamicIngre
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAdminState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAdminState.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAdminState.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelOperState_Type = CienaGlobalState
 _CienaCesGmplsDynamicIngressCoroutedTunnelOperState_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelOperState = _CienaCesGmplsDynamicIngressCoroutedTunnelOperState_Object(
@@ -4844,7 +4892,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelOperState = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelOperState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelOperState.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelOperState.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelForwardOutLabel_Type(Unsigned32):
@@ -4863,7 +4911,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelForwardOutLabel = _CienaCesGmplsDynamic
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelForwardOutLabel.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelForwardOutLabel.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelForwardOutLabel.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelReverseInLabel_Type(Unsigned32):
@@ -4882,7 +4930,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelReverseInLabel = _CienaCesGmplsDynamicI
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelReverseInLabel.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelReverseInLabel.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelReverseInLabel.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelProtectionRole_Type(Integer32):
@@ -4910,7 +4958,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelProtectionRole = _CienaCesGmplsDynamicI
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelProtectionRole.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelProtectionRole.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelProtectionRole.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName_Type = DisplayString
 _CienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName = _CienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName_Object(
@@ -4919,7 +4967,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName = _CienaCesGmplsD
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelProtectionPartnerName.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelProtectionState_Type(Integer32):
@@ -4945,7 +4993,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelProtectionState = _CienaCesGmplsDynamic
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelProtectionState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelProtectionState.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelProtectionState.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelTTLPolicy_Type(TTLPolicy):
@@ -4961,7 +5009,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelTTLPolicy = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelTTLPolicy.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelTTLPolicy.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelTTLPolicy.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelFixedTTL_Type(Unsigned32):
@@ -4982,7 +5030,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelFixedTTL = _CienaCesGmplsDynamicIngress
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelFixedTTL.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelFixedTTL.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelFixedTTL.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex_Type = Unsigned32
 _CienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex = _CienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex_Object(
@@ -4991,7 +5039,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex = _CienaCesGmplsDynamicIngress
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelGrpIndex.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelReversion_Type(Integer32):
@@ -5019,7 +5067,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelReversion = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelReversion.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelReversion.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelReversion.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelReversionTimeout_Type(Unsigned32):
@@ -5038,7 +5086,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelReversionTimeout = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelReversionTimeout.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelReversionTimeout.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelReversionTimeout.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelCosProfileIndex_Type(Unsigned32):
@@ -5057,7 +5105,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileIndex = _CienaCesGmplsDynamic
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileIndex.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileIndex.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName_Type = DisplayString
 _CienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName = _CienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName_Object(
@@ -5066,7 +5114,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName = _CienaCesGmplsDynamicI
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelCosProfileName.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelRecordRoute_Type(Integer32):
@@ -5094,7 +5142,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelRecordRoute = _CienaCesGmplsDynamicIngr
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelRecordRoute.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelRecordRoute.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelRecordRoute.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelFastRoute_Type(Integer32):
@@ -5124,7 +5172,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelFastRoute = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelFastRoute.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelFastRoute.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelFastRoute.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelSetupPriority_Type(Unsigned32):
@@ -5143,7 +5191,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelSetupPriority = _CienaCesGmplsDynamicIn
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelSetupPriority.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelSetupPriority.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelSetupPriority.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelHoldPriority_Type(Unsigned32):
@@ -5162,7 +5210,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelHoldPriority = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelHoldPriority.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelHoldPriority.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelHoldPriority.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelPathIndex_Type = Unsigned32
 _CienaCesGmplsDynamicIngressCoroutedTunnelPathIndex_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelPathIndex = _CienaCesGmplsDynamicIngressCoroutedTunnelPathIndex_Object(
@@ -5171,7 +5219,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelPathIndex = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelPathIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelPathIndex.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelPathIndex.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelPathName_Type = DisplayString
 _CienaCesGmplsDynamicIngressCoroutedTunnelPathName_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelPathName = _CienaCesGmplsDynamicIngressCoroutedTunnelPathName_Object(
@@ -5180,7 +5228,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelPathName = _CienaCesGmplsDynamicIngress
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelPathName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelPathName.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelPathName.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile_Type = DisplayString
 _CienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile = _CienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile_Object(
@@ -5189,7 +5237,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelBandwidthProfile.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer_Type = RowPointer
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer = _CienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer_Object(
@@ -5198,7 +5246,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer = _CienaCesGmplsDynamic
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelResourcePointer.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring_Type = CienaGlobalState
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring = _CienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring_Object(
@@ -5207,7 +5255,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring = _CienaCesGmplsDynamicIn
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelBfdMonitoring.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName_Type = DisplayString
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName = _CienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName_Object(
@@ -5216,7 +5264,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName = _CienaCesGmplsDynamicI
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileName.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName_Type = DisplayString
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName = _CienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName_Object(
@@ -5225,7 +5273,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName = _CienaCesGmplsDynamicI
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionName.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted_Type = Integer32
 _CienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted = _CienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted_Object(
@@ -5234,7 +5282,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted = _CienaCesGmplsDynam
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelBfdSessionFaulted.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileIndex_Type(Unsigned32):
@@ -5253,7 +5301,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileIndex = _CienaCesGmplsDynamic
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileIndex.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelBfdProfileIndex.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable_Type = Integer32
 _CienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable = _CienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable_Object(
@@ -5262,7 +5310,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAutoBackupEnable.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization_Type = MplsGlobalState
 _CienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization = _CienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization_Object(
@@ -5271,7 +5319,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization = _CienaCesGmplsDynam
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelLspReoptimization.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelLspReOptTimeInterval_Type(Unsigned32):
@@ -5292,7 +5340,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelLspReOptTimeInterval = _CienaCesGmplsDy
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelLspReOptTimeInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelLspReOptTimeInterval.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelLspReOptTimeInterval.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointType_Type(PathDisjointType):
@@ -5308,7 +5356,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointType = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointType.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointType.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointMode_Type(PathDisjointMode):
@@ -5324,7 +5372,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointMode = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointMode.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelPathDisjointMode.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable_Type = MplsGlobalState
 _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable = _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable_Object(
@@ -5333,7 +5381,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable = _CienaCesGmplsDynamicI
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeEnable.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeInterval_Type(Unsigned32):
@@ -5354,7 +5402,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeInterval = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeInterval.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeInterval.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeFailureHdlr_Type(AutoSizeFailHdlr):
@@ -5370,7 +5418,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeFailureHdlr = _CienaCesGmplsDyn
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeFailureHdlr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeFailureHdlr.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeFailureHdlr.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState_Type = AutoSizeState
 _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState = _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState_Object(
@@ -5379,7 +5427,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState = _CienaCesGmplsDynamicIn
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeState.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeMode_Type(AutoSizeMode):
@@ -5395,7 +5443,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeMode = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeMode.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelAutoSizeMode.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelMinBandwidth_Type(MplsBitRate):
@@ -5411,7 +5459,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelMinBandwidth = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelMinBandwidth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelMinBandwidth.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelMinBandwidth.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelMaxBandwidth_Type(MplsBitRate):
@@ -5427,7 +5475,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelMaxBandwidth = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelMaxBandwidth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelMaxBandwidth.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelMaxBandwidth.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelIncBandwidth_Type(MplsBitRate):
@@ -5443,7 +5491,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelIncBandwidth = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelIncBandwidth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelIncBandwidth.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelIncBandwidth.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth_Type = MplsBitRate
 _CienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth = _CienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth_Object(
@@ -5452,7 +5500,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelCurBandwidth.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth_Type = MplsBitRate
 _CienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth = _CienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth_Object(
@@ -5461,7 +5509,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth = _CienaCesGmplsDynamicIng
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelReqBandwidth.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth_Type = MplsBitRate
 _CienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth = _CienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth_Object(
@@ -5470,7 +5518,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth = _CienaCesGmplsDynamicIn
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelUsedBandwidth.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicIngressCoroutedTunnelClassType_Type(Unsigned32):
@@ -5491,7 +5539,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelClassType = _CienaCesGmplsDynamicIngres
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelClassType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelClassType.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelClassType.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll_Type = Unsigned32
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll = _CienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll_Object(
@@ -5500,7 +5548,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll = _CienaCesGmplsDyna
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAll.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny_Type = Unsigned32
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny = _CienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny_Object(
@@ -5509,7 +5557,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny = _CienaCesGmplsDyna
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelResourceIncludeAny.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny_Type = Unsigned32
 _CienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny = _CienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny_Object(
@@ -5518,7 +5566,7 @@ cienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny = _CienaCesGmplsDyna
 )
 cienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny.setStatus("current")
+    cienaCesGmplsDynamicIngressCoroutedTunnelResourceExcludeAny.setStatus("obsolete")
 _CienaCesGmplsDynamicIngressCoroutedLspId_Type = Unsigned32
 _CienaCesGmplsDynamicIngressCoroutedLspId_Object = MibTableColumn
 cienaCesGmplsDynamicIngressCoroutedLspId = _CienaCesGmplsDynamicIngressCoroutedLspId_Object(
@@ -6218,7 +6266,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelTable = _CienaCesGmplsDynamicEgressCorou
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 8)
 )
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelTable.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelTable.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelEntry_Object = MibTableRow
 cienaCesGmplsDynamicEgressCoroutedTunnelEntry = _CienaCesGmplsDynamicEgressCoroutedTunnelEntry_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 8, 1)
@@ -6227,7 +6275,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelEntry.setIndexNames(
     (0, "CIENA-CES-MPLS-MIB", "cienaCesGmplsDynamicEgressCoroutedTunnelIndex"),
 )
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelEntry.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelEntry.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelIndex_Type = Unsigned32
 _CienaCesGmplsDynamicEgressCoroutedTunnelIndex_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelIndex = _CienaCesGmplsDynamicEgressCoroutedTunnelIndex_Object(
@@ -6236,7 +6284,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelIndex = _CienaCesGmplsDynamicEgressCorou
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelIndex.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelIndex.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelName_Type(DisplayString):
@@ -6255,7 +6303,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelName = _CienaCesGmplsDynamicEgressCorout
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelName.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelName.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelAdminState_Type(CienaGlobalState):
@@ -6271,7 +6319,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelAdminState = _CienaCesGmplsDynamicEgress
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelAdminState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelAdminState.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelAdminState.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelOperState_Type = CienaGlobalState
 _CienaCesGmplsDynamicEgressCoroutedTunnelOperState_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelOperState = _CienaCesGmplsDynamicEgressCoroutedTunnelOperState_Object(
@@ -6280,7 +6328,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelOperState = _CienaCesGmplsDynamicEgressC
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelOperState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelOperState.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelOperState.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedLspId_Type = Unsigned32
 _CienaCesGmplsDynamicEgressCoroutedLspId_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedLspId = _CienaCesGmplsDynamicEgressCoroutedLspId_Object(
@@ -6289,7 +6337,7 @@ cienaCesGmplsDynamicEgressCoroutedLspId = _CienaCesGmplsDynamicEgressCoroutedLsp
 )
 cienaCesGmplsDynamicEgressCoroutedLspId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedLspId.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedLspId.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr_Type = IpAddress
 _CienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr = _CienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr_Object(
@@ -6298,7 +6346,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr = _CienaCesGmplsDynamicEgr
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelPrevHopIpAddr.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr_Type = IpAddress
 _CienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr = _CienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr_Object(
@@ -6307,7 +6355,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr = _CienaCesGmplsDynamicEgre
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelSourceIpAddr.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr_Type = IpAddress
 _CienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr = _CienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr_Object(
@@ -6316,7 +6364,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr = _CienaCesGmplsDynamicEgress
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelDestIpAddr.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel_Type = Unsigned32
 _CienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel = _CienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel_Object(
@@ -6325,7 +6373,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel = _CienaCesGmplsDynamicEg
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelForwardInLabel.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelReverseOutLabel_Type(Unsigned32):
@@ -6344,7 +6392,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelReverseOutLabel = _CienaCesGmplsDynamicE
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelReverseOutLabel.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelReverseOutLabel.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelReverseOutLabel.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelProtectionRole_Type(Integer32):
@@ -6372,7 +6420,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelProtectionRole = _CienaCesGmplsDynamicEg
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelProtectionRole.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelProtectionRole.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelProtectionRole.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName_Type = DisplayString
 _CienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName = _CienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName_Object(
@@ -6381,7 +6429,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName = _CienaCesGmplsDy
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelProtectionPartnerName.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelProtectionState_Type(Integer32):
@@ -6407,7 +6455,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelProtectionState = _CienaCesGmplsDynamicE
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelProtectionState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelProtectionState.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelProtectionState.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex_Type = Unsigned32
 _CienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex = _CienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex_Object(
@@ -6416,7 +6464,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex = _CienaCesGmplsDynamicEgressCo
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelGrpIndex.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelReversion_Type(Integer32):
@@ -6444,7 +6492,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelReversion = _CienaCesGmplsDynamicEgressC
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelReversion.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelReversion.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelReversion.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelReversionTimeout_Type(Unsigned32):
@@ -6463,7 +6511,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelReversionTimeout = _CienaCesGmplsDynamic
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelReversionTimeout.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelReversionTimeout.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelReversionTimeout.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelCosProfileIndex_Type(Unsigned32):
@@ -6482,7 +6530,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileIndex = _CienaCesGmplsDynamicE
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileIndex.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileIndex.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName_Type = DisplayString
 _CienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName = _CienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName_Object(
@@ -6491,7 +6539,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName = _CienaCesGmplsDynamicEg
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelCosProfileName.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring_Type = CienaGlobalState
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring = _CienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring_Object(
@@ -6500,7 +6548,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring = _CienaCesGmplsDynamicEgr
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelBfdMonitoring.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName_Type = DisplayString
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName = _CienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName_Object(
@@ -6509,7 +6557,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName = _CienaCesGmplsDynamicEg
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileName.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName_Type = DisplayString
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName = _CienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName_Object(
@@ -6518,7 +6566,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName = _CienaCesGmplsDynamicEg
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionName.setStatus("obsolete")
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted_Type = Integer32
 _CienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted_Object = MibTableColumn
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted = _CienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted_Object(
@@ -6527,7 +6575,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted = _CienaCesGmplsDynami
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelBfdSessionFaulted.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileIndex_Type(Unsigned32):
@@ -6546,7 +6594,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileIndex = _CienaCesGmplsDynamicE
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileIndex.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelBfdProfileIndex.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelTTLPolicy_Type(TTLPolicy):
@@ -6562,7 +6610,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelTTLPolicy = _CienaCesGmplsDynamicEgressC
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelTTLPolicy.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelTTLPolicy.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelTTLPolicy.setStatus("obsolete")
 
 
 class _CienaCesGmplsDynamicEgressCoroutedTunnelFixedTTL_Type(Unsigned32):
@@ -6583,7 +6631,7 @@ cienaCesGmplsDynamicEgressCoroutedTunnelFixedTTL = _CienaCesGmplsDynamicEgressCo
 )
 cienaCesGmplsDynamicEgressCoroutedTunnelFixedTTL.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    cienaCesGmplsDynamicEgressCoroutedTunnelFixedTTL.setStatus("current")
+    cienaCesGmplsDynamicEgressCoroutedTunnelFixedTTL.setStatus("obsolete")
 _CienaCesGmplsStaticTransitUniDirTunnelTable_Object = MibTable
 cienaCesGmplsStaticTransitUniDirTunnelTable = _CienaCesGmplsStaticTransitUniDirTunnelTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 9)
@@ -8159,7 +8207,7 @@ cienaCesGmplsNotifEncapTunnelAisFaulted = _CienaCesGmplsNotifEncapTunnelAisFault
 )
 cienaCesGmplsNotifEncapTunnelAisFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
-    cienaCesGmplsNotifEncapTunnelAisFaulted.setStatus("obsolete")
+    cienaCesGmplsNotifEncapTunnelAisFaulted.setStatus("deprecated")
 _CienaCesGmplsNotifEncapTunnelFaultedNodeId_Type = IpAddress
 _CienaCesGmplsNotifEncapTunnelFaultedNodeId_Object = MibTableColumn
 cienaCesGmplsNotifEncapTunnelFaultedNodeId = _CienaCesGmplsNotifEncapTunnelFaultedNodeId_Object(
@@ -8307,6 +8355,24 @@ cienaCesGmplsNotifEncapTunnelOamFaulted = _CienaCesGmplsNotifEncapTunnelOamFault
 cienaCesGmplsNotifEncapTunnelOamFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     cienaCesGmplsNotifEncapTunnelOamFaulted.setStatus("current")
+_CienaCesGmplsNotifEncapTunnelAisFaultReason_Type = TunnelAisFaultReason
+_CienaCesGmplsNotifEncapTunnelAisFaultReason_Object = MibTableColumn
+cienaCesGmplsNotifEncapTunnelAisFaultReason = _CienaCesGmplsNotifEncapTunnelAisFaultReason_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 15, 1, 1, 15),
+    _CienaCesGmplsNotifEncapTunnelAisFaultReason_Type()
+)
+cienaCesGmplsNotifEncapTunnelAisFaultReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesGmplsNotifEncapTunnelAisFaultReason.setStatus("current")
+_CienaCesGmplsNotifEncapTunnelServiceDegradeState_Type = ServiceDegradeState
+_CienaCesGmplsNotifEncapTunnelServiceDegradeState_Object = MibTableColumn
+cienaCesGmplsNotifEncapTunnelServiceDegradeState = _CienaCesGmplsNotifEncapTunnelServiceDegradeState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 15, 1, 1, 16),
+    _CienaCesGmplsNotifEncapTunnelServiceDegradeState_Type()
+)
+cienaCesGmplsNotifEncapTunnelServiceDegradeState.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesGmplsNotifEncapTunnelServiceDegradeState.setStatus("current")
 _CienaCesGmplsDecapTunnelNotif_ObjectIdentity = ObjectIdentity
 cienaCesGmplsDecapTunnelNotif = _CienaCesGmplsDecapTunnelNotif_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 16)
@@ -8407,7 +8473,7 @@ cienaCesGmplsNotifDecapTunnelAisFaulted = _CienaCesGmplsNotifDecapTunnelAisFault
 )
 cienaCesGmplsNotifDecapTunnelAisFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
-    cienaCesGmplsNotifDecapTunnelAisFaulted.setStatus("obsolete")
+    cienaCesGmplsNotifDecapTunnelAisFaulted.setStatus("deprecated")
 _CienaCesGmplsNotifDecapTunnelFaultedNodeId_Type = IpAddress
 _CienaCesGmplsNotifDecapTunnelFaultedNodeId_Object = MibTableColumn
 cienaCesGmplsNotifDecapTunnelFaultedNodeId = _CienaCesGmplsNotifDecapTunnelFaultedNodeId_Object(
@@ -8435,6 +8501,24 @@ cienaCesGmplsNotifDecapTunnelOamFaulted = _CienaCesGmplsNotifDecapTunnelOamFault
 cienaCesGmplsNotifDecapTunnelOamFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     cienaCesGmplsNotifDecapTunnelOamFaulted.setStatus("current")
+_CienaCesGmplsNotifDecapTunnelAisFaultReason_Type = TunnelAisFaultReason
+_CienaCesGmplsNotifDecapTunnelAisFaultReason_Object = MibTableColumn
+cienaCesGmplsNotifDecapTunnelAisFaultReason = _CienaCesGmplsNotifDecapTunnelAisFaultReason_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 16, 1, 1, 10),
+    _CienaCesGmplsNotifDecapTunnelAisFaultReason_Type()
+)
+cienaCesGmplsNotifDecapTunnelAisFaultReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesGmplsNotifDecapTunnelAisFaultReason.setStatus("current")
+_CienaCesGmplsNotifDecapTunnelServiceDegradeState_Type = ServiceDegradeState
+_CienaCesGmplsNotifDecapTunnelServiceDegradeState_Object = MibTableColumn
+cienaCesGmplsNotifDecapTunnelServiceDegradeState = _CienaCesGmplsNotifDecapTunnelServiceDegradeState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 16, 1, 1, 11),
+    _CienaCesGmplsNotifDecapTunnelServiceDegradeState_Type()
+)
+cienaCesGmplsNotifDecapTunnelServiceDegradeState.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesGmplsNotifDecapTunnelServiceDegradeState.setStatus("current")
 _CienaCesGmplsTransitTunnelNotif_ObjectIdentity = ObjectIdentity
 cienaCesGmplsTransitTunnelNotif = _CienaCesGmplsTransitTunnelNotif_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 17)
@@ -8536,6 +8620,15 @@ cienaCesGmplsNotifTransitTunnelOamFaulted = _CienaCesGmplsNotifTransitTunnelOamF
 cienaCesGmplsNotifTransitTunnelOamFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     cienaCesGmplsNotifTransitTunnelOamFaulted.setStatus("current")
+_CienaCesGmplsNotifTransitTunnelServiceDegradeState_Type = ServiceDegradeState
+_CienaCesGmplsNotifTransitTunnelServiceDegradeState_Object = MibTableColumn
+cienaCesGmplsNotifTransitTunnelServiceDegradeState = _CienaCesGmplsNotifTransitTunnelServiceDegradeState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 17, 1, 1, 7),
+    _CienaCesGmplsNotifTransitTunnelServiceDegradeState_Type()
+)
+cienaCesGmplsNotifTransitTunnelServiceDegradeState.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesGmplsNotifTransitTunnelServiceDegradeState.setStatus("current")
 _CienaCesGmplsAssociatedTunnelNotif_ObjectIdentity = ObjectIdentity
 cienaCesGmplsAssociatedTunnelNotif = _CienaCesGmplsAssociatedTunnelNotif_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 18)
@@ -8636,7 +8729,7 @@ cienaCesGmplsNotifAssociatedTunnelAisFaulted = _CienaCesGmplsNotifAssociatedTunn
 )
 cienaCesGmplsNotifAssociatedTunnelAisFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
-    cienaCesGmplsNotifAssociatedTunnelAisFaulted.setStatus("obsolete")
+    cienaCesGmplsNotifAssociatedTunnelAisFaulted.setStatus("deprecated")
 _CienaCesGmplsNotifAssociatedTunnelFaultedNodeId_Type = IpAddress
 _CienaCesGmplsNotifAssociatedTunnelFaultedNodeId_Object = MibTableColumn
 cienaCesGmplsNotifAssociatedTunnelFaultedNodeId = _CienaCesGmplsNotifAssociatedTunnelFaultedNodeId_Object(
@@ -8664,6 +8757,15 @@ cienaCesGmplsNotifAssociatedTunnelOamFaulted = _CienaCesGmplsNotifAssociatedTunn
 cienaCesGmplsNotifAssociatedTunnelOamFaulted.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     cienaCesGmplsNotifAssociatedTunnelOamFaulted.setStatus("current")
+_CienaCesGmplsNotifAssociatedTunnelAisFaultReason_Type = TunnelAisFaultReason
+_CienaCesGmplsNotifAssociatedTunnelAisFaultReason_Object = MibTableColumn
+cienaCesGmplsNotifAssociatedTunnelAisFaultReason = _CienaCesGmplsNotifAssociatedTunnelAisFaultReason_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 18, 1, 1, 10),
+    _CienaCesGmplsNotifAssociatedTunnelAisFaultReason_Type()
+)
+cienaCesGmplsNotifAssociatedTunnelAisFaultReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesGmplsNotifAssociatedTunnelAisFaultReason.setStatus("current")
 _CienaCesGmplsEncapTunnelGrpNotif_ObjectIdentity = ObjectIdentity
 cienaCesGmplsEncapTunnelGrpNotif = _CienaCesGmplsEncapTunnelGrpNotif_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 19)
@@ -8913,6 +9015,1226 @@ cienaCesGmplsNotifTunnelErrorMsg = _CienaCesGmplsNotifTunnelErrorMsg_Object(
 cienaCesGmplsNotifTunnelErrorMsg.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     cienaCesGmplsNotifTunnelErrorMsg.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelTable_Object = MibTable
+cienaCesGmplsDynamicIngressCoroutedExtTunnelTable = _CienaCesGmplsDynamicIngressCoroutedExtTunnelTable_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22)
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelTable.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelEntry_Object = MibTableRow
+cienaCesGmplsDynamicIngressCoroutedExtTunnelEntry = _CienaCesGmplsDynamicIngressCoroutedExtTunnelEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1)
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelEntry.setIndexNames(
+    (0, "CIENA-CES-MPLS-MIB", "cienaCesGmplsDynamicIngressCoroutedExtTunnelLspId"),
+    (0, "CIENA-CES-MPLS-MIB", "cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex"),
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelEntry.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelLspId_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelLspId_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelLspId = _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 1),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspId_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelLspId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelLspId.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelIndex_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelIndex_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex = _CienaCesGmplsDynamicIngressCoroutedExtTunnelIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 2),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelIndex_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelName_Type(DisplayString):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelName_Type.__name__ = "DisplayString"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelName_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelName = _CienaCesGmplsDynamicIngressCoroutedExtTunnelName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 3),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelName_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelName.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp_Type = IpAddress
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp = _CienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 4),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr_Type = IpAddress
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr = _CienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 5),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr_Type = IpAddress
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr = _CienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 6),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState_Type = CienaGlobalState
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 7),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelOperState_Type = CienaGlobalState
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelOperState_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelOperState = _CienaCesGmplsDynamicIngressCoroutedExtTunnelOperState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 8),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelOperState_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelOperState.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1048575),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel = _CienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 9),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1048575),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel = _CienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 10),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("primary", 1),
+          ("backup", 2))
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole = _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 11),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName_Type = DisplayString
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName = _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 12),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("standby", 0),
+          ("active", 1))
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState = _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 13),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy_Type(TTLPolicy):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy based on TTLPolicy"""
+    defaultValue = 1
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy_Type.__name__ = "TTLPolicy"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy = _CienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 14),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL based on Unsigned32"""
+    defaultValue = 255
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 255),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL = _CienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 15),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex = _CienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 16),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelReversion_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelReversion based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("on", 1),
+          ("off", 2))
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReversion_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReversion_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReversion = _CienaCesGmplsDynamicIngressCoroutedExtTunnelReversion_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 17),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelReversion_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReversion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelReversion.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout = _CienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 18),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout.setUnits("seconds")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex = _CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 19),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName_Type = DisplayString
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName = _CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 20),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("on", 1),
+          ("off", 2))
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute = _CienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 21),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("link-protect", 2),
+          ("node-protect", 3))
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute = _CienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 22),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority = _CienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 23),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority = _CienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 24),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex = _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 25),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathName_Type = DisplayString
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathName_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathName = _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 26),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathName_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelPathName.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile_Type = DisplayString
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile = _CienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 27),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer_Type = RowPointer
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer = _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 28),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring_Type = CienaGlobalState
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring = _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 29),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName_Type = DisplayString
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName = _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 30),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName_Type = DisplayString
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName = _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 31),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted = _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 32),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex = _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 33),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 34),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization_Type = MplsGlobalState
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization = _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 35),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval based on Unsigned32"""
+    defaultValue = 30
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(5, 60),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval = _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 36),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType_Type(PathDisjointType):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType based on PathDisjointType"""
+    defaultValue = 4
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType_Type.__name__ = "PathDisjointType"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType = _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 37),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode_Type(PathDisjointMode):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode based on PathDisjointMode"""
+    defaultValue = 2
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode_Type.__name__ = "PathDisjointMode"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode = _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 38),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable_Type = MplsGlobalState
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 39),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval based on Unsigned32"""
+    defaultValue = 5
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(5, 60),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 40),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval.setUnits("minutes")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr_Type(AutoSizeFailHdlr):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr based on AutoSizeFailHdlr"""
+    defaultValue = 2
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr_Type.__name__ = "AutoSizeFailHdlr"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 41),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState_Type = AutoSizeState
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 42),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode_Type(AutoSizeMode):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode based on AutoSizeMode"""
+    defaultValue = 2
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode_Type.__name__ = "AutoSizeMode"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode = _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 43),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode.setStatus("current")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth_Type(MplsBitRate):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth based on MplsBitRate"""
+    defaultValue = 0
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth_Type.__name__ = "MplsBitRate"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth = _CienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 44),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth.setUnits("kbps")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth_Type(MplsBitRate):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth based on MplsBitRate"""
+    defaultValue = 1000000000
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth_Type.__name__ = "MplsBitRate"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth = _CienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 45),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth.setUnits("kbps")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth_Type(MplsBitRate):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth based on MplsBitRate"""
+    defaultValue = 0
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth_Type.__name__ = "MplsBitRate"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth = _CienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 46),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth.setUnits("kbps")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth_Type = MplsBitRate
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth = _CienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 47),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth.setUnits("kbps")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth_Type = MplsBitRate
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth = _CienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 48),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth.setUnits("kbps")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth_Type = MplsBitRate
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth = _CienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 49),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth.setUnits("kbps")
+
+
+class _CienaCesGmplsDynamicIngressCoroutedExtTunnelClassType_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicIngressCoroutedExtTunnelClassType based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelClassType_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelClassType_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelClassType = _CienaCesGmplsDynamicIngressCoroutedExtTunnelClassType_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 50),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelClassType_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelClassType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelClassType.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll = _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 51),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny = _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 52),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny = _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 53),
+    _CienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny.setStatus("current")
+_CienaCesGmplsDynamicIngressCoroutedArHopIndex_Type = Unsigned32
+_CienaCesGmplsDynamicIngressCoroutedArHopIndex_Object = MibTableColumn
+cienaCesGmplsDynamicIngressCoroutedArHopIndex = _CienaCesGmplsDynamicIngressCoroutedArHopIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 22, 1, 54),
+    _CienaCesGmplsDynamicIngressCoroutedArHopIndex_Type()
+)
+cienaCesGmplsDynamicIngressCoroutedArHopIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicIngressCoroutedArHopIndex.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelTable_Object = MibTable
+cienaCesGmplsDynamicEgressCoroutedExtTunnelTable = _CienaCesGmplsDynamicEgressCoroutedExtTunnelTable_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23)
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelTable.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelEntry_Object = MibTableRow
+cienaCesGmplsDynamicEgressCoroutedExtTunnelEntry = _CienaCesGmplsDynamicEgressCoroutedExtTunnelEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1)
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelEntry.setIndexNames(
+    (0, "CIENA-CES-MPLS-MIB", "cienaCesGmplsDynamicEgressCoroutedExtTunnelLspId"),
+    (0, "CIENA-CES-MPLS-MIB", "cienaCesGmplsDynamicEgressCoroutedExtTunnelIndex"),
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelEntry.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelLspId_Type = Unsigned32
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelLspId_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelLspId = _CienaCesGmplsDynamicEgressCoroutedExtTunnelLspId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 1),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelLspId_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelLspId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelLspId.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelIndex_Type = Unsigned32
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelIndex_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelIndex = _CienaCesGmplsDynamicEgressCoroutedExtTunnelIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 2),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelIndex_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelIndex.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelName_Type(DisplayString):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelName_Type.__name__ = "DisplayString"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelName_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelName = _CienaCesGmplsDynamicEgressCoroutedExtTunnelName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 3),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelName_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelName.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState_Type(CienaGlobalState):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState based on CienaGlobalState"""
+    defaultValue = 1
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState_Type.__name__ = "CienaGlobalState"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState = _CienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 4),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelOperState_Type = CienaGlobalState
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelOperState_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelOperState = _CienaCesGmplsDynamicEgressCoroutedExtTunnelOperState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 5),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelOperState_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelOperState.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtLspId_Type = Unsigned32
+_CienaCesGmplsDynamicEgressCoroutedExtLspId_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtLspId = _CienaCesGmplsDynamicEgressCoroutedExtLspId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 6),
+    _CienaCesGmplsDynamicEgressCoroutedExtLspId_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtLspId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtLspId.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr_Type = IpAddress
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr = _CienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 7),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr_Type = IpAddress
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr = _CienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 8),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr_Type = IpAddress
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr = _CienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 9),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel_Type = Unsigned32
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel = _CienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 10),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1048575),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel = _CienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 11),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("primary", 1),
+          ("backup", 2))
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole = _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 12),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName_Type = DisplayString
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName = _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 13),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("standby", 0),
+          ("active", 1))
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState = _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 14),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex_Type = Unsigned32
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex = _CienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 15),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelReversion_Type(Integer32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelReversion based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("on", 1),
+          ("off", 2))
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelReversion_Type.__name__ = "Integer32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelReversion_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelReversion = _CienaCesGmplsDynamicEgressCoroutedExtTunnelReversion_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 16),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelReversion_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelReversion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelReversion.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout = _CienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 17),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout.setStatus("current")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout.setUnits("seconds")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex = _CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 18),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName_Type = DisplayString
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName = _CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 19),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring_Type = CienaGlobalState
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring = _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 20),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName_Type = DisplayString
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName = _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 21),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName.setStatus("current")
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName_Type = DisplayString
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName = _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 22),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted = _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 23),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex = _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 24),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy_Type(TTLPolicy):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy based on TTLPolicy"""
+    defaultValue = 1
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy_Type.__name__ = "TTLPolicy"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy = _CienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 25),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy.setStatus("current")
+
+
+class _CienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL_Type(Unsigned32):
+    """Custom type cienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL based on Unsigned32"""
+    defaultValue = 255
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 255),
+    )
+
+
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL_Type.__name__ = "Unsigned32"
+_CienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL_Object = MibTableColumn
+cienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL = _CienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 2, 23, 1, 26),
+    _CienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL_Type()
+)
+cienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL.setStatus("current")
 _CienaCesMplsGlobal_ObjectIdentity = ObjectIdentity
 cienaCesMplsGlobal = _CienaCesMplsGlobal_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 3)
@@ -9906,13 +11228,15 @@ class _CienaCesMplsPwMode_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("mesh", 1),
           ("spoke", 2),
-          ("switching", 3))
+          ("switching", 3),
+          ("gateway", 4))
     )
 
 
@@ -11140,6 +12464,15 @@ cienaCesMplsPwNotifActPwPeerIpAddr = _CienaCesMplsPwNotifActPwPeerIpAddr_Object(
 cienaCesMplsPwNotifActPwPeerIpAddr.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     cienaCesMplsPwNotifActPwPeerIpAddr.setStatus("current")
+_CienaCesMplsPwGatewayVsState_Type = DisplayString
+_CienaCesMplsPwGatewayVsState_Object = MibTableColumn
+cienaCesMplsPwGatewayVsState = _CienaCesMplsPwGatewayVsState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 4, 4, 1, 1, 12),
+    _CienaCesMplsPwGatewayVsState_Type()
+)
+cienaCesMplsPwGatewayVsState.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    cienaCesMplsPwGatewayVsState.setStatus("current")
 _CienaCesMplsPWTrafficStatsTable_Object = MibTable
 cienaCesMplsPWTrafficStatsTable = _CienaCesMplsPWTrafficStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 18, 1, 4, 5)
@@ -12342,11 +13675,12 @@ cienaCesGmplsEncapCoroutedTunnelAisFaultStateChgTrap.setObjects(
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelName"),
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelAisFaulted"),
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelFaultedNodeId"),
-        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelFarEndLerId"))
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelFarEndLerId"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelAisFaultReason"))
 )
 if mibBuilder.loadTexts:
     cienaCesGmplsEncapCoroutedTunnelAisFaultStateChgTrap.setStatus(
-        "obsolete"
+        "deprecated"
     )
 
 cienaCesGmplsDecapCoroutedTunnelAisFaultStateChgTrap = NotificationType(
@@ -12360,11 +13694,12 @@ cienaCesGmplsDecapCoroutedTunnelAisFaultStateChgTrap.setObjects(
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelName"),
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelAisFaulted"),
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelFaultedNodeId"),
-        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelFarEndLerId"))
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelFarEndLerId"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelAisFaultReason"))
 )
 if mibBuilder.loadTexts:
     cienaCesGmplsDecapCoroutedTunnelAisFaultStateChgTrap.setStatus(
-        "obsolete"
+        "deprecated"
     )
 
 cienaCesGmplsAssociatedTunnelAisFaultStateChgTrap = NotificationType(
@@ -12378,11 +13713,12 @@ cienaCesGmplsAssociatedTunnelAisFaultStateChgTrap.setObjects(
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifAssociatedTunnelName"),
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifAssociatedTunnelAisFaulted"),
         ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifAssociatedTunnelFaultedNodeId"),
-        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifAssociatedTunnelFarEndLerId"))
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifAssociatedTunnelFarEndLerId"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifAssociatedTunnelAisFaultReason"))
 )
 if mibBuilder.loadTexts:
     cienaCesGmplsAssociatedTunnelAisFaultStateChgTrap.setStatus(
-        "obsolete"
+        "deprecated"
     )
 
 cienaCesGmplsTunnelAisFaultErrorTrap = NotificationType(
@@ -12438,6 +13774,65 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+cienaCesGmplsEncapCoroutedServiceDegradeChgTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 17, 1, 16)
+)
+cienaCesGmplsEncapCoroutedServiceDegradeChgTrap.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelIndex"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelType"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelName"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelAdminState"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelOperState"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelOamFaulted"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelFaultedNodeId"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifEncapTunnelServiceDegradeState"))
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsEncapCoroutedServiceDegradeChgTrap.setStatus(
+        "current"
+    )
+
+cienaCesGmplsDecapCoroutedServiceDegradeChgTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 17, 1, 17)
+)
+cienaCesGmplsDecapCoroutedServiceDegradeChgTrap.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelIndex"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelType"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelName"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelAdminState"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelOperState"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelOamFaulted"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifdecapTunnelFaultedNodeId"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifDecapTunnelServiceDegradeState"))
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsDecapCoroutedServiceDegradeChgTrap.setStatus(
+        "current"
+    )
+
+cienaCesGmplsTransitCoroutedServiceDegradeChgTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 17, 1, 18)
+)
+cienaCesGmplsTransitCoroutedServiceDegradeChgTrap.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelIndex"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelType"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelName"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelAdminState"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelOperState"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelOamFaulted"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesGmplsNotifTransitTunnelServiceDegradeState"))
+)
+if mibBuilder.loadTexts:
+    cienaCesGmplsTransitCoroutedServiceDegradeChgTrap.setStatus(
+        "current"
+    )
+
 cienaCesMplsPwDown = NotificationType(
     (1, 3, 6, 1, 4, 1, 1271, 2, 2, 17, 2, 1)
 )
@@ -12489,6 +13884,36 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+cienaCesMplsGatewayVsConfigured = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 17, 2, 4)
+)
+cienaCesMplsGatewayVsConfigured.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesMplsPwVsIndex"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesMplsPwVsName"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesMplsPwGatewayVsState"))
+)
+if mibBuilder.loadTexts:
+    cienaCesMplsGatewayVsConfigured.setStatus(
+        "current"
+    )
+
+cienaCesMplsGatewayVsDeconfigured = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 17, 2, 5)
+)
+cienaCesMplsGatewayVsDeconfigured.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesMplsPwVsIndex"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesMplsPwVsName"),
+        ("CIENA-CES-MPLS-MIB", "cienaCesMplsPwGatewayVsState"))
+)
+if mibBuilder.loadTexts:
+    cienaCesMplsGatewayVsDeconfigured.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -12515,6 +13940,7 @@ mibBuilder.exportSymbols(
        "AttachGroupType": AttachGroupType,
        "TunnelType": TunnelType,
        "TunnelAisFault": TunnelAisFault,
+       "TunnelAisFaultReason": TunnelAisFaultReason,
        "TunnelOamFault": TunnelOamFault,
        "AutoSizeFailHdlr": AutoSizeFailHdlr,
        "AutoSizeState": AutoSizeState,
@@ -12525,6 +13951,7 @@ mibBuilder.exportSymbols(
        "SRLGState": SRLGState,
        "TEMode": TEMode,
        "MplsGlobalState": MplsGlobalState,
+       "ServiceDegradeState": ServiceDegradeState,
        "cienaCesMplsMIB": cienaCesMplsMIB,
        "cienaCesMplsMIBObjects": cienaCesMplsMIBObjects,
        "cienaCesMpls": cienaCesMpls,
@@ -12835,6 +14262,7 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsDynamicIngressUniDirTunnelPathName": cienaCesGmplsDynamicIngressUniDirTunnelPathName,
        "cienaCesGmplsDynamicIngressUniDirTunnelBandwidthProfile": cienaCesGmplsDynamicIngressUniDirTunnelBandwidthProfile,
        "cienaCesGmplsDynamicIngressUniDirTunnelResourcePointer": cienaCesGmplsDynamicIngressUniDirTunnelResourcePointer,
+       "cienaCesGmplsDynamicIngressUniDirArHopIndex": cienaCesGmplsDynamicIngressUniDirArHopIndex,
        "cienaCesGmplsDynamicIngressCoroutedTunnelTable": cienaCesGmplsDynamicIngressCoroutedTunnelTable,
        "cienaCesGmplsDynamicIngressCoroutedTunnelEntry": cienaCesGmplsDynamicIngressCoroutedTunnelEntry,
        "cienaCesGmplsDynamicIngressCoroutedTunnelIndex": cienaCesGmplsDynamicIngressCoroutedTunnelIndex,
@@ -13116,6 +14544,8 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsNotifEncapTunnelOperationalBw": cienaCesGmplsNotifEncapTunnelOperationalBw,
        "cienaCesGmplsNotifEncapTunnelMbbParentApp": cienaCesGmplsNotifEncapTunnelMbbParentApp,
        "cienaCesGmplsNotifEncapTunnelOamFaulted": cienaCesGmplsNotifEncapTunnelOamFaulted,
+       "cienaCesGmplsNotifEncapTunnelAisFaultReason": cienaCesGmplsNotifEncapTunnelAisFaultReason,
+       "cienaCesGmplsNotifEncapTunnelServiceDegradeState": cienaCesGmplsNotifEncapTunnelServiceDegradeState,
        "cienaCesGmplsDecapTunnelNotif": cienaCesGmplsDecapTunnelNotif,
        "cienaCesGmplsNotifDecapTunnelTable": cienaCesGmplsNotifDecapTunnelTable,
        "cienaCesGmplsNotifDecapTunnelEntry": cienaCesGmplsNotifDecapTunnelEntry,
@@ -13128,6 +14558,8 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsNotifDecapTunnelFaultedNodeId": cienaCesGmplsNotifDecapTunnelFaultedNodeId,
        "cienaCesGmplsNotifDecapTunnelFarEndLerId": cienaCesGmplsNotifDecapTunnelFarEndLerId,
        "cienaCesGmplsNotifDecapTunnelOamFaulted": cienaCesGmplsNotifDecapTunnelOamFaulted,
+       "cienaCesGmplsNotifDecapTunnelAisFaultReason": cienaCesGmplsNotifDecapTunnelAisFaultReason,
+       "cienaCesGmplsNotifDecapTunnelServiceDegradeState": cienaCesGmplsNotifDecapTunnelServiceDegradeState,
        "cienaCesGmplsTransitTunnelNotif": cienaCesGmplsTransitTunnelNotif,
        "cienaCesGmplsNotifTransitTunnelTable": cienaCesGmplsNotifTransitTunnelTable,
        "cienaCesGmplsNotifTransitTunnelEntry": cienaCesGmplsNotifTransitTunnelEntry,
@@ -13137,6 +14569,7 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsNotifTransitTunnelAdminState": cienaCesGmplsNotifTransitTunnelAdminState,
        "cienaCesGmplsNotifTransitTunnelOperState": cienaCesGmplsNotifTransitTunnelOperState,
        "cienaCesGmplsNotifTransitTunnelOamFaulted": cienaCesGmplsNotifTransitTunnelOamFaulted,
+       "cienaCesGmplsNotifTransitTunnelServiceDegradeState": cienaCesGmplsNotifTransitTunnelServiceDegradeState,
        "cienaCesGmplsAssociatedTunnelNotif": cienaCesGmplsAssociatedTunnelNotif,
        "cienaCesGmplsNotifAssociatedTunnelTable": cienaCesGmplsNotifAssociatedTunnelTable,
        "cienaCesGmplsNotifAssociatedTunnelEntry": cienaCesGmplsNotifAssociatedTunnelEntry,
@@ -13149,6 +14582,7 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsNotifAssociatedTunnelFaultedNodeId": cienaCesGmplsNotifAssociatedTunnelFaultedNodeId,
        "cienaCesGmplsNotifAssociatedTunnelFarEndLerId": cienaCesGmplsNotifAssociatedTunnelFarEndLerId,
        "cienaCesGmplsNotifAssociatedTunnelOamFaulted": cienaCesGmplsNotifAssociatedTunnelOamFaulted,
+       "cienaCesGmplsNotifAssociatedTunnelAisFaultReason": cienaCesGmplsNotifAssociatedTunnelAisFaultReason,
        "cienaCesGmplsEncapTunnelGrpNotif": cienaCesGmplsEncapTunnelGrpNotif,
        "cienaCesGmplsNotifEncapTunnelGrpTable": cienaCesGmplsNotifEncapTunnelGrpTable,
        "cienaCesGmplsNotifEncapTunnelGrpEntry": cienaCesGmplsNotifEncapTunnelGrpEntry,
@@ -13170,6 +14604,90 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsNotifTunnelAisFaultErrorEntry": cienaCesGmplsNotifTunnelAisFaultErrorEntry,
        "cienaCesGmplsNotifTunnelDecapLabel": cienaCesGmplsNotifTunnelDecapLabel,
        "cienaCesGmplsNotifTunnelErrorMsg": cienaCesGmplsNotifTunnelErrorMsg,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelTable": cienaCesGmplsDynamicIngressCoroutedExtTunnelTable,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelEntry": cienaCesGmplsDynamicIngressCoroutedExtTunnelEntry,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelLspId": cienaCesGmplsDynamicIngressCoroutedExtTunnelLspId,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex": cienaCesGmplsDynamicIngressCoroutedExtTunnelIndex,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelName": cienaCesGmplsDynamicIngressCoroutedExtTunnelName,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp": cienaCesGmplsDynamicIngressCoroutedExtTunnelNextHopIp,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr": cienaCesGmplsDynamicIngressCoroutedExtTunnelSrcIpAddr,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr": cienaCesGmplsDynamicIngressCoroutedExtTunnelDestIpAddr,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState": cienaCesGmplsDynamicIngressCoroutedExtTunnelAdminState,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelOperState": cienaCesGmplsDynamicIngressCoroutedExtTunnelOperState,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel": cienaCesGmplsDynamicIngressCoroutedExtTunnelForwardOutLabel,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel": cienaCesGmplsDynamicIngressCoroutedExtTunnelReverseInLabel,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole": cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionRole,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName": cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionPartName,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState": cienaCesGmplsDynamicIngressCoroutedExtTunnelProtectionState,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy": cienaCesGmplsDynamicIngressCoroutedExtTunnelTTLPolicy,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL": cienaCesGmplsDynamicIngressCoroutedExtTunnelFixedTTL,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex": cienaCesGmplsDynamicIngressCoroutedExtTunnelGrpIndex,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelReversion": cienaCesGmplsDynamicIngressCoroutedExtTunnelReversion,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout": cienaCesGmplsDynamicIngressCoroutedExtTunnelReversionTimeout,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex": cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileIndex,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName": cienaCesGmplsDynamicIngressCoroutedExtTunnelCosProfileName,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute": cienaCesGmplsDynamicIngressCoroutedExtTunnelRecordRoute,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute": cienaCesGmplsDynamicIngressCoroutedExtTunnelFastRoute,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority": cienaCesGmplsDynamicIngressCoroutedExtTunnelSetupPriority,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority": cienaCesGmplsDynamicIngressCoroutedExtTunnelHoldPriority,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex": cienaCesGmplsDynamicIngressCoroutedExtTunnelPathIndex,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelPathName": cienaCesGmplsDynamicIngressCoroutedExtTunnelPathName,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile": cienaCesGmplsDynamicIngressCoroutedExtTunnelBandwidthProfile,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer": cienaCesGmplsDynamicIngressCoroutedExtTunnelResourcePointer,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring": cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdMonitoring,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName": cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileName,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName": cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionName,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted": cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdSessionFaulted,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex": cienaCesGmplsDynamicIngressCoroutedExtTunnelBfdProfileIndex,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable": cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoBackupEnable,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization": cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReoptimization,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval": cienaCesGmplsDynamicIngressCoroutedExtTunnelLspReOptTimeInterval,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType": cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointType,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode": cienaCesGmplsDynamicIngressCoroutedExtTunnelPathDisjointMode,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable": cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeEnable,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval": cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeInterval,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr": cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeFailureHdlr,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState": cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeState,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode": cienaCesGmplsDynamicIngressCoroutedExtTunnelAutoSizeMode,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth": cienaCesGmplsDynamicIngressCoroutedExtTunnelMinBandwidth,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth": cienaCesGmplsDynamicIngressCoroutedExtTunnelMaxBandwidth,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth": cienaCesGmplsDynamicIngressCoroutedExtTunnelIncBandwidth,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth": cienaCesGmplsDynamicIngressCoroutedExtTunnelCurBandwidth,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth": cienaCesGmplsDynamicIngressCoroutedExtTunnelReqBandwidth,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth": cienaCesGmplsDynamicIngressCoroutedExtTunnelUsedBandwidth,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelClassType": cienaCesGmplsDynamicIngressCoroutedExtTunnelClassType,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll": cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAll,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny": cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceIncludeAny,
+       "cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny": cienaCesGmplsDynamicIngressCoroutedExtTunnelResourceExcludeAny,
+       "cienaCesGmplsDynamicIngressCoroutedArHopIndex": cienaCesGmplsDynamicIngressCoroutedArHopIndex,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelTable": cienaCesGmplsDynamicEgressCoroutedExtTunnelTable,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelEntry": cienaCesGmplsDynamicEgressCoroutedExtTunnelEntry,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelLspId": cienaCesGmplsDynamicEgressCoroutedExtTunnelLspId,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelIndex": cienaCesGmplsDynamicEgressCoroutedExtTunnelIndex,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelName": cienaCesGmplsDynamicEgressCoroutedExtTunnelName,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState": cienaCesGmplsDynamicEgressCoroutedExtTunnelAdminState,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelOperState": cienaCesGmplsDynamicEgressCoroutedExtTunnelOperState,
+       "cienaCesGmplsDynamicEgressCoroutedExtLspId": cienaCesGmplsDynamicEgressCoroutedExtLspId,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr": cienaCesGmplsDynamicEgressCoroutedExtTunnelPrevHopIpAddr,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr": cienaCesGmplsDynamicEgressCoroutedExtTunnelSourceIpAddr,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr": cienaCesGmplsDynamicEgressCoroutedExtTunnelDestIpAddr,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel": cienaCesGmplsDynamicEgressCoroutedExtTunnelForwardInLabel,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel": cienaCesGmplsDynamicEgressCoroutedExtTunnelReverseOutLabel,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole": cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionRole,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName": cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionPartName,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState": cienaCesGmplsDynamicEgressCoroutedExtTunnelProtectionState,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex": cienaCesGmplsDynamicEgressCoroutedExtTunnelGrpIndex,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelReversion": cienaCesGmplsDynamicEgressCoroutedExtTunnelReversion,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout": cienaCesGmplsDynamicEgressCoroutedExtTunnelReversionTimeout,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex": cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileIndex,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName": cienaCesGmplsDynamicEgressCoroutedExtTunnelCosProfileName,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring": cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdMonitoring,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName": cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileName,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName": cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionName,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted": cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdSessionFaulted,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex": cienaCesGmplsDynamicEgressCoroutedExtTunnelBfdProfileIndex,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy": cienaCesGmplsDynamicEgressCoroutedExtTunnelTTLPolicy,
+       "cienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL": cienaCesGmplsDynamicEgressCoroutedExtTunnelFixedTTL,
        "cienaCesMplsGlobal": cienaCesMplsGlobal,
        "cienaCesMplsAttrs": cienaCesMplsAttrs,
        "cienaCesMplsGlobalStaticAdminLabelRangeStart": cienaCesMplsGlobalStaticAdminLabelRangeStart,
@@ -13311,6 +14829,7 @@ mibBuilder.exportSymbols(
        "cienaCesMplsPwNotifActPwId": cienaCesMplsPwNotifActPwId,
        "cienaCesMplsPwNotifActPwName": cienaCesMplsPwNotifActPwName,
        "cienaCesMplsPwNotifActPwPeerIpAddr": cienaCesMplsPwNotifActPwPeerIpAddr,
+       "cienaCesMplsPwGatewayVsState": cienaCesMplsPwGatewayVsState,
        "cienaCesMplsPWTrafficStatsTable": cienaCesMplsPWTrafficStatsTable,
        "cienaCesMplsPWTrafficStatsEntry": cienaCesMplsPWTrafficStatsEntry,
        "cienaCesMplsPWTrafficStatsPWIndex": cienaCesMplsPWTrafficStatsPWIndex,
@@ -13394,8 +14913,13 @@ mibBuilder.exportSymbols(
        "cienaCesGmplsTunnelAisFaultErrorTrap": cienaCesGmplsTunnelAisFaultErrorTrap,
        "cienaCesGmplsEncapTunnelResizeResultTrap": cienaCesGmplsEncapTunnelResizeResultTrap,
        "cienaCesGmplsEncapTunnelMbbResultTrap": cienaCesGmplsEncapTunnelMbbResultTrap,
+       "cienaCesGmplsEncapCoroutedServiceDegradeChgTrap": cienaCesGmplsEncapCoroutedServiceDegradeChgTrap,
+       "cienaCesGmplsDecapCoroutedServiceDegradeChgTrap": cienaCesGmplsDecapCoroutedServiceDegradeChgTrap,
+       "cienaCesGmplsTransitCoroutedServiceDegradeChgTrap": cienaCesGmplsTransitCoroutedServiceDegradeChgTrap,
        "cienaCesMplsPwMIBNotifications": cienaCesMplsPwMIBNotifications,
        "cienaCesMplsPwDown": cienaCesMplsPwDown,
        "cienaCesMplsPwUp": cienaCesMplsPwUp,
-       "cienaCesMplsPwBundleActivePwChange": cienaCesMplsPwBundleActivePwChange}
+       "cienaCesMplsPwBundleActivePwChange": cienaCesMplsPwBundleActivePwChange,
+       "cienaCesMplsGatewayVsConfigured": cienaCesMplsGatewayVsConfigured,
+       "cienaCesMplsGatewayVsDeconfigured": cienaCesMplsGatewayVsDeconfigured}
 )

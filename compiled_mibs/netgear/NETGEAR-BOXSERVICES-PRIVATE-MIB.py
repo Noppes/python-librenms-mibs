@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\netgear\NETGEAR-BOXSERVICES-PRIVATE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:11:47 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -108,7 +105,8 @@ fastPathBoxServices = ModuleIdentity(
 if mibBuilder.loadTexts:
     fastPathBoxServices.setRevisions(
         ("2011-01-26 00:00",
-         "2008-02-22 00:00")
+         "2008-02-22 00:00",
+         "2019-12-23 00:00")
     )
 
 
@@ -392,9 +390,8 @@ class _BoxServicesFanSpeed_Type(OctetString):
     """Custom type boxServicesFanSpeed based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(13, 13),
+        ValueSizeConstraint(0, 13),
     )
-    fixed_length = 13
 
 
 _BoxServicesFanSpeed_Type.__name__ = "OctetString"
@@ -412,9 +409,8 @@ class _BoxServicesFanDutyLevel_Type(OctetString):
     """Custom type boxServicesFanDutyLevel based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(13, 13),
+        ValueSizeConstraint(0, 13),
     )
-    fixed_length = 13
 
 
 _BoxServicesFanDutyLevel_Type.__name__ = "OctetString"
@@ -695,6 +691,112 @@ boxServicesTempUnitTemperature = _BoxServicesTempUnitTemperature_Object(
 boxServicesTempUnitTemperature.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     boxServicesTempUnitTemperature.setStatus("current")
+_BoxServicesFiberPortsOpticsTable_Object = MibTable
+boxServicesFiberPortsOpticsTable = _BoxServicesFiberPortsOpticsTable_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16)
+)
+if mibBuilder.loadTexts:
+    boxServicesFiberPortsOpticsTable.setStatus("current")
+_BoxServicesFiberPortsOpticsEntry_Object = MibTableRow
+boxServicesFiberPortsOpticsEntry = _BoxServicesFiberPortsOpticsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1)
+)
+boxServicesFiberPortsOpticsEntry.setIndexNames(
+    (0, "NETGEAR-BOXSERVICES-PRIVATE-MIB", "boxServicesFiberPortIndex"),
+)
+if mibBuilder.loadTexts:
+    boxServicesFiberPortsOpticsEntry.setStatus("current")
+_BoxServicesFiberPortIndex_Type = Unsigned32
+_BoxServicesFiberPortIndex_Object = MibTableColumn
+boxServicesFiberPortIndex = _BoxServicesFiberPortIndex_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 1),
+    _BoxServicesFiberPortIndex_Type()
+)
+boxServicesFiberPortIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortIndex.setStatus("current")
+_BoxServicesFiberPortOpticsTemperature_Type = DisplayString
+_BoxServicesFiberPortOpticsTemperature_Object = MibTableColumn
+boxServicesFiberPortOpticsTemperature = _BoxServicesFiberPortOpticsTemperature_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 2),
+    _BoxServicesFiberPortOpticsTemperature_Type()
+)
+boxServicesFiberPortOpticsTemperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsTemperature.setStatus("current")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsTemperature.setUnits("DEGREES")
+_BoxServicesFiberPortOpticsVoltage_Type = DisplayString
+_BoxServicesFiberPortOpticsVoltage_Object = MibTableColumn
+boxServicesFiberPortOpticsVoltage = _BoxServicesFiberPortOpticsVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 3),
+    _BoxServicesFiberPortOpticsVoltage_Type()
+)
+boxServicesFiberPortOpticsVoltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsVoltage.setStatus("current")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsVoltage.setUnits("Volts")
+_BoxServicesFiberPortOpticsCurrent_Type = DisplayString
+_BoxServicesFiberPortOpticsCurrent_Object = MibTableColumn
+boxServicesFiberPortOpticsCurrent = _BoxServicesFiberPortOpticsCurrent_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 4),
+    _BoxServicesFiberPortOpticsCurrent_Type()
+)
+boxServicesFiberPortOpticsCurrent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsCurrent.setStatus("current")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsCurrent.setUnits("Milliamps")
+_BoxServicesFiberPortOpticsPowerOut_Type = DisplayString
+_BoxServicesFiberPortOpticsPowerOut_Object = MibTableColumn
+boxServicesFiberPortOpticsPowerOut = _BoxServicesFiberPortOpticsPowerOut_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 5),
+    _BoxServicesFiberPortOpticsPowerOut_Type()
+)
+boxServicesFiberPortOpticsPowerOut.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsPowerOut.setStatus("current")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsPowerOut.setUnits("dBm")
+_BoxServicesFiberPortOpticsPowerIn_Type = DisplayString
+_BoxServicesFiberPortOpticsPowerIn_Object = MibTableColumn
+boxServicesFiberPortOpticsPowerIn = _BoxServicesFiberPortOpticsPowerIn_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 6),
+    _BoxServicesFiberPortOpticsPowerIn_Type()
+)
+boxServicesFiberPortOpticsPowerIn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsPowerIn.setStatus("current")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsPowerIn.setUnits("dBm")
+_BoxServicesFiberPortOpticsTxFault_Type = DisplayString
+_BoxServicesFiberPortOpticsTxFault_Object = MibTableColumn
+boxServicesFiberPortOpticsTxFault = _BoxServicesFiberPortOpticsTxFault_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 7),
+    _BoxServicesFiberPortOpticsTxFault_Type()
+)
+boxServicesFiberPortOpticsTxFault.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsTxFault.setStatus("current")
+_BoxServicesFiberPortOpticsLos_Type = DisplayString
+_BoxServicesFiberPortOpticsLos_Object = MibTableColumn
+boxServicesFiberPortOpticsLos = _BoxServicesFiberPortOpticsLos_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 8),
+    _BoxServicesFiberPortOpticsLos_Type()
+)
+boxServicesFiberPortOpticsLos.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsLos.setStatus("current")
+_BoxServicesFiberPortOpticsFaultStatus_Type = DisplayString
+_BoxServicesFiberPortOpticsFaultStatus_Object = MibTableColumn
+boxServicesFiberPortOpticsFaultStatus = _BoxServicesFiberPortOpticsFaultStatus_Object(
+    (1, 3, 6, 1, 4, 1, 4526, 10, 43, 1, 16, 1, 9),
+    _BoxServicesFiberPortOpticsFaultStatus_Type()
+)
+boxServicesFiberPortOpticsFaultStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    boxServicesFiberPortOpticsFaultStatus.setStatus("current")
 _BoxServicesNotificationsGroup_ObjectIdentity = ObjectIdentity
 boxServicesNotificationsGroup = _BoxServicesNotificationsGroup_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 4526, 10, 43, 2)
@@ -955,6 +1057,17 @@ mibBuilder.exportSymbols(
        "boxServicesTempUnitIndex": boxServicesTempUnitIndex,
        "boxServicesTempUnitState": boxServicesTempUnitState,
        "boxServicesTempUnitTemperature": boxServicesTempUnitTemperature,
+       "boxServicesFiberPortsOpticsTable": boxServicesFiberPortsOpticsTable,
+       "boxServicesFiberPortsOpticsEntry": boxServicesFiberPortsOpticsEntry,
+       "boxServicesFiberPortIndex": boxServicesFiberPortIndex,
+       "boxServicesFiberPortOpticsTemperature": boxServicesFiberPortOpticsTemperature,
+       "boxServicesFiberPortOpticsVoltage": boxServicesFiberPortOpticsVoltage,
+       "boxServicesFiberPortOpticsCurrent": boxServicesFiberPortOpticsCurrent,
+       "boxServicesFiberPortOpticsPowerOut": boxServicesFiberPortOpticsPowerOut,
+       "boxServicesFiberPortOpticsPowerIn": boxServicesFiberPortOpticsPowerIn,
+       "boxServicesFiberPortOpticsTxFault": boxServicesFiberPortOpticsTxFault,
+       "boxServicesFiberPortOpticsLos": boxServicesFiberPortOpticsLos,
+       "boxServicesFiberPortOpticsFaultStatus": boxServicesFiberPortOpticsFaultStatus,
        "boxServicesNotificationsGroup": boxServicesNotificationsGroup,
        "boxsItemStateChangeEvent": boxsItemStateChangeEvent,
        "boxsTemperatureChangeEvent": boxsTemperatureChangeEvent,

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\mikrotik\MIKROTIK-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:10:36 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -4428,6 +4425,10 @@ _MtxrCT_ObjectIdentity = ObjectIdentity
 mtxrCT = _MtxrCT_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 14988, 1, 1, 22)
 )
+_MtxrCTStats_ObjectIdentity = ObjectIdentity
+mtxrCTStats = _MtxrCTStats_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 14988, 1, 1, 22, 1)
+)
 _MtxrCtTotalEntries_Type = Counter32
 _MtxrCtTotalEntries_Object = MibScalar
 mtxrCtTotalEntries = _MtxrCtTotalEntries_Object(
@@ -4465,17 +4466,6 @@ mtXRouterOsGroups = _MtXRouterOsGroups_ObjectIdentity(
 )
 
 # Managed Objects groups
-
-mtxrCtStatsGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 14988, 1, 1, 22, 1)
-)
-mtxrCtStatsGroup.setObjects(
-      *(("MIKROTIK-MIB", "mtxrCtTotalEntries"),
-        ("MIKROTIK-MIB", "mtxrCtIP4Entries"),
-        ("MIKROTIK-MIB", "mtxrCtIP6Entries"))
-)
-if mibBuilder.loadTexts:
-    mtxrCtStatsGroup.setStatus("current")
 
 mtxrWirelessGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 14988, 1, 2, 1, 1)
@@ -5463,7 +5453,7 @@ mibBuilder.exportSymbols(
        "mtxrWifiInterfacesSsid": mtxrWifiInterfacesSsid,
        "mtxrWifiInterfacesFreq": mtxrWifiInterfacesFreq,
        "mtxrCT": mtxrCT,
-       "mtxrCtStatsGroup": mtxrCtStatsGroup,
+       "mtxrCTStats": mtxrCTStats,
        "mtxrCtTotalEntries": mtxrCtTotalEntries,
        "mtxrCtIP4Entries": mtxrCtIP4Entries,
        "mtxrCtIP6Entries": mtxrCtIP6Entries,

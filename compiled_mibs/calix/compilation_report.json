@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-02T11:23:25.639057",
+  "timestamp": "2026-05-29T09:20:50.269153",
   "stats": {
-    "total": 34,
-    "compiled": 20,
-    "failed": 11,
-    "skipped": 3,
+    "total": 38,
+    "compiled": 21,
+    "failed": 12,
+    "skipped": 5,
     "errors": [
       {
         "mib": "AE-ALARM-TABLE-MIB",
@@ -19,15 +19,15 @@
         "error": "failed"
       },
       {
-        "mib": "CALIX-EOAM-EXT-MIB",
-        "error": "missing"
-      },
-      {
         "mib": "E5-120-AS-ATM-MIB",
         "error": "failed"
       },
       {
         "mib": "E5-120-IESCOMMON-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "E5-120-MIB",
         "error": "failed"
       },
       {
@@ -43,6 +43,10 @@
         "error": "failed"
       },
       {
+        "mib": "E5-121-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "E5-121-TRAPS-MIB",
         "error": "failed"
       },
@@ -52,5 +56,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

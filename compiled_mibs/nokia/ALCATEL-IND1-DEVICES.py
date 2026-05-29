@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-DEVICES
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:11 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-DEVICES
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,8 @@ alcatelIND1DevicesMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1DevicesMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2007-04-03 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -330,6 +328,30 @@ gicOmniSwitch7000C = _GicOmniSwitch7000C_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     gicOmniSwitch7000C.setStatus("current")
+_GicOmniSwitch7000100FX_ObjectIdentity = ObjectIdentity
+gicOmniSwitch7000100FX = _GicOmniSwitch7000100FX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 1, 4, 2, 3, 1, 5)
+)
+if mibBuilder.loadTexts:
+    gicOmniSwitch7000100FX.setStatus("current")
+_GicOmniSwitch70001001000_ObjectIdentity = ObjectIdentity
+gicOmniSwitch70001001000 = _GicOmniSwitch70001001000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 1, 4, 2, 3, 1, 6)
+)
+if mibBuilder.loadTexts:
+    gicOmniSwitch70001001000.setStatus("current")
+_GicOmniSwitch7000BX_ObjectIdentity = ObjectIdentity
+gicOmniSwitch7000BX = _GicOmniSwitch7000BX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 1, 4, 2, 3, 1, 7)
+)
+if mibBuilder.loadTexts:
+    gicOmniSwitch7000BX.setStatus("current")
+_GicOmniSwitch7000101001000_ObjectIdentity = ObjectIdentity
+gicOmniSwitch7000101001000 = _GicOmniSwitch7000101001000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 1, 4, 2, 3, 1, 8)
+)
+if mibBuilder.loadTexts:
+    gicOmniSwitch7000101001000.setStatus("current")
 _NiOmniSwitch7000DM_ObjectIdentity = ObjectIdentity
 niOmniSwitch7000DM = _NiOmniSwitch7000DM_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 1, 4, 2, 4)
@@ -546,6 +568,66 @@ mgicOmniSwitch8000LH70 = _MgicOmniSwitch8000LH70_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     mgicOmniSwitch8000LH70.setStatus("current")
+_MgicOmniSwitch6800LRM_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800LRM = _MgicOmniSwitch6800LRM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 4)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800LRM.setStatus("current")
+_MgicOmniSwitch6800SFPP_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800SFPP = _MgicOmniSwitch6800SFPP_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 5)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800SFPP.setStatus("current")
+_MgicOmniSwitch6800KF2SFPP_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800KF2SFPP = _MgicOmniSwitch6800KF2SFPP_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 6)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800KF2SFPP.setStatus("current")
+_MgicOmniSwitch6800KF2HDMI_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800KF2HDMI = _MgicOmniSwitch6800KF2HDMI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 7)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800KF2HDMI.setStatus("current")
+_MgicOmniSwitch6800SFPPSR_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800SFPPSR = _MgicOmniSwitch6800SFPPSR_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 8)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800SFPPSR.setStatus("current")
+_MgicOmniSwitch6800SFPPLR_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800SFPPLR = _MgicOmniSwitch6800SFPPLR_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 9)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800SFPPLR.setStatus("current")
+_MgicOmniSwitch6800SFPPER_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800SFPPER = _MgicOmniSwitch6800SFPPER_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 10)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800SFPPER.setStatus("current")
+_MgicOmniSwitch6800SFPPLRM_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800SFPPLRM = _MgicOmniSwitch6800SFPPLRM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 11)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800SFPPLRM.setStatus("current")
+_MgicOmniSwitch6800XFPSR_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800XFPSR = _MgicOmniSwitch6800XFPSR_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 12)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800XFPSR.setStatus("current")
+_MgicOmniSwitch6800T_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6800T = _MgicOmniSwitch6800T_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 2, 4, 1, 13)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6800T.setStatus("current")
 _ModulesOmniSwitch8000SF_ObjectIdentity = ObjectIdentity
 modulesOmniSwitch8000SF = _ModulesOmniSwitch8000SF_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 2, 4, 3)
@@ -1110,6 +1192,60 @@ deviceOmniSwitch6850P48XLU = _DeviceOmniSwitch6850P48XLU_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     deviceOmniSwitch6850P48XLU.setStatus("current")
+_DeviceOmniSwitch6850EP48_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850EP48 = _DeviceOmniSwitch6850EP48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 40)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850EP48.setStatus("current")
+_DeviceOmniSwitch6850EP48X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850EP48X = _DeviceOmniSwitch6850EP48X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 41)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850EP48X.setStatus("current")
+_DeviceOmniSwitch6850EP24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850EP24 = _DeviceOmniSwitch6850EP24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 42)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850EP24.setStatus("current")
+_DeviceOmniSwitch6850EP24X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850EP24X = _DeviceOmniSwitch6850EP24X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 43)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850EP24X.setStatus("current")
+_DeviceOmniSwitch6850E48_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850E48 = _DeviceOmniSwitch6850E48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 44)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850E48.setStatus("current")
+_DeviceOmniSwitch6850E48X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850E48X = _DeviceOmniSwitch6850E48X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 45)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850E48X.setStatus("current")
+_DeviceOmniSwitch6850E24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850E24 = _DeviceOmniSwitch6850E24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 46)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850E24.setStatus("current")
+_DeviceOmniSwitch6850E24X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850E24X = _DeviceOmniSwitch6850E24X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 47)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850E24X.setStatus("current")
+_DeviceOmniSwitch6850EU24X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6850EU24X = _DeviceOmniSwitch6850EU24X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 1, 48)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6850EU24X.setStatus("current")
 _FansOmniSwitch6850_ObjectIdentity = ObjectIdentity
 fansOmniSwitch6850 = _FansOmniSwitch6850_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 2)
@@ -1128,12 +1264,60 @@ powersOmniSwitch6850BPS = _PowersOmniSwitch6850BPS_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     powersOmniSwitch6850BPS.setStatus("current")
+_PowersOmniSwitch120DC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch120DC = _PowersOmniSwitch120DC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 3, 2)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch120DC.setStatus("current")
+_PowersOmniSwitch126AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch126AC = _PowersOmniSwitch126AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 3, 3)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch126AC.setStatus("current")
+_PowersOmniSwitch360AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch360AC = _PowersOmniSwitch360AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 3, 4)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch360AC.setStatus("current")
+_PowersOmniSwitch510AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch510AC = _PowersOmniSwitch510AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 3, 5)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch510AC.setStatus("current")
+_PowersOmniSwitch900AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch900AC = _PowersOmniSwitch900AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 3, 6)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch900AC.setStatus("current")
+_PowersOmniSwitchOsBPS_ObjectIdentity = ObjectIdentity
+powersOmniSwitchOsBPS = _PowersOmniSwitchOsBPS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 3, 7)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitchOsBPS.setStatus("current")
 _ModulesOmniSwitch6850_ObjectIdentity = ObjectIdentity
 modulesOmniSwitch6850 = _ModulesOmniSwitch6850_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 4)
 )
 if mibBuilder.loadTexts:
     modulesOmniSwitch6850.setStatus("current")
+_DaughterBoardOmniSwitch6850_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6850 = _DaughterBoardOmniSwitch6850_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 5)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6850.setStatus("current")
+_DaughterBoardOmniSwitch6850ESFPplus_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6850ESFPplus = _DaughterBoardOmniSwitch6850ESFPplus_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 7, 5, 1)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6850ESFPplus.setStatus("current")
 _FamilyOmniSwitch9000_ObjectIdentity = ObjectIdentity
 familyOmniSwitch9000 = _FamilyOmniSwitch9000_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 8)
@@ -1392,6 +1576,12 @@ gniOmniSwitch9000U12PlusFJ2E = _GniOmniSwitch9000U12PlusFJ2E_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     gniOmniSwitch9000U12PlusFJ2E.setStatus("current")
+_GniOmniSwitch9000P24FJ2E_ObjectIdentity = ObjectIdentity
+gniOmniSwitch9000P24FJ2E = _GniOmniSwitch9000P24FJ2E_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 8, 4, 2, 2, 25)
+)
+if mibBuilder.loadTexts:
+    gniOmniSwitch9000P24FJ2E.setStatus("current")
 _NiOmniSwitch9000IC_ObjectIdentity = ObjectIdentity
 niOmniSwitch9000IC = _NiOmniSwitch9000IC_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 8, 4, 2, 3)
@@ -1446,6 +1636,12 @@ deviceOmniSwitch6855U24X = _DeviceOmniSwitch6855U24X_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     deviceOmniSwitch6855U24X.setStatus("current")
+_DeviceOmniSwitch6855P14_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6855P14 = _DeviceOmniSwitch6855P14_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 9, 1, 6)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6855P14.setStatus("current")
 _FansOmniSwitch6855_ObjectIdentity = ObjectIdentity
 fansOmniSwitch6855 = _FansOmniSwitch6855_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 9, 2)
@@ -1458,6 +1654,24 @@ powersOmniSwitch6855 = _PowersOmniSwitch6855_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     powersOmniSwitch6855.setStatus("current")
+_PowersOmniSwitch6855Devices40DC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch6855Devices40DC = _PowersOmniSwitch6855Devices40DC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 9, 3, 1)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch6855Devices40DC.setStatus("current")
+_PowersOmniSwitch6855Devices62DC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch6855Devices62DC = _PowersOmniSwitch6855Devices62DC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 9, 3, 2)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch6855Devices62DC.setStatus("current")
+_PowersOmniSwitch6855Devices180DC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch6855Devices180DC = _PowersOmniSwitch6855Devices180DC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 9, 3, 3)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch6855Devices180DC.setStatus("current")
 _ModulesOmniSwitch6855_ObjectIdentity = ObjectIdentity
 modulesOmniSwitch6855 = _ModulesOmniSwitch6855_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 9, 4)
@@ -1566,6 +1780,12 @@ deviceOmniSwitch625024MD = _DeviceOmniSwitch625024MD_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     deviceOmniSwitch625024MD.setStatus("current")
+_DeviceOmniSwitch6250U24M_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6250U24M = _DeviceOmniSwitch6250U24M_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 11, 1, 4)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6250U24M.setStatus("current")
 _ChassisOmniSwitch6250ENT_ObjectIdentity = ObjectIdentity
 chassisOmniSwitch6250ENT = _ChassisOmniSwitch6250ENT_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 11, 2)
@@ -1608,6 +1828,408 @@ modulesOmniSwitch6250 = _ModulesOmniSwitch6250_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     modulesOmniSwitch6250.setStatus("current")
+_FamilyOmniSwitch6450_ObjectIdentity = ObjectIdentity
+familyOmniSwitch6450 = _FamilyOmniSwitch6450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12)
+)
+if mibBuilder.loadTexts:
+    familyOmniSwitch6450.setStatus("current")
+_ChassisOmniSwitch6450_ObjectIdentity = ObjectIdentity
+chassisOmniSwitch6450 = _ChassisOmniSwitch6450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1)
+)
+if mibBuilder.loadTexts:
+    chassisOmniSwitch6450.setStatus("current")
+_DeviceOmniSwitch6450C10_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C10 = _DeviceOmniSwitch6450C10_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 1)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C10.setStatus("current")
+_DeviceOmniSwitch6450P10_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P10 = _DeviceOmniSwitch6450P10_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 2)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P10.setStatus("current")
+_DeviceOmniSwitch6450C10L_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C10L = _DeviceOmniSwitch6450C10L_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 3)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C10L.setStatus("current")
+_DeviceOmniSwitch6450P10L_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P10L = _DeviceOmniSwitch6450P10L_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 4)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P10L.setStatus("current")
+_DeviceOmniSwitch6450C24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C24 = _DeviceOmniSwitch6450C24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 5)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C24.setStatus("current")
+_DeviceOmniSwitch6450P24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P24 = _DeviceOmniSwitch6450P24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 6)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P24.setStatus("current")
+_DeviceOmniSwitch6450U24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450U24 = _DeviceOmniSwitch6450U24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 7)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450U24.setStatus("current")
+_DeviceOmniSwitch6450C48_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C48 = _DeviceOmniSwitch6450C48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 8)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C48.setStatus("current")
+_DeviceOmniSwitch6450P48_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P48 = _DeviceOmniSwitch6450P48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 9)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P48.setStatus("current")
+_DeviceOmniSwitch6450C24L_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C24L = _DeviceOmniSwitch6450C24L_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 10)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C24L.setStatus("current")
+_DeviceOmniSwitch6450P24L_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P24L = _DeviceOmniSwitch6450P24L_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 11)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P24L.setStatus("current")
+_DeviceOmniSwitch6450C48L_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C48L = _DeviceOmniSwitch6450C48L_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 12)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C48L.setStatus("current")
+_DeviceOmniSwitch6450P48L_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P48L = _DeviceOmniSwitch6450P48L_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 13)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P48L.setStatus("current")
+_DeviceOmniSwitch6450P10S_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P10S = _DeviceOmniSwitch6450P10S_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 14)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P10S.setStatus("current")
+_DeviceOmniSwitch6450U24S_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450U24S = _DeviceOmniSwitch6450U24S_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 15)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450U24S.setStatus("current")
+_DeviceOmniSwitch6450C10M_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C10M = _DeviceOmniSwitch6450C10M_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 16)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C10M.setStatus("current")
+_DeviceOmniSwitch6450C24XM_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C24XM = _DeviceOmniSwitch6450C24XM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 17)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C24XM.setStatus("current")
+_DeviceOmniSwitch6450C24X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C24X = _DeviceOmniSwitch6450C24X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 18)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C24X.setStatus("current")
+_DeviceOmniSwitch6450P24X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P24X = _DeviceOmniSwitch6450P24X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 19)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P24X.setStatus("current")
+_DeviceOmniSwitch6450C48X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450C48X = _DeviceOmniSwitch6450C48X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 20)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450C48X.setStatus("current")
+_DeviceOmniSwitch6450P48X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450P48X = _DeviceOmniSwitch6450P48X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 21)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450P48X.setStatus("current")
+_DeviceOmniSwitch6450U24SXM_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450U24SXM = _DeviceOmniSwitch6450U24SXM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 22)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450U24SXM.setStatus("current")
+_DeviceOmniSwitch6450U24X_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6450U24X = _DeviceOmniSwitch6450U24X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 1, 23)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6450U24X.setStatus("current")
+_FansOmniSwitch6450_ObjectIdentity = ObjectIdentity
+fansOmniSwitch6450 = _FansOmniSwitch6450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 2)
+)
+if mibBuilder.loadTexts:
+    fansOmniSwitch6450.setStatus("current")
+_PowersOmniSwitch6450_ObjectIdentity = ObjectIdentity
+powersOmniSwitch6450 = _PowersOmniSwitch6450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 3)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch6450.setStatus("current")
+_PowersOmniSwitch90AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch90AC = _PowersOmniSwitch90AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 3, 1)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch90AC.setStatus("current")
+_PowersOmniSwitch550AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch550AC = _PowersOmniSwitch550AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 3, 2)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch550AC.setStatus("current")
+_PowersOmniSwitch90DC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch90DC = _PowersOmniSwitch90DC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 3, 3)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch90DC.setStatus("current")
+_PowersOmniSwitch320AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch320AC = _PowersOmniSwitch320AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 3, 4)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch320AC.setStatus("current")
+_PowersOmniSwitch6450900AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch6450900AC = _PowersOmniSwitch6450900AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 3, 5)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch6450900AC.setStatus("current")
+_ModulesOmniSwitch6450_ObjectIdentity = ObjectIdentity
+modulesOmniSwitch6450 = _ModulesOmniSwitch6450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4)
+)
+if mibBuilder.loadTexts:
+    modulesOmniSwitch6450.setStatus("current")
+_IcOmniSwitch6000TenGIC_ObjectIdentity = ObjectIdentity
+icOmniSwitch6000TenGIC = _IcOmniSwitch6000TenGIC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 1)
+)
+if mibBuilder.loadTexts:
+    icOmniSwitch6000TenGIC.setStatus("current")
+_MgicOmniSwitch6000SR_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000SR = _MgicOmniSwitch6000SR_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 1, 1)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000SR.setStatus("current")
+_MgicOmniSwitch6000LR_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000LR = _MgicOmniSwitch6000LR_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 1, 2)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000LR.setStatus("current")
+_MgicOmniSwitch6000ER_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000ER = _MgicOmniSwitch6000ER_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 1, 3)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000ER.setStatus("current")
+_MgicOmniSwitch6000LRM_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000LRM = _MgicOmniSwitch6000LRM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 1, 4)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000LRM.setStatus("current")
+_IcOmniSwitch6000GIC_ObjectIdentity = ObjectIdentity
+icOmniSwitch6000GIC = _IcOmniSwitch6000GIC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2)
+)
+if mibBuilder.loadTexts:
+    icOmniSwitch6000GIC.setStatus("current")
+_MgicOmniSwitch6000LH70_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000LH70 = _MgicOmniSwitch6000LH70_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 1)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000LH70.setStatus("current")
+_MgicOmniSwitch6000LX_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000LX = _MgicOmniSwitch6000LX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 2)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000LX.setStatus("current")
+_MgicOmniSwitch6000SX_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000SX = _MgicOmniSwitch6000SX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 3)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000SX.setStatus("current")
+_MgicOmniSwitch6000C_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000C = _MgicOmniSwitch6000C_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 4)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000C.setStatus("current")
+_MgicOmniSwitch6000100FX_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000100FX = _MgicOmniSwitch6000100FX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 5)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000100FX.setStatus("current")
+_MgicOmniSwitch60001001000_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch60001001000 = _MgicOmniSwitch60001001000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 6)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch60001001000.setStatus("current")
+_MgicOmniSwitch6000BX_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000BX = _MgicOmniSwitch6000BX_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 7)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000BX.setStatus("current")
+_MgicOmniSwitch6000XFPDAC_ObjectIdentity = ObjectIdentity
+mgicOmniSwitch6000XFPDAC = _MgicOmniSwitch6000XFPDAC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 4, 2, 8)
+)
+if mibBuilder.loadTexts:
+    mgicOmniSwitch6000XFPDAC.setStatus("current")
+_DaughterBoardOmniSwitch6450_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6450 = _DaughterBoardOmniSwitch6450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 5)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6450.setStatus("current")
+_DaughterBoardOmniSwitch6450RJ45_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6450RJ45 = _DaughterBoardOmniSwitch6450RJ45_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 5, 4)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6450RJ45.setStatus("current")
+_DaughterBoardOmniSwitch6450XNI_U2_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6450XNI_U2 = _DaughterBoardOmniSwitch6450XNI_U2_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 5, 5)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6450XNI_U2.setStatus("current")
+_DaughterBoardOmniSwitch6450XNI_U2_HDMI_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6450XNI_U2_HDMI = _DaughterBoardOmniSwitch6450XNI_U2_HDMI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 5, 6)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6450XNI_U2_HDMI.setStatus("current")
+_DaughterBoardOmniSwitch6450GNI_U2_ObjectIdentity = ObjectIdentity
+daughterBoardOmniSwitch6450GNI_U2 = _DaughterBoardOmniSwitch6450GNI_U2_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 12, 5, 7)
+)
+if mibBuilder.loadTexts:
+    daughterBoardOmniSwitch6450GNI_U2.setStatus("current")
+_FamilyOmniSwitch6350_ObjectIdentity = ObjectIdentity
+familyOmniSwitch6350 = _FamilyOmniSwitch6350_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13)
+)
+if mibBuilder.loadTexts:
+    familyOmniSwitch6350.setStatus("current")
+_ChassisOmniSwitch6350_ObjectIdentity = ObjectIdentity
+chassisOmniSwitch6350 = _ChassisOmniSwitch6350_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1)
+)
+if mibBuilder.loadTexts:
+    chassisOmniSwitch6350.setStatus("current")
+_DeviceOmniSwitch6350C24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6350C24 = _DeviceOmniSwitch6350C24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1, 1)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6350C24.setStatus("current")
+_DeviceOmniSwitch6350P24_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6350P24 = _DeviceOmniSwitch6350P24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1, 2)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6350P24.setStatus("current")
+_DeviceOmniSwitch6350C48_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6350C48 = _DeviceOmniSwitch6350C48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1, 3)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6350C48.setStatus("current")
+_DeviceOmniSwitch6350P48_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6350P48 = _DeviceOmniSwitch6350P48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1, 4)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6350P48.setStatus("current")
+_DeviceOmniSwitch6350C10_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6350C10 = _DeviceOmniSwitch6350C10_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1, 5)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6350C10.setStatus("current")
+_DeviceOmniSwitch6350P10_ObjectIdentity = ObjectIdentity
+deviceOmniSwitch6350P10 = _DeviceOmniSwitch6350P10_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 1, 6)
+)
+if mibBuilder.loadTexts:
+    deviceOmniSwitch6350P10.setStatus("current")
+_FansOmniSwitch6350_ObjectIdentity = ObjectIdentity
+fansOmniSwitch6350 = _FansOmniSwitch6350_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 2)
+)
+if mibBuilder.loadTexts:
+    fansOmniSwitch6350.setStatus("current")
+_PowersOmniSwitch6350_ObjectIdentity = ObjectIdentity
+powersOmniSwitch6350 = _PowersOmniSwitch6350_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 3)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch6350.setStatus("current")
+_PowersOmniSwitch30AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch30AC = _PowersOmniSwitch30AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 3, 1)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch30AC.setStatus("current")
+_PowersOmniSwitch525AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch525AC = _PowersOmniSwitch525AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 3, 2)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch525AC.setStatus("current")
+_PowersOmniSwitch60AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch60AC = _PowersOmniSwitch60AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 3, 3)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch60AC.setStatus("current")
+_PowersOmniSwitch915AC_ObjectIdentity = ObjectIdentity
+powersOmniSwitch915AC = _PowersOmniSwitch915AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 3, 4)
+)
+if mibBuilder.loadTexts:
+    powersOmniSwitch915AC.setStatus("current")
+_ModulesOmniSwitch6350_ObjectIdentity = ObjectIdentity
+modulesOmniSwitch6350 = _ModulesOmniSwitch6350_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 1, 13, 4)
+)
+if mibBuilder.loadTexts:
+    modulesOmniSwitch6350.setStatus("current")
 
 # Managed Objects groups
 
@@ -1664,6 +2286,10 @@ mibBuilder.exportSymbols(
        "gicOmniSwitch7000LX": gicOmniSwitch7000LX,
        "gicOmniSwitch7000SX": gicOmniSwitch7000SX,
        "gicOmniSwitch7000C": gicOmniSwitch7000C,
+       "gicOmniSwitch7000100FX": gicOmniSwitch7000100FX,
+       "gicOmniSwitch70001001000": gicOmniSwitch70001001000,
+       "gicOmniSwitch7000BX": gicOmniSwitch7000BX,
+       "gicOmniSwitch7000101001000": gicOmniSwitch7000101001000,
        "niOmniSwitch7000DM": niOmniSwitch7000DM,
        "dmOmniSwitch7000Power": dmOmniSwitch7000Power,
        "dmOmniSwitch7000PowerDsine": dmOmniSwitch7000PowerDsine,
@@ -1700,6 +2326,16 @@ mibBuilder.exportSymbols(
        "mgicOmniSwitch8000SX": mgicOmniSwitch8000SX,
        "mgicOmniSwitch8000LX": mgicOmniSwitch8000LX,
        "mgicOmniSwitch8000LH70": mgicOmniSwitch8000LH70,
+       "mgicOmniSwitch6800LRM": mgicOmniSwitch6800LRM,
+       "mgicOmniSwitch6800SFPP": mgicOmniSwitch6800SFPP,
+       "mgicOmniSwitch6800KF2SFPP": mgicOmniSwitch6800KF2SFPP,
+       "mgicOmniSwitch6800KF2HDMI": mgicOmniSwitch6800KF2HDMI,
+       "mgicOmniSwitch6800SFPPSR": mgicOmniSwitch6800SFPPSR,
+       "mgicOmniSwitch6800SFPPLR": mgicOmniSwitch6800SFPPLR,
+       "mgicOmniSwitch6800SFPPER": mgicOmniSwitch6800SFPPER,
+       "mgicOmniSwitch6800SFPPLRM": mgicOmniSwitch6800SFPPLRM,
+       "mgicOmniSwitch6800XFPSR": mgicOmniSwitch6800XFPSR,
+       "mgicOmniSwitch6800T": mgicOmniSwitch6800T,
        "modulesOmniSwitch8000SF": modulesOmniSwitch8000SF,
        "sfOmniSwitch8800SFM": sfOmniSwitch8800SFM,
        "familyOmniSwitch6600": familyOmniSwitch6600,
@@ -1794,10 +2430,27 @@ mibBuilder.exportSymbols(
        "deviceOmniSwitch6850P48LU": deviceOmniSwitch6850P48LU,
        "deviceOmniSwitch6850P24XLU": deviceOmniSwitch6850P24XLU,
        "deviceOmniSwitch6850P48XLU": deviceOmniSwitch6850P48XLU,
+       "deviceOmniSwitch6850EP48": deviceOmniSwitch6850EP48,
+       "deviceOmniSwitch6850EP48X": deviceOmniSwitch6850EP48X,
+       "deviceOmniSwitch6850EP24": deviceOmniSwitch6850EP24,
+       "deviceOmniSwitch6850EP24X": deviceOmniSwitch6850EP24X,
+       "deviceOmniSwitch6850E48": deviceOmniSwitch6850E48,
+       "deviceOmniSwitch6850E48X": deviceOmniSwitch6850E48X,
+       "deviceOmniSwitch6850E24": deviceOmniSwitch6850E24,
+       "deviceOmniSwitch6850E24X": deviceOmniSwitch6850E24X,
+       "deviceOmniSwitch6850EU24X": deviceOmniSwitch6850EU24X,
        "fansOmniSwitch6850": fansOmniSwitch6850,
        "powersOmniSwitch6850": powersOmniSwitch6850,
        "powersOmniSwitch6850BPS": powersOmniSwitch6850BPS,
+       "powersOmniSwitch120DC": powersOmniSwitch120DC,
+       "powersOmniSwitch126AC": powersOmniSwitch126AC,
+       "powersOmniSwitch360AC": powersOmniSwitch360AC,
+       "powersOmniSwitch510AC": powersOmniSwitch510AC,
+       "powersOmniSwitch900AC": powersOmniSwitch900AC,
+       "powersOmniSwitchOsBPS": powersOmniSwitchOsBPS,
        "modulesOmniSwitch6850": modulesOmniSwitch6850,
+       "daughterBoardOmniSwitch6850": daughterBoardOmniSwitch6850,
+       "daughterBoardOmniSwitch6850ESFPplus": daughterBoardOmniSwitch6850ESFPplus,
        "familyOmniSwitch9000": familyOmniSwitch9000,
        "chassisOmniSwitch9000": chassisOmniSwitch9000,
        "deviceOmniSwitch9700": deviceOmniSwitch9700,
@@ -1841,6 +2494,7 @@ mibBuilder.exportSymbols(
        "gniOmniSwitch9000U24FJ2E": gniOmniSwitch9000U24FJ2E,
        "gniOmniSwitch9000U2FJ2E": gniOmniSwitch9000U2FJ2E,
        "gniOmniSwitch9000U12PlusFJ2E": gniOmniSwitch9000U12PlusFJ2E,
+       "gniOmniSwitch9000P24FJ2E": gniOmniSwitch9000P24FJ2E,
        "niOmniSwitch9000IC": niOmniSwitch9000IC,
        "niOmniSwitch9000DM": niOmniSwitch9000DM,
        "familyOmniSwitch6855": familyOmniSwitch6855,
@@ -1850,8 +2504,12 @@ mibBuilder.exportSymbols(
        "deviceOmniSwitch685524": deviceOmniSwitch685524,
        "deviceOmniSwitch6855U24": deviceOmniSwitch6855U24,
        "deviceOmniSwitch6855U24X": deviceOmniSwitch6855U24X,
+       "deviceOmniSwitch6855P14": deviceOmniSwitch6855P14,
        "fansOmniSwitch6855": fansOmniSwitch6855,
        "powersOmniSwitch6855": powersOmniSwitch6855,
+       "powersOmniSwitch6855Devices40DC": powersOmniSwitch6855Devices40DC,
+       "powersOmniSwitch6855Devices62DC": powersOmniSwitch6855Devices62DC,
+       "powersOmniSwitch6855Devices180DC": powersOmniSwitch6855Devices180DC,
        "modulesOmniSwitch6855": modulesOmniSwitch6855,
        "familyOmniSwitch6400": familyOmniSwitch6400,
        "chassisOmniSwitch6400": chassisOmniSwitch6400,
@@ -1870,11 +2528,79 @@ mibBuilder.exportSymbols(
        "deviceOmniSwitch62508M": deviceOmniSwitch62508M,
        "deviceOmniSwitch625024M": deviceOmniSwitch625024M,
        "deviceOmniSwitch625024MD": deviceOmniSwitch625024MD,
+       "deviceOmniSwitch6250U24M": deviceOmniSwitch6250U24M,
        "chassisOmniSwitch6250ENT": chassisOmniSwitch6250ENT,
        "deviceOmniSwitch625024ENT": deviceOmniSwitch625024ENT,
        "deviceOmniSwitch6250P24ENT": deviceOmniSwitch6250P24ENT,
        "fansOmniSwitch6250": fansOmniSwitch6250,
        "powersOmniSwitch6250": powersOmniSwitch6250,
        "powersOmniSwitch6250BPS": powersOmniSwitch6250BPS,
-       "modulesOmniSwitch6250": modulesOmniSwitch6250}
+       "modulesOmniSwitch6250": modulesOmniSwitch6250,
+       "familyOmniSwitch6450": familyOmniSwitch6450,
+       "chassisOmniSwitch6450": chassisOmniSwitch6450,
+       "deviceOmniSwitch6450C10": deviceOmniSwitch6450C10,
+       "deviceOmniSwitch6450P10": deviceOmniSwitch6450P10,
+       "deviceOmniSwitch6450C10L": deviceOmniSwitch6450C10L,
+       "deviceOmniSwitch6450P10L": deviceOmniSwitch6450P10L,
+       "deviceOmniSwitch6450C24": deviceOmniSwitch6450C24,
+       "deviceOmniSwitch6450P24": deviceOmniSwitch6450P24,
+       "deviceOmniSwitch6450U24": deviceOmniSwitch6450U24,
+       "deviceOmniSwitch6450C48": deviceOmniSwitch6450C48,
+       "deviceOmniSwitch6450P48": deviceOmniSwitch6450P48,
+       "deviceOmniSwitch6450C24L": deviceOmniSwitch6450C24L,
+       "deviceOmniSwitch6450P24L": deviceOmniSwitch6450P24L,
+       "deviceOmniSwitch6450C48L": deviceOmniSwitch6450C48L,
+       "deviceOmniSwitch6450P48L": deviceOmniSwitch6450P48L,
+       "deviceOmniSwitch6450P10S": deviceOmniSwitch6450P10S,
+       "deviceOmniSwitch6450U24S": deviceOmniSwitch6450U24S,
+       "deviceOmniSwitch6450C10M": deviceOmniSwitch6450C10M,
+       "deviceOmniSwitch6450C24XM": deviceOmniSwitch6450C24XM,
+       "deviceOmniSwitch6450C24X": deviceOmniSwitch6450C24X,
+       "deviceOmniSwitch6450P24X": deviceOmniSwitch6450P24X,
+       "deviceOmniSwitch6450C48X": deviceOmniSwitch6450C48X,
+       "deviceOmniSwitch6450P48X": deviceOmniSwitch6450P48X,
+       "deviceOmniSwitch6450U24SXM": deviceOmniSwitch6450U24SXM,
+       "deviceOmniSwitch6450U24X": deviceOmniSwitch6450U24X,
+       "fansOmniSwitch6450": fansOmniSwitch6450,
+       "powersOmniSwitch6450": powersOmniSwitch6450,
+       "powersOmniSwitch90AC": powersOmniSwitch90AC,
+       "powersOmniSwitch550AC": powersOmniSwitch550AC,
+       "powersOmniSwitch90DC": powersOmniSwitch90DC,
+       "powersOmniSwitch320AC": powersOmniSwitch320AC,
+       "powersOmniSwitch6450900AC": powersOmniSwitch6450900AC,
+       "modulesOmniSwitch6450": modulesOmniSwitch6450,
+       "icOmniSwitch6000TenGIC": icOmniSwitch6000TenGIC,
+       "mgicOmniSwitch6000SR": mgicOmniSwitch6000SR,
+       "mgicOmniSwitch6000LR": mgicOmniSwitch6000LR,
+       "mgicOmniSwitch6000ER": mgicOmniSwitch6000ER,
+       "mgicOmniSwitch6000LRM": mgicOmniSwitch6000LRM,
+       "icOmniSwitch6000GIC": icOmniSwitch6000GIC,
+       "mgicOmniSwitch6000LH70": mgicOmniSwitch6000LH70,
+       "mgicOmniSwitch6000LX": mgicOmniSwitch6000LX,
+       "mgicOmniSwitch6000SX": mgicOmniSwitch6000SX,
+       "mgicOmniSwitch6000C": mgicOmniSwitch6000C,
+       "mgicOmniSwitch6000100FX": mgicOmniSwitch6000100FX,
+       "mgicOmniSwitch60001001000": mgicOmniSwitch60001001000,
+       "mgicOmniSwitch6000BX": mgicOmniSwitch6000BX,
+       "mgicOmniSwitch6000XFPDAC": mgicOmniSwitch6000XFPDAC,
+       "daughterBoardOmniSwitch6450": daughterBoardOmniSwitch6450,
+       "daughterBoardOmniSwitch6450RJ45": daughterBoardOmniSwitch6450RJ45,
+       "daughterBoardOmniSwitch6450XNI-U2": daughterBoardOmniSwitch6450XNI_U2,
+       "daughterBoardOmniSwitch6450XNI-U2-HDMI": daughterBoardOmniSwitch6450XNI_U2_HDMI,
+       "daughterBoardOmniSwitch6450GNI-U2": daughterBoardOmniSwitch6450GNI_U2,
+       "familyOmniSwitch6350": familyOmniSwitch6350,
+       "chassisOmniSwitch6350": chassisOmniSwitch6350,
+       "deviceOmniSwitch6350C24": deviceOmniSwitch6350C24,
+       "deviceOmniSwitch6350P24": deviceOmniSwitch6350P24,
+       "deviceOmniSwitch6350C48": deviceOmniSwitch6350C48,
+       "deviceOmniSwitch6350P48": deviceOmniSwitch6350P48,
+       "deviceOmniSwitch6350C10": deviceOmniSwitch6350C10,
+       "deviceOmniSwitch6350P10": deviceOmniSwitch6350P10,
+       "fansOmniSwitch6350": fansOmniSwitch6350,
+       "powersOmniSwitch6350": powersOmniSwitch6350,
+       "powersOmniSwitch30AC": powersOmniSwitch30AC,
+       "powersOmniSwitch525AC": powersOmniSwitch525AC,
+       "powersOmniSwitch60AC": powersOmniSwitch60AC,
+       "powersOmniSwitch915AC": powersOmniSwitch915AC,
+       "modulesOmniSwitch6350": modulesOmniSwitch6350}
 )

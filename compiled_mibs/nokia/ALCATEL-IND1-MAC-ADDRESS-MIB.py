@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-MAC-ADDRESS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:45 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-MAC-ADDRESS-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,7 +120,8 @@ alcatelIND1MacAddressMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1MacAddressMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2007-04-03 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -209,7 +207,7 @@ slMacAddressManagement = _SlMacAddressManagement_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 1, 1, 2),
     _SlMacAddressManagement_Type()
 )
-slMacAddressManagement.setMaxAccess("read-write")
+slMacAddressManagement.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAddressManagement.setStatus("current")
 
@@ -243,7 +241,7 @@ slMacAddressDisposition = _SlMacAddressDisposition_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 1, 1, 3),
     _SlMacAddressDisposition_Type()
 )
-slMacAddressDisposition.setMaxAccess("read-write")
+slMacAddressDisposition.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAddressDisposition.setStatus("current")
 _SlMacAddressRowStatus_Type = RowStatus
@@ -252,7 +250,7 @@ slMacAddressRowStatus = _SlMacAddressRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 1, 1, 4),
     _SlMacAddressRowStatus_Type()
 )
-slMacAddressRowStatus.setMaxAccess("read-write")
+slMacAddressRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAddressRowStatus.setStatus("current")
 _SlMacAddressProtocol_Type = MacAddressProtocolType
@@ -297,7 +295,7 @@ slMacAgingValue = _SlMacAgingValue_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 2, 1, 1),
     _SlMacAgingValue_Type()
 )
-slMacAgingValue.setMaxAccess("read-write")
+slMacAgingValue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAgingValue.setStatus("current")
 _SlMacAgingRowStatus_Type = RowStatus
@@ -306,7 +304,7 @@ slMacAgingRowStatus = _SlMacAgingRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 2, 1, 2),
     _SlMacAgingRowStatus_Type()
 )
-slMacAgingRowStatus.setMaxAccess("read-write")
+slMacAgingRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAgingRowStatus.setStatus("current")
 _SlPCamTrapObj_ObjectIdentity = ObjectIdentity
@@ -431,7 +429,7 @@ slMacToPortMacRowStatus = _SlMacToPortMacRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 4, 1, 3),
     _SlMacToPortMacRowStatus_Type()
 )
-slMacToPortMacRowStatus.setMaxAccess("read-write")
+slMacToPortMacRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacToPortMacRowStatus.setStatus("current")
 
@@ -741,7 +739,7 @@ slMacAddressGblManagement = _SlMacAddressGblManagement_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 8, 1, 7),
     _SlMacAddressGblManagement_Type()
 )
-slMacAddressGblManagement.setMaxAccess("read-write")
+slMacAddressGblManagement.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAddressGblManagement.setStatus("current")
 
@@ -775,7 +773,7 @@ slMacAddressGblDisposition = _SlMacAddressGblDisposition_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 8, 1, 8),
     _SlMacAddressGblDisposition_Type()
 )
-slMacAddressGblDisposition.setMaxAccess("read-write")
+slMacAddressGblDisposition.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAddressGblDisposition.setStatus("current")
 _SlMacAddressGblRowStatus_Type = RowStatus
@@ -793,7 +791,7 @@ slMacAddressGblProtocol = _SlMacAddressGblProtocol_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 1, 8, 1, 10),
     _SlMacAddressGblProtocol_Type()
 )
-slMacAddressGblProtocol.setMaxAccess("read-write")
+slMacAddressGblProtocol.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     slMacAddressGblProtocol.setStatus("current")
 _HalHashCollisionTrapObj_ObjectIdentity = ObjectIdentity
@@ -884,7 +882,11 @@ slMacAddressGroup.setObjects(
         ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressManagement"),
         ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressDisposition"),
         ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressRowStatus"),
-        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressProtocol"))
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressProtocol"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressGblDisposition"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressGblManagement"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressGblProtocol"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAddressGblRowStatus"))
 )
 if mibBuilder.loadTexts:
     slMacAddressGroup.setStatus("current")
@@ -916,6 +918,54 @@ slMacLearningGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     slMacLearningGroup.setStatus("current")
+
+bcmHashCollisionTrapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 2, 1, 6)
+)
+bcmHashCollisionTrapGroup.setObjects(
+      *(("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionMac"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionSlot"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionPort"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionVlan"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionTable"))
+)
+if mibBuilder.loadTexts:
+    bcmHashCollisionTrapGroup.setStatus("current")
+
+halHashCollisionTrapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 2, 1, 7)
+)
+halHashCollisionTrapGroup.setObjects(
+      *(("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionMac"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionSlot"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionPort"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionVlan"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionTable"))
+)
+if mibBuilder.loadTexts:
+    halHashCollisionTrapGroup.setStatus("current")
+
+slMacToPortMacGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 2, 1, 9)
+)
+slMacToPortMacGroup.setObjects(
+      *(("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacToPortMacVlanId"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacToPortMacAddress"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacToPortMacRowStatus"))
+)
+if mibBuilder.loadTexts:
+    slMacToPortMacGroup.setStatus("current")
+
+sourceLearningTrapsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 2, 1, 10)
+)
+sourceLearningTrapsGroup.setObjects(
+      *(("ALCATEL-IND1-MAC-ADDRESS-MIB", "slPCAMSlotNumber"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slPCAMSliceNumber"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slPCAMStatus"))
+)
+if mibBuilder.loadTexts:
+    sourceLearningTrapsGroup.setStatus("current")
 
 
 # Notification objects
@@ -977,6 +1027,18 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+hashCollisionNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 8, 1, 2, 1, 8)
+)
+hashCollisionNotificationGroup.setObjects(
+      *(("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionTrap"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionTrap"))
+)
+if mibBuilder.loadTexts:
+    hashCollisionNotificationGroup.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -991,7 +1053,12 @@ alcatelIND1MacAddressMIBCompliance.setObjects(
         ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacAgingGroup"),
         ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slPCamNotificationGroup"),
         ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacGeneralGroup"),
-        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacLearningGroup"))
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacLearningGroup"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "halHashCollisionTrapGroup"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "bcmHashCollisionTrapGroup"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "hashCollisionNotificationGroup"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "slMacToPortMacGroup"),
+        ("ALCATEL-IND1-MAC-ADDRESS-MIB", "sourceLearningTrapsGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1MacAddressMIBCompliance.setStatus(
@@ -1061,6 +1128,11 @@ mibBuilder.exportSymbols(
        "slPCamNotificationGroup": slPCamNotificationGroup,
        "slMacGeneralGroup": slMacGeneralGroup,
        "slMacLearningGroup": slMacLearningGroup,
+       "bcmHashCollisionTrapGroup": bcmHashCollisionTrapGroup,
+       "halHashCollisionTrapGroup": halHashCollisionTrapGroup,
+       "hashCollisionNotificationGroup": hashCollisionNotificationGroup,
+       "slMacToPortMacGroup": slMacToPortMacGroup,
+       "sourceLearningTrapsGroup": sourceLearningTrapsGroup,
        "alcatelIND1MacAddressMIBCompliances": alcatelIND1MacAddressMIBCompliances,
        "alcatelIND1MacAddressMIBCompliance": alcatelIND1MacAddressMIBCompliance,
        "slPCAMStatusTrap": slPCAMStatusTrap,

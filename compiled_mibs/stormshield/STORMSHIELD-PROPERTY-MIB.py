@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\stormshield\STORMSHIELD-PROPERTY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:29:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -103,11 +100,11 @@ if 'mibBuilder' not in globals():
 # MODULE-IDENTITY
 
 snsProductProperty = ModuleIdentity(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0)
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18)
 )
 if mibBuilder.loadTexts:
     snsProductProperty.setRevisions(
-        ("2017-02-20 00:00",)
+        ("2022-06-28 00:00",)
     )
 
 
@@ -133,7 +130,7 @@ class _SnsModel_Type(DisplayString):
 _SnsModel_Type.__name__ = "DisplayString"
 _SnsModel_Object = MibScalar
 snsModel = _SnsModel_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 1),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 1),
     _SnsModel_Type()
 )
 snsModel.setMaxAccess("read-only")
@@ -152,7 +149,7 @@ class _SnsVersion_Type(DisplayString):
 _SnsVersion_Type.__name__ = "DisplayString"
 _SnsVersion_Object = MibScalar
 snsVersion = _SnsVersion_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 2),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 2),
     _SnsVersion_Type()
 )
 snsVersion.setMaxAccess("read-only")
@@ -171,7 +168,7 @@ class _SnsSerialNumber_Type(DisplayString):
 _SnsSerialNumber_Type.__name__ = "DisplayString"
 _SnsSerialNumber_Object = MibScalar
 snsSerialNumber = _SnsSerialNumber_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 3),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 3),
     _SnsSerialNumber_Type()
 )
 snsSerialNumber.setMaxAccess("read-only")
@@ -190,7 +187,7 @@ class _SnsSystemName_Type(DisplayString):
 _SnsSystemName_Type.__name__ = "DisplayString"
 _SnsSystemName_Object = MibScalar
 snsSystemName = _SnsSystemName_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 4),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 4),
     _SnsSystemName_Type()
 )
 snsSystemName.setMaxAccess("read-only")
@@ -209,7 +206,7 @@ class _SnsSystemLanguage_Type(DisplayString):
 _SnsSystemLanguage_Type.__name__ = "DisplayString"
 _SnsSystemLanguage_Object = MibScalar
 snsSystemLanguage = _SnsSystemLanguage_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 5),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 5),
     _SnsSystemLanguage_Type()
 )
 snsSystemLanguage.setMaxAccess("read-only")
@@ -218,7 +215,7 @@ if mibBuilder.loadTexts:
 _SnsNbEther_Type = Integer32
 _SnsNbEther_Object = MibScalar
 snsNbEther = _SnsNbEther_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 6),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 6),
     _SnsNbEther_Type()
 )
 snsNbEther.setMaxAccess("read-only")
@@ -227,7 +224,7 @@ if mibBuilder.loadTexts:
 _SnsNbVlan_Type = Integer32
 _SnsNbVlan_Object = MibScalar
 snsNbVlan = _SnsNbVlan_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 7),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 7),
     _SnsNbVlan_Type()
 )
 snsNbVlan.setMaxAccess("read-only")
@@ -236,7 +233,7 @@ if mibBuilder.loadTexts:
 _SnsNbDialup_Type = Integer32
 _SnsNbDialup_Object = MibScalar
 snsNbDialup = _SnsNbDialup_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 8),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 8),
     _SnsNbDialup_Type()
 )
 snsNbDialup.setMaxAccess("read-only")
@@ -245,7 +242,7 @@ if mibBuilder.loadTexts:
 _SnsNbPPTP_Type = Integer32
 _SnsNbPPTP_Object = MibScalar
 snsNbPPTP = _SnsNbPPTP_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 9),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 9),
     _SnsNbPPTP_Type()
 )
 snsNbPPTP.setMaxAccess("read-only")
@@ -254,7 +251,7 @@ if mibBuilder.loadTexts:
 _SnsNbSerial_Type = Integer32
 _SnsNbSerial_Object = MibScalar
 snsNbSerial = _SnsNbSerial_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 10),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 10),
     _SnsNbSerial_Type()
 )
 snsNbSerial.setMaxAccess("read-only")
@@ -263,7 +260,7 @@ if mibBuilder.loadTexts:
 _SnsNbLoopback_Type = Integer32
 _SnsNbLoopback_Object = MibScalar
 snsNbLoopback = _SnsNbLoopback_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 11),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 11),
     _SnsNbLoopback_Type()
 )
 snsNbLoopback.setMaxAccess("read-only")
@@ -272,7 +269,7 @@ if mibBuilder.loadTexts:
 _SnsWatchdog_Type = Integer32
 _SnsWatchdog_Object = MibScalar
 snsWatchdog = _SnsWatchdog_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 12),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 12),
     _SnsWatchdog_Type()
 )
 snsWatchdog.setMaxAccess("read-only")
@@ -281,7 +278,7 @@ if mibBuilder.loadTexts:
 _SnsLed_Type = Integer32
 _SnsLed_Object = MibScalar
 snsLed = _SnsLed_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 13),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 13),
     _SnsLed_Type()
 )
 snsLed.setMaxAccess("read-only")
@@ -290,7 +287,7 @@ if mibBuilder.loadTexts:
 _SnsClone_Type = Integer32
 _SnsClone_Object = MibScalar
 snsClone = _SnsClone_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 14),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 14),
     _SnsClone_Type()
 )
 snsClone.setMaxAccess("read-only")
@@ -299,12 +296,31 @@ if mibBuilder.loadTexts:
 _SnsHADialup_Type = Integer32
 _SnsHADialup_Object = MibScalar
 snsHADialup = _SnsHADialup_Object(
-    (1, 3, 6, 1, 4, 1, 11256, 1, 0, 15),
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 15),
     _SnsHADialup_Type()
 )
 snsHADialup.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsHADialup.setStatus("current")
+
+
+class _SnsSystemNodeName_Type(DisplayString):
+    """Custom type snsSystemNodeName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_SnsSystemNodeName_Type.__name__ = "DisplayString"
+_SnsSystemNodeName_Object = MibScalar
+snsSystemNodeName = _SnsSystemNodeName_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 18, 16),
+    _SnsSystemNodeName_Type()
+)
+snsSystemNodeName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsSystemNodeName.setStatus("current")
 
 # Managed Objects groups
 
@@ -340,5 +356,6 @@ mibBuilder.exportSymbols(
        "snsWatchdog": snsWatchdog,
        "snsLed": snsLed,
        "snsClone": snsClone,
-       "snsHADialup": snsHADialup}
+       "snsHADialup": snsHADialup,
+       "snsSystemNodeName": snsSystemNodeName}
 )

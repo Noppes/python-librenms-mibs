@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\vmware\VMWARE-NSX-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:34:24 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,10 @@ vmwNSXsysMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     vmwNSXsysMIB.setRevisions(
-        ("2022-02-14 00:00",
+        ("2023-04-02 00:00",
+         "2022-06-21 00:00",
+         "2022-06-16 00:00",
+         "2022-02-14 00:00",
          "2021-08-06 00:00",
          "2021-04-22 00:00",
          "2021-03-25 00:00",
@@ -147,6 +147,7 @@ class VmwNsxTDataCenterFeatureIdType(TextualConvention, Integer32):
               11,
               12,
               13,
+              14,
               15,
               16,
               17,
@@ -170,7 +171,16 @@ class VmwNsxTDataCenterFeatureIdType(TextualConvention, Integer32):
               42,
               43,
               45,
-              46)
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              53,
+              54,
+              56,
+              58)
         )
     )
     namedValues = NamedValues(
@@ -186,6 +196,7 @@ class VmwNsxTDataCenterFeatureIdType(TextualConvention, Integer32):
           ("ncpHealth", 11),
           ("nodeAgentsHealth", 12),
           ("endpointProtection", 13),
+          ("serviceInsertion", 14),
           ("vpn", 15),
           ("alarmManagement", 16),
           ("loadBalancer", 17),
@@ -209,7 +220,16 @@ class VmwNsxTDataCenterFeatureIdType(TextualConvention, Integer32):
           ("mtuCheck", 42),
           ("nsxApplicationPlatformHealth", 43),
           ("edge", 45),
-          ("nat", 46))
+          ("nat", 46),
+          ("physicalServer", 47),
+          ("malwarePreventionHealth", 48),
+          ("edgeCluster", 49),
+          ("vmcApp", 50),
+          ("tepHealth", 51),
+          ("policyConstraint", 53),
+          ("groups", 54),
+          ("securityCompliance", 56),
+          ("nsxaasHealth", 58))
     )
 
 
@@ -1340,6 +1360,556 @@ class VmwNsxTDataCenterNappNodeNameType(TextualConvention, OctetString):
 
 
 
+class VmwNsxTDataCenterNewVMMorefIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterPolicyEdgeVMNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterVMMorefIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterDPUIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterEdgeNodeType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterPrefixesCountMaxType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterPrefixesCountThresholdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterRouteLimitMaximumType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterRouteLimitThresholdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterSubsequentAddressFamilyType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCentervCenterClusterIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterMpsServiceNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterMemberIndexIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterEdgeClusterIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterCoreDumpCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterNodeDisplayOrHostNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterNSXEdgeTNNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterNSXESXTNNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterCollectorIPType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterDvsAliasType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterStackAliasType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterVerticalNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterEdgeClusterHighestHwVersionType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterEdgeTNHwVersionType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterEdgeClusterNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterHaStateType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterHaState2Type(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterTransportNodeId2Type(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterDvsNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterVtepFaultReasonType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterVtepNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterMetricsTargetAddressType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterMetricsTargetAliasType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterMetricsTargetPortType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterIPv4AddressType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterIPv6AddressType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterConstraintLimitType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterConstraintTypeType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterCurrentCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterGroupIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterGroupMaxNumberLimitType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterGroupSizeType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterIPCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterLrpCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterLspCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterMacCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterSidCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterTNCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterVifCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterVMCountType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterCoreIdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterFlowCacheThresholdType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterNSXaaSServiceNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterProtocolNameType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
+class VmwNsxTDataCenterConstraintTypePathType(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "256a"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+
 # MIB Managed Objects in the order of their OIDs
 
 _VmwNsxTDataCenterNotifications_ObjectIdentity = ObjectIdentity
@@ -1492,6 +2062,18 @@ vmwNsxTEndpointProtectionFeature = _VmwNsxTEndpointProtectionFeature_ObjectIdent
 )
 if mibBuilder.loadTexts:
     vmwNsxTEndpointProtectionFeature.setStatus("current")
+_VmwNsxTServiceInsertionFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTServiceInsertionFeaturePrefix = _VmwNsxTServiceInsertionFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionFeaturePrefix.setStatus("current")
+_VmwNsxTServiceInsertionFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTServiceInsertionFeature = _VmwNsxTServiceInsertionFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionFeature.setStatus("current")
 _VmwNsxTVPNFeaturePrefix_ObjectIdentity = ObjectIdentity
 vmwNsxTVPNFeaturePrefix = _VmwNsxTVPNFeaturePrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 15)
@@ -1780,6 +2362,102 @@ vmwNsxTNATFeature = _VmwNsxTNATFeature_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     vmwNsxTNATFeature.setStatus("current")
+_VmwNsxTPhysicalServerFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTPhysicalServerFeaturePrefix = _VmwNsxTPhysicalServerFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerFeaturePrefix.setStatus("current")
+_VmwNsxTPhysicalServerFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTPhysicalServerFeature = _VmwNsxTPhysicalServerFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerFeature.setStatus("current")
+_VmwNsxTMalwarePreventionHealthFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTMalwarePreventionHealthFeaturePrefix = _VmwNsxTMalwarePreventionHealthFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthFeaturePrefix.setStatus("current")
+_VmwNsxTMalwarePreventionHealthFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTMalwarePreventionHealthFeature = _VmwNsxTMalwarePreventionHealthFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthFeature.setStatus("current")
+_VmwNsxTEdgeClusterFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTEdgeClusterFeaturePrefix = _VmwNsxTEdgeClusterFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 49)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeClusterFeaturePrefix.setStatus("current")
+_VmwNsxTEdgeClusterFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTEdgeClusterFeature = _VmwNsxTEdgeClusterFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 49, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeClusterFeature.setStatus("current")
+_VmwNsxTVMCAppFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTVMCAppFeaturePrefix = _VmwNsxTVMCAppFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 50)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTVMCAppFeaturePrefix.setStatus("current")
+_VmwNsxTVMCAppFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTVMCAppFeature = _VmwNsxTVMCAppFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 50, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTVMCAppFeature.setStatus("current")
+_VmwNsxTTEPHealthFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTTEPHealthFeaturePrefix = _VmwNsxTTEPHealthFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthFeaturePrefix.setStatus("current")
+_VmwNsxTTEPHealthFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTTEPHealthFeature = _VmwNsxTTEPHealthFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthFeature.setStatus("current")
+_VmwNsxTPolicyConstraintFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTPolicyConstraintFeaturePrefix = _VmwNsxTPolicyConstraintFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 53)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPolicyConstraintFeaturePrefix.setStatus("current")
+_VmwNsxTPolicyConstraintFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTPolicyConstraintFeature = _VmwNsxTPolicyConstraintFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 53, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPolicyConstraintFeature.setStatus("current")
+_VmwNsxTGroupsFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTGroupsFeaturePrefix = _VmwNsxTGroupsFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 54)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTGroupsFeaturePrefix.setStatus("current")
+_VmwNsxTGroupsFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTGroupsFeature = _VmwNsxTGroupsFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 54, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTGroupsFeature.setStatus("current")
+_VmwNsxTSecurityComplianceFeaturePrefix_ObjectIdentity = ObjectIdentity
+vmwNsxTSecurityComplianceFeaturePrefix = _VmwNsxTSecurityComplianceFeaturePrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityComplianceFeaturePrefix.setStatus("current")
+_VmwNsxTSecurityComplianceFeature_ObjectIdentity = ObjectIdentity
+vmwNsxTSecurityComplianceFeature = _VmwNsxTSecurityComplianceFeature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0)
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityComplianceFeature.setStatus("current")
 _VmwNsxTDataCenterData_ObjectIdentity = ObjectIdentity
 vmwNsxTDataCenterData = _VmwNsxTDataCenterData_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1)
@@ -2785,6 +3463,501 @@ vmwNsxTDataCenterNappNodeName = _VmwNsxTDataCenterNappNodeName_Object(
 vmwNsxTDataCenterNappNodeName.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     vmwNsxTDataCenterNappNodeName.setStatus("current")
+_VmwNsxTDataCenterNewVMMorefId_Type = VmwNsxTDataCenterNewVMMorefIdType
+_VmwNsxTDataCenterNewVMMorefId_Object = MibScalar
+vmwNsxTDataCenterNewVMMorefId = _VmwNsxTDataCenterNewVMMorefId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 148),
+    _VmwNsxTDataCenterNewVMMorefId_Type()
+)
+vmwNsxTDataCenterNewVMMorefId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNewVMMorefId.setStatus("current")
+_VmwNsxTDataCenterPolicyEdgeVMName_Type = VmwNsxTDataCenterPolicyEdgeVMNameType
+_VmwNsxTDataCenterPolicyEdgeVMName_Object = MibScalar
+vmwNsxTDataCenterPolicyEdgeVMName = _VmwNsxTDataCenterPolicyEdgeVMName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 149),
+    _VmwNsxTDataCenterPolicyEdgeVMName_Type()
+)
+vmwNsxTDataCenterPolicyEdgeVMName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterPolicyEdgeVMName.setStatus("current")
+_VmwNsxTDataCenterVMMorefId_Type = VmwNsxTDataCenterVMMorefIdType
+_VmwNsxTDataCenterVMMorefId_Object = MibScalar
+vmwNsxTDataCenterVMMorefId = _VmwNsxTDataCenterVMMorefId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 150),
+    _VmwNsxTDataCenterVMMorefId_Type()
+)
+vmwNsxTDataCenterVMMorefId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterVMMorefId.setStatus("current")
+_VmwNsxTDataCenterDPUId_Type = VmwNsxTDataCenterDPUIdType
+_VmwNsxTDataCenterDPUId_Object = MibScalar
+vmwNsxTDataCenterDPUId = _VmwNsxTDataCenterDPUId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 171),
+    _VmwNsxTDataCenterDPUId_Type()
+)
+vmwNsxTDataCenterDPUId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterDPUId.setStatus("current")
+_VmwNsxTDataCenterEdgeNode_Type = VmwNsxTDataCenterEdgeNodeType
+_VmwNsxTDataCenterEdgeNode_Object = MibScalar
+vmwNsxTDataCenterEdgeNode = _VmwNsxTDataCenterEdgeNode_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 172),
+    _VmwNsxTDataCenterEdgeNode_Type()
+)
+vmwNsxTDataCenterEdgeNode.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterEdgeNode.setStatus("current")
+_VmwNsxTDataCenterPrefixesCountMax_Type = VmwNsxTDataCenterPrefixesCountMaxType
+_VmwNsxTDataCenterPrefixesCountMax_Object = MibScalar
+vmwNsxTDataCenterPrefixesCountMax = _VmwNsxTDataCenterPrefixesCountMax_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 173),
+    _VmwNsxTDataCenterPrefixesCountMax_Type()
+)
+vmwNsxTDataCenterPrefixesCountMax.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterPrefixesCountMax.setStatus("current")
+_VmwNsxTDataCenterPrefixesCountThreshold_Type = VmwNsxTDataCenterPrefixesCountThresholdType
+_VmwNsxTDataCenterPrefixesCountThreshold_Object = MibScalar
+vmwNsxTDataCenterPrefixesCountThreshold = _VmwNsxTDataCenterPrefixesCountThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 174),
+    _VmwNsxTDataCenterPrefixesCountThreshold_Type()
+)
+vmwNsxTDataCenterPrefixesCountThreshold.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterPrefixesCountThreshold.setStatus("current")
+_VmwNsxTDataCenterRouteLimitMaximum_Type = VmwNsxTDataCenterRouteLimitMaximumType
+_VmwNsxTDataCenterRouteLimitMaximum_Object = MibScalar
+vmwNsxTDataCenterRouteLimitMaximum = _VmwNsxTDataCenterRouteLimitMaximum_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 175),
+    _VmwNsxTDataCenterRouteLimitMaximum_Type()
+)
+vmwNsxTDataCenterRouteLimitMaximum.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterRouteLimitMaximum.setStatus("current")
+_VmwNsxTDataCenterRouteLimitThreshold_Type = VmwNsxTDataCenterRouteLimitThresholdType
+_VmwNsxTDataCenterRouteLimitThreshold_Object = MibScalar
+vmwNsxTDataCenterRouteLimitThreshold = _VmwNsxTDataCenterRouteLimitThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 176),
+    _VmwNsxTDataCenterRouteLimitThreshold_Type()
+)
+vmwNsxTDataCenterRouteLimitThreshold.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterRouteLimitThreshold.setStatus("current")
+_VmwNsxTDataCenterSubsequentAddressFamily_Type = VmwNsxTDataCenterSubsequentAddressFamilyType
+_VmwNsxTDataCenterSubsequentAddressFamily_Object = MibScalar
+vmwNsxTDataCenterSubsequentAddressFamily = _VmwNsxTDataCenterSubsequentAddressFamily_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 177),
+    _VmwNsxTDataCenterSubsequentAddressFamily_Type()
+)
+vmwNsxTDataCenterSubsequentAddressFamily.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterSubsequentAddressFamily.setStatus("current")
+_VmwNsxTDataCentervCenterClusterId_Type = VmwNsxTDataCentervCenterClusterIdType
+_VmwNsxTDataCentervCenterClusterId_Object = MibScalar
+vmwNsxTDataCentervCenterClusterId = _VmwNsxTDataCentervCenterClusterId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 179),
+    _VmwNsxTDataCentervCenterClusterId_Type()
+)
+vmwNsxTDataCentervCenterClusterId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCentervCenterClusterId.setStatus("current")
+_VmwNsxTDataCenterMpsServiceName_Type = VmwNsxTDataCenterMpsServiceNameType
+_VmwNsxTDataCenterMpsServiceName_Object = MibScalar
+vmwNsxTDataCenterMpsServiceName = _VmwNsxTDataCenterMpsServiceName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 180),
+    _VmwNsxTDataCenterMpsServiceName_Type()
+)
+vmwNsxTDataCenterMpsServiceName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterMpsServiceName.setStatus("current")
+_VmwNsxTDataCenterMemberIndexId_Type = VmwNsxTDataCenterMemberIndexIdType
+_VmwNsxTDataCenterMemberIndexId_Object = MibScalar
+vmwNsxTDataCenterMemberIndexId = _VmwNsxTDataCenterMemberIndexId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 182),
+    _VmwNsxTDataCenterMemberIndexId_Type()
+)
+vmwNsxTDataCenterMemberIndexId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterMemberIndexId.setStatus("current")
+_VmwNsxTDataCenterEdgeClusterId_Type = VmwNsxTDataCenterEdgeClusterIdType
+_VmwNsxTDataCenterEdgeClusterId_Object = MibScalar
+vmwNsxTDataCenterEdgeClusterId = _VmwNsxTDataCenterEdgeClusterId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 184),
+    _VmwNsxTDataCenterEdgeClusterId_Type()
+)
+vmwNsxTDataCenterEdgeClusterId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterEdgeClusterId.setStatus("current")
+_VmwNsxTDataCenterCoreDumpCount_Type = VmwNsxTDataCenterCoreDumpCountType
+_VmwNsxTDataCenterCoreDumpCount_Object = MibScalar
+vmwNsxTDataCenterCoreDumpCount = _VmwNsxTDataCenterCoreDumpCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 185),
+    _VmwNsxTDataCenterCoreDumpCount_Type()
+)
+vmwNsxTDataCenterCoreDumpCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterCoreDumpCount.setStatus("current")
+_VmwNsxTDataCenterNodeDisplayOrHostName_Type = VmwNsxTDataCenterNodeDisplayOrHostNameType
+_VmwNsxTDataCenterNodeDisplayOrHostName_Object = MibScalar
+vmwNsxTDataCenterNodeDisplayOrHostName = _VmwNsxTDataCenterNodeDisplayOrHostName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 186),
+    _VmwNsxTDataCenterNodeDisplayOrHostName_Type()
+)
+vmwNsxTDataCenterNodeDisplayOrHostName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNodeDisplayOrHostName.setStatus("current")
+_VmwNsxTDataCenterNSXEdgeTNName_Type = VmwNsxTDataCenterNSXEdgeTNNameType
+_VmwNsxTDataCenterNSXEdgeTNName_Object = MibScalar
+vmwNsxTDataCenterNSXEdgeTNName = _VmwNsxTDataCenterNSXEdgeTNName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 187),
+    _VmwNsxTDataCenterNSXEdgeTNName_Type()
+)
+vmwNsxTDataCenterNSXEdgeTNName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNSXEdgeTNName.setStatus("current")
+_VmwNsxTDataCenterNSXESXTNName_Type = VmwNsxTDataCenterNSXESXTNNameType
+_VmwNsxTDataCenterNSXESXTNName_Object = MibScalar
+vmwNsxTDataCenterNSXESXTNName = _VmwNsxTDataCenterNSXESXTNName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 188),
+    _VmwNsxTDataCenterNSXESXTNName_Type()
+)
+vmwNsxTDataCenterNSXESXTNName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNSXESXTNName.setStatus("current")
+_VmwNsxTDataCenterCollectorIP_Type = VmwNsxTDataCenterCollectorIPType
+_VmwNsxTDataCenterCollectorIP_Object = MibScalar
+vmwNsxTDataCenterCollectorIP = _VmwNsxTDataCenterCollectorIP_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 189),
+    _VmwNsxTDataCenterCollectorIP_Type()
+)
+vmwNsxTDataCenterCollectorIP.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterCollectorIP.setStatus("current")
+_VmwNsxTDataCenterDvsAlias_Type = VmwNsxTDataCenterDvsAliasType
+_VmwNsxTDataCenterDvsAlias_Object = MibScalar
+vmwNsxTDataCenterDvsAlias = _VmwNsxTDataCenterDvsAlias_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 190),
+    _VmwNsxTDataCenterDvsAlias_Type()
+)
+vmwNsxTDataCenterDvsAlias.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterDvsAlias.setStatus("current")
+_VmwNsxTDataCenterStackAlias_Type = VmwNsxTDataCenterStackAliasType
+_VmwNsxTDataCenterStackAlias_Object = MibScalar
+vmwNsxTDataCenterStackAlias = _VmwNsxTDataCenterStackAlias_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 191),
+    _VmwNsxTDataCenterStackAlias_Type()
+)
+vmwNsxTDataCenterStackAlias.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterStackAlias.setStatus("current")
+_VmwNsxTDataCenterVerticalName_Type = VmwNsxTDataCenterVerticalNameType
+_VmwNsxTDataCenterVerticalName_Object = MibScalar
+vmwNsxTDataCenterVerticalName = _VmwNsxTDataCenterVerticalName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 192),
+    _VmwNsxTDataCenterVerticalName_Type()
+)
+vmwNsxTDataCenterVerticalName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterVerticalName.setStatus("current")
+_VmwNsxTDataCenterEdgeClusterHighestHwVersion_Type = VmwNsxTDataCenterEdgeClusterHighestHwVersionType
+_VmwNsxTDataCenterEdgeClusterHighestHwVersion_Object = MibScalar
+vmwNsxTDataCenterEdgeClusterHighestHwVersion = _VmwNsxTDataCenterEdgeClusterHighestHwVersion_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 195),
+    _VmwNsxTDataCenterEdgeClusterHighestHwVersion_Type()
+)
+vmwNsxTDataCenterEdgeClusterHighestHwVersion.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterEdgeClusterHighestHwVersion.setStatus("current")
+_VmwNsxTDataCenterEdgeTNHwVersion_Type = VmwNsxTDataCenterEdgeTNHwVersionType
+_VmwNsxTDataCenterEdgeTNHwVersion_Object = MibScalar
+vmwNsxTDataCenterEdgeTNHwVersion = _VmwNsxTDataCenterEdgeTNHwVersion_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 196),
+    _VmwNsxTDataCenterEdgeTNHwVersion_Type()
+)
+vmwNsxTDataCenterEdgeTNHwVersion.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterEdgeTNHwVersion.setStatus("current")
+_VmwNsxTDataCenterEdgeClusterName_Type = VmwNsxTDataCenterEdgeClusterNameType
+_VmwNsxTDataCenterEdgeClusterName_Object = MibScalar
+vmwNsxTDataCenterEdgeClusterName = _VmwNsxTDataCenterEdgeClusterName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 197),
+    _VmwNsxTDataCenterEdgeClusterName_Type()
+)
+vmwNsxTDataCenterEdgeClusterName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterEdgeClusterName.setStatus("current")
+_VmwNsxTDataCenterHaState_Type = VmwNsxTDataCenterHaStateType
+_VmwNsxTDataCenterHaState_Object = MibScalar
+vmwNsxTDataCenterHaState = _VmwNsxTDataCenterHaState_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 220),
+    _VmwNsxTDataCenterHaState_Type()
+)
+vmwNsxTDataCenterHaState.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterHaState.setStatus("current")
+_VmwNsxTDataCenterHaState2_Type = VmwNsxTDataCenterHaState2Type
+_VmwNsxTDataCenterHaState2_Object = MibScalar
+vmwNsxTDataCenterHaState2 = _VmwNsxTDataCenterHaState2_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 221),
+    _VmwNsxTDataCenterHaState2_Type()
+)
+vmwNsxTDataCenterHaState2.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterHaState2.setStatus("current")
+_VmwNsxTDataCenterTransportNodeId2_Type = VmwNsxTDataCenterTransportNodeId2Type
+_VmwNsxTDataCenterTransportNodeId2_Object = MibScalar
+vmwNsxTDataCenterTransportNodeId2 = _VmwNsxTDataCenterTransportNodeId2_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 222),
+    _VmwNsxTDataCenterTransportNodeId2_Type()
+)
+vmwNsxTDataCenterTransportNodeId2.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterTransportNodeId2.setStatus("current")
+_VmwNsxTDataCenterDvsName_Type = VmwNsxTDataCenterDvsNameType
+_VmwNsxTDataCenterDvsName_Object = MibScalar
+vmwNsxTDataCenterDvsName = _VmwNsxTDataCenterDvsName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 223),
+    _VmwNsxTDataCenterDvsName_Type()
+)
+vmwNsxTDataCenterDvsName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterDvsName.setStatus("current")
+_VmwNsxTDataCenterVtepFaultReason_Type = VmwNsxTDataCenterVtepFaultReasonType
+_VmwNsxTDataCenterVtepFaultReason_Object = MibScalar
+vmwNsxTDataCenterVtepFaultReason = _VmwNsxTDataCenterVtepFaultReason_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 224),
+    _VmwNsxTDataCenterVtepFaultReason_Type()
+)
+vmwNsxTDataCenterVtepFaultReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterVtepFaultReason.setStatus("current")
+_VmwNsxTDataCenterVtepName_Type = VmwNsxTDataCenterVtepNameType
+_VmwNsxTDataCenterVtepName_Object = MibScalar
+vmwNsxTDataCenterVtepName = _VmwNsxTDataCenterVtepName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 225),
+    _VmwNsxTDataCenterVtepName_Type()
+)
+vmwNsxTDataCenterVtepName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterVtepName.setStatus("current")
+_VmwNsxTDataCenterMetricsTargetAddress_Type = VmwNsxTDataCenterMetricsTargetAddressType
+_VmwNsxTDataCenterMetricsTargetAddress_Object = MibScalar
+vmwNsxTDataCenterMetricsTargetAddress = _VmwNsxTDataCenterMetricsTargetAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 226),
+    _VmwNsxTDataCenterMetricsTargetAddress_Type()
+)
+vmwNsxTDataCenterMetricsTargetAddress.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterMetricsTargetAddress.setStatus("current")
+_VmwNsxTDataCenterMetricsTargetAlias_Type = VmwNsxTDataCenterMetricsTargetAliasType
+_VmwNsxTDataCenterMetricsTargetAlias_Object = MibScalar
+vmwNsxTDataCenterMetricsTargetAlias = _VmwNsxTDataCenterMetricsTargetAlias_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 227),
+    _VmwNsxTDataCenterMetricsTargetAlias_Type()
+)
+vmwNsxTDataCenterMetricsTargetAlias.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterMetricsTargetAlias.setStatus("current")
+_VmwNsxTDataCenterMetricsTargetPort_Type = VmwNsxTDataCenterMetricsTargetPortType
+_VmwNsxTDataCenterMetricsTargetPort_Object = MibScalar
+vmwNsxTDataCenterMetricsTargetPort = _VmwNsxTDataCenterMetricsTargetPort_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 228),
+    _VmwNsxTDataCenterMetricsTargetPort_Type()
+)
+vmwNsxTDataCenterMetricsTargetPort.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterMetricsTargetPort.setStatus("current")
+_VmwNsxTDataCenterIPv4Address_Type = VmwNsxTDataCenterIPv4AddressType
+_VmwNsxTDataCenterIPv4Address_Object = MibScalar
+vmwNsxTDataCenterIPv4Address = _VmwNsxTDataCenterIPv4Address_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 229),
+    _VmwNsxTDataCenterIPv4Address_Type()
+)
+vmwNsxTDataCenterIPv4Address.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterIPv4Address.setStatus("current")
+_VmwNsxTDataCenterIPv6Address_Type = VmwNsxTDataCenterIPv6AddressType
+_VmwNsxTDataCenterIPv6Address_Object = MibScalar
+vmwNsxTDataCenterIPv6Address = _VmwNsxTDataCenterIPv6Address_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 230),
+    _VmwNsxTDataCenterIPv6Address_Type()
+)
+vmwNsxTDataCenterIPv6Address.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterIPv6Address.setStatus("current")
+_VmwNsxTDataCenterConstraintLimit_Type = VmwNsxTDataCenterConstraintLimitType
+_VmwNsxTDataCenterConstraintLimit_Object = MibScalar
+vmwNsxTDataCenterConstraintLimit = _VmwNsxTDataCenterConstraintLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 231),
+    _VmwNsxTDataCenterConstraintLimit_Type()
+)
+vmwNsxTDataCenterConstraintLimit.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterConstraintLimit.setStatus("current")
+_VmwNsxTDataCenterConstraintType_Type = VmwNsxTDataCenterConstraintTypeType
+_VmwNsxTDataCenterConstraintType_Object = MibScalar
+vmwNsxTDataCenterConstraintType = _VmwNsxTDataCenterConstraintType_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 232),
+    _VmwNsxTDataCenterConstraintType_Type()
+)
+vmwNsxTDataCenterConstraintType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterConstraintType.setStatus("current")
+_VmwNsxTDataCenterCurrentCount_Type = VmwNsxTDataCenterCurrentCountType
+_VmwNsxTDataCenterCurrentCount_Object = MibScalar
+vmwNsxTDataCenterCurrentCount = _VmwNsxTDataCenterCurrentCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 233),
+    _VmwNsxTDataCenterCurrentCount_Type()
+)
+vmwNsxTDataCenterCurrentCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterCurrentCount.setStatus("current")
+_VmwNsxTDataCenterGroupId_Type = VmwNsxTDataCenterGroupIdType
+_VmwNsxTDataCenterGroupId_Object = MibScalar
+vmwNsxTDataCenterGroupId = _VmwNsxTDataCenterGroupId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 234),
+    _VmwNsxTDataCenterGroupId_Type()
+)
+vmwNsxTDataCenterGroupId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterGroupId.setStatus("current")
+_VmwNsxTDataCenterGroupMaxNumberLimit_Type = VmwNsxTDataCenterGroupMaxNumberLimitType
+_VmwNsxTDataCenterGroupMaxNumberLimit_Object = MibScalar
+vmwNsxTDataCenterGroupMaxNumberLimit = _VmwNsxTDataCenterGroupMaxNumberLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 235),
+    _VmwNsxTDataCenterGroupMaxNumberLimit_Type()
+)
+vmwNsxTDataCenterGroupMaxNumberLimit.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterGroupMaxNumberLimit.setStatus("current")
+_VmwNsxTDataCenterGroupSize_Type = VmwNsxTDataCenterGroupSizeType
+_VmwNsxTDataCenterGroupSize_Object = MibScalar
+vmwNsxTDataCenterGroupSize = _VmwNsxTDataCenterGroupSize_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 236),
+    _VmwNsxTDataCenterGroupSize_Type()
+)
+vmwNsxTDataCenterGroupSize.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterGroupSize.setStatus("current")
+_VmwNsxTDataCenterIPCount_Type = VmwNsxTDataCenterIPCountType
+_VmwNsxTDataCenterIPCount_Object = MibScalar
+vmwNsxTDataCenterIPCount = _VmwNsxTDataCenterIPCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 237),
+    _VmwNsxTDataCenterIPCount_Type()
+)
+vmwNsxTDataCenterIPCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterIPCount.setStatus("current")
+_VmwNsxTDataCenterLrpCount_Type = VmwNsxTDataCenterLrpCountType
+_VmwNsxTDataCenterLrpCount_Object = MibScalar
+vmwNsxTDataCenterLrpCount = _VmwNsxTDataCenterLrpCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 238),
+    _VmwNsxTDataCenterLrpCount_Type()
+)
+vmwNsxTDataCenterLrpCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterLrpCount.setStatus("current")
+_VmwNsxTDataCenterLspCount_Type = VmwNsxTDataCenterLspCountType
+_VmwNsxTDataCenterLspCount_Object = MibScalar
+vmwNsxTDataCenterLspCount = _VmwNsxTDataCenterLspCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 239),
+    _VmwNsxTDataCenterLspCount_Type()
+)
+vmwNsxTDataCenterLspCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterLspCount.setStatus("current")
+_VmwNsxTDataCenterMacCount_Type = VmwNsxTDataCenterMacCountType
+_VmwNsxTDataCenterMacCount_Object = MibScalar
+vmwNsxTDataCenterMacCount = _VmwNsxTDataCenterMacCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 240),
+    _VmwNsxTDataCenterMacCount_Type()
+)
+vmwNsxTDataCenterMacCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterMacCount.setStatus("current")
+_VmwNsxTDataCenterSidCount_Type = VmwNsxTDataCenterSidCountType
+_VmwNsxTDataCenterSidCount_Object = MibScalar
+vmwNsxTDataCenterSidCount = _VmwNsxTDataCenterSidCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 241),
+    _VmwNsxTDataCenterSidCount_Type()
+)
+vmwNsxTDataCenterSidCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterSidCount.setStatus("current")
+_VmwNsxTDataCenterTNCount_Type = VmwNsxTDataCenterTNCountType
+_VmwNsxTDataCenterTNCount_Object = MibScalar
+vmwNsxTDataCenterTNCount = _VmwNsxTDataCenterTNCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 244),
+    _VmwNsxTDataCenterTNCount_Type()
+)
+vmwNsxTDataCenterTNCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterTNCount.setStatus("current")
+_VmwNsxTDataCenterVifCount_Type = VmwNsxTDataCenterVifCountType
+_VmwNsxTDataCenterVifCount_Object = MibScalar
+vmwNsxTDataCenterVifCount = _VmwNsxTDataCenterVifCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 245),
+    _VmwNsxTDataCenterVifCount_Type()
+)
+vmwNsxTDataCenterVifCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterVifCount.setStatus("current")
+_VmwNsxTDataCenterVMCount_Type = VmwNsxTDataCenterVMCountType
+_VmwNsxTDataCenterVMCount_Object = MibScalar
+vmwNsxTDataCenterVMCount = _VmwNsxTDataCenterVMCount_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 246),
+    _VmwNsxTDataCenterVMCount_Type()
+)
+vmwNsxTDataCenterVMCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterVMCount.setStatus("current")
+_VmwNsxTDataCenterCoreId_Type = VmwNsxTDataCenterCoreIdType
+_VmwNsxTDataCenterCoreId_Object = MibScalar
+vmwNsxTDataCenterCoreId = _VmwNsxTDataCenterCoreId_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 247),
+    _VmwNsxTDataCenterCoreId_Type()
+)
+vmwNsxTDataCenterCoreId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterCoreId.setStatus("current")
+_VmwNsxTDataCenterFlowCacheThreshold_Type = VmwNsxTDataCenterFlowCacheThresholdType
+_VmwNsxTDataCenterFlowCacheThreshold_Object = MibScalar
+vmwNsxTDataCenterFlowCacheThreshold = _VmwNsxTDataCenterFlowCacheThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 248),
+    _VmwNsxTDataCenterFlowCacheThreshold_Type()
+)
+vmwNsxTDataCenterFlowCacheThreshold.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterFlowCacheThreshold.setStatus("current")
+_VmwNsxTDataCenterNSXaaSServiceName_Type = VmwNsxTDataCenterNSXaaSServiceNameType
+_VmwNsxTDataCenterNSXaaSServiceName_Object = MibScalar
+vmwNsxTDataCenterNSXaaSServiceName = _VmwNsxTDataCenterNSXaaSServiceName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 249),
+    _VmwNsxTDataCenterNSXaaSServiceName_Type()
+)
+vmwNsxTDataCenterNSXaaSServiceName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNSXaaSServiceName.setStatus("current")
+_VmwNsxTDataCenterProtocolName_Type = VmwNsxTDataCenterProtocolNameType
+_VmwNsxTDataCenterProtocolName_Object = MibScalar
+vmwNsxTDataCenterProtocolName = _VmwNsxTDataCenterProtocolName_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 250),
+    _VmwNsxTDataCenterProtocolName_Type()
+)
+vmwNsxTDataCenterProtocolName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterProtocolName.setStatus("current")
+_VmwNsxTDataCenterConstraintTypePath_Type = VmwNsxTDataCenterConstraintTypePathType
+_VmwNsxTDataCenterConstraintTypePath_Object = MibScalar
+vmwNsxTDataCenterConstraintTypePath = _VmwNsxTDataCenterConstraintTypePath_Object(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 1, 251),
+    _VmwNsxTDataCenterConstraintTypePath_Type()
+)
+vmwNsxTDataCenterConstraintTypePath.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterConstraintTypePath.setStatus("current")
 _VmwNsxTDataCenterConformance_ObjectIdentity = ObjectIdentity
 vmwNsxTDataCenterConformance = _VmwNsxTDataCenterConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2)
@@ -2974,6 +4147,101 @@ vmwNsxTDataCenterNotificationInfoGroup9.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTDataCenterNotificationInfoGroup9.setStatus("current")
+
+vmwNsxTDataCenterNotificationInfoGroup10 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 19)
+)
+vmwNsxTDataCenterNotificationInfoGroup10.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterNewVMMorefId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPolicyEdgeVMName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationInfoGroup10.setStatus("current")
+
+vmwNsxTDataCenterNotificationInfoGroup11 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 21)
+)
+vmwNsxTDataCenterNotificationInfoGroup11.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterCoreId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFlowCacheThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationInfoGroup11.setStatus("current")
+
+vmwNsxTDataCenterNotificationInfoGroup12 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 23)
+)
+vmwNsxTDataCenterNotificationInfoGroup12.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterCoreDumpCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeClusterId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMemberIndexId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXESXTNName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXEdgeTNName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeDisplayOrHostName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitMaximum"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationInfoGroup12.setStatus("current")
+
+vmwNsxTDataCenterNotificationInfoGroup13 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 25)
+)
+vmwNsxTDataCenterNotificationInfoGroup13.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterCollectorIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeClusterHighestHwVersion"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeClusterName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeTNHwVersion"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterStackAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVerticalName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationInfoGroup13.setStatus("current")
+
+vmwNsxTDataCenterNotificationInfoGroup14 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 27)
+)
+vmwNsxTDataCenterNotificationInfoGroup14.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintLimit"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintTypePath"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCurrentCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupMaxNumberLimit"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupSize"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterIPCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterIPv4Address"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterIPv6Address"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterLrpCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterLspCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMacCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetAddress"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetPort"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXaaSServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterProtocolName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSidCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTNCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVifCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepFaultReason"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationInfoGroup14.setStatus("current")
 
 
 # Notification objects
@@ -3431,6 +4699,78 @@ vmwNsxTManagerHealthStorageErrorClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTManagerHealthStorageErrorClear.setStatus(
+        "current"
+    )
+
+vmwNsxTManagerHealthMissingDNSEntryForManagerFQDN = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 1, 0, 28)
+)
+vmwNsxTManagerHealthMissingDNSEntryForManagerFQDN.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterManagerNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTManagerHealthMissingDNSEntryForManagerFQDN.setStatus(
+        "current"
+    )
+
+vmwNsxTManagerHealthMissingDNSEntryForManagerFQDNClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 1, 0, 29)
+)
+vmwNsxTManagerHealthMissingDNSEntryForManagerFQDNClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterManagerNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTManagerHealthMissingDNSEntryForManagerFQDNClear.setStatus(
+        "current"
+    )
+
+vmwNsxTManagerHealthMissingDNSEntryForVipFQDN = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 1, 0, 33)
+)
+vmwNsxTManagerHealthMissingDNSEntryForVipFQDN.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterIPv4Address"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterIPv6Address"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTManagerHealthMissingDNSEntryForVipFQDN.setStatus(
+        "current"
+    )
+
+vmwNsxTManagerHealthMissingDNSEntryForVipFQDNClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 1, 0, 34)
+)
+vmwNsxTManagerHealthMissingDNSEntryForVipFQDNClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTManagerHealthMissingDNSEntryForVipFQDNClear.setStatus(
         "current"
     )
 
@@ -4183,6 +5523,78 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTEdgeHealthMegaFlowCacheHitRateLow = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 2, 0, 55)
+)
+vmwNsxTEdgeHealthMegaFlowCacheHitRateLow.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFlowCacheThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCoreId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeHealthMegaFlowCacheHitRateLow.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeHealthMegaFlowCacheHitRateLowClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 2, 0, 56)
+)
+vmwNsxTEdgeHealthMegaFlowCacheHitRateLowClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeHealthMegaFlowCacheHitRateLowClear.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeHealthMicroFlowCacheHitRateLow = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 2, 0, 57)
+)
+vmwNsxTEdgeHealthMicroFlowCacheHitRateLow.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFlowCacheThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCoreId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeHealthMicroFlowCacheHitRateLow.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeHealthMicroFlowCacheHitRateLowClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 2, 0, 58)
+)
+vmwNsxTEdgeHealthMicroFlowCacheHitRateLowClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeHealthMicroFlowCacheHitRateLowClear.setStatus(
+        "current"
+    )
+
 vmwNsxTCertificatesCertificateExpirationApproaching = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 1)
 )
@@ -4355,6 +5767,108 @@ vmwNsxTCertificatesCABundleUpdateSuggestedClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTCertificatesCABundleUpdateSuggestedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTCertificatesTransportNodeCertificateExpirApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 17)
+)
+vmwNsxTCertificatesTransportNodeCertificateExpirApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCertificatesTransportNodeCertificateExpirApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTCertificatesTransportNodeCertificateExpirApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 18)
+)
+vmwNsxTCertificatesTransportNodeCertificateExpirApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCertificatesTransportNodeCertificateExpirApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTCertificatesTransportNodeCertificateExpired = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 19)
+)
+vmwNsxTCertificatesTransportNodeCertificateExpired.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCertificatesTransportNodeCertificateExpired.setStatus(
+        "current"
+    )
+
+vmwNsxTCertificatesTransportNodeCertificateExpiredClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 20)
+)
+vmwNsxTCertificatesTransportNodeCertificateExpiredClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCertificatesTransportNodeCertificateExpiredClear.setStatus(
+        "current"
+    )
+
+vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpire = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 21)
+)
+vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpire.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpire.setStatus(
+        "current"
+    )
+
+vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpireClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 3, 0, 22)
+)
+vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpireClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpireClear.setStatus(
         "current"
     )
 
@@ -5032,6 +6546,42 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 10, 0, 5)
+)
+vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 10, 0, 6)
+)
+vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPUClear.setStatus(
+        "current"
+    )
+
 vmwNsxTNCPHealthNCPPluginDown = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 11, 0, 3)
 )
@@ -5100,6 +6650,42 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 12, 0, 5)
+)
+vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 12, 0, 6)
+)
+vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPUClear.setStatus(
+        "current"
+    )
+
 vmwNsxTEndpointProtectionEAMStatusDown = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 13, 0, 1)
 )
@@ -5165,6 +6751,366 @@ vmwNsxTEndpointProtectionPartnerChannelDownClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTEndpointProtectionPartnerChannelDownClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionNewHostAdded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 7)
+)
+vmwNsxTServiceInsertionNewHostAdded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionNewHostAdded.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionNewHostAddedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 8)
+)
+vmwNsxTServiceInsertionNewHostAddedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionNewHostAddedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceDeploymentFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 9)
+)
+vmwNsxTServiceInsertionServiceDeploymentFailed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFailureReason"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceDeploymentFailed.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceDeploymentFailedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 10)
+)
+vmwNsxTServiceInsertionServiceDeploymentFailedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceDeploymentFailedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceDeploymentSucceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 11)
+)
+vmwNsxTServiceInsertionServiceDeploymentSucceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceDeploymentSucceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceDeploymentSucceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 12)
+)
+vmwNsxTServiceInsertionServiceDeploymentSucceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceDeploymentSucceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceUndeploymentFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 15)
+)
+vmwNsxTServiceInsertionServiceUndeploymentFailed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFailureReason"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceUndeploymentFailed.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceUndeploymentFailedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 16)
+)
+vmwNsxTServiceInsertionServiceUndeploymentFailedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceUndeploymentFailedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceUndeploymentSucceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 17)
+)
+vmwNsxTServiceInsertionServiceUndeploymentSucceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceUndeploymentSucceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceUndeploymentSucceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 18)
+)
+vmwNsxTServiceInsertionServiceUndeploymentSucceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCentervCenterClusterId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceUndeploymentSucceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceChainPathDown = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 21)
+)
+vmwNsxTServiceInsertionServiceChainPathDown.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceChainPathDown.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceChainPathDownClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 22)
+)
+vmwNsxTServiceInsertionServiceChainPathDownClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceChainPathDownClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionSVMHealthStatusDown = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 23)
+)
+vmwNsxTServiceInsertionSVMHealthStatusDown.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHostnameOrIPAddressWithPort"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFailureReason"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionSVMHealthStatusDown.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionSVMHealthStatusDownClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 24)
+)
+vmwNsxTServiceInsertionSVMHealthStatusDownClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionSVMHealthStatusDownClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionSVMHealthStatusUp = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 25)
+)
+vmwNsxTServiceInsertionSVMHealthStatusUp.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHostnameOrIPAddressWithPort"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionSVMHealthStatusUp.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionSVMHealthStatusUpClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 26)
+)
+vmwNsxTServiceInsertionSVMHealthStatusUpClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionSVMHealthStatusUpClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionSVMLivenessStateDown = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 27)
+)
+vmwNsxTServiceInsertionSVMLivenessStateDown.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionSVMLivenessStateDown.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionSVMLivenessStateDownClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 28)
+)
+vmwNsxTServiceInsertionSVMLivenessStateDownClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionSVMLivenessStateDownClear.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceInsertionInfraStatusDown = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 29)
+)
+vmwNsxTServiceInsertionServiceInsertionInfraStatusDown.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFailureReason"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceInsertionInfraStatusDown.setStatus(
+        "current"
+    )
+
+vmwNsxTServiceInsertionServiceInsertionInfraStatusDownClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 14, 0, 30)
+)
+vmwNsxTServiceInsertionServiceInsertionInfraStatusDownClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTServiceInsertionServiceInsertionInfraStatusDownClear.setStatus(
         "current"
     )
 
@@ -5864,6 +7810,78 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTTransportNodeHealthLAGMemberDownOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 18, 0, 9)
+)
+vmwNsxTTransportNodeHealthLAGMemberDownOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTransportNodeHealthLAGMemberDownOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTTransportNodeHealthLAGMemberDownOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 18, 0, 10)
+)
+vmwNsxTTransportNodeHealthLAGMemberDownOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTransportNodeHealthLAGMemberDownOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 18, 0, 11)
+)
+vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 18, 0, 12)
+)
+vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPUClear.setStatus(
+        "current"
+    )
+
 vmwNsxTInfrastructureServiceEdgeServiceStatusChanged = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 1)
 )
@@ -5975,6 +7993,120 @@ vmwNsxTInfrastructureServiceServiceStatusUnknownClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTInfrastructureServiceServiceStatusUnknownClear.setStatus(
+        "current"
+    )
+
+vmwNsxTInfrastructureServiceApplicationCrashed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 9)
+)
+vmwNsxTInfrastructureServiceApplicationCrashed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeDisplayOrHostName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCoreDumpCount"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTInfrastructureServiceApplicationCrashed.setStatus(
+        "current"
+    )
+
+vmwNsxTInfrastructureServiceApplicationCrashedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 10)
+)
+vmwNsxTInfrastructureServiceApplicationCrashedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTInfrastructureServiceApplicationCrashedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 11)
+)
+vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 12)
+)
+vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTInfrastructureServiceMetricsDeliveryFailure = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 19)
+)
+vmwNsxTInfrastructureServiceMetricsDeliveryFailure.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetAddress"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetPort"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTInfrastructureServiceMetricsDeliveryFailure.setStatus(
+        "current"
+    )
+
+vmwNsxTInfrastructureServiceMetricsDeliveryFailureClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 19, 0, 20)
+)
+vmwNsxTInfrastructureServiceMetricsDeliveryFailureClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetAddress"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMetricsTargetPort"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTInfrastructureServiceMetricsDeliveryFailureClear.setStatus(
         "current"
     )
 
@@ -6122,6 +8254,164 @@ vmwNsxTHighAvailabilityTier1GatewayFailoverClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTHighAvailabilityTier1GatewayFailoverClear.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier0ServiceGroupFailover = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 13)
+)
+vmwNsxTHighAvailabilityTier0ServiceGroupFailover.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId2"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier0ServiceGroupFailover.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier0ServiceGroupFailoverClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 14)
+)
+vmwNsxTHighAvailabilityTier0ServiceGroupFailoverClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier0ServiceGroupFailoverClear.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier1ServiceGroupFailover = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 15)
+)
+vmwNsxTHighAvailabilityTier1ServiceGroupFailover.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId2"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier1ServiceGroupFailover.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier1ServiceGroupFailoverClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 16)
+)
+vmwNsxTHighAvailabilityTier1ServiceGroupFailoverClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier1ServiceGroupFailoverClear.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancy = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 17)
+)
+vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancy.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceRouterId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancy.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancyClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 18)
+)
+vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancyClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId2"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancyClear.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancy = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 19)
+)
+vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancy.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterServiceRouterId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancy.setStatus(
+        "current"
+    )
+
+vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancyClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 21, 0, 20)
+)
+vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancyClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHaState2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId2"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancyClear.setStatus(
         "current"
     )
 
@@ -6542,6 +8832,320 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 39)
+)
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 40)
+)
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 41)
+)
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 42)
+)
+vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4RouteLimitApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 43)
+)
+vmwNsxTRoutingMaximumIPv4RouteLimitApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4RouteLimitApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4RouteLimitApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 44)
+)
+vmwNsxTRoutingMaximumIPv4RouteLimitApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4RouteLimitApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4RouteLimitExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 45)
+)
+vmwNsxTRoutingMaximumIPv4RouteLimitExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitMaximum"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4RouteLimitExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv4RouteLimitExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 46)
+)
+vmwNsxTRoutingMaximumIPv4RouteLimitExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitMaximum"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv4RouteLimitExceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 47)
+)
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 48)
+)
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 49)
+)
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 50)
+)
+vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSubsequentAddressFamily"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterBGPNeighborIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPrefixesCountMax"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6RouteLimitApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 51)
+)
+vmwNsxTRoutingMaximumIPv6RouteLimitApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6RouteLimitApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6RouteLimitApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 52)
+)
+vmwNsxTRoutingMaximumIPv6RouteLimitApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitThreshold"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6RouteLimitApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6RouteLimitExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 53)
+)
+vmwNsxTRoutingMaximumIPv6RouteLimitExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitMaximum"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6RouteLimitExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTRoutingMaximumIPv6RouteLimitExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 28, 0, 54)
+)
+vmwNsxTRoutingMaximumIPv6RouteLimitExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterRouteLimitMaximum"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeNode"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTRoutingMaximumIPv6RouteLimitExceededClear.setStatus(
+        "current"
+    )
+
 vmwNsxTDNSForwarderDisabled = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 30, 0, 1)
 )
@@ -6799,6 +9403,308 @@ vmwNsxTDistributedFirewallDFWVmotionFailureClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTDistributedFirewallDFWVmotionFailureClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 9)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 10)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 11)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 12)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 13)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 14)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproaching = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 15)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproaching.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproaching.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproachingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 16)
+)
+vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproachingClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproachingClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 17)
+)
+vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 18)
+)
+vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 19)
+)
+vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHeapType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 20)
+)
+vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterHeapType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWFloodLimitWarning = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 21)
+)
+vmwNsxTDistributedFirewallDFWFloodLimitWarning.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterProtocolName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWFloodLimitWarning.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWFloodLimitWarningClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 22)
+)
+vmwNsxTDistributedFirewallDFWFloodLimitWarningClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterProtocolName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWFloodLimitWarningClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWFloodLimitCritical = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 23)
+)
+vmwNsxTDistributedFirewallDFWFloodLimitCritical.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterProtocolName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWFloodLimitCritical.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedFirewallDFWFloodLimitCriticalClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 31, 0, 24)
+)
+vmwNsxTDistributedFirewallDFWFloodLimitCriticalClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterProtocolName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedFirewallDFWFloodLimitCriticalClear.setStatus(
         "current"
     )
 
@@ -7631,6 +10537,436 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 23)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 24)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 31)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 32)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 33)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 34)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 35)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 36)
+)
+vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemResourceUsage"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 53)
+)
+vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribed.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 54)
+)
+vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 55)
+)
+vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribed.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 56)
+)
+vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHigh = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 57)
+)
+vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHigh.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHigh.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHighClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 58)
+)
+vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHighClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHighClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHigh = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 59)
+)
+vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHigh.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHigh.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHighClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 60)
+)
+vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHighClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHighClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 61)
+)
+vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribed.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 62)
+)
+vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 63)
+)
+vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribed.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 64)
+)
+vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHigh = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 65)
+)
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHigh.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHigh.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHighClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 66)
+)
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHighClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHighClear.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHigh = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 67)
+)
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHigh.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHigh.setStatus(
+        "current"
+    )
+
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHighClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 33, 0, 68)
+)
+vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHighClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSystemUsageThreshold"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHighClear.setStatus(
+        "current"
+    )
+
 vmwNsxTCommunicationManagementChannelToTransportNodeDown = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 1)
 )
@@ -7830,7 +11166,9 @@ vmwNsxTCommunicationControlChannelToTransportNodeDown.setObjects(
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
-        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCentralControlPlaneId"))
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterApplianceAddress"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCentralControlPlaneId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
 )
 if mibBuilder.loadTexts:
     vmwNsxTCommunicationControlChannelToTransportNodeDown.setStatus(
@@ -7848,6 +11186,7 @@ vmwNsxTCommunicationControlChannelToTransportNodeDownClear.setObjects(
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterApplianceAddress"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCentralControlPlaneId"))
 )
 if mibBuilder.loadTexts:
@@ -7947,7 +11286,9 @@ vmwNsxTCommunicationControlChannelToTransportNodeDownLong.setObjects(
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
-        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCentralControlPlaneId"))
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterApplianceAddress"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCentralControlPlaneId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
 )
 if mibBuilder.loadTexts:
     vmwNsxTCommunicationControlChannelToTransportNodeDownLong.setStatus(
@@ -7965,6 +11306,7 @@ vmwNsxTCommunicationControlChannelToTransportNodeDownLongClear.setObjects(
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterApplianceAddress"),
         ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCentralControlPlaneId"))
 )
 if mibBuilder.loadTexts:
@@ -8080,6 +11422,130 @@ vmwNsxTCommunicationManagementChannelToManagerNodeDownLongClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTCommunicationManagementChannelToManagerNodeDownLongClear.setStatus(
+        "current"
+    )
+
+vmwNsxTCommunicationNetworkLatencyHigh = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 29)
+)
+vmwNsxTCommunicationNetworkLatencyHigh.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeAddress"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCommunicationNetworkLatencyHigh.setStatus(
+        "current"
+    )
+
+vmwNsxTCommunicationNetworkLatencyHighClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 30)
+)
+vmwNsxTCommunicationNetworkLatencyHighClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeAddress"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCommunicationNetworkLatencyHighClear.setStatus(
+        "current"
+    )
+
+vmwNsxTCommunicationLimitedReachabilityOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 31)
+)
+vmwNsxTCommunicationLimitedReachabilityOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVerticalName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCollectorIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterStackAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCommunicationLimitedReachabilityOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTCommunicationLimitedReachabilityOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 32)
+)
+vmwNsxTCommunicationLimitedReachabilityOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVerticalName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCollectorIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterStackAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCommunicationLimitedReachabilityOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTCommunicationUnreachableCollectorOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 33)
+)
+vmwNsxTCommunicationUnreachableCollectorOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVerticalName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCollectorIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterStackAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCommunicationUnreachableCollectorOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTCommunicationUnreachableCollectorOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 35, 0, 34)
+)
+vmwNsxTCommunicationUnreachableCollectorOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVerticalName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCollectorIP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterStackAlias"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTCommunicationUnreachableCollectorOnDPUClear.setStatus(
         "current"
     )
 
@@ -8736,6 +12202,42 @@ vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectedClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 41, 0, 17)
+)
+vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 41, 0, 18)
+)
+vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPUClear.setStatus(
         "current"
     )
 
@@ -10915,6 +14417,158 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenter = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 9)
+)
+vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenter.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPolicyEdgeVMName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenter.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenterClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 10)
+)
+vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenterClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenterClear.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenter = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 11)
+)
+vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenter.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPolicyEdgeVMName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenter.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenterClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 12)
+)
+vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenterClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenterClear.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeploy = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 13)
+)
+vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeploy.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNewVMMorefId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterPolicyEdgeVMName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeploy.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeployClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 14)
+)
+vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeployClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVMMorefId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNewVMMorefId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeployClear.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeEdgeHardwareVersionMismatch = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 15)
+)
+vmwNsxTEdgeEdgeHardwareVersionMismatch.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeClusterName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeTNHwVersion"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeClusterHighestHwVersion"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeEdgeHardwareVersionMismatch.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeEdgeHardwareVersionMismatchClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 45, 0, 16)
+)
+vmwNsxTEdgeEdgeHardwareVersionMismatchClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeEdgeHardwareVersionMismatchClear.setStatus(
+        "current"
+    )
+
 vmwNsxTNATSNATPortUsageOnGatewayIsHigh = NotificationType(
     (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 46, 0, 1)
 )
@@ -10950,6 +14604,924 @@ vmwNsxTNATSNATPortUsageOnGatewayIsHighClear.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTNATSNATPortUsageOnGatewayIsHighClear.setStatus(
+        "current"
+    )
+
+vmwNsxTPhysicalServerPhysicalServerInstallFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0, 1)
+)
+vmwNsxTPhysicalServerPhysicalServerInstallFailed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerPhysicalServerInstallFailed.setStatus(
+        "current"
+    )
+
+vmwNsxTPhysicalServerPhysicalServerInstallFailedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0, 2)
+)
+vmwNsxTPhysicalServerPhysicalServerInstallFailedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerPhysicalServerInstallFailedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTPhysicalServerPhysicalServerUninstallFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0, 3)
+)
+vmwNsxTPhysicalServerPhysicalServerUninstallFailed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerPhysicalServerUninstallFailed.setStatus(
+        "current"
+    )
+
+vmwNsxTPhysicalServerPhysicalServerUninstallFailedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0, 4)
+)
+vmwNsxTPhysicalServerPhysicalServerUninstallFailedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerPhysicalServerUninstallFailedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTPhysicalServerPhysicalServerUpgradeFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0, 5)
+)
+vmwNsxTPhysicalServerPhysicalServerUpgradeFailed.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerPhysicalServerUpgradeFailed.setStatus(
+        "current"
+    )
+
+vmwNsxTPhysicalServerPhysicalServerUpgradeFailedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 47, 0, 6)
+)
+vmwNsxTPhysicalServerPhysicalServerUpgradeFailedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPhysicalServerPhysicalServerUpgradeFailedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 1)
+)
+vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 2)
+)
+vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthDatabaseUnreachable = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 3)
+)
+vmwNsxTMalwarePreventionHealthDatabaseUnreachable.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthDatabaseUnreachable.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 4)
+)
+vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 5)
+)
+vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXEdgeTNName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXESXTNName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 6)
+)
+vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 7)
+)
+vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 8)
+)
+vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthServiceStatusDown = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 9)
+)
+vmwNsxTMalwarePreventionHealthServiceStatusDown.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXEdgeTNName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNSXESXTNName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthServiceStatusDown.setStatus(
+        "current"
+    )
+
+vmwNsxTMalwarePreventionHealthServiceStatusDownClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 48, 0, 10)
+)
+vmwNsxTMalwarePreventionHealthServiceStatusDownClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMpsServiceName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeName"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTMalwarePreventionHealthServiceStatusDownClear.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailure = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 49, 0, 5)
+)
+vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailure.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEdgeClusterId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMemberIndexId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailure.setStatus(
+        "current"
+    )
+
+vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailureClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 49, 0, 6)
+)
+vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailureClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailureClear.setStatus(
+        "current"
+    )
+
+vmwNsxTVMCAppTransitConnectFailure = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 50, 0, 1)
+)
+vmwNsxTVMCAppTransitConnectFailure.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTVMCAppTransitConnectFailure.setStatus(
+        "current"
+    )
+
+vmwNsxTVMCAppTransitConnectFailureClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 50, 0, 2)
+)
+vmwNsxTVMCAppTransitConnectFailureClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTVMCAppTransitConnectFailureClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthFaultyTEP = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 1)
+)
+vmwNsxTTEPHealthFaultyTEP.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepFaultReason"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthFaultyTEP.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthFaultyTEPClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 2)
+)
+vmwNsxTTEPHealthFaultyTEPClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthFaultyTEPClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthFaultyTEPOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 3)
+)
+vmwNsxTTEPHealthFaultyTEPOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepFaultReason"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthFaultyTEPOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthFaultyTEPOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 4)
+)
+vmwNsxTTEPHealthFaultyTEPOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthFaultyTEPOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverFailure = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 5)
+)
+vmwNsxTTEPHealthTEPAutorecoverFailure.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverFailure.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverFailureClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 6)
+)
+vmwNsxTTEPHealthTEPAutorecoverFailureClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverFailureClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverFailureOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 7)
+)
+vmwNsxTTEPHealthTEPAutorecoverFailureOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverFailureOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverFailureOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 8)
+)
+vmwNsxTTEPHealthTEPAutorecoverFailureOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverFailureOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverSuccess = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 9)
+)
+vmwNsxTTEPHealthTEPAutorecoverSuccess.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverSuccess.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverSuccessClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 10)
+)
+vmwNsxTTEPHealthTEPAutorecoverSuccessClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverSuccessClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 11)
+)
+vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 12)
+)
+vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPHaActivated = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 13)
+)
+vmwNsxTTEPHealthTEPHaActivated.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPHaActivated.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPHaActivatedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 14)
+)
+vmwNsxTTEPHealthTEPHaActivatedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPHaActivatedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPHaActivatedOnDPU = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 15)
+)
+vmwNsxTTEPHealthTEPHaActivatedOnDPU.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPHaActivatedOnDPU.setStatus(
+        "current"
+    )
+
+vmwNsxTTEPHealthTEPHaActivatedOnDPUClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 51, 0, 16)
+)
+vmwNsxTTEPHealthTEPHaActivatedOnDPUClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVtepName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDvsName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterTransportNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterDPUId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTTEPHealthTEPHaActivatedOnDPUClear.setStatus(
+        "current"
+    )
+
+vmwNsxTPolicyConstraintCreationCountLimitReached = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 53, 0, 1)
+)
+vmwNsxTPolicyConstraintCreationCountLimitReached.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintTypePath"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterCurrentCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintLimit"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPolicyConstraintCreationCountLimitReached.setStatus(
+        "current"
+    )
+
+vmwNsxTPolicyConstraintCreationCountLimitReachedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 53, 0, 2)
+)
+vmwNsxTPolicyConstraintCreationCountLimitReachedClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterConstraintType"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTPolicyConstraintCreationCountLimitReachedClear.setStatus(
+        "current"
+    )
+
+vmwNsxTGroupsGroupSizeLimitExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 54, 0, 3)
+)
+vmwNsxTGroupsGroupSizeLimitExceeded.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupSize"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupMaxNumberLimit"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterIPCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterMacCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterVifCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterLspCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterLrpCount"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterSidCount"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTGroupsGroupSizeLimitExceeded.setStatus(
+        "current"
+    )
+
+vmwNsxTGroupsGroupSizeLimitExceededClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 54, 0, 4)
+)
+vmwNsxTGroupsGroupSizeLimitExceededClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterGroupMaxNumberLimit"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTGroupsGroupSizeLimitExceededClear.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityCompliancePollEAL4NonCompliance = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 1)
+)
+vmwNsxTSecurityCompliancePollEAL4NonCompliance.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityCompliancePollEAL4NonCompliance.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityCompliancePollEAL4NonComplianceClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 2)
+)
+vmwNsxTSecurityCompliancePollEAL4NonComplianceClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityCompliancePollEAL4NonComplianceClear.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityCompliancePollNDcPPNonCompliance = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 3)
+)
+vmwNsxTSecurityCompliancePollNDcPPNonCompliance.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityCompliancePollNDcPPNonCompliance.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityCompliancePollNDcPPNonComplianceClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 4)
+)
+vmwNsxTSecurityCompliancePollNDcPPNonComplianceClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityCompliancePollNDcPPNonComplianceClear.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityComplianceTriggerEAL4NonCompliance = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 5)
+)
+vmwNsxTSecurityComplianceTriggerEAL4NonCompliance.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityComplianceTriggerEAL4NonCompliance.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityComplianceTriggerEAL4NonComplianceClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 6)
+)
+vmwNsxTSecurityComplianceTriggerEAL4NonComplianceClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityComplianceTriggerEAL4NonComplianceClear.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityComplianceTriggerNDcPPNonCompliance = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 7)
+)
+vmwNsxTSecurityComplianceTriggerNDcPPNonCompliance.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityComplianceTriggerNDcPPNonCompliance.setStatus(
+        "current"
+    )
+
+vmwNsxTSecurityComplianceTriggerNDcPPNonComplianceClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 0, 56, 0, 8)
+)
+vmwNsxTSecurityComplianceTriggerNDcPPNonComplianceClear.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterTimestamp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterFeatureName"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEventSeverity"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeId"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNodeType"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterEntityId"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTSecurityComplianceTriggerNDcPPNonComplianceClear.setStatus(
         "current"
     )
 
@@ -11478,6 +16050,242 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwNsxTDataCenterNotificationGroup10 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 20)
+)
+vmwNsxTDataCenterNotificationGroup10.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenter"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenterClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenter"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenterClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeploy"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeployClear"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationGroup10.setStatus(
+        "current"
+    )
+
+vmwNsxTDataCenterNotificationGroup11 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 22)
+)
+vmwNsxTDataCenterNotificationGroup11.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTEdgeHealthMegaFlowCacheHitRateLow"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeHealthMegaFlowCacheHitRateLowClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeHealthMicroFlowCacheHitRateLow"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeHealthMicroFlowCacheHitRateLowClear"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationGroup11.setStatus(
+        "current"
+    )
+
+vmwNsxTDataCenterNotificationGroup12 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 24)
+)
+vmwNsxTDataCenterNotificationGroup12.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCommunicationNetworkLatencyHigh"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCommunicationNetworkLatencyHighClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHigh"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHighClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHigh"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHighClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHigh"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHighClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHigh"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHighClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailure"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailureClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTInfrastructureServiceApplicationCrashed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTInfrastructureServiceApplicationCrashedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthDatabaseUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthServiceStatusDown"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthServiceStatusDownClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPhysicalServerPhysicalServerInstallFailed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPhysicalServerPhysicalServerInstallFailedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPhysicalServerPhysicalServerUninstallFailed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPhysicalServerPhysicalServerUninstallFailedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPhysicalServerPhysicalServerUpgradeFailed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPhysicalServerPhysicalServerUpgradeFailedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4RouteLimitApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4RouteLimitApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4RouteLimitExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv4RouteLimitExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6RouteLimitApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6RouteLimitApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6RouteLimitExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTRoutingMaximumIPv6RouteLimitExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionNewHostAdded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionNewHostAddedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceChainPathDown"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceChainPathDownClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceDeploymentFailed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceDeploymentFailedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceDeploymentSucceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceDeploymentSucceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceInsertionInfraStatusDown"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceInsertionInfraStatusDownClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceUndeploymentFailed"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceUndeploymentFailedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceUndeploymentSucceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionServiceUndeploymentSucceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionSVMHealthStatusDown"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionSVMHealthStatusDownClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionSVMHealthStatusUp"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionSVMHealthStatusUpClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionSVMLivenessStateDown"),
+        ("VMWARE-NSX-MIB", "vmwNsxTServiceInsertionSVMLivenessStateDownClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTransportNodeHealthLAGMemberDownOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTransportNodeHealthLAGMemberDownOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPUClear"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationGroup12.setStatus(
+        "current"
+    )
+
+vmwNsxTDataCenterNotificationGroup13 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 26)
+)
+vmwNsxTDataCenterNotificationGroup13.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTCommunicationLimitedReachabilityOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCommunicationLimitedReachabilityOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCommunicationUnreachableCollectorOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCommunicationUnreachableCollectorOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeEdgeHardwareVersionMismatch"),
+        ("VMWARE-NSX-MIB", "vmwNsxTEdgeEdgeHardwareVersionMismatchClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier0ServiceGroupFailover"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier0ServiceGroupFailoverClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancy"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancyClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier1ServiceGroupFailover"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier1ServiceGroupFailoverClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancy"),
+        ("VMWARE-NSX-MIB", "vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancyClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthDatabaseUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthServiceStatusDown"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthServiceStatusDownClear"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationGroup13.setStatus(
+        "current"
+    )
+
+vmwNsxTDataCenterNotificationGroup14 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 2, 28)
+)
+vmwNsxTDataCenterNotificationGroup14.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTCertificatesTransportNodeCertificateExpirApproaching"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCertificatesTransportNodeCertificateExpirApproachingClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCertificatesTransportNodeCertificateExpired"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCertificatesTransportNodeCertificateExpiredClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpire"),
+        ("VMWARE-NSX-MIB", "vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpireClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWFloodLimitCritical"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWFloodLimitCriticalClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWFloodLimitWarning"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDistributedFirewallDFWFloodLimitWarningClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTGroupsGroupSizeLimitExceeded"),
+        ("VMWARE-NSX-MIB", "vmwNsxTGroupsGroupSizeLimitExceededClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTInfrastructureServiceMetricsDeliveryFailure"),
+        ("VMWARE-NSX-MIB", "vmwNsxTInfrastructureServiceMetricsDeliveryFailureClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable"),
+        ("VMWARE-NSX-MIB", "vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTManagerHealthMissingDNSEntryForManagerFQDN"),
+        ("VMWARE-NSX-MIB", "vmwNsxTManagerHealthMissingDNSEntryForManagerFQDNClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTManagerHealthMissingDNSEntryForVipFQDN"),
+        ("VMWARE-NSX-MIB", "vmwNsxTManagerHealthMissingDNSEntryForVipFQDNClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPolicyConstraintCreationCountLimitReached"),
+        ("VMWARE-NSX-MIB", "vmwNsxTPolicyConstraintCreationCountLimitReachedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityCompliancePollEAL4NonCompliance"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityCompliancePollEAL4NonComplianceClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityCompliancePollNDcPPNonCompliance"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityCompliancePollNDcPPNonComplianceClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityComplianceTriggerEAL4NonCompliance"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityComplianceTriggerEAL4NonComplianceClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityComplianceTriggerNDcPPNonCompliance"),
+        ("VMWARE-NSX-MIB", "vmwNsxTSecurityComplianceTriggerNDcPPNonComplianceClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthFaultyTEP"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthFaultyTEPClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthFaultyTEPOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthFaultyTEPOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverFailure"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverFailureClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverFailureOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverFailureOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverSuccess"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverSuccessClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPHaActivated"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPHaActivatedClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPHaActivatedOnDPU"),
+        ("VMWARE-NSX-MIB", "vmwNsxTTEPHealthTEPHaActivatedOnDPUClear"),
+        ("VMWARE-NSX-MIB", "vmwNsxTVMCAppTransitConnectFailure"),
+        ("VMWARE-NSX-MIB", "vmwNsxTVMCAppTransitConnectFailureClear"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterNotificationGroup14.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -11654,6 +16462,171 @@ vmwNsxTDataCenterBasicCompliance9.setObjects(
 )
 if mibBuilder.loadTexts:
     vmwNsxTDataCenterBasicCompliance9.setStatus(
+        "deprecated"
+    )
+
+vmwNsxTDataCenterBasicCompliance10 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 1, 10)
+)
+vmwNsxTDataCenterBasicCompliance10.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup5"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup10"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterBasicCompliance10.setStatus(
+        "deprecated"
+    )
+
+vmwNsxTDataCenterBasicCompliance11 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 1, 11)
+)
+vmwNsxTDataCenterBasicCompliance11.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup5"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup11"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterBasicCompliance11.setStatus(
+        "deprecated"
+    )
+
+vmwNsxTDataCenterBasicCompliance12 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 1, 12)
+)
+vmwNsxTDataCenterBasicCompliance12.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup12"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup5"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup12"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterBasicCompliance12.setStatus(
+        "deprecated"
+    )
+
+vmwNsxTDataCenterBasicCompliance13 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 1, 13)
+)
+vmwNsxTDataCenterBasicCompliance13.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup12"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup13"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup5"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup12"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup13"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterBasicCompliance13.setStatus(
+        "deprecated"
+    )
+
+vmwNsxTDataCenterBasicCompliance14 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6876, 120, 1, 2, 1, 14)
+)
+vmwNsxTDataCenterBasicCompliance14.setObjects(
+      *(("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup12"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup13"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationInfoGroup14"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup2"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup3"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup4"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup5"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup6"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup7"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup8"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup9"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup10"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup11"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup12"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup13"),
+        ("VMWARE-NSX-MIB", "vmwNsxTDataCenterNotificationGroup14"))
+)
+if mibBuilder.loadTexts:
+    vmwNsxTDataCenterBasicCompliance14.setStatus(
         "current"
     )
 
@@ -11772,6 +16745,61 @@ mibBuilder.exportSymbols(
        "VmwNsxTDataCenterNICThroughputThresholdType": VmwNsxTDataCenterNICThroughputThresholdType,
        "VmwNsxTDataCenterEdgeCryptoDrvNameType": VmwNsxTDataCenterEdgeCryptoDrvNameType,
        "VmwNsxTDataCenterNappNodeNameType": VmwNsxTDataCenterNappNodeNameType,
+       "VmwNsxTDataCenterNewVMMorefIdType": VmwNsxTDataCenterNewVMMorefIdType,
+       "VmwNsxTDataCenterPolicyEdgeVMNameType": VmwNsxTDataCenterPolicyEdgeVMNameType,
+       "VmwNsxTDataCenterVMMorefIdType": VmwNsxTDataCenterVMMorefIdType,
+       "VmwNsxTDataCenterDPUIdType": VmwNsxTDataCenterDPUIdType,
+       "VmwNsxTDataCenterEdgeNodeType": VmwNsxTDataCenterEdgeNodeType,
+       "VmwNsxTDataCenterPrefixesCountMaxType": VmwNsxTDataCenterPrefixesCountMaxType,
+       "VmwNsxTDataCenterPrefixesCountThresholdType": VmwNsxTDataCenterPrefixesCountThresholdType,
+       "VmwNsxTDataCenterRouteLimitMaximumType": VmwNsxTDataCenterRouteLimitMaximumType,
+       "VmwNsxTDataCenterRouteLimitThresholdType": VmwNsxTDataCenterRouteLimitThresholdType,
+       "VmwNsxTDataCenterSubsequentAddressFamilyType": VmwNsxTDataCenterSubsequentAddressFamilyType,
+       "VmwNsxTDataCentervCenterClusterIdType": VmwNsxTDataCentervCenterClusterIdType,
+       "VmwNsxTDataCenterMpsServiceNameType": VmwNsxTDataCenterMpsServiceNameType,
+       "VmwNsxTDataCenterMemberIndexIdType": VmwNsxTDataCenterMemberIndexIdType,
+       "VmwNsxTDataCenterEdgeClusterIdType": VmwNsxTDataCenterEdgeClusterIdType,
+       "VmwNsxTDataCenterCoreDumpCountType": VmwNsxTDataCenterCoreDumpCountType,
+       "VmwNsxTDataCenterNodeDisplayOrHostNameType": VmwNsxTDataCenterNodeDisplayOrHostNameType,
+       "VmwNsxTDataCenterNSXEdgeTNNameType": VmwNsxTDataCenterNSXEdgeTNNameType,
+       "VmwNsxTDataCenterNSXESXTNNameType": VmwNsxTDataCenterNSXESXTNNameType,
+       "VmwNsxTDataCenterCollectorIPType": VmwNsxTDataCenterCollectorIPType,
+       "VmwNsxTDataCenterDvsAliasType": VmwNsxTDataCenterDvsAliasType,
+       "VmwNsxTDataCenterStackAliasType": VmwNsxTDataCenterStackAliasType,
+       "VmwNsxTDataCenterVerticalNameType": VmwNsxTDataCenterVerticalNameType,
+       "VmwNsxTDataCenterEdgeClusterHighestHwVersionType": VmwNsxTDataCenterEdgeClusterHighestHwVersionType,
+       "VmwNsxTDataCenterEdgeTNHwVersionType": VmwNsxTDataCenterEdgeTNHwVersionType,
+       "VmwNsxTDataCenterEdgeClusterNameType": VmwNsxTDataCenterEdgeClusterNameType,
+       "VmwNsxTDataCenterHaStateType": VmwNsxTDataCenterHaStateType,
+       "VmwNsxTDataCenterHaState2Type": VmwNsxTDataCenterHaState2Type,
+       "VmwNsxTDataCenterTransportNodeId2Type": VmwNsxTDataCenterTransportNodeId2Type,
+       "VmwNsxTDataCenterDvsNameType": VmwNsxTDataCenterDvsNameType,
+       "VmwNsxTDataCenterVtepFaultReasonType": VmwNsxTDataCenterVtepFaultReasonType,
+       "VmwNsxTDataCenterVtepNameType": VmwNsxTDataCenterVtepNameType,
+       "VmwNsxTDataCenterMetricsTargetAddressType": VmwNsxTDataCenterMetricsTargetAddressType,
+       "VmwNsxTDataCenterMetricsTargetAliasType": VmwNsxTDataCenterMetricsTargetAliasType,
+       "VmwNsxTDataCenterMetricsTargetPortType": VmwNsxTDataCenterMetricsTargetPortType,
+       "VmwNsxTDataCenterIPv4AddressType": VmwNsxTDataCenterIPv4AddressType,
+       "VmwNsxTDataCenterIPv6AddressType": VmwNsxTDataCenterIPv6AddressType,
+       "VmwNsxTDataCenterConstraintLimitType": VmwNsxTDataCenterConstraintLimitType,
+       "VmwNsxTDataCenterConstraintTypeType": VmwNsxTDataCenterConstraintTypeType,
+       "VmwNsxTDataCenterCurrentCountType": VmwNsxTDataCenterCurrentCountType,
+       "VmwNsxTDataCenterGroupIdType": VmwNsxTDataCenterGroupIdType,
+       "VmwNsxTDataCenterGroupMaxNumberLimitType": VmwNsxTDataCenterGroupMaxNumberLimitType,
+       "VmwNsxTDataCenterGroupSizeType": VmwNsxTDataCenterGroupSizeType,
+       "VmwNsxTDataCenterIPCountType": VmwNsxTDataCenterIPCountType,
+       "VmwNsxTDataCenterLrpCountType": VmwNsxTDataCenterLrpCountType,
+       "VmwNsxTDataCenterLspCountType": VmwNsxTDataCenterLspCountType,
+       "VmwNsxTDataCenterMacCountType": VmwNsxTDataCenterMacCountType,
+       "VmwNsxTDataCenterSidCountType": VmwNsxTDataCenterSidCountType,
+       "VmwNsxTDataCenterTNCountType": VmwNsxTDataCenterTNCountType,
+       "VmwNsxTDataCenterVifCountType": VmwNsxTDataCenterVifCountType,
+       "VmwNsxTDataCenterVMCountType": VmwNsxTDataCenterVMCountType,
+       "VmwNsxTDataCenterCoreIdType": VmwNsxTDataCenterCoreIdType,
+       "VmwNsxTDataCenterFlowCacheThresholdType": VmwNsxTDataCenterFlowCacheThresholdType,
+       "VmwNsxTDataCenterNSXaaSServiceNameType": VmwNsxTDataCenterNSXaaSServiceNameType,
+       "VmwNsxTDataCenterProtocolNameType": VmwNsxTDataCenterProtocolNameType,
+       "VmwNsxTDataCenterConstraintTypePathType": VmwNsxTDataCenterConstraintTypePathType,
        "vmwNSXsysMIB": vmwNSXsysMIB,
        "vmwNsxTDataCenterNotifications": vmwNsxTDataCenterNotifications,
        "vmwNsxTManagerHealthFeaturePrefix": vmwNsxTManagerHealthFeaturePrefix,
@@ -11800,6 +16828,10 @@ mibBuilder.exportSymbols(
        "vmwNsxTManagerHealthOperationsDbDiskUsageVeryHighClear": vmwNsxTManagerHealthOperationsDbDiskUsageVeryHighClear,
        "vmwNsxTManagerHealthStorageError": vmwNsxTManagerHealthStorageError,
        "vmwNsxTManagerHealthStorageErrorClear": vmwNsxTManagerHealthStorageErrorClear,
+       "vmwNsxTManagerHealthMissingDNSEntryForManagerFQDN": vmwNsxTManagerHealthMissingDNSEntryForManagerFQDN,
+       "vmwNsxTManagerHealthMissingDNSEntryForManagerFQDNClear": vmwNsxTManagerHealthMissingDNSEntryForManagerFQDNClear,
+       "vmwNsxTManagerHealthMissingDNSEntryForVipFQDN": vmwNsxTManagerHealthMissingDNSEntryForVipFQDN,
+       "vmwNsxTManagerHealthMissingDNSEntryForVipFQDNClear": vmwNsxTManagerHealthMissingDNSEntryForVipFQDNClear,
        "vmwNsxTEdgeHealthFeaturePrefix": vmwNsxTEdgeHealthFeaturePrefix,
        "vmwNsxTEdgeHealthFeature": vmwNsxTEdgeHealthFeature,
        "vmwNsxTEdgeHealthEdgeCPUUsageHigh": vmwNsxTEdgeHealthEdgeCPUUsageHigh,
@@ -11842,6 +16874,10 @@ mibBuilder.exportSymbols(
        "vmwNsxTEdgeHealthEdgeDatapathNICThroughputVeryHighClear": vmwNsxTEdgeHealthEdgeDatapathNICThroughputVeryHighClear,
        "vmwNsxTEdgeHealthFailureDomainDown": vmwNsxTEdgeHealthFailureDomainDown,
        "vmwNsxTEdgeHealthFailureDomainDownClear": vmwNsxTEdgeHealthFailureDomainDownClear,
+       "vmwNsxTEdgeHealthMegaFlowCacheHitRateLow": vmwNsxTEdgeHealthMegaFlowCacheHitRateLow,
+       "vmwNsxTEdgeHealthMegaFlowCacheHitRateLowClear": vmwNsxTEdgeHealthMegaFlowCacheHitRateLowClear,
+       "vmwNsxTEdgeHealthMicroFlowCacheHitRateLow": vmwNsxTEdgeHealthMicroFlowCacheHitRateLow,
+       "vmwNsxTEdgeHealthMicroFlowCacheHitRateLowClear": vmwNsxTEdgeHealthMicroFlowCacheHitRateLowClear,
        "vmwNsxTCertificatesFeaturePrefix": vmwNsxTCertificatesFeaturePrefix,
        "vmwNsxTCertificatesFeature": vmwNsxTCertificatesFeature,
        "vmwNsxTCertificatesCertificateExpirationApproaching": vmwNsxTCertificatesCertificateExpirationApproaching,
@@ -11854,6 +16890,12 @@ mibBuilder.exportSymbols(
        "vmwNsxTCertificatesCABundleUpdateRecommendedClear": vmwNsxTCertificatesCABundleUpdateRecommendedClear,
        "vmwNsxTCertificatesCABundleUpdateSuggested": vmwNsxTCertificatesCABundleUpdateSuggested,
        "vmwNsxTCertificatesCABundleUpdateSuggestedClear": vmwNsxTCertificatesCABundleUpdateSuggestedClear,
+       "vmwNsxTCertificatesTransportNodeCertificateExpirApproaching": vmwNsxTCertificatesTransportNodeCertificateExpirApproaching,
+       "vmwNsxTCertificatesTransportNodeCertificateExpirApproachingClear": vmwNsxTCertificatesTransportNodeCertificateExpirApproachingClear,
+       "vmwNsxTCertificatesTransportNodeCertificateExpired": vmwNsxTCertificatesTransportNodeCertificateExpired,
+       "vmwNsxTCertificatesTransportNodeCertificateExpiredClear": vmwNsxTCertificatesTransportNodeCertificateExpiredClear,
+       "vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpire": vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpire,
+       "vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpireClear": vmwNsxTCertificatesTransportNodeCertificateIsAboutToExpireClear,
        "vmwNsxTPasswordManagementFeaturePrefix": vmwNsxTPasswordManagementFeaturePrefix,
        "vmwNsxTPasswordManagementFeature": vmwNsxTPasswordManagementFeature,
        "vmwNsxTPasswordManagementPasswordExpirationApproaching": vmwNsxTPasswordManagementPasswordExpirationApproaching,
@@ -11902,6 +16944,8 @@ mibBuilder.exportSymbols(
        "vmwNsxTCniHealthFeature": vmwNsxTCniHealthFeature,
        "vmwNsxTCniHealthHyperbusManagerConnectionDown": vmwNsxTCniHealthHyperbusManagerConnectionDown,
        "vmwNsxTCniHealthHyperbusManagerConnectionDownClear": vmwNsxTCniHealthHyperbusManagerConnectionDownClear,
+       "vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPU": vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPU,
+       "vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPUClear": vmwNsxTCniHealthHyperbusManagerConnectionDownOnDPUClear,
        "vmwNsxTNCPHealthFeaturePrefix": vmwNsxTNCPHealthFeaturePrefix,
        "vmwNsxTNCPHealthFeature": vmwNsxTNCPHealthFeature,
        "vmwNsxTNCPHealthNCPPluginDown": vmwNsxTNCPHealthNCPPluginDown,
@@ -11910,12 +16954,36 @@ mibBuilder.exportSymbols(
        "vmwNsxTNodeAgentsHealthFeature": vmwNsxTNodeAgentsHealthFeature,
        "vmwNsxTNodeAgentsHealthNodeAgentsDown": vmwNsxTNodeAgentsHealthNodeAgentsDown,
        "vmwNsxTNodeAgentsHealthNodeAgentsDownClear": vmwNsxTNodeAgentsHealthNodeAgentsDownClear,
+       "vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPU": vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPU,
+       "vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPUClear": vmwNsxTNodeAgentsHealthNodeAgentsDownOnDPUClear,
        "vmwNsxTEndpointProtectionFeaturePrefix": vmwNsxTEndpointProtectionFeaturePrefix,
        "vmwNsxTEndpointProtectionFeature": vmwNsxTEndpointProtectionFeature,
        "vmwNsxTEndpointProtectionEAMStatusDown": vmwNsxTEndpointProtectionEAMStatusDown,
        "vmwNsxTEndpointProtectionEAMStatusDownClear": vmwNsxTEndpointProtectionEAMStatusDownClear,
        "vmwNsxTEndpointProtectionPartnerChannelDown": vmwNsxTEndpointProtectionPartnerChannelDown,
        "vmwNsxTEndpointProtectionPartnerChannelDownClear": vmwNsxTEndpointProtectionPartnerChannelDownClear,
+       "vmwNsxTServiceInsertionFeaturePrefix": vmwNsxTServiceInsertionFeaturePrefix,
+       "vmwNsxTServiceInsertionFeature": vmwNsxTServiceInsertionFeature,
+       "vmwNsxTServiceInsertionNewHostAdded": vmwNsxTServiceInsertionNewHostAdded,
+       "vmwNsxTServiceInsertionNewHostAddedClear": vmwNsxTServiceInsertionNewHostAddedClear,
+       "vmwNsxTServiceInsertionServiceDeploymentFailed": vmwNsxTServiceInsertionServiceDeploymentFailed,
+       "vmwNsxTServiceInsertionServiceDeploymentFailedClear": vmwNsxTServiceInsertionServiceDeploymentFailedClear,
+       "vmwNsxTServiceInsertionServiceDeploymentSucceeded": vmwNsxTServiceInsertionServiceDeploymentSucceeded,
+       "vmwNsxTServiceInsertionServiceDeploymentSucceededClear": vmwNsxTServiceInsertionServiceDeploymentSucceededClear,
+       "vmwNsxTServiceInsertionServiceUndeploymentFailed": vmwNsxTServiceInsertionServiceUndeploymentFailed,
+       "vmwNsxTServiceInsertionServiceUndeploymentFailedClear": vmwNsxTServiceInsertionServiceUndeploymentFailedClear,
+       "vmwNsxTServiceInsertionServiceUndeploymentSucceeded": vmwNsxTServiceInsertionServiceUndeploymentSucceeded,
+       "vmwNsxTServiceInsertionServiceUndeploymentSucceededClear": vmwNsxTServiceInsertionServiceUndeploymentSucceededClear,
+       "vmwNsxTServiceInsertionServiceChainPathDown": vmwNsxTServiceInsertionServiceChainPathDown,
+       "vmwNsxTServiceInsertionServiceChainPathDownClear": vmwNsxTServiceInsertionServiceChainPathDownClear,
+       "vmwNsxTServiceInsertionSVMHealthStatusDown": vmwNsxTServiceInsertionSVMHealthStatusDown,
+       "vmwNsxTServiceInsertionSVMHealthStatusDownClear": vmwNsxTServiceInsertionSVMHealthStatusDownClear,
+       "vmwNsxTServiceInsertionSVMHealthStatusUp": vmwNsxTServiceInsertionSVMHealthStatusUp,
+       "vmwNsxTServiceInsertionSVMHealthStatusUpClear": vmwNsxTServiceInsertionSVMHealthStatusUpClear,
+       "vmwNsxTServiceInsertionSVMLivenessStateDown": vmwNsxTServiceInsertionSVMLivenessStateDown,
+       "vmwNsxTServiceInsertionSVMLivenessStateDownClear": vmwNsxTServiceInsertionSVMLivenessStateDownClear,
+       "vmwNsxTServiceInsertionServiceInsertionInfraStatusDown": vmwNsxTServiceInsertionServiceInsertionInfraStatusDown,
+       "vmwNsxTServiceInsertionServiceInsertionInfraStatusDownClear": vmwNsxTServiceInsertionServiceInsertionInfraStatusDownClear,
        "vmwNsxTVPNFeaturePrefix": vmwNsxTVPNFeaturePrefix,
        "vmwNsxTVPNFeature": vmwNsxTVPNFeature,
        "vmwNsxTVPNIPsecPolicyBasedSessionDown": vmwNsxTVPNIPsecPolicyBasedSessionDown,
@@ -11964,6 +17032,10 @@ mibBuilder.exportSymbols(
        "vmwNsxTTransportNodeHealthLAGMemberDownClear": vmwNsxTTransportNodeHealthLAGMemberDownClear,
        "vmwNsxTTransportNodeHealthTransportNodeUplinkDown": vmwNsxTTransportNodeHealthTransportNodeUplinkDown,
        "vmwNsxTTransportNodeHealthTransportNodeUplinkDownClear": vmwNsxTTransportNodeHealthTransportNodeUplinkDownClear,
+       "vmwNsxTTransportNodeHealthLAGMemberDownOnDPU": vmwNsxTTransportNodeHealthLAGMemberDownOnDPU,
+       "vmwNsxTTransportNodeHealthLAGMemberDownOnDPUClear": vmwNsxTTransportNodeHealthLAGMemberDownOnDPUClear,
+       "vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPU": vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPU,
+       "vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPUClear": vmwNsxTTransportNodeHealthTransportNodeUplinkDownOnDPUClear,
        "vmwNsxTInfrastructureServiceFeaturePrefix": vmwNsxTInfrastructureServiceFeaturePrefix,
        "vmwNsxTInfrastructureServiceFeature": vmwNsxTInfrastructureServiceFeature,
        "vmwNsxTInfrastructureServiceEdgeServiceStatusChanged": vmwNsxTInfrastructureServiceEdgeServiceStatusChanged,
@@ -11972,6 +17044,12 @@ mibBuilder.exportSymbols(
        "vmwNsxTInfrastructureServiceEdgeServiceStatusDownClear": vmwNsxTInfrastructureServiceEdgeServiceStatusDownClear,
        "vmwNsxTInfrastructureServiceServiceStatusUnknown": vmwNsxTInfrastructureServiceServiceStatusUnknown,
        "vmwNsxTInfrastructureServiceServiceStatusUnknownClear": vmwNsxTInfrastructureServiceServiceStatusUnknownClear,
+       "vmwNsxTInfrastructureServiceApplicationCrashed": vmwNsxTInfrastructureServiceApplicationCrashed,
+       "vmwNsxTInfrastructureServiceApplicationCrashedClear": vmwNsxTInfrastructureServiceApplicationCrashedClear,
+       "vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPU": vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPU,
+       "vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPUClear": vmwNsxTInfrastructureServiceServiceStatusUnknownOnDPUClear,
+       "vmwNsxTInfrastructureServiceMetricsDeliveryFailure": vmwNsxTInfrastructureServiceMetricsDeliveryFailure,
+       "vmwNsxTInfrastructureServiceMetricsDeliveryFailureClear": vmwNsxTInfrastructureServiceMetricsDeliveryFailureClear,
        "vmwNsxTDHCPFeaturePrefix": vmwNsxTDHCPFeaturePrefix,
        "vmwNsxTDHCPFeature": vmwNsxTDHCPFeature,
        "vmwNsxTDHCPPoolLeaseAllocationFailed": vmwNsxTDHCPPoolLeaseAllocationFailed,
@@ -11984,6 +17062,14 @@ mibBuilder.exportSymbols(
        "vmwNsxTHighAvailabilityTier0GatewayFailoverClear": vmwNsxTHighAvailabilityTier0GatewayFailoverClear,
        "vmwNsxTHighAvailabilityTier1GatewayFailover": vmwNsxTHighAvailabilityTier1GatewayFailover,
        "vmwNsxTHighAvailabilityTier1GatewayFailoverClear": vmwNsxTHighAvailabilityTier1GatewayFailoverClear,
+       "vmwNsxTHighAvailabilityTier0ServiceGroupFailover": vmwNsxTHighAvailabilityTier0ServiceGroupFailover,
+       "vmwNsxTHighAvailabilityTier0ServiceGroupFailoverClear": vmwNsxTHighAvailabilityTier0ServiceGroupFailoverClear,
+       "vmwNsxTHighAvailabilityTier1ServiceGroupFailover": vmwNsxTHighAvailabilityTier1ServiceGroupFailover,
+       "vmwNsxTHighAvailabilityTier1ServiceGroupFailoverClear": vmwNsxTHighAvailabilityTier1ServiceGroupFailoverClear,
+       "vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancy": vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancy,
+       "vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancyClear": vmwNsxTHighAvailabilityTier0ServiceGroupReducedRedundancyClear,
+       "vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancy": vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancy,
+       "vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancyClear": vmwNsxTHighAvailabilityTier1ServiceGroupReducedRedundancyClear,
        "vmwNsxTCapacityFeaturePrefix": vmwNsxTCapacityFeaturePrefix,
        "vmwNsxTCapacityFeature": vmwNsxTCapacityFeature,
        "vmwNsxTCapacityMaximumCapacity": vmwNsxTCapacityMaximumCapacity,
@@ -12012,6 +17098,22 @@ mibBuilder.exportSymbols(
        "vmwNsxTRoutingOSPFNeighborWentDownClear": vmwNsxTRoutingOSPFNeighborWentDownClear,
        "vmwNsxTRoutingProxyARPNotConfiguredForServiceIP": vmwNsxTRoutingProxyARPNotConfiguredForServiceIP,
        "vmwNsxTRoutingProxyARPNotConfiguredForServiceIPClear": vmwNsxTRoutingProxyARPNotConfiguredForServiceIPClear,
+       "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproaching": vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproaching,
+       "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproachingClear": vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborApproachingClear,
+       "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceeded": vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceeded,
+       "vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceededClear": vmwNsxTRoutingMaximumIPv4PrefixesFromBGPNeighborExceededClear,
+       "vmwNsxTRoutingMaximumIPv4RouteLimitApproaching": vmwNsxTRoutingMaximumIPv4RouteLimitApproaching,
+       "vmwNsxTRoutingMaximumIPv4RouteLimitApproachingClear": vmwNsxTRoutingMaximumIPv4RouteLimitApproachingClear,
+       "vmwNsxTRoutingMaximumIPv4RouteLimitExceeded": vmwNsxTRoutingMaximumIPv4RouteLimitExceeded,
+       "vmwNsxTRoutingMaximumIPv4RouteLimitExceededClear": vmwNsxTRoutingMaximumIPv4RouteLimitExceededClear,
+       "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproaching": vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproaching,
+       "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproachingClear": vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborApproachingClear,
+       "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceeded": vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceeded,
+       "vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceededClear": vmwNsxTRoutingMaximumIPv6PrefixesFromBGPNeighborExceededClear,
+       "vmwNsxTRoutingMaximumIPv6RouteLimitApproaching": vmwNsxTRoutingMaximumIPv6RouteLimitApproaching,
+       "vmwNsxTRoutingMaximumIPv6RouteLimitApproachingClear": vmwNsxTRoutingMaximumIPv6RouteLimitApproachingClear,
+       "vmwNsxTRoutingMaximumIPv6RouteLimitExceeded": vmwNsxTRoutingMaximumIPv6RouteLimitExceeded,
+       "vmwNsxTRoutingMaximumIPv6RouteLimitExceededClear": vmwNsxTRoutingMaximumIPv6RouteLimitExceededClear,
        "vmwNsxTDNSFeaturePrefix": vmwNsxTDNSFeaturePrefix,
        "vmwNsxTDNSFeature": vmwNsxTDNSFeature,
        "vmwNsxTDNSForwarderDisabled": vmwNsxTDNSForwarderDisabled,
@@ -12030,6 +17132,22 @@ mibBuilder.exportSymbols(
        "vmwNsxTDistributedFirewallDFWSessionCountHighClear": vmwNsxTDistributedFirewallDFWSessionCountHighClear,
        "vmwNsxTDistributedFirewallDFWVmotionFailure": vmwNsxTDistributedFirewallDFWVmotionFailure,
        "vmwNsxTDistributedFirewallDFWVmotionFailureClear": vmwNsxTDistributedFirewallDFWVmotionFailureClear,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceeded": vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceeded,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceededClear": vmwNsxTDistributedFirewallDFWRulesLimitPervNICExceededClear,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproaching": vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproaching,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproachingClear": vmwNsxTDistributedFirewallDFWRulesLimitPerHostApproachingClear,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceeded": vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceeded,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceededClear": vmwNsxTDistributedFirewallDFWRulesLimitPerHostExceededClear,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproaching": vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproaching,
+       "vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproachingClear": vmwNsxTDistributedFirewallDFWRulesLimitPervNICApproachingClear,
+       "vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPU": vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPU,
+       "vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPUClear": vmwNsxTDistributedFirewallDFWCPUUsageVeryHighOnDPUClear,
+       "vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPU": vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPU,
+       "vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPUClear": vmwNsxTDistributedFirewallDFWMemoryUsageVeryHighOnDPUClear,
+       "vmwNsxTDistributedFirewallDFWFloodLimitWarning": vmwNsxTDistributedFirewallDFWFloodLimitWarning,
+       "vmwNsxTDistributedFirewallDFWFloodLimitWarningClear": vmwNsxTDistributedFirewallDFWFloodLimitWarningClear,
+       "vmwNsxTDistributedFirewallDFWFloodLimitCritical": vmwNsxTDistributedFirewallDFWFloodLimitCritical,
+       "vmwNsxTDistributedFirewallDFWFloodLimitCriticalClear": vmwNsxTDistributedFirewallDFWFloodLimitCriticalClear,
        "vmwNsxTFederationFeaturePrefix": vmwNsxTFederationFeaturePrefix,
        "vmwNsxTFederationFeature": vmwNsxTFederationFeature,
        "vmwNsxTFederationRtepBGPDown": vmwNsxTFederationRtepBGPDown,
@@ -12076,6 +17194,30 @@ mibBuilder.exportSymbols(
        "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageVeryHighClear": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageVeryHighClear,
        "vmwNsxTDistributedIDSIPSNSXIDPSEngineCPUUsageMediumHigh": vmwNsxTDistributedIDSIPSNSXIDPSEngineCPUUsageMediumHigh,
        "vmwNsxTDistributedIDSIPSNSXIDPSEngineCPUUsageMediumHighClear": vmwNsxTDistributedIDSIPSNSXIDPSEngineCPUUsageMediumHighClear,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPU": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPU,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPUClear": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemoryUsageHighOnDPUClear,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPU": vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPU,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPUClear": vmwNsxTDistributedIDSIPSNSXIDPSEngineDownOnDPUClear,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPU": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPU,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPUClear": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageMedHighOnDPUClear,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPU": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPU,
+       "vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPUClear": vmwNsxTDistributedIDSIPSNSXIDPSEngineMemUsageVeryHighDPUClear,
+       "vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribed": vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribed,
+       "vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribedClear": vmwNsxTDistributedIDSIPSIDPSBypassedCPUOversubscribedClear,
+       "vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribed": vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribed,
+       "vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribedClear": vmwNsxTDistributedIDSIPSIDPSBypassedNetworkOversubscribedClear,
+       "vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHigh": vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHigh,
+       "vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHighClear": vmwNsxTDistributedIDSIPSIDPSEngineCPUOversubscriptionHighClear,
+       "vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHigh": vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHigh,
+       "vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHighClear": vmwNsxTDistributedIDSIPSIDPSCPUOversubscriptionVeryHighClear,
+       "vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribed": vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribed,
+       "vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribedClear": vmwNsxTDistributedIDSIPSIDPSDroppedCPUOversubscribedClear,
+       "vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribed": vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribed,
+       "vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribedClear": vmwNsxTDistributedIDSIPSIDPSDroppedNetworkOversubscribedClear,
+       "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHigh": vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHigh,
+       "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHighClear": vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionHighClear,
+       "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHigh": vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHigh,
+       "vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHighClear": vmwNsxTDistributedIDSIPSIDPSNetworkOversubscriptionVeryHighClear,
        "vmwNsxTCommunicationFeaturePrefix": vmwNsxTCommunicationFeaturePrefix,
        "vmwNsxTCommunicationFeature": vmwNsxTCommunicationFeature,
        "vmwNsxTCommunicationManagementChannelToTransportNodeDown": vmwNsxTCommunicationManagementChannelToTransportNodeDown,
@@ -12102,6 +17244,12 @@ mibBuilder.exportSymbols(
        "vmwNsxTCommunicationManagerFQDNReverseLookupFailureClear": vmwNsxTCommunicationManagerFQDNReverseLookupFailureClear,
        "vmwNsxTCommunicationManagementChannelToManagerNodeDownLong": vmwNsxTCommunicationManagementChannelToManagerNodeDownLong,
        "vmwNsxTCommunicationManagementChannelToManagerNodeDownLongClear": vmwNsxTCommunicationManagementChannelToManagerNodeDownLongClear,
+       "vmwNsxTCommunicationNetworkLatencyHigh": vmwNsxTCommunicationNetworkLatencyHigh,
+       "vmwNsxTCommunicationNetworkLatencyHighClear": vmwNsxTCommunicationNetworkLatencyHighClear,
+       "vmwNsxTCommunicationLimitedReachabilityOnDPU": vmwNsxTCommunicationLimitedReachabilityOnDPU,
+       "vmwNsxTCommunicationLimitedReachabilityOnDPUClear": vmwNsxTCommunicationLimitedReachabilityOnDPUClear,
+       "vmwNsxTCommunicationUnreachableCollectorOnDPU": vmwNsxTCommunicationUnreachableCollectorOnDPU,
+       "vmwNsxTCommunicationUnreachableCollectorOnDPUClear": vmwNsxTCommunicationUnreachableCollectorOnDPUClear,
        "vmwNsxTIdentityFirewallFeaturePrefix": vmwNsxTIdentityFirewallFeaturePrefix,
        "vmwNsxTIdentityFirewallFeature": vmwNsxTIdentityFirewallFeature,
        "vmwNsxTIdentityFirewallConnectivityToLDAPServerLost": vmwNsxTIdentityFirewallConnectivityToLDAPServerLost,
@@ -12148,6 +17296,8 @@ mibBuilder.exportSymbols(
        "vmwNsxTNSXApplicationPlatformCommunicationDelayInRawflowClear": vmwNsxTNSXApplicationPlatformCommunicationDelayInRawflowClear,
        "vmwNsxTNSXApplicationPlatformCommunicationExpDisconnected": vmwNsxTNSXApplicationPlatformCommunicationExpDisconnected,
        "vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectedClear": vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectedClear,
+       "vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPU": vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPU,
+       "vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPUClear": vmwNsxTNSXApplicationPlatformCommunicationExpDisconnectDPUClear,
        "vmwNsxTMTUCheckFeaturePrefix": vmwNsxTMTUCheckFeaturePrefix,
        "vmwNsxTMTUCheckFeature": vmwNsxTMTUCheckFeature,
        "vmwNsxTMTUCheckMTUMismatchWithinTransportZone": vmwNsxTMTUCheckMTUMismatchWithinTransportZone,
@@ -12274,10 +17424,82 @@ mibBuilder.exportSymbols(
        "vmwNsxTEdgeEdgeVmvSphereSettingsMismatchClear": vmwNsxTEdgeEdgeVmvSphereSettingsMismatchClear,
        "vmwNsxTEdgeEdgevSphereLocationMismatch": vmwNsxTEdgeEdgevSphereLocationMismatch,
        "vmwNsxTEdgeEdgevSphereLocationMismatchClear": vmwNsxTEdgeEdgevSphereLocationMismatchClear,
+       "vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenter": vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenter,
+       "vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenterClear": vmwNsxTEdgeEdgeVMPresentInNSXInventoryNotPresentInvCenterClear,
+       "vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenter": vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenter,
+       "vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenterClear": vmwNsxTEdgeEdgeVMNotPresentInBothNSXInventoryAndvCenterClear,
+       "vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeploy": vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeploy,
+       "vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeployClear": vmwNsxTEdgeFailedToDeleteTheOldVMInvCenterDuringRedeployClear,
+       "vmwNsxTEdgeEdgeHardwareVersionMismatch": vmwNsxTEdgeEdgeHardwareVersionMismatch,
+       "vmwNsxTEdgeEdgeHardwareVersionMismatchClear": vmwNsxTEdgeEdgeHardwareVersionMismatchClear,
        "vmwNsxTNATFeaturePrefix": vmwNsxTNATFeaturePrefix,
        "vmwNsxTNATFeature": vmwNsxTNATFeature,
        "vmwNsxTNATSNATPortUsageOnGatewayIsHigh": vmwNsxTNATSNATPortUsageOnGatewayIsHigh,
        "vmwNsxTNATSNATPortUsageOnGatewayIsHighClear": vmwNsxTNATSNATPortUsageOnGatewayIsHighClear,
+       "vmwNsxTPhysicalServerFeaturePrefix": vmwNsxTPhysicalServerFeaturePrefix,
+       "vmwNsxTPhysicalServerFeature": vmwNsxTPhysicalServerFeature,
+       "vmwNsxTPhysicalServerPhysicalServerInstallFailed": vmwNsxTPhysicalServerPhysicalServerInstallFailed,
+       "vmwNsxTPhysicalServerPhysicalServerInstallFailedClear": vmwNsxTPhysicalServerPhysicalServerInstallFailedClear,
+       "vmwNsxTPhysicalServerPhysicalServerUninstallFailed": vmwNsxTPhysicalServerPhysicalServerUninstallFailed,
+       "vmwNsxTPhysicalServerPhysicalServerUninstallFailedClear": vmwNsxTPhysicalServerPhysicalServerUninstallFailedClear,
+       "vmwNsxTPhysicalServerPhysicalServerUpgradeFailed": vmwNsxTPhysicalServerPhysicalServerUpgradeFailed,
+       "vmwNsxTPhysicalServerPhysicalServerUpgradeFailedClear": vmwNsxTPhysicalServerPhysicalServerUpgradeFailedClear,
+       "vmwNsxTMalwarePreventionHealthFeaturePrefix": vmwNsxTMalwarePreventionHealthFeaturePrefix,
+       "vmwNsxTMalwarePreventionHealthFeature": vmwNsxTMalwarePreventionHealthFeature,
+       "vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable": vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachable,
+       "vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear": vmwNsxTMalwarePreventionHealthAnalystAPIServiceUnreachableClear,
+       "vmwNsxTMalwarePreventionHealthDatabaseUnreachable": vmwNsxTMalwarePreventionHealthDatabaseUnreachable,
+       "vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear": vmwNsxTMalwarePreventionHealthDatabaseUnreachableClear,
+       "vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable": vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachable,
+       "vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear": vmwNsxTMalwarePreventionHealthFileExtractSvcUnreachableClear,
+       "vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable": vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachable,
+       "vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear": vmwNsxTMalwarePreventionHealthNTICSRepSvcUnreachableClear,
+       "vmwNsxTMalwarePreventionHealthServiceStatusDown": vmwNsxTMalwarePreventionHealthServiceStatusDown,
+       "vmwNsxTMalwarePreventionHealthServiceStatusDownClear": vmwNsxTMalwarePreventionHealthServiceStatusDownClear,
+       "vmwNsxTEdgeClusterFeaturePrefix": vmwNsxTEdgeClusterFeaturePrefix,
+       "vmwNsxTEdgeClusterFeature": vmwNsxTEdgeClusterFeature,
+       "vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailure": vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailure,
+       "vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailureClear": vmwNsxTEdgeClusterEdgeClusterMemberRelocateFailureClear,
+       "vmwNsxTVMCAppFeaturePrefix": vmwNsxTVMCAppFeaturePrefix,
+       "vmwNsxTVMCAppFeature": vmwNsxTVMCAppFeature,
+       "vmwNsxTVMCAppTransitConnectFailure": vmwNsxTVMCAppTransitConnectFailure,
+       "vmwNsxTVMCAppTransitConnectFailureClear": vmwNsxTVMCAppTransitConnectFailureClear,
+       "vmwNsxTTEPHealthFeaturePrefix": vmwNsxTTEPHealthFeaturePrefix,
+       "vmwNsxTTEPHealthFeature": vmwNsxTTEPHealthFeature,
+       "vmwNsxTTEPHealthFaultyTEP": vmwNsxTTEPHealthFaultyTEP,
+       "vmwNsxTTEPHealthFaultyTEPClear": vmwNsxTTEPHealthFaultyTEPClear,
+       "vmwNsxTTEPHealthFaultyTEPOnDPU": vmwNsxTTEPHealthFaultyTEPOnDPU,
+       "vmwNsxTTEPHealthFaultyTEPOnDPUClear": vmwNsxTTEPHealthFaultyTEPOnDPUClear,
+       "vmwNsxTTEPHealthTEPAutorecoverFailure": vmwNsxTTEPHealthTEPAutorecoverFailure,
+       "vmwNsxTTEPHealthTEPAutorecoverFailureClear": vmwNsxTTEPHealthTEPAutorecoverFailureClear,
+       "vmwNsxTTEPHealthTEPAutorecoverFailureOnDPU": vmwNsxTTEPHealthTEPAutorecoverFailureOnDPU,
+       "vmwNsxTTEPHealthTEPAutorecoverFailureOnDPUClear": vmwNsxTTEPHealthTEPAutorecoverFailureOnDPUClear,
+       "vmwNsxTTEPHealthTEPAutorecoverSuccess": vmwNsxTTEPHealthTEPAutorecoverSuccess,
+       "vmwNsxTTEPHealthTEPAutorecoverSuccessClear": vmwNsxTTEPHealthTEPAutorecoverSuccessClear,
+       "vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPU": vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPU,
+       "vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPUClear": vmwNsxTTEPHealthTEPAutorecoverSuccessOnDPUClear,
+       "vmwNsxTTEPHealthTEPHaActivated": vmwNsxTTEPHealthTEPHaActivated,
+       "vmwNsxTTEPHealthTEPHaActivatedClear": vmwNsxTTEPHealthTEPHaActivatedClear,
+       "vmwNsxTTEPHealthTEPHaActivatedOnDPU": vmwNsxTTEPHealthTEPHaActivatedOnDPU,
+       "vmwNsxTTEPHealthTEPHaActivatedOnDPUClear": vmwNsxTTEPHealthTEPHaActivatedOnDPUClear,
+       "vmwNsxTPolicyConstraintFeaturePrefix": vmwNsxTPolicyConstraintFeaturePrefix,
+       "vmwNsxTPolicyConstraintFeature": vmwNsxTPolicyConstraintFeature,
+       "vmwNsxTPolicyConstraintCreationCountLimitReached": vmwNsxTPolicyConstraintCreationCountLimitReached,
+       "vmwNsxTPolicyConstraintCreationCountLimitReachedClear": vmwNsxTPolicyConstraintCreationCountLimitReachedClear,
+       "vmwNsxTGroupsFeaturePrefix": vmwNsxTGroupsFeaturePrefix,
+       "vmwNsxTGroupsFeature": vmwNsxTGroupsFeature,
+       "vmwNsxTGroupsGroupSizeLimitExceeded": vmwNsxTGroupsGroupSizeLimitExceeded,
+       "vmwNsxTGroupsGroupSizeLimitExceededClear": vmwNsxTGroupsGroupSizeLimitExceededClear,
+       "vmwNsxTSecurityComplianceFeaturePrefix": vmwNsxTSecurityComplianceFeaturePrefix,
+       "vmwNsxTSecurityComplianceFeature": vmwNsxTSecurityComplianceFeature,
+       "vmwNsxTSecurityCompliancePollEAL4NonCompliance": vmwNsxTSecurityCompliancePollEAL4NonCompliance,
+       "vmwNsxTSecurityCompliancePollEAL4NonComplianceClear": vmwNsxTSecurityCompliancePollEAL4NonComplianceClear,
+       "vmwNsxTSecurityCompliancePollNDcPPNonCompliance": vmwNsxTSecurityCompliancePollNDcPPNonCompliance,
+       "vmwNsxTSecurityCompliancePollNDcPPNonComplianceClear": vmwNsxTSecurityCompliancePollNDcPPNonComplianceClear,
+       "vmwNsxTSecurityComplianceTriggerEAL4NonCompliance": vmwNsxTSecurityComplianceTriggerEAL4NonCompliance,
+       "vmwNsxTSecurityComplianceTriggerEAL4NonComplianceClear": vmwNsxTSecurityComplianceTriggerEAL4NonComplianceClear,
+       "vmwNsxTSecurityComplianceTriggerNDcPPNonCompliance": vmwNsxTSecurityComplianceTriggerNDcPPNonCompliance,
+       "vmwNsxTSecurityComplianceTriggerNDcPPNonComplianceClear": vmwNsxTSecurityComplianceTriggerNDcPPNonComplianceClear,
        "vmwNsxTDataCenterData": vmwNsxTDataCenterData,
        "vmwNsxTDataCenterTimestamp": vmwNsxTDataCenterTimestamp,
        "vmwNsxTDataCenterFeatureName": vmwNsxTDataCenterFeatureName,
@@ -12390,6 +17612,61 @@ mibBuilder.exportSymbols(
        "vmwNsxTDataCenterNICThroughputThreshold": vmwNsxTDataCenterNICThroughputThreshold,
        "vmwNsxTDataCenterEdgeCryptoDrvName": vmwNsxTDataCenterEdgeCryptoDrvName,
        "vmwNsxTDataCenterNappNodeName": vmwNsxTDataCenterNappNodeName,
+       "vmwNsxTDataCenterNewVMMorefId": vmwNsxTDataCenterNewVMMorefId,
+       "vmwNsxTDataCenterPolicyEdgeVMName": vmwNsxTDataCenterPolicyEdgeVMName,
+       "vmwNsxTDataCenterVMMorefId": vmwNsxTDataCenterVMMorefId,
+       "vmwNsxTDataCenterDPUId": vmwNsxTDataCenterDPUId,
+       "vmwNsxTDataCenterEdgeNode": vmwNsxTDataCenterEdgeNode,
+       "vmwNsxTDataCenterPrefixesCountMax": vmwNsxTDataCenterPrefixesCountMax,
+       "vmwNsxTDataCenterPrefixesCountThreshold": vmwNsxTDataCenterPrefixesCountThreshold,
+       "vmwNsxTDataCenterRouteLimitMaximum": vmwNsxTDataCenterRouteLimitMaximum,
+       "vmwNsxTDataCenterRouteLimitThreshold": vmwNsxTDataCenterRouteLimitThreshold,
+       "vmwNsxTDataCenterSubsequentAddressFamily": vmwNsxTDataCenterSubsequentAddressFamily,
+       "vmwNsxTDataCentervCenterClusterId": vmwNsxTDataCentervCenterClusterId,
+       "vmwNsxTDataCenterMpsServiceName": vmwNsxTDataCenterMpsServiceName,
+       "vmwNsxTDataCenterMemberIndexId": vmwNsxTDataCenterMemberIndexId,
+       "vmwNsxTDataCenterEdgeClusterId": vmwNsxTDataCenterEdgeClusterId,
+       "vmwNsxTDataCenterCoreDumpCount": vmwNsxTDataCenterCoreDumpCount,
+       "vmwNsxTDataCenterNodeDisplayOrHostName": vmwNsxTDataCenterNodeDisplayOrHostName,
+       "vmwNsxTDataCenterNSXEdgeTNName": vmwNsxTDataCenterNSXEdgeTNName,
+       "vmwNsxTDataCenterNSXESXTNName": vmwNsxTDataCenterNSXESXTNName,
+       "vmwNsxTDataCenterCollectorIP": vmwNsxTDataCenterCollectorIP,
+       "vmwNsxTDataCenterDvsAlias": vmwNsxTDataCenterDvsAlias,
+       "vmwNsxTDataCenterStackAlias": vmwNsxTDataCenterStackAlias,
+       "vmwNsxTDataCenterVerticalName": vmwNsxTDataCenterVerticalName,
+       "vmwNsxTDataCenterEdgeClusterHighestHwVersion": vmwNsxTDataCenterEdgeClusterHighestHwVersion,
+       "vmwNsxTDataCenterEdgeTNHwVersion": vmwNsxTDataCenterEdgeTNHwVersion,
+       "vmwNsxTDataCenterEdgeClusterName": vmwNsxTDataCenterEdgeClusterName,
+       "vmwNsxTDataCenterHaState": vmwNsxTDataCenterHaState,
+       "vmwNsxTDataCenterHaState2": vmwNsxTDataCenterHaState2,
+       "vmwNsxTDataCenterTransportNodeId2": vmwNsxTDataCenterTransportNodeId2,
+       "vmwNsxTDataCenterDvsName": vmwNsxTDataCenterDvsName,
+       "vmwNsxTDataCenterVtepFaultReason": vmwNsxTDataCenterVtepFaultReason,
+       "vmwNsxTDataCenterVtepName": vmwNsxTDataCenterVtepName,
+       "vmwNsxTDataCenterMetricsTargetAddress": vmwNsxTDataCenterMetricsTargetAddress,
+       "vmwNsxTDataCenterMetricsTargetAlias": vmwNsxTDataCenterMetricsTargetAlias,
+       "vmwNsxTDataCenterMetricsTargetPort": vmwNsxTDataCenterMetricsTargetPort,
+       "vmwNsxTDataCenterIPv4Address": vmwNsxTDataCenterIPv4Address,
+       "vmwNsxTDataCenterIPv6Address": vmwNsxTDataCenterIPv6Address,
+       "vmwNsxTDataCenterConstraintLimit": vmwNsxTDataCenterConstraintLimit,
+       "vmwNsxTDataCenterConstraintType": vmwNsxTDataCenterConstraintType,
+       "vmwNsxTDataCenterCurrentCount": vmwNsxTDataCenterCurrentCount,
+       "vmwNsxTDataCenterGroupId": vmwNsxTDataCenterGroupId,
+       "vmwNsxTDataCenterGroupMaxNumberLimit": vmwNsxTDataCenterGroupMaxNumberLimit,
+       "vmwNsxTDataCenterGroupSize": vmwNsxTDataCenterGroupSize,
+       "vmwNsxTDataCenterIPCount": vmwNsxTDataCenterIPCount,
+       "vmwNsxTDataCenterLrpCount": vmwNsxTDataCenterLrpCount,
+       "vmwNsxTDataCenterLspCount": vmwNsxTDataCenterLspCount,
+       "vmwNsxTDataCenterMacCount": vmwNsxTDataCenterMacCount,
+       "vmwNsxTDataCenterSidCount": vmwNsxTDataCenterSidCount,
+       "vmwNsxTDataCenterTNCount": vmwNsxTDataCenterTNCount,
+       "vmwNsxTDataCenterVifCount": vmwNsxTDataCenterVifCount,
+       "vmwNsxTDataCenterVMCount": vmwNsxTDataCenterVMCount,
+       "vmwNsxTDataCenterCoreId": vmwNsxTDataCenterCoreId,
+       "vmwNsxTDataCenterFlowCacheThreshold": vmwNsxTDataCenterFlowCacheThreshold,
+       "vmwNsxTDataCenterNSXaaSServiceName": vmwNsxTDataCenterNSXaaSServiceName,
+       "vmwNsxTDataCenterProtocolName": vmwNsxTDataCenterProtocolName,
+       "vmwNsxTDataCenterConstraintTypePath": vmwNsxTDataCenterConstraintTypePath,
        "vmwNsxTDataCenterConformance": vmwNsxTDataCenterConformance,
        "vmwNsxTDataCenterCompliances": vmwNsxTDataCenterCompliances,
        "vmwNsxTDataCenterBasicCompliance": vmwNsxTDataCenterBasicCompliance,
@@ -12401,6 +17678,11 @@ mibBuilder.exportSymbols(
        "vmwNsxTDataCenterBasicCompliance7": vmwNsxTDataCenterBasicCompliance7,
        "vmwNsxTDataCenterBasicCompliance8": vmwNsxTDataCenterBasicCompliance8,
        "vmwNsxTDataCenterBasicCompliance9": vmwNsxTDataCenterBasicCompliance9,
+       "vmwNsxTDataCenterBasicCompliance10": vmwNsxTDataCenterBasicCompliance10,
+       "vmwNsxTDataCenterBasicCompliance11": vmwNsxTDataCenterBasicCompliance11,
+       "vmwNsxTDataCenterBasicCompliance12": vmwNsxTDataCenterBasicCompliance12,
+       "vmwNsxTDataCenterBasicCompliance13": vmwNsxTDataCenterBasicCompliance13,
+       "vmwNsxTDataCenterBasicCompliance14": vmwNsxTDataCenterBasicCompliance14,
        "vmwNsxTDataCenterSMIBGroups": vmwNsxTDataCenterSMIBGroups,
        "vmwNsxTDataCenterNotificationInfoGroup": vmwNsxTDataCenterNotificationInfoGroup,
        "vmwNsxTDataCenterNotificationGroup": vmwNsxTDataCenterNotificationGroup,
@@ -12418,5 +17700,15 @@ mibBuilder.exportSymbols(
        "vmwNsxTDataCenterNotificationInfoGroup8": vmwNsxTDataCenterNotificationInfoGroup8,
        "vmwNsxTDataCenterNotificationGroup8": vmwNsxTDataCenterNotificationGroup8,
        "vmwNsxTDataCenterNotificationInfoGroup9": vmwNsxTDataCenterNotificationInfoGroup9,
-       "vmwNsxTDataCenterNotificationGroup9": vmwNsxTDataCenterNotificationGroup9}
+       "vmwNsxTDataCenterNotificationGroup9": vmwNsxTDataCenterNotificationGroup9,
+       "vmwNsxTDataCenterNotificationInfoGroup10": vmwNsxTDataCenterNotificationInfoGroup10,
+       "vmwNsxTDataCenterNotificationGroup10": vmwNsxTDataCenterNotificationGroup10,
+       "vmwNsxTDataCenterNotificationInfoGroup11": vmwNsxTDataCenterNotificationInfoGroup11,
+       "vmwNsxTDataCenterNotificationGroup11": vmwNsxTDataCenterNotificationGroup11,
+       "vmwNsxTDataCenterNotificationInfoGroup12": vmwNsxTDataCenterNotificationInfoGroup12,
+       "vmwNsxTDataCenterNotificationGroup12": vmwNsxTDataCenterNotificationGroup12,
+       "vmwNsxTDataCenterNotificationInfoGroup13": vmwNsxTDataCenterNotificationInfoGroup13,
+       "vmwNsxTDataCenterNotificationGroup13": vmwNsxTDataCenterNotificationGroup13,
+       "vmwNsxTDataCenterNotificationInfoGroup14": vmwNsxTDataCenterNotificationInfoGroup14,
+       "vmwNsxTDataCenterNotificationGroup14": vmwNsxTDataCenterNotificationGroup14}
 )

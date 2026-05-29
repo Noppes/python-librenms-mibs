@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\IANA-MAU-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:09:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,11 @@ ianaMauMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ianaMauMIB.setRevisions(
-        ("2010-02-23 00:00",
+        ("2017-04-10 00:00",
+         "2014-08-01 00:00",
+         "2014-05-22 00:00",
+         "2011-08-12 00:00",
+         "2010-02-23 00:00",
          "2007-04-21 00:00")
     )
 
@@ -189,7 +190,40 @@ class IANAifMauTypeListBits(TextualConvention, Bits):
           ("b10GbasePRD2", 66),
           ("b10GbasePRD3", 67),
           ("b10GbasePRU1", 68),
-          ("b10GbasePRU3", 69))
+          ("b10GbasePRU3", 69),
+          ("b40GbaseKR4", 70),
+          ("b40GbaseCR4", 71),
+          ("b40GbaseSR4", 72),
+          ("b40GbaseFR", 73),
+          ("b40GbaseLR4", 74),
+          ("b100GbaseCR10", 75),
+          ("b100GbaseSR10", 76),
+          ("b100GbaseLR4", 77),
+          ("b100GbaseER4", 78),
+          ("b1000baseT1", 79),
+          ("b1000basePX30D", 80),
+          ("b1000basePX30U", 81),
+          ("b1000basePX40D", 82),
+          ("b1000basePX40U", 83),
+          ("b10G1GbasePRXD4", 84),
+          ("b10G1GbasePRXU4", 85),
+          ("b10GbasePRD4", 86),
+          ("b10GbasePRU4", 87),
+          ("b25GbaseCR", 88),
+          ("b25GbaseCRS", 89),
+          ("b25GbaseKR", 90),
+          ("b25GbaseKRS", 91),
+          ("b25GbaseR", 92),
+          ("b25GbaseSR", 93),
+          ("b25GbaseT", 94),
+          ("b40GbaseER4", 95),
+          ("b40GbaseR", 96),
+          ("b40GbaseT", 97),
+          ("b100GbaseCR4", 98),
+          ("b100GbaseKR4", 99),
+          ("b100GbaseKP4", 100),
+          ("b100GbaseR", 101),
+          ("b100GbaseSR4", 102))
     )
 
 
@@ -267,7 +301,21 @@ class IANAifMauAutoNegCapBits(TextualConvention, Bits):
           ("b10GbaseT", 16),
           ("b1000baseKX", 17),
           ("b10GbaseKX4", 18),
-          ("b10GbaseKR", 19))
+          ("b10GbaseKR", 19),
+          ("b40GbaseKR4", 20),
+          ("b40GbaseCR4", 21),
+          ("b100GbaseCR10", 22),
+          ("b1000baseT1", 23),
+          ("b25GbaseRS", 24),
+          ("b25GbaseR", 25),
+          ("bRSFEC25Greq", 26),
+          ("bBaseFEC25Greq", 27),
+          ("b25GbaseT", 28),
+          ("b40GbaseT", 29),
+          ("b100GbaseCR4", 30),
+          ("b100GbaseKR4", 31),
+          ("b100GbaseKP4", 32),
+          ("bForceMS", 33))
     )
 
 
@@ -290,7 +338,8 @@ class IANAifJackType(TextualConvention, Integer32):
               12,
               13,
               14,
-              15)
+              15,
+              16)
         )
     )
     namedValues = NamedValues(
@@ -308,7 +357,8 @@ class IANAifJackType(TextualConvention, Integer32):
           ("mtrj", 12),
           ("hssdc", 13),
           ("fiberLC", 14),
-          ("cx4", 15))
+          ("cx4", 15),
+          ("sfpPlusDA", 16))
     )
 
 
@@ -733,6 +783,204 @@ dot3MauType10GbasePRU3 = _Dot3MauType10GbasePRU3_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     dot3MauType10GbasePRU3.setStatus("current")
+_Dot3MauType40GbaseKR4_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseKR4 = _Dot3MauType40GbaseKR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 70)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseKR4.setStatus("current")
+_Dot3MauType40GbaseCR4_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseCR4 = _Dot3MauType40GbaseCR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 71)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseCR4.setStatus("current")
+_Dot3MauType40GbaseSR4_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseSR4 = _Dot3MauType40GbaseSR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 72)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseSR4.setStatus("current")
+_Dot3MauType40GbaseFR_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseFR = _Dot3MauType40GbaseFR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 73)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseFR.setStatus("current")
+_Dot3MauType40GbaseLR4_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseLR4 = _Dot3MauType40GbaseLR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 74)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseLR4.setStatus("current")
+_Dot3MauType100GbaseCR10_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseCR10 = _Dot3MauType100GbaseCR10_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 75)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseCR10.setStatus("current")
+_Dot3MauType100GbaseSR10_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseSR10 = _Dot3MauType100GbaseSR10_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 76)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseSR10.setStatus("current")
+_Dot3MauType100GbaseLR4_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseLR4 = _Dot3MauType100GbaseLR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 77)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseLR4.setStatus("current")
+_Dot3MauType100GbaseER4_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseER4 = _Dot3MauType100GbaseER4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 78)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseER4.setStatus("current")
+_Dot3MauType1000baseT1_ObjectIdentity = ObjectIdentity
+dot3MauType1000baseT1 = _Dot3MauType1000baseT1_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 79)
+)
+if mibBuilder.loadTexts:
+    dot3MauType1000baseT1.setStatus("current")
+_Dot3MauType1000basePX30D_ObjectIdentity = ObjectIdentity
+dot3MauType1000basePX30D = _Dot3MauType1000basePX30D_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 80)
+)
+if mibBuilder.loadTexts:
+    dot3MauType1000basePX30D.setStatus("current")
+_Dot3MauType1000basePX30U_ObjectIdentity = ObjectIdentity
+dot3MauType1000basePX30U = _Dot3MauType1000basePX30U_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 81)
+)
+if mibBuilder.loadTexts:
+    dot3MauType1000basePX30U.setStatus("current")
+_Dot3MauType1000basePX40D_ObjectIdentity = ObjectIdentity
+dot3MauType1000basePX40D = _Dot3MauType1000basePX40D_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 82)
+)
+if mibBuilder.loadTexts:
+    dot3MauType1000basePX40D.setStatus("current")
+_Dot3MauType1000basePX40U_ObjectIdentity = ObjectIdentity
+dot3MauType1000basePX40U = _Dot3MauType1000basePX40U_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 83)
+)
+if mibBuilder.loadTexts:
+    dot3MauType1000basePX40U.setStatus("current")
+_Dot3MauType10G1GbasePRXD4_ObjectIdentity = ObjectIdentity
+dot3MauType10G1GbasePRXD4 = _Dot3MauType10G1GbasePRXD4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 84)
+)
+if mibBuilder.loadTexts:
+    dot3MauType10G1GbasePRXD4.setStatus("current")
+_Dot3MauType10G1GbasePRXU4_ObjectIdentity = ObjectIdentity
+dot3MauType10G1GbasePRXU4 = _Dot3MauType10G1GbasePRXU4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 85)
+)
+if mibBuilder.loadTexts:
+    dot3MauType10G1GbasePRXU4.setStatus("current")
+_Dot3MauType10GbasePRD4_ObjectIdentity = ObjectIdentity
+dot3MauType10GbasePRD4 = _Dot3MauType10GbasePRD4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 86)
+)
+if mibBuilder.loadTexts:
+    dot3MauType10GbasePRD4.setStatus("current")
+_Dot3MauType10GbasePRU4_ObjectIdentity = ObjectIdentity
+dot3MauType10GbasePRU4 = _Dot3MauType10GbasePRU4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 87)
+)
+if mibBuilder.loadTexts:
+    dot3MauType10GbasePRU4.setStatus("current")
+_Dot3MauType25GbaseCR_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseCR = _Dot3MauType25GbaseCR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 88)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseCR.setStatus("current")
+_Dot3MauType25GbaseCRS_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseCRS = _Dot3MauType25GbaseCRS_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 89)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseCRS.setStatus("current")
+_Dot3MauType25GbaseKR_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseKR = _Dot3MauType25GbaseKR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 90)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseKR.setStatus("current")
+_Dot3MauType25GbaseKRS_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseKRS = _Dot3MauType25GbaseKRS_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 91)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseKRS.setStatus("current")
+_Dot3MauType25GbaseR_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseR = _Dot3MauType25GbaseR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 92)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseR.setStatus("current")
+_Dot3MauType25GbaseSR_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseSR = _Dot3MauType25GbaseSR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 93)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseSR.setStatus("current")
+_Dot3MauType25GbaseT_ObjectIdentity = ObjectIdentity
+dot3MauType25GbaseT = _Dot3MauType25GbaseT_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 94)
+)
+if mibBuilder.loadTexts:
+    dot3MauType25GbaseT.setStatus("current")
+_Dot3MauType40GbaseER4_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseER4 = _Dot3MauType40GbaseER4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 95)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseER4.setStatus("current")
+_Dot3MauType40GbaseR_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseR = _Dot3MauType40GbaseR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 96)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseR.setStatus("current")
+_Dot3MauType40GbaseT_ObjectIdentity = ObjectIdentity
+dot3MauType40GbaseT = _Dot3MauType40GbaseT_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 97)
+)
+if mibBuilder.loadTexts:
+    dot3MauType40GbaseT.setStatus("current")
+_Dot3MauType100GbaseCR4_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseCR4 = _Dot3MauType100GbaseCR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 98)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseCR4.setStatus("current")
+_Dot3MauType100GbaseKR4_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseKR4 = _Dot3MauType100GbaseKR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 99)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseKR4.setStatus("current")
+_Dot3MauType100GbaseKP4_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseKP4 = _Dot3MauType100GbaseKP4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 100)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseKP4.setStatus("current")
+_Dot3MauType100GbaseR_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseR = _Dot3MauType100GbaseR_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 101)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseR.setStatus("current")
+_Dot3MauType100GbaseSR4_ObjectIdentity = ObjectIdentity
+dot3MauType100GbaseSR4 = _Dot3MauType100GbaseSR4_ObjectIdentity(
+    (1, 3, 6, 1, 2, 1, 26, 4, 102)
+)
+if mibBuilder.loadTexts:
+    dot3MauType100GbaseSR4.setStatus("current")
 
 # Managed Objects groups
 
@@ -827,5 +1075,38 @@ mibBuilder.exportSymbols(
        "dot3MauType10GbasePRD3": dot3MauType10GbasePRD3,
        "dot3MauType10GbasePRU1": dot3MauType10GbasePRU1,
        "dot3MauType10GbasePRU3": dot3MauType10GbasePRU3,
+       "dot3MauType40GbaseKR4": dot3MauType40GbaseKR4,
+       "dot3MauType40GbaseCR4": dot3MauType40GbaseCR4,
+       "dot3MauType40GbaseSR4": dot3MauType40GbaseSR4,
+       "dot3MauType40GbaseFR": dot3MauType40GbaseFR,
+       "dot3MauType40GbaseLR4": dot3MauType40GbaseLR4,
+       "dot3MauType100GbaseCR10": dot3MauType100GbaseCR10,
+       "dot3MauType100GbaseSR10": dot3MauType100GbaseSR10,
+       "dot3MauType100GbaseLR4": dot3MauType100GbaseLR4,
+       "dot3MauType100GbaseER4": dot3MauType100GbaseER4,
+       "dot3MauType1000baseT1": dot3MauType1000baseT1,
+       "dot3MauType1000basePX30D": dot3MauType1000basePX30D,
+       "dot3MauType1000basePX30U": dot3MauType1000basePX30U,
+       "dot3MauType1000basePX40D": dot3MauType1000basePX40D,
+       "dot3MauType1000basePX40U": dot3MauType1000basePX40U,
+       "dot3MauType10G1GbasePRXD4": dot3MauType10G1GbasePRXD4,
+       "dot3MauType10G1GbasePRXU4": dot3MauType10G1GbasePRXU4,
+       "dot3MauType10GbasePRD4": dot3MauType10GbasePRD4,
+       "dot3MauType10GbasePRU4": dot3MauType10GbasePRU4,
+       "dot3MauType25GbaseCR": dot3MauType25GbaseCR,
+       "dot3MauType25GbaseCRS": dot3MauType25GbaseCRS,
+       "dot3MauType25GbaseKR": dot3MauType25GbaseKR,
+       "dot3MauType25GbaseKRS": dot3MauType25GbaseKRS,
+       "dot3MauType25GbaseR": dot3MauType25GbaseR,
+       "dot3MauType25GbaseSR": dot3MauType25GbaseSR,
+       "dot3MauType25GbaseT": dot3MauType25GbaseT,
+       "dot3MauType40GbaseER4": dot3MauType40GbaseER4,
+       "dot3MauType40GbaseR": dot3MauType40GbaseR,
+       "dot3MauType40GbaseT": dot3MauType40GbaseT,
+       "dot3MauType100GbaseCR4": dot3MauType100GbaseCR4,
+       "dot3MauType100GbaseKR4": dot3MauType100GbaseKR4,
+       "dot3MauType100GbaseKP4": dot3MauType100GbaseKP4,
+       "dot3MauType100GbaseR": dot3MauType100GbaseR,
+       "dot3MauType100GbaseSR4": dot3MauType100GbaseSR4,
        "ianaMauMIB": ianaMauMIB}
 )

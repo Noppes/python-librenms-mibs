@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\vmware\VMWARE-VRNI-AGENTCAP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:34:37 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,8 @@ vmwVRNIAgentCapabilityMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     vmwVRNIAgentCapabilityMIB.setRevisions(
-        ("2023-03-10 00:00",
+        ("2023-08-07 00:00",
+         "2023-04-20 00:00",
          "2022-09-07 00:00",
          "2022-03-30 00:00",
          "2021-10-01 00:00",
@@ -303,6 +301,16 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vmwVRNIAgent2021v611 = AgentCapabilities(
+    (1, 3, 6, 1, 4, 1, 6876, 70, 125, 10, 22)
+)
+if mibBuilder.loadTexts:
+    vmwVRNIAgent2021v611.setProductRelease("6.11.0")
+if mibBuilder.loadTexts:
+    vmwVRNIAgent2021v611.setStatus(
+        "current"
+    )
+
 
 # Module compliance
 
@@ -327,5 +335,6 @@ mibBuilder.exportSymbols(
        "vmwVRNIAgent2021v640": vmwVRNIAgent2021v640,
        "vmwVRNIAgent2021v650": vmwVRNIAgent2021v650,
        "vmwVRNIAgent2021v660": vmwVRNIAgent2021v660,
-       "vmwVRNIAgent2021v670": vmwVRNIAgent2021v670}
+       "vmwVRNIAgent2021v670": vmwVRNIAgent2021v670,
+       "vmwVRNIAgent2021v611": vmwVRNIAgent2021v611}
 )

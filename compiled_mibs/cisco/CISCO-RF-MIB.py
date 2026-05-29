@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-RF-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:27:18 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -125,7 +122,8 @@ ciscoRFMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoRFMIB.setRevisions(
-        ("2005-09-01 00:00",
+        ("2023-07-13 00:00",
+         "2005-09-01 00:00",
          "2004-04-01 00:00",
          "2004-02-04 00:00",
          "2003-10-02 00:00",
@@ -163,7 +161,8 @@ class RFState(TextualConvention, Integer32):
               13,
               14,
               15,
-              16)
+              16,
+              17)
         )
     )
     namedValues = NamedValues(
@@ -182,7 +181,8 @@ class RFState(TextualConvention, Integer32):
           ("activePostconfig", 13),
           ("active", 14),
           ("activeExtraload", 15),
-          ("activeHandback", 16))
+          ("activeHandback", 16),
+          ("standbyWarm", 17))
     )
 
 
@@ -248,7 +248,9 @@ class RFSwactReasonType(TextualConvention, Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8,
+              9)
         )
     )
     namedValues = NamedValues(
@@ -258,7 +260,9 @@ class RFSwactReasonType(TextualConvention, Integer32):
           ("userInitiated", 4),
           ("userForced", 5),
           ("activeUnitFailed", 6),
-          ("activeUnitRemoved", 7))
+          ("activeUnitRemoved", 7),
+          ("activeGWdown", 8),
+          ("activeRMIportdown", 9))
     )
 
 

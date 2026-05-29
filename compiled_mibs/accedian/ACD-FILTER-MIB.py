@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-FILTER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:05 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,9 @@ acdFilter = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdFilter.setRevisions(
-        ("2011-10-10 01:00",
+        ("2015-06-18 01:00",
+         "2013-02-13 01:00",
+         "2011-10-10 01:00",
          "2010-11-10 01:00",
          "2008-05-01 01:00",
          "2006-08-06 01:00")
@@ -149,6 +148,22 @@ class AcdFilterOperator(TextualConvention, Integer32):
 
 
 
+class AcdFilterOperatorEqualRangeOnly(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("equalTo", 3),
+          ("range", 4))
+    )
+
+
+
 class AcdFilterVlanType(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
@@ -156,13 +171,17 @@ class AcdFilterVlanType(TextualConvention, Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("cvlan", 1),
           ("svlan", 2),
-          ("both", 3))
+          ("both", 3),
+          ("tvlan", 4),
+          ("any", 5))
     )
 
 
@@ -2879,6 +2898,80 @@ acdSmapIPv4FilterIcmpCode = _AcdSmapIPv4FilterIcmpCode_Object(
 acdSmapIPv4FilterIcmpCode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     acdSmapIPv4FilterIcmpCode.setStatus("current")
+
+
+class _AcdSmapIPv4FilterSrcPortLast_Type(Unsigned32):
+    """Custom type acdSmapIPv4FilterSrcPortLast based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_AcdSmapIPv4FilterSrcPortLast_Type.__name__ = "Unsigned32"
+_AcdSmapIPv4FilterSrcPortLast_Object = MibTableColumn
+acdSmapIPv4FilterSrcPortLast = _AcdSmapIPv4FilterSrcPortLast_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 2, 4, 1, 58),
+    _AcdSmapIPv4FilterSrcPortLast_Type()
+)
+acdSmapIPv4FilterSrcPortLast.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdSmapIPv4FilterSrcPortLast.setStatus("current")
+
+
+class _AcdSmapIPv4FilterSrcPortOper_Type(AcdFilterOperatorEqualRangeOnly):
+    """Custom type acdSmapIPv4FilterSrcPortOper based on AcdFilterOperatorEqualRangeOnly"""
+    defaultValue = 3
+
+
+_AcdSmapIPv4FilterSrcPortOper_Type.__name__ = "AcdFilterOperatorEqualRangeOnly"
+_AcdSmapIPv4FilterSrcPortOper_Object = MibTableColumn
+acdSmapIPv4FilterSrcPortOper = _AcdSmapIPv4FilterSrcPortOper_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 2, 4, 1, 59),
+    _AcdSmapIPv4FilterSrcPortOper_Type()
+)
+acdSmapIPv4FilterSrcPortOper.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdSmapIPv4FilterSrcPortOper.setStatus("current")
+
+
+class _AcdSmapIPv4FilterDstPortLast_Type(Unsigned32):
+    """Custom type acdSmapIPv4FilterDstPortLast based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_AcdSmapIPv4FilterDstPortLast_Type.__name__ = "Unsigned32"
+_AcdSmapIPv4FilterDstPortLast_Object = MibTableColumn
+acdSmapIPv4FilterDstPortLast = _AcdSmapIPv4FilterDstPortLast_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 2, 4, 1, 60),
+    _AcdSmapIPv4FilterDstPortLast_Type()
+)
+acdSmapIPv4FilterDstPortLast.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdSmapIPv4FilterDstPortLast.setStatus("current")
+
+
+class _AcdSmapIPv4FilterDstPortOper_Type(AcdFilterOperatorEqualRangeOnly):
+    """Custom type acdSmapIPv4FilterDstPortOper based on AcdFilterOperatorEqualRangeOnly"""
+    defaultValue = 3
+
+
+_AcdSmapIPv4FilterDstPortOper_Type.__name__ = "AcdFilterOperatorEqualRangeOnly"
+_AcdSmapIPv4FilterDstPortOper_Object = MibTableColumn
+acdSmapIPv4FilterDstPortOper = _AcdSmapIPv4FilterDstPortOper_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 2, 4, 1, 61),
+    _AcdSmapIPv4FilterDstPortOper_Type()
+)
+acdSmapIPv4FilterDstPortOper.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdSmapIPv4FilterDstPortOper.setStatus("current")
 _AcdFilterNotifications_ObjectIdentity = ObjectIdentity
 acdFilterNotifications = _AcdFilterNotifications_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 2, 5)
@@ -3097,7 +3190,11 @@ acdSmapIPv4FilterGroup.setObjects(
         ("ACD-FILTER-MIB", "acdSmapIPv4FilterIcmpTypeEn"),
         ("ACD-FILTER-MIB", "acdSmapIPv4FilterIcmpType"),
         ("ACD-FILTER-MIB", "acdSmapIPv4FilterIcmpCodeEn"),
-        ("ACD-FILTER-MIB", "acdSmapIPv4FilterIcmpCode"))
+        ("ACD-FILTER-MIB", "acdSmapIPv4FilterIcmpCode"),
+        ("ACD-FILTER-MIB", "acdSmapIPv4FilterSrcPortLast"),
+        ("ACD-FILTER-MIB", "acdSmapIPv4FilterSrcPortOper"),
+        ("ACD-FILTER-MIB", "acdSmapIPv4FilterDstPortLast"),
+        ("ACD-FILTER-MIB", "acdSmapIPv4FilterDstPortOper"))
 )
 if mibBuilder.loadTexts:
     acdSmapIPv4FilterGroup.setStatus("current")
@@ -3145,6 +3242,7 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "ACD-FILTER-MIB",
     **{"AcdFilterOperator": AcdFilterOperator,
+       "AcdFilterOperatorEqualRangeOnly": AcdFilterOperatorEqualRangeOnly,
        "AcdFilterVlanType": AcdFilterVlanType,
        "acdFilter": acdFilter,
        "acdL2FilterTable": acdL2FilterTable,
@@ -3305,6 +3403,10 @@ mibBuilder.exportSymbols(
        "acdSmapIPv4FilterIcmpType": acdSmapIPv4FilterIcmpType,
        "acdSmapIPv4FilterIcmpCodeEn": acdSmapIPv4FilterIcmpCodeEn,
        "acdSmapIPv4FilterIcmpCode": acdSmapIPv4FilterIcmpCode,
+       "acdSmapIPv4FilterSrcPortLast": acdSmapIPv4FilterSrcPortLast,
+       "acdSmapIPv4FilterSrcPortOper": acdSmapIPv4FilterSrcPortOper,
+       "acdSmapIPv4FilterDstPortLast": acdSmapIPv4FilterDstPortLast,
+       "acdSmapIPv4FilterDstPortOper": acdSmapIPv4FilterDstPortOper,
        "acdFilterNotifications": acdFilterNotifications,
        "acdFilterMIBObjects": acdFilterMIBObjects,
        "acdFilterTableTid": acdFilterTableTid,

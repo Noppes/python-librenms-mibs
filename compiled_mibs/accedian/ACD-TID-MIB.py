@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-TID-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:11 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,8 @@ acdTid = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdTid.setRevisions(
-        ("2011-11-11 01:00",)
+        ("2012-11-05 22:00",
+         "2011-11-11 01:00")
     )
 
 
@@ -141,6 +139,10 @@ class AcdTidType(TextualConvention, Integer32):
 _AcdTidNotifications_ObjectIdentity = ObjectIdentity
 acdTidNotifications = _AcdTidNotifications_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 14, 0)
+)
+_AcdTidNotificationPrefix_ObjectIdentity = ObjectIdentity
+acdTidNotificationPrefix = _AcdTidNotificationPrefix_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 14, 0, 0)
 )
 _AcdTidMIBObjects_ObjectIdentity = ObjectIdentity
 acdTidMIBObjects = _AcdTidMIBObjects_ObjectIdentity(
@@ -232,6 +234,19 @@ acdTidInfoLastChangeTid = _AcdTidInfoLastChangeTid_Object(
 acdTidInfoLastChangeTid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdTidInfoLastChangeTid.setStatus("current")
+_AcdTidGlobalCfg_ObjectIdentity = ObjectIdentity
+acdTidGlobalCfg = _AcdTidGlobalCfg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 14, 1, 3)
+)
+_AcdTidglobalCfgChangeCount_Type = Unsigned32
+_AcdTidglobalCfgChangeCount_Object = MibScalar
+acdTidglobalCfgChangeCount = _AcdTidglobalCfgChangeCount_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 14, 1, 3, 2),
+    _AcdTidglobalCfgChangeCount_Type()
+)
+acdTidglobalCfgChangeCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdTidglobalCfgChangeCount.setStatus("current")
 _AcdTidConformance_ObjectIdentity = ObjectIdentity
 acdTidConformance = _AcdTidConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 14, 2)
@@ -269,11 +284,42 @@ acdTidTableGroup.setObjects(
 if mibBuilder.loadTexts:
     acdTidTableGroup.setStatus("current")
 
+acdTidGlobalCfgGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 14, 2, 2, 3)
+)
+acdTidGlobalCfgGroup.setObjects(
+    ("ACD-TID-MIB", "acdTidglobalCfgChangeCount")
+)
+if mibBuilder.loadTexts:
+    acdTidGlobalCfgGroup.setStatus("current")
+
 
 # Notification objects
 
+acdTidGlobalCfgChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 14, 0, 0, 1)
+)
+acdTidGlobalCfgChange.setObjects(
+    ("ACD-TID-MIB", "acdTidglobalCfgChangeCount")
+)
+if mibBuilder.loadTexts:
+    acdTidGlobalCfgChange.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
+
+acdTidNotificationsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 14, 2, 2, 4)
+)
+acdTidNotificationsGroup.setObjects(
+    ("ACD-TID-MIB", "acdTidGlobalCfgChange")
+)
+if mibBuilder.loadTexts:
+    acdTidNotificationsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -286,7 +332,9 @@ acdTidCompliance = ModuleCompliance(
 )
 acdTidCompliance.setObjects(
       *(("ACD-TID-MIB", "acdTidGeneralGroup"),
-        ("ACD-TID-MIB", "acdTidTableGroup"))
+        ("ACD-TID-MIB", "acdTidTableGroup"),
+        ("ACD-TID-MIB", "acdTidGlobalCfgGroup"),
+        ("ACD-TID-MIB", "acdTidNotificationsGroup"))
 )
 if mibBuilder.loadTexts:
     acdTidCompliance.setStatus(
@@ -301,6 +349,8 @@ mibBuilder.exportSymbols(
     **{"AcdTidType": AcdTidType,
        "acdTid": acdTid,
        "acdTidNotifications": acdTidNotifications,
+       "acdTidNotificationPrefix": acdTidNotificationPrefix,
+       "acdTidGlobalCfgChange": acdTidGlobalCfgChange,
        "acdTidMIBObjects": acdTidMIBObjects,
        "acdTidGeneral": acdTidGeneral,
        "acdTidCfgLastChangeTid": acdTidCfgLastChangeTid,
@@ -313,10 +363,14 @@ mibBuilder.exportSymbols(
        "acdTidInfoType": acdTidInfoType,
        "acdTidInfoDescr": acdTidInfoDescr,
        "acdTidInfoLastChangeTid": acdTidInfoLastChangeTid,
+       "acdTidGlobalCfg": acdTidGlobalCfg,
+       "acdTidglobalCfgChangeCount": acdTidglobalCfgChangeCount,
        "acdTidConformance": acdTidConformance,
        "acdTidCompliances": acdTidCompliances,
        "acdTidCompliance": acdTidCompliance,
        "acdTidGroups": acdTidGroups,
        "acdTidGeneralGroup": acdTidGeneralGroup,
-       "acdTidTableGroup": acdTidTableGroup}
+       "acdTidTableGroup": acdTidTableGroup,
+       "acdTidGlobalCfgGroup": acdTidGlobalCfgGroup,
+       "acdTidNotificationsGroup": acdTidNotificationsGroup}
 )

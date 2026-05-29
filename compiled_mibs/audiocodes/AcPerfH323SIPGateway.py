@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\audiocodes\AcPerfH323SIPGateway
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:19:57 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,7 @@ acPerfH323SIPGateway = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acPerfH323SIPGateway.setRevisions(
-        ("2003-11-20 00:00",)
+        ("2021-02-16 09:55",)
     )
 
 
@@ -158,7 +155,7 @@ acPerfTel2IPAttemptedCalls = _AcPerfTel2IPAttemptedCalls_Object(
 )
 acPerfTel2IPAttemptedCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPAttemptedCalls.setStatus("current")
+    acPerfTel2IPAttemptedCalls.setStatus("obsolete")
 _AcPerfTel2IPEstablishedCalls_Type = Counter32
 _AcPerfTel2IPEstablishedCalls_Object = MibScalar
 acPerfTel2IPEstablishedCalls = _AcPerfTel2IPEstablishedCalls_Object(
@@ -167,7 +164,7 @@ acPerfTel2IPEstablishedCalls = _AcPerfTel2IPEstablishedCalls_Object(
 )
 acPerfTel2IPEstablishedCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPEstablishedCalls.setStatus("current")
+    acPerfTel2IPEstablishedCalls.setStatus("obsolete")
 _AcPerfTel2IPBusyCalls_Type = Counter32
 _AcPerfTel2IPBusyCalls_Object = MibScalar
 acPerfTel2IPBusyCalls = _AcPerfTel2IPBusyCalls_Object(
@@ -176,7 +173,7 @@ acPerfTel2IPBusyCalls = _AcPerfTel2IPBusyCalls_Object(
 )
 acPerfTel2IPBusyCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPBusyCalls.setStatus("current")
+    acPerfTel2IPBusyCalls.setStatus("obsolete")
 _AcPerfTel2IPNoAnswerCalls_Type = Counter32
 _AcPerfTel2IPNoAnswerCalls_Object = MibScalar
 acPerfTel2IPNoAnswerCalls = _AcPerfTel2IPNoAnswerCalls_Object(
@@ -185,7 +182,7 @@ acPerfTel2IPNoAnswerCalls = _AcPerfTel2IPNoAnswerCalls_Object(
 )
 acPerfTel2IPNoAnswerCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPNoAnswerCalls.setStatus("current")
+    acPerfTel2IPNoAnswerCalls.setStatus("obsolete")
 _AcPerfTel2IPNoRouteCalls_Type = Counter32
 _AcPerfTel2IPNoRouteCalls_Object = MibScalar
 acPerfTel2IPNoRouteCalls = _AcPerfTel2IPNoRouteCalls_Object(
@@ -194,7 +191,7 @@ acPerfTel2IPNoRouteCalls = _AcPerfTel2IPNoRouteCalls_Object(
 )
 acPerfTel2IPNoRouteCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPNoRouteCalls.setStatus("current")
+    acPerfTel2IPNoRouteCalls.setStatus("obsolete")
 _AcPerfTel2IPNoMatchCalls_Type = Counter32
 _AcPerfTel2IPNoMatchCalls_Object = MibScalar
 acPerfTel2IPNoMatchCalls = _AcPerfTel2IPNoMatchCalls_Object(
@@ -203,7 +200,7 @@ acPerfTel2IPNoMatchCalls = _AcPerfTel2IPNoMatchCalls_Object(
 )
 acPerfTel2IPNoMatchCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPNoMatchCalls.setStatus("current")
+    acPerfTel2IPNoMatchCalls.setStatus("obsolete")
 _AcPerfTel2IPFailCalls_Type = Counter32
 _AcPerfTel2IPFailCalls_Object = MibScalar
 acPerfTel2IPFailCalls = _AcPerfTel2IPFailCalls_Object(
@@ -212,7 +209,7 @@ acPerfTel2IPFailCalls = _AcPerfTel2IPFailCalls_Object(
 )
 acPerfTel2IPFailCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPFailCalls.setStatus("current")
+    acPerfTel2IPFailCalls.setStatus("obsolete")
 _AcPerfTel2IPFaxAttemptedCalls_Type = Counter32
 _AcPerfTel2IPFaxAttemptedCalls_Object = MibScalar
 acPerfTel2IPFaxAttemptedCalls = _AcPerfTel2IPFaxAttemptedCalls_Object(
@@ -221,7 +218,7 @@ acPerfTel2IPFaxAttemptedCalls = _AcPerfTel2IPFaxAttemptedCalls_Object(
 )
 acPerfTel2IPFaxAttemptedCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPFaxAttemptedCalls.setStatus("current")
+    acPerfTel2IPFaxAttemptedCalls.setStatus("obsolete")
 _AcPerfTel2IPFaxSuccessCalls_Type = Counter32
 _AcPerfTel2IPFaxSuccessCalls_Object = MibScalar
 acPerfTel2IPFaxSuccessCalls = _AcPerfTel2IPFaxSuccessCalls_Object(
@@ -230,7 +227,7 @@ acPerfTel2IPFaxSuccessCalls = _AcPerfTel2IPFaxSuccessCalls_Object(
 )
 acPerfTel2IPFaxSuccessCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPFaxSuccessCalls.setStatus("current")
+    acPerfTel2IPFaxSuccessCalls.setStatus("obsolete")
 _AcPerfTel2IPTotalDuration_Type = Counter32
 _AcPerfTel2IPTotalDuration_Object = MibScalar
 acPerfTel2IPTotalDuration = _AcPerfTel2IPTotalDuration_Object(
@@ -239,7 +236,7 @@ acPerfTel2IPTotalDuration = _AcPerfTel2IPTotalDuration_Object(
 )
 acPerfTel2IPTotalDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTel2IPTotalDuration.setStatus("current")
+    acPerfTel2IPTotalDuration.setStatus("obsolete")
 _AcPerfIP2Tel_ObjectIdentity = ObjectIdentity
 acPerfIP2Tel = _AcPerfIP2Tel_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 10, 3, 1, 1, 2)
@@ -252,7 +249,7 @@ acPerfIP2TelAttemptedCalls = _AcPerfIP2TelAttemptedCalls_Object(
 )
 acPerfIP2TelAttemptedCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelAttemptedCalls.setStatus("current")
+    acPerfIP2TelAttemptedCalls.setStatus("obsolete")
 _AcPerfIP2TelEstablishedCalls_Type = Counter32
 _AcPerfIP2TelEstablishedCalls_Object = MibScalar
 acPerfIP2TelEstablishedCalls = _AcPerfIP2TelEstablishedCalls_Object(
@@ -261,7 +258,7 @@ acPerfIP2TelEstablishedCalls = _AcPerfIP2TelEstablishedCalls_Object(
 )
 acPerfIP2TelEstablishedCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelEstablishedCalls.setStatus("current")
+    acPerfIP2TelEstablishedCalls.setStatus("obsolete")
 _AcPerfIP2TelBusyCalls_Type = Counter32
 _AcPerfIP2TelBusyCalls_Object = MibScalar
 acPerfIP2TelBusyCalls = _AcPerfIP2TelBusyCalls_Object(
@@ -270,7 +267,7 @@ acPerfIP2TelBusyCalls = _AcPerfIP2TelBusyCalls_Object(
 )
 acPerfIP2TelBusyCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelBusyCalls.setStatus("current")
+    acPerfIP2TelBusyCalls.setStatus("obsolete")
 _AcPerfIP2TelNoAnswerCalls_Type = Counter32
 _AcPerfIP2TelNoAnswerCalls_Object = MibScalar
 acPerfIP2TelNoAnswerCalls = _AcPerfIP2TelNoAnswerCalls_Object(
@@ -279,7 +276,7 @@ acPerfIP2TelNoAnswerCalls = _AcPerfIP2TelNoAnswerCalls_Object(
 )
 acPerfIP2TelNoAnswerCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelNoAnswerCalls.setStatus("current")
+    acPerfIP2TelNoAnswerCalls.setStatus("obsolete")
 _AcPerfIP2TelNoRouteCalls_Type = Counter32
 _AcPerfIP2TelNoRouteCalls_Object = MibScalar
 acPerfIP2TelNoRouteCalls = _AcPerfIP2TelNoRouteCalls_Object(
@@ -288,7 +285,7 @@ acPerfIP2TelNoRouteCalls = _AcPerfIP2TelNoRouteCalls_Object(
 )
 acPerfIP2TelNoRouteCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelNoRouteCalls.setStatus("current")
+    acPerfIP2TelNoRouteCalls.setStatus("obsolete")
 _AcPerfIP2TelNoMatchCalls_Type = Counter32
 _AcPerfIP2TelNoMatchCalls_Object = MibScalar
 acPerfIP2TelNoMatchCalls = _AcPerfIP2TelNoMatchCalls_Object(
@@ -297,7 +294,7 @@ acPerfIP2TelNoMatchCalls = _AcPerfIP2TelNoMatchCalls_Object(
 )
 acPerfIP2TelNoMatchCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelNoMatchCalls.setStatus("current")
+    acPerfIP2TelNoMatchCalls.setStatus("obsolete")
 _AcPerfIP2TelFailCalls_Type = Counter32
 _AcPerfIP2TelFailCalls_Object = MibScalar
 acPerfIP2TelFailCalls = _AcPerfIP2TelFailCalls_Object(
@@ -306,7 +303,7 @@ acPerfIP2TelFailCalls = _AcPerfIP2TelFailCalls_Object(
 )
 acPerfIP2TelFailCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelFailCalls.setStatus("current")
+    acPerfIP2TelFailCalls.setStatus("obsolete")
 _AcPerfIP2TelFaxAttemptedCalls_Type = Counter32
 _AcPerfIP2TelFaxAttemptedCalls_Object = MibScalar
 acPerfIP2TelFaxAttemptedCalls = _AcPerfIP2TelFaxAttemptedCalls_Object(
@@ -315,7 +312,7 @@ acPerfIP2TelFaxAttemptedCalls = _AcPerfIP2TelFaxAttemptedCalls_Object(
 )
 acPerfIP2TelFaxAttemptedCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelFaxAttemptedCalls.setStatus("current")
+    acPerfIP2TelFaxAttemptedCalls.setStatus("obsolete")
 _AcPerfIP2TelFaxSuccessCalls_Type = Counter32
 _AcPerfIP2TelFaxSuccessCalls_Object = MibScalar
 acPerfIP2TelFaxSuccessCalls = _AcPerfIP2TelFaxSuccessCalls_Object(
@@ -324,7 +321,7 @@ acPerfIP2TelFaxSuccessCalls = _AcPerfIP2TelFaxSuccessCalls_Object(
 )
 acPerfIP2TelFaxSuccessCalls.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelFaxSuccessCalls.setStatus("current")
+    acPerfIP2TelFaxSuccessCalls.setStatus("obsolete")
 _AcPerfIP2TelTotalDuration_Type = Counter32
 _AcPerfIP2TelTotalDuration_Object = MibScalar
 acPerfIP2TelTotalDuration = _AcPerfIP2TelTotalDuration_Object(
@@ -333,7 +330,7 @@ acPerfIP2TelTotalDuration = _AcPerfIP2TelTotalDuration_Object(
 )
 acPerfIP2TelTotalDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIP2TelTotalDuration.setStatus("current")
+    acPerfIP2TelTotalDuration.setStatus("obsolete")
 
 # Managed Objects groups
 

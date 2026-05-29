@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\audiocodes\AcPerfMediaServices
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:19:57 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,7 @@ acPerfMediaServices = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acPerfMediaServices.setRevisions(
-        ("2003-11-20 00:00",)
+        ("2021-02-16 09:55",)
     )
 
 
@@ -150,7 +147,7 @@ acPerfIvrPlayRequests = _AcPerfIvrPlayRequests_Object(
 )
 acPerfIvrPlayRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayRequests.setStatus("deprecated")
+    acPerfIvrPlayRequests.setStatus("obsolete")
 _AcPerfIvrPlaySuccessful_Type = Counter32
 _AcPerfIvrPlaySuccessful_Object = MibScalar
 acPerfIvrPlaySuccessful = _AcPerfIvrPlaySuccessful_Object(
@@ -159,7 +156,7 @@ acPerfIvrPlaySuccessful = _AcPerfIvrPlaySuccessful_Object(
 )
 acPerfIvrPlaySuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlaySuccessful.setStatus("deprecated")
+    acPerfIvrPlaySuccessful.setStatus("obsolete")
 _AcPerfIvrPlayFailedDueToLackOfResources_Type = Counter32
 _AcPerfIvrPlayFailedDueToLackOfResources_Object = MibScalar
 acPerfIvrPlayFailedDueToLackOfResources = _AcPerfIvrPlayFailedDueToLackOfResources_Object(
@@ -168,7 +165,7 @@ acPerfIvrPlayFailedDueToLackOfResources = _AcPerfIvrPlayFailedDueToLackOfResourc
 )
 acPerfIvrPlayFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfIvrPlayFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfIvrPlayInProgress_Type = Gauge32
 _AcPerfIvrPlayInProgress_Object = MibScalar
 acPerfIvrPlayInProgress = _AcPerfIvrPlayInProgress_Object(
@@ -177,7 +174,7 @@ acPerfIvrPlayInProgress = _AcPerfIvrPlayInProgress_Object(
 )
 acPerfIvrPlayInProgress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayInProgress.setStatus("deprecated")
+    acPerfIvrPlayInProgress.setStatus("obsolete")
 _AcPerfIvrPlayDuration_Type = Counter32
 _AcPerfIvrPlayDuration_Object = MibScalar
 acPerfIvrPlayDuration = _AcPerfIvrPlayDuration_Object(
@@ -186,7 +183,7 @@ acPerfIvrPlayDuration = _AcPerfIvrPlayDuration_Object(
 )
 acPerfIvrPlayDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayDuration.setStatus("deprecated")
+    acPerfIvrPlayDuration.setStatus("obsolete")
 _AcPerfIvrPlayFailedDueToProvMismatch_Type = Counter32
 _AcPerfIvrPlayFailedDueToProvMismatch_Object = MibScalar
 acPerfIvrPlayFailedDueToProvMismatch = _AcPerfIvrPlayFailedDueToProvMismatch_Object(
@@ -195,7 +192,7 @@ acPerfIvrPlayFailedDueToProvMismatch = _AcPerfIvrPlayFailedDueToProvMismatch_Obj
 )
 acPerfIvrPlayFailedDueToProvMismatch.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayFailedDueToProvMismatch.setStatus("deprecated")
+    acPerfIvrPlayFailedDueToProvMismatch.setStatus("obsolete")
 _AcPerfIvrPlayCollectRequests_Type = Counter32
 _AcPerfIvrPlayCollectRequests_Object = MibScalar
 acPerfIvrPlayCollectRequests = _AcPerfIvrPlayCollectRequests_Object(
@@ -204,7 +201,7 @@ acPerfIvrPlayCollectRequests = _AcPerfIvrPlayCollectRequests_Object(
 )
 acPerfIvrPlayCollectRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayCollectRequests.setStatus("deprecated")
+    acPerfIvrPlayCollectRequests.setStatus("obsolete")
 _AcPerfIvrPlayCollectSuccessful_Type = Counter32
 _AcPerfIvrPlayCollectSuccessful_Object = MibScalar
 acPerfIvrPlayCollectSuccessful = _AcPerfIvrPlayCollectSuccessful_Object(
@@ -213,7 +210,7 @@ acPerfIvrPlayCollectSuccessful = _AcPerfIvrPlayCollectSuccessful_Object(
 )
 acPerfIvrPlayCollectSuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayCollectSuccessful.setStatus("deprecated")
+    acPerfIvrPlayCollectSuccessful.setStatus("obsolete")
 _AcPerfIvrPlayCollectFailedDueToLackOfResources_Type = Counter32
 _AcPerfIvrPlayCollectFailedDueToLackOfResources_Object = MibScalar
 acPerfIvrPlayCollectFailedDueToLackOfResources = _AcPerfIvrPlayCollectFailedDueToLackOfResources_Object(
@@ -222,7 +219,7 @@ acPerfIvrPlayCollectFailedDueToLackOfResources = _AcPerfIvrPlayCollectFailedDueT
 )
 acPerfIvrPlayCollectFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayCollectFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfIvrPlayCollectFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfIvrPlayCollectFailedDueToProvMismatch_Type = Counter32
 _AcPerfIvrPlayCollectFailedDueToProvMismatch_Object = MibScalar
 acPerfIvrPlayCollectFailedDueToProvMismatch = _AcPerfIvrPlayCollectFailedDueToProvMismatch_Object(
@@ -231,7 +228,7 @@ acPerfIvrPlayCollectFailedDueToProvMismatch = _AcPerfIvrPlayCollectFailedDueToPr
 )
 acPerfIvrPlayCollectFailedDueToProvMismatch.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayCollectFailedDueToProvMismatch.setStatus("deprecated")
+    acPerfIvrPlayCollectFailedDueToProvMismatch.setStatus("obsolete")
 _AcPerfIvrPlayCollectInProgress_Type = Gauge32
 _AcPerfIvrPlayCollectInProgress_Object = MibScalar
 acPerfIvrPlayCollectInProgress = _AcPerfIvrPlayCollectInProgress_Object(
@@ -240,7 +237,7 @@ acPerfIvrPlayCollectInProgress = _AcPerfIvrPlayCollectInProgress_Object(
 )
 acPerfIvrPlayCollectInProgress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayCollectInProgress.setStatus("deprecated")
+    acPerfIvrPlayCollectInProgress.setStatus("obsolete")
 _AcPerfIvrPlayCollectDuration_Type = Counter32
 _AcPerfIvrPlayCollectDuration_Object = MibScalar
 acPerfIvrPlayCollectDuration = _AcPerfIvrPlayCollectDuration_Object(
@@ -249,7 +246,7 @@ acPerfIvrPlayCollectDuration = _AcPerfIvrPlayCollectDuration_Object(
 )
 acPerfIvrPlayCollectDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrPlayCollectDuration.setStatus("deprecated")
+    acPerfIvrPlayCollectDuration.setStatus("obsolete")
 _AcPerfIvrContDigitCollectRequests_Type = Counter32
 _AcPerfIvrContDigitCollectRequests_Object = MibScalar
 acPerfIvrContDigitCollectRequests = _AcPerfIvrContDigitCollectRequests_Object(
@@ -258,7 +255,7 @@ acPerfIvrContDigitCollectRequests = _AcPerfIvrContDigitCollectRequests_Object(
 )
 acPerfIvrContDigitCollectRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrContDigitCollectRequests.setStatus("deprecated")
+    acPerfIvrContDigitCollectRequests.setStatus("obsolete")
 _AcPerfIvrContDigitCollectSuccessful_Type = Counter32
 _AcPerfIvrContDigitCollectSuccessful_Object = MibScalar
 acPerfIvrContDigitCollectSuccessful = _AcPerfIvrContDigitCollectSuccessful_Object(
@@ -267,7 +264,7 @@ acPerfIvrContDigitCollectSuccessful = _AcPerfIvrContDigitCollectSuccessful_Objec
 )
 acPerfIvrContDigitCollectSuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrContDigitCollectSuccessful.setStatus("deprecated")
+    acPerfIvrContDigitCollectSuccessful.setStatus("obsolete")
 _AcPerfIvrContDigitCollectFailedDueToLackOfResources_Type = Counter32
 _AcPerfIvrContDigitCollectFailedDueToLackOfResources_Object = MibScalar
 acPerfIvrContDigitCollectFailedDueToLackOfResources = _AcPerfIvrContDigitCollectFailedDueToLackOfResources_Object(
@@ -276,7 +273,7 @@ acPerfIvrContDigitCollectFailedDueToLackOfResources = _AcPerfIvrContDigitCollect
 )
 acPerfIvrContDigitCollectFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrContDigitCollectFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfIvrContDigitCollectFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfIvrContDigitCollectInProgress_Type = Gauge32
 _AcPerfIvrContDigitCollectInProgress_Object = MibScalar
 acPerfIvrContDigitCollectInProgress = _AcPerfIvrContDigitCollectInProgress_Object(
@@ -285,7 +282,7 @@ acPerfIvrContDigitCollectInProgress = _AcPerfIvrContDigitCollectInProgress_Objec
 )
 acPerfIvrContDigitCollectInProgress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrContDigitCollectInProgress.setStatus("deprecated")
+    acPerfIvrContDigitCollectInProgress.setStatus("obsolete")
 _AcPerfIvrContDigitCollectDuration_Type = Counter32
 _AcPerfIvrContDigitCollectDuration_Object = MibScalar
 acPerfIvrContDigitCollectDuration = _AcPerfIvrContDigitCollectDuration_Object(
@@ -294,7 +291,7 @@ acPerfIvrContDigitCollectDuration = _AcPerfIvrContDigitCollectDuration_Object(
 )
 acPerfIvrContDigitCollectDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfIvrContDigitCollectDuration.setStatus("deprecated")
+    acPerfIvrContDigitCollectDuration.setStatus("obsolete")
 _AcPerfBct_ObjectIdentity = ObjectIdentity
 acPerfBct = _AcPerfBct_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 10, 2, 2)
@@ -307,7 +304,7 @@ acPerfBctRequests = _AcPerfBctRequests_Object(
 )
 acPerfBctRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctRequests.setStatus("deprecated")
+    acPerfBctRequests.setStatus("obsolete")
 _AcPerfBctSuccessful_Type = Counter32
 _AcPerfBctSuccessful_Object = MibScalar
 acPerfBctSuccessful = _AcPerfBctSuccessful_Object(
@@ -316,7 +313,7 @@ acPerfBctSuccessful = _AcPerfBctSuccessful_Object(
 )
 acPerfBctSuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctSuccessful.setStatus("deprecated")
+    acPerfBctSuccessful.setStatus("obsolete")
 _AcPerfBctFailedDueToLackOfResources_Type = Counter32
 _AcPerfBctFailedDueToLackOfResources_Object = MibScalar
 acPerfBctFailedDueToLackOfResources = _AcPerfBctFailedDueToLackOfResources_Object(
@@ -325,7 +322,7 @@ acPerfBctFailedDueToLackOfResources = _AcPerfBctFailedDueToLackOfResources_Objec
 )
 acPerfBctFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfBctFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfBctInProgress_Type = Gauge32
 _AcPerfBctInProgress_Object = MibScalar
 acPerfBctInProgress = _AcPerfBctInProgress_Object(
@@ -334,7 +331,7 @@ acPerfBctInProgress = _AcPerfBctInProgress_Object(
 )
 acPerfBctInProgress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctInProgress.setStatus("deprecated")
+    acPerfBctInProgress.setStatus("obsolete")
 _AcPerfBctDuration_Type = Counter32
 _AcPerfBctDuration_Object = MibScalar
 acPerfBctDuration = _AcPerfBctDuration_Object(
@@ -343,7 +340,7 @@ acPerfBctDuration = _AcPerfBctDuration_Object(
 )
 acPerfBctDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctDuration.setStatus("deprecated")
+    acPerfBctDuration.setStatus("obsolete")
 _AcPerfBctTotalParticipants_Type = Counter32
 _AcPerfBctTotalParticipants_Object = MibScalar
 acPerfBctTotalParticipants = _AcPerfBctTotalParticipants_Object(
@@ -352,7 +349,7 @@ acPerfBctTotalParticipants = _AcPerfBctTotalParticipants_Object(
 )
 acPerfBctTotalParticipants.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctTotalParticipants.setStatus("deprecated")
+    acPerfBctTotalParticipants.setStatus("obsolete")
 _AcPerfBctCurrentNumberOfParticipants_Type = Gauge32
 _AcPerfBctCurrentNumberOfParticipants_Object = MibScalar
 acPerfBctCurrentNumberOfParticipants = _AcPerfBctCurrentNumberOfParticipants_Object(
@@ -361,7 +358,7 @@ acPerfBctCurrentNumberOfParticipants = _AcPerfBctCurrentNumberOfParticipants_Obj
 )
 acPerfBctCurrentNumberOfParticipants.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfBctCurrentNumberOfParticipants.setStatus("deprecated")
+    acPerfBctCurrentNumberOfParticipants.setStatus("obsolete")
 _AcPerfConf_ObjectIdentity = ObjectIdentity
 acPerfConf = _AcPerfConf_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 10, 2, 3)
@@ -374,7 +371,7 @@ acPerfConfRequests = _AcPerfConfRequests_Object(
 )
 acPerfConfRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfRequests.setStatus("deprecated")
+    acPerfConfRequests.setStatus("obsolete")
 _AcPerfConfSuccessful_Type = Counter32
 _AcPerfConfSuccessful_Object = MibScalar
 acPerfConfSuccessful = _AcPerfConfSuccessful_Object(
@@ -383,7 +380,7 @@ acPerfConfSuccessful = _AcPerfConfSuccessful_Object(
 )
 acPerfConfSuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfSuccessful.setStatus("deprecated")
+    acPerfConfSuccessful.setStatus("obsolete")
 _AcPerfConfInProgress_Type = Gauge32
 _AcPerfConfInProgress_Object = MibScalar
 acPerfConfInProgress = _AcPerfConfInProgress_Object(
@@ -392,7 +389,7 @@ acPerfConfInProgress = _AcPerfConfInProgress_Object(
 )
 acPerfConfInProgress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfInProgress.setStatus("deprecated")
+    acPerfConfInProgress.setStatus("obsolete")
 _AcPerfConfDuration_Type = Counter32
 _AcPerfConfDuration_Object = MibScalar
 acPerfConfDuration = _AcPerfConfDuration_Object(
@@ -401,7 +398,7 @@ acPerfConfDuration = _AcPerfConfDuration_Object(
 )
 acPerfConfDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfDuration.setStatus("deprecated")
+    acPerfConfDuration.setStatus("obsolete")
 _AcPerfConfFailedDueToLackOfResources_Type = Counter32
 _AcPerfConfFailedDueToLackOfResources_Object = MibScalar
 acPerfConfFailedDueToLackOfResources = _AcPerfConfFailedDueToLackOfResources_Object(
@@ -410,7 +407,7 @@ acPerfConfFailedDueToLackOfResources = _AcPerfConfFailedDueToLackOfResources_Obj
 )
 acPerfConfFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfConfFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfConfAddRequests_Type = Counter32
 _AcPerfConfAddRequests_Object = MibScalar
 acPerfConfAddRequests = _AcPerfConfAddRequests_Object(
@@ -419,7 +416,7 @@ acPerfConfAddRequests = _AcPerfConfAddRequests_Object(
 )
 acPerfConfAddRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfAddRequests.setStatus("deprecated")
+    acPerfConfAddRequests.setStatus("obsolete")
 _AcPerfConfAddSuccessful_Type = Counter32
 _AcPerfConfAddSuccessful_Object = MibScalar
 acPerfConfAddSuccessful = _AcPerfConfAddSuccessful_Object(
@@ -428,7 +425,7 @@ acPerfConfAddSuccessful = _AcPerfConfAddSuccessful_Object(
 )
 acPerfConfAddSuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfAddSuccessful.setStatus("deprecated")
+    acPerfConfAddSuccessful.setStatus("obsolete")
 _AcPerfConfAddFailedDueToLackOfResources_Type = Counter32
 _AcPerfConfAddFailedDueToLackOfResources_Object = MibScalar
 acPerfConfAddFailedDueToLackOfResources = _AcPerfConfAddFailedDueToLackOfResources_Object(
@@ -437,7 +434,7 @@ acPerfConfAddFailedDueToLackOfResources = _AcPerfConfAddFailedDueToLackOfResourc
 )
 acPerfConfAddFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfAddFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfConfAddFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfConfPortsUsed_Type = Counter32
 _AcPerfConfPortsUsed_Object = MibScalar
 acPerfConfPortsUsed = _AcPerfConfPortsUsed_Object(
@@ -446,7 +443,7 @@ acPerfConfPortsUsed = _AcPerfConfPortsUsed_Object(
 )
 acPerfConfPortsUsed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfPortsUsed.setStatus("deprecated")
+    acPerfConfPortsUsed.setStatus("obsolete")
 _AcPerfConfPortsReserved_Type = Gauge32
 _AcPerfConfPortsReserved_Object = MibScalar
 acPerfConfPortsReserved = _AcPerfConfPortsReserved_Object(
@@ -455,7 +452,7 @@ acPerfConfPortsReserved = _AcPerfConfPortsReserved_Object(
 )
 acPerfConfPortsReserved.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfConfPortsReserved.setStatus("deprecated")
+    acPerfConfPortsReserved.setStatus("obsolete")
 _AcPerfTt_ObjectIdentity = ObjectIdentity
 acPerfTt = _AcPerfTt_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 10, 2, 4)
@@ -468,7 +465,7 @@ acPerfTtRequests = _AcPerfTtRequests_Object(
 )
 acPerfTtRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTtRequests.setStatus("deprecated")
+    acPerfTtRequests.setStatus("obsolete")
 _AcPerfTtSuccessful_Type = Counter32
 _AcPerfTtSuccessful_Object = MibScalar
 acPerfTtSuccessful = _AcPerfTtSuccessful_Object(
@@ -477,7 +474,7 @@ acPerfTtSuccessful = _AcPerfTtSuccessful_Object(
 )
 acPerfTtSuccessful.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTtSuccessful.setStatus("deprecated")
+    acPerfTtSuccessful.setStatus("obsolete")
 _AcPerfTtInProgress_Type = Gauge32
 _AcPerfTtInProgress_Object = MibScalar
 acPerfTtInProgress = _AcPerfTtInProgress_Object(
@@ -486,7 +483,7 @@ acPerfTtInProgress = _AcPerfTtInProgress_Object(
 )
 acPerfTtInProgress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTtInProgress.setStatus("deprecated")
+    acPerfTtInProgress.setStatus("obsolete")
 _AcPerfTtDuration_Type = Counter32
 _AcPerfTtDuration_Object = MibScalar
 acPerfTtDuration = _AcPerfTtDuration_Object(
@@ -495,7 +492,7 @@ acPerfTtDuration = _AcPerfTtDuration_Object(
 )
 acPerfTtDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTtDuration.setStatus("deprecated")
+    acPerfTtDuration.setStatus("obsolete")
 _AcPerfTtFailedDueToLackOfResources_Type = Counter32
 _AcPerfTtFailedDueToLackOfResources_Object = MibScalar
 acPerfTtFailedDueToLackOfResources = _AcPerfTtFailedDueToLackOfResources_Object(
@@ -504,7 +501,7 @@ acPerfTtFailedDueToLackOfResources = _AcPerfTtFailedDueToLackOfResources_Object(
 )
 acPerfTtFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfTtFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfTtFailedDueToLackOfResources.setStatus("obsolete")
 
 # Managed Objects groups
 

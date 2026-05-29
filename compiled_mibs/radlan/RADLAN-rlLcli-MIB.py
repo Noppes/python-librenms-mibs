@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\radlan\RADLAN-rlLcli-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:22:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,8 @@ rlLCli = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     rlLCli.setRevisions(
-        ("2005-04-11 00:00",
+        ("2007-07-26 00:00",
+         "2005-04-11 00:00",
          "2005-03-28 00:00",
          "2004-03-26 00:00")
     )
@@ -177,11 +175,6 @@ if mibBuilder.loadTexts:
 class _RlLCliHistorySize_Type(Unsigned32):
     """Custom type rlLCliHistorySize based on Unsigned32"""
     defaultValue = 10
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 256),
-    )
 
 
 _RlLCliHistorySize_Type.__name__ = "Unsigned32"
@@ -350,11 +343,6 @@ class _RlLCliTelnetHistorySize_Type(Unsigned32):
     """Custom type rlLCliTelnetHistorySize based on Unsigned32"""
     defaultValue = 10
 
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 256),
-    )
-
 
 _RlLCliTelnetHistorySize_Type.__name__ = "Unsigned32"
 _RlLCliTelnetHistorySize_Object = MibScalar
@@ -386,11 +374,6 @@ if mibBuilder.loadTexts:
 class _RlLCliSshHistorySize_Type(Unsigned32):
     """Custom type rlLCliSshHistorySize based on Unsigned32"""
     defaultValue = 10
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 256),
-    )
 
 
 _RlLCliSshHistorySize_Type.__name__ = "Unsigned32"

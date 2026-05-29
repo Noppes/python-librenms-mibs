@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-ETHERNET-OAM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:22 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-ETHERNET-OAM-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -110,12 +107,14 @@ if 'mibBuilder' not in globals():
 (DisplayString,
  MacAddress,
  PhysAddress,
- TextualConvention) = mibBuilder.importSymbols(
+ TextualConvention,
+ TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "MacAddress",
     "PhysAddress",
-    "TextualConvention")
+    "TextualConvention",
+    "TruthValue")
 
 
 # MODULE-IDENTITY
@@ -125,7 +124,7 @@ alcatelIND1EoamMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1EoamMIB.setRevisions(
-        ("2009-09-08 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -273,7 +272,7 @@ alaCfmMepClearStats = _AlaCfmMepClearStats_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 1),
     _AlaCfmMepClearStats_Type()
 )
-alaCfmMepClearStats.setMaxAccess("read-write")
+alaCfmMepClearStats.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepClearStats.setStatus("current")
 
@@ -289,7 +288,7 @@ alaCfmMepOWDTMacAddress = _AlaCfmMepOWDTMacAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 2),
     _AlaCfmMepOWDTMacAddress_Type()
 )
-alaCfmMepOWDTMacAddress.setMaxAccess("read-write")
+alaCfmMepOWDTMacAddress.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepOWDTMacAddress.setStatus("current")
 _AlaCfmMepOWDTRMepIdentifier_Type = Dot1agCfmMepId
@@ -298,7 +297,7 @@ alaCfmMepOWDTRMepIdentifier = _AlaCfmMepOWDTRMepIdentifier_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 3),
     _AlaCfmMepOWDTRMepIdentifier_Type()
 )
-alaCfmMepOWDTRMepIdentifier.setMaxAccess("read-write")
+alaCfmMepOWDTRMepIdentifier.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepOWDTRMepIdentifier.setStatus("current")
 
@@ -319,7 +318,7 @@ alaCfmMepOWDTPriority = _AlaCfmMepOWDTPriority_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 4),
     _AlaCfmMepOWDTPriority_Type()
 )
-alaCfmMepOWDTPriority.setMaxAccess("read-write")
+alaCfmMepOWDTPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepOWDTPriority.setStatus("current")
 
@@ -335,7 +334,7 @@ alaCfmMepTWDTMacAddress = _AlaCfmMepTWDTMacAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 5),
     _AlaCfmMepTWDTMacAddress_Type()
 )
-alaCfmMepTWDTMacAddress.setMaxAccess("read-write")
+alaCfmMepTWDTMacAddress.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepTWDTMacAddress.setStatus("current")
 _AlaCfmMepTWDTRMepIdentifier_Type = Dot1agCfmMepId
@@ -344,7 +343,7 @@ alaCfmMepTWDTRMepIdentifier = _AlaCfmMepTWDTRMepIdentifier_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 6),
     _AlaCfmMepTWDTRMepIdentifier_Type()
 )
-alaCfmMepTWDTRMepIdentifier.setMaxAccess("read-write")
+alaCfmMepTWDTRMepIdentifier.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepTWDTRMepIdentifier.setStatus("current")
 
@@ -365,9 +364,57 @@ alaCfmMepTWDTPriority = _AlaCfmMepTWDTPriority_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 7),
     _AlaCfmMepTWDTPriority_Type()
 )
-alaCfmMepTWDTPriority.setMaxAccess("read-write")
+alaCfmMepTWDTPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaCfmMepTWDTPriority.setStatus("current")
+
+
+class _AlaCfmMepRFPEnabled_Type(TruthValue):
+    """Custom type alaCfmMepRFPEnabled based on TruthValue"""
+    defaultValue = 2
+
+
+_AlaCfmMepRFPEnabled_Type.__name__ = "TruthValue"
+_AlaCfmMepRFPEnabled_Object = MibTableColumn
+alaCfmMepRFPEnabled = _AlaCfmMepRFPEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 8),
+    _AlaCfmMepRFPEnabled_Type()
+)
+alaCfmMepRFPEnabled.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaCfmMepRFPEnabled.setStatus("current")
+
+
+class _AlaCfmMepPortStatusTlv_Type(TruthValue):
+    """Custom type alaCfmMepPortStatusTlv based on TruthValue"""
+    defaultValue = 1
+
+
+_AlaCfmMepPortStatusTlv_Type.__name__ = "TruthValue"
+_AlaCfmMepPortStatusTlv_Object = MibTableColumn
+alaCfmMepPortStatusTlv = _AlaCfmMepPortStatusTlv_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 9),
+    _AlaCfmMepPortStatusTlv_Type()
+)
+alaCfmMepPortStatusTlv.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaCfmMepPortStatusTlv.setStatus("current")
+
+
+class _AlaCfmMepIfStatusTlv_Type(TruthValue):
+    """Custom type alaCfmMepIfStatusTlv based on TruthValue"""
+    defaultValue = 1
+
+
+_AlaCfmMepIfStatusTlv_Type.__name__ = "TruthValue"
+_AlaCfmMepIfStatusTlv_Object = MibTableColumn
+alaCfmMepIfStatusTlv = _AlaCfmMepIfStatusTlv_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 2, 1, 1, 10),
+    _AlaCfmMepIfStatusTlv_Type()
+)
+alaCfmMepIfStatusTlv.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaCfmMepIfStatusTlv.setStatus("current")
 _AlaCfmDelayResult_ObjectIdentity = ObjectIdentity
 alaCfmDelayResult = _AlaCfmDelayResult_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 40, 1, 1, 3)
@@ -498,7 +545,8 @@ alaCfmMepGroup.setObjects(
         ("ALCATEL-IND1-ETHERNET-OAM-MIB", "alaCfmMepOWDTPriority"),
         ("ALCATEL-IND1-ETHERNET-OAM-MIB", "alaCfmMepTWDTMacAddress"),
         ("ALCATEL-IND1-ETHERNET-OAM-MIB", "alaCfmMepTWDTRMepIdentifier"),
-        ("ALCATEL-IND1-ETHERNET-OAM-MIB", "alaCfmMepTWDTPriority"))
+        ("ALCATEL-IND1-ETHERNET-OAM-MIB", "alaCfmMepTWDTPriority"),
+        ("ALCATEL-IND1-ETHERNET-OAM-MIB", "alaCfmMepRFPEnabled"))
 )
 if mibBuilder.loadTexts:
     alaCfmMepGroup.setStatus("current")
@@ -560,6 +608,9 @@ mibBuilder.exportSymbols(
        "alaCfmMepTWDTMacAddress": alaCfmMepTWDTMacAddress,
        "alaCfmMepTWDTRMepIdentifier": alaCfmMepTWDTRMepIdentifier,
        "alaCfmMepTWDTPriority": alaCfmMepTWDTPriority,
+       "alaCfmMepRFPEnabled": alaCfmMepRFPEnabled,
+       "alaCfmMepPortStatusTlv": alaCfmMepPortStatusTlv,
+       "alaCfmMepIfStatusTlv": alaCfmMepIfStatusTlv,
        "alaCfmDelayResult": alaCfmDelayResult,
        "alaCfmDelayResultTable": alaCfmDelayResultTable,
        "alaCfmDelayResultEntry": alaCfmDelayResultEntry,

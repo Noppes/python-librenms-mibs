@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-MVRP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:49 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-MVRP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,7 +120,8 @@ alcatelIND1MVRPMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1MVRPMIB.setRevisions(
-        ("2009-08-07 00:00",)
+        ("2009-08-07 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -396,7 +394,7 @@ class _AlaMvrpPortConfigJoinTimer_Type(Integer32):
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(250, 2147483647),
+        ValueRangeConstraint(250, 1073741773),
     )
 
 
@@ -913,6 +911,18 @@ if mibBuilder.loadTexts:
 
 # Notifications groups
 
+alaMvrpNotifyGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 57, 1, 2, 1, 5)
+)
+alaMvrpNotifyGroup.setObjects(
+      *(("ALCATEL-IND1-MVRP-MIB", "alaMvrpE2eVlanConflict"),
+        ("ALCATEL-IND1-MVRP-MIB", "alaMvrpVlanLimitReachedEvent"))
+)
+if mibBuilder.loadTexts:
+    alaMvrpNotifyGroup.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -926,7 +936,8 @@ alcatelIND1MVRPMIBCompliance.setObjects(
       *(("ALCATEL-IND1-MVRP-MIB", "alaMvrpBaseGroup"),
         ("ALCATEL-IND1-MVRP-MIB", "alaMvrpPortConfigGroup"),
         ("ALCATEL-IND1-MVRP-MIB", "alaMvrpPortStatsGroup"),
-        ("ALCATEL-IND1-MVRP-MIB", "alaMvrpPortRestrictVlanConfigGroup"))
+        ("ALCATEL-IND1-MVRP-MIB", "alaMvrpPortRestrictVlanConfigGroup"),
+        ("ALCATEL-IND1-MVRP-MIB", "alaMvrpNotifyGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1MVRPMIBCompliance.setStatus(
@@ -1000,6 +1011,7 @@ mibBuilder.exportSymbols(
        "alaMvrpPortConfigGroup": alaMvrpPortConfigGroup,
        "alaMvrpPortStatsGroup": alaMvrpPortStatsGroup,
        "alaMvrpPortRestrictVlanConfigGroup": alaMvrpPortRestrictVlanConfigGroup,
+       "alaMvrpNotifyGroup": alaMvrpNotifyGroup,
        "alcatelIND1MVRPMIBCompliances": alcatelIND1MVRPMIBCompliances,
        "alcatelIND1MVRPMIBCompliance": alcatelIND1MVRPMIBCompliance}
 )

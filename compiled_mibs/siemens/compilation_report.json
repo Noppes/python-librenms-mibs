@@ -1,20 +1,16 @@
 {
-  "timestamp": "2025-10-02T12:27:59.574885",
+  "timestamp": "2026-05-29T09:49:25.368226",
   "stats": {
-    "total": 3,
+    "total": 4,
     "compiled": 1,
-    "failed": 2,
-    "skipped": 0,
+    "failed": 1,
+    "skipped": 2,
     "errors": [
       {
         "mib": "SN-MSPS-SCX200-MIB",
         "error": "failed"
-      },
-      {
-        "mib": "TRAP-MIB",
-        "error": "unprocessed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

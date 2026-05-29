@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-BENCHMARK-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:27 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -133,7 +130,10 @@ cienaCesBenchmarkMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesBenchmarkMIB.setRevisions(
-        ("2016-11-11 00:00",
+        ("2017-06-07 00:00",
+         "2017-02-28 00:00",
+         "2017-02-16 00:00",
+         "2016-11-11 00:00",
          "2016-10-14 00:00",
          "2016-10-07 00:00",
          "2016-10-04 00:00",
@@ -1952,7 +1952,7 @@ class _CienaCesBenchmarkBwRatio_Type(Integer32):
     """Custom type cienaCesBenchmarkBwRatio based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
+        ValueRangeConstraint(0, 1000000),
     )
 
 
@@ -2876,6 +2876,24 @@ cienaCesBenchmarkTestInstanceEntryAssocEntityId = _CienaCesBenchmarkTestInstance
 cienaCesBenchmarkTestInstanceEntryAssocEntityId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cienaCesBenchmarkTestInstanceEntryAssocEntityId.setStatus("current")
+_CienaCesBenchmarkTestInstanceEntryOperState_Type = TruthValue
+_CienaCesBenchmarkTestInstanceEntryOperState_Object = MibTableColumn
+cienaCesBenchmarkTestInstanceEntryOperState = _CienaCesBenchmarkTestInstanceEntryOperState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 39, 1, 1, 12, 1, 17),
+    _CienaCesBenchmarkTestInstanceEntryOperState_Type()
+)
+cienaCesBenchmarkTestInstanceEntryOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesBenchmarkTestInstanceEntryOperState.setStatus("current")
+_CienaCesBenchmarkTestInstanceEntryConnectivityTest_Type = TruthValue
+_CienaCesBenchmarkTestInstanceEntryConnectivityTest_Object = MibTableColumn
+cienaCesBenchmarkTestInstanceEntryConnectivityTest = _CienaCesBenchmarkTestInstanceEntryConnectivityTest_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 39, 1, 1, 12, 1, 18),
+    _CienaCesBenchmarkTestInstanceEntryConnectivityTest_Type()
+)
+cienaCesBenchmarkTestInstanceEntryConnectivityTest.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cienaCesBenchmarkTestInstanceEntryConnectivityTest.setStatus("current")
 _CienaCesBenchmarkGenTestSessionAllocationTable_Object = MibTable
 cienaCesBenchmarkGenTestSessionAllocationTable = _CienaCesBenchmarkGenTestSessionAllocationTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 39, 1, 1, 13)
@@ -4387,6 +4405,8 @@ mibBuilder.exportSymbols(
        "cienaCesBenchmarkTestInstanceEntryClearStats": cienaCesBenchmarkTestInstanceEntryClearStats,
        "cienaCesBenchmarkTestInstanceEntryRowStatus": cienaCesBenchmarkTestInstanceEntryRowStatus,
        "cienaCesBenchmarkTestInstanceEntryAssocEntityId": cienaCesBenchmarkTestInstanceEntryAssocEntityId,
+       "cienaCesBenchmarkTestInstanceEntryOperState": cienaCesBenchmarkTestInstanceEntryOperState,
+       "cienaCesBenchmarkTestInstanceEntryConnectivityTest": cienaCesBenchmarkTestInstanceEntryConnectivityTest,
        "cienaCesBenchmarkGenTestSessionAllocationTable": cienaCesBenchmarkGenTestSessionAllocationTable,
        "cienaCesBenchmarkGenTestSessionAllocationEntry": cienaCesBenchmarkGenTestSessionAllocationEntry,
        "cienaCesBenchmarkGenTestSessionPcpIndex": cienaCesBenchmarkGenTestSessionPcpIndex,

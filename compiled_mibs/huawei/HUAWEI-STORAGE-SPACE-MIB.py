@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\huawei\HUAWEI-STORAGE-SPACE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:58:44 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -287,114 +284,6 @@ hwInfoDiskDomainTier0HotSpareStrategy = _HwInfoDiskDomainTier0HotSpareStrategy_O
 hwInfoDiskDomainTier0HotSpareStrategy.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoDiskDomainTier0HotSpareStrategy.setStatus("current")
-_HwInfoDiskDomainTier1DiskNumber_Type = Unsigned32
-_HwInfoDiskDomainTier1DiskNumber_Object = MibTableColumn
-hwInfoDiskDomainTier1DiskNumber = _HwInfoDiskDomainTier1DiskNumber_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 15),
-    _HwInfoDiskDomainTier1DiskNumber_Type()
-)
-hwInfoDiskDomainTier1DiskNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier1DiskNumber.setStatus("current")
-_HwInfoDiskDomainTier1TotalCapacity_Type = Counter64
-_HwInfoDiskDomainTier1TotalCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier1TotalCapacity = _HwInfoDiskDomainTier1TotalCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 16),
-    _HwInfoDiskDomainTier1TotalCapacity_Type()
-)
-hwInfoDiskDomainTier1TotalCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier1TotalCapacity.setStatus("current")
-_HwInfoDiskDomainTier1FreeCapacity_Type = Counter64
-_HwInfoDiskDomainTier1FreeCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier1FreeCapacity = _HwInfoDiskDomainTier1FreeCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 17),
-    _HwInfoDiskDomainTier1FreeCapacity_Type()
-)
-hwInfoDiskDomainTier1FreeCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier1FreeCapacity.setStatus("current")
-_HwInfoDiskDomainTier1HotSpareCapacity_Type = Counter64
-_HwInfoDiskDomainTier1HotSpareCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier1HotSpareCapacity = _HwInfoDiskDomainTier1HotSpareCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 18),
-    _HwInfoDiskDomainTier1HotSpareCapacity_Type()
-)
-hwInfoDiskDomainTier1HotSpareCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier1HotSpareCapacity.setStatus("current")
-_HwInfoDiskDomainTier1UsedHotSpareCapacity_Type = Counter64
-_HwInfoDiskDomainTier1UsedHotSpareCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier1UsedHotSpareCapacity = _HwInfoDiskDomainTier1UsedHotSpareCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 19),
-    _HwInfoDiskDomainTier1UsedHotSpareCapacity_Type()
-)
-hwInfoDiskDomainTier1UsedHotSpareCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier1UsedHotSpareCapacity.setStatus("current")
-_HwInfoDiskDomainTier1HotSpareStrategy_Type = Unsigned32
-_HwInfoDiskDomainTier1HotSpareStrategy_Object = MibTableColumn
-hwInfoDiskDomainTier1HotSpareStrategy = _HwInfoDiskDomainTier1HotSpareStrategy_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 20),
-    _HwInfoDiskDomainTier1HotSpareStrategy_Type()
-)
-hwInfoDiskDomainTier1HotSpareStrategy.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier1HotSpareStrategy.setStatus("current")
-_HwInfoDiskDomainTier2DiskNumber_Type = Unsigned32
-_HwInfoDiskDomainTier2DiskNumber_Object = MibTableColumn
-hwInfoDiskDomainTier2DiskNumber = _HwInfoDiskDomainTier2DiskNumber_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 21),
-    _HwInfoDiskDomainTier2DiskNumber_Type()
-)
-hwInfoDiskDomainTier2DiskNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier2DiskNumber.setStatus("current")
-_HwInfoDiskDomainTier2TotalCapacity_Type = Counter64
-_HwInfoDiskDomainTier2TotalCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier2TotalCapacity = _HwInfoDiskDomainTier2TotalCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 22),
-    _HwInfoDiskDomainTier2TotalCapacity_Type()
-)
-hwInfoDiskDomainTier2TotalCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier2TotalCapacity.setStatus("current")
-_HwInfoDiskDomainTier2FreeCapacity_Type = Counter64
-_HwInfoDiskDomainTier2FreeCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier2FreeCapacity = _HwInfoDiskDomainTier2FreeCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 23),
-    _HwInfoDiskDomainTier2FreeCapacity_Type()
-)
-hwInfoDiskDomainTier2FreeCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier2FreeCapacity.setStatus("current")
-_HwInfoDiskDomainTier2HotSpareCapacity_Type = Counter64
-_HwInfoDiskDomainTier2HotSpareCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier2HotSpareCapacity = _HwInfoDiskDomainTier2HotSpareCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 24),
-    _HwInfoDiskDomainTier2HotSpareCapacity_Type()
-)
-hwInfoDiskDomainTier2HotSpareCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier2HotSpareCapacity.setStatus("current")
-_HwInfoDiskDomainTier2UsedHotSpareCapacity_Type = Counter64
-_HwInfoDiskDomainTier2UsedHotSpareCapacity_Object = MibTableColumn
-hwInfoDiskDomainTier2UsedHotSpareCapacity = _HwInfoDiskDomainTier2UsedHotSpareCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 25),
-    _HwInfoDiskDomainTier2UsedHotSpareCapacity_Type()
-)
-hwInfoDiskDomainTier2UsedHotSpareCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier2UsedHotSpareCapacity.setStatus("current")
-_HwInfoDiskDomainTier2HotSpareStrategy_Type = Unsigned32
-_HwInfoDiskDomainTier2HotSpareStrategy_Object = MibTableColumn
-hwInfoDiskDomainTier2HotSpareStrategy = _HwInfoDiskDomainTier2HotSpareStrategy_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 1, 1, 26),
-    _HwInfoDiskDomainTier2HotSpareStrategy_Type()
-)
-hwInfoDiskDomainTier2HotSpareStrategy.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoDiskDomainTier2HotSpareStrategy.setStatus("current")
 _HwInfoStoragePoolTable_Object = MibTable
 hwInfoStoragePoolTable = _HwInfoStoragePoolTable_Object(
     (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2)
@@ -491,15 +380,6 @@ hwInfoStoragePoolFreeCapacity = _HwInfoStoragePoolFreeCapacity_Object(
 hwInfoStoragePoolFreeCapacity.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoStoragePoolFreeCapacity.setStatus("current")
-_HwInfoStoragePoolProtectionCapacity_Type = Counter64
-_HwInfoStoragePoolProtectionCapacity_Object = MibTableColumn
-hwInfoStoragePoolProtectionCapacity = _HwInfoStoragePoolProtectionCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 10),
-    _HwInfoStoragePoolProtectionCapacity_Type()
-)
-hwInfoStoragePoolProtectionCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolProtectionCapacity.setStatus("current")
 _HwInfoStoragePoolTier0Capacity_Type = Counter64
 _HwInfoStoragePoolTier0Capacity_Object = MibTableColumn
 hwInfoStoragePoolTier0Capacity = _HwInfoStoragePoolTier0Capacity_Object(
@@ -509,24 +389,6 @@ hwInfoStoragePoolTier0Capacity = _HwInfoStoragePoolTier0Capacity_Object(
 hwInfoStoragePoolTier0Capacity.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoStoragePoolTier0Capacity.setStatus("current")
-_HwInfoStoragePoolTier1Capacity_Type = Counter64
-_HwInfoStoragePoolTier1Capacity_Object = MibTableColumn
-hwInfoStoragePoolTier1Capacity = _HwInfoStoragePoolTier1Capacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 12),
-    _HwInfoStoragePoolTier1Capacity_Type()
-)
-hwInfoStoragePoolTier1Capacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolTier1Capacity.setStatus("current")
-_HwInfoStoragePoolTier2Capacity_Type = Counter64
-_HwInfoStoragePoolTier2Capacity_Object = MibTableColumn
-hwInfoStoragePoolTier2Capacity = _HwInfoStoragePoolTier2Capacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 13),
-    _HwInfoStoragePoolTier2Capacity_Type()
-)
-hwInfoStoragePoolTier2Capacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolTier2Capacity.setStatus("current")
 _HwInfoStoragePoolFullThreshold_Type = Unsigned32
 _HwInfoStoragePoolFullThreshold_Object = MibTableColumn
 hwInfoStoragePoolFullThreshold = _HwInfoStoragePoolFullThreshold_Object(
@@ -536,201 +398,6 @@ hwInfoStoragePoolFullThreshold = _HwInfoStoragePoolFullThreshold_Object(
 hwInfoStoragePoolFullThreshold.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoStoragePoolFullThreshold.setStatus("current")
-_HwInfoStoragePoolExtentSize_Type = Unsigned32
-_HwInfoStoragePoolExtentSize_Object = MibTableColumn
-hwInfoStoragePoolExtentSize = _HwInfoStoragePoolExtentSize_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 15),
-    _HwInfoStoragePoolExtentSize_Type()
-)
-hwInfoStoragePoolExtentSize.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolExtentSize.setStatus("current")
-_HwInfoStoragePoolSmartTierFeatureStatus_Type = Unsigned32
-_HwInfoStoragePoolSmartTierFeatureStatus_Object = MibTableColumn
-hwInfoStoragePoolSmartTierFeatureStatus = _HwInfoStoragePoolSmartTierFeatureStatus_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 16),
-    _HwInfoStoragePoolSmartTierFeatureStatus_Type()
-)
-hwInfoStoragePoolSmartTierFeatureStatus.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolSmartTierFeatureStatus.setStatus("current")
-_HwInfoStoragePoolRelocationStatus_Type = Unsigned32
-_HwInfoStoragePoolRelocationStatus_Object = MibTableColumn
-hwInfoStoragePoolRelocationStatus = _HwInfoStoragePoolRelocationStatus_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 17),
-    _HwInfoStoragePoolRelocationStatus_Type()
-)
-hwInfoStoragePoolRelocationStatus.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolRelocationStatus.setStatus("current")
-_HwInfoStoragePoolRelocationTriggerMode_Type = Unsigned32
-_HwInfoStoragePoolRelocationTriggerMode_Object = MibTableColumn
-hwInfoStoragePoolRelocationTriggerMode = _HwInfoStoragePoolRelocationTriggerMode_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 18),
-    _HwInfoStoragePoolRelocationTriggerMode_Type()
-)
-hwInfoStoragePoolRelocationTriggerMode.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolRelocationTriggerMode.setStatus("current")
-_HwInfoStoragePoolRelocationPaused_Type = Unsigned32
-_HwInfoStoragePoolRelocationPaused_Object = MibTableColumn
-hwInfoStoragePoolRelocationPaused = _HwInfoStoragePoolRelocationPaused_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 19),
-    _HwInfoStoragePoolRelocationPaused_Type()
-)
-hwInfoStoragePoolRelocationPaused.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolRelocationPaused.setStatus("current")
-_HwInfoStoragePoolEstimatedMoveUpData_Type = Counter64
-_HwInfoStoragePoolEstimatedMoveUpData_Object = MibTableColumn
-hwInfoStoragePoolEstimatedMoveUpData = _HwInfoStoragePoolEstimatedMoveUpData_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 20),
-    _HwInfoStoragePoolEstimatedMoveUpData_Type()
-)
-hwInfoStoragePoolEstimatedMoveUpData.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolEstimatedMoveUpData.setStatus("current")
-_HwInfoStoragePoolEstimatedMoveDownData_Type = Counter64
-_HwInfoStoragePoolEstimatedMoveDownData_Object = MibTableColumn
-hwInfoStoragePoolEstimatedMoveDownData = _HwInfoStoragePoolEstimatedMoveDownData_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 21),
-    _HwInfoStoragePoolEstimatedMoveDownData_Type()
-)
-hwInfoStoragePoolEstimatedMoveDownData.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolEstimatedMoveDownData.setStatus("current")
-_HwInfoStoragePoolEstimatedDataRelocationDuration_Type = Counter64
-_HwInfoStoragePoolEstimatedDataRelocationDuration_Object = MibTableColumn
-hwInfoStoragePoolEstimatedDataRelocationDuration = _HwInfoStoragePoolEstimatedDataRelocationDuration_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 2, 1, 22),
-    _HwInfoStoragePoolEstimatedDataRelocationDuration_Type()
-)
-hwInfoStoragePoolEstimatedDataRelocationDuration.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStoragePoolEstimatedDataRelocationDuration.setStatus("current")
-_HwInfoStorageTierTable_Object = MibTable
-hwInfoStorageTierTable = _HwInfoStorageTierTable_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3)
-)
-if mibBuilder.loadTexts:
-    hwInfoStorageTierTable.setStatus("current")
-_HwInfoStorageTierEntry_Object = MibTableRow
-hwInfoStorageTierEntry = _HwInfoStorageTierEntry_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1)
-)
-hwInfoStorageTierEntry.setIndexNames(
-    (0, "HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierID"),
-)
-if mibBuilder.loadTexts:
-    hwInfoStorageTierEntry.setStatus("current")
-_HwInfoStorageTierID_Type = OctetString
-_HwInfoStorageTierID_Object = MibTableColumn
-hwInfoStorageTierID = _HwInfoStorageTierID_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 1),
-    _HwInfoStorageTierID_Type()
-)
-hwInfoStorageTierID.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierID.setStatus("current")
-_HwInfoStorageTierName_Type = OctetString
-_HwInfoStorageTierName_Object = MibTableColumn
-hwInfoStorageTierName = _HwInfoStorageTierName_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 2),
-    _HwInfoStorageTierName_Type()
-)
-hwInfoStorageTierName.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierName.setStatus("current")
-_HwInfoStorageTierPoolID_Type = OctetString
-_HwInfoStorageTierPoolID_Object = MibTableColumn
-hwInfoStorageTierPoolID = _HwInfoStorageTierPoolID_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 3),
-    _HwInfoStorageTierPoolID_Type()
-)
-hwInfoStorageTierPoolID.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierPoolID.setStatus("current")
-_HwInfoStorageTierHealthStatus_Type = Unsigned32
-_HwInfoStorageTierHealthStatus_Object = MibTableColumn
-hwInfoStorageTierHealthStatus = _HwInfoStorageTierHealthStatus_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 4),
-    _HwInfoStorageTierHealthStatus_Type()
-)
-hwInfoStorageTierHealthStatus.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierHealthStatus.setStatus("current")
-_HwInfoStorageTierRunningStatus_Type = Unsigned32
-_HwInfoStorageTierRunningStatus_Object = MibTableColumn
-hwInfoStorageTierRunningStatus = _HwInfoStorageTierRunningStatus_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 5),
-    _HwInfoStorageTierRunningStatus_Type()
-)
-hwInfoStorageTierRunningStatus.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierRunningStatus.setStatus("current")
-_HwInfoStorageTierCapacity_Type = Counter64
-_HwInfoStorageTierCapacity_Object = MibTableColumn
-hwInfoStorageTierCapacity = _HwInfoStorageTierCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 6),
-    _HwInfoStorageTierCapacity_Type()
-)
-hwInfoStorageTierCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierCapacity.setStatus("current")
-_HwInfoStorageTierAllocatedCapacity_Type = Counter64
-_HwInfoStorageTierAllocatedCapacity_Object = MibTableColumn
-hwInfoStorageTierAllocatedCapacity = _HwInfoStorageTierAllocatedCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 7),
-    _HwInfoStorageTierAllocatedCapacity_Type()
-)
-hwInfoStorageTierAllocatedCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierAllocatedCapacity.setStatus("current")
-_HwInfoStorageTierFreeCapacity_Type = Counter64
-_HwInfoStorageTierFreeCapacity_Object = MibTableColumn
-hwInfoStorageTierFreeCapacity = _HwInfoStorageTierFreeCapacity_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 8),
-    _HwInfoStorageTierFreeCapacity_Type()
-)
-hwInfoStorageTierFreeCapacity.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierFreeCapacity.setStatus("current")
-_HwInfoStorageTierRAIDLevel_Type = Unsigned32
-_HwInfoStorageTierRAIDLevel_Object = MibTableColumn
-hwInfoStorageTierRAIDLevel = _HwInfoStorageTierRAIDLevel_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 9),
-    _HwInfoStorageTierRAIDLevel_Type()
-)
-hwInfoStorageTierRAIDLevel.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierRAIDLevel.setStatus("current")
-_HwInfoStorageTierRAIDDiskNumber_Type = Unsigned32
-_HwInfoStorageTierRAIDDiskNumber_Object = MibTableColumn
-hwInfoStorageTierRAIDDiskNumber = _HwInfoStorageTierRAIDDiskNumber_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 10),
-    _HwInfoStorageTierRAIDDiskNumber_Type()
-)
-hwInfoStorageTierRAIDDiskNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierRAIDDiskNumber.setStatus("current")
-_HwInfoStorageTierEstimatedMoveUpData_Type = Counter64
-_HwInfoStorageTierEstimatedMoveUpData_Object = MibTableColumn
-hwInfoStorageTierEstimatedMoveUpData = _HwInfoStorageTierEstimatedMoveUpData_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 11),
-    _HwInfoStorageTierEstimatedMoveUpData_Type()
-)
-hwInfoStorageTierEstimatedMoveUpData.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierEstimatedMoveUpData.setStatus("current")
-_HwInfoStorageTierEstimatedMoveDownData_Type = Counter64
-_HwInfoStorageTierEstimatedMoveDownData_Object = MibTableColumn
-hwInfoStorageTierEstimatedMoveDownData = _HwInfoStorageTierEstimatedMoveDownData_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 3, 1, 12),
-    _HwInfoStorageTierEstimatedMoveDownData_Type()
-)
-hwInfoStorageTierEstimatedMoveDownData.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoStorageTierEstimatedMoveDownData.setStatus("current")
 _HwInfoPortGroupTable_Object = MibTable
 hwInfoPortGroupTable = _HwInfoPortGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 4)
@@ -1121,24 +788,6 @@ hwInfoLunPrefetchPolicy = _HwInfoLunPrefetchPolicy_Object(
 hwInfoLunPrefetchPolicy.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoLunPrefetchPolicy.setStatus("current")
-_HwInfoLunReadCachePolicy_Type = Unsigned32
-_HwInfoLunReadCachePolicy_Object = MibTableColumn
-hwInfoLunReadCachePolicy = _HwInfoLunReadCachePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 8, 1, 18),
-    _HwInfoLunReadCachePolicy_Type()
-)
-hwInfoLunReadCachePolicy.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoLunReadCachePolicy.setStatus("current")
-_HwInfoLunWriteCachePolicy_Type = Unsigned32
-_HwInfoLunWriteCachePolicy_Object = MibTableColumn
-hwInfoLunWriteCachePolicy = _HwInfoLunWriteCachePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 8, 1, 19),
-    _HwInfoLunWriteCachePolicy_Type()
-)
-hwInfoLunWriteCachePolicy.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoLunWriteCachePolicy.setStatus("current")
 _HwInfoLunPrefetchValue_Type = Unsigned32
 _HwInfoLunPrefetchValue_Object = MibTableColumn
 hwInfoLunPrefetchValue = _HwInfoLunPrefetchValue_Object(
@@ -1166,24 +815,6 @@ hwInfoLunWorkController = _HwInfoLunWorkController_Object(
 hwInfoLunWorkController.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoLunWorkController.setStatus("current")
-_HwInfoLunRelocationPolicy_Type = Unsigned32
-_HwInfoLunRelocationPolicy_Object = MibTableColumn
-hwInfoLunRelocationPolicy = _HwInfoLunRelocationPolicy_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 8, 1, 23),
-    _HwInfoLunRelocationPolicy_Type()
-)
-hwInfoLunRelocationPolicy.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoLunRelocationPolicy.setStatus("current")
-_HwInfoLunIniDistributePolicy_Type = Unsigned32
-_HwInfoLunIniDistributePolicy_Object = MibTableColumn
-hwInfoLunIniDistributePolicy = _HwInfoLunIniDistributePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 8, 1, 24),
-    _HwInfoLunIniDistributePolicy_Type()
-)
-hwInfoLunIniDistributePolicy.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoLunIniDistributePolicy.setStatus("current")
 _HwInfoLunIsAddToLunGroup_Type = Unsigned32
 _HwInfoLunIsAddToLunGroup_Object = MibTableColumn
 hwInfoLunIsAddToLunGroup = _HwInfoLunIsAddToLunGroup_Object(
@@ -1220,15 +851,6 @@ hwInfoLunUsageType = _HwInfoLunUsageType_Object(
 hwInfoLunUsageType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     hwInfoLunUsageType.setStatus("current")
-_HwInfoLunSmartCacheHitRage_Type = Unsigned32
-_HwInfoLunSmartCacheHitRage_Object = MibTableColumn
-hwInfoLunSmartCacheHitRage = _HwInfoLunSmartCacheHitRage_Object(
-    (1, 3, 6, 1, 4, 1, 34774, 4, 1, 23, 4, 8, 1, 29),
-    _HwInfoLunSmartCacheHitRage_Type()
-)
-hwInfoLunSmartCacheHitRage.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    hwInfoLunSmartCacheHitRage.setStatus("current")
 _IsoConformance_ObjectIdentity = ObjectIdentity
 isoConformance = _IsoConformance_ObjectIdentity(
     (1, 6)
@@ -1262,18 +884,6 @@ currentObjectGroup.setObjects(
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier0HotSpareCapacity"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier0UsedHotSpareCapacity"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier0HotSpareStrategy"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier1DiskNumber"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier1TotalCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier1FreeCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier1HotSpareCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier1UsedHotSpareCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier1HotSpareStrategy"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier2DiskNumber"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier2TotalCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier2FreeCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier2HotSpareCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier2UsedHotSpareCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoDiskDomainTier2HotSpareStrategy"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolID"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolName"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolDiskDomainID"),
@@ -1282,30 +892,8 @@ currentObjectGroup.setObjects(
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolTotalCapacity"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolSubscribedCapacity"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolFreeCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolProtectionCapacity"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolTier0Capacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolTier1Capacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolTier2Capacity"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolFullThreshold"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolExtentSize"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolSmartTierFeatureStatus"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolRelocationStatus"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolRelocationTriggerMode"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolRelocationPaused"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolEstimatedMoveUpData"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolEstimatedMoveDownData"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolEstimatedDataRelocationDuration"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierID"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierName"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierPoolID"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierHealthStatus"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierRunningStatus"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierAllocatedCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierFreeCapacity"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierRAIDLevel"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierRAIDDiskNumber"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierEstimatedMoveUpData"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoHostID"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoHostName"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoHostLocation"),
@@ -1336,18 +924,12 @@ currentObjectGroup.setObjects(
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunWritePolicy"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunRunningWritePolicy"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunPrefetchPolicy"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunReadCachePolicy"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunWriteCachePolicy"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunPrefetchValue"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunOwnerController"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunWorkController"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunRelocationPolicy"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunIniDistributePolicy"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunIsAddToLunGroup"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunDIFSwitch"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunRemoteLUNWWN"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoLunSmartCacheHitRage"),
-        ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStorageTierEstimatedMoveDownData"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoStoragePoolDiskDomainName"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoPortGroupID"),
         ("HUAWEI-STORAGE-SPACE-MIB", "hwInfoPortGroupName"),
@@ -1409,18 +991,6 @@ mibBuilder.exportSymbols(
        "hwInfoDiskDomainTier0HotSpareCapacity": hwInfoDiskDomainTier0HotSpareCapacity,
        "hwInfoDiskDomainTier0UsedHotSpareCapacity": hwInfoDiskDomainTier0UsedHotSpareCapacity,
        "hwInfoDiskDomainTier0HotSpareStrategy": hwInfoDiskDomainTier0HotSpareStrategy,
-       "hwInfoDiskDomainTier1DiskNumber": hwInfoDiskDomainTier1DiskNumber,
-       "hwInfoDiskDomainTier1TotalCapacity": hwInfoDiskDomainTier1TotalCapacity,
-       "hwInfoDiskDomainTier1FreeCapacity": hwInfoDiskDomainTier1FreeCapacity,
-       "hwInfoDiskDomainTier1HotSpareCapacity": hwInfoDiskDomainTier1HotSpareCapacity,
-       "hwInfoDiskDomainTier1UsedHotSpareCapacity": hwInfoDiskDomainTier1UsedHotSpareCapacity,
-       "hwInfoDiskDomainTier1HotSpareStrategy": hwInfoDiskDomainTier1HotSpareStrategy,
-       "hwInfoDiskDomainTier2DiskNumber": hwInfoDiskDomainTier2DiskNumber,
-       "hwInfoDiskDomainTier2TotalCapacity": hwInfoDiskDomainTier2TotalCapacity,
-       "hwInfoDiskDomainTier2FreeCapacity": hwInfoDiskDomainTier2FreeCapacity,
-       "hwInfoDiskDomainTier2HotSpareCapacity": hwInfoDiskDomainTier2HotSpareCapacity,
-       "hwInfoDiskDomainTier2UsedHotSpareCapacity": hwInfoDiskDomainTier2UsedHotSpareCapacity,
-       "hwInfoDiskDomainTier2HotSpareStrategy": hwInfoDiskDomainTier2HotSpareStrategy,
        "hwInfoStoragePoolTable": hwInfoStoragePoolTable,
        "hwInfoStoragePoolEntry": hwInfoStoragePoolEntry,
        "hwInfoStoragePoolID": hwInfoStoragePoolID,
@@ -1432,33 +1002,8 @@ mibBuilder.exportSymbols(
        "hwInfoStoragePoolTotalCapacity": hwInfoStoragePoolTotalCapacity,
        "hwInfoStoragePoolSubscribedCapacity": hwInfoStoragePoolSubscribedCapacity,
        "hwInfoStoragePoolFreeCapacity": hwInfoStoragePoolFreeCapacity,
-       "hwInfoStoragePoolProtectionCapacity": hwInfoStoragePoolProtectionCapacity,
        "hwInfoStoragePoolTier0Capacity": hwInfoStoragePoolTier0Capacity,
-       "hwInfoStoragePoolTier1Capacity": hwInfoStoragePoolTier1Capacity,
-       "hwInfoStoragePoolTier2Capacity": hwInfoStoragePoolTier2Capacity,
        "hwInfoStoragePoolFullThreshold": hwInfoStoragePoolFullThreshold,
-       "hwInfoStoragePoolExtentSize": hwInfoStoragePoolExtentSize,
-       "hwInfoStoragePoolSmartTierFeatureStatus": hwInfoStoragePoolSmartTierFeatureStatus,
-       "hwInfoStoragePoolRelocationStatus": hwInfoStoragePoolRelocationStatus,
-       "hwInfoStoragePoolRelocationTriggerMode": hwInfoStoragePoolRelocationTriggerMode,
-       "hwInfoStoragePoolRelocationPaused": hwInfoStoragePoolRelocationPaused,
-       "hwInfoStoragePoolEstimatedMoveUpData": hwInfoStoragePoolEstimatedMoveUpData,
-       "hwInfoStoragePoolEstimatedMoveDownData": hwInfoStoragePoolEstimatedMoveDownData,
-       "hwInfoStoragePoolEstimatedDataRelocationDuration": hwInfoStoragePoolEstimatedDataRelocationDuration,
-       "hwInfoStorageTierTable": hwInfoStorageTierTable,
-       "hwInfoStorageTierEntry": hwInfoStorageTierEntry,
-       "hwInfoStorageTierID": hwInfoStorageTierID,
-       "hwInfoStorageTierName": hwInfoStorageTierName,
-       "hwInfoStorageTierPoolID": hwInfoStorageTierPoolID,
-       "hwInfoStorageTierHealthStatus": hwInfoStorageTierHealthStatus,
-       "hwInfoStorageTierRunningStatus": hwInfoStorageTierRunningStatus,
-       "hwInfoStorageTierCapacity": hwInfoStorageTierCapacity,
-       "hwInfoStorageTierAllocatedCapacity": hwInfoStorageTierAllocatedCapacity,
-       "hwInfoStorageTierFreeCapacity": hwInfoStorageTierFreeCapacity,
-       "hwInfoStorageTierRAIDLevel": hwInfoStorageTierRAIDLevel,
-       "hwInfoStorageTierRAIDDiskNumber": hwInfoStorageTierRAIDDiskNumber,
-       "hwInfoStorageTierEstimatedMoveUpData": hwInfoStorageTierEstimatedMoveUpData,
-       "hwInfoStorageTierEstimatedMoveDownData": hwInfoStorageTierEstimatedMoveDownData,
        "hwInfoPortGroupTable": hwInfoPortGroupTable,
        "hwInfoPortGroupEntry": hwInfoPortGroupEntry,
        "hwInfoPortGroupID": hwInfoPortGroupID,
@@ -1504,18 +1049,13 @@ mibBuilder.exportSymbols(
        "hwInfoLunWritePolicy": hwInfoLunWritePolicy,
        "hwInfoLunRunningWritePolicy": hwInfoLunRunningWritePolicy,
        "hwInfoLunPrefetchPolicy": hwInfoLunPrefetchPolicy,
-       "hwInfoLunReadCachePolicy": hwInfoLunReadCachePolicy,
-       "hwInfoLunWriteCachePolicy": hwInfoLunWriteCachePolicy,
        "hwInfoLunPrefetchValue": hwInfoLunPrefetchValue,
        "hwInfoLunOwnerController": hwInfoLunOwnerController,
        "hwInfoLunWorkController": hwInfoLunWorkController,
-       "hwInfoLunRelocationPolicy": hwInfoLunRelocationPolicy,
-       "hwInfoLunIniDistributePolicy": hwInfoLunIniDistributePolicy,
        "hwInfoLunIsAddToLunGroup": hwInfoLunIsAddToLunGroup,
        "hwInfoLunDIFSwitch": hwInfoLunDIFSwitch,
        "hwInfoLunRemoteLUNWWN": hwInfoLunRemoteLUNWWN,
        "hwInfoLunUsageType": hwInfoLunUsageType,
-       "hwInfoLunSmartCacheHitRage": hwInfoLunSmartCacheHitRage,
        "isoConformance": isoConformance,
        "isoGroups": isoGroups,
        "currentObjectGroup": currentObjectGroup,

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\adtran\ADTRAN-AOS-OVER-TEMP-PROTECTION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:22 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,8 @@ adGenAOSOverTempProtectionMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     adGenAOSOverTempProtectionMib.setRevisions(
-        ("2014-11-04 16:15",)
+        ("2017-12-27 00:00",
+         "2014-11-04 16:15")
     )
 
 
@@ -168,6 +166,22 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+adGenAOSOverTempProtectionWarningResume = NotificationType(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 10, 0, 3)
+)
+if mibBuilder.loadTexts:
+    adGenAOSOverTempProtectionWarningResume.setStatus(
+        "current"
+    )
+
+adGenAOSOverTempProtectionShutdownResume = NotificationType(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 10, 0, 4)
+)
+if mibBuilder.loadTexts:
+    adGenAOSOverTempProtectionShutdownResume.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -176,7 +190,9 @@ adGenAOSOverTempProtectionNotificationGroup = NotificationGroup(
 )
 adGenAOSOverTempProtectionNotificationGroup.setObjects(
       *(("ADTRAN-AOS-OVER-TEMP-PROTECTION-MIB", "adGenAOSOverTempProtectionWarning"),
-        ("ADTRAN-AOS-OVER-TEMP-PROTECTION-MIB", "adGenAOSOverTempProtectionShutdown"))
+        ("ADTRAN-AOS-OVER-TEMP-PROTECTION-MIB", "adGenAOSOverTempProtectionShutdown"),
+        ("ADTRAN-AOS-OVER-TEMP-PROTECTION-MIB", "adGenAOSOverTempProtectionWarningResume"),
+        ("ADTRAN-AOS-OVER-TEMP-PROTECTION-MIB", "adGenAOSOverTempProtectionShutdownResume"))
 )
 if mibBuilder.loadTexts:
     adGenAOSOverTempProtectionNotificationGroup.setStatus(
@@ -209,6 +225,8 @@ mibBuilder.exportSymbols(
        "adGenAOSOverTempProtectionTrap": adGenAOSOverTempProtectionTrap,
        "adGenAOSOverTempProtectionWarning": adGenAOSOverTempProtectionWarning,
        "adGenAOSOverTempProtectionShutdown": adGenAOSOverTempProtectionShutdown,
+       "adGenAOSOverTempProtectionWarningResume": adGenAOSOverTempProtectionWarningResume,
+       "adGenAOSOverTempProtectionShutdownResume": adGenAOSOverTempProtectionShutdownResume,
        "adGenAOSOverTempProtectionConformance": adGenAOSOverTempProtectionConformance,
        "adGenAOSOverTempProtectionGroups": adGenAOSOverTempProtectionGroups,
        "adGenAOSOverTempProtectionNotificationGroup": adGenAOSOverTempProtectionNotificationGroup,

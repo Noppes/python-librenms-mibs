@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-VLLI-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:58 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -57,13 +54,9 @@ if 'mibBuilder' not in globals():
     "cienaCesConfig",
     "cienaCesNotifications")
 
-(CienaGlobalState,
- CienaMacAddress,
- CienaStatsClear) = mibBuilder.importSymbols(
+(CienaGlobalState,) = mibBuilder.importSymbols(
     "CIENA-TC",
-    "CienaGlobalState",
-    "CienaMacAddress",
-    "CienaStatsClear")
+    "CienaGlobalState")
 
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
@@ -123,7 +116,8 @@ cienaCesVlliMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesVlliMIB.setRevisions(
-        ("2012-02-28 00:00",)
+        ("2017-06-07 00:00",
+         "2012-02-28 00:00")
     )
 
 

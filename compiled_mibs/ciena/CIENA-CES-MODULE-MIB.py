@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-MODULE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:30 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,8 +120,17 @@ cienaCesModuleMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesModuleMIB.setRevisions(
-        ("2014-01-23 00:00",
+        ("2018-06-04 00:00",
+         "2017-06-07 00:00",
+         "2017-04-07 00:00",
+         "2016-10-14 00:00",
+         "2016-08-31 00:00",
+         "2015-12-14 00:00",
+         "2015-10-23 00:00",
+         "2015-06-04 00:00",
+         "2014-01-23 00:00",
          "2013-12-05 00:00",
+         "2013-09-10 00:00",
          "2013-04-16 00:00",
          "2013-03-28 00:00",
          "2013-03-07 00:00",
@@ -241,7 +247,12 @@ class TceHealthCategory(TextualConvention, Integer32):
               32,
               33,
               34,
-              35)
+              35,
+              36,
+              37,
+              38,
+              39,
+              40)
         )
     )
     namedValues = NamedValues(
@@ -279,7 +290,12 @@ class TceHealthCategory(TextualConvention, Integer32):
           ("slotResource", 32),
           ("tempIom", 33),
           ("powerParams", 34),
-          ("powerOutputVoltage", 35))
+          ("powerOutputVoltage", 35),
+          ("tempModem", 36),
+          ("watermarkModem", 37),
+          ("fileDescriptor", 38),
+          ("process", 39),
+          ("thread", 40))
     )
 
 
@@ -783,6 +799,15 @@ cienaCesModuleSlotName = _CienaCesModuleSlotName_Object(
 cienaCesModuleSlotName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cienaCesModuleSlotName.setStatus("current")
+_CienaCesModuleLatchLocation_Type = DisplayString
+_CienaCesModuleLatchLocation_Object = MibTableColumn
+cienaCesModuleLatchLocation = _CienaCesModuleLatchLocation_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 2, 1, 2, 1, 1, 21),
+    _CienaCesModuleLatchLocation_Type()
+)
+cienaCesModuleLatchLocation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesModuleLatchLocation.setStatus("current")
 _CienaCesModuleDescriptionTable_Object = MibTable
 cienaCesModuleDescriptionTable = _CienaCesModuleDescriptionTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 2, 1, 2, 2)
@@ -2301,6 +2326,134 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+cienaCesModuleBladeInsertedNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 20)
+)
+cienaCesModuleBladeInsertedNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleModel"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotName"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleBladeInsertedNotification.setStatus(
+        "current"
+    )
+
+cienaCesModuleBladeRemovedNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 21)
+)
+cienaCesModuleBladeRemovedNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleModel"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotName"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleBladeRemovedNotification.setStatus(
+        "current"
+    )
+
+cienaCesModuleSwitchFabricDisruptedRecoverableClrNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 22)
+)
+cienaCesModuleSwitchFabricDisruptedRecoverableClrNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleSwitchFabricDisruptedRecoverableClrNotification.setStatus(
+        "current"
+    )
+
+cienaCesModuleConfigEntryCreatedNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 23)
+)
+cienaCesModuleConfigEntryCreatedNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleModel"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleConfigEntryCreatedNotification.setStatus(
+        "current"
+    )
+
+cienaCesModuleConfigEntryDeletedNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 24)
+)
+cienaCesModuleConfigEntryDeletedNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleModel"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleConfigEntryDeletedNotification.setStatus(
+        "current"
+    )
+
+cienaCesClockRateMismatchNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 25)
+)
+cienaCesClockRateMismatchNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"))
+)
+if mibBuilder.loadTexts:
+    cienaCesClockRateMismatchNotification.setStatus(
+        "current"
+    )
+
+cienaCesModuleIncompatibilityNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 26)
+)
+cienaCesModuleIncompatibilityNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleModel"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleIncompatibilityNotification.setStatus(
+        "current"
+    )
+
+cienaCesModuleLatchOpenNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 2, 3, 0, 27)
+)
+cienaCesModuleLatchOpenNotification.setObjects(
+      *(("CIENA-GLOBAL-MIB", "cienaGlobalSeverity"),
+        ("CIENA-GLOBAL-MIB", "cienaGlobalMacAddress"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleChassisNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleShelfNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSlotNotifIndx"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleLatchLocation"))
+)
+if mibBuilder.loadTexts:
+    cienaCesModuleLatchOpenNotification.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -2326,7 +2479,11 @@ moduleNotifGroup.setObjects(
         ("CIENA-CES-MODULE-MIB", "cienaCesModuleFastReloadUnsuccessfulNotification"),
         ("CIENA-CES-MODULE-MIB", "cienaCesModuleHitlessModeUnsuccessfulNotification"),
         ("CIENA-CES-MODULE-MIB", "cienaCesModuleSwitchFabricDisruptedUnrecoverableNotification"),
-        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSwitchFabricDisruptedRecoverableNotification"))
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSwitchFabricDisruptedRecoverableNotification"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleSwitchFabricDisruptedRecoverableClrNotification"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesClockRateMismatchNotification"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleIncompatibilityNotification"),
+        ("CIENA-CES-MODULE-MIB", "cienaCesModuleLatchOpenNotification"))
 )
 if mibBuilder.loadTexts:
     moduleNotifGroup.setStatus(
@@ -2374,6 +2531,7 @@ mibBuilder.exportSymbols(
        "cienaCesModuleShelfNotifIndx": cienaCesModuleShelfNotifIndx,
        "cienaCesModuleSlotNotifIndx": cienaCesModuleSlotNotifIndx,
        "cienaCesModuleSlotName": cienaCesModuleSlotName,
+       "cienaCesModuleLatchLocation": cienaCesModuleLatchLocation,
        "cienaCesModuleDescriptionTable": cienaCesModuleDescriptionTable,
        "cienaCesModuleDescriptionEntry": cienaCesModuleDescriptionEntry,
        "cienaCesModuleDescriptionBoardName": cienaCesModuleDescriptionBoardName,
@@ -2487,5 +2645,13 @@ mibBuilder.exportSymbols(
        "cienaCesModuleFastReloadUnsuccessfulNotification": cienaCesModuleFastReloadUnsuccessfulNotification,
        "cienaCesModuleHitlessModeUnsuccessfulNotification": cienaCesModuleHitlessModeUnsuccessfulNotification,
        "cienaCesModuleSwitchFabricDisruptedUnrecoverableNotification": cienaCesModuleSwitchFabricDisruptedUnrecoverableNotification,
-       "cienaCesModuleSwitchFabricDisruptedRecoverableNotification": cienaCesModuleSwitchFabricDisruptedRecoverableNotification}
+       "cienaCesModuleSwitchFabricDisruptedRecoverableNotification": cienaCesModuleSwitchFabricDisruptedRecoverableNotification,
+       "cienaCesModuleBladeInsertedNotification": cienaCesModuleBladeInsertedNotification,
+       "cienaCesModuleBladeRemovedNotification": cienaCesModuleBladeRemovedNotification,
+       "cienaCesModuleSwitchFabricDisruptedRecoverableClrNotification": cienaCesModuleSwitchFabricDisruptedRecoverableClrNotification,
+       "cienaCesModuleConfigEntryCreatedNotification": cienaCesModuleConfigEntryCreatedNotification,
+       "cienaCesModuleConfigEntryDeletedNotification": cienaCesModuleConfigEntryDeletedNotification,
+       "cienaCesClockRateMismatchNotification": cienaCesClockRateMismatchNotification,
+       "cienaCesModuleIncompatibilityNotification": cienaCesModuleIncompatibilityNotification,
+       "cienaCesModuleLatchOpenNotification": cienaCesModuleLatchOpenNotification}
 )

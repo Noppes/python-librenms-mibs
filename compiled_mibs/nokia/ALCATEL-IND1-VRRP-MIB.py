@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-VRRP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:28 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-VRRP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -139,7 +136,7 @@ alcatelIND1VRRPMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1VRRPMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -306,7 +303,7 @@ alaVrrpTrackAdminState = _AlaVrrpTrackAdminState_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 3),
     _AlaVrrpTrackAdminState_Type()
 )
-alaVrrpTrackAdminState.setMaxAccess("read-write")
+alaVrrpTrackAdminState.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackAdminState.setStatus("current")
 
@@ -357,7 +354,7 @@ alaVrrpTrackEntityVlan = _AlaVrrpTrackEntityVlan_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 5),
     _AlaVrrpTrackEntityVlan_Type()
 )
-alaVrrpTrackEntityVlan.setMaxAccess("read-write")
+alaVrrpTrackEntityVlan.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityVlan.setStatus("deprecated")
 _AlaVrrpTrackEntityPort_Type = InterfaceIndexOrZero
@@ -366,7 +363,7 @@ alaVrrpTrackEntityPort = _AlaVrrpTrackEntityPort_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 6),
     _AlaVrrpTrackEntityPort_Type()
 )
-alaVrrpTrackEntityPort.setMaxAccess("read-write")
+alaVrrpTrackEntityPort.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityPort.setStatus("current")
 _AlaVrrpTrackEntityIpAddress_Type = IpAddress
@@ -375,7 +372,7 @@ alaVrrpTrackEntityIpAddress = _AlaVrrpTrackEntityIpAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 7),
     _AlaVrrpTrackEntityIpAddress_Type()
 )
-alaVrrpTrackEntityIpAddress.setMaxAccess("read-write")
+alaVrrpTrackEntityIpAddress.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityIpAddress.setStatus("deprecated")
 
@@ -396,7 +393,7 @@ alaVrrpTrackPriority = _AlaVrrpTrackPriority_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 8),
     _AlaVrrpTrackPriority_Type()
 )
-alaVrrpTrackPriority.setMaxAccess("read-write")
+alaVrrpTrackPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackPriority.setStatus("current")
 _AlaVrrpTrackRowStatus_Type = RowStatus
@@ -405,7 +402,7 @@ alaVrrpTrackRowStatus = _AlaVrrpTrackRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 9),
     _AlaVrrpTrackRowStatus_Type()
 )
-alaVrrpTrackRowStatus.setMaxAccess("read-write")
+alaVrrpTrackRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackRowStatus.setStatus("current")
 _AlaVrrpTrackEntityInterface_Type = InterfaceIndexOrZero
@@ -414,7 +411,7 @@ alaVrrpTrackEntityInterface = _AlaVrrpTrackEntityInterface_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 10),
     _AlaVrrpTrackEntityInterface_Type()
 )
-alaVrrpTrackEntityInterface.setMaxAccess("read-write")
+alaVrrpTrackEntityInterface.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityInterface.setStatus("current")
 _AlaVrrpTrackEntityIpv6Interface_Type = InterfaceIndexOrZero
@@ -423,7 +420,7 @@ alaVrrpTrackEntityIpv6Interface = _AlaVrrpTrackEntityIpv6Interface_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 11),
     _AlaVrrpTrackEntityIpv6Interface_Type()
 )
-alaVrrpTrackEntityIpv6Interface.setMaxAccess("read-write")
+alaVrrpTrackEntityIpv6Interface.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityIpv6Interface.setStatus("current")
 _AlaVrrpTrackEntityIpAddrType_Type = InetAddressType
@@ -432,7 +429,7 @@ alaVrrpTrackEntityIpAddrType = _AlaVrrpTrackEntityIpAddrType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 12),
     _AlaVrrpTrackEntityIpAddrType_Type()
 )
-alaVrrpTrackEntityIpAddrType.setMaxAccess("read-write")
+alaVrrpTrackEntityIpAddrType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityIpAddrType.setStatus("current")
 _AlaVrrpTrackEntityIpAddr_Type = InetAddress
@@ -441,7 +438,7 @@ alaVrrpTrackEntityIpAddr = _AlaVrrpTrackEntityIpAddr_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 13),
     _AlaVrrpTrackEntityIpAddr_Type()
 )
-alaVrrpTrackEntityIpAddr.setMaxAccess("read-write")
+alaVrrpTrackEntityIpAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackEntityIpAddr.setStatus("current")
 _AlaVrrpTrackBfdStatus_Type = Integer32
@@ -450,7 +447,7 @@ alaVrrpTrackBfdStatus = _AlaVrrpTrackBfdStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 1, 1, 14),
     _AlaVrrpTrackBfdStatus_Type()
 )
-alaVrrpTrackBfdStatus.setMaxAccess("read-write")
+alaVrrpTrackBfdStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpTrackBfdStatus.setStatus("current")
 _AlaVrrpAssoTrackTable_Object = MibTable
@@ -485,7 +482,7 @@ alaVrrpAssoTrackRowStatus = _AlaVrrpAssoTrackRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 1, 2, 2, 1, 2),
     _AlaVrrpAssoTrackRowStatus_Type()
 )
-alaVrrpAssoTrackRowStatus.setMaxAccess("read-write")
+alaVrrpAssoTrackRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVrrpAssoTrackRowStatus.setStatus("current")
 _AlaVrrp3AssoTrackTable_Object = MibTable
@@ -1001,10 +998,69 @@ alaVRRPConfigGroup = ObjectGroup(
 )
 alaVRRPConfigGroup.setObjects(
       *(("ALCATEL-IND1-VRRP-MIB", "alaVRRPStartDelay"),
-        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpBfdStatus"))
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpBfdStatus"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVRRPAdminState"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVRRPDefaultInterval"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVRRPDefaultPreemptMode"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVRRPDefaultPriority"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVRRPOverride"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVRRPSetParam"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpAssoGroupRowStatus"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpAssoTrackRowStatus"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpCurrentPriority"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackCount"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupIdent"))
 )
 if mibBuilder.loadTexts:
     alaVRRPConfigGroup.setStatus("current")
+
+alaVrrp3AssoTrackGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 2, 2, 2)
+)
+alaVrrp3AssoTrackGroup.setObjects(
+      *(("ALCATEL-IND1-VRRP-MIB", "alaVrrp3AssoTrackRowStatus"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrp3CurrentPriority"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrp3GroupIdent"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrp3TrackCount"))
+)
+if mibBuilder.loadTexts:
+    alaVrrp3AssoTrackGroup.setStatus("current")
+
+alaVrrpGroupGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 2, 2, 3)
+)
+alaVrrpGroupGroup.setObjects(
+      *(("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupInterval"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupPriority"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupPreemptMode"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupAdminState"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupSetParam"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupOverride"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaVrrpGroupGroup.setStatus("current")
+
+alaVrrpTrackGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 2, 2, 4)
+)
+alaVrrpTrackGroup.setObjects(
+      *(("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackState"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackAdminState"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityType"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityVlan"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityPort"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityIpAddress"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackPriority"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackRowStatus"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityInterface"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityIpv6Interface"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityIpAddrType"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackEntityIpAddr"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackBfdStatus"))
+)
+if mibBuilder.loadTexts:
+    alaVrrpTrackGroup.setStatus("current")
 
 
 # Notification objects
@@ -1022,7 +1078,10 @@ alaVRRPCompliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 28, 1, 2, 1, 1)
 )
 alaVRRPCompliance.setObjects(
-    ("ALCATEL-IND1-VRRP-MIB", "alaVRRPConfigGroup")
+      *(("ALCATEL-IND1-VRRP-MIB", "alaVRRPConfigGroup"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrp3AssoTrackGroup"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpGroupGroup"),
+        ("ALCATEL-IND1-VRRP-MIB", "alaVrrpTrackGroup"))
 )
 if mibBuilder.loadTexts:
     alaVRRPCompliance.setStatus(
@@ -1102,5 +1161,8 @@ mibBuilder.exportSymbols(
        "alcatelIND1VRRPMIBCompliances": alcatelIND1VRRPMIBCompliances,
        "alaVRRPCompliance": alaVRRPCompliance,
        "alcatelIND1VRRPMIBGroups": alcatelIND1VRRPMIBGroups,
-       "alaVRRPConfigGroup": alaVRRPConfigGroup}
+       "alaVRRPConfigGroup": alaVRRPConfigGroup,
+       "alaVrrp3AssoTrackGroup": alaVrrp3AssoTrackGroup,
+       "alaVrrpGroupGroup": alaVrrpGroupGroup,
+       "alaVrrpTrackGroup": alaVrrpTrackGroup}
 )

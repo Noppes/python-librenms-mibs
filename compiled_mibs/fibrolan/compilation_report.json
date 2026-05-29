@@ -1,28 +1,16 @@
 {
-  "timestamp": "2025-10-02T11:44:32.376725",
+  "timestamp": "2026-05-29T09:29:09.463138",
   "stats": {
-    "total": 21,
-    "compiled": 15,
-    "failed": 4,
+    "total": 22,
+    "compiled": 19,
+    "failed": 1,
     "skipped": 2,
     "errors": [
       {
-        "mib": "FIBROLAN-MIB-DEVICECONVERTER",
-        "error": "missing"
-      },
-      {
-        "mib": "FIBROLAN-MIB-LTA41MA-V2",
-        "error": "missing"
-      },
-      {
-        "mib": "FIBROLAN-MIB-LTA41xE1-V2",
-        "error": "missing"
-      },
-      {
-        "mib": "FIBROLAN-MIB-METRO-STAR",
-        "error": "missing"
+        "mib": "FIBROLAN-MIB-MS-TRAPS",
+        "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

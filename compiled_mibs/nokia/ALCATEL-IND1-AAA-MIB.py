@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-AAA-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:06 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-AAA-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -50,6 +47,10 @@ if 'mibBuilder' not in globals():
     "ALCATEL-IND1-BASE",
     "alaAaaTraps",
     "softentIND1AAA")
+
+(ifIndex,) = mibBuilder.importSymbols(
+    "IF-MIB",
+    "ifIndex")
 
 (InetAddress,
  InetAddressType) = mibBuilder.importSymbols(
@@ -125,7 +126,7 @@ alcatelIND1AAAMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1AAAMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -133,6 +134,58 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class AaasRadNasPortTypeConvention(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19)
+        )
+    )
+    namedValues = NamedValues(
+        *(("async", 0),
+          ("sync", 1),
+          ("isdn-sync", 2),
+          ("isdn-async-v120", 3),
+          ("isdn-async-v110", 4),
+          ("virtual", 5),
+          ("piafs", 6),
+          ("hdlc-clear-channel", 7),
+          ("x25", 8),
+          ("x75", 9),
+          ("g3-fax", 10),
+          ("sdsl-symmetric-dsl", 11),
+          ("adsl-cap-asymmetric-dsl", 12),
+          ("adsl-dmt", 13),
+          ("idsl", 14),
+          ("ethernet", 15),
+          ("xdsl", 16),
+          ("cable", 17),
+          ("wireless-other", 18),
+          ("wireless-ieee-802-11", 19))
+    )
 
 
 
@@ -297,7 +350,7 @@ class _AaasTimout_Type(Integer32):
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 512),
+        ValueRangeConstraint(0, 30),
     )
 
 
@@ -705,6 +758,566 @@ aaasVrfName = _AaasVrfName_Object(
 aaasVrfName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaasVrfName.setStatus("current")
+
+
+class _AaasRadMacAddrCase_Type(Integer32):
+    """Custom type aaasRadMacAddrCase based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("uppercase", 0),
+          ("lowercase", 1))
+    )
+
+
+_AaasRadMacAddrCase_Type.__name__ = "Integer32"
+_AaasRadMacAddrCase_Object = MibTableColumn
+aaasRadMacAddrCase = _AaasRadMacAddrCase_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 28),
+    _AaasRadMacAddrCase_Type()
+)
+aaasRadMacAddrCase.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadMacAddrCase.setStatus("current")
+
+
+class _AaasRadNasPort_Type(Integer32):
+    """Custom type aaasRadNasPort based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("ifindex", 1),
+          ("not-applicable", 2))
+    )
+
+
+_AaasRadNasPort_Type.__name__ = "Integer32"
+_AaasRadNasPort_Object = MibTableColumn
+aaasRadNasPort = _AaasRadNasPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 29),
+    _AaasRadNasPort_Type()
+)
+aaasRadNasPort.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadNasPort.setStatus("current")
+
+
+class _AaasRadNasPortId_Type(Integer32):
+    """Custom type aaasRadNasPortId based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaasRadNasPortId_Type.__name__ = "Integer32"
+_AaasRadNasPortId_Object = MibTableColumn
+aaasRadNasPortId = _AaasRadNasPortId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 30),
+    _AaasRadNasPortId_Type()
+)
+aaasRadNasPortId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadNasPortId.setStatus("current")
+
+
+class _AaasRadNasPortType_Type(AaasRadNasPortTypeConvention):
+    """Custom type aaasRadNasPortType based on AaasRadNasPortTypeConvention"""
+    defaultValue = 15
+
+
+_AaasRadNasPortType_Type.__name__ = "AaasRadNasPortTypeConvention"
+_AaasRadNasPortType_Object = MibTableColumn
+aaasRadNasPortType = _AaasRadNasPortType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 31),
+    _AaasRadNasPortType_Type()
+)
+aaasRadNasPortType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadNasPortType.setStatus("current")
+
+
+class _AaasRadMacAddrFormat_Type(Integer32):
+    """Custom type aaasRadMacAddrFormat based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("uppercase", 0),
+          ("lowercase", 1))
+    )
+
+
+_AaasRadMacAddrFormat_Type.__name__ = "Integer32"
+_AaasRadMacAddrFormat_Object = MibTableColumn
+aaasRadMacAddrFormat = _AaasRadMacAddrFormat_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 32),
+    _AaasRadMacAddrFormat_Type()
+)
+aaasRadMacAddrFormat.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadMacAddrFormat.setStatus("current")
+
+
+class _AaasRadUniqueAcctSessionId_Type(Integer32):
+    """Custom type aaasRadUniqueAcctSessionId based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaasRadUniqueAcctSessionId_Type.__name__ = "Integer32"
+_AaasRadUniqueAcctSessionId_Object = MibTableColumn
+aaasRadUniqueAcctSessionId = _AaasRadUniqueAcctSessionId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 33),
+    _AaasRadUniqueAcctSessionId_Type()
+)
+aaasRadUniqueAcctSessionId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadUniqueAcctSessionId.setStatus("current")
+
+
+class _AaasRadMacAddrCaseStatus_Type(Integer32):
+    """Custom type aaasRadMacAddrCaseStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disable", 0),
+          ("enable", 1))
+    )
+
+
+_AaasRadMacAddrCaseStatus_Type.__name__ = "Integer32"
+_AaasRadMacAddrCaseStatus_Object = MibTableColumn
+aaasRadMacAddrCaseStatus = _AaasRadMacAddrCaseStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 34),
+    _AaasRadMacAddrCaseStatus_Type()
+)
+aaasRadMacAddrCaseStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadMacAddrCaseStatus.setStatus("current")
+
+
+class _AaasRadServerStatus_Type(Integer32):
+    """Custom type aaasRadServerStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("down", 0),
+          ("up", 1))
+    )
+
+
+_AaasRadServerStatus_Type.__name__ = "Integer32"
+_AaasRadServerStatus_Object = MibTableColumn
+aaasRadServerStatus = _AaasRadServerStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 35),
+    _AaasRadServerStatus_Type()
+)
+aaasRadServerStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaasRadServerStatus.setStatus("current")
+
+
+class _AaasRadHealthstatus_Type(Integer32):
+    """Custom type aaasRadHealthstatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaasRadHealthstatus_Type.__name__ = "Integer32"
+_AaasRadHealthstatus_Object = MibTableColumn
+aaasRadHealthstatus = _AaasRadHealthstatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 36),
+    _AaasRadHealthstatus_Type()
+)
+aaasRadHealthstatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadHealthstatus.setStatus("current")
+
+
+class _AaasRadPollInterval_Type(Integer32):
+    """Custom type aaasRadPollInterval based on Integer32"""
+    defaultValue = 50
+
+
+_AaasRadPollInterval_Type.__name__ = "Integer32"
+_AaasRadPollInterval_Object = MibTableColumn
+aaasRadPollInterval = _AaasRadPollInterval_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 37),
+    _AaasRadPollInterval_Type()
+)
+aaasRadPollInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadPollInterval.setStatus("current")
+
+
+class _AaasRadFailoverStatus_Type(Integer32):
+    """Custom type aaasRadFailoverStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaasRadFailoverStatus_Type.__name__ = "Integer32"
+_AaasRadFailoverStatus_Object = MibTableColumn
+aaasRadFailoverStatus = _AaasRadFailoverStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 38),
+    _AaasRadFailoverStatus_Type()
+)
+aaasRadFailoverStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadFailoverStatus.setStatus("current")
+_AaasRadUser_Type = DisplayString
+_AaasRadUser_Object = MibTableColumn
+aaasRadUser = _AaasRadUser_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 39),
+    _AaasRadUser_Type()
+)
+aaasRadUser.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadUser.setStatus("current")
+_AaasRadPasswd_Type = DisplayString
+_AaasRadPasswd_Object = MibTableColumn
+aaasRadPasswd = _AaasRadPasswd_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 40),
+    _AaasRadPasswd_Type()
+)
+aaasRadPasswd.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadPasswd.setStatus("current")
+
+
+class _AaaRadServerPrimaryStatus_Type(Integer32):
+    """Custom type aaaRadServerPrimaryStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("down", 0),
+          ("up", 1))
+    )
+
+
+_AaaRadServerPrimaryStatus_Type.__name__ = "Integer32"
+_AaaRadServerPrimaryStatus_Object = MibTableColumn
+aaaRadServerPrimaryStatus = _AaaRadServerPrimaryStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 41),
+    _AaaRadServerPrimaryStatus_Type()
+)
+aaaRadServerPrimaryStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadServerPrimaryStatus.setStatus("current")
+
+
+class _AaaRadServerBackupStatus_Type(Integer32):
+    """Custom type aaaRadServerBackupStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("down", 0),
+          ("up", 1))
+    )
+
+
+_AaaRadServerBackupStatus_Type.__name__ = "Integer32"
+_AaaRadServerBackupStatus_Object = MibTableColumn
+aaaRadServerBackupStatus = _AaaRadServerBackupStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 42),
+    _AaaRadServerBackupStatus_Type()
+)
+aaaRadServerBackupStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadServerBackupStatus.setStatus("current")
+_AaasRadKeyHash_Type = DisplayString
+_AaasRadKeyHash_Object = MibTableColumn
+aaasRadKeyHash = _AaasRadKeyHash_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 43),
+    _AaasRadKeyHash_Type()
+)
+aaasRadKeyHash.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasRadKeyHash.setStatus("current")
+_AaaRadPrimSerNbUpToDown_Type = Integer32
+_AaaRadPrimSerNbUpToDown_Object = MibTableColumn
+aaaRadPrimSerNbUpToDown = _AaaRadPrimSerNbUpToDown_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 44),
+    _AaaRadPrimSerNbUpToDown_Type()
+)
+aaaRadPrimSerNbUpToDown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadPrimSerNbUpToDown.setStatus("current")
+_AaaRadPrimSerNbDownToUp_Type = Integer32
+_AaaRadPrimSerNbDownToUp_Object = MibTableColumn
+aaaRadPrimSerNbDownToUp = _AaaRadPrimSerNbDownToUp_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 45),
+    _AaaRadPrimSerNbDownToUp_Type()
+)
+aaaRadPrimSerNbDownToUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadPrimSerNbDownToUp.setStatus("current")
+_AaaRadPrimServUpTime_Type = DisplayString
+_AaaRadPrimServUpTime_Object = MibTableColumn
+aaaRadPrimServUpTime = _AaaRadPrimServUpTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 46),
+    _AaaRadPrimServUpTime_Type()
+)
+aaaRadPrimServUpTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadPrimServUpTime.setStatus("current")
+_AaaRadPrimServDownTime_Type = DisplayString
+_AaaRadPrimServDownTime_Object = MibTableColumn
+aaaRadPrimServDownTime = _AaaRadPrimServDownTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 47),
+    _AaaRadPrimServDownTime_Type()
+)
+aaaRadPrimServDownTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadPrimServDownTime.setStatus("current")
+_AaaRadBkupSerNbUpToDown_Type = Integer32
+_AaaRadBkupSerNbUpToDown_Object = MibTableColumn
+aaaRadBkupSerNbUpToDown = _AaaRadBkupSerNbUpToDown_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 48),
+    _AaaRadBkupSerNbUpToDown_Type()
+)
+aaaRadBkupSerNbUpToDown.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadBkupSerNbUpToDown.setStatus("current")
+_AaaRadBkupSerNbDownToUp_Type = Integer32
+_AaaRadBkupSerNbDownToUp_Object = MibTableColumn
+aaaRadBkupSerNbDownToUp = _AaaRadBkupSerNbDownToUp_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 49),
+    _AaaRadBkupSerNbDownToUp_Type()
+)
+aaaRadBkupSerNbDownToUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadBkupSerNbDownToUp.setStatus("current")
+_AaaRadBkupServUpTime_Type = DisplayString
+_AaaRadBkupServUpTime_Object = MibTableColumn
+aaaRadBkupServUpTime = _AaaRadBkupServUpTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 50),
+    _AaaRadBkupServUpTime_Type()
+)
+aaaRadBkupServUpTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadBkupServUpTime.setStatus("current")
+_AaaRadBkupServDownTime_Type = DisplayString
+_AaaRadBkupServDownTime_Object = MibTableColumn
+aaaRadBkupServDownTime = _AaaRadBkupServDownTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 51),
+    _AaaRadBkupServDownTime_Type()
+)
+aaaRadBkupServDownTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaRadBkupServDownTime.setStatus("current")
+_AaasTacacsKeyHash_Type = DisplayString
+_AaasTacacsKeyHash_Object = MibTableColumn
+aaasTacacsKeyHash = _AaasTacacsKeyHash_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 52),
+    _AaasTacacsKeyHash_Type()
+)
+aaasTacacsKeyHash.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasTacacsKeyHash.setStatus("current")
+_AaasRadSalt_Type = DisplayString
+_AaasRadSalt_Object = MibTableColumn
+aaasRadSalt = _AaasRadSalt_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 53),
+    _AaasRadSalt_Type()
+)
+aaasRadSalt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadSalt.setStatus("current")
+_AaasRadSaltHash_Type = DisplayString
+_AaasRadSaltHash_Object = MibTableColumn
+aaasRadSaltHash = _AaasRadSaltHash_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 54),
+    _AaasRadSaltHash_Type()
+)
+aaasRadSaltHash.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasRadSaltHash.setStatus("current")
+_AaasTacacsSalt_Type = DisplayString
+_AaasTacacsSalt_Object = MibTableColumn
+aaasTacacsSalt = _AaasTacacsSalt_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 55),
+    _AaasTacacsSalt_Type()
+)
+aaasTacacsSalt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasTacacsSalt.setStatus("current")
+_AaasTacacsSaltHash_Type = DisplayString
+_AaasTacacsSaltHash_Object = MibTableColumn
+aaasTacacsSaltHash = _AaasTacacsSaltHash_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 56),
+    _AaasTacacsSaltHash_Type()
+)
+aaasTacacsSaltHash.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasTacacsSaltHash.setStatus("current")
+_AaasLdapSalt_Type = DisplayString
+_AaasLdapSalt_Object = MibTableColumn
+aaasLdapSalt = _AaasLdapSalt_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 57),
+    _AaasLdapSalt_Type()
+)
+aaasLdapSalt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasLdapSalt.setStatus("current")
+_AaasLdapSaltHash_Type = DisplayString
+_AaasLdapSaltHash_Object = MibTableColumn
+aaasLdapSaltHash = _AaasLdapSaltHash_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 58),
+    _AaasLdapSaltHash_Type()
+)
+aaasLdapSaltHash.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaasLdapSaltHash.setStatus("current")
+_AaasLdapPasswdHash_Type = DisplayString
+_AaasLdapPasswdHash_Object = MibTableColumn
+aaasLdapPasswdHash = _AaasLdapPasswdHash_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 1, 1, 59),
+    _AaasLdapPasswdHash_Type()
+)
+aaasLdapPasswdHash.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaasLdapPasswdHash.setStatus("current")
+
+
+class _AaaTacacsServerCmdAuthorization_Type(Integer32):
+    """Custom type aaaTacacsServerCmdAuthorization based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaaTacacsServerCmdAuthorization_Type.__name__ = "Integer32"
+_AaaTacacsServerCmdAuthorization_Object = MibScalar
+aaaTacacsServerCmdAuthorization = _AaaTacacsServerCmdAuthorization_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 2),
+    _AaaTacacsServerCmdAuthorization_Type()
+)
+aaaTacacsServerCmdAuthorization.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaTacacsServerCmdAuthorization.setStatus("current")
+
+
+class _AaaTacacsServerWaitTime_Type(Integer32):
+    """Custom type aaaTacacsServerWaitTime based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 200),
+    )
+
+
+_AaaTacacsServerWaitTime_Type.__name__ = "Integer32"
+_AaaTacacsServerWaitTime_Object = MibScalar
+aaaTacacsServerWaitTime = _AaaTacacsServerWaitTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 1, 3),
+    _AaaTacacsServerWaitTime_Type()
+)
+aaaTacacsServerWaitTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaTacacsServerWaitTime.setStatus("current")
 _AaaAuthAcctMIB_ObjectIdentity = ObjectIdentity
 aaaAuthAcctMIB = _AaaAuthAcctMIB_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2)
@@ -1004,6 +1617,27 @@ aaatsName4 = _AaatsName4_Object(
 aaatsName4.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaatsName4.setStatus("current")
+
+
+class _AaatsName5_Type(DisplayString):
+    """Custom type aaatsName5 based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaatsName5_Type.__name__ = "DisplayString"
+_AaatsName5_Object = MibTableColumn
+aaatsName5 = _AaatsName5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 2, 1, 6),
+    _AaatsName5_Type()
+)
+aaatsName5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaatsName5.setStatus("current")
 
 
 class _AaatsRowStatus_Type(RowStatus):
@@ -1316,6 +1950,55 @@ aaacsRowStatus = _AaacsRowStatus_Object(
 aaacsRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaacsRowStatus.setStatus("current")
+
+
+class _AaaAccountingSessionIdStatus_Type(Integer32):
+    """Custom type aaaAccountingSessionIdStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaaAccountingSessionIdStatus_Type.__name__ = "Integer32"
+_AaaAccountingSessionIdStatus_Object = MibTableColumn
+aaaAccountingSessionIdStatus = _AaaAccountingSessionIdStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 4, 1, 7),
+    _AaaAccountingSessionIdStatus_Type()
+)
+aaaAccountingSessionIdStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAccountingSessionIdStatus.setStatus("current")
+
+
+class _AaacsName5_Type(DisplayString):
+    """Custom type aaacsName5 based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaacsName5_Type.__name__ = "DisplayString"
+_AaacsName5_Object = MibTableColumn
+aaacsName5 = _AaacsName5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 4, 1, 8),
+    _AaacsName5_Type()
+)
+aaacsName5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaacsName5.setStatus("current")
 _AaaAuth8021xTable_Object = MibTable
 aaaAuth8021xTable = _AaaAuth8021xTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 5)
@@ -1478,6 +2161,27 @@ aaatxRowStatus = _AaatxRowStatus_Object(
 aaatxRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaatxRowStatus.setStatus("current")
+
+
+class _AaatxName5_Type(DisplayString):
+    """Custom type aaatxName5 based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaatxName5_Type.__name__ = "DisplayString"
+_AaatxName5_Object = MibTableColumn
+aaatxName5 = _AaatxName5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 5, 1, 8),
+    _AaatxName5_Type()
+)
+aaatxName5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaatxName5.setStatus("current")
 _AaaAcct8021xTable_Object = MibTable
 aaaAcct8021xTable = _AaaAcct8021xTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 6)
@@ -1612,6 +2316,27 @@ aaacxRowStatus = _AaacxRowStatus_Object(
 aaacxRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaacxRowStatus.setStatus("current")
+
+
+class _AaacxName5_Type(DisplayString):
+    """Custom type aaacxName5 based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaacxName5_Type.__name__ = "DisplayString"
+_AaacxName5_Object = MibTableColumn
+aaacxName5 = _AaacxName5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 6, 1, 7),
+    _AaacxName5_Type()
+)
+aaacxName5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaacxName5.setStatus("current")
 _AaaPkiTable_Object = MibTable
 aaaPkiTable = _AaaPkiTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 7)
@@ -1910,6 +2635,27 @@ aaaMacSrvrRowStatus = _AaaMacSrvrRowStatus_Object(
 aaaMacSrvrRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaaMacSrvrRowStatus.setStatus("current")
+
+
+class _AaaMacSrvrName5_Type(DisplayString):
+    """Custom type aaaMacSrvrName5 based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaMacSrvrName5_Type.__name__ = "DisplayString"
+_AaaMacSrvrName5_Object = MibTableColumn
+aaaMacSrvrName5 = _AaaMacSrvrName5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 8, 1, 7),
+    _AaaMacSrvrName5_Type()
+)
+aaaMacSrvrName5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaMacSrvrName5.setStatus("current")
 _AaaAcctCmdTable_Object = MibTable
 aaaAcctCmdTable = _AaaAcctCmdTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 9)
@@ -2044,6 +2790,182 @@ aaacmdRowStatus = _AaacmdRowStatus_Object(
 aaacmdRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaacmdRowStatus.setStatus("current")
+
+
+class _AaacmdSrvName5_Type(DisplayString):
+    """Custom type aaacmdSrvName5 based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaacmdSrvName5_Type.__name__ = "DisplayString"
+_AaacmdSrvName5_Object = MibTableColumn
+aaacmdSrvName5 = _AaacmdSrvName5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 9, 1, 7),
+    _AaacmdSrvName5_Type()
+)
+aaacmdSrvName5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaacmdSrvName5.setStatus("current")
+_AaaAcctMACTable_Object = MibTable
+aaaAcctMACTable = _AaaAcctMACTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10)
+)
+if mibBuilder.loadTexts:
+    aaaAcctMACTable.setStatus("current")
+_AaaAcctMACEntry_Object = MibTableRow
+aaaAcctMACEntry = _AaaAcctMACEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1)
+)
+aaaAcctMACEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaAcctSvrInterface"),
+)
+if mibBuilder.loadTexts:
+    aaaAcctMACEntry.setStatus("current")
+
+
+class _AaaAcctSvrInterface_Type(Integer32):
+    """Custom type aaaAcctSvrInterface based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_AaaAcctSvrInterface_Type.__name__ = "Integer32"
+_AaaAcctSvrInterface_Object = MibTableColumn
+aaaAcctSvrInterface = _AaaAcctSvrInterface_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 1),
+    _AaaAcctSvrInterface_Type()
+)
+aaaAcctSvrInterface.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvrInterface.setStatus("current")
+
+
+class _AaaAcctSvr1_Type(SnmpAdminString):
+    """Custom type aaaAcctSvr1 based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaAcctSvr1_Type.__name__ = "SnmpAdminString"
+_AaaAcctSvr1_Object = MibTableColumn
+aaaAcctSvr1 = _AaaAcctSvr1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 2),
+    _AaaAcctSvr1_Type()
+)
+aaaAcctSvr1.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvr1.setStatus("current")
+
+
+class _AaaAcctSvr2_Type(SnmpAdminString):
+    """Custom type aaaAcctSvr2 based on SnmpAdminString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaAcctSvr2_Type.__name__ = "SnmpAdminString"
+_AaaAcctSvr2_Object = MibTableColumn
+aaaAcctSvr2 = _AaaAcctSvr2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 3),
+    _AaaAcctSvr2_Type()
+)
+aaaAcctSvr2.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvr2.setStatus("current")
+
+
+class _AaaAcctSvr3_Type(SnmpAdminString):
+    """Custom type aaaAcctSvr3 based on SnmpAdminString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaAcctSvr3_Type.__name__ = "SnmpAdminString"
+_AaaAcctSvr3_Object = MibTableColumn
+aaaAcctSvr3 = _AaaAcctSvr3_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 4),
+    _AaaAcctSvr3_Type()
+)
+aaaAcctSvr3.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvr3.setStatus("current")
+
+
+class _AaaAcctSvr4_Type(SnmpAdminString):
+    """Custom type aaaAcctSvr4 based on SnmpAdminString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaAcctSvr4_Type.__name__ = "SnmpAdminString"
+_AaaAcctSvr4_Object = MibTableColumn
+aaaAcctSvr4 = _AaaAcctSvr4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 5),
+    _AaaAcctSvr4_Type()
+)
+aaaAcctSvr4.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvr4.setStatus("current")
+
+
+class _AaaAcctSvrRowStatus_Type(RowStatus):
+    """Custom type aaaAcctSvrRowStatus based on RowStatus"""
+    defaultValue = 2
+
+
+_AaaAcctSvrRowStatus_Type.__name__ = "RowStatus"
+_AaaAcctSvrRowStatus_Object = MibTableColumn
+aaaAcctSvrRowStatus = _AaaAcctSvrRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 6),
+    _AaaAcctSvrRowStatus_Type()
+)
+aaaAcctSvrRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvrRowStatus.setStatus("current")
+
+
+class _AaaAcctSvr5_Type(SnmpAdminString):
+    """Custom type aaaAcctSvr5 based on SnmpAdminString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaAcctSvr5_Type.__name__ = "SnmpAdminString"
+_AaaAcctSvr5_Object = MibTableColumn
+aaaAcctSvr5 = _AaaAcctSvr5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 2, 10, 1, 7),
+    _AaaAcctSvr5_Type()
+)
+aaaAcctSvr5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAcctSvr5.setStatus("current")
 _AaaUserMIB_ObjectIdentity = ObjectIdentity
 aaaUserMIB = _AaaUserMIB_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 3)
@@ -2210,7 +3132,21 @@ class _AaauSnmpLevel_Type(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20)
         )
     )
     namedValues = NamedValues(
@@ -2219,7 +3155,21 @@ class _AaauSnmpLevel_Type(Integer32):
           ("sha", 3),
           ("md5", 4),
           ("shaDes", 5),
-          ("md5Des", 6))
+          ("md5Des", 6),
+          ("shaAes", 7),
+          ("shaAes192", 8),
+          ("shaAes256", 9),
+          ("sha3Des", 10),
+          ("sha224", 11),
+          ("sha256", 12),
+          ("sha224Aes", 13),
+          ("sha224Aes192", 14),
+          ("sha224Aes256", 15),
+          ("sha2243Des", 16),
+          ("sha256Aes", 17),
+          ("sha256Aes192", 18),
+          ("sha256Aes256", 19),
+          ("sha2563Des", 20))
     )
 
 
@@ -2413,6 +3363,91 @@ aaauBadAtempts = _AaauBadAtempts_Object(
 aaauBadAtempts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     aaauBadAtempts.setStatus("current")
+
+
+class _AaauSnmpOnly_Type(Integer32):
+    """Custom type aaauSnmpOnly based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaauSnmpOnly_Type.__name__ = "Integer32"
+_AaauSnmpOnly_Object = MibTableColumn
+aaauSnmpOnly = _AaauSnmpOnly_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 3, 1, 1, 18),
+    _AaauSnmpOnly_Type()
+)
+aaauSnmpOnly.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaauSnmpOnly.setStatus("current")
+
+
+class _AaauSnmpPrivPassword_Type(DisplayString):
+    """Custom type aaauSnmpPrivPassword based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 30),
+    )
+
+
+_AaauSnmpPrivPassword_Type.__name__ = "DisplayString"
+_AaauSnmpPrivPassword_Object = MibTableColumn
+aaauSnmpPrivPassword = _AaauSnmpPrivPassword_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 3, 1, 1, 19),
+    _AaauSnmpPrivPassword_Type()
+)
+aaauSnmpPrivPassword.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaauSnmpPrivPassword.setStatus("current")
+
+
+class _AaauReadRightView_Type(DisplayString):
+    """Custom type aaauReadRightView based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 30),
+    )
+
+
+_AaauReadRightView_Type.__name__ = "DisplayString"
+_AaauReadRightView_Object = MibTableColumn
+aaauReadRightView = _AaauReadRightView_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 3, 1, 1, 20),
+    _AaauReadRightView_Type()
+)
+aaauReadRightView.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaauReadRightView.setStatus("current")
+
+
+class _AaauWriteRightView_Type(DisplayString):
+    """Custom type aaauWriteRightView based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 30),
+    )
+
+
+_AaauWriteRightView_Type.__name__ = "DisplayString"
+_AaauWriteRightView_Object = MibTableColumn
+aaauWriteRightView = _AaauWriteRightView_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 3, 1, 1, 21),
+    _AaauWriteRightView_Type()
+)
+aaauWriteRightView.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaauWriteRightView.setStatus("current")
 _AaaAuthenticatedUserTable_Object = MibTable
 aaaAuthenticatedUserTable = _AaaAuthenticatedUserTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 4)
@@ -2976,6 +4011,102 @@ aaaAsaAccessPolicyAdminConsoleOnly = _AaaAsaAccessPolicyAdminConsoleOnly_Object(
 aaaAsaAccessPolicyAdminConsoleOnly.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     aaaAsaAccessPolicyAdminConsoleOnly.setStatus("current")
+
+
+class _AaaAsaCertPassword_Type(DisplayString):
+    """Custom type aaaAsaCertPassword based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AaaAsaCertPassword_Type.__name__ = "DisplayString"
+_AaaAsaCertPassword_Object = MibScalar
+aaaAsaCertPassword = _AaaAsaCertPassword_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 6, 15),
+    _AaaAsaCertPassword_Type()
+)
+aaaAsaCertPassword.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaAsaCertPassword.setStatus("current")
+
+
+class _AaaAsaAccessMode_Type(Integer32):
+    """Custom type aaaAsaAccessMode based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("enhanced", 1))
+    )
+
+
+_AaaAsaAccessMode_Type.__name__ = "Integer32"
+_AaaAsaAccessMode_Object = MibScalar
+aaaAsaAccessMode = _AaaAsaAccessMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 6, 16),
+    _AaaAsaAccessMode_Type()
+)
+aaaAsaAccessMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaAsaAccessMode.setStatus("current")
+
+
+class _AaaAsaIpLockoutThreshold_Type(Integer32):
+    """Custom type aaaAsaIpLockoutThreshold based on Integer32"""
+    defaultValue = 6
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 999),
+    )
+
+
+_AaaAsaIpLockoutThreshold_Type.__name__ = "Integer32"
+_AaaAsaIpLockoutThreshold_Object = MibScalar
+aaaAsaIpLockoutThreshold = _AaaAsaIpLockoutThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 6, 17),
+    _AaaAsaIpLockoutThreshold_Type()
+)
+aaaAsaIpLockoutThreshold.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaAsaIpLockoutThreshold.setStatus("current")
+
+
+class _AaaSwitchAccessMgmtStationState_Type(Integer32):
+    """Custom type aaaSwitchAccessMgmtStationState based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaaSwitchAccessMgmtStationState_Type.__name__ = "Integer32"
+_AaaSwitchAccessMgmtStationState_Object = MibScalar
+aaaSwitchAccessMgmtStationState = _AaaSwitchAccessMgmtStationState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 6, 18),
+    _AaaSwitchAccessMgmtStationState_Type()
+)
+aaaSwitchAccessMgmtStationState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessMgmtStationState.setStatus("current")
 _AaaAvlanAddressTable_Object = MibTable
 aaaAvlanAddressTable = _AaaAvlanAddressTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 7)
@@ -3119,6 +4250,88 @@ aaaUserNetProfileQosPolicyListName = _AaaUserNetProfileQosPolicyListName_Object(
 aaaUserNetProfileQosPolicyListName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaaUserNetProfileQosPolicyListName.setStatus("current")
+
+
+class _AaaUserNetProfileMaxIngressBw_Type(Integer32):
+    """Custom type aaaUserNetProfileMaxIngressBw based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 10000000),
+    )
+
+
+_AaaUserNetProfileMaxIngressBw_Type.__name__ = "Integer32"
+_AaaUserNetProfileMaxIngressBw_Object = MibTableColumn
+aaaUserNetProfileMaxIngressBw = _AaaUserNetProfileMaxIngressBw_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 8, 1, 6),
+    _AaaUserNetProfileMaxIngressBw_Type()
+)
+aaaUserNetProfileMaxIngressBw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaUserNetProfileMaxIngressBw.setStatus("current")
+
+
+class _AaaUserNetProfileMaxEgressBw_Type(Integer32):
+    """Custom type aaaUserNetProfileMaxEgressBw based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 10000000),
+    )
+
+
+_AaaUserNetProfileMaxEgressBw_Type.__name__ = "Integer32"
+_AaaUserNetProfileMaxEgressBw_Object = MibTableColumn
+aaaUserNetProfileMaxEgressBw = _AaaUserNetProfileMaxEgressBw_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 8, 1, 7),
+    _AaaUserNetProfileMaxEgressBw_Type()
+)
+aaaUserNetProfileMaxEgressBw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaUserNetProfileMaxEgressBw.setStatus("current")
+
+
+class _AaaUserNetProfileMaxDefaultDepth_Type(Integer32):
+    """Custom type aaaUserNetProfileMaxDefaultDepth based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 131072),
+    )
+
+
+_AaaUserNetProfileMaxDefaultDepth_Type.__name__ = "Integer32"
+_AaaUserNetProfileMaxDefaultDepth_Object = MibTableColumn
+aaaUserNetProfileMaxDefaultDepth = _AaaUserNetProfileMaxDefaultDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 8, 1, 8),
+    _AaaUserNetProfileMaxDefaultDepth_Type()
+)
+aaaUserNetProfileMaxDefaultDepth.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaUserNetProfileMaxDefaultDepth.setStatus("current")
+
+
+class _AaaUserNetworkProfileRedirectUrl_Type(SnmpAdminString):
+    """Custom type aaaUserNetworkProfileRedirectUrl based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaUserNetworkProfileRedirectUrl_Type.__name__ = "SnmpAdminString"
+_AaaUserNetworkProfileRedirectUrl_Object = MibTableColumn
+aaaUserNetworkProfileRedirectUrl = _AaaUserNetworkProfileRedirectUrl_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 8, 1, 9),
+    _AaaUserNetworkProfileRedirectUrl_Type()
+)
+aaaUserNetworkProfileRedirectUrl.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaUserNetworkProfileRedirectUrl.setStatus("current")
 
 
 class _AaaRadAgentConfig_Type(Integer32):
@@ -3273,6 +4486,62 @@ aaaHicSvrStatus = _AaaHicSvrStatus_Object(
 aaaHicSvrStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     aaaHicSvrStatus.setStatus("current")
+
+
+class _AaaHicSvrRole_Type(Integer32):
+    """Custom type aaaHicSvrRole based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("primary", 1),
+          ("backup", 2))
+    )
+
+
+_AaaHicSvrRole_Type.__name__ = "Integer32"
+_AaaHicSvrRole_Object = MibTableColumn
+aaaHicSvrRole = _AaaHicSvrRole_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 11, 1, 1, 7),
+    _AaaHicSvrRole_Type()
+)
+aaaHicSvrRole.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaHicSvrRole.setStatus("current")
+
+
+class _AaaHicSvrConnection_Type(Integer32):
+    """Custom type aaaHicSvrConnection based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("active", 1),
+          ("inactive", 2))
+    )
+
+
+_AaaHicSvrConnection_Type.__name__ = "Integer32"
+_AaaHicSvrConnection_Object = MibTableColumn
+aaaHicSvrConnection = _AaaHicSvrConnection_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 11, 1, 1, 8),
+    _AaaHicSvrConnection_Type()
+)
+aaaHicSvrConnection.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaHicSvrConnection.setStatus("current")
 _AaaHicAllowedTable_Object = MibTable
 aaaHicAllowedTable = _AaaHicAllowedTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 11, 2)
@@ -3606,6 +4875,57 @@ aaaHicCustomHttpProxyPort = _AaaHicCustomHttpProxyPort_Object(
 aaaHicCustomHttpProxyPort.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     aaaHicCustomHttpProxyPort.setStatus("current")
+
+
+class _AaaHicBgPollInterval_Type(Integer32):
+    """Custom type aaaHicBgPollInterval based on Integer32"""
+    defaultValue = 16
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(16, 256),
+    )
+
+
+_AaaHicBgPollInterval_Type.__name__ = "Integer32"
+_AaaHicBgPollInterval_Object = MibScalar
+aaaHicBgPollInterval = _AaaHicBgPollInterval_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 11, 5, 8),
+    _AaaHicBgPollInterval_Type()
+)
+aaaHicBgPollInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaHicBgPollInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    aaaHicBgPollInterval.setUnits("seconds")
+
+
+class _AaaHicSvrFailMode_Type(Integer32):
+    """Custom type aaaHicSvrFailMode based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("hold", 1),
+          ("passthrough", 2))
+    )
+
+
+_AaaHicSvrFailMode_Type.__name__ = "Integer32"
+_AaaHicSvrFailMode_Object = MibScalar
+aaaHicSvrFailMode = _AaaHicSvrFailMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 11, 5, 9),
+    _AaaHicSvrFailMode_Type()
+)
+aaaHicSvrFailMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaHicSvrFailMode.setStatus("current")
 _AaaUNPIpNetRuleTable_Object = MibTable
 aaaUNPIpNetRuleTable = _AaaUNPIpNetRuleTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 12)
@@ -3791,6 +5111,1239 @@ aaaUNPMacRangeRuleRowStatus = _AaaUNPMacRangeRuleRowStatus_Object(
 aaaUNPMacRangeRuleRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     aaaUNPMacRangeRuleRowStatus.setStatus("current")
+_AaaHicSvrDownUnpMapTable_Object = MibTable
+aaaHicSvrDownUnpMapTable = _AaaHicSvrDownUnpMapTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 15)
+)
+if mibBuilder.loadTexts:
+    aaaHicSvrDownUnpMapTable.setStatus("current")
+_AaaHicSvrDownUnpMapEntry_Object = MibTableRow
+aaaHicSvrDownUnpMapEntry = _AaaHicSvrDownUnpMapEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 15, 1)
+)
+aaaHicSvrDownUnpMapEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaHicSvrDownUnpName"),
+)
+if mibBuilder.loadTexts:
+    aaaHicSvrDownUnpMapEntry.setStatus("current")
+
+
+class _AaaHicSvrDownUnpName_Type(SnmpAdminString):
+    """Custom type aaaHicSvrDownUnpName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AaaHicSvrDownUnpName_Type.__name__ = "SnmpAdminString"
+_AaaHicSvrDownUnpName_Object = MibTableColumn
+aaaHicSvrDownUnpName = _AaaHicSvrDownUnpName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 15, 1, 1),
+    _AaaHicSvrDownUnpName_Type()
+)
+aaaHicSvrDownUnpName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aaaHicSvrDownUnpName.setStatus("current")
+
+
+class _AaaHicSvrDownMappedUnpName_Type(SnmpAdminString):
+    """Custom type aaaHicSvrDownMappedUnpName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AaaHicSvrDownMappedUnpName_Type.__name__ = "SnmpAdminString"
+_AaaHicSvrDownMappedUnpName_Object = MibTableColumn
+aaaHicSvrDownMappedUnpName = _AaaHicSvrDownMappedUnpName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 15, 1, 2),
+    _AaaHicSvrDownMappedUnpName_Type()
+)
+aaaHicSvrDownMappedUnpName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaHicSvrDownMappedUnpName.setStatus("current")
+_AaaHicSvrDownUnpRowStatus_Type = RowStatus
+_AaaHicSvrDownUnpRowStatus_Object = MibTableColumn
+aaaHicSvrDownUnpRowStatus = _AaaHicSvrDownUnpRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 15, 1, 3),
+    _AaaHicSvrDownUnpRowStatus_Type()
+)
+aaaHicSvrDownUnpRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaHicSvrDownUnpRowStatus.setStatus("current")
+_AaaRedirectConfig_ObjectIdentity = ObjectIdentity
+aaaRedirectConfig = _AaaRedirectConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16)
+)
+_AaaRedirectServerTable_Object = MibTable
+aaaRedirectServerTable = _AaaRedirectServerTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1)
+)
+if mibBuilder.loadTexts:
+    aaaRedirectServerTable.setStatus("current")
+_AaaRedirectServerEntry_Object = MibTableRow
+aaaRedirectServerEntry = _AaaRedirectServerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1)
+)
+aaaRedirectServerEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaRedirectServerName"),
+)
+if mibBuilder.loadTexts:
+    aaaRedirectServerEntry.setStatus("current")
+
+
+class _AaaRedirectServerName_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerName_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerName_Object = MibTableColumn
+aaaRedirectServerName = _AaaRedirectServerName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 1),
+    _AaaRedirectServerName_Type()
+)
+aaaRedirectServerName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aaaRedirectServerName.setStatus("current")
+_AaaRedirectServerIpAddress_Type = IpAddress
+_AaaRedirectServerIpAddress_Object = MibTableColumn
+aaaRedirectServerIpAddress = _AaaRedirectServerIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 2),
+    _AaaRedirectServerIpAddress_Type()
+)
+aaaRedirectServerIpAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerIpAddress.setStatus("current")
+
+
+class _AaaRedirectServerUrl1_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrl1 based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerUrl1_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrl1_Object = MibTableColumn
+aaaRedirectServerUrl1 = _AaaRedirectServerUrl1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 3),
+    _AaaRedirectServerUrl1_Type()
+)
+aaaRedirectServerUrl1.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrl1.setStatus("current")
+
+
+class _AaaRedirectServerUrl2_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrl2 based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerUrl2_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrl2_Object = MibTableColumn
+aaaRedirectServerUrl2 = _AaaRedirectServerUrl2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 4),
+    _AaaRedirectServerUrl2_Type()
+)
+aaaRedirectServerUrl2.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrl2.setStatus("current")
+
+
+class _AaaRedirectServerUrl3_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrl3 based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerUrl3_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrl3_Object = MibTableColumn
+aaaRedirectServerUrl3 = _AaaRedirectServerUrl3_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 5),
+    _AaaRedirectServerUrl3_Type()
+)
+aaaRedirectServerUrl3.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrl3.setStatus("current")
+
+
+class _AaaRedirectServerUrl4_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrl4 based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerUrl4_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrl4_Object = MibTableColumn
+aaaRedirectServerUrl4 = _AaaRedirectServerUrl4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 6),
+    _AaaRedirectServerUrl4_Type()
+)
+aaaRedirectServerUrl4.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrl4.setStatus("current")
+
+
+class _AaaRedirectServerUrl5_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrl5 based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerUrl5_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrl5_Object = MibTableColumn
+aaaRedirectServerUrl5 = _AaaRedirectServerUrl5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 7),
+    _AaaRedirectServerUrl5_Type()
+)
+aaaRedirectServerUrl5.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrl5.setStatus("current")
+_AaaRedirectSvrConfigRowStatus_Type = RowStatus
+_AaaRedirectSvrConfigRowStatus_Object = MibTableColumn
+aaaRedirectSvrConfigRowStatus = _AaaRedirectSvrConfigRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 8),
+    _AaaRedirectSvrConfigRowStatus_Type()
+)
+aaaRedirectSvrConfigRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaRedirectSvrConfigRowStatus.setStatus("current")
+
+
+class _AaaRedirectServerHostName_Type(DisplayString):
+    """Custom type aaaRedirectServerHostName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AaaRedirectServerHostName_Type.__name__ = "DisplayString"
+_AaaRedirectServerHostName_Object = MibTableColumn
+aaaRedirectServerHostName = _AaaRedirectServerHostName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 1, 1, 9),
+    _AaaRedirectServerHostName_Type()
+)
+aaaRedirectServerHostName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaRedirectServerHostName.setStatus("current")
+_AaaRedirectUrlConfigTable_Object = MibTable
+aaaRedirectUrlConfigTable = _AaaRedirectUrlConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 2)
+)
+if mibBuilder.loadTexts:
+    aaaRedirectUrlConfigTable.setStatus("current")
+_AaaRedirectURLEntry_Object = MibTableRow
+aaaRedirectURLEntry = _AaaRedirectURLEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 2, 1)
+)
+aaaRedirectURLEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrlName"),
+)
+if mibBuilder.loadTexts:
+    aaaRedirectURLEntry.setStatus("current")
+
+
+class _AaaRedirectServerUrlName_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrlName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AaaRedirectServerUrlName_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrlName_Object = MibTableColumn
+aaaRedirectServerUrlName = _AaaRedirectServerUrlName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 2, 1, 1),
+    _AaaRedirectServerUrlName_Type()
+)
+aaaRedirectServerUrlName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrlName.setStatus("current")
+
+
+class _AaaRedirectServerUrl_Type(SnmpAdminString):
+    """Custom type aaaRedirectServerUrl based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 252),
+    )
+
+
+_AaaRedirectServerUrl_Type.__name__ = "SnmpAdminString"
+_AaaRedirectServerUrl_Object = MibTableColumn
+aaaRedirectServerUrl = _AaaRedirectServerUrl_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 2, 1, 2),
+    _AaaRedirectServerUrl_Type()
+)
+aaaRedirectServerUrl.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectServerUrl.setStatus("current")
+_AaaRedirectServerRowStatus_Type = RowStatus
+_AaaRedirectServerRowStatus_Object = MibTableColumn
+aaaRedirectServerRowStatus = _AaaRedirectServerRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 2, 1, 3),
+    _AaaRedirectServerRowStatus_Type()
+)
+aaaRedirectServerRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaRedirectServerRowStatus.setStatus("current")
+_AaaRedirectGlobalConfig_ObjectIdentity = ObjectIdentity
+aaaRedirectGlobalConfig = _AaaRedirectGlobalConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 3)
+)
+
+
+class _AaaRedirectPauseTimerConfig_Type(Integer32):
+    """Custom type aaaRedirectPauseTimerConfig based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 300),
+    )
+
+
+_AaaRedirectPauseTimerConfig_Type.__name__ = "Integer32"
+_AaaRedirectPauseTimerConfig_Object = MibScalar
+aaaRedirectPauseTimerConfig = _AaaRedirectPauseTimerConfig_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 3, 1),
+    _AaaRedirectPauseTimerConfig_Type()
+)
+aaaRedirectPauseTimerConfig.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectPauseTimerConfig.setStatus("current")
+
+
+class _AaaPortBounceConfig_Type(Integer32):
+    """Custom type aaaPortBounceConfig based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaaPortBounceConfig_Type.__name__ = "Integer32"
+_AaaPortBounceConfig_Object = MibScalar
+aaaPortBounceConfig = _AaaPortBounceConfig_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 3, 2),
+    _AaaPortBounceConfig_Type()
+)
+aaaPortBounceConfig.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaPortBounceConfig.setStatus("current")
+
+
+class _AaaRedirectProxyServerPort_Type(Integer32):
+    """Custom type aaaRedirectProxyServerPort based on Integer32"""
+    defaultValue = 8080
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1024, 49151),
+    )
+
+
+_AaaRedirectProxyServerPort_Type.__name__ = "Integer32"
+_AaaRedirectProxyServerPort_Object = MibScalar
+aaaRedirectProxyServerPort = _AaaRedirectProxyServerPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 3, 3),
+    _AaaRedirectProxyServerPort_Type()
+)
+aaaRedirectProxyServerPort.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaRedirectProxyServerPort.setStatus("current")
+_AaaPortBounceInterfaceTable_Object = MibTable
+aaaPortBounceInterfaceTable = _AaaPortBounceInterfaceTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 4)
+)
+if mibBuilder.loadTexts:
+    aaaPortBounceInterfaceTable.setStatus("current")
+_AaaPortBounceInterfaceEntry_Object = MibTableRow
+aaaPortBounceInterfaceEntry = _AaaPortBounceInterfaceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 4, 1)
+)
+aaaPortBounceInterfaceEntry.setIndexNames(
+    (0, "IF-MIB", "ifIndex"),
+)
+if mibBuilder.loadTexts:
+    aaaPortBounceInterfaceEntry.setStatus("current")
+_AaaPortBouncePortSlot_Type = Integer32
+_AaaPortBouncePortSlot_Object = MibTableColumn
+aaaPortBouncePortSlot = _AaaPortBouncePortSlot_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 4, 1, 1),
+    _AaaPortBouncePortSlot_Type()
+)
+aaaPortBouncePortSlot.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaPortBouncePortSlot.setStatus("current")
+_AaaPortBounceIF_Type = Integer32
+_AaaPortBounceIF_Object = MibTableColumn
+aaaPortBounceIF = _AaaPortBounceIF_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 4, 1, 2),
+    _AaaPortBounceIF_Type()
+)
+aaaPortBounceIF.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaPortBounceIF.setStatus("current")
+
+
+class _AaaPortBounceStatus_Type(Integer32):
+    """Custom type aaaPortBounceStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AaaPortBounceStatus_Type.__name__ = "Integer32"
+_AaaPortBounceStatus_Object = MibTableColumn
+aaaPortBounceStatus = _AaaPortBounceStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 4, 1, 3),
+    _AaaPortBounceStatus_Type()
+)
+aaaPortBounceStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaPortBounceStatus.setStatus("current")
+_AaaBYODWhiteListTable_Object = MibTable
+aaaBYODWhiteListTable = _AaaBYODWhiteListTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 5)
+)
+if mibBuilder.loadTexts:
+    aaaBYODWhiteListTable.setStatus("current")
+_AaaBYODWhiteListEntry_Object = MibTableRow
+aaaBYODWhiteListEntry = _AaaBYODWhiteListEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 5, 1)
+)
+aaaBYODWhiteListEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaBYODWhiteListIPAddress"),
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaBYODWhiteListIPMask"),
+)
+if mibBuilder.loadTexts:
+    aaaBYODWhiteListEntry.setStatus("current")
+_AaaBYODWhiteListIPAddress_Type = IpAddress
+_AaaBYODWhiteListIPAddress_Object = MibTableColumn
+aaaBYODWhiteListIPAddress = _AaaBYODWhiteListIPAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 5, 1, 1),
+    _AaaBYODWhiteListIPAddress_Type()
+)
+aaaBYODWhiteListIPAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaBYODWhiteListIPAddress.setStatus("current")
+_AaaBYODWhiteListIPMask_Type = IpAddress
+_AaaBYODWhiteListIPMask_Object = MibTableColumn
+aaaBYODWhiteListIPMask = _AaaBYODWhiteListIPMask_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 5, 1, 2),
+    _AaaBYODWhiteListIPMask_Type()
+)
+aaaBYODWhiteListIPMask.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aaaBYODWhiteListIPMask.setStatus("current")
+_AaaBYODWhiteListRowStatus_Type = RowStatus
+_AaaBYODWhiteListRowStatus_Object = MibTableColumn
+aaaBYODWhiteListRowStatus = _AaaBYODWhiteListRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 16, 5, 1, 3),
+    _AaaBYODWhiteListRowStatus_Type()
+)
+aaaBYODWhiteListRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaBYODWhiteListRowStatus.setStatus("current")
+_AaaSwitchAccessConfig_ObjectIdentity = ObjectIdentity
+aaaSwitchAccessConfig = _AaaSwitchAccessConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17)
+)
+_AaaSwitchAccessMgmtStationTable_Object = MibTable
+aaaSwitchAccessMgmtStationTable = _AaaSwitchAccessMgmtStationTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 1)
+)
+if mibBuilder.loadTexts:
+    aaaSwitchAccessMgmtStationTable.setStatus("current")
+_AaaSwitchAccessMgmtStationEntry_Object = MibTableRow
+aaaSwitchAccessMgmtStationEntry = _AaaSwitchAccessMgmtStationEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 1, 1)
+)
+aaaSwitchAccessMgmtStationEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaSwitchAccessMgmtStationIpAddress"),
+)
+if mibBuilder.loadTexts:
+    aaaSwitchAccessMgmtStationEntry.setStatus("current")
+_AaaSwitchAccessMgmtStationIpAddress_Type = IpAddress
+_AaaSwitchAccessMgmtStationIpAddress_Object = MibTableColumn
+aaaSwitchAccessMgmtStationIpAddress = _AaaSwitchAccessMgmtStationIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 1, 1, 1),
+    _AaaSwitchAccessMgmtStationIpAddress_Type()
+)
+aaaSwitchAccessMgmtStationIpAddress.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessMgmtStationIpAddress.setStatus("current")
+_AaaSwitchAccessMgmtStationIpAddressMask_Type = IpAddress
+_AaaSwitchAccessMgmtStationIpAddressMask_Object = MibTableColumn
+aaaSwitchAccessMgmtStationIpAddressMask = _AaaSwitchAccessMgmtStationIpAddressMask_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 1, 1, 2),
+    _AaaSwitchAccessMgmtStationIpAddressMask_Type()
+)
+aaaSwitchAccessMgmtStationIpAddressMask.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessMgmtStationIpAddressMask.setStatus("current")
+
+
+class _AaaSwitchAccessMgmtStationRowStatus_Type(Integer32):
+    """Custom type aaaSwitchAccessMgmtStationRowStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_AaaSwitchAccessMgmtStationRowStatus_Type.__name__ = "Integer32"
+_AaaSwitchAccessMgmtStationRowStatus_Object = MibTableColumn
+aaaSwitchAccessMgmtStationRowStatus = _AaaSwitchAccessMgmtStationRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 1, 1, 3),
+    _AaaSwitchAccessMgmtStationRowStatus_Type()
+)
+aaaSwitchAccessMgmtStationRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessMgmtStationRowStatus.setStatus("current")
+_AaaSwitchAccessBannedIpTable_Object = MibTable
+aaaSwitchAccessBannedIpTable = _AaaSwitchAccessBannedIpTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 2)
+)
+if mibBuilder.loadTexts:
+    aaaSwitchAccessBannedIpTable.setStatus("current")
+_AaaSwitchAccessBannedIpEntry_Object = MibTableRow
+aaaSwitchAccessBannedIpEntry = _AaaSwitchAccessBannedIpEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 2, 1)
+)
+aaaSwitchAccessBannedIpEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaSwitchAccessBannedIpAddress"),
+)
+if mibBuilder.loadTexts:
+    aaaSwitchAccessBannedIpEntry.setStatus("current")
+_AaaSwitchAccessBannedIpAddress_Type = IpAddress
+_AaaSwitchAccessBannedIpAddress_Object = MibTableColumn
+aaaSwitchAccessBannedIpAddress = _AaaSwitchAccessBannedIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 2, 1, 1),
+    _AaaSwitchAccessBannedIpAddress_Type()
+)
+aaaSwitchAccessBannedIpAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessBannedIpAddress.setStatus("current")
+
+
+class _AaaSwitchAccessBannedIpRowStatus_Type(Unsigned32):
+    """Custom type aaaSwitchAccessBannedIpRowStatus based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4194967295),
+    )
+
+
+_AaaSwitchAccessBannedIpRowStatus_Type.__name__ = "Unsigned32"
+_AaaSwitchAccessBannedIpRowStatus_Object = MibTableColumn
+aaaSwitchAccessBannedIpRowStatus = _AaaSwitchAccessBannedIpRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 2, 1, 2),
+    _AaaSwitchAccessBannedIpRowStatus_Type()
+)
+aaaSwitchAccessBannedIpRowStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessBannedIpRowStatus.setStatus("current")
+_AaaSwitchAccessPrivMaskTable_Object = MibTable
+aaaSwitchAccessPrivMaskTable = _AaaSwitchAccessPrivMaskTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3)
+)
+if mibBuilder.loadTexts:
+    aaaSwitchAccessPrivMaskTable.setStatus("current")
+_AaaSwitchAccessPrivMaskEntry_Object = MibTableRow
+aaaSwitchAccessPrivMaskEntry = _AaaSwitchAccessPrivMaskEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1)
+)
+aaaSwitchAccessPrivMaskEntry.setIndexNames(
+    (0, "ALCATEL-IND1-AAA-MIB", "aaaSwitchAccessType"),
+)
+if mibBuilder.loadTexts:
+    aaaSwitchAccessPrivMaskEntry.setStatus("current")
+
+
+class _AaaSwitchAccessType_Type(DisplayString):
+    """Custom type aaaSwitchAccessType based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_AaaSwitchAccessType_Type.__name__ = "DisplayString"
+_AaaSwitchAccessType_Object = MibTableColumn
+aaaSwitchAccessType = _AaaSwitchAccessType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1, 1),
+    _AaaSwitchAccessType_Type()
+)
+aaaSwitchAccessType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessType.setStatus("current")
+
+
+class _AaaSwitchAccessReadRight1_Type(Unsigned32):
+    """Custom type aaaSwitchAccessReadRight1 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_AaaSwitchAccessReadRight1_Type.__name__ = "Unsigned32"
+_AaaSwitchAccessReadRight1_Object = MibTableColumn
+aaaSwitchAccessReadRight1 = _AaaSwitchAccessReadRight1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1, 2),
+    _AaaSwitchAccessReadRight1_Type()
+)
+aaaSwitchAccessReadRight1.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessReadRight1.setStatus("current")
+
+
+class _AaaSwitchAccessReadRight2_Type(Unsigned32):
+    """Custom type aaaSwitchAccessReadRight2 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_AaaSwitchAccessReadRight2_Type.__name__ = "Unsigned32"
+_AaaSwitchAccessReadRight2_Object = MibTableColumn
+aaaSwitchAccessReadRight2 = _AaaSwitchAccessReadRight2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1, 3),
+    _AaaSwitchAccessReadRight2_Type()
+)
+aaaSwitchAccessReadRight2.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessReadRight2.setStatus("current")
+
+
+class _AaaSwitchAccessWriteRight1_Type(Unsigned32):
+    """Custom type aaaSwitchAccessWriteRight1 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_AaaSwitchAccessWriteRight1_Type.__name__ = "Unsigned32"
+_AaaSwitchAccessWriteRight1_Object = MibTableColumn
+aaaSwitchAccessWriteRight1 = _AaaSwitchAccessWriteRight1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1, 4),
+    _AaaSwitchAccessWriteRight1_Type()
+)
+aaaSwitchAccessWriteRight1.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessWriteRight1.setStatus("current")
+
+
+class _AaaSwitchAccessWriteRight2_Type(Unsigned32):
+    """Custom type aaaSwitchAccessWriteRight2 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_AaaSwitchAccessWriteRight2_Type.__name__ = "Unsigned32"
+_AaaSwitchAccessWriteRight2_Object = MibTableColumn
+aaaSwitchAccessWriteRight2 = _AaaSwitchAccessWriteRight2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1, 5),
+    _AaaSwitchAccessWriteRight2_Type()
+)
+aaaSwitchAccessWriteRight2.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessWriteRight2.setStatus("current")
+
+
+class _AaaSwitchAccessPrivMaskRowStatus_Type(RowStatus):
+    """Custom type aaaSwitchAccessPrivMaskRowStatus based on RowStatus"""
+    defaultValue = 2
+
+
+_AaaSwitchAccessPrivMaskRowStatus_Type.__name__ = "RowStatus"
+_AaaSwitchAccessPrivMaskRowStatus_Object = MibTableColumn
+aaaSwitchAccessPrivMaskRowStatus = _AaaSwitchAccessPrivMaskRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 17, 3, 1, 6),
+    _AaaSwitchAccessPrivMaskRowStatus_Type()
+)
+aaaSwitchAccessPrivMaskRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaSwitchAccessPrivMaskRowStatus.setStatus("current")
+_AlaAaaTlsConfig_ObjectIdentity = ObjectIdentity
+alaAaaTlsConfig = _AlaAaaTlsConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18)
+)
+_AlaAaaTlsBaseConfig_ObjectIdentity = ObjectIdentity
+alaAaaTlsBaseConfig = _AlaAaaTlsBaseConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 1)
+)
+
+
+class _AlaAaaTlsCaFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCaFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsCaFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCaFileName_Object = MibScalar
+alaAaaTlsCaFileName = _AlaAaaTlsCaFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 1, 1),
+    _AlaAaaTlsCaFileName_Type()
+)
+alaAaaTlsCaFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCaFileName.setStatus("current")
+
+
+class _AlaAaaTlsCrlFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCrlFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsCrlFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCrlFileName_Object = MibScalar
+alaAaaTlsCrlFileName = _AlaAaaTlsCrlFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 1, 2),
+    _AlaAaaTlsCrlFileName_Type()
+)
+alaAaaTlsCrlFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCrlFileName.setStatus("current")
+
+
+class _AlaAaaTlsKeyFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsKeyFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsKeyFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsKeyFileName_Object = MibScalar
+alaAaaTlsKeyFileName = _AlaAaaTlsKeyFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 1, 3),
+    _AlaAaaTlsKeyFileName_Type()
+)
+alaAaaTlsKeyFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsKeyFileName.setStatus("current")
+
+
+class _AlaAaaTlsCertFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCertFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsCertFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCertFileName_Object = MibScalar
+alaAaaTlsCertFileName = _AlaAaaTlsCertFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 1, 4),
+    _AlaAaaTlsCertFileName_Type()
+)
+alaAaaTlsCertFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCertFileName.setStatus("current")
+_AlaAaaTlsSelfSignedCert_ObjectIdentity = ObjectIdentity
+alaAaaTlsSelfSignedCert = _AlaAaaTlsSelfSignedCert_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2)
+)
+
+
+class _AlaAaaTlsSelfSignedCertFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsSelfSignedCertFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertFileName_Object = MibScalar
+alaAaaTlsSelfSignedCertFileName = _AlaAaaTlsSelfSignedCertFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 1),
+    _AlaAaaTlsSelfSignedCertFileName_Type()
+)
+alaAaaTlsSelfSignedCertFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertFileName.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertKeyFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertKeyFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsSelfSignedCertKeyFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertKeyFileName_Object = MibScalar
+alaAaaTlsSelfSignedCertKeyFileName = _AlaAaaTlsSelfSignedCertKeyFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 2),
+    _AlaAaaTlsSelfSignedCertKeyFileName_Type()
+)
+alaAaaTlsSelfSignedCertKeyFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertKeyFileName.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertValidPeriod_Type(Integer32):
+    """Custom type alaAaaTlsSelfSignedCertValidPeriod based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3650),
+    )
+
+
+_AlaAaaTlsSelfSignedCertValidPeriod_Type.__name__ = "Integer32"
+_AlaAaaTlsSelfSignedCertValidPeriod_Object = MibScalar
+alaAaaTlsSelfSignedCertValidPeriod = _AlaAaaTlsSelfSignedCertValidPeriod_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 3),
+    _AlaAaaTlsSelfSignedCertValidPeriod_Type()
+)
+alaAaaTlsSelfSignedCertValidPeriod.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertValidPeriod.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertCommonName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertCommonName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsSelfSignedCertCommonName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertCommonName_Object = MibScalar
+alaAaaTlsSelfSignedCertCommonName = _AlaAaaTlsSelfSignedCertCommonName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 4),
+    _AlaAaaTlsSelfSignedCertCommonName_Type()
+)
+alaAaaTlsSelfSignedCertCommonName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertCommonName.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertOrgName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertOrgName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsSelfSignedCertOrgName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertOrgName_Object = MibScalar
+alaAaaTlsSelfSignedCertOrgName = _AlaAaaTlsSelfSignedCertOrgName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 5),
+    _AlaAaaTlsSelfSignedCertOrgName_Type()
+)
+alaAaaTlsSelfSignedCertOrgName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertOrgName.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertOrgUnit_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertOrgUnit based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsSelfSignedCertOrgUnit_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertOrgUnit_Object = MibScalar
+alaAaaTlsSelfSignedCertOrgUnit = _AlaAaaTlsSelfSignedCertOrgUnit_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 6),
+    _AlaAaaTlsSelfSignedCertOrgUnit_Type()
+)
+alaAaaTlsSelfSignedCertOrgUnit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertOrgUnit.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertLocality_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertLocality based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsSelfSignedCertLocality_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertLocality_Object = MibScalar
+alaAaaTlsSelfSignedCertLocality = _AlaAaaTlsSelfSignedCertLocality_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 7),
+    _AlaAaaTlsSelfSignedCertLocality_Type()
+)
+alaAaaTlsSelfSignedCertLocality.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertLocality.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertState_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertState based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsSelfSignedCertState_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertState_Object = MibScalar
+alaAaaTlsSelfSignedCertState = _AlaAaaTlsSelfSignedCertState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 8),
+    _AlaAaaTlsSelfSignedCertState_Type()
+)
+alaAaaTlsSelfSignedCertState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertState.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertCountry_Type(SnmpAdminString):
+    """Custom type alaAaaTlsSelfSignedCertCountry based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(2, 2),
+    )
+    fixed_length = 2
+
+
+_AlaAaaTlsSelfSignedCertCountry_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsSelfSignedCertCountry_Object = MibScalar
+alaAaaTlsSelfSignedCertCountry = _AlaAaaTlsSelfSignedCertCountry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 9),
+    _AlaAaaTlsSelfSignedCertCountry_Type()
+)
+alaAaaTlsSelfSignedCertCountry.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertCountry.setStatus("current")
+
+
+class _AlaAaaTlsSelfSignedCertAction_Type(Integer32):
+    """Custom type alaAaaTlsSelfSignedCertAction based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("create", 1),
+          ("delete", 2))
+    )
+
+
+_AlaAaaTlsSelfSignedCertAction_Type.__name__ = "Integer32"
+_AlaAaaTlsSelfSignedCertAction_Object = MibScalar
+alaAaaTlsSelfSignedCertAction = _AlaAaaTlsSelfSignedCertAction_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 2, 10),
+    _AlaAaaTlsSelfSignedCertAction_Type()
+)
+alaAaaTlsSelfSignedCertAction.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsSelfSignedCertAction.setStatus("current")
+_AlaAaaTlsCsr_ObjectIdentity = ObjectIdentity
+alaAaaTlsCsr = _AlaAaaTlsCsr_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3)
+)
+
+
+class _AlaAaaTlsCsrFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsCsrFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrFileName_Object = MibScalar
+alaAaaTlsCsrFileName = _AlaAaaTlsCsrFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 1),
+    _AlaAaaTlsCsrFileName_Type()
+)
+alaAaaTlsCsrFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrFileName.setStatus("current")
+
+
+class _AlaAaaTlsCsrKeyFileName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrKeyFileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaAaaTlsCsrKeyFileName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrKeyFileName_Object = MibScalar
+alaAaaTlsCsrKeyFileName = _AlaAaaTlsCsrKeyFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 2),
+    _AlaAaaTlsCsrKeyFileName_Type()
+)
+alaAaaTlsCsrKeyFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrKeyFileName.setStatus("current")
+
+
+class _AlaAaaTlsCsrCommonName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrCommonName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsCsrCommonName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrCommonName_Object = MibScalar
+alaAaaTlsCsrCommonName = _AlaAaaTlsCsrCommonName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 3),
+    _AlaAaaTlsCsrCommonName_Type()
+)
+alaAaaTlsCsrCommonName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrCommonName.setStatus("current")
+
+
+class _AlaAaaTlsCsrOrgName_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrOrgName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsCsrOrgName_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrOrgName_Object = MibScalar
+alaAaaTlsCsrOrgName = _AlaAaaTlsCsrOrgName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 4),
+    _AlaAaaTlsCsrOrgName_Type()
+)
+alaAaaTlsCsrOrgName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrOrgName.setStatus("current")
+
+
+class _AlaAaaTlsCsrOrgUnit_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrOrgUnit based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsCsrOrgUnit_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrOrgUnit_Object = MibScalar
+alaAaaTlsCsrOrgUnit = _AlaAaaTlsCsrOrgUnit_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 5),
+    _AlaAaaTlsCsrOrgUnit_Type()
+)
+alaAaaTlsCsrOrgUnit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrOrgUnit.setStatus("current")
+
+
+class _AlaAaaTlsCsrLocality_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrLocality based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsCsrLocality_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrLocality_Object = MibScalar
+alaAaaTlsCsrLocality = _AlaAaaTlsCsrLocality_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 6),
+    _AlaAaaTlsCsrLocality_Type()
+)
+alaAaaTlsCsrLocality.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrLocality.setStatus("current")
+
+
+class _AlaAaaTlsCsrState_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrState based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaAaaTlsCsrState_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrState_Object = MibScalar
+alaAaaTlsCsrState = _AlaAaaTlsCsrState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 7),
+    _AlaAaaTlsCsrState_Type()
+)
+alaAaaTlsCsrState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrState.setStatus("current")
+
+
+class _AlaAaaTlsCsrCountry_Type(SnmpAdminString):
+    """Custom type alaAaaTlsCsrCountry based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(2, 2),
+    )
+    fixed_length = 2
+
+
+_AlaAaaTlsCsrCountry_Type.__name__ = "SnmpAdminString"
+_AlaAaaTlsCsrCountry_Object = MibScalar
+alaAaaTlsCsrCountry = _AlaAaaTlsCsrCountry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 18, 3, 8),
+    _AlaAaaTlsCsrCountry_Type()
+)
+alaAaaTlsCsrCountry.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaTlsCsrCountry.setStatus("current")
+_AaaUNPLldpRuleConfig_ObjectIdentity = ObjectIdentity
+aaaUNPLldpRuleConfig = _AaaUNPLldpRuleConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 19)
+)
+
+
+class _AaaUNPLldpRuleProfileName_Type(SnmpAdminString):
+    """Custom type aaaUNPLldpRuleProfileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AaaUNPLldpRuleProfileName_Type.__name__ = "SnmpAdminString"
+_AaaUNPLldpRuleProfileName_Object = MibScalar
+aaaUNPLldpRuleProfileName = _AaaUNPLldpRuleProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 19, 1),
+    _AaaUNPLldpRuleProfileName_Type()
+)
+aaaUNPLldpRuleProfileName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    aaaUNPLldpRuleProfileName.setStatus("current")
+_AlaAaaRadClientGlobalAttr_ObjectIdentity = ObjectIdentity
+alaAaaRadClientGlobalAttr = _AlaAaaRadClientGlobalAttr_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 20)
+)
+
+
+class _AlaAaaRadNasIdentifier_Type(SnmpAdminString):
+    """Custom type alaAaaRadNasIdentifier based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 31),
+    )
+
+
+_AlaAaaRadNasIdentifier_Type.__name__ = "SnmpAdminString"
+_AlaAaaRadNasIdentifier_Object = MibScalar
+alaAaaRadNasIdentifier = _AlaAaaRadNasIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 20, 1),
+    _AlaAaaRadNasIdentifier_Type()
+)
+alaAaaRadNasIdentifier.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaAaaRadNasIdentifier.setStatus("current")
+_AlaAaaRadClientNasIpAddr_ObjectIdentity = ObjectIdentity
+alaAaaRadClientNasIpAddr = _AlaAaaRadClientNasIpAddr_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 21)
+)
+
+
+class _AlaAaaRadNasIpState_Type(Integer32):
+    """Custom type alaAaaRadNasIpState based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("localipaddr", 1))
+    )
+
+
+_AlaAaaRadNasIpState_Type.__name__ = "Integer32"
+_AlaAaaRadNasIpState_Object = MibScalar
+alaAaaRadNasIpState = _AlaAaaRadNasIpState_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 21, 1),
+    _AlaAaaRadNasIpState_Type()
+)
+alaAaaRadNasIpState.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaAaaRadNasIpState.setStatus("current")
+
+
+class _AlaAaaRadNasIpField_Type(IpAddress):
+    """Custom type alaAaaRadNasIpField based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaAaaRadNasIpField_Type.__name__ = "IpAddress"
+_AlaAaaRadNasIpField_Object = MibScalar
+alaAaaRadNasIpField = _AlaAaaRadNasIpField_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 1, 21, 2),
+    _AlaAaaRadNasIpField_Type()
+)
+alaAaaRadNasIpField.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaAaaRadNasIpField.setStatus("current")
 _AlcatelIND1AAAMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1AAAMIBConformance = _AlcatelIND1AAAMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2)
@@ -3830,6 +6383,107 @@ aaaHSvrIpAddress = _AaaHSvrIpAddress_Object(
 aaaHSvrIpAddress.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     aaaHSvrIpAddress.setStatus("current")
+_AaaHSvrCurrIpAddress_Type = IpAddress
+_AaaHSvrCurrIpAddress_Object = MibScalar
+aaaHSvrCurrIpAddress = _AaaHSvrCurrIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 2, 2),
+    _AaaHSvrCurrIpAddress_Type()
+)
+aaaHSvrCurrIpAddress.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaHSvrCurrIpAddress.setStatus("current")
+_AaaHSvrRole_Type = Integer32
+_AaaHSvrRole_Object = MibScalar
+aaaHSvrRole = _AaaHSvrRole_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 2, 3),
+    _AaaHSvrRole_Type()
+)
+aaaHSvrRole.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaHSvrRole.setStatus("current")
+_AaaHSvrName_Type = DisplayString
+_AaaHSvrName_Object = MibScalar
+aaaHSvrName = _AaaHSvrName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 2, 4),
+    _AaaHSvrName_Type()
+)
+aaaHSvrName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaHSvrName.setStatus("current")
+_AlaAaaAuthTrapsDesc_ObjectIdentity = ObjectIdentity
+alaAaaAuthTrapsDesc = _AlaAaaAuthTrapsDesc_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 3)
+)
+_AlaAaaAuthTrapsDescRoot_ObjectIdentity = ObjectIdentity
+alaAaaAuthTrapsDescRoot = _AlaAaaAuthTrapsDescRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 3, 0)
+)
+_AlaAaaAuthTrapsObj_ObjectIdentity = ObjectIdentity
+alaAaaAuthTrapsObj = _AlaAaaAuthTrapsObj_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4)
+)
+_AaaAuthSysName_Type = DisplayString
+_AaaAuthSysName_Object = MibScalar
+aaaAuthSysName = _AaaAuthSysName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4, 1),
+    _AaaAuthSysName_Type()
+)
+aaaAuthSysName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaAuthSysName.setStatus("current")
+_AaaAuthIpAddress_Type = IpAddress
+_AaaAuthIpAddress_Object = MibScalar
+aaaAuthIpAddress = _AaaAuthIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4, 2),
+    _AaaAuthIpAddress_Type()
+)
+aaaAuthIpAddress.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaAuthIpAddress.setStatus("current")
+_AaaAuthPort_Type = Integer32
+_AaaAuthPort_Object = MibScalar
+aaaAuthPort = _AaaAuthPort_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4, 3),
+    _AaaAuthPort_Type()
+)
+aaaAuthPort.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaAuthPort.setStatus("current")
+_AaaAuthUserName_Type = DisplayString
+_AaaAuthUserName_Object = MibScalar
+aaaAuthUserName = _AaaAuthUserName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4, 4),
+    _AaaAuthUserName_Type()
+)
+aaaAuthUserName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaAuthUserName.setStatus("current")
+_AaaAuthType_Type = DisplayString
+_AaaAuthType_Object = MibScalar
+aaaAuthType = _AaaAuthType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4, 5),
+    _AaaAuthType_Type()
+)
+aaaAuthType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaAuthType.setStatus("current")
+_AaaAuthFailureReason_Type = Integer32
+_AaaAuthFailureReason_Object = MibScalar
+aaaAuthFailureReason = _AaaAuthFailureReason_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 4, 6),
+    _AaaAuthFailureReason_Type()
+)
+aaaAuthFailureReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    aaaAuthFailureReason.setStatus("current")
+_AlaAaaRadiusTrapsDesc_ObjectIdentity = ObjectIdentity
+alaAaaRadiusTrapsDesc = _AlaAaaRadiusTrapsDesc_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 5)
+)
+_AlaAaaRadiusTrapsDescRoot_ObjectIdentity = ObjectIdentity
+alaAaaRadiusTrapsDescRoot = _AlaAaaRadiusTrapsDescRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 5, 0)
+)
 
 # Managed Objects groups
 
@@ -3863,7 +6517,34 @@ aaaServerMIBGroup.setObjects(
         ("ALCATEL-IND1-AAA-MIB", "aaasHttpProxyHostName"),
         ("ALCATEL-IND1-AAA-MIB", "aaasHttpProxyIpAddress"),
         ("ALCATEL-IND1-AAA-MIB", "aaasHttpProxyPort"),
-        ("ALCATEL-IND1-AAA-MIB", "aaasVrfName"))
+        ("ALCATEL-IND1-AAA-MIB", "aaasVrfName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadMacAddrCase"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaTacacsServerCmdAuthorization"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadNasPort"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadNasPortId"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadNasPortType"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadMacAddrFormat"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadUniqueAcctSessionId"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadMacAddrCaseStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadServerStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadHealthstatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadPollInterval"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadFailoverStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadUser"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadPasswd"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadServerPrimaryStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadServerBackupStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadKeyHash"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadPrimSerNbUpToDown"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadPrimSerNbDownToUp"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadPrimServUpTime"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadPrimServDownTime"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadBkupSerNbUpToDown"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadBkupSerNbDownToUp"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadBkupServUpTime"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadBkupServDownTime"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadSalt"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasRadSaltHash"))
 )
 if mibBuilder.loadTexts:
     aaaServerMIBGroup.setStatus("current")
@@ -3886,6 +6567,7 @@ aaaAuthAcctGroup.setObjects(
         ("ALCATEL-IND1-AAA-MIB", "aaatsName4"),
         ("ALCATEL-IND1-AAA-MIB", "aaatsRowStatus"),
         ("ALCATEL-IND1-AAA-MIB", "aaatsCertificate"),
+        ("ALCATEL-IND1-AAA-MIB", "aaatsName5"),
         ("ALCATEL-IND1-AAA-MIB", "aaacvVlan"),
         ("ALCATEL-IND1-AAA-MIB", "aaacvName1"),
         ("ALCATEL-IND1-AAA-MIB", "aaacvName2"),
@@ -3905,12 +6587,19 @@ aaaAuthAcctGroup.setObjects(
         ("ALCATEL-IND1-AAA-MIB", "aaatxName4"),
         ("ALCATEL-IND1-AAA-MIB", "aaatxOpen"),
         ("ALCATEL-IND1-AAA-MIB", "aaatxRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaatxName5"),
         ("ALCATEL-IND1-AAA-MIB", "aaacxInterface"),
         ("ALCATEL-IND1-AAA-MIB", "aaacxName1"),
         ("ALCATEL-IND1-AAA-MIB", "aaacxName2"),
         ("ALCATEL-IND1-AAA-MIB", "aaacxName3"),
         ("ALCATEL-IND1-AAA-MIB", "aaacxName4"),
         ("ALCATEL-IND1-AAA-MIB", "aaacxRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAcctSvrInterface"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAcctSvr1"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAcctSvr2"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAcctSvr3"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAcctSvr4"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAcctSvrRowStatus"),
         ("ALCATEL-IND1-AAA-MIB", "aaatpInterface"),
         ("ALCATEL-IND1-AAA-MIB", "aaatpName1"),
         ("ALCATEL-IND1-AAA-MIB", "aaatpName2"),
@@ -3961,8 +6650,14 @@ aaaUserMIBGroup.setObjects(
         ("ALCATEL-IND1-AAA-MIB", "aaaAsaLockoutWindow"),
         ("ALCATEL-IND1-AAA-MIB", "aaaAsaLockoutDuration"),
         ("ALCATEL-IND1-AAA-MIB", "aaaAsaLockoutThreshold"),
+        ("ALCATEL-IND1-AAA-MIB", "aaauSnmpPrivPassword"),
+        ("ALCATEL-IND1-AAA-MIB", "aaauSnmpOnly"),
         ("ALCATEL-IND1-AAA-MIB", "aaaAsaROUserPingTrtEnable"),
-        ("ALCATEL-IND1-AAA-MIB", "aaaAsaAccessPolicyAdminConsoleOnly"))
+        ("ALCATEL-IND1-AAA-MIB", "aaaAsaAccessPolicyAdminConsoleOnly"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAsaCertPassword"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAsaAccessMode"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAsaIpLockoutThreshold"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaSwitchAccessMgmtStationState"))
 )
 if mibBuilder.loadTexts:
     aaaUserMIBGroup.setStatus("current")
@@ -3976,8 +6671,11 @@ aaaHicGroup.setObjects(
         ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrKey"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrRowStatus"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrRole"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrConnection"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicAllowedIpAddr"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicAllowedRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicAllowedIpMask"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicOverrideStatus"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicOverrideRowStatus"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicHostStatus"),
@@ -3987,10 +6685,133 @@ aaaHicGroup.setObjects(
         ("ALCATEL-IND1-AAA-MIB", "aaaHicAllowed3Name"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicAllowed4Name"),
         ("ALCATEL-IND1-AAA-MIB", "aaaHicWebAgentDownloadUrl"),
-        ("ALCATEL-IND1-AAA-MIB", "aaaHicCustomHttpProxyPort"))
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicCustomHttpProxyPort"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicBgPollInterval"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrFailMode"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrDownMappedUnpName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicSvrDownUnpRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrCurrIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrRole"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacInterface"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacSrvrName1"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacSrvrName2"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacSrvrName3"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacSrvrName4"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacSrvrRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaMacSrvrName5"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadAgentConfig"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadAgentIP"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPIpNetRuleProfileName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPIpNetRuleRowStatus"))
 )
 if mibBuilder.loadTexts:
     aaaHicGroup.setStatus("current")
+
+aaaVlanGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 6)
+)
+aaaVlanGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaAvlanDnsName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAvlanDhcpDefGateway"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAvlanDefaultTraffic"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAvlanPortBound"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAvlanLanguage"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAvlanId"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAvlanIpAddress"))
+)
+if mibBuilder.loadTexts:
+    aaaVlanGroup.setStatus("current")
+
+aaaUNPMacRangeRuleGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 7)
+)
+aaaUNPMacRangeRuleGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRangeRuleHiAddr"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRangeRuleProfileName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRangeRuleRowStatus"))
+)
+if mibBuilder.loadTexts:
+    aaaUNPMacRangeRuleGroup.setStatus("current")
+
+aaaUNPMacRuleGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 8)
+)
+aaaUNPMacRuleGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRuleProfileName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRuleRowStatus"))
+)
+if mibBuilder.loadTexts:
+    aaaUNPMacRuleGroup.setStatus("current")
+
+aaaUserNetProfileGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 9)
+)
+aaaUserNetProfileGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileVlanID"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileHICflag"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileQosPolicyListName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileMaxIngressBw"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileMaxEgressBw"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileMaxDefaultDepth"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetworkProfileRedirectUrl"))
+)
+if mibBuilder.loadTexts:
+    aaaUserNetProfileGroup.setStatus("current")
+
+aaaAuthenticatedUserGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 10)
+)
+aaaAuthenticatedUserGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaaUserName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaaSlot"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaaPort"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaaVlan"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaaDrop"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaaMacAddress"))
+)
+if mibBuilder.loadTexts:
+    aaaAuthenticatedUserGroup.setStatus("current")
+
+aaaAuthFailureTrapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 11)
+)
+aaaAuthFailureTrapGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaAuthSysName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthPort"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthUserName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthType"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthFailureReason"))
+)
+if mibBuilder.loadTexts:
+    aaaAuthFailureTrapGroup.setStatus("current")
+
+aaaRedirectGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 12)
+)
+aaaRedirectGroup.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrl1"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrl2"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrl3"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrl4"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrl5"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectSvrConfigRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerHostName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerUrl"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectServerRowStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectPauseTimerConfig"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaPortBounceConfig"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaPortBounceStatus"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaBYODWhiteListIPAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaBYODWhiteListIPMask"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaBYODWhiteListRowStatus"))
+)
+if mibBuilder.loadTexts:
+    aaaRedirectGroup.setStatus("current")
 
 
 # Notification objects
@@ -3999,10 +6820,77 @@ aaaHicServerTrap = NotificationType(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 1, 0, 1)
 )
 aaaHicServerTrap.setObjects(
-    ("ALCATEL-IND1-AAA-MIB", "aaaHSvrIpAddress")
+      *(("ALCATEL-IND1-AAA-MIB", "aaaHSvrIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrRole"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrName"))
 )
 if mibBuilder.loadTexts:
     aaaHicServerTrap.setStatus(
+        "current"
+    )
+
+aaaHicServerChangeTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 1, 0, 2)
+)
+aaaHicServerChangeTrap.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaHSvrIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrCurrIpAddress"))
+)
+if mibBuilder.loadTexts:
+    aaaHicServerChangeTrap.setStatus(
+        "current"
+    )
+
+aaaHicServerUpTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 1, 0, 3)
+)
+aaaHicServerUpTrap.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaHSvrIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrRole"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHSvrName"))
+)
+if mibBuilder.loadTexts:
+    aaaHicServerUpTrap.setStatus(
+        "current"
+    )
+
+aaaAuthenticationFailureTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 3, 0, 1)
+)
+aaaAuthenticationFailureTrap.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaaAuthSysName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthPort"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthUserName"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthType"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthFailureReason"))
+)
+if mibBuilder.loadTexts:
+    aaaAuthenticationFailureTrap.setStatus(
+        "current"
+    )
+
+aaaRadiusServerUpTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 5, 0, 1)
+)
+aaaRadiusServerUpTrap.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaasIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasIpAddress2"))
+)
+if mibBuilder.loadTexts:
+    aaaRadiusServerUpTrap.setStatus(
+        "current"
+    )
+
+aaaRadiusServerDownTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 21, 5, 0, 2)
+)
+aaaRadiusServerDownTrap.setObjects(
+      *(("ALCATEL-IND1-AAA-MIB", "aaasIpAddress"),
+        ("ALCATEL-IND1-AAA-MIB", "aaasIpAddress2"))
+)
+if mibBuilder.loadTexts:
+    aaaRadiusServerDownTrap.setStatus(
         "current"
     )
 
@@ -4013,7 +6901,12 @@ aaaTrapsGroup = NotificationGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 15, 1, 2, 1, 5)
 )
 aaaTrapsGroup.setObjects(
-    ("ALCATEL-IND1-AAA-MIB", "aaaHicServerTrap")
+      *(("ALCATEL-IND1-AAA-MIB", "aaaHicServerTrap"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicServerChangeTrap"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicServerUpTrap"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthenticationFailureTrap"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadiusServerUpTrap"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRadiusServerDownTrap"))
 )
 if mibBuilder.loadTexts:
     aaaTrapsGroup.setStatus(
@@ -4032,7 +6925,15 @@ alcatelIND1AAAMIBCompliance = ModuleCompliance(
 alcatelIND1AAAMIBCompliance.setObjects(
       *(("ALCATEL-IND1-AAA-MIB", "aaaServerMIBGroup"),
         ("ALCATEL-IND1-AAA-MIB", "aaaAuthAcctGroup"),
-        ("ALCATEL-IND1-AAA-MIB", "aaaUserMIBGroup"))
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserMIBGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaHicGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaVlanGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRangeRuleGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUNPMacRuleGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaUserNetProfileGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthenticatedUserGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaAuthFailureTrapGroup"),
+        ("ALCATEL-IND1-AAA-MIB", "aaaRedirectGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1AAAMIBCompliance.setStatus(
@@ -4044,7 +6945,8 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "ALCATEL-IND1-AAA-MIB",
-    **{"alcatelIND1AAAMIB": alcatelIND1AAAMIB,
+    **{"AaasRadNasPortTypeConvention": AaasRadNasPortTypeConvention,
+       "alcatelIND1AAAMIB": alcatelIND1AAAMIB,
        "alcatelIND1AAAMIBObjects": alcatelIND1AAAMIBObjects,
        "aaaServerMIB": aaaServerMIB,
        "aaaServerTable": aaaServerTable,
@@ -4076,6 +6978,40 @@ mibBuilder.exportSymbols(
        "aaasHttpProxyIpAddress": aaasHttpProxyIpAddress,
        "aaasHttpProxyPort": aaasHttpProxyPort,
        "aaasVrfName": aaasVrfName,
+       "aaasRadMacAddrCase": aaasRadMacAddrCase,
+       "aaasRadNasPort": aaasRadNasPort,
+       "aaasRadNasPortId": aaasRadNasPortId,
+       "aaasRadNasPortType": aaasRadNasPortType,
+       "aaasRadMacAddrFormat": aaasRadMacAddrFormat,
+       "aaasRadUniqueAcctSessionId": aaasRadUniqueAcctSessionId,
+       "aaasRadMacAddrCaseStatus": aaasRadMacAddrCaseStatus,
+       "aaasRadServerStatus": aaasRadServerStatus,
+       "aaasRadHealthstatus": aaasRadHealthstatus,
+       "aaasRadPollInterval": aaasRadPollInterval,
+       "aaasRadFailoverStatus": aaasRadFailoverStatus,
+       "aaasRadUser": aaasRadUser,
+       "aaasRadPasswd": aaasRadPasswd,
+       "aaaRadServerPrimaryStatus": aaaRadServerPrimaryStatus,
+       "aaaRadServerBackupStatus": aaaRadServerBackupStatus,
+       "aaasRadKeyHash": aaasRadKeyHash,
+       "aaaRadPrimSerNbUpToDown": aaaRadPrimSerNbUpToDown,
+       "aaaRadPrimSerNbDownToUp": aaaRadPrimSerNbDownToUp,
+       "aaaRadPrimServUpTime": aaaRadPrimServUpTime,
+       "aaaRadPrimServDownTime": aaaRadPrimServDownTime,
+       "aaaRadBkupSerNbUpToDown": aaaRadBkupSerNbUpToDown,
+       "aaaRadBkupSerNbDownToUp": aaaRadBkupSerNbDownToUp,
+       "aaaRadBkupServUpTime": aaaRadBkupServUpTime,
+       "aaaRadBkupServDownTime": aaaRadBkupServDownTime,
+       "aaasTacacsKeyHash": aaasTacacsKeyHash,
+       "aaasRadSalt": aaasRadSalt,
+       "aaasRadSaltHash": aaasRadSaltHash,
+       "aaasTacacsSalt": aaasTacacsSalt,
+       "aaasTacacsSaltHash": aaasTacacsSaltHash,
+       "aaasLdapSalt": aaasLdapSalt,
+       "aaasLdapSaltHash": aaasLdapSaltHash,
+       "aaasLdapPasswdHash": aaasLdapPasswdHash,
+       "aaaTacacsServerCmdAuthorization": aaaTacacsServerCmdAuthorization,
+       "aaaTacacsServerWaitTime": aaaTacacsServerWaitTime,
        "aaaAuthAcctMIB": aaaAuthAcctMIB,
        "aaaAuthVlanTable": aaaAuthVlanTable,
        "aaaAuthVlanEntry": aaaAuthVlanEntry,
@@ -4093,6 +7029,7 @@ mibBuilder.exportSymbols(
        "aaatsName2": aaatsName2,
        "aaatsName3": aaatsName3,
        "aaatsName4": aaatsName4,
+       "aaatsName5": aaatsName5,
        "aaatsRowStatus": aaatsRowStatus,
        "aaatsCertificate": aaatsCertificate,
        "aaaAcctVlanTable": aaaAcctVlanTable,
@@ -4111,6 +7048,8 @@ mibBuilder.exportSymbols(
        "aaacsName3": aaacsName3,
        "aaacsName4": aaacsName4,
        "aaacsRowStatus": aaacsRowStatus,
+       "aaaAccountingSessionIdStatus": aaaAccountingSessionIdStatus,
+       "aaacsName5": aaacsName5,
        "aaaAuth8021xTable": aaaAuth8021xTable,
        "aaaAuth8021xEntry": aaaAuth8021xEntry,
        "aaatxInterface": aaatxInterface,
@@ -4120,6 +7059,7 @@ mibBuilder.exportSymbols(
        "aaatxName4": aaatxName4,
        "aaatxOpen": aaatxOpen,
        "aaatxRowStatus": aaatxRowStatus,
+       "aaatxName5": aaatxName5,
        "aaaAcct8021xTable": aaaAcct8021xTable,
        "aaaAcct8021xEntry": aaaAcct8021xEntry,
        "aaacxInterface": aaacxInterface,
@@ -4128,6 +7068,7 @@ mibBuilder.exportSymbols(
        "aaacxName3": aaacxName3,
        "aaacxName4": aaacxName4,
        "aaacxRowStatus": aaacxRowStatus,
+       "aaacxName5": aaacxName5,
        "aaaPkiTable": aaaPkiTable,
        "aaaPkiEntry": aaaPkiEntry,
        "aaatpInterface": aaatpInterface,
@@ -4145,6 +7086,7 @@ mibBuilder.exportSymbols(
        "aaaMacSrvrName3": aaaMacSrvrName3,
        "aaaMacSrvrName4": aaaMacSrvrName4,
        "aaaMacSrvrRowStatus": aaaMacSrvrRowStatus,
+       "aaaMacSrvrName5": aaaMacSrvrName5,
        "aaaAcctCmdTable": aaaAcctCmdTable,
        "aaaAcctCmdEntry": aaaAcctCmdEntry,
        "aaacmdInterface": aaacmdInterface,
@@ -4153,6 +7095,16 @@ mibBuilder.exportSymbols(
        "aaacmdSrvName3": aaacmdSrvName3,
        "aaacmdSrvName4": aaacmdSrvName4,
        "aaacmdRowStatus": aaacmdRowStatus,
+       "aaacmdSrvName5": aaacmdSrvName5,
+       "aaaAcctMACTable": aaaAcctMACTable,
+       "aaaAcctMACEntry": aaaAcctMACEntry,
+       "aaaAcctSvrInterface": aaaAcctSvrInterface,
+       "aaaAcctSvr1": aaaAcctSvr1,
+       "aaaAcctSvr2": aaaAcctSvr2,
+       "aaaAcctSvr3": aaaAcctSvr3,
+       "aaaAcctSvr4": aaaAcctSvr4,
+       "aaaAcctSvrRowStatus": aaaAcctSvrRowStatus,
+       "aaaAcctSvr5": aaaAcctSvr5,
        "aaaUserMIB": aaaUserMIB,
        "aaaUserTable": aaaUserTable,
        "aaaUserEntry": aaaUserEntry,
@@ -4173,6 +7125,10 @@ mibBuilder.exportSymbols(
        "aaauPasswordAllowModifyDate": aaauPasswordAllowModifyDate,
        "aaauPasswordLockoutEnable": aaauPasswordLockoutEnable,
        "aaauBadAtempts": aaauBadAtempts,
+       "aaauSnmpOnly": aaauSnmpOnly,
+       "aaauSnmpPrivPassword": aaauSnmpPrivPassword,
+       "aaauReadRightView": aaauReadRightView,
+       "aaauWriteRightView": aaauWriteRightView,
        "aaaAuthenticatedUserTable": aaaAuthenticatedUserTable,
        "aaaAuthenticatedUserEntry": aaaAuthenticatedUserEntry,
        "aaaaMacAddress": aaaaMacAddress,
@@ -4202,6 +7158,10 @@ mibBuilder.exportSymbols(
        "aaaAsaLockoutThreshold": aaaAsaLockoutThreshold,
        "aaaAsaROUserPingTrtEnable": aaaAsaROUserPingTrtEnable,
        "aaaAsaAccessPolicyAdminConsoleOnly": aaaAsaAccessPolicyAdminConsoleOnly,
+       "aaaAsaCertPassword": aaaAsaCertPassword,
+       "aaaAsaAccessMode": aaaAsaAccessMode,
+       "aaaAsaIpLockoutThreshold": aaaAsaIpLockoutThreshold,
+       "aaaSwitchAccessMgmtStationState": aaaSwitchAccessMgmtStationState,
        "aaaAvlanAddressTable": aaaAvlanAddressTable,
        "aaaAvlanAddressEntry": aaaAvlanAddressEntry,
        "aaaAvlanId": aaaAvlanId,
@@ -4213,6 +7173,10 @@ mibBuilder.exportSymbols(
        "aaaUserNetProfileRowStatus": aaaUserNetProfileRowStatus,
        "aaaUserNetProfileHICflag": aaaUserNetProfileHICflag,
        "aaaUserNetProfileQosPolicyListName": aaaUserNetProfileQosPolicyListName,
+       "aaaUserNetProfileMaxIngressBw": aaaUserNetProfileMaxIngressBw,
+       "aaaUserNetProfileMaxEgressBw": aaaUserNetProfileMaxEgressBw,
+       "aaaUserNetProfileMaxDefaultDepth": aaaUserNetProfileMaxDefaultDepth,
+       "aaaUserNetworkProfileRedirectUrl": aaaUserNetworkProfileRedirectUrl,
        "aaaRadAgentConfig": aaaRadAgentConfig,
        "aaaRadAgentIP": aaaRadAgentIP,
        "aaaHicConfig": aaaHicConfig,
@@ -4224,6 +7188,8 @@ mibBuilder.exportSymbols(
        "aaaHicSvrKey": aaaHicSvrKey,
        "aaaHicSvrRowStatus": aaaHicSvrRowStatus,
        "aaaHicSvrStatus": aaaHicSvrStatus,
+       "aaaHicSvrRole": aaaHicSvrRole,
+       "aaaHicSvrConnection": aaaHicSvrConnection,
        "aaaHicAllowedTable": aaaHicAllowedTable,
        "aaaHicAllowedEntry": aaaHicAllowedEntry,
        "aaaHicAllowedName": aaaHicAllowedName,
@@ -4247,6 +7213,8 @@ mibBuilder.exportSymbols(
        "aaaHicAllowed4Name": aaaHicAllowed4Name,
        "aaaHicWebAgentDownloadUrl": aaaHicWebAgentDownloadUrl,
        "aaaHicCustomHttpProxyPort": aaaHicCustomHttpProxyPort,
+       "aaaHicBgPollInterval": aaaHicBgPollInterval,
+       "aaaHicSvrFailMode": aaaHicSvrFailMode,
        "aaaUNPIpNetRuleTable": aaaUNPIpNetRuleTable,
        "aaaUNPIpNetRuleEntry": aaaUNPIpNetRuleEntry,
        "aaaUNPIpNetRuleAddrType": aaaUNPIpNetRuleAddrType,
@@ -4265,6 +7233,93 @@ mibBuilder.exportSymbols(
        "aaaUNPMacRangeRuleHiAddr": aaaUNPMacRangeRuleHiAddr,
        "aaaUNPMacRangeRuleProfileName": aaaUNPMacRangeRuleProfileName,
        "aaaUNPMacRangeRuleRowStatus": aaaUNPMacRangeRuleRowStatus,
+       "aaaHicSvrDownUnpMapTable": aaaHicSvrDownUnpMapTable,
+       "aaaHicSvrDownUnpMapEntry": aaaHicSvrDownUnpMapEntry,
+       "aaaHicSvrDownUnpName": aaaHicSvrDownUnpName,
+       "aaaHicSvrDownMappedUnpName": aaaHicSvrDownMappedUnpName,
+       "aaaHicSvrDownUnpRowStatus": aaaHicSvrDownUnpRowStatus,
+       "aaaRedirectConfig": aaaRedirectConfig,
+       "aaaRedirectServerTable": aaaRedirectServerTable,
+       "aaaRedirectServerEntry": aaaRedirectServerEntry,
+       "aaaRedirectServerName": aaaRedirectServerName,
+       "aaaRedirectServerIpAddress": aaaRedirectServerIpAddress,
+       "aaaRedirectServerUrl1": aaaRedirectServerUrl1,
+       "aaaRedirectServerUrl2": aaaRedirectServerUrl2,
+       "aaaRedirectServerUrl3": aaaRedirectServerUrl3,
+       "aaaRedirectServerUrl4": aaaRedirectServerUrl4,
+       "aaaRedirectServerUrl5": aaaRedirectServerUrl5,
+       "aaaRedirectSvrConfigRowStatus": aaaRedirectSvrConfigRowStatus,
+       "aaaRedirectServerHostName": aaaRedirectServerHostName,
+       "aaaRedirectUrlConfigTable": aaaRedirectUrlConfigTable,
+       "aaaRedirectURLEntry": aaaRedirectURLEntry,
+       "aaaRedirectServerUrlName": aaaRedirectServerUrlName,
+       "aaaRedirectServerUrl": aaaRedirectServerUrl,
+       "aaaRedirectServerRowStatus": aaaRedirectServerRowStatus,
+       "aaaRedirectGlobalConfig": aaaRedirectGlobalConfig,
+       "aaaRedirectPauseTimerConfig": aaaRedirectPauseTimerConfig,
+       "aaaPortBounceConfig": aaaPortBounceConfig,
+       "aaaRedirectProxyServerPort": aaaRedirectProxyServerPort,
+       "aaaPortBounceInterfaceTable": aaaPortBounceInterfaceTable,
+       "aaaPortBounceInterfaceEntry": aaaPortBounceInterfaceEntry,
+       "aaaPortBouncePortSlot": aaaPortBouncePortSlot,
+       "aaaPortBounceIF": aaaPortBounceIF,
+       "aaaPortBounceStatus": aaaPortBounceStatus,
+       "aaaBYODWhiteListTable": aaaBYODWhiteListTable,
+       "aaaBYODWhiteListEntry": aaaBYODWhiteListEntry,
+       "aaaBYODWhiteListIPAddress": aaaBYODWhiteListIPAddress,
+       "aaaBYODWhiteListIPMask": aaaBYODWhiteListIPMask,
+       "aaaBYODWhiteListRowStatus": aaaBYODWhiteListRowStatus,
+       "aaaSwitchAccessConfig": aaaSwitchAccessConfig,
+       "aaaSwitchAccessMgmtStationTable": aaaSwitchAccessMgmtStationTable,
+       "aaaSwitchAccessMgmtStationEntry": aaaSwitchAccessMgmtStationEntry,
+       "aaaSwitchAccessMgmtStationIpAddress": aaaSwitchAccessMgmtStationIpAddress,
+       "aaaSwitchAccessMgmtStationIpAddressMask": aaaSwitchAccessMgmtStationIpAddressMask,
+       "aaaSwitchAccessMgmtStationRowStatus": aaaSwitchAccessMgmtStationRowStatus,
+       "aaaSwitchAccessBannedIpTable": aaaSwitchAccessBannedIpTable,
+       "aaaSwitchAccessBannedIpEntry": aaaSwitchAccessBannedIpEntry,
+       "aaaSwitchAccessBannedIpAddress": aaaSwitchAccessBannedIpAddress,
+       "aaaSwitchAccessBannedIpRowStatus": aaaSwitchAccessBannedIpRowStatus,
+       "aaaSwitchAccessPrivMaskTable": aaaSwitchAccessPrivMaskTable,
+       "aaaSwitchAccessPrivMaskEntry": aaaSwitchAccessPrivMaskEntry,
+       "aaaSwitchAccessType": aaaSwitchAccessType,
+       "aaaSwitchAccessReadRight1": aaaSwitchAccessReadRight1,
+       "aaaSwitchAccessReadRight2": aaaSwitchAccessReadRight2,
+       "aaaSwitchAccessWriteRight1": aaaSwitchAccessWriteRight1,
+       "aaaSwitchAccessWriteRight2": aaaSwitchAccessWriteRight2,
+       "aaaSwitchAccessPrivMaskRowStatus": aaaSwitchAccessPrivMaskRowStatus,
+       "alaAaaTlsConfig": alaAaaTlsConfig,
+       "alaAaaTlsBaseConfig": alaAaaTlsBaseConfig,
+       "alaAaaTlsCaFileName": alaAaaTlsCaFileName,
+       "alaAaaTlsCrlFileName": alaAaaTlsCrlFileName,
+       "alaAaaTlsKeyFileName": alaAaaTlsKeyFileName,
+       "alaAaaTlsCertFileName": alaAaaTlsCertFileName,
+       "alaAaaTlsSelfSignedCert": alaAaaTlsSelfSignedCert,
+       "alaAaaTlsSelfSignedCertFileName": alaAaaTlsSelfSignedCertFileName,
+       "alaAaaTlsSelfSignedCertKeyFileName": alaAaaTlsSelfSignedCertKeyFileName,
+       "alaAaaTlsSelfSignedCertValidPeriod": alaAaaTlsSelfSignedCertValidPeriod,
+       "alaAaaTlsSelfSignedCertCommonName": alaAaaTlsSelfSignedCertCommonName,
+       "alaAaaTlsSelfSignedCertOrgName": alaAaaTlsSelfSignedCertOrgName,
+       "alaAaaTlsSelfSignedCertOrgUnit": alaAaaTlsSelfSignedCertOrgUnit,
+       "alaAaaTlsSelfSignedCertLocality": alaAaaTlsSelfSignedCertLocality,
+       "alaAaaTlsSelfSignedCertState": alaAaaTlsSelfSignedCertState,
+       "alaAaaTlsSelfSignedCertCountry": alaAaaTlsSelfSignedCertCountry,
+       "alaAaaTlsSelfSignedCertAction": alaAaaTlsSelfSignedCertAction,
+       "alaAaaTlsCsr": alaAaaTlsCsr,
+       "alaAaaTlsCsrFileName": alaAaaTlsCsrFileName,
+       "alaAaaTlsCsrKeyFileName": alaAaaTlsCsrKeyFileName,
+       "alaAaaTlsCsrCommonName": alaAaaTlsCsrCommonName,
+       "alaAaaTlsCsrOrgName": alaAaaTlsCsrOrgName,
+       "alaAaaTlsCsrOrgUnit": alaAaaTlsCsrOrgUnit,
+       "alaAaaTlsCsrLocality": alaAaaTlsCsrLocality,
+       "alaAaaTlsCsrState": alaAaaTlsCsrState,
+       "alaAaaTlsCsrCountry": alaAaaTlsCsrCountry,
+       "aaaUNPLldpRuleConfig": aaaUNPLldpRuleConfig,
+       "aaaUNPLldpRuleProfileName": aaaUNPLldpRuleProfileName,
+       "alaAaaRadClientGlobalAttr": alaAaaRadClientGlobalAttr,
+       "alaAaaRadNasIdentifier": alaAaaRadNasIdentifier,
+       "alaAaaRadClientNasIpAddr": alaAaaRadClientNasIpAddr,
+       "alaAaaRadNasIpState": alaAaaRadNasIpState,
+       "alaAaaRadNasIpField": alaAaaRadNasIpField,
        "alcatelIND1AAAMIBConformance": alcatelIND1AAAMIBConformance,
        "alcatelIND1AAAMIBGroups": alcatelIND1AAAMIBGroups,
        "aaaServerMIBGroup": aaaServerMIBGroup,
@@ -4272,11 +7327,37 @@ mibBuilder.exportSymbols(
        "aaaUserMIBGroup": aaaUserMIBGroup,
        "aaaHicGroup": aaaHicGroup,
        "aaaTrapsGroup": aaaTrapsGroup,
+       "aaaVlanGroup": aaaVlanGroup,
+       "aaaUNPMacRangeRuleGroup": aaaUNPMacRangeRuleGroup,
+       "aaaUNPMacRuleGroup": aaaUNPMacRuleGroup,
+       "aaaUserNetProfileGroup": aaaUserNetProfileGroup,
+       "aaaAuthenticatedUserGroup": aaaAuthenticatedUserGroup,
+       "aaaAuthFailureTrapGroup": aaaAuthFailureTrapGroup,
+       "aaaRedirectGroup": aaaRedirectGroup,
        "alcatelIND1AAAMIBCompliances": alcatelIND1AAAMIBCompliances,
        "alcatelIND1AAAMIBCompliance": alcatelIND1AAAMIBCompliance,
        "alaAaaTrapsDesc": alaAaaTrapsDesc,
        "alaAaaTrapsDescRoot": alaAaaTrapsDescRoot,
        "aaaHicServerTrap": aaaHicServerTrap,
+       "aaaHicServerChangeTrap": aaaHicServerChangeTrap,
+       "aaaHicServerUpTrap": aaaHicServerUpTrap,
        "alaAaaTrapsObj": alaAaaTrapsObj,
-       "aaaHSvrIpAddress": aaaHSvrIpAddress}
+       "aaaHSvrIpAddress": aaaHSvrIpAddress,
+       "aaaHSvrCurrIpAddress": aaaHSvrCurrIpAddress,
+       "aaaHSvrRole": aaaHSvrRole,
+       "aaaHSvrName": aaaHSvrName,
+       "alaAaaAuthTrapsDesc": alaAaaAuthTrapsDesc,
+       "alaAaaAuthTrapsDescRoot": alaAaaAuthTrapsDescRoot,
+       "aaaAuthenticationFailureTrap": aaaAuthenticationFailureTrap,
+       "alaAaaAuthTrapsObj": alaAaaAuthTrapsObj,
+       "aaaAuthSysName": aaaAuthSysName,
+       "aaaAuthIpAddress": aaaAuthIpAddress,
+       "aaaAuthPort": aaaAuthPort,
+       "aaaAuthUserName": aaaAuthUserName,
+       "aaaAuthType": aaaAuthType,
+       "aaaAuthFailureReason": aaaAuthFailureReason,
+       "alaAaaRadiusTrapsDesc": alaAaaRadiusTrapsDesc,
+       "alaAaaRadiusTrapsDescRoot": alaAaaRadiusTrapsDescRoot,
+       "aaaRadiusServerUpTrap": aaaRadiusServerUpTrap,
+       "aaaRadiusServerDownTrap": aaaRadiusServerDownTrap}
 )

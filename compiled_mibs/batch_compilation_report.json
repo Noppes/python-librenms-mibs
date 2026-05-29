@@ -1,14 +1,14 @@
 {
-  "timestamp": "2025-10-02T12:36:09.978554",
+  "timestamp": "2026-05-29T09:56:18.751208",
   "source_dir": "mibs",
   "output_dir": "compiled_mibs",
-  "total_time": 4937.537462,
+  "total_time": 2337.361547,
   "validate": false,
   "vendors": {
     "2n": {
       "vendor": "2n",
       "success": true,
-      "compile_time": 0.892603,
+      "compile_time": 0.787292,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -22,55 +22,39 @@
     "3com": {
       "vendor": "3com",
       "success": true,
-      "compile_time": 0.300095,
-      "files_moved": 1,
+      "compile_time": 1.002258,
+      "files_moved": 7,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 6,
+        "compiled": 4,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 2,
         "errors": []
       },
       "output_dir": "compiled_mibs\\3com"
     },
     "4rf": {
       "vendor": "4rf",
-      "success": false,
-      "compile_time": 4.107324,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 1.4144,
+      "files_moved": 5,
       "stats": {
         "total": 7,
-        "compiled": 0,
-        "failed": 7,
-        "skipped": 0,
+        "compiled": 1,
+        "failed": 3,
+        "skipped": 3,
         "errors": [
           {
             "mib": "APRISAXE-EVENTS-4RF",
-            "error": "missing"
+            "error": "unprocessed"
           },
           {
             "mib": "APRISAXE-MIB-4RF",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "APRISAXE-TC-4RF",
-            "error": "missing"
-          },
-          {
-            "mib": "COMMON-4RF",
-            "error": "missing"
-          },
-          {
-            "mib": "COMMON-TC-4RF",
-            "error": "missing"
-          },
-          {
-            "mib": "MIB-4RF",
-            "error": "missing"
-          },
-          {
-            "mib": "PRODUCTS-MIB-4RF",
-            "error": "missing"
+            "error": "failed"
           }
         ]
       },
@@ -79,7 +63,7 @@
     "a10": {
       "vendor": "a10",
       "success": true,
-      "compile_time": 3.061069,
+      "compile_time": 0.850889,
       "files_moved": 5,
       "stats": {
         "total": 3,
@@ -92,28 +76,23 @@
     },
     "abb": {
       "vendor": "abb",
-      "success": false,
-      "compile_time": 0.888214,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 0.899489,
+      "files_moved": 2,
       "stats": {
         "total": 1,
-        "compiled": 0,
-        "failed": 1,
+        "compiled": 1,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "ABBMODULARUPS-MIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\abb"
     },
     "accedian": {
       "vendor": "accedian",
       "success": true,
-      "compile_time": 9.951282,
-      "files_moved": 17,
+      "compile_time": 2.852915,
+      "files_moved": 26,
       "stats": {
         "total": 15,
         "compiled": 15,
@@ -126,11 +105,11 @@
     "adic": {
       "vendor": "adic",
       "success": true,
-      "compile_time": 0.324408,
-      "files_moved": 1,
+      "compile_time": 0.731489,
+      "files_moved": 4,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 3,
+        "compiled": 3,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -140,7 +119,7 @@
     "adtran": {
       "vendor": "adtran",
       "success": true,
-      "compile_time": 25.994618,
+      "compile_time": 4.302671,
       "files_moved": 38,
       "stats": {
         "total": 33,
@@ -153,13 +132,13 @@
     },
     "adva": {
       "vendor": "adva",
-      "success": false,
-      "compile_time": 144.6445,
-      "files_moved": 71,
+      "success": true,
+      "compile_time": 31.260197,
+      "files_moved": 74,
       "stats": {
-        "total": 56,
-        "compiled": 38,
-        "failed": 8,
+        "total": 59,
+        "compiled": 40,
+        "failed": 9,
         "skipped": 10,
         "errors": [
           {
@@ -173,6 +152,10 @@
           {
             "mib": "AOS-CORE-FACILITY-MIB",
             "error": "unprocessed"
+          },
+          {
+            "mib": "DEV-ID-MIB",
+            "error": "failed"
           },
           {
             "mib": "F3-BFD-MIB",
@@ -201,7 +184,7 @@
     "advantech": {
       "vendor": "advantech",
       "success": true,
-      "compile_time": 1.974818,
+      "compile_time": 0.752155,
       "files_moved": 4,
       "stats": {
         "total": 2,
@@ -214,8 +197,8 @@
     },
     "aerohive": {
       "vendor": "aerohive",
-      "success": false,
-      "compile_time": 3.401634,
+      "success": true,
+      "compile_time": 1.077035,
       "files_moved": 8,
       "stats": {
         "total": 5,
@@ -234,7 +217,7 @@
     "airport": {
       "vendor": "airport",
       "success": true,
-      "compile_time": 1.069701,
+      "compile_time": 0.34461,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -248,21 +231,64 @@
     "akcp": {
       "vendor": "akcp",
       "success": true,
-      "compile_time": 0.277619,
-      "files_moved": 1,
+      "compile_time": 1.199296,
+      "files_moved": 3,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
       },
       "output_dir": "compiled_mibs\\akcp"
     },
+    "alaxala": {
+      "vendor": "alaxala",
+      "success": true,
+      "compile_time": 9.31073,
+      "files_moved": 54,
+      "stats": {
+        "total": 40,
+        "compiled": 31,
+        "failed": 7,
+        "skipped": 2,
+        "errors": [
+          {
+            "mib": "AX-SMC-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "AX1240S",
+            "error": "missing"
+          },
+          {
+            "mib": "AX2000R",
+            "error": "failed"
+          },
+          {
+            "mib": "AX3630S",
+            "error": "missing"
+          },
+          {
+            "mib": "AX6300S",
+            "error": "missing"
+          },
+          {
+            "mib": "AX7800R",
+            "error": "missing"
+          },
+          {
+            "mib": "AX7800S",
+            "error": "missing"
+          }
+        ]
+      },
+      "output_dir": "compiled_mibs\\alaxala"
+    },
     "alcatel": {
       "vendor": "alcatel",
       "success": true,
-      "compile_time": 2.613727,
+      "compile_time": 0.634994,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -276,7 +302,7 @@
     "alcoma": {
       "vendor": "alcoma",
       "success": true,
-      "compile_time": 1.127412,
+      "compile_time": 0.497532,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -290,7 +316,7 @@
     "algcom": {
       "vendor": "algcom",
       "success": true,
-      "compile_time": 1.782353,
+      "compile_time": 0.471704,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -303,17 +329,21 @@
     },
     "allied": {
       "vendor": "allied",
-      "success": false,
-      "compile_time": 26.818213,
-      "files_moved": 47,
+      "success": true,
+      "compile_time": 5.767828,
+      "files_moved": 48,
       "stats": {
-        "total": 34,
-        "compiled": 31,
-        "failed": 1,
+        "total": 36,
+        "compiled": 32,
+        "failed": 2,
         "skipped": 2,
         "errors": [
           {
             "mib": "AT-DOS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "AtiEdgeSwitch-MIB",
             "error": "failed"
           }
         ]
@@ -323,11 +353,11 @@
     "alpha": {
       "vendor": "alpha",
       "success": true,
-      "compile_time": 2.918997,
-      "files_moved": 6,
+      "compile_time": 1.787886,
+      "files_moved": 15,
       "stats": {
-        "total": 5,
-        "compiled": 4,
+        "total": 6,
+        "compiled": 5,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -337,7 +367,7 @@
     "alpineoe": {
       "vendor": "alpineoe",
       "success": true,
-      "compile_time": 2.378269,
+      "compile_time": 0.673396,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -350,14 +380,14 @@
     },
     "alteonos": {
       "vendor": "alteonos",
-      "success": false,
-      "compile_time": 0.995075,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 2.496556,
+      "files_moved": 10,
       "stats": {
-        "total": 1,
-        "compiled": 0,
+        "total": 10,
+        "compiled": 8,
         "failed": 1,
-        "skipped": 0,
+        "skipped": 1,
         "errors": [
           {
             "mib": "ALTEON-CHEETAH-SWITCH-MIB",
@@ -369,12 +399,12 @@
     },
     "alvarion": {
       "vendor": "alvarion",
-      "success": false,
-      "compile_time": 1.202913,
-      "files_moved": 2,
+      "success": true,
+      "compile_time": 1.242265,
+      "files_moved": 3,
       "stats": {
-        "total": 2,
-        "compiled": 1,
+        "total": 3,
+        "compiled": 2,
         "failed": 1,
         "skipped": 0,
         "errors": [
@@ -389,52 +419,49 @@
     "apc": {
       "vendor": "apc",
       "success": true,
-      "compile_time": 0.24753,
-      "files_moved": 1,
+      "compile_time": 2.745789,
+      "files_moved": 2,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
       },
       "output_dir": "compiled_mibs\\apc"
     },
+    "apc-cpdu": {
+      "vendor": "apc-cpdu",
+      "success": true,
+      "compile_time": 2.668072,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\apc-cpdu"
+    },
     "arbornet": {
       "vendor": "arbornet",
-      "success": false,
-      "compile_time": 2.033421,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 1.538125,
+      "files_moved": 10,
       "stats": {
         "total": 4,
-        "compiled": 0,
-        "failed": 4,
+        "compiled": 4,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "PEAKFLOW-DOS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "PEAKFLOW-SP-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "PEAKFLOW-TMS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "ARBOR-SMI",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\arbornet"
     },
     "arista": {
       "vendor": "arista",
       "success": true,
-      "compile_time": 6.697017,
+      "compile_time": 2.541353,
       "files_moved": 18,
       "stats": {
         "total": 8,
@@ -448,7 +475,7 @@
     "arraynetworks": {
       "vendor": "arraynetworks",
       "success": true,
-      "compile_time": 0.943826,
+      "compile_time": 0.586583,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -461,22 +488,18 @@
     },
     "arris": {
       "vendor": "arris",
-      "success": false,
-      "compile_time": 41.782124,
-      "files_moved": 31,
+      "success": true,
+      "compile_time": 13.277459,
+      "files_moved": 49,
       "stats": {
-        "total": 49,
-        "compiled": 21,
-        "failed": 22,
-        "skipped": 6,
+        "total": 50,
+        "compiled": 36,
+        "failed": 10,
+        "skipped": 4,
         "errors": [
           {
             "mib": "ARRIS-D5-ALARM-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-CHANNEL-MODE-LOG-MIB",
-            "error": "failed"
+            "error": "unprocessed"
           },
           {
             "mib": "ARRIS-D5-DTI-EXT-MIB",
@@ -484,58 +507,18 @@
           },
           {
             "mib": "ARRIS-D5-DVB-EIS-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-DVB-PSIG-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-ENT-CHASSIS-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-ENT-SENSOR-THRESH-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-IP-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-LICENSE-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-QAM-EXT-MIB",
-            "error": "failed"
+            "error": "unprocessed"
           },
           {
             "mib": "ARRIS-D5-QAM-MIB",
-            "error": "failed"
+            "error": "unprocessed"
           },
           {
             "mib": "ARRIS-D5-QAM-POST-MIB",
-            "error": "failed"
+            "error": "unprocessed"
           },
           {
             "mib": "ARRIS-D5-SLOT-EXT-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-SOFTWARE-MGR-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-TEST-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-VIDEO-ERM-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-VIDEO-IP-BUNDLE-MIB",
             "error": "failed"
           },
           {
@@ -544,14 +527,10 @@
           },
           {
             "mib": "ARRIS-D5-VIDEO-SESSION-MIB",
-            "error": "failed"
+            "error": "unprocessed"
           },
           {
-            "mib": "ARRIS-D5-VIDEO-VIF-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ARRIS-D5-WAN-POST-MIB",
+            "mib": "CADANT-CMTS-EQUIPMENT-MIB",
             "error": "failed"
           },
           {
@@ -564,8 +543,8 @@
     },
     "arubaos": {
       "vendor": "arubaos",
-      "success": false,
-      "compile_time": 19.734946,
+      "success": true,
+      "compile_time": 10.760102,
       "files_moved": 23,
       "stats": {
         "total": 25,
@@ -604,7 +583,7 @@
     "arubaos-cx": {
       "vendor": "arubaos-cx",
       "success": true,
-      "compile_time": 33.460609,
+      "compile_time": 10.8203,
       "files_moved": 47,
       "stats": {
         "total": 33,
@@ -618,7 +597,7 @@
     "ascom": {
       "vendor": "ascom",
       "success": true,
-      "compile_time": 1.640882,
+      "compile_time": 0.896686,
       "files_moved": 5,
       "stats": {
         "total": 1,
@@ -632,7 +611,7 @@
     "asentria": {
       "vendor": "asentria",
       "success": true,
-      "compile_time": 5.503377,
+      "compile_time": 3.721485,
       "files_moved": 7,
       "stats": {
         "total": 6,
@@ -646,11 +625,11 @@
     "aten": {
       "vendor": "aten",
       "success": true,
-      "compile_time": 0.248329,
-      "files_moved": 1,
+      "compile_time": 0.982236,
+      "files_moved": 4,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -660,11 +639,11 @@
     "ats": {
       "vendor": "ats",
       "success": true,
-      "compile_time": 0.245158,
-      "files_moved": 1,
+      "compile_time": 0.681128,
+      "files_moved": 3,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -673,23 +652,15 @@
     },
     "audiocodes": {
       "vendor": "audiocodes",
-      "success": false,
-      "compile_time": 20.104428,
-      "files_moved": 19,
+      "success": true,
+      "compile_time": 8.011011,
+      "files_moved": 27,
       "stats": {
-        "total": 31,
-        "compiled": 10,
-        "failed": 21,
-        "skipped": 0,
+        "total": 28,
+        "compiled": 24,
+        "failed": 3,
+        "skipped": 1,
         "errors": [
-          {
-            "mib": "AcAlarm",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-ANALOG-MIB",
-            "error": "failed"
-          },
           {
             "mib": "AC-CONTROL-MIB",
             "error": "failed"
@@ -699,72 +670,8 @@
             "error": "failed"
           },
           {
-            "mib": "AC-ModularGW-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-Analog-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-ATM-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-Control-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-Media-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-MediaServer-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-PSTN-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-SS7-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PM-System-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-PSTN-MIB",
+            "mib": "AclV5",
             "error": "failed"
-          },
-          {
-            "mib": "AC-QOS-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "AC-SS7-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "AC-SYSTEM-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "AUDIOCODES-TYPES-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "AC-V5-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "AcGateway",
-            "error": "failed"
-          },
-          {
-            "mib": "RTCPXR-MIB",
-            "error": "missing"
           }
         ]
       },
@@ -773,13 +680,13 @@
     "avaya": {
       "vendor": "avaya",
       "success": true,
-      "compile_time": 5.644359,
+      "compile_time": 2.277501,
       "files_moved": 14,
       "stats": {
-        "total": 5,
+        "total": 6,
         "compiled": 5,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 1,
         "errors": []
       },
       "output_dir": "compiled_mibs\\avaya"
@@ -787,13 +694,13 @@
     "aviat-wtm": {
       "vendor": "aviat-wtm",
       "success": true,
-      "compile_time": 0.252951,
-      "files_moved": 1,
+      "compile_time": 2.500593,
+      "files_moved": 15,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 9,
+        "compiled": 6,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 3,
         "errors": []
       },
       "output_dir": "compiled_mibs\\aviat-wtm"
@@ -801,7 +708,7 @@
     "avocent": {
       "vendor": "avocent",
       "success": true,
-      "compile_time": 2.590393,
+      "compile_time": 1.105941,
       "files_moved": 6,
       "stats": {
         "total": 2,
@@ -815,21 +722,26 @@
     "avtech": {
       "vendor": "avtech",
       "success": true,
-      "compile_time": 8.781389,
+      "compile_time": 2.599357,
       "files_moved": 13,
       "stats": {
-        "total": 12,
+        "total": 13,
         "compiled": 12,
-        "failed": 0,
+        "failed": 1,
         "skipped": 0,
-        "errors": []
+        "errors": [
+          {
+            "mib": "ROOMALERT12S-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\avtech"
     },
     "awplus": {
       "vendor": "awplus",
       "success": true,
-      "compile_time": 24.757124,
+      "compile_time": 7.362093,
       "files_moved": 40,
       "stats": {
         "total": 36,
@@ -843,7 +755,7 @@
     "axis": {
       "vendor": "axis",
       "success": true,
-      "compile_time": 1.500613,
+      "compile_time": 0.731148,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -856,8 +768,8 @@
     },
     "baicells": {
       "vendor": "baicells",
-      "success": false,
-      "compile_time": 0.663993,
+      "success": true,
+      "compile_time": 0.587532,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -876,7 +788,7 @@
     "barco": {
       "vendor": "barco",
       "success": true,
-      "compile_time": 0.835796,
+      "compile_time": 0.491452,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -890,7 +802,7 @@
     "barracuda": {
       "vendor": "barracuda",
       "success": true,
-      "compile_time": 1.893453,
+      "compile_time": 0.856715,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -904,7 +816,7 @@
     "bats": {
       "vendor": "bats",
       "success": true,
-      "compile_time": 0.861184,
+      "compile_time": 0.518858,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -917,8 +829,8 @@
     },
     "bdcom": {
       "vendor": "bdcom",
-      "success": false,
-      "compile_time": 7.671915,
+      "success": true,
+      "compile_time": 3.704979,
       "files_moved": 10,
       "stats": {
         "total": 15,
@@ -961,7 +873,7 @@
     "benuos": {
       "vendor": "benuos",
       "success": true,
-      "compile_time": 16.556562,
+      "compile_time": 5.220477,
       "files_moved": 25,
       "stats": {
         "total": 21,
@@ -974,8 +886,8 @@
     },
     "bintec": {
       "vendor": "bintec",
-      "success": false,
-      "compile_time": 3.235409,
+      "success": true,
+      "compile_time": 1.343849,
       "files_moved": 1,
       "stats": {
         "total": 4,
@@ -1001,8 +913,8 @@
     },
     "bison": {
       "vendor": "bison",
-      "success": false,
-      "compile_time": 0.672594,
+      "success": true,
+      "compile_time": 0.73296,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1021,7 +933,7 @@
     "bke": {
       "vendor": "bke",
       "success": true,
-      "compile_time": 1.334551,
+      "compile_time": 0.649417,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -1035,11 +947,11 @@
     "bktel": {
       "vendor": "bktel",
       "success": true,
-      "compile_time": 1.728619,
-      "files_moved": 3,
+      "compile_time": 1.640519,
+      "files_moved": 7,
       "stats": {
-        "total": 2,
-        "compiled": 2,
+        "total": 6,
+        "compiled": 6,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -1049,7 +961,7 @@
     "bladeshelter": {
       "vendor": "bladeshelter",
       "success": true,
-      "compile_time": 1.227389,
+      "compile_time": 0.624707,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1063,7 +975,7 @@
     "bluecatnetworks": {
       "vendor": "bluecatnetworks",
       "success": true,
-      "compile_time": 10.020734,
+      "compile_time": 3.239788,
       "files_moved": 14,
       "stats": {
         "total": 13,
@@ -1077,7 +989,7 @@
     "bluecoat": {
       "vendor": "bluecoat",
       "success": true,
-      "compile_time": 11.413364,
+      "compile_time": 4.146323,
       "files_moved": 26,
       "stats": {
         "total": 15,
@@ -1091,7 +1003,7 @@
     "broadworks": {
       "vendor": "broadworks",
       "success": true,
-      "compile_time": 2.867987,
+      "compile_time": 1.758003,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -1104,9 +1016,9 @@
     },
     "brocade": {
       "vendor": "brocade",
-      "success": false,
-      "compile_time": 47.606907,
-      "files_moved": 61,
+      "success": true,
+      "compile_time": 16.371318,
+      "files_moved": 54,
       "stats": {
         "total": 47,
         "compiled": 31,
@@ -1132,7 +1044,7 @@
     "brother": {
       "vendor": "brother",
       "success": true,
-      "compile_time": 1.668506,
+      "compile_time": 1.016243,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -1146,7 +1058,7 @@
     "bti": {
       "vendor": "bti",
       "success": true,
-      "compile_time": 5.470005,
+      "compile_time": 1.89765,
       "files_moved": 10,
       "stats": {
         "total": 5,
@@ -1159,14 +1071,14 @@
     },
     "calix": {
       "vendor": "calix",
-      "success": false,
-      "compile_time": 44.208141,
-      "files_moved": 36,
+      "success": true,
+      "compile_time": 16.762453,
+      "files_moved": 41,
       "stats": {
-        "total": 34,
-        "compiled": 20,
-        "failed": 11,
-        "skipped": 3,
+        "total": 38,
+        "compiled": 21,
+        "failed": 12,
+        "skipped": 5,
         "errors": [
           {
             "mib": "AE-ALARM-TABLE-MIB",
@@ -1181,15 +1093,15 @@
             "error": "failed"
           },
           {
-            "mib": "CALIX-EOAM-EXT-MIB",
-            "error": "missing"
-          },
-          {
             "mib": "E5-120-AS-ATM-MIB",
             "error": "failed"
           },
           {
             "mib": "E5-120-IESCOMMON-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "E5-120-MIB",
             "error": "failed"
           },
           {
@@ -1202,6 +1114,10 @@
           },
           {
             "mib": "E5-121-IESCOMMON-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "E5-121-MIB",
             "error": "failed"
           },
           {
@@ -1218,19 +1134,15 @@
     },
     "cambium": {
       "vendor": "cambium",
-      "success": false,
-      "compile_time": 16.4472,
-      "files_moved": 32,
+      "success": true,
+      "compile_time": 7.363298,
+      "files_moved": 33,
       "stats": {
-        "total": 21,
-        "compiled": 15,
-        "failed": 2,
-        "skipped": 4,
+        "total": 22,
+        "compiled": 16,
+        "failed": 1,
+        "skipped": 5,
         "errors": [
-          {
-            "mib": "CAMBIUM-PTP800-MIB",
-            "error": "failed"
-          },
           {
             "mib": "CAMBIUM-PTP800-MIB",
             "error": "failed"
@@ -1242,7 +1154,7 @@
     "carel": {
       "vendor": "carel",
       "success": true,
-      "compile_time": 3.468669,
+      "compile_time": 1.4971,
       "files_moved": 8,
       "stats": {
         "total": 4,
@@ -1256,11 +1168,11 @@
     "ccpower": {
       "vendor": "ccpower",
       "success": true,
-      "compile_time": 0.245649,
-      "files_moved": 1,
+      "compile_time": 0.589445,
+      "files_moved": 2,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -1269,18 +1181,26 @@
     },
     "cdata": {
       "vendor": "cdata",
-      "success": false,
-      "compile_time": 21.90921,
-      "files_moved": 27,
+      "success": true,
+      "compile_time": 10.297506,
+      "files_moved": 26,
       "stats": {
         "total": 30,
-        "compiled": 17,
-        "failed": 8,
-        "skipped": 5,
+        "compiled": 16,
+        "failed": 10,
+        "skipped": 4,
         "errors": [
           {
             "mib": "EDFA-oa-MIB",
             "error": "failed"
+          },
+          {
+            "mib": "FD-OLT-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "FD-ONU-MIB",
+            "error": "unprocessed"
           },
           {
             "mib": "FD-PERFORMANCE-MIB",
@@ -1316,8 +1236,8 @@
     },
     "ceraos": {
       "vendor": "ceraos",
-      "success": false,
-      "compile_time": 5.421695,
+      "success": true,
+      "compile_time": 2.685462,
       "files_moved": 7,
       "stats": {
         "total": 4,
@@ -1336,7 +1256,7 @@
     "cet": {
       "vendor": "cet",
       "success": true,
-      "compile_time": 1.371407,
+      "compile_time": 0.784622,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -1349,8 +1269,8 @@
     },
     "chatsworth": {
       "vendor": "chatsworth",
-      "success": false,
-      "compile_time": 0.895904,
+      "success": true,
+      "compile_time": 0.828104,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1369,7 +1289,7 @@
     "checkpoint": {
       "vendor": "checkpoint",
       "success": true,
-      "compile_time": 1.166888,
+      "compile_time": 1.128949,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1382,14 +1302,14 @@
     },
     "ciena": {
       "vendor": "ciena",
-      "success": false,
-      "compile_time": 65.244932,
-      "files_moved": 92,
+      "success": true,
+      "compile_time": 25.235794,
+      "files_moved": 101,
       "stats": {
         "total": 85,
-        "compiled": 66,
-        "failed": 7,
-        "skipped": 12,
+        "compiled": 70,
+        "failed": 2,
+        "skipped": 13,
         "errors": [
           {
             "mib": "CIENA-CES-IP-INTERFACE-MIB",
@@ -1398,26 +1318,6 @@
           {
             "mib": "CIENA-CES-TIME-SYNC-MIB",
             "error": "failed"
-          },
-          {
-            "mib": "WWP-LEOS-PORT-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "WWP-LEOS-PORT-XCVR-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "WWP-LEOS-SYSTEM-CONFIG-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "WWP-PRODUCTS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "WWP-SMI",
-            "error": "missing"
           }
         ]
       },
@@ -1425,8 +1325,8 @@
     },
     "cirpack": {
       "vendor": "cirpack",
-      "success": false,
-      "compile_time": 0.646559,
+      "success": true,
+      "compile_time": 0.511814,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1444,14 +1344,14 @@
     },
     "cisco": {
       "vendor": "cisco",
-      "success": false,
-      "compile_time": 310.795484,
-      "files_moved": 303,
+      "success": true,
+      "compile_time": 84.719388,
+      "files_moved": 306,
       "stats": {
-        "total": 270,
-        "compiled": 218,
-        "failed": 18,
-        "skipped": 34,
+        "total": 277,
+        "compiled": 222,
+        "failed": 20,
+        "skipped": 35,
         "errors": [
           {
             "mib": "CISCO-CLASS-BASED-QOS-MIB",
@@ -1475,6 +1375,14 @@
           },
           {
             "mib": "CISCO-LWAPP-DOT11-CLIENT-MIB",
+            "error": "unprocessed"
+          },
+          {
+            "mib": "CISCO-LWAPP-DOT11-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "CISCO-LWAPP-MOBILITY-EXT-MIB",
             "error": "unprocessed"
           },
           {
@@ -1531,31 +1439,22 @@
     },
     "citrix": {
       "vendor": "citrix",
-      "success": false,
-      "compile_time": 2.729449,
-      "files_moved": 4,
+      "success": true,
+      "compile_time": 1.640999,
+      "files_moved": 6,
       "stats": {
         "total": 4,
-        "compiled": 2,
-        "failed": 2,
+        "compiled": 4,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "NS-ROOT-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "MIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\citrix"
     },
     "comet": {
       "vendor": "comet",
       "success": true,
-      "compile_time": 1.10626,
+      "compile_time": 0.57111,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1568,8 +1467,8 @@
     },
     "comtrol": {
       "vendor": "comtrol",
-      "success": false,
-      "compile_time": 0.762559,
+      "success": true,
+      "compile_time": 0.675117,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1579,7 +1478,7 @@
         "errors": [
           {
             "mib": "COMTROL-ES8510-MIB",
-            "error": "missing"
+            "error": "failed"
           }
         ]
       },
@@ -1587,23 +1486,15 @@
     },
     "comware": {
       "vendor": "comware",
-      "success": false,
-      "compile_time": 171.118814,
-      "files_moved": 206,
+      "success": true,
+      "compile_time": 70.608058,
+      "files_moved": 301,
       "stats": {
-        "total": 186,
-        "compiled": 169,
-        "failed": 13,
-        "skipped": 4,
+        "total": 270,
+        "compiled": 254,
+        "failed": 5,
+        "skipped": 11,
         "errors": [
-          {
-            "mib": "HH3C-8021PAE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "HH3C-DHCPSNOOP-MIB",
-            "error": "unprocessed"
-          },
           {
             "mib": "HH3C-FC-ZONE-SERVER-MIB",
             "error": "unprocessed"
@@ -1617,45 +1508,35 @@
             "error": "unprocessed"
           },
           {
-            "mib": "HH3C-MPLS-BGP-VPN-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "HH3C-REDUNDANCY-POWER-MIB",
-            "error": "missing"
-          },
-          {
             "mib": "HH3C-RBAC-MIB",
             "error": "'int' object has no attribute 'split'"
           },
           {
             "mib": "HH3C-SPB-MIB",
             "error": "unprocessed"
-          },
-          {
-            "mib": "HH3C-LswARP-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "HH3C-LswDHCP-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "HH3C-LswMix-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "HH3C-LswSMON-MIB",
-            "error": "missing"
           }
         ]
       },
       "output_dir": "compiled_mibs\\comware"
     },
+    "conteg": {
+      "vendor": "conteg",
+      "success": true,
+      "compile_time": 0.536386,
+      "files_moved": 3,
+      "stats": {
+        "total": 2,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 1,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\conteg"
+    },
     "controlbox": {
       "vendor": "controlbox",
       "success": true,
-      "compile_time": 0.973823,
+      "compile_time": 0.486523,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1669,7 +1550,7 @@
     "corero": {
       "vendor": "corero",
       "success": true,
-      "compile_time": 4.235476,
+      "compile_time": 1.737378,
       "files_moved": 8,
       "stats": {
         "total": 7,
@@ -1683,7 +1564,7 @@
     "cradlepoint": {
       "vendor": "cradlepoint",
       "success": true,
-      "compile_time": 1.001278,
+      "compile_time": 0.481099,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1696,27 +1577,22 @@
     },
     "ctm": {
       "vendor": "ctm",
-      "success": false,
-      "compile_time": 1.523202,
-      "files_moved": 2,
+      "success": true,
+      "compile_time": 0.700644,
+      "files_moved": 3,
       "stats": {
         "total": 2,
-        "compiled": 1,
-        "failed": 1,
+        "compiled": 2,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "CTMMIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\ctm"
     },
     "cts": {
       "vendor": "cts",
-      "success": false,
-      "compile_time": 4.943404,
+      "success": true,
+      "compile_time": 2.820019,
       "files_moved": 7,
       "stats": {
         "total": 6,
@@ -1747,7 +1623,7 @@
     "cumulus": {
       "vendor": "cumulus",
       "success": true,
-      "compile_time": 3.217189,
+      "compile_time": 1.320927,
       "files_moved": 7,
       "stats": {
         "total": 3,
@@ -1760,8 +1636,8 @@
     },
     "cxr-networks": {
       "vendor": "cxr-networks",
-      "success": false,
-      "compile_time": 1.516508,
+      "success": true,
+      "compile_time": 0.891752,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1779,8 +1655,8 @@
     },
     "cyberoam": {
       "vendor": "cyberoam",
-      "success": false,
-      "compile_time": 0.64506,
+      "success": true,
+      "compile_time": 0.752799,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1799,7 +1675,7 @@
     "cyberpower": {
       "vendor": "cyberpower",
       "success": true,
-      "compile_time": 1.366085,
+      "compile_time": 0.787889,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1812,8 +1688,8 @@
     },
     "dahua": {
       "vendor": "dahua",
-      "success": false,
-      "compile_time": 0.692127,
+      "success": true,
+      "compile_time": 0.625504,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1832,7 +1708,7 @@
     "dantel": {
       "vendor": "dantel",
       "success": true,
-      "compile_time": 1.040997,
+      "compile_time": 0.775342,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1846,7 +1722,7 @@
     "dantherm": {
       "vendor": "dantherm",
       "success": true,
-      "compile_time": 1.080045,
+      "compile_time": 0.616446,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -1859,13 +1735,13 @@
     },
     "dasan": {
       "vendor": "dasan",
-      "success": false,
-      "compile_time": 83.456258,
-      "files_moved": 82,
+      "success": true,
+      "compile_time": 36.982596,
+      "files_moved": 83,
       "stats": {
-        "total": 82,
-        "compiled": 57,
-        "failed": 22,
+        "total": 84,
+        "compiled": 58,
+        "failed": 23,
         "skipped": 3,
         "errors": [
           {
@@ -1917,6 +1793,10 @@
             "error": "failed"
           },
           {
+            "mib": "DASAN-SWITCH-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "DASAN-THRESHOLD-MIB",
             "error": "failed"
           },
@@ -1962,8 +1842,8 @@
     },
     "dataaire": {
       "vendor": "dataaire",
-      "success": false,
-      "compile_time": 0.69373,
+      "success": true,
+      "compile_time": 0.621762,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -1982,7 +1862,7 @@
     "datacom": {
       "vendor": "datacom",
       "success": true,
-      "compile_time": 6.037904,
+      "compile_time": 3.049126,
       "files_moved": 16,
       "stats": {
         "total": 5,
@@ -1996,7 +1876,7 @@
     "datadomain": {
       "vendor": "datadomain",
       "success": true,
-      "compile_time": 0.241146,
+      "compile_time": 0.012562,
       "files_moved": 1,
       "stats": {
         "total": 0,
@@ -2010,7 +1890,7 @@
     "dataprobe": {
       "vendor": "dataprobe",
       "success": true,
-      "compile_time": 0.847757,
+      "compile_time": 0.716233,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -2023,8 +1903,8 @@
     },
     "dcn": {
       "vendor": "dcn",
-      "success": false,
-      "compile_time": 0.743747,
+      "success": true,
+      "compile_time": 0.899476,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -2043,7 +1923,7 @@
     "ddn": {
       "vendor": "ddn",
       "success": true,
-      "compile_time": 1.038851,
+      "compile_time": 0.765525,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -2056,8 +1936,8 @@
     },
     "deliberant": {
       "vendor": "deliberant",
-      "success": false,
-      "compile_time": 3.869456,
+      "success": true,
+      "compile_time": 1.873785,
       "files_moved": 8,
       "stats": {
         "total": 5,
@@ -2075,13 +1955,13 @@
     },
     "dell": {
       "vendor": "dell",
-      "success": false,
-      "compile_time": 50.446019,
-      "files_moved": 69,
+      "success": true,
+      "compile_time": 21.069522,
+      "files_moved": 71,
       "stats": {
-        "total": 59,
-        "compiled": 50,
-        "failed": 2,
+        "total": 62,
+        "compiled": 52,
+        "failed": 3,
         "skipped": 7,
         "errors": [
           {
@@ -2091,6 +1971,10 @@
           {
             "mib": "DELLEMC-OS10-CHASSIS-MIB",
             "error": "failed"
+          },
+          {
+            "mib": "FLUIDFS-MIB",
+            "error": "failed"
           }
         ]
       },
@@ -2099,7 +1983,7 @@
     "delta": {
       "vendor": "delta",
       "success": true,
-      "compile_time": 2.480283,
+      "compile_time": 1.436025,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -2113,7 +1997,7 @@
     "deltanet": {
       "vendor": "deltanet",
       "success": true,
-      "compile_time": 2.180327,
+      "compile_time": 1.186909,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -2127,7 +2011,7 @@
     "deva": {
       "vendor": "deva",
       "success": true,
-      "compile_time": 0.983963,
+      "compile_time": 0.776075,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -2140,8 +2024,8 @@
     },
     "digipower": {
       "vendor": "digipower",
-      "success": false,
-      "compile_time": 0.760325,
+      "success": true,
+      "compile_time": 0.920799,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -2159,8 +2043,8 @@
     },
     "dkt": {
       "vendor": "dkt",
-      "success": false,
-      "compile_time": 4.326973,
+      "success": true,
+      "compile_time": 2.338189,
       "files_moved": 7,
       "stats": {
         "total": 7,
@@ -2178,12 +2062,12 @@
     },
     "dlink": {
       "vendor": "dlink",
-      "success": false,
-      "compile_time": 105.260154,
-      "files_moved": 89,
+      "success": true,
+      "compile_time": 36.990016,
+      "files_moved": 92,
       "stats": {
-        "total": 79,
-        "compiled": 70,
+        "total": 82,
+        "compiled": 73,
         "failed": 5,
         "skipped": 4,
         "errors": [
@@ -2214,11 +2098,11 @@
     "dlink_dgs1250": {
       "vendor": "dlink_dgs1250",
       "success": true,
-      "compile_time": 3.172351,
+      "compile_time": 2.161879,
       "files_moved": 8,
       "stats": {
-        "total": 3,
-        "compiled": 3,
+        "total": 4,
+        "compiled": 4,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -2227,8 +2111,8 @@
     },
     "dpstelecom": {
       "vendor": "dpstelecom",
-      "success": false,
-      "compile_time": 6.244637,
+      "success": true,
+      "compile_time": 3.615535,
       "files_moved": 3,
       "stats": {
         "total": 5,
@@ -2255,7 +2139,7 @@
     "dragonwave": {
       "vendor": "dragonwave",
       "success": true,
-      "compile_time": 10.352597,
+      "compile_time": 5.271044,
       "files_moved": 14,
       "stats": {
         "total": 10,
@@ -2269,21 +2153,26 @@
     "eaton": {
       "vendor": "eaton",
       "success": true,
-      "compile_time": 7.110332,
-      "files_moved": 11,
+      "compile_time": 4.473708,
+      "files_moved": 12,
       "stats": {
-        "total": 9,
-        "compiled": 8,
-        "failed": 0,
+        "total": 11,
+        "compiled": 9,
+        "failed": 1,
         "skipped": 1,
-        "errors": []
+        "errors": [
+          {
+            "mib": "RPS-SC200-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\eaton"
     },
     "edfa": {
       "vendor": "edfa",
       "success": true,
-      "compile_time": 0.937795,
+      "compile_time": 0.617827,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -2296,9 +2185,9 @@
     },
     "edgecos": {
       "vendor": "edgecos",
-      "success": false,
-      "compile_time": 18.133635,
-      "files_moved": 24,
+      "success": true,
+      "compile_time": 10.70491,
+      "files_moved": 25,
       "stats": {
         "total": 11,
         "compiled": 4,
@@ -2340,7 +2229,7 @@
     "edgeswitch": {
       "vendor": "edgeswitch",
       "success": true,
-      "compile_time": 7.349542,
+      "compile_time": 3.63574,
       "files_moved": 16,
       "stats": {
         "total": 5,
@@ -2353,8 +2242,8 @@
     },
     "eds": {
       "vendor": "eds",
-      "success": false,
-      "compile_time": 0.687391,
+      "success": true,
+      "compile_time": 0.590867,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -2373,7 +2262,7 @@
     "efficientip": {
       "vendor": "efficientip",
       "success": true,
-      "compile_time": 2.302568,
+      "compile_time": 0.954712,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -2387,7 +2276,7 @@
     "ekinops": {
       "vendor": "ekinops",
       "success": true,
-      "compile_time": 2.223593,
+      "compile_time": 1.214314,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -2401,7 +2290,7 @@
     "eltek": {
       "vendor": "eltek",
       "success": true,
-      "compile_time": 3.105297,
+      "compile_time": 1.665633,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -2415,7 +2304,7 @@
     "eltex": {
       "vendor": "eltex",
       "success": true,
-      "compile_time": 7.63272,
+      "compile_time": 3.725698,
       "files_moved": 16,
       "stats": {
         "total": 4,
@@ -2429,7 +2318,7 @@
     "eltexmes21xx": {
       "vendor": "eltexmes21xx",
       "success": true,
-      "compile_time": 9.004836,
+      "compile_time": 5.234132,
       "files_moved": 20,
       "stats": {
         "total": 10,
@@ -2443,7 +2332,7 @@
     "eltexmes23xx": {
       "vendor": "eltexmes23xx",
       "success": true,
-      "compile_time": 11.940023,
+      "compile_time": 6.943376,
       "files_moved": 22,
       "stats": {
         "total": 12,
@@ -2457,7 +2346,7 @@
     "eltexmes24xx": {
       "vendor": "eltexmes24xx",
       "success": true,
-      "compile_time": 5.710981,
+      "compile_time": 3.463936,
       "files_moved": 10,
       "stats": {
         "total": 6,
@@ -2471,7 +2360,7 @@
     "emc": {
       "vendor": "emc",
       "success": true,
-      "compile_time": 1.09379,
+      "compile_time": 0.882835,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -2484,8 +2373,8 @@
     },
     "emerson": {
       "vendor": "emerson",
-      "success": false,
-      "compile_time": 1.614212,
+      "success": true,
+      "compile_time": 1.640119,
       "files_moved": 2,
       "stats": {
         "total": 3,
@@ -2507,27 +2396,22 @@
     },
     "endace": {
       "vendor": "endace",
-      "success": false,
-      "compile_time": 7.159167,
-      "files_moved": 11,
+      "success": true,
+      "compile_time": 4.447335,
+      "files_moved": 18,
       "stats": {
         "total": 11,
-        "compiled": 8,
-        "failed": 1,
+        "compiled": 9,
+        "failed": 0,
         "skipped": 2,
-        "errors": [
-          {
-            "mib": "IPFIX-MIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\endace"
     },
     "endrun": {
       "vendor": "endrun",
-      "success": false,
-      "compile_time": 1.952171,
+      "success": true,
+      "compile_time": 1.109579,
       "files_moved": 3,
       "stats": {
         "total": 3,
@@ -2545,8 +2429,8 @@
     },
     "enlogic": {
       "vendor": "enlogic",
-      "success": false,
-      "compile_time": 1.876117,
+      "success": true,
+      "compile_time": 1.054987,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -2565,7 +2449,7 @@
     "enterasys": {
       "vendor": "enterasys",
       "success": true,
-      "compile_time": 128.544316,
+      "compile_time": 46.944635,
       "files_moved": 135,
       "stats": {
         "total": 119,
@@ -2579,7 +2463,7 @@
     "equallogic": {
       "vendor": "equallogic",
       "success": true,
-      "compile_time": 11.977111,
+      "compile_time": 5.28751,
       "files_moved": 16,
       "stats": {
         "total": 8,
@@ -2593,7 +2477,7 @@
     "ericsson": {
       "vendor": "ericsson",
       "success": true,
-      "compile_time": 26.622502,
+      "compile_time": 8.407972,
       "files_moved": 38,
       "stats": {
         "total": 27,
@@ -2607,7 +2491,7 @@
     "esphome": {
       "vendor": "esphome",
       "success": true,
-      "compile_time": 2.527282,
+      "compile_time": 1.050625,
       "files_moved": 7,
       "stats": {
         "total": 2,
@@ -2621,7 +2505,7 @@
     "ewc": {
       "vendor": "ewc",
       "success": true,
-      "compile_time": 5.042528,
+      "compile_time": 1.983733,
       "files_moved": 10,
       "stats": {
         "total": 4,
@@ -2635,7 +2519,7 @@
     "exagrid": {
       "vendor": "exagrid",
       "success": true,
-      "compile_time": 1.908629,
+      "compile_time": 0.881646,
       "files_moved": 6,
       "stats": {
         "total": 1,
@@ -2649,7 +2533,7 @@
     "exalink-fusion": {
       "vendor": "exalink-fusion",
       "success": true,
-      "compile_time": 0.87844,
+      "compile_time": 0.441753,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -2663,7 +2547,7 @@
     "exalt": {
       "vendor": "exalt",
       "success": true,
-      "compile_time": 5.961927,
+      "compile_time": 2.503206,
       "files_moved": 9,
       "stats": {
         "total": 8,
@@ -2674,10 +2558,29 @@
       },
       "output_dir": "compiled_mibs\\exalt"
     },
+    "exeltech": {
+      "vendor": "exeltech",
+      "success": true,
+      "compile_time": 0.910562,
+      "files_moved": 1,
+      "stats": {
+        "total": 1,
+        "compiled": 0,
+        "failed": 1,
+        "skipped": 0,
+        "errors": [
+          {
+            "mib": "EXELTECH-XFERSW",
+            "error": "missing"
+          }
+        ]
+      },
+      "output_dir": "compiled_mibs\\exeltech"
+    },
     "extrahop": {
       "vendor": "extrahop",
       "success": true,
-      "compile_time": 0.860257,
+      "compile_time": 0.665157,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -2690,8 +2593,8 @@
     },
     "extreme": {
       "vendor": "extreme",
-      "success": false,
-      "compile_time": 52.566146,
+      "success": true,
+      "compile_time": 17.779517,
       "files_moved": 65,
       "stats": {
         "total": 51,
@@ -2710,7 +2613,7 @@
     "f5": {
       "vendor": "f5",
       "success": true,
-      "compile_time": 8.584597,
+      "compile_time": 4.882626,
       "files_moved": 10,
       "stats": {
         "total": 9,
@@ -2724,21 +2627,26 @@
     "fiberhome": {
       "vendor": "fiberhome",
       "success": true,
-      "compile_time": 5.360348,
+      "compile_time": 3.280352,
       "files_moved": 9,
       "stats": {
-        "total": 8,
+        "total": 9,
         "compiled": 7,
-        "failed": 0,
+        "failed": 1,
         "skipped": 1,
-        "errors": []
+        "errors": [
+          {
+            "mib": "GEPON-OLT-COMMON-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\fiberhome"
     },
     "fibernet": {
       "vendor": "fibernet",
-      "success": false,
-      "compile_time": 0.747706,
+      "success": true,
+      "compile_time": 0.776058,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -2756,30 +2664,18 @@
     },
     "fibrolan": {
       "vendor": "fibrolan",
-      "success": false,
-      "compile_time": 15.569633,
-      "files_moved": 21,
+      "success": true,
+      "compile_time": 6.36565,
+      "files_moved": 25,
       "stats": {
-        "total": 21,
-        "compiled": 15,
-        "failed": 4,
+        "total": 22,
+        "compiled": 19,
+        "failed": 1,
         "skipped": 2,
         "errors": [
           {
-            "mib": "FIBROLAN-MIB-DEVICECONVERTER",
-            "error": "missing"
-          },
-          {
-            "mib": "FIBROLAN-MIB-LTA41MA-V2",
-            "error": "missing"
-          },
-          {
-            "mib": "FIBROLAN-MIB-LTA41xE1-V2",
-            "error": "missing"
-          },
-          {
-            "mib": "FIBROLAN-MIB-METRO-STAR",
-            "error": "missing"
+            "mib": "FIBROLAN-MIB-MS-TRAPS",
+            "error": "failed"
           }
         ]
       },
@@ -2787,27 +2683,22 @@
     },
     "firebrick": {
       "vendor": "firebrick",
-      "success": false,
-      "compile_time": 7.207166,
-      "files_moved": 9,
+      "success": true,
+      "compile_time": 3.574427,
+      "files_moved": 10,
       "stats": {
         "total": 9,
-        "compiled": 7,
-        "failed": 1,
+        "compiled": 8,
+        "failed": 0,
         "skipped": 1,
-        "errors": [
-          {
-            "mib": "FIREBRICK-VOIP-MIB",
-            "error": "failed"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\firebrick"
     },
     "forcepoint": {
       "vendor": "forcepoint",
       "success": true,
-      "compile_time": 3.591693,
+      "compile_time": 1.917656,
       "files_moved": 6,
       "stats": {
         "total": 4,
@@ -2820,19 +2711,15 @@
     },
     "fortinet": {
       "vendor": "fortinet",
-      "success": false,
-      "compile_time": 37.64626,
-      "files_moved": 44,
+      "success": true,
+      "compile_time": 16.180898,
+      "files_moved": 45,
       "stats": {
         "total": 39,
-        "compiled": 35,
-        "failed": 2,
+        "compiled": 36,
+        "failed": 1,
         "skipped": 2,
         "errors": [
-          {
-            "mib": "FORTINET-FORTIMANAGER-FORTIANALYZER-MIB",
-            "error": "failed"
-          },
           {
             "mib": "MERU-WLAN-MIB",
             "error": "failed"
@@ -2844,7 +2731,7 @@
     "foundry": {
       "vendor": "foundry",
       "success": true,
-      "compile_time": 2.929275,
+      "compile_time": 1.161757,
       "files_moved": 7,
       "stats": {
         "total": 3,
@@ -2857,41 +2744,17 @@
     },
     "fs": {
       "vendor": "fs",
-      "success": false,
-      "compile_time": 106.540075,
-      "files_moved": 32,
+      "success": true,
+      "compile_time": 34.060596,
+      "files_moved": 35,
       "stats": {
-        "total": 75,
-        "compiled": 17,
-        "failed": 51,
+        "total": 79,
+        "compiled": 20,
+        "failed": 52,
         "skipped": 7,
         "errors": [
           {
-            "mib": "NMS-CARD-SYS-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "NMS-CHASSIS",
-            "error": "failed"
-          },
-          {
-            "mib": "NMS-EPON-OLT-PON",
-            "error": "failed"
-          },
-          {
-            "mib": "NMS-FAN-TRAP",
-            "error": "failed"
-          },
-          {
-            "mib": "NMS-GPON-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "NMS-OPTICAL-PORT-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "NMS-POWER-MIB",
+            "mib": "ADMIN-MASTER-MIB",
             "error": "failed"
           },
           {
@@ -2907,10 +2770,6 @@
             "error": "failed"
           },
           {
-            "mib": "FS-SWITCH-V2-MIB",
-            "error": "missing"
-          },
-          {
             "mib": "FS-SYSTEM-MIB",
             "error": "unprocessed"
           },
@@ -2924,6 +2783,10 @@
           },
           {
             "mib": "GBNDevicePoe-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "GBNDeviceSWAPI-MIB",
             "error": "failed"
           },
           {
@@ -2959,7 +2822,15 @@
             "error": "failed"
           },
           {
+            "mib": "GBNL3-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "GBNL3DhcpRelay-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "GBNL3IPPool-MIB",
             "error": "failed"
           },
           {
@@ -2968,10 +2839,6 @@
           },
           {
             "mib": "GBNL3Igmp-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "GBNL3IPPool-MIB",
             "error": "failed"
           },
           {
@@ -3055,15 +2922,39 @@
             "error": "failed"
           },
           {
+            "mib": "NMS-CARD-SYS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NMS-CHASSIS",
+            "error": "failed"
+          },
+          {
+            "mib": "NMS-EPON-OLT-PON",
+            "error": "failed"
+          },
+          {
+            "mib": "NMS-FAN-TRAP",
+            "error": "failed"
+          },
+          {
+            "mib": "NMS-GPON-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NMS-OPTICAL-PORT-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NMS-POWER-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "NSCRTV-EPON-IGMP-MGM-MIB",
             "error": "failed"
           },
           {
             "mib": "NSCRTV-EPON-SYSTEM-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "PIM-BSR-MIB",
             "error": "failed"
           },
           {
@@ -3077,11 +2968,11 @@
     "fujitsu": {
       "vendor": "fujitsu",
       "success": true,
-      "compile_time": 2.45049,
-      "files_moved": 2,
+      "compile_time": 1.05423,
+      "files_moved": 3,
       "stats": {
-        "total": 1,
-        "compiled": 1,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -3091,7 +2982,7 @@
     "gamatronic": {
       "vendor": "gamatronic",
       "success": true,
-      "compile_time": 1.887629,
+      "compile_time": 0.679836,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -3104,8 +2995,8 @@
     },
     "gandi": {
       "vendor": "gandi",
-      "success": false,
-      "compile_time": 1.230855,
+      "success": true,
+      "compile_time": 0.605785,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -3123,8 +3014,8 @@
     },
     "geist": {
       "vendor": "geist",
-      "success": false,
-      "compile_time": 2.909659,
+      "success": true,
+      "compile_time": 1.343762,
       "files_moved": 2,
       "stats": {
         "total": 2,
@@ -3143,13 +3034,13 @@
     "gemds": {
       "vendor": "gemds",
       "success": true,
-      "compile_time": 19.884508,
+      "compile_time": 4.383008,
       "files_moved": 16,
       "stats": {
-        "total": 11,
+        "total": 12,
         "compiled": 10,
         "failed": 0,
-        "skipped": 1,
+        "skipped": 2,
         "errors": []
       },
       "output_dir": "compiled_mibs\\gemds"
@@ -3157,7 +3048,7 @@
     "gepower": {
       "vendor": "gepower",
       "success": true,
-      "compile_time": 2.262009,
+      "compile_time": 0.812913,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -3171,7 +3062,7 @@
     "gigamon": {
       "vendor": "gigamon",
       "success": true,
-      "compile_time": 2.258897,
+      "compile_time": 0.559554,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -3184,8 +3075,8 @@
     },
     "glassway": {
       "vendor": "glassway",
-      "success": false,
-      "compile_time": 11.368118,
+      "success": true,
+      "compile_time": 1.745191,
       "files_moved": 9,
       "stats": {
         "total": 7,
@@ -3203,14 +3094,14 @@
     },
     "grandstream": {
       "vendor": "grandstream",
-      "success": false,
-      "compile_time": 3.953688,
-      "files_moved": 3,
+      "success": true,
+      "compile_time": 1.928045,
+      "files_moved": 8,
       "stats": {
-        "total": 4,
+        "total": 6,
         "compiled": 2,
         "failed": 2,
-        "skipped": 0,
+        "skipped": 2,
         "errors": [
           {
             "mib": "GRANDSTREAM-GWN-PRODUCTS-SWITCH-MIB",
@@ -3227,7 +3118,7 @@
     "greenbone": {
       "vendor": "greenbone",
       "success": true,
-      "compile_time": 1.641081,
+      "compile_time": 0.515629,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -3241,7 +3132,7 @@
     "gude": {
       "vendor": "gude",
       "success": true,
-      "compile_time": 3.242304,
+      "compile_time": 0.813385,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -3254,8 +3145,8 @@
     },
     "gwd": {
       "vendor": "gwd",
-      "success": false,
-      "compile_time": 3.770935,
+      "success": true,
+      "compile_time": 1.352647,
       "files_moved": 3,
       "stats": {
         "total": 3,
@@ -3274,7 +3165,7 @@
     "halon": {
       "vendor": "halon",
       "success": true,
-      "compile_time": 1.481853,
+      "compile_time": 0.421217,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -3288,7 +3179,7 @@
     "haproxy": {
       "vendor": "haproxy",
       "success": true,
-      "compile_time": 1.608663,
+      "compile_time": 0.603731,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -3301,8 +3192,8 @@
     },
     "hikvision": {
       "vendor": "hikvision",
-      "success": false,
-      "compile_time": 1.288061,
+      "success": true,
+      "compile_time": 0.602198,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -3320,8 +3211,8 @@
     },
     "hillstone": {
       "vendor": "hillstone",
-      "success": false,
-      "compile_time": 12.653368,
+      "success": true,
+      "compile_time": 4.01346,
       "files_moved": 1,
       "stats": {
         "total": 15,
@@ -3395,8 +3286,8 @@
     },
     "himoinsa": {
       "vendor": "himoinsa",
-      "success": false,
-      "compile_time": 2.84807,
+      "success": true,
+      "compile_time": 0.745214,
       "files_moved": 2,
       "stats": {
         "total": 2,
@@ -3415,11 +3306,11 @@
     "hirschmann": {
       "vendor": "hirschmann",
       "success": true,
-      "compile_time": 0.379717,
-      "files_moved": 1,
+      "compile_time": 1.631417,
+      "files_moved": 11,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -3429,7 +3320,7 @@
     "hitachi": {
       "vendor": "hitachi",
       "success": true,
-      "compile_time": 1.984143,
+      "compile_time": 0.71173,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -3442,41 +3333,17 @@
     },
     "hp": {
       "vendor": "hp",
-      "success": false,
-      "compile_time": 187.302761,
-      "files_moved": 48,
+      "success": true,
+      "compile_time": 37.72114,
+      "files_moved": 126,
       "stats": {
-        "total": 91,
-        "compiled": 36,
-        "failed": 50,
-        "skipped": 5,
+        "total": 98,
+        "compiled": 83,
+        "failed": 4,
+        "skipped": 11,
         "errors": [
           {
             "mib": "CONFIG-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-AUTZ-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-DOT1X-EXTENSIONS-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ENTITY-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-8023-RPTR",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-ARP-PROTECT",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-AUTORUN",
             "error": "failed"
           },
           {
@@ -3485,171 +3352,11 @@
           },
           {
             "mib": "HP-ICF-BRIDGE",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-CHAIN",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-CHASSIS",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-CONNECTION-RATE-FILTER",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-DOWNLOAD",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-FAULT-FINDER-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-GENERIC-RPTR",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-GPPC-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-INST-MON",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-IP-ROUTING",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-IPCONFIG",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-JUMBO-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-L3MAC-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-LINKTEST",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-MLD-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-OID",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-OSPF",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-PIM",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-POE-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-PROVIDER-BRIDGE",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-RATE-LIMIT-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-RIP",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-SECURITY",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-SNMP-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-STACK",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-TC",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-TRANSCEIVER-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-UDLD-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-UDP-FORWARD",
-            "error": "failed"
+            "error": "unprocessed"
           },
           {
             "mib": "HP-ICF-USER-PROFILE-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-VG-RPTR",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-VRRP-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-ICF-XRRP",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-SNTPclientConfiguration-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-STACK-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-SwitchStack-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-USER-AUTH",
-            "error": "failed"
-          },
-          {
-            "mib": "HP-VLAN",
-            "error": "failed"
-          },
-          {
-            "mib": "ICF-VG-RPTR",
-            "error": "failed"
-          },
-          {
-            "mib": "NETSWITCH-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "POWERSUPPLY-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "STATISTICS-MIB",
-            "error": "failed"
+            "error": "unprocessed"
           }
         ]
       },
@@ -3657,40 +3364,35 @@
     },
     "hpmsm": {
       "vendor": "hpmsm",
-      "success": false,
-      "compile_time": 46.809114,
-      "files_moved": 35,
+      "success": true,
+      "compile_time": 13.149242,
+      "files_moved": 37,
       "stats": {
         "total": 33,
-        "compiled": 27,
-        "failed": 2,
-        "skipped": 4,
-        "errors": [
-          {
-            "mib": "COLUBRIS-802DOT1X-ACCESS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "COLUBRIS-802DOT11-MIB",
-            "error": "missing"
-          }
-        ]
+        "compiled": 28,
+        "failed": 0,
+        "skipped": 5,
+        "errors": []
       },
       "output_dir": "compiled_mibs\\hpmsm"
     },
     "huawei": {
       "vendor": "huawei",
-      "success": false,
-      "compile_time": 460.16285,
+      "success": true,
+      "compile_time": 232.881904,
       "files_moved": 12,
       "stats": {
-        "total": 232,
+        "total": 240,
         "compiled": 10,
-        "failed": 221,
+        "failed": 229,
         "skipped": 1,
         "errors": [
           {
             "mib": "HUAWEI-AAA-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "HUAWEI-ACL-MIB",
             "error": "failed"
           },
           {
@@ -3830,6 +3532,10 @@
             "error": "failed"
           },
           {
+            "mib": "HUAWEI-CBQOS-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "HUAWEI-CCC-MIB",
             "error": "failed"
           },
@@ -3874,6 +3580,10 @@
             "error": "failed"
           },
           {
+            "mib": "HUAWEI-DHCP-SNOOPING-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "HUAWEI-DHCPR-MIB",
             "error": "failed"
           },
@@ -3891,6 +3601,10 @@
           },
           {
             "mib": "HUAWEI-DLDP-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "HUAWEI-E-TRUNK-MIB",
             "error": "failed"
           },
           {
@@ -4170,6 +3884,10 @@
             "error": "failed"
           },
           {
+            "mib": "HUAWEI-MPLS-EXTEND-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "HUAWEI-MPLSLDP-MIB",
             "error": "failed"
           },
@@ -4402,6 +4120,10 @@
             "error": "failed"
           },
           {
+            "mib": "HUAWEI-SYS-MAN-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "HUAWEI-SYSLOG-MIB",
             "error": "failed"
           },
@@ -4439,6 +4161,10 @@
           },
           {
             "mib": "HUAWEI-TUNNEL-TE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "HUAWEI-UNIMNG-MIB",
             "error": "failed"
           },
           {
@@ -4558,6 +4284,10 @@
             "error": "failed"
           },
           {
+            "mib": "HUAWEI-XQoS-MIB",
+            "error": "failed"
+          },
+          {
             "mib": "HWMUSA-DEV-MIB",
             "error": "failed"
           },
@@ -4577,24 +4307,43 @@
       },
       "output_dir": "compiled_mibs\\huawei"
     },
-    "hwg": {
-      "vendor": "hwg",
+    "hubersuhner": {
+      "vendor": "hubersuhner",
       "success": true,
-      "compile_time": 2.796043,
-      "files_moved": 5,
+      "compile_time": 0.904283,
+      "files_moved": 3,
       "stats": {
-        "total": 3,
-        "compiled": 3,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
+      },
+      "output_dir": "compiled_mibs\\hubersuhner"
+    },
+    "hwg": {
+      "vendor": "hwg",
+      "success": true,
+      "compile_time": 1.893089,
+      "files_moved": 6,
+      "stats": {
+        "total": 5,
+        "compiled": 4,
+        "failed": 1,
+        "skipped": 0,
+        "errors": [
+          {
+            "mib": "Perseus-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\hwg"
     },
     "hytera": {
       "vendor": "hytera",
       "success": true,
-      "compile_time": 1.131319,
+      "compile_time": 0.655675,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -4607,13 +4356,13 @@
     },
     "ibm": {
       "vendor": "ibm",
-      "success": false,
-      "compile_time": 59.681648,
-      "files_moved": 48,
+      "success": true,
+      "compile_time": 32.25589,
+      "files_moved": 58,
       "stats": {
-        "total": 49,
-        "compiled": 34,
-        "failed": 15,
+        "total": 55,
+        "compiled": 39,
+        "failed": 16,
         "skipped": 0,
         "errors": [
           {
@@ -4675,6 +4424,10 @@
           {
             "mib": "IBMIROCAUTH-MIB",
             "error": "failed"
+          },
+          {
+            "mib": "IMM-MIB",
+            "error": "failed"
           }
         ]
       },
@@ -4683,7 +4436,7 @@
     "icotera": {
       "vendor": "icotera",
       "success": true,
-      "compile_time": 2.440384,
+      "compile_time": 2.987007,
       "files_moved": 6,
       "stats": {
         "total": 2,
@@ -4696,8 +4449,8 @@
     },
     "icr-os": {
       "vendor": "icr-os",
-      "success": false,
-      "compile_time": 11.800969,
+      "success": true,
+      "compile_time": 7.425161,
       "files_moved": 8,
       "stats": {
         "total": 8,
@@ -4716,7 +4469,7 @@
     "ict": {
       "vendor": "ict",
       "success": true,
-      "compile_time": 3.645075,
+      "compile_time": 1.412298,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -4730,7 +4483,7 @@
     "ifotec": {
       "vendor": "ifotec",
       "success": true,
-      "compile_time": 1.486736,
+      "compile_time": 0.867158,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -4743,8 +4496,8 @@
     },
     "ignitenet": {
       "vendor": "ignitenet",
-      "success": false,
-      "compile_time": 1.489761,
+      "success": true,
+      "compile_time": 1.341545,
       "files_moved": 1,
       "stats": {
         "total": 2,
@@ -4767,7 +4520,7 @@
     "imco": {
       "vendor": "imco",
       "success": true,
-      "compile_time": 1.73275,
+      "compile_time": 0.945871,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -4780,8 +4533,8 @@
     },
     "infinera": {
       "vendor": "infinera",
-      "success": false,
-      "compile_time": 14.808984,
+      "success": true,
+      "compile_time": 8.608657,
       "files_moved": 3,
       "stats": {
         "total": 14,
@@ -4844,7 +4597,7 @@
     "infoblox": {
       "vendor": "infoblox",
       "success": true,
-      "compile_time": 3.006056,
+      "compile_time": 1.318873,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -4858,11 +4611,11 @@
     "infortrend": {
       "vendor": "infortrend",
       "success": true,
-      "compile_time": 0.248267,
-      "files_moved": 1,
+      "compile_time": 0.838439,
+      "files_moved": 2,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -4872,11 +4625,11 @@
     "ingrasys": {
       "vendor": "ingrasys",
       "success": true,
-      "compile_time": 0.25468,
-      "files_moved": 1,
+      "compile_time": 1.350169,
+      "files_moved": 4,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -4886,7 +4639,7 @@
     "innovaphone": {
       "vendor": "innovaphone",
       "success": true,
-      "compile_time": 1.740089,
+      "compile_time": 0.916724,
       "files_moved": 5,
       "stats": {
         "total": 1,
@@ -4900,7 +4653,7 @@
     "inovonics": {
       "vendor": "inovonics",
       "success": true,
-      "compile_time": 1.529868,
+      "compile_time": 0.861606,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -4914,7 +4667,7 @@
     "inteno": {
       "vendor": "inteno",
       "success": true,
-      "compile_time": 0.921393,
+      "compile_time": 0.690206,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -4928,7 +4681,7 @@
     "ionodes": {
       "vendor": "ionodes",
       "success": true,
-      "compile_time": 0.867999,
+      "compile_time": 0.50143,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -4942,7 +4695,7 @@
     "ipinfusion": {
       "vendor": "ipinfusion",
       "success": true,
-      "compile_time": 2.984743,
+      "compile_time": 1.575667,
       "files_moved": 5,
       "stats": {
         "total": 3,
@@ -4955,8 +4708,8 @@
     },
     "iqnos": {
       "vendor": "iqnos",
-      "success": false,
-      "compile_time": 10.802536,
+      "success": true,
+      "compile_time": 5.377323,
       "files_moved": 2,
       "stats": {
         "total": 7,
@@ -4995,7 +4748,7 @@
     "ixia": {
       "vendor": "ixia",
       "success": true,
-      "compile_time": 2.086138,
+      "compile_time": 1.155773,
       "files_moved": 6,
       "stats": {
         "total": 1,
@@ -5009,7 +4762,7 @@
     "ixsystems": {
       "vendor": "ixsystems",
       "success": true,
-      "compile_time": 1.392105,
+      "compile_time": 0.741862,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -5023,11 +4776,11 @@
     "jacarta": {
       "vendor": "jacarta",
       "success": true,
-      "compile_time": 0.301004,
-      "files_moved": 1,
+      "compile_time": 0.674525,
+      "files_moved": 2,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -5037,7 +4790,7 @@
     "janitza": {
       "vendor": "janitza",
       "success": true,
-      "compile_time": 2.190128,
+      "compile_time": 1.024586,
       "files_moved": 4,
       "stats": {
         "total": 2,
@@ -5051,82 +4804,29 @@
     "juniper": {
       "vendor": "juniper",
       "success": true,
-      "compile_time": 9.362836,
-      "files_moved": 14,
+      "compile_time": 135.251167,
+      "files_moved": 339,
       "stats": {
-        "total": 13,
-        "compiled": 7,
-        "failed": 0,
-        "skipped": 6,
-        "errors": []
-      },
-      "output_dir": "compiled_mibs\\juniper"
-    },
-    "junos": {
-      "vendor": "junos",
-      "success": false,
-      "compile_time": 184.495745,
-      "files_moved": 227,
-      "stats": {
-        "total": 194,
-        "compiled": 164,
-        "failed": 5,
+        "total": 302,
+        "compiled": 268,
+        "failed": 9,
         "skipped": 25,
-        "errors": [
-          {
-            "mib": "GGSN-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "JUNIPER-TLB-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "JUNIPER-USERFIREWALL-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "JUNIPER-WIRELESS-WAN-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "JUNIPER-WLAN-WAP-MIB",
-            "error": "failed"
-          }
-        ]
-      },
-      "output_dir": "compiled_mibs\\junos"
-    },
-    "junose": {
-      "vendor": "junose",
-      "success": false,
-      "compile_time": 159.60424,
-      "files_moved": 185,
-      "stats": {
-        "total": 170,
-        "compiled": 145,
-        "failed": 10,
-        "skipped": 15,
         "errors": [
           {
             "mib": "APS-MIB-JUNI",
             "error": "failed"
           },
           {
-            "mib": "Juniper-Accounting-CONF",
-            "error": "failed"
-          },
-          {
-            "mib": "Juniper-ATM-1483-Profile-CONF",
-            "error": "failed"
-          },
-          {
-            "mib": "Juniper-Internet-CONF",
-            "error": "failed"
-          },
-          {
             "mib": "DVMRP-STD-MIB-JUNI",
             "error": "failed"
+          },
+          {
+            "mib": "GGSN-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "JUNIPER-BFD-MIB",
+            "error": "unprocessed"
           },
           {
             "mib": "Juniper-ACCOUNTING-MIB",
@@ -5150,12 +4850,12 @@
           }
         ]
       },
-      "output_dir": "compiled_mibs\\junose"
+      "output_dir": "compiled_mibs\\juniper"
     },
     "kemp": {
       "vendor": "kemp",
       "success": true,
-      "compile_time": 2.339597,
+      "compile_time": 1.193921,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -5169,7 +4869,7 @@
     "lancom": {
       "vendor": "lancom",
       "success": true,
-      "compile_time": 11.320162,
+      "compile_time": 8.867327,
       "files_moved": 16,
       "stats": {
         "total": 4,
@@ -5183,7 +4883,7 @@
     "lantronix": {
       "vendor": "lantronix",
       "success": true,
-      "compile_time": 1.910529,
+      "compile_time": 1.273639,
       "files_moved": 4,
       "stats": {
         "total": 2,
@@ -5196,14 +4896,14 @@
     },
     "lenovo": {
       "vendor": "lenovo",
-      "success": false,
-      "compile_time": 4.847221,
+      "success": true,
+      "compile_time": 3.684471,
       "files_moved": 9,
       "stats": {
-        "total": 5,
+        "total": 6,
         "compiled": 3,
         "failed": 1,
-        "skipped": 1,
+        "skipped": 2,
         "errors": [
           {
             "mib": "LENOVO-PRODUCTS-MIB",
@@ -5213,73 +4913,43 @@
       },
       "output_dir": "compiled_mibs\\lenovo"
     },
-    "liebert": {
-      "vendor": "liebert",
-      "success": false,
-      "compile_time": 10.947754,
-      "files_moved": 1,
+    "librenms": {
+      "vendor": "librenms",
+      "success": true,
+      "compile_time": 1.157901,
+      "files_moved": 2,
       "stats": {
-        "total": 12,
-        "compiled": 0,
-        "failed": 12,
+        "total": 2,
+        "compiled": 1,
+        "failed": 1,
         "skipped": 0,
         "errors": [
           {
-            "mib": "LIEBERT-GP-AGENT-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "LIEBERT-GP-CONDITIONS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "LIEBERT-GP-CONTROLLER-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "LIEBERT-GP-ENVIRONMENTAL-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "LIEBERT-GP-FLEXIBLE-CONDITIONS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "LIEBERT-GP-FLEXIBLE-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "LIEBERT-GP-NOTIFICATIONS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "LIEBERT-GP-PDU-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "LIEBERT-GP-POWER-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "LIEBERT-GP-REGISTRATION-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "LIEBERT-GP-SRC-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "LIEBERT-GP-SYSTEM-MIB",
+            "mib": "XCP-NG-VMINFO-MIB",
             "error": "failed"
           }
         ]
+      },
+      "output_dir": "compiled_mibs\\librenms"
+    },
+    "liebert": {
+      "vendor": "liebert",
+      "success": true,
+      "compile_time": 6.703958,
+      "files_moved": 14,
+      "stats": {
+        "total": 12,
+        "compiled": 10,
+        "failed": 0,
+        "skipped": 2,
+        "errors": []
       },
       "output_dir": "compiled_mibs\\liebert"
     },
     "ligoos": {
       "vendor": "ligoos",
       "success": true,
-      "compile_time": 2.012006,
+      "compile_time": 1.368922,
       "files_moved": 6,
       "stats": {
         "total": 2,
@@ -5292,8 +4962,8 @@
     },
     "linksys": {
       "vendor": "linksys",
-      "success": false,
-      "compile_time": 97.634138,
+      "success": true,
+      "compile_time": 41.97638,
       "files_moved": 109,
       "stats": {
         "total": 80,
@@ -5320,7 +4990,7 @@
     "logmaster": {
       "vendor": "logmaster",
       "success": true,
-      "compile_time": 1.343033,
+      "compile_time": 0.539033,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5334,7 +5004,7 @@
     "loop-telecom": {
       "vendor": "loop-telecom",
       "success": true,
-      "compile_time": 4.364878,
+      "compile_time": 3.643575,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5348,7 +5018,7 @@
     "maipu": {
       "vendor": "maipu",
       "success": true,
-      "compile_time": 1.612283,
+      "compile_time": 1.007037,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -5359,10 +5029,24 @@
       },
       "output_dir": "compiled_mibs\\maipu"
     },
+    "majorpower": {
+      "vendor": "majorpower",
+      "success": true,
+      "compile_time": 0.587842,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\majorpower"
+    },
     "mcafee": {
       "vendor": "mcafee",
       "success": true,
-      "compile_time": 1.817377,
+      "compile_time": 1.091983,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -5373,38 +5057,85 @@
       },
       "output_dir": "compiled_mibs\\mcafee"
     },
+    "megatec": {
+      "vendor": "megatec",
+      "success": true,
+      "compile_time": 0.775468,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\megatec"
+    },
     "meinberg": {
       "vendor": "meinberg",
       "success": true,
-      "compile_time": 3.62238,
-      "files_moved": 6,
+      "compile_time": 3.042488,
+      "files_moved": 8,
       "stats": {
-        "total": 5,
-        "compiled": 4,
+        "total": 6,
+        "compiled": 5,
         "failed": 0,
         "skipped": 1,
         "errors": []
       },
       "output_dir": "compiled_mibs\\meinberg"
     },
+    "metaswitch": {
+      "vendor": "metaswitch",
+      "success": true,
+      "compile_time": 0.747202,
+      "files_moved": 1,
+      "stats": {
+        "total": 1,
+        "compiled": 0,
+        "failed": 1,
+        "skipped": 0,
+        "errors": [
+          {
+            "mib": "METASWITCH-MIB",
+            "error": "failed"
+          }
+        ]
+      },
+      "output_dir": "compiled_mibs\\metaswitch"
+    },
     "microsemi": {
       "vendor": "microsemi",
       "success": true,
-      "compile_time": 2.342472,
-      "files_moved": 4,
+      "compile_time": 1.983328,
+      "files_moved": 5,
       "stats": {
-        "total": 3,
-        "compiled": 3,
+        "total": 4,
+        "compiled": 4,
         "failed": 0,
         "skipped": 0,
         "errors": []
       },
       "output_dir": "compiled_mibs\\microsemi"
     },
+    "microsens": {
+      "vendor": "microsens",
+      "success": true,
+      "compile_time": 3.490421,
+      "files_moved": 10,
+      "stats": {
+        "total": 9,
+        "compiled": 8,
+        "failed": 0,
+        "skipped": 1,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\microsens"
+    },
     "microsoft": {
       "vendor": "microsoft",
       "success": true,
-      "compile_time": 1.821235,
+      "compile_time": 0.966835,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -5418,7 +5149,7 @@
     "mikrotik": {
       "vendor": "mikrotik",
       "success": true,
-      "compile_time": 1.015297,
+      "compile_time": 0.637837,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5432,7 +5163,7 @@
     "mimosa": {
       "vendor": "mimosa",
       "success": true,
-      "compile_time": 4.674747,
+      "compile_time": 2.407655,
       "files_moved": 8,
       "stats": {
         "total": 4,
@@ -5446,7 +5177,7 @@
     "mitel": {
       "vendor": "mitel",
       "success": true,
-      "compile_time": 5.330035,
+      "compile_time": 2.618553,
       "files_moved": 9,
       "stats": {
         "total": 5,
@@ -5460,7 +5191,7 @@
     "mitsubishi": {
       "vendor": "mitsubishi",
       "success": true,
-      "compile_time": 0.790658,
+      "compile_time": 0.527406,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5474,7 +5205,7 @@
     "mni": {
       "vendor": "mni",
       "success": true,
-      "compile_time": 1.356673,
+      "compile_time": 0.960865,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5487,8 +5218,8 @@
     },
     "montclair": {
       "vendor": "montclair",
-      "success": false,
-      "compile_time": 0.713329,
+      "success": true,
+      "compile_time": 0.807145,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -5507,7 +5238,7 @@
     "morningstar": {
       "vendor": "morningstar",
       "success": true,
-      "compile_time": 9.059026,
+      "compile_time": 3.659233,
       "files_moved": 11,
       "stats": {
         "total": 10,
@@ -5520,21 +5251,37 @@
     },
     "moxa": {
       "vendor": "moxa",
-      "success": false,
-      "compile_time": 8.281028,
-      "files_moved": 11,
+      "success": true,
+      "compile_time": 8.704483,
+      "files_moved": 19,
       "stats": {
-        "total": 13,
-        "compiled": 10,
-        "failed": 3,
-        "skipped": 0,
+        "total": 25,
+        "compiled": 17,
+        "failed": 7,
+        "skipped": 1,
         "errors": [
           {
             "mib": "MOXA-DEVICE-IO-MIB",
             "error": "failed"
           },
           {
-            "mib": "MOXA-PORT-MIB",
+            "mib": "MOXA-DUALHOMING-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "MOXA-EDS528E-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "MOXA-EDSG512EPoE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "MOXA-IKS6728A-8POE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "MOXA-IKS6728A-MIB",
             "error": "failed"
           },
           {
@@ -5548,7 +5295,7 @@
     "mpb": {
       "vendor": "mpb",
       "success": true,
-      "compile_time": 0.995917,
+      "compile_time": 0.677281,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5562,7 +5309,7 @@
     "mrv": {
       "vendor": "mrv",
       "success": true,
-      "compile_time": 33.348415,
+      "compile_time": 13.995007,
       "files_moved": 37,
       "stats": {
         "total": 33,
@@ -5576,11 +5323,11 @@
     "netapp": {
       "vendor": "netapp",
       "success": true,
-      "compile_time": 0.265798,
-      "files_moved": 1,
+      "compile_time": 2.16316,
+      "files_moved": 4,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -5590,11 +5337,11 @@
     "netbotz": {
       "vendor": "netbotz",
       "success": true,
-      "compile_time": 1.75519,
-      "files_moved": 3,
+      "compile_time": 1.552943,
+      "files_moved": 4,
       "stats": {
-        "total": 2,
-        "compiled": 2,
+        "total": 3,
+        "compiled": 3,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -5604,7 +5351,7 @@
     "netelastic": {
       "vendor": "netelastic",
       "success": true,
-      "compile_time": 3.737034,
+      "compile_time": 1.996553,
       "files_moved": 7,
       "stats": {
         "total": 5,
@@ -5618,21 +5365,26 @@
     "netgear": {
       "vendor": "netgear",
       "success": true,
-      "compile_time": 7.374614,
-      "files_moved": 15,
+      "compile_time": 4.214115,
+      "files_moved": 14,
       "stats": {
         "total": 4,
-        "compiled": 3,
-        "failed": 0,
+        "compiled": 2,
+        "failed": 1,
         "skipped": 1,
-        "errors": []
+        "errors": [
+          {
+            "mib": "NETGEAR-SWITCHING-MIB",
+            "error": "unprocessed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\netgear"
     },
     "netonix": {
       "vendor": "netonix",
       "success": true,
-      "compile_time": 1.046142,
+      "compile_time": 0.611567,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -5646,7 +5398,7 @@
     "netping": {
       "vendor": "netping",
       "success": true,
-      "compile_time": 1.126991,
+      "compile_time": 0.699244,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -5660,13 +5412,13 @@
     "nexans": {
       "vendor": "nexans",
       "success": true,
-      "compile_time": 0.256973,
-      "files_moved": 1,
+      "compile_time": 1.36821,
+      "files_moved": 7,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 2,
+        "compiled": 1,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 1,
         "errors": []
       },
       "output_dir": "compiled_mibs\\nexans"
@@ -5674,7 +5426,7 @@
     "nimble": {
       "vendor": "nimble",
       "success": true,
-      "compile_time": 0.888293,
+      "compile_time": 0.660483,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5687,19 +5439,15 @@
     },
     "nokia": {
       "vendor": "nokia",
-      "success": false,
-      "compile_time": 366.99747,
-      "files_moved": 202,
+      "success": true,
+      "compile_time": 196.796123,
+      "files_moved": 210,
       "stats": {
         "total": 250,
-        "compiled": 116,
-        "failed": 39,
-        "skipped": 95,
+        "compiled": 120,
+        "failed": 36,
+        "skipped": 94,
         "errors": [
-          {
-            "mib": "TROPIC-OPTICALPORT-MIB",
-            "error": "failed"
-          },
           {
             "mib": "ALCATEL-IND1-APP-FINGERPRINT-MIB",
             "error": "failed"
@@ -5713,15 +5461,7 @@
             "error": "failed"
           },
           {
-            "mib": "ALCATEL-IND1-DA-MIB",
-            "error": "failed"
-          },
-          {
             "mib": "ALCATEL-IND1-DCBX-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ALCATEL-IND1-DHL-MIB",
             "error": "failed"
           },
           {
@@ -5742,14 +5482,6 @@
           },
           {
             "mib": "ALCATEL-IND1-ISIS-SPB-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ALCATEL-IND1-MULTI-CHASSIS-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "ALCATEL-IND1-OPENFLOW-MIB",
             "error": "failed"
           },
           {
@@ -5778,10 +5510,6 @@
           },
           {
             "mib": "ITF-MIB-EXT",
-            "error": "failed"
-          },
-          {
-            "mib": "PIM-BSR-MIB",
             "error": "failed"
           },
           {
@@ -5851,6 +5579,18 @@
           {
             "mib": "OAW-AP1362",
             "error": "failed"
+          },
+          {
+            "mib": "SFP-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "TIMETRA-OAM-TEST-MIB",
+            "error": "unprocessed"
+          },
+          {
+            "mib": "TROPIC-OPTICALPORT-MIB",
+            "error": "failed"
           }
         ]
       },
@@ -5858,8 +5598,8 @@
     },
     "nortel": {
       "vendor": "nortel",
-      "success": false,
-      "compile_time": 62.665086,
+      "success": true,
+      "compile_time": 38.254909,
       "files_moved": 24,
       "stats": {
         "total": 23,
@@ -5898,7 +5638,7 @@
     "nti": {
       "vendor": "nti",
       "success": true,
-      "compile_time": 1.418507,
+      "compile_time": 0.968395,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -5912,7 +5652,7 @@
     "nutanix-aos": {
       "vendor": "nutanix-aos",
       "success": true,
-      "compile_time": 1.136847,
+      "compile_time": 0.962269,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -5923,10 +5663,24 @@
       },
       "output_dir": "compiled_mibs\\nutanix-aos"
     },
+    "nvent-hoffman": {
+      "vendor": "nvent-hoffman",
+      "success": true,
+      "compile_time": 0.701473,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\nvent-hoffman"
+    },
     "omnitron": {
       "vendor": "omnitron",
       "success": true,
-      "compile_time": 2.254848,
+      "compile_time": 1.512092,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -5940,21 +5694,21 @@
     "oneaccess": {
       "vendor": "oneaccess",
       "success": true,
-      "compile_time": 3.420792,
+      "compile_time": 2.268474,
       "files_moved": 10,
       "stats": {
-        "total": 3,
+        "total": 4,
         "compiled": 3,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 1,
         "errors": []
       },
       "output_dir": "compiled_mibs\\oneaccess"
     },
     "openaccess": {
       "vendor": "openaccess",
-      "success": false,
-      "compile_time": 1.317895,
+      "success": true,
+      "compile_time": 1.032775,
       "files_moved": 2,
       "stats": {
         "total": 2,
@@ -5973,7 +5727,7 @@
     "openbsd": {
       "vendor": "openbsd",
       "success": true,
-      "compile_time": 6.998174,
+      "compile_time": 4.074464,
       "files_moved": 15,
       "stats": {
         "total": 6,
@@ -5987,11 +5741,11 @@
     "opengear": {
       "vendor": "opengear",
       "success": true,
-      "compile_time": 10.783683,
-      "files_moved": 16,
+      "compile_time": 5.752493,
+      "files_moved": 17,
       "stats": {
-        "total": 15,
-        "compiled": 14,
+        "total": 16,
+        "compiled": 15,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -6000,8 +5754,8 @@
     },
     "orvaldi": {
       "vendor": "orvaldi",
-      "success": false,
-      "compile_time": 0.677902,
+      "success": true,
+      "compile_time": 0.644938,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -6020,7 +5774,7 @@
     "osnexus": {
       "vendor": "osnexus",
       "success": true,
-      "compile_time": 2.384079,
+      "compile_time": 1.849158,
       "files_moved": 5,
       "stats": {
         "total": 1,
@@ -6034,13 +5788,13 @@
     "packetflux": {
       "vendor": "packetflux",
       "success": true,
-      "compile_time": 1.600147,
-      "files_moved": 3,
+      "compile_time": 3.477734,
+      "files_moved": 8,
       "stats": {
-        "total": 2,
-        "compiled": 2,
+        "total": 7,
+        "compiled": 5,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 2,
         "errors": []
       },
       "output_dir": "compiled_mibs\\packetflux"
@@ -6048,7 +5802,7 @@
     "packetlight": {
       "vendor": "packetlight",
       "success": true,
-      "compile_time": 36.113153,
+      "compile_time": 19.114569,
       "files_moved": 36,
       "stats": {
         "total": 29,
@@ -6059,33 +5813,38 @@
       },
       "output_dir": "compiled_mibs\\packetlight"
     },
+    "packetpower": {
+      "vendor": "packetpower",
+      "success": true,
+      "compile_time": 0.691496,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\packetpower"
+    },
     "paloaltonetworks": {
       "vendor": "paloaltonetworks",
-      "success": false,
-      "compile_time": 6.642516,
-      "files_moved": 9,
+      "success": true,
+      "compile_time": 4.16979,
+      "files_moved": 11,
       "stats": {
         "total": 7,
-        "compiled": 3,
-        "failed": 2,
-        "skipped": 2,
-        "errors": [
-          {
-            "mib": "PAN-LC-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "PAN-PRODUCTS-MIB",
-            "error": "missing"
-          }
-        ]
+        "compiled": 4,
+        "failed": 0,
+        "skipped": 3,
+        "errors": []
       },
       "output_dir": "compiled_mibs\\paloaltonetworks"
     },
     "panasonic": {
       "vendor": "panasonic",
-      "success": false,
-      "compile_time": 0.734745,
+      "success": true,
+      "compile_time": 0.633428,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -6101,10 +5860,24 @@
       },
       "output_dir": "compiled_mibs\\panasonic"
     },
+    "pandacom": {
+      "vendor": "pandacom",
+      "success": true,
+      "compile_time": 3.168174,
+      "files_moved": 8,
+      "stats": {
+        "total": 5,
+        "compiled": 5,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\pandacom"
+    },
     "panduit": {
       "vendor": "panduit",
       "success": true,
-      "compile_time": 1.471431,
+      "compile_time": 0.756926,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -6118,7 +5891,7 @@
     "papouch": {
       "vendor": "papouch",
       "success": true,
-      "compile_time": 1.203555,
+      "compile_time": 0.741266,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -6131,8 +5904,8 @@
     },
     "parks": {
       "vendor": "parks",
-      "success": false,
-      "compile_time": 0.693557,
+      "success": true,
+      "compile_time": 0.642428,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -6150,8 +5923,8 @@
     },
     "patton": {
       "vendor": "patton",
-      "success": false,
-      "compile_time": 0.787946,
+      "success": true,
+      "compile_time": 0.663341,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -6169,8 +5942,8 @@
     },
     "pbi": {
       "vendor": "pbi",
-      "success": false,
-      "compile_time": 3.21353,
+      "success": true,
+      "compile_time": 1.837066,
       "files_moved": 4,
       "stats": {
         "total": 4,
@@ -6189,27 +5962,32 @@
     "pbn": {
       "vendor": "pbn",
       "success": true,
-      "compile_time": 6.128587,
+      "compile_time": 3.184119,
       "files_moved": 10,
       "stats": {
-        "total": 8,
+        "total": 9,
         "compiled": 5,
-        "failed": 0,
+        "failed": 1,
         "skipped": 3,
-        "errors": []
+        "errors": [
+          {
+            "mib": "PBN-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\pbn"
     },
     "pegasus": {
       "vendor": "pegasus",
       "success": true,
-      "compile_time": 2.466125,
+      "compile_time": 1.67314,
       "files_moved": 7,
       "stats": {
-        "total": 2,
+        "total": 3,
         "compiled": 2,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 1,
         "errors": []
       },
       "output_dir": "compiled_mibs\\pegasus"
@@ -6217,7 +5995,7 @@
     "peplink": {
       "vendor": "peplink",
       "success": true,
-      "compile_time": 4.403406,
+      "compile_time": 2.033364,
       "files_moved": 9,
       "stats": {
         "total": 8,
@@ -6230,12 +6008,12 @@
     },
     "perle": {
       "vendor": "perle",
-      "success": false,
-      "compile_time": 0.729047,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 1.520663,
+      "files_moved": 2,
       "stats": {
-        "total": 1,
-        "compiled": 0,
+        "total": 2,
+        "compiled": 1,
         "failed": 1,
         "skipped": 0,
         "errors": [
@@ -6250,13 +6028,13 @@
     "pfsense": {
       "vendor": "pfsense",
       "success": true,
-      "compile_time": 2.025118,
-      "files_moved": 5,
+      "compile_time": 7.854315,
+      "files_moved": 19,
       "stats": {
-        "total": 2,
-        "compiled": 2,
+        "total": 14,
+        "compiled": 10,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 4,
         "errors": []
       },
       "output_dir": "compiled_mibs\\pfsense"
@@ -6264,7 +6042,7 @@
     "picos": {
       "vendor": "picos",
       "success": true,
-      "compile_time": 1.290059,
+      "compile_time": 0.842342,
       "files_moved": 4,
       "stats": {
         "total": 1,
@@ -6278,7 +6056,7 @@
     "planet": {
       "vendor": "planet",
       "success": true,
-      "compile_time": 1.079482,
+      "compile_time": 0.778127,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -6292,7 +6070,7 @@
     "polycom": {
       "vendor": "polycom",
       "success": true,
-      "compile_time": 1.738728,
+      "compile_time": 0.959958,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -6306,7 +6084,7 @@
     "positron": {
       "vendor": "positron",
       "success": true,
-      "compile_time": 3.209049,
+      "compile_time": 1.599194,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -6319,8 +6097,8 @@
     },
     "poweralert": {
       "vendor": "poweralert",
-      "success": false,
-      "compile_time": 3.025415,
+      "success": true,
+      "compile_time": 1.904076,
       "files_moved": 4,
       "stats": {
         "total": 4,
@@ -6343,11 +6121,11 @@
     "powerwalker": {
       "vendor": "powerwalker",
       "success": true,
-      "compile_time": 0.272613,
-      "files_moved": 1,
+      "compile_time": 0.763641,
+      "files_moved": 3,
       "stats": {
-        "total": 0,
-        "compiled": 0,
+        "total": 1,
+        "compiled": 1,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -6357,7 +6135,7 @@
     "primekey": {
       "vendor": "primekey",
       "success": true,
-      "compile_time": 1.493163,
+      "compile_time": 0.88641,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -6371,7 +6149,7 @@
     "procera": {
       "vendor": "procera",
       "success": true,
-      "compile_time": 31.28664,
+      "compile_time": 22.49247,
       "files_moved": 12,
       "stats": {
         "total": 10,
@@ -6384,27 +6162,22 @@
     },
     "profline": {
       "vendor": "profline",
-      "success": false,
-      "compile_time": 1.471497,
-      "files_moved": 2,
+      "success": true,
+      "compile_time": 1.181921,
+      "files_moved": 4,
       "stats": {
         "total": 2,
-        "compiled": 1,
-        "failed": 1,
+        "compiled": 2,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "PROFLINE-SFD-MIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\profline"
     },
     "protelevision": {
       "vendor": "protelevision",
       "success": true,
-      "compile_time": 2.345454,
+      "compile_time": 1.429817,
       "files_moved": 4,
       "stats": {
         "total": 2,
@@ -6417,8 +6190,8 @@
     },
     "proware": {
       "vendor": "proware",
-      "success": false,
-      "compile_time": 0.780915,
+      "success": true,
+      "compile_time": 0.786585,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -6437,7 +6210,7 @@
     "pulse": {
       "vendor": "pulse",
       "success": true,
-      "compile_time": 1.118932,
+      "compile_time": 0.62719,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -6448,10 +6221,24 @@
       },
       "output_dir": "compiled_mibs\\pulse"
     },
+    "purestorage": {
+      "vendor": "purestorage",
+      "success": true,
+      "compile_time": 0.620937,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\purestorage"
+    },
     "qnap": {
       "vendor": "qnap",
       "success": true,
-      "compile_time": 1.134683,
+      "compile_time": 0.696894,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -6464,8 +6251,8 @@
     },
     "qtech": {
       "vendor": "qtech",
-      "success": false,
-      "compile_time": 0.812995,
+      "success": true,
+      "compile_time": 0.732733,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -6483,230 +6270,230 @@
     },
     "quanta": {
       "vendor": "quanta",
-      "success": false,
-      "compile_time": 32.975468,
-      "files_moved": 19,
+      "success": true,
+      "compile_time": 37.548675,
+      "files_moved": 11,
       "stats": {
-        "total": 61,
-        "compiled": 7,
+        "total": 60,
+        "compiled": 6,
         "failed": 54,
         "skipped": 0,
         "errors": [
           {
-            "mib": "QUANTA-LB6M-REF-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-DOT1X-AUTHENTICATION-SERVER-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-DOT1X-ADVANCED-FEATURES-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "LAG-MIB",
-            "error": "missing"
-          },
-          {
             "mib": "NETGEAR-AUTHENTICATION-MANAGER-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-CAPTIVE-PORTAL-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-DCBX-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-DHCPSERVER-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-DHCPCLIENT-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-DENIALOFSERVICE-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-KEYING-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-LLPF-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-MGMT-SECURITY-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-VPC-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-MVR-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-PFC-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-PORTSECURITY-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-POWER-ETHERNET-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-QOS-COS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-QOS-ISCSI-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-QOS-AUTOVOIP-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-OUTBOUNDTELNET-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-TIMERANGE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-TIMEZONE-PRIVATE-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-UDLD-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-BGP-MIB",
-            "error": "missing"
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-CAPTIVE-PORTAL-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-DCBX-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-DENIALOFSERVICE-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-DHCPCLIENT-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-DHCPSERVER-PRIVATE-MIB",
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-DNS-RESOLVER-CONTROL-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
-            "mib": "NETGEAR-INVENTORY-MIB",
-            "error": "missing"
+            "mib": "NETGEAR-DOT1X-ADVANCED-FEATURES-MIB",
+            "error": "failed"
           },
           {
-            "mib": "NETGEAR-IPV6-LOOPBACK-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-IPV6-TUNNEL-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-ISDP-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-LOGGING-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-LOOPBACK-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-MULTICAST-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-NSF-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-ROUTE-POLICY-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-ROUTING-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-ROUTING6-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-SFLOW-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-SNTP-CLIENT-MIB",
-            "error": "missing"
+            "mib": "NETGEAR-DOT1X-AUTHENTICATION-SERVER-MIB",
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-FIPSNOOPING-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-GREENETHERNET-PRIVATE-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
-            "mib": "IEEE8021-PFC-MIB",
-            "error": "missing"
+            "mib": "NETGEAR-INVENTORY-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-IPV6-LOOPBACK-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-IPV6-TUNNEL-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-ISDP-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-KEYING-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-LLPF-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-LOGGING-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-LOOPBACK-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-MGMT-SECURITY-MIB",
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-MMRP-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-MRP-MIB",
-            "error": "missing"
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-MULTICAST-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-MVR-PRIVATE-MIB",
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-MVRP-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
-            "mib": "PIM-BSR-MIB",
+            "mib": "NETGEAR-NSF-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-OUTBOUNDTELNET-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-PFC-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-PORTSECURITY-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-POWER-ETHERNET-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-QOS-ACL-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-QOS-AUTOVOIP-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-QOS-COS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-QOS-DIFFSERV-EXTENSIONS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-QOS-DIFFSERV-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-QOS-ISCSI-MIB",
             "error": "failed"
           },
           {
             "mib": "NETGEAR-QOS-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-QOS-ACL-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "NETGEAR-QOS-DIFFSERV-EXTENSIONS-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "NETGEAR-RADIUS-AUTH-CLIENT-MIB",
-            "error": "missing"
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-ROUTE-POLICY-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-ROUTING-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-ROUTING6-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-SFLOW-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-SNTP-CLIENT-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-SWITCHING-MIB",
+            "error": "unprocessed"
+          },
+          {
+            "mib": "NETGEAR-TIMERANGE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-TIMEZONE-PRIVATE-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-UDLD-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "NETGEAR-VPC-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "QUANTA-LB6M-REF-MIB",
+            "error": "failed"
           },
           {
             "mib": "SNMP-RESEARCH-MIB",
-            "error": "missing"
+            "error": "failed"
+          },
+          {
+            "mib": "SR-AGENT-INFO-MIB",
+            "error": "failed"
           },
           {
             "mib": "TACACS-CLIENT-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "USM-TARGET-TAG-MIB",
-            "error": "missing"
+            "error": "failed"
           }
         ]
       },
@@ -6714,18 +6501,34 @@
     },
     "radlan": {
       "vendor": "radlan",
-      "success": false,
-      "compile_time": 39.679825,
-      "files_moved": 56,
+      "success": true,
+      "compile_time": 17.271404,
+      "files_moved": 52,
       "stats": {
         "total": 33,
-        "compiled": 30,
-        "failed": 1,
+        "compiled": 26,
+        "failed": 5,
         "skipped": 2,
         "errors": [
           {
+            "mib": "RADLAN-COPY-MIB",
+            "error": "unprocessed"
+          },
+          {
             "mib": "RADLAN-DNSCL-MIB",
             "error": "unprocessed"
+          },
+          {
+            "mib": "RADLAN-QOS-CLI-MIB",
+            "error": "unprocessed"
+          },
+          {
+            "mib": "RADLAN-Tuning",
+            "error": "failed"
+          },
+          {
+            "mib": "RADLAN-vlan-MIB",
+            "error": "failed"
           }
         ]
       },
@@ -6734,7 +6537,7 @@
     "radware": {
       "vendor": "radware",
       "success": true,
-      "compile_time": 2.692736,
+      "compile_time": 1.619024,
       "files_moved": 7,
       "stats": {
         "total": 1,
@@ -6748,7 +6551,7 @@
     "radwin": {
       "vendor": "radwin",
       "success": true,
-      "compile_time": 2.395725,
+      "compile_time": 1.413729,
       "files_moved": 5,
       "stats": {
         "total": 1,
@@ -6761,15 +6564,19 @@
     },
     "raisecom": {
       "vendor": "raisecom",
-      "success": false,
-      "compile_time": 15.290313,
-      "files_moved": 16,
+      "success": true,
+      "compile_time": 8.190067,
+      "files_moved": 17,
       "stats": {
-        "total": 16,
-        "compiled": 10,
-        "failed": 4,
+        "total": 18,
+        "compiled": 11,
+        "failed": 5,
         "skipped": 2,
         "errors": [
+          {
+            "mib": "RAISECOM-COMMON-MANAGEMENT-MIB",
+            "error": "failed"
+          },
           {
             "mib": "RAISECOM-FANMONITOR-MIB",
             "error": "failed"
@@ -6793,7 +6600,7 @@
     "rajant": {
       "vendor": "rajant",
       "success": true,
-      "compile_time": 0.90956,
+      "compile_time": 0.712269,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -6807,11 +6614,11 @@
     "raritan": {
       "vendor": "raritan",
       "success": true,
-      "compile_time": 2.416418,
-      "files_moved": 4,
+      "compile_time": 1.68662,
+      "files_moved": 5,
       "stats": {
-        "total": 2,
-        "compiled": 2,
+        "total": 3,
+        "compiled": 3,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -6821,7 +6628,7 @@
     "ray": {
       "vendor": "ray",
       "success": true,
-      "compile_time": 1.946396,
+      "compile_time": 1.012177,
       "files_moved": 4,
       "stats": {
         "total": 2,
@@ -6834,8 +6641,8 @@
     },
     "redlion": {
       "vendor": "redlion",
-      "success": false,
-      "compile_time": 1.457877,
+      "success": true,
+      "compile_time": 0.996511,
       "files_moved": 2,
       "stats": {
         "total": 2,
@@ -6854,7 +6661,7 @@
     "ribbon": {
       "vendor": "ribbon",
       "success": true,
-      "compile_time": 3.97353,
+      "compile_time": 1.919154,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -6867,8 +6674,8 @@
     },
     "riedo": {
       "vendor": "riedo",
-      "success": false,
-      "compile_time": 2.067305,
+      "success": true,
+      "compile_time": 1.223331,
       "files_moved": 3,
       "stats": {
         "total": 3,
@@ -6886,8 +6693,8 @@
     },
     "riello": {
       "vendor": "riello",
-      "success": false,
-      "compile_time": 3.689885,
+      "success": true,
+      "compile_time": 2.299779,
       "files_moved": 4,
       "stats": {
         "total": 5,
@@ -6910,11 +6717,11 @@
     "rittal": {
       "vendor": "rittal",
       "success": true,
-      "compile_time": 4.134736,
-      "files_moved": 6,
+      "compile_time": 3.251271,
+      "files_moved": 7,
       "stats": {
-        "total": 4,
-        "compiled": 2,
+        "total": 5,
+        "compiled": 3,
         "failed": 0,
         "skipped": 2,
         "errors": []
@@ -6924,7 +6731,7 @@
     "riverbed": {
       "vendor": "riverbed",
       "success": true,
-      "compile_time": 1.691862,
+      "compile_time": 1.232938,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -6937,8 +6744,8 @@
     },
     "ros": {
       "vendor": "ros",
-      "success": false,
-      "compile_time": 1.869666,
+      "success": true,
+      "compile_time": 1.288376,
       "files_moved": 2,
       "stats": {
         "total": 3,
@@ -6961,11 +6768,11 @@
     "rs": {
       "vendor": "rs",
       "success": true,
-      "compile_time": 3.080164,
-      "files_moved": 5,
+      "compile_time": 3.015817,
+      "files_moved": 8,
       "stats": {
-        "total": 3,
-        "compiled": 2,
+        "total": 6,
+        "compiled": 5,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -6975,7 +6782,7 @@
     "ruckus": {
       "vendor": "ruckus",
       "success": true,
-      "compile_time": 33.784793,
+      "compile_time": 10.263977,
       "files_moved": 26,
       "stats": {
         "total": 21,
@@ -6988,8 +6795,8 @@
     },
     "ruijie": {
       "vendor": "ruijie",
-      "success": false,
-      "compile_time": 22.801413,
+      "success": true,
+      "compile_time": 4.683697,
       "files_moved": 21,
       "stats": {
         "total": 8,
@@ -7007,8 +6814,8 @@
     },
     "rutos": {
       "vendor": "rutos",
-      "success": false,
-      "compile_time": 2.426634,
+      "success": true,
+      "compile_time": 0.682131,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7027,7 +6834,7 @@
     "saf": {
       "vendor": "saf",
       "success": true,
-      "compile_time": 17.7565,
+      "compile_time": 3.526212,
       "files_moved": 12,
       "stats": {
         "total": 8,
@@ -7041,21 +6848,26 @@
     "sagemcom": {
       "vendor": "sagemcom",
       "success": true,
-      "compile_time": 4.968575,
-      "files_moved": 6,
+      "compile_time": 9.033698,
+      "files_moved": 27,
       "stats": {
-        "total": 2,
-        "compiled": 1,
-        "failed": 0,
+        "total": 15,
+        "compiled": 13,
+        "failed": 1,
         "skipped": 1,
-        "errors": []
+        "errors": [
+          {
+            "mib": "PPP-BRIDGE-NCP-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\sagemcom"
     },
     "samlex": {
       "vendor": "samlex",
       "success": true,
-      "compile_time": 1.87709,
+      "compile_time": 0.488107,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7068,27 +6880,22 @@
     },
     "sangoma": {
       "vendor": "sangoma",
-      "success": false,
-      "compile_time": 1.442595,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 0.729311,
+      "files_moved": 3,
       "stats": {
         "total": 1,
-        "compiled": 0,
-        "failed": 1,
+        "compiled": 1,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "Vega-MIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\sangoma"
     },
     "schleifenbauer": {
       "vendor": "schleifenbauer",
       "success": true,
-      "compile_time": 2.999202,
+      "compile_time": 0.971565,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -7102,7 +6909,7 @@
     "schneider": {
       "vendor": "schneider",
       "success": true,
-      "compile_time": 2.466856,
+      "compile_time": 0.610226,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7115,8 +6922,8 @@
     },
     "screenos": {
       "vendor": "screenos",
-      "success": false,
-      "compile_time": 68.718772,
+      "success": true,
+      "compile_time": 15.68024,
       "files_moved": 47,
       "stats": {
         "total": 48,
@@ -7139,7 +6946,7 @@
     "seagate": {
       "vendor": "seagate",
       "success": true,
-      "compile_time": 2.703034,
+      "compile_time": 0.613448,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -7153,7 +6960,7 @@
     "seh": {
       "vendor": "seh",
       "success": true,
-      "compile_time": 2.464874,
+      "compile_time": 0.780537,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7167,7 +6974,7 @@
     "sensatronics": {
       "vendor": "sensatronics",
       "success": true,
-      "compile_time": 4.009491,
+      "compile_time": 1.10233,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -7181,7 +6988,7 @@
     "sentry": {
       "vendor": "sentry",
       "success": true,
-      "compile_time": 2.827109,
+      "compile_time": 0.854399,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -7195,7 +7002,7 @@
     "serverscheck": {
       "vendor": "serverscheck",
       "success": true,
-      "compile_time": 2.286016,
+      "compile_time": 0.665684,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7209,7 +7016,7 @@
     "siae": {
       "vendor": "siae",
       "success": true,
-      "compile_time": 82.067404,
+      "compile_time": 22.115317,
       "files_moved": 41,
       "stats": {
         "total": 36,
@@ -7222,22 +7029,18 @@
     },
     "siemens": {
       "vendor": "siemens",
-      "success": false,
-      "compile_time": 6.201405,
-      "files_moved": 2,
+      "success": true,
+      "compile_time": 2.779732,
+      "files_moved": 4,
       "stats": {
-        "total": 3,
+        "total": 4,
         "compiled": 1,
-        "failed": 2,
-        "skipped": 0,
+        "failed": 1,
+        "skipped": 2,
         "errors": [
           {
             "mib": "SN-MSPS-SCX200-MIB",
             "error": "failed"
-          },
-          {
-            "mib": "TRAP-MIB",
-            "error": "unprocessed"
           }
         ]
       },
@@ -7246,13 +7049,13 @@
     "siklu": {
       "vendor": "siklu",
       "success": true,
-      "compile_time": 7.032283,
-      "files_moved": 18,
+      "compile_time": 3.32427,
+      "files_moved": 19,
       "stats": {
-        "total": 1,
+        "total": 3,
         "compiled": 1,
         "failed": 0,
-        "skipped": 0,
+        "skipped": 2,
         "errors": []
       },
       "output_dir": "compiled_mibs\\siklu"
@@ -7260,7 +7063,7 @@
     "silverpeak": {
       "vendor": "silverpeak",
       "success": true,
-      "compile_time": 5.525444,
+      "compile_time": 1.621353,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -7274,7 +7077,7 @@
     "sinetica": {
       "vendor": "sinetica",
       "success": true,
-      "compile_time": 1.686325,
+      "compile_time": 0.551458,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7288,7 +7091,7 @@
     "skyhigh": {
       "vendor": "skyhigh",
       "success": true,
-      "compile_time": 3.291849,
+      "compile_time": 1.038179,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -7299,10 +7102,24 @@
       },
       "output_dir": "compiled_mibs\\skyhigh"
     },
+    "smartbyte": {
+      "vendor": "smartbyte",
+      "success": true,
+      "compile_time": 1.529667,
+      "files_moved": 4,
+      "stats": {
+        "total": 3,
+        "compiled": 3,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\smartbyte"
+    },
     "smartoptics": {
       "vendor": "smartoptics",
       "success": true,
-      "compile_time": 17.759843,
+      "compile_time": 8.958571,
       "files_moved": 13,
       "stats": {
         "total": 12,
@@ -7316,7 +7133,7 @@
     "snr": {
       "vendor": "snr",
       "success": true,
-      "compile_time": 2.820801,
+      "compile_time": 1.50014,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7329,8 +7146,8 @@
     },
     "snrerd": {
       "vendor": "snrerd",
-      "success": false,
-      "compile_time": 1.104237,
+      "success": true,
+      "compile_time": 0.730337,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -7349,11 +7166,11 @@
     "socomec": {
       "vendor": "socomec",
       "success": true,
-      "compile_time": 2.089331,
-      "files_moved": 2,
+      "compile_time": 0.945801,
+      "files_moved": 3,
       "stats": {
-        "total": 1,
-        "compiled": 1,
+        "total": 2,
+        "compiled": 2,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -7363,7 +7180,7 @@
     "solidoptics": {
       "vendor": "solidoptics",
       "success": true,
-      "compile_time": 1.503519,
+      "compile_time": 0.581122,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7376,14 +7193,14 @@
     },
     "sonicwall": {
       "vendor": "sonicwall",
-      "success": false,
-      "compile_time": 3.920202,
+      "success": true,
+      "compile_time": 1.651386,
       "files_moved": 4,
       "stats": {
-        "total": 3,
+        "total": 4,
         "compiled": 2,
         "failed": 1,
-        "skipped": 0,
+        "skipped": 1,
         "errors": [
           {
             "mib": "SNWL-SSLVPN-MIB",
@@ -7395,8 +7212,8 @@
     },
     "sophos": {
       "vendor": "sophos",
-      "success": false,
-      "compile_time": 1.187143,
+      "success": true,
+      "compile_time": 1.258561,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -7414,47 +7231,26 @@
     },
     "spectracom": {
       "vendor": "spectracom",
-      "success": false,
-      "compile_time": 8.058543,
-      "files_moved": 1,
+      "success": true,
+      "compile_time": 3.612964,
+      "files_moved": 9,
       "stats": {
         "total": 5,
-        "compiled": 0,
-        "failed": 5,
+        "compiled": 5,
+        "failed": 0,
         "skipped": 0,
-        "errors": [
-          {
-            "mib": "SPECTRACOM-GLOBAL-REG-MIB",
-            "error": "missing"
-          },
-          {
-            "mib": "SPECTRACOM-NTP-V4-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "SPECTRACOM-PTP-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "SPECTRACOM-PTPBASE-MIB",
-            "error": "failed"
-          },
-          {
-            "mib": "SPECTRACOM-XSYNC-MIB",
-            "error": "failed"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\spectracom"
     },
     "stormshield": {
       "vendor": "stormshield",
       "success": true,
-      "compile_time": 23.812879,
-      "files_moved": 14,
+      "compile_time": 11.460708,
+      "files_moved": 25,
       "stats": {
-        "total": 13,
-        "compiled": 12,
+        "total": 24,
+        "compiled": 23,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -7464,7 +7260,7 @@
     "sub10": {
       "vendor": "sub10",
       "success": true,
-      "compile_time": 0.421902,
+      "compile_time": 0.012139,
       "files_moved": 1,
       "stats": {
         "total": 0,
@@ -7475,10 +7271,29 @@
       },
       "output_dir": "compiled_mibs\\sub10"
     },
+    "supercap": {
+      "vendor": "supercap",
+      "success": true,
+      "compile_time": 0.790291,
+      "files_moved": 1,
+      "stats": {
+        "total": 1,
+        "compiled": 0,
+        "failed": 1,
+        "skipped": 0,
+        "errors": [
+          {
+            "mib": "SUPERCAPBATTERY-MIB",
+            "error": "failed"
+          }
+        ]
+      },
+      "output_dir": "compiled_mibs\\supercap"
+    },
     "supermicro": {
       "vendor": "supermicro",
       "success": true,
-      "compile_time": 5.439714,
+      "compile_time": 1.751247,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -7489,10 +7304,24 @@
       },
       "output_dir": "compiled_mibs\\supermicro"
     },
+    "supervyse-openbmc": {
+      "vendor": "supervyse-openbmc",
+      "success": true,
+      "compile_time": 0.633591,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\supervyse-openbmc"
+    },
     "synology": {
       "vendor": "synology",
       "success": true,
-      "compile_time": 2.953723,
+      "compile_time": 1.282711,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -7505,8 +7334,8 @@
     },
     "synso": {
       "vendor": "synso",
-      "success": false,
-      "compile_time": 0.924229,
+      "success": true,
+      "compile_time": 0.590258,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -7525,7 +7354,7 @@
     "tachyon": {
       "vendor": "tachyon",
       "success": true,
-      "compile_time": 1.823726,
+      "compile_time": 0.963405,
       "files_moved": 5,
       "stats": {
         "total": 1,
@@ -7536,10 +7365,29 @@
       },
       "output_dir": "compiled_mibs\\tachyon"
     },
+    "tailyn": {
+      "vendor": "tailyn",
+      "success": true,
+      "compile_time": 0.868634,
+      "files_moved": 1,
+      "stats": {
+        "total": 1,
+        "compiled": 0,
+        "failed": 1,
+        "skipped": 0,
+        "errors": [
+          {
+            "mib": "IMP-HF528-MIB",
+            "error": "failed"
+          }
+        ]
+      },
+      "output_dir": "compiled_mibs\\tailyn"
+    },
     "tait": {
       "vendor": "tait",
       "success": true,
-      "compile_time": 11.578763,
+      "compile_time": 6.368129,
       "files_moved": 11,
       "stats": {
         "total": 10,
@@ -7550,10 +7398,24 @@
       },
       "output_dir": "compiled_mibs\\tait"
     },
+    "tbs": {
+      "vendor": "tbs",
+      "success": true,
+      "compile_time": 0.564123,
+      "files_moved": 2,
+      "stats": {
+        "total": 1,
+        "compiled": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\tbs"
+    },
     "tegile": {
       "vendor": "tegile",
       "success": true,
-      "compile_time": 1.15998,
+      "compile_time": 0.776848,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7567,25 +7429,58 @@
     "telco-systems": {
       "vendor": "telco-systems",
       "success": true,
-      "compile_time": 11.502578,
-      "files_moved": 25,
+      "compile_time": 76.593897,
+      "files_moved": 92,
       "stats": {
-        "total": 5,
-        "compiled": 5,
-        "failed": 0,
-        "skipped": 0,
-        "errors": []
+        "total": 99,
+        "compiled": 62,
+        "failed": 8,
+        "skipped": 29,
+        "errors": [
+          {
+            "mib": "PRVT-ALARM-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-HQOS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-ISIS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-OSPF-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-RAPS-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-RAPS-SVC-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-REDUNDANCY-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "PRVT-ROUTE-MIB",
+            "error": "failed"
+          }
+        ]
       },
       "output_dir": "compiled_mibs\\telco-systems"
     },
     "teldat": {
       "vendor": "teldat",
       "success": true,
-      "compile_time": 5.446388,
-      "files_moved": 5,
+      "compile_time": 3.90818,
+      "files_moved": 7,
       "stats": {
-        "total": 3,
-        "compiled": 2,
+        "total": 6,
+        "compiled": 5,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -7595,11 +7490,11 @@
     "teleste": {
       "vendor": "teleste",
       "success": true,
-      "compile_time": 4.445133,
-      "files_moved": 6,
+      "compile_time": 2.253634,
+      "files_moved": 7,
       "stats": {
-        "total": 3,
-        "compiled": 2,
+        "total": 4,
+        "compiled": 3,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -7608,12 +7503,12 @@
     },
     "teltonika": {
       "vendor": "teltonika",
-      "success": false,
-      "compile_time": 2.507614,
-      "files_moved": 4,
+      "success": true,
+      "compile_time": 1.512546,
+      "files_moved": 5,
       "stats": {
-        "total": 3,
-        "compiled": 2,
+        "total": 4,
+        "compiled": 3,
         "failed": 1,
         "skipped": 0,
         "errors": [
@@ -7628,7 +7523,7 @@
     "teracom": {
       "vendor": "teracom",
       "success": true,
-      "compile_time": 3.316438,
+      "compile_time": 1.790681,
       "files_moved": 6,
       "stats": {
         "total": 5,
@@ -7642,11 +7537,11 @@
     "terra": {
       "vendor": "terra",
       "success": true,
-      "compile_time": 4.970182,
-      "files_moved": 6,
+      "compile_time": 4.433776,
+      "files_moved": 7,
       "stats": {
-        "total": 5,
-        "compiled": 4,
+        "total": 6,
+        "compiled": 5,
         "failed": 0,
         "skipped": 1,
         "errors": []
@@ -7656,7 +7551,7 @@
     "toshiba": {
       "vendor": "toshiba",
       "success": true,
-      "compile_time": 1.172239,
+      "compile_time": 0.668456,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7669,14 +7564,14 @@
     },
     "tplink": {
       "vendor": "tplink",
-      "success": false,
-      "compile_time": 21.991273,
+      "success": true,
+      "compile_time": 12.591992,
       "files_moved": 21,
       "stats": {
-        "total": 20,
+        "total": 19,
         "compiled": 14,
         "failed": 2,
-        "skipped": 4,
+        "skipped": 3,
         "errors": [
           {
             "mib": "TPLINK-POWER-OVER-ETHERNET-MIB",
@@ -7692,18 +7587,18 @@
     },
     "transition": {
       "vendor": "transition",
-      "success": false,
-      "compile_time": 122.856233,
-      "files_moved": 94,
+      "success": true,
+      "compile_time": 54.427783,
+      "files_moved": 95,
       "stats": {
-        "total": 71,
-        "compiled": 58,
+        "total": 72,
+        "compiled": 59,
         "failed": 8,
         "skipped": 5,
         "errors": [
           {
             "mib": "TN-ACCESS-MGMT-MIB",
-            "error": "missing"
+            "error": "failed"
           },
           {
             "mib": "TN-MRP-MIB",
@@ -7714,15 +7609,15 @@
             "error": "'int' object has no attribute 'replace'"
           },
           {
-            "mib": "TN-PRIVATE-VLAN-MIB",
-            "error": "missing"
-          },
-          {
             "mib": "TN-RFC2544-MIB",
             "error": "failed"
           },
           {
             "mib": "TN-SA-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "TN-SIP-MIB",
             "error": "failed"
           },
           {
@@ -7740,7 +7635,7 @@
     "tredess": {
       "vendor": "tredess",
       "success": true,
-      "compile_time": 1.585956,
+      "compile_time": 1.795828,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7753,8 +7648,8 @@
     },
     "trellix": {
       "vendor": "trellix",
-      "success": false,
-      "compile_time": 6.467227,
+      "success": true,
+      "compile_time": 6.442132,
       "files_moved": 9,
       "stats": {
         "total": 8,
@@ -7777,7 +7672,7 @@
     "tycon": {
       "vendor": "tycon",
       "success": true,
-      "compile_time": 1.461791,
+      "compile_time": 1.498578,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -7790,8 +7685,8 @@
     },
     "ubiquoss": {
       "vendor": "ubiquoss",
-      "success": false,
-      "compile_time": 44.441929,
+      "success": true,
+      "compile_time": 39.254898,
       "files_moved": 33,
       "stats": {
         "total": 58,
@@ -7953,8 +7848,8 @@
     },
     "ubnt": {
       "vendor": "ubnt",
-      "success": false,
-      "compile_time": 5.374169,
+      "success": true,
+      "compile_time": 5.102299,
       "files_moved": 6,
       "stats": {
         "total": 8,
@@ -7981,7 +7876,7 @@
     "ucopia": {
       "vendor": "ucopia",
       "success": true,
-      "compile_time": 0.895246,
+      "compile_time": 0.680782,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -7995,7 +7890,7 @@
     "uhp": {
       "vendor": "uhp",
       "success": true,
-      "compile_time": 0.923363,
+      "compile_time": 0.681413,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8009,7 +7904,7 @@
     "unitrends": {
       "vendor": "unitrends",
       "success": true,
-      "compile_time": 0.897918,
+      "compile_time": 0.627191,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8023,7 +7918,7 @@
     "veeam": {
       "vendor": "veeam",
       "success": true,
-      "compile_time": 1.346252,
+      "compile_time": 0.610646,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8036,31 +7931,26 @@
     },
     "venturi": {
       "vendor": "venturi",
-      "success": false,
-      "compile_time": 7.70924,
-      "files_moved": 9,
+      "success": true,
+      "compile_time": 5.067527,
+      "files_moved": 10,
       "stats": {
         "total": 9,
-        "compiled": 5,
-        "failed": 1,
+        "compiled": 6,
+        "failed": 0,
         "skipped": 3,
-        "errors": [
-          {
-            "mib": "FOURELLE-VENTURI2-MIB",
-            "error": "missing"
-          }
-        ]
+        "errors": []
       },
       "output_dir": "compiled_mibs\\venturi"
     },
     "vertiv": {
       "vendor": "vertiv",
       "success": true,
-      "compile_time": 1.288561,
-      "files_moved": 3,
+      "compile_time": 2.152668,
+      "files_moved": 5,
       "stats": {
-        "total": 1,
-        "compiled": 1,
+        "total": 3,
+        "compiled": 3,
         "failed": 0,
         "skipped": 0,
         "errors": []
@@ -8070,7 +7960,7 @@
     "vigintos": {
       "vendor": "vigintos",
       "success": true,
-      "compile_time": 2.099537,
+      "compile_time": 1.263459,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -8084,7 +7974,7 @@
     "viprinet": {
       "vendor": "viprinet",
       "success": true,
-      "compile_time": 0.900182,
+      "compile_time": 0.871109,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8098,7 +7988,7 @@
     "viptela": {
       "vendor": "viptela",
       "success": true,
-      "compile_time": 13.85734,
+      "compile_time": 10.173624,
       "files_moved": 19,
       "stats": {
         "total": 17,
@@ -8111,22 +8001,18 @@
     },
     "vmware": {
       "vendor": "vmware",
-      "success": false,
-      "compile_time": 28.963401,
-      "files_moved": 33,
+      "success": true,
+      "compile_time": 31.261632,
+      "files_moved": 34,
       "stats": {
         "total": 30,
-        "compiled": 21,
-        "failed": 2,
+        "compiled": 22,
+        "failed": 1,
         "skipped": 7,
         "errors": [
           {
             "mib": "VMWARE-NSX-AGENTCAP-MIB",
             "error": "failed"
-          },
-          {
-            "mib": "VMW-TUNNEL-SERVER-AGENTCAP-MIB",
-            "error": "missing"
           }
         ]
       },
@@ -8135,7 +8021,7 @@
     "volius": {
       "vendor": "volius",
       "success": true,
-      "compile_time": 3.037377,
+      "compile_time": 2.66153,
       "files_moved": 5,
       "stats": {
         "total": 4,
@@ -8148,8 +8034,8 @@
     },
     "vsolution": {
       "vendor": "vsolution",
-      "success": false,
-      "compile_time": 2.111273,
+      "success": true,
+      "compile_time": 2.810132,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -8168,7 +8054,7 @@
     "vutlan": {
       "vendor": "vutlan",
       "success": true,
-      "compile_time": 0.963212,
+      "compile_time": 1.121292,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8181,8 +8067,8 @@
     },
     "watchguard": {
       "vendor": "watchguard",
-      "success": false,
-      "compile_time": 10.889619,
+      "success": true,
+      "compile_time": 11.612452,
       "files_moved": 16,
       "stats": {
         "total": 13,
@@ -8201,7 +8087,7 @@
     "waystream": {
       "vendor": "waystream",
       "success": true,
-      "compile_time": 5.414239,
+      "compile_time": 6.65051,
       "files_moved": 10,
       "stats": {
         "total": 6,
@@ -8215,7 +8101,7 @@
     "westermo": {
       "vendor": "westermo",
       "success": true,
-      "compile_time": 9.848606,
+      "compile_time": 8.303766,
       "files_moved": 20,
       "stats": {
         "total": 5,
@@ -8229,7 +8115,7 @@
     "westmountainradio": {
       "vendor": "westmountainradio",
       "success": true,
-      "compile_time": 1.303293,
+      "compile_time": 1.273221,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8243,7 +8129,7 @@
     "wis": {
       "vendor": "wis",
       "success": true,
-      "compile_time": 1.800546,
+      "compile_time": 2.091033,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -8257,7 +8143,7 @@
     "wisi": {
       "vendor": "wisi",
       "success": true,
-      "compile_time": 5.787779,
+      "compile_time": 6.871761,
       "files_moved": 9,
       "stats": {
         "total": 5,
@@ -8270,8 +8156,8 @@
     },
     "witchos": {
       "vendor": "witchos",
-      "success": false,
-      "compile_time": 0.891283,
+      "success": true,
+      "compile_time": 0.939393,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8290,7 +8176,7 @@
     "worldcastsystems": {
       "vendor": "worldcastsystems",
       "success": true,
-      "compile_time": 1.445894,
+      "compile_time": 1.457828,
       "files_moved": 3,
       "stats": {
         "total": 1,
@@ -8304,7 +8190,7 @@
     "wti": {
       "vendor": "wti",
       "success": true,
-      "compile_time": 2.214246,
+      "compile_time": 1.779378,
       "files_moved": 4,
       "stats": {
         "total": 3,
@@ -8317,8 +8203,8 @@
     },
     "wut": {
       "vendor": "wut",
-      "success": false,
-      "compile_time": 5.196906,
+      "success": true,
+      "compile_time": 3.838975,
       "files_moved": 5,
       "stats": {
         "total": 6,
@@ -8341,7 +8227,7 @@
     "xirrus_aos": {
       "vendor": "xirrus_aos",
       "success": true,
-      "compile_time": 1.477855,
+      "compile_time": 1.754156,
       "files_moved": 2,
       "stats": {
         "total": 1,
@@ -8355,7 +8241,7 @@
     "zebra": {
       "vendor": "zebra",
       "success": true,
-      "compile_time": 2.300488,
+      "compile_time": 1.854258,
       "files_moved": 3,
       "stats": {
         "total": 2,
@@ -8366,10 +8252,24 @@
       },
       "output_dir": "compiled_mibs\\zebra"
     },
+    "zenitel": {
+      "vendor": "zenitel",
+      "success": true,
+      "compile_time": 1.891024,
+      "files_moved": 3,
+      "stats": {
+        "total": 2,
+        "compiled": 2,
+        "failed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "output_dir": "compiled_mibs\\zenitel"
+    },
     "zhone": {
       "vendor": "zhone",
       "success": true,
-      "compile_time": 4.221826,
+      "compile_time": 5.384549,
       "files_moved": 8,
       "stats": {
         "total": 4,
@@ -8382,8 +8282,8 @@
     },
     "zmtel": {
       "vendor": "zmtel",
-      "success": false,
-      "compile_time": 0.831721,
+      "success": true,
+      "compile_time": 1.20686,
       "files_moved": 1,
       "stats": {
         "total": 1,
@@ -8402,7 +8302,7 @@
     "zte": {
       "vendor": "zte",
       "success": true,
-      "compile_time": 5.707738,
+      "compile_time": 5.119616,
       "files_moved": 11,
       "stats": {
         "total": 6,
@@ -8415,13 +8315,13 @@
     },
     "zyxel": {
       "vendor": "zyxel",
-      "success": false,
-      "compile_time": 23.588772,
-      "files_moved": 25,
+      "success": true,
+      "compile_time": 24.432465,
+      "files_moved": 27,
       "stats": {
-        "total": 22,
-        "compiled": 12,
-        "failed": 8,
+        "total": 25,
+        "compiled": 14,
+        "failed": 9,
         "skipped": 2,
         "errors": [
           {
@@ -8438,6 +8338,10 @@
           },
           {
             "mib": "ZYXEL-GS4012F-MIB",
+            "error": "failed"
+          },
+          {
+            "mib": "ZYXEL-IES5000-MIB",
             "error": "failed"
           },
           {

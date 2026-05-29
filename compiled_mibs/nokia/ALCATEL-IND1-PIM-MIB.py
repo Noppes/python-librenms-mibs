@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-PIM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:55 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-PIM-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,7 @@ alcatelIND1PIMMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1PIMMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -255,7 +252,14 @@ alaPimsmCRPInterval = _AlaPimsmCRPInterval_Object(
 alaPimsmCRPInterval.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaPimsmCRPInterval.setStatus("obsolete")
-_AlaPimsmAdminCRPAddress_Type = IpAddress
+
+
+class _AlaPimsmAdminCRPAddress_Type(IpAddress):
+    """Custom type alaPimsmAdminCRPAddress based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaPimsmAdminCRPAddress_Type.__name__ = "IpAddress"
 _AlaPimsmAdminCRPAddress_Object = MibScalar
 alaPimsmAdminCRPAddress = _AlaPimsmAdminCRPAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 1, 7),
@@ -617,6 +621,113 @@ alaPimsmV6RPSwitchover = _AlaPimsmV6RPSwitchover_Object(
 alaPimsmV6RPSwitchover.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaPimsmV6RPSwitchover.setStatus("current")
+
+
+class _AlaPimsmBfdStatus_Type(Integer32):
+    """Custom type alaPimsmBfdStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPimsmBfdStatus_Type.__name__ = "Integer32"
+_AlaPimsmBfdStatus_Object = MibScalar
+alaPimsmBfdStatus = _AlaPimsmBfdStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 1, 21),
+    _AlaPimsmBfdStatus_Type()
+)
+alaPimsmBfdStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPimsmBfdStatus.setStatus("current")
+
+
+class _AlaPimsmBidirStatus_Type(Integer32):
+    """Custom type alaPimsmBidirStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPimsmBidirStatus_Type.__name__ = "Integer32"
+_AlaPimsmBidirStatus_Object = MibScalar
+alaPimsmBidirStatus = _AlaPimsmBidirStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 1, 22),
+    _AlaPimsmBidirStatus_Type()
+)
+alaPimsmBidirStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPimsmBidirStatus.setStatus("current")
+
+
+class _AlaPimsmBidirPeriodicInterval_Type(Integer32):
+    """Custom type alaPimsmBidirPeriodicInterval based on Integer32"""
+    defaultValue = 60
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2000),
+    )
+
+
+_AlaPimsmBidirPeriodicInterval_Type.__name__ = "Integer32"
+_AlaPimsmBidirPeriodicInterval_Object = MibScalar
+alaPimsmBidirPeriodicInterval = _AlaPimsmBidirPeriodicInterval_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 1, 23),
+    _AlaPimsmBidirPeriodicInterval_Type()
+)
+alaPimsmBidirPeriodicInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPimsmBidirPeriodicInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    alaPimsmBidirPeriodicInterval.setUnits("seconds")
+
+
+class _AlaPimsmV6BidirStatus_Type(Integer32):
+    """Custom type alaPimsmV6BidirStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPimsmV6BidirStatus_Type.__name__ = "Integer32"
+_AlaPimsmV6BidirStatus_Object = MibScalar
+alaPimsmV6BidirStatus = _AlaPimsmV6BidirStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 1, 24),
+    _AlaPimsmV6BidirStatus_Type()
+)
+alaPimsmV6BidirStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPimsmV6BidirStatus.setStatus("current")
 _AlaPimsmDebugConfig_ObjectIdentity = ObjectIdentity
 alaPimsmDebugConfig = _AlaPimsmDebugConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 2)
@@ -1210,6 +1321,62 @@ alaPimdmV6AdminStatus = _AlaPimdmV6AdminStatus_Object(
 alaPimdmV6AdminStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaPimdmV6AdminStatus.setStatus("current")
+
+
+class _AlaPimdmBfdStatus_Type(Integer32):
+    """Custom type alaPimdmBfdStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPimdmBfdStatus_Type.__name__ = "Integer32"
+_AlaPimdmBfdStatus_Object = MibScalar
+alaPimdmBfdStatus = _AlaPimdmBfdStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 3, 5),
+    _AlaPimdmBfdStatus_Type()
+)
+alaPimdmBfdStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPimdmBfdStatus.setStatus("current")
+
+
+class _AlaPimdmRedundantStatus_Type(Integer32):
+    """Custom type alaPimdmRedundantStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaPimdmRedundantStatus_Type.__name__ = "Integer32"
+_AlaPimdmRedundantStatus_Object = MibScalar
+alaPimdmRedundantStatus = _AlaPimdmRedundantStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 1, 3, 6),
+    _AlaPimdmRedundantStatus_Type()
+)
+alaPimdmRedundantStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaPimdmRedundantStatus.setStatus("current")
 _AlcatelIND1PIMMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1PIMMIBConformance = _AlcatelIND1PIMMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 6, 1, 2)
@@ -1248,7 +1415,11 @@ alaPimsmConfigMIBGroup.setObjects(
         ("ALCATEL-IND1-PIM-MIB", "alaPimsmRPThreshold"),
         ("ALCATEL-IND1-PIM-MIB", "alaPimsmV6AdminStatus"),
         ("ALCATEL-IND1-PIM-MIB", "alaPimsmV6SPTConfig"),
-        ("ALCATEL-IND1-PIM-MIB", "alaPimsmV6RPSwitchover"))
+        ("ALCATEL-IND1-PIM-MIB", "alaPimsmV6RPSwitchover"),
+        ("ALCATEL-IND1-PIM-MIB", "alaPimsmBfdStatus"),
+        ("ALCATEL-IND1-PIM-MIB", "alaPimsmBidirStatus"),
+        ("ALCATEL-IND1-PIM-MIB", "alaPimsmBidirPeriodicInterval"),
+        ("ALCATEL-IND1-PIM-MIB", "alaPimsmV6BidirStatus"))
 )
 if mibBuilder.loadTexts:
     alaPimsmConfigMIBGroup.setStatus("current")
@@ -1286,7 +1457,9 @@ alaPimdmConfigMIBGroup.setObjects(
       *(("ALCATEL-IND1-PIM-MIB", "alaPimdmAdminStatus"),
         ("ALCATEL-IND1-PIM-MIB", "alaPimdmStateRefreshTimeToLive"),
         ("ALCATEL-IND1-PIM-MIB", "alaPimdmStateRefreshLimitInterval"),
-        ("ALCATEL-IND1-PIM-MIB", "alaPimdmV6AdminStatus"))
+        ("ALCATEL-IND1-PIM-MIB", "alaPimdmV6AdminStatus"),
+        ("ALCATEL-IND1-PIM-MIB", "alaPimdmBfdStatus"),
+        ("ALCATEL-IND1-PIM-MIB", "alaPimdmRedundantStatus"))
 )
 if mibBuilder.loadTexts:
     alaPimdmConfigMIBGroup.setStatus("current")
@@ -1359,6 +1532,10 @@ mibBuilder.exportSymbols(
        "alaPimsmV6AdminStatus": alaPimsmV6AdminStatus,
        "alaPimsmV6SPTConfig": alaPimsmV6SPTConfig,
        "alaPimsmV6RPSwitchover": alaPimsmV6RPSwitchover,
+       "alaPimsmBfdStatus": alaPimsmBfdStatus,
+       "alaPimsmBidirStatus": alaPimsmBidirStatus,
+       "alaPimsmBidirPeriodicInterval": alaPimsmBidirPeriodicInterval,
+       "alaPimsmV6BidirStatus": alaPimsmV6BidirStatus,
        "alaPimsmDebugConfig": alaPimsmDebugConfig,
        "alaPimsmDebugLevel": alaPimsmDebugLevel,
        "alaPimsmDebugError": alaPimsmDebugError,
@@ -1383,6 +1560,8 @@ mibBuilder.exportSymbols(
        "alaPimdmStateRefreshTimeToLive": alaPimdmStateRefreshTimeToLive,
        "alaPimdmStateRefreshLimitInterval": alaPimdmStateRefreshLimitInterval,
        "alaPimdmV6AdminStatus": alaPimdmV6AdminStatus,
+       "alaPimdmBfdStatus": alaPimdmBfdStatus,
+       "alaPimdmRedundantStatus": alaPimdmRedundantStatus,
        "alcatelIND1PIMMIBConformance": alcatelIND1PIMMIBConformance,
        "alcatelIND1PIMMIBCompliances": alcatelIND1PIMMIBCompliances,
        "alaPimsmCompliance": alaPimsmCompliance,

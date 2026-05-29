@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-REMOTE-ACCESS-MONITOR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:27:15 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -125,7 +122,8 @@ ciscoRemoteAccessMonitorMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoRemoteAccessMonitorMIB.setRevisions(
-        ("2008-08-28 00:00",)
+        ("2020-10-04 00:00",
+         "2008-08-28 00:00")
     )
 
 
@@ -1278,6 +1276,17 @@ if mibBuilder.loadTexts:
     crasWebvpnPeakConcurrentSessions.setStatus("current")
 if mibBuilder.loadTexts:
     crasWebvpnPeakConcurrentSessions.setUnits("Sessions")
+_CrasNumPeakSessions_Type = Unsigned32
+_CrasNumPeakSessions_Object = MibScalar
+crasNumPeakSessions = _CrasNumPeakSessions_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 392, 1, 3, 41),
+    _CrasNumPeakSessions_Type()
+)
+crasNumPeakSessions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    crasNumPeakSessions.setStatus("current")
+if mibBuilder.loadTexts:
+    crasNumPeakSessions.setUnits("Sessions")
 _CrasFailures_ObjectIdentity = ObjectIdentity
 crasFailures = _CrasFailures_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 9, 392, 1, 4)
@@ -2172,6 +2181,7 @@ mibBuilder.exportSymbols(
        "crasWebvpnNumSessions": crasWebvpnNumSessions,
        "crasWebvpnCumulateSessions": crasWebvpnCumulateSessions,
        "crasWebvpnPeakConcurrentSessions": crasWebvpnPeakConcurrentSessions,
+       "crasNumPeakSessions": crasNumPeakSessions,
        "crasFailures": crasFailures,
        "crasFailuresGlobals": crasFailuresGlobals,
        "crasNumTotalFailures": crasNumTotalFailures,

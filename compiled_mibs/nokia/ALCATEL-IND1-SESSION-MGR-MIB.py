@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-SESSION-MGR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:16 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-SESSION-MGR-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,6 +108,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1SessionMgrMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1SessionMgrMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -240,6 +241,48 @@ sessionDefaultPromptString = _SessionDefaultPromptString_Object(
 sessionDefaultPromptString.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sessionDefaultPromptString.setStatus("current")
+
+
+class _SessionDefaultPromptSysName_Type(Integer32):
+    """Custom type sessionDefaultPromptSysName based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_SessionDefaultPromptSysName_Type.__name__ = "Integer32"
+_SessionDefaultPromptSysName_Object = MibTableColumn
+sessionDefaultPromptSysName = _SessionDefaultPromptSysName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 1, 1, 5),
+    _SessionDefaultPromptSysName_Type()
+)
+sessionDefaultPromptSysName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sessionDefaultPromptSysName.setStatus("current")
+
+
+class _SessionDefaultPromptSuffix_Type(DisplayString):
+    """Custom type sessionDefaultPromptSuffix based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 31),
+    )
+
+
+_SessionDefaultPromptSuffix_Type.__name__ = "DisplayString"
+_SessionDefaultPromptSuffix_Object = MibTableColumn
+sessionDefaultPromptSuffix = _SessionDefaultPromptSuffix_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 1, 1, 6),
+    _SessionDefaultPromptSuffix_Type()
+)
+sessionDefaultPromptSuffix.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sessionDefaultPromptSuffix.setStatus("current")
 _SessionActiveTable_Object = MibTable
 sessionActiveTable = _SessionActiveTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 2)
@@ -429,7 +472,7 @@ sessionRowStatus = _SessionRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 2, 1, 9),
     _SessionRowStatus_Type()
 )
-sessionRowStatus.setMaxAccess("read-write")
+sessionRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     sessionRowStatus.setStatus("current")
 
@@ -530,6 +573,134 @@ sessionXonXoffEnable = _SessionXonXoffEnable_Object(
 sessionXonXoffEnable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sessionXonXoffEnable.setStatus("current")
+_SessionAccessTable_Object = MibTable
+sessionAccessTable = _SessionAccessTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 7)
+)
+if mibBuilder.loadTexts:
+    sessionAccessTable.setStatus("current")
+_SessionAccessEntry_Object = MibTableRow
+sessionAccessEntry = _SessionAccessEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 7, 1)
+)
+sessionAccessEntry.setIndexNames(
+    (0, "ALCATEL-IND1-SESSION-MGR-MIB", "sessionServiceType"),
+)
+if mibBuilder.loadTexts:
+    sessionAccessEntry.setStatus("current")
+
+
+class _SessionServiceType_Type(Integer32):
+    """Custom type sessionServiceType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("console", 1),
+          ("telnet", 2),
+          ("ftp", 3),
+          ("http", 4),
+          ("ssh", 5),
+          ("https", 6))
+    )
+
+
+_SessionServiceType_Type.__name__ = "Integer32"
+_SessionServiceType_Object = MibTableColumn
+sessionServiceType = _SessionServiceType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 7, 1, 1),
+    _SessionServiceType_Type()
+)
+sessionServiceType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sessionServiceType.setStatus("current")
+
+
+class _SessionReauthInterval_Type(Integer32):
+    """Custom type sessionReauthInterval based on Integer32"""
+    defaultValue = 5
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 60),
+    )
+
+
+_SessionReauthInterval_Type.__name__ = "Integer32"
+_SessionReauthInterval_Object = MibTableColumn
+sessionReauthInterval = _SessionReauthInterval_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 7, 1, 2),
+    _SessionReauthInterval_Type()
+)
+sessionReauthInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sessionReauthInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    sessionReauthInterval.setUnits("minutes")
+
+
+class _SessionConsoleStatus_Type(Integer32):
+    """Custom type sessionConsoleStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_SessionConsoleStatus_Type.__name__ = "Integer32"
+_SessionConsoleStatus_Object = MibScalar
+sessionConsoleStatus = _SessionConsoleStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 8),
+    _SessionConsoleStatus_Type()
+)
+sessionConsoleStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sessionConsoleStatus.setStatus("current")
+
+
+class _SessionCliAutoCompleteSpace_Type(Integer32):
+    """Custom type sessionCliAutoCompleteSpace based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_SessionCliAutoCompleteSpace_Type.__name__ = "Integer32"
+_SessionCliAutoCompleteSpace_Object = MibScalar
+sessionCliAutoCompleteSpace = _SessionCliAutoCompleteSpace_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 1, 1, 9),
+    _SessionCliAutoCompleteSpace_Type()
+)
+sessionCliAutoCompleteSpace.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sessionCliAutoCompleteSpace.setStatus("current")
 _AlcatelIND1SessionMgrMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1SessionMgrMIBConformance = _AlcatelIND1SessionMgrMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 2)
@@ -590,7 +761,9 @@ sessionConfigGroup.setObjects(
       *(("ALCATEL-IND1-SESSION-MGR-MIB", "sessionType"),
         ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionBannerFileName"),
         ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionInactivityTimerValue"),
-        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionDefaultPromptString"))
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionDefaultPromptString"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionDefaultPromptSysName"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionDefaultPromptSuffix"))
 )
 if mibBuilder.loadTexts:
     sessionConfigGroup.setStatus("current")
@@ -611,6 +784,28 @@ sessionActiveGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     sessionActiveGroup.setStatus("current")
+
+sessionAccessGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 2, 1, 4)
+)
+sessionAccessGroup.setObjects(
+    ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionReauthInterval")
+)
+if mibBuilder.loadTexts:
+    sessionAccessGroup.setStatus("current")
+
+sessionMgrGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 7, 1, 2, 1, 5)
+)
+sessionMgrGroup.setObjects(
+      *(("ALCATEL-IND1-SESSION-MGR-MIB", "sessionLoginTimeout"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionLoginAttempt"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionCliCommandLogEnable"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionXonXoffEnable"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionConsoleStatus"))
+)
+if mibBuilder.loadTexts:
+    sessionMgrGroup.setStatus("current")
 
 
 # Notification objects
@@ -655,7 +850,8 @@ alcatelIND1SessionMgrMIBCompliance = ModuleCompliance(
 alcatelIND1SessionMgrMIBCompliance.setObjects(
       *(("ALCATEL-IND1-SESSION-MGR-MIB", "sessionConfigGroup"),
         ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionActiveGroup"),
-        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionTrapsGroup"))
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionTrapsGroup"),
+        ("ALCATEL-IND1-SESSION-MGR-MIB", "sessionAccessGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1SessionMgrMIBCompliance.setStatus(
@@ -676,6 +872,8 @@ mibBuilder.exportSymbols(
        "sessionBannerFileName": sessionBannerFileName,
        "sessionInactivityTimerValue": sessionInactivityTimerValue,
        "sessionDefaultPromptString": sessionDefaultPromptString,
+       "sessionDefaultPromptSysName": sessionDefaultPromptSysName,
+       "sessionDefaultPromptSuffix": sessionDefaultPromptSuffix,
        "sessionActiveTable": sessionActiveTable,
        "sessionActiveEntry": sessionActiveEntry,
        "sessionIndex": sessionIndex,
@@ -691,11 +889,19 @@ mibBuilder.exportSymbols(
        "sessionLoginAttempt": sessionLoginAttempt,
        "sessionCliCommandLogEnable": sessionCliCommandLogEnable,
        "sessionXonXoffEnable": sessionXonXoffEnable,
+       "sessionAccessTable": sessionAccessTable,
+       "sessionAccessEntry": sessionAccessEntry,
+       "sessionServiceType": sessionServiceType,
+       "sessionReauthInterval": sessionReauthInterval,
+       "sessionConsoleStatus": sessionConsoleStatus,
+       "sessionCliAutoCompleteSpace": sessionCliAutoCompleteSpace,
        "alcatelIND1SessionMgrMIBConformance": alcatelIND1SessionMgrMIBConformance,
        "alcatelIND1SessionMgrMIBGroups": alcatelIND1SessionMgrMIBGroups,
        "sessionConfigGroup": sessionConfigGroup,
        "sessionActiveGroup": sessionActiveGroup,
        "sessionTrapsGroup": sessionTrapsGroup,
+       "sessionAccessGroup": sessionAccessGroup,
+       "sessionMgrGroup": sessionMgrGroup,
        "alcatelIND1SessionMgrMIBCompliances": alcatelIND1SessionMgrMIBCompliances,
        "alcatelIND1SessionMgrMIBCompliance": alcatelIND1SessionMgrMIBCompliance,
        "switchMgtTrapsDesc": switchMgtTrapsDesc,

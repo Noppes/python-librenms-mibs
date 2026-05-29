@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\forcepoint\FORCEPOINT-NGFW-ENGINE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:40 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -121,7 +118,10 @@ forcepointNGFWEngineMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     forcepointNGFWEngineMib.setRevisions(
-        ("2021-12-11 00:00",)
+        ("2024-09-06 00:00",
+         "2024-09-02 00:00",
+         "2024-03-28 00:00",
+         "2021-12-11 00:00")
     )
 
 
@@ -679,6 +679,38 @@ if mibBuilder.loadTexts:
     fwMemBytesAvailable.setStatus("current")
 if mibBuilder.loadTexts:
     fwMemBytesAvailable.setUnits("bytes")
+_FwInspectionBytesUsed_Type = CounterBasedGauge64
+_FwInspectionBytesUsed_Object = MibScalar
+fwInspectionBytesUsed = _FwInspectionBytesUsed_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 11, 2, 11),
+    _FwInspectionBytesUsed_Type()
+)
+fwInspectionBytesUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwInspectionBytesUsed.setStatus("current")
+if mibBuilder.loadTexts:
+    fwInspectionBytesUsed.setUnits("bytes")
+
+
+class _FwInspectionPercentageUsed_Type(Unsigned32):
+    """Custom type fwInspectionPercentageUsed based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_FwInspectionPercentageUsed_Type.__name__ = "Unsigned32"
+_FwInspectionPercentageUsed_Object = MibScalar
+fwInspectionPercentageUsed = _FwInspectionPercentageUsed_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 11, 2, 12),
+    _FwInspectionPercentageUsed_Type()
+)
+fwInspectionPercentageUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwInspectionPercentageUsed.setStatus("current")
+if mibBuilder.loadTexts:
+    fwInspectionPercentageUsed.setUnits("percent")
 _FwDiskStatsTable_Object = MibTable
 fwDiskStatsTable = _FwDiskStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 11, 3)
@@ -1615,6 +1647,193 @@ fwVEStatus = _FwVEStatus_Object(
 fwVEStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwVEStatus.setStatus("current")
+_FwIfStatsProcTable_Object = MibTable
+fwIfStatsProcTable = _FwIfStatsProcTable_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22)
+)
+if mibBuilder.loadTexts:
+    fwIfStatsProcTable.setStatus("current")
+_FwIfStatsProcEntry_Object = MibTableRow
+fwIfStatsProcEntry = _FwIfStatsProcEntry_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1)
+)
+fwIfStatsProcEntry.setIndexNames(
+    (0, "FORCEPOINT-NGFW-ENGINE-MIB", "fwIfStatsProcIndex"),
+)
+if mibBuilder.loadTexts:
+    fwIfStatsProcEntry.setStatus("current")
+
+
+class _FwIfStatsProcIndex_Type(Integer32):
+    """Custom type fwIfStatsProcIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_FwIfStatsProcIndex_Type.__name__ = "Integer32"
+_FwIfStatsProcIndex_Object = MibTableColumn
+fwIfStatsProcIndex = _FwIfStatsProcIndex_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 1),
+    _FwIfStatsProcIndex_Type()
+)
+fwIfStatsProcIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    fwIfStatsProcIndex.setStatus("current")
+_FwIfProcName_Type = DisplayString
+_FwIfProcName_Object = MibTableColumn
+fwIfProcName = _FwIfProcName_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 2),
+    _FwIfProcName_Type()
+)
+fwIfProcName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcName.setStatus("current")
+_FwIfProcReceivedBytes_Type = Counter64
+_FwIfProcReceivedBytes_Object = MibTableColumn
+fwIfProcReceivedBytes = _FwIfProcReceivedBytes_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 3),
+    _FwIfProcReceivedBytes_Type()
+)
+fwIfProcReceivedBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedBytes.setStatus("current")
+_FwIfProcReceivedPackets_Type = Counter64
+_FwIfProcReceivedPackets_Object = MibTableColumn
+fwIfProcReceivedPackets = _FwIfProcReceivedPackets_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 4),
+    _FwIfProcReceivedPackets_Type()
+)
+fwIfProcReceivedPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedPackets.setStatus("current")
+_FwIfProcReceivedErrs_Type = Counter64
+_FwIfProcReceivedErrs_Object = MibTableColumn
+fwIfProcReceivedErrs = _FwIfProcReceivedErrs_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 5),
+    _FwIfProcReceivedErrs_Type()
+)
+fwIfProcReceivedErrs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedErrs.setStatus("current")
+_FwIfProcReceivedDrop_Type = Counter64
+_FwIfProcReceivedDrop_Object = MibTableColumn
+fwIfProcReceivedDrop = _FwIfProcReceivedDrop_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 6),
+    _FwIfProcReceivedDrop_Type()
+)
+fwIfProcReceivedDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedDrop.setStatus("current")
+_FwIfProcReceivedFifo_Type = Counter64
+_FwIfProcReceivedFifo_Object = MibTableColumn
+fwIfProcReceivedFifo = _FwIfProcReceivedFifo_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 7),
+    _FwIfProcReceivedFifo_Type()
+)
+fwIfProcReceivedFifo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedFifo.setStatus("current")
+_FwIfProcReceivedFrame_Type = Counter64
+_FwIfProcReceivedFrame_Object = MibTableColumn
+fwIfProcReceivedFrame = _FwIfProcReceivedFrame_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 8),
+    _FwIfProcReceivedFrame_Type()
+)
+fwIfProcReceivedFrame.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedFrame.setStatus("current")
+_FwIfProcReceivedCompressed_Type = Counter64
+_FwIfProcReceivedCompressed_Object = MibTableColumn
+fwIfProcReceivedCompressed = _FwIfProcReceivedCompressed_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 9),
+    _FwIfProcReceivedCompressed_Type()
+)
+fwIfProcReceivedCompressed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedCompressed.setStatus("current")
+_FwIfProcReceivedMulticast_Type = Counter64
+_FwIfProcReceivedMulticast_Object = MibTableColumn
+fwIfProcReceivedMulticast = _FwIfProcReceivedMulticast_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 10),
+    _FwIfProcReceivedMulticast_Type()
+)
+fwIfProcReceivedMulticast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcReceivedMulticast.setStatus("current")
+_FwIfProcTransmitBytes_Type = Counter64
+_FwIfProcTransmitBytes_Object = MibTableColumn
+fwIfProcTransmitBytes = _FwIfProcTransmitBytes_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 11),
+    _FwIfProcTransmitBytes_Type()
+)
+fwIfProcTransmitBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitBytes.setStatus("current")
+_FwIfProcTransmitPackets_Type = Counter64
+_FwIfProcTransmitPackets_Object = MibTableColumn
+fwIfProcTransmitPackets = _FwIfProcTransmitPackets_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 12),
+    _FwIfProcTransmitPackets_Type()
+)
+fwIfProcTransmitPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitPackets.setStatus("current")
+_FwIfProcTransmitErrs_Type = Counter64
+_FwIfProcTransmitErrs_Object = MibTableColumn
+fwIfProcTransmitErrs = _FwIfProcTransmitErrs_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 13),
+    _FwIfProcTransmitErrs_Type()
+)
+fwIfProcTransmitErrs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitErrs.setStatus("current")
+_FwIfProcTransmitDrop_Type = Counter64
+_FwIfProcTransmitDrop_Object = MibTableColumn
+fwIfProcTransmitDrop = _FwIfProcTransmitDrop_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 14),
+    _FwIfProcTransmitDrop_Type()
+)
+fwIfProcTransmitDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitDrop.setStatus("current")
+_FwIfProcTransmitFifo_Type = Counter64
+_FwIfProcTransmitFifo_Object = MibTableColumn
+fwIfProcTransmitFifo = _FwIfProcTransmitFifo_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 15),
+    _FwIfProcTransmitFifo_Type()
+)
+fwIfProcTransmitFifo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitFifo.setStatus("current")
+_FwIfProcTransmitColls_Type = Counter64
+_FwIfProcTransmitColls_Object = MibTableColumn
+fwIfProcTransmitColls = _FwIfProcTransmitColls_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 16),
+    _FwIfProcTransmitColls_Type()
+)
+fwIfProcTransmitColls.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitColls.setStatus("current")
+_FwIfProcTransmitCarrier_Type = Counter64
+_FwIfProcTransmitCarrier_Object = MibTableColumn
+fwIfProcTransmitCarrier = _FwIfProcTransmitCarrier_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 17),
+    _FwIfProcTransmitCarrier_Type()
+)
+fwIfProcTransmitCarrier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitCarrier.setStatus("current")
+_FwIfProcTransmitCompressed_Type = Counter64
+_FwIfProcTransmitCompressed_Object = MibTableColumn
+fwIfProcTransmitCompressed = _FwIfProcTransmitCompressed_Object(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 1, 22, 1, 18),
+    _FwIfProcTransmitCompressed_Type()
+)
+fwIfProcTransmitCompressed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwIfProcTransmitCompressed.setStatus("current")
 _EngineGroups_ObjectIdentity = ObjectIdentity
 engineGroups = _EngineGroups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 47565, 1, 1, 2)
@@ -1726,6 +1945,8 @@ firewallPerformanceGroup.setObjects(
         ("FORCEPOINT-NGFW-ENGINE-MIB", "fwMemBytesUnused"),
         ("FORCEPOINT-NGFW-ENGINE-MIB", "fwMemBytesCached"),
         ("FORCEPOINT-NGFW-ENGINE-MIB", "fwMemBytesAvailable"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwInspectionBytesUsed"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwInspectionPercentageUsed"),
         ("FORCEPOINT-NGFW-ENGINE-MIB", "fwMemBytesSReclaimable"),
         ("FORCEPOINT-NGFW-ENGINE-MIB", "fwPartitionUsed"),
         ("FORCEPOINT-NGFW-ENGINE-MIB", "fwPartitionAvail"),
@@ -1821,6 +2042,31 @@ engineVEGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     engineVEGroup.setStatus("current")
+
+firewallIfaceStatsProcGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 47565, 1, 1, 2, 19)
+)
+firewallIfaceStatsProcGroup.setObjects(
+      *(("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcName"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedBytes"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedPackets"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedErrs"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedDrop"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedFifo"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedFrame"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedCompressed"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcReceivedMulticast"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitBytes"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitPackets"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitErrs"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitDrop"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitFifo"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitColls"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitCarrier"),
+        ("FORCEPOINT-NGFW-ENGINE-MIB", "fwIfProcTransmitCompressed"))
+)
+if mibBuilder.loadTexts:
+    firewallIfaceStatsProcGroup.setStatus("current")
 
 
 # Notification objects
@@ -2063,6 +2309,8 @@ mibBuilder.exportSymbols(
        "fwMemBytesCached": fwMemBytesCached,
        "fwMemBytesSReclaimable": fwMemBytesSReclaimable,
        "fwMemBytesAvailable": fwMemBytesAvailable,
+       "fwInspectionBytesUsed": fwInspectionBytesUsed,
+       "fwInspectionPercentageUsed": fwInspectionPercentageUsed,
        "fwDiskStatsTable": fwDiskStatsTable,
        "fwDiskStatsEntry": fwDiskStatsEntry,
        "fwPartitionIndex": fwPartitionIndex,
@@ -2148,6 +2396,26 @@ mibBuilder.exportSymbols(
        "fwVEEngineId": fwVEEngineId,
        "fwVEName": fwVEName,
        "fwVEStatus": fwVEStatus,
+       "fwIfStatsProcTable": fwIfStatsProcTable,
+       "fwIfStatsProcEntry": fwIfStatsProcEntry,
+       "fwIfStatsProcIndex": fwIfStatsProcIndex,
+       "fwIfProcName": fwIfProcName,
+       "fwIfProcReceivedBytes": fwIfProcReceivedBytes,
+       "fwIfProcReceivedPackets": fwIfProcReceivedPackets,
+       "fwIfProcReceivedErrs": fwIfProcReceivedErrs,
+       "fwIfProcReceivedDrop": fwIfProcReceivedDrop,
+       "fwIfProcReceivedFifo": fwIfProcReceivedFifo,
+       "fwIfProcReceivedFrame": fwIfProcReceivedFrame,
+       "fwIfProcReceivedCompressed": fwIfProcReceivedCompressed,
+       "fwIfProcReceivedMulticast": fwIfProcReceivedMulticast,
+       "fwIfProcTransmitBytes": fwIfProcTransmitBytes,
+       "fwIfProcTransmitPackets": fwIfProcTransmitPackets,
+       "fwIfProcTransmitErrs": fwIfProcTransmitErrs,
+       "fwIfProcTransmitDrop": fwIfProcTransmitDrop,
+       "fwIfProcTransmitFifo": fwIfProcTransmitFifo,
+       "fwIfProcTransmitColls": fwIfProcTransmitColls,
+       "fwIfProcTransmitCarrier": fwIfProcTransmitCarrier,
+       "fwIfProcTransmitCompressed": fwIfProcTransmitCompressed,
        "engineGroups": engineGroups,
        "firewallGeneralInformationGroup": firewallGeneralInformationGroup,
        "firewallIfaceStatsGroup": firewallIfaceStatsGroup,
@@ -2166,5 +2434,6 @@ mibBuilder.exportSymbols(
        "nodeTesterNotificationsGroup": nodeTesterNotificationsGroup,
        "nodeHwmonNotificationsGroup": nodeHwmonNotificationsGroup,
        "nodeHwmonGroup": nodeHwmonGroup,
-       "engineVEGroup": engineVEGroup}
+       "engineVEGroup": engineVEGroup,
+       "firewallIfaceStatsProcGroup": firewallIfaceStatsProcGroup}
 )

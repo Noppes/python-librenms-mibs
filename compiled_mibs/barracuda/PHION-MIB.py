@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\barracuda\PHION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:20:48 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,9 @@ phion = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     phion.setRevisions(
-        ("2014-01-08 00:00",
+        ("2020-07-23 00:00",
+         "2018-05-29 00:00",
+         "2014-01-08 00:00",
          "2014-01-07 00:00",
          "2013-12-03 00:00")
     )
@@ -202,6 +201,24 @@ class VpnStates(TextualConvention, Integer32):
         *(("down", -1),
           ("down-disabled", 0),
           ("active", 1))
+    )
+
+
+
+class LicenseState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 1),
+          ("grace", 2),
+          ("expired", 3))
     )
 
 
@@ -1001,6 +1018,110 @@ partitionUsedSpacePercent = _PartitionUsedSpacePercent_Object(
 partitionUsedSpacePercent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     partitionUsedSpacePercent.setStatus("current")
+_Licenses_Object = MibTable
+licenses = _Licenses_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 14)
+)
+if mibBuilder.loadTexts:
+    licenses.setStatus("current")
+_LicenseEntry_Object = MibTableRow
+licenseEntry = _LicenseEntry_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 14, 1)
+)
+licenseEntry.setIndexNames(
+    (0, "PHION-MIB", "licenseName"),
+)
+if mibBuilder.loadTexts:
+    licenseEntry.setStatus("current")
+
+
+class _LicenseName_Type(DisplayString):
+    """Custom type licenseName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_LicenseName_Type.__name__ = "DisplayString"
+_LicenseName_Object = MibTableColumn
+licenseName = _LicenseName_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 14, 1, 1),
+    _LicenseName_Type()
+)
+licenseName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    licenseName.setStatus("current")
+_LicenseState_Type = LicenseState
+_LicenseState_Object = MibTableColumn
+licenseState = _LicenseState_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 14, 1, 2),
+    _LicenseState_Type()
+)
+licenseState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    licenseState.setStatus("current")
+_LicenseExpiration_Type = Integer32
+_LicenseExpiration_Object = MibTableColumn
+licenseExpiration = _LicenseExpiration_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 14, 1, 3),
+    _LicenseExpiration_Type()
+)
+licenseExpiration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    licenseExpiration.setStatus("current")
+_ProtectedIP_Type = Counter64
+_ProtectedIP_Object = MibScalar
+protectedIP = _ProtectedIP_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 15),
+    _ProtectedIP_Type()
+)
+protectedIP.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    protectedIP.setStatus("current")
+_Certificates_Object = MibTable
+certificates = _Certificates_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 16)
+)
+if mibBuilder.loadTexts:
+    certificates.setStatus("current")
+_CertificateEntry_Object = MibTableRow
+certificateEntry = _CertificateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 16, 1)
+)
+certificateEntry.setIndexNames(
+    (0, "PHION-MIB", "certificateName"),
+)
+if mibBuilder.loadTexts:
+    certificateEntry.setStatus("current")
+
+
+class _CertificateName_Type(DisplayString):
+    """Custom type certificateName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_CertificateName_Type.__name__ = "DisplayString"
+_CertificateName_Object = MibTableColumn
+certificateName = _CertificateName_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 16, 1, 1),
+    _CertificateName_Type()
+)
+certificateName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    certificateName.setStatus("current")
+_CertificateExpiration_Type = DateAndTime
+_CertificateExpiration_Object = MibTableColumn
+certificateExpiration = _CertificateExpiration_Object(
+    (1, 3, 6, 1, 4, 1, 10704, 1, 16, 1, 2),
+    _CertificateExpiration_Type()
+)
+certificateExpiration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    certificateExpiration.setStatus("current")
 _Event_ObjectIdentity = ObjectIdentity
 event = _Event_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 10704, 10)
@@ -1393,6 +1514,7 @@ mibBuilder.exportSymbols(
        "SensorType": SensorType,
        "RaidEventSeverity": RaidEventSeverity,
        "VpnStates": VpnStates,
+       "LicenseState": LicenseState,
        "phion": phion,
        "firewall": firewall,
        "boxServices": boxServices,
@@ -1470,6 +1592,16 @@ mibBuilder.exportSymbols(
        "partitionFreeSpace": partitionFreeSpace,
        "partitionUsedSpace": partitionUsedSpace,
        "partitionUsedSpacePercent": partitionUsedSpacePercent,
+       "licenses": licenses,
+       "licenseEntry": licenseEntry,
+       "licenseName": licenseName,
+       "licenseState": licenseState,
+       "licenseExpiration": licenseExpiration,
+       "protectedIP": protectedIP,
+       "certificates": certificates,
+       "certificateEntry": certificateEntry,
+       "certificateName": certificateName,
+       "certificateExpiration": certificateExpiration,
        "event": event,
        "eventID": eventID,
        "eventIDDescription": eventIDDescription,

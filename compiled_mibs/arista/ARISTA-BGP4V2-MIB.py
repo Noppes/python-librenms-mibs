@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arista\ARISTA-BGP4V2-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:17:52 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -46,10 +43,12 @@ if 'mibBuilder' not in globals():
 # Import SMI symbols from the MIBs this MIB depends on
 
 (AristaBgp4V2AddressFamilyIdentifierTC,
+ AristaBgp4V2EvpnNlriTC,
  AristaBgp4V2IdentifierTC,
  AristaBgp4V2SubsequentAddressFamilyIdentifierTC) = mibBuilder.importSymbols(
     "ARISTA-BGP4V2-TC-MIB",
     "AristaBgp4V2AddressFamilyIdentifierTC",
+    "AristaBgp4V2EvpnNlriTC",
     "AristaBgp4V2IdentifierTC",
     "AristaBgp4V2SubsequentAddressFamilyIdentifierTC")
 
@@ -139,7 +138,9 @@ aristaBgp4V2 = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     aristaBgp4V2.setRevisions(
-        ("2014-08-15 00:00",
+        ("2021-02-10 00:00",
+         "2020-12-29 00:00",
+         "2014-08-15 00:00",
          "2012-10-19 00:00",
          "2012-03-11 00:00")
     )
@@ -381,6 +382,40 @@ aristaBgp4V2PeerDescription = _AristaBgp4V2PeerDescription_Object(
 aristaBgp4V2PeerDescription.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     aristaBgp4V2PeerDescription.setStatus("current")
+
+
+class _AristaBgp4V2PeerPrevState_Type(Integer32):
+    """Custom type aristaBgp4V2PeerPrevState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("idle", 1),
+          ("connect", 2),
+          ("active", 3),
+          ("opensent", 4),
+          ("openconfirm", 5),
+          ("established", 6))
+    )
+
+
+_AristaBgp4V2PeerPrevState_Type.__name__ = "Integer32"
+_AristaBgp4V2PeerPrevState_Object = MibTableColumn
+aristaBgp4V2PeerPrevState = _AristaBgp4V2PeerPrevState_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 2, 1, 15),
+    _AristaBgp4V2PeerPrevState_Type()
+)
+aristaBgp4V2PeerPrevState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaBgp4V2PeerPrevState.setStatus("current")
 _AristaBgp4V2PeerErrorsTable_Object = MibTable
 aristaBgp4V2PeerErrorsTable = _AristaBgp4V2PeerErrorsTable_Object(
     (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 3)
@@ -1231,6 +1266,51 @@ aristaBgp4V2AdjRibsOutRoute = _AristaBgp4V2AdjRibsOutRoute_Object(
 aristaBgp4V2AdjRibsOutRoute.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     aristaBgp4V2AdjRibsOutRoute.setStatus("current")
+_AristaBgp4V2PrefixEvpnNlriGaugesTable_Object = MibTable
+aristaBgp4V2PrefixEvpnNlriGaugesTable = _AristaBgp4V2PrefixEvpnNlriGaugesTable_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 11)
+)
+if mibBuilder.loadTexts:
+    aristaBgp4V2PrefixEvpnNlriGaugesTable.setStatus("current")
+_AristaBgp4V2PrefixEvpnNlriGaugesEntry_Object = MibTableRow
+aristaBgp4V2PrefixEvpnNlriGaugesEntry = _AristaBgp4V2PrefixEvpnNlriGaugesEntry_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 11, 1)
+)
+aristaBgp4V2PrefixEvpnNlriGaugesEntry.setIndexNames(
+    (0, "ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerInstance"),
+    (0, "ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerRemoteAddrType"),
+    (0, "ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerRemoteAddr"),
+    (0, "ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixGaugesNlri"),
+)
+if mibBuilder.loadTexts:
+    aristaBgp4V2PrefixEvpnNlriGaugesEntry.setStatus("current")
+_AristaBgp4V2PrefixGaugesNlri_Type = AristaBgp4V2EvpnNlriTC
+_AristaBgp4V2PrefixGaugesNlri_Object = MibTableColumn
+aristaBgp4V2PrefixGaugesNlri = _AristaBgp4V2PrefixGaugesNlri_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 11, 1, 1),
+    _AristaBgp4V2PrefixGaugesNlri_Type()
+)
+aristaBgp4V2PrefixGaugesNlri.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aristaBgp4V2PrefixGaugesNlri.setStatus("current")
+_AristaBgp4V2PrefixNlriInPrefixes_Type = Gauge32
+_AristaBgp4V2PrefixNlriInPrefixes_Object = MibTableColumn
+aristaBgp4V2PrefixNlriInPrefixes = _AristaBgp4V2PrefixNlriInPrefixes_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 11, 1, 2),
+    _AristaBgp4V2PrefixNlriInPrefixes_Type()
+)
+aristaBgp4V2PrefixNlriInPrefixes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaBgp4V2PrefixNlriInPrefixes.setStatus("current")
+_AristaBgp4V2PrefixNlriInPrefixesAccepted_Type = Gauge32
+_AristaBgp4V2PrefixNlriInPrefixesAccepted_Object = MibTableColumn
+aristaBgp4V2PrefixNlriInPrefixesAccepted = _AristaBgp4V2PrefixNlriInPrefixesAccepted_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 4, 1, 1, 11, 1, 3),
+    _AristaBgp4V2PrefixNlriInPrefixesAccepted_Type()
+)
+aristaBgp4V2PrefixNlriInPrefixesAccepted.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaBgp4V2PrefixNlriInPrefixesAccepted.setStatus("current")
 _AristaBgp4V2Conformance_ObjectIdentity = ObjectIdentity
 aristaBgp4V2Conformance = _AristaBgp4V2Conformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 30065, 4, 1, 2)
@@ -1308,7 +1388,9 @@ aristaBgp4V2StdMIBCountersGroup.setObjects(
         ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerFsmEstablishedTransitions"),
         ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixInPrefixes"),
         ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixInPrefixesAccepted"),
-        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixOutPrefixes"))
+        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixOutPrefixes"),
+        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixNlriInPrefixes"),
+        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PrefixNlriInPrefixesAccepted"))
 )
 if mibBuilder.loadTexts:
     aristaBgp4V2StdMIBCountersGroup.setStatus("current")
@@ -1345,7 +1427,8 @@ aristaBgp4V2StdMIBPeerGroup.setObjects(
         ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerRemoteAs"),
         ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerLocalIdentifier"),
         ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerRemoteIdentifier"),
-        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerDescription"))
+        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerDescription"),
+        ("ARISTA-BGP4V2-MIB", "aristaBgp4V2PeerPrevState"))
 )
 if mibBuilder.loadTexts:
     aristaBgp4V2StdMIBPeerGroup.setStatus("current")
@@ -1477,6 +1560,7 @@ mibBuilder.exportSymbols(
        "aristaBgp4V2PeerAdminStatus": aristaBgp4V2PeerAdminStatus,
        "aristaBgp4V2PeerState": aristaBgp4V2PeerState,
        "aristaBgp4V2PeerDescription": aristaBgp4V2PeerDescription,
+       "aristaBgp4V2PeerPrevState": aristaBgp4V2PeerPrevState,
        "aristaBgp4V2PeerErrorsTable": aristaBgp4V2PeerErrorsTable,
        "aristaBgp4V2PeerErrorsEntry": aristaBgp4V2PeerErrorsEntry,
        "aristaBgp4V2PeerLastErrorCodeReceived": aristaBgp4V2PeerLastErrorCodeReceived,
@@ -1549,6 +1633,11 @@ mibBuilder.exportSymbols(
        "aristaBgp4V2AdjRibsOutEntry": aristaBgp4V2AdjRibsOutEntry,
        "aristaBgp4V2AdjRibsOutIndex": aristaBgp4V2AdjRibsOutIndex,
        "aristaBgp4V2AdjRibsOutRoute": aristaBgp4V2AdjRibsOutRoute,
+       "aristaBgp4V2PrefixEvpnNlriGaugesTable": aristaBgp4V2PrefixEvpnNlriGaugesTable,
+       "aristaBgp4V2PrefixEvpnNlriGaugesEntry": aristaBgp4V2PrefixEvpnNlriGaugesEntry,
+       "aristaBgp4V2PrefixGaugesNlri": aristaBgp4V2PrefixGaugesNlri,
+       "aristaBgp4V2PrefixNlriInPrefixes": aristaBgp4V2PrefixNlriInPrefixes,
+       "aristaBgp4V2PrefixNlriInPrefixesAccepted": aristaBgp4V2PrefixNlriInPrefixesAccepted,
        "aristaBgp4V2Conformance": aristaBgp4V2Conformance,
        "aristaBgp4V2Compliances": aristaBgp4V2Compliances,
        "aristaBgp4V2Compliance": aristaBgp4V2Compliance,

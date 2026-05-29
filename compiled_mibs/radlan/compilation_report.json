@@ -1,16 +1,32 @@
 {
-  "timestamp": "2025-10-02T12:22:49.737027",
+  "timestamp": "2026-05-29T09:47:39.432604",
   "stats": {
     "total": 33,
-    "compiled": 30,
-    "failed": 1,
+    "compiled": 26,
+    "failed": 5,
     "skipped": 2,
     "errors": [
       {
+        "mib": "RADLAN-COPY-MIB",
+        "error": "unprocessed"
+      },
+      {
         "mib": "RADLAN-DNSCL-MIB",
         "error": "unprocessed"
+      },
+      {
+        "mib": "RADLAN-QOS-CLI-MIB",
+        "error": "unprocessed"
+      },
+      {
+        "mib": "RADLAN-Tuning",
+        "error": "failed"
+      },
+      {
+        "mib": "RADLAN-vlan-MIB",
+        "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

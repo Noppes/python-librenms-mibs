@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\dell\Dell-Vendor-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:35:30 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -89,11 +86,13 @@ if 'mibBuilder' not in globals():
     "enterprises",
     "iso")
 
-(DisplayString,
+(DateAndTime,
+ DisplayString,
  PhysAddress,
  RowStatus,
  TextualConvention) = mibBuilder.importSymbols(
     "SNMPv2-TC",
+    "DateAndTime",
     "DisplayString",
     "PhysAddress",
     "RowStatus",
@@ -105,6 +104,10 @@ if 'mibBuilder' not in globals():
 powerConnectVendorMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 674, 10895, 3000)
 )
+if mibBuilder.loadTexts:
+    powerConnectVendorMIB.setRevisions(
+        ("2012-05-07 12:00",)
+    )
 
 
 # Types definitions
@@ -284,6 +287,15 @@ productIdentificationServiceTag = _ProductIdentificationServiceTag_Object(
 productIdentificationServiceTag.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     productIdentificationServiceTag.setStatus("current")
+_ProductIdentificationChassisServiceTag_Type = DisplayString
+_ProductIdentificationChassisServiceTag_Object = MibTableColumn
+productIdentificationChassisServiceTag = _ProductIdentificationChassisServiceTag_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 8, 1, 5),
+    _ProductIdentificationChassisServiceTag_Type()
+)
+productIdentificationChassisServiceTag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    productIdentificationChassisServiceTag.setStatus("current")
 _ProductIdentificationBootromVersion_Type = DisplayString
 _ProductIdentificationBootromVersion_Object = MibTableColumn
 productIdentificationBootromVersion = _ProductIdentificationBootromVersion_Object(
@@ -295,23 +307,61 @@ if mibBuilder.loadTexts:
     productIdentificationBootromVersion.setStatus("current")
 
 
-class _ProductIdentificationBannerMotd_Type(DisplayString):
-    """Custom type productIdentificationBannerMotd based on DisplayString"""
+class _ProductIdentificationPiecePartID_Type(DisplayString):
+    """Custom type productIdentificationPiecePartID based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 1500),
+        ValueSizeConstraint(0, 24),
     )
 
 
-_ProductIdentificationBannerMotd_Type.__name__ = "DisplayString"
-_ProductIdentificationBannerMotd_Object = MibScalar
-productIdentificationBannerMotd = _ProductIdentificationBannerMotd_Object(
-    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 9),
-    _ProductIdentificationBannerMotd_Type()
+_ProductIdentificationPiecePartID_Type.__name__ = "DisplayString"
+_ProductIdentificationPiecePartID_Object = MibTableColumn
+productIdentificationPiecePartID = _ProductIdentificationPiecePartID_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 8, 1, 7),
+    _ProductIdentificationPiecePartID_Type()
 )
-productIdentificationBannerMotd.setMaxAccess("read-write")
+productIdentificationPiecePartID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    productIdentificationBannerMotd.setStatus("current")
+    productIdentificationPiecePartID.setStatus("current")
+
+
+class _ProductIdentificationPPIDRevision_Type(DisplayString):
+    """Custom type productIdentificationPPIDRevision based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 3),
+    )
+
+
+_ProductIdentificationPPIDRevision_Type.__name__ = "DisplayString"
+_ProductIdentificationPPIDRevision_Object = MibTableColumn
+productIdentificationPPIDRevision = _ProductIdentificationPPIDRevision_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 8, 1, 8),
+    _ProductIdentificationPPIDRevision_Type()
+)
+productIdentificationPPIDRevision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    productIdentificationPPIDRevision.setStatus("current")
+
+
+class _ProductIdentificationExpressServiceCode_Type(DisplayString):
+    """Custom type productIdentificationExpressServiceCode based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 14),
+    )
+
+
+_ProductIdentificationExpressServiceCode_Type.__name__ = "DisplayString"
+_ProductIdentificationExpressServiceCode_Object = MibTableColumn
+productIdentificationExpressServiceCode = _ProductIdentificationExpressServiceCode_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 8, 1, 9),
+    _ProductIdentificationExpressServiceCode_Type()
+)
+productIdentificationExpressServiceCode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    productIdentificationExpressServiceCode.setStatus("current")
 
 
 class _ProductIdentificationBannerMotdAckMode_Type(Integer32):
@@ -332,7 +382,7 @@ class _ProductIdentificationBannerMotdAckMode_Type(Integer32):
 _ProductIdentificationBannerMotdAckMode_Type.__name__ = "Integer32"
 _ProductIdentificationBannerMotdAckMode_Object = MibScalar
 productIdentificationBannerMotdAckMode = _ProductIdentificationBannerMotdAckMode_Object(
-    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 10),
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 100, 9),
     _ProductIdentificationBannerMotdAckMode_Type()
 )
 productIdentificationBannerMotdAckMode.setMaxAccess("read-write")
@@ -539,6 +589,25 @@ envMonFanState = _EnvMonFanState_Object(
 envMonFanState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     envMonFanState.setStatus("current")
+
+
+class _EnvMonFanSpeed_Type(Integer32):
+    """Custom type envMonFanSpeed based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_EnvMonFanSpeed_Type.__name__ = "Integer32"
+_EnvMonFanSpeed_Object = MibTableColumn
+envMonFanSpeed = _EnvMonFanSpeed_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 110, 7, 1, 1, 4),
+    _EnvMonFanSpeed_Type()
+)
+envMonFanSpeed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    envMonFanSpeed.setStatus("current")
 _EnvMonSupplyStatusTable_Object = MibTable
 envMonSupplyStatusTable = _EnvMonSupplyStatusTable_Object(
     (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 110, 7, 2)
@@ -633,6 +702,55 @@ envMonSupplySource = _EnvMonSupplySource_Object(
 envMonSupplySource.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     envMonSupplySource.setStatus("current")
+
+
+class _EnvMonSupplyCurrentPower_Type(Integer32):
+    """Custom type envMonSupplyCurrentPower based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_EnvMonSupplyCurrentPower_Type.__name__ = "Integer32"
+_EnvMonSupplyCurrentPower_Object = MibTableColumn
+envMonSupplyCurrentPower = _EnvMonSupplyCurrentPower_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 110, 7, 2, 1, 5),
+    _EnvMonSupplyCurrentPower_Type()
+)
+envMonSupplyCurrentPower.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    envMonSupplyCurrentPower.setStatus("current")
+
+
+class _EnvMonSupplyAveragePower_Type(Integer32):
+    """Custom type envMonSupplyAveragePower based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_EnvMonSupplyAveragePower_Type.__name__ = "Integer32"
+_EnvMonSupplyAveragePower_Object = MibTableColumn
+envMonSupplyAveragePower = _EnvMonSupplyAveragePower_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 110, 7, 2, 1, 6),
+    _EnvMonSupplyAveragePower_Type()
+)
+envMonSupplyAveragePower.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    envMonSupplyAveragePower.setStatus("current")
+_EnvMonSupplyAvgStartTime_Type = DateAndTime
+_EnvMonSupplyAvgStartTime_Object = MibTableColumn
+envMonSupplyAvgStartTime = _EnvMonSupplyAvgStartTime_Object(
+    (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 1, 2, 110, 7, 2, 1, 7),
+    _EnvMonSupplyAvgStartTime_Type()
+)
+envMonSupplyAvgStartTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    envMonSupplyAvgStartTime.setStatus("current")
 _DellVendorNotifications_ObjectIdentity = ObjectIdentity
 dellVendorNotifications = _DellVendorNotifications_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 674, 10895, 3000, 2)
@@ -710,8 +828,11 @@ mibBuilder.exportSymbols(
        "productIdentificationSerialNumber": productIdentificationSerialNumber,
        "productIdentificationAssetTag": productIdentificationAssetTag,
        "productIdentificationServiceTag": productIdentificationServiceTag,
+       "productIdentificationChassisServiceTag": productIdentificationChassisServiceTag,
        "productIdentificationBootromVersion": productIdentificationBootromVersion,
-       "productIdentificationBannerMotd": productIdentificationBannerMotd,
+       "productIdentificationPiecePartID": productIdentificationPiecePartID,
+       "productIdentificationPPIDRevision": productIdentificationPPIDRevision,
+       "productIdentificationExpressServiceCode": productIdentificationExpressServiceCode,
        "productIdentificationBannerMotdAckMode": productIdentificationBannerMotdAckMode,
        "productStatus": productStatus,
        "productStatusGlobalStatus": productStatusGlobalStatus,
@@ -726,12 +847,16 @@ mibBuilder.exportSymbols(
        "envMonFanStatusIndex": envMonFanStatusIndex,
        "envMonFanStatusDescr": envMonFanStatusDescr,
        "envMonFanState": envMonFanState,
+       "envMonFanSpeed": envMonFanSpeed,
        "envMonSupplyStatusTable": envMonSupplyStatusTable,
        "envMonSupplyStatusEntry": envMonSupplyStatusEntry,
        "envMonSupplyStatusIndex": envMonSupplyStatusIndex,
        "envMonSupplyStatusDescr": envMonSupplyStatusDescr,
        "envMonSupplyState": envMonSupplyState,
        "envMonSupplySource": envMonSupplySource,
+       "envMonSupplyCurrentPower": envMonSupplyCurrentPower,
+       "envMonSupplyAveragePower": envMonSupplyAveragePower,
+       "envMonSupplyAvgStartTime": envMonSupplyAvgStartTime,
        "dellVendorNotifications": dellVendorNotifications,
        "dellVendorTraps": dellVendorTraps,
        "dellVendorTrapsPrefix": dellVendorTrapsPrefix,

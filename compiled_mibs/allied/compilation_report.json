@@ -1,16 +1,20 @@
 {
-  "timestamp": "2025-10-02T11:17:41.733632",
+  "timestamp": "2026-05-29T09:18:25.800824",
   "stats": {
-    "total": 34,
-    "compiled": 31,
-    "failed": 1,
+    "total": 36,
+    "compiled": 32,
+    "failed": 2,
     "skipped": 2,
     "errors": [
       {
         "mib": "AT-DOS-MIB",
         "error": "failed"
+      },
+      {
+        "mib": "AtiEdgeSwitch-MIB",
+        "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

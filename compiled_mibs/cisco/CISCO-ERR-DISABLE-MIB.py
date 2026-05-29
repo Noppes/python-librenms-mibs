@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-ERR-DISABLE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:21 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,7 +120,8 @@ ciscoErrDisableMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoErrDisableMIB.setRevisions(
-        ("2016-06-02 00:00",
+        ("2019-11-28 00:00",
+         "2016-06-02 00:00",
          "2013-04-23 00:00",
          "2010-10-19 00:00",
          "2009-03-23 00:00",
@@ -204,7 +202,8 @@ class CErrDisableFeatureID(TextualConvention, Integer32):
               58,
               59,
               60,
-              61)
+              61,
+              62)
         )
     )
     namedValues = NamedValues(
@@ -268,7 +267,8 @@ class CErrDisableFeatureID(TextualConvention, Integer32):
           ("ipConflict", 58),
           ("multipleMSapIdsRcvd", 59),
           ("oneHundredPdusWithoutAck", 60),
-          ("ipQosCompatCheckFailure", 61))
+          ("ipQosCompatCheckFailure", 61),
+          ("loopDetect", 62))
     )
 
 

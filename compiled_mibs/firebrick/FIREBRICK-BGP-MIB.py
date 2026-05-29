@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\firebrick\FIREBRICK-BGP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:33 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -101,11 +98,13 @@ if 'mibBuilder' not in globals():
 
 (DisplayString,
  PhysAddress,
- TextualConvention) = mibBuilder.importSymbols(
+ TextualConvention,
+ TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
-    "TextualConvention")
+    "TextualConvention",
+    "TruthValue")
 
 
 # MODULE-IDENTITY
@@ -115,7 +114,11 @@ fbBgpMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     fbBgpMib.setRevisions(
-        ("2020-04-06 00:00",)
+        ("2023-04-12 00:00",
+         "2023-04-09 00:00",
+         "2023-03-30 00:00",
+         "2022-07-15 00:00",
+         "2020-04-06 00:00")
     )
 
 
@@ -123,6 +126,36 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class FbBgpPeerState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("idle", 0),
+          ("active", 1),
+          ("openWait", 2),
+          ("openSent", 3),
+          ("openConfirm", 4),
+          ("established", 5),
+          ("closed", 6),
+          ("preshutdown", 7),
+          ("shutdown", 8))
+    )
 
 
 
@@ -153,7 +186,17 @@ fbBgpPeerAddressType = _FbBgpPeerAddressType_Object(
 fbBgpPeerAddressType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerAddressType.setStatus("current")
-_FbBgpPeerAddress_Type = InetAddress
+
+
+class _FbBgpPeerAddress_Type(InetAddress):
+    """Custom type fbBgpPeerAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 20),
+    )
+
+
+_FbBgpPeerAddress_Type.__name__ = "InetAddress"
 _FbBgpPeerAddress_Object = MibTableColumn
 fbBgpPeerAddress = _FbBgpPeerAddress_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 2),
@@ -171,7 +214,7 @@ fbBgpPeerName = _FbBgpPeerName_Object(
 fbBgpPeerName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerName.setStatus("current")
-_FbBgpPeerState_Type = Integer32
+_FbBgpPeerState_Type = FbBgpPeerState
 _FbBgpPeerState_Object = MibTableColumn
 fbBgpPeerState = _FbBgpPeerState_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 4),
@@ -217,7 +260,7 @@ fbBgpPeerReceivedIpv6Prefixes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerReceivedIpv6Prefixes.setStatus("current")
 _FbBgpPeerExported_Type = Integer32
-_FbBgpPeerExported_Object = MibScalar
+_FbBgpPeerExported_Object = MibTableColumn
 fbBgpPeerExported = _FbBgpPeerExported_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 9),
     _FbBgpPeerExported_Type()
@@ -226,7 +269,7 @@ fbBgpPeerExported.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerExported.setStatus("current")
 _FbBgpPeerLocalAddressType_Type = InetAddressType
-_FbBgpPeerLocalAddressType_Object = MibScalar
+_FbBgpPeerLocalAddressType_Object = MibTableColumn
 fbBgpPeerLocalAddressType = _FbBgpPeerLocalAddressType_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 10),
     _FbBgpPeerLocalAddressType_Type()
@@ -234,8 +277,18 @@ fbBgpPeerLocalAddressType = _FbBgpPeerLocalAddressType_Object(
 fbBgpPeerLocalAddressType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerLocalAddressType.setStatus("current")
-_FbBgpPeerLocalAddress_Type = InetAddress
-_FbBgpPeerLocalAddress_Object = MibScalar
+
+
+class _FbBgpPeerLocalAddress_Type(InetAddress):
+    """Custom type fbBgpPeerLocalAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 20),
+    )
+
+
+_FbBgpPeerLocalAddress_Type.__name__ = "InetAddress"
+_FbBgpPeerLocalAddress_Object = MibTableColumn
 fbBgpPeerLocalAddress = _FbBgpPeerLocalAddress_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 11),
     _FbBgpPeerLocalAddress_Type()
@@ -244,7 +297,7 @@ fbBgpPeerLocalAddress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerLocalAddress.setStatus("current")
 _FbBgpPeerLocalAS_Type = Integer32
-_FbBgpPeerLocalAS_Object = MibScalar
+_FbBgpPeerLocalAS_Object = MibTableColumn
 fbBgpPeerLocalAS = _FbBgpPeerLocalAS_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 12),
     _FbBgpPeerLocalAS_Type()
@@ -253,7 +306,7 @@ fbBgpPeerLocalAS.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerLocalAS.setStatus("current")
 _FbBgpPeerTableId_Type = Integer32
-_FbBgpPeerTableId_Object = MibScalar
+_FbBgpPeerTableId_Object = MibTableColumn
 fbBgpPeerTableId = _FbBgpPeerTableId_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 13),
     _FbBgpPeerTableId_Type()
@@ -261,6 +314,24 @@ fbBgpPeerTableId = _FbBgpPeerTableId_Object(
 fbBgpPeerTableId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbBgpPeerTableId.setStatus("current")
+_FbBgpPeerMaxPrefixes_Type = Integer32
+_FbBgpPeerMaxPrefixes_Object = MibTableColumn
+fbBgpPeerMaxPrefixes = _FbBgpPeerMaxPrefixes_Object(
+    (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 14),
+    _FbBgpPeerMaxPrefixes_Type()
+)
+fbBgpPeerMaxPrefixes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fbBgpPeerMaxPrefixes.setStatus("current")
+_FbBgpPeerMaxPrefixesHit_Type = TruthValue
+_FbBgpPeerMaxPrefixesHit_Object = MibTableColumn
+fbBgpPeerMaxPrefixesHit = _FbBgpPeerMaxPrefixesHit_Object(
+    (1, 3, 6, 1, 4, 1, 24693, 100, 179, 1, 1, 15),
+    _FbBgpPeerMaxPrefixesHit_Type()
+)
+fbBgpPeerMaxPrefixesHit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fbBgpPeerMaxPrefixesHit.setStatus("current")
 
 # Managed Objects groups
 
@@ -281,7 +352,8 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "FIREBRICK-BGP-MIB",
-    **{"fbBgpMib": fbBgpMib,
+    **{"FbBgpPeerState": FbBgpPeerState,
+       "fbBgpMib": fbBgpMib,
        "fbBgpPeerTable": fbBgpPeerTable,
        "fbBgpPeerEntry": fbBgpPeerEntry,
        "fbBgpPeerAddressType": fbBgpPeerAddressType,
@@ -296,5 +368,7 @@ mibBuilder.exportSymbols(
        "fbBgpPeerLocalAddressType": fbBgpPeerLocalAddressType,
        "fbBgpPeerLocalAddress": fbBgpPeerLocalAddress,
        "fbBgpPeerLocalAS": fbBgpPeerLocalAS,
-       "fbBgpPeerTableId": fbBgpPeerTableId}
+       "fbBgpPeerTableId": fbBgpPeerTableId,
+       "fbBgpPeerMaxPrefixes": fbBgpPeerMaxPrefixes,
+       "fbBgpPeerMaxPrefixesHit": fbBgpPeerMaxPrefixesHit}
 )

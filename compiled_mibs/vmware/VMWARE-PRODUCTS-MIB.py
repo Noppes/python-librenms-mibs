@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\vmware\VMWARE-PRODUCTS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:34:16 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,8 @@ vmwProducts = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     vmwProducts.setRevisions(
-        ("2021-04-29 00:00",
+        ("2023-08-01 00:00",
+         "2023-07-28 00:00",
          "2018-08-30 00:00",
          "2018-06-27 00:00",
          "2017-10-13 00:00",
@@ -202,6 +200,10 @@ _VmwHorizonCloudConnector_ObjectIdentity = ObjectIdentity
 vmwHorizonCloudConnector = _VmwHorizonCloudConnector_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6876, 4, 350)
 )
+_VmwHorizonV2Titan_ObjectIdentity = ObjectIdentity
+vmwHorizonV2Titan = _VmwHorizonV2Titan_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6876, 4, 450)
+)
 _OidESX_ObjectIdentity = ObjectIdentity
 oidESX = _OidESX_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6876, 60, 1)
@@ -245,5 +247,6 @@ mibBuilder.exportSymbols(
        "vmwHCXManager": vmwHCXManager,
        "vmwTunnelServer": vmwTunnelServer,
        "vmwHorizonCloudConnector": vmwHorizonCloudConnector,
+       "vmwHorizonV2Titan": vmwHorizonV2Titan,
        "oidESX": oidESX}
 )

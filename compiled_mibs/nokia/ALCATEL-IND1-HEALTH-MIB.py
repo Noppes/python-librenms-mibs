@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-HEALTH-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:25 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-HEALTH-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,7 @@ alcatelIND1HealthMonitorMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1HealthMonitorMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -1173,6 +1170,110 @@ healthPortRxTx1HrMax = _HealthPortRxTx1HrMax_Object(
 healthPortRxTx1HrMax.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     healthPortRxTx1HrMax.setStatus("current")
+
+
+class _HealthPortTxLatest_Type(Integer32):
+    """Custom type healthPortTxLatest based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_HealthPortTxLatest_Type.__name__ = "Integer32"
+_HealthPortTxLatest_Object = MibTableColumn
+healthPortTxLatest = _HealthPortTxLatest_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 16, 1, 1, 3, 1, 1, 12),
+    _HealthPortTxLatest_Type()
+)
+healthPortTxLatest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    healthPortTxLatest.setStatus("current")
+
+
+class _HealthPortTx1MinAvg_Type(Integer32):
+    """Custom type healthPortTx1MinAvg based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_HealthPortTx1MinAvg_Type.__name__ = "Integer32"
+_HealthPortTx1MinAvg_Object = MibTableColumn
+healthPortTx1MinAvg = _HealthPortTx1MinAvg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 16, 1, 1, 3, 1, 1, 13),
+    _HealthPortTx1MinAvg_Type()
+)
+healthPortTx1MinAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    healthPortTx1MinAvg.setStatus("current")
+
+
+class _HealthPortTx1HrAvg_Type(Integer32):
+    """Custom type healthPortTx1HrAvg based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_HealthPortTx1HrAvg_Type.__name__ = "Integer32"
+_HealthPortTx1HrAvg_Object = MibTableColumn
+healthPortTx1HrAvg = _HealthPortTx1HrAvg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 16, 1, 1, 3, 1, 1, 14),
+    _HealthPortTx1HrAvg_Type()
+)
+healthPortTx1HrAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    healthPortTx1HrAvg.setStatus("current")
+
+
+class _HealthPortTx1HrMax_Type(Integer32):
+    """Custom type healthPortTx1HrMax based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_HealthPortTx1HrMax_Type.__name__ = "Integer32"
+_HealthPortTx1HrMax_Object = MibTableColumn
+healthPortTx1HrMax = _HealthPortTx1HrMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 16, 1, 1, 3, 1, 1, 15),
+    _HealthPortTx1HrMax_Type()
+)
+healthPortTx1HrMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    healthPortTx1HrMax.setStatus("current")
+
+
+class _HealthPortThresholdTrapStatus_Type(Integer32):
+    """Custom type healthPortThresholdTrapStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_HealthPortThresholdTrapStatus_Type.__name__ = "Integer32"
+_HealthPortThresholdTrapStatus_Object = MibTableColumn
+healthPortThresholdTrapStatus = _HealthPortThresholdTrapStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 16, 1, 1, 3, 1, 1, 16),
+    _HealthPortThresholdTrapStatus_Type()
+)
+healthPortThresholdTrapStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    healthPortThresholdTrapStatus.setStatus("current")
 _HealthControlInfo_ObjectIdentity = ObjectIdentity
 healthControlInfo = _HealthControlInfo_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 16, 1, 1, 4)
@@ -1446,13 +1547,15 @@ class _HealthMonRxStatus_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("crossedBelowThreshold", 1),
           ("noChange", 2),
-          ("crossedAboveThreshold", 3))
+          ("crossedAboveThreshold", 3),
+          ("noTrapConfigured", 4))
     )
 
 
@@ -1474,13 +1577,15 @@ class _HealthMonRxTxStatus_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("crossedBelowThreshold", 1),
           ("noChange", 2),
-          ("crossedAboveThreshold", 3))
+          ("crossedAboveThreshold", 3),
+          ("noTrapConfigured", 4))
     )
 
 
@@ -2509,7 +2614,6 @@ healthDeviceGroup.setObjects(
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceRx1HrMax"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceRxTxLatest"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceRxTx1MinAvg"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceRxTx1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceRxTx1HrAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceRxTx1HrMax"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceMemoryLatest"),
@@ -2524,7 +2628,6 @@ healthDeviceGroup.setObjects(
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureChasLatest"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureChas1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureChas1HrAvg"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureChas1HrMax"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureCmmCpuLatest"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureCmmCpu1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthDeviceTemperatureCmmCpu1HrAvg"),
@@ -2543,7 +2646,6 @@ healthModuleGroup.setObjects(
         ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRx1HrAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRx1HrMax"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRxTxLatest"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRxTx1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRxTx1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRxTx1HrAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthModuleRxTx1HrMax"),
@@ -2571,9 +2673,10 @@ healthPortGroup.setObjects(
         ("ALCATEL-IND1-HEALTH-MIB", "healthPortRx1HrMax"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthPortRxTxLatest"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthPortRxTx1MinAvg"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthPortRxTx1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthPortRxTx1HrAvg"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthPortRxTx1HrMax"))
+        ("ALCATEL-IND1-HEALTH-MIB", "healthPortRxTx1HrMax"),
+        ("ALCATEL-IND1-HEALTH-MIB", "healthPortUpDn"),
+        ("ALCATEL-IND1-HEALTH-MIB", "healthPortThresholdTrapStatus"))
 )
 if mibBuilder.loadTexts:
     healthPortGroup.setStatus("current")
@@ -2619,7 +2722,8 @@ healthTrapObjectsGroup.setObjects(
         ("ALCATEL-IND1-HEALTH-MIB", "healthMonPrimaryFabricRxStatus"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthMonPrimaryFabricRxTxStatus"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthMonSecondaryFabricRxStatus"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthMonSecondaryFabricRxTxStatus"))
+        ("ALCATEL-IND1-HEALTH-MIB", "healthMonSecondaryFabricRxTxStatus"),
+        ("ALCATEL-IND1-HEALTH-MIB", "healthMonIpcPoolStatus"))
 )
 if mibBuilder.loadTexts:
     healthTrapObjectsGroup.setStatus("current")
@@ -2671,7 +2775,8 @@ healthFabricGroup.setObjects(
         ("ALCATEL-IND1-HEALTH-MIB", "healthFabricSecondaryLink1RxTxLatest"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthFabricSecondaryLink1RxTx1MinAvg"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthFabricSecondaryLink1RxTx1HrAvg"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthFabricSecondaryLink1RxTx1HrMax"))
+        ("ALCATEL-IND1-HEALTH-MIB", "healthFabricSecondaryLink1RxTx1HrMax"),
+        ("ALCATEL-IND1-HEALTH-MIB", "healthFabricSlot"))
 )
 if mibBuilder.loadTexts:
     healthFabricGroup.setStatus("current")
@@ -2762,7 +2867,8 @@ healthTrapsGroup.setObjects(
       *(("ALCATEL-IND1-HEALTH-MIB", "healthMonDeviceTrap"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthMonModuleTrap"),
         ("ALCATEL-IND1-HEALTH-MIB", "healthMonPortTrap"),
-        ("ALCATEL-IND1-HEALTH-MIB", "healthMonIpcTrap"))
+        ("ALCATEL-IND1-HEALTH-MIB", "healthMonIpcTrap"),
+        ("ALCATEL-IND1-HEALTH-MIB", "healthMonCpuShutPortTrap"))
 )
 if mibBuilder.loadTexts:
     healthTrapsGroup.setStatus(
@@ -2858,6 +2964,11 @@ mibBuilder.exportSymbols(
        "healthPortRxTx1MinAvg": healthPortRxTx1MinAvg,
        "healthPortRxTx1HrAvg": healthPortRxTx1HrAvg,
        "healthPortRxTx1HrMax": healthPortRxTx1HrMax,
+       "healthPortTxLatest": healthPortTxLatest,
+       "healthPortTx1MinAvg": healthPortTx1MinAvg,
+       "healthPortTx1HrAvg": healthPortTx1HrAvg,
+       "healthPortTx1HrMax": healthPortTx1HrMax,
+       "healthPortThresholdTrapStatus": healthPortThresholdTrapStatus,
        "healthControlInfo": healthControlInfo,
        "healthSamplingInterval": healthSamplingInterval,
        "healthSamplingReset": healthSamplingReset,

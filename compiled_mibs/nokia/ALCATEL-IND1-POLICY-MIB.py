@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-POLICY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:56 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-POLICY-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,6 +108,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1PolicyMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1PolicyMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -395,7 +396,7 @@ directoryServerPreference = _DirectoryServerPreference_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 3),
     _DirectoryServerPreference_Type()
 )
-directoryServerPreference.setMaxAccess("read-write")
+directoryServerPreference.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerPreference.setStatus("current")
 
@@ -423,7 +424,7 @@ directoryServerAuthenticationType = _DirectoryServerAuthenticationType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 4),
     _DirectoryServerAuthenticationType_Type()
 )
-directoryServerAuthenticationType.setMaxAccess("read-write")
+directoryServerAuthenticationType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerAuthenticationType.setStatus("current")
 
@@ -432,7 +433,7 @@ class _DirectoryServerUserId_Type(DisplayString):
     """Custom type directoryServerUserId based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 31),
+        ValueSizeConstraint(0, 127),
     )
 
 
@@ -442,7 +443,7 @@ directoryServerUserId = _DirectoryServerUserId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 5),
     _DirectoryServerUserId_Type()
 )
-directoryServerUserId.setMaxAccess("read-write")
+directoryServerUserId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerUserId.setStatus("current")
 
@@ -461,7 +462,7 @@ directoryServerPassword = _DirectoryServerPassword_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 6),
     _DirectoryServerPassword_Type()
 )
-directoryServerPassword.setMaxAccess("read-write")
+directoryServerPassword.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerPassword.setStatus("current")
 _DirectoryServerPublicKey_Type = Integer32
@@ -481,7 +482,7 @@ class _DirectoryServerSearchbase_Type(DisplayString):
 
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 31),
+        ValueSizeConstraint(0, 127),
     )
 
 
@@ -491,7 +492,7 @@ directoryServerSearchbase = _DirectoryServerSearchbase_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 8),
     _DirectoryServerSearchbase_Type()
 )
-directoryServerSearchbase.setMaxAccess("read-write")
+directoryServerSearchbase.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerSearchbase.setStatus("current")
 
@@ -519,7 +520,7 @@ directoryServerCacheChange = _DirectoryServerCacheChange_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 9),
     _DirectoryServerCacheChange_Type()
 )
-directoryServerCacheChange.setMaxAccess("read-write")
+directoryServerCacheChange.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerCacheChange.setStatus("current")
 _DirectoryServerLastChange_Type = TimeTicks
@@ -556,7 +557,7 @@ directoryServerAdminStatus = _DirectoryServerAdminStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 11),
     _DirectoryServerAdminStatus_Type()
 )
-directoryServerAdminStatus.setMaxAccess("read-write")
+directoryServerAdminStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerAdminStatus.setStatus("current")
 
@@ -602,7 +603,7 @@ directoryServerRowStatus = _DirectoryServerRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 13),
     _DirectoryServerRowStatus_Type()
 )
-directoryServerRowStatus.setMaxAccess("read-write")
+directoryServerRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerRowStatus.setStatus("current")
 
@@ -630,7 +631,7 @@ directoryServerEnableSSL = _DirectoryServerEnableSSL_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 4, 1, 14),
     _DirectoryServerEnableSSL_Type()
 )
-directoryServerEnableSSL.setMaxAccess("read-write")
+directoryServerEnableSSL.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     directoryServerEnableSSL.setStatus("current")
 _PolicyEventTable_Object = MibTable
@@ -965,6 +966,42 @@ policyManagerSwitchIdentifier = _PolicyManagerSwitchIdentifier_Object(
 policyManagerSwitchIdentifier.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     policyManagerSwitchIdentifier.setStatus("current")
+
+
+class _ServerPolicyDecisionStatus_Type(Integer32):
+    """Custom type serverPolicyDecisionStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("recacheNone", 0),
+          ("recacheInit", 1),
+          ("recacheInprogress", 2),
+          ("recacheConfigDwnld", 3),
+          ("recachingNItables", 4),
+          ("recacheSuccess", 5),
+          ("recacheFailed", 6))
+    )
+
+
+_ServerPolicyDecisionStatus_Type.__name__ = "Integer32"
+_ServerPolicyDecisionStatus_Object = MibScalar
+serverPolicyDecisionStatus = _ServerPolicyDecisionStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 1, 10),
+    _ServerPolicyDecisionStatus_Type()
+)
+serverPolicyDecisionStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    serverPolicyDecisionStatus.setStatus("current")
 _AlcatelIND1PolicyMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1PolicyMIBConformance = _AlcatelIND1PolicyMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 2)
@@ -1027,7 +1064,8 @@ policyMIBGlobalGroup = ObjectGroup(
 )
 policyMIBGlobalGroup.setObjects(
       *(("ALCATEL-IND1-POLICY-MIB", "serverPolicyDecision"),
-        ("ALCATEL-IND1-POLICY-MIB", "policyManagerEventTableSize"))
+        ("ALCATEL-IND1-POLICY-MIB", "policyManagerEventTableSize"),
+        ("ALCATEL-IND1-POLICY-MIB", "serverPolicyDecisionStatus"))
 )
 if mibBuilder.loadTexts:
     policyMIBGlobalGroup.setStatus("current")
@@ -1085,7 +1123,8 @@ policyMIBStatsGroup.setObjects(
         ("ALCATEL-IND1-POLICY-MIB", "policyStatsServerPort"),
         ("ALCATEL-IND1-POLICY-MIB", "policyStatsAccessCount"),
         ("ALCATEL-IND1-POLICY-MIB", "policyStatsSuccessAccessCount"),
-        ("ALCATEL-IND1-POLICY-MIB", "policyStatsNotFoundCount"))
+        ("ALCATEL-IND1-POLICY-MIB", "policyStatsNotFoundCount"),
+        ("ALCATEL-IND1-POLICY-MIB", "policyStatsQueryCount"))
 )
 if mibBuilder.loadTexts:
     policyMIBStatsGroup.setStatus("current")
@@ -1096,10 +1135,21 @@ policyMIBNotificationGroup = ObjectGroup(
 policyMIBNotificationGroup.setObjects(
       *(("ALCATEL-IND1-POLICY-MIB", "policyNotificationIndex"),
         ("ALCATEL-IND1-POLICY-MIB", "policyNotificationCode"),
-        ("ALCATEL-IND1-POLICY-MIB", "policyEventCount"))
+        ("ALCATEL-IND1-POLICY-MIB", "policyEventCount"),
+        ("ALCATEL-IND1-POLICY-MIB", "policyManagerSwitchIdentifier"))
 )
 if mibBuilder.loadTexts:
     policyMIBNotificationGroup.setStatus("current")
+
+policyManagerTrapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 14, 1, 2, 1, 8)
+)
+policyManagerTrapGroup.setObjects(
+      *(("ALCATEL-IND1-POLICY-MIB", "policyTrapEventDetailString"),
+        ("ALCATEL-IND1-POLICY-MIB", "policyTrapEventCode"))
+)
+if mibBuilder.loadTexts:
+    policyManagerTrapGroup.setStatus("current")
 
 
 # Notification objects
@@ -1145,7 +1195,8 @@ alcatelIND1PolicyMIBCompliance.setObjects(
         ("ALCATEL-IND1-POLICY-MIB", "policyMIBEventTableGroup"),
         ("ALCATEL-IND1-POLICY-MIB", "policyMIBRuleNamesGroup"),
         ("ALCATEL-IND1-POLICY-MIB", "policyMIBStatsGroup"),
-        ("ALCATEL-IND1-POLICY-MIB", "policyMIBNotificationGroup"))
+        ("ALCATEL-IND1-POLICY-MIB", "policyMIBNotificationGroup"),
+        ("ALCATEL-IND1-POLICY-MIB", "policyManagerTrapGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1PolicyMIBCompliance.setStatus(
@@ -1205,6 +1256,7 @@ mibBuilder.exportSymbols(
        "policyNotificationCode": policyNotificationCode,
        "policyEventCount": policyEventCount,
        "policyManagerSwitchIdentifier": policyManagerSwitchIdentifier,
+       "serverPolicyDecisionStatus": serverPolicyDecisionStatus,
        "alcatelIND1PolicyMIBConformance": alcatelIND1PolicyMIBConformance,
        "alcatelIND1PolicyMIBGroups": alcatelIND1PolicyMIBGroups,
        "policyMIBGlobalGroup": policyMIBGlobalGroup,
@@ -1214,6 +1266,7 @@ mibBuilder.exportSymbols(
        "policyMIBStatsGroup": policyMIBStatsGroup,
        "policyMIBNotificationGroup": policyMIBNotificationGroup,
        "policyMIBTrapsGroup": policyMIBTrapsGroup,
+       "policyManagerTrapGroup": policyManagerTrapGroup,
        "alcatelIND1PolicyMIBCompliances": alcatelIND1PolicyMIBCompliances,
        "alcatelIND1PolicyMIBCompliance": alcatelIND1PolicyMIBCompliance,
        "policyManagerTrapDesc": policyManagerTrapDesc,

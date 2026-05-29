@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-SUBSCRIBER-MGMT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:53 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -44,6 +41,10 @@ if 'mibBuilder' not in globals():
     "ValueSizeConstraint")
 
 # Import SMI symbols from the MIBs this MIB depends on
+
+(smRunArgument,) = mibBuilder.importSymbols(
+    "DISMAN-SCRIPT-MIB",
+    "smRunArgument")
 
 (CounterBasedGauge64,) = mibBuilder.importSymbols(
     "HCNUM-TC",
@@ -211,7 +212,8 @@ if 'mibBuilder' not in globals():
  iesIfName,
  iesIfType,
  svcDhcpLeaseCiAddrMaskLen,
- svcId) = mibBuilder.importSymbols(
+ svcId,
+ svcName) = mibBuilder.importSymbols(
     "TIMETRA-SERV-MIB",
     "DhcpLseStateInfoOrigin",
     "ServShcvOperState",
@@ -219,7 +221,8 @@ if 'mibBuilder' not in globals():
     "iesIfName",
     "iesIfType",
     "svcDhcpLeaseCiAddrMaskLen",
-    "svcId")
+    "svcId",
+    "svcName")
 
 (TmnxMobApn,
  TmnxMobApnOrZero,
@@ -230,13 +233,16 @@ if 'mibBuilder' not in globals():
     "TmnxMobImsiStr")
 
 (BgpPeeringStatus,
+ QTagFullRangeOrNone,
  SdpBindId,
  TAdaptationRule,
  TAnyQosPolicyIDorZero,
  TBurstLimit,
+ TBurstLimitOverride,
  TBurstSizeBytesOvr,
  TCIRRateOverride,
  TCpmProtPolicyID,
+ TDSCPFilterActionValue,
  TDSCPNameOrEmpty,
  TDirectionIngEgr,
  TEgrHsmdaPerPacketOffsetOvr,
@@ -256,8 +262,6 @@ if 'mibBuilder' not in globals():
  THsClassWeightOverride,
  THsWrrWeightOvr,
  THsmdaCIRKRateOverride,
- THsmdaCounterIdOrZero,
- THsmdaCounterIdOrZeroOrAll,
  THsmdaPIRKRateOverride,
  THsmdaWrrWeightOverride,
  TIcmpCodeOrNone,
@@ -292,9 +296,8 @@ if 'mibBuilder' not in globals():
  TSapIngressPolicyID,
  TTcpUdpPort,
  TTcpUdpPortOperator,
+ TWeightOverride,
  TXLNamedItem,
- TmnxAccPlcyOECounters,
- TmnxAccPlcyOICounters,
  TmnxAccPlcyQECounters,
  TmnxAccPlcyQICounters,
  TmnxActionType,
@@ -332,16 +335,19 @@ if 'mibBuilder' not in globals():
  TmnxPacketMode,
  TmnxPccRuleFilterForwardAction,
  TmnxPccRuleQosForwardAction,
+ TmnxPermitDeny,
  TmnxPortID,
  TmnxPppCpState,
  TmnxPppoeSessionId,
  TmnxPppoeSessionInfoOrigin,
  TmnxPppoeUserNameOrEmpty,
+ TmnxQosFlowIdentifier,
  TmnxRadiusFramedRouteMetric,
  TmnxRadiusFramedRoutePreference,
  TmnxRadiusFramedRouteTag,
  TmnxRadiusPendingReqLimit,
  TmnxRadiusServerOperState,
+ TmnxReflectiveQosIndicator,
  TmnxRipListenerStatus,
  TmnxRipNgAuthKey,
  TmnxRipNgAuthType,
@@ -351,6 +357,7 @@ if 'mibBuilder' not in globals():
  TmnxSubAcctSessionId,
  TmnxSubAleOffset,
  TmnxSubAleOffsetMode,
+ TmnxSubAltProfThresholdType,
  TmnxSubAuthPlcyUserNameOp,
  TmnxSubCallingStationIdType,
  TmnxSubCreditVolumeUnit,
@@ -368,6 +375,7 @@ if 'mibBuilder' not in globals():
  TmnxSubPfcpNodeIdDomainName,
  TmnxSubPfcpNodeIdType,
  TmnxSubPfcpPeerNodeIdType,
+ TmnxSubPfcpPeerSystemNodeIdType,
  TmnxSubPoolName,
  TmnxSubProfileStringOrEmpty,
  TmnxSubRadServAlgorithm,
@@ -388,13 +396,16 @@ if 'mibBuilder' not in globals():
  VRtrIgmpHostMcRDstStatType) = mibBuilder.importSymbols(
     "TIMETRA-TC-MIB",
     "BgpPeeringStatus",
+    "QTagFullRangeOrNone",
     "SdpBindId",
     "TAdaptationRule",
     "TAnyQosPolicyIDorZero",
     "TBurstLimit",
+    "TBurstLimitOverride",
     "TBurstSizeBytesOvr",
     "TCIRRateOverride",
     "TCpmProtPolicyID",
+    "TDSCPFilterActionValue",
     "TDSCPNameOrEmpty",
     "TDirectionIngEgr",
     "TEgrHsmdaPerPacketOffsetOvr",
@@ -414,8 +425,6 @@ if 'mibBuilder' not in globals():
     "THsClassWeightOverride",
     "THsWrrWeightOvr",
     "THsmdaCIRKRateOverride",
-    "THsmdaCounterIdOrZero",
-    "THsmdaCounterIdOrZeroOrAll",
     "THsmdaPIRKRateOverride",
     "THsmdaWrrWeightOverride",
     "TIcmpCodeOrNone",
@@ -450,9 +459,8 @@ if 'mibBuilder' not in globals():
     "TSapIngressPolicyID",
     "TTcpUdpPort",
     "TTcpUdpPortOperator",
+    "TWeightOverride",
     "TXLNamedItem",
-    "TmnxAccPlcyOECounters",
-    "TmnxAccPlcyOICounters",
     "TmnxAccPlcyQECounters",
     "TmnxAccPlcyQICounters",
     "TmnxActionType",
@@ -490,16 +498,19 @@ if 'mibBuilder' not in globals():
     "TmnxPacketMode",
     "TmnxPccRuleFilterForwardAction",
     "TmnxPccRuleQosForwardAction",
+    "TmnxPermitDeny",
     "TmnxPortID",
     "TmnxPppCpState",
     "TmnxPppoeSessionId",
     "TmnxPppoeSessionInfoOrigin",
     "TmnxPppoeUserNameOrEmpty",
+    "TmnxQosFlowIdentifier",
     "TmnxRadiusFramedRouteMetric",
     "TmnxRadiusFramedRoutePreference",
     "TmnxRadiusFramedRouteTag",
     "TmnxRadiusPendingReqLimit",
     "TmnxRadiusServerOperState",
+    "TmnxReflectiveQosIndicator",
     "TmnxRipListenerStatus",
     "TmnxRipNgAuthKey",
     "TmnxRipNgAuthType",
@@ -509,6 +520,7 @@ if 'mibBuilder' not in globals():
     "TmnxSubAcctSessionId",
     "TmnxSubAleOffset",
     "TmnxSubAleOffsetMode",
+    "TmnxSubAltProfThresholdType",
     "TmnxSubAuthPlcyUserNameOp",
     "TmnxSubCallingStationIdType",
     "TmnxSubCreditVolumeUnit",
@@ -526,6 +538,7 @@ if 'mibBuilder' not in globals():
     "TmnxSubPfcpNodeIdDomainName",
     "TmnxSubPfcpNodeIdType",
     "TmnxSubPfcpPeerNodeIdType",
+    "TmnxSubPfcpPeerSystemNodeIdType",
     "TmnxSubPoolName",
     "TmnxSubProfileStringOrEmpty",
     "TmnxSubRadServAlgorithm",
@@ -557,7 +570,8 @@ tmnxSubMgmtMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     tmnxSubMgmtMIBModule.setRevisions(
-        ("2020-02-01 00:00",
+        ("2024-02-01 00:00",
+         "2020-02-01 00:00",
          "2019-03-15 00:00",
          "2017-03-15 00:00",
          "2016-01-01 00:00",
@@ -681,6 +695,26 @@ class TmnxSubAdminStatus(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("enabled", 1),
           ("disabled", 2))
+    )
+
+
+
+class TmnxSubAggScope(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("static", 1),
+          ("all", 2),
+          ("dynamic", 3))
     )
 
 
@@ -1723,6 +1757,30 @@ class TmnxSubAuthOrigin(TextualConvention, Integer32):
           ("localAddressAssignment", 8),
           ("pfcp", 9),
           ("config", 10))
+    )
+
+
+
+class TmnxSubPccRuleLevel2Id(TextualConvention, Unsigned32):
+    status = "current"
+
+
+class TmnxSubPccRuleLvl2MapFromProfile(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("queue", 1),
+          ("arbiter", 2),
+          ("policer", 3))
     )
 
 
@@ -3176,24 +3234,6 @@ if mibBuilder.loadTexts:
     tmnxSubProfHsmdaIngPackByteOff.setUnits("bytes")
 
 
-class _TmnxSubProfHsmdaEgrPackByteOff_Type(TEgrHsmdaPerPacketOffsetOvr):
-    """Custom type tmnxSubProfHsmdaEgrPackByteOff based on TEgrHsmdaPerPacketOffsetOvr"""
-    defaultValue = -128
-
-
-_TmnxSubProfHsmdaEgrPackByteOff_Type.__name__ = "TEgrHsmdaPerPacketOffsetOvr"
-_TmnxSubProfHsmdaEgrPackByteOff_Object = MibTableColumn
-tmnxSubProfHsmdaEgrPackByteOff = _TmnxSubProfHsmdaEgrPackByteOff_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 5, 1, 19),
-    _TmnxSubProfHsmdaEgrPackByteOff_Type()
-)
-tmnxSubProfHsmdaEgrPackByteOff.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxSubProfHsmdaEgrPackByteOff.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxSubProfHsmdaEgrPackByteOff.setUnits("bytes")
-
-
 class _TmnxSubProfHostTrackingPolicy_Type(TNamedItemOrEmpty):
     """Custom type tmnxSubProfHostTrackingPolicy based on TNamedItemOrEmpty"""
     defaultHexValue = ""
@@ -3909,6 +3949,22 @@ tmnxSubProfEgrAggRateBurstLimit = _TmnxSubProfEgrAggRateBurstLimit_Object(
 tmnxSubProfEgrAggRateBurstLimit.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubProfEgrAggRateBurstLimit.setStatus("current")
+
+
+class _TmnxSubProfAltProfName_Type(TNamedItemOrEmpty):
+    """Custom type tmnxSubProfAltProfName based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TmnxSubProfAltProfName_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxSubProfAltProfName_Object = MibTableColumn
+tmnxSubProfAltProfName = _TmnxSubProfAltProfName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 5, 1, 132),
+    _TmnxSubProfAltProfName_Type()
+)
+tmnxSubProfAltProfName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubProfAltProfName.setStatus("current")
 _TmnxSubProfSchedOverrideTable_Object = MibTable
 tmnxSubProfSchedOverrideTable = _TmnxSubProfSchedOverrideTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 6)
@@ -5031,6 +5087,70 @@ tmnxSLAProfSessLimOvrl = _TmnxSLAProfSessLimOvrl_Object(
 tmnxSLAProfSessLimOvrl.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSLAProfSessLimOvrl.setStatus("current")
+
+
+class _TmnxSLAProfAggEgrPolicersScope_Type(TmnxSubAggScope):
+    """Custom type tmnxSLAProfAggEgrPolicersScope based on TmnxSubAggScope"""
+    defaultValue = 1
+
+
+_TmnxSLAProfAggEgrPolicersScope_Type.__name__ = "TmnxSubAggScope"
+_TmnxSLAProfAggEgrPolicersScope_Object = MibTableColumn
+tmnxSLAProfAggEgrPolicersScope = _TmnxSLAProfAggEgrPolicersScope_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 8, 1, 63),
+    _TmnxSLAProfAggEgrPolicersScope_Type()
+)
+tmnxSLAProfAggEgrPolicersScope.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSLAProfAggEgrPolicersScope.setStatus("current")
+
+
+class _TmnxSLAProfAggEgrQueuesScope_Type(TmnxSubAggScope):
+    """Custom type tmnxSLAProfAggEgrQueuesScope based on TmnxSubAggScope"""
+    defaultValue = 2
+
+
+_TmnxSLAProfAggEgrQueuesScope_Type.__name__ = "TmnxSubAggScope"
+_TmnxSLAProfAggEgrQueuesScope_Object = MibTableColumn
+tmnxSLAProfAggEgrQueuesScope = _TmnxSLAProfAggEgrQueuesScope_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 8, 1, 64),
+    _TmnxSLAProfAggEgrQueuesScope_Type()
+)
+tmnxSLAProfAggEgrQueuesScope.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSLAProfAggEgrQueuesScope.setStatus("current")
+
+
+class _TmnxSLAProfAltProfName_Type(TNamedItemOrEmpty):
+    """Custom type tmnxSLAProfAltProfName based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TmnxSLAProfAltProfName_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxSLAProfAltProfName_Object = MibTableColumn
+tmnxSLAProfAltProfName = _TmnxSLAProfAltProfName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 8, 1, 65),
+    _TmnxSLAProfAltProfName_Type()
+)
+tmnxSLAProfAltProfName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSLAProfAltProfName.setStatus("current")
+
+
+class _TmnxSLAProfIdleTimeoutPlcy_Type(TNamedItemOrEmpty):
+    """Custom type tmnxSLAProfIdleTimeoutPlcy based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TmnxSLAProfIdleTimeoutPlcy_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxSLAProfIdleTimeoutPlcy_Object = MibTableColumn
+tmnxSLAProfIdleTimeoutPlcy = _TmnxSLAProfIdleTimeoutPlcy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 8, 1, 66),
+    _TmnxSLAProfIdleTimeoutPlcy_Type()
+)
+tmnxSLAProfIdleTimeoutPlcy.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSLAProfIdleTimeoutPlcy.setStatus("current")
 _TmnxSLAIngQueueOverrideTable_Object = MibTable
 tmnxSLAIngQueueOverrideTable = _TmnxSLAIngQueueOverrideTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 9)
@@ -6113,15 +6233,6 @@ tmnxSubInfoQos = _TmnxSubInfoQos_Object(
 tmnxSubInfoQos.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubInfoQos.setStatus("current")
-_TmnxSubInfoIngQosPolIdOvr_Type = TAnyQosPolicyIDorZero
-_TmnxSubInfoIngQosPolIdOvr_Object = MibTableColumn
-tmnxSubInfoIngQosPolIdOvr = _TmnxSubInfoIngQosPolIdOvr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 17, 1, 13),
-    _TmnxSubInfoIngQosPolIdOvr_Type()
-)
-tmnxSubInfoIngQosPolIdOvr.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubInfoIngQosPolIdOvr.setStatus("current")
 _TmnxSubInfoShortId_Type = TmnxSubIdentShortString
 _TmnxSubInfoShortId_Object = MibTableColumn
 tmnxSubInfoShortId = _TmnxSubInfoShortId_Object(
@@ -6140,6 +6251,15 @@ tmnxSubInfoEgrAggRateLimitLow = _TmnxSubInfoEgrAggRateLimitLow_Object(
 tmnxSubInfoEgrAggRateLimitLow.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubInfoEgrAggRateLimitLow.setStatus("current")
+_TmnxSubInfoOversubscribed_Type = TruthValue
+_TmnxSubInfoOversubscribed_Object = MibTableColumn
+tmnxSubInfoOversubscribed = _TmnxSubInfoOversubscribed_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 17, 1, 16),
+    _TmnxSubInfoOversubscribed_Type()
+)
+tmnxSubInfoOversubscribed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubInfoOversubscribed.setStatus("current")
 _TmnxSubHostInfoTable_Object = MibTable
 tmnxSubHostInfoTable = _TmnxSubHostInfoTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 18)
@@ -7235,7 +7355,9 @@ class _TmnxSubAcctPlcyInclAttributes_Type(Bits):
           ("uli", 54),
           ("bearerFteid", 55),
           ("xconnectTunnelHomeAddress", 56),
-          ("imsi", 57))
+          ("imsi", 57),
+          ("lacFragmentation", 58),
+          ("ratType", 59))
     )
 
 _TmnxSubAcctPlcyInclAttributes_Type.__name__ = "Bits"
@@ -7688,11 +7810,11 @@ class _TmnxSubAcctPlcyTriggeredUpdates_Type(Bits):
 
     namedValues = NamedValues(
         *(("gtpMobility", 0),
-          ("reserved1", 1),
-          ("reserved2", 2),
-          ("reserved3", 3),
-          ("reserved4", 4),
-          ("reserved5", 5))
+          ("gtpChangeS1Release", 1),
+          ("gtpChangeSvcReq", 2),
+          ("gtpChangeUliChange", 3),
+          ("gtpChangeTeiduChange", 4),
+          ("gtpChangeTeidcChange", 5))
     )
 
 _TmnxSubAcctPlcyTriggeredUpdates_Type.__name__ = "Bits"
@@ -8009,7 +8131,7 @@ class _TmnxSubIPolAppProfMapAppString_Type(DisplayString):
     """Custom type tmnxSubIPolAppProfMapAppString based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 16),
+        ValueSizeConstraint(1, 32),
     )
 
 
@@ -9845,6 +9967,44 @@ tmnxSubHostInfoV2HwAggShapInUse = _TmnxSubHostInfoV2HwAggShapInUse_Object(
 tmnxSubHostInfoV2HwAggShapInUse.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubHostInfoV2HwAggShapInUse.setStatus("current")
+_TmnxSubHostInfoV2LagActivePort_Type = TmnxPortID
+_TmnxSubHostInfoV2LagActivePort_Object = MibTableColumn
+tmnxSubHostInfoV2LagActivePort = _TmnxSubHostInfoV2LagActivePort_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 41, 1, 37),
+    _TmnxSubHostInfoV2LagActivePort_Type()
+)
+tmnxSubHostInfoV2LagActivePort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostInfoV2LagActivePort.setStatus("current")
+
+
+class _TmnxSubHostInfoV2HwAggShapQSetSz_Type(Unsigned32):
+    """Custom type tmnxSubHostInfoV2HwAggShapQSetSz based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(2, 8),
+    )
+
+
+_TmnxSubHostInfoV2HwAggShapQSetSz_Type.__name__ = "Unsigned32"
+_TmnxSubHostInfoV2HwAggShapQSetSz_Object = MibTableColumn
+tmnxSubHostInfoV2HwAggShapQSetSz = _TmnxSubHostInfoV2HwAggShapQSetSz_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 41, 1, 38),
+    _TmnxSubHostInfoV2HwAggShapQSetSz_Type()
+)
+tmnxSubHostInfoV2HwAggShapQSetSz.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostInfoV2HwAggShapQSetSz.setStatus("current")
+_TmnxSubHostInfoV2HwAggShapQSzOvr_Type = TruthValue
+_TmnxSubHostInfoV2HwAggShapQSzOvr_Object = MibTableColumn
+tmnxSubHostInfoV2HwAggShapQSzOvr = _TmnxSubHostInfoV2HwAggShapQSzOvr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 41, 1, 39),
+    _TmnxSubHostInfoV2HwAggShapQSzOvr_Type()
+)
+tmnxSubHostInfoV2HwAggShapQSzOvr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostInfoV2HwAggShapQSzOvr.setStatus("current")
 _TmnxSLAProfInstSubHostV2Table_Object = MibTable
 tmnxSLAProfInstSubHostV2Table = _TmnxSLAProfInstSubHostV2Table_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 42)
@@ -10709,22 +10869,6 @@ if mibBuilder.loadTexts:
     tmnxSubApCrSignChangeQueue.setStatus("current")
 
 
-class _TmnxSubApCrSignChangeOCntr_Type(THsmdaCounterIdOrZeroOrAll):
-    """Custom type tmnxSubApCrSignChangeOCntr based on THsmdaCounterIdOrZeroOrAll"""
-    defaultValue = 0
-
-
-_TmnxSubApCrSignChangeOCntr_Type.__name__ = "THsmdaCounterIdOrZeroOrAll"
-_TmnxSubApCrSignChangeOCntr_Object = MibTableColumn
-tmnxSubApCrSignChangeOCntr = _TmnxSubApCrSignChangeOCntr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 50, 1, 4),
-    _TmnxSubApCrSignChangeOCntr_Type()
-)
-tmnxSubApCrSignChangeOCntr.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxSubApCrSignChangeOCntr.setStatus("obsolete")
-
-
 class _TmnxSubApCrSignChangeQICounters_Type(TmnxAccPlcyQICounters):
     """Custom type tmnxSubApCrSignChangeQICounters based on TmnxAccPlcyQICounters"""
     defaultBinValue = "0"
@@ -10755,38 +10899,6 @@ tmnxSubApCrSignChangeQECounters = _TmnxSubApCrSignChangeQECounters_Object(
 tmnxSubApCrSignChangeQECounters.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxSubApCrSignChangeQECounters.setStatus("current")
-
-
-class _TmnxSubApCrSignChangeOICounters_Type(TmnxAccPlcyOICounters):
-    """Custom type tmnxSubApCrSignChangeOICounters based on TmnxAccPlcyOICounters"""
-    defaultBinValue = "0"
-
-
-_TmnxSubApCrSignChangeOICounters_Type.__name__ = "TmnxAccPlcyOICounters"
-_TmnxSubApCrSignChangeOICounters_Object = MibTableColumn
-tmnxSubApCrSignChangeOICounters = _TmnxSubApCrSignChangeOICounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 50, 1, 7),
-    _TmnxSubApCrSignChangeOICounters_Type()
-)
-tmnxSubApCrSignChangeOICounters.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxSubApCrSignChangeOICounters.setStatus("obsolete")
-
-
-class _TmnxSubApCrSignChangeOECounters_Type(TmnxAccPlcyOECounters):
-    """Custom type tmnxSubApCrSignChangeOECounters based on TmnxAccPlcyOECounters"""
-    defaultBinValue = "0"
-
-
-_TmnxSubApCrSignChangeOECounters_Type.__name__ = "TmnxAccPlcyOECounters"
-_TmnxSubApCrSignChangeOECounters_Object = MibTableColumn
-tmnxSubApCrSignChangeOECounters = _TmnxSubApCrSignChangeOECounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 50, 1, 8),
-    _TmnxSubApCrSignChangeOECounters_Type()
-)
-tmnxSubApCrSignChangeOECounters.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxSubApCrSignChangeOECounters.setStatus("obsolete")
 _TmnxSubApCustRecQueueLastChnge_Type = TimeStamp
 _TmnxSubApCustRecQueueLastChnge_Object = MibScalar
 tmnxSubApCustRecQueueLastChnge = _TmnxSubApCustRecQueueLastChnge_Object(
@@ -10881,100 +10993,6 @@ tmnxSubApCrQueueECounters = _TmnxSubApCrQueueECounters_Object(
 tmnxSubApCrQueueECounters.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubApCrQueueECounters.setStatus("current")
-_TmnxSubApCustRecOvrCtrLastChnge_Type = TimeStamp
-_TmnxSubApCustRecOvrCtrLastChnge_Object = MibScalar
-tmnxSubApCustRecOvrCtrLastChnge = _TmnxSubApCustRecOvrCtrLastChnge_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 53),
-    _TmnxSubApCustRecOvrCtrLastChnge_Type()
-)
-tmnxSubApCustRecOvrCtrLastChnge.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubApCustRecOvrCtrLastChnge.setStatus("obsolete")
-_TmnxSubApCrOverrideCntrTable_Object = MibTable
-tmnxSubApCrOverrideCntrTable = _TmnxSubApCrOverrideCntrTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54)
-)
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrTable.setStatus("obsolete")
-_TmnxSubApCrOverrideCntrEntry_Object = MibTableRow
-tmnxSubApCrOverrideCntrEntry = _TmnxSubApCrOverrideCntrEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54, 1)
-)
-tmnxSubApCrOverrideCntrEntry.setIndexNames(
-    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAcctPlcyName"),
-    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrOverrideCntrId"),
-)
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrEntry.setStatus("obsolete")
-
-
-class _TmnxSubApCrOverrideCntrId_Type(THsmdaCounterIdOrZero):
-    """Custom type tmnxSubApCrOverrideCntrId based on THsmdaCounterIdOrZero"""
-    subtypeSpec = THsmdaCounterIdOrZero.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TmnxSubApCrOverrideCntrId_Type.__name__ = "THsmdaCounterIdOrZero"
-_TmnxSubApCrOverrideCntrId_Object = MibTableColumn
-tmnxSubApCrOverrideCntrId = _TmnxSubApCrOverrideCntrId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54, 1, 1),
-    _TmnxSubApCrOverrideCntrId_Type()
-)
-tmnxSubApCrOverrideCntrId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrId.setStatus("current")
-_TmnxSubApCrOverrideCntrRowStatus_Type = RowStatus
-_TmnxSubApCrOverrideCntrRowStatus_Object = MibTableColumn
-tmnxSubApCrOverrideCntrRowStatus = _TmnxSubApCrOverrideCntrRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54, 1, 2),
-    _TmnxSubApCrOverrideCntrRowStatus_Type()
-)
-tmnxSubApCrOverrideCntrRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrRowStatus.setStatus("obsolete")
-_TmnxSubApCrOverrideCntrLastChngd_Type = TimeStamp
-_TmnxSubApCrOverrideCntrLastChngd_Object = MibTableColumn
-tmnxSubApCrOverrideCntrLastChngd = _TmnxSubApCrOverrideCntrLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54, 1, 3),
-    _TmnxSubApCrOverrideCntrLastChngd_Type()
-)
-tmnxSubApCrOverrideCntrLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrLastChngd.setStatus("obsolete")
-
-
-class _TmnxSubApCrOverrideCntrICounters_Type(TmnxAccPlcyOICounters):
-    """Custom type tmnxSubApCrOverrideCntrICounters based on TmnxAccPlcyOICounters"""
-    defaultBinValue = "0"
-
-
-_TmnxSubApCrOverrideCntrICounters_Type.__name__ = "TmnxAccPlcyOICounters"
-_TmnxSubApCrOverrideCntrICounters_Object = MibTableColumn
-tmnxSubApCrOverrideCntrICounters = _TmnxSubApCrOverrideCntrICounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54, 1, 4),
-    _TmnxSubApCrOverrideCntrICounters_Type()
-)
-tmnxSubApCrOverrideCntrICounters.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrICounters.setStatus("obsolete")
-
-
-class _TmnxSubApCrOverrideCntrECounters_Type(TmnxAccPlcyOECounters):
-    """Custom type tmnxSubApCrOverrideCntrECounters based on TmnxAccPlcyOECounters"""
-    defaultBinValue = "0"
-
-
-_TmnxSubApCrOverrideCntrECounters_Type.__name__ = "TmnxAccPlcyOECounters"
-_TmnxSubApCrOverrideCntrECounters_Object = MibTableColumn
-tmnxSubApCrOverrideCntrECounters = _TmnxSubApCrOverrideCntrECounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 54, 1, 5),
-    _TmnxSubApCrOverrideCntrECounters_Type()
-)
-tmnxSubApCrOverrideCntrECounters.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxSubApCrOverrideCntrECounters.setStatus("obsolete")
 _TmnxSubApCCPlcyTableLastChnge_Type = TimeStamp
 _TmnxSubApCCPlcyTableLastChnge_Object = MibScalar
 tmnxSubApCCPlcyTableLastChnge = _TmnxSubApCCPlcyTableLastChnge_Object(
@@ -15178,6 +15196,33 @@ tmnxSLAProfInstOvrClassWeight = _TmnxSLAProfInstOvrClassWeight_Object(
 tmnxSLAProfInstOvrClassWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSLAProfInstOvrClassWeight.setStatus("current")
+_TmnxSLAProfInstOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSLAProfInstOvrBurstLimit_Object = MibTableColumn
+tmnxSLAProfInstOvrBurstLimit = _TmnxSLAProfInstOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 85, 1, 16),
+    _TmnxSLAProfInstOvrBurstLimit_Type()
+)
+tmnxSLAProfInstOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSLAProfInstOvrBurstLimit.setStatus("current")
+_TmnxSLAProfInstOvrParentWeight_Type = TWeightOverride
+_TmnxSLAProfInstOvrParentWeight_Object = MibTableColumn
+tmnxSLAProfInstOvrParentWeight = _TmnxSLAProfInstOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 85, 1, 17),
+    _TmnxSLAProfInstOvrParentWeight_Type()
+)
+tmnxSLAProfInstOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSLAProfInstOvrParentWeight.setStatus("current")
+_TmnxSLAProfInstOvrParentCIRWeigh_Type = TWeightOverride
+_TmnxSLAProfInstOvrParentCIRWeigh_Object = MibTableColumn
+tmnxSLAProfInstOvrParentCIRWeigh = _TmnxSLAProfInstOvrParentCIRWeigh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 85, 1, 18),
+    _TmnxSLAProfInstOvrParentCIRWeigh_Type()
+)
+tmnxSLAProfInstOvrParentCIRWeigh.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSLAProfInstOvrParentCIRWeigh.setStatus("current")
 _TmnxSLAProfCMapTable_Object = MibTable
 tmnxSLAProfCMapTable = _TmnxSLAProfCMapTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 86)
@@ -15475,6 +15520,33 @@ tmnxSubOvrSummedCIR = _TmnxSubOvrSummedCIR_Object(
 tmnxSubOvrSummedCIR.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubOvrSummedCIR.setStatus("current")
+_TmnxSubOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSubOvrBurstLimit_Object = MibTableColumn
+tmnxSubOvrBurstLimit = _TmnxSubOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 88, 1, 15),
+    _TmnxSubOvrBurstLimit_Type()
+)
+tmnxSubOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubOvrBurstLimit.setStatus("current")
+_TmnxSubOvrParentWeight_Type = TWeightOverride
+_TmnxSubOvrParentWeight_Object = MibTableColumn
+tmnxSubOvrParentWeight = _TmnxSubOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 88, 1, 16),
+    _TmnxSubOvrParentWeight_Type()
+)
+tmnxSubOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubOvrParentWeight.setStatus("current")
+_TmnxSubOvrParentCIRWeight_Type = TWeightOverride
+_TmnxSubOvrParentCIRWeight_Object = MibTableColumn
+tmnxSubOvrParentCIRWeight = _TmnxSubOvrParentCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 88, 1, 17),
+    _TmnxSubOvrParentCIRWeight_Type()
+)
+tmnxSubOvrParentCIRWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubOvrParentCIRWeight.setStatus("current")
 _TmnxSubFlterProfTbleLastMgmtChg_Type = TimeStamp
 _TmnxSubFlterProfTbleLastMgmtChg_Object = MibScalar
 tmnxSubFlterProfTbleLastMgmtChg = _TmnxSubFlterProfTbleLastMgmtChg_Object(
@@ -15483,13 +15555,13 @@ tmnxSubFlterProfTbleLastMgmtChg = _TmnxSubFlterProfTbleLastMgmtChg_Object(
 )
 tmnxSubFlterProfTbleLastMgmtChg.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfTbleLastMgmtChg.setStatus("current")
+    tmnxSubFlterProfTbleLastMgmtChg.setStatus("obsolete")
 _TmnxSubFilterProfileTable_Object = MibTable
 tmnxSubFilterProfileTable = _TmnxSubFilterProfileTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 90)
 )
 if mibBuilder.loadTexts:
-    tmnxSubFilterProfileTable.setStatus("current")
+    tmnxSubFilterProfileTable.setStatus("obsolete")
 _TmnxSubFilterProfileEntry_Object = MibTableRow
 tmnxSubFilterProfileEntry = _TmnxSubFilterProfileEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 90, 1)
@@ -15498,7 +15570,7 @@ tmnxSubFilterProfileEntry.setIndexNames(
     (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfName"),
 )
 if mibBuilder.loadTexts:
-    tmnxSubFilterProfileEntry.setStatus("current")
+    tmnxSubFilterProfileEntry.setStatus("obsolete")
 _TmnxSubFlterProfName_Type = TNamedItem
 _TmnxSubFlterProfName_Object = MibTableColumn
 tmnxSubFlterProfName = _TmnxSubFlterProfName_Object(
@@ -15507,7 +15579,7 @@ tmnxSubFlterProfName = _TmnxSubFlterProfName_Object(
 )
 tmnxSubFlterProfName.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfName.setStatus("current")
+    tmnxSubFlterProfName.setStatus("obsolete")
 _TmnxSubFlterProfRowStatus_Type = RowStatus
 _TmnxSubFlterProfRowStatus_Object = MibTableColumn
 tmnxSubFlterProfRowStatus = _TmnxSubFlterProfRowStatus_Object(
@@ -15516,7 +15588,7 @@ tmnxSubFlterProfRowStatus = _TmnxSubFlterProfRowStatus_Object(
 )
 tmnxSubFlterProfRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfRowStatus.setStatus("current")
+    tmnxSubFlterProfRowStatus.setStatus("obsolete")
 _TmnxSubFlterProfLastMgmtChange_Type = TimeStamp
 _TmnxSubFlterProfLastMgmtChange_Object = MibTableColumn
 tmnxSubFlterProfLastMgmtChange = _TmnxSubFlterProfLastMgmtChange_Object(
@@ -15525,7 +15597,7 @@ tmnxSubFlterProfLastMgmtChange = _TmnxSubFlterProfLastMgmtChange_Object(
 )
 tmnxSubFlterProfLastMgmtChange.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfLastMgmtChange.setStatus("current")
+    tmnxSubFlterProfLastMgmtChange.setStatus("obsolete")
 
 
 class _TmnxSubFlterProfDescription_Type(TItemDescription):
@@ -15541,7 +15613,7 @@ tmnxSubFlterProfDescription = _TmnxSubFlterProfDescription_Object(
 )
 tmnxSubFlterProfDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfDescription.setStatus("current")
+    tmnxSubFlterProfDescription.setStatus("obsolete")
 
 
 class _TmnxSubFlterProfIngIpFltrId_Type(TFilterID):
@@ -15557,7 +15629,7 @@ tmnxSubFlterProfIngIpFltrId = _TmnxSubFlterProfIngIpFltrId_Object(
 )
 tmnxSubFlterProfIngIpFltrId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfIngIpFltrId.setStatus("current")
+    tmnxSubFlterProfIngIpFltrId.setStatus("obsolete")
 
 
 class _TmnxSubFlterProfEgrIpFltrId_Type(TFilterID):
@@ -15573,7 +15645,7 @@ tmnxSubFlterProfEgrIpFltrId = _TmnxSubFlterProfEgrIpFltrId_Object(
 )
 tmnxSubFlterProfEgrIpFltrId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfEgrIpFltrId.setStatus("current")
+    tmnxSubFlterProfEgrIpFltrId.setStatus("obsolete")
 
 
 class _TmnxSubFlterProfIngIpv6FltrId_Type(TFilterID):
@@ -15589,7 +15661,7 @@ tmnxSubFlterProfIngIpv6FltrId = _TmnxSubFlterProfIngIpv6FltrId_Object(
 )
 tmnxSubFlterProfIngIpv6FltrId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfIngIpv6FltrId.setStatus("current")
+    tmnxSubFlterProfIngIpv6FltrId.setStatus("obsolete")
 
 
 class _TmnxSubFlterProfEgrIpv6FltrId_Type(TFilterID):
@@ -15605,7 +15677,7 @@ tmnxSubFlterProfEgrIpv6FltrId = _TmnxSubFlterProfEgrIpv6FltrId_Object(
 )
 tmnxSubFlterProfEgrIpv6FltrId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfEgrIpv6FltrId.setStatus("current")
+    tmnxSubFlterProfEgrIpv6FltrId.setStatus("obsolete")
 _TmnxSPFltrProfMapTblLstMgtChg_Type = TimeStamp
 _TmnxSPFltrProfMapTblLstMgtChg_Object = MibScalar
 tmnxSPFltrProfMapTblLstMgtChg = _TmnxSPFltrProfMapTblLstMgtChg_Object(
@@ -15614,13 +15686,13 @@ tmnxSPFltrProfMapTblLstMgtChg = _TmnxSPFltrProfMapTblLstMgtChg_Object(
 )
 tmnxSPFltrProfMapTblLstMgtChg.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxSPFltrProfMapTblLstMgtChg.setStatus("current")
+    tmnxSPFltrProfMapTblLstMgtChg.setStatus("obsolete")
 _TmnxSubProfFltrProfileMapTable_Object = MibTable
 tmnxSubProfFltrProfileMapTable = _TmnxSubProfFltrProfileMapTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 92)
 )
 if mibBuilder.loadTexts:
-    tmnxSubProfFltrProfileMapTable.setStatus("current")
+    tmnxSubProfFltrProfileMapTable.setStatus("obsolete")
 _TmnxSubProfFltrProfileMapEntry_Object = MibTableRow
 tmnxSubProfFltrProfileMapEntry = _TmnxSubProfFltrProfileMapEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 92, 1)
@@ -15630,7 +15702,7 @@ tmnxSubProfFltrProfileMapEntry.setIndexNames(
     (1, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPFltrProfMapFltrString"),
 )
 if mibBuilder.loadTexts:
-    tmnxSubProfFltrProfileMapEntry.setStatus("current")
+    tmnxSubProfFltrProfileMapEntry.setStatus("obsolete")
 
 
 class _TmnxSPFltrProfMapFltrString_Type(DisplayString):
@@ -15649,7 +15721,7 @@ tmnxSPFltrProfMapFltrString = _TmnxSPFltrProfMapFltrString_Object(
 )
 tmnxSPFltrProfMapFltrString.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tmnxSPFltrProfMapFltrString.setStatus("current")
+    tmnxSPFltrProfMapFltrString.setStatus("obsolete")
 _TmnxSPFltrProfMapRowStatus_Type = RowStatus
 _TmnxSPFltrProfMapRowStatus_Object = MibTableColumn
 tmnxSPFltrProfMapRowStatus = _TmnxSPFltrProfMapRowStatus_Object(
@@ -15658,7 +15730,7 @@ tmnxSPFltrProfMapRowStatus = _TmnxSPFltrProfMapRowStatus_Object(
 )
 tmnxSPFltrProfMapRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSPFltrProfMapRowStatus.setStatus("current")
+    tmnxSPFltrProfMapRowStatus.setStatus("obsolete")
 _TmnxSPFltrProfMapLstMgmtChg_Type = TimeStamp
 _TmnxSPFltrProfMapLstMgmtChg_Object = MibTableColumn
 tmnxSPFltrProfMapLstMgmtChg = _TmnxSPFltrProfMapLstMgmtChg_Object(
@@ -15667,7 +15739,7 @@ tmnxSPFltrProfMapLstMgmtChg = _TmnxSPFltrProfMapLstMgmtChg_Object(
 )
 tmnxSPFltrProfMapLstMgmtChg.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxSPFltrProfMapLstMgmtChg.setStatus("current")
+    tmnxSPFltrProfMapLstMgmtChg.setStatus("obsolete")
 _TmnxSPFltrProfMapFltrProfile_Type = TNamedItem
 _TmnxSPFltrProfMapFltrProfile_Object = MibTableColumn
 tmnxSPFltrProfMapFltrProfile = _TmnxSPFltrProfMapFltrProfile_Object(
@@ -15676,7 +15748,7 @@ tmnxSPFltrProfMapFltrProfile = _TmnxSPFltrProfMapFltrProfile_Object(
 )
 tmnxSPFltrProfMapFltrProfile.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSPFltrProfMapFltrProfile.setStatus("current")
+    tmnxSPFltrProfMapFltrProfile.setStatus("obsolete")
 _TmnxSubAleTable_Object = MibTable
 tmnxSubAleTable = _TmnxSubAleTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 93)
@@ -15739,7 +15811,7 @@ tmnxSubIPolFltrProfileMapTable = _TmnxSubIPolFltrProfileMapTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 96)
 )
 if mibBuilder.loadTexts:
-    tmnxSubIPolFltrProfileMapTable.setStatus("current")
+    tmnxSubIPolFltrProfileMapTable.setStatus("obsolete")
 _TmnxSubIPolFltrProfileMapEntry_Object = MibTableRow
 tmnxSubIPolFltrProfileMapEntry = _TmnxSubIPolFltrProfileMapEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 96, 1)
@@ -15749,7 +15821,7 @@ tmnxSubIPolFltrProfileMapEntry.setIndexNames(
     (1, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolFltrProfMapFltrString"),
 )
 if mibBuilder.loadTexts:
-    tmnxSubIPolFltrProfileMapEntry.setStatus("current")
+    tmnxSubIPolFltrProfileMapEntry.setStatus("obsolete")
 
 
 class _TmnxSubIPolFltrProfMapFltrString_Type(DisplayString):
@@ -15768,7 +15840,7 @@ tmnxSubIPolFltrProfMapFltrString = _TmnxSubIPolFltrProfMapFltrString_Object(
 )
 tmnxSubIPolFltrProfMapFltrString.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tmnxSubIPolFltrProfMapFltrString.setStatus("current")
+    tmnxSubIPolFltrProfMapFltrString.setStatus("obsolete")
 _TmnxSubIPolFltrProfMapRowStatus_Type = RowStatus
 _TmnxSubIPolFltrProfMapRowStatus_Object = MibTableColumn
 tmnxSubIPolFltrProfMapRowStatus = _TmnxSubIPolFltrProfMapRowStatus_Object(
@@ -15777,7 +15849,7 @@ tmnxSubIPolFltrProfMapRowStatus = _TmnxSubIPolFltrProfMapRowStatus_Object(
 )
 tmnxSubIPolFltrProfMapRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubIPolFltrProfMapRowStatus.setStatus("current")
+    tmnxSubIPolFltrProfMapRowStatus.setStatus("obsolete")
 _TmnxSubIPolFltrProfMapLastMgmtCh_Type = TimeStamp
 _TmnxSubIPolFltrProfMapLastMgmtCh_Object = MibTableColumn
 tmnxSubIPolFltrProfMapLastMgmtCh = _TmnxSubIPolFltrProfMapLastMgmtCh_Object(
@@ -15786,7 +15858,7 @@ tmnxSubIPolFltrProfMapLastMgmtCh = _TmnxSubIPolFltrProfMapLastMgmtCh_Object(
 )
 tmnxSubIPolFltrProfMapLastMgmtCh.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxSubIPolFltrProfMapLastMgmtCh.setStatus("current")
+    tmnxSubIPolFltrProfMapLastMgmtCh.setStatus("obsolete")
 _TmnxSubIPolFltrProfMapFltrProf_Type = TNamedItem
 _TmnxSubIPolFltrProfMapFltrProf_Object = MibTableColumn
 tmnxSubIPolFltrProfMapFltrProf = _TmnxSubIPolFltrProfMapFltrProf_Object(
@@ -15795,7 +15867,7 @@ tmnxSubIPolFltrProfMapFltrProf = _TmnxSubIPolFltrProfMapFltrProf_Object(
 )
 tmnxSubIPolFltrProfMapFltrProf.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxSubIPolFltrProfMapFltrProf.setStatus("current")
+    tmnxSubIPolFltrProfMapFltrProf.setStatus("obsolete")
 _TmnxSubHostSapTrkMcRDstStatTable_Object = MibTable
 tmnxSubHostSapTrkMcRDstStatTable = _TmnxSubHostSapTrkMcRDstStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 97)
@@ -18181,6 +18253,78 @@ tmnxSubMgmtPortSPfcpHostsPeak = _TmnxSubMgmtPortSPfcpHostsPeak_Object(
 tmnxSubMgmtPortSPfcpHostsPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtPortSPfcpHostsPeak.setStatus("current")
+_TmnxSubMgmtPortPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtPortPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV6Sl = _TmnxSubMgmtPortPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 134),
+    _TmnxSubMgmtPortPfFwaV6Sl_Type()
+)
+tmnxSubMgmtPortPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtPortPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtPortPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV6SlPeak = _TmnxSubMgmtPortPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 135),
+    _TmnxSubMgmtPortPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtPortPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtPortPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtPortPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV6Pd = _TmnxSubMgmtPortPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 136),
+    _TmnxSubMgmtPortPfFwaV6Pd_Type()
+)
+tmnxSubMgmtPortPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtPortPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtPortPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV6PdPeak = _TmnxSubMgmtPortPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 137),
+    _TmnxSubMgmtPortPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtPortPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtPortPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtPortPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV6Na = _TmnxSubMgmtPortPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 138),
+    _TmnxSubMgmtPortPfFwaV6Na_Type()
+)
+tmnxSubMgmtPortPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtPortPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtPortPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV6NaPeak = _TmnxSubMgmtPortPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 139),
+    _TmnxSubMgmtPortPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtPortPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV6NaPeak.setStatus("current")
+_TmnxSubMgmtPortPfFwaV4_Type = Counter32
+_TmnxSubMgmtPortPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV4 = _TmnxSubMgmtPortPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 140),
+    _TmnxSubMgmtPortPfFwaV4_Type()
+)
+tmnxSubMgmtPortPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV4.setStatus("current")
+_TmnxSubMgmtPortPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtPortPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtPortPfFwaV4Peak = _TmnxSubMgmtPortPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 104, 1, 141),
+    _TmnxSubMgmtPortPfFwaV4Peak_Type()
+)
+tmnxSubMgmtPortPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtPortPfFwaV4Peak.setStatus("current")
 _TmnxSubMgmtMdaStatsTable_Object = MibTable
 tmnxSubMgmtMdaStatsTable = _TmnxSubMgmtMdaStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105)
@@ -19386,6 +19530,78 @@ tmnxSubMgmtMdaSPfcpHostsPeak = _TmnxSubMgmtMdaSPfcpHostsPeak_Object(
 tmnxSubMgmtMdaSPfcpHostsPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtMdaSPfcpHostsPeak.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV6Sl = _TmnxSubMgmtMdaPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 133),
+    _TmnxSubMgmtMdaPfFwaV6Sl_Type()
+)
+tmnxSubMgmtMdaPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV6SlPeak = _TmnxSubMgmtMdaPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 134),
+    _TmnxSubMgmtMdaPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtMdaPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV6Pd = _TmnxSubMgmtMdaPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 135),
+    _TmnxSubMgmtMdaPfFwaV6Pd_Type()
+)
+tmnxSubMgmtMdaPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV6PdPeak = _TmnxSubMgmtMdaPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 136),
+    _TmnxSubMgmtMdaPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtMdaPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV6Na = _TmnxSubMgmtMdaPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 137),
+    _TmnxSubMgmtMdaPfFwaV6Na_Type()
+)
+tmnxSubMgmtMdaPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV6NaPeak = _TmnxSubMgmtMdaPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 138),
+    _TmnxSubMgmtMdaPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtMdaPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV6NaPeak.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV4_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV4 = _TmnxSubMgmtMdaPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 139),
+    _TmnxSubMgmtMdaPfFwaV4_Type()
+)
+tmnxSubMgmtMdaPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV4.setStatus("current")
+_TmnxSubMgmtMdaPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtMdaPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtMdaPfFwaV4Peak = _TmnxSubMgmtMdaPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 105, 1, 140),
+    _TmnxSubMgmtMdaPfFwaV4Peak_Type()
+)
+tmnxSubMgmtMdaPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtMdaPfFwaV4Peak.setStatus("current")
 _TmnxSubMgmtSlotStatsTable_Object = MibTable
 tmnxSubMgmtSlotStatsTable = _TmnxSubMgmtSlotStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106)
@@ -20599,6 +20815,78 @@ tmnxSubMgmtSlotSPfcpHostsPeak = _TmnxSubMgmtSlotSPfcpHostsPeak_Object(
 tmnxSubMgmtSlotSPfcpHostsPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtSlotSPfcpHostsPeak.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV6Sl = _TmnxSubMgmtSlotPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 134),
+    _TmnxSubMgmtSlotPfFwaV6Sl_Type()
+)
+tmnxSubMgmtSlotPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV6SlPeak = _TmnxSubMgmtSlotPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 135),
+    _TmnxSubMgmtSlotPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtSlotPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV6Pd = _TmnxSubMgmtSlotPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 136),
+    _TmnxSubMgmtSlotPfFwaV6Pd_Type()
+)
+tmnxSubMgmtSlotPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV6PdPeak = _TmnxSubMgmtSlotPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 137),
+    _TmnxSubMgmtSlotPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtSlotPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV6Na = _TmnxSubMgmtSlotPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 138),
+    _TmnxSubMgmtSlotPfFwaV6Na_Type()
+)
+tmnxSubMgmtSlotPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV6NaPeak = _TmnxSubMgmtSlotPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 139),
+    _TmnxSubMgmtSlotPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtSlotPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV6NaPeak.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV4_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV4 = _TmnxSubMgmtSlotPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 140),
+    _TmnxSubMgmtSlotPfFwaV4_Type()
+)
+tmnxSubMgmtSlotPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV4.setStatus("current")
+_TmnxSubMgmtSlotPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtSlotPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtSlotPfFwaV4Peak = _TmnxSubMgmtSlotPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 106, 1, 141),
+    _TmnxSubMgmtSlotPfFwaV4Peak_Type()
+)
+tmnxSubMgmtSlotPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSlotPfFwaV4Peak.setStatus("current")
 _TmnxSubMgmtSystStatsTable_Object = MibTable
 tmnxSubMgmtSystStatsTable = _TmnxSubMgmtSystStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107)
@@ -21982,6 +22270,114 @@ tmnxSubMgmtSystSPfcpSessLacPeak = _TmnxSubMgmtSystSPfcpSessLacPeak_Object(
 tmnxSubMgmtSystSPfcpSessLacPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtSystSPfcpSessLacPeak.setStatus("current")
+_TmnxSubMgmtSystPfcpSessFwa_Type = Counter32
+_TmnxSubMgmtSystPfcpSessFwa_Object = MibTableColumn
+tmnxSubMgmtSystPfcpSessFwa = _TmnxSubMgmtSystPfcpSessFwa_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 153),
+    _TmnxSubMgmtSystPfcpSessFwa_Type()
+)
+tmnxSubMgmtSystPfcpSessFwa.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfcpSessFwa.setStatus("current")
+_TmnxSubMgmtSystPfcpSessFwaPeak_Type = Counter32
+_TmnxSubMgmtSystPfcpSessFwaPeak_Object = MibTableColumn
+tmnxSubMgmtSystPfcpSessFwaPeak = _TmnxSubMgmtSystPfcpSessFwaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 154),
+    _TmnxSubMgmtSystPfcpSessFwaPeak_Type()
+)
+tmnxSubMgmtSystPfcpSessFwaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfcpSessFwaPeak.setStatus("current")
+_TmnxSubMgmtSystPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtSystPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV6Sl = _TmnxSubMgmtSystPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 155),
+    _TmnxSubMgmtSystPfFwaV6Sl_Type()
+)
+tmnxSubMgmtSystPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtSystPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtSystPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV6SlPeak = _TmnxSubMgmtSystPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 156),
+    _TmnxSubMgmtSystPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtSystPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtSystPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtSystPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV6Pd = _TmnxSubMgmtSystPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 157),
+    _TmnxSubMgmtSystPfFwaV6Pd_Type()
+)
+tmnxSubMgmtSystPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtSystPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtSystPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV6PdPeak = _TmnxSubMgmtSystPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 158),
+    _TmnxSubMgmtSystPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtSystPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtSystPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtSystPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV6Na = _TmnxSubMgmtSystPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 159),
+    _TmnxSubMgmtSystPfFwaV6Na_Type()
+)
+tmnxSubMgmtSystPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtSystPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtSystPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV6NaPeak = _TmnxSubMgmtSystPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 160),
+    _TmnxSubMgmtSystPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtSystPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV6NaPeak.setStatus("current")
+_TmnxSubMgmtSystPfFwaV4_Type = Counter32
+_TmnxSubMgmtSystPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV4 = _TmnxSubMgmtSystPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 161),
+    _TmnxSubMgmtSystPfFwaV4_Type()
+)
+tmnxSubMgmtSystPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV4.setStatus("current")
+_TmnxSubMgmtSystPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtSystPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtSystPfFwaV4Peak = _TmnxSubMgmtSystPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 162),
+    _TmnxSubMgmtSystPfFwaV4Peak_Type()
+)
+tmnxSubMgmtSystPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfFwaV4Peak.setStatus("current")
+_TmnxSubMgmtSystPfcpPerPortDefTnl_Type = Counter32
+_TmnxSubMgmtSystPfcpPerPortDefTnl_Object = MibTableColumn
+tmnxSubMgmtSystPfcpPerPortDefTnl = _TmnxSubMgmtSystPfcpPerPortDefTnl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 163),
+    _TmnxSubMgmtSystPfcpPerPortDefTnl_Type()
+)
+tmnxSubMgmtSystPfcpPerPortDefTnl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPfcpPerPortDefTnl.setStatus("current")
+_TmnxSubMgmtSystPerPortDefTnlPeak_Type = Counter32
+_TmnxSubMgmtSystPerPortDefTnlPeak_Object = MibTableColumn
+tmnxSubMgmtSystPerPortDefTnlPeak = _TmnxSubMgmtSystPerPortDefTnlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 107, 1, 164),
+    _TmnxSubMgmtSystPerPortDefTnlPeak_Type()
+)
+tmnxSubMgmtSystPerPortDefTnlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSystPerPortDefTnlPeak.setStatus("current")
 _TmnxSubHttpRdrPlcyTableLastCh_Type = TimeStamp
 _TmnxSubHttpRdrPlcyTableLastCh_Object = MibScalar
 tmnxSubHttpRdrPlcyTableLastCh = _TmnxSubHttpRdrPlcyTableLastCh_Object(
@@ -24100,6 +24496,33 @@ tmnxSubSlaacOvrClassWeight = _TmnxSubSlaacOvrClassWeight_Object(
 tmnxSubSlaacOvrClassWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubSlaacOvrClassWeight.setStatus("current")
+_TmnxSubSlaacOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSubSlaacOvrBurstLimit_Object = MibTableColumn
+tmnxSubSlaacOvrBurstLimit = _TmnxSubSlaacOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 121, 1, 12),
+    _TmnxSubSlaacOvrBurstLimit_Type()
+)
+tmnxSubSlaacOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubSlaacOvrBurstLimit.setStatus("current")
+_TmnxSubSlaacOvrParentWeight_Type = TWeightOverride
+_TmnxSubSlaacOvrParentWeight_Object = MibTableColumn
+tmnxSubSlaacOvrParentWeight = _TmnxSubSlaacOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 121, 1, 13),
+    _TmnxSubSlaacOvrParentWeight_Type()
+)
+tmnxSubSlaacOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubSlaacOvrParentWeight.setStatus("current")
+_TmnxSubSlaacOvrParentCIRWeight_Type = TWeightOverride
+_TmnxSubSlaacOvrParentCIRWeight_Object = MibTableColumn
+tmnxSubSlaacOvrParentCIRWeight = _TmnxSubSlaacOvrParentCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 121, 1, 14),
+    _TmnxSubSlaacOvrParentCIRWeight_Type()
+)
+tmnxSubSlaacOvrParentCIRWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubSlaacOvrParentCIRWeight.setStatus("current")
 _TmnxSubSlaacAddressTable_Object = MibTable
 tmnxSubSlaacAddressTable = _TmnxSubSlaacAddressTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 122)
@@ -24574,6 +24997,69 @@ tmnxSubPccRulePolicerStatMode = _TmnxSubPccRulePolicerStatMode_Object(
 tmnxSubPccRulePolicerStatMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubPccRulePolicerStatMode.setStatus("current")
+_TmnxSubPccRuleRqi_Type = TmnxReflectiveQosIndicator
+_TmnxSubPccRuleRqi_Object = MibTableColumn
+tmnxSubPccRuleRqi = _TmnxSubPccRuleRqi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 25),
+    _TmnxSubPccRuleRqi_Type()
+)
+tmnxSubPccRuleRqi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleRqi.setStatus("current")
+_TmnxSubPccRuleQfi_Type = TmnxQosFlowIdentifier
+_TmnxSubPccRuleQfi_Object = MibTableColumn
+tmnxSubPccRuleQfi = _TmnxSubPccRuleQfi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 26),
+    _TmnxSubPccRuleQfi_Type()
+)
+tmnxSubPccRuleQfi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleQfi.setStatus("current")
+_TmnxSubPccRuleGfbr_Type = TQosQueueCIRRateOverride
+_TmnxSubPccRuleGfbr_Object = MibTableColumn
+tmnxSubPccRuleGfbr = _TmnxSubPccRuleGfbr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 27),
+    _TmnxSubPccRuleGfbr_Type()
+)
+tmnxSubPccRuleGfbr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleGfbr.setStatus("current")
+_TmnxSubPccRuleMfbr_Type = TQosQueuePIRRateOverride
+_TmnxSubPccRuleMfbr_Object = MibTableColumn
+tmnxSubPccRuleMfbr = _TmnxSubPccRuleMfbr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 28),
+    _TmnxSubPccRuleMfbr_Type()
+)
+tmnxSubPccRuleMfbr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleMfbr.setStatus("current")
+_TmnxSubPccRuleLevel2Id_Type = TmnxSubPccRuleLevel2Id
+_TmnxSubPccRuleLevel2Id_Object = MibTableColumn
+tmnxSubPccRuleLevel2Id = _TmnxSubPccRuleLevel2Id_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 29),
+    _TmnxSubPccRuleLevel2Id_Type()
+)
+tmnxSubPccRuleLevel2Id.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleLevel2Id.setStatus("current")
+_TmnxSubPccRuleL2MapFromProfile_Type = TmnxSubPccRuleLvl2MapFromProfile
+_TmnxSubPccRuleL2MapFromProfile_Object = MibTableColumn
+tmnxSubPccRuleL2MapFromProfile = _TmnxSubPccRuleL2MapFromProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 30),
+    _TmnxSubPccRuleL2MapFromProfile_Type()
+)
+tmnxSubPccRuleL2MapFromProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleL2MapFromProfile.setStatus("current")
+_TmnxSubPccRuleDscp_Type = TDSCPFilterActionValue
+_TmnxSubPccRuleDscp_Object = MibTableColumn
+tmnxSubPccRuleDscp = _TmnxSubPccRuleDscp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 126, 1, 31),
+    _TmnxSubPccRuleDscp_Type()
+)
+tmnxSubPccRuleDscp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPccRuleDscp.setStatus("current")
 _TmnxSubPccRuleFlowTable_Object = MibTable
 tmnxSubPccRuleFlowTable = _TmnxSubPccRuleFlowTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 127)
@@ -25024,6 +25510,87 @@ tmnxSubHostPccRulePolicerStatMod = _TmnxSubHostPccRulePolicerStatMod_Object(
 tmnxSubHostPccRulePolicerStatMod.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubHostPccRulePolicerStatMod.setStatus("current")
+_TmnxSubHostPccRuleRqi_Type = TmnxReflectiveQosIndicator
+_TmnxSubHostPccRuleRqi_Object = MibTableColumn
+tmnxSubHostPccRuleRqi = _TmnxSubHostPccRuleRqi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 28),
+    _TmnxSubHostPccRuleRqi_Type()
+)
+tmnxSubHostPccRuleRqi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleRqi.setStatus("current")
+_TmnxSubHostPccRuleQfi_Type = TmnxQosFlowIdentifier
+_TmnxSubHostPccRuleQfi_Object = MibTableColumn
+tmnxSubHostPccRuleQfi = _TmnxSubHostPccRuleQfi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 29),
+    _TmnxSubHostPccRuleQfi_Type()
+)
+tmnxSubHostPccRuleQfi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleQfi.setStatus("current")
+_TmnxSubHostPccRuleGfbr_Type = TQosQueueCIRRateOverride
+_TmnxSubHostPccRuleGfbr_Object = MibTableColumn
+tmnxSubHostPccRuleGfbr = _TmnxSubHostPccRuleGfbr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 30),
+    _TmnxSubHostPccRuleGfbr_Type()
+)
+tmnxSubHostPccRuleGfbr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleGfbr.setStatus("current")
+_TmnxSubHostPccRuleGfbrIgnored_Type = TruthValue
+_TmnxSubHostPccRuleGfbrIgnored_Object = MibTableColumn
+tmnxSubHostPccRuleGfbrIgnored = _TmnxSubHostPccRuleGfbrIgnored_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 31),
+    _TmnxSubHostPccRuleGfbrIgnored_Type()
+)
+tmnxSubHostPccRuleGfbrIgnored.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleGfbrIgnored.setStatus("obsolete")
+_TmnxSubHostPccRuleMfbr_Type = TQosQueuePIRRateOverride
+_TmnxSubHostPccRuleMfbr_Object = MibTableColumn
+tmnxSubHostPccRuleMfbr = _TmnxSubHostPccRuleMfbr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 32),
+    _TmnxSubHostPccRuleMfbr_Type()
+)
+tmnxSubHostPccRuleMfbr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleMfbr.setStatus("current")
+_TmnxSubHostPccRuleMfbrIgnored_Type = TruthValue
+_TmnxSubHostPccRuleMfbrIgnored_Object = MibTableColumn
+tmnxSubHostPccRuleMfbrIgnored = _TmnxSubHostPccRuleMfbrIgnored_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 33),
+    _TmnxSubHostPccRuleMfbrIgnored_Type()
+)
+tmnxSubHostPccRuleMfbrIgnored.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleMfbrIgnored.setStatus("obsolete")
+_TmnxSubHostPccRuleLevel2Id_Type = TmnxSubPccRuleLevel2Id
+_TmnxSubHostPccRuleLevel2Id_Object = MibTableColumn
+tmnxSubHostPccRuleLevel2Id = _TmnxSubHostPccRuleLevel2Id_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 34),
+    _TmnxSubHostPccRuleLevel2Id_Type()
+)
+tmnxSubHostPccRuleLevel2Id.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleLevel2Id.setStatus("current")
+_TmnxSubHostPccRuleL2MapFromProf_Type = TmnxSubPccRuleLvl2MapFromProfile
+_TmnxSubHostPccRuleL2MapFromProf_Object = MibTableColumn
+tmnxSubHostPccRuleL2MapFromProf = _TmnxSubHostPccRuleL2MapFromProf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 35),
+    _TmnxSubHostPccRuleL2MapFromProf_Type()
+)
+tmnxSubHostPccRuleL2MapFromProf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleL2MapFromProf.setStatus("current")
+_TmnxSubHostPccRuleDscp_Type = TDSCPFilterActionValue
+_TmnxSubHostPccRuleDscp_Object = MibTableColumn
+tmnxSubHostPccRuleDscp = _TmnxSubHostPccRuleDscp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 128, 1, 36),
+    _TmnxSubHostPccRuleDscp_Type()
+)
+tmnxSubHostPccRuleDscp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubHostPccRuleDscp.setStatus("current")
 _TmnxSubHostPccRuleFlowTable_Object = MibTable
 tmnxSubHostPccRuleFlowTable = _TmnxSubHostPccRuleFlowTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 129)
@@ -25531,13 +26098,17 @@ class _TmnxSpiCatStatType_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("static", 1),
           ("gxSession", 2),
-          ("gxPcc", 3))
+          ("gxPcc", 3),
+          ("cupsAcct", 4),
+          ("idleTimeout", 5))
     )
 
 
@@ -28919,6 +29490,223 @@ tmnxSLAProfPfcpSeqDmgSchNm = _TmnxSLAProfPfcpSeqDmgSchNm_Object(
 tmnxSLAProfPfcpSeqDmgSchNm.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSLAProfPfcpSeqDmgSchNm.setStatus("current")
+
+
+class _TmnxSLAProfPfcpLvl2FlowRate_Type(Integer32):
+    """Custom type tmnxSLAProfPfcpLvl2FlowRate based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ignore", 1),
+          ("shape", 2))
+    )
+
+
+_TmnxSLAProfPfcpLvl2FlowRate_Type.__name__ = "Integer32"
+_TmnxSLAProfPfcpLvl2FlowRate_Object = MibTableColumn
+tmnxSLAProfPfcpLvl2FlowRate = _TmnxSLAProfPfcpLvl2FlowRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 173, 1, 11),
+    _TmnxSLAProfPfcpLvl2FlowRate_Type()
+)
+tmnxSLAProfPfcpLvl2FlowRate.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSLAProfPfcpLvl2FlowRate.setStatus("obsolete")
+_TmnxSubITPlcyTableLastChanged_Type = TimeStamp
+_TmnxSubITPlcyTableLastChanged_Object = MibScalar
+tmnxSubITPlcyTableLastChanged = _TmnxSubITPlcyTableLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 174),
+    _TmnxSubITPlcyTableLastChanged_Type()
+)
+tmnxSubITPlcyTableLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyTableLastChanged.setStatus("current")
+_TmnxSubIdleTimeoutPlcyTable_Object = MibTable
+tmnxSubIdleTimeoutPlcyTable = _TmnxSubIdleTimeoutPlcyTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175)
+)
+if mibBuilder.loadTexts:
+    tmnxSubIdleTimeoutPlcyTable.setStatus("current")
+_TmnxSubIdleTimeoutPlcyEntry_Object = MibTableRow
+tmnxSubIdleTimeoutPlcyEntry = _TmnxSubIdleTimeoutPlcyEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1)
+)
+tmnxSubIdleTimeoutPlcyEntry.setIndexNames(
+    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIdleTimeoutPolicy"),
+)
+if mibBuilder.loadTexts:
+    tmnxSubIdleTimeoutPlcyEntry.setStatus("current")
+_TmnxSubIdleTimeoutPolicy_Type = TNamedItem
+_TmnxSubIdleTimeoutPolicy_Object = MibTableColumn
+tmnxSubIdleTimeoutPolicy = _TmnxSubIdleTimeoutPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 1),
+    _TmnxSubIdleTimeoutPolicy_Type()
+)
+tmnxSubIdleTimeoutPolicy.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSubIdleTimeoutPolicy.setStatus("current")
+_TmnxSubITPlcyRowStatus_Type = RowStatus
+_TmnxSubITPlcyRowStatus_Object = MibTableColumn
+tmnxSubITPlcyRowStatus = _TmnxSubITPlcyRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 2),
+    _TmnxSubITPlcyRowStatus_Type()
+)
+tmnxSubITPlcyRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyRowStatus.setStatus("current")
+_TmnxSubITPlcyLastChanged_Type = TimeStamp
+_TmnxSubITPlcyLastChanged_Object = MibTableColumn
+tmnxSubITPlcyLastChanged = _TmnxSubITPlcyLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 3),
+    _TmnxSubITPlcyLastChanged_Type()
+)
+tmnxSubITPlcyLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyLastChanged.setStatus("current")
+
+
+class _TmnxSubITPlcyDescription_Type(TItemDescription):
+    """Custom type tmnxSubITPlcyDescription based on TItemDescription"""
+    defaultValue = OctetString("")
+
+
+_TmnxSubITPlcyDescription_Type.__name__ = "TItemDescription"
+_TmnxSubITPlcyDescription_Object = MibTableColumn
+tmnxSubITPlcyDescription = _TmnxSubITPlcyDescription_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 4),
+    _TmnxSubITPlcyDescription_Type()
+)
+tmnxSubITPlcyDescription.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyDescription.setStatus("current")
+
+
+class _TmnxSubITPlcyAction_Type(TmnxSubSlaProfIdleTimeoutAction):
+    """Custom type tmnxSubITPlcyAction based on TmnxSubSlaProfIdleTimeoutAction"""
+    defaultValue = 1
+
+
+_TmnxSubITPlcyAction_Type.__name__ = "TmnxSubSlaProfIdleTimeoutAction"
+_TmnxSubITPlcyAction_Object = MibTableColumn
+tmnxSubITPlcyAction = _TmnxSubITPlcyAction_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 5),
+    _TmnxSubITPlcyAction_Type()
+)
+tmnxSubITPlcyAction.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyAction.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyAction.setUnits("seconds")
+
+
+class _TmnxSubITPlcyTimeout_Type(Unsigned32):
+    """Custom type tmnxSubITPlcyTimeout based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(60, 15552000),
+    )
+
+
+_TmnxSubITPlcyTimeout_Type.__name__ = "Unsigned32"
+_TmnxSubITPlcyTimeout_Object = MibTableColumn
+tmnxSubITPlcyTimeout = _TmnxSubITPlcyTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 6),
+    _TmnxSubITPlcyTimeout_Type()
+)
+tmnxSubITPlcyTimeout.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyTimeout.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyTimeout.setUnits("seconds")
+
+
+class _TmnxSubITPlcyActivityThreshold_Type(TmnxSubActivityThreshold):
+    """Custom type tmnxSubITPlcyActivityThreshold based on TmnxSubActivityThreshold"""
+    defaultValue = 0
+
+
+_TmnxSubITPlcyActivityThreshold_Type.__name__ = "TmnxSubActivityThreshold"
+_TmnxSubITPlcyActivityThreshold_Object = MibTableColumn
+tmnxSubITPlcyActivityThreshold = _TmnxSubITPlcyActivityThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 7),
+    _TmnxSubITPlcyActivityThreshold_Type()
+)
+tmnxSubITPlcyActivityThreshold.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyActivityThreshold.setStatus("current")
+
+
+class _TmnxSubITPlcyEgressPolicers_Type(TmnxSubPolicersEgress):
+    """Custom type tmnxSubITPlcyEgressPolicers based on TmnxSubPolicersEgress"""
+    defaultBinValue = "0"
+
+
+_TmnxSubITPlcyEgressPolicers_Type.__name__ = "TmnxSubPolicersEgress"
+_TmnxSubITPlcyEgressPolicers_Object = MibTableColumn
+tmnxSubITPlcyEgressPolicers = _TmnxSubITPlcyEgressPolicers_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 8),
+    _TmnxSubITPlcyEgressPolicers_Type()
+)
+tmnxSubITPlcyEgressPolicers.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyEgressPolicers.setStatus("current")
+
+
+class _TmnxSubITPlcyEgressQueues_Type(TmnxSubQueuesEgress):
+    """Custom type tmnxSubITPlcyEgressQueues based on TmnxSubQueuesEgress"""
+    defaultBinValue = "0"
+
+
+_TmnxSubITPlcyEgressQueues_Type.__name__ = "TmnxSubQueuesEgress"
+_TmnxSubITPlcyEgressQueues_Object = MibTableColumn
+tmnxSubITPlcyEgressQueues = _TmnxSubITPlcyEgressQueues_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 9),
+    _TmnxSubITPlcyEgressQueues_Type()
+)
+tmnxSubITPlcyEgressQueues.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyEgressQueues.setStatus("current")
+
+
+class _TmnxSubITPlcyIngressPolicers_Type(TmnxSubPolicersIngress):
+    """Custom type tmnxSubITPlcyIngressPolicers based on TmnxSubPolicersIngress"""
+    defaultBinValue = "0"
+
+
+_TmnxSubITPlcyIngressPolicers_Type.__name__ = "TmnxSubPolicersIngress"
+_TmnxSubITPlcyIngressPolicers_Object = MibTableColumn
+tmnxSubITPlcyIngressPolicers = _TmnxSubITPlcyIngressPolicers_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 10),
+    _TmnxSubITPlcyIngressPolicers_Type()
+)
+tmnxSubITPlcyIngressPolicers.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyIngressPolicers.setStatus("current")
+
+
+class _TmnxSubITPlcyIngressQueues_Type(TmnxSubQueuesIngress):
+    """Custom type tmnxSubITPlcyIngressQueues based on TmnxSubQueuesIngress"""
+    defaultBinValue = "0"
+
+
+_TmnxSubITPlcyIngressQueues_Type.__name__ = "TmnxSubQueuesIngress"
+_TmnxSubITPlcyIngressQueues_Object = MibTableColumn
+tmnxSubITPlcyIngressQueues = _TmnxSubITPlcyIngressQueues_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 175, 1, 11),
+    _TmnxSubITPlcyIngressQueues_Type()
+)
+tmnxSubITPlcyIngressQueues.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyIngressQueues.setStatus("current")
 _TmnxSubHttpRedirectObjs_ObjectIdentity = ObjectIdentity
 tmnxSubHttpRedirectObjs = _TmnxSubHttpRedirectObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1000)
@@ -29567,6 +30355,61 @@ tmnxSubSubIfStatsNumEntries = _TmnxSubSubIfStatsNumEntries_Object(
 tmnxSubSubIfStatsNumEntries.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubSubIfStatsNumEntries.setStatus("current")
+
+
+class _TmnxSubAltProfThresholdType_Type(TmnxSubAltProfThresholdType):
+    """Custom type tmnxSubAltProfThresholdType based on TmnxSubAltProfThresholdType"""
+    defaultValue = 0
+
+
+_TmnxSubAltProfThresholdType_Type.__name__ = "TmnxSubAltProfThresholdType"
+_TmnxSubAltProfThresholdType_Object = MibScalar
+tmnxSubAltProfThresholdType = _TmnxSubAltProfThresholdType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1001, 14),
+    _TmnxSubAltProfThresholdType_Type()
+)
+tmnxSubAltProfThresholdType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxSubAltProfThresholdType.setStatus("current")
+
+
+class _TmnxSubAltProfThresholdNumber_Type(Unsigned32):
+    """Custom type tmnxSubAltProfThresholdNumber based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 500000),
+    )
+
+
+_TmnxSubAltProfThresholdNumber_Type.__name__ = "Unsigned32"
+_TmnxSubAltProfThresholdNumber_Object = MibScalar
+tmnxSubAltProfThresholdNumber = _TmnxSubAltProfThresholdNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1001, 15),
+    _TmnxSubAltProfThresholdNumber_Type()
+)
+tmnxSubAltProfThresholdNumber.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxSubAltProfThresholdNumber.setStatus("current")
+_TmnxSubNumOversubscrbdEntries_Type = Gauge32
+_TmnxSubNumOversubscrbdEntries_Object = MibScalar
+tmnxSubNumOversubscrbdEntries = _TmnxSubNumOversubscrbdEntries_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1001, 16),
+    _TmnxSubNumOversubscrbdEntries_Type()
+)
+tmnxSubNumOversubscrbdEntries.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubNumOversubscrbdEntries.setStatus("current")
+_TmnxSubNumNonOversubscrbdEntries_Type = Gauge32
+_TmnxSubNumNonOversubscrbdEntries_Object = MibScalar
+tmnxSubNumNonOversubscrbdEntries = _TmnxSubNumNonOversubscrbdEntries_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1001, 17),
+    _TmnxSubNumNonOversubscrbdEntries_Type()
+)
+tmnxSubNumNonOversubscrbdEntries.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubNumNonOversubscrbdEntries.setStatus("current")
 _TmnxSubAccuStatsObjs_ObjectIdentity = ObjectIdentity
 tmnxSubAccuStatsObjs = _TmnxSubAccuStatsObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1002)
@@ -31918,6 +32761,33 @@ tmnxSubSpiOvrClassWeight = _TmnxSubSpiOvrClassWeight_Object(
 tmnxSubSpiOvrClassWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubSpiOvrClassWeight.setStatus("current")
+_TmnxSubSpiOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSubSpiOvrBurstLimit_Object = MibTableColumn
+tmnxSubSpiOvrBurstLimit = _TmnxSubSpiOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1004, 8, 1, 16),
+    _TmnxSubSpiOvrBurstLimit_Type()
+)
+tmnxSubSpiOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubSpiOvrBurstLimit.setStatus("current")
+_TmnxSubSpiOvrParentWeight_Type = TWeightOverride
+_TmnxSubSpiOvrParentWeight_Object = MibTableColumn
+tmnxSubSpiOvrParentWeight = _TmnxSubSpiOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1004, 8, 1, 17),
+    _TmnxSubSpiOvrParentWeight_Type()
+)
+tmnxSubSpiOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubSpiOvrParentWeight.setStatus("current")
+_TmnxSubSpiOvrParentCIRWeight_Type = TWeightOverride
+_TmnxSubSpiOvrParentCIRWeight_Object = MibTableColumn
+tmnxSubSpiOvrParentCIRWeight = _TmnxSubSpiOvrParentCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1004, 8, 1, 18),
+    _TmnxSubSpiOvrParentCIRWeight_Type()
+)
+tmnxSubSpiOvrParentCIRWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubSpiOvrParentCIRWeight.setStatus("current")
 _TmnxSpiEgrQosSchedStatsTable_Object = MibTable
 tmnxSpiEgrQosSchedStatsTable = _TmnxSpiEgrQosSchedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1004, 9)
@@ -32253,13 +33123,17 @@ class _TmnxSubSpiCatStatType_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("static", 1),
           ("gxSession", 2),
-          ("gxPcc", 3))
+          ("gxPcc", 3),
+          ("cupsAcct", 4),
+          ("idleTimeout", 5))
     )
 
 
@@ -33577,6 +34451,78 @@ tmnxSubMgmtSvcPfcpHostsPeak = _TmnxSubMgmtSvcPfcpHostsPeak_Object(
 tmnxSubMgmtSvcPfcpHostsPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtSvcPfcpHostsPeak.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV4_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV4 = _TmnxSubMgmtSvcPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 134),
+    _TmnxSubMgmtSvcPfFwaV4_Type()
+)
+tmnxSubMgmtSvcPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV4.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV4Peak = _TmnxSubMgmtSvcPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 135),
+    _TmnxSubMgmtSvcPfFwaV4Peak_Type()
+)
+tmnxSubMgmtSvcPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV4Peak.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV6Sl = _TmnxSubMgmtSvcPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 136),
+    _TmnxSubMgmtSvcPfFwaV6Sl_Type()
+)
+tmnxSubMgmtSvcPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV6SlPeak = _TmnxSubMgmtSvcPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 137),
+    _TmnxSubMgmtSvcPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtSvcPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV6Pd = _TmnxSubMgmtSvcPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 138),
+    _TmnxSubMgmtSvcPfFwaV6Pd_Type()
+)
+tmnxSubMgmtSvcPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV6PdPeak = _TmnxSubMgmtSvcPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 139),
+    _TmnxSubMgmtSvcPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtSvcPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV6Na = _TmnxSubMgmtSvcPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 140),
+    _TmnxSubMgmtSvcPfFwaV6Na_Type()
+)
+tmnxSubMgmtSvcPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtSvcPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtSvcPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtSvcPfFwaV6NaPeak = _TmnxSubMgmtSvcPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1006, 1, 141),
+    _TmnxSubMgmtSvcPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtSvcPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSvcPfFwaV6NaPeak.setStatus("current")
 _TmnxSubMgmtSuIfStatsTable_Object = MibTable
 tmnxSubMgmtSuIfStatsTable = _TmnxSubMgmtSuIfStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007)
@@ -34781,6 +35727,78 @@ tmnxSubMgmtSuIfPfcpHostsPeak = _TmnxSubMgmtSuIfPfcpHostsPeak_Object(
 tmnxSubMgmtSuIfPfcpHostsPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtSuIfPfcpHostsPeak.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV4_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV4 = _TmnxSubMgmtSuIfPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 133),
+    _TmnxSubMgmtSuIfPfFwaV4_Type()
+)
+tmnxSubMgmtSuIfPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV4.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV4Peak = _TmnxSubMgmtSuIfPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 134),
+    _TmnxSubMgmtSuIfPfFwaV4Peak_Type()
+)
+tmnxSubMgmtSuIfPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV4Peak.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV6Sl = _TmnxSubMgmtSuIfPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 135),
+    _TmnxSubMgmtSuIfPfFwaV6Sl_Type()
+)
+tmnxSubMgmtSuIfPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV6SlPeak = _TmnxSubMgmtSuIfPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 136),
+    _TmnxSubMgmtSuIfPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtSuIfPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV6Pd = _TmnxSubMgmtSuIfPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 137),
+    _TmnxSubMgmtSuIfPfFwaV6Pd_Type()
+)
+tmnxSubMgmtSuIfPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV6PdPeak = _TmnxSubMgmtSuIfPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 138),
+    _TmnxSubMgmtSuIfPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtSuIfPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV6Na = _TmnxSubMgmtSuIfPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 139),
+    _TmnxSubMgmtSuIfPfFwaV6Na_Type()
+)
+tmnxSubMgmtSuIfPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtSuIfPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtSuIfPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtSuIfPfFwaV6NaPeak = _TmnxSubMgmtSuIfPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1007, 1, 140),
+    _TmnxSubMgmtSuIfPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtSuIfPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSuIfPfFwaV6NaPeak.setStatus("current")
 _TmnxSubMgmtGpIfStatsTable_Object = MibTable
 tmnxSubMgmtGpIfStatsTable = _TmnxSubMgmtGpIfStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008)
@@ -35985,6 +37003,78 @@ tmnxSubMgmtGpIfPfcpHostsPeak = _TmnxSubMgmtGpIfPfcpHostsPeak_Object(
 tmnxSubMgmtGpIfPfcpHostsPeak.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubMgmtGpIfPfcpHostsPeak.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV4_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV4_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV4 = _TmnxSubMgmtGpIfPfFwaV4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 134),
+    _TmnxSubMgmtGpIfPfFwaV4_Type()
+)
+tmnxSubMgmtGpIfPfFwaV4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV4.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV4Peak_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV4Peak_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV4Peak = _TmnxSubMgmtGpIfPfFwaV4Peak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 135),
+    _TmnxSubMgmtGpIfPfFwaV4Peak_Type()
+)
+tmnxSubMgmtGpIfPfFwaV4Peak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV4Peak.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV6Sl_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV6Sl_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV6Sl = _TmnxSubMgmtGpIfPfFwaV6Sl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 136),
+    _TmnxSubMgmtGpIfPfFwaV6Sl_Type()
+)
+tmnxSubMgmtGpIfPfFwaV6Sl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV6Sl.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV6SlPeak_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV6SlPeak_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV6SlPeak = _TmnxSubMgmtGpIfPfFwaV6SlPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 137),
+    _TmnxSubMgmtGpIfPfFwaV6SlPeak_Type()
+)
+tmnxSubMgmtGpIfPfFwaV6SlPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV6SlPeak.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV6Pd_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV6Pd_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV6Pd = _TmnxSubMgmtGpIfPfFwaV6Pd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 138),
+    _TmnxSubMgmtGpIfPfFwaV6Pd_Type()
+)
+tmnxSubMgmtGpIfPfFwaV6Pd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV6Pd.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV6PdPeak_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV6PdPeak_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV6PdPeak = _TmnxSubMgmtGpIfPfFwaV6PdPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 139),
+    _TmnxSubMgmtGpIfPfFwaV6PdPeak_Type()
+)
+tmnxSubMgmtGpIfPfFwaV6PdPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV6PdPeak.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV6Na_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV6Na_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV6Na = _TmnxSubMgmtGpIfPfFwaV6Na_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 140),
+    _TmnxSubMgmtGpIfPfFwaV6Na_Type()
+)
+tmnxSubMgmtGpIfPfFwaV6Na.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV6Na.setStatus("current")
+_TmnxSubMgmtGpIfPfFwaV6NaPeak_Type = Counter32
+_TmnxSubMgmtGpIfPfFwaV6NaPeak_Object = MibTableColumn
+tmnxSubMgmtGpIfPfFwaV6NaPeak = _TmnxSubMgmtGpIfPfFwaV6NaPeak_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1008, 1, 141),
+    _TmnxSubMgmtGpIfPfFwaV6NaPeak_Type()
+)
+tmnxSubMgmtGpIfPfFwaV6NaPeak.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubMgmtGpIfPfFwaV6NaPeak.setStatus("current")
 _TmnxSubEgrQosAggShaperTable_Object = MibTable
 tmnxSubEgrQosAggShaperTable = _TmnxSubEgrQosAggShaperTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1009)
@@ -36126,6 +37216,105 @@ tmnxSubEgrQosAggShapOutOfDate = _TmnxSubEgrQosAggShapOutOfDate_Object(
 tmnxSubEgrQosAggShapOutOfDate.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubEgrQosAggShapOutOfDate.setStatus("current")
+_TmnxSubEgrQosAggShapQSetSize_Type = Unsigned32
+_TmnxSubEgrQosAggShapQSetSize_Object = MibTableColumn
+tmnxSubEgrQosAggShapQSetSize = _TmnxSubEgrQosAggShapQSetSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1009, 1, 15),
+    _TmnxSubEgrQosAggShapQSetSize_Type()
+)
+tmnxSubEgrQosAggShapQSetSize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubEgrQosAggShapQSetSize.setStatus("current")
+_TmnxSubEgrQosAggShapQSetSizeOvr_Type = TruthValue
+_TmnxSubEgrQosAggShapQSetSizeOvr_Object = MibTableColumn
+tmnxSubEgrQosAggShapQSetSizeOvr = _TmnxSubEgrQosAggShapQSetSizeOvr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1009, 1, 16),
+    _TmnxSubEgrQosAggShapQSetSizeOvr_Type()
+)
+tmnxSubEgrQosAggShapQSetSizeOvr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubEgrQosAggShapQSetSizeOvr.setStatus("current")
+_TmnxSubStatGrpTable_Object = MibTable
+tmnxSubStatGrpTable = _TmnxSubStatGrpTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010)
+)
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpTable.setStatus("current")
+_TmnxSubStatGrpEntry_Object = MibTableRow
+tmnxSubStatGrpEntry = _TmnxSubStatGrpEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010, 1)
+)
+tmnxSubStatGrpEntry.setIndexNames(
+    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfName"),
+    (1, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatGrpName"),
+)
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpEntry.setStatus("current")
+_TmnxSubStatGrpName_Type = TNamedItem
+_TmnxSubStatGrpName_Object = MibTableColumn
+tmnxSubStatGrpName = _TmnxSubStatGrpName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010, 1, 1),
+    _TmnxSubStatGrpName_Type()
+)
+tmnxSubStatGrpName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpName.setStatus("current")
+_TmnxSubStatGrpRowStatus_Type = RowStatus
+_TmnxSubStatGrpRowStatus_Object = MibTableColumn
+tmnxSubStatGrpRowStatus = _TmnxSubStatGrpRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010, 1, 2),
+    _TmnxSubStatGrpRowStatus_Type()
+)
+tmnxSubStatGrpRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpRowStatus.setStatus("current")
+_TmnxSubStatGrpLastMgmtChange_Type = TimeStamp
+_TmnxSubStatGrpLastMgmtChange_Object = MibTableColumn
+tmnxSubStatGrpLastMgmtChange = _TmnxSubStatGrpLastMgmtChange_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010, 1, 3),
+    _TmnxSubStatGrpLastMgmtChange_Type()
+)
+tmnxSubStatGrpLastMgmtChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpLastMgmtChange.setStatus("current")
+
+
+class _TmnxSubStatGrpEgrPolicersScope_Type(TmnxSubAggScope):
+    """Custom type tmnxSubStatGrpEgrPolicersScope based on TmnxSubAggScope"""
+    defaultValue = 0
+
+
+_TmnxSubStatGrpEgrPolicersScope_Type.__name__ = "TmnxSubAggScope"
+_TmnxSubStatGrpEgrPolicersScope_Object = MibTableColumn
+tmnxSubStatGrpEgrPolicersScope = _TmnxSubStatGrpEgrPolicersScope_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010, 1, 4),
+    _TmnxSubStatGrpEgrPolicersScope_Type()
+)
+tmnxSubStatGrpEgrPolicersScope.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpEgrPolicersScope.setStatus("current")
+
+
+class _TmnxSubStatGrpEgrPolicers_Type(OctetString):
+    """Custom type tmnxSubStatGrpEgrPolicers based on OctetString"""
+    defaultHexValue = "0000000000000000"
+
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(8, 8),
+    )
+
+
+_TmnxSubStatGrpEgrPolicers_Type.__name__ = "OctetString"
+_TmnxSubStatGrpEgrPolicers_Object = MibTableColumn
+tmnxSubStatGrpEgrPolicers = _TmnxSubStatGrpEgrPolicers_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 1, 1010, 1, 5),
+    _TmnxSubStatGrpEgrPolicers_Type()
+)
+tmnxSubStatGrpEgrPolicers.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubStatGrpEgrPolicers.setStatus("current")
 _TmnxSubscriberNotifyObjects_ObjectIdentity = ObjectIdentity
 tmnxSubscriberNotifyObjects = _TmnxSubscriberNotifyObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 2)
@@ -36377,6 +37566,62 @@ tmnxPfcpSeIdLow = _TmnxPfcpSeIdLow_Object(
 tmnxPfcpSeIdLow.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     tmnxPfcpSeIdLow.setStatus("current")
+_TmnxPfcpVRtrID_Type = TmnxVRtrID
+_TmnxPfcpVRtrID_Object = MibScalar
+tmnxPfcpVRtrID = _TmnxPfcpVRtrID_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 2, 26),
+    _TmnxPfcpVRtrID_Type()
+)
+tmnxPfcpVRtrID.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxPfcpVRtrID.setStatus("current")
+_TmnxSubNotifPppoeSessionId_Type = TmnxPppoeSessionId
+_TmnxSubNotifPppoeSessionId_Object = MibScalar
+tmnxSubNotifPppoeSessionId = _TmnxSubNotifPppoeSessionId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 2, 27),
+    _TmnxSubNotifPppoeSessionId_Type()
+)
+tmnxSubNotifPppoeSessionId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxSubNotifPppoeSessionId.setStatus("current")
+
+
+class _TmnxSubNotifCircuitId_Type(OctetString):
+    """Custom type tmnxSubNotifCircuitId based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+_TmnxSubNotifCircuitId_Type.__name__ = "OctetString"
+_TmnxSubNotifCircuitId_Object = MibScalar
+tmnxSubNotifCircuitId = _TmnxSubNotifCircuitId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 2, 28),
+    _TmnxSubNotifCircuitId_Type()
+)
+tmnxSubNotifCircuitId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxSubNotifCircuitId.setStatus("current")
+
+
+class _TmnxSubNotifRemoteId_Type(OctetString):
+    """Custom type tmnxSubNotifRemoteId based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 256),
+    )
+
+
+_TmnxSubNotifRemoteId_Type.__name__ = "OctetString"
+_TmnxSubNotifRemoteId_Object = MibScalar
+tmnxSubNotifRemoteId = _TmnxSubNotifRemoteId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 2, 29),
+    _TmnxSubNotifRemoteId_Type()
+)
+tmnxSubNotifRemoteId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxSubNotifRemoteId.setStatus("current")
 _TmnxSubRadNotifyStatsObjects_ObjectIdentity = ObjectIdentity
 tmnxSubRadNotifyStatsObjects = _TmnxSubRadNotifyStatsObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 3)
@@ -38961,6 +40206,92 @@ tmnxSubPppRtrAdvPlcy = _TmnxSubPppRtrAdvPlcy_Object(
 tmnxSubPppRtrAdvPlcy.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubPppRtrAdvPlcy.setStatus("current")
+_TmnxSubPppLcpKaOrigin_Type = Unsigned32
+_TmnxSubPppLcpKaOrigin_Object = MibTableColumn
+tmnxSubPppLcpKaOrigin = _TmnxSubPppLcpKaOrigin_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 1, 1, 113),
+    _TmnxSubPppLcpKaOrigin_Type()
+)
+tmnxSubPppLcpKaOrigin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppLcpKaOrigin.setStatus("current")
+_TmnxSubPppLcpKaInterval_Type = Unsigned32
+_TmnxSubPppLcpKaInterval_Object = MibTableColumn
+tmnxSubPppLcpKaInterval = _TmnxSubPppLcpKaInterval_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 1, 1, 114),
+    _TmnxSubPppLcpKaInterval_Type()
+)
+tmnxSubPppLcpKaInterval.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppLcpKaInterval.setStatus("current")
+_TmnxSubPppLcpKaHoldUpMplier_Type = Unsigned32
+_TmnxSubPppLcpKaHoldUpMplier_Object = MibTableColumn
+tmnxSubPppLcpKaHoldUpMplier = _TmnxSubPppLcpKaHoldUpMplier_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 1, 1, 115),
+    _TmnxSubPppLcpKaHoldUpMplier_Type()
+)
+tmnxSubPppLcpKaHoldUpMplier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppLcpKaHoldUpMplier.setStatus("current")
+_TmnxSubPppLacFragActionState_Type = TmnxPermitDeny
+_TmnxSubPppLacFragActionState_Object = MibTableColumn
+tmnxSubPppLacFragActionState = _TmnxSubPppLacFragActionState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 1, 1, 116),
+    _TmnxSubPppLacFragActionState_Type()
+)
+tmnxSubPppLacFragActionState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppLacFragActionState.setStatus("current")
+
+
+class _TmnxSubPppLacFragOperState_Type(Integer32):
+    """Custom type tmnxSubPppLacFragOperState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("active", 1),
+          ("inactive", 2),
+          ("failed", 3))
+    )
+
+
+_TmnxSubPppLacFragOperState_Type.__name__ = "Integer32"
+_TmnxSubPppLacFragOperState_Object = MibTableColumn
+tmnxSubPppLacFragOperState = _TmnxSubPppLacFragOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 1, 1, 117),
+    _TmnxSubPppLacFragOperState_Type()
+)
+tmnxSubPppLacFragOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppLacFragOperState.setStatus("current")
+
+
+class _TmnxSubPppLacFragFpeId_Type(Unsigned32):
+    """Custom type tmnxSubPppLacFragFpeId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 64),
+    )
+
+
+_TmnxSubPppLacFragFpeId_Type.__name__ = "Unsigned32"
+_TmnxSubPppLacFragFpeId_Object = MibTableColumn
+tmnxSubPppLacFragFpeId = _TmnxSubPppLacFragFpeId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 1, 1, 118),
+    _TmnxSubPppLacFragFpeId_Type()
+)
+tmnxSubPppLacFragFpeId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppLacFragFpeId.setStatus("current")
 _TmnxSubPppStatTable_Object = MibTable
 tmnxSubPppStatTable = _TmnxSubPppStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 2)
@@ -39795,6 +41126,33 @@ tmnxSubPppOvrClassWeight = _TmnxSubPppOvrClassWeight_Object(
 tmnxSubPppOvrClassWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubPppOvrClassWeight.setStatus("current")
+_TmnxSubPppOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSubPppOvrBurstLimit_Object = MibTableColumn
+tmnxSubPppOvrBurstLimit = _TmnxSubPppOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 4, 1, 16),
+    _TmnxSubPppOvrBurstLimit_Type()
+)
+tmnxSubPppOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppOvrBurstLimit.setStatus("current")
+_TmnxSubPppOvrParentWeight_Type = TWeightOverride
+_TmnxSubPppOvrParentWeight_Object = MibTableColumn
+tmnxSubPppOvrParentWeight = _TmnxSubPppOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 4, 1, 17),
+    _TmnxSubPppOvrParentWeight_Type()
+)
+tmnxSubPppOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppOvrParentWeight.setStatus("current")
+_TmnxSubPppOvrParentCIRWeight_Type = TWeightOverride
+_TmnxSubPppOvrParentCIRWeight_Object = MibTableColumn
+tmnxSubPppOvrParentCIRWeight = _TmnxSubPppOvrParentCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 4, 1, 18),
+    _TmnxSubPppOvrParentCIRWeight_Type()
+)
+tmnxSubPppOvrParentCIRWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubPppOvrParentCIRWeight.setStatus("current")
 _TmnxSubPppAleTable_Object = MibTable
 tmnxSubPppAleTable = _TmnxSubPppAleTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 5, 5)
@@ -41086,157 +42444,6 @@ tmnxSubHsmdaIngQosPolStatMode = _TmnxSubHsmdaIngQosPolStatMode_Object(
 tmnxSubHsmdaIngQosPolStatMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubHsmdaIngQosPolStatMode.setStatus("obsolete")
-_TmnxSubEgrPStatsTable_Object = MibTable
-tmnxSubEgrPStatsTable = _TmnxSubEgrPStatsTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8)
-)
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsTable.setStatus("obsolete")
-_TmnxSubEgrPStatsEntry_Object = MibTableRow
-tmnxSubEgrPStatsEntry = _TmnxSubEgrPStatsEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1)
-)
-tmnxSubEgrPStatsEntry.setIndexNames(
-    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoSubIdent"),
-    (0, "TIMETRA-QOS-MIB", "tSapEgrPolicerId"),
-)
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsEntry.setStatus("current")
-_TmnxSubEgrPStatsMode_Type = TmnxSubEgrPolicerStatMode
-_TmnxSubEgrPStatsMode_Object = MibTableColumn
-tmnxSubEgrPStatsMode = _TmnxSubEgrPStatsMode_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 2),
-    _TmnxSubEgrPStatsMode_Type()
-)
-tmnxSubEgrPStatsMode.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsMode.setStatus("obsolete")
-_TmnxSubEgrPStatsOffInProfPkts_Type = Counter64
-_TmnxSubEgrPStatsOffInProfPkts_Object = MibTableColumn
-tmnxSubEgrPStatsOffInProfPkts = _TmnxSubEgrPStatsOffInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 3),
-    _TmnxSubEgrPStatsOffInProfPkts_Type()
-)
-tmnxSubEgrPStatsOffInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsOffInProfPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsOffInProfOcts_Type = Counter64
-_TmnxSubEgrPStatsOffInProfOcts_Object = MibTableColumn
-tmnxSubEgrPStatsOffInProfOcts = _TmnxSubEgrPStatsOffInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 4),
-    _TmnxSubEgrPStatsOffInProfOcts_Type()
-)
-tmnxSubEgrPStatsOffInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsOffInProfOcts.setStatus("obsolete")
-_TmnxSubEgrPStatsOffOutProfPkts_Type = Counter64
-_TmnxSubEgrPStatsOffOutProfPkts_Object = MibTableColumn
-tmnxSubEgrPStatsOffOutProfPkts = _TmnxSubEgrPStatsOffOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 5),
-    _TmnxSubEgrPStatsOffOutProfPkts_Type()
-)
-tmnxSubEgrPStatsOffOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsOffOutProfPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsOffOutProfOcts_Type = Counter64
-_TmnxSubEgrPStatsOffOutProfOcts_Object = MibTableColumn
-tmnxSubEgrPStatsOffOutProfOcts = _TmnxSubEgrPStatsOffOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 6),
-    _TmnxSubEgrPStatsOffOutProfOcts_Type()
-)
-tmnxSubEgrPStatsOffOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsOffOutProfOcts.setStatus("obsolete")
-_TmnxSubEgrPStatsOffUncolPkts_Type = Counter64
-_TmnxSubEgrPStatsOffUncolPkts_Object = MibTableColumn
-tmnxSubEgrPStatsOffUncolPkts = _TmnxSubEgrPStatsOffUncolPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 7),
-    _TmnxSubEgrPStatsOffUncolPkts_Type()
-)
-tmnxSubEgrPStatsOffUncolPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsOffUncolPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsOffUncolOcts_Type = Counter64
-_TmnxSubEgrPStatsOffUncolOcts_Object = MibTableColumn
-tmnxSubEgrPStatsOffUncolOcts = _TmnxSubEgrPStatsOffUncolOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 8),
-    _TmnxSubEgrPStatsOffUncolOcts_Type()
-)
-tmnxSubEgrPStatsOffUncolOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsOffUncolOcts.setStatus("obsolete")
-_TmnxSubEgrPStatsDrpInProfPkts_Type = Counter64
-_TmnxSubEgrPStatsDrpInProfPkts_Object = MibTableColumn
-tmnxSubEgrPStatsDrpInProfPkts = _TmnxSubEgrPStatsDrpInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 9),
-    _TmnxSubEgrPStatsDrpInProfPkts_Type()
-)
-tmnxSubEgrPStatsDrpInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsDrpInProfPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsDrpInProfOcts_Type = Counter64
-_TmnxSubEgrPStatsDrpInProfOcts_Object = MibTableColumn
-tmnxSubEgrPStatsDrpInProfOcts = _TmnxSubEgrPStatsDrpInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 10),
-    _TmnxSubEgrPStatsDrpInProfOcts_Type()
-)
-tmnxSubEgrPStatsDrpInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsDrpInProfOcts.setStatus("obsolete")
-_TmnxSubEgrPStatsDrpOutProfPkts_Type = Counter64
-_TmnxSubEgrPStatsDrpOutProfPkts_Object = MibTableColumn
-tmnxSubEgrPStatsDrpOutProfPkts = _TmnxSubEgrPStatsDrpOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 11),
-    _TmnxSubEgrPStatsDrpOutProfPkts_Type()
-)
-tmnxSubEgrPStatsDrpOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsDrpOutProfPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsDrpOutProfOcts_Type = Counter64
-_TmnxSubEgrPStatsDrpOutProfOcts_Object = MibTableColumn
-tmnxSubEgrPStatsDrpOutProfOcts = _TmnxSubEgrPStatsDrpOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 12),
-    _TmnxSubEgrPStatsDrpOutProfOcts_Type()
-)
-tmnxSubEgrPStatsDrpOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsDrpOutProfOcts.setStatus("obsolete")
-_TmnxSubEgrPStatsFwdInProfPkts_Type = Counter64
-_TmnxSubEgrPStatsFwdInProfPkts_Object = MibTableColumn
-tmnxSubEgrPStatsFwdInProfPkts = _TmnxSubEgrPStatsFwdInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 13),
-    _TmnxSubEgrPStatsFwdInProfPkts_Type()
-)
-tmnxSubEgrPStatsFwdInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsFwdInProfPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsFwdInProfOcts_Type = Counter64
-_TmnxSubEgrPStatsFwdInProfOcts_Object = MibTableColumn
-tmnxSubEgrPStatsFwdInProfOcts = _TmnxSubEgrPStatsFwdInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 14),
-    _TmnxSubEgrPStatsFwdInProfOcts_Type()
-)
-tmnxSubEgrPStatsFwdInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsFwdInProfOcts.setStatus("obsolete")
-_TmnxSubEgrPStatsFwdOutProfPkts_Type = Counter64
-_TmnxSubEgrPStatsFwdOutProfPkts_Object = MibTableColumn
-tmnxSubEgrPStatsFwdOutProfPkts = _TmnxSubEgrPStatsFwdOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 15),
-    _TmnxSubEgrPStatsFwdOutProfPkts_Type()
-)
-tmnxSubEgrPStatsFwdOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsFwdOutProfPkts.setStatus("obsolete")
-_TmnxSubEgrPStatsFwdOutProfOcts_Type = Counter64
-_TmnxSubEgrPStatsFwdOutProfOcts_Object = MibTableColumn
-tmnxSubEgrPStatsFwdOutProfOcts = _TmnxSubEgrPStatsFwdOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 6, 8, 1, 16),
-    _TmnxSubEgrPStatsFwdOutProfOcts_Type()
-)
-tmnxSubEgrPStatsFwdOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxSubEgrPStatsFwdOutProfOcts.setStatus("obsolete")
 _TmnxSubIpoeObjs_ObjectIdentity = ObjectIdentity
 tmnxSubIpoeObjs = _TmnxSubIpoeObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7)
@@ -42667,6 +43874,33 @@ tmnxSubIpoeOvrClassWeight = _TmnxSubIpoeOvrClassWeight_Object(
 tmnxSubIpoeOvrClassWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubIpoeOvrClassWeight.setStatus("current")
+_TmnxSubIpoeOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSubIpoeOvrBurstLimit_Object = MibTableColumn
+tmnxSubIpoeOvrBurstLimit = _TmnxSubIpoeOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7, 7, 1, 14),
+    _TmnxSubIpoeOvrBurstLimit_Type()
+)
+tmnxSubIpoeOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubIpoeOvrBurstLimit.setStatus("current")
+_TmnxSubIpoeOvrParentWeight_Type = TWeightOverride
+_TmnxSubIpoeOvrParentWeight_Object = MibTableColumn
+tmnxSubIpoeOvrParentWeight = _TmnxSubIpoeOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7, 7, 1, 15),
+    _TmnxSubIpoeOvrParentWeight_Type()
+)
+tmnxSubIpoeOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubIpoeOvrParentWeight.setStatus("current")
+_TmnxSubIpoeOvrParentCIRWeight_Type = TWeightOverride
+_TmnxSubIpoeOvrParentCIRWeight_Object = MibTableColumn
+tmnxSubIpoeOvrParentCIRWeight = _TmnxSubIpoeOvrParentCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7, 7, 1, 16),
+    _TmnxSubIpoeOvrParentCIRWeight_Type()
+)
+tmnxSubIpoeOvrParentCIRWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubIpoeOvrParentCIRWeight.setStatus("current")
 _TmnxSubIpoeMRtTable_Object = MibTable
 tmnxSubIpoeMRtTable = _TmnxSubIpoeMRtTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7, 8)
@@ -43098,6 +44332,22 @@ tmnxSubDataTriggIfAdminState = _TmnxSubDataTriggIfAdminState_Object(
 tmnxSubDataTriggIfAdminState.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubDataTriggIfAdminState.setStatus("current")
+
+
+class _TmnxSubDataTriggIfAcceptLla_Type(TruthValue):
+    """Custom type tmnxSubDataTriggIfAcceptLla based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxSubDataTriggIfAcceptLla_Type.__name__ = "TruthValue"
+_TmnxSubDataTriggIfAcceptLla_Object = MibTableColumn
+tmnxSubDataTriggIfAcceptLla = _TmnxSubDataTriggIfAcceptLla_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7, 14, 1, 3),
+    _TmnxSubDataTriggIfAcceptLla_Type()
+)
+tmnxSubDataTriggIfAcceptLla.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubDataTriggIfAcceptLla.setStatus("current")
 _TmnxSubIpoeDnsNbnsTable_Object = MibTable
 tmnxSubIpoeDnsNbnsTable = _TmnxSubIpoeDnsNbnsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 7, 15)
@@ -45789,6 +47039,33 @@ tmnxSubBrgOvrClassWeight = _TmnxSubBrgOvrClassWeight_Object(
 tmnxSubBrgOvrClassWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubBrgOvrClassWeight.setStatus("current")
+_TmnxSubBrgOvrBurstLimit_Type = TBurstLimitOverride
+_TmnxSubBrgOvrBurstLimit_Object = MibTableColumn
+tmnxSubBrgOvrBurstLimit = _TmnxSubBrgOvrBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 11, 17, 1, 12),
+    _TmnxSubBrgOvrBurstLimit_Type()
+)
+tmnxSubBrgOvrBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubBrgOvrBurstLimit.setStatus("current")
+_TmnxSubBrgOvrParentWeight_Type = TWeightOverride
+_TmnxSubBrgOvrParentWeight_Object = MibTableColumn
+tmnxSubBrgOvrParentWeight = _TmnxSubBrgOvrParentWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 11, 17, 1, 13),
+    _TmnxSubBrgOvrParentWeight_Type()
+)
+tmnxSubBrgOvrParentWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubBrgOvrParentWeight.setStatus("current")
+_TmnxSubBrgOvrParentCIRWeight_Type = TWeightOverride
+_TmnxSubBrgOvrParentCIRWeight_Object = MibTableColumn
+tmnxSubBrgOvrParentCIRWeight = _TmnxSubBrgOvrParentCIRWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 11, 17, 1, 14),
+    _TmnxSubBrgOvrParentCIRWeight_Type()
+)
+tmnxSubBrgOvrParentCIRWeight.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubBrgOvrParentCIRWeight.setStatus("current")
 _TmnxSubBrgFltrRuleTable_Object = MibTable
 tmnxSubBrgFltrRuleTable = _TmnxSubBrgFltrRuleTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 11, 18)
@@ -47661,6 +48938,34 @@ tmnxSubGtpPlcyApnAmbrQMapUlQueId = _TmnxSubGtpPlcyApnAmbrQMapUlQueId_Object(
 tmnxSubGtpPlcyApnAmbrQMapUlQueId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubGtpPlcyApnAmbrQMapUlQueId.setStatus("current")
+
+
+class _TmnxSubGtpUIpv6Checksum_Type(Integer32):
+    """Custom type tmnxSubGtpUIpv6Checksum based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("true", 1),
+          ("false", 2))
+    )
+
+
+_TmnxSubGtpUIpv6Checksum_Type.__name__ = "Integer32"
+_TmnxSubGtpUIpv6Checksum_Object = MibScalar
+tmnxSubGtpUIpv6Checksum = _TmnxSubGtpUIpv6Checksum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 14, 9),
+    _TmnxSubGtpUIpv6Checksum_Type()
+)
+tmnxSubGtpUIpv6Checksum.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxSubGtpUIpv6Checksum.setStatus("current")
 _TmnxSvcChainObjs_ObjectIdentity = ObjectIdentity
 tmnxSvcChainObjs = _TmnxSvcChainObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 15)
@@ -49150,7 +50455,7 @@ class _TmnxPfcpAssocHbInterval_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(5, 180),
+        ValueRangeConstraint(1, 180),
     )
 
 
@@ -49196,7 +50501,7 @@ class _TmnxPfcpAssocHbRetries_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 15),
+        ValueRangeConstraint(0, 30),
     )
 
 
@@ -49213,7 +50518,7 @@ if mibBuilder.loadTexts:
 
 class _TmnxPfcpAssocTxTimeout_Type(Unsigned32):
     """Custom type tmnxPfcpAssocTxTimeout based on Unsigned32"""
-    defaultValue = 5
+    defaultValue = 1
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
@@ -49502,7 +50807,9 @@ class _TmnxPfcpAssocUpBbfFeatures_Type(Bits):
           ("lcpko", 4),
           ("ndef1", 5),
           ("natCp", 6),
-          ("natUp", 7))
+          ("natUp", 7),
+          ("reserved8", 8),
+          ("reserved9", 9))
     )
 
 _TmnxPfcpAssocUpBbfFeatures_Type.__name__ = "Bits"
@@ -49522,7 +50829,11 @@ class _TmnxPfcpAssocUpNokiaFeatures_Type(Bits):
         *(("bulkAudit", 0),
           ("natAm", 1),
           ("lac", 2),
-          ("sssg", 3))
+          ("sssg", 3),
+          ("fsg", 4),
+          ("lpt", 5),
+          ("partialAudit", 6),
+          ("reserved7", 7))
     )
 
 _TmnxPfcpAssocUpNokiaFeatures_Type.__name__ = "Bits"
@@ -49566,7 +50877,7 @@ class _TmnxPfcpAssocPathRestorationTime_Type(Unsigned32):
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 0),
-        ValueRangeConstraint(5, 1440),
+        ValueRangeConstraint(1, 1440),
     )
 
 
@@ -49669,6 +50980,22 @@ if mibBuilder.loadTexts:
     tmnxPfcpAssocCurrReleaseTimeout.setUnits("seconds")
 
 
+class _TmnxPfcpAssocPythonPolicy_Type(TNamedItemOrEmpty):
+    """Custom type tmnxPfcpAssocPythonPolicy based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_TmnxPfcpAssocPythonPolicy_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxPfcpAssocPythonPolicy_Object = MibTableColumn
+tmnxPfcpAssocPythonPolicy = _TmnxPfcpAssocPythonPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 2, 1, 48),
+    _TmnxPfcpAssocPythonPolicy_Type()
+)
+tmnxPfcpAssocPythonPolicy.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPfcpAssocPythonPolicy.setStatus("current")
+
+
 class _TmnxPfcpAssocCurrPeerNodeIdType_Type(TmnxSubPfcpCurrPeerNodeIdType):
     """Custom type tmnxPfcpAssocCurrPeerNodeIdType based on TmnxSubPfcpCurrPeerNodeIdType"""
     defaultValue = 0
@@ -49692,6 +51019,82 @@ tmnxPfcpAssocCurrPeerFqdn = _TmnxPfcpAssocCurrPeerFqdn_Object(
 tmnxPfcpAssocCurrPeerFqdn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPfcpAssocCurrPeerFqdn.setStatus("current")
+
+
+class _TmnxPfcpAssocPathDownDetect_Type(TruthValue):
+    """Custom type tmnxPfcpAssocPathDownDetect based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxPfcpAssocPathDownDetect_Type.__name__ = "TruthValue"
+_TmnxPfcpAssocPathDownDetect_Object = MibTableColumn
+tmnxPfcpAssocPathDownDetect = _TmnxPfcpAssocPathDownDetect_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 2, 1, 51),
+    _TmnxPfcpAssocPathDownDetect_Type()
+)
+tmnxPfcpAssocPathDownDetect.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPfcpAssocPathDownDetect.setStatus("current")
+
+
+class _TmnxPfcpAssocPeerSystemNodeType_Type(TmnxSubPfcpPeerSystemNodeIdType):
+    """Custom type tmnxPfcpAssocPeerSystemNodeType based on TmnxSubPfcpPeerSystemNodeIdType"""
+    defaultValue = 1
+
+
+_TmnxPfcpAssocPeerSystemNodeType_Type.__name__ = "TmnxSubPfcpPeerSystemNodeIdType"
+_TmnxPfcpAssocPeerSystemNodeType_Object = MibTableColumn
+tmnxPfcpAssocPeerSystemNodeType = _TmnxPfcpAssocPeerSystemNodeType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 2, 1, 52),
+    _TmnxPfcpAssocPeerSystemNodeType_Type()
+)
+tmnxPfcpAssocPeerSystemNodeType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPfcpAssocPeerSystemNodeType.setStatus("current")
+_TmnxPfcpAssocPeerNodeIdFqdn_Type = TmnxSubPfcpNodeIdDomainName
+_TmnxPfcpAssocPeerNodeIdFqdn_Object = MibTableColumn
+tmnxPfcpAssocPeerNodeIdFqdn = _TmnxPfcpAssocPeerNodeIdFqdn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 2, 1, 53),
+    _TmnxPfcpAssocPeerNodeIdFqdn_Type()
+)
+tmnxPfcpAssocPeerNodeIdFqdn.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPfcpAssocPeerNodeIdFqdn.setStatus("current")
+
+
+class _TmnxPfcpAssocDefCalltraceProfile_Type(TNamedItemOrEmpty):
+    """Custom type tmnxPfcpAssocDefCalltraceProfile based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_TmnxPfcpAssocDefCalltraceProfile_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxPfcpAssocDefCalltraceProfile_Object = MibTableColumn
+tmnxPfcpAssocDefCalltraceProfile = _TmnxPfcpAssocDefCalltraceProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 2, 1, 54),
+    _TmnxPfcpAssocDefCalltraceProfile_Type()
+)
+tmnxPfcpAssocDefCalltraceProfile.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPfcpAssocDefCalltraceProfile.setStatus("current")
+
+
+class _TmnxPfcpAssocCpNokiaFeatures_Type(Bits):
+    """Custom type tmnxPfcpAssocCpNokiaFeatures based on Bits"""
+    namedValues = NamedValues(
+        *(("assocBulkAudit", 0),
+          ("assocHealth", 1),
+          ("upResGrls", 2))
+    )
+
+_TmnxPfcpAssocCpNokiaFeatures_Type.__name__ = "Bits"
+_TmnxPfcpAssocCpNokiaFeatures_Object = MibTableColumn
+tmnxPfcpAssocCpNokiaFeatures = _TmnxPfcpAssocCpNokiaFeatures_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 2, 1, 55),
+    _TmnxPfcpAssocCpNokiaFeatures_Type()
+)
+tmnxPfcpAssocCpNokiaFeatures.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpAssocCpNokiaFeatures.setStatus("current")
 _TmnxSubGitTableLastChanged_Type = TimeStamp
 _TmnxSubGitTableLastChanged_Object = MibScalar
 tmnxSubGitTableLastChanged = _TmnxSubGitTableLastChanged_Object(
@@ -50236,6 +51639,25 @@ tmnxSubGitV6UrpfCheckMode = _TmnxSubGitV6UrpfCheckMode_Object(
 tmnxSubGitV6UrpfCheckMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubGitV6UrpfCheckMode.setStatus("current")
+
+
+class _TmnxSubGitTriggerPacket_Type(Bits):
+    """Custom type tmnxSubGitTriggerPacket based on Bits"""
+    defaultBinValue = "0"
+
+    namedValues = NamedValues(
+        ("data", 0)
+    )
+
+_TmnxSubGitTriggerPacket_Type.__name__ = "Bits"
+_TmnxSubGitTriggerPacket_Object = MibTableColumn
+tmnxSubGitTriggerPacket = _TmnxSubGitTriggerPacket_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 4, 1, 70),
+    _TmnxSubGitTriggerPacket_Type()
+)
+tmnxSubGitTriggerPacket.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubGitTriggerPacket.setStatus("current")
 _TmnxSubSapTmplTableLastChanged_Type = TimeStamp
 _TmnxSubSapTmplTableLastChanged_Object = MibScalar
 tmnxSubSapTmplTableLastChanged = _TmnxSubSapTmplTableLastChanged_Object(
@@ -50832,7 +52254,7 @@ tmnxPfcpStatsSeAuditRepReq = _TmnxPfcpStatsSeAuditRepReq_Object(
 )
 tmnxPfcpStatsSeAuditRepReq.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPfcpStatsSeAuditRepReq.setStatus("current")
+    tmnxPfcpStatsSeAuditRepReq.setStatus("obsolete")
 _TmnxPfcpStatsSeAuditRepRsp_Type = Counter32
 _TmnxPfcpStatsSeAuditRepRsp_Object = MibTableColumn
 tmnxPfcpStatsSeAuditRepRsp = _TmnxPfcpStatsSeAuditRepRsp_Object(
@@ -50841,7 +52263,7 @@ tmnxPfcpStatsSeAuditRepRsp = _TmnxPfcpStatsSeAuditRepRsp_Object(
 )
 tmnxPfcpStatsSeAuditRepRsp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPfcpStatsSeAuditRepRsp.setStatus("current")
+    tmnxPfcpStatsSeAuditRepRsp.setStatus("obsolete")
 _TmnxPfcpStatsSeAuditRepRspFail_Type = Counter32
 _TmnxPfcpStatsSeAuditRepRspFail_Object = MibTableColumn
 tmnxPfcpStatsSeAuditRepRspFail = _TmnxPfcpStatsSeAuditRepRspFail_Object(
@@ -50850,7 +52272,7 @@ tmnxPfcpStatsSeAuditRepRspFail = _TmnxPfcpStatsSeAuditRepRspFail_Object(
 )
 tmnxPfcpStatsSeAuditRepRspFail.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPfcpStatsSeAuditRepRspFail.setStatus("current")
+    tmnxPfcpStatsSeAuditRepRspFail.setStatus("obsolete")
 _TmnxPfcpStatsAuReqArrTx_Type = Counter32
 _TmnxPfcpStatsAuReqArrTx_Object = MibTableColumn
 tmnxPfcpStatsAuReqArrTx = _TmnxPfcpStatsAuReqArrTx_Object(
@@ -50868,7 +52290,7 @@ tmnxPfcpStatsAuReqGrpTx = _TmnxPfcpStatsAuReqGrpTx_Object(
 )
 tmnxPfcpStatsAuReqGrpTx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPfcpStatsAuReqGrpTx.setStatus("current")
+    tmnxPfcpStatsAuReqGrpTx.setStatus("obsolete")
 _TmnxPfcpStatsAuReqArrGrpTx_Type = Counter32
 _TmnxPfcpStatsAuReqArrGrpTx_Object = MibTableColumn
 tmnxPfcpStatsAuReqArrGrpTx = _TmnxPfcpStatsAuReqArrGrpTx_Object(
@@ -51049,6 +52471,168 @@ tmnxPfcpStatsIbcpDefTnlOverwrite = _TmnxPfcpStatsIbcpDefTnlOverwrite_Object(
 tmnxPfcpStatsIbcpDefTnlOverwrite.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPfcpStatsIbcpDefTnlOverwrite.setStatus("current")
+_TmnxPfcpStatsIbcpDataTriggerRx_Type = Counter32
+_TmnxPfcpStatsIbcpDataTriggerRx_Object = MibTableColumn
+tmnxPfcpStatsIbcpDataTriggerRx = _TmnxPfcpStatsIbcpDataTriggerRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 69),
+    _TmnxPfcpStatsIbcpDataTriggerRx_Type()
+)
+tmnxPfcpStatsIbcpDataTriggerRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsIbcpDataTriggerRx.setStatus("current")
+_TmnxPfcpStatsDdrReq_Type = Counter32
+_TmnxPfcpStatsDdrReq_Object = MibTableColumn
+tmnxPfcpStatsDdrReq = _TmnxPfcpStatsDdrReq_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 70),
+    _TmnxPfcpStatsDdrReq_Type()
+)
+tmnxPfcpStatsDdrReq.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsDdrReq.setStatus("current")
+_TmnxPfcpStatsDdrRsp_Type = Counter32
+_TmnxPfcpStatsDdrRsp_Object = MibTableColumn
+tmnxPfcpStatsDdrRsp = _TmnxPfcpStatsDdrRsp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 71),
+    _TmnxPfcpStatsDdrRsp_Type()
+)
+tmnxPfcpStatsDdrRsp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsDdrRsp.setStatus("current")
+_TmnxPfcpStatsDdrRspFail_Type = Counter32
+_TmnxPfcpStatsDdrRspFail_Object = MibTableColumn
+tmnxPfcpStatsDdrRspFail = _TmnxPfcpStatsDdrRspFail_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 72),
+    _TmnxPfcpStatsDdrRspFail_Type()
+)
+tmnxPfcpStatsDdrRspFail.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsDdrRspFail.setStatus("current")
+_TmnxPfcpStatsAuAudTrigReqTx_Type = Counter32
+_TmnxPfcpStatsAuAudTrigReqTx_Object = MibTableColumn
+tmnxPfcpStatsAuAudTrigReqTx = _TmnxPfcpStatsAuAudTrigReqTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 73),
+    _TmnxPfcpStatsAuAudTrigReqTx_Type()
+)
+tmnxPfcpStatsAuAudTrigReqTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuAudTrigReqTx.setStatus("current")
+_TmnxPfcpStatsAuAudStartReqRx_Type = Counter32
+_TmnxPfcpStatsAuAudStartReqRx_Object = MibTableColumn
+tmnxPfcpStatsAuAudStartReqRx = _TmnxPfcpStatsAuAudStartReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 74),
+    _TmnxPfcpStatsAuAudStartReqRx_Type()
+)
+tmnxPfcpStatsAuAudStartReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuAudStartReqRx.setStatus("current")
+_TmnxPfcpStatsAuAudEndReqRx_Type = Counter32
+_TmnxPfcpStatsAuAudEndReqRx_Object = MibTableColumn
+tmnxPfcpStatsAuAudEndReqRx = _TmnxPfcpStatsAuAudEndReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 75),
+    _TmnxPfcpStatsAuAudEndReqRx_Type()
+)
+tmnxPfcpStatsAuAudEndReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuAudEndReqRx.setStatus("current")
+_TmnxPfcpStatsAuAudTrigRspRx_Type = Counter32
+_TmnxPfcpStatsAuAudTrigRspRx_Object = MibTableColumn
+tmnxPfcpStatsAuAudTrigRspRx = _TmnxPfcpStatsAuAudTrigRspRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 76),
+    _TmnxPfcpStatsAuAudTrigRspRx_Type()
+)
+tmnxPfcpStatsAuAudTrigRspRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuAudTrigRspRx.setStatus("current")
+_TmnxPfcpStatsAuAudStartRspTx_Type = Counter32
+_TmnxPfcpStatsAuAudStartRspTx_Object = MibTableColumn
+tmnxPfcpStatsAuAudStartRspTx = _TmnxPfcpStatsAuAudStartRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 77),
+    _TmnxPfcpStatsAuAudStartRspTx_Type()
+)
+tmnxPfcpStatsAuAudStartRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuAudStartRspTx.setStatus("current")
+_TmnxPfcpStatsAuAudEndRspTx_Type = Counter32
+_TmnxPfcpStatsAuAudEndRspTx_Object = MibTableColumn
+tmnxPfcpStatsAuAudEndRspTx = _TmnxPfcpStatsAuAudEndRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 78),
+    _TmnxPfcpStatsAuAudEndRspTx_Type()
+)
+tmnxPfcpStatsAuAudEndRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuAudEndRspTx.setStatus("current")
+_TmnxPfcpStatsHbRiReqRx_Type = Counter32
+_TmnxPfcpStatsHbRiReqRx_Object = MibTableColumn
+tmnxPfcpStatsHbRiReqRx = _TmnxPfcpStatsHbRiReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 79),
+    _TmnxPfcpStatsHbRiReqRx_Type()
+)
+tmnxPfcpStatsHbRiReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsHbRiReqRx.setStatus("current")
+_TmnxPfcpStatsHbRiRspTx_Type = Counter32
+_TmnxPfcpStatsHbRiRspTx_Object = MibTableColumn
+tmnxPfcpStatsHbRiRspTx = _TmnxPfcpStatsHbRiRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 80),
+    _TmnxPfcpStatsHbRiRspTx_Type()
+)
+tmnxPfcpStatsHbRiRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsHbRiRspTx.setStatus("current")
+_TmnxPfcpStatsAuPartialAudReqRx_Type = Counter32
+_TmnxPfcpStatsAuPartialAudReqRx_Object = MibTableColumn
+tmnxPfcpStatsAuPartialAudReqRx = _TmnxPfcpStatsAuPartialAudReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 81),
+    _TmnxPfcpStatsAuPartialAudReqRx_Type()
+)
+tmnxPfcpStatsAuPartialAudReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuPartialAudReqRx.setStatus("current")
+_TmnxPfcpStatsAuPartialAudRspTx_Type = Counter32
+_TmnxPfcpStatsAuPartialAudRspTx_Object = MibTableColumn
+tmnxPfcpStatsAuPartialAudRspTx = _TmnxPfcpStatsAuPartialAudRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 82),
+    _TmnxPfcpStatsAuPartialAudRspTx_Type()
+)
+tmnxPfcpStatsAuPartialAudRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuPartialAudRspTx.setStatus("current")
+_TmnxPfcpStatsAuPartAuSessAudited_Type = Counter32
+_TmnxPfcpStatsAuPartAuSessAudited_Object = MibTableColumn
+tmnxPfcpStatsAuPartAuSessAudited = _TmnxPfcpStatsAuPartAuSessAudited_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 83),
+    _TmnxPfcpStatsAuPartAuSessAudited_Type()
+)
+tmnxPfcpStatsAuPartAuSessAudited.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuPartAuSessAudited.setStatus("current")
+_TmnxPfcpStatsAuPartAuSessDeleted_Type = Counter32
+_TmnxPfcpStatsAuPartAuSessDeleted_Object = MibTableColumn
+tmnxPfcpStatsAuPartAuSessDeleted = _TmnxPfcpStatsAuPartAuSessDeleted_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 84),
+    _TmnxPfcpStatsAuPartAuSessDeleted_Type()
+)
+tmnxPfcpStatsAuPartAuSessDeleted.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsAuPartAuSessDeleted.setStatus("current")
+_TmnxPfcpStatsLastSuccPartAudRx_Type = TimeStamp
+_TmnxPfcpStatsLastSuccPartAudRx_Object = MibTableColumn
+tmnxPfcpStatsLastSuccPartAudRx = _TmnxPfcpStatsLastSuccPartAudRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 85),
+    _TmnxPfcpStatsLastSuccPartAudRx_Type()
+)
+tmnxPfcpStatsLastSuccPartAudRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsLastSuccPartAudRx.setStatus("current")
+_TmnxPfcpStatsLastFailPartAudRx_Type = TimeStamp
+_TmnxPfcpStatsLastFailPartAudRx_Object = MibTableColumn
+tmnxPfcpStatsLastFailPartAudRx = _TmnxPfcpStatsLastFailPartAudRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 7, 1, 86),
+    _TmnxPfcpStatsLastFailPartAudRx_Type()
+)
+tmnxPfcpStatsLastFailPartAudRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpStatsLastFailPartAudRx.setStatus("current")
 _TmnxPfcpStatsLastCleared_Type = TimeStamp
 _TmnxPfcpStatsLastCleared_Object = MibTableColumn
 tmnxPfcpStatsLastCleared = _TmnxPfcpStatsLastCleared_Object(
@@ -51785,6 +53369,150 @@ tmnxPfcpTotalIbcpDefTnlOverwrite = _TmnxPfcpTotalIbcpDefTnlOverwrite_Object(
 tmnxPfcpTotalIbcpDefTnlOverwrite.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPfcpTotalIbcpDefTnlOverwrite.setStatus("current")
+_TmnxPfcpTotalIbcpDataTriggerRx_Type = Counter32
+_TmnxPfcpTotalIbcpDataTriggerRx_Object = MibScalar
+tmnxPfcpTotalIbcpDataTriggerRx = _TmnxPfcpTotalIbcpDataTriggerRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 69),
+    _TmnxPfcpTotalIbcpDataTriggerRx_Type()
+)
+tmnxPfcpTotalIbcpDataTriggerRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalIbcpDataTriggerRx.setStatus("current")
+_TmnxPfcpTotalDdrReq_Type = Counter32
+_TmnxPfcpTotalDdrReq_Object = MibScalar
+tmnxPfcpTotalDdrReq = _TmnxPfcpTotalDdrReq_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 70),
+    _TmnxPfcpTotalDdrReq_Type()
+)
+tmnxPfcpTotalDdrReq.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalDdrReq.setStatus("current")
+_TmnxPfcpTotalDdrRsp_Type = Counter32
+_TmnxPfcpTotalDdrRsp_Object = MibScalar
+tmnxPfcpTotalDdrRsp = _TmnxPfcpTotalDdrRsp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 71),
+    _TmnxPfcpTotalDdrRsp_Type()
+)
+tmnxPfcpTotalDdrRsp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalDdrRsp.setStatus("current")
+_TmnxPfcpTotalDdrRspFail_Type = Counter32
+_TmnxPfcpTotalDdrRspFail_Object = MibScalar
+tmnxPfcpTotalDdrRspFail = _TmnxPfcpTotalDdrRspFail_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 72),
+    _TmnxPfcpTotalDdrRspFail_Type()
+)
+tmnxPfcpTotalDdrRspFail.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalDdrRspFail.setStatus("current")
+_TmnxPfcpTotalAuAudTrigReqTx_Type = Counter32
+_TmnxPfcpTotalAuAudTrigReqTx_Object = MibScalar
+tmnxPfcpTotalAuAudTrigReqTx = _TmnxPfcpTotalAuAudTrigReqTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 73),
+    _TmnxPfcpTotalAuAudTrigReqTx_Type()
+)
+tmnxPfcpTotalAuAudTrigReqTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuAudTrigReqTx.setStatus("current")
+_TmnxPfcpTotalAuAudStartReqRx_Type = Counter32
+_TmnxPfcpTotalAuAudStartReqRx_Object = MibScalar
+tmnxPfcpTotalAuAudStartReqRx = _TmnxPfcpTotalAuAudStartReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 74),
+    _TmnxPfcpTotalAuAudStartReqRx_Type()
+)
+tmnxPfcpTotalAuAudStartReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuAudStartReqRx.setStatus("current")
+_TmnxPfcpTotalAuAudEndReqRx_Type = Counter32
+_TmnxPfcpTotalAuAudEndReqRx_Object = MibScalar
+tmnxPfcpTotalAuAudEndReqRx = _TmnxPfcpTotalAuAudEndReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 75),
+    _TmnxPfcpTotalAuAudEndReqRx_Type()
+)
+tmnxPfcpTotalAuAudEndReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuAudEndReqRx.setStatus("current")
+_TmnxPfcpTotalAuAudTrigRspRx_Type = Counter32
+_TmnxPfcpTotalAuAudTrigRspRx_Object = MibScalar
+tmnxPfcpTotalAuAudTrigRspRx = _TmnxPfcpTotalAuAudTrigRspRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 76),
+    _TmnxPfcpTotalAuAudTrigRspRx_Type()
+)
+tmnxPfcpTotalAuAudTrigRspRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuAudTrigRspRx.setStatus("current")
+_TmnxPfcpTotalAuAudStartRspTx_Type = Counter32
+_TmnxPfcpTotalAuAudStartRspTx_Object = MibScalar
+tmnxPfcpTotalAuAudStartRspTx = _TmnxPfcpTotalAuAudStartRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 77),
+    _TmnxPfcpTotalAuAudStartRspTx_Type()
+)
+tmnxPfcpTotalAuAudStartRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuAudStartRspTx.setStatus("current")
+_TmnxPfcpTotalAuAudEndRspTx_Type = Counter32
+_TmnxPfcpTotalAuAudEndRspTx_Object = MibScalar
+tmnxPfcpTotalAuAudEndRspTx = _TmnxPfcpTotalAuAudEndRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 78),
+    _TmnxPfcpTotalAuAudEndRspTx_Type()
+)
+tmnxPfcpTotalAuAudEndRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuAudEndRspTx.setStatus("current")
+_TmnxPfcpTotalHbRiReqRx_Type = Counter32
+_TmnxPfcpTotalHbRiReqRx_Object = MibScalar
+tmnxPfcpTotalHbRiReqRx = _TmnxPfcpTotalHbRiReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 79),
+    _TmnxPfcpTotalHbRiReqRx_Type()
+)
+tmnxPfcpTotalHbRiReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalHbRiReqRx.setStatus("current")
+_TmnxPfcpTotalHbRiRspTx_Type = Counter32
+_TmnxPfcpTotalHbRiRspTx_Object = MibScalar
+tmnxPfcpTotalHbRiRspTx = _TmnxPfcpTotalHbRiRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 80),
+    _TmnxPfcpTotalHbRiRspTx_Type()
+)
+tmnxPfcpTotalHbRiRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalHbRiRspTx.setStatus("current")
+_TmnxPfcpTotalAuPartialAudReqRx_Type = Counter32
+_TmnxPfcpTotalAuPartialAudReqRx_Object = MibScalar
+tmnxPfcpTotalAuPartialAudReqRx = _TmnxPfcpTotalAuPartialAudReqRx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 81),
+    _TmnxPfcpTotalAuPartialAudReqRx_Type()
+)
+tmnxPfcpTotalAuPartialAudReqRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuPartialAudReqRx.setStatus("current")
+_TmnxPfcpTotalAuPartialAudRspTx_Type = Counter32
+_TmnxPfcpTotalAuPartialAudRspTx_Object = MibScalar
+tmnxPfcpTotalAuPartialAudRspTx = _TmnxPfcpTotalAuPartialAudRspTx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 82),
+    _TmnxPfcpTotalAuPartialAudRspTx_Type()
+)
+tmnxPfcpTotalAuPartialAudRspTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuPartialAudRspTx.setStatus("current")
+_TmnxPfcpTotalAuPartAuSessAudited_Type = Counter32
+_TmnxPfcpTotalAuPartAuSessAudited_Object = MibScalar
+tmnxPfcpTotalAuPartAuSessAudited = _TmnxPfcpTotalAuPartAuSessAudited_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 83),
+    _TmnxPfcpTotalAuPartAuSessAudited_Type()
+)
+tmnxPfcpTotalAuPartAuSessAudited.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuPartAuSessAudited.setStatus("current")
+_TmnxPfcpTotalAuPartAuSessDeleted_Type = Counter32
+_TmnxPfcpTotalAuPartAuSessDeleted_Object = MibScalar
+tmnxPfcpTotalAuPartAuSessDeleted = _TmnxPfcpTotalAuPartAuSessDeleted_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 9, 84),
+    _TmnxPfcpTotalAuPartAuSessDeleted_Type()
+)
+tmnxPfcpTotalAuPartAuSessDeleted.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpTotalAuPartAuSessDeleted.setStatus("current")
 _TmnxPfcpSessionTable_Object = MibTable
 tmnxPfcpSessionTable = _TmnxPfcpSessionTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10)
@@ -52177,7 +53905,8 @@ class _TmnxPfcpSeProtocols_Type(Bits):
         *(("ipoedhcp4", 0),
           ("ipoedhcp6", 1),
           ("ipoers", 2),
-          ("pppoedisc", 3))
+          ("pppoedisc", 3),
+          ("ipoedata", 4))
     )
 
 _TmnxPfcpSeProtocols_Type.__name__ = "Bits"
@@ -52216,6 +53945,203 @@ tmnxPfcpSeFsgId = _TmnxPfcpSeFsgId_Object(
 tmnxPfcpSeFsgId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPfcpSeFsgId.setStatus("current")
+_TmnxPfcpSeDefQfi_Type = Unsigned32
+_TmnxPfcpSeDefQfi_Object = MibTableColumn
+tmnxPfcpSeDefQfi = _TmnxPfcpSeDefQfi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 40),
+    _TmnxPfcpSeDefQfi_Type()
+)
+tmnxPfcpSeDefQfi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeDefQfi.setStatus("current")
+_TmnxPfcpSeDefRqi_Type = TruthValue
+_TmnxPfcpSeDefRqi_Object = MibTableColumn
+tmnxPfcpSeDefRqi = _TmnxPfcpSeDefRqi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 41),
+    _TmnxPfcpSeDefRqi_Type()
+)
+tmnxPfcpSeDefRqi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeDefRqi.setStatus("current")
+
+
+class _TmnxPfcpSeFsgOperState_Type(Integer32):
+    """Custom type tmnxPfcpSeFsgOperState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 0),
+          ("standby", 1),
+          ("active", 2))
+    )
+
+
+_TmnxPfcpSeFsgOperState_Type.__name__ = "Integer32"
+_TmnxPfcpSeFsgOperState_Object = MibTableColumn
+tmnxPfcpSeFsgOperState = _TmnxPfcpSeFsgOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 42),
+    _TmnxPfcpSeFsgOperState_Type()
+)
+tmnxPfcpSeFsgOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeFsgOperState.setStatus("current")
+_TmnxPfcpSeRemGtpuAddrType_Type = InetAddressType
+_TmnxPfcpSeRemGtpuAddrType_Object = MibTableColumn
+tmnxPfcpSeRemGtpuAddrType = _TmnxPfcpSeRemGtpuAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 43),
+    _TmnxPfcpSeRemGtpuAddrType_Type()
+)
+tmnxPfcpSeRemGtpuAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeRemGtpuAddrType.setStatus("current")
+
+
+class _TmnxPfcpSeRemGtpuAddr_Type(InetAddress):
+    """Custom type tmnxPfcpSeRemGtpuAddr based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TmnxPfcpSeRemGtpuAddr_Type.__name__ = "InetAddress"
+_TmnxPfcpSeRemGtpuAddr_Object = MibTableColumn
+tmnxPfcpSeRemGtpuAddr = _TmnxPfcpSeRemGtpuAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 44),
+    _TmnxPfcpSeRemGtpuAddr_Type()
+)
+tmnxPfcpSeRemGtpuAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeRemGtpuAddr.setStatus("current")
+_TmnxPfcpSeRemGtpuTeId_Type = Unsigned32
+_TmnxPfcpSeRemGtpuTeId_Object = MibTableColumn
+tmnxPfcpSeRemGtpuTeId = _TmnxPfcpSeRemGtpuTeId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 45),
+    _TmnxPfcpSeRemGtpuTeId_Type()
+)
+tmnxPfcpSeRemGtpuTeId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeRemGtpuTeId.setStatus("current")
+_TmnxPfcpSeLocGtpuAddrType_Type = InetAddressType
+_TmnxPfcpSeLocGtpuAddrType_Object = MibTableColumn
+tmnxPfcpSeLocGtpuAddrType = _TmnxPfcpSeLocGtpuAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 46),
+    _TmnxPfcpSeLocGtpuAddrType_Type()
+)
+tmnxPfcpSeLocGtpuAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeLocGtpuAddrType.setStatus("current")
+
+
+class _TmnxPfcpSeLocGtpuAddr_Type(InetAddress):
+    """Custom type tmnxPfcpSeLocGtpuAddr based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TmnxPfcpSeLocGtpuAddr_Type.__name__ = "InetAddress"
+_TmnxPfcpSeLocGtpuAddr_Object = MibTableColumn
+tmnxPfcpSeLocGtpuAddr = _TmnxPfcpSeLocGtpuAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 47),
+    _TmnxPfcpSeLocGtpuAddr_Type()
+)
+tmnxPfcpSeLocGtpuAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeLocGtpuAddr.setStatus("current")
+_TmnxPfcpSeLocGtpuTeId_Type = Unsigned32
+_TmnxPfcpSeLocGtpuTeId_Object = MibTableColumn
+tmnxPfcpSeLocGtpuTeId = _TmnxPfcpSeLocGtpuTeId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 48),
+    _TmnxPfcpSeLocGtpuTeId_Type()
+)
+tmnxPfcpSeLocGtpuTeId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeLocGtpuTeId.setStatus("current")
+_TmnxPfcpSeLocGtpuRouter_Type = TmnxVRtrIDOrZero
+_TmnxPfcpSeLocGtpuRouter_Object = MibTableColumn
+tmnxPfcpSeLocGtpuRouter = _TmnxPfcpSeLocGtpuRouter_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 49),
+    _TmnxPfcpSeLocGtpuRouter_Type()
+)
+tmnxPfcpSeLocGtpuRouter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeLocGtpuRouter.setStatus("current")
+_TmnxPfcpSeIsLogicalPortTunnel_Type = TruthValue
+_TmnxPfcpSeIsLogicalPortTunnel_Object = MibTableColumn
+tmnxPfcpSeIsLogicalPortTunnel = _TmnxPfcpSeIsLogicalPortTunnel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 50),
+    _TmnxPfcpSeIsLogicalPortTunnel_Type()
+)
+tmnxPfcpSeIsLogicalPortTunnel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeIsLogicalPortTunnel.setStatus("current")
+_TmnxPfcpSeSpiGroupId_Type = Unsigned32
+_TmnxPfcpSeSpiGroupId_Object = MibTableColumn
+tmnxPfcpSeSpiGroupId = _TmnxPfcpSeSpiGroupId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 51),
+    _TmnxPfcpSeSpiGroupId_Type()
+)
+tmnxPfcpSeSpiGroupId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeSpiGroupId.setStatus("current")
+_TmnxPfcpSeCalltraceProfile_Type = TNamedItemOrEmpty
+_TmnxPfcpSeCalltraceProfile_Object = MibTableColumn
+tmnxPfcpSeCalltraceProfile = _TmnxPfcpSeCalltraceProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 52),
+    _TmnxPfcpSeCalltraceProfile_Type()
+)
+tmnxPfcpSeCalltraceProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeCalltraceProfile.setStatus("current")
+_TmnxPfcpSeImsi_Type = TmnxMobImsiStr
+_TmnxPfcpSeImsi_Object = MibTableColumn
+tmnxPfcpSeImsi = _TmnxPfcpSeImsi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 53),
+    _TmnxPfcpSeImsi_Type()
+)
+tmnxPfcpSeImsi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeImsi.setStatus("current")
+_TmnxPfcpSeApn_Type = TmnxMobApnOrZero
+_TmnxPfcpSeApn_Object = MibTableColumn
+tmnxPfcpSeApn = _TmnxPfcpSeApn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 54),
+    _TmnxPfcpSeApn_Type()
+)
+tmnxPfcpSeApn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeApn.setStatus("current")
+
+
+class _TmnxPfcpSeL2AccessIdAlias_Type(DisplayString):
+    """Custom type tmnxPfcpSeL2AccessIdAlias based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_TmnxPfcpSeL2AccessIdAlias_Type.__name__ = "DisplayString"
+_TmnxPfcpSeL2AccessIdAlias_Object = MibTableColumn
+tmnxPfcpSeL2AccessIdAlias = _TmnxPfcpSeL2AccessIdAlias_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 10, 1, 55),
+    _TmnxPfcpSeL2AccessIdAlias_Type()
+)
+tmnxPfcpSeL2AccessIdAlias.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpSeL2AccessIdAlias.setStatus("current")
 _TmnxPfcpPeerTable_Object = MibTable
 tmnxPfcpPeerTable = _TmnxPfcpPeerTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 11)
@@ -52302,7 +54228,7 @@ tmnxPfcpPeerLclAddr = _TmnxPfcpPeerLclAddr_Object(
 tmnxPfcpPeerLclAddr.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     tmnxPfcpPeerLclAddr.setStatus("current")
-_TmnxPfcpPeerAssociation_Type = TNamedItem
+_TmnxPfcpPeerAssociation_Type = TNamedItemOrEmpty
 _TmnxPfcpPeerAssociation_Object = MibTableColumn
 tmnxPfcpPeerAssociation = _TmnxPfcpPeerAssociation_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 11, 1, 6),
@@ -52529,6 +54455,34 @@ tmnxSubFsgTmplStandbyFwding = _TmnxSubFsgTmplStandbyFwding_Object(
 tmnxSubFsgTmplStandbyFwding.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSubFsgTmplStandbyFwding.setStatus("current")
+
+
+class _TmnxSubFsgTmplPathRestoreState_Type(Integer32):
+    """Custom type tmnxSubFsgTmplPathRestoreState based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("standby", 1),
+          ("auto", 2))
+    )
+
+
+_TmnxSubFsgTmplPathRestoreState_Type.__name__ = "Integer32"
+_TmnxSubFsgTmplPathRestoreState_Object = MibTableColumn
+tmnxSubFsgTmplPathRestoreState = _TmnxSubFsgTmplPathRestoreState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 13, 1, 9),
+    _TmnxSubFsgTmplPathRestoreState_Type()
+)
+tmnxSubFsgTmplPathRestoreState.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSubFsgTmplPathRestoreState.setStatus("current")
 _TmnxSubUpResNwInstHealthTable_Object = MibTable
 tmnxSubUpResNwInstHealthTable = _TmnxSubUpResNwInstHealthTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 14)
@@ -52837,7 +54791,9 @@ if mibBuilder.loadTexts:
 class _TmnxSubUpResFsgOperFlags_Type(Bits):
     """Custom type tmnxSubUpResFsgOperFlags based on Bits"""
     namedValues = NamedValues(
-        ("nwConnectivityDown", 0)
+        *(("nwConnectivityDown", 0),
+          ("templateOverride", 1),
+          ("dualActiveDetect", 2))
     )
 
 _TmnxSubUpResFsgOperFlags_Type.__name__ = "Bits"
@@ -52902,6 +54858,15 @@ tmnxSubUpFsgPfcpSessions = _TmnxSubUpFsgPfcpSessions_Object(
 tmnxSubUpFsgPfcpSessions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubUpFsgPfcpSessions.setStatus("current")
+_TmnxSubUpFsgTemplate_Type = TNamedItem
+_TmnxSubUpFsgTemplate_Object = MibTableColumn
+tmnxSubUpFsgTemplate = _TmnxSubUpFsgTemplate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 17, 1, 9),
+    _TmnxSubUpFsgTemplate_Type()
+)
+tmnxSubUpFsgTemplate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgTemplate.setStatus("current")
 _TmnxSubUpResFsgIfTable_Object = MibTable
 tmnxSubUpResFsgIfTable = _TmnxSubUpResFsgIfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 18)
@@ -52972,6 +54937,192 @@ tmnxSubUpFsgStatsNrEntries = _TmnxSubUpFsgStatsNrEntries_Object(
 tmnxSubUpFsgStatsNrEntries.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSubUpFsgStatsNrEntries.setStatus("current")
+_TmnxSubUpFsgStatsOpInvalid_Type = Integer32
+_TmnxSubUpFsgStatsOpInvalid_Object = MibScalar
+tmnxSubUpFsgStatsOpInvalid = _TmnxSubUpFsgStatsOpInvalid_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 3),
+    _TmnxSubUpFsgStatsOpInvalid_Type()
+)
+tmnxSubUpFsgStatsOpInvalid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpInvalid.setStatus("current")
+_TmnxSubUpFsgStatsOpCreate_Type = Integer32
+_TmnxSubUpFsgStatsOpCreate_Object = MibScalar
+tmnxSubUpFsgStatsOpCreate = _TmnxSubUpFsgStatsOpCreate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 4),
+    _TmnxSubUpFsgStatsOpCreate_Type()
+)
+tmnxSubUpFsgStatsOpCreate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpCreate.setStatus("current")
+_TmnxSubUpFsgStatsOpCreateFail_Type = Integer32
+_TmnxSubUpFsgStatsOpCreateFail_Object = MibScalar
+tmnxSubUpFsgStatsOpCreateFail = _TmnxSubUpFsgStatsOpCreateFail_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 5),
+    _TmnxSubUpFsgStatsOpCreateFail_Type()
+)
+tmnxSubUpFsgStatsOpCreateFail.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpCreateFail.setStatus("current")
+_TmnxSubUpFsgStatsOpCreateTotal_Type = Integer32
+_TmnxSubUpFsgStatsOpCreateTotal_Object = MibScalar
+tmnxSubUpFsgStatsOpCreateTotal = _TmnxSubUpFsgStatsOpCreateTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 6),
+    _TmnxSubUpFsgStatsOpCreateTotal_Type()
+)
+tmnxSubUpFsgStatsOpCreateTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpCreateTotal.setStatus("current")
+_TmnxSubUpFsgStatsOpMod_Type = Integer32
+_TmnxSubUpFsgStatsOpMod_Object = MibScalar
+tmnxSubUpFsgStatsOpMod = _TmnxSubUpFsgStatsOpMod_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 7),
+    _TmnxSubUpFsgStatsOpMod_Type()
+)
+tmnxSubUpFsgStatsOpMod.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpMod.setStatus("current")
+_TmnxSubUpFsgStatsOpModFail_Type = Integer32
+_TmnxSubUpFsgStatsOpModFail_Object = MibScalar
+tmnxSubUpFsgStatsOpModFail = _TmnxSubUpFsgStatsOpModFail_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 8),
+    _TmnxSubUpFsgStatsOpModFail_Type()
+)
+tmnxSubUpFsgStatsOpModFail.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpModFail.setStatus("current")
+_TmnxSubUpFsgStatsOpModTotal_Type = Integer32
+_TmnxSubUpFsgStatsOpModTotal_Object = MibScalar
+tmnxSubUpFsgStatsOpModTotal = _TmnxSubUpFsgStatsOpModTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 9),
+    _TmnxSubUpFsgStatsOpModTotal_Type()
+)
+tmnxSubUpFsgStatsOpModTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpModTotal.setStatus("current")
+_TmnxSubUpFsgStatsOpDel_Type = Integer32
+_TmnxSubUpFsgStatsOpDel_Object = MibScalar
+tmnxSubUpFsgStatsOpDel = _TmnxSubUpFsgStatsOpDel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 10),
+    _TmnxSubUpFsgStatsOpDel_Type()
+)
+tmnxSubUpFsgStatsOpDel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpDel.setStatus("current")
+_TmnxSubUpFsgStatsOpDelFail_Type = Integer32
+_TmnxSubUpFsgStatsOpDelFail_Object = MibScalar
+tmnxSubUpFsgStatsOpDelFail = _TmnxSubUpFsgStatsOpDelFail_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 11),
+    _TmnxSubUpFsgStatsOpDelFail_Type()
+)
+tmnxSubUpFsgStatsOpDelFail.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpDelFail.setStatus("current")
+_TmnxSubUpFsgStatsOpDelTotal_Type = Integer32
+_TmnxSubUpFsgStatsOpDelTotal_Object = MibScalar
+tmnxSubUpFsgStatsOpDelTotal = _TmnxSubUpFsgStatsOpDelTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 19, 1, 12),
+    _TmnxSubUpFsgStatsOpDelTotal_Type()
+)
+tmnxSubUpFsgStatsOpDelTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSubUpFsgStatsOpDelTotal.setStatus("current")
+_TmnxPfcpSessPerPortTable_Object = MibTable
+tmnxPfcpSessPerPortTable = _TmnxPfcpSessPerPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20)
+)
+if mibBuilder.loadTexts:
+    tmnxPfcpSessPerPortTable.setStatus("current")
+_TmnxPfcpSessPerPortEntry_Object = MibTableRow
+tmnxPfcpSessPerPortEntry = _TmnxPfcpSessPerPortEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1)
+)
+tmnxPfcpSessPerPortEntry.setIndexNames(
+    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIdHi"),
+    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIdLo"),
+    (0, "TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortFilterKey"),
+)
+if mibBuilder.loadTexts:
+    tmnxPfcpSessPerPortEntry.setStatus("current")
+_TmnxPfcpPerPortFilterKey_Type = Unsigned32
+_TmnxPfcpPerPortFilterKey_Object = MibTableColumn
+tmnxPfcpPerPortFilterKey = _TmnxPfcpPerPortFilterKey_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 1),
+    _TmnxPfcpPerPortFilterKey_Type()
+)
+tmnxPfcpPerPortFilterKey.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortFilterKey.setStatus("current")
+_TmnxPfcpPerPortAssociation_Type = TNamedItem
+_TmnxPfcpPerPortAssociation_Object = MibTableColumn
+tmnxPfcpPerPortAssociation = _TmnxPfcpPerPortAssociation_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 2),
+    _TmnxPfcpPerPortAssociation_Type()
+)
+tmnxPfcpPerPortAssociation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortAssociation.setStatus("current")
+
+
+class _TmnxPfcpPerPortProtocols_Type(Bits):
+    """Custom type tmnxPfcpPerPortProtocols based on Bits"""
+    namedValues = NamedValues(
+        *(("ipoedhcp4", 0),
+          ("ipoedhcp6", 1),
+          ("ipoers", 2),
+          ("pppoedisc", 3),
+          ("ipoedata", 4),
+          ("pppoesesscontrol", 5),
+          ("pppoesessdatars", 6),
+          ("pppoesessdatadhcp6", 7),
+          ("pppoesessdatavsnp", 8))
+    )
+
+_TmnxPfcpPerPortProtocols_Type.__name__ = "Bits"
+_TmnxPfcpPerPortProtocols_Object = MibTableColumn
+tmnxPfcpPerPortProtocols = _TmnxPfcpPerPortProtocols_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 3),
+    _TmnxPfcpPerPortProtocols_Type()
+)
+tmnxPfcpPerPortProtocols.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortProtocols.setStatus("current")
+_TmnxPfcpPerPortStartSVlanTag_Type = QTagFullRangeOrNone
+_TmnxPfcpPerPortStartSVlanTag_Object = MibTableColumn
+tmnxPfcpPerPortStartSVlanTag = _TmnxPfcpPerPortStartSVlanTag_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 4),
+    _TmnxPfcpPerPortStartSVlanTag_Type()
+)
+tmnxPfcpPerPortStartSVlanTag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortStartSVlanTag.setStatus("current")
+_TmnxPfcpPerPortEndSVlanTag_Type = QTagFullRangeOrNone
+_TmnxPfcpPerPortEndSVlanTag_Object = MibTableColumn
+tmnxPfcpPerPortEndSVlanTag = _TmnxPfcpPerPortEndSVlanTag_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 5),
+    _TmnxPfcpPerPortEndSVlanTag_Type()
+)
+tmnxPfcpPerPortEndSVlanTag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortEndSVlanTag.setStatus("current")
+_TmnxPfcpPerPortStartCVlanTag_Type = QTagFullRangeOrNone
+_TmnxPfcpPerPortStartCVlanTag_Object = MibTableColumn
+tmnxPfcpPerPortStartCVlanTag = _TmnxPfcpPerPortStartCVlanTag_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 6),
+    _TmnxPfcpPerPortStartCVlanTag_Type()
+)
+tmnxPfcpPerPortStartCVlanTag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortStartCVlanTag.setStatus("current")
+_TmnxPfcpPerPortEndCVlanTag_Type = QTagFullRangeOrNone
+_TmnxPfcpPerPortEndCVlanTag_Object = MibTableColumn
+tmnxPfcpPerPortEndCVlanTag = _TmnxPfcpPerPortEndCVlanTag_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 33, 17, 20, 1, 7),
+    _TmnxPfcpPerPortEndCVlanTag_Type()
+)
+tmnxPfcpPerPortEndCVlanTag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPfcpPerPortEndCVlanTag.setStatus("current")
 _TmnxSubscriberNotifyPrefix_ObjectIdentity = ObjectIdentity
 tmnxSubscriberNotifyPrefix = _TmnxSubscriberNotifyPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 33)
@@ -53822,7 +55973,6 @@ tmnxHsmdaSubscriberV6v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaIngAggRateLimit"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaEgrAggRateLimit"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaIngPackByteOff"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaEgrPackByteOff"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaIngQueueOvrTableLC"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaIngQueueOvrRowStat"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaIngQueueOvrLastChgd"),
@@ -56570,7 +58720,6 @@ tmnxSubObsoletedV10v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaIngAggRateLimit"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaEgrAggRateLimit"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaIngPackByteOff"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfHsmdaEgrPackByteOff"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaIngQueueOvrTableLC"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaEgrQueueOvrTblLC"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaIngQueueOvrRowStat"),
@@ -58432,30 +60581,6 @@ tmnxSubCreditControlV13v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxSubCreditControlV13v0Group.setStatus("current")
 
-tmnxSubHsmdaV14v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 121)
-)
-tmnxSubHsmdaV14v0Group.setObjects(
-      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsMode"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffInProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffInProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffOutProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffOutProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffUncolPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffUncolOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpInProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpInProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpOutProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpOutProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdInProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdInProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdOutProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdOutProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoIngQosPolIdOvr"))
-)
-if mibBuilder.loadTexts:
-    tmnxSubHsmdaV14v0Group.setStatus("obsolete")
-
 tmnxSubErrorsGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 122)
 )
@@ -59192,7 +61317,7 @@ tmnxSubFlterProfV16v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolFltrProfMapFltrProf"))
 )
 if mibBuilder.loadTexts:
-    tmnxSubFlterProfV16v0Group.setStatus("current")
+    tmnxSubFlterProfV16v0Group.setStatus("obsolete")
 
 tmnxSvcChainObsoletedV15v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 146)
@@ -60847,6 +62972,20 @@ tmnxSubMgmtGrpItfStatsV20v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxSubMgmtGrpItfStatsV20v0Group.setStatus("current")
 
+tmnxSubStatsAggGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 166)
+)
+tmnxSubStatsAggGroup.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfAggEgrPolicersScope"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfAggEgrQueuesScope"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatGrpRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatGrpLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatGrpEgrPolicersScope"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatGrpEgrPolicers"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubStatsAggGroup.setStatus("current")
+
 tmnxSubCupsV20v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 167)
 )
@@ -61270,7 +63409,6 @@ tmnxSubMgmtProfV21v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInPProfOcts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInPProfOcts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInPProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoIngQosPolIdOvr"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoEgrSecShaper"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsOffTotalOcts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdInProfPkts"),
@@ -61302,7 +63440,7 @@ tmnxSubMgmtProfV21v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessLacPeak"))
 )
 if mibBuilder.loadTexts:
-    tmnxSubMgmtProfV21v0Group.setStatus("current")
+    tmnxSubMgmtProfV21v0Group.setStatus("obsolete")
 
 tmnxSubProfObsoleteV21v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 172)
@@ -61448,21 +63586,6 @@ tmnxSubProfObsoleteV21v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaStEgrDropOutProfPkt"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaStEgrDropInProfOct"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaStEgrDropOutProfOct"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsMode"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffInProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffInProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffOutProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffOutProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffUncolPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsOffUncolOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpInProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpInProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpOutProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsDrpOutProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdInProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdInProfOcts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdOutProfPkts"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrPStatsFwdOutProfOcts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdInProfPkts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdOutProfPkts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdInProfOcts"),
@@ -61495,15 +63618,7 @@ tmnxSubProfObsoleteV21v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrOvrCntrDropInProfOcts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrOvrCntrDropOutProfOcts"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrOvrCntrStatModeFormat"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplDelPfxLenMode"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrSignChangeOCntr"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrSignChangeOICounters"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrSignChangeOECounters"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCustRecOvrCtrLastChnge"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrOverrideCntrRowStatus"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrOverrideCntrLastChngd"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrOverrideCntrICounters"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubApCrOverrideCntrECounters"))
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplDelPfxLenMode"))
 )
 if mibBuilder.loadTexts:
     tmnxSubProfObsoleteV21v0Group.setStatus("current")
@@ -61898,6 +64013,7 @@ tmnxSubCupsV21v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplGarpGranularity"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRedInterface"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRedInterfaceSvc"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPythonPolicy"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerNodeIdType"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerFqdn"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplStandbyFwding"))
@@ -62049,6 +64165,7 @@ tmnxSubCupsV22v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4UrpfCheckMode"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV6UrpfCheckState"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV6UrpfCheckMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitTriggerPacket"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplTableLastChanged"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplLastChanged"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplRowStatus"),
@@ -62281,6 +64398,7 @@ tmnxSubCupsV22v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplGarpGranularity"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRedInterface"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRedInterfaceSvc"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPythonPolicy"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerNodeIdType"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerFqdn"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplStandbyFwding"),
@@ -62322,10 +64440,23 @@ tmnxSubCupsV22v0Group.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResFsgIfIndex"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsRxMsgs"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsNrEntries"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgPfcpSessions"))
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgPfcpSessions"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeFsgOperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpInvalid"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpCreate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpCreateFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpCreateTotal"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpMod"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpModFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpModTotal"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpDel"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpDelFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpDelTotal"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplPathRestoreState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgTemplate"))
 )
 if mibBuilder.loadTexts:
-    tmnxSubCupsV22v0Group.setStatus("current")
+    tmnxSubCupsV22v0Group.setStatus("obsolete")
 
 tmnxSubMgmtV22v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 178)
@@ -62376,6 +64507,1250 @@ tmnxSubObsoletedV22v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSubObsoletedV22v0Group.setStatus("current")
+
+tmnxSub5GSAV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 183)
+)
+tmnxSub5GSAV22v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpLvl2FlowRate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeDefQfi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeDefRqi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleRqi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleQfi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleGfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleMfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleRqi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleQfi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleGfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleGfbrIgnored"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleMfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleMfbrIgnored"))
+)
+if mibBuilder.loadTexts:
+    tmnxSub5GSAV22v0Group.setStatus("obsolete")
+
+tmnxSubCupsDataTriggerV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 184)
+)
+tmnxSubCupsDataTriggerV22v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpDataTriggerRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpDataTriggerRx"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubCupsDataTriggerV22v0Group.setStatus("current")
+
+tmnxSubCupsPfcpBfdV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 185)
+)
+tmnxSubCupsPfcpBfdV22v0Group.setObjects(
+    ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPathDownDetect")
+)
+if mibBuilder.loadTexts:
+    tmnxSubCupsPfcpBfdV22v0Group.setStatus("current")
+
+tmnxSubCupsStatsDDRV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 186)
+)
+tmnxSubCupsStatsDDRV22v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsDdrReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsDdrRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsDdrRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalDdrReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalDdrRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalDdrRspFail"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubCupsStatsDDRV22v0Group.setStatus("current")
+
+tmnxSubVportLagPLHWV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 187)
+)
+tmnxSubVportLagPLHWV22v0Group.setObjects(
+    ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2LagActivePort")
+)
+if mibBuilder.loadTexts:
+    tmnxSubVportLagPLHWV22v0Group.setStatus("current")
+
+tmnxSubHostInfoHWASV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 188)
+)
+tmnxSubHostInfoHWASV22v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2HwAggShapQSetSz"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosAggShapQSetSize"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubHostInfoHWASV22v0Group.setStatus("current")
+
+tmnxSubPppV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 189)
+)
+tmnxSubPppV23v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppLcpKaOrigin"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppLcpKaInterval"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppLcpKaHoldUpMplier"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubPppV23v0Group.setStatus("current")
+
+tmnxSub5GSAV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 190)
+)
+tmnxSub5GSAV23v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleLevel2Id"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleL2MapFromProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleDscp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleLevel2Id"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleL2MapFromProf"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleDscp"))
+)
+if mibBuilder.loadTexts:
+    tmnxSub5GSAV23v0Group.setStatus("obsolete")
+
+tmnxSubIpoeV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 191)
+)
+tmnxSubIpoeV23v0Group.setObjects(
+    ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDataTriggIfAcceptLla")
+)
+if mibBuilder.loadTexts:
+    tmnxSubIpoeV23v0Group.setStatus("current")
+
+tmnxSubFwaV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 192)
+)
+tmnxSubFwaV23v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemGtpuAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemGtpuAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemGtpuTeId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocGtpuAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocGtpuAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocGtpuTeId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocGtpuRouter"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfcpSessFwa"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfcpSessFwaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfFwaV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotPfFwaV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaPfFwaV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortPfFwaV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcPfFwaV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSuIfPfFwaV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGpIfPfFwaV4Peak"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubFwaV23v0Group.setStatus("current")
+
+tmnxSubHostInfoHWASV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 193)
+)
+tmnxSubHostInfoHWASV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2HwAggShapQSzOvr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosAggShapQSetSizeOvr"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubHostInfoHWASV24v0Group.setStatus("current")
+
+tmnxSubCupsV24v0PerPortTnlGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 194)
+)
+tmnxSubCupsV24v0PerPortTnlGroup.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIsLogicalPortTunnel"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortAssociation"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortProtocols"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortStartSVlanTag"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortEndSVlanTag"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortStartCVlanTag"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPerPortEndCVlanTag"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeL2AccessIdAlias"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubCupsV24v0PerPortTnlGroup.setStatus("current")
+
+tmnxSubCupsV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 195)
+)
+tmnxSubCupsV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfControl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfControl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocTableLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocAdminState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocNodeIdType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocNodeIdFqdn"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocRouter"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocInterface"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPeerNodeIdType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPeerAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPeerAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocSetupRetryT"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocHbInterval"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocHbTimeout"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocHbRetries"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocTxTimeout"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocTxRetries"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocTxTtl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocReleaseTimeout"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPathMgmtState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocRestartReason"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrNodeAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrNodeAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocL2AwNatGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrReleaseTimeout"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeRepReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeRepRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeRepRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsUsgReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsUsgRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsUsgRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsEirReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsEirRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsEirRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsUpirReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsUpirRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsUpirRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuReqArrTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuReqArrGrpTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAsReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAsRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAsRspFailRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAsReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAsRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAsRspFailTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuRspFailRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuRspFailTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalArReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalArRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalArRspFailTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalNdRepReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalNdRepRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalNdRepRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeEstReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeEstRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeEstRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeModReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeModRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeModRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeDelReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeDelRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeDelRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeRepReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeRepRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeRepRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalUsgReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalUsgRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalUsgRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalEirReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalEirRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalEirRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalUpirReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalUpirRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalUpirRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeAuditRepReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeAuditRepRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeAuditRepRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuReqArrTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuReqGrpTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuReqArrGrpTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeAuditModReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeAuditModRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalSeAuditModRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitTableLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitMtu"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpMaskReply"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpParamProblem"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpNumParamProblem"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpParamProblemTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpRedirects"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpNumRedirects"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpRedirectsTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpLimitTtlExpired"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpNumTtlExpired"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpTtlExpiredTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpUnreachables"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpNumUnreachables"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4IcmpUnreachablesTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4NdProxyArp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4NdProxyArpPolicy1"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4NdProxyArpPolicy2"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4NdProxyArpPolicy3"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4NdProxyArpPolicy4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4NdProxyArpPolicy5"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4UrpfCheckState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV4UrpfCheckMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV6UrpfCheckState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitV6UrpfCheckMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGitTriggerPacket"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplTableLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplCpmProtPolicyId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplCpmProtMonitorMac"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplCpmProtMonitorIP"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplDCpuProtPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSapTmplHoldTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAsReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAsRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAsRspFailRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAsReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAsRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAsRspFailTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuRspFailRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuRspFailTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsArReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsArRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsArRspFailTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsNdRepReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsNdRepRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsNdRepRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeEstReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeEstRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeEstRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeModReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeModRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeModRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeDelReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeDelRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeDelRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeAuditModReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeAuditModRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeAuditModRspFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpIpoeRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPppoeCtrlRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPppoeDataRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPktNoSess"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPktParseErr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPktTxSmfErr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPktDefTnlNoTrig"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpPktNoDefTnl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsIbcpDefTnlOverwrite"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpIpoeRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPppoeCtrlRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPppoeDataRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPktNoSess"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPktParseErr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPktTxSmfErr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPktDefTnlNoTrig"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpPktNoDefTnl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalIbcpDefTnlOverwrite"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbAudTrigReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbAudStartReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbAudEndReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbAudTrigRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbAudStartRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbAudEndRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbAudTrigReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbAudStartReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbAudEndReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbAudTrigRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbAudStartRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbAudEndRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuAudTrigReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuAudStartReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuAudEndReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuAudTrigRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuAudStartRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuAudEndRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuAudTrigReqTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuAudStartReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuAudEndReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuAudTrigRspRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuAudStartRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuAudEndRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbRiReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsHbRiRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbRiReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalHbRiRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsLastCleared"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSeMRtStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSeMRtMetric"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSeMRtPreference"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSeMRtTag"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfPppV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfIpoeV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfcpHosts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPortSPfcpHostsPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfPppV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfIpoeV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfcpHosts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtMdaSPfcpHostsPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfPppV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfIpoeV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfcpHosts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSlotSPfcpHostsPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV4Peak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfPppV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV6SlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV6PdPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfIpoeV6NaPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpHosts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpHostsPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessPpp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessPppPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessIpoe"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessIpoePeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessIs"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessIsPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessTot"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessTotPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessDef"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessDefPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV4Pk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV4"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV4Pk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV6SlPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV6PdPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfPppV6NaPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV6Sl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV6SlPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV6Pd"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV6PdPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV6Na"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfIpoeV6NaPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfcpHosts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtPwPortSPfcpHostsPk"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeAssociation"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIsDefaultTunnel"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemPeerAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemPeerAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemIdHi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemIdLo"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRemTeId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocPeerAddrType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocPeerAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocRouter"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeLocTeId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeDataUsPdrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeDataDsPdrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIbcpUsPdrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIbcpDsPdrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSapPortId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSapEncapValue"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeMacAddress"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSePppoeSessionId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSvcId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSubIf"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeGrpIf"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRtSvcId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeRtIf"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeTerminationType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocUpFeatures"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocUpBbfFeatures"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocUpNokiaFeatures"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCpFeatures"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPathRestorationTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCreated"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocOperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocTimerRunning"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSubIdent"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSubProfString"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSlaProfString"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeReqPppMtu"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSePppMtu"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeStateId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPeerAssociation"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPeerPathMgmtState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPeerRestartReason"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpPeerRestorationTimer"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeProtocols"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplTableLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplGarpGranularity"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRedInterface"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplRedInterfaceSvc"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPythonPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerNodeIdType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCurrPeerFqdn"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplStandbyFwding"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqUmgType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqUmgQueId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqUmgPolId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqUmgArbNm"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqUmgSchNm"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqDmgType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqDmgQueId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqDmgPolId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqDmgArbNm"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpSeqDmgSchNm"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNwInstHealth"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNwInstLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNwInstLastReported"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNwInstOperFlags"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNwInstSvcId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdHealth"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdLastReported"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdOperFlags"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdSvcId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdSapPortId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResL2AccIdSapEncapValue"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNrNwInst"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNrNwInstUpdates"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNrNwInstUpdateFails"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNrL2AccIds"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNrL2AccIdUpdates"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResNrL2AccIdUpdateFails"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeFsgId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResFsgLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResFsgOperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResFsgOperFlags"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResFsgCpOperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgBecomeActive"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgBecomeStandby"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpResFsgIfIndex"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsRxMsgs"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsNrEntries"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgPfcpSessions"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeFsgOperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpInvalid"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpCreate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpCreateFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpCreateTotal"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpMod"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpModFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpModTotal"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpDel"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpDelFail"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgStatsOpDelTotal"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFsgTmplPathRestoreState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubUpFsgTemplate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeSpiGroupId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPeerSystemNodeType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocPeerNodeIdFqdn"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocDefCalltraceProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeCalltraceProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPfcpPerPortDefTnl"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystPerPortDefTnlPeak"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpAssocCpNokiaFeatures"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubCupsV24v0Group.setStatus("current")
+
+tmnxSubObsoletedV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 196)
+)
+tmnxSubObsoletedV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuReqGrpTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpLvl2FlowRate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleGfbrIgnored"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleMfbrIgnored"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeAuditRepReq"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeAuditRepRsp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsSeAuditRepRspFail"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubObsoletedV24v0Group.setStatus("current")
+
+tmnxSub5GSAV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 197)
+)
+tmnxSub5GSAV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfPfcpLvl2FlowRate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeDefQfi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeDefRqi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleRqi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleQfi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleGfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleMfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleRqi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleQfi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleGfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleGfbrIgnored"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleMfbr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleMfbrIgnored"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleLevel2Id"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleL2MapFromProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleDscp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleLevel2Id"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleL2MapFromProf"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostPccRuleDscp"))
+)
+if mibBuilder.loadTexts:
+    tmnxSub5GSAV24v0Group.setStatus("current")
+
+tmnxSubQosQueueOvrV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 198)
+)
+tmnxSubQosQueueOvrV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSpiOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSpiOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSpiOvrParentCIRWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfInstOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfInstOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfInstOvrParentCIRWeigh"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubOvrParentCIRWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacOvrParentCIRWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppOvrParentCIRWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeOvrParentCIRWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubBrgOvrBurstLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubBrgOvrParentWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubBrgOvrParentCIRWeight"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubQosQueueOvrV24v0Group.setStatus("current")
+
+tmnxSubQosOvrSubscriptV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 199)
+)
+tmnxSubQosOvrSubscriptV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAltProfThresholdType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAltProfThresholdNumber"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfAltProfName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfAltProfName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoOversubscribed"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNumOversubscrbdEntries"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNumNonOversubscrbdEntries"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubQosOvrSubscriptV24v0Group.setStatus("current")
+
+tmnxSubNotificationObjV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 200)
+)
+tmnxSubNotificationObjV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpVRtrID"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifPppoeSessionId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifCircuitId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifRemoteId"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubNotificationObjV24v0Group.setStatus("current")
+
+tmnxSubITPlcyV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 201)
+)
+tmnxSubITPlcyV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyTableLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyLastChanged"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyAction"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyTimeout"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyActivityThreshold"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyEgressPolicers"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyEgressQueues"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyIngressPolicers"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyIngressQueues"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubITPlcyV24v0Group.setStatus("current")
+
+tmnxSubFwaV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 202)
+)
+tmnxSubFwaV24v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeImsi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeApn"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubFwaV24v0Group.setStatus("current")
+
+tmnxSubSimITandCCV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 203)
+)
+tmnxSubSimITandCCV25v0Group.setObjects(
+    ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfIdleTimeoutPlcy")
+)
+if mibBuilder.loadTexts:
+    tmnxSubSimITandCCV25v0Group.setStatus("current")
+
+tmnxSubPppV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 204)
+)
+tmnxSubPppV25v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppLacFragActionState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppLacFragOperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppLacFragFpeId"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubPppV25v0Group.setStatus("current")
+
+tmnxSubGtpUChecksumGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 205)
+)
+tmnxSubGtpUChecksumGroup.setObjects(
+    ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpUIpv6Checksum")
+)
+if mibBuilder.loadTexts:
+    tmnxSubGtpUChecksumGroup.setStatus("current")
+
+tmnxSubObsoletedV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 206)
+)
+tmnxSubObsoletedV25v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfIngIpFltrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfEgrIpFltrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfIngIpv6FltrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfEgrIpv6FltrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPFltrProfMapRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPFltrProfMapLstMgmtChg"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPFltrProfMapFltrProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFlterProfTbleLastMgmtChg"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPFltrProfMapTblLstMgtChg"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolFltrProfMapRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolFltrProfMapLastMgmtCh"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolFltrProfMapFltrProf"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubObsoletedV25v0Group.setStatus("current")
+
+tmnxSubMgmtProfV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 207)
+)
+tmnxSubMgmtProfV25v0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfIngQosSchedPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrQosSchedPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfCollectAcctStats"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfAccountingPolicyId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrAggRateLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfRadiusAcctPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfDuplRadiusAcctPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfUseDirectSLAMapAsDef"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSchedOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSchedOvrLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSchedOvrSummedCIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSLAProfMapRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSLAProfMapLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSLAProfMapSLAProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfHostLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfRemoveOldest"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfIngQosPolId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfIngSharedQPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfIngUseMpointShared"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfIngIPFilterId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfEgrQosPolId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfEgrIPFilterId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfReportIngRateType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfReportIngRateSched"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfReportEgrRateType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfReportEgrRateSched"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfEgrQosMarkingFromSap"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfEgrSchedulerType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfOTHttpRdrIpv4FltrId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfEgrUseIngL2tpDscp"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrPIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrCIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrCBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrHiPrioOnly"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrMBSBytes"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrPIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrCIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrCBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrHiPrioOnly"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrAvgOverhead"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrMBSBytes"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubExplicitMapRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubExplicitMapLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubExplicitMapSubProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubExplicitMapSLAProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubExplicitMapAlias"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript1URL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript1AdminState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript1OperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript2URL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript2AdminState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript2OperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript3URL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript3AdminState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolScript3OperState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolUseDirectSubMapAsDef"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolUseDirectSLAMapAsDef"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolRejectUnknownStrings"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolStringsFromOption"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolSubProfMapRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolSubProfMapLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolSubProfMapSubProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolSLAProfMapRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolSLAProfMapLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIPolSLAProfMapSLAProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoSubProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoSubAncpString"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoNumSubProfileChanges"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoIntermediateDestId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosSchedStatsFwdPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosSchedStatsFwdOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosSchedStatsFwdPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosSchedStatsFwdOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffHiPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffLoPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffUncolPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffUncolOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropHiPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropLoPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdInProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdOutProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropInProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropOutProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdInProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdOutProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsOffHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsDropHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsOffLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsDropLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsOffHiPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsDropHiPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsOffLoPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsDropLoPrioOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsOffUncolPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsOffUncolOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsFwdInProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngQStatsFwdOutProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsDropInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsDropOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsFwdInProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsDropInProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsFwdOutProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQStatsDropOutProfOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2FwdingState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2Origin"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2SubIdent"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2SubProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2SLAProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2RetailerSvcId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2RetailerIf"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2PfxLen"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2EgrQGrpName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2EgrVPortName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2AcctSessionId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2AddressOrigin"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2PppIndex"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2AcctMultiSessId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2IngFilter"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2EgrFilter"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2OtHttpRdrState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2OtHttpRdrFilter"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV2OtHttpRdrSource"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPISubHostV2Origin"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPISubHostV2PfxLen"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIInfoCategoryMapName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIInfoDiamSessId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPlcrOverrideTblLstChng"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPlcrOverrideTblLstChng"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrLastMgmtChg"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrPIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrCIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrMBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrCBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrPktOffset"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngPolicerOvrStatMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrLastMgmtChg"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrPIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrCIR"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrMBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrCBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrPktOffset"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrPolicerOvrStatMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlOvrTblLstChng"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlOvrLastChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlOvrMaxRate"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlOvrMinMBSSep"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlLvlOvrTblLstChng"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlLvlOvrRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlLvlOvrLastChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPCtrlLvlOvrCumMBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffHiPrioPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffHiPrioPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpHiPrioPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpHiPrioPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffLoPrioPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffLoPrioPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpLoPrioPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpLoPrioPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffHiPrioOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffHiPrioOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffHiPrioOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpHiPrioOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpHiPrioOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpHiPrioOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffLoPrioOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffLoPrioOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffLoPrioOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpLoPrioOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpLoPrioOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsDrpLoPrioOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffUncolPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffUncolPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffUncolPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffUncolOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffUncolOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsOffUncolOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdInProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdInProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdOutProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdOutProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdInProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdInProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdInProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdOutProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdOutProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIIngPStatsFwdOutProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffOutProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffOutProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdOutProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdOutProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpOutProfPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpOutProfPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffOutProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffOutProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffOutProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdOutProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdOutProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdOutProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpOutProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpOutProfOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpOutProfOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffUncolPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffUncolPktsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffUncolPktsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffUncolOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffUncolOctsL"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffUncolOctsH"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosArbitStatsFwdPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosArbitStatsFwdPktsLo"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosArbitStatsFwdPktsHi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosArbitStatsFwdOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosArbitStatsFwdOctsLo"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQosArbitStatsFwdOctsHi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosArbitStatsFwdPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosArbitStatsFwdPktsLo"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosArbitStatsFwdPktsHi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosArbitStatsFwdOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosArbitStatsFwdOctsLo"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubEgrQosArbitStatsFwdOctsHi"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyImportPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyHostMaxGroups"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyAdminVersion"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyFastLeave"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyRedirectionPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyEgrRateModType"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyEgrRateModSched"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyPerHostReplic"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyMcRprtDestName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyMcRprtOptFields"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyMcRprtAdminState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyStaticRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfInstOvrCBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfInstOvrMBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubOvrCBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubOvrMBS"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpHostsCreated"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcySubscriberId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpStatusPlcyName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoRadEgrAggRateLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoEgrAggRateLimit"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcyRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcyDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcyAdminState"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcyUnconstrainedBW"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcyPreRsvdMandBW"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcyLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacPlcySubscriberId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacStatusPlcyName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacStatusinUseMandBw"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacStatusinUseOpnlBw"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacStatusAvailMandBw"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMcacStatusAvailOpnlBw"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyRowStatus"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyLastMgmtChange"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyDescription"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyLcktTimeMin"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyLcktTimeMax"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyLcktResetTime"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyMaxLcktHosts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubLcktPlcyHostKey"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIgmpPlcyHostMaxSources"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQosSchedStatsFwdPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrQosSchedStatsFwdOctets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppSapSessionIndex"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAIngQueueOvrStatMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAEgrQueueOvrStatMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffV4Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffV4Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffV6Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngPchipOffV6Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropV4Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropV4Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropV6Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipDropV6Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdV4Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdV4Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdV6Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsIngQchipFwdV6Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropV4Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropV4Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropV6Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipDropV6Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdV4Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdV4Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdV6Pkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIStatsEgrQchipFwdV6Octets"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdExdProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpExdProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdExdProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpExdProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffExdProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffExdProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInPProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInPProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInPProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsOffInPProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsFwdInPProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSPIEgrPStatsDrpInPProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoEgrSecShaper"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsOffTotalOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdInProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdOutProfPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdInProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsFwdOutProfOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsDropHiPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsDropLoPrioPkts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsDropHiPrioOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIngQStatsDropLoPrioOcts"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrPolicerPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfIngPolicerPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfIgmpPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrEncapOffsetMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrEncapOffset"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfSubMcacPolicy"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfPreference"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrHsLowBurstMaxClass"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfNatAllowBypass"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfNatAccessMode"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrResvBw"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfEgrHsResvBw"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoEgrAggRateLimitLow"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppOvrWrrWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSLAProfInstOvrWrrWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubInfoQos"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubOvrWrrWeight"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessLac"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSystSPfcpSessLacPeak"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubMgmtProfV25v0Group.setStatus("current")
+
+tmnxSubCupsV25PartialAudv0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 2, 208)
+)
+tmnxSubCupsV25PartialAudv0Group.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuPartialAudReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuPartialAudRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuPartAuSessAudited"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsAuPartAuSessDeleted"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsLastSuccPartAudRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpStatsLastFailPartAudRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuPartialAudReqRx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuPartialAudRspTx"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuPartAuSessAudited"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpTotalAuPartAuSessDeleted"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubCupsV25PartialAudv0Group.setStatus("current")
 
 
 # Notification objects
@@ -63090,6 +66465,73 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxPfcpNoSuchCalltraceProfile = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 33, 0, 57)
+)
+tmnxPfcpNoSuchCalltraceProfile.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIdHigh"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIdLow"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifName"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAdditionalInfo"))
+)
+if mibBuilder.loadTexts:
+    tmnxPfcpNoSuchCalltraceProfile.setStatus(
+        "current"
+    )
+
+tmnxPfcpNoSecondaryInterface = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 33, 0, 58)
+)
+tmnxPfcpNoSecondaryInterface.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpVRtrID"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIdHigh"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpSeIdLow"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAdditionalInfo"))
+)
+if mibBuilder.loadTexts:
+    tmnxPfcpNoSecondaryInterface.setStatus(
+        "current"
+    )
+
+tmnxSubPysrosExec = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 33, 0, 59)
+)
+tmnxSubPysrosExec.setObjects(
+      *(("DISMAN-SCRIPT-MIB", "smRunArgument"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIdent"),
+        ("TIMETRA-SERV-MIB", "svcName"),
+        ("TIMETRA-SAP-MIB", "sapPortId"),
+        ("TIMETRA-SAP-MIB", "sapEncapValue"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifMacAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifPppoeSessionId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifCircuitId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifRemoteId"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubPysrosExec.setStatus(
+        "current"
+    )
+
+tmnxSubPysrosExecFail = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 33, 0, 60)
+)
+tmnxSubPysrosExecFail.setObjects(
+      *(("DISMAN-SCRIPT-MIB", "smRunArgument"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIdent"),
+        ("TIMETRA-SERV-MIB", "svcName"),
+        ("TIMETRA-SAP-MIB", "sapPortId"),
+        ("TIMETRA-SAP-MIB", "sapEncapValue"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifMacAddr"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifPppoeSessionId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifCircuitId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotifRemoteId"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAdditionalInfo"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubPysrosExecFail.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -63335,6 +66777,20 @@ tmnxSubMgmtV21v0NotifGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSubMgmtV21v0NotifGroup.setStatus(
+        "current"
+    )
+
+tmnxSubMgmtV24v0NotifGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 3, 18)
+)
+tmnxSubMgmtV24v0NotifGroup.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpNoSuchCalltraceProfile"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxPfcpNoSecondaryInterface"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPysrosExec"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPysrosExecFail"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubMgmtV24v0NotifGroup.setStatus(
         "current"
     )
 
@@ -64084,7 +67540,6 @@ tmnxSubMgmtSROSV14v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"))
 )
@@ -64168,7 +67623,6 @@ tmnxSubMgmtSROSV15v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsqV15v0Group"),
@@ -64264,7 +67718,6 @@ tmnxSubMgmtSROSV16v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsqV15v0Group"),
@@ -64294,7 +67747,7 @@ tmnxSubFlterProfV16v0Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSubFlterProfV16v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxSubMgmtSROSV19v0Compliance = ModuleCompliance(
@@ -64376,7 +67829,6 @@ tmnxSubMgmtSROSV19v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsmdaV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsqV15v0Group"),
@@ -64507,6 +67959,7 @@ tmnxSubMgmtSROSV20v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSubItfStatsV20v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGrpItfStatsV20v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatsAggGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSVlanStatsV21v0Group"))
 )
 if mibBuilder.loadTexts:
@@ -64616,6 +68069,7 @@ tmnxSubMgmtSROSV21v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSubItfStatsV20v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGrpItfStatsV20v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatsAggGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSVlanStatsV21v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtProfV21v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileV21v0Group"),
@@ -64731,6 +68185,7 @@ tmnxSubMgmtSROSV22v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSubItfStatsV20v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGrpItfStatsV20v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatsAggGroup"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSVlanStatsV21v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtProfV21v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileV21v0Group"),
@@ -64742,10 +68197,424 @@ tmnxSubMgmtSROSV22v0Compliance.setObjects(
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvV21v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRdrPlcyV22v0Group"),
         ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0NotifGroup"),
-        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHqosV22v0Group"))
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHqosV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSub5GSAV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsDataTriggerV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsPfcpBfdV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsStatsDDRV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVportLagPLHWV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoHWASV22v0Group"))
 )
 if mibBuilder.loadTexts:
     tmnxSubMgmtSROSV22v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxSubMgmtSROSV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 1, 35)
+)
+tmnxSubMgmtSROSV23v0Compliance.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAleGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV19v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV7v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV9v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV10v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV12v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV13v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtObsoletedNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtIpoeNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadNotifStatsV6v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFrameBasedAccntV6v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubBsxObjV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostTrackingV9v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadusPlcyCustomRecordV7v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxCcIpFltrV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxCcIpv6FltrV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubV6GrpIfRAV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtIPv6V8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileMssExtensionsGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV9v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAutoSubIdV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAutoSubIdV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeLinkV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNatV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubL2tpGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRedirectGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRedirectV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVSubnetV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSysGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubServiceGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosParentLocV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRipV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCcLongCatMapNameGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPimGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppDfGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDataTriggerGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsqV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccuStatsV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSteeringProfV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVcpeV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRtrAdvPlcyV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV15v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcChainV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDhcpOverloadGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSpiSharingV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpObjV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpObjV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV16v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsUpNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV19v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV19v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStringLenLongV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVcpeV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSubItfStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGrpItfStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatsAggGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSVlanStatsV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtProfV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRdrPlcyV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHqosV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSub5GSAV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsDataTriggerV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsPfcpBfdV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsStatsDDRV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVportLagPLHWV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoHWASV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSub5GSAV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFwaV23v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSROSV23v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxSubMgmtSROSV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 1, 36)
+)
+tmnxSubMgmtSROSV24v0Compliance.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAleGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV19v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV7v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV9v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV10v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV12v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV13v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtObsoletedNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtIpoeNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadNotifStatsV6v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFrameBasedAccntV6v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubBsxObjV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostTrackingV9v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadusPlcyCustomRecordV7v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxCcIpFltrV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxCcIpv6FltrV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubV6GrpIfRAV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtIPv6V8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileMssExtensionsGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV9v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAutoSubIdV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAutoSubIdV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeLinkV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNatV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubL2tpGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRedirectGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRedirectV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVSubnetV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSysGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubServiceGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosParentLocV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRipV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCcLongCatMapNameGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPimGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppDfGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDataTriggerGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsqV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccuStatsV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSteeringProfV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVcpeV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRtrAdvPlcyV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV15v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcChainV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDhcpOverloadGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSpiSharingV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpObjV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpObjV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV16v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsUpNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV19v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV19v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStringLenLongV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVcpeV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSubItfStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGrpItfStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatsAggGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSVlanStatsV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtProfV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRdrPlcyV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHqosV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsDataTriggerV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsPfcpBfdV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsStatsDDRV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVportLagPLHWV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoHWASV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFwaV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoHWASV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV24v0PerPortTnlGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSub5GSAV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosQueueOvrV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosOvrSubscriptV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV24v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotificationObjV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFwaV24v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSROSV24v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxSubMgmtSROSV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 33, 1, 37)
+)
+tmnxSubMgmtSROSV25v0Compliance.setObjects(
+      *(("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAleGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAuthenticationV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccountingV19v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV7v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV9v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV10v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV12v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV13v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtObsoletedNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtIpoeNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadNotifStatsV6v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFrameBasedAccntV6v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubBsxObjV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostTrackingV9v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadusPlcyCustomRecordV7v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxCcIpFltrV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxCcIpv6FltrV8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubV6GrpIfRAV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtIPv6V8v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileMssExtensionsGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV9v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAutoSubIdV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAutoSubIdV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeLinkV10v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSlaacV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNatV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubL2tpGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRedirectGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRedirectV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVSubnetV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSysGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubServiceGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV11v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSchedulerRateV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosParentLocV12v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRipV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCcLongCatMapNameGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPimGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppDfGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV13v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDataTriggerGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRadClassGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV14v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubErrorsGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCreditControlV14v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHsqV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubAccuStatsV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSteeringProfV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVcpeV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubRtrAdvPlcyV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV15v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcChainV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubDhcpOverloadGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSpiSharingV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpObjV15v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpObjV16v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV16v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsUpNotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV19v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPccRuleEntryV19v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStringLenLongV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVcpeV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSvcStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSubItfStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtGrpItfStatsV20v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV20v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubStatsAggGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtSVlanStatsV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtProfV25v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubProfileV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubShcvV21v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHttpRdrPlcyV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV21v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHqosV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsDataTriggerV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsPfcpBfdV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsStatsDDRV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubVportLagPLHWV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoHWASV22v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubIpoeV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFwaV23v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubHostInfoHWASV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV24v0PerPortTnlGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSub5GSAV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosQueueOvrV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubQosOvrSubscriptV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubMgmtV24v0NotifGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubNotificationObjV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubITPlcyV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubFwaV24v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubSimITandCCV25v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubPppV25v0Group"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubGtpUChecksumGroup"),
+        ("TIMETRA-SUBSCRIBER-MGMT-MIB", "tmnxSubCupsV25PartialAudv0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxSubMgmtSROSV25v0Compliance.setStatus(
         "current"
     )
 
@@ -64760,6 +68629,7 @@ mibBuilder.exportSymbols(
        "TmnxSubAcctPlcyAccountingType": TmnxSubAcctPlcyAccountingType,
        "TmnxSubAddrContextAllocationType": TmnxSubAddrContextAllocationType,
        "TmnxSubAdminStatus": TmnxSubAdminStatus,
+       "TmnxSubAggScope": TmnxSubAggScope,
        "TmnxSubAuthPlcyUserNameAppend": TmnxSubAuthPlcyUserNameAppend,
        "TmnxSubAuthPlcyUserNameFormat": TmnxSubAuthPlcyUserNameFormat,
        "TmnxSubAuthPppoeAccessMethod": TmnxSubAuthPppoeAccessMethod,
@@ -64814,6 +68684,8 @@ mibBuilder.exportSymbols(
        "TmnxVasFilterFailAction": TmnxVasFilterFailAction,
        "TmnxLacSteeringOperState": TmnxLacSteeringOperState,
        "TmnxSubAuthOrigin": TmnxSubAuthOrigin,
+       "TmnxSubPccRuleLevel2Id": TmnxSubPccRuleLevel2Id,
+       "TmnxSubPccRuleLvl2MapFromProfile": TmnxSubPccRuleLvl2MapFromProfile,
        "tmnxSubMgmtMIBModule": tmnxSubMgmtMIBModule,
        "tmnxSubMgmtConformance": tmnxSubMgmtConformance,
        "tmnxSubMgmtCompliances": tmnxSubMgmtCompliances,
@@ -64851,6 +68723,9 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtSROSV20v0Compliance": tmnxSubMgmtSROSV20v0Compliance,
        "tmnxSubMgmtSROSV21v0Compliance": tmnxSubMgmtSROSV21v0Compliance,
        "tmnxSubMgmtSROSV22v0Compliance": tmnxSubMgmtSROSV22v0Compliance,
+       "tmnxSubMgmtSROSV23v0Compliance": tmnxSubMgmtSROSV23v0Compliance,
+       "tmnxSubMgmtSROSV24v0Compliance": tmnxSubMgmtSROSV24v0Compliance,
+       "tmnxSubMgmtSROSV25v0Compliance": tmnxSubMgmtSROSV25v0Compliance,
        "tmnxSubMgmtGroups": tmnxSubMgmtGroups,
        "tmnxSubAuthenticationV4v0Group": tmnxSubAuthenticationV4v0Group,
        "tmnxSubMgmtV4v0Group": tmnxSubMgmtV4v0Group,
@@ -64961,7 +68836,6 @@ mibBuilder.exportSymbols(
        "tmnxSubIpoeV14v0Group": tmnxSubIpoeV14v0Group,
        "tmnxSubNotificationObjV14v0Group": tmnxSubNotificationObjV14v0Group,
        "tmnxSubCreditControlV13v0Group": tmnxSubCreditControlV13v0Group,
-       "tmnxSubHsmdaV14v0Group": tmnxSubHsmdaV14v0Group,
        "tmnxSubErrorsGroup": tmnxSubErrorsGroup,
        "tmnxSubCreditControlV14v0Group": tmnxSubCreditControlV14v0Group,
        "tmnxSubAccountingV15v0Group": tmnxSubAccountingV15v0Group,
@@ -65000,6 +68874,7 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtSvcStatsV20v0Group": tmnxSubMgmtSvcStatsV20v0Group,
        "tmnxSubMgmtSubItfStatsV20v0Group": tmnxSubMgmtSubItfStatsV20v0Group,
        "tmnxSubMgmtGrpItfStatsV20v0Group": tmnxSubMgmtGrpItfStatsV20v0Group,
+       "tmnxSubStatsAggGroup": tmnxSubStatsAggGroup,
        "tmnxSubCupsV20v0Group": tmnxSubCupsV20v0Group,
        "tmnxSubMgmtSVlanStatsV21v0Group": tmnxSubMgmtSVlanStatsV21v0Group,
        "tmnxSubProfileV21v0Group": tmnxSubProfileV21v0Group,
@@ -65016,6 +68891,32 @@ mibBuilder.exportSymbols(
        "tmnxSubHttpRdrPlcyV22v0Group": tmnxSubHttpRdrPlcyV22v0Group,
        "tmnxSubHqosV22v0Group": tmnxSubHqosV22v0Group,
        "tmnxSubObsoletedV22v0Group": tmnxSubObsoletedV22v0Group,
+       "tmnxSub5GSAV22v0Group": tmnxSub5GSAV22v0Group,
+       "tmnxSubCupsDataTriggerV22v0Group": tmnxSubCupsDataTriggerV22v0Group,
+       "tmnxSubCupsPfcpBfdV22v0Group": tmnxSubCupsPfcpBfdV22v0Group,
+       "tmnxSubCupsStatsDDRV22v0Group": tmnxSubCupsStatsDDRV22v0Group,
+       "tmnxSubVportLagPLHWV22v0Group": tmnxSubVportLagPLHWV22v0Group,
+       "tmnxSubHostInfoHWASV22v0Group": tmnxSubHostInfoHWASV22v0Group,
+       "tmnxSubPppV23v0Group": tmnxSubPppV23v0Group,
+       "tmnxSub5GSAV23v0Group": tmnxSub5GSAV23v0Group,
+       "tmnxSubIpoeV23v0Group": tmnxSubIpoeV23v0Group,
+       "tmnxSubFwaV23v0Group": tmnxSubFwaV23v0Group,
+       "tmnxSubHostInfoHWASV24v0Group": tmnxSubHostInfoHWASV24v0Group,
+       "tmnxSubCupsV24v0PerPortTnlGroup": tmnxSubCupsV24v0PerPortTnlGroup,
+       "tmnxSubCupsV24v0Group": tmnxSubCupsV24v0Group,
+       "tmnxSubObsoletedV24v0Group": tmnxSubObsoletedV24v0Group,
+       "tmnxSub5GSAV24v0Group": tmnxSub5GSAV24v0Group,
+       "tmnxSubQosQueueOvrV24v0Group": tmnxSubQosQueueOvrV24v0Group,
+       "tmnxSubQosOvrSubscriptV24v0Group": tmnxSubQosOvrSubscriptV24v0Group,
+       "tmnxSubNotificationObjV24v0Group": tmnxSubNotificationObjV24v0Group,
+       "tmnxSubITPlcyV24v0Group": tmnxSubITPlcyV24v0Group,
+       "tmnxSubFwaV24v0Group": tmnxSubFwaV24v0Group,
+       "tmnxSubSimITandCCV25v0Group": tmnxSubSimITandCCV25v0Group,
+       "tmnxSubPppV25v0Group": tmnxSubPppV25v0Group,
+       "tmnxSubGtpUChecksumGroup": tmnxSubGtpUChecksumGroup,
+       "tmnxSubObsoletedV25v0Group": tmnxSubObsoletedV25v0Group,
+       "tmnxSubMgmtProfV25v0Group": tmnxSubMgmtProfV25v0Group,
+       "tmnxSubCupsV25PartialAudv0Group": tmnxSubCupsV25PartialAudv0Group,
        "tmnxSubMgmtNotifGroup": tmnxSubMgmtNotifGroup,
        "tmnxSubMgmtV4v0NotifGroup": tmnxSubMgmtV4v0NotifGroup,
        "tmnxSubMgmtV5v0NotifGroup": tmnxSubMgmtV5v0NotifGroup,
@@ -65034,6 +68935,7 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtV19v0NotifGroup": tmnxSubMgmtV19v0NotifGroup,
        "tmnxSubMgmtV20v0NotifGroup": tmnxSubMgmtV20v0NotifGroup,
        "tmnxSubMgmtV21v0NotifGroup": tmnxSubMgmtV21v0NotifGroup,
+       "tmnxSubMgmtV24v0NotifGroup": tmnxSubMgmtV24v0NotifGroup,
        "tmnxSubMgmt": tmnxSubMgmt,
        "tmnxSubMgmtObjects": tmnxSubMgmtObjects,
        "tmnxSubAuthPlcyTable": tmnxSubAuthPlcyTable,
@@ -65130,7 +69032,6 @@ mibBuilder.exportSymbols(
        "tmnxSubProfHsmdaIngAggRateLimit": tmnxSubProfHsmdaIngAggRateLimit,
        "tmnxSubProfHsmdaEgrAggRateLimit": tmnxSubProfHsmdaEgrAggRateLimit,
        "tmnxSubProfHsmdaIngPackByteOff": tmnxSubProfHsmdaIngPackByteOff,
-       "tmnxSubProfHsmdaEgrPackByteOff": tmnxSubProfHsmdaEgrPackByteOff,
        "tmnxSubProfHostTrackingPolicy": tmnxSubProfHostTrackingPolicy,
        "tmnxSubProfUseSubscriberMss": tmnxSubProfUseSubscriberMss,
        "tmnxSubProfIngPolicerPolicy": tmnxSubProfIngPolicerPolicy,
@@ -65172,6 +69073,7 @@ mibBuilder.exportSymbols(
        "tmnxSubProfHsmdaEgrResvBw": tmnxSubProfHsmdaEgrResvBw,
        "tmnxSubProfEgrAggRateAdaptRule": tmnxSubProfEgrAggRateAdaptRule,
        "tmnxSubProfEgrAggRateBurstLimit": tmnxSubProfEgrAggRateBurstLimit,
+       "tmnxSubProfAltProfName": tmnxSubProfAltProfName,
        "tmnxSubProfSchedOverrideTable": tmnxSubProfSchedOverrideTable,
        "tmnxSubProfSchedOverrideEntry": tmnxSubProfSchedOverrideEntry,
        "tmnxSubProfSchedOvrDirection": tmnxSubProfSchedOvrDirection,
@@ -65244,6 +69146,10 @@ mibBuilder.exportSymbols(
        "tmnxSLAProfSessLimL2tpLts": tmnxSLAProfSessLimL2tpLts,
        "tmnxSLAProfSessLimL2tpOvrl": tmnxSLAProfSessLimL2tpOvrl,
        "tmnxSLAProfSessLimOvrl": tmnxSLAProfSessLimOvrl,
+       "tmnxSLAProfAggEgrPolicersScope": tmnxSLAProfAggEgrPolicersScope,
+       "tmnxSLAProfAggEgrQueuesScope": tmnxSLAProfAggEgrQueuesScope,
+       "tmnxSLAProfAltProfName": tmnxSLAProfAltProfName,
+       "tmnxSLAProfIdleTimeoutPlcy": tmnxSLAProfIdleTimeoutPlcy,
        "tmnxSLAIngQueueOverrideTable": tmnxSLAIngQueueOverrideTable,
        "tmnxSLAIngQueueOverrideEntry": tmnxSLAIngQueueOverrideEntry,
        "tmnxSLAIngQueueOvrRowStatus": tmnxSLAIngQueueOvrRowStatus,
@@ -65326,9 +69232,9 @@ mibBuilder.exportSymbols(
        "tmnxSubInfoRadEgrAggRateLimit": tmnxSubInfoRadEgrAggRateLimit,
        "tmnxSubInfoEgrAggRateLimit": tmnxSubInfoEgrAggRateLimit,
        "tmnxSubInfoQos": tmnxSubInfoQos,
-       "tmnxSubInfoIngQosPolIdOvr": tmnxSubInfoIngQosPolIdOvr,
        "tmnxSubInfoShortId": tmnxSubInfoShortId,
        "tmnxSubInfoEgrAggRateLimitLow": tmnxSubInfoEgrAggRateLimitLow,
+       "tmnxSubInfoOversubscribed": tmnxSubInfoOversubscribed,
        "tmnxSubHostInfoTable": tmnxSubHostInfoTable,
        "tmnxSubHostInfoEntry": tmnxSubHostInfoEntry,
        "tmnxSubHostInfoIpAddressType": tmnxSubHostInfoIpAddressType,
@@ -65682,6 +69588,9 @@ mibBuilder.exportSymbols(
        "tmnxSubHostInfoV2SpiGroupId": tmnxSubHostInfoV2SpiGroupId,
        "tmnxSubHostInfoV2HwAggShapQSet": tmnxSubHostInfoV2HwAggShapQSet,
        "tmnxSubHostInfoV2HwAggShapInUse": tmnxSubHostInfoV2HwAggShapInUse,
+       "tmnxSubHostInfoV2LagActivePort": tmnxSubHostInfoV2LagActivePort,
+       "tmnxSubHostInfoV2HwAggShapQSetSz": tmnxSubHostInfoV2HwAggShapQSetSz,
+       "tmnxSubHostInfoV2HwAggShapQSzOvr": tmnxSubHostInfoV2HwAggShapQSzOvr,
        "tmnxSLAProfInstSubHostV2Table": tmnxSLAProfInstSubHostV2Table,
        "tmnxSLAProfInstSubHostV2Entry": tmnxSLAProfInstSubHostV2Entry,
        "tmnxSPISubHostV2IpAddressType": tmnxSPISubHostV2IpAddressType,
@@ -65753,11 +69662,8 @@ mibBuilder.exportSymbols(
        "tmnxSubApCrLastChanged": tmnxSubApCrLastChanged,
        "tmnxSubApCrSignChangeDelta": tmnxSubApCrSignChangeDelta,
        "tmnxSubApCrSignChangeQueue": tmnxSubApCrSignChangeQueue,
-       "tmnxSubApCrSignChangeOCntr": tmnxSubApCrSignChangeOCntr,
        "tmnxSubApCrSignChangeQICounters": tmnxSubApCrSignChangeQICounters,
        "tmnxSubApCrSignChangeQECounters": tmnxSubApCrSignChangeQECounters,
-       "tmnxSubApCrSignChangeOICounters": tmnxSubApCrSignChangeOICounters,
-       "tmnxSubApCrSignChangeOECounters": tmnxSubApCrSignChangeOECounters,
        "tmnxSubApCustRecQueueLastChnge": tmnxSubApCustRecQueueLastChnge,
        "tmnxSubApCustRecordQueueTable": tmnxSubApCustRecordQueueTable,
        "tmnxSubApCustRecordQueueEntry": tmnxSubApCustRecordQueueEntry,
@@ -65766,14 +69672,6 @@ mibBuilder.exportSymbols(
        "tmnxSubApCrQueueLastChanged": tmnxSubApCrQueueLastChanged,
        "tmnxSubApCrQueueICounters": tmnxSubApCrQueueICounters,
        "tmnxSubApCrQueueECounters": tmnxSubApCrQueueECounters,
-       "tmnxSubApCustRecOvrCtrLastChnge": tmnxSubApCustRecOvrCtrLastChnge,
-       "tmnxSubApCrOverrideCntrTable": tmnxSubApCrOverrideCntrTable,
-       "tmnxSubApCrOverrideCntrEntry": tmnxSubApCrOverrideCntrEntry,
-       "tmnxSubApCrOverrideCntrId": tmnxSubApCrOverrideCntrId,
-       "tmnxSubApCrOverrideCntrRowStatus": tmnxSubApCrOverrideCntrRowStatus,
-       "tmnxSubApCrOverrideCntrLastChngd": tmnxSubApCrOverrideCntrLastChngd,
-       "tmnxSubApCrOverrideCntrICounters": tmnxSubApCrOverrideCntrICounters,
-       "tmnxSubApCrOverrideCntrECounters": tmnxSubApCrOverrideCntrECounters,
        "tmnxSubApCCPlcyTableLastChnge": tmnxSubApCCPlcyTableLastChnge,
        "tmnxSubApCreditControlPlcyTable": tmnxSubApCreditControlPlcyTable,
        "tmnxSubApCreditControlPlcyEntry": tmnxSubApCreditControlPlcyEntry,
@@ -66135,6 +70033,9 @@ mibBuilder.exportSymbols(
        "tmnxSLAProfInstOvrCIRLo": tmnxSLAProfInstOvrCIRLo,
        "tmnxSLAProfInstOvrSummedCIR": tmnxSLAProfInstOvrSummedCIR,
        "tmnxSLAProfInstOvrClassWeight": tmnxSLAProfInstOvrClassWeight,
+       "tmnxSLAProfInstOvrBurstLimit": tmnxSLAProfInstOvrBurstLimit,
+       "tmnxSLAProfInstOvrParentWeight": tmnxSLAProfInstOvrParentWeight,
+       "tmnxSLAProfInstOvrParentCIRWeigh": tmnxSLAProfInstOvrParentCIRWeigh,
        "tmnxSLAProfCMapTable": tmnxSLAProfCMapTable,
        "tmnxSLAProfCMapEntry": tmnxSLAProfCMapEntry,
        "tmnxSLAProfCMapName": tmnxSLAProfCMapName,
@@ -66160,6 +70061,9 @@ mibBuilder.exportSymbols(
        "tmnxSubOvrCIRHi": tmnxSubOvrCIRHi,
        "tmnxSubOvrCIRLo": tmnxSubOvrCIRLo,
        "tmnxSubOvrSummedCIR": tmnxSubOvrSummedCIR,
+       "tmnxSubOvrBurstLimit": tmnxSubOvrBurstLimit,
+       "tmnxSubOvrParentWeight": tmnxSubOvrParentWeight,
+       "tmnxSubOvrParentCIRWeight": tmnxSubOvrParentCIRWeight,
        "tmnxSubFlterProfTbleLastMgmtChg": tmnxSubFlterProfTbleLastMgmtChg,
        "tmnxSubFilterProfileTable": tmnxSubFilterProfileTable,
        "tmnxSubFilterProfileEntry": tmnxSubFilterProfileEntry,
@@ -66415,6 +70319,14 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtPortSPfIpoeV6NaPeak": tmnxSubMgmtPortSPfIpoeV6NaPeak,
        "tmnxSubMgmtPortSPfcpHosts": tmnxSubMgmtPortSPfcpHosts,
        "tmnxSubMgmtPortSPfcpHostsPeak": tmnxSubMgmtPortSPfcpHostsPeak,
+       "tmnxSubMgmtPortPfFwaV6Sl": tmnxSubMgmtPortPfFwaV6Sl,
+       "tmnxSubMgmtPortPfFwaV6SlPeak": tmnxSubMgmtPortPfFwaV6SlPeak,
+       "tmnxSubMgmtPortPfFwaV6Pd": tmnxSubMgmtPortPfFwaV6Pd,
+       "tmnxSubMgmtPortPfFwaV6PdPeak": tmnxSubMgmtPortPfFwaV6PdPeak,
+       "tmnxSubMgmtPortPfFwaV6Na": tmnxSubMgmtPortPfFwaV6Na,
+       "tmnxSubMgmtPortPfFwaV6NaPeak": tmnxSubMgmtPortPfFwaV6NaPeak,
+       "tmnxSubMgmtPortPfFwaV4": tmnxSubMgmtPortPfFwaV4,
+       "tmnxSubMgmtPortPfFwaV4Peak": tmnxSubMgmtPortPfFwaV4Peak,
        "tmnxSubMgmtMdaStatsTable": tmnxSubMgmtMdaStatsTable,
        "tmnxSubMgmtMdaStatsEntry": tmnxSubMgmtMdaStatsEntry,
        "tmnxSubMgmtMdaSIpcp": tmnxSubMgmtMdaSIpcp,
@@ -66549,6 +70461,14 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtMdaSPfIpoeV6NaPeak": tmnxSubMgmtMdaSPfIpoeV6NaPeak,
        "tmnxSubMgmtMdaSPfcpHosts": tmnxSubMgmtMdaSPfcpHosts,
        "tmnxSubMgmtMdaSPfcpHostsPeak": tmnxSubMgmtMdaSPfcpHostsPeak,
+       "tmnxSubMgmtMdaPfFwaV6Sl": tmnxSubMgmtMdaPfFwaV6Sl,
+       "tmnxSubMgmtMdaPfFwaV6SlPeak": tmnxSubMgmtMdaPfFwaV6SlPeak,
+       "tmnxSubMgmtMdaPfFwaV6Pd": tmnxSubMgmtMdaPfFwaV6Pd,
+       "tmnxSubMgmtMdaPfFwaV6PdPeak": tmnxSubMgmtMdaPfFwaV6PdPeak,
+       "tmnxSubMgmtMdaPfFwaV6Na": tmnxSubMgmtMdaPfFwaV6Na,
+       "tmnxSubMgmtMdaPfFwaV6NaPeak": tmnxSubMgmtMdaPfFwaV6NaPeak,
+       "tmnxSubMgmtMdaPfFwaV4": tmnxSubMgmtMdaPfFwaV4,
+       "tmnxSubMgmtMdaPfFwaV4Peak": tmnxSubMgmtMdaPfFwaV4Peak,
        "tmnxSubMgmtSlotStatsTable": tmnxSubMgmtSlotStatsTable,
        "tmnxSubMgmtSlotStatsEntry": tmnxSubMgmtSlotStatsEntry,
        "tmnxSubMgmtSlotID": tmnxSubMgmtSlotID,
@@ -66684,6 +70604,14 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtSlotSPfIpoeV6NaPeak": tmnxSubMgmtSlotSPfIpoeV6NaPeak,
        "tmnxSubMgmtSlotSPfcpHosts": tmnxSubMgmtSlotSPfcpHosts,
        "tmnxSubMgmtSlotSPfcpHostsPeak": tmnxSubMgmtSlotSPfcpHostsPeak,
+       "tmnxSubMgmtSlotPfFwaV6Sl": tmnxSubMgmtSlotPfFwaV6Sl,
+       "tmnxSubMgmtSlotPfFwaV6SlPeak": tmnxSubMgmtSlotPfFwaV6SlPeak,
+       "tmnxSubMgmtSlotPfFwaV6Pd": tmnxSubMgmtSlotPfFwaV6Pd,
+       "tmnxSubMgmtSlotPfFwaV6PdPeak": tmnxSubMgmtSlotPfFwaV6PdPeak,
+       "tmnxSubMgmtSlotPfFwaV6Na": tmnxSubMgmtSlotPfFwaV6Na,
+       "tmnxSubMgmtSlotPfFwaV6NaPeak": tmnxSubMgmtSlotPfFwaV6NaPeak,
+       "tmnxSubMgmtSlotPfFwaV4": tmnxSubMgmtSlotPfFwaV4,
+       "tmnxSubMgmtSlotPfFwaV4Peak": tmnxSubMgmtSlotPfFwaV4Peak,
        "tmnxSubMgmtSystStatsTable": tmnxSubMgmtSystStatsTable,
        "tmnxSubMgmtSystStatsEntry": tmnxSubMgmtSystStatsEntry,
        "tmnxSubMgmtSystSIpcp": tmnxSubMgmtSystSIpcp,
@@ -66838,6 +70766,18 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtSystSPfcpSessDefPeak": tmnxSubMgmtSystSPfcpSessDefPeak,
        "tmnxSubMgmtSystSPfcpSessLac": tmnxSubMgmtSystSPfcpSessLac,
        "tmnxSubMgmtSystSPfcpSessLacPeak": tmnxSubMgmtSystSPfcpSessLacPeak,
+       "tmnxSubMgmtSystPfcpSessFwa": tmnxSubMgmtSystPfcpSessFwa,
+       "tmnxSubMgmtSystPfcpSessFwaPeak": tmnxSubMgmtSystPfcpSessFwaPeak,
+       "tmnxSubMgmtSystPfFwaV6Sl": tmnxSubMgmtSystPfFwaV6Sl,
+       "tmnxSubMgmtSystPfFwaV6SlPeak": tmnxSubMgmtSystPfFwaV6SlPeak,
+       "tmnxSubMgmtSystPfFwaV6Pd": tmnxSubMgmtSystPfFwaV6Pd,
+       "tmnxSubMgmtSystPfFwaV6PdPeak": tmnxSubMgmtSystPfFwaV6PdPeak,
+       "tmnxSubMgmtSystPfFwaV6Na": tmnxSubMgmtSystPfFwaV6Na,
+       "tmnxSubMgmtSystPfFwaV6NaPeak": tmnxSubMgmtSystPfFwaV6NaPeak,
+       "tmnxSubMgmtSystPfFwaV4": tmnxSubMgmtSystPfFwaV4,
+       "tmnxSubMgmtSystPfFwaV4Peak": tmnxSubMgmtSystPfFwaV4Peak,
+       "tmnxSubMgmtSystPfcpPerPortDefTnl": tmnxSubMgmtSystPfcpPerPortDefTnl,
+       "tmnxSubMgmtSystPerPortDefTnlPeak": tmnxSubMgmtSystPerPortDefTnlPeak,
        "tmnxSubHttpRdrPlcyTableLastCh": tmnxSubHttpRdrPlcyTableLastCh,
        "tmnxSubHttpRdrFwdTableLastCh": tmnxSubHttpRdrFwdTableLastCh,
        "tmnxSubSvcTable": tmnxSubSvcTable,
@@ -67051,6 +70991,9 @@ mibBuilder.exportSymbols(
        "tmnxSubSlaacOvrWrrWeight": tmnxSubSlaacOvrWrrWeight,
        "tmnxSubSlaacOvrSummedCIR": tmnxSubSlaacOvrSummedCIR,
        "tmnxSubSlaacOvrClassWeight": tmnxSubSlaacOvrClassWeight,
+       "tmnxSubSlaacOvrBurstLimit": tmnxSubSlaacOvrBurstLimit,
+       "tmnxSubSlaacOvrParentWeight": tmnxSubSlaacOvrParentWeight,
+       "tmnxSubSlaacOvrParentCIRWeight": tmnxSubSlaacOvrParentCIRWeight,
        "tmnxSubSlaacAddressTable": tmnxSubSlaacAddressTable,
        "tmnxSubSlaacAddressEntry": tmnxSubSlaacAddressEntry,
        "tmnxSubSlaacAddressType": tmnxSubSlaacAddressType,
@@ -67100,6 +71043,13 @@ mibBuilder.exportSymbols(
        "tmnxSubPccRulePolicerMbs": tmnxSubPccRulePolicerMbs,
        "tmnxSubPccRulePolicerPbo": tmnxSubPccRulePolicerPbo,
        "tmnxSubPccRulePolicerStatMode": tmnxSubPccRulePolicerStatMode,
+       "tmnxSubPccRuleRqi": tmnxSubPccRuleRqi,
+       "tmnxSubPccRuleQfi": tmnxSubPccRuleQfi,
+       "tmnxSubPccRuleGfbr": tmnxSubPccRuleGfbr,
+       "tmnxSubPccRuleMfbr": tmnxSubPccRuleMfbr,
+       "tmnxSubPccRuleLevel2Id": tmnxSubPccRuleLevel2Id,
+       "tmnxSubPccRuleL2MapFromProfile": tmnxSubPccRuleL2MapFromProfile,
+       "tmnxSubPccRuleDscp": tmnxSubPccRuleDscp,
        "tmnxSubPccRuleFlowTable": tmnxSubPccRuleFlowTable,
        "tmnxSubPccRuleFlowEntry": tmnxSubPccRuleFlowEntry,
        "tmnxSubPCCRuleFlowId": tmnxSubPCCRuleFlowId,
@@ -67145,6 +71095,15 @@ mibBuilder.exportSymbols(
        "tmnxSubHostPccRulePolicerMbs": tmnxSubHostPccRulePolicerMbs,
        "tmnxSubHostPccRulePolicerPbo": tmnxSubHostPccRulePolicerPbo,
        "tmnxSubHostPccRulePolicerStatMod": tmnxSubHostPccRulePolicerStatMod,
+       "tmnxSubHostPccRuleRqi": tmnxSubHostPccRuleRqi,
+       "tmnxSubHostPccRuleQfi": tmnxSubHostPccRuleQfi,
+       "tmnxSubHostPccRuleGfbr": tmnxSubHostPccRuleGfbr,
+       "tmnxSubHostPccRuleGfbrIgnored": tmnxSubHostPccRuleGfbrIgnored,
+       "tmnxSubHostPccRuleMfbr": tmnxSubHostPccRuleMfbr,
+       "tmnxSubHostPccRuleMfbrIgnored": tmnxSubHostPccRuleMfbrIgnored,
+       "tmnxSubHostPccRuleLevel2Id": tmnxSubHostPccRuleLevel2Id,
+       "tmnxSubHostPccRuleL2MapFromProf": tmnxSubHostPccRuleL2MapFromProf,
+       "tmnxSubHostPccRuleDscp": tmnxSubHostPccRuleDscp,
        "tmnxSubHostPccRuleFlowTable": tmnxSubHostPccRuleFlowTable,
        "tmnxSubHostPccRuleFlowEntry": tmnxSubHostPccRuleFlowEntry,
        "tmnxSubHostPccRuleFlowDirection": tmnxSubHostPccRuleFlowDirection,
@@ -67474,6 +71433,21 @@ mibBuilder.exportSymbols(
        "tmnxSLAProfPfcpSeqDmgPolId": tmnxSLAProfPfcpSeqDmgPolId,
        "tmnxSLAProfPfcpSeqDmgArbNm": tmnxSLAProfPfcpSeqDmgArbNm,
        "tmnxSLAProfPfcpSeqDmgSchNm": tmnxSLAProfPfcpSeqDmgSchNm,
+       "tmnxSLAProfPfcpLvl2FlowRate": tmnxSLAProfPfcpLvl2FlowRate,
+       "tmnxSubITPlcyTableLastChanged": tmnxSubITPlcyTableLastChanged,
+       "tmnxSubIdleTimeoutPlcyTable": tmnxSubIdleTimeoutPlcyTable,
+       "tmnxSubIdleTimeoutPlcyEntry": tmnxSubIdleTimeoutPlcyEntry,
+       "tmnxSubIdleTimeoutPolicy": tmnxSubIdleTimeoutPolicy,
+       "tmnxSubITPlcyRowStatus": tmnxSubITPlcyRowStatus,
+       "tmnxSubITPlcyLastChanged": tmnxSubITPlcyLastChanged,
+       "tmnxSubITPlcyDescription": tmnxSubITPlcyDescription,
+       "tmnxSubITPlcyAction": tmnxSubITPlcyAction,
+       "tmnxSubITPlcyTimeout": tmnxSubITPlcyTimeout,
+       "tmnxSubITPlcyActivityThreshold": tmnxSubITPlcyActivityThreshold,
+       "tmnxSubITPlcyEgressPolicers": tmnxSubITPlcyEgressPolicers,
+       "tmnxSubITPlcyEgressQueues": tmnxSubITPlcyEgressQueues,
+       "tmnxSubITPlcyIngressPolicers": tmnxSubITPlcyIngressPolicers,
+       "tmnxSubITPlcyIngressQueues": tmnxSubITPlcyIngressQueues,
        "tmnxSubHttpRedirectObjs": tmnxSubHttpRedirectObjs,
        "tmnxSubHttpRdrPlcyTable": tmnxSubHttpRdrPlcyTable,
        "tmnxSubHttpRdrPlcyEntry": tmnxSubHttpRdrPlcyEntry,
@@ -67529,6 +71503,10 @@ mibBuilder.exportSymbols(
        "tmnxSubSubIfStatsAdminState": tmnxSubSubIfStatsAdminState,
        "tmnxSubGrpIfStatsNumEntries": tmnxSubGrpIfStatsNumEntries,
        "tmnxSubSubIfStatsNumEntries": tmnxSubSubIfStatsNumEntries,
+       "tmnxSubAltProfThresholdType": tmnxSubAltProfThresholdType,
+       "tmnxSubAltProfThresholdNumber": tmnxSubAltProfThresholdNumber,
+       "tmnxSubNumOversubscrbdEntries": tmnxSubNumOversubscrbdEntries,
+       "tmnxSubNumNonOversubscrbdEntries": tmnxSubNumNonOversubscrbdEntries,
        "tmnxSubAccuStatsObjs": tmnxSubAccuStatsObjs,
        "tmnxSubAccuStatsPlcyTable": tmnxSubAccuStatsPlcyTable,
        "tmnxSubAccuStatsPlcyEntry": tmnxSubAccuStatsPlcyEntry,
@@ -67772,6 +71750,9 @@ mibBuilder.exportSymbols(
        "tmnxSubSpiOvrCIRLo": tmnxSubSpiOvrCIRLo,
        "tmnxSubSpiOvrSummedCIR": tmnxSubSpiOvrSummedCIR,
        "tmnxSubSpiOvrClassWeight": tmnxSubSpiOvrClassWeight,
+       "tmnxSubSpiOvrBurstLimit": tmnxSubSpiOvrBurstLimit,
+       "tmnxSubSpiOvrParentWeight": tmnxSubSpiOvrParentWeight,
+       "tmnxSubSpiOvrParentCIRWeight": tmnxSubSpiOvrParentCIRWeight,
        "tmnxSpiEgrQosSchedStatsTable": tmnxSpiEgrQosSchedStatsTable,
        "tmnxSpiEgrQosSchedStatsEntry": tmnxSpiEgrQosSchedStatsEntry,
        "tmnxSpiEgrQosSchedStatsName": tmnxSpiEgrQosSchedStatsName,
@@ -67950,6 +71931,14 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtSvcPfIpoeV6NaPeak": tmnxSubMgmtSvcPfIpoeV6NaPeak,
        "tmnxSubMgmtSvcPfcpHosts": tmnxSubMgmtSvcPfcpHosts,
        "tmnxSubMgmtSvcPfcpHostsPeak": tmnxSubMgmtSvcPfcpHostsPeak,
+       "tmnxSubMgmtSvcPfFwaV4": tmnxSubMgmtSvcPfFwaV4,
+       "tmnxSubMgmtSvcPfFwaV4Peak": tmnxSubMgmtSvcPfFwaV4Peak,
+       "tmnxSubMgmtSvcPfFwaV6Sl": tmnxSubMgmtSvcPfFwaV6Sl,
+       "tmnxSubMgmtSvcPfFwaV6SlPeak": tmnxSubMgmtSvcPfFwaV6SlPeak,
+       "tmnxSubMgmtSvcPfFwaV6Pd": tmnxSubMgmtSvcPfFwaV6Pd,
+       "tmnxSubMgmtSvcPfFwaV6PdPeak": tmnxSubMgmtSvcPfFwaV6PdPeak,
+       "tmnxSubMgmtSvcPfFwaV6Na": tmnxSubMgmtSvcPfFwaV6Na,
+       "tmnxSubMgmtSvcPfFwaV6NaPeak": tmnxSubMgmtSvcPfFwaV6NaPeak,
        "tmnxSubMgmtSuIfStatsTable": tmnxSubMgmtSuIfStatsTable,
        "tmnxSubMgmtSuIfStatsEntry": tmnxSubMgmtSuIfStatsEntry,
        "tmnxSubMgmtSuIfStatsSvcID": tmnxSubMgmtSuIfStatsSvcID,
@@ -68084,6 +72073,14 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtSuIfPfIpoeV6NaPeak": tmnxSubMgmtSuIfPfIpoeV6NaPeak,
        "tmnxSubMgmtSuIfPfcpHosts": tmnxSubMgmtSuIfPfcpHosts,
        "tmnxSubMgmtSuIfPfcpHostsPeak": tmnxSubMgmtSuIfPfcpHostsPeak,
+       "tmnxSubMgmtSuIfPfFwaV4": tmnxSubMgmtSuIfPfFwaV4,
+       "tmnxSubMgmtSuIfPfFwaV4Peak": tmnxSubMgmtSuIfPfFwaV4Peak,
+       "tmnxSubMgmtSuIfPfFwaV6Sl": tmnxSubMgmtSuIfPfFwaV6Sl,
+       "tmnxSubMgmtSuIfPfFwaV6SlPeak": tmnxSubMgmtSuIfPfFwaV6SlPeak,
+       "tmnxSubMgmtSuIfPfFwaV6Pd": tmnxSubMgmtSuIfPfFwaV6Pd,
+       "tmnxSubMgmtSuIfPfFwaV6PdPeak": tmnxSubMgmtSuIfPfFwaV6PdPeak,
+       "tmnxSubMgmtSuIfPfFwaV6Na": tmnxSubMgmtSuIfPfFwaV6Na,
+       "tmnxSubMgmtSuIfPfFwaV6NaPeak": tmnxSubMgmtSuIfPfFwaV6NaPeak,
        "tmnxSubMgmtGpIfStatsTable": tmnxSubMgmtGpIfStatsTable,
        "tmnxSubMgmtGpIfStatsEntry": tmnxSubMgmtGpIfStatsEntry,
        "tmnxSubMgmtGpIfStatsSvcID": tmnxSubMgmtGpIfStatsSvcID,
@@ -68218,6 +72215,14 @@ mibBuilder.exportSymbols(
        "tmnxSubMgmtGpIfPfIpoeV6NaPeak": tmnxSubMgmtGpIfPfIpoeV6NaPeak,
        "tmnxSubMgmtGpIfPfcpHosts": tmnxSubMgmtGpIfPfcpHosts,
        "tmnxSubMgmtGpIfPfcpHostsPeak": tmnxSubMgmtGpIfPfcpHostsPeak,
+       "tmnxSubMgmtGpIfPfFwaV4": tmnxSubMgmtGpIfPfFwaV4,
+       "tmnxSubMgmtGpIfPfFwaV4Peak": tmnxSubMgmtGpIfPfFwaV4Peak,
+       "tmnxSubMgmtGpIfPfFwaV6Sl": tmnxSubMgmtGpIfPfFwaV6Sl,
+       "tmnxSubMgmtGpIfPfFwaV6SlPeak": tmnxSubMgmtGpIfPfFwaV6SlPeak,
+       "tmnxSubMgmtGpIfPfFwaV6Pd": tmnxSubMgmtGpIfPfFwaV6Pd,
+       "tmnxSubMgmtGpIfPfFwaV6PdPeak": tmnxSubMgmtGpIfPfFwaV6PdPeak,
+       "tmnxSubMgmtGpIfPfFwaV6Na": tmnxSubMgmtGpIfPfFwaV6Na,
+       "tmnxSubMgmtGpIfPfFwaV6NaPeak": tmnxSubMgmtGpIfPfFwaV6NaPeak,
        "tmnxSubEgrQosAggShaperTable": tmnxSubEgrQosAggShaperTable,
        "tmnxSubEgrQosAggShaperEntry": tmnxSubEgrQosAggShaperEntry,
        "tmnxSubEgrQosAggShapPort": tmnxSubEgrQosAggShapPort,
@@ -68234,6 +72239,15 @@ mibBuilder.exportSymbols(
        "tmnxSubEgrQosAggShapDepth": tmnxSubEgrQosAggShapDepth,
        "tmnxSubEgrQosAggShapPacketMode": tmnxSubEgrQosAggShapPacketMode,
        "tmnxSubEgrQosAggShapOutOfDate": tmnxSubEgrQosAggShapOutOfDate,
+       "tmnxSubEgrQosAggShapQSetSize": tmnxSubEgrQosAggShapQSetSize,
+       "tmnxSubEgrQosAggShapQSetSizeOvr": tmnxSubEgrQosAggShapQSetSizeOvr,
+       "tmnxSubStatGrpTable": tmnxSubStatGrpTable,
+       "tmnxSubStatGrpEntry": tmnxSubStatGrpEntry,
+       "tmnxSubStatGrpName": tmnxSubStatGrpName,
+       "tmnxSubStatGrpRowStatus": tmnxSubStatGrpRowStatus,
+       "tmnxSubStatGrpLastMgmtChange": tmnxSubStatGrpLastMgmtChange,
+       "tmnxSubStatGrpEgrPolicersScope": tmnxSubStatGrpEgrPolicersScope,
+       "tmnxSubStatGrpEgrPolicers": tmnxSubStatGrpEgrPolicers,
        "tmnxSubscriberNotifyObjects": tmnxSubscriberNotifyObjects,
        "tmnxSubIdent": tmnxSubIdent,
        "tmnxOldSubIdent": tmnxOldSubIdent,
@@ -68260,6 +72274,10 @@ mibBuilder.exportSymbols(
        "tmnxSubNotifSpiGroupId": tmnxSubNotifSpiGroupId,
        "tmnxPfcpSeIdHigh": tmnxPfcpSeIdHigh,
        "tmnxPfcpSeIdLow": tmnxPfcpSeIdLow,
+       "tmnxPfcpVRtrID": tmnxPfcpVRtrID,
+       "tmnxSubNotifPppoeSessionId": tmnxSubNotifPppoeSessionId,
+       "tmnxSubNotifCircuitId": tmnxSubNotifCircuitId,
+       "tmnxSubNotifRemoteId": tmnxSubNotifRemoteId,
        "tmnxSubRadNotifyStatsObjects": tmnxSubRadNotifyStatsObjects,
        "tmnxSubRadNotifyStatsReceived": tmnxSubRadNotifyStatsReceived,
        "tmnxSubRadNotifyStatsAccepted": tmnxSubRadNotifyStatsAccepted,
@@ -68470,6 +72488,12 @@ mibBuilder.exportSymbols(
        "tmnxSubPppSteeringProfile": tmnxSubPppSteeringProfile,
        "tmnxSubPppSteeringOperState": tmnxSubPppSteeringOperState,
        "tmnxSubPppRtrAdvPlcy": tmnxSubPppRtrAdvPlcy,
+       "tmnxSubPppLcpKaOrigin": tmnxSubPppLcpKaOrigin,
+       "tmnxSubPppLcpKaInterval": tmnxSubPppLcpKaInterval,
+       "tmnxSubPppLcpKaHoldUpMplier": tmnxSubPppLcpKaHoldUpMplier,
+       "tmnxSubPppLacFragActionState": tmnxSubPppLacFragActionState,
+       "tmnxSubPppLacFragOperState": tmnxSubPppLacFragOperState,
+       "tmnxSubPppLacFragFpeId": tmnxSubPppLacFragFpeId,
        "tmnxSubPppStatTable": tmnxSubPppStatTable,
        "tmnxSubPppStatEntry": tmnxSubPppStatEntry,
        "tmnxSubPppStatRxUnknownProto": tmnxSubPppStatRxUnknownProto,
@@ -68556,6 +72580,9 @@ mibBuilder.exportSymbols(
        "tmnxSubPppOvrCIRLo": tmnxSubPppOvrCIRLo,
        "tmnxSubPppOvrSummedCIR": tmnxSubPppOvrSummedCIR,
        "tmnxSubPppOvrClassWeight": tmnxSubPppOvrClassWeight,
+       "tmnxSubPppOvrBurstLimit": tmnxSubPppOvrBurstLimit,
+       "tmnxSubPppOvrParentWeight": tmnxSubPppOvrParentWeight,
+       "tmnxSubPppOvrParentCIRWeight": tmnxSubPppOvrParentCIRWeight,
        "tmnxSubPppAleTable": tmnxSubPppAleTable,
        "tmnxSubPppAleEntry": tmnxSubPppAleEntry,
        "tmnxSubPppAleDatalink": tmnxSubPppAleDatalink,
@@ -68680,23 +72707,6 @@ mibBuilder.exportSymbols(
        "tmnxSubHsmdaIngQosPolRowStatus": tmnxSubHsmdaIngQosPolRowStatus,
        "tmnxSubHsmdaIngQosPolLastChgd": tmnxSubHsmdaIngQosPolLastChgd,
        "tmnxSubHsmdaIngQosPolStatMode": tmnxSubHsmdaIngQosPolStatMode,
-       "tmnxSubEgrPStatsTable": tmnxSubEgrPStatsTable,
-       "tmnxSubEgrPStatsEntry": tmnxSubEgrPStatsEntry,
-       "tmnxSubEgrPStatsMode": tmnxSubEgrPStatsMode,
-       "tmnxSubEgrPStatsOffInProfPkts": tmnxSubEgrPStatsOffInProfPkts,
-       "tmnxSubEgrPStatsOffInProfOcts": tmnxSubEgrPStatsOffInProfOcts,
-       "tmnxSubEgrPStatsOffOutProfPkts": tmnxSubEgrPStatsOffOutProfPkts,
-       "tmnxSubEgrPStatsOffOutProfOcts": tmnxSubEgrPStatsOffOutProfOcts,
-       "tmnxSubEgrPStatsOffUncolPkts": tmnxSubEgrPStatsOffUncolPkts,
-       "tmnxSubEgrPStatsOffUncolOcts": tmnxSubEgrPStatsOffUncolOcts,
-       "tmnxSubEgrPStatsDrpInProfPkts": tmnxSubEgrPStatsDrpInProfPkts,
-       "tmnxSubEgrPStatsDrpInProfOcts": tmnxSubEgrPStatsDrpInProfOcts,
-       "tmnxSubEgrPStatsDrpOutProfPkts": tmnxSubEgrPStatsDrpOutProfPkts,
-       "tmnxSubEgrPStatsDrpOutProfOcts": tmnxSubEgrPStatsDrpOutProfOcts,
-       "tmnxSubEgrPStatsFwdInProfPkts": tmnxSubEgrPStatsFwdInProfPkts,
-       "tmnxSubEgrPStatsFwdInProfOcts": tmnxSubEgrPStatsFwdInProfOcts,
-       "tmnxSubEgrPStatsFwdOutProfPkts": tmnxSubEgrPStatsFwdOutProfPkts,
-       "tmnxSubEgrPStatsFwdOutProfOcts": tmnxSubEgrPStatsFwdOutProfOcts,
        "tmnxSubIpoeObjs": tmnxSubIpoeObjs,
        "tmnxSubIpoePlcyTableLastChanged": tmnxSubIpoePlcyTableLastChanged,
        "tmnxSubIpoePlcyTable": tmnxSubIpoePlcyTable,
@@ -68817,6 +72827,9 @@ mibBuilder.exportSymbols(
        "tmnxSubIpoeOvrCIRLo": tmnxSubIpoeOvrCIRLo,
        "tmnxSubIpoeOvrSummedCIR": tmnxSubIpoeOvrSummedCIR,
        "tmnxSubIpoeOvrClassWeight": tmnxSubIpoeOvrClassWeight,
+       "tmnxSubIpoeOvrBurstLimit": tmnxSubIpoeOvrBurstLimit,
+       "tmnxSubIpoeOvrParentWeight": tmnxSubIpoeOvrParentWeight,
+       "tmnxSubIpoeOvrParentCIRWeight": tmnxSubIpoeOvrParentCIRWeight,
        "tmnxSubIpoeMRtTable": tmnxSubIpoeMRtTable,
        "tmnxSubIpoeMRtEntry": tmnxSubIpoeMRtEntry,
        "tmnxSubIpoeMRtAddrType": tmnxSubIpoeMRtAddrType,
@@ -68860,6 +72873,7 @@ mibBuilder.exportSymbols(
        "tmnxSubDataTriggIfEntry": tmnxSubDataTriggIfEntry,
        "tmnxSubDataTriggIfLastChanged": tmnxSubDataTriggIfLastChanged,
        "tmnxSubDataTriggIfAdminState": tmnxSubDataTriggIfAdminState,
+       "tmnxSubDataTriggIfAcceptLla": tmnxSubDataTriggIfAcceptLla,
        "tmnxSubIpoeDnsNbnsTable": tmnxSubIpoeDnsNbnsTable,
        "tmnxSubIpoeDnsNbnsEntry": tmnxSubIpoeDnsNbnsEntry,
        "tmnxSubIpoeDnsNbnsAddrIndex": tmnxSubIpoeDnsNbnsAddrIndex,
@@ -69072,6 +73086,9 @@ mibBuilder.exportSymbols(
        "tmnxSubBrgOvrWrrWeight": tmnxSubBrgOvrWrrWeight,
        "tmnxSubBrgOvrSummedCir": tmnxSubBrgOvrSummedCir,
        "tmnxSubBrgOvrClassWeight": tmnxSubBrgOvrClassWeight,
+       "tmnxSubBrgOvrBurstLimit": tmnxSubBrgOvrBurstLimit,
+       "tmnxSubBrgOvrParentWeight": tmnxSubBrgOvrParentWeight,
+       "tmnxSubBrgOvrParentCIRWeight": tmnxSubBrgOvrParentCIRWeight,
        "tmnxSubBrgFltrRuleTable": tmnxSubBrgFltrRuleTable,
        "tmnxSubBrgFltrRuleEntry": tmnxSubBrgFltrRuleEntry,
        "tmnxSubBrgFltrRuleType": tmnxSubBrgFltrRuleType,
@@ -69232,6 +73249,7 @@ mibBuilder.exportSymbols(
        "tmnxSubGtpPlcyApnAmbrQMapUlSchNm": tmnxSubGtpPlcyApnAmbrQMapUlSchNm,
        "tmnxSubGtpPlcyApnAmbrQMapUlPolId": tmnxSubGtpPlcyApnAmbrQMapUlPolId,
        "tmnxSubGtpPlcyApnAmbrQMapUlQueId": tmnxSubGtpPlcyApnAmbrQMapUlQueId,
+       "tmnxSubGtpUIpv6Checksum": tmnxSubGtpUIpv6Checksum,
        "tmnxSvcChainObjs": tmnxSvcChainObjs,
        "tmnxSvcChainMacPrefix": tmnxSvcChainMacPrefix,
        "tmnxSvcChainEvpnTable": tmnxSvcChainEvpnTable,
@@ -69369,8 +73387,14 @@ mibBuilder.exportSymbols(
        "tmnxPfcpAssocTimerRunning": tmnxPfcpAssocTimerRunning,
        "tmnxPfcpAssocL2AwNatGroup": tmnxPfcpAssocL2AwNatGroup,
        "tmnxPfcpAssocCurrReleaseTimeout": tmnxPfcpAssocCurrReleaseTimeout,
+       "tmnxPfcpAssocPythonPolicy": tmnxPfcpAssocPythonPolicy,
        "tmnxPfcpAssocCurrPeerNodeIdType": tmnxPfcpAssocCurrPeerNodeIdType,
        "tmnxPfcpAssocCurrPeerFqdn": tmnxPfcpAssocCurrPeerFqdn,
+       "tmnxPfcpAssocPathDownDetect": tmnxPfcpAssocPathDownDetect,
+       "tmnxPfcpAssocPeerSystemNodeType": tmnxPfcpAssocPeerSystemNodeType,
+       "tmnxPfcpAssocPeerNodeIdFqdn": tmnxPfcpAssocPeerNodeIdFqdn,
+       "tmnxPfcpAssocDefCalltraceProfile": tmnxPfcpAssocDefCalltraceProfile,
+       "tmnxPfcpAssocCpNokiaFeatures": tmnxPfcpAssocCpNokiaFeatures,
        "tmnxSubGitTableLastChanged": tmnxSubGitTableLastChanged,
        "tmnxSubGitTable": tmnxSubGitTable,
        "tmnxSubGitEntry": tmnxSubGitEntry,
@@ -69404,6 +73428,7 @@ mibBuilder.exportSymbols(
        "tmnxSubGitV6NdNeighborDadSnoop": tmnxSubGitV6NdNeighborDadSnoop,
        "tmnxSubGitV6UrpfCheckState": tmnxSubGitV6UrpfCheckState,
        "tmnxSubGitV6UrpfCheckMode": tmnxSubGitV6UrpfCheckMode,
+       "tmnxSubGitTriggerPacket": tmnxSubGitTriggerPacket,
        "tmnxSubSapTmplTableLastChanged": tmnxSubSapTmplTableLastChanged,
        "tmnxSubSapTmplTable": tmnxSubSapTmplTable,
        "tmnxSubSapTmplEntry": tmnxSubSapTmplEntry,
@@ -69487,6 +73512,24 @@ mibBuilder.exportSymbols(
        "tmnxPfcpStatsIbcpPktDefTnlNoTrig": tmnxPfcpStatsIbcpPktDefTnlNoTrig,
        "tmnxPfcpStatsIbcpPktNoDefTnl": tmnxPfcpStatsIbcpPktNoDefTnl,
        "tmnxPfcpStatsIbcpDefTnlOverwrite": tmnxPfcpStatsIbcpDefTnlOverwrite,
+       "tmnxPfcpStatsIbcpDataTriggerRx": tmnxPfcpStatsIbcpDataTriggerRx,
+       "tmnxPfcpStatsDdrReq": tmnxPfcpStatsDdrReq,
+       "tmnxPfcpStatsDdrRsp": tmnxPfcpStatsDdrRsp,
+       "tmnxPfcpStatsDdrRspFail": tmnxPfcpStatsDdrRspFail,
+       "tmnxPfcpStatsAuAudTrigReqTx": tmnxPfcpStatsAuAudTrigReqTx,
+       "tmnxPfcpStatsAuAudStartReqRx": tmnxPfcpStatsAuAudStartReqRx,
+       "tmnxPfcpStatsAuAudEndReqRx": tmnxPfcpStatsAuAudEndReqRx,
+       "tmnxPfcpStatsAuAudTrigRspRx": tmnxPfcpStatsAuAudTrigRspRx,
+       "tmnxPfcpStatsAuAudStartRspTx": tmnxPfcpStatsAuAudStartRspTx,
+       "tmnxPfcpStatsAuAudEndRspTx": tmnxPfcpStatsAuAudEndRspTx,
+       "tmnxPfcpStatsHbRiReqRx": tmnxPfcpStatsHbRiReqRx,
+       "tmnxPfcpStatsHbRiRspTx": tmnxPfcpStatsHbRiRspTx,
+       "tmnxPfcpStatsAuPartialAudReqRx": tmnxPfcpStatsAuPartialAudReqRx,
+       "tmnxPfcpStatsAuPartialAudRspTx": tmnxPfcpStatsAuPartialAudRspTx,
+       "tmnxPfcpStatsAuPartAuSessAudited": tmnxPfcpStatsAuPartAuSessAudited,
+       "tmnxPfcpStatsAuPartAuSessDeleted": tmnxPfcpStatsAuPartAuSessDeleted,
+       "tmnxPfcpStatsLastSuccPartAudRx": tmnxPfcpStatsLastSuccPartAudRx,
+       "tmnxPfcpStatsLastFailPartAudRx": tmnxPfcpStatsLastFailPartAudRx,
        "tmnxPfcpStatsLastCleared": tmnxPfcpStatsLastCleared,
        "tmnxSubSeMRtTable": tmnxSubSeMRtTable,
        "tmnxSubSeMRtEntry": tmnxSubSeMRtEntry,
@@ -69568,6 +73611,22 @@ mibBuilder.exportSymbols(
        "tmnxPfcpTotalIbcpPktDefTnlNoTrig": tmnxPfcpTotalIbcpPktDefTnlNoTrig,
        "tmnxPfcpTotalIbcpPktNoDefTnl": tmnxPfcpTotalIbcpPktNoDefTnl,
        "tmnxPfcpTotalIbcpDefTnlOverwrite": tmnxPfcpTotalIbcpDefTnlOverwrite,
+       "tmnxPfcpTotalIbcpDataTriggerRx": tmnxPfcpTotalIbcpDataTriggerRx,
+       "tmnxPfcpTotalDdrReq": tmnxPfcpTotalDdrReq,
+       "tmnxPfcpTotalDdrRsp": tmnxPfcpTotalDdrRsp,
+       "tmnxPfcpTotalDdrRspFail": tmnxPfcpTotalDdrRspFail,
+       "tmnxPfcpTotalAuAudTrigReqTx": tmnxPfcpTotalAuAudTrigReqTx,
+       "tmnxPfcpTotalAuAudStartReqRx": tmnxPfcpTotalAuAudStartReqRx,
+       "tmnxPfcpTotalAuAudEndReqRx": tmnxPfcpTotalAuAudEndReqRx,
+       "tmnxPfcpTotalAuAudTrigRspRx": tmnxPfcpTotalAuAudTrigRspRx,
+       "tmnxPfcpTotalAuAudStartRspTx": tmnxPfcpTotalAuAudStartRspTx,
+       "tmnxPfcpTotalAuAudEndRspTx": tmnxPfcpTotalAuAudEndRspTx,
+       "tmnxPfcpTotalHbRiReqRx": tmnxPfcpTotalHbRiReqRx,
+       "tmnxPfcpTotalHbRiRspTx": tmnxPfcpTotalHbRiRspTx,
+       "tmnxPfcpTotalAuPartialAudReqRx": tmnxPfcpTotalAuPartialAudReqRx,
+       "tmnxPfcpTotalAuPartialAudRspTx": tmnxPfcpTotalAuPartialAudRspTx,
+       "tmnxPfcpTotalAuPartAuSessAudited": tmnxPfcpTotalAuPartAuSessAudited,
+       "tmnxPfcpTotalAuPartAuSessDeleted": tmnxPfcpTotalAuPartAuSessDeleted,
        "tmnxPfcpSessionTable": tmnxPfcpSessionTable,
        "tmnxPfcpSessionEntry": tmnxPfcpSessionEntry,
        "tmnxPfcpSeIdHi": tmnxPfcpSeIdHi,
@@ -69608,6 +73667,22 @@ mibBuilder.exportSymbols(
        "tmnxPfcpSeL2tpRouter": tmnxPfcpSeL2tpRouter,
        "tmnxPfcpSeL2tpSeId": tmnxPfcpSeL2tpSeId,
        "tmnxPfcpSeFsgId": tmnxPfcpSeFsgId,
+       "tmnxPfcpSeDefQfi": tmnxPfcpSeDefQfi,
+       "tmnxPfcpSeDefRqi": tmnxPfcpSeDefRqi,
+       "tmnxPfcpSeFsgOperState": tmnxPfcpSeFsgOperState,
+       "tmnxPfcpSeRemGtpuAddrType": tmnxPfcpSeRemGtpuAddrType,
+       "tmnxPfcpSeRemGtpuAddr": tmnxPfcpSeRemGtpuAddr,
+       "tmnxPfcpSeRemGtpuTeId": tmnxPfcpSeRemGtpuTeId,
+       "tmnxPfcpSeLocGtpuAddrType": tmnxPfcpSeLocGtpuAddrType,
+       "tmnxPfcpSeLocGtpuAddr": tmnxPfcpSeLocGtpuAddr,
+       "tmnxPfcpSeLocGtpuTeId": tmnxPfcpSeLocGtpuTeId,
+       "tmnxPfcpSeLocGtpuRouter": tmnxPfcpSeLocGtpuRouter,
+       "tmnxPfcpSeIsLogicalPortTunnel": tmnxPfcpSeIsLogicalPortTunnel,
+       "tmnxPfcpSeSpiGroupId": tmnxPfcpSeSpiGroupId,
+       "tmnxPfcpSeCalltraceProfile": tmnxPfcpSeCalltraceProfile,
+       "tmnxPfcpSeImsi": tmnxPfcpSeImsi,
+       "tmnxPfcpSeApn": tmnxPfcpSeApn,
+       "tmnxPfcpSeL2AccessIdAlias": tmnxPfcpSeL2AccessIdAlias,
        "tmnxPfcpPeerTable": tmnxPfcpPeerTable,
        "tmnxPfcpPeerEntry": tmnxPfcpPeerEntry,
        "tmnxPfcpPeerRouter": tmnxPfcpPeerRouter,
@@ -69630,6 +73705,7 @@ mibBuilder.exportSymbols(
        "tmnxSubFsgTmplRedInterfaceSvc": tmnxSubFsgTmplRedInterfaceSvc,
        "tmnxSubFsgTmplRedInterface": tmnxSubFsgTmplRedInterface,
        "tmnxSubFsgTmplStandbyFwding": tmnxSubFsgTmplStandbyFwding,
+       "tmnxSubFsgTmplPathRestoreState": tmnxSubFsgTmplPathRestoreState,
        "tmnxSubUpResNwInstHealthTable": tmnxSubUpResNwInstHealthTable,
        "tmnxSubUpResNwInstHealthEntry": tmnxSubUpResNwInstHealthEntry,
        "tmnxSubUpResNwInstName": tmnxSubUpResNwInstName,
@@ -69666,6 +73742,7 @@ mibBuilder.exportSymbols(
        "tmnxSubUpFsgBecomeActive": tmnxSubUpFsgBecomeActive,
        "tmnxSubUpFsgBecomeStandby": tmnxSubUpFsgBecomeStandby,
        "tmnxSubUpFsgPfcpSessions": tmnxSubUpFsgPfcpSessions,
+       "tmnxSubUpFsgTemplate": tmnxSubUpFsgTemplate,
        "tmnxSubUpResFsgIfTable": tmnxSubUpResFsgIfTable,
        "tmnxSubUpResFsgIfEntry": tmnxSubUpResFsgIfEntry,
        "tmnxSubUpResFsgIfId": tmnxSubUpResFsgIfId,
@@ -69675,6 +73752,25 @@ mibBuilder.exportSymbols(
        "tmnxSubUpResFsgStatsObjs": tmnxSubUpResFsgStatsObjs,
        "tmnxSubUpFsgStatsRxMsgs": tmnxSubUpFsgStatsRxMsgs,
        "tmnxSubUpFsgStatsNrEntries": tmnxSubUpFsgStatsNrEntries,
+       "tmnxSubUpFsgStatsOpInvalid": tmnxSubUpFsgStatsOpInvalid,
+       "tmnxSubUpFsgStatsOpCreate": tmnxSubUpFsgStatsOpCreate,
+       "tmnxSubUpFsgStatsOpCreateFail": tmnxSubUpFsgStatsOpCreateFail,
+       "tmnxSubUpFsgStatsOpCreateTotal": tmnxSubUpFsgStatsOpCreateTotal,
+       "tmnxSubUpFsgStatsOpMod": tmnxSubUpFsgStatsOpMod,
+       "tmnxSubUpFsgStatsOpModFail": tmnxSubUpFsgStatsOpModFail,
+       "tmnxSubUpFsgStatsOpModTotal": tmnxSubUpFsgStatsOpModTotal,
+       "tmnxSubUpFsgStatsOpDel": tmnxSubUpFsgStatsOpDel,
+       "tmnxSubUpFsgStatsOpDelFail": tmnxSubUpFsgStatsOpDelFail,
+       "tmnxSubUpFsgStatsOpDelTotal": tmnxSubUpFsgStatsOpDelTotal,
+       "tmnxPfcpSessPerPortTable": tmnxPfcpSessPerPortTable,
+       "tmnxPfcpSessPerPortEntry": tmnxPfcpSessPerPortEntry,
+       "tmnxPfcpPerPortFilterKey": tmnxPfcpPerPortFilterKey,
+       "tmnxPfcpPerPortAssociation": tmnxPfcpPerPortAssociation,
+       "tmnxPfcpPerPortProtocols": tmnxPfcpPerPortProtocols,
+       "tmnxPfcpPerPortStartSVlanTag": tmnxPfcpPerPortStartSVlanTag,
+       "tmnxPfcpPerPortEndSVlanTag": tmnxPfcpPerPortEndSVlanTag,
+       "tmnxPfcpPerPortStartCVlanTag": tmnxPfcpPerPortStartCVlanTag,
+       "tmnxPfcpPerPortEndCVlanTag": tmnxPfcpPerPortEndCVlanTag,
        "tmnxSubscriberNotifyPrefix": tmnxSubscriberNotifyPrefix,
        "tmnxSubscriberNotifications": tmnxSubscriberNotifications,
        "tmnxSubscriberCreated": tmnxSubscriberCreated,
@@ -69728,5 +73824,9 @@ mibBuilder.exportSymbols(
        "tmnxPfcpAssocPathMgmtStateChgd": tmnxPfcpAssocPathMgmtStateChgd,
        "tmnxSubInfoEgrAggRateLimitLowReq": tmnxSubInfoEgrAggRateLimitLowReq,
        "tmnxSubIpoeWppRegistrationFailed": tmnxSubIpoeWppRegistrationFailed,
-       "tmnxPfcpInvalidIe": tmnxPfcpInvalidIe}
+       "tmnxPfcpInvalidIe": tmnxPfcpInvalidIe,
+       "tmnxPfcpNoSuchCalltraceProfile": tmnxPfcpNoSuchCalltraceProfile,
+       "tmnxPfcpNoSecondaryInterface": tmnxPfcpNoSecondaryInterface,
+       "tmnxSubPysrosExec": tmnxSubPysrosExec,
+       "tmnxSubPysrosExecFail": tmnxSubPysrosExecFail}
 )

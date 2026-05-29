@@ -1,17 +1,33 @@
 {
-  "timestamp": "2025-10-02T12:11:06.485216",
+  "timestamp": "2026-05-29T09:40:32.376507",
   "stats": {
-    "total": 13,
-    "compiled": 10,
-    "failed": 3,
-    "skipped": 0,
+    "total": 25,
+    "compiled": 17,
+    "failed": 7,
+    "skipped": 1,
     "errors": [
       {
         "mib": "MOXA-DEVICE-IO-MIB",
         "error": "failed"
       },
       {
-        "mib": "MOXA-PORT-MIB",
+        "mib": "MOXA-DUALHOMING-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "MOXA-EDS528E-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "MOXA-EDSG512EPoE-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "MOXA-IKS6728A-8POE-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "MOXA-IKS6728A-MIB",
         "error": "failed"
       },
       {
@@ -20,5 +36,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

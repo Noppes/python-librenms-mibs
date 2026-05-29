@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-TC-MG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:30 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -1669,6 +1666,26 @@ class TmnxMobUeStrPrefix(DisplayString):
 
 
 
+class TmnxMobUeRoamStatusType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("home", 1),
+          ("roaming", 2),
+          ("visiting", 3))
+    )
+
+
+
 # MIB Managed Objects in the order of their OIDs
 
 
@@ -1779,5 +1796,6 @@ mibBuilder.exportSymbols(
        "TmnxMobServRefPointType": TmnxMobServRefPointType,
        "TmnxMobAccessType": TmnxMobAccessType,
        "TmnxMobUeStrPrefix": TmnxMobUeStrPrefix,
+       "TmnxMobUeRoamStatusType": TmnxMobUeRoamStatusType,
        "timetraTCMGMIBModule": timetraTCMGMIBModule}
 )

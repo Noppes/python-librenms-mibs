@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-AGENT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:21:53 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -67,6 +64,10 @@ if 'mibBuilder' not in globals():
     "InetAddress",
     "InetAddressType")
 
+(EnabledStatus,) = mibBuilder.importSymbols(
+    "P-BRIDGE-MIB",
+    "EnabledStatus")
+
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
     "SNMPv2-CONF",
@@ -112,16 +113,12 @@ if 'mibBuilder' not in globals():
 (DisplayString,
  PhysAddress,
  RowStatus,
- TextualConvention,
- TimeStamp,
- TruthValue) = mibBuilder.importSymbols(
+ TextualConvention) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
     "RowStatus",
-    "TextualConvention",
-    "TimeStamp",
-    "TruthValue")
+    "TextualConvention")
 
 
 # MODULE-IDENTITY
@@ -131,9 +128,8 @@ snAgent = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snAgent.setRevisions(
-        ("2011-12-22 00:00",
-         "2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -156,70 +152,6 @@ class MacAddress(TextualConvention, OctetString):
 
 class DisplayString(TextualConvention, OctetString):
     status = "current"
-
-
-class BrcdImageType(TextualConvention, Integer32):
-    status = "current"
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              17,
-              18,
-              19,
-              20,
-              21,
-              22,
-              23,
-              24,
-              25,
-              26)
-        )
-    )
-    namedValues = NamedValues(
-        *(("unknown", 1),
-          ("managementModuleBoot", 2),
-          ("managementModuleMonitor", 3),
-          ("managementModuleApplication", 4),
-          ("interfaceModuleBoot", 5),
-          ("interfaceModuleMonitor", 6),
-          ("interfaceModuleApplication", 7),
-          ("mgmtAndIntfModuleCombinedApp", 8),
-          ("fpgaMBridge", 9),
-          ("fpgaMBridge32", 10),
-          ("fpgaSBridge", 11),
-          ("fpgaHBridge", 12),
-          ("fpgaBundled", 13),
-          ("fpgaPbifOc", 14),
-          ("fpgaStatsOc", 15),
-          ("fpgaXppOc", 16),
-          ("fpgaPbifMrj", 17),
-          ("fpgaStatsMrj", 18),
-          ("fpgaXppMrj", 19),
-          ("fpgaPbifSp2", 20),
-          ("fpgaXgmacSp2", 21),
-          ("fpgaXppSp2", 22),
-          ("fpgaPbif8x10", 23),
-          ("fpgaXpp8x10", 24),
-          ("fpgaXpp2x100", 25),
-          ("fpgaPbifMetro", 26))
-    )
-
 
 
 # MIB Managed Objects in the order of their OIDs
@@ -656,10 +588,6 @@ class _SnChasProductType_Type(Integer32):
               15,
               16,
               17,
-              18,
-              19,
-              20,
-              21,
               50,
               66,
               77,
@@ -687,10 +615,6 @@ class _SnChasProductType_Type(Integer32):
           ("biRx32", 15),
           ("niCES2000Series", 16),
           ("niCER2000Series", 17),
-          ("brMlxE4", 18),
-          ("brMlxE8", 19),
-          ("brMlxE16", 20),
-          ("brMlxE32", 21),
           ("biNI2", 50),
           ("biBB", 66),
           ("biM4", 77),
@@ -711,68 +635,32 @@ if mibBuilder.loadTexts:
     snChasProductType.setStatus("current")
 
 
-class _SnChasSystemMode_Type(Integer32):
-    """Custom type snChasSystemMode based on Integer32"""
+class _SnChasGlobalIgnoreShutdownTemperature_Type(Integer32):
+    """Custom type snChasGlobalIgnoreShutdownTemperature based on Integer32"""
+    defaultValue = 0
+
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(1,
-              2)
+            *(0,
+              1)
         )
     )
     namedValues = NamedValues(
-        *(("xmr", 1),
-          ("mlx", 2))
+        *(("disabled", 0),
+          ("enabled", 1))
     )
 
 
-_SnChasSystemMode_Type.__name__ = "Integer32"
-_SnChasSystemMode_Object = MibScalar
-snChasSystemMode = _SnChasSystemMode_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 1, 27),
-    _SnChasSystemMode_Type()
+_SnChasGlobalIgnoreShutdownTemperature_Type.__name__ = "Integer32"
+_SnChasGlobalIgnoreShutdownTemperature_Object = MibScalar
+snChasGlobalIgnoreShutdownTemperature = _SnChasGlobalIgnoreShutdownTemperature_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 1, 30),
+    _SnChasGlobalIgnoreShutdownTemperature_Type()
 )
-snChasSystemMode.setMaxAccess("read-only")
+snChasGlobalIgnoreShutdownTemperature.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    snChasSystemMode.setStatus("current")
-
-
-class _SnChasFactoryPartNumber_Type(DisplayString):
-    """Custom type snChasFactoryPartNumber based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 64),
-    )
-
-
-_SnChasFactoryPartNumber_Type.__name__ = "DisplayString"
-_SnChasFactoryPartNumber_Object = MibScalar
-snChasFactoryPartNumber = _SnChasFactoryPartNumber_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 1, 28),
-    _SnChasFactoryPartNumber_Type()
-)
-snChasFactoryPartNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snChasFactoryPartNumber.setStatus("current")
-
-
-class _SnChasFactorySerialNumber_Type(DisplayString):
-    """Custom type snChasFactorySerialNumber based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 128),
-    )
-
-
-_SnChasFactorySerialNumber_Type.__name__ = "DisplayString"
-_SnChasFactorySerialNumber_Object = MibScalar
-snChasFactorySerialNumber = _SnChasFactorySerialNumber_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 1, 29),
-    _SnChasFactorySerialNumber_Type()
-)
-snChasFactorySerialNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snChasFactorySerialNumber.setStatus("current")
+    snChasGlobalIgnoreShutdownTemperature.setStatus("current")
 _SnChasPwr_ObjectIdentity = ObjectIdentity
 snChasPwr = _SnChasPwr_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 2)
@@ -1207,6 +1095,64 @@ snChasUnitPartNum = _SnChasUnitPartNum_Object(
 snChasUnitPartNum.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snChasUnitPartNum.setStatus("current")
+
+
+class _SnChasUnitIgnoreShutdownTemperature_Type(Integer32):
+    """Custom type snChasUnitIgnoreShutdownTemperature based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("enabled", 1))
+    )
+
+
+_SnChasUnitIgnoreShutdownTemperature_Type.__name__ = "Integer32"
+_SnChasUnitIgnoreShutdownTemperature_Object = MibTableColumn
+snChasUnitIgnoreShutdownTemperature = _SnChasUnitIgnoreShutdownTemperature_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 4, 1, 1, 8),
+    _SnChasUnitIgnoreShutdownTemperature_Type()
+)
+snChasUnitIgnoreShutdownTemperature.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snChasUnitIgnoreShutdownTemperature.setStatus("current")
+
+
+class _SnChasUnitFanless_Type(Integer32):
+    """Custom type snChasUnitFanless based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_SnChasUnitFanless_Type.__name__ = "Integer32"
+_SnChasUnitFanless_Object = MibTableColumn
+snChasUnitFanless = _SnChasUnitFanless_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 1, 4, 1, 1, 9),
+    _SnChasUnitFanless_Type()
+)
+snChasUnitFanless.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snChasUnitFanless.setStatus("current")
 _SnAgentGbl_ObjectIdentity = ObjectIdentity
 snAgentGbl = _SnAgentGbl_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1)
@@ -1334,7 +1280,7 @@ snAgConfigFromNVRAM = _SnAgConfigFromNVRAM_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 4),
     _SnAgConfigFromNVRAM_Type()
 )
-snAgConfigFromNVRAM.setMaxAccess("read-write")
+snAgConfigFromNVRAM.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     snAgConfigFromNVRAM.setStatus("current")
 _SnAgTftpServerIp_Type = IpAddress
@@ -1403,7 +1349,9 @@ class _SnAgImgLoad_Type(Integer32):
               29,
               30,
               31,
-              32)
+              32,
+              34,
+              35)
         )
     )
     namedValues = NamedValues(
@@ -1438,7 +1386,9 @@ class _SnAgImgLoad_Type(Integer32):
           ("downloadMPBootTFTP", 29),
           ("uploadMPMonitor", 30),
           ("downloadMPMonitor", 31),
-          ("downloadSPBootROM", 32))
+          ("downloadSPBootROM", 32),
+          ("downloadUfiPrimary", 34),
+          ("downloadUfiSecondary", 35))
     )
 
 
@@ -2063,7 +2013,17 @@ snAgGblCpuUtilCollect = _SnAgGblCpuUtilCollect_Object(
 snAgGblCpuUtilCollect.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snAgGblCpuUtilCollect.setStatus("deprecated")
-_SnAgGblTelnetTimeout_Type = Integer32
+
+
+class _SnAgGblTelnetTimeout_Type(Integer32):
+    """Custom type snAgGblTelnetTimeout based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 240),
+    )
+
+
+_SnAgGblTelnetTimeout_Type.__name__ = "Integer32"
 _SnAgGblTelnetTimeout_Object = MibScalar
 snAgGblTelnetTimeout = _SnAgGblTelnetTimeout_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 37),
@@ -2349,7 +2309,7 @@ snAgGblDynMemUtil = _SnAgGblDynMemUtil_Object(
 snAgGblDynMemUtil.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snAgGblDynMemUtil.setStatus("deprecated")
-_SnAgGblDynMemTotal_Type = Integer32
+_SnAgGblDynMemTotal_Type = Gauge32
 _SnAgGblDynMemTotal_Object = MibScalar
 snAgGblDynMemTotal = _SnAgGblDynMemTotal_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 54),
@@ -2440,7 +2400,17 @@ snAgSFlowSourceInterface = _SnAgSFlowSourceInterface_Object(
 snAgSFlowSourceInterface.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snAgSFlowSourceInterface.setStatus("current")
-_SnAgGblTelnetLoginTimeout_Type = Integer32
+
+
+class _SnAgGblTelnetLoginTimeout_Type(Integer32):
+    """Custom type snAgGblTelnetLoginTimeout based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10),
+    )
+
+
+_SnAgGblTelnetLoginTimeout_Type.__name__ = "Integer32"
 _SnAgGblTelnetLoginTimeout_Object = MibScalar
 snAgGblTelnetLoginTimeout = _SnAgGblTelnetLoginTimeout_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 60),
@@ -2520,15 +2490,78 @@ snAgTftpServerAddr = _SnAgTftpServerAddr_Object(
 snAgTftpServerAddr.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snAgTftpServerAddr.setStatus("current")
-_SnAgGblDeleteFirstBeforeDownload_Type = TruthValue
-_SnAgGblDeleteFirstBeforeDownload_Object = MibScalar
-snAgGblDeleteFirstBeforeDownload = _SnAgGblDeleteFirstBeforeDownload_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 67),
-    _SnAgGblDeleteFirstBeforeDownload_Type()
+
+
+class _SnAgGblPasswordCheckMode_Type(EnabledStatus):
+    """Custom type snAgGblPasswordCheckMode based on EnabledStatus"""
+    defaultValue = 1
+
+
+_SnAgGblPasswordCheckMode_Type.__name__ = "EnabledStatus"
+_SnAgGblPasswordCheckMode_Object = MibScalar
+snAgGblPasswordCheckMode = _SnAgGblPasswordCheckMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 68),
+    _SnAgGblPasswordCheckMode_Type()
 )
-snAgGblDeleteFirstBeforeDownload.setMaxAccess("read-write")
+snAgGblPasswordCheckMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snAgGblDeleteFirstBeforeDownload.setStatus("current")
+    snAgGblPasswordCheckMode.setStatus("current")
+
+
+class _SnAgGblEnableTelnetAuthentication_Type(Integer32):
+    """Custom type snAgGblEnableTelnetAuthentication based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("enabled", 1))
+    )
+
+
+_SnAgGblEnableTelnetAuthentication_Type.__name__ = "Integer32"
+_SnAgGblEnableTelnetAuthentication_Object = MibScalar
+snAgGblEnableTelnetAuthentication = _SnAgGblEnableTelnetAuthentication_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 69),
+    _SnAgGblEnableTelnetAuthentication_Type()
+)
+snAgGblEnableTelnetAuthentication.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgGblEnableTelnetAuthentication.setStatus("current")
+
+
+class _SnAgGblManager2FactorAuthentication_Type(Integer32):
+    """Custom type snAgGblManager2FactorAuthentication based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("enabled", 1))
+    )
+
+
+_SnAgGblManager2FactorAuthentication_Type.__name__ = "Integer32"
+_SnAgGblManager2FactorAuthentication_Object = MibScalar
+snAgGblManager2FactorAuthentication = _SnAgGblManager2FactorAuthentication_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 1, 70),
+    _SnAgGblManager2FactorAuthentication_Type()
+)
+snAgGblManager2FactorAuthentication.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgGblManager2FactorAuthentication.setStatus("current")
 _SnAgentBrd_ObjectIdentity = ObjectIdentity
 snAgentBrd = _SnAgentBrd_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 2)
@@ -2690,8 +2723,7 @@ class _SnAgentBrdModuleStatus_Type(Integer32):
               4,
               8,
               9,
-              10,
-              11)
+              10)
         )
     )
     namedValues = NamedValues(
@@ -2701,8 +2733,7 @@ class _SnAgentBrdModuleStatus_Type(Integer32):
           ("moduleBad", 4),
           ("moduleConfigured", 8),
           ("moduleComingUp", 9),
-          ("moduleRunning", 10),
-          ("moduleBlocked", 11))
+          ("moduleRunning", 10))
     )
 
 
@@ -2873,25 +2904,6 @@ snAgentBrdPartNumber = _SnAgentBrdPartNumber_Object(
 snAgentBrdPartNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snAgentBrdPartNumber.setStatus("current")
-
-
-class _SnAgentBrdMemoryUtil100thPercent_Type(Unsigned32):
-    """Custom type snAgentBrdMemoryUtil100thPercent based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 10000),
-    )
-
-
-_SnAgentBrdMemoryUtil100thPercent_Type.__name__ = "Unsigned32"
-_SnAgentBrdMemoryUtil100thPercent_Object = MibTableColumn
-snAgentBrdMemoryUtil100thPercent = _SnAgentBrdMemoryUtil100thPercent_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 2, 1, 1, 28),
-    _SnAgentBrdMemoryUtil100thPercent_Type()
-)
-snAgentBrdMemoryUtil100thPercent.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snAgentBrdMemoryUtil100thPercent.setStatus("current")
 _SnAgentBrd2Table_Object = MibTable
 snAgentBrd2Table = _SnAgentBrd2Table_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 2, 2)
@@ -2976,8 +2988,7 @@ class _SnAgentBrd2ModuleStatus_Type(Integer32):
               4,
               8,
               9,
-              10,
-              11)
+              10)
         )
     )
     namedValues = NamedValues(
@@ -2987,8 +2998,7 @@ class _SnAgentBrd2ModuleStatus_Type(Integer32):
           ("moduleBad", 4),
           ("moduleConfigured", 8),
           ("moduleComingUp", 9),
-          ("moduleRunning", 10),
-          ("moduleBlocked", 11))
+          ("moduleRunning", 10))
     )
 
 
@@ -4310,9 +4320,7 @@ class _SnAgentConfigModuleType_Type(Integer32):
               1089,
               1090,
               1091,
-              1093,
-              1094,
-              1095,
+              1092,
               1096,
               1097,
               1098,
@@ -4327,16 +4335,6 @@ class _SnAgentConfigModuleType_Type(Integer32):
               1107,
               1108,
               1109,
-              1110,
-              1111,
-              1112,
-              1113,
-              1114,
-              1115,
-              1116,
-              1117,
-              1118,
-              1119,
               2016,
               2017,
               2020,
@@ -4347,32 +4345,78 @@ class _SnAgentConfigModuleType_Type(Integer32):
               2036,
               2037,
               2040,
+              2055,
+              2056,
+              2057,
               2064,
               2065,
               2066,
-              2067,
               2068,
               2069,
+              2070,
+              2071,
+              2072,
+              2073,
               2074,
-              2080,
-              2081,
-              2083,
-              2096,
-              2098,
-              2100,
-              2101,
-              2102,
-              2103,
-              2104,
-              2105,
-              2106,
+              2075,
+              2132,
+              2133,
+              2134,
+              2136,
+              2137,
+              2138,
+              2139,
+              2140,
+              2141,
+              2142,
+              2144,
+              2148,
+              2149,
+              2152,
+              2153,
+              2154,
+              2155,
+              2156,
+              2157,
+              2160,
+              2162,
+              2163,
+              2164,
+              2165,
+              2168,
+              2169,
+              2176,
+              2177,
+              2178,
+              2179,
+              2184,
+              2185,
+              2192,
+              2193,
+              2194,
+              2200,
+              2201,
               2208,
               2209,
-              2220,
+              2210,
+              2211,
+              2212,
+              2213,
+              2214,
+              2215,
+              2216,
+              2217,
               2224,
               2225,
-              2226,
               2227,
+              2228,
+              2229,
+              2230,
+              2232,
+              2233,
+              2234,
+              2235,
+              2236,
               2240,
               2241,
               2244,
@@ -4540,9 +4584,7 @@ class _SnAgentConfigModuleType_Type(Integer32):
           ("fdryMlx2Port10GigSPModule", 1089),
           ("fdryMlx20PortGigCopperSPModule", 1090),
           ("fdryMlx20PortGigFXSPModule", 1091),
-          ("brMlx4Port10GigXModule", 1093),
-          ("brMlx24PortGigCopperXModule", 1094),
-          ("brMlx24PortGigSfpXModule", 1095),
+          ("niMlx8Port10GigSPModule", 1092),
           ("niCes24PortFiberModule", 1096),
           ("niCes24PortCopperModule", 1097),
           ("niCes2Port10GigModule", 1098),
@@ -4557,16 +4599,6 @@ class _SnAgentConfigModuleType_Type(Integer32):
           ("fdryXmr4PortOC48SPModule", 1107),
           ("fdryXmr2PortOC48SPModule", 1108),
           ("fdryNiMlxMrManagementModule", 1109),
-          ("niMlx8Port10GigMModule", 1110),
-          ("niMlx8Port10GigDModule", 1111),
-          ("brMlx8Port10GigXModule", 1112),
-          ("brMlx2Port100GigXModule", 1113),
-          ("brcdMlxMr2ManagementModule", 1114),
-          ("brcdXmrMr2ManagementModule", 1115),
-          ("brcdMlx32Mr2ManagementModule", 1116),
-          ("brcdXmr32Mr2ManagementModule", 1117),
-          ("brcdNiXmr32MrManagementModule", 1118),
-          ("brcdNiMlx32MrManagementModule", 1119),
           ("fdryIcx6430624BaseModule", 2016),
           ("fdryIcx6430648BaseModule", 2017),
           ("fdryIcx6430624PoeBaseModule", 2020),
@@ -4577,32 +4609,78 @@ class _SnAgentConfigModuleType_Type(Integer32):
           ("fdryIcx6450624PoeBaseModule", 2036),
           ("fdryIcx6450648PoeBaseModule", 2037),
           ("fdryIcx6450sfp4Port40gModule", 2040),
-          ("fdryFiV4Sx12ComboPortManagementModule", 2064),
-          ("fdryFiV4Sx2Port10gModule", 2065),
-          ("fdryFiV4Sx24PortGigCopperModule", 2066),
-          ("fdryFiV4Sx24PortGigFiberModule", 2067),
-          ("fdryFiV4Sx2Port10gLanWanModule", 2068),
-          ("fdryFiV4Sx24Port100m1gFiberModule", 2069),
-          ("fdryFiV4Sx12ComboPortManagement2Module", 2074),
-          ("fdryFiV4Sx210gPortManagementModule", 2080),
-          ("fdryFiSx0PortManagementModule", 2081),
-          ("fdryFiV4Sx4g4fPortManagementModule", 2083),
-          ("fdryFiV6Sx12ComboPortManagementModule", 2096),
-          ("fdryFiV6Sx24PortGigCopperModule", 2098),
-          ("fdryFiV6Sx2Port10gModule", 2100),
-          ("fdryFiV6Sx24Port100m1gFiberModule", 2101),
-          ("fdryFiV6Sx210gPortManagementModule", 2102),
-          ("fdryFiV6Sx48PortGigCopperPoeModule", 2103),
-          ("fdryFiV6Sx4g4fPortManagementModule", 2104),
-          ("fdryFiV6Sx12ComboPortManagement2Module", 2105),
-          ("fdryFiV6Sx48PortGigCopperModule", 2106),
-          ("fdryFcx624BaseModule", 2208),
-          ("fdryFcx648BaseModule", 2209),
-          ("fdryFcxSfpPlus4Port10gModule", 2220),
-          ("fdryFws24PortCopperBaseModule", 2224),
-          ("fdryFws48PortCopperBaseModule", 2225),
-          ("fdryFws24GPortCopperBaseModule", 2226),
-          ("fdryFws48GPortCopperBaseModule", 2227),
+          ("fdryIcx665056BaseModule", 2055),
+          ("fdryIcx6650sfp4Port40gModule", 2056),
+          ("fdryIcx6650sfp8Port10gModule", 2057),
+          ("fdryIcx7150624BaseModule", 2064),
+          ("fdryIcx7150648BaseModule", 2065),
+          ("fdryIcx7150648ZPBaseModule", 2066),
+          ("fdryIcx7150612CPoeBaseModule", 2068),
+          ("fdryIcx7150624PoeBaseModule", 2069),
+          ("fdryIcx7150648PoeBaseModule", 2070),
+          ("fdryIcx7150648PoeFBaseModule", 2071),
+          ("fdryIcx7150gc2Port2gModule", 2072),
+          ("fdryIcx7150sfpplus4Port40gModule", 2073),
+          ("fdryIcx7150sfpplus2Port20gModule", 2074),
+          ("fdryIcx7150sfpplus8Port80gModule", 2075),
+          ("fdryIcx775026QBaseModule", 2132),
+          ("fdryIcx775048FBaseModule", 2133),
+          ("fdryIcx775048CBaseModule", 2134),
+          ("fdryIcx7750QSFP6port40gModule", 2136),
+          ("fdryIcx77506Q6port40gModule", 2137),
+          ("fdryIcx6430Copper2Port2gModule", 2138),
+          ("fdryIcx6430sfp2Port2gModule", 2139),
+          ("fdryIcx6450612CPDBaseModule", 2140),
+          ("fdryIcx6450Copper2Port2gModule", 2141),
+          ("fdryIcx6450sfp2Port2gModule", 2142),
+          ("fdryIcx7650648FBaseModule", 2144),
+          ("fdryIcx7650648ZPBaseModule", 2148),
+          ("fdryIcx7650648PBaseModule", 2149),
+          ("fdryIcx76001Port100gModule", 2152),
+          ("fdryIcx76002Port80gModule", 2153),
+          ("fdryIcx76004Port40gModule", 2154),
+          ("fdryIcx76504Port160gModule", 2155),
+          ("fdryIcx76502Port200gModule", 2156),
+          ("fdryIcx76502Port80gModule", 2157),
+          ("fdryIcx7250624GBaseModule", 2160),
+          ("fdryIcx7250624BaseModule", 2162),
+          ("fdryIcx7250648BaseModule", 2163),
+          ("fdryIcx7250624PoeBaseModule", 2164),
+          ("fdryIcx7250648PoeBaseModule", 2165),
+          ("fdryIcx7250sfpplus4Port4gModule", 2168),
+          ("fdryIcx7250sfpplus8Port80gModule", 2169),
+          ("fdryIcx7150C08PBaseModule", 2176),
+          ("fdryIcx7150C10ZPBaseModule", 2177),
+          ("fdryIcx7150624FBaseModule", 2178),
+          ("fdryIcx7150C08PTBaseModule", 2179),
+          ("fdryIcx7150sfp2Port2gModule", 2184),
+          ("fdryIcx7150gc2Port20gModule", 2185),
+          ("fdryIcx7850632QBaseModule", 2192),
+          ("fdryIcx7850648FBaseModule", 2193),
+          ("fdryIcx7850648FSBaseModule", 2194),
+          ("fdryIcx780012Port1200gModule", 2200),
+          ("fdryIcx78008Port800gModule", 2201),
+          ("fdryIcx7550624BaseModule", 2208),
+          ("fdryIcx7550648BaseModule", 2209),
+          ("fdryIcx7550624FBaseModule", 2210),
+          ("fdryIcx7550648FBaseModule", 2211),
+          ("fdryIcx7550624PBaseModule", 2212),
+          ("fdryIcx7550648PBaseModule", 2213),
+          ("fdryIcx7550624ZPBaseModule", 2214),
+          ("fdryIcx7550648ZPBaseModule", 2215),
+          ("fdryIcx75502Port200gModule", 2216),
+          ("fdryIcx75502Port80gModule", 2217),
+          ("fdryIcx7450624BaseModule", 2224),
+          ("fdryIcx7450648BaseModule", 2225),
+          ("fdryIcx7450648FBaseModule", 2227),
+          ("fdryIcx7450624PoeBaseModule", 2228),
+          ("fdryIcx7450648PoeBaseModule", 2229),
+          ("fdryIcx7450632ZPBaseModule", 2230),
+          ("fdryIcx7400ServiceModule", 2232),
+          ("fdryIcx7400sfpplus4Port40gModule", 2233),
+          ("fdryIcx7400copper4Port40gModule", 2234),
+          ("fdryIcx7400sfp4Port4gModule", 2235),
+          ("fdryIcx7400qsfpplus1Port40gModule", 2236),
           ("fdryIcx6610624BaseModule", 2240),
           ("fdryIcx6610648BaseModule", 2241),
           ("fdryIcx6610624PoeBaseModule", 2244),
@@ -4712,7 +4790,9 @@ class _SnAgentConfigModuleMgmtModuleType_Type(Integer32):
               15,
               16,
               17,
-              18)
+              18,
+              19,
+              20)
         )
     )
     namedValues = NamedValues(
@@ -4733,7 +4813,9 @@ class _SnAgentConfigModuleMgmtModuleType_Type(Integer32):
           ("fastIronSuperXManagementModule", 15),
           ("fastIronSXRManagementModule", 16),
           ("fastIronV6SuperXManagementModule", 17),
-          ("fastIronV6SXRManagementModule", 18))
+          ("fastIronV6SXRManagementModule", 18),
+          ("icxStackManagementModule", 19),
+          ("icxManagementModule", 20))
     )
 
 
@@ -4796,75 +4878,7 @@ class _SnAgentConfigModule2Type_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(0,
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14,
-              15,
-              18,
-              19,
-              20,
-              21,
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              29,
-              30,
-              31,
-              32,
-              33,
-              34,
-              35,
-              36,
-              37,
-              38,
-              39,
-              40,
-              41,
-              42,
-              43,
-              44,
-              45,
-              46,
-              47,
-              48,
-              49,
-              50,
-              51,
-              52,
-              53,
-              54,
-              55,
-              56,
-              57,
-              64,
-              65,
-              66,
-              67,
-              68,
-              69,
-              74,
-              80,
-              81,
-              112,
-              113,
-              114,
-              144,
+            *(144,
               145,
               152,
               153,
@@ -4881,19 +4895,6 @@ class _SnAgentConfigModule2Type_Type(Integer32):
               184,
               185,
               192,
-              195,
-              196,
-              197,
-              198,
-              200,
-              201,
-              202,
-              206,
-              207,
-              208,
-              209,
-              212,
-              214,
               2016,
               2017,
               2020,
@@ -4904,13 +4905,78 @@ class _SnAgentConfigModule2Type_Type(Integer32):
               2036,
               2037,
               2040,
+              2055,
+              2056,
+              2057,
+              2064,
+              2065,
+              2066,
+              2068,
+              2069,
+              2070,
+              2071,
+              2072,
+              2073,
+              2074,
+              2075,
+              2132,
+              2133,
+              2134,
+              2136,
+              2137,
+              2138,
+              2139,
+              2140,
+              2141,
+              2142,
+              2144,
+              2148,
+              2149,
+              2152,
+              2153,
+              2154,
+              2155,
+              2156,
+              2157,
+              2160,
+              2162,
+              2163,
+              2164,
+              2165,
+              2168,
+              2169,
+              2176,
+              2177,
+              2178,
+              2179,
+              2184,
+              2185,
+              2192,
+              2193,
+              2194,
+              2200,
+              2201,
               2208,
               2209,
-              2220,
+              2210,
+              2211,
+              2212,
+              2213,
+              2214,
+              2215,
+              2216,
+              2217,
               2224,
               2225,
-              2226,
               2227,
+              2228,
+              2229,
+              2230,
+              2232,
+              2233,
+              2234,
+              2235,
+              2236,
               2240,
               2241,
               2244,
@@ -4921,75 +4987,7 @@ class _SnAgentConfigModule2Type_Type(Integer32):
         )
     )
     namedValues = NamedValues(
-        *(("bi8PortGigManagementModule", 0),
-          ("bi4PortGigManagementModule", 1),
-          ("bi16PortCopperManagementModule", 2),
-          ("bi4PortGigModule", 3),
-          ("fi2PortGigManagementModule", 4),
-          ("fi4PortGigManagementModule", 5),
-          ("bi8PortGigCopperManagementModule", 6),
-          ("fi8PortGigManagementModule", 7),
-          ("bi8PortGigModule", 8),
-          ("bi12PortGigCopper2PortGigFiberManagement", 9),
-          ("bi24PortCopperModule", 10),
-          ("fi24PortCopperModule", 11),
-          ("bi16Port100FXModule", 12),
-          ("bi8Port100FXModule", 13),
-          ("bi8PortGigCopperModule", 14),
-          ("bi12PortGigCopper2PortGigFiber", 15),
-          ("bi2PortGigManagementModule", 18),
-          ("bi24Port100FXModule", 19),
-          ("bi0PortManagementModule", 20),
-          ("pos622MbsModule", 21),
-          ("pos155MbsModule", 22),
-          ("bi2PortGigModule", 23),
-          ("bi2PortGigCopperModule", 24),
-          ("fi2PortGigModule", 25),
-          ("fi4PortGigModule", 26),
-          ("fi8PortGigModule", 27),
-          ("fi8PortGigCopperModule", 28),
-          ("fi8PortGigCopperManagementModule", 29),
-          ("pos155Mbs2PModule", 30),
-          ("fi4PortGigCopperManagementModule", 31),
-          ("fi2PortGigCopperManagementModule", 32),
-          ("bi4PortGigCopperManagementModule", 33),
-          ("bi2PortGigCopperManagementModule", 34),
-          ("bi8PortGigM4ManagementModule", 35),
-          ("bi4PortGigM4ManagementModule", 36),
-          ("bi2PortGigM4ManagementModule", 37),
-          ("bi0PortGigM4ManagementModule", 38),
-          ("bi0PortWSMManagementModule", 39),
-          ("biPos2Port2488MbsModule", 40),
-          ("bi0PortWSMModule", 41),
-          ("niPos2Port2488MbsModule", 42),
-          ("ni4802", 43),
-          ("bi4PortGigNPAModule", 44),
-          ("biAtm2Port155MbsModule", 45),
-          ("biAtm4Port155MbsModule", 46),
-          ("bi1Port10GigModule", 47),
-          ("fes4802Module", 48),
-          ("fes2402Module", 49),
-          ("fes9604Module", 50),
-          ("fes12GigCopperAndGigFiberModule", 51),
-          ("fesx24GigModule", 52),
-          ("fesx24Gig2TenGigModule", 53),
-          ("fesx24Gig1TenGigModule", 54),
-          ("fesx48GigModule", 55),
-          ("fesx48Gig2TenGigModule", 56),
-          ("fesx48Gig1TenGigModule", 57),
-          ("superx12ComboPortManagementModule", 64),
-          ("superx2PortTenGigModule", 65),
-          ("superx24PortGigCopperModule", 66),
-          ("superx24PortGigFiberModule", 67),
-          ("superx2PortTenGigLanWanModule", 68),
-          ("superx24Port100tx1PortGigFiberModule", 69),
-          ("superx12ComboPortManagement2Module", 74),
-          ("superxR2PortTenGigManagementModule", 80),
-          ("superxRManagementModule", 81),
-          ("fesx24GigFiberGigCopperModule", 112),
-          ("fesx24GigFiber2TenGigModule", 113),
-          ("fesx24GigFiber1TenGigModule", 114),
-          ("fgs24PortManagementModule", 144),
+        *(("fgs24PortManagementModule", 144),
           ("fgs48PortManagementModule", 145),
           ("fgsXfp2Port10gModule", 152),
           ("fgsCx42Port10gModule", 153),
@@ -5006,19 +5004,6 @@ class _SnAgentConfigModule2Type_Type(Integer32):
           ("fcxXfp2Port10gModule", 184),
           ("fcxCx42Port16gModule", 185),
           ("fcx624SFBaseModule", 192),
-          ("biFiJc48ePort100fxIpcModule", 195),
-          ("biFiJc48tPort100fxIpcModule", 196),
-          ("biFiJc8PortGigM4ManagementModule", 197),
-          ("biFiJc8PortGigIgcModule", 198),
-          ("biFiJc16PortGigIgcModule", 200),
-          ("biJc24PortCopperIpc4GigIgcModule", 201),
-          ("biJc16PortGigCopperIgcModule", 202),
-          ("biFiJc24Port100fxIpcModule", 206),
-          ("bi2Port10GigModule", 207),
-          ("biJc48tPortRJ21OmpModule", 208),
-          ("biJc48ePortRJ45OmpModule", 209),
-          ("biJc24PortIpcRJ45PoeModule", 212),
-          ("biJc2PortGigIgcM4ManagementModule", 214),
           ("fdryIcx6430624BaseModule", 2016),
           ("fdryIcx6430648BaseModule", 2017),
           ("fdryIcx6430624PoeBaseModule", 2020),
@@ -5029,13 +5014,78 @@ class _SnAgentConfigModule2Type_Type(Integer32):
           ("fdryIcx6450624PoeBaseModule", 2036),
           ("fdryIcx6450648PoeBaseModule", 2037),
           ("fdryIcx6450sfp4Port40gModule", 2040),
-          ("fdryFcx624BaseModule", 2208),
-          ("fdryFcx648BaseModule", 2209),
-          ("fdryFcxSfpPlus4Port10gModule", 2220),
-          ("fdryFws24PortCopperBaseModule", 2224),
-          ("fdryFws48PortCopperBaseModule", 2225),
-          ("fdryFws24GPortCopperBaseModule", 2226),
-          ("fdryFws48GPortCopperBaseModule", 2227),
+          ("fdryIcx665056BaseModule", 2055),
+          ("fdryIcx6650sfp4Port40gModule", 2056),
+          ("fdryIcx6650sfp8Port10gModule", 2057),
+          ("fdryIcx7150624BaseModule", 2064),
+          ("fdryIcx7150648BaseModule", 2065),
+          ("fdryIcx7150648ZPBaseModule", 2066),
+          ("fdryIcx7150612CPoeBaseModule", 2068),
+          ("fdryIcx7150624PoeBaseModule", 2069),
+          ("fdryIcx7150648PoeBaseModule", 2070),
+          ("fdryIcx7150648PoeFBaseModule", 2071),
+          ("fdryIcx7150gc2Port2gModule", 2072),
+          ("fdryIcx7150sfpplus4Port40gModule", 2073),
+          ("fdryIcx7150sfpplus2Port20gModule", 2074),
+          ("fdryIcx7150sfpplus8Port80gModule", 2075),
+          ("fdryIcx775026QBaseModule", 2132),
+          ("fdryIcx775048FBaseModule", 2133),
+          ("fdryIcx775048CBaseModule", 2134),
+          ("fdryIcx7750QSFP6port40gModule", 2136),
+          ("fdryIcx77506Q6port40gModule", 2137),
+          ("fdryIcx6430Copper2Port2gModule", 2138),
+          ("fdryIcx6430sfp2Port2gModule", 2139),
+          ("fdryIcx6450612CPDBaseModule", 2140),
+          ("fdryIcx6450Copper2Port2gModule", 2141),
+          ("fdryIcx6450sfp2Port2gModule", 2142),
+          ("fdryIcx7650648FBaseModule", 2144),
+          ("fdryIcx7650648ZPBaseModule", 2148),
+          ("fdryIcx7650648PBaseModule", 2149),
+          ("fdryIcx76001Port100gModule", 2152),
+          ("fdryIcx76002Port80gModule", 2153),
+          ("fdryIcx76004Port40gModule", 2154),
+          ("fdryIcx76504Port160gModule", 2155),
+          ("fdryIcx76502Port200gModule", 2156),
+          ("fdryIcx76502Port80gModule", 2157),
+          ("fdryIcx7250624GBaseModule", 2160),
+          ("fdryIcx7250624BaseModule", 2162),
+          ("fdryIcx7250648BaseModule", 2163),
+          ("fdryIcx7250624PoeBaseModule", 2164),
+          ("fdryIcx7250648PoeBaseModule", 2165),
+          ("fdryIcx7250sfpplus4Port4gModule", 2168),
+          ("fdryIcx7250sfpplus8Port80gModule", 2169),
+          ("fdryIcx7150C08PBaseModule", 2176),
+          ("fdryIcx7150C10ZPBaseModule", 2177),
+          ("fdryIcx7150624FBaseModule", 2178),
+          ("fdryIcx7150C08PTBaseModule", 2179),
+          ("fdryIcx7150sfp2Port2gModule", 2184),
+          ("fdryIcx7150gc2Port20gModule", 2185),
+          ("fdryIcx7850632QBaseModule", 2192),
+          ("fdryIcx7850648FBaseModule", 2193),
+          ("fdryIcx7850648FSBaseModule", 2194),
+          ("fdryIcx780012Port1200gModule", 2200),
+          ("fdryIcx78008Port800gModule", 2201),
+          ("fdryIcx7550624BaseModule", 2208),
+          ("fdryIcx7550648BaseModule", 2209),
+          ("fdryIcx7550624FBaseModule", 2210),
+          ("fdryIcx7550648FBaseModule", 2211),
+          ("fdryIcx7550624PBaseModule", 2212),
+          ("fdryIcx7550648PBaseModule", 2213),
+          ("fdryIcx7550624ZPBaseModule", 2214),
+          ("fdryIcx7550648ZPBaseModule", 2215),
+          ("fdryIcx75502Port200gModule", 2216),
+          ("fdryIcx75502Port80gModule", 2217),
+          ("fdryIcx7450624BaseModule", 2224),
+          ("fdryIcx7450648BaseModule", 2225),
+          ("fdryIcx7450648FBaseModule", 2227),
+          ("fdryIcx7450624PoeBaseModule", 2228),
+          ("fdryIcx7450648PoeBaseModule", 2229),
+          ("fdryIcx7450632ZPBaseModule", 2230),
+          ("fdryIcx7400ServiceModule", 2232),
+          ("fdryIcx7400sfpplus4Port40gModule", 2233),
+          ("fdryIcx7400copper4Port40gModule", 2234),
+          ("fdryIcx7400sfp4Port4gModule", 2235),
+          ("fdryIcx7400qsfpplus1Port40gModule", 2236),
           ("fdryIcx6610624BaseModule", 2240),
           ("fdryIcx6610648BaseModule", 2241),
           ("fdryIcx6610624PoeBaseModule", 2244),
@@ -5140,7 +5190,9 @@ class _SnAgentConfigModule2MgmtModuleType_Type(Integer32):
               10,
               11,
               12,
-              13)
+              13,
+              19,
+              20)
         )
     )
     namedValues = NamedValues(
@@ -5156,7 +5208,9 @@ class _SnAgentConfigModule2MgmtModuleType_Type(Integer32):
           ("muchoManagementModule", 10),
           ("rottWeilerManagementModule", 11),
           ("fesXStackManagementModule", 12),
-          ("fgsStackManagementModule", 13))
+          ("fgsStackManagementModule", 13),
+          ("icxStackManagementModule", 19),
+          ("icxManagementModule", 20))
     )
 
 
@@ -6431,7 +6485,7 @@ fdryLicenseEntry = _FdryLicenseEntry_Object(
 fdryLicenseEntry.setIndexNames(
     (0, "FOUNDRY-SN-AGENT-MIB", "fdryLicensePackageName"),
     (0, "FOUNDRY-SN-AGENT-MIB", "fdryLicenseLid"),
-    (1, "FOUNDRY-SN-AGENT-MIB", "fdryLicenseHash"),
+    (0, "FOUNDRY-SN-AGENT-MIB", "fdryLicenseHash"),
 )
 if mibBuilder.loadTexts:
     fdryLicenseEntry.setStatus("current")
@@ -6604,14 +6658,16 @@ class _FdryLicenseTrialState_Type(Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("invalid", 1),
           ("unused", 2),
           ("active", 3),
-          ("expired", 4))
+          ("expired", 4),
+          ("duplicated", 5))
     )
 
 
@@ -6644,353 +6700,286 @@ if mibBuilder.loadTexts:
     fdryLicenseSlot.setStatus("current")
 
 
-class _FdryLicensedFeatureInfo_Type(Bits):
-    """Custom type fdryLicensedFeatureInfo based on Bits"""
-    namedValues = NamedValues(
-        *(("ospf", 0),
-          ("isis", 1),
-          ("bgp", 2),
-          ("mpls", 3))
-    )
-
-_FdryLicensedFeatureInfo_Type.__name__ = "Bits"
-_FdryLicensedFeatureInfo_Object = MibScalar
-fdryLicensedFeatureInfo = _FdryLicensedFeatureInfo_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 2),
-    _FdryLicensedFeatureInfo_Type()
-)
-fdryLicensedFeatureInfo.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    fdryLicensedFeatureInfo.setStatus("current")
-_BrcdSw_ObjectIdentity = ObjectIdentity
-brcdSw = _BrcdSw_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16)
-)
-_BrcdSwPackageGroup_ObjectIdentity = ObjectIdentity
-brcdSwPackageGroup = _BrcdSwPackageGroup_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1)
-)
-_BrcdSwPackageUpgrade_ObjectIdentity = ObjectIdentity
-brcdSwPackageUpgrade = _BrcdSwPackageUpgrade_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1)
-)
-
-
-class _BrcdSwPackageFname_Type(DisplayString):
-    """Custom type brcdSwPackageFname based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 128),
-    )
-
-
-_BrcdSwPackageFname_Type.__name__ = "DisplayString"
-_BrcdSwPackageFname_Object = MibScalar
-brcdSwPackageFname = _BrcdSwPackageFname_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 1),
-    _BrcdSwPackageFname_Type()
-)
-brcdSwPackageFname.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    brcdSwPackageFname.setStatus("current")
-
-
-class _BrcdSwPackageLoad_Type(Integer32):
-    """Custom type brcdSwPackageLoad based on Integer32"""
+class _FdryLicenseMode_Type(Integer32):
+    """Custom type fdryLicenseMode based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2,
-              3,
-              4,
-              5)
+              2)
         )
     )
     namedValues = NamedValues(
-        *(("none", 1),
-          ("tftpToPrimary", 2),
-          ("tftpToSecondary", 3),
-          ("tftpToMgmtModulePrimaryIntfModuleSecondary", 4),
-          ("tftpToMgmtModuleSecondaryIntfModulePrimary", 5))
+        *(("nodeLocked", 1),
+          ("nonNodeLocked", 2))
     )
 
 
-_BrcdSwPackageLoad_Type.__name__ = "Integer32"
-_BrcdSwPackageLoad_Object = MibScalar
-brcdSwPackageLoad = _BrcdSwPackageLoad_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 2),
-    _BrcdSwPackageLoad_Type()
+_FdryLicenseMode_Type.__name__ = "Integer32"
+_FdryLicenseMode_Object = MibTableColumn
+fdryLicenseMode = _FdryLicenseMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 1, 1, 12),
+    _FdryLicenseMode_Type()
 )
-brcdSwPackageLoad.setMaxAccess("read-write")
+fdryLicenseMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwPackageLoad.setStatus("current")
+    fdryLicenseMode.setStatus("current")
+_FdryLicenseSerialNumber_Type = DisplayString
+_FdryLicenseSerialNumber_Object = MibTableColumn
+fdryLicenseSerialNumber = _FdryLicenseSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 1, 1, 13),
+    _FdryLicenseSerialNumber_Type()
+)
+fdryLicenseSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fdryLicenseSerialNumber.setStatus("current")
+_FdryLicenseCapacity_Type = Integer32
+_FdryLicenseCapacity_Object = MibTableColumn
+fdryLicenseCapacity = _FdryLicenseCapacity_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 1, 1, 14),
+    _FdryLicenseCapacity_Type()
+)
+fdryLicenseCapacity.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fdryLicenseCapacity.setStatus("current")
+_BrcdPortLicenseTable_Object = MibTable
+brcdPortLicenseTable = _BrcdPortLicenseTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 3)
+)
+if mibBuilder.loadTexts:
+    brcdPortLicenseTable.setStatus("current")
+_BrcdPortLicenseEntry_Object = MibTableRow
+brcdPortLicenseEntry = _BrcdPortLicenseEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 3, 1)
+)
+brcdPortLicenseEntry.setIndexNames(
+    (0, "FOUNDRY-SN-AGENT-MIB", "brcdPortLicenseIndex"),
+)
+if mibBuilder.loadTexts:
+    brcdPortLicenseEntry.setStatus("current")
+_BrcdPortLicenseIndex_Type = InterfaceIndex
+_BrcdPortLicenseIndex_Object = MibTableColumn
+brcdPortLicenseIndex = _BrcdPortLicenseIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 3, 1, 1),
+    _BrcdPortLicenseIndex_Type()
+)
+brcdPortLicenseIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdPortLicenseIndex.setStatus("current")
 
 
-class _BrcdSwPackageLoadStatus_Type(Integer32):
-    """Custom type brcdSwPackageLoadStatus based on Integer32"""
+class _BrcdPortLicenseStatus_Type(Integer32):
+    """Custom type brcdPortLicenseStatus based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              17,
-              18,
-              19,
-              20,
-              21,
-              22,
-              23,
-              24,
-              25)
+              2)
         )
     )
     namedValues = NamedValues(
-        *(("normal", 1),
-          ("started", 2),
-          ("internalError", 3),
-          ("manifestFileDownloadError", 4),
-          ("manifestFileValidationError", 5),
-          ("downloadingManagementModuleBoot", 6),
-          ("downloadingManagementModuleMonitor", 7),
-          ("downloadingManagementModuleApplication", 8),
-          ("downloadingInterfaceModuleBoot", 9),
-          ("downloadingInterfaceModuleMonitor", 10),
-          ("downloadingInterfaceModuleApplication", 11),
-          ("downloadingInterfaceModuleFpga", 12),
-          ("downloadingFpgaMBridge", 13),
-          ("downloadingFpgaSBridge", 14),
-          ("downloadingFpgaHBridge", 15),
-          ("upgradingManagementModuleBoot", 16),
-          ("upgradingManagementModuleMonitor", 17),
-          ("upgradingManagementModuleApplication", 18),
-          ("upgradingInterfaceModuleBoot", 19),
-          ("upgradingInterfaceModuleMonitor", 20),
-          ("upgradingInterfaceModuleApplication", 21),
-          ("upgradingInterfaceModuleFpga", 22),
-          ("upgradingFpgaMBridge", 23),
-          ("upgradingFpgaSBridge", 24),
-          ("upgradingFpgaHBridge", 25))
+        *(("validLic", 1),
+          ("noLic", 2))
     )
 
 
-_BrcdSwPackageLoadStatus_Type.__name__ = "Integer32"
-_BrcdSwPackageLoadStatus_Object = MibScalar
-brcdSwPackageLoadStatus = _BrcdSwPackageLoadStatus_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 3),
-    _BrcdSwPackageLoadStatus_Type()
+_BrcdPortLicenseStatus_Type.__name__ = "Integer32"
+_BrcdPortLicenseStatus_Object = MibTableColumn
+brcdPortLicenseStatus = _BrcdPortLicenseStatus_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 3, 1, 2),
+    _BrcdPortLicenseStatus_Type()
 )
-brcdSwPackageLoadStatus.setMaxAccess("read-only")
+brcdPortLicenseStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwPackageLoadStatus.setStatus("current")
-
-
-class _BrcdSwPackageUpgradeAllImages_Type(TruthValue):
-    """Custom type brcdSwPackageUpgradeAllImages based on TruthValue"""
-    defaultValue = 2
-
-
-_BrcdSwPackageUpgradeAllImages_Type.__name__ = "TruthValue"
-_BrcdSwPackageUpgradeAllImages_Object = MibScalar
-brcdSwPackageUpgradeAllImages = _BrcdSwPackageUpgradeAllImages_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 4),
-    _BrcdSwPackageUpgradeAllImages_Type()
-)
-brcdSwPackageUpgradeAllImages.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeAllImages.setStatus("current")
-_BrcdSwPackageUpgradeResultTable_Object = MibTable
-brcdSwPackageUpgradeResultTable = _BrcdSwPackageUpgradeResultTable_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5)
+    brcdPortLicenseStatus.setStatus("current")
+_SnSAULicenseUnitTable_Object = MibTable
+snSAULicenseUnitTable = _SnSAULicenseUnitTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4)
 )
 if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultTable.setStatus("current")
-_BrcdSwPackageUpgradeResultEntry_Object = MibTableRow
-brcdSwPackageUpgradeResultEntry = _BrcdSwPackageUpgradeResultEntry_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5, 1)
+    snSAULicenseUnitTable.setStatus("current")
+_SnSAULicenseUnitEntry_Object = MibTableRow
+snSAULicenseUnitEntry = _SnSAULicenseUnitEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1)
 )
-brcdSwPackageUpgradeResultEntry.setIndexNames(
-    (0, "FOUNDRY-SN-AGENT-MIB", "brcdSwPackageUpgradeResultIndex"),
+snSAULicenseUnitEntry.setIndexNames(
+    (0, "FOUNDRY-SN-AGENT-MIB", "snSAULicenseUnitIndex"),
 )
 if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultEntry.setStatus("current")
-_BrcdSwPackageUpgradeResultIndex_Type = Unsigned32
-_BrcdSwPackageUpgradeResultIndex_Object = MibTableColumn
-brcdSwPackageUpgradeResultIndex = _BrcdSwPackageUpgradeResultIndex_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5, 1, 1),
-    _BrcdSwPackageUpgradeResultIndex_Type()
+    snSAULicenseUnitEntry.setStatus("current")
+_SnSAULicenseUnitIndex_Type = Integer32
+_SnSAULicenseUnitIndex_Object = MibTableColumn
+snSAULicenseUnitIndex = _SnSAULicenseUnitIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 1),
+    _SnSAULicenseUnitIndex_Type()
 )
-brcdSwPackageUpgradeResultIndex.setMaxAccess("not-accessible")
+snSAULicenseUnitIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultIndex.setStatus("current")
-_BrcdSwPackageUpgradeResultImageType_Type = BrcdImageType
-_BrcdSwPackageUpgradeResultImageType_Object = MibTableColumn
-brcdSwPackageUpgradeResultImageType = _BrcdSwPackageUpgradeResultImageType_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5, 1, 2),
-    _BrcdSwPackageUpgradeResultImageType_Type()
+    snSAULicenseUnitIndex.setStatus("current")
+_SnSAULicensePackageName_Type = DisplayString
+_SnSAULicensePackageName_Object = MibTableColumn
+snSAULicensePackageName = _SnSAULicensePackageName_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 2),
+    _SnSAULicensePackageName_Type()
 )
-brcdSwPackageUpgradeResultImageType.setMaxAccess("read-only")
+snSAULicensePackageName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultImageType.setStatus("current")
+    snSAULicensePackageName.setStatus("current")
 
 
-class _BrcdSwPackageUpgradeResultStatus_Type(Integer32):
-    """Custom type brcdSwPackageUpgradeResultStatus based on Integer32"""
+class _SnSAUIsPremLicensePresent_Type(Integer32):
+    """Custom type snSAUIsPremLicensePresent based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(1,
-              2,
-              3)
+            *(0,
+              1,
+              2)
         )
     )
     namedValues = NamedValues(
-        *(("ok", 1),
-          ("downloadFailed", 2),
-          ("installFailed", 3))
+        *(("none", 0),
+          ("yes", 1),
+          ("no", 2))
     )
 
 
-_BrcdSwPackageUpgradeResultStatus_Type.__name__ = "Integer32"
-_BrcdSwPackageUpgradeResultStatus_Object = MibTableColumn
-brcdSwPackageUpgradeResultStatus = _BrcdSwPackageUpgradeResultStatus_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5, 1, 3),
-    _BrcdSwPackageUpgradeResultStatus_Type()
+_SnSAUIsPremLicensePresent_Type.__name__ = "Integer32"
+_SnSAUIsPremLicensePresent_Object = MibTableColumn
+snSAUIsPremLicensePresent = _SnSAUIsPremLicensePresent_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 3),
+    _SnSAUIsPremLicensePresent_Type()
 )
-brcdSwPackageUpgradeResultStatus.setMaxAccess("read-only")
+snSAUIsPremLicensePresent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultStatus.setStatus("current")
-_BrcdSwPackageUpgradeResultTimeStamp_Type = TimeStamp
-_BrcdSwPackageUpgradeResultTimeStamp_Object = MibTableColumn
-brcdSwPackageUpgradeResultTimeStamp = _BrcdSwPackageUpgradeResultTimeStamp_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5, 1, 4),
-    _BrcdSwPackageUpgradeResultTimeStamp_Type()
-)
-brcdSwPackageUpgradeResultTimeStamp.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultTimeStamp.setStatus("current")
+    snSAUIsPremLicensePresent.setStatus("current")
 
 
-class _BrcdSwPackageUpgradeResultDescription_Type(DisplayString):
-    """Custom type brcdSwPackageUpgradeResultDescription based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 255),
-    )
-
-
-_BrcdSwPackageUpgradeResultDescription_Type.__name__ = "DisplayString"
-_BrcdSwPackageUpgradeResultDescription_Object = MibTableColumn
-brcdSwPackageUpgradeResultDescription = _BrcdSwPackageUpgradeResultDescription_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 1, 5, 1, 5),
-    _BrcdSwPackageUpgradeResultDescription_Type()
-)
-brcdSwPackageUpgradeResultDescription.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdSwPackageUpgradeResultDescription.setStatus("current")
-_BrcdSwIntfModAutoUpgrade_ObjectIdentity = ObjectIdentity
-brcdSwIntfModAutoUpgrade = _BrcdSwIntfModAutoUpgrade_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 2)
-)
-
-
-class _BrcdSwIntfModAutoUpgradeMode_Type(Integer32):
-    """Custom type brcdSwIntfModAutoUpgradeMode based on Integer32"""
+class _SnSAUIsPoDLicensePresent_Type(Integer32):
+    """Custom type snSAUIsPoDLicensePresent based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(1,
-              2,
-              3,
-              4,
-              5)
+            *(0,
+              1,
+              2)
         )
     )
     namedValues = NamedValues(
-        *(("unknown", 1),
-          ("disabled", 2),
-          ("tftp", 3),
-          ("slot1", 4),
-          ("slot2", 5))
+        *(("none", 0),
+          ("yes", 1),
+          ("no", 2))
     )
 
 
-_BrcdSwIntfModAutoUpgradeMode_Type.__name__ = "Integer32"
-_BrcdSwIntfModAutoUpgradeMode_Object = MibScalar
-brcdSwIntfModAutoUpgradeMode = _BrcdSwIntfModAutoUpgradeMode_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 2, 1),
-    _BrcdSwIntfModAutoUpgradeMode_Type()
+_SnSAUIsPoDLicensePresent_Type.__name__ = "Integer32"
+_SnSAUIsPoDLicensePresent_Object = MibTableColumn
+snSAUIsPoDLicensePresent = _SnSAUIsPoDLicensePresent_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 4),
+    _SnSAUIsPoDLicensePresent_Type()
 )
-brcdSwIntfModAutoUpgradeMode.setMaxAccess("read-write")
+snSAUIsPoDLicensePresent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwIntfModAutoUpgradeMode.setStatus("current")
-_BrcdSwIntfModAutoUpgradeTftpAddrType_Type = InetAddressType
-_BrcdSwIntfModAutoUpgradeTftpAddrType_Object = MibScalar
-brcdSwIntfModAutoUpgradeTftpAddrType = _BrcdSwIntfModAutoUpgradeTftpAddrType_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 2, 2),
-    _BrcdSwIntfModAutoUpgradeTftpAddrType_Type()
-)
-brcdSwIntfModAutoUpgradeTftpAddrType.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    brcdSwIntfModAutoUpgradeTftpAddrType.setStatus("current")
-_BrcdSwIntfModAutoUpgradeTftpAddr_Type = InetAddress
-_BrcdSwIntfModAutoUpgradeTftpAddr_Object = MibScalar
-brcdSwIntfModAutoUpgradeTftpAddr = _BrcdSwIntfModAutoUpgradeTftpAddr_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 2, 3),
-    _BrcdSwIntfModAutoUpgradeTftpAddr_Type()
-)
-brcdSwIntfModAutoUpgradeTftpAddr.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    brcdSwIntfModAutoUpgradeTftpAddr.setStatus("current")
+    snSAUIsPoDLicensePresent.setStatus("current")
 
 
-class _BrcdSwIntfModAutoUpgradeSrcPath_Type(DisplayString):
-    """Custom type brcdSwIntfModAutoUpgradeSrcPath based on DisplayString"""
-    subtypeSpec = DisplayString.subtypeSpec
+class _SnSAUPoDLicensedSpeed_Type(Integer32):
+    """Custom type snSAUPoDLicensedSpeed based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 128),
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("speed10G", 1))
     )
 
 
-_BrcdSwIntfModAutoUpgradeSrcPath_Type.__name__ = "DisplayString"
-_BrcdSwIntfModAutoUpgradeSrcPath_Object = MibScalar
-brcdSwIntfModAutoUpgradeSrcPath = _BrcdSwIntfModAutoUpgradeSrcPath_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 2, 4),
-    _BrcdSwIntfModAutoUpgradeSrcPath_Type()
+_SnSAUPoDLicensedSpeed_Type.__name__ = "Integer32"
+_SnSAUPoDLicensedSpeed_Object = MibTableColumn
+snSAUPoDLicensedSpeed = _SnSAUPoDLicensedSpeed_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 5),
+    _SnSAUPoDLicensedSpeed_Type()
 )
-brcdSwIntfModAutoUpgradeSrcPath.setMaxAccess("read-write")
+snSAUPoDLicensedSpeed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwIntfModAutoUpgradeSrcPath.setStatus("current")
-
-
-class _BrcdSwIntfModAutoUpgradeAllImages_Type(TruthValue):
-    """Custom type brcdSwIntfModAutoUpgradeAllImages based on TruthValue"""
-    defaultValue = 2
-
-
-_BrcdSwIntfModAutoUpgradeAllImages_Type.__name__ = "TruthValue"
-_BrcdSwIntfModAutoUpgradeAllImages_Object = MibScalar
-brcdSwIntfModAutoUpgradeAllImages = _BrcdSwIntfModAutoUpgradeAllImages_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 16, 1, 2, 5),
-    _BrcdSwIntfModAutoUpgradeAllImages_Type()
+    snSAUPoDLicensedSpeed.setStatus("current")
+_SnSAUPoDLicensedPorts_Type = Integer32
+_SnSAUPoDLicensedPorts_Object = MibTableColumn
+snSAUPoDLicensedPorts = _SnSAUPoDLicensedPorts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 6),
+    _SnSAUPoDLicensedPorts_Type()
 )
-brcdSwIntfModAutoUpgradeAllImages.setMaxAccess("read-write")
+snSAUPoDLicensedPorts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    brcdSwIntfModAutoUpgradeAllImages.setStatus("current")
+    snSAUPoDLicensedPorts.setStatus("current")
+
+
+class _SnSAUIsMACSecLicensePresent_Type(Integer32):
+    """Custom type snSAUIsMACSecLicensePresent based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("yes", 1),
+          ("no", 2))
+    )
+
+
+_SnSAUIsMACSecLicensePresent_Type.__name__ = "Integer32"
+_SnSAUIsMACSecLicensePresent_Object = MibTableColumn
+snSAUIsMACSecLicensePresent = _SnSAUIsMACSecLicensePresent_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 7),
+    _SnSAUIsMACSecLicensePresent_Type()
+)
+snSAUIsMACSecLicensePresent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSAUIsMACSecLicensePresent.setStatus("current")
+_SnSAUPremSerialNumber_Type = DisplayString
+_SnSAUPremSerialNumber_Object = MibTableColumn
+snSAUPremSerialNumber = _SnSAUPremSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 8),
+    _SnSAUPremSerialNumber_Type()
+)
+snSAUPremSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSAUPremSerialNumber.setStatus("current")
+_SnSAUPoDSerialNumber_Type = DisplayString
+_SnSAUPoDSerialNumber_Object = MibTableColumn
+snSAUPoDSerialNumber = _SnSAUPoDSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 9),
+    _SnSAUPoDSerialNumber_Type()
+)
+snSAUPoDSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSAUPoDSerialNumber.setStatus("current")
+_SnSAUMACsecSerialNumber_Type = DisplayString
+_SnSAUMACsecSerialNumber_Object = MibTableColumn
+snSAUMACsecSerialNumber = _SnSAUMACsecSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 10),
+    _SnSAUMACsecSerialNumber_Type()
+)
+snSAUMACsecSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSAUMACsecSerialNumber.setStatus("current")
+_SnSAUICX7150SerialNumber_Type = DisplayString
+_SnSAUICX7150SerialNumber_Object = MibTableColumn
+snSAUICX7150SerialNumber = _SnSAUICX7150SerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 2, 15, 4, 1, 11),
+    _SnSAUICX7150SerialNumber_Type()
+)
+snSAUICX7150SerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSAUICX7150SerialNumber.setStatus("current")
 _SnStackGen_ObjectIdentity = ObjectIdentity
 snStackGen = _SnStackGen_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 5, 1)
@@ -7357,7 +7346,6 @@ mibBuilder.exportSymbols(
     "FOUNDRY-SN-AGENT-MIB",
     **{"MacAddress": MacAddress,
        "DisplayString": DisplayString,
-       "BrcdImageType": BrcdImageType,
        "snChasGen": snChasGen,
        "snChasType": snChasType,
        "snChasSerNum": snChasSerNum,
@@ -7385,9 +7373,7 @@ mibBuilder.exportSymbols(
        "snChasNumSlots": snChasNumSlots,
        "snChasArchitectureType": snChasArchitectureType,
        "snChasProductType": snChasProductType,
-       "snChasSystemMode": snChasSystemMode,
-       "snChasFactoryPartNumber": snChasFactoryPartNumber,
-       "snChasFactorySerialNumber": snChasFactorySerialNumber,
+       "snChasGlobalIgnoreShutdownTemperature": snChasGlobalIgnoreShutdownTemperature,
        "snChasPwr": snChasPwr,
        "snChasPwrSupplyTable": snChasPwrSupplyTable,
        "snChasPwrSupplyEntry": snChasPwrSupplyEntry,
@@ -7422,6 +7408,8 @@ mibBuilder.exportSymbols(
        "snChasUnitWarningTemperature": snChasUnitWarningTemperature,
        "snChasUnitShutdownTemperature": snChasUnitShutdownTemperature,
        "snChasUnitPartNum": snChasUnitPartNum,
+       "snChasUnitIgnoreShutdownTemperature": snChasUnitIgnoreShutdownTemperature,
+       "snChasUnitFanless": snChasUnitFanless,
        "snAgentGbl": snAgentGbl,
        "snAgReload": snAgReload,
        "snAgEraseNVRAM": snAgEraseNVRAM,
@@ -7487,7 +7475,9 @@ mibBuilder.exportSymbols(
        "snAgWebMgmtServerTcpPort": snAgWebMgmtServerTcpPort,
        "snAgTftpServerAddrType": snAgTftpServerAddrType,
        "snAgTftpServerAddr": snAgTftpServerAddr,
-       "snAgGblDeleteFirstBeforeDownload": snAgGblDeleteFirstBeforeDownload,
+       "snAgGblPasswordCheckMode": snAgGblPasswordCheckMode,
+       "snAgGblEnableTelnetAuthentication": snAgGblEnableTelnetAuthentication,
+       "snAgGblManager2FactorAuthentication": snAgGblManager2FactorAuthentication,
        "snAgentBrd": snAgentBrd,
        "snAgentBrdTable": snAgentBrdTable,
        "snAgentBrdEntry": snAgentBrdEntry,
@@ -7518,7 +7508,6 @@ mibBuilder.exportSymbols(
        "snAgentBrdMemoryAvailable": snAgentBrdMemoryAvailable,
        "snAgentBrdSerialNumber": snAgentBrdSerialNumber,
        "snAgentBrdPartNumber": snAgentBrdPartNumber,
-       "snAgentBrdMemoryUtil100thPercent": snAgentBrdMemoryUtil100thPercent,
        "snAgentBrd2Table": snAgentBrd2Table,
        "snAgentBrd2Entry": snAgentBrd2Entry,
        "snAgentBrd2Unit": snAgentBrd2Unit,
@@ -7758,27 +7747,26 @@ mibBuilder.exportSymbols(
        "fdryLicenseTrialState": fdryLicenseTrialState,
        "fdryLicenseVendorInfo": fdryLicenseVendorInfo,
        "fdryLicenseSlot": fdryLicenseSlot,
-       "fdryLicensedFeatureInfo": fdryLicensedFeatureInfo,
-       "brcdSw": brcdSw,
-       "brcdSwPackageGroup": brcdSwPackageGroup,
-       "brcdSwPackageUpgrade": brcdSwPackageUpgrade,
-       "brcdSwPackageFname": brcdSwPackageFname,
-       "brcdSwPackageLoad": brcdSwPackageLoad,
-       "brcdSwPackageLoadStatus": brcdSwPackageLoadStatus,
-       "brcdSwPackageUpgradeAllImages": brcdSwPackageUpgradeAllImages,
-       "brcdSwPackageUpgradeResultTable": brcdSwPackageUpgradeResultTable,
-       "brcdSwPackageUpgradeResultEntry": brcdSwPackageUpgradeResultEntry,
-       "brcdSwPackageUpgradeResultIndex": brcdSwPackageUpgradeResultIndex,
-       "brcdSwPackageUpgradeResultImageType": brcdSwPackageUpgradeResultImageType,
-       "brcdSwPackageUpgradeResultStatus": brcdSwPackageUpgradeResultStatus,
-       "brcdSwPackageUpgradeResultTimeStamp": brcdSwPackageUpgradeResultTimeStamp,
-       "brcdSwPackageUpgradeResultDescription": brcdSwPackageUpgradeResultDescription,
-       "brcdSwIntfModAutoUpgrade": brcdSwIntfModAutoUpgrade,
-       "brcdSwIntfModAutoUpgradeMode": brcdSwIntfModAutoUpgradeMode,
-       "brcdSwIntfModAutoUpgradeTftpAddrType": brcdSwIntfModAutoUpgradeTftpAddrType,
-       "brcdSwIntfModAutoUpgradeTftpAddr": brcdSwIntfModAutoUpgradeTftpAddr,
-       "brcdSwIntfModAutoUpgradeSrcPath": brcdSwIntfModAutoUpgradeSrcPath,
-       "brcdSwIntfModAutoUpgradeAllImages": brcdSwIntfModAutoUpgradeAllImages,
+       "fdryLicenseMode": fdryLicenseMode,
+       "fdryLicenseSerialNumber": fdryLicenseSerialNumber,
+       "fdryLicenseCapacity": fdryLicenseCapacity,
+       "brcdPortLicenseTable": brcdPortLicenseTable,
+       "brcdPortLicenseEntry": brcdPortLicenseEntry,
+       "brcdPortLicenseIndex": brcdPortLicenseIndex,
+       "brcdPortLicenseStatus": brcdPortLicenseStatus,
+       "snSAULicenseUnitTable": snSAULicenseUnitTable,
+       "snSAULicenseUnitEntry": snSAULicenseUnitEntry,
+       "snSAULicenseUnitIndex": snSAULicenseUnitIndex,
+       "snSAULicensePackageName": snSAULicensePackageName,
+       "snSAUIsPremLicensePresent": snSAUIsPremLicensePresent,
+       "snSAUIsPoDLicensePresent": snSAUIsPoDLicensePresent,
+       "snSAUPoDLicensedSpeed": snSAUPoDLicensedSpeed,
+       "snSAUPoDLicensedPorts": snSAUPoDLicensedPorts,
+       "snSAUIsMACSecLicensePresent": snSAUIsMACSecLicensePresent,
+       "snSAUPremSerialNumber": snSAUPremSerialNumber,
+       "snSAUPoDSerialNumber": snSAUPoDSerialNumber,
+       "snSAUMACsecSerialNumber": snSAUMACsecSerialNumber,
+       "snSAUICX7150SerialNumber": snSAUICX7150SerialNumber,
        "snStackGen": snStackGen,
        "snStackPriSwitchMode": snStackPriSwitchMode,
        "snStackMaxSecSwitch": snStackMaxSecSwitch,

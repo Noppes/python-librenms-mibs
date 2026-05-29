@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-IP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:05 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -77,8 +74,10 @@ if 'mibBuilder' not in globals():
     "InterfaceIndexOrZero",
     "ifIndex")
 
-(InetAddressType,) = mibBuilder.importSymbols(
+(InetAddress,
+ InetAddressType) = mibBuilder.importSymbols(
     "INET-ADDRESS-MIB",
+    "InetAddress",
     "InetAddressType")
 
 (ModuleCompliance,
@@ -139,8 +138,8 @@ snIp = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snIp.setRevisions(
-        ("2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -482,23 +481,15 @@ snRtIpStaticRouteEntry = _SnRtIpStaticRouteEntry_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1)
 )
 snRtIpStaticRouteEntry.setIndexNames(
-    (0, "FOUNDRY-SN-IP-MIB", "snRtIpStaticRouteIndex"),
+    (0, "FOUNDRY-SN-IP-MIB", "snRtIpStaticRouteDest"),
+    (0, "FOUNDRY-SN-IP-MIB", "snRtIpStaticRouteMask"),
 )
 if mibBuilder.loadTexts:
     snRtIpStaticRouteEntry.setStatus("current")
-_SnRtIpStaticRouteIndex_Type = Integer32
-_SnRtIpStaticRouteIndex_Object = MibTableColumn
-snRtIpStaticRouteIndex = _SnRtIpStaticRouteIndex_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 1),
-    _SnRtIpStaticRouteIndex_Type()
-)
-snRtIpStaticRouteIndex.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snRtIpStaticRouteIndex.setStatus("current")
 _SnRtIpStaticRouteDest_Type = IpAddress
 _SnRtIpStaticRouteDest_Object = MibTableColumn
 snRtIpStaticRouteDest = _SnRtIpStaticRouteDest_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 2),
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 1),
     _SnRtIpStaticRouteDest_Type()
 )
 snRtIpStaticRouteDest.setMaxAccess("read-write")
@@ -507,7 +498,7 @@ if mibBuilder.loadTexts:
 _SnRtIpStaticRouteMask_Type = IpAddress
 _SnRtIpStaticRouteMask_Object = MibTableColumn
 snRtIpStaticRouteMask = _SnRtIpStaticRouteMask_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 3),
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 2),
     _SnRtIpStaticRouteMask_Type()
 )
 snRtIpStaticRouteMask.setMaxAccess("read-write")
@@ -516,7 +507,7 @@ if mibBuilder.loadTexts:
 _SnRtIpStaticRouteNextHop_Type = IpAddress
 _SnRtIpStaticRouteNextHop_Object = MibTableColumn
 snRtIpStaticRouteNextHop = _SnRtIpStaticRouteNextHop_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 4),
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 3),
     _SnRtIpStaticRouteNextHop_Type()
 )
 snRtIpStaticRouteNextHop.setMaxAccess("read-write")
@@ -525,7 +516,7 @@ if mibBuilder.loadTexts:
 _SnRtIpStaticRouteMetric_Type = Integer32
 _SnRtIpStaticRouteMetric_Object = MibTableColumn
 snRtIpStaticRouteMetric = _SnRtIpStaticRouteMetric_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 5),
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 4),
     _SnRtIpStaticRouteMetric_Type()
 )
 snRtIpStaticRouteMetric.setMaxAccess("read-write")
@@ -534,7 +525,7 @@ if mibBuilder.loadTexts:
 _SnRtIpStaticRouteRowStatus_Type = RowSts
 _SnRtIpStaticRouteRowStatus_Object = MibTableColumn
 snRtIpStaticRouteRowStatus = _SnRtIpStaticRouteRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 6),
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 5),
     _SnRtIpStaticRouteRowStatus_Type()
 )
 snRtIpStaticRouteRowStatus.setMaxAccess("read-write")
@@ -553,12 +544,21 @@ class _SnRtIpStaticRouteDistance_Type(Integer32):
 _SnRtIpStaticRouteDistance_Type.__name__ = "Integer32"
 _SnRtIpStaticRouteDistance_Object = MibTableColumn
 snRtIpStaticRouteDistance = _SnRtIpStaticRouteDistance_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 7),
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 6),
     _SnRtIpStaticRouteDistance_Type()
 )
 snRtIpStaticRouteDistance.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snRtIpStaticRouteDistance.setStatus("current")
+_SnRtIpStaticRouteOutgoingInterface_Type = InterfaceIndexOrZero
+_SnRtIpStaticRouteOutgoingInterface_Object = MibTableColumn
+snRtIpStaticRouteOutgoingInterface = _SnRtIpStaticRouteOutgoingInterface_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 2, 1, 7),
+    _SnRtIpStaticRouteOutgoingInterface_Type()
+)
+snRtIpStaticRouteOutgoingInterface.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snRtIpStaticRouteOutgoingInterface.setStatus("current")
 _SnRtIpFilterTable_Object = MibTable
 snRtIpFilterTable = _SnRtIpFilterTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 3)
@@ -1441,6 +1441,137 @@ snRtUdpIfHelperRowStatus = _SnRtUdpIfHelperRowStatus_Object(
 snRtUdpIfHelperRowStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snRtUdpIfHelperRowStatus.setStatus("current")
+_SnRtIpIfHelperTable_Object = MibTable
+snRtIpIfHelperTable = _SnRtIpIfHelperTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3)
+)
+if mibBuilder.loadTexts:
+    snRtIpIfHelperTable.setStatus("current")
+_SnRtIpIfHelperEntry_Object = MibTableRow
+snRtIpIfHelperEntry = _SnRtIpIfHelperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3, 1)
+)
+snRtIpIfHelperEntry.setIndexNames(
+    (0, "FOUNDRY-SN-IP-MIB", "snRtIpIfHelperIfIndex"),
+    (0, "FOUNDRY-SN-IP-MIB", "snRtIpIfHelperAddrIndex"),
+)
+if mibBuilder.loadTexts:
+    snRtIpIfHelperEntry.setStatus("current")
+_SnRtIpIfHelperIfIndex_Type = InterfaceIndex
+_SnRtIpIfHelperIfIndex_Object = MibTableColumn
+snRtIpIfHelperIfIndex = _SnRtIpIfHelperIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3, 1, 1),
+    _SnRtIpIfHelperIfIndex_Type()
+)
+snRtIpIfHelperIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snRtIpIfHelperIfIndex.setStatus("current")
+
+
+class _SnRtIpIfHelperAddrIndex_Type(Integer32):
+    """Custom type snRtIpIfHelperAddrIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_SnRtIpIfHelperAddrIndex_Type.__name__ = "Integer32"
+_SnRtIpIfHelperAddrIndex_Object = MibTableColumn
+snRtIpIfHelperAddrIndex = _SnRtIpIfHelperAddrIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3, 1, 2),
+    _SnRtIpIfHelperAddrIndex_Type()
+)
+snRtIpIfHelperAddrIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snRtIpIfHelperAddrIndex.setStatus("current")
+_SnRtIpIfHelperAddr_Type = IpAddress
+_SnRtIpIfHelperAddr_Object = MibTableColumn
+snRtIpIfHelperAddr = _SnRtIpIfHelperAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3, 1, 3),
+    _SnRtIpIfHelperAddr_Type()
+)
+snRtIpIfHelperAddr.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snRtIpIfHelperAddr.setStatus("current")
+
+
+class _SnRtIpIfHelperAddrType_Type(Integer32):
+    """Custom type snRtIpIfHelperAddrType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unicast", 1),
+          ("broadcast", 2))
+    )
+
+
+_SnRtIpIfHelperAddrType_Type.__name__ = "Integer32"
+_SnRtIpIfHelperAddrType_Object = MibTableColumn
+snRtIpIfHelperAddrType = _SnRtIpIfHelperAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3, 1, 4),
+    _SnRtIpIfHelperAddrType_Type()
+)
+snRtIpIfHelperAddrType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snRtIpIfHelperAddrType.setStatus("current")
+_SnRtIpIfHelperRowStatus_Type = RowSts
+_SnRtIpIfHelperRowStatus_Object = MibTableColumn
+snRtIpIfHelperRowStatus = _SnRtIpIfHelperRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 3, 1, 5),
+    _SnRtIpIfHelperRowStatus_Type()
+)
+snRtIpIfHelperRowStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snRtIpIfHelperRowStatus.setStatus("current")
+_SnRtIpv6IfHelperTable_Object = MibTable
+snRtIpv6IfHelperTable = _SnRtIpv6IfHelperTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 4)
+)
+if mibBuilder.loadTexts:
+    snRtIpv6IfHelperTable.setStatus("current")
+_SnRtIpv6IfHelperEntry_Object = MibTableRow
+snRtIpv6IfHelperEntry = _SnRtIpv6IfHelperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 4, 1)
+)
+snRtIpv6IfHelperEntry.setIndexNames(
+    (0, "FOUNDRY-SN-IP-MIB", "snRtIpv6IfHelperIfIndex"),
+    (0, "FOUNDRY-SN-IP-MIB", "snRtIpv6IfHelperAddr"),
+)
+if mibBuilder.loadTexts:
+    snRtIpv6IfHelperEntry.setStatus("current")
+_SnRtIpv6IfHelperIfIndex_Type = InterfaceIndex
+_SnRtIpv6IfHelperIfIndex_Object = MibTableColumn
+snRtIpv6IfHelperIfIndex = _SnRtIpv6IfHelperIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 4, 1, 1),
+    _SnRtIpv6IfHelperIfIndex_Type()
+)
+snRtIpv6IfHelperIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snRtIpv6IfHelperIfIndex.setStatus("current")
+_SnRtIpv6IfHelperAddr_Type = InetAddress
+_SnRtIpv6IfHelperAddr_Object = MibTableColumn
+snRtIpv6IfHelperAddr = _SnRtIpv6IfHelperAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 4, 1, 2),
+    _SnRtIpv6IfHelperAddr_Type()
+)
+snRtIpv6IfHelperAddr.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snRtIpv6IfHelperAddr.setStatus("current")
+_SnRtIpv6IfHelperRowStatus_Type = RowSts
+_SnRtIpv6IfHelperRowStatus_Object = MibTableColumn
+snRtIpv6IfHelperRowStatus = _SnRtIpv6IfHelperRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 9, 3, 4, 1, 3),
+    _SnRtIpv6IfHelperRowStatus_Type()
+)
+snRtIpv6IfHelperRowStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snRtIpv6IfHelperRowStatus.setStatus("current")
 _SnRtIpTraceRoute_ObjectIdentity = ObjectIdentity
 snRtIpTraceRoute = _SnRtIpTraceRoute_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 10)
@@ -2975,15 +3106,6 @@ snRtIpPortIfDirBcastFwd = _SnRtIpPortIfDirBcastFwd_Object(
 snRtIpPortIfDirBcastFwd.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snRtIpPortIfDirBcastFwd.setStatus("current")
-_SnRtIpPortConfigIfDonorInterface_Type = InterfaceIndexOrZero
-_SnRtIpPortConfigIfDonorInterface_Object = MibTableColumn
-snRtIpPortConfigIfDonorInterface = _SnRtIpPortConfigIfDonorInterface_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 20, 1, 6),
-    _SnRtIpPortConfigIfDonorInterface_Type()
-)
-snRtIpPortConfigIfDonorInterface.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    snRtIpPortConfigIfDonorInterface.setStatus("current")
 _AgIpPortCounterTable_Object = MibTable
 agIpPortCounterTable = _AgIpPortCounterTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 21)
@@ -5329,7 +5451,7 @@ class _SnPimGraftRetransmitTime_Type(Integer32):
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(10, 3600),
+        ValueRangeConstraint(2, 3600),
     )
 
 
@@ -5350,7 +5472,7 @@ class _SnPimInactivityTime_Type(Integer32):
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(2, 3600),
+        ValueRangeConstraint(10, 3600),
     )
 
 
@@ -6175,13 +6297,13 @@ mibBuilder.exportSymbols(
        "snRtIpSourceRoute": snRtIpSourceRoute,
        "snRtIpStaticRouteTable": snRtIpStaticRouteTable,
        "snRtIpStaticRouteEntry": snRtIpStaticRouteEntry,
-       "snRtIpStaticRouteIndex": snRtIpStaticRouteIndex,
        "snRtIpStaticRouteDest": snRtIpStaticRouteDest,
        "snRtIpStaticRouteMask": snRtIpStaticRouteMask,
        "snRtIpStaticRouteNextHop": snRtIpStaticRouteNextHop,
        "snRtIpStaticRouteMetric": snRtIpStaticRouteMetric,
        "snRtIpStaticRouteRowStatus": snRtIpStaticRouteRowStatus,
        "snRtIpStaticRouteDistance": snRtIpStaticRouteDistance,
+       "snRtIpStaticRouteOutgoingInterface": snRtIpStaticRouteOutgoingInterface,
        "snRtIpFilterTable": snRtIpFilterTable,
        "snRtIpFilterEntry": snRtIpFilterEntry,
        "snRtIpFilterIndex": snRtIpFilterIndex,
@@ -6255,6 +6377,18 @@ mibBuilder.exportSymbols(
        "snRtUdpIfHelperAddr": snRtUdpIfHelperAddr,
        "snRtUdpIfHelperAddrType": snRtUdpIfHelperAddrType,
        "snRtUdpIfHelperRowStatus": snRtUdpIfHelperRowStatus,
+       "snRtIpIfHelperTable": snRtIpIfHelperTable,
+       "snRtIpIfHelperEntry": snRtIpIfHelperEntry,
+       "snRtIpIfHelperIfIndex": snRtIpIfHelperIfIndex,
+       "snRtIpIfHelperAddrIndex": snRtIpIfHelperAddrIndex,
+       "snRtIpIfHelperAddr": snRtIpIfHelperAddr,
+       "snRtIpIfHelperAddrType": snRtIpIfHelperAddrType,
+       "snRtIpIfHelperRowStatus": snRtIpIfHelperRowStatus,
+       "snRtIpv6IfHelperTable": snRtIpv6IfHelperTable,
+       "snRtIpv6IfHelperEntry": snRtIpv6IfHelperEntry,
+       "snRtIpv6IfHelperIfIndex": snRtIpv6IfHelperIfIndex,
+       "snRtIpv6IfHelperAddr": snRtIpv6IfHelperAddr,
+       "snRtIpv6IfHelperRowStatus": snRtIpv6IfHelperRowStatus,
        "snRtIpTraceRoute": snRtIpTraceRoute,
        "snRtIpTraceRouteGeneral": snRtIpTraceRouteGeneral,
        "snRtIpTraceRouteTargetAddr": snRtIpTraceRouteTargetAddr,
@@ -6352,7 +6486,6 @@ mibBuilder.exportSymbols(
        "snRtIpPortIfEncap": snRtIpPortIfEncap,
        "snRtIpPortIfMetric": snRtIpPortIfMetric,
        "snRtIpPortIfDirBcastFwd": snRtIpPortIfDirBcastFwd,
-       "snRtIpPortConfigIfDonorInterface": snRtIpPortConfigIfDonorInterface,
        "agIpPortCounterTable": agIpPortCounterTable,
        "agIpPortCounterEntry": agIpPortCounterEntry,
        "agIpPortCounterIpVersion": agIpPortCounterIpVersion,

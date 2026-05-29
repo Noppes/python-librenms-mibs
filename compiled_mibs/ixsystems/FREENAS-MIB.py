@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ixsystems\FREENAS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:02:10 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,7 @@ freeNas = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     freeNas.setRevisions(
-        ("2017-10-27 00:00",)
+        ("2020-10-20 00:00",)
     )
 
 
@@ -145,15 +142,23 @@ class AlertLevelType(TextualConvention, Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(20,
-              30,
-              50)
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
-        *(("info", 20),
-          ("warning", 30),
-          ("critical", 50))
+        *(("info", 1),
+          ("notice", 2),
+          ("warning", 3),
+          ("error", 4),
+          ("critical", 5),
+          ("alert", 6),
+          ("emergency", 7))
     )
 
 
@@ -620,6 +625,25 @@ zvolAvailable = _ZvolAvailable_Object(
 zvolAvailable.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     zvolAvailable.setStatus("current")
+
+
+class _ZvolReferenced_Type(Integer32):
+    """Custom type zvolReferenced based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_ZvolReferenced_Type.__name__ = "Integer32"
+_ZvolReferenced_Object = MibTableColumn
+zvolReferenced = _ZvolReferenced_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 1, 3, 1, 1, 7),
+    _ZvolReferenced_Type()
+)
+zvolReferenced.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    zvolReferenced.setStatus("current")
 _Arc_ObjectIdentity = ObjectIdentity
 arc = _Arc_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 50536, 1, 4)
@@ -833,6 +857,318 @@ alertMessage = _AlertMessage_Object(
 alertMessage.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alertMessage.setStatus("current")
+_HddTempTable_Object = MibTable
+hddTempTable = _HddTempTable_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 3)
+)
+if mibBuilder.loadTexts:
+    hddTempTable.setStatus("current")
+_HddTempEntry_Object = MibTableRow
+hddTempEntry = _HddTempEntry_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 3, 1)
+)
+hddTempEntry.setIndexNames(
+    (0, "FREENAS-MIB", "hddTempIndex"),
+)
+if mibBuilder.loadTexts:
+    hddTempEntry.setStatus("current")
+
+
+class _HddTempIndex_Type(Integer32):
+    """Custom type hddTempIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_HddTempIndex_Type.__name__ = "Integer32"
+_HddTempIndex_Object = MibTableColumn
+hddTempIndex = _HddTempIndex_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 3, 1, 1),
+    _HddTempIndex_Type()
+)
+hddTempIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hddTempIndex.setStatus("current")
+_HddTempDevice_Type = DisplayString
+_HddTempDevice_Object = MibTableColumn
+hddTempDevice = _HddTempDevice_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 3, 1, 2),
+    _HddTempDevice_Type()
+)
+hddTempDevice.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hddTempDevice.setStatus("current")
+_HddTempValue_Type = Gauge32
+_HddTempValue_Object = MibTableColumn
+hddTempValue = _HddTempValue_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 3, 1, 3),
+    _HddTempValue_Type()
+)
+hddTempValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    hddTempValue.setStatus("current")
+_Iftop_ObjectIdentity = ObjectIdentity
+iftop = _Iftop_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 50536, 4)
+)
+_InterfaceTable_Object = MibTable
+interfaceTable = _InterfaceTable_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 1)
+)
+if mibBuilder.loadTexts:
+    interfaceTable.setStatus("current")
+_InterfaceEntry_Object = MibTableRow
+interfaceEntry = _InterfaceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 1, 1)
+)
+interfaceEntry.setIndexNames(
+    (0, "FREENAS-MIB", "interfaceIndex"),
+)
+if mibBuilder.loadTexts:
+    interfaceEntry.setStatus("current")
+
+
+class _InterfaceIndex_Type(Integer32):
+    """Custom type interfaceIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InterfaceIndex_Type.__name__ = "Integer32"
+_InterfaceIndex_Object = MibTableColumn
+interfaceIndex = _InterfaceIndex_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 1, 1, 1),
+    _InterfaceIndex_Type()
+)
+interfaceIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceIndex.setStatus("current")
+_InterfaceName_Type = DisplayString
+_InterfaceName_Object = MibTableColumn
+interfaceName = _InterfaceName_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 1, 1, 2),
+    _InterfaceName_Type()
+)
+interfaceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceName.setStatus("current")
+_InterfaceTopHostTable_Object = MibTable
+interfaceTopHostTable = _InterfaceTopHostTable_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2)
+)
+if mibBuilder.loadTexts:
+    interfaceTopHostTable.setStatus("current")
+_InterfaceTopHostEntry_Object = MibTableRow
+interfaceTopHostEntry = _InterfaceTopHostEntry_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1)
+)
+interfaceTopHostEntry.setIndexNames(
+    (0, "FREENAS-MIB", "interfaceTopHostIndex"),
+)
+if mibBuilder.loadTexts:
+    interfaceTopHostEntry.setStatus("current")
+
+
+class _InterfaceTopHostIndex_Type(Integer32):
+    """Custom type interfaceTopHostIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InterfaceTopHostIndex_Type.__name__ = "Integer32"
+_InterfaceTopHostIndex_Object = MibTableColumn
+interfaceTopHostIndex = _InterfaceTopHostIndex_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 1),
+    _InterfaceTopHostIndex_Type()
+)
+interfaceTopHostIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceTopHostIndex.setStatus("current")
+_InterfaceTopHostInterfaceName_Type = DisplayString
+_InterfaceTopHostInterfaceName_Object = MibTableColumn
+interfaceTopHostInterfaceName = _InterfaceTopHostInterfaceName_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 2),
+    _InterfaceTopHostInterfaceName_Type()
+)
+interfaceTopHostInterfaceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceTopHostInterfaceName.setStatus("current")
+_InterfaceTopHostLocalAddress_Type = DisplayString
+_InterfaceTopHostLocalAddress_Object = MibTableColumn
+interfaceTopHostLocalAddress = _InterfaceTopHostLocalAddress_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 3),
+    _InterfaceTopHostLocalAddress_Type()
+)
+interfaceTopHostLocalAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceTopHostLocalAddress.setStatus("current")
+
+
+class _InterfaceTopHostLocalPort_Type(Integer32):
+    """Custom type interfaceTopHostLocalPort based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InterfaceTopHostLocalPort_Type.__name__ = "Integer32"
+_InterfaceTopHostLocalPort_Object = MibTableColumn
+interfaceTopHostLocalPort = _InterfaceTopHostLocalPort_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 4),
+    _InterfaceTopHostLocalPort_Type()
+)
+interfaceTopHostLocalPort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceTopHostLocalPort.setStatus("current")
+_InterfaceTopHostRemoteAddress_Type = DisplayString
+_InterfaceTopHostRemoteAddress_Object = MibTableColumn
+interfaceTopHostRemoteAddress = _InterfaceTopHostRemoteAddress_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 5),
+    _InterfaceTopHostRemoteAddress_Type()
+)
+interfaceTopHostRemoteAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceTopHostRemoteAddress.setStatus("current")
+
+
+class _InterfaceTopHostRemotePort_Type(Integer32):
+    """Custom type interfaceTopHostRemotePort based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InterfaceTopHostRemotePort_Type.__name__ = "Integer32"
+_InterfaceTopHostRemotePort_Object = MibTableColumn
+interfaceTopHostRemotePort = _InterfaceTopHostRemotePort_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 6),
+    _InterfaceTopHostRemotePort_Type()
+)
+interfaceTopHostRemotePort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    interfaceTopHostRemotePort.setStatus("current")
+
+
+class _InLast2s_Type(Integer32):
+    """Custom type inLast2s based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InLast2s_Type.__name__ = "Integer32"
+_InLast2s_Object = MibTableColumn
+inLast2s = _InLast2s_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 7),
+    _InLast2s_Type()
+)
+inLast2s.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    inLast2s.setStatus("current")
+
+
+class _OutLast2s_Type(Integer32):
+    """Custom type outLast2s based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_OutLast2s_Type.__name__ = "Integer32"
+_OutLast2s_Object = MibTableColumn
+outLast2s = _OutLast2s_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 8),
+    _OutLast2s_Type()
+)
+outLast2s.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    outLast2s.setStatus("current")
+
+
+class _InLast10s_Type(Integer32):
+    """Custom type inLast10s based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InLast10s_Type.__name__ = "Integer32"
+_InLast10s_Object = MibTableColumn
+inLast10s = _InLast10s_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 9),
+    _InLast10s_Type()
+)
+inLast10s.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    inLast10s.setStatus("current")
+
+
+class _OutLast10s_Type(Integer32):
+    """Custom type outLast10s based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_OutLast10s_Type.__name__ = "Integer32"
+_OutLast10s_Object = MibTableColumn
+outLast10s = _OutLast10s_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 10),
+    _OutLast10s_Type()
+)
+outLast10s.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    outLast10s.setStatus("current")
+
+
+class _InLast40s_Type(Integer32):
+    """Custom type inLast40s based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_InLast40s_Type.__name__ = "Integer32"
+_InLast40s_Object = MibTableColumn
+inLast40s = _InLast40s_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 11),
+    _InLast40s_Type()
+)
+inLast40s.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    inLast40s.setStatus("current")
+
+
+class _OutLast40s_Type(Integer32):
+    """Custom type outLast40s based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_OutLast40s_Type.__name__ = "Integer32"
+_OutLast40s_Object = MibTableColumn
+outLast40s = _OutLast40s_Object(
+    (1, 3, 6, 1, 4, 1, 50536, 4, 2, 1, 12),
+    _OutLast40s_Type()
+)
+outLast40s.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    outLast40s.setStatus("current")
 
 # Managed Objects groups
 
@@ -917,6 +1253,7 @@ mibBuilder.exportSymbols(
        "zvolSize": zvolSize,
        "zvolUsed": zvolUsed,
        "zvolAvailable": zvolAvailable,
+       "zvolReferenced": zvolReferenced,
        "arc": arc,
        "zfsArcSize": zfsArcSize,
        "zfsArcMeta": zfsArcMeta,
@@ -945,5 +1282,29 @@ mibBuilder.exportSymbols(
        "notificationObjects": notificationObjects,
        "alertId": alertId,
        "alertLevel": alertLevel,
-       "alertMessage": alertMessage}
+       "alertMessage": alertMessage,
+       "hddTempTable": hddTempTable,
+       "hddTempEntry": hddTempEntry,
+       "hddTempIndex": hddTempIndex,
+       "hddTempDevice": hddTempDevice,
+       "hddTempValue": hddTempValue,
+       "iftop": iftop,
+       "interfaceTable": interfaceTable,
+       "interfaceEntry": interfaceEntry,
+       "interfaceIndex": interfaceIndex,
+       "interfaceName": interfaceName,
+       "interfaceTopHostTable": interfaceTopHostTable,
+       "interfaceTopHostEntry": interfaceTopHostEntry,
+       "interfaceTopHostIndex": interfaceTopHostIndex,
+       "interfaceTopHostInterfaceName": interfaceTopHostInterfaceName,
+       "interfaceTopHostLocalAddress": interfaceTopHostLocalAddress,
+       "interfaceTopHostLocalPort": interfaceTopHostLocalPort,
+       "interfaceTopHostRemoteAddress": interfaceTopHostRemoteAddress,
+       "interfaceTopHostRemotePort": interfaceTopHostRemotePort,
+       "inLast2s": inLast2s,
+       "outLast2s": outLast2s,
+       "inLast10s": inLast10s,
+       "outLast10s": outLast10s,
+       "inLast40s": inLast40s,
+       "outLast40s": outLast40s}
 )

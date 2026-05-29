@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\IEEE8023-LAG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:12:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -52,6 +49,10 @@ if 'mibBuilder' not in globals():
 (PortList,) = mibBuilder.importSymbols(
     "Q-BRIDGE-MIB",
     "PortList")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -115,6 +116,14 @@ if 'mibBuilder' not in globals():
 lagMIB = ModuleIdentity(
     (1, 2, 840, 10006, 300, 43)
 )
+if mibBuilder.loadTexts:
+    lagMIB.setRevisions(
+        ("2016-10-12 00:00",
+         "2014-12-18 00:00",
+         "2012-01-16 00:00",
+         "2007-06-29 00:00",
+         "2000-06-27 00:00")
+    )
 
 
 # Types definitions
@@ -126,6 +135,7 @@ lagMIB = ModuleIdentity(
 
 class LacpKey(TextualConvention, Integer32):
     status = "current"
+    displayHint = "d"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 65535),
@@ -143,6 +153,20 @@ class LacpState(TextualConvention, Bits):
           ("collecting", 4),
           ("distributing", 5),
           ("defaulted", 6),
+          ("expired", 7))
+    )
+
+
+class DrcpState(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("homeGateway", 0),
+          ("neighborGateway", 1),
+          ("otherGateway", 2),
+          ("ippActivity", 3),
+          ("timeout", 4),
+          ("gatewaySync", 5),
+          ("portSync", 6),
           ("expired", 7))
     )
 
@@ -165,8 +189,55 @@ class ChurnState(TextualConvention, Integer32):
 
 
 
+class AggState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("up", 1),
+          ("down", 2))
+    )
+
+
+
+class DrniConvAdminGatewayList(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "1x,"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(3, 3),
+    )
+    fixed_length = 3
+
+
+
+class PortalLinkList(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "4d,"
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(12, 12),
+    )
+    fixed_length = 12
+
+
+
+class ServiceIdList(TextualConvention, OctetString):
+    status = "current"
+    displayHint = "4d,"
+
+
 # MIB Managed Objects in the order of their OIDs
 
+_LagMIBNotifications_ObjectIdentity = ObjectIdentity
+lagMIBNotifications = _LagMIBNotifications_ObjectIdentity(
+    (1, 2, 840, 10006, 300, 43, 0)
+)
 _LagMIBObjects_ObjectIdentity = ObjectIdentity
 lagMIBObjects = _LagMIBObjects_ObjectIdentity(
     (1, 2, 840, 10006, 300, 43, 1)
@@ -233,7 +304,7 @@ dot3adAggActorSystemID = _Dot3adAggActorSystemID_Object(
     (1, 2, 840, 10006, 300, 43, 1, 1, 1, 1, 4),
     _Dot3adAggActorSystemID_Type()
 )
-dot3adAggActorSystemID.setMaxAccess("read-only")
+dot3adAggActorSystemID.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dot3adAggActorSystemID.setStatus("current")
 _Dot3adAggAggregateOrIndividual_Type = TruthValue
@@ -343,6 +414,450 @@ dot3adAggPortListPorts = _Dot3adAggPortListPorts_Object(
 dot3adAggPortListPorts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dot3adAggPortListPorts.setStatus("current")
+_Dot3adAggXTable_Object = MibTable
+dot3adAggXTable = _Dot3adAggXTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3)
+)
+if mibBuilder.loadTexts:
+    dot3adAggXTable.setStatus("current")
+_Dot3adAggXEntry_Object = MibTableRow
+dot3adAggXEntry = _Dot3adAggXEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adAggXEntry.setStatus("current")
+_Dot3adAggDescription_Type = DisplayString
+_Dot3adAggDescription_Object = MibTableColumn
+dot3adAggDescription = _Dot3adAggDescription_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 1),
+    _Dot3adAggDescription_Type()
+)
+dot3adAggDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggDescription.setStatus("current")
+_Dot3adAggName_Type = DisplayString
+_Dot3adAggName_Object = MibTableColumn
+dot3adAggName = _Dot3adAggName_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 2),
+    _Dot3adAggName_Type()
+)
+dot3adAggName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggName.setStatus("current")
+_Dot3adAggAdminState_Type = AggState
+_Dot3adAggAdminState_Object = MibTableColumn
+dot3adAggAdminState = _Dot3adAggAdminState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 3),
+    _Dot3adAggAdminState_Type()
+)
+dot3adAggAdminState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggAdminState.setStatus("current")
+_Dot3adAggOperState_Type = AggState
+_Dot3adAggOperState_Object = MibTableColumn
+dot3adAggOperState = _Dot3adAggOperState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 4),
+    _Dot3adAggOperState_Type()
+)
+dot3adAggOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggOperState.setStatus("current")
+_Dot3adAggTimeOfLastOperChange_Type = Integer32
+_Dot3adAggTimeOfLastOperChange_Object = MibTableColumn
+dot3adAggTimeOfLastOperChange = _Dot3adAggTimeOfLastOperChange_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 5),
+    _Dot3adAggTimeOfLastOperChange_Type()
+)
+dot3adAggTimeOfLastOperChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggTimeOfLastOperChange.setStatus("current")
+_Dot3adAggDataRate_Type = Integer32
+_Dot3adAggDataRate_Object = MibTableColumn
+dot3adAggDataRate = _Dot3adAggDataRate_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 6),
+    _Dot3adAggDataRate_Type()
+)
+dot3adAggDataRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggDataRate.setStatus("current")
+_Dot3adAggOctetsTxOK_Type = Counter64
+_Dot3adAggOctetsTxOK_Object = MibTableColumn
+dot3adAggOctetsTxOK = _Dot3adAggOctetsTxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 7),
+    _Dot3adAggOctetsTxOK_Type()
+)
+dot3adAggOctetsTxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggOctetsTxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggOctetsTxOK.setUnits("octets")
+_Dot3adAggOctetsRxOK_Type = Counter64
+_Dot3adAggOctetsRxOK_Object = MibTableColumn
+dot3adAggOctetsRxOK = _Dot3adAggOctetsRxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 8),
+    _Dot3adAggOctetsRxOK_Type()
+)
+dot3adAggOctetsRxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggOctetsRxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggOctetsRxOK.setUnits("octets")
+_Dot3adAggFramesTxOK_Type = Counter64
+_Dot3adAggFramesTxOK_Object = MibTableColumn
+dot3adAggFramesTxOK = _Dot3adAggFramesTxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 9),
+    _Dot3adAggFramesTxOK_Type()
+)
+dot3adAggFramesTxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggFramesTxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggFramesTxOK.setUnits("frames")
+_Dot3adAggFramesRxOK_Type = Counter64
+_Dot3adAggFramesRxOK_Object = MibTableColumn
+dot3adAggFramesRxOK = _Dot3adAggFramesRxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 10),
+    _Dot3adAggFramesRxOK_Type()
+)
+dot3adAggFramesRxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggFramesRxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggFramesRxOK.setUnits("frames")
+_Dot3adAggMulticastFramesTxOK_Type = Counter64
+_Dot3adAggMulticastFramesTxOK_Object = MibTableColumn
+dot3adAggMulticastFramesTxOK = _Dot3adAggMulticastFramesTxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 11),
+    _Dot3adAggMulticastFramesTxOK_Type()
+)
+dot3adAggMulticastFramesTxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggMulticastFramesTxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggMulticastFramesTxOK.setUnits("frames")
+_Dot3adAggMulticastFramesRxOK_Type = Counter64
+_Dot3adAggMulticastFramesRxOK_Object = MibTableColumn
+dot3adAggMulticastFramesRxOK = _Dot3adAggMulticastFramesRxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 12),
+    _Dot3adAggMulticastFramesRxOK_Type()
+)
+dot3adAggMulticastFramesRxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggMulticastFramesRxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggMulticastFramesRxOK.setUnits("frames")
+_Dot3adAggBroadcastFramesTxOK_Type = Counter64
+_Dot3adAggBroadcastFramesTxOK_Object = MibTableColumn
+dot3adAggBroadcastFramesTxOK = _Dot3adAggBroadcastFramesTxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 13),
+    _Dot3adAggBroadcastFramesTxOK_Type()
+)
+dot3adAggBroadcastFramesTxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggBroadcastFramesTxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggBroadcastFramesTxOK.setUnits("frames")
+_Dot3adAggBroadcastFramesRxOK_Type = Counter64
+_Dot3adAggBroadcastFramesRxOK_Object = MibTableColumn
+dot3adAggBroadcastFramesRxOK = _Dot3adAggBroadcastFramesRxOK_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 14),
+    _Dot3adAggBroadcastFramesRxOK_Type()
+)
+dot3adAggBroadcastFramesRxOK.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggBroadcastFramesRxOK.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggBroadcastFramesRxOK.setUnits("frames")
+_Dot3adAggFramesDiscardedOnTx_Type = Counter64
+_Dot3adAggFramesDiscardedOnTx_Object = MibTableColumn
+dot3adAggFramesDiscardedOnTx = _Dot3adAggFramesDiscardedOnTx_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 15),
+    _Dot3adAggFramesDiscardedOnTx_Type()
+)
+dot3adAggFramesDiscardedOnTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggFramesDiscardedOnTx.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggFramesDiscardedOnTx.setUnits("frames")
+_Dot3adAggFramesDiscardedOnRx_Type = Counter64
+_Dot3adAggFramesDiscardedOnRx_Object = MibTableColumn
+dot3adAggFramesDiscardedOnRx = _Dot3adAggFramesDiscardedOnRx_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 16),
+    _Dot3adAggFramesDiscardedOnRx_Type()
+)
+dot3adAggFramesDiscardedOnRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggFramesDiscardedOnRx.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggFramesDiscardedOnRx.setUnits("frames")
+_Dot3adAggFramesWithTxErrors_Type = Counter64
+_Dot3adAggFramesWithTxErrors_Object = MibTableColumn
+dot3adAggFramesWithTxErrors = _Dot3adAggFramesWithTxErrors_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 17),
+    _Dot3adAggFramesWithTxErrors_Type()
+)
+dot3adAggFramesWithTxErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggFramesWithTxErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggFramesWithTxErrors.setUnits("frames")
+_Dot3adAggFramesWithRxErrors_Type = Counter64
+_Dot3adAggFramesWithRxErrors_Object = MibTableColumn
+dot3adAggFramesWithRxErrors = _Dot3adAggFramesWithRxErrors_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 18),
+    _Dot3adAggFramesWithRxErrors_Type()
+)
+dot3adAggFramesWithRxErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggFramesWithRxErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggFramesWithRxErrors.setUnits("frames")
+_Dot3adAggUnknownProtocolFrames_Type = Counter64
+_Dot3adAggUnknownProtocolFrames_Object = MibTableColumn
+dot3adAggUnknownProtocolFrames = _Dot3adAggUnknownProtocolFrames_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 19),
+    _Dot3adAggUnknownProtocolFrames_Type()
+)
+dot3adAggUnknownProtocolFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggUnknownProtocolFrames.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggUnknownProtocolFrames.setUnits("frames")
+
+
+class _Dot3adAggLinkUpDownNotificationEnable_Type(Integer32):
+    """Custom type dot3adAggLinkUpDownNotificationEnable based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_Dot3adAggLinkUpDownNotificationEnable_Type.__name__ = "Integer32"
+_Dot3adAggLinkUpDownNotificationEnable_Object = MibTableColumn
+dot3adAggLinkUpDownNotificationEnable = _Dot3adAggLinkUpDownNotificationEnable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 20),
+    _Dot3adAggLinkUpDownNotificationEnable_Type()
+)
+dot3adAggLinkUpDownNotificationEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggLinkUpDownNotificationEnable.setStatus("current")
+
+
+class _Dot3adAggPortAlgorithm_Type(OctetString):
+    """Custom type dot3adAggPortAlgorithm based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+    )
+    fixed_length = 4
+
+
+_Dot3adAggPortAlgorithm_Type.__name__ = "OctetString"
+_Dot3adAggPortAlgorithm_Object = MibTableColumn
+dot3adAggPortAlgorithm = _Dot3adAggPortAlgorithm_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 21),
+    _Dot3adAggPortAlgorithm_Type()
+)
+dot3adAggPortAlgorithm.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPortAlgorithm.setStatus("current")
+
+
+class _Dot3adAggPartnerAdminPortAlgorithm_Type(OctetString):
+    """Custom type dot3adAggPartnerAdminPortAlgorithm based on OctetString"""
+    defaultHexValue = "0080C200"
+
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+    )
+    fixed_length = 4
+
+
+_Dot3adAggPartnerAdminPortAlgorithm_Type.__name__ = "OctetString"
+_Dot3adAggPartnerAdminPortAlgorithm_Object = MibTableColumn
+dot3adAggPartnerAdminPortAlgorithm = _Dot3adAggPartnerAdminPortAlgorithm_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 22),
+    _Dot3adAggPartnerAdminPortAlgorithm_Type()
+)
+dot3adAggPartnerAdminPortAlgorithm.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPartnerAdminPortAlgorithm.setStatus("current")
+
+
+class _Dot3adAggPartnerAdminPortConversationListDigest_Type(OctetString):
+    """Custom type dot3adAggPartnerAdminPortConversationListDigest based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Dot3adAggPartnerAdminPortConversationListDigest_Type.__name__ = "OctetString"
+_Dot3adAggPartnerAdminPortConversationListDigest_Object = MibTableColumn
+dot3adAggPartnerAdminPortConversationListDigest = _Dot3adAggPartnerAdminPortConversationListDigest_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 23),
+    _Dot3adAggPartnerAdminPortConversationListDigest_Type()
+)
+dot3adAggPartnerAdminPortConversationListDigest.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPartnerAdminPortConversationListDigest.setStatus("current")
+_Dot3adAggAdminDiscardWrongConversation_Type = TruthValue
+_Dot3adAggAdminDiscardWrongConversation_Object = MibTableColumn
+dot3adAggAdminDiscardWrongConversation = _Dot3adAggAdminDiscardWrongConversation_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 24),
+    _Dot3adAggAdminDiscardWrongConversation_Type()
+)
+dot3adAggAdminDiscardWrongConversation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggAdminDiscardWrongConversation.setStatus("deprecated")
+
+
+class _Dot3adAggPartnerAdminConvServiceMappingDigest_Type(OctetString):
+    """Custom type dot3adAggPartnerAdminConvServiceMappingDigest based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Dot3adAggPartnerAdminConvServiceMappingDigest_Type.__name__ = "OctetString"
+_Dot3adAggPartnerAdminConvServiceMappingDigest_Object = MibTableColumn
+dot3adAggPartnerAdminConvServiceMappingDigest = _Dot3adAggPartnerAdminConvServiceMappingDigest_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 25),
+    _Dot3adAggPartnerAdminConvServiceMappingDigest_Type()
+)
+dot3adAggPartnerAdminConvServiceMappingDigest.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPartnerAdminConvServiceMappingDigest.setStatus("current")
+
+
+class _Dot3adAggAdminDiscardWrongConversation2_Type(Integer32):
+    """Custom type dot3adAggAdminDiscardWrongConversation2 based on Integer32"""
+    defaultValue = 3
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("forceTrue", 1),
+          ("forceFalse", 2),
+          ("auto", 3))
+    )
+
+
+_Dot3adAggAdminDiscardWrongConversation2_Type.__name__ = "Integer32"
+_Dot3adAggAdminDiscardWrongConversation2_Object = MibTableColumn
+dot3adAggAdminDiscardWrongConversation2 = _Dot3adAggAdminDiscardWrongConversation2_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 3, 1, 26),
+    _Dot3adAggAdminDiscardWrongConversation2_Type()
+)
+dot3adAggAdminDiscardWrongConversation2.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggAdminDiscardWrongConversation2.setStatus("current")
+_Dot3adAggConversationAdminLinkTable_Object = MibTable
+dot3adAggConversationAdminLinkTable = _Dot3adAggConversationAdminLinkTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 4)
+)
+if mibBuilder.loadTexts:
+    dot3adAggConversationAdminLinkTable.setStatus("current")
+_Dot3adAggConversationAdminLinkEntry_Object = MibTableRow
+dot3adAggConversationAdminLinkEntry = _Dot3adAggConversationAdminLinkEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 4, 1)
+)
+dot3adAggConversationAdminLinkEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adAggConversationAdminLinkId"),
+    (0, "IEEE8023-LAG-MIB", "dot3adAggIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adAggConversationAdminLinkEntry.setStatus("current")
+
+
+class _Dot3adAggConversationAdminLinkId_Type(Integer32):
+    """Custom type dot3adAggConversationAdminLinkId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4095),
+    )
+
+
+_Dot3adAggConversationAdminLinkId_Type.__name__ = "Integer32"
+_Dot3adAggConversationAdminLinkId_Object = MibTableColumn
+dot3adAggConversationAdminLinkId = _Dot3adAggConversationAdminLinkId_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 4, 1, 1),
+    _Dot3adAggConversationAdminLinkId_Type()
+)
+dot3adAggConversationAdminLinkId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dot3adAggConversationAdminLinkId.setStatus("current")
+_Dot3adAggConversationAdminLinkList_Type = OctetString
+_Dot3adAggConversationAdminLinkList_Object = MibTableColumn
+dot3adAggConversationAdminLinkList = _Dot3adAggConversationAdminLinkList_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 4, 1, 2),
+    _Dot3adAggConversationAdminLinkList_Type()
+)
+dot3adAggConversationAdminLinkList.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggConversationAdminLinkList.setStatus("current")
+_Dot3adAggAdminServiceConversationMapTable_Object = MibTable
+dot3adAggAdminServiceConversationMapTable = _Dot3adAggAdminServiceConversationMapTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 5)
+)
+if mibBuilder.loadTexts:
+    dot3adAggAdminServiceConversationMapTable.setStatus("current")
+_Dot3adAggAdminServiceConversationMapEntry_Object = MibTableRow
+dot3adAggAdminServiceConversationMapEntry = _Dot3adAggAdminServiceConversationMapEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 5, 1)
+)
+dot3adAggAdminServiceConversationMapEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adAggAdminServiceConversationMapId"),
+    (0, "IEEE8023-LAG-MIB", "dot3adAggIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adAggAdminServiceConversationMapEntry.setStatus("current")
+
+
+class _Dot3adAggAdminServiceConversationMapId_Type(Integer32):
+    """Custom type dot3adAggAdminServiceConversationMapId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4095),
+    )
+
+
+_Dot3adAggAdminServiceConversationMapId_Type.__name__ = "Integer32"
+_Dot3adAggAdminServiceConversationMapId_Object = MibTableColumn
+dot3adAggAdminServiceConversationMapId = _Dot3adAggAdminServiceConversationMapId_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 5, 1, 1),
+    _Dot3adAggAdminServiceConversationMapId_Type()
+)
+dot3adAggAdminServiceConversationMapId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dot3adAggAdminServiceConversationMapId.setStatus("current")
+_Dot3adAggAdminServiceConversationServiceIDList_Type = ServiceIdList
+_Dot3adAggAdminServiceConversationServiceIDList_Object = MibTableColumn
+dot3adAggAdminServiceConversationServiceIDList = _Dot3adAggAdminServiceConversationServiceIDList_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 1, 5, 1, 2),
+    _Dot3adAggAdminServiceConversationServiceIDList_Type()
+)
+dot3adAggAdminServiceConversationServiceIDList.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggAdminServiceConversationServiceIDList.setStatus("current")
 _Dot3adAggPort_ObjectIdentity = ObjectIdentity
 dot3adAggPort = _Dot3adAggPort_ObjectIdentity(
     (1, 2, 840, 10006, 300, 43, 1, 2)
@@ -414,7 +929,7 @@ dot3adAggPortActorOperKey = _Dot3adAggPortActorOperKey_Object(
     (1, 2, 840, 10006, 300, 43, 1, 2, 1, 1, 5),
     _Dot3adAggPortActorOperKey_Type()
 )
-dot3adAggPortActorOperKey.setMaxAccess("read-write")
+dot3adAggPortActorOperKey.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dot3adAggPortActorOperKey.setStatus("current")
 
@@ -928,6 +1443,217 @@ dot3adAggPortDebugPartnerChangeCount = _Dot3adAggPortDebugPartnerChangeCount_Obj
 dot3adAggPortDebugPartnerChangeCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dot3adAggPortDebugPartnerChangeCount.setStatus("current")
+_Dot3adAggPortXTable_Object = MibTable
+dot3adAggPortXTable = _Dot3adAggPortXTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 4)
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortXTable.setStatus("current")
+_Dot3adAggPortXEntry_Object = MibTableRow
+dot3adAggPortXEntry = _Dot3adAggPortXEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 4, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortXEntry.setStatus("current")
+
+
+class _Dot3adAggPortProtocolDA_Type(MacAddress):
+    """Custom type dot3adAggPortProtocolDA based on MacAddress"""
+    defaultHexValue = "0180C2000002"
+
+
+_Dot3adAggPortProtocolDA_Type.__name__ = "MacAddress"
+_Dot3adAggPortProtocolDA_Object = MibTableColumn
+dot3adAggPortProtocolDA = _Dot3adAggPortProtocolDA_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 4, 1, 1),
+    _Dot3adAggPortProtocolDA_Type()
+)
+dot3adAggPortProtocolDA.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPortProtocolDA.setStatus("current")
+_Dot3adAggPortSecondXTable_Object = MibTable
+dot3adAggPortSecondXTable = _Dot3adAggPortSecondXTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5)
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortSecondXTable.setStatus("current")
+_Dot3adAggPortSecondXEntry_Object = MibTableRow
+dot3adAggPortSecondXEntry = _Dot3adAggPortSecondXEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortSecondXEntry.setStatus("current")
+
+
+class _Dot3adAggPortOperConversationPasses_Type(OctetString):
+    """Custom type dot3adAggPortOperConversationPasses based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(512, 512),
+    )
+    fixed_length = 512
+
+
+_Dot3adAggPortOperConversationPasses_Type.__name__ = "OctetString"
+_Dot3adAggPortOperConversationPasses_Object = MibTableColumn
+dot3adAggPortOperConversationPasses = _Dot3adAggPortOperConversationPasses_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1, 1),
+    _Dot3adAggPortOperConversationPasses_Type()
+)
+dot3adAggPortOperConversationPasses.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggPortOperConversationPasses.setStatus("current")
+
+
+class _Dot3adAggPortOperConversationCollected_Type(OctetString):
+    """Custom type dot3adAggPortOperConversationCollected based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(512, 512),
+    )
+    fixed_length = 512
+
+
+_Dot3adAggPortOperConversationCollected_Type.__name__ = "OctetString"
+_Dot3adAggPortOperConversationCollected_Object = MibTableColumn
+dot3adAggPortOperConversationCollected = _Dot3adAggPortOperConversationCollected_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1, 2),
+    _Dot3adAggPortOperConversationCollected_Type()
+)
+dot3adAggPortOperConversationCollected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggPortOperConversationCollected.setStatus("current")
+
+
+class _Dot3adAggPortLinkNumberId_Type(Integer32):
+    """Custom type dot3adAggPortLinkNumberId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_Dot3adAggPortLinkNumberId_Type.__name__ = "Integer32"
+_Dot3adAggPortLinkNumberId_Object = MibTableColumn
+dot3adAggPortLinkNumberId = _Dot3adAggPortLinkNumberId_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1, 3),
+    _Dot3adAggPortLinkNumberId_Type()
+)
+dot3adAggPortLinkNumberId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPortLinkNumberId.setStatus("current")
+
+
+class _Dot3adAggPortPartnerAdminLinkNumberId_Type(Integer32):
+    """Custom type dot3adAggPortPartnerAdminLinkNumberId based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_Dot3adAggPortPartnerAdminLinkNumberId_Type.__name__ = "Integer32"
+_Dot3adAggPortPartnerAdminLinkNumberId_Object = MibTableColumn
+dot3adAggPortPartnerAdminLinkNumberId = _Dot3adAggPortPartnerAdminLinkNumberId_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1, 4),
+    _Dot3adAggPortPartnerAdminLinkNumberId_Type()
+)
+dot3adAggPortPartnerAdminLinkNumberId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPortPartnerAdminLinkNumberId.setStatus("deprecated")
+
+
+class _Dot3adAggPortWTRTime_Type(Integer32):
+    """Custom type dot3adAggPortWTRTime based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(5, 12),
+        ValueRangeConstraint(100, 100),
+    )
+
+
+_Dot3adAggPortWTRTime_Type.__name__ = "Integer32"
+_Dot3adAggPortWTRTime_Object = MibTableColumn
+dot3adAggPortWTRTime = _Dot3adAggPortWTRTime_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1, 5),
+    _Dot3adAggPortWTRTime_Type()
+)
+dot3adAggPortWTRTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPortWTRTime.setStatus("current")
+
+
+class _Dot3adAggPortEnableLongPDUXmit_Type(TruthValue):
+    """Custom type dot3adAggPortEnableLongPDUXmit based on TruthValue"""
+    defaultValue = 1
+
+
+_Dot3adAggPortEnableLongPDUXmit_Type.__name__ = "TruthValue"
+_Dot3adAggPortEnableLongPDUXmit_Object = MibTableColumn
+dot3adAggPortEnableLongPDUXmit = _Dot3adAggPortEnableLongPDUXmit_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 5, 1, 6),
+    _Dot3adAggPortEnableLongPDUXmit_Type()
+)
+dot3adAggPortEnableLongPDUXmit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adAggPortEnableLongPDUXmit.setStatus("current")
+_Dot3adAggPortDebugXTable_Object = MibTable
+dot3adAggPortDebugXTable = _Dot3adAggPortDebugXTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 6)
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugXTable.setStatus("current")
+_Dot3adAggPortDebugXEntry_Object = MibTableRow
+dot3adAggPortDebugXEntry = _Dot3adAggPortDebugXEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 6, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugXEntry.setStatus("current")
+_Dot3adAggPortDebugActorCDSChurnState_Type = ChurnState
+_Dot3adAggPortDebugActorCDSChurnState_Object = MibTableColumn
+dot3adAggPortDebugActorCDSChurnState = _Dot3adAggPortDebugActorCDSChurnState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 6, 1, 1),
+    _Dot3adAggPortDebugActorCDSChurnState_Type()
+)
+dot3adAggPortDebugActorCDSChurnState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugActorCDSChurnState.setStatus("current")
+_Dot3adAggPortDebugPartnerCDSChurnState_Type = ChurnState
+_Dot3adAggPortDebugPartnerCDSChurnState_Object = MibTableColumn
+dot3adAggPortDebugPartnerCDSChurnState = _Dot3adAggPortDebugPartnerCDSChurnState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 6, 1, 2),
+    _Dot3adAggPortDebugPartnerCDSChurnState_Type()
+)
+dot3adAggPortDebugPartnerCDSChurnState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugPartnerCDSChurnState.setStatus("current")
+_Dot3adAggPortDebugActorCDSChurnCount_Type = Counter64
+_Dot3adAggPortDebugActorCDSChurnCount_Object = MibTableColumn
+dot3adAggPortDebugActorCDSChurnCount = _Dot3adAggPortDebugActorCDSChurnCount_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 6, 1, 3),
+    _Dot3adAggPortDebugActorCDSChurnCount_Type()
+)
+dot3adAggPortDebugActorCDSChurnCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugActorCDSChurnCount.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugActorCDSChurnCount.setUnits("times entered ACTOR_CDS_CHURN")
+_Dot3adAggPortDebugPartnerCDSChurnCount_Type = Counter64
+_Dot3adAggPortDebugPartnerCDSChurnCount_Object = MibTableColumn
+dot3adAggPortDebugPartnerCDSChurnCount = _Dot3adAggPortDebugPartnerCDSChurnCount_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 2, 6, 1, 4),
+    _Dot3adAggPortDebugPartnerCDSChurnCount_Type()
+)
+dot3adAggPortDebugPartnerCDSChurnCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugPartnerCDSChurnCount.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugPartnerCDSChurnCount.setUnits("times entered PARTNER_CDS_CHURN")
 _Dot3adTablesLastChanged_Type = TimeTicks
 _Dot3adTablesLastChanged_Object = MibScalar
 dot3adTablesLastChanged = _Dot3adTablesLastChanged_Object(
@@ -937,6 +1663,630 @@ dot3adTablesLastChanged = _Dot3adTablesLastChanged_Object(
 dot3adTablesLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dot3adTablesLastChanged.setStatus("current")
+_Dot3adDrni_ObjectIdentity = ObjectIdentity
+dot3adDrni = _Dot3adDrni_ObjectIdentity(
+    (1, 2, 840, 10006, 300, 43, 1, 4)
+)
+_Dot3adDrniTable_Object = MibTable
+dot3adDrniTable = _Dot3adDrniTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adDrniTable.setStatus("current")
+_Dot3adDrniEntry_Object = MibTableRow
+dot3adDrniEntry = _Dot3adDrniEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1)
+)
+dot3adDrniEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adDrniEntry.setStatus("current")
+_Dot3adDrniIndex_Type = InterfaceIndex
+_Dot3adDrniIndex_Object = MibTableColumn
+dot3adDrniIndex = _Dot3adDrniIndex_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 1),
+    _Dot3adDrniIndex_Type()
+)
+dot3adDrniIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dot3adDrniIndex.setStatus("current")
+_Dot3adDrniDescription_Type = SnmpAdminString
+_Dot3adDrniDescription_Object = MibTableColumn
+dot3adDrniDescription = _Dot3adDrniDescription_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 2),
+    _Dot3adDrniDescription_Type()
+)
+dot3adDrniDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adDrniDescription.setStatus("current")
+_Dot3adDrniName_Type = SnmpAdminString
+_Dot3adDrniName_Object = MibTableColumn
+dot3adDrniName = _Dot3adDrniName_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 3),
+    _Dot3adDrniName_Type()
+)
+dot3adDrniName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniName.setStatus("current")
+_Dot3adDrniPortalAddr_Type = MacAddress
+_Dot3adDrniPortalAddr_Object = MibTableColumn
+dot3adDrniPortalAddr = _Dot3adDrniPortalAddr_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 4),
+    _Dot3adDrniPortalAddr_Type()
+)
+dot3adDrniPortalAddr.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniPortalAddr.setStatus("current")
+_Dot3adDrniPortalPriority_Type = Integer32
+_Dot3adDrniPortalPriority_Object = MibTableColumn
+dot3adDrniPortalPriority = _Dot3adDrniPortalPriority_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 5),
+    _Dot3adDrniPortalPriority_Type()
+)
+dot3adDrniPortalPriority.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniPortalPriority.setStatus("current")
+_Dot3adDrniThreePortalSystem_Type = TruthValue
+_Dot3adDrniThreePortalSystem_Object = MibTableColumn
+dot3adDrniThreePortalSystem = _Dot3adDrniThreePortalSystem_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 6),
+    _Dot3adDrniThreePortalSystem_Type()
+)
+dot3adDrniThreePortalSystem.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniThreePortalSystem.setStatus("current")
+
+
+class _Dot3adDrniPortalSystemNumber_Type(Integer32):
+    """Custom type dot3adDrniPortalSystemNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 3),
+    )
+
+
+_Dot3adDrniPortalSystemNumber_Type.__name__ = "Integer32"
+_Dot3adDrniPortalSystemNumber_Object = MibTableColumn
+dot3adDrniPortalSystemNumber = _Dot3adDrniPortalSystemNumber_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 7),
+    _Dot3adDrniPortalSystemNumber_Type()
+)
+dot3adDrniPortalSystemNumber.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniPortalSystemNumber.setStatus("current")
+_Dot3adDrniIntraPortalLinkList_Type = PortalLinkList
+_Dot3adDrniIntraPortalLinkList_Object = MibTableColumn
+dot3adDrniIntraPortalLinkList = _Dot3adDrniIntraPortalLinkList_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 8),
+    _Dot3adDrniIntraPortalLinkList_Type()
+)
+dot3adDrniIntraPortalLinkList.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniIntraPortalLinkList.setStatus("current")
+_Dot3adDrniAggregator_Type = InterfaceIndex
+_Dot3adDrniAggregator_Object = MibTableColumn
+dot3adDrniAggregator = _Dot3adDrniAggregator_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 9),
+    _Dot3adDrniAggregator_Type()
+)
+dot3adDrniAggregator.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniAggregator.setStatus("current")
+
+
+class _Dot3adDrniNeighborAdminConvGatewayListDigest_Type(OctetString):
+    """Custom type dot3adDrniNeighborAdminConvGatewayListDigest based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Dot3adDrniNeighborAdminConvGatewayListDigest_Type.__name__ = "OctetString"
+_Dot3adDrniNeighborAdminConvGatewayListDigest_Object = MibTableColumn
+dot3adDrniNeighborAdminConvGatewayListDigest = _Dot3adDrniNeighborAdminConvGatewayListDigest_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 10),
+    _Dot3adDrniNeighborAdminConvGatewayListDigest_Type()
+)
+dot3adDrniNeighborAdminConvGatewayListDigest.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniNeighborAdminConvGatewayListDigest.setStatus("current")
+
+
+class _Dot3adDrniNeighborAdminConvPortListDigest_Type(OctetString):
+    """Custom type dot3adDrniNeighborAdminConvPortListDigest based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Dot3adDrniNeighborAdminConvPortListDigest_Type.__name__ = "OctetString"
+_Dot3adDrniNeighborAdminConvPortListDigest_Object = MibTableColumn
+dot3adDrniNeighborAdminConvPortListDigest = _Dot3adDrniNeighborAdminConvPortListDigest_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 11),
+    _Dot3adDrniNeighborAdminConvPortListDigest_Type()
+)
+dot3adDrniNeighborAdminConvPortListDigest.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniNeighborAdminConvPortListDigest.setStatus("current")
+
+
+class _Dot3adDrniGatewayAlgorithm_Type(OctetString):
+    """Custom type dot3adDrniGatewayAlgorithm based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+    )
+    fixed_length = 4
+
+
+_Dot3adDrniGatewayAlgorithm_Type.__name__ = "OctetString"
+_Dot3adDrniGatewayAlgorithm_Object = MibTableColumn
+dot3adDrniGatewayAlgorithm = _Dot3adDrniGatewayAlgorithm_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 12),
+    _Dot3adDrniGatewayAlgorithm_Type()
+)
+dot3adDrniGatewayAlgorithm.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniGatewayAlgorithm.setStatus("current")
+
+
+class _Dot3adDrniNeighborAdminGatewayAlgorithm_Type(OctetString):
+    """Custom type dot3adDrniNeighborAdminGatewayAlgorithm based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Dot3adDrniNeighborAdminGatewayAlgorithm_Type.__name__ = "OctetString"
+_Dot3adDrniNeighborAdminGatewayAlgorithm_Object = MibTableColumn
+dot3adDrniNeighborAdminGatewayAlgorithm = _Dot3adDrniNeighborAdminGatewayAlgorithm_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 13),
+    _Dot3adDrniNeighborAdminGatewayAlgorithm_Type()
+)
+dot3adDrniNeighborAdminGatewayAlgorithm.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniNeighborAdminGatewayAlgorithm.setStatus("current")
+
+
+class _Dot3adDrniNeighborAdminPortAlgorithm_Type(OctetString):
+    """Custom type dot3adDrniNeighborAdminPortAlgorithm based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Dot3adDrniNeighborAdminPortAlgorithm_Type.__name__ = "OctetString"
+_Dot3adDrniNeighborAdminPortAlgorithm_Object = MibTableColumn
+dot3adDrniNeighborAdminPortAlgorithm = _Dot3adDrniNeighborAdminPortAlgorithm_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 14),
+    _Dot3adDrniNeighborAdminPortAlgorithm_Type()
+)
+dot3adDrniNeighborAdminPortAlgorithm.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniNeighborAdminPortAlgorithm.setStatus("current")
+_Dot3adDrniNeighborAdminDRCPState_Type = DrcpState
+_Dot3adDrniNeighborAdminDRCPState_Object = MibTableColumn
+dot3adDrniNeighborAdminDRCPState = _Dot3adDrniNeighborAdminDRCPState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 15),
+    _Dot3adDrniNeighborAdminDRCPState_Type()
+)
+dot3adDrniNeighborAdminDRCPState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniNeighborAdminDRCPState.setStatus("current")
+
+
+class _Dot3adDrniEncapsulationMethod_Type(OctetString):
+    """Custom type dot3adDrniEncapsulationMethod based on OctetString"""
+    defaultHexValue = "0080C200"
+
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+    )
+    fixed_length = 4
+
+
+_Dot3adDrniEncapsulationMethod_Type.__name__ = "OctetString"
+_Dot3adDrniEncapsulationMethod_Object = MibTableColumn
+dot3adDrniEncapsulationMethod = _Dot3adDrniEncapsulationMethod_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 16),
+    _Dot3adDrniEncapsulationMethod_Type()
+)
+dot3adDrniEncapsulationMethod.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniEncapsulationMethod.setStatus("current")
+
+
+class _Dot3adDrniDRPortConversationPasses_Type(OctetString):
+    """Custom type dot3adDrniDRPortConversationPasses based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(512, 512),
+    )
+    fixed_length = 512
+
+
+_Dot3adDrniDRPortConversationPasses_Type.__name__ = "OctetString"
+_Dot3adDrniDRPortConversationPasses_Object = MibTableColumn
+dot3adDrniDRPortConversationPasses = _Dot3adDrniDRPortConversationPasses_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 17),
+    _Dot3adDrniDRPortConversationPasses_Type()
+)
+dot3adDrniDRPortConversationPasses.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adDrniDRPortConversationPasses.setStatus("current")
+
+
+class _Dot3adDrniDRGatewayConversationPasses_Type(OctetString):
+    """Custom type dot3adDrniDRGatewayConversationPasses based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(512, 512),
+    )
+    fixed_length = 512
+
+
+_Dot3adDrniDRGatewayConversationPasses_Type.__name__ = "OctetString"
+_Dot3adDrniDRGatewayConversationPasses_Object = MibTableColumn
+dot3adDrniDRGatewayConversationPasses = _Dot3adDrniDRGatewayConversationPasses_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 18),
+    _Dot3adDrniDRGatewayConversationPasses_Type()
+)
+dot3adDrniDRGatewayConversationPasses.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adDrniDRGatewayConversationPasses.setStatus("current")
+_Dot3adDrniPSI_Type = TruthValue
+_Dot3adDrniPSI_Object = MibTableColumn
+dot3adDrniPSI = _Dot3adDrniPSI_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 19),
+    _Dot3adDrniPSI_Type()
+)
+dot3adDrniPSI.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adDrniPSI.setStatus("current")
+
+
+class _Dot3adDrniPortConversationControl_Type(TruthValue):
+    """Custom type dot3adDrniPortConversationControl based on TruthValue"""
+    defaultValue = 2
+
+
+_Dot3adDrniPortConversationControl_Type.__name__ = "TruthValue"
+_Dot3adDrniPortConversationControl_Object = MibTableColumn
+dot3adDrniPortConversationControl = _Dot3adDrniPortConversationControl_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 20),
+    _Dot3adDrniPortConversationControl_Type()
+)
+dot3adDrniPortConversationControl.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniPortConversationControl.setStatus("current")
+
+
+class _Dot3adDrniIntraPortalPortProtocolDA_Type(MacAddress):
+    """Custom type dot3adDrniIntraPortalPortProtocolDA based on MacAddress"""
+    defaultHexValue = "0180C2000003"
+
+
+_Dot3adDrniIntraPortalPortProtocolDA_Type.__name__ = "MacAddress"
+_Dot3adDrniIntraPortalPortProtocolDA_Object = MibTableColumn
+dot3adDrniIntraPortalPortProtocolDA = _Dot3adDrniIntraPortalPortProtocolDA_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 1, 1, 21),
+    _Dot3adDrniIntraPortalPortProtocolDA_Type()
+)
+dot3adDrniIntraPortalPortProtocolDA.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniIntraPortalPortProtocolDA.setStatus("current")
+_Dot3adDrniConvAdminGatewayTable_Object = MibTable
+dot3adDrniConvAdminGatewayTable = _Dot3adDrniConvAdminGatewayTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 2)
+)
+if mibBuilder.loadTexts:
+    dot3adDrniConvAdminGatewayTable.setStatus("current")
+_Dot3adDrniConvAdminGatewayEntry_Object = MibTableRow
+dot3adDrniConvAdminGatewayEntry = _Dot3adDrniConvAdminGatewayEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 2, 1)
+)
+dot3adDrniConvAdminGatewayEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniGatewayConversationID"),
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adDrniConvAdminGatewayEntry.setStatus("current")
+
+
+class _Dot3adDrniGatewayConversationID_Type(Integer32):
+    """Custom type dot3adDrniGatewayConversationID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4095),
+    )
+
+
+_Dot3adDrniGatewayConversationID_Type.__name__ = "Integer32"
+_Dot3adDrniGatewayConversationID_Object = MibTableColumn
+dot3adDrniGatewayConversationID = _Dot3adDrniGatewayConversationID_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 2, 1, 1),
+    _Dot3adDrniGatewayConversationID_Type()
+)
+dot3adDrniGatewayConversationID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dot3adDrniGatewayConversationID.setStatus("current")
+_Dot3adDrniConvAdminGatewayList_Type = DrniConvAdminGatewayList
+_Dot3adDrniConvAdminGatewayList_Object = MibTableColumn
+dot3adDrniConvAdminGatewayList = _Dot3adDrniConvAdminGatewayList_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 2, 1, 2),
+    _Dot3adDrniConvAdminGatewayList_Type()
+)
+dot3adDrniConvAdminGatewayList.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniConvAdminGatewayList.setStatus("current")
+_Dot3adDrniIPLEncapMapTable_Object = MibTable
+dot3adDrniIPLEncapMapTable = _Dot3adDrniIPLEncapMapTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 3)
+)
+if mibBuilder.loadTexts:
+    dot3adDrniIPLEncapMapTable.setStatus("current")
+_Dot3adDrniIPLEncapMapEntry_Object = MibTableRow
+dot3adDrniIPLEncapMapEntry = _Dot3adDrniIPLEncapMapEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 3, 1)
+)
+dot3adDrniIPLEncapMapEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniGatewayConversationID"),
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adDrniIPLEncapMapEntry.setStatus("current")
+_Dot3adDrniIPLFrameIdValue_Type = Integer32
+_Dot3adDrniIPLFrameIdValue_Object = MibTableColumn
+dot3adDrniIPLFrameIdValue = _Dot3adDrniIPLFrameIdValue_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 3, 1, 2),
+    _Dot3adDrniIPLFrameIdValue_Type()
+)
+dot3adDrniIPLFrameIdValue.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniIPLFrameIdValue.setStatus("current")
+_Dot3adDrniNetEncapMapTable_Object = MibTable
+dot3adDrniNetEncapMapTable = _Dot3adDrniNetEncapMapTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 4)
+)
+if mibBuilder.loadTexts:
+    dot3adDrniNetEncapMapTable.setStatus("current")
+_Dot3adDrniNetEncapMapEntry_Object = MibTableRow
+dot3adDrniNetEncapMapEntry = _Dot3adDrniNetEncapMapEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 4, 1)
+)
+dot3adDrniNetEncapMapEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniGatewayConversationID"),
+    (0, "IEEE8023-LAG-MIB", "dot3adDrniIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adDrniNetEncapMapEntry.setStatus("current")
+_Dot3adDrniNetFrameIdValue_Type = Integer32
+_Dot3adDrniNetFrameIdValue_Object = MibTableColumn
+dot3adDrniNetFrameIdValue = _Dot3adDrniNetFrameIdValue_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 4, 4, 1, 1),
+    _Dot3adDrniNetFrameIdValue_Type()
+)
+dot3adDrniNetFrameIdValue.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adDrniNetFrameIdValue.setStatus("current")
+_Dot3adIPP_ObjectIdentity = ObjectIdentity
+dot3adIPP = _Dot3adIPP_ObjectIdentity(
+    (1, 2, 840, 10006, 300, 43, 1, 5)
+)
+_Dot3adIPPAttributeTable_Object = MibTable
+dot3adIPPAttributeTable = _Dot3adIPPAttributeTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adIPPAttributeTable.setStatus("current")
+_Dot3adIPPAttributeEntry_Object = MibTableRow
+dot3adIPPAttributeEntry = _Dot3adIPPAttributeEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1)
+)
+dot3adIPPAttributeEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adIPPIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adIPPAttributeEntry.setStatus("current")
+_Dot3adIPPIndex_Type = InterfaceIndex
+_Dot3adIPPIndex_Object = MibTableColumn
+dot3adIPPIndex = _Dot3adIPPIndex_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1, 1),
+    _Dot3adIPPIndex_Type()
+)
+dot3adIPPIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dot3adIPPIndex.setStatus("current")
+
+
+class _Dot3adIPPPortConversationPasses_Type(OctetString):
+    """Custom type dot3adIPPPortConversationPasses based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(512, 512),
+    )
+    fixed_length = 512
+
+
+_Dot3adIPPPortConversationPasses_Type.__name__ = "OctetString"
+_Dot3adIPPPortConversationPasses_Object = MibTableColumn
+dot3adIPPPortConversationPasses = _Dot3adIPPPortConversationPasses_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1, 2),
+    _Dot3adIPPPortConversationPasses_Type()
+)
+dot3adIPPPortConversationPasses.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPPortConversationPasses.setStatus("current")
+
+
+class _Dot3adIPPGatewayConversationDirection_Type(OctetString):
+    """Custom type dot3adIPPGatewayConversationDirection based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(512, 512),
+    )
+    fixed_length = 512
+
+
+_Dot3adIPPGatewayConversationDirection_Type.__name__ = "OctetString"
+_Dot3adIPPGatewayConversationDirection_Object = MibTableColumn
+dot3adIPPGatewayConversationDirection = _Dot3adIPPGatewayConversationDirection_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1, 3),
+    _Dot3adIPPGatewayConversationDirection_Type()
+)
+dot3adIPPGatewayConversationDirection.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPGatewayConversationDirection.setStatus("current")
+_Dot3adIPPAdminState_Type = AggState
+_Dot3adIPPAdminState_Object = MibTableColumn
+dot3adIPPAdminState = _Dot3adIPPAdminState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1, 4),
+    _Dot3adIPPAdminState_Type()
+)
+dot3adIPPAdminState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot3adIPPAdminState.setStatus("current")
+_Dot3adIPPOperState_Type = AggState
+_Dot3adIPPOperState_Object = MibTableColumn
+dot3adIPPOperState = _Dot3adIPPOperState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1, 5),
+    _Dot3adIPPOperState_Type()
+)
+dot3adIPPOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPOperState.setStatus("current")
+_Dot3adIPPTimeOfLastOperChange_Type = Integer32
+_Dot3adIPPTimeOfLastOperChange_Object = MibTableColumn
+dot3adIPPTimeOfLastOperChange = _Dot3adIPPTimeOfLastOperChange_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 1, 1, 6),
+    _Dot3adIPPTimeOfLastOperChange_Type()
+)
+dot3adIPPTimeOfLastOperChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPTimeOfLastOperChange.setStatus("current")
+_Dot3adIPPStatsTable_Object = MibTable
+dot3adIPPStatsTable = _Dot3adIPPStatsTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 2)
+)
+if mibBuilder.loadTexts:
+    dot3adIPPStatsTable.setStatus("current")
+_Dot3adIPPStatsEntry_Object = MibTableRow
+dot3adIPPStatsEntry = _Dot3adIPPStatsEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 2, 1)
+)
+dot3adIPPStatsEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adIPPIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adIPPStatsEntry.setStatus("current")
+_Dot3adIPPStatsDRCPDUsRx_Type = Counter64
+_Dot3adIPPStatsDRCPDUsRx_Object = MibTableColumn
+dot3adIPPStatsDRCPDUsRx = _Dot3adIPPStatsDRCPDUsRx_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 2, 1, 1),
+    _Dot3adIPPStatsDRCPDUsRx_Type()
+)
+dot3adIPPStatsDRCPDUsRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPStatsDRCPDUsRx.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adIPPStatsDRCPDUsRx.setUnits("frames")
+_Dot3adIPPStatsIllegalRx_Type = Counter64
+_Dot3adIPPStatsIllegalRx_Object = MibTableColumn
+dot3adIPPStatsIllegalRx = _Dot3adIPPStatsIllegalRx_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 2, 1, 2),
+    _Dot3adIPPStatsIllegalRx_Type()
+)
+dot3adIPPStatsIllegalRx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPStatsIllegalRx.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adIPPStatsIllegalRx.setUnits("frames")
+_Dot3adIPPStatsDRCPDUsTx_Type = Counter64
+_Dot3adIPPStatsDRCPDUsTx_Object = MibTableColumn
+dot3adIPPStatsDRCPDUsTx = _Dot3adIPPStatsDRCPDUsTx_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 2, 1, 3),
+    _Dot3adIPPStatsDRCPDUsTx_Type()
+)
+dot3adIPPStatsDRCPDUsTx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPStatsDRCPDUsTx.setStatus("current")
+if mibBuilder.loadTexts:
+    dot3adIPPStatsDRCPDUsTx.setUnits("frames")
+_Dot3adIPPDebugTable_Object = MibTable
+dot3adIPPDebugTable = _Dot3adIPPDebugTable_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 3)
+)
+if mibBuilder.loadTexts:
+    dot3adIPPDebugTable.setStatus("current")
+_Dot3adIPPDebugEntry_Object = MibTableRow
+dot3adIPPDebugEntry = _Dot3adIPPDebugEntry_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 3, 1)
+)
+dot3adIPPDebugEntry.setIndexNames(
+    (0, "IEEE8023-LAG-MIB", "dot3adIPPIndex"),
+)
+if mibBuilder.loadTexts:
+    dot3adIPPDebugEntry.setStatus("current")
+
+
+class _Dot3adIPPDebugDRCPRxState_Type(Integer32):
+    """Custom type dot3adIPPDebugDRCPRxState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("current", 1),
+          ("expired", 2),
+          ("defaulted", 3),
+          ("initialize", 4),
+          ("reportToManagement", 5))
+    )
+
+
+_Dot3adIPPDebugDRCPRxState_Type.__name__ = "Integer32"
+_Dot3adIPPDebugDRCPRxState_Object = MibTableColumn
+dot3adIPPDebugDRCPRxState = _Dot3adIPPDebugDRCPRxState_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 3, 1, 1),
+    _Dot3adIPPDebugDRCPRxState_Type()
+)
+dot3adIPPDebugDRCPRxState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPDebugDRCPRxState.setStatus("current")
+_Dot3adIPPDebugLastRxTime_Type = TimeTicks
+_Dot3adIPPDebugLastRxTime_Object = MibTableColumn
+dot3adIPPDebugLastRxTime = _Dot3adIPPDebugLastRxTime_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 3, 1, 2),
+    _Dot3adIPPDebugLastRxTime_Type()
+)
+dot3adIPPDebugLastRxTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPDebugLastRxTime.setStatus("current")
+_Dot3adIPPDebugDifferPortalReason_Type = SnmpAdminString
+_Dot3adIPPDebugDifferPortalReason_Object = MibTableColumn
+dot3adIPPDebugDifferPortalReason = _Dot3adIPPDebugDifferPortalReason_Object(
+    (1, 2, 840, 10006, 300, 43, 1, 5, 3, 1, 3),
+    _Dot3adIPPDebugDifferPortalReason_Type()
+)
+dot3adIPPDebugDifferPortalReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot3adIPPDebugDifferPortalReason.setStatus("current")
 _Dot3adAggConformance_ObjectIdentity = ObjectIdentity
 dot3adAggConformance = _Dot3adAggConformance_ObjectIdentity(
     (1, 2, 840, 10006, 300, 43, 2)
@@ -949,6 +2299,26 @@ _Dot3adAggCompliances_ObjectIdentity = ObjectIdentity
 dot3adAggCompliances = _Dot3adAggCompliances_ObjectIdentity(
     (1, 2, 840, 10006, 300, 43, 2, 2)
 )
+dot3adAggEntry.registerAugmentions(
+    ("IEEE8023-LAG-MIB",
+     "dot3adAggXEntry")
+)
+dot3adAggXEntry.setIndexNames(*dot3adAggEntry.getIndexNames())
+dot3adAggPortEntry.registerAugmentions(
+    ("IEEE8023-LAG-MIB",
+     "dot3adAggPortXEntry")
+)
+dot3adAggPortXEntry.setIndexNames(*dot3adAggPortEntry.getIndexNames())
+dot3adAggPortEntry.registerAugmentions(
+    ("IEEE8023-LAG-MIB",
+     "dot3adAggPortSecondXEntry")
+)
+dot3adAggPortSecondXEntry.setIndexNames(*dot3adAggPortEntry.getIndexNames())
+dot3adAggPortDebugEntry.registerAugmentions(
+    ("IEEE8023-LAG-MIB",
+     "dot3adAggPortDebugXEntry")
+)
+dot3adAggPortDebugXEntry.setIndexNames(*dot3adAggPortDebugEntry.getIndexNames())
 
 # Managed Objects groups
 
@@ -969,15 +2339,6 @@ dot3adAggGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     dot3adAggGroup.setStatus("current")
-
-dot3adTablesLastChangedGroup = ObjectGroup(
-    (1, 2, 840, 10006, 300, 43, 2, 1, 1, 6)
-)
-dot3adTablesLastChangedGroup.setObjects(
-    ("IEEE8023-LAG-MIB", "dot3adTablesLastChanged")
-)
-if mibBuilder.loadTexts:
-    dot3adTablesLastChangedGroup.setStatus("current")
 
 dot3adAggPortListGroup = ObjectGroup(
     (1, 2, 840, 10006, 300, 43, 2, 1, 2)
@@ -1055,11 +2416,219 @@ dot3adAggPortDebugGroup.setObjects(
 if mibBuilder.loadTexts:
     dot3adAggPortDebugGroup.setStatus("current")
 
+dot3adTablesLastChangedGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 6)
+)
+dot3adTablesLastChangedGroup.setObjects(
+    ("IEEE8023-LAG-MIB", "dot3adTablesLastChanged")
+)
+if mibBuilder.loadTexts:
+    dot3adTablesLastChangedGroup.setStatus("current")
+
+dot3adAggPortProtocolDAGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 7)
+)
+dot3adAggPortProtocolDAGroup.setObjects(
+    ("IEEE8023-LAG-MIB", "dot3adAggPortProtocolDA")
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortProtocolDAGroup.setStatus("current")
+
+dot3adAggXGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 9)
+)
+dot3adAggXGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggDescription"),
+        ("IEEE8023-LAG-MIB", "dot3adAggName"),
+        ("IEEE8023-LAG-MIB", "dot3adAggAdminState"),
+        ("IEEE8023-LAG-MIB", "dot3adAggOperState"),
+        ("IEEE8023-LAG-MIB", "dot3adAggTimeOfLastOperChange"),
+        ("IEEE8023-LAG-MIB", "dot3adAggDataRate"),
+        ("IEEE8023-LAG-MIB", "dot3adAggFramesTxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggFramesRxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggLinkUpDownNotificationEnable"))
+)
+if mibBuilder.loadTexts:
+    dot3adAggXGroup.setStatus("current")
+
+dot3adAggRecommendedGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 10)
+)
+dot3adAggRecommendedGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggOctetsTxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggOctetsRxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggFramesDiscardedOnTx"),
+        ("IEEE8023-LAG-MIB", "dot3adAggFramesDiscardedOnRx"),
+        ("IEEE8023-LAG-MIB", "dot3adAggFramesWithTxErrors"),
+        ("IEEE8023-LAG-MIB", "dot3adAggFramesWithRxErrors"),
+        ("IEEE8023-LAG-MIB", "dot3adAggUnknownProtocolFrames"))
+)
+if mibBuilder.loadTexts:
+    dot3adAggRecommendedGroup.setStatus("current")
+
+dot3adAggOptionalGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 11)
+)
+dot3adAggOptionalGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggMulticastFramesTxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggMulticastFramesRxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggBroadcastFramesTxOK"),
+        ("IEEE8023-LAG-MIB", "dot3adAggBroadcastFramesRxOK"))
+)
+if mibBuilder.loadTexts:
+    dot3adAggOptionalGroup.setStatus("current")
+
+dot3adPerServiceFrameDistGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 12)
+)
+dot3adPerServiceFrameDistGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggConversationAdminLinkList"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPartnerAdminPortAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPartnerAdminPortConversationListDigest"),
+        ("IEEE8023-LAG-MIB", "dot3adAggAdminDiscardWrongConversation"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPartnerAdminConvServiceMappingDigest"),
+        ("IEEE8023-LAG-MIB", "dot3adAggAdminServiceConversationServiceIDList"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortLinkNumberId"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortPartnerAdminLinkNumberId"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortOperConversationPasses"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortOperConversationCollected"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortWTRTime"))
+)
+if mibBuilder.loadTexts:
+    dot3adPerServiceFrameDistGroup.setStatus("deprecated")
+
+dot3adAggPortDebugXGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 13)
+)
+dot3adAggPortDebugXGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggPortDebugActorCDSChurnState"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugPartnerCDSChurnState"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugActorCDSChurnCount"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugPartnerCDSChurnCount"))
+)
+if mibBuilder.loadTexts:
+    dot3adAggPortDebugXGroup.setStatus("current")
+
+dot3adDrniGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 14)
+)
+dot3adDrniGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adDrniDescription"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniName"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniPortalAddr"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniPortalPriority"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniThreePortalSystem"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniPortalSystemNumber"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniIntraPortalLinkList"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniAggregator"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniNeighborAdminConvGatewayListDigest"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniNeighborAdminConvPortListDigest"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniGatewayAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniNeighborAdminGatewayAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniNeighborAdminPortAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniNeighborAdminDRCPState"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniEncapsulationMethod"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniDRPortConversationPasses"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniDRGatewayConversationPasses"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniConvAdminGatewayList"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniIPLFrameIdValue"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniNetFrameIdValue"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniPSI"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniPortConversationControl"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniIntraPortalPortProtocolDA"))
+)
+if mibBuilder.loadTexts:
+    dot3adDrniGroup.setStatus("current")
+
+dot3adIPPGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 15)
+)
+dot3adIPPGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adIPPPortConversationPasses"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPGatewayConversationDirection"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPAdminState"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPOperState"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPTimeOfLastOperChange"))
+)
+if mibBuilder.loadTexts:
+    dot3adIPPGroup.setStatus("current")
+
+dot3adIPPStatsGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 16)
+)
+dot3adIPPStatsGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adIPPStatsDRCPDUsRx"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPStatsIllegalRx"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPStatsDRCPDUsTx"))
+)
+if mibBuilder.loadTexts:
+    dot3adIPPStatsGroup.setStatus("current")
+
+dot3adIPPDebugGroup = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 17)
+)
+dot3adIPPDebugGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adIPPDebugDRCPRxState"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPDebugLastRxTime"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPDebugDifferPortalReason"))
+)
+if mibBuilder.loadTexts:
+    dot3adIPPDebugGroup.setStatus("current")
+
+dot3adPerServiceFrameDistGroup2 = ObjectGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 18)
+)
+dot3adPerServiceFrameDistGroup2.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggConversationAdminLinkList"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPartnerAdminPortAlgorithm"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPartnerAdminPortConversationListDigest"),
+        ("IEEE8023-LAG-MIB", "dot3adAggAdminDiscardWrongConversation2"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPartnerAdminConvServiceMappingDigest"),
+        ("IEEE8023-LAG-MIB", "dot3adAggAdminServiceConversationServiceIDList"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortLinkNumberId"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortOperConversationPasses"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortOperConversationCollected"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortWTRTime"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortEnableLongPDUXmit"))
+)
+if mibBuilder.loadTexts:
+    dot3adPerServiceFrameDistGroup2.setStatus("current")
+
 
 # Notification objects
 
+dot3adAggLinkUpNotification = NotificationType(
+    (1, 2, 840, 10006, 300, 43, 0, 1)
+)
+if mibBuilder.loadTexts:
+    dot3adAggLinkUpNotification.setStatus(
+        "current"
+    )
+
+dot3adAggLinkDownNotification = NotificationType(
+    (1, 2, 840, 10006, 300, 43, 0, 2)
+)
+if mibBuilder.loadTexts:
+    dot3adAggLinkDownNotification.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
+
+dot3adAggNotificationGroup = NotificationGroup(
+    (1, 2, 840, 10006, 300, 43, 2, 1, 8)
+)
+dot3adAggNotificationGroup.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggLinkUpNotification"),
+        ("IEEE8023-LAG-MIB", "dot3adAggLinkDownNotification"))
+)
+if mibBuilder.loadTexts:
+    dot3adAggNotificationGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -1073,13 +2642,51 @@ dot3adAggCompliance = ModuleCompliance(
 dot3adAggCompliance.setObjects(
       *(("IEEE8023-LAG-MIB", "dot3adAggGroup"),
         ("IEEE8023-LAG-MIB", "dot3adAggPortGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggNotificationGroup"),
         ("IEEE8023-LAG-MIB", "dot3adTablesLastChangedGroup"),
         ("IEEE8023-LAG-MIB", "dot3adAggPortListGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggXGroup"),
         ("IEEE8023-LAG-MIB", "dot3adAggPortStatsGroup"),
-        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugGroup"))
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugXGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortProtocolDAGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggOptionalGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggRecommendedGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adPerServiceFrameDistGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPStatsGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPDebugGroup"))
 )
 if mibBuilder.loadTexts:
     dot3adAggCompliance.setStatus(
+        "deprecated"
+    )
+
+dot3adAggCompliance2 = ModuleCompliance(
+    (1, 2, 840, 10006, 300, 43, 2, 2, 2)
+)
+dot3adAggCompliance2.setObjects(
+      *(("IEEE8023-LAG-MIB", "dot3adAggGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggNotificationGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adTablesLastChangedGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortListGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggXGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortStatsGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortDebugXGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggPortProtocolDAGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggOptionalGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adAggRecommendedGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adPerServiceFrameDistGroup2"),
+        ("IEEE8023-LAG-MIB", "dot3adDrniGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPStatsGroup"),
+        ("IEEE8023-LAG-MIB", "dot3adIPPDebugGroup"))
+)
+if mibBuilder.loadTexts:
+    dot3adAggCompliance2.setStatus(
         "current"
     )
 
@@ -1090,8 +2697,16 @@ mibBuilder.exportSymbols(
     "IEEE8023-LAG-MIB",
     **{"LacpKey": LacpKey,
        "LacpState": LacpState,
+       "DrcpState": DrcpState,
        "ChurnState": ChurnState,
+       "AggState": AggState,
+       "DrniConvAdminGatewayList": DrniConvAdminGatewayList,
+       "PortalLinkList": PortalLinkList,
+       "ServiceIdList": ServiceIdList,
        "lagMIB": lagMIB,
+       "lagMIBNotifications": lagMIBNotifications,
+       "dot3adAggLinkUpNotification": dot3adAggLinkUpNotification,
+       "dot3adAggLinkDownNotification": dot3adAggLinkDownNotification,
        "lagMIBObjects": lagMIBObjects,
        "dot3adAgg": dot3adAgg,
        "dot3adAggTable": dot3adAggTable,
@@ -1110,6 +2725,42 @@ mibBuilder.exportSymbols(
        "dot3adAggPortListTable": dot3adAggPortListTable,
        "dot3adAggPortListEntry": dot3adAggPortListEntry,
        "dot3adAggPortListPorts": dot3adAggPortListPorts,
+       "dot3adAggXTable": dot3adAggXTable,
+       "dot3adAggXEntry": dot3adAggXEntry,
+       "dot3adAggDescription": dot3adAggDescription,
+       "dot3adAggName": dot3adAggName,
+       "dot3adAggAdminState": dot3adAggAdminState,
+       "dot3adAggOperState": dot3adAggOperState,
+       "dot3adAggTimeOfLastOperChange": dot3adAggTimeOfLastOperChange,
+       "dot3adAggDataRate": dot3adAggDataRate,
+       "dot3adAggOctetsTxOK": dot3adAggOctetsTxOK,
+       "dot3adAggOctetsRxOK": dot3adAggOctetsRxOK,
+       "dot3adAggFramesTxOK": dot3adAggFramesTxOK,
+       "dot3adAggFramesRxOK": dot3adAggFramesRxOK,
+       "dot3adAggMulticastFramesTxOK": dot3adAggMulticastFramesTxOK,
+       "dot3adAggMulticastFramesRxOK": dot3adAggMulticastFramesRxOK,
+       "dot3adAggBroadcastFramesTxOK": dot3adAggBroadcastFramesTxOK,
+       "dot3adAggBroadcastFramesRxOK": dot3adAggBroadcastFramesRxOK,
+       "dot3adAggFramesDiscardedOnTx": dot3adAggFramesDiscardedOnTx,
+       "dot3adAggFramesDiscardedOnRx": dot3adAggFramesDiscardedOnRx,
+       "dot3adAggFramesWithTxErrors": dot3adAggFramesWithTxErrors,
+       "dot3adAggFramesWithRxErrors": dot3adAggFramesWithRxErrors,
+       "dot3adAggUnknownProtocolFrames": dot3adAggUnknownProtocolFrames,
+       "dot3adAggLinkUpDownNotificationEnable": dot3adAggLinkUpDownNotificationEnable,
+       "dot3adAggPortAlgorithm": dot3adAggPortAlgorithm,
+       "dot3adAggPartnerAdminPortAlgorithm": dot3adAggPartnerAdminPortAlgorithm,
+       "dot3adAggPartnerAdminPortConversationListDigest": dot3adAggPartnerAdminPortConversationListDigest,
+       "dot3adAggAdminDiscardWrongConversation": dot3adAggAdminDiscardWrongConversation,
+       "dot3adAggPartnerAdminConvServiceMappingDigest": dot3adAggPartnerAdminConvServiceMappingDigest,
+       "dot3adAggAdminDiscardWrongConversation2": dot3adAggAdminDiscardWrongConversation2,
+       "dot3adAggConversationAdminLinkTable": dot3adAggConversationAdminLinkTable,
+       "dot3adAggConversationAdminLinkEntry": dot3adAggConversationAdminLinkEntry,
+       "dot3adAggConversationAdminLinkId": dot3adAggConversationAdminLinkId,
+       "dot3adAggConversationAdminLinkList": dot3adAggConversationAdminLinkList,
+       "dot3adAggAdminServiceConversationMapTable": dot3adAggAdminServiceConversationMapTable,
+       "dot3adAggAdminServiceConversationMapEntry": dot3adAggAdminServiceConversationMapEntry,
+       "dot3adAggAdminServiceConversationMapId": dot3adAggAdminServiceConversationMapId,
+       "dot3adAggAdminServiceConversationServiceIDList": dot3adAggAdminServiceConversationServiceIDList,
        "dot3adAggPort": dot3adAggPort,
        "dot3adAggPortTable": dot3adAggPortTable,
        "dot3adAggPortEntry": dot3adAggPortEntry,
@@ -1161,15 +2812,98 @@ mibBuilder.exportSymbols(
        "dot3adAggPortDebugPartnerSyncTransitionCount": dot3adAggPortDebugPartnerSyncTransitionCount,
        "dot3adAggPortDebugActorChangeCount": dot3adAggPortDebugActorChangeCount,
        "dot3adAggPortDebugPartnerChangeCount": dot3adAggPortDebugPartnerChangeCount,
+       "dot3adAggPortXTable": dot3adAggPortXTable,
+       "dot3adAggPortXEntry": dot3adAggPortXEntry,
+       "dot3adAggPortProtocolDA": dot3adAggPortProtocolDA,
+       "dot3adAggPortSecondXTable": dot3adAggPortSecondXTable,
+       "dot3adAggPortSecondXEntry": dot3adAggPortSecondXEntry,
+       "dot3adAggPortOperConversationPasses": dot3adAggPortOperConversationPasses,
+       "dot3adAggPortOperConversationCollected": dot3adAggPortOperConversationCollected,
+       "dot3adAggPortLinkNumberId": dot3adAggPortLinkNumberId,
+       "dot3adAggPortPartnerAdminLinkNumberId": dot3adAggPortPartnerAdminLinkNumberId,
+       "dot3adAggPortWTRTime": dot3adAggPortWTRTime,
+       "dot3adAggPortEnableLongPDUXmit": dot3adAggPortEnableLongPDUXmit,
+       "dot3adAggPortDebugXTable": dot3adAggPortDebugXTable,
+       "dot3adAggPortDebugXEntry": dot3adAggPortDebugXEntry,
+       "dot3adAggPortDebugActorCDSChurnState": dot3adAggPortDebugActorCDSChurnState,
+       "dot3adAggPortDebugPartnerCDSChurnState": dot3adAggPortDebugPartnerCDSChurnState,
+       "dot3adAggPortDebugActorCDSChurnCount": dot3adAggPortDebugActorCDSChurnCount,
+       "dot3adAggPortDebugPartnerCDSChurnCount": dot3adAggPortDebugPartnerCDSChurnCount,
        "dot3adTablesLastChanged": dot3adTablesLastChanged,
+       "dot3adDrni": dot3adDrni,
+       "dot3adDrniTable": dot3adDrniTable,
+       "dot3adDrniEntry": dot3adDrniEntry,
+       "dot3adDrniIndex": dot3adDrniIndex,
+       "dot3adDrniDescription": dot3adDrniDescription,
+       "dot3adDrniName": dot3adDrniName,
+       "dot3adDrniPortalAddr": dot3adDrniPortalAddr,
+       "dot3adDrniPortalPriority": dot3adDrniPortalPriority,
+       "dot3adDrniThreePortalSystem": dot3adDrniThreePortalSystem,
+       "dot3adDrniPortalSystemNumber": dot3adDrniPortalSystemNumber,
+       "dot3adDrniIntraPortalLinkList": dot3adDrniIntraPortalLinkList,
+       "dot3adDrniAggregator": dot3adDrniAggregator,
+       "dot3adDrniNeighborAdminConvGatewayListDigest": dot3adDrniNeighborAdminConvGatewayListDigest,
+       "dot3adDrniNeighborAdminConvPortListDigest": dot3adDrniNeighborAdminConvPortListDigest,
+       "dot3adDrniGatewayAlgorithm": dot3adDrniGatewayAlgorithm,
+       "dot3adDrniNeighborAdminGatewayAlgorithm": dot3adDrniNeighborAdminGatewayAlgorithm,
+       "dot3adDrniNeighborAdminPortAlgorithm": dot3adDrniNeighborAdminPortAlgorithm,
+       "dot3adDrniNeighborAdminDRCPState": dot3adDrniNeighborAdminDRCPState,
+       "dot3adDrniEncapsulationMethod": dot3adDrniEncapsulationMethod,
+       "dot3adDrniDRPortConversationPasses": dot3adDrniDRPortConversationPasses,
+       "dot3adDrniDRGatewayConversationPasses": dot3adDrniDRGatewayConversationPasses,
+       "dot3adDrniPSI": dot3adDrniPSI,
+       "dot3adDrniPortConversationControl": dot3adDrniPortConversationControl,
+       "dot3adDrniIntraPortalPortProtocolDA": dot3adDrniIntraPortalPortProtocolDA,
+       "dot3adDrniConvAdminGatewayTable": dot3adDrniConvAdminGatewayTable,
+       "dot3adDrniConvAdminGatewayEntry": dot3adDrniConvAdminGatewayEntry,
+       "dot3adDrniGatewayConversationID": dot3adDrniGatewayConversationID,
+       "dot3adDrniConvAdminGatewayList": dot3adDrniConvAdminGatewayList,
+       "dot3adDrniIPLEncapMapTable": dot3adDrniIPLEncapMapTable,
+       "dot3adDrniIPLEncapMapEntry": dot3adDrniIPLEncapMapEntry,
+       "dot3adDrniIPLFrameIdValue": dot3adDrniIPLFrameIdValue,
+       "dot3adDrniNetEncapMapTable": dot3adDrniNetEncapMapTable,
+       "dot3adDrniNetEncapMapEntry": dot3adDrniNetEncapMapEntry,
+       "dot3adDrniNetFrameIdValue": dot3adDrniNetFrameIdValue,
+       "dot3adIPP": dot3adIPP,
+       "dot3adIPPAttributeTable": dot3adIPPAttributeTable,
+       "dot3adIPPAttributeEntry": dot3adIPPAttributeEntry,
+       "dot3adIPPIndex": dot3adIPPIndex,
+       "dot3adIPPPortConversationPasses": dot3adIPPPortConversationPasses,
+       "dot3adIPPGatewayConversationDirection": dot3adIPPGatewayConversationDirection,
+       "dot3adIPPAdminState": dot3adIPPAdminState,
+       "dot3adIPPOperState": dot3adIPPOperState,
+       "dot3adIPPTimeOfLastOperChange": dot3adIPPTimeOfLastOperChange,
+       "dot3adIPPStatsTable": dot3adIPPStatsTable,
+       "dot3adIPPStatsEntry": dot3adIPPStatsEntry,
+       "dot3adIPPStatsDRCPDUsRx": dot3adIPPStatsDRCPDUsRx,
+       "dot3adIPPStatsIllegalRx": dot3adIPPStatsIllegalRx,
+       "dot3adIPPStatsDRCPDUsTx": dot3adIPPStatsDRCPDUsTx,
+       "dot3adIPPDebugTable": dot3adIPPDebugTable,
+       "dot3adIPPDebugEntry": dot3adIPPDebugEntry,
+       "dot3adIPPDebugDRCPRxState": dot3adIPPDebugDRCPRxState,
+       "dot3adIPPDebugLastRxTime": dot3adIPPDebugLastRxTime,
+       "dot3adIPPDebugDifferPortalReason": dot3adIPPDebugDifferPortalReason,
        "dot3adAggConformance": dot3adAggConformance,
        "dot3adAggGroups": dot3adAggGroups,
        "dot3adAggGroup": dot3adAggGroup,
-       "dot3adTablesLastChangedGroup": dot3adTablesLastChangedGroup,
        "dot3adAggPortListGroup": dot3adAggPortListGroup,
        "dot3adAggPortGroup": dot3adAggPortGroup,
        "dot3adAggPortStatsGroup": dot3adAggPortStatsGroup,
        "dot3adAggPortDebugGroup": dot3adAggPortDebugGroup,
+       "dot3adTablesLastChangedGroup": dot3adTablesLastChangedGroup,
+       "dot3adAggPortProtocolDAGroup": dot3adAggPortProtocolDAGroup,
+       "dot3adAggNotificationGroup": dot3adAggNotificationGroup,
+       "dot3adAggXGroup": dot3adAggXGroup,
+       "dot3adAggRecommendedGroup": dot3adAggRecommendedGroup,
+       "dot3adAggOptionalGroup": dot3adAggOptionalGroup,
+       "dot3adPerServiceFrameDistGroup": dot3adPerServiceFrameDistGroup,
+       "dot3adAggPortDebugXGroup": dot3adAggPortDebugXGroup,
+       "dot3adDrniGroup": dot3adDrniGroup,
+       "dot3adIPPGroup": dot3adIPPGroup,
+       "dot3adIPPStatsGroup": dot3adIPPStatsGroup,
+       "dot3adIPPDebugGroup": dot3adIPPDebugGroup,
+       "dot3adPerServiceFrameDistGroup2": dot3adPerServiceFrameDistGroup2,
        "dot3adAggCompliances": dot3adAggCompliances,
-       "dot3adAggCompliance": dot3adAggCompliance}
+       "dot3adAggCompliance": dot3adAggCompliance,
+       "dot3adAggCompliance2": dot3adAggCompliance2}
 )

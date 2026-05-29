@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\delta\ORION-BASE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:36:21 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -50,6 +47,10 @@ if 'mibBuilder' not in globals():
     "GLOBAL-REG",
     "modules",
     "orion")
+
+(InetAddress,) = mibBuilder.importSymbols(
+    "INET-ADDRESS-MIB",
+    "InetAddress")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -111,22 +112,6 @@ if 'mibBuilder' not in globals():
 orionBaseMibModule = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 1, 1, 2)
 )
-if mibBuilder.loadTexts:
-    orionBaseMibModule.setRevisions(
-        ("2012-04-27 12:00",
-         "2012-01-26 14:15",
-         "2011-06-20 07:34",
-         "2011-02-10 09:01",
-         "2010-06-16 10:27",
-         "2010-02-24 10:46",
-         "2009-09-04 09:52",
-         "2008-02-21 14:39",
-         "2008-01-18 08:35",
-         "2006-07-27 10:26",
-         "2006-03-02 08:55",
-         "2006-02-23 09:32",
-         "2005-06-03 11:07")
-    )
 
 
 # Types definitions
@@ -168,7 +153,7 @@ class _DcSiteName_Type(DisplayString):
     """Custom type dcSiteName based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 16),
+        ValueSizeConstraint(0, 128),
     )
 
 
@@ -187,7 +172,7 @@ class _DcSystemName_Type(DisplayString):
     """Custom type dcSystemName based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 16),
+        ValueSizeConstraint(0, 128),
     )
 
 
@@ -239,6 +224,30 @@ dcSoftwareVersion = _DcSoftwareVersion_Object(
 dcSoftwareVersion.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dcSoftwareVersion.setStatus("current")
+
+
+class _DcCreateInventoryReport_Type(Integer32):
+    """Custom type dcCreateInventoryReport based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            1
+        )
+    )
+    namedValues = NamedValues(
+        ("create", 1)
+    )
+
+
+_DcCreateInventoryReport_Type.__name__ = "Integer32"
+_DcCreateInventoryReport_Object = MibScalar
+dcCreateInventoryReport = _DcCreateInventoryReport_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 1, 5),
+    _DcCreateInventoryReport_Type()
+)
+dcCreateInventoryReport.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCreateInventoryReport.setStatus("current")
 _DcSystemAlarms_ObjectIdentity = ObjectIdentity
 dcSystemAlarms = _DcSystemAlarms_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 2)
@@ -360,14 +369,16 @@ class _DcAlarmEventCategory_Type(Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("unknown", 1),
           ("urgent", 2),
           ("nonUrgent", 3),
-          ("critical", 4))
+          ("critical", 4),
+          ("allAlarm", 5))
     )
 
 
@@ -743,6 +754,71 @@ dcCriticalAlarmName = _DcCriticalAlarmName_Object(
 dcCriticalAlarmName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dcCriticalAlarmName.setStatus("current")
+_DcNumberAllAlarms_Type = Gauge32
+_DcNumberAllAlarms_Object = MibScalar
+dcNumberAllAlarms = _DcNumberAllAlarms_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 2, 17),
+    _DcNumberAllAlarms_Type()
+)
+dcNumberAllAlarms.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcNumberAllAlarms.setStatus("current")
+_DcAllAlarmIdentifier_Type = Gauge32
+_DcAllAlarmIdentifier_Object = MibScalar
+dcAllAlarmIdentifier = _DcAllAlarmIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 2, 18),
+    _DcAllAlarmIdentifier_Type()
+)
+dcAllAlarmIdentifier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAllAlarmIdentifier.setStatus("current")
+
+
+class _DcAllAlarmValue_Type(Integer32):
+    """Custom type dcAllAlarmValue based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("false", 1),
+          ("indeterminate", 2),
+          ("true", 3))
+    )
+
+
+_DcAllAlarmValue_Type.__name__ = "Integer32"
+_DcAllAlarmValue_Object = MibScalar
+dcAllAlarmValue = _DcAllAlarmValue_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 2, 19),
+    _DcAllAlarmValue_Type()
+)
+dcAllAlarmValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAllAlarmValue.setStatus("current")
+
+
+class _DcAllAlarmName_Type(DisplayString):
+    """Custom type dcAllAlarmName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcAllAlarmName_Type.__name__ = "DisplayString"
+_DcAllAlarmName_Object = MibScalar
+dcAllAlarmName = _DcAllAlarmName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 2, 20),
+    _DcAllAlarmName_Type()
+)
+dcAllAlarmName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAllAlarmName.setStatus("current")
 _DcSystemMonitor_ObjectIdentity = ObjectIdentity
 dcSystemMonitor = _DcSystemMonitor_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 3)
@@ -790,7 +866,7 @@ dcBatteryTemperature.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dcBatteryTemperature.setStatus("current")
 if mibBuilder.loadTexts:
-    dcBatteryTemperature.setUnits("0.1 C")
+    dcBatteryTemperature.setUnits("0.1 degree")
 
 
 class _DcChargeState_Type(Integer32):
@@ -993,32 +1069,128 @@ if mibBuilder.loadTexts:
     dcRectifierIdentifier.setStatus("current")
 
 
-class _DcRectifierStatus_Type(Integer32):
-    """Custom type dcRectifierStatus based on Integer32"""
+class _DcRectifierSlotState_Type(Integer32):
+    """Custom type dcRectifierSlotState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("noPos", 1),
+          ("empty", 2),
+          ("lost", 3),
+          ("new", 4),
+          ("off", 5),
+          ("on", 6))
+    )
+
+
+_DcRectifierSlotState_Type.__name__ = "Integer32"
+_DcRectifierSlotState_Object = MibTableColumn
+dcRectifierSlotState = _DcRectifierSlotState_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 4, 1, 3),
+    _DcRectifierSlotState_Type()
+)
+dcRectifierSlotState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcRectifierSlotState.setStatus("current")
+
+
+class _DcRectifierMainStatus_Type(Integer32):
+    """Custom type dcRectifierMainStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
         *(("unknown", 1),
-          ("off", 2),
-          ("on", 3))
+          ("on", 2),
+          ("remoteOff", 3),
+          ("off", 4),
+          ("temporaryInternalOff", 5),
+          ("latchedInternalOff", 6),
+          ("error", 7),
+          ("notAuthenticated", 8))
     )
 
 
-_DcRectifierStatus_Type.__name__ = "Integer32"
-_DcRectifierStatus_Object = MibTableColumn
-dcRectifierStatus = _DcRectifierStatus_Object(
-    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 4, 1, 3),
-    _DcRectifierStatus_Type()
+_DcRectifierMainStatus_Type.__name__ = "Integer32"
+_DcRectifierMainStatus_Object = MibTableColumn
+dcRectifierMainStatus = _DcRectifierMainStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 4, 1, 4),
+    _DcRectifierMainStatus_Type()
 )
-dcRectifierStatus.setMaxAccess("read-only")
+dcRectifierMainStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcRectifierStatus.setStatus("current")
+    dcRectifierMainStatus.setStatus("current")
+
+
+class _DcRectifierConfiguration_Type(Integer32):
+    """Custom type dcRectifierConfiguration based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("ok", 2),
+          ("default", 3),
+          ("error", 4))
+    )
+
+
+_DcRectifierConfiguration_Type.__name__ = "Integer32"
+_DcRectifierConfiguration_Object = MibTableColumn
+dcRectifierConfiguration = _DcRectifierConfiguration_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 4, 1, 5),
+    _DcRectifierConfiguration_Type()
+)
+dcRectifierConfiguration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcRectifierConfiguration.setStatus("current")
+_DcRectifierIout_Type = Integer32
+_DcRectifierIout_Object = MibTableColumn
+dcRectifierIout = _DcRectifierIout_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 4, 1, 6),
+    _DcRectifierIout_Type()
+)
+dcRectifierIout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcRectifierIout.setStatus("current")
+if mibBuilder.loadTexts:
+    dcRectifierIout.setUnits("100 mA")
+_DcRectifierPout_Type = Integer32
+_DcRectifierPout_Object = MibTableColumn
+dcRectifierPout = _DcRectifierPout_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 4, 1, 7),
+    _DcRectifierPout_Type()
+)
+dcRectifierPout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcRectifierPout.setStatus("current")
+if mibBuilder.loadTexts:
+    dcRectifierPout.setUnits("W")
 _DcRectifierGroupTable_Object = MibTable
 dcRectifierGroupTable = _DcRectifierGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 5)
@@ -1099,7 +1271,25 @@ class _DcRectifierGroupRectifierType_Type(Integer32):
               18,
               19,
               20,
-              21)
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39)
         )
     )
     namedValues = NamedValues(
@@ -1123,7 +1313,25 @@ class _DcRectifierGroupRectifierType_Type(Integer32):
           ("dPR2900B48", 18),
           ("dPR4000B48to60", 19),
           ("dPR850B48", 20),
-          ("dPR2000B48", 21))
+          ("dPR2000B48", 21),
+          ("dPR6000B48A1", 22),
+          ("dPR6000B48B1", 23),
+          ("dPR4815B", 24),
+          ("dPR24100B", 25),
+          ("dPR3000", 26),
+          ("eSR4856FF", 27),
+          ("dPR2900F48A1", 28),
+          ("dPR4000B48A5", 29),
+          ("dPR6000B48A1forChineseMarket", 30),
+          ("dPR2500F48A1", 31),
+          ("dPR3000B48", 32),
+          ("dPR1000B48", 33),
+          ("dPR12000240", 34),
+          ("dPR12000336", 35),
+          ("dPR3000B48A4", 36),
+          ("dPR1800B48A1", 37),
+          ("dPR1800B48A2", 38),
+          ("dPR6000B48A2", 39))
     )
 
 
@@ -1179,7 +1387,7 @@ dcRectifierGroupInputLowOff.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcRectifierGroupInputLowOff.setStatus("current")
 if mibBuilder.loadTexts:
-    dcRectifierGroupInputLowOff.setUnits("10 mV")
+    dcRectifierGroupInputLowOff.setUnits("100 mV")
 _DcRectifierGroupInputLowOn_Type = Integer32
 _DcRectifierGroupInputLowOn_Object = MibTableColumn
 dcRectifierGroupInputLowOn = _DcRectifierGroupInputLowOn_Object(
@@ -1190,7 +1398,7 @@ dcRectifierGroupInputLowOn.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcRectifierGroupInputLowOn.setStatus("current")
 if mibBuilder.loadTexts:
-    dcRectifierGroupInputLowOn.setUnits("10 mV")
+    dcRectifierGroupInputLowOn.setUnits("100 mV")
 _DcRectifierGroupStartupVoltage_Type = Integer32
 _DcRectifierGroupStartupVoltage_Object = MibTableColumn
 dcRectifierGroupStartupVoltage = _DcRectifierGroupStartupVoltage_Object(
@@ -1224,17 +1432,17 @@ if mibBuilder.loadTexts:
     dcRectifierGroupStartupPowerLimit.setStatus("current")
 if mibBuilder.loadTexts:
     dcRectifierGroupStartupPowerLimit.setUnits("1 W")
-_DcRectifierGroupStartupTimeLimit_Type = Gauge32
-_DcRectifierGroupStartupTimeLimit_Object = MibTableColumn
-dcRectifierGroupStartupTimeLimit = _DcRectifierGroupStartupTimeLimit_Object(
+_DcRectifierGroupStartupLimitTime_Type = Gauge32
+_DcRectifierGroupStartupLimitTime_Object = MibTableColumn
+dcRectifierGroupStartupLimitTime = _DcRectifierGroupStartupLimitTime_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 5, 1, 12),
-    _DcRectifierGroupStartupTimeLimit_Type()
+    _DcRectifierGroupStartupLimitTime_Type()
 )
-dcRectifierGroupStartupTimeLimit.setMaxAccess("read-write")
+dcRectifierGroupStartupLimitTime.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcRectifierGroupStartupTimeLimit.setStatus("current")
+    dcRectifierGroupStartupLimitTime.setStatus("current")
 if mibBuilder.loadTexts:
-    dcRectifierGroupStartupTimeLimit.setUnits("10 ms")
+    dcRectifierGroupStartupLimitTime.setUnits("10 ms")
 _DcRectifierGroupPowerupDelay_Type = Gauge32
 _DcRectifierGroupPowerupDelay_Object = MibTableColumn
 dcRectifierGroupPowerupDelay = _DcRectifierGroupPowerupDelay_Object(
@@ -1330,52 +1538,54 @@ if mibBuilder.loadTexts:
     dcLimitSwitchingTimes.setStatus("current")
 
 
-class _DcForceSwitchingOncePerMonth_Type(Integer32):
-    """Custom type dcForceSwitchingOncePerMonth based on Integer32"""
+class _DcForceCyclingType_Type(Integer32):
+    """Custom type dcForceCyclingType based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
-        *(("no", 1),
-          ("yes", 2))
+        *(("never", 1),
+          ("day", 2),
+          ("thirtydays", 3))
     )
 
 
-_DcForceSwitchingOncePerMonth_Type.__name__ = "Integer32"
-_DcForceSwitchingOncePerMonth_Object = MibScalar
-dcForceSwitchingOncePerMonth = _DcForceSwitchingOncePerMonth_Object(
+_DcForceCyclingType_Type.__name__ = "Integer32"
+_DcForceCyclingType_Object = MibScalar
+dcForceCyclingType = _DcForceCyclingType_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 6, 1, 3),
-    _DcForceSwitchingOncePerMonth_Type()
+    _DcForceCyclingType_Type()
 )
-dcForceSwitchingOncePerMonth.setMaxAccess("read-write")
+dcForceCyclingType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcForceSwitchingOncePerMonth.setStatus("current")
-_DcMaximumLoadStep_Type = Integer32
-_DcMaximumLoadStep_Object = MibScalar
-dcMaximumLoadStep = _DcMaximumLoadStep_Object(
+    dcForceCyclingType.setStatus("current")
+_DcMinimumPowerReserve_Type = Integer32
+_DcMinimumPowerReserve_Object = MibScalar
+dcMinimumPowerReserve = _DcMinimumPowerReserve_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 6, 1, 4),
-    _DcMaximumLoadStep_Type()
+    _DcMinimumPowerReserve_Type()
 )
-dcMaximumLoadStep.setMaxAccess("read-write")
+dcMinimumPowerReserve.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcMaximumLoadStep.setStatus("current")
+    dcMinimumPowerReserve.setStatus("current")
 if mibBuilder.loadTexts:
-    dcMaximumLoadStep.setUnits("1 W")
-_DcMinimumLoadStep_Type = Integer32
-_DcMinimumLoadStep_Object = MibScalar
-dcMinimumLoadStep = _DcMinimumLoadStep_Object(
+    dcMinimumPowerReserve.setUnits("1 W")
+_DcMinimumRectifierPower_Type = Integer32
+_DcMinimumRectifierPower_Object = MibScalar
+dcMinimumRectifierPower = _DcMinimumRectifierPower_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 6, 1, 5),
-    _DcMinimumLoadStep_Type()
+    _DcMinimumRectifierPower_Type()
 )
-dcMinimumLoadStep.setMaxAccess("read-write")
+dcMinimumRectifierPower.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcMinimumLoadStep.setStatus("current")
+    dcMinimumRectifierPower.setStatus("current")
 if mibBuilder.loadTexts:
-    dcMinimumLoadStep.setUnits("1 W")
+    dcMinimumRectifierPower.setUnits("1 W")
 _DcPowerLimitation_ObjectIdentity = ObjectIdentity
 dcPowerLimitation = _DcPowerLimitation_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 6, 2)
@@ -1487,17 +1697,17 @@ dcPowerLimitationType = _DcPowerLimitationType_Object(
 dcPowerLimitationType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dcPowerLimitationType.setStatus("current")
-_DcPowerLimitationLimit_Type = Integer32
-_DcPowerLimitationLimit_Object = MibTableColumn
-dcPowerLimitationLimit = _DcPowerLimitationLimit_Object(
+_DcMaxTotalRectifierPower_Type = Integer32
+_DcMaxTotalRectifierPower_Object = MibTableColumn
+dcMaxTotalRectifierPower = _DcMaxTotalRectifierPower_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 4, 6, 2, 1, 1, 5),
-    _DcPowerLimitationLimit_Type()
+    _DcMaxTotalRectifierPower_Type()
 )
-dcPowerLimitationLimit.setMaxAccess("read-write")
+dcMaxTotalRectifierPower.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcPowerLimitationLimit.setStatus("current")
+    dcMaxTotalRectifierPower.setStatus("current")
 if mibBuilder.loadTexts:
-    dcPowerLimitationLimit.setUnits("1 W")
+    dcMaxTotalRectifierPower.setUnits("1 W")
 
 
 class _DcPowerLimitationNoBatteryDischarge_Type(Integer32):
@@ -1557,9 +1767,9 @@ dcBatteryTestUsupport = _DcBatteryTestUsupport_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 1),
     _DcBatteryTestUsupport_Type()
 )
-dcBatteryTestUsupport.setMaxAccess("read-write")
+dcBatteryTestUsupport.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestUsupport.setStatus("current")
+    dcBatteryTestUsupport.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestUsupport.setUnits("10 mV")
 _DcBatteryTestDuration_Type = Gauge32
@@ -1568,9 +1778,9 @@ dcBatteryTestDuration = _DcBatteryTestDuration_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 2),
     _DcBatteryTestDuration_Type()
 )
-dcBatteryTestDuration.setMaxAccess("read-write")
+dcBatteryTestDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestDuration.setStatus("current")
+    dcBatteryTestDuration.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestDuration.setUnits("minute")
 _DcBatteryTestInterval_Type = Gauge32
@@ -1579,9 +1789,9 @@ dcBatteryTestInterval = _DcBatteryTestInterval_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 3),
     _DcBatteryTestInterval_Type()
 )
-dcBatteryTestInterval.setMaxAccess("read-write")
+dcBatteryTestInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestInterval.setStatus("current")
+    dcBatteryTestInterval.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestInterval.setUnits("days")
 _DcBatteryTestDischargeCurrent_Type = Integer32
@@ -1590,9 +1800,9 @@ dcBatteryTestDischargeCurrent = _DcBatteryTestDischargeCurrent_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 4),
     _DcBatteryTestDischargeCurrent_Type()
 )
-dcBatteryTestDischargeCurrent.setMaxAccess("read-write")
+dcBatteryTestDischargeCurrent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestDischargeCurrent.setStatus("current")
+    dcBatteryTestDischargeCurrent.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestDischargeCurrent.setUnits("100 mA")
 _DcBatteryTestMinDuration_Type = Gauge32
@@ -1601,9 +1811,9 @@ dcBatteryTestMinDuration = _DcBatteryTestMinDuration_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 5),
     _DcBatteryTestMinDuration_Type()
 )
-dcBatteryTestMinDuration.setMaxAccess("read-write")
+dcBatteryTestMinDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestMinDuration.setStatus("current")
+    dcBatteryTestMinDuration.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestMinDuration.setUnits("minutes")
 _DcBatteryTestVoltageWithinUfloat_Type = Integer32
@@ -1612,9 +1822,9 @@ dcBatteryTestVoltageWithinUfloat = _DcBatteryTestVoltageWithinUfloat_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 6),
     _DcBatteryTestVoltageWithinUfloat_Type()
 )
-dcBatteryTestVoltageWithinUfloat.setMaxAccess("read-write")
+dcBatteryTestVoltageWithinUfloat.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestVoltageWithinUfloat.setStatus("current")
+    dcBatteryTestVoltageWithinUfloat.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestVoltageWithinUfloat.setUnits("10 mV")
 _DcBatteryTestVoltageWithinUfloatPeriod_Type = Gauge32
@@ -1623,9 +1833,9 @@ dcBatteryTestVoltageWithinUfloatPeriod = _DcBatteryTestVoltageWithinUfloatPeriod
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 7),
     _DcBatteryTestVoltageWithinUfloatPeriod_Type()
 )
-dcBatteryTestVoltageWithinUfloatPeriod.setMaxAccess("read-write")
+dcBatteryTestVoltageWithinUfloatPeriod.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestVoltageWithinUfloatPeriod.setStatus("current")
+    dcBatteryTestVoltageWithinUfloatPeriod.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestVoltageWithinUfloatPeriod.setUnits("days")
 _DcBatteryTestTempFrom_Type = Integer32
@@ -1634,22 +1844,22 @@ dcBatteryTestTempFrom = _DcBatteryTestTempFrom_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 8),
     _DcBatteryTestTempFrom_Type()
 )
-dcBatteryTestTempFrom.setMaxAccess("read-write")
+dcBatteryTestTempFrom.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestTempFrom.setStatus("current")
+    dcBatteryTestTempFrom.setStatus("obsolete")
 if mibBuilder.loadTexts:
-    dcBatteryTestTempFrom.setUnits("0.1 C")
+    dcBatteryTestTempFrom.setUnits("0.1 degree")
 _DcBatteryTestTempTo_Type = Integer32
 _DcBatteryTestTempTo_Object = MibScalar
 dcBatteryTestTempTo = _DcBatteryTestTempTo_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 9),
     _DcBatteryTestTempTo_Type()
 )
-dcBatteryTestTempTo.setMaxAccess("read-write")
+dcBatteryTestTempTo.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestTempTo.setStatus("current")
+    dcBatteryTestTempTo.setStatus("obsolete")
 if mibBuilder.loadTexts:
-    dcBatteryTestTempTo.setUnits("0.1 C")
+    dcBatteryTestTempTo.setUnits("0.1 degree")
 
 
 class _DcBatteryTestIntervalEnabled_Type(Integer32):
@@ -1673,9 +1883,9 @@ dcBatteryTestIntervalEnabled = _DcBatteryTestIntervalEnabled_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 10),
     _DcBatteryTestIntervalEnabled_Type()
 )
-dcBatteryTestIntervalEnabled.setMaxAccess("read-write")
+dcBatteryTestIntervalEnabled.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestIntervalEnabled.setStatus("current")
+    dcBatteryTestIntervalEnabled.setStatus("obsolete")
 
 
 class _DcBatteryTestStartTimeFrom_Type(DisplayString):
@@ -1693,9 +1903,9 @@ dcBatteryTestStartTimeFrom = _DcBatteryTestStartTimeFrom_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 11),
     _DcBatteryTestStartTimeFrom_Type()
 )
-dcBatteryTestStartTimeFrom.setMaxAccess("read-write")
+dcBatteryTestStartTimeFrom.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestStartTimeFrom.setStatus("current")
+    dcBatteryTestStartTimeFrom.setStatus("obsolete")
 
 
 class _DcBatteryTestStartTimeTo_Type(DisplayString):
@@ -1713,9 +1923,9 @@ dcBatteryTestStartTimeTo = _DcBatteryTestStartTimeTo_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 1, 12),
     _DcBatteryTestStartTimeTo_Type()
 )
-dcBatteryTestStartTimeTo.setMaxAccess("read-write")
+dcBatteryTestStartTimeTo.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestStartTimeTo.setStatus("current")
+    dcBatteryTestStartTimeTo.setStatus("obsolete")
 _DcBatteryTestResults_ObjectIdentity = ObjectIdentity
 dcBatteryTestResults = _DcBatteryTestResults_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 2)
@@ -1739,7 +1949,7 @@ dcBatteryTestDateTime = _DcBatteryTestDateTime_Object(
 )
 dcBatteryTestDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestDateTime.setStatus("current")
+    dcBatteryTestDateTime.setStatus("obsolete")
 
 
 class _DcBatteryTestResult_Type(Integer32):
@@ -1777,7 +1987,7 @@ dcBatteryTestResult = _DcBatteryTestResult_Object(
 )
 dcBatteryTestResult.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestResult.setStatus("current")
+    dcBatteryTestResult.setStatus("obsolete")
 _DcBatteryTestEndVoltage_Type = Integer32
 _DcBatteryTestEndVoltage_Object = MibScalar
 dcBatteryTestEndVoltage = _DcBatteryTestEndVoltage_Object(
@@ -1786,7 +1996,7 @@ dcBatteryTestEndVoltage = _DcBatteryTestEndVoltage_Object(
 )
 dcBatteryTestEndVoltage.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestEndVoltage.setStatus("current")
+    dcBatteryTestEndVoltage.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcBatteryTestEndVoltage.setUnits("10 mV")
 
@@ -1812,9 +2022,9 @@ dcBatteryTestControl = _DcBatteryTestControl_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 3),
     _DcBatteryTestControl_Type()
 )
-dcBatteryTestControl.setMaxAccess("read-write")
+dcBatteryTestControl.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestControl.setStatus("current")
+    dcBatteryTestControl.setStatus("obsolete")
 
 
 class _DcBatteryTestStatus_Type(Integer32):
@@ -1827,10 +2037,7 @@ class _DcBatteryTestStatus_Type(Integer32):
               3,
               4,
               5,
-              6,
-              7,
-              8,
-              9)
+              6)
         )
     )
     namedValues = NamedValues(
@@ -1838,11 +2045,8 @@ class _DcBatteryTestStatus_Type(Integer32):
           ("starting", 2),
           ("stopping", 3),
           ("constantCurrent", 4),
-          ("timeBased", 5),
-          ("energyBased", 6),
-          ("recovery", 7),
-          ("realLoad", 8),
-          ("stop", 9))
+          ("recovery", 5),
+          ("realLoad", 6))
     )
 
 
@@ -1854,7 +2058,7 @@ dcBatteryTestStatus = _DcBatteryTestStatus_Object(
 )
 dcBatteryTestStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestStatus.setStatus("current")
+    dcBatteryTestStatus.setStatus("obsolete")
 
 
 class _DcBatteryTestFailureEvent_Type(Integer32):
@@ -1876,9 +2080,9 @@ dcBatteryTestFailureEvent = _DcBatteryTestFailureEvent_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 5),
     _DcBatteryTestFailureEvent_Type()
 )
-dcBatteryTestFailureEvent.setMaxAccess("read-write")
+dcBatteryTestFailureEvent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestFailureEvent.setStatus("current")
+    dcBatteryTestFailureEvent.setStatus("obsolete")
 
 
 class _DcBatteryTestType_Type(Integer32):
@@ -1888,13 +2092,13 @@ class _DcBatteryTestType_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              5)
+              3)
         )
     )
     namedValues = NamedValues(
         *(("none", 1),
           ("constantCurrent", 2),
-          ("realLoad", 5))
+          ("realLoad", 3))
     )
 
 
@@ -1904,9 +2108,481 @@ dcBatteryTestType = _DcBatteryTestType_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 6),
     _DcBatteryTestType_Type()
 )
-dcBatteryTestType.setMaxAccess("read-write")
+dcBatteryTestType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcBatteryTestType.setStatus("current")
+    dcBatteryTestType.setStatus("obsolete")
+_DcBatteryTestTable_Object = MibTable
+dcBatteryTestTable = _DcBatteryTestTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7)
+)
+if mibBuilder.loadTexts:
+    dcBatteryTestTable.setStatus("current")
+_DcBatteryTestTableEntry_Object = MibTableRow
+dcBatteryTestTableEntry = _DcBatteryTestTableEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1)
+)
+dcBatteryTestTableEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcBatteryTestTableIndex"),
+)
+if mibBuilder.loadTexts:
+    dcBatteryTestTableEntry.setStatus("current")
+
+
+class _DcBatteryTestTableIndex_Type(Integer32):
+    """Custom type dcBatteryTestTableIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_DcBatteryTestTableIndex_Type.__name__ = "Integer32"
+_DcBatteryTestTableIndex_Object = MibTableColumn
+dcBatteryTestTableIndex = _DcBatteryTestTableIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 1),
+    _DcBatteryTestTableIndex_Type()
+)
+dcBatteryTestTableIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableIndex.setStatus("current")
+_DcBatteryTestTablePriority_Type = Unsigned32
+_DcBatteryTestTablePriority_Object = MibTableColumn
+dcBatteryTestTablePriority = _DcBatteryTestTablePriority_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 2),
+    _DcBatteryTestTablePriority_Type()
+)
+dcBatteryTestTablePriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestTablePriority.setStatus("current")
+
+
+class _DcBatteryTestTableName_Type(DisplayString):
+    """Custom type dcBatteryTestTableName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(32, 32),
+    )
+    fixed_length = 32
+
+
+_DcBatteryTestTableName_Type.__name__ = "DisplayString"
+_DcBatteryTestTableName_Object = MibTableColumn
+dcBatteryTestTableName = _DcBatteryTestTableName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 3),
+    _DcBatteryTestTableName_Type()
+)
+dcBatteryTestTableName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableName.setStatus("current")
+
+
+class _DcBatteryTestTableType_Type(Integer32):
+    """Custom type dcBatteryTestTableType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("constantCurrent", 2),
+          ("realLoad", 3))
+    )
+
+
+_DcBatteryTestTableType_Type.__name__ = "Integer32"
+_DcBatteryTestTableType_Object = MibTableColumn
+dcBatteryTestTableType = _DcBatteryTestTableType_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 4),
+    _DcBatteryTestTableType_Type()
+)
+dcBatteryTestTableType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableType.setStatus("current")
+
+
+class _DcBatteryTestTableStatus_Type(Integer32):
+    """Custom type dcBatteryTestTableStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("inactive", 1),
+          ("starting", 2),
+          ("stopping", 3),
+          ("constantCurrent", 4),
+          ("recovery", 5),
+          ("realLoad", 6))
+    )
+
+
+_DcBatteryTestTableStatus_Type.__name__ = "Integer32"
+_DcBatteryTestTableStatus_Object = MibTableColumn
+dcBatteryTestTableStatus = _DcBatteryTestTableStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 5),
+    _DcBatteryTestTableStatus_Type()
+)
+dcBatteryTestTableStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableStatus.setStatus("current")
+_DcBatteryTestTableUsupport_Type = Integer32
+_DcBatteryTestTableUsupport_Object = MibTableColumn
+dcBatteryTestTableUsupport = _DcBatteryTestTableUsupport_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 6),
+    _DcBatteryTestTableUsupport_Type()
+)
+dcBatteryTestTableUsupport.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableUsupport.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableUsupport.setUnits("10 mV")
+_DcBatteryTestTableDuration_Type = Gauge32
+_DcBatteryTestTableDuration_Object = MibTableColumn
+dcBatteryTestTableDuration = _DcBatteryTestTableDuration_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 7),
+    _DcBatteryTestTableDuration_Type()
+)
+dcBatteryTestTableDuration.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableDuration.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableDuration.setUnits("minute")
+_DcBatteryTestTableInterval_Type = Gauge32
+_DcBatteryTestTableInterval_Object = MibTableColumn
+dcBatteryTestTableInterval = _DcBatteryTestTableInterval_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 8),
+    _DcBatteryTestTableInterval_Type()
+)
+dcBatteryTestTableInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableInterval.setUnits("days")
+_DcBatteryTestTableDischargeCurrent_Type = Integer32
+_DcBatteryTestTableDischargeCurrent_Object = MibTableColumn
+dcBatteryTestTableDischargeCurrent = _DcBatteryTestTableDischargeCurrent_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 9),
+    _DcBatteryTestTableDischargeCurrent_Type()
+)
+dcBatteryTestTableDischargeCurrent.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableDischargeCurrent.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableDischargeCurrent.setUnits("100 mA")
+_DcBatteryTestTableMinDuration_Type = Gauge32
+_DcBatteryTestTableMinDuration_Object = MibTableColumn
+dcBatteryTestTableMinDuration = _DcBatteryTestTableMinDuration_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 10),
+    _DcBatteryTestTableMinDuration_Type()
+)
+dcBatteryTestTableMinDuration.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableMinDuration.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableMinDuration.setUnits("minutes")
+_DcBatteryTestTableVoltageWithinUfloat_Type = Integer32
+_DcBatteryTestTableVoltageWithinUfloat_Object = MibTableColumn
+dcBatteryTestTableVoltageWithinUfloat = _DcBatteryTestTableVoltageWithinUfloat_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 11),
+    _DcBatteryTestTableVoltageWithinUfloat_Type()
+)
+dcBatteryTestTableVoltageWithinUfloat.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableVoltageWithinUfloat.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableVoltageWithinUfloat.setUnits("10 mV")
+_DcBatteryTestTableVoltageWithinUfloatPeriod_Type = Gauge32
+_DcBatteryTestTableVoltageWithinUfloatPeriod_Object = MibTableColumn
+dcBatteryTestTableVoltageWithinUfloatPeriod = _DcBatteryTestTableVoltageWithinUfloatPeriod_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 12),
+    _DcBatteryTestTableVoltageWithinUfloatPeriod_Type()
+)
+dcBatteryTestTableVoltageWithinUfloatPeriod.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableVoltageWithinUfloatPeriod.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableVoltageWithinUfloatPeriod.setUnits("days")
+_DcBatteryTestTableTempFrom_Type = Integer32
+_DcBatteryTestTableTempFrom_Object = MibTableColumn
+dcBatteryTestTableTempFrom = _DcBatteryTestTableTempFrom_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 13),
+    _DcBatteryTestTableTempFrom_Type()
+)
+dcBatteryTestTableTempFrom.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableTempFrom.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableTempFrom.setUnits("0.1 degree")
+_DcBatteryTestTableTempTo_Type = Integer32
+_DcBatteryTestTableTempTo_Object = MibTableColumn
+dcBatteryTestTableTempTo = _DcBatteryTestTableTempTo_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 14),
+    _DcBatteryTestTableTempTo_Type()
+)
+dcBatteryTestTableTempTo.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableTempTo.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableTempTo.setUnits("0.1 degree")
+
+
+class _DcBatteryTestTableIntervalEnabled_Type(Integer32):
+    """Custom type dcBatteryTestTableIntervalEnabled based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcBatteryTestTableIntervalEnabled_Type.__name__ = "Integer32"
+_DcBatteryTestTableIntervalEnabled_Object = MibTableColumn
+dcBatteryTestTableIntervalEnabled = _DcBatteryTestTableIntervalEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 15),
+    _DcBatteryTestTableIntervalEnabled_Type()
+)
+dcBatteryTestTableIntervalEnabled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableIntervalEnabled.setStatus("current")
+
+
+class _DcBatteryTestTableStartTimeFrom_Type(DisplayString):
+    """Custom type dcBatteryTestTableStartTimeFrom based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_DcBatteryTestTableStartTimeFrom_Type.__name__ = "DisplayString"
+_DcBatteryTestTableStartTimeFrom_Object = MibTableColumn
+dcBatteryTestTableStartTimeFrom = _DcBatteryTestTableStartTimeFrom_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 16),
+    _DcBatteryTestTableStartTimeFrom_Type()
+)
+dcBatteryTestTableStartTimeFrom.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableStartTimeFrom.setStatus("current")
+
+
+class _DcBatteryTestTableStartTimeTo_Type(DisplayString):
+    """Custom type dcBatteryTestTableStartTimeTo based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_DcBatteryTestTableStartTimeTo_Type.__name__ = "DisplayString"
+_DcBatteryTestTableStartTimeTo_Object = MibTableColumn
+dcBatteryTestTableStartTimeTo = _DcBatteryTestTableStartTimeTo_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 17),
+    _DcBatteryTestTableStartTimeTo_Type()
+)
+dcBatteryTestTableStartTimeTo.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableStartTimeTo.setStatus("current")
+
+
+class _DcBatteryTestTableControl_Type(Integer32):
+    """Custom type dcBatteryTestTableControl based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("start", 1),
+          ("stop", 2))
+    )
+
+
+_DcBatteryTestTableControl_Type.__name__ = "Integer32"
+_DcBatteryTestTableControl_Object = MibTableColumn
+dcBatteryTestTableControl = _DcBatteryTestTableControl_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 18),
+    _DcBatteryTestTableControl_Type()
+)
+dcBatteryTestTableControl.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableControl.setStatus("current")
+
+
+class _DcBatteryTestTableFailureEvent_Type(Integer32):
+    """Custom type dcBatteryTestTableFailureEvent based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            1
+        )
+    )
+    namedValues = NamedValues(
+        ("reset", 1)
+    )
+
+
+_DcBatteryTestTableFailureEvent_Type.__name__ = "Integer32"
+_DcBatteryTestTableFailureEvent_Object = MibTableColumn
+dcBatteryTestTableFailureEvent = _DcBatteryTestTableFailureEvent_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 7, 1, 19),
+    _DcBatteryTestTableFailureEvent_Type()
+)
+dcBatteryTestTableFailureEvent.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTestTableFailureEvent.setStatus("current")
+_DcBatteryTestResultTable_Object = MibTable
+dcBatteryTestResultTable = _DcBatteryTestResultTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8)
+)
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTable.setStatus("current")
+_DcBatteryTestResultTableEntry_Object = MibTableRow
+dcBatteryTestResultTableEntry = _DcBatteryTestResultTableEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1)
+)
+dcBatteryTestResultTableEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcBatteryTestResultTableIndex"),
+)
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableEntry.setStatus("current")
+
+
+class _DcBatteryTestResultTableIndex_Type(Integer32):
+    """Custom type dcBatteryTestResultTableIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_DcBatteryTestResultTableIndex_Type.__name__ = "Integer32"
+_DcBatteryTestResultTableIndex_Object = MibTableColumn
+dcBatteryTestResultTableIndex = _DcBatteryTestResultTableIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1, 1),
+    _DcBatteryTestResultTableIndex_Type()
+)
+dcBatteryTestResultTableIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableIndex.setStatus("current")
+_DcBatteryTestResultTablePriority_Type = Unsigned32
+_DcBatteryTestResultTablePriority_Object = MibTableColumn
+dcBatteryTestResultTablePriority = _DcBatteryTestResultTablePriority_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1, 2),
+    _DcBatteryTestResultTablePriority_Type()
+)
+dcBatteryTestResultTablePriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTablePriority.setStatus("current")
+
+
+class _DcBatteryTestResultTableName_Type(DisplayString):
+    """Custom type dcBatteryTestResultTableName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(32, 32),
+    )
+    fixed_length = 32
+
+
+_DcBatteryTestResultTableName_Type.__name__ = "DisplayString"
+_DcBatteryTestResultTableName_Object = MibTableColumn
+dcBatteryTestResultTableName = _DcBatteryTestResultTableName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1, 3),
+    _DcBatteryTestResultTableName_Type()
+)
+dcBatteryTestResultTableName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableName.setStatus("current")
+
+
+class _DcBatteryTestResultTableDateTime_Type(DisplayString):
+    """Custom type dcBatteryTestResultTableDateTime based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(19, 19),
+    )
+    fixed_length = 19
+
+
+_DcBatteryTestResultTableDateTime_Type.__name__ = "DisplayString"
+_DcBatteryTestResultTableDateTime_Object = MibTableColumn
+dcBatteryTestResultTableDateTime = _DcBatteryTestResultTableDateTime_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1, 4),
+    _DcBatteryTestResultTableDateTime_Type()
+)
+dcBatteryTestResultTableDateTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableDateTime.setStatus("current")
+
+
+class _DcBatteryTestResultTableResult_Type(Integer32):
+    """Custom type dcBatteryTestResultTableResult based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("failed", 2),
+          ("aborted", 3),
+          ("loadFailure", 4),
+          ("okay", 5),
+          ("abortedManual", 6),
+          ("abortedEvCtrlCharge", 7),
+          ("abortedInhibitEv", 8))
+    )
+
+
+_DcBatteryTestResultTableResult_Type.__name__ = "Integer32"
+_DcBatteryTestResultTableResult_Object = MibTableColumn
+dcBatteryTestResultTableResult = _DcBatteryTestResultTableResult_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1, 5),
+    _DcBatteryTestResultTableResult_Type()
+)
+dcBatteryTestResultTableResult.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableResult.setStatus("current")
+_DcBatteryTestResultTableEndVoltage_Type = Integer32
+_DcBatteryTestResultTableEndVoltage_Object = MibTableColumn
+dcBatteryTestResultTableEndVoltage = _DcBatteryTestResultTableEndVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 2, 8, 1, 6),
+    _DcBatteryTestResultTableEndVoltage_Type()
+)
+dcBatteryTestResultTableEndVoltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableEndVoltage.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTestResultTableEndVoltage.setUnits("10 mV")
 _DcBatteryParameter_ObjectIdentity = ObjectIdentity
 dcBatteryParameter = _DcBatteryParameter_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3)
@@ -2068,6 +2744,368 @@ if mibBuilder.loadTexts:
     dcExpectedBackupTime.setStatus("current")
 if mibBuilder.loadTexts:
     dcExpectedBackupTime.setUnits("minutes")
+_DcBatteryLithiumTable_Object = MibTable
+dcBatteryLithiumTable = _DcBatteryLithiumTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4)
+)
+if mibBuilder.loadTexts:
+    dcBatteryLithiumTable.setStatus("current")
+_DcBatteryLithiumEntry_Object = MibTableRow
+dcBatteryLithiumEntry = _DcBatteryLithiumEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1)
+)
+dcBatteryLithiumEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcBatteryLithiumIndex"),
+)
+if mibBuilder.loadTexts:
+    dcBatteryLithiumEntry.setStatus("current")
+
+
+class _DcBatteryLithiumIndex_Type(Integer32):
+    """Custom type dcBatteryLithiumIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_DcBatteryLithiumIndex_Type.__name__ = "Integer32"
+_DcBatteryLithiumIndex_Object = MibTableColumn
+dcBatteryLithiumIndex = _DcBatteryLithiumIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 1),
+    _DcBatteryLithiumIndex_Type()
+)
+dcBatteryLithiumIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumIndex.setStatus("current")
+
+
+class _DcBatteryLithiumName_Type(DisplayString):
+    """Custom type dcBatteryLithiumName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 16),
+    )
+
+
+_DcBatteryLithiumName_Type.__name__ = "DisplayString"
+_DcBatteryLithiumName_Object = MibTableColumn
+dcBatteryLithiumName = _DcBatteryLithiumName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 2),
+    _DcBatteryLithiumName_Type()
+)
+dcBatteryLithiumName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumName.setStatus("current")
+
+
+class _DcBatteryLithiumMainState_Type(Integer32):
+    """Custom type dcBatteryLithiumMainState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 0),
+          ("unknown", 1),
+          ("missing", 2),
+          ("ok", 3),
+          ("warning", 4),
+          ("alarm", 5),
+          ("error", 6),
+          ("remoteOff", 7))
+    )
+
+
+_DcBatteryLithiumMainState_Type.__name__ = "Integer32"
+_DcBatteryLithiumMainState_Object = MibTableColumn
+dcBatteryLithiumMainState = _DcBatteryLithiumMainState_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 3),
+    _DcBatteryLithiumMainState_Type()
+)
+dcBatteryLithiumMainState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumMainState.setStatus("current")
+
+
+class _DcBatteryLithiumSubState_Type(Integer32):
+    """Custom type dcBatteryLithiumSubState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 0),
+          ("na", 1),
+          ("unknown", 2),
+          ("float", 3),
+          ("charge", 4),
+          ("discharge", 5),
+          ("highvoltage", 6),
+          ("lowvoltage", 7),
+          ("temperature", 8),
+          ("highcurrent", 9),
+          ("internalfailure", 10),
+          ("lowSoC", 11))
+    )
+
+
+_DcBatteryLithiumSubState_Type.__name__ = "Integer32"
+_DcBatteryLithiumSubState_Object = MibTableColumn
+dcBatteryLithiumSubState = _DcBatteryLithiumSubState_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 4),
+    _DcBatteryLithiumSubState_Type()
+)
+dcBatteryLithiumSubState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumSubState.setStatus("current")
+_DcBatteryLithiumCurrent_Type = Integer32
+_DcBatteryLithiumCurrent_Object = MibTableColumn
+dcBatteryLithiumCurrent = _DcBatteryLithiumCurrent_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 5),
+    _DcBatteryLithiumCurrent_Type()
+)
+dcBatteryLithiumCurrent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumCurrent.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumCurrent.setUnits("100 mA")
+_DcBatteryLithiumStateOfCharge_Type = Gauge32
+_DcBatteryLithiumStateOfCharge_Object = MibTableColumn
+dcBatteryLithiumStateOfCharge = _DcBatteryLithiumStateOfCharge_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 6),
+    _DcBatteryLithiumStateOfCharge_Type()
+)
+dcBatteryLithiumStateOfCharge.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumStateOfCharge.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumStateOfCharge.setUnits("%")
+
+
+class _DcBatteryLithiumInstallationDate_Type(DisplayString):
+    """Custom type dcBatteryLithiumInstallationDate based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 11),
+    )
+
+
+_DcBatteryLithiumInstallationDate_Type.__name__ = "DisplayString"
+_DcBatteryLithiumInstallationDate_Object = MibTableColumn
+dcBatteryLithiumInstallationDate = _DcBatteryLithiumInstallationDate_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 7),
+    _DcBatteryLithiumInstallationDate_Type()
+)
+dcBatteryLithiumInstallationDate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumInstallationDate.setStatus("current")
+_DcBatteryLithiumSoH_Type = Gauge32
+_DcBatteryLithiumSoH_Object = MibTableColumn
+dcBatteryLithiumSoH = _DcBatteryLithiumSoH_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 4, 1, 8),
+    _DcBatteryLithiumSoH_Type()
+)
+dcBatteryLithiumSoH.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumSoH.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryLithiumSoH.setUnits("%")
+_DcBatteryLifePredictionTable_Object = MibTable
+dcBatteryLifePredictionTable = _DcBatteryLifePredictionTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5)
+)
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionTable.setStatus("current")
+_DcBatteryLifePredictionEntry_Object = MibTableRow
+dcBatteryLifePredictionEntry = _DcBatteryLifePredictionEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5, 1)
+)
+dcBatteryLifePredictionEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcBatteryLifePredictionIndex"),
+)
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionEntry.setStatus("current")
+
+
+class _DcBatteryLifePredictionIndex_Type(Integer32):
+    """Custom type dcBatteryLifePredictionIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_DcBatteryLifePredictionIndex_Type.__name__ = "Integer32"
+_DcBatteryLifePredictionIndex_Object = MibTableColumn
+dcBatteryLifePredictionIndex = _DcBatteryLifePredictionIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5, 1, 1),
+    _DcBatteryLifePredictionIndex_Type()
+)
+dcBatteryLifePredictionIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionIndex.setStatus("current")
+
+
+class _DcBatteryLifePredictionName_Type(DisplayString):
+    """Custom type dcBatteryLifePredictionName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 16),
+    )
+
+
+_DcBatteryLifePredictionName_Type.__name__ = "DisplayString"
+_DcBatteryLifePredictionName_Object = MibTableColumn
+dcBatteryLifePredictionName = _DcBatteryLifePredictionName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5, 1, 2),
+    _DcBatteryLifePredictionName_Type()
+)
+dcBatteryLifePredictionName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionName.setStatus("current")
+_DcBatteryLifePredictionRemainingDays_Type = Gauge32
+_DcBatteryLifePredictionRemainingDays_Object = MibTableColumn
+dcBatteryLifePredictionRemainingDays = _DcBatteryLifePredictionRemainingDays_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5, 1, 3),
+    _DcBatteryLifePredictionRemainingDays_Type()
+)
+dcBatteryLifePredictionRemainingDays.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionRemainingDays.setStatus("current")
+_DcBatteryLifePredictionInstallationDate_Type = DisplayString
+_DcBatteryLifePredictionInstallationDate_Object = MibTableColumn
+dcBatteryLifePredictionInstallationDate = _DcBatteryLifePredictionInstallationDate_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5, 1, 4),
+    _DcBatteryLifePredictionInstallationDate_Type()
+)
+dcBatteryLifePredictionInstallationDate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionInstallationDate.setStatus("current")
+_DcBatteryLifePredictionSoH_Type = Gauge32
+_DcBatteryLifePredictionSoH_Object = MibTableColumn
+dcBatteryLifePredictionSoH = _DcBatteryLifePredictionSoH_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 5, 1, 5),
+    _DcBatteryLifePredictionSoH_Type()
+)
+dcBatteryLifePredictionSoH.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionSoH.setStatus("current")
+
+
+class _DcBatteryLifePredictionStatus_Type(Integer32):
+    """Custom type dcBatteryLifePredictionStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("inactive", 1),
+          ("ok", 2),
+          ("warning", 3),
+          ("fail", 4))
+    )
+
+
+_DcBatteryLifePredictionStatus_Type.__name__ = "Integer32"
+_DcBatteryLifePredictionStatus_Object = MibScalar
+dcBatteryLifePredictionStatus = _DcBatteryLifePredictionStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 6),
+    _DcBatteryLifePredictionStatus_Type()
+)
+dcBatteryLifePredictionStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryLifePredictionStatus.setStatus("current")
+
+
+class _DcBatteryChargingCurrentLimitEnable_Type(Integer32):
+    """Custom type dcBatteryChargingCurrentLimitEnable based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcBatteryChargingCurrentLimitEnable_Type.__name__ = "Integer32"
+_DcBatteryChargingCurrentLimitEnable_Object = MibScalar
+dcBatteryChargingCurrentLimitEnable = _DcBatteryChargingCurrentLimitEnable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 7),
+    _DcBatteryChargingCurrentLimitEnable_Type()
+)
+dcBatteryChargingCurrentLimitEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryChargingCurrentLimitEnable.setStatus("current")
+
+
+class _DcBatteryTotalChargingCurrentLimitEnable_Type(Integer32):
+    """Custom type dcBatteryTotalChargingCurrentLimitEnable based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcBatteryTotalChargingCurrentLimitEnable_Type.__name__ = "Integer32"
+_DcBatteryTotalChargingCurrentLimitEnable_Object = MibScalar
+dcBatteryTotalChargingCurrentLimitEnable = _DcBatteryTotalChargingCurrentLimitEnable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 8),
+    _DcBatteryTotalChargingCurrentLimitEnable_Type()
+)
+dcBatteryTotalChargingCurrentLimitEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTotalChargingCurrentLimitEnable.setStatus("current")
+_DcBatteryTotalMaxIBatt_Type = Integer32
+_DcBatteryTotalMaxIBatt_Object = MibScalar
+dcBatteryTotalMaxIBatt = _DcBatteryTotalMaxIBatt_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 3, 9),
+    _DcBatteryTotalMaxIBatt_Type()
+)
+dcBatteryTotalMaxIBatt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBatteryTotalMaxIBatt.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBatteryTotalMaxIBatt.setUnits("100 mA")
 _DcEqualize_ObjectIdentity = ObjectIdentity
 dcEqualize = _DcEqualize_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 4)
@@ -2482,6 +3520,17 @@ if mibBuilder.loadTexts:
     dcBoostChargeInhibitTime.setStatus("current")
 if mibBuilder.loadTexts:
     dcBoostChargeInhibitTime.setUnits("hours")
+_DcBoostChargeSoCBelow_Type = Gauge32
+_DcBoostChargeSoCBelow_Object = MibScalar
+dcBoostChargeSoCBelow = _DcBoostChargeSoCBelow_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 5, 4, 8),
+    _DcBoostChargeSoCBelow_Type()
+)
+dcBoostChargeSoCBelow.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcBoostChargeSoCBelow.setStatus("current")
+if mibBuilder.loadTexts:
+    dcBoostChargeSoCBelow.setUnits("%")
 _DcSystemVoltageSupervision_ObjectIdentity = ObjectIdentity
 dcSystemVoltageSupervision = _DcSystemVoltageSupervision_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 6)
@@ -2644,14 +3693,16 @@ class _DcEvtCtrlChargeStatus_Type(Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("inactive", 1),
           ("voltageControlled", 2),
           ("noBatteryCharge", 3),
-          ("currentLimitation", 4))
+          ("currentLimitation", 4),
+          ("suppressed", 5))
     )
 
 
@@ -2663,7 +3714,7 @@ dcEvtCtrlChargeStatus = _DcEvtCtrlChargeStatus_Object(
 )
 dcEvtCtrlChargeStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcEvtCtrlChargeStatus.setStatus("current")
+    dcEvtCtrlChargeStatus.setStatus("obsolete")
 
 
 class _DcEvtCtrlChargeType_Type(Integer32):
@@ -2691,9 +3742,9 @@ dcEvtCtrlChargeType = _DcEvtCtrlChargeType_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 2),
     _DcEvtCtrlChargeType_Type()
 )
-dcEvtCtrlChargeType.setMaxAccess("read-write")
+dcEvtCtrlChargeType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcEvtCtrlChargeType.setStatus("current")
+    dcEvtCtrlChargeType.setStatus("obsolete")
 _DcEvtCtrlChargeParameter_ObjectIdentity = ObjectIdentity
 dcEvtCtrlChargeParameter = _DcEvtCtrlChargeParameter_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 3)
@@ -2704,9 +3755,9 @@ dcEvtCtrlChargeVoltage = _DcEvtCtrlChargeVoltage_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 3, 1),
     _DcEvtCtrlChargeVoltage_Type()
 )
-dcEvtCtrlChargeVoltage.setMaxAccess("read-write")
+dcEvtCtrlChargeVoltage.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcEvtCtrlChargeVoltage.setStatus("current")
+    dcEvtCtrlChargeVoltage.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcEvtCtrlChargeVoltage.setUnits("10 mV")
 
@@ -2732,20 +3783,211 @@ dcEvtCtrlChargeTempCompEnabled = _DcEvtCtrlChargeTempCompEnabled_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 3, 2),
     _DcEvtCtrlChargeTempCompEnabled_Type()
 )
-dcEvtCtrlChargeTempCompEnabled.setMaxAccess("read-write")
+dcEvtCtrlChargeTempCompEnabled.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcEvtCtrlChargeTempCompEnabled.setStatus("current")
+    dcEvtCtrlChargeTempCompEnabled.setStatus("obsolete")
 _DcEvtCtrlChargeMaxIBatt_Type = Integer32
 _DcEvtCtrlChargeMaxIBatt_Object = MibScalar
 dcEvtCtrlChargeMaxIBatt = _DcEvtCtrlChargeMaxIBatt_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 3, 3),
     _DcEvtCtrlChargeMaxIBatt_Type()
 )
-dcEvtCtrlChargeMaxIBatt.setMaxAccess("read-write")
+dcEvtCtrlChargeMaxIBatt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    dcEvtCtrlChargeMaxIBatt.setStatus("current")
+    dcEvtCtrlChargeMaxIBatt.setStatus("obsolete")
 if mibBuilder.loadTexts:
     dcEvtCtrlChargeMaxIBatt.setUnits("100 mA")
+_DcEventControlledChargeTable_Object = MibTable
+dcEventControlledChargeTable = _DcEventControlledChargeTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4)
+)
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTable.setStatus("current")
+_DcEventControlledChargeTableEntry_Object = MibTableRow
+dcEventControlledChargeTableEntry = _DcEventControlledChargeTableEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1)
+)
+dcEventControlledChargeTableEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcEventControlledChargeTableIndex"),
+)
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableEntry.setStatus("current")
+
+
+class _DcEventControlledChargeTableIndex_Type(Integer32):
+    """Custom type dcEventControlledChargeTableIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_DcEventControlledChargeTableIndex_Type.__name__ = "Integer32"
+_DcEventControlledChargeTableIndex_Object = MibTableColumn
+dcEventControlledChargeTableIndex = _DcEventControlledChargeTableIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 1),
+    _DcEventControlledChargeTableIndex_Type()
+)
+dcEventControlledChargeTableIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableIndex.setStatus("current")
+_DcEventControlledChargeTablePriority_Type = Unsigned32
+_DcEventControlledChargeTablePriority_Object = MibTableColumn
+dcEventControlledChargeTablePriority = _DcEventControlledChargeTablePriority_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 2),
+    _DcEventControlledChargeTablePriority_Type()
+)
+dcEventControlledChargeTablePriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTablePriority.setStatus("current")
+
+
+class _DcEventControlledChargeTableName_Type(DisplayString):
+    """Custom type dcEventControlledChargeTableName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(32, 32),
+    )
+    fixed_length = 32
+
+
+_DcEventControlledChargeTableName_Type.__name__ = "DisplayString"
+_DcEventControlledChargeTableName_Object = MibTableColumn
+dcEventControlledChargeTableName = _DcEventControlledChargeTableName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 3),
+    _DcEventControlledChargeTableName_Type()
+)
+dcEventControlledChargeTableName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableName.setStatus("current")
+
+
+class _DcEventControlledChargeTableActivationInput_Type(DisplayString):
+    """Custom type dcEventControlledChargeTableActivationInput based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(32, 32),
+    )
+    fixed_length = 32
+
+
+_DcEventControlledChargeTableActivationInput_Type.__name__ = "DisplayString"
+_DcEventControlledChargeTableActivationInput_Object = MibTableColumn
+dcEventControlledChargeTableActivationInput = _DcEventControlledChargeTableActivationInput_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 4),
+    _DcEventControlledChargeTableActivationInput_Type()
+)
+dcEventControlledChargeTableActivationInput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableActivationInput.setStatus("current")
+
+
+class _DcEventControlledChargeTableStatus_Type(Integer32):
+    """Custom type dcEventControlledChargeTableStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("inactive", 1),
+          ("voltageControlled", 2),
+          ("noBatteryCharge", 3),
+          ("currentLimitation", 4),
+          ("suppressed", 5))
+    )
+
+
+_DcEventControlledChargeTableStatus_Type.__name__ = "Integer32"
+_DcEventControlledChargeTableStatus_Object = MibTableColumn
+dcEventControlledChargeTableStatus = _DcEventControlledChargeTableStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 5),
+    _DcEventControlledChargeTableStatus_Type()
+)
+dcEventControlledChargeTableStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableStatus.setStatus("current")
+
+
+class _DcEventControlledChargeTableType_Type(Integer32):
+    """Custom type dcEventControlledChargeTableType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("voltageControlled", 1),
+          ("noBatteryCharge", 2),
+          ("currentLimitation", 3))
+    )
+
+
+_DcEventControlledChargeTableType_Type.__name__ = "Integer32"
+_DcEventControlledChargeTableType_Object = MibTableColumn
+dcEventControlledChargeTableType = _DcEventControlledChargeTableType_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 6),
+    _DcEventControlledChargeTableType_Type()
+)
+dcEventControlledChargeTableType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableType.setStatus("current")
+_DcEventControlledChargeTableVoltage_Type = Integer32
+_DcEventControlledChargeTableVoltage_Object = MibTableColumn
+dcEventControlledChargeTableVoltage = _DcEventControlledChargeTableVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 7),
+    _DcEventControlledChargeTableVoltage_Type()
+)
+dcEventControlledChargeTableVoltage.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableVoltage.setStatus("current")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableVoltage.setUnits("10mV")
+_DcEventControlledChargeTableMaxIBatt_Type = Integer32
+_DcEventControlledChargeTableMaxIBatt_Object = MibTableColumn
+dcEventControlledChargeTableMaxIBatt = _DcEventControlledChargeTableMaxIBatt_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 8),
+    _DcEventControlledChargeTableMaxIBatt_Type()
+)
+dcEventControlledChargeTableMaxIBatt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableMaxIBatt.setStatus("current")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableMaxIBatt.setUnits("100mA")
+
+
+class _DcEventControlledChargeTableTempCompEnabled_Type(Integer32):
+    """Custom type dcEventControlledChargeTableTempCompEnabled based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEventControlledChargeTableTempCompEnabled_Type.__name__ = "Integer32"
+_DcEventControlledChargeTableTempCompEnabled_Object = MibTableColumn
+dcEventControlledChargeTableTempCompEnabled = _DcEventControlledChargeTableTempCompEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 7, 4, 1, 9),
+    _DcEventControlledChargeTableTempCompEnabled_Type()
+)
+dcEventControlledChargeTableTempCompEnabled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEventControlledChargeTableTempCompEnabled.setStatus("current")
 _DcTempComp_ObjectIdentity = ObjectIdentity
 dcTempComp = _DcTempComp_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 8)
@@ -2788,7 +4030,7 @@ dcSlope.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcSlope.setStatus("current")
 if mibBuilder.loadTexts:
-    dcSlope.setUnits("-1 mV/C")
+    dcSlope.setUnits("-1 mV/degree")
 _DcStartTemp_Type = Integer32
 _DcStartTemp_Object = MibScalar
 dcStartTemp = _DcStartTemp_Object(
@@ -2799,7 +4041,7 @@ dcStartTemp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcStartTemp.setStatus("current")
 if mibBuilder.loadTexts:
-    dcStartTemp.setUnits("0.1 C")
+    dcStartTemp.setUnits("0.1 degree")
 _DcStopTemp_Type = Integer32
 _DcStopTemp_Object = MibScalar
 dcStopTemp = _DcStopTemp_Object(
@@ -2810,7 +4052,7 @@ dcStopTemp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcStopTemp.setStatus("current")
 if mibBuilder.loadTexts:
-    dcStopTemp.setUnits("0.1 C")
+    dcStopTemp.setUnits("0.1 degree")
 _DcMaxVoltage_Type = Integer32
 _DcMaxVoltage_Object = MibScalar
 dcMaxVoltage = _DcMaxVoltage_Object(
@@ -2843,7 +4085,7 @@ dcLowStartTemp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcLowStartTemp.setStatus("current")
 if mibBuilder.loadTexts:
-    dcLowStartTemp.setUnits("0.1 C")
+    dcLowStartTemp.setUnits("0.1 degree")
 _DcLowTempSlope_Type = Integer32
 _DcLowTempSlope_Object = MibScalar
 dcLowTempSlope = _DcLowTempSlope_Object(
@@ -2854,7 +4096,7 @@ dcLowTempSlope.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcLowTempSlope.setStatus("current")
 if mibBuilder.loadTexts:
-    dcLowTempSlope.setUnits("-1 mV/C")
+    dcLowTempSlope.setUnits("-1 mV/degree")
 _DcHighStartTemp_Type = Integer32
 _DcHighStartTemp_Object = MibScalar
 dcHighStartTemp = _DcHighStartTemp_Object(
@@ -2865,7 +4107,7 @@ dcHighStartTemp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcHighStartTemp.setStatus("current")
 if mibBuilder.loadTexts:
-    dcHighStartTemp.setUnits("0.1 C")
+    dcHighStartTemp.setUnits("0.1 degree")
 _DcHighTempSlope_Type = Integer32
 _DcHighTempSlope_Object = MibScalar
 dcHighTempSlope = _DcHighTempSlope_Object(
@@ -2876,7 +4118,7 @@ dcHighTempSlope.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcHighTempSlope.setStatus("current")
 if mibBuilder.loadTexts:
-    dcHighTempSlope.setUnits("-1 mV/C")
+    dcHighTempSlope.setUnits("-1 mV/degree")
 _DcHighStopVoltage_Type = Integer32
 _DcHighStopVoltage_Object = MibScalar
 dcHighStopVoltage = _DcHighStopVoltage_Object(
@@ -2898,7 +4140,7 @@ dcRunawayTemp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcRunawayTemp.setStatus("current")
 if mibBuilder.loadTexts:
-    dcRunawayTemp.setUnits("0.1 C")
+    dcRunawayTemp.setUnits("0.1 degree")
 _DcRunawayVoltage_Type = Integer32
 _DcRunawayVoltage_Object = MibScalar
 dcRunawayVoltage = _DcRunawayVoltage_Object(
@@ -2924,7 +4166,7 @@ dcHighTemp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcHighTemp.setStatus("current")
 if mibBuilder.loadTexts:
-    dcHighTemp.setUnits("0.1 C")
+    dcHighTemp.setUnits("0.1 degree")
 _DcHighTempHyst_Type = Integer32
 _DcHighTempHyst_Object = MibScalar
 dcHighTempHyst = _DcHighTempHyst_Object(
@@ -2935,7 +4177,43 @@ dcHighTempHyst.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcHighTempHyst.setStatus("current")
 if mibBuilder.loadTexts:
-    dcHighTempHyst.setUnits("0.1 C")
+    dcHighTempHyst.setUnits("0.1 degree")
+_DcBatteryType_ObjectIdentity = ObjectIdentity
+dcBatteryType = _DcBatteryType_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 10)
+)
+
+
+class _DcBatteryTypeSelect_Type(Integer32):
+    """Custom type dcBatteryTypeSelect based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("lead-acid", 2),
+          ("lithium", 3),
+          ("nickel-cadmium", 4),
+          ("hybrid-lead-acid", 5))
+    )
+
+
+_DcBatteryTypeSelect_Type.__name__ = "Integer32"
+_DcBatteryTypeSelect_Object = MibScalar
+dcBatteryTypeSelect = _DcBatteryTypeSelect_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 5, 10, 1),
+    _DcBatteryTypeSelect_Type()
+)
+dcBatteryTypeSelect.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcBatteryTypeSelect.setStatus("current")
 _DcInputOutput_ObjectIdentity = ObjectIdentity
 dcInputOutput = _DcInputOutput_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 6)
@@ -3037,7 +4315,7 @@ dcTrapDestinationTable = _DcTrapDestinationTable_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 1)
 )
 if mibBuilder.loadTexts:
-    dcTrapDestinationTable.setStatus("current")
+    dcTrapDestinationTable.setStatus("obsolete")
 _DcTrapDestinationEntry_Object = MibTableRow
 dcTrapDestinationEntry = _DcTrapDestinationEntry_Object(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 1, 1)
@@ -3046,7 +4324,7 @@ dcTrapDestinationEntry.setIndexNames(
     (0, "ORION-BASE-MIB", "dcTrapDestinationIndex"),
 )
 if mibBuilder.loadTexts:
-    dcTrapDestinationEntry.setStatus("current")
+    dcTrapDestinationEntry.setStatus("obsolete")
 
 
 class _DcTrapDestinationIndex_Type(Integer32):
@@ -3065,7 +4343,7 @@ dcTrapDestinationIndex = _DcTrapDestinationIndex_Object(
 )
 dcTrapDestinationIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    dcTrapDestinationIndex.setStatus("current")
+    dcTrapDestinationIndex.setStatus("obsolete")
 _DcTrapDestinationIp_Type = IpAddress
 _DcTrapDestinationIp_Object = MibTableColumn
 dcTrapDestinationIp = _DcTrapDestinationIp_Object(
@@ -3074,7 +4352,7 @@ dcTrapDestinationIp = _DcTrapDestinationIp_Object(
 )
 dcTrapDestinationIp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcTrapDestinationIp.setStatus("current")
+    dcTrapDestinationIp.setStatus("obsolete")
 _DcTrapDestinationPort_Type = Gauge32
 _DcTrapDestinationPort_Object = MibTableColumn
 dcTrapDestinationPort = _DcTrapDestinationPort_Object(
@@ -3083,7 +4361,26 @@ dcTrapDestinationPort = _DcTrapDestinationPort_Object(
 )
 dcTrapDestinationPort.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    dcTrapDestinationPort.setStatus("current")
+    dcTrapDestinationPort.setStatus("obsolete")
+
+
+class _DcTrapDestinationUser_Type(DisplayString):
+    """Custom type dcTrapDestinationUser based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_DcTrapDestinationUser_Type.__name__ = "DisplayString"
+_DcTrapDestinationUser_Object = MibTableColumn
+dcTrapDestinationUser = _DcTrapDestinationUser_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 1, 1, 4),
+    _DcTrapDestinationUser_Type()
+)
+dcTrapDestinationUser.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcTrapDestinationUser.setStatus("obsolete")
 
 
 class _DcFileProcessingStatus_Type(Integer32):
@@ -3140,6 +4437,101 @@ dcResendActiveAlarmTraps = _DcResendActiveAlarmTraps_Object(
 dcResendActiveAlarmTraps.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcResendActiveAlarmTraps.setStatus("current")
+
+
+class _DcRebootController_Type(Integer32):
+    """Custom type dcRebootController based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            1
+        )
+    )
+    namedValues = NamedValues(
+        ("reboot", 1)
+    )
+
+
+_DcRebootController_Type.__name__ = "Integer32"
+_DcRebootController_Object = MibScalar
+dcRebootController = _DcRebootController_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 5),
+    _DcRebootController_Type()
+)
+dcRebootController.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcRebootController.setStatus("current")
+_DcTrapDestinationv2Table_Object = MibTable
+dcTrapDestinationv2Table = _DcTrapDestinationv2Table_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 6)
+)
+if mibBuilder.loadTexts:
+    dcTrapDestinationv2Table.setStatus("current")
+_DcTrapDestinationv2Entry_Object = MibTableRow
+dcTrapDestinationv2Entry = _DcTrapDestinationv2Entry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 6, 1)
+)
+dcTrapDestinationv2Entry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcTrapDestinationv2Index"),
+)
+if mibBuilder.loadTexts:
+    dcTrapDestinationv2Entry.setStatus("current")
+
+
+class _DcTrapDestinationv2Index_Type(Integer32):
+    """Custom type dcTrapDestinationv2Index based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10),
+    )
+
+
+_DcTrapDestinationv2Index_Type.__name__ = "Integer32"
+_DcTrapDestinationv2Index_Object = MibTableColumn
+dcTrapDestinationv2Index = _DcTrapDestinationv2Index_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 6, 1, 1),
+    _DcTrapDestinationv2Index_Type()
+)
+dcTrapDestinationv2Index.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcTrapDestinationv2Index.setStatus("current")
+_DcTrapDestinationv2_Type = DisplayString
+_DcTrapDestinationv2_Object = MibTableColumn
+dcTrapDestinationv2 = _DcTrapDestinationv2_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 6, 1, 2),
+    _DcTrapDestinationv2_Type()
+)
+dcTrapDestinationv2.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcTrapDestinationv2.setStatus("current")
+_DcTrapDestinationv2Port_Type = Gauge32
+_DcTrapDestinationv2Port_Object = MibTableColumn
+dcTrapDestinationv2Port = _DcTrapDestinationv2Port_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 6, 1, 3),
+    _DcTrapDestinationv2Port_Type()
+)
+dcTrapDestinationv2Port.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcTrapDestinationv2Port.setStatus("current")
+
+
+class _DcTrapDestinationv2User_Type(DisplayString):
+    """Custom type dcTrapDestinationv2User based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_DcTrapDestinationv2User_Type.__name__ = "DisplayString"
+_DcTrapDestinationv2User_Object = MibTableColumn
+dcTrapDestinationv2User = _DcTrapDestinationv2User_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 7, 6, 1, 4),
+    _DcTrapDestinationv2User_Type()
+)
+dcTrapDestinationv2User.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcTrapDestinationv2User.setStatus("current")
 _DcConfig_ObjectIdentity = ObjectIdentity
 dcConfig = _DcConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8)
@@ -3410,6 +4802,767 @@ dcLvdDisconnectDelay = _DcLvdDisconnectDelay_Object(
 dcLvdDisconnectDelay.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     dcLvdDisconnectDelay.setStatus("current")
+
+
+class _DcLvdType_Type(Integer32):
+    """Custom type dcLvdType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("eventControlled", 1),
+          ("utControlled", 2))
+    )
+
+
+_DcLvdType_Type.__name__ = "Integer32"
+_DcLvdType_Object = MibTableColumn
+dcLvdType = _DcLvdType_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 4, 1, 4),
+    _DcLvdType_Type()
+)
+dcLvdType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcLvdType.setStatus("current")
+_DcLvdVoltageThreshold_Type = Integer32
+_DcLvdVoltageThreshold_Object = MibTableColumn
+dcLvdVoltageThreshold = _DcLvdVoltageThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 4, 1, 5),
+    _DcLvdVoltageThreshold_Type()
+)
+dcLvdVoltageThreshold.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcLvdVoltageThreshold.setStatus("current")
+if mibBuilder.loadTexts:
+    dcLvdVoltageThreshold.setUnits("10 mV")
+_DcLvdVoltageHysteresis_Type = Integer32
+_DcLvdVoltageHysteresis_Object = MibTableColumn
+dcLvdVoltageHysteresis = _DcLvdVoltageHysteresis_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 4, 1, 6),
+    _DcLvdVoltageHysteresis_Type()
+)
+dcLvdVoltageHysteresis.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcLvdVoltageHysteresis.setStatus("current")
+if mibBuilder.loadTexts:
+    dcLvdVoltageHysteresis.setUnits("10 mV")
+
+
+class _DcLvdControlEvent_Type(DisplayString):
+    """Custom type dcLvdControlEvent based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcLvdControlEvent_Type.__name__ = "DisplayString"
+_DcLvdControlEvent_Object = MibTableColumn
+dcLvdControlEvent = _DcLvdControlEvent_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 4, 1, 7),
+    _DcLvdControlEvent_Type()
+)
+dcLvdControlEvent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcLvdControlEvent.setStatus("current")
+
+
+class _DcLvdMonitoringEvent_Type(DisplayString):
+    """Custom type dcLvdMonitoringEvent based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcLvdMonitoringEvent_Type.__name__ = "DisplayString"
+_DcLvdMonitoringEvent_Object = MibTableColumn
+dcLvdMonitoringEvent = _DcLvdMonitoringEvent_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 4, 1, 8),
+    _DcLvdMonitoringEvent_Type()
+)
+dcLvdMonitoringEvent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcLvdMonitoringEvent.setStatus("current")
+_DcEventDefinitionTable_Object = MibTable
+dcEventDefinitionTable = _DcEventDefinitionTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5)
+)
+if mibBuilder.loadTexts:
+    dcEventDefinitionTable.setStatus("current")
+_DcEventDefinitionEntry_Object = MibTableRow
+dcEventDefinitionEntry = _DcEventDefinitionEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5, 1)
+)
+dcEventDefinitionEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcEventIndex"),
+)
+if mibBuilder.loadTexts:
+    dcEventDefinitionEntry.setStatus("current")
+
+
+class _DcEventIndex_Type(Integer32):
+    """Custom type dcEventIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 20),
+    )
+
+
+_DcEventIndex_Type.__name__ = "Integer32"
+_DcEventIndex_Object = MibTableColumn
+dcEventIndex = _DcEventIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5, 1, 1),
+    _DcEventIndex_Type()
+)
+dcEventIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcEventIndex.setStatus("current")
+
+
+class _DcEventName_Type(DisplayString):
+    """Custom type dcEventName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcEventName_Type.__name__ = "DisplayString"
+_DcEventName_Object = MibTableColumn
+dcEventName = _DcEventName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5, 1, 2),
+    _DcEventName_Type()
+)
+dcEventName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcEventName.setStatus("current")
+_DcThreshold_Type = Integer32
+_DcThreshold_Object = MibTableColumn
+dcThreshold = _DcThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5, 1, 3),
+    _DcThreshold_Type()
+)
+dcThreshold.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcThreshold.setStatus("current")
+_DcThresholdHysteresis_Type = Integer32
+_DcThresholdHysteresis_Object = MibTableColumn
+dcThresholdHysteresis = _DcThresholdHysteresis_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5, 1, 4),
+    _DcThresholdHysteresis_Type()
+)
+dcThresholdHysteresis.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcThresholdHysteresis.setStatus("current")
+
+
+class _DcUnit_Type(Integer32):
+    """Custom type dcUnit based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unitUnknown", 1),
+          ("unitNone", 2),
+          ("unit10mVdc", 3),
+          ("unit10mVac", 4),
+          ("unit100mA", 5),
+          ("unit100mAh", 6),
+          ("unit100mDegree", 7),
+          ("unit100mDegreeCoefficient", 8),
+          ("unitWatt", 9),
+          ("unitWattHour", 10),
+          ("unitKilowattHour", 11),
+          ("unitSeconds", 12),
+          ("unitPercent", 13),
+          ("unitHertz", 14),
+          ("unitVoltAmpere", 15),
+          ("unitVoltAmpereReactive", 16),
+          ("unitVoltAmpereReactiveHour", 17),
+          ("unitVoltAmpereHour", 18))
+    )
+
+
+_DcUnit_Type.__name__ = "Integer32"
+_DcUnit_Object = MibTableColumn
+dcUnit = _DcUnit_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 5, 1, 5),
+    _DcUnit_Type()
+)
+dcUnit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcUnit.setStatus("current")
+_DcFilterTable_Object = MibTable
+dcFilterTable = _DcFilterTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 6)
+)
+if mibBuilder.loadTexts:
+    dcFilterTable.setStatus("current")
+_DcFilterEntry_Object = MibTableRow
+dcFilterEntry = _DcFilterEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 6, 1)
+)
+dcFilterEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcFilterIndex"),
+)
+if mibBuilder.loadTexts:
+    dcFilterEntry.setStatus("current")
+
+
+class _DcFilterIndex_Type(Integer32):
+    """Custom type dcFilterIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 20),
+    )
+
+
+_DcFilterIndex_Type.__name__ = "Integer32"
+_DcFilterIndex_Object = MibTableColumn
+dcFilterIndex = _DcFilterIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 6, 1, 1),
+    _DcFilterIndex_Type()
+)
+dcFilterIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcFilterIndex.setStatus("current")
+
+
+class _DcFilterName_Type(DisplayString):
+    """Custom type dcFilterName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcFilterName_Type.__name__ = "DisplayString"
+_DcFilterName_Object = MibTableColumn
+dcFilterName = _DcFilterName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 6, 1, 2),
+    _DcFilterName_Type()
+)
+dcFilterName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcFilterName.setStatus("current")
+
+
+class _DcTrueForMin_Type(DisplayString):
+    """Custom type dcTrueForMin based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcTrueForMin_Type.__name__ = "DisplayString"
+_DcTrueForMin_Object = MibTableColumn
+dcTrueForMin = _DcTrueForMin_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 6, 1, 3),
+    _DcTrueForMin_Type()
+)
+dcTrueForMin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcTrueForMin.setStatus("current")
+
+
+class _DcFalseForMin_Type(DisplayString):
+    """Custom type dcFalseForMin based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcFalseForMin_Type.__name__ = "DisplayString"
+_DcFalseForMin_Object = MibTableColumn
+dcFalseForMin = _DcFalseForMin_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 6, 1, 4),
+    _DcFalseForMin_Type()
+)
+dcFalseForMin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcFalseForMin.setStatus("current")
+_DcTimerTable_Object = MibTable
+dcTimerTable = _DcTimerTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7)
+)
+if mibBuilder.loadTexts:
+    dcTimerTable.setStatus("current")
+_DcTimerEntry_Object = MibTableRow
+dcTimerEntry = _DcTimerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1)
+)
+dcTimerEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcTimerIndex"),
+)
+if mibBuilder.loadTexts:
+    dcTimerEntry.setStatus("current")
+
+
+class _DcTimerIndex_Type(Integer32):
+    """Custom type dcTimerIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 20),
+    )
+
+
+_DcTimerIndex_Type.__name__ = "Integer32"
+_DcTimerIndex_Object = MibTableColumn
+dcTimerIndex = _DcTimerIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 1),
+    _DcTimerIndex_Type()
+)
+dcTimerIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcTimerIndex.setStatus("current")
+
+
+class _DcTimerName_Type(DisplayString):
+    """Custom type dcTimerName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 35),
+    )
+
+
+_DcTimerName_Type.__name__ = "DisplayString"
+_DcTimerName_Object = MibTableColumn
+dcTimerName = _DcTimerName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 2),
+    _DcTimerName_Type()
+)
+dcTimerName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcTimerName.setStatus("current")
+
+
+class _DcStartTime_Type(DisplayString):
+    """Custom type dcStartTime based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 10),
+    )
+
+
+_DcStartTime_Type.__name__ = "DisplayString"
+_DcStartTime_Object = MibTableColumn
+dcStartTime = _DcStartTime_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 3),
+    _DcStartTime_Type()
+)
+dcStartTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartTime.setStatus("current")
+
+
+class _DcStartDaySu_Type(Integer32):
+    """Custom type dcStartDaySu based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDaySu_Type.__name__ = "Integer32"
+_DcStartDaySu_Object = MibTableColumn
+dcStartDaySu = _DcStartDaySu_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 4),
+    _DcStartDaySu_Type()
+)
+dcStartDaySu.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDaySu.setStatus("current")
+
+
+class _DcStartDayMo_Type(Integer32):
+    """Custom type dcStartDayMo based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDayMo_Type.__name__ = "Integer32"
+_DcStartDayMo_Object = MibTableColumn
+dcStartDayMo = _DcStartDayMo_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 5),
+    _DcStartDayMo_Type()
+)
+dcStartDayMo.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDayMo.setStatus("current")
+
+
+class _DcStartDayTu_Type(Integer32):
+    """Custom type dcStartDayTu based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDayTu_Type.__name__ = "Integer32"
+_DcStartDayTu_Object = MibTableColumn
+dcStartDayTu = _DcStartDayTu_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 6),
+    _DcStartDayTu_Type()
+)
+dcStartDayTu.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDayTu.setStatus("current")
+
+
+class _DcStartDayWe_Type(Integer32):
+    """Custom type dcStartDayWe based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDayWe_Type.__name__ = "Integer32"
+_DcStartDayWe_Object = MibTableColumn
+dcStartDayWe = _DcStartDayWe_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 7),
+    _DcStartDayWe_Type()
+)
+dcStartDayWe.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDayWe.setStatus("current")
+
+
+class _DcStartDayTh_Type(Integer32):
+    """Custom type dcStartDayTh based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDayTh_Type.__name__ = "Integer32"
+_DcStartDayTh_Object = MibTableColumn
+dcStartDayTh = _DcStartDayTh_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 8),
+    _DcStartDayTh_Type()
+)
+dcStartDayTh.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDayTh.setStatus("current")
+
+
+class _DcStartDayFr_Type(Integer32):
+    """Custom type dcStartDayFr based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDayFr_Type.__name__ = "Integer32"
+_DcStartDayFr_Object = MibTableColumn
+dcStartDayFr = _DcStartDayFr_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 9),
+    _DcStartDayFr_Type()
+)
+dcStartDayFr.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDayFr.setStatus("current")
+
+
+class _DcStartDaySa_Type(Integer32):
+    """Custom type dcStartDaySa based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcStartDaySa_Type.__name__ = "Integer32"
+_DcStartDaySa_Object = MibTableColumn
+dcStartDaySa = _DcStartDaySa_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 10),
+    _DcStartDaySa_Type()
+)
+dcStartDaySa.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcStartDaySa.setStatus("current")
+
+
+class _DcEndTime_Type(DisplayString):
+    """Custom type dcEndTime based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 10),
+    )
+
+
+_DcEndTime_Type.__name__ = "DisplayString"
+_DcEndTime_Object = MibTableColumn
+dcEndTime = _DcEndTime_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 11),
+    _DcEndTime_Type()
+)
+dcEndTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndTime.setStatus("current")
+
+
+class _DcEndDaySu_Type(Integer32):
+    """Custom type dcEndDaySu based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDaySu_Type.__name__ = "Integer32"
+_DcEndDaySu_Object = MibTableColumn
+dcEndDaySu = _DcEndDaySu_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 12),
+    _DcEndDaySu_Type()
+)
+dcEndDaySu.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDaySu.setStatus("current")
+
+
+class _DcEndDayMo_Type(Integer32):
+    """Custom type dcEndDayMo based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDayMo_Type.__name__ = "Integer32"
+_DcEndDayMo_Object = MibTableColumn
+dcEndDayMo = _DcEndDayMo_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 13),
+    _DcEndDayMo_Type()
+)
+dcEndDayMo.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDayMo.setStatus("current")
+
+
+class _DcEndDayTu_Type(Integer32):
+    """Custom type dcEndDayTu based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDayTu_Type.__name__ = "Integer32"
+_DcEndDayTu_Object = MibTableColumn
+dcEndDayTu = _DcEndDayTu_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 14),
+    _DcEndDayTu_Type()
+)
+dcEndDayTu.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDayTu.setStatus("current")
+
+
+class _DcEndDayWe_Type(Integer32):
+    """Custom type dcEndDayWe based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDayWe_Type.__name__ = "Integer32"
+_DcEndDayWe_Object = MibTableColumn
+dcEndDayWe = _DcEndDayWe_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 15),
+    _DcEndDayWe_Type()
+)
+dcEndDayWe.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDayWe.setStatus("current")
+
+
+class _DcEndDayTh_Type(Integer32):
+    """Custom type dcEndDayTh based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDayTh_Type.__name__ = "Integer32"
+_DcEndDayTh_Object = MibTableColumn
+dcEndDayTh = _DcEndDayTh_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 16),
+    _DcEndDayTh_Type()
+)
+dcEndDayTh.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDayTh.setStatus("current")
+
+
+class _DcEndDayFr_Type(Integer32):
+    """Custom type dcEndDayFr based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDayFr_Type.__name__ = "Integer32"
+_DcEndDayFr_Object = MibTableColumn
+dcEndDayFr = _DcEndDayFr_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 17),
+    _DcEndDayFr_Type()
+)
+dcEndDayFr.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDayFr.setStatus("current")
+
+
+class _DcEndDaySa_Type(Integer32):
+    """Custom type dcEndDaySa based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("no", 1),
+          ("yes", 2))
+    )
+
+
+_DcEndDaySa_Type.__name__ = "Integer32"
+_DcEndDaySa_Object = MibTableColumn
+dcEndDaySa = _DcEndDaySa_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 8, 7, 1, 18),
+    _DcEndDaySa_Type()
+)
+dcEndDaySa.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcEndDaySa.setStatus("current")
 _DcMeasurement_ObjectIdentity = ObjectIdentity
 dcMeasurement = _DcMeasurement_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 9)
@@ -3507,7 +5660,8 @@ class _DcMeasurementUnit_Type(Integer32):
               13,
               14,
               15,
-              16)
+              16,
+              17)
         )
     )
     namedValues = NamedValues(
@@ -3517,7 +5671,7 @@ class _DcMeasurementUnit_Type(Integer32):
           ("voltAC", 4),
           ("ampere", 5),
           ("ampereHour", 6),
-          ("degreeCelsius", 7),
+          ("temperature", 7),
           ("temperatureCoefficient", 8),
           ("watt", 9),
           ("wattHour", 10),
@@ -3526,7 +5680,8 @@ class _DcMeasurementUnit_Type(Integer32):
           ("hertz", 13),
           ("voltAmpere", 14),
           ("voltAmpereReactive", 15),
-          ("voltAmpereReactiveHour", 16))
+          ("voltAmpereReactiveHour", 16),
+          ("voltAmpereHour", 17))
     )
 
 
@@ -3634,7 +5789,1523 @@ dcMeterPanelEventHourMeterValue.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dcMeterPanelEventHourMeterValue.setStatus("current")
 if mibBuilder.loadTexts:
-    dcMeterPanelEventHourMeterValue.setUnits("hours")
+    dcMeterPanelEventHourMeterValue.setUnits("seconds")
+_DcMeterPanelMeasurementTable_Object = MibTable
+dcMeterPanelMeasurementTable = _DcMeterPanelMeasurementTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 10, 2)
+)
+if mibBuilder.loadTexts:
+    dcMeterPanelMeasurementTable.setStatus("current")
+_DcMeterPanelMeasurementEntry_Object = MibTableRow
+dcMeterPanelMeasurementEntry = _DcMeterPanelMeasurementEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 10, 2, 1)
+)
+dcMeterPanelMeasurementEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcMeterPanelMeasurementIndex"),
+)
+if mibBuilder.loadTexts:
+    dcMeterPanelMeasurementEntry.setStatus("current")
+
+
+class _DcMeterPanelMeasurementIndex_Type(Integer32):
+    """Custom type dcMeterPanelMeasurementIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_DcMeterPanelMeasurementIndex_Type.__name__ = "Integer32"
+_DcMeterPanelMeasurementIndex_Object = MibTableColumn
+dcMeterPanelMeasurementIndex = _DcMeterPanelMeasurementIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 10, 2, 1, 1),
+    _DcMeterPanelMeasurementIndex_Type()
+)
+dcMeterPanelMeasurementIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcMeterPanelMeasurementIndex.setStatus("current")
+
+
+class _DcMeterPanelMeasurementName_Type(DisplayString):
+    """Custom type dcMeterPanelMeasurementName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 16),
+    )
+
+
+_DcMeterPanelMeasurementName_Type.__name__ = "DisplayString"
+_DcMeterPanelMeasurementName_Object = MibTableColumn
+dcMeterPanelMeasurementName = _DcMeterPanelMeasurementName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 10, 2, 1, 2),
+    _DcMeterPanelMeasurementName_Type()
+)
+dcMeterPanelMeasurementName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcMeterPanelMeasurementName.setStatus("current")
+_DcMeterPanelMeasurementValue_Type = DisplayString
+_DcMeterPanelMeasurementValue_Object = MibTableColumn
+dcMeterPanelMeasurementValue = _DcMeterPanelMeasurementValue_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 10, 2, 1, 3),
+    _DcMeterPanelMeasurementValue_Type()
+)
+dcMeterPanelMeasurementValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcMeterPanelMeasurementValue.setStatus("current")
+
+
+class _DcMeterPanelMeasurementUnit_Type(DisplayString):
+    """Custom type dcMeterPanelMeasurementUnit based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 16),
+    )
+
+
+_DcMeterPanelMeasurementUnit_Type.__name__ = "DisplayString"
+_DcMeterPanelMeasurementUnit_Object = MibTableColumn
+dcMeterPanelMeasurementUnit = _DcMeterPanelMeasurementUnit_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 10, 2, 1, 4),
+    _DcMeterPanelMeasurementUnit_Type()
+)
+dcMeterPanelMeasurementUnit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcMeterPanelMeasurementUnit.setStatus("current")
+_DcPVC_ObjectIdentity = ObjectIdentity
+dcPVC = _DcPVC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11)
+)
+
+
+class _DcNumberPVCs_Type(Gauge32):
+    """Custom type dcNumberPVCs based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 32),
+    )
+
+
+_DcNumberPVCs_Type.__name__ = "Gauge32"
+_DcNumberPVCs_Object = MibScalar
+dcNumberPVCs = _DcNumberPVCs_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 1),
+    _DcNumberPVCs_Type()
+)
+dcNumberPVCs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcNumberPVCs.setStatus("current")
+
+
+class _DcNumberPVCsFailure_Type(Gauge32):
+    """Custom type dcNumberPVCsFailure based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 32),
+    )
+
+
+_DcNumberPVCsFailure_Type.__name__ = "Gauge32"
+_DcNumberPVCsFailure_Object = MibScalar
+dcNumberPVCsFailure = _DcNumberPVCsFailure_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 2),
+    _DcNumberPVCsFailure_Type()
+)
+dcNumberPVCsFailure.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcNumberPVCsFailure.setStatus("current")
+
+
+class _DcNumberPVCsOkay_Type(Gauge32):
+    """Custom type dcNumberPVCsOkay based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 32),
+    )
+
+
+_DcNumberPVCsOkay_Type.__name__ = "Gauge32"
+_DcNumberPVCsOkay_Object = MibScalar
+dcNumberPVCsOkay = _DcNumberPVCsOkay_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 3),
+    _DcNumberPVCsOkay_Type()
+)
+dcNumberPVCsOkay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcNumberPVCsOkay.setStatus("current")
+_DcPVCTable_Object = MibTable
+dcPVCTable = _DcPVCTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4)
+)
+if mibBuilder.loadTexts:
+    dcPVCTable.setStatus("current")
+_DcPVCEntry_Object = MibTableRow
+dcPVCEntry = _DcPVCEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1)
+)
+dcPVCEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcPVCIndex"),
+)
+if mibBuilder.loadTexts:
+    dcPVCEntry.setStatus("current")
+
+
+class _DcPVCIndex_Type(Integer32):
+    """Custom type dcPVCIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 32),
+    )
+
+
+_DcPVCIndex_Type.__name__ = "Integer32"
+_DcPVCIndex_Object = MibTableColumn
+dcPVCIndex = _DcPVCIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 1),
+    _DcPVCIndex_Type()
+)
+dcPVCIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcPVCIndex.setStatus("current")
+
+
+class _DcPVCIdentifier_Type(DisplayString):
+    """Custom type dcPVCIdentifier based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 16),
+    )
+
+
+_DcPVCIdentifier_Type.__name__ = "DisplayString"
+_DcPVCIdentifier_Object = MibTableColumn
+dcPVCIdentifier = _DcPVCIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 2),
+    _DcPVCIdentifier_Type()
+)
+dcPVCIdentifier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCIdentifier.setStatus("current")
+
+
+class _DcPVCSlotState_Type(Integer32):
+    """Custom type dcPVCSlotState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("noPos", 1),
+          ("empty", 2),
+          ("lost", 3),
+          ("new", 4),
+          ("off", 5),
+          ("on", 6))
+    )
+
+
+_DcPVCSlotState_Type.__name__ = "Integer32"
+_DcPVCSlotState_Object = MibTableColumn
+dcPVCSlotState = _DcPVCSlotState_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 3),
+    _DcPVCSlotState_Type()
+)
+dcPVCSlotState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCSlotState.setStatus("current")
+
+
+class _DcPVCMainStatus_Type(Integer32):
+    """Custom type dcPVCMainStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("on", 2),
+          ("remoteOff", 3),
+          ("off", 4),
+          ("temporaryInternalOff", 5),
+          ("latchedInternalOff", 6),
+          ("error", 7))
+    )
+
+
+_DcPVCMainStatus_Type.__name__ = "Integer32"
+_DcPVCMainStatus_Object = MibTableColumn
+dcPVCMainStatus = _DcPVCMainStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 4),
+    _DcPVCMainStatus_Type()
+)
+dcPVCMainStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCMainStatus.setStatus("current")
+
+
+class _DcPVCSubStatus_Type(Integer32):
+    """Custom type dcPVCSubStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("notAvailable", 2),
+          ("mppt", 3),
+          ("voltageMode", 4),
+          ("outputCurrentLimit", 5),
+          ("outputPowerLimit", 6),
+          ("inputCurrentLimit", 7),
+          ("inputPowerLimit", 8),
+          ("inputVoltageOutsideRange", 9),
+          ("sunset", 10),
+          ("breakerOpen", 11),
+          ("startUpDelay", 12),
+          ("otp", 13),
+          ("ovp", 14),
+          ("fanFailure", 15))
+    )
+
+
+_DcPVCSubStatus_Type.__name__ = "Integer32"
+_DcPVCSubStatus_Object = MibTableColumn
+dcPVCSubStatus = _DcPVCSubStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 5),
+    _DcPVCSubStatus_Type()
+)
+dcPVCSubStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCSubStatus.setStatus("current")
+
+
+class _DcPVCConfiguration_Type(Integer32):
+    """Custom type dcPVCConfiguration based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("ok", 2),
+          ("default", 3),
+          ("outsideLimts", 4),
+          ("invalid", 5))
+    )
+
+
+_DcPVCConfiguration_Type.__name__ = "Integer32"
+_DcPVCConfiguration_Object = MibTableColumn
+dcPVCConfiguration = _DcPVCConfiguration_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 6),
+    _DcPVCConfiguration_Type()
+)
+dcPVCConfiguration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCConfiguration.setStatus("current")
+_DcPVCIout_Type = Integer32
+_DcPVCIout_Object = MibTableColumn
+dcPVCIout = _DcPVCIout_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 7),
+    _DcPVCIout_Type()
+)
+dcPVCIout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCIout.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCIout.setUnits("100 mA")
+_DcPVCUout_Type = Integer32
+_DcPVCUout_Object = MibTableColumn
+dcPVCUout = _DcPVCUout_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 8),
+    _DcPVCUout_Type()
+)
+dcPVCUout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCUout.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCUout.setUnits("10 mV")
+_DcPVCIin_Type = Integer32
+_DcPVCIin_Object = MibTableColumn
+dcPVCIin = _DcPVCIin_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 9),
+    _DcPVCIin_Type()
+)
+dcPVCIin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCIin.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCIin.setUnits("100 mA")
+_DcPVCUin_Type = Integer32
+_DcPVCUin_Object = MibTableColumn
+dcPVCUin = _DcPVCUin_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 4, 1, 10),
+    _DcPVCUin_Type()
+)
+dcPVCUin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCUin.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCUin.setUnits("100 mV")
+_DcPVCGroupTable_Object = MibTable
+dcPVCGroupTable = _DcPVCGroupTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5)
+)
+if mibBuilder.loadTexts:
+    dcPVCGroupTable.setStatus("current")
+_DcPVCGroupEntry_Object = MibTableRow
+dcPVCGroupEntry = _DcPVCGroupEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1)
+)
+dcPVCGroupEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcPVCGroupIndex"),
+)
+if mibBuilder.loadTexts:
+    dcPVCGroupEntry.setStatus("current")
+
+
+class _DcPVCGroupIndex_Type(Integer32):
+    """Custom type dcPVCGroupIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_DcPVCGroupIndex_Type.__name__ = "Integer32"
+_DcPVCGroupIndex_Object = MibTableColumn
+dcPVCGroupIndex = _DcPVCGroupIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 1),
+    _DcPVCGroupIndex_Type()
+)
+dcPVCGroupIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcPVCGroupIndex.setStatus("current")
+
+
+class _DcPVCGroupPVCType_Type(Integer32):
+    """Custom type dcPVCGroupPVCType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown48V", 1),
+          ("pvc2200B48", 2))
+    )
+
+
+_DcPVCGroupPVCType_Type.__name__ = "Integer32"
+_DcPVCGroupPVCType_Object = MibTableColumn
+dcPVCGroupPVCType = _DcPVCGroupPVCType_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 2),
+    _DcPVCGroupPVCType_Type()
+)
+dcPVCGroupPVCType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcPVCGroupPVCType.setStatus("current")
+_DcPVCGroupVoltage_Type = Integer32
+_DcPVCGroupVoltage_Object = MibTableColumn
+dcPVCGroupVoltage = _DcPVCGroupVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 3),
+    _DcPVCGroupVoltage_Type()
+)
+dcPVCGroupVoltage.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupVoltage.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupVoltage.setUnits("10 mV")
+_DcPVCGroupVPGM_Type = Integer32
+_DcPVCGroupVPGM_Object = MibTableColumn
+dcPVCGroupVPGM = _DcPVCGroupVPGM_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 4),
+    _DcPVCGroupVPGM_Type()
+)
+dcPVCGroupVPGM.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupVPGM.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupVPGM.setUnits("10 mV")
+_DcPVCGroupInputLowOff_Type = Integer32
+_DcPVCGroupInputLowOff_Object = MibTableColumn
+dcPVCGroupInputLowOff = _DcPVCGroupInputLowOff_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 5),
+    _DcPVCGroupInputLowOff_Type()
+)
+dcPVCGroupInputLowOff.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupInputLowOff.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupInputLowOff.setUnits("100 mV")
+_DcPVCGroupInputLowOn_Type = Integer32
+_DcPVCGroupInputLowOn_Object = MibTableColumn
+dcPVCGroupInputLowOn = _DcPVCGroupInputLowOn_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 6),
+    _DcPVCGroupInputLowOn_Type()
+)
+dcPVCGroupInputLowOn.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupInputLowOn.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupInputLowOn.setUnits("100 mV")
+_DcPVCGroupStartUpDelay_Type = Gauge32
+_DcPVCGroupStartUpDelay_Object = MibTableColumn
+dcPVCGroupStartUpDelay = _DcPVCGroupStartUpDelay_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 7),
+    _DcPVCGroupStartUpDelay_Type()
+)
+dcPVCGroupStartUpDelay.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupStartUpDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupStartUpDelay.setUnits("seconds")
+_DcPVCGroupOvpLimit_Type = Integer32
+_DcPVCGroupOvpLimit_Object = MibTableColumn
+dcPVCGroupOvpLimit = _DcPVCGroupOvpLimit_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 8),
+    _DcPVCGroupOvpLimit_Type()
+)
+dcPVCGroupOvpLimit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupOvpLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupOvpLimit.setUnits("10 mV")
+_DcPVCGroupAlarmDelay_Type = Gauge32
+_DcPVCGroupAlarmDelay_Object = MibTableColumn
+dcPVCGroupAlarmDelay = _DcPVCGroupAlarmDelay_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 11, 5, 1, 9),
+    _DcPVCGroupAlarmDelay_Type()
+)
+dcPVCGroupAlarmDelay.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcPVCGroupAlarmDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    dcPVCGroupAlarmDelay.setUnits("seconds")
+_DcInventory_ObjectIdentity = ObjectIdentity
+dcInventory = _DcInventory_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12)
+)
+_DcInventoryTable_Object = MibTable
+dcInventoryTable = _DcInventoryTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1)
+)
+if mibBuilder.loadTexts:
+    dcInventoryTable.setStatus("current")
+_DcInventoryEntry_Object = MibTableRow
+dcInventoryEntry = _DcInventoryEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1)
+)
+dcInventoryEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcInventoryIndex"),
+)
+if mibBuilder.loadTexts:
+    dcInventoryEntry.setStatus("current")
+
+
+class _DcInventoryIndex_Type(Integer32):
+    """Custom type dcInventoryIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_DcInventoryIndex_Type.__name__ = "Integer32"
+_DcInventoryIndex_Object = MibTableColumn
+dcInventoryIndex = _DcInventoryIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 1),
+    _DcInventoryIndex_Type()
+)
+dcInventoryIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcInventoryIndex.setStatus("current")
+
+
+class _DcInventoryType_Type(DisplayString):
+    """Custom type dcInventoryType based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventoryType_Type.__name__ = "DisplayString"
+_DcInventoryType_Object = MibTableColumn
+dcInventoryType = _DcInventoryType_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 2),
+    _DcInventoryType_Type()
+)
+dcInventoryType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventoryType.setStatus("current")
+
+
+class _DcInventoryName_Type(DisplayString):
+    """Custom type dcInventoryName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventoryName_Type.__name__ = "DisplayString"
+_DcInventoryName_Object = MibTableColumn
+dcInventoryName = _DcInventoryName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 3),
+    _DcInventoryName_Type()
+)
+dcInventoryName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventoryName.setStatus("current")
+
+
+class _DcInventorySwVersion_Type(DisplayString):
+    """Custom type dcInventorySwVersion based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventorySwVersion_Type.__name__ = "DisplayString"
+_DcInventorySwVersion_Object = MibTableColumn
+dcInventorySwVersion = _DcInventorySwVersion_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 4),
+    _DcInventorySwVersion_Type()
+)
+dcInventorySwVersion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventorySwVersion.setStatus("current")
+
+
+class _DcInventoryBuildVersion_Type(DisplayString):
+    """Custom type dcInventoryBuildVersion based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventoryBuildVersion_Type.__name__ = "DisplayString"
+_DcInventoryBuildVersion_Object = MibTableColumn
+dcInventoryBuildVersion = _DcInventoryBuildVersion_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 5),
+    _DcInventoryBuildVersion_Type()
+)
+dcInventoryBuildVersion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventoryBuildVersion.setStatus("current")
+
+
+class _DcInventoryPartNb_Type(DisplayString):
+    """Custom type dcInventoryPartNb based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventoryPartNb_Type.__name__ = "DisplayString"
+_DcInventoryPartNb_Object = MibTableColumn
+dcInventoryPartNb = _DcInventoryPartNb_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 6),
+    _DcInventoryPartNb_Type()
+)
+dcInventoryPartNb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventoryPartNb.setStatus("current")
+
+
+class _DcInventorySerialNb_Type(DisplayString):
+    """Custom type dcInventorySerialNb based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventorySerialNb_Type.__name__ = "DisplayString"
+_DcInventorySerialNb_Object = MibTableColumn
+dcInventorySerialNb = _DcInventorySerialNb_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 7),
+    _DcInventorySerialNb_Type()
+)
+dcInventorySerialNb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventorySerialNb.setStatus("current")
+
+
+class _DcInventoryTopLevel_Type(DisplayString):
+    """Custom type dcInventoryTopLevel based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_DcInventoryTopLevel_Type.__name__ = "DisplayString"
+_DcInventoryTopLevel_Object = MibTableColumn
+dcInventoryTopLevel = _DcInventoryTopLevel_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 12, 1, 1, 8),
+    _DcInventoryTopLevel_Type()
+)
+dcInventoryTopLevel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInventoryTopLevel.setStatus("current")
+_DcIP_ObjectIdentity = ObjectIdentity
+dcIP = _DcIP_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13)
+)
+_DcIPv4_ObjectIdentity = ObjectIdentity
+dcIPv4 = _DcIPv4_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 1)
+)
+_DcIPv4Address_Type = InetAddress
+_DcIPv4Address_Object = MibScalar
+dcIPv4Address = _DcIPv4Address_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 1, 1),
+    _DcIPv4Address_Type()
+)
+dcIPv4Address.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv4Address.setStatus("current")
+_DcIPv4SubnetMask_Type = InetAddress
+_DcIPv4SubnetMask_Object = MibScalar
+dcIPv4SubnetMask = _DcIPv4SubnetMask_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 1, 2),
+    _DcIPv4SubnetMask_Type()
+)
+dcIPv4SubnetMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv4SubnetMask.setStatus("current")
+_DcIPv4Gateway_Type = InetAddress
+_DcIPv4Gateway_Object = MibScalar
+dcIPv4Gateway = _DcIPv4Gateway_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 1, 3),
+    _DcIPv4Gateway_Type()
+)
+dcIPv4Gateway.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv4Gateway.setStatus("current")
+_DcIPv4DNS_Type = InetAddress
+_DcIPv4DNS_Object = MibScalar
+dcIPv4DNS = _DcIPv4DNS_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 1, 4),
+    _DcIPv4DNS_Type()
+)
+dcIPv4DNS.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv4DNS.setStatus("current")
+_DcIPv6_ObjectIdentity = ObjectIdentity
+dcIPv6 = _DcIPv6_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 2)
+)
+_DcIPv6LinkLocalAddress_Type = InetAddress
+_DcIPv6LinkLocalAddress_Object = MibScalar
+dcIPv6LinkLocalAddress = _DcIPv6LinkLocalAddress_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 2, 1),
+    _DcIPv6LinkLocalAddress_Type()
+)
+dcIPv6LinkLocalAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv6LinkLocalAddress.setStatus("current")
+_DcIPv6Address_Type = InetAddress
+_DcIPv6Address_Object = MibScalar
+dcIPv6Address = _DcIPv6Address_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 2, 2),
+    _DcIPv6Address_Type()
+)
+dcIPv6Address.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv6Address.setStatus("current")
+_DcIPv6Gateway_Type = InetAddress
+_DcIPv6Gateway_Object = MibScalar
+dcIPv6Gateway = _DcIPv6Gateway_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 2, 3),
+    _DcIPv6Gateway_Type()
+)
+dcIPv6Gateway.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv6Gateway.setStatus("current")
+_DcIPv6DNSAuto_Type = InetAddress
+_DcIPv6DNSAuto_Object = MibScalar
+dcIPv6DNSAuto = _DcIPv6DNSAuto_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 2, 4),
+    _DcIPv6DNSAuto_Type()
+)
+dcIPv6DNSAuto.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv6DNSAuto.setStatus("current")
+_DcIPv6DNSManual_Type = InetAddress
+_DcIPv6DNSManual_Object = MibScalar
+dcIPv6DNSManual = _DcIPv6DNSManual_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 13, 2, 5),
+    _DcIPv6DNSManual_Type()
+)
+dcIPv6DNSManual.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcIPv6DNSManual.setStatus("current")
+_DcAircon_ObjectIdentity = ObjectIdentity
+dcAircon = _DcAircon_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14)
+)
+_DcAirconTable_Object = MibTable
+dcAirconTable = _DcAirconTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1)
+)
+if mibBuilder.loadTexts:
+    dcAirconTable.setStatus("current")
+_DcAirconEntry_Object = MibTableRow
+dcAirconEntry = _DcAirconEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1)
+)
+dcAirconEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcAirconIndex"),
+    (0, "ORION-BASE-MIB", "dcCoolingPlanIndex"),
+)
+if mibBuilder.loadTexts:
+    dcAirconEntry.setStatus("current")
+
+
+class _DcAirconIndex_Type(Integer32):
+    """Custom type dcAirconIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_DcAirconIndex_Type.__name__ = "Integer32"
+_DcAirconIndex_Object = MibTableColumn
+dcAirconIndex = _DcAirconIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 1),
+    _DcAirconIndex_Type()
+)
+dcAirconIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcAirconIndex.setStatus("current")
+
+
+class _DcCoolingPlanIndex_Type(Integer32):
+    """Custom type dcCoolingPlanIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_DcCoolingPlanIndex_Type.__name__ = "Integer32"
+_DcCoolingPlanIndex_Object = MibTableColumn
+dcCoolingPlanIndex = _DcCoolingPlanIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 2),
+    _DcCoolingPlanIndex_Type()
+)
+dcCoolingPlanIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcCoolingPlanIndex.setStatus("current")
+_DcAirconName_Type = DisplayString
+_DcAirconName_Object = MibTableColumn
+dcAirconName = _DcAirconName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 3),
+    _DcAirconName_Type()
+)
+dcAirconName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAirconName.setStatus("current")
+
+
+class _DcAirconMainStatus_Type(Integer32):
+    """Custom type dcAirconMainStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("on", 2),
+          ("remoteOff", 3),
+          ("standby", 4),
+          ("warning", 5),
+          ("temporaryInternalOff", 6))
+    )
+
+
+_DcAirconMainStatus_Type.__name__ = "Integer32"
+_DcAirconMainStatus_Object = MibTableColumn
+dcAirconMainStatus = _DcAirconMainStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 4),
+    _DcAirconMainStatus_Type()
+)
+dcAirconMainStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAirconMainStatus.setStatus("current")
+
+
+class _DcAirconSubStatus_Type(Integer32):
+    """Custom type dcAirconSubStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              14,
+              15)
+        )
+    )
+    namedValues = NamedValues(
+        *(("na", 1),
+          ("unknown", 2),
+          ("cooling", 3),
+          ("silentCooling", 4),
+          ("selfTest", 5),
+          ("heating", 6),
+          ("targetTemperatureReached", 7),
+          ("localOff", 8),
+          ("forceVentilation", 9),
+          ("systemProtection", 10),
+          ("temperatureAbnormal", 11),
+          ("temperatureSensorFault", 12),
+          ("fanFault", 13),
+          ("controlDeviceFault", 14),
+          ("heatExchangeSystemFault", 14),
+          ("environmentalAbnormalAlarm", 15))
+    )
+
+
+_DcAirconSubStatus_Type.__name__ = "Integer32"
+_DcAirconSubStatus_Object = MibTableColumn
+dcAirconSubStatus = _DcAirconSubStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 5),
+    _DcAirconSubStatus_Type()
+)
+dcAirconSubStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAirconSubStatus.setStatus("current")
+
+
+class _DcAirconConfiguration_Type(Integer32):
+    """Custom type dcAirconConfiguration based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 1),
+          ("default", 2),
+          ("outsideLimit", 3),
+          ("invalid", 4))
+    )
+
+
+_DcAirconConfiguration_Type.__name__ = "Integer32"
+_DcAirconConfiguration_Object = MibTableColumn
+dcAirconConfiguration = _DcAirconConfiguration_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 6),
+    _DcAirconConfiguration_Type()
+)
+dcAirconConfiguration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAirconConfiguration.setStatus("current")
+_DcAirconPlanName_Type = DisplayString
+_DcAirconPlanName_Object = MibTableColumn
+dcAirconPlanName = _DcAirconPlanName_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 7),
+    _DcAirconPlanName_Type()
+)
+dcAirconPlanName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAirconPlanName.setStatus("current")
+_DcAirconRoomTemp_Type = Integer32
+_DcAirconRoomTemp_Object = MibTableColumn
+dcAirconRoomTemp = _DcAirconRoomTemp_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 8),
+    _DcAirconRoomTemp_Type()
+)
+dcAirconRoomTemp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcAirconRoomTemp.setStatus("current")
+if mibBuilder.loadTexts:
+    dcAirconRoomTemp.setUnits("0.1 degree")
+_DcCoolingPlanActivationInput_Type = DisplayString
+_DcCoolingPlanActivationInput_Object = MibTableColumn
+dcCoolingPlanActivationInput = _DcCoolingPlanActivationInput_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 9),
+    _DcCoolingPlanActivationInput_Type()
+)
+dcCoolingPlanActivationInput.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcCoolingPlanActivationInput.setStatus("current")
+
+
+class _DcCoolingPlanPriority_Type(Integer32):
+    """Custom type dcCoolingPlanPriority based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("priority1", 1),
+          ("priority2", 2),
+          ("priority3", 3),
+          ("priority4", 4),
+          ("priority5", 5),
+          ("lowest", 6))
+    )
+
+
+_DcCoolingPlanPriority_Type.__name__ = "Integer32"
+_DcCoolingPlanPriority_Object = MibTableColumn
+dcCoolingPlanPriority = _DcCoolingPlanPriority_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 10),
+    _DcCoolingPlanPriority_Type()
+)
+dcCoolingPlanPriority.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcCoolingPlanPriority.setStatus("current")
+
+
+class _DcCoolingPlanStatus_Type(Integer32):
+    """Custom type dcCoolingPlanStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("inactive", 1),
+          ("active", 2),
+          ("suppressed", 3))
+    )
+
+
+_DcCoolingPlanStatus_Type.__name__ = "Integer32"
+_DcCoolingPlanStatus_Object = MibTableColumn
+dcCoolingPlanStatus = _DcCoolingPlanStatus_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 11),
+    _DcCoolingPlanStatus_Type()
+)
+dcCoolingPlanStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcCoolingPlanStatus.setStatus("current")
+
+
+class _DcCoolingPlanTargetTemp_Type(Integer32):
+    """Custom type dcCoolingPlanTargetTemp based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(250, 1040),
+    )
+
+
+_DcCoolingPlanTargetTemp_Type.__name__ = "Integer32"
+_DcCoolingPlanTargetTemp_Object = MibTableColumn
+dcCoolingPlanTargetTemp = _DcCoolingPlanTargetTemp_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 12),
+    _DcCoolingPlanTargetTemp_Type()
+)
+dcCoolingPlanTargetTemp.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCoolingPlanTargetTemp.setStatus("current")
+if mibBuilder.loadTexts:
+    dcCoolingPlanTargetTemp.setUnits("0.1 degree")
+
+
+class _DcCoolingPlanOperatingMode_Type(Integer32):
+    """Custom type dcCoolingPlanOperatingMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("normal", 1),
+          ("silent", 2),
+          ("off", 3))
+    )
+
+
+_DcCoolingPlanOperatingMode_Type.__name__ = "Integer32"
+_DcCoolingPlanOperatingMode_Object = MibTableColumn
+dcCoolingPlanOperatingMode = _DcCoolingPlanOperatingMode_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 13),
+    _DcCoolingPlanOperatingMode_Type()
+)
+dcCoolingPlanOperatingMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCoolingPlanOperatingMode.setStatus("current")
+
+
+class _DcCoolingPlanStandbyFanSpeed_Type(Integer32):
+    """Custom type dcCoolingPlanStandbyFanSpeed based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("low", 2),
+          ("high", 3))
+    )
+
+
+_DcCoolingPlanStandbyFanSpeed_Type.__name__ = "Integer32"
+_DcCoolingPlanStandbyFanSpeed_Object = MibTableColumn
+dcCoolingPlanStandbyFanSpeed = _DcCoolingPlanStandbyFanSpeed_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 14),
+    _DcCoolingPlanStandbyFanSpeed_Type()
+)
+dcCoolingPlanStandbyFanSpeed.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCoolingPlanStandbyFanSpeed.setStatus("current")
+
+
+class _DcCoolingPlanHeaterStartTemp_Type(Integer32):
+    """Custom type dcCoolingPlanHeaterStartTemp based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-100, 590),
+    )
+
+
+_DcCoolingPlanHeaterStartTemp_Type.__name__ = "Integer32"
+_DcCoolingPlanHeaterStartTemp_Object = MibTableColumn
+dcCoolingPlanHeaterStartTemp = _DcCoolingPlanHeaterStartTemp_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 15),
+    _DcCoolingPlanHeaterStartTemp_Type()
+)
+dcCoolingPlanHeaterStartTemp.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCoolingPlanHeaterStartTemp.setStatus("current")
+if mibBuilder.loadTexts:
+    dcCoolingPlanHeaterStartTemp.setUnits("0.1 degree")
+
+
+class _DcCoolingPlanHeaterHyst_Type(Integer32):
+    """Custom type dcCoolingPlanHeaterHyst based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(10, 180),
+    )
+
+
+_DcCoolingPlanHeaterHyst_Type.__name__ = "Integer32"
+_DcCoolingPlanHeaterHyst_Object = MibTableColumn
+dcCoolingPlanHeaterHyst = _DcCoolingPlanHeaterHyst_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 16),
+    _DcCoolingPlanHeaterHyst_Type()
+)
+dcCoolingPlanHeaterHyst.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCoolingPlanHeaterHyst.setStatus("current")
+if mibBuilder.loadTexts:
+    dcCoolingPlanHeaterHyst.setUnits("0.1 degree")
+
+
+class _DcCoolingPlanHeaterControl_Type(Integer32):
+    """Custom type dcCoolingPlanHeaterControl based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("auto", 1),
+          ("manual", 2))
+    )
+
+
+_DcCoolingPlanHeaterControl_Type.__name__ = "Integer32"
+_DcCoolingPlanHeaterControl_Object = MibTableColumn
+dcCoolingPlanHeaterControl = _DcCoolingPlanHeaterControl_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 14, 1, 1, 17),
+    _DcCoolingPlanHeaterControl_Type()
+)
+dcCoolingPlanHeaterControl.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dcCoolingPlanHeaterControl.setStatus("current")
+_DcInverter_ObjectIdentity = ObjectIdentity
+dcInverter = _DcInverter_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15)
+)
+_DcInverterGroupTable_Object = MibTable
+dcInverterGroupTable = _DcInverterGroupTable_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1)
+)
+if mibBuilder.loadTexts:
+    dcInverterGroupTable.setStatus("current")
+_DcInverterGroupEntry_Object = MibTableRow
+dcInverterGroupEntry = _DcInverterGroupEntry_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1)
+)
+dcInverterGroupEntry.setIndexNames(
+    (0, "ORION-BASE-MIB", "dcInverterGroupIndex"),
+)
+if mibBuilder.loadTexts:
+    dcInverterGroupEntry.setStatus("current")
+
+
+class _DcInverterGroupIndex_Type(Integer32):
+    """Custom type dcInverterGroupIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_DcInverterGroupIndex_Type.__name__ = "Integer32"
+_DcInverterGroupIndex_Object = MibTableColumn
+dcInverterGroupIndex = _DcInverterGroupIndex_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 1),
+    _DcInverterGroupIndex_Type()
+)
+dcInverterGroupIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    dcInverterGroupIndex.setStatus("current")
+
+
+class _DcInverterGroupState_Type(Integer32):
+    """Custom type dcInverterGroupState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 1),
+          ("noAlarm", 2),
+          ("nonUrgentAlarm", 3),
+          ("urgentAlarm", 4))
+    )
+
+
+_DcInverterGroupState_Type.__name__ = "Integer32"
+_DcInverterGroupState_Object = MibTableColumn
+dcInverterGroupState = _DcInverterGroupState_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 2),
+    _DcInverterGroupState_Type()
+)
+dcInverterGroupState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupState.setStatus("current")
+
+
+class _DcInverterGroupLoadPosition_Type(Integer32):
+    """Custom type dcInverterGroupLoadPosition based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 1),
+          ("ac", 2),
+          ("dc", 3),
+          ("mixed", 4),
+          ("unknown", 5))
+    )
+
+
+_DcInverterGroupLoadPosition_Type.__name__ = "Integer32"
+_DcInverterGroupLoadPosition_Object = MibTableColumn
+dcInverterGroupLoadPosition = _DcInverterGroupLoadPosition_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 3),
+    _DcInverterGroupLoadPosition_Type()
+)
+dcInverterGroupLoadPosition.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupLoadPosition.setStatus("current")
+_DcInverterGroupNbrOfConfigInverters_Type = Gauge32
+_DcInverterGroupNbrOfConfigInverters_Object = MibTableColumn
+dcInverterGroupNbrOfConfigInverters = _DcInverterGroupNbrOfConfigInverters_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 4),
+    _DcInverterGroupNbrOfConfigInverters_Type()
+)
+dcInverterGroupNbrOfConfigInverters.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupNbrOfConfigInverters.setStatus("current")
+_DcInverterGroupNbrOfPresentInverters_Type = Gauge32
+_DcInverterGroupNbrOfPresentInverters_Object = MibTableColumn
+dcInverterGroupNbrOfPresentInverters = _DcInverterGroupNbrOfPresentInverters_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 5),
+    _DcInverterGroupNbrOfPresentInverters_Type()
+)
+dcInverterGroupNbrOfPresentInverters.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupNbrOfPresentInverters.setStatus("current")
+_DcInverterGroupPhase_Type = Gauge32
+_DcInverterGroupPhase_Object = MibTableColumn
+dcInverterGroupPhase = _DcInverterGroupPhase_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 6),
+    _DcInverterGroupPhase_Type()
+)
+dcInverterGroupPhase.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupPhase.setStatus("current")
+_DcInverterGroupDcVoltage_Type = Integer32
+_DcInverterGroupDcVoltage_Object = MibTableColumn
+dcInverterGroupDcVoltage = _DcInverterGroupDcVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 7),
+    _DcInverterGroupDcVoltage_Type()
+)
+dcInverterGroupDcVoltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupDcVoltage.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupDcVoltage.setUnits("10 mV")
+_DcInverterGroupInputDcPower_Type = Integer32
+_DcInverterGroupInputDcPower_Object = MibTableColumn
+dcInverterGroupInputDcPower = _DcInverterGroupInputDcPower_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 8),
+    _DcInverterGroupInputDcPower_Type()
+)
+dcInverterGroupInputDcPower.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputDcPower.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputDcPower.setUnits("1 W")
+_DcInverterGroupInputVoltage1_Type = Integer32
+_DcInverterGroupInputVoltage1_Object = MibTableColumn
+dcInverterGroupInputVoltage1 = _DcInverterGroupInputVoltage1_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 9),
+    _DcInverterGroupInputVoltage1_Type()
+)
+dcInverterGroupInputVoltage1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputVoltage1.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputVoltage1.setUnits("100 mV")
+_DcInverterGroupInputVoltage2_Type = Integer32
+_DcInverterGroupInputVoltage2_Object = MibTableColumn
+dcInverterGroupInputVoltage2 = _DcInverterGroupInputVoltage2_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 10),
+    _DcInverterGroupInputVoltage2_Type()
+)
+dcInverterGroupInputVoltage2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputVoltage2.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputVoltage2.setUnits("100 mV")
+_DcInverterGroupInputVoltage3_Type = Integer32
+_DcInverterGroupInputVoltage3_Object = MibTableColumn
+dcInverterGroupInputVoltage3 = _DcInverterGroupInputVoltage3_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 11),
+    _DcInverterGroupInputVoltage3_Type()
+)
+dcInverterGroupInputVoltage3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputVoltage3.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputVoltage3.setUnits("100 mV")
+_DcInverterGroupInputApparentPower1_Type = Integer32
+_DcInverterGroupInputApparentPower1_Object = MibTableColumn
+dcInverterGroupInputApparentPower1 = _DcInverterGroupInputApparentPower1_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 12),
+    _DcInverterGroupInputApparentPower1_Type()
+)
+dcInverterGroupInputApparentPower1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputApparentPower1.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputApparentPower1.setUnits("1 VA")
+_DcInverterGroupInputApparentPower2_Type = Integer32
+_DcInverterGroupInputApparentPower2_Object = MibTableColumn
+dcInverterGroupInputApparentPower2 = _DcInverterGroupInputApparentPower2_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 13),
+    _DcInverterGroupInputApparentPower2_Type()
+)
+dcInverterGroupInputApparentPower2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputApparentPower2.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputApparentPower2.setUnits("1 VA")
+_DcInverterGroupInputApparentPower3_Type = Integer32
+_DcInverterGroupInputApparentPower3_Object = MibTableColumn
+dcInverterGroupInputApparentPower3 = _DcInverterGroupInputApparentPower3_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 14),
+    _DcInverterGroupInputApparentPower3_Type()
+)
+dcInverterGroupInputApparentPower3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputApparentPower3.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputApparentPower3.setUnits("1 VA")
+_DcInverterGroupInputFrequency_Type = Gauge32
+_DcInverterGroupInputFrequency_Object = MibTableColumn
+dcInverterGroupInputFrequency = _DcInverterGroupInputFrequency_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 15),
+    _DcInverterGroupInputFrequency_Type()
+)
+dcInverterGroupInputFrequency.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputFrequency.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupInputFrequency.setUnits("10 mHz")
+_DcInverterGroupOutputVoltage1_Type = Integer32
+_DcInverterGroupOutputVoltage1_Object = MibTableColumn
+dcInverterGroupOutputVoltage1 = _DcInverterGroupOutputVoltage1_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 16),
+    _DcInverterGroupOutputVoltage1_Type()
+)
+dcInverterGroupOutputVoltage1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputVoltage1.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputVoltage1.setUnits("100 mV")
+_DcInverterGroupOutputVoltage2_Type = Integer32
+_DcInverterGroupOutputVoltage2_Object = MibTableColumn
+dcInverterGroupOutputVoltage2 = _DcInverterGroupOutputVoltage2_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 17),
+    _DcInverterGroupOutputVoltage2_Type()
+)
+dcInverterGroupOutputVoltage2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputVoltage2.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputVoltage2.setUnits("100 mV")
+_DcInverterGroupOutputVoltage3_Type = Integer32
+_DcInverterGroupOutputVoltage3_Object = MibTableColumn
+dcInverterGroupOutputVoltage3 = _DcInverterGroupOutputVoltage3_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 18),
+    _DcInverterGroupOutputVoltage3_Type()
+)
+dcInverterGroupOutputVoltage3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputVoltage3.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputVoltage3.setUnits("100 mV")
+_DcInverterGroupOutputApparentPower1_Type = Integer32
+_DcInverterGroupOutputApparentPower1_Object = MibTableColumn
+dcInverterGroupOutputApparentPower1 = _DcInverterGroupOutputApparentPower1_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 19),
+    _DcInverterGroupOutputApparentPower1_Type()
+)
+dcInverterGroupOutputApparentPower1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputApparentPower1.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputApparentPower1.setUnits("1 VA")
+_DcInverterGroupOutputApparentPower2_Type = Integer32
+_DcInverterGroupOutputApparentPower2_Object = MibTableColumn
+dcInverterGroupOutputApparentPower2 = _DcInverterGroupOutputApparentPower2_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 20),
+    _DcInverterGroupOutputApparentPower2_Type()
+)
+dcInverterGroupOutputApparentPower2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputApparentPower2.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputApparentPower2.setUnits("1 VA")
+_DcInverterGroupOutputApparentPower3_Type = Integer32
+_DcInverterGroupOutputApparentPower3_Object = MibTableColumn
+dcInverterGroupOutputApparentPower3 = _DcInverterGroupOutputApparentPower3_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 21),
+    _DcInverterGroupOutputApparentPower3_Type()
+)
+dcInverterGroupOutputApparentPower3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputApparentPower3.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputApparentPower3.setUnits("1 VA")
+_DcInverterGroupOutputFrequency_Type = Gauge32
+_DcInverterGroupOutputFrequency_Object = MibTableColumn
+dcInverterGroupOutputFrequency = _DcInverterGroupOutputFrequency_Object(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 2, 15, 1, 1, 22),
+    _DcInverterGroupOutputFrequency_Type()
+)
+dcInverterGroupOutputFrequency.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputFrequency.setStatus("current")
+if mibBuilder.loadTexts:
+    dcInverterGroupOutputFrequency.setUnits("10 mHz")
 _ControllerEvents_ObjectIdentity = ObjectIdentity
 controllerEvents = _ControllerEvents_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 3)
@@ -3657,7 +7328,8 @@ systemInfoGroup.setObjects(
       *(("ORION-BASE-MIB", "dcSiteName"),
         ("ORION-BASE-MIB", "dcSystemName"),
         ("ORION-BASE-MIB", "dcSystemDateTime"),
-        ("ORION-BASE-MIB", "dcSoftwareVersion"))
+        ("ORION-BASE-MIB", "dcSoftwareVersion"),
+        ("ORION-BASE-MIB", "dcCreateInventoryReport"))
 )
 if mibBuilder.loadTexts:
     systemInfoGroup.setStatus("current")
@@ -3678,7 +7350,11 @@ systemAlarmGroup.setObjects(
         ("ORION-BASE-MIB", "dcNumberCriticalAlarms"),
         ("ORION-BASE-MIB", "dcCriticalAlarmIdentifier"),
         ("ORION-BASE-MIB", "dcCriticalAlarmValue"),
-        ("ORION-BASE-MIB", "dcCriticalAlarmName"))
+        ("ORION-BASE-MIB", "dcCriticalAlarmName"),
+        ("ORION-BASE-MIB", "dcNumberAllAlarms"),
+        ("ORION-BASE-MIB", "dcAllAlarmIdentifier"),
+        ("ORION-BASE-MIB", "dcAllAlarmValue"),
+        ("ORION-BASE-MIB", "dcAllAlarmName"))
 )
 if mibBuilder.loadTexts:
     systemAlarmGroup.setStatus("current")
@@ -3708,9 +7384,9 @@ rectifierGroup.setObjects(
         ("ORION-BASE-MIB", "dcNumberRectifiersOkay"),
         ("ORION-BASE-MIB", "dcEfficiencyCyclingEnabled"),
         ("ORION-BASE-MIB", "dcLimitSwitchingTimes"),
-        ("ORION-BASE-MIB", "dcForceSwitchingOncePerMonth"),
-        ("ORION-BASE-MIB", "dcMaximumLoadStep"),
-        ("ORION-BASE-MIB", "dcMinimumLoadStep"))
+        ("ORION-BASE-MIB", "dcForceCyclingType"),
+        ("ORION-BASE-MIB", "dcMinimumPowerReserve"),
+        ("ORION-BASE-MIB", "dcMinimumRectifierPower"))
 )
 if mibBuilder.loadTexts:
     rectifierGroup.setStatus("current")
@@ -3742,7 +7418,11 @@ rectifierTableGroup = ObjectGroup(
 )
 rectifierTableGroup.setObjects(
       *(("ORION-BASE-MIB", "dcRectifierIdentifier"),
-        ("ORION-BASE-MIB", "dcRectifierStatus"))
+        ("ORION-BASE-MIB", "dcRectifierSlotState"),
+        ("ORION-BASE-MIB", "dcRectifierMainStatus"),
+        ("ORION-BASE-MIB", "dcRectifierConfiguration"),
+        ("ORION-BASE-MIB", "dcRectifierIout"),
+        ("ORION-BASE-MIB", "dcRectifierPout"))
 )
 if mibBuilder.loadTexts:
     rectifierTableGroup.setStatus("current")
@@ -3796,6 +7476,10 @@ batteryGroup.setObjects(
         ("ORION-BASE-MIB", "dcBatteryTestFailureEvent"),
         ("ORION-BASE-MIB", "dcBatteryTestType"),
         ("ORION-BASE-MIB", "dcTotalBatteryCapacity"),
+        ("ORION-BASE-MIB", "dcBatteryLifePredictionStatus"),
+        ("ORION-BASE-MIB", "dcBatteryChargingCurrentLimitEnable"),
+        ("ORION-BASE-MIB", "dcBatteryTotalChargingCurrentLimitEnable"),
+        ("ORION-BASE-MIB", "dcBatteryTotalMaxIBatt"),
         ("ORION-BASE-MIB", "dcLossOfBackupTimeEnabled"),
         ("ORION-BASE-MIB", "dcLossOfBackupTimeStatus"),
         ("ORION-BASE-MIB", "dcExpectedBackupTime"),
@@ -3821,6 +7505,7 @@ batteryGroup.setObjects(
         ("ORION-BASE-MIB", "dcBoostChargeIstart"),
         ("ORION-BASE-MIB", "dcBoostChargeIstop"),
         ("ORION-BASE-MIB", "dcBoostChargeInhibitTime"),
+        ("ORION-BASE-MIB", "dcBoostChargeSoCBelow"),
         ("ORION-BASE-MIB", "dcUaMax"),
         ("ORION-BASE-MIB", "dcUaMin"),
         ("ORION-BASE-MIB", "dcUsMax"),
@@ -3836,7 +7521,8 @@ batteryGroup.setObjects(
         ("ORION-BASE-MIB", "dcEvtCtrlChargeTempCompEnabled"),
         ("ORION-BASE-MIB", "dcEvtCtrlChargeMaxIBatt"),
         ("ORION-BASE-MIB", "dcHighTemp"),
-        ("ORION-BASE-MIB", "dcHighTempHyst"))
+        ("ORION-BASE-MIB", "dcHighTempHyst"),
+        ("ORION-BASE-MIB", "dcBatteryTypeSelect"))
 )
 if mibBuilder.loadTexts:
     batteryGroup.setStatus("current")
@@ -3857,7 +7543,8 @@ trapDestinationTableGroup = ObjectGroup(
 )
 trapDestinationTableGroup.setObjects(
       *(("ORION-BASE-MIB", "dcTrapDestinationIp"),
-        ("ORION-BASE-MIB", "dcTrapDestinationPort"))
+        ("ORION-BASE-MIB", "dcTrapDestinationPort"),
+        ("ORION-BASE-MIB", "dcTrapDestinationUser"))
 )
 if mibBuilder.loadTexts:
     trapDestinationTableGroup.setStatus("current")
@@ -3867,7 +7554,8 @@ miscGroup = ObjectGroup(
 )
 miscGroup.setObjects(
       *(("ORION-BASE-MIB", "dcFileProcessingStatus"),
-        ("ORION-BASE-MIB", "dcResendActiveAlarmTraps"))
+        ("ORION-BASE-MIB", "dcResendActiveAlarmTraps"),
+        ("ORION-BASE-MIB", "dcRebootController"))
 )
 if mibBuilder.loadTexts:
     miscGroup.setStatus("current")
@@ -3886,7 +7574,7 @@ rectifierGroupTableGroup.setObjects(
         ("ORION-BASE-MIB", "dcRectifierGroupStartupVoltage"),
         ("ORION-BASE-MIB", "dcRectifierGroupStartupCurrentLimit"),
         ("ORION-BASE-MIB", "dcRectifierGroupStartupPowerLimit"),
-        ("ORION-BASE-MIB", "dcRectifierGroupStartupTimeLimit"),
+        ("ORION-BASE-MIB", "dcRectifierGroupStartupLimitTime"),
         ("ORION-BASE-MIB", "dcRectifierGroupPowerupDelay"),
         ("ORION-BASE-MIB", "dcRectifierGroupPowerupTime"),
         ("ORION-BASE-MIB", "dcRectifierGroupUmaxOff"))
@@ -3932,7 +7620,12 @@ lvdTableGroup = ObjectGroup(
 )
 lvdTableGroup.setObjects(
       *(("ORION-BASE-MIB", "dcLvdName"),
-        ("ORION-BASE-MIB", "dcLvdDisconnectDelay"))
+        ("ORION-BASE-MIB", "dcLvdDisconnectDelay"),
+        ("ORION-BASE-MIB", "dcLvdType"),
+        ("ORION-BASE-MIB", "dcLvdVoltageThreshold"),
+        ("ORION-BASE-MIB", "dcLvdVoltageHysteresis"),
+        ("ORION-BASE-MIB", "dcLvdControlEvent"),
+        ("ORION-BASE-MIB", "dcLvdMonitoringEvent"))
 )
 if mibBuilder.loadTexts:
     lvdTableGroup.setStatus("current")
@@ -3944,7 +7637,7 @@ powerLimitationTableGroup.setObjects(
       *(("ORION-BASE-MIB", "dcPowerLimitationEventName"),
         ("ORION-BASE-MIB", "dcPowerLimitationStatus"),
         ("ORION-BASE-MIB", "dcPowerLimitationType"),
-        ("ORION-BASE-MIB", "dcPowerLimitationLimit"),
+        ("ORION-BASE-MIB", "dcMaxTotalRectifierPower"),
         ("ORION-BASE-MIB", "dcPowerLimitationNoBatteryDischarge"))
 )
 if mibBuilder.loadTexts:
@@ -3973,6 +7666,286 @@ meterPanelEventTableGroup.setObjects(
 if mibBuilder.loadTexts:
     meterPanelEventTableGroup.setStatus("current")
 
+meterPanelmeasurementTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 22)
+)
+meterPanelmeasurementTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcMeterPanelMeasurementName"),
+        ("ORION-BASE-MIB", "dcMeterPanelMeasurementValue"),
+        ("ORION-BASE-MIB", "dcMeterPanelMeasurementUnit"))
+)
+if mibBuilder.loadTexts:
+    meterPanelmeasurementTableGroup.setStatus("current")
+
+batteryLithiumTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 23)
+)
+batteryLithiumTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcBatteryLithiumName"),
+        ("ORION-BASE-MIB", "dcBatteryLithiumMainState"),
+        ("ORION-BASE-MIB", "dcBatteryLithiumSubState"),
+        ("ORION-BASE-MIB", "dcBatteryLithiumCurrent"),
+        ("ORION-BASE-MIB", "dcBatteryLithiumStateOfCharge"),
+        ("ORION-BASE-MIB", "dcBatteryLithiumInstallationDate"),
+        ("ORION-BASE-MIB", "dcBatteryLithiumSoH"))
+)
+if mibBuilder.loadTexts:
+    batteryLithiumTableGroup.setStatus("current")
+
+batteryLifePredictionTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 24)
+)
+batteryLifePredictionTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcBatteryLifePredictionName"),
+        ("ORION-BASE-MIB", "dcBatteryLifePredictionRemainingDays"),
+        ("ORION-BASE-MIB", "dcBatteryLifePredictionInstallationDate"),
+        ("ORION-BASE-MIB", "dcBatteryLifePredictionSoH"))
+)
+if mibBuilder.loadTexts:
+    batteryLifePredictionTableGroup.setStatus("current")
+
+pvcGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 25)
+)
+pvcGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcNumberPVCs"),
+        ("ORION-BASE-MIB", "dcNumberPVCsFailure"),
+        ("ORION-BASE-MIB", "dcNumberPVCsOkay"))
+)
+if mibBuilder.loadTexts:
+    pvcGroup.setStatus("current")
+
+pvcTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 26)
+)
+pvcTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcPVCIdentifier"),
+        ("ORION-BASE-MIB", "dcPVCSlotState"),
+        ("ORION-BASE-MIB", "dcPVCMainStatus"),
+        ("ORION-BASE-MIB", "dcPVCSubStatus"),
+        ("ORION-BASE-MIB", "dcPVCConfiguration"),
+        ("ORION-BASE-MIB", "dcPVCIout"),
+        ("ORION-BASE-MIB", "dcPVCUout"),
+        ("ORION-BASE-MIB", "dcPVCIin"),
+        ("ORION-BASE-MIB", "dcPVCUin"))
+)
+if mibBuilder.loadTexts:
+    pvcTableGroup.setStatus("current")
+
+pvcGroupTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 27)
+)
+pvcGroupTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcPVCGroupPVCType"),
+        ("ORION-BASE-MIB", "dcPVCGroupVoltage"),
+        ("ORION-BASE-MIB", "dcPVCGroupVPGM"),
+        ("ORION-BASE-MIB", "dcPVCGroupInputLowOff"),
+        ("ORION-BASE-MIB", "dcPVCGroupInputLowOn"),
+        ("ORION-BASE-MIB", "dcPVCGroupStartUpDelay"),
+        ("ORION-BASE-MIB", "dcPVCGroupOvpLimit"),
+        ("ORION-BASE-MIB", "dcPVCGroupAlarmDelay"))
+)
+if mibBuilder.loadTexts:
+    pvcGroupTableGroup.setStatus("current")
+
+inventoryTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 28)
+)
+inventoryTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcInventoryType"),
+        ("ORION-BASE-MIB", "dcInventoryName"),
+        ("ORION-BASE-MIB", "dcInventorySwVersion"),
+        ("ORION-BASE-MIB", "dcInventoryBuildVersion"),
+        ("ORION-BASE-MIB", "dcInventoryPartNb"),
+        ("ORION-BASE-MIB", "dcInventorySerialNb"),
+        ("ORION-BASE-MIB", "dcInventoryTopLevel"))
+)
+if mibBuilder.loadTexts:
+    inventoryTableGroup.setStatus("current")
+
+eventDefinitionTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 29)
+)
+eventDefinitionTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcEventName"),
+        ("ORION-BASE-MIB", "dcThreshold"),
+        ("ORION-BASE-MIB", "dcThresholdHysteresis"),
+        ("ORION-BASE-MIB", "dcUnit"))
+)
+if mibBuilder.loadTexts:
+    eventDefinitionTableGroup.setStatus("current")
+
+filterTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 30)
+)
+filterTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcFilterName"),
+        ("ORION-BASE-MIB", "dcTrueForMin"),
+        ("ORION-BASE-MIB", "dcFalseForMin"))
+)
+if mibBuilder.loadTexts:
+    filterTableGroup.setStatus("current")
+
+timerTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 31)
+)
+timerTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcTimerName"),
+        ("ORION-BASE-MIB", "dcStartTime"),
+        ("ORION-BASE-MIB", "dcStartDaySu"),
+        ("ORION-BASE-MIB", "dcStartDayMo"),
+        ("ORION-BASE-MIB", "dcStartDayTu"),
+        ("ORION-BASE-MIB", "dcStartDayWe"),
+        ("ORION-BASE-MIB", "dcStartDayTh"),
+        ("ORION-BASE-MIB", "dcStartDayFr"),
+        ("ORION-BASE-MIB", "dcStartDaySa"),
+        ("ORION-BASE-MIB", "dcEndTime"),
+        ("ORION-BASE-MIB", "dcEndDaySu"),
+        ("ORION-BASE-MIB", "dcEndDayMo"),
+        ("ORION-BASE-MIB", "dcEndDayTu"),
+        ("ORION-BASE-MIB", "dcEndDayWe"),
+        ("ORION-BASE-MIB", "dcEndDayTh"),
+        ("ORION-BASE-MIB", "dcEndDayFr"),
+        ("ORION-BASE-MIB", "dcEndDaySa"))
+)
+if mibBuilder.loadTexts:
+    timerTableGroup.setStatus("current")
+
+ipGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 32)
+)
+ipGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcIPv4Address"),
+        ("ORION-BASE-MIB", "dcIPv4SubnetMask"),
+        ("ORION-BASE-MIB", "dcIPv4Gateway"),
+        ("ORION-BASE-MIB", "dcIPv4DNS"),
+        ("ORION-BASE-MIB", "dcIPv6LinkLocalAddress"),
+        ("ORION-BASE-MIB", "dcIPv6Address"),
+        ("ORION-BASE-MIB", "dcIPv6Gateway"),
+        ("ORION-BASE-MIB", "dcIPv6DNSAuto"),
+        ("ORION-BASE-MIB", "dcIPv6DNSManual"))
+)
+if mibBuilder.loadTexts:
+    ipGroup.setStatus("current")
+
+newTrapDestinationTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 33)
+)
+newTrapDestinationTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcTrapDestinationv2"),
+        ("ORION-BASE-MIB", "dcTrapDestinationv2Port"),
+        ("ORION-BASE-MIB", "dcTrapDestinationv2User"))
+)
+if mibBuilder.loadTexts:
+    newTrapDestinationTableGroup.setStatus("current")
+
+airconTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 34)
+)
+airconTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcAirconName"),
+        ("ORION-BASE-MIB", "dcAirconMainStatus"),
+        ("ORION-BASE-MIB", "dcAirconSubStatus"),
+        ("ORION-BASE-MIB", "dcAirconConfiguration"),
+        ("ORION-BASE-MIB", "dcAirconPlanName"),
+        ("ORION-BASE-MIB", "dcAirconRoomTemp"),
+        ("ORION-BASE-MIB", "dcCoolingPlanActivationInput"),
+        ("ORION-BASE-MIB", "dcCoolingPlanPriority"),
+        ("ORION-BASE-MIB", "dcCoolingPlanStatus"),
+        ("ORION-BASE-MIB", "dcCoolingPlanTargetTemp"),
+        ("ORION-BASE-MIB", "dcCoolingPlanOperatingMode"),
+        ("ORION-BASE-MIB", "dcCoolingPlanStandbyFanSpeed"),
+        ("ORION-BASE-MIB", "dcCoolingPlanHeaterStartTemp"),
+        ("ORION-BASE-MIB", "dcCoolingPlanHeaterHyst"),
+        ("ORION-BASE-MIB", "dcCoolingPlanHeaterControl"))
+)
+if mibBuilder.loadTexts:
+    airconTableGroup.setStatus("current")
+
+inverterGroupTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 35)
+)
+inverterGroupTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcInverterGroupLoadPosition"),
+        ("ORION-BASE-MIB", "dcInverterGroupNbrOfConfigInverters"),
+        ("ORION-BASE-MIB", "dcInverterGroupNbrOfPresentInverters"),
+        ("ORION-BASE-MIB", "dcInverterGroupState"),
+        ("ORION-BASE-MIB", "dcInverterGroupPhase"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputVoltage1"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputVoltage2"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputVoltage3"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputApparentPower1"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputApparentPower2"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputApparentPower3"),
+        ("ORION-BASE-MIB", "dcInverterGroupOutputFrequency"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputVoltage1"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputVoltage2"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputVoltage3"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputApparentPower1"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputApparentPower2"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputApparentPower3"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputFrequency"),
+        ("ORION-BASE-MIB", "dcInverterGroupDcVoltage"),
+        ("ORION-BASE-MIB", "dcInverterGroupInputDcPower"))
+)
+if mibBuilder.loadTexts:
+    inverterGroupTableGroup.setStatus("current")
+
+eventCtrlChargeTableTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 36)
+)
+eventCtrlChargeTableTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcEventControlledChargeTablePriority"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableName"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableActivationInput"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableStatus"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableType"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableVoltage"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableMaxIBatt"),
+        ("ORION-BASE-MIB", "dcEventControlledChargeTableTempCompEnabled"))
+)
+if mibBuilder.loadTexts:
+    eventCtrlChargeTableTableGroup.setStatus("current")
+
+batteryTestTableTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 37)
+)
+batteryTestTableTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcBatteryTestTablePriority"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableName"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableType"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableStatus"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableUsupport"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableDuration"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableInterval"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableDischargeCurrent"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableMinDuration"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableVoltageWithinUfloat"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableVoltageWithinUfloatPeriod"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableTempFrom"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableTempTo"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableIntervalEnabled"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableStartTimeFrom"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableStartTimeTo"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableControl"),
+        ("ORION-BASE-MIB", "dcBatteryTestTableFailureEvent"))
+)
+if mibBuilder.loadTexts:
+    batteryTestTableTableGroup.setStatus("current")
+
+batteryTestResultTableTableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 1, 1, 38)
+)
+batteryTestResultTableTableGroup.setObjects(
+      *(("ORION-BASE-MIB", "dcBatteryTestResultTablePriority"),
+        ("ORION-BASE-MIB", "dcBatteryTestResultTableName"),
+        ("ORION-BASE-MIB", "dcBatteryTestResultTableDateTime"),
+        ("ORION-BASE-MIB", "dcBatteryTestResultTableResult"),
+        ("ORION-BASE-MIB", "dcBatteryTestResultTableEndVoltage"))
+)
+if mibBuilder.loadTexts:
+    batteryTestResultTableTableGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -3980,7 +7953,9 @@ systemNonUrgentAlarm = NotificationType(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 3, 1, 0, 1)
 )
 systemNonUrgentAlarm.setObjects(
-      *(("ORION-BASE-MIB", "dcSystemDateTime"),
+      *(("ORION-BASE-MIB", "dcSiteName"),
+        ("ORION-BASE-MIB", "dcSystemName"),
+        ("ORION-BASE-MIB", "dcSystemDateTime"),
         ("ORION-BASE-MIB", "dcNumberNonUrgentAlarms"),
         ("ORION-BASE-MIB", "dcNonUrgentAlarmIdentifier"),
         ("ORION-BASE-MIB", "dcNonUrgentAlarmValue"),
@@ -3995,7 +7970,9 @@ systemUrgentAlarm = NotificationType(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 3, 1, 0, 2)
 )
 systemUrgentAlarm.setObjects(
-      *(("ORION-BASE-MIB", "dcSystemDateTime"),
+      *(("ORION-BASE-MIB", "dcSiteName"),
+        ("ORION-BASE-MIB", "dcSystemName"),
+        ("ORION-BASE-MIB", "dcSystemDateTime"),
         ("ORION-BASE-MIB", "dcNumberUrgentAlarms"),
         ("ORION-BASE-MIB", "dcUrgentAlarmIdentifier"),
         ("ORION-BASE-MIB", "dcUrgentAlarmValue"),
@@ -4010,7 +7987,9 @@ systemCriticalAlarm = NotificationType(
     (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 3, 1, 0, 3)
 )
 systemCriticalAlarm.setObjects(
-      *(("ORION-BASE-MIB", "dcSystemDateTime"),
+      *(("ORION-BASE-MIB", "dcSiteName"),
+        ("ORION-BASE-MIB", "dcSystemName"),
+        ("ORION-BASE-MIB", "dcSystemDateTime"),
         ("ORION-BASE-MIB", "dcNumberCriticalAlarms"),
         ("ORION-BASE-MIB", "dcCriticalAlarmIdentifier"),
         ("ORION-BASE-MIB", "dcCriticalAlarmValue"),
@@ -4018,6 +7997,23 @@ systemCriticalAlarm.setObjects(
 )
 if mibBuilder.loadTexts:
     systemCriticalAlarm.setStatus(
+        "current"
+    )
+
+systemAllAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 20246, 2, 3, 1, 1, 1, 3, 1, 0, 4)
+)
+systemAllAlarm.setObjects(
+      *(("ORION-BASE-MIB", "dcSiteName"),
+        ("ORION-BASE-MIB", "dcSystemName"),
+        ("ORION-BASE-MIB", "dcSystemDateTime"),
+        ("ORION-BASE-MIB", "dcNumberAllAlarms"),
+        ("ORION-BASE-MIB", "dcAllAlarmIdentifier"),
+        ("ORION-BASE-MIB", "dcAllAlarmValue"),
+        ("ORION-BASE-MIB", "dcAllAlarmName"))
+)
+if mibBuilder.loadTexts:
+    systemAllAlarm.setStatus(
         "current"
     )
 
@@ -4030,7 +8026,8 @@ notificationsGroup = NotificationGroup(
 notificationsGroup.setObjects(
       *(("ORION-BASE-MIB", "systemNonUrgentAlarm"),
         ("ORION-BASE-MIB", "systemUrgentAlarm"),
-        ("ORION-BASE-MIB", "systemCriticalAlarm"))
+        ("ORION-BASE-MIB", "systemCriticalAlarm"),
+        ("ORION-BASE-MIB", "systemAllAlarm"))
 )
 if mibBuilder.loadTexts:
     notificationsGroup.setStatus(
@@ -4088,6 +8085,23 @@ mibBuilder.exportSymbols(
        "powerLimitationTableGroup": powerLimitationTableGroup,
        "measurementTableGroup": measurementTableGroup,
        "meterPanelEventTableGroup": meterPanelEventTableGroup,
+       "meterPanelmeasurementTableGroup": meterPanelmeasurementTableGroup,
+       "batteryLithiumTableGroup": batteryLithiumTableGroup,
+       "batteryLifePredictionTableGroup": batteryLifePredictionTableGroup,
+       "pvcGroup": pvcGroup,
+       "pvcTableGroup": pvcTableGroup,
+       "pvcGroupTableGroup": pvcGroupTableGroup,
+       "inventoryTableGroup": inventoryTableGroup,
+       "eventDefinitionTableGroup": eventDefinitionTableGroup,
+       "filterTableGroup": filterTableGroup,
+       "timerTableGroup": timerTableGroup,
+       "ipGroup": ipGroup,
+       "newTrapDestinationTableGroup": newTrapDestinationTableGroup,
+       "airconTableGroup": airconTableGroup,
+       "inverterGroupTableGroup": inverterGroupTableGroup,
+       "eventCtrlChargeTableTableGroup": eventCtrlChargeTableTableGroup,
+       "batteryTestTableTableGroup": batteryTestTableTableGroup,
+       "batteryTestResultTableTableGroup": batteryTestResultTableTableGroup,
        "controllerCompl": controllerCompl,
        "controllerBasicCompl": controllerBasicCompl,
        "controllerObjects": controllerObjects,
@@ -4096,6 +8110,7 @@ mibBuilder.exportSymbols(
        "dcSystemName": dcSystemName,
        "dcSystemDateTime": dcSystemDateTime,
        "dcSoftwareVersion": dcSoftwareVersion,
+       "dcCreateInventoryReport": dcCreateInventoryReport,
        "dcSystemAlarms": dcSystemAlarms,
        "dcEventHistoryTable": dcEventHistoryTable,
        "dcEventHistoryEntry": dcEventHistoryEntry,
@@ -4128,6 +8143,10 @@ mibBuilder.exportSymbols(
        "dcCriticalAlarmIdentifier": dcCriticalAlarmIdentifier,
        "dcCriticalAlarmValue": dcCriticalAlarmValue,
        "dcCriticalAlarmName": dcCriticalAlarmName,
+       "dcNumberAllAlarms": dcNumberAllAlarms,
+       "dcAllAlarmIdentifier": dcAllAlarmIdentifier,
+       "dcAllAlarmValue": dcAllAlarmValue,
+       "dcAllAlarmName": dcAllAlarmName,
        "dcSystemMonitor": dcSystemMonitor,
        "dcSystemVoltage": dcSystemVoltage,
        "dcLoadCurrent": dcLoadCurrent,
@@ -4145,7 +8164,11 @@ mibBuilder.exportSymbols(
        "dcRectifierEntry": dcRectifierEntry,
        "dcRectifierIndex": dcRectifierIndex,
        "dcRectifierIdentifier": dcRectifierIdentifier,
-       "dcRectifierStatus": dcRectifierStatus,
+       "dcRectifierSlotState": dcRectifierSlotState,
+       "dcRectifierMainStatus": dcRectifierMainStatus,
+       "dcRectifierConfiguration": dcRectifierConfiguration,
+       "dcRectifierIout": dcRectifierIout,
+       "dcRectifierPout": dcRectifierPout,
        "dcRectifierGroupTable": dcRectifierGroupTable,
        "dcRectifierGroupEntry": dcRectifierGroupEntry,
        "dcRectifierGroupIndex": dcRectifierGroupIndex,
@@ -4159,7 +8182,7 @@ mibBuilder.exportSymbols(
        "dcRectifierGroupStartupVoltage": dcRectifierGroupStartupVoltage,
        "dcRectifierGroupStartupCurrentLimit": dcRectifierGroupStartupCurrentLimit,
        "dcRectifierGroupStartupPowerLimit": dcRectifierGroupStartupPowerLimit,
-       "dcRectifierGroupStartupTimeLimit": dcRectifierGroupStartupTimeLimit,
+       "dcRectifierGroupStartupLimitTime": dcRectifierGroupStartupLimitTime,
        "dcRectifierGroupPowerupDelay": dcRectifierGroupPowerupDelay,
        "dcRectifierGroupPowerupTime": dcRectifierGroupPowerupTime,
        "dcRectifierGroupUmaxOff": dcRectifierGroupUmaxOff,
@@ -4167,9 +8190,9 @@ mibBuilder.exportSymbols(
        "dcEfficiencyCycling": dcEfficiencyCycling,
        "dcEfficiencyCyclingEnabled": dcEfficiencyCyclingEnabled,
        "dcLimitSwitchingTimes": dcLimitSwitchingTimes,
-       "dcForceSwitchingOncePerMonth": dcForceSwitchingOncePerMonth,
-       "dcMaximumLoadStep": dcMaximumLoadStep,
-       "dcMinimumLoadStep": dcMinimumLoadStep,
+       "dcForceCyclingType": dcForceCyclingType,
+       "dcMinimumPowerReserve": dcMinimumPowerReserve,
+       "dcMinimumRectifierPower": dcMinimumRectifierPower,
        "dcPowerLimitation": dcPowerLimitation,
        "dcPowerLimitationTable": dcPowerLimitationTable,
        "dcPowerLimitationEntry": dcPowerLimitationEntry,
@@ -4177,7 +8200,7 @@ mibBuilder.exportSymbols(
        "dcPowerLimitationEventName": dcPowerLimitationEventName,
        "dcPowerLimitationStatus": dcPowerLimitationStatus,
        "dcPowerLimitationType": dcPowerLimitationType,
-       "dcPowerLimitationLimit": dcPowerLimitationLimit,
+       "dcMaxTotalRectifierPower": dcMaxTotalRectifierPower,
        "dcPowerLimitationNoBatteryDischarge": dcPowerLimitationNoBatteryDischarge,
        "dcBattery": dcBattery,
        "dcFloatCharge": dcFloatCharge,
@@ -4204,6 +8227,35 @@ mibBuilder.exportSymbols(
        "dcBatteryTestStatus": dcBatteryTestStatus,
        "dcBatteryTestFailureEvent": dcBatteryTestFailureEvent,
        "dcBatteryTestType": dcBatteryTestType,
+       "dcBatteryTestTable": dcBatteryTestTable,
+       "dcBatteryTestTableEntry": dcBatteryTestTableEntry,
+       "dcBatteryTestTableIndex": dcBatteryTestTableIndex,
+       "dcBatteryTestTablePriority": dcBatteryTestTablePriority,
+       "dcBatteryTestTableName": dcBatteryTestTableName,
+       "dcBatteryTestTableType": dcBatteryTestTableType,
+       "dcBatteryTestTableStatus": dcBatteryTestTableStatus,
+       "dcBatteryTestTableUsupport": dcBatteryTestTableUsupport,
+       "dcBatteryTestTableDuration": dcBatteryTestTableDuration,
+       "dcBatteryTestTableInterval": dcBatteryTestTableInterval,
+       "dcBatteryTestTableDischargeCurrent": dcBatteryTestTableDischargeCurrent,
+       "dcBatteryTestTableMinDuration": dcBatteryTestTableMinDuration,
+       "dcBatteryTestTableVoltageWithinUfloat": dcBatteryTestTableVoltageWithinUfloat,
+       "dcBatteryTestTableVoltageWithinUfloatPeriod": dcBatteryTestTableVoltageWithinUfloatPeriod,
+       "dcBatteryTestTableTempFrom": dcBatteryTestTableTempFrom,
+       "dcBatteryTestTableTempTo": dcBatteryTestTableTempTo,
+       "dcBatteryTestTableIntervalEnabled": dcBatteryTestTableIntervalEnabled,
+       "dcBatteryTestTableStartTimeFrom": dcBatteryTestTableStartTimeFrom,
+       "dcBatteryTestTableStartTimeTo": dcBatteryTestTableStartTimeTo,
+       "dcBatteryTestTableControl": dcBatteryTestTableControl,
+       "dcBatteryTestTableFailureEvent": dcBatteryTestTableFailureEvent,
+       "dcBatteryTestResultTable": dcBatteryTestResultTable,
+       "dcBatteryTestResultTableEntry": dcBatteryTestResultTableEntry,
+       "dcBatteryTestResultTableIndex": dcBatteryTestResultTableIndex,
+       "dcBatteryTestResultTablePriority": dcBatteryTestResultTablePriority,
+       "dcBatteryTestResultTableName": dcBatteryTestResultTableName,
+       "dcBatteryTestResultTableDateTime": dcBatteryTestResultTableDateTime,
+       "dcBatteryTestResultTableResult": dcBatteryTestResultTableResult,
+       "dcBatteryTestResultTableEndVoltage": dcBatteryTestResultTableEndVoltage,
        "dcBatteryParameter": dcBatteryParameter,
        "dcTotalBatteryCapacity": dcTotalBatteryCapacity,
        "dcBatteryStringTable": dcBatteryStringTable,
@@ -4216,6 +8268,27 @@ mibBuilder.exportSymbols(
        "dcLossOfBackupTimeEnabled": dcLossOfBackupTimeEnabled,
        "dcLossOfBackupTimeStatus": dcLossOfBackupTimeStatus,
        "dcExpectedBackupTime": dcExpectedBackupTime,
+       "dcBatteryLithiumTable": dcBatteryLithiumTable,
+       "dcBatteryLithiumEntry": dcBatteryLithiumEntry,
+       "dcBatteryLithiumIndex": dcBatteryLithiumIndex,
+       "dcBatteryLithiumName": dcBatteryLithiumName,
+       "dcBatteryLithiumMainState": dcBatteryLithiumMainState,
+       "dcBatteryLithiumSubState": dcBatteryLithiumSubState,
+       "dcBatteryLithiumCurrent": dcBatteryLithiumCurrent,
+       "dcBatteryLithiumStateOfCharge": dcBatteryLithiumStateOfCharge,
+       "dcBatteryLithiumInstallationDate": dcBatteryLithiumInstallationDate,
+       "dcBatteryLithiumSoH": dcBatteryLithiumSoH,
+       "dcBatteryLifePredictionTable": dcBatteryLifePredictionTable,
+       "dcBatteryLifePredictionEntry": dcBatteryLifePredictionEntry,
+       "dcBatteryLifePredictionIndex": dcBatteryLifePredictionIndex,
+       "dcBatteryLifePredictionName": dcBatteryLifePredictionName,
+       "dcBatteryLifePredictionRemainingDays": dcBatteryLifePredictionRemainingDays,
+       "dcBatteryLifePredictionInstallationDate": dcBatteryLifePredictionInstallationDate,
+       "dcBatteryLifePredictionSoH": dcBatteryLifePredictionSoH,
+       "dcBatteryLifePredictionStatus": dcBatteryLifePredictionStatus,
+       "dcBatteryChargingCurrentLimitEnable": dcBatteryChargingCurrentLimitEnable,
+       "dcBatteryTotalChargingCurrentLimitEnable": dcBatteryTotalChargingCurrentLimitEnable,
+       "dcBatteryTotalMaxIBatt": dcBatteryTotalMaxIBatt,
        "dcEqualize": dcEqualize,
        "dcEqualizeControl": dcEqualizeControl,
        "dcEqualizeStatus": dcEqualizeStatus,
@@ -4242,6 +8315,7 @@ mibBuilder.exportSymbols(
        "dcBoostChargeIstart": dcBoostChargeIstart,
        "dcBoostChargeIstop": dcBoostChargeIstop,
        "dcBoostChargeInhibitTime": dcBoostChargeInhibitTime,
+       "dcBoostChargeSoCBelow": dcBoostChargeSoCBelow,
        "dcSystemVoltageSupervision": dcSystemVoltageSupervision,
        "dcUaMax": dcUaMax,
        "dcUaMin": dcUaMin,
@@ -4259,6 +8333,17 @@ mibBuilder.exportSymbols(
        "dcEvtCtrlChargeVoltage": dcEvtCtrlChargeVoltage,
        "dcEvtCtrlChargeTempCompEnabled": dcEvtCtrlChargeTempCompEnabled,
        "dcEvtCtrlChargeMaxIBatt": dcEvtCtrlChargeMaxIBatt,
+       "dcEventControlledChargeTable": dcEventControlledChargeTable,
+       "dcEventControlledChargeTableEntry": dcEventControlledChargeTableEntry,
+       "dcEventControlledChargeTableIndex": dcEventControlledChargeTableIndex,
+       "dcEventControlledChargeTablePriority": dcEventControlledChargeTablePriority,
+       "dcEventControlledChargeTableName": dcEventControlledChargeTableName,
+       "dcEventControlledChargeTableActivationInput": dcEventControlledChargeTableActivationInput,
+       "dcEventControlledChargeTableStatus": dcEventControlledChargeTableStatus,
+       "dcEventControlledChargeTableType": dcEventControlledChargeTableType,
+       "dcEventControlledChargeTableVoltage": dcEventControlledChargeTableVoltage,
+       "dcEventControlledChargeTableMaxIBatt": dcEventControlledChargeTableMaxIBatt,
+       "dcEventControlledChargeTableTempCompEnabled": dcEventControlledChargeTableTempCompEnabled,
        "dcTempComp": dcTempComp,
        "dcTempCompType": dcTempCompType,
        "dcSlope": dcSlope,
@@ -4276,6 +8361,8 @@ mibBuilder.exportSymbols(
        "dcTempSupervision": dcTempSupervision,
        "dcHighTemp": dcHighTemp,
        "dcHighTempHyst": dcHighTempHyst,
+       "dcBatteryType": dcBatteryType,
+       "dcBatteryTypeSelect": dcBatteryTypeSelect,
        "dcInputOutput": dcInputOutput,
        "dcControlEventTable": dcControlEventTable,
        "dcControlEventEntry": dcControlEventEntry,
@@ -4289,8 +8376,16 @@ mibBuilder.exportSymbols(
        "dcTrapDestinationIndex": dcTrapDestinationIndex,
        "dcTrapDestinationIp": dcTrapDestinationIp,
        "dcTrapDestinationPort": dcTrapDestinationPort,
+       "dcTrapDestinationUser": dcTrapDestinationUser,
        "dcFileProcessingStatus": dcFileProcessingStatus,
        "dcResendActiveAlarmTraps": dcResendActiveAlarmTraps,
+       "dcRebootController": dcRebootController,
+       "dcTrapDestinationv2Table": dcTrapDestinationv2Table,
+       "dcTrapDestinationv2Entry": dcTrapDestinationv2Entry,
+       "dcTrapDestinationv2Index": dcTrapDestinationv2Index,
+       "dcTrapDestinationv2": dcTrapDestinationv2,
+       "dcTrapDestinationv2Port": dcTrapDestinationv2Port,
+       "dcTrapDestinationv2User": dcTrapDestinationv2User,
        "dcConfig": dcConfig,
        "dcDefaultLogEventTable": dcDefaultLogEventTable,
        "dcDefaultLogEventEntry": dcDefaultLogEventEntry,
@@ -4309,6 +8404,44 @@ mibBuilder.exportSymbols(
        "dcLvdIndex": dcLvdIndex,
        "dcLvdName": dcLvdName,
        "dcLvdDisconnectDelay": dcLvdDisconnectDelay,
+       "dcLvdType": dcLvdType,
+       "dcLvdVoltageThreshold": dcLvdVoltageThreshold,
+       "dcLvdVoltageHysteresis": dcLvdVoltageHysteresis,
+       "dcLvdControlEvent": dcLvdControlEvent,
+       "dcLvdMonitoringEvent": dcLvdMonitoringEvent,
+       "dcEventDefinitionTable": dcEventDefinitionTable,
+       "dcEventDefinitionEntry": dcEventDefinitionEntry,
+       "dcEventIndex": dcEventIndex,
+       "dcEventName": dcEventName,
+       "dcThreshold": dcThreshold,
+       "dcThresholdHysteresis": dcThresholdHysteresis,
+       "dcUnit": dcUnit,
+       "dcFilterTable": dcFilterTable,
+       "dcFilterEntry": dcFilterEntry,
+       "dcFilterIndex": dcFilterIndex,
+       "dcFilterName": dcFilterName,
+       "dcTrueForMin": dcTrueForMin,
+       "dcFalseForMin": dcFalseForMin,
+       "dcTimerTable": dcTimerTable,
+       "dcTimerEntry": dcTimerEntry,
+       "dcTimerIndex": dcTimerIndex,
+       "dcTimerName": dcTimerName,
+       "dcStartTime": dcStartTime,
+       "dcStartDaySu": dcStartDaySu,
+       "dcStartDayMo": dcStartDayMo,
+       "dcStartDayTu": dcStartDayTu,
+       "dcStartDayWe": dcStartDayWe,
+       "dcStartDayTh": dcStartDayTh,
+       "dcStartDayFr": dcStartDayFr,
+       "dcStartDaySa": dcStartDaySa,
+       "dcEndTime": dcEndTime,
+       "dcEndDaySu": dcEndDaySu,
+       "dcEndDayMo": dcEndDayMo,
+       "dcEndDayTu": dcEndDayTu,
+       "dcEndDayWe": dcEndDayWe,
+       "dcEndDayTh": dcEndDayTh,
+       "dcEndDayFr": dcEndDayFr,
+       "dcEndDaySa": dcEndDaySa,
        "dcMeasurement": dcMeasurement,
        "dcMeasurementTable": dcMeasurementTable,
        "dcMeasurementEntry": dcMeasurementEntry,
@@ -4324,10 +8457,112 @@ mibBuilder.exportSymbols(
        "dcMeterPanelEventName": dcMeterPanelEventName,
        "dcMeterPanelEventValue": dcMeterPanelEventValue,
        "dcMeterPanelEventHourMeterValue": dcMeterPanelEventHourMeterValue,
+       "dcMeterPanelMeasurementTable": dcMeterPanelMeasurementTable,
+       "dcMeterPanelMeasurementEntry": dcMeterPanelMeasurementEntry,
+       "dcMeterPanelMeasurementIndex": dcMeterPanelMeasurementIndex,
+       "dcMeterPanelMeasurementName": dcMeterPanelMeasurementName,
+       "dcMeterPanelMeasurementValue": dcMeterPanelMeasurementValue,
+       "dcMeterPanelMeasurementUnit": dcMeterPanelMeasurementUnit,
+       "dcPVC": dcPVC,
+       "dcNumberPVCs": dcNumberPVCs,
+       "dcNumberPVCsFailure": dcNumberPVCsFailure,
+       "dcNumberPVCsOkay": dcNumberPVCsOkay,
+       "dcPVCTable": dcPVCTable,
+       "dcPVCEntry": dcPVCEntry,
+       "dcPVCIndex": dcPVCIndex,
+       "dcPVCIdentifier": dcPVCIdentifier,
+       "dcPVCSlotState": dcPVCSlotState,
+       "dcPVCMainStatus": dcPVCMainStatus,
+       "dcPVCSubStatus": dcPVCSubStatus,
+       "dcPVCConfiguration": dcPVCConfiguration,
+       "dcPVCIout": dcPVCIout,
+       "dcPVCUout": dcPVCUout,
+       "dcPVCIin": dcPVCIin,
+       "dcPVCUin": dcPVCUin,
+       "dcPVCGroupTable": dcPVCGroupTable,
+       "dcPVCGroupEntry": dcPVCGroupEntry,
+       "dcPVCGroupIndex": dcPVCGroupIndex,
+       "dcPVCGroupPVCType": dcPVCGroupPVCType,
+       "dcPVCGroupVoltage": dcPVCGroupVoltage,
+       "dcPVCGroupVPGM": dcPVCGroupVPGM,
+       "dcPVCGroupInputLowOff": dcPVCGroupInputLowOff,
+       "dcPVCGroupInputLowOn": dcPVCGroupInputLowOn,
+       "dcPVCGroupStartUpDelay": dcPVCGroupStartUpDelay,
+       "dcPVCGroupOvpLimit": dcPVCGroupOvpLimit,
+       "dcPVCGroupAlarmDelay": dcPVCGroupAlarmDelay,
+       "dcInventory": dcInventory,
+       "dcInventoryTable": dcInventoryTable,
+       "dcInventoryEntry": dcInventoryEntry,
+       "dcInventoryIndex": dcInventoryIndex,
+       "dcInventoryType": dcInventoryType,
+       "dcInventoryName": dcInventoryName,
+       "dcInventorySwVersion": dcInventorySwVersion,
+       "dcInventoryBuildVersion": dcInventoryBuildVersion,
+       "dcInventoryPartNb": dcInventoryPartNb,
+       "dcInventorySerialNb": dcInventorySerialNb,
+       "dcInventoryTopLevel": dcInventoryTopLevel,
+       "dcIP": dcIP,
+       "dcIPv4": dcIPv4,
+       "dcIPv4Address": dcIPv4Address,
+       "dcIPv4SubnetMask": dcIPv4SubnetMask,
+       "dcIPv4Gateway": dcIPv4Gateway,
+       "dcIPv4DNS": dcIPv4DNS,
+       "dcIPv6": dcIPv6,
+       "dcIPv6LinkLocalAddress": dcIPv6LinkLocalAddress,
+       "dcIPv6Address": dcIPv6Address,
+       "dcIPv6Gateway": dcIPv6Gateway,
+       "dcIPv6DNSAuto": dcIPv6DNSAuto,
+       "dcIPv6DNSManual": dcIPv6DNSManual,
+       "dcAircon": dcAircon,
+       "dcAirconTable": dcAirconTable,
+       "dcAirconEntry": dcAirconEntry,
+       "dcAirconIndex": dcAirconIndex,
+       "dcCoolingPlanIndex": dcCoolingPlanIndex,
+       "dcAirconName": dcAirconName,
+       "dcAirconMainStatus": dcAirconMainStatus,
+       "dcAirconSubStatus": dcAirconSubStatus,
+       "dcAirconConfiguration": dcAirconConfiguration,
+       "dcAirconPlanName": dcAirconPlanName,
+       "dcAirconRoomTemp": dcAirconRoomTemp,
+       "dcCoolingPlanActivationInput": dcCoolingPlanActivationInput,
+       "dcCoolingPlanPriority": dcCoolingPlanPriority,
+       "dcCoolingPlanStatus": dcCoolingPlanStatus,
+       "dcCoolingPlanTargetTemp": dcCoolingPlanTargetTemp,
+       "dcCoolingPlanOperatingMode": dcCoolingPlanOperatingMode,
+       "dcCoolingPlanStandbyFanSpeed": dcCoolingPlanStandbyFanSpeed,
+       "dcCoolingPlanHeaterStartTemp": dcCoolingPlanHeaterStartTemp,
+       "dcCoolingPlanHeaterHyst": dcCoolingPlanHeaterHyst,
+       "dcCoolingPlanHeaterControl": dcCoolingPlanHeaterControl,
+       "dcInverter": dcInverter,
+       "dcInverterGroupTable": dcInverterGroupTable,
+       "dcInverterGroupEntry": dcInverterGroupEntry,
+       "dcInverterGroupIndex": dcInverterGroupIndex,
+       "dcInverterGroupState": dcInverterGroupState,
+       "dcInverterGroupLoadPosition": dcInverterGroupLoadPosition,
+       "dcInverterGroupNbrOfConfigInverters": dcInverterGroupNbrOfConfigInverters,
+       "dcInverterGroupNbrOfPresentInverters": dcInverterGroupNbrOfPresentInverters,
+       "dcInverterGroupPhase": dcInverterGroupPhase,
+       "dcInverterGroupDcVoltage": dcInverterGroupDcVoltage,
+       "dcInverterGroupInputDcPower": dcInverterGroupInputDcPower,
+       "dcInverterGroupInputVoltage1": dcInverterGroupInputVoltage1,
+       "dcInverterGroupInputVoltage2": dcInverterGroupInputVoltage2,
+       "dcInverterGroupInputVoltage3": dcInverterGroupInputVoltage3,
+       "dcInverterGroupInputApparentPower1": dcInverterGroupInputApparentPower1,
+       "dcInverterGroupInputApparentPower2": dcInverterGroupInputApparentPower2,
+       "dcInverterGroupInputApparentPower3": dcInverterGroupInputApparentPower3,
+       "dcInverterGroupInputFrequency": dcInverterGroupInputFrequency,
+       "dcInverterGroupOutputVoltage1": dcInverterGroupOutputVoltage1,
+       "dcInverterGroupOutputVoltage2": dcInverterGroupOutputVoltage2,
+       "dcInverterGroupOutputVoltage3": dcInverterGroupOutputVoltage3,
+       "dcInverterGroupOutputApparentPower1": dcInverterGroupOutputApparentPower1,
+       "dcInverterGroupOutputApparentPower2": dcInverterGroupOutputApparentPower2,
+       "dcInverterGroupOutputApparentPower3": dcInverterGroupOutputApparentPower3,
+       "dcInverterGroupOutputFrequency": dcInverterGroupOutputFrequency,
        "controllerEvents": controllerEvents,
        "controllerEventObjects": controllerEventObjects,
        "controllerEventsV2": controllerEventsV2,
        "systemNonUrgentAlarm": systemNonUrgentAlarm,
        "systemUrgentAlarm": systemUrgentAlarm,
-       "systemCriticalAlarm": systemCriticalAlarm}
+       "systemCriticalAlarm": systemCriticalAlarm,
+       "systemAllAlarm": systemAllAlarm}
 )

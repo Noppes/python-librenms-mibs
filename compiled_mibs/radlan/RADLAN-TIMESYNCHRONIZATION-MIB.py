@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\radlan\RADLAN-TIMESYNCHRONIZATION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:22:44 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -45,13 +42,19 @@ if 'mibBuilder' not in globals():
 
 # Import SMI symbols from the MIBs this MIB depends on
 
+(InterfaceIndex,) = mibBuilder.importSymbols(
+    "IF-MIB",
+    "InterfaceIndex")
+
+(InetAddress,
+ InetAddressType) = mibBuilder.importSymbols(
+    "INET-ADDRESS-MIB",
+    "InetAddress",
+    "InetAddressType")
+
 (rnd,) = mibBuilder.importSymbols(
     "RADLAN-MIB",
     "rnd")
-
-(TruthValue,) = mibBuilder.importSymbols(
-    "RADLAN-SNMPv2",
-    "TruthValue")
 
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
@@ -98,16 +101,14 @@ if 'mibBuilder' not in globals():
 (DisplayString,
  PhysAddress,
  RowStatus,
- TextualConvention) = mibBuilder.importSymbols(
+ TextualConvention,
+ TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
     "RowStatus",
-    "TextualConvention")
-
-(DisplayString,) = mibBuilder.importSymbols(
-    "SNMPv2-TC-v1",
-    "DisplayString")
+    "TextualConvention",
+    "TruthValue")
 
 
 # MODULE-IDENTITY
@@ -117,7 +118,9 @@ rlTimeSynchronization = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     rlTimeSynchronization.setRevisions(
-        ("2003-11-23 00:24",)
+        ("2009-06-18 00:24",
+         "2007-09-06 00:24",
+         "2003-11-23 00:24")
     )
 
 
@@ -155,6 +158,78 @@ class NTPStratum(TextualConvention, Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 255),
+    )
+
+
+
+class RlTimeSyncMethod(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("sntp", 2),
+          ("ntp", 3))
+    )
+
+
+
+class RlDaylightSavingTimeMode(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("recurring", 1),
+          ("date", 2),
+          ("none", 3))
+    )
+
+
+
+class RlSntpNtpSyncType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("unicast", 2),
+          ("anycast", 3),
+          ("broadcast", 4))
+    )
+
+
+
+class RlSntpNtpSyncEntryType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("primaryPollSrv", 1),
+          ("syncSrv", 2))
     )
 
 
@@ -236,26 +311,12 @@ if mibBuilder.loadTexts:
     rndTimeSyncManagedDateTime.setStatus("current")
 
 
-class _RlTimeSyncMethod_Type(Integer32):
-    """Custom type rlTimeSyncMethod based on Integer32"""
+class _RlTimeSyncMethod_Type(RlTimeSyncMethod):
+    """Custom type rlTimeSyncMethod based on RlTimeSyncMethod"""
     defaultValue = 1
 
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("none", 1),
-          ("sntp", 2),
-          ("ntp", 3))
-    )
 
-
-_RlTimeSyncMethod_Type.__name__ = "Integer32"
+_RlTimeSyncMethod_Type.__name__ = "RlTimeSyncMethod"
 _RlTimeSyncMethod_Object = MibScalar
 rlTimeSyncMethod = _RlTimeSyncMethod_Object(
     (1, 3, 6, 1, 4, 1, 89, 92, 1, 5),
@@ -289,7 +350,7 @@ class _RlTimeZoneCode_Type(DisplayString):
     """Custom type rlTimeZoneCode based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 4),
+        ValueSizeConstraint(0, 16),
     )
 
 
@@ -304,26 +365,12 @@ if mibBuilder.loadTexts:
     rlTimeZoneCode.setStatus("current")
 
 
-class _RlDaylightSavingTimeMode_Type(Integer32):
-    """Custom type rlDaylightSavingTimeMode based on Integer32"""
+class _RlDaylightSavingTimeMode_Type(RlDaylightSavingTimeMode):
+    """Custom type rlDaylightSavingTimeMode based on RlDaylightSavingTimeMode"""
     defaultValue = 3
 
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("recurring", 1),
-          ("date", 2),
-          ("none", 3))
-    )
 
-
-_RlDaylightSavingTimeMode_Type.__name__ = "Integer32"
+_RlDaylightSavingTimeMode_Type.__name__ = "RlDaylightSavingTimeMode"
 _RlDaylightSavingTimeMode_Object = MibScalar
 rlDaylightSavingTimeMode = _RlDaylightSavingTimeMode_Object(
     (1, 3, 6, 1, 4, 1, 89, 92, 1, 8),
@@ -394,7 +441,7 @@ class _RlDaylightSavingTimeCode_Type(DisplayString):
     """Custom type rlDaylightSavingTimeCode based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 4),
+        ValueSizeConstraint(0, 16),
     )
 
 
@@ -416,6 +463,368 @@ rlTZDSTOffset = _RlTZDSTOffset_Object(
 rlTZDSTOffset.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rlTZDSTOffset.setStatus("current")
+
+
+class _RlTimeZoneName_Type(DisplayString):
+    """Custom type rlTimeZoneName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 16),
+    )
+
+
+_RlTimeZoneName_Type.__name__ = "DisplayString"
+_RlTimeZoneName_Object = MibScalar
+rlTimeZoneName = _RlTimeZoneName_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 14),
+    _RlTimeZoneName_Type()
+)
+rlTimeZoneName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneName.setStatus("current")
+_RlTimeZoneTable_Object = MibTable
+rlTimeZoneTable = _RlTimeZoneTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15)
+)
+if mibBuilder.loadTexts:
+    rlTimeZoneTable.setStatus("current")
+_RlTimeZoneEntry_Object = MibTableRow
+rlTimeZoneEntry = _RlTimeZoneEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1)
+)
+rlTimeZoneEntry.setIndexNames(
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlTimeZoneIndex"),
+)
+if mibBuilder.loadTexts:
+    rlTimeZoneEntry.setStatus("current")
+
+
+class _RlTimeZoneIndex_Type(Integer32):
+    """Custom type rlTimeZoneIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2),
+    )
+
+
+_RlTimeZoneIndex_Type.__name__ = "Integer32"
+_RlTimeZoneIndex_Object = MibTableColumn
+rlTimeZoneIndex = _RlTimeZoneIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 1),
+    _RlTimeZoneIndex_Type()
+)
+rlTimeZoneIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlTimeZoneIndex.setStatus("current")
+
+
+class _RlTimeZoneTimeSyncMethod_Type(RlTimeSyncMethod):
+    """Custom type rlTimeZoneTimeSyncMethod based on RlTimeSyncMethod"""
+    defaultValue = 1
+
+
+_RlTimeZoneTimeSyncMethod_Type.__name__ = "RlTimeSyncMethod"
+_RlTimeZoneTimeSyncMethod_Object = MibTableColumn
+rlTimeZoneTimeSyncMethod = _RlTimeZoneTimeSyncMethod_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 2),
+    _RlTimeZoneTimeSyncMethod_Type()
+)
+rlTimeZoneTimeSyncMethod.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneTimeSyncMethod.setStatus("current")
+
+
+class _RlTimeZoneTimeZoneOffset_Type(DisplayString):
+    """Custom type rlTimeZoneTimeZoneOffset based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 6),
+    )
+
+
+_RlTimeZoneTimeZoneOffset_Type.__name__ = "DisplayString"
+_RlTimeZoneTimeZoneOffset_Object = MibTableColumn
+rlTimeZoneTimeZoneOffset = _RlTimeZoneTimeZoneOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 3),
+    _RlTimeZoneTimeZoneOffset_Type()
+)
+rlTimeZoneTimeZoneOffset.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneTimeZoneOffset.setStatus("current")
+
+
+class _RlTimeZoneTimeZoneCode_Type(DisplayString):
+    """Custom type rlTimeZoneTimeZoneCode based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 16),
+    )
+
+
+_RlTimeZoneTimeZoneCode_Type.__name__ = "DisplayString"
+_RlTimeZoneTimeZoneCode_Object = MibTableColumn
+rlTimeZoneTimeZoneCode = _RlTimeZoneTimeZoneCode_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 4),
+    _RlTimeZoneTimeZoneCode_Type()
+)
+rlTimeZoneTimeZoneCode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneTimeZoneCode.setStatus("current")
+
+
+class _RlTimeZoneDaylightSavingTimeMode_Type(RlDaylightSavingTimeMode):
+    """Custom type rlTimeZoneDaylightSavingTimeMode based on RlDaylightSavingTimeMode"""
+    defaultValue = 3
+
+
+_RlTimeZoneDaylightSavingTimeMode_Type.__name__ = "RlDaylightSavingTimeMode"
+_RlTimeZoneDaylightSavingTimeMode_Object = MibTableColumn
+rlTimeZoneDaylightSavingTimeMode = _RlTimeZoneDaylightSavingTimeMode_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 5),
+    _RlTimeZoneDaylightSavingTimeMode_Type()
+)
+rlTimeZoneDaylightSavingTimeMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDaylightSavingTimeMode.setStatus("current")
+
+
+class _RlTimeZoneDaylightSavingTimeStart_Type(OctetString):
+    """Custom type rlTimeZoneDaylightSavingTimeStart based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(14, 14),
+    )
+    fixed_length = 14
+
+
+_RlTimeZoneDaylightSavingTimeStart_Type.__name__ = "OctetString"
+_RlTimeZoneDaylightSavingTimeStart_Object = MibTableColumn
+rlTimeZoneDaylightSavingTimeStart = _RlTimeZoneDaylightSavingTimeStart_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 6),
+    _RlTimeZoneDaylightSavingTimeStart_Type()
+)
+rlTimeZoneDaylightSavingTimeStart.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDaylightSavingTimeStart.setStatus("current")
+
+
+class _RlTimeZoneDaylightSavingTimeEnd_Type(OctetString):
+    """Custom type rlTimeZoneDaylightSavingTimeEnd based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(14, 14),
+    )
+    fixed_length = 14
+
+
+_RlTimeZoneDaylightSavingTimeEnd_Type.__name__ = "OctetString"
+_RlTimeZoneDaylightSavingTimeEnd_Object = MibTableColumn
+rlTimeZoneDaylightSavingTimeEnd = _RlTimeZoneDaylightSavingTimeEnd_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 7),
+    _RlTimeZoneDaylightSavingTimeEnd_Type()
+)
+rlTimeZoneDaylightSavingTimeEnd.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDaylightSavingTimeEnd.setStatus("current")
+
+
+class _RlTimeZoneDaylightSavingTimeOffset_Type(Integer32):
+    """Custom type rlTimeZoneDaylightSavingTimeOffset based on Integer32"""
+    defaultValue = 60
+
+
+_RlTimeZoneDaylightSavingTimeOffset_Type.__name__ = "Integer32"
+_RlTimeZoneDaylightSavingTimeOffset_Object = MibTableColumn
+rlTimeZoneDaylightSavingTimeOffset = _RlTimeZoneDaylightSavingTimeOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 8),
+    _RlTimeZoneDaylightSavingTimeOffset_Type()
+)
+rlTimeZoneDaylightSavingTimeOffset.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDaylightSavingTimeOffset.setStatus("current")
+
+
+class _RlTimeZoneDaylightSavingTimeCode_Type(DisplayString):
+    """Custom type rlTimeZoneDaylightSavingTimeCode based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 16),
+    )
+
+
+_RlTimeZoneDaylightSavingTimeCode_Type.__name__ = "DisplayString"
+_RlTimeZoneDaylightSavingTimeCode_Object = MibTableColumn
+rlTimeZoneDaylightSavingTimeCode = _RlTimeZoneDaylightSavingTimeCode_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 9),
+    _RlTimeZoneDaylightSavingTimeCode_Type()
+)
+rlTimeZoneDaylightSavingTimeCode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDaylightSavingTimeCode.setStatus("current")
+_RlTimeZoneTZDSTOffset_Type = Integer32
+_RlTimeZoneTZDSTOffset_Object = MibTableColumn
+rlTimeZoneTZDSTOffset = _RlTimeZoneTZDSTOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 10),
+    _RlTimeZoneTZDSTOffset_Type()
+)
+rlTimeZoneTZDSTOffset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlTimeZoneTZDSTOffset.setStatus("current")
+
+
+class _RlTimeZoneTimeZoneName_Type(DisplayString):
+    """Custom type rlTimeZoneTimeZoneName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 16),
+    )
+
+
+_RlTimeZoneTimeZoneName_Type.__name__ = "DisplayString"
+_RlTimeZoneTimeZoneName_Object = MibTableColumn
+rlTimeZoneTimeZoneName = _RlTimeZoneTimeZoneName_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 11),
+    _RlTimeZoneTimeZoneName_Type()
+)
+rlTimeZoneTimeZoneName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneTimeZoneName.setStatus("current")
+
+
+class _RlTimeZoneDataType_Type(Integer32):
+    """Custom type rlTimeZoneDataType based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("static", 1),
+          ("dynamic", 2))
+    )
+
+
+_RlTimeZoneDataType_Type.__name__ = "Integer32"
+_RlTimeZoneDataType_Object = MibTableColumn
+rlTimeZoneDataType = _RlTimeZoneDataType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 12),
+    _RlTimeZoneDataType_Type()
+)
+rlTimeZoneDataType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlTimeZoneDataType.setStatus("current")
+
+
+class _RlTimeZoneDataSourceIfIndex_Type(Integer32):
+    """Custom type rlTimeZoneDataSourceIfIndex based on Integer32"""
+    defaultValue = 0
+
+
+_RlTimeZoneDataSourceIfIndex_Type.__name__ = "Integer32"
+_RlTimeZoneDataSourceIfIndex_Object = MibTableColumn
+rlTimeZoneDataSourceIfIndex = _RlTimeZoneDataSourceIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 13),
+    _RlTimeZoneDataSourceIfIndex_Type()
+)
+rlTimeZoneDataSourceIfIndex.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDataSourceIfIndex.setStatus("current")
+
+
+class _RlTimeZoneDataDynamicConfSource_Type(Integer32):
+    """Custom type rlTimeZoneDataDynamicConfSource based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("dhcpv4", 2),
+          ("dhcpv6", 3))
+    )
+
+
+_RlTimeZoneDataDynamicConfSource_Type.__name__ = "Integer32"
+_RlTimeZoneDataDynamicConfSource_Object = MibTableColumn
+rlTimeZoneDataDynamicConfSource = _RlTimeZoneDataDynamicConfSource_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 15, 1, 14),
+    _RlTimeZoneDataDynamicConfSource_Type()
+)
+rlTimeZoneDataDynamicConfSource.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlTimeZoneDataDynamicConfSource.setStatus("current")
+
+
+class _RlClockStatus_Type(Integer32):
+    """Custom type rlClockStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 1),
+          ("manuallySet", 2),
+          ("synchronizedBySntp", 3))
+    )
+
+
+_RlClockStatus_Type.__name__ = "Integer32"
+_RlClockStatus_Object = MibScalar
+rlClockStatus = _RlClockStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 16),
+    _RlClockStatus_Type()
+)
+rlClockStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlClockStatus.setStatus("current")
+_RlDhcpTimezoneOptionEnabled_Type = TruthValue
+_RlDhcpTimezoneOptionEnabled_Object = MibScalar
+rlDhcpTimezoneOptionEnabled = _RlDhcpTimezoneOptionEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 17),
+    _RlDhcpTimezoneOptionEnabled_Type()
+)
+rlDhcpTimezoneOptionEnabled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlDhcpTimezoneOptionEnabled.setStatus("current")
+
+
+class _RlAutomaticClockSetFromPCEnabled_Type(TruthValue):
+    """Custom type rlAutomaticClockSetFromPCEnabled based on TruthValue"""
+    defaultValue = 2
+
+
+_RlAutomaticClockSetFromPCEnabled_Type.__name__ = "TruthValue"
+_RlAutomaticClockSetFromPCEnabled_Object = MibScalar
+rlAutomaticClockSetFromPCEnabled = _RlAutomaticClockSetFromPCEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 18),
+    _RlAutomaticClockSetFromPCEnabled_Type()
+)
+rlAutomaticClockSetFromPCEnabled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlAutomaticClockSetFromPCEnabled.setStatus("current")
+_RlTimeAndDateHaveBeenSet_Type = TruthValue
+_RlTimeAndDateHaveBeenSet_Object = MibScalar
+rlTimeAndDateHaveBeenSet = _RlTimeAndDateHaveBeenSet_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 1, 19),
+    _RlTimeAndDateHaveBeenSet_Type()
+)
+rlTimeAndDateHaveBeenSet.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlTimeAndDateHaveBeenSet.setStatus("current")
 _RlSntpNtpClient_ObjectIdentity = ObjectIdentity
 rlSntpNtpClient = _RlSntpNtpClient_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 89, 92, 2)
@@ -563,28 +972,12 @@ if mibBuilder.loadTexts:
     rlSntpNtpConfigSyncSrvIfIndex.setStatus("current")
 
 
-class _RlSntpNtpConfigSyncSrvType_Type(Integer32):
-    """Custom type rlSntpNtpConfigSyncSrvType based on Integer32"""
+class _RlSntpNtpConfigSyncSrvType_Type(RlSntpNtpSyncType):
+    """Custom type rlSntpNtpConfigSyncSrvType based on RlSntpNtpSyncType"""
     defaultValue = 1
 
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3,
-              4)
-        )
-    )
-    namedValues = NamedValues(
-        *(("none", 1),
-          ("unicast", 2),
-          ("anycast", 3),
-          ("broadcast", 4))
-    )
 
-
-_RlSntpNtpConfigSyncSrvType_Type.__name__ = "Integer32"
+_RlSntpNtpConfigSyncSrvType_Type.__name__ = "RlSntpNtpSyncType"
 _RlSntpNtpConfigSyncSrvType_Object = MibScalar
 rlSntpNtpConfigSyncSrvType = _RlSntpNtpConfigSyncSrvType_Object(
     (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 12),
@@ -620,6 +1013,84 @@ rlSntpNtpConfigRetryCnt = _RlSntpNtpConfigRetryCnt_Object(
 rlSntpNtpConfigRetryCnt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rlSntpNtpConfigRetryCnt.setStatus("current")
+_RlSntpNtpConfigSrvTable_Object = MibTable
+rlSntpNtpConfigSrvTable = _RlSntpNtpConfigSrvTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16)
+)
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvTable.setStatus("current")
+_RlSntpNtpConfigSrvEntry_Object = MibTableRow
+rlSntpNtpConfigSrvEntry = _RlSntpNtpConfigSrvEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1)
+)
+rlSntpNtpConfigSrvEntry.setIndexNames(
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpNtpConfigSrvEntryType"),
+)
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvEntry.setStatus("current")
+_RlSntpNtpConfigSrvEntryType_Type = RlSntpNtpSyncEntryType
+_RlSntpNtpConfigSrvEntryType_Object = MibTableColumn
+rlSntpNtpConfigSrvEntryType = _RlSntpNtpConfigSrvEntryType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 1),
+    _RlSntpNtpConfigSrvEntryType_Type()
+)
+rlSntpNtpConfigSrvEntryType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvEntryType.setStatus("current")
+_RlSntpNtpConfigSrvInetAddressType_Type = InetAddressType
+_RlSntpNtpConfigSrvInetAddressType_Object = MibTableColumn
+rlSntpNtpConfigSrvInetAddressType = _RlSntpNtpConfigSrvInetAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 2),
+    _RlSntpNtpConfigSrvInetAddressType_Type()
+)
+rlSntpNtpConfigSrvInetAddressType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvInetAddressType.setStatus("current")
+_RlSntpNtpConfigSrvInetAddress_Type = InetAddress
+_RlSntpNtpConfigSrvInetAddress_Object = MibTableColumn
+rlSntpNtpConfigSrvInetAddress = _RlSntpNtpConfigSrvInetAddress_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 3),
+    _RlSntpNtpConfigSrvInetAddress_Type()
+)
+rlSntpNtpConfigSrvInetAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvInetAddress.setStatus("current")
+_RlSntpNtpConfigSrvMrid_Type = Integer32
+_RlSntpNtpConfigSrvMrid_Object = MibTableColumn
+rlSntpNtpConfigSrvMrid = _RlSntpNtpConfigSrvMrid_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 4),
+    _RlSntpNtpConfigSrvMrid_Type()
+)
+rlSntpNtpConfigSrvMrid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvMrid.setStatus("current")
+_RlSntpNtpConfigSrvIfIndex_Type = Integer32
+_RlSntpNtpConfigSrvIfIndex_Object = MibTableColumn
+rlSntpNtpConfigSrvIfIndex = _RlSntpNtpConfigSrvIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 5),
+    _RlSntpNtpConfigSrvIfIndex_Type()
+)
+rlSntpNtpConfigSrvIfIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvIfIndex.setStatus("current")
+_RlSntpNtpConfigSrvSyncType_Type = RlSntpNtpSyncType
+_RlSntpNtpConfigSrvSyncType_Object = MibTableColumn
+rlSntpNtpConfigSrvSyncType = _RlSntpNtpConfigSrvSyncType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 6),
+    _RlSntpNtpConfigSrvSyncType_Type()
+)
+rlSntpNtpConfigSrvSyncType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvSyncType.setStatus("current")
+_RlSntpNtpConfigSrvStratum_Type = NTPStratum
+_RlSntpNtpConfigSrvStratum_Object = MibTableColumn
+rlSntpNtpConfigSrvStratum = _RlSntpNtpConfigSrvStratum_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 1, 16, 1, 7),
+    _RlSntpNtpConfigSrvStratum_Type()
+)
+rlSntpNtpConfigSrvStratum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpNtpConfigSrvStratum.setStatus("current")
 _RlSntpConfig_ObjectIdentity = ObjectIdentity
 rlSntpConfig = _RlSntpConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 89, 92, 2, 2)
@@ -692,12 +1163,16 @@ class _RlSntpBroadcastAdminState_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("enabled", 1),
-          ("disabled", 2))
+          ("disabled", 2),
+          ("ipv4OnlyEnabled", 3),
+          ("ipv6OnlyEnabled", 4))
     )
 
 
@@ -720,12 +1195,16 @@ class _RlSntpAnycastAdminState_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("enabled", 1),
-          ("disabled", 2))
+          ("disabled", 2),
+          ("ipv4OnlyEnabled", 3),
+          ("ipv6OnlyEnabled", 4))
     )
 
 
@@ -1304,7 +1783,7 @@ class _RlSntpAuthenticationKeyValue_Type(DisplayString):
     """Custom type rlSntpAuthenticationKeyValue based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 8),
+        ValueSizeConstraint(1, 32),
     )
 
 
@@ -1354,6 +1833,676 @@ rlSntpAuthenticationRowStatus = _RlSntpAuthenticationRowStatus_Object(
 rlSntpAuthenticationRowStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     rlSntpAuthenticationRowStatus.setStatus("current")
+
+
+class _RlSntpPort_Type(Integer32):
+    """Custom type rlSntpPort based on Integer32"""
+    defaultValue = 123
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_RlSntpPort_Type.__name__ = "Integer32"
+_RlSntpPort_Object = MibScalar
+rlSntpPort = _RlSntpPort_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 14),
+    _RlSntpPort_Type()
+)
+rlSntpPort.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpPort.setStatus("current")
+_RlSntpConfigBroadcastInetTable_Object = MibTable
+rlSntpConfigBroadcastInetTable = _RlSntpConfigBroadcastInetTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15)
+)
+if mibBuilder.loadTexts:
+    rlSntpConfigBroadcastInetTable.setStatus("current")
+_RlSntpBroadcastInetEntry_Object = MibTableRow
+rlSntpBroadcastInetEntry = _RlSntpBroadcastInetEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1)
+)
+rlSntpBroadcastInetEntry.setIndexNames(
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpBroadcastInetIfIndex"),
+)
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetEntry.setStatus("current")
+_RlSntpBroadcastInetIfIndex_Type = Integer32
+_RlSntpBroadcastInetIfIndex_Object = MibTableColumn
+rlSntpBroadcastInetIfIndex = _RlSntpBroadcastInetIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 1),
+    _RlSntpBroadcastInetIfIndex_Type()
+)
+rlSntpBroadcastInetIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetIfIndex.setStatus("current")
+
+
+class _RlSntpBroadcastInetIfAdminState_Type(Integer32):
+    """Custom type rlSntpBroadcastInetIfAdminState based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_RlSntpBroadcastInetIfAdminState_Type.__name__ = "Integer32"
+_RlSntpBroadcastInetIfAdminState_Object = MibTableColumn
+rlSntpBroadcastInetIfAdminState = _RlSntpBroadcastInetIfAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 2),
+    _RlSntpBroadcastInetIfAdminState_Type()
+)
+rlSntpBroadcastInetIfAdminState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetIfAdminState.setStatus("current")
+
+
+class _RlSntpBroadcastInetMode_Type(Integer32):
+    """Custom type rlSntpBroadcastInetMode based on Integer32"""
+    defaultValue = 4
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("receive", 2),
+          ("send", 3),
+          ("receiveSend", 4))
+    )
+
+
+_RlSntpBroadcastInetMode_Type.__name__ = "Integer32"
+_RlSntpBroadcastInetMode_Object = MibTableColumn
+rlSntpBroadcastInetMode = _RlSntpBroadcastInetMode_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 3),
+    _RlSntpBroadcastInetMode_Type()
+)
+rlSntpBroadcastInetMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetMode.setStatus("current")
+
+
+class _RlSntpBroadcastInetPolled_Type(TruthValue):
+    """Custom type rlSntpBroadcastInetPolled based on TruthValue"""
+    defaultValue = 2
+
+
+_RlSntpBroadcastInetPolled_Type.__name__ = "TruthValue"
+_RlSntpBroadcastInetPolled_Object = MibTableColumn
+rlSntpBroadcastInetPolled = _RlSntpBroadcastInetPolled_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 4),
+    _RlSntpBroadcastInetPolled_Type()
+)
+rlSntpBroadcastInetPolled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetPolled.setStatus("current")
+_RlSntpBroadcastInetAddressType_Type = InetAddressType
+_RlSntpBroadcastInetAddressType_Object = MibTableColumn
+rlSntpBroadcastInetAddressType = _RlSntpBroadcastInetAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 5),
+    _RlSntpBroadcastInetAddressType_Type()
+)
+rlSntpBroadcastInetAddressType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetAddressType.setStatus("current")
+_RlSntpBroadcastInetAddress_Type = InetAddress
+_RlSntpBroadcastInetAddress_Object = MibTableColumn
+rlSntpBroadcastInetAddress = _RlSntpBroadcastInetAddress_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 6),
+    _RlSntpBroadcastInetAddress_Type()
+)
+rlSntpBroadcastInetAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetAddress.setStatus("current")
+_RlSntpBroadcastInetStratum_Type = NTPStratum
+_RlSntpBroadcastInetStratum_Object = MibTableColumn
+rlSntpBroadcastInetStratum = _RlSntpBroadcastInetStratum_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 7),
+    _RlSntpBroadcastInetStratum_Type()
+)
+rlSntpBroadcastInetStratum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetStratum.setStatus("current")
+_RlSntpBroadcastInetLastResp_Type = NTPTimeStamp
+_RlSntpBroadcastInetLastResp_Object = MibTableColumn
+rlSntpBroadcastInetLastResp = _RlSntpBroadcastInetLastResp_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 8),
+    _RlSntpBroadcastInetLastResp_Type()
+)
+rlSntpBroadcastInetLastResp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetLastResp.setStatus("current")
+
+
+class _RlSntpBroadcastInetStatus_Type(Integer32):
+    """Custom type rlSntpBroadcastInetStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("inProcess", 2),
+          ("up", 3),
+          ("down", 4))
+    )
+
+
+_RlSntpBroadcastInetStatus_Type.__name__ = "Integer32"
+_RlSntpBroadcastInetStatus_Object = MibTableColumn
+rlSntpBroadcastInetStatus = _RlSntpBroadcastInetStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 9),
+    _RlSntpBroadcastInetStatus_Type()
+)
+rlSntpBroadcastInetStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetStatus.setStatus("current")
+_RlSntpBroadcastInetOffset_Type = NTPTimeStamp
+_RlSntpBroadcastInetOffset_Object = MibTableColumn
+rlSntpBroadcastInetOffset = _RlSntpBroadcastInetOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 10),
+    _RlSntpBroadcastInetOffset_Type()
+)
+rlSntpBroadcastInetOffset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetOffset.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetOffset.setUnits("seconds")
+_RlSntpBroadcastInetDelay_Type = NTPSignedTimeValue
+_RlSntpBroadcastInetDelay_Object = MibTableColumn
+rlSntpBroadcastInetDelay = _RlSntpBroadcastInetDelay_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 11),
+    _RlSntpBroadcastInetDelay_Type()
+)
+rlSntpBroadcastInetDelay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetDelay.setUnits("seconds")
+_RlSntpBroadcastInetRowStatus_Type = RowStatus
+_RlSntpBroadcastInetRowStatus_Object = MibTableColumn
+rlSntpBroadcastInetRowStatus = _RlSntpBroadcastInetRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 15, 1, 12),
+    _RlSntpBroadcastInetRowStatus_Type()
+)
+rlSntpBroadcastInetRowStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpBroadcastInetRowStatus.setStatus("current")
+_RlSntpConfigAnycastInetTable_Object = MibTable
+rlSntpConfigAnycastInetTable = _RlSntpConfigAnycastInetTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16)
+)
+if mibBuilder.loadTexts:
+    rlSntpConfigAnycastInetTable.setStatus("current")
+_RlSntpAnycastInetEntry_Object = MibTableRow
+rlSntpAnycastInetEntry = _RlSntpAnycastInetEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1)
+)
+rlSntpAnycastInetEntry.setIndexNames(
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpAnycastInetIfIndex"),
+)
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetEntry.setStatus("current")
+_RlSntpAnycastInetIfIndex_Type = Integer32
+_RlSntpAnycastInetIfIndex_Object = MibTableColumn
+rlSntpAnycastInetIfIndex = _RlSntpAnycastInetIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 1),
+    _RlSntpAnycastInetIfIndex_Type()
+)
+rlSntpAnycastInetIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetIfIndex.setStatus("current")
+_RlSntpAnycastInetAddressType_Type = InetAddressType
+_RlSntpAnycastInetAddressType_Object = MibTableColumn
+rlSntpAnycastInetAddressType = _RlSntpAnycastInetAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 2),
+    _RlSntpAnycastInetAddressType_Type()
+)
+rlSntpAnycastInetAddressType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetAddressType.setStatus("current")
+_RlSntpAnycastInetAddress_Type = InetAddress
+_RlSntpAnycastInetAddress_Object = MibTableColumn
+rlSntpAnycastInetAddress = _RlSntpAnycastInetAddress_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 3),
+    _RlSntpAnycastInetAddress_Type()
+)
+rlSntpAnycastInetAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetAddress.setStatus("current")
+_RlSntpAnycastInetStratum_Type = NTPStratum
+_RlSntpAnycastInetStratum_Object = MibTableColumn
+rlSntpAnycastInetStratum = _RlSntpAnycastInetStratum_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 4),
+    _RlSntpAnycastInetStratum_Type()
+)
+rlSntpAnycastInetStratum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetStratum.setStatus("current")
+_RlSntpAnycastInetLastResp_Type = NTPTimeStamp
+_RlSntpAnycastInetLastResp_Object = MibTableColumn
+rlSntpAnycastInetLastResp = _RlSntpAnycastInetLastResp_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 5),
+    _RlSntpAnycastInetLastResp_Type()
+)
+rlSntpAnycastInetLastResp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetLastResp.setStatus("current")
+
+
+class _RlSntpAnycastInetStatus_Type(Integer32):
+    """Custom type rlSntpAnycastInetStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("inProcess", 2),
+          ("up", 3),
+          ("down", 4))
+    )
+
+
+_RlSntpAnycastInetStatus_Type.__name__ = "Integer32"
+_RlSntpAnycastInetStatus_Object = MibTableColumn
+rlSntpAnycastInetStatus = _RlSntpAnycastInetStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 6),
+    _RlSntpAnycastInetStatus_Type()
+)
+rlSntpAnycastInetStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetStatus.setStatus("current")
+_RlSntpAnycastInetOffset_Type = NTPTimeStamp
+_RlSntpAnycastInetOffset_Object = MibTableColumn
+rlSntpAnycastInetOffset = _RlSntpAnycastInetOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 7),
+    _RlSntpAnycastInetOffset_Type()
+)
+rlSntpAnycastInetOffset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetOffset.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetOffset.setUnits("seconds")
+_RlSntpAnycastInetDelay_Type = NTPSignedTimeValue
+_RlSntpAnycastInetDelay_Object = MibTableColumn
+rlSntpAnycastInetDelay = _RlSntpAnycastInetDelay_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 8),
+    _RlSntpAnycastInetDelay_Type()
+)
+rlSntpAnycastInetDelay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetDelay.setUnits("seconds")
+_RlSntpAnycastInetRowStatus_Type = RowStatus
+_RlSntpAnycastInetRowStatus_Object = MibTableColumn
+rlSntpAnycastInetRowStatus = _RlSntpAnycastInetRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 16, 1, 9),
+    _RlSntpAnycastInetRowStatus_Type()
+)
+rlSntpAnycastInetRowStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpAnycastInetRowStatus.setStatus("current")
+_RlSntpConfigServerInetTable_Object = MibTable
+rlSntpConfigServerInetTable = _RlSntpConfigServerInetTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17)
+)
+if mibBuilder.loadTexts:
+    rlSntpConfigServerInetTable.setStatus("current")
+_RlSntpServerInetEntry_Object = MibTableRow
+rlSntpServerInetEntry = _RlSntpServerInetEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1)
+)
+rlSntpServerInetEntry.setIndexNames(
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpServerInetAddressType"),
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpServerInetAddress"),
+)
+if mibBuilder.loadTexts:
+    rlSntpServerInetEntry.setStatus("current")
+_RlSntpServerInetAddressType_Type = InetAddressType
+_RlSntpServerInetAddressType_Object = MibTableColumn
+rlSntpServerInetAddressType = _RlSntpServerInetAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 1),
+    _RlSntpServerInetAddressType_Type()
+)
+rlSntpServerInetAddressType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpServerInetAddressType.setStatus("current")
+_RlSntpServerInetAddress_Type = InetAddress
+_RlSntpServerInetAddress_Object = MibTableColumn
+rlSntpServerInetAddress = _RlSntpServerInetAddress_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 2),
+    _RlSntpServerInetAddress_Type()
+)
+rlSntpServerInetAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpServerInetAddress.setStatus("current")
+
+
+class _RlSntpServerInetPolled_Type(TruthValue):
+    """Custom type rlSntpServerInetPolled based on TruthValue"""
+    defaultValue = 2
+
+
+_RlSntpServerInetPolled_Type.__name__ = "TruthValue"
+_RlSntpServerInetPolled_Object = MibTableColumn
+rlSntpServerInetPolled = _RlSntpServerInetPolled_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 3),
+    _RlSntpServerInetPolled_Type()
+)
+rlSntpServerInetPolled.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpServerInetPolled.setStatus("current")
+_RlSntpServerInetStratum_Type = NTPStratum
+_RlSntpServerInetStratum_Object = MibTableColumn
+rlSntpServerInetStratum = _RlSntpServerInetStratum_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 4),
+    _RlSntpServerInetStratum_Type()
+)
+rlSntpServerInetStratum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpServerInetStratum.setStatus("current")
+_RlSntpServerInetLastResp_Type = NTPTimeStamp
+_RlSntpServerInetLastResp_Object = MibTableColumn
+rlSntpServerInetLastResp = _RlSntpServerInetLastResp_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 5),
+    _RlSntpServerInetLastResp_Type()
+)
+rlSntpServerInetLastResp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpServerInetLastResp.setStatus("current")
+
+
+class _RlSntpServerInetStatus_Type(Integer32):
+    """Custom type rlSntpServerInetStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("inProcess", 2),
+          ("up", 3),
+          ("down", 4))
+    )
+
+
+_RlSntpServerInetStatus_Type.__name__ = "Integer32"
+_RlSntpServerInetStatus_Object = MibTableColumn
+rlSntpServerInetStatus = _RlSntpServerInetStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 6),
+    _RlSntpServerInetStatus_Type()
+)
+rlSntpServerInetStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpServerInetStatus.setStatus("current")
+_RlSntpServerInetOffset_Type = NTPTimeStamp
+_RlSntpServerInetOffset_Object = MibTableColumn
+rlSntpServerInetOffset = _RlSntpServerInetOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 7),
+    _RlSntpServerInetOffset_Type()
+)
+rlSntpServerInetOffset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpServerInetOffset.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpServerInetOffset.setUnits("seconds")
+_RlSntpServerInetDelay_Type = NTPSignedTimeValue
+_RlSntpServerInetDelay_Object = MibTableColumn
+rlSntpServerInetDelay = _RlSntpServerInetDelay_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 8),
+    _RlSntpServerInetDelay_Type()
+)
+rlSntpServerInetDelay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpServerInetDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpServerInetDelay.setUnits("seconds")
+_RlSntpServerInetKeyIdentifier_Type = Unsigned32
+_RlSntpServerInetKeyIdentifier_Object = MibTableColumn
+rlSntpServerInetKeyIdentifier = _RlSntpServerInetKeyIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 9),
+    _RlSntpServerInetKeyIdentifier_Type()
+)
+rlSntpServerInetKeyIdentifier.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpServerInetKeyIdentifier.setStatus("current")
+_RlSntpServerInetRowStatus_Type = RowStatus
+_RlSntpServerInetRowStatus_Object = MibTableColumn
+rlSntpServerInetRowStatus = _RlSntpServerInetRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 17, 1, 10),
+    _RlSntpServerInetRowStatus_Type()
+)
+rlSntpServerInetRowStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpServerInetRowStatus.setStatus("current")
+_RlSntpAllServerInetTable_Object = MibTable
+rlSntpAllServerInetTable = _RlSntpAllServerInetTable_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18)
+)
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetTable.setStatus("current")
+_RlSntpAllServerInetEntry_Object = MibTableRow
+rlSntpAllServerInetEntry = _RlSntpAllServerInetEntry_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1)
+)
+rlSntpAllServerInetEntry.setIndexNames(
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpAllServerSource"),
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpAllServerIfIndex"),
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpAllServerPreference"),
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpAllServerInetAddressType"),
+    (0, "RADLAN-TIMESYNCHRONIZATION-MIB", "rlSntpAllServerInetAddress"),
+)
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetEntry.setStatus("current")
+
+
+class _RlSntpAllServerSource_Type(Integer32):
+    """Custom type rlSntpAllServerSource based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("static", 1),
+          ("dhcpv6", 2))
+    )
+
+
+_RlSntpAllServerSource_Type.__name__ = "Integer32"
+_RlSntpAllServerSource_Object = MibTableColumn
+rlSntpAllServerSource = _RlSntpAllServerSource_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 1),
+    _RlSntpAllServerSource_Type()
+)
+rlSntpAllServerSource.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpAllServerSource.setStatus("current")
+_RlSntpAllServerIfIndex_Type = InterfaceIndex
+_RlSntpAllServerIfIndex_Object = MibTableColumn
+rlSntpAllServerIfIndex = _RlSntpAllServerIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 2),
+    _RlSntpAllServerIfIndex_Type()
+)
+rlSntpAllServerIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpAllServerIfIndex.setStatus("current")
+_RlSntpAllServerPreference_Type = Integer32
+_RlSntpAllServerPreference_Object = MibTableColumn
+rlSntpAllServerPreference = _RlSntpAllServerPreference_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 3),
+    _RlSntpAllServerPreference_Type()
+)
+rlSntpAllServerPreference.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpAllServerPreference.setStatus("current")
+_RlSntpAllServerInetAddressType_Type = InetAddressType
+_RlSntpAllServerInetAddressType_Object = MibTableColumn
+rlSntpAllServerInetAddressType = _RlSntpAllServerInetAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 4),
+    _RlSntpAllServerInetAddressType_Type()
+)
+rlSntpAllServerInetAddressType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetAddressType.setStatus("current")
+_RlSntpAllServerInetAddress_Type = InetAddress
+_RlSntpAllServerInetAddress_Object = MibTableColumn
+rlSntpAllServerInetAddress = _RlSntpAllServerInetAddress_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 5),
+    _RlSntpAllServerInetAddress_Type()
+)
+rlSntpAllServerInetAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetAddress.setStatus("current")
+
+
+class _RlSntpAllServerInetPolled_Type(TruthValue):
+    """Custom type rlSntpAllServerInetPolled based on TruthValue"""
+    defaultValue = 2
+
+
+_RlSntpAllServerInetPolled_Type.__name__ = "TruthValue"
+_RlSntpAllServerInetPolled_Object = MibTableColumn
+rlSntpAllServerInetPolled = _RlSntpAllServerInetPolled_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 6),
+    _RlSntpAllServerInetPolled_Type()
+)
+rlSntpAllServerInetPolled.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetPolled.setStatus("current")
+_RlSntpAllServerInetStratum_Type = NTPStratum
+_RlSntpAllServerInetStratum_Object = MibTableColumn
+rlSntpAllServerInetStratum = _RlSntpAllServerInetStratum_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 7),
+    _RlSntpAllServerInetStratum_Type()
+)
+rlSntpAllServerInetStratum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetStratum.setStatus("current")
+_RlSntpAllServerInetLastResp_Type = NTPTimeStamp
+_RlSntpAllServerInetLastResp_Object = MibTableColumn
+rlSntpAllServerInetLastResp = _RlSntpAllServerInetLastResp_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 8),
+    _RlSntpAllServerInetLastResp_Type()
+)
+rlSntpAllServerInetLastResp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetLastResp.setStatus("current")
+
+
+class _RlSntpAllServerInetStatus_Type(Integer32):
+    """Custom type rlSntpAllServerInetStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("inProcess", 2),
+          ("up", 3),
+          ("down", 4))
+    )
+
+
+_RlSntpAllServerInetStatus_Type.__name__ = "Integer32"
+_RlSntpAllServerInetStatus_Object = MibTableColumn
+rlSntpAllServerInetStatus = _RlSntpAllServerInetStatus_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 9),
+    _RlSntpAllServerInetStatus_Type()
+)
+rlSntpAllServerInetStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetStatus.setStatus("current")
+_RlSntpAllServerInetOffset_Type = NTPTimeStamp
+_RlSntpAllServerInetOffset_Object = MibTableColumn
+rlSntpAllServerInetOffset = _RlSntpAllServerInetOffset_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 10),
+    _RlSntpAllServerInetOffset_Type()
+)
+rlSntpAllServerInetOffset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetOffset.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetOffset.setUnits("seconds")
+_RlSntpAllServerInetDelay_Type = NTPSignedTimeValue
+_RlSntpAllServerInetDelay_Object = MibTableColumn
+rlSntpAllServerInetDelay = _RlSntpAllServerInetDelay_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 11),
+    _RlSntpAllServerInetDelay_Type()
+)
+rlSntpAllServerInetDelay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetDelay.setUnits("seconds")
+_RlSntpAllServerInetKeyIdentifier_Type = Unsigned32
+_RlSntpAllServerInetKeyIdentifier_Object = MibTableColumn
+rlSntpAllServerInetKeyIdentifier = _RlSntpAllServerInetKeyIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 18, 1, 12),
+    _RlSntpAllServerInetKeyIdentifier_Type()
+)
+rlSntpAllServerInetKeyIdentifier.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpAllServerInetKeyIdentifier.setStatus("current")
+_RlSntpRestoreDefaultServers_Type = TruthValue
+_RlSntpRestoreDefaultServers_Object = MibScalar
+rlSntpRestoreDefaultServers = _RlSntpRestoreDefaultServers_Object(
+    (1, 3, 6, 1, 4, 1, 89, 92, 2, 2, 19),
+    _RlSntpRestoreDefaultServers_Type()
+)
+rlSntpRestoreDefaultServers.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    rlSntpRestoreDefaultServers.setStatus("current")
 _RlNtpConfig_ObjectIdentity = ObjectIdentity
 rlNtpConfig = _RlNtpConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 89, 92, 2, 3)
@@ -1381,6 +2530,10 @@ mibBuilder.exportSymbols(
     **{"NTPTimeStamp": NTPTimeStamp,
        "NTPSignedTimeValue": NTPSignedTimeValue,
        "NTPStratum": NTPStratum,
+       "RlTimeSyncMethod": RlTimeSyncMethod,
+       "RlDaylightSavingTimeMode": RlDaylightSavingTimeMode,
+       "RlSntpNtpSyncType": RlSntpNtpSyncType,
+       "RlSntpNtpSyncEntryType": RlSntpNtpSyncEntryType,
        "rlTimeSynchronization": rlTimeSynchronization,
        "rlTimeSyncMethodMode": rlTimeSyncMethodMode,
        "rlTimeSyncMibVersion": rlTimeSyncMibVersion,
@@ -1396,6 +2549,27 @@ mibBuilder.exportSymbols(
        "rlDaylightSavingTimeOffset": rlDaylightSavingTimeOffset,
        "rlDaylightSavingTimeCode": rlDaylightSavingTimeCode,
        "rlTZDSTOffset": rlTZDSTOffset,
+       "rlTimeZoneName": rlTimeZoneName,
+       "rlTimeZoneTable": rlTimeZoneTable,
+       "rlTimeZoneEntry": rlTimeZoneEntry,
+       "rlTimeZoneIndex": rlTimeZoneIndex,
+       "rlTimeZoneTimeSyncMethod": rlTimeZoneTimeSyncMethod,
+       "rlTimeZoneTimeZoneOffset": rlTimeZoneTimeZoneOffset,
+       "rlTimeZoneTimeZoneCode": rlTimeZoneTimeZoneCode,
+       "rlTimeZoneDaylightSavingTimeMode": rlTimeZoneDaylightSavingTimeMode,
+       "rlTimeZoneDaylightSavingTimeStart": rlTimeZoneDaylightSavingTimeStart,
+       "rlTimeZoneDaylightSavingTimeEnd": rlTimeZoneDaylightSavingTimeEnd,
+       "rlTimeZoneDaylightSavingTimeOffset": rlTimeZoneDaylightSavingTimeOffset,
+       "rlTimeZoneDaylightSavingTimeCode": rlTimeZoneDaylightSavingTimeCode,
+       "rlTimeZoneTZDSTOffset": rlTimeZoneTZDSTOffset,
+       "rlTimeZoneTimeZoneName": rlTimeZoneTimeZoneName,
+       "rlTimeZoneDataType": rlTimeZoneDataType,
+       "rlTimeZoneDataSourceIfIndex": rlTimeZoneDataSourceIfIndex,
+       "rlTimeZoneDataDynamicConfSource": rlTimeZoneDataDynamicConfSource,
+       "rlClockStatus": rlClockStatus,
+       "rlDhcpTimezoneOptionEnabled": rlDhcpTimezoneOptionEnabled,
+       "rlAutomaticClockSetFromPCEnabled": rlAutomaticClockSetFromPCEnabled,
+       "rlTimeAndDateHaveBeenSet": rlTimeAndDateHaveBeenSet,
        "rlSntpNtpClient": rlSntpNtpClient,
        "rlSntpNtpConfig": rlSntpNtpConfig,
        "rlSntpNtpMibVersion": rlSntpNtpMibVersion,
@@ -1413,6 +2587,15 @@ mibBuilder.exportSymbols(
        "rlSntpNtpConfigSyncSrvStratum": rlSntpNtpConfigSyncSrvStratum,
        "rlSntpNtpConfigRetryTimeout": rlSntpNtpConfigRetryTimeout,
        "rlSntpNtpConfigRetryCnt": rlSntpNtpConfigRetryCnt,
+       "rlSntpNtpConfigSrvTable": rlSntpNtpConfigSrvTable,
+       "rlSntpNtpConfigSrvEntry": rlSntpNtpConfigSrvEntry,
+       "rlSntpNtpConfigSrvEntryType": rlSntpNtpConfigSrvEntryType,
+       "rlSntpNtpConfigSrvInetAddressType": rlSntpNtpConfigSrvInetAddressType,
+       "rlSntpNtpConfigSrvInetAddress": rlSntpNtpConfigSrvInetAddress,
+       "rlSntpNtpConfigSrvMrid": rlSntpNtpConfigSrvMrid,
+       "rlSntpNtpConfigSrvIfIndex": rlSntpNtpConfigSrvIfIndex,
+       "rlSntpNtpConfigSrvSyncType": rlSntpNtpConfigSrvSyncType,
+       "rlSntpNtpConfigSrvStratum": rlSntpNtpConfigSrvStratum,
        "rlSntpConfig": rlSntpConfig,
        "rlSntpClientMode": rlSntpClientMode,
        "rlSntpUnicastAdminState": rlSntpUnicastAdminState,
@@ -1463,5 +2646,58 @@ mibBuilder.exportSymbols(
        "rlSntpAuthenticationKeyValue": rlSntpAuthenticationKeyValue,
        "rlSntpAuthenticationKeyState": rlSntpAuthenticationKeyState,
        "rlSntpAuthenticationRowStatus": rlSntpAuthenticationRowStatus,
+       "rlSntpPort": rlSntpPort,
+       "rlSntpConfigBroadcastInetTable": rlSntpConfigBroadcastInetTable,
+       "rlSntpBroadcastInetEntry": rlSntpBroadcastInetEntry,
+       "rlSntpBroadcastInetIfIndex": rlSntpBroadcastInetIfIndex,
+       "rlSntpBroadcastInetIfAdminState": rlSntpBroadcastInetIfAdminState,
+       "rlSntpBroadcastInetMode": rlSntpBroadcastInetMode,
+       "rlSntpBroadcastInetPolled": rlSntpBroadcastInetPolled,
+       "rlSntpBroadcastInetAddressType": rlSntpBroadcastInetAddressType,
+       "rlSntpBroadcastInetAddress": rlSntpBroadcastInetAddress,
+       "rlSntpBroadcastInetStratum": rlSntpBroadcastInetStratum,
+       "rlSntpBroadcastInetLastResp": rlSntpBroadcastInetLastResp,
+       "rlSntpBroadcastInetStatus": rlSntpBroadcastInetStatus,
+       "rlSntpBroadcastInetOffset": rlSntpBroadcastInetOffset,
+       "rlSntpBroadcastInetDelay": rlSntpBroadcastInetDelay,
+       "rlSntpBroadcastInetRowStatus": rlSntpBroadcastInetRowStatus,
+       "rlSntpConfigAnycastInetTable": rlSntpConfigAnycastInetTable,
+       "rlSntpAnycastInetEntry": rlSntpAnycastInetEntry,
+       "rlSntpAnycastInetIfIndex": rlSntpAnycastInetIfIndex,
+       "rlSntpAnycastInetAddressType": rlSntpAnycastInetAddressType,
+       "rlSntpAnycastInetAddress": rlSntpAnycastInetAddress,
+       "rlSntpAnycastInetStratum": rlSntpAnycastInetStratum,
+       "rlSntpAnycastInetLastResp": rlSntpAnycastInetLastResp,
+       "rlSntpAnycastInetStatus": rlSntpAnycastInetStatus,
+       "rlSntpAnycastInetOffset": rlSntpAnycastInetOffset,
+       "rlSntpAnycastInetDelay": rlSntpAnycastInetDelay,
+       "rlSntpAnycastInetRowStatus": rlSntpAnycastInetRowStatus,
+       "rlSntpConfigServerInetTable": rlSntpConfigServerInetTable,
+       "rlSntpServerInetEntry": rlSntpServerInetEntry,
+       "rlSntpServerInetAddressType": rlSntpServerInetAddressType,
+       "rlSntpServerInetAddress": rlSntpServerInetAddress,
+       "rlSntpServerInetPolled": rlSntpServerInetPolled,
+       "rlSntpServerInetStratum": rlSntpServerInetStratum,
+       "rlSntpServerInetLastResp": rlSntpServerInetLastResp,
+       "rlSntpServerInetStatus": rlSntpServerInetStatus,
+       "rlSntpServerInetOffset": rlSntpServerInetOffset,
+       "rlSntpServerInetDelay": rlSntpServerInetDelay,
+       "rlSntpServerInetKeyIdentifier": rlSntpServerInetKeyIdentifier,
+       "rlSntpServerInetRowStatus": rlSntpServerInetRowStatus,
+       "rlSntpAllServerInetTable": rlSntpAllServerInetTable,
+       "rlSntpAllServerInetEntry": rlSntpAllServerInetEntry,
+       "rlSntpAllServerSource": rlSntpAllServerSource,
+       "rlSntpAllServerIfIndex": rlSntpAllServerIfIndex,
+       "rlSntpAllServerPreference": rlSntpAllServerPreference,
+       "rlSntpAllServerInetAddressType": rlSntpAllServerInetAddressType,
+       "rlSntpAllServerInetAddress": rlSntpAllServerInetAddress,
+       "rlSntpAllServerInetPolled": rlSntpAllServerInetPolled,
+       "rlSntpAllServerInetStratum": rlSntpAllServerInetStratum,
+       "rlSntpAllServerInetLastResp": rlSntpAllServerInetLastResp,
+       "rlSntpAllServerInetStatus": rlSntpAllServerInetStatus,
+       "rlSntpAllServerInetOffset": rlSntpAllServerInetOffset,
+       "rlSntpAllServerInetDelay": rlSntpAllServerInetDelay,
+       "rlSntpAllServerInetKeyIdentifier": rlSntpAllServerInetKeyIdentifier,
+       "rlSntpRestoreDefaultServers": rlSntpRestoreDefaultServers,
        "rlNtpConfig": rlNtpConfig}
 )

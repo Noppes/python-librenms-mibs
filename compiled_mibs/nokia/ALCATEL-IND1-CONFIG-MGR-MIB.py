@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-CONFIG-MGR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:10 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-CONFIG-MGR-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -48,6 +45,10 @@ if 'mibBuilder' not in globals():
 (softentIND1Confmgr,) = mibBuilder.importSymbols(
     "ALCATEL-IND1-BASE",
     "softentIND1Confmgr")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -109,7 +110,7 @@ alcatelIND1ConfigMgrMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1ConfigMgrMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -118,6 +119,20 @@ if mibBuilder.loadTexts:
 
 # TEXTUAL-CONVENTIONS
 
+
+
+class VirtualChassisTopologyChassisIDs(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("chassis1", 0),
+          ("chassis2", 1),
+          ("chassis3", 2),
+          ("chassis4", 3),
+          ("chassis5", 4),
+          ("chassis6", 5),
+          ("chassis7", 6),
+          ("chassis8", 7))
+    )
 
 
 # MIB Managed Objects in the order of their OIDs
@@ -1053,9 +1068,7 @@ class _ConfigTechSupportLogAction_Type(Integer32):
               12,
               13,
               14,
-              15,
-              16,
-              17)
+              15)
         )
     )
     namedValues = NamedValues(
@@ -1074,9 +1087,7 @@ class _ConfigTechSupportLogAction_Type(Integer32):
           ("techSupportL3RIPng", 12),
           ("techSupportL3OSPF3", 13),
           ("techSupportL3Isis", 14),
-          ("techSupportL3Pim6", 15),
-          ("techSupportL3IPsec", 16),
-          ("techSupportL3Bfd", 17))
+          ("techSupportL3Pim6", 15))
     )
 
 
@@ -1632,6 +1643,337 @@ configSnapshotDhcpSrvSelect = _ConfigSnapshotDhcpSrvSelect_Object(
 configSnapshotDhcpSrvSelect.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     configSnapshotDhcpSrvSelect.setStatus("current")
+
+
+class _ConfigSnapshotLLDPSelect_Type(Integer32):
+    """Custom type configSnapshotLLDPSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotLLDPSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotLLDPSelect_Object = MibScalar
+configSnapshotLLDPSelect = _ConfigSnapshotLLDPSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 68),
+    _ConfigSnapshotLLDPSelect_Type()
+)
+configSnapshotLLDPSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotLLDPSelect.setStatus("current")
+
+
+class _ConfigSnapshotLFPSelect_Type(Integer32):
+    """Custom type configSnapshotLFPSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotLFPSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotLFPSelect_Object = MibScalar
+configSnapshotLFPSelect = _ConfigSnapshotLFPSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 69),
+    _ConfigSnapshotLFPSelect_Type()
+)
+configSnapshotLFPSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotLFPSelect.setStatus("current")
+
+
+class _ConfigSnapshotDHLSelect_Type(Integer32):
+    """Custom type configSnapshotDHLSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotDHLSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotDHLSelect_Object = MibScalar
+configSnapshotDHLSelect = _ConfigSnapshotDHLSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 70),
+    _ConfigSnapshotDHLSelect_Type()
+)
+configSnapshotDHLSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotDHLSelect.setStatus("current")
+
+
+class _ConfigSnapshotWccpSelect_Type(Integer32):
+    """Custom type configSnapshotWccpSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotWccpSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotWccpSelect_Object = MibScalar
+configSnapshotWccpSelect = _ConfigSnapshotWccpSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 71),
+    _ConfigSnapshotWccpSelect_Type()
+)
+configSnapshotWccpSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotWccpSelect.setStatus("current")
+
+
+class _ConfigSnapshotPPPOEIASelect_Type(Integer32):
+    """Custom type configSnapshotPPPOEIASelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotPPPOEIASelect_Type.__name__ = "Integer32"
+_ConfigSnapshotPPPOEIASelect_Object = MibScalar
+configSnapshotPPPOEIASelect = _ConfigSnapshotPPPOEIASelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 72),
+    _ConfigSnapshotPPPOEIASelect_Type()
+)
+configSnapshotPPPOEIASelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotPPPOEIASelect.setStatus("current")
+
+
+class _ConfigSnapshotTESTOAMSelect_Type(Integer32):
+    """Custom type configSnapshotTESTOAMSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotTESTOAMSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotTESTOAMSelect_Object = MibScalar
+configSnapshotTESTOAMSelect = _ConfigSnapshotTESTOAMSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 73),
+    _ConfigSnapshotTESTOAMSelect_Type()
+)
+configSnapshotTESTOAMSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotTESTOAMSelect.setStatus("current")
+
+
+class _ConfigSnapshotSIPSelect_Type(Integer32):
+    """Custom type configSnapshotSIPSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotSIPSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotSIPSelect_Object = MibScalar
+configSnapshotSIPSelect = _ConfigSnapshotSIPSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 74),
+    _ConfigSnapshotSIPSelect_Type()
+)
+configSnapshotSIPSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotSIPSelect.setStatus("current")
+
+
+class _ConfigSnapshotUNPSelect_Type(Integer32):
+    """Custom type configSnapshotUNPSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotUNPSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotUNPSelect_Object = MibScalar
+configSnapshotUNPSelect = _ConfigSnapshotUNPSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 75),
+    _ConfigSnapshotUNPSelect_Type()
+)
+configSnapshotUNPSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotUNPSelect.setStatus("current")
+
+
+class _ConfigSnapshotMultiChassisSelect_Type(Integer32):
+    """Custom type configSnapshotMultiChassisSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotMultiChassisSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotMultiChassisSelect_Object = MibScalar
+configSnapshotMultiChassisSelect = _ConfigSnapshotMultiChassisSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 76),
+    _ConfigSnapshotMultiChassisSelect_Type()
+)
+configSnapshotMultiChassisSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotMultiChassisSelect.setStatus("current")
+
+
+class _ConfigSnapshotDhcpv6Select_Type(Integer32):
+    """Custom type configSnapshotDhcpv6Select based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotDhcpv6Select_Type.__name__ = "Integer32"
+_ConfigSnapshotDhcpv6Select_Object = MibScalar
+configSnapshotDhcpv6Select = _ConfigSnapshotDhcpv6Select_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 77),
+    _ConfigSnapshotDhcpv6Select_Type()
+)
+configSnapshotDhcpv6Select.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotDhcpv6Select.setStatus("current")
+
+
+class _ConfigSnapshotSspHelperSelect_Type(Integer32):
+    """Custom type configSnapshotSspHelperSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotSspHelperSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotSspHelperSelect_Object = MibScalar
+configSnapshotSspHelperSelect = _ConfigSnapshotSspHelperSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 78),
+    _ConfigSnapshotSspHelperSelect_Type()
+)
+configSnapshotSspHelperSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotSspHelperSelect.setStatus("current")
+
+
+class _ConfigSnapshotOpenflowSelect_Type(Integer32):
+    """Custom type configSnapshotOpenflowSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotOpenflowSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotOpenflowSelect_Object = MibScalar
+configSnapshotOpenflowSelect = _ConfigSnapshotOpenflowSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 79),
+    _ConfigSnapshotOpenflowSelect_Type()
+)
+configSnapshotOpenflowSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotOpenflowSelect.setStatus("current")
+
+
+class _ConfigSnapshotTwampSelect_Type(Integer32):
+    """Custom type configSnapshotTwampSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotTwampSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotTwampSelect_Object = MibScalar
+configSnapshotTwampSelect = _ConfigSnapshotTwampSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 80),
+    _ConfigSnapshotTwampSelect_Type()
+)
+configSnapshotTwampSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotTwampSelect.setStatus("current")
+
+
+class _ConfigSnapshotCloudAgentSelect_Type(Integer32):
+    """Custom type configSnapshotCloudAgentSelect based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_ConfigSnapshotCloudAgentSelect_Type.__name__ = "Integer32"
+_ConfigSnapshotCloudAgentSelect_Object = MibScalar
+configSnapshotCloudAgentSelect = _ConfigSnapshotCloudAgentSelect_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 81),
+    _ConfigSnapshotCloudAgentSelect_Type()
+)
+configSnapshotCloudAgentSelect.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    configSnapshotCloudAgentSelect.setStatus("current")
+
+
+class _ConfigWriteMemoryWarning_Type(DisplayString):
+    """Custom type configWriteMemoryWarning based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_ConfigWriteMemoryWarning_Type.__name__ = "DisplayString"
+_ConfigWriteMemoryWarning_Object = MibScalar
+configWriteMemoryWarning = _ConfigWriteMemoryWarning_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 82),
+    _ConfigWriteMemoryWarning_Type()
+)
+configWriteMemoryWarning.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    configWriteMemoryWarning.setStatus("current")
+
+
+class _VirtualChassisTopologyMissingChassisIDs_Type(VirtualChassisTopologyChassisIDs):
+    """Custom type virtualChassisTopologyMissingChassisIDs based on VirtualChassisTopologyChassisIDs"""
+    defaultBinValue = "0"
+
+
+_VirtualChassisTopologyMissingChassisIDs_Type.__name__ = "VirtualChassisTopologyChassisIDs"
+_VirtualChassisTopologyMissingChassisIDs_Object = MibScalar
+virtualChassisTopologyMissingChassisIDs = _VirtualChassisTopologyMissingChassisIDs_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 1, 1, 83),
+    _VirtualChassisTopologyMissingChassisIDs_Type()
+)
+virtualChassisTopologyMissingChassisIDs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    virtualChassisTopologyMissingChassisIDs.setStatus("current")
 _AlcatelIND1ConfigMgrMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1ConfigMgrMIBConformance = _AlcatelIND1ConfigMgrMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 2)
@@ -1650,6 +1992,29 @@ alcatelIND1ConfigMgrMIBCompliances = _AlcatelIND1ConfigMgrMIBCompliances_ObjectI
 )
 if mibBuilder.loadTexts:
     alcatelIND1ConfigMgrMIBCompliances.setStatus("current")
+_AlcatelIND1ConfigMgrTraps_ObjectIdentity = ObjectIdentity
+alcatelIND1ConfigMgrTraps = _AlcatelIND1ConfigMgrTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 3)
+)
+if mibBuilder.loadTexts:
+    alcatelIND1ConfigMgrTraps.setStatus("current")
+_AlcatelIND1ConfigMgrTrapsRoot_ObjectIdentity = ObjectIdentity
+alcatelIND1ConfigMgrTrapsRoot = _AlcatelIND1ConfigMgrTrapsRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 3, 0)
+)
+_AlcatelIND1ConfigMgrTrapsObj_ObjectIdentity = ObjectIdentity
+alcatelIND1ConfigMgrTrapsObj = _AlcatelIND1ConfigMgrTrapsObj_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 3, 1)
+)
+_ConfigSaveSucceededTrapReason_Type = SnmpAdminString
+_ConfigSaveSucceededTrapReason_Object = MibScalar
+configSaveSucceededTrapReason = _ConfigSaveSucceededTrapReason_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 3, 1, 1),
+    _ConfigSaveSucceededTrapReason_Type()
+)
+configSaveSucceededTrapReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    configSaveSucceededTrapReason.setStatus("current")
 
 # Managed Objects groups
 
@@ -1728,7 +2093,26 @@ configSnapshotGroup.setObjects(
         ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotErpSelect"),
         ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotEFMOAMSelect"),
         ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotLBDSelect"),
-        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotSAASelect"))
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotSAASelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotLFPSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotDHLSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotWccpSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotPPPOEIASelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotTESTOAMSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotFileName"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotAction"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotAtmSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotDhcpSrvSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotMPLSSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotNTPSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotPortMappingSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotRIPngSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotSonetSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotSIPSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotUNPSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotDhcpv6Select"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotOpenflowSelect"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotCloudAgentSelect"))
 )
 if mibBuilder.loadTexts:
     configSnapshotGroup.setStatus("current")
@@ -1751,11 +2135,42 @@ configWriteMemoryGroup.setObjects(
 if mibBuilder.loadTexts:
     configWriteMemoryGroup.setStatus("current")
 
+configMgrTrapReasonGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 2, 1, 7)
+)
+configMgrTrapReasonGroup.setObjects(
+    ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSaveSucceededTrapReason")
+)
+if mibBuilder.loadTexts:
+    configMgrTrapReasonGroup.setStatus("current")
+
 
 # Notification objects
 
+configSaveSucceededTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 3, 0, 1)
+)
+configSaveSucceededTrap.setObjects(
+    ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSaveSucceededTrapReason")
+)
+if mibBuilder.loadTexts:
+    configSaveSucceededTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
+
+configMgrTrapsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11, 1, 2, 1, 6)
+)
+configMgrTrapsGroup.setObjects(
+    ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSaveSucceededTrap")
+)
+if mibBuilder.loadTexts:
+    configMgrTrapsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -1771,7 +2186,9 @@ alcatelIND1ConfigMgrMIBCompliance.setObjects(
         ("ALCATEL-IND1-CONFIG-MGR-MIB", "configTimerFileGroup"),
         ("ALCATEL-IND1-CONFIG-MGR-MIB", "configSnapshotGroup"),
         ("ALCATEL-IND1-CONFIG-MGR-MIB", "configTechSupportLogGroup"),
-        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configWriteMemoryGroup"))
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configWriteMemoryGroup"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configMgrTrapsGroup"),
+        ("ALCATEL-IND1-CONFIG-MGR-MIB", "configMgrTrapReasonGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1ConfigMgrMIBCompliance.setStatus(
@@ -1783,7 +2200,8 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "ALCATEL-IND1-CONFIG-MGR-MIB",
-    **{"alcatelIND1ConfigMgrMIB": alcatelIND1ConfigMgrMIB,
+    **{"VirtualChassisTopologyChassisIDs": VirtualChassisTopologyChassisIDs,
+       "alcatelIND1ConfigMgrMIB": alcatelIND1ConfigMgrMIB,
        "alcatelIND1ConfigMgrMIBObjects": alcatelIND1ConfigMgrMIBObjects,
        "configManager": configManager,
        "configFileName": configFileName,
@@ -1853,6 +2271,22 @@ mibBuilder.exportSymbols(
        "configSnapshotLBDSelect": configSnapshotLBDSelect,
        "configSnapshotSAASelect": configSnapshotSAASelect,
        "configSnapshotDhcpSrvSelect": configSnapshotDhcpSrvSelect,
+       "configSnapshotLLDPSelect": configSnapshotLLDPSelect,
+       "configSnapshotLFPSelect": configSnapshotLFPSelect,
+       "configSnapshotDHLSelect": configSnapshotDHLSelect,
+       "configSnapshotWccpSelect": configSnapshotWccpSelect,
+       "configSnapshotPPPOEIASelect": configSnapshotPPPOEIASelect,
+       "configSnapshotTESTOAMSelect": configSnapshotTESTOAMSelect,
+       "configSnapshotSIPSelect": configSnapshotSIPSelect,
+       "configSnapshotUNPSelect": configSnapshotUNPSelect,
+       "configSnapshotMultiChassisSelect": configSnapshotMultiChassisSelect,
+       "configSnapshotDhcpv6Select": configSnapshotDhcpv6Select,
+       "configSnapshotSspHelperSelect": configSnapshotSspHelperSelect,
+       "configSnapshotOpenflowSelect": configSnapshotOpenflowSelect,
+       "configSnapshotTwampSelect": configSnapshotTwampSelect,
+       "configSnapshotCloudAgentSelect": configSnapshotCloudAgentSelect,
+       "configWriteMemoryWarning": configWriteMemoryWarning,
+       "virtualChassisTopologyMissingChassisIDs": virtualChassisTopologyMissingChassisIDs,
        "alcatelIND1ConfigMgrMIBConformance": alcatelIND1ConfigMgrMIBConformance,
        "alcatelIND1ConfigMgrMIBGroups": alcatelIND1ConfigMgrMIBGroups,
        "configFileGroup": configFileGroup,
@@ -1860,6 +2294,13 @@ mibBuilder.exportSymbols(
        "configSnapshotGroup": configSnapshotGroup,
        "configTechSupportLogGroup": configTechSupportLogGroup,
        "configWriteMemoryGroup": configWriteMemoryGroup,
+       "configMgrTrapsGroup": configMgrTrapsGroup,
+       "configMgrTrapReasonGroup": configMgrTrapReasonGroup,
        "alcatelIND1ConfigMgrMIBCompliances": alcatelIND1ConfigMgrMIBCompliances,
-       "alcatelIND1ConfigMgrMIBCompliance": alcatelIND1ConfigMgrMIBCompliance}
+       "alcatelIND1ConfigMgrMIBCompliance": alcatelIND1ConfigMgrMIBCompliance,
+       "alcatelIND1ConfigMgrTraps": alcatelIND1ConfigMgrTraps,
+       "alcatelIND1ConfigMgrTrapsRoot": alcatelIND1ConfigMgrTrapsRoot,
+       "configSaveSucceededTrap": configSaveSucceededTrap,
+       "alcatelIND1ConfigMgrTrapsObj": alcatelIND1ConfigMgrTrapsObj,
+       "configSaveSucceededTrapReason": configSaveSucceededTrapReason}
 )

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-SLB-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:17 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-SLB-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,6 +114,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1SLBMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 20, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1SLBMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -154,6 +155,56 @@ class SlbOperState(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("outOfService", 1),
           ("inService", 2))
+    )
+
+
+
+class SlbClusterString(DisplayString):
+    status = "current"
+    displayHint = "255a"
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 23),
+    )
+
+
+
+class SlbProbeString(DisplayString):
+    status = "current"
+    displayHint = "255a"
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 23),
+    )
+
+
+
+class SlbExpectString(DisplayString):
+    status = "current"
+    displayHint = "255a"
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+
+class SlbUserString(DisplayString):
+    status = "current"
+    displayHint = "255a"
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+
+class SlbUrlString(DisplayString):
+    status = "current"
+    displayHint = "255a"
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 128),
     )
 
 
@@ -594,7 +645,7 @@ class _SlbServerClusterName_Type(SnmpAdminString):
     """Custom type slbServerClusterName based on SnmpAdminString"""
     subtypeSpec = SnmpAdminString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 23),
+        ValueSizeConstraint(0, 23),
     )
 
 
@@ -645,11 +696,11 @@ if mibBuilder.loadTexts:
 
 class _SlbServerAdminWeight_Type(Unsigned32):
     """Custom type slbServerAdminWeight based on Unsigned32"""
-    defaultValue = 1
+    defaultValue = 10
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 32),
+        ValueRangeConstraint(0, 100),
     )
 
 
@@ -770,7 +821,7 @@ class _SlbServerProbeStatus_Type(SnmpAdminString):
     """Custom type slbServerProbeStatus based on SnmpAdminString"""
     subtypeSpec = SnmpAdminString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 32),
+        ValueSizeConstraint(0, 23),
     )
 
 
@@ -1020,12 +1071,12 @@ if mibBuilder.loadTexts:
     slbProbeSend.setStatus("current")
 
 
-class _SlbProbeHttpStatus_Type(Integer32):
-    """Custom type slbProbeHttpStatus based on Integer32"""
+class _SlbProbeHttpStatus_Type(Unsigned32):
+    """Custom type slbProbeHttpStatus based on Unsigned32"""
     defaultValue = 200
 
 
-_SlbProbeHttpStatus_Type.__name__ = "Integer32"
+_SlbProbeHttpStatus_Type.__name__ = "Unsigned32"
 _SlbProbeHttpStatus_Object = MibTableColumn
 slbProbeHttpStatus = _SlbProbeHttpStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 20, 1, 1, 4, 1, 1, 10),
@@ -1703,6 +1754,19 @@ slbStatsGroup.setObjects(
 if mibBuilder.loadTexts:
     slbStatsGroup.setStatus("current")
 
+slbTrapObjectsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 20, 1, 2, 1, 7)
+)
+slbTrapObjectsGroup.setObjects(
+      *(("ALCATEL-IND1-SLB-MIB", "slbTrapInfoClusterName"),
+        ("ALCATEL-IND1-SLB-MIB", "slbTrapInfoEntityGroup"),
+        ("ALCATEL-IND1-SLB-MIB", "slbTrapInfoException"),
+        ("ALCATEL-IND1-SLB-MIB", "slbTrapInfoOperStatus"),
+        ("ALCATEL-IND1-SLB-MIB", "slbTrapInfoServerIpAddr"))
+)
+if mibBuilder.loadTexts:
+    slbTrapObjectsGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1788,6 +1852,11 @@ mibBuilder.exportSymbols(
     "ALCATEL-IND1-SLB-MIB",
     **{"SlbAdminState": SlbAdminState,
        "SlbOperState": SlbOperState,
+       "SlbClusterString": SlbClusterString,
+       "SlbProbeString": SlbProbeString,
+       "SlbExpectString": SlbExpectString,
+       "SlbUserString": SlbUserString,
+       "SlbUrlString": SlbUrlString,
        "SlbRedirectAlgorithm": SlbRedirectAlgorithm,
        "SlbServerOperState": SlbServerOperState,
        "alcatelIND1SLBMIB": alcatelIND1SLBMIB,
@@ -1886,6 +1955,7 @@ mibBuilder.exportSymbols(
        "slbTrapsGroup": slbTrapsGroup,
        "slbProbesGroup": slbProbesGroup,
        "slbStatsGroup": slbStatsGroup,
+       "slbTrapObjectsGroup": slbTrapObjectsGroup,
        "alcatelIND1SLBMIBCompliances": alcatelIND1SLBMIBCompliances,
        "alcatelIND1SLBMIBCompliance": alcatelIND1SLBMIBCompliance,
        "slbTrapsDesc": slbTrapsDesc,

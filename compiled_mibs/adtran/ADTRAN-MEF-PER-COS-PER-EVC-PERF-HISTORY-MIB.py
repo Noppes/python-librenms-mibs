@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\adtran\ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -129,7 +126,8 @@ adGenAosMefPerCosPerEvcPerfHistoryMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     adGenAosMefPerCosPerEvcPerfHistoryMib.setRevisions(
-        ("2014-09-10 00:00",)
+        ("2017-10-14 00:00",
+         "2014-09-10 00:00")
     )
 
 
@@ -399,6 +397,60 @@ adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day = _AdMefPerCosPerEvcPhCurEgre
 adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day.setStatus("current")
+_AdMefPerCosPerEvcPhCurIngressYellowFrames15Min_Type = HCPerfCurrentCount
+_AdMefPerCosPerEvcPhCurIngressYellowFrames15Min_Object = MibTableColumn
+adMefPerCosPerEvcPhCurIngressYellowFrames15Min = _AdMefPerCosPerEvcPhCurIngressYellowFrames15Min_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 1, 1, 25),
+    _AdMefPerCosPerEvcPhCurIngressYellowFrames15Min_Type()
+)
+adMefPerCosPerEvcPhCurIngressYellowFrames15Min.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPhCurIngressYellowFrames15Min.setStatus("current")
+_AdMefPerCosPerEvcPhCurIngressYellowOctet15Min_Type = HCPerfCurrentCount
+_AdMefPerCosPerEvcPhCurIngressYellowOctet15Min_Object = MibTableColumn
+adMefPerCosPerEvcPhCurIngressYellowOctet15Min = _AdMefPerCosPerEvcPhCurIngressYellowOctet15Min_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 1, 1, 26),
+    _AdMefPerCosPerEvcPhCurIngressYellowOctet15Min_Type()
+)
+adMefPerCosPerEvcPhCurIngressYellowOctet15Min.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPhCurIngressYellowOctet15Min.setStatus("current")
+_AdMefPerCosPerEvcPhCurIngressRedFrames15Min_Type = HCPerfCurrentCount
+_AdMefPerCosPerEvcPhCurIngressRedFrames15Min_Object = MibTableColumn
+adMefPerCosPerEvcPhCurIngressRedFrames15Min = _AdMefPerCosPerEvcPhCurIngressRedFrames15Min_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 1, 1, 27),
+    _AdMefPerCosPerEvcPhCurIngressRedFrames15Min_Type()
+)
+adMefPerCosPerEvcPhCurIngressRedFrames15Min.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPhCurIngressRedFrames15Min.setStatus("current")
+_AdMefPerCosPerEvcPhCurIngressYellowOctets1Day_Type = HCPerfCurrentCount
+_AdMefPerCosPerEvcPhCurIngressYellowOctets1Day_Object = MibTableColumn
+adMefPerCosPerEvcPhCurIngressYellowOctets1Day = _AdMefPerCosPerEvcPhCurIngressYellowOctets1Day_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 1, 1, 28),
+    _AdMefPerCosPerEvcPhCurIngressYellowOctets1Day_Type()
+)
+adMefPerCosPerEvcPhCurIngressYellowOctets1Day.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPhCurIngressYellowOctets1Day.setStatus("current")
+_AdMefPerCosPerEvcPhCurIngressYellowFrames1Day_Type = HCPerfCurrentCount
+_AdMefPerCosPerEvcPhCurIngressYellowFrames1Day_Object = MibTableColumn
+adMefPerCosPerEvcPhCurIngressYellowFrames1Day = _AdMefPerCosPerEvcPhCurIngressYellowFrames1Day_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 1, 1, 29),
+    _AdMefPerCosPerEvcPhCurIngressYellowFrames1Day_Type()
+)
+adMefPerCosPerEvcPhCurIngressYellowFrames1Day.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPhCurIngressYellowFrames1Day.setStatus("current")
+_AdMefPerCosPerEvcPhCurIngressRedFrames1Day_Type = HCPerfCurrentCount
+_AdMefPerCosPerEvcPhCurIngressRedFrames1Day_Object = MibTableColumn
+adMefPerCosPerEvcPhCurIngressRedFrames1Day = _AdMefPerCosPerEvcPhCurIngressRedFrames1Day_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 1, 1, 30),
+    _AdMefPerCosPerEvcPhCurIngressRedFrames1Day_Type()
+)
+adMefPerCosPerEvcPhCurIngressRedFrames1Day.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPhCurIngressRedFrames1Day.setStatus("current")
 _AdMefPerCosPerEvcPh15MinIntervalTable_Object = MibTable
 adMefPerCosPerEvcPh15MinIntervalTable = _AdMefPerCosPerEvcPh15MinIntervalTable_Object(
     (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 2)
@@ -546,6 +598,33 @@ adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards = _AdMefPerCosPerEvcPh15MinEgre
 adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards.setStatus("current")
+_AdMefPerCosPerEvcPh15MinIngressYellowOctets_Type = HCPerfIntervalCount
+_AdMefPerCosPerEvcPh15MinIngressYellowOctets_Object = MibTableColumn
+adMefPerCosPerEvcPh15MinIngressYellowOctets = _AdMefPerCosPerEvcPh15MinIngressYellowOctets_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 2, 1, 12),
+    _AdMefPerCosPerEvcPh15MinIngressYellowOctets_Type()
+)
+adMefPerCosPerEvcPh15MinIngressYellowOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPh15MinIngressYellowOctets.setStatus("current")
+_AdMefPerCosPerEvcPh15MinIngressYellowFrames_Type = HCPerfIntervalCount
+_AdMefPerCosPerEvcPh15MinIngressYellowFrames_Object = MibTableColumn
+adMefPerCosPerEvcPh15MinIngressYellowFrames = _AdMefPerCosPerEvcPh15MinIngressYellowFrames_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 2, 1, 13),
+    _AdMefPerCosPerEvcPh15MinIngressYellowFrames_Type()
+)
+adMefPerCosPerEvcPh15MinIngressYellowFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPh15MinIngressYellowFrames.setStatus("current")
+_AdMefPerCosPerEvcPh15MinIngressRedFrames_Type = HCPerfIntervalCount
+_AdMefPerCosPerEvcPh15MinIngressRedFrames_Object = MibTableColumn
+adMefPerCosPerEvcPh15MinIngressRedFrames = _AdMefPerCosPerEvcPh15MinIngressRedFrames_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 2, 1, 14),
+    _AdMefPerCosPerEvcPh15MinIngressRedFrames_Type()
+)
+adMefPerCosPerEvcPh15MinIngressRedFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPh15MinIngressRedFrames.setStatus("current")
 _AdMefPerCosPerEvcPh1DayIntervalTable_Object = MibTable
 adMefPerCosPerEvcPh1DayIntervalTable = _AdMefPerCosPerEvcPh1DayIntervalTable_Object(
     (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 3)
@@ -693,6 +772,33 @@ adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards = _AdMefPerCosPerEvcPh1DayEgress
 adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards.setStatus("current")
+_AdMefPerCosPerEvcPh1DayIngressYellowOctets_Type = HCPerfTotalCount
+_AdMefPerCosPerEvcPh1DayIngressYellowOctets_Object = MibTableColumn
+adMefPerCosPerEvcPh1DayIngressYellowOctets = _AdMefPerCosPerEvcPh1DayIngressYellowOctets_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 3, 1, 12),
+    _AdMefPerCosPerEvcPh1DayIngressYellowOctets_Type()
+)
+adMefPerCosPerEvcPh1DayIngressYellowOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPh1DayIngressYellowOctets.setStatus("current")
+_AdMefPerCosPerEvcPh1DayIngressYellowFrames_Type = HCPerfTotalCount
+_AdMefPerCosPerEvcPh1DayIngressYellowFrames_Object = MibTableColumn
+adMefPerCosPerEvcPh1DayIngressYellowFrames = _AdMefPerCosPerEvcPh1DayIngressYellowFrames_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 3, 1, 13),
+    _AdMefPerCosPerEvcPh1DayIngressYellowFrames_Type()
+)
+adMefPerCosPerEvcPh1DayIngressYellowFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPh1DayIngressYellowFrames.setStatus("current")
+_AdMefPerCosPerEvcPh1DayIngressRedFrames_Type = HCPerfTotalCount
+_AdMefPerCosPerEvcPh1DayIngressRedFrames_Object = MibTableColumn
+adMefPerCosPerEvcPh1DayIngressRedFrames = _AdMefPerCosPerEvcPh1DayIngressRedFrames_Object(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 9, 4, 3, 1, 14),
+    _AdMefPerCosPerEvcPh1DayIngressRedFrames_Type()
+)
+adMefPerCosPerEvcPh1DayIngressRedFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    adMefPerCosPerEvcPh1DayIngressRedFrames.setStatus("current")
 _AdGenAosMefPerCosPerEvcPerfHistoryConformance_ObjectIdentity = ObjectIdentity
 adGenAosMefPerCosPerEvcPerfHistoryConformance = _AdGenAosMefPerCosPerEvcPerfHistoryConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 664, 5, 53, 99, 24)
@@ -733,7 +839,13 @@ adMefPerCosPerEvcPhCurGroup.setObjects(
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressGreenFrameDiscards1Day"),
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurEgressGreenFrameDiscards1Day"),
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressGreenOctetDiscards1Day"),
-        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day"))
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressYellowFrames15Min"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressYellowOctet15Min"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressRedFrames15Min"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressYellowOctets1Day"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressYellowFrames1Day"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPhCurIngressRedFrames1Day"))
 )
 if mibBuilder.loadTexts:
     adMefPerCosPerEvcPhCurGroup.setStatus("current")
@@ -749,7 +861,10 @@ adMefPerCosPerEvcPh15MinIntervalGroup.setObjects(
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinIngressGreenFrameDiscards"),
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinEgressGreenFrameDiscards"),
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinIngressGreenOctetDiscards"),
-        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards"))
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinIngressYellowOctets"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinIngressYellowFrames"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh15MinIngressRedFrames"))
 )
 if mibBuilder.loadTexts:
     adMefPerCosPerEvcPh15MinIntervalGroup.setStatus("current")
@@ -765,7 +880,10 @@ adMefPerCosPerEvcPh1DayIntervalGroup.setObjects(
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayIngressGreenFrameDiscards"),
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayEgressGreenFrameDiscards"),
         ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayIngressGreenOctetDiscards"),
-        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards"))
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayIngressYellowOctets"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayIngressYellowFrames"),
+        ("ADTRAN-MEF-PER-COS-PER-EVC-PERF-HISTORY-MIB", "adMefPerCosPerEvcPh1DayIngressRedFrames"))
 )
 if mibBuilder.loadTexts:
     adMefPerCosPerEvcPh1DayIntervalGroup.setStatus("current")
@@ -827,6 +945,12 @@ mibBuilder.exportSymbols(
        "adMefPerCosPerEvcPhCurEgressGreenFrameDiscards1Day": adMefPerCosPerEvcPhCurEgressGreenFrameDiscards1Day,
        "adMefPerCosPerEvcPhCurIngressGreenOctetDiscards1Day": adMefPerCosPerEvcPhCurIngressGreenOctetDiscards1Day,
        "adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day": adMefPerCosPerEvcPhCurEgressGreenOctetDiscards1Day,
+       "adMefPerCosPerEvcPhCurIngressYellowFrames15Min": adMefPerCosPerEvcPhCurIngressYellowFrames15Min,
+       "adMefPerCosPerEvcPhCurIngressYellowOctet15Min": adMefPerCosPerEvcPhCurIngressYellowOctet15Min,
+       "adMefPerCosPerEvcPhCurIngressRedFrames15Min": adMefPerCosPerEvcPhCurIngressRedFrames15Min,
+       "adMefPerCosPerEvcPhCurIngressYellowOctets1Day": adMefPerCosPerEvcPhCurIngressYellowOctets1Day,
+       "adMefPerCosPerEvcPhCurIngressYellowFrames1Day": adMefPerCosPerEvcPhCurIngressYellowFrames1Day,
+       "adMefPerCosPerEvcPhCurIngressRedFrames1Day": adMefPerCosPerEvcPhCurIngressRedFrames1Day,
        "adMefPerCosPerEvcPh15MinIntervalTable": adMefPerCosPerEvcPh15MinIntervalTable,
        "adMefPerCosPerEvcPh15MinIntervalEntry": adMefPerCosPerEvcPh15MinIntervalEntry,
        "adMefPerCosPerEvcPh15MinEvcNameFixedLen": adMefPerCosPerEvcPh15MinEvcNameFixedLen,
@@ -840,6 +964,9 @@ mibBuilder.exportSymbols(
        "adMefPerCosPerEvcPh15MinEgressGreenFrameDiscards": adMefPerCosPerEvcPh15MinEgressGreenFrameDiscards,
        "adMefPerCosPerEvcPh15MinIngressGreenOctetDiscards": adMefPerCosPerEvcPh15MinIngressGreenOctetDiscards,
        "adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards": adMefPerCosPerEvcPh15MinEgressGreenOctetDiscards,
+       "adMefPerCosPerEvcPh15MinIngressYellowOctets": adMefPerCosPerEvcPh15MinIngressYellowOctets,
+       "adMefPerCosPerEvcPh15MinIngressYellowFrames": adMefPerCosPerEvcPh15MinIngressYellowFrames,
+       "adMefPerCosPerEvcPh15MinIngressRedFrames": adMefPerCosPerEvcPh15MinIngressRedFrames,
        "adMefPerCosPerEvcPh1DayIntervalTable": adMefPerCosPerEvcPh1DayIntervalTable,
        "adMefPerCosPerEvcPh1DayIntervalEntry": adMefPerCosPerEvcPh1DayIntervalEntry,
        "adMefPerCosPerEvcPh1DayEvcNameFixedLen": adMefPerCosPerEvcPh1DayEvcNameFixedLen,
@@ -853,6 +980,9 @@ mibBuilder.exportSymbols(
        "adMefPerCosPerEvcPh1DayEgressGreenFrameDiscards": adMefPerCosPerEvcPh1DayEgressGreenFrameDiscards,
        "adMefPerCosPerEvcPh1DayIngressGreenOctetDiscards": adMefPerCosPerEvcPh1DayIngressGreenOctetDiscards,
        "adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards": adMefPerCosPerEvcPh1DayEgressGreenOctetDiscards,
+       "adMefPerCosPerEvcPh1DayIngressYellowOctets": adMefPerCosPerEvcPh1DayIngressYellowOctets,
+       "adMefPerCosPerEvcPh1DayIngressYellowFrames": adMefPerCosPerEvcPh1DayIngressYellowFrames,
+       "adMefPerCosPerEvcPh1DayIngressRedFrames": adMefPerCosPerEvcPh1DayIngressRedFrames,
        "adGenAosMefPerCosPerEvcPerfHistoryConformance": adGenAosMefPerCosPerEvcPerfHistoryConformance,
        "adGenAosMefPerCosPerEvcPerfHistoryGroups": adGenAosMefPerCosPerEvcPerfHistoryGroups,
        "adMefPerCosPerEvcPhCurGroup": adMefPerCosPerEvcPhCurGroup,

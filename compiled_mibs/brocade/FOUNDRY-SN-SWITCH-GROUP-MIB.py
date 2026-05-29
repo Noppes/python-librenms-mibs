@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-SWITCH-GROUP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:21:52 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -56,12 +53,20 @@ if 'mibBuilder' not in globals():
     "switch")
 
 (InterfaceIndex,
- InterfaceIndexOrZero,
  ifIndex) = mibBuilder.importSymbols(
     "IF-MIB",
     "InterfaceIndex",
-    "InterfaceIndexOrZero",
     "ifIndex")
+
+(InetAddress,
+ InetAddressType) = mibBuilder.importSymbols(
+    "INET-ADDRESS-MIB",
+    "InetAddress",
+    "InetAddressType")
+
+(EnabledStatus,) = mibBuilder.importSymbols(
+    "P-BRIDGE-MIB",
+    "EnabledStatus")
 
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
@@ -123,8 +128,8 @@ snSwitch = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snSwitch.setRevisions(
-        ("2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -204,6 +209,17 @@ class BrcdVlanIdTC(TextualConvention, Integer32):
 
 
 
+class BrcdVlanIdOrNoneTC(TextualConvention, Integer32):
+    status = "current"
+    displayHint = "d"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 4090),
+    )
+
+
+
 class PortQosTC(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
@@ -230,36 +246,6 @@ class PortQosTC(TextualConvention, Integer32):
           ("level6", 6),
           ("level7", 7),
           ("invalid", 127))
-    )
-
-
-
-class PortPriorityTC(TextualConvention, Integer32):
-    status = "current"
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              128)
-        )
-    )
-    namedValues = NamedValues(
-        *(("priority0", 1),
-          ("priority1", 2),
-          ("priority2", 3),
-          ("priority3", 4),
-          ("priority4", 5),
-          ("priority5", 6),
-          ("priority6", 7),
-          ("priority7", 8),
-          ("nonPriority", 128))
     )
 
 
@@ -330,12 +316,14 @@ class _SnSwGroupIpMcastMode_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(0,
-              1)
+              1,
+              2)
         )
     )
     namedValues = NamedValues(
         *(("disabled", 0),
-          ("enabled", 1))
+          ("active", 1),
+          ("passive", 2))
     )
 
 
@@ -1017,6 +1005,76 @@ snSwSingleStpVLanId = _SnSwSingleStpVLanId_Object(
 snSwSingleStpVLanId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snSwSingleStpVLanId.setStatus("current")
+
+
+class _SnSwJumboMode_Type(Integer32):
+    """Custom type snSwJumboMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("enabled", 1))
+    )
+
+
+_SnSwJumboMode_Type.__name__ = "Integer32"
+_SnSwJumboMode_Object = MibScalar
+snSwJumboMode = _SnSwJumboMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 1, 45),
+    _SnSwJumboMode_Type()
+)
+snSwJumboMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwJumboMode.setStatus("current")
+
+
+class _SnSwACLPerPortPerVlanMode_Type(Integer32):
+    """Custom type snSwACLPerPortPerVlanMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("enabled", 1))
+    )
+
+
+_SnSwACLPerPortPerVlanMode_Type.__name__ = "Integer32"
+_SnSwACLPerPortPerVlanMode_Object = MibScalar
+snSwACLPerPortPerVlanMode = _SnSwACLPerPortPerVlanMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 1, 46),
+    _SnSwACLPerPortPerVlanMode_Type()
+)
+snSwACLPerPortPerVlanMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwACLPerPortPerVlanMode.setStatus("obsolete")
+_SnSwIpMcastVersion_Type = Integer32
+_SnSwIpMcastVersion_Object = MibScalar
+snSwIpMcastVersion = _SnSwIpMcastVersion_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 1, 47),
+    _SnSwIpMcastVersion_Type()
+)
+snSwIpMcastVersion.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIpMcastVersion.setStatus("current")
+_SnSwMgmtVlan_Type = Integer32
+_SnSwMgmtVlan_Object = MibScalar
+snSwMgmtVlan = _SnSwMgmtVlan_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 1, 48),
+    _SnSwMgmtVlan_Type()
+)
+snSwMgmtVlan.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwMgmtVlan.setStatus("current")
 _SnVLanInfo_ObjectIdentity = ObjectIdentity
 snVLanInfo = _SnVLanInfo_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2)
@@ -2936,159 +2994,44 @@ snVLanByPortCfgInOctets = _SnVLanByPortCfgInOctets_Object(
 )
 snVLanByPortCfgInOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snVLanByPortCfgInOctets.setStatus("current")
-_BrcdVlanExtStatsTable_Object = MibTable
-brcdVlanExtStatsTable = _BrcdVlanExtStatsTable_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8)
+    snVLanByPortCfgInOctets.setStatus("deprecated")
+
+
+class _SnVLanByPortCfgMcastMode_Type(Integer32):
+    """Custom type snVLanByPortCfgMcastMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("active", 1),
+          ("passive", 2))
+    )
+
+
+_SnVLanByPortCfgMcastMode_Type.__name__ = "Integer32"
+_SnVLanByPortCfgMcastMode_Object = MibTableColumn
+snVLanByPortCfgMcastMode = _SnVLanByPortCfgMcastMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 7, 1, 26),
+    _SnVLanByPortCfgMcastMode_Type()
 )
+snVLanByPortCfgMcastMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    brcdVlanExtStatsTable.setStatus("current")
-_BrcdVlanExtStatsEntry_Object = MibTableRow
-brcdVlanExtStatsEntry = _BrcdVlanExtStatsEntry_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1)
+    snVLanByPortCfgMcastMode.setStatus("current")
+_SnVLanByPortCfgMcastVersion_Type = Integer32
+_SnVLanByPortCfgMcastVersion_Object = MibTableColumn
+snVLanByPortCfgMcastVersion = _SnVLanByPortCfgMcastVersion_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 7, 1, 27),
+    _SnVLanByPortCfgMcastVersion_Type()
 )
-brcdVlanExtStatsEntry.setIndexNames(
-    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "brcdVlanExtStatsVlanId"),
-    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "brcdVlanExtStatsIfIndex"),
-    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "brcdVlanExtStatsPriorityId"),
-)
+snVLanByPortCfgMcastVersion.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    brcdVlanExtStatsEntry.setStatus("current")
-_BrcdVlanExtStatsVlanId_Type = BrcdVlanIdTC
-_BrcdVlanExtStatsVlanId_Object = MibTableColumn
-brcdVlanExtStatsVlanId = _BrcdVlanExtStatsVlanId_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 1),
-    _BrcdVlanExtStatsVlanId_Type()
-)
-brcdVlanExtStatsVlanId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsVlanId.setStatus("current")
-_BrcdVlanExtStatsIfIndex_Type = InterfaceIndex
-_BrcdVlanExtStatsIfIndex_Object = MibTableColumn
-brcdVlanExtStatsIfIndex = _BrcdVlanExtStatsIfIndex_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 2),
-    _BrcdVlanExtStatsIfIndex_Type()
-)
-brcdVlanExtStatsIfIndex.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsIfIndex.setStatus("current")
-_BrcdVlanExtStatsPriorityId_Type = PortPriorityTC
-_BrcdVlanExtStatsPriorityId_Object = MibTableColumn
-brcdVlanExtStatsPriorityId = _BrcdVlanExtStatsPriorityId_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 3),
-    _BrcdVlanExtStatsPriorityId_Type()
-)
-brcdVlanExtStatsPriorityId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsPriorityId.setStatus("current")
-_BrcdVlanExtStatsInSwitchedPkts_Type = Counter64
-_BrcdVlanExtStatsInSwitchedPkts_Object = MibTableColumn
-brcdVlanExtStatsInSwitchedPkts = _BrcdVlanExtStatsInSwitchedPkts_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 4),
-    _BrcdVlanExtStatsInSwitchedPkts_Type()
-)
-brcdVlanExtStatsInSwitchedPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsInSwitchedPkts.setStatus("current")
-_BrcdVlanExtStatsInRoutedPkts_Type = Counter64
-_BrcdVlanExtStatsInRoutedPkts_Object = MibTableColumn
-brcdVlanExtStatsInRoutedPkts = _BrcdVlanExtStatsInRoutedPkts_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 5),
-    _BrcdVlanExtStatsInRoutedPkts_Type()
-)
-brcdVlanExtStatsInRoutedPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsInRoutedPkts.setStatus("current")
-_BrcdVlanExtStatsInPkts_Type = Counter64
-_BrcdVlanExtStatsInPkts_Object = MibTableColumn
-brcdVlanExtStatsInPkts = _BrcdVlanExtStatsInPkts_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 6),
-    _BrcdVlanExtStatsInPkts_Type()
-)
-brcdVlanExtStatsInPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsInPkts.setStatus("current")
-_BrcdVlanExtStatsOutSwitchedPkts_Type = Counter64
-_BrcdVlanExtStatsOutSwitchedPkts_Object = MibTableColumn
-brcdVlanExtStatsOutSwitchedPkts = _BrcdVlanExtStatsOutSwitchedPkts_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 7),
-    _BrcdVlanExtStatsOutSwitchedPkts_Type()
-)
-brcdVlanExtStatsOutSwitchedPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsOutSwitchedPkts.setStatus("current")
-_BrcdVlanExtStatsOutRoutedPkts_Type = Counter64
-_BrcdVlanExtStatsOutRoutedPkts_Object = MibTableColumn
-brcdVlanExtStatsOutRoutedPkts = _BrcdVlanExtStatsOutRoutedPkts_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 8),
-    _BrcdVlanExtStatsOutRoutedPkts_Type()
-)
-brcdVlanExtStatsOutRoutedPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsOutRoutedPkts.setStatus("current")
-_BrcdVlanExtStatsOutPkts_Type = Counter64
-_BrcdVlanExtStatsOutPkts_Object = MibTableColumn
-brcdVlanExtStatsOutPkts = _BrcdVlanExtStatsOutPkts_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 9),
-    _BrcdVlanExtStatsOutPkts_Type()
-)
-brcdVlanExtStatsOutPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsOutPkts.setStatus("current")
-_BrcdVlanExtStatsInSwitchedOctets_Type = Counter64
-_BrcdVlanExtStatsInSwitchedOctets_Object = MibTableColumn
-brcdVlanExtStatsInSwitchedOctets = _BrcdVlanExtStatsInSwitchedOctets_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 10),
-    _BrcdVlanExtStatsInSwitchedOctets_Type()
-)
-brcdVlanExtStatsInSwitchedOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsInSwitchedOctets.setStatus("current")
-_BrcdVlanExtStatsInRoutedOctets_Type = Counter64
-_BrcdVlanExtStatsInRoutedOctets_Object = MibTableColumn
-brcdVlanExtStatsInRoutedOctets = _BrcdVlanExtStatsInRoutedOctets_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 11),
-    _BrcdVlanExtStatsInRoutedOctets_Type()
-)
-brcdVlanExtStatsInRoutedOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsInRoutedOctets.setStatus("current")
-_BrcdVlanExtStatsInOctets_Type = Counter64
-_BrcdVlanExtStatsInOctets_Object = MibTableColumn
-brcdVlanExtStatsInOctets = _BrcdVlanExtStatsInOctets_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 12),
-    _BrcdVlanExtStatsInOctets_Type()
-)
-brcdVlanExtStatsInOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsInOctets.setStatus("current")
-_BrcdVlanExtStatsOutSwitchedOctets_Type = Counter64
-_BrcdVlanExtStatsOutSwitchedOctets_Object = MibTableColumn
-brcdVlanExtStatsOutSwitchedOctets = _BrcdVlanExtStatsOutSwitchedOctets_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 13),
-    _BrcdVlanExtStatsOutSwitchedOctets_Type()
-)
-brcdVlanExtStatsOutSwitchedOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsOutSwitchedOctets.setStatus("current")
-_BrcdVlanExtStatsOutRoutedOctets_Type = Counter64
-_BrcdVlanExtStatsOutRoutedOctets_Object = MibTableColumn
-brcdVlanExtStatsOutRoutedOctets = _BrcdVlanExtStatsOutRoutedOctets_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 14),
-    _BrcdVlanExtStatsOutRoutedOctets_Type()
-)
-brcdVlanExtStatsOutRoutedOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsOutRoutedOctets.setStatus("current")
-_BrcdVlanExtStatsOutOctets_Type = Counter64
-_BrcdVlanExtStatsOutOctets_Object = MibTableColumn
-brcdVlanExtStatsOutOctets = _BrcdVlanExtStatsOutOctets_Object(
-    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 2, 8, 1, 15),
-    _BrcdVlanExtStatsOutOctets_Type()
-)
-brcdVlanExtStatsOutOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    brcdVlanExtStatsOutOctets.setStatus("current")
+    snVLanByPortCfgMcastVersion.setStatus("current")
 _SnSwPortInfo_ObjectIdentity = ObjectIdentity
 snSwPortInfo = _SnSwPortInfo_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3)
@@ -3224,7 +3167,11 @@ class _SnSwPortInfoSpeed_Type(Integer32):
               9,
               10,
               11,
-              13)
+              13,
+              14,
+              15,
+              16,
+              17)
         )
     )
     namedValues = NamedValues(
@@ -3240,7 +3187,11 @@ class _SnSwPortInfoSpeed_Type(Integer32):
           ("s2488M", 9),
           ("s9953M", 10),
           ("s16G", 11),
-          ("s40G", 13))
+          ("s40G", 13),
+          ("s2500M", 14),
+          ("s5000M", 15),
+          ("s100G", 16),
+          ("s25G", 17))
     )
 
 
@@ -3274,7 +3225,12 @@ class _SnSwPortInfoMediaType_Type(Integer32):
               12,
               13,
               14,
-              16)
+              16,
+              19,
+              20,
+              21,
+              22,
+              23)
         )
     )
     namedValues = NamedValues(
@@ -3292,7 +3248,12 @@ class _SnSwPortInfoMediaType_Type(Integer32):
           ("m10000BaseFX", 12),
           ("m9953POS", 13),
           ("m16GStacking", 14),
-          ("m40GStacking", 16))
+          ("m40GStacking", 16),
+          ("m2500BaseTX", 19),
+          ("m100GBaseTX", 20),
+          ("mMultiGigBZ", 21),
+          ("m40GBaseTX", 22),
+          ("m25GBaseFX", 23))
     )
 
 
@@ -3781,6 +3742,11 @@ class _SnSwPortInfoGigType_Type(Integer32):
               26,
               27,
               28,
+              50,
+              51,
+              52,
+              53,
+              54,
               255)
         )
     )
@@ -3814,6 +3780,11 @@ class _SnSwPortInfoGigType_Type(Integer32):
           ("m1000BaseSX2", 26),
           ("m1000BaseGBXU", 27),
           ("m1000BaseGBXD", 28),
+          ("m2500BaseTX", 50),
+          ("m100GBaseTX", 51),
+          ("mMultiGigBZ", 52),
+          ("m40GBaseTX", 53),
+          ("m25GBaseFX", 54),
           ("notApplicable", 255))
     )
 
@@ -4609,7 +4580,11 @@ class _SnSwIfInfoSpeed_Type(Integer32):
               10,
               11,
               12,
-              13)
+              13,
+              14,
+              15,
+              16,
+              17)
         )
     )
     namedValues = NamedValues(
@@ -4625,8 +4600,12 @@ class _SnSwIfInfoSpeed_Type(Integer32):
           ("s2488M", 9),
           ("s9953M", 10),
           ("s16G", 11),
-          ("s100G", 12),
-          ("s40G", 13))
+          ("sOpticBased", 12),
+          ("s40G", 13),
+          ("s2500M", 14),
+          ("s5000M", 15),
+          ("s100G", 16),
+          ("s25G", 17))
     )
 
 
@@ -4660,8 +4639,12 @@ class _SnSwIfInfoMediaType_Type(Integer32):
               12,
               13,
               14,
-              15,
-              16)
+              16,
+              19,
+              20,
+              21,
+              22,
+              23)
         )
     )
     namedValues = NamedValues(
@@ -4679,8 +4662,12 @@ class _SnSwIfInfoMediaType_Type(Integer32):
           ("m10000BaseFX", 12),
           ("m9953POS", 13),
           ("m16GStacking", 14),
-          ("m100GBaseFX", 15),
-          ("m40GStacking", 16))
+          ("m40GStacking", 16),
+          ("m2500BaseTX", 19),
+          ("m100GBaseTX", 20),
+          ("mMultiGigBZ", 21),
+          ("m40GBaseTX", 22),
+          ("m25GBaseFX", 23))
     )
 
 
@@ -5036,6 +5023,12 @@ class _SnSwIfInfoGigType_Type(Integer32):
               46,
               47,
               48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
               127,
               128,
               129,
@@ -5053,11 +5046,6 @@ class _SnSwIfInfoGigType_Type(Integer32):
               142,
               143,
               144,
-              145,
-              146,
-              147,
-              148,
-              149,
               255)
         )
     )
@@ -5111,6 +5099,12 @@ class _SnSwIfInfoGigType_Type(Integer32):
           ("mXFP10000BaseSRSW", 46),
           ("mXFP10000BaseLRLW", 47),
           ("mXFP10000BaseEREW", 48),
+          ("m10000BaseT", 49),
+          ("m2500BaseTX", 50),
+          ("m100GBaseTX", 51),
+          ("mMultiGigBZ", 52),
+          ("m40GBaseTX", 53),
+          ("m25GBaseFX", 54),
           ("m1000BaseGBXU", 127),
           ("m1000BaseGBXD", 128),
           ("m1000BaseFBX", 129),
@@ -5128,11 +5122,6 @@ class _SnSwIfInfoGigType_Type(Integer32):
           ("m1000BaseXGCX4", 142),
           ("m1000BaseXGZR", 143),
           ("m1000BaseXGZRD", 144),
-          ("mCFP100GBaseSR10", 145),
-          ("mCFP100GBaseLR4", 146),
-          ("mCFP100GBaseER4", 147),
-          ("mCFP100GBase10x10g2Km", 148),
-          ("mCFP100GBase10x10g10Km", 149),
           ("notApplicable", 255))
     )
 
@@ -5216,7 +5205,7 @@ snSwIfVlanId = _SnSwIfVlanId_Object(
 )
 snSwIfVlanId.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    snSwIfVlanId.setStatus("current")
+    snSwIfVlanId.setStatus("deprecated")
 
 
 class _SnSwIfRouteOnly_Type(Integer32):
@@ -5645,6 +5634,176 @@ snSwIfMacLearningDisable = _SnSwIfMacLearningDisable_Object(
 snSwIfMacLearningDisable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snSwIfMacLearningDisable.setStatus("current")
+_SnSwIfInfoNativeMacAddress_Type = PhysAddress
+_SnSwIfInfoNativeMacAddress_Object = MibTableColumn
+snSwIfInfoNativeMacAddress = _SnSwIfInfoNativeMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 62),
+    _SnSwIfInfoNativeMacAddress_Type()
+)
+snSwIfInfoNativeMacAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoNativeMacAddress.setStatus("current")
+
+
+class _SnSwIfQosMonitorDropCounterMode_Type(Integer32):
+    """Custom type snSwIfQosMonitorDropCounterMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disable", 0),
+          ("enable", 1))
+    )
+
+
+_SnSwIfQosMonitorDropCounterMode_Type.__name__ = "Integer32"
+_SnSwIfQosMonitorDropCounterMode_Object = MibTableColumn
+snSwIfQosMonitorDropCounterMode = _SnSwIfQosMonitorDropCounterMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 63),
+    _SnSwIfQosMonitorDropCounterMode_Type()
+)
+snSwIfQosMonitorDropCounterMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfQosMonitorDropCounterMode.setStatus("current")
+
+
+class _SnSwIfLRMAdapterPresent_Type(TruthValue):
+    """Custom type snSwIfLRMAdapterPresent based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfLRMAdapterPresent_Type.__name__ = "TruthValue"
+_SnSwIfLRMAdapterPresent_Object = MibTableColumn
+snSwIfLRMAdapterPresent = _SnSwIfLRMAdapterPresent_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 64),
+    _SnSwIfLRMAdapterPresent_Type()
+)
+snSwIfLRMAdapterPresent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfLRMAdapterPresent.setStatus("current")
+
+
+class _SnSwIfStpBPDUGuardMode_Type(TruthValue):
+    """Custom type snSwIfStpBPDUGuardMode based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfStpBPDUGuardMode_Type.__name__ = "TruthValue"
+_SnSwIfStpBPDUGuardMode_Object = MibTableColumn
+snSwIfStpBPDUGuardMode = _SnSwIfStpBPDUGuardMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 65),
+    _SnSwIfStpBPDUGuardMode_Type()
+)
+snSwIfStpBPDUGuardMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfStpBPDUGuardMode.setStatus("current")
+
+
+class _SnSwIfStpRootGuardMode_Type(TruthValue):
+    """Custom type snSwIfStpRootGuardMode based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfStpRootGuardMode_Type.__name__ = "TruthValue"
+_SnSwIfStpRootGuardMode_Object = MibTableColumn
+snSwIfStpRootGuardMode = _SnSwIfStpRootGuardMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 66),
+    _SnSwIfStpRootGuardMode_Type()
+)
+snSwIfStpRootGuardMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfStpRootGuardMode.setStatus("current")
+
+
+class _SnSwIfRstpAdminEdgePortMode_Type(TruthValue):
+    """Custom type snSwIfRstpAdminEdgePortMode based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfRstpAdminEdgePortMode_Type.__name__ = "TruthValue"
+_SnSwIfRstpAdminEdgePortMode_Object = MibTableColumn
+snSwIfRstpAdminEdgePortMode = _SnSwIfRstpAdminEdgePortMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 67),
+    _SnSwIfRstpAdminEdgePortMode_Type()
+)
+snSwIfRstpAdminEdgePortMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfRstpAdminEdgePortMode.setStatus("current")
+
+
+class _SnSwIfInfoClockMode_Type(Integer32):
+    """Custom type snSwIfInfoClockMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("master", 1),
+          ("slave", 2),
+          ("auto", 3))
+    )
+
+
+_SnSwIfInfoClockMode_Type.__name__ = "Integer32"
+_SnSwIfInfoClockMode_Object = MibTableColumn
+snSwIfInfoClockMode = _SnSwIfInfoClockMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 68),
+    _SnSwIfInfoClockMode_Type()
+)
+snSwIfInfoClockMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfInfoClockMode.setStatus("current")
+
+
+class _SnSwIfProtectedMode_Type(TruthValue):
+    """Custom type snSwIfProtectedMode based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfProtectedMode_Type.__name__ = "TruthValue"
+_SnSwIfProtectedMode_Object = MibTableColumn
+snSwIfProtectedMode = _SnSwIfProtectedMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 69),
+    _SnSwIfProtectedMode_Type()
+)
+snSwIfProtectedMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfProtectedMode.setStatus("current")
+
+
+class _SnSwIfTrustDscpMode_Type(TruthValue):
+    """Custom type snSwIfTrustDscpMode based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfTrustDscpMode_Type.__name__ = "TruthValue"
+_SnSwIfTrustDscpMode_Object = MibTableColumn
+snSwIfTrustDscpMode = _SnSwIfTrustDscpMode_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 70),
+    _SnSwIfTrustDscpMode_Type()
+)
+snSwIfTrustDscpMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfTrustDscpMode.setStatus("current")
+_SnSwIfVoiceVlanId_Type = Integer32
+_SnSwIfVoiceVlanId_Object = MibTableColumn
+snSwIfVoiceVlanId = _SnSwIfVoiceVlanId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 5, 1, 71),
+    _SnSwIfVoiceVlanId_Type()
+)
+snSwIfVoiceVlanId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snSwIfVoiceVlanId.setStatus("current")
 _SnIfOpticalMonitoringInfoTable_Object = MibTable
 snIfOpticalMonitoringInfoTable = _SnIfOpticalMonitoringInfoTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 6)
@@ -6013,6 +6172,253 @@ snIfOpticalLaneMonitoringTxBiasCurrent = _SnIfOpticalLaneMonitoringTxBiasCurrent
 snIfOpticalLaneMonitoringTxBiasCurrent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snIfOpticalLaneMonitoringTxBiasCurrent.setStatus("current")
+
+
+class _SnIfOpticalLaneMonitoringVoltage_Type(DisplayString):
+    """Custom type snIfOpticalLaneMonitoringVoltage based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_SnIfOpticalLaneMonitoringVoltage_Type.__name__ = "DisplayString"
+_SnIfOpticalLaneMonitoringVoltage_Object = MibTableColumn
+snIfOpticalLaneMonitoringVoltage = _SnIfOpticalLaneMonitoringVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 10, 1, 6),
+    _SnIfOpticalLaneMonitoringVoltage_Type()
+)
+snIfOpticalLaneMonitoringVoltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snIfOpticalLaneMonitoringVoltage.setStatus("current")
+_BrcdIfEgressCounterInfoTable_Object = MibTable
+brcdIfEgressCounterInfoTable = _BrcdIfEgressCounterInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11)
+)
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterInfoTable.setStatus("current")
+_BrcdIfEgressCounterInfoEntry_Object = MibTableRow
+brcdIfEgressCounterInfoEntry = _BrcdIfEgressCounterInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11, 1)
+)
+brcdIfEgressCounterInfoEntry.setIndexNames(
+    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "brcdIfEgressCounterIfIndex"),
+    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "brcdIfEgressCounterQueueId"),
+)
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterInfoEntry.setStatus("current")
+_BrcdIfEgressCounterIfIndex_Type = InterfaceIndex
+_BrcdIfEgressCounterIfIndex_Object = MibTableColumn
+brcdIfEgressCounterIfIndex = _BrcdIfEgressCounterIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11, 1, 1),
+    _BrcdIfEgressCounterIfIndex_Type()
+)
+brcdIfEgressCounterIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterIfIndex.setStatus("current")
+_BrcdIfEgressCounterQueueId_Type = Integer32
+_BrcdIfEgressCounterQueueId_Object = MibTableColumn
+brcdIfEgressCounterQueueId = _BrcdIfEgressCounterQueueId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11, 1, 2),
+    _BrcdIfEgressCounterQueueId_Type()
+)
+brcdIfEgressCounterQueueId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterQueueId.setStatus("current")
+
+
+class _BrcdIfEgressCounterType_Type(Integer32):
+    """Custom type brcdIfEgressCounterType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("other", 1),
+          ("unicast", 2),
+          ("multicast", 3),
+          ("total", 4))
+    )
+
+
+_BrcdIfEgressCounterType_Type.__name__ = "Integer32"
+_BrcdIfEgressCounterType_Object = MibTableColumn
+brcdIfEgressCounterType = _BrcdIfEgressCounterType_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11, 1, 3),
+    _BrcdIfEgressCounterType_Type()
+)
+brcdIfEgressCounterType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterType.setStatus("current")
+_BrcdIfEgressCounterPkts_Type = Counter64
+_BrcdIfEgressCounterPkts_Object = MibTableColumn
+brcdIfEgressCounterPkts = _BrcdIfEgressCounterPkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11, 1, 4),
+    _BrcdIfEgressCounterPkts_Type()
+)
+brcdIfEgressCounterPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterPkts.setStatus("current")
+_BrcdIfEgressCounterDropPkts_Type = Counter64
+_BrcdIfEgressCounterDropPkts_Object = MibTableColumn
+brcdIfEgressCounterDropPkts = _BrcdIfEgressCounterDropPkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 11, 1, 5),
+    _BrcdIfEgressCounterDropPkts_Type()
+)
+brcdIfEgressCounterDropPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdIfEgressCounterDropPkts.setStatus("current")
+_SnSwIfInfoLimitTable_Object = MibTable
+snSwIfInfoLimitTable = _SnSwIfInfoLimitTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12)
+)
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitTable.setStatus("current")
+_SnSwIfInfoLimitEntry_Object = MibTableRow
+snSwIfInfoLimitEntry = _SnSwIfInfoLimitEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1)
+)
+snSwIfInfoLimitEntry.setIndexNames(
+    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "snSwIfInfoPortNum"),
+    (0, "FOUNDRY-SN-SWITCH-GROUP-MIB", "snSwIfInfoLimitType"),
+)
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitEntry.setStatus("current")
+
+
+class _SnSwIfInfoLimitType_Type(Integer32):
+    """Custom type snSwIfInfoLimitType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("broadcast", 1),
+          ("multicast", 2),
+          ("unknown-unicast", 3))
+    )
+
+
+_SnSwIfInfoLimitType_Type.__name__ = "Integer32"
+_SnSwIfInfoLimitType_Object = MibTableColumn
+snSwIfInfoLimitType = _SnSwIfInfoLimitType_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1, 1),
+    _SnSwIfInfoLimitType_Type()
+)
+snSwIfInfoLimitType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitType.setStatus("current")
+
+
+class _SnSwIfInfoLimitPkts_Type(Unsigned32):
+    """Custom type snSwIfInfoLimitPkts based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 8388607),
+    )
+
+
+_SnSwIfInfoLimitPkts_Type.__name__ = "Unsigned32"
+_SnSwIfInfoLimitPkts_Object = MibTableColumn
+snSwIfInfoLimitPkts = _SnSwIfInfoLimitPkts_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1, 2),
+    _SnSwIfInfoLimitPkts_Type()
+)
+snSwIfInfoLimitPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitPkts.setStatus("current")
+
+
+class _SnSwIfInfoLimitBits_Type(Unsigned32):
+    """Custom type snSwIfInfoLimitBits based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 8388607),
+    )
+
+
+_SnSwIfInfoLimitBits_Type.__name__ = "Unsigned32"
+_SnSwIfInfoLimitBits_Object = MibTableColumn
+snSwIfInfoLimitBits = _SnSwIfInfoLimitBits_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1, 3),
+    _SnSwIfInfoLimitBits_Type()
+)
+snSwIfInfoLimitBits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitBits.setStatus("current")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitBits.setUnits("KBPS")
+
+
+class _SnSwIfInfoLimitThreshold_Type(Unsigned32):
+    """Custom type snSwIfInfoLimitThreshold based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1048576),
+    )
+
+
+_SnSwIfInfoLimitThreshold_Type.__name__ = "Unsigned32"
+_SnSwIfInfoLimitThreshold_Object = MibTableColumn
+snSwIfInfoLimitThreshold = _SnSwIfInfoLimitThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1, 4),
+    _SnSwIfInfoLimitThreshold_Type()
+)
+snSwIfInfoLimitThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitThreshold.setStatus("current")
+
+
+class _SnSwIfInfoLimitShutdownTime_Type(Unsigned32):
+    """Custom type snSwIfInfoLimitShutdownTime based on Unsigned32"""
+    defaultValue = 300
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_SnSwIfInfoLimitShutdownTime_Type.__name__ = "Unsigned32"
+_SnSwIfInfoLimitShutdownTime_Object = MibTableColumn
+snSwIfInfoLimitShutdownTime = _SnSwIfInfoLimitShutdownTime_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1, 5),
+    _SnSwIfInfoLimitShutdownTime_Type()
+)
+snSwIfInfoLimitShutdownTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitShutdownTime.setStatus("current")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitShutdownTime.setUnits("seconds")
+
+
+class _SnSwIfInfoLimitLog_Type(TruthValue):
+    """Custom type snSwIfInfoLimitLog based on TruthValue"""
+    defaultValue = 2
+
+
+_SnSwIfInfoLimitLog_Type.__name__ = "TruthValue"
+_SnSwIfInfoLimitLog_Object = MibTableColumn
+snSwIfInfoLimitLog = _SnSwIfInfoLimitLog_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 3, 12, 1, 6),
+    _SnSwIfInfoLimitLog_Type()
+)
+snSwIfInfoLimitLog.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSwIfInfoLimitLog.setStatus("current")
 _SnFdbInfo_ObjectIdentity = ObjectIdentity
 snFdbInfo = _SnFdbInfo_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 4)
@@ -8024,7 +8430,17 @@ snRadiusDeadTime = _SnRadiusDeadTime_Object(
 snRadiusDeadTime.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snRadiusDeadTime.setStatus("current")
-_SnRadiusKey_Type = DisplayString
+
+
+class _SnRadiusKey_Type(DisplayString):
+    """Custom type snRadiusKey based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_SnRadiusKey_Type.__name__ = "DisplayString"
 _SnRadiusKey_Object = MibScalar
 snRadiusKey = _SnRadiusKey_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 12, 1, 6),
@@ -8195,7 +8611,17 @@ snRadiusServerRowStatus = _SnRadiusServerRowStatus_Object(
 snRadiusServerRowStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snRadiusServerRowStatus.setStatus("current")
-_SnRadiusServerRowKey_Type = DisplayString
+
+
+class _SnRadiusServerRowKey_Type(DisplayString):
+    """Custom type snRadiusServerRowKey based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_SnRadiusServerRowKey_Type.__name__ = "DisplayString"
 _SnRadiusServerRowKey_Object = MibTableColumn
 snRadiusServerRowKey = _SnRadiusServerRowKey_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 12, 2, 1, 5),
@@ -8305,7 +8731,17 @@ snTacacsDeadTime = _SnTacacsDeadTime_Object(
 snTacacsDeadTime.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snTacacsDeadTime.setStatus("current")
-_SnTacacsKey_Type = DisplayString
+
+
+class _SnTacacsKey_Type(DisplayString):
+    """Custom type snTacacsKey based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_SnTacacsKey_Type.__name__ = "DisplayString"
 _SnTacacsKey_Object = MibScalar
 snTacacsKey = _SnTacacsKey_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 13, 1, 4),
@@ -8412,7 +8848,17 @@ snTacacsServerRowStatus = _SnTacacsServerRowStatus_Object(
 snTacacsServerRowStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snTacacsServerRowStatus.setStatus("current")
-_SnTacacsServerRowKey_Type = DisplayString
+
+
+class _SnTacacsServerRowKey_Type(DisplayString):
+    """Custom type snTacacsServerRowKey based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_SnTacacsServerRowKey_Type.__name__ = "DisplayString"
 _SnTacacsServerRowKey_Object = MibTableColumn
 snTacacsServerRowKey = _SnTacacsServerRowKey_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 13, 2, 1, 4),
@@ -8720,6 +9166,101 @@ _SnAuthentication_ObjectIdentity = ObjectIdentity
 snAuthentication = _SnAuthentication_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 1)
 )
+
+
+class _SnAuthenticationDot1x_Type(OctetString):
+    """Custom type snAuthenticationDot1x based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 3),
+    )
+
+
+_SnAuthenticationDot1x_Type.__name__ = "OctetString"
+_SnAuthenticationDot1x_Object = MibScalar
+snAuthenticationDot1x = _SnAuthenticationDot1x_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 1, 1),
+    _SnAuthenticationDot1x_Type()
+)
+snAuthenticationDot1x.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthenticationDot1x.setStatus("current")
+
+
+class _SnAuthenticationEnable_Type(OctetString):
+    """Custom type snAuthenticationEnable based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 3),
+    )
+
+
+_SnAuthenticationEnable_Type.__name__ = "OctetString"
+_SnAuthenticationEnable_Object = MibScalar
+snAuthenticationEnable = _SnAuthenticationEnable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 1, 2),
+    _SnAuthenticationEnable_Type()
+)
+snAuthenticationEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthenticationEnable.setStatus("current")
+
+
+class _SnAuthenticationLogin_Type(OctetString):
+    """Custom type snAuthenticationLogin based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 3),
+    )
+
+
+_SnAuthenticationLogin_Type.__name__ = "OctetString"
+_SnAuthenticationLogin_Object = MibScalar
+snAuthenticationLogin = _SnAuthenticationLogin_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 1, 3),
+    _SnAuthenticationLogin_Type()
+)
+snAuthenticationLogin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthenticationLogin.setStatus("current")
+
+
+class _SnAuthenticationSnmpserver_Type(OctetString):
+    """Custom type snAuthenticationSnmpserver based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 3),
+    )
+
+
+_SnAuthenticationSnmpserver_Type.__name__ = "OctetString"
+_SnAuthenticationSnmpserver_Object = MibScalar
+snAuthenticationSnmpserver = _SnAuthenticationSnmpserver_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 1, 4),
+    _SnAuthenticationSnmpserver_Type()
+)
+snAuthenticationSnmpserver.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthenticationSnmpserver.setStatus("current")
+
+
+class _SnAuthenticationWebserver_Type(OctetString):
+    """Custom type snAuthenticationWebserver based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 3),
+    )
+
+
+_SnAuthenticationWebserver_Type.__name__ = "OctetString"
+_SnAuthenticationWebserver_Object = MibScalar
+snAuthenticationWebserver = _SnAuthenticationWebserver_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 1, 5),
+    _SnAuthenticationWebserver_Type()
+)
+snAuthenticationWebserver.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthenticationWebserver.setStatus("current")
 _SnAuthorization_ObjectIdentity = ObjectIdentity
 snAuthorization = _SnAuthorization_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 2)
@@ -8790,6 +9331,51 @@ snAuthorizationExec = _SnAuthorizationExec_Object(
 snAuthorizationExec.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snAuthorizationExec.setStatus("current")
+
+
+class _SnAuthorizationCoaEnable_Type(Integer32):
+    """Custom type snAuthorizationCoaEnable based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disable", 0),
+          ("enable", 1))
+    )
+
+
+_SnAuthorizationCoaEnable_Type.__name__ = "Integer32"
+_SnAuthorizationCoaEnable_Object = MibScalar
+snAuthorizationCoaEnable = _SnAuthorizationCoaEnable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 2, 4),
+    _SnAuthorizationCoaEnable_Type()
+)
+snAuthorizationCoaEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthorizationCoaEnable.setStatus("current")
+
+
+class _SnAuthorizationCoaIgnore_Type(OctetString):
+    """Custom type snAuthorizationCoaIgnore based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 5),
+    )
+
+
+_SnAuthorizationCoaIgnore_Type.__name__ = "OctetString"
+_SnAuthorizationCoaIgnore_Object = MibScalar
+snAuthorizationCoaIgnore = _SnAuthorizationCoaIgnore_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 2, 5),
+    _SnAuthorizationCoaIgnore_Type()
+)
+snAuthorizationCoaIgnore.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAuthorizationCoaIgnore.setStatus("current")
 _SnAccounting_ObjectIdentity = ObjectIdentity
 snAccounting = _SnAccounting_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 15, 3)
@@ -9309,6 +9895,82 @@ _SnSFlowGlb_ObjectIdentity = ObjectIdentity
 snSFlowGlb = _SnSFlowGlb_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 1)
 )
+
+
+class _SnSflowStatus_Type(EnabledStatus):
+    """Custom type snSflowStatus based on EnabledStatus"""
+    defaultValue = 2
+
+
+_SnSflowStatus_Type.__name__ = "EnabledStatus"
+_SnSflowStatus_Object = MibScalar
+snSflowStatus = _SnSflowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 1, 1),
+    _SnSflowStatus_Type()
+)
+snSflowStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSflowStatus.setStatus("current")
+
+
+class _SnSflowSampleRate_Type(Unsigned32):
+    """Custom type snSflowSampleRate based on Unsigned32"""
+    defaultValue = 4096
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(256, 16777215),
+    )
+
+
+_SnSflowSampleRate_Type.__name__ = "Unsigned32"
+_SnSflowSampleRate_Object = MibScalar
+snSflowSampleRate = _SnSflowSampleRate_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 1, 2),
+    _SnSflowSampleRate_Type()
+)
+snSflowSampleRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSflowSampleRate.setStatus("current")
+
+
+class _SnSflowSourcePort_Type(Unsigned32):
+    """Custom type snSflowSourcePort based on Unsigned32"""
+    defaultValue = 8888
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1025, 65535),
+    )
+
+
+_SnSflowSourcePort_Type.__name__ = "Unsigned32"
+_SnSflowSourcePort_Object = MibScalar
+snSflowSourcePort = _SnSflowSourcePort_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 1, 3),
+    _SnSflowSourcePort_Type()
+)
+snSflowSourcePort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSflowSourcePort.setStatus("current")
+_SnSflowAgentAddrType_Type = InetAddressType
+_SnSflowAgentAddrType_Object = MibScalar
+snSflowAgentAddrType = _SnSflowAgentAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 1, 4),
+    _SnSflowAgentAddrType_Type()
+)
+snSflowAgentAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSflowAgentAddrType.setStatus("current")
+_SnSflowAgentAddr_Type = InetAddress
+_SnSflowAgentAddr_Object = MibScalar
+snSflowAgentAddr = _SnSflowAgentAddr_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 1, 5),
+    _SnSflowAgentAddr_Type()
+)
+snSflowAgentAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snSflowAgentAddr.setStatus("current")
 _SnSflowCollectorTable_Object = MibTable
 snSflowCollectorTable = _SnSflowCollectorTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 19, 2)
@@ -9703,7 +10365,7 @@ snFdpCacheDefaultTrafficeVlanIdForDualMode = _SnFdpCacheDefaultTrafficeVlanIdFor
 )
 snFdpCacheDefaultTrafficeVlanIdForDualMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snFdpCacheDefaultTrafficeVlanIdForDualMode.setStatus("current")
+    snFdpCacheDefaultTrafficeVlanIdForDualMode.setStatus("deprecated")
 _SnFdpGlobal_ObjectIdentity = ObjectIdentity
 snFdpGlobal = _SnFdpGlobal_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 20, 1, 3)
@@ -10166,12 +10828,14 @@ class _SnPortMacSecurityIntfContentViolationType_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(0,
-              1)
+              1,
+              2)
         )
     )
     namedValues = NamedValues(
         *(("shutdown", 0),
-          ("restrict", 1))
+          ("restrict", 1),
+          ("notSupported", 2))
     )
 
 
@@ -10550,6 +11214,26 @@ _FdryIpSrcGuardMIB_ObjectIdentity = ObjectIdentity
 fdryIpSrcGuardMIB = _FdryIpSrcGuardMIB_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 37)
 )
+_BrcdRouteMap_ObjectIdentity = ObjectIdentity
+brcdRouteMap = _BrcdRouteMap_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 39)
+)
+_BrcdSPXMIB_ObjectIdentity = ObjectIdentity
+brcdSPXMIB = _BrcdSPXMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 40)
+)
+_BrcdStackISSUMIB_ObjectIdentity = ObjectIdentity
+brcdStackISSUMIB = _BrcdStackISSUMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 41)
+)
+_RuckusWiredClientMIB_ObjectIdentity = ObjectIdentity
+ruckusWiredClientMIB = _RuckusWiredClientMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 43)
+)
+_RuckusDhcpClientMIB_ObjectIdentity = ObjectIdentity
+ruckusDhcpClientMIB = _RuckusDhcpClientMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 46)
+)
 
 # Managed Objects groups
 
@@ -10579,8 +11263,8 @@ mibBuilder.exportSymbols(
        "VlanTagMode": VlanTagMode,
        "FdryVlanIdOrNoneTC": FdryVlanIdOrNoneTC,
        "BrcdVlanIdTC": BrcdVlanIdTC,
+       "BrcdVlanIdOrNoneTC": BrcdVlanIdOrNoneTC,
        "PortQosTC": PortQosTC,
-       "PortPriorityTC": PortPriorityTC,
        "snSwitch": snSwitch,
        "snSwInfo": snSwInfo,
        "snSwGroupOperMode": snSwGroupOperMode,
@@ -10626,6 +11310,10 @@ mibBuilder.exportSymbols(
        "snSwFastStpMode": snSwFastStpMode,
        "snSwViolatorIfIndex": snSwViolatorIfIndex,
        "snSwSingleStpVLanId": snSwSingleStpVLanId,
+       "snSwJumboMode": snSwJumboMode,
+       "snSwACLPerPortPerVlanMode": snSwACLPerPortPerVlanMode,
+       "snSwIpMcastVersion": snSwIpMcastVersion,
+       "snSwMgmtVlan": snSwMgmtVlan,
        "snVLanInfo": snVLanInfo,
        "snVLanByPortTable": snVLanByPortTable,
        "snVLanByPortEntry": snVLanByPortEntry,
@@ -10752,23 +11440,8 @@ mibBuilder.exportSymbols(
        "snVLanByPortCfgRowStatus": snVLanByPortCfgRowStatus,
        "snVLanByPortCfgStpVersion": snVLanByPortCfgStpVersion,
        "snVLanByPortCfgInOctets": snVLanByPortCfgInOctets,
-       "brcdVlanExtStatsTable": brcdVlanExtStatsTable,
-       "brcdVlanExtStatsEntry": brcdVlanExtStatsEntry,
-       "brcdVlanExtStatsVlanId": brcdVlanExtStatsVlanId,
-       "brcdVlanExtStatsIfIndex": brcdVlanExtStatsIfIndex,
-       "brcdVlanExtStatsPriorityId": brcdVlanExtStatsPriorityId,
-       "brcdVlanExtStatsInSwitchedPkts": brcdVlanExtStatsInSwitchedPkts,
-       "brcdVlanExtStatsInRoutedPkts": brcdVlanExtStatsInRoutedPkts,
-       "brcdVlanExtStatsInPkts": brcdVlanExtStatsInPkts,
-       "brcdVlanExtStatsOutSwitchedPkts": brcdVlanExtStatsOutSwitchedPkts,
-       "brcdVlanExtStatsOutRoutedPkts": brcdVlanExtStatsOutRoutedPkts,
-       "brcdVlanExtStatsOutPkts": brcdVlanExtStatsOutPkts,
-       "brcdVlanExtStatsInSwitchedOctets": brcdVlanExtStatsInSwitchedOctets,
-       "brcdVlanExtStatsInRoutedOctets": brcdVlanExtStatsInRoutedOctets,
-       "brcdVlanExtStatsInOctets": brcdVlanExtStatsInOctets,
-       "brcdVlanExtStatsOutSwitchedOctets": brcdVlanExtStatsOutSwitchedOctets,
-       "brcdVlanExtStatsOutRoutedOctets": brcdVlanExtStatsOutRoutedOctets,
-       "brcdVlanExtStatsOutOctets": brcdVlanExtStatsOutOctets,
+       "snVLanByPortCfgMcastMode": snVLanByPortCfgMcastMode,
+       "snVLanByPortCfgMcastVersion": snVLanByPortCfgMcastVersion,
        "snSwPortInfo": snSwPortInfo,
        "snSwPortInfoTable": snSwPortInfoTable,
        "snSwPortInfoEntry": snSwPortInfoEntry,
@@ -10921,6 +11594,16 @@ mibBuilder.exportSymbols(
        "snSwIfStatsOutJumboFrames": snSwIfStatsOutJumboFrames,
        "snSwIfInfoMirrorMode": snSwIfInfoMirrorMode,
        "snSwIfMacLearningDisable": snSwIfMacLearningDisable,
+       "snSwIfInfoNativeMacAddress": snSwIfInfoNativeMacAddress,
+       "snSwIfQosMonitorDropCounterMode": snSwIfQosMonitorDropCounterMode,
+       "snSwIfLRMAdapterPresent": snSwIfLRMAdapterPresent,
+       "snSwIfStpBPDUGuardMode": snSwIfStpBPDUGuardMode,
+       "snSwIfStpRootGuardMode": snSwIfStpRootGuardMode,
+       "snSwIfRstpAdminEdgePortMode": snSwIfRstpAdminEdgePortMode,
+       "snSwIfInfoClockMode": snSwIfInfoClockMode,
+       "snSwIfProtectedMode": snSwIfProtectedMode,
+       "snSwIfTrustDscpMode": snSwIfTrustDscpMode,
+       "snSwIfVoiceVlanId": snSwIfVoiceVlanId,
        "snIfOpticalMonitoringInfoTable": snIfOpticalMonitoringInfoTable,
        "snIfOpticalMonitoringInfoEntry": snIfOpticalMonitoringInfoEntry,
        "snIfOpticalMonitoringTemperature": snIfOpticalMonitoringTemperature,
@@ -10949,6 +11632,22 @@ mibBuilder.exportSymbols(
        "snIfOpticalLaneMonitoringTxPower": snIfOpticalLaneMonitoringTxPower,
        "snIfOpticalLaneMonitoringRxPower": snIfOpticalLaneMonitoringRxPower,
        "snIfOpticalLaneMonitoringTxBiasCurrent": snIfOpticalLaneMonitoringTxBiasCurrent,
+       "snIfOpticalLaneMonitoringVoltage": snIfOpticalLaneMonitoringVoltage,
+       "brcdIfEgressCounterInfoTable": brcdIfEgressCounterInfoTable,
+       "brcdIfEgressCounterInfoEntry": brcdIfEgressCounterInfoEntry,
+       "brcdIfEgressCounterIfIndex": brcdIfEgressCounterIfIndex,
+       "brcdIfEgressCounterQueueId": brcdIfEgressCounterQueueId,
+       "brcdIfEgressCounterType": brcdIfEgressCounterType,
+       "brcdIfEgressCounterPkts": brcdIfEgressCounterPkts,
+       "brcdIfEgressCounterDropPkts": brcdIfEgressCounterDropPkts,
+       "snSwIfInfoLimitTable": snSwIfInfoLimitTable,
+       "snSwIfInfoLimitEntry": snSwIfInfoLimitEntry,
+       "snSwIfInfoLimitType": snSwIfInfoLimitType,
+       "snSwIfInfoLimitPkts": snSwIfInfoLimitPkts,
+       "snSwIfInfoLimitBits": snSwIfInfoLimitBits,
+       "snSwIfInfoLimitThreshold": snSwIfInfoLimitThreshold,
+       "snSwIfInfoLimitShutdownTime": snSwIfInfoLimitShutdownTime,
+       "snSwIfInfoLimitLog": snSwIfInfoLimitLog,
        "snFdbInfo": snFdbInfo,
        "snFdbTable": snFdbTable,
        "snFdbEntry": snFdbEntry,
@@ -11128,10 +11827,17 @@ mibBuilder.exportSymbols(
        "snDosAttackPortSYNBlockCount": snDosAttackPortSYNBlockCount,
        "snAAA": snAAA,
        "snAuthentication": snAuthentication,
+       "snAuthenticationDot1x": snAuthenticationDot1x,
+       "snAuthenticationEnable": snAuthenticationEnable,
+       "snAuthenticationLogin": snAuthenticationLogin,
+       "snAuthenticationSnmpserver": snAuthenticationSnmpserver,
+       "snAuthenticationWebserver": snAuthenticationWebserver,
        "snAuthorization": snAuthorization,
        "snAuthorizationCommandMethods": snAuthorizationCommandMethods,
        "snAuthorizationCommandLevel": snAuthorizationCommandLevel,
        "snAuthorizationExec": snAuthorizationExec,
+       "snAuthorizationCoaEnable": snAuthorizationCoaEnable,
+       "snAuthorizationCoaIgnore": snAuthorizationCoaIgnore,
        "snAccounting": snAccounting,
        "snAccountingCommandMethods": snAccountingCommandMethods,
        "snAccountingCommandLevel": snAccountingCommandLevel,
@@ -11170,6 +11876,11 @@ mibBuilder.exportSymbols(
        "snNetFlowIfFlowSwitching": snNetFlowIfFlowSwitching,
        "snSFlow": snSFlow,
        "snSFlowGlb": snSFlowGlb,
+       "snSflowStatus": snSflowStatus,
+       "snSflowSampleRate": snSflowSampleRate,
+       "snSflowSourcePort": snSflowSourcePort,
+       "snSflowAgentAddrType": snSflowAgentAddrType,
+       "snSflowAgentAddr": snSflowAgentAddr,
        "snSflowCollectorTable": snSflowCollectorTable,
        "snSflowCollectorEntry": snSflowCollectorEntry,
        "snSflowCollectorIndex": snSflowCollectorIndex,
@@ -11280,5 +11991,10 @@ mibBuilder.exportSymbols(
        "fdryDns2MIB": fdryDns2MIB,
        "fdryDaiMIB": fdryDaiMIB,
        "fdryDhcpSnoopMIB": fdryDhcpSnoopMIB,
-       "fdryIpSrcGuardMIB": fdryIpSrcGuardMIB}
+       "fdryIpSrcGuardMIB": fdryIpSrcGuardMIB,
+       "brcdRouteMap": brcdRouteMap,
+       "brcdSPXMIB": brcdSPXMIB,
+       "brcdStackISSUMIB": brcdStackISSUMIB,
+       "ruckusWiredClientMIB": ruckusWiredClientMIB,
+       "ruckusDhcpClientMIB": ruckusDhcpClientMIB}
 )

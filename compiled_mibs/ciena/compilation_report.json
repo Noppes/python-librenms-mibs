@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-02T11:25:21.912729",
+  "timestamp": "2026-05-29T09:21:40.860123",
   "stats": {
     "total": 85,
-    "compiled": 66,
-    "failed": 7,
-    "skipped": 12,
+    "compiled": 70,
+    "failed": 2,
+    "skipped": 13,
     "errors": [
       {
         "mib": "CIENA-CES-IP-INTERFACE-MIB",
@@ -13,28 +13,8 @@
       {
         "mib": "CIENA-CES-TIME-SYNC-MIB",
         "error": "failed"
-      },
-      {
-        "mib": "WWP-LEOS-PORT-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "WWP-LEOS-PORT-XCVR-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "WWP-LEOS-SYSTEM-CONFIG-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "WWP-PRODUCTS-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "WWP-SMI",
-        "error": "missing"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

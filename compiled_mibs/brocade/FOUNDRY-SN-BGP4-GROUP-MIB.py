@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-BGP4-GROUP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:06 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,8 +108,8 @@ snBgp4 = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snBgp4.setRevisions(
-        ("2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -189,7 +186,7 @@ snBgp4GenDefaultLocalPreference = _SnBgp4GenDefaultLocalPreference_Object(
 )
 snBgp4GenDefaultLocalPreference.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    snBgp4GenDefaultLocalPreference.setStatus("current")
+    snBgp4GenDefaultLocalPreference.setStatus("deprecated")
 
 
 class _SnBgp4GenDefaultInfoOriginate_Type(Integer32):
@@ -386,7 +383,7 @@ snBgp4GenDefaultMetric = _SnBgp4GenDefaultMetric_Object(
 )
 snBgp4GenDefaultMetric.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    snBgp4GenDefaultMetric.setStatus("current")
+    snBgp4GenDefaultMetric.setStatus("deprecated")
 _SnBgp4GenMaxNeighbors_Type = Integer32
 _SnBgp4GenMaxNeighbors_Object = MibScalar
 snBgp4GenMaxNeighbors = _SnBgp4GenMaxNeighbors_Object(

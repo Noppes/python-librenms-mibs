@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-LOG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:16 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -147,18 +144,15 @@ if 'mibBuilder' not in globals():
     "tmnxSRNotifyPrefix",
     "tmnxSRObjs")
 
-(THsmdaCounterIdOrZero,
- THsmdaCounterIdOrZeroOrAll,
- TItemDescription,
+(TItemDescription,
  TLNamedItemOrEmpty,
  TNamedItem,
  TNamedItemOrEmpty,
  TQueueId,
  TQueueIdOrAll,
+ TXLNamedItemOrEmpty,
  TmnxAccPlcyAACounters,
  TmnxAccPlcyAASubAttributes,
- TmnxAccPlcyOECounters,
- TmnxAccPlcyOICounters,
  TmnxAccPlcyPolicerECounters,
  TmnxAccPlcyPolicerICounters,
  TmnxAccPlcyQECounters,
@@ -170,18 +164,15 @@ if 'mibBuilder' not in globals():
  TmnxSyslogSeverity,
  TmnxUdpPort) = mibBuilder.importSymbols(
     "TIMETRA-TC-MIB",
-    "THsmdaCounterIdOrZero",
-    "THsmdaCounterIdOrZeroOrAll",
     "TItemDescription",
     "TLNamedItemOrEmpty",
     "TNamedItem",
     "TNamedItemOrEmpty",
     "TQueueId",
     "TQueueIdOrAll",
+    "TXLNamedItemOrEmpty",
     "TmnxAccPlcyAACounters",
     "TmnxAccPlcyAASubAttributes",
-    "TmnxAccPlcyOECounters",
-    "TmnxAccPlcyOICounters",
     "TmnxAccPlcyPolicerECounters",
     "TmnxAccPlcyPolicerICounters",
     "TmnxAccPlcyQECounters",
@@ -251,6 +242,34 @@ class TmnxPerceivedSeverity(TextualConvention, Integer32):
           ("major", 4),
           ("minor", 5),
           ("warning", 6))
+    )
+
+
+
+class TmnxSnmpSetErrsSeverity(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("cleared", 1),
+          ("indeterminate", 2),
+          ("critical", 3),
+          ("major", 4),
+          ("minor", 5),
+          ("warning", 6),
+          ("info", 7))
     )
 
 
@@ -379,7 +398,6 @@ class TmnxLogExRbkOperationType(TextualConvention, Integer32):
             *(0,
               1,
               2,
-              3,
               4)
         )
     )
@@ -387,7 +405,6 @@ class TmnxLogExRbkOperationType(TextualConvention, Integer32):
         *(("unknown", 0),
           ("exec", 1),
           ("rollback", 2),
-          ("vsd", 3),
           ("load", 4))
     )
 
@@ -614,6 +631,205 @@ if mibBuilder.loadTexts:
     tmnxEhsHEntryMinDelayInterval.setStatus("current")
 
 
+class _LogCustomEventSubject_Type(DisplayString):
+    """Custom type logCustomEventSubject based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 33),
+    )
+
+
+_LogCustomEventSubject_Type.__name__ = "DisplayString"
+_LogCustomEventSubject_Object = MibScalar
+logCustomEventSubject = _LogCustomEventSubject_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 19),
+    _LogCustomEventSubject_Type()
+)
+logCustomEventSubject.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventSubject.setStatus("current")
+
+
+class _LogCustomEventMessageString_Type(OctetString):
+    """Custom type logCustomEventMessageString based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventMessageString_Type.__name__ = "OctetString"
+_LogCustomEventMessageString_Object = MibScalar
+logCustomEventMessageString = _LogCustomEventMessageString_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 20),
+    _LogCustomEventMessageString_Type()
+)
+logCustomEventMessageString.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventMessageString.setStatus("current")
+
+
+class _LogCustomEventParameter1_Type(OctetString):
+    """Custom type logCustomEventParameter1 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter1_Type.__name__ = "OctetString"
+_LogCustomEventParameter1_Object = MibScalar
+logCustomEventParameter1 = _LogCustomEventParameter1_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 21),
+    _LogCustomEventParameter1_Type()
+)
+logCustomEventParameter1.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter1.setStatus("current")
+
+
+class _LogCustomEventParameter2_Type(OctetString):
+    """Custom type logCustomEventParameter2 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter2_Type.__name__ = "OctetString"
+_LogCustomEventParameter2_Object = MibScalar
+logCustomEventParameter2 = _LogCustomEventParameter2_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 22),
+    _LogCustomEventParameter2_Type()
+)
+logCustomEventParameter2.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter2.setStatus("current")
+
+
+class _LogCustomEventParameter3_Type(OctetString):
+    """Custom type logCustomEventParameter3 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter3_Type.__name__ = "OctetString"
+_LogCustomEventParameter3_Object = MibScalar
+logCustomEventParameter3 = _LogCustomEventParameter3_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 23),
+    _LogCustomEventParameter3_Type()
+)
+logCustomEventParameter3.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter3.setStatus("current")
+
+
+class _LogCustomEventParameter4_Type(OctetString):
+    """Custom type logCustomEventParameter4 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter4_Type.__name__ = "OctetString"
+_LogCustomEventParameter4_Object = MibScalar
+logCustomEventParameter4 = _LogCustomEventParameter4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 24),
+    _LogCustomEventParameter4_Type()
+)
+logCustomEventParameter4.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter4.setStatus("current")
+
+
+class _LogCustomEventParameter5_Type(OctetString):
+    """Custom type logCustomEventParameter5 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter5_Type.__name__ = "OctetString"
+_LogCustomEventParameter5_Object = MibScalar
+logCustomEventParameter5 = _LogCustomEventParameter5_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 25),
+    _LogCustomEventParameter5_Type()
+)
+logCustomEventParameter5.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter5.setStatus("current")
+
+
+class _LogCustomEventParameter6_Type(OctetString):
+    """Custom type logCustomEventParameter6 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter6_Type.__name__ = "OctetString"
+_LogCustomEventParameter6_Object = MibScalar
+logCustomEventParameter6 = _LogCustomEventParameter6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 26),
+    _LogCustomEventParameter6_Type()
+)
+logCustomEventParameter6.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter6.setStatus("current")
+
+
+class _LogCustomEventParameter7_Type(OctetString):
+    """Custom type logCustomEventParameter7 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter7_Type.__name__ = "OctetString"
+_LogCustomEventParameter7_Object = MibScalar
+logCustomEventParameter7 = _LogCustomEventParameter7_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 27),
+    _LogCustomEventParameter7_Type()
+)
+logCustomEventParameter7.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter7.setStatus("current")
+
+
+class _LogCustomEventParameter8_Type(OctetString):
+    """Custom type logCustomEventParameter8 based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 2001),
+    )
+
+
+_LogCustomEventParameter8_Type.__name__ = "OctetString"
+_LogCustomEventParameter8_Object = MibScalar
+logCustomEventParameter8 = _LogCustomEventParameter8_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 28),
+    _LogCustomEventParameter8_Type()
+)
+logCustomEventParameter8.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    logCustomEventParameter8.setStatus("current")
+_TmnxNetconfStreamDropCount_Type = Unsigned32
+_TmnxNetconfStreamDropCount_Object = MibScalar
+tmnxNetconfStreamDropCount = _TmnxNetconfStreamDropCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 1, 29),
+    _TmnxNetconfStreamDropCount_Type()
+)
+tmnxNetconfStreamDropCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxNetconfStreamDropCount.setStatus("current")
+
+
 class _TmnxLogMaxLogs_Type(Unsigned32):
     """Custom type tmnxLogMaxLogs based on Unsigned32"""
     defaultValue = 60
@@ -803,7 +1019,18 @@ tmnxLogFileIdPathName = _TmnxLogFileIdPathName_Object(
 tmnxLogFileIdPathName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxLogFileIdPathName.setStatus("current")
-_TmnxLogFileIdCreateTime_Type = DateAndTime
+
+
+class _TmnxLogFileIdCreateTime_Type(DateAndTime):
+    """Custom type tmnxLogFileIdCreateTime based on DateAndTime"""
+    subtypeSpec = DateAndTime.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(11, 11),
+    )
+    fixed_length = 11
+
+
+_TmnxLogFileIdCreateTime_Type.__name__ = "DateAndTime"
 _TmnxLogFileIdCreateTime_Object = MibTableColumn
 tmnxLogFileIdCreateTime = _TmnxLogFileIdCreateTime_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 3, 1, 12),
@@ -1068,7 +1295,8 @@ class _TmnxLogApRecord_Type(Integer32):
               74,
               75,
               76,
-              77)
+              77,
+              78)
         )
     )
     namedValues = NamedValues(
@@ -1148,7 +1376,8 @@ class _TmnxLogApRecord_Type(Integer32):
           ("combinedAccessEgress", 74),
           ("combinedNetworkEgress", 75),
           ("completeSvcActivTestHead", 76),
-          ("combinedMplsSrteEgress", 77))
+          ("combinedMplsSrteEgress", 77),
+          ("combinedSrPolicyEgress", 78))
     )
 
 
@@ -1195,7 +1424,8 @@ class _TmnxLogApPortType_Type(Integer32):
               16,
               17,
               18,
-              19)
+              19,
+              20)
         )
     )
     namedValues = NamedValues(
@@ -1217,7 +1447,8 @@ class _TmnxLogApPortType_Type(Integer32):
           ("networkIntf", 16),
           ("accessPort", 17),
           ("svcActvTest", 18),
-          ("mplsSrteEgr", 19))
+          ("mplsSrteEgr", 19),
+          ("srPolEgr", 20))
     )
 
 
@@ -1694,6 +1925,22 @@ tmnxLogIdName = _TmnxLogIdName_Object(
 tmnxLogIdName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxLogIdName.setStatus("current")
+
+
+class _TmnxLogLiUsingVPRNvRtrID_Type(Unsigned32):
+    """Custom type tmnxLogLiUsingVPRNvRtrID based on Unsigned32"""
+    defaultValue = 0
+
+
+_TmnxLogLiUsingVPRNvRtrID_Type.__name__ = "Unsigned32"
+_TmnxLogLiUsingVPRNvRtrID_Object = MibTableColumn
+tmnxLogLiUsingVPRNvRtrID = _TmnxLogLiUsingVPRNvRtrID_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 5, 1, 21),
+    _TmnxLogLiUsingVPRNvRtrID_Type()
+)
+tmnxLogLiUsingVPRNvRtrID.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxLogLiUsingVPRNvRtrID.setStatus("current")
 _TmnxLogFilterTable_Object = MibTable
 tmnxLogFilterTable = _TmnxLogFilterTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 6)
@@ -2332,6 +2579,80 @@ tmnxSyslogTlsClntProfileName = _TmnxSyslogTlsClntProfileName_Object(
 tmnxSyslogTlsClntProfileName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxSyslogTlsClntProfileName.setStatus("current")
+
+
+class _TmnxSyslogHostname_Type(TXLNamedItemOrEmpty):
+    """Custom type tmnxSyslogHostname based on TXLNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_TmnxSyslogHostname_Type.__name__ = "TXLNamedItemOrEmpty"
+_TmnxSyslogHostname_Object = MibTableColumn
+tmnxSyslogHostname = _TmnxSyslogHostname_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 8, 1, 14),
+    _TmnxSyslogHostname_Type()
+)
+tmnxSyslogHostname.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSyslogHostname.setStatus("current")
+
+
+class _TmnxSyslogHostnameUseSystem_Type(TruthValue):
+    """Custom type tmnxSyslogHostnameUseSystem based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxSyslogHostnameUseSystem_Type.__name__ = "TruthValue"
+_TmnxSyslogHostnameUseSystem_Object = MibTableColumn
+tmnxSyslogHostnameUseSystem = _TmnxSyslogHostnameUseSystem_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 8, 1, 15),
+    _TmnxSyslogHostnameUseSystem_Type()
+)
+tmnxSyslogHostnameUseSystem.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSyslogHostnameUseSystem.setStatus("current")
+
+
+class _TmnxSyslogHostnameUseVprn_Type(TruthValue):
+    """Custom type tmnxSyslogHostnameUseVprn based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxSyslogHostnameUseVprn_Type.__name__ = "TruthValue"
+_TmnxSyslogHostnameUseVprn_Object = MibTableColumn
+tmnxSyslogHostnameUseVprn = _TmnxSyslogHostnameUseVprn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 8, 1, 16),
+    _TmnxSyslogHostnameUseVprn_Type()
+)
+tmnxSyslogHostnameUseVprn.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSyslogHostnameUseVprn.setStatus("current")
+
+
+class _TmnxSyslogTimestampFormat_Type(Integer32):
+    """Custom type tmnxSyslogTimestampFormat based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("standard", 0),
+          ("millisecond", 1))
+    )
+
+
+_TmnxSyslogTimestampFormat_Type.__name__ = "Integer32"
+_TmnxSyslogTimestampFormat_Object = MibTableColumn
+tmnxSyslogTimestampFormat = _TmnxSyslogTimestampFormat_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 8, 1, 17),
+    _TmnxSyslogTimestampFormat_Type()
+)
+tmnxSyslogTimestampFormat.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSyslogTimestampFormat.setStatus("current")
 _TmnxEventAppTable_Object = MibTable
 tmnxEventAppTable = _TmnxEventAppTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 9)
@@ -2589,6 +2910,38 @@ tmnxEventRepeat = _TmnxEventRepeat_Object(
 tmnxEventRepeat.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxEventRepeat.setStatus("current")
+
+
+class _TmnxSourceStream_Type(Integer32):
+    """Custom type tmnxSourceStream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("main", 0),
+          ("security", 1),
+          ("change", 2),
+          ("debug", 3),
+          ("li", 4))
+    )
+
+
+_TmnxSourceStream_Type.__name__ = "Integer32"
+_TmnxSourceStream_Object = MibTableColumn
+tmnxSourceStream = _TmnxSourceStream_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 10, 1, 16),
+    _TmnxSourceStream_Type()
+)
+tmnxSourceStream.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSourceStream.setStatus("current")
 _TmnxSnmpTrapGroupTable_Object = MibTable
 tmnxSnmpTrapGroupTable = _TmnxSnmpTrapGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 11)
@@ -2870,7 +3223,7 @@ tmnxSseVersion = _TmnxSseVersion_Object(
 tmnxSseVersion.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSseVersion.setStatus("current")
-_TmnxSseSeverityLevel_Type = TmnxPerceivedSeverity
+_TmnxSseSeverityLevel_Type = TmnxSnmpSetErrsSeverity
 _TmnxSseSeverityLevel_Object = MibTableColumn
 tmnxSseSeverityLevel = _TmnxSseSeverityLevel_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 16, 1, 6),
@@ -2912,7 +3265,7 @@ class _TmnxSseErrorName_Type(DisplayString):
     """Custom type tmnxSseErrorName based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 64),
+        ValueSizeConstraint(0, 64),
     )
 
 
@@ -2931,7 +3284,7 @@ class _TmnxSseErrorMsg_Type(DisplayString):
     """Custom type tmnxSseErrorMsg based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 255),
+        ValueSizeConstraint(0, 255),
     )
 
 
@@ -3334,22 +3687,6 @@ if mibBuilder.loadTexts:
     tmnxLogApCrSignChangeQueue.setStatus("current")
 
 
-class _TmnxLogApCrSignChangeOCntr_Type(THsmdaCounterIdOrZeroOrAll):
-    """Custom type tmnxLogApCrSignChangeOCntr based on THsmdaCounterIdOrZeroOrAll"""
-    defaultValue = 0
-
-
-_TmnxLogApCrSignChangeOCntr_Type.__name__ = "THsmdaCounterIdOrZeroOrAll"
-_TmnxLogApCrSignChangeOCntr_Object = MibTableColumn
-tmnxLogApCrSignChangeOCntr = _TmnxLogApCrSignChangeOCntr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 20, 1, 4),
-    _TmnxLogApCrSignChangeOCntr_Type()
-)
-tmnxLogApCrSignChangeOCntr.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxLogApCrSignChangeOCntr.setStatus("obsolete")
-
-
 class _TmnxLogApCrSignChangeQICounters_Type(TmnxAccPlcyQICounters):
     """Custom type tmnxLogApCrSignChangeQICounters based on TmnxAccPlcyQICounters"""
     defaultBinValue = "0"
@@ -3380,38 +3717,6 @@ tmnxLogApCrSignChangeQECounters = _TmnxLogApCrSignChangeQECounters_Object(
 tmnxLogApCrSignChangeQECounters.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxLogApCrSignChangeQECounters.setStatus("current")
-
-
-class _TmnxLogApCrSignChangeOICounters_Type(TmnxAccPlcyOICounters):
-    """Custom type tmnxLogApCrSignChangeOICounters based on TmnxAccPlcyOICounters"""
-    defaultBinValue = "0"
-
-
-_TmnxLogApCrSignChangeOICounters_Type.__name__ = "TmnxAccPlcyOICounters"
-_TmnxLogApCrSignChangeOICounters_Object = MibTableColumn
-tmnxLogApCrSignChangeOICounters = _TmnxLogApCrSignChangeOICounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 20, 1, 7),
-    _TmnxLogApCrSignChangeOICounters_Type()
-)
-tmnxLogApCrSignChangeOICounters.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxLogApCrSignChangeOICounters.setStatus("obsolete")
-
-
-class _TmnxLogApCrSignChangeOECounters_Type(TmnxAccPlcyOECounters):
-    """Custom type tmnxLogApCrSignChangeOECounters based on TmnxAccPlcyOECounters"""
-    defaultBinValue = "0"
-
-
-_TmnxLogApCrSignChangeOECounters_Type.__name__ = "TmnxAccPlcyOECounters"
-_TmnxLogApCrSignChangeOECounters_Object = MibTableColumn
-tmnxLogApCrSignChangeOECounters = _TmnxLogApCrSignChangeOECounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 20, 1, 8),
-    _TmnxLogApCrSignChangeOECounters_Type()
-)
-tmnxLogApCrSignChangeOECounters.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxLogApCrSignChangeOECounters.setStatus("obsolete")
 
 
 class _TmnxLogApCrSignChangeAACounters_Type(TmnxAccPlcyAACounters):
@@ -3599,91 +3904,6 @@ tmnxLogApCrQueueECounters = _TmnxLogApCrQueueECounters_Object(
 tmnxLogApCrQueueECounters.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxLogApCrQueueECounters.setStatus("current")
-_TmnxLogApCrOverrideCntrTable_Object = MibTable
-tmnxLogApCrOverrideCntrTable = _TmnxLogApCrOverrideCntrTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22)
-)
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrTable.setStatus("obsolete")
-_TmnxLogApCrOverrideCntrEntry_Object = MibTableRow
-tmnxLogApCrOverrideCntrEntry = _TmnxLogApCrOverrideCntrEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22, 1)
-)
-tmnxLogApCrOverrideCntrEntry.setIndexNames(
-    (0, "TIMETRA-LOG-MIB", "tmnxLogApPolicyId"),
-    (0, "TIMETRA-LOG-MIB", "tmnxLogApCrOverrideCntrId"),
-)
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrEntry.setStatus("obsolete")
-
-
-class _TmnxLogApCrOverrideCntrId_Type(THsmdaCounterIdOrZero):
-    """Custom type tmnxLogApCrOverrideCntrId based on THsmdaCounterIdOrZero"""
-    subtypeSpec = THsmdaCounterIdOrZero.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 8),
-    )
-
-
-_TmnxLogApCrOverrideCntrId_Type.__name__ = "THsmdaCounterIdOrZero"
-_TmnxLogApCrOverrideCntrId_Object = MibTableColumn
-tmnxLogApCrOverrideCntrId = _TmnxLogApCrOverrideCntrId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22, 1, 1),
-    _TmnxLogApCrOverrideCntrId_Type()
-)
-tmnxLogApCrOverrideCntrId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrId.setStatus("current")
-_TmnxLogApCrOverrideCntrRowStatus_Type = RowStatus
-_TmnxLogApCrOverrideCntrRowStatus_Object = MibTableColumn
-tmnxLogApCrOverrideCntrRowStatus = _TmnxLogApCrOverrideCntrRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22, 1, 2),
-    _TmnxLogApCrOverrideCntrRowStatus_Type()
-)
-tmnxLogApCrOverrideCntrRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrRowStatus.setStatus("obsolete")
-_TmnxLogApCrOverrideCntrLastChngd_Type = TimeStamp
-_TmnxLogApCrOverrideCntrLastChngd_Object = MibTableColumn
-tmnxLogApCrOverrideCntrLastChngd = _TmnxLogApCrOverrideCntrLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22, 1, 3),
-    _TmnxLogApCrOverrideCntrLastChngd_Type()
-)
-tmnxLogApCrOverrideCntrLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrLastChngd.setStatus("obsolete")
-
-
-class _TmnxLogApCrOverrideCntrICounters_Type(TmnxAccPlcyOICounters):
-    """Custom type tmnxLogApCrOverrideCntrICounters based on TmnxAccPlcyOICounters"""
-    defaultBinValue = "0"
-
-
-_TmnxLogApCrOverrideCntrICounters_Type.__name__ = "TmnxAccPlcyOICounters"
-_TmnxLogApCrOverrideCntrICounters_Object = MibTableColumn
-tmnxLogApCrOverrideCntrICounters = _TmnxLogApCrOverrideCntrICounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22, 1, 4),
-    _TmnxLogApCrOverrideCntrICounters_Type()
-)
-tmnxLogApCrOverrideCntrICounters.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrICounters.setStatus("obsolete")
-
-
-class _TmnxLogApCrOverrideCntrECounters_Type(TmnxAccPlcyOECounters):
-    """Custom type tmnxLogApCrOverrideCntrECounters based on TmnxAccPlcyOECounters"""
-    defaultBinValue = "0"
-
-
-_TmnxLogApCrOverrideCntrECounters_Type.__name__ = "TmnxAccPlcyOECounters"
-_TmnxLogApCrOverrideCntrECounters_Object = MibTableColumn
-tmnxLogApCrOverrideCntrECounters = _TmnxLogApCrOverrideCntrECounters_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 22, 1, 5),
-    _TmnxLogApCrOverrideCntrECounters_Type()
-)
-tmnxLogApCrOverrideCntrECounters.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxLogApCrOverrideCntrECounters.setStatus("obsolete")
 
 
 class _TmnxEventPrimaryRoutePref_Type(Integer32):
@@ -5018,6 +5238,94 @@ tmnxLogApCrPolicerECounters = _TmnxLogApCrPolicerECounters_Object(
 tmnxLogApCrPolicerECounters.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxLogApCrPolicerECounters.setStatus("current")
+
+
+class _TmnxLogFileEncryptKey_Type(DisplayString):
+    """Custom type tmnxLogFileEncryptKey based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_TmnxLogFileEncryptKey_Type.__name__ = "DisplayString"
+_TmnxLogFileEncryptKey_Object = MibScalar
+tmnxLogFileEncryptKey = _TmnxLogFileEncryptKey_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 32),
+    _TmnxLogFileEncryptKey_Type()
+)
+tmnxLogFileEncryptKey.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxLogFileEncryptKey.setStatus("current")
+
+
+class _TmnxLogFilesTotalSize_Type(Unsigned32):
+    """Custom type tmnxLogFilesTotalSize based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4194304),
+    )
+
+
+_TmnxLogFilesTotalSize_Type.__name__ = "Unsigned32"
+_TmnxLogFilesTotalSize_Object = MibScalar
+tmnxLogFilesTotalSize = _TmnxLogFilesTotalSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 33),
+    _TmnxLogFilesTotalSize_Type()
+)
+tmnxLogFilesTotalSize.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxLogFilesTotalSize.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxLogFilesTotalSize.setUnits("megabytes")
+
+
+class _TmnxLogApFilesTotalSize_Type(Unsigned32):
+    """Custom type tmnxLogApFilesTotalSize based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4194304),
+    )
+
+
+_TmnxLogApFilesTotalSize_Type.__name__ = "Unsigned32"
+_TmnxLogApFilesTotalSize_Object = MibScalar
+tmnxLogApFilesTotalSize = _TmnxLogApFilesTotalSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 34),
+    _TmnxLogApFilesTotalSize_Type()
+)
+tmnxLogApFilesTotalSize.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxLogApFilesTotalSize.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxLogApFilesTotalSize.setUnits("megabytes")
+
+
+class _TmnxLogEventTestCustomText_Type(OctetString):
+    """Custom type tmnxLogEventTestCustomText based on OctetString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 801),
+    )
+
+
+_TmnxLogEventTestCustomText_Type.__name__ = "OctetString"
+_TmnxLogEventTestCustomText_Object = MibScalar
+tmnxLogEventTestCustomText = _TmnxLogEventTestCustomText_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 12, 35),
+    _TmnxLogEventTestCustomText_Type()
+)
+tmnxLogEventTestCustomText.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxLogEventTestCustomText.setStatus("current")
 _TmnxLogNotifyPrefix_ObjectIdentity = ObjectIdentity
 tmnxLogNotifyPrefix = _TmnxLogNotifyPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12)
@@ -5785,21 +6093,6 @@ tmnxSyslogTlsClntProfilNameGroup.setObjects(
 if mibBuilder.loadTexts:
     tmnxSyslogTlsClntProfilNameGroup.setStatus("current")
 
-tmnxLogApObsoleteObjsV21v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 65)
-)
-tmnxLogApObsoleteObjsV21v0Group.setObjects(
-      *(("TIMETRA-LOG-MIB", "tmnxLogApCrSignChangeOCntr"),
-        ("TIMETRA-LOG-MIB", "tmnxLogApCrSignChangeOECounters"),
-        ("TIMETRA-LOG-MIB", "tmnxLogApCrSignChangeOICounters"),
-        ("TIMETRA-LOG-MIB", "tmnxLogApCrOverrideCntrRowStatus"),
-        ("TIMETRA-LOG-MIB", "tmnxLogApCrOverrideCntrLastChngd"),
-        ("TIMETRA-LOG-MIB", "tmnxLogApCrOverrideCntrICounters"),
-        ("TIMETRA-LOG-MIB", "tmnxLogApCrOverrideCntrECounters"))
-)
-if mibBuilder.loadTexts:
-    tmnxLogApObsoleteObjsV21v0Group.setStatus("current")
-
 tmnxLogFileNameGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 66)
 )
@@ -5817,6 +6110,99 @@ tmnxSnmpTrapDestV22v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSnmpTrapDestV22v0Group.setStatus("current")
+
+tmnxLogFileEncryptionGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 68)
+)
+tmnxLogFileEncryptionGroup.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxLogFileEncryptKey")
+)
+if mibBuilder.loadTexts:
+    tmnxLogFileEncryptionGroup.setStatus("current")
+
+tmnxLogFilesTotalSizeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 69)
+)
+tmnxLogFilesTotalSizeGroup.setObjects(
+      *(("TIMETRA-LOG-MIB", "tmnxLogFilesTotalSize"),
+        ("TIMETRA-LOG-MIB", "tmnxLogApFilesTotalSize"))
+)
+if mibBuilder.loadTexts:
+    tmnxLogFilesTotalSizeGroup.setStatus("current")
+
+tmnxSyslogHostnameGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 70)
+)
+tmnxSyslogHostnameGroup.setObjects(
+      *(("TIMETRA-LOG-MIB", "tmnxSyslogHostname"),
+        ("TIMETRA-LOG-MIB", "tmnxSyslogHostnameUseSystem"),
+        ("TIMETRA-LOG-MIB", "tmnxSyslogHostnameUseVprn"))
+)
+if mibBuilder.loadTexts:
+    tmnxSyslogHostnameGroup.setStatus("current")
+
+tmnxLogEventsSourceStreamGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 71)
+)
+tmnxLogEventsSourceStreamGroup.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxSourceStream")
+)
+if mibBuilder.loadTexts:
+    tmnxLogEventsSourceStreamGroup.setStatus("current")
+
+tmnxLogLiUsingVPRNvRtrIDGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 72)
+)
+tmnxLogLiUsingVPRNvRtrIDGroup.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxLogLiUsingVPRNvRtrID")
+)
+if mibBuilder.loadTexts:
+    tmnxLogLiUsingVPRNvRtrIDGroup.setStatus("current")
+
+tmnxLogEventTestCustomTextGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 73)
+)
+tmnxLogEventTestCustomTextGroup.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxLogEventTestCustomText")
+)
+if mibBuilder.loadTexts:
+    tmnxLogEventTestCustomTextGroup.setStatus("current")
+
+tmnxSyslogTimestampFormatGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 74)
+)
+tmnxSyslogTimestampFormatGroup.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxSyslogTimestampFormat")
+)
+if mibBuilder.loadTexts:
+    tmnxSyslogTimestampFormatGroup.setStatus("current")
+
+tmnxLogNotifyObjsV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 75)
+)
+tmnxLogNotifyObjsV24v0Group.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxLogNotifyObjsV24v0Group.setStatus("current")
+
+tmnxLogNotifyObjsV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 77)
+)
+tmnxLogNotifyObjsV25v0Group.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxNetconfStreamDropCount")
+)
+if mibBuilder.loadTexts:
+    tmnxLogNotifyObjsV25v0Group.setStatus("current")
 
 
 # Notification objects
@@ -5908,7 +6294,8 @@ tmnxTestEvent = NotificationType(
 )
 tmnxTestEvent.setObjects(
       *(("SNMPv2-MIB", "sysDescr"),
-        ("SNMPv2-MIB", "sysObjectID"))
+        ("SNMPv2-MIB", "sysObjectID"),
+        ("TIMETRA-LOG-MIB", "tmnxLogEventTestCustomText"))
 )
 if mibBuilder.loadTexts:
     tmnxTestEvent.setStatus(
@@ -5996,6 +6383,138 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxCustomEvent1 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 13)
+)
+tmnxCustomEvent1.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxCustomEvent1.setStatus(
+        "current"
+    )
+
+tmnxCustomEvent2 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 14)
+)
+tmnxCustomEvent2.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxCustomEvent2.setStatus(
+        "current"
+    )
+
+tmnxCustomEvent3 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 15)
+)
+tmnxCustomEvent3.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxCustomEvent3.setStatus(
+        "current"
+    )
+
+tmnxCustomEvent4 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 16)
+)
+tmnxCustomEvent4.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxCustomEvent4.setStatus(
+        "current"
+    )
+
+tmnxCustomEvent5 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 17)
+)
+tmnxCustomEvent5.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxCustomEvent5.setStatus(
+        "current"
+    )
+
+tmnxCustomEvent6 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 18)
+)
+tmnxCustomEvent6.setObjects(
+      *(("TIMETRA-LOG-MIB", "logCustomEventSubject"),
+        ("TIMETRA-LOG-MIB", "logCustomEventMessageString"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter1"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter2"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter3"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter4"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter5"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter6"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter7"),
+        ("TIMETRA-LOG-MIB", "logCustomEventParameter8"))
+)
+if mibBuilder.loadTexts:
+    tmnxCustomEvent6.setStatus(
+        "current"
+    )
+
+tmnxNetconfNotifyOverrun = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 12, 0, 19)
+)
+tmnxNetconfNotifyOverrun.setObjects(
+      *(("TIMETRA-LOG-MIB", "tmnxLogIdNetconfStream"),
+        ("TIMETRA-LOG-MIB", "tmnxNetconfStreamDropCount"))
+)
+if mibBuilder.loadTexts:
+    tmnxNetconfNotifyOverrun.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -6064,6 +6583,33 @@ tmnxLogNotificationV9v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxLogNotificationV9v0Group.setStatus(
+        "current"
+    )
+
+tmnxLogNotificationV24v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 76)
+)
+tmnxLogNotificationV24v0Group.setObjects(
+      *(("TIMETRA-LOG-MIB", "tmnxCustomEvent1"),
+        ("TIMETRA-LOG-MIB", "tmnxCustomEvent2"),
+        ("TIMETRA-LOG-MIB", "tmnxCustomEvent3"),
+        ("TIMETRA-LOG-MIB", "tmnxCustomEvent4"),
+        ("TIMETRA-LOG-MIB", "tmnxCustomEvent5"),
+        ("TIMETRA-LOG-MIB", "tmnxCustomEvent6"))
+)
+if mibBuilder.loadTexts:
+    tmnxLogNotificationV24v0Group.setStatus(
+        "current"
+    )
+
+tmnxLogNotificationV25v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 2, 78)
+)
+tmnxLogNotificationV25v0Group.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxNetconfNotifyOverrun")
+)
+if mibBuilder.loadTexts:
+    tmnxLogNotificationV25v0Group.setStatus(
         "current"
     )
 
@@ -6476,10 +7022,50 @@ tmnxLogV22v0Compliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 1, 20)
 )
 tmnxLogV22v0Compliance.setObjects(
-    ("TIMETRA-LOG-MIB", "tmnxSnmpTrapDestV22v0Group")
+      *(("TIMETRA-LOG-MIB", "tmnxSnmpTrapDestV22v0Group"),
+        ("TIMETRA-LOG-MIB", "tmnxLogFileEncryptionGroup"),
+        ("TIMETRA-LOG-MIB", "tmnxLogFilesTotalSizeGroup"))
 )
 if mibBuilder.loadTexts:
     tmnxLogV22v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxLogV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 1, 21)
+)
+tmnxLogV23v0Compliance.setObjects(
+      *(("TIMETRA-LOG-MIB", "tmnxSyslogHostnameGroup"),
+        ("TIMETRA-LOG-MIB", "tmnxLogEventsSourceStreamGroup"),
+        ("TIMETRA-LOG-MIB", "tmnxLogLiUsingVPRNvRtrIDGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxLogV23v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxLogV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 1, 22)
+)
+tmnxLogV24v0Compliance.setObjects(
+      *(("TIMETRA-LOG-MIB", "tmnxLogEventTestCustomTextGroup"),
+        ("TIMETRA-LOG-MIB", "tmnxSyslogTimestampFormatGroup"),
+        ("TIMETRA-LOG-MIB", "tmnxLogNotifyObjsV24v0Group"),
+        ("TIMETRA-LOG-MIB", "tmnxLogNotificationV24v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxLogV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxLogV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 12, 1, 23)
+)
+tmnxLogV25v0Compliance.setObjects(
+    ("TIMETRA-LOG-MIB", "tmnxLogNotificationV25v0Group")
+)
+if mibBuilder.loadTexts:
+    tmnxLogV25v0Compliance.setStatus(
         "current"
     )
 
@@ -6489,6 +7075,7 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "TIMETRA-LOG-MIB",
     **{"TmnxPerceivedSeverity": TmnxPerceivedSeverity,
+       "TmnxSnmpSetErrsSeverity": TmnxSnmpSetErrsSeverity,
        "TmnxSyslogId": TmnxSyslogId,
        "TmnxSyslogIdOrEmpty": TmnxSyslogIdOrEmpty,
        "TmnxLogFileId": TmnxLogFileId,
@@ -6522,6 +7109,9 @@ mibBuilder.exportSymbols(
        "tmnxLogV20v0Compliance": tmnxLogV20v0Compliance,
        "tmnxLogV21v0Compliance": tmnxLogV21v0Compliance,
        "tmnxLogV22v0Compliance": tmnxLogV22v0Compliance,
+       "tmnxLogV23v0Compliance": tmnxLogV23v0Compliance,
+       "tmnxLogV24v0Compliance": tmnxLogV24v0Compliance,
+       "tmnxLogV25v0Compliance": tmnxLogV25v0Compliance,
        "tmnxLogGroups": tmnxLogGroups,
        "tmnxLogGlobalGroup": tmnxLogGlobalGroup,
        "tmnxLogAccountingPolicyGroup": tmnxLogAccountingPolicyGroup,
@@ -6576,9 +7166,19 @@ mibBuilder.exportSymbols(
        "tmnxLogFilterParamsNameGroup": tmnxLogFilterParamsNameGroup,
        "tmnxSyslogTargetNameGroup": tmnxSyslogTargetNameGroup,
        "tmnxSyslogTlsClntProfilNameGroup": tmnxSyslogTlsClntProfilNameGroup,
-       "tmnxLogApObsoleteObjsV21v0Group": tmnxLogApObsoleteObjsV21v0Group,
        "tmnxLogFileNameGroup": tmnxLogFileNameGroup,
        "tmnxSnmpTrapDestV22v0Group": tmnxSnmpTrapDestV22v0Group,
+       "tmnxLogFileEncryptionGroup": tmnxLogFileEncryptionGroup,
+       "tmnxLogFilesTotalSizeGroup": tmnxLogFilesTotalSizeGroup,
+       "tmnxSyslogHostnameGroup": tmnxSyslogHostnameGroup,
+       "tmnxLogEventsSourceStreamGroup": tmnxLogEventsSourceStreamGroup,
+       "tmnxLogLiUsingVPRNvRtrIDGroup": tmnxLogLiUsingVPRNvRtrIDGroup,
+       "tmnxLogEventTestCustomTextGroup": tmnxLogEventTestCustomTextGroup,
+       "tmnxSyslogTimestampFormatGroup": tmnxSyslogTimestampFormatGroup,
+       "tmnxLogNotifyObjsV24v0Group": tmnxLogNotifyObjsV24v0Group,
+       "tmnxLogNotificationV24v0Group": tmnxLogNotificationV24v0Group,
+       "tmnxLogNotifyObjsV25v0Group": tmnxLogNotifyObjsV25v0Group,
+       "tmnxLogNotificationV25v0Group": tmnxLogNotificationV25v0Group,
        "tmnxLogObjs": tmnxLogObjs,
        "tmnxLogNotificationObjects": tmnxLogNotificationObjects,
        "tmnxLogFileDeletedLogId": tmnxLogFileDeletedLogId,
@@ -6598,6 +7198,17 @@ mibBuilder.exportSymbols(
        "tmnxStdReplayStartEvent": tmnxStdReplayStartEvent,
        "tmnxStdReplayEndEvent": tmnxStdReplayEndEvent,
        "tmnxEhsHEntryMinDelayInterval": tmnxEhsHEntryMinDelayInterval,
+       "logCustomEventSubject": logCustomEventSubject,
+       "logCustomEventMessageString": logCustomEventMessageString,
+       "logCustomEventParameter1": logCustomEventParameter1,
+       "logCustomEventParameter2": logCustomEventParameter2,
+       "logCustomEventParameter3": logCustomEventParameter3,
+       "logCustomEventParameter4": logCustomEventParameter4,
+       "logCustomEventParameter5": logCustomEventParameter5,
+       "logCustomEventParameter6": logCustomEventParameter6,
+       "logCustomEventParameter7": logCustomEventParameter7,
+       "logCustomEventParameter8": logCustomEventParameter8,
+       "tmnxNetconfStreamDropCount": tmnxNetconfStreamDropCount,
        "tmnxLogMaxLogs": tmnxLogMaxLogs,
        "tmnxLogFileIdTable": tmnxLogFileIdTable,
        "tmnxLogFileIdEntry": tmnxLogFileIdEntry,
@@ -6656,6 +7267,7 @@ mibBuilder.exportSymbols(
        "tmnxLogIdOperDestination": tmnxLogIdOperDestination,
        "tmnxLogIdNetconfStream": tmnxLogIdNetconfStream,
        "tmnxLogIdName": tmnxLogIdName,
+       "tmnxLogLiUsingVPRNvRtrID": tmnxLogLiUsingVPRNvRtrID,
        "tmnxLogFilterTable": tmnxLogFilterTable,
        "tmnxLogFilterEntry": tmnxLogFilterEntry,
        "tmnxLogFilterId": tmnxLogFilterId,
@@ -6701,6 +7313,10 @@ mibBuilder.exportSymbols(
        "tmnxSyslogTargetAddr": tmnxSyslogTargetAddr,
        "tmnxSyslogTargetName": tmnxSyslogTargetName,
        "tmnxSyslogTlsClntProfileName": tmnxSyslogTlsClntProfileName,
+       "tmnxSyslogHostname": tmnxSyslogHostname,
+       "tmnxSyslogHostnameUseSystem": tmnxSyslogHostnameUseSystem,
+       "tmnxSyslogHostnameUseVprn": tmnxSyslogHostnameUseVprn,
+       "tmnxSyslogTimestampFormat": tmnxSyslogTimestampFormat,
        "tmnxEventAppTable": tmnxEventAppTable,
        "tmnxEventAppEntry": tmnxEventAppEntry,
        "tmnxEventAppIndex": tmnxEventAppIndex,
@@ -6722,6 +7338,7 @@ mibBuilder.exportSymbols(
        "tmnxEventSpecThrottleLimitDef": tmnxEventSpecThrottleLimitDef,
        "tmnxEventSpecThrottleIntvalDef": tmnxEventSpecThrottleIntvalDef,
        "tmnxEventRepeat": tmnxEventRepeat,
+       "tmnxSourceStream": tmnxSourceStream,
        "tmnxSnmpTrapGroupTable": tmnxSnmpTrapGroupTable,
        "tmnxSnmpTrapGroupEntry": tmnxSnmpTrapGroupEntry,
        "tmnxStgIndex": tmnxStgIndex,
@@ -6778,11 +7395,8 @@ mibBuilder.exportSymbols(
        "tmnxLogApCrLastChanged": tmnxLogApCrLastChanged,
        "tmnxLogApCrSignChangeDelta": tmnxLogApCrSignChangeDelta,
        "tmnxLogApCrSignChangeQueue": tmnxLogApCrSignChangeQueue,
-       "tmnxLogApCrSignChangeOCntr": tmnxLogApCrSignChangeOCntr,
        "tmnxLogApCrSignChangeQICounters": tmnxLogApCrSignChangeQICounters,
        "tmnxLogApCrSignChangeQECounters": tmnxLogApCrSignChangeQECounters,
-       "tmnxLogApCrSignChangeOICounters": tmnxLogApCrSignChangeOICounters,
-       "tmnxLogApCrSignChangeOECounters": tmnxLogApCrSignChangeOECounters,
        "tmnxLogApCrSignChangeAACounters": tmnxLogApCrSignChangeAACounters,
        "tmnxLogApCrAACounters": tmnxLogApCrAACounters,
        "tmnxLogApCrAASubAttributes": tmnxLogApCrAASubAttributes,
@@ -6796,13 +7410,6 @@ mibBuilder.exportSymbols(
        "tmnxLogApCrQueueLastChanged": tmnxLogApCrQueueLastChanged,
        "tmnxLogApCrQueueICounters": tmnxLogApCrQueueICounters,
        "tmnxLogApCrQueueECounters": tmnxLogApCrQueueECounters,
-       "tmnxLogApCrOverrideCntrTable": tmnxLogApCrOverrideCntrTable,
-       "tmnxLogApCrOverrideCntrEntry": tmnxLogApCrOverrideCntrEntry,
-       "tmnxLogApCrOverrideCntrId": tmnxLogApCrOverrideCntrId,
-       "tmnxLogApCrOverrideCntrRowStatus": tmnxLogApCrOverrideCntrRowStatus,
-       "tmnxLogApCrOverrideCntrLastChngd": tmnxLogApCrOverrideCntrLastChngd,
-       "tmnxLogApCrOverrideCntrICounters": tmnxLogApCrOverrideCntrICounters,
-       "tmnxLogApCrOverrideCntrECounters": tmnxLogApCrOverrideCntrECounters,
        "tmnxEventPrimaryRoutePref": tmnxEventPrimaryRoutePref,
        "tmnxEventSecondaryRoutePref": tmnxEventSecondaryRoutePref,
        "tmnxLogConfigEventsDamped": tmnxLogConfigEventsDamped,
@@ -6920,6 +7527,10 @@ mibBuilder.exportSymbols(
        "tmnxLogApCrPolicerRowStatus": tmnxLogApCrPolicerRowStatus,
        "tmnxLogApCrPolicerICounters": tmnxLogApCrPolicerICounters,
        "tmnxLogApCrPolicerECounters": tmnxLogApCrPolicerECounters,
+       "tmnxLogFileEncryptKey": tmnxLogFileEncryptKey,
+       "tmnxLogFilesTotalSize": tmnxLogFilesTotalSize,
+       "tmnxLogApFilesTotalSize": tmnxLogApFilesTotalSize,
+       "tmnxLogEventTestCustomText": tmnxLogEventTestCustomText,
        "tmnxLogNotifyPrefix": tmnxLogNotifyPrefix,
        "tmnxLogNotifications": tmnxLogNotifications,
        "tmnxLogSpaceContention": tmnxLogSpaceContention,
@@ -6933,5 +7544,12 @@ mibBuilder.exportSymbols(
        "tmnxSysLogTargetProblem": tmnxSysLogTargetProblem,
        "tmnxLogAccountingDataLoss": tmnxLogAccountingDataLoss,
        "tmnxStdEventsReplayed": tmnxStdEventsReplayed,
-       "tmnxLogEventOverrun": tmnxLogEventOverrun}
+       "tmnxLogEventOverrun": tmnxLogEventOverrun,
+       "tmnxCustomEvent1": tmnxCustomEvent1,
+       "tmnxCustomEvent2": tmnxCustomEvent2,
+       "tmnxCustomEvent3": tmnxCustomEvent3,
+       "tmnxCustomEvent4": tmnxCustomEvent4,
+       "tmnxCustomEvent5": tmnxCustomEvent5,
+       "tmnxCustomEvent6": tmnxCustomEvent6,
+       "tmnxNetconfNotifyOverrun": tmnxNetconfNotifyOverrun}
 )

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\juniper\JUNIPER-SMI
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:02:15 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -65,6 +62,7 @@ if 'mibBuilder' not in globals():
  MibTable,
  MibTableRow,
  MibTableColumn,
+ Opaque,
  TimeTicks,
  Unsigned32,
  enterprises,
@@ -84,6 +82,7 @@ if 'mibBuilder' not in globals():
     "MibTable",
     "MibTableRow",
     "MibTableColumn",
+    "Opaque",
     "TimeTicks",
     "Unsigned32",
     "enterprises",
@@ -126,7 +125,15 @@ if mibBuilder.loadTexts:
          "2014-10-29 00:00",
          "2015-11-19 00:00",
          "2016-05-31 00:00",
-         "2017-03-01 00:00")
+         "2017-03-01 00:00",
+         "2018-06-01 00:00",
+         "2019-06-01 00:00",
+         "2019-10-23 09:24",
+         "2019-12-18 00:00",
+         "2020-03-25 00:00",
+         "2022-02-25 00:00",
+         "2022-02-25 00:00",
+         "2024-04-02 00:00")
     )
 
 
@@ -134,6 +141,15 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class Integer64(TextualConvention, Opaque):
+    status = "current"
+    subtypeSpec = Opaque.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 11),
+    )
 
 
 
@@ -369,6 +385,30 @@ _JnxURLFMibRoot_ObjectIdentity = ObjectIdentity
 jnxURLFMibRoot = _JnxURLFMibRoot_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2636, 3, 85)
 )
+_JnxCustomMibRoot_ObjectIdentity = ObjectIdentity
+jnxCustomMibRoot = _JnxCustomMibRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 86)
+)
+_JnxWirelessWANStatusMibRoot_ObjectIdentity = ObjectIdentity
+jnxWirelessWANStatusMibRoot = _JnxWirelessWANStatusMibRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 87)
+)
+_JnxWlanWAPStatusMibRoot_ObjectIdentity = ObjectIdentity
+jnxWlanWAPStatusMibRoot = _JnxWlanWAPStatusMibRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 88)
+)
+_JnxUserFirewallsRoot_ObjectIdentity = ObjectIdentity
+jnxUserFirewallsRoot = _JnxUserFirewallsRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 89)
+)
+_JnxjSysmonMibRoot_ObjectIdentity = ObjectIdentity
+jnxjSysmonMibRoot = _JnxjSysmonMibRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 90)
+)
+_JnxTLBMIBRoot_ObjectIdentity = ObjectIdentity
+jnxTLBMIBRoot = _JnxTLBMIBRoot_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 91)
+)
 _JnxTraps_ObjectIdentity = ObjectIdentity
 jnxTraps = _JnxTraps_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2636, 4)
@@ -487,6 +527,34 @@ _JnxIlaNotifications_ObjectIdentity = ObjectIdentity
 jnxIlaNotifications = _JnxIlaNotifications_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2636, 4, 29)
 )
+_JnxCustomSyslogNotifications_ObjectIdentity = ObjectIdentity
+jnxCustomSyslogNotifications = _JnxCustomSyslogNotifications_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 30)
+)
+_JnxjSysmonNotifications_ObjectIdentity = ObjectIdentity
+jnxjSysmonNotifications = _JnxjSysmonNotifications_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 31)
+)
+_JnxTLBNotifications_ObjectIdentity = ObjectIdentity
+jnxTLBNotifications = _JnxTLBNotifications_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 32)
+)
+_JnxAsicExtMemTraps_ObjectIdentity = ObjectIdentity
+jnxAsicExtMemTraps = _JnxAsicExtMemTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 33)
+)
+_JnxAsicExtMemOKTraps_ObjectIdentity = ObjectIdentity
+jnxAsicExtMemOKTraps = _JnxAsicExtMemOKTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 34)
+)
+_JnxPoeTraps_ObjectIdentity = ObjectIdentity
+jnxPoeTraps = _JnxPoeTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 35)
+)
+_JnxPoeOKTraps_ObjectIdentity = ObjectIdentity
+jnxPoeOKTraps = _JnxPoeOKTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 36)
+)
 _JnxExperiment_ObjectIdentity = ObjectIdentity
 jnxExperiment = _JnxExperiment_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2636, 5)
@@ -535,7 +603,8 @@ jnxAgentCapability = _JnxAgentCapability_ObjectIdentity(
 
 mibBuilder.exportSymbols(
     "JUNIPER-SMI",
-    **{"juniperMIB": juniperMIB,
+    **{"Integer64": Integer64,
+       "juniperMIB": juniperMIB,
        "jnxProducts": jnxProducts,
        "jnxMediaFlow": jnxMediaFlow,
        "jnxJunosSpace": jnxJunosSpace,
@@ -592,6 +661,12 @@ mibBuilder.exportSymbols(
        "jnxOamMibRoot": jnxOamMibRoot,
        "jnxTunnelStatsMibRoot": jnxTunnelStatsMibRoot,
        "jnxURLFMibRoot": jnxURLFMibRoot,
+       "jnxCustomMibRoot": jnxCustomMibRoot,
+       "jnxWirelessWANStatusMibRoot": jnxWirelessWANStatusMibRoot,
+       "jnxWlanWAPStatusMibRoot": jnxWlanWAPStatusMibRoot,
+       "jnxUserFirewallsRoot": jnxUserFirewallsRoot,
+       "jnxjSysmonMibRoot": jnxjSysmonMibRoot,
+       "jnxTLBMIBRoot": jnxTLBMIBRoot,
        "jnxTraps": jnxTraps,
        "jnxChassisTraps": jnxChassisTraps,
        "jnxChassisOKTraps": jnxChassisOKTraps,
@@ -621,6 +696,13 @@ mibBuilder.exportSymbols(
        "jnxTwampNotificationPrefix": jnxTwampNotificationPrefix,
        "jnxIplcNotifications": jnxIplcNotifications,
        "jnxIlaNotifications": jnxIlaNotifications,
+       "jnxCustomSyslogNotifications": jnxCustomSyslogNotifications,
+       "jnxjSysmonNotifications": jnxjSysmonNotifications,
+       "jnxTLBNotifications": jnxTLBNotifications,
+       "jnxAsicExtMemTraps": jnxAsicExtMemTraps,
+       "jnxAsicExtMemOKTraps": jnxAsicExtMemOKTraps,
+       "jnxPoeTraps": jnxPoeTraps,
+       "jnxPoeOKTraps": jnxPoeOKTraps,
        "jnxExperiment": jnxExperiment,
        "jnxNsm": jnxNsm,
        "jnxCA": jnxCA,

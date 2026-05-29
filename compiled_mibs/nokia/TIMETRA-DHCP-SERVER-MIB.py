@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-DHCP-SERVER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:05 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -2716,7 +2713,17 @@ tmnxDhcpSvrDeclinedAddrClientType = _TmnxDhcpSvrDeclinedAddrClientType_Object(
 tmnxDhcpSvrDeclinedAddrClientType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxDhcpSvrDeclinedAddrClientType.setStatus("current")
-_TmnxDhcpSvrDeclinedAddrUserName_Type = TmnxPppoeUserNameOrEmpty
+
+
+class _TmnxDhcpSvrDeclinedAddrUserName_Type(OctetString):
+    """Custom type tmnxDhcpSvrDeclinedAddrUserName based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 253),
+    )
+
+
+_TmnxDhcpSvrDeclinedAddrUserName_Type.__name__ = "OctetString"
 _TmnxDhcpSvrDeclinedAddrUserName_Object = MibTableColumn
 tmnxDhcpSvrDeclinedAddrUserName = _TmnxDhcpSvrDeclinedAddrUserName_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 47, 1, 16, 1, 7),
@@ -5228,6 +5235,10 @@ if mibBuilder.loadTexts:
 _TmnxDhcpServerDuidEntry_Object = MibTableRow
 tmnxDhcpServerDuidEntry = _TmnxDhcpServerDuidEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 47, 1, 27, 1)
+)
+tmnxDhcpServerDuidEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (1, "TIMETRA-DHCP-SERVER-MIB", "tmnxDhcpServerCfgServerName"),
 )
 if mibBuilder.loadTexts:
     tmnxDhcpServerDuidEntry.setStatus("current")
@@ -7849,11 +7860,6 @@ tmnxDhcpServerPoolEntry.registerAugmentions(
      "tmnxDhcpsPoolFoStatsEntry")
 )
 tmnxDhcpsPoolFoStatsEntry.setIndexNames(*tmnxDhcpServerPoolEntry.getIndexNames())
-tmnxDhcpServerConfigEntry.registerAugmentions(
-    ("TIMETRA-DHCP-SERVER-MIB",
-     "tmnxDhcpServerDuidEntry")
-)
-tmnxDhcpServerDuidEntry.setIndexNames(*tmnxDhcpServerConfigEntry.getIndexNames())
 
 # Managed Objects groups
 

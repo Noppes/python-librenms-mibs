@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-RDP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:00 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-RDP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,7 @@ alcatelIND1RouterDiscoveryProtocolMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1RouterDiscoveryProtocolMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -218,7 +215,7 @@ alaRDPIfAdvtAddress = _AlaRDPIfAdvtAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 11, 1, 1, 1, 20, 1, 3),
     _AlaRDPIfAdvtAddress_Type()
 )
-alaRDPIfAdvtAddress.setMaxAccess("read-write")
+alaRDPIfAdvtAddress.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRDPIfAdvtAddress.setStatus("current")
 
@@ -234,7 +231,7 @@ alaRDPIfMaxAdvtInterval = _AlaRDPIfMaxAdvtInterval_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 11, 1, 1, 1, 20, 1, 4),
     _AlaRDPIfMaxAdvtInterval_Type()
 )
-alaRDPIfMaxAdvtInterval.setMaxAccess("read-write")
+alaRDPIfMaxAdvtInterval.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRDPIfMaxAdvtInterval.setStatus("current")
 _AlaRDPIfMinAdvtInterval_Type = Unsigned32
@@ -243,7 +240,7 @@ alaRDPIfMinAdvtInterval = _AlaRDPIfMinAdvtInterval_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 11, 1, 1, 1, 20, 1, 5),
     _AlaRDPIfMinAdvtInterval_Type()
 )
-alaRDPIfMinAdvtInterval.setMaxAccess("read-write")
+alaRDPIfMinAdvtInterval.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRDPIfMinAdvtInterval.setStatus("current")
 _AlaRDPIfAdvLifeTime_Type = Unsigned32
@@ -252,7 +249,7 @@ alaRDPIfAdvLifeTime = _AlaRDPIfAdvLifeTime_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 11, 1, 1, 1, 20, 1, 6),
     _AlaRDPIfAdvLifeTime_Type()
 )
-alaRDPIfAdvLifeTime.setMaxAccess("read-write")
+alaRDPIfAdvLifeTime.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRDPIfAdvLifeTime.setStatus("current")
 
@@ -268,7 +265,7 @@ alaRDPIfPrefLevel = _AlaRDPIfPrefLevel_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 11, 1, 1, 1, 20, 1, 7),
     _AlaRDPIfPrefLevel_Type()
 )
-alaRDPIfPrefLevel.setMaxAccess("read-write")
+alaRDPIfPrefLevel.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRDPIfPrefLevel.setStatus("current")
 
@@ -284,7 +281,7 @@ alaRDPIfRowStatus = _AlaRDPIfRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 11, 1, 1, 1, 20, 1, 8),
     _AlaRDPIfRowStatus_Type()
 )
-alaRDPIfRowStatus.setMaxAccess("read-write")
+alaRDPIfRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRDPIfRowStatus.setStatus("current")
 _AlaRDPIfName_Type = DisplayString

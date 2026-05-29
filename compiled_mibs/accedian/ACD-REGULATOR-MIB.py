@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-REGULATOR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:08 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,13 @@ acdRegulator = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdRegulator.setRevisions(
-        ("2011-10-10 01:00",
+        ("2017-02-21 01:00",
+         "2016-09-23 01:00",
+         "2016-05-26 01:00",
+         "2014-06-09 00:00",
+         "2013-12-01 00:00",
+         "2012-01-10 01:00",
+         "2011-10-10 01:00",
          "2010-11-10 01:00",
          "2008-05-01 01:00",
          "2008-02-06 01:00",
@@ -210,7 +213,7 @@ acdRegulatorCbs.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     acdRegulatorCbs.setStatus("current")
 if mibBuilder.loadTexts:
-    acdRegulatorCbs.setUnits("Kbytes")
+    acdRegulatorCbs.setUnits("KiB")
 
 
 class _AcdRegulatorEir_Type(Unsigned32):
@@ -246,7 +249,7 @@ acdRegulatorEbs.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     acdRegulatorEbs.setStatus("current")
 if mibBuilder.loadTexts:
-    acdRegulatorEbs.setUnits("Kbytes")
+    acdRegulatorEbs.setUnits("KiB")
 
 
 class _AcdRegulatorIsBlind_Type(TruthValue):
@@ -288,6 +291,70 @@ acdRegulatorRowStatus = _AcdRegulatorRowStatus_Object(
 acdRegulatorRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     acdRegulatorRowStatus.setStatus("current")
+
+
+class _AcdRegulatorWorkingRate_Type(Integer32):
+    """Custom type acdRegulatorWorkingRate based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("layer1", 1),
+          ("layer2", 2))
+    )
+
+
+_AcdRegulatorWorkingRate_Type.__name__ = "Integer32"
+_AcdRegulatorWorkingRate_Object = MibTableColumn
+acdRegulatorWorkingRate = _AcdRegulatorWorkingRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 1, 1, 10),
+    _AcdRegulatorWorkingRate_Type()
+)
+acdRegulatorWorkingRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorWorkingRate.setStatus("current")
+
+
+class _AcdRegulatorCirMax_Type(Unsigned32):
+    """Custom type acdRegulatorCirMax based on Unsigned32"""
+    defaultValue = 20000
+
+
+_AcdRegulatorCirMax_Type.__name__ = "Unsigned32"
+_AcdRegulatorCirMax_Object = MibTableColumn
+acdRegulatorCirMax = _AcdRegulatorCirMax_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 1, 1, 11),
+    _AcdRegulatorCirMax_Type()
+)
+acdRegulatorCirMax.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdRegulatorCirMax.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorCirMax.setUnits("Kbps")
+
+
+class _AcdRegulatorEirMax_Type(Unsigned32):
+    """Custom type acdRegulatorEirMax based on Unsigned32"""
+    defaultValue = 1000
+
+
+_AcdRegulatorEirMax_Type.__name__ = "Unsigned32"
+_AcdRegulatorEirMax_Object = MibTableColumn
+acdRegulatorEirMax = _AcdRegulatorEirMax_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 1, 1, 12),
+    _AcdRegulatorEirMax_Type()
+)
+acdRegulatorEirMax.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdRegulatorEirMax.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorEirMax.setUnits("Kbps")
 _AcdRegulatorStatsTable_Object = MibTable
 acdRegulatorStatsTable = _AcdRegulatorStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2)
@@ -332,8 +399,6 @@ acdRegulatorStatsAcceptOverflowOctets = _AcdRegulatorStatsAcceptOverflowOctets_O
 acdRegulatorStatsAcceptOverflowOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorStatsAcceptOverflowOctets.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorStatsAcceptOverflowOctets.setUnits("Octets")
 _AcdRegulatorStatsAcceptHCOctets_Type = Counter64
 _AcdRegulatorStatsAcceptHCOctets_Object = MibTableColumn
 acdRegulatorStatsAcceptHCOctets = _AcdRegulatorStatsAcceptHCOctets_Object(
@@ -365,8 +430,6 @@ acdRegulatorStatsAcceptOverflowPkts = _AcdRegulatorStatsAcceptOverflowPkts_Objec
 acdRegulatorStatsAcceptOverflowPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorStatsAcceptOverflowPkts.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorStatsAcceptOverflowPkts.setUnits("Packets")
 _AcdRegulatorStatsAcceptHCPkts_Type = Counter64
 _AcdRegulatorStatsAcceptHCPkts_Object = MibTableColumn
 acdRegulatorStatsAcceptHCPkts = _AcdRegulatorStatsAcceptHCPkts_Object(
@@ -377,7 +440,7 @@ acdRegulatorStatsAcceptHCPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorStatsAcceptHCPkts.setStatus("current")
 if mibBuilder.loadTexts:
-    acdRegulatorStatsAcceptHCPkts.setUnits("Octets")
+    acdRegulatorStatsAcceptHCPkts.setUnits("Packets")
 _AcdRegulatorStatsAcceptRate_Type = Gauge32
 _AcdRegulatorStatsAcceptRate_Object = MibTableColumn
 acdRegulatorStatsAcceptRate = _AcdRegulatorStatsAcceptRate_Object(
@@ -409,8 +472,6 @@ acdRegulatorStatsDropOverflowOctets = _AcdRegulatorStatsDropOverflowOctets_Objec
 acdRegulatorStatsDropOverflowOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorStatsDropOverflowOctets.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorStatsDropOverflowOctets.setUnits("Octets")
 _AcdRegulatorStatsDropHCOctets_Type = Counter64
 _AcdRegulatorStatsDropHCOctets_Object = MibTableColumn
 acdRegulatorStatsDropHCOctets = _AcdRegulatorStatsDropHCOctets_Object(
@@ -442,8 +503,6 @@ acdRegulatorStatsDropOverflowPkts = _AcdRegulatorStatsDropOverflowPkts_Object(
 acdRegulatorStatsDropOverflowPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorStatsDropOverflowPkts.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorStatsDropOverflowPkts.setUnits("Packets")
 _AcdRegulatorStatsDropHCPkts_Type = Counter64
 _AcdRegulatorStatsDropHCPkts_Object = MibTableColumn
 acdRegulatorStatsDropHCPkts = _AcdRegulatorStatsDropHCPkts_Object(
@@ -454,7 +513,7 @@ acdRegulatorStatsDropHCPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorStatsDropHCPkts.setStatus("current")
 if mibBuilder.loadTexts:
-    acdRegulatorStatsDropHCPkts.setUnits("Octets")
+    acdRegulatorStatsDropHCPkts.setUnits("Packets")
 _AcdRegulatorStatsDropRate_Type = Gauge32
 _AcdRegulatorStatsDropRate_Object = MibTableColumn
 acdRegulatorStatsDropRate = _AcdRegulatorStatsDropRate_Object(
@@ -466,6 +525,105 @@ if mibBuilder.loadTexts:
     acdRegulatorStatsDropRate.setStatus("current")
 if mibBuilder.loadTexts:
     acdRegulatorStatsDropRate.setUnits("Kbps")
+_AcdRegulatorStatsGreenHCOctets_Type = Counter64
+_AcdRegulatorStatsGreenHCOctets_Object = MibTableColumn
+acdRegulatorStatsGreenHCOctets = _AcdRegulatorStatsGreenHCOctets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 16),
+    _AcdRegulatorStatsGreenHCOctets_Type()
+)
+acdRegulatorStatsGreenHCOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsGreenHCOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsGreenHCOctets.setUnits("Octets")
+_AcdRegulatorStatsGreenHCPkts_Type = Counter64
+_AcdRegulatorStatsGreenHCPkts_Object = MibTableColumn
+acdRegulatorStatsGreenHCPkts = _AcdRegulatorStatsGreenHCPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 17),
+    _AcdRegulatorStatsGreenHCPkts_Type()
+)
+acdRegulatorStatsGreenHCPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsGreenHCPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsGreenHCPkts.setUnits("Packets")
+_AcdRegulatorStatsYellowHCOctets_Type = Counter64
+_AcdRegulatorStatsYellowHCOctets_Object = MibTableColumn
+acdRegulatorStatsYellowHCOctets = _AcdRegulatorStatsYellowHCOctets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 18),
+    _AcdRegulatorStatsYellowHCOctets_Type()
+)
+acdRegulatorStatsYellowHCOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsYellowHCOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsYellowHCOctets.setUnits("Octets")
+_AcdRegulatorStatsYellowHCPkts_Type = Counter64
+_AcdRegulatorStatsYellowHCPkts_Object = MibTableColumn
+acdRegulatorStatsYellowHCPkts = _AcdRegulatorStatsYellowHCPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 19),
+    _AcdRegulatorStatsYellowHCPkts_Type()
+)
+acdRegulatorStatsYellowHCPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsYellowHCPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsYellowHCPkts.setUnits("Packets")
+_AcdRegulatorStatsRedHCOctets_Type = Counter64
+_AcdRegulatorStatsRedHCOctets_Object = MibTableColumn
+acdRegulatorStatsRedHCOctets = _AcdRegulatorStatsRedHCOctets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 20),
+    _AcdRegulatorStatsRedHCOctets_Type()
+)
+acdRegulatorStatsRedHCOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsRedHCOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsRedHCOctets.setUnits("Octets")
+_AcdRegulatorStatsRedHCPkts_Type = Counter64
+_AcdRegulatorStatsRedHCPkts_Object = MibTableColumn
+acdRegulatorStatsRedHCPkts = _AcdRegulatorStatsRedHCPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 21),
+    _AcdRegulatorStatsRedHCPkts_Type()
+)
+acdRegulatorStatsRedHCPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsRedHCPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsRedHCPkts.setUnits("Packets")
+_AcdRegulatorStatsGreenRate_Type = Gauge32
+_AcdRegulatorStatsGreenRate_Object = MibTableColumn
+acdRegulatorStatsGreenRate = _AcdRegulatorStatsGreenRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 22),
+    _AcdRegulatorStatsGreenRate_Type()
+)
+acdRegulatorStatsGreenRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsGreenRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsGreenRate.setUnits("Kbps")
+_AcdRegulatorStatsYellowRate_Type = Gauge32
+_AcdRegulatorStatsYellowRate_Object = MibTableColumn
+acdRegulatorStatsYellowRate = _AcdRegulatorStatsYellowRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 23),
+    _AcdRegulatorStatsYellowRate_Type()
+)
+acdRegulatorStatsYellowRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsYellowRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsYellowRate.setUnits("Kbps")
+_AcdRegulatorStatsRedRate_Type = Gauge32
+_AcdRegulatorStatsRedRate_Object = MibTableColumn
+acdRegulatorStatsRedRate = _AcdRegulatorStatsRedRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 2, 1, 24),
+    _AcdRegulatorStatsRedRate_Type()
+)
+acdRegulatorStatsRedRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsRedRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorStatsRedRate.setUnits("Kbps")
 _AcdRegulatorHistStatsTable_Object = MibTable
 acdRegulatorHistStatsTable = _AcdRegulatorHistStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3)
@@ -488,7 +646,7 @@ acdRegulatorHistStatsID = _AcdRegulatorHistStatsID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 1),
     _AcdRegulatorHistStatsID_Type()
 )
-acdRegulatorHistStatsID.setMaxAccess("not-accessible")
+acdRegulatorHistStatsID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsID.setStatus("current")
 _AcdRegulatorHistStatsSampleIndex_Type = Unsigned32
@@ -497,7 +655,7 @@ acdRegulatorHistStatsSampleIndex = _AcdRegulatorHistStatsSampleIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 2),
     _AcdRegulatorHistStatsSampleIndex_Type()
 )
-acdRegulatorHistStatsSampleIndex.setMaxAccess("not-accessible")
+acdRegulatorHistStatsSampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsSampleIndex.setStatus("current")
 
@@ -564,8 +722,6 @@ acdRegulatorHistStatsAcceptOverflowOctets = _AcdRegulatorHistStatsAcceptOverflow
 acdRegulatorHistStatsAcceptOverflowOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsAcceptOverflowOctets.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorHistStatsAcceptOverflowOctets.setUnits("Octets")
 _AcdRegulatorHistStatsAcceptHCOctets_Type = Counter64
 _AcdRegulatorHistStatsAcceptHCOctets_Object = MibTableColumn
 acdRegulatorHistStatsAcceptHCOctets = _AcdRegulatorHistStatsAcceptHCOctets_Object(
@@ -597,8 +753,6 @@ acdRegulatorHistStatsAcceptOverflowPkts = _AcdRegulatorHistStatsAcceptOverflowPk
 acdRegulatorHistStatsAcceptOverflowPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsAcceptOverflowPkts.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorHistStatsAcceptOverflowPkts.setUnits("Packets")
 _AcdRegulatorHistStatsAcceptHCPkts_Type = Counter64
 _AcdRegulatorHistStatsAcceptHCPkts_Object = MibTableColumn
 acdRegulatorHistStatsAcceptHCPkts = _AcdRegulatorHistStatsAcceptHCPkts_Object(
@@ -609,7 +763,7 @@ acdRegulatorHistStatsAcceptHCPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsAcceptHCPkts.setStatus("current")
 if mibBuilder.loadTexts:
-    acdRegulatorHistStatsAcceptHCPkts.setUnits("Octets")
+    acdRegulatorHistStatsAcceptHCPkts.setUnits("Packets")
 _AcdRegulatorHistStatsAcceptAvgRate_Type = Gauge32
 _AcdRegulatorHistStatsAcceptAvgRate_Object = MibTableColumn
 acdRegulatorHistStatsAcceptAvgRate = _AcdRegulatorHistStatsAcceptAvgRate_Object(
@@ -663,8 +817,6 @@ acdRegulatorHistStatsDropOverflowOctets = _AcdRegulatorHistStatsDropOverflowOcte
 acdRegulatorHistStatsDropOverflowOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsDropOverflowOctets.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorHistStatsDropOverflowOctets.setUnits("Octets")
 _AcdRegulatorHistStatsDropHCOctets_Type = Counter64
 _AcdRegulatorHistStatsDropHCOctets_Object = MibTableColumn
 acdRegulatorHistStatsDropHCOctets = _AcdRegulatorHistStatsDropHCOctets_Object(
@@ -696,8 +848,6 @@ acdRegulatorHistStatsDropOverflowPkts = _AcdRegulatorHistStatsDropOverflowPkts_O
 acdRegulatorHistStatsDropOverflowPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsDropOverflowPkts.setStatus("current")
-if mibBuilder.loadTexts:
-    acdRegulatorHistStatsDropOverflowPkts.setUnits("Packets")
 _AcdRegulatorHistStatsDropHCPkts_Type = Counter64
 _AcdRegulatorHistStatsDropHCPkts_Object = MibTableColumn
 acdRegulatorHistStatsDropHCPkts = _AcdRegulatorHistStatsDropHCPkts_Object(
@@ -708,7 +858,7 @@ acdRegulatorHistStatsDropHCPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsDropHCPkts.setStatus("current")
 if mibBuilder.loadTexts:
-    acdRegulatorHistStatsDropHCPkts.setUnits("Octets")
+    acdRegulatorHistStatsDropHCPkts.setUnits("Packets")
 _AcdRegulatorHistStatsDropAvgRate_Type = Gauge32
 _AcdRegulatorHistStatsDropAvgRate_Object = MibTableColumn
 acdRegulatorHistStatsDropAvgRate = _AcdRegulatorHistStatsDropAvgRate_Object(
@@ -742,6 +892,171 @@ if mibBuilder.loadTexts:
     acdRegulatorHistStatsDropMaxRate.setStatus("current")
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsDropMaxRate.setUnits("Kbps")
+_AcdRegulatorHistStatsGreenHCOctets_Type = Counter64
+_AcdRegulatorHistStatsGreenHCOctets_Object = MibTableColumn
+acdRegulatorHistStatsGreenHCOctets = _AcdRegulatorHistStatsGreenHCOctets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 24),
+    _AcdRegulatorHistStatsGreenHCOctets_Type()
+)
+acdRegulatorHistStatsGreenHCOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenHCOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenHCOctets.setUnits("Octets")
+_AcdRegulatorHistStatsGreenHCPkts_Type = Counter64
+_AcdRegulatorHistStatsGreenHCPkts_Object = MibTableColumn
+acdRegulatorHistStatsGreenHCPkts = _AcdRegulatorHistStatsGreenHCPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 25),
+    _AcdRegulatorHistStatsGreenHCPkts_Type()
+)
+acdRegulatorHistStatsGreenHCPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenHCPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenHCPkts.setUnits("Packets")
+_AcdRegulatorHistStatsYellowHCOctets_Type = Counter64
+_AcdRegulatorHistStatsYellowHCOctets_Object = MibTableColumn
+acdRegulatorHistStatsYellowHCOctets = _AcdRegulatorHistStatsYellowHCOctets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 26),
+    _AcdRegulatorHistStatsYellowHCOctets_Type()
+)
+acdRegulatorHistStatsYellowHCOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowHCOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowHCOctets.setUnits("Octets")
+_AcdRegulatorHistStatsYellowHCPkts_Type = Counter64
+_AcdRegulatorHistStatsYellowHCPkts_Object = MibTableColumn
+acdRegulatorHistStatsYellowHCPkts = _AcdRegulatorHistStatsYellowHCPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 27),
+    _AcdRegulatorHistStatsYellowHCPkts_Type()
+)
+acdRegulatorHistStatsYellowHCPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowHCPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowHCPkts.setUnits("Packets")
+_AcdRegulatorHistStatsRedHCOctets_Type = Counter64
+_AcdRegulatorHistStatsRedHCOctets_Object = MibTableColumn
+acdRegulatorHistStatsRedHCOctets = _AcdRegulatorHistStatsRedHCOctets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 28),
+    _AcdRegulatorHistStatsRedHCOctets_Type()
+)
+acdRegulatorHistStatsRedHCOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedHCOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedHCOctets.setUnits("Octets")
+_AcdRegulatorHistStatsRedHCPkts_Type = Counter64
+_AcdRegulatorHistStatsRedHCPkts_Object = MibTableColumn
+acdRegulatorHistStatsRedHCPkts = _AcdRegulatorHistStatsRedHCPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 29),
+    _AcdRegulatorHistStatsRedHCPkts_Type()
+)
+acdRegulatorHistStatsRedHCPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedHCPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedHCPkts.setUnits("Packets")
+_AcdRegulatorHistStatsGreenAvgRate_Type = Gauge32
+_AcdRegulatorHistStatsGreenAvgRate_Object = MibTableColumn
+acdRegulatorHistStatsGreenAvgRate = _AcdRegulatorHistStatsGreenAvgRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 30),
+    _AcdRegulatorHistStatsGreenAvgRate_Type()
+)
+acdRegulatorHistStatsGreenAvgRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenAvgRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenAvgRate.setUnits("Kbps")
+_AcdRegulatorHistStatsGreenMinRate_Type = Gauge32
+_AcdRegulatorHistStatsGreenMinRate_Object = MibTableColumn
+acdRegulatorHistStatsGreenMinRate = _AcdRegulatorHistStatsGreenMinRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 31),
+    _AcdRegulatorHistStatsGreenMinRate_Type()
+)
+acdRegulatorHistStatsGreenMinRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenMinRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenMinRate.setUnits("Kbps")
+_AcdRegulatorHistStatsGreenMaxRate_Type = Gauge32
+_AcdRegulatorHistStatsGreenMaxRate_Object = MibTableColumn
+acdRegulatorHistStatsGreenMaxRate = _AcdRegulatorHistStatsGreenMaxRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 32),
+    _AcdRegulatorHistStatsGreenMaxRate_Type()
+)
+acdRegulatorHistStatsGreenMaxRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenMaxRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsGreenMaxRate.setUnits("Kbps")
+_AcdRegulatorHistStatsYellowAvgRate_Type = Gauge32
+_AcdRegulatorHistStatsYellowAvgRate_Object = MibTableColumn
+acdRegulatorHistStatsYellowAvgRate = _AcdRegulatorHistStatsYellowAvgRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 33),
+    _AcdRegulatorHistStatsYellowAvgRate_Type()
+)
+acdRegulatorHistStatsYellowAvgRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowAvgRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowAvgRate.setUnits("Kbps")
+_AcdRegulatorHistStatsYellowMinRate_Type = Gauge32
+_AcdRegulatorHistStatsYellowMinRate_Object = MibTableColumn
+acdRegulatorHistStatsYellowMinRate = _AcdRegulatorHistStatsYellowMinRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 34),
+    _AcdRegulatorHistStatsYellowMinRate_Type()
+)
+acdRegulatorHistStatsYellowMinRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowMinRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowMinRate.setUnits("Kbps")
+_AcdRegulatorHistStatsYellowMaxRate_Type = Gauge32
+_AcdRegulatorHistStatsYellowMaxRate_Object = MibTableColumn
+acdRegulatorHistStatsYellowMaxRate = _AcdRegulatorHistStatsYellowMaxRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 35),
+    _AcdRegulatorHistStatsYellowMaxRate_Type()
+)
+acdRegulatorHistStatsYellowMaxRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowMaxRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsYellowMaxRate.setUnits("Kbps")
+_AcdRegulatorHistStatsRedAvgRate_Type = Gauge32
+_AcdRegulatorHistStatsRedAvgRate_Object = MibTableColumn
+acdRegulatorHistStatsRedAvgRate = _AcdRegulatorHistStatsRedAvgRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 36),
+    _AcdRegulatorHistStatsRedAvgRate_Type()
+)
+acdRegulatorHistStatsRedAvgRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedAvgRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedAvgRate.setUnits("Kbps")
+_AcdRegulatorHistStatsRedMinRate_Type = Gauge32
+_AcdRegulatorHistStatsRedMinRate_Object = MibTableColumn
+acdRegulatorHistStatsRedMinRate = _AcdRegulatorHistStatsRedMinRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 37),
+    _AcdRegulatorHistStatsRedMinRate_Type()
+)
+acdRegulatorHistStatsRedMinRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedMinRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedMinRate.setUnits("Kbps")
+_AcdRegulatorHistStatsRedMaxRate_Type = Gauge32
+_AcdRegulatorHistStatsRedMaxRate_Object = MibTableColumn
+acdRegulatorHistStatsRedMaxRate = _AcdRegulatorHistStatsRedMaxRate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 6, 3, 1, 38),
+    _AcdRegulatorHistStatsRedMaxRate_Type()
+)
+acdRegulatorHistStatsRedMaxRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedMaxRate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdRegulatorHistStatsRedMaxRate.setUnits("Kbps")
 _AcdRegulatorNotifications_ObjectIdentity = ObjectIdentity
 acdRegulatorNotifications = _AcdRegulatorNotifications_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 4)
@@ -789,7 +1104,10 @@ acdRegulatorGroup.setObjects(
         ("ACD-REGULATOR-MIB", "acdRegulatorEbs"),
         ("ACD-REGULATOR-MIB", "acdRegulatorIsBlind"),
         ("ACD-REGULATOR-MIB", "acdRegulatorIsCouple"),
-        ("ACD-REGULATOR-MIB", "acdRegulatorRowStatus"))
+        ("ACD-REGULATOR-MIB", "acdRegulatorRowStatus"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorWorkingRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorCirMax"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorEirMax"))
 )
 if mibBuilder.loadTexts:
     acdRegulatorGroup.setStatus("current")
@@ -811,7 +1129,16 @@ acdRegulatorStatsGroup.setObjects(
         ("ACD-REGULATOR-MIB", "acdRegulatorStatsDropPkts"),
         ("ACD-REGULATOR-MIB", "acdRegulatorStatsDropOverflowPkts"),
         ("ACD-REGULATOR-MIB", "acdRegulatorStatsDropHCPkts"),
-        ("ACD-REGULATOR-MIB", "acdRegulatorStatsDropRate"))
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsDropRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsGreenHCOctets"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsGreenHCPkts"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsYellowHCOctets"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsYellowHCPkts"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsRedHCOctets"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsRedHCPkts"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsGreenRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsYellowRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorStatsRedRate"))
 )
 if mibBuilder.loadTexts:
     acdRegulatorStatsGroup.setStatus("current")
@@ -820,7 +1147,9 @@ acdRegulatorHistStatsGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 6, 2, 3)
 )
 acdRegulatorHistStatsGroup.setObjects(
-      *(("ACD-REGULATOR-MIB", "acdRegulatorHistStatsStatus"),
+      *(("ACD-REGULATOR-MIB", "acdRegulatorHistStatsID"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsSampleIndex"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsStatus"),
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsDuration"),
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsIntervalEnd"),
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsAcceptOctets"),
@@ -840,7 +1169,22 @@ acdRegulatorHistStatsGroup.setObjects(
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsDropHCPkts"),
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsDropAvgRate"),
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsDropMinRate"),
-        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsDropMaxRate"))
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsDropMaxRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsGreenHCOctets"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsGreenHCPkts"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsYellowHCOctets"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsYellowHCPkts"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsRedHCOctets"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsRedHCPkts"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsGreenAvgRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsGreenMinRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsGreenMaxRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsYellowAvgRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsYellowMinRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsYellowMaxRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsRedAvgRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsRedMinRate"),
+        ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsRedMaxRate"))
 )
 if mibBuilder.loadTexts:
     acdRegulatorHistStatsGroup.setStatus("current")
@@ -866,17 +1210,17 @@ if mibBuilder.loadTexts:
 
 # Module compliance
 
-acdPaaCompliance = ModuleCompliance(
+acdRegulatorCompliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 22420, 2, 6, 6, 1, 1)
 )
-acdPaaCompliance.setObjects(
+acdRegulatorCompliance.setObjects(
       *(("ACD-REGULATOR-MIB", "acdRegulatorGroup"),
         ("ACD-REGULATOR-MIB", "acdRegulatorStatsGroup"),
         ("ACD-REGULATOR-MIB", "acdRegulatorHistStatsGroup"),
         ("ACD-REGULATOR-MIB", "acdRegulatorTidGroup"))
 )
 if mibBuilder.loadTexts:
-    acdPaaCompliance.setStatus(
+    acdRegulatorCompliance.setStatus(
         "current"
     )
 
@@ -897,6 +1241,9 @@ mibBuilder.exportSymbols(
        "acdRegulatorIsBlind": acdRegulatorIsBlind,
        "acdRegulatorIsCouple": acdRegulatorIsCouple,
        "acdRegulatorRowStatus": acdRegulatorRowStatus,
+       "acdRegulatorWorkingRate": acdRegulatorWorkingRate,
+       "acdRegulatorCirMax": acdRegulatorCirMax,
+       "acdRegulatorEirMax": acdRegulatorEirMax,
        "acdRegulatorStatsTable": acdRegulatorStatsTable,
        "acdRegulatorStatsEntry": acdRegulatorStatsEntry,
        "acdRegulatorStatsID": acdRegulatorStatsID,
@@ -914,6 +1261,15 @@ mibBuilder.exportSymbols(
        "acdRegulatorStatsDropOverflowPkts": acdRegulatorStatsDropOverflowPkts,
        "acdRegulatorStatsDropHCPkts": acdRegulatorStatsDropHCPkts,
        "acdRegulatorStatsDropRate": acdRegulatorStatsDropRate,
+       "acdRegulatorStatsGreenHCOctets": acdRegulatorStatsGreenHCOctets,
+       "acdRegulatorStatsGreenHCPkts": acdRegulatorStatsGreenHCPkts,
+       "acdRegulatorStatsYellowHCOctets": acdRegulatorStatsYellowHCOctets,
+       "acdRegulatorStatsYellowHCPkts": acdRegulatorStatsYellowHCPkts,
+       "acdRegulatorStatsRedHCOctets": acdRegulatorStatsRedHCOctets,
+       "acdRegulatorStatsRedHCPkts": acdRegulatorStatsRedHCPkts,
+       "acdRegulatorStatsGreenRate": acdRegulatorStatsGreenRate,
+       "acdRegulatorStatsYellowRate": acdRegulatorStatsYellowRate,
+       "acdRegulatorStatsRedRate": acdRegulatorStatsRedRate,
        "acdRegulatorHistStatsTable": acdRegulatorHistStatsTable,
        "acdRegulatorHistStatsEntry": acdRegulatorHistStatsEntry,
        "acdRegulatorHistStatsID": acdRegulatorHistStatsID,
@@ -939,13 +1295,28 @@ mibBuilder.exportSymbols(
        "acdRegulatorHistStatsDropAvgRate": acdRegulatorHistStatsDropAvgRate,
        "acdRegulatorHistStatsDropMinRate": acdRegulatorHistStatsDropMinRate,
        "acdRegulatorHistStatsDropMaxRate": acdRegulatorHistStatsDropMaxRate,
+       "acdRegulatorHistStatsGreenHCOctets": acdRegulatorHistStatsGreenHCOctets,
+       "acdRegulatorHistStatsGreenHCPkts": acdRegulatorHistStatsGreenHCPkts,
+       "acdRegulatorHistStatsYellowHCOctets": acdRegulatorHistStatsYellowHCOctets,
+       "acdRegulatorHistStatsYellowHCPkts": acdRegulatorHistStatsYellowHCPkts,
+       "acdRegulatorHistStatsRedHCOctets": acdRegulatorHistStatsRedHCOctets,
+       "acdRegulatorHistStatsRedHCPkts": acdRegulatorHistStatsRedHCPkts,
+       "acdRegulatorHistStatsGreenAvgRate": acdRegulatorHistStatsGreenAvgRate,
+       "acdRegulatorHistStatsGreenMinRate": acdRegulatorHistStatsGreenMinRate,
+       "acdRegulatorHistStatsGreenMaxRate": acdRegulatorHistStatsGreenMaxRate,
+       "acdRegulatorHistStatsYellowAvgRate": acdRegulatorHistStatsYellowAvgRate,
+       "acdRegulatorHistStatsYellowMinRate": acdRegulatorHistStatsYellowMinRate,
+       "acdRegulatorHistStatsYellowMaxRate": acdRegulatorHistStatsYellowMaxRate,
+       "acdRegulatorHistStatsRedAvgRate": acdRegulatorHistStatsRedAvgRate,
+       "acdRegulatorHistStatsRedMinRate": acdRegulatorHistStatsRedMinRate,
+       "acdRegulatorHistStatsRedMaxRate": acdRegulatorHistStatsRedMaxRate,
        "acdRegulatorNotifications": acdRegulatorNotifications,
        "acdRegulatorMIBObjects": acdRegulatorMIBObjects,
        "acdRegulatorTableTid": acdRegulatorTableTid,
        "acdRegulatorTableLastChangeTid": acdRegulatorTableLastChangeTid,
        "acdRegulatorConformance": acdRegulatorConformance,
        "acdRegulatorCompliances": acdRegulatorCompliances,
-       "acdPaaCompliance": acdPaaCompliance,
+       "acdRegulatorCompliance": acdRegulatorCompliance,
        "acdRegulatorGroups": acdRegulatorGroups,
        "acdRegulatorGroup": acdRegulatorGroup,
        "acdRegulatorStatsGroup": acdRegulatorStatsGroup,

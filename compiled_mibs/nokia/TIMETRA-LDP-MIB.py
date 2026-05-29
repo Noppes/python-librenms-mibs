@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-LDP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -397,7 +394,8 @@ class TmnxLdpFECFlags(TextualConvention, Bits):
           ("upperFec", 21),
           ("lowerFec", 22),
           ("communityMismatch", 23),
-          ("bkpUpperFec", 24))
+          ("bkpUpperFec", 24),
+          ("adjCapMismatch", 25))
     )
 
 
@@ -7754,6 +7752,32 @@ vRtrLdpAggregateOctetsHigh32 = _VRtrLdpAggregateOctetsHigh32_Object(
 vRtrLdpAggregateOctetsHigh32.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrLdpAggregateOctetsHigh32.setStatus("current")
+
+
+class _VRtrLdpEgrStatOperMode_Type(Integer32):
+    """Custom type vRtrLdpEgrStatOperMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("per-fc", 0),
+          ("aggregate", 1))
+    )
+
+
+_VRtrLdpEgrStatOperMode_Type.__name__ = "Integer32"
+_VRtrLdpEgrStatOperMode_Object = MibTableColumn
+vRtrLdpEgrStatOperMode = _VRtrLdpEgrStatOperMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 8, 29, 1, 103),
+    _VRtrLdpEgrStatOperMode_Type()
+)
+vRtrLdpEgrStatOperMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrLdpEgrStatOperMode.setStatus("current")
 _VRtrLdpAddrFecExtTable_Object = MibTable
 vRtrLdpAddrFecExtTable = _VRtrLdpAddrFecExtTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 8, 30)
@@ -12573,6 +12597,15 @@ tmnxLdpPeerMcastTunnelingGroup.setObjects(
 if mibBuilder.loadTexts:
     tmnxLdpPeerMcastTunnelingGroup.setStatus("current")
 
+tmnxLdpFecStatsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 8, 2, 73)
+)
+tmnxLdpFecStatsGroup.setObjects(
+    ("TIMETRA-LDP-MIB", "vRtrLdpEgrStatOperMode")
+)
+if mibBuilder.loadTexts:
+    tmnxLdpFecStatsGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -13082,6 +13115,17 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxLdpV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 8, 1, 17)
+)
+tmnxLdpV25v0Compliance.setObjects(
+    ("TIMETRA-LDP-MIB", "tmnxLdpFecStatsGroup")
+)
+if mibBuilder.loadTexts:
+    tmnxLdpV25v0Compliance.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -13122,6 +13166,7 @@ mibBuilder.exportSymbols(
        "tmnxLdpV15v0Compliance": tmnxLdpV15v0Compliance,
        "tmnxLdpV16v0Compliance": tmnxLdpV16v0Compliance,
        "tmnxLdpV20v0Compliance": tmnxLdpV20v0Compliance,
+       "tmnxLdpV25v0Compliance": tmnxLdpV25v0Compliance,
        "tmnxLdpGroups": tmnxLdpGroups,
        "tmnxLdpAddrFecGroup": tmnxLdpAddrFecGroup,
        "tmnxLdpNotifyObjsGroup": tmnxLdpNotifyObjsGroup,
@@ -13186,6 +13231,7 @@ mibBuilder.exportSymbols(
        "tmnxLdpLocalLsrIdCommunityGroup": tmnxLdpLocalLsrIdCommunityGroup,
        "tmnxLdpAggrEgrStatsV16v0Group": tmnxLdpAggrEgrStatsV16v0Group,
        "tmnxLdpPeerMcastTunnelingGroup": tmnxLdpPeerMcastTunnelingGroup,
+       "tmnxLdpFecStatsGroup": tmnxLdpFecStatsGroup,
        "tmnxLdpObjs": tmnxLdpObjs,
        "vRtrLdpGeneralTable": vRtrLdpGeneralTable,
        "vRtrLdpGeneralEntry": vRtrLdpGeneralEntry,
@@ -13821,6 +13867,7 @@ mibBuilder.exportSymbols(
        "vRtrLdpAggregateOctets": vRtrLdpAggregateOctets,
        "vRtrLdpAggregateOctetsLow32": vRtrLdpAggregateOctetsLow32,
        "vRtrLdpAggregateOctetsHigh32": vRtrLdpAggregateOctetsHigh32,
+       "vRtrLdpEgrStatOperMode": vRtrLdpEgrStatOperMode,
        "vRtrLdpAddrFecExtTable": vRtrLdpAddrFecExtTable,
        "vRtrLdpAddrFecExtEntry": vRtrLdpAddrFecExtEntry,
        "vRtrLdpAddrFecOutLbl6": vRtrLdpAddrFecOutLbl6,

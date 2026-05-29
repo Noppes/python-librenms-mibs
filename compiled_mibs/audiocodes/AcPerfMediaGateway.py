@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\audiocodes\AcPerfMediaGateway
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:19:57 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,7 @@ acPerfMediaGateway = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acPerfMediaGateway.setRevisions(
-        ("2003-11-20 00:00",)
+        ("2021-02-16 09:55",)
     )
 
 
@@ -150,7 +147,7 @@ acPerfCpNumDupsForCompletedTransactions = _AcPerfCpNumDupsForCompletedTransactio
 )
 acPerfCpNumDupsForCompletedTransactions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpNumDupsForCompletedTransactions.setStatus("deprecated")
+    acPerfCpNumDupsForCompletedTransactions.setStatus("obsolete")
 _AcPerfCpNumDupsForOutstandingTransactions_Type = Counter32
 _AcPerfCpNumDupsForOutstandingTransactions_Object = MibScalar
 acPerfCpNumDupsForOutstandingTransactions = _AcPerfCpNumDupsForOutstandingTransactions_Object(
@@ -159,7 +156,7 @@ acPerfCpNumDupsForOutstandingTransactions = _AcPerfCpNumDupsForOutstandingTransa
 )
 acPerfCpNumDupsForOutstandingTransactions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpNumDupsForOutstandingTransactions.setStatus("deprecated")
+    acPerfCpNumDupsForOutstandingTransactions.setStatus("obsolete")
 _AcPerfCpMessageSendSuccesses_Type = Counter32
 _AcPerfCpMessageSendSuccesses_Object = MibScalar
 acPerfCpMessageSendSuccesses = _AcPerfCpMessageSendSuccesses_Object(
@@ -168,7 +165,7 @@ acPerfCpMessageSendSuccesses = _AcPerfCpMessageSendSuccesses_Object(
 )
 acPerfCpMessageSendSuccesses.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessageSendSuccesses.setStatus("deprecated")
+    acPerfCpMessageSendSuccesses.setStatus("obsolete")
 _AcPerfCpMessageSendErrors_Type = Counter32
 _AcPerfCpMessageSendErrors_Object = MibScalar
 acPerfCpMessageSendErrors = _AcPerfCpMessageSendErrors_Object(
@@ -177,7 +174,7 @@ acPerfCpMessageSendErrors = _AcPerfCpMessageSendErrors_Object(
 )
 acPerfCpMessageSendErrors.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessageSendErrors.setStatus("deprecated")
+    acPerfCpMessageSendErrors.setStatus("obsolete")
 _AcPerfCpMessageReceiveSuccesses_Type = Counter32
 _AcPerfCpMessageReceiveSuccesses_Object = MibScalar
 acPerfCpMessageReceiveSuccesses = _AcPerfCpMessageReceiveSuccesses_Object(
@@ -186,7 +183,7 @@ acPerfCpMessageReceiveSuccesses = _AcPerfCpMessageReceiveSuccesses_Object(
 )
 acPerfCpMessageReceiveSuccesses.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessageReceiveSuccesses.setStatus("deprecated")
+    acPerfCpMessageReceiveSuccesses.setStatus("obsolete")
 _AcPerfCpMessageReceiveErrors_Type = Counter32
 _AcPerfCpMessageReceiveErrors_Object = MibScalar
 acPerfCpMessageReceiveErrors = _AcPerfCpMessageReceiveErrors_Object(
@@ -195,7 +192,7 @@ acPerfCpMessageReceiveErrors = _AcPerfCpMessageReceiveErrors_Object(
 )
 acPerfCpMessageReceiveErrors.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessageReceiveErrors.setStatus("deprecated")
+    acPerfCpMessageReceiveErrors.setStatus("obsolete")
 _AcPerfCpProtocolSyntaxErrors_Type = Counter32
 _AcPerfCpProtocolSyntaxErrors_Object = MibScalar
 acPerfCpProtocolSyntaxErrors = _AcPerfCpProtocolSyntaxErrors_Object(
@@ -204,7 +201,7 @@ acPerfCpProtocolSyntaxErrors = _AcPerfCpProtocolSyntaxErrors_Object(
 )
 acPerfCpProtocolSyntaxErrors.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpProtocolSyntaxErrors.setStatus("deprecated")
+    acPerfCpProtocolSyntaxErrors.setStatus("obsolete")
 _AcPerfCpMessageRetransmissions_Type = Counter32
 _AcPerfCpMessageRetransmissions_Object = MibScalar
 acPerfCpMessageRetransmissions = _AcPerfCpMessageRetransmissions_Object(
@@ -213,7 +210,7 @@ acPerfCpMessageRetransmissions = _AcPerfCpMessageRetransmissions_Object(
 )
 acPerfCpMessageRetransmissions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessageRetransmissions.setStatus("deprecated")
+    acPerfCpMessageRetransmissions.setStatus("obsolete")
 _AcPerfCpMessageMaxRetransmissionsExceeded_Type = Counter32
 _AcPerfCpMessageMaxRetransmissionsExceeded_Object = MibScalar
 acPerfCpMessageMaxRetransmissionsExceeded = _AcPerfCpMessageMaxRetransmissionsExceeded_Object(
@@ -222,7 +219,7 @@ acPerfCpMessageMaxRetransmissionsExceeded = _AcPerfCpMessageMaxRetransmissionsEx
 )
 acPerfCpMessageMaxRetransmissionsExceeded.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessageMaxRetransmissionsExceeded.setStatus("deprecated")
+    acPerfCpMessageMaxRetransmissionsExceeded.setStatus("obsolete")
 _AcPerfCpMessagesFromUntrustedSources_Type = Counter32
 _AcPerfCpMessagesFromUntrustedSources_Object = MibScalar
 acPerfCpMessagesFromUntrustedSources = _AcPerfCpMessagesFromUntrustedSources_Object(
@@ -231,7 +228,7 @@ acPerfCpMessagesFromUntrustedSources = _AcPerfCpMessagesFromUntrustedSources_Obj
 )
 acPerfCpMessagesFromUntrustedSources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfCpMessagesFromUntrustedSources.setStatus("deprecated")
+    acPerfCpMessagesFromUntrustedSources.setStatus("obsolete")
 _AcPerfRtp_ObjectIdentity = ObjectIdentity
 acPerfRtp = _AcPerfRtp_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 10, 1, 2)
@@ -244,7 +241,7 @@ acPerfRtpSenderPackets = _AcPerfRtpSenderPackets_Object(
 )
 acPerfRtpSenderPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpSenderPackets.setStatus("deprecated")
+    acPerfRtpSenderPackets.setStatus("obsolete")
 _AcPerfRtpSenderOctets_Type = Counter32
 _AcPerfRtpSenderOctets_Object = MibScalar
 acPerfRtpSenderOctets = _AcPerfRtpSenderOctets_Object(
@@ -253,7 +250,7 @@ acPerfRtpSenderOctets = _AcPerfRtpSenderOctets_Object(
 )
 acPerfRtpSenderOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpSenderOctets.setStatus("deprecated")
+    acPerfRtpSenderOctets.setStatus("obsolete")
 _AcPerfRtpReceiverPackets_Type = Counter32
 _AcPerfRtpReceiverPackets_Object = MibScalar
 acPerfRtpReceiverPackets = _AcPerfRtpReceiverPackets_Object(
@@ -262,7 +259,7 @@ acPerfRtpReceiverPackets = _AcPerfRtpReceiverPackets_Object(
 )
 acPerfRtpReceiverPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpReceiverPackets.setStatus("deprecated")
+    acPerfRtpReceiverPackets.setStatus("obsolete")
 _AcPerfRtpReceiverOctets_Type = Counter32
 _AcPerfRtpReceiverOctets_Object = MibScalar
 acPerfRtpReceiverOctets = _AcPerfRtpReceiverOctets_Object(
@@ -271,7 +268,7 @@ acPerfRtpReceiverOctets = _AcPerfRtpReceiverOctets_Object(
 )
 acPerfRtpReceiverOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpReceiverOctets.setStatus("deprecated")
+    acPerfRtpReceiverOctets.setStatus("obsolete")
 _AcPerfRtpRcvrLostPackets_Type = Counter32
 _AcPerfRtpRcvrLostPackets_Object = MibScalar
 acPerfRtpRcvrLostPackets = _AcPerfRtpRcvrLostPackets_Object(
@@ -280,7 +277,7 @@ acPerfRtpRcvrLostPackets = _AcPerfRtpRcvrLostPackets_Object(
 )
 acPerfRtpRcvrLostPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpRcvrLostPackets.setStatus("deprecated")
+    acPerfRtpRcvrLostPackets.setStatus("obsolete")
 _AcPerfRtpFailedDueToLackOfResources_Type = Counter32
 _AcPerfRtpFailedDueToLackOfResources_Object = MibScalar
 acPerfRtpFailedDueToLackOfResources = _AcPerfRtpFailedDueToLackOfResources_Object(
@@ -289,7 +286,7 @@ acPerfRtpFailedDueToLackOfResources = _AcPerfRtpFailedDueToLackOfResources_Objec
 )
 acPerfRtpFailedDueToLackOfResources.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpFailedDueToLackOfResources.setStatus("deprecated")
+    acPerfRtpFailedDueToLackOfResources.setStatus("obsolete")
 _AcPerfRtpSimplexInSessionsTotal_Type = Counter32
 _AcPerfRtpSimplexInSessionsTotal_Object = MibScalar
 acPerfRtpSimplexInSessionsTotal = _AcPerfRtpSimplexInSessionsTotal_Object(
@@ -298,7 +295,7 @@ acPerfRtpSimplexInSessionsTotal = _AcPerfRtpSimplexInSessionsTotal_Object(
 )
 acPerfRtpSimplexInSessionsTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpSimplexInSessionsTotal.setStatus("deprecated")
+    acPerfRtpSimplexInSessionsTotal.setStatus("obsolete")
 _AcPerfRtpSimplexInSessionsCurrent_Type = Gauge32
 _AcPerfRtpSimplexInSessionsCurrent_Object = MibScalar
 acPerfRtpSimplexInSessionsCurrent = _AcPerfRtpSimplexInSessionsCurrent_Object(
@@ -307,7 +304,7 @@ acPerfRtpSimplexInSessionsCurrent = _AcPerfRtpSimplexInSessionsCurrent_Object(
 )
 acPerfRtpSimplexInSessionsCurrent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpSimplexInSessionsCurrent.setStatus("deprecated")
+    acPerfRtpSimplexInSessionsCurrent.setStatus("obsolete")
 _AcPerfRtpSimplexOutSessionsTotal_Type = Counter32
 _AcPerfRtpSimplexOutSessionsTotal_Object = MibScalar
 acPerfRtpSimplexOutSessionsTotal = _AcPerfRtpSimplexOutSessionsTotal_Object(
@@ -316,7 +313,7 @@ acPerfRtpSimplexOutSessionsTotal = _AcPerfRtpSimplexOutSessionsTotal_Object(
 )
 acPerfRtpSimplexOutSessionsTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpSimplexOutSessionsTotal.setStatus("deprecated")
+    acPerfRtpSimplexOutSessionsTotal.setStatus("obsolete")
 _AcPerfRtpSimplexOutSessionsCurrent_Type = Gauge32
 _AcPerfRtpSimplexOutSessionsCurrent_Object = MibScalar
 acPerfRtpSimplexOutSessionsCurrent = _AcPerfRtpSimplexOutSessionsCurrent_Object(
@@ -325,7 +322,7 @@ acPerfRtpSimplexOutSessionsCurrent = _AcPerfRtpSimplexOutSessionsCurrent_Object(
 )
 acPerfRtpSimplexOutSessionsCurrent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpSimplexOutSessionsCurrent.setStatus("deprecated")
+    acPerfRtpSimplexOutSessionsCurrent.setStatus("obsolete")
 _AcPerfRtpDuplexSessionsTotal_Type = Counter32
 _AcPerfRtpDuplexSessionsTotal_Object = MibScalar
 acPerfRtpDuplexSessionsTotal = _AcPerfRtpDuplexSessionsTotal_Object(
@@ -334,7 +331,7 @@ acPerfRtpDuplexSessionsTotal = _AcPerfRtpDuplexSessionsTotal_Object(
 )
 acPerfRtpDuplexSessionsTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpDuplexSessionsTotal.setStatus("deprecated")
+    acPerfRtpDuplexSessionsTotal.setStatus("obsolete")
 _AcPerfRtpDuplexSessionsCurrent_Type = Gauge32
 _AcPerfRtpDuplexSessionsCurrent_Object = MibScalar
 acPerfRtpDuplexSessionsCurrent = _AcPerfRtpDuplexSessionsCurrent_Object(
@@ -343,7 +340,7 @@ acPerfRtpDuplexSessionsCurrent = _AcPerfRtpDuplexSessionsCurrent_Object(
 )
 acPerfRtpDuplexSessionsCurrent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfRtpDuplexSessionsCurrent.setStatus("deprecated")
+    acPerfRtpDuplexSessionsCurrent.setStatus("obsolete")
 _AcPerfSystem_ObjectIdentity = ObjectIdentity
 acPerfSystem = _AcPerfSystem_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 10, 1, 3)
@@ -356,7 +353,7 @@ acPerfSystemPacketEndpoints = _AcPerfSystemPacketEndpoints_Object(
 )
 acPerfSystemPacketEndpoints.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfSystemPacketEndpoints.setStatus("deprecated")
+    acPerfSystemPacketEndpoints.setStatus("obsolete")
 _AcPerfSystemPacketEndpointsInUse_Type = Gauge32
 _AcPerfSystemPacketEndpointsInUse_Object = MibScalar
 acPerfSystemPacketEndpointsInUse = _AcPerfSystemPacketEndpointsInUse_Object(
@@ -365,7 +362,7 @@ acPerfSystemPacketEndpointsInUse = _AcPerfSystemPacketEndpointsInUse_Object(
 )
 acPerfSystemPacketEndpointsInUse.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acPerfSystemPacketEndpointsInUse.setStatus("deprecated")
+    acPerfSystemPacketEndpointsInUse.setStatus("obsolete")
 
 # Managed Objects groups
 

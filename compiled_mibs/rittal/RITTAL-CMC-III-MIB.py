@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\rittal\RITTAL-CMC-III-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:23:28 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,9 @@ cmcIII = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cmcIII.setRevisions(
-        ("2018-03-05 00:00",
+        ("2019-04-10 00:00",
+         "2018-10-22 00:00",
+         "2018-03-05 00:00",
          "2017-08-04 00:00",
          "2016-02-02 00:00",
          "2015-10-27 00:00",
@@ -380,7 +379,8 @@ class _CmcIIIUnitType_Type(Integer32):
               5,
               6,
               7,
-              8)
+              8,
+              9)
         )
     )
     namedValues = NamedValues(
@@ -391,7 +391,8 @@ class _CmcIIIUnitType_Type(Integer32):
           ("pdu", 5),
           ("rms", 6),
           ("mcs", 7),
-          ("iot", 8))
+          ("iot", 8),
+          ("pdu3", 9))
     )
 
 
@@ -1098,6 +1099,34 @@ cmcIIIOpcUaPort = _CmcIIIOpcUaPort_Object(
 cmcIIIOpcUaPort.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     cmcIIIOpcUaPort.setStatus("current")
+
+
+class _CmcIIISetFlowUnit_Type(Integer32):
+    """Custom type cmcIIISetFlowUnit based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("literMin", 1),
+          ("gallonMin", 2))
+    )
+
+
+_CmcIIISetFlowUnit_Type.__name__ = "Integer32"
+_CmcIIISetFlowUnit_Object = MibScalar
+cmcIIISetFlowUnit = _CmcIIISetFlowUnit_Object(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 3, 2, 22),
+    _CmcIIISetFlowUnit_Type()
+)
+cmcIIISetFlowUnit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cmcIIISetFlowUnit.setStatus("current")
 _CmcIIISetupTimer_ObjectIdentity = ObjectIdentity
 cmcIIISetupTimer = _CmcIIISetupTimer_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 3, 3)
@@ -3213,14 +3242,16 @@ class _CmcIIIDevBus_Type(Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("canBus1", 1),
           ("canBus2", 2),
           ("virtual", 3),
-          ("modbus", 4))
+          ("modbus", 4),
+          ("wireless", 5))
     )
 
 
@@ -3665,6 +3696,7 @@ class _CmcIIIVarType_Type(Integer32):
               36,
               37,
               38,
+              39,
               40,
               41,
               42,
@@ -3680,6 +3712,7 @@ class _CmcIIIVarType_Type(Integer32):
               53,
               54,
               55,
+              56,
               80,
               81,
               82,
@@ -3687,6 +3720,7 @@ class _CmcIIIVarType_Type(Integer32):
               84,
               85,
               86,
+              87,
               90,
               91,
               92,
@@ -3695,6 +3729,7 @@ class _CmcIIIVarType_Type(Integer32):
               95,
               96,
               97,
+              98,
               100,
               110,
               111,
@@ -3722,6 +3757,8 @@ class _CmcIIIVarType_Type(Integer32):
               140,
               145,
               146,
+              150,
+              151,
               254,
               255)
         )
@@ -3765,6 +3802,7 @@ class _CmcIIIVarType_Type(Integer32):
           ("sequence", 36),
           ("remote", 37),
           ("stringValue", 38),
+          ("remoteTimeout", 39),
           ("outputPWM", 40),
           ("rotation", 41),
           ("circuit", 42),
@@ -3780,6 +3818,7 @@ class _CmcIIIVarType_Type(Integer32):
           ("devLocation", 53),
           ("currentMin", 54),
           ("currentMax", 55),
+          ("mode", 56),
           ("keycode", 80),
           ("command", 81),
           ("commandEnum", 82),
@@ -3787,6 +3826,7 @@ class _CmcIIIVarType_Type(Integer32):
           ("commandService", 84),
           ("commandRack", 85),
           ("commandRCM", 86),
+          ("commandStatus", 87),
           ("unitType", 90),
           ("swVersion", 91),
           ("serialNumber", 92),
@@ -3795,6 +3835,7 @@ class _CmcIIIVarType_Type(Integer32):
           ("gsmStatus", 95),
           ("connected", 96),
           ("connectedEnum", 97),
+          ("hwVersion", 98),
           ("grouping", 100),
           ("scaleValue", 110),
           ("scaleUnit", 111),
@@ -3820,8 +3861,10 @@ class _CmcIIIVarType_Type(Integer32):
           ("tagsQuit", 138),
           ("tagsChanged", 139),
           ("uid", 140),
-          ("opModeMiniCh", 145),
-          ("opModeBEP", 146),
+          ("opModeBEP", 145),
+          ("opModeMiniCh", 146),
+          ("commandControl", 150),
+          ("commandSignal", 151),
           ("ignore", 254),
           ("illegal", 255))
     )
@@ -6552,6 +6595,7 @@ cmcIIISetupMibGroup.setObjects(
         ("RITTAL-CMC-III-MIB", "cmcIIILanguage"),
         ("RITTAL-CMC-III-MIB", "cmcIIIOpcUaAccess"),
         ("RITTAL-CMC-III-MIB", "cmcIIIOpcUaPort"),
+        ("RITTAL-CMC-III-MIB", "cmcIIISetFlowUnit"),
         ("RITTAL-CMC-III-MIB", "cmcIIINumberOfTrapReceivers"),
         ("RITTAL-CMC-III-MIB", "cmcIIITrapReceiverStatus"),
         ("RITTAL-CMC-III-MIB", "cmcIIITrapReceiverIpAddress"))
@@ -7062,6 +7106,7 @@ mibBuilder.exportSymbols(
        "cmcIIILanguage": cmcIIILanguage,
        "cmcIIIOpcUaAccess": cmcIIIOpcUaAccess,
        "cmcIIIOpcUaPort": cmcIIIOpcUaPort,
+       "cmcIIISetFlowUnit": cmcIIISetFlowUnit,
        "cmcIIISetupTimer": cmcIIISetupTimer,
        "cmcIIINumberOfTimers": cmcIIINumberOfTimers,
        "cmcIIITimerTable": cmcIIITimerTable,

@@ -1,28 +1,11 @@
 {
-  "timestamp": "2025-10-02T11:17:51.569039",
+  "timestamp": "2026-05-29T09:18:39.057538",
   "stats": {
     "total": 4,
-    "compiled": 0,
-    "failed": 4,
+    "compiled": 4,
+    "failed": 0,
     "skipped": 0,
-    "errors": [
-      {
-        "mib": "PEAKFLOW-DOS-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "PEAKFLOW-SP-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "PEAKFLOW-TMS-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "ARBOR-SMI",
-        "error": "missing"
-      }
-    ]
+    "errors": []
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

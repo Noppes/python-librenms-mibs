@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\juniper\JUNIPER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:02:15 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -45,13 +42,21 @@ if 'mibBuilder' not in globals():
 
 # Import SMI symbols from the MIBs this MIB depends on
 
-(jnxChassisOKTraps,
+(jnxAsicExtMemOKTraps,
+ jnxAsicExtMemTraps,
+ jnxChassisOKTraps,
  jnxChassisTraps,
- jnxMibs) = mibBuilder.importSymbols(
+ jnxMibs,
+ jnxPoeOKTraps,
+ jnxPoeTraps) = mibBuilder.importSymbols(
     "JUNIPER-SMI",
+    "jnxAsicExtMemOKTraps",
+    "jnxAsicExtMemTraps",
     "jnxChassisOKTraps",
     "jnxChassisTraps",
-    "jnxMibs")
+    "jnxMibs",
+    "jnxPoeOKTraps",
+    "jnxPoeTraps")
 
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
@@ -152,7 +157,23 @@ if mibBuilder.loadTexts:
          "2015-04-01 00:00",
          "2015-04-28 00:00",
          "2016-02-02 00:00",
-         "2016-05-16 00:00")
+         "2016-05-16 00:00",
+         "2019-06-10 00:00",
+         "2019-08-10 00:00",
+         "2019-11-15 00:00",
+         "2019-11-30 00:00",
+         "2019-12-03 00:00",
+         "2019-11-14 00:00",
+         "2019-12-09 00:00",
+         "2020-01-23 00:00",
+         "2020-12-09 00:00",
+         "2022-06-20 00:00",
+         "2023-10-06 00:00",
+         "2023-10-02 00:00",
+         "2023-11-06 00:00",
+         "2023-12-27 00:00",
+         "2024-02-06 00:00",
+         "2024-04-02 00:00")
     )
 
 
@@ -1306,7 +1327,7 @@ jnxOperatingState = _JnxOperatingState_Object(
 jnxOperatingState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     jnxOperatingState.setStatus("current")
-_JnxOperatingTemp_Type = Gauge32
+_JnxOperatingTemp_Type = Integer32
 _JnxOperatingTemp_Object = MibTableColumn
 jnxOperatingTemp = _JnxOperatingTemp_Object(
     (1, 3, 6, 1, 4, 1, 2636, 3, 1, 13, 1, 7),
@@ -1541,6 +1562,24 @@ jnxOperatingMemoryCP = _JnxOperatingMemoryCP_Object(
 jnxOperatingMemoryCP.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     jnxOperatingMemoryCP.setStatus("current")
+_JnxOperatingBufferExt_Type = Gauge32
+_JnxOperatingBufferExt_Object = MibTableColumn
+jnxOperatingBufferExt = _JnxOperatingBufferExt_Object(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 1, 13, 1, 29),
+    _JnxOperatingBufferExt_Type()
+)
+jnxOperatingBufferExt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    jnxOperatingBufferExt.setStatus("current")
+_JnxOperatingTemperature_Type = Integer32
+_JnxOperatingTemperature_Object = MibTableColumn
+jnxOperatingTemperature = _JnxOperatingTemperature_Object(
+    (1, 3, 6, 1, 4, 1, 2636, 3, 1, 13, 1, 30),
+    _JnxOperatingTemperature_Type()
+)
+jnxOperatingTemperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    jnxOperatingTemperature.setStatus("current")
 _JnxRedundancyTable_Object = MibTable
 jnxRedundancyTable = _JnxRedundancyTable_Object(
     (1, 3, 6, 1, 4, 1, 2636, 3, 1, 14)
@@ -1967,7 +2006,9 @@ class _JnxFruType_Type(Integer32):
               17,
               18,
               19,
-              20)
+              20,
+              21,
+              22)
         )
     )
     namedValues = NamedValues(
@@ -1990,7 +2031,9 @@ class _JnxFruType_Type(Integer32):
           ("powerDistributionUnit", 17),
           ("powerSupplyModule", 18),
           ("switchFabricBoard", 19),
-          ("adapterCard", 20))
+          ("adapterCard", 20),
+          ("ftc", 21),
+          ("tib", 22))
     )
 
 
@@ -2187,7 +2230,25 @@ class _JnxFruOfflineReason_Type(Integer32):
               105,
               106,
               107,
-              108)
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126)
         )
     )
     namedValues = NamedValues(
@@ -2298,7 +2359,25 @@ class _JnxFruOfflineReason_Type(Integer32):
           ("gnfIsOffline", 105),
           ("gnfdisconnected", 106),
           ("fruIncompatibleWithVersion", 107),
-          ("reasonOfflineEnd", 108))
+          ("fruInvalidConfig", 108),
+          ("katsPostError", 109),
+          ("katsRuntimeError", 110),
+          ("gnfInitRestart", 111),
+          ("gnfOverlapMac", 112),
+          ("fruOfflinedonFipsConstraints", 113),
+          ("fpcUnsupportedMode", 114),
+          ("fpcFtrayNotVerified", 115),
+          ("fpcPemNotVerified", 116),
+          ("fabricAsicFault", 117),
+          ("flowdCoreStart", 118),
+          ("fruFpcSlcMisconfig", 119),
+          ("fruSfbFanTrayIncompatible", 120),
+          ("fruSfbPEMIncompatible", 121),
+          ("fabricAsicFault2", 122),
+          ("fpcAsicInitFail", 123),
+          ("fpcDeprecated", 124),
+          ("fabricDeprecated", 125),
+          ("reDeprecated", 126))
     )
 
 
@@ -2478,7 +2557,8 @@ jnxOverTemperature.setObjects(
         ("JUNIPER-MIB", "jnxContentsL2Index"),
         ("JUNIPER-MIB", "jnxContentsL3Index"),
         ("JUNIPER-MIB", "jnxContentsDescr"),
-        ("JUNIPER-MIB", "jnxOperatingTemp"))
+        ("JUNIPER-MIB", "jnxOperatingTemp"),
+        ("JUNIPER-MIB", "jnxOperatingTemperature"))
 )
 if mibBuilder.loadTexts:
     jnxOverTemperature.setStatus(
@@ -2907,6 +2987,48 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+jnxAlarmPortInput = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 1, 28)
+)
+jnxAlarmPortInput.setObjects(
+      *(("JUNIPER-MIB", "jnxFruContentsIndex"),
+        ("JUNIPER-MIB", "jnxFruL1Index"),
+        ("JUNIPER-MIB", "jnxFruL2Index"),
+        ("JUNIPER-MIB", "jnxFruL3Index"),
+        ("JUNIPER-MIB", "jnxFruName"),
+        ("JUNIPER-MIB", "jnxFruType"),
+        ("JUNIPER-MIB", "jnxFruSlot"))
+)
+if mibBuilder.loadTexts:
+    jnxAlarmPortInput.setStatus(
+        "current"
+    )
+
+jnxUnsupportedFru = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 1, 29)
+)
+jnxUnsupportedFru.setObjects(
+      *(("JUNIPER-MIB", "jnxFruContentsIndex"),
+        ("JUNIPER-MIB", "jnxFruL1Index"),
+        ("JUNIPER-MIB", "jnxFruL2Index"),
+        ("JUNIPER-MIB", "jnxFruL3Index"),
+        ("JUNIPER-MIB", "jnxFruName"),
+        ("JUNIPER-MIB", "jnxFruType"),
+        ("JUNIPER-MIB", "jnxFruSlot"))
+)
+if mibBuilder.loadTexts:
+    jnxUnsupportedFru.setStatus(
+        "current"
+    )
+
+jnxDyingGasp = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 1, 30)
+)
+if mibBuilder.loadTexts:
+    jnxDyingGasp.setStatus(
+        "current"
+    )
+
 jnxPowerSupplyOK = NotificationType(
     (1, 3, 6, 1, 4, 1, 2636, 4, 2, 1)
 )
@@ -2948,7 +3070,8 @@ jnxTemperatureOK.setObjects(
         ("JUNIPER-MIB", "jnxContentsL2Index"),
         ("JUNIPER-MIB", "jnxContentsL3Index"),
         ("JUNIPER-MIB", "jnxContentsDescr"),
-        ("JUNIPER-MIB", "jnxOperatingTemp"))
+        ("JUNIPER-MIB", "jnxOperatingTemp"),
+        ("JUNIPER-MIB", "jnxOperatingTemperature"))
 )
 if mibBuilder.loadTexts:
     jnxTemperatureOK.setStatus(
@@ -3019,6 +3142,68 @@ jnxPowerSupplyInputOK.setObjects(
 )
 if mibBuilder.loadTexts:
     jnxPowerSupplyInputOK.setStatus(
+        "current"
+    )
+
+jnxHmcFatal = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 33, 1)
+)
+jnxHmcFatal.setObjects(
+      *(("JUNIPER-MIB", "jnxContentsContainerIndex"),
+        ("JUNIPER-MIB", "jnxContentsL1Index"),
+        ("JUNIPER-MIB", "jnxContentsL2Index"),
+        ("JUNIPER-MIB", "jnxContentsL3Index"),
+        ("JUNIPER-MIB", "jnxContentsDescr"),
+        ("JUNIPER-MIB", "jnxOperatingState"))
+)
+if mibBuilder.loadTexts:
+    jnxHmcFatal.setStatus(
+        "current"
+    )
+
+jnxHmcOK = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 34, 1)
+)
+jnxHmcOK.setObjects(
+      *(("JUNIPER-MIB", "jnxContentsContainerIndex"),
+        ("JUNIPER-MIB", "jnxContentsL1Index"),
+        ("JUNIPER-MIB", "jnxContentsL2Index"),
+        ("JUNIPER-MIB", "jnxContentsL3Index"),
+        ("JUNIPER-MIB", "jnxContentsDescr"),
+        ("JUNIPER-MIB", "jnxOperatingState"))
+)
+if mibBuilder.loadTexts:
+    jnxHmcOK.setStatus(
+        "current"
+    )
+
+jnxPsePoePdDeviceMgrFault = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 35, 1)
+)
+jnxPsePoePdDeviceMgrFault.setObjects(
+      *(("JUNIPER-MIB", "jnxContentsContainerIndex"),
+        ("JUNIPER-MIB", "jnxContentsL1Index"),
+        ("JUNIPER-MIB", "jnxContentsL2Index"),
+        ("JUNIPER-MIB", "jnxContentsL3Index"),
+        ("JUNIPER-MIB", "jnxContentsDescr"))
+)
+if mibBuilder.loadTexts:
+    jnxPsePoePdDeviceMgrFault.setStatus(
+        "current"
+    )
+
+jnxPsePoePdDeviceMgrOK = NotificationType(
+    (1, 3, 6, 1, 4, 1, 2636, 4, 36, 1)
+)
+jnxPsePoePdDeviceMgrOK.setObjects(
+      *(("JUNIPER-MIB", "jnxContentsContainerIndex"),
+        ("JUNIPER-MIB", "jnxContentsL1Index"),
+        ("JUNIPER-MIB", "jnxContentsL2Index"),
+        ("JUNIPER-MIB", "jnxContentsL3Index"),
+        ("JUNIPER-MIB", "jnxContentsDescr"))
+)
+if mibBuilder.loadTexts:
+    jnxPsePoePdDeviceMgrOK.setStatus(
         "current"
     )
 
@@ -3122,6 +3307,8 @@ mibBuilder.exportSymbols(
        "jnxOperatingFRUPower": jnxOperatingFRUPower,
        "jnxOperatingBufferCP": jnxOperatingBufferCP,
        "jnxOperatingMemoryCP": jnxOperatingMemoryCP,
+       "jnxOperatingBufferExt": jnxOperatingBufferExt,
+       "jnxOperatingTemperature": jnxOperatingTemperature,
        "jnxRedundancyTable": jnxRedundancyTable,
        "jnxRedundancyEntry": jnxRedundancyEntry,
        "jnxRedundancyContentsIndex": jnxRedundancyContentsIndex,
@@ -3188,11 +3375,18 @@ mibBuilder.exportSymbols(
        "jnxFmAsicErr": jnxFmAsicErr,
        "jnxMountVarOffHardDiskFailed": jnxMountVarOffHardDiskFailed,
        "jnxFmHealthChkErr": jnxFmHealthChkErr,
+       "jnxAlarmPortInput": jnxAlarmPortInput,
+       "jnxUnsupportedFru": jnxUnsupportedFru,
+       "jnxDyingGasp": jnxDyingGasp,
        "jnxPowerSupplyOK": jnxPowerSupplyOK,
        "jnxFanOK": jnxFanOK,
        "jnxTemperatureOK": jnxTemperatureOK,
        "jnxFruOK": jnxFruOK,
        "jnxExtSrcLockAcquired": jnxExtSrcLockAcquired,
        "jnxHardDiskOK": jnxHardDiskOK,
-       "jnxPowerSupplyInputOK": jnxPowerSupplyInputOK}
+       "jnxPowerSupplyInputOK": jnxPowerSupplyInputOK,
+       "jnxHmcFatal": jnxHmcFatal,
+       "jnxHmcOK": jnxHmcOK,
+       "jnxPsePoePdDeviceMgrFault": jnxPsePoePdDeviceMgrFault,
+       "jnxPsePoePdDeviceMgrOK": jnxPsePoePdDeviceMgrOK}
 )

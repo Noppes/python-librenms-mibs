@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-IP-ACL-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:09 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -60,9 +57,11 @@ if 'mibBuilder' not in globals():
     "PortQosTC")
 
 (InterfaceIndex,
+ InterfaceIndexOrZero,
  ifIndex) = mibBuilder.importSymbols(
     "IF-MIB",
     "InterfaceIndex",
+    "InterfaceIndexOrZero",
     "ifIndex")
 
 (ModuleCompliance,
@@ -129,7 +128,8 @@ snAgAcl = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snAgAcl.setRevisions(
-        ("2011-03-02 00:00",
+        ("2014-01-28 00:00",
+         "2011-03-02 00:00",
          "2010-06-02 00:00",
          "2009-09-30 00:00")
     )
@@ -202,7 +202,7 @@ class AclNumber(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 599),
+        ValueRangeConstraint(1, 5100),
     )
 
 
@@ -376,6 +376,107 @@ snAgAclGblCurRowIndex = _SnAgAclGblCurRowIndex_Object(
 snAgAclGblCurRowIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snAgAclGblCurRowIndex.setStatus("current")
+
+
+class _SnAgAclGblAcctEnable_Type(Integer32):
+    """Custom type snAgAclGblAcctEnable based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 0),
+          ("enabled", 1))
+    )
+
+
+_SnAgAclGblAcctEnable_Type.__name__ = "Integer32"
+_SnAgAclGblAcctEnable_Object = MibScalar
+snAgAclGblAcctEnable = _SnAgAclGblAcctEnable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 2),
+    _SnAgAclGblAcctEnable_Type()
+)
+snAgAclGblAcctEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgAclGblAcctEnable.setStatus("current")
+_SnAgAclGblIfIPv4AcctClear_Type = InterfaceIndexOrZero
+_SnAgAclGblIfIPv4AcctClear_Object = MibScalar
+snAgAclGblIfIPv4AcctClear = _SnAgAclGblIfIPv4AcctClear_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 3),
+    _SnAgAclGblIfIPv4AcctClear_Type()
+)
+snAgAclGblIfIPv4AcctClear.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgAclGblIfIPv4AcctClear.setStatus("current")
+_SnAgAclGblIfIPv6AcctClear_Type = InterfaceIndexOrZero
+_SnAgAclGblIfIPv6AcctClear_Object = MibScalar
+snAgAclGblIfIPv6AcctClear = _SnAgAclGblIfIPv6AcctClear_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 4),
+    _SnAgAclGblIfIPv6AcctClear_Type()
+)
+snAgAclGblIfIPv6AcctClear.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgAclGblIfIPv6AcctClear.setStatus("current")
+_SnAgAclGblRebindAclNumber_Type = AclNumber
+_SnAgAclGblRebindAclNumber_Object = MibScalar
+snAgAclGblRebindAclNumber = _SnAgAclGblRebindAclNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 5),
+    _SnAgAclGblRebindAclNumber_Type()
+)
+snAgAclGblRebindAclNumber.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgAclGblRebindAclNumber.setStatus("current")
+_SnAgAclGblRebindAclName_Type = DisplayString
+_SnAgAclGblRebindAclName_Object = MibScalar
+snAgAclGblRebindAclName = _SnAgAclGblRebindAclName_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 6),
+    _SnAgAclGblRebindAclName_Type()
+)
+snAgAclGblRebindAclName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    snAgAclGblRebindAclName.setStatus("current")
+_BrcdPbrAclAccntFilterAclName_Type = DisplayString
+_BrcdPbrAclAccntFilterAclName_Object = MibScalar
+brcdPbrAclAccntFilterAclName = _BrcdPbrAclAccntFilterAclName_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 7),
+    _BrcdPbrAclAccntFilterAclName_Type()
+)
+brcdPbrAclAccntFilterAclName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntFilterAclName.setStatus("current")
+
+
+class _BrcdPbrAclAccntCounterType_Type(Integer32):
+    """Custom type brcdPbrAclAccntCounterType based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("cumulative", 1),
+          ("last5min", 2))
+    )
+
+
+_BrcdPbrAclAccntCounterType_Type.__name__ = "Integer32"
+_BrcdPbrAclAccntCounterType_Object = MibScalar
+brcdPbrAclAccntCounterType = _BrcdPbrAclAccntCounterType_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 1, 8),
+    _BrcdPbrAclAccntCounterType_Type()
+)
+brcdPbrAclAccntCounterType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntCounterType.setStatus("current")
 _SnAgAclTable_Object = MibTable
 snAgAclTable = _SnAgAclTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 2)
@@ -785,6 +886,31 @@ snAgAclParameters = _SnAgAclParameters_Object(
 snAgAclParameters.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     snAgAclParameters.setStatus("current")
+
+
+class _SnAgAclVlanId_Type(FdryVlanIdOrNoneTC):
+    """Custom type snAgAclVlanId based on FdryVlanIdOrNoneTC"""
+    defaultValue = 0
+
+
+_SnAgAclVlanId_Type.__name__ = "FdryVlanIdOrNoneTC"
+_SnAgAclVlanId_Object = MibTableColumn
+snAgAclVlanId = _SnAgAclVlanId_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 2, 1, 32),
+    _SnAgAclVlanId_Type()
+)
+snAgAclVlanId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    snAgAclVlanId.setStatus("current")
+_SnAgAclClauseString_Type = DisplayString
+_SnAgAclClauseString_Object = MibTableColumn
+snAgAclClauseString = _SnAgAclClauseString_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 2, 1, 33),
+    _SnAgAclClauseString_Type()
+)
+snAgAclClauseString.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snAgAclClauseString.setStatus("current")
 _SnAgAclBindToPortTable_Object = MibTable
 snAgAclBindToPortTable = _SnAgAclBindToPortTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 3)
@@ -905,7 +1031,7 @@ snAgAclIfBindNum = _SnAgAclIfBindNum_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 4, 1, 3),
     _SnAgAclIfBindNum_Type()
 )
-snAgAclIfBindNum.setMaxAccess("read-write")
+snAgAclIfBindNum.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snAgAclIfBindNum.setStatus("current")
 
@@ -924,7 +1050,7 @@ snAgAclIfBindName = _SnAgAclIfBindName_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 4, 1, 4),
     _SnAgAclIfBindName_Type()
 )
-snAgAclIfBindName.setMaxAccess("read-write")
+snAgAclIfBindName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snAgAclIfBindName.setStatus("current")
 _SnAgAclIfBindVifPortList_Type = OctetString
@@ -933,7 +1059,7 @@ snAgAclIfBindVifPortList = _SnAgAclIfBindVifPortList_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 4, 1, 5),
     _SnAgAclIfBindVifPortList_Type()
 )
-snAgAclIfBindVifPortList.setMaxAccess("read-write")
+snAgAclIfBindVifPortList.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snAgAclIfBindVifPortList.setStatus("current")
 _SnAgAclIfBindRowStatus_Type = SnRowStatus
@@ -942,7 +1068,7 @@ snAgAclIfBindRowStatus = _SnAgAclIfBindRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 4, 1, 6),
     _SnAgAclIfBindRowStatus_Type()
 )
-snAgAclIfBindRowStatus.setMaxAccess("read-write")
+snAgAclIfBindRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snAgAclIfBindRowStatus.setStatus("current")
 
@@ -968,9 +1094,28 @@ snAgAclIfBindDenyLogging = _SnAgAclIfBindDenyLogging_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 4, 1, 7),
     _SnAgAclIfBindDenyLogging_Type()
 )
-snAgAclIfBindDenyLogging.setMaxAccess("read-write")
+snAgAclIfBindDenyLogging.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snAgAclIfBindDenyLogging.setStatus("current")
+
+
+class _SnAgAclIfIpv6BindName_Type(DisplayString):
+    """Custom type snAgAclIfIpv6BindName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 200),
+    )
+
+
+_SnAgAclIfIpv6BindName_Type.__name__ = "DisplayString"
+_SnAgAclIfIpv6BindName_Object = MibTableColumn
+snAgAclIfIpv6BindName = _SnAgAclIfIpv6BindName_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 4, 1, 8),
+    _SnAgAclIfIpv6BindName_Type()
+)
+snAgAclIfIpv6BindName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    snAgAclIfIpv6BindName.setStatus("current")
 _AgAclAccntTable_Object = MibTable
 agAclAccntTable = _AgAclAccntTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 5)
@@ -999,17 +1144,19 @@ class _AgAclAccntKind_Type(Integer32):
         SingleValueConstraint(
             *(0,
               1,
-              2,
               3,
-              4)
+              4,
+              5,
+              7)
         )
     )
     namedValues = NamedValues(
         *(("ipv4", 0),
           ("l2", 1),
-          ("policyBasedRouting", 2),
           ("rateLimit", 3),
-          ("receiveAcl", 4))
+          ("receiveAcl", 4),
+          ("ipv6", 5),
+          ("ipv6ReceiveAcl", 7))
     )
 
 
@@ -1443,6 +1590,86 @@ fdryL2AclIfBindRowStatus = _FdryL2AclIfBindRowStatus_Object(
 fdryL2AclIfBindRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     fdryL2AclIfBindRowStatus.setStatus("current")
+_BrcdPbrAclAccntTable_Object = MibTable
+brcdPbrAclAccntTable = _BrcdPbrAclAccntTable_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 9)
+)
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntTable.setStatus("current")
+_BrcdPbrAclAccntEntry_Object = MibTableRow
+brcdPbrAclAccntEntry = _BrcdPbrAclAccntEntry_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 9, 1)
+)
+brcdPbrAclAccntEntry.setIndexNames(
+    (0, "FOUNDRY-SN-IP-ACL-MIB", "brcdPbrAclAccntKind"),
+    (0, "FOUNDRY-SN-IP-ACL-MIB", "brcdPbrAclAccntIfIndex"),
+    (0, "FOUNDRY-SN-IP-ACL-MIB", "brcdPbrSerialNumber"),
+)
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntEntry.setStatus("current")
+
+
+class _BrcdPbrAclAccntKind_Type(Integer32):
+    """Custom type brcdPbrAclAccntKind based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ipv4PolicyBasedRouting", 1),
+          ("ipv6PolicyBasedRouting", 2))
+    )
+
+
+_BrcdPbrAclAccntKind_Type.__name__ = "Integer32"
+_BrcdPbrAclAccntKind_Object = MibTableColumn
+brcdPbrAclAccntKind = _BrcdPbrAclAccntKind_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 9, 1, 1),
+    _BrcdPbrAclAccntKind_Type()
+)
+brcdPbrAclAccntKind.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntKind.setStatus("current")
+_BrcdPbrAclAccntIfIndex_Type = InterfaceIndex
+_BrcdPbrAclAccntIfIndex_Object = MibTableColumn
+brcdPbrAclAccntIfIndex = _BrcdPbrAclAccntIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 9, 1, 2),
+    _BrcdPbrAclAccntIfIndex_Type()
+)
+brcdPbrAclAccntIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntIfIndex.setStatus("current")
+
+
+class _BrcdPbrSerialNumber_Type(Integer32):
+    """Custom type brcdPbrSerialNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2147483647),
+    )
+
+
+_BrcdPbrSerialNumber_Type.__name__ = "Integer32"
+_BrcdPbrSerialNumber_Object = MibTableColumn
+brcdPbrSerialNumber = _BrcdPbrSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 9, 1, 3),
+    _BrcdPbrSerialNumber_Type()
+)
+brcdPbrSerialNumber.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    brcdPbrSerialNumber.setStatus("current")
+_BrcdPbrAclAccntAclInfo_Type = DisplayString
+_BrcdPbrAclAccntAclInfo_Object = MibTableColumn
+brcdPbrAclAccntAclInfo = _BrcdPbrAclAccntAclInfo_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 2, 2, 15, 9, 1, 4),
+    _BrcdPbrAclAccntAclInfo_Type()
+)
+brcdPbrAclAccntAclInfo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    brcdPbrAclAccntAclInfo.setStatus("current")
 
 # Managed Objects groups
 
@@ -1478,6 +1705,13 @@ mibBuilder.exportSymbols(
        "snAgAcl": snAgAcl,
        "snAgAclGlobal": snAgAclGlobal,
        "snAgAclGblCurRowIndex": snAgAclGblCurRowIndex,
+       "snAgAclGblAcctEnable": snAgAclGblAcctEnable,
+       "snAgAclGblIfIPv4AcctClear": snAgAclGblIfIPv4AcctClear,
+       "snAgAclGblIfIPv6AcctClear": snAgAclGblIfIPv6AcctClear,
+       "snAgAclGblRebindAclNumber": snAgAclGblRebindAclNumber,
+       "snAgAclGblRebindAclName": snAgAclGblRebindAclName,
+       "brcdPbrAclAccntFilterAclName": brcdPbrAclAccntFilterAclName,
+       "brcdPbrAclAccntCounterType": brcdPbrAclAccntCounterType,
        "snAgAclTable": snAgAclTable,
        "snAgAclEntry": snAgAclEntry,
        "snAgAclIndex": snAgAclIndex,
@@ -1511,6 +1745,8 @@ mibBuilder.exportSymbols(
        "snAgAclDscpMapping": snAgAclDscpMapping,
        "snAgAclIcmpCode": snAgAclIcmpCode,
        "snAgAclParameters": snAgAclParameters,
+       "snAgAclVlanId": snAgAclVlanId,
+       "snAgAclClauseString": snAgAclClauseString,
        "snAgAclBindToPortTable": snAgAclBindToPortTable,
        "snAgAclBindToPortEntry": snAgAclBindToPortEntry,
        "snAgAclPortNum": snAgAclPortNum,
@@ -1528,6 +1764,7 @@ mibBuilder.exportSymbols(
        "snAgAclIfBindVifPortList": snAgAclIfBindVifPortList,
        "snAgAclIfBindRowStatus": snAgAclIfBindRowStatus,
        "snAgAclIfBindDenyLogging": snAgAclIfBindDenyLogging,
+       "snAgAclIfIpv6BindName": snAgAclIfIpv6BindName,
        "agAclAccntTable": agAclAccntTable,
        "agAclAccntEntry": agAclAccntEntry,
        "agAclAccntKind": agAclAccntKind,
@@ -1569,5 +1806,11 @@ mibBuilder.exportSymbols(
        "fdryL2AclIfBindEntry": fdryL2AclIfBindEntry,
        "fdryL2AclIfBindDirection": fdryL2AclIfBindDirection,
        "fdryL2AclIfBindAclNumber": fdryL2AclIfBindAclNumber,
-       "fdryL2AclIfBindRowStatus": fdryL2AclIfBindRowStatus}
+       "fdryL2AclIfBindRowStatus": fdryL2AclIfBindRowStatus,
+       "brcdPbrAclAccntTable": brcdPbrAclAccntTable,
+       "brcdPbrAclAccntEntry": brcdPbrAclAccntEntry,
+       "brcdPbrAclAccntKind": brcdPbrAclAccntKind,
+       "brcdPbrAclAccntIfIndex": brcdPbrAclAccntIfIndex,
+       "brcdPbrSerialNumber": brcdPbrSerialNumber,
+       "brcdPbrAclAccntAclInfo": brcdPbrAclAccntAclInfo}
 )

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-IF-EXTENSION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:35 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -139,7 +136,8 @@ ciscoIfExtensionMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoIfExtensionMIB.setRevisions(
-        ("2020-11-03 00:00",
+        ("2021-02-12 00:00",
+         "2020-11-03 00:00",
          "2016-12-01 00:00",
          "2013-03-13 00:00",
          "2012-09-05 00:00",
@@ -582,7 +580,8 @@ class _CieIfSpeedGroupConfig_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6)
         )
     )
     namedValues = NamedValues(
@@ -590,7 +589,8 @@ class _CieIfSpeedGroupConfig_Type(Integer32):
           ("tenG", 2),
           ("oneTwoFourEightG", 3),
           ("twoFourEightSixteenG", 4),
-          ("fourEightSixteenThirtyTwoG", 5))
+          ("fourEightSixteenThirtyTwoG", 5),
+          ("eightSixteenThirtyTwoSixtyFourG", 6))
     )
 
 

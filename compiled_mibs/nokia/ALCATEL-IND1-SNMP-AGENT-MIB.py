@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-SNMP-AGENT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:18 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-SNMP-AGENT-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,7 @@ alcatelIND1SNMPAgentMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1SNMPAgentMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -235,7 +232,7 @@ snmpAgtSourceIpConfig = _SnmpAgtSourceIpConfig_Object(
 )
 snmpAgtSourceIpConfig.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    snmpAgtSourceIpConfig.setStatus("obsolete")
+    snmpAgtSourceIpConfig.setStatus("current")
 _SnmpAgtSourceIp_Type = IpAddress
 _SnmpAgtSourceIp_Object = MibScalar
 snmpAgtSourceIp = _SnmpAgtSourceIp_Object(
@@ -244,7 +241,91 @@ snmpAgtSourceIp = _SnmpAgtSourceIp_Object(
 )
 snmpAgtSourceIp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    snmpAgtSourceIp.setStatus("obsolete")
+    snmpAgtSourceIp.setStatus("current")
+_SnmpAgtViewMIB_ObjectIdentity = ObjectIdentity
+snmpAgtViewMIB = _SnmpAgtViewMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 1, 6)
+)
+_SnmpAgtViewTable_Object = MibTable
+snmpAgtViewTable = _SnmpAgtViewTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 1, 6, 1)
+)
+if mibBuilder.loadTexts:
+    snmpAgtViewTable.setStatus("current")
+_SnmpAgtViewEntry_Object = MibTableRow
+snmpAgtViewEntry = _SnmpAgtViewEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 1, 6, 1, 1)
+)
+snmpAgtViewEntry.setIndexNames(
+    (0, "ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtViewName"),
+    (0, "ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtViewTableID"),
+)
+if mibBuilder.loadTexts:
+    snmpAgtViewEntry.setStatus("current")
+
+
+class _SnmpAgtViewName_Type(DisplayString):
+    """Custom type snmpAgtViewName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_SnmpAgtViewName_Type.__name__ = "DisplayString"
+_SnmpAgtViewName_Object = MibTableColumn
+snmpAgtViewName = _SnmpAgtViewName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 1, 6, 1, 1, 1),
+    _SnmpAgtViewName_Type()
+)
+snmpAgtViewName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snmpAgtViewName.setStatus("current")
+
+
+class _SnmpAgtViewTableID_Type(DisplayString):
+    """Custom type snmpAgtViewTableID based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_SnmpAgtViewTableID_Type.__name__ = "DisplayString"
+_SnmpAgtViewTableID_Object = MibTableColumn
+snmpAgtViewTableID = _SnmpAgtViewTableID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 1, 6, 1, 1, 2),
+    _SnmpAgtViewTableID_Type()
+)
+snmpAgtViewTableID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snmpAgtViewTableID.setStatus("current")
+
+
+class _SnmpAgtViewType_Type(Integer32):
+    """Custom type snmpAgtViewType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("include", 1),
+          ("exclude", 2))
+    )
+
+
+_SnmpAgtViewType_Type.__name__ = "Integer32"
+_SnmpAgtViewType_Object = MibTableColumn
+snmpAgtViewType = _SnmpAgtViewType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 1, 6, 1, 1, 3),
+    _SnmpAgtViewType_Type()
+)
+snmpAgtViewType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snmpAgtViewType.setStatus("current")
 _AlcatelIND1SNMPAgentMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1SNMPAgentMIBConformance = _AlcatelIND1SNMPAgentMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 2)
@@ -276,6 +357,16 @@ snmpAgtConfigGroup.setObjects(
 if mibBuilder.loadTexts:
     snmpAgtConfigGroup.setStatus("current")
 
+snmpAgtCtlFilesGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 2, 1, 2)
+)
+snmpAgtCtlFilesGroup.setObjects(
+      *(("ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtSourceIpConfig"),
+        ("ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtSourceIp"))
+)
+if mibBuilder.loadTexts:
+    snmpAgtCtlFilesGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -292,7 +383,8 @@ alcatelIND1SNMPAgentMIBCompliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 1, 1, 2, 2, 1)
 )
 alcatelIND1SNMPAgentMIBCompliance.setObjects(
-    ("ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtConfigGroup")
+      *(("ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtConfigGroup"),
+        ("ALCATEL-IND1-SNMP-AGENT-MIB", "snmpAgtCtlFilesGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1SNMPAgentMIBCompliance.setStatus(
@@ -313,9 +405,16 @@ mibBuilder.exportSymbols(
        "snmpAgtCtlFiles": snmpAgtCtlFiles,
        "snmpAgtSourceIpConfig": snmpAgtSourceIpConfig,
        "snmpAgtSourceIp": snmpAgtSourceIp,
+       "snmpAgtViewMIB": snmpAgtViewMIB,
+       "snmpAgtViewTable": snmpAgtViewTable,
+       "snmpAgtViewEntry": snmpAgtViewEntry,
+       "snmpAgtViewName": snmpAgtViewName,
+       "snmpAgtViewTableID": snmpAgtViewTableID,
+       "snmpAgtViewType": snmpAgtViewType,
        "alcatelIND1SNMPAgentMIBConformance": alcatelIND1SNMPAgentMIBConformance,
        "alcatelIND1SNMPAgentMIBGroups": alcatelIND1SNMPAgentMIBGroups,
        "snmpAgtConfigGroup": snmpAgtConfigGroup,
+       "snmpAgtCtlFilesGroup": snmpAgtCtlFilesGroup,
        "alcatelIND1SNMPAgentMIBCompliances": alcatelIND1SNMPAgentMIBCompliances,
        "alcatelIND1SNMPAgentMIBCompliance": alcatelIND1SNMPAgentMIBCompliance}
 )

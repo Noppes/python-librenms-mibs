@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\firebrick\FIREBRICK-CPU-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,8 @@ fbCpuMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     fbCpuMib.setRevisions(
-        ("2020-06-17 00:00",)
+        ("2022-07-15 00:00",
+         "2020-06-17 00:00")
     )
 
 

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\sensatronics\SENSATRONICS-EM1
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:26:23 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,7 @@ productEM1 = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     productEM1.setRevisions(
-        ("2004-09-13 09:00",)
+        ("2004-09-21 09:00",)
     )
 
 
@@ -1249,6 +1246,630 @@ group4WetDataInt = _Group4WetDataInt_Object(
 group4WetDataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     group4WetDataInt.setStatus("current")
+_Group5_ObjectIdentity = ObjectIdentity
+group5 = _Group5_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5)
+)
+_PCMprobe1_ObjectIdentity = ObjectIdentity
+PCMprobe1 = _PCMprobe1_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 1)
+)
+
+
+class _Probe1Name_Type(DisplayString):
+    """Custom type probe1Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe1Name_Type.__name__ = "DisplayString"
+_Probe1Name_Object = MibScalar
+probe1Name = _Probe1Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 1, 1),
+    _Probe1Name_Type()
+)
+probe1Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe1Name.setStatus("current")
+
+
+class _Probe1State_Type(Integer32):
+    """Custom type probe1State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe1State_Type.__name__ = "Integer32"
+_Probe1State_Object = MibScalar
+probe1State = _Probe1State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 1, 2),
+    _Probe1State_Type()
+)
+probe1State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe1State.setStatus("current")
+
+
+class _Probe1Flags_Type(Integer32):
+    """Custom type probe1Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe1Flags_Type.__name__ = "Integer32"
+_Probe1Flags_Object = MibScalar
+probe1Flags = _Probe1Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 1, 3),
+    _Probe1Flags_Type()
+)
+probe1Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe1Flags.setStatus("current")
+_PCMprobe2_ObjectIdentity = ObjectIdentity
+PCMprobe2 = _PCMprobe2_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 2)
+)
+
+
+class _Probe2Name_Type(DisplayString):
+    """Custom type probe2Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe2Name_Type.__name__ = "DisplayString"
+_Probe2Name_Object = MibScalar
+probe2Name = _Probe2Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 2, 1),
+    _Probe2Name_Type()
+)
+probe2Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe2Name.setStatus("current")
+
+
+class _Probe2State_Type(Integer32):
+    """Custom type probe2State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe2State_Type.__name__ = "Integer32"
+_Probe2State_Object = MibScalar
+probe2State = _Probe2State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 2, 2),
+    _Probe2State_Type()
+)
+probe2State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe2State.setStatus("current")
+
+
+class _Probe2Flags_Type(Integer32):
+    """Custom type probe2Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe2Flags_Type.__name__ = "Integer32"
+_Probe2Flags_Object = MibScalar
+probe2Flags = _Probe2Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 2, 3),
+    _Probe2Flags_Type()
+)
+probe2Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe2Flags.setStatus("current")
+_PCMprobe3_ObjectIdentity = ObjectIdentity
+PCMprobe3 = _PCMprobe3_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 3)
+)
+
+
+class _Probe3Name_Type(DisplayString):
+    """Custom type probe3Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe3Name_Type.__name__ = "DisplayString"
+_Probe3Name_Object = MibScalar
+probe3Name = _Probe3Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 3, 1),
+    _Probe3Name_Type()
+)
+probe3Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe3Name.setStatus("current")
+
+
+class _Probe3State_Type(Integer32):
+    """Custom type probe3State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe3State_Type.__name__ = "Integer32"
+_Probe3State_Object = MibScalar
+probe3State = _Probe3State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 3, 2),
+    _Probe3State_Type()
+)
+probe3State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe3State.setStatus("current")
+
+
+class _Probe3Flags_Type(Integer32):
+    """Custom type probe3Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe3Flags_Type.__name__ = "Integer32"
+_Probe3Flags_Object = MibScalar
+probe3Flags = _Probe3Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 3, 3),
+    _Probe3Flags_Type()
+)
+probe3Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe3Flags.setStatus("current")
+_PCMprobe4_ObjectIdentity = ObjectIdentity
+PCMprobe4 = _PCMprobe4_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 4)
+)
+
+
+class _Probe4Name_Type(DisplayString):
+    """Custom type probe4Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe4Name_Type.__name__ = "DisplayString"
+_Probe4Name_Object = MibScalar
+probe4Name = _Probe4Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 4, 1),
+    _Probe4Name_Type()
+)
+probe4Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe4Name.setStatus("current")
+
+
+class _Probe4State_Type(Integer32):
+    """Custom type probe4State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe4State_Type.__name__ = "Integer32"
+_Probe4State_Object = MibScalar
+probe4State = _Probe4State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 4, 2),
+    _Probe4State_Type()
+)
+probe4State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe4State.setStatus("current")
+
+
+class _Probe4Flags_Type(Integer32):
+    """Custom type probe4Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe4Flags_Type.__name__ = "Integer32"
+_Probe4Flags_Object = MibScalar
+probe4Flags = _Probe4Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 4, 3),
+    _Probe4Flags_Type()
+)
+probe4Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe4Flags.setStatus("current")
+_PCMprobe5_ObjectIdentity = ObjectIdentity
+PCMprobe5 = _PCMprobe5_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 5)
+)
+
+
+class _Probe5Name_Type(DisplayString):
+    """Custom type probe5Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe5Name_Type.__name__ = "DisplayString"
+_Probe5Name_Object = MibScalar
+probe5Name = _Probe5Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 5, 1),
+    _Probe5Name_Type()
+)
+probe5Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe5Name.setStatus("current")
+
+
+class _Probe5State_Type(Integer32):
+    """Custom type probe5State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe5State_Type.__name__ = "Integer32"
+_Probe5State_Object = MibScalar
+probe5State = _Probe5State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 5, 2),
+    _Probe5State_Type()
+)
+probe5State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe5State.setStatus("current")
+
+
+class _Probe5Flags_Type(Integer32):
+    """Custom type probe5Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe5Flags_Type.__name__ = "Integer32"
+_Probe5Flags_Object = MibScalar
+probe5Flags = _Probe5Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 5, 3),
+    _Probe5Flags_Type()
+)
+probe5Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe5Flags.setStatus("current")
+_PCMprobe6_ObjectIdentity = ObjectIdentity
+PCMprobe6 = _PCMprobe6_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 6)
+)
+
+
+class _Probe6Name_Type(DisplayString):
+    """Custom type probe6Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe6Name_Type.__name__ = "DisplayString"
+_Probe6Name_Object = MibScalar
+probe6Name = _Probe6Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 6, 1),
+    _Probe6Name_Type()
+)
+probe6Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe6Name.setStatus("current")
+
+
+class _Probe6State_Type(Integer32):
+    """Custom type probe6State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe6State_Type.__name__ = "Integer32"
+_Probe6State_Object = MibScalar
+probe6State = _Probe6State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 6, 2),
+    _Probe6State_Type()
+)
+probe6State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe6State.setStatus("current")
+
+
+class _Probe6Flags_Type(Integer32):
+    """Custom type probe6Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe6Flags_Type.__name__ = "Integer32"
+_Probe6Flags_Object = MibScalar
+probe6Flags = _Probe6Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 6, 3),
+    _Probe6Flags_Type()
+)
+probe6Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe6Flags.setStatus("current")
+_PCMprobe7_ObjectIdentity = ObjectIdentity
+PCMprobe7 = _PCMprobe7_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 7)
+)
+
+
+class _Probe7Name_Type(DisplayString):
+    """Custom type probe7Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe7Name_Type.__name__ = "DisplayString"
+_Probe7Name_Object = MibScalar
+probe7Name = _Probe7Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 7, 1),
+    _Probe7Name_Type()
+)
+probe7Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe7Name.setStatus("current")
+
+
+class _Probe7State_Type(Integer32):
+    """Custom type probe7State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe7State_Type.__name__ = "Integer32"
+_Probe7State_Object = MibScalar
+probe7State = _Probe7State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 7, 2),
+    _Probe7State_Type()
+)
+probe7State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe7State.setStatus("current")
+
+
+class _Probe7Flags_Type(Integer32):
+    """Custom type probe7Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe7Flags_Type.__name__ = "Integer32"
+_Probe7Flags_Object = MibScalar
+probe7Flags = _Probe7Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 7, 3),
+    _Probe7Flags_Type()
+)
+probe7Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe7Flags.setStatus("current")
+_PCMprobe8_ObjectIdentity = ObjectIdentity
+PCMprobe8 = _PCMprobe8_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 8)
+)
+
+
+class _Probe8Name_Type(DisplayString):
+    """Custom type probe8Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe8Name_Type.__name__ = "DisplayString"
+_Probe8Name_Object = MibScalar
+probe8Name = _Probe8Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 8, 1),
+    _Probe8Name_Type()
+)
+probe8Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe8Name.setStatus("current")
+
+
+class _Probe8State_Type(Integer32):
+    """Custom type probe8State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe8State_Type.__name__ = "Integer32"
+_Probe8State_Object = MibScalar
+probe8State = _Probe8State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 8, 2),
+    _Probe8State_Type()
+)
+probe8State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe8State.setStatus("current")
+
+
+class _Probe8Flags_Type(Integer32):
+    """Custom type probe8Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe8Flags_Type.__name__ = "Integer32"
+_Probe8Flags_Object = MibScalar
+probe8Flags = _Probe8Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 8, 3),
+    _Probe8Flags_Type()
+)
+probe8Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe8Flags.setStatus("current")
+_PCMprobe9_ObjectIdentity = ObjectIdentity
+PCMprobe9 = _PCMprobe9_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 9)
+)
+
+
+class _Probe9Name_Type(DisplayString):
+    """Custom type probe9Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe9Name_Type.__name__ = "DisplayString"
+_Probe9Name_Object = MibScalar
+probe9Name = _Probe9Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 9, 1),
+    _Probe9Name_Type()
+)
+probe9Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe9Name.setStatus("current")
+
+
+class _Probe9State_Type(Integer32):
+    """Custom type probe9State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe9State_Type.__name__ = "Integer32"
+_Probe9State_Object = MibScalar
+probe9State = _Probe9State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 9, 2),
+    _Probe9State_Type()
+)
+probe9State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe9State.setStatus("current")
+
+
+class _Probe9Flags_Type(Integer32):
+    """Custom type probe9Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe9Flags_Type.__name__ = "Integer32"
+_Probe9Flags_Object = MibScalar
+probe9Flags = _Probe9Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 9, 3),
+    _Probe9Flags_Type()
+)
+probe9Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe9Flags.setStatus("current")
+_PCMprobe10_ObjectIdentity = ObjectIdentity
+PCMprobe10 = _PCMprobe10_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 10)
+)
+
+
+class _Probe10Name_Type(DisplayString):
+    """Custom type probe10Name based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(16, 16),
+    )
+    fixed_length = 16
+
+
+_Probe10Name_Type.__name__ = "DisplayString"
+_Probe10Name_Object = MibScalar
+probe10Name = _Probe10Name_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 10, 1),
+    _Probe10Name_Type()
+)
+probe10Name.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe10Name.setStatus("current")
+
+
+class _Probe10State_Type(Integer32):
+    """Custom type probe10State based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Probe10State_Type.__name__ = "Integer32"
+_Probe10State_Object = MibScalar
+probe10State = _Probe10State_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 10, 2),
+    _Probe10State_Type()
+)
+probe10State.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe10State.setStatus("current")
+
+
+class _Probe10Flags_Type(Integer32):
+    """Custom type probe10Flags based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 3),
+    )
+
+
+_Probe10Flags_Type.__name__ = "Integer32"
+_Probe10Flags_Object = MibScalar
+probe10Flags = _Probe10Flags_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 3, 3, 5, 10, 3),
+    _Probe10Flags_Type()
+)
+probe10Flags.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    probe10Flags.setStatus("current")
 
 # Managed Objects groups
 
@@ -1335,5 +1956,46 @@ mibBuilder.exportSymbols(
        "group4HumidDataInt": group4HumidDataInt,
        "group4WetName": group4WetName,
        "group4WetDataStr": group4WetDataStr,
-       "group4WetDataInt": group4WetDataInt}
+       "group4WetDataInt": group4WetDataInt,
+       "group5": group5,
+       "PCMprobe1": PCMprobe1,
+       "probe1Name": probe1Name,
+       "probe1State": probe1State,
+       "probe1Flags": probe1Flags,
+       "PCMprobe2": PCMprobe2,
+       "probe2Name": probe2Name,
+       "probe2State": probe2State,
+       "probe2Flags": probe2Flags,
+       "PCMprobe3": PCMprobe3,
+       "probe3Name": probe3Name,
+       "probe3State": probe3State,
+       "probe3Flags": probe3Flags,
+       "PCMprobe4": PCMprobe4,
+       "probe4Name": probe4Name,
+       "probe4State": probe4State,
+       "probe4Flags": probe4Flags,
+       "PCMprobe5": PCMprobe5,
+       "probe5Name": probe5Name,
+       "probe5State": probe5State,
+       "probe5Flags": probe5Flags,
+       "PCMprobe6": PCMprobe6,
+       "probe6Name": probe6Name,
+       "probe6State": probe6State,
+       "probe6Flags": probe6Flags,
+       "PCMprobe7": PCMprobe7,
+       "probe7Name": probe7Name,
+       "probe7State": probe7State,
+       "probe7Flags": probe7Flags,
+       "PCMprobe8": PCMprobe8,
+       "probe8Name": probe8Name,
+       "probe8State": probe8State,
+       "probe8Flags": probe8Flags,
+       "PCMprobe9": PCMprobe9,
+       "probe9Name": probe9Name,
+       "probe9State": probe9State,
+       "probe9Flags": probe9Flags,
+       "PCMprobe10": PCMprobe10,
+       "probe10Name": probe10Name,
+       "probe10State": probe10State,
+       "probe10Flags": probe10Flags}
 )

@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-10-02T11:36:19.107344",
+  "timestamp": "2026-05-29T09:25:39.234049",
   "stats": {
-    "total": 59,
-    "compiled": 50,
-    "failed": 2,
+    "total": 62,
+    "compiled": 52,
+    "failed": 3,
     "skipped": 7,
     "errors": [
       {
@@ -13,8 +13,12 @@
       {
         "mib": "DELLEMC-OS10-CHASSIS-MIB",
         "error": "failed"
+      },
+      {
+        "mib": "FLUIDFS-MIB",
+        "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

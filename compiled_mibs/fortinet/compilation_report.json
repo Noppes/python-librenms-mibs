@@ -1,20 +1,16 @@
 {
-  "timestamp": "2025-10-02T11:45:20.874716",
+  "timestamp": "2026-05-29T09:29:31.202027",
   "stats": {
     "total": 39,
-    "compiled": 35,
-    "failed": 2,
+    "compiled": 36,
+    "failed": 1,
     "skipped": 2,
     "errors": [
-      {
-        "mib": "FORTINET-FORTIMANAGER-FORTIANALYZER-MIB",
-        "error": "failed"
-      },
       {
         "mib": "MERU-WLAN-MIB",
         "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

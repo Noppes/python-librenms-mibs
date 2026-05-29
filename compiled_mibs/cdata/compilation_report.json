@@ -1,14 +1,22 @@
 {
-  "timestamp": "2025-10-02T11:24:07.771412",
+  "timestamp": "2026-05-29T09:21:10.108094",
   "stats": {
     "total": 30,
-    "compiled": 17,
-    "failed": 8,
-    "skipped": 5,
+    "compiled": 16,
+    "failed": 10,
+    "skipped": 4,
     "errors": [
       {
         "mib": "EDFA-oa-MIB",
         "error": "failed"
+      },
+      {
+        "mib": "FD-OLT-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "FD-ONU-MIB",
+        "error": "unprocessed"
       },
       {
         "mib": "FD-PERFORMANCE-MIB",
@@ -40,5 +48,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

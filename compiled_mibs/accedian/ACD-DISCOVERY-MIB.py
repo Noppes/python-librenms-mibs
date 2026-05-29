@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-DISCOVERY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:05 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,8 @@ acdDiscovery = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdDiscovery.setRevisions(
-        ("2011-11-01 01:00",
+        ("2012-10-11 01:00",
+         "2011-11-01 01:00",
          "2008-10-01 01:00")
     )
 
@@ -620,6 +618,48 @@ acdDiscoveryMacAddressListPortMacAddress = _AcdDiscoveryMacAddressListPortMacAdd
 acdDiscoveryMacAddressListPortMacAddress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdDiscoveryMacAddressListPortMacAddress.setStatus("current")
+
+
+class _AcdDiscoveryInventoryInserts_Type(Unsigned32):
+    """Custom type acdDiscoveryInventoryInserts based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_AcdDiscoveryInventoryInserts_Type.__name__ = "Unsigned32"
+_AcdDiscoveryInventoryInserts_Object = MibScalar
+acdDiscoveryInventoryInserts = _AcdDiscoveryInventoryInserts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 11, 1, 1, 4),
+    _AcdDiscoveryInventoryInserts_Type()
+)
+acdDiscoveryInventoryInserts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdDiscoveryInventoryInserts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdDiscoveryInventoryInserts.setUnits("table entries")
+
+
+class _AcdDiscoveryInventoryAgeouts_Type(Unsigned32):
+    """Custom type acdDiscoveryInventoryAgeouts based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_AcdDiscoveryInventoryAgeouts_Type.__name__ = "Unsigned32"
+_AcdDiscoveryInventoryAgeouts_Object = MibScalar
+acdDiscoveryInventoryAgeouts = _AcdDiscoveryInventoryAgeouts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 11, 1, 1, 5),
+    _AcdDiscoveryInventoryAgeouts_Type()
+)
+acdDiscoveryInventoryAgeouts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdDiscoveryInventoryAgeouts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdDiscoveryInventoryAgeouts.setUnits("table entries")
 _AcdDiscoveryConformance_ObjectIdentity = ObjectIdentity
 acdDiscoveryConformance = _AcdDiscoveryConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 11, 2)
@@ -656,7 +696,9 @@ acdDiscoveryInventoryGroup.setObjects(
         ("ACD-DISCOVERY-MIB", "acdDiscoverySnmpAgentPort"),
         ("ACD-DISCOVERY-MIB", "acdDiscoverySshPort"),
         ("ACD-DISCOVERY-MIB", "acdDiscoveryVlan1"),
-        ("ACD-DISCOVERY-MIB", "acdDiscoveryVlan2"))
+        ("ACD-DISCOVERY-MIB", "acdDiscoveryVlan2"),
+        ("ACD-DISCOVERY-MIB", "acdDiscoveryInventoryInserts"),
+        ("ACD-DISCOVERY-MIB", "acdDiscoveryInventoryAgeouts"))
 )
 if mibBuilder.loadTexts:
     acdDiscoveryInventoryGroup.setStatus("current")
@@ -685,8 +727,31 @@ if mibBuilder.loadTexts:
 
 # Notification objects
 
+acdDiscoveryInventoryChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 11, 0, 1)
+)
+acdDiscoveryInventoryChange.setObjects(
+      *(("ACD-DISCOVERY-MIB", "acdDiscoveryInventoryInserts"),
+        ("ACD-DISCOVERY-MIB", "acdDiscoveryInventoryAgeouts"))
+)
+if mibBuilder.loadTexts:
+    acdDiscoveryInventoryChange.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
+
+acdDiscoveryNotificationsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 11, 2, 2, 4)
+)
+acdDiscoveryNotificationsGroup.setObjects(
+    ("ACD-DISCOVERY-MIB", "acdDiscoveryInventoryChange")
+)
+if mibBuilder.loadTexts:
+    acdDiscoveryNotificationsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -700,7 +765,8 @@ acdDiscoveryCompliance = ModuleCompliance(
 acdDiscoveryCompliance.setObjects(
       *(("ACD-DISCOVERY-MIB", "acdDiscoveryInventoryGroup"),
         ("ACD-DISCOVERY-MIB", "acdDiscoveryIpListGroup"),
-        ("ACD-DISCOVERY-MIB", "acdDiscoveryMacAddressListGroup"))
+        ("ACD-DISCOVERY-MIB", "acdDiscoveryMacAddressListGroup"),
+        ("ACD-DISCOVERY-MIB", "acdDiscoveryNotificationsGroup"))
 )
 if mibBuilder.loadTexts:
     acdDiscoveryCompliance.setStatus(
@@ -714,6 +780,7 @@ mibBuilder.exportSymbols(
     "ACD-DISCOVERY-MIB",
     **{"acdDiscovery": acdDiscovery,
        "acdDiscoveryNotifications": acdDiscoveryNotifications,
+       "acdDiscoveryInventoryChange": acdDiscoveryInventoryChange,
        "acdDiscoveryMIBObjects": acdDiscoveryMIBObjects,
        "acdDiscoveryInventory": acdDiscoveryInventory,
        "acdDiscoveryInventoryTable": acdDiscoveryInventoryTable,
@@ -748,11 +815,14 @@ mibBuilder.exportSymbols(
        "acdDiscoveryMacAddressListPortId": acdDiscoveryMacAddressListPortId,
        "acdDiscoveryMacAddressListPortName": acdDiscoveryMacAddressListPortName,
        "acdDiscoveryMacAddressListPortMacAddress": acdDiscoveryMacAddressListPortMacAddress,
+       "acdDiscoveryInventoryInserts": acdDiscoveryInventoryInserts,
+       "acdDiscoveryInventoryAgeouts": acdDiscoveryInventoryAgeouts,
        "acdDiscoveryConformance": acdDiscoveryConformance,
        "acdDiscoveryCompliances": acdDiscoveryCompliances,
        "acdDiscoveryCompliance": acdDiscoveryCompliance,
        "acdDiscoveryGroups": acdDiscoveryGroups,
        "acdDiscoveryInventoryGroup": acdDiscoveryInventoryGroup,
        "acdDiscoveryIpListGroup": acdDiscoveryIpListGroup,
-       "acdDiscoveryMacAddressListGroup": acdDiscoveryMacAddressListGroup}
+       "acdDiscoveryMacAddressListGroup": acdDiscoveryMacAddressListGroup,
+       "acdDiscoveryNotificationsGroup": acdDiscoveryNotificationsGroup}
 )

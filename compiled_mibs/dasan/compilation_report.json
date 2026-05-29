@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-10-02T11:35:15.112701",
+  "timestamp": "2026-05-29T09:25:10.072881",
   "stats": {
-    "total": 82,
-    "compiled": 57,
-    "failed": 22,
+    "total": 84,
+    "compiled": 58,
+    "failed": 23,
     "skipped": 3,
     "errors": [
       {
@@ -55,6 +55,10 @@
         "error": "failed"
       },
       {
+        "mib": "DASAN-SWITCH-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "DASAN-THRESHOLD-MIB",
         "error": "failed"
       },
@@ -96,5 +100,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

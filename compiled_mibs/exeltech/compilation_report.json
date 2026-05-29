@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-05-29T09:28:35.612833",
+  "stats": {
+    "total": 1,
+    "compiled": 0,
+    "failed": 1,
+    "skipped": 0,
+    "errors": [
+      {
+        "mib": "EXELTECH-XFERSW",
+        "error": "missing"
+      }
+    ]
+  },
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
+}

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-E-SERVICE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:17 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-E-SERVICE-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -52,6 +49,10 @@ if 'mibBuilder' not in globals():
 (InterfaceIndex,) = mibBuilder.importSymbols(
     "IF-MIB",
     "InterfaceIndex")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -117,8 +118,8 @@ alcatelIND1EServiceMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1EServiceMIB.setRevisions(
-        ("2010-01-20 00:00",
-         "2009-12-16 00:00")
+        ("2010-01-19 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -145,6 +146,28 @@ class AlaEServiceUNIProfileProtocolTreatment(TextualConvention, Integer32):
           ("drop", 2),
           ("peer", 3),
           ("macTunnel", 4))
+    )
+
+
+
+class AlaEServiceL2CustomProtocolType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("maskType", 1),
+          ("macType", 2),
+          ("ssapdsapType", 3),
+          ("etherType", 4),
+          ("ethersubType", 5))
     )
 
 
@@ -221,6 +244,62 @@ alaEServiceStatReset = _AlaEServiceStatReset_Object(
 alaEServiceStatReset.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaEServiceStatReset.setStatus("current")
+
+
+class _AlaEServiceL2MacTunnel_Type(Integer32):
+    """Custom type alaEServiceL2MacTunnel based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaEServiceL2MacTunnel_Type.__name__ = "Integer32"
+_AlaEServiceL2MacTunnel_Object = MibScalar
+alaEServiceL2MacTunnel = _AlaEServiceL2MacTunnel_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 1, 3),
+    _AlaEServiceL2MacTunnel_Type()
+)
+alaEServiceL2MacTunnel.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceL2MacTunnel.setStatus("current")
+
+
+class _AlaEServiceUntaggedMode_Type(Integer32):
+    """Custom type alaEServiceUntaggedMode based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaEServiceUntaggedMode_Type.__name__ = "Integer32"
+_AlaEServiceUntaggedMode_Object = MibScalar
+alaEServiceUntaggedMode = _AlaEServiceUntaggedMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 1, 4),
+    _AlaEServiceUntaggedMode_Type()
+)
+alaEServiceUntaggedMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceUntaggedMode.setStatus("current")
 _AlaEServiceSapProfileTable_Object = MibTable
 alaEServiceSapProfileTable = _AlaEServiceSapProfileTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 2)
@@ -487,6 +566,22 @@ alaEServiceSapProfilePBS = _AlaEServiceSapProfilePBS_Object(
 alaEServiceSapProfilePBS.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaEServiceSapProfilePBS.setStatus("current")
+
+
+class _AlaEServiceSapProfileDepth_Type(Integer32):
+    """Custom type alaEServiceSapProfileDepth based on Integer32"""
+    defaultValue = 0
+
+
+_AlaEServiceSapProfileDepth_Type.__name__ = "Integer32"
+_AlaEServiceSapProfileDepth_Object = MibTableColumn
+alaEServiceSapProfileDepth = _AlaEServiceSapProfileDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 2, 1, 14),
+    _AlaEServiceSapProfileDepth_Type()
+)
+alaEServiceSapProfileDepth.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceSapProfileDepth.setStatus("current")
 _AlaEServiceUNIProfileTable_Object = MibTable
 alaEServiceUNIProfileTable = _AlaEServiceUNIProfileTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 3)
@@ -811,6 +906,36 @@ alaEServiceUNIProfileCiscoUplinkTreatment = _AlaEServiceUNIProfileCiscoUplinkTre
 alaEServiceUNIProfileCiscoUplinkTreatment.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaEServiceUNIProfileCiscoUplinkTreatment.setStatus("current")
+
+
+class _AlaEServiceUNIProfileIeeeMacTreatment_Type(Integer32):
+    """Custom type alaEServiceUNIProfileIeeeMacTreatment based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 0),
+          ("ieeeFwdAll", 1),
+          ("ieeeDropAll", 2))
+    )
+
+
+_AlaEServiceUNIProfileIeeeMacTreatment_Type.__name__ = "Integer32"
+_AlaEServiceUNIProfileIeeeMacTreatment_Object = MibTableColumn
+alaEServiceUNIProfileIeeeMacTreatment = _AlaEServiceUNIProfileIeeeMacTreatment_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 3, 1, 21),
+    _AlaEServiceUNIProfileIeeeMacTreatment_Type()
+)
+alaEServiceUNIProfileIeeeMacTreatment.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIeeeMacTreatment.setStatus("current")
 _AlaEServiceTable_Object = MibTable
 alaEServiceTable = _AlaEServiceTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 4)
@@ -928,6 +1053,15 @@ alaEServiceStatRedCount = _AlaEServiceStatRedCount_Object(
 alaEServiceStatRedCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaEServiceStatRedCount.setStatus("current")
+_AlaEServiceStatTotalCount_Type = Counter64
+_AlaEServiceStatTotalCount_Object = MibTableColumn
+alaEServiceStatTotalCount = _AlaEServiceStatTotalCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 4, 1, 8),
+    _AlaEServiceStatTotalCount_Type()
+)
+alaEServiceStatTotalCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceStatTotalCount.setStatus("current")
 _AlaEServiceSapTable_Object = MibTable
 alaEServiceSapTable = _AlaEServiceSapTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 5)
@@ -943,7 +1077,17 @@ alaEServiceSapEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaEServiceSapEntry.setStatus("current")
-_AlaEServiceSapID_Type = Integer32
+
+
+class _AlaEServiceSapID_Type(Integer32):
+    """Custom type alaEServiceSapID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_AlaEServiceSapID_Type.__name__ = "Integer32"
 _AlaEServiceSapID_Object = MibTableColumn
 alaEServiceSapID = _AlaEServiceSapID_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 5, 1, 1),
@@ -1015,7 +1159,17 @@ alaEServiceSapCvlanEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaEServiceSapCvlanEntry.setStatus("current")
-_AlaEServiceSapCvlanSapID_Type = Integer32
+
+
+class _AlaEServiceSapCvlanSapID_Type(Integer32):
+    """Custom type alaEServiceSapCvlanSapID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_AlaEServiceSapCvlanSapID_Type.__name__ = "Integer32"
 _AlaEServiceSapCvlanSapID_Object = MibTableColumn
 alaEServiceSapCvlanSapID = _AlaEServiceSapCvlanSapID_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 6, 1, 1),
@@ -1300,10 +1454,21 @@ alaEServiceSapUniEntry = _AlaEServiceSapUniEntry_Object(
 alaEServiceSapUniEntry.setIndexNames(
     (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapUniSap"),
     (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapUniUni"),
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapUniCvlan"),
 )
 if mibBuilder.loadTexts:
     alaEServiceSapUniEntry.setStatus("current")
-_AlaEServiceSapUniSap_Type = Integer32
+
+
+class _AlaEServiceSapUniSap_Type(Integer32):
+    """Custom type alaEServiceSapUniSap based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_AlaEServiceSapUniSap_Type.__name__ = "Integer32"
 _AlaEServiceSapUniSap_Object = MibTableColumn
 alaEServiceSapUniSap = _AlaEServiceSapUniSap_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 8, 1, 1),
@@ -1330,6 +1495,15 @@ alaEServiceSapUniRowStatus = _AlaEServiceSapUniRowStatus_Object(
 alaEServiceSapUniRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaEServiceSapUniRowStatus.setStatus("current")
+_AlaEServiceSapUniCvlan_Type = InterfaceIndex
+_AlaEServiceSapUniCvlan_Object = MibTableColumn
+alaEServiceSapUniCvlan = _AlaEServiceSapUniCvlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 8, 1, 4),
+    _AlaEServiceSapUniCvlan_Type()
+)
+alaEServiceSapUniCvlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceSapUniCvlan.setStatus("current")
 _AlaEServiceNniSvlanTable_Object = MibTable
 alaEServiceNniSvlanTable = _AlaEServiceNniSvlanTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 9)
@@ -1428,7 +1602,17 @@ alaEServiceSapCvlanPortStatEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaEServiceSapCvlanPortStatEntry.setStatus("current")
-_AlaEServiceSapCvlanPortStatSapID_Type = Integer32
+
+
+class _AlaEServiceSapCvlanPortStatSapID_Type(Integer32):
+    """Custom type alaEServiceSapCvlanPortStatSapID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_AlaEServiceSapCvlanPortStatSapID_Type.__name__ = "Integer32"
 _AlaEServiceSapCvlanPortStatSapID_Object = MibTableColumn
 alaEServiceSapCvlanPortStatSapID = _AlaEServiceSapCvlanPortStatSapID_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 10, 1, 1),
@@ -1492,6 +1676,909 @@ alaEServiceSapCvlanPortStatRedCount = _AlaEServiceSapCvlanPortStatRedCount_Objec
 alaEServiceSapCvlanPortStatRedCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaEServiceSapCvlanPortStatRedCount.setStatus("current")
+_AlaEServiceSapCvlanPortStatTotalCount_Type = Counter64
+_AlaEServiceSapCvlanPortStatTotalCount_Object = MibTableColumn
+alaEServiceSapCvlanPortStatTotalCount = _AlaEServiceSapCvlanPortStatTotalCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 10, 1, 7),
+    _AlaEServiceSapCvlanPortStatTotalCount_Type()
+)
+alaEServiceSapCvlanPortStatTotalCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceSapCvlanPortStatTotalCount.setStatus("current")
+_AlaEServiceUNIProfileL2CustomProtocolTable_Object = MibTable
+alaEServiceUNIProfileL2CustomProtocolTable = _AlaEServiceUNIProfileL2CustomProtocolTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 11)
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2CustomProtocolTable.setStatus("current")
+_AlaEServiceUNIProfileL2CustomProtocolEntry_Object = MibTableRow
+alaEServiceUNIProfileL2CustomProtocolEntry = _AlaEServiceUNIProfileL2CustomProtocolEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 11, 1)
+)
+alaEServiceUNIProfileL2CustomProtocolEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolUNIProfileID"),
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileL2CustomProtocolID"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2CustomProtocolEntry.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolUNIProfileID_Type(SnmpAdminString):
+    """Custom type alaEServiceL2CustomProtocolUNIProfileID based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AlaEServiceL2CustomProtocolUNIProfileID_Type.__name__ = "SnmpAdminString"
+_AlaEServiceL2CustomProtocolUNIProfileID_Object = MibTableColumn
+alaEServiceL2CustomProtocolUNIProfileID = _AlaEServiceL2CustomProtocolUNIProfileID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 11, 1, 1),
+    _AlaEServiceL2CustomProtocolUNIProfileID_Type()
+)
+alaEServiceL2CustomProtocolUNIProfileID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolUNIProfileID.setStatus("current")
+
+
+class _AlaEServiceUNIProfileL2CustomProtocolID_Type(SnmpAdminString):
+    """Custom type alaEServiceUNIProfileL2CustomProtocolID based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AlaEServiceUNIProfileL2CustomProtocolID_Type.__name__ = "SnmpAdminString"
+_AlaEServiceUNIProfileL2CustomProtocolID_Object = MibTableColumn
+alaEServiceUNIProfileL2CustomProtocolID = _AlaEServiceUNIProfileL2CustomProtocolID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 11, 1, 2),
+    _AlaEServiceUNIProfileL2CustomProtocolID_Type()
+)
+alaEServiceUNIProfileL2CustomProtocolID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2CustomProtocolID.setStatus("current")
+
+
+class _AlaEServiceUNIProfileL2CustomProtocolTreatment_Type(AlaEServiceUNIProfileProtocolTreatment):
+    """Custom type alaEServiceUNIProfileL2CustomProtocolTreatment based on AlaEServiceUNIProfileProtocolTreatment"""
+    defaultValue = 1
+
+
+_AlaEServiceUNIProfileL2CustomProtocolTreatment_Type.__name__ = "AlaEServiceUNIProfileProtocolTreatment"
+_AlaEServiceUNIProfileL2CustomProtocolTreatment_Object = MibTableColumn
+alaEServiceUNIProfileL2CustomProtocolTreatment = _AlaEServiceUNIProfileL2CustomProtocolTreatment_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 11, 1, 3),
+    _AlaEServiceUNIProfileL2CustomProtocolTreatment_Type()
+)
+alaEServiceUNIProfileL2CustomProtocolTreatment.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2CustomProtocolTreatment.setStatus("current")
+_AlaEServiceUNIProfileL2CustomProtocolRowStatus_Type = RowStatus
+_AlaEServiceUNIProfileL2CustomProtocolRowStatus_Object = MibTableColumn
+alaEServiceUNIProfileL2CustomProtocolRowStatus = _AlaEServiceUNIProfileL2CustomProtocolRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 11, 1, 4),
+    _AlaEServiceUNIProfileL2CustomProtocolRowStatus_Type()
+)
+alaEServiceUNIProfileL2CustomProtocolRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2CustomProtocolRowStatus.setStatus("current")
+_AlaEServiceL2CustomProtocolTable_Object = MibTable
+alaEServiceL2CustomProtocolTable = _AlaEServiceL2CustomProtocolTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12)
+)
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolTable.setStatus("current")
+_AlaEServiceL2CustomProtocolEntry_Object = MibTableRow
+alaEServiceL2CustomProtocolEntry = _AlaEServiceL2CustomProtocolEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1)
+)
+alaEServiceL2CustomProtocolEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolID"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolEntry.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolID_Type(SnmpAdminString):
+    """Custom type alaEServiceL2CustomProtocolID based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AlaEServiceL2CustomProtocolID_Type.__name__ = "SnmpAdminString"
+_AlaEServiceL2CustomProtocolID_Object = MibTableColumn
+alaEServiceL2CustomProtocolID = _AlaEServiceL2CustomProtocolID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 1),
+    _AlaEServiceL2CustomProtocolID_Type()
+)
+alaEServiceL2CustomProtocolID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolID.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolEntryType_Type(AlaEServiceL2CustomProtocolType):
+    """Custom type alaEServiceL2CustomProtocolEntryType based on AlaEServiceL2CustomProtocolType"""
+    defaultValue = 2
+
+
+_AlaEServiceL2CustomProtocolEntryType_Type.__name__ = "AlaEServiceL2CustomProtocolType"
+_AlaEServiceL2CustomProtocolEntryType_Object = MibTableColumn
+alaEServiceL2CustomProtocolEntryType = _AlaEServiceL2CustomProtocolEntryType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 2),
+    _AlaEServiceL2CustomProtocolEntryType_Type()
+)
+alaEServiceL2CustomProtocolEntryType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolEntryType.setStatus("current")
+_AlaEServiceL2CustomProtocolMac_Type = MacAddress
+_AlaEServiceL2CustomProtocolMac_Object = MibTableColumn
+alaEServiceL2CustomProtocolMac = _AlaEServiceL2CustomProtocolMac_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 3),
+    _AlaEServiceL2CustomProtocolMac_Type()
+)
+alaEServiceL2CustomProtocolMac.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolMac.setStatus("current")
+_AlaEServiceL2CustomProtocolMask_Type = MacAddress
+_AlaEServiceL2CustomProtocolMask_Object = MibTableColumn
+alaEServiceL2CustomProtocolMask = _AlaEServiceL2CustomProtocolMask_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 4),
+    _AlaEServiceL2CustomProtocolMask_Type()
+)
+alaEServiceL2CustomProtocolMask.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolMask.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolEtherType_Type(Integer32):
+    """Custom type alaEServiceL2CustomProtocolEtherType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_AlaEServiceL2CustomProtocolEtherType_Type.__name__ = "Integer32"
+_AlaEServiceL2CustomProtocolEtherType_Object = MibTableColumn
+alaEServiceL2CustomProtocolEtherType = _AlaEServiceL2CustomProtocolEtherType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 5),
+    _AlaEServiceL2CustomProtocolEtherType_Type()
+)
+alaEServiceL2CustomProtocolEtherType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolEtherType.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolEtherSubType_Type(Integer32):
+    """Custom type alaEServiceL2CustomProtocolEtherSubType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_AlaEServiceL2CustomProtocolEtherSubType_Type.__name__ = "Integer32"
+_AlaEServiceL2CustomProtocolEtherSubType_Object = MibTableColumn
+alaEServiceL2CustomProtocolEtherSubType = _AlaEServiceL2CustomProtocolEtherSubType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 6),
+    _AlaEServiceL2CustomProtocolEtherSubType_Type()
+)
+alaEServiceL2CustomProtocolEtherSubType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolEtherSubType.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolSsap_Type(Integer32):
+    """Custom type alaEServiceL2CustomProtocolSsap based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_AlaEServiceL2CustomProtocolSsap_Type.__name__ = "Integer32"
+_AlaEServiceL2CustomProtocolSsap_Object = MibTableColumn
+alaEServiceL2CustomProtocolSsap = _AlaEServiceL2CustomProtocolSsap_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 7),
+    _AlaEServiceL2CustomProtocolSsap_Type()
+)
+alaEServiceL2CustomProtocolSsap.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolSsap.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolDsap_Type(Integer32):
+    """Custom type alaEServiceL2CustomProtocolDsap based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_AlaEServiceL2CustomProtocolDsap_Type.__name__ = "Integer32"
+_AlaEServiceL2CustomProtocolDsap_Object = MibTableColumn
+alaEServiceL2CustomProtocolDsap = _AlaEServiceL2CustomProtocolDsap_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 8),
+    _AlaEServiceL2CustomProtocolDsap_Type()
+)
+alaEServiceL2CustomProtocolDsap.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolDsap.setStatus("current")
+
+
+class _AlaEServiceL2CustomProtocolPid_Type(Integer32):
+    """Custom type alaEServiceL2CustomProtocolPid based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_AlaEServiceL2CustomProtocolPid_Type.__name__ = "Integer32"
+_AlaEServiceL2CustomProtocolPid_Object = MibTableColumn
+alaEServiceL2CustomProtocolPid = _AlaEServiceL2CustomProtocolPid_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 9),
+    _AlaEServiceL2CustomProtocolPid_Type()
+)
+alaEServiceL2CustomProtocolPid.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolPid.setStatus("current")
+_AlaEServiceL2CustomProtocolRowStatus_Type = RowStatus
+_AlaEServiceL2CustomProtocolRowStatus_Object = MibTableColumn
+alaEServiceL2CustomProtocolRowStatus = _AlaEServiceL2CustomProtocolRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 12, 1, 10),
+    _AlaEServiceL2CustomProtocolRowStatus_Type()
+)
+alaEServiceL2CustomProtocolRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolRowStatus.setStatus("current")
+_AlaEServiceUNIPortL2ProtocolStatisticsTable_Object = MibTable
+alaEServiceUNIPortL2ProtocolStatisticsTable = _AlaEServiceUNIPortL2ProtocolStatisticsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13)
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2ProtocolStatisticsTable.setStatus("current")
+_AlaEServiceUNIPortL2ProtocolStatisticsEntry_Object = MibTableRow
+alaEServiceUNIPortL2ProtocolStatisticsEntry = _AlaEServiceUNIPortL2ProtocolStatisticsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1)
+)
+alaEServiceUNIPortL2ProtocolStatisticsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortID"),
+    (1, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2ProtocolID"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2ProtocolStatisticsEntry.setStatus("current")
+_AlaEServiceUNIPortID_Type = InterfaceIndex
+_AlaEServiceUNIPortID_Object = MibTableColumn
+alaEServiceUNIPortID = _AlaEServiceUNIPortID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 1),
+    _AlaEServiceUNIPortID_Type()
+)
+alaEServiceUNIPortID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortID.setStatus("current")
+
+
+class _AlaEServiceUNIPortL2ProtocolID_Type(SnmpAdminString):
+    """Custom type alaEServiceUNIPortL2ProtocolID based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AlaEServiceUNIPortL2ProtocolID_Type.__name__ = "SnmpAdminString"
+_AlaEServiceUNIPortL2ProtocolID_Object = MibTableColumn
+alaEServiceUNIPortL2ProtocolID = _AlaEServiceUNIPortL2ProtocolID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 2),
+    _AlaEServiceUNIPortL2ProtocolID_Type()
+)
+alaEServiceUNIPortL2ProtocolID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2ProtocolID.setStatus("current")
+_AlaEServiceUNIPortL2RxFrames_Type = Counter32
+_AlaEServiceUNIPortL2RxFrames_Object = MibTableColumn
+alaEServiceUNIPortL2RxFrames = _AlaEServiceUNIPortL2RxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 3),
+    _AlaEServiceUNIPortL2RxFrames_Type()
+)
+alaEServiceUNIPortL2RxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2RxFrames.setStatus("current")
+_AlaEServiceUNIPortL2TunneledFrames_Type = Counter32
+_AlaEServiceUNIPortL2TunneledFrames_Object = MibTableColumn
+alaEServiceUNIPortL2TunneledFrames = _AlaEServiceUNIPortL2TunneledFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 4),
+    _AlaEServiceUNIPortL2TunneledFrames_Type()
+)
+alaEServiceUNIPortL2TunneledFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2TunneledFrames.setStatus("current")
+_AlaEServiceUNIPortL2DroppedFrames_Type = Counter32
+_AlaEServiceUNIPortL2DroppedFrames_Object = MibTableColumn
+alaEServiceUNIPortL2DroppedFrames = _AlaEServiceUNIPortL2DroppedFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 5),
+    _AlaEServiceUNIPortL2DroppedFrames_Type()
+)
+alaEServiceUNIPortL2DroppedFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2DroppedFrames.setStatus("current")
+_AlaEServiceUNIPortL2PeeredFrames_Type = Counter32
+_AlaEServiceUNIPortL2PeeredFrames_Object = MibTableColumn
+alaEServiceUNIPortL2PeeredFrames = _AlaEServiceUNIPortL2PeeredFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 6),
+    _AlaEServiceUNIPortL2PeeredFrames_Type()
+)
+alaEServiceUNIPortL2PeeredFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2PeeredFrames.setStatus("current")
+_AlaEServiceUNIPortL2MACTunneledFrames_Type = Counter32
+_AlaEServiceUNIPortL2MACTunneledFrames_Object = MibTableColumn
+alaEServiceUNIPortL2MACTunneledFrames = _AlaEServiceUNIPortL2MACTunneledFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 7),
+    _AlaEServiceUNIPortL2MACTunneledFrames_Type()
+)
+alaEServiceUNIPortL2MACTunneledFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2MACTunneledFrames.setStatus("current")
+_AlaEServiceUNIPortL2MACDeTunneledFrames_Type = Counter32
+_AlaEServiceUNIPortL2MACDeTunneledFrames_Object = MibTableColumn
+alaEServiceUNIPortL2MACDeTunneledFrames = _AlaEServiceUNIPortL2MACDeTunneledFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 8),
+    _AlaEServiceUNIPortL2MACDeTunneledFrames_Type()
+)
+alaEServiceUNIPortL2MACDeTunneledFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2MACDeTunneledFrames.setStatus("current")
+_AlaEServiceUNIPortL2LastSourceMAC_Type = MacAddress
+_AlaEServiceUNIPortL2LastSourceMAC_Object = MibTableColumn
+alaEServiceUNIPortL2LastSourceMAC = _AlaEServiceUNIPortL2LastSourceMAC_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 13, 1, 9),
+    _AlaEServiceUNIPortL2LastSourceMAC_Type()
+)
+alaEServiceUNIPortL2LastSourceMAC.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2LastSourceMAC.setStatus("current")
+_AlaEServiceNNIPortL2ProtocolStatisticsTable_Object = MibTable
+alaEServiceNNIPortL2ProtocolStatisticsTable = _AlaEServiceNNIPortL2ProtocolStatisticsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 14)
+)
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2ProtocolStatisticsTable.setStatus("current")
+_AlaEServiceNNIPortL2ProtocolStatisticsEntry_Object = MibTableRow
+alaEServiceNNIPortL2ProtocolStatisticsEntry = _AlaEServiceNNIPortL2ProtocolStatisticsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 14, 1)
+)
+alaEServiceNNIPortL2ProtocolStatisticsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceNNIPortID"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2ProtocolStatisticsEntry.setStatus("current")
+_AlaEServiceNNIPortID_Type = InterfaceIndex
+_AlaEServiceNNIPortID_Object = MibTableColumn
+alaEServiceNNIPortID = _AlaEServiceNNIPortID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 14, 1, 1),
+    _AlaEServiceNNIPortID_Type()
+)
+alaEServiceNNIPortID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortID.setStatus("current")
+_AlaEServiceNNIPortL2RxMACTunneledFrames_Type = Counter32
+_AlaEServiceNNIPortL2RxMACTunneledFrames_Object = MibTableColumn
+alaEServiceNNIPortL2RxMACTunneledFrames = _AlaEServiceNNIPortL2RxMACTunneledFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 14, 1, 2),
+    _AlaEServiceNNIPortL2RxMACTunneledFrames_Type()
+)
+alaEServiceNNIPortL2RxMACTunneledFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2RxMACTunneledFrames.setStatus("current")
+_AlaEServiceNNIPortL2MACTunneledDiscardFrames_Type = Counter32
+_AlaEServiceNNIPortL2MACTunneledDiscardFrames_Object = MibTableColumn
+alaEServiceNNIPortL2MACTunneledDiscardFrames = _AlaEServiceNNIPortL2MACTunneledDiscardFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 14, 1, 3),
+    _AlaEServiceNNIPortL2MACTunneledDiscardFrames_Type()
+)
+alaEServiceNNIPortL2MACTunneledDiscardFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2MACTunneledDiscardFrames.setStatus("current")
+
+
+class _AlaEServiceNNIPortL2ClearStats_Type(Integer32):
+    """Custom type alaEServiceNNIPortL2ClearStats based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceNNIPortL2ClearStats_Type.__name__ = "Integer32"
+_AlaEServiceNNIPortL2ClearStats_Object = MibTableColumn
+alaEServiceNNIPortL2ClearStats = _AlaEServiceNNIPortL2ClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 14, 1, 4),
+    _AlaEServiceNNIPortL2ClearStats_Type()
+)
+alaEServiceNNIPortL2ClearStats.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2ClearStats.setStatus("current")
+_AlaEServiceUNIProfileL2ProtocolTotalStatisticsTable_Object = MibTable
+alaEServiceUNIProfileL2ProtocolTotalStatisticsTable = _AlaEServiceUNIProfileL2ProtocolTotalStatisticsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 15)
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2ProtocolTotalStatisticsTable.setStatus("current")
+_AlaEServiceUNIProfileL2ProtocolTotalStatisticsEntry_Object = MibTableRow
+alaEServiceUNIProfileL2ProtocolTotalStatisticsEntry = _AlaEServiceUNIProfileL2ProtocolTotalStatisticsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 15, 1)
+)
+alaEServiceUNIProfileL2ProtocolTotalStatisticsEntry.setIndexNames(
+    (1, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfile"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2ProtocolTotalStatisticsEntry.setStatus("current")
+
+
+class _AlaEServiceUNIProfile_Type(SnmpAdminString):
+    """Custom type alaEServiceUNIProfile based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AlaEServiceUNIProfile_Type.__name__ = "SnmpAdminString"
+_AlaEServiceUNIProfile_Object = MibTableColumn
+alaEServiceUNIProfile = _AlaEServiceUNIProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 15, 1, 1),
+    _AlaEServiceUNIProfile_Type()
+)
+alaEServiceUNIProfile.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfile.setStatus("current")
+_AlaEServiceUNIProfileL2ProtocolTotalRxFrames_Type = Counter32
+_AlaEServiceUNIProfileL2ProtocolTotalRxFrames_Object = MibTableColumn
+alaEServiceUNIProfileL2ProtocolTotalRxFrames = _AlaEServiceUNIProfileL2ProtocolTotalRxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 15, 1, 2),
+    _AlaEServiceUNIProfileL2ProtocolTotalRxFrames_Type()
+)
+alaEServiceUNIProfileL2ProtocolTotalRxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2ProtocolTotalRxFrames.setStatus("current")
+
+
+class _AlaEServiceUNIProfileL2ProtocolClearStats_Type(Integer32):
+    """Custom type alaEServiceUNIProfileL2ProtocolClearStats based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceUNIProfileL2ProtocolClearStats_Type.__name__ = "Integer32"
+_AlaEServiceUNIProfileL2ProtocolClearStats_Object = MibTableColumn
+alaEServiceUNIProfileL2ProtocolClearStats = _AlaEServiceUNIProfileL2ProtocolClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 15, 1, 3),
+    _AlaEServiceUNIProfileL2ProtocolClearStats_Type()
+)
+alaEServiceUNIProfileL2ProtocolClearStats.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2ProtocolClearStats.setStatus("current")
+_AlaEServiceUNIProfileIEEEL2ProtocolStatisticsTable_Object = MibTable
+alaEServiceUNIProfileIEEEL2ProtocolStatisticsTable = _AlaEServiceUNIProfileIEEEL2ProtocolStatisticsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 16)
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProtocolStatisticsTable.setStatus("current")
+_AlaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry_Object = MibTableRow
+alaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry = _AlaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 16, 1)
+)
+alaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileIEEEL2ProfileID"),
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileIEEEL2ProtocolIndex"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry.setStatus("current")
+
+
+class _AlaEServiceUNIProfileIEEEL2ProfileID_Type(SnmpAdminString):
+    """Custom type alaEServiceUNIProfileIEEEL2ProfileID based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AlaEServiceUNIProfileIEEEL2ProfileID_Type.__name__ = "SnmpAdminString"
+_AlaEServiceUNIProfileIEEEL2ProfileID_Object = MibTableColumn
+alaEServiceUNIProfileIEEEL2ProfileID = _AlaEServiceUNIProfileIEEEL2ProfileID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 16, 1, 1),
+    _AlaEServiceUNIProfileIEEEL2ProfileID_Type()
+)
+alaEServiceUNIProfileIEEEL2ProfileID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProfileID.setStatus("current")
+
+
+class _AlaEServiceUNIProfileIEEEL2ProtocolIndex_Type(Integer32):
+    """Custom type alaEServiceUNIProfileIEEEL2ProtocolIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("lacpLacpmarkerOam", 1),
+          ("ieee802dot1x", 2),
+          ("lldp", 3),
+          ("amap", 4),
+          ("cisco", 5),
+          ("stp", 6),
+          ("gvrpMvrp", 7))
+    )
+
+
+_AlaEServiceUNIProfileIEEEL2ProtocolIndex_Type.__name__ = "Integer32"
+_AlaEServiceUNIProfileIEEEL2ProtocolIndex_Object = MibTableColumn
+alaEServiceUNIProfileIEEEL2ProtocolIndex = _AlaEServiceUNIProfileIEEEL2ProtocolIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 16, 1, 2),
+    _AlaEServiceUNIProfileIEEEL2ProtocolIndex_Type()
+)
+alaEServiceUNIProfileIEEEL2ProtocolIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProtocolIndex.setStatus("current")
+_AlaEServiceUNIProfileIEEEL2ProtocolRxFrames_Type = Counter32
+_AlaEServiceUNIProfileIEEEL2ProtocolRxFrames_Object = MibTableColumn
+alaEServiceUNIProfileIEEEL2ProtocolRxFrames = _AlaEServiceUNIProfileIEEEL2ProtocolRxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 16, 1, 3),
+    _AlaEServiceUNIProfileIEEEL2ProtocolRxFrames_Type()
+)
+alaEServiceUNIProfileIEEEL2ProtocolRxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProtocolRxFrames.setStatus("current")
+
+
+class _AlaEServiceUNIProfileIEEEL2ProtocolTreatment_Type(Integer32):
+    """Custom type alaEServiceUNIProfileIEEEL2ProtocolTreatment based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 0),
+          ("fwd", 1),
+          ("drop", 2),
+          ("cpu", 3))
+    )
+
+
+_AlaEServiceUNIProfileIEEEL2ProtocolTreatment_Type.__name__ = "Integer32"
+_AlaEServiceUNIProfileIEEEL2ProtocolTreatment_Object = MibTableColumn
+alaEServiceUNIProfileIEEEL2ProtocolTreatment = _AlaEServiceUNIProfileIEEEL2ProtocolTreatment_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 16, 1, 4),
+    _AlaEServiceUNIProfileIEEEL2ProtocolTreatment_Type()
+)
+alaEServiceUNIProfileIEEEL2ProtocolTreatment.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProtocolTreatment.setStatus("current")
+_AlaEServiceUNIProfileCustomL2ProtocolStatisticsTable_Object = MibTable
+alaEServiceUNIProfileCustomL2ProtocolStatisticsTable = _AlaEServiceUNIProfileCustomL2ProtocolStatisticsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 17)
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileCustomL2ProtocolStatisticsTable.setStatus("current")
+_AlaEServiceUNIProfileCustomL2ProtocolStatisticsEntry_Object = MibTableRow
+alaEServiceUNIProfileCustomL2ProtocolStatisticsEntry = _AlaEServiceUNIProfileCustomL2ProtocolStatisticsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 17, 1)
+)
+alaEServiceUNIProfileCustomL2ProtocolStatisticsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCustomL2StatsProfileID"),
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCustomL2ProtocolIndex"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileCustomL2ProtocolStatisticsEntry.setStatus("current")
+
+
+class _AlaEServiceUNIProfileCustomL2StatsProfileID_Type(SnmpAdminString):
+    """Custom type alaEServiceUNIProfileCustomL2StatsProfileID based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AlaEServiceUNIProfileCustomL2StatsProfileID_Type.__name__ = "SnmpAdminString"
+_AlaEServiceUNIProfileCustomL2StatsProfileID_Object = MibTableColumn
+alaEServiceUNIProfileCustomL2StatsProfileID = _AlaEServiceUNIProfileCustomL2StatsProfileID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 17, 1, 1),
+    _AlaEServiceUNIProfileCustomL2StatsProfileID_Type()
+)
+alaEServiceUNIProfileCustomL2StatsProfileID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileCustomL2StatsProfileID.setStatus("current")
+
+
+class _AlaEServiceUNIProfileCustomL2ProtocolIndex_Type(SnmpAdminString):
+    """Custom type alaEServiceUNIProfileCustomL2ProtocolIndex based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AlaEServiceUNIProfileCustomL2ProtocolIndex_Type.__name__ = "SnmpAdminString"
+_AlaEServiceUNIProfileCustomL2ProtocolIndex_Object = MibTableColumn
+alaEServiceUNIProfileCustomL2ProtocolIndex = _AlaEServiceUNIProfileCustomL2ProtocolIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 17, 1, 2),
+    _AlaEServiceUNIProfileCustomL2ProtocolIndex_Type()
+)
+alaEServiceUNIProfileCustomL2ProtocolIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileCustomL2ProtocolIndex.setStatus("current")
+_AlaEServiceUNIProfileCustomL2ProtocolRxFrames_Type = Counter32
+_AlaEServiceUNIProfileCustomL2ProtocolRxFrames_Object = MibTableColumn
+alaEServiceUNIProfileCustomL2ProtocolRxFrames = _AlaEServiceUNIProfileCustomL2ProtocolRxFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 17, 1, 3),
+    _AlaEServiceUNIProfileCustomL2ProtocolRxFrames_Type()
+)
+alaEServiceUNIProfileCustomL2ProtocolRxFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileCustomL2ProtocolRxFrames.setStatus("current")
+
+
+class _AlaEServiceUNIProfileCustomL2ProtocolTreatment_Type(Integer32):
+    """Custom type alaEServiceUNIProfileCustomL2ProtocolTreatment based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 0),
+          ("fwd", 1),
+          ("drop", 2),
+          ("cpu", 3))
+    )
+
+
+_AlaEServiceUNIProfileCustomL2ProtocolTreatment_Type.__name__ = "Integer32"
+_AlaEServiceUNIProfileCustomL2ProtocolTreatment_Object = MibTableColumn
+alaEServiceUNIProfileCustomL2ProtocolTreatment = _AlaEServiceUNIProfileCustomL2ProtocolTreatment_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 17, 1, 4),
+    _AlaEServiceUNIProfileCustomL2ProtocolTreatment_Type()
+)
+alaEServiceUNIProfileCustomL2ProtocolTreatment.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileCustomL2ProtocolTreatment.setStatus("current")
+_AlaEServiceL2PTProtocolStatisticsClear_ObjectIdentity = ObjectIdentity
+alaEServiceL2PTProtocolStatisticsClear = _AlaEServiceL2PTProtocolStatisticsClear_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 18)
+)
+
+
+class _AlaEServiceUNIPortL2GlobalClearStatistics_Type(Integer32):
+    """Custom type alaEServiceUNIPortL2GlobalClearStatistics based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceUNIPortL2GlobalClearStatistics_Type.__name__ = "Integer32"
+_AlaEServiceUNIPortL2GlobalClearStatistics_Object = MibScalar
+alaEServiceUNIPortL2GlobalClearStatistics = _AlaEServiceUNIPortL2GlobalClearStatistics_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 18, 1),
+    _AlaEServiceUNIPortL2GlobalClearStatistics_Type()
+)
+alaEServiceUNIPortL2GlobalClearStatistics.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2GlobalClearStatistics.setStatus("current")
+
+
+class _AlaEServiceNNIPortL2GlobalClearStatistics_Type(Integer32):
+    """Custom type alaEServiceNNIPortL2GlobalClearStatistics based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceNNIPortL2GlobalClearStatistics_Type.__name__ = "Integer32"
+_AlaEServiceNNIPortL2GlobalClearStatistics_Object = MibScalar
+alaEServiceNNIPortL2GlobalClearStatistics = _AlaEServiceNNIPortL2GlobalClearStatistics_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 18, 2),
+    _AlaEServiceNNIPortL2GlobalClearStatistics_Type()
+)
+alaEServiceNNIPortL2GlobalClearStatistics.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2GlobalClearStatistics.setStatus("current")
+
+
+class _AlaEServiceUNIProfileL2GlobalClearStatistics_Type(Integer32):
+    """Custom type alaEServiceUNIProfileL2GlobalClearStatistics based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceUNIProfileL2GlobalClearStatistics_Type.__name__ = "Integer32"
+_AlaEServiceUNIProfileL2GlobalClearStatistics_Object = MibScalar
+alaEServiceUNIProfileL2GlobalClearStatistics = _AlaEServiceUNIProfileL2GlobalClearStatistics_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 18, 3),
+    _AlaEServiceUNIProfileL2GlobalClearStatistics_Type()
+)
+alaEServiceUNIProfileL2GlobalClearStatistics.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2GlobalClearStatistics.setStatus("current")
+_AlaEServiceUNIPortL2ProtocolStatisticsClearTable_Object = MibTable
+alaEServiceUNIPortL2ProtocolStatisticsClearTable = _AlaEServiceUNIPortL2ProtocolStatisticsClearTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 19)
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2ProtocolStatisticsClearTable.setStatus("current")
+_AlaEServiceUNIPortL2ProtocolStatisticsClearEntry_Object = MibTableRow
+alaEServiceUNIPortL2ProtocolStatisticsClearEntry = _AlaEServiceUNIPortL2ProtocolStatisticsClearEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 19, 1)
+)
+alaEServiceUNIPortL2ProtocolStatisticsClearEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortClearID"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2ProtocolStatisticsClearEntry.setStatus("current")
+_AlaEServiceUNIPortClearID_Type = InterfaceIndex
+_AlaEServiceUNIPortClearID_Object = MibTableColumn
+alaEServiceUNIPortClearID = _AlaEServiceUNIPortClearID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 19, 1, 1),
+    _AlaEServiceUNIPortClearID_Type()
+)
+alaEServiceUNIPortClearID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortClearID.setStatus("current")
+
+
+class _AlaEServiceUNIPortL2ClearStats_Type(Integer32):
+    """Custom type alaEServiceUNIPortL2ClearStats based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceUNIPortL2ClearStats_Type.__name__ = "Integer32"
+_AlaEServiceUNIPortL2ClearStats_Object = MibTableColumn
+alaEServiceUNIPortL2ClearStats = _AlaEServiceUNIPortL2ClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 19, 1, 2),
+    _AlaEServiceUNIPortL2ClearStats_Type()
+)
+alaEServiceUNIPortL2ClearStats.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2ClearStats.setStatus("current")
+_AlaEServiceNNIPortL2ProtocolStatisticsClearTable_Object = MibTable
+alaEServiceNNIPortL2ProtocolStatisticsClearTable = _AlaEServiceNNIPortL2ProtocolStatisticsClearTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 20)
+)
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2ProtocolStatisticsClearTable.setStatus("current")
+_AlaEServiceNNIPortL2ProtocolStatisticsClearEntry_Object = MibTableRow
+alaEServiceNNIPortL2ProtocolStatisticsClearEntry = _AlaEServiceNNIPortL2ProtocolStatisticsClearEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 20, 1)
+)
+alaEServiceNNIPortL2ProtocolStatisticsClearEntry.setIndexNames(
+    (0, "ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceNNIPortClearID"),
+)
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2ProtocolStatisticsClearEntry.setStatus("current")
+_AlaEServiceNNIPortClearID_Type = InterfaceIndex
+_AlaEServiceNNIPortClearID_Object = MibTableColumn
+alaEServiceNNIPortClearID = _AlaEServiceNNIPortClearID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 20, 1, 1),
+    _AlaEServiceNNIPortClearID_Type()
+)
+alaEServiceNNIPortClearID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortClearID.setStatus("current")
+
+
+class _AlaEServiceNNIPortL2ClearStatistics_Type(Integer32):
+    """Custom type alaEServiceNNIPortL2ClearStatistics based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaEServiceNNIPortL2ClearStatistics_Type.__name__ = "Integer32"
+_AlaEServiceNNIPortL2ClearStatistics_Object = MibTableColumn
+alaEServiceNNIPortL2ClearStatistics = _AlaEServiceNNIPortL2ClearStatistics_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 1, 1, 20, 1, 2),
+    _AlaEServiceNNIPortL2ClearStatistics_Type()
+)
+alaEServiceNNIPortL2ClearStatistics.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2ClearStatistics.setStatus("current")
 _AlcatelIND1EServiceMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1EServiceMIBConformance = _AlcatelIND1EServiceMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2)
@@ -1528,7 +2615,8 @@ alaEServiceSapProfileGroup.setObjects(
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapProfileCIR"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapProfileCBS"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapProfilePIR"),
-        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapProfilePBS"))
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapProfilePBS"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapProfileDepth"))
 )
 if mibBuilder.loadTexts:
     alaEServiceSapProfileGroup.setStatus("current")
@@ -1555,7 +2643,8 @@ alaEServiceUNIProfileGroup.setObjects(
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCiscoDtpTreatment"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCiscoPvstTreatment"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCiscoVlanTreatment"),
-        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCiscoUplinkTreatment"))
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCiscoUplinkTreatment"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileIeeeMacTreatment"))
 )
 if mibBuilder.loadTexts:
     alaEServiceUNIProfileGroup.setStatus("current")
@@ -1569,7 +2658,8 @@ alaEServiceGroup.setObjects(
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceRowStatus"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatGreenCount"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatYellowCount"),
-        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatRedCount"))
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatRedCount"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatTotalCount"))
 )
 if mibBuilder.loadTexts:
     alaEServiceGroup.setStatus("current")
@@ -1635,7 +2725,8 @@ alaEServiceSapCvlanPortStatGroup = ObjectGroup(
 alaEServiceSapCvlanPortStatGroup.setObjects(
       *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapCvlanPortStatGreenCount"),
         ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapCvlanPortStatYellowCount"),
-        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapCvlanPortStatRedCount"))
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapCvlanPortStatRedCount"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceSapCvlanPortStatTotalCount"))
 )
 if mibBuilder.loadTexts:
     alaEServiceSapCvlanPortStatGroup.setStatus("current")
@@ -1645,10 +2736,123 @@ alaEServiceInfoGroup = ObjectGroup(
 )
 alaEServiceInfoGroup.setObjects(
       *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceMode"),
-        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatReset"))
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceStatReset"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2MacTunnel"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUntaggedMode"))
 )
 if mibBuilder.loadTexts:
     alaEServiceInfoGroup.setStatus("current")
+
+alaEServiceUNIProfileL2CustomProtocolGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 11)
+)
+alaEServiceUNIProfileL2CustomProtocolGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileL2CustomProtocolTreatment"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileL2CustomProtocolRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2CustomProtocolGroup.setStatus("current")
+
+alaEServiceL2CustomProtocolGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 12)
+)
+alaEServiceL2CustomProtocolGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolEntryType"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolMac"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolMask"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolEtherType"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolEtherSubType"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolSsap"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolDsap"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolPid"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceL2CustomProtocolRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceL2CustomProtocolGroup.setStatus("current")
+
+alaEServiceUNIPortL2StatisticsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 13)
+)
+alaEServiceUNIPortL2StatisticsGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2RxFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2TunneledFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2DroppedFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2PeeredFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2MACTunneledFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2MACDeTunneledFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2LastSourceMAC"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2StatisticsGroup.setStatus("current")
+
+alaEServiceNNIPortL2StatisticsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 14)
+)
+alaEServiceNNIPortL2StatisticsGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceNNIPortL2RxMACTunneledFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceNNIPortL2MACTunneledDiscardFrames"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2StatisticsGroup.setStatus("current")
+
+alaEServiceUNIProfileL2ProtocolTotalStatisticsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 15)
+)
+alaEServiceUNIProfileL2ProtocolTotalStatisticsGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileL2ProtocolTotalRxFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileL2ProtocolClearStats"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2ProtocolTotalStatisticsGroup.setStatus("current")
+
+alaEServiceUNIProfileIEEEL2ProtocolStatisticsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 16)
+)
+alaEServiceUNIProfileIEEEL2ProtocolStatisticsGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileIEEEL2ProtocolRxFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileIEEEL2ProtocolTreatment"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileIEEEL2ProtocolStatisticsGroup.setStatus("current")
+
+alaEServiceUNIProfileL2ProtocolStatisticsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 17)
+)
+alaEServiceUNIProfileL2ProtocolStatisticsGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCustomL2ProtocolRxFrames"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileCustomL2ProtocolTreatment"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIProfileL2ProtocolStatisticsGroup.setStatus("current")
+
+alaEServiceL2PTProtocolStatisticsClearGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 18)
+)
+alaEServiceL2PTProtocolStatisticsClearGroup.setObjects(
+      *(("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2GlobalClearStatistics"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceNNIPortL2GlobalClearStatistics"),
+        ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIProfileL2GlobalClearStatistics"))
+)
+if mibBuilder.loadTexts:
+    alaEServiceL2PTProtocolStatisticsClearGroup.setStatus("current")
+
+alaEServiceUNIPortL2StatisticsClearGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 19)
+)
+alaEServiceUNIPortL2StatisticsClearGroup.setObjects(
+    ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceUNIPortL2ClearStats")
+)
+if mibBuilder.loadTexts:
+    alaEServiceUNIPortL2StatisticsClearGroup.setStatus("current")
+
+alaEServiceNNIPortL2StatisticsClearGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 50, 1, 2, 1, 20)
+)
+alaEServiceNNIPortL2StatisticsClearGroup.setObjects(
+    ("ALCATEL-IND1-E-SERVICE-MIB", "alaEServiceNNIPortL2ClearStatistics")
+)
+if mibBuilder.loadTexts:
+    alaEServiceNNIPortL2StatisticsClearGroup.setStatus("current")
 
 
 # Notification objects
@@ -1688,12 +2892,15 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "ALCATEL-IND1-E-SERVICE-MIB",
     **{"AlaEServiceUNIProfileProtocolTreatment": AlaEServiceUNIProfileProtocolTreatment,
+       "AlaEServiceL2CustomProtocolType": AlaEServiceL2CustomProtocolType,
        "alcatelIND1EServiceMIB": alcatelIND1EServiceMIB,
        "alcatelIND1eServiceMIBObjects": alcatelIND1eServiceMIBObjects,
        "alaEService": alaEService,
        "alaEServiceInfo": alaEServiceInfo,
        "alaEServiceMode": alaEServiceMode,
        "alaEServiceStatReset": alaEServiceStatReset,
+       "alaEServiceL2MacTunnel": alaEServiceL2MacTunnel,
+       "alaEServiceUntaggedMode": alaEServiceUntaggedMode,
        "alaEServiceSapProfileTable": alaEServiceSapProfileTable,
        "alaEServiceSapProfileEntry": alaEServiceSapProfileEntry,
        "alaEServiceSapProfileID": alaEServiceSapProfileID,
@@ -1709,6 +2916,7 @@ mibBuilder.exportSymbols(
        "alaEServiceSapProfileCBS": alaEServiceSapProfileCBS,
        "alaEServiceSapProfilePIR": alaEServiceSapProfilePIR,
        "alaEServiceSapProfilePBS": alaEServiceSapProfilePBS,
+       "alaEServiceSapProfileDepth": alaEServiceSapProfileDepth,
        "alaEServiceUNIProfileTable": alaEServiceUNIProfileTable,
        "alaEServiceUNIProfileEntry": alaEServiceUNIProfileEntry,
        "alaEServiceUNIProfileID": alaEServiceUNIProfileID,
@@ -1731,6 +2939,7 @@ mibBuilder.exportSymbols(
        "alaEServiceUNIProfileCiscoPvstTreatment": alaEServiceUNIProfileCiscoPvstTreatment,
        "alaEServiceUNIProfileCiscoVlanTreatment": alaEServiceUNIProfileCiscoVlanTreatment,
        "alaEServiceUNIProfileCiscoUplinkTreatment": alaEServiceUNIProfileCiscoUplinkTreatment,
+       "alaEServiceUNIProfileIeeeMacTreatment": alaEServiceUNIProfileIeeeMacTreatment,
        "alaEServiceTable": alaEServiceTable,
        "alaEServiceEntry": alaEServiceEntry,
        "alaEServiceID": alaEServiceID,
@@ -1740,6 +2949,7 @@ mibBuilder.exportSymbols(
        "alaEServiceStatGreenCount": alaEServiceStatGreenCount,
        "alaEServiceStatYellowCount": alaEServiceStatYellowCount,
        "alaEServiceStatRedCount": alaEServiceStatRedCount,
+       "alaEServiceStatTotalCount": alaEServiceStatTotalCount,
        "alaEServiceSapTable": alaEServiceSapTable,
        "alaEServiceSapEntry": alaEServiceSapEntry,
        "alaEServiceSapID": alaEServiceSapID,
@@ -1767,6 +2977,7 @@ mibBuilder.exportSymbols(
        "alaEServiceSapUniSap": alaEServiceSapUniSap,
        "alaEServiceSapUniUni": alaEServiceSapUniUni,
        "alaEServiceSapUniRowStatus": alaEServiceSapUniRowStatus,
+       "alaEServiceSapUniCvlan": alaEServiceSapUniCvlan,
        "alaEServiceNniSvlanTable": alaEServiceNniSvlanTable,
        "alaEServiceNniSvlanEntry": alaEServiceNniSvlanEntry,
        "alaEServiceNniSvlanNni": alaEServiceNniSvlanNni,
@@ -1781,6 +2992,71 @@ mibBuilder.exportSymbols(
        "alaEServiceSapCvlanPortStatGreenCount": alaEServiceSapCvlanPortStatGreenCount,
        "alaEServiceSapCvlanPortStatYellowCount": alaEServiceSapCvlanPortStatYellowCount,
        "alaEServiceSapCvlanPortStatRedCount": alaEServiceSapCvlanPortStatRedCount,
+       "alaEServiceSapCvlanPortStatTotalCount": alaEServiceSapCvlanPortStatTotalCount,
+       "alaEServiceUNIProfileL2CustomProtocolTable": alaEServiceUNIProfileL2CustomProtocolTable,
+       "alaEServiceUNIProfileL2CustomProtocolEntry": alaEServiceUNIProfileL2CustomProtocolEntry,
+       "alaEServiceL2CustomProtocolUNIProfileID": alaEServiceL2CustomProtocolUNIProfileID,
+       "alaEServiceUNIProfileL2CustomProtocolID": alaEServiceUNIProfileL2CustomProtocolID,
+       "alaEServiceUNIProfileL2CustomProtocolTreatment": alaEServiceUNIProfileL2CustomProtocolTreatment,
+       "alaEServiceUNIProfileL2CustomProtocolRowStatus": alaEServiceUNIProfileL2CustomProtocolRowStatus,
+       "alaEServiceL2CustomProtocolTable": alaEServiceL2CustomProtocolTable,
+       "alaEServiceL2CustomProtocolEntry": alaEServiceL2CustomProtocolEntry,
+       "alaEServiceL2CustomProtocolID": alaEServiceL2CustomProtocolID,
+       "alaEServiceL2CustomProtocolEntryType": alaEServiceL2CustomProtocolEntryType,
+       "alaEServiceL2CustomProtocolMac": alaEServiceL2CustomProtocolMac,
+       "alaEServiceL2CustomProtocolMask": alaEServiceL2CustomProtocolMask,
+       "alaEServiceL2CustomProtocolEtherType": alaEServiceL2CustomProtocolEtherType,
+       "alaEServiceL2CustomProtocolEtherSubType": alaEServiceL2CustomProtocolEtherSubType,
+       "alaEServiceL2CustomProtocolSsap": alaEServiceL2CustomProtocolSsap,
+       "alaEServiceL2CustomProtocolDsap": alaEServiceL2CustomProtocolDsap,
+       "alaEServiceL2CustomProtocolPid": alaEServiceL2CustomProtocolPid,
+       "alaEServiceL2CustomProtocolRowStatus": alaEServiceL2CustomProtocolRowStatus,
+       "alaEServiceUNIPortL2ProtocolStatisticsTable": alaEServiceUNIPortL2ProtocolStatisticsTable,
+       "alaEServiceUNIPortL2ProtocolStatisticsEntry": alaEServiceUNIPortL2ProtocolStatisticsEntry,
+       "alaEServiceUNIPortID": alaEServiceUNIPortID,
+       "alaEServiceUNIPortL2ProtocolID": alaEServiceUNIPortL2ProtocolID,
+       "alaEServiceUNIPortL2RxFrames": alaEServiceUNIPortL2RxFrames,
+       "alaEServiceUNIPortL2TunneledFrames": alaEServiceUNIPortL2TunneledFrames,
+       "alaEServiceUNIPortL2DroppedFrames": alaEServiceUNIPortL2DroppedFrames,
+       "alaEServiceUNIPortL2PeeredFrames": alaEServiceUNIPortL2PeeredFrames,
+       "alaEServiceUNIPortL2MACTunneledFrames": alaEServiceUNIPortL2MACTunneledFrames,
+       "alaEServiceUNIPortL2MACDeTunneledFrames": alaEServiceUNIPortL2MACDeTunneledFrames,
+       "alaEServiceUNIPortL2LastSourceMAC": alaEServiceUNIPortL2LastSourceMAC,
+       "alaEServiceNNIPortL2ProtocolStatisticsTable": alaEServiceNNIPortL2ProtocolStatisticsTable,
+       "alaEServiceNNIPortL2ProtocolStatisticsEntry": alaEServiceNNIPortL2ProtocolStatisticsEntry,
+       "alaEServiceNNIPortID": alaEServiceNNIPortID,
+       "alaEServiceNNIPortL2RxMACTunneledFrames": alaEServiceNNIPortL2RxMACTunneledFrames,
+       "alaEServiceNNIPortL2MACTunneledDiscardFrames": alaEServiceNNIPortL2MACTunneledDiscardFrames,
+       "alaEServiceNNIPortL2ClearStats": alaEServiceNNIPortL2ClearStats,
+       "alaEServiceUNIProfileL2ProtocolTotalStatisticsTable": alaEServiceUNIProfileL2ProtocolTotalStatisticsTable,
+       "alaEServiceUNIProfileL2ProtocolTotalStatisticsEntry": alaEServiceUNIProfileL2ProtocolTotalStatisticsEntry,
+       "alaEServiceUNIProfile": alaEServiceUNIProfile,
+       "alaEServiceUNIProfileL2ProtocolTotalRxFrames": alaEServiceUNIProfileL2ProtocolTotalRxFrames,
+       "alaEServiceUNIProfileL2ProtocolClearStats": alaEServiceUNIProfileL2ProtocolClearStats,
+       "alaEServiceUNIProfileIEEEL2ProtocolStatisticsTable": alaEServiceUNIProfileIEEEL2ProtocolStatisticsTable,
+       "alaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry": alaEServiceUNIProfileIEEEL2ProtocolStatisticsEntry,
+       "alaEServiceUNIProfileIEEEL2ProfileID": alaEServiceUNIProfileIEEEL2ProfileID,
+       "alaEServiceUNIProfileIEEEL2ProtocolIndex": alaEServiceUNIProfileIEEEL2ProtocolIndex,
+       "alaEServiceUNIProfileIEEEL2ProtocolRxFrames": alaEServiceUNIProfileIEEEL2ProtocolRxFrames,
+       "alaEServiceUNIProfileIEEEL2ProtocolTreatment": alaEServiceUNIProfileIEEEL2ProtocolTreatment,
+       "alaEServiceUNIProfileCustomL2ProtocolStatisticsTable": alaEServiceUNIProfileCustomL2ProtocolStatisticsTable,
+       "alaEServiceUNIProfileCustomL2ProtocolStatisticsEntry": alaEServiceUNIProfileCustomL2ProtocolStatisticsEntry,
+       "alaEServiceUNIProfileCustomL2StatsProfileID": alaEServiceUNIProfileCustomL2StatsProfileID,
+       "alaEServiceUNIProfileCustomL2ProtocolIndex": alaEServiceUNIProfileCustomL2ProtocolIndex,
+       "alaEServiceUNIProfileCustomL2ProtocolRxFrames": alaEServiceUNIProfileCustomL2ProtocolRxFrames,
+       "alaEServiceUNIProfileCustomL2ProtocolTreatment": alaEServiceUNIProfileCustomL2ProtocolTreatment,
+       "alaEServiceL2PTProtocolStatisticsClear": alaEServiceL2PTProtocolStatisticsClear,
+       "alaEServiceUNIPortL2GlobalClearStatistics": alaEServiceUNIPortL2GlobalClearStatistics,
+       "alaEServiceNNIPortL2GlobalClearStatistics": alaEServiceNNIPortL2GlobalClearStatistics,
+       "alaEServiceUNIProfileL2GlobalClearStatistics": alaEServiceUNIProfileL2GlobalClearStatistics,
+       "alaEServiceUNIPortL2ProtocolStatisticsClearTable": alaEServiceUNIPortL2ProtocolStatisticsClearTable,
+       "alaEServiceUNIPortL2ProtocolStatisticsClearEntry": alaEServiceUNIPortL2ProtocolStatisticsClearEntry,
+       "alaEServiceUNIPortClearID": alaEServiceUNIPortClearID,
+       "alaEServiceUNIPortL2ClearStats": alaEServiceUNIPortL2ClearStats,
+       "alaEServiceNNIPortL2ProtocolStatisticsClearTable": alaEServiceNNIPortL2ProtocolStatisticsClearTable,
+       "alaEServiceNNIPortL2ProtocolStatisticsClearEntry": alaEServiceNNIPortL2ProtocolStatisticsClearEntry,
+       "alaEServiceNNIPortClearID": alaEServiceNNIPortClearID,
+       "alaEServiceNNIPortL2ClearStatistics": alaEServiceNNIPortL2ClearStatistics,
        "alcatelIND1EServiceMIBConformance": alcatelIND1EServiceMIBConformance,
        "alcatelIND1EServiceMIBGroups": alcatelIND1EServiceMIBGroups,
        "alaEServiceSapProfileGroup": alaEServiceSapProfileGroup,
@@ -1793,6 +3069,16 @@ mibBuilder.exportSymbols(
        "alaEServiceNniSvlanGroup": alaEServiceNniSvlanGroup,
        "alaEServiceSapCvlanPortStatGroup": alaEServiceSapCvlanPortStatGroup,
        "alaEServiceInfoGroup": alaEServiceInfoGroup,
+       "alaEServiceUNIProfileL2CustomProtocolGroup": alaEServiceUNIProfileL2CustomProtocolGroup,
+       "alaEServiceL2CustomProtocolGroup": alaEServiceL2CustomProtocolGroup,
+       "alaEServiceUNIPortL2StatisticsGroup": alaEServiceUNIPortL2StatisticsGroup,
+       "alaEServiceNNIPortL2StatisticsGroup": alaEServiceNNIPortL2StatisticsGroup,
+       "alaEServiceUNIProfileL2ProtocolTotalStatisticsGroup": alaEServiceUNIProfileL2ProtocolTotalStatisticsGroup,
+       "alaEServiceUNIProfileIEEEL2ProtocolStatisticsGroup": alaEServiceUNIProfileIEEEL2ProtocolStatisticsGroup,
+       "alaEServiceUNIProfileL2ProtocolStatisticsGroup": alaEServiceUNIProfileL2ProtocolStatisticsGroup,
+       "alaEServiceL2PTProtocolStatisticsClearGroup": alaEServiceL2PTProtocolStatisticsClearGroup,
+       "alaEServiceUNIPortL2StatisticsClearGroup": alaEServiceUNIPortL2StatisticsClearGroup,
+       "alaEServiceNNIPortL2StatisticsClearGroup": alaEServiceNNIPortL2StatisticsClearGroup,
        "alcatelIND1EServiceMIBCompliances": alcatelIND1EServiceMIBCompliances,
        "alcatelIND1EServiceMIBCompliance": alcatelIND1EServiceMIBCompliance}
 )

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IGMP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:26 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IGMP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -55,10 +52,12 @@ if 'mibBuilder' not in globals():
 
 (InetAddress,
  InetAddressIPv4,
+ InetAddressPrefixLength,
  InetAddressType) = mibBuilder.importSymbols(
     "INET-ADDRESS-MIB",
     "InetAddress",
     "InetAddressIPv4",
+    "InetAddressPrefixLength",
     "InetAddressType")
 
 (ModuleCompliance,
@@ -126,7 +125,8 @@ if mibBuilder.loadTexts:
         ("2009-03-31 00:00",
          "2008-09-10 00:00",
          "2008-08-08 00:00",
-         "2007-04-03 00:00")
+         "2007-04-03 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -582,6 +582,182 @@ alaIgmpHelperAddress = _AlaIgmpHelperAddress_Object(
 alaIgmpHelperAddress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIgmpHelperAddress.setStatus("current")
+
+
+class _AlaIgmpBufferPacket_Type(Integer32):
+    """Custom type alaIgmpBufferPacket based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIgmpBufferPacket_Type.__name__ = "Integer32"
+_AlaIgmpBufferPacket_Object = MibScalar
+alaIgmpBufferPacket = _AlaIgmpBufferPacket_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 1, 20),
+    _AlaIgmpBufferPacket_Type()
+)
+alaIgmpBufferPacket.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIgmpBufferPacket.setStatus("current")
+
+
+class _AlaIgmpIndexSharing_Type(Integer32):
+    """Custom type alaIgmpIndexSharing based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIgmpIndexSharing_Type.__name__ = "Integer32"
+_AlaIgmpIndexSharing_Object = MibScalar
+alaIgmpIndexSharing = _AlaIgmpIndexSharing_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 1, 21),
+    _AlaIgmpIndexSharing_Type()
+)
+alaIgmpIndexSharing.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIgmpIndexSharing.setStatus("current")
+
+
+class _AlaDynamicControlStatus_Type(Integer32):
+    """Custom type alaDynamicControlStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDynamicControlStatus_Type.__name__ = "Integer32"
+_AlaDynamicControlStatus_Object = MibScalar
+alaDynamicControlStatus = _AlaDynamicControlStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 1, 22),
+    _AlaDynamicControlStatus_Type()
+)
+alaDynamicControlStatus.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaDynamicControlStatus.setStatus("current")
+
+
+class _AlaDynamicControlIpv4Status_Type(Integer32):
+    """Custom type alaDynamicControlIpv4Status based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaDynamicControlIpv4Status_Type.__name__ = "Integer32"
+_AlaDynamicControlIpv4Status_Object = MibScalar
+alaDynamicControlIpv4Status = _AlaDynamicControlIpv4Status_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 1, 23),
+    _AlaDynamicControlIpv4Status_Type()
+)
+alaDynamicControlIpv4Status.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDynamicControlIpv4Status.setStatus("current")
+
+
+class _AlaIgmpStaticNeighborFastLearning_Type(Integer32):
+    """Custom type alaIgmpStaticNeighborFastLearning based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIgmpStaticNeighborFastLearning_Type.__name__ = "Integer32"
+_AlaIgmpStaticNeighborFastLearning_Object = MibScalar
+alaIgmpStaticNeighborFastLearning = _AlaIgmpStaticNeighborFastLearning_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 1, 25),
+    _AlaIgmpStaticNeighborFastLearning_Type()
+)
+alaIgmpStaticNeighborFastLearning.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIgmpStaticNeighborFastLearning.setStatus("current")
+
+
+class _AlaIgmpStarg_Type(Integer32):
+    """Custom type alaIgmpStarg based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIgmpStarg_Type.__name__ = "Integer32"
+_AlaIgmpStarg_Object = MibScalar
+alaIgmpStarg = _AlaIgmpStarg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 1, 26),
+    _AlaIgmpStarg_Type()
+)
+alaIgmpStarg.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIgmpStarg.setStatus("current")
 _AlaIgmpVlan_ObjectIdentity = ObjectIdentity
 alaIgmpVlan = _AlaIgmpVlan_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 2)
@@ -936,6 +1112,64 @@ alaIgmpVlanSpoofAddress = _AlaIgmpVlanSpoofAddress_Object(
 alaIgmpVlanSpoofAddress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIgmpVlanSpoofAddress.setStatus("obsolete")
+
+
+class _AlaIgmpVlanIndexSharing_Type(Integer32):
+    """Custom type alaIgmpVlanIndexSharing based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIgmpVlanIndexSharing_Type.__name__ = "Integer32"
+_AlaIgmpVlanIndexSharing_Object = MibTableColumn
+alaIgmpVlanIndexSharing = _AlaIgmpVlanIndexSharing_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 2, 1, 1, 20),
+    _AlaIgmpVlanIndexSharing_Type()
+)
+alaIgmpVlanIndexSharing.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIgmpVlanIndexSharing.setStatus("current")
+
+
+class _AlaIgmpVlanStarg_Type(Integer32):
+    """Custom type alaIgmpVlanStarg based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaIgmpVlanStarg_Type.__name__ = "Integer32"
+_AlaIgmpVlanStarg_Object = MibTableColumn
+alaIgmpVlanStarg = _AlaIgmpVlanStarg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 2, 1, 1, 21),
+    _AlaIgmpVlanStarg_Type()
+)
+alaIgmpVlanStarg.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIgmpVlanStarg.setStatus("current")
 _AlaIgmpMember_ObjectIdentity = ObjectIdentity
 alaIgmpMember = _AlaIgmpMember_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 3)
@@ -1871,6 +2105,455 @@ alaIgmpPortVlanMaxGroupExceedAction = _AlaIgmpPortVlanMaxGroupExceedAction_Objec
 alaIgmpPortVlanMaxGroupExceedAction.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaIgmpPortVlanMaxGroupExceedAction.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlan_ObjectIdentity = ObjectIdentity
+alaIgmpStaticMemberReceiverVlan = _AlaIgmpStaticMemberReceiverVlan_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14)
+)
+_AlaIgmpStaticMemberReceiverVlanTable_Object = MibTable
+alaIgmpStaticMemberReceiverVlanTable = _AlaIgmpStaticMemberReceiverVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1)
+)
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanTable.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlanEntry_Object = MibTableRow
+alaIgmpStaticMemberReceiverVlanEntry = _AlaIgmpStaticMemberReceiverVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1, 1)
+)
+alaIgmpStaticMemberReceiverVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticMemberReceiverVlanMemberVlan"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticMemberReceiverVlanPortIfIndex"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticMemberReceiverVlanGroupAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticMemberReceiverVlanId"),
+)
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanEntry.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlanMemberVlan_Type = Unsigned32
+_AlaIgmpStaticMemberReceiverVlanMemberVlan_Object = MibTableColumn
+alaIgmpStaticMemberReceiverVlanMemberVlan = _AlaIgmpStaticMemberReceiverVlanMemberVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1, 1, 1),
+    _AlaIgmpStaticMemberReceiverVlanMemberVlan_Type()
+)
+alaIgmpStaticMemberReceiverVlanMemberVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanMemberVlan.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlanPortIfIndex_Type = InterfaceIndex
+_AlaIgmpStaticMemberReceiverVlanPortIfIndex_Object = MibTableColumn
+alaIgmpStaticMemberReceiverVlanPortIfIndex = _AlaIgmpStaticMemberReceiverVlanPortIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1, 1, 2),
+    _AlaIgmpStaticMemberReceiverVlanPortIfIndex_Type()
+)
+alaIgmpStaticMemberReceiverVlanPortIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanPortIfIndex.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlanGroupAddress_Type = InetAddressIPv4
+_AlaIgmpStaticMemberReceiverVlanGroupAddress_Object = MibTableColumn
+alaIgmpStaticMemberReceiverVlanGroupAddress = _AlaIgmpStaticMemberReceiverVlanGroupAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1, 1, 3),
+    _AlaIgmpStaticMemberReceiverVlanGroupAddress_Type()
+)
+alaIgmpStaticMemberReceiverVlanGroupAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanGroupAddress.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlanId_Type = Unsigned32
+_AlaIgmpStaticMemberReceiverVlanId_Object = MibTableColumn
+alaIgmpStaticMemberReceiverVlanId = _AlaIgmpStaticMemberReceiverVlanId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1, 1, 4),
+    _AlaIgmpStaticMemberReceiverVlanId_Type()
+)
+alaIgmpStaticMemberReceiverVlanId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanId.setStatus("current")
+_AlaIgmpStaticMemberReceiverVlanRowStatus_Type = RowStatus
+_AlaIgmpStaticMemberReceiverVlanRowStatus_Object = MibTableColumn
+alaIgmpStaticMemberReceiverVlanRowStatus = _AlaIgmpStaticMemberReceiverVlanRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 14, 1, 1, 5),
+    _AlaIgmpStaticMemberReceiverVlanRowStatus_Type()
+)
+alaIgmpStaticMemberReceiverVlanRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanRowStatus.setStatus("current")
+_AlaIgmpReceiverVlanMember_ObjectIdentity = ObjectIdentity
+alaIgmpReceiverVlanMember = _AlaIgmpReceiverVlanMember_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15)
+)
+_AlaIgmpReceiverVlanMemberTable_Object = MibTable
+alaIgmpReceiverVlanMemberTable = _AlaIgmpReceiverVlanMemberTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1)
+)
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberTable.setStatus("current")
+_AlaIgmpReceiverVlanMemberEntry_Object = MibTableRow
+alaIgmpReceiverVlanMemberEntry = _AlaIgmpReceiverVlanMemberEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1)
+)
+alaIgmpReceiverVlanMemberEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberVlan"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberIfIndex"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberGroupAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberSourceAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberReceiverVlan"),
+)
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberEntry.setStatus("current")
+_AlaIgmpReceiverVlanMemberVlan_Type = Unsigned32
+_AlaIgmpReceiverVlanMemberVlan_Object = MibTableColumn
+alaIgmpReceiverVlanMemberVlan = _AlaIgmpReceiverVlanMemberVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 1),
+    _AlaIgmpReceiverVlanMemberVlan_Type()
+)
+alaIgmpReceiverVlanMemberVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberVlan.setStatus("current")
+_AlaIgmpReceiverVlanMemberIfIndex_Type = InterfaceIndex
+_AlaIgmpReceiverVlanMemberIfIndex_Object = MibTableColumn
+alaIgmpReceiverVlanMemberIfIndex = _AlaIgmpReceiverVlanMemberIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 2),
+    _AlaIgmpReceiverVlanMemberIfIndex_Type()
+)
+alaIgmpReceiverVlanMemberIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberIfIndex.setStatus("current")
+_AlaIgmpReceiverVlanMemberGroupAddress_Type = InetAddressIPv4
+_AlaIgmpReceiverVlanMemberGroupAddress_Object = MibTableColumn
+alaIgmpReceiverVlanMemberGroupAddress = _AlaIgmpReceiverVlanMemberGroupAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 3),
+    _AlaIgmpReceiverVlanMemberGroupAddress_Type()
+)
+alaIgmpReceiverVlanMemberGroupAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberGroupAddress.setStatus("current")
+_AlaIgmpReceiverVlanMemberSourceAddress_Type = InetAddressIPv4
+_AlaIgmpReceiverVlanMemberSourceAddress_Object = MibTableColumn
+alaIgmpReceiverVlanMemberSourceAddress = _AlaIgmpReceiverVlanMemberSourceAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 4),
+    _AlaIgmpReceiverVlanMemberSourceAddress_Type()
+)
+alaIgmpReceiverVlanMemberSourceAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberSourceAddress.setStatus("current")
+_AlaIgmpReceiverVlanMemberReceiverVlan_Type = Unsigned32
+_AlaIgmpReceiverVlanMemberReceiverVlan_Object = MibTableColumn
+alaIgmpReceiverVlanMemberReceiverVlan = _AlaIgmpReceiverVlanMemberReceiverVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 5),
+    _AlaIgmpReceiverVlanMemberReceiverVlan_Type()
+)
+alaIgmpReceiverVlanMemberReceiverVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberReceiverVlan.setStatus("current")
+
+
+class _AlaIgmpReceiverVlanMemberMode_Type(Integer32):
+    """Custom type alaIgmpReceiverVlanMemberMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("include", 1),
+          ("exclude", 2))
+    )
+
+
+_AlaIgmpReceiverVlanMemberMode_Type.__name__ = "Integer32"
+_AlaIgmpReceiverVlanMemberMode_Object = MibTableColumn
+alaIgmpReceiverVlanMemberMode = _AlaIgmpReceiverVlanMemberMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 6),
+    _AlaIgmpReceiverVlanMemberMode_Type()
+)
+alaIgmpReceiverVlanMemberMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberMode.setStatus("current")
+_AlaIgmpReceiverVlanMemberCount_Type = Counter32
+_AlaIgmpReceiverVlanMemberCount_Object = MibTableColumn
+alaIgmpReceiverVlanMemberCount = _AlaIgmpReceiverVlanMemberCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 7),
+    _AlaIgmpReceiverVlanMemberCount_Type()
+)
+alaIgmpReceiverVlanMemberCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberCount.setStatus("current")
+_AlaIgmpReceiverVlanMemberTimeout_Type = TimeTicks
+_AlaIgmpReceiverVlanMemberTimeout_Object = MibTableColumn
+alaIgmpReceiverVlanMemberTimeout = _AlaIgmpReceiverVlanMemberTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 15, 1, 1, 8),
+    _AlaIgmpReceiverVlanMemberTimeout_Type()
+)
+alaIgmpReceiverVlanMemberTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberTimeout.setStatus("current")
+_AlaIgmpReceiverVlanForward_ObjectIdentity = ObjectIdentity
+alaIgmpReceiverVlanForward = _AlaIgmpReceiverVlanForward_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16)
+)
+_AlaIgmpReceiverVlanForwardTable_Object = MibTable
+alaIgmpReceiverVlanForwardTable = _AlaIgmpReceiverVlanForwardTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1)
+)
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardTable.setStatus("current")
+_AlaIgmpReceiverVlanForwardEntry_Object = MibTableRow
+alaIgmpReceiverVlanForwardEntry = _AlaIgmpReceiverVlanForwardEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1)
+)
+alaIgmpReceiverVlanForwardEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardVlan"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardGroupAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardHostAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardDestAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardOrigAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardNextVlan"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardNextIfIndex"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardReceiverVlan"),
+)
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardEntry.setStatus("current")
+_AlaIgmpReceiverVlanForwardVlan_Type = Unsigned32
+_AlaIgmpReceiverVlanForwardVlan_Object = MibTableColumn
+alaIgmpReceiverVlanForwardVlan = _AlaIgmpReceiverVlanForwardVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 1),
+    _AlaIgmpReceiverVlanForwardVlan_Type()
+)
+alaIgmpReceiverVlanForwardVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardVlan.setStatus("current")
+_AlaIgmpReceiverVlanForwardIfIndex_Type = InterfaceIndex
+_AlaIgmpReceiverVlanForwardIfIndex_Object = MibTableColumn
+alaIgmpReceiverVlanForwardIfIndex = _AlaIgmpReceiverVlanForwardIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 2),
+    _AlaIgmpReceiverVlanForwardIfIndex_Type()
+)
+alaIgmpReceiverVlanForwardIfIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardIfIndex.setStatus("current")
+_AlaIgmpReceiverVlanForwardGroupAddress_Type = InetAddressIPv4
+_AlaIgmpReceiverVlanForwardGroupAddress_Object = MibTableColumn
+alaIgmpReceiverVlanForwardGroupAddress = _AlaIgmpReceiverVlanForwardGroupAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 3),
+    _AlaIgmpReceiverVlanForwardGroupAddress_Type()
+)
+alaIgmpReceiverVlanForwardGroupAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardGroupAddress.setStatus("current")
+_AlaIgmpReceiverVlanForwardHostAddress_Type = InetAddressIPv4
+_AlaIgmpReceiverVlanForwardHostAddress_Object = MibTableColumn
+alaIgmpReceiverVlanForwardHostAddress = _AlaIgmpReceiverVlanForwardHostAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 4),
+    _AlaIgmpReceiverVlanForwardHostAddress_Type()
+)
+alaIgmpReceiverVlanForwardHostAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardHostAddress.setStatus("current")
+_AlaIgmpReceiverVlanForwardDestAddress_Type = InetAddressIPv4
+_AlaIgmpReceiverVlanForwardDestAddress_Object = MibTableColumn
+alaIgmpReceiverVlanForwardDestAddress = _AlaIgmpReceiverVlanForwardDestAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 5),
+    _AlaIgmpReceiverVlanForwardDestAddress_Type()
+)
+alaIgmpReceiverVlanForwardDestAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardDestAddress.setStatus("current")
+_AlaIgmpReceiverVlanForwardOrigAddress_Type = InetAddressIPv4
+_AlaIgmpReceiverVlanForwardOrigAddress_Object = MibTableColumn
+alaIgmpReceiverVlanForwardOrigAddress = _AlaIgmpReceiverVlanForwardOrigAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 6),
+    _AlaIgmpReceiverVlanForwardOrigAddress_Type()
+)
+alaIgmpReceiverVlanForwardOrigAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardOrigAddress.setStatus("current")
+
+
+class _AlaIgmpReceiverVlanForwardType_Type(Integer32):
+    """Custom type alaIgmpReceiverVlanForwardType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("mcast", 1),
+          ("pim", 2),
+          ("ipip", 3))
+    )
+
+
+_AlaIgmpReceiverVlanForwardType_Type.__name__ = "Integer32"
+_AlaIgmpReceiverVlanForwardType_Object = MibTableColumn
+alaIgmpReceiverVlanForwardType = _AlaIgmpReceiverVlanForwardType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 7),
+    _AlaIgmpReceiverVlanForwardType_Type()
+)
+alaIgmpReceiverVlanForwardType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardType.setStatus("current")
+_AlaIgmpReceiverVlanForwardNextVlan_Type = Unsigned32
+_AlaIgmpReceiverVlanForwardNextVlan_Object = MibTableColumn
+alaIgmpReceiverVlanForwardNextVlan = _AlaIgmpReceiverVlanForwardNextVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 8),
+    _AlaIgmpReceiverVlanForwardNextVlan_Type()
+)
+alaIgmpReceiverVlanForwardNextVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardNextVlan.setStatus("current")
+_AlaIgmpReceiverVlanForwardNextIfIndex_Type = InterfaceIndex
+_AlaIgmpReceiverVlanForwardNextIfIndex_Object = MibTableColumn
+alaIgmpReceiverVlanForwardNextIfIndex = _AlaIgmpReceiverVlanForwardNextIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 9),
+    _AlaIgmpReceiverVlanForwardNextIfIndex_Type()
+)
+alaIgmpReceiverVlanForwardNextIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardNextIfIndex.setStatus("current")
+
+
+class _AlaIgmpReceiverVlanForwardNextType_Type(Integer32):
+    """Custom type alaIgmpReceiverVlanForwardNextType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("mcast", 1),
+          ("pim", 2),
+          ("ipip", 3))
+    )
+
+
+_AlaIgmpReceiverVlanForwardNextType_Type.__name__ = "Integer32"
+_AlaIgmpReceiverVlanForwardNextType_Object = MibTableColumn
+alaIgmpReceiverVlanForwardNextType = _AlaIgmpReceiverVlanForwardNextType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 10),
+    _AlaIgmpReceiverVlanForwardNextType_Type()
+)
+alaIgmpReceiverVlanForwardNextType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardNextType.setStatus("current")
+_AlaIgmpReceiverVlanForwardReceiverVlan_Type = Unsigned32
+_AlaIgmpReceiverVlanForwardReceiverVlan_Object = MibTableColumn
+alaIgmpReceiverVlanForwardReceiverVlan = _AlaIgmpReceiverVlanForwardReceiverVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 16, 1, 1, 11),
+    _AlaIgmpReceiverVlanForwardReceiverVlan_Type()
+)
+alaIgmpReceiverVlanForwardReceiverVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardReceiverVlan.setStatus("current")
+_AlaIgmpStaticSsmMap_ObjectIdentity = ObjectIdentity
+alaIgmpStaticSsmMap = _AlaIgmpStaticSsmMap_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17)
+)
+_AlaIgmpStaticSsmMapTable_Object = MibTable
+alaIgmpStaticSsmMapTable = _AlaIgmpStaticSsmMapTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1)
+)
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapTable.setStatus("current")
+_AlaIgmpStaticSsmMapEntry_Object = MibTableRow
+alaIgmpStaticSsmMapEntry = _AlaIgmpStaticSsmMapEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1)
+)
+alaIgmpStaticSsmMapEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticSsmMapGrpAddressType"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticSsmMapGrpAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticSsmMapSrcAddressType"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticSsmMapSrcAddress"),
+    (0, "ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticSsmMapGrpPrefixLength"),
+)
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapEntry.setStatus("current")
+
+
+class _AlaIgmpStaticSsmMapGrpAddressType_Type(InetAddressType):
+    """Custom type alaIgmpStaticSsmMapGrpAddressType based on InetAddressType"""
+    subtypeSpec = InetAddressType.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_AlaIgmpStaticSsmMapGrpAddressType_Type.__name__ = "InetAddressType"
+_AlaIgmpStaticSsmMapGrpAddressType_Object = MibTableColumn
+alaIgmpStaticSsmMapGrpAddressType = _AlaIgmpStaticSsmMapGrpAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1, 1),
+    _AlaIgmpStaticSsmMapGrpAddressType_Type()
+)
+alaIgmpStaticSsmMapGrpAddressType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapGrpAddressType.setStatus("current")
+_AlaIgmpStaticSsmMapGrpAddress_Type = InetAddress
+_AlaIgmpStaticSsmMapGrpAddress_Object = MibTableColumn
+alaIgmpStaticSsmMapGrpAddress = _AlaIgmpStaticSsmMapGrpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1, 2),
+    _AlaIgmpStaticSsmMapGrpAddress_Type()
+)
+alaIgmpStaticSsmMapGrpAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapGrpAddress.setStatus("current")
+
+
+class _AlaIgmpStaticSsmMapSrcAddressType_Type(InetAddressType):
+    """Custom type alaIgmpStaticSsmMapSrcAddressType based on InetAddressType"""
+    subtypeSpec = InetAddressType.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_AlaIgmpStaticSsmMapSrcAddressType_Type.__name__ = "InetAddressType"
+_AlaIgmpStaticSsmMapSrcAddressType_Object = MibTableColumn
+alaIgmpStaticSsmMapSrcAddressType = _AlaIgmpStaticSsmMapSrcAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1, 3),
+    _AlaIgmpStaticSsmMapSrcAddressType_Type()
+)
+alaIgmpStaticSsmMapSrcAddressType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapSrcAddressType.setStatus("current")
+_AlaIgmpStaticSsmMapSrcAddress_Type = InetAddress
+_AlaIgmpStaticSsmMapSrcAddress_Object = MibTableColumn
+alaIgmpStaticSsmMapSrcAddress = _AlaIgmpStaticSsmMapSrcAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1, 4),
+    _AlaIgmpStaticSsmMapSrcAddress_Type()
+)
+alaIgmpStaticSsmMapSrcAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapSrcAddress.setStatus("current")
+
+
+class _AlaIgmpStaticSsmMapGrpPrefixLength_Type(InetAddressPrefixLength):
+    """Custom type alaIgmpStaticSsmMapGrpPrefixLength based on InetAddressPrefixLength"""
+    subtypeSpec = InetAddressPrefixLength.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(4, 32),
+    )
+
+
+_AlaIgmpStaticSsmMapGrpPrefixLength_Type.__name__ = "InetAddressPrefixLength"
+_AlaIgmpStaticSsmMapGrpPrefixLength_Object = MibTableColumn
+alaIgmpStaticSsmMapGrpPrefixLength = _AlaIgmpStaticSsmMapGrpPrefixLength_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1, 5),
+    _AlaIgmpStaticSsmMapGrpPrefixLength_Type()
+)
+alaIgmpStaticSsmMapGrpPrefixLength.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapGrpPrefixLength.setStatus("current")
+_AlaIgmpStaticSsmMapRowStatus_Type = RowStatus
+_AlaIgmpStaticSsmMapRowStatus_Object = MibTableColumn
+alaIgmpStaticSsmMapRowStatus = _AlaIgmpStaticSsmMapRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 1, 17, 1, 1, 6),
+    _AlaIgmpStaticSsmMapRowStatus_Type()
+)
+alaIgmpStaticSsmMapRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIgmpStaticSsmMapRowStatus.setStatus("current")
 _AlcatelIND1IgmpMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1IgmpMIBConformance = _AlcatelIND1IgmpMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 2)
@@ -1908,7 +2591,11 @@ alaIgmpGroup.setObjects(
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpMaxGroupExceedAction"),
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpFloodUnknown"),
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpHelperAddressType"),
-        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpHelperAddress"))
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpHelperAddress"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpBufferPacket"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaDynamicControlIpv4Status"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticNeighborFastLearning"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpStarg"))
 )
 if mibBuilder.loadTexts:
     alaIgmpGroup.setStatus("current")
@@ -1934,7 +2621,9 @@ alaIgmpVlanGroup.setObjects(
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanMaxGroupLimit"),
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanMaxGroupExceedAction"),
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanSpoofAddressType"),
-        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanSpoofAddress"))
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanSpoofAddress"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanIndexSharing"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpVlanStarg"))
 )
 if mibBuilder.loadTexts:
     alaIgmpVlanGroup.setStatus("current")
@@ -2050,6 +2739,37 @@ alaIgmpPortVlanGroup.setObjects(
 if mibBuilder.loadTexts:
     alaIgmpPortVlanGroup.setStatus("current")
 
+alaIgmpStaticMemberReceiverVlanGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 2, 2, 14)
+)
+alaIgmpStaticMemberReceiverVlanGroup.setObjects(
+    ("ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticMemberReceiverVlanRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaIgmpStaticMemberReceiverVlanGroup.setStatus("current")
+
+alaIgmpReceiverVlanMemberGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 2, 2, 15)
+)
+alaIgmpReceiverVlanMemberGroup.setObjects(
+      *(("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberMode"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberCount"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberTimeout"))
+)
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanMemberGroup.setStatus("current")
+
+alaIgmpReceiverVlanForwardGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 34, 1, 2, 2, 16)
+)
+alaIgmpReceiverVlanForwardGroup.setObjects(
+      *(("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardIfIndex"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardType"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardNextType"))
+)
+if mibBuilder.loadTexts:
+    alaIgmpReceiverVlanForwardGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -2078,7 +2798,10 @@ alaIgmpCompliance.setObjects(
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpForwardGroup"),
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpTunnelGroup"),
         ("ALCATEL-IND1-IGMP-MIB", "alaIgmpPortGroup"),
-        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpPortVlanGroup"))
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpPortVlanGroup"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpStaticMemberReceiverVlanGroup"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanMemberGroup"),
+        ("ALCATEL-IND1-IGMP-MIB", "alaIgmpReceiverVlanForwardGroup"))
 )
 if mibBuilder.loadTexts:
     alaIgmpCompliance.setStatus(
@@ -2112,6 +2835,12 @@ mibBuilder.exportSymbols(
        "alaIgmpFloodUnknown": alaIgmpFloodUnknown,
        "alaIgmpHelperAddressType": alaIgmpHelperAddressType,
        "alaIgmpHelperAddress": alaIgmpHelperAddress,
+       "alaIgmpBufferPacket": alaIgmpBufferPacket,
+       "alaIgmpIndexSharing": alaIgmpIndexSharing,
+       "alaDynamicControlStatus": alaDynamicControlStatus,
+       "alaDynamicControlIpv4Status": alaDynamicControlIpv4Status,
+       "alaIgmpStaticNeighborFastLearning": alaIgmpStaticNeighborFastLearning,
+       "alaIgmpStarg": alaIgmpStarg,
        "alaIgmpVlan": alaIgmpVlan,
        "alaIgmpVlanTable": alaIgmpVlanTable,
        "alaIgmpVlanEntry": alaIgmpVlanEntry,
@@ -2134,6 +2863,8 @@ mibBuilder.exportSymbols(
        "alaIgmpVlanMaxGroupExceedAction": alaIgmpVlanMaxGroupExceedAction,
        "alaIgmpVlanSpoofAddressType": alaIgmpVlanSpoofAddressType,
        "alaIgmpVlanSpoofAddress": alaIgmpVlanSpoofAddress,
+       "alaIgmpVlanIndexSharing": alaIgmpVlanIndexSharing,
+       "alaIgmpVlanStarg": alaIgmpVlanStarg,
        "alaIgmpMember": alaIgmpMember,
        "alaIgmpMemberTable": alaIgmpMemberTable,
        "alaIgmpMemberEntry": alaIgmpMemberEntry,
@@ -2227,6 +2958,48 @@ mibBuilder.exportSymbols(
        "alaIgmpPortVlanCurrentGroupCount": alaIgmpPortVlanCurrentGroupCount,
        "alaIgmpPortVlanMaxGroupLimit": alaIgmpPortVlanMaxGroupLimit,
        "alaIgmpPortVlanMaxGroupExceedAction": alaIgmpPortVlanMaxGroupExceedAction,
+       "alaIgmpStaticMemberReceiverVlan": alaIgmpStaticMemberReceiverVlan,
+       "alaIgmpStaticMemberReceiverVlanTable": alaIgmpStaticMemberReceiverVlanTable,
+       "alaIgmpStaticMemberReceiverVlanEntry": alaIgmpStaticMemberReceiverVlanEntry,
+       "alaIgmpStaticMemberReceiverVlanMemberVlan": alaIgmpStaticMemberReceiverVlanMemberVlan,
+       "alaIgmpStaticMemberReceiverVlanPortIfIndex": alaIgmpStaticMemberReceiverVlanPortIfIndex,
+       "alaIgmpStaticMemberReceiverVlanGroupAddress": alaIgmpStaticMemberReceiverVlanGroupAddress,
+       "alaIgmpStaticMemberReceiverVlanId": alaIgmpStaticMemberReceiverVlanId,
+       "alaIgmpStaticMemberReceiverVlanRowStatus": alaIgmpStaticMemberReceiverVlanRowStatus,
+       "alaIgmpReceiverVlanMember": alaIgmpReceiverVlanMember,
+       "alaIgmpReceiverVlanMemberTable": alaIgmpReceiverVlanMemberTable,
+       "alaIgmpReceiverVlanMemberEntry": alaIgmpReceiverVlanMemberEntry,
+       "alaIgmpReceiverVlanMemberVlan": alaIgmpReceiverVlanMemberVlan,
+       "alaIgmpReceiverVlanMemberIfIndex": alaIgmpReceiverVlanMemberIfIndex,
+       "alaIgmpReceiverVlanMemberGroupAddress": alaIgmpReceiverVlanMemberGroupAddress,
+       "alaIgmpReceiverVlanMemberSourceAddress": alaIgmpReceiverVlanMemberSourceAddress,
+       "alaIgmpReceiverVlanMemberReceiverVlan": alaIgmpReceiverVlanMemberReceiverVlan,
+       "alaIgmpReceiverVlanMemberMode": alaIgmpReceiverVlanMemberMode,
+       "alaIgmpReceiverVlanMemberCount": alaIgmpReceiverVlanMemberCount,
+       "alaIgmpReceiverVlanMemberTimeout": alaIgmpReceiverVlanMemberTimeout,
+       "alaIgmpReceiverVlanForward": alaIgmpReceiverVlanForward,
+       "alaIgmpReceiverVlanForwardTable": alaIgmpReceiverVlanForwardTable,
+       "alaIgmpReceiverVlanForwardEntry": alaIgmpReceiverVlanForwardEntry,
+       "alaIgmpReceiverVlanForwardVlan": alaIgmpReceiverVlanForwardVlan,
+       "alaIgmpReceiverVlanForwardIfIndex": alaIgmpReceiverVlanForwardIfIndex,
+       "alaIgmpReceiverVlanForwardGroupAddress": alaIgmpReceiverVlanForwardGroupAddress,
+       "alaIgmpReceiverVlanForwardHostAddress": alaIgmpReceiverVlanForwardHostAddress,
+       "alaIgmpReceiverVlanForwardDestAddress": alaIgmpReceiverVlanForwardDestAddress,
+       "alaIgmpReceiverVlanForwardOrigAddress": alaIgmpReceiverVlanForwardOrigAddress,
+       "alaIgmpReceiverVlanForwardType": alaIgmpReceiverVlanForwardType,
+       "alaIgmpReceiverVlanForwardNextVlan": alaIgmpReceiverVlanForwardNextVlan,
+       "alaIgmpReceiverVlanForwardNextIfIndex": alaIgmpReceiverVlanForwardNextIfIndex,
+       "alaIgmpReceiverVlanForwardNextType": alaIgmpReceiverVlanForwardNextType,
+       "alaIgmpReceiverVlanForwardReceiverVlan": alaIgmpReceiverVlanForwardReceiverVlan,
+       "alaIgmpStaticSsmMap": alaIgmpStaticSsmMap,
+       "alaIgmpStaticSsmMapTable": alaIgmpStaticSsmMapTable,
+       "alaIgmpStaticSsmMapEntry": alaIgmpStaticSsmMapEntry,
+       "alaIgmpStaticSsmMapGrpAddressType": alaIgmpStaticSsmMapGrpAddressType,
+       "alaIgmpStaticSsmMapGrpAddress": alaIgmpStaticSsmMapGrpAddress,
+       "alaIgmpStaticSsmMapSrcAddressType": alaIgmpStaticSsmMapSrcAddressType,
+       "alaIgmpStaticSsmMapSrcAddress": alaIgmpStaticSsmMapSrcAddress,
+       "alaIgmpStaticSsmMapGrpPrefixLength": alaIgmpStaticSsmMapGrpPrefixLength,
+       "alaIgmpStaticSsmMapRowStatus": alaIgmpStaticSsmMapRowStatus,
        "alcatelIND1IgmpMIBConformance": alcatelIND1IgmpMIBConformance,
        "alcatelIND1IgmpMIBCompliances": alcatelIND1IgmpMIBCompliances,
        "alaIgmpCompliance": alaIgmpCompliance,
@@ -2243,5 +3016,8 @@ mibBuilder.exportSymbols(
        "alaIgmpForwardGroup": alaIgmpForwardGroup,
        "alaIgmpTunnelGroup": alaIgmpTunnelGroup,
        "alaIgmpPortGroup": alaIgmpPortGroup,
-       "alaIgmpPortVlanGroup": alaIgmpPortVlanGroup}
+       "alaIgmpPortVlanGroup": alaIgmpPortVlanGroup,
+       "alaIgmpStaticMemberReceiverVlanGroup": alaIgmpStaticMemberReceiverVlanGroup,
+       "alaIgmpReceiverVlanMemberGroup": alaIgmpReceiverVlanMemberGroup,
+       "alaIgmpReceiverVlanForwardGroup": alaIgmpReceiverVlanForwardGroup}
 )

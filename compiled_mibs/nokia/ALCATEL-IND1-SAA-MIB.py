@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-SAA-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:05 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-SAA-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -133,7 +130,7 @@ alcatelIND1SaaMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1SaaMIB.setRevisions(
-        ("2009-07-21 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -196,7 +193,7 @@ alaSaaCtrlOwnerIndex = _AlaSaaCtrlOwnerIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 1, 1, 1, 1),
     _AlaSaaCtrlOwnerIndex_Type()
 )
-alaSaaCtrlOwnerIndex.setMaxAccess("not-accessible")
+alaSaaCtrlOwnerIndex.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaSaaCtrlOwnerIndex.setStatus("current")
 
@@ -215,7 +212,7 @@ alaSaaCtrlTestIndex = _AlaSaaCtrlTestIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 1, 1, 1, 2),
     _AlaSaaCtrlTestIndex_Type()
 )
-alaSaaCtrlTestIndex.setMaxAccess("not-accessible")
+alaSaaCtrlTestIndex.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaSaaCtrlTestIndex.setStatus("current")
 _AlaSaaCtrlRowStatus_Type = RowStatus
@@ -280,13 +277,15 @@ class _AlaSaaCtrlTestMode_Type(Integer32):
         SingleValueConstraint(
             *(0,
               1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("undefined", 0),
           ("ipSaa", 1),
-          ("ethSaa", 2))
+          ("ethSaa", 2),
+          ("macSaa", 3))
     )
 
 
@@ -364,7 +363,7 @@ class _AlaSaaCtrlInterval_Type(Integer32):
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(10, 1500),
+        ValueRangeConstraint(1, 1500),
     )
 
 
@@ -592,11 +591,11 @@ if mibBuilder.loadTexts:
 
 class _AlaSaaIpCtrlPayloadSize_Type(Integer32):
     """Custom type alaSaaIpCtrlPayloadSize based on Integer32"""
-    defaultValue = 24
+    defaultValue = 28
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(24, 1472),
+        ValueRangeConstraint(28, 1472),
     )
 
 
@@ -617,7 +616,7 @@ class _AlaSaaIpCtrlNumPkts_Type(Integer32):
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10),
+        ValueRangeConstraint(1, 100),
     )
 
 
@@ -838,7 +837,7 @@ alaSaaIpResultsTestRunIndex = _AlaSaaIpResultsTestRunIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 3, 1, 1, 1),
     _AlaSaaIpResultsTestRunIndex_Type()
 )
-alaSaaIpResultsTestRunIndex.setMaxAccess("not-accessible")
+alaSaaIpResultsTestRunIndex.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaSaaIpResultsTestRunIndex.setStatus("current")
 _AlaSaaIpResultsPktsSent_Type = Counter32
@@ -1161,7 +1160,7 @@ class _AlaSaaEthoamCtrlNumPkts_Type(Integer32):
     """Custom type alaSaaEthoamCtrlNumPkts based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10),
+        ValueRangeConstraint(1, 100),
     )
 
 
@@ -1384,7 +1383,7 @@ alaSaaEthoamResultsTestRunIndex = _AlaSaaEthoamResultsTestRunIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 6, 1, 1, 1),
     _AlaSaaEthoamResultsTestRunIndex_Type()
 )
-alaSaaEthoamResultsTestRunIndex.setMaxAccess("not-accessible")
+alaSaaEthoamResultsTestRunIndex.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaSaaEthoamResultsTestRunIndex.setStatus("current")
 _AlaSaaEthoamResultsPktsSent_Type = Unsigned32
@@ -1565,6 +1564,572 @@ alaSaaEthoamHistoryPktJitter = _AlaSaaEthoamHistoryPktJitter_Object(
 alaSaaEthoamHistoryPktJitter.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaSaaEthoamHistoryPktJitter.setStatus("current")
+_AlaSaaMacCtrlConfig_ObjectIdentity = ObjectIdentity
+alaSaaMacCtrlConfig = _AlaSaaMacCtrlConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8)
+)
+_AlaSaaMacCtrlTable_Object = MibTable
+alaSaaMacCtrlTable = _AlaSaaMacCtrlTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1)
+)
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTable.setStatus("current")
+_AlaSaaMacCtrlEntry_Object = MibTableRow
+alaSaaMacCtrlEntry = _AlaSaaMacCtrlEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1)
+)
+alaSaaMacCtrlEntry.setIndexNames(
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlOwnerIndex"),
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTestIndex"),
+)
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlEntry.setStatus("current")
+
+
+class _AlaSaaMacCtrlOwnerIndex_Type(SnmpAdminString):
+    """Custom type alaSaaMacCtrlOwnerIndex based on SnmpAdminString"""
+    defaultValue = OctetString("USER")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AlaSaaMacCtrlOwnerIndex_Type.__name__ = "SnmpAdminString"
+_AlaSaaMacCtrlOwnerIndex_Object = MibTableColumn
+alaSaaMacCtrlOwnerIndex = _AlaSaaMacCtrlOwnerIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 1),
+    _AlaSaaMacCtrlOwnerIndex_Type()
+)
+alaSaaMacCtrlOwnerIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlOwnerIndex.setStatus("current")
+
+
+class _AlaSaaMacCtrlTestIndex_Type(SnmpAdminString):
+    """Custom type alaSaaMacCtrlTestIndex based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AlaSaaMacCtrlTestIndex_Type.__name__ = "SnmpAdminString"
+_AlaSaaMacCtrlTestIndex_Object = MibTableColumn
+alaSaaMacCtrlTestIndex = _AlaSaaMacCtrlTestIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 2),
+    _AlaSaaMacCtrlTestIndex_Type()
+)
+alaSaaMacCtrlTestIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTestIndex.setStatus("current")
+_AlaSaaMacCtrlRowStatus_Type = RowStatus
+_AlaSaaMacCtrlRowStatus_Object = MibTableColumn
+alaSaaMacCtrlRowStatus = _AlaSaaMacCtrlRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 3),
+    _AlaSaaMacCtrlRowStatus_Type()
+)
+alaSaaMacCtrlRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlRowStatus.setStatus("current")
+_AlaSaaMacCtrlDstAddress_Type = MacAddress
+_AlaSaaMacCtrlDstAddress_Object = MibTableColumn
+alaSaaMacCtrlDstAddress = _AlaSaaMacCtrlDstAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 4),
+    _AlaSaaMacCtrlDstAddress_Type()
+)
+alaSaaMacCtrlDstAddress.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlDstAddress.setStatus("current")
+
+
+class _AlaSaaMacCtrlVlan_Type(Integer32):
+    """Custom type alaSaaMacCtrlVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_AlaSaaMacCtrlVlan_Type.__name__ = "Integer32"
+_AlaSaaMacCtrlVlan_Object = MibTableColumn
+alaSaaMacCtrlVlan = _AlaSaaMacCtrlVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 5),
+    _AlaSaaMacCtrlVlan_Type()
+)
+alaSaaMacCtrlVlan.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlVlan.setStatus("current")
+
+
+class _AlaSaaMacCtrlVlanPriority_Type(Integer32):
+    """Custom type alaSaaMacCtrlVlanPriority based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AlaSaaMacCtrlVlanPriority_Type.__name__ = "Integer32"
+_AlaSaaMacCtrlVlanPriority_Object = MibTableColumn
+alaSaaMacCtrlVlanPriority = _AlaSaaMacCtrlVlanPriority_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 6),
+    _AlaSaaMacCtrlVlanPriority_Type()
+)
+alaSaaMacCtrlVlanPriority.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlVlanPriority.setStatus("current")
+
+
+class _AlaSaaMacCtrlPktData_Type(OctetString):
+    """Custom type alaSaaMacCtrlPktData based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaSaaMacCtrlPktData_Type.__name__ = "OctetString"
+_AlaSaaMacCtrlPktData_Object = MibTableColumn
+alaSaaMacCtrlPktData = _AlaSaaMacCtrlPktData_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 7),
+    _AlaSaaMacCtrlPktData_Type()
+)
+alaSaaMacCtrlPktData.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlPktData.setStatus("current")
+
+
+class _AlaSaaMacCtrlDropEligible_Type(TruthValue):
+    """Custom type alaSaaMacCtrlDropEligible based on TruthValue"""
+    defaultValue = 2
+
+
+_AlaSaaMacCtrlDropEligible_Type.__name__ = "TruthValue"
+_AlaSaaMacCtrlDropEligible_Object = MibTableColumn
+alaSaaMacCtrlDropEligible = _AlaSaaMacCtrlDropEligible_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 8),
+    _AlaSaaMacCtrlDropEligible_Type()
+)
+alaSaaMacCtrlDropEligible.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlDropEligible.setStatus("current")
+
+
+class _AlaSaaMacCtrlPayloadSize_Type(Integer32):
+    """Custom type alaSaaMacCtrlPayloadSize based on Integer32"""
+    defaultValue = 36
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(36, 1500),
+    )
+
+
+_AlaSaaMacCtrlPayloadSize_Type.__name__ = "Integer32"
+_AlaSaaMacCtrlPayloadSize_Object = MibTableColumn
+alaSaaMacCtrlPayloadSize = _AlaSaaMacCtrlPayloadSize_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 9),
+    _AlaSaaMacCtrlPayloadSize_Type()
+)
+alaSaaMacCtrlPayloadSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlPayloadSize.setStatus("current")
+
+
+class _AlaSaaMacCtrlNumPkts_Type(Integer32):
+    """Custom type alaSaaMacCtrlNumPkts based on Integer32"""
+    defaultValue = 5
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_AlaSaaMacCtrlNumPkts_Type.__name__ = "Integer32"
+_AlaSaaMacCtrlNumPkts_Object = MibTableColumn
+alaSaaMacCtrlNumPkts = _AlaSaaMacCtrlNumPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 10),
+    _AlaSaaMacCtrlNumPkts_Type()
+)
+alaSaaMacCtrlNumPkts.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlNumPkts.setStatus("current")
+
+
+class _AlaSaaMacCtrlInterPktDelay_Type(Integer32):
+    """Custom type alaSaaMacCtrlInterPktDelay based on Integer32"""
+    defaultValue = 1000
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(100, 1000),
+    )
+
+
+_AlaSaaMacCtrlInterPktDelay_Type.__name__ = "Integer32"
+_AlaSaaMacCtrlInterPktDelay_Object = MibTableColumn
+alaSaaMacCtrlInterPktDelay = _AlaSaaMacCtrlInterPktDelay_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 11),
+    _AlaSaaMacCtrlInterPktDelay_Type()
+)
+alaSaaMacCtrlInterPktDelay.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlInterPktDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlInterPktDelay.setUnits("milli-seconds")
+_AlaSaaMacCtrlTotalPktsSent_Type = Counter32
+_AlaSaaMacCtrlTotalPktsSent_Object = MibTableColumn
+alaSaaMacCtrlTotalPktsSent = _AlaSaaMacCtrlTotalPktsSent_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 12),
+    _AlaSaaMacCtrlTotalPktsSent_Type()
+)
+alaSaaMacCtrlTotalPktsSent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTotalPktsSent.setStatus("current")
+_AlaSaaMacCtrlTotalPktsRcvd_Type = Counter32
+_AlaSaaMacCtrlTotalPktsRcvd_Object = MibTableColumn
+alaSaaMacCtrlTotalPktsRcvd = _AlaSaaMacCtrlTotalPktsRcvd_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 13),
+    _AlaSaaMacCtrlTotalPktsRcvd_Type()
+)
+alaSaaMacCtrlTotalPktsRcvd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTotalPktsRcvd.setStatus("current")
+_AlaSaaMacCtrlMinRTT_Type = Integer32
+_AlaSaaMacCtrlMinRTT_Object = MibTableColumn
+alaSaaMacCtrlMinRTT = _AlaSaaMacCtrlMinRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 14),
+    _AlaSaaMacCtrlMinRTT_Type()
+)
+alaSaaMacCtrlMinRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlMinRTT.setStatus("current")
+_AlaSaaMacCtrlAvgRTT_Type = Integer32
+_AlaSaaMacCtrlAvgRTT_Object = MibTableColumn
+alaSaaMacCtrlAvgRTT = _AlaSaaMacCtrlAvgRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 15),
+    _AlaSaaMacCtrlAvgRTT_Type()
+)
+alaSaaMacCtrlAvgRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlAvgRTT.setStatus("current")
+_AlaSaaMacCtrlMaxRTT_Type = Integer32
+_AlaSaaMacCtrlMaxRTT_Object = MibTableColumn
+alaSaaMacCtrlMaxRTT = _AlaSaaMacCtrlMaxRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 16),
+    _AlaSaaMacCtrlMaxRTT_Type()
+)
+alaSaaMacCtrlMaxRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlMaxRTT.setStatus("current")
+_AlaSaaMacCtrlMinJitter_Type = Integer32
+_AlaSaaMacCtrlMinJitter_Object = MibTableColumn
+alaSaaMacCtrlMinJitter = _AlaSaaMacCtrlMinJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 17),
+    _AlaSaaMacCtrlMinJitter_Type()
+)
+alaSaaMacCtrlMinJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlMinJitter.setStatus("current")
+_AlaSaaMacCtrlAvgJitter_Type = Integer32
+_AlaSaaMacCtrlAvgJitter_Object = MibTableColumn
+alaSaaMacCtrlAvgJitter = _AlaSaaMacCtrlAvgJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 18),
+    _AlaSaaMacCtrlAvgJitter_Type()
+)
+alaSaaMacCtrlAvgJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlAvgJitter.setStatus("current")
+_AlaSaaMacCtrlMaxJitter_Type = Integer32
+_AlaSaaMacCtrlMaxJitter_Object = MibTableColumn
+alaSaaMacCtrlMaxJitter = _AlaSaaMacCtrlMaxJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 19),
+    _AlaSaaMacCtrlMaxJitter_Type()
+)
+alaSaaMacCtrlMaxJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlMaxJitter.setStatus("current")
+_AlaSaaMacCtrlTSMinRTT_Type = DateAndTime
+_AlaSaaMacCtrlTSMinRTT_Object = MibTableColumn
+alaSaaMacCtrlTSMinRTT = _AlaSaaMacCtrlTSMinRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 20),
+    _AlaSaaMacCtrlTSMinRTT_Type()
+)
+alaSaaMacCtrlTSMinRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTSMinRTT.setStatus("current")
+_AlaSaaMacCtrlTSMaxRTT_Type = DateAndTime
+_AlaSaaMacCtrlTSMaxRTT_Object = MibTableColumn
+alaSaaMacCtrlTSMaxRTT = _AlaSaaMacCtrlTSMaxRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 21),
+    _AlaSaaMacCtrlTSMaxRTT_Type()
+)
+alaSaaMacCtrlTSMaxRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTSMaxRTT.setStatus("current")
+_AlaSaaMacCtrlTSMinJitter_Type = DateAndTime
+_AlaSaaMacCtrlTSMinJitter_Object = MibTableColumn
+alaSaaMacCtrlTSMinJitter = _AlaSaaMacCtrlTSMinJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 22),
+    _AlaSaaMacCtrlTSMinJitter_Type()
+)
+alaSaaMacCtrlTSMinJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTSMinJitter.setStatus("current")
+_AlaSaaMacCtrlTSMaxJitter_Type = DateAndTime
+_AlaSaaMacCtrlTSMaxJitter_Object = MibTableColumn
+alaSaaMacCtrlTSMaxJitter = _AlaSaaMacCtrlTSMaxJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 8, 1, 1, 23),
+    _AlaSaaMacCtrlTSMaxJitter_Type()
+)
+alaSaaMacCtrlTSMaxJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlTSMaxJitter.setStatus("current")
+_AlaSaaMacResults_ObjectIdentity = ObjectIdentity
+alaSaaMacResults = _AlaSaaMacResults_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9)
+)
+_AlaSaaMacResultsTable_Object = MibTable
+alaSaaMacResultsTable = _AlaSaaMacResultsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1)
+)
+if mibBuilder.loadTexts:
+    alaSaaMacResultsTable.setStatus("current")
+_AlaSaaMacResultsEntry_Object = MibTableRow
+alaSaaMacResultsEntry = _AlaSaaMacResultsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1)
+)
+alaSaaMacResultsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlOwnerIndex"),
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTestIndex"),
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsTestRunIndex"),
+)
+if mibBuilder.loadTexts:
+    alaSaaMacResultsEntry.setStatus("current")
+_AlaSaaMacResultsTestRunIndex_Type = Unsigned32
+_AlaSaaMacResultsTestRunIndex_Object = MibTableColumn
+alaSaaMacResultsTestRunIndex = _AlaSaaMacResultsTestRunIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 1),
+    _AlaSaaMacResultsTestRunIndex_Type()
+)
+alaSaaMacResultsTestRunIndex.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsTestRunIndex.setStatus("current")
+_AlaSaaMacResultsPktsSent_Type = Unsigned32
+_AlaSaaMacResultsPktsSent_Object = MibTableColumn
+alaSaaMacResultsPktsSent = _AlaSaaMacResultsPktsSent_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 2),
+    _AlaSaaMacResultsPktsSent_Type()
+)
+alaSaaMacResultsPktsSent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsPktsSent.setStatus("current")
+_AlaSaaMacResultsPktsRcvd_Type = Unsigned32
+_AlaSaaMacResultsPktsRcvd_Object = MibTableColumn
+alaSaaMacResultsPktsRcvd = _AlaSaaMacResultsPktsRcvd_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 3),
+    _AlaSaaMacResultsPktsRcvd_Type()
+)
+alaSaaMacResultsPktsRcvd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsPktsRcvd.setStatus("current")
+_AlaSaaMacResultsInterPktDelay_Type = Integer32
+_AlaSaaMacResultsInterPktDelay_Object = MibTableColumn
+alaSaaMacResultsInterPktDelay = _AlaSaaMacResultsInterPktDelay_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 4),
+    _AlaSaaMacResultsInterPktDelay_Type()
+)
+alaSaaMacResultsInterPktDelay.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsInterPktDelay.setStatus("current")
+
+
+class _AlaSaaMacResultsRunResult_Type(Integer32):
+    """Custom type alaSaaMacResultsRunResult based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("undetermined", 0),
+          ("success", 1),
+          ("failed", 2),
+          ("aborted", 3))
+    )
+
+
+_AlaSaaMacResultsRunResult_Type.__name__ = "Integer32"
+_AlaSaaMacResultsRunResult_Object = MibTableColumn
+alaSaaMacResultsRunResult = _AlaSaaMacResultsRunResult_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 5),
+    _AlaSaaMacResultsRunResult_Type()
+)
+alaSaaMacResultsRunResult.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsRunResult.setStatus("current")
+_AlaSaaMacResultsRunResultReason_Type = OctetString
+_AlaSaaMacResultsRunResultReason_Object = MibTableColumn
+alaSaaMacResultsRunResultReason = _AlaSaaMacResultsRunResultReason_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 6),
+    _AlaSaaMacResultsRunResultReason_Type()
+)
+alaSaaMacResultsRunResultReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsRunResultReason.setStatus("current")
+_AlaSaaMacResultsRunTime_Type = DateAndTime
+_AlaSaaMacResultsRunTime_Object = MibTableColumn
+alaSaaMacResultsRunTime = _AlaSaaMacResultsRunTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 7),
+    _AlaSaaMacResultsRunTime_Type()
+)
+alaSaaMacResultsRunTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsRunTime.setStatus("current")
+_AlaSaaMacResultsMinRTT_Type = Integer32
+_AlaSaaMacResultsMinRTT_Object = MibTableColumn
+alaSaaMacResultsMinRTT = _AlaSaaMacResultsMinRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 8),
+    _AlaSaaMacResultsMinRTT_Type()
+)
+alaSaaMacResultsMinRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsMinRTT.setStatus("current")
+_AlaSaaMacResultsAvgRTT_Type = Integer32
+_AlaSaaMacResultsAvgRTT_Object = MibTableColumn
+alaSaaMacResultsAvgRTT = _AlaSaaMacResultsAvgRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 9),
+    _AlaSaaMacResultsAvgRTT_Type()
+)
+alaSaaMacResultsAvgRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsAvgRTT.setStatus("current")
+_AlaSaaMacResultsMaxRTT_Type = Integer32
+_AlaSaaMacResultsMaxRTT_Object = MibTableColumn
+alaSaaMacResultsMaxRTT = _AlaSaaMacResultsMaxRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 10),
+    _AlaSaaMacResultsMaxRTT_Type()
+)
+alaSaaMacResultsMaxRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsMaxRTT.setStatus("current")
+_AlaSaaMacResultsMinJitter_Type = Integer32
+_AlaSaaMacResultsMinJitter_Object = MibTableColumn
+alaSaaMacResultsMinJitter = _AlaSaaMacResultsMinJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 11),
+    _AlaSaaMacResultsMinJitter_Type()
+)
+alaSaaMacResultsMinJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsMinJitter.setStatus("current")
+_AlaSaaMacResultsAvgJitter_Type = Integer32
+_AlaSaaMacResultsAvgJitter_Object = MibTableColumn
+alaSaaMacResultsAvgJitter = _AlaSaaMacResultsAvgJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 12),
+    _AlaSaaMacResultsAvgJitter_Type()
+)
+alaSaaMacResultsAvgJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsAvgJitter.setStatus("current")
+_AlaSaaMacResultsMaxJitter_Type = Integer32
+_AlaSaaMacResultsMaxJitter_Object = MibTableColumn
+alaSaaMacResultsMaxJitter = _AlaSaaMacResultsMaxJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 9, 1, 1, 13),
+    _AlaSaaMacResultsMaxJitter_Type()
+)
+alaSaaMacResultsMaxJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacResultsMaxJitter.setStatus("current")
+_AlaSaaMacHistory_ObjectIdentity = ObjectIdentity
+alaSaaMacHistory = _AlaSaaMacHistory_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 10)
+)
+_AlaSaaMacHistoryTable_Object = MibTable
+alaSaaMacHistoryTable = _AlaSaaMacHistoryTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 10, 1)
+)
+if mibBuilder.loadTexts:
+    alaSaaMacHistoryTable.setStatus("current")
+_AlaSaaMacHistoryEntry_Object = MibTableRow
+alaSaaMacHistoryEntry = _AlaSaaMacHistoryEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 10, 1, 1)
+)
+alaSaaMacHistoryEntry.setIndexNames(
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlOwnerIndex"),
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTestIndex"),
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsTestRunIndex"),
+    (0, "ALCATEL-IND1-SAA-MIB", "alaSaaMacHistoryIndex"),
+)
+if mibBuilder.loadTexts:
+    alaSaaMacHistoryEntry.setStatus("current")
+_AlaSaaMacHistoryIndex_Type = Unsigned32
+_AlaSaaMacHistoryIndex_Object = MibTableColumn
+alaSaaMacHistoryIndex = _AlaSaaMacHistoryIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 10, 1, 1, 1),
+    _AlaSaaMacHistoryIndex_Type()
+)
+alaSaaMacHistoryIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaSaaMacHistoryIndex.setStatus("current")
+_AlaSaaMacHistoryPktRTT_Type = Integer32
+_AlaSaaMacHistoryPktRTT_Object = MibTableColumn
+alaSaaMacHistoryPktRTT = _AlaSaaMacHistoryPktRTT_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 10, 1, 1, 2),
+    _AlaSaaMacHistoryPktRTT_Type()
+)
+alaSaaMacHistoryPktRTT.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacHistoryPktRTT.setStatus("current")
+_AlaSaaMacHistoryPktJitter_Type = Integer32
+_AlaSaaMacHistoryPktJitter_Object = MibTableColumn
+alaSaaMacHistoryPktJitter = _AlaSaaMacHistoryPktJitter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 10, 1, 1, 3),
+    _AlaSaaMacHistoryPktJitter_Type()
+)
+alaSaaMacHistoryPktJitter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSaaMacHistoryPktJitter.setStatus("current")
+_AlaSaaJitterCalcModeConfig_ObjectIdentity = ObjectIdentity
+alaSaaJitterCalcModeConfig = _AlaSaaJitterCalcModeConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 11)
+)
+
+
+class _AlaSaaCtrlJitterCalculationMode_Type(Integer32):
+    """Custom type alaSaaCtrlJitterCalculationMode based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 1),
+          ("enhanced", 2))
+    )
+
+
+_AlaSaaCtrlJitterCalculationMode_Type.__name__ = "Integer32"
+_AlaSaaCtrlJitterCalculationMode_Object = MibScalar
+alaSaaCtrlJitterCalculationMode = _AlaSaaCtrlJitterCalculationMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 1, 11, 1),
+    _AlaSaaCtrlJitterCalculationMode_Type()
+)
+alaSaaCtrlJitterCalculationMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSaaCtrlJitterCalculationMode.setStatus("current")
 _AlcatelIND1SaaMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1SaaMIBConformance = _AlcatelIND1SaaMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 2)
@@ -1730,11 +2295,128 @@ alaSaaEthoamHistoryGroup.setObjects(
 if mibBuilder.loadTexts:
     alaSaaEthoamHistoryGroup.setStatus("current")
 
+alaSaaMacCtrlConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 2, 1, 8)
+)
+alaSaaMacCtrlConfigGroup.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlRowStatus"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlDstAddress"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlVlan"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlVlanPriority"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlPktData"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlDropEligible"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlPayloadSize"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlNumPkts"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlInterPktDelay"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTotalPktsSent"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTotalPktsRcvd"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlMinRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlAvgRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlMaxRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlMinJitter"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlAvgJitter"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlMaxJitter"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTSMinRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTSMaxRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTSMinJitter"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlTSMaxJitter"))
+)
+if mibBuilder.loadTexts:
+    alaSaaMacCtrlConfigGroup.setStatus("current")
+
+alaSaaMacResultsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 2, 1, 9)
+)
+alaSaaMacResultsGroup.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsPktsSent"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsPktsRcvd"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsInterPktDelay"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsRunResult"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsRunResultReason"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsRunTime"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsMinRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsAvgRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsMaxRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsMinJitter"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsAvgJitter"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsMaxJitter"))
+)
+if mibBuilder.loadTexts:
+    alaSaaMacResultsGroup.setStatus("current")
+
+alaSaaMacHistoryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 2, 1, 10)
+)
+alaSaaMacHistoryGroup.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaMacHistoryPktRTT"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacHistoryPktJitter"))
+)
+if mibBuilder.loadTexts:
+    alaSaaMacHistoryGroup.setStatus("current")
+
 
 # Notification objects
 
+alaSaaIPIterationCompleteTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 0, 1)
+)
+alaSaaIPIterationCompleteTrap.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlOwnerIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlTestIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaIpResultsTestRunIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlLastRunResult"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlLastRunTime"))
+)
+if mibBuilder.loadTexts:
+    alaSaaIPIterationCompleteTrap.setStatus(
+        "current"
+    )
+
+alaSaaEthIterationCompleteTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 0, 2)
+)
+alaSaaEthIterationCompleteTrap.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlOwnerIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlTestIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaEthoamResultsTestRunIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlLastRunResult"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlLastRunTime"))
+)
+if mibBuilder.loadTexts:
+    alaSaaEthIterationCompleteTrap.setStatus(
+        "current"
+    )
+
+alaSaaMacIterationCompleteTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 0, 3)
+)
+alaSaaMacIterationCompleteTrap.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlOwnerIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlTestIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsTestRunIndex"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlLastRunResult"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaCtrlLastRunTime"))
+)
+if mibBuilder.loadTexts:
+    alaSaaMacIterationCompleteTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
+
+alaSaaNotificationsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 55, 1, 2, 1, 11)
+)
+alaSaaNotificationsGroup.setObjects(
+      *(("ALCATEL-IND1-SAA-MIB", "alaSaaIPIterationCompleteTrap"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaEthIterationCompleteTrap"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacIterationCompleteTrap"))
+)
+if mibBuilder.loadTexts:
+    alaSaaNotificationsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -1752,7 +2434,11 @@ alcatelIND1SaaMIBCompliance.setObjects(
         ("ALCATEL-IND1-SAA-MIB", "alaSaaIpHistoryGroup"),
         ("ALCATEL-IND1-SAA-MIB", "alaSaaEthoamCtrlConfigGroup"),
         ("ALCATEL-IND1-SAA-MIB", "alaSaaEthoamResultsGroup"),
-        ("ALCATEL-IND1-SAA-MIB", "alaSaaEthoamHistoryGroup"))
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaEthoamHistoryGroup"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacCtrlConfigGroup"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacResultsGroup"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaMacHistoryGroup"),
+        ("ALCATEL-IND1-SAA-MIB", "alaSaaNotificationsGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1SaaMIBCompliance.setStatus(
@@ -1766,6 +2452,9 @@ mibBuilder.exportSymbols(
     "ALCATEL-IND1-SAA-MIB",
     **{"alcatelIND1SaaMIB": alcatelIND1SaaMIB,
        "alcatelIND1SaaNotifications": alcatelIND1SaaNotifications,
+       "alaSaaIPIterationCompleteTrap": alaSaaIPIterationCompleteTrap,
+       "alaSaaEthIterationCompleteTrap": alaSaaEthIterationCompleteTrap,
+       "alaSaaMacIterationCompleteTrap": alaSaaMacIterationCompleteTrap,
        "alcatelIND1SaaMIBObjects": alcatelIND1SaaMIBObjects,
        "alaSaaCtrlConfig": alaSaaCtrlConfig,
        "alaSaaCtrlTable": alaSaaCtrlTable,
@@ -1886,6 +2575,56 @@ mibBuilder.exportSymbols(
        "alaSaaEthoamHistoryIndex": alaSaaEthoamHistoryIndex,
        "alaSaaEthoamHistoryPktRTT": alaSaaEthoamHistoryPktRTT,
        "alaSaaEthoamHistoryPktJitter": alaSaaEthoamHistoryPktJitter,
+       "alaSaaMacCtrlConfig": alaSaaMacCtrlConfig,
+       "alaSaaMacCtrlTable": alaSaaMacCtrlTable,
+       "alaSaaMacCtrlEntry": alaSaaMacCtrlEntry,
+       "alaSaaMacCtrlOwnerIndex": alaSaaMacCtrlOwnerIndex,
+       "alaSaaMacCtrlTestIndex": alaSaaMacCtrlTestIndex,
+       "alaSaaMacCtrlRowStatus": alaSaaMacCtrlRowStatus,
+       "alaSaaMacCtrlDstAddress": alaSaaMacCtrlDstAddress,
+       "alaSaaMacCtrlVlan": alaSaaMacCtrlVlan,
+       "alaSaaMacCtrlVlanPriority": alaSaaMacCtrlVlanPriority,
+       "alaSaaMacCtrlPktData": alaSaaMacCtrlPktData,
+       "alaSaaMacCtrlDropEligible": alaSaaMacCtrlDropEligible,
+       "alaSaaMacCtrlPayloadSize": alaSaaMacCtrlPayloadSize,
+       "alaSaaMacCtrlNumPkts": alaSaaMacCtrlNumPkts,
+       "alaSaaMacCtrlInterPktDelay": alaSaaMacCtrlInterPktDelay,
+       "alaSaaMacCtrlTotalPktsSent": alaSaaMacCtrlTotalPktsSent,
+       "alaSaaMacCtrlTotalPktsRcvd": alaSaaMacCtrlTotalPktsRcvd,
+       "alaSaaMacCtrlMinRTT": alaSaaMacCtrlMinRTT,
+       "alaSaaMacCtrlAvgRTT": alaSaaMacCtrlAvgRTT,
+       "alaSaaMacCtrlMaxRTT": alaSaaMacCtrlMaxRTT,
+       "alaSaaMacCtrlMinJitter": alaSaaMacCtrlMinJitter,
+       "alaSaaMacCtrlAvgJitter": alaSaaMacCtrlAvgJitter,
+       "alaSaaMacCtrlMaxJitter": alaSaaMacCtrlMaxJitter,
+       "alaSaaMacCtrlTSMinRTT": alaSaaMacCtrlTSMinRTT,
+       "alaSaaMacCtrlTSMaxRTT": alaSaaMacCtrlTSMaxRTT,
+       "alaSaaMacCtrlTSMinJitter": alaSaaMacCtrlTSMinJitter,
+       "alaSaaMacCtrlTSMaxJitter": alaSaaMacCtrlTSMaxJitter,
+       "alaSaaMacResults": alaSaaMacResults,
+       "alaSaaMacResultsTable": alaSaaMacResultsTable,
+       "alaSaaMacResultsEntry": alaSaaMacResultsEntry,
+       "alaSaaMacResultsTestRunIndex": alaSaaMacResultsTestRunIndex,
+       "alaSaaMacResultsPktsSent": alaSaaMacResultsPktsSent,
+       "alaSaaMacResultsPktsRcvd": alaSaaMacResultsPktsRcvd,
+       "alaSaaMacResultsInterPktDelay": alaSaaMacResultsInterPktDelay,
+       "alaSaaMacResultsRunResult": alaSaaMacResultsRunResult,
+       "alaSaaMacResultsRunResultReason": alaSaaMacResultsRunResultReason,
+       "alaSaaMacResultsRunTime": alaSaaMacResultsRunTime,
+       "alaSaaMacResultsMinRTT": alaSaaMacResultsMinRTT,
+       "alaSaaMacResultsAvgRTT": alaSaaMacResultsAvgRTT,
+       "alaSaaMacResultsMaxRTT": alaSaaMacResultsMaxRTT,
+       "alaSaaMacResultsMinJitter": alaSaaMacResultsMinJitter,
+       "alaSaaMacResultsAvgJitter": alaSaaMacResultsAvgJitter,
+       "alaSaaMacResultsMaxJitter": alaSaaMacResultsMaxJitter,
+       "alaSaaMacHistory": alaSaaMacHistory,
+       "alaSaaMacHistoryTable": alaSaaMacHistoryTable,
+       "alaSaaMacHistoryEntry": alaSaaMacHistoryEntry,
+       "alaSaaMacHistoryIndex": alaSaaMacHistoryIndex,
+       "alaSaaMacHistoryPktRTT": alaSaaMacHistoryPktRTT,
+       "alaSaaMacHistoryPktJitter": alaSaaMacHistoryPktJitter,
+       "alaSaaJitterCalcModeConfig": alaSaaJitterCalcModeConfig,
+       "alaSaaCtrlJitterCalculationMode": alaSaaCtrlJitterCalculationMode,
        "alcatelIND1SaaMIBConformance": alcatelIND1SaaMIBConformance,
        "alcatelIND1SaaMIBGroups": alcatelIND1SaaMIBGroups,
        "alaSaaCtrlConfigGroup": alaSaaCtrlConfigGroup,
@@ -1895,6 +2634,10 @@ mibBuilder.exportSymbols(
        "alaSaaEthoamCtrlConfigGroup": alaSaaEthoamCtrlConfigGroup,
        "alaSaaEthoamResultsGroup": alaSaaEthoamResultsGroup,
        "alaSaaEthoamHistoryGroup": alaSaaEthoamHistoryGroup,
+       "alaSaaMacCtrlConfigGroup": alaSaaMacCtrlConfigGroup,
+       "alaSaaMacResultsGroup": alaSaaMacResultsGroup,
+       "alaSaaMacHistoryGroup": alaSaaMacHistoryGroup,
+       "alaSaaNotificationsGroup": alaSaaNotificationsGroup,
        "alcatelIND1SaaMIBCompliances": alcatelIND1SaaMIBCompliances,
        "alcatelIND1SaaMIBCompliance": alcatelIND1SaaMIBCompliance}
 )

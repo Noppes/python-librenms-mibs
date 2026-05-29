@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-02T11:21:17.345828",
+  "timestamp": "2026-05-29T09:20:01.193794",
   "stats": {
     "total": 4,
     "compiled": 0,
@@ -20,5 +20,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

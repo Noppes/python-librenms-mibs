@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-VRTR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -44,6 +41,10 @@ if 'mibBuilder' not in globals():
     "ValueSizeConstraint")
 
 # Import SMI symbols from the MIBs this MIB depends on
+
+(IANAipRouteProtocol,) = mibBuilder.importSymbols(
+    "IANA-RTPROTO-MIB",
+    "IANAipRouteProtocol")
 
 (InterfaceIndex,
  InterfaceIndexOrZero) = mibBuilder.importSymbols(
@@ -213,6 +214,8 @@ if 'mibBuilder' not in globals():
  Dot1PPriority,
  IpAddressPrefixLength,
  SdpBindId,
+ TBgpSrv6UpaTriggerNextHop,
+ TBgpUntaggedRouteType,
  TCIRRate,
  TCpmProtPolicyID,
  TDSCPValue,
@@ -232,13 +235,16 @@ if 'mibBuilder' not in globals():
  TPolicyStatementNameOrEmpty,
  TPriorityOrUndefined,
  TQosQGrpInstanceIDorZero,
+ TRateType,
  TResolveStatus,
+ TSrv6RouteResolution,
  TXLPolicyNameOrExpOrEmpty,
  TmnxAddressAndPrefixAddress,
  TmnxAddressAndPrefixPrefix,
  TmnxAddressAndPrefixType,
  TmnxAdminState,
  TmnxAlgorithmId,
+ TmnxAttrSetImport,
  TmnxBfdSessOperFlags,
  TmnxBfdSessProtocolState,
  TmnxBfdSessionProtocols,
@@ -258,6 +264,7 @@ if 'mibBuilder' not in globals():
  TmnxDistCpuProtState,
  TmnxEnabledDisabled,
  TmnxEncapVal,
+ TmnxFPNumber,
  TmnxFlexAlgoIdOrZero,
  TmnxIpv6AddressAndPrefixAddress,
  TmnxIpv6AddressAndPrefixPrefix,
@@ -265,6 +272,7 @@ if 'mibBuilder' not in globals():
  TmnxLagPerLinkHashClass,
  TmnxLagPerLinkHashWeight,
  TmnxLinkMapProfileIdOrZero,
+ TmnxMplsLabelOrZero,
  TmnxMplsTpGlobalID,
  TmnxMplsTpNodeID,
  TmnxOperState,
@@ -292,6 +300,8 @@ if 'mibBuilder' not in globals():
     "Dot1PPriority",
     "IpAddressPrefixLength",
     "SdpBindId",
+    "TBgpSrv6UpaTriggerNextHop",
+    "TBgpUntaggedRouteType",
     "TCIRRate",
     "TCpmProtPolicyID",
     "TDSCPValue",
@@ -311,13 +321,16 @@ if 'mibBuilder' not in globals():
     "TPolicyStatementNameOrEmpty",
     "TPriorityOrUndefined",
     "TQosQGrpInstanceIDorZero",
+    "TRateType",
     "TResolveStatus",
+    "TSrv6RouteResolution",
     "TXLPolicyNameOrExpOrEmpty",
     "TmnxAddressAndPrefixAddress",
     "TmnxAddressAndPrefixPrefix",
     "TmnxAddressAndPrefixType",
     "TmnxAdminState",
     "TmnxAlgorithmId",
+    "TmnxAttrSetImport",
     "TmnxBfdSessOperFlags",
     "TmnxBfdSessProtocolState",
     "TmnxBfdSessionProtocols",
@@ -337,6 +350,7 @@ if 'mibBuilder' not in globals():
     "TmnxDistCpuProtState",
     "TmnxEnabledDisabled",
     "TmnxEncapVal",
+    "TmnxFPNumber",
     "TmnxFlexAlgoIdOrZero",
     "TmnxIpv6AddressAndPrefixAddress",
     "TmnxIpv6AddressAndPrefixPrefix",
@@ -344,6 +358,7 @@ if 'mibBuilder' not in globals():
     "TmnxLagPerLinkHashClass",
     "TmnxLagPerLinkHashWeight",
     "TmnxLinkMapProfileIdOrZero",
+    "TmnxMplsLabelOrZero",
     "TmnxMplsTpGlobalID",
     "TmnxMplsTpNodeID",
     "TmnxOperState",
@@ -373,7 +388,11 @@ timetraVRtrMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     timetraVRtrMIBModule.setRevisions(
-        ("2021-02-01 00:00",
+        ("2025-02-01 00:00",
+         "2024-02-01 00:00",
+         "2023-02-01 00:00",
+         "2022-02-01 00:00",
+         "2021-02-01 00:00",
          "2020-02-01 00:00",
          "2019-03-01 00:00",
          "2017-03-01 00:00",
@@ -481,7 +500,8 @@ class TDSCPAppId(TextualConvention, Integer32):
               41,
               42,
               43,
-              44)
+              44,
+              45)
         )
     )
     namedValues = NamedValues(
@@ -526,7 +546,8 @@ class TDSCPAppId(TextualConvention, Integer32):
           ("http", 41),
           ("mpls-udp-return", 42),
           ("pfcp", 43),
-          ("ibcp", 44))
+          ("ibcp", 44),
+          ("bfd", 45))
     )
 
 
@@ -609,7 +630,12 @@ class TmnxInetCidrNextHopOwner(TextualConvention, Integer32):
               12,
               13,
               14,
-              15)
+              15,
+              16,
+              17,
+              18,
+              19,
+              20)
         )
     )
     namedValues = NamedValues(
@@ -628,7 +654,12 @@ class TmnxInetCidrNextHopOwner(TextualConvention, Integer32):
           ("srPolicy", 12),
           ("ribApi", 13),
           ("srv6", 14),
-          ("srv6Isis", 15))
+          ("srv6Isis", 15),
+          ("srv6Policy", 16),
+          ("video", 17),
+          ("esmbcast", 18),
+          ("vxlan", 19),
+          ("reserved20", 20))
     )
 
 
@@ -769,6 +800,24 @@ class VrtrMplsTunnelMode(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("uniform", 0),
           ("pipe", 1))
+    )
+
+
+
+class VrtrIpTunnelOperState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("inService", 2),
+          ("outOfService", 3))
     )
 
 
@@ -975,7 +1024,7 @@ class _VRtrEcmpMaxRoutes_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 64),
+        ValueRangeConstraint(1, 128),
     )
 
 
@@ -3098,7 +3147,11 @@ class _VRtrIfType_Type(Integer32):
               30,
               31,
               32,
-              33)
+              33,
+              34,
+              35,
+              36,
+              37)
         )
     )
     namedValues = NamedValues(
@@ -3134,7 +3187,11 @@ class _VRtrIfType_Type(Integer32):
           ("unnumMplsTp", 30),
           ("gmplsLoopback", 31),
           ("controlTunnel", 32),
-          ("pdn", 33))
+          ("pdn", 33),
+          ("serviceIesDms", 34),
+          ("serviceVprnDms", 35),
+          ("serviceIesIpTunnel", 36),
+          ("serviceVprnIpTunnel", 37))
     )
 
 
@@ -7533,6 +7590,22 @@ vRtrIfDHCPReleaseIncludeGiaddr = _VRtrIfDHCPReleaseIncludeGiaddr_Object(
 vRtrIfDHCPReleaseIncludeGiaddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIfDHCPReleaseIncludeGiaddr.setStatus("current")
+
+
+class _VRtrIfDHCPRelayForceRenewWoLease_Type(TruthValue):
+    """Custom type vRtrIfDHCPRelayForceRenewWoLease based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfDHCPRelayForceRenewWoLease_Type.__name__ = "TruthValue"
+_VRtrIfDHCPRelayForceRenewWoLease_Object = MibTableColumn
+vRtrIfDHCPRelayForceRenewWoLease = _VRtrIfDHCPRelayForceRenewWoLease_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 19, 1, 51),
+    _VRtrIfDHCPRelayForceRenewWoLease_Type()
+)
+vRtrIfDHCPRelayForceRenewWoLease.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfDHCPRelayForceRenewWoLease.setStatus("current")
 _VRtrIfDHCPRelayStatsTable_Object = MibTable
 vRtrIfDHCPRelayStatsTable = _VRtrIfDHCPRelayStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 20)
@@ -8277,6 +8350,64 @@ vRtrNotifIgnorePortState = _VRtrNotifIgnorePortState_Object(
 vRtrNotifIgnorePortState.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     vRtrNotifIgnorePortState.setStatus("current")
+_VRtrNotifyFpNum_Type = TmnxFPNumber
+_VRtrNotifyFpNum_Object = MibScalar
+vRtrNotifyFpNum = _VRtrNotifyFpNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 21, 51),
+    _VRtrNotifyFpNum_Type()
+)
+vRtrNotifyFpNum.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vRtrNotifyFpNum.setStatus("current")
+
+
+class _VRtrNotifyBgpInstType_Type(Integer32):
+    """Custom type vRtrNotifyBgpInstType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ipVpnMpls", 1),
+          ("ipVpnSrv6", 2),
+          ("evpnMpls", 3),
+          ("evpnSrv6", 4))
+    )
+
+
+_VRtrNotifyBgpInstType_Type.__name__ = "Integer32"
+_VRtrNotifyBgpInstType_Object = MibScalar
+vRtrNotifyBgpInstType = _VRtrNotifyBgpInstType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 21, 52),
+    _VRtrNotifyBgpInstType_Type()
+)
+vRtrNotifyBgpInstType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vRtrNotifyBgpInstType.setStatus("current")
+
+
+class _VRtrNotifyBgpInstance_Type(Integer32):
+    """Custom type vRtrNotifyBgpInstance based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_VRtrNotifyBgpInstance_Type.__name__ = "Integer32"
+_VRtrNotifyBgpInstance_Object = MibScalar
+vRtrNotifyBgpInstance = _VRtrNotifyBgpInstance_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 21, 53),
+    _VRtrNotifyBgpInstance_Type()
+)
+vRtrNotifyBgpInstance.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vRtrNotifyBgpInstance.setStatus("current")
 _VRtrIfDHCPLeaseStateTable_Object = MibTable
 vRtrIfDHCPLeaseStateTable = _VRtrIfDHCPLeaseStateTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 22)
@@ -8616,7 +8747,8 @@ class _VRtrInetStaticRouteStaticType_Type(Integer32):
               1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
@@ -8624,7 +8756,8 @@ class _VRtrInetStaticRouteStaticType_Type(Integer32):
           ("nextHop", 1),
           ("indirect", 2),
           ("blackHole", 3),
-          ("grt", 4))
+          ("grt", 4),
+          ("reserved5", 5))
     )
 
 
@@ -9315,6 +9448,22 @@ vRtrInetStaticRouteBackupStatus = _VRtrInetStaticRouteBackupStatus_Object(
 vRtrInetStaticRouteBackupStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrInetStaticRouteBackupStatus.setStatus("current")
+
+
+class _VRtrInetStaticRoutePfxLstRtrInst_Type(TLNamedItemOrEmpty):
+    """Custom type vRtrInetStaticRoutePfxLstRtrInst based on TLNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrInetStaticRoutePfxLstRtrInst_Type.__name__ = "TLNamedItemOrEmpty"
+_VRtrInetStaticRoutePfxLstRtrInst_Object = MibTableColumn
+vRtrInetStaticRoutePfxLstRtrInst = _VRtrInetStaticRoutePfxLstRtrInst_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 24, 1, 49),
+    _VRtrInetStaticRoutePfxLstRtrInst_Type()
+)
+vRtrInetStaticRoutePfxLstRtrInst.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrInetStaticRoutePfxLstRtrInst.setStatus("current")
 _VRtrInetStaticRouteIndexTable_Object = MibTable
 vRtrInetStaticRouteIndexTable = _VRtrInetStaticRouteIndexTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 25)
@@ -10452,6 +10601,26 @@ vRtrInetCidrRouteNHFecPfxLen = _VRtrInetCidrRouteNHFecPfxLen_Object(
 vRtrInetCidrRouteNHFecPfxLen.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrInetCidrRouteNHFecPfxLen.setStatus("current")
+
+
+class _VRtrInetCidrRouteEgrVni_Type(Unsigned32):
+    """Custom type vRtrInetCidrRouteEgrVni based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 16777215),
+    )
+
+
+_VRtrInetCidrRouteEgrVni_Type.__name__ = "Unsigned32"
+_VRtrInetCidrRouteEgrVni_Object = MibTableColumn
+vRtrInetCidrRouteEgrVni = _VRtrInetCidrRouteEgrVni_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 30, 1, 28),
+    _VRtrInetCidrRouteEgrVni_Type()
+)
+vRtrInetCidrRouteEgrVni.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetCidrRouteEgrVni.setStatus("current")
 _VRtrIcmp6Table_Object = MibTable
 vRtrIcmp6Table = _VRtrIcmp6Table_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 31)
@@ -12509,6 +12678,38 @@ if mibBuilder.loadTexts:
     vRtrIfDHCP6LseSplitValidLifetime.setStatus("current")
 if mibBuilder.loadTexts:
     vRtrIfDHCP6LseSplitValidLifetime.setUnits("seconds")
+
+
+class _VRtrIfDHCP6AllowClntIdChng_Type(TruthValue):
+    """Custom type vRtrIfDHCP6AllowClntIdChng based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfDHCP6AllowClntIdChng_Type.__name__ = "TruthValue"
+_VRtrIfDHCP6AllowClntIdChng_Object = MibTableColumn
+vRtrIfDHCP6AllowClntIdChng = _VRtrIfDHCP6AllowClntIdChng_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 36, 1, 47),
+    _VRtrIfDHCP6AllowClntIdChng_Type()
+)
+vRtrIfDHCP6AllowClntIdChng.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfDHCP6AllowClntIdChng.setStatus("current")
+
+
+class _VRtrIfDHCP6RelayReconfigureWoLse_Type(TruthValue):
+    """Custom type vRtrIfDHCP6RelayReconfigureWoLse based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfDHCP6RelayReconfigureWoLse_Type.__name__ = "TruthValue"
+_VRtrIfDHCP6RelayReconfigureWoLse_Object = MibTableColumn
+vRtrIfDHCP6RelayReconfigureWoLse = _VRtrIfDHCP6RelayReconfigureWoLse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 36, 1, 48),
+    _VRtrIfDHCP6RelayReconfigureWoLse_Type()
+)
+vRtrIfDHCP6RelayReconfigureWoLse.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfDHCP6RelayReconfigureWoLse.setStatus("current")
 _VRtrIfGlobalIndexTable_Object = MibTable
 vRtrIfGlobalIndexTable = _VRtrIfGlobalIndexTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 37)
@@ -13819,6 +14020,24 @@ vRtrFibStatIpVpnCurrUtilization = _VRtrFibStatIpVpnCurrUtilization_Object(
 vRtrFibStatIpVpnCurrUtilization.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrFibStatIpVpnCurrUtilization.setStatus("current")
+_VRtrFibStatBGPEvpnIflHostRoutes_Type = Gauge32
+_VRtrFibStatBGPEvpnIflHostRoutes_Object = MibTableColumn
+vRtrFibStatBGPEvpnIflHostRoutes = _VRtrFibStatBGPEvpnIflHostRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 51, 1, 52),
+    _VRtrFibStatBGPEvpnIflHostRoutes_Type()
+)
+vRtrFibStatBGPEvpnIflHostRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrFibStatBGPEvpnIflHostRoutes.setStatus("current")
+_VRtrFibStatV6BGPEvpnIflHostRts_Type = Gauge32
+_VRtrFibStatV6BGPEvpnIflHostRts_Object = MibTableColumn
+vRtrFibStatV6BGPEvpnIflHostRts = _VRtrFibStatV6BGPEvpnIflHostRts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 51, 1, 53),
+    _VRtrFibStatV6BGPEvpnIflHostRts_Type()
+)
+vRtrFibStatV6BGPEvpnIflHostRts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrFibStatV6BGPEvpnIflHostRts.setStatus("current")
 _VRtrFibStatNextHopTable_Object = MibTable
 vRtrFibStatNextHopTable = _VRtrFibStatNextHopTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 52)
@@ -14237,6 +14456,26 @@ vRtrInetAllCidrRouteNHFecPfxLen = _VRtrInetAllCidrRouteNHFecPfxLen_Object(
 vRtrInetAllCidrRouteNHFecPfxLen.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrInetAllCidrRouteNHFecPfxLen.setStatus("current")
+
+
+class _VRtrInetAllCidrRouteEgrVni_Type(Unsigned32):
+    """Custom type vRtrInetAllCidrRouteEgrVni based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 16777215),
+    )
+
+
+_VRtrInetAllCidrRouteEgrVni_Type.__name__ = "Unsigned32"
+_VRtrInetAllCidrRouteEgrVni_Object = MibTableColumn
+vRtrInetAllCidrRouteEgrVni = _VRtrInetAllCidrRouteEgrVni_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 53, 1, 33),
+    _VRtrInetAllCidrRouteEgrVni_Type()
+)
+vRtrInetAllCidrRouteEgrVni.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetAllCidrRouteEgrVni.setStatus("current")
 _VRtrIfStatsTable_Object = MibTable
 vRtrIfStatsTable = _VRtrIfStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 54)
@@ -16709,6 +16948,15 @@ vRtrBgpIpVpnMplsDynEgrLblLmt = _VRtrBgpIpVpnMplsDynEgrLblLmt_Object(
 vRtrBgpIpVpnMplsDynEgrLblLmt.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrBgpIpVpnMplsDynEgrLblLmt.setStatus("current")
+_VRtrBgpIpVpnMplsOperState_Type = TmnxEnabledDisabled
+_VRtrBgpIpVpnMplsOperState_Object = MibTableColumn
+vRtrBgpIpVpnMplsOperState = _VRtrBgpIpVpnMplsOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 60, 1, 76),
+    _VRtrBgpIpVpnMplsOperState_Type()
+)
+vRtrBgpIpVpnMplsOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpIpVpnMplsOperState.setStatus("current")
 _VRtrIfExtTable_Object = MibTable
 vRtrIfExtTable = _VRtrIfExtTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 61)
@@ -16821,13 +17069,15 @@ class _VRtrIfQosRouteLookup_Type(Integer32):
         SingleValueConstraint(
             *(0,
               1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("none", 0),
           ("destination", 1),
-          ("source", 2))
+          ("source", 2),
+          ("source-and-dest", 3))
     )
 
 
@@ -16851,13 +17101,15 @@ class _VRtrIfIpv6QosRouteLookup_Type(Integer32):
         SingleValueConstraint(
             *(0,
               1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("none", 0),
           ("destination", 1),
-          ("source", 2))
+          ("source", 2),
+          ("source-and-dest", 3))
     )
 
 
@@ -17666,7 +17918,9 @@ class _VRtrIfOperV4DownReason_Type(Bits):
           ("ipControlTunnelOperDown", 17),
           ("pdnAddressMismatch", 18),
           ("pingCheckFailure", 19),
-          ("portInternalLoopback", 20))
+          ("portInternalLoopback", 20),
+          ("noHwResForSrv6Loopback", 21),
+          ("ipTunnelNotReady", 22))
     )
 
 _VRtrIfOperV4DownReason_Type.__name__ = "Bits"
@@ -17703,7 +17957,9 @@ class _VRtrIfOperV6DownReason_Type(Bits):
           ("ipControlTunnelOperDown", 17),
           ("pdnAddressMismatch", 18),
           ("pingCheckFailure", 19),
-          ("portInternalLoopback", 20))
+          ("portInternalLoopback", 20),
+          ("noHwResForSrv6Loopback", 21),
+          ("ipTunnelNotReady", 22))
     )
 
 _VRtrIfOperV6DownReason_Type.__name__ = "Bits"
@@ -17847,7 +18103,7 @@ vRtrIfIpTunnelRemoteIpAddrType = _VRtrIfIpTunnelRemoteIpAddrType_Object(
 )
 vRtrIfIpTunnelRemoteIpAddrType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    vRtrIfIpTunnelRemoteIpAddrType.setStatus("current")
+    vRtrIfIpTunnelRemoteIpAddrType.setStatus("obsolete")
 
 
 class _VRtrIfIpTunnelRemoteIpAddr_Type(InetAddress):
@@ -17870,7 +18126,7 @@ vRtrIfIpTunnelRemoteIpAddr = _VRtrIfIpTunnelRemoteIpAddr_Object(
 )
 vRtrIfIpTunnelRemoteIpAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    vRtrIfIpTunnelRemoteIpAddr.setStatus("current")
+    vRtrIfIpTunnelRemoteIpAddr.setStatus("obsolete")
 
 
 class _VRtrIfIpv4ArpLearnUnsol_Type(TruthValue):
@@ -20349,6 +20605,186 @@ vRtrStatSrV6TotalRoutes = _VRtrStatSrV6TotalRoutes_Object(
 vRtrStatSrV6TotalRoutes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrStatSrV6TotalRoutes.setStatus("current")
+_VRtrStatActiveSrV6PolicyTunnels_Type = Gauge32
+_VRtrStatActiveSrV6PolicyTunnels_Object = MibTableColumn
+vRtrStatActiveSrV6PolicyTunnels = _VRtrStatActiveSrV6PolicyTunnels_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 84),
+    _VRtrStatActiveSrV6PolicyTunnels_Type()
+)
+vRtrStatActiveSrV6PolicyTunnels.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatActiveSrV6PolicyTunnels.setStatus("current")
+_VRtrStatTotalSrV6PolicyTunnels_Type = Gauge32
+_VRtrStatTotalSrV6PolicyTunnels_Object = MibTableColumn
+vRtrStatTotalSrV6PolicyTunnels = _VRtrStatTotalSrV6PolicyTunnels_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 85),
+    _VRtrStatTotalSrV6PolicyTunnels_Type()
+)
+vRtrStatTotalSrV6PolicyTunnels.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatTotalSrV6PolicyTunnels.setStatus("current")
+_VRtrStatActiveSrV6PolicyRoutes_Type = Gauge32
+_VRtrStatActiveSrV6PolicyRoutes_Object = MibTableColumn
+vRtrStatActiveSrV6PolicyRoutes = _VRtrStatActiveSrV6PolicyRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 86),
+    _VRtrStatActiveSrV6PolicyRoutes_Type()
+)
+vRtrStatActiveSrV6PolicyRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatActiveSrV6PolicyRoutes.setStatus("current")
+_VRtrStatTotalSrV6PolicyRoutes_Type = Gauge32
+_VRtrStatTotalSrV6PolicyRoutes_Object = MibTableColumn
+vRtrStatTotalSrV6PolicyRoutes = _VRtrStatTotalSrV6PolicyRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 87),
+    _VRtrStatTotalSrV6PolicyRoutes_Type()
+)
+vRtrStatTotalSrV6PolicyRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatTotalSrV6PolicyRoutes.setStatus("current")
+_VRtrStatActiveV4VideoRoutes_Type = Gauge32
+_VRtrStatActiveV4VideoRoutes_Object = MibTableColumn
+vRtrStatActiveV4VideoRoutes = _VRtrStatActiveV4VideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 88),
+    _VRtrStatActiveV4VideoRoutes_Type()
+)
+vRtrStatActiveV4VideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatActiveV4VideoRoutes.setStatus("current")
+_VRtrStatTotalV4VideoRoutes_Type = Gauge32
+_VRtrStatTotalV4VideoRoutes_Object = MibTableColumn
+vRtrStatTotalV4VideoRoutes = _VRtrStatTotalV4VideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 89),
+    _VRtrStatTotalV4VideoRoutes_Type()
+)
+vRtrStatTotalV4VideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatTotalV4VideoRoutes.setStatus("current")
+_VRtrStatActiveV6VideoRoutes_Type = Gauge32
+_VRtrStatActiveV6VideoRoutes_Object = MibTableColumn
+vRtrStatActiveV6VideoRoutes = _VRtrStatActiveV6VideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 90),
+    _VRtrStatActiveV6VideoRoutes_Type()
+)
+vRtrStatActiveV6VideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatActiveV6VideoRoutes.setStatus("current")
+_VRtrStatTotalV6VideoRoutes_Type = Gauge32
+_VRtrStatTotalV6VideoRoutes_Object = MibTableColumn
+vRtrStatTotalV6VideoRoutes = _VRtrStatTotalV6VideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 91),
+    _VRtrStatTotalV6VideoRoutes_Type()
+)
+vRtrStatTotalV6VideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatTotalV6VideoRoutes.setStatus("current")
+_VRtrMcastIpv4ActiveVideoRoutes_Type = Gauge32
+_VRtrMcastIpv4ActiveVideoRoutes_Object = MibTableColumn
+vRtrMcastIpv4ActiveVideoRoutes = _VRtrMcastIpv4ActiveVideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 92),
+    _VRtrMcastIpv4ActiveVideoRoutes_Type()
+)
+vRtrMcastIpv4ActiveVideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMcastIpv4ActiveVideoRoutes.setStatus("current")
+_VRtrMcastIpv4TotalVideoRoutes_Type = Gauge32
+_VRtrMcastIpv4TotalVideoRoutes_Object = MibTableColumn
+vRtrMcastIpv4TotalVideoRoutes = _VRtrMcastIpv4TotalVideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 93),
+    _VRtrMcastIpv4TotalVideoRoutes_Type()
+)
+vRtrMcastIpv4TotalVideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMcastIpv4TotalVideoRoutes.setStatus("current")
+_VRtrMcastIpv6ActiveVideoRoutes_Type = Gauge32
+_VRtrMcastIpv6ActiveVideoRoutes_Object = MibTableColumn
+vRtrMcastIpv6ActiveVideoRoutes = _VRtrMcastIpv6ActiveVideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 94),
+    _VRtrMcastIpv6ActiveVideoRoutes_Type()
+)
+vRtrMcastIpv6ActiveVideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMcastIpv6ActiveVideoRoutes.setStatus("current")
+_VRtrMcastIpv6TotalVideoRoutes_Type = Gauge32
+_VRtrMcastIpv6TotalVideoRoutes_Object = MibTableColumn
+vRtrMcastIpv6TotalVideoRoutes = _VRtrMcastIpv6TotalVideoRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 95),
+    _VRtrMcastIpv6TotalVideoRoutes_Type()
+)
+vRtrMcastIpv6TotalVideoRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMcastIpv6TotalVideoRoutes.setStatus("current")
+_VRtrStatV6NdRaRoutes_Type = Gauge32
+_VRtrStatV6NdRaRoutes_Object = MibTableColumn
+vRtrStatV6NdRaRoutes = _VRtrStatV6NdRaRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 96),
+    _VRtrStatV6NdRaRoutes_Type()
+)
+vRtrStatV6NdRaRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatV6NdRaRoutes.setStatus("current")
+_VRtrStatV6NdRaActiveRoutes_Type = Gauge32
+_VRtrStatV6NdRaActiveRoutes_Object = MibTableColumn
+vRtrStatV6NdRaActiveRoutes = _VRtrStatV6NdRaActiveRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 97),
+    _VRtrStatV6NdRaActiveRoutes_Type()
+)
+vRtrStatV6NdRaActiveRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatV6NdRaActiveRoutes.setStatus("current")
+_VRtrStatActiveV4EsmBcastRoutes_Type = Gauge32
+_VRtrStatActiveV4EsmBcastRoutes_Object = MibTableColumn
+vRtrStatActiveV4EsmBcastRoutes = _VRtrStatActiveV4EsmBcastRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 98),
+    _VRtrStatActiveV4EsmBcastRoutes_Type()
+)
+vRtrStatActiveV4EsmBcastRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatActiveV4EsmBcastRoutes.setStatus("current")
+_VRtrStatTotalV4EsmBcastRoutes_Type = Gauge32
+_VRtrStatTotalV4EsmBcastRoutes_Object = MibTableColumn
+vRtrStatTotalV4EsmBcastRoutes = _VRtrStatTotalV4EsmBcastRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 99),
+    _VRtrStatTotalV4EsmBcastRoutes_Type()
+)
+vRtrStatTotalV4EsmBcastRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrStatTotalV4EsmBcastRoutes.setStatus("current")
+_VRtrBgpEvpnIflHostRoutes_Type = Gauge32
+_VRtrBgpEvpnIflHostRoutes_Object = MibTableColumn
+vRtrBgpEvpnIflHostRoutes = _VRtrBgpEvpnIflHostRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 100),
+    _VRtrBgpEvpnIflHostRoutes_Type()
+)
+vRtrBgpEvpnIflHostRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnIflHostRoutes.setStatus("current")
+_VRtrBgpEvpnIflHostActRoutes_Type = Gauge32
+_VRtrBgpEvpnIflHostActRoutes_Object = MibTableColumn
+vRtrBgpEvpnIflHostActRoutes = _VRtrBgpEvpnIflHostActRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 101),
+    _VRtrBgpEvpnIflHostActRoutes_Type()
+)
+vRtrBgpEvpnIflHostActRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnIflHostActRoutes.setStatus("current")
+_VRtrV6BgpEvpnIflHostRoutes_Type = Gauge32
+_VRtrV6BgpEvpnIflHostRoutes_Object = MibTableColumn
+vRtrV6BgpEvpnIflHostRoutes = _VRtrV6BgpEvpnIflHostRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 102),
+    _VRtrV6BgpEvpnIflHostRoutes_Type()
+)
+vRtrV6BgpEvpnIflHostRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrV6BgpEvpnIflHostRoutes.setStatus("current")
+_VRtrV6BgpEvpnIflHostActRoutes_Type = Gauge32
+_VRtrV6BgpEvpnIflHostActRoutes_Object = MibTableColumn
+vRtrV6BgpEvpnIflHostActRoutes = _VRtrV6BgpEvpnIflHostActRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 75, 1, 103),
+    _VRtrV6BgpEvpnIflHostActRoutes_Type()
+)
+vRtrV6BgpEvpnIflHostActRoutes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrV6BgpEvpnIflHostActRoutes.setStatus("current")
 _VRtrVrfPolicyTable_Object = MibTable
 vRtrVrfPolicyTable = _VRtrVrfPolicyTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 76)
@@ -21568,6 +22004,108 @@ vRtrIfQosEgrVlanPlcyPortRedirect = _VRtrIfQosEgrVlanPlcyPortRedirect_Object(
 vRtrIfQosEgrVlanPlcyPortRedirect.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIfQosEgrVlanPlcyPortRedirect.setStatus("current")
+
+
+class _VRtrIfQosEgrAggRatePIRPercent_Type(Unsigned32):
+    """Custom type vRtrIfQosEgrAggRatePIRPercent based on Unsigned32"""
+    defaultValue = 10000
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_VRtrIfQosEgrAggRatePIRPercent_Type.__name__ = "Unsigned32"
+_VRtrIfQosEgrAggRatePIRPercent_Object = MibTableColumn
+vRtrIfQosEgrAggRatePIRPercent = _VRtrIfQosEgrAggRatePIRPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 78, 1, 13),
+    _VRtrIfQosEgrAggRatePIRPercent_Type()
+)
+vRtrIfQosEgrAggRatePIRPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRatePIRPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRatePIRPercent.setUnits("centipercent")
+
+
+class _VRtrIfQosEgrAggRateCIRPercent_Type(Unsigned32):
+    """Custom type vRtrIfQosEgrAggRateCIRPercent based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_VRtrIfQosEgrAggRateCIRPercent_Type.__name__ = "Unsigned32"
+_VRtrIfQosEgrAggRateCIRPercent_Object = MibTableColumn
+vRtrIfQosEgrAggRateCIRPercent = _VRtrIfQosEgrAggRateCIRPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 78, 1, 14),
+    _VRtrIfQosEgrAggRateCIRPercent_Type()
+)
+vRtrIfQosEgrAggRateCIRPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRateCIRPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRateCIRPercent.setUnits("centipercent")
+
+
+class _VRtrIfQosEgrAggRateType_Type(TRateType):
+    """Custom type vRtrIfQosEgrAggRateType based on TRateType"""
+    defaultValue = 1
+
+
+_VRtrIfQosEgrAggRateType_Type.__name__ = "TRateType"
+_VRtrIfQosEgrAggRateType_Object = MibTableColumn
+vRtrIfQosEgrAggRateType = _VRtrIfQosEgrAggRateType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 78, 1, 15),
+    _VRtrIfQosEgrAggRateType_Type()
+)
+vRtrIfQosEgrAggRateType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRateType.setStatus("current")
+
+
+class _VRtrIfQosEgrAggRateBurstLmt_Type(Integer32):
+    """Custom type vRtrIfQosEgrAggRateBurstLmt based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(2, 2),
+    )
+
+
+_VRtrIfQosEgrAggRateBurstLmt_Type.__name__ = "Integer32"
+_VRtrIfQosEgrAggRateBurstLmt_Object = MibTableColumn
+vRtrIfQosEgrAggRateBurstLmt = _VRtrIfQosEgrAggRateBurstLmt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 78, 1, 16),
+    _VRtrIfQosEgrAggRateBurstLmt_Type()
+)
+vRtrIfQosEgrAggRateBurstLmt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRateBurstLmt.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrAggRateBurstLmt.setUnits("kilobytes")
+
+
+class _VRtrIfQosEgrSinkExcessBW_Type(TruthValue):
+    """Custom type vRtrIfQosEgrSinkExcessBW based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfQosEgrSinkExcessBW_Type.__name__ = "TruthValue"
+_VRtrIfQosEgrSinkExcessBW_Object = MibTableColumn
+vRtrIfQosEgrSinkExcessBW = _VRtrIfQosEgrSinkExcessBW_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 78, 1, 17),
+    _VRtrIfQosEgrSinkExcessBW_Type()
+)
+vRtrIfQosEgrSinkExcessBW.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfQosEgrSinkExcessBW.setStatus("current")
 _VRtrDnsTableLastCh_Type = TimeStamp
 _VRtrDnsTableLastCh_Object = MibScalar
 vRtrDnsTableLastCh = _VRtrDnsTableLastCh_Object(
@@ -22150,6 +22688,24 @@ if mibBuilder.loadTexts:
     vRtrIfDcpFpStaticDetectionTime.setStatus("current")
 if mibBuilder.loadTexts:
     vRtrIfDcpFpStaticDetectionTime.setUnits("seconds")
+_VRtrIfDcpFpStaticTotalExcdCount_Type = Counter64
+_VRtrIfDcpFpStaticTotalExcdCount_Object = MibTableColumn
+vRtrIfDcpFpStaticTotalExcdCount = _VRtrIfDcpFpStaticTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 85, 1, 8),
+    _VRtrIfDcpFpStaticTotalExcdCount_Type()
+)
+vRtrIfDcpFpStaticTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfDcpFpStaticTotalExcdCount.setStatus("current")
+_VRtrIfDcpFpStaticExtCnfrmStCount_Type = Counter32
+_VRtrIfDcpFpStaticExtCnfrmStCount_Object = MibTableColumn
+vRtrIfDcpFpStaticExtCnfrmStCount = _VRtrIfDcpFpStaticExtCnfrmStCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 85, 1, 9),
+    _VRtrIfDcpFpStaticExtCnfrmStCount_Type()
+)
+vRtrIfDcpFpStaticExtCnfrmStCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfDcpFpStaticExtCnfrmStCount.setStatus("current")
 _VRtrIfDcpFpDynStatTable_Object = MibTable
 vRtrIfDcpFpDynStatTable = _VRtrIfDcpFpDynStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 86)
@@ -22246,6 +22802,24 @@ vRtrIfDcpFpDynAllocated = _VRtrIfDcpFpDynAllocated_Object(
 vRtrIfDcpFpDynAllocated.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrIfDcpFpDynAllocated.setStatus("current")
+_VRtrIfDcpFpDynTotalExcdCount_Type = Counter64
+_VRtrIfDcpFpDynTotalExcdCount_Object = MibTableColumn
+vRtrIfDcpFpDynTotalExcdCount = _VRtrIfDcpFpDynTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 86, 1, 9),
+    _VRtrIfDcpFpDynTotalExcdCount_Type()
+)
+vRtrIfDcpFpDynTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfDcpFpDynTotalExcdCount.setStatus("current")
+_VRtrIfDcpFpDynExtCnfrmStateCount_Type = Counter32
+_VRtrIfDcpFpDynExtCnfrmStateCount_Object = MibTableColumn
+vRtrIfDcpFpDynExtCnfrmStateCount = _VRtrIfDcpFpDynExtCnfrmStateCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 86, 1, 10),
+    _VRtrIfDcpFpDynExtCnfrmStateCount_Type()
+)
+vRtrIfDcpFpDynExtCnfrmStateCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfDcpFpDynExtCnfrmStateCount.setStatus("current")
 _VRtrIfDcpFpLocMonStatTable_Object = MibTable
 vRtrIfDcpFpLocMonStatTable = _VRtrIfDcpFpLocMonStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 87)
@@ -22320,6 +22894,24 @@ vRtrIfDcpFpLocMonAllDynAlloc = _VRtrIfDcpFpLocMonAllDynAlloc_Object(
 vRtrIfDcpFpLocMonAllDynAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrIfDcpFpLocMonAllDynAlloc.setStatus("current")
+_VRtrIfDcpFpLocMonTotalExcdCount_Type = Counter64
+_VRtrIfDcpFpLocMonTotalExcdCount_Object = MibTableColumn
+vRtrIfDcpFpLocMonTotalExcdCount = _VRtrIfDcpFpLocMonTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 87, 1, 7),
+    _VRtrIfDcpFpLocMonTotalExcdCount_Type()
+)
+vRtrIfDcpFpLocMonTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfDcpFpLocMonTotalExcdCount.setStatus("current")
+_VRtrIfDcpFpLocMonExtCnfrmStCount_Type = Counter32
+_VRtrIfDcpFpLocMonExtCnfrmStCount_Object = MibTableColumn
+vRtrIfDcpFpLocMonExtCnfrmStCount = _VRtrIfDcpFpLocMonExtCnfrmStCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 87, 1, 8),
+    _VRtrIfDcpFpLocMonExtCnfrmStCount_Type()
+)
+vRtrIfDcpFpLocMonExtCnfrmStCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfDcpFpLocMonExtCnfrmStCount.setStatus("current")
 _VRtrIfDHCP6ProxyDuidTableLastCh_Type = TimeStamp
 _VRtrIfDHCP6ProxyDuidTableLastCh_Object = MibScalar
 vRtrIfDHCP6ProxyDuidTableLastCh = _VRtrIfDHCP6ProxyDuidTableLastCh_Object(
@@ -22567,6 +23159,36 @@ vRtrIpv6RtrAdvertCreationOrigin = _VRtrIpv6RtrAdvertCreationOrigin_Object(
 vRtrIpv6RtrAdvertCreationOrigin.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrIpv6RtrAdvertCreationOrigin.setStatus("current")
+
+
+class _VRtrIpv6RtrAdvertNdRtrPreference_Type(Integer32):
+    """Custom type vRtrIpv6RtrAdvertNdRtrPreference based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("medium", 0),
+          ("high", 1),
+          ("low", 3))
+    )
+
+
+_VRtrIpv6RtrAdvertNdRtrPreference_Type.__name__ = "Integer32"
+_VRtrIpv6RtrAdvertNdRtrPreference_Object = MibTableColumn
+vRtrIpv6RtrAdvertNdRtrPreference = _VRtrIpv6RtrAdvertNdRtrPreference_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 91, 1, 2),
+    _VRtrIpv6RtrAdvertNdRtrPreference_Type()
+)
+vRtrIpv6RtrAdvertNdRtrPreference.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIpv6RtrAdvertNdRtrPreference.setStatus("current")
 _VRtrIfBfdSessExtTable_Object = MibTable
 vRtrIfBfdSessExtTable = _VRtrIfBfdSessExtTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 92)
@@ -23230,7 +23852,7 @@ class _TmnxAdminGrpValue_Type(Unsigned32):
     """Custom type tmnxAdminGrpValue based on Unsigned32"""
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 31),
+        ValueRangeConstraint(0, 255),
     )
 
 
@@ -23969,6 +24591,38 @@ vRtrTTLPropLsrLabelRoute = _VRtrTTLPropLsrLabelRoute_Object(
 vRtrTTLPropLsrLabelRoute.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrTTLPropLsrLabelRoute.setStatus("current")
+
+
+class _VRtrTTLPropSrMplsLocal_Type(VRtrTTLPropagateType):
+    """Custom type vRtrTTLPropSrMplsLocal based on VRtrTTLPropagateType"""
+    defaultValue = 1
+
+
+_VRtrTTLPropSrMplsLocal_Type.__name__ = "VRtrTTLPropagateType"
+_VRtrTTLPropSrMplsLocal_Object = MibTableColumn
+vRtrTTLPropSrMplsLocal = _VRtrTTLPropSrMplsLocal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 115, 1, 6),
+    _VRtrTTLPropSrMplsLocal_Type()
+)
+vRtrTTLPropSrMplsLocal.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrTTLPropSrMplsLocal.setStatus("current")
+
+
+class _VRtrTTLPropSrMplsTransit_Type(VRtrTTLPropagateType):
+    """Custom type vRtrTTLPropSrMplsTransit based on VRtrTTLPropagateType"""
+    defaultValue = 1
+
+
+_VRtrTTLPropSrMplsTransit_Type.__name__ = "VRtrTTLPropagateType"
+_VRtrTTLPropSrMplsTransit_Object = MibTableColumn
+vRtrTTLPropSrMplsTransit = _VRtrTTLPropSrMplsTransit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 115, 1, 7),
+    _VRtrTTLPropSrMplsTransit_Type()
+)
+vRtrTTLPropSrMplsTransit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrTTLPropSrMplsTransit.setStatus("current")
 _VRtrSvcTTLPropTblLstChgd_Type = TimeStamp
 _VRtrSvcTTLPropTblLstChgd_Object = MibScalar
 vRtrSvcTTLPropTblLstChgd = _VRtrSvcTTLPropTblLstChgd_Object(
@@ -25947,6 +26601,8 @@ vRtrIfUnidirectionalLinkDelay = _VRtrIfUnidirectionalLinkDelay_Object(
 vRtrIfUnidirectionalLinkDelay.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIfUnidirectionalLinkDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrIfUnidirectionalLinkDelay.setUnits("microseconds")
 
 
 class _VRtrIfIngrDestinationClassLookup_Type(TruthValue):
@@ -25963,6 +26619,118 @@ vRtrIfIngrDestinationClassLookup = _VRtrIfIngrDestinationClassLookup_Object(
 vRtrIfIngrDestinationClassLookup.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIfIngrDestinationClassLookup.setStatus("current")
+
+
+class _VRtrIfIcmpTtlExpiredMatchingAddr_Type(TruthValue):
+    """Custom type vRtrIfIcmpTtlExpiredMatchingAddr based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfIcmpTtlExpiredMatchingAddr_Type.__name__ = "TruthValue"
+_VRtrIfIcmpTtlExpiredMatchingAddr_Object = MibTableColumn
+vRtrIfIcmpTtlExpiredMatchingAddr = _VRtrIfIcmpTtlExpiredMatchingAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 14),
+    _VRtrIfIcmpTtlExpiredMatchingAddr_Type()
+)
+vRtrIfIcmpTtlExpiredMatchingAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIcmpTtlExpiredMatchingAddr.setStatus("current")
+
+
+class _VRtrIfExtRefOcSubIfPresence_Type(TruthValue):
+    """Custom type vRtrIfExtRefOcSubIfPresence based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfExtRefOcSubIfPresence_Type.__name__ = "TruthValue"
+_VRtrIfExtRefOcSubIfPresence_Object = MibTableColumn
+vRtrIfExtRefOcSubIfPresence = _VRtrIfExtRefOcSubIfPresence_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 15),
+    _VRtrIfExtRefOcSubIfPresence_Type()
+)
+vRtrIfExtRefOcSubIfPresence.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfExtRefOcSubIfPresence.setStatus("current")
+
+
+class _VRtrIfExtRefOcSubIf_Type(Unsigned32):
+    """Custom type vRtrIfExtRefOcSubIf based on Unsigned32"""
+    defaultValue = 0
+
+
+_VRtrIfExtRefOcSubIf_Type.__name__ = "Unsigned32"
+_VRtrIfExtRefOcSubIf_Object = MibTableColumn
+vRtrIfExtRefOcSubIf = _VRtrIfExtRefOcSubIf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 16),
+    _VRtrIfExtRefOcSubIf_Type()
+)
+vRtrIfExtRefOcSubIf.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfExtRefOcSubIf.setStatus("current")
+
+
+class _VRtrIfMtuProfile_Type(TruthValue):
+    """Custom type vRtrIfMtuProfile based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfMtuProfile_Type.__name__ = "TruthValue"
+_VRtrIfMtuProfile_Object = MibTableColumn
+vRtrIfMtuProfile = _VRtrIfMtuProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 17),
+    _VRtrIfMtuProfile_Type()
+)
+vRtrIfMtuProfile.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfMtuProfile.setStatus("current")
+
+
+class _VRtrIfOperMtuProfile_Type(Unsigned32):
+    """Custom type vRtrIfOperMtuProfile based on Unsigned32"""
+    defaultValue = 0
+
+
+_VRtrIfOperMtuProfile_Type.__name__ = "Unsigned32"
+_VRtrIfOperMtuProfile_Object = MibTableColumn
+vRtrIfOperMtuProfile = _VRtrIfOperMtuProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 18),
+    _VRtrIfOperMtuProfile_Type()
+)
+vRtrIfOperMtuProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfOperMtuProfile.setStatus("current")
+
+
+class _VRtrIfAllocMtuProfile_Type(Unsigned32):
+    """Custom type vRtrIfAllocMtuProfile based on Unsigned32"""
+    defaultValue = 0
+
+
+_VRtrIfAllocMtuProfile_Type.__name__ = "Unsigned32"
+_VRtrIfAllocMtuProfile_Object = MibTableColumn
+vRtrIfAllocMtuProfile = _VRtrIfAllocMtuProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 19),
+    _VRtrIfAllocMtuProfile_Type()
+)
+vRtrIfAllocMtuProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfAllocMtuProfile.setStatus("current")
+
+
+class _VRtrIfIpv6GreTermination_Type(TruthValue):
+    """Custom type vRtrIfIpv6GreTermination based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfIpv6GreTermination_Type.__name__ = "TruthValue"
+_VRtrIfIpv6GreTermination_Object = MibTableColumn
+vRtrIfIpv6GreTermination = _VRtrIfIpv6GreTermination_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 131, 1, 20),
+    _VRtrIfIpv6GreTermination_Type()
+)
+vRtrIfIpv6GreTermination.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpv6GreTermination.setStatus("current")
 _VRtrAdminTagsTable_Object = MibTable
 vRtrAdminTagsTable = _VRtrAdminTagsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 133)
@@ -26364,7 +27132,9 @@ class _VRtrInetExtTunnelFlags_Type(Bits):
           ("isAdjacencyTunnel", 11),
           ("lspBfdDown", 12),
           ("hasColor", 13),
-          ("preferTransportFRR", 14))
+          ("preferTransportFRR", 14),
+          ("allowSrOverSrTe", 15),
+          ("encryptedTunnel", 16))
     )
 
 _VRtrInetExtTunnelFlags_Type.__name__ = "Bits"
@@ -26541,6 +27311,9 @@ if mibBuilder.loadTexts:
 _VRtrLeakExportPolicyEntry_Object = MibTableRow
 vRtrLeakExportPolicyEntry = _VRtrLeakExportPolicyEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 138, 1)
+)
+vRtrLeakExportPolicyEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
 )
 if mibBuilder.loadTexts:
     vRtrLeakExportPolicyEntry.setStatus("current")
@@ -27117,6 +27890,405 @@ vRtrLspBfdTailEndMultiplier = _VRtrLspBfdTailEndMultiplier_Object(
 vRtrLspBfdTailEndMultiplier.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrLspBfdTailEndMultiplier.setStatus("current")
+_VRtrIfIpTunnelTableLastChanged_Type = TimeStamp
+_VRtrIfIpTunnelTableLastChanged_Object = MibScalar
+vRtrIfIpTunnelTableLastChanged = _VRtrIfIpTunnelTableLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 145),
+    _VRtrIfIpTunnelTableLastChanged_Type()
+)
+vRtrIfIpTunnelTableLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelTableLastChanged.setStatus("current")
+_VRtrIfIpTunnelTable_Object = MibTable
+vRtrIfIpTunnelTable = _VRtrIfIpTunnelTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146)
+)
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelTable.setStatus("current")
+_VRtrIfIpTunnelEntry_Object = MibTableRow
+vRtrIfIpTunnelEntry = _VRtrIfIpTunnelEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1)
+)
+vRtrIfIpTunnelEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrIfIndex"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrIfIpTunnelName"),
+)
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelEntry.setStatus("current")
+_VRtrIfIpTunnelName_Type = TNamedItem
+_VRtrIfIpTunnelName_Object = MibTableColumn
+vRtrIfIpTunnelName = _VRtrIfIpTunnelName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 1),
+    _VRtrIfIpTunnelName_Type()
+)
+vRtrIfIpTunnelName.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelName.setStatus("current")
+_VRtrIfIpTunnelRowStatus_Type = RowStatus
+_VRtrIfIpTunnelRowStatus_Object = MibTableColumn
+vRtrIfIpTunnelRowStatus = _VRtrIfIpTunnelRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 2),
+    _VRtrIfIpTunnelRowStatus_Type()
+)
+vRtrIfIpTunnelRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelRowStatus.setStatus("current")
+_VRtrIfIpTunnelLastChanged_Type = TimeStamp
+_VRtrIfIpTunnelLastChanged_Object = MibTableColumn
+vRtrIfIpTunnelLastChanged = _VRtrIfIpTunnelLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 3),
+    _VRtrIfIpTunnelLastChanged_Type()
+)
+vRtrIfIpTunnelLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelLastChanged.setStatus("current")
+
+
+class _VRtrIfIpTunnelGreHeader_Type(TruthValue):
+    """Custom type vRtrIfIpTunnelGreHeader based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfIpTunnelGreHeader_Type.__name__ = "TruthValue"
+_VRtrIfIpTunnelGreHeader_Object = MibTableColumn
+vRtrIfIpTunnelGreHeader = _VRtrIfIpTunnelGreHeader_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 4),
+    _VRtrIfIpTunnelGreHeader_Type()
+)
+vRtrIfIpTunnelGreHeader.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelGreHeader.setStatus("current")
+
+
+class _VRtrIfIpTunnelDescription_Type(TItemDescription):
+    """Custom type vRtrIfIpTunnelDescription based on TItemDescription"""
+    defaultValue = OctetString("")
+
+
+_VRtrIfIpTunnelDescription_Type.__name__ = "TItemDescription"
+_VRtrIfIpTunnelDescription_Object = MibTableColumn
+vRtrIfIpTunnelDescription = _VRtrIfIpTunnelDescription_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 5),
+    _VRtrIfIpTunnelDescription_Type()
+)
+vRtrIfIpTunnelDescription.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelDescription.setStatus("current")
+
+
+class _VRtrIfIpTunnelLclIpAddrType_Type(InetAddressType):
+    """Custom type vRtrIfIpTunnelLclIpAddrType based on InetAddressType"""
+    defaultValue = 0
+
+
+_VRtrIfIpTunnelLclIpAddrType_Type.__name__ = "InetAddressType"
+_VRtrIfIpTunnelLclIpAddrType_Object = MibTableColumn
+vRtrIfIpTunnelLclIpAddrType = _VRtrIfIpTunnelLclIpAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 6),
+    _VRtrIfIpTunnelLclIpAddrType_Type()
+)
+vRtrIfIpTunnelLclIpAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelLclIpAddrType.setStatus("current")
+
+
+class _VRtrIfIpTunnelLclIpAddr_Type(InetAddress):
+    """Custom type vRtrIfIpTunnelLclIpAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+        ValueSizeConstraint(20, 20),
+    )
+
+
+_VRtrIfIpTunnelLclIpAddr_Type.__name__ = "InetAddress"
+_VRtrIfIpTunnelLclIpAddr_Object = MibTableColumn
+vRtrIfIpTunnelLclIpAddr = _VRtrIfIpTunnelLclIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 7),
+    _VRtrIfIpTunnelLclIpAddr_Type()
+)
+vRtrIfIpTunnelLclIpAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelLclIpAddr.setStatus("current")
+
+
+class _VRtrIfIpTunnelRemIpAddrType_Type(InetAddressType):
+    """Custom type vRtrIfIpTunnelRemIpAddrType based on InetAddressType"""
+    defaultValue = 0
+
+
+_VRtrIfIpTunnelRemIpAddrType_Type.__name__ = "InetAddressType"
+_VRtrIfIpTunnelRemIpAddrType_Object = MibTableColumn
+vRtrIfIpTunnelRemIpAddrType = _VRtrIfIpTunnelRemIpAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 8),
+    _VRtrIfIpTunnelRemIpAddrType_Type()
+)
+vRtrIfIpTunnelRemIpAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelRemIpAddrType.setStatus("current")
+
+
+class _VRtrIfIpTunnelRemIpAddr_Type(InetAddress):
+    """Custom type vRtrIfIpTunnelRemIpAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+        ValueSizeConstraint(20, 20),
+    )
+
+
+_VRtrIfIpTunnelRemIpAddr_Type.__name__ = "InetAddress"
+_VRtrIfIpTunnelRemIpAddr_Object = MibTableColumn
+vRtrIfIpTunnelRemIpAddr = _VRtrIfIpTunnelRemIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 9),
+    _VRtrIfIpTunnelRemIpAddr_Type()
+)
+vRtrIfIpTunnelRemIpAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelRemIpAddr.setStatus("current")
+_VRtrIfIpTunnelOperRemIpAddrType_Type = InetAddressType
+_VRtrIfIpTunnelOperRemIpAddrType_Object = MibTableColumn
+vRtrIfIpTunnelOperRemIpAddrType = _VRtrIfIpTunnelOperRemIpAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 10),
+    _VRtrIfIpTunnelOperRemIpAddrType_Type()
+)
+vRtrIfIpTunnelOperRemIpAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelOperRemIpAddrType.setStatus("current")
+
+
+class _VRtrIfIpTunnelOperRemIpAddr_Type(InetAddress):
+    """Custom type vRtrIfIpTunnelOperRemIpAddr based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+        ValueSizeConstraint(20, 20),
+    )
+
+
+_VRtrIfIpTunnelOperRemIpAddr_Type.__name__ = "InetAddress"
+_VRtrIfIpTunnelOperRemIpAddr_Object = MibTableColumn
+vRtrIfIpTunnelOperRemIpAddr = _VRtrIfIpTunnelOperRemIpAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 11),
+    _VRtrIfIpTunnelOperRemIpAddr_Type()
+)
+vRtrIfIpTunnelOperRemIpAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelOperRemIpAddr.setStatus("current")
+
+
+class _VRtrIfIpTunnelDlvryRtrId_Type(TmnxServId):
+    """Custom type vRtrIfIpTunnelDlvryRtrId based on TmnxServId"""
+    defaultValue = 0
+
+
+_VRtrIfIpTunnelDlvryRtrId_Type.__name__ = "TmnxServId"
+_VRtrIfIpTunnelDlvryRtrId_Object = MibTableColumn
+vRtrIfIpTunnelDlvryRtrId = _VRtrIfIpTunnelDlvryRtrId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 12),
+    _VRtrIfIpTunnelDlvryRtrId_Type()
+)
+vRtrIfIpTunnelDlvryRtrId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelDlvryRtrId.setStatus("current")
+
+
+class _VRtrIfIpTunnelAdminState_Type(TmnxAdminState):
+    """Custom type vRtrIfIpTunnelAdminState based on TmnxAdminState"""
+    defaultValue = 3
+
+
+_VRtrIfIpTunnelAdminState_Type.__name__ = "TmnxAdminState"
+_VRtrIfIpTunnelAdminState_Object = MibTableColumn
+vRtrIfIpTunnelAdminState = _VRtrIfIpTunnelAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 13),
+    _VRtrIfIpTunnelAdminState_Type()
+)
+vRtrIfIpTunnelAdminState.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelAdminState.setStatus("current")
+_VRtrIfIpTunnelOperState_Type = VrtrIpTunnelOperState
+_VRtrIfIpTunnelOperState_Object = MibTableColumn
+vRtrIfIpTunnelOperState = _VRtrIfIpTunnelOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 14),
+    _VRtrIfIpTunnelOperState_Type()
+)
+vRtrIfIpTunnelOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelOperState.setStatus("current")
+
+
+class _VRtrIfIpTunnelOperFlags_Type(Bits):
+    """Custom type vRtrIfIpTunnelOperFlags based on Bits"""
+    namedValues = NamedValues(
+        *(("interfaceAdminDown", 0),
+          ("interfaceOperDown", 1),
+          ("interfaceNoAddress", 2),
+          ("tunnelAdminDown", 3),
+          ("unresolvedLocalIp", 4),
+          ("remIpUnreachable", 5))
+    )
+
+_VRtrIfIpTunnelOperFlags_Type.__name__ = "Bits"
+_VRtrIfIpTunnelOperFlags_Object = MibTableColumn
+vRtrIfIpTunnelOperFlags = _VRtrIfIpTunnelOperFlags_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 15),
+    _VRtrIfIpTunnelOperFlags_Type()
+)
+vRtrIfIpTunnelOperFlags.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelOperFlags.setStatus("current")
+_VRtrIfIpTunnelOperChanged_Type = TimeStamp
+_VRtrIfIpTunnelOperChanged_Object = MibTableColumn
+vRtrIfIpTunnelOperChanged = _VRtrIfIpTunnelOperChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 16),
+    _VRtrIfIpTunnelOperChanged_Type()
+)
+vRtrIfIpTunnelOperChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelOperChanged.setStatus("current")
+
+
+class _VRtrIfIpTunnelIngStatsEnabled_Type(TruthValue):
+    """Custom type vRtrIfIpTunnelIngStatsEnabled based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfIpTunnelIngStatsEnabled_Type.__name__ = "TruthValue"
+_VRtrIfIpTunnelIngStatsEnabled_Object = MibTableColumn
+vRtrIfIpTunnelIngStatsEnabled = _VRtrIfIpTunnelIngStatsEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 19),
+    _VRtrIfIpTunnelIngStatsEnabled_Type()
+)
+vRtrIfIpTunnelIngStatsEnabled.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelIngStatsEnabled.setStatus("current")
+
+
+class _VRtrIfIpTunnelEgrStatsEnabled_Type(TruthValue):
+    """Custom type vRtrIfIpTunnelEgrStatsEnabled based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrIfIpTunnelEgrStatsEnabled_Type.__name__ = "TruthValue"
+_VRtrIfIpTunnelEgrStatsEnabled_Object = MibTableColumn
+vRtrIfIpTunnelEgrStatsEnabled = _VRtrIfIpTunnelEgrStatsEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 20),
+    _VRtrIfIpTunnelEgrStatsEnabled_Type()
+)
+vRtrIfIpTunnelEgrStatsEnabled.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelEgrStatsEnabled.setStatus("current")
+
+
+class _VRtrIfIpTunnelEncapsulatedMtu_Type(Unsigned32):
+    """Custom type vRtrIfIpTunnelEncapsulatedMtu based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(512, 9786),
+    )
+
+
+_VRtrIfIpTunnelEncapsulatedMtu_Type.__name__ = "Unsigned32"
+_VRtrIfIpTunnelEncapsulatedMtu_Object = MibTableColumn
+vRtrIfIpTunnelEncapsulatedMtu = _VRtrIfIpTunnelEncapsulatedMtu_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 146, 1, 21),
+    _VRtrIfIpTunnelEncapsulatedMtu_Type()
+)
+vRtrIfIpTunnelEncapsulatedMtu.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelEncapsulatedMtu.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelEncapsulatedMtu.setUnits("bytes")
+_VRtrIfNatTableLastChanged_Type = TimeStamp
+_VRtrIfNatTableLastChanged_Object = MibScalar
+vRtrIfNatTableLastChanged = _VRtrIfNatTableLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 147),
+    _VRtrIfNatTableLastChanged_Type()
+)
+vRtrIfNatTableLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfNatTableLastChanged.setStatus("current")
+_VRtrIfNatTable_Object = MibTable
+vRtrIfNatTable = _VRtrIfNatTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 148)
+)
+if mibBuilder.loadTexts:
+    vRtrIfNatTable.setStatus("current")
+_VRtrIfNatEntry_Object = MibTableRow
+vRtrIfNatEntry = _VRtrIfNatEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 148, 1)
+)
+vRtrIfNatEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrIfIndex"),
+)
+if mibBuilder.loadTexts:
+    vRtrIfNatEntry.setStatus("current")
+_VRtrIfNatRowStatus_Type = RowStatus
+_VRtrIfNatRowStatus_Object = MibTableColumn
+vRtrIfNatRowStatus = _VRtrIfNatRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 148, 1, 1),
+    _VRtrIfNatRowStatus_Type()
+)
+vRtrIfNatRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfNatRowStatus.setStatus("current")
+_VRtrIfNatLastChanged_Type = TimeStamp
+_VRtrIfNatLastChanged_Object = MibTableColumn
+vRtrIfNatLastChanged = _VRtrIfNatLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 148, 1, 2),
+    _VRtrIfNatLastChanged_Type()
+)
+vRtrIfNatLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrIfNatLastChanged.setStatus("current")
+
+
+class _VRtrIfNatCpmPolicy_Type(TNamedItemOrEmpty):
+    """Custom type vRtrIfNatCpmPolicy based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrIfNatCpmPolicy_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrIfNatCpmPolicy_Object = MibTableColumn
+vRtrIfNatCpmPolicy = _VRtrIfNatCpmPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 148, 1, 3),
+    _VRtrIfNatCpmPolicy_Type()
+)
+vRtrIfNatCpmPolicy.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfNatCpmPolicy.setStatus("current")
+
+
+class _VRtrIfNatCpmSpfPolicy_Type(TNamedItemOrEmpty):
+    """Custom type vRtrIfNatCpmSpfPolicy based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrIfNatCpmSpfPolicy_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrIfNatCpmSpfPolicy_Object = MibTableColumn
+vRtrIfNatCpmSpfPolicy = _VRtrIfNatCpmSpfPolicy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 148, 1, 4),
+    _VRtrIfNatCpmSpfPolicy_Type()
+)
+vRtrIfNatCpmSpfPolicy.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfNatCpmSpfPolicy.setStatus("current")
 _TmnxVRtrDCObjs_ObjectIdentity = ObjectIdentity
 tmnxVRtrDCObjs = _TmnxVRtrDCObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 200)
@@ -27286,6 +28458,65 @@ tmnxVrtrIPAllowICMPRedirect = _TmnxVrtrIPAllowICMPRedirect_Object(
 tmnxVrtrIPAllowICMPRedirect.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxVrtrIPAllowICMPRedirect.setStatus("current")
+_TmnxVrtrIPStartMacAddress_Type = MacAddress
+_TmnxVrtrIPStartMacAddress_Object = MibScalar
+tmnxVrtrIPStartMacAddress = _TmnxVrtrIPStartMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 201, 10),
+    _TmnxVrtrIPStartMacAddress_Type()
+)
+tmnxVrtrIPStartMacAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxVrtrIPStartMacAddress.setStatus("current")
+_TmnxVrtrIPEndMacAddress_Type = MacAddress
+_TmnxVrtrIPEndMacAddress_Object = MibScalar
+tmnxVrtrIPEndMacAddress = _TmnxVrtrIPEndMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 201, 11),
+    _TmnxVrtrIPEndMacAddress_Type()
+)
+tmnxVrtrIPEndMacAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxVrtrIPEndMacAddress.setStatus("current")
+_TmnxVrtrIPCommonMacAddress_Type = MacAddress
+_TmnxVrtrIPCommonMacAddress_Object = MibScalar
+tmnxVrtrIPCommonMacAddress = _TmnxVrtrIPCommonMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 201, 12),
+    _TmnxVrtrIPCommonMacAddress_Type()
+)
+tmnxVrtrIPCommonMacAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxVrtrIPCommonMacAddress.setStatus("current")
+
+
+class _TmnxVrtrIPBufferUnresolvedPkts_Type(TruthValue):
+    """Custom type tmnxVrtrIPBufferUnresolvedPkts based on TruthValue"""
+    defaultValue = 1
+
+
+_TmnxVrtrIPBufferUnresolvedPkts_Type.__name__ = "TruthValue"
+_TmnxVrtrIPBufferUnresolvedPkts_Object = MibScalar
+tmnxVrtrIPBufferUnresolvedPkts = _TmnxVrtrIPBufferUnresolvedPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 201, 13),
+    _TmnxVrtrIPBufferUnresolvedPkts_Type()
+)
+tmnxVrtrIPBufferUnresolvedPkts.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxVrtrIPBufferUnresolvedPkts.setStatus("current")
+
+
+class _TmnxVrtrSysuRPFIgnoreDefault_Type(TruthValue):
+    """Custom type tmnxVrtrSysuRPFIgnoreDefault based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxVrtrSysuRPFIgnoreDefault_Type.__name__ = "TruthValue"
+_TmnxVrtrSysuRPFIgnoreDefault_Object = MibScalar
+tmnxVrtrSysuRPFIgnoreDefault = _TmnxVrtrSysuRPFIgnoreDefault_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 201, 14),
+    _TmnxVrtrSysuRPFIgnoreDefault_Type()
+)
+tmnxVrtrSysuRPFIgnoreDefault.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxVrtrSysuRPFIgnoreDefault.setStatus("current")
 _TmnxVrtrAutoconfiguration_ObjectIdentity = ObjectIdentity
 tmnxVrtrAutoconfiguration = _TmnxVrtrAutoconfiguration_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 202)
@@ -30130,6 +31361,159 @@ vRtrBgpEvpnDynEgrLblLmt = _VRtrBgpEvpnDynEgrLblLmt_Object(
 vRtrBgpEvpnDynEgrLblLmt.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrBgpEvpnDynEgrLblLmt.setStatus("current")
+
+
+class _VRtrBgpEvpnEvi_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnEvi based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 16777215),
+    )
+
+
+_VRtrBgpEvpnEvi_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnEvi_Object = MibTableColumn
+vRtrBgpEvpnEvi = _VRtrBgpEvpnEvi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 18),
+    _VRtrBgpEvpnEvi_Type()
+)
+vRtrBgpEvpnEvi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnEvi.setStatus("current")
+
+
+class _VRtrBgpEvpnAdLinkBw_Type(TruthValue):
+    """Custom type vRtrBgpEvpnAdLinkBw based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnAdLinkBw_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnAdLinkBw_Object = MibTableColumn
+vRtrBgpEvpnAdLinkBw = _VRtrBgpEvpnAdLinkBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 19),
+    _VRtrBgpEvpnAdLinkBw_Type()
+)
+vRtrBgpEvpnAdLinkBw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnAdLinkBw.setStatus("current")
+
+
+class _VRtrBgpEvpnAdLinkBwWeight_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnAdLinkBwWeight based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_VRtrBgpEvpnAdLinkBwWeight_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnAdLinkBwWeight_Object = MibTableColumn
+vRtrBgpEvpnAdLinkBwWeight = _VRtrBgpEvpnAdLinkBwWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 20),
+    _VRtrBgpEvpnAdLinkBwWeight_Type()
+)
+vRtrBgpEvpnAdLinkBwWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnAdLinkBwWeight.setStatus("current")
+
+
+class _VRtrBgpEvpnAdLinkBwMaxWeight_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnAdLinkBwMaxWeight based on Unsigned32"""
+    defaultValue = 128
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_VRtrBgpEvpnAdLinkBwMaxWeight_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnAdLinkBwMaxWeight_Object = MibTableColumn
+vRtrBgpEvpnAdLinkBwMaxWeight = _VRtrBgpEvpnAdLinkBwMaxWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 21),
+    _VRtrBgpEvpnAdLinkBwMaxWeight_Type()
+)
+vRtrBgpEvpnAdLinkBwMaxWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnAdLinkBwMaxWeight.setStatus("current")
+
+
+class _VRtrBgpEvpnWeightedEcmp_Type(TruthValue):
+    """Custom type vRtrBgpEvpnWeightedEcmp based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnWeightedEcmp_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnWeightedEcmp_Object = MibTableColumn
+vRtrBgpEvpnWeightedEcmp = _VRtrBgpEvpnWeightedEcmp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 22),
+    _VRtrBgpEvpnWeightedEcmp_Type()
+)
+vRtrBgpEvpnWeightedEcmp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnWeightedEcmp.setStatus("current")
+_VRtrBgpEvpnOperState_Type = TmnxEnabledDisabled
+_VRtrBgpEvpnOperState_Object = MibTableColumn
+vRtrBgpEvpnOperState = _VRtrBgpEvpnOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 23),
+    _VRtrBgpEvpnOperState_Type()
+)
+vRtrBgpEvpnOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnOperState.setStatus("current")
+
+
+class _VRtrBgpEvpnGwIpAdvertise_Type(TruthValue):
+    """Custom type vRtrBgpEvpnGwIpAdvertise based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnGwIpAdvertise_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnGwIpAdvertise_Object = MibTableColumn
+vRtrBgpEvpnGwIpAdvertise = _VRtrBgpEvpnGwIpAdvertise_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 24),
+    _VRtrBgpEvpnGwIpAdvertise_Type()
+)
+vRtrBgpEvpnGwIpAdvertise.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnGwIpAdvertise.setStatus("current")
+
+
+class _VRtrBgpEvpnGwIpResolve_Type(TruthValue):
+    """Custom type vRtrBgpEvpnGwIpResolve based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnGwIpResolve_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnGwIpResolve_Object = MibTableColumn
+vRtrBgpEvpnGwIpResolve = _VRtrBgpEvpnGwIpResolve_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 25),
+    _VRtrBgpEvpnGwIpResolve_Type()
+)
+vRtrBgpEvpnGwIpResolve.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnGwIpResolve.setStatus("current")
+
+
+class _VRtrBgpEvpnAnySecEncGrp_Type(TNamedItemOrEmpty):
+    """Custom type vRtrBgpEvpnAnySecEncGrp based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrBgpEvpnAnySecEncGrp_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrBgpEvpnAnySecEncGrp_Object = MibTableColumn
+vRtrBgpEvpnAnySecEncGrp = _VRtrBgpEvpnAnySecEncGrp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 2, 1, 26),
+    _VRtrBgpEvpnAnySecEncGrp_Type()
+)
+vRtrBgpEvpnAnySecEncGrp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnAnySecEncGrp.setStatus("current")
 _VRtrBgpEvpnMplsTblLastCh_Type = TimeStamp
 _VRtrBgpEvpnMplsTblLastCh_Object = MibScalar
 vRtrBgpEvpnMplsTblLastCh = _VRtrBgpEvpnMplsTblLastCh_Object(
@@ -30475,6 +31859,22 @@ vRtrBgpEvpnAutoBndTnlFlexAlgoFb = _VRtrBgpEvpnAutoBndTnlFlexAlgoFb_Object(
 vRtrBgpEvpnAutoBndTnlFlexAlgoFb.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     vRtrBgpEvpnAutoBndTnlFlexAlgoFb.setStatus("current")
+
+
+class _VRtrBgpEvpnAutoBndTnlUntagRt_Type(TBgpUntaggedRouteType):
+    """Custom type vRtrBgpEvpnAutoBndTnlUntagRt based on TBgpUntaggedRouteType"""
+    defaultValue = 0
+
+
+_VRtrBgpEvpnAutoBndTnlUntagRt_Type.__name__ = "TBgpUntaggedRouteType"
+_VRtrBgpEvpnAutoBndTnlUntagRt_Object = MibTableColumn
+vRtrBgpEvpnAutoBndTnlUntagRt = _VRtrBgpEvpnAutoBndTnlUntagRt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 6, 1, 18),
+    _VRtrBgpEvpnAutoBndTnlUntagRt_Type()
+)
+vRtrBgpEvpnAutoBndTnlUntagRt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnAutoBndTnlUntagRt.setStatus("current")
 _VRtrBgpEvpnVrfPolicyTblLastCh_Type = TimeStamp
 _VRtrBgpEvpnVrfPolicyTblLastCh_Object = MibScalar
 vRtrBgpEvpnVrfPolicyTblLastCh = _VRtrBgpEvpnVrfPolicyTblLastCh_Object(
@@ -31005,6 +32405,900 @@ vRtrBgpEvpnVrfPolicyCreateOrig = _VRtrBgpEvpnVrfPolicyCreateOrig_Object(
 vRtrBgpEvpnVrfPolicyCreateOrig.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrBgpEvpnVrfPolicyCreateOrig.setStatus("current")
+_VRtrBgpEvpnVxTblLastCh_Type = TimeStamp
+_VRtrBgpEvpnVxTblLastCh_Object = MibScalar
+vRtrBgpEvpnVxTblLastCh = _VRtrBgpEvpnVxTblLastCh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 9),
+    _VRtrBgpEvpnVxTblLastCh_Type()
+)
+vRtrBgpEvpnVxTblLastCh.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxTblLastCh.setStatus("current")
+_VRtrBgpEvpnVxTable_Object = MibTable
+vRtrBgpEvpnVxTable = _VRtrBgpEvpnVxTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10)
+)
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxTable.setStatus("current")
+_VRtrBgpEvpnVxEntry_Object = MibTableRow
+vRtrBgpEvpnVxEntry = _VRtrBgpEvpnVxEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1)
+)
+vRtrBgpEvpnVxEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxBgpInstance"),
+)
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxEntry.setStatus("current")
+
+
+class _VRtrBgpEvpnVxBgpInstance_Type(Integer32):
+    """Custom type vRtrBgpEvpnVxBgpInstance based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_VRtrBgpEvpnVxBgpInstance_Type.__name__ = "Integer32"
+_VRtrBgpEvpnVxBgpInstance_Object = MibTableColumn
+vRtrBgpEvpnVxBgpInstance = _VRtrBgpEvpnVxBgpInstance_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 1),
+    _VRtrBgpEvpnVxBgpInstance_Type()
+)
+vRtrBgpEvpnVxBgpInstance.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxBgpInstance.setStatus("current")
+_VRtrBgpEvpnVxRowStatus_Type = RowStatus
+_VRtrBgpEvpnVxRowStatus_Object = MibTableColumn
+vRtrBgpEvpnVxRowStatus = _VRtrBgpEvpnVxRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 2),
+    _VRtrBgpEvpnVxRowStatus_Type()
+)
+vRtrBgpEvpnVxRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxRowStatus.setStatus("current")
+_VRtrBgpEvpnVxLastChanged_Type = TimeStamp
+_VRtrBgpEvpnVxLastChanged_Object = MibTableColumn
+vRtrBgpEvpnVxLastChanged = _VRtrBgpEvpnVxLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 3),
+    _VRtrBgpEvpnVxLastChanged_Type()
+)
+vRtrBgpEvpnVxLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxLastChanged.setStatus("current")
+
+
+class _VRtrBgpEvpnVxAdminState_Type(TmnxEnabledDisabled):
+    """Custom type vRtrBgpEvpnVxAdminState based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnVxAdminState_Type.__name__ = "TmnxEnabledDisabled"
+_VRtrBgpEvpnVxAdminState_Object = MibTableColumn
+vRtrBgpEvpnVxAdminState = _VRtrBgpEvpnVxAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 4),
+    _VRtrBgpEvpnVxAdminState_Type()
+)
+vRtrBgpEvpnVxAdminState.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxAdminState.setStatus("current")
+
+
+class _VRtrBgpEvpnVxDefRtTag_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnVxDefRtTag based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_VRtrBgpEvpnVxDefRtTag_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnVxDefRtTag_Object = MibTableColumn
+vRtrBgpEvpnVxDefRtTag = _VRtrBgpEvpnVxDefRtTag_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 8),
+    _VRtrBgpEvpnVxDefRtTag_Type()
+)
+vRtrBgpEvpnVxDefRtTag.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxDefRtTag.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfRD_Type(TmnxVPNRouteDistinguisher):
+    """Custom type vRtrBgpEvpnVxVrfRD based on TmnxVPNRouteDistinguisher"""
+    defaultHexValue = "0000000000000000"
+
+
+_VRtrBgpEvpnVxVrfRD_Type.__name__ = "TmnxVPNRouteDistinguisher"
+_VRtrBgpEvpnVxVrfRD_Object = MibTableColumn
+vRtrBgpEvpnVxVrfRD = _VRtrBgpEvpnVxVrfRD_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 9),
+    _VRtrBgpEvpnVxVrfRD_Type()
+)
+vRtrBgpEvpnVxVrfRD.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfRD.setStatus("current")
+
+
+class _VRtrBgpEvpnVxExportRteTarget_Type(TNamedItemOrEmpty):
+    """Custom type vRtrBgpEvpnVxExportRteTarget based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrBgpEvpnVxExportRteTarget_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrBgpEvpnVxExportRteTarget_Object = MibTableColumn
+vRtrBgpEvpnVxExportRteTarget = _VRtrBgpEvpnVxExportRteTarget_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 10),
+    _VRtrBgpEvpnVxExportRteTarget_Type()
+)
+vRtrBgpEvpnVxExportRteTarget.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxExportRteTarget.setStatus("current")
+
+
+class _VRtrBgpEvpnVxImportRteTarget_Type(TNamedItemOrEmpty):
+    """Custom type vRtrBgpEvpnVxImportRteTarget based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrBgpEvpnVxImportRteTarget_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrBgpEvpnVxImportRteTarget_Object = MibTableColumn
+vRtrBgpEvpnVxImportRteTarget = _VRtrBgpEvpnVxImportRteTarget_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 11),
+    _VRtrBgpEvpnVxImportRteTarget_Type()
+)
+vRtrBgpEvpnVxImportRteTarget.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxImportRteTarget.setStatus("current")
+
+
+class _VRtrBgpEvpnVxAutoRD_Type(TruthValue):
+    """Custom type vRtrBgpEvpnVxAutoRD based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnVxAutoRD_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnVxAutoRD_Object = MibTableColumn
+vRtrBgpEvpnVxAutoRD = _VRtrBgpEvpnVxAutoRD_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 12),
+    _VRtrBgpEvpnVxAutoRD_Type()
+)
+vRtrBgpEvpnVxAutoRD.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxAutoRD.setStatus("current")
+_VRtrBgpEvpnVxOperRD_Type = TmnxVPNRouteDistinguisher
+_VRtrBgpEvpnVxOperRD_Object = MibTableColumn
+vRtrBgpEvpnVxOperRD = _VRtrBgpEvpnVxOperRD_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 13),
+    _VRtrBgpEvpnVxOperRD_Type()
+)
+vRtrBgpEvpnVxOperRD.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxOperRD.setStatus("current")
+_VRtrBgpEvpnVxOperRDType_Type = TmnxRouteDistType
+_VRtrBgpEvpnVxOperRDType_Object = MibTableColumn
+vRtrBgpEvpnVxOperRDType = _VRtrBgpEvpnVxOperRDType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 14),
+    _VRtrBgpEvpnVxOperRDType_Type()
+)
+vRtrBgpEvpnVxOperRDType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxOperRDType.setStatus("current")
+_VRtrBgpEvpnVxVrfTarget_Type = TNamedItemOrEmpty
+_VRtrBgpEvpnVxVrfTarget_Object = MibTableColumn
+vRtrBgpEvpnVxVrfTarget = _VRtrBgpEvpnVxVrfTarget_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 15),
+    _VRtrBgpEvpnVxVrfTarget_Type()
+)
+vRtrBgpEvpnVxVrfTarget.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfTarget.setStatus("current")
+
+
+class _VRtrBgpEvpnVxDomainId_Type(TmnxDPathDomainId):
+    """Custom type vRtrBgpEvpnVxDomainId based on TmnxDPathDomainId"""
+    defaultHexValue = "000000000000"
+
+
+_VRtrBgpEvpnVxDomainId_Type.__name__ = "TmnxDPathDomainId"
+_VRtrBgpEvpnVxDomainId_Object = MibTableColumn
+vRtrBgpEvpnVxDomainId = _VRtrBgpEvpnVxDomainId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 16),
+    _VRtrBgpEvpnVxDomainId_Type()
+)
+vRtrBgpEvpnVxDomainId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxDomainId.setStatus("current")
+
+
+class _VRtrBgpEvpnVxEvi_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnVxEvi based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 16777215),
+    )
+
+
+_VRtrBgpEvpnVxEvi_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnVxEvi_Object = MibTableColumn
+vRtrBgpEvpnVxEvi = _VRtrBgpEvpnVxEvi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 17),
+    _VRtrBgpEvpnVxEvi_Type()
+)
+vRtrBgpEvpnVxEvi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxEvi.setStatus("current")
+
+
+class _VRtrBgpEvpnVxAdLinkBw_Type(TruthValue):
+    """Custom type vRtrBgpEvpnVxAdLinkBw based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnVxAdLinkBw_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnVxAdLinkBw_Object = MibTableColumn
+vRtrBgpEvpnVxAdLinkBw = _VRtrBgpEvpnVxAdLinkBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 18),
+    _VRtrBgpEvpnVxAdLinkBw_Type()
+)
+vRtrBgpEvpnVxAdLinkBw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxAdLinkBw.setStatus("current")
+
+
+class _VRtrBgpEvpnVxAdLinkBwWeight_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnVxAdLinkBwWeight based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_VRtrBgpEvpnVxAdLinkBwWeight_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnVxAdLinkBwWeight_Object = MibTableColumn
+vRtrBgpEvpnVxAdLinkBwWeight = _VRtrBgpEvpnVxAdLinkBwWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 19),
+    _VRtrBgpEvpnVxAdLinkBwWeight_Type()
+)
+vRtrBgpEvpnVxAdLinkBwWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxAdLinkBwWeight.setStatus("current")
+
+
+class _VRtrBgpEvpnVxAdLinkBwMaxWeight_Type(Unsigned32):
+    """Custom type vRtrBgpEvpnVxAdLinkBwMaxWeight based on Unsigned32"""
+    defaultValue = 128
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_VRtrBgpEvpnVxAdLinkBwMaxWeight_Type.__name__ = "Unsigned32"
+_VRtrBgpEvpnVxAdLinkBwMaxWeight_Object = MibTableColumn
+vRtrBgpEvpnVxAdLinkBwMaxWeight = _VRtrBgpEvpnVxAdLinkBwMaxWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 20),
+    _VRtrBgpEvpnVxAdLinkBwMaxWeight_Type()
+)
+vRtrBgpEvpnVxAdLinkBwMaxWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxAdLinkBwMaxWeight.setStatus("current")
+
+
+class _VRtrBgpEvpnVxWeightedEcmp_Type(TruthValue):
+    """Custom type vRtrBgpEvpnVxWeightedEcmp based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnVxWeightedEcmp_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnVxWeightedEcmp_Object = MibTableColumn
+vRtrBgpEvpnVxWeightedEcmp = _VRtrBgpEvpnVxWeightedEcmp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 21),
+    _VRtrBgpEvpnVxWeightedEcmp_Type()
+)
+vRtrBgpEvpnVxWeightedEcmp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxWeightedEcmp.setStatus("current")
+_VRtrBgpEvpnVxOperState_Type = TmnxEnabledDisabled
+_VRtrBgpEvpnVxOperState_Object = MibTableColumn
+vRtrBgpEvpnVxOperState = _VRtrBgpEvpnVxOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 22),
+    _VRtrBgpEvpnVxOperState_Type()
+)
+vRtrBgpEvpnVxOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxOperState.setStatus("current")
+
+
+class _VRtrBgpEvpnVxInstance_Type(Integer32):
+    """Custom type vRtrBgpEvpnVxInstance based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_VRtrBgpEvpnVxInstance_Type.__name__ = "Integer32"
+_VRtrBgpEvpnVxInstance_Object = MibTableColumn
+vRtrBgpEvpnVxInstance = _VRtrBgpEvpnVxInstance_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 23),
+    _VRtrBgpEvpnVxInstance_Type()
+)
+vRtrBgpEvpnVxInstance.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxInstance.setStatus("current")
+
+
+class _VRtrBgpEvpnVxGwIpAdvertise_Type(TruthValue):
+    """Custom type vRtrBgpEvpnVxGwIpAdvertise based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnVxGwIpAdvertise_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnVxGwIpAdvertise_Object = MibTableColumn
+vRtrBgpEvpnVxGwIpAdvertise = _VRtrBgpEvpnVxGwIpAdvertise_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 24),
+    _VRtrBgpEvpnVxGwIpAdvertise_Type()
+)
+vRtrBgpEvpnVxGwIpAdvertise.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxGwIpAdvertise.setStatus("current")
+
+
+class _VRtrBgpEvpnVxGwIpResolve_Type(TruthValue):
+    """Custom type vRtrBgpEvpnVxGwIpResolve based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpEvpnVxGwIpResolve_Type.__name__ = "TruthValue"
+_VRtrBgpEvpnVxGwIpResolve_Object = MibTableColumn
+vRtrBgpEvpnVxGwIpResolve = _VRtrBgpEvpnVxGwIpResolve_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 10, 1, 25),
+    _VRtrBgpEvpnVxGwIpResolve_Type()
+)
+vRtrBgpEvpnVxGwIpResolve.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxGwIpResolve.setStatus("current")
+_VRtrBgpEvpnVxVrfPlcyTblLastCh_Type = TimeStamp
+_VRtrBgpEvpnVxVrfPlcyTblLastCh_Object = MibScalar
+vRtrBgpEvpnVxVrfPlcyTblLastCh = _VRtrBgpEvpnVxVrfPlcyTblLastCh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 11),
+    _VRtrBgpEvpnVxVrfPlcyTblLastCh_Type()
+)
+vRtrBgpEvpnVxVrfPlcyTblLastCh.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPlcyTblLastCh.setStatus("current")
+_VRtrBgpEvpnVxVrfPolicyTable_Object = MibTable
+vRtrBgpEvpnVxVrfPolicyTable = _VRtrBgpEvpnVxVrfPolicyTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12)
+)
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyTable.setStatus("current")
+_VRtrBgpEvpnVxVrfPolicyEntry_Object = MibTableRow
+vRtrBgpEvpnVxVrfPolicyEntry = _VRtrBgpEvpnVxVrfPolicyEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1)
+)
+vRtrBgpEvpnVxVrfPolicyEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxBgpInstance"),
+)
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyEntry.setStatus("current")
+_VRtrBgpEvpnVxVrfPolicyLastChg_Type = TimeStamp
+_VRtrBgpEvpnVxVrfPolicyLastChg_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyLastChg = _VRtrBgpEvpnVxVrfPolicyLastChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 1),
+    _VRtrBgpEvpnVxVrfPolicyLastChg_Type()
+)
+vRtrBgpEvpnVxVrfPolicyLastChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyLastChg.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp1_Type(TXLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp1 based on TXLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp1_Type.__name__ = "TXLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp1_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp1 = _VRtrBgpEvpnVxVrfPolicyImp1_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 2),
+    _VRtrBgpEvpnVxVrfPolicyImp1_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp1.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp1.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp2_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp2 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp2_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp2_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp2 = _VRtrBgpEvpnVxVrfPolicyImp2_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 3),
+    _VRtrBgpEvpnVxVrfPolicyImp2_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp2.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp2.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp3_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp3 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp3_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp3_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp3 = _VRtrBgpEvpnVxVrfPolicyImp3_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 4),
+    _VRtrBgpEvpnVxVrfPolicyImp3_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp3.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp3.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp4_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp4 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp4_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp4_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp4 = _VRtrBgpEvpnVxVrfPolicyImp4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 5),
+    _VRtrBgpEvpnVxVrfPolicyImp4_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp4.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp4.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp5_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp5 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp5_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp5_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp5 = _VRtrBgpEvpnVxVrfPolicyImp5_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 6),
+    _VRtrBgpEvpnVxVrfPolicyImp5_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp5.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp6_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp6 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp6_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp6_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp6 = _VRtrBgpEvpnVxVrfPolicyImp6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 7),
+    _VRtrBgpEvpnVxVrfPolicyImp6_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp6.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp6.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp7_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp7 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp7_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp7_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp7 = _VRtrBgpEvpnVxVrfPolicyImp7_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 8),
+    _VRtrBgpEvpnVxVrfPolicyImp7_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp7.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp7.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp8_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp8 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp8_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp8_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp8 = _VRtrBgpEvpnVxVrfPolicyImp8_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 9),
+    _VRtrBgpEvpnVxVrfPolicyImp8_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp8.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp8.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp9_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp9 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp9_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp9_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp9 = _VRtrBgpEvpnVxVrfPolicyImp9_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 10),
+    _VRtrBgpEvpnVxVrfPolicyImp9_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp9.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp9.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp10_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp10 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp10_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp10_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp10 = _VRtrBgpEvpnVxVrfPolicyImp10_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 11),
+    _VRtrBgpEvpnVxVrfPolicyImp10_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp10.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp10.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp11_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp11 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp11_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp11_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp11 = _VRtrBgpEvpnVxVrfPolicyImp11_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 12),
+    _VRtrBgpEvpnVxVrfPolicyImp11_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp11.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp11.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp12_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp12 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp12_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp12_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp12 = _VRtrBgpEvpnVxVrfPolicyImp12_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 13),
+    _VRtrBgpEvpnVxVrfPolicyImp12_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp12.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp12.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp13_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp13 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp13_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp13_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp13 = _VRtrBgpEvpnVxVrfPolicyImp13_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 14),
+    _VRtrBgpEvpnVxVrfPolicyImp13_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp13.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp13.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp14_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp14 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp14_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp14_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp14 = _VRtrBgpEvpnVxVrfPolicyImp14_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 15),
+    _VRtrBgpEvpnVxVrfPolicyImp14_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp14.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp14.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyImp15_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyImp15 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyImp15_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyImp15_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyImp15 = _VRtrBgpEvpnVxVrfPolicyImp15_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 16),
+    _VRtrBgpEvpnVxVrfPolicyImp15_Type()
+)
+vRtrBgpEvpnVxVrfPolicyImp15.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyImp15.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp1_Type(TXLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp1 based on TXLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp1_Type.__name__ = "TXLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp1_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp1 = _VRtrBgpEvpnVxVrfPolicyExp1_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 17),
+    _VRtrBgpEvpnVxVrfPolicyExp1_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp1.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp1.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp2_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp2 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp2_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp2_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp2 = _VRtrBgpEvpnVxVrfPolicyExp2_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 18),
+    _VRtrBgpEvpnVxVrfPolicyExp2_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp2.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp2.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp3_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp3 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp3_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp3_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp3 = _VRtrBgpEvpnVxVrfPolicyExp3_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 19),
+    _VRtrBgpEvpnVxVrfPolicyExp3_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp3.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp3.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp4_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp4 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp4_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp4_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp4 = _VRtrBgpEvpnVxVrfPolicyExp4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 20),
+    _VRtrBgpEvpnVxVrfPolicyExp4_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp4.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp4.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp5_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp5 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp5_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp5_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp5 = _VRtrBgpEvpnVxVrfPolicyExp5_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 21),
+    _VRtrBgpEvpnVxVrfPolicyExp5_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp5.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp6_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp6 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp6_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp6_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp6 = _VRtrBgpEvpnVxVrfPolicyExp6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 22),
+    _VRtrBgpEvpnVxVrfPolicyExp6_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp6.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp6.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp7_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp7 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp7_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp7_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp7 = _VRtrBgpEvpnVxVrfPolicyExp7_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 23),
+    _VRtrBgpEvpnVxVrfPolicyExp7_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp7.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp7.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp8_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp8 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp8_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp8_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp8 = _VRtrBgpEvpnVxVrfPolicyExp8_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 24),
+    _VRtrBgpEvpnVxVrfPolicyExp8_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp8.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp8.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp9_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp9 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp9_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp9_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp9 = _VRtrBgpEvpnVxVrfPolicyExp9_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 25),
+    _VRtrBgpEvpnVxVrfPolicyExp9_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp9.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp9.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp10_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp10 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp10_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp10_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp10 = _VRtrBgpEvpnVxVrfPolicyExp10_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 26),
+    _VRtrBgpEvpnVxVrfPolicyExp10_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp10.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp10.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp11_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp11 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp11_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp11_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp11 = _VRtrBgpEvpnVxVrfPolicyExp11_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 27),
+    _VRtrBgpEvpnVxVrfPolicyExp11_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp11.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp11.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp12_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp12 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp12_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp12_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp12 = _VRtrBgpEvpnVxVrfPolicyExp12_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 28),
+    _VRtrBgpEvpnVxVrfPolicyExp12_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp12.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp12.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp13_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp13 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp13_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp13_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp13 = _VRtrBgpEvpnVxVrfPolicyExp13_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 29),
+    _VRtrBgpEvpnVxVrfPolicyExp13_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp13.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp13.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp14_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp14 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp14_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp14_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp14 = _VRtrBgpEvpnVxVrfPolicyExp14_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 30),
+    _VRtrBgpEvpnVxVrfPolicyExp14_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp14.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp14.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyExp15_Type(TLPolicyNameOrExpOrEmpty):
+    """Custom type vRtrBgpEvpnVxVrfPolicyExp15 based on TLPolicyNameOrExpOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrBgpEvpnVxVrfPolicyExp15_Type.__name__ = "TLPolicyNameOrExpOrEmpty"
+_VRtrBgpEvpnVxVrfPolicyExp15_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyExp15 = _VRtrBgpEvpnVxVrfPolicyExp15_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 31),
+    _VRtrBgpEvpnVxVrfPolicyExp15_Type()
+)
+vRtrBgpEvpnVxVrfPolicyExp15.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyExp15.setStatus("current")
+
+
+class _VRtrBgpEvpnVxVrfPolicyCreateOrig_Type(TmnxCreateOrigin):
+    """Custom type vRtrBgpEvpnVxVrfPolicyCreateOrig based on TmnxCreateOrigin"""
+    defaultValue = 1
+
+
+_VRtrBgpEvpnVxVrfPolicyCreateOrig_Type.__name__ = "TmnxCreateOrigin"
+_VRtrBgpEvpnVxVrfPolicyCreateOrig_Object = MibTableColumn
+vRtrBgpEvpnVxVrfPolicyCreateOrig = _VRtrBgpEvpnVxVrfPolicyCreateOrig_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 212, 12, 1, 32),
+    _VRtrBgpEvpnVxVrfPolicyCreateOrig_Type()
+)
+vRtrBgpEvpnVxVrfPolicyCreateOrig.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnVxVrfPolicyCreateOrig.setStatus("current")
 _VRtrIfEthLoopbackObjs_ObjectIdentity = ObjectIdentity
 vRtrIfEthLoopbackObjs = _VRtrIfEthLoopbackObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 213)
@@ -31307,7 +33601,7 @@ class _VRtrBgpSrv6BgpInstance_Type(Integer32):
     """Custom type vRtrBgpSrv6BgpInstance based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 1),
+        ValueRangeConstraint(1, 2),
     )
 
 
@@ -31557,6 +33851,143 @@ vRtrBgpSrv6DomainId = _VRtrBgpSrv6DomainId_Object(
 vRtrBgpSrv6DomainId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrBgpSrv6DomainId.setStatus("current")
+
+
+class _VRtrBgpSrv6Evi_Type(Unsigned32):
+    """Custom type vRtrBgpSrv6Evi based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 16777215),
+    )
+
+
+_VRtrBgpSrv6Evi_Type.__name__ = "Unsigned32"
+_VRtrBgpSrv6Evi_Object = MibTableColumn
+vRtrBgpSrv6Evi = _VRtrBgpSrv6Evi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 20),
+    _VRtrBgpSrv6Evi_Type()
+)
+vRtrBgpSrv6Evi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6Evi.setStatus("current")
+
+
+class _VRtrBgpSrv6Resolution_Type(TSrv6RouteResolution):
+    """Custom type vRtrBgpSrv6Resolution based on TSrv6RouteResolution"""
+    defaultValue = 0
+
+
+_VRtrBgpSrv6Resolution_Type.__name__ = "TSrv6RouteResolution"
+_VRtrBgpSrv6Resolution_Object = MibTableColumn
+vRtrBgpSrv6Resolution = _VRtrBgpSrv6Resolution_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 21),
+    _VRtrBgpSrv6Resolution_Type()
+)
+vRtrBgpSrv6Resolution.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6Resolution.setStatus("current")
+_VRtrBgpSrv6OperState_Type = TmnxEnabledDisabled
+_VRtrBgpSrv6OperState_Object = MibTableColumn
+vRtrBgpSrv6OperState = _VRtrBgpSrv6OperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 22),
+    _VRtrBgpSrv6OperState_Type()
+)
+vRtrBgpSrv6OperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6OperState.setStatus("current")
+
+
+class _VRtrBgpSrv6AdLinkBw_Type(TruthValue):
+    """Custom type vRtrBgpSrv6AdLinkBw based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpSrv6AdLinkBw_Type.__name__ = "TruthValue"
+_VRtrBgpSrv6AdLinkBw_Object = MibTableColumn
+vRtrBgpSrv6AdLinkBw = _VRtrBgpSrv6AdLinkBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 23),
+    _VRtrBgpSrv6AdLinkBw_Type()
+)
+vRtrBgpSrv6AdLinkBw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6AdLinkBw.setStatus("current")
+
+
+class _VRtrBgpSrv6AdLinkBwWeight_Type(Integer32):
+    """Custom type vRtrBgpSrv6AdLinkBwWeight based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_VRtrBgpSrv6AdLinkBwWeight_Type.__name__ = "Integer32"
+_VRtrBgpSrv6AdLinkBwWeight_Object = MibTableColumn
+vRtrBgpSrv6AdLinkBwWeight = _VRtrBgpSrv6AdLinkBwWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 24),
+    _VRtrBgpSrv6AdLinkBwWeight_Type()
+)
+vRtrBgpSrv6AdLinkBwWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6AdLinkBwWeight.setStatus("current")
+
+
+class _VRtrBgpSrv6AdLinkBwMaxWeight_Type(Unsigned32):
+    """Custom type vRtrBgpSrv6AdLinkBwMaxWeight based on Unsigned32"""
+    defaultValue = 128
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_VRtrBgpSrv6AdLinkBwMaxWeight_Type.__name__ = "Unsigned32"
+_VRtrBgpSrv6AdLinkBwMaxWeight_Object = MibTableColumn
+vRtrBgpSrv6AdLinkBwMaxWeight = _VRtrBgpSrv6AdLinkBwMaxWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 25),
+    _VRtrBgpSrv6AdLinkBwMaxWeight_Type()
+)
+vRtrBgpSrv6AdLinkBwMaxWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6AdLinkBwMaxWeight.setStatus("current")
+
+
+class _VRtrBgpSrv6WeightedEcmp_Type(TruthValue):
+    """Custom type vRtrBgpSrv6WeightedEcmp based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpSrv6WeightedEcmp_Type.__name__ = "TruthValue"
+_VRtrBgpSrv6WeightedEcmp_Object = MibTableColumn
+vRtrBgpSrv6WeightedEcmp = _VRtrBgpSrv6WeightedEcmp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 26),
+    _VRtrBgpSrv6WeightedEcmp_Type()
+)
+vRtrBgpSrv6WeightedEcmp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6WeightedEcmp.setStatus("current")
+
+
+class _VRtrBgpSrv6UpaTriggerNextHop_Type(TBgpSrv6UpaTriggerNextHop):
+    """Custom type vRtrBgpSrv6UpaTriggerNextHop based on TBgpSrv6UpaTriggerNextHop"""
+    defaultValue = 0
+
+
+_VRtrBgpSrv6UpaTriggerNextHop_Type.__name__ = "TBgpSrv6UpaTriggerNextHop"
+_VRtrBgpSrv6UpaTriggerNextHop_Object = MibTableColumn
+vRtrBgpSrv6UpaTriggerNextHop = _VRtrBgpSrv6UpaTriggerNextHop_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 218, 2, 1, 27),
+    _VRtrBgpSrv6UpaTriggerNextHop_Type()
+)
+vRtrBgpSrv6UpaTriggerNextHop.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpSrv6UpaTriggerNextHop.setStatus("current")
 _VRtrBgpSrv6VrfPolicyTblLastCh_Type = TimeStamp
 _VRtrBgpSrv6VrfPolicyTblLastCh_Object = MibScalar
 vRtrBgpSrv6VrfPolicyTblLastCh = _VRtrBgpSrv6VrfPolicyTblLastCh_Object(
@@ -32404,6 +34835,22 @@ vRtrIfLnkDlyTwampIpv6SrcAddr = _VRtrIfLnkDlyTwampIpv6SrcAddr_Object(
 vRtrIfLnkDlyTwampIpv6SrcAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIfLnkDlyTwampIpv6SrcAddr.setStatus("current")
+
+
+class _VRtrIfLinkDelayLagMeasTemplName_Type(TLNamedItemOrEmpty):
+    """Custom type vRtrIfLinkDelayLagMeasTemplName based on TLNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrIfLinkDelayLagMeasTemplName_Type.__name__ = "TLNamedItemOrEmpty"
+_VRtrIfLinkDelayLagMeasTemplName_Object = MibTableColumn
+vRtrIfLinkDelayLagMeasTemplName = _VRtrIfLinkDelayLagMeasTemplName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 219, 1, 16),
+    _VRtrIfLinkDelayLagMeasTemplName_Type()
+)
+vRtrIfLinkDelayLagMeasTemplName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIfLinkDelayLagMeasTemplName.setStatus("current")
 _VRtrDPathAttrTable_Object = MibTable
 vRtrDPathAttrTable = _VRtrDPathAttrTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 220)
@@ -32473,6 +34920,410 @@ vRtrDPathAttrLastChanged = _VRtrDPathAttrLastChanged_Object(
 vRtrDPathAttrLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrDPathAttrLastChanged.setStatus("current")
+_VRtrSubDhcp4Table_Object = MibTable
+vRtrSubDhcp4Table = _VRtrSubDhcp4Table_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221)
+)
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4Table.setStatus("current")
+_VRtrSubDhcp4Entry_Object = MibTableRow
+vRtrSubDhcp4Entry = _VRtrSubDhcp4Entry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221, 1)
+)
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4Entry.setStatus("current")
+_VRtrSubDhcp4LastChanged_Type = TimeStamp
+_VRtrSubDhcp4LastChanged_Object = MibTableColumn
+vRtrSubDhcp4LastChanged = _VRtrSubDhcp4LastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221, 1, 1),
+    _VRtrSubDhcp4LastChanged_Type()
+)
+vRtrSubDhcp4LastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4LastChanged.setStatus("current")
+
+
+class _VRtrSubDhcp4TransparentForward_Type(TruthValue):
+    """Custom type vRtrSubDhcp4TransparentForward based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrSubDhcp4TransparentForward_Type.__name__ = "TruthValue"
+_VRtrSubDhcp4TransparentForward_Object = MibTableColumn
+vRtrSubDhcp4TransparentForward = _VRtrSubDhcp4TransparentForward_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221, 1, 2),
+    _VRtrSubDhcp4TransparentForward_Type()
+)
+vRtrSubDhcp4TransparentForward.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4TransparentForward.setStatus("current")
+_VRtrSubDhcp4TranspFwdClntPkts_Type = Counter64
+_VRtrSubDhcp4TranspFwdClntPkts_Object = MibTableColumn
+vRtrSubDhcp4TranspFwdClntPkts = _VRtrSubDhcp4TranspFwdClntPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221, 1, 3),
+    _VRtrSubDhcp4TranspFwdClntPkts_Type()
+)
+vRtrSubDhcp4TranspFwdClntPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4TranspFwdClntPkts.setStatus("current")
+_VRtrSubDhcp4TranspFwdServPkts_Type = Counter64
+_VRtrSubDhcp4TranspFwdServPkts_Object = MibTableColumn
+vRtrSubDhcp4TranspFwdServPkts = _VRtrSubDhcp4TranspFwdServPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221, 1, 4),
+    _VRtrSubDhcp4TranspFwdServPkts_Type()
+)
+vRtrSubDhcp4TranspFwdServPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4TranspFwdServPkts.setStatus("current")
+_VRtrSubDhcp4TranspFwdOtherPkts_Type = Counter64
+_VRtrSubDhcp4TranspFwdOtherPkts_Object = MibTableColumn
+vRtrSubDhcp4TranspFwdOtherPkts = _VRtrSubDhcp4TranspFwdOtherPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 221, 1, 5),
+    _VRtrSubDhcp4TranspFwdOtherPkts_Type()
+)
+vRtrSubDhcp4TranspFwdOtherPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrSubDhcp4TranspFwdOtherPkts.setStatus("current")
+_VRtrConfExt2Table_Object = MibTable
+vRtrConfExt2Table = _VRtrConfExt2Table_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222)
+)
+if mibBuilder.loadTexts:
+    vRtrConfExt2Table.setStatus("current")
+_VRtrConfExt2Entry_Object = MibTableRow
+vRtrConfExt2Entry = _VRtrConfExt2Entry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1)
+)
+if mibBuilder.loadTexts:
+    vRtrConfExt2Entry.setStatus("current")
+
+
+class _VRtrAllowBgpToIgpExport_Type(TruthValue):
+    """Custom type vRtrAllowBgpToIgpExport based on TruthValue"""
+    defaultValue = 1
+
+
+_VRtrAllowBgpToIgpExport_Type.__name__ = "TruthValue"
+_VRtrAllowBgpToIgpExport_Object = MibTableColumn
+vRtrAllowBgpToIgpExport = _VRtrAllowBgpToIgpExport_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 1),
+    _VRtrAllowBgpToIgpExport_Type()
+)
+vRtrAllowBgpToIgpExport.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrAllowBgpToIgpExport.setStatus("current")
+
+
+class _VRtrBgpIpVpnAttrSetImport_Type(TmnxAttrSetImport):
+    """Custom type vRtrBgpIpVpnAttrSetImport based on TmnxAttrSetImport"""
+    defaultValue = 1
+
+
+_VRtrBgpIpVpnAttrSetImport_Type.__name__ = "TmnxAttrSetImport"
+_VRtrBgpIpVpnAttrSetImport_Object = MibTableColumn
+vRtrBgpIpVpnAttrSetImport = _VRtrBgpIpVpnAttrSetImport_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 2),
+    _VRtrBgpIpVpnAttrSetImport_Type()
+)
+vRtrBgpIpVpnAttrSetImport.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpIpVpnAttrSetImport.setStatus("current")
+
+
+class _VRtrBgpIpVpnAttrSetExport_Type(TruthValue):
+    """Custom type vRtrBgpIpVpnAttrSetExport based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpIpVpnAttrSetExport_Type.__name__ = "TruthValue"
+_VRtrBgpIpVpnAttrSetExport_Object = MibTableColumn
+vRtrBgpIpVpnAttrSetExport = _VRtrBgpIpVpnAttrSetExport_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 3),
+    _VRtrBgpIpVpnAttrSetExport_Type()
+)
+vRtrBgpIpVpnAttrSetExport.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpIpVpnAttrSetExport.setStatus("current")
+
+
+class _VRtrBgpExportInactiveBgpEnhanced_Type(TruthValue):
+    """Custom type vRtrBgpExportInactiveBgpEnhanced based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrBgpExportInactiveBgpEnhanced_Type.__name__ = "TruthValue"
+_VRtrBgpExportInactiveBgpEnhanced_Object = MibTableColumn
+vRtrBgpExportInactiveBgpEnhanced = _VRtrBgpExportInactiveBgpEnhanced_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 4),
+    _VRtrBgpExportInactiveBgpEnhanced_Type()
+)
+vRtrBgpExportInactiveBgpEnhanced.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpExportInactiveBgpEnhanced.setStatus("current")
+
+
+class _VRtrMvpnWldCrdSpmsiSuppressIpmsi_Type(TruthValue):
+    """Custom type vRtrMvpnWldCrdSpmsiSuppressIpmsi based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMvpnWldCrdSpmsiSuppressIpmsi_Type.__name__ = "TruthValue"
+_VRtrMvpnWldCrdSpmsiSuppressIpmsi_Object = MibTableColumn
+vRtrMvpnWldCrdSpmsiSuppressIpmsi = _VRtrMvpnWldCrdSpmsiSuppressIpmsi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 5),
+    _VRtrMvpnWldCrdSpmsiSuppressIpmsi_Type()
+)
+vRtrMvpnWldCrdSpmsiSuppressIpmsi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMvpnWldCrdSpmsiSuppressIpmsi.setStatus("current")
+
+
+class _VRtrMvpnIpmsiP2mpPolicySrv6_Type(TNamedItemOrEmpty):
+    """Custom type vRtrMvpnIpmsiP2mpPolicySrv6 based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrMvpnIpmsiP2mpPolicySrv6_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrMvpnIpmsiP2mpPolicySrv6_Object = MibTableColumn
+vRtrMvpnIpmsiP2mpPolicySrv6 = _VRtrMvpnIpmsiP2mpPolicySrv6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 6),
+    _VRtrMvpnIpmsiP2mpPolicySrv6_Type()
+)
+vRtrMvpnIpmsiP2mpPolicySrv6.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMvpnIpmsiP2mpPolicySrv6.setStatus("current")
+
+
+class _VRtrMvpnSpmsiP2mpPolicySrv6_Type(TNamedItemOrEmpty):
+    """Custom type vRtrMvpnSpmsiP2mpPolicySrv6 based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrMvpnSpmsiP2mpPolicySrv6_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrMvpnSpmsiP2mpPolicySrv6_Object = MibTableColumn
+vRtrMvpnSpmsiP2mpPolicySrv6 = _VRtrMvpnSpmsiP2mpPolicySrv6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 7),
+    _VRtrMvpnSpmsiP2mpPolicySrv6_Type()
+)
+vRtrMvpnSpmsiP2mpPolicySrv6.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMvpnSpmsiP2mpPolicySrv6.setStatus("current")
+
+
+class _VRtrMvpnServiceReservedLabel_Type(TmnxMplsLabelOrZero):
+    """Custom type vRtrMvpnServiceReservedLabel based on TmnxMplsLabelOrZero"""
+    defaultValue = 0
+
+
+_VRtrMvpnServiceReservedLabel_Type.__name__ = "TmnxMplsLabelOrZero"
+_VRtrMvpnServiceReservedLabel_Object = MibTableColumn
+vRtrMvpnServiceReservedLabel = _VRtrMvpnServiceReservedLabel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 8),
+    _VRtrMvpnServiceReservedLabel_Type()
+)
+vRtrMvpnServiceReservedLabel.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMvpnServiceReservedLabel.setStatus("current")
+
+
+class _VRtrMvpnBierPtaLabelInMsb_Type(TruthValue):
+    """Custom type vRtrMvpnBierPtaLabelInMsb based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMvpnBierPtaLabelInMsb_Type.__name__ = "TruthValue"
+_VRtrMvpnBierPtaLabelInMsb_Object = MibTableColumn
+vRtrMvpnBierPtaLabelInMsb = _VRtrMvpnBierPtaLabelInMsb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 9),
+    _VRtrMvpnBierPtaLabelInMsb_Type()
+)
+vRtrMvpnBierPtaLabelInMsb.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMvpnBierPtaLabelInMsb.setStatus("current")
+
+
+class _VRtrBgpIpVpnAnySecEncGrp_Type(TNamedItemOrEmpty):
+    """Custom type vRtrBgpIpVpnAnySecEncGrp based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrBgpIpVpnAnySecEncGrp_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrBgpIpVpnAnySecEncGrp_Object = MibTableColumn
+vRtrBgpIpVpnAnySecEncGrp = _VRtrBgpIpVpnAnySecEncGrp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 222, 1, 10),
+    _VRtrBgpIpVpnAnySecEncGrp_Type()
+)
+vRtrBgpIpVpnAnySecEncGrp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrBgpIpVpnAnySecEncGrp.setStatus("current")
+_VRtrInetCidrUpaRouteTable_Object = MibTable
+vRtrInetCidrUpaRouteTable = _VRtrInetCidrUpaRouteTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223)
+)
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteTable.setStatus("current")
+_VRtrInetCidrUpaRouteEntry_Object = MibTableRow
+vRtrInetCidrUpaRouteEntry = _VRtrInetCidrUpaRouteEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1)
+)
+vRtrInetCidrUpaRouteEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRouteType"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRoutePfx"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRoutePfxLen"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRoutePfxIndex"),
+)
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteEntry.setStatus("current")
+_VRtrInetCidrUpaRouteType_Type = InetAddressType
+_VRtrInetCidrUpaRouteType_Object = MibTableColumn
+vRtrInetCidrUpaRouteType = _VRtrInetCidrUpaRouteType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 1),
+    _VRtrInetCidrUpaRouteType_Type()
+)
+vRtrInetCidrUpaRouteType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteType.setStatus("current")
+
+
+class _VRtrInetCidrUpaRoutePfx_Type(InetAddress):
+    """Custom type vRtrInetCidrUpaRoutePfx based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_VRtrInetCidrUpaRoutePfx_Type.__name__ = "InetAddress"
+_VRtrInetCidrUpaRoutePfx_Object = MibTableColumn
+vRtrInetCidrUpaRoutePfx = _VRtrInetCidrUpaRoutePfx_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 2),
+    _VRtrInetCidrUpaRoutePfx_Type()
+)
+vRtrInetCidrUpaRoutePfx.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRoutePfx.setStatus("current")
+_VRtrInetCidrUpaRoutePfxLen_Type = InetAddressPrefixLength
+_VRtrInetCidrUpaRoutePfxLen_Object = MibTableColumn
+vRtrInetCidrUpaRoutePfxLen = _VRtrInetCidrUpaRoutePfxLen_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 3),
+    _VRtrInetCidrUpaRoutePfxLen_Type()
+)
+vRtrInetCidrUpaRoutePfxLen.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRoutePfxLen.setStatus("current")
+_VRtrInetCidrUpaRoutePfxIndex_Type = Unsigned32
+_VRtrInetCidrUpaRoutePfxIndex_Object = MibTableColumn
+vRtrInetCidrUpaRoutePfxIndex = _VRtrInetCidrUpaRoutePfxIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 4),
+    _VRtrInetCidrUpaRoutePfxIndex_Type()
+)
+vRtrInetCidrUpaRoutePfxIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRoutePfxIndex.setStatus("current")
+_VRtrInetCidrUpaRouteAge_Type = Gauge32
+_VRtrInetCidrUpaRouteAge_Object = MibTableColumn
+vRtrInetCidrUpaRouteAge = _VRtrInetCidrUpaRouteAge_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 5),
+    _VRtrInetCidrUpaRouteAge_Type()
+)
+vRtrInetCidrUpaRouteAge.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteAge.setStatus("current")
+_VRtrInetCidrUpaRouteProto_Type = IANAipRouteProtocol
+_VRtrInetCidrUpaRouteProto_Object = MibTableColumn
+vRtrInetCidrUpaRouteProto = _VRtrInetCidrUpaRouteProto_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 6),
+    _VRtrInetCidrUpaRouteProto_Type()
+)
+vRtrInetCidrUpaRouteProto.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteProto.setStatus("current")
+_VRtrInetCidrUpaRouteProtoInst_Type = Unsigned32
+_VRtrInetCidrUpaRouteProtoInst_Object = MibTableColumn
+vRtrInetCidrUpaRouteProtoInst = _VRtrInetCidrUpaRouteProtoInst_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 7),
+    _VRtrInetCidrUpaRouteProtoInst_Type()
+)
+vRtrInetCidrUpaRouteProtoInst.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteProtoInst.setStatus("current")
+
+
+class _VRtrInetCidrUpaRoutePreference_Type(Unsigned32):
+    """Custom type vRtrInetCidrUpaRoutePreference based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_VRtrInetCidrUpaRoutePreference_Type.__name__ = "Unsigned32"
+_VRtrInetCidrUpaRoutePreference_Object = MibTableColumn
+vRtrInetCidrUpaRoutePreference = _VRtrInetCidrUpaRoutePreference_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 8),
+    _VRtrInetCidrUpaRoutePreference_Type()
+)
+vRtrInetCidrUpaRoutePreference.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRoutePreference.setStatus("current")
+_VRtrInetCidrUpaRouteMetric_Type = Unsigned32
+_VRtrInetCidrUpaRouteMetric_Object = MibTableColumn
+vRtrInetCidrUpaRouteMetric = _VRtrInetCidrUpaRouteMetric_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 223, 1, 9),
+    _VRtrInetCidrUpaRouteMetric_Type()
+)
+vRtrInetCidrUpaRouteMetric.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetCidrUpaRouteMetric.setStatus("current")
+_VRtrInetStaticRtLeakDestTblLstCh_Type = TimeStamp
+_VRtrInetStaticRtLeakDestTblLstCh_Object = MibScalar
+vRtrInetStaticRtLeakDestTblLstCh = _VRtrInetStaticRtLeakDestTblLstCh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 224),
+    _VRtrInetStaticRtLeakDestTblLstCh_Type()
+)
+vRtrInetStaticRtLeakDestTblLstCh.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrInetStaticRtLeakDestTblLstCh.setStatus("current")
+_VRtrInetStaticRouteLeakDestTable_Object = MibTable
+vRtrInetStaticRouteLeakDestTable = _VRtrInetStaticRouteLeakDestTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 225)
+)
+if mibBuilder.loadTexts:
+    vRtrInetStaticRouteLeakDestTable.setStatus("current")
+_VRtrInetStaticRouteLeakDestEntry_Object = MibTableRow
+vRtrInetStaticRouteLeakDestEntry = _VRtrInetStaticRouteLeakDestEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 225, 1)
+)
+vRtrInetStaticRouteLeakDestEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetStaticRouteDestType"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetStaticRouteDest"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetStaticRouteDestPfxLen"),
+    (0, "TIMETRA-VRTR-MIB", "vRtrInetStaticRouteLeakVRtrID"),
+)
+if mibBuilder.loadTexts:
+    vRtrInetStaticRouteLeakDestEntry.setStatus("current")
+_VRtrInetStaticRouteLeakVRtrID_Type = TmnxVRtrID
+_VRtrInetStaticRouteLeakVRtrID_Object = MibTableColumn
+vRtrInetStaticRouteLeakVRtrID = _VRtrInetStaticRouteLeakVRtrID_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 225, 1, 1),
+    _VRtrInetStaticRouteLeakVRtrID_Type()
+)
+vRtrInetStaticRouteLeakVRtrID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrInetStaticRouteLeakVRtrID.setStatus("current")
+_VRtrInetStaticRtLeakDestRowStat_Type = RowStatus
+_VRtrInetStaticRtLeakDestRowStat_Object = MibTableColumn
+vRtrInetStaticRtLeakDestRowStat = _VRtrInetStaticRtLeakDestRowStat_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 3, 225, 1, 2),
+    _VRtrInetStaticRtLeakDestRowStat_Type()
+)
+vRtrInetStaticRtLeakDestRowStat.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrInetStaticRtLeakDestRowStat.setStatus("current")
 _TmnxVRtrNotifyPrefix_ObjectIdentity = ObjectIdentity
 tmnxVRtrNotifyPrefix = _TmnxVRtrNotifyPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 3)
@@ -32641,11 +35492,6 @@ vRtrIfEntry.registerAugmentions(
      "vRtrIfExtParmsEntry")
 )
 vRtrIfExtParmsEntry.setIndexNames(*vRtrIfEntry.getIndexNames())
-vRtrConfEntry.registerAugmentions(
-    ("TIMETRA-VRTR-MIB",
-     "vRtrLeakExportPolicyEntry")
-)
-vRtrLeakExportPolicyEntry.setIndexNames(*vRtrConfEntry.getIndexNames())
 vRtrIfEntry.registerAugmentions(
     ("TIMETRA-VRTR-MIB",
      "vRtrIfLinkDelayEntry")
@@ -32656,6 +35502,16 @@ vRtrConfEntry.registerAugmentions(
      "vRtrDPathAttrEntry")
 )
 vRtrDPathAttrEntry.setIndexNames(*vRtrConfEntry.getIndexNames())
+vRtrConfEntry.registerAugmentions(
+    ("TIMETRA-VRTR-MIB",
+     "vRtrSubDhcp4Entry")
+)
+vRtrSubDhcp4Entry.setIndexNames(*vRtrConfEntry.getIndexNames())
+vRtrConfEntry.registerAugmentions(
+    ("TIMETRA-VRTR-MIB",
+     "vRtrConfExt2Entry")
+)
+vRtrConfExt2Entry.setIndexNames(*vRtrConfEntry.getIndexNames())
 
 # Managed Objects groups
 
@@ -37225,7 +40081,7 @@ tmnxVRtrIfExtV15v0Group.setObjects(
         ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelRemoteIpAddr"))
 )
 if mibBuilder.loadTexts:
-    tmnxVRtrIfExtV15v0Group.setStatus("current")
+    tmnxVRtrIfExtV15v0Group.setStatus("obsolete")
 
 tmnxVRtrUdpTunnelGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 191)
@@ -38869,6 +41725,558 @@ tmnxVRtrObsoleteV22v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxVRtrObsoleteV22v0Group.setStatus("current")
 
+tmnxVRtrBgpEvpnEviGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 302)
+)
+tmnxVRtrBgpEvpnEviGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnEvi")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpEvpnEviGroup.setStatus("current")
+
+tmnxVRtrIfExtParmsV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 303)
+)
+tmnxVRtrIfExtParmsV22v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfIcmpTtlExpiredMatchingAddr"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfExtRefOcSubIfPresence"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfExtRefOcSubIf"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIfExtParmsV22v0Group.setStatus("current")
+
+tmnxVRtrIfDcpFpCountV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 304)
+)
+tmnxVRtrIfDcpFpCountV22v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfDcpFpStaticTotalExcdCount"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDcpFpStaticExtCnfrmStCount"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDcpFpDynTotalExcdCount"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDcpFpDynExtCnfrmStateCount"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDcpFpLocMonTotalExcdCount"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDcpFpLocMonExtCnfrmStCount"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIfDcpFpCountV22v0Group.setStatus("current")
+
+vRtrSrV6PolicyGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 306)
+)
+vRtrSrV6PolicyGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrStatActiveSrV6PolicyTunnels"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatTotalSrV6PolicyTunnels"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatActiveSrV6PolicyRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatTotalSrV6PolicyRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6Resolution"))
+)
+if mibBuilder.loadTexts:
+    vRtrSrV6PolicyGroup.setStatus("current")
+
+vRtrBgpEvpnSrv6EviGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 307)
+)
+vRtrBgpEvpnSrv6EviGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6Evi")
+)
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnSrv6EviGroup.setStatus("current")
+
+vRtrBgpEvpnUneqalEcmpV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 308)
+)
+vRtrBgpEvpnUneqalEcmpV22v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpEvpnAdLinkBw"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnAdLinkBwWeight"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnAdLinkBwMaxWeight"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnWeightedEcmp"))
+)
+if mibBuilder.loadTexts:
+    vRtrBgpEvpnUneqalEcmpV22v0Group.setStatus("current")
+
+tmnxVRtrIfQosV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 309)
+)
+tmnxVRtrIfQosV22v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfQosEgrAggRatePIRPercent"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfQosEgrAggRateCIRPercent"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfQosEgrAggRateType"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIfQosV22v0Group.setStatus("current")
+
+tmnxvRtrEsaVideoRoutesGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 310)
+)
+tmnxvRtrEsaVideoRoutesGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrStatActiveV4VideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatTotalV4VideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatActiveV6VideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatTotalV6VideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrMcastIpv4ActiveVideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrMcastIpv4TotalVideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrMcastIpv6ActiveVideoRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrMcastIpv6TotalVideoRoutes"))
+)
+if mibBuilder.loadTexts:
+    tmnxvRtrEsaVideoRoutesGroup.setStatus("current")
+
+tmnxVRtrNdRaRoutesGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 311)
+)
+tmnxVRtrNdRaRoutesGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrStatV6NdRaRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatV6NdRaActiveRoutes"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNdRaRoutesGroup.setStatus("current")
+
+tmnxVRtrNotifyObjsV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 313)
+)
+tmnxVRtrNotifyObjsV23v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrNotifyFpNum")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNotifyObjsV23v0Group.setStatus("current")
+
+tmnxVRtrSubDhcp4V23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 314)
+)
+tmnxVRtrSubDhcp4V23v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrSubDhcp4LastChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrSubDhcp4TransparentForward"),
+        ("TIMETRA-VRTR-MIB", "vRtrSubDhcp4TranspFwdClntPkts"),
+        ("TIMETRA-VRTR-MIB", "vRtrSubDhcp4TranspFwdServPkts"),
+        ("TIMETRA-VRTR-MIB", "vRtrSubDhcp4TranspFwdOtherPkts"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrSubDhcp4V23v0Group.setStatus("current")
+
+tmnxVRtrObsoleteV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 315)
+)
+tmnxVRtrObsoleteV23v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelRemoteIpAddrType"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelRemoteIpAddr"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrObsoleteV23v0Group.setStatus("current")
+
+tmnxVRtrV23Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 316)
+)
+tmnxVRtrV23Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfUrpfSelectedVprnsOnly"),
+        ("TIMETRA-VRTR-MIB", "vRtrAllowBgpToIgpExport"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnOperState"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6OperState"),
+        ("TIMETRA-VRTR-MIB", "vRtrIpv6RtrAdvertNdRtrPreference"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfMtuProfile"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfOperMtuProfile"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfAllocMtuProfile"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDHCP6AllowClntIdChng"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrV23Group.setStatus("current")
+
+tmnxVRtrBgpIpVpnV21Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 317)
+)
+tmnxVRtrBgpIpVpnV21Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpIpVpnMplsOperState")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpIpVpnV21Group.setStatus("current")
+
+tmnxVRtrNotifyObjsV21v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 319)
+)
+tmnxVRtrNotifyObjsV21v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrNotifyBgpInstType"),
+        ("TIMETRA-VRTR-MIB", "vRtrNotifyBgpInstance"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNotifyObjsV21v0Group.setStatus("current")
+
+tmnxVRtrV21Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 320)
+)
+tmnxVRtrV21Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpEvpnOperState"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6OperState"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrV21Group.setStatus("current")
+
+tmnxVRtrBgpIpVpnAttrSetGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 321)
+)
+tmnxVRtrBgpIpVpnAttrSetGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpIpVpnAttrSetImport"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpIpVpnAttrSetExport"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpIpVpnAttrSetGroup.setStatus("current")
+
+tmnxVrtrBgpSrv6UqlEcmpV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 322)
+)
+tmnxVrtrBgpSrv6UqlEcmpV23v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpSrv6AdLinkBw"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6AdLinkBwWeight"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6AdLinkBwMaxWeight"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6WeightedEcmp"))
+)
+if mibBuilder.loadTexts:
+    tmnxVrtrBgpSrv6UqlEcmpV23v0Group.setStatus("current")
+
+tmnxVRtrSrMplsTTLPropagateGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 323)
+)
+tmnxVRtrSrMplsTTLPropagateGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrTTLPropSrMplsLocal"),
+        ("TIMETRA-VRTR-MIB", "vRtrTTLPropSrMplsTransit"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrSrMplsTTLPropagateGroup.setStatus("current")
+
+tmnxVRtrBgpExpInactiveAllGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 324)
+)
+tmnxVRtrBgpExpInactiveAllGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpExportInactiveBgpEnhanced")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpExpInactiveAllGroup.setStatus("current")
+
+tmnxVRtrStaticRtVprnCondRtGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 325)
+)
+tmnxVRtrStaticRtVprnCondRtGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrInetStaticRoutePfxLstRtrInst")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrStaticRtVprnCondRtGroup.setStatus("current")
+
+tmnxVRtrBgpNhResGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 326)
+)
+tmnxVRtrBgpNhResGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnAutoBndTnlUntagRt")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpNhResGroup.setStatus("current")
+
+tmnxVRtrEsmBcastGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 327)
+)
+tmnxVRtrEsmBcastGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrStatActiveV4EsmBcastRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrStatTotalV4EsmBcastRoutes"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrEsmBcastGroup.setStatus("current")
+
+tmnxVRtrUpaRouteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 328)
+)
+tmnxVRtrUpaRouteGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRouteAge"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRouteProto"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRouteProtoInst"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRoutePreference"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetCidrUpaRouteMetric"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpSrv6UpaTriggerNextHop"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrUpaRouteGroup.setStatus("current")
+
+tmnxVRtrSysMacAddrRangeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 329)
+)
+tmnxVRtrSysMacAddrRangeGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "tmnxVrtrIPStartMacAddress"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrIPEndMacAddress"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrSysMacAddrRangeGroup.setStatus("current")
+
+tmnxVRtrSysCommonMacAddrGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 330)
+)
+tmnxVRtrSysCommonMacAddrGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "tmnxVrtrIPCommonMacAddress")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrSysCommonMacAddrGroup.setStatus("current")
+
+tmnxVRtrIfQosV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 331)
+)
+tmnxVRtrIfQosV24v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrIfQosEgrAggRateBurstLmt")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIfQosV24v0Group.setStatus("current")
+
+vRtrVprnVxlanV24Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 332)
+)
+vRtrVprnVxlanV24Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxTblLastCh"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxRowStatus"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxLastChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxAdminState"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxDefRtTag"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfRD"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxExportRteTarget"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxImportRteTarget"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxAutoRD"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxOperRD"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxOperRDType"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfTarget"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxDomainId"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxEvi"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxAdLinkBw"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxAdLinkBwWeight"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxAdLinkBwMaxWeight"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxWeightedEcmp"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxOperState"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxInstance"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPlcyTblLastCh"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyLastChg"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp1"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp2"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp3"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp4"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp5"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp6"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp7"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp8"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp9"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp10"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp11"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp12"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp13"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp14"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyImp15"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp1"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp2"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp3"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp4"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp5"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp6"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp7"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp8"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp9"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp10"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp11"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp12"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp13"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp14"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyExp15"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxVrfPolicyCreateOrig"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetCidrRouteEgrVni"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetAllCidrRouteEgrVni"))
+)
+if mibBuilder.loadTexts:
+    vRtrVprnVxlanV24Group.setStatus("current")
+
+tmnxVRtrMvpnPmsiV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 333)
+)
+tmnxVRtrMvpnPmsiV24v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrMvpnWldCrdSpmsiSuppressIpmsi")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrMvpnPmsiV24v0Group.setStatus("current")
+
+tmnxVRtrOamLagMeasV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 334)
+)
+tmnxVRtrOamLagMeasV24v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrIfLinkDelayLagMeasTemplName")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrOamLagMeasV24v0Group.setStatus("current")
+
+tmnxVRtrIPV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 335)
+)
+tmnxVRtrIPV24v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "tmnxVrtrIPBufferUnresolvedPkts")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIPV24v0Group.setStatus("current")
+
+tmnxVRtrMvpnP2mp24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 336)
+)
+tmnxVRtrMvpnP2mp24v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrMvpnIpmsiP2mpPolicySrv6"),
+        ("TIMETRA-VRTR-MIB", "vRtrMvpnSpmsiP2mpPolicySrv6"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrMvpnP2mp24v0Group.setStatus("current")
+
+vRtrIfIpTunnelV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 337)
+)
+vRtrIfIpTunnelV24v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelTableLastChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelRowStatus"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelLastChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelGreHeader"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelDescription"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelLclIpAddrType"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelLclIpAddr"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelRemIpAddrType"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelRemIpAddr"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperRemIpAddrType"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperRemIpAddr"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelDlvryRtrId"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelAdminState"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperState"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperFlags"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelIngStatsEnabled"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelEgrStatsEnabled"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelEncapsulatedMtu"))
+)
+if mibBuilder.loadTexts:
+    vRtrIfIpTunnelV24v0Group.setStatus("current")
+
+vRtrStaticRtLeakDestGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 338)
+)
+vRtrStaticRtLeakDestGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrInetStaticRtLeakDestTblLstCh"),
+        ("TIMETRA-VRTR-MIB", "vRtrInetStaticRtLeakDestRowStat"))
+)
+if mibBuilder.loadTexts:
+    vRtrStaticRtLeakDestGroup.setStatus("current")
+
+vRtrEvpnIflHostRouteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 339)
+)
+vRtrEvpnIflHostRouteGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpEvpnIflHostActRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnIflHostRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrV6BgpEvpnIflHostActRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrV6BgpEvpnIflHostRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrFibStatBGPEvpnIflHostRoutes"),
+        ("TIMETRA-VRTR-MIB", "vRtrFibStatV6BGPEvpnIflHostRts"))
+)
+if mibBuilder.loadTexts:
+    vRtrEvpnIflHostRouteGroup.setStatus("current")
+
+tmnxVRtrNotifyObjsV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 341)
+)
+tmnxVRtrNotifyObjsV24v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelName")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNotifyObjsV24v0Group.setStatus("current")
+
+tmnxVRtrMvpnP2mp25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 342)
+)
+tmnxVRtrMvpnP2mp25v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrMvpnServiceReservedLabel")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrMvpnP2mp25v0Group.setStatus("current")
+
+tmnxVRtrRedIfOverIpv6Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 343)
+)
+tmnxVRtrRedIfOverIpv6Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrIfIpv6GreTermination")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrRedIfOverIpv6Group.setStatus("current")
+
+tmnxVRtrBgpEvpnGwIpV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 344)
+)
+tmnxVRtrBgpEvpnGwIpV25v0Group.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrBgpEvpnGwIpAdvertise"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnGwIpResolve"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxGwIpAdvertise"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnVxGwIpResolve"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpEvpnGwIpV25v0Group.setStatus("current")
+
+tmnxVRtrIfNatGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 345)
+)
+tmnxVRtrIfNatGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfNatTableLastChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfNatRowStatus"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfNatLastChanged"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfNatCpmPolicy"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfNatCpmSpfPolicy"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIfNatGroup.setStatus("current")
+
+tmnxVRtrMvpnGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 346)
+)
+tmnxVRtrMvpnGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrMvpnBierPtaLabelInMsb")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrMvpnGroup.setStatus("current")
+
+tmnxVRtrIPV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 347)
+)
+tmnxVRtrIPV25v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "tmnxVrtrSysuRPFIgnoreDefault")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIPV25v0Group.setStatus("current")
+
+tmnxVRtrBgpEvpnAnySecGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 348)
+)
+tmnxVRtrBgpEvpnAnySecGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnAnySecEncGrp")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpEvpnAnySecGroup.setStatus("current")
+
+tmnxVRtrBgpIpVpnAnySecGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 349)
+)
+tmnxVRtrBgpIpVpnAnySecGroup.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpIpVpnAnySecEncGrp")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBgpIpVpnAnySecGroup.setStatus("current")
+
+tmnxVRtrIfDHCPRelayFRGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 350)
+)
+tmnxVRtrIfDHCPRelayFRGroup.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfDHCPRelayForceRenewWoLease"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfDHCP6RelayReconfigureWoLse"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrIfDHCPRelayFRGroup.setStatus("current")
+
+tmnxVRtrQosSinkExcessBWV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 353)
+)
+tmnxVRtrQosSinkExcessBWV25v0Grp.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrIfQosEgrSinkExcessBW")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrQosSinkExcessBWV25v0Grp.setStatus("current")
+
 tmnxVRtrIpPoolGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 4, 1)
 )
@@ -40242,6 +43650,49 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxVRtrBfdMultiHopFpMismatch = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 3, 0, 100)
+)
+tmnxVRtrBfdMultiHopFpMismatch.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrIfBfdSessExtLclDisc"),
+        ("TIMETRA-VRTR-MIB", "vRtrBfdSlotNumber"),
+        ("TIMETRA-VRTR-MIB", "vRtrNotifyFpNum"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrBfdMultiHopFpMismatch.setStatus(
+        "current"
+    )
+
+vRtrBgpInstanceError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 3, 0, 101)
+)
+vRtrBgpInstanceError.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrID"),
+        ("TIMETRA-VRTR-MIB", "vRtrNotifyBgpInstType"),
+        ("TIMETRA-VRTR-MIB", "vRtrNotifyBgpInstance"),
+        ("TIMETRA-VRTR-MIB", "vRtrFailureDescription"))
+)
+if mibBuilder.loadTexts:
+    vRtrBgpInstanceError.setStatus(
+        "current"
+    )
+
+vrtrIfIpTunnelOperStateChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 3, 0, 102)
+)
+vrtrIfIpTunnelOperStateChange.setObjects(
+      *(("TIMETRA-VRTR-MIB", "vRtrID"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIndex"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelName"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelAdminState"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperState"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelOperFlags"))
+)
+if mibBuilder.loadTexts:
+    vrtrIfIpTunnelOperStateChange.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -40837,6 +44288,39 @@ tmnxVRtrNotificationObj21Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxVRtrNotificationObj21Group.setStatus(
+        "current"
+    )
+
+tmnxVRtrNotificationV23v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 312)
+)
+tmnxVRtrNotificationV23v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "tmnxVRtrBfdMultiHopFpMismatch")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNotificationV23v0Group.setStatus(
+        "current"
+    )
+
+tmnxVRtrNotificationV21v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 318)
+)
+tmnxVRtrNotificationV21v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vRtrBgpInstanceError")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNotificationV21v0Group.setStatus(
+        "current"
+    )
+
+tmnxVRtrNotificationV24v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 2, 340)
+)
+tmnxVRtrNotificationV24v0Group.setObjects(
+    ("TIMETRA-VRTR-MIB", "vrtrIfIpTunnelOperStateChange")
+)
+if mibBuilder.loadTexts:
+    tmnxVRtrNotificationV24v0Group.setStatus(
         "current"
     )
 
@@ -42156,14 +45640,170 @@ tmnxVRtr7xx0V19v0Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxVRtr7xx0V19v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxVRtr7xx0V20v0Compliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 1, 27)
 )
 tmnxVRtr7xx0V20v0Compliance.setObjects(
-      *(("TIMETRA-VRTR-MIB", "tmnxVRtrIfNdHostRouteGroup"),
+      *(("TIMETRA-VRTR-MIB", "tmnxVRtrGlobalV6v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPv6V4v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPv6IpV5v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPv6IfV4v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDhcpServerGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfSubscrAuthV3v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStaticRteCPEChkV6v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfIpcpV6v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfCpmProtectGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxDscpAppV6v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCPRelayV9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCPRelayV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV6v1Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetAllCidrRouteV7v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetStaticRouteV7v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtruRPFV7v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrPolicyGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNetDomainGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrTunIntV8v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrFibStatsV8v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMvpnPmsiV8v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCPRelayV6v1Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrQPPBV9v0R4Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCP6V9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCP6V10v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCP6V11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCP6V12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrIfDHCP6ProxyDuidGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfStatsV9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfStatsV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfIpReasV9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMSPwV9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNatRedGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMvpnSrcRedV9v0R4Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStatV9v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtruRPFV10v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIpPoolGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrQosQGrplV10v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStatV10v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStatV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPv6MgtIfV7v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxMGVRtrIfV4v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrFlowSpecV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrGrtLocalMgmtV10v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMcastV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrIfDCpuProtV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrDcpNotifyObjsV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrIfDcpNotifyV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfMacStatsV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIpv6RtrAdvertV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBfdV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrRAV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrExportBgpVpnV11v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrGenerateICMPV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfSendV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxvRtrIfAttributeGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrCreation12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPsecStatGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrVirtualCPE12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpEvpn12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLagHashLoadBal12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrPlcyAcctTempl12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLagEgrLoadBal12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrVccvBfd12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIcmpTunnelingGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrAggrRouteV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrConfExtV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStickyHashEcmp12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotifyObjsNHRvplsArpGrp"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotificationNHRvplsArpGr"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMcastSpmsiEnhV13v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrHoldDownTimeV12v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLoadBalEnhV13v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetSRIndirectV13v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfExtIfArpRetryTimerGrp"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpAutoRDGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrTunnelTableStatGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCPRelayV13v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLdpIpv613v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfLagPerLinkHashGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrCidrNextHopOwnInstGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIpV13v0ObsoletedGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV13v0GenObsoletedGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfArpNbrLimitGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfExtV13v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV13v0IfStatsGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfArpNbrNotifGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPv6IPsecStatGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrUniqueIfIndexGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStaticRoutePrefixGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrEntropyLabelGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLspBfdGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrConfFlowspecV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetSRIndirectV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrFibStatsV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCPRelayV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpLblIpRoutes14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV6TunnelTableStatGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSrTeV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfExtV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLoopbackNotifGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV14v0NotifyObjsGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIcmpV4StatsV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIcmpV4ParamV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrFpeV14v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV15v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrDDosDCpuProtPolicyGrp"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrUdpTunnelGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIpV15v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrQinQNetworkIntfGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfExtV15v0ObjectGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrClassFwdingV15v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfExtHostRteV20v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfStatsV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfNgeStatsGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrAdminTagsV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLargeCommValV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfStatsDBCastV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLocalPrefV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIpV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLoadBalWeightV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetExtTunnelV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrGrtLeakImpPolV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetTunnStatV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrGlobalV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetRouteV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSrTnlStatV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBierV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrDhcpClientGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrRibApiV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrRibTelemetryV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMplsFwdPlcyV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIcmpV4StatsV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrLeakExportLimNotifGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrInetSRIndirectV16v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrDhcpRoutesV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotificationV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfEgressQueueV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfQosV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIngressPolicerV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrMplsTunnelModeV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrDiscardCV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrMplsTunnelModeV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrConfFlowspecV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfHostRouteGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrTunTerminationV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfPhysStatsV19v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSrTnlStatV19v10Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfEgressQueueV19v01Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSrTeV6Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfNdHostRouteGroup"),
         ("TIMETRA-VRTR-MIB", "tmnxVRtrDnsV20v0Group"),
         ("TIMETRA-VRTR-MIB", "tmnxVRtrHelperRedirectPkts"),
         ("TIMETRA-VRTR-MIB", "tmnxVRtrIPEHV20v0Group"),
@@ -42208,7 +45848,11 @@ tmnxVRtr7xx0V21v0Compliance.setObjects(
         ("TIMETRA-VRTR-MIB", "tmnxVRtrFibStatObj21Group"),
         ("TIMETRA-VRTR-MIB", "tmnxVRtrNotificationObj21Group"),
         ("TIMETRA-VRTR-MIB", "tmnxVRtrDPathAttrObj21Group"),
-        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfHQosOnLagV21v0Group"))
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfHQosOnLagV21v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotifyObjsV21v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotificationV21v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV21Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpIpVpnV21Group"))
 )
 if mibBuilder.loadTexts:
     tmnxVRtr7xx0V21v0Compliance.setStatus(
@@ -42220,10 +45864,83 @@ tmnxVRtr7xx0V22v0Compliance = ModuleCompliance(
 )
 tmnxVRtr7xx0V22v0Compliance.setObjects(
       *(("TIMETRA-VRTR-MIB", "tmnxVRtrDynEgLblLmtObj22Group"),
-        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfV22v0Group"))
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfV22v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfExtParmsV22v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpEvpnEviGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDcpFpCountV22v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrSrV6PolicyGroup"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnSrv6EviGroup"),
+        ("TIMETRA-VRTR-MIB", "vRtrBgpEvpnUneqalEcmpV22v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfQosV22v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxvRtrEsaVideoRoutesGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNdRaRoutesGroup"))
 )
 if mibBuilder.loadTexts:
     tmnxVRtr7xx0V22v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxVRtr7xx0V23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 1, 30)
+)
+tmnxVRtr7xx0V23v0Compliance.setObjects(
+      *(("TIMETRA-VRTR-MIB", "tmnxVRtrNotifyObjsV23v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotificationV23v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSubDhcp4V23v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrV23Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpIpVpnAttrSetGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVrtrBgpSrv6UqlEcmpV23v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSrMplsTTLPropagateGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpExpInactiveAllGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrStaticRtVprnCondRtGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpNhResGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrEsmBcastGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrUpaRouteGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtr7xx0V23v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxVRtr7xx0V24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 1, 31)
+)
+tmnxVRtr7xx0V24v0Compliance.setObjects(
+      *(("TIMETRA-VRTR-MIB", "tmnxVRtrSysMacAddrRangeGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrSysCommonMacAddrGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfQosV24v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrVprnVxlanV24Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMvpnPmsiV24v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrOamLagMeasV24v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPV24v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMvpnP2mp24v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrIfIpTunnelV24v0Group"),
+        ("TIMETRA-VRTR-MIB", "vRtrStaticRtLeakDestGroup"),
+        ("TIMETRA-VRTR-MIB", "vRtrEvpnIflHostRouteGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrNotificationV24v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtr7xx0V24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxVRtr7xx0V25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 3, 1, 32)
+)
+tmnxVRtr7xx0V25v0Compliance.setObjects(
+      *(("TIMETRA-VRTR-MIB", "tmnxVRtrMvpnP2mp25v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrRedIfOverIpv6Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpEvpnGwIpV25v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfNatGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrMvpnGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIPV25v0Group"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpEvpnAnySecGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrBgpIpVpnAnySecGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrIfDHCPRelayFRGroup"),
+        ("TIMETRA-VRTR-MIB", "tmnxVRtrQosSinkExcessBWV25v0Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxVRtr7xx0V25v0Compliance.setStatus(
         "current"
     )
 
@@ -42248,6 +45965,7 @@ mibBuilder.exportSymbols(
        "TmnxInetAddrTypeWithMcast": TmnxInetAddrTypeWithMcast,
        "TmnxVrtrNeid": TmnxVrtrNeid,
        "VrtrMplsTunnelMode": VrtrMplsTunnelMode,
+       "VrtrIpTunnelOperState": VrtrIpTunnelOperState,
        "timetraVRtrMIBModule": timetraVRtrMIBModule,
        "tmnxVRtrConformance": tmnxVRtrConformance,
        "tmnxVRtrCompliances": tmnxVRtrCompliances,
@@ -42276,6 +45994,9 @@ mibBuilder.exportSymbols(
        "tmnxVRtr7xx0V20v0Compliance": tmnxVRtr7xx0V20v0Compliance,
        "tmnxVRtr7xx0V21v0Compliance": tmnxVRtr7xx0V21v0Compliance,
        "tmnxVRtr7xx0V22v0Compliance": tmnxVRtr7xx0V22v0Compliance,
+       "tmnxVRtr7xx0V23v0Compliance": tmnxVRtr7xx0V23v0Compliance,
+       "tmnxVRtr7xx0V24v0Compliance": tmnxVRtr7xx0V24v0Compliance,
+       "tmnxVRtr7xx0V25v0Compliance": tmnxVRtr7xx0V25v0Compliance,
        "tmnxVRtrGroups": tmnxVRtrGroups,
        "tmnxVRtrGlobalR2r1Group": tmnxVRtrGlobalR2r1Group,
        "tmnxVRtrIfSubscrAuthV3v0Group": tmnxVRtrIfSubscrAuthV3v0Group,
@@ -42548,6 +46269,55 @@ mibBuilder.exportSymbols(
        "tmnxVRtrDynEgLblLmtObj22Group": tmnxVRtrDynEgLblLmtObj22Group,
        "tmnxVRtrIfV22v0Group": tmnxVRtrIfV22v0Group,
        "tmnxVRtrObsoleteV22v0Group": tmnxVRtrObsoleteV22v0Group,
+       "tmnxVRtrBgpEvpnEviGroup": tmnxVRtrBgpEvpnEviGroup,
+       "tmnxVRtrIfExtParmsV22v0Group": tmnxVRtrIfExtParmsV22v0Group,
+       "tmnxVRtrIfDcpFpCountV22v0Group": tmnxVRtrIfDcpFpCountV22v0Group,
+       "vRtrSrV6PolicyGroup": vRtrSrV6PolicyGroup,
+       "vRtrBgpEvpnSrv6EviGroup": vRtrBgpEvpnSrv6EviGroup,
+       "vRtrBgpEvpnUneqalEcmpV22v0Group": vRtrBgpEvpnUneqalEcmpV22v0Group,
+       "tmnxVRtrIfQosV22v0Group": tmnxVRtrIfQosV22v0Group,
+       "tmnxvRtrEsaVideoRoutesGroup": tmnxvRtrEsaVideoRoutesGroup,
+       "tmnxVRtrNdRaRoutesGroup": tmnxVRtrNdRaRoutesGroup,
+       "tmnxVRtrNotificationV23v0Group": tmnxVRtrNotificationV23v0Group,
+       "tmnxVRtrNotifyObjsV23v0Group": tmnxVRtrNotifyObjsV23v0Group,
+       "tmnxVRtrSubDhcp4V23v0Group": tmnxVRtrSubDhcp4V23v0Group,
+       "tmnxVRtrObsoleteV23v0Group": tmnxVRtrObsoleteV23v0Group,
+       "tmnxVRtrV23Group": tmnxVRtrV23Group,
+       "tmnxVRtrBgpIpVpnV21Group": tmnxVRtrBgpIpVpnV21Group,
+       "tmnxVRtrNotificationV21v0Group": tmnxVRtrNotificationV21v0Group,
+       "tmnxVRtrNotifyObjsV21v0Group": tmnxVRtrNotifyObjsV21v0Group,
+       "tmnxVRtrV21Group": tmnxVRtrV21Group,
+       "tmnxVRtrBgpIpVpnAttrSetGroup": tmnxVRtrBgpIpVpnAttrSetGroup,
+       "tmnxVrtrBgpSrv6UqlEcmpV23v0Group": tmnxVrtrBgpSrv6UqlEcmpV23v0Group,
+       "tmnxVRtrSrMplsTTLPropagateGroup": tmnxVRtrSrMplsTTLPropagateGroup,
+       "tmnxVRtrBgpExpInactiveAllGroup": tmnxVRtrBgpExpInactiveAllGroup,
+       "tmnxVRtrStaticRtVprnCondRtGroup": tmnxVRtrStaticRtVprnCondRtGroup,
+       "tmnxVRtrBgpNhResGroup": tmnxVRtrBgpNhResGroup,
+       "tmnxVRtrEsmBcastGroup": tmnxVRtrEsmBcastGroup,
+       "tmnxVRtrUpaRouteGroup": tmnxVRtrUpaRouteGroup,
+       "tmnxVRtrSysMacAddrRangeGroup": tmnxVRtrSysMacAddrRangeGroup,
+       "tmnxVRtrSysCommonMacAddrGroup": tmnxVRtrSysCommonMacAddrGroup,
+       "tmnxVRtrIfQosV24v0Group": tmnxVRtrIfQosV24v0Group,
+       "vRtrVprnVxlanV24Group": vRtrVprnVxlanV24Group,
+       "tmnxVRtrMvpnPmsiV24v0Group": tmnxVRtrMvpnPmsiV24v0Group,
+       "tmnxVRtrOamLagMeasV24v0Group": tmnxVRtrOamLagMeasV24v0Group,
+       "tmnxVRtrIPV24v0Group": tmnxVRtrIPV24v0Group,
+       "tmnxVRtrMvpnP2mp24v0Group": tmnxVRtrMvpnP2mp24v0Group,
+       "vRtrIfIpTunnelV24v0Group": vRtrIfIpTunnelV24v0Group,
+       "vRtrStaticRtLeakDestGroup": vRtrStaticRtLeakDestGroup,
+       "vRtrEvpnIflHostRouteGroup": vRtrEvpnIflHostRouteGroup,
+       "tmnxVRtrNotificationV24v0Group": tmnxVRtrNotificationV24v0Group,
+       "tmnxVRtrNotifyObjsV24v0Group": tmnxVRtrNotifyObjsV24v0Group,
+       "tmnxVRtrMvpnP2mp25v0Group": tmnxVRtrMvpnP2mp25v0Group,
+       "tmnxVRtrRedIfOverIpv6Group": tmnxVRtrRedIfOverIpv6Group,
+       "tmnxVRtrBgpEvpnGwIpV25v0Group": tmnxVRtrBgpEvpnGwIpV25v0Group,
+       "tmnxVRtrIfNatGroup": tmnxVRtrIfNatGroup,
+       "tmnxVRtrMvpnGroup": tmnxVRtrMvpnGroup,
+       "tmnxVRtrIPV25v0Group": tmnxVRtrIPV25v0Group,
+       "tmnxVRtrBgpEvpnAnySecGroup": tmnxVRtrBgpEvpnAnySecGroup,
+       "tmnxVRtrBgpIpVpnAnySecGroup": tmnxVRtrBgpIpVpnAnySecGroup,
+       "tmnxVRtrIfDHCPRelayFRGroup": tmnxVRtrIfDHCPRelayFRGroup,
+       "tmnxVRtrQosSinkExcessBWV25v0Grp": tmnxVRtrQosSinkExcessBWV25v0Grp,
        "tmnxVRtrMobGatewayCompliances": tmnxVRtrMobGatewayCompliances,
        "tmnxVRtrMobGatewayGroups": tmnxVRtrMobGatewayGroups,
        "tmnxVRtrIpPoolGroup": tmnxVRtrIpPoolGroup,
@@ -43030,6 +46800,7 @@ mibBuilder.exportSymbols(
        "vRtrIfDHCPOSelClntMac": vRtrIfDHCPOSelClntMac,
        "vRtrIfDHCPOSelClntMacDiscoDly": vRtrIfDHCPOSelClntMacDiscoDly,
        "vRtrIfDHCPReleaseIncludeGiaddr": vRtrIfDHCPReleaseIncludeGiaddr,
+       "vRtrIfDHCPRelayForceRenewWoLease": vRtrIfDHCPRelayForceRenewWoLease,
        "vRtrIfDHCPRelayStatsTable": vRtrIfDHCPRelayStatsTable,
        "vRtrIfDHCPRelayStatsEntry": vRtrIfDHCPRelayStatsEntry,
        "vRtrIfDHCPRelayRxPkts": vRtrIfDHCPRelayRxPkts,
@@ -43098,6 +46869,9 @@ mibBuilder.exportSymbols(
        "vRtrNotifTruthValue": vRtrNotifTruthValue,
        "tmnxVRtrMaxNHRvplsARPEntries": tmnxVRtrMaxNHRvplsARPEntries,
        "vRtrNotifIgnorePortState": vRtrNotifIgnorePortState,
+       "vRtrNotifyFpNum": vRtrNotifyFpNum,
+       "vRtrNotifyBgpInstType": vRtrNotifyBgpInstType,
+       "vRtrNotifyBgpInstance": vRtrNotifyBgpInstance,
        "vRtrIfDHCPLeaseStateTable": vRtrIfDHCPLeaseStateTable,
        "vRtrIfDHCPLeaseStateEntry": vRtrIfDHCPLeaseStateEntry,
        "vRtrIfDHCPLseStateCiAddr": vRtrIfDHCPLseStateCiAddr,
@@ -43163,6 +46937,7 @@ mibBuilder.exportSymbols(
        "vRtrInetStaticRouteBackupNHType": vRtrInetStaticRouteBackupNHType,
        "vRtrInetStaticRouteBackupNHAddr": vRtrInetStaticRouteBackupNHAddr,
        "vRtrInetStaticRouteBackupStatus": vRtrInetStaticRouteBackupStatus,
+       "vRtrInetStaticRoutePfxLstRtrInst": vRtrInetStaticRoutePfxLstRtrInst,
        "vRtrInetStaticRouteIndexTable": vRtrInetStaticRouteIndexTable,
        "vRtrInetStaticRouteIndexEntry": vRtrInetStaticRouteIndexEntry,
        "vRtrInetStaticRouteAvailIndex": vRtrInetStaticRouteAvailIndex,
@@ -43247,6 +47022,7 @@ mibBuilder.exportSymbols(
        "vRtrInetCidrRouteBkupNHOwnInst": vRtrInetCidrRouteBkupNHOwnInst,
        "vRtrInetCidrRouteNHIsFec": vRtrInetCidrRouteNHIsFec,
        "vRtrInetCidrRouteNHFecPfxLen": vRtrInetCidrRouteNHFecPfxLen,
+       "vRtrInetCidrRouteEgrVni": vRtrInetCidrRouteEgrVni,
        "vRtrIcmp6Table": vRtrIcmp6Table,
        "vRtrIcmp6Entry": vRtrIcmp6Entry,
        "vRtrIcmp6InMsgs": vRtrIcmp6InMsgs,
@@ -43406,6 +47182,8 @@ mibBuilder.exportSymbols(
        "vRtrIfDHCP6ASelClntMacPref": vRtrIfDHCP6ASelClntMacPref,
        "vRtrIfDHCP6LseSplitAdminState": vRtrIfDHCP6LseSplitAdminState,
        "vRtrIfDHCP6LseSplitValidLifetime": vRtrIfDHCP6LseSplitValidLifetime,
+       "vRtrIfDHCP6AllowClntIdChng": vRtrIfDHCP6AllowClntIdChng,
+       "vRtrIfDHCP6RelayReconfigureWoLse": vRtrIfDHCP6RelayReconfigureWoLse,
        "vRtrIfGlobalIndexTable": vRtrIfGlobalIndexTable,
        "vRtrIfGlobalIndexEntry": vRtrIfGlobalIndexEntry,
        "vRtrIfGlobalIndexvRtrID": vRtrIfGlobalIndexvRtrID,
@@ -43526,6 +47304,8 @@ mibBuilder.exportSymbols(
        "vRtrFibStatV6BGPEvpnIffRoutes": vRtrFibStatV6BGPEvpnIffRoutes,
        "vRtrFibStatSrV6Routes": vRtrFibStatSrV6Routes,
        "vRtrFibStatIpVpnCurrUtilization": vRtrFibStatIpVpnCurrUtilization,
+       "vRtrFibStatBGPEvpnIflHostRoutes": vRtrFibStatBGPEvpnIflHostRoutes,
+       "vRtrFibStatV6BGPEvpnIflHostRts": vRtrFibStatV6BGPEvpnIflHostRts,
        "vRtrFibStatNextHopTable": vRtrFibStatNextHopTable,
        "vRtrFibStatNextHopEntry": vRtrFibStatNextHopEntry,
        "vRtrFibStatNextHopIPActive": vRtrFibStatNextHopIPActive,
@@ -43566,6 +47346,7 @@ mibBuilder.exportSymbols(
        "vRtrInetAllCidrRtBkupNHOwnInst": vRtrInetAllCidrRtBkupNHOwnInst,
        "vRtrInetAllCidrRouteNHIsFec": vRtrInetAllCidrRouteNHIsFec,
        "vRtrInetAllCidrRouteNHFecPfxLen": vRtrInetAllCidrRouteNHFecPfxLen,
+       "vRtrInetAllCidrRouteEgrVni": vRtrInetAllCidrRouteEgrVni,
        "vRtrIfStatsTable": vRtrIfStatsTable,
        "vRtrIfStatsEntry": vRtrIfStatsEntry,
        "vRtrIfuRPFCheckFailPkts": vRtrIfuRPFCheckFailPkts,
@@ -43774,6 +47555,7 @@ mibBuilder.exportSymbols(
        "vRtrMvpnSpmsiSRPolicy": vRtrMvpnSpmsiSRPolicy,
        "vRtrBgpIpVpnMplsAdminState": vRtrBgpIpVpnMplsAdminState,
        "vRtrBgpIpVpnMplsDynEgrLblLmt": vRtrBgpIpVpnMplsDynEgrLblLmt,
+       "vRtrBgpIpVpnMplsOperState": vRtrBgpIpVpnMplsOperState,
        "vRtrIfExtTable": vRtrIfExtTable,
        "vRtrIfExtEntry": vRtrIfExtEntry,
        "vRtrIfLsrIpLoadBalancing": vRtrIfLsrIpLoadBalancing,
@@ -44065,6 +47847,26 @@ mibBuilder.exportSymbols(
        "vRtrStatTotalSrV6IsisTunnels": vRtrStatTotalSrV6IsisTunnels,
        "vRtrStatSrV6ActiveRoutes": vRtrStatSrV6ActiveRoutes,
        "vRtrStatSrV6TotalRoutes": vRtrStatSrV6TotalRoutes,
+       "vRtrStatActiveSrV6PolicyTunnels": vRtrStatActiveSrV6PolicyTunnels,
+       "vRtrStatTotalSrV6PolicyTunnels": vRtrStatTotalSrV6PolicyTunnels,
+       "vRtrStatActiveSrV6PolicyRoutes": vRtrStatActiveSrV6PolicyRoutes,
+       "vRtrStatTotalSrV6PolicyRoutes": vRtrStatTotalSrV6PolicyRoutes,
+       "vRtrStatActiveV4VideoRoutes": vRtrStatActiveV4VideoRoutes,
+       "vRtrStatTotalV4VideoRoutes": vRtrStatTotalV4VideoRoutes,
+       "vRtrStatActiveV6VideoRoutes": vRtrStatActiveV6VideoRoutes,
+       "vRtrStatTotalV6VideoRoutes": vRtrStatTotalV6VideoRoutes,
+       "vRtrMcastIpv4ActiveVideoRoutes": vRtrMcastIpv4ActiveVideoRoutes,
+       "vRtrMcastIpv4TotalVideoRoutes": vRtrMcastIpv4TotalVideoRoutes,
+       "vRtrMcastIpv6ActiveVideoRoutes": vRtrMcastIpv6ActiveVideoRoutes,
+       "vRtrMcastIpv6TotalVideoRoutes": vRtrMcastIpv6TotalVideoRoutes,
+       "vRtrStatV6NdRaRoutes": vRtrStatV6NdRaRoutes,
+       "vRtrStatV6NdRaActiveRoutes": vRtrStatV6NdRaActiveRoutes,
+       "vRtrStatActiveV4EsmBcastRoutes": vRtrStatActiveV4EsmBcastRoutes,
+       "vRtrStatTotalV4EsmBcastRoutes": vRtrStatTotalV4EsmBcastRoutes,
+       "vRtrBgpEvpnIflHostRoutes": vRtrBgpEvpnIflHostRoutes,
+       "vRtrBgpEvpnIflHostActRoutes": vRtrBgpEvpnIflHostActRoutes,
+       "vRtrV6BgpEvpnIflHostRoutes": vRtrV6BgpEvpnIflHostRoutes,
+       "vRtrV6BgpEvpnIflHostActRoutes": vRtrV6BgpEvpnIflHostActRoutes,
        "vRtrVrfPolicyTable": vRtrVrfPolicyTable,
        "vRtrVrfPolicyEntry": vRtrVrfPolicyEntry,
        "vRtrVrfImportPolicy1": vRtrVrfImportPolicy1,
@@ -44144,6 +47946,11 @@ mibBuilder.exportSymbols(
        "vRtrIfQosEgrAggRateCIRLmt": vRtrIfQosEgrAggRateCIRLmt,
        "vRtrIfQosEgrOperVlanQosPlcy": vRtrIfQosEgrOperVlanQosPlcy,
        "vRtrIfQosEgrVlanPlcyPortRedirect": vRtrIfQosEgrVlanPlcyPortRedirect,
+       "vRtrIfQosEgrAggRatePIRPercent": vRtrIfQosEgrAggRatePIRPercent,
+       "vRtrIfQosEgrAggRateCIRPercent": vRtrIfQosEgrAggRateCIRPercent,
+       "vRtrIfQosEgrAggRateType": vRtrIfQosEgrAggRateType,
+       "vRtrIfQosEgrAggRateBurstLmt": vRtrIfQosEgrAggRateBurstLmt,
+       "vRtrIfQosEgrSinkExcessBW": vRtrIfQosEgrSinkExcessBW,
        "vRtrDnsTableLastCh": vRtrDnsTableLastCh,
        "vRtrDnsTable": vRtrDnsTable,
        "vRtrDnsEntry": vRtrDnsEntry,
@@ -44190,6 +47997,8 @@ mibBuilder.exportSymbols(
        "vRtrIfDcpFpStaticExcdCountLo": vRtrIfDcpFpStaticExcdCountLo,
        "vRtrIfDcpFpStaticHoldDown": vRtrIfDcpFpStaticHoldDown,
        "vRtrIfDcpFpStaticDetectionTime": vRtrIfDcpFpStaticDetectionTime,
+       "vRtrIfDcpFpStaticTotalExcdCount": vRtrIfDcpFpStaticTotalExcdCount,
+       "vRtrIfDcpFpStaticExtCnfrmStCount": vRtrIfDcpFpStaticExtCnfrmStCount,
        "vRtrIfDcpFpDynStatTable": vRtrIfDcpFpDynStatTable,
        "vRtrIfDcpFpDynStatEntry": vRtrIfDcpFpDynStatEntry,
        "vRtrIfDcpFpProtocol": vRtrIfDcpFpProtocol,
@@ -44200,6 +48009,8 @@ mibBuilder.exportSymbols(
        "vRtrIfDcpFpDynHoldDown": vRtrIfDcpFpDynHoldDown,
        "vRtrIfDcpFpDynDetectionTime": vRtrIfDcpFpDynDetectionTime,
        "vRtrIfDcpFpDynAllocated": vRtrIfDcpFpDynAllocated,
+       "vRtrIfDcpFpDynTotalExcdCount": vRtrIfDcpFpDynTotalExcdCount,
+       "vRtrIfDcpFpDynExtCnfrmStateCount": vRtrIfDcpFpDynExtCnfrmStateCount,
        "vRtrIfDcpFpLocMonStatTable": vRtrIfDcpFpLocMonStatTable,
        "vRtrIfDcpFpLocMonStatEntry": vRtrIfDcpFpLocMonStatEntry,
        "vRtrIfDcpFpLocMonPlcrName": vRtrIfDcpFpLocMonPlcrName,
@@ -44208,6 +48019,8 @@ mibBuilder.exportSymbols(
        "vRtrIfDcpFpLocMonExcdCountHi": vRtrIfDcpFpLocMonExcdCountHi,
        "vRtrIfDcpFpLocMonExcdCountLo": vRtrIfDcpFpLocMonExcdCountLo,
        "vRtrIfDcpFpLocMonAllDynAlloc": vRtrIfDcpFpLocMonAllDynAlloc,
+       "vRtrIfDcpFpLocMonTotalExcdCount": vRtrIfDcpFpLocMonTotalExcdCount,
+       "vRtrIfDcpFpLocMonExtCnfrmStCount": vRtrIfDcpFpLocMonExtCnfrmStCount,
        "vRtrIfDHCP6ProxyDuidTableLastCh": vRtrIfDHCP6ProxyDuidTableLastCh,
        "vRtrIfDHCP6ProxyDuidTable": vRtrIfDHCP6ProxyDuidTable,
        "vRtrIfDHCP6ProxyDuidEntry": vRtrIfDHCP6ProxyDuidEntry,
@@ -44234,6 +48047,7 @@ mibBuilder.exportSymbols(
        "vRtrIpv6RtrAdvertTable": vRtrIpv6RtrAdvertTable,
        "vRtrIpv6RtrAdvertEntry": vRtrIpv6RtrAdvertEntry,
        "vRtrIpv6RtrAdvertCreationOrigin": vRtrIpv6RtrAdvertCreationOrigin,
+       "vRtrIpv6RtrAdvertNdRtrPreference": vRtrIpv6RtrAdvertNdRtrPreference,
        "vRtrIfBfdSessExtTable": vRtrIfBfdSessExtTable,
        "vRtrIfBfdSessExtEntry": vRtrIfBfdSessExtEntry,
        "vRtrIfBfdSessExtLinkType": vRtrIfBfdSessExtLinkType,
@@ -44357,6 +48171,8 @@ mibBuilder.exportSymbols(
        "vRtrTTLPropLabelRouteLocal": vRtrTTLPropLabelRouteLocal,
        "vRtrTTLPropLabelRouteTransit": vRtrTTLPropLabelRouteTransit,
        "vRtrTTLPropLsrLabelRoute": vRtrTTLPropLsrLabelRoute,
+       "vRtrTTLPropSrMplsLocal": vRtrTTLPropSrMplsLocal,
+       "vRtrTTLPropSrMplsTransit": vRtrTTLPropSrMplsTransit,
        "vRtrSvcTTLPropTblLstChgd": vRtrSvcTTLPropTblLstChgd,
        "vRtrSvcTTLPropTable": vRtrSvcTTLPropTable,
        "vRtrSvcTTLPropEntry": vRtrSvcTTLPropEntry,
@@ -44524,6 +48340,13 @@ mibBuilder.exportSymbols(
        "vRtrIfCollectStats": vRtrIfCollectStats,
        "vRtrIfUnidirectionalLinkDelay": vRtrIfUnidirectionalLinkDelay,
        "vRtrIfIngrDestinationClassLookup": vRtrIfIngrDestinationClassLookup,
+       "vRtrIfIcmpTtlExpiredMatchingAddr": vRtrIfIcmpTtlExpiredMatchingAddr,
+       "vRtrIfExtRefOcSubIfPresence": vRtrIfExtRefOcSubIfPresence,
+       "vRtrIfExtRefOcSubIf": vRtrIfExtRefOcSubIf,
+       "vRtrIfMtuProfile": vRtrIfMtuProfile,
+       "vRtrIfOperMtuProfile": vRtrIfOperMtuProfile,
+       "vRtrIfAllocMtuProfile": vRtrIfAllocMtuProfile,
+       "vRtrIfIpv6GreTermination": vRtrIfIpv6GreTermination,
        "vRtrAdminTagsTable": vRtrAdminTagsTable,
        "vRtrAdminTagsEntry": vRtrAdminTagsEntry,
        "vRtrAdminTag": vRtrAdminTag,
@@ -44622,6 +48445,35 @@ mibBuilder.exportSymbols(
        "vRtrLspBfdTailEndTxInterval": vRtrLspBfdTailEndTxInterval,
        "vRtrLspBfdTailEndRxInterval": vRtrLspBfdTailEndRxInterval,
        "vRtrLspBfdTailEndMultiplier": vRtrLspBfdTailEndMultiplier,
+       "vRtrIfIpTunnelTableLastChanged": vRtrIfIpTunnelTableLastChanged,
+       "vRtrIfIpTunnelTable": vRtrIfIpTunnelTable,
+       "vRtrIfIpTunnelEntry": vRtrIfIpTunnelEntry,
+       "vRtrIfIpTunnelName": vRtrIfIpTunnelName,
+       "vRtrIfIpTunnelRowStatus": vRtrIfIpTunnelRowStatus,
+       "vRtrIfIpTunnelLastChanged": vRtrIfIpTunnelLastChanged,
+       "vRtrIfIpTunnelGreHeader": vRtrIfIpTunnelGreHeader,
+       "vRtrIfIpTunnelDescription": vRtrIfIpTunnelDescription,
+       "vRtrIfIpTunnelLclIpAddrType": vRtrIfIpTunnelLclIpAddrType,
+       "vRtrIfIpTunnelLclIpAddr": vRtrIfIpTunnelLclIpAddr,
+       "vRtrIfIpTunnelRemIpAddrType": vRtrIfIpTunnelRemIpAddrType,
+       "vRtrIfIpTunnelRemIpAddr": vRtrIfIpTunnelRemIpAddr,
+       "vRtrIfIpTunnelOperRemIpAddrType": vRtrIfIpTunnelOperRemIpAddrType,
+       "vRtrIfIpTunnelOperRemIpAddr": vRtrIfIpTunnelOperRemIpAddr,
+       "vRtrIfIpTunnelDlvryRtrId": vRtrIfIpTunnelDlvryRtrId,
+       "vRtrIfIpTunnelAdminState": vRtrIfIpTunnelAdminState,
+       "vRtrIfIpTunnelOperState": vRtrIfIpTunnelOperState,
+       "vRtrIfIpTunnelOperFlags": vRtrIfIpTunnelOperFlags,
+       "vRtrIfIpTunnelOperChanged": vRtrIfIpTunnelOperChanged,
+       "vRtrIfIpTunnelIngStatsEnabled": vRtrIfIpTunnelIngStatsEnabled,
+       "vRtrIfIpTunnelEgrStatsEnabled": vRtrIfIpTunnelEgrStatsEnabled,
+       "vRtrIfIpTunnelEncapsulatedMtu": vRtrIfIpTunnelEncapsulatedMtu,
+       "vRtrIfNatTableLastChanged": vRtrIfNatTableLastChanged,
+       "vRtrIfNatTable": vRtrIfNatTable,
+       "vRtrIfNatEntry": vRtrIfNatEntry,
+       "vRtrIfNatRowStatus": vRtrIfNatRowStatus,
+       "vRtrIfNatLastChanged": vRtrIfNatLastChanged,
+       "vRtrIfNatCpmPolicy": vRtrIfNatCpmPolicy,
+       "vRtrIfNatCpmSpfPolicy": vRtrIfNatCpmSpfPolicy,
        "tmnxVRtrDCObjs": tmnxVRtrDCObjs,
        "tmnxVrtrSys": tmnxVrtrSys,
        "tmnxVrtrSysEnforceUniqueIfIndex": tmnxVrtrSysEnforceUniqueIfIndex,
@@ -44633,6 +48485,11 @@ mibBuilder.exportSymbols(
        "tmnxVrtrIPEHPerform": tmnxVrtrIPEHPerform,
        "tmnxVrtrIPAllowCPUFragmentation": tmnxVrtrIPAllowCPUFragmentation,
        "tmnxVrtrIPAllowICMPRedirect": tmnxVrtrIPAllowICMPRedirect,
+       "tmnxVrtrIPStartMacAddress": tmnxVrtrIPStartMacAddress,
+       "tmnxVrtrIPEndMacAddress": tmnxVrtrIPEndMacAddress,
+       "tmnxVrtrIPCommonMacAddress": tmnxVrtrIPCommonMacAddress,
+       "tmnxVrtrIPBufferUnresolvedPkts": tmnxVrtrIPBufferUnresolvedPkts,
+       "tmnxVrtrSysuRPFIgnoreDefault": tmnxVrtrSysuRPFIgnoreDefault,
        "tmnxVrtrAutoconfiguration": tmnxVrtrAutoconfiguration,
        "tmnxVrtrDhcpClient": tmnxVrtrDhcpClient,
        "vRtrIfDhcpClTable": vRtrIfDhcpClTable,
@@ -44868,6 +48725,15 @@ mibBuilder.exportSymbols(
        "vRtrBgpEvpnVrfTarget": vRtrBgpEvpnVrfTarget,
        "vRtrBgpEvpnDomainId": vRtrBgpEvpnDomainId,
        "vRtrBgpEvpnDynEgrLblLmt": vRtrBgpEvpnDynEgrLblLmt,
+       "vRtrBgpEvpnEvi": vRtrBgpEvpnEvi,
+       "vRtrBgpEvpnAdLinkBw": vRtrBgpEvpnAdLinkBw,
+       "vRtrBgpEvpnAdLinkBwWeight": vRtrBgpEvpnAdLinkBwWeight,
+       "vRtrBgpEvpnAdLinkBwMaxWeight": vRtrBgpEvpnAdLinkBwMaxWeight,
+       "vRtrBgpEvpnWeightedEcmp": vRtrBgpEvpnWeightedEcmp,
+       "vRtrBgpEvpnOperState": vRtrBgpEvpnOperState,
+       "vRtrBgpEvpnGwIpAdvertise": vRtrBgpEvpnGwIpAdvertise,
+       "vRtrBgpEvpnGwIpResolve": vRtrBgpEvpnGwIpResolve,
+       "vRtrBgpEvpnAnySecEncGrp": vRtrBgpEvpnAnySecEncGrp,
        "vRtrBgpEvpnMplsTblLastCh": vRtrBgpEvpnMplsTblLastCh,
        "vRtrBgpEvpnMplsTable": vRtrBgpEvpnMplsTable,
        "vRtrBgpEvpnMplsEntry": vRtrBgpEvpnMplsEntry,
@@ -44893,6 +48759,7 @@ mibBuilder.exportSymbols(
        "vRtrBgpEvpnBndTnlRibApi": vRtrBgpEvpnBndTnlRibApi,
        "vRtrBgpEvpnAutoBndTnlSrOspf3": vRtrBgpEvpnAutoBndTnlSrOspf3,
        "vRtrBgpEvpnAutoBndTnlFlexAlgoFb": vRtrBgpEvpnAutoBndTnlFlexAlgoFb,
+       "vRtrBgpEvpnAutoBndTnlUntagRt": vRtrBgpEvpnAutoBndTnlUntagRt,
        "vRtrBgpEvpnVrfPolicyTblLastCh": vRtrBgpEvpnVrfPolicyTblLastCh,
        "vRtrBgpEvpnVrfPolicyTable": vRtrBgpEvpnVrfPolicyTable,
        "vRtrBgpEvpnVrfPolicyEntry": vRtrBgpEvpnVrfPolicyEntry,
@@ -44928,6 +48795,66 @@ mibBuilder.exportSymbols(
        "vRtrBgpEvpnVrfPolicyExp14": vRtrBgpEvpnVrfPolicyExp14,
        "vRtrBgpEvpnVrfPolicyExp15": vRtrBgpEvpnVrfPolicyExp15,
        "vRtrBgpEvpnVrfPolicyCreateOrig": vRtrBgpEvpnVrfPolicyCreateOrig,
+       "vRtrBgpEvpnVxTblLastCh": vRtrBgpEvpnVxTblLastCh,
+       "vRtrBgpEvpnVxTable": vRtrBgpEvpnVxTable,
+       "vRtrBgpEvpnVxEntry": vRtrBgpEvpnVxEntry,
+       "vRtrBgpEvpnVxBgpInstance": vRtrBgpEvpnVxBgpInstance,
+       "vRtrBgpEvpnVxRowStatus": vRtrBgpEvpnVxRowStatus,
+       "vRtrBgpEvpnVxLastChanged": vRtrBgpEvpnVxLastChanged,
+       "vRtrBgpEvpnVxAdminState": vRtrBgpEvpnVxAdminState,
+       "vRtrBgpEvpnVxDefRtTag": vRtrBgpEvpnVxDefRtTag,
+       "vRtrBgpEvpnVxVrfRD": vRtrBgpEvpnVxVrfRD,
+       "vRtrBgpEvpnVxExportRteTarget": vRtrBgpEvpnVxExportRteTarget,
+       "vRtrBgpEvpnVxImportRteTarget": vRtrBgpEvpnVxImportRteTarget,
+       "vRtrBgpEvpnVxAutoRD": vRtrBgpEvpnVxAutoRD,
+       "vRtrBgpEvpnVxOperRD": vRtrBgpEvpnVxOperRD,
+       "vRtrBgpEvpnVxOperRDType": vRtrBgpEvpnVxOperRDType,
+       "vRtrBgpEvpnVxVrfTarget": vRtrBgpEvpnVxVrfTarget,
+       "vRtrBgpEvpnVxDomainId": vRtrBgpEvpnVxDomainId,
+       "vRtrBgpEvpnVxEvi": vRtrBgpEvpnVxEvi,
+       "vRtrBgpEvpnVxAdLinkBw": vRtrBgpEvpnVxAdLinkBw,
+       "vRtrBgpEvpnVxAdLinkBwWeight": vRtrBgpEvpnVxAdLinkBwWeight,
+       "vRtrBgpEvpnVxAdLinkBwMaxWeight": vRtrBgpEvpnVxAdLinkBwMaxWeight,
+       "vRtrBgpEvpnVxWeightedEcmp": vRtrBgpEvpnVxWeightedEcmp,
+       "vRtrBgpEvpnVxOperState": vRtrBgpEvpnVxOperState,
+       "vRtrBgpEvpnVxInstance": vRtrBgpEvpnVxInstance,
+       "vRtrBgpEvpnVxGwIpAdvertise": vRtrBgpEvpnVxGwIpAdvertise,
+       "vRtrBgpEvpnVxGwIpResolve": vRtrBgpEvpnVxGwIpResolve,
+       "vRtrBgpEvpnVxVrfPlcyTblLastCh": vRtrBgpEvpnVxVrfPlcyTblLastCh,
+       "vRtrBgpEvpnVxVrfPolicyTable": vRtrBgpEvpnVxVrfPolicyTable,
+       "vRtrBgpEvpnVxVrfPolicyEntry": vRtrBgpEvpnVxVrfPolicyEntry,
+       "vRtrBgpEvpnVxVrfPolicyLastChg": vRtrBgpEvpnVxVrfPolicyLastChg,
+       "vRtrBgpEvpnVxVrfPolicyImp1": vRtrBgpEvpnVxVrfPolicyImp1,
+       "vRtrBgpEvpnVxVrfPolicyImp2": vRtrBgpEvpnVxVrfPolicyImp2,
+       "vRtrBgpEvpnVxVrfPolicyImp3": vRtrBgpEvpnVxVrfPolicyImp3,
+       "vRtrBgpEvpnVxVrfPolicyImp4": vRtrBgpEvpnVxVrfPolicyImp4,
+       "vRtrBgpEvpnVxVrfPolicyImp5": vRtrBgpEvpnVxVrfPolicyImp5,
+       "vRtrBgpEvpnVxVrfPolicyImp6": vRtrBgpEvpnVxVrfPolicyImp6,
+       "vRtrBgpEvpnVxVrfPolicyImp7": vRtrBgpEvpnVxVrfPolicyImp7,
+       "vRtrBgpEvpnVxVrfPolicyImp8": vRtrBgpEvpnVxVrfPolicyImp8,
+       "vRtrBgpEvpnVxVrfPolicyImp9": vRtrBgpEvpnVxVrfPolicyImp9,
+       "vRtrBgpEvpnVxVrfPolicyImp10": vRtrBgpEvpnVxVrfPolicyImp10,
+       "vRtrBgpEvpnVxVrfPolicyImp11": vRtrBgpEvpnVxVrfPolicyImp11,
+       "vRtrBgpEvpnVxVrfPolicyImp12": vRtrBgpEvpnVxVrfPolicyImp12,
+       "vRtrBgpEvpnVxVrfPolicyImp13": vRtrBgpEvpnVxVrfPolicyImp13,
+       "vRtrBgpEvpnVxVrfPolicyImp14": vRtrBgpEvpnVxVrfPolicyImp14,
+       "vRtrBgpEvpnVxVrfPolicyImp15": vRtrBgpEvpnVxVrfPolicyImp15,
+       "vRtrBgpEvpnVxVrfPolicyExp1": vRtrBgpEvpnVxVrfPolicyExp1,
+       "vRtrBgpEvpnVxVrfPolicyExp2": vRtrBgpEvpnVxVrfPolicyExp2,
+       "vRtrBgpEvpnVxVrfPolicyExp3": vRtrBgpEvpnVxVrfPolicyExp3,
+       "vRtrBgpEvpnVxVrfPolicyExp4": vRtrBgpEvpnVxVrfPolicyExp4,
+       "vRtrBgpEvpnVxVrfPolicyExp5": vRtrBgpEvpnVxVrfPolicyExp5,
+       "vRtrBgpEvpnVxVrfPolicyExp6": vRtrBgpEvpnVxVrfPolicyExp6,
+       "vRtrBgpEvpnVxVrfPolicyExp7": vRtrBgpEvpnVxVrfPolicyExp7,
+       "vRtrBgpEvpnVxVrfPolicyExp8": vRtrBgpEvpnVxVrfPolicyExp8,
+       "vRtrBgpEvpnVxVrfPolicyExp9": vRtrBgpEvpnVxVrfPolicyExp9,
+       "vRtrBgpEvpnVxVrfPolicyExp10": vRtrBgpEvpnVxVrfPolicyExp10,
+       "vRtrBgpEvpnVxVrfPolicyExp11": vRtrBgpEvpnVxVrfPolicyExp11,
+       "vRtrBgpEvpnVxVrfPolicyExp12": vRtrBgpEvpnVxVrfPolicyExp12,
+       "vRtrBgpEvpnVxVrfPolicyExp13": vRtrBgpEvpnVxVrfPolicyExp13,
+       "vRtrBgpEvpnVxVrfPolicyExp14": vRtrBgpEvpnVxVrfPolicyExp14,
+       "vRtrBgpEvpnVxVrfPolicyExp15": vRtrBgpEvpnVxVrfPolicyExp15,
+       "vRtrBgpEvpnVxVrfPolicyCreateOrig": vRtrBgpEvpnVxVrfPolicyCreateOrig,
        "vRtrIfEthLoopbackObjs": vRtrIfEthLoopbackObjs,
        "vRtrIfEthLoopbackTblLastCh": vRtrIfEthLoopbackTblLastCh,
        "vRtrIfEthLoopbackTable": vRtrIfEthLoopbackTable,
@@ -44974,6 +48901,14 @@ mibBuilder.exportSymbols(
        "vRtrBgpSrv6SrcAddr": vRtrBgpSrv6SrcAddr,
        "vRtrBgpSrv6DefRtTag": vRtrBgpSrv6DefRtTag,
        "vRtrBgpSrv6DomainId": vRtrBgpSrv6DomainId,
+       "vRtrBgpSrv6Evi": vRtrBgpSrv6Evi,
+       "vRtrBgpSrv6Resolution": vRtrBgpSrv6Resolution,
+       "vRtrBgpSrv6OperState": vRtrBgpSrv6OperState,
+       "vRtrBgpSrv6AdLinkBw": vRtrBgpSrv6AdLinkBw,
+       "vRtrBgpSrv6AdLinkBwWeight": vRtrBgpSrv6AdLinkBwWeight,
+       "vRtrBgpSrv6AdLinkBwMaxWeight": vRtrBgpSrv6AdLinkBwMaxWeight,
+       "vRtrBgpSrv6WeightedEcmp": vRtrBgpSrv6WeightedEcmp,
+       "vRtrBgpSrv6UpaTriggerNextHop": vRtrBgpSrv6UpaTriggerNextHop,
        "vRtrBgpSrv6VrfPolicyTblLastCh": vRtrBgpSrv6VrfPolicyTblLastCh,
        "vRtrBgpSrv6VrfPolicyTable": vRtrBgpSrv6VrfPolicyTable,
        "vRtrBgpSrv6VrfPolicyEntry": vRtrBgpSrv6VrfPolicyEntry,
@@ -45026,12 +48961,48 @@ mibBuilder.exportSymbols(
        "vRtrIfLnkDlyTwampIpv6DstAddr": vRtrIfLnkDlyTwampIpv6DstAddr,
        "vRtrIfLnkDlyTwampIpv6SrcAddrType": vRtrIfLnkDlyTwampIpv6SrcAddrType,
        "vRtrIfLnkDlyTwampIpv6SrcAddr": vRtrIfLnkDlyTwampIpv6SrcAddr,
+       "vRtrIfLinkDelayLagMeasTemplName": vRtrIfLinkDelayLagMeasTemplName,
        "vRtrDPathAttrTable": vRtrDPathAttrTable,
        "vRtrDPathAttrEntry": vRtrDPathAttrEntry,
        "vRtrBgpIpVpnMplsDomainId": vRtrBgpIpVpnMplsDomainId,
        "vRtrLocalRoutesDomainId": vRtrLocalRoutesDomainId,
        "vRtrDpathLengthIgnore": vRtrDpathLengthIgnore,
        "vRtrDPathAttrLastChanged": vRtrDPathAttrLastChanged,
+       "vRtrSubDhcp4Table": vRtrSubDhcp4Table,
+       "vRtrSubDhcp4Entry": vRtrSubDhcp4Entry,
+       "vRtrSubDhcp4LastChanged": vRtrSubDhcp4LastChanged,
+       "vRtrSubDhcp4TransparentForward": vRtrSubDhcp4TransparentForward,
+       "vRtrSubDhcp4TranspFwdClntPkts": vRtrSubDhcp4TranspFwdClntPkts,
+       "vRtrSubDhcp4TranspFwdServPkts": vRtrSubDhcp4TranspFwdServPkts,
+       "vRtrSubDhcp4TranspFwdOtherPkts": vRtrSubDhcp4TranspFwdOtherPkts,
+       "vRtrConfExt2Table": vRtrConfExt2Table,
+       "vRtrConfExt2Entry": vRtrConfExt2Entry,
+       "vRtrAllowBgpToIgpExport": vRtrAllowBgpToIgpExport,
+       "vRtrBgpIpVpnAttrSetImport": vRtrBgpIpVpnAttrSetImport,
+       "vRtrBgpIpVpnAttrSetExport": vRtrBgpIpVpnAttrSetExport,
+       "vRtrBgpExportInactiveBgpEnhanced": vRtrBgpExportInactiveBgpEnhanced,
+       "vRtrMvpnWldCrdSpmsiSuppressIpmsi": vRtrMvpnWldCrdSpmsiSuppressIpmsi,
+       "vRtrMvpnIpmsiP2mpPolicySrv6": vRtrMvpnIpmsiP2mpPolicySrv6,
+       "vRtrMvpnSpmsiP2mpPolicySrv6": vRtrMvpnSpmsiP2mpPolicySrv6,
+       "vRtrMvpnServiceReservedLabel": vRtrMvpnServiceReservedLabel,
+       "vRtrMvpnBierPtaLabelInMsb": vRtrMvpnBierPtaLabelInMsb,
+       "vRtrBgpIpVpnAnySecEncGrp": vRtrBgpIpVpnAnySecEncGrp,
+       "vRtrInetCidrUpaRouteTable": vRtrInetCidrUpaRouteTable,
+       "vRtrInetCidrUpaRouteEntry": vRtrInetCidrUpaRouteEntry,
+       "vRtrInetCidrUpaRouteType": vRtrInetCidrUpaRouteType,
+       "vRtrInetCidrUpaRoutePfx": vRtrInetCidrUpaRoutePfx,
+       "vRtrInetCidrUpaRoutePfxLen": vRtrInetCidrUpaRoutePfxLen,
+       "vRtrInetCidrUpaRoutePfxIndex": vRtrInetCidrUpaRoutePfxIndex,
+       "vRtrInetCidrUpaRouteAge": vRtrInetCidrUpaRouteAge,
+       "vRtrInetCidrUpaRouteProto": vRtrInetCidrUpaRouteProto,
+       "vRtrInetCidrUpaRouteProtoInst": vRtrInetCidrUpaRouteProtoInst,
+       "vRtrInetCidrUpaRoutePreference": vRtrInetCidrUpaRoutePreference,
+       "vRtrInetCidrUpaRouteMetric": vRtrInetCidrUpaRouteMetric,
+       "vRtrInetStaticRtLeakDestTblLstCh": vRtrInetStaticRtLeakDestTblLstCh,
+       "vRtrInetStaticRouteLeakDestTable": vRtrInetStaticRouteLeakDestTable,
+       "vRtrInetStaticRouteLeakDestEntry": vRtrInetStaticRouteLeakDestEntry,
+       "vRtrInetStaticRouteLeakVRtrID": vRtrInetStaticRouteLeakVRtrID,
+       "vRtrInetStaticRtLeakDestRowStat": vRtrInetStaticRtLeakDestRowStat,
        "tmnxVRtrNotifyPrefix": tmnxVRtrNotifyPrefix,
        "tmnxVRtrNotifications": tmnxVRtrNotifications,
        "tmnxVRtrMidRouteTCA": tmnxVRtrMidRouteTCA,
@@ -45131,5 +49102,8 @@ mibBuilder.exportSymbols(
        "vRtrIfEthLoopbackStarted": vRtrIfEthLoopbackStarted,
        "vRtrIfEthLoopbackStopped": vRtrIfEthLoopbackStopped,
        "tmnxVRtrBfdExtNoFreeTxIntrvlSlot": tmnxVRtrBfdExtNoFreeTxIntrvlSlot,
-       "tmnxVRtrFibVPNOccupancyThreshold": tmnxVRtrFibVPNOccupancyThreshold}
+       "tmnxVRtrFibVPNOccupancyThreshold": tmnxVRtrFibVPNOccupancyThreshold,
+       "tmnxVRtrBfdMultiHopFpMismatch": tmnxVRtrBfdMultiHopFpMismatch,
+       "vRtrBgpInstanceError": vRtrBgpInstanceError,
+       "vrtrIfIpTunnelOperStateChange": vrtrIfIpTunnelOperStateChange}
 )

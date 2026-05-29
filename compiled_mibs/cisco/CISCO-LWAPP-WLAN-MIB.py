@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-LWAPP-WLAN-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:54 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -133,7 +130,12 @@ ciscoLwappWlanMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoLwappWlanMIB.setRevisions(
-        ("2018-07-05 00:00",
+        ("2020-04-28 00:00",
+         "2020-04-01 00:00",
+         "2020-03-31 00:00",
+         "2019-04-09 00:00",
+         "2018-09-03 00:00",
+         "2018-07-05 00:00",
          "2018-03-07 00:00",
          "2017-07-22 00:00",
          "2016-12-08 00:00",
@@ -681,13 +683,15 @@ class _CLWlanWifiDirectPolicyStatus_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("disable", 1),
           ("allow", 2),
-          ("notAllow", 3))
+          ("notAllow", 3),
+          ("xconnectNotAllow", 4))
     )
 
 
@@ -1087,6 +1091,70 @@ if mibBuilder.loadTexts:
     cLWlan11vOpRoamDisassocTimer.setUnits("Target Beacon Transmission Times")
 
 
+class _CLWlan11kAssistedRoamingEnable_Type(TruthValue):
+    """Custom type cLWlan11kAssistedRoamingEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11kAssistedRoamingEnable_Type.__name__ = "TruthValue"
+_CLWlan11kAssistedRoamingEnable_Object = MibTableColumn
+cLWlan11kAssistedRoamingEnable = _CLWlan11kAssistedRoamingEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 84),
+    _CLWlan11kAssistedRoamingEnable_Type()
+)
+cLWlan11kAssistedRoamingEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLWlan11kAssistedRoamingEnable.setStatus("current")
+
+
+class _CLWlan11kNeighborListEnable_Type(TruthValue):
+    """Custom type cLWlan11kNeighborListEnable based on TruthValue"""
+    defaultValue = 1
+
+
+_CLWlan11kNeighborListEnable_Type.__name__ = "TruthValue"
+_CLWlan11kNeighborListEnable_Object = MibTableColumn
+cLWlan11kNeighborListEnable = _CLWlan11kNeighborListEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 85),
+    _CLWlan11kNeighborListEnable_Type()
+)
+cLWlan11kNeighborListEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLWlan11kNeighborListEnable.setStatus("current")
+
+
+class _CLWlan11kDualbandNeigListEnable_Type(TruthValue):
+    """Custom type cLWlan11kDualbandNeigListEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11kDualbandNeigListEnable_Type.__name__ = "TruthValue"
+_CLWlan11kDualbandNeigListEnable_Object = MibTableColumn
+cLWlan11kDualbandNeigListEnable = _CLWlan11kDualbandNeigListEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 86),
+    _CLWlan11kDualbandNeigListEnable_Type()
+)
+cLWlan11kDualbandNeigListEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLWlan11kDualbandNeigListEnable.setStatus("current")
+
+
+class _CLWlan11vDMSEnable_Type(TruthValue):
+    """Custom type cLWlan11vDMSEnable based on TruthValue"""
+    defaultValue = 1
+
+
+_CLWlan11vDMSEnable_Type.__name__ = "TruthValue"
+_CLWlan11vDMSEnable_Object = MibTableColumn
+cLWlan11vDMSEnable = _CLWlan11vDMSEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 87),
+    _CLWlan11vDMSEnable_Type()
+)
+cLWlan11vDMSEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLWlan11vDMSEnable.setStatus("current")
+
+
 class _CLWlan11vBssTransEnable_Type(TruthValue):
     """Custom type cLWlan11vBssTransEnable based on TruthValue"""
     defaultValue = 2
@@ -1101,6 +1169,108 @@ cLWlan11vBssTransEnable = _CLWlan11vBssTransEnable_Object(
 cLWlan11vBssTransEnable.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     cLWlan11vBssTransEnable.setStatus("current")
+
+
+class _CLWlanEapProfileName_Type(SnmpAdminString):
+    """Custom type cLWlanEapProfileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 64),
+    )
+
+
+_CLWlanEapProfileName_Type.__name__ = "SnmpAdminString"
+_CLWlanEapProfileName_Object = MibTableColumn
+cLWlanEapProfileName = _CLWlanEapProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 96),
+    _CLWlanEapProfileName_Type()
+)
+cLWlanEapProfileName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLWlanEapProfileName.setStatus("current")
+
+
+class _CLWlanSetEapProfileName_Type(TruthValue):
+    """Custom type cLWlanSetEapProfileName based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlanSetEapProfileName_Type.__name__ = "TruthValue"
+_CLWlanSetEapProfileName_Object = MibTableColumn
+cLWlanSetEapProfileName = _CLWlanSetEapProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 97),
+    _CLWlanSetEapProfileName_Type()
+)
+cLWlanSetEapProfileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlanSetEapProfileName.setStatus("current")
+
+
+class _CLWlanMaxClientsAllowedPerAP_Type(Unsigned32):
+    """Custom type cLWlanMaxClientsAllowedPerAP based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 400),
+    )
+
+
+_CLWlanMaxClientsAllowedPerAP_Type.__name__ = "Unsigned32"
+_CLWlanMaxClientsAllowedPerAP_Object = MibTableColumn
+cLWlanMaxClientsAllowedPerAP = _CLWlanMaxClientsAllowedPerAP_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 98),
+    _CLWlanMaxClientsAllowedPerAP_Type()
+)
+cLWlanMaxClientsAllowedPerAP.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLWlanMaxClientsAllowedPerAP.setStatus("current")
+
+
+class _CLWlanMdnsMode_Type(Integer32):
+    """Custom type cLWlanMdnsMode based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("bridge", 0),
+          ("drop", 1),
+          ("gateway", 2))
+    )
+
+
+_CLWlanMdnsMode_Type.__name__ = "Integer32"
+_CLWlanMdnsMode_Object = MibTableColumn
+cLWlanMdnsMode = _CLWlanMdnsMode_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 99),
+    _CLWlanMdnsMode_Type()
+)
+cLWlanMdnsMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlanMdnsMode.setStatus("current")
+
+
+class _CLWlanOpportunisticKeyCaching_Type(TruthValue):
+    """Custom type cLWlanOpportunisticKeyCaching based on TruthValue"""
+    defaultValue = 1
+
+
+_CLWlanOpportunisticKeyCaching_Type.__name__ = "TruthValue"
+_CLWlanOpportunisticKeyCaching_Object = MibTableColumn
+cLWlanOpportunisticKeyCaching = _CLWlanOpportunisticKeyCaching_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 1, 1, 100),
+    _CLWlanOpportunisticKeyCaching_Type()
+)
+cLWlanOpportunisticKeyCaching.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlanOpportunisticKeyCaching.setStatus("current")
 _CLWlanConfigClientTable_Object = MibTable
 cLWlanConfigClientTable = _CLWlanConfigClientTable_Object(
     (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 2)
@@ -1652,6 +1822,63 @@ cLWlanIosQosClientDownStreamProfileName = _CLWlanIosQosClientDownStreamProfileNa
 cLWlanIosQosClientDownStreamProfileName.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     cLWlanIosQosClientDownStreamProfileName.setStatus("current")
+
+
+class _CLWlanIosAuthorizationMethodListName_Type(SnmpAdminString):
+    """Custom type cLWlanIosAuthorizationMethodListName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 64),
+    )
+
+
+_CLWlanIosAuthorizationMethodListName_Type.__name__ = "SnmpAdminString"
+_CLWlanIosAuthorizationMethodListName_Object = MibTableColumn
+cLWlanIosAuthorizationMethodListName = _CLWlanIosAuthorizationMethodListName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 4, 1, 15),
+    _CLWlanIosAuthorizationMethodListName_Type()
+)
+cLWlanIosAuthorizationMethodListName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlanIosAuthorizationMethodListName.setStatus("current")
+
+
+class _CLWlanIosWebAuthAuthorizationMethodListName_Type(SnmpAdminString):
+    """Custom type cLWlanIosWebAuthAuthorizationMethodListName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 64),
+    )
+
+
+_CLWlanIosWebAuthAuthorizationMethodListName_Type.__name__ = "SnmpAdminString"
+_CLWlanIosWebAuthAuthorizationMethodListName_Object = MibTableColumn
+cLWlanIosWebAuthAuthorizationMethodListName = _CLWlanIosWebAuthAuthorizationMethodListName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 4, 1, 16),
+    _CLWlanIosWebAuthAuthorizationMethodListName_Type()
+)
+cLWlanIosWebAuthAuthorizationMethodListName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlanIosWebAuthAuthorizationMethodListName.setStatus("current")
+
+
+class _CLWlanIosMacOverrideMethodListName_Type(SnmpAdminString):
+    """Custom type cLWlanIosMacOverrideMethodListName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 64),
+    )
+
+
+_CLWlanIosMacOverrideMethodListName_Type.__name__ = "SnmpAdminString"
+_CLWlanIosMacOverrideMethodListName_Object = MibTableColumn
+cLWlanIosMacOverrideMethodListName = _CLWlanIosMacOverrideMethodListName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 4, 1, 17),
+    _CLWlanIosMacOverrideMethodListName_Type()
+)
+cLWlanIosMacOverrideMethodListName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlanIosMacOverrideMethodListName.setStatus("current")
 _CLWlanFlexibleNetflowTable_Object = MibTable
 cLWlanFlexibleNetflowTable = _CLWlanFlexibleNetflowTable_Object(
     (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 5)
@@ -1722,6 +1949,168 @@ cLWlanFlexibleNetflowRowStatus = _CLWlanFlexibleNetflowRowStatus_Object(
 cLWlanFlexibleNetflowRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     cLWlanFlexibleNetflowRowStatus.setStatus("current")
+_CLWlan11axConfigTable_Object = MibTable
+cLWlan11axConfigTable = _CLWlan11axConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9)
+)
+if mibBuilder.loadTexts:
+    cLWlan11axConfigTable.setStatus("current")
+_CLWlan11axConfigEntry_Object = MibTableRow
+cLWlan11axConfigEntry = _CLWlan11axConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1)
+)
+cLWlan11axConfigEntry.setIndexNames(
+    (0, "CISCO-LWAPP-WLAN-MIB", "cLWlanIndex"),
+)
+if mibBuilder.loadTexts:
+    cLWlan11axConfigEntry.setStatus("current")
+
+
+class _CLWlan11axMuMimoUplinkEnable_Type(TruthValue):
+    """Custom type cLWlan11axMuMimoUplinkEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axMuMimoUplinkEnable_Type.__name__ = "TruthValue"
+_CLWlan11axMuMimoUplinkEnable_Object = MibTableColumn
+cLWlan11axMuMimoUplinkEnable = _CLWlan11axMuMimoUplinkEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 1),
+    _CLWlan11axMuMimoUplinkEnable_Type()
+)
+cLWlan11axMuMimoUplinkEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axMuMimoUplinkEnable.setStatus("current")
+
+
+class _CLWlan11axMuMimoDownlinkEnable_Type(TruthValue):
+    """Custom type cLWlan11axMuMimoDownlinkEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axMuMimoDownlinkEnable_Type.__name__ = "TruthValue"
+_CLWlan11axMuMimoDownlinkEnable_Object = MibTableColumn
+cLWlan11axMuMimoDownlinkEnable = _CLWlan11axMuMimoDownlinkEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 2),
+    _CLWlan11axMuMimoDownlinkEnable_Type()
+)
+cLWlan11axMuMimoDownlinkEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axMuMimoDownlinkEnable.setStatus("current")
+
+
+class _CLWlan11axOfdmaUplinkEnable_Type(TruthValue):
+    """Custom type cLWlan11axOfdmaUplinkEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axOfdmaUplinkEnable_Type.__name__ = "TruthValue"
+_CLWlan11axOfdmaUplinkEnable_Object = MibTableColumn
+cLWlan11axOfdmaUplinkEnable = _CLWlan11axOfdmaUplinkEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 3),
+    _CLWlan11axOfdmaUplinkEnable_Type()
+)
+cLWlan11axOfdmaUplinkEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axOfdmaUplinkEnable.setStatus("current")
+
+
+class _CLWlan11axOfdmaDownlinkEnable_Type(TruthValue):
+    """Custom type cLWlan11axOfdmaDownlinkEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axOfdmaDownlinkEnable_Type.__name__ = "TruthValue"
+_CLWlan11axOfdmaDownlinkEnable_Object = MibTableColumn
+cLWlan11axOfdmaDownlinkEnable = _CLWlan11axOfdmaDownlinkEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 4),
+    _CLWlan11axOfdmaDownlinkEnable_Type()
+)
+cLWlan11axOfdmaDownlinkEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axOfdmaDownlinkEnable.setStatus("current")
+
+
+class _CLWlan11axTargetWaketimeEnable_Type(TruthValue):
+    """Custom type cLWlan11axTargetWaketimeEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axTargetWaketimeEnable_Type.__name__ = "TruthValue"
+_CLWlan11axTargetWaketimeEnable_Object = MibTableColumn
+cLWlan11axTargetWaketimeEnable = _CLWlan11axTargetWaketimeEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 5),
+    _CLWlan11axTargetWaketimeEnable_Type()
+)
+cLWlan11axTargetWaketimeEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axTargetWaketimeEnable.setStatus("current")
+
+
+class _CLWlan11axBssColorModeEnable_Type(TruthValue):
+    """Custom type cLWlan11axBssColorModeEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axBssColorModeEnable_Type.__name__ = "TruthValue"
+_CLWlan11axBssColorModeEnable_Object = MibTableColumn
+cLWlan11axBssColorModeEnable = _CLWlan11axBssColorModeEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 6),
+    _CLWlan11axBssColorModeEnable_Type()
+)
+cLWlan11axBssColorModeEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axBssColorModeEnable.setStatus("current")
+
+
+class _CLWlan11axBssColorCode_Type(Unsigned32):
+    """Custom type cLWlan11axBssColorCode based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_CLWlan11axBssColorCode_Type.__name__ = "Unsigned32"
+_CLWlan11axBssColorCode_Object = MibTableColumn
+cLWlan11axBssColorCode = _CLWlan11axBssColorCode_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 7),
+    _CLWlan11axBssColorCode_Type()
+)
+cLWlan11axBssColorCode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axBssColorCode.setStatus("current")
+
+
+class _CLWlan11axBssPartialColorEnable_Type(TruthValue):
+    """Custom type cLWlan11axBssPartialColorEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLWlan11axBssPartialColorEnable_Type.__name__ = "TruthValue"
+_CLWlan11axBssPartialColorEnable_Object = MibTableColumn
+cLWlan11axBssPartialColorEnable = _CLWlan11axBssPartialColorEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 8),
+    _CLWlan11axBssPartialColorEnable_Type()
+)
+cLWlan11axBssPartialColorEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axBssPartialColorEnable.setStatus("current")
+
+
+class _CLWlan11axTwtBroadcastSupport_Type(TruthValue):
+    """Custom type cLWlan11axTwtBroadcastSupport based on TruthValue"""
+    defaultValue = 1
+
+
+_CLWlan11axTwtBroadcastSupport_Type.__name__ = "TruthValue"
+_CLWlan11axTwtBroadcastSupport_Object = MibTableColumn
+cLWlan11axTwtBroadcastSupport = _CLWlan11axTwtBroadcastSupport_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 1, 9, 1, 9),
+    _CLWlan11axTwtBroadcastSupport_Type()
+)
+cLWlan11axTwtBroadcastSupport.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLWlan11axTwtBroadcastSupport.setStatus("current")
 _CiscoLwappAPGroupsVlanConfig_ObjectIdentity = ObjectIdentity
 ciscoLwappAPGroupsVlanConfig = _CiscoLwappAPGroupsVlanConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 2)
@@ -4158,7 +4547,7 @@ cLAPGroupsPakRssiNtpIpAddressType = _CLAPGroupsPakRssiNtpIpAddressType_Object(
 )
 cLAPGroupsPakRssiNtpIpAddressType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    cLAPGroupsPakRssiNtpIpAddressType.setStatus("current")
+    cLAPGroupsPakRssiNtpIpAddressType.setStatus("deprecated")
 _CLAPGroupsPakRssiNtpAddress_Type = InetAddress
 _CLAPGroupsPakRssiNtpAddress_Object = MibTableColumn
 cLAPGroupsPakRssiNtpAddress = _CLAPGroupsPakRssiNtpAddress_Object(
@@ -4167,7 +4556,7 @@ cLAPGroupsPakRssiNtpAddress = _CLAPGroupsPakRssiNtpAddress_Object(
 )
 cLAPGroupsPakRssiNtpAddress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    cLAPGroupsPakRssiNtpAddress.setStatus("current")
+    cLAPGroupsPakRssiNtpAddress.setStatus("deprecated")
 _CiscoLwappAPGroupsPortConfig_ObjectIdentity = ObjectIdentity
 ciscoLwappAPGroupsPortConfig = _CiscoLwappAPGroupsPortConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 9)
@@ -4345,6 +4734,286 @@ cLAPGroupsExtModuleRlanName = _CLAPGroupsExtModuleRlanName_Object(
 cLAPGroupsExtModuleRlanName.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     cLAPGroupsExtModuleRlanName.setStatus("current")
+_CiscoLwappAPGroupNtpConfig_ObjectIdentity = ObjectIdentity
+ciscoLwappAPGroupNtpConfig = _CiscoLwappAPGroupNtpConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10)
+)
+_CLwappAPGroupNtpConfigTable_Object = MibTable
+cLwappAPGroupNtpConfigTable = _CLwappAPGroupNtpConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1)
+)
+if mibBuilder.loadTexts:
+    cLwappAPGroupNtpConfigTable.setStatus("current")
+_CLAPGroupNtpConfigEntry_Object = MibTableRow
+cLAPGroupNtpConfigEntry = _CLAPGroupNtpConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1)
+)
+cLAPGroupNtpConfigEntry.setIndexNames(
+    (0, "CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpIndex"),
+)
+if mibBuilder.loadTexts:
+    cLAPGroupNtpConfigEntry.setStatus("current")
+_CLAPGroupNtpIndex_Type = Unsigned32
+_CLAPGroupNtpIndex_Object = MibTableColumn
+cLAPGroupNtpIndex = _CLAPGroupNtpIndex_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1, 1),
+    _CLAPGroupNtpIndex_Type()
+)
+cLAPGroupNtpIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpIndex.setStatus("current")
+_CLAPGroupNtpAddressType_Type = InetAddressType
+_CLAPGroupNtpAddressType_Object = MibTableColumn
+cLAPGroupNtpAddressType = _CLAPGroupNtpAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1, 2),
+    _CLAPGroupNtpAddressType_Type()
+)
+cLAPGroupNtpAddressType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAddressType.setStatus("current")
+_CLAPGroupNtpAddress_Type = InetAddress
+_CLAPGroupNtpAddress_Object = MibTableColumn
+cLAPGroupNtpAddress = _CLAPGroupNtpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1, 3),
+    _CLAPGroupNtpAddress_Type()
+)
+cLAPGroupNtpAddress.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAddress.setStatus("current")
+
+
+class _CLAPGroupNtpAuthKeyIndex_Type(Unsigned32):
+    """Custom type cLAPGroupNtpAuthKeyIndex based on Unsigned32"""
+    defaultValue = 0
+
+
+_CLAPGroupNtpAuthKeyIndex_Type.__name__ = "Unsigned32"
+_CLAPGroupNtpAuthKeyIndex_Object = MibTableColumn
+cLAPGroupNtpAuthKeyIndex = _CLAPGroupNtpAuthKeyIndex_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1, 4),
+    _CLAPGroupNtpAuthKeyIndex_Type()
+)
+cLAPGroupNtpAuthKeyIndex.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyIndex.setStatus("current")
+
+
+class _CLAPGroupNtpAuthEnable_Type(TruthValue):
+    """Custom type cLAPGroupNtpAuthEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLAPGroupNtpAuthEnable_Type.__name__ = "TruthValue"
+_CLAPGroupNtpAuthEnable_Object = MibTableColumn
+cLAPGroupNtpAuthEnable = _CLAPGroupNtpAuthEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1, 5),
+    _CLAPGroupNtpAuthEnable_Type()
+)
+cLAPGroupNtpAuthEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthEnable.setStatus("current")
+_CLAPGroupNtpRowStatus_Type = RowStatus
+_CLAPGroupNtpRowStatus_Object = MibTableColumn
+cLAPGroupNtpRowStatus = _CLAPGroupNtpRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 1, 1, 6),
+    _CLAPGroupNtpRowStatus_Type()
+)
+cLAPGroupNtpRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpRowStatus.setStatus("current")
+_CLAPGroupNtpAuthKeyConfigTable_Object = MibTable
+cLAPGroupNtpAuthKeyConfigTable = _CLAPGroupNtpAuthKeyConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2)
+)
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyConfigTable.setStatus("current")
+_CLAPGroupNtpAuthKeyConfigEntry_Object = MibTableRow
+cLAPGroupNtpAuthKeyConfigEntry = _CLAPGroupNtpAuthKeyConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2, 1)
+)
+cLAPGroupNtpAuthKeyConfigEntry.setIndexNames(
+    (0, "CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyListIndex"),
+)
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyConfigEntry.setStatus("current")
+_CLAPGroupNtpAuthKeyListIndex_Type = Unsigned32
+_CLAPGroupNtpAuthKeyListIndex_Object = MibTableColumn
+cLAPGroupNtpAuthKeyListIndex = _CLAPGroupNtpAuthKeyListIndex_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2, 1, 1),
+    _CLAPGroupNtpAuthKeyListIndex_Type()
+)
+cLAPGroupNtpAuthKeyListIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyListIndex.setStatus("current")
+
+
+class _CLAPGroupNtpAuthKeyFormat_Type(Integer32):
+    """Custom type cLAPGroupNtpAuthKeyFormat based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ascii", 1),
+          ("hex", 2))
+    )
+
+
+_CLAPGroupNtpAuthKeyFormat_Type.__name__ = "Integer32"
+_CLAPGroupNtpAuthKeyFormat_Object = MibTableColumn
+cLAPGroupNtpAuthKeyFormat = _CLAPGroupNtpAuthKeyFormat_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2, 1, 2),
+    _CLAPGroupNtpAuthKeyFormat_Type()
+)
+cLAPGroupNtpAuthKeyFormat.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyFormat.setStatus("current")
+_CLAPGroupNtpAuthKeyString_Type = OctetString
+_CLAPGroupNtpAuthKeyString_Object = MibTableColumn
+cLAPGroupNtpAuthKeyString = _CLAPGroupNtpAuthKeyString_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2, 1, 3),
+    _CLAPGroupNtpAuthKeyString_Type()
+)
+cLAPGroupNtpAuthKeyString.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyString.setStatus("current")
+
+
+class _CLAPGroupNtpAuthKeyType_Type(Integer32):
+    """Custom type cLAPGroupNtpAuthKeyType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("md5", 1),
+          ("sha1", 2))
+    )
+
+
+_CLAPGroupNtpAuthKeyType_Type.__name__ = "Integer32"
+_CLAPGroupNtpAuthKeyType_Object = MibTableColumn
+cLAPGroupNtpAuthKeyType = _CLAPGroupNtpAuthKeyType_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2, 1, 4),
+    _CLAPGroupNtpAuthKeyType_Type()
+)
+cLAPGroupNtpAuthKeyType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyType.setStatus("current")
+_CLAPGroupNtpAuthKeyRowStatus_Type = RowStatus
+_CLAPGroupNtpAuthKeyRowStatus_Object = MibTableColumn
+cLAPGroupNtpAuthKeyRowStatus = _CLAPGroupNtpAuthKeyRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 2, 1, 5),
+    _CLAPGroupNtpAuthKeyRowStatus_Type()
+)
+cLAPGroupNtpAuthKeyRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpAuthKeyRowStatus.setStatus("current")
+_CLAPGroupNtpServerConfigTable_Object = MibTable
+cLAPGroupNtpServerConfigTable = _CLAPGroupNtpServerConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 3)
+)
+if mibBuilder.loadTexts:
+    cLAPGroupNtpServerConfigTable.setStatus("current")
+_CLAPGroupNtpServerConfigEntry_Object = MibTableRow
+cLAPGroupNtpServerConfigEntry = _CLAPGroupNtpServerConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 3, 1)
+)
+cLAPGroupNtpServerConfigEntry.setIndexNames(
+    (0, "CISCO-LWAPP-WLAN-MIB", "cLAPGroupName"),
+    (0, "CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpServerIndex"),
+)
+if mibBuilder.loadTexts:
+    cLAPGroupNtpServerConfigEntry.setStatus("current")
+_CLAPGroupNtpServerIndex_Type = Unsigned32
+_CLAPGroupNtpServerIndex_Object = MibTableColumn
+cLAPGroupNtpServerIndex = _CLAPGroupNtpServerIndex_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 3, 1, 1),
+    _CLAPGroupNtpServerIndex_Type()
+)
+cLAPGroupNtpServerIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpServerIndex.setStatus("current")
+
+
+class _CLAPGroupNtpServerAuthEnable_Type(TruthValue):
+    """Custom type cLAPGroupNtpServerAuthEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLAPGroupNtpServerAuthEnable_Type.__name__ = "TruthValue"
+_CLAPGroupNtpServerAuthEnable_Object = MibTableColumn
+cLAPGroupNtpServerAuthEnable = _CLAPGroupNtpServerAuthEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 3, 1, 2),
+    _CLAPGroupNtpServerAuthEnable_Type()
+)
+cLAPGroupNtpServerAuthEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpServerAuthEnable.setStatus("current")
+_CLAPGroupNtpServerRowStatus_Type = RowStatus
+_CLAPGroupNtpServerRowStatus_Object = MibTableColumn
+cLAPGroupNtpServerRowStatus = _CLAPGroupNtpServerRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 3, 1, 3),
+    _CLAPGroupNtpServerRowStatus_Type()
+)
+cLAPGroupNtpServerRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupNtpServerRowStatus.setStatus("current")
+_CLAPGroupGlobalNtpServerConfigTable_Object = MibTable
+cLAPGroupGlobalNtpServerConfigTable = _CLAPGroupGlobalNtpServerConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 4)
+)
+if mibBuilder.loadTexts:
+    cLAPGroupGlobalNtpServerConfigTable.setStatus("current")
+_CLAPGroupGlobalNtpServerConfigEntry_Object = MibTableRow
+cLAPGroupGlobalNtpServerConfigEntry = _CLAPGroupGlobalNtpServerConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 4, 1)
+)
+cLAPGroupGlobalNtpServerConfigEntry.setIndexNames(
+    (0, "CISCO-LWAPP-WLAN-MIB", "cLAPGroupGlobalNtpServerIndex"),
+)
+if mibBuilder.loadTexts:
+    cLAPGroupGlobalNtpServerConfigEntry.setStatus("current")
+_CLAPGroupGlobalNtpServerIndex_Type = Unsigned32
+_CLAPGroupGlobalNtpServerIndex_Object = MibTableColumn
+cLAPGroupGlobalNtpServerIndex = _CLAPGroupGlobalNtpServerIndex_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 4, 1, 1),
+    _CLAPGroupGlobalNtpServerIndex_Type()
+)
+cLAPGroupGlobalNtpServerIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cLAPGroupGlobalNtpServerIndex.setStatus("current")
+
+
+class _CLAPGroupGlobalNtpServerAuth_Type(TruthValue):
+    """Custom type cLAPGroupGlobalNtpServerAuth based on TruthValue"""
+    defaultValue = 2
+
+
+_CLAPGroupGlobalNtpServerAuth_Type.__name__ = "TruthValue"
+_CLAPGroupGlobalNtpServerAuth_Object = MibTableColumn
+cLAPGroupGlobalNtpServerAuth = _CLAPGroupGlobalNtpServerAuth_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 4, 1, 2),
+    _CLAPGroupGlobalNtpServerAuth_Type()
+)
+cLAPGroupGlobalNtpServerAuth.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupGlobalNtpServerAuth.setStatus("current")
+_CLAPGroupGlobalNtpServerRowStatus_Type = RowStatus
+_CLAPGroupGlobalNtpServerRowStatus_Object = MibTableColumn
+cLAPGroupGlobalNtpServerRowStatus = _CLAPGroupGlobalNtpServerRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 1, 10, 4, 1, 3),
+    _CLAPGroupGlobalNtpServerRowStatus_Type()
+)
+cLAPGroupGlobalNtpServerRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLAPGroupGlobalNtpServerRowStatus.setStatus("current")
 _CiscoLwappWlanMIBConform_ObjectIdentity = ObjectIdentity
 ciscoLwappWlanMIBConform = _CiscoLwappWlanMIBConform_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 9, 512, 2)
@@ -4462,7 +5131,12 @@ ciscoLwappWlanConfigGroupSup3.setObjects(
         ("CISCO-LWAPP-WLAN-MIB", "cLWlanScanDeferTime"),
         ("CISCO-LWAPP-WLAN-MIB", "cLWlanLanSubType"),
         ("CISCO-LWAPP-WLAN-MIB", "cLWlanWebAuthOnMacFilterFailureEnabled"),
-        ("CISCO-LWAPP-WLAN-MIB", "cLWlanStaticIpTunnelingEnabled"))
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanStaticIpTunnelingEnabled"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanEapProfileName"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanSetEapProfileName"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanMaxClientsAllowedPerAP"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanMdnsMode"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanOpportunisticKeyCaching"))
 )
 if mibBuilder.loadTexts:
     ciscoLwappWlanConfigGroupSup3.setStatus("current")
@@ -4540,7 +5214,10 @@ ciscoLwappWlanIosConfigGroup.setObjects(
         ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosScanDeferPriority"),
         ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosWebAuthParameterMapName"),
         ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosQosClientUpStreamProfileName"),
-        ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosQosClientDownStreamProfileName"))
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosQosClientDownStreamProfileName"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosAuthorizationMethodListName"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosWebAuthAuthorizationMethodListName"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlanIosMacOverrideMethodListName"))
 )
 if mibBuilder.loadTexts:
     ciscoLwappWlanIosConfigGroup.setStatus("current")
@@ -4757,7 +5434,8 @@ ciscoLwappWlan11vConfigGroup.setObjects(
       *(("CISCO-LWAPP-WLAN-MIB", "cLWlan11vBssTransEnable"),
         ("CISCO-LWAPP-WLAN-MIB", "cLWlan11vDisassocImmiEnable"),
         ("CISCO-LWAPP-WLAN-MIB", "cLWlan11vDisassocTimer"),
-        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11vOpRoamDisassocTimer"))
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11vOpRoamDisassocTimer"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11vDMSEnable"))
 )
 if mibBuilder.loadTexts:
     ciscoLwappWlan11vConfigGroup.setStatus("current")
@@ -4811,6 +5489,59 @@ ciscoLwappPolicyConfigGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     ciscoLwappPolicyConfigGroup.setStatus("current")
+
+ciscoLwappWlan11kConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 2, 2, 30)
+)
+ciscoLwappWlan11kConfigGroup.setObjects(
+      *(("CISCO-LWAPP-WLAN-MIB", "cLWlan11kAssistedRoamingEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11kNeighborListEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11kDualbandNeigListEnable"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappWlan11kConfigGroup.setStatus("current")
+
+ciscoLwappWlan11axConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 2, 2, 31)
+)
+ciscoLwappWlan11axConfigGroup.setObjects(
+      *(("CISCO-LWAPP-WLAN-MIB", "cLWlan11axMuMimoUplinkEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axMuMimoDownlinkEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axOfdmaUplinkEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axOfdmaDownlinkEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axTargetWaketimeEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axBssColorModeEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axBssColorCode"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axBssPartialColorEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLWlan11axTwtBroadcastSupport"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappWlan11axConfigGroup.setStatus("current")
+
+ciscoLwappApGroupNtpServerGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 2, 2, 32)
+)
+ciscoLwappApGroupNtpServerGroup.setObjects(
+      *(("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpIndex"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAddress"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAddressType"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyIndex"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpRowStatus"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyFormat"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyListIndex"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyString"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyType"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpAuthKeyRowStatus"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupGlobalNtpServerAuth"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupGlobalNtpServerRowStatus"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupGlobalNtpServerIndex"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpServerAuthEnable"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpServerRowStatus"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupNtpServerIndex"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappApGroupNtpServerGroup.setStatus("current")
 
 
 # Notification objects
@@ -5093,6 +5824,80 @@ ciscoLwappWlanMIBComplianceRev10.setObjects(
 )
 if mibBuilder.loadTexts:
     ciscoLwappWlanMIBComplianceRev10.setStatus(
+        "deprecated"
+    )
+
+ciscoLwappWlanMIBComplianceRev11 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 2, 1, 12)
+)
+ciscoLwappWlanMIBComplianceRev11.setObjects(
+      *(("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigClientGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigClientGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup3"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11uConfigGroupsup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanServiceAdvertisementConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanHotSpot2ConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanIosConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanQosConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11uConfigGroupsup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanHotSpot2ConfigGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappAPGroupsVlanConfigGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupsVenueConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupsMultipleVenueGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigClientGroupSup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigFlexibleNetflowGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup5"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappAPGroupsVlanConfigGroupSup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup6"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup7"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup8"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11vConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappApGroupConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappPolicyConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11kConfigGroup"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappWlanMIBComplianceRev11.setStatus(
+        "deprecated"
+    )
+
+ciscoLwappWlanMIBComplianceRev12 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 9, 9, 512, 2, 1, 13)
+)
+ciscoLwappWlanMIBComplianceRev12.setObjects(
+      *(("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigClientGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigClientGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup3"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11uConfigGroupsup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanServiceAdvertisementConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanHotSpot2ConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanIosConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanQosConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11uConfigGroupsup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanHotSpot2ConfigGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappAPGroupsVlanConfigGroupSup1"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupsVenueConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "cLAPGroupsMultipleVenueGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigClientGroupSup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigFlexibleNetflowGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup5"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappAPGroupsVlanConfigGroupSup2"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup6"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup7"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlanConfigGroupSup8"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11vConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappApGroupConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappPolicyConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11kConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappWlan11axConfigGroup"),
+        ("CISCO-LWAPP-WLAN-MIB", "ciscoLwappApGroupNtpServerGroup"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappWlanMIBComplianceRev12.setStatus(
         "current"
     )
 
@@ -5157,7 +5962,16 @@ mibBuilder.exportSymbols(
        "cLWlan11vDisassocImmiEnable": cLWlan11vDisassocImmiEnable,
        "cLWlan11vDisassocTimer": cLWlan11vDisassocTimer,
        "cLWlan11vOpRoamDisassocTimer": cLWlan11vOpRoamDisassocTimer,
+       "cLWlan11kAssistedRoamingEnable": cLWlan11kAssistedRoamingEnable,
+       "cLWlan11kNeighborListEnable": cLWlan11kNeighborListEnable,
+       "cLWlan11kDualbandNeigListEnable": cLWlan11kDualbandNeigListEnable,
+       "cLWlan11vDMSEnable": cLWlan11vDMSEnable,
        "cLWlan11vBssTransEnable": cLWlan11vBssTransEnable,
+       "cLWlanEapProfileName": cLWlanEapProfileName,
+       "cLWlanSetEapProfileName": cLWlanSetEapProfileName,
+       "cLWlanMaxClientsAllowedPerAP": cLWlanMaxClientsAllowedPerAP,
+       "cLWlanMdnsMode": cLWlanMdnsMode,
+       "cLWlanOpportunisticKeyCaching": cLWlanOpportunisticKeyCaching,
        "cLWlanConfigClientTable": cLWlanConfigClientTable,
        "cLWlanConfigClientEntry": cLWlanConfigClientEntry,
        "cLWlanClientAclName": cLWlanClientAclName,
@@ -5205,11 +6019,25 @@ mibBuilder.exportSymbols(
        "cLWlanIosWebAuthParameterMapName": cLWlanIosWebAuthParameterMapName,
        "cLWlanIosQosClientUpStreamProfileName": cLWlanIosQosClientUpStreamProfileName,
        "cLWlanIosQosClientDownStreamProfileName": cLWlanIosQosClientDownStreamProfileName,
+       "cLWlanIosAuthorizationMethodListName": cLWlanIosAuthorizationMethodListName,
+       "cLWlanIosWebAuthAuthorizationMethodListName": cLWlanIosWebAuthAuthorizationMethodListName,
+       "cLWlanIosMacOverrideMethodListName": cLWlanIosMacOverrideMethodListName,
        "cLWlanFlexibleNetflowTable": cLWlanFlexibleNetflowTable,
        "cLWlanFlexibleNetflowEntry": cLWlanFlexibleNetflowEntry,
        "cLWlanFlexibleNetflowPolicyTypeIndex": cLWlanFlexibleNetflowPolicyTypeIndex,
        "cLWlanFlexibleNetflowMonitorName": cLWlanFlexibleNetflowMonitorName,
        "cLWlanFlexibleNetflowRowStatus": cLWlanFlexibleNetflowRowStatus,
+       "cLWlan11axConfigTable": cLWlan11axConfigTable,
+       "cLWlan11axConfigEntry": cLWlan11axConfigEntry,
+       "cLWlan11axMuMimoUplinkEnable": cLWlan11axMuMimoUplinkEnable,
+       "cLWlan11axMuMimoDownlinkEnable": cLWlan11axMuMimoDownlinkEnable,
+       "cLWlan11axOfdmaUplinkEnable": cLWlan11axOfdmaUplinkEnable,
+       "cLWlan11axOfdmaDownlinkEnable": cLWlan11axOfdmaDownlinkEnable,
+       "cLWlan11axTargetWaketimeEnable": cLWlan11axTargetWaketimeEnable,
+       "cLWlan11axBssColorModeEnable": cLWlan11axBssColorModeEnable,
+       "cLWlan11axBssColorCode": cLWlan11axBssColorCode,
+       "cLWlan11axBssPartialColorEnable": cLWlan11axBssPartialColorEnable,
+       "cLWlan11axTwtBroadcastSupport": cLWlan11axTwtBroadcastSupport,
        "ciscoLwappAPGroupsVlanConfig": ciscoLwappAPGroupsVlanConfig,
        "cLAPGroupsVlanConfigTable": cLAPGroupsVlanConfigTable,
        "cLAPGroupsVlanConfigEntry": cLAPGroupsVlanConfigEntry,
@@ -5383,6 +6211,32 @@ mibBuilder.exportSymbols(
        "cLAPGroupsExtModuleConfigEntry": cLAPGroupsExtModuleConfigEntry,
        "cLAPGroupsExtModuleStatus": cLAPGroupsExtModuleStatus,
        "cLAPGroupsExtModuleRlanName": cLAPGroupsExtModuleRlanName,
+       "ciscoLwappAPGroupNtpConfig": ciscoLwappAPGroupNtpConfig,
+       "cLwappAPGroupNtpConfigTable": cLwappAPGroupNtpConfigTable,
+       "cLAPGroupNtpConfigEntry": cLAPGroupNtpConfigEntry,
+       "cLAPGroupNtpIndex": cLAPGroupNtpIndex,
+       "cLAPGroupNtpAddressType": cLAPGroupNtpAddressType,
+       "cLAPGroupNtpAddress": cLAPGroupNtpAddress,
+       "cLAPGroupNtpAuthKeyIndex": cLAPGroupNtpAuthKeyIndex,
+       "cLAPGroupNtpAuthEnable": cLAPGroupNtpAuthEnable,
+       "cLAPGroupNtpRowStatus": cLAPGroupNtpRowStatus,
+       "cLAPGroupNtpAuthKeyConfigTable": cLAPGroupNtpAuthKeyConfigTable,
+       "cLAPGroupNtpAuthKeyConfigEntry": cLAPGroupNtpAuthKeyConfigEntry,
+       "cLAPGroupNtpAuthKeyListIndex": cLAPGroupNtpAuthKeyListIndex,
+       "cLAPGroupNtpAuthKeyFormat": cLAPGroupNtpAuthKeyFormat,
+       "cLAPGroupNtpAuthKeyString": cLAPGroupNtpAuthKeyString,
+       "cLAPGroupNtpAuthKeyType": cLAPGroupNtpAuthKeyType,
+       "cLAPGroupNtpAuthKeyRowStatus": cLAPGroupNtpAuthKeyRowStatus,
+       "cLAPGroupNtpServerConfigTable": cLAPGroupNtpServerConfigTable,
+       "cLAPGroupNtpServerConfigEntry": cLAPGroupNtpServerConfigEntry,
+       "cLAPGroupNtpServerIndex": cLAPGroupNtpServerIndex,
+       "cLAPGroupNtpServerAuthEnable": cLAPGroupNtpServerAuthEnable,
+       "cLAPGroupNtpServerRowStatus": cLAPGroupNtpServerRowStatus,
+       "cLAPGroupGlobalNtpServerConfigTable": cLAPGroupGlobalNtpServerConfigTable,
+       "cLAPGroupGlobalNtpServerConfigEntry": cLAPGroupGlobalNtpServerConfigEntry,
+       "cLAPGroupGlobalNtpServerIndex": cLAPGroupGlobalNtpServerIndex,
+       "cLAPGroupGlobalNtpServerAuth": cLAPGroupGlobalNtpServerAuth,
+       "cLAPGroupGlobalNtpServerRowStatus": cLAPGroupGlobalNtpServerRowStatus,
        "ciscoLwappWlanMIBConform": ciscoLwappWlanMIBConform,
        "ciscoLwappWlanMIBCompliances": ciscoLwappWlanMIBCompliances,
        "ciscoLwappWlanMIBCompliance": ciscoLwappWlanMIBCompliance,
@@ -5396,6 +6250,8 @@ mibBuilder.exportSymbols(
        "ciscoLwappWlanMIBComplianceRev8": ciscoLwappWlanMIBComplianceRev8,
        "ciscoLwappWlanMIBComplianceRev9": ciscoLwappWlanMIBComplianceRev9,
        "ciscoLwappWlanMIBComplianceRev10": ciscoLwappWlanMIBComplianceRev10,
+       "ciscoLwappWlanMIBComplianceRev11": ciscoLwappWlanMIBComplianceRev11,
+       "ciscoLwappWlanMIBComplianceRev12": ciscoLwappWlanMIBComplianceRev12,
        "ciscoLwappWlanMIBGroups": ciscoLwappWlanMIBGroups,
        "ciscoLwappWlanConfigGroup": ciscoLwappWlanConfigGroup,
        "ciscoLwappWlanConfigGroupSup1": ciscoLwappWlanConfigGroupSup1,
@@ -5425,5 +6281,8 @@ mibBuilder.exportSymbols(
        "ciscoLwappWlanConfigGroupSup8": ciscoLwappWlanConfigGroupSup8,
        "ciscoLwappWlan11vConfigGroup": ciscoLwappWlan11vConfigGroup,
        "ciscoLwappApGroupConfigGroup": ciscoLwappApGroupConfigGroup,
-       "ciscoLwappPolicyConfigGroup": ciscoLwappPolicyConfigGroup}
+       "ciscoLwappPolicyConfigGroup": ciscoLwappPolicyConfigGroup,
+       "ciscoLwappWlan11kConfigGroup": ciscoLwappWlan11kConfigGroup,
+       "ciscoLwappWlan11axConfigGroup": ciscoLwappWlan11axConfigGroup,
+       "ciscoLwappApGroupNtpServerGroup": ciscoLwappApGroupNtpServerGroup}
 )

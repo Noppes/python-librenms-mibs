@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-MAC-SERVER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:46 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-MAC-SERVER-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -125,7 +122,8 @@ alcatelIND1MacServerMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1MacServerMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2007-04-03 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -208,7 +206,7 @@ chasMacAddressStart = _ChasMacAddressStart_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 1, 3, 1, 1, 1, 2),
     _ChasMacAddressStart_Type()
 )
-chasMacAddressStart.setMaxAccess("read-write")
+chasMacAddressStart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     chasMacAddressStart.setStatus("current")
 
@@ -227,7 +225,7 @@ chasMacAddressCount = _ChasMacAddressCount_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 1, 3, 1, 1, 1, 3),
     _ChasMacAddressCount_Type()
 )
-chasMacAddressCount.setMaxAccess("read-write")
+chasMacAddressCount.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     chasMacAddressCount.setStatus("current")
 _ChasGlobalLocal_Type = MacAddrGlobalLocalStatusType
@@ -236,7 +234,7 @@ chasGlobalLocal = _ChasGlobalLocal_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 1, 3, 1, 1, 1, 4),
     _ChasGlobalLocal_Type()
 )
-chasGlobalLocal.setMaxAccess("read-write")
+chasGlobalLocal.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     chasGlobalLocal.setStatus("current")
 _ChasMacRowStatus_Type = RowStatus
@@ -245,7 +243,7 @@ chasMacRowStatus = _ChasMacRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 1, 3, 1, 1, 1, 5),
     _ChasMacRowStatus_Type()
 )
-chasMacRowStatus.setMaxAccess("read-write")
+chasMacRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     chasMacRowStatus.setStatus("current")
 _ChasMacAddressAllocTable_Object = MibTable
@@ -326,7 +324,7 @@ chasAllocRowStatus = _ChasAllocRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 1, 3, 1, 2, 1, 5),
     _ChasAllocRowStatus_Type()
 )
-chasAllocRowStatus.setMaxAccess("read-write")
+chasAllocRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     chasAllocRowStatus.setStatus("current")
 _ChasMacAddrDupAllocStatusTable_ObjectIdentity = ObjectIdentity
@@ -622,10 +620,21 @@ chasMacAddrRetentionGroup.setObjects(
         ("ALCATEL-IND1-MAC-SERVER-MIB", "chasPossibleDuplicateMacTrapStatus"),
         ("ALCATEL-IND1-MAC-SERVER-MIB", "chasRingStatus"),
         ("ALCATEL-IND1-MAC-SERVER-MIB", "chasBaseMacAddrSource"),
-        ("ALCATEL-IND1-MAC-SERVER-MIB", "chasBaseMacAddr"))
+        ("ALCATEL-IND1-MAC-SERVER-MIB", "chasBaseMacAddr"),
+        ("ALCATEL-IND1-MAC-SERVER-MIB", "chasBaseMacReleaseAction"))
 )
 if mibBuilder.loadTexts:
     chasMacAddrRetentionGroup.setStatus("current")
+
+chassisTrapsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 1, 3, 3, 1, 7)
+)
+chassisTrapsGroup.setObjects(
+      *(("ALCATEL-IND1-MAC-SERVER-MIB", "chasTrapMacRangeIndex"),
+        ("ALCATEL-IND1-MAC-SERVER-MIB", "baseMacAddress"))
+)
+if mibBuilder.loadTexts:
+    chassisTrapsGroup.setStatus("current")
 
 
 # Notification objects
@@ -694,7 +703,8 @@ alcatelIND1MacServerMIBCompliance.setObjects(
         ("ALCATEL-IND1-MAC-SERVER-MIB", "chasMacAddrDupAllocStatusGroup"),
         ("ALCATEL-IND1-MAC-SERVER-MIB", "chasTrapsMacOverlapGroup"),
         ("ALCATEL-IND1-MAC-SERVER-MIB", "chasMacAddrRetentionGroup"),
-        ("ALCATEL-IND1-MAC-SERVER-MIB", "chasTrapsPossibleDuplicateMacGroup"))
+        ("ALCATEL-IND1-MAC-SERVER-MIB", "chasTrapsPossibleDuplicateMacGroup"),
+        ("ALCATEL-IND1-MAC-SERVER-MIB", "chassisTrapsGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1MacServerMIBCompliance.setStatus(
@@ -743,6 +753,7 @@ mibBuilder.exportSymbols(
        "chasTrapsMacOverlapGroup": chasTrapsMacOverlapGroup,
        "chasMacAddrRetentionGroup": chasMacAddrRetentionGroup,
        "chasTrapsPossibleDuplicateMacGroup": chasTrapsPossibleDuplicateMacGroup,
+       "chassisTrapsGroup": chassisTrapsGroup,
        "alcatelIND1MacServerMIBCompliances": alcatelIND1MacServerMIBCompliances,
        "alcatelIND1MacServerMIBCompliance": alcatelIND1MacServerMIBCompliance,
        "chassisTrapsMacOverlap": chassisTrapsMacOverlap,

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arista\ARISTA-IF-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:17:56 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,9 @@ aristaIfMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     aristaIfMIB.setRevisions(
-        ("2014-10-09 00:00",)
+        ("2021-03-10 00:00",
+         "2021-01-21 00:00",
+         "2014-10-09 00:00")
     )
 
 
@@ -230,6 +229,52 @@ aristaIfInAclDrops = _AristaIfInAclDrops_Object(
 aristaIfInAclDrops.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     aristaIfInAclDrops.setStatus("current")
+
+
+class _AristaIfErrDisabledReason_Type(DisplayString):
+    """Custom type aristaIfErrDisabledReason based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AristaIfErrDisabledReason_Type.__name__ = "DisplayString"
+_AristaIfErrDisabledReason_Object = MibTableColumn
+aristaIfErrDisabledReason = _AristaIfErrDisabledReason_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 3, 15, 1, 1, 1, 10),
+    _AristaIfErrDisabledReason_Type()
+)
+aristaIfErrDisabledReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaIfErrDisabledReason.setStatus("current")
+_AristaIfDot1xEapolPortDrops_Type = Counter32
+_AristaIfDot1xEapolPortDrops_Object = MibTableColumn
+aristaIfDot1xEapolPortDrops = _AristaIfDot1xEapolPortDrops_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 3, 15, 1, 1, 1, 11),
+    _AristaIfDot1xEapolPortDrops_Type()
+)
+aristaIfDot1xEapolPortDrops.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaIfDot1xEapolPortDrops.setStatus("current")
+_AristaIfDot1xEapolHostDrops_Type = Counter32
+_AristaIfDot1xEapolHostDrops_Object = MibTableColumn
+aristaIfDot1xEapolHostDrops = _AristaIfDot1xEapolHostDrops_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 3, 15, 1, 1, 1, 12),
+    _AristaIfDot1xEapolHostDrops_Type()
+)
+aristaIfDot1xEapolHostDrops.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaIfDot1xEapolHostDrops.setStatus("current")
+_AristaIfDot1xMbaHostDrops_Type = Counter32
+_AristaIfDot1xMbaHostDrops_Object = MibTableColumn
+aristaIfDot1xMbaHostDrops = _AristaIfDot1xMbaHostDrops_Object(
+    (1, 3, 6, 1, 4, 1, 30065, 3, 15, 1, 1, 1, 13),
+    _AristaIfDot1xMbaHostDrops_Type()
+)
+aristaIfDot1xMbaHostDrops.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aristaIfDot1xMbaHostDrops.setStatus("current")
 _AristaIfConformance_ObjectIdentity = ObjectIdentity
 aristaIfConformance = _AristaIfConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 30065, 3, 15, 2)
@@ -257,7 +302,11 @@ aristaIfAdditionalInformationGroup.setObjects(
         ("ARISTA-IF-MIB", "aristaIfOutOctetRate"),
         ("ARISTA-IF-MIB", "aristaIfRatesLastUpdated"),
         ("ARISTA-IF-MIB", "aristaIfOperStatusChanges"),
-        ("ARISTA-IF-MIB", "aristaIfInAclDrops"))
+        ("ARISTA-IF-MIB", "aristaIfInAclDrops"),
+        ("ARISTA-IF-MIB", "aristaIfErrDisabledReason"),
+        ("ARISTA-IF-MIB", "aristaIfDot1xEapolPortDrops"),
+        ("ARISTA-IF-MIB", "aristaIfDot1xEapolHostDrops"),
+        ("ARISTA-IF-MIB", "aristaIfDot1xMbaHostDrops"))
 )
 if mibBuilder.loadTexts:
     aristaIfAdditionalInformationGroup.setStatus("current")
@@ -303,6 +352,10 @@ mibBuilder.exportSymbols(
        "aristaIfRatesLastUpdated": aristaIfRatesLastUpdated,
        "aristaIfOperStatusChanges": aristaIfOperStatusChanges,
        "aristaIfInAclDrops": aristaIfInAclDrops,
+       "aristaIfErrDisabledReason": aristaIfErrDisabledReason,
+       "aristaIfDot1xEapolPortDrops": aristaIfDot1xEapolPortDrops,
+       "aristaIfDot1xEapolHostDrops": aristaIfDot1xEapolHostDrops,
+       "aristaIfDot1xMbaHostDrops": aristaIfDot1xMbaHostDrops,
        "aristaIfConformance": aristaIfConformance,
        "aristaIfGroups": aristaIfGroups,
        "aristaIfAdditionalInformationGroup": aristaIfAdditionalInformationGroup,

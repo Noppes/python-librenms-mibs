@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\ALU-SAR-GLOBAL-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:37 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,14 +104,15 @@ aluSARGlobalMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     aluSARGlobalMIBModule.setRevisions(
-        ("1911-12-06 10:00",
-         "1911-12-06 00:00",
-         "1910-12-20 00:00",
-         "1910-08-13 00:00",
-         "1908-01-23 00:00",
-         "1908-08-27 00:00",
-         "1908-06-03 00:00",
-         "1908-01-09 00:00")
+        ("2016-05-06 10:00",
+         "2013-05-06 10:00",
+         "2011-12-06 00:00",
+         "2010-12-20 00:00",
+         "2010-08-13 00:00",
+         "2009-01-23 00:00",
+         "2008-08-27 00:00",
+         "2008-06-03 00:00",
+         "2008-01-09 00:00")
     )
 
 
@@ -287,6 +285,18 @@ aluSARModel7705SARWxIReg = _AluSARModel7705SARWxIReg_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     aluSARModel7705SARWxIReg.setStatus("current")
+_AluSARModel7705TSATSReg_ObjectIdentity = ObjectIdentity
+aluSARModel7705TSATSReg = _AluSARModel7705TSATSReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 6, 1, 1, 2, 23)
+)
+if mibBuilder.loadTexts:
+    aluSARModel7705TSATSReg.setStatus("current")
+_AluSARModel7705SARmlAxReg_ObjectIdentity = ObjectIdentity
+aluSARModel7705SARmlAxReg = _AluSARModel7705SARmlAxReg_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 6, 1, 1, 2, 24)
+)
+if mibBuilder.loadTexts:
+    aluSARModel7705SARmlAxReg.setStatus("current")
 _AluSARMIB_ObjectIdentity = ObjectIdentity
 aluSARMIB = _AluSARMIB_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 6, 1, 2)
@@ -351,6 +361,10 @@ _AluSAR7705V7v0_ObjectIdentity = ObjectIdentity
 aluSAR7705V7v0 = _AluSAR7705V7v0_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 6, 1, 3, 1, 10)
 )
+_AluSAR7705V8v0_ObjectIdentity = ObjectIdentity
+aluSAR7705V8v0 = _AluSAR7705V8v0_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 6, 1, 3, 1, 11)
+)
 
 # Managed Objects groups
 
@@ -401,6 +415,8 @@ mibBuilder.exportSymbols(
        "aluSARModel7705SARWxGReg": aluSARModel7705SARWxGReg,
        "aluSARModel7705SARWxHReg": aluSARModel7705SARWxHReg,
        "aluSARModel7705SARWxIReg": aluSARModel7705SARWxIReg,
+       "aluSARModel7705TSATSReg": aluSARModel7705TSATSReg,
+       "aluSARModel7705SARmlAxReg": aluSARModel7705SARmlAxReg,
        "aluSARMIB": aluSARMIB,
        "aluSARConfs": aluSARConfs,
        "aluSARObjs": aluSARObjs,
@@ -416,5 +432,6 @@ mibBuilder.exportSymbols(
        "aluSAR7705V5v0": aluSAR7705V5v0,
        "aluSAR7705V6v0": aluSAR7705V6v0,
        "aluSAR7705V6v1": aluSAR7705V6v1,
-       "aluSAR7705V7v0": aluSAR7705V7v0}
+       "aluSAR7705V7v0": aluSAR7705V7v0,
+       "aluSAR7705V8v0": aluSAR7705V8v0}
 )

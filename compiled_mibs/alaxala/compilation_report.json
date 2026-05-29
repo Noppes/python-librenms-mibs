@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-05-29T09:18:18.353319",
+  "stats": {
+    "total": 40,
+    "compiled": 31,
+    "failed": 7,
+    "skipped": 2,
+    "errors": [
+      {
+        "mib": "AX-SMC-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "AX1240S",
+        "error": "missing"
+      },
+      {
+        "mib": "AX2000R",
+        "error": "failed"
+      },
+      {
+        "mib": "AX3630S",
+        "error": "missing"
+      },
+      {
+        "mib": "AX6300S",
+        "error": "missing"
+      },
+      {
+        "mib": "AX7800R",
+        "error": "missing"
+      },
+      {
+        "mib": "AX7800S",
+        "error": "missing"
+      }
+    ]
+  },
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
+}

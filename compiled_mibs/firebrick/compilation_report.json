@@ -1,16 +1,11 @@
 {
-  "timestamp": "2025-10-02T11:44:39.583314",
+  "timestamp": "2026-05-29T09:29:13.070869",
   "stats": {
     "total": 9,
-    "compiled": 7,
-    "failed": 1,
+    "compiled": 8,
+    "failed": 0,
     "skipped": 1,
-    "errors": [
-      {
-        "mib": "FIREBRICK-VOIP-MIB",
-        "error": "failed"
-      }
-    ]
+    "errors": []
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

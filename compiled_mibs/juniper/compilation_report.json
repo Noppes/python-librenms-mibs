@@ -1,11 +1,48 @@
 {
-  "timestamp": "2025-10-02T12:02:22.880387",
+  "timestamp": "2026-05-29T09:38:47.265495",
   "stats": {
-    "total": 13,
-    "compiled": 7,
-    "failed": 0,
-    "skipped": 6,
-    "errors": []
+    "total": 302,
+    "compiled": 268,
+    "failed": 9,
+    "skipped": 25,
+    "errors": [
+      {
+        "mib": "APS-MIB-JUNI",
+        "error": "failed"
+      },
+      {
+        "mib": "DVMRP-STD-MIB-JUNI",
+        "error": "failed"
+      },
+      {
+        "mib": "GGSN-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "JUNIPER-BFD-MIB",
+        "error": "unprocessed"
+      },
+      {
+        "mib": "Juniper-ACCOUNTING-MIB",
+        "error": "unprocessed"
+      },
+      {
+        "mib": "Juniper-DVMRP-MIB",
+        "error": "unprocessed"
+      },
+      {
+        "mib": "Juniper-Experiment",
+        "error": "unknown"
+      },
+      {
+        "mib": "Juniper-LICENSE-MIB",
+        "error": "unknown"
+      },
+      {
+        "mib": "Juniper-SUBSCRIBER-MIB",
+        "error": "unknown"
+      }
+    ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

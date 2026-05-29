@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arris\DOCS-QOS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:18:39 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -54,6 +51,12 @@ if 'mibBuilder' not in globals():
     "IF-MIB",
     "InterfaceIndex",
     "ifIndex")
+
+(InetAddress,
+ InetAddressType) = mibBuilder.importSymbols(
+    "INET-ADDRESS-MIB",
+    "InetAddress",
+    "InetAddressType")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -123,7 +126,7 @@ docsQosMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     docsQosMIB.setRevisions(
-        ("1900-10-18 00:00",)
+        ("2001-11-09 00:00",)
     )
 
 
@@ -336,7 +339,7 @@ docsQosPktClassIpSourceAddr = _DocsQosPktClassIpSourceAddr_Object(
 )
 docsQosPktClassIpSourceAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    docsQosPktClassIpSourceAddr.setStatus("current")
+    docsQosPktClassIpSourceAddr.setStatus("deprecated")
 _DocsQosPktClassIpSourceMask_Type = IpAddress
 _DocsQosPktClassIpSourceMask_Object = MibTableColumn
 docsQosPktClassIpSourceMask = _DocsQosPktClassIpSourceMask_Object(
@@ -345,7 +348,7 @@ docsQosPktClassIpSourceMask = _DocsQosPktClassIpSourceMask_Object(
 )
 docsQosPktClassIpSourceMask.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    docsQosPktClassIpSourceMask.setStatus("current")
+    docsQosPktClassIpSourceMask.setStatus("deprecated")
 _DocsQosPktClassIpDestAddr_Type = IpAddress
 _DocsQosPktClassIpDestAddr_Object = MibTableColumn
 docsQosPktClassIpDestAddr = _DocsQosPktClassIpDestAddr_Object(
@@ -354,7 +357,7 @@ docsQosPktClassIpDestAddr = _DocsQosPktClassIpDestAddr_Object(
 )
 docsQosPktClassIpDestAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    docsQosPktClassIpDestAddr.setStatus("current")
+    docsQosPktClassIpDestAddr.setStatus("deprecated")
 _DocsQosPktClassIpDestMask_Type = IpAddress
 _DocsQosPktClassIpDestMask_Object = MibTableColumn
 docsQosPktClassIpDestMask = _DocsQosPktClassIpDestMask_Object(
@@ -363,7 +366,7 @@ docsQosPktClassIpDestMask = _DocsQosPktClassIpDestMask_Object(
 )
 docsQosPktClassIpDestMask.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    docsQosPktClassIpDestMask.setStatus("current")
+    docsQosPktClassIpDestMask.setStatus("deprecated")
 
 
 class _DocsQosPktClassSourcePortStart_Type(Integer32):
@@ -518,6 +521,15 @@ docsQosPktClassEnetProtocol = _DocsQosPktClassEnetProtocol_Object(
 docsQosPktClassEnetProtocol.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsQosPktClassEnetProtocol.setStatus("current")
+_DocsQosPktClassUserPriApplies_Type = TruthValue
+_DocsQosPktClassUserPriApplies_Object = MibTableColumn
+docsQosPktClassUserPriApplies = _DocsQosPktClassUserPriApplies_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 21),
+    _DocsQosPktClassUserPriApplies_Type()
+)
+docsQosPktClassUserPriApplies.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassUserPriApplies.setStatus("obsolete")
 
 
 class _DocsQosPktClassUserPriLow_Type(Integer32):
@@ -643,6 +655,78 @@ docsQosPktClassBitMap = _DocsQosPktClassBitMap_Object(
 docsQosPktClassBitMap.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsQosPktClassBitMap.setStatus("current")
+_DocsQosPktClassInetSourceAddrType_Type = InetAddressType
+_DocsQosPktClassInetSourceAddrType_Object = MibTableColumn
+docsQosPktClassInetSourceAddrType = _DocsQosPktClassInetSourceAddrType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 28),
+    _DocsQosPktClassInetSourceAddrType_Type()
+)
+docsQosPktClassInetSourceAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetSourceAddrType.setStatus("current")
+_DocsQosPktClassInetSourceAddr_Type = InetAddress
+_DocsQosPktClassInetSourceAddr_Object = MibTableColumn
+docsQosPktClassInetSourceAddr = _DocsQosPktClassInetSourceAddr_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 29),
+    _DocsQosPktClassInetSourceAddr_Type()
+)
+docsQosPktClassInetSourceAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetSourceAddr.setStatus("current")
+_DocsQosPktClassInetSourceMaskType_Type = InetAddressType
+_DocsQosPktClassInetSourceMaskType_Object = MibTableColumn
+docsQosPktClassInetSourceMaskType = _DocsQosPktClassInetSourceMaskType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 30),
+    _DocsQosPktClassInetSourceMaskType_Type()
+)
+docsQosPktClassInetSourceMaskType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetSourceMaskType.setStatus("current")
+_DocsQosPktClassInetSourceMask_Type = InetAddress
+_DocsQosPktClassInetSourceMask_Object = MibTableColumn
+docsQosPktClassInetSourceMask = _DocsQosPktClassInetSourceMask_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 31),
+    _DocsQosPktClassInetSourceMask_Type()
+)
+docsQosPktClassInetSourceMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetSourceMask.setStatus("current")
+_DocsQosPktClassInetDestAddrType_Type = InetAddressType
+_DocsQosPktClassInetDestAddrType_Object = MibTableColumn
+docsQosPktClassInetDestAddrType = _DocsQosPktClassInetDestAddrType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 32),
+    _DocsQosPktClassInetDestAddrType_Type()
+)
+docsQosPktClassInetDestAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetDestAddrType.setStatus("current")
+_DocsQosPktClassInetDestAddr_Type = InetAddress
+_DocsQosPktClassInetDestAddr_Object = MibTableColumn
+docsQosPktClassInetDestAddr = _DocsQosPktClassInetDestAddr_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 33),
+    _DocsQosPktClassInetDestAddr_Type()
+)
+docsQosPktClassInetDestAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetDestAddr.setStatus("current")
+_DocsQosPktClassInetDestMaskType_Type = InetAddressType
+_DocsQosPktClassInetDestMaskType_Object = MibTableColumn
+docsQosPktClassInetDestMaskType = _DocsQosPktClassInetDestMaskType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 34),
+    _DocsQosPktClassInetDestMaskType_Type()
+)
+docsQosPktClassInetDestMaskType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetDestMaskType.setStatus("current")
+_DocsQosPktClassInetDestMask_Type = InetAddress
+_DocsQosPktClassInetDestMask_Object = MibTableColumn
+docsQosPktClassInetDestMask = _DocsQosPktClassInetDestMask_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 1, 1, 35),
+    _DocsQosPktClassInetDestMask_Type()
+)
+docsQosPktClassInetDestMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPktClassInetDestMask.setStatus("current")
 _DocsQosParamSetTable_Object = MibTable
 docsQosParamSetTable = _DocsQosParamSetTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2)
@@ -651,7 +735,7 @@ if mibBuilder.loadTexts:
     docsQosParamSetTable.setStatus("current")
 _DocsQosParamSetEntry_Object = MibTableRow
 docsQosParamSetEntry = _DocsQosParamSetEntry_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2)
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1)
 )
 docsQosParamSetEntry.setIndexNames(
     (0, "IF-MIB", "ifIndex"),
@@ -663,7 +747,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetServiceClassName_Type = DisplayString
 _DocsQosParamSetServiceClassName_Object = MibTableColumn
 docsQosParamSetServiceClassName = _DocsQosParamSetServiceClassName_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 4),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 4),
     _DocsQosParamSetServiceClassName_Type()
 )
 docsQosParamSetServiceClassName.setMaxAccess("read-only")
@@ -682,7 +766,7 @@ class _DocsQosParamSetPriority_Type(Integer32):
 _DocsQosParamSetPriority_Type.__name__ = "Integer32"
 _DocsQosParamSetPriority_Object = MibTableColumn
 docsQosParamSetPriority = _DocsQosParamSetPriority_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 5),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 5),
     _DocsQosParamSetPriority_Type()
 )
 docsQosParamSetPriority.setMaxAccess("read-only")
@@ -691,7 +775,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetMaxTrafficRate_Type = BitRate
 _DocsQosParamSetMaxTrafficRate_Object = MibTableColumn
 docsQosParamSetMaxTrafficRate = _DocsQosParamSetMaxTrafficRate_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 6),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 6),
     _DocsQosParamSetMaxTrafficRate_Type()
 )
 docsQosParamSetMaxTrafficRate.setMaxAccess("read-only")
@@ -700,7 +784,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetMaxTrafficBurst_Type = Unsigned32
 _DocsQosParamSetMaxTrafficBurst_Object = MibTableColumn
 docsQosParamSetMaxTrafficBurst = _DocsQosParamSetMaxTrafficBurst_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 7),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 7),
     _DocsQosParamSetMaxTrafficBurst_Type()
 )
 docsQosParamSetMaxTrafficBurst.setMaxAccess("read-only")
@@ -709,7 +793,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetMinReservedRate_Type = BitRate
 _DocsQosParamSetMinReservedRate_Object = MibTableColumn
 docsQosParamSetMinReservedRate = _DocsQosParamSetMinReservedRate_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 8),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 8),
     _DocsQosParamSetMinReservedRate_Type()
 )
 docsQosParamSetMinReservedRate.setMaxAccess("read-only")
@@ -728,7 +812,7 @@ class _DocsQosParamSetMinReservedPkt_Type(Integer32):
 _DocsQosParamSetMinReservedPkt_Type.__name__ = "Integer32"
 _DocsQosParamSetMinReservedPkt_Object = MibTableColumn
 docsQosParamSetMinReservedPkt = _DocsQosParamSetMinReservedPkt_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 9),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 9),
     _DocsQosParamSetMinReservedPkt_Type()
 )
 docsQosParamSetMinReservedPkt.setMaxAccess("read-only")
@@ -747,7 +831,7 @@ class _DocsQosParamSetActiveTimeout_Type(Integer32):
 _DocsQosParamSetActiveTimeout_Type.__name__ = "Integer32"
 _DocsQosParamSetActiveTimeout_Object = MibTableColumn
 docsQosParamSetActiveTimeout = _DocsQosParamSetActiveTimeout_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 10),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 10),
     _DocsQosParamSetActiveTimeout_Type()
 )
 docsQosParamSetActiveTimeout.setMaxAccess("read-only")
@@ -770,7 +854,7 @@ class _DocsQosParamSetAdmittedTimeout_Type(Integer32):
 _DocsQosParamSetAdmittedTimeout_Type.__name__ = "Integer32"
 _DocsQosParamSetAdmittedTimeout_Object = MibTableColumn
 docsQosParamSetAdmittedTimeout = _DocsQosParamSetAdmittedTimeout_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 11),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 11),
     _DocsQosParamSetAdmittedTimeout_Type()
 )
 docsQosParamSetAdmittedTimeout.setMaxAccess("read-only")
@@ -791,7 +875,7 @@ class _DocsQosParamSetMaxConcatBurst_Type(Integer32):
 _DocsQosParamSetMaxConcatBurst_Type.__name__ = "Integer32"
 _DocsQosParamSetMaxConcatBurst_Object = MibTableColumn
 docsQosParamSetMaxConcatBurst = _DocsQosParamSetMaxConcatBurst_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 12),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 12),
     _DocsQosParamSetMaxConcatBurst_Type()
 )
 docsQosParamSetMaxConcatBurst.setMaxAccess("read-only")
@@ -800,7 +884,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetSchedulingType_Type = SchedulingType
 _DocsQosParamSetSchedulingType_Object = MibTableColumn
 docsQosParamSetSchedulingType = _DocsQosParamSetSchedulingType_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 13),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 13),
     _DocsQosParamSetSchedulingType_Type()
 )
 docsQosParamSetSchedulingType.setMaxAccess("read-only")
@@ -809,7 +893,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetNomPollInterval_Type = Unsigned32
 _DocsQosParamSetNomPollInterval_Object = MibTableColumn
 docsQosParamSetNomPollInterval = _DocsQosParamSetNomPollInterval_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 15),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 15),
     _DocsQosParamSetNomPollInterval_Type()
 )
 docsQosParamSetNomPollInterval.setMaxAccess("read-only")
@@ -820,7 +904,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetTolPollJitter_Type = Unsigned32
 _DocsQosParamSetTolPollJitter_Object = MibTableColumn
 docsQosParamSetTolPollJitter = _DocsQosParamSetTolPollJitter_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 16),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 16),
     _DocsQosParamSetTolPollJitter_Type()
 )
 docsQosParamSetTolPollJitter.setMaxAccess("read-only")
@@ -841,7 +925,7 @@ class _DocsQosParamSetUnsolicitGrantSize_Type(Integer32):
 _DocsQosParamSetUnsolicitGrantSize_Type.__name__ = "Integer32"
 _DocsQosParamSetUnsolicitGrantSize_Object = MibTableColumn
 docsQosParamSetUnsolicitGrantSize = _DocsQosParamSetUnsolicitGrantSize_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 17),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 17),
     _DocsQosParamSetUnsolicitGrantSize_Type()
 )
 docsQosParamSetUnsolicitGrantSize.setMaxAccess("read-only")
@@ -850,7 +934,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetNomGrantInterval_Type = Unsigned32
 _DocsQosParamSetNomGrantInterval_Object = MibTableColumn
 docsQosParamSetNomGrantInterval = _DocsQosParamSetNomGrantInterval_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 18),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 18),
     _DocsQosParamSetNomGrantInterval_Type()
 )
 docsQosParamSetNomGrantInterval.setMaxAccess("read-only")
@@ -861,7 +945,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetTolGrantJitter_Type = Unsigned32
 _DocsQosParamSetTolGrantJitter_Object = MibTableColumn
 docsQosParamSetTolGrantJitter = _DocsQosParamSetTolGrantJitter_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 19),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 19),
     _DocsQosParamSetTolGrantJitter_Type()
 )
 docsQosParamSetTolGrantJitter.setMaxAccess("read-only")
@@ -882,7 +966,7 @@ class _DocsQosParamSetGrantsPerInterval_Type(Integer32):
 _DocsQosParamSetGrantsPerInterval_Type.__name__ = "Integer32"
 _DocsQosParamSetGrantsPerInterval_Object = MibTableColumn
 docsQosParamSetGrantsPerInterval = _DocsQosParamSetGrantsPerInterval_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 20),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 20),
     _DocsQosParamSetGrantsPerInterval_Type()
 )
 docsQosParamSetGrantsPerInterval.setMaxAccess("read-only")
@@ -902,7 +986,7 @@ class _DocsQosParamSetTosAndMask_Type(OctetString):
 _DocsQosParamSetTosAndMask_Type.__name__ = "OctetString"
 _DocsQosParamSetTosAndMask_Object = MibTableColumn
 docsQosParamSetTosAndMask = _DocsQosParamSetTosAndMask_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 21),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 21),
     _DocsQosParamSetTosAndMask_Type()
 )
 docsQosParamSetTosAndMask.setMaxAccess("read-only")
@@ -922,7 +1006,7 @@ class _DocsQosParamSetTosOrMask_Type(OctetString):
 _DocsQosParamSetTosOrMask_Type.__name__ = "OctetString"
 _DocsQosParamSetTosOrMask_Object = MibTableColumn
 docsQosParamSetTosOrMask = _DocsQosParamSetTosOrMask_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 22),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 22),
     _DocsQosParamSetTosOrMask_Type()
 )
 docsQosParamSetTosOrMask.setMaxAccess("read-only")
@@ -931,7 +1015,7 @@ if mibBuilder.loadTexts:
 _DocsQosParamSetMaxLatency_Type = Unsigned32
 _DocsQosParamSetMaxLatency_Object = MibTableColumn
 docsQosParamSetMaxLatency = _DocsQosParamSetMaxLatency_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 23),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 23),
     _DocsQosParamSetMaxLatency_Type()
 )
 docsQosParamSetMaxLatency.setMaxAccess("read-only")
@@ -961,7 +1045,7 @@ class _DocsQosParamSetType_Type(Integer32):
 _DocsQosParamSetType_Type.__name__ = "Integer32"
 _DocsQosParamSetType_Object = MibTableColumn
 docsQosParamSetType = _DocsQosParamSetType_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 24),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 24),
     _DocsQosParamSetType_Type()
 )
 docsQosParamSetType.setMaxAccess("not-accessible")
@@ -981,7 +1065,7 @@ class _DocsQosParamSetRequestPolicyOct_Type(OctetString):
 _DocsQosParamSetRequestPolicyOct_Type.__name__ = "OctetString"
 _DocsQosParamSetRequestPolicyOct_Object = MibTableColumn
 docsQosParamSetRequestPolicyOct = _DocsQosParamSetRequestPolicyOct_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 25),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 25),
     _DocsQosParamSetRequestPolicyOct_Type()
 )
 docsQosParamSetRequestPolicyOct.setMaxAccess("read-only")
@@ -1015,7 +1099,7 @@ class _DocsQosParamSetBitMap_Type(Bits):
 _DocsQosParamSetBitMap_Type.__name__ = "Bits"
 _DocsQosParamSetBitMap_Object = MibTableColumn
 docsQosParamSetBitMap = _DocsQosParamSetBitMap_Object(
-    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 2, 26),
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 2, 1, 26),
     _DocsQosParamSetBitMap_Type()
 )
 docsQosParamSetBitMap.setMaxAccess("read-only")
@@ -1058,6 +1142,63 @@ if mibBuilder.loadTexts:
     docsQosServiceFlowId.setStatus("current")
 
 
+class _DocsQosServiceFlowProvisionedParamSetIndex_Type(Unsigned32):
+    """Custom type docsQosServiceFlowProvisionedParamSetIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_DocsQosServiceFlowProvisionedParamSetIndex_Type.__name__ = "Unsigned32"
+_DocsQosServiceFlowProvisionedParamSetIndex_Object = MibTableColumn
+docsQosServiceFlowProvisionedParamSetIndex = _DocsQosServiceFlowProvisionedParamSetIndex_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 3),
+    _DocsQosServiceFlowProvisionedParamSetIndex_Type()
+)
+docsQosServiceFlowProvisionedParamSetIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowProvisionedParamSetIndex.setStatus("obsolete")
+
+
+class _DocsQosServiceFlowAdmittedParamSetIndex_Type(Unsigned32):
+    """Custom type docsQosServiceFlowAdmittedParamSetIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_DocsQosServiceFlowAdmittedParamSetIndex_Type.__name__ = "Unsigned32"
+_DocsQosServiceFlowAdmittedParamSetIndex_Object = MibTableColumn
+docsQosServiceFlowAdmittedParamSetIndex = _DocsQosServiceFlowAdmittedParamSetIndex_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 4),
+    _DocsQosServiceFlowAdmittedParamSetIndex_Type()
+)
+docsQosServiceFlowAdmittedParamSetIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowAdmittedParamSetIndex.setStatus("obsolete")
+
+
+class _DocsQosServiceFlowActiveParamSetIndex_Type(Unsigned32):
+    """Custom type docsQosServiceFlowActiveParamSetIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_DocsQosServiceFlowActiveParamSetIndex_Type.__name__ = "Unsigned32"
+_DocsQosServiceFlowActiveParamSetIndex_Object = MibTableColumn
+docsQosServiceFlowActiveParamSetIndex = _DocsQosServiceFlowActiveParamSetIndex_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 5),
+    _DocsQosServiceFlowActiveParamSetIndex_Type()
+)
+docsQosServiceFlowActiveParamSetIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowActiveParamSetIndex.setStatus("obsolete")
+
+
 class _DocsQosServiceFlowSID_Type(Unsigned32):
     """Custom type docsQosServiceFlowSID based on Unsigned32"""
     subtypeSpec = Unsigned32.subtypeSpec
@@ -1093,6 +1234,117 @@ docsQosServiceFlowPrimary = _DocsQosServiceFlowPrimary_Object(
 docsQosServiceFlowPrimary.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsQosServiceFlowPrimary.setStatus("current")
+
+
+class _DocsQosServiceFlowActiveTimeout_Type(Integer32):
+    """Custom type docsQosServiceFlowActiveTimeout based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_DocsQosServiceFlowActiveTimeout_Type.__name__ = "Integer32"
+_DocsQosServiceFlowActiveTimeout_Object = MibTableColumn
+docsQosServiceFlowActiveTimeout = _DocsQosServiceFlowActiveTimeout_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 9),
+    _DocsQosServiceFlowActiveTimeout_Type()
+)
+docsQosServiceFlowActiveTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowActiveTimeout.setStatus("obsolete")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowActiveTimeout.setUnits("seconds")
+
+
+class _DocsQosServiceFlowAdmittedTimeout_Type(Integer32):
+    """Custom type docsQosServiceFlowAdmittedTimeout based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_DocsQosServiceFlowAdmittedTimeout_Type.__name__ = "Integer32"
+_DocsQosServiceFlowAdmittedTimeout_Object = MibTableColumn
+docsQosServiceFlowAdmittedTimeout = _DocsQosServiceFlowAdmittedTimeout_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 10),
+    _DocsQosServiceFlowAdmittedTimeout_Type()
+)
+docsQosServiceFlowAdmittedTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowAdmittedTimeout.setStatus("obsolete")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowAdmittedTimeout.setUnits("seconds")
+_DocsQosServiceFlowSchedulingType_Type = SchedulingType
+_DocsQosServiceFlowSchedulingType_Object = MibTableColumn
+docsQosServiceFlowSchedulingType = _DocsQosServiceFlowSchedulingType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 11),
+    _DocsQosServiceFlowSchedulingType_Type()
+)
+docsQosServiceFlowSchedulingType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowSchedulingType.setStatus("obsolete")
+
+
+class _DocsQosServiceFlowRequestPolicy_Type(OctetString):
+    """Custom type docsQosServiceFlowRequestPolicy based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+    )
+    fixed_length = 4
+
+
+_DocsQosServiceFlowRequestPolicy_Type.__name__ = "OctetString"
+_DocsQosServiceFlowRequestPolicy_Object = MibTableColumn
+docsQosServiceFlowRequestPolicy = _DocsQosServiceFlowRequestPolicy_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 12),
+    _DocsQosServiceFlowRequestPolicy_Type()
+)
+docsQosServiceFlowRequestPolicy.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowRequestPolicy.setStatus("obsolete")
+
+
+class _DocsQosServiceFlowTosAndMask_Type(OctetString):
+    """Custom type docsQosServiceFlowTosAndMask based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 1),
+    )
+    fixed_length = 1
+
+
+_DocsQosServiceFlowTosAndMask_Type.__name__ = "OctetString"
+_DocsQosServiceFlowTosAndMask_Object = MibTableColumn
+docsQosServiceFlowTosAndMask = _DocsQosServiceFlowTosAndMask_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 13),
+    _DocsQosServiceFlowTosAndMask_Type()
+)
+docsQosServiceFlowTosAndMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowTosAndMask.setStatus("obsolete")
+
+
+class _DocsQosServiceFlowTosOrMask_Type(OctetString):
+    """Custom type docsQosServiceFlowTosOrMask based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 1),
+    )
+    fixed_length = 1
+
+
+_DocsQosServiceFlowTosOrMask_Type.__name__ = "OctetString"
+_DocsQosServiceFlowTosOrMask_Object = MibTableColumn
+docsQosServiceFlowTosOrMask = _DocsQosServiceFlowTosOrMask_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 3, 1, 14),
+    _DocsQosServiceFlowTosOrMask_Type()
+)
+docsQosServiceFlowTosOrMask.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosServiceFlowTosOrMask.setStatus("obsolete")
 _DocsQosServiceFlowStatsTable_Object = MibTable
 docsQosServiceFlowStatsTable = _DocsQosServiceFlowStatsTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 4)
@@ -1432,6 +1684,24 @@ docsQosDCCFails = _DocsQosDCCFails_Object(
 docsQosDCCFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsQosDCCFails.setStatus("current")
+_DocsQosDCCRspDeparts_Type = Counter32
+_DocsQosDCCRspDeparts_Object = MibTableColumn
+docsQosDCCRspDeparts = _DocsQosDCCRspDeparts_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 6, 1, 21),
+    _DocsQosDCCRspDeparts_Type()
+)
+docsQosDCCRspDeparts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosDCCRspDeparts.setStatus("current")
+_DocsQosDCCRspArrives_Type = Counter32
+_DocsQosDCCRspArrives_Object = MibTableColumn
+docsQosDCCRspArrives = _DocsQosDCCRspArrives_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 6, 1, 22),
+    _DocsQosDCCRspArrives_Type()
+)
+docsQosDCCRspArrives.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosDCCRspArrives.setStatus("current")
 _DocsQosServiceFlowLogTable_Object = MibTable
 docsQosServiceFlowLogTable = _DocsQosServiceFlowLogTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 7)
@@ -1645,6 +1915,25 @@ docsQosServiceClassName = _DocsQosServiceClassName_Object(
 docsQosServiceClassName.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     docsQosServiceClassName.setStatus("current")
+
+
+class _DocsQosServiceClassParamSetIndex_Type(Unsigned32):
+    """Custom type docsQosServiceClassParamSetIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4294967295),
+    )
+
+
+_DocsQosServiceClassParamSetIndex_Type.__name__ = "Unsigned32"
+_DocsQosServiceClassParamSetIndex_Object = MibTableColumn
+docsQosServiceClassParamSetIndex = _DocsQosServiceClassParamSetIndex_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 8, 1, 2),
+    _DocsQosServiceClassParamSetIndex_Type()
+)
+docsQosServiceClassParamSetIndex.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    docsQosServiceClassParamSetIndex.setStatus("obsolete")
 _DocsQosServiceClassStatus_Type = RowStatus
 _DocsQosServiceClassStatus_Object = MibTableColumn
 docsQosServiceClassStatus = _DocsQosServiceClassStatus_Object(
@@ -2195,6 +2484,25 @@ if mibBuilder.loadTexts:
     docsQosPHSVerify.setStatus("current")
 
 
+class _DocsQosPHSClassifierIndex_Type(Integer32):
+    """Custom type docsQosPHSClassifierIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_DocsQosPHSClassifierIndex_Type.__name__ = "Integer32"
+_DocsQosPHSClassifierIndex_Object = MibTableColumn
+docsQosPHSClassifierIndex = _DocsQosPHSClassifierIndex_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 1, 10, 1, 6),
+    _DocsQosPHSClassifierIndex_Type()
+)
+docsQosPHSClassifierIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsQosPHSClassifierIndex.setStatus("obsolete")
+
+
 class _DocsQosPHSIndex_Type(Integer32):
     """Custom type docsQosPHSIndex based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
@@ -2294,10 +2602,6 @@ docsQosBaseGroup.setObjects(
         ("DOCS-QOS-MIB", "docsQosPktClassIpTosHigh"),
         ("DOCS-QOS-MIB", "docsQosPktClassIpTosMask"),
         ("DOCS-QOS-MIB", "docsQosPktClassIpProtocol"),
-        ("DOCS-QOS-MIB", "docsQosPktClassIpSourceAddr"),
-        ("DOCS-QOS-MIB", "docsQosPktClassIpSourceMask"),
-        ("DOCS-QOS-MIB", "docsQosPktClassIpDestAddr"),
-        ("DOCS-QOS-MIB", "docsQosPktClassIpDestMask"),
         ("DOCS-QOS-MIB", "docsQosPktClassSourcePortStart"),
         ("DOCS-QOS-MIB", "docsQosPktClassSourcePortEnd"),
         ("DOCS-QOS-MIB", "docsQosPktClassDestPortStart"),
@@ -2313,6 +2617,14 @@ docsQosBaseGroup.setObjects(
         ("DOCS-QOS-MIB", "docsQosPktClassState"),
         ("DOCS-QOS-MIB", "docsQosPktClassPkts"),
         ("DOCS-QOS-MIB", "docsQosPktClassBitMap"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetSourceAddrType"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetSourceAddr"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetSourceMaskType"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetSourceMask"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetDestAddrType"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetDestAddr"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetDestMaskType"),
+        ("DOCS-QOS-MIB", "docsQosPktClassInetDestMask"),
         ("DOCS-QOS-MIB", "docsQosServiceFlowSID"),
         ("DOCS-QOS-MIB", "docsQosServiceFlowDirection"),
         ("DOCS-QOS-MIB", "docsQosServiceFlowPrimary"),
@@ -2446,6 +2758,38 @@ docsQosServiceClassGroup.setObjects(
 if mibBuilder.loadTexts:
     docsQosServiceClassGroup.setStatus("current")
 
+docsQosDeprecatedGroup = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 3, 1, 6)
+)
+docsQosDeprecatedGroup.setObjects(
+      *(("DOCS-QOS-MIB", "docsQosPktClassIpSourceAddr"),
+        ("DOCS-QOS-MIB", "docsQosPktClassIpSourceMask"),
+        ("DOCS-QOS-MIB", "docsQosPktClassIpDestAddr"),
+        ("DOCS-QOS-MIB", "docsQosPktClassIpDestMask"))
+)
+if mibBuilder.loadTexts:
+    docsQosDeprecatedGroup.setStatus("deprecated")
+
+docsQosObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 7, 3, 1, 7)
+)
+docsQosObsoleteGroup.setObjects(
+      *(("DOCS-QOS-MIB", "docsQosPktClassUserPriApplies"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowProvisionedParamSetIndex"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowAdmittedParamSetIndex"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowActiveParamSetIndex"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowActiveTimeout"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowAdmittedTimeout"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowSchedulingType"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowRequestPolicy"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowTosAndMask"),
+        ("DOCS-QOS-MIB", "docsQosServiceFlowTosOrMask"),
+        ("DOCS-QOS-MIB", "docsQosServiceClassParamSetIndex"),
+        ("DOCS-QOS-MIB", "docsQosPHSClassifierIndex"))
+)
+if mibBuilder.loadTexts:
+    docsQosObsoleteGroup.setStatus("obsolete")
+
 
 # Notification objects
 
@@ -2505,12 +2849,21 @@ mibBuilder.exportSymbols(
        "docsQosPktClassSourceMacAddr": docsQosPktClassSourceMacAddr,
        "docsQosPktClassEnetProtocolType": docsQosPktClassEnetProtocolType,
        "docsQosPktClassEnetProtocol": docsQosPktClassEnetProtocol,
+       "docsQosPktClassUserPriApplies": docsQosPktClassUserPriApplies,
        "docsQosPktClassUserPriLow": docsQosPktClassUserPriLow,
        "docsQosPktClassUserPriHigh": docsQosPktClassUserPriHigh,
        "docsQosPktClassVlanId": docsQosPktClassVlanId,
        "docsQosPktClassState": docsQosPktClassState,
        "docsQosPktClassPkts": docsQosPktClassPkts,
        "docsQosPktClassBitMap": docsQosPktClassBitMap,
+       "docsQosPktClassInetSourceAddrType": docsQosPktClassInetSourceAddrType,
+       "docsQosPktClassInetSourceAddr": docsQosPktClassInetSourceAddr,
+       "docsQosPktClassInetSourceMaskType": docsQosPktClassInetSourceMaskType,
+       "docsQosPktClassInetSourceMask": docsQosPktClassInetSourceMask,
+       "docsQosPktClassInetDestAddrType": docsQosPktClassInetDestAddrType,
+       "docsQosPktClassInetDestAddr": docsQosPktClassInetDestAddr,
+       "docsQosPktClassInetDestMaskType": docsQosPktClassInetDestMaskType,
+       "docsQosPktClassInetDestMask": docsQosPktClassInetDestMask,
        "docsQosParamSetTable": docsQosParamSetTable,
        "docsQosParamSetEntry": docsQosParamSetEntry,
        "docsQosParamSetServiceClassName": docsQosParamSetServiceClassName,
@@ -2538,9 +2891,18 @@ mibBuilder.exportSymbols(
        "docsQosServiceFlowTable": docsQosServiceFlowTable,
        "docsQosServiceFlowEntry": docsQosServiceFlowEntry,
        "docsQosServiceFlowId": docsQosServiceFlowId,
+       "docsQosServiceFlowProvisionedParamSetIndex": docsQosServiceFlowProvisionedParamSetIndex,
+       "docsQosServiceFlowAdmittedParamSetIndex": docsQosServiceFlowAdmittedParamSetIndex,
+       "docsQosServiceFlowActiveParamSetIndex": docsQosServiceFlowActiveParamSetIndex,
        "docsQosServiceFlowSID": docsQosServiceFlowSID,
        "docsQosServiceFlowDirection": docsQosServiceFlowDirection,
        "docsQosServiceFlowPrimary": docsQosServiceFlowPrimary,
+       "docsQosServiceFlowActiveTimeout": docsQosServiceFlowActiveTimeout,
+       "docsQosServiceFlowAdmittedTimeout": docsQosServiceFlowAdmittedTimeout,
+       "docsQosServiceFlowSchedulingType": docsQosServiceFlowSchedulingType,
+       "docsQosServiceFlowRequestPolicy": docsQosServiceFlowRequestPolicy,
+       "docsQosServiceFlowTosAndMask": docsQosServiceFlowTosAndMask,
+       "docsQosServiceFlowTosOrMask": docsQosServiceFlowTosOrMask,
        "docsQosServiceFlowStatsTable": docsQosServiceFlowStatsTable,
        "docsQosServiceFlowStatsEntry": docsQosServiceFlowStatsEntry,
        "docsQosServiceFlowPkts": docsQosServiceFlowPkts,
@@ -2578,6 +2940,8 @@ mibBuilder.exportSymbols(
        "docsQosDCCAcks": docsQosDCCAcks,
        "docsQosDCCs": docsQosDCCs,
        "docsQosDCCFails": docsQosDCCFails,
+       "docsQosDCCRspDeparts": docsQosDCCRspDeparts,
+       "docsQosDCCRspArrives": docsQosDCCRspArrives,
        "docsQosServiceFlowLogTable": docsQosServiceFlowLogTable,
        "docsQosServiceFlowLogEntry": docsQosServiceFlowLogEntry,
        "docsQosServiceFlowLogIndex": docsQosServiceFlowLogIndex,
@@ -2598,6 +2962,7 @@ mibBuilder.exportSymbols(
        "docsQosServiceClassTable": docsQosServiceClassTable,
        "docsQosServiceClassEntry": docsQosServiceClassEntry,
        "docsQosServiceClassName": docsQosServiceClassName,
+       "docsQosServiceClassParamSetIndex": docsQosServiceClassParamSetIndex,
        "docsQosServiceClassStatus": docsQosServiceClassStatus,
        "docsQosServiceClassPriority": docsQosServiceClassPriority,
        "docsQosServiceClassMaxTrafficRate": docsQosServiceClassMaxTrafficRate,
@@ -2631,6 +2996,7 @@ mibBuilder.exportSymbols(
        "docsQosPHSMask": docsQosPHSMask,
        "docsQosPHSSize": docsQosPHSSize,
        "docsQosPHSVerify": docsQosPHSVerify,
+       "docsQosPHSClassifierIndex": docsQosPHSClassifierIndex,
        "docsQosPHSIndex": docsQosPHSIndex,
        "docsQosCmtsMacToSrvFlowTable": docsQosCmtsMacToSrvFlowTable,
        "docsQosCmtsMacToSrvFlowEntry": docsQosCmtsMacToSrvFlowEntry,
@@ -2645,6 +3011,8 @@ mibBuilder.exportSymbols(
        "docsQosCmtsGroup": docsQosCmtsGroup,
        "docsQosSrvClassPolicyGroup": docsQosSrvClassPolicyGroup,
        "docsQosServiceClassGroup": docsQosServiceClassGroup,
+       "docsQosDeprecatedGroup": docsQosDeprecatedGroup,
+       "docsQosObsoleteGroup": docsQosObsoleteGroup,
        "docsQosCompliances": docsQosCompliances,
        "docsQosCompliance": docsQosCompliance}
 )

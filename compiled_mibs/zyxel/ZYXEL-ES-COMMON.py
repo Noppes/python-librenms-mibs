@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\zyxel\ZYXEL-ES-COMMON
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:35:55 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -95,11 +92,13 @@ if 'mibBuilder' not in globals():
 
 (DisplayString,
  PhysAddress,
- TextualConvention) = mibBuilder.importSymbols(
+ TextualConvention,
+ TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
-    "TextualConvention")
+    "TextualConvention",
+    "TruthValue")
 
 (esConformance,
  esMgmt) = mibBuilder.importSymbols(
@@ -335,6 +334,15 @@ sysActiveSessionNum = _SysActiveSessionNum_Object(
 sysActiveSessionNum.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sysActiveSessionNum.setStatus("current")
+_SysNebulaManaged_Type = TruthValue
+_SysNebulaManaged_Object = MibScalar
+sysNebulaManaged = _SysNebulaManaged_Object(
+    (1, 3, 6, 1, 4, 1, 890, 1, 15, 3, 1, 20),
+    _SysNebulaManaged_Type()
+)
+sysNebulaManaged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sysNebulaManaged.setStatus("current")
 
 
 class _SysMgmtReboot_Type(Integer32):
@@ -533,7 +541,7 @@ class _SysMgmtBootupConfigIndex_Type(Integer32):
     """Custom type sysMgmtBootupConfigIndex based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
+        ValueRangeConstraint(1, 100),
     )
 
 
@@ -552,7 +560,7 @@ class _SysMgmtBootupImageIndex_Type(Integer32):
     """Custom type sysMgmtBootupImageIndex based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100),
+        ValueRangeConstraint(1, 100),
     )
 
 
@@ -611,6 +619,28 @@ sys8021QControl = _Sys8021QControl_Object(
 sys8021QControl.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sys8021QControl.setStatus("deprecated")
+_SysMgmtUsers_ObjectIdentity = ObjectIdentity
+sysMgmtUsers = _SysMgmtUsers_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 890, 1, 15, 3, 2, 16)
+)
+_SysUserNumber_Type = Integer32
+_SysUserNumber_Object = MibScalar
+sysUserNumber = _SysUserNumber_Object(
+    (1, 3, 6, 1, 4, 1, 890, 1, 15, 3, 2, 16, 1),
+    _SysUserNumber_Type()
+)
+sysUserNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sysUserNumber.setStatus("current")
+_SysMgmtNebulaControlCenterDiscovery_Type = EnabledStatus
+_SysMgmtNebulaControlCenterDiscovery_Object = MibScalar
+sysMgmtNebulaControlCenterDiscovery = _SysMgmtNebulaControlCenterDiscovery_Object(
+    (1, 3, 6, 1, 4, 1, 890, 1, 15, 3, 2, 19),
+    _SysMgmtNebulaControlCenterDiscovery_Type()
+)
+sysMgmtNebulaControlCenterDiscovery.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sysMgmtNebulaControlCenterDiscovery.setStatus("current")
 
 # Managed Objects groups
 
@@ -703,6 +733,7 @@ mibBuilder.exportSymbols(
        "sysCurrentDateTime": sysCurrentDateTime,
        "sysCurrentTime": sysCurrentTime,
        "sysActiveSessionNum": sysActiveSessionNum,
+       "sysNebulaManaged": sysNebulaManaged,
        "esSysMgmt": esSysMgmt,
        "sysMgmtReboot": sysMgmtReboot,
        "sysMgmtConfigSave": sysMgmtConfigSave,
@@ -718,5 +749,8 @@ mibBuilder.exportSymbols(
        "sysMgmtAlarmStatus": sysMgmtAlarmStatus,
        "sysMgmtVLANControl": sysMgmtVLANControl,
        "sysMgmtVLANID": sysMgmtVLANID,
-       "sys8021QControl": sys8021QControl}
+       "sys8021QControl": sys8021QControl,
+       "sysMgmtUsers": sysMgmtUsers,
+       "sysUserNumber": sysUserNumber,
+       "sysMgmtNebulaControlCenterDiscovery": sysMgmtNebulaControlCenterDiscovery}
 )

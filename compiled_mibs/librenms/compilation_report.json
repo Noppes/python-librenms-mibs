@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-05-29T09:39:03.767474",
+  "stats": {
+    "total": 2,
+    "compiled": 1,
+    "failed": 1,
+    "skipped": 0,
+    "errors": [
+      {
+        "mib": "XCP-NG-VMINFO-MIB",
+        "error": "failed"
+      }
+    ]
+  },
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
+}

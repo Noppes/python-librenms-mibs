@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\DOCS-IF-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:18:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,6 +108,7 @@ if 'mibBuilder' not in globals():
  MacAddress,
  PhysAddress,
  RowStatus,
+ StorageType,
  TextualConvention,
  TimeInterval,
  TimeStamp,
@@ -120,6 +118,7 @@ if 'mibBuilder' not in globals():
     "MacAddress",
     "PhysAddress",
     "RowStatus",
+    "StorageType",
     "TextualConvention",
     "TimeInterval",
     "TimeStamp",
@@ -133,7 +132,7 @@ docsIfMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     docsIfMib.setRevisions(
-        ("2002-12-20 00:00",
+        ("2006-05-24 00:00",
          "1999-08-19 00:00")
     )
 
@@ -211,22 +210,12 @@ class DocsisUpstreamType(TextualConvention, Integer32):
 
 
 
-class DocsisUpstreamTypeStatus(TextualConvention, Integer32):
+class DocsEqualizerData(TextualConvention, OctetString):
     status = "current"
-    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("unknown", 0),
-          ("tdma", 1),
-          ("atdma", 2),
-          ("scdma", 3))
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(36, 260),
     )
 
 
@@ -327,22 +316,14 @@ class _DocsIfDownChannelModulation_Type(Integer32):
             *(1,
               2,
               3,
-              4,
-              5,
-              6,
-              7,
-              8)
+              4)
         )
     )
     namedValues = NamedValues(
         *(("unknown", 1),
           ("other", 2),
           ("qam64", 3),
-          ("qam256", 4),
-          ("qam512", 5),
-          ("qam1024", 6),
-          ("qpsk", 7),
-          ("qam16", 8))
+          ("qam256", 4))
     )
 
 
@@ -436,6 +417,15 @@ docsIfDownChannelAnnex = _DocsIfDownChannelAnnex_Object(
 docsIfDownChannelAnnex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfDownChannelAnnex.setStatus("current")
+_DocsIfDownChannelStorageType_Type = StorageType
+_DocsIfDownChannelStorageType_Object = MibTableColumn
+docsIfDownChannelStorageType = _DocsIfDownChannelStorageType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 1, 1, 8),
+    _DocsIfDownChannelStorageType_Type()
+)
+docsIfDownChannelStorageType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfDownChannelStorageType.setStatus("current")
 _DocsIfUpstreamChannelTable_Object = MibTable
 docsIfUpstreamChannelTable = _DocsIfUpstreamChannelTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 2)
@@ -530,6 +520,8 @@ docsIfUpChannelSlotSize = _DocsIfUpChannelSlotSize_Object(
 docsIfUpChannelSlotSize.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfUpChannelSlotSize.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfUpChannelSlotSize.setUnits("ticks")
 _DocsIfUpChannelTxTimingOffset_Type = Unsigned32
 _DocsIfUpChannelTxTimingOffset_Object = MibTableColumn
 docsIfUpChannelTxTimingOffset = _DocsIfUpChannelTxTimingOffset_Object(
@@ -622,7 +614,20 @@ class _DocsIfUpChannelScdmaActiveCodes_Type(Unsigned32):
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 0),
-        ValueRangeConstraint(64, 128),
+        ValueRangeConstraint(64, 66),
+        ValueRangeConstraint(68, 70),
+        ValueRangeConstraint(72, 72),
+        ValueRangeConstraint(74, 78),
+        ValueRangeConstraint(80, 82),
+        ValueRangeConstraint(84, 88),
+        ValueRangeConstraint(90, 96),
+        ValueRangeConstraint(98, 100),
+        ValueRangeConstraint(102, 102),
+        ValueRangeConstraint(104, 106),
+        ValueRangeConstraint(108, 108),
+        ValueRangeConstraint(110, 112),
+        ValueRangeConstraint(114, 126),
+        ValueRangeConstraint(128, 128),
     )
 
 
@@ -655,6 +660,8 @@ docsIfUpChannelScdmaCodesPerSlot = _DocsIfUpChannelScdmaCodesPerSlot_Object(
 docsIfUpChannelScdmaCodesPerSlot.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfUpChannelScdmaCodesPerSlot.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfUpChannelScdmaCodesPerSlot.setUnits("codesperMinislots")
 
 
 class _DocsIfUpChannelScdmaFrameSize_Type(Unsigned32):
@@ -674,6 +681,8 @@ docsIfUpChannelScdmaFrameSize = _DocsIfUpChannelScdmaFrameSize_Object(
 docsIfUpChannelScdmaFrameSize.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfUpChannelScdmaFrameSize.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfUpChannelScdmaFrameSize.setUnits("spreadIntervals")
 
 
 class _DocsIfUpChannelScdmaHoppingSeed_Type(Unsigned32):
@@ -699,7 +708,7 @@ docsIfUpChannelType = _DocsIfUpChannelType_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 2, 1, 15),
     _DocsIfUpChannelType_Type()
 )
-docsIfUpChannelType.setMaxAccess("read-create")
+docsIfUpChannelType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfUpChannelType.setStatus("current")
 _DocsIfUpChannelCloneFrom_Type = InterfaceIndexOrZero
@@ -729,7 +738,14 @@ docsIfUpChannelStatus = _DocsIfUpChannelStatus_Object(
 docsIfUpChannelStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfUpChannelStatus.setStatus("current")
-_DocsIfUpChannelPreEqEnable_Type = TruthValue
+
+
+class _DocsIfUpChannelPreEqEnable_Type(TruthValue):
+    """Custom type docsIfUpChannelPreEqEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_DocsIfUpChannelPreEqEnable_Type.__name__ = "TruthValue"
 _DocsIfUpChannelPreEqEnable_Object = MibTableColumn
 docsIfUpChannelPreEqEnable = _DocsIfUpChannelPreEqEnable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 2, 1, 19),
@@ -790,7 +806,7 @@ docsIfQosProfPriority = _DocsIfQosProfPriority_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 2),
     _DocsIfQosProfPriority_Type()
 )
-docsIfQosProfPriority.setMaxAccess("read-only")
+docsIfQosProfPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfPriority.setStatus("current")
 
@@ -811,9 +827,11 @@ docsIfQosProfMaxUpBandwidth = _DocsIfQosProfMaxUpBandwidth_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 3),
     _DocsIfQosProfMaxUpBandwidth_Type()
 )
-docsIfQosProfMaxUpBandwidth.setMaxAccess("read-only")
+docsIfQosProfMaxUpBandwidth.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfMaxUpBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfQosProfMaxUpBandwidth.setUnits("bits per second")
 
 
 class _DocsIfQosProfGuarUpBandwidth_Type(Integer32):
@@ -832,9 +850,11 @@ docsIfQosProfGuarUpBandwidth = _DocsIfQosProfGuarUpBandwidth_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 4),
     _DocsIfQosProfGuarUpBandwidth_Type()
 )
-docsIfQosProfGuarUpBandwidth.setMaxAccess("read-only")
+docsIfQosProfGuarUpBandwidth.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfGuarUpBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfQosProfGuarUpBandwidth.setUnits("bits per second")
 
 
 class _DocsIfQosProfMaxDownBandwidth_Type(Integer32):
@@ -853,9 +873,11 @@ docsIfQosProfMaxDownBandwidth = _DocsIfQosProfMaxDownBandwidth_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 5),
     _DocsIfQosProfMaxDownBandwidth_Type()
 )
-docsIfQosProfMaxDownBandwidth.setMaxAccess("read-only")
+docsIfQosProfMaxDownBandwidth.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfMaxDownBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfQosProfMaxDownBandwidth.setUnits("bits per second")
 
 
 class _DocsIfQosProfMaxTxBurst_Type(Integer32):
@@ -874,9 +896,11 @@ docsIfQosProfMaxTxBurst = _DocsIfQosProfMaxTxBurst_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 6),
     _DocsIfQosProfMaxTxBurst_Type()
 )
-docsIfQosProfMaxTxBurst.setMaxAccess("read-only")
+docsIfQosProfMaxTxBurst.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfMaxTxBurst.setStatus("deprecated")
+if mibBuilder.loadTexts:
+    docsIfQosProfMaxTxBurst.setUnits("mini-slots")
 
 
 class _DocsIfQosProfBaselinePrivacy_Type(TruthValue):
@@ -890,7 +914,7 @@ docsIfQosProfBaselinePrivacy = _DocsIfQosProfBaselinePrivacy_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 7),
     _DocsIfQosProfBaselinePrivacy_Type()
 )
-docsIfQosProfBaselinePrivacy.setMaxAccess("read-only")
+docsIfQosProfBaselinePrivacy.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfBaselinePrivacy.setStatus("current")
 _DocsIfQosProfStatus_Type = RowStatus
@@ -899,7 +923,7 @@ docsIfQosProfStatus = _DocsIfQosProfStatus_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 8),
     _DocsIfQosProfStatus_Type()
 )
-docsIfQosProfStatus.setMaxAccess("read-only")
+docsIfQosProfStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfStatus.setStatus("current")
 
@@ -920,9 +944,20 @@ docsIfQosProfMaxTransmitBurst = _DocsIfQosProfMaxTransmitBurst_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 9),
     _DocsIfQosProfMaxTransmitBurst_Type()
 )
-docsIfQosProfMaxTransmitBurst.setMaxAccess("read-only")
+docsIfQosProfMaxTransmitBurst.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfQosProfMaxTransmitBurst.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfQosProfMaxTransmitBurst.setUnits("bytes")
+_DocsIfQosProfStorageType_Type = StorageType
+_DocsIfQosProfStorageType_Object = MibTableColumn
+docsIfQosProfStorageType = _DocsIfQosProfStorageType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 3, 1, 10),
+    _DocsIfQosProfStorageType_Type()
+)
+docsIfQosProfStorageType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfQosProfStorageType.setStatus("current")
 _DocsIfSignalQualityTable_Object = MibTable
 docsIfSignalQualityTable = _DocsIfSignalQualityTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 4)
@@ -956,6 +991,8 @@ docsIfSigQUnerroreds = _DocsIfSigQUnerroreds_Object(
 docsIfSigQUnerroreds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQUnerroreds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfSigQUnerroreds.setUnits("codewords")
 _DocsIfSigQCorrecteds_Type = Counter32
 _DocsIfSigQCorrecteds_Object = MibTableColumn
 docsIfSigQCorrecteds = _DocsIfSigQCorrecteds_Object(
@@ -965,6 +1002,8 @@ docsIfSigQCorrecteds = _DocsIfSigQCorrecteds_Object(
 docsIfSigQCorrecteds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQCorrecteds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfSigQCorrecteds.setUnits("codewords")
 _DocsIfSigQUncorrectables_Type = Counter32
 _DocsIfSigQUncorrectables_Object = MibTableColumn
 docsIfSigQUncorrectables = _DocsIfSigQUncorrectables_Object(
@@ -974,6 +1013,8 @@ docsIfSigQUncorrectables = _DocsIfSigQUncorrectables_Object(
 docsIfSigQUncorrectables.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQUncorrectables.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfSigQUncorrectables.setUnits("codewords")
 _DocsIfSigQSignalNoise_Type = TenthdB
 _DocsIfSigQSignalNoise_Object = MibTableColumn
 docsIfSigQSignalNoise = _DocsIfSigQSignalNoise_Object(
@@ -984,7 +1025,7 @@ docsIfSigQSignalNoise.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQSignalNoise.setStatus("current")
 if mibBuilder.loadTexts:
-    docsIfSigQSignalNoise.setUnits("dB")
+    docsIfSigQSignalNoise.setUnits("TenthdB")
 
 
 class _DocsIfSigQMicroreflections_Type(Integer32):
@@ -1005,8 +1046,8 @@ docsIfSigQMicroreflections.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQMicroreflections.setStatus("current")
 if mibBuilder.loadTexts:
-    docsIfSigQMicroreflections.setUnits("dBc")
-_DocsIfSigQEqualizationData_Type = OctetString
+    docsIfSigQMicroreflections.setUnits("-dBc")
+_DocsIfSigQEqualizationData_Type = DocsEqualizerData
 _DocsIfSigQEqualizationData_Object = MibTableColumn
 docsIfSigQEqualizationData = _DocsIfSigQEqualizationData_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 1, 4, 1, 7),
@@ -1024,6 +1065,8 @@ docsIfSigQExtUnerroreds = _DocsIfSigQExtUnerroreds_Object(
 docsIfSigQExtUnerroreds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQExtUnerroreds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfSigQExtUnerroreds.setUnits("codewords")
 _DocsIfSigQExtCorrecteds_Type = Counter64
 _DocsIfSigQExtCorrecteds_Object = MibTableColumn
 docsIfSigQExtCorrecteds = _DocsIfSigQExtCorrecteds_Object(
@@ -1033,6 +1076,8 @@ docsIfSigQExtCorrecteds = _DocsIfSigQExtCorrecteds_Object(
 docsIfSigQExtCorrecteds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQExtCorrecteds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfSigQExtCorrecteds.setUnits("codewords")
 _DocsIfSigQExtUncorrectables_Type = Counter64
 _DocsIfSigQExtUncorrectables_Object = MibTableColumn
 docsIfSigQExtUncorrectables = _DocsIfSigQExtUncorrectables_Object(
@@ -1042,6 +1087,8 @@ docsIfSigQExtUncorrectables = _DocsIfSigQExtUncorrectables_Object(
 docsIfSigQExtUncorrectables.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfSigQExtUncorrectables.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfSigQExtUncorrectables.setUnits("codewords")
 _DocsIfDocsisBaseCapability_Type = DocsisVersion
 _DocsIfDocsisBaseCapability_Object = MibScalar
 docsIfDocsisBaseCapability = _DocsIfDocsisBaseCapability_Object(
@@ -1129,6 +1176,8 @@ docsIfCmRangingTimeout = _DocsIfCmRangingTimeout_Object(
 docsIfCmRangingTimeout.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     docsIfCmRangingTimeout.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmRangingTimeout.setUnits("HundredOfSeconds")
 _DocsIfCmStatusTable_Object = MibTable
 docsIfCmStatusTable = _DocsIfCmStatusTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 2)
@@ -1192,7 +1241,19 @@ docsIfCmStatusValue = _DocsIfCmStatusValue_Object(
 docsIfCmStatusValue.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusValue.setStatus("current")
-_DocsIfCmStatusCode_Type = OctetString
+
+
+class _DocsIfCmStatusCode_Type(OctetString):
+    """Custom type docsIfCmStatusCode based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(5, 5),
+        ValueSizeConstraint(6, 6),
+    )
+
+
+_DocsIfCmStatusCode_Type.__name__ = "OctetString"
 _DocsIfCmStatusCode_Object = MibTableColumn
 docsIfCmStatusCode = _DocsIfCmStatusCode_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 2, 1, 2),
@@ -1211,7 +1272,7 @@ docsIfCmStatusTxPower.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusTxPower.setStatus("current")
 if mibBuilder.loadTexts:
-    docsIfCmStatusTxPower.setUnits("dBmV")
+    docsIfCmStatusTxPower.setUnits("TenthdBmV")
 _DocsIfCmStatusResets_Type = Counter32
 _DocsIfCmStatusResets_Object = MibTableColumn
 docsIfCmStatusResets = _DocsIfCmStatusResets_Object(
@@ -1221,6 +1282,8 @@ docsIfCmStatusResets = _DocsIfCmStatusResets_Object(
 docsIfCmStatusResets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusResets.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusResets.setUnits("resets")
 _DocsIfCmStatusLostSyncs_Type = Counter32
 _DocsIfCmStatusLostSyncs_Object = MibTableColumn
 docsIfCmStatusLostSyncs = _DocsIfCmStatusLostSyncs_Object(
@@ -1239,6 +1302,8 @@ docsIfCmStatusInvalidMaps = _DocsIfCmStatusInvalidMaps_Object(
 docsIfCmStatusInvalidMaps.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusInvalidMaps.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusInvalidMaps.setUnits("maps")
 _DocsIfCmStatusInvalidUcds_Type = Counter32
 _DocsIfCmStatusInvalidUcds_Object = MibTableColumn
 docsIfCmStatusInvalidUcds = _DocsIfCmStatusInvalidUcds_Object(
@@ -1248,6 +1313,8 @@ docsIfCmStatusInvalidUcds = _DocsIfCmStatusInvalidUcds_Object(
 docsIfCmStatusInvalidUcds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusInvalidUcds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusInvalidUcds.setUnits("messages")
 _DocsIfCmStatusInvalidRangingResponses_Type = Counter32
 _DocsIfCmStatusInvalidRangingResponses_Object = MibTableColumn
 docsIfCmStatusInvalidRangingResponses = _DocsIfCmStatusInvalidRangingResponses_Object(
@@ -1257,6 +1324,8 @@ docsIfCmStatusInvalidRangingResponses = _DocsIfCmStatusInvalidRangingResponses_O
 docsIfCmStatusInvalidRangingResponses.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusInvalidRangingResponses.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusInvalidRangingResponses.setUnits("messages")
 _DocsIfCmStatusInvalidRegistrationResponses_Type = Counter32
 _DocsIfCmStatusInvalidRegistrationResponses_Object = MibTableColumn
 docsIfCmStatusInvalidRegistrationResponses = _DocsIfCmStatusInvalidRegistrationResponses_Object(
@@ -1266,6 +1335,8 @@ docsIfCmStatusInvalidRegistrationResponses = _DocsIfCmStatusInvalidRegistrationR
 docsIfCmStatusInvalidRegistrationResponses.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusInvalidRegistrationResponses.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusInvalidRegistrationResponses.setUnits("messages")
 _DocsIfCmStatusT1Timeouts_Type = Counter32
 _DocsIfCmStatusT1Timeouts_Object = MibTableColumn
 docsIfCmStatusT1Timeouts = _DocsIfCmStatusT1Timeouts_Object(
@@ -1275,6 +1346,8 @@ docsIfCmStatusT1Timeouts = _DocsIfCmStatusT1Timeouts_Object(
 docsIfCmStatusT1Timeouts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusT1Timeouts.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusT1Timeouts.setUnits("timeouts")
 _DocsIfCmStatusT2Timeouts_Type = Counter32
 _DocsIfCmStatusT2Timeouts_Object = MibTableColumn
 docsIfCmStatusT2Timeouts = _DocsIfCmStatusT2Timeouts_Object(
@@ -1284,6 +1357,8 @@ docsIfCmStatusT2Timeouts = _DocsIfCmStatusT2Timeouts_Object(
 docsIfCmStatusT2Timeouts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusT2Timeouts.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusT2Timeouts.setUnits("timeouts")
 _DocsIfCmStatusT3Timeouts_Type = Counter32
 _DocsIfCmStatusT3Timeouts_Object = MibTableColumn
 docsIfCmStatusT3Timeouts = _DocsIfCmStatusT3Timeouts_Object(
@@ -1293,6 +1368,8 @@ docsIfCmStatusT3Timeouts = _DocsIfCmStatusT3Timeouts_Object(
 docsIfCmStatusT3Timeouts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusT3Timeouts.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusT3Timeouts.setUnits("timeouts")
 _DocsIfCmStatusT4Timeouts_Type = Counter32
 _DocsIfCmStatusT4Timeouts_Object = MibTableColumn
 docsIfCmStatusT4Timeouts = _DocsIfCmStatusT4Timeouts_Object(
@@ -1302,6 +1379,8 @@ docsIfCmStatusT4Timeouts = _DocsIfCmStatusT4Timeouts_Object(
 docsIfCmStatusT4Timeouts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusT4Timeouts.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusT4Timeouts.setUnits("timeouts")
 _DocsIfCmStatusRangingAborteds_Type = Counter32
 _DocsIfCmStatusRangingAborteds_Object = MibTableColumn
 docsIfCmStatusRangingAborteds = _DocsIfCmStatusRangingAborteds_Object(
@@ -1311,6 +1390,8 @@ docsIfCmStatusRangingAborteds = _DocsIfCmStatusRangingAborteds_Object(
 docsIfCmStatusRangingAborteds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusRangingAborteds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusRangingAborteds.setUnits("attempts")
 _DocsIfCmStatusDocsisOperMode_Type = DocsisQosVersion
 _DocsIfCmStatusDocsisOperMode_Object = MibTableColumn
 docsIfCmStatusDocsisOperMode = _DocsIfCmStatusDocsisOperMode_Object(
@@ -1320,7 +1401,7 @@ docsIfCmStatusDocsisOperMode = _DocsIfCmStatusDocsisOperMode_Object(
 docsIfCmStatusDocsisOperMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusDocsisOperMode.setStatus("current")
-_DocsIfCmStatusModulationType_Type = DocsisUpstreamTypeStatus
+_DocsIfCmStatusModulationType_Type = DocsisUpstreamType
 _DocsIfCmStatusModulationType_Object = MibTableColumn
 docsIfCmStatusModulationType = _DocsIfCmStatusModulationType_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 2, 1, 16),
@@ -1329,7 +1410,7 @@ docsIfCmStatusModulationType = _DocsIfCmStatusModulationType_Object(
 docsIfCmStatusModulationType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusModulationType.setStatus("current")
-_DocsIfCmStatusEqualizationData_Type = OctetString
+_DocsIfCmStatusEqualizationData_Type = DocsEqualizerData
 _DocsIfCmStatusEqualizationData_Object = MibTableColumn
 docsIfCmStatusEqualizationData = _DocsIfCmStatusEqualizationData_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 2, 1, 17),
@@ -1338,6 +1419,28 @@ docsIfCmStatusEqualizationData = _DocsIfCmStatusEqualizationData_Object(
 docsIfCmStatusEqualizationData.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmStatusEqualizationData.setStatus("current")
+_DocsIfCmStatusUCCs_Type = Counter32
+_DocsIfCmStatusUCCs_Object = MibTableColumn
+docsIfCmStatusUCCs = _DocsIfCmStatusUCCs_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 2, 1, 18),
+    _DocsIfCmStatusUCCs_Type()
+)
+docsIfCmStatusUCCs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfCmStatusUCCs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusUCCs.setUnits("attempts")
+_DocsIfCmStatusUCCFails_Type = Counter32
+_DocsIfCmStatusUCCFails_Object = MibTableColumn
+docsIfCmStatusUCCFails = _DocsIfCmStatusUCCFails_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 2, 1, 19),
+    _DocsIfCmStatusUCCFails_Type()
+)
+docsIfCmStatusUCCFails.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfCmStatusUCCFails.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmStatusUCCFails.setUnits("attempts")
 _DocsIfCmServiceTable_Object = MibTable
 docsIfCmServiceTable = _DocsIfCmServiceTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 2, 3)
@@ -1401,6 +1504,8 @@ docsIfCmServiceTxSlotsImmed = _DocsIfCmServiceTxSlotsImmed_Object(
 docsIfCmServiceTxSlotsImmed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceTxSlotsImmed.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceTxSlotsImmed.setUnits("mini-slots")
 _DocsIfCmServiceTxSlotsDed_Type = Counter32
 _DocsIfCmServiceTxSlotsDed_Object = MibTableColumn
 docsIfCmServiceTxSlotsDed = _DocsIfCmServiceTxSlotsDed_Object(
@@ -1410,6 +1515,8 @@ docsIfCmServiceTxSlotsDed = _DocsIfCmServiceTxSlotsDed_Object(
 docsIfCmServiceTxSlotsDed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceTxSlotsDed.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceTxSlotsDed.setUnits("mini-slots")
 _DocsIfCmServiceTxRetries_Type = Counter32
 _DocsIfCmServiceTxRetries_Object = MibTableColumn
 docsIfCmServiceTxRetries = _DocsIfCmServiceTxRetries_Object(
@@ -1419,6 +1526,8 @@ docsIfCmServiceTxRetries = _DocsIfCmServiceTxRetries_Object(
 docsIfCmServiceTxRetries.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceTxRetries.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceTxRetries.setUnits("attempts")
 _DocsIfCmServiceTxExceededs_Type = Counter32
 _DocsIfCmServiceTxExceededs_Object = MibTableColumn
 docsIfCmServiceTxExceededs = _DocsIfCmServiceTxExceededs_Object(
@@ -1428,6 +1537,8 @@ docsIfCmServiceTxExceededs = _DocsIfCmServiceTxExceededs_Object(
 docsIfCmServiceTxExceededs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceTxExceededs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceTxExceededs.setUnits("attempts")
 _DocsIfCmServiceRqRetries_Type = Counter32
 _DocsIfCmServiceRqRetries_Object = MibTableColumn
 docsIfCmServiceRqRetries = _DocsIfCmServiceRqRetries_Object(
@@ -1437,6 +1548,8 @@ docsIfCmServiceRqRetries = _DocsIfCmServiceRqRetries_Object(
 docsIfCmServiceRqRetries.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceRqRetries.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceRqRetries.setUnits("attempts")
 _DocsIfCmServiceRqExceededs_Type = Counter32
 _DocsIfCmServiceRqExceededs_Object = MibTableColumn
 docsIfCmServiceRqExceededs = _DocsIfCmServiceRqExceededs_Object(
@@ -1446,6 +1559,8 @@ docsIfCmServiceRqExceededs = _DocsIfCmServiceRqExceededs_Object(
 docsIfCmServiceRqExceededs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceRqExceededs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceRqExceededs.setUnits("attempts")
 _DocsIfCmServiceExtTxSlotsImmed_Type = Counter64
 _DocsIfCmServiceExtTxSlotsImmed_Object = MibTableColumn
 docsIfCmServiceExtTxSlotsImmed = _DocsIfCmServiceExtTxSlotsImmed_Object(
@@ -1455,6 +1570,8 @@ docsIfCmServiceExtTxSlotsImmed = _DocsIfCmServiceExtTxSlotsImmed_Object(
 docsIfCmServiceExtTxSlotsImmed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceExtTxSlotsImmed.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceExtTxSlotsImmed.setUnits("mini-slots")
 _DocsIfCmServiceExtTxSlotsDed_Type = Counter64
 _DocsIfCmServiceExtTxSlotsDed_Object = MibTableColumn
 docsIfCmServiceExtTxSlotsDed = _DocsIfCmServiceExtTxSlotsDed_Object(
@@ -1464,6 +1581,8 @@ docsIfCmServiceExtTxSlotsDed = _DocsIfCmServiceExtTxSlotsDed_Object(
 docsIfCmServiceExtTxSlotsDed.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmServiceExtTxSlotsDed.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmServiceExtTxSlotsDed.setUnits("mini-slots")
 _DocsIfCmtsObjects_ObjectIdentity = ObjectIdentity
 docsIfCmtsObjects = _DocsIfCmtsObjects_ObjectIdentity(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3)
@@ -1562,6 +1681,8 @@ docsIfCmtsMaxServiceIds = _DocsIfCmtsMaxServiceIds_Object(
 docsIfCmtsMaxServiceIds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsMaxServiceIds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsMaxServiceIds.setUnits("SIDs")
 _DocsIfCmtsInsertionInterval_Type = TimeTicks
 _DocsIfCmtsInsertionInterval_Object = MibTableColumn
 docsIfCmtsInsertionInterval = _DocsIfCmtsInsertionInterval_Object(
@@ -1590,6 +1711,8 @@ docsIfCmtsInvitedRangingAttempts = _DocsIfCmtsInvitedRangingAttempts_Object(
 docsIfCmtsInvitedRangingAttempts.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     docsIfCmtsInvitedRangingAttempts.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsInvitedRangingAttempts.setUnits("attempts")
 _DocsIfCmtsInsertInterval_Type = TimeInterval
 _DocsIfCmtsInsertInterval_Object = MibTableColumn
 docsIfCmtsInsertInterval = _DocsIfCmtsInsertInterval_Object(
@@ -1599,6 +1722,17 @@ docsIfCmtsInsertInterval = _DocsIfCmtsInsertInterval_Object(
 docsIfCmtsInsertInterval.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     docsIfCmtsInsertInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsInsertInterval.setUnits("HundredOfSeconds")
+_DocsIfCmtsMacStorageType_Type = StorageType
+_DocsIfCmtsMacStorageType_Object = MibTableColumn
+docsIfCmtsMacStorageType = _DocsIfCmtsMacStorageType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 1, 1, 8),
+    _DocsIfCmtsMacStorageType_Type()
+)
+docsIfCmtsMacStorageType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfCmtsMacStorageType.setStatus("current")
 _DocsIfCmtsStatusTable_Object = MibTable
 docsIfCmtsStatusTable = _DocsIfCmtsStatusTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 2)
@@ -1623,6 +1757,8 @@ docsIfCmtsStatusInvalidRangeReqs = _DocsIfCmtsStatusInvalidRangeReqs_Object(
 docsIfCmtsStatusInvalidRangeReqs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsStatusInvalidRangeReqs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsStatusInvalidRangeReqs.setUnits("messages")
 _DocsIfCmtsStatusRangingAborteds_Type = Counter32
 _DocsIfCmtsStatusRangingAborteds_Object = MibTableColumn
 docsIfCmtsStatusRangingAborteds = _DocsIfCmtsStatusRangingAborteds_Object(
@@ -1632,6 +1768,8 @@ docsIfCmtsStatusRangingAborteds = _DocsIfCmtsStatusRangingAborteds_Object(
 docsIfCmtsStatusRangingAborteds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsStatusRangingAborteds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsStatusRangingAborteds.setUnits("attempts")
 _DocsIfCmtsStatusInvalidRegReqs_Type = Counter32
 _DocsIfCmtsStatusInvalidRegReqs_Object = MibTableColumn
 docsIfCmtsStatusInvalidRegReqs = _DocsIfCmtsStatusInvalidRegReqs_Object(
@@ -1641,6 +1779,8 @@ docsIfCmtsStatusInvalidRegReqs = _DocsIfCmtsStatusInvalidRegReqs_Object(
 docsIfCmtsStatusInvalidRegReqs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsStatusInvalidRegReqs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsStatusInvalidRegReqs.setUnits("messages")
 _DocsIfCmtsStatusFailedRegReqs_Type = Counter32
 _DocsIfCmtsStatusFailedRegReqs_Object = MibTableColumn
 docsIfCmtsStatusFailedRegReqs = _DocsIfCmtsStatusFailedRegReqs_Object(
@@ -1650,6 +1790,8 @@ docsIfCmtsStatusFailedRegReqs = _DocsIfCmtsStatusFailedRegReqs_Object(
 docsIfCmtsStatusFailedRegReqs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsStatusFailedRegReqs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsStatusFailedRegReqs.setUnits("attempts")
 _DocsIfCmtsStatusInvalidDataReqs_Type = Counter32
 _DocsIfCmtsStatusInvalidDataReqs_Object = MibTableColumn
 docsIfCmtsStatusInvalidDataReqs = _DocsIfCmtsStatusInvalidDataReqs_Object(
@@ -1659,6 +1801,8 @@ docsIfCmtsStatusInvalidDataReqs = _DocsIfCmtsStatusInvalidDataReqs_Object(
 docsIfCmtsStatusInvalidDataReqs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsStatusInvalidDataReqs.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsStatusInvalidDataReqs.setUnits("messages")
 _DocsIfCmtsStatusT5Timeouts_Type = Counter32
 _DocsIfCmtsStatusT5Timeouts_Object = MibTableColumn
 docsIfCmtsStatusT5Timeouts = _DocsIfCmtsStatusT5Timeouts_Object(
@@ -1668,6 +1812,8 @@ docsIfCmtsStatusT5Timeouts = _DocsIfCmtsStatusT5Timeouts_Object(
 docsIfCmtsStatusT5Timeouts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsStatusT5Timeouts.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsStatusT5Timeouts.setUnits("timeouts")
 _DocsIfCmtsCmStatusTable_Object = MibTable
 docsIfCmtsCmStatusTable = _DocsIfCmtsCmStatusTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 3)
@@ -1748,17 +1894,27 @@ docsIfCmtsCmStatusRxPower.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusRxPower.setStatus("current")
 if mibBuilder.loadTexts:
-    docsIfCmtsCmStatusRxPower.setUnits("dBmV")
-_DocsIfCmtsCmStatusTimingOffset_Type = Unsigned32
+    docsIfCmtsCmStatusRxPower.setUnits("ThenthdBmV")
+
+
+class _DocsIfCmtsCmStatusTimingOffset_Type(Unsigned32):
+    """Custom type docsIfCmtsCmStatusTimingOffset based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_DocsIfCmtsCmStatusTimingOffset_Type.__name__ = "Unsigned32"
 _DocsIfCmtsCmStatusTimingOffset_Object = MibTableColumn
 docsIfCmtsCmStatusTimingOffset = _DocsIfCmtsCmStatusTimingOffset_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 3, 1, 7),
     _DocsIfCmtsCmStatusTimingOffset_Type()
 )
-docsIfCmtsCmStatusTimingOffset.setMaxAccess("read-write")
+docsIfCmtsCmStatusTimingOffset.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusTimingOffset.setStatus("current")
-_DocsIfCmtsCmStatusEqualizationData_Type = OctetString
+_DocsIfCmtsCmStatusEqualizationData_Type = DocsEqualizerData
 _DocsIfCmtsCmStatusEqualizationData_Object = MibTableColumn
 docsIfCmtsCmStatusEqualizationData = _DocsIfCmtsCmStatusEqualizationData_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 3, 1, 8),
@@ -1816,6 +1972,8 @@ docsIfCmtsCmStatusUnerroreds = _DocsIfCmtsCmStatusUnerroreds_Object(
 docsIfCmtsCmStatusUnerroreds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusUnerroreds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusUnerroreds.setUnits("codewords")
 _DocsIfCmtsCmStatusCorrecteds_Type = Counter32
 _DocsIfCmtsCmStatusCorrecteds_Object = MibTableColumn
 docsIfCmtsCmStatusCorrecteds = _DocsIfCmtsCmStatusCorrecteds_Object(
@@ -1825,6 +1983,8 @@ docsIfCmtsCmStatusCorrecteds = _DocsIfCmtsCmStatusCorrecteds_Object(
 docsIfCmtsCmStatusCorrecteds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusCorrecteds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusCorrecteds.setUnits("codewords")
 _DocsIfCmtsCmStatusUncorrectables_Type = Counter32
 _DocsIfCmtsCmStatusUncorrectables_Object = MibTableColumn
 docsIfCmtsCmStatusUncorrectables = _DocsIfCmtsCmStatusUncorrectables_Object(
@@ -1834,6 +1994,8 @@ docsIfCmtsCmStatusUncorrectables = _DocsIfCmtsCmStatusUncorrectables_Object(
 docsIfCmtsCmStatusUncorrectables.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusUncorrectables.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusUncorrectables.setUnits("codewords")
 _DocsIfCmtsCmStatusSignalNoise_Type = TenthdB
 _DocsIfCmtsCmStatusSignalNoise_Object = MibTableColumn
 docsIfCmtsCmStatusSignalNoise = _DocsIfCmtsCmStatusSignalNoise_Object(
@@ -1844,7 +2006,7 @@ docsIfCmtsCmStatusSignalNoise.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusSignalNoise.setStatus("current")
 if mibBuilder.loadTexts:
-    docsIfCmtsCmStatusSignalNoise.setUnits("dB")
+    docsIfCmtsCmStatusSignalNoise.setUnits("TenthdB")
 
 
 class _DocsIfCmtsCmStatusMicroreflections_Type(Integer32):
@@ -1865,7 +2027,7 @@ docsIfCmtsCmStatusMicroreflections.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusMicroreflections.setStatus("current")
 if mibBuilder.loadTexts:
-    docsIfCmtsCmStatusMicroreflections.setUnits("dBc")
+    docsIfCmtsCmStatusMicroreflections.setUnits("-dBc")
 _DocsIfCmtsCmStatusExtUnerroreds_Type = Counter64
 _DocsIfCmtsCmStatusExtUnerroreds_Object = MibTableColumn
 docsIfCmtsCmStatusExtUnerroreds = _DocsIfCmtsCmStatusExtUnerroreds_Object(
@@ -1875,6 +2037,8 @@ docsIfCmtsCmStatusExtUnerroreds = _DocsIfCmtsCmStatusExtUnerroreds_Object(
 docsIfCmtsCmStatusExtUnerroreds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusExtUnerroreds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusExtUnerroreds.setUnits("codewords")
 _DocsIfCmtsCmStatusExtCorrecteds_Type = Counter64
 _DocsIfCmtsCmStatusExtCorrecteds_Object = MibTableColumn
 docsIfCmtsCmStatusExtCorrecteds = _DocsIfCmtsCmStatusExtCorrecteds_Object(
@@ -1884,6 +2048,8 @@ docsIfCmtsCmStatusExtCorrecteds = _DocsIfCmtsCmStatusExtCorrecteds_Object(
 docsIfCmtsCmStatusExtCorrecteds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusExtCorrecteds.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusExtCorrecteds.setUnits("codewords")
 _DocsIfCmtsCmStatusExtUncorrectables_Type = Counter64
 _DocsIfCmtsCmStatusExtUncorrectables_Object = MibTableColumn
 docsIfCmtsCmStatusExtUncorrectables = _DocsIfCmtsCmStatusExtUncorrectables_Object(
@@ -1893,6 +2059,8 @@ docsIfCmtsCmStatusExtUncorrectables = _DocsIfCmtsCmStatusExtUncorrectables_Objec
 docsIfCmtsCmStatusExtUncorrectables.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusExtUncorrectables.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusExtUncorrectables.setUnits("codewords")
 _DocsIfCmtsCmStatusDocsisRegMode_Type = DocsisQosVersion
 _DocsIfCmtsCmStatusDocsisRegMode_Object = MibTableColumn
 docsIfCmtsCmStatusDocsisRegMode = _DocsIfCmtsCmStatusDocsisRegMode_Object(
@@ -1902,7 +2070,7 @@ docsIfCmtsCmStatusDocsisRegMode = _DocsIfCmtsCmStatusDocsisRegMode_Object(
 docsIfCmtsCmStatusDocsisRegMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusDocsisRegMode.setStatus("current")
-_DocsIfCmtsCmStatusModulationType_Type = DocsisUpstreamTypeStatus
+_DocsIfCmtsCmStatusModulationType_Type = DocsisUpstreamType
 _DocsIfCmtsCmStatusModulationType_Object = MibTableColumn
 docsIfCmtsCmStatusModulationType = _DocsIfCmtsCmStatusModulationType_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 3, 1, 19),
@@ -1938,6 +2106,25 @@ docsIfCmtsCmStatusValueLastUpdate = _DocsIfCmtsCmStatusValueLastUpdate_Object(
 docsIfCmtsCmStatusValueLastUpdate.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsCmStatusValueLastUpdate.setStatus("current")
+
+
+class _DocsIfCmtsCmStatusHighResolutionTimingOffset_Type(Unsigned32):
+    """Custom type docsIfCmtsCmStatusHighResolutionTimingOffset based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_DocsIfCmtsCmStatusHighResolutionTimingOffset_Type.__name__ = "Unsigned32"
+_DocsIfCmtsCmStatusHighResolutionTimingOffset_Object = MibTableColumn
+docsIfCmtsCmStatusHighResolutionTimingOffset = _DocsIfCmtsCmStatusHighResolutionTimingOffset_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 3, 1, 23),
+    _DocsIfCmtsCmStatusHighResolutionTimingOffset_Type()
+)
+docsIfCmtsCmStatusHighResolutionTimingOffset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfCmtsCmStatusHighResolutionTimingOffset.setStatus("current")
 _DocsIfCmtsServiceTable_Object = MibTable
 docsIfCmtsServiceTable = _DocsIfCmtsServiceTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 4)
@@ -2057,6 +2244,8 @@ docsIfCmtsServiceInOctets = _DocsIfCmtsServiceInOctets_Object(
 docsIfCmtsServiceInOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsServiceInOctets.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsServiceInOctets.setUnits("Bytes")
 _DocsIfCmtsServiceInPackets_Type = Counter32
 _DocsIfCmtsServiceInPackets_Object = MibTableColumn
 docsIfCmtsServiceInPackets = _DocsIfCmtsServiceInPackets_Object(
@@ -2066,6 +2255,8 @@ docsIfCmtsServiceInPackets = _DocsIfCmtsServiceInPackets_Object(
 docsIfCmtsServiceInPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsServiceInPackets.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsServiceInPackets.setUnits("packets")
 
 
 class _DocsIfCmtsServiceNewCmStatusIndex_Type(Integer32):
@@ -2184,8 +2375,7 @@ class _DocsIfCmtsModType_Type(Integer32):
               4,
               5,
               6,
-              7,
-              8)
+              7)
         )
     )
     namedValues = NamedValues(
@@ -2195,8 +2385,7 @@ class _DocsIfCmtsModType_Type(Integer32):
           ("qam8", 4),
           ("qam32", 5),
           ("qam64", 6),
-          ("qam128", 7),
-          ("qam256", 8))
+          ("qam128", 7))
     )
 
 
@@ -2228,6 +2417,8 @@ docsIfCmtsModPreambleLen = _DocsIfCmtsModPreambleLen_Object(
 docsIfCmtsModPreambleLen.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfCmtsModPreambleLen.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsModPreambleLen.setUnits("bits")
 
 
 class _DocsIfCmtsModDifferentialEncoding_Type(TruthValue):
@@ -2265,6 +2456,8 @@ docsIfCmtsModFECErrorCorrection = _DocsIfCmtsModFECErrorCorrection_Object(
 docsIfCmtsModFECErrorCorrection.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfCmtsModFECErrorCorrection.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsModFECErrorCorrection.setUnits("Bytes")
 
 
 class _DocsIfCmtsModFECCodewordLength_Type(Integer32):
@@ -2286,6 +2479,8 @@ docsIfCmtsModFECCodewordLength = _DocsIfCmtsModFECCodewordLength_Object(
 docsIfCmtsModFECCodewordLength.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfCmtsModFECCodewordLength.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsModFECCodewordLength.setUnits("Bytes")
 
 
 class _DocsIfCmtsModScramblerSeed_Type(Integer32):
@@ -2326,6 +2521,8 @@ docsIfCmtsModMaxBurstSize = _DocsIfCmtsModMaxBurstSize_Object(
 docsIfCmtsModMaxBurstSize.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     docsIfCmtsModMaxBurstSize.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsModMaxBurstSize.setUnits("mini-slots")
 _DocsIfCmtsModGuardTimeSize_Type = Unsigned32
 _DocsIfCmtsModGuardTimeSize_Object = MibTableColumn
 docsIfCmtsModGuardTimeSize = _DocsIfCmtsModGuardTimeSize_Object(
@@ -2335,6 +2532,8 @@ docsIfCmtsModGuardTimeSize = _DocsIfCmtsModGuardTimeSize_Object(
 docsIfCmtsModGuardTimeSize.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsModGuardTimeSize.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsModGuardTimeSize.setUnits("Symbol-times")
 
 
 class _DocsIfCmtsModLastCodewordShortened_Type(TruthValue):
@@ -2516,6 +2715,22 @@ if mibBuilder.loadTexts:
     docsIfCmtsModChannelType.setStatus("current")
 
 
+class _DocsIfCmtsModStorageType_Type(StorageType):
+    """Custom type docsIfCmtsModStorageType based on StorageType"""
+    defaultValue = 3
+
+
+_DocsIfCmtsModStorageType_Type.__name__ = "StorageType"
+_DocsIfCmtsModStorageType_Object = MibTableColumn
+docsIfCmtsModStorageType = _DocsIfCmtsModStorageType_Object(
+    (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 5, 1, 22),
+    _DocsIfCmtsModStorageType_Type()
+)
+docsIfCmtsModStorageType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsIfCmtsModStorageType.setStatus("current")
+
+
 class _DocsIfCmtsQosProfilePermissions_Type(Bits):
     """Custom type docsIfCmtsQosProfilePermissions based on Bits"""
     namedValues = NamedValues(
@@ -2629,7 +2844,7 @@ class _DocsIfCmtsChannelUtId_Type(Integer32):
     """Custom type docsIfCmtsChannelUtId based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 255),
+        ValueRangeConstraint(0, 255),
     )
 
 
@@ -2706,6 +2921,8 @@ docsIfCmtsDownChnlCtrTotalBytes = _DocsIfCmtsDownChnlCtrTotalBytes_Object(
 docsIfCmtsDownChnlCtrTotalBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsDownChnlCtrTotalBytes.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsDownChnlCtrTotalBytes.setUnits("Bytes")
 _DocsIfCmtsDownChnlCtrUsedBytes_Type = Counter32
 _DocsIfCmtsDownChnlCtrUsedBytes_Object = MibTableColumn
 docsIfCmtsDownChnlCtrUsedBytes = _DocsIfCmtsDownChnlCtrUsedBytes_Object(
@@ -2715,6 +2932,8 @@ docsIfCmtsDownChnlCtrUsedBytes = _DocsIfCmtsDownChnlCtrUsedBytes_Object(
 docsIfCmtsDownChnlCtrUsedBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsDownChnlCtrUsedBytes.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsDownChnlCtrUsedBytes.setUnits("Bytes")
 _DocsIfCmtsDownChnlCtrExtTotalBytes_Type = Counter64
 _DocsIfCmtsDownChnlCtrExtTotalBytes_Object = MibTableColumn
 docsIfCmtsDownChnlCtrExtTotalBytes = _DocsIfCmtsDownChnlCtrExtTotalBytes_Object(
@@ -2724,6 +2943,8 @@ docsIfCmtsDownChnlCtrExtTotalBytes = _DocsIfCmtsDownChnlCtrExtTotalBytes_Object(
 docsIfCmtsDownChnlCtrExtTotalBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsDownChnlCtrExtTotalBytes.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsDownChnlCtrExtTotalBytes.setUnits("Bytes")
 _DocsIfCmtsDownChnlCtrExtUsedBytes_Type = Counter64
 _DocsIfCmtsDownChnlCtrExtUsedBytes_Object = MibTableColumn
 docsIfCmtsDownChnlCtrExtUsedBytes = _DocsIfCmtsDownChnlCtrExtUsedBytes_Object(
@@ -2733,6 +2954,8 @@ docsIfCmtsDownChnlCtrExtUsedBytes = _DocsIfCmtsDownChnlCtrExtUsedBytes_Object(
 docsIfCmtsDownChnlCtrExtUsedBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsDownChnlCtrExtUsedBytes.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsDownChnlCtrExtUsedBytes.setUnits("Bytes")
 _DocsIfCmtsUpChannelCounterTable_Object = MibTable
 docsIfCmtsUpChannelCounterTable = _DocsIfCmtsUpChannelCounterTable_Object(
     (1, 3, 6, 1, 2, 1, 10, 127, 1, 3, 11)
@@ -2776,6 +2999,8 @@ docsIfCmtsUpChnlCtrTotalMslots = _DocsIfCmtsUpChnlCtrTotalMslots_Object(
 docsIfCmtsUpChnlCtrTotalMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrTotalMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrTotalMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrUcastGrantedMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrUcastGrantedMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrUcastGrantedMslots = _DocsIfCmtsUpChnlCtrUcastGrantedMslots_Object(
@@ -2785,6 +3010,8 @@ docsIfCmtsUpChnlCtrUcastGrantedMslots = _DocsIfCmtsUpChnlCtrUcastGrantedMslots_O
 docsIfCmtsUpChnlCtrUcastGrantedMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrUcastGrantedMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrUcastGrantedMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrTotalCntnMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrTotalCntnMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrTotalCntnMslots = _DocsIfCmtsUpChnlCtrTotalCntnMslots_Object(
@@ -2794,6 +3021,8 @@ docsIfCmtsUpChnlCtrTotalCntnMslots = _DocsIfCmtsUpChnlCtrTotalCntnMslots_Object(
 docsIfCmtsUpChnlCtrTotalCntnMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrTotalCntnMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrTotalCntnMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrUsedCntnMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrUsedCntnMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrUsedCntnMslots = _DocsIfCmtsUpChnlCtrUsedCntnMslots_Object(
@@ -2803,6 +3032,8 @@ docsIfCmtsUpChnlCtrUsedCntnMslots = _DocsIfCmtsUpChnlCtrUsedCntnMslots_Object(
 docsIfCmtsUpChnlCtrUsedCntnMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrUsedCntnMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrUsedCntnMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtTotalMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtTotalMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtTotalMslots = _DocsIfCmtsUpChnlCtrExtTotalMslots_Object(
@@ -2812,6 +3043,8 @@ docsIfCmtsUpChnlCtrExtTotalMslots = _DocsIfCmtsUpChnlCtrExtTotalMslots_Object(
 docsIfCmtsUpChnlCtrExtTotalMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtTotalMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtTotalMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtUcastGrantedMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtUcastGrantedMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtUcastGrantedMslots = _DocsIfCmtsUpChnlCtrExtUcastGrantedMslots_Object(
@@ -2821,6 +3054,8 @@ docsIfCmtsUpChnlCtrExtUcastGrantedMslots = _DocsIfCmtsUpChnlCtrExtUcastGrantedMs
 docsIfCmtsUpChnlCtrExtUcastGrantedMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtUcastGrantedMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtUcastGrantedMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtTotalCntnMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtTotalCntnMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtTotalCntnMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnMslots_Object(
@@ -2830,6 +3065,8 @@ docsIfCmtsUpChnlCtrExtTotalCntnMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnMslots_O
 docsIfCmtsUpChnlCtrExtTotalCntnMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtTotalCntnMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtTotalCntnMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtUsedCntnMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtUsedCntnMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtUsedCntnMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnMslots_Object(
@@ -2839,6 +3076,8 @@ docsIfCmtsUpChnlCtrExtUsedCntnMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnMslots_Obj
 docsIfCmtsUpChnlCtrExtUsedCntnMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtUsedCntnMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtUsedCntnMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrCollCntnMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrCollCntnMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrCollCntnMslots = _DocsIfCmtsUpChnlCtrCollCntnMslots_Object(
@@ -2848,6 +3087,8 @@ docsIfCmtsUpChnlCtrCollCntnMslots = _DocsIfCmtsUpChnlCtrCollCntnMslots_Object(
 docsIfCmtsUpChnlCtrCollCntnMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrCollCntnMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrCollCntnMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrTotalCntnReqMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrTotalCntnReqMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrTotalCntnReqMslots = _DocsIfCmtsUpChnlCtrTotalCntnReqMslots_Object(
@@ -2857,6 +3098,8 @@ docsIfCmtsUpChnlCtrTotalCntnReqMslots = _DocsIfCmtsUpChnlCtrTotalCntnReqMslots_O
 docsIfCmtsUpChnlCtrTotalCntnReqMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrTotalCntnReqMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrTotalCntnReqMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrUsedCntnReqMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrUsedCntnReqMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrUsedCntnReqMslots = _DocsIfCmtsUpChnlCtrUsedCntnReqMslots_Object(
@@ -2866,6 +3109,8 @@ docsIfCmtsUpChnlCtrUsedCntnReqMslots = _DocsIfCmtsUpChnlCtrUsedCntnReqMslots_Obj
 docsIfCmtsUpChnlCtrUsedCntnReqMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrUsedCntnReqMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrUsedCntnReqMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrCollCntnReqMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrCollCntnReqMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrCollCntnReqMslots = _DocsIfCmtsUpChnlCtrCollCntnReqMslots_Object(
@@ -2875,6 +3120,8 @@ docsIfCmtsUpChnlCtrCollCntnReqMslots = _DocsIfCmtsUpChnlCtrCollCntnReqMslots_Obj
 docsIfCmtsUpChnlCtrCollCntnReqMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrCollCntnReqMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrCollCntnReqMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrTotalCntnReqDataMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrTotalCntnReqDataMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrTotalCntnReqDataMslots = _DocsIfCmtsUpChnlCtrTotalCntnReqDataMslots_Object(
@@ -2884,6 +3131,8 @@ docsIfCmtsUpChnlCtrTotalCntnReqDataMslots = _DocsIfCmtsUpChnlCtrTotalCntnReqData
 docsIfCmtsUpChnlCtrTotalCntnReqDataMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrTotalCntnReqDataMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrTotalCntnReqDataMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrUsedCntnReqDataMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrUsedCntnReqDataMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrUsedCntnReqDataMslots = _DocsIfCmtsUpChnlCtrUsedCntnReqDataMslots_Object(
@@ -2893,6 +3142,8 @@ docsIfCmtsUpChnlCtrUsedCntnReqDataMslots = _DocsIfCmtsUpChnlCtrUsedCntnReqDataMs
 docsIfCmtsUpChnlCtrUsedCntnReqDataMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrUsedCntnReqDataMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrUsedCntnReqDataMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrCollCntnReqDataMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrCollCntnReqDataMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrCollCntnReqDataMslots = _DocsIfCmtsUpChnlCtrCollCntnReqDataMslots_Object(
@@ -2902,6 +3153,8 @@ docsIfCmtsUpChnlCtrCollCntnReqDataMslots = _DocsIfCmtsUpChnlCtrCollCntnReqDataMs
 docsIfCmtsUpChnlCtrCollCntnReqDataMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrCollCntnReqDataMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrCollCntnReqDataMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrTotalCntnInitMaintMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrTotalCntnInitMaintMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrTotalCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrTotalCntnInitMaintMslots_Object(
@@ -2911,6 +3164,8 @@ docsIfCmtsUpChnlCtrTotalCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrTotalCntnInitM
 docsIfCmtsUpChnlCtrTotalCntnInitMaintMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrTotalCntnInitMaintMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrTotalCntnInitMaintMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrUsedCntnInitMaintMslots_Type = Counter32
 _DocsIfCmtsUpChnlCtrUsedCntnInitMaintMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrUsedCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrUsedCntnInitMaintMslots_Object(
@@ -2929,6 +3184,8 @@ docsIfCmtsUpChnlCtrCollCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrCollCntnInitMai
 docsIfCmtsUpChnlCtrCollCntnInitMaintMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrCollCntnInitMaintMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrCollCntnInitMaintMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtCollCntnMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtCollCntnMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtCollCntnMslots = _DocsIfCmtsUpChnlCtrExtCollCntnMslots_Object(
@@ -2938,6 +3195,8 @@ docsIfCmtsUpChnlCtrExtCollCntnMslots = _DocsIfCmtsUpChnlCtrExtCollCntnMslots_Obj
 docsIfCmtsUpChnlCtrExtCollCntnMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtCollCntnMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtCollCntnMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtTotalCntnReqMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtTotalCntnReqMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtTotalCntnReqMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnReqMslots_Object(
@@ -2947,6 +3206,8 @@ docsIfCmtsUpChnlCtrExtTotalCntnReqMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnReqMs
 docsIfCmtsUpChnlCtrExtTotalCntnReqMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtTotalCntnReqMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtTotalCntnReqMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtUsedCntnReqMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtUsedCntnReqMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtUsedCntnReqMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnReqMslots_Object(
@@ -2956,6 +3217,8 @@ docsIfCmtsUpChnlCtrExtUsedCntnReqMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnReqMslo
 docsIfCmtsUpChnlCtrExtUsedCntnReqMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtUsedCntnReqMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtUsedCntnReqMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtCollCntnReqMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtCollCntnReqMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtCollCntnReqMslots = _DocsIfCmtsUpChnlCtrExtCollCntnReqMslots_Object(
@@ -2965,6 +3228,8 @@ docsIfCmtsUpChnlCtrExtCollCntnReqMslots = _DocsIfCmtsUpChnlCtrExtCollCntnReqMslo
 docsIfCmtsUpChnlCtrExtCollCntnReqMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtCollCntnReqMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtCollCntnReqMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots_Object(
@@ -2974,6 +3239,8 @@ docsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnR
 docsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtTotalCntnReqDataMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots_Object(
@@ -2983,6 +3250,8 @@ docsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnReq
 docsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtUsedCntnReqDataMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtCollCntnReqDataMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtCollCntnReqDataMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtCollCntnReqDataMslots = _DocsIfCmtsUpChnlCtrExtCollCntnReqDataMslots_Object(
@@ -2992,6 +3261,8 @@ docsIfCmtsUpChnlCtrExtCollCntnReqDataMslots = _DocsIfCmtsUpChnlCtrExtCollCntnReq
 docsIfCmtsUpChnlCtrExtCollCntnReqDataMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtCollCntnReqDataMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtCollCntnReqDataMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots_Object(
@@ -3001,6 +3272,8 @@ docsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrExtTotalCnt
 docsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots_Object(
@@ -3010,6 +3283,8 @@ docsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrExtUsedCntnI
 docsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots.setUnits("mini-slots")
 _DocsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots_Type = Counter64
 _DocsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots_Object = MibTableColumn
 docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots_Object(
@@ -3019,6 +3294,8 @@ docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots = _DocsIfCmtsUpChnlCtrExtCollCntnI
 docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots.setStatus("current")
+if mibBuilder.loadTexts:
+    docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots.setUnits("mini-slots")
 _DocsIfNotification_ObjectIdentity = ObjectIdentity
 docsIfNotification = _DocsIfNotification_ObjectIdentity(
     (1, 3, 6, 1, 2, 1, 10, 127, 2)
@@ -3042,6 +3319,138 @@ docsIfBasicGroup = ObjectGroup(
     (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 1)
 )
 docsIfBasicGroup.setObjects(
+      *(("DOCS-IF-MIB", "docsIfDownChannelId"),
+        ("DOCS-IF-MIB", "docsIfDownChannelFrequency"),
+        ("DOCS-IF-MIB", "docsIfDownChannelWidth"),
+        ("DOCS-IF-MIB", "docsIfDownChannelModulation"),
+        ("DOCS-IF-MIB", "docsIfDownChannelInterleave"),
+        ("DOCS-IF-MIB", "docsIfDownChannelPower"),
+        ("DOCS-IF-MIB", "docsIfUpChannelId"),
+        ("DOCS-IF-MIB", "docsIfUpChannelFrequency"),
+        ("DOCS-IF-MIB", "docsIfUpChannelWidth"),
+        ("DOCS-IF-MIB", "docsIfUpChannelModulationProfile"),
+        ("DOCS-IF-MIB", "docsIfUpChannelSlotSize"),
+        ("DOCS-IF-MIB", "docsIfUpChannelTxTimingOffset"),
+        ("DOCS-IF-MIB", "docsIfUpChannelRangingBackoffStart"),
+        ("DOCS-IF-MIB", "docsIfUpChannelRangingBackoffEnd"),
+        ("DOCS-IF-MIB", "docsIfUpChannelTxBackoffStart"),
+        ("DOCS-IF-MIB", "docsIfUpChannelTxBackoffEnd"),
+        ("DOCS-IF-MIB", "docsIfQosProfPriority"),
+        ("DOCS-IF-MIB", "docsIfQosProfMaxUpBandwidth"),
+        ("DOCS-IF-MIB", "docsIfQosProfGuarUpBandwidth"),
+        ("DOCS-IF-MIB", "docsIfQosProfMaxDownBandwidth"),
+        ("DOCS-IF-MIB", "docsIfQosProfMaxTxBurst"),
+        ("DOCS-IF-MIB", "docsIfQosProfBaselinePrivacy"),
+        ("DOCS-IF-MIB", "docsIfQosProfStatus"),
+        ("DOCS-IF-MIB", "docsIfSigQIncludesContention"),
+        ("DOCS-IF-MIB", "docsIfSigQUnerroreds"),
+        ("DOCS-IF-MIB", "docsIfSigQCorrecteds"),
+        ("DOCS-IF-MIB", "docsIfSigQUncorrectables"),
+        ("DOCS-IF-MIB", "docsIfSigQSignalNoise"),
+        ("DOCS-IF-MIB", "docsIfSigQMicroreflections"),
+        ("DOCS-IF-MIB", "docsIfSigQEqualizationData"))
+)
+if mibBuilder.loadTexts:
+    docsIfBasicGroup.setStatus("deprecated")
+
+docsIfCmGroup = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 2)
+)
+docsIfCmGroup.setObjects(
+      *(("DOCS-IF-MIB", "docsIfCmCmtsAddress"),
+        ("DOCS-IF-MIB", "docsIfCmCapabilities"),
+        ("DOCS-IF-MIB", "docsIfCmRangingTimeout"),
+        ("DOCS-IF-MIB", "docsIfCmStatusValue"),
+        ("DOCS-IF-MIB", "docsIfCmStatusCode"),
+        ("DOCS-IF-MIB", "docsIfCmStatusTxPower"),
+        ("DOCS-IF-MIB", "docsIfCmStatusResets"),
+        ("DOCS-IF-MIB", "docsIfCmStatusLostSyncs"),
+        ("DOCS-IF-MIB", "docsIfCmStatusInvalidMaps"),
+        ("DOCS-IF-MIB", "docsIfCmStatusInvalidUcds"),
+        ("DOCS-IF-MIB", "docsIfCmStatusInvalidRangingResponses"),
+        ("DOCS-IF-MIB", "docsIfCmStatusInvalidRegistrationResponses"),
+        ("DOCS-IF-MIB", "docsIfCmStatusT1Timeouts"),
+        ("DOCS-IF-MIB", "docsIfCmStatusT2Timeouts"),
+        ("DOCS-IF-MIB", "docsIfCmStatusT3Timeouts"),
+        ("DOCS-IF-MIB", "docsIfCmStatusT4Timeouts"),
+        ("DOCS-IF-MIB", "docsIfCmStatusRangingAborteds"),
+        ("DOCS-IF-MIB", "docsIfCmServiceQosProfile"),
+        ("DOCS-IF-MIB", "docsIfCmServiceTxSlotsImmed"),
+        ("DOCS-IF-MIB", "docsIfCmServiceTxSlotsDed"),
+        ("DOCS-IF-MIB", "docsIfCmServiceTxRetries"),
+        ("DOCS-IF-MIB", "docsIfCmServiceTxExceededs"),
+        ("DOCS-IF-MIB", "docsIfCmServiceRqRetries"),
+        ("DOCS-IF-MIB", "docsIfCmServiceRqExceededs"))
+)
+if mibBuilder.loadTexts:
+    docsIfCmGroup.setStatus("deprecated")
+
+docsIfCmtsGroup = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 3)
+)
+docsIfCmtsGroup.setObjects(
+      *(("DOCS-IF-MIB", "docsIfCmtsCapabilities"),
+        ("DOCS-IF-MIB", "docsIfCmtsSyncInterval"),
+        ("DOCS-IF-MIB", "docsIfCmtsUcdInterval"),
+        ("DOCS-IF-MIB", "docsIfCmtsMaxServiceIds"),
+        ("DOCS-IF-MIB", "docsIfCmtsInvitedRangingAttempts"),
+        ("DOCS-IF-MIB", "docsIfCmtsInsertInterval"),
+        ("DOCS-IF-MIB", "docsIfCmtsStatusInvalidRangeReqs"),
+        ("DOCS-IF-MIB", "docsIfCmtsStatusRangingAborteds"),
+        ("DOCS-IF-MIB", "docsIfCmtsStatusInvalidRegReqs"),
+        ("DOCS-IF-MIB", "docsIfCmtsStatusFailedRegReqs"),
+        ("DOCS-IF-MIB", "docsIfCmtsStatusInvalidDataReqs"),
+        ("DOCS-IF-MIB", "docsIfCmtsStatusT5Timeouts"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusMacAddress"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusIpAddress"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusDownChannelIfIndex"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusUpChannelIfIndex"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusRxPower"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusTimingOffset"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusEqualizationData"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusValue"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusUnerroreds"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusCorrecteds"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusUncorrectables"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusSignalNoise"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusMicroreflections"),
+        ("DOCS-IF-MIB", "docsIfCmtsServiceCmStatusIndex"),
+        ("DOCS-IF-MIB", "docsIfCmtsServiceAdminStatus"),
+        ("DOCS-IF-MIB", "docsIfCmtsServiceQosProfile"),
+        ("DOCS-IF-MIB", "docsIfCmtsServiceCreateTime"),
+        ("DOCS-IF-MIB", "docsIfCmtsServiceInOctets"),
+        ("DOCS-IF-MIB", "docsIfCmtsServiceInPackets"),
+        ("DOCS-IF-MIB", "docsIfCmtsModType"),
+        ("DOCS-IF-MIB", "docsIfCmtsModControl"),
+        ("DOCS-IF-MIB", "docsIfCmtsModPreambleLen"),
+        ("DOCS-IF-MIB", "docsIfCmtsModDifferentialEncoding"),
+        ("DOCS-IF-MIB", "docsIfCmtsModFECErrorCorrection"),
+        ("DOCS-IF-MIB", "docsIfCmtsModFECCodewordLength"),
+        ("DOCS-IF-MIB", "docsIfCmtsModScramblerSeed"),
+        ("DOCS-IF-MIB", "docsIfCmtsModMaxBurstSize"),
+        ("DOCS-IF-MIB", "docsIfCmtsModGuardTimeSize"),
+        ("DOCS-IF-MIB", "docsIfCmtsModLastCodewordShortened"),
+        ("DOCS-IF-MIB", "docsIfCmtsModScrambler"),
+        ("DOCS-IF-MIB", "docsIfCmtsQosProfilePermissions"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmPtr"))
+)
+if mibBuilder.loadTexts:
+    docsIfCmtsGroup.setStatus("deprecated")
+
+docsIfObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 4)
+)
+docsIfObsoleteGroup.setObjects(
+      *(("DOCS-IF-MIB", "docsIfCmRangingRespTimeout"),
+        ("DOCS-IF-MIB", "docsIfCmtsInsertionInterval"))
+)
+if mibBuilder.loadTexts:
+    docsIfObsoleteGroup.setStatus("obsolete")
+
+docsIfBasicGroupV2 = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 5)
+)
+docsIfBasicGroupV2.setObjects(
       *(("DOCS-IF-MIB", "docsIfDownChannelId"),
         ("DOCS-IF-MIB", "docsIfDownChannelFrequency"),
         ("DOCS-IF-MIB", "docsIfDownChannelWidth"),
@@ -3081,19 +3490,18 @@ docsIfBasicGroup.setObjects(
         ("DOCS-IF-MIB", "docsIfSigQUncorrectables"),
         ("DOCS-IF-MIB", "docsIfSigQSignalNoise"),
         ("DOCS-IF-MIB", "docsIfSigQMicroreflections"),
-        ("DOCS-IF-MIB", "docsIfSigQEqualizationData"),
         ("DOCS-IF-MIB", "docsIfSigQExtUnerroreds"),
         ("DOCS-IF-MIB", "docsIfSigQExtCorrecteds"),
         ("DOCS-IF-MIB", "docsIfSigQExtUncorrectables"),
         ("DOCS-IF-MIB", "docsIfDocsisBaseCapability"))
 )
 if mibBuilder.loadTexts:
-    docsIfBasicGroup.setStatus("current")
+    docsIfBasicGroupV2.setStatus("current")
 
-docsIfCmGroup = ObjectGroup(
-    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 2)
+docsIfCmGroupV2 = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 6)
 )
-docsIfCmGroup.setObjects(
+docsIfCmGroupV2.setObjects(
       *(("DOCS-IF-MIB", "docsIfCmCmtsAddress"),
         ("DOCS-IF-MIB", "docsIfCmCapabilities"),
         ("DOCS-IF-MIB", "docsIfCmRangingTimeout"),
@@ -3114,6 +3522,8 @@ docsIfCmGroup.setObjects(
         ("DOCS-IF-MIB", "docsIfCmStatusDocsisOperMode"),
         ("DOCS-IF-MIB", "docsIfCmStatusModulationType"),
         ("DOCS-IF-MIB", "docsIfCmStatusEqualizationData"),
+        ("DOCS-IF-MIB", "docsIfCmStatusUCCs"),
+        ("DOCS-IF-MIB", "docsIfCmStatusUCCFails"),
         ("DOCS-IF-MIB", "docsIfCmServiceQosProfile"),
         ("DOCS-IF-MIB", "docsIfCmServiceTxSlotsImmed"),
         ("DOCS-IF-MIB", "docsIfCmServiceTxSlotsDed"),
@@ -3122,21 +3532,23 @@ docsIfCmGroup.setObjects(
         ("DOCS-IF-MIB", "docsIfCmServiceRqRetries"),
         ("DOCS-IF-MIB", "docsIfCmServiceRqExceededs"),
         ("DOCS-IF-MIB", "docsIfCmServiceExtTxSlotsImmed"),
-        ("DOCS-IF-MIB", "docsIfCmServiceExtTxSlotsDed"))
+        ("DOCS-IF-MIB", "docsIfCmServiceExtTxSlotsDed"),
+        ("DOCS-IF-MIB", "docsIfSigQEqualizationData"))
 )
 if mibBuilder.loadTexts:
-    docsIfCmGroup.setStatus("current")
+    docsIfCmGroupV2.setStatus("current")
 
-docsIfCmtsGroup = ObjectGroup(
-    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 3)
+docsIfCmtsGroupV2 = ObjectGroup(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 7)
 )
-docsIfCmtsGroup.setObjects(
+docsIfCmtsGroupV2.setObjects(
       *(("DOCS-IF-MIB", "docsIfCmtsCapabilities"),
         ("DOCS-IF-MIB", "docsIfCmtsSyncInterval"),
         ("DOCS-IF-MIB", "docsIfCmtsUcdInterval"),
         ("DOCS-IF-MIB", "docsIfCmtsMaxServiceIds"),
         ("DOCS-IF-MIB", "docsIfCmtsInvitedRangingAttempts"),
         ("DOCS-IF-MIB", "docsIfCmtsInsertInterval"),
+        ("DOCS-IF-MIB", "docsIfCmtsMacStorageType"),
         ("DOCS-IF-MIB", "docsIfCmtsStatusInvalidRangeReqs"),
         ("DOCS-IF-MIB", "docsIfCmtsStatusRangingAborteds"),
         ("DOCS-IF-MIB", "docsIfCmtsStatusInvalidRegReqs"),
@@ -3163,6 +3575,7 @@ docsIfCmtsGroup.setObjects(
         ("DOCS-IF-MIB", "docsIfCmtsCmStatusInetAddressType"),
         ("DOCS-IF-MIB", "docsIfCmtsCmStatusInetAddress"),
         ("DOCS-IF-MIB", "docsIfCmtsCmStatusValueLastUpdate"),
+        ("DOCS-IF-MIB", "docsIfCmtsCmStatusHighResolutionTimingOffset"),
         ("DOCS-IF-MIB", "docsIfCmtsServiceAdminStatus"),
         ("DOCS-IF-MIB", "docsIfCmtsServiceQosProfile"),
         ("DOCS-IF-MIB", "docsIfCmtsServiceCreateTime"),
@@ -3188,14 +3601,17 @@ docsIfCmtsGroup.setObjects(
         ("DOCS-IF-MIB", "docsIfCmtsModScdmaSpreaderEnable"),
         ("DOCS-IF-MIB", "docsIfCmtsModScdmaSubframeCodes"),
         ("DOCS-IF-MIB", "docsIfCmtsModChannelType"),
+        ("DOCS-IF-MIB", "docsIfCmtsModStorageType"),
         ("DOCS-IF-MIB", "docsIfCmtsQosProfilePermissions"),
         ("DOCS-IF-MIB", "docsIfCmtsCmPtr"),
         ("DOCS-IF-MIB", "docsIfCmtsChannelUtilizationInterval"),
         ("DOCS-IF-MIB", "docsIfCmtsChannelUtUtilization"),
+        ("DOCS-IF-MIB", "docsIfCmtsDownChnlCtrId"),
         ("DOCS-IF-MIB", "docsIfCmtsDownChnlCtrTotalBytes"),
         ("DOCS-IF-MIB", "docsIfCmtsDownChnlCtrUsedBytes"),
         ("DOCS-IF-MIB", "docsIfCmtsDownChnlCtrExtTotalBytes"),
         ("DOCS-IF-MIB", "docsIfCmtsDownChnlCtrExtUsedBytes"),
+        ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrId"),
         ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrTotalMslots"),
         ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrUcastGrantedMslots"),
         ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrTotalCntnMslots"),
@@ -3223,31 +3639,12 @@ docsIfCmtsGroup.setObjects(
         ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrExtCollCntnReqDataMslots"),
         ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrExtTotalCntnInitMaintMslots"),
         ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrExtUsedCntnInitMaintMslots"),
-        ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots"))
+        ("DOCS-IF-MIB", "docsIfCmtsUpChnlCtrExtCollCntnInitMaintMslots"),
+        ("DOCS-IF-MIB", "docsIfDownChannelStorageType"),
+        ("DOCS-IF-MIB", "docsIfQosProfStorageType"))
 )
 if mibBuilder.loadTexts:
-    docsIfCmtsGroup.setStatus("current")
-
-docsIfObsoleteGroup = ObjectGroup(
-    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 4)
-)
-docsIfObsoleteGroup.setObjects(
-      *(("DOCS-IF-MIB", "docsIfCmRangingRespTimeout"),
-        ("DOCS-IF-MIB", "docsIfCmtsInsertionInterval"))
-)
-if mibBuilder.loadTexts:
-    docsIfObsoleteGroup.setStatus("obsolete")
-
-docsIfDeprecatedGroup = ObjectGroup(
-    (1, 3, 6, 1, 2, 1, 10, 127, 3, 2, 5)
-)
-docsIfDeprecatedGroup.setObjects(
-      *(("DOCS-IF-MIB", "docsIfQosProfMaxTxBurst"),
-        ("DOCS-IF-MIB", "docsIfCmtsCmStatusIpAddress"),
-        ("DOCS-IF-MIB", "docsIfCmtsServiceCmStatusIndex"))
-)
-if mibBuilder.loadTexts:
-    docsIfDeprecatedGroup.setStatus("deprecated")
+    docsIfCmtsGroupV2.setStatus("current")
 
 
 # Notification objects
@@ -3271,6 +3668,19 @@ docsIfBasicCompliance.setObjects(
 )
 if mibBuilder.loadTexts:
     docsIfBasicCompliance.setStatus(
+        "deprecated"
+    )
+
+docsIfBasicComplianceV2 = ModuleCompliance(
+    (1, 3, 6, 1, 2, 1, 10, 127, 3, 1, 2)
+)
+docsIfBasicComplianceV2.setObjects(
+      *(("DOCS-IF-MIB", "docsIfBasicGroupV2"),
+        ("DOCS-IF-MIB", "docsIfCmGroupV2"),
+        ("DOCS-IF-MIB", "docsIfCmtsGroupV2"))
+)
+if mibBuilder.loadTexts:
+    docsIfBasicComplianceV2.setStatus(
         "current"
     )
 
@@ -3284,7 +3694,7 @@ mibBuilder.exportSymbols(
        "DocsisVersion": DocsisVersion,
        "DocsisQosVersion": DocsisQosVersion,
        "DocsisUpstreamType": DocsisUpstreamType,
-       "DocsisUpstreamTypeStatus": DocsisUpstreamTypeStatus,
+       "DocsEqualizerData": DocsEqualizerData,
        "docsIfMib": docsIfMib,
        "docsIfMibObjects": docsIfMibObjects,
        "docsIfBaseObjects": docsIfBaseObjects,
@@ -3297,6 +3707,7 @@ mibBuilder.exportSymbols(
        "docsIfDownChannelInterleave": docsIfDownChannelInterleave,
        "docsIfDownChannelPower": docsIfDownChannelPower,
        "docsIfDownChannelAnnex": docsIfDownChannelAnnex,
+       "docsIfDownChannelStorageType": docsIfDownChannelStorageType,
        "docsIfUpstreamChannelTable": docsIfUpstreamChannelTable,
        "docsIfUpstreamChannelEntry": docsIfUpstreamChannelEntry,
        "docsIfUpChannelId": docsIfUpChannelId,
@@ -3329,6 +3740,7 @@ mibBuilder.exportSymbols(
        "docsIfQosProfBaselinePrivacy": docsIfQosProfBaselinePrivacy,
        "docsIfQosProfStatus": docsIfQosProfStatus,
        "docsIfQosProfMaxTransmitBurst": docsIfQosProfMaxTransmitBurst,
+       "docsIfQosProfStorageType": docsIfQosProfStorageType,
        "docsIfSignalQualityTable": docsIfSignalQualityTable,
        "docsIfSignalQualityEntry": docsIfSignalQualityEntry,
        "docsIfSigQIncludesContention": docsIfSigQIncludesContention,
@@ -3368,6 +3780,8 @@ mibBuilder.exportSymbols(
        "docsIfCmStatusDocsisOperMode": docsIfCmStatusDocsisOperMode,
        "docsIfCmStatusModulationType": docsIfCmStatusModulationType,
        "docsIfCmStatusEqualizationData": docsIfCmStatusEqualizationData,
+       "docsIfCmStatusUCCs": docsIfCmStatusUCCs,
+       "docsIfCmStatusUCCFails": docsIfCmStatusUCCFails,
        "docsIfCmServiceTable": docsIfCmServiceTable,
        "docsIfCmServiceEntry": docsIfCmServiceEntry,
        "docsIfCmServiceId": docsIfCmServiceId,
@@ -3390,6 +3804,7 @@ mibBuilder.exportSymbols(
        "docsIfCmtsInsertionInterval": docsIfCmtsInsertionInterval,
        "docsIfCmtsInvitedRangingAttempts": docsIfCmtsInvitedRangingAttempts,
        "docsIfCmtsInsertInterval": docsIfCmtsInsertInterval,
+       "docsIfCmtsMacStorageType": docsIfCmtsMacStorageType,
        "docsIfCmtsStatusTable": docsIfCmtsStatusTable,
        "docsIfCmtsStatusEntry": docsIfCmtsStatusEntry,
        "docsIfCmtsStatusInvalidRangeReqs": docsIfCmtsStatusInvalidRangeReqs,
@@ -3422,6 +3837,7 @@ mibBuilder.exportSymbols(
        "docsIfCmtsCmStatusInetAddressType": docsIfCmtsCmStatusInetAddressType,
        "docsIfCmtsCmStatusInetAddress": docsIfCmtsCmStatusInetAddress,
        "docsIfCmtsCmStatusValueLastUpdate": docsIfCmtsCmStatusValueLastUpdate,
+       "docsIfCmtsCmStatusHighResolutionTimingOffset": docsIfCmtsCmStatusHighResolutionTimingOffset,
        "docsIfCmtsServiceTable": docsIfCmtsServiceTable,
        "docsIfCmtsServiceEntry": docsIfCmtsServiceEntry,
        "docsIfCmtsServiceId": docsIfCmtsServiceId,
@@ -3455,6 +3871,7 @@ mibBuilder.exportSymbols(
        "docsIfCmtsModScdmaSpreaderEnable": docsIfCmtsModScdmaSpreaderEnable,
        "docsIfCmtsModScdmaSubframeCodes": docsIfCmtsModScdmaSubframeCodes,
        "docsIfCmtsModChannelType": docsIfCmtsModChannelType,
+       "docsIfCmtsModStorageType": docsIfCmtsModStorageType,
        "docsIfCmtsQosProfilePermissions": docsIfCmtsQosProfilePermissions,
        "docsIfCmtsMacToCmTable": docsIfCmtsMacToCmTable,
        "docsIfCmtsMacToCmEntry": docsIfCmtsMacToCmEntry,
@@ -3508,10 +3925,13 @@ mibBuilder.exportSymbols(
        "docsIfConformance": docsIfConformance,
        "docsIfCompliances": docsIfCompliances,
        "docsIfBasicCompliance": docsIfBasicCompliance,
+       "docsIfBasicComplianceV2": docsIfBasicComplianceV2,
        "docsIfGroups": docsIfGroups,
        "docsIfBasicGroup": docsIfBasicGroup,
        "docsIfCmGroup": docsIfCmGroup,
        "docsIfCmtsGroup": docsIfCmtsGroup,
        "docsIfObsoleteGroup": docsIfObsoleteGroup,
-       "docsIfDeprecatedGroup": docsIfDeprecatedGroup}
+       "docsIfBasicGroupV2": docsIfBasicGroupV2,
+       "docsIfCmGroupV2": docsIfCmGroupV2,
+       "docsIfCmtsGroupV2": docsIfCmtsGroupV2}
 )

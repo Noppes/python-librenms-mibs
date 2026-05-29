@@ -1,16 +1,11 @@
 {
-  "timestamp": "2025-10-02T12:33:53.513695",
+  "timestamp": "2026-05-29T09:53:59.404991",
   "stats": {
     "total": 9,
-    "compiled": 5,
-    "failed": 1,
+    "compiled": 6,
+    "failed": 0,
     "skipped": 3,
-    "errors": [
-      {
-        "mib": "FOURELLE-VENTURI2-MIB",
-        "error": "missing"
-      }
-    ]
+    "errors": []
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

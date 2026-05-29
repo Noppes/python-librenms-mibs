@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IPM-VLAN-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:30 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IPM-VLAN-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -121,6 +118,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1IPMVlanMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1IPMVlanMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -281,7 +282,18 @@ alaipmvVlanIpAddrType = _AlaipmvVlanIpAddrType_Object(
 alaipmvVlanIpAddrType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alaipmvVlanIpAddrType.setStatus("current")
-_AlaipmvVlanIpAddress_Type = InetAddress
+
+
+class _AlaipmvVlanIpAddress_Type(InetAddress):
+    """Custom type alaipmvVlanIpAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_AlaipmvVlanIpAddress_Type.__name__ = "InetAddress"
 _AlaipmvVlanIpAddress_Object = MibTableColumn
 alaipmvVlanIpAddress = _AlaipmvVlanIpAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 2, 1, 1, 3),
@@ -464,6 +476,83 @@ _AlaipmvVlanIpAddrMask_ObjectIdentity = ObjectIdentity
 alaipmvVlanIpAddrMask = _AlaipmvVlanIpAddrMask_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 4)
 )
+_AlaipmvReceiverVlanPort_ObjectIdentity = ObjectIdentity
+alaipmvReceiverVlanPort = _AlaipmvReceiverVlanPort_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5)
+)
+_AlaipmvReceiverVlanPortTable_Object = MibTable
+alaipmvReceiverVlanPortTable = _AlaipmvReceiverVlanPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5, 1)
+)
+if mibBuilder.loadTexts:
+    alaipmvReceiverVlanPortTable.setStatus("current")
+_AlaipmvReceiverVlanPortEntry_Object = MibTableRow
+alaipmvReceiverVlanPortEntry = _AlaipmvReceiverVlanPortEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5, 1, 1)
+)
+alaipmvReceiverVlanPortEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvReceiverVlanPortNumber"),
+    (0, "ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvReceiverVlanPortIPMVlanNumber"),
+    (0, "ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvReceiverVlanPortRcvrVlanNumber"),
+)
+if mibBuilder.loadTexts:
+    alaipmvReceiverVlanPortEntry.setStatus("current")
+_AlaipmvReceiverVlanPortNumber_Type = InterfaceIndex
+_AlaipmvReceiverVlanPortNumber_Object = MibTableColumn
+alaipmvReceiverVlanPortNumber = _AlaipmvReceiverVlanPortNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5, 1, 1, 1),
+    _AlaipmvReceiverVlanPortNumber_Type()
+)
+alaipmvReceiverVlanPortNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaipmvReceiverVlanPortNumber.setStatus("current")
+
+
+class _AlaipmvReceiverVlanPortIPMVlanNumber_Type(Integer32):
+    """Custom type alaipmvReceiverVlanPortIPMVlanNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2, 4094),
+    )
+
+
+_AlaipmvReceiverVlanPortIPMVlanNumber_Type.__name__ = "Integer32"
+_AlaipmvReceiverVlanPortIPMVlanNumber_Object = MibTableColumn
+alaipmvReceiverVlanPortIPMVlanNumber = _AlaipmvReceiverVlanPortIPMVlanNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5, 1, 1, 2),
+    _AlaipmvReceiverVlanPortIPMVlanNumber_Type()
+)
+alaipmvReceiverVlanPortIPMVlanNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaipmvReceiverVlanPortIPMVlanNumber.setStatus("current")
+
+
+class _AlaipmvReceiverVlanPortRcvrVlanNumber_Type(Integer32):
+    """Custom type alaipmvReceiverVlanPortRcvrVlanNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2, 4094),
+    )
+
+
+_AlaipmvReceiverVlanPortRcvrVlanNumber_Type.__name__ = "Integer32"
+_AlaipmvReceiverVlanPortRcvrVlanNumber_Object = MibTableColumn
+alaipmvReceiverVlanPortRcvrVlanNumber = _AlaipmvReceiverVlanPortRcvrVlanNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5, 1, 1, 3),
+    _AlaipmvReceiverVlanPortRcvrVlanNumber_Type()
+)
+alaipmvReceiverVlanPortRcvrVlanNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaipmvReceiverVlanPortRcvrVlanNumber.setStatus("current")
+_AlaipmvReceiverVlanPortRowStatus_Type = RowStatus
+_AlaipmvReceiverVlanPortRowStatus_Object = MibTableColumn
+alaipmvReceiverVlanPortRowStatus = _AlaipmvReceiverVlanPortRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 1, 5, 1, 1, 4),
+    _AlaipmvReceiverVlanPortRowStatus_Type()
+)
+alaipmvReceiverVlanPortRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaipmvReceiverVlanPortRowStatus.setStatus("current")
 _AlcatelIND1IPMVlanMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1IPMVlanMIBConformance = _AlcatelIND1IPMVlanMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 2)
@@ -529,6 +618,15 @@ alaipmvlanIPAddrMaskGroup.setObjects(
 if mibBuilder.loadTexts:
     alaipmvlanIPAddrMaskGroup.setStatus("current")
 
+alaipmReceiverVlanPortGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 41, 1, 2, 1, 5)
+)
+alaipmReceiverVlanPortGroup.setObjects(
+    ("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvReceiverVlanPortRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaipmReceiverVlanPortGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -548,7 +646,8 @@ alcatelIND1IPMVlanMIBCompliance.setObjects(
       *(("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvlanPortGroup"),
         ("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvlanIPAddressGroup"),
         ("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvlanIPAddrMaskGroup"),
-        ("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvlanCtagGroup"))
+        ("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmvlanCtagGroup"),
+        ("ALCATEL-IND1-IPM-VLAN-MIB", "alaipmReceiverVlanPortGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1IPMVlanMIBCompliance.setStatus(
@@ -590,12 +689,20 @@ mibBuilder.exportSymbols(
        "alaipmvVlanCtag": alaipmvVlanCtag,
        "alaipmvVlanCtagRowStatus": alaipmvVlanCtagRowStatus,
        "alaipmvVlanIpAddrMask": alaipmvVlanIpAddrMask,
+       "alaipmvReceiverVlanPort": alaipmvReceiverVlanPort,
+       "alaipmvReceiverVlanPortTable": alaipmvReceiverVlanPortTable,
+       "alaipmvReceiverVlanPortEntry": alaipmvReceiverVlanPortEntry,
+       "alaipmvReceiverVlanPortNumber": alaipmvReceiverVlanPortNumber,
+       "alaipmvReceiverVlanPortIPMVlanNumber": alaipmvReceiverVlanPortIPMVlanNumber,
+       "alaipmvReceiverVlanPortRcvrVlanNumber": alaipmvReceiverVlanPortRcvrVlanNumber,
+       "alaipmvReceiverVlanPortRowStatus": alaipmvReceiverVlanPortRowStatus,
        "alcatelIND1IPMVlanMIBConformance": alcatelIND1IPMVlanMIBConformance,
        "alcatelIND1IPMVlanMIBGroups": alcatelIND1IPMVlanMIBGroups,
        "alaipmvlanPortGroup": alaipmvlanPortGroup,
        "alaipmvlanIPAddressGroup": alaipmvlanIPAddressGroup,
        "alaipmvlanCtagGroup": alaipmvlanCtagGroup,
        "alaipmvlanIPAddrMaskGroup": alaipmvlanIPAddrMaskGroup,
+       "alaipmReceiverVlanPortGroup": alaipmReceiverVlanPortGroup,
        "alcatelIND1IPMVlanMIBCompliances": alcatelIND1IPMVlanMIBCompliances,
        "alcatelIND1IPMVlanMIBCompliance": alcatelIND1IPMVlanMIBCompliance}
 )

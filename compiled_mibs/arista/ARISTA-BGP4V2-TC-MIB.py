@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arista\ARISTA-BGP4V2-TC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:17:52 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,8 @@ aristaBgp4V2TC = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     aristaBgp4V2TC.setRevisions(
-        ("2014-08-15 00:00",
+        ("2020-12-29 00:00",
+         "2014-08-15 00:00",
          "2012-10-19 00:00",
          "2011-01-17 00:00")
     )
@@ -137,12 +135,14 @@ class AristaBgp4V2AddressFamilyIdentifierTC(TextualConvention, Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              25)
         )
     )
     namedValues = NamedValues(
         *(("ipv4", 1),
-          ("ipv6", 2))
+          ("ipv6", 2),
+          ("l2vpn", 25))
     )
 
 
@@ -154,13 +154,47 @@ class AristaBgp4V2SubsequentAddressFamilyIdentifierTC(TextualConvention, Integer
         SingleValueConstraint(
             *(1,
               2,
-              4)
+              4,
+              70)
         )
     )
     namedValues = NamedValues(
         *(("unicast", 1),
           ("multicast", 2),
-          ("mpls", 4))
+          ("mpls", 4),
+          ("evpn", 70))
+    )
+
+
+
+class AristaBgp4V2EvpnNlriTC(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("autoDiscovery", 1),
+          ("macIp", 2),
+          ("imet", 3),
+          ("ethernetSegment", 4),
+          ("ipPrefixIpv4", 5),
+          ("ipPrefixIpv6", 6),
+          ("smet", 7),
+          ("joinSync", 8),
+          ("leaveSync", 9),
+          ("spmsi", 10))
     )
 
 
@@ -190,5 +224,6 @@ mibBuilder.exportSymbols(
     **{"AristaBgp4V2IdentifierTC": AristaBgp4V2IdentifierTC,
        "AristaBgp4V2AddressFamilyIdentifierTC": AristaBgp4V2AddressFamilyIdentifierTC,
        "AristaBgp4V2SubsequentAddressFamilyIdentifierTC": AristaBgp4V2SubsequentAddressFamilyIdentifierTC,
+       "AristaBgp4V2EvpnNlriTC": AristaBgp4V2EvpnNlriTC,
        "aristaBgp4V2TC": aristaBgp4V2TC}
 )

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-MRP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:45:23 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,8 +104,8 @@ snMetroRing = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snMetroRing.setRevisions(
-        ("2010-06-02 00:00",
-         "2007-05-16 00:00")
+        ("2017-08-07 00:00",
+         "2017-08-07 00:00")
     )
 
 

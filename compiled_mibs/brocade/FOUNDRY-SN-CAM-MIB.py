@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-CAM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:07 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,8 +104,7 @@ snCamMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snCamMIB.setRevisions(
-        ("2010-06-02 00:00",
-         "2007-11-19 00:00")
+        ("2007-11-19 00:00",)
     )
 
 
@@ -158,7 +154,9 @@ class _SnCamProfile_Type(Integer32):
               15,
               16,
               17,
-              18)
+              18,
+              19,
+              20)
         )
     )
     namedValues = NamedValues(
@@ -179,7 +177,9 @@ class _SnCamProfile_Type(Integer32):
           ("multiService", 15),
           ("multiService2", 16),
           ("multiService3", 17),
-          ("multiService4", 18))
+          ("multiService4", 18),
+          ("multiService5", 19),
+          ("multiService6", 20))
     )
 
 
@@ -223,17 +223,7 @@ snCamUsageL3Slot = _SnCamUsageL3Slot_Object(
 snCamUsageL3Slot.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     snCamUsageL3Slot.setStatus("current")
-
-
-class _SnCamUsageL3Processor_Type(Unsigned32):
-    """Custom type snCamUsageL3Processor based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 2),
-    )
-
-
-_SnCamUsageL3Processor_Type.__name__ = "Unsigned32"
+_SnCamUsageL3Processor_Type = Unsigned32
 _SnCamUsageL3Processor_Object = MibTableColumn
 snCamUsageL3Processor = _SnCamUsageL3Processor_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 14, 1, 1, 2, 1, 1, 2),
@@ -338,17 +328,7 @@ snCamUsageL2Slot = _SnCamUsageL2Slot_Object(
 snCamUsageL2Slot.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     snCamUsageL2Slot.setStatus("current")
-
-
-class _SnCamUsageL2Processor_Type(Unsigned32):
-    """Custom type snCamUsageL2Processor based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 2),
-    )
-
-
-_SnCamUsageL2Processor_Type.__name__ = "Unsigned32"
+_SnCamUsageL2Processor_Type = Unsigned32
 _SnCamUsageL2Processor_Object = MibTableColumn
 snCamUsageL2Processor = _SnCamUsageL2Processor_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 14, 1, 1, 2, 2, 1, 2),
@@ -444,17 +424,7 @@ snCamUsageSessionSlot = _SnCamUsageSessionSlot_Object(
 snCamUsageSessionSlot.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     snCamUsageSessionSlot.setStatus("current")
-
-
-class _SnCamUsageSessionProcessor_Type(Unsigned32):
-    """Custom type snCamUsageSessionProcessor based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 2),
-    )
-
-
-_SnCamUsageSessionProcessor_Type.__name__ = "Unsigned32"
+_SnCamUsageSessionProcessor_Type = Unsigned32
 _SnCamUsageSessionProcessor_Object = MibTableColumn
 snCamUsageSessionProcessor = _SnCamUsageSessionProcessor_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 14, 1, 1, 2, 3, 1, 2),
@@ -570,17 +540,7 @@ snCamUsageOtherSlot = _SnCamUsageOtherSlot_Object(
 snCamUsageOtherSlot.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     snCamUsageOtherSlot.setStatus("current")
-
-
-class _SnCamUsageOtherProcessor_Type(Unsigned32):
-    """Custom type snCamUsageOtherProcessor based on Unsigned32"""
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 2),
-    )
-
-
-_SnCamUsageOtherProcessor_Type.__name__ = "Unsigned32"
+_SnCamUsageOtherProcessor_Type = Unsigned32
 _SnCamUsageOtherProcessor_Object = MibTableColumn
 snCamUsageOtherProcessor = _SnCamUsageOtherProcessor_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 14, 1, 1, 2, 4, 1, 2),

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\fortinet\FORTINET-FORTIWEB-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:58 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,18 @@ fnFortiWebMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     fnFortiWebMib.setRevisions(
-        ("2018-07-13 00:00",
+        ("2020-07-02 00:00",
+         "2020-07-02 00:00",
+         "2020-07-02 00:00",
+         "2020-07-02 00:00",
+         "2020-07-02 00:00",
+         "2020-07-02 00:00",
+         "2019-08-15 00:00",
+         "2019-04-29 00:00",
+         "2018-09-20 00:00",
+         "2018-09-13 00:00",
+         "2018-08-06 00:00",
+         "2018-08-06 00:00",
          "2018-04-04 00:00",
          "2018-03-21 00:00",
          "2017-11-17 00:00",
@@ -148,14 +156,16 @@ class FwOpMode(TextualConvention, Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("inline", 1),
           ("offline", 2),
           ("transparent", 3),
-          ("wccp", 4))
+          ("wccp", 4),
+          ("inspection", 5))
     )
 
 
@@ -188,6 +198,10 @@ _Fwb100D_ObjectIdentity = ObjectIdentity
 fwb100D = _Fwb100D_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 1, 1004)
 )
+_Fwb100E_ObjectIdentity = ObjectIdentity
+fwb100E = _Fwb100E_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 1005)
+)
 _Fwb400B_ObjectIdentity = ObjectIdentity
 fwb400B = _Fwb400B_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 1, 4002)
@@ -200,9 +214,17 @@ _Fwb400D_ObjectIdentity = ObjectIdentity
 fwb400D = _Fwb400D_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 1, 4004)
 )
+_Fwb400E_ObjectIdentity = ObjectIdentity
+fwb400E = _Fwb400E_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 4005)
+)
 _Fwb600D_ObjectIdentity = ObjectIdentity
 fwb600D = _Fwb600D_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 1, 6004)
+)
+_Fwb600E_ObjectIdentity = ObjectIdentity
+fwb600E = _Fwb600E_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 6005)
 )
 _Fwb1000B_ObjectIdentity = ObjectIdentity
 fwb1000B = _Fwb1000B_ObjectIdentity(
@@ -307,6 +329,30 @@ fwbVBOX = _FwbVBOX_ObjectIdentity(
 _FwbDOCKER_ObjectIdentity = ObjectIdentity
 fwbDOCKER = _FwbDOCKER_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50012)
+)
+_FwbOCI_ObjectIdentity = ObjectIdentity
+fwbOCI = _FwbOCI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50013)
+)
+_FwbALI_ObjectIdentity = ObjectIdentity
+fwbALI = _FwbALI_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50014)
+)
+_FwbAZRCLD_ObjectIdentity = ObjectIdentity
+fwbAZRCLD = _FwbAZRCLD_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50015)
+)
+_FwbAZROND_ObjectIdentity = ObjectIdentity
+fwbAZROND = _FwbAZROND_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50016)
+)
+_FwbXENAWSOND_ObjectIdentity = ObjectIdentity
+fwbXENAWSOND = _FwbXENAWSOND_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50017)
+)
+_FwbAWSCLD_ObjectIdentity = ObjectIdentity
+fwbAWSCLD = _FwbAWSCLD_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 1, 50018)
 )
 _FwSystem_ObjectIdentity = ObjectIdentity
 fwSystem = _FwSystem_ObjectIdentity(
@@ -490,7 +536,7 @@ cPUIndex = _CPUIndex_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 2, 2, 2, 1, 1),
     _CPUIndex_Type()
 )
-cPUIndex.setMaxAccess("read-only")
+cPUIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cPUIndex.setStatus("current")
 _CPUusage_Type = Integer32
@@ -506,7 +552,7 @@ _FwProxy_ObjectIdentity = ObjectIdentity
 fwProxy = _FwProxy_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3)
 )
-_FwProxyNumber_Type = Counter32
+_FwProxyNumber_Type = Gauge32
 _FwProxyNumber_Object = MibScalar
 fwProxyNumber = _FwProxyNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3, 1),
@@ -515,7 +561,7 @@ fwProxyNumber = _FwProxyNumber_Object(
 fwProxyNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwProxyNumber.setStatus("current")
-_FwPServerNumber_Type = Counter32
+_FwPServerNumber_Type = Gauge32
 _FwPServerNumber_Object = MibScalar
 fwPServerNumber = _FwPServerNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3, 2),
@@ -524,7 +570,7 @@ fwPServerNumber = _FwPServerNumber_Object(
 fwPServerNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwPServerNumber.setStatus("current")
-_FwVServerNumber_Type = Counter32
+_FwVServerNumber_Type = Gauge32
 _FwVServerNumber_Object = MibScalar
 fwVServerNumber = _FwVServerNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3, 3),
@@ -533,7 +579,7 @@ fwVServerNumber = _FwVServerNumber_Object(
 fwVServerNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwVServerNumber.setStatus("current")
-_FwMonitorNumber_Type = Counter32
+_FwMonitorNumber_Type = Gauge32
 _FwMonitorNumber_Object = MibScalar
 fwMonitorNumber = _FwMonitorNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3, 4),
@@ -542,7 +588,7 @@ fwMonitorNumber = _FwMonitorNumber_Object(
 fwMonitorNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwMonitorNumber.setStatus("current")
-_FwServiceNumber_Type = Counter32
+_FwServiceNumber_Type = Gauge32
 _FwServiceNumber_Object = MibScalar
 fwServiceNumber = _FwServiceNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3, 5),
@@ -551,7 +597,7 @@ fwServiceNumber = _FwServiceNumber_Object(
 fwServiceNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwServiceNumber.setStatus("current")
-_FwPortSvrNumber_Type = Counter32
+_FwPortSvrNumber_Type = Gauge32
 _FwPortSvrNumber_Object = MibScalar
 fwPortSvrNumber = _FwPortSvrNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 3, 6),
@@ -560,11 +606,29 @@ fwPortSvrNumber = _FwPortSvrNumber_Object(
 fwPortSvrNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwPortSvrNumber.setStatus("current")
+_FwTotalConnectNumber_Type = Gauge32
+_FwTotalConnectNumber_Object = MibScalar
+fwTotalConnectNumber = _FwTotalConnectNumber_Object(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 3, 7),
+    _FwTotalConnectNumber_Type()
+)
+fwTotalConnectNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwTotalConnectNumber.setStatus("current")
+_FwTotalConnectNumberPerSecond_Type = Gauge32
+_FwTotalConnectNumberPerSecond_Object = MibScalar
+fwTotalConnectNumberPerSecond = _FwTotalConnectNumberPerSecond_Object(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 3, 8),
+    _FwTotalConnectNumberPerSecond_Type()
+)
+fwTotalConnectNumberPerSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fwTotalConnectNumberPerSecond.setStatus("current")
 _FwWAFProtection_ObjectIdentity = ObjectIdentity
 fwWAFProtection = _FwWAFProtection_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12356, 107, 4)
 )
-_FwWAFInputRuleNumber_Type = Counter32
+_FwWAFInputRuleNumber_Type = Gauge32
 _FwWAFInputRuleNumber_Object = MibScalar
 fwWAFInputRuleNumber = _FwWAFInputRuleNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 4, 1),
@@ -573,7 +637,7 @@ fwWAFInputRuleNumber = _FwWAFInputRuleNumber_Object(
 fwWAFInputRuleNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwWAFInputRuleNumber.setStatus("current")
-_FwWAFParameterNumber_Type = Counter32
+_FwWAFParameterNumber_Type = Gauge32
 _FwWAFParameterNumber_Object = MibScalar
 fwWAFParameterNumber = _FwWAFParameterNumber_Object(
     (1, 3, 6, 1, 4, 1, 12356, 107, 4, 2),
@@ -582,37 +646,19 @@ fwWAFParameterNumber = _FwWAFParameterNumber_Object(
 fwWAFParameterNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwWAFParameterNumber.setStatus("current")
-_FwWAFAccessNumber_Type = Counter32
-_FwWAFAccessNumber_Object = MibScalar
-fwWAFAccessNumber = _FwWAFAccessNumber_Object(
-    (1, 3, 6, 1, 4, 1, 12356, 107, 4, 3),
-    _FwWAFAccessNumber_Type()
-)
-fwWAFAccessNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    fwWAFAccessNumber.setStatus("current")
-_FwWAFSvrPortNumber_Type = Counter32
+_FwWAFSvrPortNumber_Type = Gauge32
 _FwWAFSvrPortNumber_Object = MibScalar
 fwWAFSvrPortNumber = _FwWAFSvrPortNumber_Object(
-    (1, 3, 6, 1, 4, 1, 12356, 107, 4, 4),
+    (1, 3, 6, 1, 4, 1, 12356, 107, 4, 3),
     _FwWAFSvrPortNumber_Type()
 )
 fwWAFSvrPortNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fwWAFSvrPortNumber.setStatus("current")
-_FwWAFStartPageNumber_Type = Counter32
-_FwWAFStartPageNumber_Object = MibScalar
-fwWAFStartPageNumber = _FwWAFStartPageNumber_Object(
-    (1, 3, 6, 1, 4, 1, 12356, 107, 4, 5),
-    _FwWAFStartPageNumber_Type()
-)
-fwWAFStartPageNumber.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    fwWAFStartPageNumber.setStatus("current")
-_FwWAFProfileNumber_Type = Counter32
+_FwWAFProfileNumber_Type = Gauge32
 _FwWAFProfileNumber_Object = MibScalar
 fwWAFProfileNumber = _FwWAFProfileNumber_Object(
-    (1, 3, 6, 1, 4, 1, 12356, 107, 4, 6),
+    (1, 3, 6, 1, 4, 1, 12356, 107, 4, 4),
     _FwWAFProfileNumber_Type()
 )
 fwWAFProfileNumber.setMaxAccess("read-only")
@@ -752,10 +798,40 @@ fwSystemObjectGroup.setObjects(
         ("FORTINET-FORTIWEB-MIB", "fwSysMemUsage"),
         ("FORTINET-FORTIWEB-MIB", "fwSysMemCapacity"),
         ("FORTINET-FORTIWEB-MIB", "fwSysDiskUsage"),
-        ("FORTINET-FORTIWEB-MIB", "fwSysDiskCapacity"))
+        ("FORTINET-FORTIWEB-MIB", "fwSysDiskCapacity"),
+        ("FORTINET-FORTIWEB-MIB", "cPUNumber"),
+        ("FORTINET-FORTIWEB-MIB", "cPUusage"))
 )
 if mibBuilder.loadTexts:
     fwSystemObjectGroup.setStatus("current")
+
+fwProxyObjectGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 100, 3)
+)
+fwProxyObjectGroup.setObjects(
+      *(("FORTINET-FORTIWEB-MIB", "fwProxyNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwPServerNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwVServerNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwMonitorNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwServiceNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwPortSvrNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwTotalConnectNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwTotalConnectNumberPerSecond"))
+)
+if mibBuilder.loadTexts:
+    fwProxyObjectGroup.setStatus("current")
+
+fwWAFProtectionGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 100, 4)
+)
+fwWAFProtectionGroup.setObjects(
+      *(("FORTINET-FORTIWEB-MIB", "fwWAFInputRuleNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwWAFParameterNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwWAFSvrPortNumber"),
+        ("FORTINET-FORTIWEB-MIB", "fwWAFProfileNumber"))
+)
+if mibBuilder.loadTexts:
+    fwWAFProtectionGroup.setStatus("current")
 
 
 # Notification objects
@@ -817,6 +893,42 @@ fwTrapPServerFailed.setObjects(
 )
 if mibBuilder.loadTexts:
     fwTrapPServerFailed.setStatus(
+        "current"
+    )
+
+fwTrapHAStatusChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 10, 0, 6)
+)
+fwTrapHAStatusChange.setObjects(
+      *(("FORTINET-CORE-MIB", "fnSysSerial"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    fwTrapHAStatusChange.setStatus(
+        "current"
+    )
+
+fwTrapHAMemberJoin = NotificationType(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 10, 0, 7)
+)
+fwTrapHAMemberJoin.setObjects(
+      *(("FORTINET-CORE-MIB", "fnSysSerial"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    fwTrapHAMemberJoin.setStatus(
+        "current"
+    )
+
+fwTrapHAMemberLeave = NotificationType(
+    (1, 3, 6, 1, 4, 1, 12356, 107, 10, 0, 8)
+)
+fwTrapHAMemberLeave.setObjects(
+      *(("FORTINET-CORE-MIB", "fnSysSerial"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    fwTrapHAMemberLeave.setStatus(
         "current"
     )
 
@@ -1110,6 +1222,9 @@ fwTrapGroup.setObjects(
         ("FORTINET-FORTIWEB-MIB", "fwTrapPolicyStart"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapPolicyStop"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapPServerFailed"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapHAStatusChange"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapHAMemberJoin"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapHAMemberLeave"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapXMLIntrusionAttack"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapXMLSchemaAttack"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapXMLFilterAttack"),
@@ -1125,9 +1240,13 @@ fwTrapGroup.setObjects(
         ("FORTINET-FORTIWEB-MIB", "fwTrapWAFSPageAttack"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapWAFPValidAttack"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapWAFBListAttack"),
-        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFWListAttack"),
         ("FORTINET-FORTIWEB-MIB", "fwTrapWAFBLoginAttack"),
-        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFRobotAttack"))
+        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFRobotAttack"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFHideFieldAttack"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFUrlAccessAttack"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFBadRobotAttack"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFSignatureAttack"),
+        ("FORTINET-FORTIWEB-MIB", "fwTrapWAFWListAttack"))
 )
 if mibBuilder.loadTexts:
     fwTrapGroup.setStatus(
@@ -1145,7 +1264,9 @@ fwMibCompliance = ModuleCompliance(
 )
 fwMibCompliance.setObjects(
       *(("FORTINET-FORTIWEB-MIB", "fwTrapGroup"),
-        ("FORTINET-FORTIWEB-MIB", "fwSystemObjectGroup"))
+        ("FORTINET-FORTIWEB-MIB", "fwSystemObjectGroup"),
+        ("FORTINET-FORTIWEB-MIB", "fwProxyObjectGroup"),
+        ("FORTINET-FORTIWEB-MIB", "fwWAFProtectionGroup"))
 )
 if mibBuilder.loadTexts:
     fwMibCompliance.setStatus(
@@ -1162,10 +1283,13 @@ mibBuilder.exportSymbols(
        "fnFortiWebMib": fnFortiWebMib,
        "fwModel": fwModel,
        "fwb100D": fwb100D,
+       "fwb100E": fwb100E,
        "fwb400B": fwb400B,
        "fwb400C": fwb400C,
        "fwb400D": fwb400D,
+       "fwb400E": fwb400E,
        "fwb600D": fwb600D,
+       "fwb600E": fwb600E,
        "fwb1000B": fwb1000B,
        "fwb1000C": fwb1000C,
        "fwb1000D": fwb1000D,
@@ -1192,6 +1316,12 @@ mibBuilder.exportSymbols(
        "fwbGCP": fwbGCP,
        "fwbVBOX": fwbVBOX,
        "fwbDOCKER": fwbDOCKER,
+       "fwbOCI": fwbOCI,
+       "fwbALI": fwbALI,
+       "fwbAZRCLD": fwbAZRCLD,
+       "fwbAZROND": fwbAZROND,
+       "fwbXENAWSOND": fwbXENAWSOND,
+       "fwbAWSCLD": fwbAWSCLD,
        "fwSystem": fwSystem,
        "fwSystemInfo": fwSystemInfo,
        "fwSysModel": fwSysModel,
@@ -1217,12 +1347,12 @@ mibBuilder.exportSymbols(
        "fwMonitorNumber": fwMonitorNumber,
        "fwServiceNumber": fwServiceNumber,
        "fwPortSvrNumber": fwPortSvrNumber,
+       "fwTotalConnectNumber": fwTotalConnectNumber,
+       "fwTotalConnectNumberPerSecond": fwTotalConnectNumberPerSecond,
        "fwWAFProtection": fwWAFProtection,
        "fwWAFInputRuleNumber": fwWAFInputRuleNumber,
        "fwWAFParameterNumber": fwWAFParameterNumber,
-       "fwWAFAccessNumber": fwWAFAccessNumber,
        "fwWAFSvrPortNumber": fwWAFSvrPortNumber,
-       "fwWAFStartPageNumber": fwWAFStartPageNumber,
        "fwWAFProfileNumber": fwWAFProfileNumber,
        "fwTraps": fwTraps,
        "fwTrapPrefix": fwTrapPrefix,
@@ -1231,6 +1361,9 @@ mibBuilder.exportSymbols(
        "fwTrapPolicyStart": fwTrapPolicyStart,
        "fwTrapPolicyStop": fwTrapPolicyStop,
        "fwTrapPServerFailed": fwTrapPServerFailed,
+       "fwTrapHAStatusChange": fwTrapHAStatusChange,
+       "fwTrapHAMemberJoin": fwTrapHAMemberJoin,
+       "fwTrapHAMemberLeave": fwTrapHAMemberLeave,
        "fwTrapXMLIntrusionAttack": fwTrapXMLIntrusionAttack,
        "fwTrapXMLSchemaAttack": fwTrapXMLSchemaAttack,
        "fwTrapXMLFilterAttack": fwTrapXMLFilterAttack,
@@ -1267,5 +1400,7 @@ mibBuilder.exportSymbols(
        "fwMibConformance": fwMibConformance,
        "fwTrapGroup": fwTrapGroup,
        "fwSystemObjectGroup": fwSystemObjectGroup,
+       "fwProxyObjectGroup": fwProxyObjectGroup,
+       "fwWAFProtectionGroup": fwWAFProtectionGroup,
        "fwMibCompliance": fwMibCompliance}
 )

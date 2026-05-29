@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IPV6-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:35 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IPV6-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -48,6 +45,10 @@ if 'mibBuilder' not in globals():
 (softentIND1Ipv6,) = mibBuilder.importSymbols(
     "ALCATEL-IND1-BASE",
     "softentIND1Ipv6")
+
+(InterfaceIndex,) = mibBuilder.importSymbols(
+    "IF-MIB",
+    "InterfaceIndex")
 
 (ipv6IfIndex,
  ipv6RouteEntry) = mibBuilder.importSymbols(
@@ -129,7 +130,7 @@ alcatelIND1IPv6MIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1IPv6MIB.setRevisions(
-        ("2008-07-24 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -299,6 +300,30 @@ alaIPv6GlobalID = _AlaIPv6GlobalID_Object(
 alaIPv6GlobalID.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIPv6GlobalID.setStatus("current")
+
+
+class _AlaIPv6ClearRafCounters_Type(Integer32):
+    """Custom type alaIPv6ClearRafCounters based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            1
+        )
+    )
+    namedValues = NamedValues(
+        ("clear", 1)
+    )
+
+
+_AlaIPv6ClearRafCounters_Type.__name__ = "Integer32"
+_AlaIPv6ClearRafCounters_Object = MibScalar
+alaIPv6ClearRafCounters = _AlaIPv6ClearRafCounters_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 1, 7),
+    _AlaIPv6ClearRafCounters_Type()
+)
+alaIPv6ClearRafCounters.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIPv6ClearRafCounters.setStatus("current")
 _AlaIPv6InterfaceTable_Object = MibTable
 alaIPv6InterfaceTable = _AlaIPv6InterfaceTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 2)
@@ -732,6 +757,22 @@ alaIPv6InterfaceAdvHopLimit = _AlaIPv6InterfaceAdvHopLimit_Object(
 alaIPv6InterfaceAdvHopLimit.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIPv6InterfaceAdvHopLimit.setStatus("current")
+
+
+class _AlaIPv6InterfaceDADEnable_Type(TruthValue):
+    """Custom type alaIPv6InterfaceDADEnable based on TruthValue"""
+    defaultValue = 1
+
+
+_AlaIPv6InterfaceDADEnable_Type.__name__ = "TruthValue"
+_AlaIPv6InterfaceDADEnable_Object = MibTableColumn
+alaIPv6InterfaceDADEnable = _AlaIPv6InterfaceDADEnable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 2, 1, 22),
+    _AlaIPv6InterfaceDADEnable_Type()
+)
+alaIPv6InterfaceDADEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIPv6InterfaceDADEnable.setStatus("current")
 _AlaIPv6TunnelConfig_ObjectIdentity = ObjectIdentity
 alaIPv6TunnelConfig = _AlaIPv6TunnelConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 3)
@@ -1732,6 +1773,187 @@ alaIPv6LocalUnicastRowStatus = _AlaIPv6LocalUnicastRowStatus_Object(
 alaIPv6LocalUnicastRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIPv6LocalUnicastRowStatus.setStatus("current")
+_AlaIpv6RafVlanTable_Object = MibTable
+alaIpv6RafVlanTable = _AlaIpv6RafVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 14)
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafVlanTable.setStatus("current")
+_AlaIpv6RafVlanEntry_Object = MibTableRow
+alaIpv6RafVlanEntry = _AlaIpv6RafVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 14, 1)
+)
+alaIpv6RafVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IPV6-MIB", "alaIpv6RafVlan"),
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafVlanEntry.setStatus("current")
+
+
+class _AlaIpv6RafVlan_Type(Unsigned32):
+    """Custom type alaIpv6RafVlan based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_AlaIpv6RafVlan_Type.__name__ = "Unsigned32"
+_AlaIpv6RafVlan_Object = MibTableColumn
+alaIpv6RafVlan = _AlaIpv6RafVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 14, 1, 1),
+    _AlaIpv6RafVlan_Type()
+)
+alaIpv6RafVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpv6RafVlan.setStatus("current")
+_AlaIpv6RafVlanRowStatus_Type = RowStatus
+_AlaIpv6RafVlanRowStatus_Object = MibTableColumn
+alaIpv6RafVlanRowStatus = _AlaIpv6RafVlanRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 14, 1, 2),
+    _AlaIpv6RafVlanRowStatus_Type()
+)
+alaIpv6RafVlanRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIpv6RafVlanRowStatus.setStatus("current")
+
+
+class _AlaIpv6RafVlanActiveStatus_Type(TruthValue):
+    """Custom type alaIpv6RafVlanActiveStatus based on TruthValue"""
+    defaultValue = 2
+
+
+_AlaIpv6RafVlanActiveStatus_Type.__name__ = "TruthValue"
+_AlaIpv6RafVlanActiveStatus_Object = MibTableColumn
+alaIpv6RafVlanActiveStatus = _AlaIpv6RafVlanActiveStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 14, 1, 3),
+    _AlaIpv6RafVlanActiveStatus_Type()
+)
+alaIpv6RafVlanActiveStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIpv6RafVlanActiveStatus.setStatus("current")
+_AlaIpv6RafPortTable_Object = MibTable
+alaIpv6RafPortTable = _AlaIpv6RafPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 15)
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafPortTable.setStatus("current")
+_AlaIpv6RafPortEntry_Object = MibTableRow
+alaIpv6RafPortEntry = _AlaIpv6RafPortEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 15, 1)
+)
+alaIpv6RafPortEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IPV6-MIB", "alaIpv6RafPortVlan"),
+    (0, "ALCATEL-IND1-IPV6-MIB", "alaIpv6RafPortIfIndex"),
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafPortEntry.setStatus("current")
+
+
+class _AlaIpv6RafPortVlan_Type(Unsigned32):
+    """Custom type alaIpv6RafPortVlan based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_AlaIpv6RafPortVlan_Type.__name__ = "Unsigned32"
+_AlaIpv6RafPortVlan_Object = MibTableColumn
+alaIpv6RafPortVlan = _AlaIpv6RafPortVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 15, 1, 1),
+    _AlaIpv6RafPortVlan_Type()
+)
+alaIpv6RafPortVlan.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpv6RafPortVlan.setStatus("current")
+_AlaIpv6RafPortIfIndex_Type = InterfaceIndex
+_AlaIpv6RafPortIfIndex_Object = MibTableColumn
+alaIpv6RafPortIfIndex = _AlaIpv6RafPortIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 15, 1, 2),
+    _AlaIpv6RafPortIfIndex_Type()
+)
+alaIpv6RafPortIfIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpv6RafPortIfIndex.setStatus("current")
+_AlaIpv6RafPortRowStatus_Type = RowStatus
+_AlaIpv6RafPortRowStatus_Object = MibTableColumn
+alaIpv6RafPortRowStatus = _AlaIpv6RafPortRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 15, 1, 3),
+    _AlaIpv6RafPortRowStatus_Type()
+)
+alaIpv6RafPortRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIpv6RafPortRowStatus.setStatus("current")
+
+
+class _AlaIpv6RafPortActiveStatus_Type(TruthValue):
+    """Custom type alaIpv6RafPortActiveStatus based on TruthValue"""
+    defaultValue = 2
+
+
+_AlaIpv6RafPortActiveStatus_Type.__name__ = "TruthValue"
+_AlaIpv6RafPortActiveStatus_Object = MibTableColumn
+alaIpv6RafPortActiveStatus = _AlaIpv6RafPortActiveStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 15, 1, 4),
+    _AlaIpv6RafPortActiveStatus_Type()
+)
+alaIpv6RafPortActiveStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIpv6RafPortActiveStatus.setStatus("current")
+_AlaIpv6RafCounterStatsTable_Object = MibTable
+alaIpv6RafCounterStatsTable = _AlaIpv6RafCounterStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 16)
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafCounterStatsTable.setStatus("current")
+_AlaIpv6RafCounterStatsEntry_Object = MibTableRow
+alaIpv6RafCounterStatsEntry = _AlaIpv6RafCounterStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 16, 1)
+)
+alaIpv6RafCounterStatsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IPV6-MIB", "alaIpv6RafNi"),
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafCounterStatsEntry.setStatus("current")
+
+
+class _AlaIpv6RafNi_Type(Integer32):
+    """Custom type alaIpv6RafNi based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8),
+    )
+
+
+_AlaIpv6RafNi_Type.__name__ = "Integer32"
+_AlaIpv6RafNi_Object = MibTableColumn
+alaIpv6RafNi = _AlaIpv6RafNi_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 16, 1, 1),
+    _AlaIpv6RafNi_Type()
+)
+alaIpv6RafNi.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIpv6RafNi.setStatus("current")
+
+
+class _AlaIpv6RafUntrustedPktCnt_Type(Unsigned32):
+    """Custom type alaIpv6RafUntrustedPktCnt based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4000000000),
+    )
+
+
+_AlaIpv6RafUntrustedPktCnt_Type.__name__ = "Unsigned32"
+_AlaIpv6RafUntrustedPktCnt_Object = MibTableColumn
+alaIpv6RafUntrustedPktCnt = _AlaIpv6RafUntrustedPktCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 1, 16, 1, 2),
+    _AlaIpv6RafUntrustedPktCnt_Type()
+)
+alaIpv6RafUntrustedPktCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIpv6RafUntrustedPktCnt.setStatus("current")
 _AlcatelIND1IPv6MIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1IPv6MIBConformance = _AlcatelIND1IPv6MIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 2)
@@ -1771,7 +1993,8 @@ alaIPv6ConfigGroup.setObjects(
         ("ALCATEL-IND1-IPV6-MIB", "alaIPv6ClearPMTUTable"),
         ("ALCATEL-IND1-IPV6-MIB", "alaIPv6PMTUMinLifetime"),
         ("ALCATEL-IND1-IPV6-MIB", "alaIPv6NeighborStaleLifetime"),
-        ("ALCATEL-IND1-IPV6-MIB", "alaIPv6GlobalID"))
+        ("ALCATEL-IND1-IPV6-MIB", "alaIPv6GlobalID"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIPv6ClearRafCounters"))
 )
 if mibBuilder.loadTexts:
     alaIPv6ConfigGroup.setStatus("current")
@@ -1910,6 +2133,44 @@ alaIPv6LocalUnicastGroup.setObjects(
 if mibBuilder.loadTexts:
     alaIPv6LocalUnicastGroup.setStatus("current")
 
+alaIPv6HostGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 2, 2, 12)
+)
+alaIPv6HostGroup.setObjects(
+    ("ALCATEL-IND1-IPV6-MIB", "alaIPv6HostRowStatus")
+)
+if mibBuilder.loadTexts:
+    alaIPv6HostGroup.setStatus("current")
+
+alaIpv6RafVlanGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 2, 2, 14)
+)
+alaIpv6RafVlanGroup.setObjects(
+      *(("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafVlanRowStatus"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafVlanActiveStatus"))
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafVlanGroup.setStatus("current")
+
+alaIpv6RafPortGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 2, 2, 15)
+)
+alaIpv6RafPortGroup.setObjects(
+      *(("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafPortRowStatus"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafPortActiveStatus"))
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafPortGroup.setStatus("current")
+
+alaIpv6RafCounterStatsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 2, 2, 16)
+)
+alaIpv6RafCounterStatsGroup.setObjects(
+    ("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafUntrustedPktCnt")
+)
+if mibBuilder.loadTexts:
+    alaIpv6RafCounterStatsGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1923,6 +2184,17 @@ if mibBuilder.loadTexts:
 
 
 # Notifications groups
+
+alcatelIND1IPv6TrapsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 29, 1, 2, 2, 13)
+)
+alcatelIND1IPv6TrapsGroup.setObjects(
+    ("ALCATEL-IND1-IPV6-MIB", "ndpMaxLimitReached")
+)
+if mibBuilder.loadTexts:
+    alcatelIND1IPv6TrapsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -1944,7 +2216,12 @@ alaIPv6Compliance.setObjects(
         ("ALCATEL-IND1-IPV6-MIB", "alaIPv6InterfacePrefixGroup"),
         ("ALCATEL-IND1-IPV6-MIB", "alaIPv6PMTUGroup"),
         ("ALCATEL-IND1-IPV6-MIB", "alaIPv6RouteFlagsGroup"),
-        ("ALCATEL-IND1-IPV6-MIB", "alaIPv6LocalUnicastGroup"))
+        ("ALCATEL-IND1-IPV6-MIB", "alaIPv6LocalUnicastGroup"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIPv6HostGroup"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafVlanGroup"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafPortGroup"),
+        ("ALCATEL-IND1-IPV6-MIB", "alaIpv6RafCounterStatsGroup"),
+        ("ALCATEL-IND1-IPV6-MIB", "alcatelIND1IPv6TrapsGroup"))
 )
 if mibBuilder.loadTexts:
     alaIPv6Compliance.setStatus(
@@ -1966,6 +2243,7 @@ mibBuilder.exportSymbols(
        "alaIPv6PMTUMinLifetime": alaIPv6PMTUMinLifetime,
        "alaIPv6NeighborStaleLifetime": alaIPv6NeighborStaleLifetime,
        "alaIPv6GlobalID": alaIPv6GlobalID,
+       "alaIPv6ClearRafCounters": alaIPv6ClearRafCounters,
        "alaIPv6InterfaceTable": alaIPv6InterfaceTable,
        "alaIPv6InterfaceEntry": alaIPv6InterfaceEntry,
        "alaIPv6InterfaceRowStatus": alaIPv6InterfaceRowStatus,
@@ -1989,6 +2267,7 @@ mibBuilder.exportSymbols(
        "alaIPv6InterfaceRetransTimer": alaIPv6InterfaceRetransTimer,
        "alaIPv6InterfaceDADTransmits": alaIPv6InterfaceDADTransmits,
        "alaIPv6InterfaceAdvHopLimit": alaIPv6InterfaceAdvHopLimit,
+       "alaIPv6InterfaceDADEnable": alaIPv6InterfaceDADEnable,
        "alaIPv6TunnelConfig": alaIPv6TunnelConfig,
        "alaIPv6ConfigTunnelTable": alaIPv6ConfigTunnelTable,
        "alaIPv6ConfigTunnelEntry": alaIPv6ConfigTunnelEntry,
@@ -2073,6 +2352,21 @@ mibBuilder.exportSymbols(
        "alaIPv6LocalUnicastPrefixLength": alaIPv6LocalUnicastPrefixLength,
        "alaIPv6LocalUnicastEUI64": alaIPv6LocalUnicastEUI64,
        "alaIPv6LocalUnicastRowStatus": alaIPv6LocalUnicastRowStatus,
+       "alaIpv6RafVlanTable": alaIpv6RafVlanTable,
+       "alaIpv6RafVlanEntry": alaIpv6RafVlanEntry,
+       "alaIpv6RafVlan": alaIpv6RafVlan,
+       "alaIpv6RafVlanRowStatus": alaIpv6RafVlanRowStatus,
+       "alaIpv6RafVlanActiveStatus": alaIpv6RafVlanActiveStatus,
+       "alaIpv6RafPortTable": alaIpv6RafPortTable,
+       "alaIpv6RafPortEntry": alaIpv6RafPortEntry,
+       "alaIpv6RafPortVlan": alaIpv6RafPortVlan,
+       "alaIpv6RafPortIfIndex": alaIpv6RafPortIfIndex,
+       "alaIpv6RafPortRowStatus": alaIpv6RafPortRowStatus,
+       "alaIpv6RafPortActiveStatus": alaIpv6RafPortActiveStatus,
+       "alaIpv6RafCounterStatsTable": alaIpv6RafCounterStatsTable,
+       "alaIpv6RafCounterStatsEntry": alaIpv6RafCounterStatsEntry,
+       "alaIpv6RafNi": alaIpv6RafNi,
+       "alaIpv6RafUntrustedPktCnt": alaIpv6RafUntrustedPktCnt,
        "alcatelIND1IPv6MIBConformance": alcatelIND1IPv6MIBConformance,
        "alcatelIND1IPv6MIBCompliances": alcatelIND1IPv6MIBCompliances,
        "alaIPv6Compliance": alaIPv6Compliance,
@@ -2087,5 +2381,10 @@ mibBuilder.exportSymbols(
        "alaIPv6InterfacePrefixGroup": alaIPv6InterfacePrefixGroup,
        "alaIPv6PMTUGroup": alaIPv6PMTUGroup,
        "alaIPv6RouteFlagsGroup": alaIPv6RouteFlagsGroup,
-       "alaIPv6LocalUnicastGroup": alaIPv6LocalUnicastGroup}
+       "alaIPv6LocalUnicastGroup": alaIPv6LocalUnicastGroup,
+       "alaIPv6HostGroup": alaIPv6HostGroup,
+       "alcatelIND1IPv6TrapsGroup": alcatelIND1IPv6TrapsGroup,
+       "alaIpv6RafVlanGroup": alaIpv6RafVlanGroup,
+       "alaIpv6RafPortGroup": alaIpv6RafPortGroup,
+       "alaIpv6RafCounterStatsGroup": alaIpv6RafCounterStatsGroup}
 )

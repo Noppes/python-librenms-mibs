@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-RIP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-RIP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,7 @@ alcatelIND1RIPMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1RIPMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -362,7 +359,7 @@ alaRipRedistProtoMetric = _AlaRipRedistProtoMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 7, 1, 2),
     _AlaRipRedistProtoMetric_Type()
 )
-alaRipRedistProtoMetric.setMaxAccess("read-write")
+alaRipRedistProtoMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistProtoMetric.setStatus("obsolete")
 
@@ -378,7 +375,7 @@ alaRipRedistProtoStatus = _AlaRipRedistProtoStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 7, 1, 3),
     _AlaRipRedistProtoStatus_Type()
 )
-alaRipRedistProtoStatus.setMaxAccess("read-write")
+alaRipRedistProtoStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistProtoStatus.setStatus("obsolete")
 _AlaRipRouteTable_Object = MibTable
@@ -599,7 +596,7 @@ alaRipRedistRouteMetric = _AlaRipRedistRouteMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 10, 1, 4),
     _AlaRipRedistRouteMetric_Type()
 )
-alaRipRedistRouteMetric.setMaxAccess("read-write")
+alaRipRedistRouteMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistRouteMetric.setStatus("obsolete")
 
@@ -629,7 +626,7 @@ alaRipRedistRouteControl = _AlaRipRedistRouteControl_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 10, 1, 5),
     _AlaRipRedistRouteControl_Type()
 )
-alaRipRedistRouteControl.setMaxAccess("read-write")
+alaRipRedistRouteControl.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistRouteControl.setStatus("obsolete")
 
@@ -650,7 +647,7 @@ alaRipRedistRouteTagMatch = _AlaRipRedistRouteTagMatch_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 10, 1, 6),
     _AlaRipRedistRouteTagMatch_Type()
 )
-alaRipRedistRouteTagMatch.setMaxAccess("read-write")
+alaRipRedistRouteTagMatch.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistRouteTagMatch.setStatus("obsolete")
 
@@ -678,7 +675,7 @@ alaRipRedistRouteEffect = _AlaRipRedistRouteEffect_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 10, 1, 7),
     _AlaRipRedistRouteEffect_Type()
 )
-alaRipRedistRouteEffect.setMaxAccess("read-write")
+alaRipRedistRouteEffect.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistRouteEffect.setStatus("obsolete")
 _AlaRipRedistRouteStatus_Type = RowStatus
@@ -687,7 +684,7 @@ alaRipRedistRouteStatus = _AlaRipRedistRouteStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 1, 1, 10, 1, 8),
     _AlaRipRedistRouteStatus_Type()
 )
-alaRipRedistRouteStatus.setMaxAccess("read-write")
+alaRipRedistRouteStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaRipRedistRouteStatus.setStatus("obsolete")
 _AlaRip2IfConfAugTable_Object = MibTable
@@ -1495,7 +1492,13 @@ alaRipRouteGroup.setObjects(
         ("ALCATEL-IND1-RIP-MIB", "alaRipRouteAge"),
         ("ALCATEL-IND1-RIP-MIB", "alaRipRouteTag"),
         ("ALCATEL-IND1-RIP-MIB", "alaRipRouteMetric"),
-        ("ALCATEL-IND1-RIP-MIB", "alaRipRouteStatus"))
+        ("ALCATEL-IND1-RIP-MIB", "alaRipRouteStatus"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRipGarbageTimer"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRipHolddownTimer"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRipHostRouteSupport"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRipInvalidTimer"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRipProtoStatus"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRipUpdateInterval"))
 )
 if mibBuilder.loadTexts:
     alaRipRouteGroup.setStatus("deprecated")
@@ -1532,6 +1535,20 @@ alaRipEcmpRouteGroup.setObjects(
 if mibBuilder.loadTexts:
     alaRipEcmpRouteGroup.setStatus("current")
 
+alaRip2IfConfAugGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 2, 1, 7)
+)
+alaRip2IfConfAugGroup.setObjects(
+      *(("ALCATEL-IND1-RIP-MIB", "alaRip2IfConfEncryptKey"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRip2IfConfName"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRip2IfConfPtoPPeer"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRip2IfConfType"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRip2IfIpConfStatus"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRip2IfRecvPkts"))
+)
+if mibBuilder.loadTexts:
+    alaRip2IfConfAugGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1545,6 +1562,17 @@ if mibBuilder.loadTexts:
 
 
 # Notifications groups
+
+alaRIPTrapsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 3, 1, 2, 1, 8)
+)
+alaRIPTrapsGroup.setObjects(
+    ("ALCATEL-IND1-RIP-MIB", "ripRouteMaxLimitReached")
+)
+if mibBuilder.loadTexts:
+    alaRIPTrapsGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -1560,7 +1588,9 @@ alcatelIND1RIPMIBCompliance.setObjects(
         ("ALCATEL-IND1-RIP-MIB", "alaRipRedistProtoGroup"),
         ("ALCATEL-IND1-RIP-MIB", "alaRipDebugGroup"),
         ("ALCATEL-IND1-RIP-MIB", "alaRipEcmpRouteGroup"),
-        ("ALCATEL-IND1-RIP-MIB", "alaRipRedistRouteGroup"))
+        ("ALCATEL-IND1-RIP-MIB", "alaRipRedistRouteGroup"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRip2IfConfAugGroup"),
+        ("ALCATEL-IND1-RIP-MIB", "alaRIPTrapsGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1RIPMIBCompliance.setStatus(
@@ -1652,6 +1682,8 @@ mibBuilder.exportSymbols(
        "alaRipRouteGroup": alaRipRouteGroup,
        "alaRipRedistRouteGroup": alaRipRedistRouteGroup,
        "alaRipEcmpRouteGroup": alaRipEcmpRouteGroup,
+       "alaRip2IfConfAugGroup": alaRip2IfConfAugGroup,
+       "alaRIPTrapsGroup": alaRIPTrapsGroup,
        "alcatelIND1RIPMIBCompliances": alcatelIND1RIPMIBCompliances,
        "alcatelIND1RIPMIBCompliance": alcatelIND1RIPMIBCompliance,
        "alcatelIND1RIPTraps": alcatelIND1RIPTraps,

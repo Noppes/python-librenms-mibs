@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\aos7\ALCATEL-IND1-TIMETRA-OAM-TEST-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:16:03 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -130,7 +127,7 @@ if 'mibBuilder' not in globals():
     "InetAddressType")
 
 (MplsLabel,) = mibBuilder.importSymbols(
-    "MPLS-LDP-MIB",
+    "MPLS-LDP-STD-MIB",
     "MplsLabel")
 
 (RouterID,) = mibBuilder.importSymbols(
@@ -213,7 +210,8 @@ timetraOamTestMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     timetraOamTestMIBModule.setRevisions(
-        ("1908-01-01 00:00",
+        ("2019-11-27 00:00",
+         "1908-01-01 00:00",
          "1907-01-01 00:00",
          "1906-03-09 00:00",
          "1905-08-31 00:00",

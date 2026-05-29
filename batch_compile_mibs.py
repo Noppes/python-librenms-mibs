@@ -17,16 +17,16 @@ from datetime import datetime
 import json
 import shutil
 
+from lnmsc import MibCompilerRunner
+
 
 class BatchMibCompiler:
     """Batch compile and organize MIBs from multiple vendors."""
 
-    def __init__(self, source_dir: Path, output_dir: Path, validate: bool = False,
-                 offline: bool = False, verbose: bool = False):
+    def __init__(self, source_dir: Path, output_dir: Path, validate: bool = False, verbose: bool = False):
         self.source_dir = Path(source_dir)
         self.output_dir = Path(output_dir)
         self.validate = validate
-        self.offline = offline
         self.verbose = verbose
         self.results = {}
 
@@ -57,31 +57,16 @@ class BatchMibCompiler:
 
         vendor_source = self.source_dir / vendor
         vendor_output = self.output_dir / vendor
-        temp_output = self.output_dir  # Compile to root first
+        temp_output = self.output_dir / ".build"
 
         # Create vendor directory first
         vendor_output.mkdir(parents=True, exist_ok=True)
 
-        # Build compilation command
-        cmd = [
-            sys.executable,
-            'lnmsc.py',
-            str(self.source_dir),
-            '--vendor', vendor,
-            '-o', str(temp_output)
-        ]
-
-        if self.offline:
-            cmd.append('--offline')
-
-        if self.verbose:
-            cmd.append('-v')
-
         # Run compilation
         start_time = datetime.now()
         try:
-            result = subprocess.run(cmd, capture_output=False, text=True)
-            compile_success = result.returncode == 0
+            MibCompilerRunner.start(str(self.source_dir), str(temp_output), vendor, False, self.verbose)
+            compile_success = True
         except Exception as e:
             print(f"Error running compiler: {e}")
             return {
@@ -287,8 +272,6 @@ Examples:
   # Compile and validate
   %(prog)s --source ./mibs --output ./compiled_mibs --validate
 
-  # Offline mode with verbose output
-  %(prog)s --source ./mibs --output ./compiled_mibs --offline -v
         """
     )
 
@@ -300,8 +283,6 @@ Examples:
                         help='Comma-separated list of vendors to compile (default: all)')
     parser.add_argument('--validate', action='store_true',
                         help='Validate MIBs after compilation')
-    parser.add_argument('--offline', action='store_true',
-                        help='Do not use network fallbacks')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='Enable verbose output')
     parser.add_argument('--version', action='version', version='%(prog)s 1.0.0')
@@ -326,7 +307,6 @@ Examples:
         source_dir,
         output_dir,
         validate=args.validate,
-        offline=args.offline,
         verbose=args.verbose
     )
 

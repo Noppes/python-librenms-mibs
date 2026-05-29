@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\stormshield\STORMSHIELD-SYSTEM-MONITOR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:29:17 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,8 @@ snsSystemMonitor = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snsSystemMonitor.setRevisions(
-        ("2017-02-20 00:00",)
+        ("2025-04-10 00:00",
+         "2022-06-09 00:00")
     )
 
 
@@ -181,23 +179,23 @@ if mibBuilder.loadTexts:
     snsMem.setStatus("current")
 
 
-class _SnsStatTime_Type(DisplayString):
-    """Custom type snsStatTime based on DisplayString"""
+class _SnsStartTime_Type(DisplayString):
+    """Custom type snsStartTime based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 255),
     )
 
 
-_SnsStatTime_Type.__name__ = "DisplayString"
-_SnsStatTime_Object = MibScalar
-snsStatTime = _SnsStatTime_Object(
+_SnsStartTime_Type.__name__ = "DisplayString"
+_SnsStartTime_Object = MibScalar
+snsStartTime = _SnsStartTime_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 10, 4),
-    _SnsStatTime_Type()
+    _SnsStartTime_Type()
 )
-snsStatTime.setMaxAccess("read-only")
+snsStartTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    snsStatTime.setStatus("current")
+    snsStartTime.setStatus("current")
 _SnsDiskTable_Object = MibTable
 snsDiskTable = _SnsDiskTable_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 10, 5)
@@ -330,6 +328,15 @@ snsPowerSupplyPowered = _SnsPowerSupplyPowered_Object(
 snsPowerSupplyPowered.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsPowerSupplyPowered.setStatus("current")
+_SnsPowerSupplyStatus_Type = DisplayString
+_SnsPowerSupplyStatus_Object = MibTableColumn
+snsPowerSupplyStatus = _SnsPowerSupplyStatus_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 6, 1, 3),
+    _SnsPowerSupplyStatus_Type()
+)
+snsPowerSupplyStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsPowerSupplyStatus.setStatus("current")
 _SnsCpuTable_Object = MibTable
 snsCpuTable = _SnsCpuTable_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 10, 7)
@@ -453,7 +460,7 @@ snsBypassRunTime = _SnsBypassRunTime_Object(
 snsBypassRunTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsBypassRunTime.setStatus("current")
-_SnsBypassWatchdog_Type = TruthValue
+_SnsBypassWatchdog_Type = DisplayString
 _SnsBypassWatchdog_Object = MibTableColumn
 snsBypassWatchdog = _SnsBypassWatchdog_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 10, 8, 1, 6),
@@ -462,6 +469,210 @@ snsBypassWatchdog = _SnsBypassWatchdog_Object(
 snsBypassWatchdog.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsBypassWatchdog.setStatus("current")
+_SnsFanTable_Object = MibTable
+snsFanTable = _SnsFanTable_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 9)
+)
+if mibBuilder.loadTexts:
+    snsFanTable.setStatus("current")
+_SnsFanEntry_Object = MibTableRow
+snsFanEntry = _SnsFanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 9, 1)
+)
+snsFanEntry.setIndexNames(
+    (0, "STORMSHIELD-SYSTEM-MONITOR-MIB", "snsFanIndex"),
+)
+if mibBuilder.loadTexts:
+    snsFanEntry.setStatus("current")
+
+
+class _SnsFanIndex_Type(Integer32):
+    """Custom type snsFanIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_SnsFanIndex_Type.__name__ = "Integer32"
+_SnsFanIndex_Object = MibTableColumn
+snsFanIndex = _SnsFanIndex_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 9, 1, 1),
+    _SnsFanIndex_Type()
+)
+snsFanIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snsFanIndex.setStatus("current")
+_SnsFanName_Type = DisplayString
+_SnsFanName_Object = MibTableColumn
+snsFanName = _SnsFanName_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 9, 1, 2),
+    _SnsFanName_Type()
+)
+snsFanName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsFanName.setStatus("current")
+_SnsFanStatus_Type = DisplayString
+_SnsFanStatus_Object = MibTableColumn
+snsFanStatus = _SnsFanStatus_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 9, 1, 3),
+    _SnsFanStatus_Type()
+)
+snsFanStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsFanStatus.setStatus("current")
+
+
+class _SnsFanRpm_Type(Unsigned32):
+    """Custom type snsFanRpm based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4294967295),
+    )
+
+
+_SnsFanRpm_Type.__name__ = "Unsigned32"
+_SnsFanRpm_Object = MibTableColumn
+snsFanRpm = _SnsFanRpm_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 9, 1, 4),
+    _SnsFanRpm_Type()
+)
+snsFanRpm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsFanRpm.setStatus("current")
+_SnsMemUsageTable_Object = MibTable
+snsMemUsageTable = _SnsMemUsageTable_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10)
+)
+if mibBuilder.loadTexts:
+    snsMemUsageTable.setStatus("current")
+_SnsMemUsageEntry_Object = MibTableRow
+snsMemUsageEntry = _SnsMemUsageEntry_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1)
+)
+snsMemUsageEntry.setIndexNames(
+    (0, "STORMSHIELD-SYSTEM-MONITOR-MIB", "snsMemUsageIndex"),
+)
+if mibBuilder.loadTexts:
+    snsMemUsageEntry.setStatus("current")
+
+
+class _SnsMemUsageIndex_Type(Integer32):
+    """Custom type snsMemUsageIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 255),
+    )
+
+
+_SnsMemUsageIndex_Type.__name__ = "Integer32"
+_SnsMemUsageIndex_Object = MibTableColumn
+snsMemUsageIndex = _SnsMemUsageIndex_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 1),
+    _SnsMemUsageIndex_Type()
+)
+snsMemUsageIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    snsMemUsageIndex.setStatus("current")
+_SnsMemHost_Type = Integer32
+_SnsMemHost_Object = MibTableColumn
+snsMemHost = _SnsMemHost_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 2),
+    _SnsMemHost_Type()
+)
+snsMemHost.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemHost.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemHost.setUnits("%")
+_SnsMemFrag_Type = Integer32
+_SnsMemFrag_Object = MibTableColumn
+snsMemFrag = _SnsMemFrag_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 3),
+    _SnsMemFrag_Type()
+)
+snsMemFrag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemFrag.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemFrag.setUnits("%")
+_SnsMemIcmp_Type = Integer32
+_SnsMemIcmp_Object = MibTableColumn
+snsMemIcmp = _SnsMemIcmp_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 4),
+    _SnsMemIcmp_Type()
+)
+snsMemIcmp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemIcmp.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemIcmp.setUnits("%")
+_SnsMemConn_Type = Integer32
+_SnsMemConn_Object = MibTableColumn
+snsMemConn = _SnsMemConn_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 5),
+    _SnsMemConn_Type()
+)
+snsMemConn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemConn.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemConn.setUnits("%")
+_SnsMemEther_Type = Integer32
+_SnsMemEther_Object = MibTableColumn
+snsMemEther = _SnsMemEther_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 6),
+    _SnsMemEther_Type()
+)
+snsMemEther.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemEther.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemEther.setUnits("%")
+_SnsMemDataTrack_Type = Integer32
+_SnsMemDataTrack_Object = MibTableColumn
+snsMemDataTrack = _SnsMemDataTrack_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 7),
+    _SnsMemDataTrack_Type()
+)
+snsMemDataTrack.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemDataTrack.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemDataTrack.setUnits("%")
+_SnsMemSystem_Type = Integer32
+_SnsMemSystem_Object = MibTableColumn
+snsMemSystem = _SnsMemSystem_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 8),
+    _SnsMemSystem_Type()
+)
+snsMemSystem.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemSystem.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemSystem.setUnits("%")
+_SnsMemUser_Type = Integer32
+_SnsMemUser_Object = MibTableColumn
+snsMemUser = _SnsMemUser_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 9),
+    _SnsMemUser_Type()
+)
+snsMemUser.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemUser.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemUser.setUnits("%")
+_SnsMemMbuf_Type = Integer32
+_SnsMemMbuf_Object = MibTableColumn
+snsMemMbuf = _SnsMemMbuf_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 10, 10, 1, 10),
+    _SnsMemMbuf_Type()
+)
+snsMemMbuf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsMemMbuf.setStatus("current")
+if mibBuilder.loadTexts:
+    snsMemMbuf.setUnits("%")
 
 # Managed Objects groups
 
@@ -486,7 +697,7 @@ mibBuilder.exportSymbols(
        "snsDate": snsDate,
        "snsUptime": snsUptime,
        "snsMem": snsMem,
-       "snsStatTime": snsStatTime,
+       "snsStartTime": snsStartTime,
        "snsDiskTable": snsDiskTable,
        "snsDiskEntry": snsDiskEntry,
        "snsDiskEntryIndex": snsDiskEntryIndex,
@@ -499,6 +710,7 @@ mibBuilder.exportSymbols(
        "snsPowerSupplyEntry": snsPowerSupplyEntry,
        "snsPowerSupplyIndex": snsPowerSupplyIndex,
        "snsPowerSupplyPowered": snsPowerSupplyPowered,
+       "snsPowerSupplyStatus": snsPowerSupplyStatus,
        "snsCpuTable": snsCpuTable,
        "snsCpuEntry": snsCpuEntry,
        "snsCpuIndex": snsCpuIndex,
@@ -510,5 +722,23 @@ mibBuilder.exportSymbols(
        "snsBypassSystemOff": snsBypassSystemOff,
        "snsBypassJustOn": snsBypassJustOn,
        "snsBypassRunTime": snsBypassRunTime,
-       "snsBypassWatchdog": snsBypassWatchdog}
+       "snsBypassWatchdog": snsBypassWatchdog,
+       "snsFanTable": snsFanTable,
+       "snsFanEntry": snsFanEntry,
+       "snsFanIndex": snsFanIndex,
+       "snsFanName": snsFanName,
+       "snsFanStatus": snsFanStatus,
+       "snsFanRpm": snsFanRpm,
+       "snsMemUsageTable": snsMemUsageTable,
+       "snsMemUsageEntry": snsMemUsageEntry,
+       "snsMemUsageIndex": snsMemUsageIndex,
+       "snsMemHost": snsMemHost,
+       "snsMemFrag": snsMemFrag,
+       "snsMemIcmp": snsMemIcmp,
+       "snsMemConn": snsMemConn,
+       "snsMemEther": snsMemEther,
+       "snsMemDataTrack": snsMemDataTrack,
+       "snsMemSystem": snsMemSystem,
+       "snsMemUser": snsMemUser,
+       "snsMemMbuf": snsMemMbuf}
 )

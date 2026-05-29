@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-PARTITIONED-MGR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:55 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-PARTITIONED-MGR-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,6 +114,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1PartitionedMgrMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1PartitionedMgrMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -273,7 +274,7 @@ endUserProfileAreaPhysical = _EndUserProfileAreaPhysical_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 2),
     _EndUserProfileAreaPhysical_Type()
 )
-endUserProfileAreaPhysical.setMaxAccess("read-write")
+endUserProfileAreaPhysical.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileAreaPhysical.setStatus("current")
 
@@ -289,7 +290,7 @@ endUserProfileAreaVlanTable = _EndUserProfileAreaVlanTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 3),
     _EndUserProfileAreaVlanTable_Type()
 )
-endUserProfileAreaVlanTable.setMaxAccess("read-write")
+endUserProfileAreaVlanTable.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileAreaVlanTable.setStatus("current")
 
@@ -305,7 +306,7 @@ endUserProfileAreaBasicIpRouting = _EndUserProfileAreaBasicIpRouting_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 4),
     _EndUserProfileAreaBasicIpRouting_Type()
 )
-endUserProfileAreaBasicIpRouting.setMaxAccess("read-write")
+endUserProfileAreaBasicIpRouting.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileAreaBasicIpRouting.setStatus("current")
 
@@ -321,7 +322,7 @@ endUserProfileAreaIpRoutesTable = _EndUserProfileAreaIpRoutesTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 5),
     _EndUserProfileAreaIpRoutesTable_Type()
 )
-endUserProfileAreaIpRoutesTable.setMaxAccess("read-write")
+endUserProfileAreaIpRoutesTable.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileAreaIpRoutesTable.setStatus("current")
 
@@ -337,7 +338,7 @@ endUserProfileAreaMacFilteringTable = _EndUserProfileAreaMacFilteringTable_Objec
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 6),
     _EndUserProfileAreaMacFilteringTable_Type()
 )
-endUserProfileAreaMacFilteringTable.setMaxAccess("read-write")
+endUserProfileAreaMacFilteringTable.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileAreaMacFilteringTable.setStatus("current")
 
@@ -353,7 +354,7 @@ endUserProfileAreaSpantree = _EndUserProfileAreaSpantree_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 7),
     _EndUserProfileAreaSpantree_Type()
 )
-endUserProfileAreaSpantree.setMaxAccess("read-write")
+endUserProfileAreaSpantree.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileAreaSpantree.setStatus("current")
 _EndUserProfileRowStatus_Type = RowStatus
@@ -362,7 +363,7 @@ endUserProfileRowStatus = _EndUserProfileRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 1, 1, 8),
     _EndUserProfileRowStatus_Type()
 )
-endUserProfileRowStatus.setMaxAccess("read-write")
+endUserProfileRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileRowStatus.setStatus("current")
 _EndUserProfileSlotPortTable_Object = MibTable
@@ -406,7 +407,7 @@ endUserProfilePortList = _EndUserProfilePortList_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 2, 1, 2),
     _EndUserProfilePortList_Type()
 )
-endUserProfilePortList.setMaxAccess("read-write")
+endUserProfilePortList.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfilePortList.setStatus("current")
 _EndUserProfileSlotPortRowStatus_Type = RowStatus
@@ -415,7 +416,7 @@ endUserProfileSlotPortRowStatus = _EndUserProfileSlotPortRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 2, 1, 3),
     _EndUserProfileSlotPortRowStatus_Type()
 )
-endUserProfileSlotPortRowStatus.setMaxAccess("read-write")
+endUserProfileSlotPortRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileSlotPortRowStatus.setStatus("current")
 _EndUserProfileVlanIdTable_Object = MibTable
@@ -449,7 +450,7 @@ endUserProfileVlanIdEnd = _EndUserProfileVlanIdEnd_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 3, 1, 2),
     _EndUserProfileVlanIdEnd_Type()
 )
-endUserProfileVlanIdEnd.setMaxAccess("read-write")
+endUserProfileVlanIdEnd.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileVlanIdEnd.setStatus("current")
 _EndUserProfileVlanIdRowStatus_Type = RowStatus
@@ -458,7 +459,7 @@ endUserProfileVlanIdRowStatus = _EndUserProfileVlanIdRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 25, 1, 1, 1, 3, 1, 3),
     _EndUserProfileVlanIdRowStatus_Type()
 )
-endUserProfileVlanIdRowStatus.setMaxAccess("read-write")
+endUserProfileVlanIdRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     endUserProfileVlanIdRowStatus.setStatus("current")
 _AlcatelIND1PartitionedMgrMIBConformance_ObjectIdentity = ObjectIdentity

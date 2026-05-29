@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-BASE
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:06 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-BASE
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,7 @@ alcatelIND1BaseMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1BaseMIB.setRevisions(
-        ("2007-04-02 00:08",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -328,6 +325,12 @@ routingIND1Vrf = _RoutingIND1Vrf_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     routingIND1Vrf.setStatus("current")
+_RoutingIND1GlobalRouteTableMIB_ObjectIdentity = ObjectIdentity
+routingIND1GlobalRouteTableMIB = _RoutingIND1GlobalRouteTableMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 16)
+)
+if mibBuilder.loadTexts:
+    routingIND1GlobalRouteTableMIB.setStatus("current")
 _SoftentIND1Confmgr_ObjectIdentity = ObjectIdentity
 softentIND1Confmgr = _SoftentIND1Confmgr_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 11)
@@ -604,6 +607,78 @@ softentIND1DhcpSrv = _SoftentIND1DhcpSrv_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     softentIND1DhcpSrv.setStatus("current")
+_SoftentIND1LLDP_ObjectIdentity = ObjectIdentity
+softentIND1LLDP = _SoftentIND1LLDP_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 60)
+)
+if mibBuilder.loadTexts:
+    softentIND1LLDP.setStatus("current")
+_SoftentIND1DHL_ObjectIdentity = ObjectIdentity
+softentIND1DHL = _SoftentIND1DHL_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 63)
+)
+if mibBuilder.loadTexts:
+    softentIND1DHL.setStatus("current")
+_SoftentIND1PPPoEIA_ObjectIdentity = ObjectIdentity
+softentIND1PPPoEIA = _SoftentIND1PPPoEIA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 64)
+)
+if mibBuilder.loadTexts:
+    softentIND1PPPoEIA.setStatus("current")
+_SoftentIND1TestOam_ObjectIdentity = ObjectIdentity
+softentIND1TestOam = _SoftentIND1TestOam_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 65)
+)
+if mibBuilder.loadTexts:
+    softentIND1TestOam.setStatus("current")
+_SoftentIND1Kerberos_ObjectIdentity = ObjectIdentity
+softentIND1Kerberos = _SoftentIND1Kerberos_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 66)
+)
+if mibBuilder.loadTexts:
+    softentIND1Kerberos.setStatus("current")
+_SoftentIND1SIPSnooping_ObjectIdentity = ObjectIdentity
+softentIND1SIPSnooping = _SoftentIND1SIPSnooping_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 67)
+)
+if mibBuilder.loadTexts:
+    softentIND1SIPSnooping.setStatus("current")
+_SoftentIND1Da_ObjectIdentity = ObjectIdentity
+softentIND1Da = _SoftentIND1Da_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 68)
+)
+if mibBuilder.loadTexts:
+    softentIND1Da.setStatus("current")
+_SoftentIND1MultiChassisManager_ObjectIdentity = ObjectIdentity
+softentIND1MultiChassisManager = _SoftentIND1MultiChassisManager_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 69)
+)
+if mibBuilder.loadTexts:
+    softentIND1MultiChassisManager.setStatus("current")
+_SoftentIND1OpenflowMIB_ObjectIdentity = ObjectIdentity
+softentIND1OpenflowMIB = _SoftentIND1OpenflowMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 70)
+)
+if mibBuilder.loadTexts:
+    softentIND1OpenflowMIB.setStatus("current")
+_SoftentIND1TWAMP_ObjectIdentity = ObjectIdentity
+softentIND1TWAMP = _SoftentIND1TWAMP_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 71)
+)
+if mibBuilder.loadTexts:
+    softentIND1TWAMP.setStatus("current")
+_SoftentIND1CldAgnt_ObjectIdentity = ObjectIdentity
+softentIND1CldAgnt = _SoftentIND1CldAgnt_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 72)
+)
+if mibBuilder.loadTexts:
+    softentIND1CldAgnt.setStatus("current")
+_SoftentIND1RAD_ObjectIdentity = ObjectIdentity
+softentIND1RAD = _SoftentIND1RAD_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 73)
+)
+if mibBuilder.loadTexts:
+    softentIND1RAD.setStatus("current")
 _SoftwareIND1Services_ObjectIdentity = ObjectIdentity
 softwareIND1Services = _SoftwareIND1Services_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 2)
@@ -772,6 +847,12 @@ alaDhcpClientTraps = _AlaDhcpClientTraps_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     alaDhcpClientTraps.setStatus("current")
+_AlaLLDPTraps_ObjectIdentity = ObjectIdentity
+alaLLDPTraps = _AlaLLDPTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 24)
+)
+if mibBuilder.loadTexts:
+    alaLLDPTraps.setStatus("current")
 _ManagementIND1AgentCapabilities_ObjectIdentity = ObjectIdentity
 managementIND1AgentCapabilities = _ManagementIND1AgentCapabilities_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 4)
@@ -834,6 +915,7 @@ mibBuilder.exportSymbols(
        "routingIND1Ospf3": routingIND1Ospf3,
        "routingIND1ISIS": routingIND1ISIS,
        "routingIND1Vrf": routingIND1Vrf,
+       "routingIND1GlobalRouteTableMIB": routingIND1GlobalRouteTableMIB,
        "softentIND1Confmgr": softentIND1Confmgr,
        "softentIND1VlanStp": softentIND1VlanStp,
        "softentIND1LnkAgg": softentIND1LnkAgg,
@@ -880,6 +962,18 @@ mibBuilder.exportSymbols(
        "softentIND1Mvrp": softentIND1Mvrp,
        "softentIND1LldpMed": softentIND1LldpMed,
        "softentIND1DhcpSrv": softentIND1DhcpSrv,
+       "softentIND1LLDP": softentIND1LLDP,
+       "softentIND1DHL": softentIND1DHL,
+       "softentIND1PPPoEIA": softentIND1PPPoEIA,
+       "softentIND1TestOam": softentIND1TestOam,
+       "softentIND1Kerberos": softentIND1Kerberos,
+       "softentIND1SIPSnooping": softentIND1SIPSnooping,
+       "softentIND1Da": softentIND1Da,
+       "softentIND1MultiChassisManager": softentIND1MultiChassisManager,
+       "softentIND1OpenflowMIB": softentIND1OpenflowMIB,
+       "softentIND1TWAMP": softentIND1TWAMP,
+       "softentIND1CldAgnt": softentIND1CldAgnt,
+       "softentIND1RAD": softentIND1RAD,
        "softwareIND1Services": softwareIND1Services,
        "serventIND1Aqe": serventIND1Aqe,
        "managementIND1Notifications": managementIND1Notifications,
@@ -908,5 +1002,6 @@ mibBuilder.exportSymbols(
        "alaAaaTraps": alaAaaTraps,
        "alaLbdTraps": alaLbdTraps,
        "alaDhcpClientTraps": alaDhcpClientTraps,
+       "alaLLDPTraps": alaLLDPTraps,
        "managementIND1AgentCapabilities": managementIND1AgentCapabilities}
 )

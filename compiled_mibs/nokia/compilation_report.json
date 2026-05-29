@@ -1,15 +1,11 @@
 {
-  "timestamp": "2025-10-02T12:18:04.272588",
+  "timestamp": "2026-05-29T09:44:17.345525",
   "stats": {
     "total": 250,
-    "compiled": 116,
-    "failed": 39,
-    "skipped": 95,
+    "compiled": 120,
+    "failed": 36,
+    "skipped": 94,
     "errors": [
-      {
-        "mib": "TROPIC-OPTICALPORT-MIB",
-        "error": "failed"
-      },
       {
         "mib": "ALCATEL-IND1-APP-FINGERPRINT-MIB",
         "error": "failed"
@@ -23,15 +19,7 @@
         "error": "failed"
       },
       {
-        "mib": "ALCATEL-IND1-DA-MIB",
-        "error": "failed"
-      },
-      {
         "mib": "ALCATEL-IND1-DCBX-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ALCATEL-IND1-DHL-MIB",
         "error": "failed"
       },
       {
@@ -52,14 +40,6 @@
       },
       {
         "mib": "ALCATEL-IND1-ISIS-SPB-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ALCATEL-IND1-MULTI-CHASSIS-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "ALCATEL-IND1-OPENFLOW-MIB",
         "error": "failed"
       },
       {
@@ -88,10 +68,6 @@
       },
       {
         "mib": "ITF-MIB-EXT",
-        "error": "failed"
-      },
-      {
-        "mib": "PIM-BSR-MIB",
         "error": "failed"
       },
       {
@@ -161,8 +137,20 @@
       {
         "mib": "OAW-AP1362",
         "error": "failed"
+      },
+      {
+        "mib": "SFP-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "TIMETRA-OAM-TEST-MIB",
+        "error": "unprocessed"
+      },
+      {
+        "mib": "TROPIC-OPTICALPORT-MIB",
+        "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

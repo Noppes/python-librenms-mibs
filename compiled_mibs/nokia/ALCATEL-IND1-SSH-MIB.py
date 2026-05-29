@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-SSH-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:19 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-SSH-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,7 @@ alcatelIND1SshMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1SshMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -212,6 +209,25 @@ alaSshPubKeyEnforceAdminStatus = _AlaSshPubKeyEnforceAdminStatus_Object(
 alaSshPubKeyEnforceAdminStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaSshPubKeyEnforceAdminStatus.setStatus("current")
+
+
+class _AlaSshPortNumber_Type(Integer32):
+    """Custom type alaSshPortNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AlaSshPortNumber_Type.__name__ = "Integer32"
+_AlaSshPortNumber_Object = MibScalar
+alaSshPortNumber = _AlaSshPortNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 39, 1, 1, 4),
+    _AlaSshPortNumber_Type()
+)
+alaSshPortNumber.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSshPortNumber.setStatus("current")
 _AlcatelIND1SshMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1SshMIBConformance = _AlcatelIND1SshMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 39, 1, 2)
@@ -277,6 +293,7 @@ mibBuilder.exportSymbols(
        "alaSshAdminStatus": alaSshAdminStatus,
        "alaScpSftpAdminStatus": alaScpSftpAdminStatus,
        "alaSshPubKeyEnforceAdminStatus": alaSshPubKeyEnforceAdminStatus,
+       "alaSshPortNumber": alaSshPortNumber,
        "alcatelIND1SshMIBConformance": alcatelIND1SshMIBConformance,
        "alcatelIND1SshMIBGroups": alcatelIND1SshMIBGroups,
        "alaSshConfigGroup": alaSshConfigGroup,

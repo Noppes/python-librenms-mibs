@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-ENTITY-SENSOR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:17 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -121,7 +118,8 @@ ciscoEntitySensorMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoEntitySensorMIB.setRevisions(
-        ("2015-01-15 00:00",
+        ("2017-01-19 00:00",
+         "2015-01-15 00:00",
          "2013-09-21 00:00",
          "2007-11-12 00:00",
          "2006-01-01 00:00",
@@ -157,7 +155,8 @@ class SensorDataType(TextualConvention, Integer32):
               11,
               12,
               13,
-              14)
+              14,
+              15)
         )
     )
     namedValues = NamedValues(
@@ -174,7 +173,8 @@ class SensorDataType(TextualConvention, Integer32):
           ("cmm", 11),
           ("truthvalue", 12),
           ("specialEnum", 13),
-          ("dBm", 14))
+          ("dBm", 14),
+          ("dB", 15))
     )
 
 

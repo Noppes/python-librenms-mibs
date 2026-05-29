@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-LLDP-MED-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:41 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-LLDP-MED-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -55,9 +52,11 @@ if 'mibBuilder' not in globals():
     "Dscp",
     "PolicyAppType")
 
-(LldpPortNumber,) = mibBuilder.importSymbols(
+(LldpPortNumber,
+ lldpPortConfigEntry) = mibBuilder.importSymbols(
     "LLDP-MIB",
-    "LldpPortNumber")
+    "LldpPortNumber",
+    "lldpPortConfigEntry")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -123,7 +122,7 @@ alcatelIND1LLDPMEDMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1LLDPMEDMIB.setRevisions(
-        ("2009-08-11 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -161,7 +160,17 @@ alaLldpXMedLocMediaPolicyEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     alaLldpXMedLocMediaPolicyEntry.setStatus("current")
-_AlaLldpXMedLocMediaPolicyId_Type = Integer32
+
+
+class _AlaLldpXMedLocMediaPolicyId_Type(Integer32):
+    """Custom type alaLldpXMedLocMediaPolicyId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_AlaLldpXMedLocMediaPolicyId_Type.__name__ = "Integer32"
 _AlaLldpXMedLocMediaPolicyId_Object = MibTableColumn
 alaLldpXMedLocMediaPolicyId = _AlaLldpXMedLocMediaPolicyId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 1, 1, 1, 1),
@@ -319,6 +328,66 @@ alaLldpXMedLocMediaPolicyPortRowStatus = _AlaLldpXMedLocMediaPolicyPortRowStatus
 alaLldpXMedLocMediaPolicyPortRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaLldpXMedLocMediaPolicyPortRowStatus.setStatus("current")
+_AlaLldpProprietaryAttributes_ObjectIdentity = ObjectIdentity
+alaLldpProprietaryAttributes = _AlaLldpProprietaryAttributes_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 2)
+)
+_AlaLldpPropConfigTable_Object = MibTable
+alaLldpPropConfigTable = _AlaLldpPropConfigTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 2, 1)
+)
+if mibBuilder.loadTexts:
+    alaLldpPropConfigTable.setStatus("current")
+_AlaLldpPropConfigEntry_Object = MibTableRow
+alaLldpPropConfigEntry = _AlaLldpPropConfigEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 2, 1, 1)
+)
+if mibBuilder.loadTexts:
+    alaLldpPropConfigEntry.setStatus("current")
+
+
+class _AlaLldpPropAPLocation_Type(TruthValue):
+    """Custom type alaLldpPropAPLocation based on TruthValue"""
+    defaultValue = 2
+
+
+_AlaLldpPropAPLocation_Type.__name__ = "TruthValue"
+_AlaLldpPropAPLocation_Object = MibTableColumn
+alaLldpPropAPLocation = _AlaLldpPropAPLocation_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 2, 1, 1, 1),
+    _AlaLldpPropAPLocation_Type()
+)
+alaLldpPropAPLocation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaLldpPropAPLocation.setStatus("current")
+_AlaLldpPropVlan_Type = Integer32
+_AlaLldpPropVlan_Object = MibTableColumn
+alaLldpPropVlan = _AlaLldpPropVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 2, 1, 1, 2),
+    _AlaLldpPropVlan_Type()
+)
+alaLldpPropVlan.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLldpPropVlan.setStatus("current")
+
+
+class _AlaLldpPropLocationDesc_Type(DisplayString):
+    """Custom type alaLldpPropLocationDesc based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AlaLldpPropLocationDesc_Type.__name__ = "DisplayString"
+_AlaLldpPropLocationDesc_Object = MibTableColumn
+alaLldpPropLocationDesc = _AlaLldpPropLocationDesc_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 1, 2, 1, 1, 3),
+    _AlaLldpPropLocationDesc_Type()
+)
+alaLldpPropLocationDesc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaLldpPropLocationDesc.setStatus("current")
 _AlcatelIND1LLDPMEDMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1LLDPMEDMIBConformance = _AlcatelIND1LLDPMEDMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 2)
@@ -331,6 +400,11 @@ _AlcatelIND1LLDPMEDMIBGroups_ObjectIdentity = ObjectIdentity
 alcatelIND1LLDPMEDMIBGroups = _AlcatelIND1LLDPMEDMIBGroups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 58, 1, 2, 2)
 )
+lldpPortConfigEntry.registerAugmentions(
+    ("ALCATEL-IND1-LLDP-MED-MIB",
+     "alaLldpPropConfigEntry")
+)
+alaLldpPropConfigEntry.setIndexNames(*lldpPortConfigEntry.getIndexNames())
 
 # Managed Objects groups
 
@@ -397,6 +471,12 @@ mibBuilder.exportSymbols(
        "alaLldpXMedLocMediaPolicyPortEntry": alaLldpXMedLocMediaPolicyPortEntry,
        "alaLldpXMedLocMediaPolicyPortNumber": alaLldpXMedLocMediaPolicyPortNumber,
        "alaLldpXMedLocMediaPolicyPortRowStatus": alaLldpXMedLocMediaPolicyPortRowStatus,
+       "alaLldpProprietaryAttributes": alaLldpProprietaryAttributes,
+       "alaLldpPropConfigTable": alaLldpPropConfigTable,
+       "alaLldpPropConfigEntry": alaLldpPropConfigEntry,
+       "alaLldpPropAPLocation": alaLldpPropAPLocation,
+       "alaLldpPropVlan": alaLldpPropVlan,
+       "alaLldpPropLocationDesc": alaLldpPropLocationDesc,
        "alcatelIND1LLDPMEDMIBConformance": alcatelIND1LLDPMEDMIBConformance,
        "alcatelIND1LLDPMEDMIBCompliances": alcatelIND1LLDPMEDMIBCompliances,
        "alcatelIND1LLDPMEDMIBCompliance": alcatelIND1LLDPMEDMIBCompliance,

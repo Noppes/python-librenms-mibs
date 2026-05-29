@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-TRAP-MGR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:22 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-TRAP-MGR-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -119,7 +116,7 @@ alcatelIND1TrapMgrMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1TrapMgrMIB.setRevisions(
-        ("2007-08-07 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -270,7 +267,7 @@ trapStationPort = _TrapStationPort_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2),
     _TrapStationPort_Type()
 )
-trapStationPort.setMaxAccess("read-write")
+trapStationPort.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     trapStationPort.setStatus("current")
 _TrapStationRowStatus_Type = RowStatus
@@ -279,7 +276,7 @@ trapStationRowStatus = _TrapStationRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 2, 1, 1, 1, 2, 1, 3),
     _TrapStationRowStatus_Type()
 )
-trapStationRowStatus.setMaxAccess("read-write")
+trapStationRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     trapStationRowStatus.setStatus("current")
 
@@ -309,7 +306,7 @@ trapStationProtocol = _TrapStationProtocol_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 2, 1, 1, 1, 2, 1, 4),
     _TrapStationProtocol_Type()
 )
-trapStationProtocol.setMaxAccess("read-write")
+trapStationProtocol.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     trapStationProtocol.setStatus("current")
 
@@ -328,7 +325,7 @@ trapStationUser = _TrapStationUser_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 2, 1, 1, 1, 2, 1, 5),
     _TrapStationUser_Type()
 )
-trapStationUser.setMaxAccess("read-write")
+trapStationUser.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     trapStationUser.setStatus("current")
 
@@ -344,7 +341,7 @@ trapStationReplay = _TrapStationReplay_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 2, 1, 1, 1, 2, 1, 6),
     _TrapStationReplay_Type()
 )
-trapStationReplay.setMaxAccess("read-write")
+trapStationReplay.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     trapStationReplay.setStatus("current")
 

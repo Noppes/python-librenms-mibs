@@ -1,40 +1,24 @@
 {
-  "timestamp": "2025-10-02T11:13:57.696918",
+  "timestamp": "2026-05-29T09:17:24.587330",
   "stats": {
     "total": 7,
-    "compiled": 0,
-    "failed": 7,
-    "skipped": 0,
+    "compiled": 1,
+    "failed": 3,
+    "skipped": 3,
     "errors": [
       {
         "mib": "APRISAXE-EVENTS-4RF",
-        "error": "missing"
+        "error": "unprocessed"
       },
       {
         "mib": "APRISAXE-MIB-4RF",
-        "error": "missing"
+        "error": "failed"
       },
       {
         "mib": "APRISAXE-TC-4RF",
-        "error": "missing"
-      },
-      {
-        "mib": "COMMON-4RF",
-        "error": "missing"
-      },
-      {
-        "mib": "COMMON-TC-4RF",
-        "error": "missing"
-      },
-      {
-        "mib": "MIB-4RF",
-        "error": "missing"
-      },
-      {
-        "mib": "PRODUCTS-MIB-4RF",
-        "error": "missing"
+        "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

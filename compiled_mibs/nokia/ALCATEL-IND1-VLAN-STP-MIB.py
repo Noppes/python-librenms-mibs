@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-VLAN-STP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:24 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-VLAN-STP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,6 +120,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1VLANSTPMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1VLANSTPMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -4246,15 +4247,6 @@ class VlanBitmap(TextualConvention, Bits):
     )
 
 
-class MstList(DisplayString):
-    status = "current"
-    subtypeSpec = DisplayString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 128),
-    )
-
-
-
 # MIB Managed Objects in the order of their OIDs
 
 _AlcatelIND1VLANSTPMIBObjects_ObjectIdentity = ObjectIdentity
@@ -4571,7 +4563,17 @@ vStpPortEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     vStpPortEntry.setStatus("deprecated")
-_VStpPortNumber_Type = Integer32
+
+
+class _VStpPortNumber_Type(Integer32):
+    """Custom type vStpPortNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_VStpPortNumber_Type.__name__ = "Integer32"
 _VStpPortNumber_Object = MibTableColumn
 vStpPortNumber = _VStpPortNumber_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 2, 1, 1),
@@ -5293,6 +5295,15 @@ vStpInsStatus = _VStpInsStatus_Object(
 vStpInsStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vStpInsStatus.setStatus("current")
+_VStpLastTcRcvdPortNumber_Type = Integer32
+_VStpLastTcRcvdPortNumber_Object = MibTableColumn
+vStpLastTcRcvdPortNumber = _VStpLastTcRcvdPortNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 3, 1, 28),
+    _VStpLastTcRcvdPortNumber_Type()
+)
+vStpLastTcRcvdPortNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vStpLastTcRcvdPortNumber.setStatus("current")
 _VStpInsPortTable_Object = MibTable
 vStpInsPortTable = _VStpInsPortTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 4)
@@ -5310,7 +5321,17 @@ vStpInsPortEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     vStpInsPortEntry.setStatus("current")
-_VStpInsPortNumber_Type = Integer32
+
+
+class _VStpInsPortNumber_Type(Integer32):
+    """Custom type vStpInsPortNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_VStpInsPortNumber_Type.__name__ = "Integer32"
 _VStpInsPortNumber_Object = MibTableColumn
 vStpInsPortNumber = _VStpInsPortNumber_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 4, 1, 1),
@@ -6039,7 +6060,17 @@ vStpMstRegionConfigRevisionLevel = _VStpMstRegionConfigRevisionLevel_Object(
 vStpMstRegionConfigRevisionLevel.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     vStpMstRegionConfigRevisionLevel.setStatus("current")
-_VStpMstRegionMstiList_Type = MstList
+
+
+class _VStpMstRegionMstiList_Type(DisplayString):
+    """Custom type vStpMstRegionMstiList based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 128),
+    )
+
+
+_VStpMstRegionMstiList_Type.__name__ = "DisplayString"
 _VStpMstRegionMstiList_Object = MibTableColumn
 vStpMstRegionMstiList = _VStpMstRegionMstiList_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 6, 1, 6),
@@ -6138,7 +6169,7 @@ vStpMstInstanceName = _VStpMstInstanceName_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 7, 1, 2),
     _VStpMstInstanceName_Type()
 )
-vStpMstInstanceName.setMaxAccess("read-write")
+vStpMstInstanceName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vStpMstInstanceName.setStatus("current")
 _VStpMstInstanceVlanBitmapAddition_Type = VlanBitmap
@@ -6147,7 +6178,7 @@ vStpMstInstanceVlanBitmapAddition = _VStpMstInstanceVlanBitmapAddition_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 7, 1, 3),
     _VStpMstInstanceVlanBitmapAddition_Type()
 )
-vStpMstInstanceVlanBitmapAddition.setMaxAccess("read-write")
+vStpMstInstanceVlanBitmapAddition.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vStpMstInstanceVlanBitmapAddition.setStatus("current")
 _VStpMstInstanceVlanBitmapDeletion_Type = VlanBitmap
@@ -6156,7 +6187,7 @@ vStpMstInstanceVlanBitmapDeletion = _VStpMstInstanceVlanBitmapDeletion_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 7, 1, 4),
     _VStpMstInstanceVlanBitmapDeletion_Type()
 )
-vStpMstInstanceVlanBitmapDeletion.setMaxAccess("read-write")
+vStpMstInstanceVlanBitmapDeletion.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vStpMstInstanceVlanBitmapDeletion.setStatus("current")
 _VStpMstInstanceVlanBitmapState_Type = VlanBitmap
@@ -6174,7 +6205,7 @@ vStpMstInstanceRowStatus = _VStpMstInstanceRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 7, 1, 6),
     _VStpMstInstanceRowStatus_Type()
 )
-vStpMstInstanceRowStatus.setMaxAccess("read-write")
+vStpMstInstanceRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vStpMstInstanceRowStatus.setStatus("current")
 _VStpMstVlanAssignmentTable_Object = MibTable
@@ -6340,6 +6371,34 @@ vStpPortConfigStatePVST = _VStpPortConfigStatePVST_Object(
 vStpPortConfigStatePVST.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vStpPortConfigStatePVST.setStatus("current")
+
+
+class _VStpPortConfigLoopGuard_Type(Integer32):
+    """Custom type vStpPortConfigLoopGuard based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_VStpPortConfigLoopGuard_Type.__name__ = "Integer32"
+_VStpPortConfigLoopGuard_Object = MibTableColumn
+vStpPortConfigLoopGuard = _VStpPortConfigLoopGuard_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 1, 1, 9, 1, 5),
+    _VStpPortConfigLoopGuard_Type()
+)
+vStpPortConfigLoopGuard.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    vStpPortConfigLoopGuard.setStatus("current")
 
 
 class _VStpRrstpGlobalState_Type(Integer32):
@@ -6525,7 +6584,26 @@ vStpGroup.setObjects(
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpIns1x1VlanNumber"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsMstiNumber"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsMode"),
-        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsAutoVlanContainment"))
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsAutoVlanContainment"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeAddress"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeForwardDelay"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeHelloTime"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeMaxAge"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpDesignatedRoot"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpForwardDelay"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpHelloTime"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpHoldTime"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpMaxAge"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpMode"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpNextBestRootCost"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpNextBestRootPortNumber"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpNumber"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPriority"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpProtocolSpecification"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRootPortNumber"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpTimeSinceTopologyChange"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpTopChanges"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpLastTcRcvdPortNumber"))
 )
 if mibBuilder.loadTexts:
     vStpGroup.setStatus("current")
@@ -6554,7 +6632,33 @@ vStpPortGroup.setObjects(
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortCistPathCost"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortHelloTime"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsBridgeHelloTime"),
-        ("ALCATEL-IND1-VLAN-STP-MIB", "vstpInsPortRcvdInternal"))
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vstpInsPortRcvdInternal"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsBridgeTxHoldCount"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortAdminEdge"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortAutoEdge"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortBridgeHelloTime"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortRestrictedRole"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsPortRestrictedTcn"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpInsStatus"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortAdminConnectionType"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigPVST"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigStatePVST"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortDesignatedBridge"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortDesignatedCost"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortDesignatedPtNumber"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortDesignatedPtPrio"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortDesignatedRoot"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortEnable"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortForwardTransitions"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortManualMode"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortNumber"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortOperConnectionType"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortPathCost"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortPrimaryPortNumber"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortPriority"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortRole"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortState"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRootCost"))
 )
 if mibBuilder.loadTexts:
     vStpPortGroup.setStatus("current")
@@ -6604,7 +6708,8 @@ vStpPortConfigGroup = ObjectGroup(
 )
 vStpPortConfigGroup.setObjects(
       *(("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigIfIndex"),
-        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigTenGigOs8800Opt"))
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigTenGigOs8800Opt"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigLoopGuard"))
 )
 if mibBuilder.loadTexts:
     vStpPortConfigGroup.setStatus("current")
@@ -6617,7 +6722,8 @@ vStpRrstpRingConfigGroup.setObjects(
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingPort1"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingPort2"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingState"),
-        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingRowStatus"))
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingRowStatus"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingVlanTag"))
 )
 if mibBuilder.loadTexts:
     vStpRrstpRingConfigGroup.setStatus("current")
@@ -6630,6 +6736,20 @@ vStpRrstpRingBaseGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     vStpRrstpRingBaseGroup.setStatus("current")
+
+vStpBridgeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 12, 1, 2, 1, 10)
+)
+vStpBridgeGroup.setObjects(
+      *(("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeAddressId"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeLastChanged"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeAutoVlanContainment"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeMode"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeModePVST"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgePathCostMode"))
+)
+if mibBuilder.loadTexts:
+    vStpBridgeGroup.setStatus("current")
 
 
 # Notification objects
@@ -6657,6 +6777,30 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+stpLoopGuardError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 7, 0, 3)
+)
+stpLoopGuardError.setObjects(
+      *(("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigIfIndex"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpNumber"))
+)
+if mibBuilder.loadTexts:
+    stpLoopGuardError.setStatus(
+        "current"
+    )
+
+stpLoopGuardRecovery = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 7, 0, 4)
+)
+stpLoopGuardRecovery.setObjects(
+      *(("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigIfIndex"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpNumber"))
+)
+if mibBuilder.loadTexts:
+    stpLoopGuardRecovery.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -6665,7 +6809,9 @@ vStpNotificationGroup = NotificationGroup(
 )
 vStpNotificationGroup.setObjects(
       *(("ALCATEL-IND1-VLAN-STP-MIB", "stpNewRoot"),
-        ("ALCATEL-IND1-VLAN-STP-MIB", "stpRootPortChange"))
+        ("ALCATEL-IND1-VLAN-STP-MIB", "stpRootPortChange"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "stpLoopGuardError"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "stpLoopGuardRecovery"))
 )
 if mibBuilder.loadTexts:
     vStpNotificationGroup.setStatus(
@@ -6690,7 +6836,8 @@ alcatelIND1VLANSTPMIBCompliance.setObjects(
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpPortConfigGroup"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpNotificationGroup"),
         ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingConfigGroup"),
-        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingBaseGroup"))
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpRrstpRingBaseGroup"),
+        ("ALCATEL-IND1-VLAN-STP-MIB", "vStpBridgeGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1VLANSTPMIBCompliance.setStatus(
@@ -6703,7 +6850,6 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "ALCATEL-IND1-VLAN-STP-MIB",
     **{"VlanBitmap": VlanBitmap,
-       "MstList": MstList,
        "DigestId": DigestId,
        "alcatelIND1VLANSTPMIB": alcatelIND1VLANSTPMIB,
        "alcatelIND1VLANSTPMIBObjects": alcatelIND1VLANSTPMIBObjects,
@@ -6776,6 +6922,7 @@ mibBuilder.exportSymbols(
        "vStpInsAutoVlanContainment": vStpInsAutoVlanContainment,
        "vStpInsBridgeTxHoldCount": vStpInsBridgeTxHoldCount,
        "vStpInsStatus": vStpInsStatus,
+       "vStpLastTcRcvdPortNumber": vStpLastTcRcvdPortNumber,
        "vStpInsPortTable": vStpInsPortTable,
        "vStpInsPortEntry": vStpInsPortEntry,
        "vStpInsPortNumber": vStpInsPortNumber,
@@ -6838,6 +6985,7 @@ mibBuilder.exportSymbols(
        "vStpPortConfigTenGigOs8800Opt": vStpPortConfigTenGigOs8800Opt,
        "vStpPortConfigPVST": vStpPortConfigPVST,
        "vStpPortConfigStatePVST": vStpPortConfigStatePVST,
+       "vStpPortConfigLoopGuard": vStpPortConfigLoopGuard,
        "vStpRrstpGlobalState": vStpRrstpGlobalState,
        "vStpRrstpRingConfigTable": vStpRrstpRingConfigTable,
        "vStpRrstpRingConfigEntry": vStpRrstpRingConfigEntry,
@@ -6858,8 +7006,11 @@ mibBuilder.exportSymbols(
        "vStpPortConfigGroup": vStpPortConfigGroup,
        "vStpRrstpRingConfigGroup": vStpRrstpRingConfigGroup,
        "vStpRrstpRingBaseGroup": vStpRrstpRingBaseGroup,
+       "vStpBridgeGroup": vStpBridgeGroup,
        "alcatelIND1VLANSTPMIBCompliances": alcatelIND1VLANSTPMIBCompliances,
        "alcatelIND1VLANSTPMIBCompliance": alcatelIND1VLANSTPMIBCompliance,
        "stpNewRoot": stpNewRoot,
-       "stpRootPortChange": stpRootPortChange}
+       "stpRootPortChange": stpRootPortChange,
+       "stpLoopGuardError": stpLoopGuardError,
+       "stpLoopGuardRecovery": stpLoopGuardRecovery}
 )

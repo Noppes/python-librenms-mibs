@@ -119,7 +119,7 @@ mib_builder.load_modules('CISCO-MEMORY-POOL-MIB', 'CISCO-PROCESS-MIB')
 git clone https://github.com/librenms/librenms.git
 
 # Compile all vendors
-python batch_compile_mibs.py --source librenms/mibs --output ./compiled_mibs --offline
+python batch_compile_mibs.py --source ./mibs --output ./compiled_mibs
 
 # Validate compiled MIBs
 python batch_validate_mibs.py --input ./compiled_mibs --markdown validation.md
@@ -151,14 +151,10 @@ Compile multiple vendor MIB directories:
 python batch_compile_mibs.py --source ./mibs --output ./compiled_mibs
 
 # Compile specific vendors
-python batch_compile_mibs.py --source ./mibs --output ./compiled_mibs \
-    --vendors cisco,juniper,arista,fortinet
+python batch_compile_mibs.py --source ./mibs --output ./compiled_mibs --vendors apc
 
 # Compile and validate
 python batch_compile_mibs.py --source ./mibs --output ./compiled_mibs --validate
-
-# Offline mode (no network fallbacks)
-python batch_compile_mibs.py --source ./mibs --output ./compiled_mibs --offline
 ```
 
 ### Batch Validation

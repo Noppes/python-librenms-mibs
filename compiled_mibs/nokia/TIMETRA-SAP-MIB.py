@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-SAP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:11 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -155,14 +152,12 @@ if 'mibBuilder' not in globals():
     "TIMETRA-PORT-MIB",
     "tmnxPortCemStatsReportAlarm")
 
-(TmnxMcFrClassIndex,
- tQosPolicerLevel,
+(tQosPolicerLevel,
  tSapEgrPolicerId,
  tSapIngPolicerId,
  tSchedulerPolicyName,
  tVirtualSchedulerName) = mibBuilder.importSymbols(
     "TIMETRA-QOS-MIB",
-    "TmnxMcFrClassIndex",
     "tQosPolicerLevel",
     "tSapEgrPolicerId",
     "tSapIngPolicerId",
@@ -310,6 +305,7 @@ if 'mibBuilder' not in globals():
  ServiceOperStatus,
  SvcISID,
  TAdaptationRule,
+ TAnyQosPolicyIDorZero,
  TBurstLimit,
  TBurstPercentOrDefault,
  TBurstSize,
@@ -318,10 +314,7 @@ if 'mibBuilder' not in globals():
  TCpmProtPolicyID,
  TCpmProtPolicyIDOrDefault,
  TDSCPNameOrEmpty,
- TEgrHsmdaPerPacketOffsetOvr,
  TEgrPolicerId,
- TEgressHsmdaCounterId,
- TEgressHsmdaQueueId,
  TEgressPerPacketOffsetOvr,
  TEgressPolicerId,
  TEgressQueueId,
@@ -330,10 +323,8 @@ if 'mibBuilder' not in globals():
  THPolPIRRateOverride,
  THPolVirtualScheCIRRate,
  THPolVirtualSchePIRRate,
- THSMDABurstSizeBytesOverride,
  THsmdaCIRKRateOverride,
  THsmdaPIRKRateOverride,
- THsmdaWrrWeightOverride,
  TIngHsmdaPerPacketOffsetOvr,
  TIngPolicerId,
  TIngressHsmdaCounterId,
@@ -355,6 +346,7 @@ if 'mibBuilder' not in globals():
  TQosQGrpInstanceIDorZero,
  TQosQueueCIRRate,
  TQosQueuePIRRate,
+ TRateType,
  TSapEgrEncapGroupActionType,
  TSapEgrEncapGroupType,
  TSapEgrEncapGrpQosPolicyIdOrZero,
@@ -398,6 +390,7 @@ if 'mibBuilder' not in globals():
  TmnxLow32,
  TmnxManagedRouteStatus,
  TmnxOperState,
+ TmnxPacketMode,
  TmnxPortID,
  TmnxQosRateHigh32,
  TmnxQosRateLow32,
@@ -421,6 +414,7 @@ if 'mibBuilder' not in globals():
     "ServiceOperStatus",
     "SvcISID",
     "TAdaptationRule",
+    "TAnyQosPolicyIDorZero",
     "TBurstLimit",
     "TBurstPercentOrDefault",
     "TBurstSize",
@@ -429,10 +423,7 @@ if 'mibBuilder' not in globals():
     "TCpmProtPolicyID",
     "TCpmProtPolicyIDOrDefault",
     "TDSCPNameOrEmpty",
-    "TEgrHsmdaPerPacketOffsetOvr",
     "TEgrPolicerId",
-    "TEgressHsmdaCounterId",
-    "TEgressHsmdaQueueId",
     "TEgressPerPacketOffsetOvr",
     "TEgressPolicerId",
     "TEgressQueueId",
@@ -441,10 +432,8 @@ if 'mibBuilder' not in globals():
     "THPolPIRRateOverride",
     "THPolVirtualScheCIRRate",
     "THPolVirtualSchePIRRate",
-    "THSMDABurstSizeBytesOverride",
     "THsmdaCIRKRateOverride",
     "THsmdaPIRKRateOverride",
-    "THsmdaWrrWeightOverride",
     "TIngHsmdaPerPacketOffsetOvr",
     "TIngPolicerId",
     "TIngressHsmdaCounterId",
@@ -466,6 +455,7 @@ if 'mibBuilder' not in globals():
     "TQosQGrpInstanceIDorZero",
     "TQosQueueCIRRate",
     "TQosQueuePIRRate",
+    "TRateType",
     "TSapEgrEncapGroupActionType",
     "TSapEgrEncapGroupType",
     "TSapEgrEncapGrpQosPolicyIdOrZero",
@@ -509,6 +499,7 @@ if 'mibBuilder' not in globals():
     "TmnxLow32",
     "TmnxManagedRouteStatus",
     "TmnxOperState",
+    "TmnxPacketMode",
     "TmnxPortID",
     "TmnxQosRateHigh32",
     "TmnxQosRateLow32",
@@ -533,7 +524,8 @@ timetraSvcSapMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     timetraSvcSapMIBModule.setRevisions(
-        ("2022-01-20 00:00",
+        ("2025-02-21 00:00",
+         "2022-01-20 00:00",
          "2019-03-20 00:00",
          "2017-03-20 00:00",
          "2015-02-20 00:00",
@@ -846,12 +838,12 @@ if mibBuilder.loadTexts:
     sapOperStatus.setStatus("current")
 
 
-class _SapIngressQosPolicyId_Type(TSapIngressPolicyID):
-    """Custom type sapIngressQosPolicyId based on TSapIngressPolicyID"""
+class _SapIngressQosPolicyId_Type(TAnyQosPolicyIDorZero):
+    """Custom type sapIngressQosPolicyId based on TAnyQosPolicyIDorZero"""
     defaultValue = 1
 
 
-_SapIngressQosPolicyId_Type.__name__ = "TSapIngressPolicyID"
+_SapIngressQosPolicyId_Type.__name__ = "TAnyQosPolicyIDorZero"
 _SapIngressQosPolicyId_Object = MibTableColumn
 sapIngressQosPolicyId = _SapIngressQosPolicyId_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 8),
@@ -894,12 +886,12 @@ if mibBuilder.loadTexts:
     sapIngressIpFilterId.setStatus("current")
 
 
-class _SapEgressQosPolicyId_Type(TSapEgressPolicyID):
-    """Custom type sapEgressQosPolicyId based on TSapEgressPolicyID"""
+class _SapEgressQosPolicyId_Type(TAnyQosPolicyIDorZero):
+    """Custom type sapEgressQosPolicyId based on TAnyQosPolicyIDorZero"""
     defaultValue = 1
 
 
-_SapEgressQosPolicyId_Type.__name__ = "TSapEgressPolicyID"
+_SapEgressQosPolicyId_Type.__name__ = "TAnyQosPolicyIDorZero"
 _SapEgressQosPolicyId_Object = MibTableColumn
 sapEgressQosPolicyId = _SapEgressQosPolicyId_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 11),
@@ -1513,22 +1505,6 @@ if mibBuilder.loadTexts:
     sapIngressAggRateLimit.setUnits("kilobps")
 
 
-class _SapEgressHsmdaShaperOverride_Type(TNamedItemOrEmpty):
-    """Custom type sapEgressHsmdaShaperOverride based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_SapEgressHsmdaShaperOverride_Type.__name__ = "TNamedItemOrEmpty"
-_SapEgressHsmdaShaperOverride_Object = MibTableColumn
-sapEgressHsmdaShaperOverride = _SapEgressHsmdaShaperOverride_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 44),
-    _SapEgressHsmdaShaperOverride_Type()
-)
-sapEgressHsmdaShaperOverride.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgressHsmdaShaperOverride.setStatus("obsolete")
-
-
 class _SapIngressHsmdaPacketOffOvr_Type(TIngHsmdaPerPacketOffsetOvr):
     """Custom type sapIngressHsmdaPacketOffOvr based on TIngHsmdaPerPacketOffsetOvr"""
     defaultValue = -128
@@ -1545,24 +1521,6 @@ if mibBuilder.loadTexts:
     sapIngressHsmdaPacketOffOvr.setStatus("obsolete")
 if mibBuilder.loadTexts:
     sapIngressHsmdaPacketOffOvr.setUnits("bytes")
-
-
-class _SapEgressHsmdaPacketOffOverride_Type(TEgrHsmdaPerPacketOffsetOvr):
-    """Custom type sapEgressHsmdaPacketOffOverride based on TEgrHsmdaPerPacketOffsetOvr"""
-    defaultValue = -128
-
-
-_SapEgressHsmdaPacketOffOverride_Type.__name__ = "TEgrHsmdaPerPacketOffsetOvr"
-_SapEgressHsmdaPacketOffOverride_Object = MibTableColumn
-sapEgressHsmdaPacketOffOverride = _SapEgressHsmdaPacketOffOverride_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 46),
-    _SapEgressHsmdaPacketOffOverride_Type()
-)
-sapEgressHsmdaPacketOffOverride.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgressHsmdaPacketOffOverride.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    sapEgressHsmdaPacketOffOverride.setUnits("bytes")
 
 
 class _SapCallingStationId_Type(DisplayString):
@@ -1742,22 +1700,6 @@ sapMonitorOperGrp = _SapMonitorOperGrp_Object(
 sapMonitorOperGrp.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     sapMonitorOperGrp.setStatus("current")
-
-
-class _SapEgressHsmdaWrrPolicyOvr_Type(TNamedItemOrEmpty):
-    """Custom type sapEgressHsmdaWrrPolicyOvr based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_SapEgressHsmdaWrrPolicyOvr_Type.__name__ = "TNamedItemOrEmpty"
-_SapEgressHsmdaWrrPolicyOvr_Object = MibTableColumn
-sapEgressHsmdaWrrPolicyOvr = _SapEgressHsmdaWrrPolicyOvr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 58),
-    _SapEgressHsmdaWrrPolicyOvr_Type()
-)
-sapEgressHsmdaWrrPolicyOvr.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgressHsmdaWrrPolicyOvr.setStatus("obsolete")
 
 
 class _SapTransitPrefixPolicyId_Type(TmnxBsxTransPrefPolicyIdOrZero):
@@ -2047,6 +1989,24 @@ if mibBuilder.loadTexts:
     sapEgressAggRateLUB.setStatus("current")
 
 
+class _SapEgressAggBurstLimit_Type(TBurstLimit):
+    """Custom type sapEgressAggBurstLimit based on TBurstLimit"""
+    defaultValue = -1
+
+
+_SapEgressAggBurstLimit_Type.__name__ = "TBurstLimit"
+_SapEgressAggBurstLimit_Object = MibTableColumn
+sapEgressAggBurstLimit = _SapEgressAggBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 78),
+    _SapEgressAggBurstLimit_Type()
+)
+sapEgressAggBurstLimit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressAggBurstLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgressAggBurstLimit.setUnits("bytes")
+
+
 class _SapEgressAggRateLmtHi_Type(TmnxQosRateHigh32):
     """Custom type sapEgressAggRateLmtHi based on TmnxQosRateHigh32"""
     defaultValue = 4294967295
@@ -2060,7 +2020,7 @@ sapEgressAggRateLmtHi = _SapEgressAggRateLmtHi_Object(
 )
 sapEgressAggRateLmtHi.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapEgressAggRateLmtHi.setStatus("current")
+    sapEgressAggRateLmtHi.setStatus("obsolete")
 if mibBuilder.loadTexts:
     sapEgressAggRateLmtHi.setUnits("kilobps")
 
@@ -2078,7 +2038,7 @@ sapEgressAggRateLmt = _SapEgressAggRateLmt_Object(
 )
 sapEgressAggRateLmt.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapEgressAggRateLmt.setStatus("current")
+    sapEgressAggRateLmt.setStatus("obsolete")
 if mibBuilder.loadTexts:
     sapEgressAggRateLmt.setUnits("kilobps")
 
@@ -2097,6 +2057,70 @@ sapMulticastSource = _SapMulticastSource_Object(
 sapMulticastSource.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     sapMulticastSource.setStatus("current")
+
+
+class _SapEgressAggRateAdaptRule_Type(TAdaptationRule):
+    """Custom type sapEgressAggRateAdaptRule based on TAdaptationRule"""
+    defaultValue = 3
+
+
+_SapEgressAggRateAdaptRule_Type.__name__ = "TAdaptationRule"
+_SapEgressAggRateAdaptRule_Object = MibTableColumn
+sapEgressAggRateAdaptRule = _SapEgressAggRateAdaptRule_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 82),
+    _SapEgressAggRateAdaptRule_Type()
+)
+sapEgressAggRateAdaptRule.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressAggRateAdaptRule.setStatus("current")
+
+
+class _SapQtagNormalization_Type(Integer32):
+    """Custom type sapQtagNormalization based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("sapEncap", 1),
+          ("singleTag", 2),
+          ("doubleTag", 3))
+    )
+
+
+_SapQtagNormalization_Type.__name__ = "Integer32"
+_SapQtagNormalization_Object = MibTableColumn
+sapQtagNormalization = _SapQtagNormalization_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 83),
+    _SapQtagNormalization_Type()
+)
+sapQtagNormalization.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapQtagNormalization.setStatus("current")
+
+
+class _SapQtagNormalizationEncap_Type(Unsigned32):
+    """Custom type sapQtagNormalizationEncap based on Unsigned32"""
+    defaultValue = 0
+
+
+_SapQtagNormalizationEncap_Type.__name__ = "Unsigned32"
+_SapQtagNormalizationEncap_Object = MibTableColumn
+sapQtagNormalizationEncap = _SapQtagNormalizationEncap_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 2, 1, 84),
+    _SapQtagNormalizationEncap_Type()
+)
+sapQtagNormalizationEncap.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapQtagNormalizationEncap.setStatus("current")
 _SapTlsInfoTable_Object = MibTable
 sapTlsInfoTable = _SapTlsInfoTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 3)
@@ -3391,7 +3415,7 @@ sapTlsPppMsapTrigger = _SapTlsPppMsapTrigger_Object(
 )
 sapTlsPppMsapTrigger.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapTlsPppMsapTrigger.setStatus("current")
+    sapTlsPppMsapTrigger.setStatus("obsolete")
 
 
 class _SapTlsPppPolicy_Type(TNamedItemOrEmpty):
@@ -3407,7 +3431,7 @@ sapTlsPppPolicy = _SapTlsPppPolicy_Object(
 )
 sapTlsPppPolicy.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapTlsPppPolicy.setStatus("current")
+    sapTlsPppPolicy.setStatus("obsolete")
 
 
 class _SapTlsTrackSrrpInst_Type(Unsigned32):
@@ -3439,7 +3463,7 @@ sapTlsPppUserDb = _SapTlsPppUserDb_Object(
 )
 sapTlsPppUserDb.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapTlsPppUserDb.setStatus("current")
+    sapTlsPppUserDb.setStatus("obsolete")
 
 
 class _SapTlsPppoeUserDb_Type(TNamedItemOrEmpty):
@@ -3582,12 +3606,30 @@ sapTlsLastMgmtChange = _SapTlsLastMgmtChange_Object(
 sapTlsLastMgmtChange.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sapTlsLastMgmtChange.setStatus("current")
+_SapTlsAutoLearnMacProtectOper_Type = TruthValue
+_SapTlsAutoLearnMacProtectOper_Object = MibTableColumn
+sapTlsAutoLearnMacProtectOper = _SapTlsAutoLearnMacProtectOper_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 3, 1, 103),
+    _SapTlsAutoLearnMacProtectOper_Type()
+)
+sapTlsAutoLearnMacProtectOper.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsAutoLearnMacProtectOper.setStatus("current")
+_SapTlsRestUnprotDstMacOper_Type = TruthValue
+_SapTlsRestUnprotDstMacOper_Object = MibTableColumn
+sapTlsRestUnprotDstMacOper = _SapTlsRestUnprotDstMacOper_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 3, 1, 104),
+    _SapTlsRestUnprotDstMacOper_Type()
+)
+sapTlsRestUnprotDstMacOper.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsRestUnprotDstMacOper.setStatus("current")
 _SapAtmInfoTable_Object = MibTable
 sapAtmInfoTable = _SapAtmInfoTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 4)
 )
 if mibBuilder.loadTexts:
-    sapAtmInfoTable.setStatus("current")
+    sapAtmInfoTable.setStatus("obsolete")
 _SapAtmInfoEntry_Object = MibTableRow
 sapAtmInfoEntry = _SapAtmInfoEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 4, 1)
@@ -3598,7 +3640,7 @@ sapAtmInfoEntry.setIndexNames(
     (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
 )
 if mibBuilder.loadTexts:
-    sapAtmInfoEntry.setStatus("current")
+    sapAtmInfoEntry.setStatus("obsolete")
 _SapAtmEncapsulation_Type = TmnxSapAtmEncapsulation
 _SapAtmEncapsulation_Object = MibTableColumn
 sapAtmEncapsulation = _SapAtmEncapsulation_Object(
@@ -3607,7 +3649,7 @@ sapAtmEncapsulation = _SapAtmEncapsulation_Object(
 )
 sapAtmEncapsulation.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmEncapsulation.setStatus("current")
+    sapAtmEncapsulation.setStatus("obsolete")
 
 
 class _SapAtmIngressTrafficDescIndex_Type(AtmTrafficDescrParamIndex):
@@ -3628,7 +3670,7 @@ sapAtmIngressTrafficDescIndex = _SapAtmIngressTrafficDescIndex_Object(
 )
 sapAtmIngressTrafficDescIndex.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmIngressTrafficDescIndex.setStatus("current")
+    sapAtmIngressTrafficDescIndex.setStatus("obsolete")
 
 
 class _SapAtmEgressTrafficDescIndex_Type(AtmTrafficDescrParamIndex):
@@ -3649,7 +3691,7 @@ sapAtmEgressTrafficDescIndex = _SapAtmEgressTrafficDescIndex_Object(
 )
 sapAtmEgressTrafficDescIndex.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmEgressTrafficDescIndex.setStatus("current")
+    sapAtmEgressTrafficDescIndex.setStatus("obsolete")
 
 
 class _SapAtmOamAlarmCellHandling_Type(ServiceAdminStatus):
@@ -3665,7 +3707,7 @@ sapAtmOamAlarmCellHandling = _SapAtmOamAlarmCellHandling_Object(
 )
 sapAtmOamAlarmCellHandling.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmOamAlarmCellHandling.setStatus("current")
+    sapAtmOamAlarmCellHandling.setStatus("obsolete")
 
 
 class _SapAtmOamTerminate_Type(ServiceAdminStatus):
@@ -3681,7 +3723,7 @@ sapAtmOamTerminate = _SapAtmOamTerminate_Object(
 )
 sapAtmOamTerminate.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmOamTerminate.setStatus("current")
+    sapAtmOamTerminate.setStatus("obsolete")
 
 
 class _SapAtmOamPeriodicLoopback_Type(ServiceAdminStatus):
@@ -3697,7 +3739,7 @@ sapAtmOamPeriodicLoopback = _SapAtmOamPeriodicLoopback_Object(
 )
 sapAtmOamPeriodicLoopback.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmOamPeriodicLoopback.setStatus("current")
+    sapAtmOamPeriodicLoopback.setStatus("obsolete")
 
 
 class _SapAtmLLFAdminStatus_Type(ServiceAdminStatus):
@@ -3713,7 +3755,7 @@ sapAtmLLFAdminStatus = _SapAtmLLFAdminStatus_Object(
 )
 sapAtmLLFAdminStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapAtmLLFAdminStatus.setStatus("current")
+    sapAtmLLFAdminStatus.setStatus("obsolete")
 
 
 class _SapAtmLLFOperStatus_Type(Integer32):
@@ -3739,7 +3781,7 @@ sapAtmLLFOperStatus = _SapAtmLLFOperStatus_Object(
 )
 sapAtmLLFOperStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmLLFOperStatus.setStatus("current")
+    sapAtmLLFOperStatus.setStatus("obsolete")
 _SapAtmSubPppIndex_Type = Unsigned32
 _SapAtmSubPppIndex_Object = MibTableColumn
 sapAtmSubPppIndex = _SapAtmSubPppIndex_Object(
@@ -3748,7 +3790,7 @@ sapAtmSubPppIndex = _SapAtmSubPppIndex_Object(
 )
 sapAtmSubPppIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmSubPppIndex.setStatus("current")
+    sapAtmSubPppIndex.setStatus("obsolete")
 _SapAtmDetectedEncapsulation_Type = TmnxSapAtmEncapsulation
 _SapAtmDetectedEncapsulation_Object = MibTableColumn
 sapAtmDetectedEncapsulation = _SapAtmDetectedEncapsulation_Object(
@@ -3757,7 +3799,7 @@ sapAtmDetectedEncapsulation = _SapAtmDetectedEncapsulation_Object(
 )
 sapAtmDetectedEncapsulation.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmDetectedEncapsulation.setStatus("current")
+    sapAtmDetectedEncapsulation.setStatus("obsolete")
 
 
 class _SapAtmIngressTrafficDescIndexOvr_Type(AtmTrafficDescrParamIndex):
@@ -3777,7 +3819,7 @@ sapAtmIngressTrafficDescIndexOvr = _SapAtmIngressTrafficDescIndexOvr_Object(
 )
 sapAtmIngressTrafficDescIndexOvr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmIngressTrafficDescIndexOvr.setStatus("current")
+    sapAtmIngressTrafficDescIndexOvr.setStatus("obsolete")
 
 
 class _SapAtmEgressTrafficDescIndexOvr_Type(AtmTrafficDescrParamIndex):
@@ -3797,7 +3839,7 @@ sapAtmEgressTrafficDescIndexOvr = _SapAtmEgressTrafficDescIndexOvr_Object(
 )
 sapAtmEgressTrafficDescIndexOvr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmEgressTrafficDescIndexOvr.setStatus("current")
+    sapAtmEgressTrafficDescIndexOvr.setStatus("obsolete")
 _SapBaseStatsTable_Object = MibTable
 sapBaseStatsTable = _SapBaseStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 6)
@@ -5104,7 +5146,7 @@ sapStaticHostFilterProfile = _SapStaticHostFilterProfile_Object(
 )
 sapStaticHostFilterProfile.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapStaticHostFilterProfile.setStatus("current")
+    sapStaticHostFilterProfile.setStatus("obsolete")
 
 
 class _SapStaticHostAdminRetailSvcId_Type(TmnxServId):
@@ -7498,7 +7540,7 @@ sapSubMgmtDefFilterProfile = _SapSubMgmtDefFilterProfile_Object(
 )
 sapSubMgmtDefFilterProfile.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapSubMgmtDefFilterProfile.setStatus("current")
+    sapSubMgmtDefFilterProfile.setStatus("obsolete")
 _SapTlsMstiTable_Object = MibTable
 sapTlsMstiTable = _SapTlsMstiTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 24)
@@ -7828,7 +7870,7 @@ sapIpipeLegacyFaultNotification = _SapIpipeLegacyFaultNotification_Object(
 )
 sapIpipeLegacyFaultNotification.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapIpipeLegacyFaultNotification.setStatus("current")
+    sapIpipeLegacyFaultNotification.setStatus("obsolete")
 _SapIpipeRemainRecoveryTimer_Type = Unsigned32
 _SapIpipeRemainRecoveryTimer_Object = MibTableColumn
 sapIpipeRemainRecoveryTimer = _SapIpipeRemainRecoveryTimer_Object(
@@ -7837,7 +7879,7 @@ sapIpipeRemainRecoveryTimer = _SapIpipeRemainRecoveryTimer_Object(
 )
 sapIpipeRemainRecoveryTimer.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapIpipeRemainRecoveryTimer.setStatus("current")
+    sapIpipeRemainRecoveryTimer.setStatus("obsolete")
 if mibBuilder.loadTexts:
     sapIpipeRemainRecoveryTimer.setUnits("deciseconds")
 _SapTodMonitorTable_Object = MibTable
@@ -8816,7 +8858,7 @@ class _SapCemPayloadSize_Type(Unsigned32):
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 0),
-        ValueRangeConstraint(16, 2048),
+        ValueRangeConstraint(2, 1514),
     )
 
 
@@ -10127,7 +10169,7 @@ msapPlcySubMgmtDefFilterProfile = _MsapPlcySubMgmtDefFilterProfile_Object(
 )
 msapPlcySubMgmtDefFilterProfile.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    msapPlcySubMgmtDefFilterProfile.setStatus("current")
+    msapPlcySubMgmtDefFilterProfile.setStatus("obsolete")
 
 
 class _MsapPlcyLagLinkMapProfile_Type(TmnxLinkMapProfileIdOrZero):
@@ -11847,344 +11889,6 @@ sapIngHsmdaCntrStAllOctOffered = _SapIngHsmdaCntrStAllOctOffered_Object(
 sapIngHsmdaCntrStAllOctOffered.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sapIngHsmdaCntrStAllOctOffered.setStatus("obsolete")
-_SapEgrQosHsmdaQueueTable_Object = MibTable
-sapEgrQosHsmdaQueueTable = _SapEgrQosHsmdaQueueTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55)
-)
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueTable.setStatus("obsolete")
-_SapEgrQosHsmdaQueueEntry_Object = MibTableRow
-sapEgrQosHsmdaQueueEntry = _SapEgrQosHsmdaQueueEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1)
-)
-sapEgrQosHsmdaQueueEntry.setIndexNames(
-    (0, "TIMETRA-SERV-MIB", "svcId"),
-    (0, "TIMETRA-SAP-MIB", "sapPortId"),
-    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
-    (0, "TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueId"),
-)
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueEntry.setStatus("current")
-_SapEgrQosHsmdaQueueId_Type = TEgressHsmdaQueueId
-_SapEgrQosHsmdaQueueId_Object = MibTableColumn
-sapEgrQosHsmdaQueueId = _SapEgrQosHsmdaQueueId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 1),
-    _SapEgrQosHsmdaQueueId_Type()
-)
-sapEgrQosHsmdaQueueId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueId.setStatus("current")
-_SapEgrQosHsmdaQueueRowStatus_Type = RowStatus
-_SapEgrQosHsmdaQueueRowStatus_Object = MibTableColumn
-sapEgrQosHsmdaQueueRowStatus = _SapEgrQosHsmdaQueueRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 2),
-    _SapEgrQosHsmdaQueueRowStatus_Type()
-)
-sapEgrQosHsmdaQueueRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueRowStatus.setStatus("obsolete")
-_SapEgrQosHsmdaQueueLastChanged_Type = TimeStamp
-_SapEgrQosHsmdaQueueLastChanged_Object = MibTableColumn
-sapEgrQosHsmdaQueueLastChanged = _SapEgrQosHsmdaQueueLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 3),
-    _SapEgrQosHsmdaQueueLastChanged_Type()
-)
-sapEgrQosHsmdaQueueLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueLastChanged.setStatus("obsolete")
-
-
-class _SapEgrQosHsmdaQueueAdminPIR_Type(THsmdaPIRKRateOverride):
-    """Custom type sapEgrQosHsmdaQueueAdminPIR based on THsmdaPIRKRateOverride"""
-    defaultValue = -2
-
-
-_SapEgrQosHsmdaQueueAdminPIR_Type.__name__ = "THsmdaPIRKRateOverride"
-_SapEgrQosHsmdaQueueAdminPIR_Object = MibTableColumn
-sapEgrQosHsmdaQueueAdminPIR = _SapEgrQosHsmdaQueueAdminPIR_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 4),
-    _SapEgrQosHsmdaQueueAdminPIR_Type()
-)
-sapEgrQosHsmdaQueueAdminPIR.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueAdminPIR.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueAdminPIR.setUnits("kilobps")
-
-
-class _SapEgrQosHsmdaQueueAdminCIR_Type(THsmdaCIRKRateOverride):
-    """Custom type sapEgrQosHsmdaQueueAdminCIR based on THsmdaCIRKRateOverride"""
-    defaultValue = -2
-
-
-_SapEgrQosHsmdaQueueAdminCIR_Type.__name__ = "THsmdaCIRKRateOverride"
-_SapEgrQosHsmdaQueueAdminCIR_Object = MibTableColumn
-sapEgrQosHsmdaQueueAdminCIR = _SapEgrQosHsmdaQueueAdminCIR_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 5),
-    _SapEgrQosHsmdaQueueAdminCIR_Type()
-)
-sapEgrQosHsmdaQueueAdminCIR.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueAdminCIR.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueAdminCIR.setUnits("kilobps")
-
-
-class _SapEgrQosHsmdaQueueSlopePolicy_Type(TNamedItemOrEmpty):
-    """Custom type sapEgrQosHsmdaQueueSlopePolicy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_SapEgrQosHsmdaQueueSlopePolicy_Type.__name__ = "TNamedItemOrEmpty"
-_SapEgrQosHsmdaQueueSlopePolicy_Object = MibTableColumn
-sapEgrQosHsmdaQueueSlopePolicy = _SapEgrQosHsmdaQueueSlopePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 6),
-    _SapEgrQosHsmdaQueueSlopePolicy_Type()
-)
-sapEgrQosHsmdaQueueSlopePolicy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueSlopePolicy.setStatus("obsolete")
-
-
-class _SapEgrQosHsmdaQueueWrrWeight_Type(THsmdaWrrWeightOverride):
-    """Custom type sapEgrQosHsmdaQueueWrrWeight based on THsmdaWrrWeightOverride"""
-    defaultValue = -2
-
-
-_SapEgrQosHsmdaQueueWrrWeight_Type.__name__ = "THsmdaWrrWeightOverride"
-_SapEgrQosHsmdaQueueWrrWeight_Object = MibTableColumn
-sapEgrQosHsmdaQueueWrrWeight = _SapEgrQosHsmdaQueueWrrWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 7),
-    _SapEgrQosHsmdaQueueWrrWeight_Type()
-)
-sapEgrQosHsmdaQueueWrrWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueWrrWeight.setStatus("obsolete")
-
-
-class _SapEgrQosHsmdaQueueMBS_Type(THSMDABurstSizeBytesOverride):
-    """Custom type sapEgrQosHsmdaQueueMBS based on THSMDABurstSizeBytesOverride"""
-    defaultValue = -2
-
-
-_SapEgrQosHsmdaQueueMBS_Type.__name__ = "THSMDABurstSizeBytesOverride"
-_SapEgrQosHsmdaQueueMBS_Object = MibTableColumn
-sapEgrQosHsmdaQueueMBS = _SapEgrQosHsmdaQueueMBS_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 55, 1, 8),
-    _SapEgrQosHsmdaQueueMBS_Type()
-)
-sapEgrQosHsmdaQueueMBS.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueMBS.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueMBS.setUnits("bytes")
-_SapEgrQosHsmdaQueueStatsTable_Object = MibTable
-sapEgrQosHsmdaQueueStatsTable = _SapEgrQosHsmdaQueueStatsTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56)
-)
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueStatsTable.setStatus("obsolete")
-_SapEgrQosHsmdaQueueStatsEntry_Object = MibTableRow
-sapEgrQosHsmdaQueueStatsEntry = _SapEgrQosHsmdaQueueStatsEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1)
-)
-sapEgrQosHsmdaQueueStatsEntry.setIndexNames(
-    (0, "TIMETRA-SERV-MIB", "svcId"),
-    (0, "TIMETRA-SAP-MIB", "sapPortId"),
-    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
-    (0, "TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueId"),
-)
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaQueueStatsEntry.setStatus("current")
-_SapEgrHsmdaQStatCustId_Type = TmnxCustId
-_SapEgrHsmdaQStatCustId_Object = MibTableColumn
-sapEgrHsmdaQStatCustId = _SapEgrHsmdaQStatCustId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 1),
-    _SapEgrHsmdaQStatCustId_Type()
-)
-sapEgrHsmdaQStatCustId.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatCustId.setStatus("obsolete")
-_SapEgrHsmdaQStatInProfPktFwd_Type = Counter64
-_SapEgrHsmdaQStatInProfPktFwd_Object = MibTableColumn
-sapEgrHsmdaQStatInProfPktFwd = _SapEgrHsmdaQStatInProfPktFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 2),
-    _SapEgrHsmdaQStatInProfPktFwd_Type()
-)
-sapEgrHsmdaQStatInProfPktFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatInProfPktFwd.setStatus("obsolete")
-_SapEgrHsmdaQStatInProfPktDropd_Type = Counter64
-_SapEgrHsmdaQStatInProfPktDropd_Object = MibTableColumn
-sapEgrHsmdaQStatInProfPktDropd = _SapEgrHsmdaQStatInProfPktDropd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 3),
-    _SapEgrHsmdaQStatInProfPktDropd_Type()
-)
-sapEgrHsmdaQStatInProfPktDropd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatInProfPktDropd.setStatus("obsolete")
-_SapEgrHsmdaQStatOutProfPktFwd_Type = Counter64
-_SapEgrHsmdaQStatOutProfPktFwd_Object = MibTableColumn
-sapEgrHsmdaQStatOutProfPktFwd = _SapEgrHsmdaQStatOutProfPktFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 4),
-    _SapEgrHsmdaQStatOutProfPktFwd_Type()
-)
-sapEgrHsmdaQStatOutProfPktFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatOutProfPktFwd.setStatus("obsolete")
-_SapEgrHsmdaQStatOutProfPktDropd_Type = Counter64
-_SapEgrHsmdaQStatOutProfPktDropd_Object = MibTableColumn
-sapEgrHsmdaQStatOutProfPktDropd = _SapEgrHsmdaQStatOutProfPktDropd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 5),
-    _SapEgrHsmdaQStatOutProfPktDropd_Type()
-)
-sapEgrHsmdaQStatOutProfPktDropd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatOutProfPktDropd.setStatus("obsolete")
-_SapEgrHsmdaQStatInProfOctFwd_Type = Counter64
-_SapEgrHsmdaQStatInProfOctFwd_Object = MibTableColumn
-sapEgrHsmdaQStatInProfOctFwd = _SapEgrHsmdaQStatInProfOctFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 6),
-    _SapEgrHsmdaQStatInProfOctFwd_Type()
-)
-sapEgrHsmdaQStatInProfOctFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatInProfOctFwd.setStatus("obsolete")
-_SapEgrHsmdaQStatInProfOctDropd_Type = Counter64
-_SapEgrHsmdaQStatInProfOctDropd_Object = MibTableColumn
-sapEgrHsmdaQStatInProfOctDropd = _SapEgrHsmdaQStatInProfOctDropd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 7),
-    _SapEgrHsmdaQStatInProfOctDropd_Type()
-)
-sapEgrHsmdaQStatInProfOctDropd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatInProfOctDropd.setStatus("obsolete")
-_SapEgrHsmdaQStatOutProfOctFwd_Type = Counter64
-_SapEgrHsmdaQStatOutProfOctFwd_Object = MibTableColumn
-sapEgrHsmdaQStatOutProfOctFwd = _SapEgrHsmdaQStatOutProfOctFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 8),
-    _SapEgrHsmdaQStatOutProfOctFwd_Type()
-)
-sapEgrHsmdaQStatOutProfOctFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatOutProfOctFwd.setStatus("obsolete")
-_SapEgrHsmdaQStatOutProfOctDropd_Type = Counter64
-_SapEgrHsmdaQStatOutProfOctDropd_Object = MibTableColumn
-sapEgrHsmdaQStatOutProfOctDropd = _SapEgrHsmdaQStatOutProfOctDropd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 56, 1, 9),
-    _SapEgrHsmdaQStatOutProfOctDropd_Type()
-)
-sapEgrHsmdaQStatOutProfOctDropd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaQStatOutProfOctDropd.setStatus("obsolete")
-_SapEgrQosHsmdaCntrStatsTable_Object = MibTable
-sapEgrQosHsmdaCntrStatsTable = _SapEgrQosHsmdaCntrStatsTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57)
-)
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaCntrStatsTable.setStatus("obsolete")
-_SapEgrQosHsmdaCntrStatsEntry_Object = MibTableRow
-sapEgrQosHsmdaCntrStatsEntry = _SapEgrQosHsmdaCntrStatsEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1)
-)
-sapEgrQosHsmdaCntrStatsEntry.setIndexNames(
-    (0, "TIMETRA-SERV-MIB", "svcId"),
-    (0, "TIMETRA-SAP-MIB", "sapPortId"),
-    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
-    (0, "TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStCntrId"),
-)
-if mibBuilder.loadTexts:
-    sapEgrQosHsmdaCntrStatsEntry.setStatus("current")
-_SapEgrHsmdaCntrStCntrId_Type = TEgressHsmdaCounterId
-_SapEgrHsmdaCntrStCntrId_Object = MibTableColumn
-sapEgrHsmdaCntrStCntrId = _SapEgrHsmdaCntrStCntrId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 1),
-    _SapEgrHsmdaCntrStCntrId_Type()
-)
-sapEgrHsmdaCntrStCntrId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStCntrId.setStatus("obsolete")
-_SapEgrHsmdaCntrStCustId_Type = TmnxCustId
-_SapEgrHsmdaCntrStCustId_Object = MibTableColumn
-sapEgrHsmdaCntrStCustId = _SapEgrHsmdaCntrStCustId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 2),
-    _SapEgrHsmdaCntrStCustId_Type()
-)
-sapEgrHsmdaCntrStCustId.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStCustId.setStatus("obsolete")
-_SapEgrHsmdaCntrStInProfPktFwd_Type = Counter64
-_SapEgrHsmdaCntrStInProfPktFwd_Object = MibTableColumn
-sapEgrHsmdaCntrStInProfPktFwd = _SapEgrHsmdaCntrStInProfPktFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 3),
-    _SapEgrHsmdaCntrStInProfPktFwd_Type()
-)
-sapEgrHsmdaCntrStInProfPktFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStInProfPktFwd.setStatus("obsolete")
-_SapEgrHsmdaCntrStInProfPktDrop_Type = Counter64
-_SapEgrHsmdaCntrStInProfPktDrop_Object = MibTableColumn
-sapEgrHsmdaCntrStInProfPktDrop = _SapEgrHsmdaCntrStInProfPktDrop_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 4),
-    _SapEgrHsmdaCntrStInProfPktDrop_Type()
-)
-sapEgrHsmdaCntrStInProfPktDrop.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStInProfPktDrop.setStatus("obsolete")
-_SapEgrHsmdaCntrStOutProfPktFwd_Type = Counter64
-_SapEgrHsmdaCntrStOutProfPktFwd_Object = MibTableColumn
-sapEgrHsmdaCntrStOutProfPktFwd = _SapEgrHsmdaCntrStOutProfPktFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 5),
-    _SapEgrHsmdaCntrStOutProfPktFwd_Type()
-)
-sapEgrHsmdaCntrStOutProfPktFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStOutProfPktFwd.setStatus("obsolete")
-_SapEgrHsmdaCntrStOutProfPktDrop_Type = Counter64
-_SapEgrHsmdaCntrStOutProfPktDrop_Object = MibTableColumn
-sapEgrHsmdaCntrStOutProfPktDrop = _SapEgrHsmdaCntrStOutProfPktDrop_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 6),
-    _SapEgrHsmdaCntrStOutProfPktDrop_Type()
-)
-sapEgrHsmdaCntrStOutProfPktDrop.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStOutProfPktDrop.setStatus("obsolete")
-_SapEgrHsmdaCntrStInProfOctFwd_Type = Counter64
-_SapEgrHsmdaCntrStInProfOctFwd_Object = MibTableColumn
-sapEgrHsmdaCntrStInProfOctFwd = _SapEgrHsmdaCntrStInProfOctFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 7),
-    _SapEgrHsmdaCntrStInProfOctFwd_Type()
-)
-sapEgrHsmdaCntrStInProfOctFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStInProfOctFwd.setStatus("obsolete")
-_SapEgrHsmdaCntrStInProfOctDrop_Type = Counter64
-_SapEgrHsmdaCntrStInProfOctDrop_Object = MibTableColumn
-sapEgrHsmdaCntrStInProfOctDrop = _SapEgrHsmdaCntrStInProfOctDrop_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 8),
-    _SapEgrHsmdaCntrStInProfOctDrop_Type()
-)
-sapEgrHsmdaCntrStInProfOctDrop.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStInProfOctDrop.setStatus("obsolete")
-_SapEgrHsmdaCntrStOutProfOctFwd_Type = Counter64
-_SapEgrHsmdaCntrStOutProfOctFwd_Object = MibTableColumn
-sapEgrHsmdaCntrStOutProfOctFwd = _SapEgrHsmdaCntrStOutProfOctFwd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 9),
-    _SapEgrHsmdaCntrStOutProfOctFwd_Type()
-)
-sapEgrHsmdaCntrStOutProfOctFwd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStOutProfOctFwd.setStatus("obsolete")
-_SapEgrHsmdaCntrStOutProfOctDrop_Type = Counter64
-_SapEgrHsmdaCntrStOutProfOctDrop_Object = MibTableColumn
-sapEgrHsmdaCntrStOutProfOctDrop = _SapEgrHsmdaCntrStOutProfOctDrop_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 57, 1, 10),
-    _SapEgrHsmdaCntrStOutProfOctDrop_Type()
-)
-sapEgrHsmdaCntrStOutProfOctDrop.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapEgrHsmdaCntrStOutProfOctDrop.setStatus("obsolete")
 _MsapL3PlcyTable_Object = MibTable
 msapL3PlcyTable = _MsapL3PlcyTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 58)
@@ -12765,127 +12469,6 @@ sapIgmpTrkMaxNbrGrpSrcs = _SapIgmpTrkMaxNbrGrpSrcs_Object(
 sapIgmpTrkMaxNbrGrpSrcs.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sapIgmpTrkMaxNbrGrpSrcs.setStatus("current")
-_SapFrInfoTable_Object = MibTable
-sapFrInfoTable = _SapFrInfoTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 71)
-)
-if mibBuilder.loadTexts:
-    sapFrInfoTable.setStatus("current")
-_SapFrInfoEntry_Object = MibTableRow
-sapFrInfoEntry = _SapFrInfoEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 71, 1)
-)
-sapFrInfoEntry.setIndexNames(
-    (0, "TIMETRA-SERV-MIB", "svcId"),
-    (0, "TIMETRA-SAP-MIB", "sapPortId"),
-    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
-)
-if mibBuilder.loadTexts:
-    sapFrInfoEntry.setStatus("current")
-
-
-class _SapFrInfoFrf12Mode_Type(TmnxEnabledDisabled):
-    """Custom type sapFrInfoFrf12Mode based on TmnxEnabledDisabled"""
-    defaultValue = 2
-
-
-_SapFrInfoFrf12Mode_Type.__name__ = "TmnxEnabledDisabled"
-_SapFrInfoFrf12Mode_Object = MibTableColumn
-sapFrInfoFrf12Mode = _SapFrInfoFrf12Mode_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 71, 1, 1),
-    _SapFrInfoFrf12Mode_Type()
-)
-sapFrInfoFrf12Mode.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapFrInfoFrf12Mode.setStatus("current")
-
-
-class _SapFrInfoSchedulingClass_Type(TmnxMcFrClassIndex):
-    """Custom type sapFrInfoSchedulingClass based on TmnxMcFrClassIndex"""
-    defaultValue = 3
-
-
-_SapFrInfoSchedulingClass_Type.__name__ = "TmnxMcFrClassIndex"
-_SapFrInfoSchedulingClass_Object = MibTableColumn
-sapFrInfoSchedulingClass = _SapFrInfoSchedulingClass_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 71, 1, 2),
-    _SapFrInfoSchedulingClass_Type()
-)
-sapFrInfoSchedulingClass.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapFrInfoSchedulingClass.setStatus("current")
-_SapFrInfoLastChanged_Type = TimeStamp
-_SapFrInfoLastChanged_Object = MibTableColumn
-sapFrInfoLastChanged = _SapFrInfoLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 71, 1, 3),
-    _SapFrInfoLastChanged_Type()
-)
-sapFrInfoLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapFrInfoLastChanged.setStatus("current")
-_SapFrf12InfoTable_Object = MibTable
-sapFrf12InfoTable = _SapFrf12InfoTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 74)
-)
-if mibBuilder.loadTexts:
-    sapFrf12InfoTable.setStatus("current")
-_SapFrf12InfoEntry_Object = MibTableRow
-sapFrf12InfoEntry = _SapFrf12InfoEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 74, 1)
-)
-sapFrf12InfoEntry.setIndexNames(
-    (0, "TIMETRA-SERV-MIB", "svcId"),
-    (0, "TIMETRA-SAP-MIB", "sapPortId"),
-    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
-)
-if mibBuilder.loadTexts:
-    sapFrf12InfoEntry.setStatus("current")
-
-
-class _SapFrf12InfoFragmentThreshold_Type(Unsigned32):
-    """Custom type sapFrf12InfoFragmentThreshold based on Unsigned32"""
-    defaultValue = 128
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(128, 512),
-    )
-
-
-_SapFrf12InfoFragmentThreshold_Type.__name__ = "Unsigned32"
-_SapFrf12InfoFragmentThreshold_Object = MibTableColumn
-sapFrf12InfoFragmentThreshold = _SapFrf12InfoFragmentThreshold_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 74, 1, 1),
-    _SapFrf12InfoFragmentThreshold_Type()
-)
-sapFrf12InfoFragmentThreshold.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapFrf12InfoFragmentThreshold.setStatus("current")
-_SapFrf12InfoLastChanged_Type = TimeStamp
-_SapFrf12InfoLastChanged_Object = MibTableColumn
-sapFrf12InfoLastChanged = _SapFrf12InfoLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 74, 1, 2),
-    _SapFrf12InfoLastChanged_Type()
-)
-sapFrf12InfoLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    sapFrf12InfoLastChanged.setStatus("current")
-
-
-class _SapFrf12InfoInterleave_Type(TmnxEnabledDisabled):
-    """Custom type sapFrf12InfoInterleave based on TmnxEnabledDisabled"""
-    defaultValue = 2
-
-
-_SapFrf12InfoInterleave_Type.__name__ = "TmnxEnabledDisabled"
-_SapFrf12InfoInterleave_Object = MibTableColumn
-sapFrf12InfoInterleave = _SapFrf12InfoInterleave_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 74, 1, 3),
-    _SapFrf12InfoInterleave_Type()
-)
-sapFrf12InfoInterleave.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    sapFrf12InfoInterleave.setStatus("current")
 _SapArpHostStatTable_Object = MibTable
 sapArpHostStatTable = _SapArpHostStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 75)
@@ -18516,7 +18099,7 @@ sapAtmVcRangeTable = _SapAtmVcRangeTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 116)
 )
 if mibBuilder.loadTexts:
-    sapAtmVcRangeTable.setStatus("current")
+    sapAtmVcRangeTable.setStatus("obsolete")
 _SapAtmVcRangeEntry_Object = MibTableRow
 sapAtmVcRangeEntry = _SapAtmVcRangeEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 116, 1)
@@ -18528,7 +18111,7 @@ sapAtmVcRangeEntry.setIndexNames(
     (0, "TIMETRA-SAP-MIB", "sapAtmVcRangeIndex"),
 )
 if mibBuilder.loadTexts:
-    sapAtmVcRangeEntry.setStatus("current")
+    sapAtmVcRangeEntry.setStatus("obsolete")
 
 
 class _SapAtmVcRangeIndex_Type(Unsigned32):
@@ -18547,7 +18130,7 @@ sapAtmVcRangeIndex = _SapAtmVcRangeIndex_Object(
 )
 sapAtmVcRangeIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeIndex.setStatus("current")
+    sapAtmVcRangeIndex.setStatus("obsolete")
 _SapAtmVcRangeRowStatus_Type = RowStatus
 _SapAtmVcRangeRowStatus_Object = MibTableColumn
 sapAtmVcRangeRowStatus = _SapAtmVcRangeRowStatus_Object(
@@ -18556,7 +18139,7 @@ sapAtmVcRangeRowStatus = _SapAtmVcRangeRowStatus_Object(
 )
 sapAtmVcRangeRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeRowStatus.setStatus("current")
+    sapAtmVcRangeRowStatus.setStatus("obsolete")
 _SapAtmVcRangeLastMgmtChange_Type = TimeStamp
 _SapAtmVcRangeLastMgmtChange_Object = MibTableColumn
 sapAtmVcRangeLastMgmtChange = _SapAtmVcRangeLastMgmtChange_Object(
@@ -18565,7 +18148,7 @@ sapAtmVcRangeLastMgmtChange = _SapAtmVcRangeLastMgmtChange_Object(
 )
 sapAtmVcRangeLastMgmtChange.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeLastMgmtChange.setStatus("current")
+    sapAtmVcRangeLastMgmtChange.setStatus("obsolete")
 _SapAtmVcRangeVpiStart_Type = AtmVpIdentifier
 _SapAtmVcRangeVpiStart_Object = MibTableColumn
 sapAtmVcRangeVpiStart = _SapAtmVcRangeVpiStart_Object(
@@ -18574,7 +18157,7 @@ sapAtmVcRangeVpiStart = _SapAtmVcRangeVpiStart_Object(
 )
 sapAtmVcRangeVpiStart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeVpiStart.setStatus("current")
+    sapAtmVcRangeVpiStart.setStatus("obsolete")
 _SapAtmVcRangeVpiEnd_Type = AtmVpIdentifier
 _SapAtmVcRangeVpiEnd_Object = MibTableColumn
 sapAtmVcRangeVpiEnd = _SapAtmVcRangeVpiEnd_Object(
@@ -18583,7 +18166,7 @@ sapAtmVcRangeVpiEnd = _SapAtmVcRangeVpiEnd_Object(
 )
 sapAtmVcRangeVpiEnd.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeVpiEnd.setStatus("current")
+    sapAtmVcRangeVpiEnd.setStatus("obsolete")
 
 
 class _SapAtmVcRangeVciStart_Type(AtmVcIdentifier):
@@ -18602,7 +18185,7 @@ sapAtmVcRangeVciStart = _SapAtmVcRangeVciStart_Object(
 )
 sapAtmVcRangeVciStart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeVciStart.setStatus("current")
+    sapAtmVcRangeVciStart.setStatus("obsolete")
 
 
 class _SapAtmVcRangeVciEnd_Type(AtmVcIdentifier):
@@ -18621,19 +18204,19 @@ sapAtmVcRangeVciEnd = _SapAtmVcRangeVciEnd_Object(
 )
 sapAtmVcRangeVciEnd.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapAtmVcRangeVciEnd.setStatus("current")
+    sapAtmVcRangeVciEnd.setStatus("obsolete")
 _MsapAtmPlcyTable_Object = MibTable
 msapAtmPlcyTable = _MsapAtmPlcyTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 117)
 )
 if mibBuilder.loadTexts:
-    msapAtmPlcyTable.setStatus("current")
+    msapAtmPlcyTable.setStatus("obsolete")
 _MsapAtmPlcyEntry_Object = MibTableRow
 msapAtmPlcyEntry = _MsapAtmPlcyEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 117, 1)
 )
 if mibBuilder.loadTexts:
-    msapAtmPlcyEntry.setStatus("current")
+    msapAtmPlcyEntry.setStatus("obsolete")
 _MsapAtmPlcyLastChanged_Type = TimeStamp
 _MsapAtmPlcyLastChanged_Object = MibTableColumn
 msapAtmPlcyLastChanged = _MsapAtmPlcyLastChanged_Object(
@@ -18642,7 +18225,7 @@ msapAtmPlcyLastChanged = _MsapAtmPlcyLastChanged_Object(
 )
 msapAtmPlcyLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    msapAtmPlcyLastChanged.setStatus("current")
+    msapAtmPlcyLastChanged.setStatus("obsolete")
 
 
 class _MsapAtmPlcyIngTrafficDescIndex_Type(AtmTrafficDescrParamIndex):
@@ -18663,7 +18246,7 @@ msapAtmPlcyIngTrafficDescIndex = _MsapAtmPlcyIngTrafficDescIndex_Object(
 )
 msapAtmPlcyIngTrafficDescIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    msapAtmPlcyIngTrafficDescIndex.setStatus("current")
+    msapAtmPlcyIngTrafficDescIndex.setStatus("obsolete")
 
 
 class _MsapAtmPlcyEgrTrafficDescIndex_Type(AtmTrafficDescrParamIndex):
@@ -18684,7 +18267,7 @@ msapAtmPlcyEgrTrafficDescIndex = _MsapAtmPlcyEgrTrafficDescIndex_Object(
 )
 msapAtmPlcyEgrTrafficDescIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    msapAtmPlcyEgrTrafficDescIndex.setStatus("current")
+    msapAtmPlcyEgrTrafficDescIndex.setStatus("obsolete")
 
 
 class _MsapAtmPlcyOamAlarmCellHandling_Type(ServiceAdminStatus):
@@ -18700,7 +18283,7 @@ msapAtmPlcyOamAlarmCellHandling = _MsapAtmPlcyOamAlarmCellHandling_Object(
 )
 msapAtmPlcyOamAlarmCellHandling.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    msapAtmPlcyOamAlarmCellHandling.setStatus("current")
+    msapAtmPlcyOamAlarmCellHandling.setStatus("obsolete")
 
 
 class _MsapAtmPlcyOamPeriodicLoopback_Type(ServiceAdminStatus):
@@ -18716,7 +18299,7 @@ msapAtmPlcyOamPeriodicLoopback = _MsapAtmPlcyOamPeriodicLoopback_Object(
 )
 msapAtmPlcyOamPeriodicLoopback.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    msapAtmPlcyOamPeriodicLoopback.setStatus("current")
+    msapAtmPlcyOamPeriodicLoopback.setStatus("obsolete")
 _MsapAtmPlcyTblLastChgd_Type = TimeStamp
 _MsapAtmPlcyTblLastChgd_Object = MibScalar
 msapAtmPlcyTblLastChgd = _MsapAtmPlcyTblLastChgd_Object(
@@ -18725,7 +18308,7 @@ msapAtmPlcyTblLastChgd = _MsapAtmPlcyTblLastChgd_Object(
 )
 msapAtmPlcyTblLastChgd.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    msapAtmPlcyTblLastChgd.setStatus("current")
+    msapAtmPlcyTblLastChgd.setStatus("obsolete")
 _SapEthCfmTblLastChanged_Type = TimeStamp
 _SapEthCfmTblLastChanged_Object = MibScalar
 sapEthCfmTblLastChanged = _SapEthCfmTblLastChanged_Object(
@@ -19246,7 +18829,7 @@ sapAtmPppStatsTable = _SapAtmPppStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 127)
 )
 if mibBuilder.loadTexts:
-    sapAtmPppStatsTable.setStatus("current")
+    sapAtmPppStatsTable.setStatus("obsolete")
 _SapAtmPppStatsEntry_Object = MibTableRow
 sapAtmPppStatsEntry = _SapAtmPppStatsEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 127, 1)
@@ -19257,7 +18840,7 @@ sapAtmPppStatsEntry.setIndexNames(
     (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
 )
 if mibBuilder.loadTexts:
-    sapAtmPppStatsEntry.setStatus("current")
+    sapAtmPppStatsEntry.setStatus("obsolete")
 _SapAtmPppStatsRxPackets_Type = Counter32
 _SapAtmPppStatsRxPackets_Object = MibTableColumn
 sapAtmPppStatsRxPackets = _SapAtmPppStatsRxPackets_Object(
@@ -19266,7 +18849,7 @@ sapAtmPppStatsRxPackets = _SapAtmPppStatsRxPackets_Object(
 )
 sapAtmPppStatsRxPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmPppStatsRxPackets.setStatus("current")
+    sapAtmPppStatsRxPackets.setStatus("obsolete")
 _SapAtmPppStatsRxDropped_Type = Counter32
 _SapAtmPppStatsRxDropped_Object = MibTableColumn
 sapAtmPppStatsRxDropped = _SapAtmPppStatsRxDropped_Object(
@@ -19275,7 +18858,7 @@ sapAtmPppStatsRxDropped = _SapAtmPppStatsRxDropped_Object(
 )
 sapAtmPppStatsRxDropped.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmPppStatsRxDropped.setStatus("current")
+    sapAtmPppStatsRxDropped.setStatus("obsolete")
 _SapAtmPppStatsTxPackets_Type = Counter32
 _SapAtmPppStatsTxPackets_Object = MibTableColumn
 sapAtmPppStatsTxPackets = _SapAtmPppStatsTxPackets_Object(
@@ -19284,7 +18867,7 @@ sapAtmPppStatsTxPackets = _SapAtmPppStatsTxPackets_Object(
 )
 sapAtmPppStatsTxPackets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sapAtmPppStatsTxPackets.setStatus("current")
+    sapAtmPppStatsTxPackets.setStatus("obsolete")
 _TmnxSapGlobalObjs_ObjectIdentity = ObjectIdentity
 tmnxSapGlobalObjs = _TmnxSapGlobalObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 128)
@@ -22265,7 +21848,7 @@ class _SapIngressQinqInnerTranslationId_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(-1, -1),
-        ValueRangeConstraint(0, 4094),
+        ValueRangeConstraint(0, 4095),
     )
 
 
@@ -22470,7 +22053,7 @@ class _SapIngressAggregatePolicerRateLo_Type(TmnxLow32):
 
     subtypeSpec = TmnxLow32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(144, 1000000000),
+        ValueRangeConstraint(1, 1000000000),
         ValueRangeConstraint(4294967295, 4294967295),
     )
 
@@ -22507,7 +22090,7 @@ sapIngressAggregatePolicerBurst = _SapIngressAggregatePolicerBurst_Object(
 )
 sapIngressAggregatePolicerBurst.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    sapIngressAggregatePolicerBurst.setStatus("current")
+    sapIngressAggregatePolicerBurst.setStatus("obsolete")
 
 
 class _SapIngressAggregatePolicerCIRHi_Type(TmnxHigh32):
@@ -22654,6 +22237,266 @@ sapIngressIpFilterPair = _SapIngressIpFilterPair_Object(
 sapIngressIpFilterPair.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     sapIngressIpFilterPair.setStatus("current")
+
+
+class _SapQosSharedPolicerName_Type(TNamedItemOrEmpty):
+    """Custom type sapQosSharedPolicerName based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_SapQosSharedPolicerName_Type.__name__ = "TNamedItemOrEmpty"
+_SapQosSharedPolicerName_Object = MibTableColumn
+sapQosSharedPolicerName = _SapQosSharedPolicerName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 92),
+    _SapQosSharedPolicerName_Type()
+)
+sapQosSharedPolicerName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapQosSharedPolicerName.setStatus("current")
+
+
+class _SapEgressQosAggRatePIRPercent_Type(Unsigned32):
+    """Custom type sapEgressQosAggRatePIRPercent based on Unsigned32"""
+    defaultValue = 10000
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_SapEgressQosAggRatePIRPercent_Type.__name__ = "Unsigned32"
+_SapEgressQosAggRatePIRPercent_Object = MibTableColumn
+sapEgressQosAggRatePIRPercent = _SapEgressQosAggRatePIRPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 93),
+    _SapEgressQosAggRatePIRPercent_Type()
+)
+sapEgressQosAggRatePIRPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressQosAggRatePIRPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgressQosAggRatePIRPercent.setUnits("centipercent")
+
+
+class _SapEgressQosAggRateCIRPercent_Type(Unsigned32):
+    """Custom type sapEgressQosAggRateCIRPercent based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_SapEgressQosAggRateCIRPercent_Type.__name__ = "Unsigned32"
+_SapEgressQosAggRateCIRPercent_Object = MibTableColumn
+sapEgressQosAggRateCIRPercent = _SapEgressQosAggRateCIRPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 94),
+    _SapEgressQosAggRateCIRPercent_Type()
+)
+sapEgressQosAggRateCIRPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressQosAggRateCIRPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgressQosAggRateCIRPercent.setUnits("centipercent")
+
+
+class _SapEgressQosAggRateType_Type(TRateType):
+    """Custom type sapEgressQosAggRateType based on TRateType"""
+    defaultValue = 1
+
+
+_SapEgressQosAggRateType_Type.__name__ = "TRateType"
+_SapEgressQosAggRateType_Object = MibTableColumn
+sapEgressQosAggRateType = _SapEgressQosAggRateType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 95),
+    _SapEgressQosAggRateType_Type()
+)
+sapEgressQosAggRateType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressQosAggRateType.setStatus("current")
+
+
+class _SapEgrAggRateLimitHi_Type(TmnxQosRateHigh32):
+    """Custom type sapEgrAggRateLimitHi based on TmnxQosRateHigh32"""
+    defaultValue = 4294967295
+
+
+_SapEgrAggRateLimitHi_Type.__name__ = "TmnxQosRateHigh32"
+_SapEgrAggRateLimitHi_Object = MibTableColumn
+sapEgrAggRateLimitHi = _SapEgrAggRateLimitHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 96),
+    _SapEgrAggRateLimitHi_Type()
+)
+sapEgrAggRateLimitHi.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgrAggRateLimitHi.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgrAggRateLimitHi.setUnits("kilobps")
+
+
+class _SapEgrAggRateLimit_Type(TmnxQosRateLow32):
+    """Custom type sapEgrAggRateLimit based on TmnxQosRateLow32"""
+    defaultValue = 4294967295
+
+
+_SapEgrAggRateLimit_Type.__name__ = "TmnxQosRateLow32"
+_SapEgrAggRateLimit_Object = MibTableColumn
+sapEgrAggRateLimit = _SapEgrAggRateLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 97),
+    _SapEgrAggRateLimit_Type()
+)
+sapEgrAggRateLimit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgrAggRateLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgrAggRateLimit.setUnits("kilobps")
+
+
+class _SapEgressVirtualPort_Type(TNamedItemOrEmpty):
+    """Custom type sapEgressVirtualPort based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_SapEgressVirtualPort_Type.__name__ = "TNamedItemOrEmpty"
+_SapEgressVirtualPort_Object = MibTableColumn
+sapEgressVirtualPort = _SapEgressVirtualPort_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 98),
+    _SapEgressVirtualPort_Type()
+)
+sapEgressVirtualPort.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressVirtualPort.setStatus("current")
+
+
+class _SapEgrShrdQAggRateBurstLmt_Type(Integer32):
+    """Custom type sapEgrShrdQAggRateBurstLmt based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(2, 2),
+    )
+
+
+_SapEgrShrdQAggRateBurstLmt_Type.__name__ = "Integer32"
+_SapEgrShrdQAggRateBurstLmt_Object = MibTableColumn
+sapEgrShrdQAggRateBurstLmt = _SapEgrShrdQAggRateBurstLmt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 99),
+    _SapEgrShrdQAggRateBurstLmt_Type()
+)
+sapEgrShrdQAggRateBurstLmt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgrShrdQAggRateBurstLmt.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgrShrdQAggRateBurstLmt.setUnits("kilobytes")
+
+
+class _SapEgressLatencyBudget_Type(Unsigned32):
+    """Custom type sapEgressLatencyBudget based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 1000000),
+    )
+
+
+_SapEgressLatencyBudget_Type.__name__ = "Unsigned32"
+_SapEgressLatencyBudget_Object = MibTableColumn
+sapEgressLatencyBudget = _SapEgressLatencyBudget_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 100),
+    _SapEgressLatencyBudget_Type()
+)
+sapEgressLatencyBudget.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressLatencyBudget.setStatus("current")
+if mibBuilder.loadTexts:
+    sapEgressLatencyBudget.setUnits("microseconds")
+
+
+class _SapIngressFilterSet_Type(TNamedItemOrEmpty):
+    """Custom type sapIngressFilterSet based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_SapIngressFilterSet_Type.__name__ = "TNamedItemOrEmpty"
+_SapIngressFilterSet_Object = MibTableColumn
+sapIngressFilterSet = _SapIngressFilterSet_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 101),
+    _SapIngressFilterSet_Type()
+)
+sapIngressFilterSet.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapIngressFilterSet.setStatus("current")
+
+
+class _SapIngressAggregatePolicerMBS_Type(Integer32):
+    """Custom type sapIngressAggregatePolicerMBS based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(1, 33292),
+    )
+
+
+_SapIngressAggregatePolicerMBS_Type.__name__ = "Integer32"
+_SapIngressAggregatePolicerMBS_Object = MibTableColumn
+sapIngressAggregatePolicerMBS = _SapIngressAggregatePolicerMBS_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 102),
+    _SapIngressAggregatePolicerMBS_Type()
+)
+sapIngressAggregatePolicerMBS.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapIngressAggregatePolicerMBS.setStatus("current")
+
+
+class _SapIngressAggregatePlcrAlgoType_Type(Integer32):
+    """Custom type sapIngressAggregatePlcrAlgoType based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("trtcmDs", 1),
+          ("trtcmDsCoupled", 2))
+    )
+
+
+_SapIngressAggregatePlcrAlgoType_Type.__name__ = "Integer32"
+_SapIngressAggregatePlcrAlgoType_Object = MibTableColumn
+sapIngressAggregatePlcrAlgoType = _SapIngressAggregatePlcrAlgoType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 103),
+    _SapIngressAggregatePlcrAlgoType_Type()
+)
+sapIngressAggregatePlcrAlgoType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapIngressAggregatePlcrAlgoType.setStatus("current")
+
+
+class _SapEgressQosSinkExcessBW_Type(TruthValue):
+    """Custom type sapEgressQosSinkExcessBW based on TruthValue"""
+    defaultValue = 2
+
+
+_SapEgressQosSinkExcessBW_Type.__name__ = "TruthValue"
+_SapEgressQosSinkExcessBW_Object = MibTableColumn
+sapEgressQosSinkExcessBW = _SapEgressQosSinkExcessBW_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 147, 1, 104),
+    _SapEgressQosSinkExcessBW_Type()
+)
+sapEgressQosSinkExcessBW.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sapEgressQosSinkExcessBW.setStatus("current")
 _SapDcpFpStaticStatTable_Object = MibTable
 sapDcpFpStaticStatTable = _SapDcpFpStaticStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 148)
@@ -22742,6 +22585,24 @@ if mibBuilder.loadTexts:
     sapDcpFpStaticDetectionTime.setStatus("current")
 if mibBuilder.loadTexts:
     sapDcpFpStaticDetectionTime.setUnits("seconds")
+_SapDcpFpStaticTotalExcdCount_Type = Counter64
+_SapDcpFpStaticTotalExcdCount_Object = MibTableColumn
+sapDcpFpStaticTotalExcdCount = _SapDcpFpStaticTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 148, 1, 8),
+    _SapDcpFpStaticTotalExcdCount_Type()
+)
+sapDcpFpStaticTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapDcpFpStaticTotalExcdCount.setStatus("current")
+_SapDcpFpStaticExtCnfrmStateCount_Type = Counter32
+_SapDcpFpStaticExtCnfrmStateCount_Object = MibTableColumn
+sapDcpFpStaticExtCnfrmStateCount = _SapDcpFpStaticExtCnfrmStateCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 148, 1, 9),
+    _SapDcpFpStaticExtCnfrmStateCount_Type()
+)
+sapDcpFpStaticExtCnfrmStateCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapDcpFpStaticExtCnfrmStateCount.setStatus("current")
 _SapDcpFpDynStatTable_Object = MibTable
 sapDcpFpDynStatTable = _SapDcpFpDynStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 149)
@@ -22839,6 +22700,24 @@ sapDcpFpDynAllocated = _SapDcpFpDynAllocated_Object(
 sapDcpFpDynAllocated.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sapDcpFpDynAllocated.setStatus("current")
+_SapDcpFpDynTotalExcdCount_Type = Counter64
+_SapDcpFpDynTotalExcdCount_Object = MibTableColumn
+sapDcpFpDynTotalExcdCount = _SapDcpFpDynTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 149, 1, 9),
+    _SapDcpFpDynTotalExcdCount_Type()
+)
+sapDcpFpDynTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapDcpFpDynTotalExcdCount.setStatus("current")
+_SapDcpFpDynExitConformStateCount_Type = Counter32
+_SapDcpFpDynExitConformStateCount_Object = MibTableColumn
+sapDcpFpDynExitConformStateCount = _SapDcpFpDynExitConformStateCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 149, 1, 10),
+    _SapDcpFpDynExitConformStateCount_Type()
+)
+sapDcpFpDynExitConformStateCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapDcpFpDynExitConformStateCount.setStatus("current")
 _SapDcpFpLocMonStatTable_Object = MibTable
 sapDcpFpLocMonStatTable = _SapDcpFpLocMonStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 150)
@@ -22914,6 +22793,24 @@ sapDcpFpLocMonAllDynAlloc = _SapDcpFpLocMonAllDynAlloc_Object(
 sapDcpFpLocMonAllDynAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sapDcpFpLocMonAllDynAlloc.setStatus("current")
+_SapDcpFpLocMonTotalExcdCount_Type = Counter64
+_SapDcpFpLocMonTotalExcdCount_Object = MibTableColumn
+sapDcpFpLocMonTotalExcdCount = _SapDcpFpLocMonTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 150, 1, 7),
+    _SapDcpFpLocMonTotalExcdCount_Type()
+)
+sapDcpFpLocMonTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapDcpFpLocMonTotalExcdCount.setStatus("current")
+_SapDcpFpLocMonExtCnfrmStateCount_Type = Counter32
+_SapDcpFpLocMonExtCnfrmStateCount_Object = MibTableColumn
+sapDcpFpLocMonExtCnfrmStateCount = _SapDcpFpLocMonExtCnfrmStateCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 150, 1, 8),
+    _SapDcpFpLocMonExtCnfrmStateCount_Type()
+)
+sapDcpFpLocMonExtCnfrmStateCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapDcpFpLocMonExtCnfrmStateCount.setStatus("current")
 _SapNotificationObjects_ObjectIdentity = ObjectIdentity
 sapNotificationObjects = _SapNotificationObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 151)
@@ -23073,22 +22970,24 @@ sapTlsDhcp6Snoop = _SapTlsDhcp6Snoop_Object(
 )
 sapTlsDhcp6Snoop.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sapTlsDhcp6Snoop.setStatus("current")
+    sapTlsDhcp6Snoop.setStatus("obsolete")
 
 
 class _SapTlsDhcp6InterfaceId_Type(Integer32):
     """Custom type sapTlsDhcp6InterfaceId based on Integer32"""
-    defaultValue = 1
+    defaultValue = 0
 
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            *(1,
+            *(0,
+              1,
               2)
         )
     )
     namedValues = NamedValues(
-        *(("asciiTuple", 1),
+        *(("none", 0),
+          ("asciiTuple", 1),
           ("vlanAsciiTuple", 2))
     )
 
@@ -23119,7 +23018,7 @@ class _SapTlsDhcp6RemoteId_Type(Integer32):
     namedValues = NamedValues(
         *(("none", 1),
           ("mac", 2),
-          ("remote-id", 3))
+          ("remoteId", 3))
     )
 
 
@@ -23153,6 +23052,52 @@ sapTlsDhcp6RemoteIdString = _SapTlsDhcp6RemoteIdString_Object(
 sapTlsDhcp6RemoteIdString.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sapTlsDhcp6RemoteIdString.setStatus("current")
+
+
+class _SapTlsDhcp6LdraAdminState_Type(TmnxEnabledDisabled):
+    """Custom type sapTlsDhcp6LdraAdminState based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_SapTlsDhcp6LdraAdminState_Type.__name__ = "TmnxEnabledDisabled"
+_SapTlsDhcp6LdraAdminState_Object = MibTableColumn
+sapTlsDhcp6LdraAdminState = _SapTlsDhcp6LdraAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 153, 1, 7),
+    _SapTlsDhcp6LdraAdminState_Type()
+)
+sapTlsDhcp6LdraAdminState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6LdraAdminState.setStatus("current")
+
+
+class _SapTlsDhcp6InterfaceType_Type(Integer32):
+    """Custom type sapTlsDhcp6InterfaceType based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("clientFacing", 1),
+          ("networkFacing", 2))
+    )
+
+
+_SapTlsDhcp6InterfaceType_Type.__name__ = "Integer32"
+_SapTlsDhcp6InterfaceType_Object = MibTableColumn
+sapTlsDhcp6InterfaceType = _SapTlsDhcp6InterfaceType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 153, 1, 8),
+    _SapTlsDhcp6InterfaceType_Type()
+)
+sapTlsDhcp6InterfaceType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6InterfaceType.setStatus("current")
 _SapTlsStaticIsidTable_Object = MibTable
 sapTlsStaticIsidTable = _SapTlsStaticIsidTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 154)
@@ -23538,6 +23483,96 @@ sapTlsExBgpVplsMhVeId = _SapTlsExBgpVplsMhVeId_Object(
 sapTlsExBgpVplsMhVeId.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sapTlsExBgpVplsMhVeId.setStatus("current")
+_SapTlsAutoLrnMacPrtctExcListOper_Type = TNamedItemOrEmpty
+_SapTlsAutoLrnMacPrtctExcListOper_Object = MibTableColumn
+sapTlsAutoLrnMacPrtctExcListOper = _SapTlsAutoLrnMacPrtctExcListOper_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 14),
+    _SapTlsAutoLrnMacPrtctExcListOper_Type()
+)
+sapTlsAutoLrnMacPrtctExcListOper.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsAutoLrnMacPrtctExcListOper.setStatus("current")
+_SapTlsFdbProtectedMacAddrRec_Type = MacAddress
+_SapTlsFdbProtectedMacAddrRec_Object = MibTableColumn
+sapTlsFdbProtectedMacAddrRec = _SapTlsFdbProtectedMacAddrRec_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 15),
+    _SapTlsFdbProtectedMacAddrRec_Type()
+)
+sapTlsFdbProtectedMacAddrRec.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsFdbProtectedMacAddrRec.setStatus("current")
+_SapTlsFdbProtMacAddrRecLastChgd_Type = TimeStamp
+_SapTlsFdbProtMacAddrRecLastChgd_Object = MibTableColumn
+sapTlsFdbProtMacAddrRecLastChgd = _SapTlsFdbProtMacAddrRecLastChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 16),
+    _SapTlsFdbProtMacAddrRecLastChgd_Type()
+)
+sapTlsFdbProtMacAddrRecLastChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsFdbProtMacAddrRecLastChgd.setStatus("current")
+_SapTlsExtPbbProtectedMacAddrRec_Type = MacAddress
+_SapTlsExtPbbProtectedMacAddrRec_Object = MibTableColumn
+sapTlsExtPbbProtectedMacAddrRec = _SapTlsExtPbbProtectedMacAddrRec_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 17),
+    _SapTlsExtPbbProtectedMacAddrRec_Type()
+)
+sapTlsExtPbbProtectedMacAddrRec.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsExtPbbProtectedMacAddrRec.setStatus("current")
+_SapTlsExtPbbProtMacAddrRecLstChg_Type = TimeStamp
+_SapTlsExtPbbProtMacAddrRecLstChg_Object = MibTableColumn
+sapTlsExtPbbProtMacAddrRecLstChg = _SapTlsExtPbbProtMacAddrRecLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 18),
+    _SapTlsExtPbbProtMacAddrRecLstChg_Type()
+)
+sapTlsExtPbbProtMacAddrRecLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsExtPbbProtMacAddrRecLstChg.setStatus("current")
+_SapTlsExtTableHighUtilization_Type = TruthValue
+_SapTlsExtTableHighUtilization_Object = MibTableColumn
+sapTlsExtTableHighUtilization = _SapTlsExtTableHighUtilization_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 19),
+    _SapTlsExtTableHighUtilization_Type()
+)
+sapTlsExtTableHighUtilization.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsExtTableHighUtilization.setStatus("current")
+_SapTlsNonBlockMoveRateXMacAddr_Type = MacAddress
+_SapTlsNonBlockMoveRateXMacAddr_Object = MibTableColumn
+sapTlsNonBlockMoveRateXMacAddr = _SapTlsNonBlockMoveRateXMacAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 20),
+    _SapTlsNonBlockMoveRateXMacAddr_Type()
+)
+sapTlsNonBlockMoveRateXMacAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsNonBlockMoveRateXMacAddr.setStatus("current")
+_SapTlsNoBlckMvRateXMacAddrLstChg_Type = TimeStamp
+_SapTlsNoBlckMvRateXMacAddrLstChg_Object = MibTableColumn
+sapTlsNoBlckMvRateXMacAddrLstChg = _SapTlsNoBlckMvRateXMacAddrLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 21),
+    _SapTlsNoBlckMvRateXMacAddrLstChg_Type()
+)
+sapTlsNoBlckMvRateXMacAddrLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsNoBlckMvRateXMacAddrLstChg.setStatus("current")
+_SapTlsMoveRateExceededMacAddr_Type = MacAddress
+_SapTlsMoveRateExceededMacAddr_Object = MibTableColumn
+sapTlsMoveRateExceededMacAddr = _SapTlsMoveRateExceededMacAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 22),
+    _SapTlsMoveRateExceededMacAddr_Type()
+)
+sapTlsMoveRateExceededMacAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsMoveRateExceededMacAddr.setStatus("current")
+_SapTlsMvRateExceedMacAddrLstChgd_Type = TimeStamp
+_SapTlsMvRateExceedMacAddrLstChgd_Object = MibTableColumn
+sapTlsMvRateExceedMacAddrLstChgd = _SapTlsMvRateExceedMacAddrLstChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 157, 1, 23),
+    _SapTlsMvRateExceedMacAddrLstChgd_Type()
+)
+sapTlsMvRateExceedMacAddrLstChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsMvRateExceedMacAddrLstChgd.setStatus("current")
 _SapLagPerLinkHashTableLastChgd_Type = TimeStamp
 _SapLagPerLinkHashTableLastChgd_Object = MibScalar
 sapLagPerLinkHashTableLastChgd = _SapLagPerLinkHashTableLastChgd_Object(
@@ -25611,7 +25646,8 @@ class _TmnxSapOperFlags_Type(Bits):
           ("l2tpv3TunnelDown", 36),
           ("labelStackLimitExceeded", 37),
           ("sapIngQGrpRedirMismatch", 38),
-          ("sapEgrQGrpRedirMismatch", 39))
+          ("sapEgrQGrpRedirMismatch", 39),
+          ("reserved40", 40))
     )
 
 _TmnxSapOperFlags_Type.__name__ = "Bits"
@@ -25880,6 +25916,15 @@ tmnxIpTnlIPsecMatchTrustAnchor = _TmnxIpTnlIPsecMatchTrustAnchor_Object(
 tmnxIpTnlIPsecMatchTrustAnchor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxIpTnlIPsecMatchTrustAnchor.setStatus("current")
+_TmnxIpTnlIPsecStatPpkNegotiated_Type = TruthValue
+_TmnxIpTnlIPsecStatPpkNegotiated_Object = MibTableColumn
+tmnxIpTnlIPsecStatPpkNegotiated = _TmnxIpTnlIPsecStatPpkNegotiated_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 182, 1, 22),
+    _TmnxIpTnlIPsecStatPpkNegotiated_Type()
+)
+tmnxIpTnlIPsecStatPpkNegotiated.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxIpTnlIPsecStatPpkNegotiated.setStatus("current")
 _TmnxIpTnlIPsecSATable_Object = MibTable
 tmnxIpTnlIPsecSATable = _TmnxIpTnlIPsecSATable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 183)
@@ -26211,7 +26256,7 @@ class _TmnxSapSubMonOperGrpHlthDrop_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 255),
+        ValueRangeConstraint(1, 100),
     )
 
 
@@ -26233,6 +26278,770 @@ tmnxSapSubMonOperGrpActHlthDrop = _TmnxSapSubMonOperGrpActHlthDrop_Object(
 tmnxSapSubMonOperGrpActHlthDrop.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSapSubMonOperGrpActHlthDrop.setStatus("current")
+_TmnxSapMRtCpeChkTable_Object = MibTable
+tmnxSapMRtCpeChkTable = _TmnxSapMRtCpeChkTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189)
+)
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkTable.setStatus("current")
+_TmnxSapMRtCpeChkEntry_Object = MibTableRow
+tmnxSapMRtCpeChkEntry = _TmnxSapMRtCpeChkEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1)
+)
+tmnxSapMRtCpeChkEntry.setIndexNames(
+    (0, "TIMETRA-SERV-MIB", "svcId"),
+    (0, "TIMETRA-SAP-MIB", "sapPortId"),
+    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkHostAddrType"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkHostAddr"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkHostMacAddress"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkMRtAddrType"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkMRtAddr"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkMRtPrefixLen"),
+)
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkEntry.setStatus("current")
+_TmnxSapMRtCpeChkHostAddrType_Type = InetAddressType
+_TmnxSapMRtCpeChkHostAddrType_Object = MibTableColumn
+tmnxSapMRtCpeChkHostAddrType = _TmnxSapMRtCpeChkHostAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 1),
+    _TmnxSapMRtCpeChkHostAddrType_Type()
+)
+tmnxSapMRtCpeChkHostAddrType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkHostAddrType.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkHostAddr_Type(InetAddress):
+    """Custom type tmnxSapMRtCpeChkHostAddr based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TmnxSapMRtCpeChkHostAddr_Type.__name__ = "InetAddress"
+_TmnxSapMRtCpeChkHostAddr_Object = MibTableColumn
+tmnxSapMRtCpeChkHostAddr = _TmnxSapMRtCpeChkHostAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 2),
+    _TmnxSapMRtCpeChkHostAddr_Type()
+)
+tmnxSapMRtCpeChkHostAddr.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkHostAddr.setStatus("current")
+_TmnxSapMRtCpeChkHostMacAddress_Type = MacAddress
+_TmnxSapMRtCpeChkHostMacAddress_Object = MibTableColumn
+tmnxSapMRtCpeChkHostMacAddress = _TmnxSapMRtCpeChkHostMacAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 3),
+    _TmnxSapMRtCpeChkHostMacAddress_Type()
+)
+tmnxSapMRtCpeChkHostMacAddress.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkHostMacAddress.setStatus("current")
+_TmnxSapMRtCpeChkMRtAddrType_Type = InetAddressType
+_TmnxSapMRtCpeChkMRtAddrType_Object = MibTableColumn
+tmnxSapMRtCpeChkMRtAddrType = _TmnxSapMRtCpeChkMRtAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 4),
+    _TmnxSapMRtCpeChkMRtAddrType_Type()
+)
+tmnxSapMRtCpeChkMRtAddrType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkMRtAddrType.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkMRtAddr_Type(InetAddress):
+    """Custom type tmnxSapMRtCpeChkMRtAddr based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TmnxSapMRtCpeChkMRtAddr_Type.__name__ = "InetAddress"
+_TmnxSapMRtCpeChkMRtAddr_Object = MibTableColumn
+tmnxSapMRtCpeChkMRtAddr = _TmnxSapMRtCpeChkMRtAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 5),
+    _TmnxSapMRtCpeChkMRtAddr_Type()
+)
+tmnxSapMRtCpeChkMRtAddr.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkMRtAddr.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkMRtPrefixLen_Type(InetAddressPrefixLength):
+    """Custom type tmnxSapMRtCpeChkMRtPrefixLen based on InetAddressPrefixLength"""
+    subtypeSpec = InetAddressPrefixLength.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 128),
+    )
+
+
+_TmnxSapMRtCpeChkMRtPrefixLen_Type.__name__ = "InetAddressPrefixLength"
+_TmnxSapMRtCpeChkMRtPrefixLen_Object = MibTableColumn
+tmnxSapMRtCpeChkMRtPrefixLen = _TmnxSapMRtCpeChkMRtPrefixLen_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 6),
+    _TmnxSapMRtCpeChkMRtPrefixLen_Type()
+)
+tmnxSapMRtCpeChkMRtPrefixLen.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkMRtPrefixLen.setStatus("current")
+_TmnxSapMRtCpeChkRowStatus_Type = RowStatus
+_TmnxSapMRtCpeChkRowStatus_Object = MibTableColumn
+tmnxSapMRtCpeChkRowStatus = _TmnxSapMRtCpeChkRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 7),
+    _TmnxSapMRtCpeChkRowStatus_Type()
+)
+tmnxSapMRtCpeChkRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkRowStatus.setStatus("current")
+_TmnxSapMRtCpeChkLastMgmtChange_Type = TimeStamp
+_TmnxSapMRtCpeChkLastMgmtChange_Object = MibTableColumn
+tmnxSapMRtCpeChkLastMgmtChange = _TmnxSapMRtCpeChkLastMgmtChange_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 8),
+    _TmnxSapMRtCpeChkLastMgmtChange_Type()
+)
+tmnxSapMRtCpeChkLastMgmtChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkLastMgmtChange.setStatus("current")
+_TmnxSapMRtCpeChkAddrType_Type = InetAddressType
+_TmnxSapMRtCpeChkAddrType_Object = MibTableColumn
+tmnxSapMRtCpeChkAddrType = _TmnxSapMRtCpeChkAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 9),
+    _TmnxSapMRtCpeChkAddrType_Type()
+)
+tmnxSapMRtCpeChkAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkAddrType.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkAddr_Type(InetAddress):
+    """Custom type tmnxSapMRtCpeChkAddr based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TmnxSapMRtCpeChkAddr_Type.__name__ = "InetAddress"
+_TmnxSapMRtCpeChkAddr_Object = MibTableColumn
+tmnxSapMRtCpeChkAddr = _TmnxSapMRtCpeChkAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 10),
+    _TmnxSapMRtCpeChkAddr_Type()
+)
+tmnxSapMRtCpeChkAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkAddr.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkInterval_Type(Unsigned32):
+    """Custom type tmnxSapMRtCpeChkInterval based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 255),
+    )
+
+
+_TmnxSapMRtCpeChkInterval_Type.__name__ = "Unsigned32"
+_TmnxSapMRtCpeChkInterval_Object = MibTableColumn
+tmnxSapMRtCpeChkInterval = _TmnxSapMRtCpeChkInterval_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 11),
+    _TmnxSapMRtCpeChkInterval_Type()
+)
+tmnxSapMRtCpeChkInterval.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkInterval.setUnits("seconds")
+
+
+class _TmnxSapMRtCpeChkDropCnt_Type(Unsigned32):
+    """Custom type tmnxSapMRtCpeChkDropCnt based on Unsigned32"""
+    defaultValue = 3
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 255),
+    )
+
+
+_TmnxSapMRtCpeChkDropCnt_Type.__name__ = "Unsigned32"
+_TmnxSapMRtCpeChkDropCnt_Object = MibTableColumn
+tmnxSapMRtCpeChkDropCnt = _TmnxSapMRtCpeChkDropCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 12),
+    _TmnxSapMRtCpeChkDropCnt_Type()
+)
+tmnxSapMRtCpeChkDropCnt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkDropCnt.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkTimeout_Type(Unsigned32):
+    """Custom type tmnxSapMRtCpeChkTimeout based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10),
+    )
+
+
+_TmnxSapMRtCpeChkTimeout_Type.__name__ = "Unsigned32"
+_TmnxSapMRtCpeChkTimeout_Object = MibTableColumn
+tmnxSapMRtCpeChkTimeout = _TmnxSapMRtCpeChkTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 13),
+    _TmnxSapMRtCpeChkTimeout_Type()
+)
+tmnxSapMRtCpeChkTimeout.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkTimeout.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkTimeout.setUnits("seconds")
+
+
+class _TmnxSapMRtCpeChkPaddingSize_Type(Unsigned32):
+    """Custom type tmnxSapMRtCpeChkPaddingSize based on Unsigned32"""
+    defaultValue = 56
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 16384),
+    )
+
+
+_TmnxSapMRtCpeChkPaddingSize_Type.__name__ = "Unsigned32"
+_TmnxSapMRtCpeChkPaddingSize_Object = MibTableColumn
+tmnxSapMRtCpeChkPaddingSize = _TmnxSapMRtCpeChkPaddingSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 14),
+    _TmnxSapMRtCpeChkPaddingSize_Type()
+)
+tmnxSapMRtCpeChkPaddingSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkPaddingSize.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkPaddingSize.setUnits("bytes")
+
+
+class _TmnxSapMRtCpeChkEnableLog_Type(TruthValue):
+    """Custom type tmnxSapMRtCpeChkEnableLog based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxSapMRtCpeChkEnableLog_Type.__name__ = "TruthValue"
+_TmnxSapMRtCpeChkEnableLog_Object = MibTableColumn
+tmnxSapMRtCpeChkEnableLog = _TmnxSapMRtCpeChkEnableLog_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 15),
+    _TmnxSapMRtCpeChkEnableLog_Type()
+)
+tmnxSapMRtCpeChkEnableLog.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkEnableLog.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkFailMetric_Type(Unsigned32):
+    """Custom type tmnxSapMRtCpeChkFailMetric based on Unsigned32"""
+    defaultValue = 0
+
+
+_TmnxSapMRtCpeChkFailMetric_Type.__name__ = "Unsigned32"
+_TmnxSapMRtCpeChkFailMetric_Object = MibTableColumn
+tmnxSapMRtCpeChkFailMetric = _TmnxSapMRtCpeChkFailMetric_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 16),
+    _TmnxSapMRtCpeChkFailMetric_Type()
+)
+tmnxSapMRtCpeChkFailMetric.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkFailMetric.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkFailPreference_Type(Integer32):
+    """Custom type tmnxSapMRtCpeChkFailPreference based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 255),
+    )
+
+
+_TmnxSapMRtCpeChkFailPreference_Type.__name__ = "Integer32"
+_TmnxSapMRtCpeChkFailPreference_Object = MibTableColumn
+tmnxSapMRtCpeChkFailPreference = _TmnxSapMRtCpeChkFailPreference_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 17),
+    _TmnxSapMRtCpeChkFailPreference_Type()
+)
+tmnxSapMRtCpeChkFailPreference.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkFailPreference.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkFailTag_Type(Unsigned32):
+    """Custom type tmnxSapMRtCpeChkFailTag based on Unsigned32"""
+    defaultValue = 0
+
+
+_TmnxSapMRtCpeChkFailTag_Type.__name__ = "Unsigned32"
+_TmnxSapMRtCpeChkFailTag_Object = MibTableColumn
+tmnxSapMRtCpeChkFailTag = _TmnxSapMRtCpeChkFailTag_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 18),
+    _TmnxSapMRtCpeChkFailTag_Type()
+)
+tmnxSapMRtCpeChkFailTag.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkFailTag.setStatus("current")
+_TmnxSapMRtCpeChkSrcAddrType_Type = InetAddressType
+_TmnxSapMRtCpeChkSrcAddrType_Object = MibTableColumn
+tmnxSapMRtCpeChkSrcAddrType = _TmnxSapMRtCpeChkSrcAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 19),
+    _TmnxSapMRtCpeChkSrcAddrType_Type()
+)
+tmnxSapMRtCpeChkSrcAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkSrcAddrType.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkSrcAddr_Type(InetAddress):
+    """Custom type tmnxSapMRtCpeChkSrcAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TmnxSapMRtCpeChkSrcAddr_Type.__name__ = "InetAddress"
+_TmnxSapMRtCpeChkSrcAddr_Object = MibTableColumn
+tmnxSapMRtCpeChkSrcAddr = _TmnxSapMRtCpeChkSrcAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 20),
+    _TmnxSapMRtCpeChkSrcAddr_Type()
+)
+tmnxSapMRtCpeChkSrcAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkSrcAddr.setStatus("current")
+
+
+class _TmnxSapMRtCpeChkFailWithdraw_Type(TruthValue):
+    """Custom type tmnxSapMRtCpeChkFailWithdraw based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxSapMRtCpeChkFailWithdraw_Type.__name__ = "TruthValue"
+_TmnxSapMRtCpeChkFailWithdraw_Object = MibTableColumn
+tmnxSapMRtCpeChkFailWithdraw = _TmnxSapMRtCpeChkFailWithdraw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 189, 1, 21),
+    _TmnxSapMRtCpeChkFailWithdraw_Type()
+)
+tmnxSapMRtCpeChkFailWithdraw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkFailWithdraw.setStatus("current")
+_TmnxSapMRtCpeChkStatTable_Object = MibTable
+tmnxSapMRtCpeChkStatTable = _TmnxSapMRtCpeChkStatTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190)
+)
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkStatTable.setStatus("current")
+_TmnxSapMRtCpeChkStatEntry_Object = MibTableRow
+tmnxSapMRtCpeChkStatEntry = _TmnxSapMRtCpeChkStatEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1)
+)
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkStatEntry.setStatus("current")
+_TmnxSapMRtCpeChkUpTime_Type = TimeTicks
+_TmnxSapMRtCpeChkUpTime_Object = MibTableColumn
+tmnxSapMRtCpeChkUpTime = _TmnxSapMRtCpeChkUpTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 1),
+    _TmnxSapMRtCpeChkUpTime_Type()
+)
+tmnxSapMRtCpeChkUpTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkUpTime.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkUpTime.setUnits("centiseconds")
+_TmnxSapMRtCpeChkInPktCnt_Type = Counter32
+_TmnxSapMRtCpeChkInPktCnt_Object = MibTableColumn
+tmnxSapMRtCpeChkInPktCnt = _TmnxSapMRtCpeChkInPktCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 2),
+    _TmnxSapMRtCpeChkInPktCnt_Type()
+)
+tmnxSapMRtCpeChkInPktCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkInPktCnt.setStatus("current")
+_TmnxSapMRtCpeChkOutPktCnt_Type = Counter32
+_TmnxSapMRtCpeChkOutPktCnt_Object = MibTableColumn
+tmnxSapMRtCpeChkOutPktCnt = _TmnxSapMRtCpeChkOutPktCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 3),
+    _TmnxSapMRtCpeChkOutPktCnt_Type()
+)
+tmnxSapMRtCpeChkOutPktCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkOutPktCnt.setStatus("current")
+_TmnxSapMRtCpeChkDownTrans_Type = Gauge32
+_TmnxSapMRtCpeChkDownTrans_Object = MibTableColumn
+tmnxSapMRtCpeChkDownTrans = _TmnxSapMRtCpeChkDownTrans_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 4),
+    _TmnxSapMRtCpeChkDownTrans_Type()
+)
+tmnxSapMRtCpeChkDownTrans.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkDownTrans.setStatus("current")
+_TmnxSapMRtCpeChkUpTrans_Type = Gauge32
+_TmnxSapMRtCpeChkUpTrans_Object = MibTableColumn
+tmnxSapMRtCpeChkUpTrans = _TmnxSapMRtCpeChkUpTrans_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 5),
+    _TmnxSapMRtCpeChkUpTrans_Type()
+)
+tmnxSapMRtCpeChkUpTrans.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkUpTrans.setStatus("current")
+_TmnxSapMRtCpeChkTTL_Type = Unsigned32
+_TmnxSapMRtCpeChkTTL_Object = MibTableColumn
+tmnxSapMRtCpeChkTTL = _TmnxSapMRtCpeChkTTL_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 6),
+    _TmnxSapMRtCpeChkTTL_Type()
+)
+tmnxSapMRtCpeChkTTL.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkTTL.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkTTL.setUnits("seconds")
+
+
+class _TmnxSapMRtCpeChkStatus_Type(Integer32):
+    """Custom type tmnxSapMRtCpeChkStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("reachable", 1),
+          ("unreachable", 2))
+    )
+
+
+_TmnxSapMRtCpeChkStatus_Type.__name__ = "Integer32"
+_TmnxSapMRtCpeChkStatus_Object = MibTableColumn
+tmnxSapMRtCpeChkStatus = _TmnxSapMRtCpeChkStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 190, 1, 7),
+    _TmnxSapMRtCpeChkStatus_Type()
+)
+tmnxSapMRtCpeChkStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkStatus.setStatus("current")
+_TmnxSapEgrQosAggShaperTable_Object = MibTable
+tmnxSapEgrQosAggShaperTable = _TmnxSapEgrQosAggShaperTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191)
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShaperTable.setStatus("current")
+_TmnxSapEgrQosAggShaperEntry_Object = MibTableRow
+tmnxSapEgrQosAggShaperEntry = _TmnxSapEgrQosAggShaperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1)
+)
+tmnxSapEgrQosAggShaperEntry.setIndexNames(
+    (0, "TIMETRA-SERV-MIB", "svcId"),
+    (0, "TIMETRA-SAP-MIB", "sapPortId"),
+    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
+    (0, "TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapPort"),
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShaperEntry.setStatus("current")
+_TmnxSapEgrQosAggShapPort_Type = TmnxPortID
+_TmnxSapEgrQosAggShapPort_Object = MibTableColumn
+tmnxSapEgrQosAggShapPort = _TmnxSapEgrQosAggShapPort_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 1),
+    _TmnxSapEgrQosAggShapPort_Type()
+)
+tmnxSapEgrQosAggShapPort.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapPort.setStatus("current")
+_TmnxSapEgrQosAggShapSchedAssignd_Type = TruthValue
+_TmnxSapEgrQosAggShapSchedAssignd_Object = MibTableColumn
+tmnxSapEgrQosAggShapSchedAssignd = _TmnxSapEgrQosAggShapSchedAssignd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 2),
+    _TmnxSapEgrQosAggShapSchedAssignd_Type()
+)
+tmnxSapEgrQosAggShapSchedAssignd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapSchedAssignd.setStatus("current")
+_TmnxSapEgrQosAggShapAssignedRate_Type = Counter32
+_TmnxSapEgrQosAggShapAssignedRate_Object = MibTableColumn
+tmnxSapEgrQosAggShapAssignedRate = _TmnxSapEgrQosAggShapAssignedRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 3),
+    _TmnxSapEgrQosAggShapAssignedRate_Type()
+)
+tmnxSapEgrQosAggShapAssignedRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapAssignedRate.setStatus("current")
+_TmnxSapEgrQosAggShapOperRate_Type = Counter32
+_TmnxSapEgrQosAggShapOperRate_Object = MibTableColumn
+tmnxSapEgrQosAggShapOperRate = _TmnxSapEgrQosAggShapOperRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 4),
+    _TmnxSapEgrQosAggShapOperRate_Type()
+)
+tmnxSapEgrQosAggShapOperRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapOperRate.setStatus("current")
+_TmnxSapEgrQosAggShapConsumedRate_Type = Counter32
+_TmnxSapEgrQosAggShapConsumedRate_Object = MibTableColumn
+tmnxSapEgrQosAggShapConsumedRate = _TmnxSapEgrQosAggShapConsumedRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 5),
+    _TmnxSapEgrQosAggShapConsumedRate_Type()
+)
+tmnxSapEgrQosAggShapConsumedRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapConsumedRate.setStatus("current")
+_TmnxSapEgrQosAggShapAvgFrameOvhd_Type = Integer32
+_TmnxSapEgrQosAggShapAvgFrameOvhd_Object = MibTableColumn
+tmnxSapEgrQosAggShapAvgFrameOvhd = _TmnxSapEgrQosAggShapAvgFrameOvhd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 6),
+    _TmnxSapEgrQosAggShapAvgFrameOvhd_Type()
+)
+tmnxSapEgrQosAggShapAvgFrameOvhd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapAvgFrameOvhd.setStatus("current")
+_TmnxSapEgrQosAggShapAfoRealTime_Type = TruthValue
+_TmnxSapEgrQosAggShapAfoRealTime_Object = MibTableColumn
+tmnxSapEgrQosAggShapAfoRealTime = _TmnxSapEgrQosAggShapAfoRealTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 7),
+    _TmnxSapEgrQosAggShapAfoRealTime_Type()
+)
+tmnxSapEgrQosAggShapAfoRealTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapAfoRealTime.setStatus("current")
+_TmnxSapEgrQosAggShapSchedActive_Type = TruthValue
+_TmnxSapEgrQosAggShapSchedActive_Object = MibTableColumn
+tmnxSapEgrQosAggShapSchedActive = _TmnxSapEgrQosAggShapSchedActive_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 8),
+    _TmnxSapEgrQosAggShapSchedActive_Type()
+)
+tmnxSapEgrQosAggShapSchedActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapSchedActive.setStatus("current")
+_TmnxSapEgrQosAggShapSchedRunning_Type = TruthValue
+_TmnxSapEgrQosAggShapSchedRunning_Object = MibTableColumn
+tmnxSapEgrQosAggShapSchedRunning = _TmnxSapEgrQosAggShapSchedRunning_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 9),
+    _TmnxSapEgrQosAggShapSchedRunning_Type()
+)
+tmnxSapEgrQosAggShapSchedRunning.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapSchedRunning.setStatus("current")
+_TmnxSapEgrQosAggShapInvlClassUse_Type = TruthValue
+_TmnxSapEgrQosAggShapInvlClassUse_Object = MibTableColumn
+tmnxSapEgrQosAggShapInvlClassUse = _TmnxSapEgrQosAggShapInvlClassUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 10),
+    _TmnxSapEgrQosAggShapInvlClassUse_Type()
+)
+tmnxSapEgrQosAggShapInvlClassUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapInvlClassUse.setStatus("current")
+_TmnxSapEgrQosAggShapBurstLimit_Type = Integer32
+_TmnxSapEgrQosAggShapBurstLimit_Object = MibTableColumn
+tmnxSapEgrQosAggShapBurstLimit = _TmnxSapEgrQosAggShapBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 11),
+    _TmnxSapEgrQosAggShapBurstLimit_Type()
+)
+tmnxSapEgrQosAggShapBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapBurstLimit.setStatus("current")
+_TmnxSapEgrQosAggShapDepth_Type = Unsigned32
+_TmnxSapEgrQosAggShapDepth_Object = MibTableColumn
+tmnxSapEgrQosAggShapDepth = _TmnxSapEgrQosAggShapDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 12),
+    _TmnxSapEgrQosAggShapDepth_Type()
+)
+tmnxSapEgrQosAggShapDepth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapDepth.setStatus("current")
+_TmnxSapEgrQosAggShapPacketMode_Type = TmnxPacketMode
+_TmnxSapEgrQosAggShapPacketMode_Object = MibTableColumn
+tmnxSapEgrQosAggShapPacketMode = _TmnxSapEgrQosAggShapPacketMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 13),
+    _TmnxSapEgrQosAggShapPacketMode_Type()
+)
+tmnxSapEgrQosAggShapPacketMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapPacketMode.setStatus("current")
+_TmnxSapEgrQosAggShapOutOfDate_Type = TruthValue
+_TmnxSapEgrQosAggShapOutOfDate_Object = MibTableColumn
+tmnxSapEgrQosAggShapOutOfDate = _TmnxSapEgrQosAggShapOutOfDate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 14),
+    _TmnxSapEgrQosAggShapOutOfDate_Type()
+)
+tmnxSapEgrQosAggShapOutOfDate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapOutOfDate.setStatus("current")
+_TmnxSapEgrQosAggShapQSetSize_Type = Unsigned32
+_TmnxSapEgrQosAggShapQSetSize_Object = MibTableColumn
+tmnxSapEgrQosAggShapQSetSize = _TmnxSapEgrQosAggShapQSetSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 15),
+    _TmnxSapEgrQosAggShapQSetSize_Type()
+)
+tmnxSapEgrQosAggShapQSetSize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShapQSetSize.setStatus("current")
+_TmnxSapEgrQosAggShpQSetSzOvr_Type = TruthValue
+_TmnxSapEgrQosAggShpQSetSzOvr_Object = MibTableColumn
+tmnxSapEgrQosAggShpQSetSzOvr = _TmnxSapEgrQosAggShpQSetSzOvr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 191, 1, 16),
+    _TmnxSapEgrQosAggShpQSetSzOvr_Type()
+)
+tmnxSapEgrQosAggShpQSetSzOvr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShpQSetSzOvr.setStatus("current")
+_SapTlsDhcp6StatsTable_Object = MibTable
+sapTlsDhcp6StatsTable = _SapTlsDhcp6StatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192)
+)
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsTable.setStatus("current")
+_SapTlsDhcp6StatsEntry_Object = MibTableRow
+sapTlsDhcp6StatsEntry = _SapTlsDhcp6StatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1)
+)
+sapTlsDhcp6StatsEntry.setIndexNames(
+    (0, "TIMETRA-SERV-MIB", "svcId"),
+    (0, "TIMETRA-SAP-MIB", "sapPortId"),
+    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
+)
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsEntry.setStatus("current")
+_SapTlsDhcp6StatsClntSnoopdPckts_Type = Counter32
+_SapTlsDhcp6StatsClntSnoopdPckts_Object = MibTableColumn
+sapTlsDhcp6StatsClntSnoopdPckts = _SapTlsDhcp6StatsClntSnoopdPckts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1, 1),
+    _SapTlsDhcp6StatsClntSnoopdPckts_Type()
+)
+sapTlsDhcp6StatsClntSnoopdPckts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsClntSnoopdPckts.setStatus("current")
+_SapTlsDhcp6StatsSrvrSnoopdPckts_Type = Counter32
+_SapTlsDhcp6StatsSrvrSnoopdPckts_Object = MibTableColumn
+sapTlsDhcp6StatsSrvrSnoopdPckts = _SapTlsDhcp6StatsSrvrSnoopdPckts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1, 2),
+    _SapTlsDhcp6StatsSrvrSnoopdPckts_Type()
+)
+sapTlsDhcp6StatsSrvrSnoopdPckts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsSrvrSnoopdPckts.setStatus("current")
+_SapTlsDhcp6StatsClntForwdPckts_Type = Counter32
+_SapTlsDhcp6StatsClntForwdPckts_Object = MibTableColumn
+sapTlsDhcp6StatsClntForwdPckts = _SapTlsDhcp6StatsClntForwdPckts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1, 3),
+    _SapTlsDhcp6StatsClntForwdPckts_Type()
+)
+sapTlsDhcp6StatsClntForwdPckts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsClntForwdPckts.setStatus("current")
+_SapTlsDhcp6StatsSrvrForwdPckts_Type = Counter32
+_SapTlsDhcp6StatsSrvrForwdPckts_Object = MibTableColumn
+sapTlsDhcp6StatsSrvrForwdPckts = _SapTlsDhcp6StatsSrvrForwdPckts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1, 4),
+    _SapTlsDhcp6StatsSrvrForwdPckts_Type()
+)
+sapTlsDhcp6StatsSrvrForwdPckts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsSrvrForwdPckts.setStatus("current")
+_SapTlsDhcp6StatsClntDropdPckts_Type = Counter32
+_SapTlsDhcp6StatsClntDropdPckts_Object = MibTableColumn
+sapTlsDhcp6StatsClntDropdPckts = _SapTlsDhcp6StatsClntDropdPckts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1, 5),
+    _SapTlsDhcp6StatsClntDropdPckts_Type()
+)
+sapTlsDhcp6StatsClntDropdPckts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsClntDropdPckts.setStatus("current")
+_SapTlsDhcp6StatsSrvrDropdPckts_Type = Counter32
+_SapTlsDhcp6StatsSrvrDropdPckts_Object = MibTableColumn
+sapTlsDhcp6StatsSrvrDropdPckts = _SapTlsDhcp6StatsSrvrDropdPckts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 192, 1, 6),
+    _SapTlsDhcp6StatsSrvrDropdPckts_Type()
+)
+sapTlsDhcp6StatsSrvrDropdPckts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapTlsDhcp6StatsSrvrDropdPckts.setStatus("current")
+_SapIngAggPolicerStatsTable_Object = MibTable
+sapIngAggPolicerStatsTable = _SapIngAggPolicerStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193)
+)
+if mibBuilder.loadTexts:
+    sapIngAggPolicerStatsTable.setStatus("current")
+_SapIngAggPolicerStatsEntry_Object = MibTableRow
+sapIngAggPolicerStatsEntry = _SapIngAggPolicerStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1)
+)
+sapIngAggPolicerStatsEntry.setIndexNames(
+    (0, "TIMETRA-SERV-MIB", "svcId"),
+    (0, "TIMETRA-SAP-MIB", "sapPortId"),
+    (0, "TIMETRA-SAP-MIB", "sapEncapValue"),
+)
+if mibBuilder.loadTexts:
+    sapIngAggPolicerStatsEntry.setStatus("current")
+_SapIngAggPolStatsInProfFwdPkts_Type = Counter64
+_SapIngAggPolStatsInProfFwdPkts_Object = MibTableColumn
+sapIngAggPolStatsInProfFwdPkts = _SapIngAggPolStatsInProfFwdPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1, 47),
+    _SapIngAggPolStatsInProfFwdPkts_Type()
+)
+sapIngAggPolStatsInProfFwdPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapIngAggPolStatsInProfFwdPkts.setStatus("current")
+_SapIngAggPolStatsInProfFwdOcts_Type = Counter64
+_SapIngAggPolStatsInProfFwdOcts_Object = MibTableColumn
+sapIngAggPolStatsInProfFwdOcts = _SapIngAggPolStatsInProfFwdOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1, 48),
+    _SapIngAggPolStatsInProfFwdOcts_Type()
+)
+sapIngAggPolStatsInProfFwdOcts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapIngAggPolStatsInProfFwdOcts.setStatus("current")
+_SapIngAggPolStatsOutProfFwdPkts_Type = Counter64
+_SapIngAggPolStatsOutProfFwdPkts_Object = MibTableColumn
+sapIngAggPolStatsOutProfFwdPkts = _SapIngAggPolStatsOutProfFwdPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1, 49),
+    _SapIngAggPolStatsOutProfFwdPkts_Type()
+)
+sapIngAggPolStatsOutProfFwdPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapIngAggPolStatsOutProfFwdPkts.setStatus("current")
+_SapIngAggPolStatsOutProfFwdOcts_Type = Counter64
+_SapIngAggPolStatsOutProfFwdOcts_Object = MibTableColumn
+sapIngAggPolStatsOutProfFwdOcts = _SapIngAggPolStatsOutProfFwdOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1, 50),
+    _SapIngAggPolStatsOutProfFwdOcts_Type()
+)
+sapIngAggPolStatsOutProfFwdOcts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapIngAggPolStatsOutProfFwdOcts.setStatus("current")
+_SapIngAggPolStatsExcProfDropPkts_Type = Counter64
+_SapIngAggPolStatsExcProfDropPkts_Object = MibTableColumn
+sapIngAggPolStatsExcProfDropPkts = _SapIngAggPolStatsExcProfDropPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1, 51),
+    _SapIngAggPolStatsExcProfDropPkts_Type()
+)
+sapIngAggPolStatsExcProfDropPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapIngAggPolStatsExcProfDropPkts.setStatus("current")
+_SapIngAggPolStatsExcProfDropOcts_Type = Counter64
+_SapIngAggPolStatsExcProfDropOcts_Object = MibTableColumn
+sapIngAggPolStatsExcProfDropOcts = _SapIngAggPolStatsExcProfDropOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 3, 193, 1, 52),
+    _SapIngAggPolStatsExcProfDropOcts_Type()
+)
+sapIngAggPolStatsExcProfDropOcts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sapIngAggPolStatsExcProfDropOcts.setStatus("current")
 _SapTrapsPrefix_ObjectIdentity = ObjectIdentity
 sapTrapsPrefix = _SapTrapsPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 4, 3)
@@ -26280,6 +27089,11 @@ sapStaticHostEntry.registerAugmentions(
      "sapStaticHostRipEntry")
 )
 sapStaticHostRipEntry.setIndexNames(*sapStaticHostEntry.getIndexNames())
+tmnxSapMRtCpeChkEntry.registerAugmentions(
+    ("TIMETRA-SAP-MIB",
+     "tmnxSapMRtCpeChkStatEntry")
+)
+tmnxSapMRtCpeChkStatEntry.setIndexNames(*tmnxSapMRtCpeChkEntry.getIndexNames())
 
 # Managed Objects groups
 
@@ -26433,7 +27247,7 @@ tmnxSapAtmV6v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "sapAtmLLFOperStatus"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapAtmV6v0Group.setStatus("current")
+    tmnxSapAtmV6v0Group.setStatus("obsolete")
 
 tmnxSapBaseV6v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 103)
@@ -26938,19 +27752,12 @@ tmnxSapHsmdaV6v0Group = ObjectGroup(
 )
 tmnxSapHsmdaV6v0Group.setObjects(
       *(("TIMETRA-SAP-MIB", "sapIngressAggRateLimit"),
-        ("TIMETRA-SAP-MIB", "sapEgressHsmdaShaperOverride"),
         ("TIMETRA-SAP-MIB", "sapIngressHsmdaPacketOffOvr"),
-        ("TIMETRA-SAP-MIB", "sapEgressHsmdaPacketOffOverride"),
         ("TIMETRA-SAP-MIB", "sapIngQosHsmdaQueueRowStatus"),
         ("TIMETRA-SAP-MIB", "sapIngQosHsmdaQueueLastChanged"),
         ("TIMETRA-SAP-MIB", "sapIngQosHsmdaQueueAdminPIR"),
         ("TIMETRA-SAP-MIB", "sapIngQosHsmdaQueueAdminCIR"),
         ("TIMETRA-SAP-MIB", "sapIngQosHsmdaQueueSlopePolicy"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueRowStatus"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueLastChanged"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminPIR"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminCIR"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueSlopePolicy"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaQStatCustId"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaQStatHiPktsDropped"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaQStatLoPktsDropped"),
@@ -26972,25 +27779,7 @@ tmnxSapHsmdaV6v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "sapIngHsmdaCntrStInProfOctFwd"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaCntrStOutProfOctFwd"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaCntrStAllPktOffered"),
-        ("TIMETRA-SAP-MIB", "sapIngHsmdaCntrStAllOctOffered"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatCustId"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfPktDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfPktDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfOctDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfOctDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStCustId"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfPktDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfPktDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfOctDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfOctDrop"))
+        ("TIMETRA-SAP-MIB", "sapIngHsmdaCntrStAllOctOffered"))
 )
 if mibBuilder.loadTexts:
     tmnxSapHsmdaV6v0Group.setStatus("obsolete")
@@ -27247,19 +28036,6 @@ tmnxSapIgmpTrkGroup.setObjects(
 if mibBuilder.loadTexts:
     tmnxSapIgmpTrkGroup.setStatus("current")
 
-tmnxSapFrGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 126)
-)
-tmnxSapFrGroup.setObjects(
-      *(("TIMETRA-SAP-MIB", "sapFrInfoFrf12Mode"),
-        ("TIMETRA-SAP-MIB", "sapFrInfoSchedulingClass"),
-        ("TIMETRA-SAP-MIB", "sapFrInfoLastChanged"),
-        ("TIMETRA-SAP-MIB", "sapFrf12InfoFragmentThreshold"),
-        ("TIMETRA-SAP-MIB", "sapFrf12InfoLastChanged"))
-)
-if mibBuilder.loadTexts:
-    tmnxSapFrGroup.setStatus("obsolete")
-
 tmnxSapIpipeV7v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 127)
 )
@@ -27312,20 +28088,6 @@ tmnxSapPbbGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSapPbbGroup.setStatus("current")
-
-tmnxSapFrGroupV8v0 = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 131)
-)
-tmnxSapFrGroupV8v0.setObjects(
-      *(("TIMETRA-SAP-MIB", "sapFrInfoFrf12Mode"),
-        ("TIMETRA-SAP-MIB", "sapFrInfoSchedulingClass"),
-        ("TIMETRA-SAP-MIB", "sapFrInfoLastChanged"),
-        ("TIMETRA-SAP-MIB", "sapFrf12InfoFragmentThreshold"),
-        ("TIMETRA-SAP-MIB", "sapFrf12InfoLastChanged"),
-        ("TIMETRA-SAP-MIB", "sapFrf12InfoInterleave"))
-)
-if mibBuilder.loadTexts:
-    tmnxSapFrGroupV8v0.setStatus("current")
 
 tmnxSapTlsV8v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 132)
@@ -28124,7 +28886,7 @@ tmnxSapAtmV9v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "sapAtmPppStatsTxPackets"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapAtmV9v0Group.setStatus("current")
+    tmnxSapAtmV9v0Group.setStatus("obsolete")
 
 tmnxSapEthCfmMonitorGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 148)
@@ -28227,7 +28989,7 @@ tmnxSapMsapV9v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "msapAtmPlcyTblLastChgd"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapMsapV9v0Group.setStatus("current")
+    tmnxSapMsapV9v0Group.setStatus("obsolete")
 
 tmnxSapOverrideV9v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 153)
@@ -28457,17 +29219,6 @@ tmnxSapSubMgmtV9v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxSapSubMgmtV9v0Group.setStatus("current")
 
-tmnxSapHsmdaV9v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 158)
-)
-tmnxSapHsmdaV9v0Group.setObjects(
-      *(("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueMBS"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueWrrWeight"),
-        ("TIMETRA-SAP-MIB", "sapEgressHsmdaWrrPolicyOvr"))
-)
-if mibBuilder.loadTexts:
-    tmnxSapHsmdaV9v0Group.setStatus("obsolete")
-
 tmnxSapDefHostV9v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 159)
 )
@@ -28489,7 +29240,7 @@ tmnxSapFilterProfileV9v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "msapPlcySubMgmtDefFilterProfile"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapFilterProfileV9v0Group.setStatus("current")
+    tmnxSapFilterProfileV9v0Group.setStatus("obsolete")
 
 tmnxSapV10v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 161)
@@ -28744,7 +29495,7 @@ tmnxSapV11v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "sapTlsDhcp6UserDb"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapV11v0Group.setStatus("current")
+    tmnxSapV11v0Group.setStatus("obsolete")
 
 tmnxSapIpTnlGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 411)
@@ -28820,47 +29571,12 @@ tmnxSapGreV10v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxSapGreV10v0Group.setStatus("obsolete")
 
-tmnxSapHsmdaV10v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 414)
-)
-tmnxSapHsmdaV10v0Group.setObjects(
-      *(("TIMETRA-SAP-MIB", "sapEgressHsmdaShaperOverride"),
-        ("TIMETRA-SAP-MIB", "sapIngressHsmdaPacketOffOvr"),
-        ("TIMETRA-SAP-MIB", "sapEgressHsmdaPacketOffOverride"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueRowStatus"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueLastChanged"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminPIR"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminCIR"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueSlopePolicy"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatCustId"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfPktDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfPktDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfOctDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfOctDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStCustId"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfPktDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfPktDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfOctDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfOctDrop"))
-)
-if mibBuilder.loadTexts:
-    tmnxSapHsmdaV10v0Group.setStatus("obsolete")
-
 tmnxSapObsoletedV10v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 415)
 )
 tmnxSapObsoletedV10v0Group.setObjects(
       *(("TIMETRA-SAP-MIB", "sapIngressAggRateLimit"),
         ("TIMETRA-SAP-MIB", "sapIngressHsmdaPacketOffOvr"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminCIR"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaQStatCustId"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaQStatHiPktsDropped"),
         ("TIMETRA-SAP-MIB", "sapIngHsmdaQStatLoPktsDropped"),
@@ -29722,7 +30438,7 @@ tmnxSapIpipeFaultPropGroup.setObjects(
         ("TIMETRA-SAP-MIB", "sapIpipeRemainRecoveryTimer"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapIpipeFaultPropGroup.setStatus("current")
+    tmnxSapIpipeFaultPropGroup.setStatus("obsolete")
 
 tmnxSapStaticHostRipV13v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 458)
@@ -29806,7 +30522,7 @@ tmnxSapQosRateV13v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "sapEgrEncapGrpAggRateLimit"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapQosRateV13v0Group.setStatus("current")
+    tmnxSapQosRateV13v0Group.setStatus("obsolete")
 
 tmnxSapDhcpV13v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 466)
@@ -30955,7 +31671,7 @@ tmnxSapQosRateGroup.setObjects(
         ("TIMETRA-SAP-MIB", "sapEgressAggRateLmtHi"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapQosRateGroup.setStatus("current")
+    tmnxSapQosRateGroup.setStatus("obsolete")
 
 tmnxSapQosHsQOvrGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 509)
@@ -31562,10 +32278,11 @@ tmnxSapIngressAggRateV19v0Group = ObjectGroup(
 tmnxSapIngressAggRateV19v0Group.setObjects(
       *(("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerRateLo"),
         ("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerRateHi"),
-        ("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerBurst"))
+        ("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerBurst"),
+        ("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerMBS"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapIngressAggRateV19v0Group.setStatus("current")
+    tmnxSapIngressAggRateV19v0Group.setStatus("obsolete")
 
 tmnxIpTunnelEsaVmV19v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 543)
@@ -31728,41 +32445,15 @@ sapIngressIPCritOvrV20v10Group.setObjects(
 if mibBuilder.loadTexts:
     sapIngressIPCritOvrV20v10Group.setStatus("current")
 
-sapHsmdaObsoleteV21v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 556)
+sapEgressAggRateV21v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 555)
 )
-sapHsmdaObsoleteV21v0Group.setObjects(
-      *(("TIMETRA-SAP-MIB", "sapEgressHsmdaShaperOverride"),
-        ("TIMETRA-SAP-MIB", "sapEgressHsmdaPacketOffOverride"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueRowStatus"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueLastChanged"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminPIR"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueAdminCIR"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueSlopePolicy"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatCustId"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfPktDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfPktDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatInProfOctDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaQStatOutProfOctDropd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStCustId"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfPktDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfPktFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfPktDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStInProfOctDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfOctFwd"),
-        ("TIMETRA-SAP-MIB", "sapEgrHsmdaCntrStOutProfOctDrop"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueMBS"),
-        ("TIMETRA-SAP-MIB", "sapEgrQosHsmdaQueueWrrWeight"),
-        ("TIMETRA-SAP-MIB", "sapEgressHsmdaWrrPolicyOvr"))
+sapEgressAggRateV21v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapEgressAggRateAdaptRule"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggBurstLimit"))
 )
 if mibBuilder.loadTexts:
-    sapHsmdaObsoleteV21v0Group.setStatus("current")
+    sapEgressAggRateV21v0Group.setStatus("current")
 
 sapQueueOvrObsoleteV21v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 557)
@@ -31908,10 +32599,366 @@ tmnxSapStaticHostV22v0Group.setObjects(
         ("TIMETRA-SAP-MIB", "sapStaticHostMRtPreference"),
         ("TIMETRA-SAP-MIB", "sapStaticHostMRtTag"),
         ("TIMETRA-SAP-MIB", "sapStatHost6MRtPreference"),
-        ("TIMETRA-SAP-MIB", "sapStatHost6MRtTag"))
+        ("TIMETRA-SAP-MIB", "sapStatHost6MRtTag"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkLastMgmtChange"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkRowStatus"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkAddr"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkAddrType"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkInterval"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkDropCnt"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkTimeout"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkPaddingSize"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkEnableLog"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkFailMetric"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkFailPreference"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkFailTag"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkSrcAddrType"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkSrcAddr"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkFailWithdraw"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkUpTime"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkInPktCnt"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkOutPktCnt"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkDownTrans"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkUpTrans"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkTTL"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkStatus"))
 )
 if mibBuilder.loadTexts:
     tmnxSapStaticHostV22v0Group.setStatus("current")
+
+tmnxSapSharedPolicerV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 567)
+)
+tmnxSapSharedPolicerV22v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapQosSharedPolicerName")
+)
+if mibBuilder.loadTexts:
+    tmnxSapSharedPolicerV22v0Group.setStatus("current")
+
+tmnxSapDcpFpCountV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 569)
+)
+tmnxSapDcpFpCountV22v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapDcpFpStaticTotalExcdCount"),
+        ("TIMETRA-SAP-MIB", "sapDcpFpStaticExtCnfrmStateCount"),
+        ("TIMETRA-SAP-MIB", "sapDcpFpDynTotalExcdCount"),
+        ("TIMETRA-SAP-MIB", "sapDcpFpDynExitConformStateCount"),
+        ("TIMETRA-SAP-MIB", "sapDcpFpLocMonTotalExcdCount"),
+        ("TIMETRA-SAP-MIB", "sapDcpFpLocMonExtCnfrmStateCount"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapDcpFpCountV22v0Group.setStatus("current")
+
+tmnxSapEgrAggRatePerV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 570)
+)
+tmnxSapEgrAggRatePerV22v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapEgressQosAggRatePIRPercent"),
+        ("TIMETRA-SAP-MIB", "sapEgressQosAggRateCIRPercent"),
+        ("TIMETRA-SAP-MIB", "sapEgressQosAggRateType"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgrAggRatePerV22v0Group.setStatus("current")
+
+tmnxSapEgrAggRateV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 571)
+)
+tmnxSapEgrAggRateV22v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapEgrAggRateLimitHi"),
+        ("TIMETRA-SAP-MIB", "sapEgrAggRateLimit"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapSchedAssignd"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapAssignedRate"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapOperRate"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapConsumedRate"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapAvgFrameOvhd"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapAfoRealTime"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapSchedActive"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapSchedRunning"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapInvlClassUse"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapBurstLimit"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapDepth"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapPacketMode"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapOutOfDate"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShapQSetSize"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgrAggRateV22v0Group.setStatus("current")
+
+sapAlmpV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 572)
+)
+sapAlmpV23v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapTlsAutoLearnMacProtectOper"),
+        ("TIMETRA-SAP-MIB", "sapTlsRestUnprotDstMacOper"),
+        ("TIMETRA-SAP-MIB", "sapTlsAutoLrnMacPrtctExcListOper"))
+)
+if mibBuilder.loadTexts:
+    sapAlmpV23v0Group.setStatus("current")
+
+sapAtmObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 573)
+)
+sapAtmObsoleteGroup.setObjects(
+      *(("TIMETRA-SAP-MIB", "msapAtmPlcyEgrTrafficDescIndex"),
+        ("TIMETRA-SAP-MIB", "msapAtmPlcyIngTrafficDescIndex"),
+        ("TIMETRA-SAP-MIB", "msapAtmPlcyLastChanged"),
+        ("TIMETRA-SAP-MIB", "msapAtmPlcyOamAlarmCellHandling"),
+        ("TIMETRA-SAP-MIB", "msapAtmPlcyOamPeriodicLoopback"),
+        ("TIMETRA-SAP-MIB", "msapAtmPlcyTblLastChgd"),
+        ("TIMETRA-SAP-MIB", "sapAtmDetectedEncapsulation"),
+        ("TIMETRA-SAP-MIB", "sapAtmEgressTrafficDescIndex"),
+        ("TIMETRA-SAP-MIB", "sapAtmEgressTrafficDescIndexOvr"),
+        ("TIMETRA-SAP-MIB", "sapAtmEncapsulation"),
+        ("TIMETRA-SAP-MIB", "sapAtmIngressTrafficDescIndex"),
+        ("TIMETRA-SAP-MIB", "sapAtmIngressTrafficDescIndexOvr"),
+        ("TIMETRA-SAP-MIB", "sapAtmLLFAdminStatus"),
+        ("TIMETRA-SAP-MIB", "sapAtmLLFOperStatus"),
+        ("TIMETRA-SAP-MIB", "sapAtmOamAlarmCellHandling"),
+        ("TIMETRA-SAP-MIB", "sapAtmOamPeriodicLoopback"),
+        ("TIMETRA-SAP-MIB", "sapAtmOamTerminate"),
+        ("TIMETRA-SAP-MIB", "sapAtmPppStatsRxDropped"),
+        ("TIMETRA-SAP-MIB", "sapAtmPppStatsRxPackets"),
+        ("TIMETRA-SAP-MIB", "sapAtmPppStatsTxPackets"),
+        ("TIMETRA-SAP-MIB", "sapAtmSubPppIndex"),
+        ("TIMETRA-SAP-MIB", "sapAtmVcRangeLastMgmtChange"),
+        ("TIMETRA-SAP-MIB", "sapAtmVcRangeRowStatus"),
+        ("TIMETRA-SAP-MIB", "sapAtmVcRangeVciEnd"),
+        ("TIMETRA-SAP-MIB", "sapAtmVcRangeVciStart"),
+        ("TIMETRA-SAP-MIB", "sapAtmVcRangeVpiEnd"),
+        ("TIMETRA-SAP-MIB", "sapAtmVcRangeVpiStart"))
+)
+if mibBuilder.loadTexts:
+    sapAtmObsoleteGroup.setStatus("current")
+
+sapTlsPppObsoletedGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 575)
+)
+sapTlsPppObsoletedGroup.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapTlsPppMsapTrigger"),
+        ("TIMETRA-SAP-MIB", "sapTlsPppPolicy"),
+        ("TIMETRA-SAP-MIB", "sapTlsPppUserDb"))
+)
+if mibBuilder.loadTexts:
+    sapTlsPppObsoletedGroup.setStatus("current")
+
+sapEgressVPortV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 576)
+)
+sapEgressVPortV23v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapEgressVirtualPort")
+)
+if mibBuilder.loadTexts:
+    sapEgressVPortV23v0Group.setStatus("current")
+
+sapTlsObsoletedV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 577)
+)
+sapTlsObsoletedV23v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapTlsDhcp6Snoop")
+)
+if mibBuilder.loadTexts:
+    sapTlsObsoletedV23v0Group.setStatus("current")
+
+tmnxSapV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 578)
+)
+tmnxSapV23v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapTlsDhcp6AdminState"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6Description"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6InterfaceId"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6RemoteId"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6RemoteIdString"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6LdraAdminState"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6InterfaceType"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6StatsClntSnoopdPckts"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6StatsSrvrSnoopdPckts"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6StatsClntForwdPckts"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6StatsSrvrForwdPckts"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6StatsClntDropdPckts"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6StatsSrvrDropdPckts"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcp6UserDb"),
+        ("TIMETRA-SAP-MIB", "sapSiteName"),
+        ("TIMETRA-SAP-MIB", "sapTlsDhcpUserDb"),
+        ("TIMETRA-SAP-MIB", "sapHostLockoutPolicy"),
+        ("TIMETRA-SAP-MIB", "sapTlsAutoLearnMacProtect"),
+        ("TIMETRA-SAP-MIB", "sapIngressFPQGrp"),
+        ("TIMETRA-SAP-MIB", "sapIngressFPQGrpInstanceId"),
+        ("TIMETRA-SAP-MIB", "sapIpv6HostInfoIpoeSLAACHosts"),
+        ("TIMETRA-SAP-MIB", "sapIgnoreOperDown"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapV23v0Group.setStatus("current")
+
+tmnxSapBaseSIngAggPolV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 579)
+)
+tmnxSapBaseSIngAggPolV23v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapIngAggPolStatsInProfFwdPkts"),
+        ("TIMETRA-SAP-MIB", "sapIngAggPolStatsInProfFwdOcts"),
+        ("TIMETRA-SAP-MIB", "sapIngAggPolStatsOutProfFwdPkts"),
+        ("TIMETRA-SAP-MIB", "sapIngAggPolStatsOutProfFwdOcts"),
+        ("TIMETRA-SAP-MIB", "sapIngAggPolStatsExcProfDropPkts"),
+        ("TIMETRA-SAP-MIB", "sapIngAggPolStatsExcProfDropOcts"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapBaseSIngAggPolV23v0Group.setStatus("current")
+
+tmnxSapEgrQosAggShpOvrSapV230Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 580)
+)
+tmnxSapEgrQosAggShpOvrSapV230Grp.setObjects(
+    ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShpQSetSzOvr")
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgrQosAggShpOvrSapV230Grp.setStatus("current")
+
+sapIpipeFaultPropObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 581)
+)
+sapIpipeFaultPropObsoleteGroup.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapIpipeLegacyFaultNotification"),
+        ("TIMETRA-SAP-MIB", "sapIpipeRemainRecoveryTimer"))
+)
+if mibBuilder.loadTexts:
+    sapIpipeFaultPropObsoleteGroup.setStatus("current")
+
+tSapQosRateObsoletedV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 582)
+)
+tSapQosRateObsoletedV24v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapEgressAggRateLmt"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggRateLmtHi"))
+)
+if mibBuilder.loadTexts:
+    tSapQosRateObsoletedV24v0Group.setStatus("current")
+
+tmnxSapQosRateV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 583)
+)
+tmnxSapQosRateV24v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapTmplEgrAggRateLimit"),
+        ("TIMETRA-SAP-MIB", "sapEgrEncapGrpAggRateLimit"),
+        ("TIMETRA-SAP-MIB", "sapIngQosQAdminPIRHi"),
+        ("TIMETRA-SAP-MIB", "sapIngQosQAdminPIRLo"),
+        ("TIMETRA-SAP-MIB", "sapIngQosQAdminCIRHi"),
+        ("TIMETRA-SAP-MIB", "sapIngQosQAdminCIRLo"),
+        ("TIMETRA-SAP-MIB", "sapEgrQosQAdminPIRHi"),
+        ("TIMETRA-SAP-MIB", "sapEgrQosQAdminPIRLo"),
+        ("TIMETRA-SAP-MIB", "sapEgrQosQAdminCIRHi"),
+        ("TIMETRA-SAP-MIB", "sapEgrQosQAdminCIRLo"),
+        ("TIMETRA-SAP-MIB", "sapIngPlcrCtrlOvrMaxRateHi"),
+        ("TIMETRA-SAP-MIB", "sapIngPlcrCtrlOvrMaxRateLo"),
+        ("TIMETRA-SAP-MIB", "sapEgrPlcrCtrlOvrMaxRateHi"),
+        ("TIMETRA-SAP-MIB", "sapEgrPlcrCtrlOvrMaxRateLo"),
+        ("TIMETRA-SAP-MIB", "sapEgrEncapGrpAggRateLimitHi"),
+        ("TIMETRA-SAP-MIB", "sapTmplEgrAggRateLimitHi"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapQosRateV24v0Group.setStatus("current")
+
+tmnxSapEgrAggRateV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 584)
+)
+tmnxSapEgrAggRateV24v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapEgrShrdQAggRateBurstLmt")
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgrAggRateV24v0Group.setStatus("current")
+
+tmnxSapEgressLatencyV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 585)
+)
+tmnxSapEgressLatencyV24v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapEgressLatencyBudget")
+)
+if mibBuilder.loadTexts:
+    tmnxSapEgressLatencyV24v0Group.setStatus("current")
+
+tmnxIpTnlTransProfV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 586)
+)
+tmnxIpTnlTransProfV24v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "tmnxIpTnlIPsecStatPpkNegotiated")
+)
+if mibBuilder.loadTexts:
+    tmnxIpTnlTransProfV24v0Group.setStatus("current")
+
+sapQtagNormalizationV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 587)
+)
+sapQtagNormalizationV24v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapQtagNormalization"),
+        ("TIMETRA-SAP-MIB", "sapQtagNormalizationEncap"))
+)
+if mibBuilder.loadTexts:
+    sapQtagNormalizationV24v0Group.setStatus("current")
+
+sapIngFilterSetV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 588)
+)
+sapIngFilterSetV24v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapIngressFilterSet")
+)
+if mibBuilder.loadTexts:
+    sapIngFilterSetV24v0Group.setStatus("current")
+
+sapIngAggPolicerV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 589)
+)
+sapIngAggPolicerV25v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "sapIngressAggregatePlcrAlgoType")
+)
+if mibBuilder.loadTexts:
+    sapIngAggPolicerV25v0Group.setStatus("current")
+
+sapIngAggRateV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 590)
+)
+sapIngAggRateV25v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerRateLo"),
+        ("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerRateHi"),
+        ("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerMBS"))
+)
+if mibBuilder.loadTexts:
+    sapIngAggRateV25v0Group.setStatus("current")
+
+tmnxSapObsoletedV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 592)
+)
+tmnxSapObsoletedV25v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapIngressAggregatePolicerBurst"),
+        ("TIMETRA-SAP-MIB", "sapStaticHostFilterProfile"),
+        ("TIMETRA-SAP-MIB", "sapSubMgmtDefFilterProfile"),
+        ("TIMETRA-SAP-MIB", "msapPlcySubMgmtDefFilterProfile"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapObsoletedV25v0Group.setStatus("current")
+
+sapTlsMacAddrV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 593)
+)
+sapTlsMacAddrV25v0Group.setObjects(
+      *(("TIMETRA-SAP-MIB", "sapTlsFdbProtectedMacAddrRec"),
+        ("TIMETRA-SAP-MIB", "sapTlsFdbProtMacAddrRecLastChgd"),
+        ("TIMETRA-SAP-MIB", "sapTlsExtPbbProtectedMacAddrRec"),
+        ("TIMETRA-SAP-MIB", "sapTlsExtPbbProtMacAddrRecLstChg"),
+        ("TIMETRA-SAP-MIB", "sapTlsExtTableHighUtilization"),
+        ("TIMETRA-SAP-MIB", "sapTlsNonBlockMoveRateXMacAddr"),
+        ("TIMETRA-SAP-MIB", "sapTlsNoBlckMvRateXMacAddrLstChg"),
+        ("TIMETRA-SAP-MIB", "sapTlsMoveRateExceededMacAddr"),
+        ("TIMETRA-SAP-MIB", "sapTlsMvRateExceedMacAddrLstChgd"))
+)
+if mibBuilder.loadTexts:
+    sapTlsMacAddrV25v0Group.setStatus("current")
+
+sapEgrQosSinkExcessBWV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 598)
+)
+sapEgrQosSinkExcessBWV25v0Grp.setObjects(
+    ("TIMETRA-SAP-MIB", "sapEgressQosSinkExcessBW")
+)
+if mibBuilder.loadTexts:
+    sapEgrQosSinkExcessBWV25v0Grp.setStatus("current")
 
 
 # Notification objects
@@ -32415,7 +33462,7 @@ sapAtmPppSessionFailure.setObjects(
 )
 if mibBuilder.loadTexts:
     sapAtmPppSessionFailure.setStatus(
-        "current"
+        "obsolete"
     )
 
 sapAtmPppNcpFailure = NotificationType(
@@ -32431,7 +33478,7 @@ sapAtmPppNcpFailure.setObjects(
 )
 if mibBuilder.loadTexts:
     sapAtmPppNcpFailure.setStatus(
-        "current"
+        "obsolete"
     )
 
 sapIpipeCeIpAddrChange = NotificationType(
@@ -32816,6 +33863,17 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxSapMRtCpeChkStatusChange = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 4, 3, 0, 64)
+)
+tmnxSapMRtCpeChkStatusChange.setObjects(
+    ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkStatus")
+)
+if mibBuilder.loadTexts:
+    tmnxSapMRtCpeChkStatusChange.setStatus(
+        "current"
+    )
+
 topologyChangeSapMajorState = NotificationType(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 4, 5, 0, 1)
 )
@@ -33095,7 +34153,7 @@ tmnxSapNotificationV9v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxSapNotificationV9v0Group.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxSapIpipeNotificationGroup = NotificationGroup(
@@ -33244,6 +34302,17 @@ sapNotifyV20v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     sapNotifyV20v0Group.setStatus(
+        "current"
+    )
+
+tmnxSapNotifyV22v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 2, 568)
+)
+tmnxSapNotifyV22v0Group.setObjects(
+    ("TIMETRA-SAP-MIB", "tmnxSapMRtCpeChkStatusChange")
+)
+if mibBuilder.loadTexts:
+    tmnxSapNotifyV22v0Group.setStatus(
         "current"
     )
 
@@ -33498,7 +34567,6 @@ tmnxSap7750V7v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapBsxV7v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV7v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapTlsV7v0Group"))
@@ -33533,7 +34601,6 @@ tmnxSap7710V7v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMrpV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV7v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapTlsV7v0Group"))
@@ -33614,7 +34681,6 @@ tmnxSap7750V8v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -33661,7 +34727,6 @@ tmnxSap7710V8v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -33759,7 +34824,6 @@ tmnxSap7750V9v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -33805,7 +34869,6 @@ tmnxSap7710V9v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -33816,7 +34879,6 @@ tmnxSap7710V9v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -33930,7 +34992,6 @@ tmnxSap7750V10v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -33984,7 +35045,6 @@ tmnxSap7710V10v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -33995,7 +35055,6 @@ tmnxSap7710V10v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34041,7 +35100,6 @@ tmnxSap7450V11v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapDhcpV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapDhcpV11v0Group"),
@@ -34116,7 +35174,6 @@ tmnxSap7750V11v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34132,7 +35189,6 @@ tmnxSap7750V11v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34201,7 +35257,6 @@ tmnxSap7710V11v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34214,7 +35269,6 @@ tmnxSap7710V11v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34273,7 +35327,6 @@ tmnxSap7450V12v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapDhcpV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapDhcpV11v0Group"),
@@ -34357,7 +35410,6 @@ tmnxSap7750V12v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34373,7 +35425,6 @@ tmnxSap7750V12v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34454,7 +35505,6 @@ tmnxSap7710V12v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34467,7 +35517,6 @@ tmnxSap7710V12v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34533,7 +35582,6 @@ tmnxSap7450V13v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapDhcpV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapDhcpV11v0Group"),
@@ -34629,7 +35677,6 @@ tmnxSap7750V13v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34645,7 +35692,6 @@ tmnxSap7750V13v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34737,7 +35783,6 @@ tmnxSap7710V13v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34750,7 +35795,6 @@ tmnxSap7710V13v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34839,8 +35883,6 @@ tmnxSap7xxxV14v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34855,7 +35897,6 @@ tmnxSap7xxxV14v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -34969,8 +36010,6 @@ tmnxSap7xxxV15v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -34985,7 +36024,6 @@ tmnxSap7xxxV15v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -35113,8 +36151,6 @@ tmnxSap7xxxV16v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -35129,7 +36165,6 @@ tmnxSap7xxxV16v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -35265,8 +36300,6 @@ tmnxSap7xxxV15v1Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -35281,7 +36314,6 @@ tmnxSap7xxxV15v1Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -35409,8 +36441,6 @@ tmnxSap7xxxV19v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV9v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapHsmdaV10v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
@@ -35425,7 +36455,6 @@ tmnxSap7xxxV19v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -35544,7 +36573,6 @@ tmnxSap7xxxV19v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapVlanQosPlcyV19v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateCIRV19v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgPlcyPlcerStatV19v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapIngressAggRateV19v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxIpTunnelEsaVmV19v0Group"),
         ("TIMETRA-SAP-MIB", "sapNotifyObjsPortStateGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapQosStatsV19v0Group"))
@@ -35602,7 +36630,6 @@ tmnxSap7xxxV21v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -35734,6 +36761,7 @@ tmnxSap7xxxV21v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV21v0Group"),
         ("TIMETRA-SAP-MIB", "sapCfmSquelchInCtagGroup"),
         ("TIMETRA-SAP-MIB", "tmnxIPTunnelPMTUV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggRateV21v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIngQMonQDepthV21v0Group"),
         ("TIMETRA-SAP-MIB", "sapLastChangeV21v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapEgressHQosV21v0Group"),
@@ -35752,8 +36780,6 @@ tmnxSapV22v0Compliance = ModuleCompliance(
 tmnxSapV22v0Compliance.setObjects(
       *(("TIMETRA-SAP-MIB", "tmnxSapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapBaseV6v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapAtmV6v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapAtmV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV11v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapPortIdV6v0Group"),
@@ -35761,7 +36787,6 @@ tmnxSapV22v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapMstiV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapL2ptV6v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapMsapV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
@@ -35777,7 +36802,6 @@ tmnxSapV22v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapFrGroupV8v0"),
         ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
@@ -35796,7 +36820,6 @@ tmnxSapV22v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxSapEthCfmMonitorGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapEthCfmGroup"),
         ("TIMETRA-SAP-MIB", "tmnxSapCflowdGroupV11v0"),
-        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapDefHostV9v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapDefHostV14v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapFilterProfileV9v0Group"),
@@ -35909,16 +36932,572 @@ tmnxSapV22v0Compliance.setObjects(
         ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV21v0Group"),
         ("TIMETRA-SAP-MIB", "sapCfmSquelchInCtagGroup"),
         ("TIMETRA-SAP-MIB", "tmnxIPTunnelPMTUV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggRateV21v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapIngQMonQDepthV21v0Group"),
         ("TIMETRA-SAP-MIB", "sapLastChangeV21v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapEgressHQosV21v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapSubV21v0Group"),
         ("TIMETRA-SAP-MIB", "sapIPFilterPairV22v0Group"),
         ("TIMETRA-SAP-MIB", "tmnxSapQueueOvrV22v0Group"),
-        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV22v0Group"))
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSharedPolicerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpFpCountV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRatePerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateV22v0Group"))
 )
 if mibBuilder.loadTexts:
     tmnxSapV22v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxSapV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 1, 136)
+)
+tmnxSapV23v0Compliance.setObjects(
+      *(("TIMETRA-SAP-MIB", "tmnxSapV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPortIdV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSubMgmtV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMstiV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2ptV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCemV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMrpV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV7v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPbbV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV7v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFPropBMacV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPlcrV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthRingGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOverrideV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOverrideV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapGreObsoletedGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapGreV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifObsoletedGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMvrpNotificationV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmMonitorGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCflowdGroupV11v0"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDefHostV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDefHostV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFilterProfileV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeNotificationGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSpbGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpTnlGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapLagV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMonitorIPGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatsV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFlowSPecV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDCpuProtV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpNotifyObjsV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpNotifyV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrPortQGrpV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSpbV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSchedulerRateV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthLoopbackV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthLpbkNotifyV11v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsFdbMacStatsGroup"),
+        ("TIMETRA-SAP-MIB", "sapTlsEtreeGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxMsapPlcyCpmProtV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelV12v0Group"),
+        ("TIMETRA-SAP-MIB", "sapLagV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIPTunnelGreKeyV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelFragStatV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEncapNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEncaNotifyObjsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlOperChgGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxMsapQosV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatHost6Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatHost6V13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpoeV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDnGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosSchedV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeFaultPropGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostRipV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseStatsV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDiamNasreqGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapRipNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosRateV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapShcvPolicyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMvrpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrEncapGrpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "sapBgpEvpnMplsMhGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVplsV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosStatsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStickyMsapGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapInfoV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpV6FilterV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxEvpnMplsMacMovNotifGroup"),
+        ("TIMETRA-SAP-MIB", "sapEthLoopbackV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsPbbV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVprnLoopbackV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2tpv3V16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBgpEvpnAlmpGroup"),
+        ("TIMETRA-SAP-MIB", "sapL3LoopbackNotifGroup"),
+        ("TIMETRA-SAP-MIB", "sapV14v0NotifyObjsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosStatsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCfmLmmPerQosV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosQDropTailGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEsmMacV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosRateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosHsQOvrGroup"),
+        ("TIMETRA-SAP-MIB", "tSapQosQGrpIngRedirectListGroup"),
+        ("TIMETRA-SAP-MIB", "tSapQosQGrpEgrRedirectListGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxDDosDCpuProtPolicyGrp"),
+        ("TIMETRA-SAP-MIB", "tSapIpTnlTcpMssAdjustV15v0Grp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosHsWrrGrpOvrGroup"),
+        ("TIMETRA-SAP-MIB", "sapEvpnMhEthSegV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosQBurstLimitOvrGrp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosPlcrOvrV15v1Group"),
+        ("TIMETRA-SAP-MIB", "sapPppoeRedirectGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTemplateQosV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTmplFilterNameV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2tpv3ExtGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngressQinqV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPfcpV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseStatsAggregateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOperStatusGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBWGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQtagV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVlanQosPlcyV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateCIRV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgPlcyPlcerStatV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngressAggRateV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEsaVmV19v0Group"),
+        ("TIMETRA-SAP-MIB", "sapNotifyObjsPortStateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosStatsV19v0Group"),
+        ("TIMETRA-SAP-MIB", "sapNotifyV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsMacListV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsBgpVplsEvpnV20v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStickyMsapV20v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQMonQDepthV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngTrtcm2AggRateV20v10Group"),
+        ("TIMETRA-SAP-MIB", "sapIngressIPCritOvrV20v10Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapCfmSquelchInCtagGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIPTunnelPMTUV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggRateV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngQMonQDepthV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapLastChangeV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgressHQosV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSubV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIPFilterPairV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQueueOvrV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSharedPolicerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpFpCountV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRatePerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateV22v0Group"),
+        ("TIMETRA-SAP-MIB", "sapAlmpV23v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressVPortV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseSIngAggPolV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShpOvrSapV230Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapV23v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxSapV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 1, 137)
+)
+tmnxSapV24v0Compliance.setObjects(
+      *(("TIMETRA-SAP-MIB", "tmnxSapV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPortIdV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSubMgmtV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMstiV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2ptV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCemV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMrpV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV7v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPbbV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV7v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFPropBMacV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPlcrV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthRingGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOverrideV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOverrideV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapGreObsoletedGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapGreV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifObsoletedGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMvrpNotificationV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmMonitorGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCflowdGroupV11v0"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDefHostV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDefHostV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFilterProfileV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeNotificationGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSpbGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpTnlGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapLagV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMonitorIPGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatsV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFlowSPecV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDCpuProtV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpNotifyObjsV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpNotifyV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrPortQGrpV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSpbV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSchedulerRateV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthLoopbackV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthLpbkNotifyV11v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsFdbMacStatsGroup"),
+        ("TIMETRA-SAP-MIB", "sapTlsEtreeGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxMsapPlcyCpmProtV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelV12v0Group"),
+        ("TIMETRA-SAP-MIB", "sapLagV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIPTunnelGreKeyV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelFragStatV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEncapNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEncaNotifyObjsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlOperChgGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxMsapQosV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatHost6Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatHost6V13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpoeV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDnGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosSchedV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostRipV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseStatsV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDiamNasreqGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapRipNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapShcvPolicyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMvrpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrEncapGrpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "sapBgpEvpnMplsMhGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVplsV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosStatsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStickyMsapGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapInfoV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpV6FilterV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxEvpnMplsMacMovNotifGroup"),
+        ("TIMETRA-SAP-MIB", "sapEthLoopbackV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsPbbV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVprnLoopbackV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2tpv3V16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBgpEvpnAlmpGroup"),
+        ("TIMETRA-SAP-MIB", "sapL3LoopbackNotifGroup"),
+        ("TIMETRA-SAP-MIB", "sapV14v0NotifyObjsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosStatsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCfmLmmPerQosV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosQDropTailGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEsmMacV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosHsQOvrGroup"),
+        ("TIMETRA-SAP-MIB", "tSapQosQGrpIngRedirectListGroup"),
+        ("TIMETRA-SAP-MIB", "tSapQosQGrpEgrRedirectListGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxDDosDCpuProtPolicyGrp"),
+        ("TIMETRA-SAP-MIB", "tSapIpTnlTcpMssAdjustV15v0Grp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosHsWrrGrpOvrGroup"),
+        ("TIMETRA-SAP-MIB", "sapEvpnMhEthSegV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosQBurstLimitOvrGrp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosPlcrOvrV15v1Group"),
+        ("TIMETRA-SAP-MIB", "sapPppoeRedirectGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTemplateQosV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTmplFilterNameV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2tpv3ExtGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngressQinqV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPfcpV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseStatsAggregateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOperStatusGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBWGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQtagV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVlanQosPlcyV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateCIRV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgPlcyPlcerStatV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEsaVmV19v0Group"),
+        ("TIMETRA-SAP-MIB", "sapNotifyObjsPortStateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosStatsV19v0Group"),
+        ("TIMETRA-SAP-MIB", "sapNotifyV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsMacListV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsBgpVplsEvpnV20v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStickyMsapV20v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQMonQDepthV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngTrtcm2AggRateV20v10Group"),
+        ("TIMETRA-SAP-MIB", "sapIngressIPCritOvrV20v10Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapCfmSquelchInCtagGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIPTunnelPMTUV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggRateV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngQMonQDepthV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapLastChangeV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgressHQosV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSubV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIPFilterPairV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQueueOvrV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSharedPolicerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpFpCountV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRatePerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateV22v0Group"),
+        ("TIMETRA-SAP-MIB", "sapAlmpV23v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressVPortV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseSIngAggPolV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShpOvrSapV230Grp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosRateV24v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateV24v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgressLatencyV24v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV24v0Group"),
+        ("TIMETRA-SAP-MIB", "sapQtagNormalizationV24v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngFilterSetV24v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapV24v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxSapV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 3, 1, 138)
+)
+tmnxSapV25v0Compliance.setObjects(
+      *(("TIMETRA-SAP-MIB", "tmnxSapV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPortIdV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSubMgmtV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMstiV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2ptV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV6v1Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCemNotificationV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxTlsMsapPppoeV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCemV6v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMrpV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV7v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBsxV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapArpHostGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgmpTrkV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapRadiusFallbackGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPbbGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPbbV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV7v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFPropBMacV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPlcrV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthRingGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOverrideV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOverrideV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapGreObsoletedGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapGreV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifObsoletedGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMvrpNotificationV8v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmMonitorGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCflowdGroupV11v0"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDefHostV9v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDefHostV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpipeNotificationGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSpbGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpTnlGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapLagV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMonitorIPGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatsV10v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapFlowSPecV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDCpuProtV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpNotifyObjsV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpNotifyV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrPortQGrpV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSpbV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSchedulerRateV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthLoopbackV11v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthLpbkNotifyV11v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsFdbMacStatsGroup"),
+        ("TIMETRA-SAP-MIB", "sapTlsEtreeGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxMsapPlcyCpmProtV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEthCfmV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelV12v0Group"),
+        ("TIMETRA-SAP-MIB", "sapLagV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIPTunnelGreKeyV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelFragStatV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEncapNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEncaNotifyObjsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlOperChgGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxMsapQosV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV12v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatHost6Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStatHost6V13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpoeV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDnGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosSchedV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostRipV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseStatsV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDiamNasreqGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapRipNotifyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotificationV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDhcpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapShcvPolicyGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMvrpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrEncapGrpV13v0Group"),
+        ("TIMETRA-SAP-MIB", "sapBgpEvpnMplsMhGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVplsV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosStatsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStickyMsapGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapInfoV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIpV6FilterV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxEvpnMplsMacMovNotifGroup"),
+        ("TIMETRA-SAP-MIB", "sapEthLoopbackV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsPbbV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVprnLoopbackV14v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2tpv3V16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBgpEvpnAlmpGroup"),
+        ("TIMETRA-SAP-MIB", "sapL3LoopbackNotifGroup"),
+        ("TIMETRA-SAP-MIB", "sapV14v0NotifyObjsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosStatsGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapCfmLmmPerQosV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosQDropTailGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEsmMacV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosHsQOvrGroup"),
+        ("TIMETRA-SAP-MIB", "tSapQosQGrpIngRedirectListGroup"),
+        ("TIMETRA-SAP-MIB", "tSapQosQGrpEgrRedirectListGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxDDosDCpuProtPolicyGrp"),
+        ("TIMETRA-SAP-MIB", "tSapIpTnlTcpMssAdjustV15v0Grp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTlsV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapMsapV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosHsWrrGrpOvrGroup"),
+        ("TIMETRA-SAP-MIB", "sapEvpnMhEthSegV15v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosQBurstLimitOvrGrp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosPlcrOvrV15v1Group"),
+        ("TIMETRA-SAP-MIB", "sapPppoeRedirectGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTemplateQosV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapTmplFilterNameV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapL2tpv3ExtGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngressQinqV16v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapPfcpV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseStatsAggregateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapOperStatusGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBWGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQtagV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapVlanQosPlcyV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateCIRV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIgPlcyPlcerStatV19v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTunnelEsaVmV19v0Group"),
+        ("TIMETRA-SAP-MIB", "sapNotifyObjsPortStateGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosStatsV19v0Group"),
+        ("TIMETRA-SAP-MIB", "sapNotifyV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsMacListV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsBgpVplsEvpnV20v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStickyMsapV20v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQMonQDepthV20v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngTrtcm2AggRateV20v10Group"),
+        ("TIMETRA-SAP-MIB", "sapIngressIPCritOvrV20v10Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapCfmSquelchInCtagGroup"),
+        ("TIMETRA-SAP-MIB", "tmnxIPTunnelPMTUV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressAggRateV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapIngQMonQDepthV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapLastChangeV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgressHQosV21v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSubV21v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIPFilterPairV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQueueOvrV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapStaticHostV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapSharedPolicerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapNotifyV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapDcpFpCountV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRatePerV22v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateV22v0Group"),
+        ("TIMETRA-SAP-MIB", "sapAlmpV23v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgressVPortV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapBaseSIngAggPolV23v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrQosAggShpOvrSapV230Grp"),
+        ("TIMETRA-SAP-MIB", "tmnxSapQosRateV24v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgrAggRateV24v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxSapEgressLatencyV24v0Group"),
+        ("TIMETRA-SAP-MIB", "tmnxIpTnlTransProfV24v0Group"),
+        ("TIMETRA-SAP-MIB", "sapQtagNormalizationV24v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngFilterSetV24v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngAggPolicerV25v0Group"),
+        ("TIMETRA-SAP-MIB", "sapIngAggRateV25v0Group"),
+        ("TIMETRA-SAP-MIB", "sapTlsMacAddrV25v0Group"),
+        ("TIMETRA-SAP-MIB", "sapEgrQosSinkExcessBWV25v0Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapV25v0Compliance.setStatus(
         "current"
     )
 
@@ -35971,6 +37550,9 @@ mibBuilder.exportSymbols(
        "tmnxSap7xxxV20v0Compliance": tmnxSap7xxxV20v0Compliance,
        "tmnxSap7xxxV21v0Compliance": tmnxSap7xxxV21v0Compliance,
        "tmnxSapV22v0Compliance": tmnxSapV22v0Compliance,
+       "tmnxSapV23v0Compliance": tmnxSapV23v0Compliance,
+       "tmnxSapV24v0Compliance": tmnxSapV24v0Compliance,
+       "tmnxSapV25v0Compliance": tmnxSapV25v0Compliance,
        "tmnxSapGroups": tmnxSapGroups,
        "tmnxSapV6v0Group": tmnxSapV6v0Group,
        "tmnxSapTlsV6v0Group": tmnxSapTlsV6v0Group,
@@ -35998,12 +37580,10 @@ mibBuilder.exportSymbols(
        "tmnxSapArpHostGroup": tmnxSapArpHostGroup,
        "tmnxSapV7v0Group": tmnxSapV7v0Group,
        "tmnxSapIgmpTrkGroup": tmnxSapIgmpTrkGroup,
-       "tmnxSapFrGroup": tmnxSapFrGroup,
        "tmnxSapIpipeV7v0Group": tmnxSapIpipeV7v0Group,
        "tmnxSapBsxV7v0Group": tmnxSapBsxV7v0Group,
        "tmnxSapRadiusFallbackGroup": tmnxSapRadiusFallbackGroup,
        "tmnxSapPbbGroup": tmnxSapPbbGroup,
-       "tmnxSapFrGroupV8v0": tmnxSapFrGroupV8v0,
        "tmnxSapTlsV8v0Group": tmnxSapTlsV8v0Group,
        "tmnxSapDhcpV8v0Group": tmnxSapDhcpV8v0Group,
        "tmnxSapV8v0Group": tmnxSapV8v0Group,
@@ -36030,7 +37610,6 @@ mibBuilder.exportSymbols(
        "tmnxSapEgrEncapGrpV9v0Group": tmnxSapEgrEncapGrpV9v0Group,
        "tmnxSapStaticHostV9v0Group": tmnxSapStaticHostV9v0Group,
        "tmnxSapSubMgmtV9v0Group": tmnxSapSubMgmtV9v0Group,
-       "tmnxSapHsmdaV9v0Group": tmnxSapHsmdaV9v0Group,
        "tmnxSapDefHostV9v0Group": tmnxSapDefHostV9v0Group,
        "tmnxSapFilterProfileV9v0Group": tmnxSapFilterProfileV9v0Group,
        "tmnxSapV10v0Group": tmnxSapV10v0Group,
@@ -36064,7 +37643,6 @@ mibBuilder.exportSymbols(
        "tmnxSapIpTnlGroup": tmnxSapIpTnlGroup,
        "tmnxSapGreV10v0Group": tmnxSapGreV10v0Group,
        "tmnxSapNotificationV10v0Group": tmnxSapNotificationV10v0Group,
-       "tmnxSapHsmdaV10v0Group": tmnxSapHsmdaV10v0Group,
        "tmnxSapObsoletedV10v0Group": tmnxSapObsoletedV10v0Group,
        "tmnxSapLagV11v0Group": tmnxSapLagV11v0Group,
        "tmnxSapMvrpV10v0Group": tmnxSapMvrpV10v0Group,
@@ -36193,7 +37771,7 @@ mibBuilder.exportSymbols(
        "tmnxIpTnlTransProfV21v0Group": tmnxIpTnlTransProfV21v0Group,
        "sapCfmSquelchInCtagGroup": sapCfmSquelchInCtagGroup,
        "sapIngressIPCritOvrV20v10Group": sapIngressIPCritOvrV20v10Group,
-       "sapHsmdaObsoleteV21v0Group": sapHsmdaObsoleteV21v0Group,
+       "sapEgressAggRateV21v0Group": sapEgressAggRateV21v0Group,
        "sapQueueOvrObsoleteV21v0Group": sapQueueOvrObsoleteV21v0Group,
        "tmnxSapQueueOvrV21v0Group": tmnxSapQueueOvrV21v0Group,
        "tmnxSapIngQMonQDepthV21v0Group": tmnxSapIngQMonQDepthV21v0Group,
@@ -36204,6 +37782,32 @@ mibBuilder.exportSymbols(
        "sapQueueOvrObsoleteV22v0Group": sapQueueOvrObsoleteV22v0Group,
        "tmnxSapQueueOvrV22v0Group": tmnxSapQueueOvrV22v0Group,
        "tmnxSapStaticHostV22v0Group": tmnxSapStaticHostV22v0Group,
+       "tmnxSapSharedPolicerV22v0Group": tmnxSapSharedPolicerV22v0Group,
+       "tmnxSapNotifyV22v0Group": tmnxSapNotifyV22v0Group,
+       "tmnxSapDcpFpCountV22v0Group": tmnxSapDcpFpCountV22v0Group,
+       "tmnxSapEgrAggRatePerV22v0Group": tmnxSapEgrAggRatePerV22v0Group,
+       "tmnxSapEgrAggRateV22v0Group": tmnxSapEgrAggRateV22v0Group,
+       "sapAlmpV23v0Group": sapAlmpV23v0Group,
+       "sapAtmObsoleteGroup": sapAtmObsoleteGroup,
+       "sapTlsPppObsoletedGroup": sapTlsPppObsoletedGroup,
+       "sapEgressVPortV23v0Group": sapEgressVPortV23v0Group,
+       "sapTlsObsoletedV23v0Group": sapTlsObsoletedV23v0Group,
+       "tmnxSapV23v0Group": tmnxSapV23v0Group,
+       "tmnxSapBaseSIngAggPolV23v0Group": tmnxSapBaseSIngAggPolV23v0Group,
+       "tmnxSapEgrQosAggShpOvrSapV230Grp": tmnxSapEgrQosAggShpOvrSapV230Grp,
+       "sapIpipeFaultPropObsoleteGroup": sapIpipeFaultPropObsoleteGroup,
+       "tSapQosRateObsoletedV24v0Group": tSapQosRateObsoletedV24v0Group,
+       "tmnxSapQosRateV24v0Group": tmnxSapQosRateV24v0Group,
+       "tmnxSapEgrAggRateV24v0Group": tmnxSapEgrAggRateV24v0Group,
+       "tmnxSapEgressLatencyV24v0Group": tmnxSapEgressLatencyV24v0Group,
+       "tmnxIpTnlTransProfV24v0Group": tmnxIpTnlTransProfV24v0Group,
+       "sapQtagNormalizationV24v0Group": sapQtagNormalizationV24v0Group,
+       "sapIngFilterSetV24v0Group": sapIngFilterSetV24v0Group,
+       "sapIngAggPolicerV25v0Group": sapIngAggPolicerV25v0Group,
+       "sapIngAggRateV25v0Group": sapIngAggRateV25v0Group,
+       "tmnxSapObsoletedV25v0Group": tmnxSapObsoletedV25v0Group,
+       "sapTlsMacAddrV25v0Group": sapTlsMacAddrV25v0Group,
+       "sapEgrQosSinkExcessBWV25v0Grp": sapEgrQosSinkExcessBWV25v0Grp,
        "tmnxDCSapCompliances": tmnxDCSapCompliances,
        "tmnxDCSapGroups": tmnxDCSapGroups,
        "tmnxMgSapCompliances": tmnxMgSapCompliances,
@@ -36255,9 +37859,7 @@ mibBuilder.exportSymbols(
        "sapCpmProtMonitorMac": sapCpmProtMonitorMac,
        "sapEgressFrameBasedAccounting": sapEgressFrameBasedAccounting,
        "sapIngressAggRateLimit": sapIngressAggRateLimit,
-       "sapEgressHsmdaShaperOverride": sapEgressHsmdaShaperOverride,
        "sapIngressHsmdaPacketOffOvr": sapIngressHsmdaPacketOffOvr,
-       "sapEgressHsmdaPacketOffOverride": sapEgressHsmdaPacketOffOverride,
        "sapCallingStationId": sapCallingStationId,
        "sapIsaAaApplicationProfile": sapIsaAaApplicationProfile,
        "sapIngPolicerPolicy": sapIngPolicerPolicy,
@@ -36269,7 +37871,6 @@ mibBuilder.exportSymbols(
        "sapTransitIpPolicyId": sapTransitIpPolicyId,
        "sapOperGrp": sapOperGrp,
        "sapMonitorOperGrp": sapMonitorOperGrp,
-       "sapEgressHsmdaWrrPolicyOvr": sapEgressHsmdaWrrPolicyOvr,
        "sapTransitPrefixPolicyId": sapTransitPrefixPolicyId,
        "sapCpmProtMonitorIP": sapCpmProtMonitorIP,
        "sapHostsAdminState": sapHostsAdminState,
@@ -36288,9 +37889,13 @@ mibBuilder.exportSymbols(
        "sapEtreeLeafTag": sapEtreeLeafTag,
        "sapEtreeLeafAc": sapEtreeLeafAc,
        "sapEgressAggRateLUB": sapEgressAggRateLUB,
+       "sapEgressAggBurstLimit": sapEgressAggBurstLimit,
        "sapEgressAggRateLmtHi": sapEgressAggRateLmtHi,
        "sapEgressAggRateLmt": sapEgressAggRateLmt,
        "sapMulticastSource": sapMulticastSource,
+       "sapEgressAggRateAdaptRule": sapEgressAggRateAdaptRule,
+       "sapQtagNormalization": sapQtagNormalization,
+       "sapQtagNormalizationEncap": sapQtagNormalizationEncap,
        "sapTlsInfoTable": sapTlsInfoTable,
        "sapTlsInfoEntry": sapTlsInfoEntry,
        "sapTlsStpAdminStatus": sapTlsStpAdminStatus,
@@ -36394,6 +37999,8 @@ mibBuilder.exportSymbols(
        "sapTlsRestProtSrcMacOper": sapTlsRestProtSrcMacOper,
        "sapTlsRestProtSrcMacOperAct": sapTlsRestProtSrcMacOperAct,
        "sapTlsLastMgmtChange": sapTlsLastMgmtChange,
+       "sapTlsAutoLearnMacProtectOper": sapTlsAutoLearnMacProtectOper,
+       "sapTlsRestUnprotDstMacOper": sapTlsRestUnprotDstMacOper,
        "sapAtmInfoTable": sapAtmInfoTable,
        "sapAtmInfoEntry": sapAtmInfoEntry,
        "sapAtmEncapsulation": sapAtmEncapsulation,
@@ -37082,39 +38689,6 @@ mibBuilder.exportSymbols(
        "sapIngHsmdaCntrStOutProfOctFwd": sapIngHsmdaCntrStOutProfOctFwd,
        "sapIngHsmdaCntrStAllPktOffered": sapIngHsmdaCntrStAllPktOffered,
        "sapIngHsmdaCntrStAllOctOffered": sapIngHsmdaCntrStAllOctOffered,
-       "sapEgrQosHsmdaQueueTable": sapEgrQosHsmdaQueueTable,
-       "sapEgrQosHsmdaQueueEntry": sapEgrQosHsmdaQueueEntry,
-       "sapEgrQosHsmdaQueueId": sapEgrQosHsmdaQueueId,
-       "sapEgrQosHsmdaQueueRowStatus": sapEgrQosHsmdaQueueRowStatus,
-       "sapEgrQosHsmdaQueueLastChanged": sapEgrQosHsmdaQueueLastChanged,
-       "sapEgrQosHsmdaQueueAdminPIR": sapEgrQosHsmdaQueueAdminPIR,
-       "sapEgrQosHsmdaQueueAdminCIR": sapEgrQosHsmdaQueueAdminCIR,
-       "sapEgrQosHsmdaQueueSlopePolicy": sapEgrQosHsmdaQueueSlopePolicy,
-       "sapEgrQosHsmdaQueueWrrWeight": sapEgrQosHsmdaQueueWrrWeight,
-       "sapEgrQosHsmdaQueueMBS": sapEgrQosHsmdaQueueMBS,
-       "sapEgrQosHsmdaQueueStatsTable": sapEgrQosHsmdaQueueStatsTable,
-       "sapEgrQosHsmdaQueueStatsEntry": sapEgrQosHsmdaQueueStatsEntry,
-       "sapEgrHsmdaQStatCustId": sapEgrHsmdaQStatCustId,
-       "sapEgrHsmdaQStatInProfPktFwd": sapEgrHsmdaQStatInProfPktFwd,
-       "sapEgrHsmdaQStatInProfPktDropd": sapEgrHsmdaQStatInProfPktDropd,
-       "sapEgrHsmdaQStatOutProfPktFwd": sapEgrHsmdaQStatOutProfPktFwd,
-       "sapEgrHsmdaQStatOutProfPktDropd": sapEgrHsmdaQStatOutProfPktDropd,
-       "sapEgrHsmdaQStatInProfOctFwd": sapEgrHsmdaQStatInProfOctFwd,
-       "sapEgrHsmdaQStatInProfOctDropd": sapEgrHsmdaQStatInProfOctDropd,
-       "sapEgrHsmdaQStatOutProfOctFwd": sapEgrHsmdaQStatOutProfOctFwd,
-       "sapEgrHsmdaQStatOutProfOctDropd": sapEgrHsmdaQStatOutProfOctDropd,
-       "sapEgrQosHsmdaCntrStatsTable": sapEgrQosHsmdaCntrStatsTable,
-       "sapEgrQosHsmdaCntrStatsEntry": sapEgrQosHsmdaCntrStatsEntry,
-       "sapEgrHsmdaCntrStCntrId": sapEgrHsmdaCntrStCntrId,
-       "sapEgrHsmdaCntrStCustId": sapEgrHsmdaCntrStCustId,
-       "sapEgrHsmdaCntrStInProfPktFwd": sapEgrHsmdaCntrStInProfPktFwd,
-       "sapEgrHsmdaCntrStInProfPktDrop": sapEgrHsmdaCntrStInProfPktDrop,
-       "sapEgrHsmdaCntrStOutProfPktFwd": sapEgrHsmdaCntrStOutProfPktFwd,
-       "sapEgrHsmdaCntrStOutProfPktDrop": sapEgrHsmdaCntrStOutProfPktDrop,
-       "sapEgrHsmdaCntrStInProfOctFwd": sapEgrHsmdaCntrStInProfOctFwd,
-       "sapEgrHsmdaCntrStInProfOctDrop": sapEgrHsmdaCntrStInProfOctDrop,
-       "sapEgrHsmdaCntrStOutProfOctFwd": sapEgrHsmdaCntrStOutProfOctFwd,
-       "sapEgrHsmdaCntrStOutProfOctDrop": sapEgrHsmdaCntrStOutProfOctDrop,
        "msapL3PlcyTable": msapL3PlcyTable,
        "msapL3PlcyEntry": msapL3PlcyEntry,
        "msapL3PlcyLastChanged": msapL3PlcyLastChanged,
@@ -37158,16 +38732,6 @@ mibBuilder.exportSymbols(
        "sapIgmpTrkMaxNbrSrcs": sapIgmpTrkMaxNbrSrcs,
        "sapIgmpTrkDisRtrAlertChk": sapIgmpTrkDisRtrAlertChk,
        "sapIgmpTrkMaxNbrGrpSrcs": sapIgmpTrkMaxNbrGrpSrcs,
-       "sapFrInfoTable": sapFrInfoTable,
-       "sapFrInfoEntry": sapFrInfoEntry,
-       "sapFrInfoFrf12Mode": sapFrInfoFrf12Mode,
-       "sapFrInfoSchedulingClass": sapFrInfoSchedulingClass,
-       "sapFrInfoLastChanged": sapFrInfoLastChanged,
-       "sapFrf12InfoTable": sapFrf12InfoTable,
-       "sapFrf12InfoEntry": sapFrf12InfoEntry,
-       "sapFrf12InfoFragmentThreshold": sapFrf12InfoFragmentThreshold,
-       "sapFrf12InfoLastChanged": sapFrf12InfoLastChanged,
-       "sapFrf12InfoInterleave": sapFrf12InfoInterleave,
        "sapArpHostStatTable": sapArpHostStatTable,
        "sapArpHostStatEntry": sapArpHostStatEntry,
        "sapArpHostStatLastClearedTime": sapArpHostStatLastClearedTime,
@@ -38033,6 +39597,19 @@ mibBuilder.exportSymbols(
        "sapIngressIPv6CriteriaOvrTag": sapIngressIPv6CriteriaOvrTag,
        "sapEgrVlanQosPlcyPortRedirect": sapEgrVlanQosPlcyPortRedirect,
        "sapIngressIpFilterPair": sapIngressIpFilterPair,
+       "sapQosSharedPolicerName": sapQosSharedPolicerName,
+       "sapEgressQosAggRatePIRPercent": sapEgressQosAggRatePIRPercent,
+       "sapEgressQosAggRateCIRPercent": sapEgressQosAggRateCIRPercent,
+       "sapEgressQosAggRateType": sapEgressQosAggRateType,
+       "sapEgrAggRateLimitHi": sapEgrAggRateLimitHi,
+       "sapEgrAggRateLimit": sapEgrAggRateLimit,
+       "sapEgressVirtualPort": sapEgressVirtualPort,
+       "sapEgrShrdQAggRateBurstLmt": sapEgrShrdQAggRateBurstLmt,
+       "sapEgressLatencyBudget": sapEgressLatencyBudget,
+       "sapIngressFilterSet": sapIngressFilterSet,
+       "sapIngressAggregatePolicerMBS": sapIngressAggregatePolicerMBS,
+       "sapIngressAggregatePlcrAlgoType": sapIngressAggregatePlcrAlgoType,
+       "sapEgressQosSinkExcessBW": sapEgressQosSinkExcessBW,
        "sapDcpFpStaticStatTable": sapDcpFpStaticStatTable,
        "sapDcpFpStaticStatEntry": sapDcpFpStaticStatEntry,
        "sapDcpFpStaticPlcrName": sapDcpFpStaticPlcrName,
@@ -38042,6 +39619,8 @@ mibBuilder.exportSymbols(
        "sapDcpFpStaticExcdCountLo": sapDcpFpStaticExcdCountLo,
        "sapDcpFpStaticHoldDown": sapDcpFpStaticHoldDown,
        "sapDcpFpStaticDetectionTime": sapDcpFpStaticDetectionTime,
+       "sapDcpFpStaticTotalExcdCount": sapDcpFpStaticTotalExcdCount,
+       "sapDcpFpStaticExtCnfrmStateCount": sapDcpFpStaticExtCnfrmStateCount,
        "sapDcpFpDynStatTable": sapDcpFpDynStatTable,
        "sapDcpFpDynStatEntry": sapDcpFpDynStatEntry,
        "sapDcpFpProtocol": sapDcpFpProtocol,
@@ -38052,6 +39631,8 @@ mibBuilder.exportSymbols(
        "sapDcpFpDynHoldDown": sapDcpFpDynHoldDown,
        "sapDcpFpDynDetectionTime": sapDcpFpDynDetectionTime,
        "sapDcpFpDynAllocated": sapDcpFpDynAllocated,
+       "sapDcpFpDynTotalExcdCount": sapDcpFpDynTotalExcdCount,
+       "sapDcpFpDynExitConformStateCount": sapDcpFpDynExitConformStateCount,
        "sapDcpFpLocMonStatTable": sapDcpFpLocMonStatTable,
        "sapDcpFpLocMonStatEntry": sapDcpFpLocMonStatEntry,
        "sapDcpFpLocMonPlcrName": sapDcpFpLocMonPlcrName,
@@ -38060,6 +39641,8 @@ mibBuilder.exportSymbols(
        "sapDcpFpLocMonExcdCountHi": sapDcpFpLocMonExcdCountHi,
        "sapDcpFpLocMonExcdCountLo": sapDcpFpLocMonExcdCountLo,
        "sapDcpFpLocMonAllDynAlloc": sapDcpFpLocMonAllDynAlloc,
+       "sapDcpFpLocMonTotalExcdCount": sapDcpFpLocMonTotalExcdCount,
+       "sapDcpFpLocMonExtCnfrmStateCount": sapDcpFpLocMonExtCnfrmStateCount,
        "sapNotificationObjects": sapNotificationObjects,
        "sapDcpTimeEventOccured": sapDcpTimeEventOccured,
        "sapTlsStaticIsidRngTable": sapTlsStaticIsidRngTable,
@@ -38077,6 +39660,8 @@ mibBuilder.exportSymbols(
        "sapTlsDhcp6InterfaceId": sapTlsDhcp6InterfaceId,
        "sapTlsDhcp6RemoteId": sapTlsDhcp6RemoteId,
        "sapTlsDhcp6RemoteIdString": sapTlsDhcp6RemoteIdString,
+       "sapTlsDhcp6LdraAdminState": sapTlsDhcp6LdraAdminState,
+       "sapTlsDhcp6InterfaceType": sapTlsDhcp6InterfaceType,
        "sapTlsStaticIsidTable": sapTlsStaticIsidTable,
        "sapTlsStaticIsidEntry": sapTlsStaticIsidEntry,
        "sapTlsStaticIsid": sapTlsStaticIsid,
@@ -38107,6 +39692,16 @@ mibBuilder.exportSymbols(
        "sapTlsDisableSendBvplsEvpnFlush": sapTlsDisableSendBvplsEvpnFlush,
        "sapTlsAutoLrnMacProtectExcList": sapTlsAutoLrnMacProtectExcList,
        "sapTlsExBgpVplsMhVeId": sapTlsExBgpVplsMhVeId,
+       "sapTlsAutoLrnMacPrtctExcListOper": sapTlsAutoLrnMacPrtctExcListOper,
+       "sapTlsFdbProtectedMacAddrRec": sapTlsFdbProtectedMacAddrRec,
+       "sapTlsFdbProtMacAddrRecLastChgd": sapTlsFdbProtMacAddrRecLastChgd,
+       "sapTlsExtPbbProtectedMacAddrRec": sapTlsExtPbbProtectedMacAddrRec,
+       "sapTlsExtPbbProtMacAddrRecLstChg": sapTlsExtPbbProtMacAddrRecLstChg,
+       "sapTlsExtTableHighUtilization": sapTlsExtTableHighUtilization,
+       "sapTlsNonBlockMoveRateXMacAddr": sapTlsNonBlockMoveRateXMacAddr,
+       "sapTlsNoBlckMvRateXMacAddrLstChg": sapTlsNoBlckMvRateXMacAddrLstChg,
+       "sapTlsMoveRateExceededMacAddr": sapTlsMoveRateExceededMacAddr,
+       "sapTlsMvRateExceedMacAddrLstChgd": sapTlsMvRateExceedMacAddrLstChgd,
        "sapLagPerLinkHashTableLastChgd": sapLagPerLinkHashTableLastChgd,
        "sapLagPerLinkHashTable": sapLagPerLinkHashTable,
        "sapLagPerLinkHashEntry": sapLagPerLinkHashEntry,
@@ -38284,6 +39879,7 @@ mibBuilder.exportSymbols(
        "tmnxIpTnlIPsecStatIsakmpPfsDhGp": tmnxIpTnlIPsecStatIsakmpPfsDhGp,
        "tmnxIpTnlIPsecStatIkeTranPrfAlg": tmnxIpTnlIPsecStatIkeTranPrfAlg,
        "tmnxIpTnlIPsecMatchTrustAnchor": tmnxIpTnlIPsecMatchTrustAnchor,
+       "tmnxIpTnlIPsecStatPpkNegotiated": tmnxIpTnlIPsecStatPpkNegotiated,
        "tmnxIpTnlIPsecSATable": tmnxIpTnlIPsecSATable,
        "tmnxIpTnlIPsecSAEntry": tmnxIpTnlIPsecSAEntry,
        "tmnxIpTnlIPsecSAId": tmnxIpTnlIPsecSAId,
@@ -38319,6 +39915,72 @@ mibBuilder.exportSymbols(
        "tmnxSapSubMonOperGrpLastCh": tmnxSapSubMonOperGrpLastCh,
        "tmnxSapSubMonOperGrpHlthDrop": tmnxSapSubMonOperGrpHlthDrop,
        "tmnxSapSubMonOperGrpActHlthDrop": tmnxSapSubMonOperGrpActHlthDrop,
+       "tmnxSapMRtCpeChkTable": tmnxSapMRtCpeChkTable,
+       "tmnxSapMRtCpeChkEntry": tmnxSapMRtCpeChkEntry,
+       "tmnxSapMRtCpeChkHostAddrType": tmnxSapMRtCpeChkHostAddrType,
+       "tmnxSapMRtCpeChkHostAddr": tmnxSapMRtCpeChkHostAddr,
+       "tmnxSapMRtCpeChkHostMacAddress": tmnxSapMRtCpeChkHostMacAddress,
+       "tmnxSapMRtCpeChkMRtAddrType": tmnxSapMRtCpeChkMRtAddrType,
+       "tmnxSapMRtCpeChkMRtAddr": tmnxSapMRtCpeChkMRtAddr,
+       "tmnxSapMRtCpeChkMRtPrefixLen": tmnxSapMRtCpeChkMRtPrefixLen,
+       "tmnxSapMRtCpeChkRowStatus": tmnxSapMRtCpeChkRowStatus,
+       "tmnxSapMRtCpeChkLastMgmtChange": tmnxSapMRtCpeChkLastMgmtChange,
+       "tmnxSapMRtCpeChkAddrType": tmnxSapMRtCpeChkAddrType,
+       "tmnxSapMRtCpeChkAddr": tmnxSapMRtCpeChkAddr,
+       "tmnxSapMRtCpeChkInterval": tmnxSapMRtCpeChkInterval,
+       "tmnxSapMRtCpeChkDropCnt": tmnxSapMRtCpeChkDropCnt,
+       "tmnxSapMRtCpeChkTimeout": tmnxSapMRtCpeChkTimeout,
+       "tmnxSapMRtCpeChkPaddingSize": tmnxSapMRtCpeChkPaddingSize,
+       "tmnxSapMRtCpeChkEnableLog": tmnxSapMRtCpeChkEnableLog,
+       "tmnxSapMRtCpeChkFailMetric": tmnxSapMRtCpeChkFailMetric,
+       "tmnxSapMRtCpeChkFailPreference": tmnxSapMRtCpeChkFailPreference,
+       "tmnxSapMRtCpeChkFailTag": tmnxSapMRtCpeChkFailTag,
+       "tmnxSapMRtCpeChkSrcAddrType": tmnxSapMRtCpeChkSrcAddrType,
+       "tmnxSapMRtCpeChkSrcAddr": tmnxSapMRtCpeChkSrcAddr,
+       "tmnxSapMRtCpeChkFailWithdraw": tmnxSapMRtCpeChkFailWithdraw,
+       "tmnxSapMRtCpeChkStatTable": tmnxSapMRtCpeChkStatTable,
+       "tmnxSapMRtCpeChkStatEntry": tmnxSapMRtCpeChkStatEntry,
+       "tmnxSapMRtCpeChkUpTime": tmnxSapMRtCpeChkUpTime,
+       "tmnxSapMRtCpeChkInPktCnt": tmnxSapMRtCpeChkInPktCnt,
+       "tmnxSapMRtCpeChkOutPktCnt": tmnxSapMRtCpeChkOutPktCnt,
+       "tmnxSapMRtCpeChkDownTrans": tmnxSapMRtCpeChkDownTrans,
+       "tmnxSapMRtCpeChkUpTrans": tmnxSapMRtCpeChkUpTrans,
+       "tmnxSapMRtCpeChkTTL": tmnxSapMRtCpeChkTTL,
+       "tmnxSapMRtCpeChkStatus": tmnxSapMRtCpeChkStatus,
+       "tmnxSapEgrQosAggShaperTable": tmnxSapEgrQosAggShaperTable,
+       "tmnxSapEgrQosAggShaperEntry": tmnxSapEgrQosAggShaperEntry,
+       "tmnxSapEgrQosAggShapPort": tmnxSapEgrQosAggShapPort,
+       "tmnxSapEgrQosAggShapSchedAssignd": tmnxSapEgrQosAggShapSchedAssignd,
+       "tmnxSapEgrQosAggShapAssignedRate": tmnxSapEgrQosAggShapAssignedRate,
+       "tmnxSapEgrQosAggShapOperRate": tmnxSapEgrQosAggShapOperRate,
+       "tmnxSapEgrQosAggShapConsumedRate": tmnxSapEgrQosAggShapConsumedRate,
+       "tmnxSapEgrQosAggShapAvgFrameOvhd": tmnxSapEgrQosAggShapAvgFrameOvhd,
+       "tmnxSapEgrQosAggShapAfoRealTime": tmnxSapEgrQosAggShapAfoRealTime,
+       "tmnxSapEgrQosAggShapSchedActive": tmnxSapEgrQosAggShapSchedActive,
+       "tmnxSapEgrQosAggShapSchedRunning": tmnxSapEgrQosAggShapSchedRunning,
+       "tmnxSapEgrQosAggShapInvlClassUse": tmnxSapEgrQosAggShapInvlClassUse,
+       "tmnxSapEgrQosAggShapBurstLimit": tmnxSapEgrQosAggShapBurstLimit,
+       "tmnxSapEgrQosAggShapDepth": tmnxSapEgrQosAggShapDepth,
+       "tmnxSapEgrQosAggShapPacketMode": tmnxSapEgrQosAggShapPacketMode,
+       "tmnxSapEgrQosAggShapOutOfDate": tmnxSapEgrQosAggShapOutOfDate,
+       "tmnxSapEgrQosAggShapQSetSize": tmnxSapEgrQosAggShapQSetSize,
+       "tmnxSapEgrQosAggShpQSetSzOvr": tmnxSapEgrQosAggShpQSetSzOvr,
+       "sapTlsDhcp6StatsTable": sapTlsDhcp6StatsTable,
+       "sapTlsDhcp6StatsEntry": sapTlsDhcp6StatsEntry,
+       "sapTlsDhcp6StatsClntSnoopdPckts": sapTlsDhcp6StatsClntSnoopdPckts,
+       "sapTlsDhcp6StatsSrvrSnoopdPckts": sapTlsDhcp6StatsSrvrSnoopdPckts,
+       "sapTlsDhcp6StatsClntForwdPckts": sapTlsDhcp6StatsClntForwdPckts,
+       "sapTlsDhcp6StatsSrvrForwdPckts": sapTlsDhcp6StatsSrvrForwdPckts,
+       "sapTlsDhcp6StatsClntDropdPckts": sapTlsDhcp6StatsClntDropdPckts,
+       "sapTlsDhcp6StatsSrvrDropdPckts": sapTlsDhcp6StatsSrvrDropdPckts,
+       "sapIngAggPolicerStatsTable": sapIngAggPolicerStatsTable,
+       "sapIngAggPolicerStatsEntry": sapIngAggPolicerStatsEntry,
+       "sapIngAggPolStatsInProfFwdPkts": sapIngAggPolStatsInProfFwdPkts,
+       "sapIngAggPolStatsInProfFwdOcts": sapIngAggPolStatsInProfFwdOcts,
+       "sapIngAggPolStatsOutProfFwdPkts": sapIngAggPolStatsOutProfFwdPkts,
+       "sapIngAggPolStatsOutProfFwdOcts": sapIngAggPolStatsOutProfFwdOcts,
+       "sapIngAggPolStatsExcProfDropPkts": sapIngAggPolStatsExcProfDropPkts,
+       "sapIngAggPolStatsExcProfDropOcts": sapIngAggPolStatsExcProfDropOcts,
        "sapTrapsPrefix": sapTrapsPrefix,
        "sapTraps": sapTraps,
        "sapCreated": sapCreated,
@@ -38380,6 +40042,7 @@ mibBuilder.exportSymbols(
        "sapIfIgnorePortStateStart": sapIfIgnorePortStateStart,
        "sapIfIgnorePortStateStop": sapIfIgnorePortStateStop,
        "sapReceivedPbbProtSrcMac": sapReceivedPbbProtSrcMac,
+       "tmnxSapMRtCpeChkStatusChange": tmnxSapMRtCpeChkStatusChange,
        "sapMgNotification": sapMgNotification,
        "topologyChangeSapMajorState": topologyChangeSapMajorState,
        "newRootSap": newRootSap,

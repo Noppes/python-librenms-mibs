@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-PORT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:07 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -93,12 +90,14 @@ if 'mibBuilder' not in globals():
     "Unsigned32",
     "iso")
 
-(DisplayString,
+(DateAndTime,
+ DisplayString,
  MacAddress,
  PhysAddress,
  TextualConvention,
  TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
+    "DateAndTime",
     "DisplayString",
     "MacAddress",
     "PhysAddress",
@@ -113,7 +112,12 @@ acdPort = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdPort.setRevisions(
-        ("2011-10-10 01:00",
+        ("2016-09-23 01:00",
+         "2016-05-26 01:00",
+         "2016-03-15 01:00",
+         "2014-11-13 01:00",
+         "2014-06-23 01:00",
+         "2011-10-10 01:00",
          "2010-10-01 01:00",
          "2008-05-01 01:00")
     )
@@ -368,6 +372,41 @@ acdPortConfigAdvertisement = _AcdPortConfigAdvertisement_Object(
 acdPortConfigAdvertisement.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdPortConfigAdvertisement.setStatus("current")
+_AcdPortConfigForceTxOn_Type = TruthValue
+_AcdPortConfigForceTxOn_Object = MibTableColumn
+acdPortConfigForceTxOn = _AcdPortConfigForceTxOn_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 1, 1, 1, 14),
+    _AcdPortConfigForceTxOn_Type()
+)
+acdPortConfigForceTxOn.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPortConfigForceTxOn.setStatus("current")
+
+
+class _AcdPortConfigLaserMode_Type(Integer32):
+    """Custom type acdPortConfigLaserMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("on", 1),
+          ("off", 2))
+    )
+
+
+_AcdPortConfigLaserMode_Type.__name__ = "Integer32"
+_AcdPortConfigLaserMode_Object = MibTableColumn
+acdPortConfigLaserMode = _AcdPortConfigLaserMode_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 1, 1, 1, 15),
+    _AcdPortConfigLaserMode_Type()
+)
+acdPortConfigLaserMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPortConfigLaserMode.setStatus("current")
 _AcdPortStatus_ObjectIdentity = ObjectIdentity
 acdPortStatus = _AcdPortStatus_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 2)
@@ -670,7 +709,10 @@ class _AcdPortTxStatsSupportBits_Type(Bits):
           ("bPkts2048to4095", 23),
           ("bPkts4096to8191", 24),
           ("bPkts8192andMore", 25),
-          ("bPktsLarge", 26))
+          ("bPktsLarge", 26),
+          ("bL1Rate", 27),
+          ("bL1Percent", 28),
+          ("bL2Rate", 29))
     )
 
 _AcdPortTxStatsSupportBits_Type.__name__ = "Bits"
@@ -801,8 +843,6 @@ acdPortTxStatsSingleCollisions = _AcdPortTxStatsSingleCollisions_Object(
 acdPortTxStatsSingleCollisions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPortTxStatsSingleCollisions.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPortTxStatsSingleCollisions.setUnits("Packets")
 _AcdPortTxStatsMultipleCollisions_Type = Counter64
 _AcdPortTxStatsMultipleCollisions_Object = MibTableColumn
 acdPortTxStatsMultipleCollisions = _AcdPortTxStatsMultipleCollisions_Object(
@@ -812,8 +852,6 @@ acdPortTxStatsMultipleCollisions = _AcdPortTxStatsMultipleCollisions_Object(
 acdPortTxStatsMultipleCollisions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPortTxStatsMultipleCollisions.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPortTxStatsMultipleCollisions.setUnits("Packets")
 _AcdPortTxStatsExcessiveCollisions_Type = Counter64
 _AcdPortTxStatsExcessiveCollisions_Object = MibTableColumn
 acdPortTxStatsExcessiveCollisions = _AcdPortTxStatsExcessiveCollisions_Object(
@@ -979,6 +1017,39 @@ if mibBuilder.loadTexts:
     acdPortTxStatsPktsLarge.setStatus("current")
 if mibBuilder.loadTexts:
     acdPortTxStatsPktsLarge.setUnits("Packets")
+_AcdPortTxL1Rate_Type = Gauge32
+_AcdPortTxL1Rate_Object = MibTableColumn
+acdPortTxL1Rate = _AcdPortTxL1Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 1, 1, 30),
+    _AcdPortTxL1Rate_Type()
+)
+acdPortTxL1Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxL1Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxL1Rate.setUnits("Mbps")
+_AcdPortTxL1Percent_Type = Gauge32
+_AcdPortTxL1Percent_Object = MibTableColumn
+acdPortTxL1Percent = _AcdPortTxL1Percent_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 1, 1, 31),
+    _AcdPortTxL1Percent_Type()
+)
+acdPortTxL1Percent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxL1Percent.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxL1Percent.setUnits("%")
+_AcdPortTxL2Rate_Type = Gauge32
+_AcdPortTxL2Rate_Object = MibTableColumn
+acdPortTxL2Rate = _AcdPortTxL2Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 1, 1, 32),
+    _AcdPortTxL2Rate_Type()
+)
+acdPortTxL2Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxL2Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxL2Rate.setUnits("Mbps")
 _AcdPortRxStatsTable_Object = MibTable
 acdPortRxStatsTable = _AcdPortRxStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 2)
@@ -1401,6 +1472,155 @@ if mibBuilder.loadTexts:
     acdPortRxStatsPktsLarge.setStatus("current")
 if mibBuilder.loadTexts:
     acdPortRxStatsPktsLarge.setUnits("Packets")
+_AcdPortRxL1Rate_Type = Gauge32
+_AcdPortRxL1Rate_Object = MibTableColumn
+acdPortRxL1Rate = _AcdPortRxL1Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 2, 1, 34),
+    _AcdPortRxL1Rate_Type()
+)
+acdPortRxL1Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxL1Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxL1Rate.setUnits("Mbps")
+_AcdPortRxL1Percent_Type = Gauge32
+_AcdPortRxL1Percent_Object = MibTableColumn
+acdPortRxL1Percent = _AcdPortRxL1Percent_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 2, 1, 35),
+    _AcdPortRxL1Percent_Type()
+)
+acdPortRxL1Percent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxL1Percent.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxL1Percent.setUnits("%")
+_AcdPortRxL2Rate_Type = Gauge32
+_AcdPortRxL2Rate_Object = MibTableColumn
+acdPortRxL2Rate = _AcdPortRxL2Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 2, 1, 36),
+    _AcdPortRxL2Rate_Type()
+)
+acdPortRxL2Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxL2Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxL2Rate.setUnits("Mbps")
+
+
+class _AcdPortRxStatsSupportBitsExt_Type(Bits):
+    """Custom type acdPortRxStatsSupportBitsExt based on Bits"""
+    namedValues = NamedValues(
+        *(("bL1Rate", 0),
+          ("bL1Percent", 1),
+          ("bL2Rate", 2))
+    )
+
+_AcdPortRxStatsSupportBitsExt_Type.__name__ = "Bits"
+_AcdPortRxStatsSupportBitsExt_Object = MibTableColumn
+acdPortRxStatsSupportBitsExt = _AcdPortRxStatsSupportBitsExt_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 2, 1, 37),
+    _AcdPortRxStatsSupportBitsExt_Type()
+)
+acdPortRxStatsSupportBitsExt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxStatsSupportBitsExt.setStatus("current")
+_AcdPortStatsSumTable_Object = MibTable
+acdPortStatsSumTable = _AcdPortStatsSumTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3)
+)
+if mibBuilder.loadTexts:
+    acdPortStatsSumTable.setStatus("current")
+_AcdPortStatsSumEntry_Object = MibTableRow
+acdPortStatsSumEntry = _AcdPortStatsSumEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1)
+)
+acdPortStatsSumEntry.setIndexNames(
+    (0, "ACD-PORT-MIB", "acdPortStatsSumIndex"),
+)
+if mibBuilder.loadTexts:
+    acdPortStatsSumEntry.setStatus("current")
+
+
+class _AcdPortStatsSumIndex_Type(Unsigned32):
+    """Custom type acdPortStatsSumIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AcdPortStatsSumIndex_Type.__name__ = "Unsigned32"
+_AcdPortStatsSumIndex_Object = MibTableColumn
+acdPortStatsSumIndex = _AcdPortStatsSumIndex_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1, 1),
+    _AcdPortStatsSumIndex_Type()
+)
+acdPortStatsSumIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    acdPortStatsSumIndex.setStatus("current")
+
+
+class _AcdPortStatsSumName_Type(DisplayString):
+    """Custom type acdPortStatsSumName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 31),
+    )
+
+
+_AcdPortStatsSumName_Type.__name__ = "DisplayString"
+_AcdPortStatsSumName_Object = MibTableColumn
+acdPortStatsSumName = _AcdPortStatsSumName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1, 2),
+    _AcdPortStatsSumName_Type()
+)
+acdPortStatsSumName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortStatsSumName.setStatus("current")
+_AcdPortStatsSumTXPkt_Type = Counter64
+_AcdPortStatsSumTXPkt_Object = MibTableColumn
+acdPortStatsSumTXPkt = _AcdPortStatsSumTXPkt_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1, 3),
+    _AcdPortStatsSumTXPkt_Type()
+)
+acdPortStatsSumTXPkt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortStatsSumTXPkt.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortStatsSumTXPkt.setUnits("Packets")
+_AcdPortStatsSumTXErr_Type = Counter64
+_AcdPortStatsSumTXErr_Object = MibTableColumn
+acdPortStatsSumTXErr = _AcdPortStatsSumTXErr_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1, 4),
+    _AcdPortStatsSumTXErr_Type()
+)
+acdPortStatsSumTXErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortStatsSumTXErr.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortStatsSumTXErr.setUnits("Packets")
+_AcdPortStatsSumRXPkt_Type = Counter64
+_AcdPortStatsSumRXPkt_Object = MibTableColumn
+acdPortStatsSumRXPkt = _AcdPortStatsSumRXPkt_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1, 5),
+    _AcdPortStatsSumRXPkt_Type()
+)
+acdPortStatsSumRXPkt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortStatsSumRXPkt.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortStatsSumRXPkt.setUnits("Packets")
+_AcdPortStatsSumRXErr_Type = Counter64
+_AcdPortStatsSumRXErr_Object = MibTableColumn
+acdPortStatsSumRXErr = _AcdPortStatsSumRXErr_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 3, 3, 1, 6),
+    _AcdPortStatsSumRXErr_Type()
+)
+acdPortStatsSumRXErr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortStatsSumRXErr.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortStatsSumRXErr.setUnits("Packets")
 _AcdPortTableTid_ObjectIdentity = ObjectIdentity
 acdPortTableTid = _AcdPortTableTid_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 4)
@@ -1414,6 +1634,1042 @@ acdPortConfigTableLastChangeTid = _AcdPortConfigTableLastChangeTid_Object(
 acdPortConfigTableLastChangeTid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPortConfigTableLastChangeTid.setStatus("current")
+_AcdPortHistStats_ObjectIdentity = ObjectIdentity
+acdPortHistStats = _AcdPortHistStats_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5)
+)
+_AcdPortTxHistStatsTable_Object = MibTable
+acdPortTxHistStatsTable = _AcdPortTxHistStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1)
+)
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsTable.setStatus("current")
+_AcdPortTxHistStatsEntry_Object = MibTableRow
+acdPortTxHistStatsEntry = _AcdPortTxHistStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1)
+)
+acdPortTxHistStatsEntry.setIndexNames(
+    (0, "ACD-PORT-MIB", "acdPortTxHistStatsIndex"),
+    (0, "ACD-PORT-MIB", "acdPortTxHistStatsSampleIndex"),
+)
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsEntry.setStatus("current")
+
+
+class _AcdPortTxHistStatsIndex_Type(Unsigned32):
+    """Custom type acdPortTxHistStatsIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AcdPortTxHistStatsIndex_Type.__name__ = "Unsigned32"
+_AcdPortTxHistStatsIndex_Object = MibTableColumn
+acdPortTxHistStatsIndex = _AcdPortTxHistStatsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 1),
+    _AcdPortTxHistStatsIndex_Type()
+)
+acdPortTxHistStatsIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsIndex.setStatus("current")
+_AcdPortTxHistStatsSampleIndex_Type = Unsigned32
+_AcdPortTxHistStatsSampleIndex_Object = MibTableColumn
+acdPortTxHistStatsSampleIndex = _AcdPortTxHistStatsSampleIndex_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 2),
+    _AcdPortTxHistStatsSampleIndex_Type()
+)
+acdPortTxHistStatsSampleIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsSampleIndex.setStatus("current")
+
+
+class _AcdPortTxHistStatsStatus_Type(Integer32):
+    """Custom type acdPortTxHistStatsStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("valid", 1),
+          ("invalid", 2))
+    )
+
+
+_AcdPortTxHistStatsStatus_Type.__name__ = "Integer32"
+_AcdPortTxHistStatsStatus_Object = MibTableColumn
+acdPortTxHistStatsStatus = _AcdPortTxHistStatsStatus_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 3),
+    _AcdPortTxHistStatsStatus_Type()
+)
+acdPortTxHistStatsStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsStatus.setStatus("current")
+_AcdPortTxHistStatsDuration_Type = Unsigned32
+_AcdPortTxHistStatsDuration_Object = MibTableColumn
+acdPortTxHistStatsDuration = _AcdPortTxHistStatsDuration_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 4),
+    _AcdPortTxHistStatsDuration_Type()
+)
+acdPortTxHistStatsDuration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsDuration.setStatus("current")
+_AcdPortTxHistStatsIntervalEnd_Type = DateAndTime
+_AcdPortTxHistStatsIntervalEnd_Object = MibTableColumn
+acdPortTxHistStatsIntervalEnd = _AcdPortTxHistStatsIntervalEnd_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 5),
+    _AcdPortTxHistStatsIntervalEnd_Type()
+)
+acdPortTxHistStatsIntervalEnd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsIntervalEnd.setStatus("current")
+
+
+class _AcdPortTxHistStatsSupportBits_Type(Bits):
+    """Custom type acdPortTxHistStatsSupportBits based on Bits"""
+    namedValues = NamedValues(
+        *(("bBytesGood", 0),
+          ("bBytesTotal", 1),
+          ("bUnicastPkts", 2),
+          ("bMulticastPkts", 3),
+          ("bBroadcastPkts", 4),
+          ("bPauseFrames", 5),
+          ("bTaggedFrames", 6),
+          ("bCRCErrors", 7),
+          ("bDeferred", 8),
+          ("bExcessiveDeferrals", 9),
+          ("bSingleCollisions", 10),
+          ("bMultipleCollisions", 11),
+          ("bExcessiveCollisions", 12),
+          ("bLateCollisions", 13),
+          ("bNormalCollisions", 14),
+          ("bFifoErrors", 15),
+          ("bPkts64", 16),
+          ("bPkts65to127", 17),
+          ("bPkts128to255", 18),
+          ("bPkts256to511", 19),
+          ("bPkts512to1023", 20),
+          ("bPkts1024to1518", 21),
+          ("bPkts1519to2047", 22),
+          ("bPkts2048to4095", 23),
+          ("bPkts4096to8191", 24),
+          ("bPkts8192andMore", 25),
+          ("bPktsLarge", 26),
+          ("bL1Rate", 27),
+          ("bL1Percent", 28),
+          ("bL2Rate", 29))
+    )
+
+_AcdPortTxHistStatsSupportBits_Type.__name__ = "Bits"
+_AcdPortTxHistStatsSupportBits_Object = MibTableColumn
+acdPortTxHistStatsSupportBits = _AcdPortTxHistStatsSupportBits_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 6),
+    _AcdPortTxHistStatsSupportBits_Type()
+)
+acdPortTxHistStatsSupportBits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsSupportBits.setStatus("current")
+_AcdPortTxHistStatsBytesGood_Type = Counter64
+_AcdPortTxHistStatsBytesGood_Object = MibTableColumn
+acdPortTxHistStatsBytesGood = _AcdPortTxHistStatsBytesGood_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 7),
+    _AcdPortTxHistStatsBytesGood_Type()
+)
+acdPortTxHistStatsBytesGood.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsBytesGood.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsBytesGood.setUnits("Octets")
+_AcdPortTxHistStatsBytesTotal_Type = Counter64
+_AcdPortTxHistStatsBytesTotal_Object = MibTableColumn
+acdPortTxHistStatsBytesTotal = _AcdPortTxHistStatsBytesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 8),
+    _AcdPortTxHistStatsBytesTotal_Type()
+)
+acdPortTxHistStatsBytesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsBytesTotal.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsBytesTotal.setUnits("Octets")
+_AcdPortTxHistStatsUnicastPkts_Type = Counter64
+_AcdPortTxHistStatsUnicastPkts_Object = MibTableColumn
+acdPortTxHistStatsUnicastPkts = _AcdPortTxHistStatsUnicastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 9),
+    _AcdPortTxHistStatsUnicastPkts_Type()
+)
+acdPortTxHistStatsUnicastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsUnicastPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsUnicastPkts.setUnits("Packets")
+_AcdPortTxHistStatsMulticastPkts_Type = Counter64
+_AcdPortTxHistStatsMulticastPkts_Object = MibTableColumn
+acdPortTxHistStatsMulticastPkts = _AcdPortTxHistStatsMulticastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 10),
+    _AcdPortTxHistStatsMulticastPkts_Type()
+)
+acdPortTxHistStatsMulticastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsMulticastPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsMulticastPkts.setUnits("Packets")
+_AcdPortTxHistStatsBroadcastPkts_Type = Counter64
+_AcdPortTxHistStatsBroadcastPkts_Object = MibTableColumn
+acdPortTxHistStatsBroadcastPkts = _AcdPortTxHistStatsBroadcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 11),
+    _AcdPortTxHistStatsBroadcastPkts_Type()
+)
+acdPortTxHistStatsBroadcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsBroadcastPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsBroadcastPkts.setUnits("Packets")
+_AcdPortTxHistStatsPauseFrames_Type = Counter64
+_AcdPortTxHistStatsPauseFrames_Object = MibTableColumn
+acdPortTxHistStatsPauseFrames = _AcdPortTxHistStatsPauseFrames_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 12),
+    _AcdPortTxHistStatsPauseFrames_Type()
+)
+acdPortTxHistStatsPauseFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPauseFrames.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPauseFrames.setUnits("Packets")
+_AcdPortTxHistStatsTaggedFrames_Type = Counter64
+_AcdPortTxHistStatsTaggedFrames_Object = MibTableColumn
+acdPortTxHistStatsTaggedFrames = _AcdPortTxHistStatsTaggedFrames_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 13),
+    _AcdPortTxHistStatsTaggedFrames_Type()
+)
+acdPortTxHistStatsTaggedFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsTaggedFrames.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsTaggedFrames.setUnits("Packets")
+_AcdPortTxHistStatsCRCErrors_Type = Counter64
+_AcdPortTxHistStatsCRCErrors_Object = MibTableColumn
+acdPortTxHistStatsCRCErrors = _AcdPortTxHistStatsCRCErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 14),
+    _AcdPortTxHistStatsCRCErrors_Type()
+)
+acdPortTxHistStatsCRCErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsCRCErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsCRCErrors.setUnits("Packets")
+_AcdPortTxHistStatsDeferred_Type = Counter64
+_AcdPortTxHistStatsDeferred_Object = MibTableColumn
+acdPortTxHistStatsDeferred = _AcdPortTxHistStatsDeferred_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 15),
+    _AcdPortTxHistStatsDeferred_Type()
+)
+acdPortTxHistStatsDeferred.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsDeferred.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsDeferred.setUnits("Packets")
+_AcdPortTxHistStatsExcessiveDeferrals_Type = Counter64
+_AcdPortTxHistStatsExcessiveDeferrals_Object = MibTableColumn
+acdPortTxHistStatsExcessiveDeferrals = _AcdPortTxHistStatsExcessiveDeferrals_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 16),
+    _AcdPortTxHistStatsExcessiveDeferrals_Type()
+)
+acdPortTxHistStatsExcessiveDeferrals.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsExcessiveDeferrals.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsExcessiveDeferrals.setUnits("Packets")
+_AcdPortTxHistStatsSingleCollisions_Type = Counter64
+_AcdPortTxHistStatsSingleCollisions_Object = MibTableColumn
+acdPortTxHistStatsSingleCollisions = _AcdPortTxHistStatsSingleCollisions_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 17),
+    _AcdPortTxHistStatsSingleCollisions_Type()
+)
+acdPortTxHistStatsSingleCollisions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsSingleCollisions.setStatus("current")
+_AcdPortTxHistStatsMultipleCollisions_Type = Counter64
+_AcdPortTxHistStatsMultipleCollisions_Object = MibTableColumn
+acdPortTxHistStatsMultipleCollisions = _AcdPortTxHistStatsMultipleCollisions_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 18),
+    _AcdPortTxHistStatsMultipleCollisions_Type()
+)
+acdPortTxHistStatsMultipleCollisions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsMultipleCollisions.setStatus("current")
+_AcdPortTxHistStatsExcessiveCollisions_Type = Counter64
+_AcdPortTxHistStatsExcessiveCollisions_Object = MibTableColumn
+acdPortTxHistStatsExcessiveCollisions = _AcdPortTxHistStatsExcessiveCollisions_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 19),
+    _AcdPortTxHistStatsExcessiveCollisions_Type()
+)
+acdPortTxHistStatsExcessiveCollisions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsExcessiveCollisions.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsExcessiveCollisions.setUnits("Packets")
+_AcdPortTxHistStatsLateCollisions_Type = Counter64
+_AcdPortTxHistStatsLateCollisions_Object = MibTableColumn
+acdPortTxHistStatsLateCollisions = _AcdPortTxHistStatsLateCollisions_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 20),
+    _AcdPortTxHistStatsLateCollisions_Type()
+)
+acdPortTxHistStatsLateCollisions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsLateCollisions.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsLateCollisions.setUnits("Packets")
+_AcdPortTxHistStatsNormalCollisions_Type = Counter64
+_AcdPortTxHistStatsNormalCollisions_Object = MibTableColumn
+acdPortTxHistStatsNormalCollisions = _AcdPortTxHistStatsNormalCollisions_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 21),
+    _AcdPortTxHistStatsNormalCollisions_Type()
+)
+acdPortTxHistStatsNormalCollisions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsNormalCollisions.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsNormalCollisions.setUnits("Packets")
+_AcdPortTxHistStatsFifoErrors_Type = Counter64
+_AcdPortTxHistStatsFifoErrors_Object = MibTableColumn
+acdPortTxHistStatsFifoErrors = _AcdPortTxHistStatsFifoErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 22),
+    _AcdPortTxHistStatsFifoErrors_Type()
+)
+acdPortTxHistStatsFifoErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsFifoErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsFifoErrors.setUnits("Packets")
+_AcdPortTxHistStatsPkts64_Type = Counter64
+_AcdPortTxHistStatsPkts64_Object = MibTableColumn
+acdPortTxHistStatsPkts64 = _AcdPortTxHistStatsPkts64_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 23),
+    _AcdPortTxHistStatsPkts64_Type()
+)
+acdPortTxHistStatsPkts64.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts64.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts64.setUnits("Packets")
+_AcdPortTxHistStatsPkts65to127_Type = Counter64
+_AcdPortTxHistStatsPkts65to127_Object = MibTableColumn
+acdPortTxHistStatsPkts65to127 = _AcdPortTxHistStatsPkts65to127_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 24),
+    _AcdPortTxHistStatsPkts65to127_Type()
+)
+acdPortTxHistStatsPkts65to127.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts65to127.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts65to127.setUnits("Packets")
+_AcdPortTxHistStatsPkts128to255_Type = Counter64
+_AcdPortTxHistStatsPkts128to255_Object = MibTableColumn
+acdPortTxHistStatsPkts128to255 = _AcdPortTxHistStatsPkts128to255_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 25),
+    _AcdPortTxHistStatsPkts128to255_Type()
+)
+acdPortTxHistStatsPkts128to255.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts128to255.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts128to255.setUnits("Packets")
+_AcdPortTxHistStatsPkts256to511_Type = Counter64
+_AcdPortTxHistStatsPkts256to511_Object = MibTableColumn
+acdPortTxHistStatsPkts256to511 = _AcdPortTxHistStatsPkts256to511_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 26),
+    _AcdPortTxHistStatsPkts256to511_Type()
+)
+acdPortTxHistStatsPkts256to511.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts256to511.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts256to511.setUnits("Packets")
+_AcdPortTxHistStatsPkts512to1023_Type = Counter64
+_AcdPortTxHistStatsPkts512to1023_Object = MibTableColumn
+acdPortTxHistStatsPkts512to1023 = _AcdPortTxHistStatsPkts512to1023_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 27),
+    _AcdPortTxHistStatsPkts512to1023_Type()
+)
+acdPortTxHistStatsPkts512to1023.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts512to1023.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts512to1023.setUnits("Packets")
+_AcdPortTxHistStatsPkts1024to1518_Type = Counter64
+_AcdPortTxHistStatsPkts1024to1518_Object = MibTableColumn
+acdPortTxHistStatsPkts1024to1518 = _AcdPortTxHistStatsPkts1024to1518_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 28),
+    _AcdPortTxHistStatsPkts1024to1518_Type()
+)
+acdPortTxHistStatsPkts1024to1518.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts1024to1518.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts1024to1518.setUnits("Packets")
+_AcdPortTxHistStatsPkts1519to2047_Type = Counter64
+_AcdPortTxHistStatsPkts1519to2047_Object = MibTableColumn
+acdPortTxHistStatsPkts1519to2047 = _AcdPortTxHistStatsPkts1519to2047_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 29),
+    _AcdPortTxHistStatsPkts1519to2047_Type()
+)
+acdPortTxHistStatsPkts1519to2047.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts1519to2047.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts1519to2047.setUnits("Packets")
+_AcdPortTxHistStatsPkts2048to4095_Type = Counter64
+_AcdPortTxHistStatsPkts2048to4095_Object = MibTableColumn
+acdPortTxHistStatsPkts2048to4095 = _AcdPortTxHistStatsPkts2048to4095_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 30),
+    _AcdPortTxHistStatsPkts2048to4095_Type()
+)
+acdPortTxHistStatsPkts2048to4095.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts2048to4095.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts2048to4095.setUnits("Packets")
+_AcdPortTxHistStatsPkts4096to8191_Type = Counter64
+_AcdPortTxHistStatsPkts4096to8191_Object = MibTableColumn
+acdPortTxHistStatsPkts4096to8191 = _AcdPortTxHistStatsPkts4096to8191_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 31),
+    _AcdPortTxHistStatsPkts4096to8191_Type()
+)
+acdPortTxHistStatsPkts4096to8191.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts4096to8191.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts4096to8191.setUnits("Packets")
+_AcdPortTxHistStatsPkts8192andMore_Type = Counter64
+_AcdPortTxHistStatsPkts8192andMore_Object = MibTableColumn
+acdPortTxHistStatsPkts8192andMore = _AcdPortTxHistStatsPkts8192andMore_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 32),
+    _AcdPortTxHistStatsPkts8192andMore_Type()
+)
+acdPortTxHistStatsPkts8192andMore.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts8192andMore.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPkts8192andMore.setUnits("Packets")
+_AcdPortTxHistStatsPktsLarge_Type = Counter64
+_AcdPortTxHistStatsPktsLarge_Object = MibTableColumn
+acdPortTxHistStatsPktsLarge = _AcdPortTxHistStatsPktsLarge_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 33),
+    _AcdPortTxHistStatsPktsLarge_Type()
+)
+acdPortTxHistStatsPktsLarge.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPktsLarge.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPktsLarge.setUnits("Packets")
+_AcdPortTxHistStatsPackets_Type = Counter64
+_AcdPortTxHistStatsPackets_Object = MibTableColumn
+acdPortTxHistStatsPackets = _AcdPortTxHistStatsPackets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 34),
+    _AcdPortTxHistStatsPackets_Type()
+)
+acdPortTxHistStatsPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPackets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPackets.setUnits("Packets")
+_AcdPortTxHistStatsPktsErrors_Type = Counter64
+_AcdPortTxHistStatsPktsErrors_Object = MibTableColumn
+acdPortTxHistStatsPktsErrors = _AcdPortTxHistStatsPktsErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 35),
+    _AcdPortTxHistStatsPktsErrors_Type()
+)
+acdPortTxHistStatsPktsErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPktsErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsPktsErrors.setUnits("Packets")
+_AcdPortTxHistL1Rate_Type = Gauge32
+_AcdPortTxHistL1Rate_Object = MibTableColumn
+acdPortTxHistL1Rate = _AcdPortTxHistL1Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 36),
+    _AcdPortTxHistL1Rate_Type()
+)
+acdPortTxHistL1Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistL1Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistL1Rate.setUnits("Mbps")
+_AcdPortTxHistL1Percent_Type = Gauge32
+_AcdPortTxHistL1Percent_Object = MibTableColumn
+acdPortTxHistL1Percent = _AcdPortTxHistL1Percent_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 37),
+    _AcdPortTxHistL1Percent_Type()
+)
+acdPortTxHistL1Percent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistL1Percent.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistL1Percent.setUnits("%")
+_AcdPortTxHistL2Rate_Type = Gauge32
+_AcdPortTxHistL2Rate_Object = MibTableColumn
+acdPortTxHistL2Rate = _AcdPortTxHistL2Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 1, 1, 38),
+    _AcdPortTxHistL2Rate_Type()
+)
+acdPortTxHistL2Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortTxHistL2Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortTxHistL2Rate.setUnits("Mbps")
+_AcdPortRxHistStatsTable_Object = MibTable
+acdPortRxHistStatsTable = _AcdPortRxHistStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2)
+)
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsTable.setStatus("current")
+_AcdPortRxHistStatsEntry_Object = MibTableRow
+acdPortRxHistStatsEntry = _AcdPortRxHistStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1)
+)
+acdPortRxHistStatsEntry.setIndexNames(
+    (0, "ACD-PORT-MIB", "acdPortRxHistStatsIndex"),
+    (0, "ACD-PORT-MIB", "acdPortRxHistStatsSampleIndex"),
+)
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsEntry.setStatus("current")
+
+
+class _AcdPortRxHistStatsIndex_Type(Unsigned32):
+    """Custom type acdPortRxHistStatsIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AcdPortRxHistStatsIndex_Type.__name__ = "Unsigned32"
+_AcdPortRxHistStatsIndex_Object = MibTableColumn
+acdPortRxHistStatsIndex = _AcdPortRxHistStatsIndex_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 1),
+    _AcdPortRxHistStatsIndex_Type()
+)
+acdPortRxHistStatsIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsIndex.setStatus("current")
+_AcdPortRxHistStatsSampleIndex_Type = Unsigned32
+_AcdPortRxHistStatsSampleIndex_Object = MibTableColumn
+acdPortRxHistStatsSampleIndex = _AcdPortRxHistStatsSampleIndex_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 2),
+    _AcdPortRxHistStatsSampleIndex_Type()
+)
+acdPortRxHistStatsSampleIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsSampleIndex.setStatus("current")
+
+
+class _AcdPortRxHistStatsStatus_Type(Integer32):
+    """Custom type acdPortRxHistStatsStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("valid", 1),
+          ("invalid", 2))
+    )
+
+
+_AcdPortRxHistStatsStatus_Type.__name__ = "Integer32"
+_AcdPortRxHistStatsStatus_Object = MibTableColumn
+acdPortRxHistStatsStatus = _AcdPortRxHistStatsStatus_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 3),
+    _AcdPortRxHistStatsStatus_Type()
+)
+acdPortRxHistStatsStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsStatus.setStatus("current")
+_AcdPortRxHistStatsDuration_Type = Unsigned32
+_AcdPortRxHistStatsDuration_Object = MibTableColumn
+acdPortRxHistStatsDuration = _AcdPortRxHistStatsDuration_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 4),
+    _AcdPortRxHistStatsDuration_Type()
+)
+acdPortRxHistStatsDuration.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsDuration.setStatus("current")
+_AcdPortRxHistStatsIntervalEnd_Type = DateAndTime
+_AcdPortRxHistStatsIntervalEnd_Object = MibTableColumn
+acdPortRxHistStatsIntervalEnd = _AcdPortRxHistStatsIntervalEnd_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 5),
+    _AcdPortRxHistStatsIntervalEnd_Type()
+)
+acdPortRxHistStatsIntervalEnd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsIntervalEnd.setStatus("current")
+
+
+class _AcdPortRxHistStatsSupportBits_Type(Bits):
+    """Custom type acdPortRxHistStatsSupportBits based on Bits"""
+    namedValues = NamedValues(
+        *(("bBytesGood", 0),
+          ("bBytesTotal", 1),
+          ("bRxStatsShortOk", 2),
+          ("bRxStatsShortBad", 3),
+          ("bRxStatsLongOk", 4),
+          ("bRxStatsLongBad", 5),
+          ("bUnicastPkts", 6),
+          ("bMulticastPkts", 7),
+          ("bBroadcastPkts", 8),
+          ("bPauseFrames", 9),
+          ("bTaggedFrames", 10),
+          ("bCRCErrors", 11),
+          ("bAlignErrors", 12),
+          ("bRuntFrames", 13),
+          ("bLengthErrors", 14),
+          ("bFalseCRS", 15),
+          ("bPhyErrors", 16),
+          ("bFifoErrors", 17),
+          ("bIgnored", 18),
+          ("bBadOpcode", 19),
+          ("bPkts64", 20),
+          ("bPkts65to127", 21),
+          ("bPkts128to255", 22),
+          ("bPkts256to511", 23),
+          ("bPkts512to1023", 24),
+          ("bPkts1024to1518", 25),
+          ("bPkts1519to2047", 26),
+          ("bPkts2048to4095", 27),
+          ("bPkts4096to8191", 28),
+          ("bPkts8192andMore", 29),
+          ("bPktsLarge", 30))
+    )
+
+_AcdPortRxHistStatsSupportBits_Type.__name__ = "Bits"
+_AcdPortRxHistStatsSupportBits_Object = MibTableColumn
+acdPortRxHistStatsSupportBits = _AcdPortRxHistStatsSupportBits_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 6),
+    _AcdPortRxHistStatsSupportBits_Type()
+)
+acdPortRxHistStatsSupportBits.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsSupportBits.setStatus("current")
+_AcdPortRxHistStatsBytesGood_Type = Counter64
+_AcdPortRxHistStatsBytesGood_Object = MibTableColumn
+acdPortRxHistStatsBytesGood = _AcdPortRxHistStatsBytesGood_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 7),
+    _AcdPortRxHistStatsBytesGood_Type()
+)
+acdPortRxHistStatsBytesGood.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBytesGood.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBytesGood.setUnits("Octets")
+_AcdPortRxHistStatsBytesTotal_Type = Counter64
+_AcdPortRxHistStatsBytesTotal_Object = MibTableColumn
+acdPortRxHistStatsBytesTotal = _AcdPortRxHistStatsBytesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 8),
+    _AcdPortRxHistStatsBytesTotal_Type()
+)
+acdPortRxHistStatsBytesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBytesTotal.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBytesTotal.setUnits("Octets")
+_AcdPortRxHistStatsShortOk_Type = Counter64
+_AcdPortRxHistStatsShortOk_Object = MibTableColumn
+acdPortRxHistStatsShortOk = _AcdPortRxHistStatsShortOk_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 9),
+    _AcdPortRxHistStatsShortOk_Type()
+)
+acdPortRxHistStatsShortOk.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsShortOk.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsShortOk.setUnits("Packets")
+_AcdPortRxHistStatsShortBad_Type = Counter64
+_AcdPortRxHistStatsShortBad_Object = MibTableColumn
+acdPortRxHistStatsShortBad = _AcdPortRxHistStatsShortBad_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 10),
+    _AcdPortRxHistStatsShortBad_Type()
+)
+acdPortRxHistStatsShortBad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsShortBad.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsShortBad.setUnits("Packets")
+_AcdPortRxHistStatsLongOk_Type = Counter64
+_AcdPortRxHistStatsLongOk_Object = MibTableColumn
+acdPortRxHistStatsLongOk = _AcdPortRxHistStatsLongOk_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 11),
+    _AcdPortRxHistStatsLongOk_Type()
+)
+acdPortRxHistStatsLongOk.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsLongOk.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsLongOk.setUnits("Packets")
+_AcdPortRxHistStatsLongBad_Type = Counter64
+_AcdPortRxHistStatsLongBad_Object = MibTableColumn
+acdPortRxHistStatsLongBad = _AcdPortRxHistStatsLongBad_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 12),
+    _AcdPortRxHistStatsLongBad_Type()
+)
+acdPortRxHistStatsLongBad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsLongBad.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsLongBad.setUnits("Packets")
+_AcdPortRxHistStatsUnicastPkts_Type = Counter64
+_AcdPortRxHistStatsUnicastPkts_Object = MibTableColumn
+acdPortRxHistStatsUnicastPkts = _AcdPortRxHistStatsUnicastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 13),
+    _AcdPortRxHistStatsUnicastPkts_Type()
+)
+acdPortRxHistStatsUnicastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsUnicastPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsUnicastPkts.setUnits("Packets")
+_AcdPortRxHistStatsMulticastPkts_Type = Counter64
+_AcdPortRxHistStatsMulticastPkts_Object = MibTableColumn
+acdPortRxHistStatsMulticastPkts = _AcdPortRxHistStatsMulticastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 14),
+    _AcdPortRxHistStatsMulticastPkts_Type()
+)
+acdPortRxHistStatsMulticastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsMulticastPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsMulticastPkts.setUnits("Packets")
+_AcdPortRxHistStatsBroadcastPkts_Type = Counter64
+_AcdPortRxHistStatsBroadcastPkts_Object = MibTableColumn
+acdPortRxHistStatsBroadcastPkts = _AcdPortRxHistStatsBroadcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 15),
+    _AcdPortRxHistStatsBroadcastPkts_Type()
+)
+acdPortRxHistStatsBroadcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBroadcastPkts.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBroadcastPkts.setUnits("Packets")
+_AcdPortRxHistStatsPauseFrames_Type = Counter64
+_AcdPortRxHistStatsPauseFrames_Object = MibTableColumn
+acdPortRxHistStatsPauseFrames = _AcdPortRxHistStatsPauseFrames_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 16),
+    _AcdPortRxHistStatsPauseFrames_Type()
+)
+acdPortRxHistStatsPauseFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPauseFrames.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPauseFrames.setUnits("Packets")
+_AcdPortRxHistStatsTaggedFrames_Type = Counter64
+_AcdPortRxHistStatsTaggedFrames_Object = MibTableColumn
+acdPortRxHistStatsTaggedFrames = _AcdPortRxHistStatsTaggedFrames_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 17),
+    _AcdPortRxHistStatsTaggedFrames_Type()
+)
+acdPortRxHistStatsTaggedFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsTaggedFrames.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsTaggedFrames.setUnits("Packets")
+_AcdPortRxHistStatsCRCErrors_Type = Counter64
+_AcdPortRxHistStatsCRCErrors_Object = MibTableColumn
+acdPortRxHistStatsCRCErrors = _AcdPortRxHistStatsCRCErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 18),
+    _AcdPortRxHistStatsCRCErrors_Type()
+)
+acdPortRxHistStatsCRCErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsCRCErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsCRCErrors.setUnits("Packets")
+_AcdPortRxHistStatsAlignErrors_Type = Counter64
+_AcdPortRxHistStatsAlignErrors_Object = MibTableColumn
+acdPortRxHistStatsAlignErrors = _AcdPortRxHistStatsAlignErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 19),
+    _AcdPortRxHistStatsAlignErrors_Type()
+)
+acdPortRxHistStatsAlignErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsAlignErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsAlignErrors.setUnits("Packets")
+_AcdPortRxHistStatsRuntFrames_Type = Counter64
+_AcdPortRxHistStatsRuntFrames_Object = MibTableColumn
+acdPortRxHistStatsRuntFrames = _AcdPortRxHistStatsRuntFrames_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 20),
+    _AcdPortRxHistStatsRuntFrames_Type()
+)
+acdPortRxHistStatsRuntFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsRuntFrames.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsRuntFrames.setUnits("Packets")
+_AcdPortRxHistStatsLengthErrors_Type = Counter64
+_AcdPortRxHistStatsLengthErrors_Object = MibTableColumn
+acdPortRxHistStatsLengthErrors = _AcdPortRxHistStatsLengthErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 21),
+    _AcdPortRxHistStatsLengthErrors_Type()
+)
+acdPortRxHistStatsLengthErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsLengthErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsLengthErrors.setUnits("Packets")
+_AcdPortRxHistStatsFalseCRS_Type = Counter64
+_AcdPortRxHistStatsFalseCRS_Object = MibTableColumn
+acdPortRxHistStatsFalseCRS = _AcdPortRxHistStatsFalseCRS_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 22),
+    _AcdPortRxHistStatsFalseCRS_Type()
+)
+acdPortRxHistStatsFalseCRS.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsFalseCRS.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsFalseCRS.setUnits("Packets")
+_AcdPortRxHistStatsPhyErrors_Type = Counter64
+_AcdPortRxHistStatsPhyErrors_Object = MibTableColumn
+acdPortRxHistStatsPhyErrors = _AcdPortRxHistStatsPhyErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 23),
+    _AcdPortRxHistStatsPhyErrors_Type()
+)
+acdPortRxHistStatsPhyErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPhyErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPhyErrors.setUnits("Packets")
+_AcdPortRxHistStatsFifoErrors_Type = Counter64
+_AcdPortRxHistStatsFifoErrors_Object = MibTableColumn
+acdPortRxHistStatsFifoErrors = _AcdPortRxHistStatsFifoErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 24),
+    _AcdPortRxHistStatsFifoErrors_Type()
+)
+acdPortRxHistStatsFifoErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsFifoErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsFifoErrors.setUnits("Packets")
+_AcdPortRxHistStatsIgnored_Type = Counter64
+_AcdPortRxHistStatsIgnored_Object = MibTableColumn
+acdPortRxHistStatsIgnored = _AcdPortRxHistStatsIgnored_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 25),
+    _AcdPortRxHistStatsIgnored_Type()
+)
+acdPortRxHistStatsIgnored.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsIgnored.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsIgnored.setUnits("Packets")
+_AcdPortRxHistStatsBadOpcode_Type = Counter64
+_AcdPortRxHistStatsBadOpcode_Object = MibTableColumn
+acdPortRxHistStatsBadOpcode = _AcdPortRxHistStatsBadOpcode_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 26),
+    _AcdPortRxHistStatsBadOpcode_Type()
+)
+acdPortRxHistStatsBadOpcode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBadOpcode.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsBadOpcode.setUnits("Packets")
+_AcdPortRxHistStatsPkts64_Type = Counter64
+_AcdPortRxHistStatsPkts64_Object = MibTableColumn
+acdPortRxHistStatsPkts64 = _AcdPortRxHistStatsPkts64_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 27),
+    _AcdPortRxHistStatsPkts64_Type()
+)
+acdPortRxHistStatsPkts64.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts64.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts64.setUnits("Packets")
+_AcdPortRxHistStatsPkts65to127_Type = Counter64
+_AcdPortRxHistStatsPkts65to127_Object = MibTableColumn
+acdPortRxHistStatsPkts65to127 = _AcdPortRxHistStatsPkts65to127_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 28),
+    _AcdPortRxHistStatsPkts65to127_Type()
+)
+acdPortRxHistStatsPkts65to127.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts65to127.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts65to127.setUnits("Packets")
+_AcdPortRxHistStatsPkts128to255_Type = Counter64
+_AcdPortRxHistStatsPkts128to255_Object = MibTableColumn
+acdPortRxHistStatsPkts128to255 = _AcdPortRxHistStatsPkts128to255_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 29),
+    _AcdPortRxHistStatsPkts128to255_Type()
+)
+acdPortRxHistStatsPkts128to255.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts128to255.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts128to255.setUnits("Packets")
+_AcdPortRxHistStatsPkts256to511_Type = Counter64
+_AcdPortRxHistStatsPkts256to511_Object = MibTableColumn
+acdPortRxHistStatsPkts256to511 = _AcdPortRxHistStatsPkts256to511_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 30),
+    _AcdPortRxHistStatsPkts256to511_Type()
+)
+acdPortRxHistStatsPkts256to511.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts256to511.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts256to511.setUnits("Packets")
+_AcdPortRxHistStatsPkts512to1023_Type = Counter64
+_AcdPortRxHistStatsPkts512to1023_Object = MibTableColumn
+acdPortRxHistStatsPkts512to1023 = _AcdPortRxHistStatsPkts512to1023_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 31),
+    _AcdPortRxHistStatsPkts512to1023_Type()
+)
+acdPortRxHistStatsPkts512to1023.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts512to1023.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts512to1023.setUnits("Packets")
+_AcdPortRxHistStatsPkts1024to1518_Type = Counter64
+_AcdPortRxHistStatsPkts1024to1518_Object = MibTableColumn
+acdPortRxHistStatsPkts1024to1518 = _AcdPortRxHistStatsPkts1024to1518_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 32),
+    _AcdPortRxHistStatsPkts1024to1518_Type()
+)
+acdPortRxHistStatsPkts1024to1518.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts1024to1518.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts1024to1518.setUnits("Packets")
+_AcdPortRxHistStatsPkts1519to2047_Type = Counter64
+_AcdPortRxHistStatsPkts1519to2047_Object = MibTableColumn
+acdPortRxHistStatsPkts1519to2047 = _AcdPortRxHistStatsPkts1519to2047_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 33),
+    _AcdPortRxHistStatsPkts1519to2047_Type()
+)
+acdPortRxHistStatsPkts1519to2047.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts1519to2047.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts1519to2047.setUnits("Packets")
+_AcdPortRxHistStatsPkts2048to4095_Type = Counter64
+_AcdPortRxHistStatsPkts2048to4095_Object = MibTableColumn
+acdPortRxHistStatsPkts2048to4095 = _AcdPortRxHistStatsPkts2048to4095_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 34),
+    _AcdPortRxHistStatsPkts2048to4095_Type()
+)
+acdPortRxHistStatsPkts2048to4095.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts2048to4095.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts2048to4095.setUnits("Packets")
+_AcdPortRxHistStatsPkts4096to8191_Type = Counter64
+_AcdPortRxHistStatsPkts4096to8191_Object = MibTableColumn
+acdPortRxHistStatsPkts4096to8191 = _AcdPortRxHistStatsPkts4096to8191_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 35),
+    _AcdPortRxHistStatsPkts4096to8191_Type()
+)
+acdPortRxHistStatsPkts4096to8191.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts4096to8191.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts4096to8191.setUnits("Packets")
+_AcdPortRxHistStatsPkts8192andMore_Type = Counter64
+_AcdPortRxHistStatsPkts8192andMore_Object = MibTableColumn
+acdPortRxHistStatsPkts8192andMore = _AcdPortRxHistStatsPkts8192andMore_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 36),
+    _AcdPortRxHistStatsPkts8192andMore_Type()
+)
+acdPortRxHistStatsPkts8192andMore.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts8192andMore.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPkts8192andMore.setUnits("Packets")
+_AcdPortRxHistStatsPktsLarge_Type = Counter64
+_AcdPortRxHistStatsPktsLarge_Object = MibTableColumn
+acdPortRxHistStatsPktsLarge = _AcdPortRxHistStatsPktsLarge_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 37),
+    _AcdPortRxHistStatsPktsLarge_Type()
+)
+acdPortRxHistStatsPktsLarge.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPktsLarge.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPktsLarge.setUnits("Packets")
+_AcdPortRxHistStatsPackets_Type = Counter64
+_AcdPortRxHistStatsPackets_Object = MibTableColumn
+acdPortRxHistStatsPackets = _AcdPortRxHistStatsPackets_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 38),
+    _AcdPortRxHistStatsPackets_Type()
+)
+acdPortRxHistStatsPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPackets.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPackets.setUnits("Packets")
+_AcdPortRxHistStatsPktsErrors_Type = Counter64
+_AcdPortRxHistStatsPktsErrors_Object = MibTableColumn
+acdPortRxHistStatsPktsErrors = _AcdPortRxHistStatsPktsErrors_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 39),
+    _AcdPortRxHistStatsPktsErrors_Type()
+)
+acdPortRxHistStatsPktsErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPktsErrors.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsPktsErrors.setUnits("Packets")
+_AcdPortRxHistL1Rate_Type = Gauge32
+_AcdPortRxHistL1Rate_Object = MibTableColumn
+acdPortRxHistL1Rate = _AcdPortRxHistL1Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 40),
+    _AcdPortRxHistL1Rate_Type()
+)
+acdPortRxHistL1Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistL1Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistL1Rate.setUnits("Mbps")
+_AcdPortRxHistL1Percent_Type = Gauge32
+_AcdPortRxHistL1Percent_Object = MibTableColumn
+acdPortRxHistL1Percent = _AcdPortRxHistL1Percent_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 41),
+    _AcdPortRxHistL1Percent_Type()
+)
+acdPortRxHistL1Percent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistL1Percent.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistL1Percent.setUnits("%")
+_AcdPortRxHistL2Rate_Type = Gauge32
+_AcdPortRxHistL2Rate_Object = MibTableColumn
+acdPortRxHistL2Rate = _AcdPortRxHistL2Rate_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 42),
+    _AcdPortRxHistL2Rate_Type()
+)
+acdPortRxHistL2Rate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistL2Rate.setStatus("current")
+if mibBuilder.loadTexts:
+    acdPortRxHistL2Rate.setUnits("Mbps")
+
+
+class _AcdPortRxHistStatsSupportBitsExt_Type(Bits):
+    """Custom type acdPortRxHistStatsSupportBitsExt based on Bits"""
+    namedValues = NamedValues(
+        *(("bL1Rate", 0),
+          ("bL1Percent", 1),
+          ("bL2Rate", 2))
+    )
+
+_AcdPortRxHistStatsSupportBitsExt_Type.__name__ = "Bits"
+_AcdPortRxHistStatsSupportBitsExt_Object = MibTableColumn
+acdPortRxHistStatsSupportBitsExt = _AcdPortRxHistStatsSupportBitsExt_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 1, 5, 2, 1, 43),
+    _AcdPortRxHistStatsSupportBitsExt_Type()
+)
+acdPortRxHistStatsSupportBitsExt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsSupportBitsExt.setStatus("current")
 _AcdPortConformance_ObjectIdentity = ObjectIdentity
 acdPortConformance = _AcdPortConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 9, 2)
@@ -1444,7 +2700,9 @@ acdPortConfigGroup.setObjects(
         ("ACD-PORT-MIB", "acdPortConfigDuplex"),
         ("ACD-PORT-MIB", "acdPortConfigMdi"),
         ("ACD-PORT-MIB", "acdPortConfigPauseMode"),
-        ("ACD-PORT-MIB", "acdPortConfigAdvertisement"))
+        ("ACD-PORT-MIB", "acdPortConfigAdvertisement"),
+        ("ACD-PORT-MIB", "acdPortConfigForceTxOn"),
+        ("ACD-PORT-MIB", "acdPortConfigLaserMode"))
 )
 if mibBuilder.loadTexts:
     acdPortConfigGroup.setStatus("current")
@@ -1500,7 +2758,10 @@ acdPortTxStatsGroup.setObjects(
         ("ACD-PORT-MIB", "acdPortTxStatsPkts2048to4095"),
         ("ACD-PORT-MIB", "acdPortTxStatsPkts4096to8191"),
         ("ACD-PORT-MIB", "acdPortTxStatsPkts8192andMore"),
-        ("ACD-PORT-MIB", "acdPortTxStatsPktsLarge"))
+        ("ACD-PORT-MIB", "acdPortTxStatsPktsLarge"),
+        ("ACD-PORT-MIB", "acdPortTxL1Rate"),
+        ("ACD-PORT-MIB", "acdPortTxL1Percent"),
+        ("ACD-PORT-MIB", "acdPortTxL2Rate"))
 )
 if mibBuilder.loadTexts:
     acdPortTxStatsGroup.setStatus("current")
@@ -1540,7 +2801,11 @@ acdPortRxStatsGroup.setObjects(
         ("ACD-PORT-MIB", "acdPortRxStatsPkts2048to4095"),
         ("ACD-PORT-MIB", "acdPortRxStatsPkts4096to8191"),
         ("ACD-PORT-MIB", "acdPortRxStatsPkts8192andMore"),
-        ("ACD-PORT-MIB", "acdPortRxStatsPktsLarge"))
+        ("ACD-PORT-MIB", "acdPortRxStatsPktsLarge"),
+        ("ACD-PORT-MIB", "acdPortRxL1Rate"),
+        ("ACD-PORT-MIB", "acdPortRxL1Percent"),
+        ("ACD-PORT-MIB", "acdPortRxL2Rate"),
+        ("ACD-PORT-MIB", "acdPortRxStatsSupportBitsExt"))
 )
 if mibBuilder.loadTexts:
     acdPortRxStatsGroup.setStatus("current")
@@ -1553,6 +2818,116 @@ acdPortTidGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     acdPortTidGroup.setStatus("current")
+
+acdPortTxHistStatsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 2, 2, 6)
+)
+acdPortTxHistStatsGroup.setObjects(
+      *(("ACD-PORT-MIB", "acdPortTxHistStatsIndex"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsSampleIndex"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsStatus"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsDuration"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsIntervalEnd"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsSupportBits"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsBytesGood"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsBytesTotal"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsUnicastPkts"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsMulticastPkts"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsBroadcastPkts"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPauseFrames"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsTaggedFrames"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsCRCErrors"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsDeferred"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsExcessiveDeferrals"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsSingleCollisions"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsMultipleCollisions"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsExcessiveCollisions"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsLateCollisions"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsNormalCollisions"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsFifoErrors"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts64"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts65to127"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts128to255"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts256to511"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts512to1023"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts1024to1518"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts1519to2047"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts2048to4095"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts4096to8191"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPkts8192andMore"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPktsLarge"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPackets"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsPktsErrors"),
+        ("ACD-PORT-MIB", "acdPortTxHistL1Rate"),
+        ("ACD-PORT-MIB", "acdPortTxHistL1Percent"),
+        ("ACD-PORT-MIB", "acdPortTxHistL2Rate"))
+)
+if mibBuilder.loadTexts:
+    acdPortTxHistStatsGroup.setStatus("current")
+
+acdPortRxHistStatsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 2, 2, 7)
+)
+acdPortRxHistStatsGroup.setObjects(
+      *(("ACD-PORT-MIB", "acdPortRxHistStatsIndex"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsSampleIndex"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsStatus"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsDuration"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsIntervalEnd"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsSupportBits"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsBytesGood"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsBytesTotal"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsShortOk"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsShortBad"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsLongOk"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsLongBad"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsUnicastPkts"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsMulticastPkts"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsBroadcastPkts"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPauseFrames"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsTaggedFrames"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsCRCErrors"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsAlignErrors"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsRuntFrames"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsLengthErrors"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsFalseCRS"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPhyErrors"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsFifoErrors"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsIgnored"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsBadOpcode"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts64"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts65to127"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts128to255"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts256to511"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts512to1023"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts1024to1518"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts1519to2047"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts2048to4095"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts4096to8191"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPkts8192andMore"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPktsLarge"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPackets"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsPktsErrors"),
+        ("ACD-PORT-MIB", "acdPortRxHistL1Rate"),
+        ("ACD-PORT-MIB", "acdPortRxHistL1Percent"),
+        ("ACD-PORT-MIB", "acdPortRxHistL2Rate"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsSupportBitsExt"))
+)
+if mibBuilder.loadTexts:
+    acdPortRxHistStatsGroup.setStatus("current")
+
+acdPortStatsSumGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 9, 2, 2, 8)
+)
+acdPortStatsSumGroup.setObjects(
+      *(("ACD-PORT-MIB", "acdPortStatsSumName"),
+        ("ACD-PORT-MIB", "acdPortStatsSumTXPkt"),
+        ("ACD-PORT-MIB", "acdPortStatsSumTXErr"),
+        ("ACD-PORT-MIB", "acdPortStatsSumRXPkt"),
+        ("ACD-PORT-MIB", "acdPortStatsSumRXErr"))
+)
+if mibBuilder.loadTexts:
+    acdPortStatsSumGroup.setStatus("current")
 
 
 # Notification objects
@@ -1574,7 +2949,10 @@ acdPortCompliance.setObjects(
         ("ACD-PORT-MIB", "acdPortStatusGroup"),
         ("ACD-PORT-MIB", "acdPortTxStatsGroup"),
         ("ACD-PORT-MIB", "acdPortRxStatsGroup"),
-        ("ACD-PORT-MIB", "acdPortTidGroup"))
+        ("ACD-PORT-MIB", "acdPortTidGroup"),
+        ("ACD-PORT-MIB", "acdPortTxHistStatsGroup"),
+        ("ACD-PORT-MIB", "acdPortRxHistStatsGroup"),
+        ("ACD-PORT-MIB", "acdPortStatsSumGroup"))
 )
 if mibBuilder.loadTexts:
     acdPortCompliance.setStatus(
@@ -1604,6 +2982,8 @@ mibBuilder.exportSymbols(
        "acdPortConfigMdi": acdPortConfigMdi,
        "acdPortConfigPauseMode": acdPortConfigPauseMode,
        "acdPortConfigAdvertisement": acdPortConfigAdvertisement,
+       "acdPortConfigForceTxOn": acdPortConfigForceTxOn,
+       "acdPortConfigLaserMode": acdPortConfigLaserMode,
        "acdPortStatus": acdPortStatus,
        "acdPortStatusTable": acdPortStatusTable,
        "acdPortStatusEntry": acdPortStatusEntry,
@@ -1652,6 +3032,9 @@ mibBuilder.exportSymbols(
        "acdPortTxStatsPkts4096to8191": acdPortTxStatsPkts4096to8191,
        "acdPortTxStatsPkts8192andMore": acdPortTxStatsPkts8192andMore,
        "acdPortTxStatsPktsLarge": acdPortTxStatsPktsLarge,
+       "acdPortTxL1Rate": acdPortTxL1Rate,
+       "acdPortTxL1Percent": acdPortTxL1Percent,
+       "acdPortTxL2Rate": acdPortTxL2Rate,
        "acdPortRxStatsTable": acdPortRxStatsTable,
        "acdPortRxStatsEntry": acdPortRxStatsEntry,
        "acdPortRxStatsIndex": acdPortRxStatsIndex,
@@ -1687,8 +3070,106 @@ mibBuilder.exportSymbols(
        "acdPortRxStatsPkts4096to8191": acdPortRxStatsPkts4096to8191,
        "acdPortRxStatsPkts8192andMore": acdPortRxStatsPkts8192andMore,
        "acdPortRxStatsPktsLarge": acdPortRxStatsPktsLarge,
+       "acdPortRxL1Rate": acdPortRxL1Rate,
+       "acdPortRxL1Percent": acdPortRxL1Percent,
+       "acdPortRxL2Rate": acdPortRxL2Rate,
+       "acdPortRxStatsSupportBitsExt": acdPortRxStatsSupportBitsExt,
+       "acdPortStatsSumTable": acdPortStatsSumTable,
+       "acdPortStatsSumEntry": acdPortStatsSumEntry,
+       "acdPortStatsSumIndex": acdPortStatsSumIndex,
+       "acdPortStatsSumName": acdPortStatsSumName,
+       "acdPortStatsSumTXPkt": acdPortStatsSumTXPkt,
+       "acdPortStatsSumTXErr": acdPortStatsSumTXErr,
+       "acdPortStatsSumRXPkt": acdPortStatsSumRXPkt,
+       "acdPortStatsSumRXErr": acdPortStatsSumRXErr,
        "acdPortTableTid": acdPortTableTid,
        "acdPortConfigTableLastChangeTid": acdPortConfigTableLastChangeTid,
+       "acdPortHistStats": acdPortHistStats,
+       "acdPortTxHistStatsTable": acdPortTxHistStatsTable,
+       "acdPortTxHistStatsEntry": acdPortTxHistStatsEntry,
+       "acdPortTxHistStatsIndex": acdPortTxHistStatsIndex,
+       "acdPortTxHistStatsSampleIndex": acdPortTxHistStatsSampleIndex,
+       "acdPortTxHistStatsStatus": acdPortTxHistStatsStatus,
+       "acdPortTxHistStatsDuration": acdPortTxHistStatsDuration,
+       "acdPortTxHistStatsIntervalEnd": acdPortTxHistStatsIntervalEnd,
+       "acdPortTxHistStatsSupportBits": acdPortTxHistStatsSupportBits,
+       "acdPortTxHistStatsBytesGood": acdPortTxHistStatsBytesGood,
+       "acdPortTxHistStatsBytesTotal": acdPortTxHistStatsBytesTotal,
+       "acdPortTxHistStatsUnicastPkts": acdPortTxHistStatsUnicastPkts,
+       "acdPortTxHistStatsMulticastPkts": acdPortTxHistStatsMulticastPkts,
+       "acdPortTxHistStatsBroadcastPkts": acdPortTxHistStatsBroadcastPkts,
+       "acdPortTxHistStatsPauseFrames": acdPortTxHistStatsPauseFrames,
+       "acdPortTxHistStatsTaggedFrames": acdPortTxHistStatsTaggedFrames,
+       "acdPortTxHistStatsCRCErrors": acdPortTxHistStatsCRCErrors,
+       "acdPortTxHistStatsDeferred": acdPortTxHistStatsDeferred,
+       "acdPortTxHistStatsExcessiveDeferrals": acdPortTxHistStatsExcessiveDeferrals,
+       "acdPortTxHistStatsSingleCollisions": acdPortTxHistStatsSingleCollisions,
+       "acdPortTxHistStatsMultipleCollisions": acdPortTxHistStatsMultipleCollisions,
+       "acdPortTxHistStatsExcessiveCollisions": acdPortTxHistStatsExcessiveCollisions,
+       "acdPortTxHistStatsLateCollisions": acdPortTxHistStatsLateCollisions,
+       "acdPortTxHistStatsNormalCollisions": acdPortTxHistStatsNormalCollisions,
+       "acdPortTxHistStatsFifoErrors": acdPortTxHistStatsFifoErrors,
+       "acdPortTxHistStatsPkts64": acdPortTxHistStatsPkts64,
+       "acdPortTxHistStatsPkts65to127": acdPortTxHistStatsPkts65to127,
+       "acdPortTxHistStatsPkts128to255": acdPortTxHistStatsPkts128to255,
+       "acdPortTxHistStatsPkts256to511": acdPortTxHistStatsPkts256to511,
+       "acdPortTxHistStatsPkts512to1023": acdPortTxHistStatsPkts512to1023,
+       "acdPortTxHistStatsPkts1024to1518": acdPortTxHistStatsPkts1024to1518,
+       "acdPortTxHistStatsPkts1519to2047": acdPortTxHistStatsPkts1519to2047,
+       "acdPortTxHistStatsPkts2048to4095": acdPortTxHistStatsPkts2048to4095,
+       "acdPortTxHistStatsPkts4096to8191": acdPortTxHistStatsPkts4096to8191,
+       "acdPortTxHistStatsPkts8192andMore": acdPortTxHistStatsPkts8192andMore,
+       "acdPortTxHistStatsPktsLarge": acdPortTxHistStatsPktsLarge,
+       "acdPortTxHistStatsPackets": acdPortTxHistStatsPackets,
+       "acdPortTxHistStatsPktsErrors": acdPortTxHistStatsPktsErrors,
+       "acdPortTxHistL1Rate": acdPortTxHistL1Rate,
+       "acdPortTxHistL1Percent": acdPortTxHistL1Percent,
+       "acdPortTxHistL2Rate": acdPortTxHistL2Rate,
+       "acdPortRxHistStatsTable": acdPortRxHistStatsTable,
+       "acdPortRxHistStatsEntry": acdPortRxHistStatsEntry,
+       "acdPortRxHistStatsIndex": acdPortRxHistStatsIndex,
+       "acdPortRxHistStatsSampleIndex": acdPortRxHistStatsSampleIndex,
+       "acdPortRxHistStatsStatus": acdPortRxHistStatsStatus,
+       "acdPortRxHistStatsDuration": acdPortRxHistStatsDuration,
+       "acdPortRxHistStatsIntervalEnd": acdPortRxHistStatsIntervalEnd,
+       "acdPortRxHistStatsSupportBits": acdPortRxHistStatsSupportBits,
+       "acdPortRxHistStatsBytesGood": acdPortRxHistStatsBytesGood,
+       "acdPortRxHistStatsBytesTotal": acdPortRxHistStatsBytesTotal,
+       "acdPortRxHistStatsShortOk": acdPortRxHistStatsShortOk,
+       "acdPortRxHistStatsShortBad": acdPortRxHistStatsShortBad,
+       "acdPortRxHistStatsLongOk": acdPortRxHistStatsLongOk,
+       "acdPortRxHistStatsLongBad": acdPortRxHistStatsLongBad,
+       "acdPortRxHistStatsUnicastPkts": acdPortRxHistStatsUnicastPkts,
+       "acdPortRxHistStatsMulticastPkts": acdPortRxHistStatsMulticastPkts,
+       "acdPortRxHistStatsBroadcastPkts": acdPortRxHistStatsBroadcastPkts,
+       "acdPortRxHistStatsPauseFrames": acdPortRxHistStatsPauseFrames,
+       "acdPortRxHistStatsTaggedFrames": acdPortRxHistStatsTaggedFrames,
+       "acdPortRxHistStatsCRCErrors": acdPortRxHistStatsCRCErrors,
+       "acdPortRxHistStatsAlignErrors": acdPortRxHistStatsAlignErrors,
+       "acdPortRxHistStatsRuntFrames": acdPortRxHistStatsRuntFrames,
+       "acdPortRxHistStatsLengthErrors": acdPortRxHistStatsLengthErrors,
+       "acdPortRxHistStatsFalseCRS": acdPortRxHistStatsFalseCRS,
+       "acdPortRxHistStatsPhyErrors": acdPortRxHistStatsPhyErrors,
+       "acdPortRxHistStatsFifoErrors": acdPortRxHistStatsFifoErrors,
+       "acdPortRxHistStatsIgnored": acdPortRxHistStatsIgnored,
+       "acdPortRxHistStatsBadOpcode": acdPortRxHistStatsBadOpcode,
+       "acdPortRxHistStatsPkts64": acdPortRxHistStatsPkts64,
+       "acdPortRxHistStatsPkts65to127": acdPortRxHistStatsPkts65to127,
+       "acdPortRxHistStatsPkts128to255": acdPortRxHistStatsPkts128to255,
+       "acdPortRxHistStatsPkts256to511": acdPortRxHistStatsPkts256to511,
+       "acdPortRxHistStatsPkts512to1023": acdPortRxHistStatsPkts512to1023,
+       "acdPortRxHistStatsPkts1024to1518": acdPortRxHistStatsPkts1024to1518,
+       "acdPortRxHistStatsPkts1519to2047": acdPortRxHistStatsPkts1519to2047,
+       "acdPortRxHistStatsPkts2048to4095": acdPortRxHistStatsPkts2048to4095,
+       "acdPortRxHistStatsPkts4096to8191": acdPortRxHistStatsPkts4096to8191,
+       "acdPortRxHistStatsPkts8192andMore": acdPortRxHistStatsPkts8192andMore,
+       "acdPortRxHistStatsPktsLarge": acdPortRxHistStatsPktsLarge,
+       "acdPortRxHistStatsPackets": acdPortRxHistStatsPackets,
+       "acdPortRxHistStatsPktsErrors": acdPortRxHistStatsPktsErrors,
+       "acdPortRxHistL1Rate": acdPortRxHistL1Rate,
+       "acdPortRxHistL1Percent": acdPortRxHistL1Percent,
+       "acdPortRxHistL2Rate": acdPortRxHistL2Rate,
+       "acdPortRxHistStatsSupportBitsExt": acdPortRxHistStatsSupportBitsExt,
        "acdPortConformance": acdPortConformance,
        "acdPortCompliances": acdPortCompliances,
        "acdPortCompliance": acdPortCompliance,
@@ -1697,5 +3178,8 @@ mibBuilder.exportSymbols(
        "acdPortStatusGroup": acdPortStatusGroup,
        "acdPortTxStatsGroup": acdPortTxStatsGroup,
        "acdPortRxStatsGroup": acdPortRxStatsGroup,
-       "acdPortTidGroup": acdPortTidGroup}
+       "acdPortTidGroup": acdPortTidGroup,
+       "acdPortTxHistStatsGroup": acdPortTxHistStatsGroup,
+       "acdPortRxHistStatsGroup": acdPortRxHistStatsGroup,
+       "acdPortStatsSumGroup": acdPortStatsSumGroup}
 )

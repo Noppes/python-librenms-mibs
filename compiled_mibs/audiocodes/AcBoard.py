@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\audiocodes\AcBoard
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:19:55 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -6884,7 +6881,7 @@ acBoardTrapGlobalsName = _AcBoardTrapGlobalsName_Object(
 )
 acBoardTrapGlobalsName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsName.setStatus("deprecated")
+    acBoardTrapGlobalsName.setStatus("current")
 
 
 class _AcBoardTrapGlobalsTextualDescription_Type(OctetString):
@@ -6903,7 +6900,7 @@ acBoardTrapGlobalsTextualDescription = _AcBoardTrapGlobalsTextualDescription_Obj
 )
 acBoardTrapGlobalsTextualDescription.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsTextualDescription.setStatus("deprecated")
+    acBoardTrapGlobalsTextualDescription.setStatus("current")
 
 
 class _AcBoardTrapGlobalsSource_Type(OctetString):
@@ -6922,7 +6919,7 @@ acBoardTrapGlobalsSource = _AcBoardTrapGlobalsSource_Object(
 )
 acBoardTrapGlobalsSource.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsSource.setStatus("deprecated")
+    acBoardTrapGlobalsSource.setStatus("current")
 
 
 class _AcBoardTrapGlobalsSeverity_Type(Integer32):
@@ -6956,7 +6953,7 @@ acBoardTrapGlobalsSeverity = _AcBoardTrapGlobalsSeverity_Object(
 )
 acBoardTrapGlobalsSeverity.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsSeverity.setStatus("deprecated")
+    acBoardTrapGlobalsSeverity.setStatus("current")
 
 
 class _AcBoardTrapGlobalsUniqID_Type(Integer32):
@@ -6975,7 +6972,7 @@ acBoardTrapGlobalsUniqID = _AcBoardTrapGlobalsUniqID_Object(
 )
 acBoardTrapGlobalsUniqID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsUniqID.setStatus("deprecated")
+    acBoardTrapGlobalsUniqID.setStatus("current")
 
 
 class _AcBoardTrapGlobalsType_Type(Integer32):
@@ -6988,7 +6985,12 @@ class _AcBoardTrapGlobalsType_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
         )
     )
     namedValues = NamedValues(
@@ -6997,7 +6999,12 @@ class _AcBoardTrapGlobalsType_Type(Integer32):
           ("qualityOfServiceAlarm", 2),
           ("processingErrorAlarm", 3),
           ("equipmentAlarm", 4),
-          ("environmentalAlarm", 5))
+          ("environmentalAlarm", 5),
+          ("integrityViolation", 6),
+          ("operationalViolation", 7),
+          ("physicalViolation", 8),
+          ("securityServiceOrMechanismViolation", 9),
+          ("timeDomainViolation", 10))
     )
 
 
@@ -7009,7 +7016,7 @@ acBoardTrapGlobalsType = _AcBoardTrapGlobalsType_Object(
 )
 acBoardTrapGlobalsType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsType.setStatus("deprecated")
+    acBoardTrapGlobalsType.setStatus("current")
 
 
 class _AcBoardTrapGlobalsProbableCause_Type(Integer32):
@@ -7181,7 +7188,7 @@ acBoardTrapGlobalsProbableCause = _AcBoardTrapGlobalsProbableCause_Object(
 )
 acBoardTrapGlobalsProbableCause.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsProbableCause.setStatus("deprecated")
+    acBoardTrapGlobalsProbableCause.setStatus("current")
 
 
 class _AcBoardTrapGlobalsAdditionalInfo1_Type(OctetString):
@@ -7200,7 +7207,7 @@ acBoardTrapGlobalsAdditionalInfo1 = _AcBoardTrapGlobalsAdditionalInfo1_Object(
 )
 acBoardTrapGlobalsAdditionalInfo1.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsAdditionalInfo1.setStatus("deprecated")
+    acBoardTrapGlobalsAdditionalInfo1.setStatus("current")
 
 
 class _AcBoardTrapGlobalsAdditionalInfo2_Type(OctetString):
@@ -7219,7 +7226,7 @@ acBoardTrapGlobalsAdditionalInfo2 = _AcBoardTrapGlobalsAdditionalInfo2_Object(
 )
 acBoardTrapGlobalsAdditionalInfo2.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsAdditionalInfo2.setStatus("deprecated")
+    acBoardTrapGlobalsAdditionalInfo2.setStatus("current")
 
 
 class _AcBoardTrapGlobalsAdditionalInfo3_Type(OctetString):
@@ -7238,7 +7245,7 @@ acBoardTrapGlobalsAdditionalInfo3 = _AcBoardTrapGlobalsAdditionalInfo3_Object(
 )
 acBoardTrapGlobalsAdditionalInfo3.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsAdditionalInfo3.setStatus("deprecated")
+    acBoardTrapGlobalsAdditionalInfo3.setStatus("current")
 _AcBoardTrapGlobalsDateAndTime_Type = DateAndTime
 _AcBoardTrapGlobalsDateAndTime_Object = MibScalar
 acBoardTrapGlobalsDateAndTime = _AcBoardTrapGlobalsDateAndTime_Object(
@@ -7247,7 +7254,117 @@ acBoardTrapGlobalsDateAndTime = _AcBoardTrapGlobalsDateAndTime_Object(
 )
 acBoardTrapGlobalsDateAndTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    acBoardTrapGlobalsDateAndTime.setStatus("deprecated")
+    acBoardTrapGlobalsDateAndTime.setStatus("current")
+
+
+class _AcBoardTrapGlobalsSystemSeverity_Type(Integer32):
+    """Custom type acBoardTrapGlobalsSystemSeverity based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("noAlarm", 0),
+          ("indeterminate", 1),
+          ("warning", 2),
+          ("minor", 3),
+          ("major", 4),
+          ("critical", 5))
+    )
+
+
+_AcBoardTrapGlobalsSystemSeverity_Type.__name__ = "Integer32"
+_AcBoardTrapGlobalsSystemSeverity_Object = MibScalar
+acBoardTrapGlobalsSystemSeverity = _AcBoardTrapGlobalsSystemSeverity_Object(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 1, 12),
+    _AcBoardTrapGlobalsSystemSeverity_Type()
+)
+acBoardTrapGlobalsSystemSeverity.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acBoardTrapGlobalsSystemSeverity.setStatus("current")
+
+
+class _AcBoardTrapGlobalsDeviceName_Type(OctetString):
+    """Custom type acBoardTrapGlobalsDeviceName based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 100),
+    )
+
+
+_AcBoardTrapGlobalsDeviceName_Type.__name__ = "OctetString"
+_AcBoardTrapGlobalsDeviceName_Object = MibScalar
+acBoardTrapGlobalsDeviceName = _AcBoardTrapGlobalsDeviceName_Object(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 1, 13),
+    _AcBoardTrapGlobalsDeviceName_Type()
+)
+acBoardTrapGlobalsDeviceName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acBoardTrapGlobalsDeviceName.setStatus("current")
+
+
+class _AcBoardTrapGlobalsDeviceInfo_Type(OctetString):
+    """Custom type acBoardTrapGlobalsDeviceInfo based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AcBoardTrapGlobalsDeviceInfo_Type.__name__ = "OctetString"
+_AcBoardTrapGlobalsDeviceInfo_Object = MibScalar
+acBoardTrapGlobalsDeviceInfo = _AcBoardTrapGlobalsDeviceInfo_Object(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 1, 14),
+    _AcBoardTrapGlobalsDeviceInfo_Type()
+)
+acBoardTrapGlobalsDeviceInfo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acBoardTrapGlobalsDeviceInfo.setStatus("current")
+
+
+class _AcBoardTrapGlobalsDeviceDescriprion_Type(OctetString):
+    """Custom type acBoardTrapGlobalsDeviceDescriprion based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 100),
+    )
+
+
+_AcBoardTrapGlobalsDeviceDescriprion_Type.__name__ = "OctetString"
+_AcBoardTrapGlobalsDeviceDescriprion_Object = MibScalar
+acBoardTrapGlobalsDeviceDescriprion = _AcBoardTrapGlobalsDeviceDescriprion_Object(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 1, 15),
+    _AcBoardTrapGlobalsDeviceDescriprion_Type()
+)
+acBoardTrapGlobalsDeviceDescriprion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acBoardTrapGlobalsDeviceDescriprion.setStatus("current")
+
+
+class _AcBoardTrapGlobalsSystemSerialNumber_Type(OctetString):
+    """Custom type acBoardTrapGlobalsSystemSerialNumber based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_AcBoardTrapGlobalsSystemSerialNumber_Type.__name__ = "OctetString"
+_AcBoardTrapGlobalsSystemSerialNumber_Object = MibScalar
+acBoardTrapGlobalsSystemSerialNumber = _AcBoardTrapGlobalsSystemSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 1, 16),
+    _AcBoardTrapGlobalsSystemSerialNumber_Type()
+)
+acBoardTrapGlobalsSystemSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acBoardTrapGlobalsSystemSerialNumber.setStatus("current")
 _AcBoardTrapDefinitions_ObjectIdentity = ObjectIdentity
 acBoardTrapDefinitions = _AcBoardTrapDefinitions_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2)
@@ -7272,7 +7389,12 @@ acBoardFatalError.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardFatalError.setStatus(
@@ -7293,7 +7415,12 @@ acBoardConfigurationError.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardConfigurationError.setStatus(
@@ -7314,7 +7441,12 @@ acBoardTemperatureAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardTemperatureAlarm.setStatus(
@@ -7335,7 +7467,12 @@ acBoardEvBoardStarted.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardEvBoardStarted.setStatus(
@@ -7356,7 +7493,12 @@ acBoardEvResettingBoard.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardEvResettingBoard.setStatus(
@@ -7377,7 +7519,12 @@ acFeatureKeyError.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acFeatureKeyError.setStatus(
@@ -7398,7 +7545,12 @@ acgwAdminStateChange.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acgwAdminStateChange.setStatus(
@@ -7419,7 +7571,12 @@ acBoardCallResourcesAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardCallResourcesAlarm.setStatus(
@@ -7440,7 +7597,12 @@ acBoardControllerFailureAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardControllerFailureAlarm.setStatus(
@@ -7461,7 +7623,12 @@ acBoardEthernetLinkAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardEthernetLinkAlarm.setStatus(
@@ -7482,7 +7649,12 @@ acBoardOverloadAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardOverloadAlarm.setStatus(
@@ -7503,7 +7675,12 @@ acActiveAlarmTableOverflow.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acActiveAlarmTableOverflow.setStatus(
@@ -7524,7 +7701,12 @@ acAtmPortAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acAtmPortAlarm.setStatus(
@@ -7545,7 +7727,12 @@ acAudioProvisioningAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acAudioProvisioningAlarm.setStatus(
@@ -7566,7 +7753,12 @@ acOperationalStateChange.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acOperationalStateChange.setStatus(
@@ -7587,7 +7779,12 @@ acKeepAlive.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acKeepAlive.setStatus(
@@ -7608,7 +7805,12 @@ acNATTraversalAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNATTraversalAlarm.setStatus(
@@ -7629,7 +7831,12 @@ acEnhancedBITStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acEnhancedBITStatus.setStatus(
@@ -7650,7 +7857,12 @@ acSS7LinkStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7LinkStateChangeAlarm.setStatus(
@@ -7671,7 +7883,12 @@ acSS7LinkInhibitStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7LinkInhibitStateChangeAlarm.setStatus(
@@ -7692,7 +7909,12 @@ acSS7LinkBlockStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7LinkBlockStateChangeAlarm.setStatus(
@@ -7713,7 +7935,12 @@ acSS7LinkCongestionStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7LinkCongestionStateChangeAlarm.setStatus(
@@ -7734,7 +7961,12 @@ acSS7LinkSetStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7LinkSetStateChangeAlarm.setStatus(
@@ -7755,7 +7987,12 @@ acSS7RouteSetStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7RouteSetStateChangeAlarm.setStatus(
@@ -7776,7 +8013,12 @@ acSS7SNSetStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7SNSetStateChangeAlarm.setStatus(
@@ -7797,7 +8039,12 @@ acSS7RedundancyAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7RedundancyAlarm.setStatus(
@@ -7818,7 +8065,12 @@ acPerformanceMonitoringThresholdCrossing.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acPerformanceMonitoringThresholdCrossing.setStatus(
@@ -7839,7 +8091,12 @@ acHTTPDownloadResult.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHTTPDownloadResult.setStatus(
@@ -7860,7 +8117,12 @@ acFanTrayAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acFanTrayAlarm.setStatus(
@@ -7881,7 +8143,12 @@ acPowerSupplyAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acPowerSupplyAlarm.setStatus(
@@ -7902,7 +8169,12 @@ acPEMAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acPEMAlarm.setStatus(
@@ -7923,7 +8195,12 @@ acSAMissingAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSAMissingAlarm.setStatus(
@@ -7944,7 +8221,12 @@ acHASystemFaultAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHASystemFaultAlarm.setStatus(
@@ -7965,7 +8247,12 @@ acHASystemConfigMismatchAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHASystemConfigMismatchAlarm.setStatus(
@@ -7986,7 +8273,12 @@ acHASystemSwitchOverAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHASystemSwitchOverAlarm.setStatus(
@@ -8007,7 +8299,12 @@ acUserInputAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acUserInputAlarm.setStatus(
@@ -8028,7 +8325,12 @@ acDChannelStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDChannelStatus.setStatus(
@@ -8049,7 +8351,12 @@ acSonetSectionLOFAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetSectionLOFAlarm.setStatus(
@@ -8070,7 +8377,12 @@ acSonetSectionLOSAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetSectionLOSAlarm.setStatus(
@@ -8091,7 +8403,12 @@ acSonetLineAISAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetLineAISAlarm.setStatus(
@@ -8112,7 +8429,12 @@ acSonetLineRDIAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetLineRDIAlarm.setStatus(
@@ -8133,7 +8455,12 @@ acSonetIfHwFailureAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetIfHwFailureAlarm.setStatus(
@@ -8154,7 +8481,12 @@ acHwFailureAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHwFailureAlarm.setStatus(
@@ -8175,7 +8507,12 @@ acH248LostConnectionWithCA.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acH248LostConnectionWithCA.setStatus(
@@ -8196,7 +8533,12 @@ acDialPlanFileReplaced.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDialPlanFileReplaced.setStatus(
@@ -8217,7 +8559,12 @@ acAnalogPortSPIOutOfService.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acAnalogPortSPIOutOfService.setStatus(
@@ -8238,7 +8585,12 @@ acAnalogPortHighTemperature.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acAnalogPortHighTemperature.setStatus(
@@ -8259,7 +8611,12 @@ acHitlessUpdateStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHitlessUpdateStatus.setStatus(
@@ -8280,7 +8637,12 @@ acTrunksAlarmNearEndLOS.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTrunksAlarmNearEndLOS.setStatus(
@@ -8301,7 +8663,12 @@ acTrunksAlarmNearEndLOF.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTrunksAlarmNearEndLOF.setStatus(
@@ -8322,7 +8689,12 @@ acTrunksAlarmRcvAIS.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTrunksAlarmRcvAIS.setStatus(
@@ -8343,7 +8715,12 @@ acTrunksAlarmFarEndLOF.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTrunksAlarmFarEndLOF.setStatus(
@@ -8364,7 +8741,12 @@ acIPv6ErrorAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acIPv6ErrorAlarm.setStatus(
@@ -8385,7 +8767,12 @@ acAMSProcedureResult.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acAMSProcedureResult.setStatus(
@@ -8406,7 +8793,12 @@ acWeakRedundancy.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acWeakRedundancy.setStatus(
@@ -8427,7 +8819,12 @@ acTMInconsistentRemoteAndLocalPLLStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTMInconsistentRemoteAndLocalPLLStatus.setStatus(
@@ -8448,7 +8845,12 @@ acTMReferenceStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTMReferenceStatus.setStatus(
@@ -8469,7 +8871,12 @@ acTMReferenceChange.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acTMReferenceChange.setStatus(
@@ -8490,7 +8897,12 @@ acGWSASEmergencyModeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acGWSASEmergencyModeAlarm.setStatus(
@@ -8511,7 +8923,12 @@ acV52InterfaceAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acV52InterfaceAlarm.setStatus(
@@ -8532,7 +8949,12 @@ acSonetPathSTSLOPAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetPathSTSLOPAlarm.setStatus(
@@ -8553,7 +8975,12 @@ acSonetPathSTSAISAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetPathSTSAISAlarm.setStatus(
@@ -8574,7 +9001,12 @@ acSonetPathSTSRDIAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetPathSTSRDIAlarm.setStatus(
@@ -8595,7 +9027,12 @@ acSonetPathUnequippedAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetPathUnequippedAlarm.setStatus(
@@ -8616,7 +9053,12 @@ acSonetPathSignalLabelMismatchAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSonetPathSignalLabelMismatchAlarm.setStatus(
@@ -8637,7 +9079,12 @@ acDS3RAIAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDS3RAIAlarm.setStatus(
@@ -8658,7 +9105,12 @@ acDS3AISAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDS3AISAlarm.setStatus(
@@ -8679,7 +9131,12 @@ acDS3LOFAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDS3LOFAlarm.setStatus(
@@ -8700,7 +9157,12 @@ acDS3LOSAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDS3LOSAlarm.setStatus(
@@ -8721,7 +9183,12 @@ acSWUpgradeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSWUpgradeAlarm.setStatus(
@@ -8742,7 +9209,12 @@ acNTPServerStatusAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNTPServerStatusAlarm.setStatus(
@@ -8763,7 +9235,12 @@ acThreeWayConferenceOutOfResources.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acThreeWayConferenceOutOfResources.setStatus(
@@ -8784,7 +9261,12 @@ acSS7AliasPcStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7AliasPcStateChangeAlarm.setStatus(
@@ -8805,7 +9287,12 @@ acSS7UalGroupStateChangeAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSS7UalGroupStateChangeAlarm.setStatus(
@@ -8826,7 +9313,12 @@ acLDAPLostConnection.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acLDAPLostConnection.setStatus(
@@ -8847,7 +9339,12 @@ acAnalogPortGroundFaultOutOfService.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acAnalogPortGroundFaultOutOfService.setStatus(
@@ -8868,7 +9365,12 @@ acSSHConnectionStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acSSHConnectionStatus.setStatus(
@@ -8889,7 +9391,12 @@ acOCSPServerStatusAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acOCSPServerStatusAlarm.setStatus(
@@ -8910,7 +9417,12 @@ acBoardWanLinkAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBoardWanLinkAlarm.setStatus(
@@ -8931,7 +9443,12 @@ acPowerOverEthernetStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acPowerOverEthernetStatus.setStatus(
@@ -8952,7 +9469,12 @@ acMediaProcessOverloadAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acMediaProcessOverloadAlarm.setStatus(
@@ -8973,7 +9495,12 @@ acWirelessCellularModemAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acWirelessCellularModemAlarm.setStatus(
@@ -8994,7 +9521,12 @@ acDataInterfaceStatus.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acDataInterfaceStatus.setStatus(
@@ -9015,7 +9547,12 @@ acNFASGroupAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNFASGroupAlarm.setStatus(
@@ -9036,7 +9573,12 @@ acBChannelAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acBChannelAlarm.setStatus(
@@ -9057,7 +9599,12 @@ acEthernetGroupAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acEthernetGroupAlarm.setStatus(
@@ -9078,7 +9625,12 @@ acMediaRealmBWThresholdAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acMediaRealmBWThresholdAlarm.setStatus(
@@ -9099,7 +9651,12 @@ acNqmConnectivityAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNqmConnectivityAlarm.setStatus(
@@ -9120,7 +9677,12 @@ acNqmRttAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNqmRttAlarm.setStatus(
@@ -9141,7 +9703,12 @@ acNqmJitterAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNqmJitterAlarm.setStatus(
@@ -9162,17 +9729,22 @@ acNqmPacketLossAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNqmPacketLossAlarm.setStatus(
         "current"
     )
 
-acCertificateExpiryNotifiaction = NotificationType(
+acCertificateExpiryNotification = NotificationType(
     (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 92)
 )
-acCertificateExpiryNotifiaction.setObjects(
+acCertificateExpiryNotification.setObjects(
       *(("AcBoard", "acBoardTrapGlobalsName"),
         ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
         ("AcBoard", "acBoardTrapGlobalsSource"),
@@ -9183,10 +9755,15 @@ acCertificateExpiryNotifiaction.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
-    acCertificateExpiryNotifiaction.setStatus(
+    acCertificateExpiryNotification.setStatus(
         "current"
     )
 
@@ -9204,7 +9781,12 @@ acWEBUserAccessDisabled.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acWEBUserAccessDisabled.setStatus(
@@ -9225,7 +9807,12 @@ acProxyConnectionLost.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acProxyConnectionLost.setStatus(
@@ -9246,7 +9833,12 @@ acNqmCqMosAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNqmCqMosAlarm.setStatus(
@@ -9267,7 +9859,12 @@ acNqmLqMosAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acNqmLqMosAlarm.setStatus(
@@ -9288,7 +9885,12 @@ acRedundantBoardAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acRedundantBoardAlarm.setStatus(
@@ -9309,7 +9911,12 @@ acHANetworkWatchdogStatusAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acHANetworkWatchdogStatusAlarm.setStatus(
@@ -9330,7 +9937,12 @@ acIDSPolicyAlarm.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acIDSPolicyAlarm.setStatus(
@@ -9351,10 +9963,1549 @@ acIDSThresholdCrossNotification.setObjects(
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
         ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
-        ("AcBoard", "acBoardTrapGlobalsDateAndTime"))
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
 )
 if mibBuilder.loadTexts:
     acIDSThresholdCrossNotification.setStatus(
+        "current"
+    )
+
+acIDSBlacklistNotification = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 101)
+)
+acIDSBlacklistNotification.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acIDSBlacklistNotification.setStatus(
+        "current"
+    )
+
+acProxyConnectivity = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 102)
+)
+acProxyConnectivity.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acProxyConnectivity.setStatus(
+        "current"
+    )
+
+acBoardSignalingCpuUsageThresholdAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 103)
+)
+acBoardSignalingCpuUsageThresholdAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acBoardSignalingCpuUsageThresholdAlarm.setStatus(
+        "current"
+    )
+
+acWirelessCellularModemStatusChanged = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 104)
+)
+acWirelessCellularModemStatusChanged.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acWirelessCellularModemStatusChanged.setStatus(
+        "current"
+    )
+
+acActivityLog = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 105)
+)
+acActivityLog.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acActivityLog.setStatus(
+        "current"
+    )
+
+acLicensePoolInfraAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 106)
+)
+acLicensePoolInfraAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acLicensePoolInfraAlarm.setStatus(
+        "current"
+    )
+
+acLicensePoolApplicationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 107)
+)
+acLicensePoolApplicationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acLicensePoolApplicationAlarm.setStatus(
+        "current"
+    )
+
+acHTTPProxyServiceAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 108)
+)
+acHTTPProxyServiceAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acHTTPProxyServiceAlarm.setStatus(
+        "current"
+    )
+
+acReservedAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 109)
+)
+acReservedAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acReservedAlarm.setStatus(
+        "current"
+    )
+
+acResetNeededAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 110)
+)
+acResetNeededAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acResetNeededAlarm.setStatus(
+        "current"
+    )
+
+acASRThresholdAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 111)
+)
+acASRThresholdAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acASRThresholdAlarm.setStatus(
+        "current"
+    )
+
+acACDThresholdAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 112)
+)
+acACDThresholdAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acACDThresholdAlarm.setStatus(
+        "current"
+    )
+
+acNERThresholdAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 113)
+)
+acNERThresholdAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acNERThresholdAlarm.setStatus(
+        "current"
+    )
+
+acIpGroupNoRouteAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 114)
+)
+acIpGroupNoRouteAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acIpGroupNoRouteAlarm.setStatus(
+        "current"
+    )
+
+acMtcmClusterHaAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 115)
+)
+acMtcmClusterHaAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMtcmClusterHaAlarm.setStatus(
+        "current"
+    )
+
+acMtceNetworkFailureAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 116)
+)
+acMtceNetworkFailureAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMtceNetworkFailureAlarm.setStatus(
+        "current"
+    )
+
+acMtceSwUpgradeFailureAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 117)
+)
+acMtceSwUpgradeFailureAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMtceSwUpgradeFailureAlarm.setStatus(
+        "current"
+    )
+
+acMtceHwTemperatureFailureAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 118)
+)
+acMtceHwTemperatureFailureAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMtceHwTemperatureFailureAlarm.setStatus(
+        "current"
+    )
+
+acMtceHwFanTrayFailureAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 119)
+)
+acMtceHwFanTrayFailureAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMtceHwFanTrayFailureAlarm.setStatus(
+        "current"
+    )
+
+acMtcePsuFailureAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 120)
+)
+acMtcePsuFailureAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMtcePsuFailureAlarm.setStatus(
+        "current"
+    )
+
+acTrackIdStateChangeAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 121)
+)
+acTrackIdStateChangeAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acTrackIdStateChangeAlarm.setStatus(
+        "current"
+    )
+
+acModuleServiceAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 122)
+)
+acModuleServiceAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acModuleServiceAlarm.setStatus(
+        "current"
+    )
+
+acModuleOperationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 123)
+)
+acModuleOperationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acModuleOperationAlarm.setStatus(
+        "current"
+    )
+
+acPortServiceAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 124)
+)
+acPortServiceAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acPortServiceAlarm.setStatus(
+        "current"
+    )
+
+acLicensePoolOverAllocationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 125)
+)
+acLicensePoolOverAllocationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acLicensePoolOverAllocationAlarm.setStatus(
+        "current"
+    )
+
+acClusterBandwidthAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 126)
+)
+acClusterBandwidthAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acClusterBandwidthAlarm.setStatus(
+        "current"
+    )
+
+acLicensePoolExpirationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 127)
+)
+acLicensePoolExpirationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acLicensePoolExpirationAlarm.setStatus(
+        "current"
+    )
+
+acCertificateExpiryAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 128)
+)
+acCertificateExpiryAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acCertificateExpiryAlarm.setStatus(
+        "current"
+    )
+
+acLicenseKeyHitlessUpgradeAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 129)
+)
+acLicenseKeyHitlessUpgradeAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acLicenseKeyHitlessUpgradeAlarm.setStatus(
+        "current"
+    )
+
+acNGINXConfigurationIsInvalidAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 130)
+)
+acNGINXConfigurationIsInvalidAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acNGINXConfigurationIsInvalidAlarm.setStatus(
+        "current"
+    )
+
+acNGINXPprocessIsNotRunningAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 131)
+)
+acNGINXPprocessIsNotRunningAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acNGINXPprocessIsNotRunningAlarm.setStatus(
+        "current"
+    )
+
+acCloudLicenseManagerAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 132)
+)
+acCloudLicenseManagerAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acCloudLicenseManagerAlarm.setStatus(
+        "current"
+    )
+
+acMediaClusterAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 133)
+)
+acMediaClusterAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMediaClusterAlarm.setStatus(
+        "current"
+    )
+
+acMediaClusterRemoteInterfaceAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 134)
+)
+acMediaClusterRemoteInterfaceAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMediaClusterRemoteInterfaceAlarm.setStatus(
+        "current"
+    )
+
+acHANetworkMismatchAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 135)
+)
+acHANetworkMismatchAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acHANetworkMismatchAlarm.setStatus(
+        "current"
+    )
+
+acHANetworkMonitorAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 136)
+)
+acHANetworkMonitorAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acHANetworkMonitorAlarm.setStatus(
+        "current"
+    )
+
+acHAEthernetGroupAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 137)
+)
+acHAEthernetGroupAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acHAEthernetGroupAlarm.setStatus(
+        "current"
+    )
+
+acFloatingLicenseAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 138)
+)
+acFloatingLicenseAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acFloatingLicenseAlarm.setStatus(
+        "current"
+    )
+
+acAWSSecurityRoleAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 139)
+)
+acAWSSecurityRoleAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acAWSSecurityRoleAlarm.setStatus(
+        "current"
+    )
+
+acInstallationFailureAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 140)
+)
+acInstallationFailureAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acInstallationFailureAlarm.setStatus(
+        "current"
+    )
+
+acAnalogLineLeftOffhookAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 141)
+)
+acAnalogLineLeftOffhookAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acAnalogLineLeftOffhookAlarm.setStatus(
+        "current"
+    )
+
+acCDRServerAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 142)
+)
+acCDRServerAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acCDRServerAlarm.setStatus(
+        "current"
+    )
+
+acDSPFarmsMismatchAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 143)
+)
+acDSPFarmsMismatchAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acDSPFarmsMismatchAlarm.setStatus(
+        "current"
+    )
+
+acFlexLicenseManagerAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 144)
+)
+acFlexLicenseManagerAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acFlexLicenseManagerAlarm.setStatus(
+        "current"
+    )
+
+acRemoteMonitoringAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 145)
+)
+acRemoteMonitoringAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acRemoteMonitoringAlarm.setStatus(
+        "current"
+    )
+
+acMeteringAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 146)
+)
+acMeteringAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMeteringAlarm.setStatus(
+        "current"
+    )
+
+acSDRServerAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 147)
+)
+acSDRServerAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acSDRServerAlarm.setStatus(
+        "current"
+    )
+
+acKpiThresholdCrossing = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 148)
+)
+acKpiThresholdCrossing.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acKpiThresholdCrossing.setStatus(
+        "current"
+    )
+
+acClockConfigurationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 149)
+)
+acClockConfigurationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acClockConfigurationAlarm.setStatus(
+        "current"
+    )
+
+acDebugRecordingActivationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 150)
+)
+acDebugRecordingActivationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acDebugRecordingActivationAlarm.setStatus(
+        "current"
+    )
+
+acMCNotSecuredAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 151)
+)
+acMCNotSecuredAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acMCNotSecuredAlarm.setStatus(
+        "current"
+    )
+
+acFaultyDSPAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 152)
+)
+acFaultyDSPAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acFaultyDSPAlarm.setStatus(
+        "current"
+    )
+
+acDspOperationAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 153)
+)
+acDspOperationAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acDspOperationAlarm.setStatus(
+        "current"
+    )
+
+acTLSCertificateMismatchAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 154)
+)
+acTLSCertificateMismatchAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acTLSCertificateMismatchAlarm.setStatus(
+        "current"
+    )
+
+acNoReplyFromDNSServerAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 155)
+)
+acNoReplyFromDNSServerAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acNoReplyFromDNSServerAlarm.setStatus(
+        "current"
+    )
+
+acWeakPasswordAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 156)
+)
+acWeakPasswordAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acWeakPasswordAlarm.setStatus(
+        "current"
+    )
+
+acVMMaintenaceAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 157)
+)
+acVMMaintenaceAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acVMMaintenaceAlarm.setStatus(
+        "current"
+    )
+
+acIPv4ErrorAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 158)
+)
+acIPv4ErrorAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acIPv4ErrorAlarm.setStatus(
+        "current"
+    )
+
+acTLSSocketsLimitAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5003, 9, 10, 1, 21, 2, 0, 159)
+)
+acTLSSocketsLimitAlarm.setObjects(
+      *(("AcBoard", "acBoardTrapGlobalsName"),
+        ("AcBoard", "acBoardTrapGlobalsTextualDescription"),
+        ("AcBoard", "acBoardTrapGlobalsSource"),
+        ("AcBoard", "acBoardTrapGlobalsSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsUniqID"),
+        ("AcBoard", "acBoardTrapGlobalsType"),
+        ("AcBoard", "acBoardTrapGlobalsProbableCause"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo1"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo2"),
+        ("AcBoard", "acBoardTrapGlobalsAdditionalInfo3"),
+        ("AcBoard", "acBoardTrapGlobalsDateAndTime"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSeverity"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceName"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceInfo"),
+        ("AcBoard", "acBoardTrapGlobalsDeviceDescriprion"),
+        ("AcBoard", "acBoardTrapGlobalsSystemSerialNumber"))
+)
+if mibBuilder.loadTexts:
+    acTLSSocketsLimitAlarm.setStatus(
         "current"
     )
 
@@ -9716,6 +11867,11 @@ mibBuilder.exportSymbols(
        "acBoardTrapGlobalsAdditionalInfo2": acBoardTrapGlobalsAdditionalInfo2,
        "acBoardTrapGlobalsAdditionalInfo3": acBoardTrapGlobalsAdditionalInfo3,
        "acBoardTrapGlobalsDateAndTime": acBoardTrapGlobalsDateAndTime,
+       "acBoardTrapGlobalsSystemSeverity": acBoardTrapGlobalsSystemSeverity,
+       "acBoardTrapGlobalsDeviceName": acBoardTrapGlobalsDeviceName,
+       "acBoardTrapGlobalsDeviceInfo": acBoardTrapGlobalsDeviceInfo,
+       "acBoardTrapGlobalsDeviceDescriprion": acBoardTrapGlobalsDeviceDescriprion,
+       "acBoardTrapGlobalsSystemSerialNumber": acBoardTrapGlobalsSystemSerialNumber,
        "acBoardTrapDefinitions": acBoardTrapDefinitions,
        "acBoardFatalError": acBoardFatalError,
        "acBoardConfigurationError": acBoardConfigurationError,
@@ -9808,7 +11964,7 @@ mibBuilder.exportSymbols(
        "acNqmRttAlarm": acNqmRttAlarm,
        "acNqmJitterAlarm": acNqmJitterAlarm,
        "acNqmPacketLossAlarm": acNqmPacketLossAlarm,
-       "acCertificateExpiryNotifiaction": acCertificateExpiryNotifiaction,
+       "acCertificateExpiryNotification": acCertificateExpiryNotification,
        "acWEBUserAccessDisabled": acWEBUserAccessDisabled,
        "acProxyConnectionLost": acProxyConnectionLost,
        "acNqmCqMosAlarm": acNqmCqMosAlarm,
@@ -9816,5 +11972,64 @@ mibBuilder.exportSymbols(
        "acRedundantBoardAlarm": acRedundantBoardAlarm,
        "acHANetworkWatchdogStatusAlarm": acHANetworkWatchdogStatusAlarm,
        "acIDSPolicyAlarm": acIDSPolicyAlarm,
-       "acIDSThresholdCrossNotification": acIDSThresholdCrossNotification}
+       "acIDSThresholdCrossNotification": acIDSThresholdCrossNotification,
+       "acIDSBlacklistNotification": acIDSBlacklistNotification,
+       "acProxyConnectivity": acProxyConnectivity,
+       "acBoardSignalingCpuUsageThresholdAlarm": acBoardSignalingCpuUsageThresholdAlarm,
+       "acWirelessCellularModemStatusChanged": acWirelessCellularModemStatusChanged,
+       "acActivityLog": acActivityLog,
+       "acLicensePoolInfraAlarm": acLicensePoolInfraAlarm,
+       "acLicensePoolApplicationAlarm": acLicensePoolApplicationAlarm,
+       "acHTTPProxyServiceAlarm": acHTTPProxyServiceAlarm,
+       "acReservedAlarm": acReservedAlarm,
+       "acResetNeededAlarm": acResetNeededAlarm,
+       "acASRThresholdAlarm": acASRThresholdAlarm,
+       "acACDThresholdAlarm": acACDThresholdAlarm,
+       "acNERThresholdAlarm": acNERThresholdAlarm,
+       "acIpGroupNoRouteAlarm": acIpGroupNoRouteAlarm,
+       "acMtcmClusterHaAlarm": acMtcmClusterHaAlarm,
+       "acMtceNetworkFailureAlarm": acMtceNetworkFailureAlarm,
+       "acMtceSwUpgradeFailureAlarm": acMtceSwUpgradeFailureAlarm,
+       "acMtceHwTemperatureFailureAlarm": acMtceHwTemperatureFailureAlarm,
+       "acMtceHwFanTrayFailureAlarm": acMtceHwFanTrayFailureAlarm,
+       "acMtcePsuFailureAlarm": acMtcePsuFailureAlarm,
+       "acTrackIdStateChangeAlarm": acTrackIdStateChangeAlarm,
+       "acModuleServiceAlarm": acModuleServiceAlarm,
+       "acModuleOperationAlarm": acModuleOperationAlarm,
+       "acPortServiceAlarm": acPortServiceAlarm,
+       "acLicensePoolOverAllocationAlarm": acLicensePoolOverAllocationAlarm,
+       "acClusterBandwidthAlarm": acClusterBandwidthAlarm,
+       "acLicensePoolExpirationAlarm": acLicensePoolExpirationAlarm,
+       "acCertificateExpiryAlarm": acCertificateExpiryAlarm,
+       "acLicenseKeyHitlessUpgradeAlarm": acLicenseKeyHitlessUpgradeAlarm,
+       "acNGINXConfigurationIsInvalidAlarm": acNGINXConfigurationIsInvalidAlarm,
+       "acNGINXPprocessIsNotRunningAlarm": acNGINXPprocessIsNotRunningAlarm,
+       "acCloudLicenseManagerAlarm": acCloudLicenseManagerAlarm,
+       "acMediaClusterAlarm": acMediaClusterAlarm,
+       "acMediaClusterRemoteInterfaceAlarm": acMediaClusterRemoteInterfaceAlarm,
+       "acHANetworkMismatchAlarm": acHANetworkMismatchAlarm,
+       "acHANetworkMonitorAlarm": acHANetworkMonitorAlarm,
+       "acHAEthernetGroupAlarm": acHAEthernetGroupAlarm,
+       "acFloatingLicenseAlarm": acFloatingLicenseAlarm,
+       "acAWSSecurityRoleAlarm": acAWSSecurityRoleAlarm,
+       "acInstallationFailureAlarm": acInstallationFailureAlarm,
+       "acAnalogLineLeftOffhookAlarm": acAnalogLineLeftOffhookAlarm,
+       "acCDRServerAlarm": acCDRServerAlarm,
+       "acDSPFarmsMismatchAlarm": acDSPFarmsMismatchAlarm,
+       "acFlexLicenseManagerAlarm": acFlexLicenseManagerAlarm,
+       "acRemoteMonitoringAlarm": acRemoteMonitoringAlarm,
+       "acMeteringAlarm": acMeteringAlarm,
+       "acSDRServerAlarm": acSDRServerAlarm,
+       "acKpiThresholdCrossing": acKpiThresholdCrossing,
+       "acClockConfigurationAlarm": acClockConfigurationAlarm,
+       "acDebugRecordingActivationAlarm": acDebugRecordingActivationAlarm,
+       "acMCNotSecuredAlarm": acMCNotSecuredAlarm,
+       "acFaultyDSPAlarm": acFaultyDSPAlarm,
+       "acDspOperationAlarm": acDspOperationAlarm,
+       "acTLSCertificateMismatchAlarm": acTLSCertificateMismatchAlarm,
+       "acNoReplyFromDNSServerAlarm": acNoReplyFromDNSServerAlarm,
+       "acWeakPasswordAlarm": acWeakPasswordAlarm,
+       "acVMMaintenaceAlarm": acVMMaintenaceAlarm,
+       "acIPv4ErrorAlarm": acIPv4ErrorAlarm,
+       "acTLSSocketsLimitAlarm": acTLSSocketsLimitAlarm}
 )

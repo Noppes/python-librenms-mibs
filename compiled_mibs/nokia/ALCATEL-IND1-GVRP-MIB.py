@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-GVRP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:24 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-GVRP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,8 @@ alcatelIND1GVRPMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1GVRPMIB.setRevisions(
-        ("2007-07-02 00:00",)
+        ("2007-07-02 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -736,7 +734,8 @@ gvrpPortBaseGroup = ObjectGroup(
 gvrpPortBaseGroup.setObjects(
       *(("ALCATEL-IND1-GVRP-MIB", "alaGvrpGlobalClearStats"),
         ("ALCATEL-IND1-GVRP-MIB", "alaGvrpTransparentSwitching"),
-        ("ALCATEL-IND1-GVRP-MIB", "alaGvrpMaxVlanLimit"))
+        ("ALCATEL-IND1-GVRP-MIB", "alaGvrpMaxVlanLimit"),
+        ("ALCATEL-IND1-GVRP-MIB", "alaGvrpVlanConflictInfo"))
 )
 if mibBuilder.loadTexts:
     gvrpPortBaseGroup.setStatus("current")
@@ -817,6 +816,18 @@ if mibBuilder.loadTexts:
 
 # Notifications groups
 
+gvrpNotificationsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 36, 1, 2, 1, 4)
+)
+gvrpNotificationsGroup.setObjects(
+      *(("ALCATEL-IND1-GVRP-MIB", "e2eGvrpVlanConflictTrap"),
+        ("ALCATEL-IND1-GVRP-MIB", "gvrpVlanLimitReachedEvent"))
+)
+if mibBuilder.loadTexts:
+    gvrpNotificationsGroup.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -829,7 +840,8 @@ alcatelIND1GVRPMIBCompliance = ModuleCompliance(
 alcatelIND1GVRPMIBCompliance.setObjects(
       *(("ALCATEL-IND1-GVRP-MIB", "gvrpPortBaseGroup"),
         ("ALCATEL-IND1-GVRP-MIB", "gvrpPortConfigGroup"),
-        ("ALCATEL-IND1-GVRP-MIB", "gvrpPortStatsGroup"))
+        ("ALCATEL-IND1-GVRP-MIB", "gvrpPortStatsGroup"),
+        ("ALCATEL-IND1-GVRP-MIB", "gvrpNotificationsGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1GVRPMIBCompliance.setStatus(
@@ -893,6 +905,7 @@ mibBuilder.exportSymbols(
        "gvrpPortBaseGroup": gvrpPortBaseGroup,
        "gvrpPortConfigGroup": gvrpPortConfigGroup,
        "gvrpPortStatsGroup": gvrpPortStatsGroup,
+       "gvrpNotificationsGroup": gvrpNotificationsGroup,
        "alcatelIND1GVRPMIBCompliances": alcatelIND1GVRPMIBCompliances,
        "alcatelIND1GVRPMIBCompliance": alcatelIND1GVRPMIBCompliance,
        "alaGvrpEvents": alaGvrpEvents,

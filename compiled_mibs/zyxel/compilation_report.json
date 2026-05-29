@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-10-02T12:36:09.902651",
+  "timestamp": "2026-05-29T09:56:18.650501",
   "stats": {
-    "total": 22,
-    "compiled": 12,
-    "failed": 8,
+    "total": 25,
+    "compiled": 14,
+    "failed": 9,
     "skipped": 2,
     "errors": [
       {
@@ -20,6 +20,10 @@
       },
       {
         "mib": "ZYXEL-GS4012F-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "ZYXEL-IES5000-MIB",
         "error": "failed"
       },
       {
@@ -40,5 +44,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

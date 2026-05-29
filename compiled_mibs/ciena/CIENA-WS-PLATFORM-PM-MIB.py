@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-WS-PLATFORM-PM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:25:09 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -119,7 +116,8 @@ cienaWsPlatformPmMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaWsPlatformPmMIB.setRevisions(
-        ("2018-12-20 00:00",
+        ("2019-09-09 00:00",
+         "2018-12-20 00:00",
          "2018-09-20 00:00",
          "2018-08-28 00:00",
          "2018-08-15 00:00",
@@ -149,6 +147,44 @@ class PmConfigurationMode(TextualConvention, Integer32):
         *(("unknown", 0),
           ("autoCreated", 1),
           ("userCreated", 2))
+    )
+
+
+
+class PmTcaNotificationType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("tcaAlarm", 0),
+          ("tcaEvent", 1),
+          ("tcaSummaryAlarm", 2),
+          ("tcaSummaryEvent", 3))
+    )
+
+
+
+class PmTcaActiveFlag(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("inactive", 0),
+          ("active", 1),
+          ("notSupported", 2))
     )
 
 
@@ -235,7 +271,7 @@ class PmEthernetMonType(TextualConvention, Integer32):
           ("rxOversizePkts", 6),
           ("rxFragmentPkts", 7),
           ("rxJabberPkts", 8),
-          ("rxLOutRangePkts", 9),
+          ("rxLenOutRangePkts", 9),
           ("rxPausePkts", 10),
           ("rx64OctsPkts", 11),
           ("rx65To127OctsPkts", 12),
@@ -419,7 +455,12 @@ class PmModemMonType(TextualConvention, Integer32):
               18,
               19,
               20,
-              21)
+              21,
+              22,
+              23,
+              24,
+              25,
+              26)
         )
     )
     namedValues = NamedValues(
@@ -444,7 +485,12 @@ class PmModemMonType(TextualConvention, Integer32):
           ("cdAvg", 18),
           ("cdMax", 19),
           ("cdMin", 20),
-          ("qStdev", 21))
+          ("qStdev", 21),
+          ("snrExtAvg", 22),
+          ("snrExtMax", 23),
+          ("snrExtMin", 24),
+          ("csiAvg", 25),
+          ("csiMax", 26))
     )
 
 
@@ -480,7 +526,91 @@ class PmPhotonicsMonType(TextualConvention, Integer32):
               5,
               6,
               7,
-              8)
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92)
         )
     )
     namedValues = NamedValues(
@@ -492,7 +622,91 @@ class PmPhotonicsMonType(TextualConvention, Integer32):
           ("rxSpanLossAverage", 5),
           ("txSpanLossMinimum", 6),
           ("txSpanLossMaximum", 7),
-          ("txSpanLossAverage", 8))
+          ("txSpanLossAverage", 8),
+          ("txECshortMax", 9),
+          ("txECshort", 10),
+          ("txECshortMin", 11),
+          ("txEMLshortMax", 12),
+          ("txEMLshort", 13),
+          ("txEMLshortMin", 14),
+          ("txEMLDshortMax", 15),
+          ("txEMLDshort", 16),
+          ("txEMLDshortMin", 17),
+          ("txEMRshortMax", 18),
+          ("txEMRshort", 19),
+          ("txEMRshortMin", 20),
+          ("txEMRDshortMax", 21),
+          ("txEMRDshort", 22),
+          ("txEMRDshortMin", 23),
+          ("txCLshortMax", 24),
+          ("txCLshort", 25),
+          ("txCLshortMin", 26),
+          ("txCRshortMax", 27),
+          ("txCRshort", 28),
+          ("txCRshortMin", 29),
+          ("txEClongMax", 30),
+          ("txEClong", 31),
+          ("txEClongMin", 32),
+          ("txEMLlongMax", 33),
+          ("txEMLlong", 34),
+          ("txEMLlongMin", 35),
+          ("txEMLDlongMax", 36),
+          ("txEMLDlong", 37),
+          ("txEMLDlongMin", 38),
+          ("txEMRlongMax", 39),
+          ("txEMRlong", 40),
+          ("txEMRlongMin", 41),
+          ("txEMRDlongMax", 42),
+          ("txEMRDlong", 43),
+          ("txEMRDlongMin", 44),
+          ("txCLlongMax", 45),
+          ("txCLlong", 46),
+          ("txCLlongMin", 47),
+          ("txCRlongMax", 48),
+          ("txCRlong", 49),
+          ("txCRlongMin", 50),
+          ("rxECshortMax", 51),
+          ("rxECshort", 52),
+          ("rxECshortMin", 53),
+          ("rxEMLshortMax", 54),
+          ("rxEMLshort", 55),
+          ("rxEMLshortMin", 56),
+          ("rxEMLDshortMax", 57),
+          ("rxEMLDshort", 58),
+          ("rxEMLDshortMin", 59),
+          ("rxEMRshortMax", 60),
+          ("rxEMRshort", 61),
+          ("rxEMRshortMin", 62),
+          ("rxEMRDshortMax", 63),
+          ("rxEMRDshort", 64),
+          ("rxEMRDshortMin", 65),
+          ("rxCLshortMax", 66),
+          ("rxCLshort", 67),
+          ("rxCLshortMin", 68),
+          ("rxCRshortMax", 69),
+          ("rxCRshort", 70),
+          ("rxCRshortMin", 71),
+          ("rxEClongMax", 72),
+          ("rxEClong", 73),
+          ("rxEClongMin", 74),
+          ("rxEMLlongMax", 75),
+          ("rxEMLlong", 76),
+          ("rxEMLlongMin", 77),
+          ("rxEMLDlongMax", 78),
+          ("rxEMLDlong", 79),
+          ("rxEMLDlongMin", 80),
+          ("rxEMRlongMax", 81),
+          ("rxEMRlong", 82),
+          ("rxEMRlongMin", 83),
+          ("rxEMRDlongMax", 84),
+          ("rxEMRDlong", 85),
+          ("rxEMRDlongMin", 86),
+          ("rxCLlongMax", 87),
+          ("rxCLlong", 88),
+          ("rxCLlongMin", 89),
+          ("rxCRlongMax", 90),
+          ("rxCRlong", 91),
+          ("rxCRlongMin", 92))
     )
 
 
@@ -558,6 +772,24 @@ pmAdminState = _PmAdminState_Object(
 pmAdminState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmAdminState.setStatus("current")
+_PmTcaAdminState_Type = EnabledDisabledEnum
+_PmTcaAdminState_Object = MibTableColumn
+pmTcaAdminState = _PmTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 3, 1, 3),
+    _PmTcaAdminState_Type()
+)
+pmTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmTcaAdminState.setStatus("current")
+_PmTcaNotificationType_Type = PmTcaNotificationType
+_PmTcaNotificationType_Object = MibTableColumn
+pmTcaNotificationType = _PmTcaNotificationType_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 3, 1, 4),
+    _PmTcaNotificationType_Type()
+)
+pmTcaNotificationType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmTcaNotificationType.setStatus("current")
 _PmEthernetCurrent15minStatsTable_Object = MibTable
 pmEthernetCurrent15minStatsTable = _PmEthernetCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 4)
@@ -646,6 +878,52 @@ pmEthernet15minMonStartDateTime = _PmEthernet15minMonStartDateTime_Object(
 pmEthernet15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmEthernet15minMonStartDateTime.setStatus("current")
+_PmEthernet15minTHValue_Type = DisplayString
+_PmEthernet15minTHValue_Object = MibTableColumn
+pmEthernet15minTHValue = _PmEthernet15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 4, 1, 9),
+    _PmEthernet15minTHValue_Type()
+)
+pmEthernet15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet15minTHValue.setStatus("current")
+_PmEthernet15minTcaActive_Type = PmTcaActiveFlag
+_PmEthernet15minTcaActive_Object = MibTableColumn
+pmEthernet15minTcaActive = _PmEthernet15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 4, 1, 10),
+    _PmEthernet15minTcaActive_Type()
+)
+pmEthernet15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet15minTcaActive.setStatus("current")
+_PmEthernet15minTcaAdminState_Type = EnabledDisabledEnum
+_PmEthernet15minTcaAdminState_Object = MibTableColumn
+pmEthernet15minTcaAdminState = _PmEthernet15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 4, 1, 11),
+    _PmEthernet15minTcaAdminState_Type()
+)
+pmEthernet15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet15minTcaAdminState.setStatus("current")
+
+
+class _PmEthernet15minTcaProfileId_Type(Integer32):
+    """Custom type pmEthernet15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmEthernet15minTcaProfileId_Type.__name__ = "Integer32"
+_PmEthernet15minTcaProfileId_Object = MibTableColumn
+pmEthernet15minTcaProfileId = _PmEthernet15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 4, 1, 12),
+    _PmEthernet15minTcaProfileId_Type()
+)
+pmEthernet15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet15minTcaProfileId.setStatus("current")
 _PmEthernetCurrent24HrStatsTable_Object = MibTable
 pmEthernetCurrent24HrStatsTable = _PmEthernetCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 5)
@@ -734,6 +1012,52 @@ pmEthernet24HrMonStartDateTime = _PmEthernet24HrMonStartDateTime_Object(
 pmEthernet24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmEthernet24HrMonStartDateTime.setStatus("current")
+_PmEthernet24HrTHValue_Type = DisplayString
+_PmEthernet24HrTHValue_Object = MibTableColumn
+pmEthernet24HrTHValue = _PmEthernet24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 5, 1, 9),
+    _PmEthernet24HrTHValue_Type()
+)
+pmEthernet24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet24HrTHValue.setStatus("current")
+_PmEthernet24HrTcaActive_Type = PmTcaActiveFlag
+_PmEthernet24HrTcaActive_Object = MibTableColumn
+pmEthernet24HrTcaActive = _PmEthernet24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 5, 1, 10),
+    _PmEthernet24HrTcaActive_Type()
+)
+pmEthernet24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet24HrTcaActive.setStatus("current")
+_PmEthernet24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmEthernet24HrTcaAdminState_Object = MibTableColumn
+pmEthernet24HrTcaAdminState = _PmEthernet24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 5, 1, 11),
+    _PmEthernet24HrTcaAdminState_Type()
+)
+pmEthernet24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet24HrTcaAdminState.setStatus("current")
+
+
+class _PmEthernet24HrTcaProfileId_Type(Integer32):
+    """Custom type pmEthernet24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmEthernet24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmEthernet24HrTcaProfileId_Object = MibTableColumn
+pmEthernet24HrTcaProfileId = _PmEthernet24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 5, 1, 12),
+    _PmEthernet24HrTcaProfileId_Type()
+)
+pmEthernet24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernet24HrTcaProfileId.setStatus("current")
 _PmEthernetUntimedStatsTable_Object = MibTable
 pmEthernetUntimedStatsTable = _PmEthernetUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 6)
@@ -822,6 +1146,52 @@ pmEthernetUntimedMonStartDateTime = _PmEthernetUntimedMonStartDateTime_Object(
 pmEthernetUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmEthernetUntimedMonStartDateTime.setStatus("current")
+_PmEthernetUntimedTHValue_Type = DisplayString
+_PmEthernetUntimedTHValue_Object = MibTableColumn
+pmEthernetUntimedTHValue = _PmEthernetUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 6, 1, 9),
+    _PmEthernetUntimedTHValue_Type()
+)
+pmEthernetUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetUntimedTHValue.setStatus("current")
+_PmEthernetUntimedTcaActive_Type = PmTcaActiveFlag
+_PmEthernetUntimedTcaActive_Object = MibTableColumn
+pmEthernetUntimedTcaActive = _PmEthernetUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 6, 1, 10),
+    _PmEthernetUntimedTcaActive_Type()
+)
+pmEthernetUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetUntimedTcaActive.setStatus("current")
+_PmEthernetUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmEthernetUntimedTcaAdminState_Object = MibTableColumn
+pmEthernetUntimedTcaAdminState = _PmEthernetUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 6, 1, 11),
+    _PmEthernetUntimedTcaAdminState_Type()
+)
+pmEthernetUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetUntimedTcaAdminState.setStatus("current")
+
+
+class _PmEthernetUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmEthernetUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmEthernetUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmEthernetUntimedTcaProfileId_Object = MibTableColumn
+pmEthernetUntimedTcaProfileId = _PmEthernetUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 6, 1, 12),
+    _PmEthernetUntimedTcaProfileId_Type()
+)
+pmEthernetUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetUntimedTcaProfileId.setStatus("current")
 _PmEthernetHistory15minStatsTable_Object = MibTable
 pmEthernetHistory15minStatsTable = _PmEthernetHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 7)
@@ -930,6 +1300,24 @@ pmEthernetHistory15minMonStartDateTime = _PmEthernetHistory15minMonStartDateTime
 pmEthernetHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmEthernetHistory15minMonStartDateTime.setStatus("current")
+_PmEthernetHistory15minTHValue_Type = DisplayString
+_PmEthernetHistory15minTHValue_Object = MibTableColumn
+pmEthernetHistory15minTHValue = _PmEthernetHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 7, 1, 10),
+    _PmEthernetHistory15minTHValue_Type()
+)
+pmEthernetHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetHistory15minTHValue.setStatus("current")
+_PmEthernetHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmEthernetHistory15minTcaActive_Object = MibTableColumn
+pmEthernetHistory15minTcaActive = _PmEthernetHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 7, 1, 11),
+    _PmEthernetHistory15minTcaActive_Type()
+)
+pmEthernetHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetHistory15minTcaActive.setStatus("current")
 _PmEthernetHistory24HrStatsTable_Object = MibTable
 pmEthernetHistory24HrStatsTable = _PmEthernetHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 8)
@@ -1018,6 +1406,24 @@ pmEthernetHistory24HrMonStartDateTime = _PmEthernetHistory24HrMonStartDateTime_O
 pmEthernetHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmEthernetHistory24HrMonStartDateTime.setStatus("current")
+_PmEthernetHistory24HrTHValue_Type = DisplayString
+_PmEthernetHistory24HrTHValue_Object = MibTableColumn
+pmEthernetHistory24HrTHValue = _PmEthernetHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 8, 1, 9),
+    _PmEthernetHistory24HrTHValue_Type()
+)
+pmEthernetHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetHistory24HrTHValue.setStatus("current")
+_PmEthernetHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmEthernetHistory24HrTcaActive_Object = MibTableColumn
+pmEthernetHistory24HrTcaActive = _PmEthernetHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 8, 1, 10),
+    _PmEthernetHistory24HrTcaActive_Type()
+)
+pmEthernetHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmEthernetHistory24HrTcaActive.setStatus("current")
 _PmModemCurrent15minStatsTable_Object = MibTable
 pmModemCurrent15minStatsTable = _PmModemCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 9)
@@ -1106,6 +1512,52 @@ pmModem15minMonStartDateTime = _PmModem15minMonStartDateTime_Object(
 pmModem15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmModem15minMonStartDateTime.setStatus("current")
+_PmModem15minTHValue_Type = DisplayString
+_PmModem15minTHValue_Object = MibTableColumn
+pmModem15minTHValue = _PmModem15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 9, 1, 9),
+    _PmModem15minTHValue_Type()
+)
+pmModem15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem15minTHValue.setStatus("current")
+_PmModem15minTcaActive_Type = PmTcaActiveFlag
+_PmModem15minTcaActive_Object = MibTableColumn
+pmModem15minTcaActive = _PmModem15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 9, 1, 10),
+    _PmModem15minTcaActive_Type()
+)
+pmModem15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem15minTcaActive.setStatus("current")
+_PmModem15minTcaAdminState_Type = EnabledDisabledEnum
+_PmModem15minTcaAdminState_Object = MibTableColumn
+pmModem15minTcaAdminState = _PmModem15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 9, 1, 11),
+    _PmModem15minTcaAdminState_Type()
+)
+pmModem15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem15minTcaAdminState.setStatus("current")
+
+
+class _PmModem15minTcaProfileId_Type(Integer32):
+    """Custom type pmModem15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmModem15minTcaProfileId_Type.__name__ = "Integer32"
+_PmModem15minTcaProfileId_Object = MibTableColumn
+pmModem15minTcaProfileId = _PmModem15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 9, 1, 12),
+    _PmModem15minTcaProfileId_Type()
+)
+pmModem15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem15minTcaProfileId.setStatus("current")
 _PmModemCurrent24HrStatsTable_Object = MibTable
 pmModemCurrent24HrStatsTable = _PmModemCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 10)
@@ -1194,6 +1646,52 @@ pmModem24HrMonStartDateTime = _PmModem24HrMonStartDateTime_Object(
 pmModem24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmModem24HrMonStartDateTime.setStatus("current")
+_PmModem24HrTHValue_Type = DisplayString
+_PmModem24HrTHValue_Object = MibTableColumn
+pmModem24HrTHValue = _PmModem24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 10, 1, 9),
+    _PmModem24HrTHValue_Type()
+)
+pmModem24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem24HrTHValue.setStatus("current")
+_PmModem24HrTcaActive_Type = PmTcaActiveFlag
+_PmModem24HrTcaActive_Object = MibTableColumn
+pmModem24HrTcaActive = _PmModem24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 10, 1, 10),
+    _PmModem24HrTcaActive_Type()
+)
+pmModem24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem24HrTcaActive.setStatus("current")
+_PmModem24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmModem24HrTcaAdminState_Object = MibTableColumn
+pmModem24HrTcaAdminState = _PmModem24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 10, 1, 11),
+    _PmModem24HrTcaAdminState_Type()
+)
+pmModem24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem24HrTcaAdminState.setStatus("current")
+
+
+class _PmModem24HrTcaProfileId_Type(Integer32):
+    """Custom type pmModem24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmModem24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmModem24HrTcaProfileId_Object = MibTableColumn
+pmModem24HrTcaProfileId = _PmModem24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 10, 1, 12),
+    _PmModem24HrTcaProfileId_Type()
+)
+pmModem24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModem24HrTcaProfileId.setStatus("current")
 _PmModemUntimedStatsTable_Object = MibTable
 pmModemUntimedStatsTable = _PmModemUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 11)
@@ -1282,6 +1780,52 @@ pmModemUntimedMonStartDateTime = _PmModemUntimedMonStartDateTime_Object(
 pmModemUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmModemUntimedMonStartDateTime.setStatus("current")
+_PmModemUntimedTHValue_Type = DisplayString
+_PmModemUntimedTHValue_Object = MibTableColumn
+pmModemUntimedTHValue = _PmModemUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 11, 1, 9),
+    _PmModemUntimedTHValue_Type()
+)
+pmModemUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemUntimedTHValue.setStatus("current")
+_PmModemUntimedTcaActive_Type = PmTcaActiveFlag
+_PmModemUntimedTcaActive_Object = MibTableColumn
+pmModemUntimedTcaActive = _PmModemUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 11, 1, 10),
+    _PmModemUntimedTcaActive_Type()
+)
+pmModemUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemUntimedTcaActive.setStatus("current")
+_PmModemUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmModemUntimedTcaAdminState_Object = MibTableColumn
+pmModemUntimedTcaAdminState = _PmModemUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 11, 1, 11),
+    _PmModemUntimedTcaAdminState_Type()
+)
+pmModemUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemUntimedTcaAdminState.setStatus("current")
+
+
+class _PmModemUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmModemUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmModemUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmModemUntimedTcaProfileId_Object = MibTableColumn
+pmModemUntimedTcaProfileId = _PmModemUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 11, 1, 12),
+    _PmModemUntimedTcaProfileId_Type()
+)
+pmModemUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemUntimedTcaProfileId.setStatus("current")
 _PmModemHistory15minStatsTable_Object = MibTable
 pmModemHistory15minStatsTable = _PmModemHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 12)
@@ -1390,6 +1934,24 @@ pmModemHistory15minMonStartDateTime = _PmModemHistory15minMonStartDateTime_Objec
 pmModemHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmModemHistory15minMonStartDateTime.setStatus("current")
+_PmModemHistory15minTHValue_Type = DisplayString
+_PmModemHistory15minTHValue_Object = MibTableColumn
+pmModemHistory15minTHValue = _PmModemHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 12, 1, 10),
+    _PmModemHistory15minTHValue_Type()
+)
+pmModemHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemHistory15minTHValue.setStatus("current")
+_PmModemHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmModemHistory15minTcaActive_Object = MibTableColumn
+pmModemHistory15minTcaActive = _PmModemHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 12, 1, 11),
+    _PmModemHistory15minTcaActive_Type()
+)
+pmModemHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemHistory15minTcaActive.setStatus("current")
 _PmModemHistory24HrStatsTable_Object = MibTable
 pmModemHistory24HrStatsTable = _PmModemHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 13)
@@ -1478,6 +2040,24 @@ pmModemHistory24HrMonStartDateTime = _PmModemHistory24HrMonStartDateTime_Object(
 pmModemHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmModemHistory24HrMonStartDateTime.setStatus("current")
+_PmModemHistory24HrTHValue_Type = DisplayString
+_PmModemHistory24HrTHValue_Object = MibTableColumn
+pmModemHistory24HrTHValue = _PmModemHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 13, 1, 9),
+    _PmModemHistory24HrTHValue_Type()
+)
+pmModemHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemHistory24HrTHValue.setStatus("current")
+_PmModemHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmModemHistory24HrTcaActive_Object = MibTableColumn
+pmModemHistory24HrTcaActive = _PmModemHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 13, 1, 10),
+    _PmModemHistory24HrTcaActive_Type()
+)
+pmModemHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmModemHistory24HrTcaActive.setStatus("current")
 _PmOtuCurrent15minStatsTable_Object = MibTable
 pmOtuCurrent15minStatsTable = _PmOtuCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 14)
@@ -1566,6 +2146,52 @@ pmOtu15minMonStartDateTime = _PmOtu15minMonStartDateTime_Object(
 pmOtu15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOtu15minMonStartDateTime.setStatus("current")
+_PmOtu15minTHValue_Type = DisplayString
+_PmOtu15minTHValue_Object = MibTableColumn
+pmOtu15minTHValue = _PmOtu15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 14, 1, 9),
+    _PmOtu15minTHValue_Type()
+)
+pmOtu15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu15minTHValue.setStatus("current")
+_PmOtu15minTcaActive_Type = PmTcaActiveFlag
+_PmOtu15minTcaActive_Object = MibTableColumn
+pmOtu15minTcaActive = _PmOtu15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 14, 1, 10),
+    _PmOtu15minTcaActive_Type()
+)
+pmOtu15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu15minTcaActive.setStatus("current")
+_PmOtu15minTcaAdminState_Type = EnabledDisabledEnum
+_PmOtu15minTcaAdminState_Object = MibTableColumn
+pmOtu15minTcaAdminState = _PmOtu15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 14, 1, 11),
+    _PmOtu15minTcaAdminState_Type()
+)
+pmOtu15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu15minTcaAdminState.setStatus("current")
+
+
+class _PmOtu15minTcaProfileId_Type(Integer32):
+    """Custom type pmOtu15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOtu15minTcaProfileId_Type.__name__ = "Integer32"
+_PmOtu15minTcaProfileId_Object = MibTableColumn
+pmOtu15minTcaProfileId = _PmOtu15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 14, 1, 12),
+    _PmOtu15minTcaProfileId_Type()
+)
+pmOtu15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu15minTcaProfileId.setStatus("current")
 _PmOtuCurrent24HrStatsTable_Object = MibTable
 pmOtuCurrent24HrStatsTable = _PmOtuCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 15)
@@ -1654,6 +2280,52 @@ pmOtu24HrMonStartDateTime = _PmOtu24HrMonStartDateTime_Object(
 pmOtu24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOtu24HrMonStartDateTime.setStatus("current")
+_PmOtu24HrTHValue_Type = DisplayString
+_PmOtu24HrTHValue_Object = MibTableColumn
+pmOtu24HrTHValue = _PmOtu24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 15, 1, 9),
+    _PmOtu24HrTHValue_Type()
+)
+pmOtu24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu24HrTHValue.setStatus("current")
+_PmOtu24HrTcaActive_Type = PmTcaActiveFlag
+_PmOtu24HrTcaActive_Object = MibTableColumn
+pmOtu24HrTcaActive = _PmOtu24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 15, 1, 10),
+    _PmOtu24HrTcaActive_Type()
+)
+pmOtu24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu24HrTcaActive.setStatus("current")
+_PmOtu24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmOtu24HrTcaAdminState_Object = MibTableColumn
+pmOtu24HrTcaAdminState = _PmOtu24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 15, 1, 11),
+    _PmOtu24HrTcaAdminState_Type()
+)
+pmOtu24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu24HrTcaAdminState.setStatus("current")
+
+
+class _PmOtu24HrTcaProfileId_Type(Integer32):
+    """Custom type pmOtu24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOtu24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmOtu24HrTcaProfileId_Object = MibTableColumn
+pmOtu24HrTcaProfileId = _PmOtu24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 15, 1, 12),
+    _PmOtu24HrTcaProfileId_Type()
+)
+pmOtu24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtu24HrTcaProfileId.setStatus("current")
 _PmOtuUntimedStatsTable_Object = MibTable
 pmOtuUntimedStatsTable = _PmOtuUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 16)
@@ -1742,6 +2414,52 @@ pmOtuUntimedMonStartDateTime = _PmOtuUntimedMonStartDateTime_Object(
 pmOtuUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOtuUntimedMonStartDateTime.setStatus("current")
+_PmOtuUntimedTHValue_Type = DisplayString
+_PmOtuUntimedTHValue_Object = MibTableColumn
+pmOtuUntimedTHValue = _PmOtuUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 16, 1, 9),
+    _PmOtuUntimedTHValue_Type()
+)
+pmOtuUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuUntimedTHValue.setStatus("current")
+_PmOtuUntimedTcaActive_Type = PmTcaActiveFlag
+_PmOtuUntimedTcaActive_Object = MibTableColumn
+pmOtuUntimedTcaActive = _PmOtuUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 16, 1, 10),
+    _PmOtuUntimedTcaActive_Type()
+)
+pmOtuUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuUntimedTcaActive.setStatus("current")
+_PmOtuUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmOtuUntimedTcaAdminState_Object = MibTableColumn
+pmOtuUntimedTcaAdminState = _PmOtuUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 16, 1, 11),
+    _PmOtuUntimedTcaAdminState_Type()
+)
+pmOtuUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuUntimedTcaAdminState.setStatus("current")
+
+
+class _PmOtuUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmOtuUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOtuUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmOtuUntimedTcaProfileId_Object = MibTableColumn
+pmOtuUntimedTcaProfileId = _PmOtuUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 16, 1, 12),
+    _PmOtuUntimedTcaProfileId_Type()
+)
+pmOtuUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuUntimedTcaProfileId.setStatus("current")
 _PmOtuHistory15minStatsTable_Object = MibTable
 pmOtuHistory15minStatsTable = _PmOtuHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 17)
@@ -1850,6 +2568,24 @@ pmOtuHistory15minMonStartDateTime = _PmOtuHistory15minMonStartDateTime_Object(
 pmOtuHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOtuHistory15minMonStartDateTime.setStatus("current")
+_PmOtuHistory15minTHValue_Type = DisplayString
+_PmOtuHistory15minTHValue_Object = MibTableColumn
+pmOtuHistory15minTHValue = _PmOtuHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 17, 1, 10),
+    _PmOtuHistory15minTHValue_Type()
+)
+pmOtuHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuHistory15minTHValue.setStatus("current")
+_PmOtuHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmOtuHistory15minTcaActive_Object = MibTableColumn
+pmOtuHistory15minTcaActive = _PmOtuHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 17, 1, 11),
+    _PmOtuHistory15minTcaActive_Type()
+)
+pmOtuHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuHistory15minTcaActive.setStatus("current")
 _PmOtuHistory24HrStatsTable_Object = MibTable
 pmOtuHistory24HrStatsTable = _PmOtuHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 18)
@@ -1938,6 +2674,24 @@ pmOtuHistory24HrMonStartDateTime = _PmOtuHistory24HrMonStartDateTime_Object(
 pmOtuHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOtuHistory24HrMonStartDateTime.setStatus("current")
+_PmOtuHistory24HrTHValue_Type = DisplayString
+_PmOtuHistory24HrTHValue_Object = MibTableColumn
+pmOtuHistory24HrTHValue = _PmOtuHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 18, 1, 9),
+    _PmOtuHistory24HrTHValue_Type()
+)
+pmOtuHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuHistory24HrTHValue.setStatus("current")
+_PmOtuHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmOtuHistory24HrTcaActive_Object = MibTableColumn
+pmOtuHistory24HrTcaActive = _PmOtuHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 18, 1, 10),
+    _PmOtuHistory24HrTcaActive_Type()
+)
+pmOtuHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOtuHistory24HrTcaActive.setStatus("current")
 _PmOduCurrent15minStatsTable_Object = MibTable
 pmOduCurrent15minStatsTable = _PmOduCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 19)
@@ -2026,6 +2780,52 @@ pmOdu15minMonStartDateTime = _PmOdu15minMonStartDateTime_Object(
 pmOdu15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOdu15minMonStartDateTime.setStatus("current")
+_PmOdu15minTHValue_Type = DisplayString
+_PmOdu15minTHValue_Object = MibTableColumn
+pmOdu15minTHValue = _PmOdu15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 19, 1, 9),
+    _PmOdu15minTHValue_Type()
+)
+pmOdu15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu15minTHValue.setStatus("current")
+_PmOdu15minTcaActive_Type = PmTcaActiveFlag
+_PmOdu15minTcaActive_Object = MibTableColumn
+pmOdu15minTcaActive = _PmOdu15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 19, 1, 10),
+    _PmOdu15minTcaActive_Type()
+)
+pmOdu15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu15minTcaActive.setStatus("current")
+_PmOdu15minTcaAdminState_Type = EnabledDisabledEnum
+_PmOdu15minTcaAdminState_Object = MibTableColumn
+pmOdu15minTcaAdminState = _PmOdu15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 19, 1, 11),
+    _PmOdu15minTcaAdminState_Type()
+)
+pmOdu15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu15minTcaAdminState.setStatus("current")
+
+
+class _PmOdu15minTcaProfileId_Type(Integer32):
+    """Custom type pmOdu15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOdu15minTcaProfileId_Type.__name__ = "Integer32"
+_PmOdu15minTcaProfileId_Object = MibTableColumn
+pmOdu15minTcaProfileId = _PmOdu15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 19, 1, 12),
+    _PmOdu15minTcaProfileId_Type()
+)
+pmOdu15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu15minTcaProfileId.setStatus("current")
 _PmOduCurrent24HrStatsTable_Object = MibTable
 pmOduCurrent24HrStatsTable = _PmOduCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 20)
@@ -2114,6 +2914,52 @@ pmOdu24HrMonStartDateTime = _PmOdu24HrMonStartDateTime_Object(
 pmOdu24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOdu24HrMonStartDateTime.setStatus("current")
+_PmOdu24HrTHValue_Type = DisplayString
+_PmOdu24HrTHValue_Object = MibTableColumn
+pmOdu24HrTHValue = _PmOdu24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 20, 1, 9),
+    _PmOdu24HrTHValue_Type()
+)
+pmOdu24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu24HrTHValue.setStatus("current")
+_PmOdu24HrTcaActive_Type = PmTcaActiveFlag
+_PmOdu24HrTcaActive_Object = MibTableColumn
+pmOdu24HrTcaActive = _PmOdu24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 20, 1, 10),
+    _PmOdu24HrTcaActive_Type()
+)
+pmOdu24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu24HrTcaActive.setStatus("current")
+_PmOdu24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmOdu24HrTcaAdminState_Object = MibTableColumn
+pmOdu24HrTcaAdminState = _PmOdu24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 20, 1, 11),
+    _PmOdu24HrTcaAdminState_Type()
+)
+pmOdu24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu24HrTcaAdminState.setStatus("current")
+
+
+class _PmOdu24HrTcaProfileId_Type(Integer32):
+    """Custom type pmOdu24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOdu24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmOdu24HrTcaProfileId_Object = MibTableColumn
+pmOdu24HrTcaProfileId = _PmOdu24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 20, 1, 12),
+    _PmOdu24HrTcaProfileId_Type()
+)
+pmOdu24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOdu24HrTcaProfileId.setStatus("current")
 _PmOduUntimedStatsTable_Object = MibTable
 pmOduUntimedStatsTable = _PmOduUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 21)
@@ -2202,6 +3048,52 @@ pmOduUntimedMonStartDateTime = _PmOduUntimedMonStartDateTime_Object(
 pmOduUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOduUntimedMonStartDateTime.setStatus("current")
+_PmOduUntimedTHValue_Type = DisplayString
+_PmOduUntimedTHValue_Object = MibTableColumn
+pmOduUntimedTHValue = _PmOduUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 21, 1, 9),
+    _PmOduUntimedTHValue_Type()
+)
+pmOduUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduUntimedTHValue.setStatus("current")
+_PmOduUntimedTcaActive_Type = PmTcaActiveFlag
+_PmOduUntimedTcaActive_Object = MibTableColumn
+pmOduUntimedTcaActive = _PmOduUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 21, 1, 10),
+    _PmOduUntimedTcaActive_Type()
+)
+pmOduUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduUntimedTcaActive.setStatus("current")
+_PmOduUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmOduUntimedTcaAdminState_Object = MibTableColumn
+pmOduUntimedTcaAdminState = _PmOduUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 21, 1, 11),
+    _PmOduUntimedTcaAdminState_Type()
+)
+pmOduUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduUntimedTcaAdminState.setStatus("current")
+
+
+class _PmOduUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmOduUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOduUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmOduUntimedTcaProfileId_Object = MibTableColumn
+pmOduUntimedTcaProfileId = _PmOduUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 21, 1, 12),
+    _PmOduUntimedTcaProfileId_Type()
+)
+pmOduUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduUntimedTcaProfileId.setStatus("current")
 _PmOduHistory15minStatsTable_Object = MibTable
 pmOduHistory15minStatsTable = _PmOduHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 22)
@@ -2310,6 +3202,24 @@ pmOduHistory15minMonStartDateTime = _PmOduHistory15minMonStartDateTime_Object(
 pmOduHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOduHistory15minMonStartDateTime.setStatus("current")
+_PmOduHistory15minTHValue_Type = DisplayString
+_PmOduHistory15minTHValue_Object = MibTableColumn
+pmOduHistory15minTHValue = _PmOduHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 22, 1, 10),
+    _PmOduHistory15minTHValue_Type()
+)
+pmOduHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduHistory15minTHValue.setStatus("current")
+_PmOduHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmOduHistory15minTcaActive_Object = MibTableColumn
+pmOduHistory15minTcaActive = _PmOduHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 22, 1, 11),
+    _PmOduHistory15minTcaActive_Type()
+)
+pmOduHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduHistory15minTcaActive.setStatus("current")
 _PmOduHistory24HrStatsTable_Object = MibTable
 pmOduHistory24HrStatsTable = _PmOduHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 23)
@@ -2398,6 +3308,24 @@ pmOduHistory24HrMonStartDateTime = _PmOduHistory24HrMonStartDateTime_Object(
 pmOduHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOduHistory24HrMonStartDateTime.setStatus("current")
+_PmOduHistory24HrTHValue_Type = DisplayString
+_PmOduHistory24HrTHValue_Object = MibTableColumn
+pmOduHistory24HrTHValue = _PmOduHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 23, 1, 9),
+    _PmOduHistory24HrTHValue_Type()
+)
+pmOduHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduHistory24HrTHValue.setStatus("current")
+_PmOduHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmOduHistory24HrTcaActive_Object = MibTableColumn
+pmOduHistory24HrTcaActive = _PmOduHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 23, 1, 10),
+    _PmOduHistory24HrTcaActive_Type()
+)
+pmOduHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOduHistory24HrTcaActive.setStatus("current")
 _PmOpticalPowerCurrent15minStatsTable_Object = MibTable
 pmOpticalPowerCurrent15minStatsTable = _PmOpticalPowerCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 24)
@@ -2506,6 +3434,61 @@ pmOpticalPower15minMonStartDateTime = _PmOpticalPower15minMonStartDateTime_Objec
 pmOpticalPower15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOpticalPower15minMonStartDateTime.setStatus("current")
+_PmOpticalPower15minTHValue_Type = DisplayString
+_PmOpticalPower15minTHValue_Object = MibTableColumn
+pmOpticalPower15minTHValue = _PmOpticalPower15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 24, 1, 10),
+    _PmOpticalPower15minTHValue_Type()
+)
+pmOpticalPower15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower15minTHValue.setStatus("current")
+_PmOpticalPower15minTcaActive_Type = PmTcaActiveFlag
+_PmOpticalPower15minTcaActive_Object = MibTableColumn
+pmOpticalPower15minTcaActive = _PmOpticalPower15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 24, 1, 11),
+    _PmOpticalPower15minTcaActive_Type()
+)
+pmOpticalPower15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower15minTcaActive.setStatus("current")
+_PmOpticalPower15minTcaAdminState_Type = EnabledDisabledEnum
+_PmOpticalPower15minTcaAdminState_Object = MibTableColumn
+pmOpticalPower15minTcaAdminState = _PmOpticalPower15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 24, 1, 12),
+    _PmOpticalPower15minTcaAdminState_Type()
+)
+pmOpticalPower15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower15minTcaAdminState.setStatus("current")
+
+
+class _PmOpticalPower15minTcaProfileId_Type(Integer32):
+    """Custom type pmOpticalPower15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOpticalPower15minTcaProfileId_Type.__name__ = "Integer32"
+_PmOpticalPower15minTcaProfileId_Object = MibTableColumn
+pmOpticalPower15minTcaProfileId = _PmOpticalPower15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 24, 1, 13),
+    _PmOpticalPower15minTcaProfileId_Type()
+)
+pmOpticalPower15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower15minTcaProfileId.setStatus("current")
+_PmOpticalPower15minBaseLineValue_Type = DisplayString
+_PmOpticalPower15minBaseLineValue_Object = MibTableColumn
+pmOpticalPower15minBaseLineValue = _PmOpticalPower15minBaseLineValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 24, 1, 14),
+    _PmOpticalPower15minBaseLineValue_Type()
+)
+pmOpticalPower15minBaseLineValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower15minBaseLineValue.setStatus("current")
 _PmOpticalPowerCurrent24HrStatsTable_Object = MibTable
 pmOpticalPowerCurrent24HrStatsTable = _PmOpticalPowerCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 25)
@@ -2614,6 +3597,61 @@ pmOpticalPower24HrMonStartDateTime = _PmOpticalPower24HrMonStartDateTime_Object(
 pmOpticalPower24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOpticalPower24HrMonStartDateTime.setStatus("current")
+_PmOpticalPower24HrTHValue_Type = DisplayString
+_PmOpticalPower24HrTHValue_Object = MibTableColumn
+pmOpticalPower24HrTHValue = _PmOpticalPower24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 25, 1, 10),
+    _PmOpticalPower24HrTHValue_Type()
+)
+pmOpticalPower24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower24HrTHValue.setStatus("current")
+_PmOpticalPower24HrTcaActive_Type = PmTcaActiveFlag
+_PmOpticalPower24HrTcaActive_Object = MibTableColumn
+pmOpticalPower24HrTcaActive = _PmOpticalPower24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 25, 1, 11),
+    _PmOpticalPower24HrTcaActive_Type()
+)
+pmOpticalPower24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower24HrTcaActive.setStatus("current")
+_PmOpticalPower24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmOpticalPower24HrTcaAdminState_Object = MibTableColumn
+pmOpticalPower24HrTcaAdminState = _PmOpticalPower24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 25, 1, 12),
+    _PmOpticalPower24HrTcaAdminState_Type()
+)
+pmOpticalPower24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower24HrTcaAdminState.setStatus("current")
+
+
+class _PmOpticalPower24HrTcaProfileId_Type(Integer32):
+    """Custom type pmOpticalPower24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOpticalPower24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmOpticalPower24HrTcaProfileId_Object = MibTableColumn
+pmOpticalPower24HrTcaProfileId = _PmOpticalPower24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 25, 1, 13),
+    _PmOpticalPower24HrTcaProfileId_Type()
+)
+pmOpticalPower24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower24HrTcaProfileId.setStatus("current")
+_PmOpticalPower24HrBaseLineValue_Type = DisplayString
+_PmOpticalPower24HrBaseLineValue_Object = MibTableColumn
+pmOpticalPower24HrBaseLineValue = _PmOpticalPower24HrBaseLineValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 25, 1, 14),
+    _PmOpticalPower24HrBaseLineValue_Type()
+)
+pmOpticalPower24HrBaseLineValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPower24HrBaseLineValue.setStatus("current")
 _PmOpticalPowerUntimedStatsTable_Object = MibTable
 pmOpticalPowerUntimedStatsTable = _PmOpticalPowerUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 26)
@@ -2722,6 +3760,61 @@ pmOpticalPowerUntimedMonStartDateTime = _PmOpticalPowerUntimedMonStartDateTime_O
 pmOpticalPowerUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOpticalPowerUntimedMonStartDateTime.setStatus("current")
+_PmOpticalPowerUntimedTHValue_Type = DisplayString
+_PmOpticalPowerUntimedTHValue_Object = MibTableColumn
+pmOpticalPowerUntimedTHValue = _PmOpticalPowerUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 26, 1, 10),
+    _PmOpticalPowerUntimedTHValue_Type()
+)
+pmOpticalPowerUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerUntimedTHValue.setStatus("current")
+_PmOpticalPowerUntimedTcaActive_Type = PmTcaActiveFlag
+_PmOpticalPowerUntimedTcaActive_Object = MibTableColumn
+pmOpticalPowerUntimedTcaActive = _PmOpticalPowerUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 26, 1, 11),
+    _PmOpticalPowerUntimedTcaActive_Type()
+)
+pmOpticalPowerUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerUntimedTcaActive.setStatus("current")
+_PmOpticalPowerUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmOpticalPowerUntimedTcaAdminState_Object = MibTableColumn
+pmOpticalPowerUntimedTcaAdminState = _PmOpticalPowerUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 26, 1, 12),
+    _PmOpticalPowerUntimedTcaAdminState_Type()
+)
+pmOpticalPowerUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerUntimedTcaAdminState.setStatus("current")
+
+
+class _PmOpticalPowerUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmOpticalPowerUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmOpticalPowerUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmOpticalPowerUntimedTcaProfileId_Object = MibTableColumn
+pmOpticalPowerUntimedTcaProfileId = _PmOpticalPowerUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 26, 1, 13),
+    _PmOpticalPowerUntimedTcaProfileId_Type()
+)
+pmOpticalPowerUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerUntimedTcaProfileId.setStatus("current")
+_PmOpticalPowerUntimedBaseLineValue_Type = DisplayString
+_PmOpticalPowerUntimedBaseLineValue_Object = MibTableColumn
+pmOpticalPowerUntimedBaseLineValue = _PmOpticalPowerUntimedBaseLineValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 26, 1, 14),
+    _PmOpticalPowerUntimedBaseLineValue_Type()
+)
+pmOpticalPowerUntimedBaseLineValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerUntimedBaseLineValue.setStatus("current")
 _PmOpticalPowerHistory15minStatsTable_Object = MibTable
 pmOpticalPowerHistory15minStatsTable = _PmOpticalPowerHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 27)
@@ -2850,6 +3943,24 @@ pmOpticalPowerHistory15minMonStartDateTime = _PmOpticalPowerHistory15minMonStart
 pmOpticalPowerHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOpticalPowerHistory15minMonStartDateTime.setStatus("current")
+_PmOpticalPowerHistory15minTHValue_Type = DisplayString
+_PmOpticalPowerHistory15minTHValue_Object = MibTableColumn
+pmOpticalPowerHistory15minTHValue = _PmOpticalPowerHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 27, 1, 11),
+    _PmOpticalPowerHistory15minTHValue_Type()
+)
+pmOpticalPowerHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerHistory15minTHValue.setStatus("current")
+_PmOpticalPowerHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmOpticalPowerHistory15minTcaActive_Object = MibTableColumn
+pmOpticalPowerHistory15minTcaActive = _PmOpticalPowerHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 27, 1, 12),
+    _PmOpticalPowerHistory15minTcaActive_Type()
+)
+pmOpticalPowerHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerHistory15minTcaActive.setStatus("current")
 _PmOpticalPowerHistory24HrStatsTable_Object = MibTable
 pmOpticalPowerHistory24HrStatsTable = _PmOpticalPowerHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 28)
@@ -2958,6 +4069,24 @@ pmOpticalPowerHistory24HrMonStartDateTime = _PmOpticalPowerHistory24HrMonStartDa
 pmOpticalPowerHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmOpticalPowerHistory24HrMonStartDateTime.setStatus("current")
+_PmOpticalPowerHistory24HrTHValue_Type = DisplayString
+_PmOpticalPowerHistory24HrTHValue_Object = MibTableColumn
+pmOpticalPowerHistory24HrTHValue = _PmOpticalPowerHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 28, 1, 10),
+    _PmOpticalPowerHistory24HrTHValue_Type()
+)
+pmOpticalPowerHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerHistory24HrTHValue.setStatus("current")
+_PmOpticalPowerHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmOpticalPowerHistory24HrTcaActive_Object = MibTableColumn
+pmOpticalPowerHistory24HrTcaActive = _PmOpticalPowerHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 28, 1, 11),
+    _PmOpticalPowerHistory24HrTcaActive_Type()
+)
+pmOpticalPowerHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmOpticalPowerHistory24HrTcaActive.setStatus("current")
 _PmGcmCurrent15minStatsTable_Object = MibTable
 pmGcmCurrent15minStatsTable = _PmGcmCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 29)
@@ -3046,6 +4175,52 @@ pmGcm15minMonStartDateTime = _PmGcm15minMonStartDateTime_Object(
 pmGcm15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmGcm15minMonStartDateTime.setStatus("current")
+_PmGcm15minTHValue_Type = DisplayString
+_PmGcm15minTHValue_Object = MibTableColumn
+pmGcm15minTHValue = _PmGcm15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 29, 1, 9),
+    _PmGcm15minTHValue_Type()
+)
+pmGcm15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm15minTHValue.setStatus("current")
+_PmGcm15minTcaActive_Type = PmTcaActiveFlag
+_PmGcm15minTcaActive_Object = MibTableColumn
+pmGcm15minTcaActive = _PmGcm15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 29, 1, 10),
+    _PmGcm15minTcaActive_Type()
+)
+pmGcm15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm15minTcaActive.setStatus("current")
+_PmGcm15minTcaAdminState_Type = EnabledDisabledEnum
+_PmGcm15minTcaAdminState_Object = MibTableColumn
+pmGcm15minTcaAdminState = _PmGcm15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 29, 1, 11),
+    _PmGcm15minTcaAdminState_Type()
+)
+pmGcm15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm15minTcaAdminState.setStatus("current")
+
+
+class _PmGcm15minTcaProfileId_Type(Integer32):
+    """Custom type pmGcm15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmGcm15minTcaProfileId_Type.__name__ = "Integer32"
+_PmGcm15minTcaProfileId_Object = MibTableColumn
+pmGcm15minTcaProfileId = _PmGcm15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 29, 1, 12),
+    _PmGcm15minTcaProfileId_Type()
+)
+pmGcm15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm15minTcaProfileId.setStatus("current")
 _PmGcmCurrent24HrStatsTable_Object = MibTable
 pmGcmCurrent24HrStatsTable = _PmGcmCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 30)
@@ -3134,6 +4309,52 @@ pmGcm24HrMonStartDateTime = _PmGcm24HrMonStartDateTime_Object(
 pmGcm24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmGcm24HrMonStartDateTime.setStatus("current")
+_PmGcm24HrTHValue_Type = DisplayString
+_PmGcm24HrTHValue_Object = MibTableColumn
+pmGcm24HrTHValue = _PmGcm24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 30, 1, 9),
+    _PmGcm24HrTHValue_Type()
+)
+pmGcm24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm24HrTHValue.setStatus("current")
+_PmGcm24HrTcaActive_Type = PmTcaActiveFlag
+_PmGcm24HrTcaActive_Object = MibTableColumn
+pmGcm24HrTcaActive = _PmGcm24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 30, 1, 10),
+    _PmGcm24HrTcaActive_Type()
+)
+pmGcm24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm24HrTcaActive.setStatus("current")
+_PmGcm24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmGcm24HrTcaAdminState_Object = MibTableColumn
+pmGcm24HrTcaAdminState = _PmGcm24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 30, 1, 11),
+    _PmGcm24HrTcaAdminState_Type()
+)
+pmGcm24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm24HrTcaAdminState.setStatus("current")
+
+
+class _PmGcm24HrTcaProfileId_Type(Integer32):
+    """Custom type pmGcm24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmGcm24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmGcm24HrTcaProfileId_Object = MibTableColumn
+pmGcm24HrTcaProfileId = _PmGcm24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 30, 1, 12),
+    _PmGcm24HrTcaProfileId_Type()
+)
+pmGcm24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcm24HrTcaProfileId.setStatus("current")
 _PmGcmUntimedStatsTable_Object = MibTable
 pmGcmUntimedStatsTable = _PmGcmUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 31)
@@ -3222,6 +4443,52 @@ pmGcmUntimedMonStartDateTime = _PmGcmUntimedMonStartDateTime_Object(
 pmGcmUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmGcmUntimedMonStartDateTime.setStatus("current")
+_PmGcmUntimedTHValue_Type = DisplayString
+_PmGcmUntimedTHValue_Object = MibTableColumn
+pmGcmUntimedTHValue = _PmGcmUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 31, 1, 9),
+    _PmGcmUntimedTHValue_Type()
+)
+pmGcmUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmUntimedTHValue.setStatus("current")
+_PmGcmUntimedTcaActive_Type = PmTcaActiveFlag
+_PmGcmUntimedTcaActive_Object = MibTableColumn
+pmGcmUntimedTcaActive = _PmGcmUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 31, 1, 10),
+    _PmGcmUntimedTcaActive_Type()
+)
+pmGcmUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmUntimedTcaActive.setStatus("current")
+_PmGcmUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmGcmUntimedTcaAdminState_Object = MibTableColumn
+pmGcmUntimedTcaAdminState = _PmGcmUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 31, 1, 11),
+    _PmGcmUntimedTcaAdminState_Type()
+)
+pmGcmUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmUntimedTcaAdminState.setStatus("current")
+
+
+class _PmGcmUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmGcmUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmGcmUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmGcmUntimedTcaProfileId_Object = MibTableColumn
+pmGcmUntimedTcaProfileId = _PmGcmUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 31, 1, 12),
+    _PmGcmUntimedTcaProfileId_Type()
+)
+pmGcmUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmUntimedTcaProfileId.setStatus("current")
 _PmGcmHistory15minStatsTable_Object = MibTable
 pmGcmHistory15minStatsTable = _PmGcmHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 32)
@@ -3330,6 +4597,24 @@ pmGcmHistory15minMonStartDateTime = _PmGcmHistory15minMonStartDateTime_Object(
 pmGcmHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmGcmHistory15minMonStartDateTime.setStatus("current")
+_PmGcmHistory15minTHValue_Type = DisplayString
+_PmGcmHistory15minTHValue_Object = MibTableColumn
+pmGcmHistory15minTHValue = _PmGcmHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 32, 1, 10),
+    _PmGcmHistory15minTHValue_Type()
+)
+pmGcmHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmHistory15minTHValue.setStatus("current")
+_PmGcmHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmGcmHistory15minTcaActive_Object = MibTableColumn
+pmGcmHistory15minTcaActive = _PmGcmHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 32, 1, 11),
+    _PmGcmHistory15minTcaActive_Type()
+)
+pmGcmHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmHistory15minTcaActive.setStatus("current")
 _PmGcmHistory24HrStatsTable_Object = MibTable
 pmGcmHistory24HrStatsTable = _PmGcmHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 33)
@@ -3418,6 +4703,24 @@ pmGcmHistory24HrMonStartDateTime = _PmGcmHistory24HrMonStartDateTime_Object(
 pmGcmHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmGcmHistory24HrMonStartDateTime.setStatus("current")
+_PmGcmHistory24HrTHValue_Type = DisplayString
+_PmGcmHistory24HrTHValue_Object = MibTableColumn
+pmGcmHistory24HrTHValue = _PmGcmHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 33, 1, 9),
+    _PmGcmHistory24HrTHValue_Type()
+)
+pmGcmHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmHistory24HrTHValue.setStatus("current")
+_PmGcmHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmGcmHistory24HrTcaActive_Object = MibTableColumn
+pmGcmHistory24HrTcaActive = _PmGcmHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 33, 1, 10),
+    _PmGcmHistory24HrTcaActive_Type()
+)
+pmGcmHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmGcmHistory24HrTcaActive.setStatus("current")
 _PmPhotonicsCurrent15minStatsTable_Object = MibTable
 pmPhotonicsCurrent15minStatsTable = _PmPhotonicsCurrent15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 34)
@@ -3506,6 +4809,61 @@ pmPhotonics15minMonStartDateTime = _PmPhotonics15minMonStartDateTime_Object(
 pmPhotonics15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmPhotonics15minMonStartDateTime.setStatus("current")
+_PmPhotonics15minTHValue_Type = DisplayString
+_PmPhotonics15minTHValue_Object = MibTableColumn
+pmPhotonics15minTHValue = _PmPhotonics15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 34, 1, 9),
+    _PmPhotonics15minTHValue_Type()
+)
+pmPhotonics15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics15minTHValue.setStatus("current")
+_PmPhotonics15minTcaActive_Type = PmTcaActiveFlag
+_PmPhotonics15minTcaActive_Object = MibTableColumn
+pmPhotonics15minTcaActive = _PmPhotonics15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 34, 1, 10),
+    _PmPhotonics15minTcaActive_Type()
+)
+pmPhotonics15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics15minTcaActive.setStatus("current")
+_PmPhotonics15minTcaAdminState_Type = EnabledDisabledEnum
+_PmPhotonics15minTcaAdminState_Object = MibTableColumn
+pmPhotonics15minTcaAdminState = _PmPhotonics15minTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 34, 1, 11),
+    _PmPhotonics15minTcaAdminState_Type()
+)
+pmPhotonics15minTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics15minTcaAdminState.setStatus("current")
+
+
+class _PmPhotonics15minTcaProfileId_Type(Integer32):
+    """Custom type pmPhotonics15minTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmPhotonics15minTcaProfileId_Type.__name__ = "Integer32"
+_PmPhotonics15minTcaProfileId_Object = MibTableColumn
+pmPhotonics15minTcaProfileId = _PmPhotonics15minTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 34, 1, 12),
+    _PmPhotonics15minTcaProfileId_Type()
+)
+pmPhotonics15minTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics15minTcaProfileId.setStatus("current")
+_PmPhotonics15minBaseLineValue_Type = DisplayString
+_PmPhotonics15minBaseLineValue_Object = MibTableColumn
+pmPhotonics15minBaseLineValue = _PmPhotonics15minBaseLineValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 34, 1, 13),
+    _PmPhotonics15minBaseLineValue_Type()
+)
+pmPhotonics15minBaseLineValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics15minBaseLineValue.setStatus("current")
 _PmPhotonicsCurrent24HrStatsTable_Object = MibTable
 pmPhotonicsCurrent24HrStatsTable = _PmPhotonicsCurrent24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 35)
@@ -3594,6 +4952,61 @@ pmPhotonics24HrMonStartDateTime = _PmPhotonics24HrMonStartDateTime_Object(
 pmPhotonics24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmPhotonics24HrMonStartDateTime.setStatus("current")
+_PmPhotonics24HrTHValue_Type = DisplayString
+_PmPhotonics24HrTHValue_Object = MibTableColumn
+pmPhotonics24HrTHValue = _PmPhotonics24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 35, 1, 9),
+    _PmPhotonics24HrTHValue_Type()
+)
+pmPhotonics24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics24HrTHValue.setStatus("current")
+_PmPhotonics24HrTcaActive_Type = PmTcaActiveFlag
+_PmPhotonics24HrTcaActive_Object = MibTableColumn
+pmPhotonics24HrTcaActive = _PmPhotonics24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 35, 1, 10),
+    _PmPhotonics24HrTcaActive_Type()
+)
+pmPhotonics24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics24HrTcaActive.setStatus("current")
+_PmPhotonics24HrTcaAdminState_Type = EnabledDisabledEnum
+_PmPhotonics24HrTcaAdminState_Object = MibTableColumn
+pmPhotonics24HrTcaAdminState = _PmPhotonics24HrTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 35, 1, 11),
+    _PmPhotonics24HrTcaAdminState_Type()
+)
+pmPhotonics24HrTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics24HrTcaAdminState.setStatus("current")
+
+
+class _PmPhotonics24HrTcaProfileId_Type(Integer32):
+    """Custom type pmPhotonics24HrTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmPhotonics24HrTcaProfileId_Type.__name__ = "Integer32"
+_PmPhotonics24HrTcaProfileId_Object = MibTableColumn
+pmPhotonics24HrTcaProfileId = _PmPhotonics24HrTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 35, 1, 12),
+    _PmPhotonics24HrTcaProfileId_Type()
+)
+pmPhotonics24HrTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics24HrTcaProfileId.setStatus("current")
+_PmPhotonics24HrBaseLineValue_Type = DisplayString
+_PmPhotonics24HrBaseLineValue_Object = MibTableColumn
+pmPhotonics24HrBaseLineValue = _PmPhotonics24HrBaseLineValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 35, 1, 13),
+    _PmPhotonics24HrBaseLineValue_Type()
+)
+pmPhotonics24HrBaseLineValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonics24HrBaseLineValue.setStatus("current")
 _PmPhotonicsUntimedStatsTable_Object = MibTable
 pmPhotonicsUntimedStatsTable = _PmPhotonicsUntimedStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 36)
@@ -3682,6 +5095,61 @@ pmPhotonicsUntimedMonStartDateTime = _PmPhotonicsUntimedMonStartDateTime_Object(
 pmPhotonicsUntimedMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmPhotonicsUntimedMonStartDateTime.setStatus("current")
+_PmPhotonicsUntimedTHValue_Type = DisplayString
+_PmPhotonicsUntimedTHValue_Object = MibTableColumn
+pmPhotonicsUntimedTHValue = _PmPhotonicsUntimedTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 36, 1, 9),
+    _PmPhotonicsUntimedTHValue_Type()
+)
+pmPhotonicsUntimedTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsUntimedTHValue.setStatus("current")
+_PmPhotonicsUntimedTcaActive_Type = PmTcaActiveFlag
+_PmPhotonicsUntimedTcaActive_Object = MibTableColumn
+pmPhotonicsUntimedTcaActive = _PmPhotonicsUntimedTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 36, 1, 10),
+    _PmPhotonicsUntimedTcaActive_Type()
+)
+pmPhotonicsUntimedTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsUntimedTcaActive.setStatus("current")
+_PmPhotonicsUntimedTcaAdminState_Type = EnabledDisabledEnum
+_PmPhotonicsUntimedTcaAdminState_Object = MibTableColumn
+pmPhotonicsUntimedTcaAdminState = _PmPhotonicsUntimedTcaAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 36, 1, 11),
+    _PmPhotonicsUntimedTcaAdminState_Type()
+)
+pmPhotonicsUntimedTcaAdminState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsUntimedTcaAdminState.setStatus("current")
+
+
+class _PmPhotonicsUntimedTcaProfileId_Type(Integer32):
+    """Custom type pmPhotonicsUntimedTcaProfileId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_PmPhotonicsUntimedTcaProfileId_Type.__name__ = "Integer32"
+_PmPhotonicsUntimedTcaProfileId_Object = MibTableColumn
+pmPhotonicsUntimedTcaProfileId = _PmPhotonicsUntimedTcaProfileId_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 36, 1, 12),
+    _PmPhotonicsUntimedTcaProfileId_Type()
+)
+pmPhotonicsUntimedTcaProfileId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsUntimedTcaProfileId.setStatus("current")
+_PmPhotonicsUntimedBaseLineValue_Type = DisplayString
+_PmPhotonicsUntimedBaseLineValue_Object = MibTableColumn
+pmPhotonicsUntimedBaseLineValue = _PmPhotonicsUntimedBaseLineValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 36, 1, 13),
+    _PmPhotonicsUntimedBaseLineValue_Type()
+)
+pmPhotonicsUntimedBaseLineValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsUntimedBaseLineValue.setStatus("current")
 _PmPhotonicsHistory15minStatsTable_Object = MibTable
 pmPhotonicsHistory15minStatsTable = _PmPhotonicsHistory15minStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 37)
@@ -3790,6 +5258,24 @@ pmPhotonicsHistory15minMonStartDateTime = _PmPhotonicsHistory15minMonStartDateTi
 pmPhotonicsHistory15minMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmPhotonicsHistory15minMonStartDateTime.setStatus("current")
+_PmPhotonicsHistory15minTHValue_Type = DisplayString
+_PmPhotonicsHistory15minTHValue_Object = MibTableColumn
+pmPhotonicsHistory15minTHValue = _PmPhotonicsHistory15minTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 37, 1, 10),
+    _PmPhotonicsHistory15minTHValue_Type()
+)
+pmPhotonicsHistory15minTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsHistory15minTHValue.setStatus("current")
+_PmPhotonicsHistory15minTcaActive_Type = PmTcaActiveFlag
+_PmPhotonicsHistory15minTcaActive_Object = MibTableColumn
+pmPhotonicsHistory15minTcaActive = _PmPhotonicsHistory15minTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 37, 1, 11),
+    _PmPhotonicsHistory15minTcaActive_Type()
+)
+pmPhotonicsHistory15minTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsHistory15minTcaActive.setStatus("current")
 _PmPhotonicsHistory24HrStatsTable_Object = MibTable
 pmPhotonicsHistory24HrStatsTable = _PmPhotonicsHistory24HrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 38)
@@ -3878,6 +5364,24 @@ pmPhotonicsHistory24HrMonStartDateTime = _PmPhotonicsHistory24HrMonStartDateTime
 pmPhotonicsHistory24HrMonStartDateTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     pmPhotonicsHistory24HrMonStartDateTime.setStatus("current")
+_PmPhotonicsHistory24HrTHValue_Type = DisplayString
+_PmPhotonicsHistory24HrTHValue_Object = MibTableColumn
+pmPhotonicsHistory24HrTHValue = _PmPhotonicsHistory24HrTHValue_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 38, 1, 9),
+    _PmPhotonicsHistory24HrTHValue_Type()
+)
+pmPhotonicsHistory24HrTHValue.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsHistory24HrTHValue.setStatus("current")
+_PmPhotonicsHistory24HrTcaActive_Type = PmTcaActiveFlag
+_PmPhotonicsHistory24HrTcaActive_Object = MibTableColumn
+pmPhotonicsHistory24HrTcaActive = _PmPhotonicsHistory24HrTcaActive_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 3, 5, 22, 38, 1, 10),
+    _PmPhotonicsHistory24HrTcaActive_Type()
+)
+pmPhotonicsHistory24HrTcaActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pmPhotonicsHistory24HrTcaActive.setStatus("current")
 
 # Managed Objects groups
 
@@ -3886,6 +5390,8 @@ pmGroup = ObjectGroup(
 )
 pmGroup.setObjects(
       *(("CIENA-WS-PLATFORM-PM-MIB", "pmAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmTcaNotificationType"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minMonValue"),
@@ -3893,6 +5399,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrMonValue"),
@@ -3900,6 +5410,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernet24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedMonValue"),
@@ -3907,6 +5421,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetUntimedTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minMonValue"),
@@ -3914,6 +5432,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrMonValue"),
@@ -3921,6 +5441,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmEthernetHistory24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minMonValue"),
@@ -3928,6 +5450,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrMonValue"),
@@ -3935,6 +5461,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModem24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedMonValue"),
@@ -3942,6 +5472,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemUntimedTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minMonValue"),
@@ -3949,6 +5483,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrMonValue"),
@@ -3956,6 +5492,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmModemHistory24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minMonValue"),
@@ -3963,6 +5501,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrMonValue"),
@@ -3970,6 +5512,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtu24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedMonValue"),
@@ -3977,6 +5523,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuUntimedTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minMonValue"),
@@ -3984,6 +5534,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrMonValue"),
@@ -3991,6 +5543,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOtuHistory24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minMonValue"),
@@ -3998,6 +5552,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrMonValue"),
@@ -4005,6 +5563,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOdu24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedMonValue"),
@@ -4012,6 +5574,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduUntimedTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minMonValue"),
@@ -4019,6 +5585,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrMonValue"),
@@ -4026,6 +5594,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOduHistory24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minMonValue"),
@@ -4033,6 +5603,11 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minTcaActive"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower15minBaseLineValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrMonValue"),
@@ -4040,6 +5615,11 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrTcaActive"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPower24HrBaseLineValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedMonValue"),
@@ -4047,6 +5627,11 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedTcaActive"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerUntimedBaseLineValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minMonValue"),
@@ -4054,12 +5639,17 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrMonValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrMonIDF"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmOpticalPowerHistory24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minMonValue"),
@@ -4067,6 +5657,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrMonValue"),
@@ -4074,6 +5668,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcm24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedMonValue"),
@@ -4081,6 +5679,10 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmUntimedTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minMonValue"),
@@ -4088,6 +5690,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrMonValue"),
@@ -4095,6 +5699,8 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmGcmHistory24HrTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minMonValue"),
@@ -4102,6 +5708,11 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minTcaActive"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics15minBaseLineValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrMonValue"),
@@ -4109,6 +5720,11 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrTcaActive"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonics24HrBaseLineValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedIfIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedMonValue"),
@@ -4116,6 +5732,11 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedTcaAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedTcaProfileId"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedTcaActive"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsUntimedBaseLineValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minMonValue"),
@@ -4123,12 +5744,17 @@ pmGroup.setObjects(
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minMonSupported"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minAdminState"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory15minTcaActive"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrMonTypeDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrIndexDescr"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrMonValue"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrMonIDF"),
         ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrMonSupported"),
-        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrMonStartDateTime"))
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrMonStartDateTime"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrAdminState"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrTHValue"),
+        ("CIENA-WS-PLATFORM-PM-MIB", "pmPhotonicsHistory24HrTcaActive"))
 )
 if mibBuilder.loadTexts:
     pmGroup.setStatus("current")
@@ -4162,6 +5788,8 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "CIENA-WS-PLATFORM-PM-MIB",
     **{"PmConfigurationMode": PmConfigurationMode,
+       "PmTcaNotificationType": PmTcaNotificationType,
+       "PmTcaActiveFlag": PmTcaActiveFlag,
        "PmEthernetMonType": PmEthernetMonType,
        "PmOtuMonType": PmOtuMonType,
        "PmOpticalPowerMonType": PmOpticalPowerMonType,
@@ -4180,6 +5808,8 @@ mibBuilder.exportSymbols(
        "pmGlobalConfigEntry": pmGlobalConfigEntry,
        "pmGlobalConfigTableSnmpKey": pmGlobalConfigTableSnmpKey,
        "pmAdminState": pmAdminState,
+       "pmTcaAdminState": pmTcaAdminState,
+       "pmTcaNotificationType": pmTcaNotificationType,
        "pmEthernetCurrent15minStatsTable": pmEthernetCurrent15minStatsTable,
        "pmEthernetCurrent15minStatsEntry": pmEthernetCurrent15minStatsEntry,
        "pmEthernet15minMonType": pmEthernet15minMonType,
@@ -4190,6 +5820,10 @@ mibBuilder.exportSymbols(
        "pmEthernet15minMonSupported": pmEthernet15minMonSupported,
        "pmEthernet15minAdminState": pmEthernet15minAdminState,
        "pmEthernet15minMonStartDateTime": pmEthernet15minMonStartDateTime,
+       "pmEthernet15minTHValue": pmEthernet15minTHValue,
+       "pmEthernet15minTcaActive": pmEthernet15minTcaActive,
+       "pmEthernet15minTcaAdminState": pmEthernet15minTcaAdminState,
+       "pmEthernet15minTcaProfileId": pmEthernet15minTcaProfileId,
        "pmEthernetCurrent24HrStatsTable": pmEthernetCurrent24HrStatsTable,
        "pmEthernetCurrent24HrStatsEntry": pmEthernetCurrent24HrStatsEntry,
        "pmEthernet24HrMonType": pmEthernet24HrMonType,
@@ -4200,6 +5834,10 @@ mibBuilder.exportSymbols(
        "pmEthernet24HrMonSupported": pmEthernet24HrMonSupported,
        "pmEthernet24HrAdminState": pmEthernet24HrAdminState,
        "pmEthernet24HrMonStartDateTime": pmEthernet24HrMonStartDateTime,
+       "pmEthernet24HrTHValue": pmEthernet24HrTHValue,
+       "pmEthernet24HrTcaActive": pmEthernet24HrTcaActive,
+       "pmEthernet24HrTcaAdminState": pmEthernet24HrTcaAdminState,
+       "pmEthernet24HrTcaProfileId": pmEthernet24HrTcaProfileId,
        "pmEthernetUntimedStatsTable": pmEthernetUntimedStatsTable,
        "pmEthernetUntimedStatsEntry": pmEthernetUntimedStatsEntry,
        "pmEthernetUntimedMonType": pmEthernetUntimedMonType,
@@ -4210,6 +5848,10 @@ mibBuilder.exportSymbols(
        "pmEthernetUntimedMonSupported": pmEthernetUntimedMonSupported,
        "pmEthernetUntimedAdminState": pmEthernetUntimedAdminState,
        "pmEthernetUntimedMonStartDateTime": pmEthernetUntimedMonStartDateTime,
+       "pmEthernetUntimedTHValue": pmEthernetUntimedTHValue,
+       "pmEthernetUntimedTcaActive": pmEthernetUntimedTcaActive,
+       "pmEthernetUntimedTcaAdminState": pmEthernetUntimedTcaAdminState,
+       "pmEthernetUntimedTcaProfileId": pmEthernetUntimedTcaProfileId,
        "pmEthernetHistory15minStatsTable": pmEthernetHistory15minStatsTable,
        "pmEthernetHistory15minStatsEntry": pmEthernetHistory15minStatsEntry,
        "pmEthernetHistory15minBinIndex": pmEthernetHistory15minBinIndex,
@@ -4221,6 +5863,8 @@ mibBuilder.exportSymbols(
        "pmEthernetHistory15minMonSupported": pmEthernetHistory15minMonSupported,
        "pmEthernetHistory15minAdminState": pmEthernetHistory15minAdminState,
        "pmEthernetHistory15minMonStartDateTime": pmEthernetHistory15minMonStartDateTime,
+       "pmEthernetHistory15minTHValue": pmEthernetHistory15minTHValue,
+       "pmEthernetHistory15minTcaActive": pmEthernetHistory15minTcaActive,
        "pmEthernetHistory24HrStatsTable": pmEthernetHistory24HrStatsTable,
        "pmEthernetHistory24HrStatsEntry": pmEthernetHistory24HrStatsEntry,
        "pmEthernetHistory24HrMonType": pmEthernetHistory24HrMonType,
@@ -4231,6 +5875,8 @@ mibBuilder.exportSymbols(
        "pmEthernetHistory24HrMonSupported": pmEthernetHistory24HrMonSupported,
        "pmEthernetHistory24HrAdminState": pmEthernetHistory24HrAdminState,
        "pmEthernetHistory24HrMonStartDateTime": pmEthernetHistory24HrMonStartDateTime,
+       "pmEthernetHistory24HrTHValue": pmEthernetHistory24HrTHValue,
+       "pmEthernetHistory24HrTcaActive": pmEthernetHistory24HrTcaActive,
        "pmModemCurrent15minStatsTable": pmModemCurrent15minStatsTable,
        "pmModemCurrent15minStatsEntry": pmModemCurrent15minStatsEntry,
        "pmModem15minMonType": pmModem15minMonType,
@@ -4241,6 +5887,10 @@ mibBuilder.exportSymbols(
        "pmModem15minMonSupported": pmModem15minMonSupported,
        "pmModem15minAdminState": pmModem15minAdminState,
        "pmModem15minMonStartDateTime": pmModem15minMonStartDateTime,
+       "pmModem15minTHValue": pmModem15minTHValue,
+       "pmModem15minTcaActive": pmModem15minTcaActive,
+       "pmModem15minTcaAdminState": pmModem15minTcaAdminState,
+       "pmModem15minTcaProfileId": pmModem15minTcaProfileId,
        "pmModemCurrent24HrStatsTable": pmModemCurrent24HrStatsTable,
        "pmModemCurrent24HrStatsEntry": pmModemCurrent24HrStatsEntry,
        "pmModem24HrMonType": pmModem24HrMonType,
@@ -4251,6 +5901,10 @@ mibBuilder.exportSymbols(
        "pmModem24HrMonSupported": pmModem24HrMonSupported,
        "pmModem24HrAdminState": pmModem24HrAdminState,
        "pmModem24HrMonStartDateTime": pmModem24HrMonStartDateTime,
+       "pmModem24HrTHValue": pmModem24HrTHValue,
+       "pmModem24HrTcaActive": pmModem24HrTcaActive,
+       "pmModem24HrTcaAdminState": pmModem24HrTcaAdminState,
+       "pmModem24HrTcaProfileId": pmModem24HrTcaProfileId,
        "pmModemUntimedStatsTable": pmModemUntimedStatsTable,
        "pmModemUntimedStatsEntry": pmModemUntimedStatsEntry,
        "pmModemUntimedMonType": pmModemUntimedMonType,
@@ -4261,6 +5915,10 @@ mibBuilder.exportSymbols(
        "pmModemUntimedMonSupported": pmModemUntimedMonSupported,
        "pmModemUntimedAdminState": pmModemUntimedAdminState,
        "pmModemUntimedMonStartDateTime": pmModemUntimedMonStartDateTime,
+       "pmModemUntimedTHValue": pmModemUntimedTHValue,
+       "pmModemUntimedTcaActive": pmModemUntimedTcaActive,
+       "pmModemUntimedTcaAdminState": pmModemUntimedTcaAdminState,
+       "pmModemUntimedTcaProfileId": pmModemUntimedTcaProfileId,
        "pmModemHistory15minStatsTable": pmModemHistory15minStatsTable,
        "pmModemHistory15minStatsEntry": pmModemHistory15minStatsEntry,
        "pmModemHistory15minBinIndex": pmModemHistory15minBinIndex,
@@ -4272,6 +5930,8 @@ mibBuilder.exportSymbols(
        "pmModemHistory15minMonSupported": pmModemHistory15minMonSupported,
        "pmModemHistory15minAdminState": pmModemHistory15minAdminState,
        "pmModemHistory15minMonStartDateTime": pmModemHistory15minMonStartDateTime,
+       "pmModemHistory15minTHValue": pmModemHistory15minTHValue,
+       "pmModemHistory15minTcaActive": pmModemHistory15minTcaActive,
        "pmModemHistory24HrStatsTable": pmModemHistory24HrStatsTable,
        "pmModemHistory24HrStatsEntry": pmModemHistory24HrStatsEntry,
        "pmModemHistory24HrMonType": pmModemHistory24HrMonType,
@@ -4282,6 +5942,8 @@ mibBuilder.exportSymbols(
        "pmModemHistory24HrMonSupported": pmModemHistory24HrMonSupported,
        "pmModemHistory24HrAdminState": pmModemHistory24HrAdminState,
        "pmModemHistory24HrMonStartDateTime": pmModemHistory24HrMonStartDateTime,
+       "pmModemHistory24HrTHValue": pmModemHistory24HrTHValue,
+       "pmModemHistory24HrTcaActive": pmModemHistory24HrTcaActive,
        "pmOtuCurrent15minStatsTable": pmOtuCurrent15minStatsTable,
        "pmOtuCurrent15minStatsEntry": pmOtuCurrent15minStatsEntry,
        "pmOtu15minMonType": pmOtu15minMonType,
@@ -4292,6 +5954,10 @@ mibBuilder.exportSymbols(
        "pmOtu15minMonSupported": pmOtu15minMonSupported,
        "pmOtu15minAdminState": pmOtu15minAdminState,
        "pmOtu15minMonStartDateTime": pmOtu15minMonStartDateTime,
+       "pmOtu15minTHValue": pmOtu15minTHValue,
+       "pmOtu15minTcaActive": pmOtu15minTcaActive,
+       "pmOtu15minTcaAdminState": pmOtu15minTcaAdminState,
+       "pmOtu15minTcaProfileId": pmOtu15minTcaProfileId,
        "pmOtuCurrent24HrStatsTable": pmOtuCurrent24HrStatsTable,
        "pmOtuCurrent24HrStatsEntry": pmOtuCurrent24HrStatsEntry,
        "pmOtu24HrMonType": pmOtu24HrMonType,
@@ -4302,6 +5968,10 @@ mibBuilder.exportSymbols(
        "pmOtu24HrMonSupported": pmOtu24HrMonSupported,
        "pmOtu24HrAdminState": pmOtu24HrAdminState,
        "pmOtu24HrMonStartDateTime": pmOtu24HrMonStartDateTime,
+       "pmOtu24HrTHValue": pmOtu24HrTHValue,
+       "pmOtu24HrTcaActive": pmOtu24HrTcaActive,
+       "pmOtu24HrTcaAdminState": pmOtu24HrTcaAdminState,
+       "pmOtu24HrTcaProfileId": pmOtu24HrTcaProfileId,
        "pmOtuUntimedStatsTable": pmOtuUntimedStatsTable,
        "pmOtuUntimedStatsEntry": pmOtuUntimedStatsEntry,
        "pmOtuUntimedMonType": pmOtuUntimedMonType,
@@ -4312,6 +5982,10 @@ mibBuilder.exportSymbols(
        "pmOtuUntimedMonSupported": pmOtuUntimedMonSupported,
        "pmOtuUntimedAdminState": pmOtuUntimedAdminState,
        "pmOtuUntimedMonStartDateTime": pmOtuUntimedMonStartDateTime,
+       "pmOtuUntimedTHValue": pmOtuUntimedTHValue,
+       "pmOtuUntimedTcaActive": pmOtuUntimedTcaActive,
+       "pmOtuUntimedTcaAdminState": pmOtuUntimedTcaAdminState,
+       "pmOtuUntimedTcaProfileId": pmOtuUntimedTcaProfileId,
        "pmOtuHistory15minStatsTable": pmOtuHistory15minStatsTable,
        "pmOtuHistory15minStatsEntry": pmOtuHistory15minStatsEntry,
        "pmOtuHistory15minBinIndex": pmOtuHistory15minBinIndex,
@@ -4323,6 +5997,8 @@ mibBuilder.exportSymbols(
        "pmOtuHistory15minMonSupported": pmOtuHistory15minMonSupported,
        "pmOtuHistory15minAdminState": pmOtuHistory15minAdminState,
        "pmOtuHistory15minMonStartDateTime": pmOtuHistory15minMonStartDateTime,
+       "pmOtuHistory15minTHValue": pmOtuHistory15minTHValue,
+       "pmOtuHistory15minTcaActive": pmOtuHistory15minTcaActive,
        "pmOtuHistory24HrStatsTable": pmOtuHistory24HrStatsTable,
        "pmOtuHistory24HrStatsEntry": pmOtuHistory24HrStatsEntry,
        "pmOtuHistory24HrMonType": pmOtuHistory24HrMonType,
@@ -4333,6 +6009,8 @@ mibBuilder.exportSymbols(
        "pmOtuHistory24HrMonSupported": pmOtuHistory24HrMonSupported,
        "pmOtuHistory24HrAdminState": pmOtuHistory24HrAdminState,
        "pmOtuHistory24HrMonStartDateTime": pmOtuHistory24HrMonStartDateTime,
+       "pmOtuHistory24HrTHValue": pmOtuHistory24HrTHValue,
+       "pmOtuHistory24HrTcaActive": pmOtuHistory24HrTcaActive,
        "pmOduCurrent15minStatsTable": pmOduCurrent15minStatsTable,
        "pmOduCurrent15minStatsEntry": pmOduCurrent15minStatsEntry,
        "pmOdu15minMonType": pmOdu15minMonType,
@@ -4343,6 +6021,10 @@ mibBuilder.exportSymbols(
        "pmOdu15minMonSupported": pmOdu15minMonSupported,
        "pmOdu15minAdminState": pmOdu15minAdminState,
        "pmOdu15minMonStartDateTime": pmOdu15minMonStartDateTime,
+       "pmOdu15minTHValue": pmOdu15minTHValue,
+       "pmOdu15minTcaActive": pmOdu15minTcaActive,
+       "pmOdu15minTcaAdminState": pmOdu15minTcaAdminState,
+       "pmOdu15minTcaProfileId": pmOdu15minTcaProfileId,
        "pmOduCurrent24HrStatsTable": pmOduCurrent24HrStatsTable,
        "pmOduCurrent24HrStatsEntry": pmOduCurrent24HrStatsEntry,
        "pmOdu24HrMonType": pmOdu24HrMonType,
@@ -4353,6 +6035,10 @@ mibBuilder.exportSymbols(
        "pmOdu24HrMonSupported": pmOdu24HrMonSupported,
        "pmOdu24HrAdminState": pmOdu24HrAdminState,
        "pmOdu24HrMonStartDateTime": pmOdu24HrMonStartDateTime,
+       "pmOdu24HrTHValue": pmOdu24HrTHValue,
+       "pmOdu24HrTcaActive": pmOdu24HrTcaActive,
+       "pmOdu24HrTcaAdminState": pmOdu24HrTcaAdminState,
+       "pmOdu24HrTcaProfileId": pmOdu24HrTcaProfileId,
        "pmOduUntimedStatsTable": pmOduUntimedStatsTable,
        "pmOduUntimedStatsEntry": pmOduUntimedStatsEntry,
        "pmOduUntimedMonType": pmOduUntimedMonType,
@@ -4363,6 +6049,10 @@ mibBuilder.exportSymbols(
        "pmOduUntimedMonSupported": pmOduUntimedMonSupported,
        "pmOduUntimedAdminState": pmOduUntimedAdminState,
        "pmOduUntimedMonStartDateTime": pmOduUntimedMonStartDateTime,
+       "pmOduUntimedTHValue": pmOduUntimedTHValue,
+       "pmOduUntimedTcaActive": pmOduUntimedTcaActive,
+       "pmOduUntimedTcaAdminState": pmOduUntimedTcaAdminState,
+       "pmOduUntimedTcaProfileId": pmOduUntimedTcaProfileId,
        "pmOduHistory15minStatsTable": pmOduHistory15minStatsTable,
        "pmOduHistory15minStatsEntry": pmOduHistory15minStatsEntry,
        "pmOduHistory15minBinIndex": pmOduHistory15minBinIndex,
@@ -4374,6 +6064,8 @@ mibBuilder.exportSymbols(
        "pmOduHistory15minMonSupported": pmOduHistory15minMonSupported,
        "pmOduHistory15minAdminState": pmOduHistory15minAdminState,
        "pmOduHistory15minMonStartDateTime": pmOduHistory15minMonStartDateTime,
+       "pmOduHistory15minTHValue": pmOduHistory15minTHValue,
+       "pmOduHistory15minTcaActive": pmOduHistory15minTcaActive,
        "pmOduHistory24HrStatsTable": pmOduHistory24HrStatsTable,
        "pmOduHistory24HrStatsEntry": pmOduHistory24HrStatsEntry,
        "pmOduHistory24HrMonType": pmOduHistory24HrMonType,
@@ -4384,6 +6076,8 @@ mibBuilder.exportSymbols(
        "pmOduHistory24HrMonSupported": pmOduHistory24HrMonSupported,
        "pmOduHistory24HrAdminState": pmOduHistory24HrAdminState,
        "pmOduHistory24HrMonStartDateTime": pmOduHistory24HrMonStartDateTime,
+       "pmOduHistory24HrTHValue": pmOduHistory24HrTHValue,
+       "pmOduHistory24HrTcaActive": pmOduHistory24HrTcaActive,
        "pmOpticalPowerCurrent15minStatsTable": pmOpticalPowerCurrent15minStatsTable,
        "pmOpticalPowerCurrent15minStatsEntry": pmOpticalPowerCurrent15minStatsEntry,
        "pmOpticalPower15minLaneIndex": pmOpticalPower15minLaneIndex,
@@ -4395,6 +6089,11 @@ mibBuilder.exportSymbols(
        "pmOpticalPower15minMonSupported": pmOpticalPower15minMonSupported,
        "pmOpticalPower15minAdminState": pmOpticalPower15minAdminState,
        "pmOpticalPower15minMonStartDateTime": pmOpticalPower15minMonStartDateTime,
+       "pmOpticalPower15minTHValue": pmOpticalPower15minTHValue,
+       "pmOpticalPower15minTcaActive": pmOpticalPower15minTcaActive,
+       "pmOpticalPower15minTcaAdminState": pmOpticalPower15minTcaAdminState,
+       "pmOpticalPower15minTcaProfileId": pmOpticalPower15minTcaProfileId,
+       "pmOpticalPower15minBaseLineValue": pmOpticalPower15minBaseLineValue,
        "pmOpticalPowerCurrent24HrStatsTable": pmOpticalPowerCurrent24HrStatsTable,
        "pmOpticalPowerCurrent24HrStatsEntry": pmOpticalPowerCurrent24HrStatsEntry,
        "pmOpticalPower24HrLaneIndex": pmOpticalPower24HrLaneIndex,
@@ -4406,6 +6105,11 @@ mibBuilder.exportSymbols(
        "pmOpticalPower24HrMonSupported": pmOpticalPower24HrMonSupported,
        "pmOpticalPower24HrAdminState": pmOpticalPower24HrAdminState,
        "pmOpticalPower24HrMonStartDateTime": pmOpticalPower24HrMonStartDateTime,
+       "pmOpticalPower24HrTHValue": pmOpticalPower24HrTHValue,
+       "pmOpticalPower24HrTcaActive": pmOpticalPower24HrTcaActive,
+       "pmOpticalPower24HrTcaAdminState": pmOpticalPower24HrTcaAdminState,
+       "pmOpticalPower24HrTcaProfileId": pmOpticalPower24HrTcaProfileId,
+       "pmOpticalPower24HrBaseLineValue": pmOpticalPower24HrBaseLineValue,
        "pmOpticalPowerUntimedStatsTable": pmOpticalPowerUntimedStatsTable,
        "pmOpticalPowerUntimedStatsEntry": pmOpticalPowerUntimedStatsEntry,
        "pmOpticalPowerUntimedLaneIndex": pmOpticalPowerUntimedLaneIndex,
@@ -4417,6 +6121,11 @@ mibBuilder.exportSymbols(
        "pmOpticalPowerUntimedMonSupported": pmOpticalPowerUntimedMonSupported,
        "pmOpticalPowerUntimedAdminState": pmOpticalPowerUntimedAdminState,
        "pmOpticalPowerUntimedMonStartDateTime": pmOpticalPowerUntimedMonStartDateTime,
+       "pmOpticalPowerUntimedTHValue": pmOpticalPowerUntimedTHValue,
+       "pmOpticalPowerUntimedTcaActive": pmOpticalPowerUntimedTcaActive,
+       "pmOpticalPowerUntimedTcaAdminState": pmOpticalPowerUntimedTcaAdminState,
+       "pmOpticalPowerUntimedTcaProfileId": pmOpticalPowerUntimedTcaProfileId,
+       "pmOpticalPowerUntimedBaseLineValue": pmOpticalPowerUntimedBaseLineValue,
        "pmOpticalPowerHistory15minStatsTable": pmOpticalPowerHistory15minStatsTable,
        "pmOpticalPowerHistory15minStatsEntry": pmOpticalPowerHistory15minStatsEntry,
        "pmOpticalPowerHistory15minBinIndex": pmOpticalPowerHistory15minBinIndex,
@@ -4429,6 +6138,8 @@ mibBuilder.exportSymbols(
        "pmOpticalPowerHistory15minMonSupported": pmOpticalPowerHistory15minMonSupported,
        "pmOpticalPowerHistory15minAdminState": pmOpticalPowerHistory15minAdminState,
        "pmOpticalPowerHistory15minMonStartDateTime": pmOpticalPowerHistory15minMonStartDateTime,
+       "pmOpticalPowerHistory15minTHValue": pmOpticalPowerHistory15minTHValue,
+       "pmOpticalPowerHistory15minTcaActive": pmOpticalPowerHistory15minTcaActive,
        "pmOpticalPowerHistory24HrStatsTable": pmOpticalPowerHistory24HrStatsTable,
        "pmOpticalPowerHistory24HrStatsEntry": pmOpticalPowerHistory24HrStatsEntry,
        "pmOpticalPowerHistory24HrLaneIndex": pmOpticalPowerHistory24HrLaneIndex,
@@ -4440,6 +6151,8 @@ mibBuilder.exportSymbols(
        "pmOpticalPowerHistory24HrMonSupported": pmOpticalPowerHistory24HrMonSupported,
        "pmOpticalPowerHistory24HrAdminState": pmOpticalPowerHistory24HrAdminState,
        "pmOpticalPowerHistory24HrMonStartDateTime": pmOpticalPowerHistory24HrMonStartDateTime,
+       "pmOpticalPowerHistory24HrTHValue": pmOpticalPowerHistory24HrTHValue,
+       "pmOpticalPowerHistory24HrTcaActive": pmOpticalPowerHistory24HrTcaActive,
        "pmGcmCurrent15minStatsTable": pmGcmCurrent15minStatsTable,
        "pmGcmCurrent15minStatsEntry": pmGcmCurrent15minStatsEntry,
        "pmGcm15minMonType": pmGcm15minMonType,
@@ -4450,6 +6163,10 @@ mibBuilder.exportSymbols(
        "pmGcm15minMonSupported": pmGcm15minMonSupported,
        "pmGcm15minAdminState": pmGcm15minAdminState,
        "pmGcm15minMonStartDateTime": pmGcm15minMonStartDateTime,
+       "pmGcm15minTHValue": pmGcm15minTHValue,
+       "pmGcm15minTcaActive": pmGcm15minTcaActive,
+       "pmGcm15minTcaAdminState": pmGcm15minTcaAdminState,
+       "pmGcm15minTcaProfileId": pmGcm15minTcaProfileId,
        "pmGcmCurrent24HrStatsTable": pmGcmCurrent24HrStatsTable,
        "pmGcmCurrent24HrStatsEntry": pmGcmCurrent24HrStatsEntry,
        "pmGcm24HrMonType": pmGcm24HrMonType,
@@ -4460,6 +6177,10 @@ mibBuilder.exportSymbols(
        "pmGcm24HrMonSupported": pmGcm24HrMonSupported,
        "pmGcm24HrAdminState": pmGcm24HrAdminState,
        "pmGcm24HrMonStartDateTime": pmGcm24HrMonStartDateTime,
+       "pmGcm24HrTHValue": pmGcm24HrTHValue,
+       "pmGcm24HrTcaActive": pmGcm24HrTcaActive,
+       "pmGcm24HrTcaAdminState": pmGcm24HrTcaAdminState,
+       "pmGcm24HrTcaProfileId": pmGcm24HrTcaProfileId,
        "pmGcmUntimedStatsTable": pmGcmUntimedStatsTable,
        "pmGcmUntimedStatsEntry": pmGcmUntimedStatsEntry,
        "pmGcmUntimedMonType": pmGcmUntimedMonType,
@@ -4470,6 +6191,10 @@ mibBuilder.exportSymbols(
        "pmGcmUntimedMonSupported": pmGcmUntimedMonSupported,
        "pmGcmUntimedAdminState": pmGcmUntimedAdminState,
        "pmGcmUntimedMonStartDateTime": pmGcmUntimedMonStartDateTime,
+       "pmGcmUntimedTHValue": pmGcmUntimedTHValue,
+       "pmGcmUntimedTcaActive": pmGcmUntimedTcaActive,
+       "pmGcmUntimedTcaAdminState": pmGcmUntimedTcaAdminState,
+       "pmGcmUntimedTcaProfileId": pmGcmUntimedTcaProfileId,
        "pmGcmHistory15minStatsTable": pmGcmHistory15minStatsTable,
        "pmGcmHistory15minStatsEntry": pmGcmHistory15minStatsEntry,
        "pmGcmHistory15minBinIndex": pmGcmHistory15minBinIndex,
@@ -4481,6 +6206,8 @@ mibBuilder.exportSymbols(
        "pmGcmHistory15minMonSupported": pmGcmHistory15minMonSupported,
        "pmGcmHistory15minAdminState": pmGcmHistory15minAdminState,
        "pmGcmHistory15minMonStartDateTime": pmGcmHistory15minMonStartDateTime,
+       "pmGcmHistory15minTHValue": pmGcmHistory15minTHValue,
+       "pmGcmHistory15minTcaActive": pmGcmHistory15minTcaActive,
        "pmGcmHistory24HrStatsTable": pmGcmHistory24HrStatsTable,
        "pmGcmHistory24HrStatsEntry": pmGcmHistory24HrStatsEntry,
        "pmGcmHistory24HrMonType": pmGcmHistory24HrMonType,
@@ -4491,6 +6218,8 @@ mibBuilder.exportSymbols(
        "pmGcmHistory24HrMonSupported": pmGcmHistory24HrMonSupported,
        "pmGcmHistory24HrAdminState": pmGcmHistory24HrAdminState,
        "pmGcmHistory24HrMonStartDateTime": pmGcmHistory24HrMonStartDateTime,
+       "pmGcmHistory24HrTHValue": pmGcmHistory24HrTHValue,
+       "pmGcmHistory24HrTcaActive": pmGcmHistory24HrTcaActive,
        "pmPhotonicsCurrent15minStatsTable": pmPhotonicsCurrent15minStatsTable,
        "pmPhotonicsCurrent15minStatsEntry": pmPhotonicsCurrent15minStatsEntry,
        "pmPhotonics15minMonType": pmPhotonics15minMonType,
@@ -4501,6 +6230,11 @@ mibBuilder.exportSymbols(
        "pmPhotonics15minMonSupported": pmPhotonics15minMonSupported,
        "pmPhotonics15minAdminState": pmPhotonics15minAdminState,
        "pmPhotonics15minMonStartDateTime": pmPhotonics15minMonStartDateTime,
+       "pmPhotonics15minTHValue": pmPhotonics15minTHValue,
+       "pmPhotonics15minTcaActive": pmPhotonics15minTcaActive,
+       "pmPhotonics15minTcaAdminState": pmPhotonics15minTcaAdminState,
+       "pmPhotonics15minTcaProfileId": pmPhotonics15minTcaProfileId,
+       "pmPhotonics15minBaseLineValue": pmPhotonics15minBaseLineValue,
        "pmPhotonicsCurrent24HrStatsTable": pmPhotonicsCurrent24HrStatsTable,
        "pmPhotonicsCurrent24HrStatsEntry": pmPhotonicsCurrent24HrStatsEntry,
        "pmPhotonics24HrMonType": pmPhotonics24HrMonType,
@@ -4511,6 +6245,11 @@ mibBuilder.exportSymbols(
        "pmPhotonics24HrMonSupported": pmPhotonics24HrMonSupported,
        "pmPhotonics24HrAdminState": pmPhotonics24HrAdminState,
        "pmPhotonics24HrMonStartDateTime": pmPhotonics24HrMonStartDateTime,
+       "pmPhotonics24HrTHValue": pmPhotonics24HrTHValue,
+       "pmPhotonics24HrTcaActive": pmPhotonics24HrTcaActive,
+       "pmPhotonics24HrTcaAdminState": pmPhotonics24HrTcaAdminState,
+       "pmPhotonics24HrTcaProfileId": pmPhotonics24HrTcaProfileId,
+       "pmPhotonics24HrBaseLineValue": pmPhotonics24HrBaseLineValue,
        "pmPhotonicsUntimedStatsTable": pmPhotonicsUntimedStatsTable,
        "pmPhotonicsUntimedStatsEntry": pmPhotonicsUntimedStatsEntry,
        "pmPhotonicsUntimedMonType": pmPhotonicsUntimedMonType,
@@ -4521,6 +6260,11 @@ mibBuilder.exportSymbols(
        "pmPhotonicsUntimedMonSupported": pmPhotonicsUntimedMonSupported,
        "pmPhotonicsUntimedAdminState": pmPhotonicsUntimedAdminState,
        "pmPhotonicsUntimedMonStartDateTime": pmPhotonicsUntimedMonStartDateTime,
+       "pmPhotonicsUntimedTHValue": pmPhotonicsUntimedTHValue,
+       "pmPhotonicsUntimedTcaActive": pmPhotonicsUntimedTcaActive,
+       "pmPhotonicsUntimedTcaAdminState": pmPhotonicsUntimedTcaAdminState,
+       "pmPhotonicsUntimedTcaProfileId": pmPhotonicsUntimedTcaProfileId,
+       "pmPhotonicsUntimedBaseLineValue": pmPhotonicsUntimedBaseLineValue,
        "pmPhotonicsHistory15minStatsTable": pmPhotonicsHistory15minStatsTable,
        "pmPhotonicsHistory15minStatsEntry": pmPhotonicsHistory15minStatsEntry,
        "pmPhotonicsHistory15minBinIndex": pmPhotonicsHistory15minBinIndex,
@@ -4532,6 +6276,8 @@ mibBuilder.exportSymbols(
        "pmPhotonicsHistory15minMonSupported": pmPhotonicsHistory15minMonSupported,
        "pmPhotonicsHistory15minAdminState": pmPhotonicsHistory15minAdminState,
        "pmPhotonicsHistory15minMonStartDateTime": pmPhotonicsHistory15minMonStartDateTime,
+       "pmPhotonicsHistory15minTHValue": pmPhotonicsHistory15minTHValue,
+       "pmPhotonicsHistory15minTcaActive": pmPhotonicsHistory15minTcaActive,
        "pmPhotonicsHistory24HrStatsTable": pmPhotonicsHistory24HrStatsTable,
        "pmPhotonicsHistory24HrStatsEntry": pmPhotonicsHistory24HrStatsEntry,
        "pmPhotonicsHistory24HrMonType": pmPhotonicsHistory24HrMonType,
@@ -4541,5 +6287,7 @@ mibBuilder.exportSymbols(
        "pmPhotonicsHistory24HrMonIDF": pmPhotonicsHistory24HrMonIDF,
        "pmPhotonicsHistory24HrMonSupported": pmPhotonicsHistory24HrMonSupported,
        "pmPhotonicsHistory24HrAdminState": pmPhotonicsHistory24HrAdminState,
-       "pmPhotonicsHistory24HrMonStartDateTime": pmPhotonicsHistory24HrMonStartDateTime}
+       "pmPhotonicsHistory24HrMonStartDateTime": pmPhotonicsHistory24HrMonStartDateTime,
+       "pmPhotonicsHistory24HrTHValue": pmPhotonicsHistory24HrTHValue,
+       "pmPhotonicsHistory24HrTcaActive": pmPhotonicsHistory24HrTcaActive}
 )

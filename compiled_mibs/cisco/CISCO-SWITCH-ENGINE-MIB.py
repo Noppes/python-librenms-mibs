@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-SWITCH-ENGINE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:27:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -155,7 +152,9 @@ ciscoSwitchEngineMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoSwitchEngineMIB.setRevisions(
-        ("2020-05-26 00:00",
+        ("2024-01-09 00:00",
+         "2021-08-01 00:00",
+         "2020-05-26 00:00",
          "2020-03-06 00:00",
          "2019-07-11 00:00",
          "2018-06-20 00:00",
@@ -3943,7 +3942,17 @@ class _CseTcamResourceType_Type(Integer32):
               305,
               306,
               307,
-              308)
+              308,
+              309,
+              310,
+              311,
+              312,
+              313,
+              314,
+              315,
+              316,
+              317,
+              318)
         )
     )
     namedValues = NamedValues(
@@ -4254,7 +4263,17 @@ class _CseTcamResourceType_Type(Integer32):
           ("ingressNatInside", 305),
           ("ingressL2L3QosAll", 306),
           ("natRewriteTable", 307),
-          ("tcpAwareNat", 308))
+          ("tcpAwareNat", 308),
+          ("ingressNetflowSvi", 309),
+          ("ingressIpv6Span", 310),
+          ("ingressFlowPathTracerIpv4", 311),
+          ("ingressFlowPathTracerIpv6", 312),
+          ("analyticsFilterTcam", 313),
+          ("egressNetflow", 314),
+          ("egressNetflowL2", 315),
+          ("egressNetflowSvi", 316),
+          ("labelLblAHv1", 317),
+          ("labelLblAIv1", 318))
     )
 
 

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FA-EXT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:21:57 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,10 @@ faExt = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     faExt.setRevisions(
-        ("2010-11-22 10:30",)
+        ("2010-11-22 10:30",
+         "2013-09-12 10:30",
+         "2013-09-24 13:55",
+         "2013-10-29 13:54")
     )
 
 
@@ -487,6 +487,66 @@ swConnUnitPortSpeedMode = _SwConnUnitPortSpeedMode_Object(
 swConnUnitPortSpeedMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     swConnUnitPortSpeedMode.setStatus("current")
+
+
+class _SwConnUnitPortFECMode_Type(Integer32):
+    """Custom type swConnUnitPortFECMode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("disabled", 2),
+          ("enabled", 3),
+          ("notsupported", 4))
+    )
+
+
+_SwConnUnitPortFECMode_Type.__name__ = "Integer32"
+_SwConnUnitPortFECMode_Object = MibTableColumn
+swConnUnitPortFECMode = _SwConnUnitPortFECMode_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 28, 4, 1, 3),
+    _SwConnUnitPortFECMode_Type()
+)
+swConnUnitPortFECMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitPortFECMode.setStatus("current")
+
+
+class _SwConnUnitPortFECState_Type(Integer32):
+    """Custom type swConnUnitPortFECState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 0),
+          ("active", 1),
+          ("inactive", 2),
+          ("notsupported", 3))
+    )
+
+
+_SwConnUnitPortFECState_Type.__name__ = "Integer32"
+_SwConnUnitPortFECState_Object = MibTableColumn
+swConnUnitPortFECState = _SwConnUnitPortFECState_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 28, 4, 1, 4),
+    _SwConnUnitPortFECState_Type()
+)
+swConnUnitPortFECState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitPortFECState.setStatus("current")
 connUnitPortEntry.registerAugmentions(
     ("FA-EXT-MIB",
      "swSfpStatEntry")
@@ -555,5 +615,7 @@ mibBuilder.exportSymbols(
        "swConnUnitPortTable": swConnUnitPortTable,
        "swConnUnitPortEntry": swConnUnitPortEntry,
        "swConnUnitPortCapableSpeeds": swConnUnitPortCapableSpeeds,
-       "swConnUnitPortSpeedMode": swConnUnitPortSpeedMode}
+       "swConnUnitPortSpeedMode": swConnUnitPortSpeedMode,
+       "swConnUnitPortFECMode": swConnUnitPortFECMode,
+       "swConnUnitPortFECState": swConnUnitPortFECState}
 )

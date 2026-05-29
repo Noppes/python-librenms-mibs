@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-POLICY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:07 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,10 @@ acdPolicy = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdPolicy.setRevisions(
-        ("2011-10-10 01:00",
+        ("2016-09-23 01:00",
+         "2016-05-26 01:00",
+         "2013-04-24 01:00",
+         "2011-10-10 01:00",
          "2011-02-28 01:00",
          "2010-11-10 01:00",
          "2008-06-15 01:00",
@@ -358,7 +358,11 @@ class _AcdPolicyEvcMappingEncaps_Type(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7,
+              8,
+              9,
+              10)
         )
     )
     namedValues = NamedValues(
@@ -367,7 +371,11 @@ class _AcdPolicyEvcMappingEncaps_Type(Integer32):
           ("pop", 3),
           ("replace", 4),
           ("popAndReplace", 5),
-          ("pushAndPreserve", 6))
+          ("pushAndPreserve", 6),
+          ("preserveVlanNewCfiPcp", 7),
+          ("pushAndPush", 8),
+          ("popAndPop", 9),
+          ("pushAndReplace", 10))
     )
 
 
@@ -388,12 +396,14 @@ class _AcdPolicyEvcMappingEtype_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("cvlan", 1),
-          ("svlan", 2))
+          ("svlan", 2),
+          ("tvlan", 3))
     )
 
 
@@ -652,6 +662,53 @@ acdPolicyOutgoingPort = _AcdPolicyOutgoingPort_Object(
 acdPolicyOutgoingPort.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdPolicyOutgoingPort.setStatus("current")
+
+
+class _AcdPolicyEvcMappingVlan2Etype_Type(Integer32):
+    """Custom type acdPolicyEvcMappingVlan2Etype based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("cvlan", 1),
+          ("svlan", 2),
+          ("tvlan", 3))
+    )
+
+
+_AcdPolicyEvcMappingVlan2Etype_Type.__name__ = "Integer32"
+_AcdPolicyEvcMappingVlan2Etype_Object = MibTableColumn
+acdPolicyEvcMappingVlan2Etype = _AcdPolicyEvcMappingVlan2Etype_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 3, 1, 1, 31),
+    _AcdPolicyEvcMappingVlan2Etype_Type()
+)
+acdPolicyEvcMappingVlan2Etype.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPolicyEvcMappingVlan2Etype.setStatus("current")
+
+
+class _AcdPolicyEvcMappingVlan2Id_Type(Unsigned32):
+    """Custom type acdPolicyEvcMappingVlan2Id based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4095),
+    )
+
+
+_AcdPolicyEvcMappingVlan2Id_Type.__name__ = "Unsigned32"
+_AcdPolicyEvcMappingVlan2Id_Object = MibTableColumn
+acdPolicyEvcMappingVlan2Id = _AcdPolicyEvcMappingVlan2Id_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 3, 1, 1, 32),
+    _AcdPolicyEvcMappingVlan2Id_Type()
+)
+acdPolicyEvcMappingVlan2Id.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPolicyEvcMappingVlan2Id.setStatus("current")
 _AcdPolicyStatsTable_Object = MibTable
 acdPolicyStatsTable = _AcdPolicyStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 3, 2)
@@ -714,8 +771,6 @@ acdPolicyStatsInOverflowPkts = _AcdPolicyStatsInOverflowPkts_Object(
 acdPolicyStatsInOverflowPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyStatsInOverflowPkts.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPolicyStatsInOverflowPkts.setUnits("Packets")
 _AcdPolicyStatsInHCPkts_Type = Counter64
 _AcdPolicyStatsInHCPkts_Object = MibTableColumn
 acdPolicyStatsInHCPkts = _AcdPolicyStatsInHCPkts_Object(
@@ -747,8 +802,6 @@ acdPolicyStatsInOverflowOctets = _AcdPolicyStatsInOverflowOctets_Object(
 acdPolicyStatsInOverflowOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyStatsInOverflowOctets.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPolicyStatsInOverflowOctets.setUnits("Octets")
 _AcdPolicyStatsInHCOctets_Type = Counter64
 _AcdPolicyStatsInHCOctets_Object = MibTableColumn
 acdPolicyStatsInHCOctets = _AcdPolicyStatsInHCOctets_Object(
@@ -780,8 +833,6 @@ acdPolicyStatsInOverflowPktsErr = _AcdPolicyStatsInOverflowPktsErr_Object(
 acdPolicyStatsInOverflowPktsErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyStatsInOverflowPktsErr.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPolicyStatsInOverflowPktsErr.setUnits("Packets")
 _AcdPolicyStatsInHCPktsErr_Type = Counter64
 _AcdPolicyStatsInHCPktsErr_Object = MibTableColumn
 acdPolicyStatsInHCPktsErr = _AcdPolicyStatsInHCPktsErr_Object(
@@ -815,7 +866,7 @@ acdPolicyHistStatsID = _AcdPolicyHistStatsID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 3, 3, 1, 1),
     _AcdPolicyHistStatsID_Type()
 )
-acdPolicyHistStatsID.setMaxAccess("not-accessible")
+acdPolicyHistStatsID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyHistStatsID.setStatus("current")
 _AcdPolicyHistStatsListID_Type = Unsigned32
@@ -842,7 +893,7 @@ acdPolicyHistStatsSampleIndex = _AcdPolicyHistStatsSampleIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 3, 3, 1, 4),
     _AcdPolicyHistStatsSampleIndex_Type()
 )
-acdPolicyHistStatsSampleIndex.setMaxAccess("not-accessible")
+acdPolicyHistStatsSampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyHistStatsSampleIndex.setStatus("current")
 
@@ -909,8 +960,6 @@ acdPolicyHistStatsInOverflowPkts = _AcdPolicyHistStatsInOverflowPkts_Object(
 acdPolicyHistStatsInOverflowPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyHistStatsInOverflowPkts.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPolicyHistStatsInOverflowPkts.setUnits("Packets")
 _AcdPolicyHistStatsInHCPkts_Type = Counter64
 _AcdPolicyHistStatsInHCPkts_Object = MibTableColumn
 acdPolicyHistStatsInHCPkts = _AcdPolicyHistStatsInHCPkts_Object(
@@ -942,8 +991,6 @@ acdPolicyHistStatsInOverflowOctets = _AcdPolicyHistStatsInOverflowOctets_Object(
 acdPolicyHistStatsInOverflowOctets.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyHistStatsInOverflowOctets.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPolicyHistStatsInOverflowOctets.setUnits("Octets")
 _AcdPolicyHistStatsInHCOctets_Type = Counter64
 _AcdPolicyHistStatsInHCOctets_Object = MibTableColumn
 acdPolicyHistStatsInHCOctets = _AcdPolicyHistStatsInHCOctets_Object(
@@ -975,8 +1022,6 @@ acdPolicyHistStatsInOverflowPktsErr = _AcdPolicyHistStatsInOverflowPktsErr_Objec
 acdPolicyHistStatsInOverflowPktsErr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPolicyHistStatsInOverflowPktsErr.setStatus("current")
-if mibBuilder.loadTexts:
-    acdPolicyHistStatsInOverflowPktsErr.setUnits("Packets")
 _AcdPolicyHistStatsInHCPktsErr_Type = Counter64
 _AcdPolicyHistStatsInHCPktsErr_Object = MibTableColumn
 acdPolicyHistStatsInHCPktsErr = _AcdPolicyHistStatsInHCPktsErr_Object(
@@ -1148,7 +1193,9 @@ acdPolicyGroup.setObjects(
         ("ACD-POLICY-MIB", "acdPolicyDefaultMappingGreenPrior"),
         ("ACD-POLICY-MIB", "acdPolicyDefaultMappingYellowCfi"),
         ("ACD-POLICY-MIB", "acdPolicyDefaultMappingYellowPrior"),
-        ("ACD-POLICY-MIB", "acdPolicyOutgoingPort"))
+        ("ACD-POLICY-MIB", "acdPolicyOutgoingPort"),
+        ("ACD-POLICY-MIB", "acdPolicyEvcMappingVlan2Etype"),
+        ("ACD-POLICY-MIB", "acdPolicyEvcMappingVlan2Id"))
 )
 if mibBuilder.loadTexts:
     acdPolicyGroup.setStatus("current")
@@ -1176,8 +1223,10 @@ acdPolicyHistStatsGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 3, 6, 2, 3)
 )
 acdPolicyHistStatsGroup.setObjects(
-      *(("ACD-POLICY-MIB", "acdPolicyHistStatsListID"),
+      *(("ACD-POLICY-MIB", "acdPolicyHistStatsID"),
+        ("ACD-POLICY-MIB", "acdPolicyHistStatsListID"),
         ("ACD-POLICY-MIB", "acdPolicyHistStatsEntryID"),
+        ("ACD-POLICY-MIB", "acdPolicyHistStatsSampleIndex"),
         ("ACD-POLICY-MIB", "acdPolicyHistStatsStatus"),
         ("ACD-POLICY-MIB", "acdPolicyHistStatsDuration"),
         ("ACD-POLICY-MIB", "acdPolicyHistStatsIntervalEnd"),
@@ -1259,6 +1308,17 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+acdPolicyDeprecatedCompliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 3, 6, 1, 2)
+)
+acdPolicyDeprecatedCompliance.setObjects(
+    ("ACD-POLICY-MIB", "acdPolicyDeprecatedGroup")
+)
+if mibBuilder.loadTexts:
+    acdPolicyDeprecatedCompliance.setStatus(
+        "deprecated"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -1297,6 +1357,8 @@ mibBuilder.exportSymbols(
        "acdPolicyDefaultMappingYellowCfi": acdPolicyDefaultMappingYellowCfi,
        "acdPolicyDefaultMappingYellowPrior": acdPolicyDefaultMappingYellowPrior,
        "acdPolicyOutgoingPort": acdPolicyOutgoingPort,
+       "acdPolicyEvcMappingVlan2Etype": acdPolicyEvcMappingVlan2Etype,
+       "acdPolicyEvcMappingVlan2Id": acdPolicyEvcMappingVlan2Id,
        "acdPolicyStatsTable": acdPolicyStatsTable,
        "acdPolicyStatsEntry": acdPolicyStatsEntry,
        "acdPolicyStatsID": acdPolicyStatsID,
@@ -1347,6 +1409,7 @@ mibBuilder.exportSymbols(
        "acdPolicyConformance": acdPolicyConformance,
        "acdPolicyCompliances": acdPolicyCompliances,
        "acdPolicyCompliance": acdPolicyCompliance,
+       "acdPolicyDeprecatedCompliance": acdPolicyDeprecatedCompliance,
        "acdPolicyGroups": acdPolicyGroups,
        "acdPolicyGroup": acdPolicyGroup,
        "acdPolicyStatsGroup": acdPolicyStatsGroup,

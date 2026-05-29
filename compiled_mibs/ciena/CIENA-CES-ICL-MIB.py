@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-ICL-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:37 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -127,7 +124,9 @@ cienaCesIclMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesIclMIB.setRevisions(
-        ("2013-11-07 00:00",)
+        ("2017-06-07 00:00",
+         "2016-12-09 00:00",
+         "2016-08-04 00:00")
     )
 
 
@@ -519,6 +518,15 @@ cienaCesIclRxConfigMismatch = _CienaCesIclRxConfigMismatch_Object(
 cienaCesIclRxConfigMismatch.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cienaCesIclRxConfigMismatch.setStatus("current")
+_CienaCesIclRxTimeoutMultiplier_Type = Unsigned32
+_CienaCesIclRxTimeoutMultiplier_Object = MibTableColumn
+cienaCesIclRxTimeoutMultiplier = _CienaCesIclRxTimeoutMultiplier_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 32, 1, 1, 1, 1, 27),
+    _CienaCesIclRxTimeoutMultiplier_Type()
+)
+cienaCesIclRxTimeoutMultiplier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cienaCesIclRxTimeoutMultiplier.setStatus("current")
 _CienaCesIclMIBNotificationPrefix_ObjectIdentity = ObjectIdentity
 cienaCesIclMIBNotificationPrefix = _CienaCesIclMIBNotificationPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 32, 2)
@@ -606,6 +614,7 @@ mibBuilder.exportSymbols(
        "cienaCesIclTxFailedFrames": cienaCesIclTxFailedFrames,
        "cienaCesIclNumberFailures": cienaCesIclNumberFailures,
        "cienaCesIclRxConfigMismatch": cienaCesIclRxConfigMismatch,
+       "cienaCesIclRxTimeoutMultiplier": cienaCesIclRxTimeoutMultiplier,
        "cienaCesIclMIBNotificationPrefix": cienaCesIclMIBNotificationPrefix,
        "cienaCesIclMIBNotifications": cienaCesIclMIBNotifications,
        "cienaCesIclStateChange": cienaCesIclStateChange,

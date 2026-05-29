@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\rittal\RITTAL-CMC-III-PRODUCTS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:23:30 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,8 @@ cmcIIIProducts = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cmcIIIProducts.setRevisions(
-        ("2015-08-25 00:00",
+        ("2019-04-10 00:00",
+         "2015-08-25 00:00",
          "2015-08-17 00:00",
          "2015-01-23 00:00",
          "2013-08-12 00:00",
@@ -152,6 +150,10 @@ cmcIIIProductUnitPDU = _CmcIIIProductUnitPDU_ObjectIdentity(
 _CmcIIIProductUnitRMS_ObjectIdentity = ObjectIdentity
 cmcIIIProductUnitRMS = _CmcIIIProductUnitRMS_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 1, 6)
+)
+_CmcIIIProductUnitIoT_ObjectIdentity = ObjectIdentity
+cmcIIIProductUnitIoT = _CmcIIIProductUnitIoT_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 1, 8)
 )
 _CmcIIIProductPort_ObjectIdentity = ObjectIdentity
 cmcIIIProductPort = _CmcIIIProductPort_ObjectIdentity(
@@ -360,6 +362,10 @@ cmcIIIProductChassisPSM_CAN_C19 = _CmcIIIProductChassisPSM_CAN_C19_ObjectIdentit
 _CmcIIIProductChassisPSM_CAN_Schuko_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisPSM_CAN_Schuko = _CmcIIIProductChassisPSM_CAN_Schuko_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 4866)
+)
+_CmcIIIProductChassisWirelessUnit_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisWirelessUnit = _CmcIIIProductChassisWirelessUnit_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 6400)
 )
 _CmcIIIProductChassisLCPFan_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisLCPFan = _CmcIIIProductChassisLCPFan_ObjectIdentity(
@@ -633,6 +639,10 @@ _CmcIIIProductChassisPDUu_MAN_S_UserDefined_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisPDUu_MAN_S_UserDefined = _CmcIIIProductChassisPDUu_MAN_S_UserDefined_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 16383)
 )
+_CmcIIIProductChassisPDUu_METP_M_UserDefined_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisPDUu_METP_M_UserDefined = _CmcIIIProductChassisPDUu_METP_M_UserDefined_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 16639)
+)
 _CmcIIIProductChassisRiMatrixS_S6_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisRiMatrixS_S6 = _CmcIIIProductChassisRiMatrixS_S6_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 20481)
@@ -664,6 +674,14 @@ cmcIIIProductChassisRiMatrixS_S9W = _CmcIIIProductChassisRiMatrixS_S9W_ObjectIde
 _CmcIIIProductChassisRiMatrixS_D9W_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisRiMatrixS_D9W = _CmcIIIProductChassisRiMatrixS_D9W_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 20488)
+)
+_CmcIIIProductChassisBluee_plus_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisBluee_plus = _CmcIIIProductChassisBluee_plus_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 24832)
+)
+_CmcIIIProductChassisMiniChiller_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisMiniChiller = _CmcIIIProductChassisMiniChiller_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 25088)
 )
 _CmcIIIProductChassisFireDetect_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisFireDetect = _CmcIIIProductChassisFireDetect_ObjectIdentity(
@@ -705,9 +723,25 @@ _CmcIIIProductChassisInternal_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisInternal = _CmcIIIProductChassisInternal_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 32768)
 )
+_CmcIIIProductChassisInternal_IoT_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisInternal_IoT = _CmcIIIProductChassisInternal_IoT_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 33024)
+)
+_CmcIIIProductChassisPDUi_SYS_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisPDUi_SYS = _CmcIIIProductChassisPDUi_SYS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 33536)
+)
+_CmcIIIProductChassisPDUi_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisPDUi = _CmcIIIProductChassisPDUi_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 33792)
+)
 _CmcIIIProductChassisSES_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisSES = _CmcIIIProductChassisSES_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 36864)
+)
+_CmcIIIProductChassisWirelessLock_ObjectIdentity = ObjectIdentity
+cmcIIIProductChassisWirelessLock = _CmcIIIProductChassisWirelessLock_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 2606, 7, 7, 4, 53248)
 )
 _CmcIIIProductChassisVirtualTwoLevel_ObjectIdentity = ObjectIdentity
 cmcIIIProductChassisVirtualTwoLevel = _CmcIIIProductChassisVirtualTwoLevel_ObjectIdentity(
@@ -749,6 +783,7 @@ mibBuilder.exportSymbols(
        "cmcIIIProductUnitLCP": cmcIIIProductUnitLCP,
        "cmcIIIProductUnitPDU": cmcIIIProductUnitPDU,
        "cmcIIIProductUnitRMS": cmcIIIProductUnitRMS,
+       "cmcIIIProductUnitIoT": cmcIIIProductUnitIoT,
        "cmcIIIProductPort": cmcIIIProductPort,
        "cmcIIIProductPortUnknown": cmcIIIProductPortUnknown,
        "cmcIIIProductPortLoopback": cmcIIIProductPortLoopback,
@@ -801,6 +836,7 @@ mibBuilder.exportSymbols(
        "cmcIIIProductChassisPSM-CAN-C13": cmcIIIProductChassisPSM_CAN_C13,
        "cmcIIIProductChassisPSM-CAN-C19": cmcIIIProductChassisPSM_CAN_C19,
        "cmcIIIProductChassisPSM-CAN-Schuko": cmcIIIProductChassisPSM_CAN_Schuko,
+       "cmcIIIProductChassisWirelessUnit": cmcIIIProductChassisWirelessUnit,
        "cmcIIIProductChassisLCPFan": cmcIIIProductChassisLCPFan,
        "cmcIIIProductChassisLCPWtr": cmcIIIProductChassisLCPWtr,
        "cmcIIIProductChassisLCPFcs": cmcIIIProductChassisLCPFcs,
@@ -869,6 +905,7 @@ mibBuilder.exportSymbols(
        "cmcIIIProductChassisPDUu-MAN-S-1P-16A-CEE-16-04": cmcIIIProductChassisPDUu_MAN_S_1P_16A_CEE_16_04,
        "cmcIIIProductChassisPDUu-MAN-S-1P-32A-CEE-16-04": cmcIIIProductChassisPDUu_MAN_S_1P_32A_CEE_16_04,
        "cmcIIIProductChassisPDUu-MAN-S-UserDefined": cmcIIIProductChassisPDUu_MAN_S_UserDefined,
+       "cmcIIIProductChassisPDUu-METP-M-UserDefined": cmcIIIProductChassisPDUu_METP_M_UserDefined,
        "cmcIIIProductChassisRiMatrixS-S6": cmcIIIProductChassisRiMatrixS_S6,
        "cmcIIIProductChassisRiMatrixS-D6": cmcIIIProductChassisRiMatrixS_D6,
        "cmcIIIProductChassisRiMatrixS-S9": cmcIIIProductChassisRiMatrixS_S9,
@@ -877,6 +914,8 @@ mibBuilder.exportSymbols(
        "cmcIIIProductChassisRiMatrixS-D6W": cmcIIIProductChassisRiMatrixS_D6W,
        "cmcIIIProductChassisRiMatrixS-S9W": cmcIIIProductChassisRiMatrixS_S9W,
        "cmcIIIProductChassisRiMatrixS-D9W": cmcIIIProductChassisRiMatrixS_D9W,
+       "cmcIIIProductChassisBluee-plus": cmcIIIProductChassisBluee_plus,
+       "cmcIIIProductChassisMiniChiller": cmcIIIProductChassisMiniChiller,
        "cmcIIIProductChassisFireDetect": cmcIIIProductChassisFireDetect,
        "cmcIIIProductChassisFireExt": cmcIIIProductChassisFireExt,
        "cmcIIIProductChassisFireExtSlave": cmcIIIProductChassisFireExtSlave,
@@ -887,7 +926,11 @@ mibBuilder.exportSymbols(
        "cmcIIIProductChassisFireExtOneU-VSN-ED": cmcIIIProductChassisFireExtOneU_VSN_ED,
        "cmcIIIProductChassisFireExtOneU-VSN-DD": cmcIIIProductChassisFireExtOneU_VSN_DD,
        "cmcIIIProductChassisInternal": cmcIIIProductChassisInternal,
+       "cmcIIIProductChassisInternal-IoT": cmcIIIProductChassisInternal_IoT,
+       "cmcIIIProductChassisPDUi-SYS": cmcIIIProductChassisPDUi_SYS,
+       "cmcIIIProductChassisPDUi": cmcIIIProductChassisPDUi,
        "cmcIIIProductChassisSES": cmcIIIProductChassisSES,
+       "cmcIIIProductChassisWirelessLock": cmcIIIProductChassisWirelessLock,
        "cmcIIIProductChassisVirtualTwoLevel": cmcIIIProductChassisVirtualTwoLevel,
        "cmcIIIProductChassisVirtualAccess": cmcIIIProductChassisVirtualAccess,
        "cmcIIIProductSensor": cmcIIIProductSensor}

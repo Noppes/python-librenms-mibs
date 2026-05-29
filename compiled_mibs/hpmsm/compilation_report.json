@@ -1,20 +1,11 @@
 {
-  "timestamp": "2025-10-02T11:52:23.799285",
+  "timestamp": "2026-05-29T09:31:22.265301",
   "stats": {
     "total": 33,
-    "compiled": 27,
-    "failed": 2,
-    "skipped": 4,
-    "errors": [
-      {
-        "mib": "COLUBRIS-802DOT1X-ACCESS-MIB",
-        "error": "missing"
-      },
-      {
-        "mib": "COLUBRIS-802DOT11-MIB",
-        "error": "missing"
-      }
-    ]
+    "compiled": 28,
+    "failed": 0,
+    "skipped": 5,
+    "errors": []
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

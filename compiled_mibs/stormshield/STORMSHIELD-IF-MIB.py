@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\stormshield\STORMSHIELD-IF-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:29:07 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,7 @@ snsif = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snsif.setRevisions(
-        ("2017-02-20 00:00",)
+        ("2019-04-25 00:00",)
     )
 
 
@@ -145,7 +142,7 @@ class _SnsifIndex_Type(Integer32):
     """Custom type snsifIndex based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 65535),
+        ValueRangeConstraint(0, 65535),
     )
 
 
@@ -212,7 +209,7 @@ snsifColor = _SnsifColor_Object(
 snsifColor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsifColor.setStatus("current")
-_SnsifMacThroughput_Type = Integer32
+_SnsifMacThroughput_Type = Counter64
 _SnsifMacThroughput_Object = MibTableColumn
 snsifMacThroughput = _SnsifMacThroughput_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 4, 1, 1, 8),
@@ -221,7 +218,7 @@ snsifMacThroughput = _SnsifMacThroughput_Object(
 snsifMacThroughput.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsifMacThroughput.setStatus("current")
-_SnsifCurThroughput_Type = Integer32
+_SnsifCurThroughput_Type = Counter64
 _SnsifCurThroughput_Object = MibTableColumn
 snsifCurThroughput = _SnsifCurThroughput_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 4, 1, 1, 9),
@@ -230,7 +227,7 @@ snsifCurThroughput = _SnsifCurThroughput_Object(
 snsifCurThroughput.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsifCurThroughput.setStatus("current")
-_SnsifMaxThroughput_Type = Integer32
+_SnsifMaxThroughput_Type = Counter64
 _SnsifMaxThroughput_Object = MibTableColumn
 snsifMaxThroughput = _SnsifMaxThroughput_Object(
     (1, 3, 6, 1, 4, 1, 11256, 1, 4, 1, 1, 10),
@@ -491,6 +488,15 @@ snsifDrvName = _SnsifDrvName_Object(
 snsifDrvName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsifDrvName.setStatus("current")
+_SnsifComment_Type = DisplayString
+_SnsifComment_Object = MibTableColumn
+snsifComment = _SnsifComment_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 4, 1, 1, 39),
+    _SnsifComment_Type()
+)
+snsifComment.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsifComment.setStatus("current")
 
 # Managed Objects groups
 
@@ -551,5 +557,6 @@ mibBuilder.exportSymbols(
        "snsifInIcmpBytes": snsifInIcmpBytes,
        "snsifOutIcmpBytes": snsifOutIcmpBytes,
        "snsifProtected": snsifProtected,
-       "snsifDrvName": snsifDrvName}
+       "snsifDrvName": snsifDrvName,
+       "snsifComment": snsifComment}
 )

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-TP-DEVICES
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:21 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-TP-DEVICES
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,7 @@ alcatelIND1TpDevicesMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1TpDevicesMIB.setRevisions(
-        ("2004-03-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -324,6 +321,108 @@ deviceOmniAccess4306GW = _DeviceOmniAccess4306GW_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     deviceOmniAccess4306GW.setStatus("current")
+_DeviceOmniAccess4550_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4550 = _DeviceOmniAccess4550_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 13)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4550.setStatus("current")
+_DeviceOmniAccess4650_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4650 = _DeviceOmniAccess4650_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 14)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4650.setStatus("current")
+_DeviceOmniAccess4750_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4750 = _DeviceOmniAccess4750_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 15)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4750.setStatus("current")
+_DeviceOmniAccess4005_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4005 = _DeviceOmniAccess4005_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 16)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4005.setStatus("current")
+_DeviceOmniAccess4010_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4010 = _DeviceOmniAccess4010_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 17)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4010.setStatus("current")
+_DeviceOmniAccess4030_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4030 = _DeviceOmniAccess4030_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 18)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4030.setStatus("current")
+_DeviceOmniAccessWireless4024_ObjectIdentity = ObjectIdentity
+deviceOmniAccessWireless4024 = _DeviceOmniAccessWireless4024_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 19)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessWireless4024.setStatus("current")
+_DeviceOmniAccessWireless4450_ObjectIdentity = ObjectIdentity
+deviceOmniAccessWireless4450 = _DeviceOmniAccessWireless4450_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 20)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessWireless4450.setStatus("current")
+_DeviceOmniAccess4750XM_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4750XM = _DeviceOmniAccess4750XM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 21)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4750XM.setStatus("current")
+_DeviceOmniAccess4008_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4008 = _DeviceOmniAccess4008_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 22)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4008.setStatus("current")
+_DeviceOmniAccess4850IS_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4850IS = _DeviceOmniAccess4850IS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 23)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4850IS.setStatus("current")
+_DeviceOmniAccessMMHW1K_ObjectIdentity = ObjectIdentity
+deviceOmniAccessMMHW1K = _DeviceOmniAccessMMHW1K_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 24)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessMMHW1K.setStatus("current")
+_DeviceOmniAccessMMHW5K_ObjectIdentity = ObjectIdentity
+deviceOmniAccessMMHW5K = _DeviceOmniAccessMMHW5K_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 25)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessMMHW5K.setStatus("current")
+_DeviceOmniAccessMMHW10K_ObjectIdentity = ObjectIdentity
+deviceOmniAccessMMHW10K = _DeviceOmniAccessMMHW10K_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 26)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessMMHW10K.setStatus("current")
+_DeviceOmniAccessMMVA_ObjectIdentity = ObjectIdentity
+deviceOmniAccessMMVA = _DeviceOmniAccessMMVA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 27)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessMMVA.setStatus("current")
+_DeviceOmniAccessMCVARW_ObjectIdentity = ObjectIdentity
+deviceOmniAccessMCVARW = _DeviceOmniAccessMCVARW_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 28)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessMCVARW.setStatus("current")
+_DeviceOmniAccess4104_ObjectIdentity = ObjectIdentity
+deviceOmniAccess4104 = _DeviceOmniAccess4104_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 1, 29)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccess4104.setStatus("current")
 _ChassisOmniAccessWirelessAP_ObjectIdentity = ObjectIdentity
 chassisOmniAccessWirelessAP = _ChassisOmniAccessWirelessAP_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2)
@@ -432,6 +531,444 @@ deviceOmniAccessAP125ABG = _DeviceOmniAccessAP125ABG_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     deviceOmniAccessAP125ABG.setStatus("current")
+_DeviceOmniAccessAP60P_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP60P = _DeviceOmniAccessAP60P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 18)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP60P.setStatus("current")
+_DeviceOmniAccessAP105_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP105 = _DeviceOmniAccessAP105_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 19)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP105.setStatus("current")
+_DeviceOmniAccessAP4306INT_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP4306INT = _DeviceOmniAccessAP4306INT_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 20)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP4306INT.setStatus("current")
+_DeviceOmniAccessRAP2WG_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP2WG = _DeviceOmniAccessRAP2WG_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 21)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP2WG.setStatus("current")
+_DeviceOmniAccessRAP5WN_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP5WN = _DeviceOmniAccessRAP5WN_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 22)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP5WN.setStatus("current")
+_DeviceOmniAccessRAP5_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP5 = _DeviceOmniAccessRAP5_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 23)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP5.setStatus("current")
+_DeviceOmniAccessAP92_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP92 = _DeviceOmniAccessAP92_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 24)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP92.setStatus("current")
+_DeviceOmniAccessAP93_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP93 = _DeviceOmniAccessAP93_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 25)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP93.setStatus("current")
+_DeviceOmniAccessAP185_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP185 = _DeviceOmniAccessAP185_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 26)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP185.setStatus("current")
+_DeviceOmniAccessAP175POE_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP175POE = _DeviceOmniAccessAP175POE_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 27)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP175POE.setStatus("current")
+_DeviceOmniAccessAP175AC_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP175AC = _DeviceOmniAccessAP175AC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 28)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP175AC.setStatus("current")
+_DeviceOmniAccessAP175DC_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP175DC = _DeviceOmniAccessAP175DC_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 29)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP175DC.setStatus("current")
+_DeviceOmniAccessAP68_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP68 = _DeviceOmniAccessAP68_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 30)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP68.setStatus("current")
+_DeviceOmniAccessAP68P_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP68P = _DeviceOmniAccessAP68P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 31)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP68P.setStatus("current")
+_DeviceOmniAccessAP93H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP93H = _DeviceOmniAccessAP93H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 32)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP93H.setStatus("current")
+_DeviceOmniAccessAP134_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP134 = _DeviceOmniAccessAP134_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 33)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP134.setStatus("current")
+_DeviceOmniAccessAP135_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP135 = _DeviceOmniAccessAP135_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 34)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP135.setStatus("current")
+_DeviceOmniAccessIAP23_ObjectIdentity = ObjectIdentity
+deviceOmniAccessIAP23 = _DeviceOmniAccessIAP23_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 35)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessIAP23.setStatus("current")
+_DeviceOmniAccessIAP23P_ObjectIdentity = ObjectIdentity
+deviceOmniAccessIAP23P = _DeviceOmniAccessIAP23P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 36)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessIAP23P.setStatus("current")
+_DeviceOmniAccessAP104_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP104 = _DeviceOmniAccessAP104_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 37)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP104.setStatus("current")
+_DeviceOmniAccessRAP108_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP108 = _DeviceOmniAccessRAP108_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 38)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP108.setStatus("current")
+_DeviceOmniAccessRAP109_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP109 = _DeviceOmniAccessRAP109_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 39)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP109.setStatus("current")
+_DeviceOmniAccessRAP155_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP155 = _DeviceOmniAccessRAP155_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 40)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP155.setStatus("current")
+_DeviceOmniAccessRAP155P_ObjectIdentity = ObjectIdentity
+deviceOmniAccessRAP155P = _DeviceOmniAccessRAP155P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 41)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessRAP155P.setStatus("current")
+_DeviceOmniAccessAP224_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP224 = _DeviceOmniAccessAP224_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 42)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP224.setStatus("current")
+_DeviceOmniAccessAP114_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP114 = _DeviceOmniAccessAP114_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 43)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP114.setStatus("current")
+_DeviceOmniAccessAP225_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP225 = _DeviceOmniAccessAP225_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 44)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP225.setStatus("current")
+_DeviceOmniAccessAP115_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP115 = _DeviceOmniAccessAP115_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 45)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP115.setStatus("current")
+_DeviceOmniAccessAP274_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP274 = _DeviceOmniAccessAP274_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 46)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP274.setStatus("current")
+_DeviceOmniAccessAP275_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP275 = _DeviceOmniAccessAP275_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 47)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP275.setStatus("current")
+_DeviceOmniAccessAP214_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP214 = _DeviceOmniAccessAP214_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 48)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP214.setStatus("current")
+_DeviceOmniAccessAP215_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP215 = _DeviceOmniAccessAP215_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 49)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP215.setStatus("current")
+_DeviceOmniAccessAP204_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP204 = _DeviceOmniAccessAP204_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 50)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP204.setStatus("current")
+_DeviceOmniAccessAP205_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP205 = _DeviceOmniAccessAP205_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 51)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP205.setStatus("current")
+_DeviceOmniAccessAP103_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP103 = _DeviceOmniAccessAP103_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 52)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP103.setStatus("current")
+_DeviceOmniAccessAP103H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP103H = _DeviceOmniAccessAP103H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 53)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP103H.setStatus("current")
+_DeviceOmniAccessAP277_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP277 = _DeviceOmniAccessAP277_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 54)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP277.setStatus("current")
+_DeviceOmniAccessAP228_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP228 = _DeviceOmniAccessAP228_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 55)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP228.setStatus("current")
+_DeviceOmniAccessAP205H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP205H = _DeviceOmniAccessAP205H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 56)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP205H.setStatus("current")
+_DeviceOmniAccessAP324_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP324 = _DeviceOmniAccessAP324_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 58)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP324.setStatus("current")
+_DeviceOmniAccessAP325_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP325 = _DeviceOmniAccessAP325_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 59)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP325.setStatus("current")
+_DeviceOmniAccessAP314_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP314 = _DeviceOmniAccessAP314_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 60)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP314.setStatus("current")
+_DeviceOmniAccessAP315_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP315 = _DeviceOmniAccessAP315_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 61)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP315.setStatus("current")
+_DeviceOmniAccessAP334_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP334 = _DeviceOmniAccessAP334_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 62)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP334.setStatus("current")
+_DeviceOmniAccessAP335_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP335 = _DeviceOmniAccessAP335_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 63)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP335.setStatus("current")
+_DeviceOmniAccessAP304_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP304 = _DeviceOmniAccessAP304_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 64)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP304.setStatus("current")
+_DeviceOmniAccessAP305_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP305 = _DeviceOmniAccessAP305_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 65)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP305.setStatus("current")
+_DeviceOmniAccessAP207_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP207 = _DeviceOmniAccessAP207_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 66)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP207.setStatus("current")
+_DeviceOmniAccessAP262_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP262 = _DeviceOmniAccessAP262_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 67)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP262.setStatus("current")
+_DeviceOmniAccessAP365_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP365 = _DeviceOmniAccessAP365_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 68)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP365.setStatus("current")
+_DeviceOmniAccessAP367_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP367 = _DeviceOmniAccessAP367_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 69)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP367.setStatus("current")
+_DeviceOmniAccessAP203H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP203H = _DeviceOmniAccessAP203H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 70)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP203H.setStatus("current")
+_DeviceOmniAccessAP303H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP303H = _DeviceOmniAccessAP303H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 71)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP303H.setStatus("current")
+_DeviceOmniAccessAP203R_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP203R = _DeviceOmniAccessAP203R_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 72)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP203R.setStatus("current")
+_DeviceOmniAccessAP203RP_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP203RP = _DeviceOmniAccessAP203RP_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 73)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP203RP.setStatus("current")
+_DeviceOmniAccessOAWAP318_ObjectIdentity = ObjectIdentity
+deviceOmniAccessOAWAP318 = _DeviceOmniAccessOAWAP318_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 74)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessOAWAP318.setStatus("current")
+_DeviceOmniAccessOAWAP344_ObjectIdentity = ObjectIdentity
+deviceOmniAccessOAWAP344 = _DeviceOmniAccessOAWAP344_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 75)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessOAWAP344.setStatus("current")
+_DeviceOmniAccessOAWAP345_ObjectIdentity = ObjectIdentity
+deviceOmniAccessOAWAP345 = _DeviceOmniAccessOAWAP345_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 76)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessOAWAP345.setStatus("current")
+_DeviceOmniAccessOAWAP374_ObjectIdentity = ObjectIdentity
+deviceOmniAccessOAWAP374 = _DeviceOmniAccessOAWAP374_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 77)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessOAWAP374.setStatus("current")
+_DeviceOmniAccessOAWAP375_ObjectIdentity = ObjectIdentity
+deviceOmniAccessOAWAP375 = _DeviceOmniAccessOAWAP375_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 78)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessOAWAP375.setStatus("current")
+_DeviceOmniAccessOAWAP377_ObjectIdentity = ObjectIdentity
+deviceOmniAccessOAWAP377 = _DeviceOmniAccessOAWAP377_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 79)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessOAWAP377.setStatus("current")
+_DeviceOmniAccessAP303_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP303 = _DeviceOmniAccessAP303_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 80)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP303.setStatus("current")
+_DeviceOmniAccessAP303P_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP303P = _DeviceOmniAccessAP303P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 81)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP303P.setStatus("current")
+_DeviceOmniAccessAP514_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP514 = _DeviceOmniAccessAP514_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 82)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP514.setStatus("current")
+_DeviceOmniAccessAP515_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP515 = _DeviceOmniAccessAP515_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 83)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP515.setStatus("current")
+_DeviceOmniAccessAP534_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP534 = _DeviceOmniAccessAP534_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 84)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP534.setStatus("current")
+_DeviceOmniAccessAP535_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP535 = _DeviceOmniAccessAP535_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 85)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP535.setStatus("current")
+_DeviceOmniAccessAP554_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP554 = _DeviceOmniAccessAP554_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 86)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP554.setStatus("current")
+_DeviceOmniAccessAP555_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP555 = _DeviceOmniAccessAP555_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 87)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP555.setStatus("current")
+_DeviceOmniAccessAP504_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP504 = _DeviceOmniAccessAP504_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 88)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP504.setStatus("current")
+_DeviceOmniAccessAP505_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP505 = _DeviceOmniAccessAP505_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 89)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP505.setStatus("current")
+_DeviceOmniAccessAP503H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP503H = _DeviceOmniAccessAP503H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 90)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP503H.setStatus("current")
+_DeviceOmniAccessAP505H_ObjectIdentity = ObjectIdentity
+deviceOmniAccessAP505H = _DeviceOmniAccessAP505H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 1, 2, 91)
+)
+if mibBuilder.loadTexts:
+    deviceOmniAccessAP505H.setStatus("current")
 _FansOmniAccessWireless_ObjectIdentity = ObjectIdentity
 fansOmniAccessWireless = _FansOmniAccessWireless_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 2, 2)
@@ -696,6 +1233,186 @@ modulesOA7XX = _ModulesOA7XX_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     modulesOA7XX.setStatus("current")
+_FamilyOA855X_ObjectIdentity = ObjectIdentity
+familyOA855X = _FamilyOA855X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 7)
+)
+if mibBuilder.loadTexts:
+    familyOA855X.setStatus("current")
+_ChassisOA855X_ObjectIdentity = ObjectIdentity
+chassisOA855X = _ChassisOA855X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 7, 1)
+)
+if mibBuilder.loadTexts:
+    chassisOA855X.setStatus("current")
+_DeviceOA8550WSG_ObjectIdentity = ObjectIdentity
+deviceOA8550WSG = _DeviceOA8550WSG_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 7, 1, 1)
+)
+if mibBuilder.loadTexts:
+    deviceOA8550WSG.setStatus("current")
+_ModuleOA855X_ObjectIdentity = ObjectIdentity
+moduleOA855X = _ModuleOA855X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 7, 2)
+)
+if mibBuilder.loadTexts:
+    moduleOA855X.setStatus("current")
+_FamilyWiNGOAW_ObjectIdentity = ObjectIdentity
+familyWiNGOAW = _FamilyWiNGOAW_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 8)
+)
+if mibBuilder.loadTexts:
+    familyWiNGOAW.setStatus("current")
+_FamilyPhoenixOA_ObjectIdentity = ObjectIdentity
+familyPhoenixOA = _FamilyPhoenixOA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9)
+)
+if mibBuilder.loadTexts:
+    familyPhoenixOA.setStatus("current")
+_ChassisPhoenixOA_ObjectIdentity = ObjectIdentity
+chassisPhoenixOA = _ChassisPhoenixOA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1)
+)
+if mibBuilder.loadTexts:
+    chassisPhoenixOA.setStatus("current")
+_DevicePhoenixOA5710V_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5710V = _DevicePhoenixOA5710V_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 1)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5710V.setStatus("current")
+_DevicePhoenixOA5720_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5720 = _DevicePhoenixOA5720_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 2)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5720.setStatus("current")
+_DevicePhoenixOA5840_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5840 = _DevicePhoenixOA5840_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 3)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5840.setStatus("current")
+_DevicePhoenixOA5850_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5850 = _DevicePhoenixOA5850_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 4)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5850.setStatus("current")
+_DevicePhoenixOA5725R61ER_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5725R61ER = _DevicePhoenixOA5725R61ER_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 5)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5725R61ER.setStatus("current")
+_DevicePhoenixOA5725R62ER_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5725R62ER = _DevicePhoenixOA5725R62ER_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 6)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5725R62ER.setStatus("current")
+_DevicePhoenixOA5725A3G_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5725A3G = _DevicePhoenixOA5725A3G_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 7)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5725A3G.setStatus("current")
+_DevicePhoenixOA5725ALTE_ObjectIdentity = ObjectIdentity
+devicePhoenixOA5725ALTE = _DevicePhoenixOA5725ALTE_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 8)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixOA5725ALTE.setStatus("current")
+_DevicePhoenixESRWWANENABLER_ObjectIdentity = ObjectIdentity
+devicePhoenixESRWWANENABLER = _DevicePhoenixESRWWANENABLER_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 1, 9)
+)
+if mibBuilder.loadTexts:
+    devicePhoenixESRWWANENABLER.setStatus("current")
+_FansPhoenixOA_ObjectIdentity = ObjectIdentity
+fansPhoenixOA = _FansPhoenixOA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 2)
+)
+if mibBuilder.loadTexts:
+    fansPhoenixOA.setStatus("current")
+_PowersPhoenixOA_ObjectIdentity = ObjectIdentity
+powersPhoenixOA = _PowersPhoenixOA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 3)
+)
+if mibBuilder.loadTexts:
+    powersPhoenixOA.setStatus("current")
+_ModulesPhoenixOA_ObjectIdentity = ObjectIdentity
+modulesPhoenixOA = _ModulesPhoenixOA_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 9, 4)
+)
+if mibBuilder.loadTexts:
+    modulesPhoenixOA.setStatus("current")
+_FamilyWebSmart_ObjectIdentity = ObjectIdentity
+familyWebSmart = _FamilyWebSmart_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10)
+)
+if mibBuilder.loadTexts:
+    familyWebSmart.setStatus("current")
+_ChassisWebSmart_ObjectIdentity = ObjectIdentity
+chassisWebSmart = _ChassisWebSmart_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1)
+)
+if mibBuilder.loadTexts:
+    chassisWebSmart.setStatus("current")
+_DeviceWebSmartOS22208_ObjectIdentity = ObjectIdentity
+deviceWebSmartOS22208 = _DeviceWebSmartOS22208_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1, 1)
+)
+if mibBuilder.loadTexts:
+    deviceWebSmartOS22208.setStatus("current")
+_DeviceWebSmartOS2220P8_ObjectIdentity = ObjectIdentity
+deviceWebSmartOS2220P8 = _DeviceWebSmartOS2220P8_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1, 2)
+)
+if mibBuilder.loadTexts:
+    deviceWebSmartOS2220P8.setStatus("current")
+_DeviceWebSmartOS222024_ObjectIdentity = ObjectIdentity
+deviceWebSmartOS222024 = _DeviceWebSmartOS222024_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1, 3)
+)
+if mibBuilder.loadTexts:
+    deviceWebSmartOS222024.setStatus("current")
+_DeviceWebSmartOS2220P24_ObjectIdentity = ObjectIdentity
+deviceWebSmartOS2220P24 = _DeviceWebSmartOS2220P24_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1, 4)
+)
+if mibBuilder.loadTexts:
+    deviceWebSmartOS2220P24.setStatus("current")
+_DeviceWebSmartOS222048_ObjectIdentity = ObjectIdentity
+deviceWebSmartOS222048 = _DeviceWebSmartOS222048_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1, 5)
+)
+if mibBuilder.loadTexts:
+    deviceWebSmartOS222048.setStatus("current")
+_DeviceWebSmartOS2220P48_ObjectIdentity = ObjectIdentity
+deviceWebSmartOS2220P48 = _DeviceWebSmartOS2220P48_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 1, 6)
+)
+if mibBuilder.loadTexts:
+    deviceWebSmartOS2220P48.setStatus("current")
+_FansWebSmart_ObjectIdentity = ObjectIdentity
+fansWebSmart = _FansWebSmart_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 2)
+)
+if mibBuilder.loadTexts:
+    fansWebSmart.setStatus("current")
+_PowersWebSmart_ObjectIdentity = ObjectIdentity
+powersWebSmart = _PowersWebSmart_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 3)
+)
+if mibBuilder.loadTexts:
+    powersWebSmart.setStatus("current")
+_ModuleWebSmart_ObjectIdentity = ObjectIdentity
+moduleWebSmart = _ModuleWebSmart_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 2, 2, 10, 4)
+)
+if mibBuilder.loadTexts:
+    moduleWebSmart.setStatus("current")
 
 # Managed Objects groups
 
@@ -751,6 +1468,23 @@ mibBuilder.exportSymbols(
        "deviceOmniAccess4306": deviceOmniAccess4306,
        "deviceOmniAccess4306G": deviceOmniAccess4306G,
        "deviceOmniAccess4306GW": deviceOmniAccess4306GW,
+       "deviceOmniAccess4550": deviceOmniAccess4550,
+       "deviceOmniAccess4650": deviceOmniAccess4650,
+       "deviceOmniAccess4750": deviceOmniAccess4750,
+       "deviceOmniAccess4005": deviceOmniAccess4005,
+       "deviceOmniAccess4010": deviceOmniAccess4010,
+       "deviceOmniAccess4030": deviceOmniAccess4030,
+       "deviceOmniAccessWireless4024": deviceOmniAccessWireless4024,
+       "deviceOmniAccessWireless4450": deviceOmniAccessWireless4450,
+       "deviceOmniAccess4750XM": deviceOmniAccess4750XM,
+       "deviceOmniAccess4008": deviceOmniAccess4008,
+       "deviceOmniAccess4850IS": deviceOmniAccess4850IS,
+       "deviceOmniAccessMMHW1K": deviceOmniAccessMMHW1K,
+       "deviceOmniAccessMMHW5K": deviceOmniAccessMMHW5K,
+       "deviceOmniAccessMMHW10K": deviceOmniAccessMMHW10K,
+       "deviceOmniAccessMMVA": deviceOmniAccessMMVA,
+       "deviceOmniAccessMCVARW": deviceOmniAccessMCVARW,
+       "deviceOmniAccess4104": deviceOmniAccess4104,
        "chassisOmniAccessWirelessAP": chassisOmniAccessWirelessAP,
        "deviceOmniAccessAP60": deviceOmniAccessAP60,
        "deviceOmniAccessAP61": deviceOmniAccessAP61,
@@ -769,6 +1503,79 @@ mibBuilder.exportSymbols(
        "deviceOmniAccessAP121ABG": deviceOmniAccessAP121ABG,
        "deviceOmniAccessAP124ABG": deviceOmniAccessAP124ABG,
        "deviceOmniAccessAP125ABG": deviceOmniAccessAP125ABG,
+       "deviceOmniAccessAP60P": deviceOmniAccessAP60P,
+       "deviceOmniAccessAP105": deviceOmniAccessAP105,
+       "deviceOmniAccessAP4306INT": deviceOmniAccessAP4306INT,
+       "deviceOmniAccessRAP2WG": deviceOmniAccessRAP2WG,
+       "deviceOmniAccessRAP5WN": deviceOmniAccessRAP5WN,
+       "deviceOmniAccessRAP5": deviceOmniAccessRAP5,
+       "deviceOmniAccessAP92": deviceOmniAccessAP92,
+       "deviceOmniAccessAP93": deviceOmniAccessAP93,
+       "deviceOmniAccessAP185": deviceOmniAccessAP185,
+       "deviceOmniAccessAP175POE": deviceOmniAccessAP175POE,
+       "deviceOmniAccessAP175AC": deviceOmniAccessAP175AC,
+       "deviceOmniAccessAP175DC": deviceOmniAccessAP175DC,
+       "deviceOmniAccessAP68": deviceOmniAccessAP68,
+       "deviceOmniAccessAP68P": deviceOmniAccessAP68P,
+       "deviceOmniAccessAP93H": deviceOmniAccessAP93H,
+       "deviceOmniAccessAP134": deviceOmniAccessAP134,
+       "deviceOmniAccessAP135": deviceOmniAccessAP135,
+       "deviceOmniAccessIAP23": deviceOmniAccessIAP23,
+       "deviceOmniAccessIAP23P": deviceOmniAccessIAP23P,
+       "deviceOmniAccessAP104": deviceOmniAccessAP104,
+       "deviceOmniAccessRAP108": deviceOmniAccessRAP108,
+       "deviceOmniAccessRAP109": deviceOmniAccessRAP109,
+       "deviceOmniAccessRAP155": deviceOmniAccessRAP155,
+       "deviceOmniAccessRAP155P": deviceOmniAccessRAP155P,
+       "deviceOmniAccessAP224": deviceOmniAccessAP224,
+       "deviceOmniAccessAP114": deviceOmniAccessAP114,
+       "deviceOmniAccessAP225": deviceOmniAccessAP225,
+       "deviceOmniAccessAP115": deviceOmniAccessAP115,
+       "deviceOmniAccessAP274": deviceOmniAccessAP274,
+       "deviceOmniAccessAP275": deviceOmniAccessAP275,
+       "deviceOmniAccessAP214": deviceOmniAccessAP214,
+       "deviceOmniAccessAP215": deviceOmniAccessAP215,
+       "deviceOmniAccessAP204": deviceOmniAccessAP204,
+       "deviceOmniAccessAP205": deviceOmniAccessAP205,
+       "deviceOmniAccessAP103": deviceOmniAccessAP103,
+       "deviceOmniAccessAP103H": deviceOmniAccessAP103H,
+       "deviceOmniAccessAP277": deviceOmniAccessAP277,
+       "deviceOmniAccessAP228": deviceOmniAccessAP228,
+       "deviceOmniAccessAP205H": deviceOmniAccessAP205H,
+       "deviceOmniAccessAP324": deviceOmniAccessAP324,
+       "deviceOmniAccessAP325": deviceOmniAccessAP325,
+       "deviceOmniAccessAP314": deviceOmniAccessAP314,
+       "deviceOmniAccessAP315": deviceOmniAccessAP315,
+       "deviceOmniAccessAP334": deviceOmniAccessAP334,
+       "deviceOmniAccessAP335": deviceOmniAccessAP335,
+       "deviceOmniAccessAP304": deviceOmniAccessAP304,
+       "deviceOmniAccessAP305": deviceOmniAccessAP305,
+       "deviceOmniAccessAP207": deviceOmniAccessAP207,
+       "deviceOmniAccessAP262": deviceOmniAccessAP262,
+       "deviceOmniAccessAP365": deviceOmniAccessAP365,
+       "deviceOmniAccessAP367": deviceOmniAccessAP367,
+       "deviceOmniAccessAP203H": deviceOmniAccessAP203H,
+       "deviceOmniAccessAP303H": deviceOmniAccessAP303H,
+       "deviceOmniAccessAP203R": deviceOmniAccessAP203R,
+       "deviceOmniAccessAP203RP": deviceOmniAccessAP203RP,
+       "deviceOmniAccessOAWAP318": deviceOmniAccessOAWAP318,
+       "deviceOmniAccessOAWAP344": deviceOmniAccessOAWAP344,
+       "deviceOmniAccessOAWAP345": deviceOmniAccessOAWAP345,
+       "deviceOmniAccessOAWAP374": deviceOmniAccessOAWAP374,
+       "deviceOmniAccessOAWAP375": deviceOmniAccessOAWAP375,
+       "deviceOmniAccessOAWAP377": deviceOmniAccessOAWAP377,
+       "deviceOmniAccessAP303": deviceOmniAccessAP303,
+       "deviceOmniAccessAP303P": deviceOmniAccessAP303P,
+       "deviceOmniAccessAP514": deviceOmniAccessAP514,
+       "deviceOmniAccessAP515": deviceOmniAccessAP515,
+       "deviceOmniAccessAP534": deviceOmniAccessAP534,
+       "deviceOmniAccessAP535": deviceOmniAccessAP535,
+       "deviceOmniAccessAP554": deviceOmniAccessAP554,
+       "deviceOmniAccessAP555": deviceOmniAccessAP555,
+       "deviceOmniAccessAP504": deviceOmniAccessAP504,
+       "deviceOmniAccessAP505": deviceOmniAccessAP505,
+       "deviceOmniAccessAP503H": deviceOmniAccessAP503H,
+       "deviceOmniAccessAP505H": deviceOmniAccessAP505H,
        "fansOmniAccessWireless": fansOmniAccessWireless,
        "powersOmniAccessWireless": powersOmniAccessWireless,
        "modulesOmniAccessWireless": modulesOmniAccessWireless,
@@ -812,5 +1619,35 @@ mibBuilder.exportSymbols(
        "deviceOA780": deviceOA780,
        "fansOA7XX": fansOA7XX,
        "powersOA7XX": powersOA7XX,
-       "modulesOA7XX": modulesOA7XX}
+       "modulesOA7XX": modulesOA7XX,
+       "familyOA855X": familyOA855X,
+       "chassisOA855X": chassisOA855X,
+       "deviceOA8550WSG": deviceOA8550WSG,
+       "moduleOA855X": moduleOA855X,
+       "familyWiNGOAW": familyWiNGOAW,
+       "familyPhoenixOA": familyPhoenixOA,
+       "chassisPhoenixOA": chassisPhoenixOA,
+       "devicePhoenixOA5710V": devicePhoenixOA5710V,
+       "devicePhoenixOA5720": devicePhoenixOA5720,
+       "devicePhoenixOA5840": devicePhoenixOA5840,
+       "devicePhoenixOA5850": devicePhoenixOA5850,
+       "devicePhoenixOA5725R61ER": devicePhoenixOA5725R61ER,
+       "devicePhoenixOA5725R62ER": devicePhoenixOA5725R62ER,
+       "devicePhoenixOA5725A3G": devicePhoenixOA5725A3G,
+       "devicePhoenixOA5725ALTE": devicePhoenixOA5725ALTE,
+       "devicePhoenixESRWWANENABLER": devicePhoenixESRWWANENABLER,
+       "fansPhoenixOA": fansPhoenixOA,
+       "powersPhoenixOA": powersPhoenixOA,
+       "modulesPhoenixOA": modulesPhoenixOA,
+       "familyWebSmart": familyWebSmart,
+       "chassisWebSmart": chassisWebSmart,
+       "deviceWebSmartOS22208": deviceWebSmartOS22208,
+       "deviceWebSmartOS2220P8": deviceWebSmartOS2220P8,
+       "deviceWebSmartOS222024": deviceWebSmartOS222024,
+       "deviceWebSmartOS2220P24": deviceWebSmartOS2220P24,
+       "deviceWebSmartOS222048": deviceWebSmartOS222048,
+       "deviceWebSmartOS2220P48": deviceWebSmartOS2220P48,
+       "fansWebSmart": fansWebSmart,
+       "powersWebSmart": powersWebSmart,
+       "moduleWebSmart": moduleWebSmart}
 )

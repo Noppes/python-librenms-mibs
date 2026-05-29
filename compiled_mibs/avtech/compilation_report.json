@@ -1,11 +1,16 @@
 {
-  "timestamp": "2025-10-02T11:20:19.297975",
+  "timestamp": "2026-05-29T09:19:40.168014",
   "stats": {
-    "total": 12,
+    "total": 13,
     "compiled": 12,
-    "failed": 0,
+    "failed": 1,
     "skipped": 0,
-    "errors": []
+    "errors": [
+      {
+        "mib": "ROOMALERT12S-MIB",
+        "error": "failed"
+      }
+    ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

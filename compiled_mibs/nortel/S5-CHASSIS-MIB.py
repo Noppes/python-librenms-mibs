@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nortel\S5-CHASSIS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:18:56 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -125,7 +122,9 @@ s5ChasMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     s5ChasMib.setRevisions(
-        ("2015-04-07 00:00",
+        ("2019-08-23 00:00",
+         "2018-10-09 00:00",
+         "2015-04-07 00:00",
          "2013-11-26 00:00",
          "2013-10-18 00:00",
          "2013-10-16 00:00",
@@ -1488,7 +1487,7 @@ class _S5ChasStoreFilename_Type(DisplayString):
     """Custom type s5ChasStoreFilename based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 128),
+        ValueSizeConstraint(0, 255),
     )
 
 
@@ -2102,6 +2101,93 @@ s5ChasPsRpsuSourceConfig = _S5ChasPsRpsuSourceConfig_Object(
 s5ChasPsRpsuSourceConfig.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     s5ChasPsRpsuSourceConfig.setStatus("current")
+_S5ChasPsuInfoTable_Object = MibTable
+s5ChasPsuInfoTable = _S5ChasPsuInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2)
+)
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoTable.setStatus("current")
+_S5ChasPsuInfoEntry_Object = MibTableRow
+s5ChasPsuInfoEntry = _S5ChasPsuInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1)
+)
+s5ChasPsuInfoEntry.setIndexNames(
+    (0, "S5-CHASSIS-MIB", "s5ChasPsuInfoPsuId"),
+)
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoEntry.setStatus("current")
+_S5ChasPsuInfoPsuId_Type = Integer32
+_S5ChasPsuInfoPsuId_Object = MibTableColumn
+s5ChasPsuInfoPsuId = _S5ChasPsuInfoPsuId_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 1),
+    _S5ChasPsuInfoPsuId_Type()
+)
+s5ChasPsuInfoPsuId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoPsuId.setStatus("current")
+_S5ChasPsuInfoOrderCode_Type = DisplayString
+_S5ChasPsuInfoOrderCode_Object = MibTableColumn
+s5ChasPsuInfoOrderCode = _S5ChasPsuInfoOrderCode_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 2),
+    _S5ChasPsuInfoOrderCode_Type()
+)
+s5ChasPsuInfoOrderCode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoOrderCode.setStatus("current")
+_S5ChasPsuInfoOrderCodeRev_Type = DisplayString
+_S5ChasPsuInfoOrderCodeRev_Object = MibTableColumn
+s5ChasPsuInfoOrderCodeRev = _S5ChasPsuInfoOrderCodeRev_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 3),
+    _S5ChasPsuInfoOrderCodeRev_Type()
+)
+s5ChasPsuInfoOrderCodeRev.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoOrderCodeRev.setStatus("current")
+_S5ChasPsuInfoDescription_Type = DisplayString
+_S5ChasPsuInfoDescription_Object = MibTableColumn
+s5ChasPsuInfoDescription = _S5ChasPsuInfoDescription_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 4),
+    _S5ChasPsuInfoDescription_Type()
+)
+s5ChasPsuInfoDescription.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoDescription.setStatus("current")
+_S5ChasPsuInfoSerialNumber_Type = DisplayString
+_S5ChasPsuInfoSerialNumber_Object = MibTableColumn
+s5ChasPsuInfoSerialNumber = _S5ChasPsuInfoSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 5),
+    _S5ChasPsuInfoSerialNumber_Type()
+)
+s5ChasPsuInfoSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoSerialNumber.setStatus("current")
+_S5ChasPsuInfoSuppPartNum_Type = DisplayString
+_S5ChasPsuInfoSuppPartNum_Object = MibTableColumn
+s5ChasPsuInfoSuppPartNum = _S5ChasPsuInfoSuppPartNum_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 6),
+    _S5ChasPsuInfoSuppPartNum_Type()
+)
+s5ChasPsuInfoSuppPartNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoSuppPartNum.setStatus("current")
+_S5ChasPsuInfoModelRevision_Type = DisplayString
+_S5ChasPsuInfoModelRevision_Object = MibTableColumn
+s5ChasPsuInfoModelRevision = _S5ChasPsuInfoModelRevision_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 7),
+    _S5ChasPsuInfoModelRevision_Type()
+)
+s5ChasPsuInfoModelRevision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoModelRevision.setStatus("current")
+_S5ChasPsuInfoManufacturer_Type = DisplayString
+_S5ChasPsuInfoManufacturer_Object = MibTableColumn
+s5ChasPsuInfoManufacturer = _S5ChasPsuInfoManufacturer_Object(
+    (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 9, 2, 1, 8),
+    _S5ChasPsuInfoManufacturer_Type()
+)
+s5ChasPsuInfoManufacturer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    s5ChasPsuInfoManufacturer.setStatus("current")
 _S5ChasNotify_ObjectIdentity = ObjectIdentity
 s5ChasNotify = _S5ChasNotify_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 45, 1, 6, 3, 11)
@@ -2433,6 +2519,16 @@ mibBuilder.exportSymbols(
        "s5ChasPsRpsuSubIndx": s5ChasPsRpsuSubIndx,
        "s5ChasPsRpsuType": s5ChasPsRpsuType,
        "s5ChasPsRpsuSourceConfig": s5ChasPsRpsuSourceConfig,
+       "s5ChasPsuInfoTable": s5ChasPsuInfoTable,
+       "s5ChasPsuInfoEntry": s5ChasPsuInfoEntry,
+       "s5ChasPsuInfoPsuId": s5ChasPsuInfoPsuId,
+       "s5ChasPsuInfoOrderCode": s5ChasPsuInfoOrderCode,
+       "s5ChasPsuInfoOrderCodeRev": s5ChasPsuInfoOrderCodeRev,
+       "s5ChasPsuInfoDescription": s5ChasPsuInfoDescription,
+       "s5ChasPsuInfoSerialNumber": s5ChasPsuInfoSerialNumber,
+       "s5ChasPsuInfoSuppPartNum": s5ChasPsuInfoSuppPartNum,
+       "s5ChasPsuInfoModelRevision": s5ChasPsuInfoModelRevision,
+       "s5ChasPsuInfoManufacturer": s5ChasPsuInfoManufacturer,
        "s5ChasMib": s5ChasMib,
        "s5ChasNotify": s5ChasNotify,
        "s5ChasNotifyFanDirection": s5ChasNotifyFanDirection,

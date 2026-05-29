@@ -1,11 +1,44 @@
 {
-  "timestamp": "2025-10-02T12:29:55.461981",
+  "timestamp": "2026-05-29T09:51:35.691100",
   "stats": {
-    "total": 5,
-    "compiled": 5,
-    "failed": 0,
-    "skipped": 0,
-    "errors": []
+    "total": 99,
+    "compiled": 62,
+    "failed": 8,
+    "skipped": 29,
+    "errors": [
+      {
+        "mib": "PRVT-ALARM-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-HQOS-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-ISIS-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-OSPF-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-RAPS-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-RAPS-SVC-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-REDUNDANCY-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "PRVT-ROUTE-MIB",
+        "error": "failed"
+      }
+    ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

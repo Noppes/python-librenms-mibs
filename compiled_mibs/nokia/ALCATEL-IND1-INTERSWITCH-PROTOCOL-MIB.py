@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:28 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -121,7 +118,9 @@ alcatelIND1InterswitchProtocolMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1InterswitchProtocolMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2011-05-06 00:00",
+         "2009-02-21 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -749,9 +748,6 @@ class _AipAMAPRemDeviceType_Type(Integer32):
               4,
               5,
               6,
-              7,
-              8,
-              9,
               10,
               20,
               21,
@@ -793,6 +789,18 @@ class _AipAMAPRemDeviceType_Type(Integer32):
               80,
               81,
               82,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
               214,
               215,
               216,
@@ -820,9 +828,6 @@ class _AipAMAPRemDeviceType_Type(Integer32):
           ("omniSwitch9600", 4),
           ("omniSwitch9700", 5),
           ("omniSwitch9800", 6),
-          ("omniSwitch9600E", 7),
-          ("omniSwitch9700E", 8),
-          ("omniSwitch9800E", 9),
           ("omniSwitch8800", 10),
           ("omniSwitch6624", 20),
           ("omniSwitch6648", 21),
@@ -864,6 +869,18 @@ class _AipAMAPRemDeviceType_Type(Integer32):
           ("omniSwitch62508ME", 80),
           ("omniSwitch625024ME", 81),
           ("omniSwitch625024SMB", 82),
+          ("omniSwitch645010", 87),
+          ("omniSwitch6450645024", 88),
+          ("omniSwitch6450645024U", 89),
+          ("omniSwitch645048", 90),
+          ("omniSwitch6250U24M", 91),
+          ("omniSwitch645024SF", 92),
+          ("omniSwitch645048SF", 93),
+          ("omniSwitch6450S10", 94),
+          ("omniSwitch635024", 95),
+          ("omniSwitch6350P24", 96),
+          ("omniSwitch635048", 97),
+          ("omniSwitch6350P48", 98),
           ("omniSwitch6200-MIXED-STACK", 214),
           ("omniSwitch6224", 215),
           ("omniSwitch6224P", 216),
@@ -1004,6 +1021,34 @@ aipAMAPVoiceVlan = _AipAMAPVoiceVlan_Object(
 aipAMAPVoiceVlan.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     aipAMAPVoiceVlan.setStatus("current")
+
+
+class _AipAMAPportstatus_Type(Integer32):
+    """Custom type aipAMAPportstatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AipAMAPportstatus_Type.__name__ = "Integer32"
+_AipAMAPportstatus_Object = MibScalar
+aipAMAPportstatus = _AipAMAPportstatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 9, 1, 1, 2, 10),
+    _AipAMAPportstatus_Type()
+)
+aipAMAPportstatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aipAMAPportstatus.setStatus("current")
 _AipLLDPConfig_ObjectIdentity = ObjectIdentity
 aipLLDPConfig = _AipLLDPConfig_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 9, 1, 1, 3)
@@ -1048,6 +1093,34 @@ aipLLDPConfigManAddrTlvTxEnable = _AipLLDPConfigManAddrTlvTxEnable_Object(
 aipLLDPConfigManAddrTlvTxEnable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     aipLLDPConfigManAddrTlvTxEnable.setStatus("current")
+
+
+class _AipLLDPDestMac_Type(Integer32):
+    """Custom type aipLLDPDestMac based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("nearestBridge", 1),
+          ("nearestEdge", 2))
+    )
+
+
+_AipLLDPDestMac_Type.__name__ = "Integer32"
+_AipLLDPDestMac_Object = MibScalar
+aipLLDPDestMac = _AipLLDPDestMac_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 9, 1, 1, 3, 2),
+    _AipLLDPDestMac_Type()
+)
+aipLLDPDestMac.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aipLLDPDestMac.setStatus("current")
 _AlcatelIND1InterswitchProtocolMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1InterswitchProtocolMIBConformance = _AlcatelIND1InterswitchProtocolMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 9, 1, 2)
@@ -1093,6 +1166,7 @@ aipAMAPConfGroup.setObjects(
       *(("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPstate"),
         ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPdisctime"),
         ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPcommontime"),
+        ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPportstatus"),
         ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPLastTrapReason"),
         ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPLastTrapPort"),
         ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPLocalConnectionIndex"),
@@ -1111,6 +1185,24 @@ aipAMAPConfGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     aipAMAPConfGroup.setStatus("current")
+
+aipLLDPConfGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 9, 1, 2, 1, 4)
+)
+aipLLDPConfGroup.setObjects(
+    ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipLLDPDestMac")
+)
+if mibBuilder.loadTexts:
+    aipLLDPConfGroup.setStatus("current")
+
+aipLLDPConfigManAddrEntryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 9, 1, 2, 1, 5)
+)
+aipLLDPConfigManAddrEntryGroup.setObjects(
+    ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipLLDPConfigManAddrTlvTxEnable")
+)
+if mibBuilder.loadTexts:
+    aipLLDPConfigManAddrEntryGroup.setStatus("current")
 
 
 # Notification objects
@@ -1169,7 +1261,9 @@ alcatelIND1InterswitchProtocolMIBCompliance = ModuleCompliance(
 alcatelIND1InterswitchProtocolMIBCompliance.setObjects(
       *(("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipGMAPConfGroup"),
         ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipAMAPConfGroup"),
-        ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipNotificationGroup"))
+        ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipNotificationGroup"),
+        ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipLLDPConfGroup"),
+        ("ALCATEL-IND1-INTERSWITCH-PROTOCOL-MIB", "aipLLDPConfigManAddrEntryGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1InterswitchProtocolMIBCompliance.setStatus(
@@ -1227,16 +1321,20 @@ mibBuilder.exportSymbols(
        "aipAMAPHostMac": aipAMAPHostMac,
        "aipAMAPIpAddr": aipAMAPIpAddr,
        "aipAMAPVoiceVlan": aipAMAPVoiceVlan,
+       "aipAMAPportstatus": aipAMAPportstatus,
        "aipLLDPConfig": aipLLDPConfig,
        "aipLLDPConfigManAddrTable": aipLLDPConfigManAddrTable,
        "aipLLDPConfigManAddrEntry": aipLLDPConfigManAddrEntry,
        "aipLLDPConfigManAddrPortNum": aipLLDPConfigManAddrPortNum,
        "aipLLDPConfigManAddrTlvTxEnable": aipLLDPConfigManAddrTlvTxEnable,
+       "aipLLDPDestMac": aipLLDPDestMac,
        "alcatelIND1InterswitchProtocolMIBConformance": alcatelIND1InterswitchProtocolMIBConformance,
        "alcatelIND1InterswitchProtocolMIBGroups": alcatelIND1InterswitchProtocolMIBGroups,
        "aipGMAPConfGroup": aipGMAPConfGroup,
        "aipAMAPConfGroup": aipAMAPConfGroup,
        "aipNotificationGroup": aipNotificationGroup,
+       "aipLLDPConfGroup": aipLLDPConfGroup,
+       "aipLLDPConfigManAddrEntryGroup": aipLLDPConfigManAddrEntryGroup,
        "alcatelIND1InterswitchProtocolMIBCompliances": alcatelIND1InterswitchProtocolMIBCompliances,
        "alcatelIND1InterswitchProtocolMIBCompliance": alcatelIND1InterswitchProtocolMIBCompliance,
        "aipAMAPStatusTrap": aipAMAPStatusTrap,

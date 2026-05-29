@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-VLAN-STACKING-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:26 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-VLAN-STACKING-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,6 +110,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1VLANStackingMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1VLANStackingMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -185,7 +186,7 @@ alaVstkPortType = _AlaVstkPortType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 2),
     _AlaVstkPortType_Type()
 )
-alaVstkPortType.setMaxAccess("read-write")
+alaVstkPortType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortType.setStatus("current")
 
@@ -201,7 +202,7 @@ alaVstkPortVendorTpid = _AlaVstkPortVendorTpid_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 3),
     _AlaVstkPortVendorTpid_Type()
 )
-alaVstkPortVendorTpid.setMaxAccess("read-write")
+alaVstkPortVendorTpid.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortVendorTpid.setStatus("current")
 
@@ -229,7 +230,7 @@ alaVstkPortBpduTreatment = _AlaVstkPortBpduTreatment_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 4),
     _AlaVstkPortBpduTreatment_Type()
 )
-alaVstkPortBpduTreatment.setMaxAccess("read-write")
+alaVstkPortBpduTreatment.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortBpduTreatment.setStatus("current")
 
@@ -259,7 +260,7 @@ alaVstkPortAcceptFrameType = _AlaVstkPortAcceptFrameType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 5),
     _AlaVstkPortAcceptFrameType_Type()
 )
-alaVstkPortAcceptFrameType.setMaxAccess("read-write")
+alaVstkPortAcceptFrameType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortAcceptFrameType.setStatus("current")
 
@@ -287,7 +288,7 @@ alaVstkPortLookupMiss = _AlaVstkPortLookupMiss_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 6),
     _AlaVstkPortLookupMiss_Type()
 )
-alaVstkPortLookupMiss.setMaxAccess("read-write")
+alaVstkPortLookupMiss.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortLookupMiss.setStatus("current")
 
@@ -306,7 +307,7 @@ alaVstkPortDefaultSvlan = _AlaVstkPortDefaultSvlan_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 7),
     _AlaVstkPortDefaultSvlan_Type()
 )
-alaVstkPortDefaultSvlan.setMaxAccess("read-write")
+alaVstkPortDefaultSvlan.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortDefaultSvlan.setStatus("current")
 _AlaVstkPortRowStatus_Type = RowStatus
@@ -315,7 +316,7 @@ alaVstkPortRowStatus = _AlaVstkPortRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 8),
     _AlaVstkPortRowStatus_Type()
 )
-alaVstkPortRowStatus.setMaxAccess("read-write")
+alaVstkPortRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortRowStatus.setStatus("current")
 
@@ -343,7 +344,7 @@ alaVstkPortLegacyStpBpdu = _AlaVstkPortLegacyStpBpdu_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 1, 1, 1, 9),
     _AlaVstkPortLegacyStpBpdu_Type()
 )
-alaVstkPortLegacyStpBpdu.setMaxAccess("read-write")
+alaVstkPortLegacyStpBpdu.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkPortLegacyStpBpdu.setStatus("current")
 _AlaVlanStackingSvlanPort_ObjectIdentity = ObjectIdentity
@@ -437,7 +438,7 @@ alaVstkSvlanPortMode = _AlaVstkSvlanPortMode_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 2, 1, 1, 4),
     _AlaVstkSvlanPortMode_Type()
 )
-alaVstkSvlanPortMode.setMaxAccess("read-write")
+alaVstkSvlanPortMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkSvlanPortMode.setStatus("current")
 _AlaVstkSvlanPortRowStatus_Type = RowStatus
@@ -446,7 +447,7 @@ alaVstkSvlanPortRowStatus = _AlaVstkSvlanPortRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 37, 1, 1, 2, 1, 1, 5),
     _AlaVstkSvlanPortRowStatus_Type()
 )
-alaVstkSvlanPortRowStatus.setMaxAccess("read-write")
+alaVstkSvlanPortRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaVstkSvlanPortRowStatus.setStatus("current")
 _AlcatelIND1VLANStackingMIBConformance_ObjectIdentity = ObjectIdentity
@@ -481,7 +482,8 @@ vlanStackingPortGroup.setObjects(
         ("ALCATEL-IND1-VLAN-STACKING-MIB", "alaVstkPortAcceptFrameType"),
         ("ALCATEL-IND1-VLAN-STACKING-MIB", "alaVstkPortLookupMiss"),
         ("ALCATEL-IND1-VLAN-STACKING-MIB", "alaVstkPortDefaultSvlan"),
-        ("ALCATEL-IND1-VLAN-STACKING-MIB", "alaVstkPortRowStatus"))
+        ("ALCATEL-IND1-VLAN-STACKING-MIB", "alaVstkPortRowStatus"),
+        ("ALCATEL-IND1-VLAN-STACKING-MIB", "alaVstkPortLegacyStpBpdu"))
 )
 if mibBuilder.loadTexts:
     vlanStackingPortGroup.setStatus("current")

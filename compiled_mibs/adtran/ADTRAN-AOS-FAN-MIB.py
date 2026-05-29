@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\adtran\ADTRAN-AOS-FAN-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:18 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,8 @@ adGenAOSFanMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     adGenAOSFanMib.setRevisions(
-        ("2013-10-22 00:00",)
+        ("2017-12-27 00:00",
+         "2013-10-22 00:00")
     )
 
 
@@ -228,6 +226,17 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+adGenAOSFanFailureResume = NotificationType(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 8, 0, 2)
+)
+adGenAOSFanFailureResume.setObjects(
+    ("ADTRAN-AOS-FAN-MIB", "adGenAOSFanNumber")
+)
+if mibBuilder.loadTexts:
+    adGenAOSFanFailureResume.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -235,7 +244,8 @@ adGenAOSFanNotificationGroup = NotificationGroup(
     (1, 3, 6, 1, 4, 1, 664, 5, 53, 99, 17, 1, 3)
 )
 adGenAOSFanNotificationGroup.setObjects(
-    ("ADTRAN-AOS-FAN-MIB", "adGenAOSFanFailure")
+      *(("ADTRAN-AOS-FAN-MIB", "adGenAOSFanFailure"),
+        ("ADTRAN-AOS-FAN-MIB", "adGenAOSFanFailureResume"))
 )
 if mibBuilder.loadTexts:
     adGenAOSFanNotificationGroup.setStatus(
@@ -269,6 +279,7 @@ mibBuilder.exportSymbols(
     **{"adGenAOSFan": adGenAOSFan,
        "adGenAOSFanTrap": adGenAOSFanTrap,
        "adGenAOSFanFailure": adGenAOSFanFailure,
+       "adGenAOSFanFailureResume": adGenAOSFanFailureResume,
        "adGenAOSFanTrapControl": adGenAOSFanTrapControl,
        "adGenAOSFanTrapEnable": adGenAOSFanTrapEnable,
        "adGenAOSFanInfo": adGenAOSFanInfo,

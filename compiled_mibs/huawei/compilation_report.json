@@ -1,13 +1,17 @@
 {
-  "timestamp": "2025-10-02T12:00:02.782582",
+  "timestamp": "2026-05-29T09:35:15.303033",
   "stats": {
-    "total": 232,
+    "total": 240,
     "compiled": 10,
-    "failed": 221,
+    "failed": 229,
     "skipped": 1,
     "errors": [
       {
         "mib": "HUAWEI-AAA-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "HUAWEI-ACL-MIB",
         "error": "failed"
       },
       {
@@ -147,6 +151,10 @@
         "error": "failed"
       },
       {
+        "mib": "HUAWEI-CBQOS-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "HUAWEI-CCC-MIB",
         "error": "failed"
       },
@@ -191,6 +199,10 @@
         "error": "failed"
       },
       {
+        "mib": "HUAWEI-DHCP-SNOOPING-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "HUAWEI-DHCPR-MIB",
         "error": "failed"
       },
@@ -208,6 +220,10 @@
       },
       {
         "mib": "HUAWEI-DLDP-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "HUAWEI-E-TRUNK-MIB",
         "error": "failed"
       },
       {
@@ -487,6 +503,10 @@
         "error": "failed"
       },
       {
+        "mib": "HUAWEI-MPLS-EXTEND-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "HUAWEI-MPLSLDP-MIB",
         "error": "failed"
       },
@@ -719,6 +739,10 @@
         "error": "failed"
       },
       {
+        "mib": "HUAWEI-SYS-MAN-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "HUAWEI-SYSLOG-MIB",
         "error": "failed"
       },
@@ -756,6 +780,10 @@
       },
       {
         "mib": "HUAWEI-TUNNEL-TE-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "HUAWEI-UNIMNG-MIB",
         "error": "failed"
       },
       {
@@ -875,6 +903,10 @@
         "error": "failed"
       },
       {
+        "mib": "HUAWEI-XQoS-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "HWMUSA-DEV-MIB",
         "error": "failed"
       },
@@ -892,5 +924,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

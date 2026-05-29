@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-MLD-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:47 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-MLD-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,9 +120,10 @@ alcatelIND1MldMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1MldMIB.setRevisions(
-        ("2008-09-10 00:00",
+        ("2009-08-06 00:00",
          "2008-08-08 00:00",
-         "2007-04-03 00:00")
+         "2007-04-03 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -542,6 +540,66 @@ alaMldFloodUnknown = _AlaMldFloodUnknown_Object(
 alaMldFloodUnknown.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaMldFloodUnknown.setStatus("current")
+
+
+class _AlaMldBufferPacket_Type(Integer32):
+    """Custom type alaMldBufferPacket based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaMldBufferPacket_Type.__name__ = "Integer32"
+_AlaMldBufferPacket_Object = MibScalar
+alaMldBufferPacket = _AlaMldBufferPacket_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 35, 1, 1, 1, 18),
+    _AlaMldBufferPacket_Type()
+)
+alaMldBufferPacket.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaMldBufferPacket.setStatus("current")
+
+
+class _AlaMldStarg_Type(Integer32):
+    """Custom type alaMldStarg based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaMldStarg_Type.__name__ = "Integer32"
+_AlaMldStarg_Object = MibScalar
+alaMldStarg = _AlaMldStarg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 35, 1, 1, 1, 19),
+    _AlaMldStarg_Type()
+)
+alaMldStarg.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaMldStarg.setStatus("current")
 _AlaMldVlan_ObjectIdentity = ObjectIdentity
 alaMldVlan = _AlaMldVlan_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 35, 1, 1, 2)
@@ -896,6 +954,34 @@ alaMldVlanSpoofAddress = _AlaMldVlanSpoofAddress_Object(
 alaMldVlanSpoofAddress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaMldVlanSpoofAddress.setStatus("obsolete")
+
+
+class _AlaMldVlanStarg_Type(Integer32):
+    """Custom type alaMldVlanStarg based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaMldVlanStarg_Type.__name__ = "Integer32"
+_AlaMldVlanStarg_Object = MibTableColumn
+alaMldVlanStarg = _AlaMldVlanStarg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 35, 1, 1, 2, 1, 1, 20),
+    _AlaMldVlanStarg_Type()
+)
+alaMldVlanStarg.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaMldVlanStarg.setStatus("current")
 _AlaMldMember_ObjectIdentity = ObjectIdentity
 alaMldMember = _AlaMldMember_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 35, 1, 1, 3)
@@ -1856,7 +1942,9 @@ alaMldGroup.setObjects(
         ("ALCATEL-IND1-MLD-MIB", "alaMldQuerierForwarding"),
         ("ALCATEL-IND1-MLD-MIB", "alaMldMaxGroupLimit"),
         ("ALCATEL-IND1-MLD-MIB", "alaMldMaxGroupExceedAction"),
-        ("ALCATEL-IND1-MLD-MIB", "alaMldFloodUnknown"))
+        ("ALCATEL-IND1-MLD-MIB", "alaMldFloodUnknown"),
+        ("ALCATEL-IND1-MLD-MIB", "alaMldBufferPacket"),
+        ("ALCATEL-IND1-MLD-MIB", "alaMldStarg"))
 )
 if mibBuilder.loadTexts:
     alaMldGroup.setStatus("current")
@@ -1882,7 +1970,8 @@ alaMldVlanGroup.setObjects(
         ("ALCATEL-IND1-MLD-MIB", "alaMldVlanMaxGroupLimit"),
         ("ALCATEL-IND1-MLD-MIB", "alaMldVlanMaxGroupExceedAction"),
         ("ALCATEL-IND1-MLD-MIB", "alaMldVlanSpoofAddressType"),
-        ("ALCATEL-IND1-MLD-MIB", "alaMldVlanSpoofAddress"))
+        ("ALCATEL-IND1-MLD-MIB", "alaMldVlanSpoofAddress"),
+        ("ALCATEL-IND1-MLD-MIB", "alaMldVlanStarg"))
 )
 if mibBuilder.loadTexts:
     alaMldVlanGroup.setStatus("current")
@@ -2058,6 +2147,8 @@ mibBuilder.exportSymbols(
        "alaMldMaxGroupLimit": alaMldMaxGroupLimit,
        "alaMldMaxGroupExceedAction": alaMldMaxGroupExceedAction,
        "alaMldFloodUnknown": alaMldFloodUnknown,
+       "alaMldBufferPacket": alaMldBufferPacket,
+       "alaMldStarg": alaMldStarg,
        "alaMldVlan": alaMldVlan,
        "alaMldVlanTable": alaMldVlanTable,
        "alaMldVlanEntry": alaMldVlanEntry,
@@ -2080,6 +2171,7 @@ mibBuilder.exportSymbols(
        "alaMldVlanMaxGroupExceedAction": alaMldVlanMaxGroupExceedAction,
        "alaMldVlanSpoofAddressType": alaMldVlanSpoofAddressType,
        "alaMldVlanSpoofAddress": alaMldVlanSpoofAddress,
+       "alaMldVlanStarg": alaMldVlanStarg,
        "alaMldMember": alaMldMember,
        "alaMldMemberTable": alaMldMemberTable,
        "alaMldMemberEntry": alaMldMemberEntry,

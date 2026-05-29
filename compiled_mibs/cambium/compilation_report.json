@@ -1,20 +1,16 @@
 {
-  "timestamp": "2025-10-02T11:23:42.127505",
+  "timestamp": "2026-05-29T09:20:57.660121",
   "stats": {
-    "total": 21,
-    "compiled": 15,
-    "failed": 2,
-    "skipped": 4,
+    "total": 22,
+    "compiled": 16,
+    "failed": 1,
+    "skipped": 5,
     "errors": [
-      {
-        "mib": "CAMBIUM-PTP800-MIB",
-        "error": "failed"
-      },
       {
         "mib": "CAMBIUM-PTP800-MIB",
         "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

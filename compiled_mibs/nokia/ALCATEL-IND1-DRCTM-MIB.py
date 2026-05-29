@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-DRCTM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:15 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-DRCTM-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,7 @@ alcatelIND1DrcTmMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1DrcTmMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -4743,7 +4740,14 @@ alaDrcTmDebugMIBGroup.setObjects(
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugEvents"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugMip"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugMisc"),
-        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugAll"))
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugAll"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugLevel"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugUnused1"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugUnused2"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugUnused3"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugUnused4"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugUnusedA"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmDebugUnusedB"))
 )
 if mibBuilder.loadTexts:
     alaDrcTmDebugMIBGroup.setStatus("current")
@@ -4795,7 +4799,9 @@ alaDrcTmOspfDebugMIBGroup.setObjects(
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugSetup"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugTime"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugTm"),
-        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugAll"))
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugAll"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugHelper"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspfDebugRestart"))
 )
 if mibBuilder.loadTexts:
     alaDrcTmOspfDebugMIBGroup.setStatus("current")
@@ -4983,7 +4989,15 @@ alaDrcTmLogDestinationMIBGroup = ObjectGroup(
 alaDrcTmLogDestinationMIBGroup.setObjects(
       *(("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogToSysFacility"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogToSessionId"),
-        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogBufferSize"))
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogBufferSize"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogBufferDumpfile"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogClearBuffer"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogCriticalBufferDumpfile"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogShowDate"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogShowFunction"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogShowLine"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogShowTask"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogShowTime"))
 )
 if mibBuilder.loadTexts:
     alaDrcTmLogDestinationMIBGroup.setStatus("current")
@@ -5039,7 +5053,7 @@ alaDrcTmCompliance.setObjects(
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmIprmDebugMIBGroup"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmIpmrmDebugMIBGroup"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmOspf3DebugMIBGroup"),
-        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogDestination"),
+        ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmLogDestinationMIBGroup"),
         ("ALCATEL-IND1-DRCTM-MIB", "alaDrcTmIsisDebugMIBGroup"))
 )
 if mibBuilder.loadTexts:

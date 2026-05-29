@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-ERP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:19 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-ERP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -49,9 +46,11 @@ if 'mibBuilder' not in globals():
     "ALCATEL-IND1-BASE",
     "softentIND1Erp")
 
-(InterfaceIndex,) = mibBuilder.importSymbols(
+(InterfaceIndex,
+ InterfaceIndexOrZero) = mibBuilder.importSymbols(
     "IF-MIB",
-    "InterfaceIndex")
+    "InterfaceIndex",
+    "InterfaceIndexOrZero")
 
 (VlanId,) = mibBuilder.importSymbols(
     "Q-BRIDGE-MIB",
@@ -123,7 +122,8 @@ alcatelIND1ERPMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1ERPMIB.setRevisions(
-        ("2008-07-10 00:00",)
+        ("2008-07-10 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -291,7 +291,7 @@ alaErpRingPort1 = _AlaErpRingPort1_Object(
 alaErpRingPort1.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaErpRingPort1.setStatus("current")
-_AlaErpRingPort2_Type = InterfaceIndex
+_AlaErpRingPort2_Type = InterfaceIndexOrZero
 _AlaErpRingPort2_Object = MibTableColumn
 alaErpRingPort2 = _AlaErpRingPort2_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 1, 1, 5),
@@ -336,12 +336,20 @@ class _AlaErpRingState_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(0,
-              1)
+              1,
+              2,
+              3,
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("idle", 0),
-          ("protection", 1))
+          ("protection", 1),
+          ("init", 2),
+          ("manualSwitch", 3),
+          ("forcedSwitch", 4),
+          ("pending", 5))
     )
 
 
@@ -453,6 +461,137 @@ alaErpRingRowStatus = _AlaErpRingRowStatus_Object(
 alaErpRingRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaErpRingRowStatus.setStatus("current")
+
+
+class _AlaErpRingVirtualChannel_Type(Integer32):
+    """Custom type alaErpRingVirtualChannel based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaErpRingVirtualChannel_Type.__name__ = "Integer32"
+_AlaErpRingVirtualChannel_Object = MibTableColumn
+alaErpRingVirtualChannel = _AlaErpRingVirtualChannel_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 1, 1, 14),
+    _AlaErpRingVirtualChannel_Type()
+)
+alaErpRingVirtualChannel.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaErpRingVirtualChannel.setStatus("current")
+
+
+class _AlaErpRingRevertive_Type(Integer32):
+    """Custom type alaErpRingRevertive based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaErpRingRevertive_Type.__name__ = "Integer32"
+_AlaErpRingRevertive_Object = MibTableColumn
+alaErpRingRevertive = _AlaErpRingRevertive_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 1, 1, 15),
+    _AlaErpRingRevertive_Type()
+)
+alaErpRingRevertive.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaErpRingRevertive.setStatus("current")
+
+
+class _AlaErpRingClearAction_Type(Integer32):
+    """Custom type alaErpRingClearAction based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaErpRingClearAction_Type.__name__ = "Integer32"
+_AlaErpRingClearAction_Object = MibTableColumn
+alaErpRingClearAction = _AlaErpRingClearAction_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 1, 1, 16),
+    _AlaErpRingClearAction_Type()
+)
+alaErpRingClearAction.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaErpRingClearAction.setStatus("current")
+
+
+class _AlaErpRingActiveVersion_Type(Unsigned32):
+    """Custom type alaErpRingActiveVersion based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2),
+    )
+
+
+_AlaErpRingActiveVersion_Type.__name__ = "Unsigned32"
+_AlaErpRingActiveVersion_Object = MibTableColumn
+alaErpRingActiveVersion = _AlaErpRingActiveVersion_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 1, 1, 17),
+    _AlaErpRingActiveVersion_Type()
+)
+alaErpRingActiveVersion.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaErpRingActiveVersion.setStatus("current")
+
+
+class _AlaErpRingResetVersionFallback_Type(Integer32):
+    """Custom type alaErpRingResetVersionFallback based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reset", 1))
+    )
+
+
+_AlaErpRingResetVersionFallback_Type.__name__ = "Integer32"
+_AlaErpRingResetVersionFallback_Object = MibTableColumn
+alaErpRingResetVersionFallback = _AlaErpRingResetVersionFallback_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 1, 1, 18),
+    _AlaErpRingResetVersionFallback_Type()
+)
+alaErpRingResetVersionFallback.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaErpRingResetVersionFallback.setStatus("current")
 _AlaErpRingPortTable_Object = MibTable
 alaErpRingPortTable = _AlaErpRingPortTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 2)
@@ -594,7 +733,7 @@ alaErpRingVlanRowStatus = _AlaErpRingVlanRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 1, 2, 3, 1, 2),
     _AlaErpRingVlanRowStatus_Type()
 )
-alaErpRingVlanRowStatus.setMaxAccess("read-create")
+alaErpRingVlanRowStatus.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     alaErpRingVlanRowStatus.setStatus("current")
 _AlaErpStatsTable_Object = MibTable
@@ -740,7 +879,8 @@ alaErpRingAttributesGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 46, 1, 3, 2, 2)
 )
 alaErpRingAttributesGroup.setObjects(
-      *(("ALCATEL-IND1-ERP-MIB", "alaErpRingServiceVid"),
+      *(("ALCATEL-IND1-ERP-MIB", "alaErpRingId"),
+        ("ALCATEL-IND1-ERP-MIB", "alaErpRingServiceVid"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingMEGLevel"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPort1"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPort2"),
@@ -752,12 +892,14 @@ alaErpRingAttributesGroup.setObjects(
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingLastStateChange"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingTimeToRevert"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingRowStatus"),
+        ("ALCATEL-IND1-ERP-MIB", "alaErpRingVirtualChannel"),
+        ("ALCATEL-IND1-ERP-MIB", "alaErpRingRevertive"),
+        ("ALCATEL-IND1-ERP-MIB", "alaErpRingClearAction"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPortStatus"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPortType"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPortEthOAMEvent"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPortClearStats"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpRingPortRmepId"),
-        ("ALCATEL-IND1-ERP-MIB", "alaErpRingVlanRowStatus"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpStatsSignalFailPduTx"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpStatsSignalFailPduRx"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpStatsSignalFailPduDrop"),
@@ -767,7 +909,9 @@ alaErpRingAttributesGroup.setObjects(
         ("ALCATEL-IND1-ERP-MIB", "alaErpStatsRPLBlockPDUTx"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpStatsRPLBlockPDURx"),
         ("ALCATEL-IND1-ERP-MIB", "alaErpStatsRPLBlockPDUDrop"),
-        ("ALCATEL-IND1-ERP-MIB", "alaErpStatsPDUErr"))
+        ("ALCATEL-IND1-ERP-MIB", "alaErpStatsPDUErr"),
+        ("ALCATEL-IND1-ERP-MIB", "alaErpRingActiveVersion"),
+        ("ALCATEL-IND1-ERP-MIB", "alaErpRingResetVersionFallback"))
 )
 if mibBuilder.loadTexts:
     alaErpRingAttributesGroup.setStatus("current")
@@ -887,6 +1031,11 @@ mibBuilder.exportSymbols(
        "alaErpRingLastStateChange": alaErpRingLastStateChange,
        "alaErpRingTimeToRevert": alaErpRingTimeToRevert,
        "alaErpRingRowStatus": alaErpRingRowStatus,
+       "alaErpRingVirtualChannel": alaErpRingVirtualChannel,
+       "alaErpRingRevertive": alaErpRingRevertive,
+       "alaErpRingClearAction": alaErpRingClearAction,
+       "alaErpRingActiveVersion": alaErpRingActiveVersion,
+       "alaErpRingResetVersionFallback": alaErpRingResetVersionFallback,
        "alaErpRingPortTable": alaErpRingPortTable,
        "alaErpRingPortEntry": alaErpRingPortEntry,
        "alaErpRingPortIfIndex": alaErpRingPortIfIndex,

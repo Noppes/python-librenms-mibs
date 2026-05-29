@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-MPLS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:22 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -168,6 +165,7 @@ if 'mibBuilder' not in globals():
  TmnxMplsLabel,
  TmnxMplsLabelOrZero,
  TmnxMplsLspBandwidth,
+ TmnxMplsLspBandwidthOrNone,
  TmnxMplsTpGlobalID,
  TmnxMplsTpNodeID,
  TmnxNhgDownReason,
@@ -189,6 +187,7 @@ if 'mibBuilder' not in globals():
     "TmnxMplsLabel",
     "TmnxMplsLabelOrZero",
     "TmnxMplsLspBandwidth",
+    "TmnxMplsLspBandwidthOrNone",
     "TmnxMplsTpGlobalID",
     "TmnxMplsTpNodeID",
     "TmnxNhgDownReason",
@@ -306,7 +305,24 @@ class TmnxMplsLspFailCode(TextualConvention, Integer32):
               61,
               62,
               63,
-              64)
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82)
         )
     )
     namedValues = NamedValues(
@@ -374,7 +390,24 @@ class TmnxMplsLspFailCode(TextualConvention, Integer32):
           ("mplsV6Down", 61),
           ("lspAdminDown", 62),
           ("pathAdminDown", 63),
-          ("templateAdminDown", 64))
+          ("templateAdminDown", 64),
+          ("pceAssocConflict", 65),
+          ("pathRetried", 66),
+          ("clearCommand", 67),
+          ("nonActiveSecondary", 68),
+          ("autoBandwidthAdjustment", 69),
+          ("pathDegraded", 71),
+          ("lspSelfPingTimeout", 72),
+          ("rsvpError", 73),
+          ("p2mpInstanceAdminDown", 74),
+          ("bfdDown", 75),
+          ("rsvpNeighborDown", 76),
+          ("resvTimeout", 77),
+          ("resvTear", 78),
+          ("frrPathDown", 79),
+          ("lspInitRetryTimeout", 80),
+          ("iomProgrammingFailure", 81),
+          ("delayMetricLimitExceeded", 82))
     )
 
 
@@ -512,7 +545,8 @@ class TmnxMplsLspAutoBWLastAdjCause(TextualConvention, Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -522,7 +556,8 @@ class TmnxMplsLspAutoBWLastAdjCause(TextualConvention, Integer32):
           ("overflow", 3),
           ("vllCAC", 4),
           ("underflow", 5),
-          ("activePathChange", 6))
+          ("activePathChange", 6),
+          ("lspContainerOptimization", 7))
     )
 
 
@@ -559,6 +594,36 @@ class TmnxMplsLspAddrType(TextualConvention, Integer32):
           ("ipv4", 1),
           ("nodeId", 2),
           ("ipv6", 3))
+    )
+
+
+
+class TmnxMplsResourceOwner(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9)
+        )
+    )
+    namedValues = NamedValues(
+        *(("rsvp", 1),
+          ("ldp", 2),
+          ("bgp", 3),
+          ("mplsTp", 4),
+          ("staticSvc", 5),
+          ("srMpls", 6),
+          ("bier", 7),
+          ("treeSid", 8),
+          ("reservedBlock", 9))
     )
 
 
@@ -698,7 +763,8 @@ class _VRtrMplsLspType_Type(Integer32):
               11,
               12,
               13,
-              15)
+              15,
+              16)
         )
     )
     namedValues = NamedValues(
@@ -715,7 +781,8 @@ class _VRtrMplsLspType_Type(Integer32):
           ("meshP2pSrTe", 11),
           ("oneHopP2pSrTe", 12),
           ("pceInitP2pSrTe", 13),
-          ("onDemandP2pSrTe", 15))
+          ("onDemandP2pSrTe", 15),
+          ("memberP2p", 16))
     )
 
 
@@ -1537,14 +1604,7 @@ vRtrMplsLspSwitchStbyPath = _VRtrMplsLspSwitchStbyPath_Object(
 vRtrMplsLspSwitchStbyPath.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspSwitchStbyPath.setStatus("current")
-
-
-class _VRtrMplsLspSwitchStbyPathIndex_Type(MplsTunnelIndex):
-    """Custom type vRtrMplsLspSwitchStbyPathIndex based on MplsTunnelIndex"""
-    defaultValue = 0
-
-
-_VRtrMplsLspSwitchStbyPathIndex_Type.__name__ = "MplsTunnelIndex"
+_VRtrMplsLspSwitchStbyPathIndex_Type = MplsTunnelIndex
 _VRtrMplsLspSwitchStbyPathIndex_Object = MibTableColumn
 vRtrMplsLspSwitchStbyPathIndex = _VRtrMplsLspSwitchStbyPathIndex_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 1, 1, 56),
@@ -1939,6 +1999,22 @@ vRtrMplsLspNgToAddr = _VRtrMplsLspNgToAddr_Object(
 vRtrMplsLspNgToAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspNgToAddr.setStatus("current")
+
+
+class _VRtrMplsLspIgpScSrOverSrTe_Type(TruthValue):
+    """Custom type vRtrMplsLspIgpScSrOverSrTe based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsLspIgpScSrOverSrTe_Type.__name__ = "TruthValue"
+_VRtrMplsLspIgpScSrOverSrTe_Object = MibTableColumn
+vRtrMplsLspIgpScSrOverSrTe = _VRtrMplsLspIgpScSrOverSrTe_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 1, 1, 79),
+    _VRtrMplsLspIgpScSrOverSrTe_Type()
+)
+vRtrMplsLspIgpScSrOverSrTe.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspIgpScSrOverSrTe.setStatus("current")
 _VRtrMplsLspStatTable_Object = MibTable
 vRtrMplsLspStatTable = _VRtrMplsLspStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 2)
@@ -2119,7 +2195,7 @@ vRtrMplsLspPathTableSpinlock = _VRtrMplsLspPathTableSpinlock_Object(
 )
 vRtrMplsLspPathTableSpinlock.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    vRtrMplsLspPathTableSpinlock.setStatus("current")
+    vRtrMplsLspPathTableSpinlock.setStatus("obsolete")
 _VRtrMplsLspPathTable_Object = MibTable
 vRtrMplsLspPathTable = _VRtrMplsLspPathTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 4)
@@ -3042,14 +3118,7 @@ vRtrMplsLspPathOperCT = _VRtrMplsLspPathOperCT_Object(
 vRtrMplsLspPathOperCT.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrMplsLspPathOperCT.setStatus("current")
-
-
-class _VRtrMplsLspPathNewPathIndex_Type(MplsTunnelIndex):
-    """Custom type vRtrMplsLspPathNewPathIndex based on MplsTunnelIndex"""
-    defaultValue = 0
-
-
-_VRtrMplsLspPathNewPathIndex_Type.__name__ = "MplsTunnelIndex"
+_VRtrMplsLspPathNewPathIndex_Type = MplsTunnelIndex
 _VRtrMplsLspPathNewPathIndex_Object = MibTableColumn
 vRtrMplsLspPathNewPathIndex = _VRtrMplsLspPathNewPathIndex_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 4, 1, 59),
@@ -3268,7 +3337,7 @@ class _VRtrMplsLspPathBfdUpWaitTmLeft_Type(Unsigned32):
     """Custom type vRtrMplsLspPathBfdUpWaitTmLeft based on Unsigned32"""
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 60),
+        ValueRangeConstraint(0, 60),
     )
 
 
@@ -3340,7 +3409,7 @@ class _VRtrMplsLspPathBfdOperUpWaitTmr_Type(Unsigned32):
     """Custom type vRtrMplsLspPathBfdOperUpWaitTmr based on Unsigned32"""
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 60),
+        ValueRangeConstraint(0, 60),
     )
 
 
@@ -3410,7 +3479,7 @@ class _VRtrMplsLspPathReturnPathLabel_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(32, 1048512),
+        ValueRangeConstraint(32, 1048575),
         ValueRangeConstraint(4294967295, 4294967295),
     )
 
@@ -3424,6 +3493,88 @@ vRtrMplsLspPathReturnPathLabel = _VRtrMplsLspPathReturnPathLabel_Object(
 vRtrMplsLspPathReturnPathLabel.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspPathReturnPathLabel.setStatus("current")
+
+
+class _VRtrMplsLspPathBfdSrcAddrType_Type(InetAddressType):
+    """Custom type vRtrMplsLspPathBfdSrcAddrType based on InetAddressType"""
+    defaultValue = 0
+
+
+_VRtrMplsLspPathBfdSrcAddrType_Type.__name__ = "InetAddressType"
+_VRtrMplsLspPathBfdSrcAddrType_Object = MibTableColumn
+vRtrMplsLspPathBfdSrcAddrType = _VRtrMplsLspPathBfdSrcAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 4, 1, 83),
+    _VRtrMplsLspPathBfdSrcAddrType_Type()
+)
+vRtrMplsLspPathBfdSrcAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathBfdSrcAddrType.setStatus("current")
+
+
+class _VRtrMplsLspPathBfdSrcAddr_Type(InetAddress):
+    """Custom type vRtrMplsLspPathBfdSrcAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_VRtrMplsLspPathBfdSrcAddr_Type.__name__ = "InetAddress"
+_VRtrMplsLspPathBfdSrcAddr_Object = MibTableColumn
+vRtrMplsLspPathBfdSrcAddr = _VRtrMplsLspPathBfdSrcAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 4, 1, 84),
+    _VRtrMplsLspPathBfdSrcAddr_Type()
+)
+vRtrMplsLspPathBfdSrcAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathBfdSrcAddr.setStatus("current")
+
+
+class _VRtrMplsLspPathDelayMetricLimit_Type(Unsigned32):
+    """Custom type vRtrMplsLspPathDelayMetricLimit based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 16777215),
+    )
+
+
+_VRtrMplsLspPathDelayMetricLimit_Type.__name__ = "Unsigned32"
+_VRtrMplsLspPathDelayMetricLimit_Object = MibTableColumn
+vRtrMplsLspPathDelayMetricLimit = _VRtrMplsLspPathDelayMetricLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 4, 1, 85),
+    _VRtrMplsLspPathDelayMetricLimit_Type()
+)
+vRtrMplsLspPathDelayMetricLimit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathDelayMetricLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathDelayMetricLimit.setUnits("microseconds")
+
+
+class _VRtrMplsLspPathLspIdentifier_Type(Unsigned32):
+    """Custom type vRtrMplsLspPathLspIdentifier based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_VRtrMplsLspPathLspIdentifier_Type.__name__ = "Unsigned32"
+_VRtrMplsLspPathLspIdentifier_Object = MibTableColumn
+vRtrMplsLspPathLspIdentifier = _VRtrMplsLspPathLspIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 4, 1, 86),
+    _VRtrMplsLspPathLspIdentifier_Type()
+)
+vRtrMplsLspPathLspIdentifier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathLspIdentifier.setStatus("current")
 _VRtrMplsLspPathStatTable_Object = MibTable
 vRtrMplsLspPathStatTable = _VRtrMplsLspPathStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 5)
@@ -4690,6 +4841,118 @@ vRtrMplsGenSrTePceOperState = _VRtrMplsGenSrTePceOperState_Object(
 vRtrMplsGenSrTePceOperState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrMplsGenSrTePceOperState.setStatus("current")
+
+
+class _VRtrMplsGenStrictEroNhopDirRes_Type(TruthValue):
+    """Custom type vRtrMplsGenStrictEroNhopDirRes based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsGenStrictEroNhopDirRes_Type.__name__ = "TruthValue"
+_VRtrMplsGenStrictEroNhopDirRes_Object = MibTableColumn
+vRtrMplsGenStrictEroNhopDirRes = _VRtrMplsGenStrictEroNhopDirRes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 67),
+    _VRtrMplsGenStrictEroNhopDirRes_Type()
+)
+vRtrMplsGenStrictEroNhopDirRes.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenStrictEroNhopDirRes.setStatus("current")
+
+
+class _VRtrMplsGenRsvpResigOnIgpEvt_Type(TruthValue):
+    """Custom type vRtrMplsGenRsvpResigOnIgpEvt based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsGenRsvpResigOnIgpEvt_Type.__name__ = "TruthValue"
+_VRtrMplsGenRsvpResigOnIgpEvt_Object = MibTableColumn
+vRtrMplsGenRsvpResigOnIgpEvt = _VRtrMplsGenRsvpResigOnIgpEvt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 68),
+    _VRtrMplsGenRsvpResigOnIgpEvt_Type()
+)
+vRtrMplsGenRsvpResigOnIgpEvt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenRsvpResigOnIgpEvt.setStatus("current")
+
+
+class _VRtrMplsGenSrTeResigOnIgpOvl_Type(TruthValue):
+    """Custom type vRtrMplsGenSrTeResigOnIgpOvl based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsGenSrTeResigOnIgpOvl_Type.__name__ = "TruthValue"
+_VRtrMplsGenSrTeResigOnIgpOvl_Object = MibTableColumn
+vRtrMplsGenSrTeResigOnIgpOvl = _VRtrMplsGenSrTeResigOnIgpOvl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 69),
+    _VRtrMplsGenSrTeResigOnIgpOvl_Type()
+)
+vRtrMplsGenSrTeResigOnIgpOvl.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenSrTeResigOnIgpOvl.setStatus("current")
+
+
+class _VRtrMplsGenLspBsidBlkName_Type(TLNamedItemOrEmpty):
+    """Custom type vRtrMplsGenLspBsidBlkName based on TLNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_VRtrMplsGenLspBsidBlkName_Type.__name__ = "TLNamedItemOrEmpty"
+_VRtrMplsGenLspBsidBlkName_Object = MibTableColumn
+vRtrMplsGenLspBsidBlkName = _VRtrMplsGenLspBsidBlkName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 71),
+    _VRtrMplsGenLspBsidBlkName_Type()
+)
+vRtrMplsGenLspBsidBlkName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenLspBsidBlkName.setStatus("current")
+
+
+class _VRtrMplsGenLspHistory_Type(TruthValue):
+    """Custom type vRtrMplsGenLspHistory based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsGenLspHistory_Type.__name__ = "TruthValue"
+_VRtrMplsGenLspHistory_Object = MibTableColumn
+vRtrMplsGenLspHistory = _VRtrMplsGenLspHistory_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 72),
+    _VRtrMplsGenLspHistory_Type()
+)
+vRtrMplsGenLspHistory.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenLspHistory.setStatus("current")
+
+
+class _VRtrMplsGenLspHistAdminState_Type(TmnxAdminState):
+    """Custom type vRtrMplsGenLspHistAdminState based on TmnxAdminState"""
+    defaultValue = 2
+
+
+_VRtrMplsGenLspHistAdminState_Type.__name__ = "TmnxAdminState"
+_VRtrMplsGenLspHistAdminState_Object = MibTableColumn
+vRtrMplsGenLspHistAdminState = _VRtrMplsGenLspHistAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 73),
+    _VRtrMplsGenLspHistAdminState_Type()
+)
+vRtrMplsGenLspHistAdminState.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenLspHistAdminState.setStatus("current")
+
+
+class _VRtrMplsGenP2mpTtlPropagate_Type(TruthValue):
+    """Custom type vRtrMplsGenP2mpTtlPropagate based on TruthValue"""
+    defaultValue = 1
+
+
+_VRtrMplsGenP2mpTtlPropagate_Type.__name__ = "TruthValue"
+_VRtrMplsGenP2mpTtlPropagate_Object = MibTableColumn
+vRtrMplsGenP2mpTtlPropagate = _VRtrMplsGenP2mpTtlPropagate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 7, 1, 74),
+    _VRtrMplsGenP2mpTtlPropagate_Type()
+)
+vRtrMplsGenP2mpTtlPropagate.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsGenP2mpTtlPropagate.setStatus("current")
 _VRtrMplsGeneralStatTable_Object = MibTable
 vRtrMplsGeneralStatTable = _VRtrMplsGeneralStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 8)
@@ -5062,6 +5325,15 @@ vRtrMplsGenOnDemandSrTeIpv6LspUp = _VRtrMplsGenOnDemandSrTeIpv6LspUp_Object(
 vRtrMplsGenOnDemandSrTeIpv6LspUp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrMplsGenOnDemandSrTeIpv6LspUp.setStatus("current")
+_VRtrMplsGenMemberP2pLspUp_Type = Gauge32
+_VRtrMplsGenMemberP2pLspUp_Object = MibTableColumn
+vRtrMplsGenMemberP2pLspUp = _VRtrMplsGenMemberP2pLspUp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 8, 1, 41),
+    _VRtrMplsGenMemberP2pLspUp_Type()
+)
+vRtrMplsGenMemberP2pLspUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsGenMemberP2pLspUp.setStatus("current")
 _VRtrMplsIfTable_Object = MibTable
 vRtrMplsIfTable = _VRtrMplsIfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 9)
@@ -6185,6 +6457,52 @@ vRtrMplsLspPathManDegState = _VRtrMplsLspPathManDegState_Object(
 vRtrMplsLspPathManDegState.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     vRtrMplsLspPathManDegState.setStatus("current")
+
+
+class _TmnxNotifyMplsResourceType_Type(Integer32):
+    """Custom type tmnxNotifyMplsResourceType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("nhlfe", 1),
+          ("ltn", 2),
+          ("labels", 3))
+    )
+
+
+_TmnxNotifyMplsResourceType_Type.__name__ = "Integer32"
+_TmnxNotifyMplsResourceType_Object = MibScalar
+tmnxNotifyMplsResourceType = _TmnxNotifyMplsResourceType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 16, 26),
+    _TmnxNotifyMplsResourceType_Type()
+)
+tmnxNotifyMplsResourceType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxNotifyMplsResourceType.setStatus("current")
+_TmnxNotifyMplsResourceUsagePct_Type = Unsigned32
+_TmnxNotifyMplsResourceUsagePct_Object = MibScalar
+tmnxNotifyMplsResourceUsagePct = _TmnxNotifyMplsResourceUsagePct_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 16, 27),
+    _TmnxNotifyMplsResourceUsagePct_Type()
+)
+tmnxNotifyMplsResourceUsagePct.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxNotifyMplsResourceUsagePct.setStatus("current")
+_VRtrMplsLspContCompNominalLsps_Type = Unsigned32
+_VRtrMplsLspContCompNominalLsps_Object = MibScalar
+vRtrMplsLspContCompNominalLsps = _VRtrMplsLspContCompNominalLsps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 16, 28),
+    _VRtrMplsLspContCompNominalLsps_Type()
+)
+vRtrMplsLspContCompNominalLsps.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContCompNominalLsps.setStatus("current")
 _VRtrMplsLabelRangeTable_Object = MibTable
 vRtrMplsLabelRangeTable = _VRtrMplsLabelRangeTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 17)
@@ -9221,7 +9539,8 @@ class _VRtrMplsLspTemplateType_Type(Integer32):
               4,
               5,
               6,
-              8)
+              8,
+              9)
         )
     )
     namedValues = NamedValues(
@@ -9232,7 +9551,8 @@ class _VRtrMplsLspTemplateType_Type(Integer32):
           ("onehopP2PSrTe", 4),
           ("meshP2PSrTe", 5),
           ("pceInitP2PSrTe", 6),
-          ("onDemandP2pSrTe", 8))
+          ("onDemandP2pSrTe", 8),
+          ("memberP2p", 9))
     )
 
 
@@ -9300,14 +9620,7 @@ vRtrMplsLspTemplateCspf = _VRtrMplsLspTemplateCspf_Object(
 vRtrMplsLspTemplateCspf.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspTemplateCspf.setStatus("obsolete")
-
-
-class _VRtrMplsLspTemplateDefaultPath_Type(MplsTunnelIndex):
-    """Custom type vRtrMplsLspTemplateDefaultPath based on MplsTunnelIndex"""
-    defaultValue = 0
-
-
-_VRtrMplsLspTemplateDefaultPath_Type.__name__ = "MplsTunnelIndex"
+_VRtrMplsLspTemplateDefaultPath_Type = MplsTunnelIndex
 _VRtrMplsLspTemplateDefaultPath_Object = MibTableColumn
 vRtrMplsLspTemplateDefaultPath = _VRtrMplsLspTemplateDefaultPath_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 41, 1, 9),
@@ -10340,12 +10653,14 @@ class _VRtrMplsLspTempMetricType_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("igp", 1),
-          ("te", 2))
+          ("te", 2),
+          ("delay", 3))
     )
 
 
@@ -10515,6 +10830,22 @@ vRtrMplsLspTemplateEgrStatsMode = _VRtrMplsLspTemplateEgrStatsMode_Object(
 vRtrMplsLspTemplateEgrStatsMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspTemplateEgrStatsMode.setStatus("current")
+
+
+class _VRtrMplsLspTempIgpScSrOverSrTe_Type(TruthValue):
+    """Custom type vRtrMplsLspTempIgpScSrOverSrTe based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsLspTempIgpScSrOverSrTe_Type.__name__ = "TruthValue"
+_VRtrMplsLspTempIgpScSrOverSrTe_Object = MibTableColumn
+vRtrMplsLspTempIgpScSrOverSrTe = _VRtrMplsLspTempIgpScSrOverSrTe_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 41, 1, 69),
+    _VRtrMplsLspTempIgpScSrOverSrTe_Type()
+)
+vRtrMplsLspTempIgpScSrOverSrTe.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempIgpScSrOverSrTe.setStatus("current")
 _VRtrMplsLspAutoBWTableLastChg_Type = TimeStamp
 _VRtrMplsLspAutoBWTableLastChg_Object = MibScalar
 vRtrMplsLspAutoBWTableLastChg = _VRtrMplsLspAutoBWTableLastChg_Object(
@@ -11368,6 +11699,7 @@ class _VRtrMplsLspPathOperHopLimit_Type(Unsigned32):
     """Custom type vRtrMplsLspPathOperHopLimit based on Unsigned32"""
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
         ValueRangeConstraint(2, 255),
     )
 
@@ -11529,13 +11861,15 @@ class _VRtrMplsLspPathOperMetricType_Type(Integer32):
         SingleValueConstraint(
             *(0,
               1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("notApplicable", 0),
           ("igp", 1),
-          ("te", 2))
+          ("te", 2),
+          ("delay", 3))
     )
 
 
@@ -11635,6 +11969,28 @@ vRtrMplsLspPathNgFNAddr = _VRtrMplsLspPathNgFNAddr_Object(
 vRtrMplsLspPathNgFNAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrMplsLspPathNgFNAddr.setStatus("current")
+
+
+class _VRtrMplsLspPathOperDelayMetricLm_Type(Unsigned32):
+    """Custom type vRtrMplsLspPathOperDelayMetricLm based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 16777215),
+    )
+
+
+_VRtrMplsLspPathOperDelayMetricLm_Type.__name__ = "Unsigned32"
+_VRtrMplsLspPathOperDelayMetricLm_Object = MibTableColumn
+vRtrMplsLspPathOperDelayMetricLm = _VRtrMplsLspPathOperDelayMetricLm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 44, 1, 23),
+    _VRtrMplsLspPathOperDelayMetricLm_Type()
+)
+vRtrMplsLspPathOperDelayMetricLm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathOperDelayMetricLm.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPathOperDelayMetricLm.setUnits("microseconds")
 _VRtrMplsLabelObjs_ObjectIdentity = ObjectIdentity
 vRtrMplsLabelObjs = _VRtrMplsLabelObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 45)
@@ -12996,12 +13352,14 @@ class _VRtrMplsLspExtMetricType_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("igp", 1),
-          ("te", 2))
+          ("te", 2),
+          ("delay", 3))
     )
 
 
@@ -13222,7 +13580,7 @@ class _VRtrMplsLspExtBfdReturnPathLabel_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(32, 1048512),
+        ValueRangeConstraint(32, 1048575),
         ValueRangeConstraint(4294967295, 4294967295),
     )
 
@@ -13252,6 +13610,89 @@ vRtrMplsLspExtSoftPreemption = _VRtrMplsLspExtSoftPreemption_Object(
 vRtrMplsLspExtSoftPreemption.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspExtSoftPreemption.setStatus("current")
+
+
+class _VRtrMplsLspExtBsid_Type(TmnxMplsLabelOrZero):
+    """Custom type vRtrMplsLspExtBsid based on TmnxMplsLabelOrZero"""
+    defaultValue = 0
+
+
+_VRtrMplsLspExtBsid_Type.__name__ = "TmnxMplsLabelOrZero"
+_VRtrMplsLspExtBsid_Object = MibTableColumn
+vRtrMplsLspExtBsid = _VRtrMplsLspExtBsid_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 52, 1, 27),
+    _VRtrMplsLspExtBsid_Type()
+)
+vRtrMplsLspExtBsid.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspExtBsid.setStatus("current")
+
+
+class _VRtrMplsLspExtBfdSrcAddrType_Type(InetAddressType):
+    """Custom type vRtrMplsLspExtBfdSrcAddrType based on InetAddressType"""
+    defaultValue = 0
+
+
+_VRtrMplsLspExtBfdSrcAddrType_Type.__name__ = "InetAddressType"
+_VRtrMplsLspExtBfdSrcAddrType_Object = MibTableColumn
+vRtrMplsLspExtBfdSrcAddrType = _VRtrMplsLspExtBfdSrcAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 52, 1, 28),
+    _VRtrMplsLspExtBfdSrcAddrType_Type()
+)
+vRtrMplsLspExtBfdSrcAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspExtBfdSrcAddrType.setStatus("current")
+
+
+class _VRtrMplsLspExtBfdSrcAddr_Type(InetAddress):
+    """Custom type vRtrMplsLspExtBfdSrcAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_VRtrMplsLspExtBfdSrcAddr_Type.__name__ = "InetAddress"
+_VRtrMplsLspExtBfdSrcAddr_Object = MibTableColumn
+vRtrMplsLspExtBfdSrcAddr = _VRtrMplsLspExtBfdSrcAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 52, 1, 29),
+    _VRtrMplsLspExtBfdSrcAddr_Type()
+)
+vRtrMplsLspExtBfdSrcAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspExtBfdSrcAddr.setStatus("current")
+_VRtrMplsLspExtLspContainer_Type = TNamedItemOrEmpty
+_VRtrMplsLspExtLspContainer_Object = MibTableColumn
+vRtrMplsLspExtLspContainer = _VRtrMplsLspExtLspContainer_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 52, 1, 30),
+    _VRtrMplsLspExtLspContainer_Type()
+)
+vRtrMplsLspExtLspContainer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspExtLspContainer.setStatus("current")
+
+
+class _VRtrMplsLspExtLspContMemberId_Type(Unsigned32):
+    """Custom type vRtrMplsLspExtLspContMemberId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 64),
+    )
+
+
+_VRtrMplsLspExtLspContMemberId_Type.__name__ = "Unsigned32"
+_VRtrMplsLspExtLspContMemberId_Object = MibTableColumn
+vRtrMplsLspExtLspContMemberId = _VRtrMplsLspExtLspContMemberId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 52, 1, 31),
+    _VRtrMplsLspExtLspContMemberId_Type()
+)
+vRtrMplsLspExtLspContMemberId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspExtLspContMemberId.setStatus("current")
 _VRtrMplsLspPathProfTblLstChg_Type = TimeStamp
 _VRtrMplsLspPathProfTblLstChg_Object = MibScalar
 vRtrMplsLspPathProfTblLstChg = _VRtrMplsLspPathProfTblLstChg_Object(
@@ -16149,7 +16590,7 @@ class _VRtrMplsLspTempExtReturnPathLbl_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(32, 1048512),
+        ValueRangeConstraint(32, 1048575),
         ValueRangeConstraint(4294967295, 4294967295),
     )
 
@@ -16179,6 +16620,178 @@ vRtrMplsLspTempExtSoftPreemption = _VRtrMplsLspTempExtSoftPreemption_Object(
 vRtrMplsLspTempExtSoftPreemption.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspTempExtSoftPreemption.setStatus("current")
+
+
+class _VRtrMplsLspTempExtBsidEnable_Type(TruthValue):
+    """Custom type vRtrMplsLspTempExtBsidEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsLspTempExtBsidEnable_Type.__name__ = "TruthValue"
+_VRtrMplsLspTempExtBsidEnable_Object = MibTableColumn
+vRtrMplsLspTempExtBsidEnable = _VRtrMplsLspTempExtBsidEnable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 92, 1, 7),
+    _VRtrMplsLspTempExtBsidEnable_Type()
+)
+vRtrMplsLspTempExtBsidEnable.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempExtBsidEnable.setStatus("current")
+
+
+class _VRtrMplsLspTempExtBfdSrcAddrType_Type(InetAddressType):
+    """Custom type vRtrMplsLspTempExtBfdSrcAddrType based on InetAddressType"""
+    defaultValue = 0
+
+
+_VRtrMplsLspTempExtBfdSrcAddrType_Type.__name__ = "InetAddressType"
+_VRtrMplsLspTempExtBfdSrcAddrType_Object = MibTableColumn
+vRtrMplsLspTempExtBfdSrcAddrType = _VRtrMplsLspTempExtBfdSrcAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 92, 1, 8),
+    _VRtrMplsLspTempExtBfdSrcAddrType_Type()
+)
+vRtrMplsLspTempExtBfdSrcAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempExtBfdSrcAddrType.setStatus("current")
+
+
+class _VRtrMplsLspTempExtBfdSrcAddr_Type(InetAddress):
+    """Custom type vRtrMplsLspTempExtBfdSrcAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_VRtrMplsLspTempExtBfdSrcAddr_Type.__name__ = "InetAddress"
+_VRtrMplsLspTempExtBfdSrcAddr_Object = MibTableColumn
+vRtrMplsLspTempExtBfdSrcAddr = _VRtrMplsLspTempExtBfdSrcAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 92, 1, 9),
+    _VRtrMplsLspTempExtBfdSrcAddr_Type()
+)
+vRtrMplsLspTempExtBfdSrcAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempExtBfdSrcAddr.setStatus("current")
+
+
+class _VRtrMplsLspTempExtDelayMetricLim_Type(Unsigned32):
+    """Custom type vRtrMplsLspTempExtDelayMetricLim based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 16777215),
+    )
+
+
+_VRtrMplsLspTempExtDelayMetricLim_Type.__name__ = "Unsigned32"
+_VRtrMplsLspTempExtDelayMetricLim_Object = MibTableColumn
+vRtrMplsLspTempExtDelayMetricLim = _VRtrMplsLspTempExtDelayMetricLim_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 92, 1, 10),
+    _VRtrMplsLspTempExtDelayMetricLim_Type()
+)
+vRtrMplsLspTempExtDelayMetricLim.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempExtDelayMetricLim.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempExtDelayMetricLim.setUnits("microseconds")
+_VRtrMplsLspTempExtLspContRefCnt_Type = Gauge32
+_VRtrMplsLspTempExtLspContRefCnt_Object = MibTableColumn
+vRtrMplsLspTempExtLspContRefCnt = _VRtrMplsLspTempExtLspContRefCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 92, 1, 11),
+    _VRtrMplsLspTempExtLspContRefCnt_Type()
+)
+vRtrMplsLspTempExtLspContRefCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempExtLspContRefCnt.setStatus("current")
+_VRtrMplsLspPceAssocTableLastChg_Type = TimeStamp
+_VRtrMplsLspPceAssocTableLastChg_Object = MibScalar
+vRtrMplsLspPceAssocTableLastChg = _VRtrMplsLspPceAssocTableLastChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 93),
+    _VRtrMplsLspPceAssocTableLastChg_Type()
+)
+vRtrMplsLspPceAssocTableLastChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocTableLastChg.setStatus("current")
+_VRtrMplsLspPceAssocTable_Object = MibTable
+vRtrMplsLspPceAssocTable = _VRtrMplsLspPceAssocTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 94)
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocTable.setStatus("current")
+_VRtrMplsLspPceAssocEntry_Object = MibTableRow
+vRtrMplsLspPceAssocEntry = _VRtrMplsLspPceAssocEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 94, 1)
+)
+vRtrMplsLspPceAssocEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspIndex"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspPceAssocType"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspPceAssocName"),
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocEntry.setStatus("current")
+
+
+class _VRtrMplsLspPceAssocType_Type(Integer32):
+    """Custom type vRtrMplsLspPceAssocType based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("diversity", 1),
+          ("policy", 2))
+    )
+
+
+_VRtrMplsLspPceAssocType_Type.__name__ = "Integer32"
+_VRtrMplsLspPceAssocType_Object = MibTableColumn
+vRtrMplsLspPceAssocType = _VRtrMplsLspPceAssocType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 94, 1, 1),
+    _VRtrMplsLspPceAssocType_Type()
+)
+vRtrMplsLspPceAssocType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocType.setStatus("current")
+_VRtrMplsLspPceAssocName_Type = TNamedItem
+_VRtrMplsLspPceAssocName_Object = MibTableColumn
+vRtrMplsLspPceAssocName = _VRtrMplsLspPceAssocName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 94, 1, 2),
+    _VRtrMplsLspPceAssocName_Type()
+)
+vRtrMplsLspPceAssocName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocName.setStatus("current")
+_VRtrMplsLspPceAssocRowStatus_Type = RowStatus
+_VRtrMplsLspPceAssocRowStatus_Object = MibTableColumn
+vRtrMplsLspPceAssocRowStatus = _VRtrMplsLspPceAssocRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 94, 1, 3),
+    _VRtrMplsLspPceAssocRowStatus_Type()
+)
+vRtrMplsLspPceAssocRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocRowStatus.setStatus("current")
+_VRtrMplsLspPceAssocLastChange_Type = TimeStamp
+_VRtrMplsLspPceAssocLastChange_Object = MibTableColumn
+vRtrMplsLspPceAssocLastChange = _VRtrMplsLspPceAssocLastChange_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 94, 1, 4),
+    _VRtrMplsLspPceAssocLastChange_Type()
+)
+vRtrMplsLspPceAssocLastChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspPceAssocLastChange.setStatus("current")
 _VRtrMplsLspTempPathProTblLastChg_Type = TimeStamp
 _VRtrMplsLspTempPathProTblLastChg_Object = MibScalar
 vRtrMplsLspTempPathProTblLastChg = _VRtrMplsLspTempPathProTblLastChg_Object(
@@ -16264,6 +16877,775 @@ vRtrMplsLspTempPathProfGroupId = _VRtrMplsLspTempPathProfGroupId_Object(
 vRtrMplsLspTempPathProfGroupId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrMplsLspTempPathProfGroupId.setStatus("current")
+_VRtrMplsLspTempPceAssocTblLstChg_Type = TimeStamp
+_VRtrMplsLspTempPceAssocTblLstChg_Object = MibScalar
+vRtrMplsLspTempPceAssocTblLstChg = _VRtrMplsLspTempPceAssocTblLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 97),
+    _VRtrMplsLspTempPceAssocTblLstChg_Type()
+)
+vRtrMplsLspTempPceAssocTblLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocTblLstChg.setStatus("current")
+_VRtrMplsLspTempPceAssocTable_Object = MibTable
+vRtrMplsLspTempPceAssocTable = _VRtrMplsLspTempPceAssocTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 98)
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocTable.setStatus("current")
+_VRtrMplsLspTempPceAssocEntry_Object = MibTableRow
+vRtrMplsLspTempPceAssocEntry = _VRtrMplsLspTempPceAssocEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 98, 1)
+)
+vRtrMplsLspTempPceAssocEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspTemplateName"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspTempPceAssocType"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspTempPceAssocName"),
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocEntry.setStatus("current")
+
+
+class _VRtrMplsLspTempPceAssocType_Type(Integer32):
+    """Custom type vRtrMplsLspTempPceAssocType based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("diversity", 1),
+          ("policy", 2))
+    )
+
+
+_VRtrMplsLspTempPceAssocType_Type.__name__ = "Integer32"
+_VRtrMplsLspTempPceAssocType_Object = MibTableColumn
+vRtrMplsLspTempPceAssocType = _VRtrMplsLspTempPceAssocType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 98, 1, 1),
+    _VRtrMplsLspTempPceAssocType_Type()
+)
+vRtrMplsLspTempPceAssocType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocType.setStatus("current")
+_VRtrMplsLspTempPceAssocName_Type = TNamedItem
+_VRtrMplsLspTempPceAssocName_Object = MibTableColumn
+vRtrMplsLspTempPceAssocName = _VRtrMplsLspTempPceAssocName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 98, 1, 2),
+    _VRtrMplsLspTempPceAssocName_Type()
+)
+vRtrMplsLspTempPceAssocName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocName.setStatus("current")
+_VRtrMplsLspTempPceAssocRowStatus_Type = RowStatus
+_VRtrMplsLspTempPceAssocRowStatus_Object = MibTableColumn
+vRtrMplsLspTempPceAssocRowStatus = _VRtrMplsLspTempPceAssocRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 98, 1, 3),
+    _VRtrMplsLspTempPceAssocRowStatus_Type()
+)
+vRtrMplsLspTempPceAssocRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocRowStatus.setStatus("current")
+_VRtrMplsLspTempPceAssocLstChg_Type = TimeStamp
+_VRtrMplsLspTempPceAssocLstChg_Object = MibTableColumn
+vRtrMplsLspTempPceAssocLstChg = _VRtrMplsLspTempPceAssocLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 98, 1, 4),
+    _VRtrMplsLspTempPceAssocLstChg_Type()
+)
+vRtrMplsLspTempPceAssocLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspTempPceAssocLstChg.setStatus("current")
+_TmnxMplsResourceTable_ObjectIdentity = ObjectIdentity
+tmnxMplsResourceTable = _TmnxMplsResourceTable_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99)
+)
+_TmnxMplsResourceEntry_ObjectIdentity = ObjectIdentity
+tmnxMplsResourceEntry = _TmnxMplsResourceEntry_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1)
+)
+_TmnxMplsResourceNhlfeTotal_Type = Unsigned32
+_TmnxMplsResourceNhlfeTotal_Object = MibScalar
+tmnxMplsResourceNhlfeTotal = _TmnxMplsResourceNhlfeTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 1),
+    _TmnxMplsResourceNhlfeTotal_Type()
+)
+tmnxMplsResourceNhlfeTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceNhlfeTotal.setStatus("current")
+_TmnxMplsResourceNhlfeAlloc_Type = Unsigned32
+_TmnxMplsResourceNhlfeAlloc_Object = MibScalar
+tmnxMplsResourceNhlfeAlloc = _TmnxMplsResourceNhlfeAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 2),
+    _TmnxMplsResourceNhlfeAlloc_Type()
+)
+tmnxMplsResourceNhlfeAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceNhlfeAlloc.setStatus("current")
+_TmnxMplsResourceNhlfeFree_Type = Unsigned32
+_TmnxMplsResourceNhlfeFree_Object = MibScalar
+tmnxMplsResourceNhlfeFree = _TmnxMplsResourceNhlfeFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 3),
+    _TmnxMplsResourceNhlfeFree_Type()
+)
+tmnxMplsResourceNhlfeFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceNhlfeFree.setStatus("current")
+_TmnxMplsResourceLtnTotal_Type = Unsigned32
+_TmnxMplsResourceLtnTotal_Object = MibScalar
+tmnxMplsResourceLtnTotal = _TmnxMplsResourceLtnTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 4),
+    _TmnxMplsResourceLtnTotal_Type()
+)
+tmnxMplsResourceLtnTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceLtnTotal.setStatus("current")
+_TmnxMplsResourceLtnAlloc_Type = Unsigned32
+_TmnxMplsResourceLtnAlloc_Object = MibScalar
+tmnxMplsResourceLtnAlloc = _TmnxMplsResourceLtnAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 5),
+    _TmnxMplsResourceLtnAlloc_Type()
+)
+tmnxMplsResourceLtnAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceLtnAlloc.setStatus("current")
+_TmnxMplsResourceLtnFree_Type = Unsigned32
+_TmnxMplsResourceLtnFree_Object = MibScalar
+tmnxMplsResourceLtnFree = _TmnxMplsResourceLtnFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 6),
+    _TmnxMplsResourceLtnFree_Type()
+)
+tmnxMplsResourceLtnFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceLtnFree.setStatus("current")
+_TmnxMplsResourceLabelTotal_Type = Unsigned32
+_TmnxMplsResourceLabelTotal_Object = MibScalar
+tmnxMplsResourceLabelTotal = _TmnxMplsResourceLabelTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 7),
+    _TmnxMplsResourceLabelTotal_Type()
+)
+tmnxMplsResourceLabelTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceLabelTotal.setStatus("current")
+_TmnxMplsResourceLabelAlloc_Type = Unsigned32
+_TmnxMplsResourceLabelAlloc_Object = MibScalar
+tmnxMplsResourceLabelAlloc = _TmnxMplsResourceLabelAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 8),
+    _TmnxMplsResourceLabelAlloc_Type()
+)
+tmnxMplsResourceLabelAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceLabelAlloc.setStatus("current")
+_TmnxMplsResourceLabelFree_Type = Unsigned32
+_TmnxMplsResourceLabelFree_Object = MibScalar
+tmnxMplsResourceLabelFree = _TmnxMplsResourceLabelFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 99, 1, 9),
+    _TmnxMplsResourceLabelFree_Type()
+)
+tmnxMplsResourceLabelFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceLabelFree.setStatus("current")
+_TmnxMplsResourceOwnerTable_Object = MibTable
+tmnxMplsResourceOwnerTable = _TmnxMplsResourceOwnerTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 100)
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResourceOwnerTable.setStatus("current")
+_TmnxMplsResourceOwnerEntry_Object = MibTableRow
+tmnxMplsResourceOwnerEntry = _TmnxMplsResourceOwnerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 100, 1)
+)
+tmnxMplsResourceOwnerEntry.setIndexNames(
+    (0, "TIMETRA-MPLS-MIB", "tmnxMplsResourceOwner"),
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResourceOwnerEntry.setStatus("current")
+_TmnxMplsResourceOwner_Type = TmnxMplsResourceOwner
+_TmnxMplsResourceOwner_Object = MibTableColumn
+tmnxMplsResourceOwner = _TmnxMplsResourceOwner_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 100, 1, 1),
+    _TmnxMplsResourceOwner_Type()
+)
+tmnxMplsResourceOwner.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxMplsResourceOwner.setStatus("current")
+_TmnxMplsResOwnerNhlfeAlloc_Type = Unsigned32
+_TmnxMplsResOwnerNhlfeAlloc_Object = MibTableColumn
+tmnxMplsResOwnerNhlfeAlloc = _TmnxMplsResOwnerNhlfeAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 100, 1, 2),
+    _TmnxMplsResOwnerNhlfeAlloc_Type()
+)
+tmnxMplsResOwnerNhlfeAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResOwnerNhlfeAlloc.setStatus("current")
+_TmnxMplsResOwnerLtnAlloc_Type = Unsigned32
+_TmnxMplsResOwnerLtnAlloc_Object = MibTableColumn
+tmnxMplsResOwnerLtnAlloc = _TmnxMplsResOwnerLtnAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 100, 1, 3),
+    _TmnxMplsResOwnerLtnAlloc_Type()
+)
+tmnxMplsResOwnerLtnAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResOwnerLtnAlloc.setStatus("current")
+_TmnxMplsResOwnerLabelAlloc_Type = Unsigned32
+_TmnxMplsResOwnerLabelAlloc_Object = MibTableColumn
+tmnxMplsResOwnerLabelAlloc = _TmnxMplsResOwnerLabelAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 100, 1, 4),
+    _TmnxMplsResOwnerLabelAlloc_Type()
+)
+tmnxMplsResOwnerLabelAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMplsResOwnerLabelAlloc.setStatus("current")
+_VRtrMplsLspContainerTblLstChg_Type = TimeStamp
+_VRtrMplsLspContainerTblLstChg_Object = MibScalar
+vRtrMplsLspContainerTblLstChg = _VRtrMplsLspContainerTblLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 101),
+    _VRtrMplsLspContainerTblLstChg_Type()
+)
+vRtrMplsLspContainerTblLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerTblLstChg.setStatus("current")
+_VRtrMplsLspContainerTable_Object = MibTable
+vRtrMplsLspContainerTable = _VRtrMplsLspContainerTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102)
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerTable.setStatus("current")
+_VRtrMplsLspContainerEntry_Object = MibTableRow
+vRtrMplsLspContainerEntry = _VRtrMplsLspContainerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1)
+)
+vRtrMplsLspContainerEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspContainerName"),
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerEntry.setStatus("current")
+_VRtrMplsLspContainerName_Type = TNamedItem
+_VRtrMplsLspContainerName_Object = MibTableColumn
+vRtrMplsLspContainerName = _VRtrMplsLspContainerName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 1),
+    _VRtrMplsLspContainerName_Type()
+)
+vRtrMplsLspContainerName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerName.setStatus("current")
+_VRtrMplsLspContainerRowStatus_Type = RowStatus
+_VRtrMplsLspContainerRowStatus_Object = MibTableColumn
+vRtrMplsLspContainerRowStatus = _VRtrMplsLspContainerRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 2),
+    _VRtrMplsLspContainerRowStatus_Type()
+)
+vRtrMplsLspContainerRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerRowStatus.setStatus("current")
+_VRtrMplsLspContainerLastChgd_Type = TimeStamp
+_VRtrMplsLspContainerLastChgd_Object = MibTableColumn
+vRtrMplsLspContainerLastChgd = _VRtrMplsLspContainerLastChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 3),
+    _VRtrMplsLspContainerLastChgd_Type()
+)
+vRtrMplsLspContainerLastChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerLastChgd.setStatus("current")
+
+
+class _VRtrMplsLspContainerAdminState_Type(TmnxAdminState):
+    """Custom type vRtrMplsLspContainerAdminState based on TmnxAdminState"""
+    defaultValue = 3
+
+
+_VRtrMplsLspContainerAdminState_Type.__name__ = "TmnxAdminState"
+_VRtrMplsLspContainerAdminState_Object = MibTableColumn
+vRtrMplsLspContainerAdminState = _VRtrMplsLspContainerAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 4),
+    _VRtrMplsLspContainerAdminState_Type()
+)
+vRtrMplsLspContainerAdminState.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerAdminState.setStatus("current")
+
+
+class _VRtrMplsLspContLspTemplateName_Type(TNamedItemOrEmpty):
+    """Custom type vRtrMplsLspContLspTemplateName based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_VRtrMplsLspContLspTemplateName_Type.__name__ = "TNamedItemOrEmpty"
+_VRtrMplsLspContLspTemplateName_Object = MibTableColumn
+vRtrMplsLspContLspTemplateName = _VRtrMplsLspContLspTemplateName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 5),
+    _VRtrMplsLspContLspTemplateName_Type()
+)
+vRtrMplsLspContLspTemplateName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContLspTemplateName.setStatus("current")
+
+
+class _VRtrMplsLspContMinMemberLsps_Type(Unsigned32):
+    """Custom type vRtrMplsLspContMinMemberLsps based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 64),
+    )
+
+
+_VRtrMplsLspContMinMemberLsps_Type.__name__ = "Unsigned32"
+_VRtrMplsLspContMinMemberLsps_Object = MibTableColumn
+vRtrMplsLspContMinMemberLsps = _VRtrMplsLspContMinMemberLsps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 6),
+    _VRtrMplsLspContMinMemberLsps_Type()
+)
+vRtrMplsLspContMinMemberLsps.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMinMemberLsps.setStatus("current")
+
+
+class _VRtrMplsLspContMaxMemberLsps_Type(Unsigned32):
+    """Custom type vRtrMplsLspContMaxMemberLsps based on Unsigned32"""
+    defaultValue = 64
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 64),
+    )
+
+
+_VRtrMplsLspContMaxMemberLsps_Type.__name__ = "Unsigned32"
+_VRtrMplsLspContMaxMemberLsps_Object = MibTableColumn
+vRtrMplsLspContMaxMemberLsps = _VRtrMplsLspContMaxMemberLsps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 7),
+    _VRtrMplsLspContMaxMemberLsps_Type()
+)
+vRtrMplsLspContMaxMemberLsps.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMaxMemberLsps.setStatus("current")
+
+
+class _VRtrMplsLspContainerToAddrType_Type(InetAddressType):
+    """Custom type vRtrMplsLspContainerToAddrType based on InetAddressType"""
+    defaultValue = 0
+
+
+_VRtrMplsLspContainerToAddrType_Type.__name__ = "InetAddressType"
+_VRtrMplsLspContainerToAddrType_Object = MibTableColumn
+vRtrMplsLspContainerToAddrType = _VRtrMplsLspContainerToAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 8),
+    _VRtrMplsLspContainerToAddrType_Type()
+)
+vRtrMplsLspContainerToAddrType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerToAddrType.setStatus("current")
+
+
+class _VRtrMplsLspContainerToAddr_Type(InetAddress):
+    """Custom type vRtrMplsLspContainerToAddr based on InetAddress"""
+    defaultHexValue = ""
+
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+    )
+
+
+_VRtrMplsLspContainerToAddr_Type.__name__ = "InetAddress"
+_VRtrMplsLspContainerToAddr_Object = MibTableColumn
+vRtrMplsLspContainerToAddr = _VRtrMplsLspContainerToAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 9),
+    _VRtrMplsLspContainerToAddr_Type()
+)
+vRtrMplsLspContainerToAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerToAddr.setStatus("current")
+
+
+class _VRtrMplsLspContainerSuffix_Type(DisplayString):
+    """Custom type vRtrMplsLspContainerSuffix based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(1, 24),
+    )
+
+
+_VRtrMplsLspContainerSuffix_Type.__name__ = "DisplayString"
+_VRtrMplsLspContainerSuffix_Object = MibTableColumn
+vRtrMplsLspContainerSuffix = _VRtrMplsLspContainerSuffix_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 10),
+    _VRtrMplsLspContainerSuffix_Type()
+)
+vRtrMplsLspContainerSuffix.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerSuffix.setStatus("current")
+
+
+class _VRtrMplsLspContOptMinAvgRate_Type(TmnxMplsLspBandwidth):
+    """Custom type vRtrMplsLspContOptMinAvgRate based on TmnxMplsLspBandwidth"""
+    defaultValue = 0
+
+
+_VRtrMplsLspContOptMinAvgRate_Type.__name__ = "TmnxMplsLspBandwidth"
+_VRtrMplsLspContOptMinAvgRate_Object = MibTableColumn
+vRtrMplsLspContOptMinAvgRate = _VRtrMplsLspContOptMinAvgRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 11),
+    _VRtrMplsLspContOptMinAvgRate_Type()
+)
+vRtrMplsLspContOptMinAvgRate.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptMinAvgRate.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptMinAvgRate.setUnits("megabps")
+
+
+class _VRtrMplsLspContOptMaxAvgRate_Type(TmnxMplsLspBandwidth):
+    """Custom type vRtrMplsLspContOptMaxAvgRate based on TmnxMplsLspBandwidth"""
+    defaultValue = 6400000
+
+
+_VRtrMplsLspContOptMaxAvgRate_Type.__name__ = "TmnxMplsLspBandwidth"
+_VRtrMplsLspContOptMaxAvgRate_Object = MibTableColumn
+vRtrMplsLspContOptMaxAvgRate = _VRtrMplsLspContOptMaxAvgRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 12),
+    _VRtrMplsLspContOptMaxAvgRate_Type()
+)
+vRtrMplsLspContOptMaxAvgRate.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptMaxAvgRate.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptMaxAvgRate.setUnits("megabps")
+
+
+class _VRtrMplsLspContOptOptimizeTimer_Type(Unsigned32):
+    """Custom type vRtrMplsLspContOptOptimizeTimer based on Unsigned32"""
+    defaultValue = 2880
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(15, 44640),
+    )
+
+
+_VRtrMplsLspContOptOptimizeTimer_Type.__name__ = "Unsigned32"
+_VRtrMplsLspContOptOptimizeTimer_Object = MibTableColumn
+vRtrMplsLspContOptOptimizeTimer = _VRtrMplsLspContOptOptimizeTimer_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 13),
+    _VRtrMplsLspContOptOptimizeTimer_Type()
+)
+vRtrMplsLspContOptOptimizeTimer.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptOptimizeTimer.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptOptimizeTimer.setUnits("minutes")
+
+
+class _VRtrMplsLspContOptAdHoc_Type(TruthValue):
+    """Custom type vRtrMplsLspContOptAdHoc based on TruthValue"""
+    defaultValue = 2
+
+
+_VRtrMplsLspContOptAdHoc_Type.__name__ = "TruthValue"
+_VRtrMplsLspContOptAdHoc_Object = MibTableColumn
+vRtrMplsLspContOptAdHoc = _VRtrMplsLspContOptAdHoc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 14),
+    _VRtrMplsLspContOptAdHoc_Type()
+)
+vRtrMplsLspContOptAdHoc.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptAdHoc.setStatus("current")
+_VRtrMplsLspContainerOperState_Type = TmnxOperState
+_VRtrMplsLspContainerOperState_Object = MibTableColumn
+vRtrMplsLspContainerOperState = _VRtrMplsLspContainerOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 15),
+    _VRtrMplsLspContainerOperState_Type()
+)
+vRtrMplsLspContainerOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContainerOperState.setStatus("current")
+
+
+class _VRtrMplsLspContOperDownReason_Type(Integer32):
+    """Custom type vRtrMplsLspContOperDownReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("adminDown", 1),
+          ("lspNameConflict", 2),
+          ("noResourcesAvailable", 3),
+          ("noLspOperational", 4))
+    )
+
+
+_VRtrMplsLspContOperDownReason_Type.__name__ = "Integer32"
+_VRtrMplsLspContOperDownReason_Object = MibTableColumn
+vRtrMplsLspContOperDownReason = _VRtrMplsLspContOperDownReason_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 16),
+    _VRtrMplsLspContOperDownReason_Type()
+)
+vRtrMplsLspContOperDownReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOperDownReason.setStatus("current")
+_VRtrMplsLspContNumMemberLsps_Type = Gauge32
+_VRtrMplsLspContNumMemberLsps_Object = MibTableColumn
+vRtrMplsLspContNumMemberLsps = _VRtrMplsLspContNumMemberLsps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 17),
+    _VRtrMplsLspContNumMemberLsps_Type()
+)
+vRtrMplsLspContNumMemberLsps.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContNumMemberLsps.setStatus("current")
+_VRtrMplsLspContNumMemberLspsUp_Type = Gauge32
+_VRtrMplsLspContNumMemberLspsUp_Object = MibTableColumn
+vRtrMplsLspContNumMemberLspsUp = _VRtrMplsLspContNumMemberLspsUp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 18),
+    _VRtrMplsLspContNumMemberLspsUp_Type()
+)
+vRtrMplsLspContNumMemberLspsUp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContNumMemberLspsUp.setStatus("current")
+_VRtrMplsLspContNumNominalLsps_Type = Gauge32
+_VRtrMplsLspContNumNominalLsps_Object = MibTableColumn
+vRtrMplsLspContNumNominalLsps = _VRtrMplsLspContNumNominalLsps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 19),
+    _VRtrMplsLspContNumNominalLsps_Type()
+)
+vRtrMplsLspContNumNominalLsps.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContNumNominalLsps.setStatus("current")
+_VRtrMplsLspContNominalBw_Type = TmnxMplsLspBandwidth
+_VRtrMplsLspContNominalBw_Object = MibTableColumn
+vRtrMplsLspContNominalBw = _VRtrMplsLspContNominalBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 20),
+    _VRtrMplsLspContNominalBw_Type()
+)
+vRtrMplsLspContNominalBw.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContNominalBw.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContNominalBw.setUnits("megabps")
+_VRtrMplsLspContOptTimeRemaining_Type = Unsigned32
+_VRtrMplsLspContOptTimeRemaining_Object = MibTableColumn
+vRtrMplsLspContOptTimeRemaining = _VRtrMplsLspContOptTimeRemaining_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 21),
+    _VRtrMplsLspContOptTimeRemaining_Type()
+)
+vRtrMplsLspContOptTimeRemaining.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptTimeRemaining.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptTimeRemaining.setUnits("seconds")
+_VRtrMplsLspContAdHocOptPending_Type = TruthValue
+_VRtrMplsLspContAdHocOptPending_Object = MibTableColumn
+vRtrMplsLspContAdHocOptPending = _VRtrMplsLspContAdHocOptPending_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 22),
+    _VRtrMplsLspContAdHocOptPending_Type()
+)
+vRtrMplsLspContAdHocOptPending.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContAdHocOptPending.setStatus("current")
+_VRtrMplsLspContLastOpt_Type = TimeStamp
+_VRtrMplsLspContLastOpt_Object = MibTableColumn
+vRtrMplsLspContLastOpt = _VRtrMplsLspContLastOpt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 23),
+    _VRtrMplsLspContLastOpt_Type()
+)
+vRtrMplsLspContLastOpt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContLastOpt.setStatus("current")
+
+
+class _VRtrMplsLspContLastOptStatus_Type(Integer32):
+    """Custom type vRtrMplsLspContLastOptStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("completed", 1),
+          ("failed", 2))
+    )
+
+
+_VRtrMplsLspContLastOptStatus_Type.__name__ = "Integer32"
+_VRtrMplsLspContLastOptStatus_Object = MibTableColumn
+vRtrMplsLspContLastOptStatus = _VRtrMplsLspContLastOptStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 24),
+    _VRtrMplsLspContLastOptStatus_Type()
+)
+vRtrMplsLspContLastOptStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContLastOptStatus.setStatus("current")
+
+
+class _VRtrMplsLspContLastOptReason_Type(Integer32):
+    """Custom type vRtrMplsLspContLastOptReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("timerBased", 1),
+          ("adHoc", 2),
+          ("configParamModified", 3))
+    )
+
+
+_VRtrMplsLspContLastOptReason_Type.__name__ = "Integer32"
+_VRtrMplsLspContLastOptReason_Object = MibTableColumn
+vRtrMplsLspContLastOptReason = _VRtrMplsLspContLastOptReason_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 25),
+    _VRtrMplsLspContLastOptReason_Type()
+)
+vRtrMplsLspContLastOptReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContLastOptReason.setStatus("current")
+
+
+class _VRtrMplsLspContAdHocOptEvent_Type(Integer32):
+    """Custom type vRtrMplsLspContAdHocOptEvent based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("lspAutoBwFailed", 1),
+          ("lspFailedToEstablish", 2),
+          ("lspAutoBwSkipped", 3))
+    )
+
+
+_VRtrMplsLspContAdHocOptEvent_Type.__name__ = "Integer32"
+_VRtrMplsLspContAdHocOptEvent_Object = MibTableColumn
+vRtrMplsLspContAdHocOptEvent = _VRtrMplsLspContAdHocOptEvent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 26),
+    _VRtrMplsLspContAdHocOptEvent_Type()
+)
+vRtrMplsLspContAdHocOptEvent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContAdHocOptEvent.setStatus("current")
+
+
+class _VRtrMplsLspContInitMemberLsps_Type(Unsigned32):
+    """Custom type vRtrMplsLspContInitMemberLsps based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 64),
+    )
+
+
+_VRtrMplsLspContInitMemberLsps_Type.__name__ = "Unsigned32"
+_VRtrMplsLspContInitMemberLsps_Object = MibTableColumn
+vRtrMplsLspContInitMemberLsps = _VRtrMplsLspContInitMemberLsps_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 27),
+    _VRtrMplsLspContInitMemberLsps_Type()
+)
+vRtrMplsLspContInitMemberLsps.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContInitMemberLsps.setStatus("current")
+
+
+class _VRtrMplsLspContInitMemLspBw_Type(TmnxMplsLspBandwidthOrNone):
+    """Custom type vRtrMplsLspContInitMemLspBw based on TmnxMplsLspBandwidthOrNone"""
+    defaultValue = -1
+
+
+_VRtrMplsLspContInitMemLspBw_Type.__name__ = "TmnxMplsLspBandwidthOrNone"
+_VRtrMplsLspContInitMemLspBw_Object = MibTableColumn
+vRtrMplsLspContInitMemLspBw = _VRtrMplsLspContInitMemLspBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 102, 1, 28),
+    _VRtrMplsLspContInitMemLspBw_Type()
+)
+vRtrMplsLspContInitMemLspBw.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContInitMemLspBw.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContInitMemLspBw.setUnits("megabps")
+_VRtrMplsLspContMemberLspTable_Object = MibTable
+vRtrMplsLspContMemberLspTable = _VRtrMplsLspContMemberLspTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 103)
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemberLspTable.setStatus("current")
+_VRtrMplsLspContMemberLspEntry_Object = MibTableRow
+vRtrMplsLspContMemberLspEntry = _VRtrMplsLspContMemberLspEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 103, 1)
+)
+vRtrMplsLspContMemberLspEntry.setIndexNames(
+    (0, "TIMETRA-VRTR-MIB", "vRtrID"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspContainerName"),
+    (0, "TIMETRA-MPLS-MIB", "vRtrMplsLspExtLspContMemberId"),
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemberLspEntry.setStatus("current")
+_VRtrMplsLspContMemberLspIndex_Type = TmnxVRtrMplsLspID
+_VRtrMplsLspContMemberLspIndex_Object = MibTableColumn
+vRtrMplsLspContMemberLspIndex = _VRtrMplsLspContMemberLspIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 103, 1, 1),
+    _VRtrMplsLspContMemberLspIndex_Type()
+)
+vRtrMplsLspContMemberLspIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemberLspIndex.setStatus("current")
+_VRtrMplsLspContMemLspOperBw_Type = TmnxMplsLspBandwidth
+_VRtrMplsLspContMemLspOperBw_Object = MibTableColumn
+vRtrMplsLspContMemLspOperBw = _VRtrMplsLspContMemLspOperBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 103, 1, 2),
+    _VRtrMplsLspContMemLspOperBw_Type()
+)
+vRtrMplsLspContMemLspOperBw.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemLspOperBw.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemLspOperBw.setUnits("megabps")
+_VRtrMplsLspContMemLspSamAvgBw_Type = TmnxMplsLspBandwidth
+_VRtrMplsLspContMemLspSamAvgBw_Object = MibTableColumn
+vRtrMplsLspContMemLspSamAvgBw = _VRtrMplsLspContMemLspSamAvgBw_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 6, 103, 1, 3),
+    _VRtrMplsLspContMemLspSamAvgBw_Type()
+)
+vRtrMplsLspContMemLspSamAvgBw.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemLspSamAvgBw.setStatus("current")
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMemLspSamAvgBw.setUnits("megabps")
 _TmnxMplsNotifyPrefix_ObjectIdentity = ObjectIdentity
 tmnxMplsNotifyPrefix = _TmnxMplsNotifyPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6)
@@ -18900,6 +20282,17 @@ tmnxMplsLspStatsModeV21Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxMplsLspStatsModeV21Group.setStatus("current")
 
+tmnxMplsLspPceAssocGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 132)
+)
+tmnxMplsLspPceAssocGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspPceAssocTableLastChg"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspPceAssocRowStatus"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspPceAssocLastChange"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsLspPceAssocGroup.setStatus("current")
+
 tmnxMplsLspOvrTunnelElcGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 133)
 )
@@ -18964,6 +20357,201 @@ tmnxP2mpMplsLspSoftPreemptGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxP2mpMplsLspSoftPreemptGroup.setStatus("current")
+
+tmnxMplsStrictEroNextHopResGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 140)
+)
+tmnxMplsStrictEroNextHopResGroup.setObjects(
+    ("TIMETRA-MPLS-MIB", "vRtrMplsGenStrictEroNhopDirRes")
+)
+if mibBuilder.loadTexts:
+    tmnxMplsStrictEroNextHopResGroup.setStatus("current")
+
+tmnxMplsLspTempPceAssocGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 141)
+)
+tmnxMplsLspTempPceAssocGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspTempPceAssocTblLstChg"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempPceAssocRowStatus"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempPceAssocLstChg"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsLspTempPceAssocGroup.setStatus("current")
+
+tmnxMplsAdHocRouteOptGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 142)
+)
+tmnxMplsAdHocRouteOptGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsGenRsvpResigOnIgpEvt"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsGenSrTeResigOnIgpOvl"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsAdHocRouteOptGroup.setStatus("current")
+
+tmnxMplsBsidRsvdLblBlkGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 143)
+)
+tmnxMplsBsidRsvdLblBlkGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspExtBsid"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempExtBsidEnable"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsGenLspBsidBlkName"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsBsidRsvdLblBlkGroup.setStatus("current")
+
+tmnxMplsLspHistoryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 144)
+)
+tmnxMplsLspHistoryGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsGenLspHistory"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsGenLspHistAdminState"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsLspHistoryGroup.setStatus("current")
+
+tmnxMplsV23v0ObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 145)
+)
+tmnxMplsV23v0ObsoleteGroup.setObjects(
+    ("TIMETRA-MPLS-MIB", "vRtrMplsLspPathTableSpinlock")
+)
+if mibBuilder.loadTexts:
+    tmnxMplsV23v0ObsoleteGroup.setStatus("current")
+
+tmnxMplsIgpScOverSrTeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 146)
+)
+tmnxMplsIgpScOverSrTeGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspIgpScSrOverSrTe"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempIgpScSrOverSrTe"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsIgpScOverSrTeGroup.setStatus("current")
+
+tmnxMplsP2mpTtlPropagateGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 147)
+)
+tmnxMplsP2mpTtlPropagateGroup.setObjects(
+    ("TIMETRA-MPLS-MIB", "vRtrMplsGenP2mpTtlPropagate")
+)
+if mibBuilder.loadTexts:
+    tmnxMplsP2mpTtlPropagateGroup.setStatus("current")
+
+tmnxMplsResourcesGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 148)
+)
+tmnxMplsResourcesGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxMplsResourceNhlfeTotal"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceNhlfeAlloc"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceNhlfeFree"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceLtnTotal"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceLtnAlloc"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceLtnFree"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceLabelTotal"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceLabelAlloc"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceLabelFree"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResOwnerNhlfeAlloc"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResOwnerLtnAlloc"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResOwnerLabelAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResourcesGroup.setStatus("current")
+
+tmnxMplsResNotifyObjsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 149)
+)
+tmnxMplsResNotifyObjsGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceType"),
+        ("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceUsagePct"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResNotifyObjsGroup.setStatus("current")
+
+tmnxMplsBfdSrcAddrGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 151)
+)
+tmnxMplsBfdSrcAddrGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspExtBfdSrcAddrType"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspExtBfdSrcAddr"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempExtBfdSrcAddrType"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempExtBfdSrcAddr"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspPathBfdSrcAddrType"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspPathBfdSrcAddr"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsBfdSrcAddrGroup.setStatus("current")
+
+tmnxMplsSrteDelayMetricGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 152)
+)
+tmnxMplsSrteDelayMetricGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspPathDelayMetricLimit"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempExtDelayMetricLim"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspPathOperDelayMetricLm"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsSrteDelayMetricGroup.setStatus("current")
+
+tmnxMplsV24GenGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 153)
+)
+tmnxMplsV24GenGroup.setObjects(
+    ("TIMETRA-MPLS-MIB", "vRtrMplsLspPathLspIdentifier")
+)
+if mibBuilder.loadTexts:
+    tmnxMplsV24GenGroup.setStatus("current")
+
+tmnxMplsLspContainerGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 154)
+)
+tmnxMplsLspContainerGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerTblLstChg"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerRowStatus"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerLastChgd"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContLspTemplateName"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMinMemberLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMaxMemberLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerToAddrType"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerToAddr"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerAdminState"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerSuffix"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspTempExtLspContRefCnt"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsGenMemberP2pLspUp"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContOptMinAvgRate"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContOptMaxAvgRate"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContOptOptimizeTimer"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContOptAdHoc"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspExtLspContainer"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspExtLspContMemberId"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMemberLspIndex"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContainerOperState"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContOperDownReason"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContNumMemberLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContNumMemberLspsUp"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContNumNominalLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContNominalBw"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContOptTimeRemaining"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContAdHocOptPending"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContLastOpt"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContLastOptStatus"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContLastOptReason"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContAdHocOptEvent"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMemLspOperBw"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMemLspSamAvgBw"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContInitMemberLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContInitMemLspBw"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsLspContainerGroup.setStatus("current")
+
+tmnxMplsLspContNotifyObjsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 155)
+)
+tmnxMplsLspContNotifyObjsGroup.setObjects(
+    ("TIMETRA-MPLS-MIB", "vRtrMplsLspContCompNominalLsps")
+)
+if mibBuilder.loadTexts:
+    tmnxMplsLspContNotifyObjsGroup.setStatus("current")
 
 
 # Notification objects
@@ -19402,6 +20990,90 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+vRtrMplsNodeInIgpOverloadIpv6 = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 31)
+)
+vRtrMplsNodeInIgpOverloadIpv6.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsGenRetryOnIgpOverload"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsIgpOverloadRtrAddrType"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsIgpOverloadRtrAddr"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsIgpOverloadIgpType"))
+)
+if mibBuilder.loadTexts:
+    vRtrMplsNodeInIgpOverloadIpv6.setStatus(
+        "current"
+    )
+
+tmnxMplsResourceHighUsage = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 32)
+)
+tmnxMplsResourceHighUsage.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceType"),
+        ("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceUsagePct"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResourceHighUsage.setStatus(
+        "current"
+    )
+
+tmnxMplsResourceExhausted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 33)
+)
+tmnxMplsResourceExhausted.setObjects(
+    ("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceType")
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResourceExhausted.setStatus(
+        "current"
+    )
+
+tmnxMplsResourceRecovered = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 34)
+)
+tmnxMplsResourceRecovered.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceType"),
+        ("TIMETRA-MPLS-MIB", "tmnxNotifyMplsResourceUsagePct"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResourceRecovered.setStatus(
+        "current"
+    )
+
+vRtrMplsLspContOptStarted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 35)
+)
+vRtrMplsLspContOptStarted.setObjects(
+    ("TIMETRA-MPLS-MIB", "vRtrMplsLspContLastOptReason")
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContOptStarted.setStatus(
+        "current"
+    )
+
+vRtrMplsLspContMaxLspsExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 36)
+)
+vRtrMplsLspContMaxLspsExceeded.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspContMaxMemberLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContCompNominalLsps"))
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMaxLspsExceeded.setStatus(
+        "current"
+    )
+
+vRtrMplsLspContMinLspsExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 6, 0, 37)
+)
+vRtrMplsLspContMinLspsExceeded.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspContMinMemberLsps"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContCompNominalLsps"))
+)
+if mibBuilder.loadTexts:
+    vRtrMplsLspContMinLspsExceeded.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -19549,10 +21221,37 @@ tmnxMplsNotifyV22v0Group = NotificationGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 139)
 )
 tmnxMplsNotifyV22v0Group.setObjects(
-    ("TIMETRA-MPLS-MIB", "vRtrMplsS2lSubLspPreempted")
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsS2lSubLspPreempted"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsNodeInIgpOverloadIpv6"))
 )
 if mibBuilder.loadTexts:
     tmnxMplsNotifyV22v0Group.setStatus(
+        "current"
+    )
+
+tmnxMplsResNotificationsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 150)
+)
+tmnxMplsResNotificationsGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxMplsResourceHighUsage"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceExhausted"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourceRecovered"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsResNotificationsGroup.setStatus(
+        "current"
+    )
+
+tmnxMplsLCNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 2, 156)
+)
+tmnxMplsLCNotificationGroup.setObjects(
+      *(("TIMETRA-MPLS-MIB", "vRtrMplsLspContOptStarted"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMaxLspsExceeded"),
+        ("TIMETRA-MPLS-MIB", "vRtrMplsLspContMinLspsExceeded"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsLCNotificationGroup.setStatus(
         "current"
     )
 
@@ -20310,6 +22009,7 @@ tmnxMplsV21v0Compliance.setObjects(
         ("TIMETRA-MPLS-MIB", "tmnxMplsPccPceOperStateV21Group"),
         ("TIMETRA-MPLS-MIB", "tmnxMplsLspTempExtV21Group"),
         ("TIMETRA-MPLS-MIB", "tmnxMplsLspStatsModeV21Group"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsLspPceAssocGroup"),
         ("TIMETRA-MPLS-MIB", "tmnxMplsLspOvrTunnelElcGroup"),
         ("TIMETRA-MPLS-MIB", "tmnxMplsLspTransportFrrGroup"),
         ("TIMETRA-MPLS-MIB", "tmnxMplsLspTempPathProfGroup"))
@@ -20326,10 +22026,57 @@ tmnxMplsV22v0Compliance.setObjects(
       *(("TIMETRA-MPLS-MIB", "tmnxMplsLspExtBfdGroup"),
         ("TIMETRA-MPLS-MIB", "tmnxMplsLspRateCountersGroup"),
         ("TIMETRA-MPLS-MIB", "tmnxP2mpMplsLspSoftPreemptGroup"),
-        ("TIMETRA-MPLS-MIB", "tmnxMplsNotifyV22v0Group"))
+        ("TIMETRA-MPLS-MIB", "tmnxMplsNotifyV22v0Group"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsStrictEroNextHopResGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsLspTempPceAssocGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsAdHocRouteOptGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsBsidRsvdLblBlkGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsLspHistoryGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsIgpScOverSrTeGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsP2mpTtlPropagateGroup"))
 )
 if mibBuilder.loadTexts:
     tmnxMplsV22v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxMplsV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 1, 21)
+)
+tmnxMplsV23v0Compliance.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxMplsIgpScOverSrTeGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResourcesGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResNotifyObjsGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsResNotificationsGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsV23v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxMplsV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 1, 22)
+)
+tmnxMplsV24v0Compliance.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxMplsBfdSrcAddrGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsSrteDelayMetricGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsV24GenGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxMplsV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 6, 1, 23)
+)
+tmnxMplsV25v0Compliance.setObjects(
+      *(("TIMETRA-MPLS-MIB", "tmnxMplsLspContainerGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsLspContNotifyObjsGroup"),
+        ("TIMETRA-MPLS-MIB", "tmnxMplsLCNotificationGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxMplsV25v0Compliance.setStatus(
         "current"
     )
 
@@ -20347,6 +22094,7 @@ mibBuilder.exportSymbols(
        "TmnxMplsLspAutoBWLastAdjCause": TmnxMplsLspAutoBWLastAdjCause,
        "TmnxMplsLspBgpRSVPLSPTunState": TmnxMplsLspBgpRSVPLSPTunState,
        "TmnxMplsLspAddrType": TmnxMplsLspAddrType,
+       "TmnxMplsResourceOwner": TmnxMplsResourceOwner,
        "timetraMplsMIBModule": timetraMplsMIBModule,
        "tmnxMplsConformance": tmnxMplsConformance,
        "tmnxMplsCompliances": tmnxMplsCompliances,
@@ -20368,6 +22116,9 @@ mibBuilder.exportSymbols(
        "tmnxMplsV20v0Compliance": tmnxMplsV20v0Compliance,
        "tmnxMplsV21v0Compliance": tmnxMplsV21v0Compliance,
        "tmnxMplsV22v0Compliance": tmnxMplsV22v0Compliance,
+       "tmnxMplsV23v0Compliance": tmnxMplsV23v0Compliance,
+       "tmnxMplsV24v0Compliance": tmnxMplsV24v0Compliance,
+       "tmnxMplsV25v0Compliance": tmnxMplsV25v0Compliance,
        "tmnxMplsGroups": tmnxMplsGroups,
        "tmnxMplsLspPathGroup": tmnxMplsLspPathGroup,
        "tmnxMplsXCGroup": tmnxMplsXCGroup,
@@ -20497,6 +22248,7 @@ mibBuilder.exportSymbols(
        "tmnxMplsPccPceOperStateV21Group": tmnxMplsPccPceOperStateV21Group,
        "tmnxMplsLspTempExtV21Group": tmnxMplsLspTempExtV21Group,
        "tmnxMplsLspStatsModeV21Group": tmnxMplsLspStatsModeV21Group,
+       "tmnxMplsLspPceAssocGroup": tmnxMplsLspPceAssocGroup,
        "tmnxMplsLspOvrTunnelElcGroup": tmnxMplsLspOvrTunnelElcGroup,
        "tmnxMplsLspTransportFrrGroup": tmnxMplsLspTransportFrrGroup,
        "tmnxMplsLspTempPathProfGroup": tmnxMplsLspTempPathProfGroup,
@@ -20504,6 +22256,23 @@ mibBuilder.exportSymbols(
        "tmnxMplsLspRateCountersGroup": tmnxMplsLspRateCountersGroup,
        "tmnxP2mpMplsLspSoftPreemptGroup": tmnxP2mpMplsLspSoftPreemptGroup,
        "tmnxMplsNotifyV22v0Group": tmnxMplsNotifyV22v0Group,
+       "tmnxMplsStrictEroNextHopResGroup": tmnxMplsStrictEroNextHopResGroup,
+       "tmnxMplsLspTempPceAssocGroup": tmnxMplsLspTempPceAssocGroup,
+       "tmnxMplsAdHocRouteOptGroup": tmnxMplsAdHocRouteOptGroup,
+       "tmnxMplsBsidRsvdLblBlkGroup": tmnxMplsBsidRsvdLblBlkGroup,
+       "tmnxMplsLspHistoryGroup": tmnxMplsLspHistoryGroup,
+       "tmnxMplsV23v0ObsoleteGroup": tmnxMplsV23v0ObsoleteGroup,
+       "tmnxMplsIgpScOverSrTeGroup": tmnxMplsIgpScOverSrTeGroup,
+       "tmnxMplsP2mpTtlPropagateGroup": tmnxMplsP2mpTtlPropagateGroup,
+       "tmnxMplsResourcesGroup": tmnxMplsResourcesGroup,
+       "tmnxMplsResNotifyObjsGroup": tmnxMplsResNotifyObjsGroup,
+       "tmnxMplsResNotificationsGroup": tmnxMplsResNotificationsGroup,
+       "tmnxMplsBfdSrcAddrGroup": tmnxMplsBfdSrcAddrGroup,
+       "tmnxMplsSrteDelayMetricGroup": tmnxMplsSrteDelayMetricGroup,
+       "tmnxMplsV24GenGroup": tmnxMplsV24GenGroup,
+       "tmnxMplsLspContainerGroup": tmnxMplsLspContainerGroup,
+       "tmnxMplsLspContNotifyObjsGroup": tmnxMplsLspContNotifyObjsGroup,
+       "tmnxMplsLCNotificationGroup": tmnxMplsLCNotificationGroup,
        "tmnxMplsObjs": tmnxMplsObjs,
        "vRtrMplsLspTable": vRtrMplsLspTable,
        "vRtrMplsLspEntry": vRtrMplsLspEntry,
@@ -20585,6 +22354,7 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspBfdPingIntvl": vRtrMplsLspBfdPingIntvl,
        "vRtrMplsLspNgFromAddr": vRtrMplsLspNgFromAddr,
        "vRtrMplsLspNgToAddr": vRtrMplsLspNgToAddr,
+       "vRtrMplsLspIgpScSrOverSrTe": vRtrMplsLspIgpScSrOverSrTe,
        "vRtrMplsLspStatTable": vRtrMplsLspStatTable,
        "vRtrMplsLspStatEntry": vRtrMplsLspStatEntry,
        "vRtrMplsLspOctets": vRtrMplsLspOctets,
@@ -20689,6 +22459,10 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspPathDegraded": vRtrMplsLspPathDegraded,
        "vRtrMplsLspPathDegradedReason": vRtrMplsLspPathDegradedReason,
        "vRtrMplsLspPathReturnPathLabel": vRtrMplsLspPathReturnPathLabel,
+       "vRtrMplsLspPathBfdSrcAddrType": vRtrMplsLspPathBfdSrcAddrType,
+       "vRtrMplsLspPathBfdSrcAddr": vRtrMplsLspPathBfdSrcAddr,
+       "vRtrMplsLspPathDelayMetricLimit": vRtrMplsLspPathDelayMetricLimit,
+       "vRtrMplsLspPathLspIdentifier": vRtrMplsLspPathLspIdentifier,
        "vRtrMplsLspPathStatTable": vRtrMplsLspPathStatTable,
        "vRtrMplsLspPathStatEntry": vRtrMplsLspPathStatEntry,
        "vRtrMplsLspPathTimeUp": vRtrMplsLspPathTimeUp,
@@ -20771,6 +22545,13 @@ mibBuilder.exportSymbols(
        "vRtrMplsGenRsvpPceOperState": vRtrMplsGenRsvpPceOperState,
        "vRtrMplsGenSrTePccOperState": vRtrMplsGenSrTePccOperState,
        "vRtrMplsGenSrTePceOperState": vRtrMplsGenSrTePceOperState,
+       "vRtrMplsGenStrictEroNhopDirRes": vRtrMplsGenStrictEroNhopDirRes,
+       "vRtrMplsGenRsvpResigOnIgpEvt": vRtrMplsGenRsvpResigOnIgpEvt,
+       "vRtrMplsGenSrTeResigOnIgpOvl": vRtrMplsGenSrTeResigOnIgpOvl,
+       "vRtrMplsGenLspBsidBlkName": vRtrMplsGenLspBsidBlkName,
+       "vRtrMplsGenLspHistory": vRtrMplsGenLspHistory,
+       "vRtrMplsGenLspHistAdminState": vRtrMplsGenLspHistAdminState,
+       "vRtrMplsGenP2mpTtlPropagate": vRtrMplsGenP2mpTtlPropagate,
        "vRtrMplsGeneralStatTable": vRtrMplsGeneralStatTable,
        "vRtrMplsGeneralStatEntry": vRtrMplsGeneralStatEntry,
        "vRtrMplsGeneralStaticLspOriginate": vRtrMplsGeneralStaticLspOriginate,
@@ -20813,6 +22594,7 @@ mibBuilder.exportSymbols(
        "vRtrMplsGenOnDemandSrTeLspOrig": vRtrMplsGenOnDemandSrTeLspOrig,
        "vRtrMplsGenOnDemandSrTeIpv4LspUp": vRtrMplsGenOnDemandSrTeIpv4LspUp,
        "vRtrMplsGenOnDemandSrTeIpv6LspUp": vRtrMplsGenOnDemandSrTeIpv6LspUp,
+       "vRtrMplsGenMemberP2pLspUp": vRtrMplsGenMemberP2pLspUp,
        "vRtrMplsIfTable": vRtrMplsIfTable,
        "vRtrMplsIfEntry": vRtrMplsIfEntry,
        "vRtrMplsIfAdminState": vRtrMplsIfAdminState,
@@ -20894,6 +22676,9 @@ mibBuilder.exportSymbols(
        "vRtrMplsResourceType": vRtrMplsResourceType,
        "vRtrMplsLspManualSwFailReason": vRtrMplsLspManualSwFailReason,
        "vRtrMplsLspPathManDegState": vRtrMplsLspPathManDegState,
+       "tmnxNotifyMplsResourceType": tmnxNotifyMplsResourceType,
+       "tmnxNotifyMplsResourceUsagePct": tmnxNotifyMplsResourceUsagePct,
+       "vRtrMplsLspContCompNominalLsps": vRtrMplsLspContCompNominalLsps,
        "vRtrMplsLabelRangeTable": vRtrMplsLabelRangeTable,
        "vRtrMplsLabelRangeEntry": vRtrMplsLabelRangeEntry,
        "vRtrMplsLabelType": vRtrMplsLabelType,
@@ -21237,6 +23022,7 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspTempSelfPing": vRtrMplsLspTempSelfPing,
        "vRtrMplsLspTempAddrFamily": vRtrMplsLspTempAddrFamily,
        "vRtrMplsLspTemplateEgrStatsMode": vRtrMplsLspTemplateEgrStatsMode,
+       "vRtrMplsLspTempIgpScSrOverSrTe": vRtrMplsLspTempIgpScSrOverSrTe,
        "vRtrMplsLspAutoBWTableLastChg": vRtrMplsLspAutoBWTableLastChg,
        "vRtrMplsLspAutoBandwidthTable": vRtrMplsLspAutoBandwidthTable,
        "vRtrMplsLspAutoBandwidthEntry": vRtrMplsLspAutoBandwidthEntry,
@@ -21308,6 +23094,7 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspPathOperLabelStackRed": vRtrMplsLspPathOperLabelStackRed,
        "vRtrMplsLspPathNgFNAddrType": vRtrMplsLspPathNgFNAddrType,
        "vRtrMplsLspPathNgFNAddr": vRtrMplsLspPathNgFNAddr,
+       "vRtrMplsLspPathOperDelayMetricLm": vRtrMplsLspPathOperDelayMetricLm,
        "vRtrMplsLabelObjs": vRtrMplsLabelObjs,
        "vRtrMplsLabelMaxStaticLspLabels": vRtrMplsLabelMaxStaticLspLabels,
        "vRtrMplsLabelMaxStaticSvcLabels": vRtrMplsLabelMaxStaticSvcLabels,
@@ -21398,6 +23185,11 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspExtPrefTransFrr": vRtrMplsLspExtPrefTransFrr,
        "vRtrMplsLspExtBfdReturnPathLabel": vRtrMplsLspExtBfdReturnPathLabel,
        "vRtrMplsLspExtSoftPreemption": vRtrMplsLspExtSoftPreemption,
+       "vRtrMplsLspExtBsid": vRtrMplsLspExtBsid,
+       "vRtrMplsLspExtBfdSrcAddrType": vRtrMplsLspExtBfdSrcAddrType,
+       "vRtrMplsLspExtBfdSrcAddr": vRtrMplsLspExtBfdSrcAddr,
+       "vRtrMplsLspExtLspContainer": vRtrMplsLspExtLspContainer,
+       "vRtrMplsLspExtLspContMemberId": vRtrMplsLspExtLspContMemberId,
        "vRtrMplsLspPathProfTblLstChg": vRtrMplsLspPathProfTblLstChg,
        "vRtrMplsLspPathProfTable": vRtrMplsLspPathProfTable,
        "vRtrMplsLspPathProfEntry": vRtrMplsLspPathProfEntry,
@@ -21629,6 +23421,18 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspTempExtPrefTransFrr": vRtrMplsLspTempExtPrefTransFrr,
        "vRtrMplsLspTempExtReturnPathLbl": vRtrMplsLspTempExtReturnPathLbl,
        "vRtrMplsLspTempExtSoftPreemption": vRtrMplsLspTempExtSoftPreemption,
+       "vRtrMplsLspTempExtBsidEnable": vRtrMplsLspTempExtBsidEnable,
+       "vRtrMplsLspTempExtBfdSrcAddrType": vRtrMplsLspTempExtBfdSrcAddrType,
+       "vRtrMplsLspTempExtBfdSrcAddr": vRtrMplsLspTempExtBfdSrcAddr,
+       "vRtrMplsLspTempExtDelayMetricLim": vRtrMplsLspTempExtDelayMetricLim,
+       "vRtrMplsLspTempExtLspContRefCnt": vRtrMplsLspTempExtLspContRefCnt,
+       "vRtrMplsLspPceAssocTableLastChg": vRtrMplsLspPceAssocTableLastChg,
+       "vRtrMplsLspPceAssocTable": vRtrMplsLspPceAssocTable,
+       "vRtrMplsLspPceAssocEntry": vRtrMplsLspPceAssocEntry,
+       "vRtrMplsLspPceAssocType": vRtrMplsLspPceAssocType,
+       "vRtrMplsLspPceAssocName": vRtrMplsLspPceAssocName,
+       "vRtrMplsLspPceAssocRowStatus": vRtrMplsLspPceAssocRowStatus,
+       "vRtrMplsLspPceAssocLastChange": vRtrMplsLspPceAssocLastChange,
        "vRtrMplsLspTempPathProTblLastChg": vRtrMplsLspTempPathProTblLastChg,
        "vRtrMplsLspTempPathProfTable": vRtrMplsLspTempPathProfTable,
        "vRtrMplsLspTempPathProfEntry": vRtrMplsLspTempPathProfEntry,
@@ -21636,6 +23440,66 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspTempPathProfRowStatus": vRtrMplsLspTempPathProfRowStatus,
        "vRtrMplsLspTempPathProfLastChg": vRtrMplsLspTempPathProfLastChg,
        "vRtrMplsLspTempPathProfGroupId": vRtrMplsLspTempPathProfGroupId,
+       "vRtrMplsLspTempPceAssocTblLstChg": vRtrMplsLspTempPceAssocTblLstChg,
+       "vRtrMplsLspTempPceAssocTable": vRtrMplsLspTempPceAssocTable,
+       "vRtrMplsLspTempPceAssocEntry": vRtrMplsLspTempPceAssocEntry,
+       "vRtrMplsLspTempPceAssocType": vRtrMplsLspTempPceAssocType,
+       "vRtrMplsLspTempPceAssocName": vRtrMplsLspTempPceAssocName,
+       "vRtrMplsLspTempPceAssocRowStatus": vRtrMplsLspTempPceAssocRowStatus,
+       "vRtrMplsLspTempPceAssocLstChg": vRtrMplsLspTempPceAssocLstChg,
+       "tmnxMplsResourceTable": tmnxMplsResourceTable,
+       "tmnxMplsResourceEntry": tmnxMplsResourceEntry,
+       "tmnxMplsResourceNhlfeTotal": tmnxMplsResourceNhlfeTotal,
+       "tmnxMplsResourceNhlfeAlloc": tmnxMplsResourceNhlfeAlloc,
+       "tmnxMplsResourceNhlfeFree": tmnxMplsResourceNhlfeFree,
+       "tmnxMplsResourceLtnTotal": tmnxMplsResourceLtnTotal,
+       "tmnxMplsResourceLtnAlloc": tmnxMplsResourceLtnAlloc,
+       "tmnxMplsResourceLtnFree": tmnxMplsResourceLtnFree,
+       "tmnxMplsResourceLabelTotal": tmnxMplsResourceLabelTotal,
+       "tmnxMplsResourceLabelAlloc": tmnxMplsResourceLabelAlloc,
+       "tmnxMplsResourceLabelFree": tmnxMplsResourceLabelFree,
+       "tmnxMplsResourceOwnerTable": tmnxMplsResourceOwnerTable,
+       "tmnxMplsResourceOwnerEntry": tmnxMplsResourceOwnerEntry,
+       "tmnxMplsResourceOwner": tmnxMplsResourceOwner,
+       "tmnxMplsResOwnerNhlfeAlloc": tmnxMplsResOwnerNhlfeAlloc,
+       "tmnxMplsResOwnerLtnAlloc": tmnxMplsResOwnerLtnAlloc,
+       "tmnxMplsResOwnerLabelAlloc": tmnxMplsResOwnerLabelAlloc,
+       "vRtrMplsLspContainerTblLstChg": vRtrMplsLspContainerTblLstChg,
+       "vRtrMplsLspContainerTable": vRtrMplsLspContainerTable,
+       "vRtrMplsLspContainerEntry": vRtrMplsLspContainerEntry,
+       "vRtrMplsLspContainerName": vRtrMplsLspContainerName,
+       "vRtrMplsLspContainerRowStatus": vRtrMplsLspContainerRowStatus,
+       "vRtrMplsLspContainerLastChgd": vRtrMplsLspContainerLastChgd,
+       "vRtrMplsLspContainerAdminState": vRtrMplsLspContainerAdminState,
+       "vRtrMplsLspContLspTemplateName": vRtrMplsLspContLspTemplateName,
+       "vRtrMplsLspContMinMemberLsps": vRtrMplsLspContMinMemberLsps,
+       "vRtrMplsLspContMaxMemberLsps": vRtrMplsLspContMaxMemberLsps,
+       "vRtrMplsLspContainerToAddrType": vRtrMplsLspContainerToAddrType,
+       "vRtrMplsLspContainerToAddr": vRtrMplsLspContainerToAddr,
+       "vRtrMplsLspContainerSuffix": vRtrMplsLspContainerSuffix,
+       "vRtrMplsLspContOptMinAvgRate": vRtrMplsLspContOptMinAvgRate,
+       "vRtrMplsLspContOptMaxAvgRate": vRtrMplsLspContOptMaxAvgRate,
+       "vRtrMplsLspContOptOptimizeTimer": vRtrMplsLspContOptOptimizeTimer,
+       "vRtrMplsLspContOptAdHoc": vRtrMplsLspContOptAdHoc,
+       "vRtrMplsLspContainerOperState": vRtrMplsLspContainerOperState,
+       "vRtrMplsLspContOperDownReason": vRtrMplsLspContOperDownReason,
+       "vRtrMplsLspContNumMemberLsps": vRtrMplsLspContNumMemberLsps,
+       "vRtrMplsLspContNumMemberLspsUp": vRtrMplsLspContNumMemberLspsUp,
+       "vRtrMplsLspContNumNominalLsps": vRtrMplsLspContNumNominalLsps,
+       "vRtrMplsLspContNominalBw": vRtrMplsLspContNominalBw,
+       "vRtrMplsLspContOptTimeRemaining": vRtrMplsLspContOptTimeRemaining,
+       "vRtrMplsLspContAdHocOptPending": vRtrMplsLspContAdHocOptPending,
+       "vRtrMplsLspContLastOpt": vRtrMplsLspContLastOpt,
+       "vRtrMplsLspContLastOptStatus": vRtrMplsLspContLastOptStatus,
+       "vRtrMplsLspContLastOptReason": vRtrMplsLspContLastOptReason,
+       "vRtrMplsLspContAdHocOptEvent": vRtrMplsLspContAdHocOptEvent,
+       "vRtrMplsLspContInitMemberLsps": vRtrMplsLspContInitMemberLsps,
+       "vRtrMplsLspContInitMemLspBw": vRtrMplsLspContInitMemLspBw,
+       "vRtrMplsLspContMemberLspTable": vRtrMplsLspContMemberLspTable,
+       "vRtrMplsLspContMemberLspEntry": vRtrMplsLspContMemberLspEntry,
+       "vRtrMplsLspContMemberLspIndex": vRtrMplsLspContMemberLspIndex,
+       "vRtrMplsLspContMemLspOperBw": vRtrMplsLspContMemLspOperBw,
+       "vRtrMplsLspContMemLspSamAvgBw": vRtrMplsLspContMemLspSamAvgBw,
        "tmnxMplsNotifyPrefix": tmnxMplsNotifyPrefix,
        "tmnxMplsNotifications": tmnxMplsNotifications,
        "vRtrMplsStateChange": vRtrMplsStateChange,
@@ -21667,5 +23531,12 @@ mibBuilder.exportSymbols(
        "vRtrMplsLspResourceExhaustion": vRtrMplsLspResourceExhaustion,
        "vRtrMplsLspManualSwitchFailure": vRtrMplsLspManualSwitchFailure,
        "vRtrMplsLspPathManualDegStateChg": vRtrMplsLspPathManualDegStateChg,
-       "vRtrMplsS2lSubLspPreempted": vRtrMplsS2lSubLspPreempted}
+       "vRtrMplsS2lSubLspPreempted": vRtrMplsS2lSubLspPreempted,
+       "vRtrMplsNodeInIgpOverloadIpv6": vRtrMplsNodeInIgpOverloadIpv6,
+       "tmnxMplsResourceHighUsage": tmnxMplsResourceHighUsage,
+       "tmnxMplsResourceExhausted": tmnxMplsResourceExhausted,
+       "tmnxMplsResourceRecovered": tmnxMplsResourceRecovered,
+       "vRtrMplsLspContOptStarted": vRtrMplsLspContOptStarted,
+       "vRtrMplsLspContMaxLspsExceeded": vRtrMplsLspContMaxLspsExceeded,
+       "vRtrMplsLspContMinLspsExceeded": vRtrMplsLspContMinLspsExceeded}
 )

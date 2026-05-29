@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arris\ARRIS-CMTS-FFT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:18:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,6 +112,11 @@ if 'mibBuilder' not in globals():
 cmtsFftMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 4115, 1, 4, 5, 1)
 )
+if mibBuilder.loadTexts:
+    cmtsFftMIB.setRevisions(
+        ("2014-08-12 00:00",
+         "2006-01-23 00:00")
+    )
 
 
 # Types definitions
@@ -160,6 +162,15 @@ class _DcxFftSize_Type(Unsigned32):
     """Custom type dcxFftSize based on Unsigned32"""
     defaultValue = 2048
 
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(256, 256),
+        ValueRangeConstraint(512, 512),
+        ValueRangeConstraint(1024, 1024),
+        ValueRangeConstraint(2048, 2048),
+        ValueRangeConstraint(4096, 4096),
+    )
+
 
 _DcxFftSize_Type.__name__ = "Unsigned32"
 _DcxFftSize_Object = MibTableColumn
@@ -182,14 +193,22 @@ class _DcxFftSampleRate_Type(Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5,
+              6,
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
         *(("adcRate", 1),
           ("halfAdcRate", 2),
           ("quarterAdcRate", 3),
-          ("quadrupleSymbolRate", 4))
+          ("quadrupleSymbolRate", 4),
+          ("reserved5", 5),
+          ("reserved6", 6),
+          ("reserved7", 7),
+          ("reserved8", 8))
     )
 
 
@@ -207,6 +226,11 @@ if mibBuilder.loadTexts:
 class _DcxFftCentreFrequency_Type(Integer32):
     """Custom type dcxFftCentreFrequency based on Integer32"""
     defaultValue = 40960000
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-81920000, 81920000),
+    )
 
 
 _DcxFftCentreFrequency_Type.__name__ = "Integer32"
@@ -420,7 +444,7 @@ if mibBuilder.loadTexts:
 
 class _DcxFftTriggerCount_Type(Unsigned32):
     """Custom type dcxFftTriggerCount based on Unsigned32"""
-    defaultValue = 0
+    defaultValue = 1
 
 
 _DcxFftTriggerCount_Type.__name__ = "Unsigned32"

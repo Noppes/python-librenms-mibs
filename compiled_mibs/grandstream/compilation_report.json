@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-02T11:47:58.670751",
+  "timestamp": "2026-05-29T09:30:19.752573",
   "stats": {
-    "total": 4,
+    "total": 6,
     "compiled": 2,
     "failed": 2,
-    "skipped": 0,
+    "skipped": 2,
     "errors": [
       {
         "mib": "GRANDSTREAM-GWN-PRODUCTS-SWITCH-MIB",
@@ -16,5 +16,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

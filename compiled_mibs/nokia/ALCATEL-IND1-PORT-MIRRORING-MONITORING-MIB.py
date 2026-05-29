@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:59 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -129,7 +126,7 @@ alcatelIND1PortMirrorMonitoringMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1PortMirrorMonitoringMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -214,7 +211,7 @@ mirrorMirroredIfindex = _MirrorMirroredIfindex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 2),
     _MirrorMirroredIfindex_Type()
 )
-mirrorMirroredIfindex.setMaxAccess("read-write")
+mirrorMirroredIfindex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorMirroredIfindex.setStatus("deprecated")
 _MirrorMirroringIfindex_Type = InterfaceIndex
@@ -223,7 +220,7 @@ mirrorMirroringIfindex = _MirrorMirroringIfindex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 3),
     _MirrorMirroringIfindex_Type()
 )
-mirrorMirroringIfindex.setMaxAccess("read-write")
+mirrorMirroringIfindex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorMirroringIfindex.setStatus("current")
 
@@ -251,7 +248,7 @@ mirrorStatus = _MirrorStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 4),
     _MirrorStatus_Type()
 )
-mirrorStatus.setMaxAccess("read-write")
+mirrorStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorStatus.setStatus("current")
 
@@ -270,7 +267,7 @@ mirrorUnblockedVLAN = _MirrorUnblockedVLAN_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 5),
     _MirrorUnblockedVLAN_Type()
 )
-mirrorUnblockedVLAN.setMaxAccess("read-write")
+mirrorUnblockedVLAN.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorUnblockedVLAN.setStatus("current")
 _MirrorRowStatus_Type = RowStatus
@@ -279,7 +276,7 @@ mirrorRowStatus = _MirrorRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 6),
     _MirrorRowStatus_Type()
 )
-mirrorRowStatus.setMaxAccess("read-write")
+mirrorRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorRowStatus.setStatus("current")
 
@@ -309,7 +306,7 @@ mirrorDirection = _MirrorDirection_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 7),
     _MirrorDirection_Type()
 )
-mirrorDirection.setMaxAccess("read-write")
+mirrorDirection.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorDirection.setStatus("deprecated")
 
@@ -356,9 +353,35 @@ mirrorTaggedVLAN = _MirrorTaggedVLAN_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 9),
     _MirrorTaggedVLAN_Type()
 )
-mirrorTaggedVLAN.setMaxAccess("read-write")
+mirrorTaggedVLAN.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorTaggedVLAN.setStatus("current")
+
+
+class _MirrorModeLoopback_Type(Integer32):
+    """Custom type mirrorModeLoopback based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            1
+        )
+    )
+    namedValues = NamedValues(
+        ("enable", 1)
+    )
+
+
+_MirrorModeLoopback_Type.__name__ = "Integer32"
+_MirrorModeLoopback_Object = MibTableColumn
+mirrorModeLoopback = _MirrorModeLoopback_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 1, 1, 10),
+    _MirrorModeLoopback_Type()
+)
+mirrorModeLoopback.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    mirrorModeLoopback.setStatus("current")
 _MirrorSrcTable_Object = MibTable
 mirrorSrcTable = _MirrorSrcTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 2)
@@ -409,7 +432,7 @@ mirrorSrcStatus = _MirrorSrcStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 2, 1, 2),
     _MirrorSrcStatus_Type()
 )
-mirrorSrcStatus.setMaxAccess("read-write")
+mirrorSrcStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorSrcStatus.setStatus("current")
 
@@ -439,7 +462,7 @@ mirrorSrcDirection = _MirrorSrcDirection_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 2, 1, 3),
     _MirrorSrcDirection_Type()
 )
-mirrorSrcDirection.setMaxAccess("read-write")
+mirrorSrcDirection.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorSrcDirection.setStatus("current")
 _MirrorSrcRowStatus_Type = RowStatus
@@ -448,7 +471,7 @@ mirrorSrcRowStatus = _MirrorSrcRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 1, 2, 1, 4),
     _MirrorSrcRowStatus_Type()
 )
-mirrorSrcRowStatus.setMaxAccess("read-write")
+mirrorSrcRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     mirrorSrcRowStatus.setStatus("current")
 
@@ -532,7 +555,7 @@ monitorIfindex = _MonitorIfindex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 2),
     _MonitorIfindex_Type()
 )
-monitorIfindex.setMaxAccess("read-write")
+monitorIfindex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorIfindex.setStatus("current")
 
@@ -560,7 +583,7 @@ monitorFileStatus = _MonitorFileStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 3),
     _MonitorFileStatus_Type()
 )
-monitorFileStatus.setMaxAccess("read-write")
+monitorFileStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorFileStatus.setStatus("current")
 
@@ -579,7 +602,7 @@ monitorFileName = _MonitorFileName_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 4),
     _MonitorFileName_Type()
 )
-monitorFileName.setMaxAccess("read-write")
+monitorFileName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorFileName.setStatus("current")
 
@@ -600,7 +623,7 @@ monitorFileSize = _MonitorFileSize_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 5),
     _MonitorFileSize_Type()
 )
-monitorFileSize.setMaxAccess("read-write")
+monitorFileSize.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorFileSize.setStatus("current")
 
@@ -628,7 +651,7 @@ monitorScreenStatus = _MonitorScreenStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 6),
     _MonitorScreenStatus_Type()
 )
-monitorScreenStatus.setMaxAccess("read-write")
+monitorScreenStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorScreenStatus.setStatus("current")
 
@@ -649,7 +672,7 @@ monitorScreenLine = _MonitorScreenLine_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 7),
     _MonitorScreenLine_Type()
 )
-monitorScreenLine.setMaxAccess("read-write")
+monitorScreenLine.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorScreenLine.setStatus("current")
 
@@ -687,7 +710,7 @@ monitorTrafficType = _MonitorTrafficType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 8),
     _MonitorTrafficType_Type()
 )
-monitorTrafficType.setMaxAccess("read-write")
+monitorTrafficType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorTrafficType.setStatus("current")
 
@@ -717,7 +740,7 @@ monitorStatus = _MonitorStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 9),
     _MonitorStatus_Type()
 )
-monitorStatus.setMaxAccess("read-write")
+monitorStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorStatus.setStatus("current")
 
@@ -745,7 +768,7 @@ monitorFileOverWrite = _MonitorFileOverWrite_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 10),
     _MonitorFileOverWrite_Type()
 )
-monitorFileOverWrite.setMaxAccess("read-write")
+monitorFileOverWrite.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorFileOverWrite.setStatus("current")
 
@@ -775,7 +798,7 @@ monitorDirection = _MonitorDirection_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 11),
     _MonitorDirection_Type()
 )
-monitorDirection.setMaxAccess("read-write")
+monitorDirection.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorDirection.setStatus("current")
 
@@ -796,7 +819,7 @@ monitorTimeout = _MonitorTimeout_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 12),
     _MonitorTimeout_Type()
 )
-monitorTimeout.setMaxAccess("read-write")
+monitorTimeout.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorTimeout.setStatus("current")
 _MonitorRowStatus_Type = RowStatus
@@ -805,7 +828,7 @@ monitorRowStatus = _MonitorRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 1, 2, 1, 1, 13),
     _MonitorRowStatus_Type()
 )
-monitorRowStatus.setMaxAccess("read-write")
+monitorRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     monitorRowStatus.setStatus("current")
 _MirmonNotificationVars_ObjectIdentity = ObjectIdentity
@@ -1046,7 +1069,7 @@ alasFlowAgentConfigType = _AlasFlowAgentConfigType_Object(
 )
 alasFlowAgentConfigType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    alasFlowAgentConfigType.setStatus("obsolete")
+    alasFlowAgentConfigType.setStatus("current")
 _AlasFlowAgentAddressType_Type = InetAddressType
 _AlasFlowAgentAddressType_Object = MibScalar
 alasFlowAgentAddressType = _AlasFlowAgentAddressType_Object(
@@ -1055,7 +1078,7 @@ alasFlowAgentAddressType = _AlasFlowAgentAddressType_Object(
 )
 alasFlowAgentAddressType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    alasFlowAgentAddressType.setStatus("obsolete")
+    alasFlowAgentAddressType.setStatus("current")
 _AlasFlowAgentAddress_Type = InetAddress
 _AlasFlowAgentAddress_Object = MibScalar
 alasFlowAgentAddress = _AlasFlowAgentAddress_Object(
@@ -1064,7 +1087,7 @@ alasFlowAgentAddress = _AlasFlowAgentAddress_Object(
 )
 alasFlowAgentAddress.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    alasFlowAgentAddress.setStatus("obsolete")
+    alasFlowAgentAddress.setStatus("current")
 _AlcatelIND1PortMirMonMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1PortMirMonMIBConformance = _AlcatelIND1PortMirMonMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 2)
@@ -1153,6 +1176,19 @@ portNotificationVarsGroup.setObjects(
 if mibBuilder.loadTexts:
     portNotificationVarsGroup.setStatus("current")
 
+mirmonSFlowObjectsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 19, 1, 2, 1, 5)
+)
+mirmonSFlowObjectsGroup.setObjects(
+      *(("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "alasFlowAgentAddress"),
+        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "alasFlowAgentAddressType"),
+        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "alasFlowAgentConfigType"),
+        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "alasFlowCpDeleteEntry"),
+        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "alasFlowFsDeleteEntry"))
+)
+if mibBuilder.loadTexts:
+    mirmonSFlowObjectsGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -1228,7 +1264,8 @@ alcatelIND1PortMirMonMIBCompliance = ModuleCompliance(
 alcatelIND1PortMirMonMIBCompliance.setObjects(
       *(("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "portMirroringGroup"),
         ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "portMonitoringGroup"),
-        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "portNotificationVarsGroup"))
+        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "portNotificationVarsGroup"),
+        ("ALCATEL-IND1-PORT-MIRRORING-MONITORING-MIB", "mirmonSFlowObjectsGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1PortMirMonMIBCompliance.setStatus(
@@ -1255,6 +1292,7 @@ mibBuilder.exportSymbols(
        "mirrorDirection": mirrorDirection,
        "mirrorSessOperStatus": mirrorSessOperStatus,
        "mirrorTaggedVLAN": mirrorTaggedVLAN,
+       "mirrorModeLoopback": mirrorModeLoopback,
        "mirrorSrcTable": mirrorSrcTable,
        "mirrorSrcEntry": mirrorSrcEntry,
        "mirrorSrcMirroredIf": mirrorSrcMirroredIf,
@@ -1302,6 +1340,7 @@ mibBuilder.exportSymbols(
        "portMonitoringGroup": portMonitoringGroup,
        "portNotificationVarsGroup": portNotificationVarsGroup,
        "mirmonTrapsGroup": mirmonTrapsGroup,
+       "mirmonSFlowObjectsGroup": mirmonSFlowObjectsGroup,
        "alcatelIND1PortMirMonMIBCompliances": alcatelIND1PortMirMonMIBCompliances,
        "alcatelIND1PortMirMonMIBCompliance": alcatelIND1PortMirMonMIBCompliance,
        "mirrorConfigError": mirrorConfigError,

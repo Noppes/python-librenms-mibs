@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-GROUP-MOBILITY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:22 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-GROUP-MOBILITY-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,7 @@ alcatelIND1GroupMobilityMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1GroupMobilityMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -188,7 +185,7 @@ vIpNetRuleVlanId = _VIpNetRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 1, 1, 3),
     _VIpNetRuleVlanId_Type()
 )
-vIpNetRuleVlanId.setMaxAccess("read-write")
+vIpNetRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vIpNetRuleVlanId.setStatus("current")
 _VIpNetRuleStatus_Type = RowStatus
@@ -197,7 +194,7 @@ vIpNetRuleStatus = _VIpNetRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 1, 1, 4),
     _VIpNetRuleStatus_Type()
 )
-vIpNetRuleStatus.setMaxAccess("read-write")
+vIpNetRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vIpNetRuleStatus.setStatus("current")
 _VIpxNetRuleTable_Object = MibTable
@@ -263,7 +260,7 @@ vIpxNetRuleEncap = _VIpxNetRuleEncap_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 2, 1, 2),
     _VIpxNetRuleEncap_Type()
 )
-vIpxNetRuleEncap.setMaxAccess("read-write")
+vIpxNetRuleEncap.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vIpxNetRuleEncap.setStatus("current")
 
@@ -282,7 +279,7 @@ vIpxNetRuleVlanId = _VIpxNetRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 2, 1, 3),
     _VIpxNetRuleVlanId_Type()
 )
-vIpxNetRuleVlanId.setMaxAccess("read-write")
+vIpxNetRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vIpxNetRuleVlanId.setStatus("current")
 _VIpxNetRuleStatus_Type = RowStatus
@@ -291,7 +288,7 @@ vIpxNetRuleStatus = _VIpxNetRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 2, 1, 4),
     _VIpxNetRuleStatus_Type()
 )
-vIpxNetRuleStatus.setMaxAccess("read-write")
+vIpxNetRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vIpxNetRuleStatus.setStatus("current")
 _VMacRuleTable_Object = MibTable
@@ -334,7 +331,7 @@ vMacRuleVlanId = _VMacRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 3, 1, 2),
     _VMacRuleVlanId_Type()
 )
-vMacRuleVlanId.setMaxAccess("read-write")
+vMacRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacRuleVlanId.setStatus("current")
 _VMacRuleStatus_Type = RowStatus
@@ -343,7 +340,7 @@ vMacRuleStatus = _VMacRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 3, 1, 3),
     _VMacRuleStatus_Type()
 )
-vMacRuleStatus.setMaxAccess("read-write")
+vMacRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacRuleStatus.setStatus("current")
 _VMacRangeRuleTable_Object = MibTable
@@ -376,7 +373,7 @@ vMacRangeRuleHiAddr = _VMacRangeRuleHiAddr_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 4, 1, 2),
     _VMacRangeRuleHiAddr_Type()
 )
-vMacRangeRuleHiAddr.setMaxAccess("read-write")
+vMacRangeRuleHiAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacRangeRuleHiAddr.setStatus("current")
 
@@ -395,7 +392,7 @@ vMacRangeRuleVlanId = _VMacRangeRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 4, 1, 3),
     _VMacRangeRuleVlanId_Type()
 )
-vMacRangeRuleVlanId.setMaxAccess("read-write")
+vMacRangeRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacRangeRuleVlanId.setStatus("current")
 _VMacRangeRuleStatus_Type = RowStatus
@@ -404,7 +401,7 @@ vMacRangeRuleStatus = _VMacRangeRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 4, 1, 4),
     _VMacRangeRuleStatus_Type()
 )
-vMacRangeRuleStatus.setMaxAccess("read-write")
+vMacRangeRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacRangeRuleStatus.setStatus("current")
 _VMacPortIpBRuleTable_Object = MibTable
@@ -447,7 +444,7 @@ vMacPortIpBRuleIfIndex = _VMacPortIpBRuleIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 5, 1, 2),
     _VMacPortIpBRuleIfIndex_Type()
 )
-vMacPortIpBRuleIfIndex.setMaxAccess("read-write")
+vMacPortIpBRuleIfIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortIpBRuleIfIndex.setStatus("current")
 _VMacPortIpBRuleIp_Type = IpAddress
@@ -456,7 +453,7 @@ vMacPortIpBRuleIp = _VMacPortIpBRuleIp_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 5, 1, 3),
     _VMacPortIpBRuleIp_Type()
 )
-vMacPortIpBRuleIp.setMaxAccess("read-write")
+vMacPortIpBRuleIp.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortIpBRuleIp.setStatus("current")
 
@@ -475,7 +472,7 @@ vMacPortIpBRuleVlanId = _VMacPortIpBRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 5, 1, 4),
     _VMacPortIpBRuleVlanId_Type()
 )
-vMacPortIpBRuleVlanId.setMaxAccess("read-write")
+vMacPortIpBRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortIpBRuleVlanId.setStatus("current")
 _VMacPortIpBRuleStatus_Type = RowStatus
@@ -484,7 +481,7 @@ vMacPortIpBRuleStatus = _VMacPortIpBRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 5, 1, 5),
     _VMacPortIpBRuleStatus_Type()
 )
-vMacPortIpBRuleStatus.setMaxAccess("read-write")
+vMacPortIpBRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortIpBRuleStatus.setStatus("current")
 _VPortIpBRuleTable_Object = MibTable
@@ -527,7 +524,7 @@ vPortIpBRuleIfIndex = _VPortIpBRuleIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 6, 1, 2),
     _VPortIpBRuleIfIndex_Type()
 )
-vPortIpBRuleIfIndex.setMaxAccess("read-write")
+vPortIpBRuleIfIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortIpBRuleIfIndex.setStatus("current")
 
@@ -546,7 +543,7 @@ vPortIpBRuleVlanId = _VPortIpBRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 6, 1, 3),
     _VPortIpBRuleVlanId_Type()
 )
-vPortIpBRuleVlanId.setMaxAccess("read-write")
+vPortIpBRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortIpBRuleVlanId.setStatus("current")
 _VPortIpBRuleStatus_Type = RowStatus
@@ -555,7 +552,7 @@ vPortIpBRuleStatus = _VPortIpBRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 6, 1, 4),
     _VPortIpBRuleStatus_Type()
 )
-vPortIpBRuleStatus.setMaxAccess("read-write")
+vPortIpBRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortIpBRuleStatus.setStatus("current")
 _VMacIpBRuleTable_Object = MibTable
@@ -588,7 +585,7 @@ vMacIpBRuleIp = _VMacIpBRuleIp_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 7, 1, 2),
     _VMacIpBRuleIp_Type()
 )
-vMacIpBRuleIp.setMaxAccess("read-write")
+vMacIpBRuleIp.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacIpBRuleIp.setStatus("current")
 
@@ -607,7 +604,7 @@ vMacIpBRuleVlanId = _VMacIpBRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 7, 1, 3),
     _VMacIpBRuleVlanId_Type()
 )
-vMacIpBRuleVlanId.setMaxAccess("read-write")
+vMacIpBRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacIpBRuleVlanId.setStatus("current")
 _VMacIpBRuleStatus_Type = RowStatus
@@ -616,7 +613,7 @@ vMacIpBRuleStatus = _VMacIpBRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 7, 1, 4),
     _VMacIpBRuleStatus_Type()
 )
-vMacIpBRuleStatus.setMaxAccess("read-write")
+vMacIpBRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacIpBRuleStatus.setStatus("current")
 _VMacPortBRuleTable_Object = MibTable
@@ -659,7 +656,7 @@ vMacPortBRuleIfIndex = _VMacPortBRuleIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 8, 1, 2),
     _VMacPortBRuleIfIndex_Type()
 )
-vMacPortBRuleIfIndex.setMaxAccess("read-write")
+vMacPortBRuleIfIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortBRuleIfIndex.setStatus("current")
 
@@ -678,7 +675,7 @@ vMacPortBRuleVlanId = _VMacPortBRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 8, 1, 3),
     _VMacPortBRuleVlanId_Type()
 )
-vMacPortBRuleVlanId.setMaxAccess("read-write")
+vMacPortBRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortBRuleVlanId.setStatus("current")
 _VMacPortBRuleStatus_Type = RowStatus
@@ -687,7 +684,7 @@ vMacPortBRuleStatus = _VMacPortBRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 8, 1, 4),
     _VMacPortBRuleStatus_Type()
 )
-vMacPortBRuleStatus.setMaxAccess("read-write")
+vMacPortBRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortBRuleStatus.setStatus("current")
 _VMacPortProtoBRuleTable_Object = MibTable
@@ -733,7 +730,7 @@ vMacPortProtoBRuleIfIndex = _VMacPortProtoBRuleIfIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 9, 1, 2),
     _VMacPortProtoBRuleIfIndex_Type()
 )
-vMacPortProtoBRuleIfIndex.setMaxAccess("read-write")
+vMacPortProtoBRuleIfIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortProtoBRuleIfIndex.setStatus("current")
 
@@ -834,7 +831,7 @@ vMacPortProtoBRuleVlanId = _VMacPortProtoBRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 9, 1, 6),
     _VMacPortProtoBRuleVlanId_Type()
 )
-vMacPortProtoBRuleVlanId.setMaxAccess("read-write")
+vMacPortProtoBRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortProtoBRuleVlanId.setStatus("current")
 _VMacPortProtoBRuleStatus_Type = RowStatus
@@ -843,7 +840,7 @@ vMacPortProtoBRuleStatus = _VMacPortProtoBRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 9, 1, 7),
     _VMacPortProtoBRuleStatus_Type()
 )
-vMacPortProtoBRuleStatus.setMaxAccess("read-write")
+vMacPortProtoBRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vMacPortProtoBRuleStatus.setStatus("current")
 _VPortProtoBRuleTable_Object = MibTable
@@ -984,7 +981,7 @@ vPortProtoBRuleVlanId = _VPortProtoBRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 10, 1, 5),
     _VPortProtoBRuleVlanId_Type()
 )
-vPortProtoBRuleVlanId.setMaxAccess("read-write")
+vPortProtoBRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortProtoBRuleVlanId.setStatus("current")
 _VPortProtoBRuleStatus_Type = RowStatus
@@ -993,7 +990,7 @@ vPortProtoBRuleStatus = _VPortProtoBRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 10, 1, 6),
     _VPortProtoBRuleStatus_Type()
 )
-vPortProtoBRuleStatus.setMaxAccess("read-write")
+vPortProtoBRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortProtoBRuleStatus.setStatus("current")
 _VDhcpMacRuleTable_Object = MibTable
@@ -1036,7 +1033,7 @@ vDhcpMacRuleVlanId = _VDhcpMacRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 11, 1, 2),
     _VDhcpMacRuleVlanId_Type()
 )
-vDhcpMacRuleVlanId.setMaxAccess("read-write")
+vDhcpMacRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpMacRuleVlanId.setStatus("current")
 _VDhcpMacRuleStatus_Type = RowStatus
@@ -1045,7 +1042,7 @@ vDhcpMacRuleStatus = _VDhcpMacRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 11, 1, 3),
     _VDhcpMacRuleStatus_Type()
 )
-vDhcpMacRuleStatus.setMaxAccess("read-write")
+vDhcpMacRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpMacRuleStatus.setStatus("current")
 _VDhcpPortRuleTable_Object = MibTable
@@ -1098,7 +1095,7 @@ vDhcpPortRuleVlanId = _VDhcpPortRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 12, 1, 2),
     _VDhcpPortRuleVlanId_Type()
 )
-vDhcpPortRuleVlanId.setMaxAccess("read-write")
+vDhcpPortRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpPortRuleVlanId.setStatus("current")
 _VDhcpPortRuleStatus_Type = RowStatus
@@ -1107,7 +1104,7 @@ vDhcpPortRuleStatus = _VDhcpPortRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 12, 1, 3),
     _VDhcpPortRuleStatus_Type()
 )
-vDhcpPortRuleStatus.setMaxAccess("read-write")
+vDhcpPortRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpPortRuleStatus.setStatus("current")
 _VDhcpGenericRuleTable_Object = MibTable
@@ -1150,7 +1147,7 @@ vDhcpGenericRuleStatus = _VDhcpGenericRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 13, 1, 2),
     _VDhcpGenericRuleStatus_Type()
 )
-vDhcpGenericRuleStatus.setMaxAccess("read-write")
+vDhcpGenericRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpGenericRuleStatus.setStatus("current")
 _VProtoRuleTable_Object = MibTable
@@ -1279,7 +1276,7 @@ vProtoRuleStatus = _VProtoRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 14, 1, 5),
     _VProtoRuleStatus_Type()
 )
-vProtoRuleStatus.setMaxAccess("read-write")
+vProtoRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vProtoRuleStatus.setStatus("current")
 _VCustomRuleTable_Object = MibTable
@@ -1335,7 +1332,7 @@ vCustomRuleMask = _VCustomRuleMask_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 15, 1, 2),
     _VCustomRuleMask_Type()
 )
-vCustomRuleMask.setMaxAccess("read-write")
+vCustomRuleMask.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vCustomRuleMask.setStatus("current")
 
@@ -1373,7 +1370,7 @@ vCustomRuleVlanId = _VCustomRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 15, 1, 4),
     _VCustomRuleVlanId_Type()
 )
-vCustomRuleVlanId.setMaxAccess("read-write")
+vCustomRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vCustomRuleVlanId.setStatus("current")
 _VCustomRuleStatus_Type = RowStatus
@@ -1382,7 +1379,7 @@ vCustomRuleStatus = _VCustomRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 15, 1, 5),
     _VCustomRuleStatus_Type()
 )
-vCustomRuleStatus.setMaxAccess("read-write")
+vCustomRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vCustomRuleStatus.setStatus("current")
 _VPortRuleTable_Object = MibTable
@@ -1436,7 +1433,7 @@ vPortRuleVlanId = _VPortRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 16, 1, 2),
     _VPortRuleVlanId_Type()
 )
-vPortRuleVlanId.setMaxAccess("read-write")
+vPortRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortRuleVlanId.setStatus("current")
 _VPortRuleStatus_Type = RowStatus
@@ -1445,7 +1442,7 @@ vPortRuleStatus = _VPortRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 16, 1, 3),
     _VPortRuleStatus_Type()
 )
-vPortRuleStatus.setMaxAccess("read-write")
+vPortRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vPortRuleStatus.setStatus("current")
 _VDhcpMacRangeRuleTable_Object = MibTable
@@ -1478,7 +1475,7 @@ vDhcpMacRangeRuleHiAddr = _VDhcpMacRangeRuleHiAddr_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 17, 1, 2),
     _VDhcpMacRangeRuleHiAddr_Type()
 )
-vDhcpMacRangeRuleHiAddr.setMaxAccess("read-write")
+vDhcpMacRangeRuleHiAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpMacRangeRuleHiAddr.setStatus("current")
 
@@ -1497,7 +1494,7 @@ vDhcpMacRangeRuleVlanId = _VDhcpMacRangeRuleVlanId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 17, 1, 3),
     _VDhcpMacRangeRuleVlanId_Type()
 )
-vDhcpMacRangeRuleVlanId.setMaxAccess("read-write")
+vDhcpMacRangeRuleVlanId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpMacRangeRuleVlanId.setStatus("current")
 _VDhcpMacRangeRuleStatus_Type = RowStatus
@@ -1506,7 +1503,7 @@ vDhcpMacRangeRuleStatus = _VDhcpMacRangeRuleStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 1, 1, 17, 1, 4),
     _VDhcpMacRangeRuleStatus_Type()
 )
-vDhcpMacRangeRuleStatus.setMaxAccess("read-write")
+vDhcpMacRangeRuleStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vDhcpMacRangeRuleStatus.setStatus("current")
 _GroupMobilityPort_ObjectIdentity = ObjectIdentity
@@ -2219,6 +2216,39 @@ groupMobilityPortGroup.setObjects(
 if mibBuilder.loadTexts:
     groupMobilityPortGroup.setStatus("current")
 
+gmBindRuleTypeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 2, 1, 5)
+)
+gmBindRuleTypeGroup.setObjects(
+      *(("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleDsapSsap"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleEthertype"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleIPAddress"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleMacAddress"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRulePortIfIndex"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleProtoClass"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleType"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleVlanId"))
+)
+if mibBuilder.loadTexts:
+    gmBindRuleTypeGroup.setStatus("current")
+
+gmHwVlanRuleTableOverloadAlertGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 4, 1, 2, 1, 6)
+)
+gmHwVlanRuleTableOverloadAlertGroup.setObjects(
+      *(("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleIpAddress"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleIpxNetwork"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleMacAddress"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleProtocol"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleSlice"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleTable"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleType"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmOverloadRuleVlanId"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmSubnetRuleTable"))
+)
+if mibBuilder.loadTexts:
+    gmHwVlanRuleTableOverloadAlertGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -2297,7 +2327,9 @@ alcatelIND1GroupMobilityMIBCompliance = ModuleCompliance(
 alcatelIND1GroupMobilityMIBCompliance.setObjects(
       *(("ALCATEL-IND1-GROUP-MOBILITY-MIB", "groupMobilityRuleGroup"),
         ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "groupMobilityPortGroup"),
-        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "groupMobilityTrapGroup"))
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "groupMobilityTrapGroup"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmBindRuleTypeGroup"),
+        ("ALCATEL-IND1-GROUP-MOBILITY-MIB", "gmHwVlanRuleTableOverloadAlertGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1GroupMobilityMIBCompliance.setStatus(
@@ -2432,6 +2464,8 @@ mibBuilder.exportSymbols(
        "groupMobilityRuleGroup": groupMobilityRuleGroup,
        "groupMobilityPortGroup": groupMobilityPortGroup,
        "groupMobilityTrapGroup": groupMobilityTrapGroup,
+       "gmBindRuleTypeGroup": gmBindRuleTypeGroup,
+       "gmHwVlanRuleTableOverloadAlertGroup": gmHwVlanRuleTableOverloadAlertGroup,
        "alcatelIND1GroupMobilityMIBCompliances": alcatelIND1GroupMobilityMIBCompliances,
        "alcatelIND1GroupMobilityMIBCompliance": alcatelIND1GroupMobilityMIBCompliance,
        "groupmobilityTrapsDesc": groupmobilityTrapsDesc,

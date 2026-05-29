@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nti\ENVIROMUXMICRO-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:19:08 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,8 @@ enviromuxMicro = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     enviromuxMicro.setRevisions(
-        ("2021-03-07 14:00",
+        ("2022-07-22 14:00",
+         "2021-03-07 14:00",
          "2015-09-27 14:00",
          "2015-02-23 14:00",
          "2014-11-25 14:00",
@@ -649,6 +647,15 @@ alertStatus = _AlertStatus_Object(
 alertStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alertStatus.setStatus("current")
+_AlertName_Type = DisplayString
+_AlertName_Object = MibTableColumn
+alertName = _AlertName_Object(
+    (1, 3, 6, 1, 4, 1, 3699, 1, 1, 12, 1, 5, 1, 1, 8),
+    _AlertName_Type()
+)
+alertName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alertName.setStatus("current")
 _SmAlerts_ObjectIdentity = ObjectIdentity
 smAlerts = _SmAlerts_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 3699, 1, 1, 12, 1, 6)
@@ -1080,6 +1087,7 @@ mibBuilder.exportSymbols(
        "alertThreshold": alertThreshold,
        "alertThresholdType": alertThresholdType,
        "alertStatus": alertStatus,
+       "alertName": alertName,
        "smAlerts": smAlerts,
        "smAlertTable": smAlertTable,
        "smAlertEntry": smAlertEntry,

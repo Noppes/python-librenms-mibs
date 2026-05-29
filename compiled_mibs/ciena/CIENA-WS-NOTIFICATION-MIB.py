@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-WS-NOTIFICATION-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:25:07 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -48,6 +45,10 @@ if 'mibBuilder' not in globals():
 (cienaWsNotifications,) = mibBuilder.importSymbols(
     "CIENA-WS-MIB",
     "cienaWsNotifications")
+
+(StringMaxl44,) = mibBuilder.importSymbols(
+    "CIENA-WS-PLATFORM-TYPEDEFS-MIB",
+    "StringMaxl44")
 
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
@@ -107,7 +108,8 @@ cienaWsNotificationMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaWsNotificationMIB.setRevisions(
-        ("2018-01-15 00:00",
+        ("2019-09-09 00:00",
+         "2018-01-15 00:00",
          "2016-11-14 00:00")
     )
 
@@ -238,7 +240,7 @@ wsAlarmNotificationInstance = _WsAlarmNotificationInstance_Object(
 wsAlarmNotificationInstance.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     wsAlarmNotificationInstance.setStatus("current")
-_WsAlarmNotificationDescription_Type = DisplayString32
+_WsAlarmNotificationDescription_Type = StringMaxl44
 _WsAlarmNotificationDescription_Object = MibScalar
 wsAlarmNotificationDescription = _WsAlarmNotificationDescription_Object(
     (1, 3, 6, 1, 4, 1, 1271, 3, 2, 11, 9),

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-ISIS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:32 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-ISIS-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -155,7 +152,8 @@ if mibBuilder.loadTexts:
          "1904-01-15 00:00",
          "1903-08-15 00:00",
          "1903-01-20 00:00",
-         "1901-09-21 00:00")
+         "1901-09-21 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -848,6 +846,38 @@ vRtrIsisStrictAdjacencyCheck = _VRtrIsisStrictAdjacencyCheck_Object(
 vRtrIsisStrictAdjacencyCheck.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     vRtrIsisStrictAdjacencyCheck.setStatus("current")
+
+
+class _VRtrIsisActivateIPv4_Type(TruthValue):
+    """Custom type vRtrIsisActivateIPv4 based on TruthValue"""
+    defaultValue = 1
+
+
+_VRtrIsisActivateIPv4_Type.__name__ = "TruthValue"
+_VRtrIsisActivateIPv4_Object = MibTableColumn
+vRtrIsisActivateIPv4 = _VRtrIsisActivateIPv4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 1, 1, 31),
+    _VRtrIsisActivateIPv4_Type()
+)
+vRtrIsisActivateIPv4.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    vRtrIsisActivateIPv4.setStatus("current")
+
+
+class _VRtrIsisActivateIPv6_Type(TruthValue):
+    """Custom type vRtrIsisActivateIPv6 based on TruthValue"""
+    defaultValue = 1
+
+
+_VRtrIsisActivateIPv6_Type.__name__ = "TruthValue"
+_VRtrIsisActivateIPv6_Object = MibTableColumn
+vRtrIsisActivateIPv6 = _VRtrIsisActivateIPv6_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 1, 1, 32),
+    _VRtrIsisActivateIPv6_Type()
+)
+vRtrIsisActivateIPv6.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    vRtrIsisActivateIPv6.setStatus("current")
 _VRtrIsisLevelTable_Object = MibTable
 vRtrIsisLevelTable = _VRtrIsisLevelTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 2)
@@ -2367,6 +2397,42 @@ vRtrIsisIfTypeDefault = _VRtrIsisIfTypeDefault_Object(
 vRtrIsisIfTypeDefault.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIsisIfTypeDefault.setStatus("current")
+
+
+class _VRtrIsisIfAddressFamily_Type(Integer32):
+    """Custom type vRtrIsisIfAddressFamily based on Integer32"""
+    defaultValue = 7
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("v4", 1),
+          ("v6", 2),
+          ("v4v6", 3),
+          ("nov4", 5),
+          ("nov6", 6),
+          ("nov4v6", 7))
+    )
+
+
+_VRtrIsisIfAddressFamily_Type.__name__ = "Integer32"
+_VRtrIsisIfAddressFamily_Object = MibTableColumn
+vRtrIsisIfAddressFamily = _VRtrIsisIfAddressFamily_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 3, 1, 1, 13),
+    _VRtrIsisIfAddressFamily_Type()
+)
+vRtrIsisIfAddressFamily.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIsisIfAddressFamily.setStatus("current")
 _VRtrIsisIfLevelTable_Object = MibTable
 vRtrIsisIfLevelTable = _VRtrIsisIfLevelTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 3, 2)
@@ -4014,6 +4080,8 @@ mibBuilder.exportSymbols(
        "vRtrIsisGRRestartDuration": vRtrIsisGRRestartDuration,
        "vRtrIsisGRHelperMode": vRtrIsisGRHelperMode,
        "vRtrIsisStrictAdjacencyCheck": vRtrIsisStrictAdjacencyCheck,
+       "vRtrIsisActivateIPv4": vRtrIsisActivateIPv4,
+       "vRtrIsisActivateIPv6": vRtrIsisActivateIPv6,
        "vRtrIsisLevelTable": vRtrIsisLevelTable,
        "vRtrIsisLevelEntry": vRtrIsisLevelEntry,
        "vRtrIsisLevel": vRtrIsisLevel,
@@ -4141,6 +4209,7 @@ mibBuilder.exportSymbols(
        "vRtrIsisIfCircIndex": vRtrIsisIfCircIndex,
        "vRtrIsisIfRetransmitInterval": vRtrIsisIfRetransmitInterval,
        "vRtrIsisIfTypeDefault": vRtrIsisIfTypeDefault,
+       "vRtrIsisIfAddressFamily": vRtrIsisIfAddressFamily,
        "vRtrIsisIfLevelTable": vRtrIsisIfLevelTable,
        "vRtrIsisIfLevelEntry": vRtrIsisIfLevelEntry,
        "vRtrIsisIfLevel": vRtrIsisIfLevel,

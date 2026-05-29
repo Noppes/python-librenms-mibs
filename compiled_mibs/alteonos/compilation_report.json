@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-02T11:17:48.064167",
+  "timestamp": "2026-05-29T09:18:30.812530",
   "stats": {
-    "total": 1,
-    "compiled": 0,
+    "total": 10,
+    "compiled": 8,
     "failed": 1,
-    "skipped": 0,
+    "skipped": 1,
     "errors": [
       {
         "mib": "ALTEON-CHEETAH-SWITCH-MIB",
@@ -12,5 +12,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

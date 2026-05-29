@@ -1,20 +1,16 @@
 {
-  "timestamp": "2025-10-02T12:34:40.681354",
+  "timestamp": "2026-05-29T09:54:45.208913",
   "stats": {
     "total": 30,
-    "compiled": 21,
-    "failed": 2,
+    "compiled": 22,
+    "failed": 1,
     "skipped": 7,
     "errors": [
       {
         "mib": "VMWARE-NSX-AGENTCAP-MIB",
         "error": "failed"
-      },
-      {
-        "mib": "VMW-TUNNEL-SERVER-AGENTCAP-MIB",
-        "error": "missing"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

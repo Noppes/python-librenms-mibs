@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-TC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -181,6 +178,16 @@ class QTag(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+
+class QTagOrNone(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
         ValueRangeConstraint(1, 4094),
     )
 
@@ -388,6 +395,40 @@ class TmnxEnabledDisabledOrInherit(TextualConvention, Integer32):
 
 
 
+class TmnxPermitDeny(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("deny", 2),
+          ("permit", 3))
+    )
+
+
+
+class TmnxPermitDenyOrInherit(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("inherit", 1),
+          ("deny", 2),
+          ("permit", 3))
+    )
+
+
+
 class TmnxTimeInterval(TextualConvention, Unsigned32):
     status = "current"
 
@@ -477,6 +518,15 @@ class TRegularExpression(DisplayString):
 
 class TmnxHttpRedirectUrl(DisplayString):
     status = "current"
+
+
+class TmnxBofDisplayStringURL(DisplayString):
+    status = "current"
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 199),
+    )
+
 
 
 class TmnxDisplayStringURL(DisplayString):
@@ -665,6 +715,7 @@ class TmnxServId(TextualConvention, Unsigned32):
         ValueRangeConstraint(2148278318, 2148278381),
         ValueRangeConstraint(2148278382, 2148278382),
         ValueRangeConstraint(2148278382, 2148278386),
+        ValueRangeConstraint(2148278387, 2148282482),
     )
 
 
@@ -842,15 +893,15 @@ class TmnxCreateOrigin(TextualConvention, Integer32):
               7,
               8,
               9,
-              12,
               13,
-              14,
               15,
               16,
               17,
               18,
               19,
               20,
+              21,
+              22,
               23,
               24,
               25,
@@ -867,15 +918,15 @@ class TmnxCreateOrigin(TextualConvention, Integer32):
           ("dynScript", 7),
           ("bof", 8),
           ("bgpSignalVpws", 9),
-          ("vsd", 12),
           ("evpn", 13),
-          ("vsd-sd", 14),
           ("satellites", 15),
           ("fpe", 16),
           ("evpnIsa", 17),
           ("greBridged", 18),
           ("tli", 19),
           ("pdn", 20),
+          ("vmhost", 21),
+          ("dhcpClient", 22),
           ("ipsec", 23),
           ("esa", 24),
           ("pfcpCups", 25),
@@ -1111,6 +1162,16 @@ class TEgrHsmdaPerPacketOffsetOvr(TextualConvention, Integer32):
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(-128, -128),
         ValueRangeConstraint(-64, 31),
+    )
+
+
+
+class TEgressQMaxDataTrans(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(512, 32768),
     )
 
 
@@ -1455,16 +1516,14 @@ class TFrameType(TextualConvention, Integer32):
             *(0,
               1,
               2,
-              3,
-              5)
+              3)
         )
     )
     namedValues = NamedValues(
         *(("e802dot3", 0),
           ("e802dot2LLC", 1),
           ("e802dot2SNAP", 2),
-          ("ethernetII", 3),
-          ("atm", 5))
+          ("ethernetII", 3))
     )
 
 
@@ -2398,8 +2457,8 @@ class TmnxBGPFamilyType(TextualConvention, Bits):
           ("mcastVpnIpv6", 21),
           ("srplcyIpv4", 22),
           ("srplcyIpv6", 23),
-          ("reserved24", 24),
-          ("reserved25", 25))
+          ("flowVpnIpv4", 24),
+          ("flowVpnIpv6", 25))
     )
 
 
@@ -2548,7 +2607,8 @@ class TmnxManagedRouteStatus(TextualConvention, Integer32):
               11,
               12,
               13,
-              14)
+              14,
+              15)
         )
     )
     namedValues = NamedValues(
@@ -2566,7 +2626,8 @@ class TmnxManagedRouteStatus(TextualConvention, Integer32):
           ("nextHopLimitExceeded", 11),
           ("notApplicable", 12),
           ("noNextHop", 13),
-          ("gtpNotSupported", 14))
+          ("gtpNotSupported", 14),
+          ("withdrawn", 15))
     )
 
 
@@ -2593,7 +2654,11 @@ class TmnxTunnelTypeExt(TextualConvention, Integer32):
               15,
               16,
               17,
-              18)
+              18,
+              19,
+              20,
+              21,
+              22)
         )
     )
     namedValues = NamedValues(
@@ -2614,7 +2679,11 @@ class TmnxTunnelTypeExt(TextualConvention, Integer32):
           ("srPolicy", 15),
           ("ribApi", 16),
           ("bgpEpe", 17),
-          ("srv6Isis", 18))
+          ("srv6Isis", 18),
+          ("srv6Policy", 19),
+          ("vxlan", 20),
+          ("srv6", 21),
+          ("reserved22", 22))
     )
 
 
@@ -2731,6 +2800,28 @@ class TmnxNatSubscriberType(TextualConvention, Integer32):
             *(1,
               2,
               3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("l2AwareSub", 1),
+          ("classicLsnSub", 2),
+          ("dsliteLsnSub", 3),
+          ("nat64LsnSub", 4),
+          ("nat66LsnSub", 5))
+    )
+
+
+
+class TmnxNatLegacySubscriberType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
               4)
         )
     )
@@ -2744,6 +2835,28 @@ class TmnxNatSubscriberType(TextualConvention, Integer32):
 
 
 class TmnxNatSubscriberTypeOrNone(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("l2AwareSub", 1),
+          ("classicLsnSub", 2),
+          ("dsliteLsnSub", 3),
+          ("nat64LsnSub", 4))
+    )
+
+
+
+class TmnxNatLegacySubscriberTypeOrNone(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
@@ -2889,14 +3002,16 @@ class TmnxSubHostGrouping(TextualConvention, Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("perSap", 1),
           ("perGroup", 2),
           ("perSessionPpp", 3),
-          ("perSessionIpoe", 4))
+          ("perSessionIpoe", 4),
+          ("perSessionPfcp", 5))
     )
 
 
@@ -3196,6 +3311,22 @@ class TmnxSubPfcpCurrPeerNodeIdType(TextualConvention, Integer32):
 
 
 
+class TmnxSubPfcpPeerSystemNodeIdType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("useIpAddress", 1),
+          ("fqdn", 2))
+    )
+
+
+
 class TmnxSubPoolName(TLNamedItem):
     status = "current"
 
@@ -3240,7 +3371,7 @@ class TmnxAppProfileString(DisplayString):
     status = "current"
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 16),
+        ValueSizeConstraint(1, 32),
     )
 
 
@@ -3249,7 +3380,7 @@ class TmnxAppProfileStringOrEmpty(DisplayString):
     status = "current"
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 16),
+        ValueSizeConstraint(0, 32),
     )
 
 
@@ -3370,7 +3501,8 @@ class TmnxPccRuleFilterForwardAction(TextualConvention, Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6)
         )
     )
     namedValues = NamedValues(
@@ -3379,7 +3511,8 @@ class TmnxPccRuleFilterForwardAction(TextualConvention, Integer32):
           ("drop", 2),
           ("redirUrl", 3),
           ("redirNh", 4),
-          ("redirNhOrFwd", 5))
+          ("redirNhOrFwd", 5),
+          ("remarkDscp", 6))
     )
 
 
@@ -3391,7 +3524,11 @@ class TmnxPccRuleQosForwardAction(TextualConvention, Bits):
           ("fcRemark", 1),
           ("monitor", 2),
           ("account", 3),
-          ("forward", 4))
+          ("forward", 4),
+          ("insertRqiQfi", 5),
+          ("flowLimit", 6),
+          ("flowLimit1", 7),
+          ("l2FromProf", 8))
     )
 
 
@@ -4926,6 +5063,152 @@ class TmnxVdoAnalyzerAlarmStates(TextualConvention, OctetString):
 
 
 
+class TmnxMcPathVdoStSeBufferTime(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30)
+        )
+    )
+    namedValues = NamedValues(
+        *(("buf100ms", 1),
+          ("buf200ms", 2),
+          ("buf300ms", 3),
+          ("buf400ms", 4),
+          ("buf500ms", 5),
+          ("buf600ms", 6),
+          ("buf700ms", 7),
+          ("buf800ms", 8),
+          ("buf900ms", 9),
+          ("buf1000ms", 10),
+          ("buf1100ms", 11),
+          ("buf1200ms", 12),
+          ("buf1300ms", 13),
+          ("buf1400ms", 14),
+          ("buf1500ms", 15),
+          ("buf1600ms", 16),
+          ("buf1700ms", 17),
+          ("buf1800ms", 18),
+          ("buf1900ms", 19),
+          ("buf2000ms", 20),
+          ("buf2100ms", 21),
+          ("buf2200ms", 22),
+          ("buf2300ms", 23),
+          ("buf2400ms", 24),
+          ("buf2500ms", 25),
+          ("buf2600ms", 26),
+          ("buf2700ms", 27),
+          ("buf2800ms", 28),
+          ("buf2900ms", 29),
+          ("buf3000ms", 30))
+    )
+
+
+
+class TmnxMcPathVdoStSeBufferTimeOrZero(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("buf100ms", 1),
+          ("buf200ms", 2),
+          ("buf300ms", 3),
+          ("buf400ms", 4),
+          ("buf500ms", 5),
+          ("buf600ms", 6),
+          ("buf700ms", 7),
+          ("buf800ms", 8),
+          ("buf900ms", 9),
+          ("buf1000ms", 10),
+          ("buf1100ms", 11),
+          ("buf1200ms", 12),
+          ("buf1300ms", 13),
+          ("buf1400ms", 14),
+          ("buf1500ms", 15),
+          ("buf1600ms", 16),
+          ("buf1700ms", 17),
+          ("buf1800ms", 18),
+          ("buf1900ms", 19),
+          ("buf2000ms", 20),
+          ("buf2100ms", 21),
+          ("buf2200ms", 22),
+          ("buf2300ms", 23),
+          ("buf2400ms", 24),
+          ("buf2500ms", 25),
+          ("buf2600ms", 26),
+          ("buf2700ms", 27),
+          ("buf2800ms", 28),
+          ("buf2900ms", 29),
+          ("buf3000ms", 30))
+    )
+
+
+
 class SvcISID(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
@@ -5226,7 +5509,8 @@ class TmnxBfdSessionProtocols(TextualConvention, Bits):
           ("reserved25", 25),
           ("srPolicy", 26),
           ("treeSid", 27),
-          ("bier", 28))
+          ("bier", 28),
+          ("pfcp", 29))
     )
 
 
@@ -5263,7 +5547,8 @@ class TmnxBfdOnLspSessFecType(TextualConvention, Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6)
         )
     )
     namedValues = NamedValues(
@@ -5271,7 +5556,8 @@ class TmnxBfdOnLspSessFecType(TextualConvention, Integer32):
           ("ldp", 2),
           ("bgp", 3),
           ("srTe", 4),
-          ("srPolicy", 5))
+          ("srPolicy", 5),
+          ("srv6", 6))
     )
 
 
@@ -5699,15 +5985,13 @@ class TmnxSvcOperGrpCreationOrigin(TextualConvention, Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              7,
-              12)
+              7)
         )
     )
     namedValues = NamedValues(
         *(("manual", 1),
           ("mvrp", 2),
-          ("dynScript", 7),
-          ("vsd", 12))
+          ("dynScript", 7))
     )
 
 
@@ -5858,7 +6142,7 @@ class TmnxTunnelGroupId(TextualConvention, Unsigned32):
     status = "current"
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 16),
+        ValueRangeConstraint(1, 64),
     )
 
 
@@ -5867,7 +6151,7 @@ class TmnxTunnelGroupIdOrZero(TextualConvention, Unsigned32):
     status = "current"
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 16),
+        ValueRangeConstraint(0, 64),
     )
 
 
@@ -6119,12 +6403,14 @@ class TmnxDistCpuProtEnforceType(TextualConvention, Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3)
         )
     )
     namedValues = NamedValues(
         *(("static", 1),
-          ("dynamic", 2))
+          ("dynamic", 2),
+          ("shared", 3))
     )
 
 
@@ -6153,7 +6439,13 @@ class TmnxDistCpuProtProtocolId(TextualConvention, Integer32):
               17,
               18,
               19,
-              21)
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27)
         )
     )
     namedValues = NamedValues(
@@ -6176,7 +6468,87 @@ class TmnxDistCpuProtProtocolId(TextualConvention, Integer32):
           ("pim", 17),
           ("rsvp", 18),
           ("icmp-ping-check", 19),
-          ("lacp", 21))
+          ("lacp", 21),
+          ("vrrp", 22),
+          ("multi-chassis", 23),
+          ("multi-chassis-sync", 24),
+          ("ssh", 25),
+          ("radius", 26),
+          ("needsIcmp", 27))
+    )
+
+
+
+class TmnxDistCpuProtDuneProtocolId(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              5,
+              6,
+              9,
+              12,
+              14,
+              15,
+              16,
+              17,
+              18,
+              22,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43)
+        )
+    )
+    namedValues = NamedValues(
+        *(("arp", 1),
+          ("dhcp", 2),
+          ("igmp", 5),
+          ("mld", 6),
+          ("all-unspecified", 9),
+          ("bgp", 12),
+          ("isis", 14),
+          ("ldp", 15),
+          ("ospf", 16),
+          ("pim", 17),
+          ("rsvp", 18),
+          ("vrrp", 22),
+          ("bfd", 25),
+          ("ftp", 26),
+          ("icmp-v4", 27),
+          ("icmp-v6", 28),
+          ("l3-to-my-ipv4", 29),
+          ("l3-to-my-ipv6", 30),
+          ("lsp-ping", 31),
+          ("mc-lag", 32),
+          ("mcast-snooping", 33),
+          ("radius", 34),
+          ("rip", 35),
+          ("sbfd-reflector", 36),
+          ("snmp", 37),
+          ("ssh", 38),
+          ("stp", 39),
+          ("tacacs", 40),
+          ("telnet", 41),
+          ("tftp", 42),
+          ("twamp", 43))
     )
 
 
@@ -6574,21 +6946,19 @@ class TmnxScriptAuthType(TextualConvention, Integer32):
         SingleValueConstraint(
             *(0,
               1,
-              2,
               3,
-              4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
         *(("none", 0),
           ("cron", 1),
-          ("xmpp", 2),
           ("event-script", 3),
-          ("vsd", 4),
           ("cron-python", 5),
-          ("event-script-python", 6))
+          ("event-script-python", 6),
+          ("subscriber-mgmt-pysros-script", 7))
     )
 
 
@@ -6874,14 +7244,16 @@ class TmnxEvpnMultiHomingState(TextualConvention, Integer32):
             *(0,
               1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("disabled", 0),
           ("singleActive", 1),
           ("singleActiveNoEsiLabel", 2),
-          ("allActive", 3))
+          ("allActive", 3),
+          ("allActiveNoEsiLabel", 4))
     )
 
 
@@ -6909,6 +7281,26 @@ class TmnxL2tpTunnelGroupNameOrEmpty(DisplayString):
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 63),
+    )
+
+
+
+class TmnxLldpManAddressIndex(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("oob", 0),
+          ("system", 1),
+          ("systemIpv6", 2),
+          ("oobIpv6", 3))
     )
 
 
@@ -7263,6 +7655,15 @@ class TmnxMplsLspBandwidth(TextualConvention, Unsigned32):
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 6400000),
+    )
+
+
+
+class TmnxPrefixSidFullRange(TextualConvention, Unsigned32):
+    status = "current"
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1048575),
     )
 
 
@@ -7643,11 +8044,38 @@ class TPktByteOffset(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-60, -60),
+        ValueRangeConstraint(-56, -56),
+        ValueRangeConstraint(-52, -52),
+        ValueRangeConstraint(-48, -48),
+        ValueRangeConstraint(-44, -44),
+        ValueRangeConstraint(-40, -40),
+        ValueRangeConstraint(-36, -36),
+        ValueRangeConstraint(-32, -32),
+        ValueRangeConstraint(-28, -28),
+        ValueRangeConstraint(-24, -24),
+        ValueRangeConstraint(-20, -20),
+        ValueRangeConstraint(-16, -16),
+        ValueRangeConstraint(-12, -12),
         ValueRangeConstraint(-8, -8),
         ValueRangeConstraint(-4, -4),
         ValueRangeConstraint(0, 0),
         ValueRangeConstraint(4, 4),
         ValueRangeConstraint(8, 8),
+        ValueRangeConstraint(12, 12),
+        ValueRangeConstraint(16, 16),
+        ValueRangeConstraint(20, 20),
+        ValueRangeConstraint(24, 24),
+        ValueRangeConstraint(28, 28),
+        ValueRangeConstraint(32, 32),
+        ValueRangeConstraint(36, 36),
+        ValueRangeConstraint(40, 40),
+        ValueRangeConstraint(44, 44),
+        ValueRangeConstraint(48, 48),
+        ValueRangeConstraint(52, 52),
+        ValueRangeConstraint(56, 56),
+        ValueRangeConstraint(60, 60),
+        ValueRangeConstraint(64, 64),
     )
 
 
@@ -7854,7 +8282,8 @@ class TSrv6FunctionErrorCode(TextualConvention, Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6)
         )
     )
     namedValues = NamedValues(
@@ -7863,7 +8292,8 @@ class TSrv6FunctionErrorCode(TextualConvention, Integer32):
           ("noResource", 2),
           ("locAdminDown", 3),
           ("noIntConfig", 4),
-          ("fpeOperDown", 5))
+          ("fpeOperDown", 5),
+          ("microSegBlockAdminDown", 6))
     )
 
 
@@ -7880,7 +8310,18 @@ class TSrv6Function(TextualConvention, Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18)
         )
     )
     namedValues = NamedValues(
@@ -7891,7 +8332,36 @@ class TSrv6Function(TextualConvention, Integer32):
           ("end-dt46", 4),
           ("end-dx2", 5),
           ("end-dt2u", 6),
-          ("end-dt2m", 7))
+          ("end-dt2m", 7),
+          ("un", 8),
+          ("ua", 9),
+          ("udt4", 10),
+          ("udt6", 11),
+          ("udt46", 12),
+          ("udx2", 13),
+          ("udt2u", 14),
+          ("udt2m", 15),
+          ("end-b6-encaps-red", 16),
+          ("end-b6-encaps-red-next-csid", 17),
+          ("endReplicate", 18))
+    )
+
+
+
+class TSrv6RouteResolution(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("routeTable", 0),
+          ("tunnelTable", 1),
+          ("fallbackTunnelToRouteTable", 2))
     )
 
 
@@ -7937,7 +8407,25 @@ class TSrv6EndpointBehavior(TextualConvention, Integer32):
               36,
               37,
               38,
-              39)
+              39,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59)
         )
     )
     namedValues = NamedValues(
@@ -7977,7 +8465,25 @@ class TSrv6EndpointBehavior(TextualConvention, Integer32):
           ("endTUsd", 36),
           ("endTPspUsd", 37),
           ("endTUspUsd", 38),
-          ("endTPspUspUsd", 39))
+          ("endTPspUspUsd", 39),
+          ("endNxtOnlyCsid", 42),
+          ("endNxtCsid", 43),
+          ("endNxtCsidPsp", 44),
+          ("endNxtCsidUsp", 45),
+          ("endNxtCsidPspUsp", 46),
+          ("endNxtCsidUsd", 47),
+          ("endNxtCsidPspUsd", 48),
+          ("endNxtCsidUspUsd", 49),
+          ("endNxtCsidPspUspUsd", 50),
+          ("endXNxtOnlyCsid", 51),
+          ("endXNxtCsid", 52),
+          ("endXNxtCsidPsp", 53),
+          ("endXNxtCsidUsp", 54),
+          ("endXNxtCsidPspUsp", 55),
+          ("endXNxtCsidUsd", 56),
+          ("endXNxtCsidPspUsd", 57),
+          ("endXNxtCsidUspUsd", 58),
+          ("endXNxtCsidPspUspUsd", 59))
     )
 
 
@@ -8017,7 +8523,8 @@ class TmnxPacketMode(TextualConvention, Integer32):
               1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
@@ -8025,7 +8532,8 @@ class TmnxPacketMode(TextualConvention, Integer32):
           ("lmotwLmotwOtwAtm", 1),
           ("lmotwLmotwOtwNonAtm", 2),
           ("otwOtwOtw", 3),
-          ("dataData", 4))
+          ("dataData", 4),
+          ("unknown", 5))
     )
 
 
@@ -8052,6 +8560,328 @@ class TmnxTacplusAccessOpType(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("none", 0),
           ("delete", 1))
+    )
+
+
+
+class TmnxReflectiveQosIndicator(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("false", 0),
+          ("true", 1),
+          ("noRQI", 2))
+    )
+
+
+
+class TmnxQosFlowIdentifier(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 63),
+    )
+
+
+
+class TmnxCamOverloadState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("operational", 1),
+          ("nearFull", 2),
+          ("overload", 3))
+    )
+
+
+
+class TmnxCertUpdateStatus(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("invalid", 0),
+          ("scheduled", 1),
+          ("inProgress", 2),
+          ("waitForRetry", 3))
+    )
+
+
+
+class TmnxDestTEPOperState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("up", 1),
+          ("down", 2))
+    )
+
+
+
+class TmnxDestTEPOperFlag(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("serviceMtuMismatch", 0),
+          ("controlWordMismatch", 1),
+          ("noL2Comm", 2),
+          ("transportDown", 3),
+          ("serviceDown", 4),
+          ("hashLblMismatch", 5))
+    )
+
+
+class TStormCtrlRate(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(22, 720000000),
+    )
+
+
+
+class TStormCtrlBurst(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(1, 4096),
+    )
+
+
+
+class TStormCtrlOprRate(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(22, 720000000),
+    )
+
+
+
+class TStormCtrlOprBurst(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 4161),
+    )
+
+
+
+class TStormCtrlTrafficType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("broadcast", 1),
+          ("multicast", 2),
+          ("unicast", 3),
+          ("unknown", 4))
+    )
+
+
+
+class TmnxAttrSetImport(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ignore", 1),
+          ("accept", 2),
+          ("drop", 3))
+    )
+
+
+
+class TSrv6LocatorType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("locator", 0),
+          ("microSegmentLocator", 1))
+    )
+
+
+
+class TSrv6ResourceType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("function", 1),
+          ("label", 2),
+          ("lif", 3))
+    )
+
+
+
+class TBgpUntaggedRouteType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("untaggedTunnel", 1))
+    )
+
+
+
+class TBgpSrv6UpaTriggerNextHop(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("frr", 1))
+    )
+
+
+
+class TEgressQDelayTime(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 1000000),
+    )
+
+
+
+class TEgressQDelayPercent(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+
+class TEgressQBurstLimDelayTime(TextualConvention, Unsigned32):
+    status = "current"
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 1000000),
+    )
+
+
+
+class TEgressQBurstSizeType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("bytes", 0),
+          ("percent", 1),
+          ("time", 2))
+    )
+
+
+
+class TmnxSubAltProfThresholdType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("subscriberCount", 1))
+    )
+
+
+
+class TmnxPortOptComplianceExtType(TextualConvention, Unsigned32):
+    status = "current"
+
+
+class TmnxObjectID(TextualConvention, Unsigned32):
+    status = "current"
+
+
+class TmnxMplsLspBandwidthOrNone(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 6400000),
     )
 
 
@@ -8084,6 +8914,7 @@ mibBuilder.exportSymbols(
        "TmnxPortID": TmnxPortID,
        "TmnxEncapVal": TmnxEncapVal,
        "QTag": QTag,
+       "QTagOrNone": QTagOrNone,
        "QTagOrZero": QTagOrZero,
        "QTagFullRange": QTagFullRange,
        "QTagFullRangeOrNone": QTagFullRangeOrNone,
@@ -8098,6 +8929,8 @@ mibBuilder.exportSymbols(
        "TmnxEnabledDisabled": TmnxEnabledDisabled,
        "TmnxEnabledDisabledOrNA": TmnxEnabledDisabledOrNA,
        "TmnxEnabledDisabledOrInherit": TmnxEnabledDisabledOrInherit,
+       "TmnxPermitDeny": TmnxPermitDeny,
+       "TmnxPermitDenyOrInherit": TmnxPermitDenyOrInherit,
        "TmnxTimeInterval": TmnxTimeInterval,
        "TNamedItem": TNamedItem,
        "TNamedItemOrEmpty": TNamedItemOrEmpty,
@@ -8110,6 +8943,7 @@ mibBuilder.exportSymbols(
        "TItemVeryLongDescription": TItemVeryLongDescription,
        "TRegularExpression": TRegularExpression,
        "TmnxHttpRedirectUrl": TmnxHttpRedirectUrl,
+       "TmnxBofDisplayStringURL": TmnxBofDisplayStringURL,
        "TmnxDisplayStringURL": TmnxDisplayStringURL,
        "TmnxVRtrID": TmnxVRtrID,
        "TmnxVRtrIDOrZero": TmnxVRtrIDOrZero,
@@ -8161,6 +8995,7 @@ mibBuilder.exportSymbols(
        "TEgressPerPacketOffsetOvr": TEgressPerPacketOffsetOvr,
        "TEgressHsmdaPerPacketOffset": TEgressHsmdaPerPacketOffset,
        "TEgrHsmdaPerPacketOffsetOvr": TEgrHsmdaPerPacketOffsetOvr,
+       "TEgressQMaxDataTrans": TEgressQMaxDataTrans,
        "TIngressQPerPacketOffset": TIngressQPerPacketOffset,
        "THsmdaCounterIdOrZero": THsmdaCounterIdOrZero,
        "THsmdaCounterIdOrZeroOrAll": THsmdaCounterIdOrZeroOrAll,
@@ -8291,7 +9126,9 @@ mibBuilder.exportSymbols(
        "TmnxNatIsaGrpIdOrZero": TmnxNatIsaGrpIdOrZero,
        "TmnxNatL2AwAccessMode": TmnxNatL2AwAccessMode,
        "TmnxNatSubscriberType": TmnxNatSubscriberType,
+       "TmnxNatLegacySubscriberType": TmnxNatLegacySubscriberType,
        "TmnxNatSubscriberTypeOrNone": TmnxNatSubscriberTypeOrNone,
+       "TmnxNatLegacySubscriberTypeOrNone": TmnxNatLegacySubscriberTypeOrNone,
        "TmnxNatWaterMark": TmnxNatWaterMark,
        "TmnxAuthPassword": TmnxAuthPassword,
        "TmnxAsciiSpecification": TmnxAsciiSpecification,
@@ -8326,6 +9163,7 @@ mibBuilder.exportSymbols(
        "TmnxSubPfcpNodeIdDomainName": TmnxSubPfcpNodeIdDomainName,
        "TmnxSubPfcpPeerNodeIdType": TmnxSubPfcpPeerNodeIdType,
        "TmnxSubPfcpCurrPeerNodeIdType": TmnxSubPfcpCurrPeerNodeIdType,
+       "TmnxSubPfcpPeerSystemNodeIdType": TmnxSubPfcpPeerSystemNodeIdType,
        "TmnxSubPoolName": TmnxSubPoolName,
        "TmnxSubProfileString": TmnxSubProfileString,
        "TmnxSubProfileStringOrEmpty": TmnxSubProfileStringOrEmpty,
@@ -8444,6 +9282,8 @@ mibBuilder.exportSymbols(
        "TmnxVdoOutputFormat": TmnxVdoOutputFormat,
        "TmnxVdoAnalyzerAlarm": TmnxVdoAnalyzerAlarm,
        "TmnxVdoAnalyzerAlarmStates": TmnxVdoAnalyzerAlarmStates,
+       "TmnxMcPathVdoStSeBufferTime": TmnxMcPathVdoStSeBufferTime,
+       "TmnxMcPathVdoStSeBufferTimeOrZero": TmnxMcPathVdoStSeBufferTimeOrZero,
        "SvcISID": SvcISID,
        "TmnxISID": TmnxISID,
        "TIngPolicerId": TIngPolicerId,
@@ -8532,6 +9372,7 @@ mibBuilder.exportSymbols(
        "TmnxDistCpuProtAction": TmnxDistCpuProtAction,
        "TmnxDistCpuProtEnforceType": TmnxDistCpuProtEnforceType,
        "TmnxDistCpuProtProtocolId": TmnxDistCpuProtProtocolId,
+       "TmnxDistCpuProtDuneProtocolId": TmnxDistCpuProtDuneProtocolId,
        "TmnxDistCpuProtRateType": TmnxDistCpuProtRateType,
        "TmnxDistCpuProtLogEventType": TmnxDistCpuProtLogEventType,
        "TmnxDistCpuProtState": TmnxDistCpuProtState,
@@ -8585,6 +9426,7 @@ mibBuilder.exportSymbols(
        "TmnxBgpEvpnAcEthTag": TmnxBgpEvpnAcEthTag,
        "TmnxL2tpTunnelGroupName": TmnxL2tpTunnelGroupName,
        "TmnxL2tpTunnelGroupNameOrEmpty": TmnxL2tpTunnelGroupNameOrEmpty,
+       "TmnxLldpManAddressIndex": TmnxLldpManAddressIndex,
        "TFilterID": TFilterID,
        "TIPFilterID": TIPFilterID,
        "TDHCPFilterID": TDHCPFilterID,
@@ -8626,6 +9468,7 @@ mibBuilder.exportSymbols(
        "TmnxMplsLabel": TmnxMplsLabel,
        "TmnxMplsLabelOrZero": TmnxMplsLabelOrZero,
        "TmnxMplsLspBandwidth": TmnxMplsLspBandwidth,
+       "TmnxPrefixSidFullRange": TmnxPrefixSidFullRange,
        "TmnxVni": TmnxVni,
        "TmnxVniOrZero": TmnxVniOrZero,
        "PwPortIdOrZero": PwPortIdOrZero,
@@ -8667,11 +9510,36 @@ mibBuilder.exportSymbols(
        "TSrv6FunctionType": TSrv6FunctionType,
        "TSrv6FunctionErrorCode": TSrv6FunctionErrorCode,
        "TSrv6Function": TSrv6Function,
+       "TSrv6RouteResolution": TSrv6RouteResolution,
        "TSrv6EndpointBehavior": TSrv6EndpointBehavior,
        "TFirBurstLimit": TFirBurstLimit,
        "TSchedulerMode": TSchedulerMode,
        "TmnxPacketMode": TmnxPacketMode,
        "TmnxDPathDomainId": TmnxDPathDomainId,
        "TmnxTacplusAccessOpType": TmnxTacplusAccessOpType,
+       "TmnxReflectiveQosIndicator": TmnxReflectiveQosIndicator,
+       "TmnxQosFlowIdentifier": TmnxQosFlowIdentifier,
+       "TmnxCamOverloadState": TmnxCamOverloadState,
+       "TmnxCertUpdateStatus": TmnxCertUpdateStatus,
+       "TmnxDestTEPOperState": TmnxDestTEPOperState,
+       "TmnxDestTEPOperFlag": TmnxDestTEPOperFlag,
+       "TStormCtrlRate": TStormCtrlRate,
+       "TStormCtrlBurst": TStormCtrlBurst,
+       "TStormCtrlOprRate": TStormCtrlOprRate,
+       "TStormCtrlOprBurst": TStormCtrlOprBurst,
+       "TStormCtrlTrafficType": TStormCtrlTrafficType,
+       "TmnxAttrSetImport": TmnxAttrSetImport,
+       "TSrv6LocatorType": TSrv6LocatorType,
+       "TSrv6ResourceType": TSrv6ResourceType,
+       "TBgpUntaggedRouteType": TBgpUntaggedRouteType,
+       "TBgpSrv6UpaTriggerNextHop": TBgpSrv6UpaTriggerNextHop,
+       "TEgressQDelayTime": TEgressQDelayTime,
+       "TEgressQDelayPercent": TEgressQDelayPercent,
+       "TEgressQBurstLimDelayTime": TEgressQBurstLimDelayTime,
+       "TEgressQBurstSizeType": TEgressQBurstSizeType,
+       "TmnxSubAltProfThresholdType": TmnxSubAltProfThresholdType,
+       "TmnxPortOptComplianceExtType": TmnxPortOptComplianceExtType,
+       "TmnxObjectID": TmnxObjectID,
+       "TmnxMplsLspBandwidthOrNone": TmnxMplsLspBandwidthOrNone,
        "timetraTCMIBModule": timetraTCMIBModule}
 )

@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-SYSTEM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:43 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-SYSTEM-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,7 @@ alcatelIND1SystemMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1SystemMIB.setRevisions(
-        ("2007-06-18 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -175,15 +172,13 @@ class MicrocodeDirectoryIndex(TextualConvention, Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3,
-              4)
+              3)
         )
     )
     namedValues = NamedValues(
         *(("loaded", 1),
           ("certified", 2),
-          ("working", 3),
-          ("issu", 4))
+          ("working", 3))
     )
 
 
@@ -742,10 +737,13 @@ class _SystemHardwareFlashMfg_Type(Integer32):
               2,
               3,
               4,
+              5,
               7,
               8,
               9,
-              10)
+              10,
+              16,
+              17)
         )
     )
     namedValues = NamedValues(
@@ -753,10 +751,13 @@ class _SystemHardwareFlashMfg_Type(Integer32):
           ("amd", 2),
           ("intel", 3),
           ("atmel", 4),
+          ("micron", 5),
           ("toshiba", 7),
           ("sandisk", 8),
           ("sst", 9),
-          ("spansion", 10))
+          ("spansion", 10),
+          ("macronix", 16),
+          ("winbond", 17))
     )
 
 
@@ -1909,8 +1910,7 @@ class _SystemServicesAction_Type(Integer32):
               46,
               47,
               48,
-              49,
-              50)
+              49)
         )
     )
     namedValues = NamedValues(
@@ -1958,13 +1958,12 @@ class _SystemServicesAction_Type(Integer32):
           ("ssh6", 41),
           ("sftp6", 42),
           ("mount", 43),
-          ("umount", 44),
+          ("unmount", 44),
           ("backup", 45),
           ("restore", 46),
           ("tftp", 47),
           ("fscollect", 48),
-          ("fpgani", 49),
-          ("fscollectForce", 50))
+          ("fpgani", 49))
     )
 
 
@@ -2481,6 +2480,72 @@ systemServicesUsbDisasterRecoveryEnable = _SystemServicesUsbDisasterRecoveryEnab
 systemServicesUsbDisasterRecoveryEnable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     systemServicesUsbDisasterRecoveryEnable.setStatus("current")
+
+
+class _SystemServicesFipsEnable_Type(Enable):
+    """Custom type systemServicesFipsEnable based on Enable"""
+    defaultValue = 2
+
+
+_SystemServicesFipsEnable_Type.__name__ = "Enable"
+_SystemServicesFipsEnable_Object = MibScalar
+systemServicesFipsEnable = _SystemServicesFipsEnable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 5, 41),
+    _SystemServicesFipsEnable_Type()
+)
+systemServicesFipsEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    systemServicesFipsEnable.setStatus("current")
+_SystemServicesFipsStatus_Type = Enable
+_SystemServicesFipsStatus_Object = MibScalar
+systemServicesFipsStatus = _SystemServicesFipsStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 5, 42),
+    _SystemServicesFipsStatus_Type()
+)
+systemServicesFipsStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    systemServicesFipsStatus.setStatus("current")
+
+
+class _SystemServicesArg10_Type(Integer32):
+    """Custom type systemServicesArg10 based on Integer32"""
+    defaultValue = 0
+
+
+_SystemServicesArg10_Type.__name__ = "Integer32"
+_SystemServicesArg10_Object = MibScalar
+systemServicesArg10 = _SystemServicesArg10_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 5, 43),
+    _SystemServicesArg10_Type()
+)
+systemServicesArg10.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    systemServicesArg10.setStatus("current")
+
+
+class _SystemServicesCommonCriteriaEnable_Type(Enable):
+    """Custom type systemServicesCommonCriteriaEnable based on Enable"""
+    defaultValue = 2
+
+
+_SystemServicesCommonCriteriaEnable_Type.__name__ = "Enable"
+_SystemServicesCommonCriteriaEnable_Object = MibScalar
+systemServicesCommonCriteriaEnable = _SystemServicesCommonCriteriaEnable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 5, 44),
+    _SystemServicesCommonCriteriaEnable_Type()
+)
+systemServicesCommonCriteriaEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    systemServicesCommonCriteriaEnable.setStatus("current")
+_SystemServicesCommonCriteriaStatus_Type = Enable
+_SystemServicesCommonCriteriaStatus_Object = MibScalar
+systemServicesCommonCriteriaStatus = _SystemServicesCommonCriteriaStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 5, 45),
+    _SystemServicesCommonCriteriaStatus_Type()
+)
+systemServicesCommonCriteriaStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    systemServicesCommonCriteriaStatus.setStatus("current")
 _SystemSwitchLogging_ObjectIdentity = ObjectIdentity
 systemSwitchLogging = _SystemSwitchLogging_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 6)
@@ -2832,6 +2897,25 @@ systemSwitchLoggingSysLogFacilityId = _SystemSwitchLoggingSysLogFacilityId_Objec
 systemSwitchLoggingSysLogFacilityId.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     systemSwitchLoggingSysLogFacilityId.setStatus("current")
+
+
+class _SystemSwlogViewPassword_Type(DisplayString):
+    """Custom type systemSwlogViewPassword based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_SystemSwlogViewPassword_Type.__name__ = "DisplayString"
+_SystemSwlogViewPassword_Object = MibScalar
+systemSwlogViewPassword = _SystemSwlogViewPassword_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 6, 16),
+    _SystemSwlogViewPassword_Type()
+)
+systemSwlogViewPassword.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    systemSwlogViewPassword.setStatus("current")
 _SystemDNS_ObjectIdentity = ObjectIdentity
 systemDNS = _SystemDNS_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7)
@@ -2873,7 +2957,14 @@ systemDNSDomainName = _SystemDNSDomainName_Object(
 systemDNSDomainName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSDomainName.setStatus("current")
-_SystemDNSNsAddr1_Type = IpAddress
+
+
+class _SystemDNSNsAddr1_Type(IpAddress):
+    """Custom type systemDNSNsAddr1 based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_SystemDNSNsAddr1_Type.__name__ = "IpAddress"
 _SystemDNSNsAddr1_Object = MibScalar
 systemDNSNsAddr1 = _SystemDNSNsAddr1_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7, 3),
@@ -2882,7 +2973,14 @@ systemDNSNsAddr1 = _SystemDNSNsAddr1_Object(
 systemDNSNsAddr1.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSNsAddr1.setStatus("current")
-_SystemDNSNsAddr2_Type = IpAddress
+
+
+class _SystemDNSNsAddr2_Type(IpAddress):
+    """Custom type systemDNSNsAddr2 based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_SystemDNSNsAddr2_Type.__name__ = "IpAddress"
 _SystemDNSNsAddr2_Object = MibScalar
 systemDNSNsAddr2 = _SystemDNSNsAddr2_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7, 4),
@@ -2891,7 +2989,14 @@ systemDNSNsAddr2 = _SystemDNSNsAddr2_Object(
 systemDNSNsAddr2.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSNsAddr2.setStatus("current")
-_SystemDNSNsAddr3_Type = IpAddress
+
+
+class _SystemDNSNsAddr3_Type(IpAddress):
+    """Custom type systemDNSNsAddr3 based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_SystemDNSNsAddr3_Type.__name__ = "IpAddress"
 _SystemDNSNsAddr3_Object = MibScalar
 systemDNSNsAddr3 = _SystemDNSNsAddr3_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7, 5),
@@ -2900,7 +3005,14 @@ systemDNSNsAddr3 = _SystemDNSNsAddr3_Object(
 systemDNSNsAddr3.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSNsAddr3.setStatus("current")
-_SystemDNSNsIPv6Addr1_Type = Ipv6Address
+
+
+class _SystemDNSNsIPv6Addr1_Type(Ipv6Address):
+    """Custom type systemDNSNsIPv6Addr1 based on Ipv6Address"""
+    defaultHexValue = "00000000000000000000000000000000"
+
+
+_SystemDNSNsIPv6Addr1_Type.__name__ = "Ipv6Address"
 _SystemDNSNsIPv6Addr1_Object = MibScalar
 systemDNSNsIPv6Addr1 = _SystemDNSNsIPv6Addr1_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7, 6),
@@ -2909,7 +3021,14 @@ systemDNSNsIPv6Addr1 = _SystemDNSNsIPv6Addr1_Object(
 systemDNSNsIPv6Addr1.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSNsIPv6Addr1.setStatus("current")
-_SystemDNSNsIPv6Addr2_Type = Ipv6Address
+
+
+class _SystemDNSNsIPv6Addr2_Type(Ipv6Address):
+    """Custom type systemDNSNsIPv6Addr2 based on Ipv6Address"""
+    defaultHexValue = "00000000000000000000000000000000"
+
+
+_SystemDNSNsIPv6Addr2_Type.__name__ = "Ipv6Address"
 _SystemDNSNsIPv6Addr2_Object = MibScalar
 systemDNSNsIPv6Addr2 = _SystemDNSNsIPv6Addr2_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7, 7),
@@ -2918,7 +3037,14 @@ systemDNSNsIPv6Addr2 = _SystemDNSNsIPv6Addr2_Object(
 systemDNSNsIPv6Addr2.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSNsIPv6Addr2.setStatus("current")
-_SystemDNSNsIPv6Addr3_Type = Ipv6Address
+
+
+class _SystemDNSNsIPv6Addr3_Type(Ipv6Address):
+    """Custom type systemDNSNsIPv6Addr3 based on Ipv6Address"""
+    defaultHexValue = "00000000000000000000000000000000"
+
+
+_SystemDNSNsIPv6Addr3_Type.__name__ = "Ipv6Address"
 _SystemDNSNsIPv6Addr3_Object = MibScalar
 systemDNSNsIPv6Addr3 = _SystemDNSNsIPv6Addr3_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 7, 8),
@@ -2927,6 +3053,37 @@ systemDNSNsIPv6Addr3 = _SystemDNSNsIPv6Addr3_Object(
 systemDNSNsIPv6Addr3.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     systemDNSNsIPv6Addr3.setStatus("current")
+_SystemSignature_ObjectIdentity = ObjectIdentity
+systemSignature = _SystemSignature_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 8)
+)
+_SystemSignatureCertified_Type = DisplayString
+_SystemSignatureCertified_Object = MibScalar
+systemSignatureCertified = _SystemSignatureCertified_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 8, 1),
+    _SystemSignatureCertified_Type()
+)
+systemSignatureCertified.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    systemSignatureCertified.setStatus("current")
+_SystemSignatureWorking_Type = DisplayString
+_SystemSignatureWorking_Object = MibScalar
+systemSignatureWorking = _SystemSignatureWorking_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 8, 2),
+    _SystemSignatureWorking_Type()
+)
+systemSignatureWorking.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    systemSignatureWorking.setStatus("current")
+_SystemSignatureIssu_Type = DisplayString
+_SystemSignatureIssu_Object = MibScalar
+systemSignatureIssu = _SystemSignatureIssu_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 1, 8, 3),
+    _SystemSignatureIssu_Type()
+)
+systemSignatureIssu.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    systemSignatureIssu.setStatus("current")
 _AlcatelIND1SystemMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1SystemMIBConformance = _AlcatelIND1SystemMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 2)
@@ -2945,6 +3102,33 @@ alcatelIND1SystemMIBCompliances = _AlcatelIND1SystemMIBCompliances_ObjectIdentit
 )
 if mibBuilder.loadTexts:
     alcatelIND1SystemMIBCompliances.setStatus("current")
+_AlcatelIND1SystemTrapObjects_ObjectIdentity = ObjectIdentity
+alcatelIND1SystemTrapObjects = _AlcatelIND1SystemTrapObjects_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 3)
+)
+
+
+class _SystemSwlogName_Type(DisplayString):
+    """Custom type systemSwlogName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 255),
+    )
+
+
+_SystemSwlogName_Type.__name__ = "DisplayString"
+_SystemSwlogName_Object = MibScalar
+systemSwlogName = _SystemSwlogName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 3, 1),
+    _SystemSwlogName_Type()
+)
+systemSwlogName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    systemSwlogName.setStatus("current")
+_AlaSystemMgrTraps_ObjectIdentity = ObjectIdentity
+alaSystemMgrTraps = _AlaSystemMgrTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 4)
+)
 
 # Managed Objects groups
 
@@ -3001,7 +3185,14 @@ systemHardwareGroup.setObjects(
         ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareFpgaVersion"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareBootRomVersion"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareDefaultMiniBootVersion"),
-        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareBackupMiniBootVersion"))
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareBackupMiniBootVersion"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareCpldVersion"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareMinorFpgaVersion"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareProdRegId"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareRevisionRegister"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareUbootMinibootVersion"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareUbootVersion"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemHardwareXfpId"))
 )
 if mibBuilder.loadTexts:
     systemHardwareGroup.setStatus("current")
@@ -3033,6 +3224,7 @@ systemServicesGroup.setObjects(
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesArg7"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesArg8"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesArg9"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesArg10"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesAction"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesResultCode"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesResultString"),
@@ -3054,7 +3246,9 @@ systemServicesGroup.setObjects(
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesArchiveAttr"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesUsbEnable"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesUsbAutoCopyEnable"),
-        ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesUsbDisasterRecoveryEnable"))
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesUsbDisasterRecoveryEnable"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesArchiveIndex"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesCurrentArchivePathName"))
 )
 if mibBuilder.loadTexts:
     systemServicesGroup.setStatus("current")
@@ -3091,7 +3285,9 @@ systemSwitchLoggingGroup.setObjects(
         ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingClear"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingFileSize"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingLevel"),
-        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingLevelAppId"))
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingLevelAppId"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingSysLogFacilityId"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwlogViewPassword"))
 )
 if mibBuilder.loadTexts:
     systemSwitchLoggingGroup.setStatus("current")
@@ -3112,11 +3308,61 @@ systemDNSGroup.setObjects(
 if mibBuilder.loadTexts:
     systemDNSGroup.setStatus("current")
 
+systemSwitchLoggingHostGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 2, 1, 8)
+)
+systemSwitchLoggingHostGroup.setObjects(
+      *(("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostCount"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostIpAddr"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostPort"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostStatus"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostUserCommandHost"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostv6IpAddr"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostv6Port"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostv6Status"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostv6UserCommandHost"))
+)
+if mibBuilder.loadTexts:
+    systemSwitchLoggingHostGroup.setStatus("current")
+
+systemSignatureGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 2, 1, 9)
+)
+systemSignatureGroup.setObjects(
+      *(("ALCATEL-IND1-SYSTEM-MIB", "systemSignatureCertified"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSignatureWorking"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSignatureIssu"))
+)
+if mibBuilder.loadTexts:
+    systemSignatureGroup.setStatus("current")
+
 
 # Notification objects
 
+systemSwlogSizeTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 4, 0, 1)
+)
+systemSwlogSizeTrap.setObjects(
+    ("ALCATEL-IND1-SYSTEM-MIB", "systemSwlogName")
+)
+if mibBuilder.loadTexts:
+    systemSwlogSizeTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
+
+systemNotificationGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 1, 1, 2, 1, 2, 1, 10)
+)
+systemNotificationGroup.setObjects(
+    ("ALCATEL-IND1-SYSTEM-MIB", "systemSwlogSizeTrap")
+)
+if mibBuilder.loadTexts:
+    systemNotificationGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -3134,7 +3380,10 @@ alcatelIND1SystemMIBCompliance.setObjects(
         ("ALCATEL-IND1-SYSTEM-MIB", "systemServicesGroup"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemFileSystemGroup"),
         ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingGroup"),
-        ("ALCATEL-IND1-SYSTEM-MIB", "systemDNSGroup"))
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemDNSGroup"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSwitchLoggingHostGroup"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemSignatureGroup"),
+        ("ALCATEL-IND1-SYSTEM-MIB", "systemNotificationGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1SystemMIBCompliance.setStatus(
@@ -3284,6 +3533,11 @@ mibBuilder.exportSymbols(
        "systemServicesUsbEnable": systemServicesUsbEnable,
        "systemServicesUsbAutoCopyEnable": systemServicesUsbAutoCopyEnable,
        "systemServicesUsbDisasterRecoveryEnable": systemServicesUsbDisasterRecoveryEnable,
+       "systemServicesFipsEnable": systemServicesFipsEnable,
+       "systemServicesFipsStatus": systemServicesFipsStatus,
+       "systemServicesArg10": systemServicesArg10,
+       "systemServicesCommonCriteriaEnable": systemServicesCommonCriteriaEnable,
+       "systemServicesCommonCriteriaStatus": systemServicesCommonCriteriaStatus,
        "systemSwitchLogging": systemSwitchLogging,
        "systemSwitchLoggingIndex": systemSwitchLoggingIndex,
        "systemSwitchLoggingEnable": systemSwitchLoggingEnable,
@@ -3313,6 +3567,7 @@ mibBuilder.exportSymbols(
        "systemSwitchLoggingConsoleLevel": systemSwitchLoggingConsoleLevel,
        "systemSwitchLoggingUserCommandStatus": systemSwitchLoggingUserCommandStatus,
        "systemSwitchLoggingSysLogFacilityId": systemSwitchLoggingSysLogFacilityId,
+       "systemSwlogViewPassword": systemSwlogViewPassword,
        "systemDNS": systemDNS,
        "systemDNSEnableDnsResolver": systemDNSEnableDnsResolver,
        "systemDNSDomainName": systemDNSDomainName,
@@ -3322,6 +3577,10 @@ mibBuilder.exportSymbols(
        "systemDNSNsIPv6Addr1": systemDNSNsIPv6Addr1,
        "systemDNSNsIPv6Addr2": systemDNSNsIPv6Addr2,
        "systemDNSNsIPv6Addr3": systemDNSNsIPv6Addr3,
+       "systemSignature": systemSignature,
+       "systemSignatureCertified": systemSignatureCertified,
+       "systemSignatureWorking": systemSignatureWorking,
+       "systemSignatureIssu": systemSignatureIssu,
        "alcatelIND1SystemMIBConformance": alcatelIND1SystemMIBConformance,
        "alcatelIND1SystemMIBGroups": alcatelIND1SystemMIBGroups,
        "systemMicrocodeGroup": systemMicrocodeGroup,
@@ -3331,6 +3590,13 @@ mibBuilder.exportSymbols(
        "systemFileSystemGroup": systemFileSystemGroup,
        "systemSwitchLoggingGroup": systemSwitchLoggingGroup,
        "systemDNSGroup": systemDNSGroup,
+       "systemSwitchLoggingHostGroup": systemSwitchLoggingHostGroup,
+       "systemSignatureGroup": systemSignatureGroup,
+       "systemNotificationGroup": systemNotificationGroup,
        "alcatelIND1SystemMIBCompliances": alcatelIND1SystemMIBCompliances,
-       "alcatelIND1SystemMIBCompliance": alcatelIND1SystemMIBCompliance}
+       "alcatelIND1SystemMIBCompliance": alcatelIND1SystemMIBCompliance,
+       "alcatelIND1SystemTrapObjects": alcatelIND1SystemTrapObjects,
+       "systemSwlogName": systemSwlogName,
+       "alaSystemMgrTraps": alaSystemMgrTraps,
+       "systemSwlogSizeTrap": systemSwlogSizeTrap}
 )

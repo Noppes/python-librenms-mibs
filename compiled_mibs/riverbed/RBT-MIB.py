@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\riverbed\RBT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:23:31 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -103,6 +100,11 @@ if 'mibBuilder' not in globals():
 rbt = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 17163)
 )
+if mibBuilder.loadTexts:
+    rbt.setRevisions(
+        ("2017-04-20 00:00",
+         "2009-09-23 00:00")
+    )
 
 
 # Types definitions
@@ -117,6 +119,18 @@ rbt = ModuleIdentity(
 _Products_ObjectIdentity = ObjectIdentity
 products = _Products_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 17163, 1)
+)
+_RbtTrap_ObjectIdentity = ObjectIdentity
+rbtTrap = _RbtTrap_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 17163, 2)
+)
+_RbtTrapInfo_ObjectIdentity = ObjectIdentity
+rbtTrapInfo = _RbtTrapInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 17163, 3)
+)
+_ProductFamilies_ObjectIdentity = ObjectIdentity
+productFamilies = _ProductFamilies_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 17163, 4)
 )
 
 # Managed Objects groups
@@ -139,5 +153,8 @@ products = _Products_ObjectIdentity(
 mibBuilder.exportSymbols(
     "RBT-MIB",
     **{"rbt": rbt,
-       "products": products}
+       "products": products,
+       "rbtTrap": rbtTrap,
+       "rbtTrapInfo": rbtTrapInfo,
+       "productFamilies": productFamilies}
 )

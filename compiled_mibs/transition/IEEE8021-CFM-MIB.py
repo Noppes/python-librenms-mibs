@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\IEEE8021-CFM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:31:21 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -44,6 +41,12 @@ if 'mibBuilder' not in globals():
     "ValueSizeConstraint")
 
 # Import SMI symbols from the MIBs this MIB depends on
+
+(IEEE8021VlanIndex,
+ ieee802dot1mibs) = mibBuilder.importSymbols(
+    "IEEE8021-TC-MIB",
+    "IEEE8021VlanIndex",
+    "ieee802dot1mibs")
 
 (InterfaceIndex,
  InterfaceIndexOrZero) = mibBuilder.importSymbols(
@@ -141,7 +144,11 @@ ieee8021CfmMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ieee8021CfmMib.setRevisions(
-        ("2008-10-15 00:00",
+        ("2018-06-28 00:00",
+         "2014-12-15 00:00",
+         "2011-02-27 00:00",
+         "2008-11-18 00:00",
+         "2008-10-15 00:00",
          "2007-06-10 00:00")
     )
 
@@ -190,14 +197,16 @@ class Dot1agCfmMaintAssocNameType(TextualConvention, Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              32)
         )
     )
     namedValues = NamedValues(
         *(("primaryVid", 1),
           ("charString", 2),
           ("unsignedInt16", 3),
-          ("rfc2865VpnId", 4))
+          ("rfc2865VpnId", 4),
+          ("iccFormat", 32))
     )
 
 
@@ -708,6 +717,20 @@ class _Dot1agCfmDefaultMdDefMhfCreation_Type(Dot1agCfmMhfCreation):
     """Custom type dot1agCfmDefaultMdDefMhfCreation based on Dot1agCfmMhfCreation"""
     defaultValue = 1
 
+    subtypeSpec = Dot1agCfmMhfCreation.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("defMHFnone", 1),
+          ("defMHFdefault", 2),
+          ("defMHFexplicit", 3))
+    )
+
 
 _Dot1agCfmDefaultMdDefMhfCreation_Type.__name__ = "Dot1agCfmMhfCreation"
 _Dot1agCfmDefaultMdDefMhfCreation_Object = MibScalar
@@ -723,6 +746,22 @@ if mibBuilder.loadTexts:
 class _Dot1agCfmDefaultMdDefIdPermission_Type(Dot1agCfmIdPermission):
     """Custom type dot1agCfmDefaultMdDefIdPermission based on Dot1agCfmIdPermission"""
     defaultValue = 1
+
+    subtypeSpec = Dot1agCfmIdPermission.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("sendIdNone", 1),
+          ("sendIdChassis", 2),
+          ("sendIdManage", 3),
+          ("sendIdChassisManage", 4))
+    )
 
 
 _Dot1agCfmDefaultMdDefIdPermission_Type.__name__ = "Dot1agCfmIdPermission"
@@ -1029,6 +1068,20 @@ class _Dot1agCfmMdMhfCreation_Type(Dot1agCfmMhfCreation):
     """Custom type dot1agCfmMdMhfCreation based on Dot1agCfmMhfCreation"""
     defaultValue = 1
 
+    subtypeSpec = Dot1agCfmMhfCreation.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("defMHFnone", 1),
+          ("defMHFdefault", 2),
+          ("defMHFexplicit", 3))
+    )
+
 
 _Dot1agCfmMdMhfCreation_Type.__name__ = "Dot1agCfmMhfCreation"
 _Dot1agCfmMdMhfCreation_Object = MibTableColumn
@@ -1044,6 +1097,22 @@ if mibBuilder.loadTexts:
 class _Dot1agCfmMdMhfIdPermission_Type(Dot1agCfmIdPermission):
     """Custom type dot1agCfmMdMhfIdPermission based on Dot1agCfmIdPermission"""
     defaultValue = 1
+
+    subtypeSpec = Dot1agCfmIdPermission.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("sendIdNone", 1),
+          ("sendIdChassis", 2),
+          ("sendIdManage", 3),
+          ("sendIdChassisManage", 4))
+    )
 
 
 _Dot1agCfmMdMhfIdPermission_Type.__name__ = "Dot1agCfmIdPermission"
@@ -1711,7 +1780,7 @@ if mibBuilder.loadTexts:
 
 class _Dot1agCfmMepTransmitLbmVlanDropEnable_Type(TruthValue):
     """Custom type dot1agCfmMepTransmitLbmVlanDropEnable based on TruthValue"""
-    defaultValue = 1
+    defaultValue = 2
 
 
 _Dot1agCfmMepTransmitLbmVlanDropEnable_Type.__name__ = "TruthValue"
@@ -1885,6 +1954,74 @@ dot1agCfmMepRowStatus = _Dot1agCfmMepRowStatus_Object(
 dot1agCfmMepRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     dot1agCfmMepRowStatus.setStatus("current")
+
+
+class _Dot1agCfmMepPbbTeCanReportPbbTePresence_Type(TruthValue):
+    """Custom type dot1agCfmMepPbbTeCanReportPbbTePresence based on TruthValue"""
+    defaultValue = 2
+
+
+_Dot1agCfmMepPbbTeCanReportPbbTePresence_Type.__name__ = "TruthValue"
+_Dot1agCfmMepPbbTeCanReportPbbTePresence_Object = MibTableColumn
+dot1agCfmMepPbbTeCanReportPbbTePresence = _Dot1agCfmMepPbbTeCanReportPbbTePresence_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 1, 1, 46),
+    _Dot1agCfmMepPbbTeCanReportPbbTePresence_Type()
+)
+dot1agCfmMepPbbTeCanReportPbbTePresence.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    dot1agCfmMepPbbTeCanReportPbbTePresence.setStatus("current")
+_Dot1agCfmMepPbbTeTrafficMismatchDefect_Type = TruthValue
+_Dot1agCfmMepPbbTeTrafficMismatchDefect_Object = MibTableColumn
+dot1agCfmMepPbbTeTrafficMismatchDefect = _Dot1agCfmMepPbbTeTrafficMismatchDefect_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 1, 1, 47),
+    _Dot1agCfmMepPbbTeTrafficMismatchDefect_Type()
+)
+dot1agCfmMepPbbTeTrafficMismatchDefect.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot1agCfmMepPbbTeTrafficMismatchDefect.setStatus("current")
+_Dot1agCfmMepPbbTransmitLbmLtmReverseVid_Type = IEEE8021VlanIndex
+_Dot1agCfmMepPbbTransmitLbmLtmReverseVid_Object = MibTableColumn
+dot1agCfmMepPbbTransmitLbmLtmReverseVid = _Dot1agCfmMepPbbTransmitLbmLtmReverseVid_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 1, 1, 48),
+    _Dot1agCfmMepPbbTransmitLbmLtmReverseVid_Type()
+)
+dot1agCfmMepPbbTransmitLbmLtmReverseVid.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    dot1agCfmMepPbbTransmitLbmLtmReverseVid.setStatus("current")
+
+
+class _Dot1agCfmMepPbbTeMismatchAlarm_Type(TruthValue):
+    """Custom type dot1agCfmMepPbbTeMismatchAlarm based on TruthValue"""
+    defaultValue = 2
+
+
+_Dot1agCfmMepPbbTeMismatchAlarm_Type.__name__ = "TruthValue"
+_Dot1agCfmMepPbbTeMismatchAlarm_Object = MibTableColumn
+dot1agCfmMepPbbTeMismatchAlarm = _Dot1agCfmMepPbbTeMismatchAlarm_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 1, 1, 49),
+    _Dot1agCfmMepPbbTeMismatchAlarm_Type()
+)
+dot1agCfmMepPbbTeMismatchAlarm.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    dot1agCfmMepPbbTeMismatchAlarm.setStatus("current")
+_Dot1agCfmMepPbbTeLocalMismatchDefect_Type = TruthValue
+_Dot1agCfmMepPbbTeLocalMismatchDefect_Object = MibTableColumn
+dot1agCfmMepPbbTeLocalMismatchDefect = _Dot1agCfmMepPbbTeLocalMismatchDefect_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 1, 1, 50),
+    _Dot1agCfmMepPbbTeLocalMismatchDefect_Type()
+)
+dot1agCfmMepPbbTeLocalMismatchDefect.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot1agCfmMepPbbTeLocalMismatchDefect.setStatus("current")
+_Dot1agCfmMepPbbTeMismatchSinceReset_Type = TruthValue
+_Dot1agCfmMepPbbTeMismatchSinceReset_Object = MibTableColumn
+dot1agCfmMepPbbTeMismatchSinceReset = _Dot1agCfmMepPbbTeMismatchSinceReset_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 1, 1, 51),
+    _Dot1agCfmMepPbbTeMismatchSinceReset_Type()
+)
+dot1agCfmMepPbbTeMismatchSinceReset.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    dot1agCfmMepPbbTeMismatchSinceReset.setStatus("current")
 _Dot1agCfmLtrTable_Object = MibTable
 dot1agCfmLtrTable = _Dot1agCfmLtrTable_Object(
     (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 2)
@@ -2287,6 +2424,15 @@ dot1agCfmMepDbManAddress = _Dot1agCfmMepDbManAddress_Object(
 dot1agCfmMepDbManAddress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     dot1agCfmMepDbManAddress.setStatus("current")
+_Dot1agCfmMepDbRMepIsActive_Type = TruthValue
+_Dot1agCfmMepDbRMepIsActive_Object = MibTableColumn
+dot1agCfmMepDbRMepIsActive = _Dot1agCfmMepDbRMepIsActive_Object(
+    (1, 3, 111, 2, 802, 1, 1, 8, 1, 7, 3, 1, 12),
+    _Dot1agCfmMepDbRMepIsActive_Type()
+)
+dot1agCfmMepDbRMepIsActive.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    dot1agCfmMepDbRMepIsActive.setStatus("current")
 _Dot1agCfmConformance_ObjectIdentity = ObjectIdentity
 dot1agCfmConformance = _Dot1agCfmConformance_ObjectIdentity(
     (1, 3, 111, 2, 802, 1, 1, 8, 2)
@@ -2495,6 +2641,30 @@ ieee8021CfmDefaultMdDefGroup.setObjects(
 if mibBuilder.loadTexts:
     ieee8021CfmDefaultMdDefGroup.setStatus("current")
 
+ieee8021CfmPbbTeExtensionGroup = ObjectGroup(
+    (1, 3, 111, 2, 802, 1, 1, 8, 2, 2, 12)
+)
+ieee8021CfmPbbTeExtensionGroup.setObjects(
+      *(("IEEE8021-CFM-MIB", "dot1agCfmMepDbRMepIsActive"),
+        ("IEEE8021-CFM-MIB", "dot1agCfmMepPbbTransmitLbmLtmReverseVid"))
+)
+if mibBuilder.loadTexts:
+    ieee8021CfmPbbTeExtensionGroup.setStatus("current")
+
+ieee8021CfmPbbTeTrafficBitGroup = ObjectGroup(
+    (1, 3, 111, 2, 802, 1, 1, 8, 2, 2, 13)
+)
+ieee8021CfmPbbTeTrafficBitGroup.setObjects(
+      *(("IEEE8021-CFM-MIB", "dot1agCfmMepDbManAddress"),
+        ("IEEE8021-CFM-MIB", "dot1agCfmMepPbbTeCanReportPbbTePresence"),
+        ("IEEE8021-CFM-MIB", "dot1agCfmMepPbbTeMismatchAlarm"),
+        ("IEEE8021-CFM-MIB", "dot1agCfmMepPbbTeTrafficMismatchDefect"),
+        ("IEEE8021-CFM-MIB", "dot1agCfmMepPbbTeLocalMismatchDefect"),
+        ("IEEE8021-CFM-MIB", "dot1agCfmMepPbbTeMismatchSinceReset"))
+)
+if mibBuilder.loadTexts:
+    ieee8021CfmPbbTeTrafficBitGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -2698,6 +2868,12 @@ mibBuilder.exportSymbols(
        "dot1agCfmMepTransmitLtmSeqNumber": dot1agCfmMepTransmitLtmSeqNumber,
        "dot1agCfmMepTransmitLtmEgressIdentifier": dot1agCfmMepTransmitLtmEgressIdentifier,
        "dot1agCfmMepRowStatus": dot1agCfmMepRowStatus,
+       "dot1agCfmMepPbbTeCanReportPbbTePresence": dot1agCfmMepPbbTeCanReportPbbTePresence,
+       "dot1agCfmMepPbbTeTrafficMismatchDefect": dot1agCfmMepPbbTeTrafficMismatchDefect,
+       "dot1agCfmMepPbbTransmitLbmLtmReverseVid": dot1agCfmMepPbbTransmitLbmLtmReverseVid,
+       "dot1agCfmMepPbbTeMismatchAlarm": dot1agCfmMepPbbTeMismatchAlarm,
+       "dot1agCfmMepPbbTeLocalMismatchDefect": dot1agCfmMepPbbTeLocalMismatchDefect,
+       "dot1agCfmMepPbbTeMismatchSinceReset": dot1agCfmMepPbbTeMismatchSinceReset,
        "dot1agCfmLtrTable": dot1agCfmLtrTable,
        "dot1agCfmLtrEntry": dot1agCfmLtrEntry,
        "dot1agCfmLtrSeqNumber": dot1agCfmLtrSeqNumber,
@@ -2734,6 +2910,7 @@ mibBuilder.exportSymbols(
        "dot1agCfmMepDbChassisId": dot1agCfmMepDbChassisId,
        "dot1agCfmMepDbManAddressDomain": dot1agCfmMepDbManAddressDomain,
        "dot1agCfmMepDbManAddress": dot1agCfmMepDbManAddress,
+       "dot1agCfmMepDbRMepIsActive": dot1agCfmMepDbRMepIsActive,
        "dot1agCfmConformance": dot1agCfmConformance,
        "dot1agCfmCompliances": dot1agCfmCompliances,
        "dot1agCfmCompliance": dot1agCfmCompliance,
@@ -2748,5 +2925,7 @@ mibBuilder.exportSymbols(
        "dot1agCfmMepDbGroup": dot1agCfmMepDbGroup,
        "dot1agCfmNotificationsGroup": dot1agCfmNotificationsGroup,
        "ieee8021CfmMaNetGroup": ieee8021CfmMaNetGroup,
-       "ieee8021CfmDefaultMdDefGroup": ieee8021CfmDefaultMdDefGroup}
+       "ieee8021CfmDefaultMdDefGroup": ieee8021CfmDefaultMdDefGroup,
+       "ieee8021CfmPbbTeExtensionGroup": ieee8021CfmPbbTeExtensionGroup,
+       "ieee8021CfmPbbTeTrafficBitGroup": ieee8021CfmPbbTeTrafficBitGroup}
 )

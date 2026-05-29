@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\kemp\B100-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:08:08 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,7 @@ b100 = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     b100.setRevisions(
-        ("2011-12-01 00:00",)
+        ("2021-06-25 09:09",)
     )
 
 
@@ -253,8 +250,8 @@ if mibBuilder.loadTexts:
     mcastInterface.setStatus("current")
 
 
-class _HAstate_Type(Integer32):
-    """Custom type hAstate based on Integer32"""
+class _HaState_Type(Integer32):
+    """Custom type haState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -272,15 +269,15 @@ class _HAstate_Type(Integer32):
     )
 
 
-_HAstate_Type.__name__ = "Integer32"
-_HAstate_Object = MibScalar
-hAstate = _HAstate_Object(
+_HaState_Type.__name__ = "Integer32"
+_HaState_Object = MibScalar
+haState = _HaState_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 0, 9),
-    _HAstate_Type()
+    _HaState_Type()
 )
-hAstate.setMaxAccess("read-only")
+haState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    hAstate.setStatus("current")
+    haState.setStatus("current")
 
 
 class _PatchVersion_Type(OctetString):
@@ -329,60 +326,60 @@ vsEntry = _VsEntry_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1)
 )
 vsEntry.setIndexNames(
-    (0, "B100-MIB", "vSidx"),
+    (0, "B100-MIB", "vSIdx"),
 )
 if mibBuilder.loadTexts:
     vsEntry.setStatus("current")
 
 
-class _VSidx_Type(Integer32):
-    """Custom type vSidx based on Integer32"""
+class _VSIdx_Type(Integer32):
+    """Custom type vSIdx based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 1024),
     )
 
 
-_VSidx_Type.__name__ = "Integer32"
-_VSidx_Object = MibTableColumn
-vSidx = _VSidx_Object(
+_VSIdx_Type.__name__ = "Integer32"
+_VSIdx_Object = MibTableColumn
+vSIdx = _VSIdx_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 1),
-    _VSidx_Type()
+    _VSIdx_Type()
 )
-vSidx.setMaxAccess("read-only")
+vSIdx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSidx.setStatus("current")
-_VSip_Type = InetAddress
-_VSip_Object = MibTableColumn
-vSip = _VSip_Object(
+    vSIdx.setStatus("current")
+_VSIp_Type = InetAddress
+_VSIp_Object = MibTableColumn
+vSIp = _VSIp_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 2),
-    _VSip_Type()
+    _VSIp_Type()
 )
-vSip.setMaxAccess("read-only")
+vSIp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSip.setStatus("current")
-_VSport_Type = InetPortNumber
-_VSport_Object = MibTableColumn
-vSport = _VSport_Object(
+    vSIp.setStatus("current")
+_VSPort_Type = InetPortNumber
+_VSPort_Object = MibTableColumn
+vSPort = _VSPort_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 3),
-    _VSport_Type()
+    _VSPort_Type()
 )
-vSport.setMaxAccess("read-only")
+vSPort.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSport.setStatus("current")
-_VSaddrtype_Type = InetAddressType
-_VSaddrtype_Object = MibTableColumn
-vSaddrtype = _VSaddrtype_Object(
+    vSPort.setStatus("current")
+_VSAddrtype_Type = InetAddressType
+_VSAddrtype_Object = MibTableColumn
+vSAddrtype = _VSAddrtype_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 4),
-    _VSaddrtype_Type()
+    _VSAddrtype_Type()
 )
-vSaddrtype.setMaxAccess("read-only")
+vSAddrtype.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSaddrtype.setStatus("current")
+    vSAddrtype.setStatus("current")
 
 
-class _VSprotocol_Type(Integer32):
-    """Custom type vSprotocol based on Integer32"""
+class _VSProtocol_Type(Integer32):
+    """Custom type vSProtocol based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -396,161 +393,161 @@ class _VSprotocol_Type(Integer32):
     )
 
 
-_VSprotocol_Type.__name__ = "Integer32"
-_VSprotocol_Object = MibTableColumn
-vSprotocol = _VSprotocol_Object(
+_VSProtocol_Type.__name__ = "Integer32"
+_VSProtocol_Object = MibTableColumn
+vSProtocol = _VSProtocol_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 5),
-    _VSprotocol_Type()
+    _VSProtocol_Type()
 )
-vSprotocol.setMaxAccess("read-only")
+vSProtocol.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSprotocol.setStatus("current")
+    vSProtocol.setStatus("current")
 
 
-class _VSschedulingMethod_Type(OctetString):
-    """Custom type vSschedulingMethod based on OctetString"""
+class _VSSchedulingMethod_Type(OctetString):
+    """Custom type vSSchedulingMethod based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 16),
     )
 
 
-_VSschedulingMethod_Type.__name__ = "OctetString"
-_VSschedulingMethod_Object = MibTableColumn
-vSschedulingMethod = _VSschedulingMethod_Object(
+_VSSchedulingMethod_Type.__name__ = "OctetString"
+_VSSchedulingMethod_Object = MibTableColumn
+vSSchedulingMethod = _VSSchedulingMethod_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 6),
-    _VSschedulingMethod_Type()
+    _VSSchedulingMethod_Type()
 )
-vSschedulingMethod.setMaxAccess("read-only")
+vSSchedulingMethod.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSschedulingMethod.setStatus("current")
-_VSpersistenceTimeout_Type = TimeInterval
-_VSpersistenceTimeout_Object = MibTableColumn
-vSpersistenceTimeout = _VSpersistenceTimeout_Object(
+    vSSchedulingMethod.setStatus("current")
+_VSPersistenceTimeout_Type = TimeInterval
+_VSPersistenceTimeout_Object = MibTableColumn
+vSPersistenceTimeout = _VSPersistenceTimeout_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 7),
-    _VSpersistenceTimeout_Type()
+    _VSPersistenceTimeout_Type()
 )
-vSpersistenceTimeout.setMaxAccess("read-only")
+vSPersistenceTimeout.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSpersistenceTimeout.setStatus("current")
+    vSPersistenceTimeout.setStatus("current")
 
 
-class _VScheckerType_Type(OctetString):
-    """Custom type vScheckerType based on OctetString"""
+class _VSCheckerType_Type(OctetString):
+    """Custom type vSCheckerType based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 32),
     )
 
 
-_VScheckerType_Type.__name__ = "OctetString"
-_VScheckerType_Object = MibTableColumn
-vScheckerType = _VScheckerType_Object(
+_VSCheckerType_Type.__name__ = "OctetString"
+_VSCheckerType_Object = MibTableColumn
+vSCheckerType = _VSCheckerType_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 8),
-    _VScheckerType_Type()
+    _VSCheckerType_Type()
 )
-vScheckerType.setMaxAccess("read-only")
+vSCheckerType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vScheckerType.setStatus("current")
+    vSCheckerType.setStatus("current")
 
 
-class _VSadaptiveMethod_Type(OctetString):
-    """Custom type vSadaptiveMethod based on OctetString"""
+class _VSAdaptiveMethod_Type(OctetString):
+    """Custom type vSAdaptiveMethod based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 32),
     )
 
 
-_VSadaptiveMethod_Type.__name__ = "OctetString"
-_VSadaptiveMethod_Object = MibTableColumn
-vSadaptiveMethod = _VSadaptiveMethod_Object(
+_VSAdaptiveMethod_Type.__name__ = "OctetString"
+_VSAdaptiveMethod_Object = MibTableColumn
+vSAdaptiveMethod = _VSAdaptiveMethod_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 9),
-    _VSadaptiveMethod_Type()
+    _VSAdaptiveMethod_Type()
 )
-vSadaptiveMethod.setMaxAccess("read-only")
+vSAdaptiveMethod.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSadaptiveMethod.setStatus("current")
+    vSAdaptiveMethod.setStatus("current")
 
 
-class _VSnumDests_Type(Integer32):
-    """Custom type vSnumDests based on Integer32"""
+class _VSNumDests_Type(Integer32):
+    """Custom type vSNumDests based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 100),
     )
 
 
-_VSnumDests_Type.__name__ = "Integer32"
-_VSnumDests_Object = MibTableColumn
-vSnumDests = _VSnumDests_Object(
+_VSNumDests_Type.__name__ = "Integer32"
+_VSNumDests_Object = MibTableColumn
+vSNumDests = _VSNumDests_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 10),
-    _VSnumDests_Type()
+    _VSNumDests_Type()
 )
-vSnumDests.setMaxAccess("read-only")
+vSNumDests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSnumDests.setStatus("current")
+    vSNumDests.setStatus("current")
 
 
-class _VSl7persist_Type(OctetString):
-    """Custom type vSl7persist based on OctetString"""
+class _VSL7persist_Type(OctetString):
+    """Custom type vSL7persist based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 16),
     )
 
 
-_VSl7persist_Type.__name__ = "OctetString"
-_VSl7persist_Object = MibTableColumn
-vSl7persist = _VSl7persist_Object(
+_VSL7persist_Type.__name__ = "OctetString"
+_VSL7persist_Object = MibTableColumn
+vSL7persist = _VSL7persist_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 11),
-    _VSl7persist_Type()
+    _VSL7persist_Type()
 )
-vSl7persist.setMaxAccess("read-only")
+vSL7persist.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSl7persist.setStatus("current")
+    vSL7persist.setStatus("current")
 
 
-class _VSl7cookieId_Type(OctetString):
-    """Custom type vSl7cookieId based on OctetString"""
+class _VSL7cookieId_Type(OctetString):
+    """Custom type vSL7cookieId based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 128),
     )
 
 
-_VSl7cookieId_Type.__name__ = "OctetString"
-_VSl7cookieId_Object = MibTableColumn
-vSl7cookieId = _VSl7cookieId_Object(
+_VSL7cookieId_Type.__name__ = "OctetString"
+_VSL7cookieId_Object = MibTableColumn
+vSL7cookieId = _VSL7cookieId_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 12),
-    _VSl7cookieId_Type()
+    _VSL7cookieId_Type()
 )
-vSl7cookieId.setMaxAccess("read-only")
+vSL7cookieId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSl7cookieId.setStatus("current")
+    vSL7cookieId.setStatus("current")
 
 
-class _VSname_Type(OctetString):
-    """Custom type vSname based on OctetString"""
+class _VSName_Type(OctetString):
+    """Custom type vSName based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 16),
     )
 
 
-_VSname_Type.__name__ = "OctetString"
-_VSname_Object = MibTableColumn
-vSname = _VSname_Object(
+_VSName_Type.__name__ = "OctetString"
+_VSName_Object = MibTableColumn
+vSName = _VSName_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 13),
-    _VSname_Type()
+    _VSName_Type()
 )
-vSname.setMaxAccess("read-only")
+vSName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSname.setStatus("current")
+    vSName.setStatus("current")
 
 
-class _VSstate_Type(Integer32):
-    """Custom type vSstate based on Integer32"""
+class _VSState_Type(Integer32):
+    """Custom type vSState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -559,7 +556,8 @@ class _VSstate_Type(Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
@@ -568,28 +566,29 @@ class _VSstate_Type(Integer32):
           ("disabled", 4),
           ("sorry", 5),
           ("redirect", 6),
-          ("errormsg", 7))
+          ("errormsg", 7),
+          ("securityDown", 8))
     )
 
 
-_VSstate_Type.__name__ = "Integer32"
-_VSstate_Object = MibTableColumn
-vSstate = _VSstate_Object(
+_VSState_Type.__name__ = "Integer32"
+_VSState_Object = MibTableColumn
+vSState = _VSState_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 14),
-    _VSstate_Type()
+    _VSState_Type()
 )
-vSstate.setMaxAccess("read-only")
+vSState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSstate.setStatus("current")
-_VSfollow_Type = InetPortNumber
-_VSfollow_Object = MibTableColumn
-vSfollow = _VSfollow_Object(
+    vSState.setStatus("current")
+_VSFollow_Type = InetPortNumber
+_VSFollow_Object = MibTableColumn
+vSFollow = _VSFollow_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 15),
-    _VSfollow_Type()
+    _VSFollow_Type()
 )
-vSfollow.setMaxAccess("read-only")
+vSFollow.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSfollow.setStatus("current")
+    vSFollow.setStatus("current")
 _VSConns_Type = Counter32
 _VSConns_Object = MibTableColumn
 vSConns = _VSConns_Object(
@@ -635,15 +634,177 @@ vSOutBytes = _VSOutBytes_Object(
 vSOutBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vSOutBytes.setStatus("current")
-_VSActivConns_Type = Counter32
-_VSActivConns_Object = MibTableColumn
-vSActivConns = _VSActivConns_Object(
+_VSActiveConns_Type = Gauge32
+_VSActiveConns_Object = MibTableColumn
+vSActiveConns = _VSActiveConns_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 21),
-    _VSActivConns_Type()
+    _VSActiveConns_Type()
 )
-vSActivConns.setMaxAccess("read-only")
+vSActiveConns.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    vSActivConns.setStatus("current")
+    vSActiveConns.setStatus("current")
+_VSCurrentAvgRequest_Type = Integer32
+_VSCurrentAvgRequest_Object = MibTableColumn
+vSCurrentAvgRequest = _VSCurrentAvgRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 22),
+    _VSCurrentAvgRequest_Type()
+)
+vSCurrentAvgRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentAvgRequest.setStatus("current")
+_VSCurrentAvgResponse_Type = Integer32
+_VSCurrentAvgResponse_Object = MibTableColumn
+vSCurrentAvgResponse = _VSCurrentAvgResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 23),
+    _VSCurrentAvgResponse_Type()
+)
+vSCurrentAvgResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentAvgResponse.setStatus("current")
+_VSCurrentMaxRequest_Type = Integer32
+_VSCurrentMaxRequest_Object = MibTableColumn
+vSCurrentMaxRequest = _VSCurrentMaxRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 24),
+    _VSCurrentMaxRequest_Type()
+)
+vSCurrentMaxRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentMaxRequest.setStatus("current")
+_VSCurrentMaxResponse_Type = Integer32
+_VSCurrentMaxResponse_Object = MibTableColumn
+vSCurrentMaxResponse = _VSCurrentMaxResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 25),
+    _VSCurrentMaxResponse_Type()
+)
+vSCurrentMaxResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentMaxResponse.setStatus("current")
+_VSCurrentMinRequest_Type = Integer32
+_VSCurrentMinRequest_Object = MibTableColumn
+vSCurrentMinRequest = _VSCurrentMinRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 26),
+    _VSCurrentMinRequest_Type()
+)
+vSCurrentMinRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentMinRequest.setStatus("current")
+_VSCurrentMinResponse_Type = Integer32
+_VSCurrentMinResponse_Object = MibTableColumn
+vSCurrentMinResponse = _VSCurrentMinResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 27),
+    _VSCurrentMinResponse_Type()
+)
+vSCurrentMinResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentMinResponse.setStatus("current")
+_VSLongTermAvgRequest_Type = Integer32
+_VSLongTermAvgRequest_Object = MibTableColumn
+vSLongTermAvgRequest = _VSLongTermAvgRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 28),
+    _VSLongTermAvgRequest_Type()
+)
+vSLongTermAvgRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermAvgRequest.setStatus("current")
+_VSLongTermAvgResponse_Type = Integer32
+_VSLongTermAvgResponse_Object = MibTableColumn
+vSLongTermAvgResponse = _VSLongTermAvgResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 29),
+    _VSLongTermAvgResponse_Type()
+)
+vSLongTermAvgResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermAvgResponse.setStatus("current")
+_VSLongTermMaxRequest_Type = Integer32
+_VSLongTermMaxRequest_Object = MibTableColumn
+vSLongTermMaxRequest = _VSLongTermMaxRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 30),
+    _VSLongTermMaxRequest_Type()
+)
+vSLongTermMaxRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermMaxRequest.setStatus("current")
+_VSLongTermMaxResponse_Type = Integer32
+_VSLongTermMaxResponse_Object = MibTableColumn
+vSLongTermMaxResponse = _VSLongTermMaxResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 31),
+    _VSLongTermMaxResponse_Type()
+)
+vSLongTermMaxResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermMaxResponse.setStatus("current")
+_VSLongTermMinRequest_Type = Integer32
+_VSLongTermMinRequest_Object = MibTableColumn
+vSLongTermMinRequest = _VSLongTermMinRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 32),
+    _VSLongTermMinRequest_Type()
+)
+vSLongTermMinRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermMinRequest.setStatus("current")
+_VSLongTermMinResponse_Type = Integer32
+_VSLongTermMinResponse_Object = MibTableColumn
+vSLongTermMinResponse = _VSLongTermMinResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 33),
+    _VSLongTermMinResponse_Type()
+)
+vSLongTermMinResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermMinResponse.setStatus("current")
+_VSCurrentAvgRTTTimes_Type = Integer32
+_VSCurrentAvgRTTTimes_Object = MibTableColumn
+vSCurrentAvgRTTTimes = _VSCurrentAvgRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 34),
+    _VSCurrentAvgRTTTimes_Type()
+)
+vSCurrentAvgRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentAvgRTTTimes.setStatus("current")
+_VSCurrentMaxRTTTimes_Type = Integer32
+_VSCurrentMaxRTTTimes_Object = MibTableColumn
+vSCurrentMaxRTTTimes = _VSCurrentMaxRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 35),
+    _VSCurrentMaxRTTTimes_Type()
+)
+vSCurrentMaxRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentMaxRTTTimes.setStatus("current")
+_VSCurrentMinRTTTimes_Type = Integer32
+_VSCurrentMinRTTTimes_Object = MibTableColumn
+vSCurrentMinRTTTimes = _VSCurrentMinRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 36),
+    _VSCurrentMinRTTTimes_Type()
+)
+vSCurrentMinRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSCurrentMinRTTTimes.setStatus("current")
+_VSLongTermAvgRTTTimes_Type = Integer32
+_VSLongTermAvgRTTTimes_Object = MibTableColumn
+vSLongTermAvgRTTTimes = _VSLongTermAvgRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 37),
+    _VSLongTermAvgRTTTimes_Type()
+)
+vSLongTermAvgRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermAvgRTTTimes.setStatus("current")
+_VSLongTermMaxRTTTimes_Type = Integer32
+_VSLongTermMaxRTTTimes_Object = MibTableColumn
+vSLongTermMaxRTTTimes = _VSLongTermMaxRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 38),
+    _VSLongTermMaxRTTTimes_Type()
+)
+vSLongTermMaxRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermMaxRTTTimes.setStatus("current")
+_VSLongTermMinRTTTimes_Type = Integer32
+_VSLongTermMinRTTTimes_Object = MibTableColumn
+vSLongTermMinRTTTimes = _VSLongTermMinRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 1, 1, 39),
+    _VSLongTermMinRTTTimes_Type()
+)
+vSLongTermMinRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    vSLongTermMinRTTTimes.setStatus("current")
 _B100RSTable_Object = MibTable
 b100RSTable = _B100RSTable_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2)
@@ -655,117 +816,117 @@ rsEntry = _RsEntry_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1)
 )
 rsEntry.setIndexNames(
-    (0, "B100-MIB", "rSidx"),
+    (0, "B100-MIB", "rSIdx"),
 )
 if mibBuilder.loadTexts:
     rsEntry.setStatus("current")
 
 
-class _RSvsidx_Type(Integer32):
-    """Custom type rSvsidx based on Integer32"""
+class _RSVsIdx_Type(Integer32):
+    """Custom type rSVsIdx based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 1024),
     )
 
 
-_RSvsidx_Type.__name__ = "Integer32"
-_RSvsidx_Object = MibTableColumn
-rSvsidx = _RSvsidx_Object(
+_RSVsIdx_Type.__name__ = "Integer32"
+_RSVsIdx_Object = MibTableColumn
+rSVsIdx = _RSVsIdx_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 1),
-    _RSvsidx_Type()
+    _RSVsIdx_Type()
 )
-rSvsidx.setMaxAccess("read-only")
+rSVsIdx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSvsidx.setStatus("current")
-_RSip_Type = InetAddress
-_RSip_Object = MibTableColumn
-rSip = _RSip_Object(
+    rSVsIdx.setStatus("current")
+_RSIp_Type = InetAddress
+_RSIp_Object = MibTableColumn
+rSIp = _RSIp_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 2),
-    _RSip_Type()
+    _RSIp_Type()
 )
-rSip.setMaxAccess("read-only")
+rSIp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSip.setStatus("current")
-_RSport_Type = InetPortNumber
-_RSport_Object = MibTableColumn
-rSport = _RSport_Object(
+    rSIp.setStatus("current")
+_RSPort_Type = InetPortNumber
+_RSPort_Object = MibTableColumn
+rSPort = _RSPort_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 3),
-    _RSport_Type()
+    _RSPort_Type()
 )
-rSport.setMaxAccess("read-only")
+rSPort.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSport.setStatus("current")
-_RSaddrtype_Type = InetAddressType
-_RSaddrtype_Object = MibTableColumn
-rSaddrtype = _RSaddrtype_Object(
+    rSPort.setStatus("current")
+_RSAddrType_Type = InetAddressType
+_RSAddrType_Object = MibTableColumn
+rSAddrType = _RSAddrType_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 4),
-    _RSaddrtype_Type()
+    _RSAddrType_Type()
 )
-rSaddrtype.setMaxAccess("read-only")
+rSAddrType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSaddrtype.setStatus("current")
+    rSAddrType.setStatus("current")
 
 
-class _RSidx_Type(Integer32):
-    """Custom type rSidx based on Integer32"""
+class _RSIdx_Type(Integer32):
+    """Custom type rSIdx based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 1024),
+        ValueRangeConstraint(0, 8192),
     )
 
 
-_RSidx_Type.__name__ = "Integer32"
-_RSidx_Object = MibTableColumn
-rSidx = _RSidx_Object(
+_RSIdx_Type.__name__ = "Integer32"
+_RSIdx_Object = MibTableColumn
+rSIdx = _RSIdx_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 5),
-    _RSidx_Type()
+    _RSIdx_Type()
 )
-rSidx.setMaxAccess("read-only")
+rSIdx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSidx.setStatus("current")
+    rSIdx.setStatus("current")
 
 
-class _RSforwardingMethod_Type(OctetString):
-    """Custom type rSforwardingMethod based on OctetString"""
+class _RSForwardingMethod_Type(OctetString):
+    """Custom type rSForwardingMethod based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 32),
     )
 
 
-_RSforwardingMethod_Type.__name__ = "OctetString"
-_RSforwardingMethod_Object = MibTableColumn
-rSforwardingMethod = _RSforwardingMethod_Object(
+_RSForwardingMethod_Type.__name__ = "OctetString"
+_RSForwardingMethod_Object = MibTableColumn
+rSForwardingMethod = _RSForwardingMethod_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 6),
-    _RSforwardingMethod_Type()
+    _RSForwardingMethod_Type()
 )
-rSforwardingMethod.setMaxAccess("read-only")
+rSForwardingMethod.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSforwardingMethod.setStatus("current")
+    rSForwardingMethod.setStatus("current")
 
 
-class _RSweight_Type(Integer32):
-    """Custom type rSweight based on Integer32"""
+class _RSWeight_Type(Integer32):
+    """Custom type rSWeight based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 65535),
     )
 
 
-_RSweight_Type.__name__ = "Integer32"
-_RSweight_Object = MibTableColumn
-rSweight = _RSweight_Object(
+_RSWeight_Type.__name__ = "Integer32"
+_RSWeight_Object = MibTableColumn
+rSWeight = _RSWeight_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 7),
-    _RSweight_Type()
+    _RSWeight_Type()
 )
-rSweight.setMaxAccess("read-only")
+rSWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSweight.setStatus("current")
+    rSWeight.setStatus("current")
 
 
-class _RSstate_Type(Integer32):
-    """Custom type rSstate based on Integer32"""
+class _RSState_Type(Integer32):
+    """Custom type rSState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -781,15 +942,15 @@ class _RSstate_Type(Integer32):
     )
 
 
-_RSstate_Type.__name__ = "Integer32"
-_RSstate_Object = MibTableColumn
-rSstate = _RSstate_Object(
+_RSState_Type.__name__ = "Integer32"
+_RSState_Object = MibTableColumn
+rSState = _RSState_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 8),
-    _RSstate_Type()
+    _RSState_Type()
 )
-rSstate.setMaxAccess("read-only")
+rSState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    rSstate.setStatus("current")
+    rSState.setStatus("current")
 _RSConns_Type = Counter32
 _RSConns_Object = MibTableColumn
 rSConns = _RSConns_Object(
@@ -835,7 +996,7 @@ rSOutBytes = _RSOutBytes_Object(
 rSOutBytes.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rSOutBytes.setStatus("current")
-_RSActiveConns_Type = Counter32
+_RSActiveConns_Type = Gauge32
 _RSActiveConns_Object = MibTableColumn
 rSActiveConns = _RSActiveConns_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 17),
@@ -853,6 +1014,168 @@ rSInactiveConns = _RSInactiveConns_Object(
 rSInactiveConns.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rSInactiveConns.setStatus("current")
+_RSCurrentAvgRequest_Type = Integer32
+_RSCurrentAvgRequest_Object = MibTableColumn
+rSCurrentAvgRequest = _RSCurrentAvgRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 19),
+    _RSCurrentAvgRequest_Type()
+)
+rSCurrentAvgRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentAvgRequest.setStatus("current")
+_RSCurrentAvgResponse_Type = Integer32
+_RSCurrentAvgResponse_Object = MibTableColumn
+rSCurrentAvgResponse = _RSCurrentAvgResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 20),
+    _RSCurrentAvgResponse_Type()
+)
+rSCurrentAvgResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentAvgResponse.setStatus("current")
+_RSCurrentMaxRequest_Type = Integer32
+_RSCurrentMaxRequest_Object = MibTableColumn
+rSCurrentMaxRequest = _RSCurrentMaxRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 21),
+    _RSCurrentMaxRequest_Type()
+)
+rSCurrentMaxRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentMaxRequest.setStatus("current")
+_RSCurrentMaxResponse_Type = Integer32
+_RSCurrentMaxResponse_Object = MibTableColumn
+rSCurrentMaxResponse = _RSCurrentMaxResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 22),
+    _RSCurrentMaxResponse_Type()
+)
+rSCurrentMaxResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentMaxResponse.setStatus("current")
+_RSCurrentMinRequest_Type = Integer32
+_RSCurrentMinRequest_Object = MibTableColumn
+rSCurrentMinRequest = _RSCurrentMinRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 23),
+    _RSCurrentMinRequest_Type()
+)
+rSCurrentMinRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentMinRequest.setStatus("current")
+_RSCurrentMinResponse_Type = Integer32
+_RSCurrentMinResponse_Object = MibTableColumn
+rSCurrentMinResponse = _RSCurrentMinResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 24),
+    _RSCurrentMinResponse_Type()
+)
+rSCurrentMinResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentMinResponse.setStatus("current")
+_RSLongTermAvgRequest_Type = Integer32
+_RSLongTermAvgRequest_Object = MibTableColumn
+rSLongTermAvgRequest = _RSLongTermAvgRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 25),
+    _RSLongTermAvgRequest_Type()
+)
+rSLongTermAvgRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermAvgRequest.setStatus("current")
+_RSLongTermAvgResponse_Type = Integer32
+_RSLongTermAvgResponse_Object = MibTableColumn
+rSLongTermAvgResponse = _RSLongTermAvgResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 26),
+    _RSLongTermAvgResponse_Type()
+)
+rSLongTermAvgResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermAvgResponse.setStatus("current")
+_RSLongTermMaxRequest_Type = Integer32
+_RSLongTermMaxRequest_Object = MibTableColumn
+rSLongTermMaxRequest = _RSLongTermMaxRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 27),
+    _RSLongTermMaxRequest_Type()
+)
+rSLongTermMaxRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermMaxRequest.setStatus("current")
+_RSLongTermMaxResponse_Type = Integer32
+_RSLongTermMaxResponse_Object = MibTableColumn
+rSLongTermMaxResponse = _RSLongTermMaxResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 28),
+    _RSLongTermMaxResponse_Type()
+)
+rSLongTermMaxResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermMaxResponse.setStatus("current")
+_RSLongTermMinRequest_Type = Integer32
+_RSLongTermMinRequest_Object = MibTableColumn
+rSLongTermMinRequest = _RSLongTermMinRequest_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 29),
+    _RSLongTermMinRequest_Type()
+)
+rSLongTermMinRequest.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermMinRequest.setStatus("current")
+_RSLongTermMinResponse_Type = Integer32
+_RSLongTermMinResponse_Object = MibTableColumn
+rSLongTermMinResponse = _RSLongTermMinResponse_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 30),
+    _RSLongTermMinResponse_Type()
+)
+rSLongTermMinResponse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermMinResponse.setStatus("current")
+_RSCurrentAvgRTTTimes_Type = Integer32
+_RSCurrentAvgRTTTimes_Object = MibTableColumn
+rSCurrentAvgRTTTimes = _RSCurrentAvgRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 31),
+    _RSCurrentAvgRTTTimes_Type()
+)
+rSCurrentAvgRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentAvgRTTTimes.setStatus("current")
+_RSCurrentMaxRTTTimes_Type = Integer32
+_RSCurrentMaxRTTTimes_Object = MibTableColumn
+rSCurrentMaxRTTTimes = _RSCurrentMaxRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 32),
+    _RSCurrentMaxRTTTimes_Type()
+)
+rSCurrentMaxRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentMaxRTTTimes.setStatus("current")
+_RSCurrentMinRTTTimes_Type = Integer32
+_RSCurrentMinRTTTimes_Object = MibTableColumn
+rSCurrentMinRTTTimes = _RSCurrentMinRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 33),
+    _RSCurrentMinRTTTimes_Type()
+)
+rSCurrentMinRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSCurrentMinRTTTimes.setStatus("current")
+_RSLongTermAvgRTTTimes_Type = Integer32
+_RSLongTermAvgRTTTimes_Object = MibTableColumn
+rSLongTermAvgRTTTimes = _RSLongTermAvgRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 34),
+    _RSLongTermAvgRTTTimes_Type()
+)
+rSLongTermAvgRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermAvgRTTTimes.setStatus("current")
+_RSLongTermMaxRTTTimes_Type = Integer32
+_RSLongTermMaxRTTTimes_Object = MibTableColumn
+rSLongTermMaxRTTTimes = _RSLongTermMaxRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 35),
+    _RSLongTermMaxRTTTimes_Type()
+)
+rSLongTermMaxRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermMaxRTTTimes.setStatus("current")
+_RSLongTermMinRTTTimes_Type = Integer32
+_RSLongTermMinRTTTimes_Object = MibTableColumn
+rSLongTermMinRTTTimes = _RSLongTermMinRTTTimes_Object(
+    (1, 3, 6, 1, 4, 1, 12196, 13, 2, 1, 36),
+    _RSLongTermMinRTTTimes_Type()
+)
+rSLongTermMinRTTTimes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rSLongTermMinRTTTimes.setStatus("current")
 _B100NotificationsPrefix_ObjectIdentity = ObjectIdentity
 b100NotificationsPrefix = _B100NotificationsPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12196, 13, 3)
@@ -863,80 +1186,80 @@ b100Notifications = _B100Notifications_ObjectIdentity(
 )
 
 
-class _AdaptivInterval_Type(Integer32):
-    """Custom type adaptivInterval based on Integer32"""
+class _AdaptiveInterval_Type(Integer32):
+    """Custom type adaptiveInterval based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 65535),
     )
 
 
-_AdaptivInterval_Type.__name__ = "Integer32"
-_AdaptivInterval_Object = MibScalar
-adaptivInterval = _AdaptivInterval_Object(
+_AdaptiveInterval_Type.__name__ = "Integer32"
+_AdaptiveInterval_Object = MibScalar
+adaptiveInterval = _AdaptiveInterval_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 13),
-    _AdaptivInterval_Type()
+    _AdaptiveInterval_Type()
 )
-adaptivInterval.setMaxAccess("read-only")
+adaptiveInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    adaptivInterval.setStatus("current")
+    adaptiveInterval.setStatus("current")
 
 
-class _AdaptivUrl_Type(OctetString):
-    """Custom type adaptivUrl based on OctetString"""
+class _AdaptiveUrl_Type(OctetString):
+    """Custom type adaptiveUrl based on OctetString"""
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(0, 1023),
     )
 
 
-_AdaptivUrl_Type.__name__ = "OctetString"
-_AdaptivUrl_Object = MibScalar
-adaptivUrl = _AdaptivUrl_Object(
+_AdaptiveUrl_Type.__name__ = "OctetString"
+_AdaptiveUrl_Object = MibScalar
+adaptiveUrl = _AdaptiveUrl_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 14),
-    _AdaptivUrl_Type()
+    _AdaptiveUrl_Type()
 )
-adaptivUrl.setMaxAccess("read-only")
+adaptiveUrl.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    adaptivUrl.setStatus("current")
+    adaptiveUrl.setStatus("current")
 
 
-class _AdaptivCtrlMinP_Type(Integer32):
-    """Custom type adaptivCtrlMinP based on Integer32"""
+class _AdaptiveCtrlMinP_Type(Integer32):
+    """Custom type adaptiveCtrlMinP based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(0, 65535),
     )
 
 
-_AdaptivCtrlMinP_Type.__name__ = "Integer32"
-_AdaptivCtrlMinP_Object = MibScalar
-adaptivCtrlMinP = _AdaptivCtrlMinP_Object(
+_AdaptiveCtrlMinP_Type.__name__ = "Integer32"
+_AdaptiveCtrlMinP_Object = MibScalar
+adaptiveCtrlMinP = _AdaptiveCtrlMinP_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 15),
-    _AdaptivCtrlMinP_Type()
+    _AdaptiveCtrlMinP_Type()
 )
-adaptivCtrlMinP.setMaxAccess("read-only")
+adaptiveCtrlMinP.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    adaptivCtrlMinP.setStatus("current")
+    adaptiveCtrlMinP.setStatus("current")
 
 
-class _AdaptivMinWeight_Type(Integer32):
-    """Custom type adaptivMinWeight based on Integer32"""
+class _AdaptiveMinWeight_Type(Integer32):
+    """Custom type adaptiveMinWeight based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(1, 65535),
     )
 
 
-_AdaptivMinWeight_Type.__name__ = "Integer32"
-_AdaptivMinWeight_Object = MibScalar
-adaptivMinWeight = _AdaptivMinWeight_Object(
+_AdaptiveMinWeight_Type.__name__ = "Integer32"
+_AdaptiveMinWeight_Object = MibScalar
+adaptiveMinWeight = _AdaptiveMinWeight_Object(
     (1, 3, 6, 1, 4, 1, 12196, 13, 16),
-    _AdaptivMinWeight_Type()
+    _AdaptiveMinWeight_Type()
 )
-adaptivMinWeight.setMaxAccess("read-only")
+adaptiveMinWeight.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    adaptivMinWeight.setStatus("current")
+    adaptiveMinWeight.setStatus("current")
 
 # Managed Objects groups
 
@@ -947,12 +1270,12 @@ vSstateChange = NotificationType(
     (1, 3, 6, 1, 4, 1, 12196, 13, 3, 1, 1)
 )
 vSstateChange.setObjects(
-      *(("B100-MIB", "vSstate"),
-        ("B100-MIB", "vSip"),
-        ("B100-MIB", "vSport"),
-        ("B100-MIB", "vSaddrtype"),
-        ("B100-MIB", "vSname"),
-        ("B100-MIB", "vSidx"))
+      *(("B100-MIB", "vSState"),
+        ("B100-MIB", "vSIp"),
+        ("B100-MIB", "vSPort"),
+        ("B100-MIB", "vSAddrtype"),
+        ("B100-MIB", "vSName"),
+        ("B100-MIB", "vSIdx"))
 )
 if mibBuilder.loadTexts:
     vSstateChange.setStatus(
@@ -963,16 +1286,16 @@ rSstateChange = NotificationType(
     (1, 3, 6, 1, 4, 1, 12196, 13, 3, 1, 2)
 )
 rSstateChange.setObjects(
-      *(("B100-MIB", "rSstate"),
-        ("B100-MIB", "rSip"),
-        ("B100-MIB", "rSport"),
-        ("B100-MIB", "rSaddrtype"),
-        ("B100-MIB", "rSidx"),
-        ("B100-MIB", "vSip"),
-        ("B100-MIB", "vSport"),
-        ("B100-MIB", "vSaddrtype"),
-        ("B100-MIB", "vSname"),
-        ("B100-MIB", "vSidx"))
+      *(("B100-MIB", "rSState"),
+        ("B100-MIB", "rSIp"),
+        ("B100-MIB", "rSPort"),
+        ("B100-MIB", "rSAddrType"),
+        ("B100-MIB", "rSIdx"),
+        ("B100-MIB", "vSIp"),
+        ("B100-MIB", "vSPort"),
+        ("B100-MIB", "vSAddrtype"),
+        ("B100-MIB", "vSName"),
+        ("B100-MIB", "vSIdx"))
 )
 if mibBuilder.loadTexts:
     rSstateChange.setStatus(
@@ -983,7 +1306,7 @@ hAstateChange = NotificationType(
     (1, 3, 6, 1, 4, 1, 12196, 13, 3, 1, 3)
 )
 hAstateChange.setObjects(
-    ("B100-MIB", "hAstate")
+    ("B100-MIB", "haState")
 )
 if mibBuilder.loadTexts:
     hAstateChange.setStatus(
@@ -1021,43 +1344,61 @@ mibBuilder.exportSymbols(
        "udpTimeOut": udpTimeOut,
        "daemonState": daemonState,
        "mcastInterface": mcastInterface,
-       "hAstate": hAstate,
+       "haState": haState,
        "patchVersion": patchVersion,
        "totalTps": totalTps,
        "sslTps": sslTps,
        "b100VSTable": b100VSTable,
        "vsEntry": vsEntry,
-       "vSidx": vSidx,
-       "vSip": vSip,
-       "vSport": vSport,
-       "vSaddrtype": vSaddrtype,
-       "vSprotocol": vSprotocol,
-       "vSschedulingMethod": vSschedulingMethod,
-       "vSpersistenceTimeout": vSpersistenceTimeout,
-       "vScheckerType": vScheckerType,
-       "vSadaptiveMethod": vSadaptiveMethod,
-       "vSnumDests": vSnumDests,
-       "vSl7persist": vSl7persist,
-       "vSl7cookieId": vSl7cookieId,
-       "vSname": vSname,
-       "vSstate": vSstate,
-       "vSfollow": vSfollow,
+       "vSIdx": vSIdx,
+       "vSIp": vSIp,
+       "vSPort": vSPort,
+       "vSAddrtype": vSAddrtype,
+       "vSProtocol": vSProtocol,
+       "vSSchedulingMethod": vSSchedulingMethod,
+       "vSPersistenceTimeout": vSPersistenceTimeout,
+       "vSCheckerType": vSCheckerType,
+       "vSAdaptiveMethod": vSAdaptiveMethod,
+       "vSNumDests": vSNumDests,
+       "vSL7persist": vSL7persist,
+       "vSL7cookieId": vSL7cookieId,
+       "vSName": vSName,
+       "vSState": vSState,
+       "vSFollow": vSFollow,
        "vSConns": vSConns,
        "vSInPkts": vSInPkts,
        "vSOutPkts": vSOutPkts,
        "vSInBytes": vSInBytes,
        "vSOutBytes": vSOutBytes,
-       "vSActivConns": vSActivConns,
+       "vSActiveConns": vSActiveConns,
+       "vSCurrentAvgRequest": vSCurrentAvgRequest,
+       "vSCurrentAvgResponse": vSCurrentAvgResponse,
+       "vSCurrentMaxRequest": vSCurrentMaxRequest,
+       "vSCurrentMaxResponse": vSCurrentMaxResponse,
+       "vSCurrentMinRequest": vSCurrentMinRequest,
+       "vSCurrentMinResponse": vSCurrentMinResponse,
+       "vSLongTermAvgRequest": vSLongTermAvgRequest,
+       "vSLongTermAvgResponse": vSLongTermAvgResponse,
+       "vSLongTermMaxRequest": vSLongTermMaxRequest,
+       "vSLongTermMaxResponse": vSLongTermMaxResponse,
+       "vSLongTermMinRequest": vSLongTermMinRequest,
+       "vSLongTermMinResponse": vSLongTermMinResponse,
+       "vSCurrentAvgRTTTimes": vSCurrentAvgRTTTimes,
+       "vSCurrentMaxRTTTimes": vSCurrentMaxRTTTimes,
+       "vSCurrentMinRTTTimes": vSCurrentMinRTTTimes,
+       "vSLongTermAvgRTTTimes": vSLongTermAvgRTTTimes,
+       "vSLongTermMaxRTTTimes": vSLongTermMaxRTTTimes,
+       "vSLongTermMinRTTTimes": vSLongTermMinRTTTimes,
        "b100RSTable": b100RSTable,
        "rsEntry": rsEntry,
-       "rSvsidx": rSvsidx,
-       "rSip": rSip,
-       "rSport": rSport,
-       "rSaddrtype": rSaddrtype,
-       "rSidx": rSidx,
-       "rSforwardingMethod": rSforwardingMethod,
-       "rSweight": rSweight,
-       "rSstate": rSstate,
+       "rSVsIdx": rSVsIdx,
+       "rSIp": rSIp,
+       "rSPort": rSPort,
+       "rSAddrType": rSAddrType,
+       "rSIdx": rSIdx,
+       "rSForwardingMethod": rSForwardingMethod,
+       "rSWeight": rSWeight,
+       "rSState": rSState,
        "rSConns": rSConns,
        "rSInPkts": rSInPkts,
        "rSOutPkts": rSOutPkts,
@@ -1065,14 +1406,32 @@ mibBuilder.exportSymbols(
        "rSOutBytes": rSOutBytes,
        "rSActiveConns": rSActiveConns,
        "rSInactiveConns": rSInactiveConns,
+       "rSCurrentAvgRequest": rSCurrentAvgRequest,
+       "rSCurrentAvgResponse": rSCurrentAvgResponse,
+       "rSCurrentMaxRequest": rSCurrentMaxRequest,
+       "rSCurrentMaxResponse": rSCurrentMaxResponse,
+       "rSCurrentMinRequest": rSCurrentMinRequest,
+       "rSCurrentMinResponse": rSCurrentMinResponse,
+       "rSLongTermAvgRequest": rSLongTermAvgRequest,
+       "rSLongTermAvgResponse": rSLongTermAvgResponse,
+       "rSLongTermMaxRequest": rSLongTermMaxRequest,
+       "rSLongTermMaxResponse": rSLongTermMaxResponse,
+       "rSLongTermMinRequest": rSLongTermMinRequest,
+       "rSLongTermMinResponse": rSLongTermMinResponse,
+       "rSCurrentAvgRTTTimes": rSCurrentAvgRTTTimes,
+       "rSCurrentMaxRTTTimes": rSCurrentMaxRTTTimes,
+       "rSCurrentMinRTTTimes": rSCurrentMinRTTTimes,
+       "rSLongTermAvgRTTTimes": rSLongTermAvgRTTTimes,
+       "rSLongTermMaxRTTTimes": rSLongTermMaxRTTTimes,
+       "rSLongTermMinRTTTimes": rSLongTermMinRTTTimes,
        "b100NotificationsPrefix": b100NotificationsPrefix,
        "b100Notifications": b100Notifications,
        "vSstateChange": vSstateChange,
        "rSstateChange": rSstateChange,
        "hAstateChange": hAstateChange,
        "licenseExceeded": licenseExceeded,
-       "adaptivInterval": adaptivInterval,
-       "adaptivUrl": adaptivUrl,
-       "adaptivCtrlMinP": adaptivCtrlMinP,
-       "adaptivMinWeight": adaptivMinWeight}
+       "adaptiveInterval": adaptiveInterval,
+       "adaptiveUrl": adaptiveUrl,
+       "adaptiveCtrlMinP": adaptiveCtrlMinP,
+       "adaptiveMinWeight": adaptiveMinWeight}
 )

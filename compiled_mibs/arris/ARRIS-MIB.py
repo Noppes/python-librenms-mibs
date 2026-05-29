@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arris\ARRIS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:18:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,10 @@ arris = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     arris.setRevisions(
-        ("1904-02-02 00:00",
+        ("1910-09-25 00:00",
+         "1905-03-14 00:00",
+         "1904-09-10 00:00",
+         "1904-02-02 00:00",
          "1902-06-24 00:00",
          "1901-10-04 00:00",
          "1901-01-24 00:00",
@@ -194,6 +194,18 @@ _ArrisGlobalAccessProductUas_ObjectIdentity = ObjectIdentity
 arrisGlobalAccessProductUas = _ArrisGlobalAccessProductUas_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 4115, 1, 6, 2)
 )
+_ArrisProdIdVideo_ObjectIdentity = ObjectIdentity
+arrisProdIdVideo = _ArrisProdIdVideo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 4115, 1, 8)
+)
+_ArrisD5UEQam_ObjectIdentity = ObjectIdentity
+arrisD5UEQam = _ArrisD5UEQam_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 4115, 1, 8, 1)
+)
+_ArrisD5AM_ObjectIdentity = ObjectIdentity
+arrisD5AM = _ArrisD5AM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 4115, 1, 8, 2)
+)
 
 # Managed Objects groups
 
@@ -232,5 +244,8 @@ mibBuilder.exportSymbols(
        "mrcController": mrcController,
        "arrisProdIdGlobalAccess": arrisProdIdGlobalAccess,
        "arrisGlobalAccessMib": arrisGlobalAccessMib,
-       "arrisGlobalAccessProductUas": arrisGlobalAccessProductUas}
+       "arrisGlobalAccessProductUas": arrisGlobalAccessProductUas,
+       "arrisProdIdVideo": arrisProdIdVideo,
+       "arrisD5UEQam": arrisD5UEQam,
+       "arrisD5AM": arrisD5AM}
 )

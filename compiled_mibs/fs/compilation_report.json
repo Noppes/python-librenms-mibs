@@ -1,37 +1,13 @@
 {
-  "timestamp": "2025-10-02T11:47:10.313210",
+  "timestamp": "2026-05-29T09:30:06.501777",
   "stats": {
-    "total": 75,
-    "compiled": 17,
-    "failed": 51,
+    "total": 79,
+    "compiled": 20,
+    "failed": 52,
     "skipped": 7,
     "errors": [
       {
-        "mib": "NMS-CARD-SYS-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "NMS-CHASSIS",
-        "error": "failed"
-      },
-      {
-        "mib": "NMS-EPON-OLT-PON",
-        "error": "failed"
-      },
-      {
-        "mib": "NMS-FAN-TRAP",
-        "error": "failed"
-      },
-      {
-        "mib": "NMS-GPON-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "NMS-OPTICAL-PORT-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "NMS-POWER-MIB",
+        "mib": "ADMIN-MASTER-MIB",
         "error": "failed"
       },
       {
@@ -47,10 +23,6 @@
         "error": "failed"
       },
       {
-        "mib": "FS-SWITCH-V2-MIB",
-        "error": "missing"
-      },
-      {
         "mib": "FS-SYSTEM-MIB",
         "error": "unprocessed"
       },
@@ -64,6 +36,10 @@
       },
       {
         "mib": "GBNDevicePoe-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "GBNDeviceSWAPI-MIB",
         "error": "failed"
       },
       {
@@ -99,7 +75,15 @@
         "error": "failed"
       },
       {
+        "mib": "GBNL3-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "GBNL3DhcpRelay-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "GBNL3IPPool-MIB",
         "error": "failed"
       },
       {
@@ -108,10 +92,6 @@
       },
       {
         "mib": "GBNL3Igmp-MIB",
-        "error": "failed"
-      },
-      {
-        "mib": "GBNL3IPPool-MIB",
         "error": "failed"
       },
       {
@@ -195,6 +175,34 @@
         "error": "failed"
       },
       {
+        "mib": "NMS-CARD-SYS-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "NMS-CHASSIS",
+        "error": "failed"
+      },
+      {
+        "mib": "NMS-EPON-OLT-PON",
+        "error": "failed"
+      },
+      {
+        "mib": "NMS-FAN-TRAP",
+        "error": "failed"
+      },
+      {
+        "mib": "NMS-GPON-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "NMS-OPTICAL-PORT-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "NMS-POWER-MIB",
+        "error": "failed"
+      },
+      {
         "mib": "NSCRTV-EPON-IGMP-MGM-MIB",
         "error": "failed"
       },
@@ -203,14 +211,10 @@
         "error": "failed"
       },
       {
-        "mib": "PIM-BSR-MIB",
-        "error": "failed"
-      },
-      {
         "mib": "STP-MIB",
         "error": "failed"
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

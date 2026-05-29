@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-NTP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:51 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-NTP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,7 @@ alcatelIND1NTPMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1NTPMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -300,7 +297,7 @@ alaNtpPeerType = _AlaNtpPeerType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 4),
     _AlaNtpPeerType_Type()
 )
-alaNtpPeerType.setMaxAccess("read-write")
+alaNtpPeerType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerType.setStatus("current")
 
@@ -321,7 +318,7 @@ alaNtpPeerAuth = _AlaNtpPeerAuth_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 5),
     _AlaNtpPeerAuth_Type()
 )
-alaNtpPeerAuth.setMaxAccess("read-write")
+alaNtpPeerAuth.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerAuth.setStatus("current")
 
@@ -342,7 +339,7 @@ alaNtpPeerVersion = _AlaNtpPeerVersion_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 6),
     _AlaNtpPeerVersion_Type()
 )
-alaNtpPeerVersion.setMaxAccess("read-write")
+alaNtpPeerVersion.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerVersion.setStatus("current")
 
@@ -363,7 +360,7 @@ alaNtpPeerMinpoll = _AlaNtpPeerMinpoll_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 7),
     _AlaNtpPeerMinpoll_Type()
 )
-alaNtpPeerMinpoll.setMaxAccess("read-write")
+alaNtpPeerMinpoll.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerMinpoll.setStatus("current")
 
@@ -391,7 +388,7 @@ alaNtpPeerPrefer = _AlaNtpPeerPrefer_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 8),
     _AlaNtpPeerPrefer_Type()
 )
-alaNtpPeerPrefer.setMaxAccess("read-write")
+alaNtpPeerPrefer.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerPrefer.setStatus("current")
 _AlaNtpPeerAdmin_Type = RowStatus
@@ -400,7 +397,7 @@ alaNtpPeerAdmin = _AlaNtpPeerAdmin_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 9),
     _AlaNtpPeerAdmin_Type()
 )
-alaNtpPeerAdmin.setMaxAccess("read-write")
+alaNtpPeerAdmin.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerAdmin.setStatus("current")
 _AlaNtpPeerName_Type = DisplayString
@@ -430,9 +427,65 @@ alaNtpPeerStratum = _AlaNtpPeerStratum_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 11),
     _AlaNtpPeerStratum_Type()
 )
-alaNtpPeerStratum.setMaxAccess("read-write")
+alaNtpPeerStratum.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpPeerStratum.setStatus("current")
+
+
+class _AlaNtpPeerBurst_Type(Integer32):
+    """Custom type alaNtpPeerBurst based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("burst", 1),
+          ("noBurst", 2))
+    )
+
+
+_AlaNtpPeerBurst_Type.__name__ = "Integer32"
+_AlaNtpPeerBurst_Object = MibTableColumn
+alaNtpPeerBurst = _AlaNtpPeerBurst_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 12),
+    _AlaNtpPeerBurst_Type()
+)
+alaNtpPeerBurst.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaNtpPeerBurst.setStatus("current")
+
+
+class _AlaNtpPeerIburst_Type(Integer32):
+    """Custom type alaNtpPeerIburst based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("iburst", 1),
+          ("noIburst", 2))
+    )
+
+
+_AlaNtpPeerIburst_Type.__name__ = "Integer32"
+_AlaNtpPeerIburst_Object = MibTableColumn
+alaNtpPeerIburst = _AlaNtpPeerIburst_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 1, 4, 1, 13),
+    _AlaNtpPeerIburst_Type()
+)
+alaNtpPeerIburst.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaNtpPeerIburst.setStatus("current")
 
 
 class _AlaNtpAuthDelay_Type(Integer32):
@@ -2160,7 +2213,7 @@ alaNtpAccessRestrictedRestrictions = _AlaNtpAccessRestrictedRestrictions_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 7, 2, 1, 3),
     _AlaNtpAccessRestrictedRestrictions_Type()
 )
-alaNtpAccessRestrictedRestrictions.setMaxAccess("read-write")
+alaNtpAccessRestrictedRestrictions.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpAccessRestrictedRestrictions.setStatus("current")
 _AlaNtpAccessRestrictedCount_Type = Counter32
@@ -2178,7 +2231,7 @@ alaNtpAccessRestrictedRowStatus = _AlaNtpAccessRestrictedRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 1, 7, 2, 1, 5),
     _AlaNtpAccessRestrictedRowStatus_Type()
 )
-alaNtpAccessRestrictedRowStatus.setMaxAccess("read-write")
+alaNtpAccessRestrictedRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaNtpAccessRestrictedRowStatus.setStatus("current")
 
@@ -2404,7 +2457,7 @@ ntpClientConfig = _NtpClientConfig_Object(
 )
 ntpClientConfig.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    ntpClientConfig.setStatus("deprecated")
+    ntpClientConfig.setStatus("current")
 _NtpClientIP_Type = IpAddress
 _NtpClientIP_Object = MibScalar
 ntpClientIP = _NtpClientIP_Object(
@@ -2413,7 +2466,7 @@ ntpClientIP = _NtpClientIP_Object(
 )
 ntpClientIP.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    ntpClientIP.setStatus("deprecated")
+    ntpClientIP.setStatus("current")
 
 
 class _AlaNtpSrcIpConfig_Type(Integer32):
@@ -2479,6 +2532,28 @@ _AlaNtpEventsRoot_ObjectIdentity = ObjectIdentity
 alaNtpEventsRoot = _AlaNtpEventsRoot_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 3, 0)
 )
+_AlaNtpEventsObj_ObjectIdentity = ObjectIdentity
+alaNtpEventsObj = _AlaNtpEventsObj_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 3, 1)
+)
+_AlaNtpSyncPeerIpAddress_Type = IpAddress
+_AlaNtpSyncPeerIpAddress_Object = MibScalar
+alaNtpSyncPeerIpAddress = _AlaNtpSyncPeerIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 3, 1, 1),
+    _AlaNtpSyncPeerIpAddress_Type()
+)
+alaNtpSyncPeerIpAddress.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaNtpSyncPeerIpAddress.setStatus("current")
+_AlaNtpAllServerDown_Type = DisplayString
+_AlaNtpAllServerDown_Object = MibScalar
+alaNtpAllServerDown = _AlaNtpAllServerDown_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 3, 1, 2),
+    _AlaNtpAllServerDown_Type()
+)
+alaNtpAllServerDown.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaNtpAllServerDown.setStatus("current")
 
 # Managed Objects groups
 
@@ -2507,7 +2582,10 @@ alaNtpConfigGroup.setObjects(
         ("ALCATEL-IND1-NTP-MIB", "alaNtpPeerTests"),
         ("ALCATEL-IND1-NTP-MIB", "alaNtpSysStratum"),
         ("ALCATEL-IND1-NTP-MIB", "alaNtpMaxAssociation"),
-        ("ALCATEL-IND1-NTP-MIB", "alaNtpAuthenticate"))
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpAuthenticate"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpConfigCfgKeyId"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpPeerBurst"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpPeerIburst"))
 )
 if mibBuilder.loadTexts:
     alaNtpConfigGroup.setStatus("current")
@@ -2677,10 +2755,40 @@ alaNtpSrcIpGroup = ObjectGroup(
 )
 alaNtpSrcIpGroup.setObjects(
       *(("ALCATEL-IND1-NTP-MIB", "alaNtpSrcIpConfig"),
-        ("ALCATEL-IND1-NTP-MIB", "alaNtpSrcIp"))
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpSrcIp"),
+        ("ALCATEL-IND1-NTP-MIB", "ntpClientConfig"),
+        ("ALCATEL-IND1-NTP-MIB", "ntpClientIP"))
 )
 if mibBuilder.loadTexts:
     alaNtpSrcIpGroup.setStatus("current")
+
+alaNtpStatsMonitorGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 2, 1, 11)
+)
+alaNtpStatsMonitorGroup.setObjects(
+      *(("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorAddress"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorCount"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorDrop"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorFirst"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorLast"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorLocalAddress"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorMode"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorName"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorPort"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorVersion"))
+)
+if mibBuilder.loadTexts:
+    alaNtpStatsMonitorGroup.setStatus("current")
+
+alaNtpEventsObjGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 2, 1, 12)
+)
+alaNtpEventsObjGroup.setObjects(
+      *(("ALCATEL-IND1-NTP-MIB", "alaNtpAllServerDown"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpSyncPeerIpAddress"))
+)
+if mibBuilder.loadTexts:
+    alaNtpEventsObjGroup.setStatus("current")
 
 
 # Notification objects
@@ -2696,6 +2804,28 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+alaNtpActiveServerChangeTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 3, 0, 2)
+)
+alaNtpActiveServerChangeTrap.setObjects(
+    ("ALCATEL-IND1-NTP-MIB", "alaNtpSyncPeerIpAddress")
+)
+if mibBuilder.loadTexts:
+    alaNtpActiveServerChangeTrap.setStatus(
+        "current"
+    )
+
+alaNtpAllPeerUnreachableTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 3, 0, 3)
+)
+alaNtpAllPeerUnreachableTrap.setObjects(
+    ("ALCATEL-IND1-NTP-MIB", "alaNtpAllServerDown")
+)
+if mibBuilder.loadTexts:
+    alaNtpAllPeerUnreachableTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -2703,7 +2833,9 @@ alaNtpEventsGroup = NotificationGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 26, 1, 2, 1, 9)
 )
 alaNtpEventsGroup.setObjects(
-    ("ALCATEL-IND1-NTP-MIB", "alaNtpMaxAssocTrap")
+      *(("ALCATEL-IND1-NTP-MIB", "alaNtpMaxAssocTrap"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpActiveServerChangeTrap"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpAllPeerUnreachableTrap"))
 )
 if mibBuilder.loadTexts:
     alaNtpEventsGroup.setStatus(
@@ -2729,7 +2861,9 @@ alaIND1NtpMonitorMIBCompliance.setObjects(
         ("ALCATEL-IND1-NTP-MIB", "alaNtpAccessGroup"),
         ("ALCATEL-IND1-NTP-MIB", "alaNtpLocalInfoGroup"),
         ("ALCATEL-IND1-NTP-MIB", "alaNtpEventsGroup"),
-        ("ALCATEL-IND1-NTP-MIB", "alaNtpSrcIpGroup"))
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpSrcIpGroup"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpStatsMonitorGroup"),
+        ("ALCATEL-IND1-NTP-MIB", "alaNtpEventsObjGroup"))
 )
 if mibBuilder.loadTexts:
     alaIND1NtpMonitorMIBCompliance.setStatus(
@@ -2760,6 +2894,8 @@ mibBuilder.exportSymbols(
        "alaNtpPeerAdmin": alaNtpPeerAdmin,
        "alaNtpPeerName": alaNtpPeerName,
        "alaNtpPeerStratum": alaNtpPeerStratum,
+       "alaNtpPeerBurst": alaNtpPeerBurst,
+       "alaNtpPeerIburst": alaNtpPeerIburst,
        "alaNtpAuthDelay": alaNtpAuthDelay,
        "alaNtpBroadcastDelay": alaNtpBroadcastDelay,
        "alaNtpKeysFile": alaNtpKeysFile,
@@ -2934,9 +3070,16 @@ mibBuilder.exportSymbols(
        "alaNtpLocalInfoGroup": alaNtpLocalInfoGroup,
        "alaNtpEventsGroup": alaNtpEventsGroup,
        "alaNtpSrcIpGroup": alaNtpSrcIpGroup,
+       "alaNtpStatsMonitorGroup": alaNtpStatsMonitorGroup,
+       "alaNtpEventsObjGroup": alaNtpEventsObjGroup,
        "alaIND1NtpMIBCompliances": alaIND1NtpMIBCompliances,
        "alaIND1NtpMonitorMIBCompliance": alaIND1NtpMonitorMIBCompliance,
        "alaNtpEvents": alaNtpEvents,
        "alaNtpEventsRoot": alaNtpEventsRoot,
-       "alaNtpMaxAssocTrap": alaNtpMaxAssocTrap}
+       "alaNtpMaxAssocTrap": alaNtpMaxAssocTrap,
+       "alaNtpActiveServerChangeTrap": alaNtpActiveServerChangeTrap,
+       "alaNtpAllPeerUnreachableTrap": alaNtpAllPeerUnreachableTrap,
+       "alaNtpEventsObj": alaNtpEventsObj,
+       "alaNtpSyncPeerIpAddress": alaNtpSyncPeerIpAddress,
+       "alaNtpAllServerDown": alaNtpAllServerDown}
 )

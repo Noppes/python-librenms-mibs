@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-PAA-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:06 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,10 @@ acdPaa = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdPaa.setRevisions(
-        ("2010-11-10 01:00",
+        ("2016-09-23 01:00",
+         "2016-05-26 01:00",
+         "2012-11-06 01:00",
+         "2010-11-10 01:00",
          "2009-02-23 01:00",
          "2008-02-06 01:00",
          "2007-10-12 01:00",
@@ -1236,6 +1236,141 @@ acdPaaResultPktLossFePrevNbrLoss = _AcdPaaResultPktLossFePrevNbrLoss_Object(
 acdPaaResultPktLossFePrevNbrLoss.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPaaResultPktLossFePrevNbrLoss.setStatus("current")
+_AcdPaaResultVlan1IdMismatch_Type = Unsigned32
+_AcdPaaResultVlan1IdMismatch_Object = MibTableColumn
+acdPaaResultVlan1IdMismatch = _AcdPaaResultVlan1IdMismatch_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 110),
+    _AcdPaaResultVlan1IdMismatch_Type()
+)
+acdPaaResultVlan1IdMismatch.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan1IdMismatch.setStatus("current")
+_AcdPaaResultVlan1IdExpected_Type = Unsigned32
+_AcdPaaResultVlan1IdExpected_Object = MibTableColumn
+acdPaaResultVlan1IdExpected = _AcdPaaResultVlan1IdExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 111),
+    _AcdPaaResultVlan1IdExpected_Type()
+)
+acdPaaResultVlan1IdExpected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan1IdExpected.setStatus("current")
+_AcdPaaResultVlan1IdReceived_Type = Unsigned32
+_AcdPaaResultVlan1IdReceived_Object = MibTableColumn
+acdPaaResultVlan1IdReceived = _AcdPaaResultVlan1IdReceived_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 112),
+    _AcdPaaResultVlan1IdReceived_Type()
+)
+acdPaaResultVlan1IdReceived.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan1IdReceived.setStatus("current")
+_AcdPaaResultVlan2IdMismatch_Type = Unsigned32
+_AcdPaaResultVlan2IdMismatch_Object = MibTableColumn
+acdPaaResultVlan2IdMismatch = _AcdPaaResultVlan2IdMismatch_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 113),
+    _AcdPaaResultVlan2IdMismatch_Type()
+)
+acdPaaResultVlan2IdMismatch.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan2IdMismatch.setStatus("current")
+_AcdPaaResultVlan2IdExpected_Type = Unsigned32
+_AcdPaaResultVlan2IdExpected_Object = MibTableColumn
+acdPaaResultVlan2IdExpected = _AcdPaaResultVlan2IdExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 114),
+    _AcdPaaResultVlan2IdExpected_Type()
+)
+acdPaaResultVlan2IdExpected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan2IdExpected.setStatus("current")
+_AcdPaaResultVlan2IdReceived_Type = Unsigned32
+_AcdPaaResultVlan2IdReceived_Object = MibTableColumn
+acdPaaResultVlan2IdReceived = _AcdPaaResultVlan2IdReceived_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 115),
+    _AcdPaaResultVlan2IdReceived_Type()
+)
+acdPaaResultVlan2IdReceived.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan2IdReceived.setStatus("current")
+_AcdPaaResultVlan1PriorityMismatch_Type = Unsigned32
+_AcdPaaResultVlan1PriorityMismatch_Object = MibTableColumn
+acdPaaResultVlan1PriorityMismatch = _AcdPaaResultVlan1PriorityMismatch_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 116),
+    _AcdPaaResultVlan1PriorityMismatch_Type()
+)
+acdPaaResultVlan1PriorityMismatch.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan1PriorityMismatch.setStatus("current")
+_AcdPaaResultVlan1PriorityExpected_Type = Unsigned32
+_AcdPaaResultVlan1PriorityExpected_Object = MibTableColumn
+acdPaaResultVlan1PriorityExpected = _AcdPaaResultVlan1PriorityExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 117),
+    _AcdPaaResultVlan1PriorityExpected_Type()
+)
+acdPaaResultVlan1PriorityExpected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan1PriorityExpected.setStatus("current")
+_AcdPaaResultVlan1PriorityReceived_Type = Unsigned32
+_AcdPaaResultVlan1PriorityReceived_Object = MibTableColumn
+acdPaaResultVlan1PriorityReceived = _AcdPaaResultVlan1PriorityReceived_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 118),
+    _AcdPaaResultVlan1PriorityReceived_Type()
+)
+acdPaaResultVlan1PriorityReceived.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan1PriorityReceived.setStatus("current")
+_AcdPaaResultVlan2PriorityMismatch_Type = Unsigned32
+_AcdPaaResultVlan2PriorityMismatch_Object = MibTableColumn
+acdPaaResultVlan2PriorityMismatch = _AcdPaaResultVlan2PriorityMismatch_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 119),
+    _AcdPaaResultVlan2PriorityMismatch_Type()
+)
+acdPaaResultVlan2PriorityMismatch.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan2PriorityMismatch.setStatus("current")
+_AcdPaaResultVlan2PriorityExpected_Type = Unsigned32
+_AcdPaaResultVlan2PriorityExpected_Object = MibTableColumn
+acdPaaResultVlan2PriorityExpected = _AcdPaaResultVlan2PriorityExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 120),
+    _AcdPaaResultVlan2PriorityExpected_Type()
+)
+acdPaaResultVlan2PriorityExpected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan2PriorityExpected.setStatus("current")
+_AcdPaaResultVlan2PriorityReceived_Type = Unsigned32
+_AcdPaaResultVlan2PriorityReceived_Object = MibTableColumn
+acdPaaResultVlan2PriorityReceived = _AcdPaaResultVlan2PriorityReceived_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 121),
+    _AcdPaaResultVlan2PriorityReceived_Type()
+)
+acdPaaResultVlan2PriorityReceived.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultVlan2PriorityReceived.setStatus("current")
+_AcdPaaResultDscpMismatch_Type = Unsigned32
+_AcdPaaResultDscpMismatch_Object = MibTableColumn
+acdPaaResultDscpMismatch = _AcdPaaResultDscpMismatch_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 122),
+    _AcdPaaResultDscpMismatch_Type()
+)
+acdPaaResultDscpMismatch.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultDscpMismatch.setStatus("current")
+_AcdPaaResultDscpExpected_Type = Unsigned32
+_AcdPaaResultDscpExpected_Object = MibTableColumn
+acdPaaResultDscpExpected = _AcdPaaResultDscpExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 123),
+    _AcdPaaResultDscpExpected_Type()
+)
+acdPaaResultDscpExpected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultDscpExpected.setStatus("current")
+_AcdPaaResultDscpReceived_Type = Unsigned32
+_AcdPaaResultDscpReceived_Object = MibTableColumn
+acdPaaResultDscpReceived = _AcdPaaResultDscpReceived_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 1, 1, 124),
+    _AcdPaaResultDscpReceived_Type()
+)
+acdPaaResultDscpReceived.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdPaaResultDscpReceived.setStatus("current")
 _AcdPaaStatusTable_Object = MibTable
 acdPaaStatusTable = _AcdPaaStatusTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 5, 2)
@@ -1810,6 +1945,84 @@ acdPaaUdpCfgPktLossThreshExt = _AcdPaaUdpCfgPktLossThreshExt_Object(
 acdPaaUdpCfgPktLossThreshExt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdPaaUdpCfgPktLossThreshExt.setStatus("current")
+_AcdPaaUdpCfgVlan1PriorityValidation_Type = TruthValue
+_AcdPaaUdpCfgVlan1PriorityValidation_Object = MibTableColumn
+acdPaaUdpCfgVlan1PriorityValidation = _AcdPaaUdpCfgVlan1PriorityValidation_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 3, 1, 40),
+    _AcdPaaUdpCfgVlan1PriorityValidation_Type()
+)
+acdPaaUdpCfgVlan1PriorityValidation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaUdpCfgVlan1PriorityValidation.setStatus("current")
+_AcdPaaUdpCfgVlan1PriorityTxRxCoupling_Type = TruthValue
+_AcdPaaUdpCfgVlan1PriorityTxRxCoupling_Object = MibTableColumn
+acdPaaUdpCfgVlan1PriorityTxRxCoupling = _AcdPaaUdpCfgVlan1PriorityTxRxCoupling_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 3, 1, 41),
+    _AcdPaaUdpCfgVlan1PriorityTxRxCoupling_Type()
+)
+acdPaaUdpCfgVlan1PriorityTxRxCoupling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaUdpCfgVlan1PriorityTxRxCoupling.setStatus("current")
+
+
+class _AcdPaaUdpCfgVlan1PriorityExpected_Type(Unsigned32):
+    """Custom type acdPaaUdpCfgVlan1PriorityExpected based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdPaaUdpCfgVlan1PriorityExpected_Type.__name__ = "Unsigned32"
+_AcdPaaUdpCfgVlan1PriorityExpected_Object = MibTableColumn
+acdPaaUdpCfgVlan1PriorityExpected = _AcdPaaUdpCfgVlan1PriorityExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 3, 1, 42),
+    _AcdPaaUdpCfgVlan1PriorityExpected_Type()
+)
+acdPaaUdpCfgVlan1PriorityExpected.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaUdpCfgVlan1PriorityExpected.setStatus("current")
+_AcdPaaUdpCfgDscpValidation_Type = TruthValue
+_AcdPaaUdpCfgDscpValidation_Object = MibTableColumn
+acdPaaUdpCfgDscpValidation = _AcdPaaUdpCfgDscpValidation_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 3, 1, 43),
+    _AcdPaaUdpCfgDscpValidation_Type()
+)
+acdPaaUdpCfgDscpValidation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaUdpCfgDscpValidation.setStatus("current")
+_AcdPaaUdpCfgDscpTxRxCoupling_Type = TruthValue
+_AcdPaaUdpCfgDscpTxRxCoupling_Object = MibTableColumn
+acdPaaUdpCfgDscpTxRxCoupling = _AcdPaaUdpCfgDscpTxRxCoupling_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 3, 1, 44),
+    _AcdPaaUdpCfgDscpTxRxCoupling_Type()
+)
+acdPaaUdpCfgDscpTxRxCoupling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaUdpCfgDscpTxRxCoupling.setStatus("current")
+
+
+class _AcdPaaUdpCfgDscpExpected_Type(Unsigned32):
+    """Custom type acdPaaUdpCfgDscpExpected based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdPaaUdpCfgDscpExpected_Type.__name__ = "Unsigned32"
+_AcdPaaUdpCfgDscpExpected_Object = MibTableColumn
+acdPaaUdpCfgDscpExpected = _AcdPaaUdpCfgDscpExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 3, 1, 45),
+    _AcdPaaUdpCfgDscpExpected_Type()
+)
+acdPaaUdpCfgDscpExpected.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaUdpCfgDscpExpected.setStatus("current")
 _AcdPaaL2CfgTable_Object = MibTable
 acdPaaL2CfgTable = _AcdPaaL2CfgTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4)
@@ -2180,6 +2393,162 @@ acdPaaL2CfgPktLossThreshExt = _AcdPaaL2CfgPktLossThreshExt_Object(
 acdPaaL2CfgPktLossThreshExt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdPaaL2CfgPktLossThreshExt.setStatus("current")
+_AcdPaaL2CfgVlan1IdValidation_Type = TruthValue
+_AcdPaaL2CfgVlan1IdValidation_Object = MibTableColumn
+acdPaaL2CfgVlan1IdValidation = _AcdPaaL2CfgVlan1IdValidation_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 35),
+    _AcdPaaL2CfgVlan1IdValidation_Type()
+)
+acdPaaL2CfgVlan1IdValidation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan1IdValidation.setStatus("current")
+_AcdPaaL2CfgVlan1IdTxRxCoupling_Type = TruthValue
+_AcdPaaL2CfgVlan1IdTxRxCoupling_Object = MibTableColumn
+acdPaaL2CfgVlan1IdTxRxCoupling = _AcdPaaL2CfgVlan1IdTxRxCoupling_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 36),
+    _AcdPaaL2CfgVlan1IdTxRxCoupling_Type()
+)
+acdPaaL2CfgVlan1IdTxRxCoupling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan1IdTxRxCoupling.setStatus("current")
+
+
+class _AcdPaaL2CfgVlan1IdExpected_Type(Unsigned32):
+    """Custom type acdPaaL2CfgVlan1IdExpected based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4095),
+    )
+
+
+_AcdPaaL2CfgVlan1IdExpected_Type.__name__ = "Unsigned32"
+_AcdPaaL2CfgVlan1IdExpected_Object = MibTableColumn
+acdPaaL2CfgVlan1IdExpected = _AcdPaaL2CfgVlan1IdExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 37),
+    _AcdPaaL2CfgVlan1IdExpected_Type()
+)
+acdPaaL2CfgVlan1IdExpected.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan1IdExpected.setStatus("current")
+_AcdPaaL2CfgVlan2IdValidation_Type = TruthValue
+_AcdPaaL2CfgVlan2IdValidation_Object = MibTableColumn
+acdPaaL2CfgVlan2IdValidation = _AcdPaaL2CfgVlan2IdValidation_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 38),
+    _AcdPaaL2CfgVlan2IdValidation_Type()
+)
+acdPaaL2CfgVlan2IdValidation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan2IdValidation.setStatus("current")
+_AcdPaaL2CfgVlan2IdTxRxCoupling_Type = TruthValue
+_AcdPaaL2CfgVlan2IdTxRxCoupling_Object = MibTableColumn
+acdPaaL2CfgVlan2IdTxRxCoupling = _AcdPaaL2CfgVlan2IdTxRxCoupling_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 39),
+    _AcdPaaL2CfgVlan2IdTxRxCoupling_Type()
+)
+acdPaaL2CfgVlan2IdTxRxCoupling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan2IdTxRxCoupling.setStatus("current")
+
+
+class _AcdPaaL2CfgVlan2IdExpected_Type(Unsigned32):
+    """Custom type acdPaaL2CfgVlan2IdExpected based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4095),
+    )
+
+
+_AcdPaaL2CfgVlan2IdExpected_Type.__name__ = "Unsigned32"
+_AcdPaaL2CfgVlan2IdExpected_Object = MibTableColumn
+acdPaaL2CfgVlan2IdExpected = _AcdPaaL2CfgVlan2IdExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 40),
+    _AcdPaaL2CfgVlan2IdExpected_Type()
+)
+acdPaaL2CfgVlan2IdExpected.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan2IdExpected.setStatus("current")
+_AcdPaaL2CfgVlan1PriorityValidation_Type = TruthValue
+_AcdPaaL2CfgVlan1PriorityValidation_Object = MibTableColumn
+acdPaaL2CfgVlan1PriorityValidation = _AcdPaaL2CfgVlan1PriorityValidation_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 41),
+    _AcdPaaL2CfgVlan1PriorityValidation_Type()
+)
+acdPaaL2CfgVlan1PriorityValidation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan1PriorityValidation.setStatus("current")
+_AcdPaaL2CfgVlan1PriorityTxRxCoupling_Type = TruthValue
+_AcdPaaL2CfgVlan1PriorityTxRxCoupling_Object = MibTableColumn
+acdPaaL2CfgVlan1PriorityTxRxCoupling = _AcdPaaL2CfgVlan1PriorityTxRxCoupling_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 42),
+    _AcdPaaL2CfgVlan1PriorityTxRxCoupling_Type()
+)
+acdPaaL2CfgVlan1PriorityTxRxCoupling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan1PriorityTxRxCoupling.setStatus("current")
+
+
+class _AcdPaaL2CfgVlan1PriorityExpected_Type(Unsigned32):
+    """Custom type acdPaaL2CfgVlan1PriorityExpected based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdPaaL2CfgVlan1PriorityExpected_Type.__name__ = "Unsigned32"
+_AcdPaaL2CfgVlan1PriorityExpected_Object = MibTableColumn
+acdPaaL2CfgVlan1PriorityExpected = _AcdPaaL2CfgVlan1PriorityExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 43),
+    _AcdPaaL2CfgVlan1PriorityExpected_Type()
+)
+acdPaaL2CfgVlan1PriorityExpected.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan1PriorityExpected.setStatus("current")
+_AcdPaaL2CfgVlan2PriorityValidation_Type = TruthValue
+_AcdPaaL2CfgVlan2PriorityValidation_Object = MibTableColumn
+acdPaaL2CfgVlan2PriorityValidation = _AcdPaaL2CfgVlan2PriorityValidation_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 44),
+    _AcdPaaL2CfgVlan2PriorityValidation_Type()
+)
+acdPaaL2CfgVlan2PriorityValidation.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan2PriorityValidation.setStatus("current")
+_AcdPaaL2CfgVlan2PriorityTxRxCoupling_Type = TruthValue
+_AcdPaaL2CfgVlan2PriorityTxRxCoupling_Object = MibTableColumn
+acdPaaL2CfgVlan2PriorityTxRxCoupling = _AcdPaaL2CfgVlan2PriorityTxRxCoupling_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 45),
+    _AcdPaaL2CfgVlan2PriorityTxRxCoupling_Type()
+)
+acdPaaL2CfgVlan2PriorityTxRxCoupling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan2PriorityTxRxCoupling.setStatus("current")
+
+
+class _AcdPaaL2CfgVlan2PriorityExpected_Type(Unsigned32):
+    """Custom type acdPaaL2CfgVlan2PriorityExpected based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdPaaL2CfgVlan2PriorityExpected_Type.__name__ = "Unsigned32"
+_AcdPaaL2CfgVlan2PriorityExpected_Object = MibTableColumn
+acdPaaL2CfgVlan2PriorityExpected = _AcdPaaL2CfgVlan2PriorityExpected_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 5, 4, 1, 46),
+    _AcdPaaL2CfgVlan2PriorityExpected_Type()
+)
+acdPaaL2CfgVlan2PriorityExpected.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdPaaL2CfgVlan2PriorityExpected.setStatus("current")
 _AcdPaaHistResultTable_Object = MibTable
 acdPaaHistResultTable = _AcdPaaHistResultTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 5, 5)
@@ -2202,7 +2571,7 @@ acdPaaHistResultID = _AcdPaaHistResultID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 5, 5, 1, 1),
     _AcdPaaHistResultID_Type()
 )
-acdPaaHistResultID.setMaxAccess("not-accessible")
+acdPaaHistResultID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPaaHistResultID.setStatus("current")
 _AcdPaaHistResultSampleIndex_Type = Unsigned32
@@ -2211,7 +2580,7 @@ acdPaaHistResultSampleIndex = _AcdPaaHistResultSampleIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 5, 5, 1, 2),
     _AcdPaaHistResultSampleIndex_Type()
 )
-acdPaaHistResultSampleIndex.setMaxAccess("not-accessible")
+acdPaaHistResultSampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdPaaHistResultSampleIndex.setStatus("current")
 
@@ -2846,7 +3215,22 @@ acdPaaResultGroup.setObjects(
         ("ACD-PAA-MIB", "acdPaaResultPktLossNeCurrNbrLoss"),
         ("ACD-PAA-MIB", "acdPaaResultPktLossNePrevNbrLoss"),
         ("ACD-PAA-MIB", "acdPaaResultPktLossFeCurrNbrLoss"),
-        ("ACD-PAA-MIB", "acdPaaResultPktLossFePrevNbrLoss"))
+        ("ACD-PAA-MIB", "acdPaaResultPktLossFePrevNbrLoss"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan1IdMismatch"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan1IdExpected"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan1IdReceived"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan2IdMismatch"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan2IdExpected"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan2IdReceived"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan1PriorityMismatch"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan1PriorityExpected"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan1PriorityReceived"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan2PriorityMismatch"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan2PriorityExpected"),
+        ("ACD-PAA-MIB", "acdPaaResultVlan2PriorityReceived"),
+        ("ACD-PAA-MIB", "acdPaaResultDscpMismatch"),
+        ("ACD-PAA-MIB", "acdPaaResultDscpExpected"),
+        ("ACD-PAA-MIB", "acdPaaResultDscpReceived"))
 )
 if mibBuilder.loadTexts:
     acdPaaResultGroup.setStatus("current")
@@ -2912,7 +3296,13 @@ acdPaaUdpCfgGroup.setObjects(
         ("ACD-PAA-MIB", "acdPaaUdpCfgIgmpMaxLvDly"),
         ("ACD-PAA-MIB", "acdPaaUdpCfgIgmpLvDlyThresh"),
         ("ACD-PAA-MIB", "acdPaaUdpCfgIgmpLvAvgDlyThresh"),
-        ("ACD-PAA-MIB", "acdPaaUdpCfgPktLossThreshExt"))
+        ("ACD-PAA-MIB", "acdPaaUdpCfgPktLossThreshExt"),
+        ("ACD-PAA-MIB", "acdPaaUdpCfgVlan1PriorityValidation"),
+        ("ACD-PAA-MIB", "acdPaaUdpCfgVlan1PriorityTxRxCoupling"),
+        ("ACD-PAA-MIB", "acdPaaUdpCfgVlan1PriorityExpected"),
+        ("ACD-PAA-MIB", "acdPaaUdpCfgDscpValidation"),
+        ("ACD-PAA-MIB", "acdPaaUdpCfgDscpTxRxCoupling"),
+        ("ACD-PAA-MIB", "acdPaaUdpCfgDscpExpected"))
 )
 if mibBuilder.loadTexts:
     acdPaaUdpCfgGroup.setStatus("current")
@@ -2953,7 +3343,19 @@ acdPaaL2CfgGroup.setObjects(
         ("ACD-PAA-MIB", "acdPaaL2CfgOneWayAvgDelayThresh"),
         ("ACD-PAA-MIB", "acdPaaL2CfgPeerID"),
         ("ACD-PAA-MIB", "acdPaaL2CfgOperationMode"),
-        ("ACD-PAA-MIB", "acdPaaL2CfgPktLossThreshExt"))
+        ("ACD-PAA-MIB", "acdPaaL2CfgPktLossThreshExt"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan1IdValidation"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan1IdTxRxCoupling"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan1IdExpected"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan2IdValidation"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan2IdTxRxCoupling"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan2IdExpected"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan1PriorityValidation"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan1PriorityTxRxCoupling"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan1PriorityExpected"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan2PriorityValidation"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan2PriorityTxRxCoupling"),
+        ("ACD-PAA-MIB", "acdPaaL2CfgVlan2PriorityExpected"))
 )
 if mibBuilder.loadTexts:
     acdPaaL2CfgGroup.setStatus("current")
@@ -2962,7 +3364,9 @@ acdPaaHistResultGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 5, 9, 2, 5)
 )
 acdPaaHistResultGroup.setObjects(
-      *(("ACD-PAA-MIB", "acdPaaHistResultStatus"),
+      *(("ACD-PAA-MIB", "acdPaaHistResultID"),
+        ("ACD-PAA-MIB", "acdPaaHistResultSampleIndex"),
+        ("ACD-PAA-MIB", "acdPaaHistResultStatus"),
         ("ACD-PAA-MIB", "acdPaaHistResultDuration"),
         ("ACD-PAA-MIB", "acdPaaHistResultIntervalEnd"),
         ("ACD-PAA-MIB", "acdPaaHistResultPktLossNeValid"),
@@ -3159,6 +3563,21 @@ mibBuilder.exportSymbols(
        "acdPaaResultPktLossNePrevNbrLoss": acdPaaResultPktLossNePrevNbrLoss,
        "acdPaaResultPktLossFeCurrNbrLoss": acdPaaResultPktLossFeCurrNbrLoss,
        "acdPaaResultPktLossFePrevNbrLoss": acdPaaResultPktLossFePrevNbrLoss,
+       "acdPaaResultVlan1IdMismatch": acdPaaResultVlan1IdMismatch,
+       "acdPaaResultVlan1IdExpected": acdPaaResultVlan1IdExpected,
+       "acdPaaResultVlan1IdReceived": acdPaaResultVlan1IdReceived,
+       "acdPaaResultVlan2IdMismatch": acdPaaResultVlan2IdMismatch,
+       "acdPaaResultVlan2IdExpected": acdPaaResultVlan2IdExpected,
+       "acdPaaResultVlan2IdReceived": acdPaaResultVlan2IdReceived,
+       "acdPaaResultVlan1PriorityMismatch": acdPaaResultVlan1PriorityMismatch,
+       "acdPaaResultVlan1PriorityExpected": acdPaaResultVlan1PriorityExpected,
+       "acdPaaResultVlan1PriorityReceived": acdPaaResultVlan1PriorityReceived,
+       "acdPaaResultVlan2PriorityMismatch": acdPaaResultVlan2PriorityMismatch,
+       "acdPaaResultVlan2PriorityExpected": acdPaaResultVlan2PriorityExpected,
+       "acdPaaResultVlan2PriorityReceived": acdPaaResultVlan2PriorityReceived,
+       "acdPaaResultDscpMismatch": acdPaaResultDscpMismatch,
+       "acdPaaResultDscpExpected": acdPaaResultDscpExpected,
+       "acdPaaResultDscpReceived": acdPaaResultDscpReceived,
        "acdPaaStatusTable": acdPaaStatusTable,
        "acdPaaStatusEntry": acdPaaStatusEntry,
        "acdPaaStatusID": acdPaaStatusID,
@@ -3215,6 +3634,12 @@ mibBuilder.exportSymbols(
        "acdPaaUdpCfgIgmpLvDlyThresh": acdPaaUdpCfgIgmpLvDlyThresh,
        "acdPaaUdpCfgIgmpLvAvgDlyThresh": acdPaaUdpCfgIgmpLvAvgDlyThresh,
        "acdPaaUdpCfgPktLossThreshExt": acdPaaUdpCfgPktLossThreshExt,
+       "acdPaaUdpCfgVlan1PriorityValidation": acdPaaUdpCfgVlan1PriorityValidation,
+       "acdPaaUdpCfgVlan1PriorityTxRxCoupling": acdPaaUdpCfgVlan1PriorityTxRxCoupling,
+       "acdPaaUdpCfgVlan1PriorityExpected": acdPaaUdpCfgVlan1PriorityExpected,
+       "acdPaaUdpCfgDscpValidation": acdPaaUdpCfgDscpValidation,
+       "acdPaaUdpCfgDscpTxRxCoupling": acdPaaUdpCfgDscpTxRxCoupling,
+       "acdPaaUdpCfgDscpExpected": acdPaaUdpCfgDscpExpected,
        "acdPaaL2CfgTable": acdPaaL2CfgTable,
        "acdPaaL2CfgEntry": acdPaaL2CfgEntry,
        "acdPaaL2CfgID": acdPaaL2CfgID,
@@ -3251,6 +3676,18 @@ mibBuilder.exportSymbols(
        "acdPaaL2CfgPeerID": acdPaaL2CfgPeerID,
        "acdPaaL2CfgOperationMode": acdPaaL2CfgOperationMode,
        "acdPaaL2CfgPktLossThreshExt": acdPaaL2CfgPktLossThreshExt,
+       "acdPaaL2CfgVlan1IdValidation": acdPaaL2CfgVlan1IdValidation,
+       "acdPaaL2CfgVlan1IdTxRxCoupling": acdPaaL2CfgVlan1IdTxRxCoupling,
+       "acdPaaL2CfgVlan1IdExpected": acdPaaL2CfgVlan1IdExpected,
+       "acdPaaL2CfgVlan2IdValidation": acdPaaL2CfgVlan2IdValidation,
+       "acdPaaL2CfgVlan2IdTxRxCoupling": acdPaaL2CfgVlan2IdTxRxCoupling,
+       "acdPaaL2CfgVlan2IdExpected": acdPaaL2CfgVlan2IdExpected,
+       "acdPaaL2CfgVlan1PriorityValidation": acdPaaL2CfgVlan1PriorityValidation,
+       "acdPaaL2CfgVlan1PriorityTxRxCoupling": acdPaaL2CfgVlan1PriorityTxRxCoupling,
+       "acdPaaL2CfgVlan1PriorityExpected": acdPaaL2CfgVlan1PriorityExpected,
+       "acdPaaL2CfgVlan2PriorityValidation": acdPaaL2CfgVlan2PriorityValidation,
+       "acdPaaL2CfgVlan2PriorityTxRxCoupling": acdPaaL2CfgVlan2PriorityTxRxCoupling,
+       "acdPaaL2CfgVlan2PriorityExpected": acdPaaL2CfgVlan2PriorityExpected,
        "acdPaaHistResultTable": acdPaaHistResultTable,
        "acdPaaHistResultEntry": acdPaaHistResultEntry,
        "acdPaaHistResultID": acdPaaHistResultID,

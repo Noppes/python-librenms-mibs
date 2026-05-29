@@ -31,15 +31,38 @@ except ImportError:
     print("ERROR: pysmi is required. Install it with: pip install pysmi")
     sys.exit(1)
 
+class NoHeaderPySnmpCodeGen(PySnmpCodeGen):
+    def gen_code(self, ast, symbolTable, **kwargs):
+        comments = kwargs.get("comments", [])
+        if comments:
+            kwargs["comments"] = [comments[0]]
+        return super().gen_code(ast, symbolTable, **kwargs)
+    
+class CachedFileReader(FileReader):
+
+    def __init__(self, path, recursive=True, ignoreErrors=True):
+        super().__init__(path, recursive, ignoreErrors)
+        self._loading = True
+        self._subdirs = self.get_subdirs(self._path, self._recursive, self._ignoreErrors)
+        self._loading = False
+
+        
+    def get_subdirs(self, path, recursive=True, ignoreErrors=True):
+        if self._loading:
+            return super().get_subdirs(path, recursive, ignoreErrors)
+        return self._subdirs
 
 class MibCompilerTool:
     """Tool to compile MIB files from LibreNMS vendor folders."""
+    MIB_NAME_PATTERN = re.compile(
+        br'^\s*([A-Za-z0-9][A-Za-z0-9\-_]+)\s+DEFINITIONS\s+::=\s+BEGIN',
+        re.IGNORECASE | re.MULTILINE
+    )
 
-    def __init__(self, source_dir: Path, output_dir: Path, verbose: bool = False, offline: bool = False):
+    def __init__(self, source_dir: Path, output_dir: Path, verbose: bool = False):
         self.source_dir = Path(source_dir)
         self.output_dir = Path(output_dir)
         self.verbose = verbose
-        self.offline = offline
         self.stats = {
             'total': 0,
             'compiled': 0,
@@ -54,7 +77,7 @@ class MibCompilerTool:
             format='%(message)s'
         )
         self.logger = logging.getLogger(__name__)
-
+        #debug.set_logger(debug.Debug("compiler"))
         if verbose:
             try:
                 debug.set_logger(debug.Debug('all'))
@@ -72,33 +95,43 @@ class MibCompilerTool:
             if file_path.is_file():
                 if file_path.suffix.lower() in extensions:
                     try:
-                        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                            first_chunk = f.read(2048)
-                            if 'DEFINITIONS ::= BEGIN' in first_chunk:
-                                mib_files.append(file_path)
+                        mib_name = self._get_mib_name(file_path)
+                        if mib_name:
+                            mib_files.append(mib_name)
+                        else:
+                            self.logger.info(f"Skipped: {file_path.stem}")
+                                    
                     except Exception as e:
                         if self.verbose:
                             self.logger.debug(f"Could not read {file_path}: {e}")
+                            self.logger.exception(e)
 
         return sorted(mib_files)
+    
+    MARKER = b"DEFINITIONS ::= BEGIN"
+    def _get_mib_name(self, file_path, chunk_size=8192, tries=10):
+        overlap = 512
+        tail = b""
 
-    def extract_mib_name(self, file_path: Path) -> str:
-        """Extract the ASN.1 module name."""
-        try:
-            pattern = re.compile(r'^\s*([A-Za-z0-9][A-Za-z0-9\-\_]+)\s+DEFINITIONS\s+::=\s+BEGIN', re.IGNORECASE)
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                for _ in range(200):
-                    line = f.readline()
-                    if not line:
-                        break
-                    match = pattern.search(line)
+        with open(file_path, "rb") as f:
+            while True:
+                if tries < 0:
+                    break
+                chunk = f.read(chunk_size)
+                if not chunk:
+                    return False
+
+                data = tail + chunk
+
+                if self.MARKER in data:
+                    match = self.MIB_NAME_PATTERN.search(data)
                     if match:
-                        return match.group(1).strip()
-        except Exception as e:
-            if self.verbose:
-                self.logger.debug(f"Error extracting MIB name from {file_path}: {e}")
+                        return match.group(1).decode("ascii", errors="ignore").strip()
+                    return file_path.stem
 
-        return file_path.stem
+                tail = data[-overlap:]
+                tries-=1
+        return False
 
     def get_vendor_folders(self) -> List[Path]:
         """Get all vendor subdirectories."""
@@ -117,17 +150,16 @@ class MibCompilerTool:
         """Instantiate and configure a MibCompiler instance."""
         mib_compiler = MibCompiler(
             SmiStarParser(),
-            PySnmpCodeGen(),
+            NoHeaderPySnmpCodeGen(),
             PyFileWriter(str(self.output_dir))
         )
-
+        
         if self.verbose:
             self.logger.debug(f"Search paths: {search_paths[:3]}...")
 
         for path in search_paths:
-            mib_compiler.add_sources(FileReader(path))
-
-        # Network sources disabled when offline
+            mib_compiler.add_sources(CachedFileReader(path))
+            
 
         mib_compiler.add_searchers(PyFileSearcher(str(self.output_dir)))
         mib_compiler.add_searchers(StubSearcher(*PySnmpCodeGen.baseMibs))
@@ -150,16 +182,8 @@ class MibCompilerTool:
             self.logger.warning(f"No MIB files found in {folder}")
             return self.stats
 
-        # Extract MIB names
-        mib_list = []
-        for mib_file in mib_files:
-            name = self.extract_mib_name(mib_file)
-            mib_list.append((name, mib_file))
-            if self.verbose:
-                self.logger.debug(f"Found: {name} in {mib_file.name}")
-
-        print(f"Found {len(mib_list)} MIB files\n")
-        self.stats['total'] += len(mib_list)
+        print(f"Found {len(mib_files)} MIB files\n")
+        self.stats['total'] += len(mib_files)
 
         # Build search paths - always include parent if we're in a subdirectory
         search_paths = [str(folder)]
@@ -179,8 +203,8 @@ class MibCompilerTool:
         compiler = self._build_compiler(search_paths)
 
         # Compile each MIB individually
-        for idx, (mib_name, mib_file) in enumerate(mib_list, 1):
-            prefix = f"[{idx}/{len(mib_list)}]"
+        for idx, mib_name in enumerate(mib_files, 1):
+            prefix = f"[{idx}/{len(mib_files)}]"
 
             try:
                 results = compiler.compile(mib_name)
@@ -196,7 +220,6 @@ class MibCompilerTool:
                     print(f"{prefix} ✗ {mib_name}: {status}")
                     self.stats['failed'] += 1
                     self.stats['errors'].append({'mib': mib_name, 'error': status})
-
             except Exception as e:
                 error_msg = str(e)[:100]
                 print(f"{prefix} ✗ {mib_name}: {error_msg}")
@@ -254,6 +277,49 @@ class MibCompilerTool:
         except Exception as e:
             self.logger.error(f"Failed to write report: {e}")
 
+class MibCompilerRunner:
+    @staticmethod
+    def start(source, output, vendor, all=False, verbose=False):
+        source_path = Path(source)
+        if not source_path.exists():
+            print(f"ERROR: Source path does not exist: {source_path}")
+            return 1
+
+        output_path = Path(output)
+        compiler = MibCompilerTool(source_path, output_path, verbose)
+
+        try:
+            if all:
+                compiler.compile_all_vendors()
+            elif vendor:
+                vendor_path = source_path / vendor
+                if not vendor_path.exists():
+                    print(f"ERROR: Vendor folder does not exist: {vendor_path}")
+                    return 1
+                compiler.compile_folder(vendor_path, vendor)
+            else:
+                if source_path.is_dir():
+                    compiler.compile_folder(source_path)
+                else:
+                    print("ERROR: Source must be a directory")
+                    return 1
+
+            compiler.print_summary()
+
+            if compiler.stats['failed'] > 0:
+                return 1
+
+        except KeyboardInterrupt:
+            print("\n\nInterrupted by user")
+            compiler.print_summary()
+            return 130
+        except Exception as e:
+            print(f"\nERROR: {e}")
+            if verbose:
+                import traceback
+                traceback.print_exc()
+            return 1
+        return 0
 
 def main():
     parser = argparse.ArgumentParser(
@@ -276,51 +342,13 @@ Examples:
     parser.add_argument('-o', '--output', type=str, required=True, help='Output directory for compiled MIBs')
     parser.add_argument('--all', action='store_true', help='Compile all vendor folders')
     parser.add_argument('--vendor', type=str, help='Specific vendor folder name')
-    parser.add_argument('--offline', action='store_true', help='Do not use network fallbacks')
     parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.0.0')
 
     args = parser.parse_args()
 
-    source_path = Path(args.source)
-    if not source_path.exists():
-        print(f"ERROR: Source path does not exist: {source_path}")
-        sys.exit(1)
-
-    output_path = Path(args.output)
-    compiler = MibCompilerTool(source_path, output_path, args.verbose, args.offline)
-
-    try:
-        if args.all:
-            compiler.compile_all_vendors()
-        elif args.vendor:
-            vendor_path = source_path / args.vendor
-            if not vendor_path.exists():
-                print(f"ERROR: Vendor folder does not exist: {vendor_path}")
-                sys.exit(1)
-            compiler.compile_folder(vendor_path, args.vendor)
-        else:
-            if source_path.is_dir():
-                compiler.compile_folder(source_path)
-            else:
-                print("ERROR: Source must be a directory")
-                sys.exit(1)
-
-        compiler.print_summary()
-
-        if compiler.stats['failed'] > 0:
-            sys.exit(1)
-
-    except KeyboardInterrupt:
-        print("\n\nInterrupted by user")
-        compiler.print_summary()
-        sys.exit(130)
-    except Exception as e:
-        print(f"\nERROR: {e}")
-        if args.verbose:
-            import traceback
-            traceback.print_exc()
-        sys.exit(1)
+    result = MibCompilerRunner.start(args.source, args.output, args.vendor, args.all, args.verbose)
+    if result:
+        sys.exit(result)
 
 
 if __name__ == '__main__':

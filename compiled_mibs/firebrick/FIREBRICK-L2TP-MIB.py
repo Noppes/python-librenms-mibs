@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\firebrick\FIREBRICK-L2TP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:37 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,8 @@ fbL2tpMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     fbL2tpMib.setRevisions(
-        ("2020-04-06 00:00",)
+        ("2022-07-15 00:00",
+         "2020-04-06 00:00")
     )
 
 
@@ -326,7 +324,7 @@ fbL2tpPeerAddressType = _FbL2tpPeerAddressType_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 1),
     _FbL2tpPeerAddressType_Type()
 )
-fbL2tpPeerAddressType.setMaxAccess("not-accessible")
+fbL2tpPeerAddressType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerAddressType.setStatus("current")
 
@@ -345,7 +343,7 @@ fbL2tpPeerAddress = _FbL2tpPeerAddress_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 2),
     _FbL2tpPeerAddress_Type()
 )
-fbL2tpPeerAddress.setMaxAccess("not-accessible")
+fbL2tpPeerAddress.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerAddress.setStatus("current")
 _FbL2tpPeerLoginName_Type = DisplayString
@@ -354,7 +352,7 @@ fbL2tpPeerLoginName = _FbL2tpPeerLoginName_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 3),
     _FbL2tpPeerLoginName_Type()
 )
-fbL2tpPeerLoginName.setMaxAccess("not-accessible")
+fbL2tpPeerLoginName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerLoginName.setStatus("current")
 _FbL2tpPeerHostName_Type = DisplayString
@@ -363,7 +361,7 @@ fbL2tpPeerHostName = _FbL2tpPeerHostName_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 4),
     _FbL2tpPeerHostName_Type()
 )
-fbL2tpPeerHostName.setMaxAccess("not-accessible")
+fbL2tpPeerHostName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerHostName.setStatus("current")
 _FbL2tpPeerInTunnels_Type = Integer32
@@ -372,7 +370,7 @@ fbL2tpPeerInTunnels = _FbL2tpPeerInTunnels_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 5),
     _FbL2tpPeerInTunnels_Type()
 )
-fbL2tpPeerInTunnels.setMaxAccess("not-accessible")
+fbL2tpPeerInTunnels.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerInTunnels.setStatus("current")
 _FbL2tpPeerOutTunnels_Type = Integer32
@@ -381,7 +379,7 @@ fbL2tpPeerOutTunnels = _FbL2tpPeerOutTunnels_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 6),
     _FbL2tpPeerOutTunnels_Type()
 )
-fbL2tpPeerOutTunnels.setMaxAccess("not-accessible")
+fbL2tpPeerOutTunnels.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerOutTunnels.setStatus("current")
 _FbL2tpPeerOldestUptime_Type = Integer32
@@ -390,7 +388,7 @@ fbL2tpPeerOldestUptime = _FbL2tpPeerOldestUptime_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 7),
     _FbL2tpPeerOldestUptime_Type()
 )
-fbL2tpPeerOldestUptime.setMaxAccess("not-accessible")
+fbL2tpPeerOldestUptime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerOldestUptime.setStatus("current")
 _FbL2tpPeerLiveTunnels_Type = Integer32
@@ -399,7 +397,7 @@ fbL2tpPeerLiveTunnels = _FbL2tpPeerLiveTunnels_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 8),
     _FbL2tpPeerLiveTunnels_Type()
 )
-fbL2tpPeerLiveTunnels.setMaxAccess("not-accessible")
+fbL2tpPeerLiveTunnels.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerLiveTunnels.setStatus("current")
 _FbL2tpPeerSessions_Type = Integer32
@@ -408,9 +406,18 @@ fbL2tpPeerSessions = _FbL2tpPeerSessions_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 9),
     _FbL2tpPeerSessions_Type()
 )
-fbL2tpPeerSessions.setMaxAccess("not-accessible")
+fbL2tpPeerSessions.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbL2tpPeerSessions.setStatus("current")
+_FbL2tpPeerGraphName_Type = DisplayString
+_FbL2tpPeerGraphName_Object = MibTableColumn
+fbL2tpPeerGraphName = _FbL2tpPeerGraphName_Object(
+    (1, 3, 6, 1, 4, 1, 24693, 100, 1701, 1, 1, 10),
+    _FbL2tpPeerGraphName_Type()
+)
+fbL2tpPeerGraphName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    fbL2tpPeerGraphName.setStatus("current")
 
 # Managed Objects groups
 
@@ -463,5 +470,6 @@ mibBuilder.exportSymbols(
        "fbL2tpPeerOutTunnels": fbL2tpPeerOutTunnels,
        "fbL2tpPeerOldestUptime": fbL2tpPeerOldestUptime,
        "fbL2tpPeerLiveTunnels": fbL2tpPeerLiveTunnels,
-       "fbL2tpPeerSessions": fbL2tpPeerSessions}
+       "fbL2tpPeerSessions": fbL2tpPeerSessions,
+       "fbL2tpPeerGraphName": fbL2tpPeerGraphName}
 )

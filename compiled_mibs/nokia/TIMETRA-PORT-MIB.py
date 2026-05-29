@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-PORT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:13 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -50,6 +47,10 @@ if 'mibBuilder' not in globals():
     "ATM-TC-MIB",
     "AtmTrafficDescrParamIndex",
     "AtmVpIdentifier")
+
+(CounterBasedGauge64,) = mibBuilder.importSymbols(
+    "HCNUM-TC",
+    "CounterBasedGauge64")
 
 (dot1xPaePortNumber,) = mibBuilder.importSymbols(
     "IEEE8021-PAE-MIB",
@@ -153,27 +154,21 @@ if 'mibBuilder' not in globals():
     "TIMETRA-GLOBAL-MIB",
     "timetraSRMIBModules")
 
-(TAdaptationRuleOverride,
+(TAdaptationRule,
+ TAdaptationRuleOverride,
+ TBurstLimit,
  TBurstLimitOverride,
  TBurstPercentOrDefaultOverride,
  TBurstSizeBytesOvr,
  TBurstSizeOverride,
  TCIRPercentOverride,
  TClassBurstLimit,
- TEgrHsmdaPerPacketOffsetOvr,
- TEgressHsmdaCounterId,
- TEgressHsmdaQueueId,
  TEgressQueueId,
  TExpSecondaryShaperClassRate,
  TExpSecondaryShaperPIRRate,
  TFCName,
- THSMDABurstSizeBytesOverride,
  THsPirRateOverride,
  THsSchedulerPolicyWeightOverride,
- THsmdaPIRKRateOverride,
- THsmdaPIRMRateOverride,
- THsmdaWeightOverride,
- THsmdaWrrWeightOverride,
  TIngressQueueId,
  TItemDescription,
  TItemVeryLongDescription,
@@ -193,6 +188,11 @@ if 'mibBuilder' not in globals():
  TRateType,
  TSchedulerMode,
  TSecondaryShaper10GPIRRate,
+ TStormCtrlBurst,
+ TStormCtrlOprBurst,
+ TStormCtrlOprRate,
+ TStormCtrlRate,
+ TStormCtrlTrafficType,
  TWeightOverride,
  TmnxActionType,
  TmnxAdminStateTruthValue,
@@ -202,35 +202,33 @@ if 'mibBuilder' not in globals():
  TmnxEgrPolicerStatMode,
  TmnxEnabledDisabled,
  TmnxFPNumberOrZero,
- TmnxOperState,
+ TmnxLagPerLinkHashClass,
+ TmnxLagPerLinkHashWeight,
+ TmnxObjectID,
+ TmnxPacketMode,
  TmnxPortID,
+ TmnxPortOptComplianceExtType,
  TmnxQosRateHigh32,
  TmnxQosRateLow32,
  TmnxSubIdentStringOrEmpty,
  TmnxSubMgtIntDestId,
  TmnxSubMgtOrgStrOrZero) = mibBuilder.importSymbols(
     "TIMETRA-TC-MIB",
+    "TAdaptationRule",
     "TAdaptationRuleOverride",
+    "TBurstLimit",
     "TBurstLimitOverride",
     "TBurstPercentOrDefaultOverride",
     "TBurstSizeBytesOvr",
     "TBurstSizeOverride",
     "TCIRPercentOverride",
     "TClassBurstLimit",
-    "TEgrHsmdaPerPacketOffsetOvr",
-    "TEgressHsmdaCounterId",
-    "TEgressHsmdaQueueId",
     "TEgressQueueId",
     "TExpSecondaryShaperClassRate",
     "TExpSecondaryShaperPIRRate",
     "TFCName",
-    "THSMDABurstSizeBytesOverride",
     "THsPirRateOverride",
     "THsSchedulerPolicyWeightOverride",
-    "THsmdaPIRKRateOverride",
-    "THsmdaPIRMRateOverride",
-    "THsmdaWeightOverride",
-    "THsmdaWrrWeightOverride",
     "TIngressQueueId",
     "TItemDescription",
     "TItemVeryLongDescription",
@@ -250,6 +248,11 @@ if 'mibBuilder' not in globals():
     "TRateType",
     "TSchedulerMode",
     "TSecondaryShaper10GPIRRate",
+    "TStormCtrlBurst",
+    "TStormCtrlOprBurst",
+    "TStormCtrlOprRate",
+    "TStormCtrlRate",
+    "TStormCtrlTrafficType",
     "TWeightOverride",
     "TmnxActionType",
     "TmnxAdminStateTruthValue",
@@ -259,8 +262,12 @@ if 'mibBuilder' not in globals():
     "TmnxEgrPolicerStatMode",
     "TmnxEnabledDisabled",
     "TmnxFPNumberOrZero",
-    "TmnxOperState",
+    "TmnxLagPerLinkHashClass",
+    "TmnxLagPerLinkHashWeight",
+    "TmnxObjectID",
+    "TmnxPacketMode",
     "TmnxPortID",
+    "TmnxPortOptComplianceExtType",
     "TmnxQosRateHigh32",
     "TmnxQosRateLow32",
     "TmnxSubIdentStringOrEmpty",
@@ -424,7 +431,6 @@ class TmnxPortClass(TextualConvention, Integer32):
               9,
               10,
               11,
-              12,
               13,
               14,
               17,
@@ -450,7 +456,6 @@ class TmnxPortClass(TextualConvention, Integer32):
           ("tdm", 9),
           ("xlgige", 10),
           ("cgige", 11),
-          ("vsme", 12),
           ("gnss", 13),
           ("vspeede", 14),
           ("serial", 17),
@@ -458,10 +463,10 @@ class TmnxPortClass(TextualConvention, Integer32):
           ("connector", 19),
           ("xxvgige", 20),
           ("cdgige", 21),
-          ("reserved22", 22),
-          ("reserved23", 23),
+          ("flexmbr", 22),
+          ("flex", 23),
           ("lgige", 24),
-          ("reserved25", 25),
+          ("terabite", 25),
           ("anchor", 26))
     )
 
@@ -724,6 +729,24 @@ class TmnxDSXClockSyncState(TextualConvention, Integer32):
 
 
 
+class TmnxDS0Loopback(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("line", 1),
+          ("internal", 2))
+    )
+
+
+
 class TmnxDS1Loopback(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
@@ -773,7 +796,7 @@ class TmnxDS3Loopback(TextualConvention, Integer32):
 
 
 class TmnxImaGrpState(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -807,7 +830,7 @@ class TmnxImaGrpState(TextualConvention, Integer32):
 
 
 class TmnxImaGrpFailState(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -847,7 +870,7 @@ class TmnxImaGrpFailState(TextualConvention, Integer32):
 
 
 class TmnxImaLnkState(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -875,7 +898,7 @@ class TmnxImaLnkState(TextualConvention, Integer32):
 
 
 class TmnxImaLnkFailState(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -905,7 +928,7 @@ class TmnxImaLnkFailState(TextualConvention, Integer32):
 
 
 class TmnxImaTestState(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -923,7 +946,7 @@ class TmnxImaTestState(TextualConvention, Integer32):
 
 
 class TmnxImaGrpClockModes(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -939,7 +962,7 @@ class TmnxImaGrpClockModes(TextualConvention, Integer32):
 
 
 class TmnxImaGrpVersion(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -1249,7 +1272,10 @@ class TmnxPortCompatMode(TextualConvention, Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7,
+              8,
+              9)
         )
     )
     namedValues = NamedValues(
@@ -1259,7 +1285,10 @@ class TmnxPortCompatMode(TextualConvention, Integer32):
           ("interop", 3),
           ("interop2", 4),
           ("interop3", 5),
-          ("longHaulNonDiff", 6))
+          ("longHaulNonDiff", 6),
+          ("oif400gZr", 7),
+          ("openZrpOfec1", 8),
+          ("openZrpOfec2", 9))
     )
 
 
@@ -1276,7 +1305,11 @@ class TmnxSFFStatus(TextualConvention, Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8,
+              9,
+              10,
+              11)
         )
     )
     namedValues = NamedValues(
@@ -1287,16 +1320,16 @@ class TmnxSFFStatus(TextualConvention, Integer32):
           ("ddm-corrupt", 4),
           ("unsupported", 5),
           ("culprit", 6),
-          ("blocked", 7))
+          ("blocked", 7),
+          ("module-fault", 8),
+          ("invalid-form-factor", 9),
+          ("low-power-mode", 10),
+          ("reserved11", 11))
     )
 
 
 
 class TmnxHoldTime(TextualConvention, Unsigned32):
-    status = "current"
-
-
-class TmnxPortOptComplianceExtType(TextualConvention, Unsigned32):
     status = "current"
 
 
@@ -1312,6 +1345,24 @@ class TmnxRS232ControlLead(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("high", 1),
           ("low", 2))
+    )
+
+
+
+class TmnxRS232ControlLeadHcm(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("high", 1),
+          ("low", 2),
+          ("reserved3", 3))
     )
 
 
@@ -1332,11 +1383,115 @@ class TmnxRS232ControlLeadMon(TextualConvention, Integer32):
 
 
 
+class TmnxRS232Speed(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9)
+        )
+    )
+    namedValues = NamedValues(
+        *(("speed600", 1),
+          ("speed1200", 2),
+          ("speed2400", 3),
+          ("speed4800", 4),
+          ("speed9600", 5),
+          ("speed19200", 6),
+          ("speed38400", 7),
+          ("speed57600", 8),
+          ("speed115200", 9))
+    )
+
+
+
+class TmnxRS232Parity(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("odd", 2),
+          ("even", 3),
+          ("mark", 4),
+          ("space", 5))
+    )
+
+
+
+class TmnxRS232Loopback(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 1),
+          ("bidirE", 2))
+    )
+
+
+
+class TmnxRS232SocketSquelchStatus(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("on", 1),
+          ("off", 2))
+    )
+
+
+
+class TmnxRS232ReportAlarmStatus(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("hcmOof", 1),
+          ("hcmRai", 2),
+          ("ctrlLeadMon", 3),
+          ("monDataInac", 4))
+    )
+
+
+class TmnxDataChanReportAlarmStatus(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("los", 1),
+          ("rai", 2))
+    )
+
+
 class TmnxPortConnectorBreakoutType(TextualConvention, Unsigned32):
     status = "current"
 
 
-class TmnxCrcPolynomial(TextualConvention, Integer32):
+class TmnxCrcPolynomialEcmp(TextualConvention, Integer32):
     status = "current"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
@@ -1360,11 +1515,38 @@ class TmnxCrcPolynomial(TextualConvention, Integer32):
 
 
 
+class TmnxCrcPolynomialLag(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("poly1", 1),
+          ("poly2", 2),
+          ("poly3", 3),
+          ("poly4", 4),
+          ("poly5", 5),
+          ("poly6", 6),
+          ("poly7", 7))
+    )
+
+
+
 class TmnxPortGnssConstellation(TextualConvention, Bits):
     status = "current"
     namedValues = NamedValues(
         *(("gps", 0),
-          ("glonass", 1))
+          ("glonass", 1),
+          ("galileo", 2))
     )
 
 
@@ -1511,6 +1693,22 @@ tmnxPortV21v0Groups = _TmnxPortV21v0Groups_ObjectIdentity(
 _TmnxPortV22v0Groups_ObjectIdentity = ObjectIdentity
 tmnxPortV22v0Groups = _TmnxPortV22v0Groups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148)
+)
+_TmnxPortV23v0Groups_ObjectIdentity = ObjectIdentity
+tmnxPortV23v0Groups = _TmnxPortV23v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149)
+)
+_TmnxPortV24v0Groups_ObjectIdentity = ObjectIdentity
+tmnxPortV24v0Groups = _TmnxPortV24v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150)
+)
+_TmnxPortV25v0Groups_ObjectIdentity = ObjectIdentity
+tmnxPortV25v0Groups = _TmnxPortV25v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 151)
+)
+_TmnxPortV26v0Groups_ObjectIdentity = ObjectIdentity
+tmnxPortV26v0Groups = _TmnxPortV26v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 152)
 )
 _TmnxPortDCCompliances_ObjectIdentity = ObjectIdentity
 tmnxPortDCCompliances = _TmnxPortDCCompliances_ObjectIdentity(
@@ -1836,7 +2034,18 @@ class _TmnxPortTransceiverType_Type(Integer32):
               23,
               24,
               25,
-              26)
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37)
         )
     )
     namedValues = NamedValues(
@@ -1866,7 +2075,18 @@ class _TmnxPortTransceiverType_Type(Integer32):
           ("microQsfpTransceiver", 23),
           ("qsfpDdTransceiver", 24),
           ("cfp2DcoTransceiver", 25),
-          ("sfpDdTransceiver", 26))
+          ("sfpDdTransceiver", 26),
+          ("dsfpTransceiver", 27),
+          ("x4MiniLinkTransceiver", 28),
+          ("x8MiniLinkTransceiver", 29),
+          ("qsfpPlusOrLaterWithCmisTransceiver", 30),
+          ("sfpDdWithCmisTransceiver", 31),
+          ("sfpPlusOrLaterWithCmisTransceiver", 32),
+          ("osfpXdWithCmisTransceiver", 33),
+          ("oifElsfpwihCmisTransceiver", 34),
+          ("cdfpX4WithCmisTransceiver", 35),
+          ("cdfpX8WithCmisTransceiver", 36),
+          ("cdfpX16WithCmisTransceiver", 37))
     )
 
 
@@ -2266,7 +2486,7 @@ tmnxPortBundleNumber = _TmnxPortBundleNumber_Object(
 )
 tmnxPortBundleNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPortBundleNumber.setStatus("current")
+    tmnxPortBundleNumber.setStatus("obsolete")
 _TmnxPortIsLeaf_Type = TruthValue
 _TmnxPortIsLeaf_Object = MibTableColumn
 tmnxPortIsLeaf = _TmnxPortIsLeaf_Object(
@@ -2371,22 +2591,6 @@ tmnxPortLastClearedTime = _TmnxPortLastClearedTime_Object(
 tmnxPortLastClearedTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortLastClearedTime.setStatus("current")
-
-
-class _TmnxPortEgrHsmdaSchedPlcy_Type(TNamedItemOrEmpty):
-    """Custom type tmnxPortEgrHsmdaSchedPlcy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TmnxPortEgrHsmdaSchedPlcy_Type.__name__ = "TNamedItemOrEmpty"
-_TmnxPortEgrHsmdaSchedPlcy_Object = MibTableColumn
-tmnxPortEgrHsmdaSchedPlcy = _TmnxPortEgrHsmdaSchedPlcy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 2, 1, 59),
-    _TmnxPortEgrHsmdaSchedPlcy_Type()
-)
-tmnxPortEgrHsmdaSchedPlcy.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxPortEgrHsmdaSchedPlcy.setStatus("obsolete")
 
 
 class _TmnxPortIngNamedPoolPlcy_Type(TNamedItemOrEmpty):
@@ -2509,7 +2713,7 @@ class _TmnxPortReasonDownFlags_Type(Bits):
           ("internalMacTxError", 8),
           ("efmOamDown", 9),
           ("symMonError", 10),
-          ("reserved11", 11),
+          ("operGroupDown", 11),
           ("satHostPortDown", 12),
           ("satUplinkPortDown", 13))
     )
@@ -2551,7 +2755,11 @@ class _TmnxPortSSMRxQualityLevel_Type(Integer32):
               16,
               17,
               18,
-              19)
+              19,
+              20,
+              21,
+              22,
+              23)
         )
     )
     namedValues = NamedValues(
@@ -2574,7 +2782,11 @@ class _TmnxPortSSMRxQualityLevel_Type(Integer32):
           ("pno", 16),
           ("eec1", 17),
           ("eec2", 18),
-          ("failed", 19))
+          ("failed", 19),
+          ("reserved20", 20),
+          ("reserved21", 21),
+          ("reserved22", 22),
+          ("reserved23", 23))
     )
 
 
@@ -2835,6 +3047,22 @@ tmnxPortOperGrpName = _TmnxPortOperGrpName_Object(
 tmnxPortOperGrpName.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxPortOperGrpName.setStatus("current")
+
+
+class _TmnxPortMonitorOperGrpName_Type(TNamedItemOrEmpty):
+    """Custom type tmnxPortMonitorOperGrpName based on TNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TmnxPortMonitorOperGrpName_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxPortMonitorOperGrpName_Object = MibTableColumn
+tmnxPortMonitorOperGrpName = _TmnxPortMonitorOperGrpName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 2, 1, 86),
+    _TmnxPortMonitorOperGrpName_Type()
+)
+tmnxPortMonitorOperGrpName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortMonitorOperGrpName.setStatus("current")
 _TmnxPortFarEndId_Type = TmnxPortID
 _TmnxPortFarEndId_Object = MibTableColumn
 tmnxPortFarEndId = _TmnxPortFarEndId_Object(
@@ -2958,6 +3186,54 @@ tmnxPortSchedulerMode = _TmnxPortSchedulerMode_Object(
 tmnxPortSchedulerMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxPortSchedulerMode.setStatus("current")
+
+
+class _TmnxPortHwAggShaperScheduler_Type(TLNamedItemOrEmpty):
+    """Custom type tmnxPortHwAggShaperScheduler based on TLNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TmnxPortHwAggShaperScheduler_Type.__name__ = "TLNamedItemOrEmpty"
+_TmnxPortHwAggShaperScheduler_Object = MibTableColumn
+tmnxPortHwAggShaperScheduler = _TmnxPortHwAggShaperScheduler_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 2, 1, 96),
+    _TmnxPortHwAggShaperScheduler_Type()
+)
+tmnxPortHwAggShaperScheduler.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortHwAggShaperScheduler.setStatus("current")
+
+
+class _TmnxPortMonHwAggShaperSch_Type(TmnxEnabledDisabled):
+    """Custom type tmnxPortMonHwAggShaperSch based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_TmnxPortMonHwAggShaperSch_Type.__name__ = "TmnxEnabledDisabled"
+_TmnxPortMonHwAggShaperSch_Object = MibTableColumn
+tmnxPortMonHwAggShaperSch = _TmnxPortMonHwAggShaperSch_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 2, 1, 97),
+    _TmnxPortMonHwAggShaperSch_Type()
+)
+tmnxPortMonHwAggShaperSch.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortMonHwAggShaperSch.setStatus("current")
+
+
+class _TmnxPortSchedulerLowLatency_Type(TmnxEnabledDisabled):
+    """Custom type tmnxPortSchedulerLowLatency based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_TmnxPortSchedulerLowLatency_Type.__name__ = "TmnxEnabledDisabled"
+_TmnxPortSchedulerLowLatency_Object = MibTableColumn
+tmnxPortSchedulerLowLatency = _TmnxPortSchedulerLowLatency_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 2, 1, 98),
+    _TmnxPortSchedulerLowLatency_Type()
+)
+tmnxPortSchedulerLowLatency.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortSchedulerLowLatency.setStatus("current")
 _TmnxPortTestTable_Object = MibTable
 tmnxPortTestTable = _TmnxPortTestTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 3)
@@ -3415,7 +3691,7 @@ class _TmnxPortEtherEgressRate_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(-1, -1),
-        ValueRangeConstraint(1, 400000000),
+        ValueRangeConstraint(1, 1600000000),
     )
 
 
@@ -3481,7 +3757,7 @@ class _TmnxPortEtherIngressRate_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(-1, -1),
-        ValueRangeConstraint(1, 400000),
+        ValueRangeConstraint(1, 1600000),
     )
 
 
@@ -3838,7 +4114,11 @@ class _TmnxPortEtherSSMTxQualityLevel_Type(Integer32):
               16,
               17,
               18,
-              19)
+              19,
+              20,
+              21,
+              22,
+              23)
         )
     )
     namedValues = NamedValues(
@@ -3861,7 +4141,11 @@ class _TmnxPortEtherSSMTxQualityLevel_Type(Integer32):
           ("pno", 16),
           ("eec1", 17),
           ("eec2", 18),
-          ("reserved19", 19))
+          ("reserved19", 19),
+          ("reserved20", 20),
+          ("reserved21", 21),
+          ("reserved22", 22),
+          ("reserved23", 23))
     )
 
 
@@ -4016,6 +4300,7 @@ class _TmnxPortEtherMinFrameLength_Type(Unsigned32):
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(64, 64),
         ValueRangeConstraint(68, 68),
+        ValueRangeConstraint(72, 72),
     )
 
 
@@ -4460,6 +4745,125 @@ tmnxPortEtherSSMEsmcTunnel = _TmnxPortEtherSSMEsmcTunnel_Object(
 tmnxPortEtherSSMEsmcTunnel.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxPortEtherSSMEsmcTunnel.setStatus("current")
+_TmnxPortEtherReportedAlarmStatus_Type = TmnxPortEtherReportStatus
+_TmnxPortEtherReportedAlarmStatus_Object = MibTableColumn
+tmnxPortEtherReportedAlarmStatus = _TmnxPortEtherReportedAlarmStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 67),
+    _TmnxPortEtherReportedAlarmStatus_Type()
+)
+tmnxPortEtherReportedAlarmStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEtherReportedAlarmStatus.setStatus("current")
+
+
+class _TmnxPortEtherMtuProfile_Type(TruthValue):
+    """Custom type tmnxPortEtherMtuProfile based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxPortEtherMtuProfile_Type.__name__ = "TruthValue"
+_TmnxPortEtherMtuProfile_Object = MibTableColumn
+tmnxPortEtherMtuProfile = _TmnxPortEtherMtuProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 69),
+    _TmnxPortEtherMtuProfile_Type()
+)
+tmnxPortEtherMtuProfile.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortEtherMtuProfile.setStatus("current")
+
+
+class _TmnxPortEtherOperMtuProfile_Type(Unsigned32):
+    """Custom type tmnxPortEtherOperMtuProfile based on Unsigned32"""
+    defaultValue = 0
+
+
+_TmnxPortEtherOperMtuProfile_Type.__name__ = "Unsigned32"
+_TmnxPortEtherOperMtuProfile_Object = MibTableColumn
+tmnxPortEtherOperMtuProfile = _TmnxPortEtherOperMtuProfile_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 70),
+    _TmnxPortEtherOperMtuProfile_Type()
+)
+tmnxPortEtherOperMtuProfile.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEtherOperMtuProfile.setStatus("current")
+
+
+class _TmnxPortEtherTxPauseFrame_Type(TruthValue):
+    """Custom type tmnxPortEtherTxPauseFrame based on TruthValue"""
+    defaultValue = 1
+
+
+_TmnxPortEtherTxPauseFrame_Type.__name__ = "TruthValue"
+_TmnxPortEtherTxPauseFrame_Object = MibTableColumn
+tmnxPortEtherTxPauseFrame = _TmnxPortEtherTxPauseFrame_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 71),
+    _TmnxPortEtherTxPauseFrame_Type()
+)
+tmnxPortEtherTxPauseFrame.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortEtherTxPauseFrame.setStatus("current")
+
+
+class _TmnxPortEtherPTPTunnel_Type(TruthValue):
+    """Custom type tmnxPortEtherPTPTunnel based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxPortEtherPTPTunnel_Type.__name__ = "TruthValue"
+_TmnxPortEtherPTPTunnel_Object = MibTableColumn
+tmnxPortEtherPTPTunnel = _TmnxPortEtherPTPTunnel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 72),
+    _TmnxPortEtherPTPTunnel_Type()
+)
+tmnxPortEtherPTPTunnel.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortEtherPTPTunnel.setStatus("current")
+
+
+class _TmnxPortEtherDwlTunneling_Type(TruthValue):
+    """Custom type tmnxPortEtherDwlTunneling based on TruthValue"""
+    defaultValue = 1
+
+
+_TmnxPortEtherDwlTunneling_Type.__name__ = "TruthValue"
+_TmnxPortEtherDwlTunneling_Object = MibTableColumn
+tmnxPortEtherDwlTunneling = _TmnxPortEtherDwlTunneling_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 73),
+    _TmnxPortEtherDwlTunneling_Type()
+)
+tmnxPortEtherDwlTunneling.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortEtherDwlTunneling.setStatus("current")
+
+
+class _TmnxPortEtherOperAutoNegotiate_Type(Integer32):
+    """Custom type tmnxPortEtherOperAutoNegotiate based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("unsupported", 1),
+          ("down", 2),
+          ("up", 3))
+    )
+
+
+_TmnxPortEtherOperAutoNegotiate_Type.__name__ = "Integer32"
+_TmnxPortEtherOperAutoNegotiate_Object = MibTableColumn
+tmnxPortEtherOperAutoNegotiate = _TmnxPortEtherOperAutoNegotiate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 4, 1, 74),
+    _TmnxPortEtherOperAutoNegotiate_Type()
+)
+tmnxPortEtherOperAutoNegotiate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEtherOperAutoNegotiate.setStatus("current")
 _TmnxSonetTable_Object = MibTable
 tmnxSonetTable = _TmnxSonetTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 5)
@@ -6717,12 +7121,28 @@ if mibBuilder.loadTexts:
     tmnxDS1LastChangeTime.setStatus("current")
 
 
-class _TmnxDS1ClockSource_Type(TmnxDSXClockSource):
-    """Custom type tmnxDS1ClockSource based on TmnxDSXClockSource"""
+class _TmnxDS1ClockSource_Type(Integer32):
+    """Custom type tmnxDS1ClockSource based on Integer32"""
     defaultValue = 1
 
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("loopTimed", 1),
+          ("nodeTimed", 2),
+          ("adaptive", 3),
+          ("differential", 4))
+    )
 
-_TmnxDS1ClockSource_Type.__name__ = "TmnxDSXClockSource"
+
+_TmnxDS1ClockSource_Type.__name__ = "Integer32"
 _TmnxDS1ClockSource_Object = MibTableColumn
 tmnxDS1ClockSource = _TmnxDS1ClockSource_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 12, 1, 13),
@@ -6972,6 +7392,26 @@ if mibBuilder.loadTexts:
     tmnxDS1HoldTimeDown.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxDS1HoldTimeDown.setUnits("deciseconds")
+
+
+class _TmnxDS1SignalBitsState_Type(OctetString):
+    """Custom type tmnxDS1SignalBitsState based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(64, 64),
+    )
+    fixed_length = 64
+
+
+_TmnxDS1SignalBitsState_Type.__name__ = "OctetString"
+_TmnxDS1SignalBitsState_Object = MibTableColumn
+tmnxDS1SignalBitsState = _TmnxDS1SignalBitsState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 12, 1, 29),
+    _TmnxDS1SignalBitsState_Type()
+)
+tmnxDS1SignalBitsState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxDS1SignalBitsState.setStatus("current")
 _TmnxDS0ChanGroupTable_Object = MibTable
 tmnxDS0ChanGroupTable = _TmnxDS0ChanGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 13)
@@ -7059,7 +7499,7 @@ tmnxDS0ChanGroupCRC = _TmnxDS0ChanGroupCRC_Object(
 )
 tmnxDS0ChanGroupCRC.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxDS0ChanGroupCRC.setStatus("current")
+    tmnxDS0ChanGroupCRC.setStatus("obsolete")
 
 
 class _TmnxDS0ChanGroupMTU_Type(Unsigned32):
@@ -7117,7 +7557,7 @@ tmnxDS0ChanGroupIdleCycleFlags = _TmnxDS0ChanGroupIdleCycleFlags_Object(
 )
 tmnxDS0ChanGroupIdleCycleFlags.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxDS0ChanGroupIdleCycleFlags.setStatus("current")
+    tmnxDS0ChanGroupIdleCycleFlags.setStatus("obsolete")
 _TmnxDS0ChanGroupScramble_Type = TruthValue
 _TmnxDS0ChanGroupScramble_Object = MibTableColumn
 tmnxDS0ChanGroupScramble = _TmnxDS0ChanGroupScramble_Object(
@@ -7126,7 +7566,7 @@ tmnxDS0ChanGroupScramble = _TmnxDS0ChanGroupScramble_Object(
 )
 tmnxDS0ChanGroupScramble.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxDS0ChanGroupScramble.setStatus("current")
+    tmnxDS0ChanGroupScramble.setStatus("obsolete")
 
 
 class _TmnxDS0ChanGroupAcctPolicyId_Type(Unsigned32):
@@ -7253,13 +7693,29 @@ tmnxDS0ChanGroupBerSfLinkDown = _TmnxDS0ChanGroupBerSfLinkDown_Object(
 )
 tmnxDS0ChanGroupBerSfLinkDown.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxDS0ChanGroupBerSfLinkDown.setStatus("current")
+    tmnxDS0ChanGroupBerSfLinkDown.setStatus("obsolete")
+
+
+class _TmnxDS0ChanGroupLoopback_Type(TmnxDS0Loopback):
+    """Custom type tmnxDS0ChanGroupLoopback based on TmnxDS0Loopback"""
+    defaultValue = 0
+
+
+_TmnxDS0ChanGroupLoopback_Type.__name__ = "TmnxDS0Loopback"
+_TmnxDS0ChanGroupLoopback_Object = MibTableColumn
+tmnxDS0ChanGroupLoopback = _TmnxDS0ChanGroupLoopback_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 13, 1, 17),
+    _TmnxDS0ChanGroupLoopback_Type()
+)
+tmnxDS0ChanGroupLoopback.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxDS0ChanGroupLoopback.setStatus("current")
 _TmnxBundleTable_Object = MibTable
 tmnxBundleTable = _TmnxBundleTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 14)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleTable.setStatus("current")
+    tmnxBundleTable.setStatus("obsolete")
 _TmnxBundleEntry_Object = MibTableRow
 tmnxBundleEntry = _TmnxBundleEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 14, 1)
@@ -7278,7 +7734,7 @@ tmnxBundleBundleID = _TmnxBundleBundleID_Object(
 )
 tmnxBundleBundleID.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tmnxBundleBundleID.setStatus("current")
+    tmnxBundleBundleID.setStatus("obsolete")
 _TmnxBundleRowStatus_Type = RowStatus
 _TmnxBundleRowStatus_Object = MibTableColumn
 tmnxBundleRowStatus = _TmnxBundleRowStatus_Object(
@@ -7287,7 +7743,7 @@ tmnxBundleRowStatus = _TmnxBundleRowStatus_Object(
 )
 tmnxBundleRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleRowStatus.setStatus("current")
+    tmnxBundleRowStatus.setStatus("obsolete")
 
 
 class _TmnxBundleType_Type(Integer32):
@@ -7317,7 +7773,7 @@ tmnxBundleType = _TmnxBundleType_Object(
 )
 tmnxBundleType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleType.setStatus("current")
+    tmnxBundleType.setStatus("obsolete")
 
 
 class _TmnxBundleMinimumLinks_Type(Unsigned32):
@@ -7336,7 +7792,7 @@ tmnxBundleMinimumLinks = _TmnxBundleMinimumLinks_Object(
 )
 tmnxBundleMinimumLinks.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMinimumLinks.setStatus("current")
+    tmnxBundleMinimumLinks.setStatus("obsolete")
 _TmnxBundleNumLinks_Type = Unsigned32
 _TmnxBundleNumLinks_Object = MibTableColumn
 tmnxBundleNumLinks = _TmnxBundleNumLinks_Object(
@@ -7345,7 +7801,7 @@ tmnxBundleNumLinks = _TmnxBundleNumLinks_Object(
 )
 tmnxBundleNumLinks.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleNumLinks.setStatus("current")
+    tmnxBundleNumLinks.setStatus("obsolete")
 _TmnxBundleNumActiveLinks_Type = Unsigned32
 _TmnxBundleNumActiveLinks_Object = MibTableColumn
 tmnxBundleNumActiveLinks = _TmnxBundleNumActiveLinks_Object(
@@ -7354,7 +7810,7 @@ tmnxBundleNumActiveLinks = _TmnxBundleNumActiveLinks_Object(
 )
 tmnxBundleNumActiveLinks.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleNumActiveLinks.setStatus("current")
+    tmnxBundleNumActiveLinks.setStatus("obsolete")
 
 
 class _TmnxBundleMRRU_Type(Unsigned32):
@@ -7376,7 +7832,7 @@ tmnxBundleMRRU = _TmnxBundleMRRU_Object(
 )
 tmnxBundleMRRU.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMRRU.setStatus("current")
+    tmnxBundleMRRU.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleMRRU.setUnits("bytes")
 _TmnxBundleOperMRRU_Type = Unsigned32
@@ -7387,7 +7843,7 @@ tmnxBundleOperMRRU = _TmnxBundleOperMRRU_Object(
 )
 tmnxBundleOperMRRU.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleOperMRRU.setStatus("current")
+    tmnxBundleOperMRRU.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleOperMRRU.setUnits("bytes")
 _TmnxBundlePeerMRRU_Type = Unsigned32
@@ -7398,7 +7854,7 @@ tmnxBundlePeerMRRU = _TmnxBundlePeerMRRU_Object(
 )
 tmnxBundlePeerMRRU.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundlePeerMRRU.setStatus("current")
+    tmnxBundlePeerMRRU.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundlePeerMRRU.setUnits("bytes")
 _TmnxBundleOperMTU_Type = Unsigned32
@@ -7409,7 +7865,7 @@ tmnxBundleOperMTU = _TmnxBundleOperMTU_Object(
 )
 tmnxBundleOperMTU.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleOperMTU.setStatus("current")
+    tmnxBundleOperMTU.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleOperMTU.setUnits("bytes")
 
@@ -7430,7 +7886,7 @@ tmnxBundleRedDiffDelay = _TmnxBundleRedDiffDelay_Object(
 )
 tmnxBundleRedDiffDelay.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleRedDiffDelay.setStatus("current")
+    tmnxBundleRedDiffDelay.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleRedDiffDelay.setUnits("milliseconds")
 
@@ -7460,7 +7916,7 @@ tmnxBundleRedDiffDelayAction = _TmnxBundleRedDiffDelayAction_Object(
 )
 tmnxBundleRedDiffDelayAction.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleRedDiffDelayAction.setStatus("current")
+    tmnxBundleRedDiffDelayAction.setStatus("obsolete")
 
 
 class _TmnxBundleYellowDiffDelay_Type(Unsigned32):
@@ -7479,7 +7935,7 @@ tmnxBundleYellowDiffDelay = _TmnxBundleYellowDiffDelay_Object(
 )
 tmnxBundleYellowDiffDelay.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleYellowDiffDelay.setStatus("current")
+    tmnxBundleYellowDiffDelay.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleYellowDiffDelay.setUnits("milliseconds")
 
@@ -7497,7 +7953,7 @@ tmnxBundleShortSequence = _TmnxBundleShortSequence_Object(
 )
 tmnxBundleShortSequence.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleShortSequence.setStatus("current")
+    tmnxBundleShortSequence.setStatus("obsolete")
 _TmnxBundleLastChangeTime_Type = TimeStamp
 _TmnxBundleLastChangeTime_Object = MibTableColumn
 tmnxBundleLastChangeTime = _TmnxBundleLastChangeTime_Object(
@@ -7506,7 +7962,7 @@ tmnxBundleLastChangeTime = _TmnxBundleLastChangeTime_Object(
 )
 tmnxBundleLastChangeTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleLastChangeTime.setStatus("current")
+    tmnxBundleLastChangeTime.setStatus("obsolete")
 
 
 class _TmnxBundleFragmentThreshold_Type(Unsigned32):
@@ -7528,7 +7984,7 @@ tmnxBundleFragmentThreshold = _TmnxBundleFragmentThreshold_Object(
 )
 tmnxBundleFragmentThreshold.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleFragmentThreshold.setStatus("current")
+    tmnxBundleFragmentThreshold.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleFragmentThreshold.setUnits("bytes")
 _TmnxBundleUpTime_Type = Unsigned32
@@ -7539,7 +7995,7 @@ tmnxBundleUpTime = _TmnxBundleUpTime_Object(
 )
 tmnxBundleUpTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleUpTime.setStatus("current")
+    tmnxBundleUpTime.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleUpTime.setUnits("seconds")
 _TmnxBundleInputDiscards_Type = Counter32
@@ -7550,7 +8006,7 @@ tmnxBundleInputDiscards = _TmnxBundleInputDiscards_Object(
 )
 tmnxBundleInputDiscards.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleInputDiscards.setStatus("current")
+    tmnxBundleInputDiscards.setStatus("obsolete")
 _TmnxBundlePrimaryMemberPortID_Type = TmnxPortID
 _TmnxBundlePrimaryMemberPortID_Object = MibTableColumn
 tmnxBundlePrimaryMemberPortID = _TmnxBundlePrimaryMemberPortID_Object(
@@ -7559,7 +8015,7 @@ tmnxBundlePrimaryMemberPortID = _TmnxBundlePrimaryMemberPortID_Object(
 )
 tmnxBundlePrimaryMemberPortID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundlePrimaryMemberPortID.setStatus("current")
+    tmnxBundlePrimaryMemberPortID.setStatus("obsolete")
 
 
 class _TmnxBundleLFI_Type(TruthValue):
@@ -7575,7 +8031,7 @@ tmnxBundleLFI = _TmnxBundleLFI_Object(
 )
 tmnxBundleLFI.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleLFI.setStatus("current")
+    tmnxBundleLFI.setStatus("obsolete")
 
 
 class _TmnxBundleProtectedType_Type(Integer32):
@@ -7605,7 +8061,7 @@ tmnxBundleProtectedType = _TmnxBundleProtectedType_Object(
 )
 tmnxBundleProtectedType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleProtectedType.setStatus("current")
+    tmnxBundleProtectedType.setStatus("obsolete")
 
 
 class _TmnxBundleParentBundle_Type(TmnxBundleID):
@@ -7621,13 +8077,13 @@ tmnxBundleParentBundle = _TmnxBundleParentBundle_Object(
 )
 tmnxBundleParentBundle.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleParentBundle.setStatus("current")
+    tmnxBundleParentBundle.setStatus("obsolete")
 _TmnxBundleMemberTable_Object = MibTable
 tmnxBundleMemberTable = _TmnxBundleMemberTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 15)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMemberTable.setStatus("current")
+    tmnxBundleMemberTable.setStatus("obsolete")
 _TmnxBundleMemberEntry_Object = MibTableRow
 tmnxBundleMemberEntry = _TmnxBundleMemberEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 15, 1)
@@ -7646,7 +8102,7 @@ tmnxBundleMemberRowStatus = _TmnxBundleMemberRowStatus_Object(
 )
 tmnxBundleMemberRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberRowStatus.setStatus("current")
+    tmnxBundleMemberRowStatus.setStatus("obsolete")
 _TmnxBundleMemberActive_Type = TruthValue
 _TmnxBundleMemberActive_Object = MibTableColumn
 tmnxBundleMemberActive = _TmnxBundleMemberActive_Object(
@@ -7655,7 +8111,7 @@ tmnxBundleMemberActive = _TmnxBundleMemberActive_Object(
 )
 tmnxBundleMemberActive.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberActive.setStatus("current")
+    tmnxBundleMemberActive.setStatus("obsolete")
 
 
 class _TmnxBundleMemberDownReason_Type(Integer32):
@@ -7693,7 +8149,7 @@ tmnxBundleMemberDownReason = _TmnxBundleMemberDownReason_Object(
 )
 tmnxBundleMemberDownReason.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberDownReason.setStatus("current")
+    tmnxBundleMemberDownReason.setStatus("obsolete")
 _TmnxBundleMemberUpTime_Type = Unsigned32
 _TmnxBundleMemberUpTime_Object = MibTableColumn
 tmnxBundleMemberUpTime = _TmnxBundleMemberUpTime_Object(
@@ -7702,7 +8158,7 @@ tmnxBundleMemberUpTime = _TmnxBundleMemberUpTime_Object(
 )
 tmnxBundleMemberUpTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberUpTime.setStatus("current")
+    tmnxBundleMemberUpTime.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleMemberUpTime.setUnits("seconds")
 _TmnxPortToChannelTable_Object = MibTable
@@ -8140,7 +8596,7 @@ class _TmnxLsrIpLoadBalancing_Type(Integer32):
           ("ip-only", 3),
           ("eth-encap-ip", 4),
           ("label-ip-l4-teid", 5),
-          ("reserved6", 6),
+          ("label-eth-ip-l4-teid", 6),
           ("label-ip-or-teid", 7))
     )
 
@@ -8232,12 +8688,12 @@ if mibBuilder.loadTexts:
     tmnxL2tpLoadBalancing.setStatus("current")
 
 
-class _TmnxLoadBalancingHashEcmpPoly_Type(TmnxCrcPolynomial):
-    """Custom type tmnxLoadBalancingHashEcmpPoly based on TmnxCrcPolynomial"""
+class _TmnxLoadBalancingHashEcmpPoly_Type(TmnxCrcPolynomialEcmp):
+    """Custom type tmnxLoadBalancingHashEcmpPoly based on TmnxCrcPolynomialEcmp"""
     defaultValue = 1
 
 
-_TmnxLoadBalancingHashEcmpPoly_Type.__name__ = "TmnxCrcPolynomial"
+_TmnxLoadBalancingHashEcmpPoly_Type.__name__ = "TmnxCrcPolynomialEcmp"
 _TmnxLoadBalancingHashEcmpPoly_Object = MibScalar
 tmnxLoadBalancingHashEcmpPoly = _TmnxLoadBalancingHashEcmpPoly_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 19, 7),
@@ -8248,12 +8704,12 @@ if mibBuilder.loadTexts:
     tmnxLoadBalancingHashEcmpPoly.setStatus("current")
 
 
-class _TmnxLoadBalancingHashLagPoly_Type(TmnxCrcPolynomial):
-    """Custom type tmnxLoadBalancingHashLagPoly based on TmnxCrcPolynomial"""
+class _TmnxLoadBalancingHashLagPoly_Type(TmnxCrcPolynomialLag):
+    """Custom type tmnxLoadBalancingHashLagPoly based on TmnxCrcPolynomialLag"""
     defaultValue = 2
 
 
-_TmnxLoadBalancingHashLagPoly_Type.__name__ = "TmnxCrcPolynomial"
+_TmnxLoadBalancingHashLagPoly_Type.__name__ = "TmnxCrcPolynomialLag"
 _TmnxLoadBalancingHashLagPoly_Object = MibScalar
 tmnxLoadBalancingHashLagPoly = _TmnxLoadBalancingHashLagPoly_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 19, 8),
@@ -8262,102 +8718,44 @@ tmnxLoadBalancingHashLagPoly = _TmnxLoadBalancingHashLagPoly_Object(
 tmnxLoadBalancingHashLagPoly.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxLoadBalancingHashLagPoly.setStatus("current")
-_TmnxCiscoHDLCTable_Object = MibTable
-tmnxCiscoHDLCTable = _TmnxCiscoHDLCTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 20)
+
+
+class _TmnxLoadBalancingExcSrcDstIpv6_Type(TruthValue):
+    """Custom type tmnxLoadBalancingExcSrcDstIpv6 based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxLoadBalancingExcSrcDstIpv6_Type.__name__ = "TruthValue"
+_TmnxLoadBalancingExcSrcDstIpv6_Object = MibScalar
+tmnxLoadBalancingExcSrcDstIpv6 = _TmnxLoadBalancingExcSrcDstIpv6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 19, 9),
+    _TmnxLoadBalancingExcSrcDstIpv6_Type()
 )
+tmnxLoadBalancingExcSrcDstIpv6.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxCiscoHDLCTable.setStatus("current")
-_TmnxCiscoHDLCEntry_Object = MibTableRow
-tmnxCiscoHDLCEntry = _TmnxCiscoHDLCEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 20, 1)
+    tmnxLoadBalancingExcSrcDstIpv6.setStatus("current")
+
+
+class _TmnxLoadBalancingEntropyLabel_Type(TruthValue):
+    """Custom type tmnxLoadBalancingEntropyLabel based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxLoadBalancingEntropyLabel_Type.__name__ = "TruthValue"
+_TmnxLoadBalancingEntropyLabel_Object = MibScalar
+tmnxLoadBalancingEntropyLabel = _TmnxLoadBalancingEntropyLabel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 19, 10),
+    _TmnxLoadBalancingEntropyLabel_Type()
 )
-tmnxCiscoHDLCEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-)
+tmnxLoadBalancingEntropyLabel.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxCiscoHDLCEntry.setStatus("current")
-
-
-class _TmnxCiscoHDLCKeepAliveInt_Type(Unsigned32):
-    """Custom type tmnxCiscoHDLCKeepAliveInt based on Unsigned32"""
-    defaultValue = 10
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 300),
-    )
-
-
-_TmnxCiscoHDLCKeepAliveInt_Type.__name__ = "Unsigned32"
-_TmnxCiscoHDLCKeepAliveInt_Object = MibTableColumn
-tmnxCiscoHDLCKeepAliveInt = _TmnxCiscoHDLCKeepAliveInt_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 20, 1, 1),
-    _TmnxCiscoHDLCKeepAliveInt_Type()
-)
-tmnxCiscoHDLCKeepAliveInt.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCKeepAliveInt.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCKeepAliveInt.setUnits("seconds")
-
-
-class _TmnxCiscoHDLCUpCount_Type(Unsigned32):
-    """Custom type tmnxCiscoHDLCUpCount based on Unsigned32"""
-    defaultValue = 1
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 3),
-    )
-
-
-_TmnxCiscoHDLCUpCount_Type.__name__ = "Unsigned32"
-_TmnxCiscoHDLCUpCount_Object = MibTableColumn
-tmnxCiscoHDLCUpCount = _TmnxCiscoHDLCUpCount_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 20, 1, 2),
-    _TmnxCiscoHDLCUpCount_Type()
-)
-tmnxCiscoHDLCUpCount.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCUpCount.setStatus("current")
-
-
-class _TmnxCiscoHDLCDownCount_Type(Unsigned32):
-    """Custom type tmnxCiscoHDLCDownCount based on Unsigned32"""
-    defaultValue = 3
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(3, 16),
-    )
-
-
-_TmnxCiscoHDLCDownCount_Type.__name__ = "Unsigned32"
-_TmnxCiscoHDLCDownCount_Object = MibTableColumn
-tmnxCiscoHDLCDownCount = _TmnxCiscoHDLCDownCount_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 20, 1, 3),
-    _TmnxCiscoHDLCDownCount_Type()
-)
-tmnxCiscoHDLCDownCount.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCDownCount.setStatus("current")
-_TmnxCiscoHDLCOperState_Type = TmnxOperState
-_TmnxCiscoHDLCOperState_Object = MibTableColumn
-tmnxCiscoHDLCOperState = _TmnxCiscoHDLCOperState_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 20, 1, 4),
-    _TmnxCiscoHDLCOperState_Type()
-)
-tmnxCiscoHDLCOperState.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCOperState.setStatus("current")
+    tmnxLoadBalancingEntropyLabel.setStatus("current")
 _TmnxBundleImaGrpTable_Object = MibTable
 tmnxBundleImaGrpTable = _TmnxBundleImaGrpTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 21)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTable.setStatus("current")
+    tmnxBundleImaGrpTable.setStatus("obsolete")
 _TmnxBundleImaGrpEntry_Object = MibTableRow
 tmnxBundleImaGrpEntry = _TmnxBundleImaGrpEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 21, 1)
@@ -8367,7 +8765,7 @@ tmnxBundleImaGrpEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxBundleBundleID"),
 )
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpEntry.setStatus("current")
+    tmnxBundleImaGrpEntry.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpLnkActTimer_Type(Unsigned32):
@@ -8388,7 +8786,7 @@ tmnxBundleImaGrpLnkActTimer = _TmnxBundleImaGrpLnkActTimer_Object(
 )
 tmnxBundleImaGrpLnkActTimer.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpLnkActTimer.setStatus("current")
+    tmnxBundleImaGrpLnkActTimer.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleImaGrpLnkActTimer.setUnits("milliseconds")
 
@@ -8411,7 +8809,7 @@ tmnxBundleImaGrpLnkDeactTimer = _TmnxBundleImaGrpLnkDeactTimer_Object(
 )
 tmnxBundleImaGrpLnkDeactTimer.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpLnkDeactTimer.setStatus("current")
+    tmnxBundleImaGrpLnkDeactTimer.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleImaGrpLnkDeactTimer.setUnits("milliseconds")
 
@@ -8439,7 +8837,7 @@ tmnxBundleImaGrpSymmetryMode = _TmnxBundleImaGrpSymmetryMode_Object(
 )
 tmnxBundleImaGrpSymmetryMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpSymmetryMode.setStatus("current")
+    tmnxBundleImaGrpSymmetryMode.setStatus("obsolete")
 _TmnxBundleImaGrpTxId_Type = Integer32
 _TmnxBundleImaGrpTxId_Object = MibTableColumn
 tmnxBundleImaGrpTxId = _TmnxBundleImaGrpTxId_Object(
@@ -8448,7 +8846,7 @@ tmnxBundleImaGrpTxId = _TmnxBundleImaGrpTxId_Object(
 )
 tmnxBundleImaGrpTxId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTxId.setStatus("current")
+    tmnxBundleImaGrpTxId.setStatus("obsolete")
 _TmnxBundleImaGrpRxId_Type = Integer32
 _TmnxBundleImaGrpRxId_Object = MibTableColumn
 tmnxBundleImaGrpRxId = _TmnxBundleImaGrpRxId_Object(
@@ -8457,7 +8855,7 @@ tmnxBundleImaGrpRxId = _TmnxBundleImaGrpRxId_Object(
 )
 tmnxBundleImaGrpRxId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpRxId.setStatus("current")
+    tmnxBundleImaGrpRxId.setStatus("obsolete")
 _TmnxBundleImaGrpTxRefLnk_Type = TmnxPortID
 _TmnxBundleImaGrpTxRefLnk_Object = MibTableColumn
 tmnxBundleImaGrpTxRefLnk = _TmnxBundleImaGrpTxRefLnk_Object(
@@ -8466,7 +8864,7 @@ tmnxBundleImaGrpTxRefLnk = _TmnxBundleImaGrpTxRefLnk_Object(
 )
 tmnxBundleImaGrpTxRefLnk.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTxRefLnk.setStatus("current")
+    tmnxBundleImaGrpTxRefLnk.setStatus("obsolete")
 _TmnxBundleImaGrpRxRefLnk_Type = TmnxPortID
 _TmnxBundleImaGrpRxRefLnk_Object = MibTableColumn
 tmnxBundleImaGrpRxRefLnk = _TmnxBundleImaGrpRxRefLnk_Object(
@@ -8475,7 +8873,7 @@ tmnxBundleImaGrpRxRefLnk = _TmnxBundleImaGrpRxRefLnk_Object(
 )
 tmnxBundleImaGrpRxRefLnk.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpRxRefLnk.setStatus("current")
+    tmnxBundleImaGrpRxRefLnk.setStatus("obsolete")
 _TmnxBundleImaGrpSmNeState_Type = TmnxImaGrpState
 _TmnxBundleImaGrpSmNeState_Object = MibTableColumn
 tmnxBundleImaGrpSmNeState = _TmnxBundleImaGrpSmNeState_Object(
@@ -8484,7 +8882,7 @@ tmnxBundleImaGrpSmNeState = _TmnxBundleImaGrpSmNeState_Object(
 )
 tmnxBundleImaGrpSmNeState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpSmNeState.setStatus("current")
+    tmnxBundleImaGrpSmNeState.setStatus("obsolete")
 _TmnxBundleImaGrpSmFeState_Type = TmnxImaGrpState
 _TmnxBundleImaGrpSmFeState_Object = MibTableColumn
 tmnxBundleImaGrpSmFeState = _TmnxBundleImaGrpSmFeState_Object(
@@ -8493,7 +8891,7 @@ tmnxBundleImaGrpSmFeState = _TmnxBundleImaGrpSmFeState_Object(
 )
 tmnxBundleImaGrpSmFeState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpSmFeState.setStatus("current")
+    tmnxBundleImaGrpSmFeState.setStatus("obsolete")
 _TmnxBundleImaGrpSmFailState_Type = TmnxImaGrpFailState
 _TmnxBundleImaGrpSmFailState_Object = MibTableColumn
 tmnxBundleImaGrpSmFailState = _TmnxBundleImaGrpSmFailState_Object(
@@ -8502,7 +8900,7 @@ tmnxBundleImaGrpSmFailState = _TmnxBundleImaGrpSmFailState_Object(
 )
 tmnxBundleImaGrpSmFailState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpSmFailState.setStatus("current")
+    tmnxBundleImaGrpSmFailState.setStatus("obsolete")
 _TmnxBundleImaGrpSmDownSecs_Type = Counter32
 _TmnxBundleImaGrpSmDownSecs_Object = MibTableColumn
 tmnxBundleImaGrpSmDownSecs = _TmnxBundleImaGrpSmDownSecs_Object(
@@ -8511,7 +8909,7 @@ tmnxBundleImaGrpSmDownSecs = _TmnxBundleImaGrpSmDownSecs_Object(
 )
 tmnxBundleImaGrpSmDownSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpSmDownSecs.setStatus("current")
+    tmnxBundleImaGrpSmDownSecs.setStatus("obsolete")
 _TmnxBundleImaGrpSmOperSecs_Type = Counter32
 _TmnxBundleImaGrpSmOperSecs_Object = MibTableColumn
 tmnxBundleImaGrpSmOperSecs = _TmnxBundleImaGrpSmOperSecs_Object(
@@ -8520,7 +8918,7 @@ tmnxBundleImaGrpSmOperSecs = _TmnxBundleImaGrpSmOperSecs_Object(
 )
 tmnxBundleImaGrpSmOperSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpSmOperSecs.setStatus("current")
+    tmnxBundleImaGrpSmOperSecs.setStatus("obsolete")
 _TmnxBundleImaGrpAvailTxCR_Type = Gauge32
 _TmnxBundleImaGrpAvailTxCR_Object = MibTableColumn
 tmnxBundleImaGrpAvailTxCR = _TmnxBundleImaGrpAvailTxCR_Object(
@@ -8529,7 +8927,7 @@ tmnxBundleImaGrpAvailTxCR = _TmnxBundleImaGrpAvailTxCR_Object(
 )
 tmnxBundleImaGrpAvailTxCR.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpAvailTxCR.setStatus("current")
+    tmnxBundleImaGrpAvailTxCR.setStatus("obsolete")
 _TmnxBundleImaGrpAvailRxCR_Type = Gauge32
 _TmnxBundleImaGrpAvailRxCR_Object = MibTableColumn
 tmnxBundleImaGrpAvailRxCR = _TmnxBundleImaGrpAvailRxCR_Object(
@@ -8538,7 +8936,7 @@ tmnxBundleImaGrpAvailRxCR = _TmnxBundleImaGrpAvailRxCR_Object(
 )
 tmnxBundleImaGrpAvailRxCR.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpAvailRxCR.setStatus("current")
+    tmnxBundleImaGrpAvailRxCR.setStatus("obsolete")
 _TmnxBundleImaGrpNeFails_Type = Counter32
 _TmnxBundleImaGrpNeFails_Object = MibTableColumn
 tmnxBundleImaGrpNeFails = _TmnxBundleImaGrpNeFails_Object(
@@ -8547,7 +8945,7 @@ tmnxBundleImaGrpNeFails = _TmnxBundleImaGrpNeFails_Object(
 )
 tmnxBundleImaGrpNeFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpNeFails.setStatus("current")
+    tmnxBundleImaGrpNeFails.setStatus("obsolete")
 _TmnxBundleImaGrpFeFails_Type = Counter32
 _TmnxBundleImaGrpFeFails_Object = MibTableColumn
 tmnxBundleImaGrpFeFails = _TmnxBundleImaGrpFeFails_Object(
@@ -8556,7 +8954,7 @@ tmnxBundleImaGrpFeFails = _TmnxBundleImaGrpFeFails_Object(
 )
 tmnxBundleImaGrpFeFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpFeFails.setStatus("current")
+    tmnxBundleImaGrpFeFails.setStatus("obsolete")
 _TmnxBundleImaGrpTxIcpCells_Type = Counter32
 _TmnxBundleImaGrpTxIcpCells_Object = MibTableColumn
 tmnxBundleImaGrpTxIcpCells = _TmnxBundleImaGrpTxIcpCells_Object(
@@ -8565,7 +8963,7 @@ tmnxBundleImaGrpTxIcpCells = _TmnxBundleImaGrpTxIcpCells_Object(
 )
 tmnxBundleImaGrpTxIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTxIcpCells.setStatus("current")
+    tmnxBundleImaGrpTxIcpCells.setStatus("obsolete")
 _TmnxBundleImaGrpRxIcpCells_Type = Counter32
 _TmnxBundleImaGrpRxIcpCells_Object = MibTableColumn
 tmnxBundleImaGrpRxIcpCells = _TmnxBundleImaGrpRxIcpCells_Object(
@@ -8574,7 +8972,7 @@ tmnxBundleImaGrpRxIcpCells = _TmnxBundleImaGrpRxIcpCells_Object(
 )
 tmnxBundleImaGrpRxIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpRxIcpCells.setStatus("current")
+    tmnxBundleImaGrpRxIcpCells.setStatus("obsolete")
 _TmnxBundleImaGrpErrorIcpCells_Type = Counter32
 _TmnxBundleImaGrpErrorIcpCells_Object = MibTableColumn
 tmnxBundleImaGrpErrorIcpCells = _TmnxBundleImaGrpErrorIcpCells_Object(
@@ -8583,7 +8981,7 @@ tmnxBundleImaGrpErrorIcpCells = _TmnxBundleImaGrpErrorIcpCells_Object(
 )
 tmnxBundleImaGrpErrorIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpErrorIcpCells.setStatus("current")
+    tmnxBundleImaGrpErrorIcpCells.setStatus("obsolete")
 _TmnxBundleImaGrpLostRxIcpCells_Type = Counter32
 _TmnxBundleImaGrpLostRxIcpCells_Object = MibTableColumn
 tmnxBundleImaGrpLostRxIcpCells = _TmnxBundleImaGrpLostRxIcpCells_Object(
@@ -8592,7 +8990,7 @@ tmnxBundleImaGrpLostRxIcpCells = _TmnxBundleImaGrpLostRxIcpCells_Object(
 )
 tmnxBundleImaGrpLostRxIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpLostRxIcpCells.setStatus("current")
+    tmnxBundleImaGrpLostRxIcpCells.setStatus("obsolete")
 _TmnxBundleImaGrpTxOamLablVal_Type = Integer32
 _TmnxBundleImaGrpTxOamLablVal_Object = MibTableColumn
 tmnxBundleImaGrpTxOamLablVal = _TmnxBundleImaGrpTxOamLablVal_Object(
@@ -8601,7 +8999,7 @@ tmnxBundleImaGrpTxOamLablVal = _TmnxBundleImaGrpTxOamLablVal_Object(
 )
 tmnxBundleImaGrpTxOamLablVal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTxOamLablVal.setStatus("current")
+    tmnxBundleImaGrpTxOamLablVal.setStatus("obsolete")
 _TmnxBundleImaGrpRxOamLablVal_Type = Integer32
 _TmnxBundleImaGrpRxOamLablVal_Object = MibTableColumn
 tmnxBundleImaGrpRxOamLablVal = _TmnxBundleImaGrpRxOamLablVal_Object(
@@ -8610,7 +9008,7 @@ tmnxBundleImaGrpRxOamLablVal = _TmnxBundleImaGrpRxOamLablVal_Object(
 )
 tmnxBundleImaGrpRxOamLablVal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpRxOamLablVal.setStatus("current")
+    tmnxBundleImaGrpRxOamLablVal.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpAlphaValue_Type(Integer32):
@@ -8626,7 +9024,7 @@ tmnxBundleImaGrpAlphaValue = _TmnxBundleImaGrpAlphaValue_Object(
 )
 tmnxBundleImaGrpAlphaValue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpAlphaValue.setStatus("current")
+    tmnxBundleImaGrpAlphaValue.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpBetaValue_Type(Integer32):
@@ -8642,7 +9040,7 @@ tmnxBundleImaGrpBetaValue = _TmnxBundleImaGrpBetaValue_Object(
 )
 tmnxBundleImaGrpBetaValue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpBetaValue.setStatus("current")
+    tmnxBundleImaGrpBetaValue.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpGammaValue_Type(Integer32):
@@ -8658,7 +9056,7 @@ tmnxBundleImaGrpGammaValue = _TmnxBundleImaGrpGammaValue_Object(
 )
 tmnxBundleImaGrpGammaValue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpGammaValue.setStatus("current")
+    tmnxBundleImaGrpGammaValue.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpNeClockMode_Type(TmnxImaGrpClockModes):
@@ -8674,7 +9072,7 @@ tmnxBundleImaGrpNeClockMode = _TmnxBundleImaGrpNeClockMode_Object(
 )
 tmnxBundleImaGrpNeClockMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpNeClockMode.setStatus("current")
+    tmnxBundleImaGrpNeClockMode.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpFeClockMode_Type(TmnxImaGrpClockModes):
@@ -8690,7 +9088,7 @@ tmnxBundleImaGrpFeClockMode = _TmnxBundleImaGrpFeClockMode_Object(
 )
 tmnxBundleImaGrpFeClockMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpFeClockMode.setStatus("current")
+    tmnxBundleImaGrpFeClockMode.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpVersion_Type(TmnxImaGrpVersion):
@@ -8706,7 +9104,7 @@ tmnxBundleImaGrpVersion = _TmnxBundleImaGrpVersion_Object(
 )
 tmnxBundleImaGrpVersion.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpVersion.setStatus("current")
+    tmnxBundleImaGrpVersion.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpMaxConfBw_Type(Unsigned32):
@@ -8727,7 +9125,7 @@ tmnxBundleImaGrpMaxConfBw = _TmnxBundleImaGrpMaxConfBw_Object(
 )
 tmnxBundleImaGrpMaxConfBw.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpMaxConfBw.setStatus("current")
+    tmnxBundleImaGrpMaxConfBw.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpTestState_Type(TmnxImaTestState):
@@ -8743,7 +9141,7 @@ tmnxBundleImaGrpTestState = _TmnxBundleImaGrpTestState_Object(
 )
 tmnxBundleImaGrpTestState.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTestState.setStatus("current")
+    tmnxBundleImaGrpTestState.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpTestMember_Type(TmnxPortID):
@@ -8759,7 +9157,7 @@ tmnxBundleImaGrpTestMember = _TmnxBundleImaGrpTestMember_Object(
 )
 tmnxBundleImaGrpTestMember.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTestMember.setStatus("current")
+    tmnxBundleImaGrpTestMember.setStatus("obsolete")
 
 
 class _TmnxBundleImaGrpTestPattern_Type(Integer32):
@@ -8780,7 +9178,7 @@ tmnxBundleImaGrpTestPattern = _TmnxBundleImaGrpTestPattern_Object(
 )
 tmnxBundleImaGrpTestPattern.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpTestPattern.setStatus("current")
+    tmnxBundleImaGrpTestPattern.setStatus("obsolete")
 _TmnxBundleImaGrpDiffDelayMaxObs_Type = Unsigned32
 _TmnxBundleImaGrpDiffDelayMaxObs_Object = MibTableColumn
 tmnxBundleImaGrpDiffDelayMaxObs = _TmnxBundleImaGrpDiffDelayMaxObs_Object(
@@ -8789,7 +9187,7 @@ tmnxBundleImaGrpDiffDelayMaxObs = _TmnxBundleImaGrpDiffDelayMaxObs_Object(
 )
 tmnxBundleImaGrpDiffDelayMaxObs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpDiffDelayMaxObs.setStatus("current")
+    tmnxBundleImaGrpDiffDelayMaxObs.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleImaGrpDiffDelayMaxObs.setUnits("milliseconds")
 _TmnxBundleImaGrpLeastDelayLink_Type = Unsigned32
@@ -8800,7 +9198,7 @@ tmnxBundleImaGrpLeastDelayLink = _TmnxBundleImaGrpLeastDelayLink_Object(
 )
 tmnxBundleImaGrpLeastDelayLink.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleImaGrpLeastDelayLink.setStatus("current")
+    tmnxBundleImaGrpLeastDelayLink.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleImaGrpLeastDelayLink.setUnits("milliseconds")
 _TmnxBundleMemberImaTable_Object = MibTable
@@ -8808,7 +9206,7 @@ tmnxBundleMemberImaTable = _TmnxBundleMemberImaTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 22)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaTable.setStatus("current")
+    tmnxBundleMemberImaTable.setStatus("obsolete")
 _TmnxBundleMemberImaEntry_Object = MibTableRow
 tmnxBundleMemberImaEntry = _TmnxBundleMemberImaEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 22, 1)
@@ -8818,7 +9216,7 @@ tmnxBundleMemberImaEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaEntry.setStatus("current")
+    tmnxBundleMemberImaEntry.setStatus("obsolete")
 _TmnxBundleMemberImaNeTxState_Type = TmnxImaLnkState
 _TmnxBundleMemberImaNeTxState_Object = MibTableColumn
 tmnxBundleMemberImaNeTxState = _TmnxBundleMemberImaNeTxState_Object(
@@ -8827,7 +9225,7 @@ tmnxBundleMemberImaNeTxState = _TmnxBundleMemberImaNeTxState_Object(
 )
 tmnxBundleMemberImaNeTxState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeTxState.setStatus("current")
+    tmnxBundleMemberImaNeTxState.setStatus("obsolete")
 _TmnxBundleMemberImaNeRxState_Type = TmnxImaLnkState
 _TmnxBundleMemberImaNeRxState_Object = MibTableColumn
 tmnxBundleMemberImaNeRxState = _TmnxBundleMemberImaNeRxState_Object(
@@ -8836,7 +9234,7 @@ tmnxBundleMemberImaNeRxState = _TmnxBundleMemberImaNeRxState_Object(
 )
 tmnxBundleMemberImaNeRxState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeRxState.setStatus("current")
+    tmnxBundleMemberImaNeRxState.setStatus("obsolete")
 _TmnxBundleMemberImaFeTxState_Type = TmnxImaLnkState
 _TmnxBundleMemberImaFeTxState_Object = MibTableColumn
 tmnxBundleMemberImaFeTxState = _TmnxBundleMemberImaFeTxState_Object(
@@ -8845,7 +9243,7 @@ tmnxBundleMemberImaFeTxState = _TmnxBundleMemberImaFeTxState_Object(
 )
 tmnxBundleMemberImaFeTxState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeTxState.setStatus("current")
+    tmnxBundleMemberImaFeTxState.setStatus("obsolete")
 _TmnxBundleMemberImaFeRxState_Type = TmnxImaLnkState
 _TmnxBundleMemberImaFeRxState_Object = MibTableColumn
 tmnxBundleMemberImaFeRxState = _TmnxBundleMemberImaFeRxState_Object(
@@ -8854,7 +9252,7 @@ tmnxBundleMemberImaFeRxState = _TmnxBundleMemberImaFeRxState_Object(
 )
 tmnxBundleMemberImaFeRxState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeRxState.setStatus("current")
+    tmnxBundleMemberImaFeRxState.setStatus("obsolete")
 _TmnxBundleMemberImaNeRxFailState_Type = TmnxImaLnkFailState
 _TmnxBundleMemberImaNeRxFailState_Object = MibTableColumn
 tmnxBundleMemberImaNeRxFailState = _TmnxBundleMemberImaNeRxFailState_Object(
@@ -8863,7 +9261,7 @@ tmnxBundleMemberImaNeRxFailState = _TmnxBundleMemberImaNeRxFailState_Object(
 )
 tmnxBundleMemberImaNeRxFailState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeRxFailState.setStatus("current")
+    tmnxBundleMemberImaNeRxFailState.setStatus("obsolete")
 _TmnxBundleMemberImaFeRxFailState_Type = TmnxImaLnkFailState
 _TmnxBundleMemberImaFeRxFailState_Object = MibTableColumn
 tmnxBundleMemberImaFeRxFailState = _TmnxBundleMemberImaFeRxFailState_Object(
@@ -8872,7 +9270,7 @@ tmnxBundleMemberImaFeRxFailState = _TmnxBundleMemberImaFeRxFailState_Object(
 )
 tmnxBundleMemberImaFeRxFailState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeRxFailState.setStatus("current")
+    tmnxBundleMemberImaFeRxFailState.setStatus("obsolete")
 _TmnxBundleMemberImaTxLid_Type = Integer32
 _TmnxBundleMemberImaTxLid_Object = MibTableColumn
 tmnxBundleMemberImaTxLid = _TmnxBundleMemberImaTxLid_Object(
@@ -8881,7 +9279,7 @@ tmnxBundleMemberImaTxLid = _TmnxBundleMemberImaTxLid_Object(
 )
 tmnxBundleMemberImaTxLid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaTxLid.setStatus("current")
+    tmnxBundleMemberImaTxLid.setStatus("obsolete")
 _TmnxBundleMemberImaRxLid_Type = Integer32
 _TmnxBundleMemberImaRxLid_Object = MibTableColumn
 tmnxBundleMemberImaRxLid = _TmnxBundleMemberImaRxLid_Object(
@@ -8890,7 +9288,7 @@ tmnxBundleMemberImaRxLid = _TmnxBundleMemberImaRxLid_Object(
 )
 tmnxBundleMemberImaRxLid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaRxLid.setStatus("current")
+    tmnxBundleMemberImaRxLid.setStatus("obsolete")
 _TmnxBundleMemberImaViolations_Type = Counter32
 _TmnxBundleMemberImaViolations_Object = MibTableColumn
 tmnxBundleMemberImaViolations = _TmnxBundleMemberImaViolations_Object(
@@ -8899,7 +9297,7 @@ tmnxBundleMemberImaViolations = _TmnxBundleMemberImaViolations_Object(
 )
 tmnxBundleMemberImaViolations.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaViolations.setStatus("current")
+    tmnxBundleMemberImaViolations.setStatus("obsolete")
 _TmnxBundleMemberImaNeSevErrSecs_Type = Counter32
 _TmnxBundleMemberImaNeSevErrSecs_Object = MibTableColumn
 tmnxBundleMemberImaNeSevErrSecs = _TmnxBundleMemberImaNeSevErrSecs_Object(
@@ -8908,7 +9306,7 @@ tmnxBundleMemberImaNeSevErrSecs = _TmnxBundleMemberImaNeSevErrSecs_Object(
 )
 tmnxBundleMemberImaNeSevErrSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeSevErrSecs.setStatus("current")
+    tmnxBundleMemberImaNeSevErrSecs.setStatus("obsolete")
 _TmnxBundleMemberImaFeSevErrSecs_Type = Counter32
 _TmnxBundleMemberImaFeSevErrSecs_Object = MibTableColumn
 tmnxBundleMemberImaFeSevErrSecs = _TmnxBundleMemberImaFeSevErrSecs_Object(
@@ -8917,7 +9315,7 @@ tmnxBundleMemberImaFeSevErrSecs = _TmnxBundleMemberImaFeSevErrSecs_Object(
 )
 tmnxBundleMemberImaFeSevErrSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeSevErrSecs.setStatus("current")
+    tmnxBundleMemberImaFeSevErrSecs.setStatus("obsolete")
 _TmnxBundleMemberImaNeUnavailSecs_Type = Counter32
 _TmnxBundleMemberImaNeUnavailSecs_Object = MibTableColumn
 tmnxBundleMemberImaNeUnavailSecs = _TmnxBundleMemberImaNeUnavailSecs_Object(
@@ -8926,7 +9324,7 @@ tmnxBundleMemberImaNeUnavailSecs = _TmnxBundleMemberImaNeUnavailSecs_Object(
 )
 tmnxBundleMemberImaNeUnavailSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeUnavailSecs.setStatus("current")
+    tmnxBundleMemberImaNeUnavailSecs.setStatus("obsolete")
 _TmnxBundleMemberImaFeUnavailSecs_Type = Counter32
 _TmnxBundleMemberImaFeUnavailSecs_Object = MibTableColumn
 tmnxBundleMemberImaFeUnavailSecs = _TmnxBundleMemberImaFeUnavailSecs_Object(
@@ -8935,7 +9333,7 @@ tmnxBundleMemberImaFeUnavailSecs = _TmnxBundleMemberImaFeUnavailSecs_Object(
 )
 tmnxBundleMemberImaFeUnavailSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeUnavailSecs.setStatus("current")
+    tmnxBundleMemberImaFeUnavailSecs.setStatus("obsolete")
 _TmnxBundleMemberImaNeTxUnuseSecs_Type = Counter32
 _TmnxBundleMemberImaNeTxUnuseSecs_Object = MibTableColumn
 tmnxBundleMemberImaNeTxUnuseSecs = _TmnxBundleMemberImaNeTxUnuseSecs_Object(
@@ -8944,7 +9342,7 @@ tmnxBundleMemberImaNeTxUnuseSecs = _TmnxBundleMemberImaNeTxUnuseSecs_Object(
 )
 tmnxBundleMemberImaNeTxUnuseSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeTxUnuseSecs.setStatus("current")
+    tmnxBundleMemberImaNeTxUnuseSecs.setStatus("obsolete")
 _TmnxBundleMemberImaNeRxUnuseSecs_Type = Counter32
 _TmnxBundleMemberImaNeRxUnuseSecs_Object = MibTableColumn
 tmnxBundleMemberImaNeRxUnuseSecs = _TmnxBundleMemberImaNeRxUnuseSecs_Object(
@@ -8953,7 +9351,7 @@ tmnxBundleMemberImaNeRxUnuseSecs = _TmnxBundleMemberImaNeRxUnuseSecs_Object(
 )
 tmnxBundleMemberImaNeRxUnuseSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeRxUnuseSecs.setStatus("current")
+    tmnxBundleMemberImaNeRxUnuseSecs.setStatus("obsolete")
 _TmnxBundleMemberImaFeTxUnuseSecs_Type = Counter32
 _TmnxBundleMemberImaFeTxUnuseSecs_Object = MibTableColumn
 tmnxBundleMemberImaFeTxUnuseSecs = _TmnxBundleMemberImaFeTxUnuseSecs_Object(
@@ -8962,7 +9360,7 @@ tmnxBundleMemberImaFeTxUnuseSecs = _TmnxBundleMemberImaFeTxUnuseSecs_Object(
 )
 tmnxBundleMemberImaFeTxUnuseSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeTxUnuseSecs.setStatus("current")
+    tmnxBundleMemberImaFeTxUnuseSecs.setStatus("obsolete")
 _TmnxBundleMemberImaFeRxUnuseSecs_Type = Counter32
 _TmnxBundleMemberImaFeRxUnuseSecs_Object = MibTableColumn
 tmnxBundleMemberImaFeRxUnuseSecs = _TmnxBundleMemberImaFeRxUnuseSecs_Object(
@@ -8971,7 +9369,7 @@ tmnxBundleMemberImaFeRxUnuseSecs = _TmnxBundleMemberImaFeRxUnuseSecs_Object(
 )
 tmnxBundleMemberImaFeRxUnuseSecs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeRxUnuseSecs.setStatus("current")
+    tmnxBundleMemberImaFeRxUnuseSecs.setStatus("obsolete")
 _TmnxBundleMemberImaNeTxNumFails_Type = Counter32
 _TmnxBundleMemberImaNeTxNumFails_Object = MibTableColumn
 tmnxBundleMemberImaNeTxNumFails = _TmnxBundleMemberImaNeTxNumFails_Object(
@@ -8980,7 +9378,7 @@ tmnxBundleMemberImaNeTxNumFails = _TmnxBundleMemberImaNeTxNumFails_Object(
 )
 tmnxBundleMemberImaNeTxNumFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeTxNumFails.setStatus("current")
+    tmnxBundleMemberImaNeTxNumFails.setStatus("obsolete")
 _TmnxBundleMemberImaNeRxNumFails_Type = Counter32
 _TmnxBundleMemberImaNeRxNumFails_Object = MibTableColumn
 tmnxBundleMemberImaNeRxNumFails = _TmnxBundleMemberImaNeRxNumFails_Object(
@@ -8989,7 +9387,7 @@ tmnxBundleMemberImaNeRxNumFails = _TmnxBundleMemberImaNeRxNumFails_Object(
 )
 tmnxBundleMemberImaNeRxNumFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaNeRxNumFails.setStatus("current")
+    tmnxBundleMemberImaNeRxNumFails.setStatus("obsolete")
 _TmnxBundleMemberImaFeTxNumFails_Type = Counter32
 _TmnxBundleMemberImaFeTxNumFails_Object = MibTableColumn
 tmnxBundleMemberImaFeTxNumFails = _TmnxBundleMemberImaFeTxNumFails_Object(
@@ -8998,7 +9396,7 @@ tmnxBundleMemberImaFeTxNumFails = _TmnxBundleMemberImaFeTxNumFails_Object(
 )
 tmnxBundleMemberImaFeTxNumFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeTxNumFails.setStatus("current")
+    tmnxBundleMemberImaFeTxNumFails.setStatus("obsolete")
 _TmnxBundleMemberImaFeRxNumFails_Type = Counter32
 _TmnxBundleMemberImaFeRxNumFails_Object = MibTableColumn
 tmnxBundleMemberImaFeRxNumFails = _TmnxBundleMemberImaFeRxNumFails_Object(
@@ -9007,7 +9405,7 @@ tmnxBundleMemberImaFeRxNumFails = _TmnxBundleMemberImaFeRxNumFails_Object(
 )
 tmnxBundleMemberImaFeRxNumFails.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaFeRxNumFails.setStatus("current")
+    tmnxBundleMemberImaFeRxNumFails.setStatus("obsolete")
 _TmnxBundleMemberImaTxIcpCells_Type = Counter32
 _TmnxBundleMemberImaTxIcpCells_Object = MibTableColumn
 tmnxBundleMemberImaTxIcpCells = _TmnxBundleMemberImaTxIcpCells_Object(
@@ -9016,7 +9414,7 @@ tmnxBundleMemberImaTxIcpCells = _TmnxBundleMemberImaTxIcpCells_Object(
 )
 tmnxBundleMemberImaTxIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaTxIcpCells.setStatus("current")
+    tmnxBundleMemberImaTxIcpCells.setStatus("obsolete")
 _TmnxBundleMemberImaRxIcpCells_Type = Counter32
 _TmnxBundleMemberImaRxIcpCells_Object = MibTableColumn
 tmnxBundleMemberImaRxIcpCells = _TmnxBundleMemberImaRxIcpCells_Object(
@@ -9025,7 +9423,7 @@ tmnxBundleMemberImaRxIcpCells = _TmnxBundleMemberImaRxIcpCells_Object(
 )
 tmnxBundleMemberImaRxIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaRxIcpCells.setStatus("current")
+    tmnxBundleMemberImaRxIcpCells.setStatus("obsolete")
 _TmnxBundleMemberImaErrorIcpCells_Type = Counter32
 _TmnxBundleMemberImaErrorIcpCells_Object = MibTableColumn
 tmnxBundleMemberImaErrorIcpCells = _TmnxBundleMemberImaErrorIcpCells_Object(
@@ -9034,7 +9432,7 @@ tmnxBundleMemberImaErrorIcpCells = _TmnxBundleMemberImaErrorIcpCells_Object(
 )
 tmnxBundleMemberImaErrorIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaErrorIcpCells.setStatus("current")
+    tmnxBundleMemberImaErrorIcpCells.setStatus("obsolete")
 _TmnxBundleMemberImaLstRxIcpCells_Type = Counter32
 _TmnxBundleMemberImaLstRxIcpCells_Object = MibTableColumn
 tmnxBundleMemberImaLstRxIcpCells = _TmnxBundleMemberImaLstRxIcpCells_Object(
@@ -9043,7 +9441,7 @@ tmnxBundleMemberImaLstRxIcpCells = _TmnxBundleMemberImaLstRxIcpCells_Object(
 )
 tmnxBundleMemberImaLstRxIcpCells.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaLstRxIcpCells.setStatus("current")
+    tmnxBundleMemberImaLstRxIcpCells.setStatus("obsolete")
 _TmnxBundleMemberImaOifAnomalies_Type = Counter32
 _TmnxBundleMemberImaOifAnomalies_Object = MibTableColumn
 tmnxBundleMemberImaOifAnomalies = _TmnxBundleMemberImaOifAnomalies_Object(
@@ -9052,7 +9450,7 @@ tmnxBundleMemberImaOifAnomalies = _TmnxBundleMemberImaOifAnomalies_Object(
 )
 tmnxBundleMemberImaOifAnomalies.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaOifAnomalies.setStatus("current")
+    tmnxBundleMemberImaOifAnomalies.setStatus("obsolete")
 _TmnxBundleMemberImaRxTestState_Type = TmnxImaTestState
 _TmnxBundleMemberImaRxTestState_Object = MibTableColumn
 tmnxBundleMemberImaRxTestState = _TmnxBundleMemberImaRxTestState_Object(
@@ -9061,7 +9459,7 @@ tmnxBundleMemberImaRxTestState = _TmnxBundleMemberImaRxTestState_Object(
 )
 tmnxBundleMemberImaRxTestState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaRxTestState.setStatus("current")
+    tmnxBundleMemberImaRxTestState.setStatus("obsolete")
 
 
 class _TmnxBundleMemberImaRxTestPattern_Type(Integer32):
@@ -9080,7 +9478,7 @@ tmnxBundleMemberImaRxTestPattern = _TmnxBundleMemberImaRxTestPattern_Object(
 )
 tmnxBundleMemberImaRxTestPattern.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaRxTestPattern.setStatus("current")
+    tmnxBundleMemberImaRxTestPattern.setStatus("obsolete")
 _TmnxBundleMemberImaRelDelay_Type = Unsigned32
 _TmnxBundleMemberImaRelDelay_Object = MibTableColumn
 tmnxBundleMemberImaRelDelay = _TmnxBundleMemberImaRelDelay_Object(
@@ -9089,7 +9487,7 @@ tmnxBundleMemberImaRelDelay = _TmnxBundleMemberImaRelDelay_Object(
 )
 tmnxBundleMemberImaRelDelay.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberImaRelDelay.setStatus("current")
+    tmnxBundleMemberImaRelDelay.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleMemberImaRelDelay.setUnits("milliseconds")
 _TmnxDS1PortTable_Object = MibTable
@@ -10710,7 +11108,7 @@ tmnxBPGrpAssocTable = _TmnxBPGrpAssocTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 25)
 )
 if mibBuilder.loadTexts:
-    tmnxBPGrpAssocTable.setStatus("current")
+    tmnxBPGrpAssocTable.setStatus("obsolete")
 _TmnxBPGrpAssocEntry_Object = MibTableRow
 tmnxBPGrpAssocEntry = _TmnxBPGrpAssocEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 25, 1)
@@ -10729,7 +11127,7 @@ tmnxBPGrpAssocWorkingBundleID = _TmnxBPGrpAssocWorkingBundleID_Object(
 )
 tmnxBPGrpAssocWorkingBundleID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBPGrpAssocWorkingBundleID.setStatus("current")
+    tmnxBPGrpAssocWorkingBundleID.setStatus("obsolete")
 _TmnxBPGrpAssocProtectBundleID_Type = TmnxBundleID
 _TmnxBPGrpAssocProtectBundleID_Object = MibTableColumn
 tmnxBPGrpAssocProtectBundleID = _TmnxBPGrpAssocProtectBundleID_Object(
@@ -10738,7 +11136,7 @@ tmnxBPGrpAssocProtectBundleID = _TmnxBPGrpAssocProtectBundleID_Object(
 )
 tmnxBPGrpAssocProtectBundleID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBPGrpAssocProtectBundleID.setStatus("current")
+    tmnxBPGrpAssocProtectBundleID.setStatus("obsolete")
 _TmnxBPGrpAssocActiveBundleID_Type = TmnxBundleID
 _TmnxBPGrpAssocActiveBundleID_Object = MibTableColumn
 tmnxBPGrpAssocActiveBundleID = _TmnxBPGrpAssocActiveBundleID_Object(
@@ -10747,13 +11145,13 @@ tmnxBPGrpAssocActiveBundleID = _TmnxBPGrpAssocActiveBundleID_Object(
 )
 tmnxBPGrpAssocActiveBundleID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBPGrpAssocActiveBundleID.setStatus("current")
+    tmnxBPGrpAssocActiveBundleID.setStatus("obsolete")
 _TmnxBundleMlpppTable_Object = MibTable
 tmnxBundleMlpppTable = _TmnxBundleMlpppTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 26)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppTable.setStatus("current")
+    tmnxBundleMlpppTable.setStatus("obsolete")
 _TmnxBundleMlpppEntry_Object = MibTableRow
 tmnxBundleMlpppEntry = _TmnxBundleMlpppEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 26, 1)
@@ -10763,7 +11161,7 @@ tmnxBundleMlpppEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxBundleBundleID"),
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppEntry.setStatus("current")
+    tmnxBundleMlpppEntry.setStatus("obsolete")
 
 
 class _TmnxBundleMlpppEndpointID_Type(OctetString):
@@ -10782,7 +11180,7 @@ tmnxBundleMlpppEndpointID = _TmnxBundleMlpppEndpointID_Object(
 )
 tmnxBundleMlpppEndpointID.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppEndpointID.setStatus("current")
+    tmnxBundleMlpppEndpointID.setStatus("obsolete")
 _TmnxBundleMlpppEndpointIDClass_Type = TmnxMlpppEndpointIdClass
 _TmnxBundleMlpppEndpointIDClass_Object = MibTableColumn
 tmnxBundleMlpppEndpointIDClass = _TmnxBundleMlpppEndpointIDClass_Object(
@@ -10791,7 +11189,7 @@ tmnxBundleMlpppEndpointIDClass = _TmnxBundleMlpppEndpointIDClass_Object(
 )
 tmnxBundleMlpppEndpointIDClass.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppEndpointIDClass.setStatus("current")
+    tmnxBundleMlpppEndpointIDClass.setStatus("obsolete")
 
 
 class _TmnxBundleMlpppClassCount_Type(Integer32):
@@ -10812,7 +11210,7 @@ tmnxBundleMlpppClassCount = _TmnxBundleMlpppClassCount_Object(
 )
 tmnxBundleMlpppClassCount.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppClassCount.setStatus("current")
+    tmnxBundleMlpppClassCount.setStatus("obsolete")
 
 
 class _TmnxBundleMlpppIngQoSProfId_Type(TMlpppQoSProfileId):
@@ -10828,7 +11226,7 @@ tmnxBundleMlpppIngQoSProfId = _TmnxBundleMlpppIngQoSProfId_Object(
 )
 tmnxBundleMlpppIngQoSProfId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppIngQoSProfId.setStatus("current")
+    tmnxBundleMlpppIngQoSProfId.setStatus("obsolete")
 
 
 class _TmnxBundleMlpppEgrQoSProfId_Type(TMlpppQoSProfileId):
@@ -10844,7 +11242,7 @@ tmnxBundleMlpppEgrQoSProfId = _TmnxBundleMlpppEgrQoSProfId_Object(
 )
 tmnxBundleMlpppEgrQoSProfId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppEgrQoSProfId.setStatus("current")
+    tmnxBundleMlpppEgrQoSProfId.setStatus("obsolete")
 
 
 class _TmnxBundleMlpppMagicNumber_Type(TmnxEnabledDisabled):
@@ -10860,7 +11258,7 @@ tmnxBundleMlpppMagicNumber = _TmnxBundleMlpppMagicNumber_Object(
 )
 tmnxBundleMlpppMagicNumber.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppMagicNumber.setStatus("current")
+    tmnxBundleMlpppMagicNumber.setStatus("obsolete")
 
 
 class _TmnxBundleMlpppStatelessApsSwo_Type(TmnxEnabledDisabled):
@@ -10876,376 +11274,7 @@ tmnxBundleMlpppStatelessApsSwo = _TmnxBundleMlpppStatelessApsSwo_Object(
 )
 tmnxBundleMlpppStatelessApsSwo.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlpppStatelessApsSwo.setStatus("current")
-_TmnxHsmdaPortSchOvrTblLastChngd_Type = TimeStamp
-_TmnxHsmdaPortSchOvrTblLastChngd_Object = MibScalar
-tmnxHsmdaPortSchOvrTblLastChngd = _TmnxHsmdaPortSchOvrTblLastChngd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 27),
-    _TmnxHsmdaPortSchOvrTblLastChngd_Type()
-)
-tmnxHsmdaPortSchOvrTblLastChngd.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrTblLastChngd.setStatus("obsolete")
-_TmnxHsmdaPortSchOvrTable_Object = MibTable
-tmnxHsmdaPortSchOvrTable = _TmnxHsmdaPortSchOvrTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28)
-)
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrTable.setStatus("obsolete")
-_TmnxHsmdaPortSchOvrEntry_Object = MibTableRow
-tmnxHsmdaPortSchOvrEntry = _TmnxHsmdaPortSchOvrEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1)
-)
-tmnxHsmdaPortSchOvrEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-)
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrEntry.setStatus("current")
-_TmnxHsmdaPortSchOvrRowStatus_Type = RowStatus
-_TmnxHsmdaPortSchOvrRowStatus_Object = MibTableColumn
-tmnxHsmdaPortSchOvrRowStatus = _TmnxHsmdaPortSchOvrRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 1),
-    _TmnxHsmdaPortSchOvrRowStatus_Type()
-)
-tmnxHsmdaPortSchOvrRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrRowStatus.setStatus("obsolete")
-_TmnxHsmdaPortSchOvrLastChanged_Type = TimeStamp
-_TmnxHsmdaPortSchOvrLastChanged_Object = MibTableColumn
-tmnxHsmdaPortSchOvrLastChanged = _TmnxHsmdaPortSchOvrLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 2),
-    _TmnxHsmdaPortSchOvrLastChanged_Type()
-)
-tmnxHsmdaPortSchOvrLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrLastChanged.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrMaxRate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrMaxRate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrMaxRate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrMaxRate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrMaxRate = _TmnxHsmdaPortSchOvrMaxRate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 3),
-    _TmnxHsmdaPortSchOvrMaxRate_Type()
-)
-tmnxHsmdaPortSchOvrMaxRate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrMaxRate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrMaxRate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrGrp1Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrGrp1Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrGrp1Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrGrp1Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrGrp1Rate = _TmnxHsmdaPortSchOvrGrp1Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 4),
-    _TmnxHsmdaPortSchOvrGrp1Rate_Type()
-)
-tmnxHsmdaPortSchOvrGrp1Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrGrp1Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrGrp1Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrGrp2Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrGrp2Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrGrp2Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrGrp2Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrGrp2Rate = _TmnxHsmdaPortSchOvrGrp2Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 5),
-    _TmnxHsmdaPortSchOvrGrp2Rate_Type()
-)
-tmnxHsmdaPortSchOvrGrp2Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrGrp2Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrGrp2Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass1Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass1Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass1Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass1Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass1Rate = _TmnxHsmdaPortSchOvrClass1Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 6),
-    _TmnxHsmdaPortSchOvrClass1Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass1Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass1Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass1Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass1WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass1WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass1WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass1WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass1WtInGp = _TmnxHsmdaPortSchOvrClass1WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 7),
-    _TmnxHsmdaPortSchOvrClass1WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass1WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass1WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass2Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass2Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass2Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass2Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass2Rate = _TmnxHsmdaPortSchOvrClass2Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 8),
-    _TmnxHsmdaPortSchOvrClass2Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass2Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass2Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass2Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass2WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass2WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass2WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass2WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass2WtInGp = _TmnxHsmdaPortSchOvrClass2WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 9),
-    _TmnxHsmdaPortSchOvrClass2WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass2WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass2WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass3Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass3Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass3Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass3Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass3Rate = _TmnxHsmdaPortSchOvrClass3Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 10),
-    _TmnxHsmdaPortSchOvrClass3Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass3Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass3Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass3Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass3WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass3WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass3WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass3WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass3WtInGp = _TmnxHsmdaPortSchOvrClass3WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 11),
-    _TmnxHsmdaPortSchOvrClass3WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass3WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass3WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass4Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass4Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass4Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass4Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass4Rate = _TmnxHsmdaPortSchOvrClass4Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 12),
-    _TmnxHsmdaPortSchOvrClass4Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass4Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass4Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass4Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass4WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass4WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass4WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass4WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass4WtInGp = _TmnxHsmdaPortSchOvrClass4WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 13),
-    _TmnxHsmdaPortSchOvrClass4WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass4WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass4WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass5Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass5Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass5Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass5Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass5Rate = _TmnxHsmdaPortSchOvrClass5Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 14),
-    _TmnxHsmdaPortSchOvrClass5Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass5Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass5Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass5Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass5WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass5WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass5WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass5WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass5WtInGp = _TmnxHsmdaPortSchOvrClass5WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 15),
-    _TmnxHsmdaPortSchOvrClass5WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass5WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass5WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass6Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass6Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass6Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass6Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass6Rate = _TmnxHsmdaPortSchOvrClass6Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 16),
-    _TmnxHsmdaPortSchOvrClass6Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass6Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass6Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass6Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass6WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass6WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass6WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass6WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass6WtInGp = _TmnxHsmdaPortSchOvrClass6WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 17),
-    _TmnxHsmdaPortSchOvrClass6WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass6WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass6WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass7Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass7Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass7Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass7Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass7Rate = _TmnxHsmdaPortSchOvrClass7Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 18),
-    _TmnxHsmdaPortSchOvrClass7Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass7Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass7Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass7Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass7WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass7WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass7WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass7WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass7WtInGp = _TmnxHsmdaPortSchOvrClass7WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 19),
-    _TmnxHsmdaPortSchOvrClass7WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass7WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass7WtInGp.setStatus("obsolete")
-
-
-class _TmnxHsmdaPortSchOvrClass8Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass8Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass8Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaPortSchOvrClass8Rate_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass8Rate = _TmnxHsmdaPortSchOvrClass8Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 20),
-    _TmnxHsmdaPortSchOvrClass8Rate_Type()
-)
-tmnxHsmdaPortSchOvrClass8Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass8Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass8Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaPortSchOvrClass8WtInGp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaPortSchOvrClass8WtInGp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaPortSchOvrClass8WtInGp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaPortSchOvrClass8WtInGp_Object = MibTableColumn
-tmnxHsmdaPortSchOvrClass8WtInGp = _TmnxHsmdaPortSchOvrClass8WtInGp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 28, 1, 21),
-    _TmnxHsmdaPortSchOvrClass8WtInGp_Type()
-)
-tmnxHsmdaPortSchOvrClass8WtInGp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaPortSchOvrClass8WtInGp.setStatus("obsolete")
+    tmnxBundleMlpppStatelessApsSwo.setStatus("obsolete")
 _TmnxPortEgrShaperTblLastChanged_Type = TimeStamp
 _TmnxPortEgrShaperTblLastChanged_Object = MibScalar
 tmnxPortEgrShaperTblLastChanged = _TmnxPortEgrShaperTblLastChanged_Object(
@@ -12563,56 +12592,6 @@ if mibBuilder.loadTexts:
     tPortAccEgrQGrpInstanceId.setStatus("current")
 
 
-class _TPortAccEgrQGrpHsmdaShaperOvr_Type(TNamedItemOrEmpty):
-    """Custom type tPortAccEgrQGrpHsmdaShaperOvr based on TNamedItemOrEmpty"""
-    defaultHexValue = ""
-
-
-_TPortAccEgrQGrpHsmdaShaperOvr_Type.__name__ = "TNamedItemOrEmpty"
-_TPortAccEgrQGrpHsmdaShaperOvr_Object = MibTableColumn
-tPortAccEgrQGrpHsmdaShaperOvr = _TPortAccEgrQGrpHsmdaShaperOvr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 37, 1, 11),
-    _TPortAccEgrQGrpHsmdaShaperOvr_Type()
-)
-tPortAccEgrQGrpHsmdaShaperOvr.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrQGrpHsmdaShaperOvr.setStatus("obsolete")
-
-
-class _TPortAccEgrQGrpHsmdaPktOffOvr_Type(TEgrHsmdaPerPacketOffsetOvr):
-    """Custom type tPortAccEgrQGrpHsmdaPktOffOvr based on TEgrHsmdaPerPacketOffsetOvr"""
-    defaultValue = -128
-
-
-_TPortAccEgrQGrpHsmdaPktOffOvr_Type.__name__ = "TEgrHsmdaPerPacketOffsetOvr"
-_TPortAccEgrQGrpHsmdaPktOffOvr_Object = MibTableColumn
-tPortAccEgrQGrpHsmdaPktOffOvr = _TPortAccEgrQGrpHsmdaPktOffOvr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 37, 1, 12),
-    _TPortAccEgrQGrpHsmdaPktOffOvr_Type()
-)
-tPortAccEgrQGrpHsmdaPktOffOvr.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrQGrpHsmdaPktOffOvr.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tPortAccEgrQGrpHsmdaPktOffOvr.setUnits("bytes")
-
-
-class _TPortAccEgrQGrpHsmdaWrrPolicyOvr_Type(TNamedItemOrEmpty):
-    """Custom type tPortAccEgrQGrpHsmdaWrrPolicyOvr based on TNamedItemOrEmpty"""
-    defaultHexValue = ""
-
-
-_TPortAccEgrQGrpHsmdaWrrPolicyOvr_Type.__name__ = "TNamedItemOrEmpty"
-_TPortAccEgrQGrpHsmdaWrrPolicyOvr_Object = MibTableColumn
-tPortAccEgrQGrpHsmdaWrrPolicyOvr = _TPortAccEgrQGrpHsmdaWrrPolicyOvr_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 37, 1, 13),
-    _TPortAccEgrQGrpHsmdaWrrPolicyOvr_Type()
-)
-tPortAccEgrQGrpHsmdaWrrPolicyOvr.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrQGrpHsmdaWrrPolicyOvr.setStatus("obsolete")
-
-
 class _TPortAccEgrQGrpAggRateLUB_Type(TruthValue):
     """Custom type tPortAccEgrQGrpAggRateLUB based on TruthValue"""
     defaultValue = 2
@@ -12627,6 +12606,24 @@ tPortAccEgrQGrpAggRateLUB = _TPortAccEgrQGrpAggRateLUB_Object(
 tPortAccEgrQGrpAggRateLUB.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tPortAccEgrQGrpAggRateLUB.setStatus("current")
+
+
+class _TPortAccEgrQGrpAggBurstLimit_Type(TBurstLimit):
+    """Custom type tPortAccEgrQGrpAggBurstLimit based on TBurstLimit"""
+    defaultValue = -1
+
+
+_TPortAccEgrQGrpAggBurstLimit_Type.__name__ = "TBurstLimit"
+_TPortAccEgrQGrpAggBurstLimit_Object = MibTableColumn
+tPortAccEgrQGrpAggBurstLimit = _TPortAccEgrQGrpAggBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 37, 1, 15),
+    _TPortAccEgrQGrpAggBurstLimit_Type()
+)
+tPortAccEgrQGrpAggBurstLimit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggBurstLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggBurstLimit.setUnits("bytes")
 
 
 class _TPortAccEgrQGrpAggRateLmt_Type(Unsigned32):
@@ -12667,6 +12664,22 @@ tPortAccEgrQGrpHsTurboQueues = _TPortAccEgrQGrpHsTurboQueues_Object(
 tPortAccEgrQGrpHsTurboQueues.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tPortAccEgrQGrpHsTurboQueues.setStatus("current")
+
+
+class _TPortAccEgrQGrpAggAdaptRule_Type(TAdaptationRule):
+    """Custom type tPortAccEgrQGrpAggAdaptRule based on TAdaptationRule"""
+    defaultValue = 3
+
+
+_TPortAccEgrQGrpAggAdaptRule_Type.__name__ = "TAdaptationRule"
+_TPortAccEgrQGrpAggAdaptRule_Object = MibTableColumn
+tPortAccEgrQGrpAggAdaptRule = _TPortAccEgrQGrpAggAdaptRule_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 37, 1, 19),
+    _TPortAccEgrQGrpAggAdaptRule_Type()
+)
+tPortAccEgrQGrpAggAdaptRule.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggAdaptRule.setStatus("current")
 _TPortAccEgrQOverTableLastChgd_Type = TimeStamp
 _TPortAccEgrQOverTableLastChgd_Object = MibScalar
 tPortAccEgrQOverTableLastChgd = _TPortAccEgrQOverTableLastChgd_Object(
@@ -13270,6 +13283,24 @@ if mibBuilder.loadTexts:
     tPortNetEgrQGrpAggRateLUB.setStatus("current")
 
 
+class _TPortNetEgrQGrpAggBurstLimit_Type(TBurstLimit):
+    """Custom type tPortNetEgrQGrpAggBurstLimit based on TBurstLimit"""
+    defaultValue = -1
+
+
+_TPortNetEgrQGrpAggBurstLimit_Type.__name__ = "TBurstLimit"
+_TPortNetEgrQGrpAggBurstLimit_Object = MibTableColumn
+tPortNetEgrQGrpAggBurstLimit = _TPortNetEgrQGrpAggBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 41, 1, 13),
+    _TPortNetEgrQGrpAggBurstLimit_Type()
+)
+tPortNetEgrQGrpAggBurstLimit.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggBurstLimit.setStatus("current")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggBurstLimit.setUnits("bytes")
+
+
 class _TPortNetEgrQGrpAggRateLmt_Type(Unsigned32):
     """Custom type tPortNetEgrQGrpAggRateLmt based on Unsigned32"""
     defaultValue = 4294967295
@@ -13308,6 +13339,22 @@ tPortNetEgrQGrpHsTurboQueues = _TPortNetEgrQGrpHsTurboQueues_Object(
 tPortNetEgrQGrpHsTurboQueues.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tPortNetEgrQGrpHsTurboQueues.setStatus("current")
+
+
+class _TPortNetEgrQGrpAggAdaptRule_Type(TAdaptationRule):
+    """Custom type tPortNetEgrQGrpAggAdaptRule based on TAdaptationRule"""
+    defaultValue = 3
+
+
+_TPortNetEgrQGrpAggAdaptRule_Type.__name__ = "TAdaptationRule"
+_TPortNetEgrQGrpAggAdaptRule_Object = MibTableColumn
+tPortNetEgrQGrpAggAdaptRule = _TPortNetEgrQGrpAggAdaptRule_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 41, 1, 19),
+    _TPortNetEgrQGrpAggAdaptRule_Type()
+)
+tPortNetEgrQGrpAggAdaptRule.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggAdaptRule.setStatus("current")
 _TPortNetEgrQOverTableLastChgd_Type = TimeStamp
 _TPortNetEgrQOverTableLastChgd_Object = MibScalar
 tPortNetEgrQOverTableLastChgd = _TPortNetEgrQOverTableLastChgd_Object(
@@ -13656,7 +13703,7 @@ tmnxBundleMlfrTable = _TmnxBundleMlfrTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 44)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrTable.setStatus("current")
+    tmnxBundleMlfrTable.setStatus("obsolete")
 _TmnxBundleMlfrEntry_Object = MibTableRow
 tmnxBundleMlfrEntry = _TmnxBundleMlfrEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 44, 1)
@@ -13666,7 +13713,7 @@ tmnxBundleMlfrEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxBundleBundleID"),
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrEntry.setStatus("current")
+    tmnxBundleMlfrEntry.setStatus("obsolete")
 
 
 class _TmnxBundleMlfrBundleId_Type(SnmpAdminString):
@@ -13687,7 +13734,7 @@ tmnxBundleMlfrBundleId = _TmnxBundleMlfrBundleId_Object(
 )
 tmnxBundleMlfrBundleId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrBundleId.setStatus("current")
+    tmnxBundleMlfrBundleId.setStatus("obsolete")
 
 
 class _TmnxBundleMlfrIngQoSProfId_Type(TMcFrQoSProfileId):
@@ -13703,7 +13750,7 @@ tmnxBundleMlfrIngQoSProfId = _TmnxBundleMlfrIngQoSProfId_Object(
 )
 tmnxBundleMlfrIngQoSProfId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrIngQoSProfId.setStatus("current")
+    tmnxBundleMlfrIngQoSProfId.setStatus("obsolete")
 
 
 class _TmnxBundleMlfrEgrQoSProfId_Type(TMcFrQoSProfileId):
@@ -13719,7 +13766,7 @@ tmnxBundleMlfrEgrQoSProfId = _TmnxBundleMlfrEgrQoSProfId_Object(
 )
 tmnxBundleMlfrEgrQoSProfId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrEgrQoSProfId.setStatus("current")
+    tmnxBundleMlfrEgrQoSProfId.setStatus("obsolete")
 
 
 class _TmnxBundleMlfrHelloTimer_Type(Unsigned32):
@@ -13740,7 +13787,7 @@ tmnxBundleMlfrHelloTimer = _TmnxBundleMlfrHelloTimer_Object(
 )
 tmnxBundleMlfrHelloTimer.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrHelloTimer.setStatus("current")
+    tmnxBundleMlfrHelloTimer.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleMlfrHelloTimer.setUnits("seconds")
 
@@ -13763,7 +13810,7 @@ tmnxBundleMlfrHelloRetryCount = _TmnxBundleMlfrHelloRetryCount_Object(
 )
 tmnxBundleMlfrHelloRetryCount.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrHelloRetryCount.setStatus("current")
+    tmnxBundleMlfrHelloRetryCount.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleMlfrHelloRetryCount.setUnits("seconds")
 
@@ -13786,7 +13833,7 @@ tmnxBundleMlfrAckTimer = _TmnxBundleMlfrAckTimer_Object(
 )
 tmnxBundleMlfrAckTimer.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrAckTimer.setStatus("current")
+    tmnxBundleMlfrAckTimer.setStatus("obsolete")
 if mibBuilder.loadTexts:
     tmnxBundleMlfrAckTimer.setUnits("seconds")
 _TmnxBundleMlfrLastChanged_Type = TimeStamp
@@ -13797,7 +13844,7 @@ tmnxBundleMlfrLastChanged = _TmnxBundleMlfrLastChanged_Object(
 )
 tmnxBundleMlfrLastChanged.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMlfrLastChanged.setStatus("current")
+    tmnxBundleMlfrLastChanged.setStatus("obsolete")
 _TmnxPortIngQosQStatTable_Object = MibTable
 tmnxPortIngQosQStatTable = _TmnxPortIngQosQStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 45)
@@ -14076,7 +14123,7 @@ tmnxBundleMemberMlfrTable = _TmnxBundleMemberMlfrTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 47)
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMemberMlfrTable.setStatus("current")
+    tmnxBundleMemberMlfrTable.setStatus("obsolete")
 _TmnxBundleMemberMlfrEntry_Object = MibTableRow
 tmnxBundleMemberMlfrEntry = _TmnxBundleMemberMlfrEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 47, 1)
@@ -14086,7 +14133,7 @@ tmnxBundleMemberMlfrEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
 )
 if mibBuilder.loadTexts:
-    tmnxBundleMemberMlfrEntry.setStatus("current")
+    tmnxBundleMemberMlfrEntry.setStatus("obsolete")
 _TmnxBundleMemberMlfrDownReason_Type = TmnxMlfrLinkDownReason
 _TmnxBundleMemberMlfrDownReason_Object = MibTableColumn
 tmnxBundleMemberMlfrDownReason = _TmnxBundleMemberMlfrDownReason_Object(
@@ -14095,7 +14142,7 @@ tmnxBundleMemberMlfrDownReason = _TmnxBundleMemberMlfrDownReason_Object(
 )
 tmnxBundleMemberMlfrDownReason.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxBundleMemberMlfrDownReason.setStatus("current")
+    tmnxBundleMemberMlfrDownReason.setStatus("obsolete")
 _TmnxWaveTrackerTable_Object = MibTable
 tmnxWaveTrackerTable = _TmnxWaveTrackerTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 48)
@@ -14963,6 +15010,47 @@ tPortEgrVPortMonHwAggShaperSch = _TPortEgrVPortMonHwAggShaperSch_Object(
 tPortEgrVPortMonHwAggShaperSch.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tPortEgrVPortMonHwAggShaperSch.setStatus("current")
+
+
+class _TPortEgrVPortLagPerLinkHashClass_Type(TmnxLagPerLinkHashClass):
+    """Custom type tPortEgrVPortLagPerLinkHashClass based on TmnxLagPerLinkHashClass"""
+    defaultValue = 1
+
+
+_TPortEgrVPortLagPerLinkHashClass_Type.__name__ = "TmnxLagPerLinkHashClass"
+_TPortEgrVPortLagPerLinkHashClass_Object = MibTableColumn
+tPortEgrVPortLagPerLinkHashClass = _TPortEgrVPortLagPerLinkHashClass_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 55, 1, 22),
+    _TPortEgrVPortLagPerLinkHashClass_Type()
+)
+tPortEgrVPortLagPerLinkHashClass.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortEgrVPortLagPerLinkHashClass.setStatus("current")
+
+
+class _TPortEgrVPortLagPerLinkHashWght_Type(TmnxLagPerLinkHashWeight):
+    """Custom type tPortEgrVPortLagPerLinkHashWght based on TmnxLagPerLinkHashWeight"""
+    defaultValue = 1
+
+
+_TPortEgrVPortLagPerLinkHashWght_Type.__name__ = "TmnxLagPerLinkHashWeight"
+_TPortEgrVPortLagPerLinkHashWght_Object = MibTableColumn
+tPortEgrVPortLagPerLinkHashWght = _TPortEgrVPortLagPerLinkHashWght_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 55, 1, 23),
+    _TPortEgrVPortLagPerLinkHashWght_Type()
+)
+tPortEgrVPortLagPerLinkHashWght.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortEgrVPortLagPerLinkHashWght.setStatus("current")
+_TPortEgrVPortLagActivePort_Type = TmnxPortID
+_TPortEgrVPortLagActivePort_Object = MibTableColumn
+tPortEgrVPortLagActivePort = _TPortEgrVPortLagActivePort_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 55, 1, 24),
+    _TPortEgrVPortLagActivePort_Type()
+)
+tPortEgrVPortLagActivePort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrVPortLagActivePort.setStatus("current")
 _TPortEgrVPortHMTableLastChgd_Type = TimeStamp
 _TPortEgrVPortHMTableLastChgd_Object = MibScalar
 tPortEgrVPortHMTableLastChgd = _TPortEgrVPortHMTableLastChgd_Object(
@@ -17700,6 +17788,15 @@ tmnxPwPortOperGrpName = _TmnxPwPortOperGrpName_Object(
 tmnxPwPortOperGrpName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxPwPortOperGrpName.setStatus("current")
+_TmnxPwPortOperPortId_Type = TmnxPortID
+_TmnxPwPortOperPortId_Object = MibTableColumn
+tmnxPwPortOperPortId = _TmnxPwPortOperPortId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 70, 1, 9),
+    _TmnxPwPortOperPortId_Type()
+)
+tmnxPwPortOperPortId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPwPortOperPortId.setStatus("current")
 _TmnxCohOptPortCfgTable_Object = MibTable
 tmnxCohOptPortCfgTable = _TmnxCohOptPortCfgTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 71)
@@ -18239,608 +18336,15 @@ if mibBuilder.loadTexts:
     tmnxCohOptPortCfgTxPowerMax.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxCohOptPortCfgTxPowerMax.setUnits("millibel-milliwatts")
-_TPortEgrHsmdaQStatTable_Object = MibTable
-tPortEgrHsmdaQStatTable = _TPortEgrHsmdaQStatTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74)
-)
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatTable.setStatus("obsolete")
-_TPortEgrHsmdaQStatEntry_Object = MibTableRow
-tPortEgrHsmdaQStatEntry = _TPortEgrHsmdaQStatEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1)
-)
-tPortEgrHsmdaQStatEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpName"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpInstanceId"),
-    (0, "TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatQueueId"),
-)
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatEntry.setStatus("current")
-_TPortEgrHsmdaQStatQueueId_Type = TEgressHsmdaQueueId
-_TPortEgrHsmdaQStatQueueId_Object = MibTableColumn
-tPortEgrHsmdaQStatQueueId = _TPortEgrHsmdaQStatQueueId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 1),
-    _TPortEgrHsmdaQStatQueueId_Type()
-)
-tPortEgrHsmdaQStatQueueId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatQueueId.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdInProfPkts_Type = Counter64
-_TPortEgrHsmdaQStatFwdInProfPkts_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdInProfPkts = _TPortEgrHsmdaQStatFwdInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 2),
-    _TPortEgrHsmdaQStatFwdInProfPkts_Type()
-)
-tPortEgrHsmdaQStatFwdInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdInProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdInProfPktH_Type = Counter32
-_TPortEgrHsmdaQStatFwdInProfPktH_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdInProfPktH = _TPortEgrHsmdaQStatFwdInProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 3),
-    _TPortEgrHsmdaQStatFwdInProfPktH_Type()
-)
-tPortEgrHsmdaQStatFwdInProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdInProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdInProfPktL_Type = Counter32
-_TPortEgrHsmdaQStatFwdInProfPktL_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdInProfPktL = _TPortEgrHsmdaQStatFwdInProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 4),
-    _TPortEgrHsmdaQStatFwdInProfPktL_Type()
-)
-tPortEgrHsmdaQStatFwdInProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdInProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdInProfPkts_Type = Counter64
-_TPortEgrHsmdaQStatDpdInProfPkts_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdInProfPkts = _TPortEgrHsmdaQStatDpdInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 5),
-    _TPortEgrHsmdaQStatDpdInProfPkts_Type()
-)
-tPortEgrHsmdaQStatDpdInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdInProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdInProfPktH_Type = Counter32
-_TPortEgrHsmdaQStatDpdInProfPktH_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdInProfPktH = _TPortEgrHsmdaQStatDpdInProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 6),
-    _TPortEgrHsmdaQStatDpdInProfPktH_Type()
-)
-tPortEgrHsmdaQStatDpdInProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdInProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdInProfPktL_Type = Counter32
-_TPortEgrHsmdaQStatDpdInProfPktL_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdInProfPktL = _TPortEgrHsmdaQStatDpdInProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 7),
-    _TPortEgrHsmdaQStatDpdInProfPktL_Type()
-)
-tPortEgrHsmdaQStatDpdInProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdInProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdOutProfPkts_Type = Counter64
-_TPortEgrHsmdaQStatFwdOutProfPkts_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdOutProfPkts = _TPortEgrHsmdaQStatFwdOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 8),
-    _TPortEgrHsmdaQStatFwdOutProfPkts_Type()
-)
-tPortEgrHsmdaQStatFwdOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdOutProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdOutProfPktH_Type = Counter32
-_TPortEgrHsmdaQStatFwdOutProfPktH_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdOutProfPktH = _TPortEgrHsmdaQStatFwdOutProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 9),
-    _TPortEgrHsmdaQStatFwdOutProfPktH_Type()
-)
-tPortEgrHsmdaQStatFwdOutProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdOutProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdOutProfPktL_Type = Counter32
-_TPortEgrHsmdaQStatFwdOutProfPktL_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdOutProfPktL = _TPortEgrHsmdaQStatFwdOutProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 10),
-    _TPortEgrHsmdaQStatFwdOutProfPktL_Type()
-)
-tPortEgrHsmdaQStatFwdOutProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdOutProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdOutProfPkts_Type = Counter64
-_TPortEgrHsmdaQStatDpdOutProfPkts_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdOutProfPkts = _TPortEgrHsmdaQStatDpdOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 11),
-    _TPortEgrHsmdaQStatDpdOutProfPkts_Type()
-)
-tPortEgrHsmdaQStatDpdOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdOutProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdOutProfPktH_Type = Counter32
-_TPortEgrHsmdaQStatDpdOutProfPktH_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdOutProfPktH = _TPortEgrHsmdaQStatDpdOutProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 12),
-    _TPortEgrHsmdaQStatDpdOutProfPktH_Type()
-)
-tPortEgrHsmdaQStatDpdOutProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdOutProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdOutProfPktL_Type = Counter32
-_TPortEgrHsmdaQStatDpdOutProfPktL_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdOutProfPktL = _TPortEgrHsmdaQStatDpdOutProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 13),
-    _TPortEgrHsmdaQStatDpdOutProfPktL_Type()
-)
-tPortEgrHsmdaQStatDpdOutProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdOutProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdInProfOcts_Type = Counter64
-_TPortEgrHsmdaQStatFwdInProfOcts_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdInProfOcts = _TPortEgrHsmdaQStatFwdInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 14),
-    _TPortEgrHsmdaQStatFwdInProfOcts_Type()
-)
-tPortEgrHsmdaQStatFwdInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdInProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdInProfOctH_Type = Counter32
-_TPortEgrHsmdaQStatFwdInProfOctH_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdInProfOctH = _TPortEgrHsmdaQStatFwdInProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 15),
-    _TPortEgrHsmdaQStatFwdInProfOctH_Type()
-)
-tPortEgrHsmdaQStatFwdInProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdInProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdInProfOctL_Type = Counter32
-_TPortEgrHsmdaQStatFwdInProfOctL_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdInProfOctL = _TPortEgrHsmdaQStatFwdInProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 16),
-    _TPortEgrHsmdaQStatFwdInProfOctL_Type()
-)
-tPortEgrHsmdaQStatFwdInProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdInProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdInProfOcts_Type = Counter64
-_TPortEgrHsmdaQStatDpdInProfOcts_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdInProfOcts = _TPortEgrHsmdaQStatDpdInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 17),
-    _TPortEgrHsmdaQStatDpdInProfOcts_Type()
-)
-tPortEgrHsmdaQStatDpdInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdInProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdInProfOctH_Type = Counter32
-_TPortEgrHsmdaQStatDpdInProfOctH_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdInProfOctH = _TPortEgrHsmdaQStatDpdInProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 18),
-    _TPortEgrHsmdaQStatDpdInProfOctH_Type()
-)
-tPortEgrHsmdaQStatDpdInProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdInProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdInProfOctL_Type = Counter32
-_TPortEgrHsmdaQStatDpdInProfOctL_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdInProfOctL = _TPortEgrHsmdaQStatDpdInProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 19),
-    _TPortEgrHsmdaQStatDpdInProfOctL_Type()
-)
-tPortEgrHsmdaQStatDpdInProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdInProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdOutProfOcts_Type = Counter64
-_TPortEgrHsmdaQStatFwdOutProfOcts_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdOutProfOcts = _TPortEgrHsmdaQStatFwdOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 20),
-    _TPortEgrHsmdaQStatFwdOutProfOcts_Type()
-)
-tPortEgrHsmdaQStatFwdOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdOutProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdOutProfOctH_Type = Counter32
-_TPortEgrHsmdaQStatFwdOutProfOctH_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdOutProfOctH = _TPortEgrHsmdaQStatFwdOutProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 21),
-    _TPortEgrHsmdaQStatFwdOutProfOctH_Type()
-)
-tPortEgrHsmdaQStatFwdOutProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdOutProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaQStatFwdOutProfOctL_Type = Counter32
-_TPortEgrHsmdaQStatFwdOutProfOctL_Object = MibTableColumn
-tPortEgrHsmdaQStatFwdOutProfOctL = _TPortEgrHsmdaQStatFwdOutProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 22),
-    _TPortEgrHsmdaQStatFwdOutProfOctL_Type()
-)
-tPortEgrHsmdaQStatFwdOutProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatFwdOutProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdOutProfOcts_Type = Counter64
-_TPortEgrHsmdaQStatDpdOutProfOcts_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdOutProfOcts = _TPortEgrHsmdaQStatDpdOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 23),
-    _TPortEgrHsmdaQStatDpdOutProfOcts_Type()
-)
-tPortEgrHsmdaQStatDpdOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdOutProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdOutProfOctH_Type = Counter32
-_TPortEgrHsmdaQStatDpdOutProfOctH_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdOutProfOctH = _TPortEgrHsmdaQStatDpdOutProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 24),
-    _TPortEgrHsmdaQStatDpdOutProfOctH_Type()
-)
-tPortEgrHsmdaQStatDpdOutProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdOutProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaQStatDpdOutProfOctL_Type = Counter32
-_TPortEgrHsmdaQStatDpdOutProfOctL_Object = MibTableColumn
-tPortEgrHsmdaQStatDpdOutProfOctL = _TPortEgrHsmdaQStatDpdOutProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 74, 1, 25),
-    _TPortEgrHsmdaQStatDpdOutProfOctL_Type()
-)
-tPortEgrHsmdaQStatDpdOutProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaQStatDpdOutProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaCStatTable_Object = MibTable
-tPortEgrHsmdaCStatTable = _TPortEgrHsmdaCStatTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75)
-)
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatTable.setStatus("obsolete")
-_TPortEgrHsmdaCStatEntry_Object = MibTableRow
-tPortEgrHsmdaCStatEntry = _TPortEgrHsmdaCStatEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1)
-)
-tPortEgrHsmdaCStatEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpName"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpInstanceId"),
-    (0, "TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatCntrId"),
-)
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatEntry.setStatus("current")
-_TPortEgrHsmdaCStatCntrId_Type = TEgressHsmdaCounterId
-_TPortEgrHsmdaCStatCntrId_Object = MibTableColumn
-tPortEgrHsmdaCStatCntrId = _TPortEgrHsmdaCStatCntrId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 1),
-    _TPortEgrHsmdaCStatCntrId_Type()
-)
-tPortEgrHsmdaCStatCntrId.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatCntrId.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdInProfPkts_Type = Counter64
-_TPortEgrHsmdaCStatFwdInProfPkts_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdInProfPkts = _TPortEgrHsmdaCStatFwdInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 2),
-    _TPortEgrHsmdaCStatFwdInProfPkts_Type()
-)
-tPortEgrHsmdaCStatFwdInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdInProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdInProfPktH_Type = Counter32
-_TPortEgrHsmdaCStatFwdInProfPktH_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdInProfPktH = _TPortEgrHsmdaCStatFwdInProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 3),
-    _TPortEgrHsmdaCStatFwdInProfPktH_Type()
-)
-tPortEgrHsmdaCStatFwdInProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdInProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdInProfPktL_Type = Counter32
-_TPortEgrHsmdaCStatFwdInProfPktL_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdInProfPktL = _TPortEgrHsmdaCStatFwdInProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 4),
-    _TPortEgrHsmdaCStatFwdInProfPktL_Type()
-)
-tPortEgrHsmdaCStatFwdInProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdInProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdInProfPkts_Type = Counter64
-_TPortEgrHsmdaCStatDpdInProfPkts_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdInProfPkts = _TPortEgrHsmdaCStatDpdInProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 5),
-    _TPortEgrHsmdaCStatDpdInProfPkts_Type()
-)
-tPortEgrHsmdaCStatDpdInProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdInProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdInProfPktH_Type = Counter32
-_TPortEgrHsmdaCStatDpdInProfPktH_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdInProfPktH = _TPortEgrHsmdaCStatDpdInProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 6),
-    _TPortEgrHsmdaCStatDpdInProfPktH_Type()
-)
-tPortEgrHsmdaCStatDpdInProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdInProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdInProfPktL_Type = Counter32
-_TPortEgrHsmdaCStatDpdInProfPktL_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdInProfPktL = _TPortEgrHsmdaCStatDpdInProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 7),
-    _TPortEgrHsmdaCStatDpdInProfPktL_Type()
-)
-tPortEgrHsmdaCStatDpdInProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdInProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdOutProfPkts_Type = Counter64
-_TPortEgrHsmdaCStatFwdOutProfPkts_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdOutProfPkts = _TPortEgrHsmdaCStatFwdOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 8),
-    _TPortEgrHsmdaCStatFwdOutProfPkts_Type()
-)
-tPortEgrHsmdaCStatFwdOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdOutProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdOutProfPktH_Type = Counter32
-_TPortEgrHsmdaCStatFwdOutProfPktH_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdOutProfPktH = _TPortEgrHsmdaCStatFwdOutProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 9),
-    _TPortEgrHsmdaCStatFwdOutProfPktH_Type()
-)
-tPortEgrHsmdaCStatFwdOutProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdOutProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdOutProfPktL_Type = Counter32
-_TPortEgrHsmdaCStatFwdOutProfPktL_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdOutProfPktL = _TPortEgrHsmdaCStatFwdOutProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 10),
-    _TPortEgrHsmdaCStatFwdOutProfPktL_Type()
-)
-tPortEgrHsmdaCStatFwdOutProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdOutProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdOutProfPkts_Type = Counter64
-_TPortEgrHsmdaCStatDpdOutProfPkts_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdOutProfPkts = _TPortEgrHsmdaCStatDpdOutProfPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 11),
-    _TPortEgrHsmdaCStatDpdOutProfPkts_Type()
-)
-tPortEgrHsmdaCStatDpdOutProfPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdOutProfPkts.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdOutProfPktH_Type = Counter32
-_TPortEgrHsmdaCStatDpdOutProfPktH_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdOutProfPktH = _TPortEgrHsmdaCStatDpdOutProfPktH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 12),
-    _TPortEgrHsmdaCStatDpdOutProfPktH_Type()
-)
-tPortEgrHsmdaCStatDpdOutProfPktH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdOutProfPktH.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdOutProfPktL_Type = Counter32
-_TPortEgrHsmdaCStatDpdOutProfPktL_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdOutProfPktL = _TPortEgrHsmdaCStatDpdOutProfPktL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 13),
-    _TPortEgrHsmdaCStatDpdOutProfPktL_Type()
-)
-tPortEgrHsmdaCStatDpdOutProfPktL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdOutProfPktL.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdInProfOcts_Type = Counter64
-_TPortEgrHsmdaCStatFwdInProfOcts_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdInProfOcts = _TPortEgrHsmdaCStatFwdInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 14),
-    _TPortEgrHsmdaCStatFwdInProfOcts_Type()
-)
-tPortEgrHsmdaCStatFwdInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdInProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdInProfOctH_Type = Counter32
-_TPortEgrHsmdaCStatFwdInProfOctH_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdInProfOctH = _TPortEgrHsmdaCStatFwdInProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 15),
-    _TPortEgrHsmdaCStatFwdInProfOctH_Type()
-)
-tPortEgrHsmdaCStatFwdInProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdInProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdInProfOctL_Type = Counter32
-_TPortEgrHsmdaCStatFwdInProfOctL_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdInProfOctL = _TPortEgrHsmdaCStatFwdInProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 16),
-    _TPortEgrHsmdaCStatFwdInProfOctL_Type()
-)
-tPortEgrHsmdaCStatFwdInProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdInProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdInProfOcts_Type = Counter64
-_TPortEgrHsmdaCStatDpdInProfOcts_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdInProfOcts = _TPortEgrHsmdaCStatDpdInProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 17),
-    _TPortEgrHsmdaCStatDpdInProfOcts_Type()
-)
-tPortEgrHsmdaCStatDpdInProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdInProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdInProfOctH_Type = Counter32
-_TPortEgrHsmdaCStatDpdInProfOctH_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdInProfOctH = _TPortEgrHsmdaCStatDpdInProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 18),
-    _TPortEgrHsmdaCStatDpdInProfOctH_Type()
-)
-tPortEgrHsmdaCStatDpdInProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdInProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdInProfOctL_Type = Counter32
-_TPortEgrHsmdaCStatDpdInProfOctL_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdInProfOctL = _TPortEgrHsmdaCStatDpdInProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 19),
-    _TPortEgrHsmdaCStatDpdInProfOctL_Type()
-)
-tPortEgrHsmdaCStatDpdInProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdInProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdOutProfOcts_Type = Counter64
-_TPortEgrHsmdaCStatFwdOutProfOcts_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdOutProfOcts = _TPortEgrHsmdaCStatFwdOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 20),
-    _TPortEgrHsmdaCStatFwdOutProfOcts_Type()
-)
-tPortEgrHsmdaCStatFwdOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdOutProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdOutProfOctH_Type = Counter32
-_TPortEgrHsmdaCStatFwdOutProfOctH_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdOutProfOctH = _TPortEgrHsmdaCStatFwdOutProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 21),
-    _TPortEgrHsmdaCStatFwdOutProfOctH_Type()
-)
-tPortEgrHsmdaCStatFwdOutProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdOutProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaCStatFwdOutProfOctL_Type = Counter32
-_TPortEgrHsmdaCStatFwdOutProfOctL_Object = MibTableColumn
-tPortEgrHsmdaCStatFwdOutProfOctL = _TPortEgrHsmdaCStatFwdOutProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 22),
-    _TPortEgrHsmdaCStatFwdOutProfOctL_Type()
-)
-tPortEgrHsmdaCStatFwdOutProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatFwdOutProfOctL.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdOutProfOcts_Type = Counter64
-_TPortEgrHsmdaCStatDpdOutProfOcts_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdOutProfOcts = _TPortEgrHsmdaCStatDpdOutProfOcts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 23),
-    _TPortEgrHsmdaCStatDpdOutProfOcts_Type()
-)
-tPortEgrHsmdaCStatDpdOutProfOcts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdOutProfOcts.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdOutProfOctH_Type = Counter32
-_TPortEgrHsmdaCStatDpdOutProfOctH_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdOutProfOctH = _TPortEgrHsmdaCStatDpdOutProfOctH_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 24),
-    _TPortEgrHsmdaCStatDpdOutProfOctH_Type()
-)
-tPortEgrHsmdaCStatDpdOutProfOctH.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdOutProfOctH.setStatus("obsolete")
-_TPortEgrHsmdaCStatDpdOutProfOctL_Type = Counter32
-_TPortEgrHsmdaCStatDpdOutProfOctL_Object = MibTableColumn
-tPortEgrHsmdaCStatDpdOutProfOctL = _TPortEgrHsmdaCStatDpdOutProfOctL_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 75, 1, 25),
-    _TPortEgrHsmdaCStatDpdOutProfOctL_Type()
-)
-tPortEgrHsmdaCStatDpdOutProfOctL.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortEgrHsmdaCStatDpdOutProfOctL.setStatus("obsolete")
-_TPortAccEgrHsmdaQOverTable_Object = MibTable
-tPortAccEgrHsmdaQOverTable = _TPortAccEgrHsmdaQOverTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76)
-)
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverTable.setStatus("obsolete")
-_TPortAccEgrHsmdaQOverEntry_Object = MibTableRow
-tPortAccEgrHsmdaQOverEntry = _TPortAccEgrHsmdaQOverEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1)
-)
-tPortAccEgrHsmdaQOverEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpName"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpInstanceId"),
-    (0, "TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverQueue"),
-)
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverEntry.setStatus("current")
-_TPortAccEgrHsmdaQOverQueue_Type = TEgressHsmdaQueueId
-_TPortAccEgrHsmdaQOverQueue_Object = MibTableColumn
-tPortAccEgrHsmdaQOverQueue = _TPortAccEgrHsmdaQOverQueue_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 1),
-    _TPortAccEgrHsmdaQOverQueue_Type()
-)
-tPortAccEgrHsmdaQOverQueue.setMaxAccess("not-accessible")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverQueue.setStatus("obsolete")
-_TPortAccEgrHsmdaQOverRowStatus_Type = RowStatus
-_TPortAccEgrHsmdaQOverRowStatus_Object = MibTableColumn
-tPortAccEgrHsmdaQOverRowStatus = _TPortAccEgrHsmdaQOverRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 2),
-    _TPortAccEgrHsmdaQOverRowStatus_Type()
-)
-tPortAccEgrHsmdaQOverRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverRowStatus.setStatus("obsolete")
-_TPortAccEgrHsmdaQOverLastChanged_Type = TimeStamp
-_TPortAccEgrHsmdaQOverLastChanged_Object = MibTableColumn
-tPortAccEgrHsmdaQOverLastChanged = _TPortAccEgrHsmdaQOverLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 3),
-    _TPortAccEgrHsmdaQOverLastChanged_Type()
-)
-tPortAccEgrHsmdaQOverLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverLastChanged.setStatus("obsolete")
-
-
-class _TPortAccEgrHsmdaQOverAdminPIR_Type(THsmdaPIRKRateOverride):
-    """Custom type tPortAccEgrHsmdaQOverAdminPIR based on THsmdaPIRKRateOverride"""
-    defaultValue = -2
-
-
-_TPortAccEgrHsmdaQOverAdminPIR_Type.__name__ = "THsmdaPIRKRateOverride"
-_TPortAccEgrHsmdaQOverAdminPIR_Object = MibTableColumn
-tPortAccEgrHsmdaQOverAdminPIR = _TPortAccEgrHsmdaQOverAdminPIR_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 4),
-    _TPortAccEgrHsmdaQOverAdminPIR_Type()
-)
-tPortAccEgrHsmdaQOverAdminPIR.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverAdminPIR.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverAdminPIR.setUnits("kilobps")
-
-
-class _TPortAccEgrHsmdaQOverSlopePolicy_Type(TNamedItemOrEmpty):
-    """Custom type tPortAccEgrHsmdaQOverSlopePolicy based on TNamedItemOrEmpty"""
-    defaultHexValue = ""
-
-
-_TPortAccEgrHsmdaQOverSlopePolicy_Type.__name__ = "TNamedItemOrEmpty"
-_TPortAccEgrHsmdaQOverSlopePolicy_Object = MibTableColumn
-tPortAccEgrHsmdaQOverSlopePolicy = _TPortAccEgrHsmdaQOverSlopePolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 5),
-    _TPortAccEgrHsmdaQOverSlopePolicy_Type()
-)
-tPortAccEgrHsmdaQOverSlopePolicy.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverSlopePolicy.setStatus("obsolete")
-
-
-class _TPortAccEgrHsmdaQOverWrrWeight_Type(THsmdaWrrWeightOverride):
-    """Custom type tPortAccEgrHsmdaQOverWrrWeight based on THsmdaWrrWeightOverride"""
-    defaultValue = -2
-
-
-_TPortAccEgrHsmdaQOverWrrWeight_Type.__name__ = "THsmdaWrrWeightOverride"
-_TPortAccEgrHsmdaQOverWrrWeight_Object = MibTableColumn
-tPortAccEgrHsmdaQOverWrrWeight = _TPortAccEgrHsmdaQOverWrrWeight_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 6),
-    _TPortAccEgrHsmdaQOverWrrWeight_Type()
-)
-tPortAccEgrHsmdaQOverWrrWeight.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverWrrWeight.setStatus("obsolete")
-
-
-class _TPortAccEgrHsmdaQOverMBS_Type(THSMDABurstSizeBytesOverride):
-    """Custom type tPortAccEgrHsmdaQOverMBS based on THSMDABurstSizeBytesOverride"""
-    defaultValue = -2
-
-
-_TPortAccEgrHsmdaQOverMBS_Type.__name__ = "THSMDABurstSizeBytesOverride"
-_TPortAccEgrHsmdaQOverMBS_Object = MibTableColumn
-tPortAccEgrHsmdaQOverMBS = _TPortAccEgrHsmdaQOverMBS_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 76, 1, 7),
-    _TPortAccEgrHsmdaQOverMBS_Type()
-)
-tPortAccEgrHsmdaQOverMBS.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverMBS.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tPortAccEgrHsmdaQOverMBS.setUnits("bytes")
+_TmnxCohOptPortReportedAlarmState_Type = TmnxCoherentOpticalAlarm
+_TmnxCohOptPortReportedAlarmState_Object = MibTableColumn
+tmnxCohOptPortReportedAlarmState = _TmnxCohOptPortReportedAlarmState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 73, 1, 15),
+    _TmnxCohOptPortReportedAlarmState_Type()
+)
+tmnxCohOptPortReportedAlarmState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortReportedAlarmState.setStatus("current")
 _TmnxDot1xPaePortTblLastChanged_Type = TimeStamp
 _TmnxDot1xPaePortTblLastChanged_Object = MibScalar
 tmnxDot1xPaePortTblLastChanged = _TmnxDot1xPaePortTblLastChanged_Object(
@@ -21626,6 +21130,15 @@ if mibBuilder.loadTexts:
     tmnxPortGnssElevationMaskAngle.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxPortGnssElevationMaskAngle.setUnits("degrees")
+_TmnxPortGnssRestartPosSurvey_Type = TmnxActionType
+_TmnxPortGnssRestartPosSurvey_Object = MibTableColumn
+tmnxPortGnssRestartPosSurvey = _TmnxPortGnssRestartPosSurvey_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 105, 1, 5),
+    _TmnxPortGnssRestartPosSurvey_Type()
+)
+tmnxPortGnssRestartPosSurvey.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPortGnssRestartPosSurvey.setStatus("current")
 _TmnxPortConnectorTblLastChanged_Type = TimeStamp
 _TmnxPortConnectorTblLastChanged_Object = MibScalar
 tmnxPortConnectorTblLastChanged = _TmnxPortConnectorTblLastChanged_Object(
@@ -21692,8 +21205,8 @@ class _TmnxPortConnectorRsFecMode_Type(Integer32):
     )
     namedValues = NamedValues(
         *(("none", 0),
-          ("cl91514528", 1),
-          ("cl91514544", 2))
+          ("cl91-514-528", 1),
+          ("cl91-514-544", 2))
     )
 
 
@@ -21742,38 +21255,12 @@ if mibBuilder.loadTexts:
     tmnxRS232LastChangeTime.setStatus("current")
 
 
-class _TmnxRS232Speed_Type(Integer32):
-    """Custom type tmnxRS232Speed based on Integer32"""
+class _TmnxRS232Speed_Type(TmnxRS232Speed):
+    """Custom type tmnxRS232Speed based on TmnxRS232Speed"""
     defaultValue = 5
 
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9)
-        )
-    )
-    namedValues = NamedValues(
-        *(("speed600", 1),
-          ("speed1200", 2),
-          ("speed2400", 3),
-          ("speed4800", 4),
-          ("speed9600", 5),
-          ("speed19200", 6),
-          ("speed38400", 7),
-          ("speed57600", 8),
-          ("speed115200", 9))
-    )
 
-
-_TmnxRS232Speed_Type.__name__ = "Integer32"
+_TmnxRS232Speed_Type.__name__ = "TmnxRS232Speed"
 _TmnxRS232Speed_Object = MibTableColumn
 tmnxRS232Speed = _TmnxRS232Speed_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 112, 1, 2),
@@ -21784,24 +21271,12 @@ if mibBuilder.loadTexts:
     tmnxRS232Speed.setStatus("current")
 
 
-class _TmnxRS232Loopback_Type(Integer32):
-    """Custom type tmnxRS232Loopback based on Integer32"""
+class _TmnxRS232Loopback_Type(TmnxRS232Loopback):
+    """Custom type tmnxRS232Loopback based on TmnxRS232Loopback"""
     defaultValue = 1
 
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2)
-        )
-    )
-    namedValues = NamedValues(
-        *(("none", 1),
-          ("bidirE", 2))
-    )
 
-
-_TmnxRS232Loopback_Type.__name__ = "Integer32"
+_TmnxRS232Loopback_Type.__name__ = "TmnxRS232Loopback"
 _TmnxRS232Loopback_Object = MibTableColumn
 tmnxRS232Loopback = _TmnxRS232Loopback_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 112, 1, 3),
@@ -21833,30 +21308,12 @@ if mibBuilder.loadTexts:
     tmnxRS232CharacterLength.setStatus("current")
 
 
-class _TmnxRS232Parity_Type(Integer32):
-    """Custom type tmnxRS232Parity based on Integer32"""
+class _TmnxRS232Parity_Type(TmnxRS232Parity):
+    """Custom type tmnxRS232Parity based on TmnxRS232Parity"""
     defaultValue = 1
 
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3,
-              4,
-              5)
-        )
-    )
-    namedValues = NamedValues(
-        *(("none", 1),
-          ("odd", 2),
-          ("even", 3),
-          ("mark", 4),
-          ("space", 5))
-    )
 
-
-_TmnxRS232Parity_Type.__name__ = "Integer32"
+_TmnxRS232Parity_Type.__name__ = "TmnxRS232Parity"
 _TmnxRS232Parity_Object = MibTableColumn
 tmnxRS232Parity = _TmnxRS232Parity_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 112, 1, 5),
@@ -22335,24 +21792,7 @@ if mibBuilder.loadTexts:
     tmnxRS232SocketInterSessionDelay.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxRS232SocketInterSessionDelay.setUnits("milliseconds")
-
-
-class _TmnxRS232SocketSquelchStatus_Type(Integer32):
-    """Custom type tmnxRS232SocketSquelchStatus based on Integer32"""
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2)
-        )
-    )
-    namedValues = NamedValues(
-        *(("on", 1),
-          ("off", 2))
-    )
-
-
-_TmnxRS232SocketSquelchStatus_Type.__name__ = "Integer32"
+_TmnxRS232SocketSquelchStatus_Type = TmnxRS232SocketSquelchStatus
 _TmnxRS232SocketSquelchStatus_Object = MibTableColumn
 tmnxRS232SocketSquelchStatus = _TmnxRS232SocketSquelchStatus_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 114, 1, 8),
@@ -22675,17 +22115,19 @@ class _TmnxPortRsFecOperMode_Type(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
         *(("none", 0),
-          ("cl91514528", 1),
-          ("cl91514544", 2),
+          ("cl91-514-528", 1),
+          ("cl91-514-544", 2),
           ("cl74", 3),
           ("cl108", 4),
           ("cl119", 5),
-          ("cl134514544", 6))
+          ("cl134-514-544", 6),
+          ("cl172", 7))
     )
 
 
@@ -22698,6 +22140,28 @@ tmnxPortRsFecOperMode = _TmnxPortRsFecOperMode_Object(
 tmnxPortRsFecOperMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortRsFecOperMode.setStatus("current")
+_TmnxPortHoldTimeUpRemaining_Type = TmnxHoldTime
+_TmnxPortHoldTimeUpRemaining_Object = MibTableColumn
+tmnxPortHoldTimeUpRemaining = _TmnxPortHoldTimeUpRemaining_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 118, 1, 5),
+    _TmnxPortHoldTimeUpRemaining_Type()
+)
+tmnxPortHoldTimeUpRemaining.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortHoldTimeUpRemaining.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortHoldTimeUpRemaining.setUnits("centiseconds")
+_TmnxPortHoldTimeDownRemaining_Type = TmnxHoldTime
+_TmnxPortHoldTimeDownRemaining_Object = MibTableColumn
+tmnxPortHoldTimeDownRemaining = _TmnxPortHoldTimeDownRemaining_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 118, 1, 6),
+    _TmnxPortHoldTimeDownRemaining_Type()
+)
+tmnxPortHoldTimeDownRemaining.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortHoldTimeDownRemaining.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortHoldTimeDownRemaining.setUnits("centiseconds")
 _TmnxPortTransceiverTblLastChgd_Type = TimeStamp
 _TmnxPortTransceiverTblLastChgd_Object = MibScalar
 tmnxPortTransceiverTblLastChgd = _TmnxPortTransceiverTblLastChgd_Object(
@@ -22748,6 +22212,61 @@ tmnxPortTransDco = _TmnxPortTransDco_Object(
 tmnxPortTransDco.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxPortTransDco.setStatus("current")
+
+
+class _TmnxPortTransOls_Type(TmnxEnabledDisabled):
+    """Custom type tmnxPortTransOls based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_TmnxPortTransOls_Type.__name__ = "TmnxEnabledDisabled"
+_TmnxPortTransOls_Object = MibTableColumn
+tmnxPortTransOls = _TmnxPortTransOls_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 120, 1, 3),
+    _TmnxPortTransOls_Type()
+)
+tmnxPortTransOls.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortTransOls.setStatus("current")
+
+
+class _TmnxPortTransOlsEgAmpGain_Type(Unsigned32):
+    """Custom type tmnxPortTransOlsEgAmpGain based on Unsigned32"""
+    defaultValue = 2500
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 2500),
+    )
+
+
+_TmnxPortTransOlsEgAmpGain_Type.__name__ = "Unsigned32"
+_TmnxPortTransOlsEgAmpGain_Object = MibTableColumn
+tmnxPortTransOlsEgAmpGain = _TmnxPortTransOlsEgAmpGain_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 120, 1, 4),
+    _TmnxPortTransOlsEgAmpGain_Type()
+)
+tmnxPortTransOlsEgAmpGain.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortTransOlsEgAmpGain.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortTransOlsEgAmpGain.setUnits("0.01 dB")
+
+
+class _TmnxPortTransPowerSaveMode_Type(TmnxEnabledDisabled):
+    """Custom type tmnxPortTransPowerSaveMode based on TmnxEnabledDisabled"""
+    defaultValue = 2
+
+
+_TmnxPortTransPowerSaveMode_Type.__name__ = "TmnxEnabledDisabled"
+_TmnxPortTransPowerSaveMode_Object = MibTableColumn
+tmnxPortTransPowerSaveMode = _TmnxPortTransPowerSaveMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 120, 1, 5),
+    _TmnxPortTransPowerSaveMode_Type()
+)
+tmnxPortTransPowerSaveMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxPortTransPowerSaveMode.setStatus("current")
 _TmnxPortAdapterTable_Object = MibTable
 tmnxPortAdapterTable = _TmnxPortAdapterTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 121)
@@ -23024,6 +22543,27 @@ tmnxPortGnssReceiverFwVersion = _TmnxPortGnssReceiverFwVersion_Object(
 tmnxPortGnssReceiverFwVersion.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortGnssReceiverFwVersion.setStatus("current")
+
+
+class _TmnxPortGnssSurveyCompPercent_Type(Unsigned32):
+    """Custom type tmnxPortGnssSurveyCompPercent based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TmnxPortGnssSurveyCompPercent_Type.__name__ = "Unsigned32"
+_TmnxPortGnssSurveyCompPercent_Object = MibTableColumn
+tmnxPortGnssSurveyCompPercent = _TmnxPortGnssSurveyCompPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 123, 1, 14),
+    _TmnxPortGnssSurveyCompPercent_Type()
+)
+tmnxPortGnssSurveyCompPercent.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortGnssSurveyCompPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortGnssSurveyCompPercent.setUnits("percent")
 _TPortNetEgrPortQOverTblLastChgd_Type = TimeStamp
 _TPortNetEgrPortQOverTblLastChgd_Object = MibScalar
 tPortNetEgrPortQOverTblLastChgd = _TPortNetEgrPortQOverTblLastChgd_Object(
@@ -23595,6 +23135,109 @@ tmnxPortDwdmLaserFrequency = _TmnxPortDwdmLaserFrequency_Object(
 tmnxPortDwdmLaserFrequency.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxPortDwdmLaserFrequency.setStatus("current")
+_TPortEthStormCtrlTable_Object = MibTable
+tPortEthStormCtrlTable = _TPortEthStormCtrlTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141)
+)
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlTable.setStatus("current")
+_TPortEthStormCtrlEntry_Object = MibTableRow
+tPortEthStormCtrlEntry = _TPortEthStormCtrlEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1)
+)
+tPortEthStormCtrlEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+    (0, "TIMETRA-PORT-MIB", "tPortEthStormCtrlTrafficType"),
+)
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlEntry.setStatus("current")
+_TPortEthStormCtrlTrafficType_Type = TStormCtrlTrafficType
+_TPortEthStormCtrlTrafficType_Object = MibTableColumn
+tPortEthStormCtrlTrafficType = _TPortEthStormCtrlTrafficType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 3),
+    _TPortEthStormCtrlTrafficType_Type()
+)
+tPortEthStormCtrlTrafficType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlTrafficType.setStatus("current")
+_TPortEthStormCtrlRowStatus_Type = RowStatus
+_TPortEthStormCtrlRowStatus_Object = MibTableColumn
+tPortEthStormCtrlRowStatus = _TPortEthStormCtrlRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 4),
+    _TPortEthStormCtrlRowStatus_Type()
+)
+tPortEthStormCtrlRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlRowStatus.setStatus("current")
+
+
+class _TPortEthStormCtrlRate_Type(TStormCtrlRate):
+    """Custom type tPortEthStormCtrlRate based on TStormCtrlRate"""
+    defaultValue = -1
+
+
+_TPortEthStormCtrlRate_Type.__name__ = "TStormCtrlRate"
+_TPortEthStormCtrlRate_Object = MibTableColumn
+tPortEthStormCtrlRate = _TPortEthStormCtrlRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 5),
+    _TPortEthStormCtrlRate_Type()
+)
+tPortEthStormCtrlRate.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlRate.setStatus("current")
+
+
+class _TPortEthStormCtrlBurst_Type(TStormCtrlBurst):
+    """Custom type tPortEthStormCtrlBurst based on TStormCtrlBurst"""
+    defaultValue = -1
+
+
+_TPortEthStormCtrlBurst_Type.__name__ = "TStormCtrlBurst"
+_TPortEthStormCtrlBurst_Object = MibTableColumn
+tPortEthStormCtrlBurst = _TPortEthStormCtrlBurst_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 6),
+    _TPortEthStormCtrlBurst_Type()
+)
+tPortEthStormCtrlBurst.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlBurst.setStatus("current")
+_TPortEthStormCtrlOprRate_Type = TStormCtrlOprRate
+_TPortEthStormCtrlOprRate_Object = MibTableColumn
+tPortEthStormCtrlOprRate = _TPortEthStormCtrlOprRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 7),
+    _TPortEthStormCtrlOprRate_Type()
+)
+tPortEthStormCtrlOprRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlOprRate.setStatus("current")
+_TPortEthStormCtrlOprBurst_Type = TStormCtrlOprBurst
+_TPortEthStormCtrlOprBurst_Object = MibTableColumn
+tPortEthStormCtrlOprBurst = _TPortEthStormCtrlOprBurst_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 8),
+    _TPortEthStormCtrlOprBurst_Type()
+)
+tPortEthStormCtrlOprBurst.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlOprBurst.setStatus("current")
+_TPortEthStormCtrlLastChanged_Type = TimeStamp
+_TPortEthStormCtrlLastChanged_Object = MibTableColumn
+tPortEthStormCtrlLastChanged = _TPortEthStormCtrlLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 141, 1, 9),
+    _TPortEthStormCtrlLastChanged_Type()
+)
+tPortEthStormCtrlLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlLastChanged.setStatus("current")
+_TPortEthStormCtrlTableLastChange_Type = TimeStamp
+_TPortEthStormCtrlTableLastChange_Object = MibScalar
+tPortEthStormCtrlTableLastChange = _TPortEthStormCtrlTableLastChange_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 142),
+    _TPortEthStormCtrlTableLastChange_Type()
+)
+tPortEthStormCtrlTableLastChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEthStormCtrlTableLastChange.setStatus("current")
 _TmnxPortSharedQueueTable_Object = MibTable
 tmnxPortSharedQueueTable = _TmnxPortSharedQueueTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 400)
@@ -23698,6 +23341,108 @@ tPortSharedQueueLastChgd = _TPortSharedQueueLastChgd_Object(
 tPortSharedQueueLastChgd.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tPortSharedQueueLastChgd.setStatus("current")
+
+
+class _TmnxPortSharedQAggRatePIRPercent_Type(Unsigned32):
+    """Custom type tmnxPortSharedQAggRatePIRPercent based on Unsigned32"""
+    defaultValue = 10000
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_TmnxPortSharedQAggRatePIRPercent_Type.__name__ = "Unsigned32"
+_TmnxPortSharedQAggRatePIRPercent_Object = MibTableColumn
+tmnxPortSharedQAggRatePIRPercent = _TmnxPortSharedQAggRatePIRPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 400, 1, 7),
+    _TmnxPortSharedQAggRatePIRPercent_Type()
+)
+tmnxPortSharedQAggRatePIRPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPortSharedQAggRatePIRPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortSharedQAggRatePIRPercent.setUnits("centipercent")
+
+
+class _TmnxPortSharedQAggRateCIRPercent_Type(Unsigned32):
+    """Custom type tmnxPortSharedQAggRateCIRPercent based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxPortSharedQAggRateCIRPercent_Type.__name__ = "Unsigned32"
+_TmnxPortSharedQAggRateCIRPercent_Object = MibTableColumn
+tmnxPortSharedQAggRateCIRPercent = _TmnxPortSharedQAggRateCIRPercent_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 400, 1, 8),
+    _TmnxPortSharedQAggRateCIRPercent_Type()
+)
+tmnxPortSharedQAggRateCIRPercent.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPortSharedQAggRateCIRPercent.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortSharedQAggRateCIRPercent.setUnits("centipercent")
+
+
+class _TmnxPortSharedQAggRateType_Type(TRateType):
+    """Custom type tmnxPortSharedQAggRateType based on TRateType"""
+    defaultValue = 1
+
+
+_TmnxPortSharedQAggRateType_Type.__name__ = "TRateType"
+_TmnxPortSharedQAggRateType_Object = MibTableColumn
+tmnxPortSharedQAggRateType = _TmnxPortSharedQAggRateType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 400, 1, 9),
+    _TmnxPortSharedQAggRateType_Type()
+)
+tmnxPortSharedQAggRateType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPortSharedQAggRateType.setStatus("current")
+
+
+class _TmnxPortShrdQAggRateBurstLmt_Type(Integer32):
+    """Custom type tmnxPortShrdQAggRateBurstLmt based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(2, 2),
+    )
+
+
+_TmnxPortShrdQAggRateBurstLmt_Type.__name__ = "Integer32"
+_TmnxPortShrdQAggRateBurstLmt_Object = MibTableColumn
+tmnxPortShrdQAggRateBurstLmt = _TmnxPortShrdQAggRateBurstLmt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 400, 1, 10),
+    _TmnxPortShrdQAggRateBurstLmt_Type()
+)
+tmnxPortShrdQAggRateBurstLmt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPortShrdQAggRateBurstLmt.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxPortShrdQAggRateBurstLmt.setUnits("kilobytes")
+
+
+class _TmnxPortShrdQSinkExcessBW_Type(TruthValue):
+    """Custom type tmnxPortShrdQSinkExcessBW based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxPortShrdQSinkExcessBW_Type.__name__ = "TruthValue"
+_TmnxPortShrdQSinkExcessBW_Object = MibTableColumn
+tmnxPortShrdQSinkExcessBW = _TmnxPortShrdQSinkExcessBW_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 4, 400, 1, 11),
+    _TmnxPortShrdQSinkExcessBW_Type()
+)
+tmnxPortShrdQSinkExcessBW.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxPortShrdQSinkExcessBW.setStatus("current")
 _TmnxPortNotificationObjects_ObjectIdentity = ObjectIdentity
 tmnxPortNotificationObjects = _TmnxPortNotificationObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 7)
@@ -24169,7 +23914,7 @@ tmnxObjPortId = _TmnxObjPortId_Object(
 tmnxObjPortId.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     tmnxObjPortId.setStatus("current")
-_TmnxObjMdaId_Type = TmnxPortID
+_TmnxObjMdaId_Type = TmnxObjectID
 _TmnxObjMdaId_Object = MibScalar
 tmnxObjMdaId = _TmnxObjMdaId_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 7, 22),
@@ -24368,333 +24113,147 @@ tmnxPortSchedLocType = _TmnxPortSchedLocType_Object(
 tmnxPortSchedLocType.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     tmnxPortSchedLocType.setStatus("current")
+
+
+class _TmnxPortFlexEGrpAlmReason_Type(Integer32):
+    """Custom type tmnxPortFlexEGrpAlmReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("overheadFrameNotLocked", 1),
+          ("deskewFailed", 2),
+          ("localPhyFault", 3),
+          ("remotePhyFault", 4),
+          ("badGroupNumber", 5),
+          ("badPhyNumber", 6),
+          ("badPhyInstanceNumber", 7),
+          ("flexEMapMismatch", 8),
+          ("clientCalendarError", 9),
+          ("calendarInUseError", 10))
+    )
+
+
+_TmnxPortFlexEGrpAlmReason_Type.__name__ = "Integer32"
+_TmnxPortFlexEGrpAlmReason_Object = MibScalar
+tmnxPortFlexEGrpAlmReason = _TmnxPortFlexEGrpAlmReason_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 7, 39),
+    _TmnxPortFlexEGrpAlmReason_Type()
+)
+tmnxPortFlexEGrpAlmReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxPortFlexEGrpAlmReason.setStatus("current")
+
+
+class _TmnxPortFlexEMbrAlmReason_Type(Integer32):
+    """Custom type tmnxPortFlexEMbrAlmReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("los", 1),
+          ("highBer", 2),
+          ("amNotLocked", 3),
+          ("deskewFailed", 4),
+          ("remotePhyFault", 5))
+    )
+
+
+_TmnxPortFlexEMbrAlmReason_Type.__name__ = "Integer32"
+_TmnxPortFlexEMbrAlmReason_Object = MibScalar
+tmnxPortFlexEMbrAlmReason = _TmnxPortFlexEMbrAlmReason_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 7, 40),
+    _TmnxPortFlexEMbrAlmReason_Type()
+)
+tmnxPortFlexEMbrAlmReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxPortFlexEMbrAlmReason.setStatus("current")
+
+
+class _TmnxPortFlexEMbrPhyInstAlmReason_Type(Integer32):
+    """Custom type tmnxPortFlexEMbrPhyInstAlmReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("badCrc", 1),
+          ("multiframeNotLocked", 2),
+          ("badGroupNumber", 3),
+          ("badPhyNumber", 4),
+          ("badPhyInstanceNumber", 5),
+          ("flexEMapMismatch", 6),
+          ("clientCalendarError", 7),
+          ("calendarInUseError", 8))
+    )
+
+
+_TmnxPortFlexEMbrPhyInstAlmReason_Type.__name__ = "Integer32"
+_TmnxPortFlexEMbrPhyInstAlmReason_Object = MibScalar
+tmnxPortFlexEMbrPhyInstAlmReason = _TmnxPortFlexEMbrPhyInstAlmReason_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 7, 41),
+    _TmnxPortFlexEMbrPhyInstAlmReason_Type()
+)
+tmnxPortFlexEMbrPhyInstAlmReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxPortFlexEMbrPhyInstAlmReason.setStatus("current")
+
+
+class _TmnxPortFlexEMbrPhyInst_Type(Unsigned32):
+    """Custom type tmnxPortFlexEMbrPhyInst based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4),
+    )
+
+
+_TmnxPortFlexEMbrPhyInst_Type.__name__ = "Unsigned32"
+_TmnxPortFlexEMbrPhyInst_Object = MibScalar
+tmnxPortFlexEMbrPhyInst = _TmnxPortFlexEMbrPhyInst_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 7, 42),
+    _TmnxPortFlexEMbrPhyInst_Type()
+)
+tmnxPortFlexEMbrPhyInst.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxPortFlexEMbrPhyInst.setStatus("current")
 _TmnxFRObjs_ObjectIdentity = ObjectIdentity
 tmnxFRObjs = _TmnxFRObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9)
 )
-_TmnxFRDlcmiTable_Object = MibTable
-tmnxFRDlcmiTable = _TmnxFRDlcmiTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1)
-)
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiTable.setStatus("current")
-_TmnxFRDlcmiEntry_Object = MibTableRow
-tmnxFRDlcmiEntry = _TmnxFRDlcmiEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1)
-)
-tmnxFRDlcmiEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-)
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiEntry.setStatus("current")
-
-
-class _TmnxFRDlcmiMode_Type(Integer32):
-    """Custom type tmnxFRDlcmiMode based on Integer32"""
-    defaultValue = 1
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("dte", 1),
-          ("dce", 2),
-          ("bidir", 3))
-    )
-
-
-_TmnxFRDlcmiMode_Type.__name__ = "Integer32"
-_TmnxFRDlcmiMode_Object = MibTableColumn
-tmnxFRDlcmiMode = _TmnxFRDlcmiMode_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 1),
-    _TmnxFRDlcmiMode_Type()
-)
-tmnxFRDlcmiMode.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiMode.setStatus("current")
-
-
-class _TmnxFRDlcmiN392Dce_Type(Integer32):
-    """Custom type tmnxFRDlcmiN392Dce based on Integer32"""
-    defaultValue = 3
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10),
-    )
-
-
-_TmnxFRDlcmiN392Dce_Type.__name__ = "Integer32"
-_TmnxFRDlcmiN392Dce_Object = MibTableColumn
-tmnxFRDlcmiN392Dce = _TmnxFRDlcmiN392Dce_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 2),
-    _TmnxFRDlcmiN392Dce_Type()
-)
-tmnxFRDlcmiN392Dce.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiN392Dce.setStatus("current")
-
-
-class _TmnxFRDlcmiN393Dce_Type(Integer32):
-    """Custom type tmnxFRDlcmiN393Dce based on Integer32"""
-    defaultValue = 4
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 10),
-    )
-
-
-_TmnxFRDlcmiN393Dce_Type.__name__ = "Integer32"
-_TmnxFRDlcmiN393Dce_Object = MibTableColumn
-tmnxFRDlcmiN393Dce = _TmnxFRDlcmiN393Dce_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 3),
-    _TmnxFRDlcmiN393Dce_Type()
-)
-tmnxFRDlcmiN393Dce.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiN393Dce.setStatus("current")
-
-
-class _TmnxFRDlcmiT392Dce_Type(Integer32):
-    """Custom type tmnxFRDlcmiT392Dce based on Integer32"""
-    defaultValue = 15
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(5, 30),
-    )
-
-
-_TmnxFRDlcmiT392Dce_Type.__name__ = "Integer32"
-_TmnxFRDlcmiT392Dce_Object = MibTableColumn
-tmnxFRDlcmiT392Dce = _TmnxFRDlcmiT392Dce_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 4),
-    _TmnxFRDlcmiT392Dce_Type()
-)
-tmnxFRDlcmiT392Dce.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiT392Dce.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiT392Dce.setUnits("seconds")
-_TmnxFRDlcmiTxStatusEnqMsgs_Type = Counter32
-_TmnxFRDlcmiTxStatusEnqMsgs_Object = MibTableColumn
-tmnxFRDlcmiTxStatusEnqMsgs = _TmnxFRDlcmiTxStatusEnqMsgs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 5),
-    _TmnxFRDlcmiTxStatusEnqMsgs_Type()
-)
-tmnxFRDlcmiTxStatusEnqMsgs.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiTxStatusEnqMsgs.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiTxStatusEnqMsgs.setUnits("messages")
-_TmnxFRDlcmiRxStatusEnqMsgs_Type = Counter32
-_TmnxFRDlcmiRxStatusEnqMsgs_Object = MibTableColumn
-tmnxFRDlcmiRxStatusEnqMsgs = _TmnxFRDlcmiRxStatusEnqMsgs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 6),
-    _TmnxFRDlcmiRxStatusEnqMsgs_Type()
-)
-tmnxFRDlcmiRxStatusEnqMsgs.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiRxStatusEnqMsgs.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiRxStatusEnqMsgs.setUnits("messages")
-_TmnxFRDlcmiStatusEnqMsgTimeouts_Type = Counter32
-_TmnxFRDlcmiStatusEnqMsgTimeouts_Object = MibTableColumn
-tmnxFRDlcmiStatusEnqMsgTimeouts = _TmnxFRDlcmiStatusEnqMsgTimeouts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 7),
-    _TmnxFRDlcmiStatusEnqMsgTimeouts_Type()
-)
-tmnxFRDlcmiStatusEnqMsgTimeouts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiStatusEnqMsgTimeouts.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiStatusEnqMsgTimeouts.setUnits("messages")
-_TmnxFRDlcmiTxStatusMsgs_Type = Counter32
-_TmnxFRDlcmiTxStatusMsgs_Object = MibTableColumn
-tmnxFRDlcmiTxStatusMsgs = _TmnxFRDlcmiTxStatusMsgs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 8),
-    _TmnxFRDlcmiTxStatusMsgs_Type()
-)
-tmnxFRDlcmiTxStatusMsgs.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiTxStatusMsgs.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiTxStatusMsgs.setUnits("messages")
-_TmnxFRDlcmiRxStatusMsgs_Type = Counter32
-_TmnxFRDlcmiRxStatusMsgs_Object = MibTableColumn
-tmnxFRDlcmiRxStatusMsgs = _TmnxFRDlcmiRxStatusMsgs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 9),
-    _TmnxFRDlcmiRxStatusMsgs_Type()
-)
-tmnxFRDlcmiRxStatusMsgs.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiRxStatusMsgs.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiRxStatusMsgs.setUnits("messages")
-_TmnxFRDlcmiStatusMsgTimeouts_Type = Counter32
-_TmnxFRDlcmiStatusMsgTimeouts_Object = MibTableColumn
-tmnxFRDlcmiStatusMsgTimeouts = _TmnxFRDlcmiStatusMsgTimeouts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 10),
-    _TmnxFRDlcmiStatusMsgTimeouts_Type()
-)
-tmnxFRDlcmiStatusMsgTimeouts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiStatusMsgTimeouts.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiStatusMsgTimeouts.setUnits("messages")
-_TmnxFRDlcmiDiscardedMsgs_Type = Counter32
-_TmnxFRDlcmiDiscardedMsgs_Object = MibTableColumn
-tmnxFRDlcmiDiscardedMsgs = _TmnxFRDlcmiDiscardedMsgs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 11),
-    _TmnxFRDlcmiDiscardedMsgs_Type()
-)
-tmnxFRDlcmiDiscardedMsgs.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiDiscardedMsgs.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiDiscardedMsgs.setUnits("messages")
-_TmnxFRDlcmiInvRxSeqNumMsgs_Type = Counter32
-_TmnxFRDlcmiInvRxSeqNumMsgs_Object = MibTableColumn
-tmnxFRDlcmiInvRxSeqNumMsgs = _TmnxFRDlcmiInvRxSeqNumMsgs_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 1, 1, 12),
-    _TmnxFRDlcmiInvRxSeqNumMsgs_Type()
-)
-tmnxFRDlcmiInvRxSeqNumMsgs.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiInvRxSeqNumMsgs.setStatus("current")
-if mibBuilder.loadTexts:
-    tmnxFRDlcmiInvRxSeqNumMsgs.setUnits("messages")
-_TmnxFrIntfTable_Object = MibTable
-tmnxFrIntfTable = _TmnxFrIntfTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 2)
-)
-if mibBuilder.loadTexts:
-    tmnxFrIntfTable.setStatus("current")
-_TmnxFrIntfEntry_Object = MibTableRow
-tmnxFrIntfEntry = _TmnxFrIntfEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 2, 1)
-)
-tmnxFrIntfEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-)
-if mibBuilder.loadTexts:
-    tmnxFrIntfEntry.setStatus("current")
-
-
-class _TmnxFrIntfFrf12Mode_Type(TmnxEnabledDisabled):
-    """Custom type tmnxFrIntfFrf12Mode based on TmnxEnabledDisabled"""
-    defaultValue = 2
-
-
-_TmnxFrIntfFrf12Mode_Type.__name__ = "TmnxEnabledDisabled"
-_TmnxFrIntfFrf12Mode_Object = MibTableColumn
-tmnxFrIntfFrf12Mode = _TmnxFrIntfFrf12Mode_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 2, 1, 1),
-    _TmnxFrIntfFrf12Mode_Type()
-)
-tmnxFrIntfFrf12Mode.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxFrIntfFrf12Mode.setStatus("current")
-
-
-class _TmnxFrIntfLinkId_Type(SnmpAdminString):
-    """Custom type tmnxFrIntfLinkId based on SnmpAdminString"""
-    defaultValue = OctetString("")
-
-    subtypeSpec = SnmpAdminString.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 49),
-    )
-
-
-_TmnxFrIntfLinkId_Type.__name__ = "SnmpAdminString"
-_TmnxFrIntfLinkId_Object = MibTableColumn
-tmnxFrIntfLinkId = _TmnxFrIntfLinkId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 2, 1, 2),
-    _TmnxFrIntfLinkId_Type()
-)
-tmnxFrIntfLinkId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxFrIntfLinkId.setStatus("current")
-_TmnxFrIntfLastChanged_Type = TimeStamp
-_TmnxFrIntfLastChanged_Object = MibTableColumn
-tmnxFrIntfLastChanged = _TmnxFrIntfLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 2, 1, 3),
-    _TmnxFrIntfLastChanged_Type()
-)
-tmnxFrIntfLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFrIntfLastChanged.setStatus("current")
-_TmnxFrf12IntfTable_Object = MibTable
-tmnxFrf12IntfTable = _TmnxFrf12IntfTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 3)
-)
-if mibBuilder.loadTexts:
-    tmnxFrf12IntfTable.setStatus("current")
-_TmnxFrf12IntfEntry_Object = MibTableRow
-tmnxFrf12IntfEntry = _TmnxFrf12IntfEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 3, 1)
-)
-tmnxFrf12IntfEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
-)
-if mibBuilder.loadTexts:
-    tmnxFrf12IntfEntry.setStatus("current")
-
-
-class _TmnxFrf12IntfFragmentThreshold_Type(Unsigned32):
-    """Custom type tmnxFrf12IntfFragmentThreshold based on Unsigned32"""
-    defaultValue = 128
-
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(128, 512),
-    )
-
-
-_TmnxFrf12IntfFragmentThreshold_Type.__name__ = "Unsigned32"
-_TmnxFrf12IntfFragmentThreshold_Object = MibTableColumn
-tmnxFrf12IntfFragmentThreshold = _TmnxFrf12IntfFragmentThreshold_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 3, 1, 1),
-    _TmnxFrf12IntfFragmentThreshold_Type()
-)
-tmnxFrf12IntfFragmentThreshold.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxFrf12IntfFragmentThreshold.setStatus("current")
-
-
-class _TmnxFrf12IntfEgrQoSProfId_Type(TMcFrQoSProfileId):
-    """Custom type tmnxFrf12IntfEgrQoSProfId based on TMcFrQoSProfileId"""
-    defaultValue = 0
-
-
-_TmnxFrf12IntfEgrQoSProfId_Type.__name__ = "TMcFrQoSProfileId"
-_TmnxFrf12IntfEgrQoSProfId_Object = MibTableColumn
-tmnxFrf12IntfEgrQoSProfId = _TmnxFrf12IntfEgrQoSProfId_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 3, 1, 2),
-    _TmnxFrf12IntfEgrQoSProfId_Type()
-)
-tmnxFrf12IntfEgrQoSProfId.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxFrf12IntfEgrQoSProfId.setStatus("current")
-_TmnxFrf12IntfLastChanged_Type = TimeStamp
-_TmnxFrf12IntfLastChanged_Object = MibTableColumn
-tmnxFrf12IntfLastChanged = _TmnxFrf12IntfLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 9, 3, 1, 3),
-    _TmnxFrf12IntfLastChanged_Type()
-)
-tmnxFrf12IntfLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxFrf12IntfLastChanged.setStatus("current")
 _TmnxQosAppObjs_ObjectIdentity = ObjectIdentity
 tmnxQosAppObjs = _TmnxQosAppObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10)
@@ -24959,6 +24518,493 @@ if mibBuilder.loadTexts:
     tmnxObjectAppRedAlrmThresh.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxObjectAppRedAlrmThresh.setUnits("percent")
+
+
+class _TmnxObjAppMonPoolDepthAdminSt_Type(TruthValue):
+    """Custom type tmnxObjAppMonPoolDepthAdminSt based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxObjAppMonPoolDepthAdminSt_Type.__name__ = "TruthValue"
+_TmnxObjAppMonPoolDepthAdminSt_Object = MibTableColumn
+tmnxObjAppMonPoolDepthAdminSt = _TmnxObjAppMonPoolDepthAdminSt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 2, 1, 13),
+    _TmnxObjAppMonPoolDepthAdminSt_Type()
+)
+tmnxObjAppMonPoolDepthAdminSt.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxObjAppMonPoolDepthAdminSt.setStatus("current")
+
+
+class _TmnxObjAppAlrmThreshTotalPool_Type(Unsigned32):
+    """Custom type tmnxObjAppAlrmThreshTotalPool based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_TmnxObjAppAlrmThreshTotalPool_Type.__name__ = "Unsigned32"
+_TmnxObjAppAlrmThreshTotalPool_Object = MibTableColumn
+tmnxObjAppAlrmThreshTotalPool = _TmnxObjAppAlrmThreshTotalPool_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 2, 1, 14),
+    _TmnxObjAppAlrmThreshTotalPool_Type()
+)
+tmnxObjAppAlrmThreshTotalPool.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxObjAppAlrmThreshTotalPool.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppAlrmThreshTotalPool.setUnits("centipercent")
+
+
+class _TmnxObjAppAlrmThreshSharedPool_Type(Unsigned32):
+    """Custom type tmnxObjAppAlrmThreshSharedPool based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_TmnxObjAppAlrmThreshSharedPool_Type.__name__ = "Unsigned32"
+_TmnxObjAppAlrmThreshSharedPool_Object = MibTableColumn
+tmnxObjAppAlrmThreshSharedPool = _TmnxObjAppAlrmThreshSharedPool_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 2, 1, 15),
+    _TmnxObjAppAlrmThreshSharedPool_Type()
+)
+tmnxObjAppAlrmThreshSharedPool.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxObjAppAlrmThreshSharedPool.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppAlrmThreshSharedPool.setUnits("centipercent")
+
+
+class _TmnxObjAppAlrmThreshResvPool_Type(Unsigned32):
+    """Custom type tmnxObjAppAlrmThreshResvPool based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 10000),
+    )
+
+
+_TmnxObjAppAlrmThreshResvPool_Type.__name__ = "Unsigned32"
+_TmnxObjAppAlrmThreshResvPool_Object = MibTableColumn
+tmnxObjAppAlrmThreshResvPool = _TmnxObjAppAlrmThreshResvPool_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 2, 1, 16),
+    _TmnxObjAppAlrmThreshResvPool_Type()
+)
+tmnxObjAppAlrmThreshResvPool.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxObjAppAlrmThreshResvPool.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppAlrmThreshResvPool.setUnits("centipercent")
+_TmnxQosPoolAppDepthInfoTable_Object = MibTable
+tmnxQosPoolAppDepthInfoTable = _TmnxQosPoolAppDepthInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3)
+)
+if mibBuilder.loadTexts:
+    tmnxQosPoolAppDepthInfoTable.setStatus("current")
+_TmnxQosPoolAppDepthInfoEntry_Object = MibTableRow
+tmnxQosPoolAppDepthInfoEntry = _TmnxQosPoolAppDepthInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1)
+)
+tmnxQosPoolAppDepthInfoEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectType"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectId"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectAppType"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectAppPool"),
+)
+if mibBuilder.loadTexts:
+    tmnxQosPoolAppDepthInfoEntry.setStatus("current")
+_TmnxObjAppPoolDepthAvgPollInt_Type = Unsigned32
+_TmnxObjAppPoolDepthAvgPollInt_Object = MibTableColumn
+tmnxObjAppPoolDepthAvgPollInt = _TmnxObjAppPoolDepthAvgPollInt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 1),
+    _TmnxObjAppPoolDepthAvgPollInt_Type()
+)
+tmnxObjAppPoolDepthAvgPollInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthAvgPollInt.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthAvgPollInt.setUnits("milliseconds")
+_TmnxObjAppPoolDepthAvgElpsdTme_Type = TimeStamp
+_TmnxObjAppPoolDepthAvgElpsdTme_Object = MibTableColumn
+tmnxObjAppPoolDepthAvgElpsdTme = _TmnxObjAppPoolDepthAvgElpsdTme_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 2),
+    _TmnxObjAppPoolDepthAvgElpsdTme_Type()
+)
+tmnxObjAppPoolDepthAvgElpsdTme.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthAvgElpsdTme.setStatus("current")
+_TmnxObjAppPoolDepResvViolTotCnt_Type = Unsigned32
+_TmnxObjAppPoolDepResvViolTotCnt_Object = MibTableColumn
+tmnxObjAppPoolDepResvViolTotCnt = _TmnxObjAppPoolDepResvViolTotCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 3),
+    _TmnxObjAppPoolDepResvViolTotCnt_Type()
+)
+tmnxObjAppPoolDepResvViolTotCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepResvViolTotCnt.setStatus("current")
+_TmnxObjAppPoolDepResvViolLast_Type = TimeStamp
+_TmnxObjAppPoolDepResvViolLast_Object = MibTableColumn
+tmnxObjAppPoolDepResvViolLast = _TmnxObjAppPoolDepResvViolLast_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 4),
+    _TmnxObjAppPoolDepResvViolLast_Type()
+)
+tmnxObjAppPoolDepResvViolLast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepResvViolLast.setStatus("current")
+_TmnxObjAppPoolDepShrdViolTotCnt_Type = Unsigned32
+_TmnxObjAppPoolDepShrdViolTotCnt_Object = MibTableColumn
+tmnxObjAppPoolDepShrdViolTotCnt = _TmnxObjAppPoolDepShrdViolTotCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 5),
+    _TmnxObjAppPoolDepShrdViolTotCnt_Type()
+)
+tmnxObjAppPoolDepShrdViolTotCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepShrdViolTotCnt.setStatus("current")
+_TmnxObjAppPoolDepShrdViolLast_Type = TimeStamp
+_TmnxObjAppPoolDepShrdViolLast_Object = MibTableColumn
+tmnxObjAppPoolDepShrdViolLast = _TmnxObjAppPoolDepShrdViolLast_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 6),
+    _TmnxObjAppPoolDepShrdViolLast_Type()
+)
+tmnxObjAppPoolDepShrdViolLast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepShrdViolLast.setStatus("current")
+_TmnxObjAppPoolDepTotViolTotCnt_Type = Unsigned32
+_TmnxObjAppPoolDepTotViolTotCnt_Object = MibTableColumn
+tmnxObjAppPoolDepTotViolTotCnt = _TmnxObjAppPoolDepTotViolTotCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 7),
+    _TmnxObjAppPoolDepTotViolTotCnt_Type()
+)
+tmnxObjAppPoolDepTotViolTotCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepTotViolTotCnt.setStatus("current")
+_TmnxObjAppPoolDepTotViolLast_Type = TimeStamp
+_TmnxObjAppPoolDepTotViolLast_Object = MibTableColumn
+tmnxObjAppPoolDepTotViolLast = _TmnxObjAppPoolDepTotViolLast_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 8),
+    _TmnxObjAppPoolDepTotViolLast_Type()
+)
+tmnxObjAppPoolDepTotViolLast.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepTotViolLast.setStatus("current")
+
+
+class _TmnxObjAppPoolTotalUseThresExc_Type(TruthValue):
+    """Custom type tmnxObjAppPoolTotalUseThresExc based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxObjAppPoolTotalUseThresExc_Type.__name__ = "TruthValue"
+_TmnxObjAppPoolTotalUseThresExc_Object = MibTableColumn
+tmnxObjAppPoolTotalUseThresExc = _TmnxObjAppPoolTotalUseThresExc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 9),
+    _TmnxObjAppPoolTotalUseThresExc_Type()
+)
+tmnxObjAppPoolTotalUseThresExc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolTotalUseThresExc.setStatus("current")
+
+
+class _TmnxObjAppPoolSharedUseThresExc_Type(TruthValue):
+    """Custom type tmnxObjAppPoolSharedUseThresExc based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxObjAppPoolSharedUseThresExc_Type.__name__ = "TruthValue"
+_TmnxObjAppPoolSharedUseThresExc_Object = MibTableColumn
+tmnxObjAppPoolSharedUseThresExc = _TmnxObjAppPoolSharedUseThresExc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 10),
+    _TmnxObjAppPoolSharedUseThresExc_Type()
+)
+tmnxObjAppPoolSharedUseThresExc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolSharedUseThresExc.setStatus("current")
+
+
+class _TmnxObjAppPoolReservdUseThresExc_Type(TruthValue):
+    """Custom type tmnxObjAppPoolReservdUseThresExc based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxObjAppPoolReservdUseThresExc_Type.__name__ = "TruthValue"
+_TmnxObjAppPoolReservdUseThresExc_Object = MibTableColumn
+tmnxObjAppPoolReservdUseThresExc = _TmnxObjAppPoolReservdUseThresExc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 3, 1, 11),
+    _TmnxObjAppPoolReservdUseThresExc_Type()
+)
+tmnxObjAppPoolReservdUseThresExc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolReservdUseThresExc.setStatus("current")
+_TmnxQosPoolAppDepthThdInfoTable_Object = MibTable
+tmnxQosPoolAppDepthThdInfoTable = _TmnxQosPoolAppDepthThdInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4)
+)
+if mibBuilder.loadTexts:
+    tmnxQosPoolAppDepthThdInfoTable.setStatus("current")
+_TmnxQosPoolAppDepthThdInfoEntry_Object = MibTableRow
+tmnxQosPoolAppDepthThdInfoEntry = _TmnxQosPoolAppDepthThdInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1)
+)
+tmnxQosPoolAppDepthThdInfoEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectType"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectId"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectAppType"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectAppPool"),
+    (0, "TIMETRA-PORT-MIB", "tmnxObjectAppPoolThdType"),
+)
+if mibBuilder.loadTexts:
+    tmnxQosPoolAppDepthThdInfoEntry.setStatus("current")
+
+
+class _TmnxObjectAppPoolThdType_Type(Integer32):
+    """Custom type tmnxObjectAppPoolThdType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("total", 1),
+          ("shared", 2),
+          ("reserved", 3))
+    )
+
+
+_TmnxObjectAppPoolThdType_Type.__name__ = "Integer32"
+_TmnxObjectAppPoolThdType_Object = MibTableColumn
+tmnxObjectAppPoolThdType = _TmnxObjectAppPoolThdType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 1),
+    _TmnxObjectAppPoolThdType_Type()
+)
+tmnxObjectAppPoolThdType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxObjectAppPoolThdType.setStatus("current")
+
+
+class _TmnxObjAppPoolDepthPollPcnt1_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt1 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt1_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt1_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt1 = _TmnxObjAppPoolDepthPollPcnt1_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 2),
+    _TmnxObjAppPoolDepthPollPcnt1_Type()
+)
+tmnxObjAppPoolDepthPollPcnt1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt1.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt1.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt2_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt2 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt2_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt2_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt2 = _TmnxObjAppPoolDepthPollPcnt2_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 3),
+    _TmnxObjAppPoolDepthPollPcnt2_Type()
+)
+tmnxObjAppPoolDepthPollPcnt2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt2.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt2.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt3_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt3 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt3_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt3_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt3 = _TmnxObjAppPoolDepthPollPcnt3_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 4),
+    _TmnxObjAppPoolDepthPollPcnt3_Type()
+)
+tmnxObjAppPoolDepthPollPcnt3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt3.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt3.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt4_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt4 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt4_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt4_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt4 = _TmnxObjAppPoolDepthPollPcnt4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 5),
+    _TmnxObjAppPoolDepthPollPcnt4_Type()
+)
+tmnxObjAppPoolDepthPollPcnt4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt4.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt4.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt5_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt5 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt5_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt5_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt5 = _TmnxObjAppPoolDepthPollPcnt5_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 6),
+    _TmnxObjAppPoolDepthPollPcnt5_Type()
+)
+tmnxObjAppPoolDepthPollPcnt5.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt5.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt5.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt6_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt6 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt6_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt6_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt6 = _TmnxObjAppPoolDepthPollPcnt6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 7),
+    _TmnxObjAppPoolDepthPollPcnt6_Type()
+)
+tmnxObjAppPoolDepthPollPcnt6.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt6.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt6.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt7_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt7 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt7_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt7_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt7 = _TmnxObjAppPoolDepthPollPcnt7_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 8),
+    _TmnxObjAppPoolDepthPollPcnt7_Type()
+)
+tmnxObjAppPoolDepthPollPcnt7.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt7.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt7.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt8_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt8 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt8_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt8_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt8 = _TmnxObjAppPoolDepthPollPcnt8_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 9),
+    _TmnxObjAppPoolDepthPollPcnt8_Type()
+)
+tmnxObjAppPoolDepthPollPcnt8.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt8.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt8.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt9_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt9 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt9_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt9_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt9 = _TmnxObjAppPoolDepthPollPcnt9_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 10),
+    _TmnxObjAppPoolDepthPollPcnt9_Type()
+)
+tmnxObjAppPoolDepthPollPcnt9.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt9.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt9.setUnits("centipercent")
+
+
+class _TmnxObjAppPoolDepthPollPcnt10_Type(Unsigned32):
+    """Custom type tmnxObjAppPoolDepthPollPcnt10 based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 10000),
+    )
+
+
+_TmnxObjAppPoolDepthPollPcnt10_Type.__name__ = "Unsigned32"
+_TmnxObjAppPoolDepthPollPcnt10_Object = MibTableColumn
+tmnxObjAppPoolDepthPollPcnt10 = _TmnxObjAppPoolDepthPollPcnt10_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 10, 4, 1, 11),
+    _TmnxObjAppPoolDepthPollPcnt10_Type()
+)
+tmnxObjAppPoolDepthPollPcnt10.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt10.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDepthPollPcnt10.setUnits("centipercent")
 _TmnxATMObjs_ObjectIdentity = ObjectIdentity
 tmnxATMObjs = _TmnxATMObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 11)
@@ -24968,7 +25014,7 @@ tmnxATMIntfTable = _TmnxATMIntfTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 11, 1)
 )
 if mibBuilder.loadTexts:
-    tmnxATMIntfTable.setStatus("current")
+    tmnxATMIntfTable.setStatus("obsolete")
 _TmnxATMIntfEntry_Object = MibTableRow
 tmnxATMIntfEntry = _TmnxATMIntfEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 11, 1, 1)
@@ -24978,7 +25024,7 @@ tmnxATMIntfEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
 )
 if mibBuilder.loadTexts:
-    tmnxATMIntfEntry.setStatus("current")
+    tmnxATMIntfEntry.setStatus("obsolete")
 
 
 class _TmnxATMIntfCellFormat_Type(Integer32):
@@ -25006,7 +25052,7 @@ tmnxATMIntfCellFormat = _TmnxATMIntfCellFormat_Object(
 )
 tmnxATMIntfCellFormat.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxATMIntfCellFormat.setStatus("current")
+    tmnxATMIntfCellFormat.setStatus("obsolete")
 
 
 class _TmnxATMIntfMinVpValue_Type(Integer32):
@@ -25027,7 +25073,7 @@ tmnxATMIntfMinVpValue = _TmnxATMIntfMinVpValue_Object(
 )
 tmnxATMIntfMinVpValue.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxATMIntfMinVpValue.setStatus("current")
+    tmnxATMIntfMinVpValue.setStatus("obsolete")
 
 
 class _TmnxATMIntfMapping_Type(Integer32):
@@ -25055,7 +25101,7 @@ tmnxATMIntfMapping = _TmnxATMIntfMapping_Object(
 )
 tmnxATMIntfMapping.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxATMIntfMapping.setStatus("current")
+    tmnxATMIntfMapping.setStatus("obsolete")
 
 
 class _TmnxATMIntfCustomBufferMode_Type(TruthValue):
@@ -25071,7 +25117,7 @@ tmnxATMIntfCustomBufferMode = _TmnxATMIntfCustomBufferMode_Object(
 )
 tmnxATMIntfCustomBufferMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxATMIntfCustomBufferMode.setStatus("current")
+    tmnxATMIntfCustomBufferMode.setStatus("obsolete")
 
 
 class _TmnxATMIntfBufferPool_Type(Integer32):
@@ -25092,7 +25138,7 @@ tmnxATMIntfBufferPool = _TmnxATMIntfBufferPool_Object(
 )
 tmnxATMIntfBufferPool.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxATMIntfBufferPool.setStatus("current")
+    tmnxATMIntfBufferPool.setStatus("obsolete")
 
 
 class _TmnxATMIntfVcThreshold_Type(Integer32):
@@ -25113,7 +25159,7 @@ tmnxATMIntfVcThreshold = _TmnxATMIntfVcThreshold_Object(
 )
 tmnxATMIntfVcThreshold.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxATMIntfVcThreshold.setStatus("current")
+    tmnxATMIntfVcThreshold.setStatus("obsolete")
 _TmnxPortATMVpShaperTblLastCh_Type = TimeStamp
 _TmnxPortATMVpShaperTblLastCh_Object = MibScalar
 tmnxPortATMVpShaperTblLastCh = _TmnxPortATMVpShaperTblLastCh_Object(
@@ -25122,13 +25168,13 @@ tmnxPortATMVpShaperTblLastCh = _TmnxPortATMVpShaperTblLastCh_Object(
 )
 tmnxPortATMVpShaperTblLastCh.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperTblLastCh.setStatus("current")
+    tmnxPortATMVpShaperTblLastCh.setStatus("obsolete")
 _TmnxPortATMVpShaperTable_Object = MibTable
 tmnxPortATMVpShaperTable = _TmnxPortATMVpShaperTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 11, 3)
 )
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperTable.setStatus("current")
+    tmnxPortATMVpShaperTable.setStatus("obsolete")
 _TmnxPortATMVpShaperEntry_Object = MibTableRow
 tmnxPortATMVpShaperEntry = _TmnxPortATMVpShaperEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 11, 3, 1)
@@ -25139,7 +25185,7 @@ tmnxPortATMVpShaperEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxPortATMVpShaperVpi"),
 )
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperEntry.setStatus("current")
+    tmnxPortATMVpShaperEntry.setStatus("obsolete")
 _TmnxPortATMVpShaperVpi_Type = AtmVpIdentifier
 _TmnxPortATMVpShaperVpi_Object = MibTableColumn
 tmnxPortATMVpShaperVpi = _TmnxPortATMVpShaperVpi_Object(
@@ -25148,7 +25194,7 @@ tmnxPortATMVpShaperVpi = _TmnxPortATMVpShaperVpi_Object(
 )
 tmnxPortATMVpShaperVpi.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperVpi.setStatus("current")
+    tmnxPortATMVpShaperVpi.setStatus("obsolete")
 _TmnxPortATMVpShaperRowStatus_Type = RowStatus
 _TmnxPortATMVpShaperRowStatus_Object = MibTableColumn
 tmnxPortATMVpShaperRowStatus = _TmnxPortATMVpShaperRowStatus_Object(
@@ -25157,7 +25203,7 @@ tmnxPortATMVpShaperRowStatus = _TmnxPortATMVpShaperRowStatus_Object(
 )
 tmnxPortATMVpShaperRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperRowStatus.setStatus("current")
+    tmnxPortATMVpShaperRowStatus.setStatus("obsolete")
 _TmnxPortATMVpShaperLastMgmtCh_Type = TimeStamp
 _TmnxPortATMVpShaperLastMgmtCh_Object = MibTableColumn
 tmnxPortATMVpShaperLastMgmtCh = _TmnxPortATMVpShaperLastMgmtCh_Object(
@@ -25166,7 +25212,7 @@ tmnxPortATMVpShaperLastMgmtCh = _TmnxPortATMVpShaperLastMgmtCh_Object(
 )
 tmnxPortATMVpShaperLastMgmtCh.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperLastMgmtCh.setStatus("current")
+    tmnxPortATMVpShaperLastMgmtCh.setStatus("obsolete")
 
 
 class _TmnxPortATMVpShaperEgrAtd_Type(AtmTrafficDescrParamIndex):
@@ -25185,7 +25231,7 @@ tmnxPortATMVpShaperEgrAtd = _TmnxPortATMVpShaperEgrAtd_Object(
 )
 tmnxPortATMVpShaperEgrAtd.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxPortATMVpShaperEgrAtd.setStatus("current")
+    tmnxPortATMVpShaperEgrAtd.setStatus("obsolete")
 _TmnxPortStatsObjs_ObjectIdentity = ObjectIdentity
 tmnxPortStatsObjs = _TmnxPortStatsObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12)
@@ -25478,78 +25524,48 @@ tmnxPortNetEgressMCDroOcts = _TmnxPortNetEgressMCDroOcts_Object(
 tmnxPortNetEgressMCDroOcts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortNetEgressMCDroOcts.setStatus("current")
-_TmnxCiscoHDLCStatsTable_Object = MibTable
-tmnxCiscoHDLCStatsTable = _TmnxCiscoHDLCStatsTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3)
+_TmnxPortNetEgressPpUCDroPkts_Type = Counter64
+_TmnxPortNetEgressPpUCDroPkts_Object = MibTableColumn
+tmnxPortNetEgressPpUCDroPkts = _TmnxPortNetEgressPpUCDroPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 2, 1, 18),
+    _TmnxPortNetEgressPpUCDroPkts_Type()
 )
+tmnxPortNetEgressPpUCDroPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxCiscoHDLCStatsTable.setStatus("current")
-_TmnxCiscoHDLCStatsEntry_Object = MibTableRow
-tmnxCiscoHDLCStatsEntry = _TmnxCiscoHDLCStatsEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1)
+    tmnxPortNetEgressPpUCDroPkts.setStatus("current")
+_TmnxPortNetEgressPpUCDroOcts_Type = Counter64
+_TmnxPortNetEgressPpUCDroOcts_Object = MibTableColumn
+tmnxPortNetEgressPpUCDroOcts = _TmnxPortNetEgressPpUCDroOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 2, 1, 19),
+    _TmnxPortNetEgressPpUCDroOcts_Type()
 )
+tmnxPortNetEgressPpUCDroOcts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxCiscoHDLCStatsEntry.setStatus("current")
-_TmnxCiscoHDLCDiscardStatInPkts_Type = Unsigned32
-_TmnxCiscoHDLCDiscardStatInPkts_Object = MibTableColumn
-tmnxCiscoHDLCDiscardStatInPkts = _TmnxCiscoHDLCDiscardStatInPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1, 1),
-    _TmnxCiscoHDLCDiscardStatInPkts_Type()
+    tmnxPortNetEgressPpUCDroOcts.setStatus("current")
+_TmnxPortNetEgressPpMCDroPkts_Type = Counter64
+_TmnxPortNetEgressPpMCDroPkts_Object = MibTableColumn
+tmnxPortNetEgressPpMCDroPkts = _TmnxPortNetEgressPpMCDroPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 2, 1, 20),
+    _TmnxPortNetEgressPpMCDroPkts_Type()
 )
-tmnxCiscoHDLCDiscardStatInPkts.setMaxAccess("read-only")
+tmnxPortNetEgressPpMCDroPkts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxCiscoHDLCDiscardStatInPkts.setStatus("current")
-_TmnxCiscoHDLCDiscardStatOutPkts_Type = Unsigned32
-_TmnxCiscoHDLCDiscardStatOutPkts_Object = MibTableColumn
-tmnxCiscoHDLCDiscardStatOutPkts = _TmnxCiscoHDLCDiscardStatOutPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1, 2),
-    _TmnxCiscoHDLCDiscardStatOutPkts_Type()
+    tmnxPortNetEgressPpMCDroPkts.setStatus("current")
+_TmnxPortNetEgressPpMCDroOcts_Type = Counter64
+_TmnxPortNetEgressPpMCDroOcts_Object = MibTableColumn
+tmnxPortNetEgressPpMCDroOcts = _TmnxPortNetEgressPpMCDroOcts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 2, 1, 21),
+    _TmnxPortNetEgressPpMCDroOcts_Type()
 )
-tmnxCiscoHDLCDiscardStatOutPkts.setMaxAccess("read-only")
+tmnxPortNetEgressPpMCDroOcts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxCiscoHDLCDiscardStatOutPkts.setStatus("current")
-_TmnxCiscoHDLCStatInPkts_Type = Unsigned32
-_TmnxCiscoHDLCStatInPkts_Object = MibTableColumn
-tmnxCiscoHDLCStatInPkts = _TmnxCiscoHDLCStatInPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1, 3),
-    _TmnxCiscoHDLCStatInPkts_Type()
-)
-tmnxCiscoHDLCStatInPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCStatInPkts.setStatus("current")
-_TmnxCiscoHDLCStatOutPkts_Type = Unsigned32
-_TmnxCiscoHDLCStatOutPkts_Object = MibTableColumn
-tmnxCiscoHDLCStatOutPkts = _TmnxCiscoHDLCStatOutPkts_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1, 4),
-    _TmnxCiscoHDLCStatOutPkts_Type()
-)
-tmnxCiscoHDLCStatOutPkts.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCStatOutPkts.setStatus("current")
-_TmnxCiscoHDLCStatInOctets_Type = Unsigned32
-_TmnxCiscoHDLCStatInOctets_Object = MibTableColumn
-tmnxCiscoHDLCStatInOctets = _TmnxCiscoHDLCStatInOctets_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1, 5),
-    _TmnxCiscoHDLCStatInOctets_Type()
-)
-tmnxCiscoHDLCStatInOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCStatInOctets.setStatus("current")
-_TmnxCiscoHDLCStatOutOctets_Type = Unsigned32
-_TmnxCiscoHDLCStatOutOctets_Object = MibTableColumn
-tmnxCiscoHDLCStatOutOctets = _TmnxCiscoHDLCStatOutOctets_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 3, 1, 6),
-    _TmnxCiscoHDLCStatOutOctets_Type()
-)
-tmnxCiscoHDLCStatOutOctets.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCStatOutOctets.setStatus("current")
+    tmnxPortNetEgressPpMCDroOcts.setStatus("current")
 _TmnxMcMlpppStatsTable_Object = MibTable
 tmnxMcMlpppStatsTable = _TmnxMcMlpppStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 4)
 )
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsTable.setStatus("current")
+    tmnxMcMlpppStatsTable.setStatus("obsolete")
 _TmnxMcMlpppStatsEntry_Object = MibTableRow
 tmnxMcMlpppStatsEntry = _TmnxMcMlpppStatsEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 4, 1)
@@ -25560,7 +25576,7 @@ tmnxMcMlpppStatsEntry.setIndexNames(
     (0, "TIMETRA-PORT-MIB", "tmnxMcMlpppClassIndex"),
 )
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsEntry.setStatus("current")
+    tmnxMcMlpppStatsEntry.setStatus("obsolete")
 _TmnxMcMlpppClassIndex_Type = TmnxMcMlpppClassIndex
 _TmnxMcMlpppClassIndex_Object = MibTableColumn
 tmnxMcMlpppClassIndex = _TmnxMcMlpppClassIndex_Object(
@@ -25569,7 +25585,7 @@ tmnxMcMlpppClassIndex = _TmnxMcMlpppClassIndex_Object(
 )
 tmnxMcMlpppClassIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppClassIndex.setStatus("current")
+    tmnxMcMlpppClassIndex.setStatus("obsolete")
 _TmnxMcMlpppStatsIngressOct_Type = Counter32
 _TmnxMcMlpppStatsIngressOct_Object = MibTableColumn
 tmnxMcMlpppStatsIngressOct = _TmnxMcMlpppStatsIngressOct_Object(
@@ -25578,7 +25594,7 @@ tmnxMcMlpppStatsIngressOct = _TmnxMcMlpppStatsIngressOct_Object(
 )
 tmnxMcMlpppStatsIngressOct.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsIngressOct.setStatus("current")
+    tmnxMcMlpppStatsIngressOct.setStatus("obsolete")
 _TmnxMcMlpppStatsIngressPkt_Type = Counter32
 _TmnxMcMlpppStatsIngressPkt_Object = MibTableColumn
 tmnxMcMlpppStatsIngressPkt = _TmnxMcMlpppStatsIngressPkt_Object(
@@ -25587,7 +25603,7 @@ tmnxMcMlpppStatsIngressPkt = _TmnxMcMlpppStatsIngressPkt_Object(
 )
 tmnxMcMlpppStatsIngressPkt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsIngressPkt.setStatus("current")
+    tmnxMcMlpppStatsIngressPkt.setStatus("obsolete")
 _TmnxMcMlpppStatsIngressErrPkt_Type = Counter32
 _TmnxMcMlpppStatsIngressErrPkt_Object = MibTableColumn
 tmnxMcMlpppStatsIngressErrPkt = _TmnxMcMlpppStatsIngressErrPkt_Object(
@@ -25596,7 +25612,7 @@ tmnxMcMlpppStatsIngressErrPkt = _TmnxMcMlpppStatsIngressErrPkt_Object(
 )
 tmnxMcMlpppStatsIngressErrPkt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsIngressErrPkt.setStatus("current")
+    tmnxMcMlpppStatsIngressErrPkt.setStatus("obsolete")
 _TmnxMcMlpppStatsEgressOct_Type = Counter32
 _TmnxMcMlpppStatsEgressOct_Object = MibTableColumn
 tmnxMcMlpppStatsEgressOct = _TmnxMcMlpppStatsEgressOct_Object(
@@ -25605,7 +25621,7 @@ tmnxMcMlpppStatsEgressOct = _TmnxMcMlpppStatsEgressOct_Object(
 )
 tmnxMcMlpppStatsEgressOct.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsEgressOct.setStatus("current")
+    tmnxMcMlpppStatsEgressOct.setStatus("obsolete")
 _TmnxMcMlpppStatsEgressPkt_Type = Counter32
 _TmnxMcMlpppStatsEgressPkt_Object = MibTableColumn
 tmnxMcMlpppStatsEgressPkt = _TmnxMcMlpppStatsEgressPkt_Object(
@@ -25614,7 +25630,7 @@ tmnxMcMlpppStatsEgressPkt = _TmnxMcMlpppStatsEgressPkt_Object(
 )
 tmnxMcMlpppStatsEgressPkt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsEgressPkt.setStatus("current")
+    tmnxMcMlpppStatsEgressPkt.setStatus("obsolete")
 _TmnxMcMlpppStatsEgressErrPkt_Type = Counter32
 _TmnxMcMlpppStatsEgressErrPkt_Object = MibTableColumn
 tmnxMcMlpppStatsEgressErrPkt = _TmnxMcMlpppStatsEgressErrPkt_Object(
@@ -25623,7 +25639,7 @@ tmnxMcMlpppStatsEgressErrPkt = _TmnxMcMlpppStatsEgressErrPkt_Object(
 )
 tmnxMcMlpppStatsEgressErrPkt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tmnxMcMlpppStatsEgressErrPkt.setStatus("current")
+    tmnxMcMlpppStatsEgressErrPkt.setStatus("obsolete")
 _TmnxPortNetEgrQStatTable_Object = MibTable
 tmnxPortNetEgrQStatTable = _TmnxPortNetEgrQStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 5)
@@ -26875,6 +26891,194 @@ if mibBuilder.loadTexts:
     tmnxCohOptPortRxOSNRMax.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxCohOptPortRxOSNRMax.setUnits("0.1 dB")
+_TmnxCohOptPortRxTotalPower_Type = Integer32
+_TmnxCohOptPortRxTotalPower_Object = MibTableColumn
+tmnxCohOptPortRxTotalPower = _TmnxCohOptPortRxTotalPower_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 38),
+    _TmnxCohOptPortRxTotalPower_Type()
+)
+tmnxCohOptPortRxTotalPower.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPower.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPower.setUnits("millibel-milliwatts")
+_TmnxCohOptPortRxTotalPowerAvg_Type = Integer32
+_TmnxCohOptPortRxTotalPowerAvg_Object = MibTableColumn
+tmnxCohOptPortRxTotalPowerAvg = _TmnxCohOptPortRxTotalPowerAvg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 39),
+    _TmnxCohOptPortRxTotalPowerAvg_Type()
+)
+tmnxCohOptPortRxTotalPowerAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPowerAvg.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPowerAvg.setUnits("millibel-milliwatts")
+_TmnxCohOptPortRxTotalPowerMin_Type = Integer32
+_TmnxCohOptPortRxTotalPowerMin_Object = MibTableColumn
+tmnxCohOptPortRxTotalPowerMin = _TmnxCohOptPortRxTotalPowerMin_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 40),
+    _TmnxCohOptPortRxTotalPowerMin_Type()
+)
+tmnxCohOptPortRxTotalPowerMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPowerMin.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPowerMin.setUnits("millibel-milliwatts")
+_TmnxCohOptPortRxTotalPowerMax_Type = Integer32
+_TmnxCohOptPortRxTotalPowerMax_Object = MibTableColumn
+tmnxCohOptPortRxTotalPowerMax = _TmnxCohOptPortRxTotalPowerMax_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 41),
+    _TmnxCohOptPortRxTotalPowerMax_Type()
+)
+tmnxCohOptPortRxTotalPowerMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPowerMax.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxTotalPowerMax.setUnits("millibel-milliwatts")
+_TmnxCohOptPortRxPolarDepLoss_Type = Gauge32
+_TmnxCohOptPortRxPolarDepLoss_Object = MibTableColumn
+tmnxCohOptPortRxPolarDepLoss = _TmnxCohOptPortRxPolarDepLoss_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 42),
+    _TmnxCohOptPortRxPolarDepLoss_Type()
+)
+tmnxCohOptPortRxPolarDepLoss.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLoss.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLoss.setUnits("0.1 dB")
+_TmnxCohOptPortRxPolarDepLossAvg_Type = Gauge32
+_TmnxCohOptPortRxPolarDepLossAvg_Object = MibTableColumn
+tmnxCohOptPortRxPolarDepLossAvg = _TmnxCohOptPortRxPolarDepLossAvg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 43),
+    _TmnxCohOptPortRxPolarDepLossAvg_Type()
+)
+tmnxCohOptPortRxPolarDepLossAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLossAvg.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLossAvg.setUnits("0.1 dB")
+_TmnxCohOptPortRxPolarDepLossMin_Type = Gauge32
+_TmnxCohOptPortRxPolarDepLossMin_Object = MibTableColumn
+tmnxCohOptPortRxPolarDepLossMin = _TmnxCohOptPortRxPolarDepLossMin_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 44),
+    _TmnxCohOptPortRxPolarDepLossMin_Type()
+)
+tmnxCohOptPortRxPolarDepLossMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLossMin.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLossMin.setUnits("0.1 dB")
+_TmnxCohOptPortRxPolarDepLossMax_Type = Gauge32
+_TmnxCohOptPortRxPolarDepLossMax_Object = MibTableColumn
+tmnxCohOptPortRxPolarDepLossMax = _TmnxCohOptPortRxPolarDepLossMax_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 45),
+    _TmnxCohOptPortRxPolarDepLossMax_Type()
+)
+tmnxCohOptPortRxPolarDepLossMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLossMax.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxPolarDepLossMax.setUnits("0.1 dB")
+_TmnxCohOptPortRxSopRoc_Type = Integer32
+_TmnxCohOptPortRxSopRoc_Object = MibTableColumn
+tmnxCohOptPortRxSopRoc = _TmnxCohOptPortRxSopRoc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 46),
+    _TmnxCohOptPortRxSopRoc_Type()
+)
+tmnxCohOptPortRxSopRoc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRoc.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRoc.setUnits("0.1 krads/s")
+_TmnxCohOptPortRxSopRocAvg_Type = Integer32
+_TmnxCohOptPortRxSopRocAvg_Object = MibTableColumn
+tmnxCohOptPortRxSopRocAvg = _TmnxCohOptPortRxSopRocAvg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 47),
+    _TmnxCohOptPortRxSopRocAvg_Type()
+)
+tmnxCohOptPortRxSopRocAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRocAvg.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRocAvg.setUnits("0.1 krads/s")
+_TmnxCohOptPortRxSopRocMin_Type = Integer32
+_TmnxCohOptPortRxSopRocMin_Object = MibTableColumn
+tmnxCohOptPortRxSopRocMin = _TmnxCohOptPortRxSopRocMin_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 48),
+    _TmnxCohOptPortRxSopRocMin_Type()
+)
+tmnxCohOptPortRxSopRocMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRocMin.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRocMin.setUnits("0.1 krads/s")
+_TmnxCohOptPortRxSopRocMax_Type = Integer32
+_TmnxCohOptPortRxSopRocMax_Object = MibTableColumn
+tmnxCohOptPortRxSopRocMax = _TmnxCohOptPortRxSopRocMax_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 49),
+    _TmnxCohOptPortRxSopRocMax_Type()
+)
+tmnxCohOptPortRxSopRocMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRocMax.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxSopRocMax.setUnits("0.1 krads/s")
+_TmnxCohOptPortRxMediaFERC_Type = CounterBasedGauge64
+_TmnxCohOptPortRxMediaFERC_Object = MibTableColumn
+tmnxCohOptPortRxMediaFERC = _TmnxCohOptPortRxMediaFERC_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 50),
+    _TmnxCohOptPortRxMediaFERC_Type()
+)
+tmnxCohOptPortRxMediaFERC.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxMediaFERC.setStatus("current")
+_TmnxCohOptPortRxMediaFERCAvg_Type = CounterBasedGauge64
+_TmnxCohOptPortRxMediaFERCAvg_Object = MibTableColumn
+tmnxCohOptPortRxMediaFERCAvg = _TmnxCohOptPortRxMediaFERCAvg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 51),
+    _TmnxCohOptPortRxMediaFERCAvg_Type()
+)
+tmnxCohOptPortRxMediaFERCAvg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxMediaFERCAvg.setStatus("current")
+_TmnxCohOptPortRxMediaFERCMin_Type = CounterBasedGauge64
+_TmnxCohOptPortRxMediaFERCMin_Object = MibTableColumn
+tmnxCohOptPortRxMediaFERCMin = _TmnxCohOptPortRxMediaFERCMin_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 52),
+    _TmnxCohOptPortRxMediaFERCMin_Type()
+)
+tmnxCohOptPortRxMediaFERCMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxMediaFERCMin.setStatus("current")
+_TmnxCohOptPortRxMediaFERCMax_Type = CounterBasedGauge64
+_TmnxCohOptPortRxMediaFERCMax_Object = MibTableColumn
+tmnxCohOptPortRxMediaFERCMax = _TmnxCohOptPortRxMediaFERCMax_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 53),
+    _TmnxCohOptPortRxMediaFERCMax_Type()
+)
+tmnxCohOptPortRxMediaFERCMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCohOptPortRxMediaFERCMax.setStatus("current")
+
+
+class _TmnxPortDwdmSupportedStats_Type(Bits):
+    """Custom type tmnxPortDwdmSupportedStats based on Bits"""
+    namedValues = NamedValues(
+        *(("rxTotalPower", 0),
+          ("rxPolarDepLoss", 1),
+          ("rxSopRoc", 2),
+          ("rxMediaFERC", 3))
+    )
+
+_TmnxPortDwdmSupportedStats_Type.__name__ = "Bits"
+_TmnxPortDwdmSupportedStats_Object = MibTableColumn
+tmnxPortDwdmSupportedStats = _TmnxPortDwdmSupportedStats_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 8, 1, 54),
+    _TmnxPortDwdmSupportedStats_Type()
+)
+tmnxPortDwdmSupportedStats.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDwdmSupportedStats.setStatus("current")
 _TmnxPortEgrAggStatsTable_Object = MibTable
 tmnxPortEgrAggStatsTable = _TmnxPortEgrAggStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 9)
@@ -27096,6 +27300,15 @@ tFwdEngDRNeedsICMP = _TFwdEngDRNeedsICMP_Object(
 tFwdEngDRNeedsICMP.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tFwdEngDRNeedsICMP.setStatus("current")
+_TFwdEngDRUnknownLabeledPkt_Type = Counter64
+_TFwdEngDRUnknownLabeledPkt_Object = MibTableColumn
+tFwdEngDRUnknownLabeledPkt = _TFwdEngDRUnknownLabeledPkt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 11, 1, 14),
+    _TFwdEngDRUnknownLabeledPkt_Type()
+)
+tFwdEngDRUnknownLabeledPkt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFwdEngDRUnknownLabeledPkt.setStatus("current")
 _TmnxPortStatsTable_Object = MibTable
 tmnxPortStatsTable = _TmnxPortStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 12)
@@ -27655,6 +27868,24 @@ tmnxPortDcpFpStaticPlcrDepth = _TmnxPortDcpFpStaticPlcrDepth_Object(
 tmnxPortDcpFpStaticPlcrDepth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortDcpFpStaticPlcrDepth.setStatus("current")
+_TmnxPortDcpFpStaticTotalExcdCnt_Type = Counter64
+_TmnxPortDcpFpStaticTotalExcdCnt_Object = MibTableColumn
+tmnxPortDcpFpStaticTotalExcdCnt = _TmnxPortDcpFpStaticTotalExcdCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 16, 1, 13),
+    _TmnxPortDcpFpStaticTotalExcdCnt_Type()
+)
+tmnxPortDcpFpStaticTotalExcdCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpStaticTotalExcdCnt.setStatus("current")
+_TmnxPortDcpFpStaticExtCnfrmStCnt_Type = Counter32
+_TmnxPortDcpFpStaticExtCnfrmStCnt_Object = MibTableColumn
+tmnxPortDcpFpStaticExtCnfrmStCnt = _TmnxPortDcpFpStaticExtCnfrmStCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 16, 1, 14),
+    _TmnxPortDcpFpStaticExtCnfrmStCnt_Type()
+)
+tmnxPortDcpFpStaticExtCnfrmStCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpStaticExtCnfrmStCnt.setStatus("current")
 _TmnxPortDcpFpDynStatTable_Object = MibTable
 tmnxPortDcpFpDynStatTable = _TmnxPortDcpFpDynStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 17)
@@ -27814,6 +28045,24 @@ tmnxPortDcpFpDynPlcrDepth = _TmnxPortDcpFpDynPlcrDepth_Object(
 tmnxPortDcpFpDynPlcrDepth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortDcpFpDynPlcrDepth.setStatus("current")
+_TmnxPortDcpFpDynTotalExcdCount_Type = Counter64
+_TmnxPortDcpFpDynTotalExcdCount_Object = MibTableColumn
+tmnxPortDcpFpDynTotalExcdCount = _TmnxPortDcpFpDynTotalExcdCount_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 17, 1, 14),
+    _TmnxPortDcpFpDynTotalExcdCount_Type()
+)
+tmnxPortDcpFpDynTotalExcdCount.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpDynTotalExcdCount.setStatus("current")
+_TmnxPortDcpFpDynExtCnfrmStCnt_Type = Counter32
+_TmnxPortDcpFpDynExtCnfrmStCnt_Object = MibTableColumn
+tmnxPortDcpFpDynExtCnfrmStCnt = _TmnxPortDcpFpDynExtCnfrmStCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 17, 1, 15),
+    _TmnxPortDcpFpDynExtCnfrmStCnt_Type()
+)
+tmnxPortDcpFpDynExtCnfrmStCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpDynExtCnfrmStCnt.setStatus("current")
 _TmnxPortDcpFpLocMonStatTable_Object = MibTable
 tmnxPortDcpFpLocMonStatTable = _TmnxPortDcpFpLocMonStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 18)
@@ -27951,6 +28200,24 @@ tmnxPortDcpFpLocMonPlcrDepth = _TmnxPortDcpFpLocMonPlcrDepth_Object(
 tmnxPortDcpFpLocMonPlcrDepth.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPortDcpFpLocMonPlcrDepth.setStatus("current")
+_TmnxPortDcpFpLocMonTotalExcdCnt_Type = Counter64
+_TmnxPortDcpFpLocMonTotalExcdCnt_Object = MibTableColumn
+tmnxPortDcpFpLocMonTotalExcdCnt = _TmnxPortDcpFpLocMonTotalExcdCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 18, 1, 13),
+    _TmnxPortDcpFpLocMonTotalExcdCnt_Type()
+)
+tmnxPortDcpFpLocMonTotalExcdCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpLocMonTotalExcdCnt.setStatus("current")
+_TmnxPortDcpFpLocMonExtCnfrmStCnt_Type = Counter32
+_TmnxPortDcpFpLocMonExtCnfrmStCnt_Object = MibTableColumn
+tmnxPortDcpFpLocMonExtCnfrmStCnt = _TmnxPortDcpFpLocMonExtCnfrmStCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 18, 1, 14),
+    _TmnxPortDcpFpLocMonExtCnfrmStCnt_Type()
+)
+tmnxPortDcpFpLocMonExtCnfrmStCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpLocMonExtCnfrmStCnt.setStatus("current")
 _TmnxPortSharedQStatsTable_Object = MibTable
 tmnxPortSharedQStatsTable = _TmnxPortSharedQStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 19)
@@ -28203,6 +28470,15 @@ tPortEgrHAShpSchdAlgScalngColor = _TPortEgrHAShpSchdAlgScalngColor_Object(
 tPortEgrHAShpSchdAlgScalngColor.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tPortEgrHAShpSchdAlgScalngColor.setStatus("current")
+_TPortEgrHAShpSchdNumNonMgdSMbrs_Type = Counter32
+_TPortEgrHAShpSchdNumNonMgdSMbrs_Object = MibTableColumn
+tPortEgrHAShpSchdNumNonMgdSMbrs = _TPortEgrHAShpSchdNumNonMgdSMbrs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 20, 1, 3),
+    _TPortEgrHAShpSchdNumNonMgdSMbrs_Type()
+)
+tPortEgrHAShpSchdNumNonMgdSMbrs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdNumNonMgdSMbrs.setStatus("current")
 _TmnxPortDwdmStatsTable_Object = MibTable
 tmnxPortDwdmStatsTable = _TmnxPortDwdmStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 21)
@@ -28297,6 +28573,595 @@ if mibBuilder.loadTexts:
     tmnxPortDwdmFineTuningRange.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxPortDwdmFineTuningRange.setUnits("megahertz")
+_TPortEgrHAShpSchdStatsTable_Object = MibTable
+tPortEgrHAShpSchdStatsTable = _TPortEgrHAShpSchdStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22)
+)
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStatsTable.setStatus("current")
+_TPortEgrHAShpSchdStatsEntry_Object = MibTableRow
+tPortEgrHAShpSchdStatsEntry = _TPortEgrHAShpSchdStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1)
+)
+tPortEgrHAShpSchdStatsEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+    (0, "TIMETRA-PORT-MIB", "tPortEgrHAShpSchdStSCls"),
+)
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStatsEntry.setStatus("current")
+
+
+class _TPortEgrHAShpSchdStSCls_Type(Unsigned32):
+    """Custom type tPortEgrHAShpSchdStSCls based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 6),
+        ValueRangeConstraint(4294967295, 4294967295),
+    )
+
+
+_TPortEgrHAShpSchdStSCls_Type.__name__ = "Unsigned32"
+_TPortEgrHAShpSchdStSCls_Object = MibTableColumn
+tPortEgrHAShpSchdStSCls = _TPortEgrHAShpSchdStSCls_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1, 1),
+    _TPortEgrHAShpSchdStSCls_Type()
+)
+tPortEgrHAShpSchdStSCls.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStSCls.setStatus("current")
+_TPortEgrHAShpSchdSLstClrdTime_Type = TimeStamp
+_TPortEgrHAShpSchdSLstClrdTime_Object = MibTableColumn
+tPortEgrHAShpSchdSLstClrdTime = _TPortEgrHAShpSchdSLstClrdTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1, 2),
+    _TPortEgrHAShpSchdSLstClrdTime_Type()
+)
+tPortEgrHAShpSchdSLstClrdTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdSLstClrdTime.setStatus("current")
+_TPortEgrHAShpSchdStSClsFwdPkt_Type = Counter64
+_TPortEgrHAShpSchdStSClsFwdPkt_Object = MibTableColumn
+tPortEgrHAShpSchdStSClsFwdPkt = _TPortEgrHAShpSchdStSClsFwdPkt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1, 3),
+    _TPortEgrHAShpSchdStSClsFwdPkt_Type()
+)
+tPortEgrHAShpSchdStSClsFwdPkt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStSClsFwdPkt.setStatus("current")
+_TPortEgrHAShpSchdStSClsFwdOct_Type = Counter64
+_TPortEgrHAShpSchdStSClsFwdOct_Object = MibTableColumn
+tPortEgrHAShpSchdStSClsFwdOct = _TPortEgrHAShpSchdStSClsFwdOct_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1, 4),
+    _TPortEgrHAShpSchdStSClsFwdOct_Type()
+)
+tPortEgrHAShpSchdStSClsFwdOct.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStSClsFwdOct.setStatus("current")
+_TPortEgrHAShpSchdStSClsDpdPkt_Type = Counter64
+_TPortEgrHAShpSchdStSClsDpdPkt_Object = MibTableColumn
+tPortEgrHAShpSchdStSClsDpdPkt = _TPortEgrHAShpSchdStSClsDpdPkt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1, 5),
+    _TPortEgrHAShpSchdStSClsDpdPkt_Type()
+)
+tPortEgrHAShpSchdStSClsDpdPkt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStSClsDpdPkt.setStatus("current")
+_TPortEgrHAShpSchdStSClsDpdOct_Type = Counter64
+_TPortEgrHAShpSchdStSClsDpdOct_Object = MibTableColumn
+tPortEgrHAShpSchdStSClsDpdOct = _TPortEgrHAShpSchdStSClsDpdOct_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 22, 1, 6),
+    _TPortEgrHAShpSchdStSClsDpdOct_Type()
+)
+tPortEgrHAShpSchdStSClsDpdOct.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdStSClsDpdOct.setStatus("current")
+_TPortEgrHAShpSchdMonThrTable_Object = MibTable
+tPortEgrHAShpSchdMonThrTable = _TPortEgrHAShpSchdMonThrTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 23)
+)
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdMonThrTable.setStatus("current")
+_TPortEgrHAShpSchdMonThrEntry_Object = MibTableRow
+tPortEgrHAShpSchdMonThrEntry = _TPortEgrHAShpSchdMonThrEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 23, 1)
+)
+tPortEgrHAShpSchdMonThrEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+)
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdMonThrEntry.setStatus("current")
+_TmnxPortEgrHASSchdMonThrPExdCnt_Type = Counter32
+_TmnxPortEgrHASSchdMonThrPExdCnt_Object = MibTableColumn
+tmnxPortEgrHASSchdMonThrPExdCnt = _TmnxPortEgrHASSchdMonThrPExdCnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 23, 1, 1),
+    _TmnxPortEgrHASSchdMonThrPExdCnt_Type()
+)
+tmnxPortEgrHASSchdMonThrPExdCnt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEgrHASSchdMonThrPExdCnt.setStatus("current")
+_TmnxPortEgrHASSchdMonThrStrtTime_Type = TimeStamp
+_TmnxPortEgrHASSchdMonThrStrtTime_Object = MibTableColumn
+tmnxPortEgrHASSchdMonThrStrtTime = _TmnxPortEgrHASSchdMonThrStrtTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 23, 1, 2),
+    _TmnxPortEgrHASSchdMonThrStrtTime_Type()
+)
+tmnxPortEgrHASSchdMonThrStrtTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEgrHASSchdMonThrStrtTime.setStatus("current")
+_TmnxPortEgrHASSchdMonThrEndTime_Type = TimeStamp
+_TmnxPortEgrHASSchdMonThrEndTime_Object = MibTableColumn
+tmnxPortEgrHASSchdMonThrEndTime = _TmnxPortEgrHASSchdMonThrEndTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 23, 1, 3),
+    _TmnxPortEgrHASSchdMonThrEndTime_Type()
+)
+tmnxPortEgrHASSchdMonThrEndTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEgrHASSchdMonThrEndTime.setStatus("current")
+_TmnxPortEgrHASSchdMonThrTotSmpls_Type = Counter32
+_TmnxPortEgrHASSchdMonThrTotSmpls_Object = MibTableColumn
+tmnxPortEgrHASSchdMonThrTotSmpls = _TmnxPortEgrHASSchdMonThrTotSmpls_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 23, 1, 4),
+    _TmnxPortEgrHASSchdMonThrTotSmpls_Type()
+)
+tmnxPortEgrHASSchdMonThrTotSmpls.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortEgrHASSchdMonThrTotSmpls.setStatus("current")
+_TPortEgrHAShpSchdInfoTable_Object = MibTable
+tPortEgrHAShpSchdInfoTable = _TPortEgrHAShpSchdInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 24)
+)
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdInfoTable.setStatus("current")
+_TPortEgrHAShpSchdInfoEntry_Object = MibTableRow
+tPortEgrHAShpSchdInfoEntry = _TPortEgrHAShpSchdInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 24, 1)
+)
+tPortEgrHAShpSchdInfoEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+)
+if mibBuilder.loadTexts:
+    tPortEgrHAShpSchdInfoEntry.setStatus("current")
+_TPortEgrHASSchdNumAggShprMbrs_Type = Counter32
+_TPortEgrHASSchdNumAggShprMbrs_Object = MibTableColumn
+tPortEgrHASSchdNumAggShprMbrs = _TPortEgrHASSchdNumAggShprMbrs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 24, 1, 1),
+    _TPortEgrHASSchdNumAggShprMbrs_Type()
+)
+tPortEgrHASSchdNumAggShprMbrs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHASSchdNumAggShprMbrs.setStatus("current")
+_TPortEgrHASSchdAlgScalngColor_Type = TmnxAggShaperSchdAlgColorType
+_TPortEgrHASSchdAlgScalngColor_Object = MibTableColumn
+tPortEgrHASSchdAlgScalngColor = _TPortEgrHASSchdAlgScalngColor_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 24, 1, 2),
+    _TPortEgrHASSchdAlgScalngColor_Type()
+)
+tPortEgrHASSchdAlgScalngColor.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHASSchdAlgScalngColor.setStatus("current")
+_TPortEgrHASSchdNumNonMgdSMbrs_Type = Counter32
+_TPortEgrHASSchdNumNonMgdSMbrs_Object = MibTableColumn
+tPortEgrHASSchdNumNonMgdSMbrs = _TPortEgrHASSchdNumNonMgdSMbrs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 24, 1, 3),
+    _TPortEgrHASSchdNumNonMgdSMbrs_Type()
+)
+tPortEgrHASSchdNumNonMgdSMbrs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortEgrHASSchdNumNonMgdSMbrs.setStatus("current")
+_TmnxPortAggQueueStatsTable_Object = MibTable
+tmnxPortAggQueueStatsTable = _TmnxPortAggQueueStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25)
+)
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueStatsTable.setStatus("current")
+_TmnxPortAggQueueStatsEntry_Object = MibTableRow
+tmnxPortAggQueueStatsEntry = _TmnxPortAggQueueStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1)
+)
+tmnxPortAggQueueStatsEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+)
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueStatsEntry.setStatus("current")
+_TmnxPortAggQueueIngPktsFwd_Type = Counter64
+_TmnxPortAggQueueIngPktsFwd_Object = MibTableColumn
+tmnxPortAggQueueIngPktsFwd = _TmnxPortAggQueueIngPktsFwd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 1),
+    _TmnxPortAggQueueIngPktsFwd_Type()
+)
+tmnxPortAggQueueIngPktsFwd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueIngPktsFwd.setStatus("current")
+_TmnxPortAggQueueEgrPktsFwd_Type = Counter64
+_TmnxPortAggQueueEgrPktsFwd_Object = MibTableColumn
+tmnxPortAggQueueEgrPktsFwd = _TmnxPortAggQueueEgrPktsFwd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 2),
+    _TmnxPortAggQueueEgrPktsFwd_Type()
+)
+tmnxPortAggQueueEgrPktsFwd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueEgrPktsFwd.setStatus("current")
+_TmnxPortAggQueueIngOctsFwd_Type = Counter64
+_TmnxPortAggQueueIngOctsFwd_Object = MibTableColumn
+tmnxPortAggQueueIngOctsFwd = _TmnxPortAggQueueIngOctsFwd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 3),
+    _TmnxPortAggQueueIngOctsFwd_Type()
+)
+tmnxPortAggQueueIngOctsFwd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueIngOctsFwd.setStatus("current")
+_TmnxPortAggQueueEgrOctsFwd_Type = Counter64
+_TmnxPortAggQueueEgrOctsFwd_Object = MibTableColumn
+tmnxPortAggQueueEgrOctsFwd = _TmnxPortAggQueueEgrOctsFwd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 4),
+    _TmnxPortAggQueueEgrOctsFwd_Type()
+)
+tmnxPortAggQueueEgrOctsFwd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueEgrOctsFwd.setStatus("current")
+_TmnxPortAggQueueIngPktsDrop_Type = Counter64
+_TmnxPortAggQueueIngPktsDrop_Object = MibTableColumn
+tmnxPortAggQueueIngPktsDrop = _TmnxPortAggQueueIngPktsDrop_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 5),
+    _TmnxPortAggQueueIngPktsDrop_Type()
+)
+tmnxPortAggQueueIngPktsDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueIngPktsDrop.setStatus("current")
+_TmnxPortAggQueueEgrPktsDrop_Type = Counter64
+_TmnxPortAggQueueEgrPktsDrop_Object = MibTableColumn
+tmnxPortAggQueueEgrPktsDrop = _TmnxPortAggQueueEgrPktsDrop_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 6),
+    _TmnxPortAggQueueEgrPktsDrop_Type()
+)
+tmnxPortAggQueueEgrPktsDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueEgrPktsDrop.setStatus("current")
+_TmnxPortAggQueueIngOctsDrop_Type = Counter64
+_TmnxPortAggQueueIngOctsDrop_Object = MibTableColumn
+tmnxPortAggQueueIngOctsDrop = _TmnxPortAggQueueIngOctsDrop_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 7),
+    _TmnxPortAggQueueIngOctsDrop_Type()
+)
+tmnxPortAggQueueIngOctsDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueIngOctsDrop.setStatus("current")
+_TmnxPortAggQueueEgrOctsDrop_Type = Counter64
+_TmnxPortAggQueueEgrOctsDrop_Object = MibTableColumn
+tmnxPortAggQueueEgrOctsDrop = _TmnxPortAggQueueEgrOctsDrop_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 8),
+    _TmnxPortAggQueueEgrOctsDrop_Type()
+)
+tmnxPortAggQueueEgrOctsDrop.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueEgrOctsDrop.setStatus("current")
+_TmnxPortAggQueueLastClearedTime_Type = TimeStamp
+_TmnxPortAggQueueLastClearedTime_Object = MibTableColumn
+tmnxPortAggQueueLastClearedTime = _TmnxPortAggQueueLastClearedTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 9),
+    _TmnxPortAggQueueLastClearedTime_Type()
+)
+tmnxPortAggQueueLastClearedTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueLastClearedTime.setStatus("current")
+_TmnxPortAggQueueLastFetchedTime_Type = TimeStamp
+_TmnxPortAggQueueLastFetchedTime_Object = MibTableColumn
+tmnxPortAggQueueLastFetchedTime = _TmnxPortAggQueueLastFetchedTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 25, 1, 10),
+    _TmnxPortAggQueueLastFetchedTime_Type()
+)
+tmnxPortAggQueueLastFetchedTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPortAggQueueLastFetchedTime.setStatus("current")
+_TPortAccEgrQGrpAggShaperTable_Object = MibTable
+tPortAccEgrQGrpAggShaperTable = _TPortAccEgrQGrpAggShaperTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26)
+)
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShaperTable.setStatus("current")
+_TPortAccEgrQGrpAggShaperEntry_Object = MibTableRow
+tPortAccEgrQGrpAggShaperEntry = _TPortAccEgrQGrpAggShaperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1)
+)
+tPortAccEgrQGrpAggShaperEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpName"),
+    (0, "TIMETRA-PORT-MIB", "tPortAccEgrQGrpInstanceId"),
+)
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShaperEntry.setStatus("current")
+_TPortAccEgrQGrpAggShpSchdAssgnd_Type = TruthValue
+_TPortAccEgrQGrpAggShpSchdAssgnd_Object = MibTableColumn
+tPortAccEgrQGrpAggShpSchdAssgnd = _TPortAccEgrQGrpAggShpSchdAssgnd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 1),
+    _TPortAccEgrQGrpAggShpSchdAssgnd_Type()
+)
+tPortAccEgrQGrpAggShpSchdAssgnd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpSchdAssgnd.setStatus("current")
+_TPortAccEgrQGrpAggShpAssgndRate_Type = Counter32
+_TPortAccEgrQGrpAggShpAssgndRate_Object = MibTableColumn
+tPortAccEgrQGrpAggShpAssgndRate = _TPortAccEgrQGrpAggShpAssgndRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 2),
+    _TPortAccEgrQGrpAggShpAssgndRate_Type()
+)
+tPortAccEgrQGrpAggShpAssgndRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpAssgndRate.setStatus("current")
+_TPortAccEgrQGrpAggShpOperRate_Type = Counter32
+_TPortAccEgrQGrpAggShpOperRate_Object = MibTableColumn
+tPortAccEgrQGrpAggShpOperRate = _TPortAccEgrQGrpAggShpOperRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 3),
+    _TPortAccEgrQGrpAggShpOperRate_Type()
+)
+tPortAccEgrQGrpAggShpOperRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpOperRate.setStatus("current")
+_TPortAccEgrQGrpAggShpConsmdRate_Type = Counter32
+_TPortAccEgrQGrpAggShpConsmdRate_Object = MibTableColumn
+tPortAccEgrQGrpAggShpConsmdRate = _TPortAccEgrQGrpAggShpConsmdRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 4),
+    _TPortAccEgrQGrpAggShpConsmdRate_Type()
+)
+tPortAccEgrQGrpAggShpConsmdRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpConsmdRate.setStatus("current")
+_TPortAccEgrQGrpAggShpAvgFrmOvhd_Type = Integer32
+_TPortAccEgrQGrpAggShpAvgFrmOvhd_Object = MibTableColumn
+tPortAccEgrQGrpAggShpAvgFrmOvhd = _TPortAccEgrQGrpAggShpAvgFrmOvhd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 5),
+    _TPortAccEgrQGrpAggShpAvgFrmOvhd_Type()
+)
+tPortAccEgrQGrpAggShpAvgFrmOvhd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpAvgFrmOvhd.setStatus("current")
+_TPortAccEgrQGrpAggShpAfoRlTime_Type = TruthValue
+_TPortAccEgrQGrpAggShpAfoRlTime_Object = MibTableColumn
+tPortAccEgrQGrpAggShpAfoRlTime = _TPortAccEgrQGrpAggShpAfoRlTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 6),
+    _TPortAccEgrQGrpAggShpAfoRlTime_Type()
+)
+tPortAccEgrQGrpAggShpAfoRlTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpAfoRlTime.setStatus("current")
+_TPortAccEgrQGrpAggShpSchdActive_Type = TruthValue
+_TPortAccEgrQGrpAggShpSchdActive_Object = MibTableColumn
+tPortAccEgrQGrpAggShpSchdActive = _TPortAccEgrQGrpAggShpSchdActive_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 7),
+    _TPortAccEgrQGrpAggShpSchdActive_Type()
+)
+tPortAccEgrQGrpAggShpSchdActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpSchdActive.setStatus("current")
+_TPortAccEgrQGrpAggShpSchdRuning_Type = TruthValue
+_TPortAccEgrQGrpAggShpSchdRuning_Object = MibTableColumn
+tPortAccEgrQGrpAggShpSchdRuning = _TPortAccEgrQGrpAggShpSchdRuning_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 8),
+    _TPortAccEgrQGrpAggShpSchdRuning_Type()
+)
+tPortAccEgrQGrpAggShpSchdRuning.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpSchdRuning.setStatus("current")
+_TPortAccEgrQGrpAggShpInvlClsUse_Type = TruthValue
+_TPortAccEgrQGrpAggShpInvlClsUse_Object = MibTableColumn
+tPortAccEgrQGrpAggShpInvlClsUse = _TPortAccEgrQGrpAggShpInvlClsUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 9),
+    _TPortAccEgrQGrpAggShpInvlClsUse_Type()
+)
+tPortAccEgrQGrpAggShpInvlClsUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpInvlClsUse.setStatus("current")
+_TPortAccEgrQGrpAggShpBurstLimit_Type = Integer32
+_TPortAccEgrQGrpAggShpBurstLimit_Object = MibTableColumn
+tPortAccEgrQGrpAggShpBurstLimit = _TPortAccEgrQGrpAggShpBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 10),
+    _TPortAccEgrQGrpAggShpBurstLimit_Type()
+)
+tPortAccEgrQGrpAggShpBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpBurstLimit.setStatus("current")
+_TPortAccEgrQGrpAggShpDepth_Type = Unsigned32
+_TPortAccEgrQGrpAggShpDepth_Object = MibTableColumn
+tPortAccEgrQGrpAggShpDepth = _TPortAccEgrQGrpAggShpDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 11),
+    _TPortAccEgrQGrpAggShpDepth_Type()
+)
+tPortAccEgrQGrpAggShpDepth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpDepth.setStatus("current")
+_TPortAccEgrQGrpAggShpPacketMode_Type = TmnxPacketMode
+_TPortAccEgrQGrpAggShpPacketMode_Object = MibTableColumn
+tPortAccEgrQGrpAggShpPacketMode = _TPortAccEgrQGrpAggShpPacketMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 12),
+    _TPortAccEgrQGrpAggShpPacketMode_Type()
+)
+tPortAccEgrQGrpAggShpPacketMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpPacketMode.setStatus("current")
+_TPortAccEgrQGrpAggShpOutOfDate_Type = TruthValue
+_TPortAccEgrQGrpAggShpOutOfDate_Object = MibTableColumn
+tPortAccEgrQGrpAggShpOutOfDate = _TPortAccEgrQGrpAggShpOutOfDate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 13),
+    _TPortAccEgrQGrpAggShpOutOfDate_Type()
+)
+tPortAccEgrQGrpAggShpOutOfDate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpOutOfDate.setStatus("current")
+_TPortAccEgrQGrpAggShpQSetSize_Type = Unsigned32
+_TPortAccEgrQGrpAggShpQSetSize_Object = MibTableColumn
+tPortAccEgrQGrpAggShpQSetSize = _TPortAccEgrQGrpAggShpQSetSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 14),
+    _TPortAccEgrQGrpAggShpQSetSize_Type()
+)
+tPortAccEgrQGrpAggShpQSetSize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpQSetSize.setStatus("current")
+_TPortAccEgrQGrpAggShpQSetSzOvr_Type = TruthValue
+_TPortAccEgrQGrpAggShpQSetSzOvr_Object = MibTableColumn
+tPortAccEgrQGrpAggShpQSetSzOvr = _TPortAccEgrQGrpAggShpQSetSzOvr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 26, 1, 15),
+    _TPortAccEgrQGrpAggShpQSetSzOvr_Type()
+)
+tPortAccEgrQGrpAggShpQSetSzOvr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortAccEgrQGrpAggShpQSetSzOvr.setStatus("current")
+_TPortNetEgrQGrpAggShaperTable_Object = MibTable
+tPortNetEgrQGrpAggShaperTable = _TPortNetEgrQGrpAggShaperTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27)
+)
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShaperTable.setStatus("current")
+_TPortNetEgrQGrpAggShaperEntry_Object = MibTableRow
+tPortNetEgrQGrpAggShaperEntry = _TPortNetEgrQGrpAggShaperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1)
+)
+tPortNetEgrQGrpAggShaperEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-PORT-MIB", "tmnxPortPortID"),
+    (0, "TIMETRA-PORT-MIB", "tPortNetEgrQGrpName"),
+    (0, "TIMETRA-PORT-MIB", "tPortNetEgrQGrpInstanceId"),
+)
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShaperEntry.setStatus("current")
+_TPortNetEgrQGrpAggShpSchdAssgnd_Type = TruthValue
+_TPortNetEgrQGrpAggShpSchdAssgnd_Object = MibTableColumn
+tPortNetEgrQGrpAggShpSchdAssgnd = _TPortNetEgrQGrpAggShpSchdAssgnd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 1),
+    _TPortNetEgrQGrpAggShpSchdAssgnd_Type()
+)
+tPortNetEgrQGrpAggShpSchdAssgnd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpSchdAssgnd.setStatus("current")
+_TPortNetEgrQGrpAggShpAssgndRate_Type = Counter32
+_TPortNetEgrQGrpAggShpAssgndRate_Object = MibTableColumn
+tPortNetEgrQGrpAggShpAssgndRate = _TPortNetEgrQGrpAggShpAssgndRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 2),
+    _TPortNetEgrQGrpAggShpAssgndRate_Type()
+)
+tPortNetEgrQGrpAggShpAssgndRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpAssgndRate.setStatus("current")
+_TPortNetEgrQGrpAggShpOperRate_Type = Counter32
+_TPortNetEgrQGrpAggShpOperRate_Object = MibTableColumn
+tPortNetEgrQGrpAggShpOperRate = _TPortNetEgrQGrpAggShpOperRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 3),
+    _TPortNetEgrQGrpAggShpOperRate_Type()
+)
+tPortNetEgrQGrpAggShpOperRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpOperRate.setStatus("current")
+_TPortNetEgrQGrpAggShpConsmdRate_Type = Counter32
+_TPortNetEgrQGrpAggShpConsmdRate_Object = MibTableColumn
+tPortNetEgrQGrpAggShpConsmdRate = _TPortNetEgrQGrpAggShpConsmdRate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 4),
+    _TPortNetEgrQGrpAggShpConsmdRate_Type()
+)
+tPortNetEgrQGrpAggShpConsmdRate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpConsmdRate.setStatus("current")
+_TPortNetEgrQGrpAggShpAvgFrmOvhd_Type = Integer32
+_TPortNetEgrQGrpAggShpAvgFrmOvhd_Object = MibTableColumn
+tPortNetEgrQGrpAggShpAvgFrmOvhd = _TPortNetEgrQGrpAggShpAvgFrmOvhd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 5),
+    _TPortNetEgrQGrpAggShpAvgFrmOvhd_Type()
+)
+tPortNetEgrQGrpAggShpAvgFrmOvhd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpAvgFrmOvhd.setStatus("current")
+_TPortNetEgrQGrpAggShpAfoRlTime_Type = TruthValue
+_TPortNetEgrQGrpAggShpAfoRlTime_Object = MibTableColumn
+tPortNetEgrQGrpAggShpAfoRlTime = _TPortNetEgrQGrpAggShpAfoRlTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 6),
+    _TPortNetEgrQGrpAggShpAfoRlTime_Type()
+)
+tPortNetEgrQGrpAggShpAfoRlTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpAfoRlTime.setStatus("current")
+_TPortNetEgrQGrpAggShpSchdActive_Type = TruthValue
+_TPortNetEgrQGrpAggShpSchdActive_Object = MibTableColumn
+tPortNetEgrQGrpAggShpSchdActive = _TPortNetEgrQGrpAggShpSchdActive_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 7),
+    _TPortNetEgrQGrpAggShpSchdActive_Type()
+)
+tPortNetEgrQGrpAggShpSchdActive.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpSchdActive.setStatus("current")
+_TPortNetEgrQGrpAggShpSchdRuning_Type = TruthValue
+_TPortNetEgrQGrpAggShpSchdRuning_Object = MibTableColumn
+tPortNetEgrQGrpAggShpSchdRuning = _TPortNetEgrQGrpAggShpSchdRuning_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 8),
+    _TPortNetEgrQGrpAggShpSchdRuning_Type()
+)
+tPortNetEgrQGrpAggShpSchdRuning.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpSchdRuning.setStatus("current")
+_TPortNetEgrQGrpAggShpInvlClsUse_Type = TruthValue
+_TPortNetEgrQGrpAggShpInvlClsUse_Object = MibTableColumn
+tPortNetEgrQGrpAggShpInvlClsUse = _TPortNetEgrQGrpAggShpInvlClsUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 9),
+    _TPortNetEgrQGrpAggShpInvlClsUse_Type()
+)
+tPortNetEgrQGrpAggShpInvlClsUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpInvlClsUse.setStatus("current")
+_TPortNetEgrQGrpAggShpBurstLimit_Type = Integer32
+_TPortNetEgrQGrpAggShpBurstLimit_Object = MibTableColumn
+tPortNetEgrQGrpAggShpBurstLimit = _TPortNetEgrQGrpAggShpBurstLimit_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 10),
+    _TPortNetEgrQGrpAggShpBurstLimit_Type()
+)
+tPortNetEgrQGrpAggShpBurstLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpBurstLimit.setStatus("current")
+_TPortNetEgrQGrpAggShpDepth_Type = Unsigned32
+_TPortNetEgrQGrpAggShpDepth_Object = MibTableColumn
+tPortNetEgrQGrpAggShpDepth = _TPortNetEgrQGrpAggShpDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 11),
+    _TPortNetEgrQGrpAggShpDepth_Type()
+)
+tPortNetEgrQGrpAggShpDepth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpDepth.setStatus("current")
+_TPortNetEgrQGrpAggShpPacketMode_Type = TmnxPacketMode
+_TPortNetEgrQGrpAggShpPacketMode_Object = MibTableColumn
+tPortNetEgrQGrpAggShpPacketMode = _TPortNetEgrQGrpAggShpPacketMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 12),
+    _TPortNetEgrQGrpAggShpPacketMode_Type()
+)
+tPortNetEgrQGrpAggShpPacketMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpPacketMode.setStatus("current")
+_TPortNetEgrQGrpAggShpOutOfDate_Type = TruthValue
+_TPortNetEgrQGrpAggShpOutOfDate_Object = MibTableColumn
+tPortNetEgrQGrpAggShpOutOfDate = _TPortNetEgrQGrpAggShpOutOfDate_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 13),
+    _TPortNetEgrQGrpAggShpOutOfDate_Type()
+)
+tPortNetEgrQGrpAggShpOutOfDate.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpOutOfDate.setStatus("current")
+_TPortNetEgrQGrpAggShpQSetSize_Type = Unsigned32
+_TPortNetEgrQGrpAggShpQSetSize_Object = MibTableColumn
+tPortNetEgrQGrpAggShpQSetSize = _TPortNetEgrQGrpAggShpQSetSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 14),
+    _TPortNetEgrQGrpAggShpQSetSize_Type()
+)
+tPortNetEgrQGrpAggShpQSetSize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpQSetSize.setStatus("current")
+_TPortNetEgrQGrpAggShpQSetSzOvr_Type = TruthValue
+_TPortNetEgrQGrpAggShpQSetSzOvr_Object = MibTableColumn
+tPortNetEgrQGrpAggShpQSetSzOvr = _TPortNetEgrQGrpAggShpQSetSzOvr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 12, 27, 1, 15),
+    _TPortNetEgrQGrpAggShpQSetSzOvr_Type()
+)
+tPortNetEgrQGrpAggShpQSetSzOvr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tPortNetEgrQGrpAggShpQSetSzOvr.setStatus("current")
 _TmnxPortNotifyPrefix_ObjectIdentity = ObjectIdentity
 tmnxPortNotifyPrefix = _TmnxPortNotifyPrefix_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2)
@@ -28335,11 +29200,6 @@ tmnxPortTransceiverEntry.registerAugmentions(
      "tmnxPortTransceiverStatsEntry")
 )
 tmnxPortTransceiverStatsEntry.setIndexNames(*tmnxPortTransceiverEntry.getIndexNames())
-tmnxCiscoHDLCEntry.registerAugmentions(
-    ("TIMETRA-PORT-MIB",
-     "tmnxCiscoHDLCStatsEntry")
-)
-tmnxCiscoHDLCStatsEntry.setIndexNames(*tmnxCiscoHDLCEntry.getIndexNames())
 tmnxPortEntry.registerAugmentions(
     ("TIMETRA-PORT-MIB",
      "tmnxPortStatsEntry")
@@ -28352,26 +29212,6 @@ tmnxPortDwdmConfigEntry.registerAugmentions(
 tmnxPortDwdmStatsEntry.setIndexNames(*tmnxPortDwdmConfigEntry.getIndexNames())
 
 # Managed Objects groups
-
-tmnxPortFRGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 5)
-)
-tmnxPortFRGroup.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxFRDlcmiMode"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiN392Dce"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiN393Dce"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiT392Dce"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiTxStatusEnqMsgs"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiRxStatusEnqMsgs"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiStatusEnqMsgTimeouts"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiTxStatusMsgs"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiRxStatusMsgs"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiStatusMsgTimeouts"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiDiscardedMsgs"),
-        ("TIMETRA-PORT-MIB", "tmnxFRDlcmiInvRxSeqNumMsgs"))
-)
-if mibBuilder.loadTexts:
-    tmnxPortFRGroup.setStatus("current")
 
 tmnxQosAppObjsGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 6)
@@ -28705,24 +29545,6 @@ tmnxPortV3v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxPortV3v0Group.setStatus("obsolete")
 
-tmnxCiscoHDLCGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 26)
-)
-tmnxCiscoHDLCGroup.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxCiscoHDLCKeepAliveInt"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCUpCount"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCDownCount"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCOperState"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCDiscardStatInPkts"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCDiscardStatOutPkts"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCStatInPkts"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCStatOutPkts"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCStatInOctets"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCStatOutOctets"))
-)
-if mibBuilder.loadTexts:
-    tmnxCiscoHDLCGroup.setStatus("current")
-
 tmnxMlBundleV3v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 27)
 )
@@ -28984,7 +29806,7 @@ tmnxMlImaBundleGroup.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaRelDelay"))
 )
 if mibBuilder.loadTexts:
-    tmnxMlImaBundleGroup.setStatus("current")
+    tmnxMlImaBundleGroup.setStatus("obsolete")
 
 tmnx7710PortTDMGroupV3v0 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 34)
@@ -29360,7 +30182,7 @@ tmnxMcMlpppBundleGroup.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsEgressErrPkt"))
 )
 if mibBuilder.loadTexts:
-    tmnxMcMlpppBundleGroup.setStatus("current")
+    tmnxMcMlpppBundleGroup.setStatus("obsolete")
 
 tmnxPortEthernetV6v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 47)
@@ -29424,7 +30246,7 @@ tmnxMlBundleGroupV6v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxBPGrpAssocActiveBundleID"))
 )
 if mibBuilder.loadTexts:
-    tmnxMlBundleGroupV6v0.setStatus("current")
+    tmnxMlBundleGroupV6v0.setStatus("obsolete")
 
 tmnxMlpppBundleGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 49)
@@ -29442,36 +30264,13 @@ tmnxMlpppBundleGroup.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxBundleMlpppMagicNumber"))
 )
 if mibBuilder.loadTexts:
-    tmnxMlpppBundleGroup.setStatus("current")
+    tmnxMlpppBundleGroup.setStatus("obsolete")
 
 tmnxHsmdaGroupV6v0 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 51)
 )
 tmnxHsmdaGroupV6v0.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaSchedPlcy"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrTblLastChngd"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrRowStatus"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrLastChanged"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrMaxRate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrGrp1Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrGrp2Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass1Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass1WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass2Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass2WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass3Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass3WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass4Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass4WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass5Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass5WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass6Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass6WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass7Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass7WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass8Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass8WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrShaperTblLastChanged"),
+      *(("TIMETRA-PORT-MIB", "tmnxPortEgrShaperTblLastChanged"),
         ("TIMETRA-PORT-MIB", "tmnxPortEgrShaperRowStatus"),
         ("TIMETRA-PORT-MIB", "tmnxPortEgrShaperLastChanged"),
         ("TIMETRA-PORT-MIB", "tmnxPortEgrShaperRate"))
@@ -29817,29 +30616,7 @@ tmnxMcMfrBundleGroup.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxBundleMemberMlfrDownReason"))
 )
 if mibBuilder.loadTexts:
-    tmnxMcMfrBundleGroup.setStatus("current")
-
-tmnxFrIntfGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 60)
-)
-tmnxFrIntfGroup.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxFrIntfFrf12Mode"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfLinkId"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfLastChanged"))
-)
-if mibBuilder.loadTexts:
-    tmnxFrIntfGroup.setStatus("current")
-
-tmnxFrf12IntfGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 61)
-)
-tmnxFrf12IntfGroup.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxFrf12IntfFragmentThreshold"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfEgrQoSProfId"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfLastChanged"))
-)
-if mibBuilder.loadTexts:
-    tmnxFrf12IntfGroup.setStatus("current")
+    tmnxMcMfrBundleGroup.setStatus("obsolete")
 
 tmnxPortQStatV7v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 62)
@@ -30079,7 +30856,7 @@ tmnxPortTDMGroupV7v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupBerSfLinkDown"))
 )
 if mibBuilder.loadTexts:
-    tmnxPortTDMGroupV7v0.setStatus("current")
+    tmnxPortTDMGroupV7v0.setStatus("obsolete")
 
 tmnxPortTDME1GroupV6v1 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 69)
@@ -30180,7 +30957,7 @@ tmnxPortATMGroupV7v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxATMIntfVcThreshold"))
 )
 if mibBuilder.loadTexts:
-    tmnxPortATMGroupV7v0.setStatus("current")
+    tmnxPortATMGroupV7v0.setStatus("obsolete")
 
 tmnxPortCEMGroupV8v0 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 75)
@@ -30328,7 +31105,7 @@ tmnxMlpppBundleGroupV7v0.setObjects(
     ("TIMETRA-PORT-MIB", "tmnxBundleMlpppStatelessApsSwo")
 )
 if mibBuilder.loadTexts:
-    tmnxMlpppBundleGroupV7v0.setStatus("current")
+    tmnxMlpppBundleGroupV7v0.setStatus("obsolete")
 
 tmnxOpticalPortGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 82)
@@ -30382,7 +31159,7 @@ tmnxPortATMGroupV9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortATMVpShaperEgrAtd"))
 )
 if mibBuilder.loadTexts:
-    tmnxPortATMGroupV9v0.setStatus("current")
+    tmnxPortATMGroupV9v0.setStatus("obsolete")
 
 tmnxPortVPortV9v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 91)
@@ -30748,37 +31525,6 @@ tmnxPortEthernetV10v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxPortEthernetV10v0Group.setStatus("current")
 
-tmnxHsmdaGroupV10v0 = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 110)
-)
-tmnxHsmdaGroupV10v0.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaSchedPlcy"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrTblLastChngd"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrRowStatus"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrLastChanged"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrMaxRate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrGrp1Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrGrp2Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass1Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass1WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass2Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass2WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass3Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass3WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass4Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass4WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass5Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass5WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass6Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass6WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass7Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass7WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass8Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass8WtInGp"))
-)
-if mibBuilder.loadTexts:
-    tmnxHsmdaGroupV10v0.setStatus("obsolete")
-
 tmnxPortObsoletedV10v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 111)
 )
@@ -30900,79 +31646,6 @@ tmnxCohOptPortStatsGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxCohOptPortStatsGroup.setStatus("current")
-
-tmnxPortEgrHsmdaStatV11v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 119)
-)
-tmnxPortEgrHsmdaStatV11v0Group.setObjects(
-      *(("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfOctL"))
-)
-if mibBuilder.loadTexts:
-    tmnxPortEgrHsmdaStatV11v0Group.setStatus("obsolete")
-
-tmnxPortEgrHsmdaOverV11v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 120)
-)
-tmnxPortEgrHsmdaOverV11v0Group.setObjects(
-      *(("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHsmdaShaperOvr"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHsmdaPktOffOvr"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHsmdaWrrPolicyOvr"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverRowStatus"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverLastChanged"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverAdminPIR"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverSlopePolicy"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverWrrWeight"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverMBS"))
-)
-if mibBuilder.loadTexts:
-    tmnxPortEgrHsmdaOverV11v0Group.setStatus("obsolete")
 
 tmnxPortEthernetV11v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 121)
@@ -32079,6 +32752,18 @@ tmnxPortEtherPhysStatsV19v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxPortEtherPhysStatsV19v0Group.setStatus("current")
 
+tmnxPortNetEgrPpStatsV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 145, 11)
+)
+tmnxPortNetEgrPpStatsV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNetEgressPpUCDroPkts"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNetEgressPpUCDroOcts"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNetEgressPpMCDroPkts"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNetEgressPpMCDroOcts"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortNetEgrPpStatsV23v0Group.setStatus("current")
+
 tmnxPortStatsGroupV20v0 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 146, 1)
 )
@@ -32283,6 +32968,18 @@ tmnxPortDwdmV20v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxPortDwdmV20v0Group.setStatus("current")
 
+tmnxPortAggRateV21v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 147, 1)
+)
+tmnxPortAggRateV21v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggAdaptRule"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggBurstLimit"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggAdaptRule"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggBurstLimit"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortAggRateV21v0Group.setStatus("current")
+
 tPortDCpuProtV21v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 147, 2)
 )
@@ -32325,94 +33022,6 @@ tPortDCpuProtV21v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tPortDCpuProtV21v0Group.setStatus("current")
-
-tPortObsoleteV21v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 147, 3)
-)
-tPortObsoleteV21v0Group.setObjects(
-      *(("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaSchedPlcy"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrTblLastChngd"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrRowStatus"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrLastChanged"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrMaxRate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrGrp1Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrGrp2Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass1Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass1WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass2Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass2WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass3Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass3WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass4Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass4WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass5Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass5WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass6Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass6WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass7Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass7WtInGp"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass8Rate"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaPortSchOvrClass8WtInGp"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatFwdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaQStatDpdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfPkts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfPktH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfPktL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdInProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatFwdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfOcts"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfOctH"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHsmdaCStatDpdOutProfOctL"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHsmdaShaperOvr"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHsmdaPktOffOvr"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHsmdaWrrPolicyOvr"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverRowStatus"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverLastChanged"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverAdminPIR"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverSlopePolicy"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverWrrWeight"),
-        ("TIMETRA-PORT-MIB", "tPortAccEgrHsmdaQOverMBS"))
-)
-if mibBuilder.loadTexts:
-    tPortObsoleteV21v0Group.setStatus("current")
 
 tPortEgrExpObsoleteV21v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 147, 4)
@@ -32720,12 +33329,24 @@ tmnxPortHQosOnLagWredV21v0Grp.setObjects(
 if mibBuilder.loadTexts:
     tmnxPortHQosOnLagWredV21v0Grp.setStatus("current")
 
+tmnxPortPerAggRateV21v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 147, 15)
+)
+tmnxPortPerAggRateV21v0Grp.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortSharedQAggRatePIRPercent"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSharedQAggRateCIRPercent"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSharedQAggRateType"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortPerAggRateV21v0Grp.setStatus("current")
+
 tPortHWAggShaperV22v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148, 1)
 )
 tPortHWAggShaperV22v0Group.setObjects(
       *(("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdNumAggShprMbrs"),
-        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdAlgScalngColor"))
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdAlgScalngColor"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdNumNonMgdSMbrs"))
 )
 if mibBuilder.loadTexts:
     tPortHWAggShaperV22v0Group.setStatus("current")
@@ -32818,6 +33439,612 @@ tmnxPortDwdmObsoleteV22v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxPortDwdmObsoleteV22v0Group.setStatus("current")
+
+tmnxPortHWAggShaperV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148, 7)
+)
+tmnxPortHWAggShaperV22v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortHwAggShaperScheduler"),
+        ("TIMETRA-PORT-MIB", "tmnxPortMonHwAggShaperSch"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdSLstClrdTime"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdStSClsFwdPkt"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdStSClsFwdOct"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdStSClsDpdPkt"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHAShpSchdStSClsDpdOct"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHASSchdMonThrPExdCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHASSchdMonThrStrtTime"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHASSchdMonThrEndTime"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHASSchdMonThrTotSmpls"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHASSchdNumAggShprMbrs"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHASSchdAlgScalngColor"),
+        ("TIMETRA-PORT-MIB", "tPortEgrHASSchdNumNonMgdSMbrs"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortHWAggShaperV22v0Group.setStatus("current")
+
+tmnxPortDcpFpCountV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148, 8)
+)
+tmnxPortDcpFpCountV22v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortDcpFpStaticTotalExcdCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDcpFpStaticExtCnfrmStCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDcpFpDynTotalExcdCount"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDcpFpDynExtCnfrmStCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDcpFpLocMonTotalExcdCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDcpFpLocMonExtCnfrmStCnt"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortDcpFpCountV22v0Group.setStatus("current")
+
+tmnxPortMonOperGrpV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148, 9)
+)
+tmnxPortMonOperGrpV22v0Group.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortMonitorOperGrpName")
+)
+if mibBuilder.loadTexts:
+    tmnxPortMonOperGrpV22v0Group.setStatus("current")
+
+tmnxPortStatsGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148, 10)
+)
+tmnxPortStatsGroupV22v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortHoldTimeUpRemaining"),
+        ("TIMETRA-PORT-MIB", "tmnxPortHoldTimeDownRemaining"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortStatsGroupV22v0.setStatus("current")
+
+tmnxPortEgrVPortPLHWGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 148, 11)
+)
+tmnxPortEgrVPortPLHWGroupV22v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tPortEgrVPortLagPerLinkHashClass"),
+        ("TIMETRA-PORT-MIB", "tPortEgrVPortLagPerLinkHashWght"),
+        ("TIMETRA-PORT-MIB", "tPortEgrVPortLagActivePort"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortEgrVPortPLHWGroupV22v0.setStatus("current")
+
+tmnxPortOnChangeAlmV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 1)
+)
+tmnxPortOnChangeAlmV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxCohOptPortReportedAlarmState"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherReportedAlarmStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortOnChangeAlmV23v0Group.setStatus("current")
+
+tmnxCohOptPortStatsV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 3)
+)
+tmnxCohOptPortStatsV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxCohOptPortRxTotalPower"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxTotalPowerAvg"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxTotalPowerMin"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxTotalPowerMax"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxPolarDepLoss"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxPolarDepLossAvg"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxPolarDepLossMin"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxPolarDepLossMax"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxSopRoc"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxSopRocAvg"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxSopRocMin"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxSopRocMax"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxMediaFERC"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxMediaFERCAvg"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxMediaFERCMin"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortRxMediaFERCMax"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDwdmSupportedStats"))
+)
+if mibBuilder.loadTexts:
+    tmnxCohOptPortStatsV23v0Group.setStatus("current")
+
+tmnxPortSched23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 4)
+)
+tmnxPortSched23v0Group.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortSchedulerLowLatency")
+)
+if mibBuilder.loadTexts:
+    tmnxPortSched23v0Group.setStatus("current")
+
+tmnxPortAtmObsoletedV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 5)
+)
+tmnxPortAtmObsoletedV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxATMIntfCellFormat"),
+        ("TIMETRA-PORT-MIB", "tmnxATMIntfMinVpValue"),
+        ("TIMETRA-PORT-MIB", "tmnxATMIntfMapping"),
+        ("TIMETRA-PORT-MIB", "tmnxATMIntfCustomBufferMode"),
+        ("TIMETRA-PORT-MIB", "tmnxATMIntfBufferPool"),
+        ("TIMETRA-PORT-MIB", "tmnxATMIntfVcThreshold"),
+        ("TIMETRA-PORT-MIB", "tmnxPortATMVpShaperTblLastCh"),
+        ("TIMETRA-PORT-MIB", "tmnxPortATMVpShaperRowStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxPortATMVpShaperLastMgmtCh"),
+        ("TIMETRA-PORT-MIB", "tmnxPortATMVpShaperEgrAtd"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortAtmObsoletedV23v0Group.setStatus("current")
+
+tmnxPortImaObsoletedV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 6)
+)
+tmnxPortImaObsoletedV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxBundleImaGrpLnkActTimer"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpLnkDeactTimer"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpSymmetryMode"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTxId"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpRxId"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTxRefLnk"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpRxRefLnk"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpSmNeState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpSmFeState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpSmFailState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpSmDownSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpSmOperSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpAvailTxCR"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpAvailRxCR"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpNeFails"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpFeFails"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTxIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpRxIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpErrorIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpLostRxIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTxOamLablVal"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpRxOamLablVal"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpAlphaValue"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpBetaValue"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpGammaValue"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpNeClockMode"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpFeClockMode"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpVersion"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpMaxConfBw"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTestState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTestMember"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpTestPattern"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpDiffDelayMaxObs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleImaGrpLeastDelayLink"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeTxState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeRxState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeTxState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeRxState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeRxFailState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeRxFailState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaTxLid"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaRxLid"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaViolations"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeSevErrSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeSevErrSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeUnavailSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeUnavailSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeTxUnuseSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeRxUnuseSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeTxUnuseSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeRxUnuseSecs"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeTxNumFails"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaNeRxNumFails"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeTxNumFails"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaFeRxNumFails"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaTxIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaRxIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaErrorIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaLstRxIcpCells"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaOifAnomalies"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaRxTestState"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaRxTestPattern"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberImaRelDelay"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortImaObsoletedV23v0Group.setStatus("current")
+
+tmnxPortFrObsoletedV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 7)
+)
+tmnxPortFrObsoletedV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxBundleMlfrBundleId"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlfrIngQoSProfId"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlfrEgrQoSProfId"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlfrHelloTimer"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlfrHelloRetryCount"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlfrAckTimer"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlfrLastChanged"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberMlfrDownReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortFrObsoletedV23v0Group.setStatus("current")
+
+tmnxMcMlpppBundleObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 10)
+)
+tmnxMcMlpppBundleObsoleteGroup.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxBundleMlpppClassCount"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlpppIngQoSProfId"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlpppEgrQoSProfId"),
+        ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsIngressOct"),
+        ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsIngressPkt"),
+        ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsIngressErrPkt"),
+        ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsEgressOct"),
+        ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsEgressPkt"),
+        ("TIMETRA-PORT-MIB", "tmnxMcMlpppStatsEgressErrPkt"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlpppStatelessApsSwo"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlpppEndpointID"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlpppEndpointIDClass"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMlpppMagicNumber"))
+)
+if mibBuilder.loadTexts:
+    tmnxMcMlpppBundleObsoleteGroup.setStatus("current")
+
+tmnxMlBundleObsoleteGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 11)
+)
+tmnxMlBundleObsoleteGroupV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxBundleYellowDiffDelay"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleShortSequence"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMRRU"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleOperMRRU"),
+        ("TIMETRA-PORT-MIB", "tmnxBundlePeerMRRU"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleOperMTU"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleLFI"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleRowStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleType"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMinimumLinks"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleNumLinks"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleNumActiveLinks"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleRedDiffDelay"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleRedDiffDelayAction"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleLastChangeTime"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleFragmentThreshold"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleUpTime"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberRowStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberActive"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberDownReason"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleMemberUpTime"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleInputDiscards"),
+        ("TIMETRA-PORT-MIB", "tmnxBundlePrimaryMemberPortID"),
+        ("TIMETRA-PORT-MIB", "tmnxPortBundleNumber"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleProtectedType"),
+        ("TIMETRA-PORT-MIB", "tmnxBundleParentBundle"),
+        ("TIMETRA-PORT-MIB", "tmnxBPGrpAssocWorkingBundleID"),
+        ("TIMETRA-PORT-MIB", "tmnxBPGrpAssocProtectBundleID"),
+        ("TIMETRA-PORT-MIB", "tmnxBPGrpAssocActiveBundleID"))
+)
+if mibBuilder.loadTexts:
+    tmnxMlBundleObsoleteGroupV23v0.setStatus("current")
+
+tmnxPortTDMGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 13)
+)
+tmnxPortTDMGroupV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxDS3ChannelAcctPolicyId"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelCollectStats"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3Buildout"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3Type"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3LastChangeTime"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelRowStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelType"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelFraming"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelClockSource"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelChannelized"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelSubrateCSUMode"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelSubrate"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelIdleCycleFlags"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelLoopback"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBitErrorInsertionRate"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBERTPattern"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBERTDuration"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLEicString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLLicString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLFicString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLUnitString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLPfiString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLPortString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLGenString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLMessageType"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelFEACLoopRespond"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelCRC"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMTU"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelOperMTU"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelReportAlarm"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelReportAlarmStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelLastChangeTime"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelInFEACLoop"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLMonPortString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelMDLMonGenString"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBERTOperStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBERTSynched"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBERTErrors"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelBERTTotalBits"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3ChannelScramble"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1RowStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1Type"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1Framing"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1Loopback"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1InvertData"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BitErrorInsertionRate"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BERTPattern"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BERTDuration"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1ReportAlarm"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1ReportAlarmStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1LastChangeTime"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1ClockSource"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BERTOperStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BERTSynched"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BERTErrors"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BERTTotalBits"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1RemoteLoopRespond"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1InRemoteLoop"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BerSdThreshold"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1BerSfThreshold"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupRowStatus"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupTimeSlots"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupSpeed"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupMTU"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupOperMTU"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupLastChangeTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortTDMGroupV23v0.setStatus("current")
+
+tmnxPortTDMObsoleteGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 14)
+)
+tmnxPortTDMObsoleteGroupV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupBerSfLinkDown"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupCRC"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupIdleCycleFlags"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupScramble"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortTDMObsoleteGroupV23v0.setStatus("current")
+
+tmnxPortEthStrmCtrlV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 15)
+)
+tmnxPortEthStrmCtrlV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tPortEthStormCtrlRowStatus"),
+        ("TIMETRA-PORT-MIB", "tPortEthStormCtrlRate"),
+        ("TIMETRA-PORT-MIB", "tPortEthStormCtrlBurst"),
+        ("TIMETRA-PORT-MIB", "tPortEthStormCtrlOprRate"),
+        ("TIMETRA-PORT-MIB", "tPortEthStormCtrlOprBurst"),
+        ("TIMETRA-PORT-MIB", "tPortEthStormCtrlLastChanged"),
+        ("TIMETRA-PORT-MIB", "tPortEthStormCtrlTableLastChange"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortEthStrmCtrlV23v0Group.setStatus("current")
+
+tmnxCesopsnV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 16)
+)
+tmnxCesopsnV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxDS1SignalBitsState"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupLoopback"))
+)
+if mibBuilder.loadTexts:
+    tmnxCesopsnV23v0Group.setStatus("current")
+
+tmnxPortTransOlsV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 17)
+)
+tmnxPortTransOlsV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortTransOls"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTransOlsEgAmpGain"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortTransOlsV23v0Group.setStatus("current")
+
+tmnxLoadBalLagHashV23Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 19)
+)
+tmnxLoadBalLagHashV23Group.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxLoadBalancingExcSrcDstIpv6")
+)
+if mibBuilder.loadTexts:
+    tmnxLoadBalLagHashV23Group.setStatus("current")
+
+tmnxPortEtherV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 20)
+)
+tmnxPortEtherV23v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortEtherMtuProfile"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherOperMtuProfile"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortEtherV23v0Group.setStatus("current")
+
+tmnxPortFwdEngStatsV23Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 21)
+)
+tmnxPortFwdEngStatsV23Group.setObjects(
+    ("TIMETRA-PORT-MIB", "tFwdEngDRUnknownLabeledPkt")
+)
+if mibBuilder.loadTexts:
+    tmnxPortFwdEngStatsV23Group.setStatus("current")
+
+tmnxPortEtherOperAutoNegV23Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 22)
+)
+tmnxPortEtherOperAutoNegV23Grp.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortEtherOperAutoNegotiate")
+)
+if mibBuilder.loadTexts:
+    tmnxPortEtherOperAutoNegV23Grp.setStatus("current")
+
+tmnxPortTxPauseFramesV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 1)
+)
+tmnxPortTxPauseFramesV24v0Group.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortEtherTxPauseFrame")
+)
+if mibBuilder.loadTexts:
+    tmnxPortTxPauseFramesV24v0Group.setStatus("current")
+
+tmnxObjAppPoolDpthAlrmV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 2)
+)
+tmnxObjAppPoolDpthAlrmV24v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjAppMonPoolDepthAdminSt"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppAlrmThreshTotalPool"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppAlrmThreshSharedPool"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppAlrmThreshResvPool"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthAvgPollInt"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthAvgElpsdTme"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepResvViolTotCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepResvViolLast"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepShrdViolTotCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepShrdViolLast"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepTotViolTotCnt"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepTotViolLast"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolTotalUseThresExc"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolSharedUseThresExc"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolReservdUseThresExc"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt1"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt2"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt3"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt4"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt5"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt6"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt7"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt8"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt9"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDepthPollPcnt10"))
+)
+if mibBuilder.loadTexts:
+    tmnxObjAppPoolDpthAlrmV24v0Group.setStatus("current")
+
+tmnxPortPerAggRateV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 3)
+)
+tmnxPortPerAggRateV24v0Grp.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortShrdQAggRateBurstLmt")
+)
+if mibBuilder.loadTexts:
+    tmnxPortPerAggRateV24v0Grp.setStatus("current")
+
+tmnxPortStatsV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 4)
+)
+tmnxPortStatsV24v0Grp.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortAggQueueIngPktsFwd"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueIngOctsFwd"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueIngPktsDrop"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueIngOctsDrop"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueEgrPktsFwd"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueEgrOctsFwd"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueEgrPktsDrop"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueEgrOctsDrop"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueLastClearedTime"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggQueueLastFetchedTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortStatsV24v0Grp.setStatus("current")
+
+tmnxLoadBalEntropyLabelV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 5)
+)
+tmnxLoadBalEntropyLabelV24v0Grp.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxLoadBalancingEntropyLabel")
+)
+if mibBuilder.loadTexts:
+    tmnxLoadBalEntropyLabelV24v0Grp.setStatus("current")
+
+tmnxPortQGrpAggShapV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 6)
+)
+tmnxPortQGrpAggShapV24v0Group.setObjects(
+      *(("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpSchdAssgnd"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpAssgndRate"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpOperRate"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpConsmdRate"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpAvgFrmOvhd"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpAfoRlTime"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpSchdActive"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpSchdRuning"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpInvlClsUse"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpBurstLimit"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpDepth"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpPacketMode"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpOutOfDate"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpQSetSize"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpAggShpQSetSzOvr"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpSchdAssgnd"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpAssgndRate"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpOperRate"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpConsmdRate"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpAvgFrmOvhd"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpAfoRlTime"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpSchdActive"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpSchdRuning"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpInvlClsUse"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpBurstLimit"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpDepth"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpPacketMode"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpOutOfDate"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpQSetSize"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrQGrpAggShpQSetSzOvr"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortQGrpAggShapV24v0Group.setStatus("current")
+
+tmnxPortFlexENotifyObjs24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 7)
+)
+tmnxPortFlexENotifyObjs24v0Grp.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortFlexEGrpAlmReason"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrAlmReason"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrPhyInstAlmReason"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrPhyInst"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortFlexENotifyObjs24v0Grp.setStatus("current")
+
+tmnxPortSharedQV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 9)
+)
+tmnxPortSharedQV25v0Grp.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortShrdQSinkExcessBW")
+)
+if mibBuilder.loadTexts:
+    tmnxPortSharedQV25v0Grp.setStatus("current")
+
+tmnxLagPortProtocolTunnelGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 151, 1)
+)
+tmnxLagPortProtocolTunnelGroup.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortEtherPTPTunnel"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherDwlTunneling"))
+)
+if mibBuilder.loadTexts:
+    tmnxLagPortProtocolTunnelGroup.setStatus("current")
+
+tmnxPortFlexPwPortV25Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 151, 3)
+)
+tmnxPortFlexPwPortV25Group.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPwPortOperPortId")
+)
+if mibBuilder.loadTexts:
+    tmnxPortFlexPwPortV25Group.setStatus("current")
+
+tmnxPortGnssImprovedStartup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 151, 6)
+)
+tmnxPortGnssImprovedStartup.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortGnssSurveyCompPercent"),
+        ("TIMETRA-PORT-MIB", "tmnxPortGnssRestartPosSurvey"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortGnssImprovedStartup.setStatus("current")
+
+tmnxPortTransPowerSaveModeV25v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 151, 10)
+)
+tmnxPortTransPowerSaveModeV25v0.setObjects(
+    ("TIMETRA-PORT-MIB", "tmnxPortTransPowerSaveMode")
+)
+if mibBuilder.loadTexts:
+    tmnxPortTransPowerSaveModeV25v0.setStatus("current")
 
 
 # Notification objects
@@ -33043,7 +34270,7 @@ tmnxEqPortBndlYellowDiffExceeded.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxEqPortBndlYellowDiffExceeded.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxEqPortBndlRedDiffExceeded = NotificationType(
@@ -33055,7 +34282,7 @@ tmnxEqPortBndlRedDiffExceeded.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxEqPortBndlRedDiffExceeded.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxEqPortBndlBadEndPtDiscr = NotificationType(
@@ -33066,7 +34293,7 @@ tmnxEqPortBndlBadEndPtDiscr.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxEqPortBndlBadEndPtDiscr.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxEqPortEtherAlarm = NotificationType(
@@ -33282,7 +34509,7 @@ tmnxBundleMemberMlfrLoopback.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBundleMemberMlfrLoopback.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxEqPortWaveTrackerAlarm = NotificationType(
@@ -33680,6 +34907,194 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxDS0ChanGrpLoopbackStarted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 70)
+)
+tmnxDS0ChanGrpLoopbackStarted.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupLoopback"))
+)
+if mibBuilder.loadTexts:
+    tmnxDS0ChanGrpLoopbackStarted.setStatus(
+        "current"
+    )
+
+tmnxDS0ChanGrpLoopbackStopped = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 71)
+)
+tmnxDS0ChanGrpLoopbackStopped.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGroupLoopback"))
+)
+if mibBuilder.loadTexts:
+    tmnxDS0ChanGrpLoopbackStopped.setStatus(
+        "current"
+    )
+
+tmnxResvPoolUseThreshExcd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 72)
+)
+tmnxResvPoolUseThreshExcd.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjMdaId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxResvPoolUseThreshExcd.setStatus(
+        "current"
+    )
+
+tmnxResvPoolUseThreshNotExcd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 73)
+)
+tmnxResvPoolUseThreshNotExcd.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjMdaId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxResvPoolUseThreshNotExcd.setStatus(
+        "current"
+    )
+
+tmnxTotalPoolUseThreshExcd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 74)
+)
+tmnxTotalPoolUseThreshExcd.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjMdaId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxTotalPoolUseThreshExcd.setStatus(
+        "current"
+    )
+
+tmnxTotalPoolUseThreshNotExcd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 75)
+)
+tmnxTotalPoolUseThreshNotExcd.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjMdaId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxTotalPoolUseThreshNotExcd.setStatus(
+        "current"
+    )
+
+tmnxSharedPoolUseThreshExcd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 76)
+)
+tmnxSharedPoolUseThreshExcd.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjMdaId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxSharedPoolUseThreshExcd.setStatus(
+        "current"
+    )
+
+tmnxSharedPoolUseThreshNotExcd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 77)
+)
+tmnxSharedPoolUseThreshNotExcd.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxObjType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjMdaId"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppType"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxSharedPoolUseThreshNotExcd.setStatus(
+        "current"
+    )
+
+tmnxEqPortFlexEGroupAlrm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 78)
+)
+tmnxEqPortFlexEGroupAlrm.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEGrpAlmReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqPortFlexEGroupAlrm.setStatus(
+        "current"
+    )
+
+tmnxEqPortFlexEGroupAlrmClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 79)
+)
+tmnxEqPortFlexEGroupAlrmClr.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEGrpAlmReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqPortFlexEGroupAlrmClr.setStatus(
+        "current"
+    )
+
+tmnxEqPortFlexEMemberAlrm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 80)
+)
+tmnxEqPortFlexEMemberAlrm.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrAlmReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqPortFlexEMemberAlrm.setStatus(
+        "current"
+    )
+
+tmnxEqPortFlexEMemberAlrmClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 81)
+)
+tmnxEqPortFlexEMemberAlrmClr.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrAlmReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqPortFlexEMemberAlrmClr.setStatus(
+        "current"
+    )
+
+tmnxEqPortFlexEMbrPhyInstAlrm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 82)
+)
+tmnxEqPortFlexEMbrPhyInstAlrm.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrPhyInst"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrPhyInstAlmReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqPortFlexEMbrPhyInstAlrm.setStatus(
+        "current"
+    )
+
+tmnxEqPortFlexEMbrPhyInstAlrmClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 2, 0, 83)
+)
+tmnxEqPortFlexEMbrPhyInstAlrmClr.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrPhyInst"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexEMbrPhyInstAlmReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqPortFlexEMbrPhyInstAlrmClr.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -33918,7 +35333,7 @@ tmnxPortNotificationGroupV8v0.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxPortNotificationGroupV8v0.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxPortNotificationGroupV9v4 = NotificationGroup(
@@ -34078,6 +35493,105 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxPortNotificationGroupV23v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 8)
+)
+tmnxPortNotificationGroupV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxEqPortSonetAlarm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSonetAlarmClear"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSonetPathAlarm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSonetPathAlarmClear"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSFPInserted"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSFPRemoved"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortError"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortDS3Alarm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortDS3AlarmClear"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortDS1Alarm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortDS1AlarmClear"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortEtherAlarm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortEtherAlarmClear"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1E1LoopbackStarted"),
+        ("TIMETRA-PORT-MIB", "tmnxDS1E1LoopbackStopped"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3E3LoopbackStarted"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3E3LoopbackStopped"),
+        ("TIMETRA-PORT-MIB", "tmnxSonetSDHLoopbackStarted"),
+        ("TIMETRA-PORT-MIB", "tmnxSonetSDHLoopbackStopped"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortEtherLoopDetected"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortEtherLoopCleared"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSpeedCfgNotCompatible"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortDuplexCfgNotCompatible"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortIngressRateCfgNotCompatible"),
+        ("TIMETRA-PORT-MIB", "tmnxEqDigitalDiagMonitorFailure"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortSFPStatusFailure"),
+        ("TIMETRA-PORT-MIB", "tmnxDSXClockSyncStateChange"),
+        ("TIMETRA-PORT-MIB", "tmnxPortUnsupportedFunction"),
+        ("TIMETRA-PORT-MIB", "tPortAccEgrQGrpHostMatchFailure"),
+        ("TIMETRA-PORT-MIB", "tPortEgrVPortHostMatchFailure"),
+        ("TIMETRA-PORT-MIB", "tmnxEqDigitalDiagMonitorClear"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortNotificationGroupV23v0.setStatus(
+        "current"
+    )
+
+tmnxPortObsoleteNotifiGroupV23v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 9)
+)
+tmnxPortObsoleteNotifiGroupV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxBundleMemberMlfrLoopback"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortBndlYellowDiffExceeded"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortBndlRedDiffExceeded"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortBndlBadEndPtDiscr"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortObsoleteNotifiGroupV23v0.setStatus(
+        "current"
+    )
+
+tmnxCesopsnNotifGroupV23v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 149, 18)
+)
+tmnxCesopsnNotifGroupV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxDS0ChanGrpLoopbackStarted"),
+        ("TIMETRA-PORT-MIB", "tmnxDS0ChanGrpLoopbackStopped"))
+)
+if mibBuilder.loadTexts:
+    tmnxCesopsnNotifGroupV23v0.setStatus(
+        "current"
+    )
+
+tmnxPortFlexENotifGrpV24v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 8)
+)
+tmnxPortFlexENotifGrpV24v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxEqPortFlexEGroupAlrm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortFlexEGroupAlrmClr"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortFlexEMemberAlrm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortFlexEMemberAlrmClr"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortFlexEMbrPhyInstAlrm"),
+        ("TIMETRA-PORT-MIB", "tmnxEqPortFlexEMbrPhyInstAlrmClr"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortFlexENotifGrpV24v0.setStatus(
+        "current"
+    )
+
+tmnxResvPoolDpthThrNotifGrpV24v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 2, 150, 21)
+)
+tmnxResvPoolDpthThrNotifGrpV24v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxResvPoolUseThreshExcd"),
+        ("TIMETRA-PORT-MIB", "tmnxResvPoolUseThreshNotExcd"),
+        ("TIMETRA-PORT-MIB", "tmnxTotalPoolUseThreshExcd"),
+        ("TIMETRA-PORT-MIB", "tmnxTotalPoolUseThreshNotExcd"),
+        ("TIMETRA-PORT-MIB", "tmnxSharedPoolUseThreshExcd"),
+        ("TIMETRA-PORT-MIB", "tmnxSharedPoolUseThreshNotExcd"))
+)
+if mibBuilder.loadTexts:
+    tmnxResvPoolDpthThrNotifGrpV24v0.setStatus(
+        "current"
+    )
+
 
 # Agent capabilities
 
@@ -34092,13 +35606,11 @@ tmnxPortComp7750V4v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV4v0"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV3v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"))
@@ -34115,13 +35627,11 @@ tmnxPortComp7750V5v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV5v0"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34140,13 +35650,11 @@ tmnxPortComp7750V6v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV6v0"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34171,13 +35679,11 @@ tmnxPortComp7750V6v1.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34203,14 +35709,12 @@ tmnxPortComp7750V7v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34225,8 +35729,6 @@ tmnxPortComp7750V7v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortQV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedStatsGroup"))
 )
 if mibBuilder.loadTexts:
@@ -34242,14 +35744,12 @@ tmnxPortComp7750V8v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34264,8 +35764,6 @@ tmnxPortComp7750V8v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortQV8v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -34289,7 +35787,6 @@ tmnxPortComp7750V9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34297,7 +35794,6 @@ tmnxPortComp7750V9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34312,8 +35808,6 @@ tmnxPortComp7750V9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortQV8v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -34341,7 +35835,6 @@ tmnxPortComp7450V4v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV3v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
@@ -34359,7 +35852,6 @@ tmnxPortComp7450V5v0 = ModuleCompliance(
 tmnxPortComp7450V5v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
@@ -34378,7 +35870,6 @@ tmnxPortComp7450V6v0 = ModuleCompliance(
 tmnxPortComp7450V6v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
@@ -34399,7 +35890,6 @@ tmnxPortComp7450V6v1 = ModuleCompliance(
 tmnxPortComp7450V6v1.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
@@ -34421,7 +35911,6 @@ tmnxPortComp7450V7v0 = ModuleCompliance(
 tmnxPortComp7450V7v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV7v0"),
@@ -34447,7 +35936,6 @@ tmnxPortComp7450V8v0 = ModuleCompliance(
 tmnxPortComp7450V8v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tmnxPortGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34482,14 +35970,12 @@ tmnxPortComp7710V3v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMV3v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupR2r1"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV3v0"))
@@ -34507,13 +35993,11 @@ tmnxPortComp7710V5v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV5v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV5v0"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedV5v0Group"),
@@ -34532,13 +36016,11 @@ tmnxPortComp7710V6v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV6v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV6v0"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedV5v0Group"),
@@ -34562,13 +36044,11 @@ tmnxPortComp7710V6v1.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV4v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedV5v0Group"),
@@ -34592,14 +36072,12 @@ tmnxPortComp7710V7v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedV5v0Group"),
@@ -34626,14 +36104,12 @@ tmnxPortComp7710V8v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedV5v0Group"),
@@ -34666,7 +36142,6 @@ tmnxPortComplianceV9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34674,7 +36149,6 @@ tmnxPortComplianceV9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34690,8 +36164,6 @@ tmnxPortComplianceV9v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -34723,7 +36195,6 @@ tmnxPortComplianceV10v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34731,7 +36202,6 @@ tmnxPortComplianceV10v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMlImaBundleGroup"),
@@ -34741,7 +36211,6 @@ tmnxPortComplianceV10v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppBundleGroup"),
         ("TIMETRA-PORT-MIB", "tmnxMlpppBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnxNamedPoolGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
         ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
@@ -34749,8 +36218,6 @@ tmnxPortComplianceV10v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -34787,7 +36254,6 @@ tmnxPortComplianceV11v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34795,7 +36261,6 @@ tmnxPortComplianceV11v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
@@ -34806,7 +36271,6 @@ tmnxPortComplianceV11v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppBundleGroup"),
         ("TIMETRA-PORT-MIB", "tmnxMlpppBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnxNamedPoolGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
         ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
@@ -34814,8 +36278,6 @@ tmnxPortComplianceV11v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -34845,8 +36307,6 @@ tmnxPortComplianceV11v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortGroup"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaStatV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaOverV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV11v0Group"))
 )
 if mibBuilder.loadTexts:
@@ -34863,7 +36323,6 @@ tmnxPortComplianceV12v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34871,7 +36330,6 @@ tmnxPortComplianceV12v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
@@ -34882,7 +36340,6 @@ tmnxPortComplianceV12v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppBundleGroup"),
         ("TIMETRA-PORT-MIB", "tmnxMlpppBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnxNamedPoolGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
         ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
@@ -34890,8 +36347,6 @@ tmnxPortComplianceV12v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -34926,8 +36381,6 @@ tmnxPortComplianceV12v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortGroup"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaStatV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaOverV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV12v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortV11v0Group"),
@@ -34950,7 +36403,6 @@ tmnxPortComplianceV13v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -34958,7 +36410,6 @@ tmnxPortComplianceV13v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
@@ -34968,15 +36419,12 @@ tmnxPortComplianceV13v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppBundleGroup"),
         ("TIMETRA-PORT-MIB", "tmnxMlpppBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnxNamedPoolGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
         ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -35010,8 +36458,6 @@ tmnxPortComplianceV13v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortGroup"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaStatV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaOverV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV12v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortV11v0Group"),
@@ -35059,7 +36505,6 @@ tmnxPortComplianceV15v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -35067,7 +36512,6 @@ tmnxPortComplianceV15v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
@@ -35077,15 +36521,12 @@ tmnxPortComplianceV15v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppBundleGroup"),
         ("TIMETRA-PORT-MIB", "tmnxMlpppBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnxNamedPoolGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
         ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -35118,8 +36559,6 @@ tmnxPortComplianceV15v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortGroup"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaStatV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaOverV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV12v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortV11v0Group"),
@@ -35202,7 +36641,6 @@ tmnxPortComplianceV20v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -35210,7 +36648,6 @@ tmnxPortComplianceV20v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
@@ -35220,14 +36657,11 @@ tmnxPortComplianceV20v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
         ("TIMETRA-PORT-MIB", "tmnxMcMlpppBundleGroup"),
         ("TIMETRA-PORT-MIB", "tmnxMlpppBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxHsmdaGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
         ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxWaveTrackerGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
@@ -35260,8 +36694,6 @@ tmnxPortComplianceV20v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortGroup"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaStatV11v0Group"),
-        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsmdaOverV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEthernetV12v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxCohOptPortV11v0Group"),
@@ -35324,7 +36756,6 @@ tmnxPortComplianceV21v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
-        ("TIMETRA-PORT-MIB", "tmnxPortFRGroup"),
         ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v0"),
@@ -35332,7 +36763,6 @@ tmnxPortComplianceV21v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortATMGroupV7v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
-        ("TIMETRA-PORT-MIB", "tmnxCiscoHDLCGroup"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMlBundleGroupV6v0"),
@@ -35347,8 +36777,6 @@ tmnxPortComplianceV21v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxMcMfrBundleGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrIntfGroup"),
-        ("TIMETRA-PORT-MIB", "tmnxFrf12IntfGroup"),
         ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortCEMGroupV8v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortSchedStatsGroup"),
@@ -35422,6 +36850,7 @@ tmnxPortComplianceV21v0.setObjects(
         ("TIMETRA-PORT-MIB", "tmnxPortTransceiverGroupV20v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV20v0"),
         ("TIMETRA-PORT-MIB", "tmnxPortDwdmV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggRateV21v0Group"),
         ("TIMETRA-PORT-MIB", "tPortDCpuProtV21v0Group"),
         ("TIMETRA-PORT-MIB", "tPortHWAggShaperV21v0Group"),
         ("TIMETRA-PORT-MIB", "tmnxPortEgrVoqStatsV21v0Group"),
@@ -35432,7 +36861,7 @@ tmnxPortComplianceV21v0.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxPortComplianceV21v0.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxPortComplianceV22v0 = ModuleCompliance(
@@ -35441,10 +36870,171 @@ tmnxPortComplianceV22v0 = ModuleCompliance(
 tmnxPortComplianceV22v0.setObjects(
       *(("TIMETRA-PORT-MIB", "tPortHWAggShaperV22v0Group"),
         ("TIMETRA-PORT-MIB", "tPortHWAggShaperNotifGroupV22v0"),
-        ("TIMETRA-PORT-MIB", "tmnxPortQueueOvrV22v0Group"))
+        ("TIMETRA-PORT-MIB", "tmnxPortQueueOvrV22v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortHWAggShaperV22v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDcpFpCountV22v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortMonOperGrpV22v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortStatsGroupV22v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortPerAggRateV21v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrVPortPLHWGroupV22v0"))
 )
 if mibBuilder.loadTexts:
     tmnxPortComplianceV22v0.setStatus(
+        "current"
+    )
+
+tmnxPortComplianceV23v0 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 1, 18)
+)
+tmnxPortComplianceV23v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortEtherV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortOnChangeAlmV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSched23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxDS3V12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortGroupV7v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSonetV3v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTDMGroupV23v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTDME1GroupV6v1"),
+        ("TIMETRA-PORT-MIB", "tmnxQosAppObjsGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTestGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV9v4"),
+        ("TIMETRA-PORT-MIB", "tmnxPortIngrMdaQosStatR2r1Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortStatsR2r1Group"),
+        ("TIMETRA-PORT-MIB", "tmnxScalarPortV3v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxScalarPortV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEthernetV7v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEthernetV10v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortCemGroupV6v0"),
+        ("TIMETRA-PORT-MIB", "tmnxDigitalDiagMonitorGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV10v0"),
+        ("TIMETRA-PORT-MIB", "tmnx7710PortTDMGroupV5v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortQStatV7v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortGroupV8v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortCEMGroupV8v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSchedStatsGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortVPortV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortVPortV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortParentLocV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortObjAppV9v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxOpticalPortGroupV9v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV8v9"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrVPortStatsV9v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherV9v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotificationV9v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortV9v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNetEgrV10v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortPlcyGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPwPortV10v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortLoadBalGroupV10v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrQGrpV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherPhysStatsGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherSymMonGroupV12v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPrtEthSmMnNotifyObjsGrpV12v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEthSymMonNotifyGrpV12v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrQGrpV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotificationV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEthernetV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEthernetV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortV11v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxDot1xPaePortGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggRateV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSchedPlcyV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTopologyV13v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCohOptPortStatsV12v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSchedPlcyOvrV13v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggRateLimitV13v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortV13v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSchedV15v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortQOverDropTailGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsSchedGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrHsSecShaperGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherUtilStatGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortRateV15v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherRsFecModeGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSchedBurstV15v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAccSchedOvrSV15v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherDampeningGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherDampeningStatsGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortConnectorBreakoutGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPwPortEthTypeV15v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxRS232PortGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxRS232PortNotifyGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortVsrGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTransceiverGroupV15v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortStatsGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortRxPauseFramesV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortGNSSGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortGnssNotifV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortPoolGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNetEgrQMonQDepthV20v0Grp"),
+        ("TIMETRA-PORT-MIB", "tPortNetEgrPortQMonQDepV20v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxDot1xPaePortV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEsmcTunV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tPortEgrPSAggStatsV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotifyObjsGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxDDMLaneGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTransceiverGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV20v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortDwdmV20v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAggRateV21v0Group"),
+        ("TIMETRA-PORT-MIB", "tPortDCpuProtV21v0Group"),
+        ("TIMETRA-PORT-MIB", "tPortHWAggShaperV21v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEgrVoqStatsV21v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortAccIngQMonQDepthV21v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortHQosOnLagV21v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortCupsV21v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortHQosOnLagWredV21v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNotificationGroupV23v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEthStrmCtrlV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCesopsnV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTransOlsV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxCesopsnNotifGroupV23v0"),
+        ("TIMETRA-PORT-MIB", "tmnxLoadBalLagHashV23Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortNetEgrPpStatsV23v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFwdEngStatsV23Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortEtherOperAutoNegV23Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortComplianceV23v0.setStatus(
+        "current"
+    )
+
+tmnxPortComplianceV24v0 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 1, 19)
+)
+tmnxPortComplianceV24v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortTxPauseFramesV24v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxObjAppPoolDpthAlrmV24v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortPerAggRateV24v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortStatsV24v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxResvPoolDpthThrNotifGrpV24v0"),
+        ("TIMETRA-PORT-MIB", "tmnxLoadBalEntropyLabelV24v0Grp"),
+        ("TIMETRA-PORT-MIB", "tmnxPortQGrpAggShapV24v0Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexENotifGrpV24v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexENotifyObjs24v0Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortComplianceV24v0.setStatus(
+        "current"
+    )
+
+tmnxPortComplianceV25v0 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 2, 1, 20)
+)
+tmnxPortComplianceV25v0.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxLagPortProtocolTunnelGroup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortFlexPwPortV25Group"),
+        ("TIMETRA-PORT-MIB", "tmnxPortGnssImprovedStartup"),
+        ("TIMETRA-PORT-MIB", "tmnxPortTransPowerSaveModeV25v0"),
+        ("TIMETRA-PORT-MIB", "tmnxPortSharedQV25v0Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxPortComplianceV25v0.setStatus(
         "current"
     )
 
@@ -35474,6 +37064,7 @@ mibBuilder.exportSymbols(
        "TmnxDSXReportAlarm": TmnxDSXReportAlarm,
        "TmnxDSXClockSource": TmnxDSXClockSource,
        "TmnxDSXClockSyncState": TmnxDSXClockSyncState,
+       "TmnxDS0Loopback": TmnxDS0Loopback,
        "TmnxDS1Loopback": TmnxDS1Loopback,
        "TmnxDS3Loopback": TmnxDS3Loopback,
        "TmnxImaGrpState": TmnxImaGrpState,
@@ -35501,11 +37092,18 @@ mibBuilder.exportSymbols(
        "TmnxPortCompatMode": TmnxPortCompatMode,
        "TmnxSFFStatus": TmnxSFFStatus,
        "TmnxHoldTime": TmnxHoldTime,
-       "TmnxPortOptComplianceExtType": TmnxPortOptComplianceExtType,
        "TmnxRS232ControlLead": TmnxRS232ControlLead,
+       "TmnxRS232ControlLeadHcm": TmnxRS232ControlLeadHcm,
        "TmnxRS232ControlLeadMon": TmnxRS232ControlLeadMon,
+       "TmnxRS232Speed": TmnxRS232Speed,
+       "TmnxRS232Parity": TmnxRS232Parity,
+       "TmnxRS232Loopback": TmnxRS232Loopback,
+       "TmnxRS232SocketSquelchStatus": TmnxRS232SocketSquelchStatus,
+       "TmnxRS232ReportAlarmStatus": TmnxRS232ReportAlarmStatus,
+       "TmnxDataChanReportAlarmStatus": TmnxDataChanReportAlarmStatus,
        "TmnxPortConnectorBreakoutType": TmnxPortConnectorBreakoutType,
-       "TmnxCrcPolynomial": TmnxCrcPolynomial,
+       "TmnxCrcPolynomialEcmp": TmnxCrcPolynomialEcmp,
+       "TmnxCrcPolynomialLag": TmnxCrcPolynomialLag,
        "TmnxPortGnssConstellation": TmnxPortGnssConstellation,
        "TmnxPortGnssAntennaStatus": TmnxPortGnssAntennaStatus,
        "TmnxPortGnssSyncStatus": TmnxPortGnssSyncStatus,
@@ -35548,8 +37146,10 @@ mibBuilder.exportSymbols(
        "tmnxPortComplianceV20v0": tmnxPortComplianceV20v0,
        "tmnxPortComplianceV21v0": tmnxPortComplianceV21v0,
        "tmnxPortComplianceV22v0": tmnxPortComplianceV22v0,
+       "tmnxPortComplianceV23v0": tmnxPortComplianceV23v0,
+       "tmnxPortComplianceV24v0": tmnxPortComplianceV24v0,
+       "tmnxPortComplianceV25v0": tmnxPortComplianceV25v0,
        "tmnxPortGroups": tmnxPortGroups,
-       "tmnxPortFRGroup": tmnxPortFRGroup,
        "tmnxQosAppObjsGroup": tmnxQosAppObjsGroup,
        "tmnxPortTestGroup": tmnxPortTestGroup,
        "tmnxPortObsoleteGroup": tmnxPortObsoleteGroup,
@@ -35563,7 +37163,6 @@ mibBuilder.exportSymbols(
        "tmnxPortATMV3v0Group": tmnxPortATMV3v0Group,
        "tmnxScalarPortV3v0Group": tmnxScalarPortV3v0Group,
        "tmnxPortV3v0Group": tmnxPortV3v0Group,
-       "tmnxCiscoHDLCGroup": tmnxCiscoHDLCGroup,
        "tmnxMlBundleV3v0Group": tmnxMlBundleV3v0Group,
        "tmnxObsoleteGroupV3v0": tmnxObsoleteGroupV3v0,
        "tmnxPortEthernetV3v0Group": tmnxPortEthernetV3v0Group,
@@ -35597,8 +37196,6 @@ mibBuilder.exportSymbols(
        "tmnxPortNotifyObjsGroupV6v0": tmnxPortNotifyObjsGroupV6v0,
        "tmnxPortQV7v0Group": tmnxPortQV7v0Group,
        "tmnxMcMfrBundleGroup": tmnxMcMfrBundleGroup,
-       "tmnxFrIntfGroup": tmnxFrIntfGroup,
-       "tmnxFrf12IntfGroup": tmnxFrf12IntfGroup,
        "tmnxPortQStatV7v0Group": tmnxPortQStatV7v0Group,
        "tmnxPortEthernetV7v0Group": tmnxPortEthernetV7v0Group,
        "tmnxPortGroupV7v0": tmnxPortGroupV7v0,
@@ -35639,7 +37236,6 @@ mibBuilder.exportSymbols(
        "tmnxPortPlcyGroup": tmnxPortPlcyGroup,
        "tmnxPortLoadBalGroupV10v0": tmnxPortLoadBalGroupV10v0,
        "tmnxPortEthernetV10v0Group": tmnxPortEthernetV10v0Group,
-       "tmnxHsmdaGroupV10v0": tmnxHsmdaGroupV10v0,
        "tmnxPortObsoletedV10v0Group": tmnxPortObsoletedV10v0Group,
        "tmnxPwPortV10v0Group": tmnxPwPortV10v0Group,
        "tmnxPortEtherPhysStatsGroup": tmnxPortEtherPhysStatsGroup,
@@ -35648,8 +37244,6 @@ mibBuilder.exportSymbols(
        "tmnxCohOptPortGroup": tmnxCohOptPortGroup,
        "tmnxCohOptPortStatsGroup": tmnxCohOptPortStatsGroup,
        "tmnxPortNotificationV11v0Group": tmnxPortNotificationV11v0Group,
-       "tmnxPortEgrHsmdaStatV11v0Group": tmnxPortEgrHsmdaStatV11v0Group,
-       "tmnxPortEgrHsmdaOverV11v0Group": tmnxPortEgrHsmdaOverV11v0Group,
        "tmnxPortEthernetV11v0Group": tmnxPortEthernetV11v0Group,
        "tmnxScalarPortV11v0Group": tmnxScalarPortV11v0Group,
        "tmnxPortVPortV11v0Group": tmnxPortVPortV11v0Group,
@@ -35728,6 +37322,7 @@ mibBuilder.exportSymbols(
        "tmnxPortNotificationV19v0Group": tmnxPortNotificationV19v0Group,
        "tmnxPortAdapterGroupV19v0": tmnxPortAdapterGroupV19v0,
        "tmnxPortEtherPhysStatsV19v0Group": tmnxPortEtherPhysStatsV19v0Group,
+       "tmnxPortNetEgrPpStatsV23v0Group": tmnxPortNetEgrPpStatsV23v0Group,
        "tmnxPortV20v0Groups": tmnxPortV20v0Groups,
        "tmnxPortStatsGroupV20v0": tmnxPortStatsGroupV20v0,
        "tmnxPortRxPauseFramesV20v0Group": tmnxPortRxPauseFramesV20v0Group,
@@ -35747,8 +37342,8 @@ mibBuilder.exportSymbols(
        "tmnxPortNotificationGroupV20v0": tmnxPortNotificationGroupV20v0,
        "tmnxPortDwdmV20v0Group": tmnxPortDwdmV20v0Group,
        "tmnxPortV21v0Groups": tmnxPortV21v0Groups,
+       "tmnxPortAggRateV21v0Group": tmnxPortAggRateV21v0Group,
        "tPortDCpuProtV21v0Group": tPortDCpuProtV21v0Group,
-       "tPortObsoleteV21v0Group": tPortObsoleteV21v0Group,
        "tPortEgrExpObsoleteV21v0Group": tPortEgrExpObsoleteV21v0Group,
        "tmnxPortQueueOvrObsoleteV21v0Grp": tmnxPortQueueOvrObsoleteV21v0Grp,
        "tmnxPortQueueOvrV21v0Group": tmnxPortQueueOvrV21v0Group,
@@ -35760,6 +37355,7 @@ mibBuilder.exportSymbols(
        "tmnxPortHQosOnLagV21v0Grp": tmnxPortHQosOnLagV21v0Grp,
        "tmnxPortCupsV21v0Grp": tmnxPortCupsV21v0Grp,
        "tmnxPortHQosOnLagWredV21v0Grp": tmnxPortHQosOnLagWredV21v0Grp,
+       "tmnxPortPerAggRateV21v0Grp": tmnxPortPerAggRateV21v0Grp,
        "tmnxPortV22v0Groups": tmnxPortV22v0Groups,
        "tPortHWAggShaperV22v0Group": tPortHWAggShaperV22v0Group,
        "tPortHWAggShaperNotifGroupV22v0": tPortHWAggShaperNotifGroupV22v0,
@@ -35767,6 +37363,49 @@ mibBuilder.exportSymbols(
        "tmnxPortQueueOvrV22v0Group": tmnxPortQueueOvrV22v0Group,
        "tmnxPortDwdmObsoleteV22v0Group": tmnxPortDwdmObsoleteV22v0Group,
        "tmnxPortObsoleteNotifV22v0Grp": tmnxPortObsoleteNotifV22v0Grp,
+       "tmnxPortHWAggShaperV22v0Group": tmnxPortHWAggShaperV22v0Group,
+       "tmnxPortDcpFpCountV22v0Group": tmnxPortDcpFpCountV22v0Group,
+       "tmnxPortMonOperGrpV22v0Group": tmnxPortMonOperGrpV22v0Group,
+       "tmnxPortStatsGroupV22v0": tmnxPortStatsGroupV22v0,
+       "tmnxPortEgrVPortPLHWGroupV22v0": tmnxPortEgrVPortPLHWGroupV22v0,
+       "tmnxPortV23v0Groups": tmnxPortV23v0Groups,
+       "tmnxPortOnChangeAlmV23v0Group": tmnxPortOnChangeAlmV23v0Group,
+       "tmnxCohOptPortStatsV23v0Group": tmnxCohOptPortStatsV23v0Group,
+       "tmnxPortSched23v0Group": tmnxPortSched23v0Group,
+       "tmnxPortAtmObsoletedV23v0Group": tmnxPortAtmObsoletedV23v0Group,
+       "tmnxPortImaObsoletedV23v0Group": tmnxPortImaObsoletedV23v0Group,
+       "tmnxPortFrObsoletedV23v0Group": tmnxPortFrObsoletedV23v0Group,
+       "tmnxPortNotificationGroupV23v0": tmnxPortNotificationGroupV23v0,
+       "tmnxPortObsoleteNotifiGroupV23v0": tmnxPortObsoleteNotifiGroupV23v0,
+       "tmnxMcMlpppBundleObsoleteGroup": tmnxMcMlpppBundleObsoleteGroup,
+       "tmnxMlBundleObsoleteGroupV23v0": tmnxMlBundleObsoleteGroupV23v0,
+       "tmnxPortTDMGroupV23v0": tmnxPortTDMGroupV23v0,
+       "tmnxPortTDMObsoleteGroupV23v0": tmnxPortTDMObsoleteGroupV23v0,
+       "tmnxPortEthStrmCtrlV23v0Group": tmnxPortEthStrmCtrlV23v0Group,
+       "tmnxCesopsnV23v0Group": tmnxCesopsnV23v0Group,
+       "tmnxPortTransOlsV23v0Group": tmnxPortTransOlsV23v0Group,
+       "tmnxCesopsnNotifGroupV23v0": tmnxCesopsnNotifGroupV23v0,
+       "tmnxLoadBalLagHashV23Group": tmnxLoadBalLagHashV23Group,
+       "tmnxPortEtherV23v0Group": tmnxPortEtherV23v0Group,
+       "tmnxPortFwdEngStatsV23Group": tmnxPortFwdEngStatsV23Group,
+       "tmnxPortEtherOperAutoNegV23Grp": tmnxPortEtherOperAutoNegV23Grp,
+       "tmnxPortV24v0Groups": tmnxPortV24v0Groups,
+       "tmnxPortTxPauseFramesV24v0Group": tmnxPortTxPauseFramesV24v0Group,
+       "tmnxObjAppPoolDpthAlrmV24v0Group": tmnxObjAppPoolDpthAlrmV24v0Group,
+       "tmnxPortPerAggRateV24v0Grp": tmnxPortPerAggRateV24v0Grp,
+       "tmnxPortStatsV24v0Grp": tmnxPortStatsV24v0Grp,
+       "tmnxLoadBalEntropyLabelV24v0Grp": tmnxLoadBalEntropyLabelV24v0Grp,
+       "tmnxPortQGrpAggShapV24v0Group": tmnxPortQGrpAggShapV24v0Group,
+       "tmnxPortFlexENotifyObjs24v0Grp": tmnxPortFlexENotifyObjs24v0Grp,
+       "tmnxPortFlexENotifGrpV24v0": tmnxPortFlexENotifGrpV24v0,
+       "tmnxPortSharedQV25v0Grp": tmnxPortSharedQV25v0Grp,
+       "tmnxResvPoolDpthThrNotifGrpV24v0": tmnxResvPoolDpthThrNotifGrpV24v0,
+       "tmnxPortV25v0Groups": tmnxPortV25v0Groups,
+       "tmnxLagPortProtocolTunnelGroup": tmnxLagPortProtocolTunnelGroup,
+       "tmnxPortFlexPwPortV25Group": tmnxPortFlexPwPortV25Group,
+       "tmnxPortGnssImprovedStartup": tmnxPortGnssImprovedStartup,
+       "tmnxPortTransPowerSaveModeV25v0": tmnxPortTransPowerSaveModeV25v0,
+       "tmnxPortV26v0Groups": tmnxPortV26v0Groups,
        "tmnxPortDCCompliances": tmnxPortDCCompliances,
        "tmnxPortDCGroups": tmnxPortDCGroups,
        "tmnxPortObjs": tmnxPortObjs,
@@ -35823,7 +37462,6 @@ mibBuilder.exportSymbols(
        "tmnxPortLoadBalanceAlgorithm": tmnxPortLoadBalanceAlgorithm,
        "tmnxPortEgrPortSchedPlcy": tmnxPortEgrPortSchedPlcy,
        "tmnxPortLastClearedTime": tmnxPortLastClearedTime,
-       "tmnxPortEgrHsmdaSchedPlcy": tmnxPortEgrHsmdaSchedPlcy,
        "tmnxPortIngNamedPoolPlcy": tmnxPortIngNamedPoolPlcy,
        "tmnxPortEgrNamedPoolPlcy": tmnxPortEgrNamedPoolPlcy,
        "tmnxPortIngPoolPercentRate": tmnxPortIngPoolPercentRate,
@@ -35847,6 +37485,7 @@ mibBuilder.exportSymbols(
        "tmnxPortSFPNumLanes": tmnxPortSFPNumLanes,
        "tmnxPortPhysStateChangeCount": tmnxPortPhysStateChangeCount,
        "tmnxPortOperGrpName": tmnxPortOperGrpName,
+       "tmnxPortMonitorOperGrpName": tmnxPortMonitorOperGrpName,
        "tmnxPortFarEndId": tmnxPortFarEndId,
        "tmnxPortEgrMonitorPortSched": tmnxPortEgrMonitorPortSched,
        "tmnxPortMonitorAggEgrQueueStats": tmnxPortMonitorAggEgrQueueStats,
@@ -35856,6 +37495,9 @@ mibBuilder.exportSymbols(
        "tmnxPortDCpuProtPolicy": tmnxPortDCpuProtPolicy,
        "tmnxPortOperDCpuProtPolicy": tmnxPortOperDCpuProtPolicy,
        "tmnxPortSchedulerMode": tmnxPortSchedulerMode,
+       "tmnxPortHwAggShaperScheduler": tmnxPortHwAggShaperScheduler,
+       "tmnxPortMonHwAggShaperSch": tmnxPortMonHwAggShaperSch,
+       "tmnxPortSchedulerLowLatency": tmnxPortSchedulerLowLatency,
        "tmnxPortTestTable": tmnxPortTestTable,
        "tmnxPortTestEntry": tmnxPortTestEntry,
        "tmnxPortTestState": tmnxPortTestState,
@@ -35933,6 +37575,13 @@ mibBuilder.exportSymbols(
        "tmnxPortEtherAccessCollectStats": tmnxPortEtherAccessCollectStats,
        "tmnxPortEtherDiscardRxPauseFrame": tmnxPortEtherDiscardRxPauseFrame,
        "tmnxPortEtherSSMEsmcTunnel": tmnxPortEtherSSMEsmcTunnel,
+       "tmnxPortEtherReportedAlarmStatus": tmnxPortEtherReportedAlarmStatus,
+       "tmnxPortEtherMtuProfile": tmnxPortEtherMtuProfile,
+       "tmnxPortEtherOperMtuProfile": tmnxPortEtherOperMtuProfile,
+       "tmnxPortEtherTxPauseFrame": tmnxPortEtherTxPauseFrame,
+       "tmnxPortEtherPTPTunnel": tmnxPortEtherPTPTunnel,
+       "tmnxPortEtherDwlTunneling": tmnxPortEtherDwlTunneling,
+       "tmnxPortEtherOperAutoNegotiate": tmnxPortEtherOperAutoNegotiate,
        "tmnxSonetTable": tmnxSonetTable,
        "tmnxSonetEntry": tmnxSonetEntry,
        "tmnxSonetSpeed": tmnxSonetSpeed,
@@ -36093,6 +37742,7 @@ mibBuilder.exportSymbols(
        "tmnxDS1NationalUseBits": tmnxDS1NationalUseBits,
        "tmnxDS1HoldTimeUp": tmnxDS1HoldTimeUp,
        "tmnxDS1HoldTimeDown": tmnxDS1HoldTimeDown,
+       "tmnxDS1SignalBitsState": tmnxDS1SignalBitsState,
        "tmnxDS0ChanGroupTable": tmnxDS0ChanGroupTable,
        "tmnxDS0ChanGroupEntry": tmnxDS0ChanGroupEntry,
        "tmnxDS0ChanGroupRowStatus": tmnxDS0ChanGroupRowStatus,
@@ -36111,6 +37761,7 @@ mibBuilder.exportSymbols(
        "tmnxDS0ChanGroupSignalFillType": tmnxDS0ChanGroupSignalFillType,
        "tmnxDS0ChanGroupSignalPattern": tmnxDS0ChanGroupSignalPattern,
        "tmnxDS0ChanGroupBerSfLinkDown": tmnxDS0ChanGroupBerSfLinkDown,
+       "tmnxDS0ChanGroupLoopback": tmnxDS0ChanGroupLoopback,
        "tmnxBundleTable": tmnxBundleTable,
        "tmnxBundleEntry": tmnxBundleEntry,
        "tmnxBundleBundleID": tmnxBundleBundleID,
@@ -36194,12 +37845,8 @@ mibBuilder.exportSymbols(
        "tmnxL2tpLoadBalancing": tmnxL2tpLoadBalancing,
        "tmnxLoadBalancingHashEcmpPoly": tmnxLoadBalancingHashEcmpPoly,
        "tmnxLoadBalancingHashLagPoly": tmnxLoadBalancingHashLagPoly,
-       "tmnxCiscoHDLCTable": tmnxCiscoHDLCTable,
-       "tmnxCiscoHDLCEntry": tmnxCiscoHDLCEntry,
-       "tmnxCiscoHDLCKeepAliveInt": tmnxCiscoHDLCKeepAliveInt,
-       "tmnxCiscoHDLCUpCount": tmnxCiscoHDLCUpCount,
-       "tmnxCiscoHDLCDownCount": tmnxCiscoHDLCDownCount,
-       "tmnxCiscoHDLCOperState": tmnxCiscoHDLCOperState,
+       "tmnxLoadBalancingExcSrcDstIpv6": tmnxLoadBalancingExcSrcDstIpv6,
+       "tmnxLoadBalancingEntropyLabel": tmnxLoadBalancingEntropyLabel,
        "tmnxBundleImaGrpTable": tmnxBundleImaGrpTable,
        "tmnxBundleImaGrpEntry": tmnxBundleImaGrpEntry,
        "tmnxBundleImaGrpLnkActTimer": tmnxBundleImaGrpLnkActTimer,
@@ -36365,30 +38012,6 @@ mibBuilder.exportSymbols(
        "tmnxBundleMlpppEgrQoSProfId": tmnxBundleMlpppEgrQoSProfId,
        "tmnxBundleMlpppMagicNumber": tmnxBundleMlpppMagicNumber,
        "tmnxBundleMlpppStatelessApsSwo": tmnxBundleMlpppStatelessApsSwo,
-       "tmnxHsmdaPortSchOvrTblLastChngd": tmnxHsmdaPortSchOvrTblLastChngd,
-       "tmnxHsmdaPortSchOvrTable": tmnxHsmdaPortSchOvrTable,
-       "tmnxHsmdaPortSchOvrEntry": tmnxHsmdaPortSchOvrEntry,
-       "tmnxHsmdaPortSchOvrRowStatus": tmnxHsmdaPortSchOvrRowStatus,
-       "tmnxHsmdaPortSchOvrLastChanged": tmnxHsmdaPortSchOvrLastChanged,
-       "tmnxHsmdaPortSchOvrMaxRate": tmnxHsmdaPortSchOvrMaxRate,
-       "tmnxHsmdaPortSchOvrGrp1Rate": tmnxHsmdaPortSchOvrGrp1Rate,
-       "tmnxHsmdaPortSchOvrGrp2Rate": tmnxHsmdaPortSchOvrGrp2Rate,
-       "tmnxHsmdaPortSchOvrClass1Rate": tmnxHsmdaPortSchOvrClass1Rate,
-       "tmnxHsmdaPortSchOvrClass1WtInGp": tmnxHsmdaPortSchOvrClass1WtInGp,
-       "tmnxHsmdaPortSchOvrClass2Rate": tmnxHsmdaPortSchOvrClass2Rate,
-       "tmnxHsmdaPortSchOvrClass2WtInGp": tmnxHsmdaPortSchOvrClass2WtInGp,
-       "tmnxHsmdaPortSchOvrClass3Rate": tmnxHsmdaPortSchOvrClass3Rate,
-       "tmnxHsmdaPortSchOvrClass3WtInGp": tmnxHsmdaPortSchOvrClass3WtInGp,
-       "tmnxHsmdaPortSchOvrClass4Rate": tmnxHsmdaPortSchOvrClass4Rate,
-       "tmnxHsmdaPortSchOvrClass4WtInGp": tmnxHsmdaPortSchOvrClass4WtInGp,
-       "tmnxHsmdaPortSchOvrClass5Rate": tmnxHsmdaPortSchOvrClass5Rate,
-       "tmnxHsmdaPortSchOvrClass5WtInGp": tmnxHsmdaPortSchOvrClass5WtInGp,
-       "tmnxHsmdaPortSchOvrClass6Rate": tmnxHsmdaPortSchOvrClass6Rate,
-       "tmnxHsmdaPortSchOvrClass6WtInGp": tmnxHsmdaPortSchOvrClass6WtInGp,
-       "tmnxHsmdaPortSchOvrClass7Rate": tmnxHsmdaPortSchOvrClass7Rate,
-       "tmnxHsmdaPortSchOvrClass7WtInGp": tmnxHsmdaPortSchOvrClass7WtInGp,
-       "tmnxHsmdaPortSchOvrClass8Rate": tmnxHsmdaPortSchOvrClass8Rate,
-       "tmnxHsmdaPortSchOvrClass8WtInGp": tmnxHsmdaPortSchOvrClass8WtInGp,
        "tmnxPortEgrShaperTblLastChanged": tmnxPortEgrShaperTblLastChanged,
        "tmnxPortEgrShaperTable": tmnxPortEgrShaperTable,
        "tmnxPortEgrShaperEntry": tmnxPortEgrShaperEntry,
@@ -36492,12 +38115,11 @@ mibBuilder.exportSymbols(
        "tPortAccEgrQGrpFrameBaseActg": tPortAccEgrQGrpFrameBaseActg,
        "tPortAccEgrQGrpDescr": tPortAccEgrQGrpDescr,
        "tPortAccEgrQGrpInstanceId": tPortAccEgrQGrpInstanceId,
-       "tPortAccEgrQGrpHsmdaShaperOvr": tPortAccEgrQGrpHsmdaShaperOvr,
-       "tPortAccEgrQGrpHsmdaPktOffOvr": tPortAccEgrQGrpHsmdaPktOffOvr,
-       "tPortAccEgrQGrpHsmdaWrrPolicyOvr": tPortAccEgrQGrpHsmdaWrrPolicyOvr,
        "tPortAccEgrQGrpAggRateLUB": tPortAccEgrQGrpAggRateLUB,
+       "tPortAccEgrQGrpAggBurstLimit": tPortAccEgrQGrpAggBurstLimit,
        "tPortAccEgrQGrpAggRateLmt": tPortAccEgrQGrpAggRateLmt,
        "tPortAccEgrQGrpHsTurboQueues": tPortAccEgrQGrpHsTurboQueues,
+       "tPortAccEgrQGrpAggAdaptRule": tPortAccEgrQGrpAggAdaptRule,
        "tPortAccEgrQOverTableLastChgd": tPortAccEgrQOverTableLastChgd,
        "tPortAccEgrQOverTable": tPortAccEgrQOverTable,
        "tPortAccEgrQOverEntry": tPortAccEgrQOverEntry,
@@ -36538,8 +38160,10 @@ mibBuilder.exportSymbols(
        "tPortNetEgrQGrpPlcrCntrlPolicy": tPortNetEgrQGrpPlcrCntrlPolicy,
        "tPortNetEgrQGrpInstanceId": tPortNetEgrQGrpInstanceId,
        "tPortNetEgrQGrpAggRateLUB": tPortNetEgrQGrpAggRateLUB,
+       "tPortNetEgrQGrpAggBurstLimit": tPortNetEgrQGrpAggBurstLimit,
        "tPortNetEgrQGrpAggRateLmt": tPortNetEgrQGrpAggRateLmt,
        "tPortNetEgrQGrpHsTurboQueues": tPortNetEgrQGrpHsTurboQueues,
+       "tPortNetEgrQGrpAggAdaptRule": tPortNetEgrQGrpAggAdaptRule,
        "tPortNetEgrQOverTableLastChgd": tPortNetEgrQOverTableLastChgd,
        "tPortNetEgrQOverTable": tPortNetEgrQOverTable,
        "tPortNetEgrQOverEntry": tPortNetEgrQOverEntry,
@@ -36675,6 +38299,9 @@ mibBuilder.exportSymbols(
        "tPortEgrVPortMonitorPortSched": tPortEgrVPortMonitorPortSched,
        "tPortEgrVPortHwAggShaperSchedPol": tPortEgrVPortHwAggShaperSchedPol,
        "tPortEgrVPortMonHwAggShaperSch": tPortEgrVPortMonHwAggShaperSch,
+       "tPortEgrVPortLagPerLinkHashClass": tPortEgrVPortLagPerLinkHashClass,
+       "tPortEgrVPortLagPerLinkHashWght": tPortEgrVPortLagPerLinkHashWght,
+       "tPortEgrVPortLagActivePort": tPortEgrVPortLagActivePort,
        "tPortEgrVPortHMTableLastChgd": tPortEgrVPortHMTableLastChgd,
        "tPortEgrVPortHostMatchTable": tPortEgrVPortHostMatchTable,
        "tPortEgrVPortHostMatchEntry": tPortEgrVPortHostMatchEntry,
@@ -36916,6 +38543,7 @@ mibBuilder.exportSymbols(
        "tmnxPwPortDot1qEthType": tmnxPwPortDot1qEthType,
        "tmnxPwPortQinqEthType": tmnxPwPortQinqEthType,
        "tmnxPwPortOperGrpName": tmnxPwPortOperGrpName,
+       "tmnxPwPortOperPortId": tmnxPwPortOperPortId,
        "tmnxCohOptPortCfgTable": tmnxCohOptPortCfgTable,
        "tmnxCohOptPortCfgEntry": tmnxCohOptPortCfgEntry,
        "tmnxCohOptPortCfgAlarms": tmnxCohOptPortCfgAlarms,
@@ -36950,69 +38578,7 @@ mibBuilder.exportSymbols(
        "tmnxCohOptPortSupportsCfgTxPower": tmnxCohOptPortSupportsCfgTxPower,
        "tmnxCohOptPortCfgTxPowerMin": tmnxCohOptPortCfgTxPowerMin,
        "tmnxCohOptPortCfgTxPowerMax": tmnxCohOptPortCfgTxPowerMax,
-       "tPortEgrHsmdaQStatTable": tPortEgrHsmdaQStatTable,
-       "tPortEgrHsmdaQStatEntry": tPortEgrHsmdaQStatEntry,
-       "tPortEgrHsmdaQStatQueueId": tPortEgrHsmdaQStatQueueId,
-       "tPortEgrHsmdaQStatFwdInProfPkts": tPortEgrHsmdaQStatFwdInProfPkts,
-       "tPortEgrHsmdaQStatFwdInProfPktH": tPortEgrHsmdaQStatFwdInProfPktH,
-       "tPortEgrHsmdaQStatFwdInProfPktL": tPortEgrHsmdaQStatFwdInProfPktL,
-       "tPortEgrHsmdaQStatDpdInProfPkts": tPortEgrHsmdaQStatDpdInProfPkts,
-       "tPortEgrHsmdaQStatDpdInProfPktH": tPortEgrHsmdaQStatDpdInProfPktH,
-       "tPortEgrHsmdaQStatDpdInProfPktL": tPortEgrHsmdaQStatDpdInProfPktL,
-       "tPortEgrHsmdaQStatFwdOutProfPkts": tPortEgrHsmdaQStatFwdOutProfPkts,
-       "tPortEgrHsmdaQStatFwdOutProfPktH": tPortEgrHsmdaQStatFwdOutProfPktH,
-       "tPortEgrHsmdaQStatFwdOutProfPktL": tPortEgrHsmdaQStatFwdOutProfPktL,
-       "tPortEgrHsmdaQStatDpdOutProfPkts": tPortEgrHsmdaQStatDpdOutProfPkts,
-       "tPortEgrHsmdaQStatDpdOutProfPktH": tPortEgrHsmdaQStatDpdOutProfPktH,
-       "tPortEgrHsmdaQStatDpdOutProfPktL": tPortEgrHsmdaQStatDpdOutProfPktL,
-       "tPortEgrHsmdaQStatFwdInProfOcts": tPortEgrHsmdaQStatFwdInProfOcts,
-       "tPortEgrHsmdaQStatFwdInProfOctH": tPortEgrHsmdaQStatFwdInProfOctH,
-       "tPortEgrHsmdaQStatFwdInProfOctL": tPortEgrHsmdaQStatFwdInProfOctL,
-       "tPortEgrHsmdaQStatDpdInProfOcts": tPortEgrHsmdaQStatDpdInProfOcts,
-       "tPortEgrHsmdaQStatDpdInProfOctH": tPortEgrHsmdaQStatDpdInProfOctH,
-       "tPortEgrHsmdaQStatDpdInProfOctL": tPortEgrHsmdaQStatDpdInProfOctL,
-       "tPortEgrHsmdaQStatFwdOutProfOcts": tPortEgrHsmdaQStatFwdOutProfOcts,
-       "tPortEgrHsmdaQStatFwdOutProfOctH": tPortEgrHsmdaQStatFwdOutProfOctH,
-       "tPortEgrHsmdaQStatFwdOutProfOctL": tPortEgrHsmdaQStatFwdOutProfOctL,
-       "tPortEgrHsmdaQStatDpdOutProfOcts": tPortEgrHsmdaQStatDpdOutProfOcts,
-       "tPortEgrHsmdaQStatDpdOutProfOctH": tPortEgrHsmdaQStatDpdOutProfOctH,
-       "tPortEgrHsmdaQStatDpdOutProfOctL": tPortEgrHsmdaQStatDpdOutProfOctL,
-       "tPortEgrHsmdaCStatTable": tPortEgrHsmdaCStatTable,
-       "tPortEgrHsmdaCStatEntry": tPortEgrHsmdaCStatEntry,
-       "tPortEgrHsmdaCStatCntrId": tPortEgrHsmdaCStatCntrId,
-       "tPortEgrHsmdaCStatFwdInProfPkts": tPortEgrHsmdaCStatFwdInProfPkts,
-       "tPortEgrHsmdaCStatFwdInProfPktH": tPortEgrHsmdaCStatFwdInProfPktH,
-       "tPortEgrHsmdaCStatFwdInProfPktL": tPortEgrHsmdaCStatFwdInProfPktL,
-       "tPortEgrHsmdaCStatDpdInProfPkts": tPortEgrHsmdaCStatDpdInProfPkts,
-       "tPortEgrHsmdaCStatDpdInProfPktH": tPortEgrHsmdaCStatDpdInProfPktH,
-       "tPortEgrHsmdaCStatDpdInProfPktL": tPortEgrHsmdaCStatDpdInProfPktL,
-       "tPortEgrHsmdaCStatFwdOutProfPkts": tPortEgrHsmdaCStatFwdOutProfPkts,
-       "tPortEgrHsmdaCStatFwdOutProfPktH": tPortEgrHsmdaCStatFwdOutProfPktH,
-       "tPortEgrHsmdaCStatFwdOutProfPktL": tPortEgrHsmdaCStatFwdOutProfPktL,
-       "tPortEgrHsmdaCStatDpdOutProfPkts": tPortEgrHsmdaCStatDpdOutProfPkts,
-       "tPortEgrHsmdaCStatDpdOutProfPktH": tPortEgrHsmdaCStatDpdOutProfPktH,
-       "tPortEgrHsmdaCStatDpdOutProfPktL": tPortEgrHsmdaCStatDpdOutProfPktL,
-       "tPortEgrHsmdaCStatFwdInProfOcts": tPortEgrHsmdaCStatFwdInProfOcts,
-       "tPortEgrHsmdaCStatFwdInProfOctH": tPortEgrHsmdaCStatFwdInProfOctH,
-       "tPortEgrHsmdaCStatFwdInProfOctL": tPortEgrHsmdaCStatFwdInProfOctL,
-       "tPortEgrHsmdaCStatDpdInProfOcts": tPortEgrHsmdaCStatDpdInProfOcts,
-       "tPortEgrHsmdaCStatDpdInProfOctH": tPortEgrHsmdaCStatDpdInProfOctH,
-       "tPortEgrHsmdaCStatDpdInProfOctL": tPortEgrHsmdaCStatDpdInProfOctL,
-       "tPortEgrHsmdaCStatFwdOutProfOcts": tPortEgrHsmdaCStatFwdOutProfOcts,
-       "tPortEgrHsmdaCStatFwdOutProfOctH": tPortEgrHsmdaCStatFwdOutProfOctH,
-       "tPortEgrHsmdaCStatFwdOutProfOctL": tPortEgrHsmdaCStatFwdOutProfOctL,
-       "tPortEgrHsmdaCStatDpdOutProfOcts": tPortEgrHsmdaCStatDpdOutProfOcts,
-       "tPortEgrHsmdaCStatDpdOutProfOctH": tPortEgrHsmdaCStatDpdOutProfOctH,
-       "tPortEgrHsmdaCStatDpdOutProfOctL": tPortEgrHsmdaCStatDpdOutProfOctL,
-       "tPortAccEgrHsmdaQOverTable": tPortAccEgrHsmdaQOverTable,
-       "tPortAccEgrHsmdaQOverEntry": tPortAccEgrHsmdaQOverEntry,
-       "tPortAccEgrHsmdaQOverQueue": tPortAccEgrHsmdaQOverQueue,
-       "tPortAccEgrHsmdaQOverRowStatus": tPortAccEgrHsmdaQOverRowStatus,
-       "tPortAccEgrHsmdaQOverLastChanged": tPortAccEgrHsmdaQOverLastChanged,
-       "tPortAccEgrHsmdaQOverAdminPIR": tPortAccEgrHsmdaQOverAdminPIR,
-       "tPortAccEgrHsmdaQOverSlopePolicy": tPortAccEgrHsmdaQOverSlopePolicy,
-       "tPortAccEgrHsmdaQOverWrrWeight": tPortAccEgrHsmdaQOverWrrWeight,
-       "tPortAccEgrHsmdaQOverMBS": tPortAccEgrHsmdaQOverMBS,
+       "tmnxCohOptPortReportedAlarmState": tmnxCohOptPortReportedAlarmState,
        "tmnxDot1xPaePortTblLastChanged": tmnxDot1xPaePortTblLastChanged,
        "tmnxDot1xPaePortTable": tmnxDot1xPaePortTable,
        "tmnxDot1xPaePortEntry": tmnxDot1xPaePortEntry,
@@ -37240,6 +38806,7 @@ mibBuilder.exportSymbols(
        "tmnxPortGnssConstellation": tmnxPortGnssConstellation,
        "tmnxPortGnssAntennaCableDelay": tmnxPortGnssAntennaCableDelay,
        "tmnxPortGnssElevationMaskAngle": tmnxPortGnssElevationMaskAngle,
+       "tmnxPortGnssRestartPosSurvey": tmnxPortGnssRestartPosSurvey,
        "tmnxPortConnectorTblLastChanged": tmnxPortConnectorTblLastChanged,
        "tmnxPortConnectorTable": tmnxPortConnectorTable,
        "tmnxPortConnectorEntry": tmnxPortConnectorEntry,
@@ -37313,11 +38880,16 @@ mibBuilder.exportSymbols(
        "tmnxPortStateMacChipNumber": tmnxPortStateMacChipNumber,
        "tmnxPortStateLicensed": tmnxPortStateLicensed,
        "tmnxPortRsFecOperMode": tmnxPortRsFecOperMode,
+       "tmnxPortHoldTimeUpRemaining": tmnxPortHoldTimeUpRemaining,
+       "tmnxPortHoldTimeDownRemaining": tmnxPortHoldTimeDownRemaining,
        "tmnxPortTransceiverTblLastChgd": tmnxPortTransceiverTblLastChgd,
        "tmnxPortTransceiverTable": tmnxPortTransceiverTable,
        "tmnxPortTransceiverEntry": tmnxPortTransceiverEntry,
        "tmnxPortTransLastChanged": tmnxPortTransLastChanged,
        "tmnxPortTransDco": tmnxPortTransDco,
+       "tmnxPortTransOls": tmnxPortTransOls,
+       "tmnxPortTransOlsEgAmpGain": tmnxPortTransOlsEgAmpGain,
+       "tmnxPortTransPowerSaveMode": tmnxPortTransPowerSaveMode,
        "tmnxPortAdapterTable": tmnxPortAdapterTable,
        "tmnxPortAdapterEntry": tmnxPortAdapterEntry,
        "tmnxPortAdapterType": tmnxPortAdapterType,
@@ -37342,6 +38914,7 @@ mibBuilder.exportSymbols(
        "tmnxPortGnssCurUtcOffset": tmnxPortGnssCurUtcOffset,
        "tmnxPortGnssCurUtcOffsetValid": tmnxPortGnssCurUtcOffsetValid,
        "tmnxPortGnssReceiverFwVersion": tmnxPortGnssReceiverFwVersion,
+       "tmnxPortGnssSurveyCompPercent": tmnxPortGnssSurveyCompPercent,
        "tPortNetEgrPortQOverTblLastChgd": tPortNetEgrPortQOverTblLastChgd,
        "tPortNetEgrPortQOverTable": tPortNetEgrPortQOverTable,
        "tPortNetEgrPortQOverEntry": tPortNetEgrPortQOverEntry,
@@ -37386,6 +38959,16 @@ mibBuilder.exportSymbols(
        "tmnxPortDwdmConfigEntry": tmnxPortDwdmConfigEntry,
        "tmnxPortDwdmLastChanged": tmnxPortDwdmLastChanged,
        "tmnxPortDwdmLaserFrequency": tmnxPortDwdmLaserFrequency,
+       "tPortEthStormCtrlTable": tPortEthStormCtrlTable,
+       "tPortEthStormCtrlEntry": tPortEthStormCtrlEntry,
+       "tPortEthStormCtrlTrafficType": tPortEthStormCtrlTrafficType,
+       "tPortEthStormCtrlRowStatus": tPortEthStormCtrlRowStatus,
+       "tPortEthStormCtrlRate": tPortEthStormCtrlRate,
+       "tPortEthStormCtrlBurst": tPortEthStormCtrlBurst,
+       "tPortEthStormCtrlOprRate": tPortEthStormCtrlOprRate,
+       "tPortEthStormCtrlOprBurst": tPortEthStormCtrlOprBurst,
+       "tPortEthStormCtrlLastChanged": tPortEthStormCtrlLastChanged,
+       "tPortEthStormCtrlTableLastChange": tPortEthStormCtrlTableLastChange,
        "tmnxPortSharedQueueTable": tmnxPortSharedQueueTable,
        "tmnxPortSharedQueueEntry": tmnxPortSharedQueueEntry,
        "tmnxPortSharedQueueVlanQosPlcy": tmnxPortSharedQueueVlanQosPlcy,
@@ -37394,6 +38977,11 @@ mibBuilder.exportSymbols(
        "tmnxPortSharedQueueAggRatePIRLo": tmnxPortSharedQueueAggRatePIRLo,
        "tmnxPortSharedQueueAggRateCIR": tmnxPortSharedQueueAggRateCIR,
        "tPortSharedQueueLastChgd": tPortSharedQueueLastChgd,
+       "tmnxPortSharedQAggRatePIRPercent": tmnxPortSharedQAggRatePIRPercent,
+       "tmnxPortSharedQAggRateCIRPercent": tmnxPortSharedQAggRateCIRPercent,
+       "tmnxPortSharedQAggRateType": tmnxPortSharedQAggRateType,
+       "tmnxPortShrdQAggRateBurstLmt": tmnxPortShrdQAggRateBurstLmt,
+       "tmnxPortShrdQSinkExcessBW": tmnxPortShrdQSinkExcessBW,
        "tmnxPortNotificationObjects": tmnxPortNotificationObjects,
        "tmnxPortNotifyPortId": tmnxPortNotifyPortId,
        "tmnxPortNotifySonetAlarmReason": tmnxPortNotifySonetAlarmReason,
@@ -37432,31 +39020,11 @@ mibBuilder.exportSymbols(
        "tmnxPortNotifyAUIResetSource": tmnxPortNotifyAUIResetSource,
        "tmnxPortNotifyEgrVPortName": tmnxPortNotifyEgrVPortName,
        "tmnxPortSchedLocType": tmnxPortSchedLocType,
+       "tmnxPortFlexEGrpAlmReason": tmnxPortFlexEGrpAlmReason,
+       "tmnxPortFlexEMbrAlmReason": tmnxPortFlexEMbrAlmReason,
+       "tmnxPortFlexEMbrPhyInstAlmReason": tmnxPortFlexEMbrPhyInstAlmReason,
+       "tmnxPortFlexEMbrPhyInst": tmnxPortFlexEMbrPhyInst,
        "tmnxFRObjs": tmnxFRObjs,
-       "tmnxFRDlcmiTable": tmnxFRDlcmiTable,
-       "tmnxFRDlcmiEntry": tmnxFRDlcmiEntry,
-       "tmnxFRDlcmiMode": tmnxFRDlcmiMode,
-       "tmnxFRDlcmiN392Dce": tmnxFRDlcmiN392Dce,
-       "tmnxFRDlcmiN393Dce": tmnxFRDlcmiN393Dce,
-       "tmnxFRDlcmiT392Dce": tmnxFRDlcmiT392Dce,
-       "tmnxFRDlcmiTxStatusEnqMsgs": tmnxFRDlcmiTxStatusEnqMsgs,
-       "tmnxFRDlcmiRxStatusEnqMsgs": tmnxFRDlcmiRxStatusEnqMsgs,
-       "tmnxFRDlcmiStatusEnqMsgTimeouts": tmnxFRDlcmiStatusEnqMsgTimeouts,
-       "tmnxFRDlcmiTxStatusMsgs": tmnxFRDlcmiTxStatusMsgs,
-       "tmnxFRDlcmiRxStatusMsgs": tmnxFRDlcmiRxStatusMsgs,
-       "tmnxFRDlcmiStatusMsgTimeouts": tmnxFRDlcmiStatusMsgTimeouts,
-       "tmnxFRDlcmiDiscardedMsgs": tmnxFRDlcmiDiscardedMsgs,
-       "tmnxFRDlcmiInvRxSeqNumMsgs": tmnxFRDlcmiInvRxSeqNumMsgs,
-       "tmnxFrIntfTable": tmnxFrIntfTable,
-       "tmnxFrIntfEntry": tmnxFrIntfEntry,
-       "tmnxFrIntfFrf12Mode": tmnxFrIntfFrf12Mode,
-       "tmnxFrIntfLinkId": tmnxFrIntfLinkId,
-       "tmnxFrIntfLastChanged": tmnxFrIntfLastChanged,
-       "tmnxFrf12IntfTable": tmnxFrf12IntfTable,
-       "tmnxFrf12IntfEntry": tmnxFrf12IntfEntry,
-       "tmnxFrf12IntfFragmentThreshold": tmnxFrf12IntfFragmentThreshold,
-       "tmnxFrf12IntfEgrQoSProfId": tmnxFrf12IntfEgrQoSProfId,
-       "tmnxFrf12IntfLastChanged": tmnxFrf12IntfLastChanged,
        "tmnxQosAppObjs": tmnxQosAppObjs,
        "tmnxQosPoolAppTable": tmnxQosPoolAppTable,
        "tmnxQosPoolAppEntry": tmnxQosPoolAppEntry,
@@ -37472,6 +39040,36 @@ mibBuilder.exportSymbols(
        "tmnxObjectAppResvCbsAmbrAlrmMax": tmnxObjectAppResvCbsAmbrAlrmMax,
        "tmnxObjectAppAmbrAlrmThresh": tmnxObjectAppAmbrAlrmThresh,
        "tmnxObjectAppRedAlrmThresh": tmnxObjectAppRedAlrmThresh,
+       "tmnxObjAppMonPoolDepthAdminSt": tmnxObjAppMonPoolDepthAdminSt,
+       "tmnxObjAppAlrmThreshTotalPool": tmnxObjAppAlrmThreshTotalPool,
+       "tmnxObjAppAlrmThreshSharedPool": tmnxObjAppAlrmThreshSharedPool,
+       "tmnxObjAppAlrmThreshResvPool": tmnxObjAppAlrmThreshResvPool,
+       "tmnxQosPoolAppDepthInfoTable": tmnxQosPoolAppDepthInfoTable,
+       "tmnxQosPoolAppDepthInfoEntry": tmnxQosPoolAppDepthInfoEntry,
+       "tmnxObjAppPoolDepthAvgPollInt": tmnxObjAppPoolDepthAvgPollInt,
+       "tmnxObjAppPoolDepthAvgElpsdTme": tmnxObjAppPoolDepthAvgElpsdTme,
+       "tmnxObjAppPoolDepResvViolTotCnt": tmnxObjAppPoolDepResvViolTotCnt,
+       "tmnxObjAppPoolDepResvViolLast": tmnxObjAppPoolDepResvViolLast,
+       "tmnxObjAppPoolDepShrdViolTotCnt": tmnxObjAppPoolDepShrdViolTotCnt,
+       "tmnxObjAppPoolDepShrdViolLast": tmnxObjAppPoolDepShrdViolLast,
+       "tmnxObjAppPoolDepTotViolTotCnt": tmnxObjAppPoolDepTotViolTotCnt,
+       "tmnxObjAppPoolDepTotViolLast": tmnxObjAppPoolDepTotViolLast,
+       "tmnxObjAppPoolTotalUseThresExc": tmnxObjAppPoolTotalUseThresExc,
+       "tmnxObjAppPoolSharedUseThresExc": tmnxObjAppPoolSharedUseThresExc,
+       "tmnxObjAppPoolReservdUseThresExc": tmnxObjAppPoolReservdUseThresExc,
+       "tmnxQosPoolAppDepthThdInfoTable": tmnxQosPoolAppDepthThdInfoTable,
+       "tmnxQosPoolAppDepthThdInfoEntry": tmnxQosPoolAppDepthThdInfoEntry,
+       "tmnxObjectAppPoolThdType": tmnxObjectAppPoolThdType,
+       "tmnxObjAppPoolDepthPollPcnt1": tmnxObjAppPoolDepthPollPcnt1,
+       "tmnxObjAppPoolDepthPollPcnt2": tmnxObjAppPoolDepthPollPcnt2,
+       "tmnxObjAppPoolDepthPollPcnt3": tmnxObjAppPoolDepthPollPcnt3,
+       "tmnxObjAppPoolDepthPollPcnt4": tmnxObjAppPoolDepthPollPcnt4,
+       "tmnxObjAppPoolDepthPollPcnt5": tmnxObjAppPoolDepthPollPcnt5,
+       "tmnxObjAppPoolDepthPollPcnt6": tmnxObjAppPoolDepthPollPcnt6,
+       "tmnxObjAppPoolDepthPollPcnt7": tmnxObjAppPoolDepthPollPcnt7,
+       "tmnxObjAppPoolDepthPollPcnt8": tmnxObjAppPoolDepthPollPcnt8,
+       "tmnxObjAppPoolDepthPollPcnt9": tmnxObjAppPoolDepthPollPcnt9,
+       "tmnxObjAppPoolDepthPollPcnt10": tmnxObjAppPoolDepthPollPcnt10,
        "tmnxATMObjs": tmnxATMObjs,
        "tmnxATMIntfTable": tmnxATMIntfTable,
        "tmnxATMIntfEntry": tmnxATMIntfEntry,
@@ -37519,14 +39117,10 @@ mibBuilder.exportSymbols(
        "tmnxPortNetEgressMCFwdOcts": tmnxPortNetEgressMCFwdOcts,
        "tmnxPortNetEgressMCDroPkts": tmnxPortNetEgressMCDroPkts,
        "tmnxPortNetEgressMCDroOcts": tmnxPortNetEgressMCDroOcts,
-       "tmnxCiscoHDLCStatsTable": tmnxCiscoHDLCStatsTable,
-       "tmnxCiscoHDLCStatsEntry": tmnxCiscoHDLCStatsEntry,
-       "tmnxCiscoHDLCDiscardStatInPkts": tmnxCiscoHDLCDiscardStatInPkts,
-       "tmnxCiscoHDLCDiscardStatOutPkts": tmnxCiscoHDLCDiscardStatOutPkts,
-       "tmnxCiscoHDLCStatInPkts": tmnxCiscoHDLCStatInPkts,
-       "tmnxCiscoHDLCStatOutPkts": tmnxCiscoHDLCStatOutPkts,
-       "tmnxCiscoHDLCStatInOctets": tmnxCiscoHDLCStatInOctets,
-       "tmnxCiscoHDLCStatOutOctets": tmnxCiscoHDLCStatOutOctets,
+       "tmnxPortNetEgressPpUCDroPkts": tmnxPortNetEgressPpUCDroPkts,
+       "tmnxPortNetEgressPpUCDroOcts": tmnxPortNetEgressPpUCDroOcts,
+       "tmnxPortNetEgressPpMCDroPkts": tmnxPortNetEgressPpMCDroPkts,
+       "tmnxPortNetEgressPpMCDroOcts": tmnxPortNetEgressPpMCDroOcts,
        "tmnxMcMlpppStatsTable": tmnxMcMlpppStatsTable,
        "tmnxMcMlpppStatsEntry": tmnxMcMlpppStatsEntry,
        "tmnxMcMlpppClassIndex": tmnxMcMlpppClassIndex,
@@ -37665,6 +39259,23 @@ mibBuilder.exportSymbols(
        "tmnxCohOptPortRxOSNRAvg": tmnxCohOptPortRxOSNRAvg,
        "tmnxCohOptPortRxOSNRMin": tmnxCohOptPortRxOSNRMin,
        "tmnxCohOptPortRxOSNRMax": tmnxCohOptPortRxOSNRMax,
+       "tmnxCohOptPortRxTotalPower": tmnxCohOptPortRxTotalPower,
+       "tmnxCohOptPortRxTotalPowerAvg": tmnxCohOptPortRxTotalPowerAvg,
+       "tmnxCohOptPortRxTotalPowerMin": tmnxCohOptPortRxTotalPowerMin,
+       "tmnxCohOptPortRxTotalPowerMax": tmnxCohOptPortRxTotalPowerMax,
+       "tmnxCohOptPortRxPolarDepLoss": tmnxCohOptPortRxPolarDepLoss,
+       "tmnxCohOptPortRxPolarDepLossAvg": tmnxCohOptPortRxPolarDepLossAvg,
+       "tmnxCohOptPortRxPolarDepLossMin": tmnxCohOptPortRxPolarDepLossMin,
+       "tmnxCohOptPortRxPolarDepLossMax": tmnxCohOptPortRxPolarDepLossMax,
+       "tmnxCohOptPortRxSopRoc": tmnxCohOptPortRxSopRoc,
+       "tmnxCohOptPortRxSopRocAvg": tmnxCohOptPortRxSopRocAvg,
+       "tmnxCohOptPortRxSopRocMin": tmnxCohOptPortRxSopRocMin,
+       "tmnxCohOptPortRxSopRocMax": tmnxCohOptPortRxSopRocMax,
+       "tmnxCohOptPortRxMediaFERC": tmnxCohOptPortRxMediaFERC,
+       "tmnxCohOptPortRxMediaFERCAvg": tmnxCohOptPortRxMediaFERCAvg,
+       "tmnxCohOptPortRxMediaFERCMin": tmnxCohOptPortRxMediaFERCMin,
+       "tmnxCohOptPortRxMediaFERCMax": tmnxCohOptPortRxMediaFERCMax,
+       "tmnxPortDwdmSupportedStats": tmnxPortDwdmSupportedStats,
        "tmnxPortEgrAggStatsTable": tmnxPortEgrAggStatsTable,
        "tmnxPortEgrAggStatsEntry": tmnxPortEgrAggStatsEntry,
        "tmnxPortEgrAggFwdInProfPkts": tmnxPortEgrAggFwdInProfPkts,
@@ -37690,6 +39301,7 @@ mibBuilder.exportSymbols(
        "tFwdEngDRUnkwnMACDstAddDscrdVPLS": tFwdEngDRUnkwnMACDstAddDscrdVPLS,
        "tFwdEngDRL2ServiceMTUExceed": tFwdEngDRL2ServiceMTUExceed,
        "tFwdEngDRNeedsICMP": tFwdEngDRNeedsICMP,
+       "tFwdEngDRUnknownLabeledPkt": tFwdEngDRUnknownLabeledPkt,
        "tmnxPortStatsTable": tmnxPortStatsTable,
        "tmnxPortStatsEntry": tmnxPortStatsEntry,
        "tmnxPortInErrors": tmnxPortInErrors,
@@ -37748,6 +39360,8 @@ mibBuilder.exportSymbols(
        "tmnxPortDcpFpStaticOperKbps": tmnxPortDcpFpStaticOperKbps,
        "tmnxPortDcpFpStaticOperMbs": tmnxPortDcpFpStaticOperMbs,
        "tmnxPortDcpFpStaticPlcrDepth": tmnxPortDcpFpStaticPlcrDepth,
+       "tmnxPortDcpFpStaticTotalExcdCnt": tmnxPortDcpFpStaticTotalExcdCnt,
+       "tmnxPortDcpFpStaticExtCnfrmStCnt": tmnxPortDcpFpStaticExtCnfrmStCnt,
        "tmnxPortDcpFpDynStatTable": tmnxPortDcpFpDynStatTable,
        "tmnxPortDcpFpDynStatEntry": tmnxPortDcpFpDynStatEntry,
        "tmnxPortDcpFpProtocol": tmnxPortDcpFpProtocol,
@@ -37763,6 +39377,8 @@ mibBuilder.exportSymbols(
        "tmnxPortDcpFpDynOperKbps": tmnxPortDcpFpDynOperKbps,
        "tmnxPortDcpFpDynOperMbs": tmnxPortDcpFpDynOperMbs,
        "tmnxPortDcpFpDynPlcrDepth": tmnxPortDcpFpDynPlcrDepth,
+       "tmnxPortDcpFpDynTotalExcdCount": tmnxPortDcpFpDynTotalExcdCount,
+       "tmnxPortDcpFpDynExtCnfrmStCnt": tmnxPortDcpFpDynExtCnfrmStCnt,
        "tmnxPortDcpFpLocMonStatTable": tmnxPortDcpFpLocMonStatTable,
        "tmnxPortDcpFpLocMonStatEntry": tmnxPortDcpFpLocMonStatEntry,
        "tmnxPortDcpFpLocMonPlcrName": tmnxPortDcpFpLocMonPlcrName,
@@ -37776,6 +39392,8 @@ mibBuilder.exportSymbols(
        "tmnxPortDcpFpLocMonOperKbps": tmnxPortDcpFpLocMonOperKbps,
        "tmnxPortDcpFpLocMonOperMbs": tmnxPortDcpFpLocMonOperMbs,
        "tmnxPortDcpFpLocMonPlcrDepth": tmnxPortDcpFpLocMonPlcrDepth,
+       "tmnxPortDcpFpLocMonTotalExcdCnt": tmnxPortDcpFpLocMonTotalExcdCnt,
+       "tmnxPortDcpFpLocMonExtCnfrmStCnt": tmnxPortDcpFpLocMonExtCnfrmStCnt,
        "tmnxPortSharedQStatsTable": tmnxPortSharedQStatsTable,
        "tmnxPortSharedQStatsEntry": tmnxPortSharedQStatsEntry,
        "tPortSharedQStatsVoqId": tPortSharedQStatsVoqId,
@@ -37803,6 +39421,7 @@ mibBuilder.exportSymbols(
        "tPortEgrVPHAShpSchdInfoEntry": tPortEgrVPHAShpSchdInfoEntry,
        "tPortEgrHAShpSchdNumAggShprMbrs": tPortEgrHAShpSchdNumAggShprMbrs,
        "tPortEgrHAShpSchdAlgScalngColor": tPortEgrHAShpSchdAlgScalngColor,
+       "tPortEgrHAShpSchdNumNonMgdSMbrs": tPortEgrHAShpSchdNumNonMgdSMbrs,
        "tmnxPortDwdmStatsTable": tmnxPortDwdmStatsTable,
        "tmnxPortDwdmStatsEntry": tmnxPortDwdmStatsEntry,
        "tmnxPortDwdmOperFrequency": tmnxPortDwdmOperFrequency,
@@ -37812,6 +39431,71 @@ mibBuilder.exportSymbols(
        "tmnxPortDwdmFineTuning": tmnxPortDwdmFineTuning,
        "tmnxPortDwdmFineTuningResolution": tmnxPortDwdmFineTuningResolution,
        "tmnxPortDwdmFineTuningRange": tmnxPortDwdmFineTuningRange,
+       "tPortEgrHAShpSchdStatsTable": tPortEgrHAShpSchdStatsTable,
+       "tPortEgrHAShpSchdStatsEntry": tPortEgrHAShpSchdStatsEntry,
+       "tPortEgrHAShpSchdStSCls": tPortEgrHAShpSchdStSCls,
+       "tPortEgrHAShpSchdSLstClrdTime": tPortEgrHAShpSchdSLstClrdTime,
+       "tPortEgrHAShpSchdStSClsFwdPkt": tPortEgrHAShpSchdStSClsFwdPkt,
+       "tPortEgrHAShpSchdStSClsFwdOct": tPortEgrHAShpSchdStSClsFwdOct,
+       "tPortEgrHAShpSchdStSClsDpdPkt": tPortEgrHAShpSchdStSClsDpdPkt,
+       "tPortEgrHAShpSchdStSClsDpdOct": tPortEgrHAShpSchdStSClsDpdOct,
+       "tPortEgrHAShpSchdMonThrTable": tPortEgrHAShpSchdMonThrTable,
+       "tPortEgrHAShpSchdMonThrEntry": tPortEgrHAShpSchdMonThrEntry,
+       "tmnxPortEgrHASSchdMonThrPExdCnt": tmnxPortEgrHASSchdMonThrPExdCnt,
+       "tmnxPortEgrHASSchdMonThrStrtTime": tmnxPortEgrHASSchdMonThrStrtTime,
+       "tmnxPortEgrHASSchdMonThrEndTime": tmnxPortEgrHASSchdMonThrEndTime,
+       "tmnxPortEgrHASSchdMonThrTotSmpls": tmnxPortEgrHASSchdMonThrTotSmpls,
+       "tPortEgrHAShpSchdInfoTable": tPortEgrHAShpSchdInfoTable,
+       "tPortEgrHAShpSchdInfoEntry": tPortEgrHAShpSchdInfoEntry,
+       "tPortEgrHASSchdNumAggShprMbrs": tPortEgrHASSchdNumAggShprMbrs,
+       "tPortEgrHASSchdAlgScalngColor": tPortEgrHASSchdAlgScalngColor,
+       "tPortEgrHASSchdNumNonMgdSMbrs": tPortEgrHASSchdNumNonMgdSMbrs,
+       "tmnxPortAggQueueStatsTable": tmnxPortAggQueueStatsTable,
+       "tmnxPortAggQueueStatsEntry": tmnxPortAggQueueStatsEntry,
+       "tmnxPortAggQueueIngPktsFwd": tmnxPortAggQueueIngPktsFwd,
+       "tmnxPortAggQueueEgrPktsFwd": tmnxPortAggQueueEgrPktsFwd,
+       "tmnxPortAggQueueIngOctsFwd": tmnxPortAggQueueIngOctsFwd,
+       "tmnxPortAggQueueEgrOctsFwd": tmnxPortAggQueueEgrOctsFwd,
+       "tmnxPortAggQueueIngPktsDrop": tmnxPortAggQueueIngPktsDrop,
+       "tmnxPortAggQueueEgrPktsDrop": tmnxPortAggQueueEgrPktsDrop,
+       "tmnxPortAggQueueIngOctsDrop": tmnxPortAggQueueIngOctsDrop,
+       "tmnxPortAggQueueEgrOctsDrop": tmnxPortAggQueueEgrOctsDrop,
+       "tmnxPortAggQueueLastClearedTime": tmnxPortAggQueueLastClearedTime,
+       "tmnxPortAggQueueLastFetchedTime": tmnxPortAggQueueLastFetchedTime,
+       "tPortAccEgrQGrpAggShaperTable": tPortAccEgrQGrpAggShaperTable,
+       "tPortAccEgrQGrpAggShaperEntry": tPortAccEgrQGrpAggShaperEntry,
+       "tPortAccEgrQGrpAggShpSchdAssgnd": tPortAccEgrQGrpAggShpSchdAssgnd,
+       "tPortAccEgrQGrpAggShpAssgndRate": tPortAccEgrQGrpAggShpAssgndRate,
+       "tPortAccEgrQGrpAggShpOperRate": tPortAccEgrQGrpAggShpOperRate,
+       "tPortAccEgrQGrpAggShpConsmdRate": tPortAccEgrQGrpAggShpConsmdRate,
+       "tPortAccEgrQGrpAggShpAvgFrmOvhd": tPortAccEgrQGrpAggShpAvgFrmOvhd,
+       "tPortAccEgrQGrpAggShpAfoRlTime": tPortAccEgrQGrpAggShpAfoRlTime,
+       "tPortAccEgrQGrpAggShpSchdActive": tPortAccEgrQGrpAggShpSchdActive,
+       "tPortAccEgrQGrpAggShpSchdRuning": tPortAccEgrQGrpAggShpSchdRuning,
+       "tPortAccEgrQGrpAggShpInvlClsUse": tPortAccEgrQGrpAggShpInvlClsUse,
+       "tPortAccEgrQGrpAggShpBurstLimit": tPortAccEgrQGrpAggShpBurstLimit,
+       "tPortAccEgrQGrpAggShpDepth": tPortAccEgrQGrpAggShpDepth,
+       "tPortAccEgrQGrpAggShpPacketMode": tPortAccEgrQGrpAggShpPacketMode,
+       "tPortAccEgrQGrpAggShpOutOfDate": tPortAccEgrQGrpAggShpOutOfDate,
+       "tPortAccEgrQGrpAggShpQSetSize": tPortAccEgrQGrpAggShpQSetSize,
+       "tPortAccEgrQGrpAggShpQSetSzOvr": tPortAccEgrQGrpAggShpQSetSzOvr,
+       "tPortNetEgrQGrpAggShaperTable": tPortNetEgrQGrpAggShaperTable,
+       "tPortNetEgrQGrpAggShaperEntry": tPortNetEgrQGrpAggShaperEntry,
+       "tPortNetEgrQGrpAggShpSchdAssgnd": tPortNetEgrQGrpAggShpSchdAssgnd,
+       "tPortNetEgrQGrpAggShpAssgndRate": tPortNetEgrQGrpAggShpAssgndRate,
+       "tPortNetEgrQGrpAggShpOperRate": tPortNetEgrQGrpAggShpOperRate,
+       "tPortNetEgrQGrpAggShpConsmdRate": tPortNetEgrQGrpAggShpConsmdRate,
+       "tPortNetEgrQGrpAggShpAvgFrmOvhd": tPortNetEgrQGrpAggShpAvgFrmOvhd,
+       "tPortNetEgrQGrpAggShpAfoRlTime": tPortNetEgrQGrpAggShpAfoRlTime,
+       "tPortNetEgrQGrpAggShpSchdActive": tPortNetEgrQGrpAggShpSchdActive,
+       "tPortNetEgrQGrpAggShpSchdRuning": tPortNetEgrQGrpAggShpSchdRuning,
+       "tPortNetEgrQGrpAggShpInvlClsUse": tPortNetEgrQGrpAggShpInvlClsUse,
+       "tPortNetEgrQGrpAggShpBurstLimit": tPortNetEgrQGrpAggShpBurstLimit,
+       "tPortNetEgrQGrpAggShpDepth": tPortNetEgrQGrpAggShpDepth,
+       "tPortNetEgrQGrpAggShpPacketMode": tPortNetEgrQGrpAggShpPacketMode,
+       "tPortNetEgrQGrpAggShpOutOfDate": tPortNetEgrQGrpAggShpOutOfDate,
+       "tPortNetEgrQGrpAggShpQSetSize": tPortNetEgrQGrpAggShpQSetSize,
+       "tPortNetEgrQGrpAggShpQSetSzOvr": tPortNetEgrQGrpAggShpQSetSzOvr,
        "tmnxPortNotifyPrefix": tmnxPortNotifyPrefix,
        "tmnxPortNotification": tmnxPortNotification,
        "tmnxEqOobPortFailure": tmnxEqOobPortFailure,
@@ -37882,5 +39566,19 @@ mibBuilder.exportSymbols(
        "tmnxPortAUIReset": tmnxPortAUIReset,
        "tmnxHwAggShpSchedOperColorGreen": tmnxHwAggShpSchedOperColorGreen,
        "tmnxHwAggShpSchedOperColorAmber": tmnxHwAggShpSchedOperColorAmber,
-       "tmnxHwAggShpSchedOperColorRed": tmnxHwAggShpSchedOperColorRed}
+       "tmnxHwAggShpSchedOperColorRed": tmnxHwAggShpSchedOperColorRed,
+       "tmnxDS0ChanGrpLoopbackStarted": tmnxDS0ChanGrpLoopbackStarted,
+       "tmnxDS0ChanGrpLoopbackStopped": tmnxDS0ChanGrpLoopbackStopped,
+       "tmnxResvPoolUseThreshExcd": tmnxResvPoolUseThreshExcd,
+       "tmnxResvPoolUseThreshNotExcd": tmnxResvPoolUseThreshNotExcd,
+       "tmnxTotalPoolUseThreshExcd": tmnxTotalPoolUseThreshExcd,
+       "tmnxTotalPoolUseThreshNotExcd": tmnxTotalPoolUseThreshNotExcd,
+       "tmnxSharedPoolUseThreshExcd": tmnxSharedPoolUseThreshExcd,
+       "tmnxSharedPoolUseThreshNotExcd": tmnxSharedPoolUseThreshNotExcd,
+       "tmnxEqPortFlexEGroupAlrm": tmnxEqPortFlexEGroupAlrm,
+       "tmnxEqPortFlexEGroupAlrmClr": tmnxEqPortFlexEGroupAlrmClr,
+       "tmnxEqPortFlexEMemberAlrm": tmnxEqPortFlexEMemberAlrm,
+       "tmnxEqPortFlexEMemberAlrmClr": tmnxEqPortFlexEMemberAlrmClr,
+       "tmnxEqPortFlexEMbrPhyInstAlrm": tmnxEqPortFlexEMbrPhyInstAlrm,
+       "tmnxEqPortFlexEMbrPhyInstAlrmClr": tmnxEqPortFlexEMbrPhyInstAlrmClr}
 )

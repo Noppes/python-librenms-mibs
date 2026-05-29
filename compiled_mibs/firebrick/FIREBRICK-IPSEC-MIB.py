@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\firebrick\FIREBRICK-IPSEC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:44:36 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -115,7 +112,8 @@ fbIPsecMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     fbIPsecMib.setRevisions(
-        ("2020-06-16 00:00",)
+        ("2022-07-15 00:00",
+         "2020-06-16 00:00")
     )
 
 
@@ -123,6 +121,44 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class FbIPsecConState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12)
+        )
+    )
+    namedValues = NamedValues(
+        *(("badConfig", 0),
+          ("profileOff", 1),
+          ("awaitPeer", 2),
+          ("awaitDemand", 3),
+          ("lingering", 4),
+          ("awaitRecon", 5),
+          ("down", 6),
+          ("initEAP", 7),
+          ("initAuth", 8),
+          ("initNeg", 9),
+          ("closing", 10),
+          ("childless", 11),
+          ("connected", 12))
+    )
 
 
 
@@ -183,7 +219,7 @@ fbIPsecConnectionName = _FbIPsecConnectionName_Object(
 fbIPsecConnectionName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbIPsecConnectionName.setStatus("current")
-_FbIPsecConnectionState_Type = Integer32
+_FbIPsecConnectionState_Type = FbIPsecConState
 _FbIPsecConnectionState_Object = MibTableColumn
 fbIPsecConnectionState = _FbIPsecConnectionState_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 500, 2, 1, 3),
@@ -202,7 +238,7 @@ fbIPsecConnectionUptime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbIPsecConnectionUptime.setStatus("current")
 _FbIPsecConnectionLocalID_Type = DisplayString
-_FbIPsecConnectionLocalID_Object = MibScalar
+_FbIPsecConnectionLocalID_Object = MibTableColumn
 fbIPsecConnectionLocalID = _FbIPsecConnectionLocalID_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 500, 2, 1, 5),
     _FbIPsecConnectionLocalID_Type()
@@ -211,7 +247,7 @@ fbIPsecConnectionLocalID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fbIPsecConnectionLocalID.setStatus("current")
 _FbIPsecConnectionPeerID_Type = DisplayString
-_FbIPsecConnectionPeerID_Object = MibScalar
+_FbIPsecConnectionPeerID_Object = MibTableColumn
 fbIPsecConnectionPeerID = _FbIPsecConnectionPeerID_Object(
     (1, 3, 6, 1, 4, 1, 24693, 100, 500, 2, 1, 6),
     _FbIPsecConnectionPeerID_Type()
@@ -248,7 +284,8 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "FIREBRICK-IPSEC-MIB",
-    **{"fbIPsecMib": fbIPsecMib,
+    **{"FbIPsecConState": FbIPsecConState,
+       "fbIPsecMib": fbIPsecMib,
        "fbIPsecGeneral": fbIPsecGeneral,
        "fbIPsecEstablished": fbIPsecEstablished,
        "fbIPsecHalfOpen": fbIPsecHalfOpen,

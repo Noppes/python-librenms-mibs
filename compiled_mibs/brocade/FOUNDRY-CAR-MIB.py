@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-CAR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -99,10 +96,12 @@ if 'mibBuilder' not in globals():
 
 (DisplayString,
  PhysAddress,
+ RowStatus,
  TextualConvention) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
+    "RowStatus",
     "TextualConvention")
 
 
@@ -113,8 +112,8 @@ snCAR = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snCAR.setRevisions(
-        ("2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -265,7 +264,7 @@ snPortCARRate = _SnPortCARRate_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 16, 1, 1, 1, 6),
     _SnPortCARRate_Type()
 )
-snPortCARRate.setMaxAccess("read-only")
+snPortCARRate.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snPortCARRate.setStatus("current")
 _SnPortCARLimit_Type = Integer32
@@ -274,7 +273,7 @@ snPortCARLimit = _SnPortCARLimit_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 16, 1, 1, 1, 7),
     _SnPortCARLimit_Type()
 )
-snPortCARLimit.setMaxAccess("read-only")
+snPortCARLimit.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     snPortCARLimit.setStatus("current")
 _SnPortCARExtLimit_Type = Integer32
@@ -349,6 +348,15 @@ snPortCARStatCurBurst = _SnPortCARStatCurBurst_Object(
 snPortCARStatCurBurst.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snPortCARStatCurBurst.setStatus("current")
+_SnPortCARRowStatus_Type = RowStatus
+_SnPortCARRowStatus_Object = MibTableColumn
+snPortCARRowStatus = _SnPortCARRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 16, 1, 1, 1, 16),
+    _SnPortCARRowStatus_Type()
+)
+snPortCARRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    snPortCARRowStatus.setStatus("current")
 _AgRateLimitCounterTable_Object = MibTable
 agRateLimitCounterTable = _AgRateLimitCounterTable_Object(
     (1, 3, 6, 1, 4, 1, 1991, 1, 1, 3, 16, 1, 2)
@@ -443,6 +451,7 @@ mibBuilder.exportSymbols(
        "snPortCARStatFilteredPkts": snPortCARStatFilteredPkts,
        "snPortCARStatFilteredBytes": snPortCARStatFilteredBytes,
        "snPortCARStatCurBurst": snPortCARStatCurBurst,
+       "snPortCARRowStatus": snPortCARRowStatus,
        "agRateLimitCounterTable": agRateLimitCounterTable,
        "agRateLimitCounterEntry": agRateLimitCounterEntry,
        "agRateLimitCounterFwdedOctets": agRateLimitCounterFwdedOctets,

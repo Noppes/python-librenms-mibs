@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\packetflux\PACKETFLUX-SMI
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:19:38 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,8 +102,8 @@ packetflux = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     packetflux.setRevisions(
-        ("2013-06-04 16:31",
-         "2013-06-04 21:58")
+        ("2018-07-07 12:55",
+         "2013-06-04 16:32")
     )
 
 
@@ -119,18 +116,36 @@ if mibBuilder.loadTexts:
 
 # MIB Managed Objects in the order of their OIDs
 
-_PacketfluxProducts_ObjectIdentity = ObjectIdentity
-packetfluxProducts = _PacketfluxProducts_ObjectIdentity(
+_PacketfluxProductIDs_ObjectIdentity = ObjectIdentity
+packetfluxProductIDs = _PacketfluxProductIDs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 32050, 1)
 )
 if mibBuilder.loadTexts:
-    packetfluxProducts.setStatus("current")
-_PacketfluxMgmt_ObjectIdentity = ObjectIdentity
-packetfluxMgmt = _PacketfluxMgmt_ObjectIdentity(
+    packetfluxProductIDs.setStatus("current")
+_PacketfluxProductSpecific_ObjectIdentity = ObjectIdentity
+packetfluxProductSpecific = _PacketfluxProductSpecific_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 32050, 2)
 )
 if mibBuilder.loadTexts:
-    packetfluxMgmt.setStatus("current")
+    packetfluxProductSpecific.setStatus("current")
+_PacketfluxFeatureSpecific_ObjectIdentity = ObjectIdentity
+packetfluxFeatureSpecific = _PacketfluxFeatureSpecific_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 32050, 3)
+)
+if mibBuilder.loadTexts:
+    packetfluxFeatureSpecific.setStatus("current")
+_PacketfluxModuleIdentities_ObjectIdentity = ObjectIdentity
+packetfluxModuleIdentities = _PacketfluxModuleIdentities_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 32050, 4)
+)
+if mibBuilder.loadTexts:
+    packetfluxModuleIdentities.setStatus("current")
+_PacketfluxExperimental_ObjectIdentity = ObjectIdentity
+packetfluxExperimental = _PacketfluxExperimental_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 32050, 5)
+)
+if mibBuilder.loadTexts:
+    packetfluxExperimental.setStatus("current")
 
 # Managed Objects groups
 
@@ -152,6 +167,9 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "PACKETFLUX-SMI",
     **{"packetflux": packetflux,
-       "packetfluxProducts": packetfluxProducts,
-       "packetfluxMgmt": packetfluxMgmt}
+       "packetfluxProductIDs": packetfluxProductIDs,
+       "packetfluxProductSpecific": packetfluxProductSpecific,
+       "packetfluxFeatureSpecific": packetfluxFeatureSpecific,
+       "packetfluxModuleIdentities": packetfluxModuleIdentities,
+       "packetfluxExperimental": packetfluxExperimental}
 )

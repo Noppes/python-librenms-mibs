@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-DOT1Q-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-DOT1Q-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,7 @@ alcatelIND1Dot1QMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1Dot1QMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -214,7 +211,7 @@ qPortVlanStatus = _QPortVlanStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 1, 1, 4),
     _QPortVlanStatus_Type()
 )
-qPortVlanStatus.setMaxAccess("read-write")
+qPortVlanStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qPortVlanStatus.setStatus("current")
 
@@ -233,7 +230,7 @@ qPortVlanDescription = _QPortVlanDescription_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 1, 1, 5),
     _QPortVlanDescription_Type()
 )
-qPortVlanDescription.setMaxAccess("read-write")
+qPortVlanDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qPortVlanDescription.setStatus("current")
 
@@ -263,7 +260,7 @@ qPortVlanForceTagInternal = _QPortVlanForceTagInternal_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 1, 1, 6),
     _QPortVlanForceTagInternal_Type()
 )
-qPortVlanForceTagInternal.setMaxAccess("read-write")
+qPortVlanForceTagInternal.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qPortVlanForceTagInternal.setStatus("current")
 _QAggregateVlanTable_Object = MibTable
@@ -326,7 +323,7 @@ qAggregateVlanStatus = _QAggregateVlanStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 2, 1, 3),
     _QAggregateVlanStatus_Type()
 )
-qAggregateVlanStatus.setMaxAccess("read-write")
+qAggregateVlanStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qAggregateVlanStatus.setStatus("current")
 
@@ -345,7 +342,7 @@ qAggregateVlanDescription = _QAggregateVlanDescription_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 2, 1, 4),
     _QAggregateVlanDescription_Type()
 )
-qAggregateVlanDescription.setMaxAccess("read-write")
+qAggregateVlanDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qAggregateVlanDescription.setStatus("current")
 _QAtmIfIndexVpiVciTable_Object = MibTable
@@ -448,7 +445,7 @@ qAtmIfIndexVpiVciVlanAction = _QAtmIfIndexVpiVciVlanAction_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 3, 1, 5),
     _QAtmIfIndexVpiVciVlanAction_Type()
 )
-qAtmIfIndexVpiVciVlanAction.setMaxAccess("read-write")
+qAtmIfIndexVpiVciVlanAction.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qAtmIfIndexVpiVciVlanAction.setStatus("current")
 
@@ -467,7 +464,7 @@ qAtmIfIndexVpiVciVlanDescription = _QAtmIfIndexVpiVciVlanDescription_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 3, 1, 6),
     _QAtmIfIndexVpiVciVlanDescription_Type()
 )
-qAtmIfIndexVpiVciVlanDescription.setMaxAccess("read-write")
+qAtmIfIndexVpiVciVlanDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qAtmIfIndexVpiVciVlanDescription.setStatus("current")
 
@@ -495,7 +492,7 @@ qAtmIfIndexVpiVciAcceptableFrameTypes = _QAtmIfIndexVpiVciAcceptableFrameTypes_O
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 3, 1, 7),
     _QAtmIfIndexVpiVciAcceptableFrameTypes_Type()
 )
-qAtmIfIndexVpiVciAcceptableFrameTypes.setMaxAccess("read-write")
+qAtmIfIndexVpiVciAcceptableFrameTypes.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qAtmIfIndexVpiVciAcceptableFrameTypes.setStatus("current")
 
@@ -525,7 +522,7 @@ qAtmIfIndexVpiVciForceTagInternal = _QAtmIfIndexVpiVciForceTagInternal_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 1, 1, 3, 1, 8),
     _QAtmIfIndexVpiVciForceTagInternal_Type()
 )
-qAtmIfIndexVpiVciForceTagInternal.setMaxAccess("read-write")
+qAtmIfIndexVpiVciForceTagInternal.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     qAtmIfIndexVpiVciForceTagInternal.setStatus("current")
 _AlcatelIND1Dot1QMIBConformance_ObjectIdentity = ObjectIdentity
@@ -575,6 +572,22 @@ dot1qAggregateGroup.setObjects(
 if mibBuilder.loadTexts:
     dot1qAggregateGroup.setStatus("current")
 
+qAtmIfIndexVpiVciEntryGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 21, 1, 2, 1, 3)
+)
+qAtmIfIndexVpiVciEntryGroup.setObjects(
+      *(("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndex"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmVpiValue"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmVciValue"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndexVpiVciVlanTagValue"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndexVpiVciVlanAction"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndexVpiVciVlanDescription"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndexVpiVciAcceptableFrameTypes"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndexVpiVciForceTagInternal"))
+)
+if mibBuilder.loadTexts:
+    qAtmIfIndexVpiVciEntryGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -592,7 +605,8 @@ alcatelIND1Dot1QMIBCompliance = ModuleCompliance(
 )
 alcatelIND1Dot1QMIBCompliance.setObjects(
       *(("ALCATEL-IND1-DOT1Q-MIB", "dot1qPortGroup"),
-        ("ALCATEL-IND1-DOT1Q-MIB", "dot1qAggregateGroup"))
+        ("ALCATEL-IND1-DOT1Q-MIB", "dot1qAggregateGroup"),
+        ("ALCATEL-IND1-DOT1Q-MIB", "qAtmIfIndexVpiVciEntryGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1Dot1QMIBCompliance.setStatus(
@@ -635,6 +649,7 @@ mibBuilder.exportSymbols(
        "alcatelIND1Dot1QMIBGroups": alcatelIND1Dot1QMIBGroups,
        "dot1qPortGroup": dot1qPortGroup,
        "dot1qAggregateGroup": dot1qAggregateGroup,
+       "qAtmIfIndexVpiVciEntryGroup": qAtmIfIndexVpiVciEntryGroup,
        "alcatelIND1Dot1QMIBCompliances": alcatelIND1Dot1QMIBCompliances,
        "alcatelIND1Dot1QMIBCompliance": alcatelIND1Dot1QMIBCompliance}
 )

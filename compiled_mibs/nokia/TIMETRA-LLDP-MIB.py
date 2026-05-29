@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-LLDP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:17:14 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -146,10 +143,14 @@ if 'mibBuilder' not in globals():
     "tmnxSRObjs")
 
 (TmnxEnabledDisabled,
- TmnxEnabledDisabledAdminState) = mibBuilder.importSymbols(
+ TmnxEnabledDisabledAdminState,
+ TmnxLldpManAddressIndex,
+ TmnxPortID) = mibBuilder.importSymbols(
     "TIMETRA-TC-MIB",
     "TmnxEnabledDisabled",
-    "TmnxEnabledDisabledAdminState")
+    "TmnxEnabledDisabledAdminState",
+    "TmnxLldpManAddressIndex",
+    "TmnxPortID")
 
 
 # MODULE-IDENTITY
@@ -159,7 +160,8 @@ tmnxLldpMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     tmnxLldpMIBModule.setRevisions(
-        ("2015-01-01 00:00",
+        ("2024-02-28 00:00",
+         "2015-01-01 00:00",
          "2009-02-28 00:00",
          "2002-02-02 00:00")
     )
@@ -177,26 +179,6 @@ class TmnxLldpDestAddressTableIndex(TextualConvention, Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueRangeConstraint(1, 4096),
-    )
-
-
-
-class TmnxLldpManAddressIndex(TextualConvention, Integer32):
-    status = "current"
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("oob", 0),
-          ("system", 1),
-          ("systemIpv6", 2),
-          ("oobIpv6", 3))
     )
 
 
@@ -226,6 +208,14 @@ tmnxLldpV13v0Groups = _TmnxLldpV13v0Groups_ObjectIdentity(
 _TmnxLldpV16v0Groups_ObjectIdentity = ObjectIdentity
 tmnxLldpV16v0Groups = _TmnxLldpV16v0Groups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 2, 13)
+)
+_TmnxLldpV24v0Groups_ObjectIdentity = ObjectIdentity
+tmnxLldpV24v0Groups = _TmnxLldpV24v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 2, 14)
+)
+_TmnxLldpV25v0Groups_ObjectIdentity = ObjectIdentity
+tmnxLldpV25v0Groups = _TmnxLldpV25v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 2, 15)
 )
 _TmnxLldpObjects_ObjectIdentity = ObjectIdentity
 tmnxLldpObjects = _TmnxLldpObjects_ObjectIdentity(
@@ -450,6 +440,75 @@ tmnxLldpPortCfgPortIdSubtype = _TmnxLldpPortCfgPortIdSubtype_Object(
 tmnxLldpPortCfgPortIdSubtype.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxLldpPortCfgPortIdSubtype.setStatus("current")
+_TmnxLldpPortCfgOverride_Type = TmnxPortID
+_TmnxLldpPortCfgOverride_Object = MibTableColumn
+tmnxLldpPortCfgOverride = _TmnxLldpPortCfgOverride_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 59, 1, 5, 1, 7),
+    _TmnxLldpPortCfgOverride_Type()
+)
+tmnxLldpPortCfgOverride.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxLldpPortCfgOverride.setStatus("current")
+
+
+class _TmnxLldpPortCfgTunnelNearNonTpmr_Type(Integer32):
+    """Custom type tmnxLldpPortCfgTunnelNearNonTpmr based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_TmnxLldpPortCfgTunnelNearNonTpmr_Type.__name__ = "Integer32"
+_TmnxLldpPortCfgTunnelNearNonTpmr_Object = MibTableColumn
+tmnxLldpPortCfgTunnelNearNonTpmr = _TmnxLldpPortCfgTunnelNearNonTpmr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 59, 1, 5, 1, 8),
+    _TmnxLldpPortCfgTunnelNearNonTpmr_Type()
+)
+tmnxLldpPortCfgTunnelNearNonTpmr.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxLldpPortCfgTunnelNearNonTpmr.setStatus("current")
+
+
+class _TmnxLldpPortCfgTunnelNearestCust_Type(Integer32):
+    """Custom type tmnxLldpPortCfgTunnelNearestCust based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_TmnxLldpPortCfgTunnelNearestCust_Type.__name__ = "Integer32"
+_TmnxLldpPortCfgTunnelNearestCust_Object = MibTableColumn
+tmnxLldpPortCfgTunnelNearestCust = _TmnxLldpPortCfgTunnelNearestCust_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 59, 1, 5, 1, 9),
+    _TmnxLldpPortCfgTunnelNearestCust_Type()
+)
+tmnxLldpPortCfgTunnelNearestCust.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxLldpPortCfgTunnelNearestCust.setStatus("current")
 _TmnxLldpConfigManAddrPortsTable_Object = MibTable
 tmnxLldpConfigManAddrPortsTable = _TmnxLldpConfigManAddrPortsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 59, 1, 6)
@@ -1101,6 +1160,25 @@ tmnxLldpRemSysV16v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxLldpRemSysV16v0Group.setStatus("current")
 
+tmnxLldpConfigV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 2, 14, 1)
+)
+tmnxLldpConfigV24v0Group.setObjects(
+    ("TIMETRA-LLDP-MIB", "tmnxLldpPortCfgOverride")
+)
+if mibBuilder.loadTexts:
+    tmnxLldpConfigV24v0Group.setStatus("current")
+
+tmnxLldpConfigV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 2, 15, 1)
+)
+tmnxLldpConfigV25v0Group.setObjects(
+      *(("TIMETRA-LLDP-MIB", "tmnxLldpPortCfgTunnelNearNonTpmr"),
+        ("TIMETRA-LLDP-MIB", "tmnxLldpPortCfgTunnelNearestCust"))
+)
+if mibBuilder.loadTexts:
+    tmnxLldpConfigV25v0Group.setStatus("current")
+
 
 # Notification objects
 
@@ -1251,13 +1329,34 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxLldpV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 1, 5)
+)
+tmnxLldpV24v0Compliance.setObjects(
+    ("TIMETRA-LLDP-MIB", "tmnxLldpConfigV24v0Group")
+)
+if mibBuilder.loadTexts:
+    tmnxLldpV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxLldpV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 59, 1, 6)
+)
+tmnxLldpV25v0Compliance.setObjects(
+    ("TIMETRA-LLDP-MIB", "tmnxLldpConfigV25v0Group")
+)
+if mibBuilder.loadTexts:
+    tmnxLldpV25v0Compliance.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
 mibBuilder.exportSymbols(
     "TIMETRA-LLDP-MIB",
     **{"TmnxLldpDestAddressTableIndex": TmnxLldpDestAddressTableIndex,
-       "TmnxLldpManAddressIndex": TmnxLldpManAddressIndex,
        "tmnxLldpMIBModule": tmnxLldpMIBModule,
        "tmnxLldpConformance": tmnxLldpConformance,
        "tmnxLldpCompliances": tmnxLldpCompliances,
@@ -1265,6 +1364,8 @@ mibBuilder.exportSymbols(
        "tmnxLldpV11v0Compliance": tmnxLldpV11v0Compliance,
        "tmnxLldpV13v0Compliance": tmnxLldpV13v0Compliance,
        "tmnxLldpV16v0Compliance": tmnxLldpV16v0Compliance,
+       "tmnxLldpV24v0Compliance": tmnxLldpV24v0Compliance,
+       "tmnxLldpV25v0Compliance": tmnxLldpV25v0Compliance,
        "tmnxLldpGroups": tmnxLldpGroups,
        "tmnxLldpConfigGroup": tmnxLldpConfigGroup,
        "tmnxLldpStatsRxGroup": tmnxLldpStatsRxGroup,
@@ -1279,6 +1380,10 @@ mibBuilder.exportSymbols(
        "tmnxLldpV16v0Groups": tmnxLldpV16v0Groups,
        "tmnxLldpRemSysV16v0Group": tmnxLldpRemSysV16v0Group,
        "tmnxLldpNotifV16v0Group": tmnxLldpNotifV16v0Group,
+       "tmnxLldpV24v0Groups": tmnxLldpV24v0Groups,
+       "tmnxLldpConfigV24v0Group": tmnxLldpConfigV24v0Group,
+       "tmnxLldpV25v0Groups": tmnxLldpV25v0Groups,
+       "tmnxLldpConfigV25v0Group": tmnxLldpConfigV25v0Group,
        "tmnxLldpObjects": tmnxLldpObjects,
        "tmnxLldpConfiguration": tmnxLldpConfiguration,
        "tmnxLldpTxCreditMax": tmnxLldpTxCreditMax,
@@ -1293,6 +1398,9 @@ mibBuilder.exportSymbols(
        "tmnxLldpPortCfgTLVsTxEnable": tmnxLldpPortCfgTLVsTxEnable,
        "tmnxLldpPortCfgTunnelNearestBrg": tmnxLldpPortCfgTunnelNearestBrg,
        "tmnxLldpPortCfgPortIdSubtype": tmnxLldpPortCfgPortIdSubtype,
+       "tmnxLldpPortCfgOverride": tmnxLldpPortCfgOverride,
+       "tmnxLldpPortCfgTunnelNearNonTpmr": tmnxLldpPortCfgTunnelNearNonTpmr,
+       "tmnxLldpPortCfgTunnelNearestCust": tmnxLldpPortCfgTunnelNearestCust,
        "tmnxLldpConfigManAddrPortsTable": tmnxLldpConfigManAddrPortsTable,
        "tmnxLldpConfigManAddrPortsEntry": tmnxLldpConfigManAddrPortsEntry,
        "tmnxLldpPortCfgAddressIndex": tmnxLldpPortCfgAddressIndex,

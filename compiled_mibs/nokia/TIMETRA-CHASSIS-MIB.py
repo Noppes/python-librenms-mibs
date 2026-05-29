@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-CHASSIS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:13 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -127,10 +124,9 @@ if 'mibBuilder' not in globals():
 
 (THPolCIRRateOverride,
  THPolPIRRateOverride,
- THsmdaPIRMRateOverride,
- THsmdaWeightOverride,
  TIngPolicerId,
  TItemDescription,
+ TItemLongDescription,
  TItemVeryLongDescription,
  TLNamedItemOrEmpty,
  TLevel,
@@ -141,7 +137,9 @@ if 'mibBuilder' not in globals():
  TPolicerBurstSizeBytesOverride,
  TmnxActionType,
  TmnxAdminState,
+ TmnxCamOverloadState,
  TmnxEnabledDisabled,
+ TmnxEnabledDisabledOrNA,
  TmnxFPNumber,
  TmnxIngPolicerStatMode,
  TmnxIngPolicerStatModeOverride,
@@ -149,14 +147,14 @@ if 'mibBuilder' not in globals():
  TmnxIpSecIsaOperFlags,
  TmnxOperState,
  TmnxPortID,
+ TmnxPortOptComplianceExtType,
  TmnxUuid) = mibBuilder.importSymbols(
     "TIMETRA-TC-MIB",
     "THPolCIRRateOverride",
     "THPolPIRRateOverride",
-    "THsmdaPIRMRateOverride",
-    "THsmdaWeightOverride",
     "TIngPolicerId",
     "TItemDescription",
+    "TItemLongDescription",
     "TItemVeryLongDescription",
     "TLNamedItemOrEmpty",
     "TLevel",
@@ -167,7 +165,9 @@ if 'mibBuilder' not in globals():
     "TPolicerBurstSizeBytesOverride",
     "TmnxActionType",
     "TmnxAdminState",
+    "TmnxCamOverloadState",
     "TmnxEnabledDisabled",
+    "TmnxEnabledDisabledOrNA",
     "TmnxFPNumber",
     "TmnxIngPolicerStatMode",
     "TmnxIngPolicerStatModeOverride",
@@ -175,6 +175,7 @@ if 'mibBuilder' not in globals():
     "TmnxIpSecIsaOperFlags",
     "TmnxOperState",
     "TmnxPortID",
+    "TmnxPortOptComplianceExtType",
     "TmnxUuid")
 
 
@@ -353,7 +354,7 @@ class TmnxPhysChassisClass(TextualConvention, Integer32):
           ("unknown", 2),
           ("routerChassis", 3),
           ("ethSatChassis", 5),
-          ("tdmSatChassis", 6),
+          ("reserved6", 6),
           ("esaChassis", 7))
     )
 
@@ -376,7 +377,7 @@ class TmnxPhysChassisRole(TextualConvention, Integer32):
           ("master", 2),
           ("extension", 3),
           ("sat-ethernet", 6),
-          ("sat-tdm", 7))
+          ("reserved7", 7))
     )
 
 
@@ -669,7 +670,15 @@ class TmnxPEQSuppType(TextualConvention, Bits):
           ("suppPEQType12", 12),
           ("suppPEQType13", 13),
           ("suppPEQType14", 14),
-          ("suppPEQType15", 15))
+          ("suppPEQType15", 15),
+          ("suppPEQType16", 16),
+          ("suppPEQType17", 17),
+          ("suppPEQType18", 18),
+          ("suppPEQType19", 19),
+          ("suppPEQType20", 20),
+          ("suppPEQType21", 21),
+          ("suppPEQType22", 22),
+          ("suppPEQType23", 23))
     )
 
 
@@ -796,7 +805,9 @@ class TmnxDeviceState(TextualConvention, Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8,
+              9)
         )
     )
     namedValues = NamedValues(
@@ -806,7 +817,77 @@ class TmnxDeviceState(TextualConvention, Integer32):
           ("deviceStateFailed", 4),
           ("deviceStateOutOfService", 5),
           ("deviceNotProvisioned", 6),
-          ("deviceNotApplicable", 7))
+          ("deviceNotApplicable", 7),
+          ("deviceFormatting", 8),
+          ("deviceSecureErase", 9))
+    )
+
+
+
+class TmnxCardFpIxrResourceEgressType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("cluster", 1),
+          ("linkList", 2))
+    )
+
+
+
+class TmnxCardFpIxrResourceEgressSet(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              9999)
+        )
+    )
+    namedValues = NamedValues(
+        *(("set0", 0),
+          ("set1", 1),
+          ("set2", 2),
+          ("set3", 3),
+          ("set4", 4),
+          ("reserved9999", 9999))
+    )
+
+
+
+class TmnxCardFpIxrResourceEgressPhase(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("phase1", 1),
+          ("phase2", 2),
+          ("phase3", 3),
+          ("phase4", 4),
+          ("phase5", 5),
+          ("phase6", 6),
+          ("phase7", 7),
+          ("phase8", 8))
     )
 
 
@@ -849,6 +930,28 @@ class TmnxMdaType(TextualConvention, Unsigned32):
 
 class TmnxXiomType(TextualConvention, Unsigned32):
     status = "current"
+
+
+class TmnxXiomSuppType(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("invalid-xiom-type", 0),
+          ("unassigned", 1),
+          ("supp-XIOM-type-2", 2),
+          ("supp-XIOM-type-3", 3),
+          ("supp-XIOM-type-4", 4),
+          ("supp-XIOM-type-5", 5),
+          ("supp-XIOM-type-6", 6),
+          ("supp-XIOM-type-7", 7),
+          ("supp-XIOM-type-8", 8),
+          ("supp-XIOM-type-9", 9),
+          ("supp-XIOM-type-10", 10),
+          ("supp-XIOM-type-11", 11),
+          ("supp-XIOM-type-12", 12),
+          ("supp-XIOM-type-13", 13),
+          ("supp-XIOM-type-14", 14),
+          ("supp-XIOM-type-15", 15))
+    )
 
 
 class TmnxMDASuppType(TextualConvention, Bits):
@@ -1088,7 +1191,284 @@ class TmnxMDASuppType(TextualConvention, Bits):
           ("supp-MDA-type-231", 231),
           ("supp-MDA-type-232", 232),
           ("supp-MDA-type-233", 233),
-          ("supp-MDA-type-234", 234))
+          ("supp-MDA-type-234", 234),
+          ("supp-MDA-type-235", 235),
+          ("supp-MDA-type-236", 236),
+          ("supp-MDA-type-237", 237),
+          ("supp-MDA-type-238", 238),
+          ("supp-MDA-type-239", 239),
+          ("supp-MDA-type-240", 240),
+          ("supp-MDA-type-241", 241),
+          ("supp-MDA-type-242", 242),
+          ("supp-MDA-type-243", 243),
+          ("supp-MDA-type-244", 244),
+          ("supp-MDA-type-245", 245),
+          ("supp-MDA-type-246", 246),
+          ("supp-MDA-type-247", 247),
+          ("supp-MDA-type-248", 248),
+          ("supp-MDA-type-249", 249),
+          ("supp-MDA-type-250", 250),
+          ("supp-MDA-type-251", 251),
+          ("supp-MDA-type-252", 252),
+          ("supp-MDA-type-253", 253),
+          ("supp-MDA-type-254", 254),
+          ("supp-MDA-type-255", 255),
+          ("supp-MDA-type-256", 256),
+          ("supp-MDA-type-257", 257),
+          ("supp-MDA-type-258", 258),
+          ("supp-MDA-type-259", 259),
+          ("supp-MDA-type-260", 260),
+          ("supp-MDA-type-261", 261),
+          ("supp-MDA-type-262", 262),
+          ("supp-MDA-type-263", 263),
+          ("supp-MDA-type-264", 264),
+          ("supp-MDA-type-265", 265),
+          ("supp-MDA-type-266", 266),
+          ("supp-MDA-type-267", 267),
+          ("supp-MDA-type-268", 268),
+          ("supp-MDA-type-269", 269),
+          ("supp-MDA-type-270", 270),
+          ("supp-MDA-type-271", 271),
+          ("supp-MDA-type-272", 272),
+          ("supp-MDA-type-273", 273),
+          ("supp-MDA-type-274", 274),
+          ("supp-MDA-type-275", 275),
+          ("supp-MDA-type-276", 276),
+          ("supp-MDA-type-277", 277),
+          ("supp-MDA-type-278", 278),
+          ("supp-MDA-type-279", 279),
+          ("supp-MDA-type-280", 280),
+          ("supp-MDA-type-281", 281),
+          ("supp-MDA-type-282", 282),
+          ("supp-MDA-type-283", 283),
+          ("supp-MDA-type-284", 284),
+          ("supp-MDA-type-285", 285),
+          ("supp-MDA-type-286", 286),
+          ("supp-MDA-type-287", 287),
+          ("supp-MDA-type-288", 288),
+          ("supp-MDA-type-289", 289),
+          ("supp-MDA-type-290", 290),
+          ("supp-MDA-type-291", 291),
+          ("supp-MDA-type-292", 292),
+          ("supp-MDA-type-293", 293),
+          ("supp-MDA-type-294", 294),
+          ("supp-MDA-type-295", 295),
+          ("supp-MDA-type-296", 296),
+          ("supp-MDA-type-297", 297),
+          ("supp-MDA-type-298", 298),
+          ("supp-MDA-type-299", 299),
+          ("supp-MDA-type-300", 300),
+          ("supp-MDA-type-301", 301),
+          ("supp-MDA-type-302", 302),
+          ("supp-MDA-type-303", 303),
+          ("supp-MDA-type-304", 304),
+          ("supp-MDA-type-305", 305),
+          ("supp-MDA-type-306", 306),
+          ("supp-MDA-type-307", 307),
+          ("supp-MDA-type-308", 308),
+          ("supp-MDA-type-309", 309),
+          ("supp-MDA-type-310", 310),
+          ("supp-MDA-type-311", 311),
+          ("supp-MDA-type-312", 312),
+          ("supp-MDA-type-313", 313),
+          ("supp-MDA-type-314", 314),
+          ("supp-MDA-type-315", 315),
+          ("supp-MDA-type-316", 316),
+          ("supp-MDA-type-317", 317),
+          ("supp-MDA-type-318", 318),
+          ("supp-MDA-type-319", 319),
+          ("supp-MDA-type-320", 320),
+          ("supp-MDA-type-321", 321),
+          ("supp-MDA-type-322", 322),
+          ("supp-MDA-type-323", 323),
+          ("supp-MDA-type-324", 324),
+          ("supp-MDA-type-325", 325),
+          ("supp-MDA-type-326", 326),
+          ("supp-MDA-type-327", 327),
+          ("supp-MDA-type-328", 328),
+          ("supp-MDA-type-329", 329),
+          ("supp-MDA-type-330", 330),
+          ("supp-MDA-type-331", 331),
+          ("supp-MDA-type-332", 332),
+          ("supp-MDA-type-333", 333),
+          ("supp-MDA-type-334", 334),
+          ("supp-MDA-type-335", 335),
+          ("supp-MDA-type-336", 336),
+          ("supp-MDA-type-337", 337),
+          ("supp-MDA-type-338", 338),
+          ("supp-MDA-type-339", 339),
+          ("supp-MDA-type-340", 340),
+          ("supp-MDA-type-341", 341),
+          ("supp-MDA-type-342", 342),
+          ("supp-MDA-type-343", 343),
+          ("supp-MDA-type-344", 344),
+          ("supp-MDA-type-345", 345),
+          ("supp-MDA-type-346", 346),
+          ("supp-MDA-type-347", 347),
+          ("supp-MDA-type-348", 348),
+          ("supp-MDA-type-349", 349),
+          ("supp-MDA-type-350", 350),
+          ("supp-MDA-type-351", 351),
+          ("supp-MDA-type-352", 352),
+          ("supp-MDA-type-353", 353),
+          ("supp-MDA-type-354", 354),
+          ("supp-MDA-type-355", 355),
+          ("supp-MDA-type-356", 356),
+          ("supp-MDA-type-357", 357),
+          ("supp-MDA-type-358", 358),
+          ("supp-MDA-type-359", 359),
+          ("supp-MDA-type-360", 360),
+          ("supp-MDA-type-361", 361),
+          ("supp-MDA-type-362", 362),
+          ("supp-MDA-type-363", 363),
+          ("supp-MDA-type-364", 364),
+          ("supp-MDA-type-365", 365),
+          ("supp-MDA-type-366", 366),
+          ("supp-MDA-type-367", 367),
+          ("supp-MDA-type-368", 368),
+          ("supp-MDA-type-369", 369),
+          ("supp-MDA-type-370", 370),
+          ("supp-MDA-type-371", 371),
+          ("supp-MDA-type-372", 372),
+          ("supp-MDA-type-373", 373),
+          ("supp-MDA-type-374", 374),
+          ("supp-MDA-type-375", 375),
+          ("supp-MDA-type-376", 376),
+          ("supp-MDA-type-377", 377),
+          ("supp-MDA-type-378", 378),
+          ("supp-MDA-type-379", 379),
+          ("supp-MDA-type-380", 380),
+          ("supp-MDA-type-381", 381),
+          ("supp-MDA-type-382", 382),
+          ("supp-MDA-type-383", 383),
+          ("supp-MDA-type-384", 384),
+          ("supp-MDA-type-385", 385),
+          ("supp-MDA-type-386", 386),
+          ("supp-MDA-type-387", 387),
+          ("supp-MDA-type-388", 388),
+          ("supp-MDA-type-389", 389),
+          ("supp-MDA-type-390", 390),
+          ("supp-MDA-type-391", 391),
+          ("supp-MDA-type-392", 392),
+          ("supp-MDA-type-393", 393),
+          ("supp-MDA-type-394", 394),
+          ("supp-MDA-type-395", 395),
+          ("supp-MDA-type-396", 396),
+          ("supp-MDA-type-397", 397),
+          ("supp-MDA-type-398", 398),
+          ("supp-MDA-type-399", 399),
+          ("supp-MDA-type-400", 400),
+          ("supp-MDA-type-401", 401),
+          ("supp-MDA-type-402", 402),
+          ("supp-MDA-type-403", 403),
+          ("supp-MDA-type-404", 404),
+          ("supp-MDA-type-405", 405),
+          ("supp-MDA-type-406", 406),
+          ("supp-MDA-type-407", 407),
+          ("supp-MDA-type-408", 408),
+          ("supp-MDA-type-409", 409),
+          ("supp-MDA-type-410", 410),
+          ("supp-MDA-type-411", 411),
+          ("supp-MDA-type-412", 412),
+          ("supp-MDA-type-413", 413),
+          ("supp-MDA-type-414", 414),
+          ("supp-MDA-type-415", 415),
+          ("supp-MDA-type-416", 416),
+          ("supp-MDA-type-417", 417),
+          ("supp-MDA-type-418", 418),
+          ("supp-MDA-type-419", 419),
+          ("supp-MDA-type-420", 420),
+          ("supp-MDA-type-421", 421),
+          ("supp-MDA-type-422", 422),
+          ("supp-MDA-type-423", 423),
+          ("supp-MDA-type-424", 424),
+          ("supp-MDA-type-425", 425),
+          ("supp-MDA-type-426", 426),
+          ("supp-MDA-type-427", 427),
+          ("supp-MDA-type-428", 428),
+          ("supp-MDA-type-429", 429),
+          ("supp-MDA-type-430", 430),
+          ("supp-MDA-type-431", 431),
+          ("supp-MDA-type-432", 432),
+          ("supp-MDA-type-433", 433),
+          ("supp-MDA-type-434", 434),
+          ("supp-MDA-type-435", 435),
+          ("supp-MDA-type-436", 436),
+          ("supp-MDA-type-437", 437),
+          ("supp-MDA-type-438", 438),
+          ("supp-MDA-type-439", 439),
+          ("supp-MDA-type-440", 440),
+          ("supp-MDA-type-441", 441),
+          ("supp-MDA-type-442", 442),
+          ("supp-MDA-type-443", 443),
+          ("supp-MDA-type-444", 444),
+          ("supp-MDA-type-445", 445),
+          ("supp-MDA-type-446", 446),
+          ("supp-MDA-type-447", 447),
+          ("supp-MDA-type-448", 448),
+          ("supp-MDA-type-449", 449),
+          ("supp-MDA-type-450", 450),
+          ("supp-MDA-type-451", 451),
+          ("supp-MDA-type-452", 452),
+          ("supp-MDA-type-453", 453),
+          ("supp-MDA-type-454", 454),
+          ("supp-MDA-type-455", 455),
+          ("supp-MDA-type-456", 456),
+          ("supp-MDA-type-457", 457),
+          ("supp-MDA-type-458", 458),
+          ("supp-MDA-type-459", 459),
+          ("supp-MDA-type-460", 460),
+          ("supp-MDA-type-461", 461),
+          ("supp-MDA-type-462", 462),
+          ("supp-MDA-type-463", 463),
+          ("supp-MDA-type-464", 464),
+          ("supp-MDA-type-465", 465),
+          ("supp-MDA-type-466", 466),
+          ("supp-MDA-type-467", 467),
+          ("supp-MDA-type-468", 468),
+          ("supp-MDA-type-469", 469),
+          ("supp-MDA-type-470", 470),
+          ("supp-MDA-type-471", 471),
+          ("supp-MDA-type-472", 472),
+          ("supp-MDA-type-473", 473),
+          ("supp-MDA-type-474", 474),
+          ("supp-MDA-type-475", 475),
+          ("supp-MDA-type-476", 476),
+          ("supp-MDA-type-477", 477),
+          ("supp-MDA-type-478", 478),
+          ("supp-MDA-type-479", 479),
+          ("supp-MDA-type-480", 480),
+          ("supp-MDA-type-481", 481),
+          ("supp-MDA-type-482", 482),
+          ("supp-MDA-type-483", 483),
+          ("supp-MDA-type-484", 484),
+          ("supp-MDA-type-485", 485),
+          ("supp-MDA-type-486", 486),
+          ("supp-MDA-type-487", 487),
+          ("supp-MDA-type-488", 488),
+          ("supp-MDA-type-489", 489),
+          ("supp-MDA-type-490", 490),
+          ("supp-MDA-type-491", 491),
+          ("supp-MDA-type-492", 492),
+          ("supp-MDA-type-493", 493),
+          ("supp-MDA-type-494", 494),
+          ("supp-MDA-type-495", 495),
+          ("supp-MDA-type-496", 496),
+          ("supp-MDA-type-497", 497),
+          ("supp-MDA-type-498", 498),
+          ("supp-MDA-type-499", 499),
+          ("supp-MDA-type-500", 500),
+          ("supp-MDA-type-501", 501),
+          ("supp-MDA-type-502", 502),
+          ("supp-MDA-type-503", 503),
+          ("supp-MDA-type-504", 504),
+          ("supp-MDA-type-505", 505),
+          ("supp-MDA-type-506", 506),
+          ("supp-MDA-type-507", 507),
+          ("supp-MDA-type-508", 508),
+          ("supp-MDA-type-509", 509),
+          ("supp-MDA-type-510", 510),
+          ("supp-MDA-type-511", 511))
     )
 
 
@@ -1115,7 +1495,10 @@ class TmnxMDAChanType(TextualConvention, Integer32):
               15,
               16,
               17,
-              18)
+              18,
+              19,
+              20,
+              21)
         )
     )
     namedValues = NamedValues(
@@ -1137,13 +1520,16 @@ class TmnxMDAChanType(TextualConvention, Integer32):
           ("pdhE3", 15),
           ("pdhDs1", 16),
           ("pdhE1", 17),
-          ("pdhDs0Grp", 18))
+          ("pdhDs0Grp", 18),
+          ("reserved19", 19),
+          ("reserved20", 20),
+          ("reserved21", 21))
     )
 
 
 
 class TmnxMdaAtmMode(TextualConvention, Integer32):
-    status = "current"
+    status = "obsolete"
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
@@ -1351,7 +1737,11 @@ class TmnxSSMQualityLevel(TextualConvention, Integer32):
               16,
               17,
               18,
-              19)
+              19,
+              20,
+              21,
+              22,
+              23)
         )
     )
     namedValues = NamedValues(
@@ -1374,7 +1764,11 @@ class TmnxSSMQualityLevel(TextualConvention, Integer32):
           ("pno", 16),
           ("eec1", 17),
           ("eec2", 18),
-          ("failed", 19))
+          ("failed", 19),
+          ("reserved20", 20),
+          ("reserved21", 21),
+          ("reserved22", 22),
+          ("reserved23", 23))
     )
 
 
@@ -1405,7 +1799,8 @@ class TmnxRefInState(TextualConvention, Integer32):
               18,
               19,
               20,
-              21)
+              21,
+              22)
         )
     )
     namedValues = NamedValues(
@@ -1430,7 +1825,8 @@ class TmnxRefInState(TextualConvention, Integer32):
           ("ptpOperDown", 18),
           ("ptpNoParentClock", 19),
           ("operSpeedNotSupported", 20),
-          ("cpmUnsupBITS2048khz", 21))
+          ("cpmUnsupBITS2048khz", 21),
+          ("reserved22", 22))
     )
 
 
@@ -1541,7 +1937,7 @@ class TmnxTunnelGroupId(TextualConvention, Unsigned32):
     status = "current"
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(1, 16),
+        ValueRangeConstraint(1, 64),
     )
 
 
@@ -1550,7 +1946,7 @@ class TmnxTunnelGroupIdOrZero(TextualConvention, Unsigned32):
     status = "current"
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 16),
+        ValueRangeConstraint(0, 64),
     )
 
 
@@ -1616,7 +2012,7 @@ class TmnxFpGeneration(TextualConvention, Integer32):
           ("fp2", 1),
           ("fp3", 2),
           ("fp4", 3),
-          ("reserved4", 4))
+          ("fp5", 4))
     )
 
 
@@ -1643,7 +2039,15 @@ class TmnxPMSuppType(TextualConvention, Bits):
           ("suppPMType12", 12),
           ("suppPMType13", 13),
           ("suppPMType14", 14),
-          ("suppPMType15", 15))
+          ("suppPMType15", 15),
+          ("suppPMType16", 16),
+          ("suppPMType17", 17),
+          ("suppPMType18", 18),
+          ("suppPMType19", 19),
+          ("suppPMType20", 20),
+          ("suppPMType21", 21),
+          ("suppPMType22", 22),
+          ("suppPMType23", 23))
     )
 
 
@@ -1689,7 +2093,19 @@ class TmnxCardFunctionalLevel(TextualConvention, Integer32):
               34,
               35,
               36,
-              37)
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49)
         )
     )
     namedValues = NamedValues(
@@ -1730,7 +2146,19 @@ class TmnxCardFunctionalLevel(TextualConvention, Integer32):
           ("cr14400g", 34),
           ("he14400g-plus", 35),
           ("er14400g-plus", 36),
-          ("cr14400g-plus", 37))
+          ("cr14400g-plus", 37),
+          ("he2800g-plus", 38),
+          ("er2800g-plus", 39),
+          ("cr2800g-plus", 40),
+          ("he6000g-plus", 41),
+          ("er6000g-plus", 42),
+          ("cr6000g-plus", 43),
+          ("he18000g-plus", 44),
+          ("er18000g-plus", 45),
+          ("cr18000g-plus", 46),
+          ("he19200g", 47),
+          ("er19200g", 48),
+          ("cr19200g", 49))
     )
 
 
@@ -1771,7 +2199,25 @@ class TmnxCardFunctionalUpgrade(TextualConvention, Integer32):
               28,
               29,
               30,
-              31)
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49)
         )
     )
     namedValues = NamedValues(
@@ -1806,7 +2252,25 @@ class TmnxCardFunctionalUpgrade(TextualConvention, Integer32):
           ("he9600g-he14400g", 28),
           ("er9600g-er14400g", 29),
           ("cr9600g-cr14400g", 30),
-          ("any14400g-14400gp", 31))
+          ("any14400g-14400gp", 31),
+          ("any2400g-2800gp", 32),
+          ("any4800g-6000gp", 33),
+          ("any14400g-18000gp", 34),
+          ("he2400g-he2800gp", 35),
+          ("er2400g-er2800gp", 36),
+          ("cr2400g-cr2800gp", 37),
+          ("he4800g-he6000gp", 38),
+          ("er4800g-er6000gp", 39),
+          ("cr4800g-cr6000gp", 40),
+          ("he14400g-he19200g", 41),
+          ("er14400g-er19200g", 42),
+          ("cr14400g-cr19200g", 43),
+          ("cr-er2800gp", 44),
+          ("er-he2800gp", 45),
+          ("cr-er6000gp", 46),
+          ("er-he6000gp", 47),
+          ("cr-er19200g", 48),
+          ("er-he19200g", 49))
     )
 
 
@@ -1862,7 +2326,13 @@ class TmnxMDAFunctionalLevel(TextualConvention, Integer32):
               43,
               44,
               45,
-              46)
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52)
         )
     )
     namedValues = NamedValues(
@@ -1912,7 +2382,13 @@ class TmnxMDAFunctionalLevel(TextualConvention, Integer32):
           ("cr14400g", 43),
           ("he14400g-plus", 44),
           ("er14400g-plus", 45),
-          ("cr14400g-plus", 46))
+          ("cr14400g-plus", 46),
+          ("he12000g-plus", 47),
+          ("er12000g-plus", 48),
+          ("cr12000g-plus", 49),
+          ("he18000g-plus", 50),
+          ("er18000g-plus", 51),
+          ("cr18000g-plus", 52))
     )
 
 
@@ -1957,7 +2433,17 @@ class TmnxMDAFunctionalUpgrade(TextualConvention, Integer32):
               32,
               33,
               34,
-              35)
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45)
         )
     )
     namedValues = NamedValues(
@@ -1996,7 +2482,17 @@ class TmnxMDAFunctionalUpgrade(TextualConvention, Integer32):
           ("any9600g-9600g-plus", 32),
           ("cr-er14400g", 33),
           ("er-he14400g", 34),
-          ("any14400g-14400g-plus", 35))
+          ("any14400g-14400g-plus", 35),
+          ("he9600g-he12000g-plus", 36),
+          ("er9600g-er12000g-plus", 37),
+          ("cr9600g-cr12000g-plus", 38),
+          ("he14400g-he18000g-plus", 39),
+          ("er14400g-er18000g-plus", 40),
+          ("cr14400g-cr18000g-plus", 41),
+          ("cr-er12000g-plus", 42),
+          ("er-he12000g-plus", 43),
+          ("cr-er18000g-plus", 44),
+          ("er-he18000g-plus", 45))
     )
 
 
@@ -2022,7 +2518,19 @@ class TmnxXiomFunctionalLevel(TextualConvention, Integer32):
               13,
               14,
               15,
-              16)
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28)
         )
     )
     namedValues = NamedValues(
@@ -2042,7 +2550,19 @@ class TmnxXiomFunctionalLevel(TextualConvention, Integer32):
           ("cr2400gPlus", 13),
           ("he3000gPlus", 14),
           ("er3000gPlus", 15),
-          ("cr3000gPlus", 16))
+          ("cr3000gPlus", 16),
+          ("he2400g", 17),
+          ("er2400g", 18),
+          ("cr2400g", 19),
+          ("he4800g", 20),
+          ("er4800g", 21),
+          ("cr4800g", 22),
+          ("he6000gPlus", 23),
+          ("er6000gPlus", 24),
+          ("cr6000gPlus", 25),
+          ("he3200gPlus", 26),
+          ("er3200gPlus", 27),
+          ("cr3200gPlus", 28))
     )
 
 
@@ -2071,7 +2591,24 @@ class TmnxXiomFunctionalUpgrade(TextualConvention, Integer32):
               16,
               17,
               18,
-              19)
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36)
         )
     )
     namedValues = NamedValues(
@@ -2094,7 +2631,24 @@ class TmnxXiomFunctionalUpgrade(TextualConvention, Integer32):
           ("crEr2400gPlus", 16),
           ("erHe2400gPlus", 17),
           ("crEr3000gPlus", 18),
-          ("erHe3000gPlus", 19))
+          ("erHe3000gPlus", 19),
+          ("cr4800gCr6000gPlus", 20),
+          ("er4800gEr6000gPlus", 21),
+          ("he4800gHe6000gPlus", 22),
+          ("crEr2400g", 23),
+          ("erHe2400g", 24),
+          ("crEr4800g", 25),
+          ("erHe4800g", 26),
+          ("crEr6000gPlus", 27),
+          ("erHe6000gPlus", 28),
+          ("cr1600gCr3000gPlus", 29),
+          ("er1600gEr3000gPlus", 30),
+          ("he1600gHe3000gPlus", 31),
+          ("crEr3200gPlus", 32),
+          ("erHe3200gPlus", 33),
+          ("cr3200gCr6000gPlus", 34),
+          ("er3200gEr6000gPlus", 35),
+          ("he3200gHe6000gPlus", 36))
     )
 
 
@@ -2224,13 +2778,269 @@ class TmnxEsaDeviceState(TextualConvention, Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
         *(("unknown", 1),
           ("ok", 2),
-          ("failed", 3))
+          ("degraded", 3),
+          ("failed", 4),
+          ("unsupported", 5))
+    )
+
+
+
+class TmnxEsaDeviceRedundancyState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("redundant", 2),
+          ("non-redundant", 3),
+          ("failed-redundant", 4),
+          ("unsupported", 5))
+    )
+
+
+
+class TmnxEsaDeviceMismatchState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("noMismatch", 2),
+          ("mismatch", 3),
+          ("unsupported", 4))
+    )
+
+
+
+class TmnxSBUefiVarsState(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 1),
+          ("updateReqd", 2),
+          ("unknown", 3))
+    )
+
+
+
+class TmnxIxrResourceOwner(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24)
+        )
+    )
+    namedValues = NamedValues(
+        *(("bgp", 1),
+          ("rsvp", 2),
+          ("ldp", 3),
+          ("srMpls", 4),
+          ("serviceSdpBindGre", 5),
+          ("serviceSapRingAps", 6),
+          ("service", 9),
+          ("serviceSap", 10),
+          ("serviceSdpBind", 11),
+          ("serviceEvpn", 12),
+          ("interface", 13),
+          ("arp", 14),
+          ("ipv6", 15),
+          ("rtm", 16),
+          ("ptp", 17),
+          ("bfd", 18),
+          ("port", 19),
+          ("ethCfm", 20),
+          ("treeSid", 21),
+          ("serviceSdpGre", 22),
+          ("portLagVlanQos", 23),
+          ("srv6", 24))
+    )
+
+
+
+class TmnxCardIxrResourceOwner(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18)
+        )
+    )
+    namedValues = NamedValues(
+        *(("system", 0),
+          ("filter", 1),
+          ("ipMulticast", 2),
+          ("mpls", 3),
+          ("ipRouting", 4),
+          ("arp", 5),
+          ("nd", 6),
+          ("interface", 7),
+          ("sapEndpoint", 8),
+          ("mplsEcmp", 9),
+          ("ipRoutingEcmp", 10),
+          ("srv6DirectIpTransport", 11),
+          ("tunnelEcmp", 12),
+          ("rvplsOism", 13),
+          ("sdpBindings", 14),
+          ("evpnBindings", 15),
+          ("mvpnNhlfe", 16),
+          ("mplsMulticastFrr", 17),
+          ("reserved18", 18))
+    )
+
+
+
+class TmnxEsaHostPortMonReportValue(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("noFault", 0),
+          ("sdThresholdExceeded", 1),
+          ("sfThresholdExceeded", 2))
+    )
+
+
+
+class TmnxMdaFlexGroupErrors(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("overheadFrameNotLocked", 1),
+          ("deskewFailed", 2),
+          ("localPhyFault", 3),
+          ("remotePhyFault", 4),
+          ("badGroupNumber", 5),
+          ("badPhyNumber", 6),
+          ("badPhyInstanceNumber", 7),
+          ("flexEMapMismatch", 8),
+          ("clientCalendarError", 9),
+          ("calendarInUseError", 10))
+    )
+
+
+class TmnxMdaFlexMemberErrors(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("los", 1),
+          ("highBer", 2),
+          ("amNotLocked", 3),
+          ("deskewFailed", 4),
+          ("remotePhyFault", 5))
+    )
+
+
+class TmnxMdaFlexMbrInstErrors(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("notUsed", 0),
+          ("badCrc", 1),
+          ("multiframeNotLocked", 2),
+          ("badGroupNumber", 3),
+          ("badPhyNumber", 4),
+          ("badPhyInstanceNumber", 5),
+          ("flexEMapMismatch", 6),
+          ("clientCalendarError", 7),
+          ("calendarInUseError", 8))
+    )
+
+
+class TmnxFpIxrAvailableLifs(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(-1,
+              0,
+              1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", -1),
+          ("undetermined", 0),
+          ("noneAvailable", 1),
+          ("standardLifsOnly", 2),
+          ("dataLifsOnly", 3),
+          ("standardAndDataLifs", 4))
     )
 
 
@@ -2308,6 +3118,18 @@ tmnxChassisV21Groups = _TmnxChassisV21Groups_ObjectIdentity(
 _TmnxChassisV22v0Groups_ObjectIdentity = ObjectIdentity
 tmnxChassisV22v0Groups = _TmnxChassisV22v0Groups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84)
+)
+_TmnxChassisV23v0Groups_ObjectIdentity = ObjectIdentity
+tmnxChassisV23v0Groups = _TmnxChassisV23v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85)
+)
+_TmnxChassisV24v0Groups_ObjectIdentity = ObjectIdentity
+tmnxChassisV24v0Groups = _TmnxChassisV24v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86)
+)
+_TmnxChassisV25v0Groups_ObjectIdentity = ObjectIdentity
+tmnxChassisV25v0Groups = _TmnxChassisV25v0Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87)
 )
 _TmnxChassisDCCompliances_ObjectIdentity = ObjectIdentity
 tmnxChassisDCCompliances = _TmnxChassisDCCompliances_ObjectIdentity(
@@ -2812,7 +3634,7 @@ class _TmnxChassisPortIdScheme_Type(Integer32):
           ("schemeB", 2),
           ("schemeC", 3),
           ("schemeD", 4),
-          ("reserved5", 5))
+          ("schemeE", 5))
     )
 
 
@@ -2923,6 +3745,74 @@ tmnxChassisSystemProfile = _TmnxChassisSystemProfile_Object(
 tmnxChassisSystemProfile.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxChassisSystemProfile.setStatus("current")
+_TmnxChassisFPGenerationFP5_Type = TruthValue
+_TmnxChassisFPGenerationFP5_Object = MibTableColumn
+tmnxChassisFPGenerationFP5 = _TmnxChassisFPGenerationFP5_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 3, 1, 41),
+    _TmnxChassisFPGenerationFP5_Type()
+)
+tmnxChassisFPGenerationFP5.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxChassisFPGenerationFP5.setStatus("current")
+_TmnxChassisRebootReqd_Type = TruthValue
+_TmnxChassisRebootReqd_Object = MibTableColumn
+tmnxChassisRebootReqd = _TmnxChassisRebootReqd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 3, 1, 42),
+    _TmnxChassisRebootReqd_Type()
+)
+tmnxChassisRebootReqd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxChassisRebootReqd.setStatus("current")
+
+
+class _TmnxChassisRebootReqdReason_Type(Bits):
+    """Custom type tmnxChassisRebootReqdReason based on Bits"""
+    namedValues = NamedValues(
+        *(("upgradeAslChange", 0),
+          ("fpResourcePolicyChange", 1),
+          ("bofConfigurationChange", 2),
+          ("ptpConfigurationChange", 3),
+          ("fpOptionsChange", 4),
+          ("fpResourceAllocChange", 5),
+          ("fpCamAllocChange", 6),
+          ("isaMdaDeprovision", 7),
+          ("reserved8", 8),
+          ("reserved9", 9),
+          ("reserved10", 10),
+          ("reserved11", 11),
+          ("reserved12", 12),
+          ("reserved13", 13),
+          ("reserved14", 14),
+          ("reserved15", 15))
+    )
+
+_TmnxChassisRebootReqdReason_Type.__name__ = "Bits"
+_TmnxChassisRebootReqdReason_Object = MibTableColumn
+tmnxChassisRebootReqdReason = _TmnxChassisRebootReqdReason_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 3, 1, 43),
+    _TmnxChassisRebootReqdReason_Type()
+)
+tmnxChassisRebootReqdReason.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxChassisRebootReqdReason.setStatus("current")
+_TmnxChassisOsSecPasswd_Type = TmnxEnabledDisabled
+_TmnxChassisOsSecPasswd_Object = MibTableColumn
+tmnxChassisOsSecPasswd = _TmnxChassisOsSecPasswd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 3, 1, 44),
+    _TmnxChassisOsSecPasswd_Type()
+)
+tmnxChassisOsSecPasswd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxChassisOsSecPasswd.setStatus("current")
+_TmnxChassisAntiTheftLocked_Type = TruthValue
+_TmnxChassisAntiTheftLocked_Object = MibTableColumn
+tmnxChassisAntiTheftLocked = _TmnxChassisAntiTheftLocked_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 3, 1, 45),
+    _TmnxChassisAntiTheftLocked_Type()
+)
+tmnxChassisAntiTheftLocked.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxChassisAntiTheftLocked.setStatus("current")
 _TmnxChassisFanTable_Object = MibTable
 tmnxChassisFanTable = _TmnxChassisFanTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 4)
@@ -3589,7 +4479,8 @@ class _TmnxHwOperState_Type(Integer32):
               14,
               15,
               16,
-              17)
+              17,
+              18)
         )
     )
     namedValues = NamedValues(
@@ -3609,7 +4500,8 @@ class _TmnxHwOperState_Type(Integer32):
           ("resetPending", 14),
           ("softReset", 15),
           ("preExtension", 16),
-          ("downloading", 17))
+          ("downloading", 17),
+          ("powerSave", 18))
     )
 
 
@@ -3822,7 +4714,8 @@ class _TmnxHwEquippedPlatform_Type(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -3832,7 +4725,8 @@ class _TmnxHwEquippedPlatform_Type(Integer32):
           ("pf7710", 3),
           ("pf7950", 4),
           ("pf7705", 5),
-          ("pf7250", 6))
+          ("pf7250", 6),
+          ("pf7750dms", 7))
     )
 
 
@@ -3904,7 +4798,8 @@ class _TmnxHwFirmwareRevisionStatus_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6)
         )
     )
     namedValues = NamedValues(
@@ -3913,7 +4808,8 @@ class _TmnxHwFirmwareRevisionStatus_Type(Integer32):
           ("notAcceptable", 2),
           ("upgradePending", 3),
           ("upgrading", 4),
-          ("upgradeNextHardReset", 5))
+          ("upgradeNextHardReset", 5),
+          ("powerCycleRequired", 6))
     )
 
 
@@ -3926,6 +4822,34 @@ tmnxHwFirmwareRevisionStatus = _TmnxHwFirmwareRevisionStatus_Object(
 tmnxHwFirmwareRevisionStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxHwFirmwareRevisionStatus.setStatus("current")
+
+
+class _TmnxHwOverTempStatus_Type(Integer32):
+    """Custom type tmnxHwOverTempStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("ok", 1),
+          ("overTemp", 2))
+    )
+
+
+_TmnxHwOverTempStatus_Type.__name__ = "Integer32"
+_TmnxHwOverTempStatus_Object = MibTableColumn
+tmnxHwOverTempStatus = _TmnxHwOverTempStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 8, 1, 36),
+    _TmnxHwOverTempStatus_Type()
+)
+tmnxHwOverTempStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxHwOverTempStatus.setStatus("current")
 _TmnxHwContainsTable_Object = MibTable
 tmnxHwContainsTable = _TmnxHwContainsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 9)
@@ -4551,6 +5475,45 @@ if mibBuilder.loadTexts:
     tmnxChassisPwrMgmtSafetyAlert.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxChassisPwrMgmtSafetyAlert.setUnits("watts")
+
+
+class _TChassisPwrMgmtLowPwrFabAdmState_Type(TmnxAdminState):
+    """Custom type tChassisPwrMgmtLowPwrFabAdmState based on TmnxAdminState"""
+    defaultValue = 3
+
+
+_TChassisPwrMgmtLowPwrFabAdmState_Type.__name__ = "TmnxAdminState"
+_TChassisPwrMgmtLowPwrFabAdmState_Object = MibTableColumn
+tChassisPwrMgmtLowPwrFabAdmState = _TChassisPwrMgmtLowPwrFabAdmState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 18, 1, 7),
+    _TChassisPwrMgmtLowPwrFabAdmState_Type()
+)
+tChassisPwrMgmtLowPwrFabAdmState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tChassisPwrMgmtLowPwrFabAdmState.setStatus("current")
+
+
+class _TChassisPwrMgmtLowPwrFabCapacity_Type(Unsigned32):
+    """Custom type tChassisPwrMgmtLowPwrFabCapacity based on Unsigned32"""
+    defaultValue = 10000
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1250, 10000),
+    )
+
+
+_TChassisPwrMgmtLowPwrFabCapacity_Type.__name__ = "Unsigned32"
+_TChassisPwrMgmtLowPwrFabCapacity_Object = MibTableColumn
+tChassisPwrMgmtLowPwrFabCapacity = _TChassisPwrMgmtLowPwrFabCapacity_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 18, 1, 8),
+    _TChassisPwrMgmtLowPwrFabCapacity_Type()
+)
+tChassisPwrMgmtLowPwrFabCapacity.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tChassisPwrMgmtLowPwrFabCapacity.setStatus("current")
+if mibBuilder.loadTexts:
+    tChassisPwrMgmtLowPwrFabCapacity.setUnits("centipercent")
 _TChassisResTable_Object = MibTable
 tChassisResTable = _TChassisResTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19)
@@ -4862,7 +5825,7 @@ tChassisResApipeSapTotal = _TChassisResApipeSapTotal_Object(
 )
 tChassisResApipeSapTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tChassisResApipeSapTotal.setStatus("current")
+    tChassisResApipeSapTotal.setStatus("obsolete")
 _TChassisResApipeSapAlloc_Type = Unsigned32
 _TChassisResApipeSapAlloc_Object = MibTableColumn
 tChassisResApipeSapAlloc = _TChassisResApipeSapAlloc_Object(
@@ -4871,7 +5834,7 @@ tChassisResApipeSapAlloc = _TChassisResApipeSapAlloc_Object(
 )
 tChassisResApipeSapAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tChassisResApipeSapAlloc.setStatus("current")
+    tChassisResApipeSapAlloc.setStatus("obsolete")
 _TChassisResCpipeSapTotal_Type = Unsigned32
 _TChassisResCpipeSapTotal_Object = MibTableColumn
 tChassisResCpipeSapTotal = _TChassisResCpipeSapTotal_Object(
@@ -4916,7 +5879,7 @@ tChassisResFpipeSapTotal = _TChassisResFpipeSapTotal_Object(
 )
 tChassisResFpipeSapTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tChassisResFpipeSapTotal.setStatus("current")
+    tChassisResFpipeSapTotal.setStatus("obsolete")
 _TChassisResFpipeSapAlloc_Type = Unsigned32
 _TChassisResFpipeSapAlloc_Object = MibTableColumn
 tChassisResFpipeSapAlloc = _TChassisResFpipeSapAlloc_Object(
@@ -4925,7 +5888,7 @@ tChassisResFpipeSapAlloc = _TChassisResFpipeSapAlloc_Object(
 )
 tChassisResFpipeSapAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tChassisResFpipeSapAlloc.setStatus("current")
+    tChassisResFpipeSapAlloc.setStatus("obsolete")
 _TChassisResIpipeSapTotal_Type = Unsigned32
 _TChassisResIpipeSapTotal_Object = MibTableColumn
 tChassisResIpipeSapTotal = _TChassisResIpipeSapTotal_Object(
@@ -5196,6 +6159,154 @@ tChassisResSystemBundleNumAlloc = _TChassisResSystemBundleNumAlloc_Object(
 tChassisResSystemBundleNumAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tChassisResSystemBundleNumAlloc.setStatus("current")
+_TChassisResIOCapacityTotal_Type = Unsigned32
+_TChassisResIOCapacityTotal_Object = MibTableColumn
+tChassisResIOCapacityTotal = _TChassisResIOCapacityTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 71),
+    _TChassisResIOCapacityTotal_Type()
+)
+tChassisResIOCapacityTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResIOCapacityTotal.setStatus("current")
+if mibBuilder.loadTexts:
+    tChassisResIOCapacityTotal.setUnits("gigabps")
+_TChassisResIOCapacityAlloc_Type = Unsigned32
+_TChassisResIOCapacityAlloc_Object = MibTableColumn
+tChassisResIOCapacityAlloc = _TChassisResIOCapacityAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 72),
+    _TChassisResIOCapacityAlloc_Type()
+)
+tChassisResIOCapacityAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResIOCapacityAlloc.setStatus("current")
+if mibBuilder.loadTexts:
+    tChassisResIOCapacityAlloc.setUnits("gigabps")
+_TChassisResMtuProfileTotal_Type = Unsigned32
+_TChassisResMtuProfileTotal_Object = MibTableColumn
+tChassisResMtuProfileTotal = _TChassisResMtuProfileTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 73),
+    _TChassisResMtuProfileTotal_Type()
+)
+tChassisResMtuProfileTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResMtuProfileTotal.setStatus("current")
+_TChassisResMtuProfileAlloc_Type = Unsigned32
+_TChassisResMtuProfileAlloc_Object = MibTableColumn
+tChassisResMtuProfileAlloc = _TChassisResMtuProfileAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 74),
+    _TChassisResMtuProfileAlloc_Type()
+)
+tChassisResMtuProfileAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResMtuProfileAlloc.setStatus("current")
+_TChassisResEprirTotal_Type = Unsigned32
+_TChassisResEprirTotal_Object = MibTableColumn
+tChassisResEprirTotal = _TChassisResEprirTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 75),
+    _TChassisResEprirTotal_Type()
+)
+tChassisResEprirTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirTotal.setStatus("current")
+_TChassisResEprirAlloc_Type = Unsigned32
+_TChassisResEprirAlloc_Object = MibTableColumn
+tChassisResEprirAlloc = _TChassisResEprirAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 76),
+    _TChassisResEprirAlloc_Type()
+)
+tChassisResEprirAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirAlloc.setStatus("current")
+_TChassisResEprirMirrorAlloc_Type = Unsigned32
+_TChassisResEprirMirrorAlloc_Object = MibTableColumn
+tChassisResEprirMirrorAlloc = _TChassisResEprirMirrorAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 77),
+    _TChassisResEprirMirrorAlloc_Type()
+)
+tChassisResEprirMirrorAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirMirrorAlloc.setStatus("current")
+_TChassisResEprirRadiusAlloc_Type = Unsigned32
+_TChassisResEprirRadiusAlloc_Object = MibTableColumn
+tChassisResEprirRadiusAlloc = _TChassisResEprirRadiusAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 78),
+    _TChassisResEprirRadiusAlloc_Type()
+)
+tChassisResEprirRadiusAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirRadiusAlloc.setStatus("current")
+_TChassisResEprirSatTrafGenTotal_Type = Unsigned32
+_TChassisResEprirSatTrafGenTotal_Object = MibTableColumn
+tChassisResEprirSatTrafGenTotal = _TChassisResEprirSatTrafGenTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 79),
+    _TChassisResEprirSatTrafGenTotal_Type()
+)
+tChassisResEprirSatTrafGenTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirSatTrafGenTotal.setStatus("current")
+_TChassisResEprirSatTrafGenAlloc_Type = Unsigned32
+_TChassisResEprirSatTrafGenAlloc_Object = MibTableColumn
+tChassisResEprirSatTrafGenAlloc = _TChassisResEprirSatTrafGenAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 80),
+    _TChassisResEprirSatTrafGenAlloc_Type()
+)
+tChassisResEprirSatTrafGenAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirSatTrafGenAlloc.setStatus("current")
+_TChassisResEprirReservedAlloc_Type = Unsigned32
+_TChassisResEprirReservedAlloc_Object = MibTableColumn
+tChassisResEprirReservedAlloc = _TChassisResEprirReservedAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 81),
+    _TChassisResEprirReservedAlloc_Type()
+)
+tChassisResEprirReservedAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirReservedAlloc.setStatus("current")
+_TChassisResEprirFilterAlloc_Type = Unsigned32
+_TChassisResEprirFilterAlloc_Object = MibTableColumn
+tChassisResEprirFilterAlloc = _TChassisResEprirFilterAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 82),
+    _TChassisResEprirFilterAlloc_Type()
+)
+tChassisResEprirFilterAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEprirFilterAlloc.setStatus("current")
+_TChassisResEgrStat4QVVoQTotal_Type = Unsigned32
+_TChassisResEgrStat4QVVoQTotal_Object = MibTableColumn
+tChassisResEgrStat4QVVoQTotal = _TChassisResEgrStat4QVVoQTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 83),
+    _TChassisResEgrStat4QVVoQTotal_Type()
+)
+tChassisResEgrStat4QVVoQTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEgrStat4QVVoQTotal.setStatus("current")
+_TChassisResEgrStat4QVVoQAlloc_Type = Unsigned32
+_TChassisResEgrStat4QVVoQAlloc_Object = MibTableColumn
+tChassisResEgrStat4QVVoQAlloc = _TChassisResEgrStat4QVVoQAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 84),
+    _TChassisResEgrStat4QVVoQAlloc_Type()
+)
+tChassisResEgrStat4QVVoQAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEgrStat4QVVoQAlloc.setStatus("current")
+_TChassisResEgrNoStat4QVVoQTotal_Type = Unsigned32
+_TChassisResEgrNoStat4QVVoQTotal_Object = MibTableColumn
+tChassisResEgrNoStat4QVVoQTotal = _TChassisResEgrNoStat4QVVoQTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 85),
+    _TChassisResEgrNoStat4QVVoQTotal_Type()
+)
+tChassisResEgrNoStat4QVVoQTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEgrNoStat4QVVoQTotal.setStatus("current")
+_TChassisResEgrNoStat4QVVoQAlloc_Type = Unsigned32
+_TChassisResEgrNoStat4QVVoQAlloc_Object = MibTableColumn
+tChassisResEgrNoStat4QVVoQAlloc = _TChassisResEgrNoStat4QVVoQAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 19, 1, 86),
+    _TChassisResEgrNoStat4QVVoQAlloc_Type()
+)
+tChassisResEgrNoStat4QVVoQAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisResEgrNoStat4QVVoQAlloc.setStatus("current")
 _TmnxPhysChassisTable_Object = MibTable
 tmnxPhysChassisTable = _TmnxPhysChassisTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 21)
@@ -5995,6 +7106,33 @@ tmnxPhysChassPowerSupFanDir = _TmnxPhysChassPowerSupFanDir_Object(
 tmnxPhysChassPowerSupFanDir.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPhysChassPowerSupFanDir.setStatus("current")
+_TmnxPhysChassPSFeedAInVolt_Type = Integer32
+_TmnxPhysChassPSFeedAInVolt_Object = MibTableColumn
+tmnxPhysChassPSFeedAInVolt = _TmnxPhysChassPSFeedAInVolt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 24, 2, 1, 15),
+    _TmnxPhysChassPSFeedAInVolt_Type()
+)
+tmnxPhysChassPSFeedAInVolt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPhysChassPSFeedAInVolt.setStatus("current")
+_TmnxPhysChassPSFeedBInVolt_Type = Integer32
+_TmnxPhysChassPSFeedBInVolt_Object = MibTableColumn
+tmnxPhysChassPSFeedBInVolt = _TmnxPhysChassPSFeedBInVolt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 24, 2, 1, 16),
+    _TmnxPhysChassPSFeedBInVolt_Type()
+)
+tmnxPhysChassPSFeedBInVolt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPhysChassPSFeedBInVolt.setStatus("current")
+_TmnxPhysChassPSFanOperStatus_Type = TmnxDeviceState
+_TmnxPhysChassPSFanOperStatus_Object = MibTableColumn
+tmnxPhysChassPSFanOperStatus = _TmnxPhysChassPSFanOperStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 24, 2, 1, 17),
+    _TmnxPhysChassPSFanOperStatus_Type()
+)
+tmnxPhysChassPSFanOperStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPhysChassPSFanOperStatus.setStatus("current")
 _TmnxPhysChassisPEQTableLastChg_Type = TimeStamp
 _TmnxPhysChassisPEQTableLastChg_Object = MibScalar
 tmnxPhysChassisPEQTableLastChg = _TmnxPhysChassisPEQTableLastChg_Object(
@@ -6380,6 +7518,24 @@ tmnxPhysChassisPMInputFeedDown = _TmnxPhysChassisPMInputFeedDown_Object(
 tmnxPhysChassisPMInputFeedDown.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxPhysChassisPMInputFeedDown.setStatus("current")
+_TmnxPhysChassisPMFeedAInVolt_Type = Integer32
+_TmnxPhysChassisPMFeedAInVolt_Object = MibTableColumn
+tmnxPhysChassisPMFeedAInVolt = _TmnxPhysChassisPMFeedAInVolt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 24, 9, 1, 9),
+    _TmnxPhysChassisPMFeedAInVolt_Type()
+)
+tmnxPhysChassisPMFeedAInVolt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPhysChassisPMFeedAInVolt.setStatus("current")
+_TmnxPhysChassisPMFeedBInVolt_Type = Integer32
+_TmnxPhysChassisPMFeedBInVolt_Object = MibTableColumn
+tmnxPhysChassisPMFeedBInVolt = _TmnxPhysChassisPMFeedBInVolt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 24, 9, 1, 10),
+    _TmnxPhysChassisPMFeedBInVolt_Type()
+)
+tmnxPhysChassisPMFeedBInVolt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxPhysChassisPMFeedBInVolt.setStatus("current")
 _TmnxBluetoothTableLastChange_Type = TimeStamp
 _TmnxBluetoothTableLastChange_Object = MibScalar
 tmnxBluetoothTableLastChange = _TmnxBluetoothTableLastChange_Object(
@@ -6749,6 +7905,826 @@ tmnxChassisPwrMgmtActiveConds = _TmnxChassisPwrMgmtActiveConds_Object(
 tmnxChassisPwrMgmtActiveConds.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxChassisPwrMgmtActiveConds.setStatus("current")
+_TmnxChassisPwrMgmtTotalWattage_Type = Unsigned32
+_TmnxChassisPwrMgmtTotalWattage_Object = MibTableColumn
+tmnxChassisPwrMgmtTotalWattage = _TmnxChassisPwrMgmtTotalWattage_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 31, 1, 8),
+    _TmnxChassisPwrMgmtTotalWattage_Type()
+)
+tmnxChassisPwrMgmtTotalWattage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxChassisPwrMgmtTotalWattage.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxChassisPwrMgmtTotalWattage.setUnits("milliwatts")
+_TChassisPwrMgmtLowPwrFabOprState_Type = TmnxOperState
+_TChassisPwrMgmtLowPwrFabOprState_Object = MibTableColumn
+tChassisPwrMgmtLowPwrFabOprState = _TChassisPwrMgmtLowPwrFabOprState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 31, 1, 9),
+    _TChassisPwrMgmtLowPwrFabOprState_Type()
+)
+tChassisPwrMgmtLowPwrFabOprState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisPwrMgmtLowPwrFabOprState.setStatus("current")
+_TChassisPwrMgmtLowPwrFabLstChgd_Type = TimeStamp
+_TChassisPwrMgmtLowPwrFabLstChgd_Object = MibTableColumn
+tChassisPwrMgmtLowPwrFabLstChgd = _TChassisPwrMgmtLowPwrFabLstChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 31, 1, 10),
+    _TChassisPwrMgmtLowPwrFabLstChgd_Type()
+)
+tChassisPwrMgmtLowPwrFabLstChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisPwrMgmtLowPwrFabLstChgd.setStatus("current")
+_TChassisIxrResourceTable_Object = MibTable
+tChassisIxrResourceTable = _TChassisIxrResourceTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32)
+)
+if mibBuilder.loadTexts:
+    tChassisIxrResourceTable.setStatus("current")
+_TChassisIxrResourceEntry_Object = MibTableRow
+tChassisIxrResourceEntry = _TChassisIxrResourceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1)
+)
+tChassisIxrResourceEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+)
+if mibBuilder.loadTexts:
+    tChassisIxrResourceEntry.setStatus("current")
+_TChassisIxrResCommonLifTotal_Type = Unsigned32
+_TChassisIxrResCommonLifTotal_Object = MibTableColumn
+tChassisIxrResCommonLifTotal = _TChassisIxrResCommonLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 1),
+    _TChassisIxrResCommonLifTotal_Type()
+)
+tChassisIxrResCommonLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResCommonLifTotal.setStatus("current")
+_TChassisIxrResCommonLifAlloc_Type = Unsigned32
+_TChassisIxrResCommonLifAlloc_Object = MibTableColumn
+tChassisIxrResCommonLifAlloc = _TChassisIxrResCommonLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 2),
+    _TChassisIxrResCommonLifAlloc_Type()
+)
+tChassisIxrResCommonLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResCommonLifAlloc.setStatus("current")
+_TChassisIxrResCommonLifFree_Type = Unsigned32
+_TChassisIxrResCommonLifFree_Object = MibTableColumn
+tChassisIxrResCommonLifFree = _TChassisIxrResCommonLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 3),
+    _TChassisIxrResCommonLifFree_Type()
+)
+tChassisIxrResCommonLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResCommonLifFree.setStatus("current")
+_TChassisIxrResArpLifTotal_Type = Unsigned32
+_TChassisIxrResArpLifTotal_Object = MibTableColumn
+tChassisIxrResArpLifTotal = _TChassisIxrResArpLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 4),
+    _TChassisIxrResArpLifTotal_Type()
+)
+tChassisIxrResArpLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResArpLifTotal.setStatus("current")
+_TChassisIxrResArpLifAlloc_Type = Unsigned32
+_TChassisIxrResArpLifAlloc_Object = MibTableColumn
+tChassisIxrResArpLifAlloc = _TChassisIxrResArpLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 5),
+    _TChassisIxrResArpLifAlloc_Type()
+)
+tChassisIxrResArpLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResArpLifAlloc.setStatus("current")
+_TChassisIxrResArpLifFree_Type = Unsigned32
+_TChassisIxrResArpLifFree_Object = MibTableColumn
+tChassisIxrResArpLifFree = _TChassisIxrResArpLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 6),
+    _TChassisIxrResArpLifFree_Type()
+)
+tChassisIxrResArpLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResArpLifFree.setStatus("current")
+_TChassisIxrResMplsLifTotal_Type = Unsigned32
+_TChassisIxrResMplsLifTotal_Object = MibTableColumn
+tChassisIxrResMplsLifTotal = _TChassisIxrResMplsLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 7),
+    _TChassisIxrResMplsLifTotal_Type()
+)
+tChassisIxrResMplsLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResMplsLifTotal.setStatus("current")
+_TChassisIxrResMplsLifAlloc_Type = Unsigned32
+_TChassisIxrResMplsLifAlloc_Object = MibTableColumn
+tChassisIxrResMplsLifAlloc = _TChassisIxrResMplsLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 8),
+    _TChassisIxrResMplsLifAlloc_Type()
+)
+tChassisIxrResMplsLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResMplsLifAlloc.setStatus("current")
+_TChassisIxrResMplsLifFree_Type = Unsigned32
+_TChassisIxrResMplsLifFree_Object = MibTableColumn
+tChassisIxrResMplsLifFree = _TChassisIxrResMplsLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 9),
+    _TChassisIxrResMplsLifFree_Type()
+)
+tChassisIxrResMplsLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResMplsLifFree.setStatus("current")
+_TChassisIxrResL3VsiRifTotal_Type = Unsigned32
+_TChassisIxrResL3VsiRifTotal_Object = MibTableColumn
+tChassisIxrResL3VsiRifTotal = _TChassisIxrResL3VsiRifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 10),
+    _TChassisIxrResL3VsiRifTotal_Type()
+)
+tChassisIxrResL3VsiRifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResL3VsiRifTotal.setStatus("current")
+_TChassisIxrResL3VsiRifAlloc_Type = Unsigned32
+_TChassisIxrResL3VsiRifAlloc_Object = MibTableColumn
+tChassisIxrResL3VsiRifAlloc = _TChassisIxrResL3VsiRifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 11),
+    _TChassisIxrResL3VsiRifAlloc_Type()
+)
+tChassisIxrResL3VsiRifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResL3VsiRifAlloc.setStatus("current")
+_TChassisIxrResL3VsiRifFree_Type = Unsigned32
+_TChassisIxrResL3VsiRifFree_Object = MibTableColumn
+tChassisIxrResL3VsiRifFree = _TChassisIxrResL3VsiRifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 12),
+    _TChassisIxrResL3VsiRifFree_Type()
+)
+tChassisIxrResL3VsiRifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResL3VsiRifFree.setStatus("current")
+_TChassisIxrResFecUnpairedTotal_Type = Unsigned32
+_TChassisIxrResFecUnpairedTotal_Object = MibTableColumn
+tChassisIxrResFecUnpairedTotal = _TChassisIxrResFecUnpairedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 13),
+    _TChassisIxrResFecUnpairedTotal_Type()
+)
+tChassisIxrResFecUnpairedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResFecUnpairedTotal.setStatus("current")
+_TChassisIxrResFecUnpairedAlloc_Type = Unsigned32
+_TChassisIxrResFecUnpairedAlloc_Object = MibTableColumn
+tChassisIxrResFecUnpairedAlloc = _TChassisIxrResFecUnpairedAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 14),
+    _TChassisIxrResFecUnpairedAlloc_Type()
+)
+tChassisIxrResFecUnpairedAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResFecUnpairedAlloc.setStatus("current")
+_TChassisIxrResFecUnpairedFree_Type = Unsigned32
+_TChassisIxrResFecUnpairedFree_Object = MibTableColumn
+tChassisIxrResFecUnpairedFree = _TChassisIxrResFecUnpairedFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 15),
+    _TChassisIxrResFecUnpairedFree_Type()
+)
+tChassisIxrResFecUnpairedFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResFecUnpairedFree.setStatus("current")
+_TChassisIxrResFecPairedTotal_Type = Unsigned32
+_TChassisIxrResFecPairedTotal_Object = MibTableColumn
+tChassisIxrResFecPairedTotal = _TChassisIxrResFecPairedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 16),
+    _TChassisIxrResFecPairedTotal_Type()
+)
+tChassisIxrResFecPairedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResFecPairedTotal.setStatus("current")
+_TChassisIxrResFecPairedAlloc_Type = Unsigned32
+_TChassisIxrResFecPairedAlloc_Object = MibTableColumn
+tChassisIxrResFecPairedAlloc = _TChassisIxrResFecPairedAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 17),
+    _TChassisIxrResFecPairedAlloc_Type()
+)
+tChassisIxrResFecPairedAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResFecPairedAlloc.setStatus("current")
+_TChassisIxrResFecPairedFree_Type = Unsigned32
+_TChassisIxrResFecPairedFree_Object = MibTableColumn
+tChassisIxrResFecPairedFree = _TChassisIxrResFecPairedFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 18),
+    _TChassisIxrResFecPairedFree_Type()
+)
+tChassisIxrResFecPairedFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResFecPairedFree.setStatus("current")
+_TChassisIxrResOamLmCtrTotal_Type = Unsigned32
+_TChassisIxrResOamLmCtrTotal_Object = MibTableColumn
+tChassisIxrResOamLmCtrTotal = _TChassisIxrResOamLmCtrTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 19),
+    _TChassisIxrResOamLmCtrTotal_Type()
+)
+tChassisIxrResOamLmCtrTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOamLmCtrTotal.setStatus("current")
+_TChassisIxrResOamLmCtrAlloc_Type = Unsigned32
+_TChassisIxrResOamLmCtrAlloc_Object = MibTableColumn
+tChassisIxrResOamLmCtrAlloc = _TChassisIxrResOamLmCtrAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 20),
+    _TChassisIxrResOamLmCtrAlloc_Type()
+)
+tChassisIxrResOamLmCtrAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOamLmCtrAlloc.setStatus("current")
+_TChassisIxrResOamLmCtrFree_Type = Unsigned32
+_TChassisIxrResOamLmCtrFree_Object = MibTableColumn
+tChassisIxrResOamLmCtrFree = _TChassisIxrResOamLmCtrFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 21),
+    _TChassisIxrResOamLmCtrFree_Type()
+)
+tChassisIxrResOamLmCtrFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOamLmCtrFree.setStatus("current")
+_TChassisIxrResAcLifTotal_Type = Unsigned32
+_TChassisIxrResAcLifTotal_Object = MibTableColumn
+tChassisIxrResAcLifTotal = _TChassisIxrResAcLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 22),
+    _TChassisIxrResAcLifTotal_Type()
+)
+tChassisIxrResAcLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResAcLifTotal.setStatus("current")
+_TChassisIxrResAcLifAlloc_Type = Unsigned32
+_TChassisIxrResAcLifAlloc_Object = MibTableColumn
+tChassisIxrResAcLifAlloc = _TChassisIxrResAcLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 23),
+    _TChassisIxrResAcLifAlloc_Type()
+)
+tChassisIxrResAcLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResAcLifAlloc.setStatus("current")
+_TChassisIxrResAcLifFree_Type = Unsigned32
+_TChassisIxrResAcLifFree_Object = MibTableColumn
+tChassisIxrResAcLifFree = _TChassisIxrResAcLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 24),
+    _TChassisIxrResAcLifFree_Type()
+)
+tChassisIxrResAcLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResAcLifFree.setStatus("current")
+_TChassisIxrResMplsNhlfeLifTotal_Type = Unsigned32
+_TChassisIxrResMplsNhlfeLifTotal_Object = MibTableColumn
+tChassisIxrResMplsNhlfeLifTotal = _TChassisIxrResMplsNhlfeLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 25),
+    _TChassisIxrResMplsNhlfeLifTotal_Type()
+)
+tChassisIxrResMplsNhlfeLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResMplsNhlfeLifTotal.setStatus("current")
+_TChassisIxrResMplsNhlfeLifAlloc_Type = Unsigned32
+_TChassisIxrResMplsNhlfeLifAlloc_Object = MibTableColumn
+tChassisIxrResMplsNhlfeLifAlloc = _TChassisIxrResMplsNhlfeLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 26),
+    _TChassisIxrResMplsNhlfeLifAlloc_Type()
+)
+tChassisIxrResMplsNhlfeLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResMplsNhlfeLifAlloc.setStatus("current")
+_TChassisIxrResMplsNhlfeLifFree_Type = Unsigned32
+_TChassisIxrResMplsNhlfeLifFree_Object = MibTableColumn
+tChassisIxrResMplsNhlfeLifFree = _TChassisIxrResMplsNhlfeLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 27),
+    _TChassisIxrResMplsNhlfeLifFree_Type()
+)
+tChassisIxrResMplsNhlfeLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResMplsNhlfeLifFree.setStatus("current")
+_TChassisIxrResBgpLblRtLifTotal_Type = Unsigned32
+_TChassisIxrResBgpLblRtLifTotal_Object = MibTableColumn
+tChassisIxrResBgpLblRtLifTotal = _TChassisIxrResBgpLblRtLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 28),
+    _TChassisIxrResBgpLblRtLifTotal_Type()
+)
+tChassisIxrResBgpLblRtLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResBgpLblRtLifTotal.setStatus("current")
+_TChassisIxrResBgpLblRtLifAlloc_Type = Unsigned32
+_TChassisIxrResBgpLblRtLifAlloc_Object = MibTableColumn
+tChassisIxrResBgpLblRtLifAlloc = _TChassisIxrResBgpLblRtLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 29),
+    _TChassisIxrResBgpLblRtLifAlloc_Type()
+)
+tChassisIxrResBgpLblRtLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResBgpLblRtLifAlloc.setStatus("current")
+_TChassisIxrResBgpLblRtLifFree_Type = Unsigned32
+_TChassisIxrResBgpLblRtLifFree_Object = MibTableColumn
+tChassisIxrResBgpLblRtLifFree = _TChassisIxrResBgpLblRtLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 30),
+    _TChassisIxrResBgpLblRtLifFree_Type()
+)
+tChassisIxrResBgpLblRtLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResBgpLblRtLifFree.setStatus("current")
+_TChassisIxrResSdpBndMplsLifTotal_Type = Unsigned32
+_TChassisIxrResSdpBndMplsLifTotal_Object = MibTableColumn
+tChassisIxrResSdpBndMplsLifTotal = _TChassisIxrResSdpBndMplsLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 31),
+    _TChassisIxrResSdpBndMplsLifTotal_Type()
+)
+tChassisIxrResSdpBndMplsLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSdpBndMplsLifTotal.setStatus("current")
+_TChassisIxrResSdpBndMplsLifAlloc_Type = Unsigned32
+_TChassisIxrResSdpBndMplsLifAlloc_Object = MibTableColumn
+tChassisIxrResSdpBndMplsLifAlloc = _TChassisIxrResSdpBndMplsLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 32),
+    _TChassisIxrResSdpBndMplsLifAlloc_Type()
+)
+tChassisIxrResSdpBndMplsLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSdpBndMplsLifAlloc.setStatus("current")
+_TChassisIxrResSdpBndMplsLifFree_Type = Unsigned32
+_TChassisIxrResSdpBndMplsLifFree_Object = MibTableColumn
+tChassisIxrResSdpBndMplsLifFree = _TChassisIxrResSdpBndMplsLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 33),
+    _TChassisIxrResSdpBndMplsLifFree_Type()
+)
+tChassisIxrResSdpBndMplsLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSdpBndMplsLifFree.setStatus("current")
+_TChassisIxrResSdpBndGreLifTotal_Type = Unsigned32
+_TChassisIxrResSdpBndGreLifTotal_Object = MibTableColumn
+tChassisIxrResSdpBndGreLifTotal = _TChassisIxrResSdpBndGreLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 34),
+    _TChassisIxrResSdpBndGreLifTotal_Type()
+)
+tChassisIxrResSdpBndGreLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSdpBndGreLifTotal.setStatus("current")
+_TChassisIxrResSdpBndGreLifAlloc_Type = Unsigned32
+_TChassisIxrResSdpBndGreLifAlloc_Object = MibTableColumn
+tChassisIxrResSdpBndGreLifAlloc = _TChassisIxrResSdpBndGreLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 35),
+    _TChassisIxrResSdpBndGreLifAlloc_Type()
+)
+tChassisIxrResSdpBndGreLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSdpBndGreLifAlloc.setStatus("current")
+_TChassisIxrResSdpBndGreLifFree_Type = Unsigned32
+_TChassisIxrResSdpBndGreLifFree_Object = MibTableColumn
+tChassisIxrResSdpBndGreLifFree = _TChassisIxrResSdpBndGreLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 36),
+    _TChassisIxrResSdpBndGreLifFree_Type()
+)
+tChassisIxrResSdpBndGreLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSdpBndGreLifFree.setStatus("current")
+_TChassisIxrResSsidLifTotal_Type = Unsigned32
+_TChassisIxrResSsidLifTotal_Object = MibTableColumn
+tChassisIxrResSsidLifTotal = _TChassisIxrResSsidLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 37),
+    _TChassisIxrResSsidLifTotal_Type()
+)
+tChassisIxrResSsidLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSsidLifTotal.setStatus("current")
+_TChassisIxrResSsidLifAlloc_Type = Unsigned32
+_TChassisIxrResSsidLifAlloc_Object = MibTableColumn
+tChassisIxrResSsidLifAlloc = _TChassisIxrResSsidLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 38),
+    _TChassisIxrResSsidLifAlloc_Type()
+)
+tChassisIxrResSsidLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSsidLifAlloc.setStatus("current")
+_TChassisIxrResSsidLifFree_Type = Unsigned32
+_TChassisIxrResSsidLifFree_Object = MibTableColumn
+tChassisIxrResSsidLifFree = _TChassisIxrResSsidLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 39),
+    _TChassisIxrResSsidLifFree_Type()
+)
+tChassisIxrResSsidLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSsidLifFree.setStatus("current")
+_TChassisIxrResSrv6TunnelLifTotal_Type = Unsigned32
+_TChassisIxrResSrv6TunnelLifTotal_Object = MibTableColumn
+tChassisIxrResSrv6TunnelLifTotal = _TChassisIxrResSrv6TunnelLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 40),
+    _TChassisIxrResSrv6TunnelLifTotal_Type()
+)
+tChassisIxrResSrv6TunnelLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSrv6TunnelLifTotal.setStatus("current")
+_TChassisIxrResSrv6TunnelLifAlloc_Type = Unsigned32
+_TChassisIxrResSrv6TunnelLifAlloc_Object = MibTableColumn
+tChassisIxrResSrv6TunnelLifAlloc = _TChassisIxrResSrv6TunnelLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 41),
+    _TChassisIxrResSrv6TunnelLifAlloc_Type()
+)
+tChassisIxrResSrv6TunnelLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSrv6TunnelLifAlloc.setStatus("current")
+_TChassisIxrResSrv6TunnelLifFree_Type = Unsigned32
+_TChassisIxrResSrv6TunnelLifFree_Object = MibTableColumn
+tChassisIxrResSrv6TunnelLifFree = _TChassisIxrResSrv6TunnelLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 42),
+    _TChassisIxrResSrv6TunnelLifFree_Type()
+)
+tChassisIxrResSrv6TunnelLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResSrv6TunnelLifFree.setStatus("current")
+_TChassisIxrResL2ServiceTotal_Type = Unsigned32
+_TChassisIxrResL2ServiceTotal_Object = MibTableColumn
+tChassisIxrResL2ServiceTotal = _TChassisIxrResL2ServiceTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 43),
+    _TChassisIxrResL2ServiceTotal_Type()
+)
+tChassisIxrResL2ServiceTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResL2ServiceTotal.setStatus("current")
+_TChassisIxrResL2ServiceAlloc_Type = Unsigned32
+_TChassisIxrResL2ServiceAlloc_Object = MibTableColumn
+tChassisIxrResL2ServiceAlloc = _TChassisIxrResL2ServiceAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 44),
+    _TChassisIxrResL2ServiceAlloc_Type()
+)
+tChassisIxrResL2ServiceAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResL2ServiceAlloc.setStatus("current")
+_TChassisIxrResL2ServiceFree_Type = Unsigned32
+_TChassisIxrResL2ServiceFree_Object = MibTableColumn
+tChassisIxrResL2ServiceFree = _TChassisIxrResL2ServiceFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 45),
+    _TChassisIxrResL2ServiceFree_Type()
+)
+tChassisIxrResL2ServiceFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResL2ServiceFree.setStatus("current")
+_TChassisIxrResStationIdTotal_Type = Unsigned32
+_TChassisIxrResStationIdTotal_Object = MibTableColumn
+tChassisIxrResStationIdTotal = _TChassisIxrResStationIdTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 46),
+    _TChassisIxrResStationIdTotal_Type()
+)
+tChassisIxrResStationIdTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResStationIdTotal.setStatus("current")
+_TChassisIxrResStationIdAlloc_Type = Unsigned32
+_TChassisIxrResStationIdAlloc_Object = MibTableColumn
+tChassisIxrResStationIdAlloc = _TChassisIxrResStationIdAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 47),
+    _TChassisIxrResStationIdAlloc_Type()
+)
+tChassisIxrResStationIdAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResStationIdAlloc.setStatus("current")
+_TChassisIxrResStationIdFree_Type = Unsigned32
+_TChassisIxrResStationIdFree_Object = MibTableColumn
+tChassisIxrResStationIdFree = _TChassisIxrResStationIdFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 48),
+    _TChassisIxrResStationIdFree_Type()
+)
+tChassisIxrResStationIdFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResStationIdFree.setStatus("current")
+_TChassisIxrResVxlanLifTotal_Type = Unsigned32
+_TChassisIxrResVxlanLifTotal_Object = MibTableColumn
+tChassisIxrResVxlanLifTotal = _TChassisIxrResVxlanLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 49),
+    _TChassisIxrResVxlanLifTotal_Type()
+)
+tChassisIxrResVxlanLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResVxlanLifTotal.setStatus("current")
+_TChassisIxrResVxlanLifAlloc_Type = Unsigned32
+_TChassisIxrResVxlanLifAlloc_Object = MibTableColumn
+tChassisIxrResVxlanLifAlloc = _TChassisIxrResVxlanLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 50),
+    _TChassisIxrResVxlanLifAlloc_Type()
+)
+tChassisIxrResVxlanLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResVxlanLifAlloc.setStatus("current")
+_TChassisIxrResVxlanLifFree_Type = Unsigned32
+_TChassisIxrResVxlanLifFree_Object = MibTableColumn
+tChassisIxrResVxlanLifFree = _TChassisIxrResVxlanLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 32, 1, 51),
+    _TChassisIxrResVxlanLifFree_Type()
+)
+tChassisIxrResVxlanLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResVxlanLifFree.setStatus("current")
+_TChassisIxrResourceOwnerTable_Object = MibTable
+tChassisIxrResourceOwnerTable = _TChassisIxrResourceOwnerTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33)
+)
+if mibBuilder.loadTexts:
+    tChassisIxrResourceOwnerTable.setStatus("current")
+_TChassisIxrResourceOwnerEntry_Object = MibTableRow
+tChassisIxrResourceOwnerEntry = _TChassisIxrResourceOwnerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1)
+)
+tChassisIxrResourceOwnerEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResourceOwner"),
+)
+if mibBuilder.loadTexts:
+    tChassisIxrResourceOwnerEntry.setStatus("current")
+_TmnxChassisIxrResourceOwner_Type = TmnxIxrResourceOwner
+_TmnxChassisIxrResourceOwner_Object = MibTableColumn
+tmnxChassisIxrResourceOwner = _TmnxChassisIxrResourceOwner_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 1),
+    _TmnxChassisIxrResourceOwner_Type()
+)
+tmnxChassisIxrResourceOwner.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxChassisIxrResourceOwner.setStatus("current")
+_TChassisIxrResOwnCommonLifTotal_Type = Unsigned32
+_TChassisIxrResOwnCommonLifTotal_Object = MibTableColumn
+tChassisIxrResOwnCommonLifTotal = _TChassisIxrResOwnCommonLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 2),
+    _TChassisIxrResOwnCommonLifTotal_Type()
+)
+tChassisIxrResOwnCommonLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnCommonLifTotal.setStatus("current")
+_TChassisIxrResOwnCommonLifAlloc_Type = Unsigned32
+_TChassisIxrResOwnCommonLifAlloc_Object = MibTableColumn
+tChassisIxrResOwnCommonLifAlloc = _TChassisIxrResOwnCommonLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 3),
+    _TChassisIxrResOwnCommonLifAlloc_Type()
+)
+tChassisIxrResOwnCommonLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnCommonLifAlloc.setStatus("current")
+_TChassisIxrResOwnCommonLifFree_Type = Unsigned32
+_TChassisIxrResOwnCommonLifFree_Object = MibTableColumn
+tChassisIxrResOwnCommonLifFree = _TChassisIxrResOwnCommonLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 4),
+    _TChassisIxrResOwnCommonLifFree_Type()
+)
+tChassisIxrResOwnCommonLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnCommonLifFree.setStatus("current")
+_TChassisIxrResOwnArpLifAlloc_Type = Unsigned32
+_TChassisIxrResOwnArpLifAlloc_Object = MibTableColumn
+tChassisIxrResOwnArpLifAlloc = _TChassisIxrResOwnArpLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 5),
+    _TChassisIxrResOwnArpLifAlloc_Type()
+)
+tChassisIxrResOwnArpLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnArpLifAlloc.setStatus("current")
+_TChassisIxrResOwnMplsLifAlloc_Type = Unsigned32
+_TChassisIxrResOwnMplsLifAlloc_Object = MibTableColumn
+tChassisIxrResOwnMplsLifAlloc = _TChassisIxrResOwnMplsLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 6),
+    _TChassisIxrResOwnMplsLifAlloc_Type()
+)
+tChassisIxrResOwnMplsLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnMplsLifAlloc.setStatus("current")
+_TChassisIxrResOwnL3VsiRifAlloc_Type = Unsigned32
+_TChassisIxrResOwnL3VsiRifAlloc_Object = MibTableColumn
+tChassisIxrResOwnL3VsiRifAlloc = _TChassisIxrResOwnL3VsiRifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 7),
+    _TChassisIxrResOwnL3VsiRifAlloc_Type()
+)
+tChassisIxrResOwnL3VsiRifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnL3VsiRifAlloc.setStatus("current")
+_TChassisIxrResOwnFecUnpairAlloc_Type = Unsigned32
+_TChassisIxrResOwnFecUnpairAlloc_Object = MibTableColumn
+tChassisIxrResOwnFecUnpairAlloc = _TChassisIxrResOwnFecUnpairAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 8),
+    _TChassisIxrResOwnFecUnpairAlloc_Type()
+)
+tChassisIxrResOwnFecUnpairAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnFecUnpairAlloc.setStatus("current")
+_TChassisIxrResOwnFecPairedAlloc_Type = Unsigned32
+_TChassisIxrResOwnFecPairedAlloc_Object = MibTableColumn
+tChassisIxrResOwnFecPairedAlloc = _TChassisIxrResOwnFecPairedAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 9),
+    _TChassisIxrResOwnFecPairedAlloc_Type()
+)
+tChassisIxrResOwnFecPairedAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnFecPairedAlloc.setStatus("current")
+_TChassisIxrResOwnOamLmCtrAlloc_Type = Unsigned32
+_TChassisIxrResOwnOamLmCtrAlloc_Object = MibTableColumn
+tChassisIxrResOwnOamLmCtrAlloc = _TChassisIxrResOwnOamLmCtrAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 10),
+    _TChassisIxrResOwnOamLmCtrAlloc_Type()
+)
+tChassisIxrResOwnOamLmCtrAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChassisIxrResOwnOamLmCtrAlloc.setStatus("current")
+_TChasIxrResOwnAcLifAlloc_Type = Unsigned32
+_TChasIxrResOwnAcLifAlloc_Object = MibTableColumn
+tChasIxrResOwnAcLifAlloc = _TChasIxrResOwnAcLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 11),
+    _TChasIxrResOwnAcLifAlloc_Type()
+)
+tChasIxrResOwnAcLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnAcLifAlloc.setStatus("current")
+_TChasIxrResOwnMplsNhlfeLifAlloc_Type = Unsigned32
+_TChasIxrResOwnMplsNhlfeLifAlloc_Object = MibTableColumn
+tChasIxrResOwnMplsNhlfeLifAlloc = _TChasIxrResOwnMplsNhlfeLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 12),
+    _TChasIxrResOwnMplsNhlfeLifAlloc_Type()
+)
+tChasIxrResOwnMplsNhlfeLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnMplsNhlfeLifAlloc.setStatus("current")
+_TChasIxrResOwnBgpLblRtLifTotal_Type = Unsigned32
+_TChasIxrResOwnBgpLblRtLifTotal_Object = MibTableColumn
+tChasIxrResOwnBgpLblRtLifTotal = _TChasIxrResOwnBgpLblRtLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 13),
+    _TChasIxrResOwnBgpLblRtLifTotal_Type()
+)
+tChasIxrResOwnBgpLblRtLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnBgpLblRtLifTotal.setStatus("current")
+_TChasIxrResOwnBgpLblRtLifAlloc_Type = Unsigned32
+_TChasIxrResOwnBgpLblRtLifAlloc_Object = MibTableColumn
+tChasIxrResOwnBgpLblRtLifAlloc = _TChasIxrResOwnBgpLblRtLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 14),
+    _TChasIxrResOwnBgpLblRtLifAlloc_Type()
+)
+tChasIxrResOwnBgpLblRtLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnBgpLblRtLifAlloc.setStatus("current")
+_TChasIxrResOwnBgpLblRtLifFree_Type = Unsigned32
+_TChasIxrResOwnBgpLblRtLifFree_Object = MibTableColumn
+tChasIxrResOwnBgpLblRtLifFree = _TChasIxrResOwnBgpLblRtLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 15),
+    _TChasIxrResOwnBgpLblRtLifFree_Type()
+)
+tChasIxrResOwnBgpLblRtLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnBgpLblRtLifFree.setStatus("current")
+_TChasIxrResOwnSdpBndMplsLifAlloc_Type = Unsigned32
+_TChasIxrResOwnSdpBndMplsLifAlloc_Object = MibTableColumn
+tChasIxrResOwnSdpBndMplsLifAlloc = _TChasIxrResOwnSdpBndMplsLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 16),
+    _TChasIxrResOwnSdpBndMplsLifAlloc_Type()
+)
+tChasIxrResOwnSdpBndMplsLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnSdpBndMplsLifAlloc.setStatus("current")
+_TChasIxrResOwnSdpBndGreLifAlloc_Type = Unsigned32
+_TChasIxrResOwnSdpBndGreLifAlloc_Object = MibTableColumn
+tChasIxrResOwnSdpBndGreLifAlloc = _TChasIxrResOwnSdpBndGreLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 17),
+    _TChasIxrResOwnSdpBndGreLifAlloc_Type()
+)
+tChasIxrResOwnSdpBndGreLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnSdpBndGreLifAlloc.setStatus("current")
+_TChasIxrResOwnSsidLifAlloc_Type = Unsigned32
+_TChasIxrResOwnSsidLifAlloc_Object = MibTableColumn
+tChasIxrResOwnSsidLifAlloc = _TChasIxrResOwnSsidLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 18),
+    _TChasIxrResOwnSsidLifAlloc_Type()
+)
+tChasIxrResOwnSsidLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnSsidLifAlloc.setStatus("current")
+_TChasIxrResOwnSrv6TunnelLifAlloc_Type = Unsigned32
+_TChasIxrResOwnSrv6TunnelLifAlloc_Object = MibTableColumn
+tChasIxrResOwnSrv6TunnelLifAlloc = _TChasIxrResOwnSrv6TunnelLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 19),
+    _TChasIxrResOwnSrv6TunnelLifAlloc_Type()
+)
+tChasIxrResOwnSrv6TunnelLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnSrv6TunnelLifAlloc.setStatus("current")
+_TChasIxrResOwnL2ServiceAlloc_Type = Unsigned32
+_TChasIxrResOwnL2ServiceAlloc_Object = MibTableColumn
+tChasIxrResOwnL2ServiceAlloc = _TChasIxrResOwnL2ServiceAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 20),
+    _TChasIxrResOwnL2ServiceAlloc_Type()
+)
+tChasIxrResOwnL2ServiceAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnL2ServiceAlloc.setStatus("current")
+_TChasIxrResOwnStationIdAlloc_Type = Unsigned32
+_TChasIxrResOwnStationIdAlloc_Object = MibTableColumn
+tChasIxrResOwnStationIdAlloc = _TChasIxrResOwnStationIdAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 21),
+    _TChasIxrResOwnStationIdAlloc_Type()
+)
+tChasIxrResOwnStationIdAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnStationIdAlloc.setStatus("current")
+_TChasIxrResOwnVxlanLifAlloc_Type = Unsigned32
+_TChasIxrResOwnVxlanLifAlloc_Object = MibTableColumn
+tChasIxrResOwnVxlanLifAlloc = _TChasIxrResOwnVxlanLifAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 22),
+    _TChasIxrResOwnVxlanLifAlloc_Type()
+)
+tChasIxrResOwnVxlanLifAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnVxlanLifAlloc.setStatus("current")
+_TChasIxrResOwnAcLifTotal_Type = Unsigned32
+_TChasIxrResOwnAcLifTotal_Object = MibTableColumn
+tChasIxrResOwnAcLifTotal = _TChasIxrResOwnAcLifTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 23),
+    _TChasIxrResOwnAcLifTotal_Type()
+)
+tChasIxrResOwnAcLifTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnAcLifTotal.setStatus("current")
+_TChasIxrResOwnAcLifFree_Type = Unsigned32
+_TChasIxrResOwnAcLifFree_Object = MibTableColumn
+tChasIxrResOwnAcLifFree = _TChasIxrResOwnAcLifFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 33, 1, 24),
+    _TChasIxrResOwnAcLifFree_Type()
+)
+tChasIxrResOwnAcLifFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tChasIxrResOwnAcLifFree.setStatus("current")
+_TmnxFlashTable_Object = MibTable
+tmnxFlashTable = _TmnxFlashTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34)
+)
+if mibBuilder.loadTexts:
+    tmnxFlashTable.setStatus("current")
+_TmnxFlashEntry_Object = MibTableRow
+tmnxFlashEntry = _TmnxFlashEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1)
+)
+tmnxFlashEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxHwIndex"),
+)
+if mibBuilder.loadTexts:
+    tmnxFlashEntry.setStatus("current")
+_TmnxFlashOperStatus_Type = TmnxDeviceState
+_TmnxFlashOperStatus_Object = MibTableColumn
+tmnxFlashOperStatus = _TmnxFlashOperStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 1),
+    _TmnxFlashOperStatus_Type()
+)
+tmnxFlashOperStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashOperStatus.setStatus("current")
+_TmnxFlashSerialNumber_Type = TItemDescription
+_TmnxFlashSerialNumber_Object = MibTableColumn
+tmnxFlashSerialNumber = _TmnxFlashSerialNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 2),
+    _TmnxFlashSerialNumber_Type()
+)
+tmnxFlashSerialNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashSerialNumber.setStatus("current")
+_TmnxFlashFirmwareRevision_Type = TItemDescription
+_TmnxFlashFirmwareRevision_Object = MibTableColumn
+tmnxFlashFirmwareRevision = _TmnxFlashFirmwareRevision_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 3),
+    _TmnxFlashFirmwareRevision_Type()
+)
+tmnxFlashFirmwareRevision.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashFirmwareRevision.setStatus("current")
+_TmnxFlashModelNumber_Type = TItemDescription
+_TmnxFlashModelNumber_Object = MibTableColumn
+tmnxFlashModelNumber = _TmnxFlashModelNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 4),
+    _TmnxFlashModelNumber_Type()
+)
+tmnxFlashModelNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashModelNumber.setStatus("current")
+_TmnxFlashCapacity_Type = Unsigned32
+_TmnxFlashCapacity_Object = MibTableColumn
+tmnxFlashCapacity = _TmnxFlashCapacity_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 5),
+    _TmnxFlashCapacity_Type()
+)
+tmnxFlashCapacity.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashCapacity.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxFlashCapacity.setUnits("sectors")
+_TmnxFlashUsed_Type = Unsigned32
+_TmnxFlashUsed_Object = MibTableColumn
+tmnxFlashUsed = _TmnxFlashUsed_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 6),
+    _TmnxFlashUsed_Type()
+)
+tmnxFlashUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashUsed.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxFlashUsed.setUnits("sectors")
+_TmnxFlashPercentageUsed_Type = Unsigned32
+_TmnxFlashPercentageUsed_Object = MibTableColumn
+tmnxFlashPercentageUsed = _TmnxFlashPercentageUsed_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 1, 34, 1, 7),
+    _TmnxFlashPercentageUsed_Type()
+)
+tmnxFlashPercentageUsed.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFlashPercentageUsed.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxFlashPercentageUsed.setUnits("percent")
 _TmnxSlotObjs_ObjectIdentity = ObjectIdentity
 tmnxSlotObjs = _TmnxSlotObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 2)
@@ -8268,6 +10244,24 @@ tmnxCpmCardVmNumCores = _TmnxCpmCardVmNumCores_Object(
 tmnxCpmCardVmNumCores.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxCpmCardVmNumCores.setStatus("obsolete")
+_TmnxCpmCardAntiTheft_Type = TmnxEnabledDisabled
+_TmnxCpmCardAntiTheft_Object = MibTableColumn
+tmnxCpmCardAntiTheft = _TmnxCpmCardAntiTheft_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 4, 1, 61),
+    _TmnxCpmCardAntiTheft_Type()
+)
+tmnxCpmCardAntiTheft.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCpmCardAntiTheft.setStatus("current")
+_TmnxCpmCardPwdPendingActivation_Type = TruthValue
+_TmnxCpmCardPwdPendingActivation_Object = MibTableColumn
+tmnxCpmCardPwdPendingActivation = _TmnxCpmCardPwdPendingActivation_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 4, 1, 62),
+    _TmnxCpmCardPwdPendingActivation_Type()
+)
+tmnxCpmCardPwdPendingActivation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCpmCardPwdPendingActivation.setStatus("current")
 _TmnxFabricLastChange_Type = TimeStamp
 _TmnxFabricLastChange_Object = MibScalar
 tmnxFabricLastChange = _TmnxFabricLastChange_Object(
@@ -8858,7 +10852,7 @@ tmnxMDAClockMode = _TmnxMDAClockMode_Object(
 )
 tmnxMDAClockMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxMDAClockMode.setStatus("current")
+    tmnxMDAClockMode.setStatus("obsolete")
 
 
 class _TmnxMDADiffTimestampFreq_Type(Unsigned32):
@@ -8885,22 +10879,6 @@ if mibBuilder.loadTexts:
     tmnxMDADiffTimestampFreq.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxMDADiffTimestampFreq.setUnits("kilohertz")
-
-
-class _TmnxMDAIngHsmdaSchedPolicy_Type(TNamedItemOrEmpty):
-    """Custom type tmnxMDAIngHsmdaSchedPolicy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TmnxMDAIngHsmdaSchedPolicy_Type.__name__ = "TNamedItemOrEmpty"
-_TmnxMDAIngHsmdaSchedPolicy_Object = MibTableColumn
-tmnxMDAIngHsmdaSchedPolicy = _TmnxMDAIngHsmdaSchedPolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 26),
-    _TmnxMDAIngHsmdaSchedPolicy_Type()
-)
-tmnxMDAIngHsmdaSchedPolicy.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxMDAIngHsmdaSchedPolicy.setStatus("obsolete")
 
 
 class _TmnxMDAMcPathMgmtBwPlcyName_Type(TNamedItem):
@@ -9034,38 +11012,6 @@ tmnxMDAEgrNamedPoolPolicy = _TmnxMDAEgrNamedPoolPolicy_Object(
 tmnxMDAEgrNamedPoolPolicy.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxMDAEgrNamedPoolPolicy.setStatus("obsolete")
-
-
-class _TmnxMDAIngHsmdaPoolPolicy_Type(TNamedItemOrEmpty):
-    """Custom type tmnxMDAIngHsmdaPoolPolicy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TmnxMDAIngHsmdaPoolPolicy_Type.__name__ = "TNamedItemOrEmpty"
-_TmnxMDAIngHsmdaPoolPolicy_Object = MibTableColumn
-tmnxMDAIngHsmdaPoolPolicy = _TmnxMDAIngHsmdaPoolPolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 34),
-    _TmnxMDAIngHsmdaPoolPolicy_Type()
-)
-tmnxMDAIngHsmdaPoolPolicy.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxMDAIngHsmdaPoolPolicy.setStatus("obsolete")
-
-
-class _TmnxMDAEgrHsmdaPoolPolicy_Type(TNamedItemOrEmpty):
-    """Custom type tmnxMDAEgrHsmdaPoolPolicy based on TNamedItemOrEmpty"""
-    defaultValue = OctetString("")
-
-
-_TmnxMDAEgrHsmdaPoolPolicy_Type.__name__ = "TNamedItemOrEmpty"
-_TmnxMDAEgrHsmdaPoolPolicy_Object = MibTableColumn
-tmnxMDAEgrHsmdaPoolPolicy = _TmnxMDAEgrHsmdaPoolPolicy_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 35),
-    _TmnxMDAEgrHsmdaPoolPolicy_Type()
-)
-tmnxMDAEgrHsmdaPoolPolicy.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxMDAEgrHsmdaPoolPolicy.setStatus("obsolete")
 _TmnxMDAMcPathMgmtPriInUseBw_Type = Gauge32
 _TmnxMDAMcPathMgmtPriInUseBw_Object = MibTableColumn
 tmnxMDAMcPathMgmtPriInUseBw = _TmnxMDAMcPathMgmtPriInUseBw_Object(
@@ -9166,54 +11112,7 @@ tmnxMDAAtmMode = _TmnxMDAAtmMode_Object(
 )
 tmnxMDAAtmMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    tmnxMDAAtmMode.setStatus("current")
-
-
-class _TmnxMDAEgrHsmdaThrshLoBrstMult_Type(Integer32):
-    """Custom type tmnxMDAEgrHsmdaThrshLoBrstMult based on Integer32"""
-    defaultValue = -1
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(-1, -1),
-        ValueRangeConstraint(1, 65536),
-    )
-
-
-_TmnxMDAEgrHsmdaThrshLoBrstMult_Type.__name__ = "Integer32"
-_TmnxMDAEgrHsmdaThrshLoBrstMult_Object = MibTableColumn
-tmnxMDAEgrHsmdaThrshLoBrstMult = _TmnxMDAEgrHsmdaThrshLoBrstMult_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 44),
-    _TmnxMDAEgrHsmdaThrshLoBrstMult_Type()
-)
-tmnxMDAEgrHsmdaThrshLoBrstMult.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxMDAEgrHsmdaThrshLoBrstMult.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxMDAEgrHsmdaThrshLoBrstMult.setUnits("bytes per megabit of rate")
-
-
-class _TmnxMDAEgrHsmdaThrshHiBrstInc_Type(Integer32):
-    """Custom type tmnxMDAEgrHsmdaThrshHiBrstInc based on Integer32"""
-    defaultValue = -1
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(-1, 65536),
-    )
-
-
-_TmnxMDAEgrHsmdaThrshHiBrstInc_Type.__name__ = "Integer32"
-_TmnxMDAEgrHsmdaThrshHiBrstInc_Object = MibTableColumn
-tmnxMDAEgrHsmdaThrshHiBrstInc = _TmnxMDAEgrHsmdaThrshHiBrstInc_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 45),
-    _TmnxMDAEgrHsmdaThrshHiBrstInc_Type()
-)
-tmnxMDAEgrHsmdaThrshHiBrstInc.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    tmnxMDAEgrHsmdaThrshHiBrstInc.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxMDAEgrHsmdaThrshHiBrstInc.setUnits("bytes")
+    tmnxMDAAtmMode.setStatus("obsolete")
 
 
 class _TmnxMDAIsaTunnelGroup_Type(TmnxTunnelGroupIdOrZero):
@@ -9432,6 +11331,63 @@ if mibBuilder.loadTexts:
     tmnxMDALicensedBandwidth.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxMDALicensedBandwidth.setUnits("gigabps")
+
+
+class _TmnxMDAIsaMemberPoolAssoc_Type(TNamedItemOrEmpty):
+    """Custom type tmnxMDAIsaMemberPoolAssoc based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_TmnxMDAIsaMemberPoolAssoc_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxMDAIsaMemberPoolAssoc_Object = MibTableColumn
+tmnxMDAIsaMemberPoolAssoc = _TmnxMDAIsaMemberPoolAssoc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 59),
+    _TmnxMDAIsaMemberPoolAssoc_Type()
+)
+tmnxMDAIsaMemberPoolAssoc.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxMDAIsaMemberPoolAssoc.setStatus("current")
+_TmnxMDAIsaTunnelActiveInGrp_Type = TmnxTunnelGroupIdOrZero
+_TmnxMDAIsaTunnelActiveInGrp_Object = MibTableColumn
+tmnxMDAIsaTunnelActiveInGrp = _TmnxMDAIsaTunnelActiveInGrp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 60),
+    _TmnxMDAIsaTunnelActiveInGrp_Type()
+)
+tmnxMDAIsaTunnelActiveInGrp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMDAIsaTunnelActiveInGrp.setStatus("current")
+
+
+class _TmnxMDAMacMode_Type(Integer32):
+    """Custom type tmnxMDAMacMode based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("mode100g", 1),
+          ("mode800g", 2),
+          ("mode10g", 3))
+    )
+
+
+_TmnxMDAMacMode_Type.__name__ = "Integer32"
+_TmnxMDAMacMode_Object = MibTableColumn
+tmnxMDAMacMode = _TmnxMDAMacMode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 8, 1, 61),
+    _TmnxMDAMacMode_Type()
+)
+tmnxMDAMacMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxMDAMacMode.setStatus("current")
 _TmnxCardTypeTable_Object = MibTable
 tmnxCardTypeTable = _TmnxCardTypeTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 9)
@@ -10495,6 +12451,26 @@ tmnxSyncIfTimingGnss2State = _TmnxSyncIfTimingGnss2State_Object(
 tmnxSyncIfTimingGnss2State.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxSyncIfTimingGnss2State.setStatus("current")
+_TmnxSyncIfTimingRefOrder6_Type = TmnxSETSRefSource
+_TmnxSyncIfTimingRefOrder6_Object = MibTableColumn
+tmnxSyncIfTimingRefOrder6 = _TmnxSyncIfTimingRefOrder6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 11, 1, 95),
+    _TmnxSyncIfTimingRefOrder6_Type()
+)
+tmnxSyncIfTimingRefOrder6.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSyncIfTimingRefOrder6.setStatus("current")
+_TmnxSyncIfTimingFreqOffsetPpb_Type = Integer32
+_TmnxSyncIfTimingFreqOffsetPpb_Object = MibTableColumn
+tmnxSyncIfTimingFreqOffsetPpb = _TmnxSyncIfTimingFreqOffsetPpb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 11, 1, 96),
+    _TmnxSyncIfTimingFreqOffsetPpb_Type()
+)
+tmnxSyncIfTimingFreqOffsetPpb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxSyncIfTimingFreqOffsetPpb.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxSyncIfTimingFreqOffsetPpb.setUnits("parts-per-billion")
 _TmnxCcagTable_Object = MibTable
 tmnxCcagTable = _TmnxCcagTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 12)
@@ -11381,7 +13357,8 @@ class _TmnxIPsecIsaGrpIsaScaleMode_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6)
         )
     )
     namedValues = NamedValues(
@@ -11389,7 +13366,8 @@ class _TmnxIPsecIsaGrpIsaScaleMode_Type(Integer32):
           ("tunnelLimit32k", 2),
           ("tunnelLimit64k", 3),
           ("tunnelLimit8", 4),
-          ("tunnelLimit32", 5))
+          ("tunnelLimit32", 5),
+          ("tunnelLimit4k", 6))
     )
 
 
@@ -11434,376 +13412,68 @@ tmnxIPsecIsaGrpTrafficFwdCollEn = _TmnxIPsecIsaGrpTrafficFwdCollEn_Object(
 tmnxIPsecIsaGrpTrafficFwdCollEn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxIPsecIsaGrpTrafficFwdCollEn.setStatus("current")
-_TmnxHsmdaMdaSchOvrTblLastChangd_Type = TimeStamp
-_TmnxHsmdaMdaSchOvrTblLastChangd_Object = MibScalar
-tmnxHsmdaMdaSchOvrTblLastChangd = _TmnxHsmdaMdaSchOvrTblLastChangd_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 19),
-    _TmnxHsmdaMdaSchOvrTblLastChangd_Type()
+
+
+class _TmnxIPsecIsaGrpMemberPool_Type(TNamedItemOrEmpty):
+    """Custom type tmnxIPsecIsaGrpMemberPool based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_TmnxIPsecIsaGrpMemberPool_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxIPsecIsaGrpMemberPool_Object = MibTableColumn
+tmnxIPsecIsaGrpMemberPool = _TmnxIPsecIsaGrpMemberPool_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 18, 1, 23),
+    _TmnxIPsecIsaGrpMemberPool_Type()
 )
-tmnxHsmdaMdaSchOvrTblLastChangd.setMaxAccess("read-only")
+tmnxIPsecIsaGrpMemberPool.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrTblLastChangd.setStatus("obsolete")
-_TmnxHsmdaMdaSchOvrTable_Object = MibTable
-tmnxHsmdaMdaSchOvrTable = _TmnxHsmdaMdaSchOvrTable_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20)
+    tmnxIPsecIsaGrpMemberPool.setStatus("current")
+
+
+class _TmnxIPsecIsaGrpESPSeqNumOrder_Type(TruthValue):
+    """Custom type tmnxIPsecIsaGrpESPSeqNumOrder based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxIPsecIsaGrpESPSeqNumOrder_Type.__name__ = "TruthValue"
+_TmnxIPsecIsaGrpESPSeqNumOrder_Object = MibTableColumn
+tmnxIPsecIsaGrpESPSeqNumOrder = _TmnxIPsecIsaGrpESPSeqNumOrder_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 18, 1, 24),
+    _TmnxIPsecIsaGrpESPSeqNumOrder_Type()
 )
+tmnxIPsecIsaGrpESPSeqNumOrder.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrTable.setStatus("obsolete")
-_TmnxHsmdaMdaSchOvrEntry_Object = MibTableRow
-tmnxHsmdaMdaSchOvrEntry = _TmnxHsmdaMdaSchOvrEntry_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1)
+    tmnxIPsecIsaGrpESPSeqNumOrder.setStatus("current")
+_TmnxIPsecIsaGrpESPSeqNumOrderOpr_Type = TruthValue
+_TmnxIPsecIsaGrpESPSeqNumOrderOpr_Object = MibTableColumn
+tmnxIPsecIsaGrpESPSeqNumOrderOpr = _TmnxIPsecIsaGrpESPSeqNumOrderOpr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 18, 1, 25),
+    _TmnxIPsecIsaGrpESPSeqNumOrderOpr_Type()
 )
-tmnxHsmdaMdaSchOvrEntry.setIndexNames(
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
-    (0, "TIMETRA-CHASSIS-MIB", "tmnxMDASlotNum"),
+tmnxIPsecIsaGrpESPSeqNumOrderOpr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaGrpESPSeqNumOrderOpr.setStatus("current")
+
+
+class _TmnxIPsecIsaGrpSpiRangeIndex_Type(Unsigned32):
+    """Custom type tmnxIPsecIsaGrpSpiRangeIndex based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4),
+    )
+
+
+_TmnxIPsecIsaGrpSpiRangeIndex_Type.__name__ = "Unsigned32"
+_TmnxIPsecIsaGrpSpiRangeIndex_Object = MibTableColumn
+tmnxIPsecIsaGrpSpiRangeIndex = _TmnxIPsecIsaGrpSpiRangeIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 18, 1, 26),
+    _TmnxIPsecIsaGrpSpiRangeIndex_Type()
 )
+tmnxIPsecIsaGrpSpiRangeIndex.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrEntry.setStatus("obsolete")
-_TmnxHsmdaMdaSchOvrRowStatus_Type = RowStatus
-_TmnxHsmdaMdaSchOvrRowStatus_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrRowStatus = _TmnxHsmdaMdaSchOvrRowStatus_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 1),
-    _TmnxHsmdaMdaSchOvrRowStatus_Type()
-)
-tmnxHsmdaMdaSchOvrRowStatus.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrRowStatus.setStatus("obsolete")
-_TmnxHsmdaMdaSchOvrLastChanged_Type = TimeStamp
-_TmnxHsmdaMdaSchOvrLastChanged_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrLastChanged = _TmnxHsmdaMdaSchOvrLastChanged_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 2),
-    _TmnxHsmdaMdaSchOvrLastChanged_Type()
-)
-tmnxHsmdaMdaSchOvrLastChanged.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrLastChanged.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrMaxRate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrMaxRate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrMaxRate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrMaxRate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrMaxRate = _TmnxHsmdaMdaSchOvrMaxRate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 3),
-    _TmnxHsmdaMdaSchOvrMaxRate_Type()
-)
-tmnxHsmdaMdaSchOvrMaxRate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrMaxRate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrMaxRate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrGrp1Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrGrp1Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrGrp1Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrGrp1Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrGrp1Rate = _TmnxHsmdaMdaSchOvrGrp1Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 4),
-    _TmnxHsmdaMdaSchOvrGrp1Rate_Type()
-)
-tmnxHsmdaMdaSchOvrGrp1Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrGrp1Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrGrp1Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrGrp2Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrGrp2Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrGrp2Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrGrp2Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrGrp2Rate = _TmnxHsmdaMdaSchOvrGrp2Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 5),
-    _TmnxHsmdaMdaSchOvrGrp2Rate_Type()
-)
-tmnxHsmdaMdaSchOvrGrp2Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrGrp2Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrGrp2Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass1Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass1Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass1Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass1Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass1Rate = _TmnxHsmdaMdaSchOvrClass1Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 6),
-    _TmnxHsmdaMdaSchOvrClass1Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass1Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass1Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass1Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass1WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass1WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass1WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass1WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass1WtInGrp = _TmnxHsmdaMdaSchOvrClass1WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 7),
-    _TmnxHsmdaMdaSchOvrClass1WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass1WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass1WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass2Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass2Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass2Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass2Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass2Rate = _TmnxHsmdaMdaSchOvrClass2Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 8),
-    _TmnxHsmdaMdaSchOvrClass2Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass2Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass2Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass2Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass2WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass2WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass2WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass2WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass2WtInGrp = _TmnxHsmdaMdaSchOvrClass2WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 9),
-    _TmnxHsmdaMdaSchOvrClass2WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass2WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass2WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass3Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass3Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass3Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass3Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass3Rate = _TmnxHsmdaMdaSchOvrClass3Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 10),
-    _TmnxHsmdaMdaSchOvrClass3Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass3Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass3Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass3Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass3WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass3WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass3WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass3WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass3WtInGrp = _TmnxHsmdaMdaSchOvrClass3WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 11),
-    _TmnxHsmdaMdaSchOvrClass3WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass3WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass3WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass4Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass4Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass4Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass4Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass4Rate = _TmnxHsmdaMdaSchOvrClass4Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 12),
-    _TmnxHsmdaMdaSchOvrClass4Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass4Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass4Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass4Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass4WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass4WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass4WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass4WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass4WtInGrp = _TmnxHsmdaMdaSchOvrClass4WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 13),
-    _TmnxHsmdaMdaSchOvrClass4WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass4WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass4WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass5Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass5Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass5Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass5Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass5Rate = _TmnxHsmdaMdaSchOvrClass5Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 14),
-    _TmnxHsmdaMdaSchOvrClass5Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass5Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass5Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass5Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass5WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass5WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass5WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass5WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass5WtInGrp = _TmnxHsmdaMdaSchOvrClass5WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 15),
-    _TmnxHsmdaMdaSchOvrClass5WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass5WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass5WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass6Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass6Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass6Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass6Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass6Rate = _TmnxHsmdaMdaSchOvrClass6Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 16),
-    _TmnxHsmdaMdaSchOvrClass6Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass6Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass6Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass6Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass6WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass6WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass6WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass6WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass6WtInGrp = _TmnxHsmdaMdaSchOvrClass6WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 17),
-    _TmnxHsmdaMdaSchOvrClass6WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass6WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass6WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass7Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass7Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass7Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass7Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass7Rate = _TmnxHsmdaMdaSchOvrClass7Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 18),
-    _TmnxHsmdaMdaSchOvrClass7Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass7Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass7Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass7Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass7WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass7WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass7WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass7WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass7WtInGrp = _TmnxHsmdaMdaSchOvrClass7WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 19),
-    _TmnxHsmdaMdaSchOvrClass7WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass7WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass7WtInGrp.setStatus("obsolete")
-
-
-class _TmnxHsmdaMdaSchOvrClass8Rate_Type(THsmdaPIRMRateOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass8Rate based on THsmdaPIRMRateOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass8Rate_Type.__name__ = "THsmdaPIRMRateOverride"
-_TmnxHsmdaMdaSchOvrClass8Rate_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass8Rate = _TmnxHsmdaMdaSchOvrClass8Rate_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 20),
-    _TmnxHsmdaMdaSchOvrClass8Rate_Type()
-)
-tmnxHsmdaMdaSchOvrClass8Rate.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass8Rate.setStatus("obsolete")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass8Rate.setUnits("megabps")
-
-
-class _TmnxHsmdaMdaSchOvrClass8WtInGrp_Type(THsmdaWeightOverride):
-    """Custom type tmnxHsmdaMdaSchOvrClass8WtInGrp based on THsmdaWeightOverride"""
-    defaultValue = -2
-
-
-_TmnxHsmdaMdaSchOvrClass8WtInGrp_Type.__name__ = "THsmdaWeightOverride"
-_TmnxHsmdaMdaSchOvrClass8WtInGrp_Object = MibTableColumn
-tmnxHsmdaMdaSchOvrClass8WtInGrp = _TmnxHsmdaMdaSchOvrClass8WtInGrp_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 20, 1, 21),
-    _TmnxHsmdaMdaSchOvrClass8WtInGrp_Type()
-)
-tmnxHsmdaMdaSchOvrClass8WtInGrp.setMaxAccess("read-create")
-if mibBuilder.loadTexts:
-    tmnxHsmdaMdaSchOvrClass8WtInGrp.setStatus("obsolete")
+    tmnxIPsecIsaGrpSpiRangeIndex.setStatus("current")
 _TmnxFPTable_Object = MibTable
 tmnxFPTable = _TmnxFPTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 21)
@@ -13979,6 +15649,22 @@ tmnxCardInternalSchedWghtMode = _TmnxCardInternalSchedWghtMode_Object(
 tmnxCardInternalSchedWghtMode.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxCardInternalSchedWghtMode.setStatus("current")
+
+
+class _TmnxCardManualCntrlAdminState_Type(TmnxAdminState):
+    """Custom type tmnxCardManualCntrlAdminState based on TmnxAdminState"""
+    defaultValue = 3
+
+
+_TmnxCardManualCntrlAdminState_Type.__name__ = "TmnxAdminState"
+_TmnxCardManualCntrlAdminState_Object = MibTableColumn
+tmnxCardManualCntrlAdminState = _TmnxCardManualCntrlAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 33, 1, 7),
+    _TmnxCardManualCntrlAdminState_Type()
+)
+tmnxCardManualCntrlAdminState.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxCardManualCntrlAdminState.setStatus("current")
 _TmnxFpDcpDynEnfrcPlcrStatTable_Object = MibTable
 tmnxFpDcpDynEnfrcPlcrStatTable = _TmnxFpDcpDynEnfrcPlcrStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 34)
@@ -14558,24 +16244,6 @@ tCardResSubSPIQosOvrAlloc = _TCardResSubSPIQosOvrAlloc_Object(
 tCardResSubSPIQosOvrAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tCardResSubSPIQosOvrAlloc.setStatus("current")
-_TCardResHsmdaQOvrTotal_Type = Unsigned32
-_TCardResHsmdaQOvrTotal_Object = MibTableColumn
-tCardResHsmdaQOvrTotal = _TCardResHsmdaQOvrTotal_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 45, 1, 7),
-    _TCardResHsmdaQOvrTotal_Type()
-)
-tCardResHsmdaQOvrTotal.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tCardResHsmdaQOvrTotal.setStatus("obsolete")
-_TCardResHsmdaQOvrAlloc_Type = Unsigned32
-_TCardResHsmdaQOvrAlloc_Object = MibTableColumn
-tCardResHsmdaQOvrAlloc = _TCardResHsmdaQOvrAlloc_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 45, 1, 8),
-    _TCardResHsmdaQOvrAlloc_Type()
-)
-tCardResHsmdaQOvrAlloc.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tCardResHsmdaQOvrAlloc.setStatus("obsolete")
 _TCardResPortAccEgrQGrpInstTotal_Type = Unsigned32
 _TCardResPortAccEgrQGrpInstTotal_Object = MibTableColumn
 tCardResPortAccEgrQGrpInstTotal = _TCardResPortAccEgrQGrpInstTotal_Object(
@@ -15375,7 +17043,7 @@ tFPResIngAclQosEntryTotal = _TFPResIngAclQosEntryTotal_Object(
 )
 tFPResIngAclQosEntryTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tFPResIngAclQosEntryTotal.setStatus("current")
+    tFPResIngAclQosEntryTotal.setStatus("obsolete")
 _TFPResIngAclQosEntryAlloc_Type = Unsigned32
 _TFPResIngAclQosEntryAlloc_Object = MibTableColumn
 tFPResIngAclQosEntryAlloc = _TFPResIngAclQosEntryAlloc_Object(
@@ -15384,7 +17052,7 @@ tFPResIngAclQosEntryAlloc = _TFPResIngAclQosEntryAlloc_Object(
 )
 tFPResIngAclQosEntryAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tFPResIngAclQosEntryAlloc.setStatus("current")
+    tFPResIngAclQosEntryAlloc.setStatus("obsolete")
 _TFPResIngIPv6AclEntryTotal_Type = Unsigned32
 _TFPResIngIPv6AclEntryTotal_Object = MibTableColumn
 tFPResIngIPv6AclEntryTotal = _TFPResIngIPv6AclEntryTotal_Object(
@@ -15465,7 +17133,7 @@ tFPResEgrAclQosEntryTotal = _TFPResEgrAclQosEntryTotal_Object(
 )
 tFPResEgrAclQosEntryTotal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tFPResEgrAclQosEntryTotal.setStatus("current")
+    tFPResEgrAclQosEntryTotal.setStatus("obsolete")
 _TFPResEgrAclQosEntryAlloc_Type = Unsigned32
 _TFPResEgrAclQosEntryAlloc_Object = MibTableColumn
 tFPResEgrAclQosEntryAlloc = _TFPResEgrAclQosEntryAlloc_Object(
@@ -15474,7 +17142,7 @@ tFPResEgrAclQosEntryAlloc = _TFPResEgrAclQosEntryAlloc_Object(
 )
 tFPResEgrAclQosEntryAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    tFPResEgrAclQosEntryAlloc.setStatus("current")
+    tFPResEgrAclQosEntryAlloc.setStatus("obsolete")
 _TFPResEgrIPv6AclEntryTotal_Type = Unsigned32
 _TFPResEgrIPv6AclEntryTotal_Object = MibTableColumn
 tFPResEgrIPv6AclEntryTotal = _TFPResEgrIPv6AclEntryTotal_Object(
@@ -16662,6 +18330,361 @@ tFPResIPv6CamBanksAlloc = _TFPResIPv6CamBanksAlloc_Object(
 tFPResIPv6CamBanksAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tFPResIPv6CamBanksAlloc.setStatus("current")
+_TFPResPortForwardingIdTotal_Type = Unsigned32
+_TFPResPortForwardingIdTotal_Object = MibTableColumn
+tFPResPortForwardingIdTotal = _TFPResPortForwardingIdTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 184),
+    _TFPResPortForwardingIdTotal_Type()
+)
+tFPResPortForwardingIdTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResPortForwardingIdTotal.setStatus("current")
+_TFPResPortForwardingIdAlloc_Type = Unsigned32
+_TFPResPortForwardingIdAlloc_Object = MibTableColumn
+tFPResPortForwardingIdAlloc = _TFPResPortForwardingIdAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 185),
+    _TFPResPortForwardingIdAlloc_Type()
+)
+tFPResPortForwardingIdAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResPortForwardingIdAlloc.setStatus("current")
+_TFPResIngIPv4AclEntryIUBAcl_Type = Unsigned32
+_TFPResIngIPv4AclEntryIUBAcl_Object = MibTableColumn
+tFPResIngIPv4AclEntryIUBAcl = _TFPResIngIPv4AclEntryIUBAcl_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 186),
+    _TFPResIngIPv4AclEntryIUBAcl_Type()
+)
+tFPResIngIPv4AclEntryIUBAcl.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResIngIPv4AclEntryIUBAcl.setStatus("current")
+_TFPResIngIPv4AclEntryIUBDcpu_Type = Unsigned32
+_TFPResIngIPv4AclEntryIUBDcpu_Object = MibTableColumn
+tFPResIngIPv4AclEntryIUBDcpu = _TFPResIngIPv4AclEntryIUBDcpu_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 187),
+    _TFPResIngIPv4AclEntryIUBDcpu_Type()
+)
+tFPResIngIPv4AclEntryIUBDcpu.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResIngIPv4AclEntryIUBDcpu.setStatus("current")
+_TFPResIngIPv4MacCamOverLoad_Type = TmnxCamOverloadState
+_TFPResIngIPv4MacCamOverLoad_Object = MibTableColumn
+tFPResIngIPv4MacCamOverLoad = _TFPResIngIPv4MacCamOverLoad_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 188),
+    _TFPResIngIPv4MacCamOverLoad_Type()
+)
+tFPResIngIPv4MacCamOverLoad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResIngIPv4MacCamOverLoad.setStatus("current")
+_TFPResIngIPv6CamOverLoad_Type = TmnxCamOverloadState
+_TFPResIngIPv6CamOverLoad_Object = MibTableColumn
+tFPResIngIPv6CamOverLoad = _TFPResIngIPv6CamOverLoad_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 189),
+    _TFPResIngIPv6CamOverLoad_Type()
+)
+tFPResIngIPv6CamOverLoad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResIngIPv6CamOverLoad.setStatus("current")
+_TFPResEgrIPv4MacCamOverLoad_Type = TmnxCamOverloadState
+_TFPResEgrIPv4MacCamOverLoad_Object = MibTableColumn
+tFPResEgrIPv4MacCamOverLoad = _TFPResEgrIPv4MacCamOverLoad_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 190),
+    _TFPResEgrIPv4MacCamOverLoad_Type()
+)
+tFPResEgrIPv4MacCamOverLoad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrIPv4MacCamOverLoad.setStatus("current")
+_TFPResEgrIPv6CamOverLoad_Type = TmnxCamOverloadState
+_TFPResEgrIPv6CamOverLoad_Object = MibTableColumn
+tFPResEgrIPv6CamOverLoad = _TFPResEgrIPv6CamOverLoad_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 191),
+    _TFPResEgrIPv6CamOverLoad_Type()
+)
+tFPResEgrIPv6CamOverLoad.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrIPv6CamOverLoad.setStatus("current")
+
+
+class _TFPResOversub_Type(Bits):
+    """Custom type tFPResOversub based on Bits"""
+    namedValues = NamedValues(
+        *(("sramBuf", 0),
+          ("sramPdb", 1),
+          ("dramBdb", 2),
+          ("dramBandwidth", 3),
+          ("coreProcessPipeline", 4),
+          ("meshFabricBandwidth", 5))
+    )
+
+_TFPResOversub_Type.__name__ = "Bits"
+_TFPResOversub_Object = MibTableColumn
+tFPResOversub = _TFPResOversub_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 192),
+    _TFPResOversub_Type()
+)
+tFPResOversub.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResOversub.setStatus("current")
+_TFPResEgrHwAggShapQSetSizeTotal_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSizeTotal_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSizeTotal = _TFPResEgrHwAggShapQSetSizeTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 193),
+    _TFPResEgrHwAggShapQSetSizeTotal_Type()
+)
+tFPResEgrHwAggShapQSetSizeTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSizeTotal.setStatus("obsolete")
+_TFPResEgrHwAggShapQSetSizeAlloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSizeAlloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSizeAlloc = _TFPResEgrHwAggShapQSetSizeAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 194),
+    _TFPResEgrHwAggShapQSetSizeAlloc_Type()
+)
+tFPResEgrHwAggShapQSetSizeAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSizeAlloc.setStatus("obsolete")
+_TFPResEgrHwAggShpDefSapQSetSz_Type = Unsigned32
+_TFPResEgrHwAggShpDefSapQSetSz_Object = MibTableColumn
+tFPResEgrHwAggShpDefSapQSetSz = _TFPResEgrHwAggShpDefSapQSetSz_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 195),
+    _TFPResEgrHwAggShpDefSapQSetSz_Type()
+)
+tFPResEgrHwAggShpDefSapQSetSz.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShpDefSapQSetSz.setStatus("current")
+_TFPResEgrHwAggShpDefSubQSetSz_Type = Unsigned32
+_TFPResEgrHwAggShpDefSubQSetSz_Object = MibTableColumn
+tFPResEgrHwAggShpDefSubQSetSz = _TFPResEgrHwAggShpDefSubQSetSz_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 196),
+    _TFPResEgrHwAggShpDefSubQSetSz_Type()
+)
+tFPResEgrHwAggShpDefSubQSetSz.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShpDefSubQSetSz.setStatus("current")
+_TFPResEgrHwAggShpDefQGrpQSetSz_Type = Unsigned32
+_TFPResEgrHwAggShpDefQGrpQSetSz_Object = MibTableColumn
+tFPResEgrHwAggShpDefQGrpQSetSz = _TFPResEgrHwAggShpDefQGrpQSetSz_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 197),
+    _TFPResEgrHwAggShpDefQGrpQSetSz_Type()
+)
+tFPResEgrHwAggShpDefQGrpQSetSz.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShpDefQGrpQSetSz.setStatus("current")
+_TFPResCamBanksIUBSharedPlcrs_Type = Unsigned32
+_TFPResCamBanksIUBSharedPlcrs_Object = MibTableColumn
+tFPResCamBanksIUBSharedPlcrs = _TFPResCamBanksIUBSharedPlcrs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 198),
+    _TFPResCamBanksIUBSharedPlcrs_Type()
+)
+tFPResCamBanksIUBSharedPlcrs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResCamBanksIUBSharedPlcrs.setStatus("current")
+_TFPResSharedPlcrCamBanksTotal_Type = Unsigned32
+_TFPResSharedPlcrCamBanksTotal_Object = MibTableColumn
+tFPResSharedPlcrCamBanksTotal = _TFPResSharedPlcrCamBanksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 199),
+    _TFPResSharedPlcrCamBanksTotal_Type()
+)
+tFPResSharedPlcrCamBanksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResSharedPlcrCamBanksTotal.setStatus("current")
+_TFPResSharedPlcrCamBanksAlloc_Type = Unsigned32
+_TFPResSharedPlcrCamBanksAlloc_Object = MibTableColumn
+tFPResSharedPlcrCamBanksAlloc = _TFPResSharedPlcrCamBanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 200),
+    _TFPResSharedPlcrCamBanksAlloc_Type()
+)
+tFPResSharedPlcrCamBanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResSharedPlcrCamBanksAlloc.setStatus("current")
+_TFPResSharedPlcrCamEntryTotal_Type = Unsigned32
+_TFPResSharedPlcrCamEntryTotal_Object = MibTableColumn
+tFPResSharedPlcrCamEntryTotal = _TFPResSharedPlcrCamEntryTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 201),
+    _TFPResSharedPlcrCamEntryTotal_Type()
+)
+tFPResSharedPlcrCamEntryTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResSharedPlcrCamEntryTotal.setStatus("current")
+_TFPResSharedPlcrCamEntryAlloc_Type = Unsigned32
+_TFPResSharedPlcrCamEntryAlloc_Object = MibTableColumn
+tFPResSharedPlcrCamEntryAlloc = _TFPResSharedPlcrCamEntryAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 202),
+    _TFPResSharedPlcrCamEntryAlloc_Type()
+)
+tFPResSharedPlcrCamEntryAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResSharedPlcrCamEntryAlloc.setStatus("current")
+_TFPResCamBanksIUBSrv6TunnelTerm_Type = Unsigned32
+_TFPResCamBanksIUBSrv6TunnelTerm_Object = MibTableColumn
+tFPResCamBanksIUBSrv6TunnelTerm = _TFPResCamBanksIUBSrv6TunnelTerm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 203),
+    _TFPResCamBanksIUBSrv6TunnelTerm_Type()
+)
+tFPResCamBanksIUBSrv6TunnelTerm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResCamBanksIUBSrv6TunnelTerm.setStatus("current")
+_TFPResEgrHwAggShapQSetSize1Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize1Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize1Total = _TFPResEgrHwAggShapQSetSize1Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 204),
+    _TFPResEgrHwAggShapQSetSize1Total_Type()
+)
+tFPResEgrHwAggShapQSetSize1Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize1Total.setStatus("obsolete")
+_TFPResEgrHwAggShapQSetSize1Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize1Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize1Alloc = _TFPResEgrHwAggShapQSetSize1Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 205),
+    _TFPResEgrHwAggShapQSetSize1Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize1Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize1Alloc.setStatus("obsolete")
+_TFPResEgrHwAggShapQSetSize2Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize2Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize2Total = _TFPResEgrHwAggShapQSetSize2Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 206),
+    _TFPResEgrHwAggShapQSetSize2Total_Type()
+)
+tFPResEgrHwAggShapQSetSize2Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize2Total.setStatus("current")
+_TFPResEgrHwAggShapQSetSize2Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize2Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize2Alloc = _TFPResEgrHwAggShapQSetSize2Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 207),
+    _TFPResEgrHwAggShapQSetSize2Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize2Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize2Alloc.setStatus("current")
+_TFPResEgrHwAggShapQSetSize3Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize3Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize3Total = _TFPResEgrHwAggShapQSetSize3Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 208),
+    _TFPResEgrHwAggShapQSetSize3Total_Type()
+)
+tFPResEgrHwAggShapQSetSize3Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize3Total.setStatus("current")
+_TFPResEgrHwAggShapQSetSize3Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize3Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize3Alloc = _TFPResEgrHwAggShapQSetSize3Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 209),
+    _TFPResEgrHwAggShapQSetSize3Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize3Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize3Alloc.setStatus("current")
+_TFPResEgrHwAggShapQSetSize4Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize4Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize4Total = _TFPResEgrHwAggShapQSetSize4Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 210),
+    _TFPResEgrHwAggShapQSetSize4Total_Type()
+)
+tFPResEgrHwAggShapQSetSize4Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize4Total.setStatus("current")
+_TFPResEgrHwAggShapQSetSize4Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize4Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize4Alloc = _TFPResEgrHwAggShapQSetSize4Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 211),
+    _TFPResEgrHwAggShapQSetSize4Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize4Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize4Alloc.setStatus("current")
+_TFPResEgrHwAggShapQSetSize5Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize5Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize5Total = _TFPResEgrHwAggShapQSetSize5Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 212),
+    _TFPResEgrHwAggShapQSetSize5Total_Type()
+)
+tFPResEgrHwAggShapQSetSize5Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize5Total.setStatus("current")
+_TFPResEgrHwAggShapQSetSize5Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize5Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize5Alloc = _TFPResEgrHwAggShapQSetSize5Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 213),
+    _TFPResEgrHwAggShapQSetSize5Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize5Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize5Alloc.setStatus("current")
+_TFPResEgrHwAggShapQSetSize6Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize6Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize6Total = _TFPResEgrHwAggShapQSetSize6Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 214),
+    _TFPResEgrHwAggShapQSetSize6Total_Type()
+)
+tFPResEgrHwAggShapQSetSize6Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize6Total.setStatus("current")
+_TFPResEgrHwAggShapQSetSize6Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize6Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize6Alloc = _TFPResEgrHwAggShapQSetSize6Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 215),
+    _TFPResEgrHwAggShapQSetSize6Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize6Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize6Alloc.setStatus("current")
+_TFPResEgrHwAggShapQSetSize7Total_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize7Total_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize7Total = _TFPResEgrHwAggShapQSetSize7Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 216),
+    _TFPResEgrHwAggShapQSetSize7Total_Type()
+)
+tFPResEgrHwAggShapQSetSize7Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize7Total.setStatus("current")
+_TFPResEgrHwAggShapQSetSize7Alloc_Type = Unsigned32
+_TFPResEgrHwAggShapQSetSize7Alloc_Object = MibTableColumn
+tFPResEgrHwAggShapQSetSize7Alloc = _TFPResEgrHwAggShapQSetSize7Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 217),
+    _TFPResEgrHwAggShapQSetSize7Alloc_Type()
+)
+tFPResEgrHwAggShapQSetSize7Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShapQSetSize7Alloc.setStatus("current")
+_TFPResDCpuProtCamEntryTotal_Type = Unsigned32
+_TFPResDCpuProtCamEntryTotal_Object = MibTableColumn
+tFPResDCpuProtCamEntryTotal = _TFPResDCpuProtCamEntryTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 218),
+    _TFPResDCpuProtCamEntryTotal_Type()
+)
+tFPResDCpuProtCamEntryTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResDCpuProtCamEntryTotal.setStatus("current")
+_TFPResDCpuProtCamEntryAlloc_Type = Unsigned32
+_TFPResDCpuProtCamEntryAlloc_Object = MibTableColumn
+tFPResDCpuProtCamEntryAlloc = _TFPResDCpuProtCamEntryAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 219),
+    _TFPResDCpuProtCamEntryAlloc_Type()
+)
+tFPResDCpuProtCamEntryAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResDCpuProtCamEntryAlloc.setStatus("current")
+_TFPResSapIngAggPolicerTotal_Type = Unsigned32
+_TFPResSapIngAggPolicerTotal_Object = MibTableColumn
+tFPResSapIngAggPolicerTotal = _TFPResSapIngAggPolicerTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 220),
+    _TFPResSapIngAggPolicerTotal_Type()
+)
+tFPResSapIngAggPolicerTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResSapIngAggPolicerTotal.setStatus("current")
+_TFPResSapIngAggPolicerAlloc_Type = Unsigned32
+_TFPResSapIngAggPolicerAlloc_Object = MibTableColumn
+tFPResSapIngAggPolicerAlloc = _TFPResSapIngAggPolicerAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 46, 1, 221),
+    _TFPResSapIngAggPolicerAlloc_Type()
+)
+tFPResSapIngAggPolicerAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFPResSapIngAggPolicerAlloc.setStatus("current")
 _TMDAResTable_Object = MibTable
 tMDAResTable = _TMDAResTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47)
@@ -16679,42 +18702,6 @@ tMDAResEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     tMDAResEntry.setStatus("current")
-_TMDAResEgrHsmdaQGrpTotal_Type = Unsigned32
-_TMDAResEgrHsmdaQGrpTotal_Object = MibTableColumn
-tMDAResEgrHsmdaQGrpTotal = _TMDAResEgrHsmdaQGrpTotal_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47, 1, 1),
-    _TMDAResEgrHsmdaQGrpTotal_Type()
-)
-tMDAResEgrHsmdaQGrpTotal.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tMDAResEgrHsmdaQGrpTotal.setStatus("obsolete")
-_TMDAResEgrHsmdaQGrpAlloc_Type = Unsigned32
-_TMDAResEgrHsmdaQGrpAlloc_Object = MibTableColumn
-tMDAResEgrHsmdaQGrpAlloc = _TMDAResEgrHsmdaQGrpAlloc_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47, 1, 2),
-    _TMDAResEgrHsmdaQGrpAlloc_Type()
-)
-tMDAResEgrHsmdaQGrpAlloc.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tMDAResEgrHsmdaQGrpAlloc.setStatus("obsolete")
-_TMDAResEgrHsmdaSecShaperTotal_Type = Unsigned32
-_TMDAResEgrHsmdaSecShaperTotal_Object = MibTableColumn
-tMDAResEgrHsmdaSecShaperTotal = _TMDAResEgrHsmdaSecShaperTotal_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47, 1, 3),
-    _TMDAResEgrHsmdaSecShaperTotal_Type()
-)
-tMDAResEgrHsmdaSecShaperTotal.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tMDAResEgrHsmdaSecShaperTotal.setStatus("obsolete")
-_TMDAResEgrHsmdaSecShaperAlloc_Type = Unsigned32
-_TMDAResEgrHsmdaSecShaperAlloc_Object = MibTableColumn
-tMDAResEgrHsmdaSecShaperAlloc = _TMDAResEgrHsmdaSecShaperAlloc_Object(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47, 1, 4),
-    _TMDAResEgrHsmdaSecShaperAlloc_Type()
-)
-tMDAResEgrHsmdaSecShaperAlloc.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    tMDAResEgrHsmdaSecShaperAlloc.setStatus("obsolete")
 _TMDAResSapInstanceTotal_Type = Unsigned32
 _TMDAResSapInstanceTotal_Object = MibTableColumn
 tMDAResSapInstanceTotal = _TMDAResSapInstanceTotal_Object(
@@ -16733,6 +18720,24 @@ tMDAResSapInstanceAlloc = _TMDAResSapInstanceAlloc_Object(
 tMDAResSapInstanceAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tMDAResSapInstanceAlloc.setStatus("current")
+_TMDAResPortForwardingIdTotal_Type = Unsigned32
+_TMDAResPortForwardingIdTotal_Object = MibTableColumn
+tMDAResPortForwardingIdTotal = _TMDAResPortForwardingIdTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47, 1, 7),
+    _TMDAResPortForwardingIdTotal_Type()
+)
+tMDAResPortForwardingIdTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMDAResPortForwardingIdTotal.setStatus("current")
+_TMDAResPortForwardingIdAlloc_Type = Unsigned32
+_TMDAResPortForwardingIdAlloc_Object = MibTableColumn
+tMDAResPortForwardingIdAlloc = _TMDAResPortForwardingIdAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 47, 1, 8),
+    _TMDAResPortForwardingIdAlloc_Type()
+)
+tMDAResPortForwardingIdAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMDAResPortForwardingIdAlloc.setStatus("current")
 _TFPEgressFwdEngDRStatsTable_Object = MibTable
 tFPEgressFwdEngDRStatsTable = _TFPEgressFwdEngDRStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 52)
@@ -16805,7 +18810,9 @@ class _TmnxCardVFpTaskType_Type(Integer32):
               2,
               3,
               4,
-              5)
+              5,
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -16813,7 +18820,9 @@ class _TmnxCardVFpTaskType_Type(Integer32):
           ("worker", 2),
           ("scheduler", 3),
           ("collapsed", 4),
-          ("combined", 5))
+          ("combined", 5),
+          ("dispatch", 6),
+          ("bman", 7))
     )
 
 
@@ -17338,6 +19347,22 @@ if mibBuilder.loadTexts:
     tmnxGnssNmeaSentenceInterval.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxGnssNmeaSentenceInterval.setUnits("seconds")
+
+
+class _TmnxGnssSyncSysTime_Type(TruthValue):
+    """Custom type tmnxGnssSyncSysTime based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxGnssSyncSysTime_Type.__name__ = "TruthValue"
+_TmnxGnssSyncSysTime_Object = MibTableColumn
+tmnxGnssSyncSysTime = _TmnxGnssSyncSysTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 59, 1, 7),
+    _TmnxGnssSyncSysTime_Type()
+)
+tmnxGnssSyncSysTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxGnssSyncSysTime.setStatus("current")
 _TmnxGnssOperTable_Object = MibTable
 tmnxGnssOperTable = _TmnxGnssOperTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 60)
@@ -17602,6 +19627,565 @@ if mibBuilder.loadTexts:
     tmnxGnssSatelliteSnr.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxGnssSatelliteSnr.setUnits("dB")
+_TmnxMdaFlexObjs_ObjectIdentity = ObjectIdentity
+tmnxMdaFlexObjs = _TmnxMdaFlexObjs_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62)
+)
+_TmnxMdaFlexTimestamps_ObjectIdentity = ObjectIdentity
+tmnxMdaFlexTimestamps = _TmnxMdaFlexTimestamps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 1)
+)
+_TmnxMdaFlexGroupTableLastChanged_Type = TimeStamp
+_TmnxMdaFlexGroupTableLastChanged_Object = MibScalar
+tmnxMdaFlexGroupTableLastChanged = _TmnxMdaFlexGroupTableLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 1, 1),
+    _TmnxMdaFlexGroupTableLastChanged_Type()
+)
+tmnxMdaFlexGroupTableLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupTableLastChanged.setStatus("current")
+_TmnxMdaFlexMemberTableLastChngd_Type = TimeStamp
+_TmnxMdaFlexMemberTableLastChngd_Object = MibScalar
+tmnxMdaFlexMemberTableLastChngd = _TmnxMdaFlexMemberTableLastChngd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 1, 2),
+    _TmnxMdaFlexMemberTableLastChngd_Type()
+)
+tmnxMdaFlexMemberTableLastChngd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberTableLastChngd.setStatus("current")
+_TmnxMdaFlexClientTableLastChngd_Type = TimeStamp
+_TmnxMdaFlexClientTableLastChngd_Object = MibScalar
+tmnxMdaFlexClientTableLastChngd = _TmnxMdaFlexClientTableLastChngd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 1, 3),
+    _TmnxMdaFlexClientTableLastChngd_Type()
+)
+tmnxMdaFlexClientTableLastChngd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexClientTableLastChngd.setStatus("current")
+_TmnxMdaFlexGroupTable_Object = MibTable
+tmnxMdaFlexGroupTable = _TmnxMdaFlexGroupTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2)
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupTable.setStatus("current")
+_TmnxMdaFlexGroupEntry_Object = MibTableRow
+tmnxMdaFlexGroupEntry = _TmnxMdaFlexGroupEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1)
+)
+tmnxMdaFlexGroupEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMDASlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupId"),
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupEntry.setStatus("current")
+
+
+class _TmnxMdaFlexGroupId_Type(Unsigned32):
+    """Custom type tmnxMdaFlexGroupId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 24),
+    )
+
+
+_TmnxMdaFlexGroupId_Type.__name__ = "Unsigned32"
+_TmnxMdaFlexGroupId_Object = MibTableColumn
+tmnxMdaFlexGroupId = _TmnxMdaFlexGroupId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 1),
+    _TmnxMdaFlexGroupId_Type()
+)
+tmnxMdaFlexGroupId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupId.setStatus("current")
+_TmnxMdaFlexGroupRowStatus_Type = RowStatus
+_TmnxMdaFlexGroupRowStatus_Object = MibTableColumn
+tmnxMdaFlexGroupRowStatus = _TmnxMdaFlexGroupRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 2),
+    _TmnxMdaFlexGroupRowStatus_Type()
+)
+tmnxMdaFlexGroupRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupRowStatus.setStatus("current")
+_TmnxMdaFlexGroupEntryLastChanged_Type = TimeStamp
+_TmnxMdaFlexGroupEntryLastChanged_Object = MibTableColumn
+tmnxMdaFlexGroupEntryLastChanged = _TmnxMdaFlexGroupEntryLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 3),
+    _TmnxMdaFlexGroupEntryLastChanged_Type()
+)
+tmnxMdaFlexGroupEntryLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupEntryLastChanged.setStatus("current")
+
+
+class _TmnxMdaFlexGroupAdminState_Type(TmnxAdminState):
+    """Custom type tmnxMdaFlexGroupAdminState based on TmnxAdminState"""
+    defaultValue = 3
+
+
+_TmnxMdaFlexGroupAdminState_Type.__name__ = "TmnxAdminState"
+_TmnxMdaFlexGroupAdminState_Object = MibTableColumn
+tmnxMdaFlexGroupAdminState = _TmnxMdaFlexGroupAdminState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 5),
+    _TmnxMdaFlexGroupAdminState_Type()
+)
+tmnxMdaFlexGroupAdminState.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupAdminState.setStatus("current")
+_TmnxMdaFlexGroupOperState_Type = TmnxOperState
+_TmnxMdaFlexGroupOperState_Object = MibTableColumn
+tmnxMdaFlexGroupOperState = _TmnxMdaFlexGroupOperState_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 6),
+    _TmnxMdaFlexGroupOperState_Type()
+)
+tmnxMdaFlexGroupOperState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupOperState.setStatus("current")
+
+
+class _TmnxMdaFlexGroupDescription_Type(TItemLongDescription):
+    """Custom type tmnxMdaFlexGroupDescription based on TItemLongDescription"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = TItemLongDescription.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 160),
+    )
+
+
+_TmnxMdaFlexGroupDescription_Type.__name__ = "TItemLongDescription"
+_TmnxMdaFlexGroupDescription_Object = MibTableColumn
+tmnxMdaFlexGroupDescription = _TmnxMdaFlexGroupDescription_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 7),
+    _TmnxMdaFlexGroupDescription_Type()
+)
+tmnxMdaFlexGroupDescription.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupDescription.setStatus("current")
+
+
+class _TmnxMdaFlexGroupNumber_Type(Unsigned32):
+    """Custom type tmnxMdaFlexGroupNumber based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1048573),
+    )
+
+
+_TmnxMdaFlexGroupNumber_Type.__name__ = "Unsigned32"
+_TmnxMdaFlexGroupNumber_Object = MibTableColumn
+tmnxMdaFlexGroupNumber = _TmnxMdaFlexGroupNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 9),
+    _TmnxMdaFlexGroupNumber_Type()
+)
+tmnxMdaFlexGroupNumber.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupNumber.setStatus("current")
+_TmnxMdaFlexGroupCurrentAlarm_Type = TmnxMdaFlexGroupErrors
+_TmnxMdaFlexGroupCurrentAlarm_Object = MibTableColumn
+tmnxMdaFlexGroupCurrentAlarm = _TmnxMdaFlexGroupCurrentAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 10),
+    _TmnxMdaFlexGroupCurrentAlarm_Type()
+)
+tmnxMdaFlexGroupCurrentAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupCurrentAlarm.setStatus("current")
+_TmnxMdaFlexGroupMaxBandwidth_Type = Unsigned32
+_TmnxMdaFlexGroupMaxBandwidth_Object = MibTableColumn
+tmnxMdaFlexGroupMaxBandwidth = _TmnxMdaFlexGroupMaxBandwidth_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 11),
+    _TmnxMdaFlexGroupMaxBandwidth_Type()
+)
+tmnxMdaFlexGroupMaxBandwidth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupMaxBandwidth.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupMaxBandwidth.setUnits("gigabps")
+
+
+class _TmnxMdaFlexGroupReportAlarm_Type(TmnxMdaFlexGroupErrors):
+    """Custom type tmnxMdaFlexGroupReportAlarm based on TmnxMdaFlexGroupErrors"""
+    defaultBinValue = "01101111111"
+
+
+_TmnxMdaFlexGroupReportAlarm_Type.__name__ = "TmnxMdaFlexGroupErrors"
+_TmnxMdaFlexGroupReportAlarm_Object = MibTableColumn
+tmnxMdaFlexGroupReportAlarm = _TmnxMdaFlexGroupReportAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 12),
+    _TmnxMdaFlexGroupReportAlarm_Type()
+)
+tmnxMdaFlexGroupReportAlarm.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupReportAlarm.setStatus("current")
+_TmnxMdaFlexGroupReportedAlarm_Type = TmnxMdaFlexGroupErrors
+_TmnxMdaFlexGroupReportedAlarm_Object = MibTableColumn
+tmnxMdaFlexGroupReportedAlarm = _TmnxMdaFlexGroupReportedAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 2, 1, 13),
+    _TmnxMdaFlexGroupReportedAlarm_Type()
+)
+tmnxMdaFlexGroupReportedAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupReportedAlarm.setStatus("current")
+_TmnxMdaFlexMemberTable_Object = MibTable
+tmnxMdaFlexMemberTable = _TmnxMdaFlexMemberTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3)
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberTable.setStatus("current")
+_TmnxMdaFlexMemberEntry_Object = MibTableRow
+tmnxMdaFlexMemberEntry = _TmnxMdaFlexMemberEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1)
+)
+tmnxMdaFlexMemberEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMDASlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberPortId"),
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberEntry.setStatus("current")
+_TmnxMdaFlexMemberPortId_Type = TmnxPortID
+_TmnxMdaFlexMemberPortId_Object = MibTableColumn
+tmnxMdaFlexMemberPortId = _TmnxMdaFlexMemberPortId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 1),
+    _TmnxMdaFlexMemberPortId_Type()
+)
+tmnxMdaFlexMemberPortId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberPortId.setStatus("current")
+_TmnxMdaFlexMemberRowStatus_Type = RowStatus
+_TmnxMdaFlexMemberRowStatus_Object = MibTableColumn
+tmnxMdaFlexMemberRowStatus = _TmnxMdaFlexMemberRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 2),
+    _TmnxMdaFlexMemberRowStatus_Type()
+)
+tmnxMdaFlexMemberRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberRowStatus.setStatus("current")
+_TmnxMdaFlexMemberEntryLastChngd_Type = TimeStamp
+_TmnxMdaFlexMemberEntryLastChngd_Object = MibTableColumn
+tmnxMdaFlexMemberEntryLastChngd = _TmnxMdaFlexMemberEntryLastChngd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 3),
+    _TmnxMdaFlexMemberEntryLastChngd_Type()
+)
+tmnxMdaFlexMemberEntryLastChngd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberEntryLastChngd.setStatus("current")
+
+
+class _TmnxMdaFlexMemberPhyNumber_Type(Unsigned32):
+    """Custom type tmnxMdaFlexMemberPhyNumber based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 62),
+    )
+
+
+_TmnxMdaFlexMemberPhyNumber_Type.__name__ = "Unsigned32"
+_TmnxMdaFlexMemberPhyNumber_Object = MibTableColumn
+tmnxMdaFlexMemberPhyNumber = _TmnxMdaFlexMemberPhyNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 4),
+    _TmnxMdaFlexMemberPhyNumber_Type()
+)
+tmnxMdaFlexMemberPhyNumber.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberPhyNumber.setStatus("current")
+
+
+class _TmnxMdaFlexMemberReportAlarm_Type(TmnxMdaFlexMemberErrors):
+    """Custom type tmnxMdaFlexMemberReportAlarm based on TmnxMdaFlexMemberErrors"""
+    defaultBinValue = "0"
+
+
+_TmnxMdaFlexMemberReportAlarm_Type.__name__ = "TmnxMdaFlexMemberErrors"
+_TmnxMdaFlexMemberReportAlarm_Object = MibTableColumn
+tmnxMdaFlexMemberReportAlarm = _TmnxMdaFlexMemberReportAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 7),
+    _TmnxMdaFlexMemberReportAlarm_Type()
+)
+tmnxMdaFlexMemberReportAlarm.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberReportAlarm.setStatus("current")
+_TmnxMdaFlexMemberCurrentAlarm_Type = TmnxMdaFlexMemberErrors
+_TmnxMdaFlexMemberCurrentAlarm_Object = MibTableColumn
+tmnxMdaFlexMemberCurrentAlarm = _TmnxMdaFlexMemberCurrentAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 8),
+    _TmnxMdaFlexMemberCurrentAlarm_Type()
+)
+tmnxMdaFlexMemberCurrentAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberCurrentAlarm.setStatus("current")
+_TmnxMdaFlexMemberReportedAlarm_Type = TmnxMdaFlexMemberErrors
+_TmnxMdaFlexMemberReportedAlarm_Object = MibTableColumn
+tmnxMdaFlexMemberReportedAlarm = _TmnxMdaFlexMemberReportedAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 9),
+    _TmnxMdaFlexMemberReportedAlarm_Type()
+)
+tmnxMdaFlexMemberReportedAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberReportedAlarm.setStatus("current")
+
+
+class _TmnxMdaFlexMemberPhyReportAlarm_Type(TmnxMdaFlexMbrInstErrors):
+    """Custom type tmnxMdaFlexMemberPhyReportAlarm based on TmnxMdaFlexMbrInstErrors"""
+    defaultBinValue = "0"
+
+
+_TmnxMdaFlexMemberPhyReportAlarm_Type.__name__ = "TmnxMdaFlexMbrInstErrors"
+_TmnxMdaFlexMemberPhyReportAlarm_Object = MibTableColumn
+tmnxMdaFlexMemberPhyReportAlarm = _TmnxMdaFlexMemberPhyReportAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 3, 1, 10),
+    _TmnxMdaFlexMemberPhyReportAlarm_Type()
+)
+tmnxMdaFlexMemberPhyReportAlarm.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMemberPhyReportAlarm.setStatus("current")
+_TmnxMdaFlexClientTable_Object = MibTable
+tmnxMdaFlexClientTable = _TmnxMdaFlexClientTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 4)
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexClientTable.setStatus("current")
+_TmnxMdaFlexClientEntry_Object = MibTableRow
+tmnxMdaFlexClientEntry = _TmnxMdaFlexClientEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 4, 1)
+)
+tmnxMdaFlexClientEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMDASlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexClientIndex"),
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexClientEntry.setStatus("current")
+
+
+class _TmnxMdaFlexClientIndex_Type(Unsigned32):
+    """Custom type tmnxMdaFlexClientIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_TmnxMdaFlexClientIndex_Type.__name__ = "Unsigned32"
+_TmnxMdaFlexClientIndex_Object = MibTableColumn
+tmnxMdaFlexClientIndex = _TmnxMdaFlexClientIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 4, 1, 1),
+    _TmnxMdaFlexClientIndex_Type()
+)
+tmnxMdaFlexClientIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexClientIndex.setStatus("current")
+_TmnxMdaFlexClientRowStatus_Type = RowStatus
+_TmnxMdaFlexClientRowStatus_Object = MibTableColumn
+tmnxMdaFlexClientRowStatus = _TmnxMdaFlexClientRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 4, 1, 2),
+    _TmnxMdaFlexClientRowStatus_Type()
+)
+tmnxMdaFlexClientRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexClientRowStatus.setStatus("current")
+_TmnxMdaFlexClientEntryLastChngd_Type = TimeStamp
+_TmnxMdaFlexClientEntryLastChngd_Object = MibTableColumn
+tmnxMdaFlexClientEntryLastChngd = _TmnxMdaFlexClientEntryLastChngd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 4, 1, 3),
+    _TmnxMdaFlexClientEntryLastChngd_Type()
+)
+tmnxMdaFlexClientEntryLastChngd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexClientEntryLastChngd.setStatus("current")
+_TMdaFlexMbrInstOperTable_Object = MibTable
+tMdaFlexMbrInstOperTable = _TMdaFlexMbrInstOperTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5)
+)
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperTable.setStatus("current")
+_TMdaFlexMbrInstOperEntry_Object = MibTableRow
+tMdaFlexMbrInstOperEntry = _TMdaFlexMbrInstOperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1)
+)
+tMdaFlexMbrInstOperEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMDASlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberPortId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMbrInstIndex"),
+)
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperEntry.setStatus("current")
+
+
+class _TmnxMdaFlexMbrInstIndex_Type(Unsigned32):
+    """Custom type tmnxMdaFlexMbrInstIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4),
+    )
+
+
+_TmnxMdaFlexMbrInstIndex_Type.__name__ = "Unsigned32"
+_TmnxMdaFlexMbrInstIndex_Object = MibTableColumn
+tmnxMdaFlexMbrInstIndex = _TmnxMdaFlexMbrInstIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 1),
+    _TmnxMdaFlexMbrInstIndex_Type()
+)
+tmnxMdaFlexMbrInstIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxMdaFlexMbrInstIndex.setStatus("current")
+_TMdaFlexMbrInstOperInstNum_Type = Unsigned32
+_TMdaFlexMbrInstOperInstNum_Object = MibTableColumn
+tMdaFlexMbrInstOperInstNum = _TMdaFlexMbrInstOperInstNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 2),
+    _TMdaFlexMbrInstOperInstNum_Type()
+)
+tMdaFlexMbrInstOperInstNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperInstNum.setStatus("current")
+_TMdaFlexMbrInstOperCurrentAlarm_Type = TmnxMdaFlexMbrInstErrors
+_TMdaFlexMbrInstOperCurrentAlarm_Object = MibTableColumn
+tMdaFlexMbrInstOperCurrentAlarm = _TMdaFlexMbrInstOperCurrentAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 3),
+    _TMdaFlexMbrInstOperCurrentAlarm_Type()
+)
+tMdaFlexMbrInstOperCurrentAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperCurrentAlarm.setStatus("current")
+_TMdaFlexMbrInstOperReportedAlm_Type = TmnxMdaFlexMbrInstErrors
+_TMdaFlexMbrInstOperReportedAlm_Object = MibTableColumn
+tMdaFlexMbrInstOperReportedAlm = _TMdaFlexMbrInstOperReportedAlm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 4),
+    _TMdaFlexMbrInstOperReportedAlm_Type()
+)
+tMdaFlexMbrInstOperReportedAlm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperReportedAlm.setStatus("current")
+_TMdaFlexMbrInstOperDeskewDepth_Type = Gauge32
+_TMdaFlexMbrInstOperDeskewDepth_Object = MibTableColumn
+tMdaFlexMbrInstOperDeskewDepth = _TMdaFlexMbrInstOperDeskewDepth_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 5),
+    _TMdaFlexMbrInstOperDeskewDepth_Type()
+)
+tMdaFlexMbrInstOperDeskewDepth.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperDeskewDepth.setStatus("current")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperDeskewDepth.setUnits("picoseconds")
+_TMdaFlexMbrInstOperInfoValid_Type = TruthValue
+_TMdaFlexMbrInstOperInfoValid_Object = MibTableColumn
+tMdaFlexMbrInstOperInfoValid = _TMdaFlexMbrInstOperInfoValid_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 6),
+    _TMdaFlexMbrInstOperInfoValid_Type()
+)
+tMdaFlexMbrInstOperInfoValid.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperInfoValid.setStatus("current")
+
+
+class _TMdaFlexMbrInstOperCalInUse_Type(Integer32):
+    """Custom type tMdaFlexMbrInstOperCalInUse based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("calendarA", 0),
+          ("calendarB", 1))
+    )
+
+
+_TMdaFlexMbrInstOperCalInUse_Type.__name__ = "Integer32"
+_TMdaFlexMbrInstOperCalInUse_Object = MibTableColumn
+tMdaFlexMbrInstOperCalInUse = _TMdaFlexMbrInstOperCalInUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 7),
+    _TMdaFlexMbrInstOperCalInUse_Type()
+)
+tMdaFlexMbrInstOperCalInUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperCalInUse.setStatus("current")
+
+
+class _TMdaFlexMbrInstOperFlexEMap_Type(OctetString):
+    """Custom type tMdaFlexMbrInstOperFlexEMap based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(32, 32),
+    )
+    fixed_length = 32
+
+
+_TMdaFlexMbrInstOperFlexEMap_Type.__name__ = "OctetString"
+_TMdaFlexMbrInstOperFlexEMap_Object = MibTableColumn
+tMdaFlexMbrInstOperFlexEMap = _TMdaFlexMbrInstOperFlexEMap_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 8),
+    _TMdaFlexMbrInstOperFlexEMap_Type()
+)
+tMdaFlexMbrInstOperFlexEMap.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperFlexEMap.setStatus("current")
+
+
+class _TMdaFlexMbrInstOperCalASlots_Type(OctetString):
+    """Custom type tMdaFlexMbrInstOperCalASlots based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(64, 64),
+    )
+    fixed_length = 64
+
+
+_TMdaFlexMbrInstOperCalASlots_Type.__name__ = "OctetString"
+_TMdaFlexMbrInstOperCalASlots_Object = MibTableColumn
+tMdaFlexMbrInstOperCalASlots = _TMdaFlexMbrInstOperCalASlots_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 9),
+    _TMdaFlexMbrInstOperCalASlots_Type()
+)
+tMdaFlexMbrInstOperCalASlots.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperCalASlots.setStatus("current")
+
+
+class _TMdaFlexMbrInstOperCalBSlots_Type(OctetString):
+    """Custom type tMdaFlexMbrInstOperCalBSlots based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(64, 64),
+    )
+    fixed_length = 64
+
+
+_TMdaFlexMbrInstOperCalBSlots_Type.__name__ = "OctetString"
+_TMdaFlexMbrInstOperCalBSlots_Object = MibTableColumn
+tMdaFlexMbrInstOperCalBSlots = _TMdaFlexMbrInstOperCalBSlots_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 10),
+    _TMdaFlexMbrInstOperCalBSlots_Type()
+)
+tMdaFlexMbrInstOperCalBSlots.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperCalBSlots.setStatus("current")
+_TMdaFlexMbrInstOperRcvdGrpNum_Type = Unsigned32
+_TMdaFlexMbrInstOperRcvdGrpNum_Object = MibTableColumn
+tMdaFlexMbrInstOperRcvdGrpNum = _TMdaFlexMbrInstOperRcvdGrpNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 11),
+    _TMdaFlexMbrInstOperRcvdGrpNum_Type()
+)
+tMdaFlexMbrInstOperRcvdGrpNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperRcvdGrpNum.setStatus("current")
+_TMdaFlexMbrInstOperRcvdInstNum_Type = Unsigned32
+_TMdaFlexMbrInstOperRcvdInstNum_Object = MibTableColumn
+tMdaFlexMbrInstOperRcvdInstNum = _TMdaFlexMbrInstOperRcvdInstNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 62, 5, 1, 12),
+    _TMdaFlexMbrInstOperRcvdInstNum_Type()
+)
+tMdaFlexMbrInstOperRcvdInstNum.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tMdaFlexMbrInstOperRcvdInstNum.setStatus("current")
 _TmnxVmCardTable_Object = MibTable
 tmnxVmCardTable = _TmnxVmCardTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 63)
@@ -18093,6 +20677,113 @@ tmnxEsaHostPortRowStatus = _TmnxEsaHostPortRowStatus_Object(
 tmnxEsaHostPortRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tmnxEsaHostPortRowStatus.setStatus("current")
+
+
+class _TmnxEsaHostPortCrcMonSdThreshold_Type(Unsigned32):
+    """Custom type tmnxEsaHostPortCrcMonSdThreshold based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 9),
+    )
+
+
+_TmnxEsaHostPortCrcMonSdThreshold_Type.__name__ = "Unsigned32"
+_TmnxEsaHostPortCrcMonSdThreshold_Object = MibTableColumn
+tmnxEsaHostPortCrcMonSdThreshold = _TmnxEsaHostPortCrcMonSdThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 71, 1, 3),
+    _TmnxEsaHostPortCrcMonSdThreshold_Type()
+)
+tmnxEsaHostPortCrcMonSdThreshold.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonSdThreshold.setStatus("current")
+
+
+class _TmnxEsaHostPortCrcMonSdTMltplier_Type(Unsigned32):
+    """Custom type tmnxEsaHostPortCrcMonSdTMltplier based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_TmnxEsaHostPortCrcMonSdTMltplier_Type.__name__ = "Unsigned32"
+_TmnxEsaHostPortCrcMonSdTMltplier_Object = MibTableColumn
+tmnxEsaHostPortCrcMonSdTMltplier = _TmnxEsaHostPortCrcMonSdTMltplier_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 71, 1, 4),
+    _TmnxEsaHostPortCrcMonSdTMltplier_Type()
+)
+tmnxEsaHostPortCrcMonSdTMltplier.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonSdTMltplier.setStatus("current")
+
+
+class _TmnxEsaHostPortCrcMonSfThreshold_Type(Unsigned32):
+    """Custom type tmnxEsaHostPortCrcMonSfThreshold based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 9),
+    )
+
+
+_TmnxEsaHostPortCrcMonSfThreshold_Type.__name__ = "Unsigned32"
+_TmnxEsaHostPortCrcMonSfThreshold_Object = MibTableColumn
+tmnxEsaHostPortCrcMonSfThreshold = _TmnxEsaHostPortCrcMonSfThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 71, 1, 5),
+    _TmnxEsaHostPortCrcMonSfThreshold_Type()
+)
+tmnxEsaHostPortCrcMonSfThreshold.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonSfThreshold.setStatus("current")
+
+
+class _TmnxEsaHostPortCrcMonSfTMltplier_Type(Unsigned32):
+    """Custom type tmnxEsaHostPortCrcMonSfTMltplier based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_TmnxEsaHostPortCrcMonSfTMltplier_Type.__name__ = "Unsigned32"
+_TmnxEsaHostPortCrcMonSfTMltplier_Object = MibTableColumn
+tmnxEsaHostPortCrcMonSfTMltplier = _TmnxEsaHostPortCrcMonSfTMltplier_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 71, 1, 6),
+    _TmnxEsaHostPortCrcMonSfTMltplier_Type()
+)
+tmnxEsaHostPortCrcMonSfTMltplier.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonSfTMltplier.setStatus("current")
+
+
+class _TmnxEsaHostPortCrcMonWindowSize_Type(Unsigned32):
+    """Custom type tmnxEsaHostPortCrcMonWindowSize based on Unsigned32"""
+    defaultValue = 10
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(10, 60),
+    )
+
+
+_TmnxEsaHostPortCrcMonWindowSize_Type.__name__ = "Unsigned32"
+_TmnxEsaHostPortCrcMonWindowSize_Object = MibTableColumn
+tmnxEsaHostPortCrcMonWindowSize = _TmnxEsaHostPortCrcMonWindowSize_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 71, 1, 7),
+    _TmnxEsaHostPortCrcMonWindowSize_Type()
+)
+tmnxEsaHostPortCrcMonWindowSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonWindowSize.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonWindowSize.setUnits("seconds")
 _TmnxEsaVmTable_Object = MibTable
 tmnxEsaVmTable = _TmnxEsaVmTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 72)
@@ -18181,7 +20872,8 @@ class _TmnxEsaVmType_Type(Integer32):
               1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
@@ -18189,7 +20881,8 @@ class _TmnxEsaVmType_Type(Integer32):
           ("aa", 1),
           ("bb", 2),
           ("tunnel", 3),
-          ("video", 4))
+          ("video", 4),
+          ("dms", 5))
     )
 
 
@@ -18337,6 +21030,61 @@ tmnxTunnelGrpEsaVmActive = _TmnxTunnelGrpEsaVmActive_Object(
 tmnxTunnelGrpEsaVmActive.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxTunnelGrpEsaVmActive.setStatus("current")
+
+
+class _TmnxTunnelGrpEsaVmPoolAssoc_Type(TNamedItemOrEmpty):
+    """Custom type tmnxTunnelGrpEsaVmPoolAssoc based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_TmnxTunnelGrpEsaVmPoolAssoc_Type.__name__ = "TNamedItemOrEmpty"
+_TmnxTunnelGrpEsaVmPoolAssoc_Object = MibTableColumn
+tmnxTunnelGrpEsaVmPoolAssoc = _TmnxTunnelGrpEsaVmPoolAssoc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 73, 1, 5),
+    _TmnxTunnelGrpEsaVmPoolAssoc_Type()
+)
+tmnxTunnelGrpEsaVmPoolAssoc.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxTunnelGrpEsaVmPoolAssoc.setStatus("current")
+_TmnxTunnelGrpEsaVmActiveInGrp_Type = TmnxTunnelGroupIdOrZero
+_TmnxTunnelGrpEsaVmActiveInGrp_Object = MibTableColumn
+tmnxTunnelGrpEsaVmActiveInGrp = _TmnxTunnelGrpEsaVmActiveInGrp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 73, 1, 6),
+    _TmnxTunnelGrpEsaVmActiveInGrp_Type()
+)
+tmnxTunnelGrpEsaVmActiveInGrp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxTunnelGrpEsaVmActiveInGrp.setStatus("current")
+
+
+class _TmnxTunnelGrpEsaVmWeight_Type(Unsigned32):
+    """Custom type tmnxTunnelGrpEsaVmWeight based on Unsigned32"""
+    defaultValue = 0
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1000),
+    )
+
+
+_TmnxTunnelGrpEsaVmWeight_Type.__name__ = "Unsigned32"
+_TmnxTunnelGrpEsaVmWeight_Object = MibTableColumn
+tmnxTunnelGrpEsaVmWeight = _TmnxTunnelGrpEsaVmWeight_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 73, 1, 7),
+    _TmnxTunnelGrpEsaVmWeight_Type()
+)
+tmnxTunnelGrpEsaVmWeight.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxTunnelGrpEsaVmWeight.setStatus("current")
+_TmnxTunnelGrpEsaVmAllocHashSlots_Type = Unsigned32
+_TmnxTunnelGrpEsaVmAllocHashSlots_Object = MibTableColumn
+tmnxTunnelGrpEsaVmAllocHashSlots = _TmnxTunnelGrpEsaVmAllocHashSlots_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 73, 1, 8),
+    _TmnxTunnelGrpEsaVmAllocHashSlots_Type()
+)
+tmnxTunnelGrpEsaVmAllocHashSlots.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxTunnelGrpEsaVmAllocHashSlots.setStatus("current")
 _TmnxEsaStatsTable_Object = MibTable
 tmnxEsaStatsTable = _TmnxEsaStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74)
@@ -18367,7 +21115,14 @@ class _TmnxEsaStatsOperState_Type(Integer32):
               6,
               7,
               8,
-              9)
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16)
         )
     )
     namedValues = NamedValues(
@@ -18379,7 +21134,14 @@ class _TmnxEsaStatsOperState_Type(Integer32):
           ("provisioned", 6),
           ("unprovisioned", 7),
           ("upgrade", 8),
-          ("fwUpgrade", 9))
+          ("fwUpgrade", 9),
+          ("fwUpgradeNic", 10),
+          ("fwUpgradeSps", 11),
+          ("fwUpgradeSystemRom", 12),
+          ("fwUpgradeSetting", 13),
+          ("fwUpgradeBmc", 14),
+          ("fwUpgradeBmcSetting", 15),
+          ("fwUpgradeIe", 16))
     )
 
 
@@ -18451,7 +21213,9 @@ class _TmnxEsaStatsOperFlags_Type(Bits):
           ("esaMismatch", 2),
           ("connectFailed", 3),
           ("fwUpdateFailed", 4),
-          ("bootFailed", 5))
+          ("bootFailed", 5),
+          ("fwUpdateRequired", 6),
+          ("unexpectedFwVersion", 7))
     )
 
 _TmnxEsaStatsOperFlags_Type.__name__ = "Bits"
@@ -18517,6 +21281,274 @@ tmnxEsaStatsExportRestricted = _TmnxEsaStatsExportRestricted_Object(
 tmnxEsaStatsExportRestricted.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxEsaStatsExportRestricted.setStatus("current")
+
+
+class _TmnxEsaStatsHardwareStatus_Type(Integer32):
+    """Custom type tmnxEsaStatsHardwareStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("ok", 2),
+          ("degraded", 3),
+          ("critical", 4),
+          ("unsupported", 5))
+    )
+
+
+_TmnxEsaStatsHardwareStatus_Type.__name__ = "Integer32"
+_TmnxEsaStatsHardwareStatus_Object = MibTableColumn
+tmnxEsaStatsHardwareStatus = _TmnxEsaStatsHardwareStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 14),
+    _TmnxEsaStatsHardwareStatus_Type()
+)
+tmnxEsaStatsHardwareStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsHardwareStatus.setStatus("current")
+_TmnxEsaStatsPowerSupply1Status_Type = TmnxEsaDeviceState
+_TmnxEsaStatsPowerSupply1Status_Object = MibTableColumn
+tmnxEsaStatsPowerSupply1Status = _TmnxEsaStatsPowerSupply1Status_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 15),
+    _TmnxEsaStatsPowerSupply1Status_Type()
+)
+tmnxEsaStatsPowerSupply1Status.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply1Status.setStatus("current")
+_TmnxEsaStatsPowerSupply2Status_Type = TmnxEsaDeviceState
+_TmnxEsaStatsPowerSupply2Status_Object = MibTableColumn
+tmnxEsaStatsPowerSupply2Status = _TmnxEsaStatsPowerSupply2Status_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 16),
+    _TmnxEsaStatsPowerSupply2Status_Type()
+)
+tmnxEsaStatsPowerSupply2Status.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply2Status.setStatus("current")
+_TmnxEsaStatsPowerSupply1Temp_Type = Integer32
+_TmnxEsaStatsPowerSupply1Temp_Object = MibTableColumn
+tmnxEsaStatsPowerSupply1Temp = _TmnxEsaStatsPowerSupply1Temp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 17),
+    _TmnxEsaStatsPowerSupply1Temp_Type()
+)
+tmnxEsaStatsPowerSupply1Temp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply1Temp.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply1Temp.setUnits("degrees celsius")
+_TmnxEsaStatsPowerSupply2Temp_Type = Integer32
+_TmnxEsaStatsPowerSupply2Temp_Object = MibTableColumn
+tmnxEsaStatsPowerSupply2Temp = _TmnxEsaStatsPowerSupply2Temp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 18),
+    _TmnxEsaStatsPowerSupply2Temp_Type()
+)
+tmnxEsaStatsPowerSupply2Temp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply2Temp.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply2Temp.setUnits("degrees celsius")
+_TmnxEsaStatsFanRedundancy_Type = TmnxEsaDeviceRedundancyState
+_TmnxEsaStatsFanRedundancy_Object = MibTableColumn
+tmnxEsaStatsFanRedundancy = _TmnxEsaStatsFanRedundancy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 19),
+    _TmnxEsaStatsFanRedundancy_Type()
+)
+tmnxEsaStatsFanRedundancy.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsFanRedundancy.setStatus("current")
+_TmnxEsaStatsFanStatus_Type = TmnxEsaDeviceState
+_TmnxEsaStatsFanStatus_Object = MibTableColumn
+tmnxEsaStatsFanStatus = _TmnxEsaStatsFanStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 20),
+    _TmnxEsaStatsFanStatus_Type()
+)
+tmnxEsaStatsFanStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsFanStatus.setStatus("current")
+_TmnxEsaStatsPwrSupMismatchStatus_Type = TmnxEsaDeviceMismatchState
+_TmnxEsaStatsPwrSupMismatchStatus_Object = MibTableColumn
+tmnxEsaStatsPwrSupMismatchStatus = _TmnxEsaStatsPwrSupMismatchStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 21),
+    _TmnxEsaStatsPwrSupMismatchStatus_Type()
+)
+tmnxEsaStatsPwrSupMismatchStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPwrSupMismatchStatus.setStatus("current")
+_TmnxEsaStatsPwrSupRedundancy_Type = TmnxEsaDeviceRedundancyState
+_TmnxEsaStatsPwrSupRedundancy_Object = MibTableColumn
+tmnxEsaStatsPwrSupRedundancy = _TmnxEsaStatsPwrSupRedundancy_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 22),
+    _TmnxEsaStatsPwrSupRedundancy_Type()
+)
+tmnxEsaStatsPwrSupRedundancy.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPwrSupRedundancy.setStatus("current")
+_TmnxEsaStatsTemperatureStatus_Type = TmnxEsaDeviceState
+_TmnxEsaStatsTemperatureStatus_Object = MibTableColumn
+tmnxEsaStatsTemperatureStatus = _TmnxEsaStatsTemperatureStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 23),
+    _TmnxEsaStatsTemperatureStatus_Type()
+)
+tmnxEsaStatsTemperatureStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsTemperatureStatus.setStatus("current")
+_TmnxEsaStatsCpu1Temperature_Type = Integer32
+_TmnxEsaStatsCpu1Temperature_Object = MibTableColumn
+tmnxEsaStatsCpu1Temperature = _TmnxEsaStatsCpu1Temperature_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 24),
+    _TmnxEsaStatsCpu1Temperature_Type()
+)
+tmnxEsaStatsCpu1Temperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu1Temperature.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu1Temperature.setUnits("degrees celsius")
+_TmnxEsaStatsCpu2Temperature_Type = Integer32
+_TmnxEsaStatsCpu2Temperature_Object = MibTableColumn
+tmnxEsaStatsCpu2Temperature = _TmnxEsaStatsCpu2Temperature_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 25),
+    _TmnxEsaStatsCpu2Temperature_Type()
+)
+tmnxEsaStatsCpu2Temperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu2Temperature.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu2Temperature.setUnits("degrees celsius")
+_TmnxEsaStatsSystemPartNumber_Type = DisplayString
+_TmnxEsaStatsSystemPartNumber_Object = MibTableColumn
+tmnxEsaStatsSystemPartNumber = _TmnxEsaStatsSystemPartNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 26),
+    _TmnxEsaStatsSystemPartNumber_Type()
+)
+tmnxEsaStatsSystemPartNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsSystemPartNumber.setStatus("current")
+_TmnxEsaStatsPowerSupply1Voltage_Type = Integer32
+_TmnxEsaStatsPowerSupply1Voltage_Object = MibTableColumn
+tmnxEsaStatsPowerSupply1Voltage = _TmnxEsaStatsPowerSupply1Voltage_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 27),
+    _TmnxEsaStatsPowerSupply1Voltage_Type()
+)
+tmnxEsaStatsPowerSupply1Voltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply1Voltage.setStatus("current")
+_TmnxEsaStatsPowerSupply2Voltage_Type = Integer32
+_TmnxEsaStatsPowerSupply2Voltage_Object = MibTableColumn
+tmnxEsaStatsPowerSupply2Voltage = _TmnxEsaStatsPowerSupply2Voltage_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 28),
+    _TmnxEsaStatsPowerSupply2Voltage_Type()
+)
+tmnxEsaStatsPowerSupply2Voltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply2Voltage.setStatus("current")
+_TmnxEsaStatsPowerSupply1OutPwr_Type = Integer32
+_TmnxEsaStatsPowerSupply1OutPwr_Object = MibTableColumn
+tmnxEsaStatsPowerSupply1OutPwr = _TmnxEsaStatsPowerSupply1OutPwr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 29),
+    _TmnxEsaStatsPowerSupply1OutPwr_Type()
+)
+tmnxEsaStatsPowerSupply1OutPwr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply1OutPwr.setStatus("current")
+_TmnxEsaStatsPowerSupply2OutPwr_Type = Integer32
+_TmnxEsaStatsPowerSupply2OutPwr_Object = MibTableColumn
+tmnxEsaStatsPowerSupply2OutPwr = _TmnxEsaStatsPowerSupply2OutPwr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 30),
+    _TmnxEsaStatsPowerSupply2OutPwr_Type()
+)
+tmnxEsaStatsPowerSupply2OutPwr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply2OutPwr.setStatus("current")
+_TmnxEsaStatsPowerSupply1MaxPwr_Type = Integer32
+_TmnxEsaStatsPowerSupply1MaxPwr_Object = MibTableColumn
+tmnxEsaStatsPowerSupply1MaxPwr = _TmnxEsaStatsPowerSupply1MaxPwr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 31),
+    _TmnxEsaStatsPowerSupply1MaxPwr_Type()
+)
+tmnxEsaStatsPowerSupply1MaxPwr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply1MaxPwr.setStatus("current")
+_TmnxEsaStatsPowerSupply2MaxPwr_Type = Integer32
+_TmnxEsaStatsPowerSupply2MaxPwr_Object = MibTableColumn
+tmnxEsaStatsPowerSupply2MaxPwr = _TmnxEsaStatsPowerSupply2MaxPwr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 32),
+    _TmnxEsaStatsPowerSupply2MaxPwr_Type()
+)
+tmnxEsaStatsPowerSupply2MaxPwr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsPowerSupply2MaxPwr.setStatus("current")
+_TmnxEsaStatsCpu1TempThreshold_Type = Integer32
+_TmnxEsaStatsCpu1TempThreshold_Object = MibTableColumn
+tmnxEsaStatsCpu1TempThreshold = _TmnxEsaStatsCpu1TempThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 33),
+    _TmnxEsaStatsCpu1TempThreshold_Type()
+)
+tmnxEsaStatsCpu1TempThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu1TempThreshold.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu1TempThreshold.setUnits("degrees celsius")
+_TmnxEsaStatsCpu2TempThreshold_Type = Integer32
+_TmnxEsaStatsCpu2TempThreshold_Object = MibTableColumn
+tmnxEsaStatsCpu2TempThreshold = _TmnxEsaStatsCpu2TempThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 34),
+    _TmnxEsaStatsCpu2TempThreshold_Type()
+)
+tmnxEsaStatsCpu2TempThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu2TempThreshold.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsCpu2TempThreshold.setUnits("degrees celsius")
+_TmnxEsaStatsNic1Temperature_Type = Integer32
+_TmnxEsaStatsNic1Temperature_Object = MibTableColumn
+tmnxEsaStatsNic1Temperature = _TmnxEsaStatsNic1Temperature_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 35),
+    _TmnxEsaStatsNic1Temperature_Type()
+)
+tmnxEsaStatsNic1Temperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic1Temperature.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic1Temperature.setUnits("degrees celsius")
+_TmnxEsaStatsNic2Temperature_Type = Integer32
+_TmnxEsaStatsNic2Temperature_Object = MibTableColumn
+tmnxEsaStatsNic2Temperature = _TmnxEsaStatsNic2Temperature_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 36),
+    _TmnxEsaStatsNic2Temperature_Type()
+)
+tmnxEsaStatsNic2Temperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic2Temperature.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic2Temperature.setUnits("degrees celsius")
+_TmnxEsaStatsNic1TempThreshold_Type = Integer32
+_TmnxEsaStatsNic1TempThreshold_Object = MibTableColumn
+tmnxEsaStatsNic1TempThreshold = _TmnxEsaStatsNic1TempThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 37),
+    _TmnxEsaStatsNic1TempThreshold_Type()
+)
+tmnxEsaStatsNic1TempThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic1TempThreshold.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic1TempThreshold.setUnits("degrees celsius")
+_TmnxEsaStatsNic2TempThreshold_Type = Integer32
+_TmnxEsaStatsNic2TempThreshold_Object = MibTableColumn
+tmnxEsaStatsNic2TempThreshold = _TmnxEsaStatsNic2TempThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 74, 1, 38),
+    _TmnxEsaStatsNic2TempThreshold_Type()
+)
+tmnxEsaStatsNic2TempThreshold.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic2TempThreshold.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaStatsNic2TempThreshold.setUnits("degrees celsius")
 _TmnxEsaVmStatsTable_Object = MibTable
 tmnxEsaVmStatsTable = _TmnxEsaVmStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 75)
@@ -18791,6 +21823,213 @@ tCoreResIngFloatPlcrStatIUBACL = _TCoreResIngFloatPlcrStatIUBACL_Object(
 tCoreResIngFloatPlcrStatIUBACL.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tCoreResIngFloatPlcrStatIUBACL.setStatus("current")
+_TCoreResSharedPolicerTotal_Type = Unsigned32
+_TCoreResSharedPolicerTotal_Object = MibTableColumn
+tCoreResSharedPolicerTotal = _TCoreResSharedPolicerTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 15),
+    _TCoreResSharedPolicerTotal_Type()
+)
+tCoreResSharedPolicerTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSharedPolicerTotal.setStatus("current")
+_TCoreResSharedPolicerAlloc_Type = Unsigned32
+_TCoreResSharedPolicerAlloc_Object = MibTableColumn
+tCoreResSharedPolicerAlloc = _TCoreResSharedPolicerAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 16),
+    _TCoreResSharedPolicerAlloc_Type()
+)
+tCoreResSharedPolicerAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSharedPolicerAlloc.setStatus("current")
+_TCoreResIngFloatPlcrStatIUBSP_Type = Unsigned32
+_TCoreResIngFloatPlcrStatIUBSP_Object = MibTableColumn
+tCoreResIngFloatPlcrStatIUBSP = _TCoreResIngFloatPlcrStatIUBSP_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 17),
+    _TCoreResIngFloatPlcrStatIUBSP_Type()
+)
+tCoreResIngFloatPlcrStatIUBSP.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResIngFloatPlcrStatIUBSP.setStatus("current")
+_TCoreResSharedPolicerStatsTotal_Type = Unsigned32
+_TCoreResSharedPolicerStatsTotal_Object = MibTableColumn
+tCoreResSharedPolicerStatsTotal = _TCoreResSharedPolicerStatsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 18),
+    _TCoreResSharedPolicerStatsTotal_Type()
+)
+tCoreResSharedPolicerStatsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSharedPolicerStatsTotal.setStatus("current")
+_TCoreResSharedPolicerStatsAlloc_Type = Unsigned32
+_TCoreResSharedPolicerStatsAlloc_Object = MibTableColumn
+tCoreResSharedPolicerStatsAlloc = _TCoreResSharedPolicerStatsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 19),
+    _TCoreResSharedPolicerStatsAlloc_Type()
+)
+tCoreResSharedPolicerStatsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSharedPolicerStatsAlloc.setStatus("current")
+_TCoreRes4QVlanVoqTotal_Type = Unsigned32
+_TCoreRes4QVlanVoqTotal_Object = MibTableColumn
+tCoreRes4QVlanVoqTotal = _TCoreRes4QVlanVoqTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 20),
+    _TCoreRes4QVlanVoqTotal_Type()
+)
+tCoreRes4QVlanVoqTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes4QVlanVoqTotal.setStatus("current")
+_TCoreRes4QVlanVoqAlloc_Type = Unsigned32
+_TCoreRes4QVlanVoqAlloc_Object = MibTableColumn
+tCoreRes4QVlanVoqAlloc = _TCoreRes4QVlanVoqAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 21),
+    _TCoreRes4QVlanVoqAlloc_Type()
+)
+tCoreRes4QVlanVoqAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes4QVlanVoqAlloc.setStatus("current")
+_TCoreResFltrSharedPlcrTotal_Type = Unsigned32
+_TCoreResFltrSharedPlcrTotal_Object = MibTableColumn
+tCoreResFltrSharedPlcrTotal = _TCoreResFltrSharedPlcrTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 22),
+    _TCoreResFltrSharedPlcrTotal_Type()
+)
+tCoreResFltrSharedPlcrTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResFltrSharedPlcrTotal.setStatus("current")
+_TCoreResFltrSharedPlcrAlloc_Type = Unsigned32
+_TCoreResFltrSharedPlcrAlloc_Object = MibTableColumn
+tCoreResFltrSharedPlcrAlloc = _TCoreResFltrSharedPlcrAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 23),
+    _TCoreResFltrSharedPlcrAlloc_Type()
+)
+tCoreResFltrSharedPlcrAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResFltrSharedPlcrAlloc.setStatus("current")
+_TCoreResFltrSharedPlcrStatsTotal_Type = Unsigned32
+_TCoreResFltrSharedPlcrStatsTotal_Object = MibTableColumn
+tCoreResFltrSharedPlcrStatsTotal = _TCoreResFltrSharedPlcrStatsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 24),
+    _TCoreResFltrSharedPlcrStatsTotal_Type()
+)
+tCoreResFltrSharedPlcrStatsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResFltrSharedPlcrStatsTotal.setStatus("current")
+_TCoreResFltrSharedPlcrStatsAlloc_Type = Unsigned32
+_TCoreResFltrSharedPlcrStatsAlloc_Object = MibTableColumn
+tCoreResFltrSharedPlcrStatsAlloc = _TCoreResFltrSharedPlcrStatsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 25),
+    _TCoreResFltrSharedPlcrStatsAlloc_Type()
+)
+tCoreResFltrSharedPlcrStatsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResFltrSharedPlcrStatsAlloc.setStatus("current")
+_TCoreResSchedulerFlowTotal_Type = Unsigned32
+_TCoreResSchedulerFlowTotal_Object = MibTableColumn
+tCoreResSchedulerFlowTotal = _TCoreResSchedulerFlowTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 26),
+    _TCoreResSchedulerFlowTotal_Type()
+)
+tCoreResSchedulerFlowTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSchedulerFlowTotal.setStatus("current")
+_TCoreResSchedulerFlowAlloc_Type = Unsigned32
+_TCoreResSchedulerFlowAlloc_Object = MibTableColumn
+tCoreResSchedulerFlowAlloc = _TCoreResSchedulerFlowAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 27),
+    _TCoreResSchedulerFlowAlloc_Type()
+)
+tCoreResSchedulerFlowAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSchedulerFlowAlloc.setStatus("current")
+_TCoreResSchedulerInterfacesTotal_Type = Unsigned32
+_TCoreResSchedulerInterfacesTotal_Object = MibTableColumn
+tCoreResSchedulerInterfacesTotal = _TCoreResSchedulerInterfacesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 28),
+    _TCoreResSchedulerInterfacesTotal_Type()
+)
+tCoreResSchedulerInterfacesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSchedulerInterfacesTotal.setStatus("current")
+_TCoreResSchedulerInterfacesAlloc_Type = Unsigned32
+_TCoreResSchedulerInterfacesAlloc_Object = MibTableColumn
+tCoreResSchedulerInterfacesAlloc = _TCoreResSchedulerInterfacesAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 29),
+    _TCoreResSchedulerInterfacesAlloc_Type()
+)
+tCoreResSchedulerInterfacesAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreResSchedulerInterfacesAlloc.setStatus("current")
+_TCoreRes8QSchedulerFlowTotal_Type = Unsigned32
+_TCoreRes8QSchedulerFlowTotal_Object = MibTableColumn
+tCoreRes8QSchedulerFlowTotal = _TCoreRes8QSchedulerFlowTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 30),
+    _TCoreRes8QSchedulerFlowTotal_Type()
+)
+tCoreRes8QSchedulerFlowTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes8QSchedulerFlowTotal.setStatus("current")
+_TCoreRes8QSchedulerFlowAlloc_Type = Unsigned32
+_TCoreRes8QSchedulerFlowAlloc_Object = MibTableColumn
+tCoreRes8QSchedulerFlowAlloc = _TCoreRes8QSchedulerFlowAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 31),
+    _TCoreRes8QSchedulerFlowAlloc_Type()
+)
+tCoreRes8QSchedulerFlowAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes8QSchedulerFlowAlloc.setStatus("current")
+_TCoreRes4QSchedulerFlowTotal_Type = Unsigned32
+_TCoreRes4QSchedulerFlowTotal_Object = MibTableColumn
+tCoreRes4QSchedulerFlowTotal = _TCoreRes4QSchedulerFlowTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 32),
+    _TCoreRes4QSchedulerFlowTotal_Type()
+)
+tCoreRes4QSchedulerFlowTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes4QSchedulerFlowTotal.setStatus("current")
+_TCoreRes4QSchedulerFlowAlloc_Type = Unsigned32
+_TCoreRes4QSchedulerFlowAlloc_Object = MibTableColumn
+tCoreRes4QSchedulerFlowAlloc = _TCoreRes4QSchedulerFlowAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 33),
+    _TCoreRes4QSchedulerFlowAlloc_Type()
+)
+tCoreRes4QSchedulerFlowAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes4QSchedulerFlowAlloc.setStatus("current")
+_TCoreRes8QVirtualFlowTotal_Type = Unsigned32
+_TCoreRes8QVirtualFlowTotal_Object = MibTableColumn
+tCoreRes8QVirtualFlowTotal = _TCoreRes8QVirtualFlowTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 34),
+    _TCoreRes8QVirtualFlowTotal_Type()
+)
+tCoreRes8QVirtualFlowTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes8QVirtualFlowTotal.setStatus("current")
+_TCoreRes8QVirtualFlowAlloc_Type = Unsigned32
+_TCoreRes8QVirtualFlowAlloc_Object = MibTableColumn
+tCoreRes8QVirtualFlowAlloc = _TCoreRes8QVirtualFlowAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 35),
+    _TCoreRes8QVirtualFlowAlloc_Type()
+)
+tCoreRes8QVirtualFlowAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes8QVirtualFlowAlloc.setStatus("current")
+_TCoreRes4QVirtualFlowTotal_Type = Unsigned32
+_TCoreRes4QVirtualFlowTotal_Object = MibTableColumn
+tCoreRes4QVirtualFlowTotal = _TCoreRes4QVirtualFlowTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 36),
+    _TCoreRes4QVirtualFlowTotal_Type()
+)
+tCoreRes4QVirtualFlowTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes4QVirtualFlowTotal.setStatus("current")
+_TCoreRes4QVirtualFlowAlloc_Type = Unsigned32
+_TCoreRes4QVirtualFlowAlloc_Object = MibTableColumn
+tCoreRes4QVirtualFlowAlloc = _TCoreRes4QVirtualFlowAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 76, 1, 37),
+    _TCoreRes4QVirtualFlowAlloc_Type()
+)
+tCoreRes4QVirtualFlowAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreRes4QVirtualFlowAlloc.setStatus("current")
 _TmnxXiomConfigTableLastChanged_Type = TimeStamp
 _TmnxXiomConfigTableLastChanged_Object = MibScalar
 tmnxXiomConfigTableLastChanged = _TmnxXiomConfigTableLastChanged_Object(
@@ -18990,6 +22229,15 @@ tmnxXiomHwIndex = _TmnxXiomHwIndex_Object(
 tmnxXiomHwIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxXiomHwIndex.setStatus("current")
+_TmnxXiomSupportedTypes_Type = TmnxXiomSuppType
+_TmnxXiomSupportedTypes_Object = MibTableColumn
+tmnxXiomSupportedTypes = _TmnxXiomSupportedTypes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 79, 1, 7),
+    _TmnxXiomSupportedTypes_Type()
+)
+tmnxXiomSupportedTypes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxXiomSupportedTypes.setStatus("current")
 _TmnxXiomTypeTable_Object = MibTable
 tmnxXiomTypeTable = _TmnxXiomTypeTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 80)
@@ -19296,6 +22544,109 @@ if mibBuilder.loadTexts:
     tmnxEsaVmVirtCorePeakUtilization.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxEsaVmVirtCorePeakUtilization.setUnits("hundredths of a percent")
+_TmnxIPsecIsaMemberPoolTable_Object = MibTable
+tmnxIPsecIsaMemberPoolTable = _TmnxIPsecIsaMemberPoolTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86)
+)
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolTable.setStatus("current")
+_TmnxIPsecIsaMemberPoolEntry_Object = MibTableRow
+tmnxIPsecIsaMemberPoolEntry = _TmnxIPsecIsaMemberPoolEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86, 1)
+)
+tmnxIPsecIsaMemberPoolEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolName"),
+)
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolEntry.setStatus("current")
+_TmnxIPsecIsaMemberPoolName_Type = TNamedItem
+_TmnxIPsecIsaMemberPoolName_Object = MibTableColumn
+tmnxIPsecIsaMemberPoolName = _TmnxIPsecIsaMemberPoolName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86, 1, 1),
+    _TmnxIPsecIsaMemberPoolName_Type()
+)
+tmnxIPsecIsaMemberPoolName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolName.setStatus("current")
+_TmnxIPsecIsaMemberPoolRowStatus_Type = RowStatus
+_TmnxIPsecIsaMemberPoolRowStatus_Object = MibTableColumn
+tmnxIPsecIsaMemberPoolRowStatus = _TmnxIPsecIsaMemberPoolRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86, 1, 2),
+    _TmnxIPsecIsaMemberPoolRowStatus_Type()
+)
+tmnxIPsecIsaMemberPoolRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolRowStatus.setStatus("current")
+_TmnxIPsecIsaMemberPoolLastChgd_Type = TimeStamp
+_TmnxIPsecIsaMemberPoolLastChgd_Object = MibTableColumn
+tmnxIPsecIsaMemberPoolLastChgd = _TmnxIPsecIsaMemberPoolLastChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86, 1, 3),
+    _TmnxIPsecIsaMemberPoolLastChgd_Type()
+)
+tmnxIPsecIsaMemberPoolLastChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolLastChgd.setStatus("current")
+
+
+class _TmnxIPsecIsaMemberPoolDesc_Type(TItemDescription):
+    """Custom type tmnxIPsecIsaMemberPoolDesc based on TItemDescription"""
+    defaultValue = OctetString("")
+
+
+_TmnxIPsecIsaMemberPoolDesc_Type.__name__ = "TItemDescription"
+_TmnxIPsecIsaMemberPoolDesc_Object = MibTableColumn
+tmnxIPsecIsaMemberPoolDesc = _TmnxIPsecIsaMemberPoolDesc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86, 1, 4),
+    _TmnxIPsecIsaMemberPoolDesc_Type()
+)
+tmnxIPsecIsaMemberPoolDesc.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolDesc.setStatus("current")
+
+
+class _TmnxIPsecIsaMemberPoolHighAvail_Type(Integer32):
+    """Custom type tmnxIPsecIsaMemberPoolHighAvail based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("tunnelLimitSystem", 1),
+          ("tunnelLimit32k", 2),
+          ("tunnelLimit64k", 3),
+          ("tunnelLimit128k", 4),
+          ("tunnelLimit256k", 5))
+    )
+
+
+_TmnxIPsecIsaMemberPoolHighAvail_Type.__name__ = "Integer32"
+_TmnxIPsecIsaMemberPoolHighAvail_Object = MibTableColumn
+tmnxIPsecIsaMemberPoolHighAvail = _TmnxIPsecIsaMemberPoolHighAvail_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 86, 1, 5),
+    _TmnxIPsecIsaMemberPoolHighAvail_Type()
+)
+tmnxIPsecIsaMemberPoolHighAvail.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolHighAvail.setStatus("current")
+_TmnxIPsecIsaMemberPoolTblLstChgd_Type = TimeStamp
+_TmnxIPsecIsaMemberPoolTblLstChgd_Object = MibScalar
+tmnxIPsecIsaMemberPoolTblLstChgd = _TmnxIPsecIsaMemberPoolTblLstChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 87),
+    _TmnxIPsecIsaMemberPoolTblLstChgd_Type()
+)
+tmnxIPsecIsaMemberPoolTblLstChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxIPsecIsaMemberPoolTblLstChgd.setStatus("current")
 _TmnxMdaXConMacTableLastChanged_Type = TimeStamp
 _TmnxMdaXConMacTableLastChanged_Object = MibScalar
 tmnxMdaXConMacTableLastChanged = _TmnxMdaXConMacTableLastChanged_Object(
@@ -19468,6 +22819,7 @@ class _TmnxMdaXConLpbkBandwidth_Type(Unsigned32):
         ValueRangeConstraint(40, 40),
         ValueRangeConstraint(100, 100),
         ValueRangeConstraint(400, 400),
+        ValueRangeConstraint(800, 800),
     )
 
 
@@ -19510,13 +22862,21 @@ class _TCoreDdctdPolicerPartition_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4,
+              5,
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
         *(("per-fc", 1),
           ("per-fc-unicast-multicast-or-multipoint", 2),
-          ("per-fc-unicast-broadcast-unknown-multicast", 3))
+          ("per-fc-unicast-broadcast-unknown-multicast", 3),
+          ("per-2-fc-unicast-multicast-or-multipoint", 4),
+          ("per-4-fc-unicast-multicast-or-multipoint", 5),
+          ("per-2-fc", 6),
+          ("per-4-fc", 7))
     )
 
 
@@ -19547,6 +22907,24 @@ tCoreDdctdPolicersAlloc = _TCoreDdctdPolicersAlloc_Object(
 tCoreDdctdPolicersAlloc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tCoreDdctdPolicersAlloc.setStatus("current")
+_TCoreDdctdPolicerStatsTotal_Type = Unsigned32
+_TCoreDdctdPolicerStatsTotal_Object = MibTableColumn
+tCoreDdctdPolicerStatsTotal = _TCoreDdctdPolicerStatsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 92, 1, 4),
+    _TCoreDdctdPolicerStatsTotal_Type()
+)
+tCoreDdctdPolicerStatsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreDdctdPolicerStatsTotal.setStatus("current")
+_TCoreDdctdPolicerStatsAlloc_Type = Unsigned32
+_TCoreDdctdPolicerStatsAlloc_Object = MibTableColumn
+tCoreDdctdPolicerStatsAlloc = _TCoreDdctdPolicerStatsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 92, 1, 5),
+    _TCoreDdctdPolicerStatsAlloc_Type()
+)
+tCoreDdctdPolicerStatsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCoreDdctdPolicerStatsAlloc.setStatus("current")
 _TmnxFPtoFPStatTable_Object = MibTable
 tmnxFPtoFPStatTable = _TmnxFPtoFPStatTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 93)
@@ -19697,6 +23075,2802 @@ tmnxExpeditedFptoFpOcts = _TmnxExpeditedFptoFpOcts_Object(
 tmnxExpeditedFptoFpOcts.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxExpeditedFptoFpOcts.setStatus("current")
+_TmnxEsaCellTopoTable_Object = MibTable
+tmnxEsaCellTopoTable = _TmnxEsaCellTopoTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94)
+)
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoTable.setStatus("current")
+_TmnxEsaCellTopoEntry_Object = MibTableRow
+tmnxEsaCellTopoEntry = _TmnxEsaCellTopoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1)
+)
+tmnxEsaCellTopoEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaCellId"),
+)
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoEntry.setStatus("current")
+
+
+class _TmnxEsaCellId_Type(Unsigned32):
+    """Custom type tmnxEsaCellId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_TmnxEsaCellId_Type.__name__ = "Unsigned32"
+_TmnxEsaCellId_Object = MibTableColumn
+tmnxEsaCellId = _TmnxEsaCellId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1, 1),
+    _TmnxEsaCellId_Type()
+)
+tmnxEsaCellId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxEsaCellId.setStatus("current")
+_TmnxEsaCellTopoSocket_Type = Unsigned32
+_TmnxEsaCellTopoSocket_Object = MibTableColumn
+tmnxEsaCellTopoSocket = _TmnxEsaCellTopoSocket_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1, 2),
+    _TmnxEsaCellTopoSocket_Type()
+)
+tmnxEsaCellTopoSocket.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoSocket.setStatus("current")
+_TmnxEsaCellTopoCoresAvailable_Type = Unsigned32
+_TmnxEsaCellTopoCoresAvailable_Object = MibTableColumn
+tmnxEsaCellTopoCoresAvailable = _TmnxEsaCellTopoCoresAvailable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1, 3),
+    _TmnxEsaCellTopoCoresAvailable_Type()
+)
+tmnxEsaCellTopoCoresAvailable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoCoresAvailable.setStatus("current")
+_TmnxEsaCellTopoCoresAllocated_Type = Unsigned32
+_TmnxEsaCellTopoCoresAllocated_Object = MibTableColumn
+tmnxEsaCellTopoCoresAllocated = _TmnxEsaCellTopoCoresAllocated_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1, 4),
+    _TmnxEsaCellTopoCoresAllocated_Type()
+)
+tmnxEsaCellTopoCoresAllocated.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoCoresAllocated.setStatus("current")
+_TmnxEsaCellTopoMemoryAvailable_Type = Unsigned32
+_TmnxEsaCellTopoMemoryAvailable_Object = MibTableColumn
+tmnxEsaCellTopoMemoryAvailable = _TmnxEsaCellTopoMemoryAvailable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1, 5),
+    _TmnxEsaCellTopoMemoryAvailable_Type()
+)
+tmnxEsaCellTopoMemoryAvailable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoMemoryAvailable.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoMemoryAvailable.setUnits("gigabyte")
+_TmnxEsaCellTopoMemoryAllocated_Type = Unsigned32
+_TmnxEsaCellTopoMemoryAllocated_Object = MibTableColumn
+tmnxEsaCellTopoMemoryAllocated = _TmnxEsaCellTopoMemoryAllocated_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 94, 1, 6),
+    _TmnxEsaCellTopoMemoryAllocated_Type()
+)
+tmnxEsaCellTopoMemoryAllocated.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoMemoryAllocated.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxEsaCellTopoMemoryAllocated.setUnits("gigabyte")
+_TmnxEsaHostPortStatsTable_Object = MibTable
+tmnxEsaHostPortStatsTable = _TmnxEsaHostPortStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95)
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortStatsTable.setStatus("current")
+_TmnxEsaHostPortStatsEntry_Object = MibTableRow
+tmnxEsaHostPortStatsEntry = _TmnxEsaHostPortStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1)
+)
+tmnxEsaHostPortStatsEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortId"),
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortStatsEntry.setStatus("current")
+_TmnxEsaHostPortSocketId_Type = Unsigned32
+_TmnxEsaHostPortSocketId_Object = MibTableColumn
+tmnxEsaHostPortSocketId = _TmnxEsaHostPortSocketId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 1),
+    _TmnxEsaHostPortSocketId_Type()
+)
+tmnxEsaHostPortSocketId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortSocketId.setStatus("current")
+_TmnxEsaHostPortNicIfName_Type = DisplayString
+_TmnxEsaHostPortNicIfName_Object = MibTableColumn
+tmnxEsaHostPortNicIfName = _TmnxEsaHostPortNicIfName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 2),
+    _TmnxEsaHostPortNicIfName_Type()
+)
+tmnxEsaHostPortNicIfName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicIfName.setStatus("current")
+
+
+class _TmnxEsaHostPortNicXceiverType_Type(Integer32):
+    """Custom type tmnxEsaHostPortNicXceiverType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 0),
+          ("gbic", 1),
+          ("moduleConnectorSolderedToMotherboard", 2),
+          ("sfpTransceiver", 3),
+          ("xbiTransceiver", 4),
+          ("xenpakTransceiver", 5),
+          ("xfpTransceiver", 6),
+          ("xffTransceiver", 7),
+          ("xfpeTransceiver", 8),
+          ("xpakTransceiver", 9),
+          ("x2Transceiver", 10),
+          ("dwdmSfpTransceiver", 11),
+          ("qsfpTransceiver", 12),
+          ("qsfpPlusTransceiver", 13),
+          ("cfpTransceiver", 14),
+          ("cxpTransceiver", 15),
+          ("oifMsa100gLh", 16),
+          ("cfp2OrQsfp28Transceiver", 17),
+          ("cfp4Transceiver", 18),
+          ("cdfpTransceiver", 19),
+          ("cfp2AcoTransceiver", 20),
+          ("cfp8Transceiver", 21),
+          ("cdfp3Transceiver", 22),
+          ("microQsfpTransceiver", 23),
+          ("qsfpDdTransceiver", 24),
+          ("cfp2DcoTransceiver", 25),
+          ("sfpDdTransceiver", 26),
+          ("dsfpTransceiver", 27),
+          ("x4MiniLinkTransceiver", 28),
+          ("x8MiniLinkTransceiver", 29),
+          ("qsfpPlusOrLaterWithCmisTransceiver", 30),
+          ("sfpDdWithCmisTransceiver", 31),
+          ("sfpPlusOrLaterWithCmisTransceiver", 32))
+    )
+
+
+_TmnxEsaHostPortNicXceiverType_Type.__name__ = "Integer32"
+_TmnxEsaHostPortNicXceiverType_Object = MibTableColumn
+tmnxEsaHostPortNicXceiverType = _TmnxEsaHostPortNicXceiverType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 3),
+    _TmnxEsaHostPortNicXceiverType_Type()
+)
+tmnxEsaHostPortNicXceiverType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicXceiverType.setStatus("current")
+_TmnxEsaHostPortNicXceiverMN_Type = TNamedItemOrEmpty
+_TmnxEsaHostPortNicXceiverMN_Object = MibTableColumn
+tmnxEsaHostPortNicXceiverMN = _TmnxEsaHostPortNicXceiverMN_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 4),
+    _TmnxEsaHostPortNicXceiverMN_Type()
+)
+tmnxEsaHostPortNicXceiverMN.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicXceiverMN.setStatus("current")
+_TmnxEsaHostPortNicXceiverLWL_Type = Unsigned32
+_TmnxEsaHostPortNicXceiverLWL_Object = MibTableColumn
+tmnxEsaHostPortNicXceiverLWL = _TmnxEsaHostPortNicXceiverLWL_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 5),
+    _TmnxEsaHostPortNicXceiverLWL_Type()
+)
+tmnxEsaHostPortNicXceiverLWL.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicXceiverLWL.setStatus("current")
+_TmnxEsaHostPortNicSFPNumLanes_Type = Unsigned32
+_TmnxEsaHostPortNicSFPNumLanes_Object = MibTableColumn
+tmnxEsaHostPortNicSFPNumLanes = _TmnxEsaHostPortNicSFPNumLanes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 6),
+    _TmnxEsaHostPortNicSFPNumLanes_Type()
+)
+tmnxEsaHostPortNicSFPNumLanes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicSFPNumLanes.setStatus("current")
+
+
+class _TmnxEsaHostPortNictSFPConCode_Type(Integer32):
+    """Custom type tmnxEsaHostPortNictSFPConCode based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              51,
+              128,
+              129)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 0),
+          ("sc", 1),
+          ("fiberChannel-Style1-CopperConnector", 2),
+          ("fiberChannel-Style2-CopperConnector", 3),
+          ("bncortnc", 4),
+          ("fiberChannelCoaxialHeaders", 5),
+          ("fiberJack", 6),
+          ("lc", 7),
+          ("mt-rj", 8),
+          ("mu", 9),
+          ("sg", 10),
+          ("opticalPigtail", 11),
+          ("mpo1x12", 12),
+          ("mpo2x16", 13),
+          ("hssdcII", 32),
+          ("copperPigtail", 33),
+          ("rj45", 34),
+          ("noSepConn", 35),
+          ("mxc2x16", 36),
+          ("cs", 37),
+          ("snOptConn", 38),
+          ("mpo2x12", 39),
+          ("mpo1x16", 40),
+          ("opticalTransceiver", 51),
+          ("copperGigE", 128),
+          ("rjp5", 129))
+    )
+
+
+_TmnxEsaHostPortNictSFPConCode_Type.__name__ = "Integer32"
+_TmnxEsaHostPortNictSFPConCode_Object = MibTableColumn
+tmnxEsaHostPortNictSFPConCode = _TmnxEsaHostPortNictSFPConCode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 7),
+    _TmnxEsaHostPortNictSFPConCode_Type()
+)
+tmnxEsaHostPortNictSFPConCode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNictSFPConCode.setStatus("current")
+_TmnxEsaHostPortNicSFPVendorOUI_Type = Unsigned32
+_TmnxEsaHostPortNicSFPVendorOUI_Object = MibTableColumn
+tmnxEsaHostPortNicSFPVendorOUI = _TmnxEsaHostPortNicSFPVendorOUI_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 8),
+    _TmnxEsaHostPortNicSFPVendorOUI_Type()
+)
+tmnxEsaHostPortNicSFPVendorOUI.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicSFPVendorOUI.setStatus("current")
+_TmnxEsaHostPortNicSFPVendorMfg_Type = DateAndTime
+_TmnxEsaHostPortNicSFPVendorMfg_Object = MibTableColumn
+tmnxEsaHostPortNicSFPVendorMfg = _TmnxEsaHostPortNicSFPVendorMfg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 9),
+    _TmnxEsaHostPortNicSFPVendorMfg_Type()
+)
+tmnxEsaHostPortNicSFPVendorMfg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicSFPVendorMfg.setStatus("current")
+
+
+class _TmnxEsaHostPortNicSFPMedia_Type(Integer32):
+    """Custom type tmnxEsaHostPortNicSFPMedia based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notApplicable", 0),
+          ("ethernet", 1),
+          ("sonetsdh", 2))
+    )
+
+
+_TmnxEsaHostPortNicSFPMedia_Type.__name__ = "Integer32"
+_TmnxEsaHostPortNicSFPMedia_Object = MibTableColumn
+tmnxEsaHostPortNicSFPMedia = _TmnxEsaHostPortNicSFPMedia_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 10),
+    _TmnxEsaHostPortNicSFPMedia_Type()
+)
+tmnxEsaHostPortNicSFPMedia.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicSFPMedia.setStatus("current")
+_TmnxEsaHostPortNicSFPVendorSN_Type = TNamedItemOrEmpty
+_TmnxEsaHostPortNicSFPVendorSN_Object = MibTableColumn
+tmnxEsaHostPortNicSFPVendorSN = _TmnxEsaHostPortNicSFPVendorSN_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 11),
+    _TmnxEsaHostPortNicSFPVendorSN_Type()
+)
+tmnxEsaHostPortNicSFPVendorSN.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicSFPVendorSN.setStatus("current")
+_TmnxEsaHostPortNicSFPVendorPN_Type = TNamedItemOrEmpty
+_TmnxEsaHostPortNicSFPVendorPN_Object = MibTableColumn
+tmnxEsaHostPortNicSFPVendorPN = _TmnxEsaHostPortNicSFPVendorPN_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 12),
+    _TmnxEsaHostPortNicSFPVendorPN_Type()
+)
+tmnxEsaHostPortNicSFPVendorPN.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicSFPVendorPN.setStatus("current")
+
+
+class _TmnxEsaHostPortNicOptCompliance_Type(OctetString):
+    """Custom type tmnxEsaHostPortNicOptCompliance based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(64, 64),
+    )
+    fixed_length = 64
+
+
+_TmnxEsaHostPortNicOptCompliance_Type.__name__ = "OctetString"
+_TmnxEsaHostPortNicOptCompliance_Object = MibTableColumn
+tmnxEsaHostPortNicOptCompliance = _TmnxEsaHostPortNicOptCompliance_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 13),
+    _TmnxEsaHostPortNicOptCompliance_Type()
+)
+tmnxEsaHostPortNicOptCompliance.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicOptCompliance.setStatus("current")
+_TmnxEsaHostPortNicOptCCExtension_Type = TmnxPortOptComplianceExtType
+_TmnxEsaHostPortNicOptCCExtension_Object = MibTableColumn
+tmnxEsaHostPortNicOptCCExtension = _TmnxEsaHostPortNicOptCCExtension_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 14),
+    _TmnxEsaHostPortNicOptCCExtension_Type()
+)
+tmnxEsaHostPortNicOptCCExtension.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicOptCCExtension.setStatus("current")
+
+
+class _TmnxEsaHostPortNicLinkLenInfo_Type(OctetString):
+    """Custom type tmnxEsaHostPortNicLinkLenInfo based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_TmnxEsaHostPortNicLinkLenInfo_Type.__name__ = "OctetString"
+_TmnxEsaHostPortNicLinkLenInfo_Object = MibTableColumn
+tmnxEsaHostPortNicLinkLenInfo = _TmnxEsaHostPortNicLinkLenInfo_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 15),
+    _TmnxEsaHostPortNicLinkLenInfo_Type()
+)
+tmnxEsaHostPortNicLinkLenInfo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicLinkLenInfo.setStatus("current")
+_TmnxEsaHostPortNicDDMTemp_Type = Integer32
+_TmnxEsaHostPortNicDDMTemp_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTemp = _TmnxEsaHostPortNicDDMTemp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 16),
+    _TmnxEsaHostPortNicDDMTemp_Type()
+)
+tmnxEsaHostPortNicDDMTemp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTemp.setStatus("current")
+_TmnxEsaHostPortNicDDMTempLowWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMTempLowWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTempLowWarn = _TmnxEsaHostPortNicDDMTempLowWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 17),
+    _TmnxEsaHostPortNicDDMTempLowWarn_Type()
+)
+tmnxEsaHostPortNicDDMTempLowWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTempLowWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMTempLwAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMTempLwAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTempLwAlarm = _TmnxEsaHostPortNicDDMTempLwAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 18),
+    _TmnxEsaHostPortNicDDMTempLwAlarm_Type()
+)
+tmnxEsaHostPortNicDDMTempLwAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTempLwAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMTempHiWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMTempHiWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTempHiWarn = _TmnxEsaHostPortNicDDMTempHiWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 19),
+    _TmnxEsaHostPortNicDDMTempHiWarn_Type()
+)
+tmnxEsaHostPortNicDDMTempHiWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTempHiWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMTempHiAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMTempHiAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTempHiAlarm = _TmnxEsaHostPortNicDDMTempHiAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 20),
+    _TmnxEsaHostPortNicDDMTempHiAlarm_Type()
+)
+tmnxEsaHostPortNicDDMTempHiAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTempHiAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMSupVoltage_Type = Integer32
+_TmnxEsaHostPortNicDDMSupVoltage_Object = MibTableColumn
+tmnxEsaHostPortNicDDMSupVoltage = _TmnxEsaHostPortNicDDMSupVoltage_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 21),
+    _TmnxEsaHostPortNicDDMSupVoltage_Type()
+)
+tmnxEsaHostPortNicDDMSupVoltage.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMSupVoltage.setStatus("current")
+_TmnxEsaHostPortNicDDMSVLowWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMSVLowWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMSVLowWarn = _TmnxEsaHostPortNicDDMSVLowWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 22),
+    _TmnxEsaHostPortNicDDMSVLowWarn_Type()
+)
+tmnxEsaHostPortNicDDMSVLowWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMSVLowWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMSVLowAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMSVLowAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMSVLowAlarm = _TmnxEsaHostPortNicDDMSVLowAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 23),
+    _TmnxEsaHostPortNicDDMSVLowAlarm_Type()
+)
+tmnxEsaHostPortNicDDMSVLowAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMSVLowAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMSVHiWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMSVHiWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMSVHiWarn = _TmnxEsaHostPortNicDDMSVHiWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 24),
+    _TmnxEsaHostPortNicDDMSVHiWarn_Type()
+)
+tmnxEsaHostPortNicDDMSVHiWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMSVHiWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMSVHiAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMSVHiAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMSVHiAlarm = _TmnxEsaHostPortNicDDMSVHiAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 25),
+    _TmnxEsaHostPortNicDDMSVHiAlarm_Type()
+)
+tmnxEsaHostPortNicDDMSVHiAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMSVHiAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMTxBCLwWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMTxBCLwWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxBCLwWarn = _TmnxEsaHostPortNicDDMTxBCLwWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 26),
+    _TmnxEsaHostPortNicDDMTxBCLwWarn_Type()
+)
+tmnxEsaHostPortNicDDMTxBCLwWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxBCLwWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMTxBCLwAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMTxBCLwAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxBCLwAlarm = _TmnxEsaHostPortNicDDMTxBCLwAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 27),
+    _TmnxEsaHostPortNicDDMTxBCLwAlarm_Type()
+)
+tmnxEsaHostPortNicDDMTxBCLwAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxBCLwAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMTxBCHiWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMTxBCHiWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxBCHiWarn = _TmnxEsaHostPortNicDDMTxBCHiWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 28),
+    _TmnxEsaHostPortNicDDMTxBCHiWarn_Type()
+)
+tmnxEsaHostPortNicDDMTxBCHiWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxBCHiWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMTxBCHiAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMTxBCHiAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxBCHiAlarm = _TmnxEsaHostPortNicDDMTxBCHiAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 29),
+    _TmnxEsaHostPortNicDDMTxBCHiAlarm_Type()
+)
+tmnxEsaHostPortNicDDMTxBCHiAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxBCHiAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMTxOPLwWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMTxOPLwWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxOPLwWarn = _TmnxEsaHostPortNicDDMTxOPLwWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 30),
+    _TmnxEsaHostPortNicDDMTxOPLwWarn_Type()
+)
+tmnxEsaHostPortNicDDMTxOPLwWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxOPLwWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMTxOPLwAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMTxOPLwAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxOPLwAlarm = _TmnxEsaHostPortNicDDMTxOPLwAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 31),
+    _TmnxEsaHostPortNicDDMTxOPLwAlarm_Type()
+)
+tmnxEsaHostPortNicDDMTxOPLwAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxOPLwAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMTxOPHiWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMTxOPHiWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxOPHiWarn = _TmnxEsaHostPortNicDDMTxOPHiWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 32),
+    _TmnxEsaHostPortNicDDMTxOPHiWarn_Type()
+)
+tmnxEsaHostPortNicDDMTxOPHiWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxOPHiWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMTxOPHiAlarm_Type = Integer32
+_TmnxEsaHostPortNicDDMTxOPHiAlarm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxOPHiAlarm = _TmnxEsaHostPortNicDDMTxOPHiAlarm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 33),
+    _TmnxEsaHostPortNicDDMTxOPHiAlarm_Type()
+)
+tmnxEsaHostPortNicDDMTxOPHiAlarm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxOPHiAlarm.setStatus("current")
+_TmnxEsaHostPortNicDDMRxOpPLwWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMRxOpPLwWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMRxOpPLwWarn = _TmnxEsaHostPortNicDDMRxOpPLwWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 34),
+    _TmnxEsaHostPortNicDDMRxOpPLwWarn_Type()
+)
+tmnxEsaHostPortNicDDMRxOpPLwWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMRxOpPLwWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMRxOpPLwAlrm_Type = Integer32
+_TmnxEsaHostPortNicDDMRxOpPLwAlrm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMRxOpPLwAlrm = _TmnxEsaHostPortNicDDMRxOpPLwAlrm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 35),
+    _TmnxEsaHostPortNicDDMRxOpPLwAlrm_Type()
+)
+tmnxEsaHostPortNicDDMRxOpPLwAlrm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMRxOpPLwAlrm.setStatus("current")
+_TmnxEsaHostPortNicDDMRxOpPHiWarn_Type = Integer32
+_TmnxEsaHostPortNicDDMRxOpPHiWarn_Object = MibTableColumn
+tmnxEsaHostPortNicDDMRxOpPHiWarn = _TmnxEsaHostPortNicDDMRxOpPHiWarn_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 36),
+    _TmnxEsaHostPortNicDDMRxOpPHiWarn_Type()
+)
+tmnxEsaHostPortNicDDMRxOpPHiWarn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMRxOpPHiWarn.setStatus("current")
+_TmnxEsaHostPortNicDDMRxOpPHiAlrm_Type = Integer32
+_TmnxEsaHostPortNicDDMRxOpPHiAlrm_Object = MibTableColumn
+tmnxEsaHostPortNicDDMRxOpPHiAlrm = _TmnxEsaHostPortNicDDMRxOpPHiAlrm_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 37),
+    _TmnxEsaHostPortNicDDMRxOpPHiAlrm_Type()
+)
+tmnxEsaHostPortNicDDMRxOpPHiAlrm.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMRxOpPHiAlrm.setStatus("current")
+
+
+class _TmnxEsaHostPortOperStatus_Type(Integer32):
+    """Custom type tmnxEsaHostPortOperStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("inService", 2),
+          ("outOfService", 3))
+    )
+
+
+_TmnxEsaHostPortOperStatus_Type.__name__ = "Integer32"
+_TmnxEsaHostPortOperStatus_Object = MibTableColumn
+tmnxEsaHostPortOperStatus = _TmnxEsaHostPortOperStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 38),
+    _TmnxEsaHostPortOperStatus_Type()
+)
+tmnxEsaHostPortOperStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortOperStatus.setStatus("current")
+_TmnxEsaHostPortFwdStatus_Type = TruthValue
+_TmnxEsaHostPortFwdStatus_Object = MibTableColumn
+tmnxEsaHostPortFwdStatus = _TmnxEsaHostPortFwdStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 39),
+    _TmnxEsaHostPortFwdStatus_Type()
+)
+tmnxEsaHostPortFwdStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortFwdStatus.setStatus("current")
+_TmnxEsaHostPortRxTotalPkts_Type = Counter64
+_TmnxEsaHostPortRxTotalPkts_Object = MibTableColumn
+tmnxEsaHostPortRxTotalPkts = _TmnxEsaHostPortRxTotalPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 40),
+    _TmnxEsaHostPortRxTotalPkts_Type()
+)
+tmnxEsaHostPortRxTotalPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortRxTotalPkts.setStatus("current")
+_TmnxEsaHostPortTxTotalPkts_Type = Counter64
+_TmnxEsaHostPortTxTotalPkts_Object = MibTableColumn
+tmnxEsaHostPortTxTotalPkts = _TmnxEsaHostPortTxTotalPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 41),
+    _TmnxEsaHostPortTxTotalPkts_Type()
+)
+tmnxEsaHostPortTxTotalPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortTxTotalPkts.setStatus("current")
+_TmnxEsaHostPortRxDiscards_Type = Counter64
+_TmnxEsaHostPortRxDiscards_Object = MibTableColumn
+tmnxEsaHostPortRxDiscards = _TmnxEsaHostPortRxDiscards_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 42),
+    _TmnxEsaHostPortRxDiscards_Type()
+)
+tmnxEsaHostPortRxDiscards.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortRxDiscards.setStatus("current")
+_TmnxEsaHostPortRxCrcErrors_Type = Counter64
+_TmnxEsaHostPortRxCrcErrors_Object = MibTableColumn
+tmnxEsaHostPortRxCrcErrors = _TmnxEsaHostPortRxCrcErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 43),
+    _TmnxEsaHostPortRxCrcErrors_Type()
+)
+tmnxEsaHostPortRxCrcErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortRxCrcErrors.setStatus("current")
+_TmnxEsaHostPortRxSymErrors_Type = Counter64
+_TmnxEsaHostPortRxSymErrors_Object = MibTableColumn
+tmnxEsaHostPortRxSymErrors = _TmnxEsaHostPortRxSymErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 95, 1, 44),
+    _TmnxEsaHostPortRxSymErrors_Type()
+)
+tmnxEsaHostPortRxSymErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortRxSymErrors.setStatus("current")
+_TmnxFPCoreResUsgStatsTable_Object = MibTable
+tmnxFPCoreResUsgStatsTable = _TmnxFPCoreResUsgStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96)
+)
+if mibBuilder.loadTexts:
+    tmnxFPCoreResUsgStatsTable.setStatus("current")
+_TmnxFPCoreResUsgStatsEntry_Object = MibTableRow
+tmnxFPCoreResUsgStatsEntry = _TmnxFPCoreResUsgStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1)
+)
+tmnxFPCoreResUsgStatsEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxFPNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCoreNum"),
+)
+if mibBuilder.loadTexts:
+    tmnxFPCoreResUsgStatsEntry.setStatus("current")
+_TmnxFPCoreFreeDramBdb_Type = Counter64
+_TmnxFPCoreFreeDramBdb_Object = MibTableColumn
+tmnxFPCoreFreeDramBdb = _TmnxFPCoreFreeDramBdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 1),
+    _TmnxFPCoreFreeDramBdb_Type()
+)
+tmnxFPCoreFreeDramBdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreFreeDramBdb.setStatus("current")
+_TmnxFPCoreMinFreeDramBdb_Type = Counter64
+_TmnxFPCoreMinFreeDramBdb_Object = MibTableColumn
+tmnxFPCoreMinFreeDramBdb = _TmnxFPCoreMinFreeDramBdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 2),
+    _TmnxFPCoreMinFreeDramBdb_Type()
+)
+tmnxFPCoreMinFreeDramBdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreMinFreeDramBdb.setStatus("current")
+_TmnxFPCoreLowFreeDramBdb_Type = Counter64
+_TmnxFPCoreLowFreeDramBdb_Object = MibTableColumn
+tmnxFPCoreLowFreeDramBdb = _TmnxFPCoreLowFreeDramBdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 3),
+    _TmnxFPCoreLowFreeDramBdb_Type()
+)
+tmnxFPCoreLowFreeDramBdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreLowFreeDramBdb.setStatus("current")
+_TmnxFPCoreTotalDramBdb_Type = Counter64
+_TmnxFPCoreTotalDramBdb_Object = MibTableColumn
+tmnxFPCoreTotalDramBdb = _TmnxFPCoreTotalDramBdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 4),
+    _TmnxFPCoreTotalDramBdb_Type()
+)
+tmnxFPCoreTotalDramBdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreTotalDramBdb.setStatus("current")
+_TmnxFPCoreFreeSramBuf_Type = Counter64
+_TmnxFPCoreFreeSramBuf_Object = MibTableColumn
+tmnxFPCoreFreeSramBuf = _TmnxFPCoreFreeSramBuf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 5),
+    _TmnxFPCoreFreeSramBuf_Type()
+)
+tmnxFPCoreFreeSramBuf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreFreeSramBuf.setStatus("current")
+_TmnxFPCoreMinFreeSramBuf_Type = Counter64
+_TmnxFPCoreMinFreeSramBuf_Object = MibTableColumn
+tmnxFPCoreMinFreeSramBuf = _TmnxFPCoreMinFreeSramBuf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 6),
+    _TmnxFPCoreMinFreeSramBuf_Type()
+)
+tmnxFPCoreMinFreeSramBuf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreMinFreeSramBuf.setStatus("current")
+_TmnxFPCoreLowFreeSramBuf_Type = Counter64
+_TmnxFPCoreLowFreeSramBuf_Object = MibTableColumn
+tmnxFPCoreLowFreeSramBuf = _TmnxFPCoreLowFreeSramBuf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 7),
+    _TmnxFPCoreLowFreeSramBuf_Type()
+)
+tmnxFPCoreLowFreeSramBuf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreLowFreeSramBuf.setStatus("current")
+_TmnxFPCoreTotalSramBuf_Type = Counter64
+_TmnxFPCoreTotalSramBuf_Object = MibTableColumn
+tmnxFPCoreTotalSramBuf = _TmnxFPCoreTotalSramBuf_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 8),
+    _TmnxFPCoreTotalSramBuf_Type()
+)
+tmnxFPCoreTotalSramBuf.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreTotalSramBuf.setStatus("current")
+_TmnxFPCoreFreeSramPdb_Type = Counter64
+_TmnxFPCoreFreeSramPdb_Object = MibTableColumn
+tmnxFPCoreFreeSramPdb = _TmnxFPCoreFreeSramPdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 9),
+    _TmnxFPCoreFreeSramPdb_Type()
+)
+tmnxFPCoreFreeSramPdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreFreeSramPdb.setStatus("current")
+_TmnxFPCoreMinFreeSramPdb_Type = Counter64
+_TmnxFPCoreMinFreeSramPdb_Object = MibTableColumn
+tmnxFPCoreMinFreeSramPdb = _TmnxFPCoreMinFreeSramPdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 10),
+    _TmnxFPCoreMinFreeSramPdb_Type()
+)
+tmnxFPCoreMinFreeSramPdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreMinFreeSramPdb.setStatus("current")
+_TmnxFPCoreLowFreeSramPdb_Type = Counter64
+_TmnxFPCoreLowFreeSramPdb_Object = MibTableColumn
+tmnxFPCoreLowFreeSramPdb = _TmnxFPCoreLowFreeSramPdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 11),
+    _TmnxFPCoreLowFreeSramPdb_Type()
+)
+tmnxFPCoreLowFreeSramPdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreLowFreeSramPdb.setStatus("current")
+_TmnxFPCoreTotalSramPdb_Type = Counter64
+_TmnxFPCoreTotalSramPdb_Object = MibTableColumn
+tmnxFPCoreTotalSramPdb = _TmnxFPCoreTotalSramPdb_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 12),
+    _TmnxFPCoreTotalSramPdb_Type()
+)
+tmnxFPCoreTotalSramPdb.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreTotalSramPdb.setStatus("current")
+_TmnxFPCoreDramBwMaxCnscPollBlk_Type = Counter64
+_TmnxFPCoreDramBwMaxCnscPollBlk_Object = MibTableColumn
+tmnxFPCoreDramBwMaxCnscPollBlk = _TmnxFPCoreDramBwMaxCnscPollBlk_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 13),
+    _TmnxFPCoreDramBwMaxCnscPollBlk_Type()
+)
+tmnxFPCoreDramBwMaxCnscPollBlk.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreDramBwMaxCnscPollBlk.setStatus("current")
+_TmnxFPCoreDramBwPktRejLastPoll_Type = Counter64
+_TmnxFPCoreDramBwPktRejLastPoll_Object = MibTableColumn
+tmnxFPCoreDramBwPktRejLastPoll = _TmnxFPCoreDramBwPktRejLastPoll_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 14),
+    _TmnxFPCoreDramBwPktRejLastPoll_Type()
+)
+tmnxFPCoreDramBwPktRejLastPoll.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreDramBwPktRejLastPoll.setStatus("current")
+_TmnxFPCoreDramBwTotalPktRejects_Type = Counter64
+_TmnxFPCoreDramBwTotalPktRejects_Object = MibTableColumn
+tmnxFPCoreDramBwTotalPktRejects = _TmnxFPCoreDramBwTotalPktRejects_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 15),
+    _TmnxFPCoreDramBwTotalPktRejects_Type()
+)
+tmnxFPCoreDramBwTotalPktRejects.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreDramBwTotalPktRejects.setStatus("current")
+_TmnxFPCorePcsPipeNifPrdDrpLstPol_Type = Counter64
+_TmnxFPCorePcsPipeNifPrdDrpLstPol_Object = MibTableColumn
+tmnxFPCorePcsPipeNifPrdDrpLstPol = _TmnxFPCorePcsPipeNifPrdDrpLstPol_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 16),
+    _TmnxFPCorePcsPipeNifPrdDrpLstPol_Type()
+)
+tmnxFPCorePcsPipeNifPrdDrpLstPol.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCorePcsPipeNifPrdDrpLstPol.setStatus("current")
+_TmnxFPCorePcsPipeTotNifPrdDrops_Type = Counter64
+_TmnxFPCorePcsPipeTotNifPrdDrops_Object = MibTableColumn
+tmnxFPCorePcsPipeTotNifPrdDrops = _TmnxFPCorePcsPipeTotNifPrdDrops_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 17),
+    _TmnxFPCorePcsPipeTotNifPrdDrops_Type()
+)
+tmnxFPCorePcsPipeTotNifPrdDrops.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCorePcsPipeTotNifPrdDrops.setStatus("current")
+_TmnxFPCorePcsPipeMxCnvPlNifPrdDp_Type = Counter64
+_TmnxFPCorePcsPipeMxCnvPlNifPrdDp_Object = MibTableColumn
+tmnxFPCorePcsPipeMxCnvPlNifPrdDp = _TmnxFPCorePcsPipeMxCnvPlNifPrdDp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 18),
+    _TmnxFPCorePcsPipeMxCnvPlNifPrdDp_Type()
+)
+tmnxFPCorePcsPipeMxCnvPlNifPrdDp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCorePcsPipeMxCnvPlNifPrdDp.setStatus("current")
+_TmnxFPCoreMeshFabBwAsrtCngstFP1_Type = Counter64
+_TmnxFPCoreMeshFabBwAsrtCngstFP1_Object = MibTableColumn
+tmnxFPCoreMeshFabBwAsrtCngstFP1 = _TmnxFPCoreMeshFabBwAsrtCngstFP1_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 19),
+    _TmnxFPCoreMeshFabBwAsrtCngstFP1_Type()
+)
+tmnxFPCoreMeshFabBwAsrtCngstFP1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreMeshFabBwAsrtCngstFP1.setStatus("current")
+_TmnxFPCoreMeshFabBwAsrtCngstFP2_Type = Counter64
+_TmnxFPCoreMeshFabBwAsrtCngstFP2_Object = MibTableColumn
+tmnxFPCoreMeshFabBwAsrtCngstFP2 = _TmnxFPCoreMeshFabBwAsrtCngstFP2_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 20),
+    _TmnxFPCoreMeshFabBwAsrtCngstFP2_Type()
+)
+tmnxFPCoreMeshFabBwAsrtCngstFP2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreMeshFabBwAsrtCngstFP2.setStatus("current")
+_TmnxFPCoreMeshFabBwAsrtCngstFP3_Type = Counter64
+_TmnxFPCoreMeshFabBwAsrtCngstFP3_Object = MibTableColumn
+tmnxFPCoreMeshFabBwAsrtCngstFP3 = _TmnxFPCoreMeshFabBwAsrtCngstFP3_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 21),
+    _TmnxFPCoreMeshFabBwAsrtCngstFP3_Type()
+)
+tmnxFPCoreMeshFabBwAsrtCngstFP3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreMeshFabBwAsrtCngstFP3.setStatus("current")
+_TmnxFPCoreL0PolicerProfilesInUse_Type = Unsigned32
+_TmnxFPCoreL0PolicerProfilesInUse_Object = MibTableColumn
+tmnxFPCoreL0PolicerProfilesInUse = _TmnxFPCoreL0PolicerProfilesInUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 22),
+    _TmnxFPCoreL0PolicerProfilesInUse_Type()
+)
+tmnxFPCoreL0PolicerProfilesInUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreL0PolicerProfilesInUse.setStatus("current")
+_TmnxFPCoreL1PolicerProfilesInUse_Type = Unsigned32
+_TmnxFPCoreL1PolicerProfilesInUse_Object = MibTableColumn
+tmnxFPCoreL1PolicerProfilesInUse = _TmnxFPCoreL1PolicerProfilesInUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 96, 1, 23),
+    _TmnxFPCoreL1PolicerProfilesInUse_Type()
+)
+tmnxFPCoreL1PolicerProfilesInUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPCoreL1PolicerProfilesInUse.setStatus("current")
+_TmnxCpmSecureBootStatsTable_Object = MibTable
+tmnxCpmSecureBootStatsTable = _TmnxCpmSecureBootStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 97)
+)
+if mibBuilder.loadTexts:
+    tmnxCpmSecureBootStatsTable.setStatus("current")
+_TmnxCpmSecureBootStatsEntry_Object = MibTableRow
+tmnxCpmSecureBootStatsEntry = _TmnxCpmSecureBootStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 97, 1)
+)
+if mibBuilder.loadTexts:
+    tmnxCpmSecureBootStatsEntry.setStatus("current")
+_TmnxCpmSecureBootEnabled_Type = TmnxEnabledDisabledOrNA
+_TmnxCpmSecureBootEnabled_Object = MibTableColumn
+tmnxCpmSecureBootEnabled = _TmnxCpmSecureBootEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 97, 1, 1),
+    _TmnxCpmSecureBootEnabled_Type()
+)
+tmnxCpmSecureBootEnabled.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCpmSecureBootEnabled.setStatus("current")
+_TmnxCpmSBUefiVarsStatus_Type = TmnxSBUefiVarsState
+_TmnxCpmSBUefiVarsStatus_Object = MibTableColumn
+tmnxCpmSBUefiVarsStatus = _TmnxCpmSBUefiVarsStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 97, 1, 2),
+    _TmnxCpmSBUefiVarsStatus_Type()
+)
+tmnxCpmSBUefiVarsStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCpmSBUefiVarsStatus.setStatus("current")
+_TmnxFPResOversubStatsTable_Object = MibTable
+tmnxFPResOversubStatsTable = _TmnxFPResOversubStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 98)
+)
+if mibBuilder.loadTexts:
+    tmnxFPResOversubStatsTable.setStatus("current")
+_TmnxFPResOversubStatsEntry_Object = MibTableRow
+tmnxFPResOversubStatsEntry = _TmnxFPResOversubStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 98, 1)
+)
+tmnxFPResOversubStatsEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxFPNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxFPOversubResource"),
+)
+if mibBuilder.loadTexts:
+    tmnxFPResOversubStatsEntry.setStatus("current")
+
+
+class _TmnxFPOversubResource_Type(Integer32):
+    """Custom type tmnxFPOversubResource based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6)
+        )
+    )
+    namedValues = NamedValues(
+        *(("sramBuf", 1),
+          ("sramPdb", 2),
+          ("dramBdb", 3),
+          ("dramBandwidth", 4),
+          ("coreProcessPipeline", 5),
+          ("meshFabricBandwidth", 6))
+    )
+
+
+_TmnxFPOversubResource_Type.__name__ = "Integer32"
+_TmnxFPOversubResource_Object = MibTableColumn
+tmnxFPOversubResource = _TmnxFPOversubResource_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 98, 1, 1),
+    _TmnxFPOversubResource_Type()
+)
+tmnxFPOversubResource.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxFPOversubResource.setStatus("current")
+_TmnxFPResOversubDetected_Type = Unsigned32
+_TmnxFPResOversubDetected_Object = MibTableColumn
+tmnxFPResOversubDetected = _TmnxFPResOversubDetected_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 98, 1, 2),
+    _TmnxFPResOversubDetected_Type()
+)
+tmnxFPResOversubDetected.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxFPResOversubDetected.setStatus("current")
+_TCardIxrResourceTable_Object = MibTable
+tCardIxrResourceTable = _TCardIxrResourceTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99)
+)
+if mibBuilder.loadTexts:
+    tCardIxrResourceTable.setStatus("current")
+_TCardIxrResourceEntry_Object = MibTableRow
+tCardIxrResourceEntry = _TCardIxrResourceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1)
+)
+tCardIxrResourceEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+)
+if mibBuilder.loadTexts:
+    tCardIxrResourceEntry.setStatus("current")
+_TCardIxrResMplsEcmpGroupsTotal_Type = Unsigned32
+_TCardIxrResMplsEcmpGroupsTotal_Object = MibTableColumn
+tCardIxrResMplsEcmpGroupsTotal = _TCardIxrResMplsEcmpGroupsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 1),
+    _TCardIxrResMplsEcmpGroupsTotal_Type()
+)
+tCardIxrResMplsEcmpGroupsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResMplsEcmpGroupsTotal.setStatus("obsolete")
+_TCardIxrResMplsEcmpGroupsAlloc_Type = Unsigned32
+_TCardIxrResMplsEcmpGroupsAlloc_Object = MibTableColumn
+tCardIxrResMplsEcmpGroupsAlloc = _TCardIxrResMplsEcmpGroupsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 2),
+    _TCardIxrResMplsEcmpGroupsAlloc_Type()
+)
+tCardIxrResMplsEcmpGroupsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResMplsEcmpGroupsAlloc.setStatus("obsolete")
+_TCardIxrResMplsEcmpGroupsFree_Type = Unsigned32
+_TCardIxrResMplsEcmpGroupsFree_Object = MibTableColumn
+tCardIxrResMplsEcmpGroupsFree = _TCardIxrResMplsEcmpGroupsFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 3),
+    _TCardIxrResMplsEcmpGroupsFree_Type()
+)
+tCardIxrResMplsEcmpGroupsFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResMplsEcmpGroupsFree.setStatus("obsolete")
+_TCardIxrResIpEcmpGroupsTotal_Type = Unsigned32
+_TCardIxrResIpEcmpGroupsTotal_Object = MibTableColumn
+tCardIxrResIpEcmpGroupsTotal = _TCardIxrResIpEcmpGroupsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 4),
+    _TCardIxrResIpEcmpGroupsTotal_Type()
+)
+tCardIxrResIpEcmpGroupsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResIpEcmpGroupsTotal.setStatus("obsolete")
+_TCardIxrResIpEcmpGroupsAlloc_Type = Unsigned32
+_TCardIxrResIpEcmpGroupsAlloc_Object = MibTableColumn
+tCardIxrResIpEcmpGroupsAlloc = _TCardIxrResIpEcmpGroupsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 5),
+    _TCardIxrResIpEcmpGroupsAlloc_Type()
+)
+tCardIxrResIpEcmpGroupsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResIpEcmpGroupsAlloc.setStatus("obsolete")
+_TCardIxrResIpEcmpGroupsFree_Type = Unsigned32
+_TCardIxrResIpEcmpGroupsFree_Object = MibTableColumn
+tCardIxrResIpEcmpGroupsFree = _TCardIxrResIpEcmpGroupsFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 6),
+    _TCardIxrResIpEcmpGroupsFree_Type()
+)
+tCardIxrResIpEcmpGroupsFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResIpEcmpGroupsFree.setStatus("obsolete")
+_TCardIxrResFecBanksTotal_Type = Unsigned32
+_TCardIxrResFecBanksTotal_Object = MibTableColumn
+tCardIxrResFecBanksTotal = _TCardIxrResFecBanksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 7),
+    _TCardIxrResFecBanksTotal_Type()
+)
+tCardIxrResFecBanksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecBanksTotal.setStatus("current")
+_TCardIxrResFecBanksAlloc_Type = Unsigned32
+_TCardIxrResFecBanksAlloc_Object = MibTableColumn
+tCardIxrResFecBanksAlloc = _TCardIxrResFecBanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 8),
+    _TCardIxrResFecBanksAlloc_Type()
+)
+tCardIxrResFecBanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecBanksAlloc.setStatus("current")
+_TCardIxrResFecBanksFree_Type = Unsigned32
+_TCardIxrResFecBanksFree_Object = MibTableColumn
+tCardIxrResFecBanksFree = _TCardIxrResFecBanksFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 9),
+    _TCardIxrResFecBanksFree_Type()
+)
+tCardIxrResFecBanksFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecBanksFree.setStatus("current")
+_TCardIxrResFecLevel1BanksAlloc_Type = Unsigned32
+_TCardIxrResFecLevel1BanksAlloc_Object = MibTableColumn
+tCardIxrResFecLevel1BanksAlloc = _TCardIxrResFecLevel1BanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 10),
+    _TCardIxrResFecLevel1BanksAlloc_Type()
+)
+tCardIxrResFecLevel1BanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel1BanksAlloc.setStatus("current")
+_TCardIxrResFecLevel2BanksAlloc_Type = Unsigned32
+_TCardIxrResFecLevel2BanksAlloc_Object = MibTableColumn
+tCardIxrResFecLevel2BanksAlloc = _TCardIxrResFecLevel2BanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 11),
+    _TCardIxrResFecLevel2BanksAlloc_Type()
+)
+tCardIxrResFecLevel2BanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel2BanksAlloc.setStatus("current")
+_TCardIxrResFecsTotal_Type = Unsigned32
+_TCardIxrResFecsTotal_Object = MibTableColumn
+tCardIxrResFecsTotal = _TCardIxrResFecsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 12),
+    _TCardIxrResFecsTotal_Type()
+)
+tCardIxrResFecsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecsTotal.setStatus("current")
+_TCardIxrResFecsAlloc_Type = Unsigned32
+_TCardIxrResFecsAlloc_Object = MibTableColumn
+tCardIxrResFecsAlloc = _TCardIxrResFecsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 13),
+    _TCardIxrResFecsAlloc_Type()
+)
+tCardIxrResFecsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecsAlloc.setStatus("current")
+_TCardIxrResFecsFree_Type = Unsigned32
+_TCardIxrResFecsFree_Object = MibTableColumn
+tCardIxrResFecsFree = _TCardIxrResFecsFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 14),
+    _TCardIxrResFecsFree_Type()
+)
+tCardIxrResFecsFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecsFree.setStatus("current")
+_TCardIxrResFecLevel1Total_Type = Unsigned32
+_TCardIxrResFecLevel1Total_Object = MibTableColumn
+tCardIxrResFecLevel1Total = _TCardIxrResFecLevel1Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 15),
+    _TCardIxrResFecLevel1Total_Type()
+)
+tCardIxrResFecLevel1Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel1Total.setStatus("current")
+_TCardIxrResFecLevel1Alloc_Type = Unsigned32
+_TCardIxrResFecLevel1Alloc_Object = MibTableColumn
+tCardIxrResFecLevel1Alloc = _TCardIxrResFecLevel1Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 16),
+    _TCardIxrResFecLevel1Alloc_Type()
+)
+tCardIxrResFecLevel1Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel1Alloc.setStatus("current")
+_TCardIxrResFecLevel1Free_Type = Unsigned32
+_TCardIxrResFecLevel1Free_Object = MibTableColumn
+tCardIxrResFecLevel1Free = _TCardIxrResFecLevel1Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 17),
+    _TCardIxrResFecLevel1Free_Type()
+)
+tCardIxrResFecLevel1Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel1Free.setStatus("current")
+_TCardIxrResFecLevel2Total_Type = Unsigned32
+_TCardIxrResFecLevel2Total_Object = MibTableColumn
+tCardIxrResFecLevel2Total = _TCardIxrResFecLevel2Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 18),
+    _TCardIxrResFecLevel2Total_Type()
+)
+tCardIxrResFecLevel2Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel2Total.setStatus("current")
+_TCardIxrResFecLevel2Alloc_Type = Unsigned32
+_TCardIxrResFecLevel2Alloc_Object = MibTableColumn
+tCardIxrResFecLevel2Alloc = _TCardIxrResFecLevel2Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 19),
+    _TCardIxrResFecLevel2Alloc_Type()
+)
+tCardIxrResFecLevel2Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel2Alloc.setStatus("current")
+_TCardIxrResFecLevel2Free_Type = Unsigned32
+_TCardIxrResFecLevel2Free_Object = MibTableColumn
+tCardIxrResFecLevel2Free = _TCardIxrResFecLevel2Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 20),
+    _TCardIxrResFecLevel2Free_Type()
+)
+tCardIxrResFecLevel2Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel2Free.setStatus("current")
+_TCardIxrResGrpFecsTotal_Type = Unsigned32
+_TCardIxrResGrpFecsTotal_Object = MibTableColumn
+tCardIxrResGrpFecsTotal = _TCardIxrResGrpFecsTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 21),
+    _TCardIxrResGrpFecsTotal_Type()
+)
+tCardIxrResGrpFecsTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecsTotal.setStatus("current")
+_TCardIxrResGrpFecsAlloc_Type = Unsigned32
+_TCardIxrResGrpFecsAlloc_Object = MibTableColumn
+tCardIxrResGrpFecsAlloc = _TCardIxrResGrpFecsAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 22),
+    _TCardIxrResGrpFecsAlloc_Type()
+)
+tCardIxrResGrpFecsAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecsAlloc.setStatus("current")
+_TCardIxrResGrpFecsFree_Type = Unsigned32
+_TCardIxrResGrpFecsFree_Object = MibTableColumn
+tCardIxrResGrpFecsFree = _TCardIxrResGrpFecsFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 23),
+    _TCardIxrResGrpFecsFree_Type()
+)
+tCardIxrResGrpFecsFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecsFree.setStatus("current")
+_TCardIxrResGrpFecBanksTotal_Type = Unsigned32
+_TCardIxrResGrpFecBanksTotal_Object = MibTableColumn
+tCardIxrResGrpFecBanksTotal = _TCardIxrResGrpFecBanksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 24),
+    _TCardIxrResGrpFecBanksTotal_Type()
+)
+tCardIxrResGrpFecBanksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecBanksTotal.setStatus("current")
+_TCardIxrResGrpFecBanksAlloc_Type = Unsigned32
+_TCardIxrResGrpFecBanksAlloc_Object = MibTableColumn
+tCardIxrResGrpFecBanksAlloc = _TCardIxrResGrpFecBanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 25),
+    _TCardIxrResGrpFecBanksAlloc_Type()
+)
+tCardIxrResGrpFecBanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecBanksAlloc.setStatus("current")
+_TCardIxrResGrpFecBanksFree_Type = Unsigned32
+_TCardIxrResGrpFecBanksFree_Object = MibTableColumn
+tCardIxrResGrpFecBanksFree = _TCardIxrResGrpFecBanksFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 26),
+    _TCardIxrResGrpFecBanksFree_Type()
+)
+tCardIxrResGrpFecBanksFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecBanksFree.setStatus("current")
+_TCardIxrResGrpFecLvl1BanksAlloc_Type = Unsigned32
+_TCardIxrResGrpFecLvl1BanksAlloc_Object = MibTableColumn
+tCardIxrResGrpFecLvl1BanksAlloc = _TCardIxrResGrpFecLvl1BanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 27),
+    _TCardIxrResGrpFecLvl1BanksAlloc_Type()
+)
+tCardIxrResGrpFecLvl1BanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLvl1BanksAlloc.setStatus("current")
+_TCardIxrResGrpFecLvl2BanksAlloc_Type = Unsigned32
+_TCardIxrResGrpFecLvl2BanksAlloc_Object = MibTableColumn
+tCardIxrResGrpFecLvl2BanksAlloc = _TCardIxrResGrpFecLvl2BanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 28),
+    _TCardIxrResGrpFecLvl2BanksAlloc_Type()
+)
+tCardIxrResGrpFecLvl2BanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLvl2BanksAlloc.setStatus("current")
+_TCardIxrResGrpFecLevel1Total_Type = Unsigned32
+_TCardIxrResGrpFecLevel1Total_Object = MibTableColumn
+tCardIxrResGrpFecLevel1Total = _TCardIxrResGrpFecLevel1Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 29),
+    _TCardIxrResGrpFecLevel1Total_Type()
+)
+tCardIxrResGrpFecLevel1Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel1Total.setStatus("current")
+_TCardIxrResGrpFecLevel1Alloc_Type = Unsigned32
+_TCardIxrResGrpFecLevel1Alloc_Object = MibTableColumn
+tCardIxrResGrpFecLevel1Alloc = _TCardIxrResGrpFecLevel1Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 30),
+    _TCardIxrResGrpFecLevel1Alloc_Type()
+)
+tCardIxrResGrpFecLevel1Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel1Alloc.setStatus("current")
+_TCardIxrResGrpFecLevel1Free_Type = Unsigned32
+_TCardIxrResGrpFecLevel1Free_Object = MibTableColumn
+tCardIxrResGrpFecLevel1Free = _TCardIxrResGrpFecLevel1Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 31),
+    _TCardIxrResGrpFecLevel1Free_Type()
+)
+tCardIxrResGrpFecLevel1Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel1Free.setStatus("current")
+_TCardIxrResGrpFecLevel2Total_Type = Unsigned32
+_TCardIxrResGrpFecLevel2Total_Object = MibTableColumn
+tCardIxrResGrpFecLevel2Total = _TCardIxrResGrpFecLevel2Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 32),
+    _TCardIxrResGrpFecLevel2Total_Type()
+)
+tCardIxrResGrpFecLevel2Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel2Total.setStatus("current")
+_TCardIxrResGrpFecLevel2Alloc_Type = Unsigned32
+_TCardIxrResGrpFecLevel2Alloc_Object = MibTableColumn
+tCardIxrResGrpFecLevel2Alloc = _TCardIxrResGrpFecLevel2Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 33),
+    _TCardIxrResGrpFecLevel2Alloc_Type()
+)
+tCardIxrResGrpFecLevel2Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel2Alloc.setStatus("current")
+_TCardIxrResGrpFecLevel2Free_Type = Unsigned32
+_TCardIxrResGrpFecLevel2Free_Object = MibTableColumn
+tCardIxrResGrpFecLevel2Free = _TCardIxrResGrpFecLevel2Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 34),
+    _TCardIxrResGrpFecLevel2Free_Type()
+)
+tCardIxrResGrpFecLevel2Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel2Free.setStatus("current")
+_TCardIxrResIlmSwapTotal_Type = Unsigned32
+_TCardIxrResIlmSwapTotal_Object = MibTableColumn
+tCardIxrResIlmSwapTotal = _TCardIxrResIlmSwapTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 35),
+    _TCardIxrResIlmSwapTotal_Type()
+)
+tCardIxrResIlmSwapTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResIlmSwapTotal.setStatus("current")
+_TCardIxrResIlmSwapAlloc_Type = Unsigned32
+_TCardIxrResIlmSwapAlloc_Object = MibTableColumn
+tCardIxrResIlmSwapAlloc = _TCardIxrResIlmSwapAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 36),
+    _TCardIxrResIlmSwapAlloc_Type()
+)
+tCardIxrResIlmSwapAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResIlmSwapAlloc.setStatus("current")
+_TCardIxrResIlmSwapFree_Type = Unsigned32
+_TCardIxrResIlmSwapFree_Object = MibTableColumn
+tCardIxrResIlmSwapFree = _TCardIxrResIlmSwapFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 37),
+    _TCardIxrResIlmSwapFree_Type()
+)
+tCardIxrResIlmSwapFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResIlmSwapFree.setStatus("current")
+_TCardIxrResFecLevel3Total_Type = Unsigned32
+_TCardIxrResFecLevel3Total_Object = MibTableColumn
+tCardIxrResFecLevel3Total = _TCardIxrResFecLevel3Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 38),
+    _TCardIxrResFecLevel3Total_Type()
+)
+tCardIxrResFecLevel3Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel3Total.setStatus("current")
+_TCardIxrResFecLevel3Alloc_Type = Unsigned32
+_TCardIxrResFecLevel3Alloc_Object = MibTableColumn
+tCardIxrResFecLevel3Alloc = _TCardIxrResFecLevel3Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 39),
+    _TCardIxrResFecLevel3Alloc_Type()
+)
+tCardIxrResFecLevel3Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel3Alloc.setStatus("current")
+_TCardIxrResFecLevel3Free_Type = Unsigned32
+_TCardIxrResFecLevel3Free_Object = MibTableColumn
+tCardIxrResFecLevel3Free = _TCardIxrResFecLevel3Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 40),
+    _TCardIxrResFecLevel3Free_Type()
+)
+tCardIxrResFecLevel3Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResFecLevel3Free.setStatus("current")
+_TCardIxrResGrpFecLvl3BanksAlloc_Type = Unsigned32
+_TCardIxrResGrpFecLvl3BanksAlloc_Object = MibTableColumn
+tCardIxrResGrpFecLvl3BanksAlloc = _TCardIxrResGrpFecLvl3BanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 41),
+    _TCardIxrResGrpFecLvl3BanksAlloc_Type()
+)
+tCardIxrResGrpFecLvl3BanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLvl3BanksAlloc.setStatus("current")
+_TCardIxrResGrpFecLevel3Total_Type = Unsigned32
+_TCardIxrResGrpFecLevel3Total_Object = MibTableColumn
+tCardIxrResGrpFecLevel3Total = _TCardIxrResGrpFecLevel3Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 42),
+    _TCardIxrResGrpFecLevel3Total_Type()
+)
+tCardIxrResGrpFecLevel3Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel3Total.setStatus("current")
+_TCardIxrResGrpFecLevel3Alloc_Type = Unsigned32
+_TCardIxrResGrpFecLevel3Alloc_Object = MibTableColumn
+tCardIxrResGrpFecLevel3Alloc = _TCardIxrResGrpFecLevel3Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 43),
+    _TCardIxrResGrpFecLevel3Alloc_Type()
+)
+tCardIxrResGrpFecLevel3Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel3Alloc.setStatus("current")
+_TCardIxrResGrpFecLevel3Free_Type = Unsigned32
+_TCardIxrResGrpFecLevel3Free_Object = MibTableColumn
+tCardIxrResGrpFecLevel3Free = _TCardIxrResGrpFecLevel3Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 44),
+    _TCardIxrResGrpFecLevel3Free_Type()
+)
+tCardIxrResGrpFecLevel3Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResGrpFecLevel3Free.setStatus("current")
+_TCardIxrResPpmcBestCaseEstTotal_Type = Unsigned32
+_TCardIxrResPpmcBestCaseEstTotal_Object = MibTableColumn
+tCardIxrResPpmcBestCaseEstTotal = _TCardIxrResPpmcBestCaseEstTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 45),
+    _TCardIxrResPpmcBestCaseEstTotal_Type()
+)
+tCardIxrResPpmcBestCaseEstTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResPpmcBestCaseEstTotal.setStatus("current")
+_TCardIxrResPpmcWrstCaseEstTotal_Type = Unsigned32
+_TCardIxrResPpmcWrstCaseEstTotal_Object = MibTableColumn
+tCardIxrResPpmcWrstCaseEstTotal = _TCardIxrResPpmcWrstCaseEstTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 46),
+    _TCardIxrResPpmcWrstCaseEstTotal_Type()
+)
+tCardIxrResPpmcWrstCaseEstTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResPpmcWrstCaseEstTotal.setStatus("current")
+_TCardIxrResPpmcSingleLevelAlloc_Type = Unsigned32
+_TCardIxrResPpmcSingleLevelAlloc_Object = MibTableColumn
+tCardIxrResPpmcSingleLevelAlloc = _TCardIxrResPpmcSingleLevelAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 47),
+    _TCardIxrResPpmcSingleLevelAlloc_Type()
+)
+tCardIxrResPpmcSingleLevelAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResPpmcSingleLevelAlloc.setStatus("current")
+_TCardIxrResPpmcMultiLevelAlloc_Type = Unsigned32
+_TCardIxrResPpmcMultiLevelAlloc_Object = MibTableColumn
+tCardIxrResPpmcMultiLevelAlloc = _TCardIxrResPpmcMultiLevelAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 48),
+    _TCardIxrResPpmcMultiLevelAlloc_Type()
+)
+tCardIxrResPpmcMultiLevelAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResPpmcMultiLevelAlloc.setStatus("current")
+_TCardIxrResPpmcExhausted_Type = TruthValue
+_TCardIxrResPpmcExhausted_Object = MibTableColumn
+tCardIxrResPpmcExhausted = _TCardIxrResPpmcExhausted_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 99, 1, 49),
+    _TCardIxrResPpmcExhausted_Type()
+)
+tCardIxrResPpmcExhausted.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResPpmcExhausted.setStatus("current")
+_TCardIxrResourceOwnerTable_Object = MibTable
+tCardIxrResourceOwnerTable = _TCardIxrResourceOwnerTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100)
+)
+if mibBuilder.loadTexts:
+    tCardIxrResourceOwnerTable.setStatus("current")
+_TCardIxrResourceOwnerEntry_Object = MibTableRow
+tCardIxrResourceOwnerEntry = _TCardIxrResourceOwnerEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1)
+)
+tCardIxrResourceOwnerEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tCardIxrResourceOwner"),
+)
+if mibBuilder.loadTexts:
+    tCardIxrResourceOwnerEntry.setStatus("current")
+_TCardIxrResourceOwner_Type = TmnxCardIxrResourceOwner
+_TCardIxrResourceOwner_Object = MibTableColumn
+tCardIxrResourceOwner = _TCardIxrResourceOwner_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 1),
+    _TCardIxrResourceOwner_Type()
+)
+tCardIxrResourceOwner.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tCardIxrResourceOwner.setStatus("current")
+_TCardIxrResOwnFecLevel1Alloc_Type = Unsigned32
+_TCardIxrResOwnFecLevel1Alloc_Object = MibTableColumn
+tCardIxrResOwnFecLevel1Alloc = _TCardIxrResOwnFecLevel1Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 2),
+    _TCardIxrResOwnFecLevel1Alloc_Type()
+)
+tCardIxrResOwnFecLevel1Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnFecLevel1Alloc.setStatus("current")
+_TCardIxrResOwnFecLevel2Alloc_Type = Unsigned32
+_TCardIxrResOwnFecLevel2Alloc_Object = MibTableColumn
+tCardIxrResOwnFecLevel2Alloc = _TCardIxrResOwnFecLevel2Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 3),
+    _TCardIxrResOwnFecLevel2Alloc_Type()
+)
+tCardIxrResOwnFecLevel2Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnFecLevel2Alloc.setStatus("current")
+_TCardIxrResOwnGrpFecAlloc_Type = Unsigned32
+_TCardIxrResOwnGrpFecAlloc_Object = MibTableColumn
+tCardIxrResOwnGrpFecAlloc = _TCardIxrResOwnGrpFecAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 4),
+    _TCardIxrResOwnGrpFecAlloc_Type()
+)
+tCardIxrResOwnGrpFecAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnGrpFecAlloc.setStatus("current")
+_TCardIxrResOwnGrpFecLevel1Alloc_Type = Unsigned32
+_TCardIxrResOwnGrpFecLevel1Alloc_Object = MibTableColumn
+tCardIxrResOwnGrpFecLevel1Alloc = _TCardIxrResOwnGrpFecLevel1Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 5),
+    _TCardIxrResOwnGrpFecLevel1Alloc_Type()
+)
+tCardIxrResOwnGrpFecLevel1Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnGrpFecLevel1Alloc.setStatus("current")
+_TCardIxrResOwnGrpFecLevel2Alloc_Type = Unsigned32
+_TCardIxrResOwnGrpFecLevel2Alloc_Object = MibTableColumn
+tCardIxrResOwnGrpFecLevel2Alloc = _TCardIxrResOwnGrpFecLevel2Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 6),
+    _TCardIxrResOwnGrpFecLevel2Alloc_Type()
+)
+tCardIxrResOwnGrpFecLevel2Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnGrpFecLevel2Alloc.setStatus("current")
+_TCardIxrResOwnFecLevel3Alloc_Type = Unsigned32
+_TCardIxrResOwnFecLevel3Alloc_Object = MibTableColumn
+tCardIxrResOwnFecLevel3Alloc = _TCardIxrResOwnFecLevel3Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 7),
+    _TCardIxrResOwnFecLevel3Alloc_Type()
+)
+tCardIxrResOwnFecLevel3Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnFecLevel3Alloc.setStatus("current")
+_TCardIxrResOwnGrpFecLevel3Alloc_Type = Unsigned32
+_TCardIxrResOwnGrpFecLevel3Alloc_Object = MibTableColumn
+tCardIxrResOwnGrpFecLevel3Alloc = _TCardIxrResOwnGrpFecLevel3Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 8),
+    _TCardIxrResOwnGrpFecLevel3Alloc_Type()
+)
+tCardIxrResOwnGrpFecLevel3Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnGrpFecLevel3Alloc.setStatus("current")
+_TCardIxrResOwnPpmcSingleLvlAlloc_Type = Unsigned32
+_TCardIxrResOwnPpmcSingleLvlAlloc_Object = MibTableColumn
+tCardIxrResOwnPpmcSingleLvlAlloc = _TCardIxrResOwnPpmcSingleLvlAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 9),
+    _TCardIxrResOwnPpmcSingleLvlAlloc_Type()
+)
+tCardIxrResOwnPpmcSingleLvlAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnPpmcSingleLvlAlloc.setStatus("current")
+_TCardIxrResOwnPpmcMultiLvlAlloc_Type = Unsigned32
+_TCardIxrResOwnPpmcMultiLvlAlloc_Object = MibTableColumn
+tCardIxrResOwnPpmcMultiLvlAlloc = _TCardIxrResOwnPpmcMultiLvlAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 100, 1, 10),
+    _TCardIxrResOwnPpmcMultiLvlAlloc_Type()
+)
+tCardIxrResOwnPpmcMultiLvlAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tCardIxrResOwnPpmcMultiLvlAlloc.setStatus("current")
+_TFpIxrResourceTable_Object = MibTable
+tFpIxrResourceTable = _TFpIxrResourceTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102)
+)
+if mibBuilder.loadTexts:
+    tFpIxrResourceTable.setStatus("current")
+_TFpIxrResourceEntry_Object = MibTableRow
+tFpIxrResourceEntry = _TFpIxrResourceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1)
+)
+tFpIxrResourceEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFPIxrResFPNum"),
+)
+if mibBuilder.loadTexts:
+    tFpIxrResourceEntry.setStatus("current")
+_TFPIxrResFPNum_Type = TmnxFPNumber
+_TFPIxrResFPNum_Object = MibTableColumn
+tFPIxrResFPNum = _TFPIxrResFPNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 1),
+    _TFPIxrResFPNum_Type()
+)
+tFPIxrResFPNum.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFPIxrResFPNum.setStatus("current")
+_TFpIxrResEgrGlobalLifMapTotal_Type = Unsigned32
+_TFpIxrResEgrGlobalLifMapTotal_Object = MibTableColumn
+tFpIxrResEgrGlobalLifMapTotal = _TFpIxrResEgrGlobalLifMapTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 2),
+    _TFpIxrResEgrGlobalLifMapTotal_Type()
+)
+tFpIxrResEgrGlobalLifMapTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrGlobalLifMapTotal.setStatus("current")
+_TFpIxrResEgrGlobalLifMapAlloc_Type = Unsigned32
+_TFpIxrResEgrGlobalLifMapAlloc_Object = MibTableColumn
+tFpIxrResEgrGlobalLifMapAlloc = _TFpIxrResEgrGlobalLifMapAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 3),
+    _TFpIxrResEgrGlobalLifMapAlloc_Type()
+)
+tFpIxrResEgrGlobalLifMapAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrGlobalLifMapAlloc.setStatus("current")
+_TFpIxrResEgrGlobalLifMapFree_Type = Unsigned32
+_TFpIxrResEgrGlobalLifMapFree_Object = MibTableColumn
+tFpIxrResEgrGlobalLifMapFree = _TFpIxrResEgrGlobalLifMapFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 4),
+    _TFpIxrResEgrGlobalLifMapFree_Type()
+)
+tFpIxrResEgrGlobalLifMapFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrGlobalLifMapFree.setStatus("current")
+_TFpIxrResIngTerminationATotal_Type = Unsigned32
+_TFpIxrResIngTerminationATotal_Object = MibTableColumn
+tFpIxrResIngTerminationATotal = _TFpIxrResIngTerminationATotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 5),
+    _TFpIxrResIngTerminationATotal_Type()
+)
+tFpIxrResIngTerminationATotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngTerminationATotal.setStatus("current")
+_TFpIxrResIngTerminationAAlloc_Type = Unsigned32
+_TFpIxrResIngTerminationAAlloc_Object = MibTableColumn
+tFpIxrResIngTerminationAAlloc = _TFpIxrResIngTerminationAAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 6),
+    _TFpIxrResIngTerminationAAlloc_Type()
+)
+tFpIxrResIngTerminationAAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngTerminationAAlloc.setStatus("current")
+_TFpIxrResIngTerminationAFree_Type = Unsigned32
+_TFpIxrResIngTerminationAFree_Object = MibTableColumn
+tFpIxrResIngTerminationAFree = _TFpIxrResIngTerminationAFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 7),
+    _TFpIxrResIngTerminationAFree_Type()
+)
+tFpIxrResIngTerminationAFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngTerminationAFree.setStatus("current")
+_TFpIxrResIngTerminationBTotal_Type = Unsigned32
+_TFpIxrResIngTerminationBTotal_Object = MibTableColumn
+tFpIxrResIngTerminationBTotal = _TFpIxrResIngTerminationBTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 8),
+    _TFpIxrResIngTerminationBTotal_Type()
+)
+tFpIxrResIngTerminationBTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngTerminationBTotal.setStatus("current")
+_TFpIxrResIngTerminationBAlloc_Type = Unsigned32
+_TFpIxrResIngTerminationBAlloc_Object = MibTableColumn
+tFpIxrResIngTerminationBAlloc = _TFpIxrResIngTerminationBAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 9),
+    _TFpIxrResIngTerminationBAlloc_Type()
+)
+tFpIxrResIngTerminationBAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngTerminationBAlloc.setStatus("current")
+_TFpIxrResIngTerminationBFree_Type = Unsigned32
+_TFpIxrResIngTerminationBFree_Object = MibTableColumn
+tFpIxrResIngTerminationBFree = _TFpIxrResIngTerminationBFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 10),
+    _TFpIxrResIngTerminationBFree_Type()
+)
+tFpIxrResIngTerminationBFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngTerminationBFree.setStatus("current")
+_TFpIxrResIngEndpoint1Total_Type = Unsigned32
+_TFpIxrResIngEndpoint1Total_Object = MibTableColumn
+tFpIxrResIngEndpoint1Total = _TFpIxrResIngEndpoint1Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 11),
+    _TFpIxrResIngEndpoint1Total_Type()
+)
+tFpIxrResIngEndpoint1Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint1Total.setStatus("current")
+_TFpIxrResIngEndpoint1Alloc_Type = Unsigned32
+_TFpIxrResIngEndpoint1Alloc_Object = MibTableColumn
+tFpIxrResIngEndpoint1Alloc = _TFpIxrResIngEndpoint1Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 12),
+    _TFpIxrResIngEndpoint1Alloc_Type()
+)
+tFpIxrResIngEndpoint1Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint1Alloc.setStatus("current")
+_TFpIxrResIngEndpoint1Free_Type = Unsigned32
+_TFpIxrResIngEndpoint1Free_Object = MibTableColumn
+tFpIxrResIngEndpoint1Free = _TFpIxrResIngEndpoint1Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 13),
+    _TFpIxrResIngEndpoint1Free_Type()
+)
+tFpIxrResIngEndpoint1Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint1Free.setStatus("current")
+_TFpIxrResIngEndpoint2Total_Type = Unsigned32
+_TFpIxrResIngEndpoint2Total_Object = MibTableColumn
+tFpIxrResIngEndpoint2Total = _TFpIxrResIngEndpoint2Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 14),
+    _TFpIxrResIngEndpoint2Total_Type()
+)
+tFpIxrResIngEndpoint2Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint2Total.setStatus("current")
+_TFpIxrResIngEndpoint2Alloc_Type = Unsigned32
+_TFpIxrResIngEndpoint2Alloc_Object = MibTableColumn
+tFpIxrResIngEndpoint2Alloc = _TFpIxrResIngEndpoint2Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 15),
+    _TFpIxrResIngEndpoint2Alloc_Type()
+)
+tFpIxrResIngEndpoint2Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint2Alloc.setStatus("current")
+_TFpIxrResIngEndpoint2Free_Type = Unsigned32
+_TFpIxrResIngEndpoint2Free_Object = MibTableColumn
+tFpIxrResIngEndpoint2Free = _TFpIxrResIngEndpoint2Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 16),
+    _TFpIxrResIngEndpoint2Free_Type()
+)
+tFpIxrResIngEndpoint2Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint2Free.setStatus("current")
+_TFpIxrResIngEndpoint3Total_Type = Unsigned32
+_TFpIxrResIngEndpoint3Total_Object = MibTableColumn
+tFpIxrResIngEndpoint3Total = _TFpIxrResIngEndpoint3Total_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 17),
+    _TFpIxrResIngEndpoint3Total_Type()
+)
+tFpIxrResIngEndpoint3Total.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint3Total.setStatus("current")
+_TFpIxrResIngEndpoint3Alloc_Type = Unsigned32
+_TFpIxrResIngEndpoint3Alloc_Object = MibTableColumn
+tFpIxrResIngEndpoint3Alloc = _TFpIxrResIngEndpoint3Alloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 18),
+    _TFpIxrResIngEndpoint3Alloc_Type()
+)
+tFpIxrResIngEndpoint3Alloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint3Alloc.setStatus("current")
+_TFpIxrResIngEndpoint3Free_Type = Unsigned32
+_TFpIxrResIngEndpoint3Free_Object = MibTableColumn
+tFpIxrResIngEndpoint3Free = _TFpIxrResIngEndpoint3Free_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 19),
+    _TFpIxrResIngEndpoint3Free_Type()
+)
+tFpIxrResIngEndpoint3Free.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResIngEndpoint3Free.setStatus("current")
+_TFpIxrResEgrEncapBanksTotal_Type = Unsigned32
+_TFpIxrResEgrEncapBanksTotal_Object = MibTableColumn
+tFpIxrResEgrEncapBanksTotal = _TFpIxrResEgrEncapBanksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 20),
+    _TFpIxrResEgrEncapBanksTotal_Type()
+)
+tFpIxrResEgrEncapBanksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapBanksTotal.setStatus("current")
+_TFpIxrResEgrEncapBanksAlloc_Type = Unsigned32
+_TFpIxrResEgrEncapBanksAlloc_Object = MibTableColumn
+tFpIxrResEgrEncapBanksAlloc = _TFpIxrResEgrEncapBanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 21),
+    _TFpIxrResEgrEncapBanksAlloc_Type()
+)
+tFpIxrResEgrEncapBanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapBanksAlloc.setStatus("current")
+_TFpIxrResEgrEncapBanksFree_Type = Unsigned32
+_TFpIxrResEgrEncapBanksFree_Object = MibTableColumn
+tFpIxrResEgrEncapBanksFree = _TFpIxrResEgrEncapBanksFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 22),
+    _TFpIxrResEgrEncapBanksFree_Type()
+)
+tFpIxrResEgrEncapBanksFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapBanksFree.setStatus("current")
+_TFpIxrResEgrEncapEntriesTotal_Type = Unsigned32
+_TFpIxrResEgrEncapEntriesTotal_Object = MibTableColumn
+tFpIxrResEgrEncapEntriesTotal = _TFpIxrResEgrEncapEntriesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 23),
+    _TFpIxrResEgrEncapEntriesTotal_Type()
+)
+tFpIxrResEgrEncapEntriesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapEntriesTotal.setStatus("current")
+_TFpIxrResEgrEncapEntriesAlloc_Type = Unsigned32
+_TFpIxrResEgrEncapEntriesAlloc_Object = MibTableColumn
+tFpIxrResEgrEncapEntriesAlloc = _TFpIxrResEgrEncapEntriesAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 24),
+    _TFpIxrResEgrEncapEntriesAlloc_Type()
+)
+tFpIxrResEgrEncapEntriesAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapEntriesAlloc.setStatus("current")
+_TFpIxrResEgrEncapEntriesFree_Type = Unsigned32
+_TFpIxrResEgrEncapEntriesFree_Object = MibTableColumn
+tFpIxrResEgrEncapEntriesFree = _TFpIxrResEgrEncapEntriesFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 25),
+    _TFpIxrResEgrEncapEntriesFree_Type()
+)
+tFpIxrResEgrEncapEntriesFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapEntriesFree.setStatus("current")
+_TFpIxrResEgrRoutedBanks_Type = Unsigned32
+_TFpIxrResEgrRoutedBanks_Object = MibTableColumn
+tFpIxrResEgrRoutedBanks = _TFpIxrResEgrRoutedBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 26),
+    _TFpIxrResEgrRoutedBanks_Type()
+)
+tFpIxrResEgrRoutedBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrRoutedBanks.setStatus("current")
+_TFpIxrResEgrRoutedTotal_Type = Unsigned32
+_TFpIxrResEgrRoutedTotal_Object = MibTableColumn
+tFpIxrResEgrRoutedTotal = _TFpIxrResEgrRoutedTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 27),
+    _TFpIxrResEgrRoutedTotal_Type()
+)
+tFpIxrResEgrRoutedTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrRoutedTotal.setStatus("current")
+_TFpIxrResEgrRoutedAlloc_Type = Unsigned32
+_TFpIxrResEgrRoutedAlloc_Object = MibTableColumn
+tFpIxrResEgrRoutedAlloc = _TFpIxrResEgrRoutedAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 28),
+    _TFpIxrResEgrRoutedAlloc_Type()
+)
+tFpIxrResEgrRoutedAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrRoutedAlloc.setStatus("current")
+_TFpIxrResEgrRoutedFree_Type = Unsigned32
+_TFpIxrResEgrRoutedFree_Object = MibTableColumn
+tFpIxrResEgrRoutedFree = _TFpIxrResEgrRoutedFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 29),
+    _TFpIxrResEgrRoutedFree_Type()
+)
+tFpIxrResEgrRoutedFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrRoutedFree.setStatus("current")
+_TFpIxrResEgrTdmBanks_Type = Unsigned32
+_TFpIxrResEgrTdmBanks_Object = MibTableColumn
+tFpIxrResEgrTdmBanks = _TFpIxrResEgrTdmBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 30),
+    _TFpIxrResEgrTdmBanks_Type()
+)
+tFpIxrResEgrTdmBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrTdmBanks.setStatus("current")
+_TFpIxrResEgrTdmTotal_Type = Unsigned32
+_TFpIxrResEgrTdmTotal_Object = MibTableColumn
+tFpIxrResEgrTdmTotal = _TFpIxrResEgrTdmTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 31),
+    _TFpIxrResEgrTdmTotal_Type()
+)
+tFpIxrResEgrTdmTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrTdmTotal.setStatus("current")
+_TFpIxrResEgrTdmAlloc_Type = Unsigned32
+_TFpIxrResEgrTdmAlloc_Object = MibTableColumn
+tFpIxrResEgrTdmAlloc = _TFpIxrResEgrTdmAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 32),
+    _TFpIxrResEgrTdmAlloc_Type()
+)
+tFpIxrResEgrTdmAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrTdmAlloc.setStatus("current")
+_TFpIxrResEgrTdmFree_Type = Unsigned32
+_TFpIxrResEgrTdmFree_Object = MibTableColumn
+tFpIxrResEgrTdmFree = _TFpIxrResEgrTdmFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 33),
+    _TFpIxrResEgrTdmFree_Type()
+)
+tFpIxrResEgrTdmFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrTdmFree.setStatus("current")
+_TFpIxrResEgrPortVlanXlatBanks_Type = Unsigned32
+_TFpIxrResEgrPortVlanXlatBanks_Object = MibTableColumn
+tFpIxrResEgrPortVlanXlatBanks = _TFpIxrResEgrPortVlanXlatBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 34),
+    _TFpIxrResEgrPortVlanXlatBanks_Type()
+)
+tFpIxrResEgrPortVlanXlatBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXlatBanks.setStatus("current")
+_TFpIxrResEgrPortVlanXlatTotal_Type = Unsigned32
+_TFpIxrResEgrPortVlanXlatTotal_Object = MibTableColumn
+tFpIxrResEgrPortVlanXlatTotal = _TFpIxrResEgrPortVlanXlatTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 35),
+    _TFpIxrResEgrPortVlanXlatTotal_Type()
+)
+tFpIxrResEgrPortVlanXlatTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXlatTotal.setStatus("current")
+_TFpIxrResEgrPortVlanXlatAlloc_Type = Unsigned32
+_TFpIxrResEgrPortVlanXlatAlloc_Object = MibTableColumn
+tFpIxrResEgrPortVlanXlatAlloc = _TFpIxrResEgrPortVlanXlatAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 36),
+    _TFpIxrResEgrPortVlanXlatAlloc_Type()
+)
+tFpIxrResEgrPortVlanXlatAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXlatAlloc.setStatus("current")
+_TFpIxrResEgrPortVlanXlatFree_Type = Unsigned32
+_TFpIxrResEgrPortVlanXlatFree_Object = MibTableColumn
+tFpIxrResEgrPortVlanXlatFree = _TFpIxrResEgrPortVlanXlatFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 37),
+    _TFpIxrResEgrPortVlanXlatFree_Type()
+)
+tFpIxrResEgrPortVlanXlatFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXlatFree.setStatus("current")
+_TFpIxrResEgrArpBanks_Type = Unsigned32
+_TFpIxrResEgrArpBanks_Object = MibTableColumn
+tFpIxrResEgrArpBanks = _TFpIxrResEgrArpBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 38),
+    _TFpIxrResEgrArpBanks_Type()
+)
+tFpIxrResEgrArpBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpBanks.setStatus("current")
+_TFpIxrResEgrArpTotal_Type = Unsigned32
+_TFpIxrResEgrArpTotal_Object = MibTableColumn
+tFpIxrResEgrArpTotal = _TFpIxrResEgrArpTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 39),
+    _TFpIxrResEgrArpTotal_Type()
+)
+tFpIxrResEgrArpTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpTotal.setStatus("current")
+_TFpIxrResEgrArpAlloc_Type = Unsigned32
+_TFpIxrResEgrArpAlloc_Object = MibTableColumn
+tFpIxrResEgrArpAlloc = _TFpIxrResEgrArpAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 40),
+    _TFpIxrResEgrArpAlloc_Type()
+)
+tFpIxrResEgrArpAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpAlloc.setStatus("current")
+_TFpIxrResEgrArpFree_Type = Unsigned32
+_TFpIxrResEgrArpFree_Object = MibTableColumn
+tFpIxrResEgrArpFree = _TFpIxrResEgrArpFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 41),
+    _TFpIxrResEgrArpFree_Type()
+)
+tFpIxrResEgrArpFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpFree.setStatus("current")
+_TFpIxrResEgrLabelPushBanks_Type = Unsigned32
+_TFpIxrResEgrLabelPushBanks_Object = MibTableColumn
+tFpIxrResEgrLabelPushBanks = _TFpIxrResEgrLabelPushBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 42),
+    _TFpIxrResEgrLabelPushBanks_Type()
+)
+tFpIxrResEgrLabelPushBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushBanks.setStatus("current")
+_TFpIxrResEgrLabelPushTotal_Type = Unsigned32
+_TFpIxrResEgrLabelPushTotal_Object = MibTableColumn
+tFpIxrResEgrLabelPushTotal = _TFpIxrResEgrLabelPushTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 43),
+    _TFpIxrResEgrLabelPushTotal_Type()
+)
+tFpIxrResEgrLabelPushTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushTotal.setStatus("current")
+_TFpIxrResEgrLabelPushAlloc_Type = Unsigned32
+_TFpIxrResEgrLabelPushAlloc_Object = MibTableColumn
+tFpIxrResEgrLabelPushAlloc = _TFpIxrResEgrLabelPushAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 44),
+    _TFpIxrResEgrLabelPushAlloc_Type()
+)
+tFpIxrResEgrLabelPushAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushAlloc.setStatus("current")
+_TFpIxrResEgrLabelPushFree_Type = Unsigned32
+_TFpIxrResEgrLabelPushFree_Object = MibTableColumn
+tFpIxrResEgrLabelPushFree = _TFpIxrResEgrLabelPushFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 45),
+    _TFpIxrResEgrLabelPushFree_Type()
+)
+tFpIxrResEgrLabelPushFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushFree.setStatus("current")
+_TFpIxrResEgrLabelSwapPushBanks_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPushBanks_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPushBanks = _TFpIxrResEgrLabelSwapPushBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 46),
+    _TFpIxrResEgrLabelSwapPushBanks_Type()
+)
+tFpIxrResEgrLabelSwapPushBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPushBanks.setStatus("current")
+_TFpIxrResEgrLabelSwapPushTotal_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPushTotal_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPushTotal = _TFpIxrResEgrLabelSwapPushTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 47),
+    _TFpIxrResEgrLabelSwapPushTotal_Type()
+)
+tFpIxrResEgrLabelSwapPushTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPushTotal.setStatus("current")
+_TFpIxrResEgrLabelSwapPushAlloc_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPushAlloc_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPushAlloc = _TFpIxrResEgrLabelSwapPushAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 48),
+    _TFpIxrResEgrLabelSwapPushAlloc_Type()
+)
+tFpIxrResEgrLabelSwapPushAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPushAlloc.setStatus("current")
+_TFpIxrResEgrLabelSwapPushFree_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPushFree_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPushFree = _TFpIxrResEgrLabelSwapPushFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 49),
+    _TFpIxrResEgrLabelSwapPushFree_Type()
+)
+tFpIxrResEgrLabelSwapPushFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPushFree.setStatus("current")
+_TFpIxrResEgrPortVlanXltExtBanks_Type = Unsigned32
+_TFpIxrResEgrPortVlanXltExtBanks_Object = MibTableColumn
+tFpIxrResEgrPortVlanXltExtBanks = _TFpIxrResEgrPortVlanXltExtBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 50),
+    _TFpIxrResEgrPortVlanXltExtBanks_Type()
+)
+tFpIxrResEgrPortVlanXltExtBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXltExtBanks.setStatus("current")
+_TFpIxrResEgrPortVlanXltExtTotal_Type = Unsigned32
+_TFpIxrResEgrPortVlanXltExtTotal_Object = MibTableColumn
+tFpIxrResEgrPortVlanXltExtTotal = _TFpIxrResEgrPortVlanXltExtTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 51),
+    _TFpIxrResEgrPortVlanXltExtTotal_Type()
+)
+tFpIxrResEgrPortVlanXltExtTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXltExtTotal.setStatus("current")
+_TFpIxrResEgrPortVlanXltExtAlloc_Type = Unsigned32
+_TFpIxrResEgrPortVlanXltExtAlloc_Object = MibTableColumn
+tFpIxrResEgrPortVlanXltExtAlloc = _TFpIxrResEgrPortVlanXltExtAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 52),
+    _TFpIxrResEgrPortVlanXltExtAlloc_Type()
+)
+tFpIxrResEgrPortVlanXltExtAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXltExtAlloc.setStatus("current")
+_TFpIxrResEgrPortVlanXltExtFree_Type = Unsigned32
+_TFpIxrResEgrPortVlanXltExtFree_Object = MibTableColumn
+tFpIxrResEgrPortVlanXltExtFree = _TFpIxrResEgrPortVlanXltExtFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 53),
+    _TFpIxrResEgrPortVlanXltExtFree_Type()
+)
+tFpIxrResEgrPortVlanXltExtFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrPortVlanXltExtFree.setStatus("current")
+_TFpIxrResEgrArpExtBanks_Type = Unsigned32
+_TFpIxrResEgrArpExtBanks_Object = MibTableColumn
+tFpIxrResEgrArpExtBanks = _TFpIxrResEgrArpExtBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 54),
+    _TFpIxrResEgrArpExtBanks_Type()
+)
+tFpIxrResEgrArpExtBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpExtBanks.setStatus("current")
+_TFpIxrResEgrArpExtTotal_Type = Unsigned32
+_TFpIxrResEgrArpExtTotal_Object = MibTableColumn
+tFpIxrResEgrArpExtTotal = _TFpIxrResEgrArpExtTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 55),
+    _TFpIxrResEgrArpExtTotal_Type()
+)
+tFpIxrResEgrArpExtTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpExtTotal.setStatus("current")
+_TFpIxrResEgrArpExtAlloc_Type = Unsigned32
+_TFpIxrResEgrArpExtAlloc_Object = MibTableColumn
+tFpIxrResEgrArpExtAlloc = _TFpIxrResEgrArpExtAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 56),
+    _TFpIxrResEgrArpExtAlloc_Type()
+)
+tFpIxrResEgrArpExtAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpExtAlloc.setStatus("current")
+_TFpIxrResEgrArpExtFree_Type = Unsigned32
+_TFpIxrResEgrArpExtFree_Object = MibTableColumn
+tFpIxrResEgrArpExtFree = _TFpIxrResEgrArpExtFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 57),
+    _TFpIxrResEgrArpExtFree_Type()
+)
+tFpIxrResEgrArpExtFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrArpExtFree.setStatus("current")
+_TFpIxrResEgrLabelPushExtBanks_Type = Unsigned32
+_TFpIxrResEgrLabelPushExtBanks_Object = MibTableColumn
+tFpIxrResEgrLabelPushExtBanks = _TFpIxrResEgrLabelPushExtBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 58),
+    _TFpIxrResEgrLabelPushExtBanks_Type()
+)
+tFpIxrResEgrLabelPushExtBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushExtBanks.setStatus("current")
+_TFpIxrResEgrLabelPushExtTotal_Type = Unsigned32
+_TFpIxrResEgrLabelPushExtTotal_Object = MibTableColumn
+tFpIxrResEgrLabelPushExtTotal = _TFpIxrResEgrLabelPushExtTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 59),
+    _TFpIxrResEgrLabelPushExtTotal_Type()
+)
+tFpIxrResEgrLabelPushExtTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushExtTotal.setStatus("current")
+_TFpIxrResEgrLabelPushExtAlloc_Type = Unsigned32
+_TFpIxrResEgrLabelPushExtAlloc_Object = MibTableColumn
+tFpIxrResEgrLabelPushExtAlloc = _TFpIxrResEgrLabelPushExtAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 60),
+    _TFpIxrResEgrLabelPushExtAlloc_Type()
+)
+tFpIxrResEgrLabelPushExtAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushExtAlloc.setStatus("current")
+_TFpIxrResEgrLabelPushExtFree_Type = Unsigned32
+_TFpIxrResEgrLabelPushExtFree_Object = MibTableColumn
+tFpIxrResEgrLabelPushExtFree = _TFpIxrResEgrLabelPushExtFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 61),
+    _TFpIxrResEgrLabelPushExtFree_Type()
+)
+tFpIxrResEgrLabelPushExtFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelPushExtFree.setStatus("current")
+_TFpIxrResEgrLabelSwapPshExBanks_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPshExBanks_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPshExBanks = _TFpIxrResEgrLabelSwapPshExBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 62),
+    _TFpIxrResEgrLabelSwapPshExBanks_Type()
+)
+tFpIxrResEgrLabelSwapPshExBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPshExBanks.setStatus("current")
+_TFpIxrResEgrLabelSwapPshExTotal_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPshExTotal_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPshExTotal = _TFpIxrResEgrLabelSwapPshExTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 63),
+    _TFpIxrResEgrLabelSwapPshExTotal_Type()
+)
+tFpIxrResEgrLabelSwapPshExTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPshExTotal.setStatus("current")
+_TFpIxrResEgrLabelSwapPshExAlloc_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPshExAlloc_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPshExAlloc = _TFpIxrResEgrLabelSwapPshExAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 64),
+    _TFpIxrResEgrLabelSwapPshExAlloc_Type()
+)
+tFpIxrResEgrLabelSwapPshExAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPshExAlloc.setStatus("current")
+_TFpIxrResEgrLabelSwapPshExFree_Type = Unsigned32
+_TFpIxrResEgrLabelSwapPshExFree_Object = MibTableColumn
+tFpIxrResEgrLabelSwapPshExFree = _TFpIxrResEgrLabelSwapPshExFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 65),
+    _TFpIxrResEgrLabelSwapPshExFree_Type()
+)
+tFpIxrResEgrLabelSwapPshExFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrLabelSwapPshExFree.setStatus("current")
+_TFpIxrResEgrEncapExtBanksTotal_Type = Unsigned32
+_TFpIxrResEgrEncapExtBanksTotal_Object = MibTableColumn
+tFpIxrResEgrEncapExtBanksTotal = _TFpIxrResEgrEncapExtBanksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 66),
+    _TFpIxrResEgrEncapExtBanksTotal_Type()
+)
+tFpIxrResEgrEncapExtBanksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapExtBanksTotal.setStatus("current")
+_TFpIxrResEgrEncapExtBanksAlloc_Type = Unsigned32
+_TFpIxrResEgrEncapExtBanksAlloc_Object = MibTableColumn
+tFpIxrResEgrEncapExtBanksAlloc = _TFpIxrResEgrEncapExtBanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 67),
+    _TFpIxrResEgrEncapExtBanksAlloc_Type()
+)
+tFpIxrResEgrEncapExtBanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapExtBanksAlloc.setStatus("current")
+_TFpIxrResEgrEncapExtBanksFree_Type = Unsigned32
+_TFpIxrResEgrEncapExtBanksFree_Object = MibTableColumn
+tFpIxrResEgrEncapExtBanksFree = _TFpIxrResEgrEncapExtBanksFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 68),
+    _TFpIxrResEgrEncapExtBanksFree_Type()
+)
+tFpIxrResEgrEncapExtBanksFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapExtBanksFree.setStatus("current")
+_TFpIxrResEgrEncapExtEntriesTotal_Type = Unsigned32
+_TFpIxrResEgrEncapExtEntriesTotal_Object = MibTableColumn
+tFpIxrResEgrEncapExtEntriesTotal = _TFpIxrResEgrEncapExtEntriesTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 69),
+    _TFpIxrResEgrEncapExtEntriesTotal_Type()
+)
+tFpIxrResEgrEncapExtEntriesTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapExtEntriesTotal.setStatus("current")
+_TFpIxrResEgrEncapExtEntriesAlloc_Type = Unsigned32
+_TFpIxrResEgrEncapExtEntriesAlloc_Object = MibTableColumn
+tFpIxrResEgrEncapExtEntriesAlloc = _TFpIxrResEgrEncapExtEntriesAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 70),
+    _TFpIxrResEgrEncapExtEntriesAlloc_Type()
+)
+tFpIxrResEgrEncapExtEntriesAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapExtEntriesAlloc.setStatus("current")
+_TFpIxrResEgrEncapExtEntriesFree_Type = Unsigned32
+_TFpIxrResEgrEncapExtEntriesFree_Object = MibTableColumn
+tFpIxrResEgrEncapExtEntriesFree = _TFpIxrResEgrEncapExtEntriesFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 71),
+    _TFpIxrResEgrEncapExtEntriesFree_Type()
+)
+tFpIxrResEgrEncapExtEntriesFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrEncapExtEntriesFree.setStatus("current")
+_TFpIxrResEgrExPortVlanXlatBanks_Type = Unsigned32
+_TFpIxrResEgrExPortVlanXlatBanks_Object = MibTableColumn
+tFpIxrResEgrExPortVlanXlatBanks = _TFpIxrResEgrExPortVlanXlatBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 72),
+    _TFpIxrResEgrExPortVlanXlatBanks_Type()
+)
+tFpIxrResEgrExPortVlanXlatBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExPortVlanXlatBanks.setStatus("current")
+_TFpIxrResEgrExPortVlanXlatTotal_Type = Unsigned32
+_TFpIxrResEgrExPortVlanXlatTotal_Object = MibTableColumn
+tFpIxrResEgrExPortVlanXlatTotal = _TFpIxrResEgrExPortVlanXlatTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 73),
+    _TFpIxrResEgrExPortVlanXlatTotal_Type()
+)
+tFpIxrResEgrExPortVlanXlatTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExPortVlanXlatTotal.setStatus("current")
+_TFpIxrResEgrExPortVlanXlatAlloc_Type = Unsigned32
+_TFpIxrResEgrExPortVlanXlatAlloc_Object = MibTableColumn
+tFpIxrResEgrExPortVlanXlatAlloc = _TFpIxrResEgrExPortVlanXlatAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 74),
+    _TFpIxrResEgrExPortVlanXlatAlloc_Type()
+)
+tFpIxrResEgrExPortVlanXlatAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExPortVlanXlatAlloc.setStatus("current")
+_TFpIxrResEgrExPortVlanXlatFree_Type = Unsigned32
+_TFpIxrResEgrExPortVlanXlatFree_Object = MibTableColumn
+tFpIxrResEgrExPortVlanXlatFree = _TFpIxrResEgrExPortVlanXlatFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 75),
+    _TFpIxrResEgrExPortVlanXlatFree_Type()
+)
+tFpIxrResEgrExPortVlanXlatFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExPortVlanXlatFree.setStatus("current")
+_TFpIxrResEgrExArpBanks_Type = Unsigned32
+_TFpIxrResEgrExArpBanks_Object = MibTableColumn
+tFpIxrResEgrExArpBanks = _TFpIxrResEgrExArpBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 76),
+    _TFpIxrResEgrExArpBanks_Type()
+)
+tFpIxrResEgrExArpBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExArpBanks.setStatus("current")
+_TFpIxrResEgrExArpTotal_Type = Unsigned32
+_TFpIxrResEgrExArpTotal_Object = MibTableColumn
+tFpIxrResEgrExArpTotal = _TFpIxrResEgrExArpTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 77),
+    _TFpIxrResEgrExArpTotal_Type()
+)
+tFpIxrResEgrExArpTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExArpTotal.setStatus("current")
+_TFpIxrResEgrExArpAlloc_Type = Unsigned32
+_TFpIxrResEgrExArpAlloc_Object = MibTableColumn
+tFpIxrResEgrExArpAlloc = _TFpIxrResEgrExArpAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 78),
+    _TFpIxrResEgrExArpAlloc_Type()
+)
+tFpIxrResEgrExArpAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExArpAlloc.setStatus("current")
+_TFpIxrResEgrExArpFree_Type = Unsigned32
+_TFpIxrResEgrExArpFree_Object = MibTableColumn
+tFpIxrResEgrExArpFree = _TFpIxrResEgrExArpFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 79),
+    _TFpIxrResEgrExArpFree_Type()
+)
+tFpIxrResEgrExArpFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExArpFree.setStatus("current")
+_TFpIxrResEgrExLabelPushBanks_Type = Unsigned32
+_TFpIxrResEgrExLabelPushBanks_Object = MibTableColumn
+tFpIxrResEgrExLabelPushBanks = _TFpIxrResEgrExLabelPushBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 80),
+    _TFpIxrResEgrExLabelPushBanks_Type()
+)
+tFpIxrResEgrExLabelPushBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelPushBanks.setStatus("current")
+_TFpIxrResEgrExLabelPushTotal_Type = Unsigned32
+_TFpIxrResEgrExLabelPushTotal_Object = MibTableColumn
+tFpIxrResEgrExLabelPushTotal = _TFpIxrResEgrExLabelPushTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 81),
+    _TFpIxrResEgrExLabelPushTotal_Type()
+)
+tFpIxrResEgrExLabelPushTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelPushTotal.setStatus("current")
+_TFpIxrResEgrExLabelPushAlloc_Type = Unsigned32
+_TFpIxrResEgrExLabelPushAlloc_Object = MibTableColumn
+tFpIxrResEgrExLabelPushAlloc = _TFpIxrResEgrExLabelPushAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 82),
+    _TFpIxrResEgrExLabelPushAlloc_Type()
+)
+tFpIxrResEgrExLabelPushAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelPushAlloc.setStatus("current")
+_TFpIxrResEgrExLabelPushFree_Type = Unsigned32
+_TFpIxrResEgrExLabelPushFree_Object = MibTableColumn
+tFpIxrResEgrExLabelPushFree = _TFpIxrResEgrExLabelPushFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 83),
+    _TFpIxrResEgrExLabelPushFree_Type()
+)
+tFpIxrResEgrExLabelPushFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelPushFree.setStatus("current")
+_TFpIxrResEgrExLabelSwapPshBanks_Type = Unsigned32
+_TFpIxrResEgrExLabelSwapPshBanks_Object = MibTableColumn
+tFpIxrResEgrExLabelSwapPshBanks = _TFpIxrResEgrExLabelSwapPshBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 84),
+    _TFpIxrResEgrExLabelSwapPshBanks_Type()
+)
+tFpIxrResEgrExLabelSwapPshBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelSwapPshBanks.setStatus("current")
+_TFpIxrResEgrExLabelSwapPshTotal_Type = Unsigned32
+_TFpIxrResEgrExLabelSwapPshTotal_Object = MibTableColumn
+tFpIxrResEgrExLabelSwapPshTotal = _TFpIxrResEgrExLabelSwapPshTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 85),
+    _TFpIxrResEgrExLabelSwapPshTotal_Type()
+)
+tFpIxrResEgrExLabelSwapPshTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelSwapPshTotal.setStatus("current")
+_TFpIxrResEgrExLabelSwapPshAlloc_Type = Unsigned32
+_TFpIxrResEgrExLabelSwapPshAlloc_Object = MibTableColumn
+tFpIxrResEgrExLabelSwapPshAlloc = _TFpIxrResEgrExLabelSwapPshAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 86),
+    _TFpIxrResEgrExLabelSwapPshAlloc_Type()
+)
+tFpIxrResEgrExLabelSwapPshAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelSwapPshAlloc.setStatus("current")
+_TFpIxrResEgrExLabelSwapPshFree_Type = Unsigned32
+_TFpIxrResEgrExLabelSwapPshFree_Object = MibTableColumn
+tFpIxrResEgrExLabelSwapPshFree = _TFpIxrResEgrExLabelSwapPshFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 87),
+    _TFpIxrResEgrExLabelSwapPshFree_Type()
+)
+tFpIxrResEgrExLabelSwapPshFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResEgrExLabelSwapPshFree.setStatus("current")
+_TFpIxrResLargeExactMatchTotal_Type = Unsigned32
+_TFpIxrResLargeExactMatchTotal_Object = MibTableColumn
+tFpIxrResLargeExactMatchTotal = _TFpIxrResLargeExactMatchTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 88),
+    _TFpIxrResLargeExactMatchTotal_Type()
+)
+tFpIxrResLargeExactMatchTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResLargeExactMatchTotal.setStatus("current")
+_TFpIxrResLargeExactMatchAlloc_Type = Unsigned32
+_TFpIxrResLargeExactMatchAlloc_Object = MibTableColumn
+tFpIxrResLargeExactMatchAlloc = _TFpIxrResLargeExactMatchAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 89),
+    _TFpIxrResLargeExactMatchAlloc_Type()
+)
+tFpIxrResLargeExactMatchAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResLargeExactMatchAlloc.setStatus("current")
+_TFpIxrResLargeExactMatchFree_Type = Unsigned32
+_TFpIxrResLargeExactMatchFree_Object = MibTableColumn
+tFpIxrResLargeExactMatchFree = _TFpIxrResLargeExactMatchFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 102, 1, 90),
+    _TFpIxrResLargeExactMatchFree_Type()
+)
+tFpIxrResLargeExactMatchFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResLargeExactMatchFree.setStatus("current")
+_TFpIxrResourceEgressTable_Object = MibTable
+tFpIxrResourceEgressTable = _TFpIxrResourceEgressTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103)
+)
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressTable.setStatus("current")
+_TFpIxrResourceEgressEntry_Object = MibTableRow
+tFpIxrResourceEgressEntry = _TFpIxrResourceEgressEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1)
+)
+tFpIxrResourceEgressEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressFpNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressType"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressSet"),
+)
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressEntry.setStatus("current")
+_TFpIxrResourceEgressFpNum_Type = TmnxFPNumber
+_TFpIxrResourceEgressFpNum_Object = MibTableColumn
+tFpIxrResourceEgressFpNum = _TFpIxrResourceEgressFpNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 1),
+    _TFpIxrResourceEgressFpNum_Type()
+)
+tFpIxrResourceEgressFpNum.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressFpNum.setStatus("current")
+_TFpIxrResourceEgressType_Type = TmnxCardFpIxrResourceEgressType
+_TFpIxrResourceEgressType_Object = MibTableColumn
+tFpIxrResourceEgressType = _TFpIxrResourceEgressType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 2),
+    _TFpIxrResourceEgressType_Type()
+)
+tFpIxrResourceEgressType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressType.setStatus("current")
+_TFpIxrResourceEgressSet_Type = TmnxCardFpIxrResourceEgressSet
+_TFpIxrResourceEgressSet_Object = MibTableColumn
+tFpIxrResourceEgressSet = _TFpIxrResourceEgressSet_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 3),
+    _TFpIxrResourceEgressSet_Type()
+)
+tFpIxrResourceEgressSet.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressSet.setStatus("current")
+_TFpIxrResourceEgressBanksTotal_Type = Unsigned32
+_TFpIxrResourceEgressBanksTotal_Object = MibTableColumn
+tFpIxrResourceEgressBanksTotal = _TFpIxrResourceEgressBanksTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 4),
+    _TFpIxrResourceEgressBanksTotal_Type()
+)
+tFpIxrResourceEgressBanksTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressBanksTotal.setStatus("current")
+_TFpIxrResourceEgressBanksAlloc_Type = Unsigned32
+_TFpIxrResourceEgressBanksAlloc_Object = MibTableColumn
+tFpIxrResourceEgressBanksAlloc = _TFpIxrResourceEgressBanksAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 5),
+    _TFpIxrResourceEgressBanksAlloc_Type()
+)
+tFpIxrResourceEgressBanksAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressBanksAlloc.setStatus("current")
+_TFpIxrResourceEgressBanksFree_Type = Unsigned32
+_TFpIxrResourceEgressBanksFree_Object = MibTableColumn
+tFpIxrResourceEgressBanksFree = _TFpIxrResourceEgressBanksFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 6),
+    _TFpIxrResourceEgressBanksFree_Type()
+)
+tFpIxrResourceEgressBanksFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressBanksFree.setStatus("current")
+
+
+class _TFpIxrResourceEgressPhases_Type(Bits):
+    """Custom type tFpIxrResourceEgressPhases based on Bits"""
+    namedValues = NamedValues(
+        *(("phase1", 0),
+          ("phase2", 1),
+          ("phase3", 2),
+          ("phase4", 3),
+          ("phase5", 4),
+          ("phase6", 5),
+          ("phase7", 6),
+          ("phase8", 7))
+    )
+
+_TFpIxrResourceEgressPhases_Type.__name__ = "Bits"
+_TFpIxrResourceEgressPhases_Object = MibTableColumn
+tFpIxrResourceEgressPhases = _TFpIxrResourceEgressPhases_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 103, 1, 7),
+    _TFpIxrResourceEgressPhases_Type()
+)
+tFpIxrResourceEgressPhases.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressPhases.setStatus("current")
+_TFpIxrResourceEgressPhaseTable_Object = MibTable
+tFpIxrResourceEgressPhaseTable = _TFpIxrResourceEgressPhaseTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104)
+)
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressPhaseTable.setStatus("current")
+_TFpIxrResourceEgressPhaseEntry_Object = MibTableRow
+tFpIxrResourceEgressPhaseEntry = _TFpIxrResourceEgressPhaseEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1)
+)
+tFpIxrResourceEgressPhaseEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhFpNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhType"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhSet"),
+    (0, "TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhPhase"),
+)
+if mibBuilder.loadTexts:
+    tFpIxrResourceEgressPhaseEntry.setStatus("current")
+_TFpIxrRsEgPhFpNum_Type = TmnxFPNumber
+_TFpIxrRsEgPhFpNum_Object = MibTableColumn
+tFpIxrRsEgPhFpNum = _TFpIxrRsEgPhFpNum_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 1),
+    _TFpIxrRsEgPhFpNum_Type()
+)
+tFpIxrRsEgPhFpNum.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhFpNum.setStatus("current")
+_TFpIxrRsEgPhType_Type = TmnxCardFpIxrResourceEgressType
+_TFpIxrRsEgPhType_Object = MibTableColumn
+tFpIxrRsEgPhType = _TFpIxrRsEgPhType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 2),
+    _TFpIxrRsEgPhType_Type()
+)
+tFpIxrRsEgPhType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhType.setStatus("current")
+_TFpIxrRsEgPhSet_Type = TmnxCardFpIxrResourceEgressSet
+_TFpIxrRsEgPhSet_Object = MibTableColumn
+tFpIxrRsEgPhSet = _TFpIxrRsEgPhSet_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 3),
+    _TFpIxrRsEgPhSet_Type()
+)
+tFpIxrRsEgPhSet.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhSet.setStatus("current")
+_TFpIxrRsEgPhPhase_Type = TmnxCardFpIxrResourceEgressPhase
+_TFpIxrRsEgPhPhase_Object = MibTableColumn
+tFpIxrRsEgPhPhase = _TFpIxrRsEgPhPhase_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 4),
+    _TFpIxrRsEgPhPhase_Type()
+)
+tFpIxrRsEgPhPhase.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhPhase.setStatus("current")
+_TFpIxrRsEgPhLinkedDataBanks_Type = Unsigned32
+_TFpIxrRsEgPhLinkedDataBanks_Object = MibTableColumn
+tFpIxrRsEgPhLinkedDataBanks = _TFpIxrRsEgPhLinkedDataBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 5),
+    _TFpIxrRsEgPhLinkedDataBanks_Type()
+)
+tFpIxrRsEgPhLinkedDataBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedDataBanks.setStatus("current")
+_TFpIxrRsEgPhLinkedDataTotal_Type = Unsigned32
+_TFpIxrRsEgPhLinkedDataTotal_Object = MibTableColumn
+tFpIxrRsEgPhLinkedDataTotal = _TFpIxrRsEgPhLinkedDataTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 6),
+    _TFpIxrRsEgPhLinkedDataTotal_Type()
+)
+tFpIxrRsEgPhLinkedDataTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedDataTotal.setStatus("current")
+_TFpIxrRsEgPhLinkedDataAlloc_Type = Unsigned32
+_TFpIxrRsEgPhLinkedDataAlloc_Object = MibTableColumn
+tFpIxrRsEgPhLinkedDataAlloc = _TFpIxrRsEgPhLinkedDataAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 7),
+    _TFpIxrRsEgPhLinkedDataAlloc_Type()
+)
+tFpIxrRsEgPhLinkedDataAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedDataAlloc.setStatus("current")
+_TFpIxrRsEgPhLinkedDataFree_Type = Unsigned32
+_TFpIxrRsEgPhLinkedDataFree_Object = MibTableColumn
+tFpIxrRsEgPhLinkedDataFree = _TFpIxrRsEgPhLinkedDataFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 8),
+    _TFpIxrRsEgPhLinkedDataFree_Type()
+)
+tFpIxrRsEgPhLinkedDataFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedDataFree.setStatus("current")
+_TFpIxrRsEgPhNonLinkedDataBanks_Type = Unsigned32
+_TFpIxrRsEgPhNonLinkedDataBanks_Object = MibTableColumn
+tFpIxrRsEgPhNonLinkedDataBanks = _TFpIxrRsEgPhNonLinkedDataBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 9),
+    _TFpIxrRsEgPhNonLinkedDataBanks_Type()
+)
+tFpIxrRsEgPhNonLinkedDataBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhNonLinkedDataBanks.setStatus("current")
+_TFpIxrRsEgPhNonLinkedDataTotal_Type = Unsigned32
+_TFpIxrRsEgPhNonLinkedDataTotal_Object = MibTableColumn
+tFpIxrRsEgPhNonLinkedDataTotal = _TFpIxrRsEgPhNonLinkedDataTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 10),
+    _TFpIxrRsEgPhNonLinkedDataTotal_Type()
+)
+tFpIxrRsEgPhNonLinkedDataTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhNonLinkedDataTotal.setStatus("current")
+_TFpIxrRsEgPhNonLinkedDataAlloc_Type = Unsigned32
+_TFpIxrRsEgPhNonLinkedDataAlloc_Object = MibTableColumn
+tFpIxrRsEgPhNonLinkedDataAlloc = _TFpIxrRsEgPhNonLinkedDataAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 11),
+    _TFpIxrRsEgPhNonLinkedDataAlloc_Type()
+)
+tFpIxrRsEgPhNonLinkedDataAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhNonLinkedDataAlloc.setStatus("current")
+_TFpIxrRsEgPhNonLinkedDataFree_Type = Unsigned32
+_TFpIxrRsEgPhNonLinkedDataFree_Object = MibTableColumn
+tFpIxrRsEgPhNonLinkedDataFree = _TFpIxrRsEgPhNonLinkedDataFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 12),
+    _TFpIxrRsEgPhNonLinkedDataFree_Type()
+)
+tFpIxrRsEgPhNonLinkedDataFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhNonLinkedDataFree.setStatus("current")
+_TFpIxrRsEgPhLinkedListBanks_Type = Unsigned32
+_TFpIxrRsEgPhLinkedListBanks_Object = MibTableColumn
+tFpIxrRsEgPhLinkedListBanks = _TFpIxrRsEgPhLinkedListBanks_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 13),
+    _TFpIxrRsEgPhLinkedListBanks_Type()
+)
+tFpIxrRsEgPhLinkedListBanks.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedListBanks.setStatus("current")
+_TFpIxrRsEgPhLinkedListTotal_Type = Unsigned32
+_TFpIxrRsEgPhLinkedListTotal_Object = MibTableColumn
+tFpIxrRsEgPhLinkedListTotal = _TFpIxrRsEgPhLinkedListTotal_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 14),
+    _TFpIxrRsEgPhLinkedListTotal_Type()
+)
+tFpIxrRsEgPhLinkedListTotal.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedListTotal.setStatus("current")
+_TFpIxrRsEgPhLinkedListAlloc_Type = Unsigned32
+_TFpIxrRsEgPhLinkedListAlloc_Object = MibTableColumn
+tFpIxrRsEgPhLinkedListAlloc = _TFpIxrRsEgPhLinkedListAlloc_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 15),
+    _TFpIxrRsEgPhLinkedListAlloc_Type()
+)
+tFpIxrRsEgPhLinkedListAlloc.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedListAlloc.setStatus("current")
+_TFpIxrRsEgPhLinkedListFree_Type = Unsigned32
+_TFpIxrRsEgPhLinkedListFree_Object = MibTableColumn
+tFpIxrRsEgPhLinkedListFree = _TFpIxrRsEgPhLinkedListFree_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 104, 1, 16),
+    _TFpIxrRsEgPhLinkedListFree_Type()
+)
+tFpIxrRsEgPhLinkedListFree.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tFpIxrRsEgPhLinkedListFree.setStatus("current")
+_TmnxVirSchAdjWrkManulCntrlTable_Object = MibTable
+tmnxVirSchAdjWrkManulCntrlTable = _TmnxVirSchAdjWrkManulCntrlTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 105)
+)
+if mibBuilder.loadTexts:
+    tmnxVirSchAdjWrkManulCntrlTable.setStatus("current")
+_TmnxVirSchAdjWrkManulCntrlEntry_Object = MibTableRow
+tmnxVirSchAdjWrkManulCntrlEntry = _TmnxVirSchAdjWrkManulCntrlEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 105, 2)
+)
+tmnxVirSchAdjWrkManulCntrlEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxChassisIndex"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardSlotNum"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxCardManualCntrlParameterName"),
+)
+if mibBuilder.loadTexts:
+    tmnxVirSchAdjWrkManulCntrlEntry.setStatus("current")
+_TmnxCardManualCntrlParameterName_Type = TNamedItem
+_TmnxCardManualCntrlParameterName_Object = MibTableColumn
+tmnxCardManualCntrlParameterName = _TmnxCardManualCntrlParameterName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 105, 2, 1),
+    _TmnxCardManualCntrlParameterName_Type()
+)
+tmnxCardManualCntrlParameterName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxCardManualCntrlParameterName.setStatus("current")
+_TmnxCardManulCntrlParamRowStatus_Type = RowStatus
+_TmnxCardManulCntrlParamRowStatus_Object = MibTableColumn
+tmnxCardManulCntrlParamRowStatus = _TmnxCardManulCntrlParamRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 105, 2, 2),
+    _TmnxCardManulCntrlParamRowStatus_Type()
+)
+tmnxCardManulCntrlParamRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxCardManulCntrlParamRowStatus.setStatus("current")
+_TmnxCardManulCntrlParamLastChngd_Type = TimeStamp
+_TmnxCardManulCntrlParamLastChngd_Object = MibTableColumn
+tmnxCardManulCntrlParamLastChngd = _TmnxCardManulCntrlParamLastChngd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 105, 2, 3),
+    _TmnxCardManulCntrlParamLastChngd_Type()
+)
+tmnxCardManulCntrlParamLastChngd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCardManulCntrlParamLastChngd.setStatus("current")
+
+
+class _TmnxCardManualCntrlParamPrcnt_Type(Unsigned32):
+    """Custom type tmnxCardManualCntrlParamPrcnt based on Unsigned32"""
+    defaultValue = 10000
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2000, 10000),
+    )
+
+
+_TmnxCardManualCntrlParamPrcnt_Type.__name__ = "Unsigned32"
+_TmnxCardManualCntrlParamPrcnt_Object = MibTableColumn
+tmnxCardManualCntrlParamPrcnt = _TmnxCardManualCntrlParamPrcnt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 105, 2, 4),
+    _TmnxCardManualCntrlParamPrcnt_Type()
+)
+tmnxCardManualCntrlParamPrcnt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tmnxCardManualCntrlParamPrcnt.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCardManualCntrlParamPrcnt.setUnits("centipercent")
+_TmnxEsaHostPortDDMLaneTable_Object = MibTable
+tmnxEsaHostPortDDMLaneTable = _TmnxEsaHostPortDDMLaneTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 106)
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortDDMLaneTable.setStatus("current")
+_TmnxEsaHostPortDDMLaneEntry_Object = MibTableRow
+tmnxEsaHostPortDDMLaneEntry = _TmnxEsaHostPortDDMLaneEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 106, 1)
+)
+tmnxEsaHostPortDDMLaneEntry.setIndexNames(
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortId"),
+    (0, "TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicLaneId"),
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortDDMLaneEntry.setStatus("current")
+
+
+class _TmnxEsaHostPortNicLaneId_Type(Unsigned32):
+    """Custom type tmnxEsaHostPortNicLaneId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_TmnxEsaHostPortNicLaneId_Type.__name__ = "Unsigned32"
+_TmnxEsaHostPortNicLaneId_Object = MibTableColumn
+tmnxEsaHostPortNicLaneId = _TmnxEsaHostPortNicLaneId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 106, 1, 1),
+    _TmnxEsaHostPortNicLaneId_Type()
+)
+tmnxEsaHostPortNicLaneId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicLaneId.setStatus("current")
+_TmnxEsaHostPortNicDDMTxBiasCurr_Type = Integer32
+_TmnxEsaHostPortNicDDMTxBiasCurr_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxBiasCurr = _TmnxEsaHostPortNicDDMTxBiasCurr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 106, 1, 2),
+    _TmnxEsaHostPortNicDDMTxBiasCurr_Type()
+)
+tmnxEsaHostPortNicDDMTxBiasCurr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxBiasCurr.setStatus("current")
+_TmnxEsaHostPortNicDDMTxOutPower_Type = Integer32
+_TmnxEsaHostPortNicDDMTxOutPower_Object = MibTableColumn
+tmnxEsaHostPortNicDDMTxOutPower = _TmnxEsaHostPortNicDDMTxOutPower_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 106, 1, 3),
+    _TmnxEsaHostPortNicDDMTxOutPower_Type()
+)
+tmnxEsaHostPortNicDDMTxOutPower.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMTxOutPower.setStatus("current")
+_TmnxEsaHostPortNicDDMRxOpPower_Type = Integer32
+_TmnxEsaHostPortNicDDMRxOpPower_Object = MibTableColumn
+tmnxEsaHostPortNicDDMRxOpPower = _TmnxEsaHostPortNicDDMRxOpPower_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 3, 106, 1, 4),
+    _TmnxEsaHostPortNicDDMRxOpPower_Type()
+)
+tmnxEsaHostPortNicDDMRxOpPower.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNicDDMRxOpPower.setStatus("current")
 _TmnxChassisNotificationObjects_ObjectIdentity = ObjectIdentity
 tmnxChassisNotificationObjects = _TmnxChassisNotificationObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6)
@@ -20052,7 +26226,7 @@ class _TmnxIomResourceType_Type(Integer32):
           ("ecmpMpls", 8),
           ("ecmpIp", 9),
           ("ecmpIpLevel2", 10),
-          ("reserved11", 11))
+          ("fpMemory", 11))
     )
 
 
@@ -20189,11 +26363,53 @@ class _TmnxIomRsrcResourceType_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            2
+            *(1,
+              2,
+              3,
+              4,
+              21,
+              22,
+              23,
+              100,
+              103,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              300)
         )
     )
     namedValues = NamedValues(
-        ("fecLevel2", 2)
+        *(("fecLevel1", 1),
+          ("fecLevel2", 2),
+          ("fecLevel3", 3),
+          ("fecLevel1n2", 4),
+          ("groupFecLevel1", 21),
+          ("groupFecLevel2", 22),
+          ("groupFecLevel3", 23),
+          ("encap", 100),
+          ("egressEncapsulation", 103),
+          ("ingressTerminationA", 200),
+          ("ingressTerminationB", 201),
+          ("ingressEndpoint1", 202),
+          ("ingressEndpoint2", 203),
+          ("egressEncapPhase1", 204),
+          ("egressEncapPhase2", 205),
+          ("egressEncapPhase3", 206),
+          ("egressEncapPhase4", 207),
+          ("egressEncapPhase5", 208),
+          ("egressEncapPhase6", 209),
+          ("egressEncapPhase7", 210),
+          ("egressEncapPhase8", 211),
+          ("ppmc", 300))
     )
 
 
@@ -20213,11 +26429,41 @@ class _TmnxIomRsrcUserType_Type(Integer32):
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
-            1
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16)
         )
     )
     namedValues = NamedValues(
-        ("mpls", 1)
+        *(("mpls", 1),
+          ("interface", 2),
+          ("sap", 3),
+          ("sdpb", 4),
+          ("arpNbr", 5),
+          ("ucastTnh", 6),
+          ("mcastTnh", 7),
+          ("mplsArp", 8),
+          ("mplsNhlfe", 9),
+          ("mplsIlm", 10),
+          ("bfd", 11),
+          ("ptp", 12),
+          ("system", 13),
+          ("filter", 14),
+          ("multicast", 15),
+          ("routing", 16))
     )
 
 
@@ -20229,7 +26475,7 @@ tmnxIomRsrcUserType = _TmnxIomRsrcUserType_Object(
 )
 tmnxIomRsrcUserType.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
-    tmnxIomRsrcUserType.setStatus("current")
+    tmnxIomRsrcUserType.setStatus("obsolete")
 _TmnxIomRsrcTimeEventOccured_Type = TimeStamp
 _TmnxIomRsrcTimeEventOccured_Object = MibScalar
 tmnxIomRsrcTimeEventOccured = _TmnxIomRsrcTimeEventOccured_Object(
@@ -20239,7 +26485,18 @@ tmnxIomRsrcTimeEventOccured = _TmnxIomRsrcTimeEventOccured_Object(
 tmnxIomRsrcTimeEventOccured.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     tmnxIomRsrcTimeEventOccured.setStatus("current")
-_TmnxIomRsrcUsagePercent_Type = Unsigned32
+
+
+class _TmnxIomRsrcUsagePercent_Type(Integer32):
+    """Custom type tmnxIomRsrcUsagePercent based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(0, 100),
+    )
+
+
+_TmnxIomRsrcUsagePercent_Type.__name__ = "Integer32"
 _TmnxIomRsrcUsagePercent_Object = MibScalar
 tmnxIomRsrcUsagePercent = _TmnxIomRsrcUsagePercent_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 48),
@@ -20275,6 +26532,228 @@ tmnxHwAggShpMissingNotifCount = _TmnxHwAggShpMissingNotifCount_Object(
 tmnxHwAggShpMissingNotifCount.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     tmnxHwAggShpMissingNotifCount.setStatus("current")
+
+
+class _TmnxIomRsrcOwnerType_Type(Integer32):
+    """Custom type tmnxIomRsrcOwnerType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29)
+        )
+    )
+    namedValues = NamedValues(
+        *(("mpls", 1),
+          ("interface", 2),
+          ("sap", 3),
+          ("sdpb", 4),
+          ("arpNbr", 5),
+          ("ucastTnh", 6),
+          ("mcastTnh", 7),
+          ("mplsArp", 8),
+          ("mplsNhlfe", 9),
+          ("mplsIlm", 10),
+          ("bfd", 11),
+          ("ptp", 12),
+          ("system", 13),
+          ("filter", 14),
+          ("multicast", 15),
+          ("routing", 16),
+          ("srv6", 17),
+          ("arp", 18),
+          ("nd", 19),
+          ("mplsEcmp", 20),
+          ("ipRoutingEcmp", 21),
+          ("srv6DirectIpTransport", 22),
+          ("tunnelEcmp", 23),
+          ("rvplsOism", 24),
+          ("evpn", 25),
+          ("mvpnNhlfe", 26),
+          ("ppmc", 27),
+          ("mplsMulticastFrr", 28),
+          ("reserved29", 29))
+    )
+
+
+_TmnxIomRsrcOwnerType_Type.__name__ = "Integer32"
+_TmnxIomRsrcOwnerType_Object = MibScalar
+tmnxIomRsrcOwnerType = _TmnxIomRsrcOwnerType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 52),
+    _TmnxIomRsrcOwnerType_Type()
+)
+tmnxIomRsrcOwnerType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxIomRsrcOwnerType.setStatus("current")
+_TmnxNotifIxrResourceOwner_Type = TmnxIxrResourceOwner
+_TmnxNotifIxrResourceOwner_Object = MibScalar
+tmnxNotifIxrResourceOwner = _TmnxNotifIxrResourceOwner_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 53),
+    _TmnxNotifIxrResourceOwner_Type()
+)
+tmnxNotifIxrResourceOwner.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxNotifIxrResourceOwner.setStatus("current")
+
+
+class _TmnxNotifIxrResource_Type(Integer32):
+    """Custom type tmnxNotifIxrResource based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20)
+        )
+    )
+    namedValues = NamedValues(
+        *(("acLif", 1),
+          ("arpLif", 2),
+          ("bgpLabelRouteLif", 3),
+          ("commonLif", 4),
+          ("fecNeighbor", 5),
+          ("fecProtected", 6),
+          ("fecUnpaired", 7),
+          ("l2Service", 8),
+          ("l3VsiRif", 9),
+          ("mplsLif", 10),
+          ("mplsInLif", 11),
+          ("mplsNhlfeLif", 12),
+          ("oamLmCtr", 13),
+          ("sdpBindGreLif", 14),
+          ("sdpBindMplsLif", 15),
+          ("srv6Lif", 16),
+          ("srv6TunnelLif", 17),
+          ("ssidLif", 18),
+          ("stationId", 19),
+          ("vxlanLif", 20))
+    )
+
+
+_TmnxNotifIxrResource_Type.__name__ = "Integer32"
+_TmnxNotifIxrResource_Object = MibScalar
+tmnxNotifIxrResource = _TmnxNotifIxrResource_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 54),
+    _TmnxNotifIxrResource_Type()
+)
+tmnxNotifIxrResource.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxNotifIxrResource.setStatus("current")
+_TmnxNotifIxrRsrcUtilPercentage_Type = Unsigned32
+_TmnxNotifIxrRsrcUtilPercentage_Object = MibScalar
+tmnxNotifIxrRsrcUtilPercentage = _TmnxNotifIxrRsrcUtilPercentage_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 55),
+    _TmnxNotifIxrRsrcUtilPercentage_Type()
+)
+tmnxNotifIxrRsrcUtilPercentage.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxNotifIxrRsrcUtilPercentage.setStatus("current")
+_TmnxEsaPortNotifyPortId_Type = TmnxPortID
+_TmnxEsaPortNotifyPortId_Object = MibScalar
+tmnxEsaPortNotifyPortId = _TmnxEsaPortNotifyPortId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 56),
+    _TmnxEsaPortNotifyPortId_Type()
+)
+tmnxEsaPortNotifyPortId.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxEsaPortNotifyPortId.setStatus("current")
+_TmnxEsaHostPortNotifCrcThreshold_Type = Unsigned32
+_TmnxEsaHostPortNotifCrcThreshold_Object = MibScalar
+tmnxEsaHostPortNotifCrcThreshold = _TmnxEsaHostPortNotifCrcThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 57),
+    _TmnxEsaHostPortNotifCrcThreshold_Type()
+)
+tmnxEsaHostPortNotifCrcThreshold.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNotifCrcThreshold.setStatus("current")
+_TmnxEsaHostPortNotifCrcMltiplier_Type = Unsigned32
+_TmnxEsaHostPortNotifCrcMltiplier_Object = MibScalar
+tmnxEsaHostPortNotifCrcMltiplier = _TmnxEsaHostPortNotifCrcMltiplier_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 58),
+    _TmnxEsaHostPortNotifCrcMltiplier_Type()
+)
+tmnxEsaHostPortNotifCrcMltiplier.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNotifCrcMltiplier.setStatus("current")
+_TmnxEsaHostPortNotifCrcAlrmValue_Type = TmnxEsaHostPortMonReportValue
+_TmnxEsaHostPortNotifCrcAlrmValue_Object = MibScalar
+tmnxEsaHostPortNotifCrcAlrmValue = _TmnxEsaHostPortNotifCrcAlrmValue_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 59),
+    _TmnxEsaHostPortNotifCrcAlrmValue_Type()
+)
+tmnxEsaHostPortNotifCrcAlrmValue.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNotifCrcAlrmValue.setStatus("current")
+
+
+class _TmnxChassisNotifyDiskFormatType_Type(Integer32):
+    """Custom type tmnxChassisNotifyDiskFormatType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("format", 1),
+          ("secureErase", 2))
+    )
+
+
+_TmnxChassisNotifyDiskFormatType_Type.__name__ = "Integer32"
+_TmnxChassisNotifyDiskFormatType_Object = MibScalar
+tmnxChassisNotifyDiskFormatType = _TmnxChassisNotifyDiskFormatType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 6, 60),
+    _TmnxChassisNotifyDiskFormatType_Type()
+)
+tmnxChassisNotifyDiskFormatType.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    tmnxChassisNotifyDiskFormatType.setStatus("current")
 _TmnxChassisAdminObjects_ObjectIdentity = ObjectIdentity
 tmnxChassisAdminObjects = _TmnxChassisAdminObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 8)
@@ -20962,7 +27441,8 @@ class _TSyncIfTimingAdmChangedMask_Type(Bits):
           ("tSyncIfTimingAdmSyncEAdminStatus", 35),
           ("tSyncIfTimingAdmRefOrder5", 36),
           ("tSyncIfTimingAdmGnssCfgQltyLevel", 37),
-          ("tSyncIfTimingAdmGnssAdminStatus", 38))
+          ("tSyncIfTimingAdmGnssAdminStatus", 38),
+          ("tSyncIfTimingAdmRefOrder6", 39))
     )
 
 _TSyncIfTimingAdmChangedMask_Type.__name__ = "Bits"
@@ -21054,6 +27534,22 @@ tSyncIfTimingAdmGnssAdminStatus = _TSyncIfTimingAdmGnssAdminStatus_Object(
 tSyncIfTimingAdmGnssAdminStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tSyncIfTimingAdmGnssAdminStatus.setStatus("current")
+
+
+class _TSyncIfTimingAdmRefOrder6_Type(TmnxSETSRefSource):
+    """Custom type tSyncIfTimingAdmRefOrder6 based on TmnxSETSRefSource"""
+    defaultValue = 6
+
+
+_TSyncIfTimingAdmRefOrder6_Type.__name__ = "TmnxSETSRefSource"
+_TSyncIfTimingAdmRefOrder6_Object = MibTableColumn
+tSyncIfTimingAdmRefOrder6 = _TSyncIfTimingAdmRefOrder6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 2, 8, 2, 1, 1, 40),
+    _TSyncIfTimingAdmRefOrder6_Type()
+)
+tSyncIfTimingAdmRefOrder6.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tSyncIfTimingAdmRefOrder6.setStatus("current")
 _TmnxHwNotification_ObjectIdentity = ObjectIdentity
 tmnxHwNotification = _TmnxHwNotification_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2)
@@ -21096,6 +27592,11 @@ tmnxXiomConfigEntry.registerAugmentions(
      "tmnxXiomStatsEntry")
 )
 tmnxXiomStatsEntry.setIndexNames(*tmnxXiomConfigEntry.getIndexNames())
+tmnxCpmCardEntry.registerAugmentions(
+    ("TIMETRA-CHASSIS-MIB",
+     "tmnxCpmSecureBootStatsEntry")
+)
+tmnxCpmSecureBootStatsEntry.setIndexNames(*tmnxCpmCardEntry.getIndexNames())
 
 # Managed Objects groups
 
@@ -21546,39 +28047,6 @@ tmnx7710SETSRefSrcHwV6v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnx7710SETSRefSrcHwV6v0Group.setStatus("current")
 
-tmnxChassisHsmdaV6v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 23)
-)
-tmnxChassisHsmdaV6v0Group.setObjects(
-      *(("TIMETRA-CHASSIS-MIB", "tmnxMDAIngHsmdaSchedPolicy"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrTblLastChangd"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrRowStatus"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrLastChanged"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrMaxRate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrGrp1Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrGrp2Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass1Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass1WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass2Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass2WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass3Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass3WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass4Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass4WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass5Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass5WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass6Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass6WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass7Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass7WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass8Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass8WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAIngHsmdaPoolPolicy"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaPoolPolicy"))
-)
-if mibBuilder.loadTexts:
-    tmnxChassisHsmdaV6v0Group.setStatus("obsolete")
-
 tmnxMDAMcPathMgmtV6v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 24)
 )
@@ -21910,7 +28378,7 @@ tmnxAtmGroup.setObjects(
     ("TIMETRA-CHASSIS-MIB", "tmnxMDAAtmMode")
 )
 if mibBuilder.loadTexts:
-    tmnxAtmGroup.setStatus("current")
+    tmnxAtmGroup.setStatus("obsolete")
 
 tmnxChassisHwV6v1Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 52)
@@ -21960,16 +28428,6 @@ tmnxChassisNotifyObjsV9v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxChassisNotifyObjsV9v0Group.setStatus("current")
-
-tmnxMDAV9v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 57)
-)
-tmnxMDAV9v0Group.setObjects(
-      *(("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshLoBrstMult"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshHiBrstInc"))
-)
-if mibBuilder.loadTexts:
-    tmnxMDAV9v0Group.setStatus("obsolete")
 
 tmnxCardPchipV8v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 58)
@@ -22200,47 +28658,6 @@ tmnxMdaV10v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxMdaV10v0Group.setStatus("obsolete")
-
-tmnxMdaObsoletedV10v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 67)
-)
-tmnxMdaObsoletedV10v0Group.setObjects(
-      *(("TIMETRA-CHASSIS-MIB", "tmnxMDAIngHsmdaSchedPolicy"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAIngHsmdaPoolPolicy"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrTblLastChangd"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrRowStatus"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrLastChanged"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrMaxRate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrGrp1Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrGrp2Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass1Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass1WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass2Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass2WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass3Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass3WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass4Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass4WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass5Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass5WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass6Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass6WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass7Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass7WtInGrp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass8Rate"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHsmdaMdaSchOvrClass8WtInGrp"))
-)
-if mibBuilder.loadTexts:
-    tmnxMdaObsoletedV10v0Group.setStatus("current")
-
-tmnxMdaHsmdaPoolV10v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 70)
-)
-tmnxMdaHsmdaPoolV10v0Group.setObjects(
-    ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaPoolPolicy")
-)
-if mibBuilder.loadTexts:
-    tmnxMdaHsmdaPoolV10v0Group.setStatus("obsolete")
 
 tmnxFPDCpuProtV11v0R0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 71, 1)
@@ -22571,8 +28988,6 @@ tmnxChassisResourceV12v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tCardResQosIntSchedsAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstTotal"),
@@ -22664,11 +29079,7 @@ tmnxChassisResourceV12v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrQ1NamedPoolTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrQ1NamedPoolAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperAlloc"))
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"))
 )
 if mibBuilder.loadTexts:
     tmnxChassisResourceV12v0Group.setStatus("obsolete")
@@ -22846,8 +29257,6 @@ tmnxChassisResourceV13v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tCardResQosUserSchedsAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstTotal"),
@@ -22942,10 +29351,6 @@ tmnxChassisResourceV13v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrQ1NamedPoolAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclFilterTotal"),
@@ -23302,8 +29707,6 @@ tmnxMDAV15v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaTypeStatus"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAReboot"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDASynchronousEthernet"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshLoBrstMult"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshHiBrstInc"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAIsaTunnelGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpIPsecRespondOnly"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpMultiActive"),
@@ -23357,8 +29760,6 @@ tmnxChassisResourceV15v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tCardResQosUserSchedsAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstTotal"),
@@ -23451,10 +29852,6 @@ tmnxChassisResourceV15v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrQ1NamedPoolAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclFilterTotal"),
@@ -23609,8 +30006,6 @@ tmnxChassisResourceV16v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tCardResQosUserSchedsAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstTotal"),
@@ -23701,10 +30096,6 @@ tmnxChassisResourceV16v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2NamedPoolIUBE"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclFilterTotal"),
@@ -23787,6 +30178,28 @@ tmnxChassisGnssGroup.setObjects(
 if mibBuilder.loadTexts:
     tmnxChassisGnssGroup.setStatus("current")
 
+tmnxMdaFlexGroupV16v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 78, 10)
+)
+tmnxMdaFlexGroupV16v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupTableLastChanged"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberTableLastChngd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexClientTableLastChngd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupRowStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupEntryLastChanged"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupAdminState"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupOperState"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupDescription"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberRowStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberEntryLastChngd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberPhyNumber"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexClientRowStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexClientEntryLastChngd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupMaxBandwidth"))
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexGroupV16v0.setStatus("current")
+
 tmnxCardV16v0ObsoleteGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 78, 14)
 )
@@ -23866,6 +30279,28 @@ tmnxCardPowerSaveGroupV16v0.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxCardPowerSaveGroupV16v0.setStatus("current")
+
+tmnxChassPSStateGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 78, 19)
+)
+tmnxChassPSStateGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMFeedAInVolt"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMFeedBInVolt"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassPSFeedAInVolt"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassPSFeedBInVolt"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassPSStateGroupV22v0.setStatus("current")
+
+tmnxCpmSecureBootGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 78, 20)
+)
+tmnxCpmSecureBootGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxCpmSecureBootEnabled"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmSBUefiVarsStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxCpmSecureBootGroupV22v0.setStatus("current")
 
 tmnxBluetoothGroupV15v1 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 79, 1)
@@ -24096,8 +30531,6 @@ tmnxMDAV19v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaTypeStatus"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAReboot"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDASynchronousEthernet"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshLoBrstMult"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshHiBrstInc"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAIsaTunnelGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpIPsecRespondOnly"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpMultiActive"),
@@ -24232,7 +30665,11 @@ tmnxEsaNotificationObjectGroup = ObjectGroup(
 )
 tmnxEsaNotificationObjectGroup.setObjects(
       *(("TIMETRA-CHASSIS-MIB", "tmnxEsaNotifyId"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxEsaVmNotifyId"))
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaVmNotifyId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaPortNotifyPortId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcAlrmValue"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcMltiplier"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcThreshold"))
 )
 if mibBuilder.loadTexts:
     tmnxEsaNotificationObjectGroup.setStatus("current")
@@ -24336,7 +30773,7 @@ tmnxSapResourceUsageV19v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tCardResVprnSapInstanceAlloc"))
 )
 if mibBuilder.loadTexts:
-    tmnxSapResourceUsageV19v0Group.setStatus("current")
+    tmnxSapResourceUsageV19v0Group.setStatus("obsolete")
 
 tmnxIPv6MCastCamV19v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 81, 26)
@@ -24395,7 +30832,7 @@ tmnx77x0CESMDAV20v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDADiffTimestampFreq"))
 )
 if mibBuilder.loadTexts:
-    tmnx77x0CESMDAV20v0Group.setStatus("current")
+    tmnx77x0CESMDAV20v0Group.setStatus("obsolete")
 
 tmnxChassisResourceV20v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 82, 5)
@@ -24425,8 +30862,6 @@ tmnxChassisResourceV20v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tCardResQosUserSchedsAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstTotal"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstTotal"),
@@ -24513,10 +30948,6 @@ tmnxChassisResourceV20v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tFPResMacFdbRecAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterTotal"),
         ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterAlloc"),
         ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclFilterTotal"),
@@ -24639,6 +31070,24 @@ tmnxChassisIxrXFanV20v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxChassisIxrXFanV20v0Group.setStatus("current")
+
+tmnxIpsecV21Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 83, 1)
+)
+tmnxIpsecV21Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolName"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolRowStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolLastChgd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolDesc"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolTblLstChgd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAIsaMemberPoolAssoc"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAIsaTunnelActiveInGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmPoolAssoc"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmActiveInGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpMemberPool"))
+)
+if mibBuilder.loadTexts:
+    tmnxIpsecV21Group.setStatus("current")
 
 tmnxMdaXConnectGroupV21 = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 83, 2)
@@ -24887,24 +31336,7 @@ tmnxChassisResourceV21v0Group.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenSvcStrmTotal"))
 )
 if mibBuilder.loadTexts:
-    tmnxChassisResourceV21v0Group.setStatus("current")
-
-tmnxHsmdaObsoleteV21v0Group = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 83, 9)
-)
-tmnxHsmdaObsoleteV21v0Group.setObjects(
-      *(("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tCardResHsmdaQOvrAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaQGrpAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperTotal"),
-        ("TIMETRA-CHASSIS-MIB", "tMDAResEgrHsmdaSecShaperAlloc"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaPoolPolicy"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshLoBrstMult"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAEgrHsmdaThrshHiBrstInc"))
-)
-if mibBuilder.loadTexts:
-    tmnxHsmdaObsoleteV21v0Group.setStatus("current")
+    tmnxChassisResourceV21v0Group.setStatus("obsolete")
 
 tFPResEgrHwAggShaperV21v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 83, 10)
@@ -25048,7 +31480,7 @@ tmnxIomRsrcNotifyObjsV21v0Grp.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcMissingNotifCount"))
 )
 if mibBuilder.loadTexts:
-    tmnxIomRsrcNotifyObjsV21v0Grp.setStatus("current")
+    tmnxIomRsrcNotifyObjsV21v0Grp.setStatus("obsolete")
 
 tmnxChassisResPerHostAutV21v0Grp = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 83, 24)
@@ -25095,6 +31527,15 @@ tmnxChassisResMacCamBnkV21v0Grp.setObjects(
 if mibBuilder.loadTexts:
     tmnxChassisResMacCamBnkV21v0Grp.setStatus("current")
 
+tmnxMinFpGenerationV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 1)
+)
+tmnxMinFpGenerationV22v0Group.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxChassisFPGenerationFP5")
+)
+if mibBuilder.loadTexts:
+    tmnxMinFpGenerationV22v0Group.setStatus("current")
+
 tmnxHwAggShpNotifyObjsV22v0Grp = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 2)
 )
@@ -25104,6 +31545,1429 @@ tmnxHwAggShpNotifyObjsV22v0Grp.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxHwAggShpNotifyObjsV22v0Grp.setStatus("current")
+
+tmnxEsa400gGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 4)
+)
+tmnxEsa400gGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaCellTopoSocket"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaCellTopoCoresAvailable"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaCellTopoCoresAllocated"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaCellTopoMemoryAvailable"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaCellTopoMemoryAllocated"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortSocketId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicIfName"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsa400gGroupV22v0.setStatus("current")
+
+tmnxEsaHwStatusMonGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 5)
+)
+tmnxEsaHwStatusMonGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsHardwareStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1Status"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2Status"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1Temp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2Temp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsFanRedundancy"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsFanStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPwrSupMismatchStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPwrSupRedundancy"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsTemperatureStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsCpu1Temperature"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsCpu2Temperature"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusMonGroupV22v0.setStatus("current")
+
+tmnxChassisGnssGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 6)
+)
+tmnxChassisGnssGroupV22v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxGnssSyncSysTime")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisGnssGroupV22v0.setStatus("current")
+
+tmnxChassisResPortFwdIdGrpV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 7)
+)
+tmnxChassisResPortFwdIdGrpV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResPortForwardingIdTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResPortForwardingIdAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tMDAResPortForwardingIdTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tMDAResPortForwardingIdAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv4AclEntryIUBAcl"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv4AclEntryIUBDcpu"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResPortFwdIdGrpV22v0.setStatus("current")
+
+tmnxChassisResShardPlcrGrpV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 8)
+)
+tmnxChassisResShardPlcrGrpV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCoreResSharedPolicerAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResSharedPolicerTotal"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResShardPlcrGrpV22v0.setStatus("current")
+
+tmnxFPCoreResUsgStatsGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 9)
+)
+tmnxFPCoreResUsgStatsGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxFPCoreFreeDramBdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreMinFreeDramBdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreLowFreeDramBdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreTotalDramBdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreFreeSramBuf"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreMinFreeSramBuf"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreLowFreeSramBuf"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreTotalSramBuf"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreFreeSramPdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreMinFreeSramPdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreLowFreeSramPdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreTotalSramPdb"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreDramBwMaxCnscPollBlk"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreDramBwPktRejLastPoll"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreDramBwTotalPktRejects"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCorePcsPipeNifPrdDrpLstPol"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCorePcsPipeTotNifPrdDrops"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCorePcsPipeMxCnvPlNifPrdDp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreMeshFabBwAsrtCngstFP1"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreMeshFabBwAsrtCngstFP2"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreMeshFabBwAsrtCngstFP3"))
+)
+if mibBuilder.loadTexts:
+    tmnxFPCoreResUsgStatsGroupV22v0.setStatus("current")
+
+tmnxHwTempGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 10)
+)
+tmnxHwTempGroupV22v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwOverTempStatus")
+)
+if mibBuilder.loadTexts:
+    tmnxHwTempGroupV22v0.setStatus("current")
+
+tmnxCamOverloadGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 11)
+)
+tmnxCamOverloadGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResIngIPv4MacCamOverLoad"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6CamOverLoad"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv4MacCamOverLoad"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6CamOverLoad"))
+)
+if mibBuilder.loadTexts:
+    tmnxCamOverloadGroupV22v0.setStatus("current")
+
+tmnxSyncIfTimingGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 12)
+)
+tmnxSyncIfTimingGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tSyncIfTimingAdmRefOrder6"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingRefOrder6"))
+)
+if mibBuilder.loadTexts:
+    tmnxSyncIfTimingGroupV22v0.setStatus("current")
+
+tChassisResShardPlcrStatGrpV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 13)
+)
+tChassisResShardPlcrStatGrpV22v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tCoreResIngFloatPlcrStatIUBSP")
+)
+if mibBuilder.loadTexts:
+    tChassisResShardPlcrStatGrpV22v0.setStatus("current")
+
+tmnxIomRsrcNotifyObjsV22v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 15)
+)
+tmnxIomRsrcNotifyObjsV22v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcOwnerType")
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcNotifyObjsV22v0Grp.setStatus("current")
+
+tmnxIsaGrpESPSeqNumGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 17)
+)
+tmnxIsaGrpESPSeqNumGroupV22v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpESPSeqNumOrder")
+)
+if mibBuilder.loadTexts:
+    tmnxIsaGrpESPSeqNumGroupV22v0.setStatus("current")
+
+tFPResOversubGroupV22v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 18)
+)
+tFPResOversubGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResOversub"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPResOversubDetected"))
+)
+if mibBuilder.loadTexts:
+    tFPResOversubGroupV22v0.setStatus("current")
+
+tFPResEgrHwAggShaperV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 21)
+)
+tFPResEgrHwAggShaperV22v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSizeTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSizeAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShpDefSapQSetSz"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShpDefSubQSetSz"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShpDefQGrpQSetSz"))
+)
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShaperV22v0Group.setStatus("obsolete")
+
+tmnxIsaGrpESPSeqNumGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 22)
+)
+tmnxIsaGrpESPSeqNumGroupV23v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpESPSeqNumOrderOpr")
+)
+if mibBuilder.loadTexts:
+    tmnxIsaGrpESPSeqNumGroupV23v0.setStatus("current")
+
+tmnxIsaMemberPoolV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 23)
+)
+tmnxIsaMemberPoolV23v0Group.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaMemberPoolHighAvail")
+)
+if mibBuilder.loadTexts:
+    tmnxIsaMemberPoolV23v0Group.setStatus("current")
+
+tmnxXiomGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 1)
+)
+tmnxXiomGroupV23v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxXiomSupportedTypes")
+)
+if mibBuilder.loadTexts:
+    tmnxXiomGroupV23v0.setStatus("current")
+
+tmnxCoreDdctdPolicerResGroupV23 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 2)
+)
+tmnxCoreDdctdPolicerResGroupV23.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCoreDdctdPolicerStatsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreDdctdPolicerStatsAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxCoreDdctdPolicerResGroupV23.setStatus("current")
+
+tmnxChassisRebootReqdGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 3)
+)
+tmnxChassisRebootReqdGroupV23v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisRebootReqd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisRebootReqdReason"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisRebootReqdGroupV23v0.setStatus("current")
+
+tmnxChassisAtmObsoleteGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 4)
+)
+tmnxChassisAtmObsoleteGroupV23v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxMDAAtmMode")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisAtmObsoleteGroupV23v0.setStatus("current")
+
+tmnxChassisIxrResourceGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 5)
+)
+tmnxChassisIxrResourceGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisIxrResCommonLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResCommonLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResCommonLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResArpLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResArpLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResArpLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL3VsiRifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL3VsiRifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL3VsiRifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecUnpairedTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecUnpairedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecUnpairedFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecPairedTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecPairedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecPairedFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOamLmCtrTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOamLmCtrAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOamLmCtrFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnCommonLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnCommonLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnCommonLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnArpLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnMplsLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnL3VsiRifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnFecUnpairAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnFecPairedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnOamLmCtrAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResMplsEcmpGroupsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResMplsEcmpGroupsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResMplsEcmpGroupsFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIpEcmpGroupsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIpEcmpGroupsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIpEcmpGroupsFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecsFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnFecLevel1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnFecLevel2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrGlobalLifMapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrGlobalLifMapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrGlobalLifMapFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationATotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationAAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationAFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationBTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationBAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationBFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint1Free"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint2Free"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint3Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint3Free"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapEntriesTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapEntriesAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapEntriesFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtEntriesTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtEntriesAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtEntriesFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshBanks"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisIxrResourceGroup.setStatus("obsolete")
+
+tmnxIomRsrcObjObsoleteGrpV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 6)
+)
+tmnxIomRsrcObjObsoleteGrpV23v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUserType")
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcObjObsoleteGrpV23v0.setStatus("current")
+
+tmnxIomRsrcNotifyObjsV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 7)
+)
+tmnxIomRsrcNotifyObjsV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcResourceType"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcTimeEventOccured"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsagePercent"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcMissingNotifCount"))
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcNotifyObjsV23v0Grp.setStatus("current")
+
+tmnxSapResourceUsageV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 9)
+)
+tmnxSapResourceUsageV23v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResCpipeSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResCpipeSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEpipeSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEpipeSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIpipeSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIpipeSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIesSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIesSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResMirrorSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResMirrorSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResVplsSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResVplsSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResVprnSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResVprnSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResApipeSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResApipeSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResCpipeSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResCpipeSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResEpipeSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResEpipeSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResFpipeSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResFpipeSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResIpipeSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResIpipeSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResIesSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResIesSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResMirrorSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResMirrorSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResVplsSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResVplsSapInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResVprnSapInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResVprnSapInstanceAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapResourceUsageV23v0Group.setStatus("current")
+
+tmnxSapResUsageObsoletedGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 10)
+)
+tmnxSapResUsageObsoletedGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResApipeSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResApipeSapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResFpipeSapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResFpipeSapAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxSapResUsageObsoletedGroup.setStatus("current")
+
+tmnxFPCoreResUsgStatsGroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 11)
+)
+tmnxFPCoreResUsgStatsGroupV23v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxFPCoreL0PolicerProfilesInUse"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreL1PolicerProfilesInUse"))
+)
+if mibBuilder.loadTexts:
+    tmnxFPCoreResUsgStatsGroupV23v0.setStatus("current")
+
+tmnxEsa100g2GroupV23v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 12)
+)
+tmnxEsa100g2GroupV23v0.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsSystemPartNumber")
+)
+if mibBuilder.loadTexts:
+    tmnxEsa100g2GroupV23v0.setStatus("current")
+
+tmnxChassisResIOCapacityV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 13)
+)
+tmnxChassisResIOCapacityV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResIOCapacityTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIOCapacityAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResIOCapacityV23v0Grp.setStatus("current")
+
+tFPResSharedPolicersV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 14)
+)
+tFPResSharedPolicersV23v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResCamBanksIUBSharedPlcrs"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSharedPlcrCamBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSharedPlcrCamBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSharedPlcrCamEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSharedPlcrCamEntryAlloc"))
+)
+if mibBuilder.loadTexts:
+    tFPResSharedPolicersV23v0Group.setStatus("current")
+
+tmnxChassisResourceV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 15)
+)
+tmnxChassisResourceV23v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResDynSvcNHEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResDynSvcNHEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIpSecNHEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIpSecNHEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResSubNHEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResSubNHEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResSapIngQosPolTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResSapIngQosPolAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResSapEgrQosPolTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResSapEgrQosPolAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIngQGrpTmplTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResIngQGrpTmplAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEgrQGrpTmplTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEgrQGrpTmplAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResPortEgrQGrpInstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResPortEgrQGrpInstAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResFPIngQGrpInstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResFPIngQGrpInstAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResPortEgrVPortTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResPortEgrVPortAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResQosUserSchedsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResQosUserSchedsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResSubSPIQosOvrAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortAccEgrQGrpInstAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortNetEgrQGrpInstAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortEgrQGrpInstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortEgrQGrpInstAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResFPIngQGrpInstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResFPIngQGrpInstAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortEgrVPortTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResPortEgrVPortAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResCategoryEntriesTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResCategoryEntriesAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResIntArbiterOvrsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResIntArbiterOvrsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResSLAProfileInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResSLAProfileInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSapIngQosPolTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSapIngQosPolAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynEgrClassTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynEgrClassAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynEgrClassIUBSE"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynEgrClassIUBNE"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngQueueTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngQueueAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrQueueTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrQueueAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngPolicerTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngPolicerAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrPolicerTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrPolicerAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngPolicerStatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngPolicerStatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrPolicerStatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrPolicerStatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngRootArbiterTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngRootArbiterAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrRootArbiterTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrRootArbiterAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQueueTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQueueAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQueueIUBI"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQueueIUBE"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerIUBI"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerIUBE"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerStatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerStatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerStatIUBI"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynPolicerStatIUBE"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngQosEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngQosEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6QosEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6QosEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrQosEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrQosEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6QosEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6QosEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclFilterTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclFilterAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclFilterTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclFilterAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynSvcEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynSvcEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSubHostTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSubHostAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEncapGrpMemberTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEncapGrpMemberAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrNetQGrpMapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrNetQGrpMapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMacFdbRecTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMacFdbRecAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDynQ2WredPoolAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngIPv6AclFilterAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclFilterTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrIPv6AclFilterAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSLAProfileInstanceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSLAProfileInstanceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMepsWithIntMegTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMepsWithIntMegAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMepsWithIccMegTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMepsWithIccMegAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMepsWithOtherMegTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResMepsWithOtherMegAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResUniqueIccsForMepsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResUniqueIccsForMepsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResPrefixesOfMepMacsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResPrefixesOfMepMacsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclStatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclStatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclStatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclStatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenBandwAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenBandwTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenSvcStrmAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenSvcStrmTotal"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResourceV23v0Group.setStatus("current")
+
+tmnxChassisResObsoletedGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 16)
+)
+tmnxChassisResObsoletedGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResIngAclQosEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResIngAclQosEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclQosEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrAclQosEntryAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResObsoletedGroup.setStatus("current")
+
+tmnxChassisPwrMgmtV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 17)
+)
+tmnxChassisPwrMgmtV23v0Group.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassPSFanOperStatus")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisPwrMgmtV23v0Group.setStatus("current")
+
+tmnxIxrRsrcNotifyObjsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 19)
+)
+tmnxIxrRsrcNotifyObjsGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResourceOwner"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrRsrcUtilPercentage"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrRsrcNotifyObjsGroup.setStatus("current")
+
+tFPResSrv6TunnelTermV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 22)
+)
+tFPResSrv6TunnelTermV23v0Group.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tFPResCamBanksIUBSrv6TunnelTerm")
+)
+if mibBuilder.loadTexts:
+    tFPResSrv6TunnelTermV23v0Group.setStatus("current")
+
+tFPResEgrHwAggShaperV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 23)
+)
+tFPResEgrHwAggShaperV23v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize3Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize4Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize4Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize5Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize5Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize6Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize6Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize7Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize7Alloc"))
+)
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShaperV23v0Group.setStatus("obsolete")
+
+tmnxChassisIxrResourceJ2Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 24)
+)
+tmnxChassisIxrResourceJ2Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisIxrResAcLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResAcLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResAcLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsNhlfeLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsNhlfeLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsNhlfeLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResBgpLblRtLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResBgpLblRtLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResBgpLblRtLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSdpBndMplsLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSdpBndMplsLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSdpBndMplsLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSdpBndGreLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSdpBndGreLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSdpBndGreLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSsidLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSsidLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSsidLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSrv6TunnelLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSrv6TunnelLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResSrv6TunnelLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL2ServiceTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL2ServiceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL2ServiceFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResStationIdTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResStationIdAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResStationIdFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResVxlanLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResVxlanLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResVxlanLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnAcLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnMplsNhlfeLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnBgpLblRtLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnBgpLblRtLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnBgpLblRtLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnSdpBndMplsLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnSdpBndGreLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnSsidLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnSrv6TunnelLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnL2ServiceAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnStationIdAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnVxlanLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResourceEgressPhases"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedDataBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedDataTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedDataAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedDataFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhNonLinkedDataBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhNonLinkedDataTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhNonLinkedDataAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhNonLinkedDataFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedListBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedListTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedListAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrRsEgPhLinkedListFree"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisIxrResourceJ2Group.setStatus("current")
+
+tmnxIxrRsrcObsoletedGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 25)
+)
+tmnxIxrRsrcObsoletedGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCardIxrResMplsEcmpGroupsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResMplsEcmpGroupsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResMplsEcmpGroupsFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIpEcmpGroupsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIpEcmpGroupsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIpEcmpGroupsFree"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrRsrcObsoletedGroup.setStatus("current")
+
+tChassisIxrResDynEcmpAllocGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 26)
+)
+tChassisIxrResDynEcmpAllocGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecsFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLvl1BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLvl2BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel1Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel2Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnGrpFecAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnGrpFecLevel1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnGrpFecLevel2Alloc"))
+)
+if mibBuilder.loadTexts:
+    tChassisIxrResDynEcmpAllocGroup.setStatus("current")
+
+tmnxChassisResMtuProfileV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 27)
+)
+tmnxChassisResMtuProfileV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResMtuProfileTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResMtuProfileAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResMtuProfileV23v0Grp.setStatus("current")
+
+tmnxChassisResEprirSrV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 28)
+)
+tmnxChassisResEprirSrV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResEprirRadiusAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEprirReservedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEprirSatTrafGenTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEprirSatTrafGenAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResEprirSrV23v0Grp.setStatus("current")
+
+tmnxChassisResEprirIxrV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 29)
+)
+tmnxChassisResEprirIxrV23v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tChassisResEprirFilterAlloc")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResEprirIxrV23v0Grp.setStatus("current")
+
+tmnxChassisResEprirSrIxrV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 30)
+)
+tmnxChassisResEprirSrIxrV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResEprirTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEprirAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEprirMirrorAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResEprirSrIxrV23v0Grp.setStatus("current")
+
+tmnxChassisResEprirNotSrV23v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 31)
+)
+tmnxChassisResEprirNotSrV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenBandwAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenBandwTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenSvcStrmTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOamSathTrafGenSvcStrmTotal"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisResEprirNotSrV23v0Grp.setStatus("current")
+
+tmnxChassisIxrResourceV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 32)
+)
+tmnxChassisIxrResourceV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisIxrResCommonLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResCommonLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResCommonLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResArpLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResArpLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResArpLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResMplsLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL3VsiRifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL3VsiRifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResL3VsiRifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecUnpairedTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecUnpairedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecUnpairedFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecPairedTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecPairedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResFecPairedFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOamLmCtrTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOamLmCtrAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOamLmCtrFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnCommonLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnCommonLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnCommonLifFree"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnArpLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnMplsLifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnL3VsiRifAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnFecUnpairAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnFecPairedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResOwnOamLmCtrAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecsAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecsFree"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel1Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel2Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnFecLevel1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnFecLevel2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrGlobalLifMapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrGlobalLifMapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrGlobalLifMapFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationATotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationAAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationAFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationBTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationBAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngTerminationBFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint1Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint1Free"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint2Free"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint3Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResIngEndpoint3Free"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapEntriesTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapEntriesAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapEntriesFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrRoutedBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrTdmBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXlatBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPushBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrPortVlanXltExtBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrArpExtBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelPushExtBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrLabelSwapPshExBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtEntriesTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtEntriesAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtEntriesFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtBanksTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtBanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrEncapExtBanksFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExPortVlanXlatBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExArpBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelPushBanks"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshFree"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResEgrExLabelSwapPshBanks"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisIxrResourceV24v0Group.setStatus("current")
+
+tmnxVlanQosScalingModeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 33)
+)
+tmnxVlanQosScalingModeGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisResEgrStat4QVVoQTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEgrStat4QVVoQAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEgrNoStat4QVVoQTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResEgrNoStat4QVVoQAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes4QVlanVoqTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes4QVlanVoqAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxVlanQosScalingModeGroup.setStatus("current")
+
+tmnxChassisMDAV24v0ObsoletedGrp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 1)
+)
+tmnxChassisMDAV24v0ObsoletedGrp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxMDAClockMode")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisMDAV24v0ObsoletedGrp.setStatus("current")
+
+tmnxChassisCemMDAV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 2)
+)
+tmnxChassisCemMDAV24v0Group.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxMDADiffTimestampFreq")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisCemMDAV24v0Group.setStatus("current")
+
+tFPResEgrHwAggSV24v0ObsoletedGrp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 3)
+)
+tFPResEgrHwAggSV24v0ObsoletedGrp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSizeTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSizeAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize1Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize1Alloc"))
+)
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggSV24v0ObsoletedGrp.setStatus("current")
+
+tFPResEgrHwAggShaperV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 4)
+)
+tFPResEgrHwAggShaperV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShpDefSapQSetSz"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShpDefSubQSetSz"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShpDefQGrpQSetSz"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize2Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize2Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize3Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize4Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize4Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize5Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize5Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize6Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize6Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize7Total"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShapQSetSize7Alloc"))
+)
+if mibBuilder.loadTexts:
+    tFPResEgrHwAggShaperV24v0Group.setStatus("current")
+
+tmnxFlashV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 5)
+)
+tmnxFlashV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxFlashSerialNumber"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashOperStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashFirmwareRevision"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashModelNumber"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashCapacity"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashUsed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashPercentageUsed"))
+)
+if mibBuilder.loadTexts:
+    tmnxFlashV24v0Group.setStatus("current")
+
+tmnxEsaHwStatusPwrLoadV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 6)
+)
+tmnxEsaHwStatusPwrLoadV24v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1Voltage"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2Voltage"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1OutPwr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2OutPwr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1MaxPwr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2MaxPwr"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusPwrLoadV24v0Grp.setStatus("current")
+
+tmnxEsaHwStatusTempV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 7)
+)
+tmnxEsaHwStatusTempV24v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsCpu1TempThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsCpu2TempThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsNic1Temperature"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsNic2Temperature"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsNic1TempThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsNic2TempThreshold"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusTempV24v0Grp.setStatus("current")
+
+tmnxVirtualSchedAdjV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 8)
+)
+tmnxVirtualSchedAdjV24v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxCardManulCntrlParamRowStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardManulCntrlParamLastChngd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardManualCntrlAdminState"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardManualCntrlParamPrcnt"))
+)
+if mibBuilder.loadTexts:
+    tmnxVirtualSchedAdjV24v0Grp.setStatus("current")
+
+tmnxEsaHostPortStatsV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 9)
+)
+tmnxEsaHostPortStatsV24v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicXceiverType"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicXceiverMN"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicXceiverLWL"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicSFPNumLanes"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicSFPVendorOUI"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNictSFPConCode"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicSFPVendorMfg"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicSFPMedia"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicSFPVendorSN"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicSFPVendorPN"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicOptCompliance"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicOptCCExtension"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicLinkLenInfo"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTemp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTempLowWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTempLwAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTempHiWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTempHiAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMSupVoltage"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMSVLowWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMSVLowAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMSVHiWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMSVHiAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxBiasCurr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxBCLwWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxBCLwAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxBCHiWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxBCHiAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxOutPower"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxOPLwWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxOPLwAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxOPHiWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMTxOPHiAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMRxOpPower"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMRxOpPLwWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMRxOpPLwAlrm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMRxOpPHiWarn"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNicDDMRxOpPHiAlrm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortOperStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortFwdStatus"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortRxTotalPkts"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortTxTotalPkts"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortRxDiscards"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortRxCrcErrors"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortRxSymErrors"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortStatsV24v0Grp.setStatus("current")
+
+tmnxIpsecLoadBalV24Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 10)
+)
+tmnxIpsecLoadBalV24Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpSpiRangeIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmWeight"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmAllocHashSlots"))
+)
+if mibBuilder.loadTexts:
+    tmnxIpsecLoadBalV24Group.setStatus("current")
+
+tmnxChassisPwrMgmtV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 11)
+)
+tmnxChassisPwrMgmtV24v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtTotalWattage")
+)
+if mibBuilder.loadTexts:
+    tmnxChassisPwrMgmtV24v0Grp.setStatus("current")
+
+tFPResV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 13)
+)
+tFPResV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResDCpuProtCamEntryTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResDCpuProtCamEntryAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResSharedPolicerStatsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResSharedPolicerStatsAlloc"))
+)
+if mibBuilder.loadTexts:
+    tFPResV24v0Group.setStatus("current")
+
+tmnxMdaFlexEV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 14)
+)
+tmnxMdaFlexEV24v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperInstNum"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperCurrentAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperReportedAlm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupNumber"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupCurrentAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupReportAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupReportedAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberReportAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberCurrentAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberReportedAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperDeskewDepth"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperInfoValid"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperCalInUse"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperFlexEMap"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperCalASlots"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperCalBSlots"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperRcvdGrpNum"),
+        ("TIMETRA-CHASSIS-MIB", "tMdaFlexMbrInstOperRcvdInstNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexMemberPhyReportAlarm"))
+)
+if mibBuilder.loadTexts:
+    tmnxMdaFlexEV24v0Grp.setStatus("current")
+
+tmnxEsaHostPortCrcMonV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 15)
+)
+tmnxEsaHostPortCrcMonV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortCrcMonSdThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortCrcMonSdTMltplier"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortCrcMonSfThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortCrcMonSfTMltplier"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortCrcMonWindowSize"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortCrcMonV24v0Group.setStatus("current")
+
+tmnxChassisFpIxrResV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 16)
+)
+tmnxChassisFpIxrResV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFpIxrResLargeExactMatchTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResLargeExactMatchAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tFpIxrResLargeExactMatchFree"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisFpIxrResV24v0Group.setStatus("current")
+
+tmnxChassisOsSecV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 18)
+)
+tmnxChassisOsSecV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisOsSecPasswd"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardAntiTheft"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisAntiTheftLocked"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisOsSecV24v0Group.setStatus("current")
+
+tmnxChassisIxrResOwnV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 20)
+)
+tmnxChassisIxrResOwnV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnAcLifTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tChasIxrResOwnAcLifFree"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisIxrResOwnV24v0Group.setStatus("current")
+
+tmnxChassisIxrResScaleV24v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 21)
+)
+tmnxChassisIxrResScaleV24v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCardIxrResIlmSwapTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIlmSwapAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResIlmSwapFree"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisIxrResScaleV24v0Grp.setStatus("current")
+
+tmnxCardIxrResourcesV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 22)
+)
+tmnxCardIxrResourcesV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel3Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResFecLevel3Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLvl3BanksAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel3Total"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResGrpFecLevel3Free"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnFecLevel3Alloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnGrpFecLevel3Alloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxCardIxrResourcesV24v0Group.setStatus("current")
+
+tmnxCardIxrPpmcResourcesGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 25)
+)
+tmnxCardIxrPpmcResourcesGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCardIxrResPpmcBestCaseEstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResPpmcWrstCaseEstTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResPpmcSingleLevelAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResPpmcMultiLevelAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnPpmcSingleLvlAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCardIxrResOwnPpmcMultiLvlAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxCardIxrPpmcResourcesGroup.setStatus("current")
+
+tmnxCardIxrPpmcResourcesGroup2 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 26)
+)
+tmnxCardIxrPpmcResourcesGroup2.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tCardIxrResPpmcExhausted")
+)
+if mibBuilder.loadTexts:
+    tmnxCardIxrPpmcResourcesGroup2.setStatus("current")
+
+tFPResV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 1)
+)
+tFPResV25v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tFPResSapIngAggPolicerTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSapIngAggPolicerAlloc"))
+)
+if mibBuilder.loadTexts:
+    tFPResV25v0Group.setStatus("current")
+
+tmnxChassisPwrMgmtLowPwrV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 2)
+)
+tmnxChassisPwrMgmtLowPwrV25v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tChassisPwrMgmtLowPwrFabAdmState"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisPwrMgmtLowPwrFabCapacity"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisPwrMgmtLowPwrFabOprState"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisPwrMgmtLowPwrFabLstChgd"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisPwrMgmtLowPwrV25v0Grp.setStatus("current")
+
+tmnxSyncFreqOffsetInPpbGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 5)
+)
+tmnxSyncFreqOffsetInPpbGroup.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingFreqOffsetPpb")
+)
+if mibBuilder.loadTexts:
+    tmnxSyncFreqOffsetInPpbGroup.setStatus("current")
+
+tmnxMDAMacModeV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 6)
+)
+tmnxMDAMacModeV25v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxMDAMacMode")
+)
+if mibBuilder.loadTexts:
+    tmnxMDAMacModeV25v0Grp.setStatus("current")
+
+tmnxFltrSharedPlcrV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 7)
+)
+tmnxFltrSharedPlcrV25v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCoreResFltrSharedPlcrTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResFltrSharedPlcrAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResFltrSharedPlcrStatsTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResFltrSharedPlcrStatsAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxFltrSharedPlcrV25v0Grp.setStatus("current")
+
+tmnxSchedulerFlowsV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 10)
+)
+tmnxSchedulerFlowsV25v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCoreResSchedulerFlowTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResSchedulerFlowAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResSchedulerInterfacesTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreResSchedulerInterfacesAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes8QSchedulerFlowTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes8QSchedulerFlowAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes4QSchedulerFlowTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes4QSchedulerFlowAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxSchedulerFlowsV25v0Grp.setStatus("current")
+
+tmnxCpmCardOsSecurityV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 13)
+)
+tmnxCpmCardOsSecurityV25v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardPwdPendingActivation")
+)
+if mibBuilder.loadTexts:
+    tmnxCpmCardOsSecurityV25v0Grp.setStatus("current")
+
+tmnxSecEraseNotifyObjsV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 14)
+)
+tmnxSecEraseNotifyObjsV25v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyDiskFormatType")
+)
+if mibBuilder.loadTexts:
+    tmnxSecEraseNotifyObjsV25v0Grp.setStatus("current")
+
+tmnxVirtualFlowsV25v0Grp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 16)
+)
+tmnxVirtualFlowsV25v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tCoreRes8QVirtualFlowTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes8QVirtualFlowAlloc"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes4QVirtualFlowTotal"),
+        ("TIMETRA-CHASSIS-MIB", "tCoreRes4QVirtualFlowAlloc"))
+)
+if mibBuilder.loadTexts:
+    tmnxVirtualFlowsV25v0Grp.setStatus("current")
 
 
 # Notification objects
@@ -28053,6 +35917,7 @@ tmnxIomRsrcUsageHighLimitReached = NotificationType(
 tmnxIomRsrcUsageHighLimitReached.setObjects(
       *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCardSlotNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyFpNum"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcTimeEventOccured"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcResourceType"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsagePercent"))
@@ -28068,6 +35933,7 @@ tmnxIomRsrcUsageExhausted = NotificationType(
 tmnxIomRsrcUsageExhausted.setObjects(
       *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCardSlotNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyFpNum"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcTimeEventOccured"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcResourceType"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsagePercent"))
@@ -28083,6 +35949,7 @@ tmnxIomRsrcUsageRecovered = NotificationType(
 tmnxIomRsrcUsageRecovered.setObjects(
       *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCardSlotNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyFpNum"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcTimeEventOccured"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcResourceType"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsagePercent"))
@@ -28104,7 +35971,7 @@ tmnxIomRsrcUserOversubscribed.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxIomRsrcUserOversubscribed.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxIomRsrcUserOversubscribedClr = NotificationType(
@@ -28119,7 +35986,7 @@ tmnxIomRsrcUserOversubscribedClr.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxIomRsrcUserOversubscribedClr.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxIomRsrcEventOverflow = NotificationType(
@@ -28173,6 +36040,686 @@ tmnxHwAggShpSchedEventOvrflw.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxHwAggShpSchedEventOvrflw.setStatus(
+        "current"
+    )
+
+tmnxIomRsrcOwnerOversubscribed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 261)
+)
+tmnxIomRsrcOwnerOversubscribed.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCardSlotNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcTimeEventOccured"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcResourceType"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcOwnerType"))
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcOwnerOversubscribed.setStatus(
+        "current"
+    )
+
+tmnxIomRsrcOwnerOversubscrbdClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 262)
+)
+tmnxIomRsrcOwnerOversubscrbdClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCardSlotNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcTimeEventOccured"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcResourceType"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcOwnerType"))
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcOwnerOversubscrbdClr.setStatus(
+        "current"
+    )
+
+tmnxFPResOversubscribed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 263)
+)
+tmnxFPResOversubscribed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tFPResOversub")
+)
+if mibBuilder.loadTexts:
+    tmnxFPResOversubscribed.setStatus(
+        "current"
+    )
+
+tmnxFPResOversubscribedCleared = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 264)
+)
+tmnxFPResOversubscribedCleared.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCardSlotNum"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyFabricSlotNum"))
+)
+if mibBuilder.loadTexts:
+    tmnxFPResOversubscribedCleared.setStatus(
+        "current"
+    )
+
+tmnxEsaHwStatusDegraded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 265)
+)
+tmnxEsaHwStatusDegraded.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusDegraded.setStatus(
+        "current"
+    )
+
+tmnxEsaHwStatusDegradedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 266)
+)
+tmnxEsaHwStatusDegradedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsHardwareStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusDegradedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwStatusCritical = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 267)
+)
+tmnxEsaHwStatusCritical.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusCritical.setStatus(
+        "current"
+    )
+
+tmnxEsaHwStatusCriticalClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 268)
+)
+tmnxEsaHwStatusCriticalClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsHardwareStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusCriticalClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup1Degraded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 269)
+)
+tmnxEsaHwPwrSup1Degraded.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup1Degraded.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup1DegradedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 270)
+)
+tmnxEsaHwPwrSup1DegradedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1Status"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup1DegradedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup1Failed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 271)
+)
+tmnxEsaHwPwrSup1Failed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup1Failed.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup1FailedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 272)
+)
+tmnxEsaHwPwrSup1FailedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply1Status"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup1FailedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup2Degraded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 273)
+)
+tmnxEsaHwPwrSup2Degraded.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup2Degraded.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup2DegradedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 274)
+)
+tmnxEsaHwPwrSup2DegradedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2Status"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup2DegradedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup2Failed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 275)
+)
+tmnxEsaHwPwrSup2Failed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup2Failed.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSup2FailedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 276)
+)
+tmnxEsaHwPwrSup2FailedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPowerSupply2Status"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSup2FailedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanBankNonRedun = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 277)
+)
+tmnxEsaHwFanBankNonRedun.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanBankNonRedun.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanBankNonRedunClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 278)
+)
+tmnxEsaHwFanBankNonRedunClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsFanRedundancy"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanBankNonRedunClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanBankFailRedun = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 279)
+)
+tmnxEsaHwFanBankFailRedun.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanBankFailRedun.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanBankFailRedunClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 280)
+)
+tmnxEsaHwFanBankFailRedunClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsFanRedundancy"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanBankFailRedunClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanStatusDegraded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 281)
+)
+tmnxEsaHwFanStatusDegraded.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanStatusDegraded.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanStatusDegradedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 282)
+)
+tmnxEsaHwFanStatusDegradedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsFanStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanStatusDegradedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanStatusFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 283)
+)
+tmnxEsaHwFanStatusFailed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanStatusFailed.setStatus(
+        "current"
+    )
+
+tmnxEsaHwFanStatusFailedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 284)
+)
+tmnxEsaHwFanStatusFailedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsFanStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwFanStatusFailedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSupMismatch = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 285)
+)
+tmnxEsaHwPwrSupMismatch.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSupMismatch.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSupMismatchClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 286)
+)
+tmnxEsaHwPwrSupMismatchClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPwrSupMismatchStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSupMismatchClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSupBankNonRedun = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 287)
+)
+tmnxEsaHwPwrSupBankNonRedun.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSupBankNonRedun.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSupBankNonRedunClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 288)
+)
+tmnxEsaHwPwrSupBankNonRedunClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPwrSupRedundancy"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSupBankNonRedunClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSupBankFailRedun = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 289)
+)
+tmnxEsaHwPwrSupBankFailRedun.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSupBankFailRedun.setStatus(
+        "current"
+    )
+
+tmnxEsaHwPwrSupBankFailRedunClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 290)
+)
+tmnxEsaHwPwrSupBankFailRedunClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsPwrSupRedundancy"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwPwrSupBankFailRedunClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwTemperatureDegraded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 291)
+)
+tmnxEsaHwTemperatureDegraded.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwTemperatureDegraded.setStatus(
+        "current"
+    )
+
+tmnxEsaHwTemperatureDegradedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 292)
+)
+tmnxEsaHwTemperatureDegradedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsTemperatureStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwTemperatureDegradedClr.setStatus(
+        "current"
+    )
+
+tmnxEsaHwTemperatureFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 293)
+)
+tmnxEsaHwTemperatureFailed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwTemperatureFailed.setStatus(
+        "current"
+    )
+
+tmnxEsaHwTemperatureFailedClr = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 294)
+)
+tmnxEsaHwTemperatureFailedClr.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStatsTemperatureStatus"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwTemperatureFailedClr.setStatus(
+        "current"
+    )
+
+tmnxPowerSupplyFanFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 295)
+)
+tmnxPowerSupplyFanFailed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxPowerSupplyFanFailed.setStatus(
+        "current"
+    )
+
+tmnxPowerSupplyFanFailedClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 296)
+)
+tmnxPowerSupplyFanFailedClear.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxHwClass")
+)
+if mibBuilder.loadTexts:
+    tmnxPowerSupplyFanFailedClear.setStatus(
+        "current"
+    )
+
+tmnxIxrResourceHighUsage = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 297)
+)
+tmnxIxrResourceHighUsage.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrRsrcUtilPercentage"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrResourceHighUsage.setStatus(
+        "current"
+    )
+
+tmnxIxrResourceExhausted = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 298)
+)
+tmnxIxrResourceExhausted.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrResourceExhausted.setStatus(
+        "current"
+    )
+
+tmnxIxrResourceRecovered = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 299)
+)
+tmnxIxrResourceRecovered.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrRsrcUtilPercentage"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrResourceRecovered.setStatus(
+        "current"
+    )
+
+tmnxIxrResourceHighUsageByOwner = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 300)
+)
+tmnxIxrResourceHighUsageByOwner.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResourceOwner"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrRsrcUtilPercentage"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrResourceHighUsageByOwner.setStatus(
+        "current"
+    )
+
+tmnxIxrResourceExhaustedByOwner = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 301)
+)
+tmnxIxrResourceExhaustedByOwner.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResourceOwner"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrResourceExhaustedByOwner.setStatus(
+        "current"
+    )
+
+tmnxIxrResourceRecoveredByOwner = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 302)
+)
+tmnxIxrResourceRecoveredByOwner.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyChassisId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResource"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrResourceOwner"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNotifIxrRsrcUtilPercentage"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrResourceRecoveredByOwner.setStatus(
+        "current"
+    )
+
+tmnxEqCardMissing = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 303)
+)
+tmnxEqCardMissing.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyHwIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqCardMissing.setStatus(
+        "current"
+    )
+
+tmnxEqCardMissingClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 304)
+)
+tmnxEqCardMissingClear.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyHwIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqCardMissingClear.setStatus(
+        "current"
+    )
+
+tmnxEsaStolenTimeDetected = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 305)
+)
+tmnxEsaStolenTimeDetected.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotifyId")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaStolenTimeDetected.setStatus(
+        "current"
+    )
+
+tmnxEqEsaHostPortCrcAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 306)
+)
+tmnxEqEsaHostPortCrcAlarm.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaPortNotifyPortId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcMltiplier"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcAlrmValue"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqEsaHostPortCrcAlarm.setStatus(
+        "current"
+    )
+
+tmnxEqEsaHostPortCrcAlarmClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 307)
+)
+tmnxEqEsaHostPortCrcAlarmClear.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaPortNotifyPortId"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcThreshold"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcMltiplier"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifCrcAlrmValue"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqEsaHostPortCrcAlarmClear.setStatus(
+        "current"
+    )
+
+tmnxEsaFirmwareUpgradeInProgress = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 308)
+)
+tmnxEsaFirmwareUpgradeInProgress.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotifyId")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaFirmwareUpgradeInProgress.setStatus(
+        "current"
+    )
+
+tmnxEsaFirmwareUpgradeDone = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 309)
+)
+tmnxEsaFirmwareUpgradeDone.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotifyId")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaFirmwareUpgradeDone.setStatus(
+        "current"
+    )
+
+tmnxEsaFirmwareUpgradeFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 310)
+)
+tmnxEsaFirmwareUpgradeFailed.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotifyId")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaFirmwareUpgradeFailed.setStatus(
+        "current"
+    )
+
+tmnxChassisAntiTheftModeBoot = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 311)
+)
+tmnxChassisAntiTheftModeBoot.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyHwIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisAntiTheftModeBoot.setStatus(
+        "current"
+    )
+
+tmnxChassisAntiTheftUnlocked = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 312)
+)
+tmnxChassisAntiTheftUnlocked.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyHwIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisAntiTheftUnlocked.setStatus(
+        "current"
+    )
+
+tmnxEqLowPowerSwFabModeEnabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 313)
+)
+if mibBuilder.loadTexts:
+    tmnxEqLowPowerSwFabModeEnabled.setStatus(
+        "current"
+    )
+
+tmnxEqLowPowerSwFabModeDisabled = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 314)
+)
+if mibBuilder.loadTexts:
+    tmnxEqLowPowerSwFabModeDisabled.setStatus(
+        "current"
+    )
+
+tmnxChassisGoldenStatusEvent = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 315)
+)
+tmnxChassisGoldenStatusEvent.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyCpmCardSlotNum"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisGoldenStatusEvent.setStatus(
+        "current"
+    )
+
+tmnxEqFlashDiskFormatStart = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 318)
+)
+tmnxEqFlashDiskFormatStart.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyHwIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyDiskFormatType"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqFlashDiskFormatStart.setStatus(
+        "current"
+    )
+
+tmnxEqFlashDiskFormatFinish = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 2, 1, 0, 319)
+)
+tmnxEqFlashDiskFormatFinish.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyHwIndex"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwID"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwClass"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyDiskFormatType"))
+)
+if mibBuilder.loadTexts:
+    tmnxEqFlashDiskFormatFinish.setStatus(
         "current"
     )
 
@@ -29011,7 +37558,7 @@ tmnxIomRsrcNotifyV21v0Grp.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxIomRsrcNotifyV21v0Grp.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxHwAggShpNotifGroupV22v0 = NotificationGroup(
@@ -29023,6 +37570,208 @@ tmnxHwAggShpNotifGroupV22v0.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxHwAggShpNotifGroupV22v0.setStatus(
+        "current"
+    )
+
+tmnxIomRsrcNotifyV22v0Grp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 16)
+)
+tmnxIomRsrcNotifyV22v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcOwnerOversubscribed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcOwnerOversubscrbdClr"))
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcNotifyV22v0Grp.setStatus(
+        "current"
+    )
+
+tmnxFPResOversubNotifGroupV22v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 19)
+)
+tmnxFPResOversubNotifGroupV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxFPResOversubscribed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPResOversubscribedCleared"))
+)
+if mibBuilder.loadTexts:
+    tmnxFPResOversubNotifGroupV22v0.setStatus(
+        "current"
+    )
+
+tmnxEsaHwStatusMonNotifGrpV22v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 20)
+)
+tmnxEsaHwStatusMonNotifGrpV22v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusDegraded"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusDegradedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusCritical"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusCriticalClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup1Degraded"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup1DegradedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup1Failed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup1FailedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup2Degraded"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup2DegradedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup2Failed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSup2FailedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanBankNonRedun"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanBankNonRedunClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanBankFailRedun"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanBankFailRedunClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanStatusDegraded"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanStatusDegradedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanStatusFailed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwFanStatusFailedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSupMismatch"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSupMismatchClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSupBankNonRedun"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSupBankNonRedunClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSupBankFailRedun"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwPwrSupBankFailRedunClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwTemperatureDegraded"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwTemperatureDegradedClr"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwTemperatureFailed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwTemperatureFailedClr"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHwStatusMonNotifGrpV22v0.setStatus(
+        "current"
+    )
+
+tmnxEsaStallNotifV22v0Grp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 84, 24)
+)
+tmnxEsaStallNotifV22v0Grp.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxEsaStolenTimeDetected")
+)
+if mibBuilder.loadTexts:
+    tmnxEsaStallNotifV22v0Grp.setStatus(
+        "current"
+    )
+
+tmnxIomRsrcNotifyV23v0Grp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 8)
+)
+tmnxIomRsrcNotifyV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsageHighLimitReached"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsageExhausted"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcUsageRecovered"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcEventOverflow"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcEventOverflowClr"))
+)
+if mibBuilder.loadTexts:
+    tmnxIomRsrcNotifyV23v0Grp.setStatus(
+        "current"
+    )
+
+tmnxChassisPwrMgmtNotifsV23v0Grp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 18)
+)
+tmnxChassisPwrMgmtNotifsV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxPowerSupplyFanFailed"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPowerSupplyFanFailedClear"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisPwrMgmtNotifsV23v0Grp.setStatus(
+        "current"
+    )
+
+tmnxIxrRsrcNotifsGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 20)
+)
+tmnxIxrRsrcNotifsGroup.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxIxrResourceHighUsage"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrResourceHighUsageByOwner"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrResourceExhausted"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrResourceExhaustedByOwner"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrResourceRecovered"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrResourceRecoveredByOwner"))
+)
+if mibBuilder.loadTexts:
+    tmnxIxrRsrcNotifsGroup.setStatus(
+        "current"
+    )
+
+tnmxCardEqNotifsV23v0Grp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 85, 21)
+)
+tnmxCardEqNotifsV23v0Grp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEqCardMissing"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEqCardMissingClear"))
+)
+if mibBuilder.loadTexts:
+    tnmxCardEqNotifsV23v0Grp.setStatus(
+        "current"
+    )
+
+tmnxEsaHostPortNotifV24v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 17)
+)
+tmnxEsaHostPortNotifV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEqEsaHostPortCrcAlarm"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEqEsaHostPortCrcAlarmClear"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaHostPortNotifV24v0Group.setStatus(
+        "current"
+    )
+
+tmnxEsaFirmUpgNotifV24v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 19)
+)
+tmnxEsaFirmUpgNotifV24v0Group.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEsaFirmwareUpgradeInProgress"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaFirmwareUpgradeDone"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaFirmwareUpgradeFailed"))
+)
+if mibBuilder.loadTexts:
+    tmnxEsaFirmUpgNotifV24v0Group.setStatus(
+        "current"
+    )
+
+tmnxChassisOsSecV24v0NotifGrp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 86, 24)
+)
+tmnxChassisOsSecV24v0NotifGrp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisAntiTheftModeBoot"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisAntiTheftUnlocked"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisOsSecV24v0NotifGrp.setStatus(
+        "current"
+    )
+
+tmnxLowPowerSwFabV25v0NotifGrp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 3)
+)
+tmnxLowPowerSwFabV25v0NotifGrp.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEqLowPowerSwFabModeEnabled"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEqLowPowerSwFabModeDisabled"))
+)
+if mibBuilder.loadTexts:
+    tmnxLowPowerSwFabV25v0NotifGrp.setStatus(
+        "current"
+    )
+
+tmnxChGoldenStatusV25v0Group = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 4)
+)
+tmnxChGoldenStatusV25v0Group.setObjects(
+    ("TIMETRA-CHASSIS-MIB", "tmnxChassisGoldenStatusEvent")
+)
+if mibBuilder.loadTexts:
+    tmnxChGoldenStatusV25v0Group.setStatus(
+        "current"
+    )
+
+tmnxSecEraseNotificationGrpV25v0 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 2, 87, 15)
+)
+tmnxSecEraseNotificationGrpV25v0.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxEqFlashDiskFormatStart"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEqFlashDiskFormatFinish"))
+)
+if mibBuilder.loadTexts:
+    tmnxSecEraseNotificationGrpV25v0.setStatus(
         "current"
     )
 
@@ -29216,7 +37965,6 @@ tmnxChassis7750V6v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnx77x0CESMDAV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV6v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardPchipV5v0Group"),
@@ -29237,7 +37985,6 @@ tmnxChassis7450V6v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV4v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV6v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardPchipV5v0Group"),
@@ -29260,7 +38007,6 @@ tmnxChassis7750V6v1Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnx77x0CESMDAV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV6v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV6v1Group"),
@@ -29285,7 +38031,6 @@ tmnxChassis7450V6v1Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV6v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV6v1Group"),
@@ -29312,7 +38057,6 @@ tmnxChassis7750V7v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnx77x0CESMDAV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV6v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV6v1Group"),
@@ -29342,7 +38086,6 @@ tmnxChassis7450V7v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV7v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV6v1Group"),
@@ -29375,7 +38118,6 @@ tmnxChassis7x50V8v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnx7710HwV3v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnx7710SETSRefSrcHwV6v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisV7v0Group"),
@@ -29415,7 +38157,6 @@ tmnxChassisV9v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV3v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV6v0NamedPoolPlcyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCardV7v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHsmdaV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventNotifyGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV6v1Group"),
@@ -29436,7 +38177,6 @@ tmnxChassisV9v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV9v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifyV9v0Group"),
@@ -29484,7 +38224,6 @@ tmnxChassisV10v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV9v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifyV9v0Group"),
@@ -29497,7 +38236,6 @@ tmnxChassisV10v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxFPQGrpV10v0R4Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyV10v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventGroupV10v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventNotifyGrpV10v0"))
 )
@@ -29556,8 +38294,6 @@ tmnxChassisV11v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV9v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
@@ -29636,8 +38372,6 @@ tmnxChassisV12v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV9v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
@@ -29731,8 +38465,6 @@ tmnxChassisV13v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAMcPathMgmtV6v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV9v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
@@ -29853,7 +38585,6 @@ tmnxChassisV15v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecV7v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV15v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
@@ -29977,7 +38708,6 @@ tmnxChassisV16v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecV7v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDAV15v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
@@ -30046,6 +38776,7 @@ tmnxChassisV16v0Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisMdaLevelGroupV15v1"),
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMNotifGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxNearFullNotifGroupV16v0"),
@@ -30141,7 +38872,6 @@ tmnxChassisV19Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecV7v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMDACcagV6v1Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifyV9v0Group"),
@@ -30209,6 +38939,7 @@ tmnxChassisV19Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisMdaLevelGroupV15v1"),
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMNotifGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxNearFullNotifGroupV16v0"),
@@ -30300,7 +39031,6 @@ tmnxChassisV20Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecNotifV7v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIPsecV7v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV10v0Group"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxMdaHsmdaPoolV10v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifyV9v0Group"),
@@ -30367,6 +39097,7 @@ tmnxChassisV20Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisMdaLevelGroupV15v1"),
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMNotifGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxNearFullNotifGroupV16v0"),
@@ -30538,6 +39269,7 @@ tmnxChassisV21Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroup"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisMdaLevelGroupV15v1"),
         ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMNotifGroupV16v0"),
         ("TIMETRA-CHASSIS-MIB", "tmnxNearFullNotifGroupV16v0"),
@@ -30583,6 +39315,7 @@ tmnxChassisV21Compliance.setObjects(
         ("TIMETRA-CHASSIS-MIB", "tmnxFPNotificationV20Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResPlcrV19v0Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrXFanV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV21Group"),
         ("TIMETRA-CHASSIS-MIB", "tmnxMdaXConnectGroupV21"),
         ("TIMETRA-CHASSIS-MIB", "tmnxCoreDdctdPolicerResGroupV21"),
         ("TIMETRA-CHASSIS-MIB", "tmnxFPToFPStatGroupV21"),
@@ -30606,18 +39339,539 @@ tmnxChassisV21Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxChassisV21Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxChassisV22v0Compliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 1, 27)
 )
 tmnxChassisV22v0Compliance.setObjects(
-      *(("TIMETRA-CHASSIS-MIB", "tmnxHwAggShpNotifyObjsV22v0Grp"),
-        ("TIMETRA-CHASSIS-MIB", "tmnxHwAggShpNotifGroupV22v0"))
+      *(("TIMETRA-CHASSIS-MIB", "tmnxMinFpGenerationV22v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwAggShpNotifyObjsV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwAggShpNotifGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsa400gGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusMonGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassPSStateGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResPortFwdIdGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResShardPlcrGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreResUsgStatsGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwTempGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCamOverloadGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResShardPlcrStatGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmSecureBootGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyObjsV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaGrpESPSeqNumGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOversubGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPResOversubNotifGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusMonNotifGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShaperV22v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStallNotifV22v0Grp"))
 )
 if mibBuilder.loadTexts:
     tmnxChassisV22v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxChassisV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 1, 28)
+)
+tmnxChassisV23v0Compliance.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResourceGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxXiomGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCoreDdctdPolicerResGroupV23"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisRebootReqdGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxXiomGroupV20v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifGroupV20v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnx7710HwV3v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnx7710SETSRefSrcHwV6v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardCamErrorV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardPchipV5v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardPchipV8v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV3v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFabricV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFanV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventNotifyGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyObjsV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerMgmtGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerMgmtNotifyGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisQGrpOvrGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisSwitchFabNtfyV11v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisUserModV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardRebootHoldV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPDCpuProtV11v0R0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPDcpNotifyObjsV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPDcpNotifyV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV15v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPQGrpGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPQGrpV10v0R4Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPWredV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV6v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecNotifV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifyV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV8v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncV6v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPPoolSizingV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardCmplxMemErrV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPBufAllocV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardCmplQChipMemErrV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardCmplChipIfErrV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPPlcyAcctV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerSupplyV9v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisSmartPeqV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassPANotifyObjsV12v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPlcyAcctNtfyV12v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomResrcNotifyObjsV12v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomResrcNotifyV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventGroupV10v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventNotifyGrpV10v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardVirtualSchAdjV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisMgmtEthRedNtfV13v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisMgmtEthRedV13v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerMgmtGroupV13v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyObjsV13v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFpResourceV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardResetOnRecoverErGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAResetOnRecoverErGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmMemSizeNotifGroupV12v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmPChipFcsObjGroupV12v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResourceV14v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmFlashV14v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisNotifGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV14v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tFPFwdEngStatsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaMemWMarkNotifGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmMemSizeNotifGroupV12v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaGrpIsaScaleModeGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardVirtualGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFanV15v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPEgrHsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisNotifGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIcmpMtuExceededStatGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardResMacFdbUsgNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMacScaleNotifyObjsV15v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPResIngV15v0QGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPResEgrV15v0QGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV15v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPCMGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMinFpGenerationGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassPCMNotifGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV16v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardComplexGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCardLevelGroupV15v1"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisMdaLevelGroupV15v1"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMNotifGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNearFullNotifGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV16v0ObsoleteGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV16v0FpgaSoftErrNotifGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAIsaTnlStatsV16v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardPowerSaveGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPNetworkIngressGroupV19v5"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV19v5Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmGroupV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrRmrkV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIngClassV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResDynCAMV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIpMacCAMV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV19v0NotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwEventGroupV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwEventNotifyObjsGrpV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwEventNotifGroupV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmNotifGrpV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotificationObjectGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotificationGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardSapInstV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPQosPolicyV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResQMgmtV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSapResourceUsageV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV20v0ObsoleteGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnx77x0CESMDAV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPv6MCastCamV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResourceV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV20v0ObsoleteGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingGnssV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrRmrkV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV20v0NotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisDot1xHostV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResDepthMQV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFPQppbPolV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPNotificationV20Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResPlcrV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrXFanV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV21Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaXConnectGroupV21"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCoreDdctdPolicerResGroupV21"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPToFPStatGroupV21"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResPlcrV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShaperV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResTLSMcastV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifGroupV21v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIngClassV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrRmrkV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIngrMapsV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrMapsV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResLagBundl1V21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResLagBundl2V21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResSysBundleV21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResPerHostAutV21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisDrpCntrJ1V21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResMacCamBnkV21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyObjsV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcObjObsoleteGrpV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreResUsgStatsGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsa100g2GroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIOCapacityV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSharedPolicersV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtNotifsV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrRsrcNotifyObjsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrRsrcNotifsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaGrpESPSeqNumGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tnmxCardEqNotifsV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSrv6TunnelTermV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaMemberPoolV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShaperV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResourceJ2Group"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResDynEcmpAllocGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResMtuProfileV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirSrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirIxrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirSrIxrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirNotSrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStallNotifV22v0Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisV23v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxChassisV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 1, 29)
+)
+tmnxChassisV24v0Compliance.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxMinFpGenerationV22v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwAggShpNotifyObjsV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwAggShpNotifGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsa400gGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusMonGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassPSStateGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResPortFwdIdGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResShardPlcrGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreResUsgStatsGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwTempGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCamOverloadGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisResShardPlcrStatGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmSecureBootGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyObjsV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaGrpESPSeqNumGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResOversubGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPResOversubNotifGroupV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusMonNotifGrpV22v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResourceV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxXiomGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCoreDdctdPolicerResGroupV23"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisRebootReqdGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxXiomGroupV20v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifGroupV20v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnx7710HwV3v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnx7710SETSRefSrcHwV6v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardCamErrorV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardPchipV5v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardPchipV8v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV3v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFabricV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFanV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventNotifyGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotificationV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyObjsV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerMgmtGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerMgmtNotifyGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisQGrpOvrGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisSwitchFabNtfyV11v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisUserModV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardRebootHoldV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPDCpuProtV11v0R0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPDcpNotifyObjsV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPDcpNotifyV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV6v1Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPMcPathMgmtV15v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPQGrpGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPQGrpV10v0R4Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPWredV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV6v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecNotifV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecV7v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV10v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaXplV5v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifV8v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingNotifyV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV8v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncV6v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPPoolSizingV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardCmplxMemErrV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPBufAllocV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardCmplQChipMemErrV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardCmplChipIfErrV9v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPPlcyAcctV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerSupplyV9v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisSmartPeqV11v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassPANotifyObjsV12v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPlcyAcctNtfyV12v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomResrcNotifyObjsV12v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomResrcNotifyV12v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventGroupV10v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisHwEventNotifyGrpV10v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardVirtualSchAdjV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisMgmtEthRedNtfV13v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisMgmtEthRedV13v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPowerMgmtGroupV13v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifyObjsV13v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFpResourceV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPV13v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardResetOnRecoverErGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAResetOnRecoverErGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmMemSizeNotifGroupV12v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmPChipFcsObjGroupV12v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResourceV14v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmFlashV14v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisNotifGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV14v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tFPFwdEngStatsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaMemWMarkNotifGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmMemSizeNotifGroupV12v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaGrpIsaScaleModeGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardVirtualGroupV14v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFanV15v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPEgrHsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisNotifGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIcmpMtuExceededStatGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardResMacFdbUsgNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMacScaleNotifyObjsV15v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPResIngV15v0QGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPResEgrV15v0QGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPsecIsaGrpV15v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPCMGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMinFpGenerationGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassPCMNotifGroupV15v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV16v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardComplexGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCardLevelGroupV15v1"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisGnssNotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisMdaLevelGroupV15v1"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxPhysChassisPMNotifGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxNearFullNotifGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV16v0ObsoleteGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV16v0FpgaSoftErrNotifGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAIsaTnlStatsV16v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardPowerSaveGroupV16v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPNetworkIngressGroupV19v5"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardV19v5Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmGroupV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrRmrkV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIngClassV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResDynCAMV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIpMacCAMV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV19v0NotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwEventGroupV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwEventNotifyObjsGrpV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxHwEventNotifGroupV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxTunnelGrpEsaVmNotifGrpV19v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotificationObjectGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaNotificationGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardSapInstV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardFPQosPolicyV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResQMgmtV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSapResourceUsageV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisV20v0ObsoleteGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIPv6MCastCamV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResourceV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV20v0ObsoleteGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingGnssV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrRmrkV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncIfTimingV20v0NotifGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisDot1xHostV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResDepthMQV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFPQppbPolV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPNotificationV20Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResPlcrV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrXFanV20v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIpsecV21Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaXConnectGroupV21"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCoreDdctdPolicerResGroupV21"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPToFPStatGroupV21"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCoreResPlcrV19v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShaperV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tCardResTLSMcastV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisNotifGroupV21v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIngClassV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrRmrkV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIngrMapsV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEgrMapsV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResLagBundl1V21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResLagBundl2V21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResSysBundleV21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResPerHostAutV21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisDrpCntrJ1V21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtV21v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResMacCamBnkV21v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyObjsV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcNotifyV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIomRsrcObjObsoleteGrpV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFPCoreResUsgStatsGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsa100g2GroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResIOCapacityV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSharedPolicersV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtNotifsV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrRsrcNotifyObjsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIxrRsrcNotifsGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaGrpESPSeqNumGroupV23v0"),
+        ("TIMETRA-CHASSIS-MIB", "tnmxCardEqNotifsV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResSrv6TunnelTermV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIsaMemberPoolV23v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResourceJ2Group"),
+        ("TIMETRA-CHASSIS-MIB", "tChassisIxrResDynEcmpAllocGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResMtuProfileV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirSrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirIxrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirSrIxrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisResEprirNotSrV23v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisCemMDAV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResEgrHwAggShaperV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFlashV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusPwrLoadV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHwStatusTempV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxVirtualSchedAdjV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaStallNotifV22v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortStatsV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxIpsecLoadBalV24Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMdaFlexEV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortCrcMonV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisFpIxrResV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaHostPortNotifV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisOsSecV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxEsaFirmUpgNotifV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxVlanQosScalingModeGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResOwnV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisIxrResScaleV24v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardIxrResourcesV24v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChassisOsSecV24v0NotifGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardIxrPpmcResourcesGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCardIxrPpmcResourcesGroup2"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxChassisV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 2, 1, 1, 30)
+)
+tmnxChassisV25v0Compliance.setObjects(
+      *(("TIMETRA-CHASSIS-MIB", "tmnxChassisPwrMgmtLowPwrV25v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tFPResV25v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxLowPowerSwFabV25v0NotifGrp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxChGoldenStatusV25v0Group"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSyncFreqOffsetInPpbGroup"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxMDAMacModeV25v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxFltrSharedPlcrV25v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSchedulerFlowsV25v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxCpmCardOsSecurityV25v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSecEraseNotifyObjsV25v0Grp"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxSecEraseNotificationGrpV25v0"),
+        ("TIMETRA-CHASSIS-MIB", "tmnxVirtualFlowsV25v0Grp"))
+)
+if mibBuilder.loadTexts:
+    tmnxChassisV25v0Compliance.setStatus(
         "current"
     )
 
@@ -30645,9 +39899,13 @@ mibBuilder.exportSymbols(
        "TmnxCardRebootType": TmnxCardRebootType,
        "TmnxChassisType": TmnxChassisType,
        "TmnxDeviceState": TmnxDeviceState,
+       "TmnxCardFpIxrResourceEgressType": TmnxCardFpIxrResourceEgressType,
+       "TmnxCardFpIxrResourceEgressSet": TmnxCardFpIxrResourceEgressSet,
+       "TmnxCardFpIxrResourceEgressPhase": TmnxCardFpIxrResourceEgressPhase,
        "TmnxLEDState": TmnxLEDState,
        "TmnxMdaType": TmnxMdaType,
        "TmnxXiomType": TmnxXiomType,
+       "TmnxXiomSuppType": TmnxXiomSuppType,
        "TmnxMDASuppType": TmnxMDASuppType,
        "TmnxMDAChanType": TmnxMDAChanType,
        "TmnxMdaAtmMode": TmnxMdaAtmMode,
@@ -30693,6 +39951,16 @@ mibBuilder.exportSymbols(
        "TmnxEsaVmId": TmnxEsaVmId,
        "TmnxEsaVmIdOrZero": TmnxEsaVmIdOrZero,
        "TmnxEsaDeviceState": TmnxEsaDeviceState,
+       "TmnxEsaDeviceRedundancyState": TmnxEsaDeviceRedundancyState,
+       "TmnxEsaDeviceMismatchState": TmnxEsaDeviceMismatchState,
+       "TmnxSBUefiVarsState": TmnxSBUefiVarsState,
+       "TmnxIxrResourceOwner": TmnxIxrResourceOwner,
+       "TmnxCardIxrResourceOwner": TmnxCardIxrResourceOwner,
+       "TmnxEsaHostPortMonReportValue": TmnxEsaHostPortMonReportValue,
+       "TmnxMdaFlexGroupErrors": TmnxMdaFlexGroupErrors,
+       "TmnxMdaFlexMemberErrors": TmnxMdaFlexMemberErrors,
+       "TmnxMdaFlexMbrInstErrors": TmnxMdaFlexMbrInstErrors,
+       "TmnxFpIxrAvailableLifs": TmnxFpIxrAvailableLifs,
        "tmnxChassisMIBModule": tmnxChassisMIBModule,
        "tmnxHwConformance": tmnxHwConformance,
        "tmnxChassisConformance": tmnxChassisConformance,
@@ -30727,6 +39995,9 @@ mibBuilder.exportSymbols(
        "tmnxChassisV20Compliance": tmnxChassisV20Compliance,
        "tmnxChassisV21Compliance": tmnxChassisV21Compliance,
        "tmnxChassisV22v0Compliance": tmnxChassisV22v0Compliance,
+       "tmnxChassisV23v0Compliance": tmnxChassisV23v0Compliance,
+       "tmnxChassisV24v0Compliance": tmnxChassisV24v0Compliance,
+       "tmnxChassisV25v0Compliance": tmnxChassisV25v0Compliance,
        "tmnxChassisGroups": tmnxChassisGroups,
        "tmnxChassisNotifyObjsGroup": tmnxChassisNotifyObjsGroup,
        "tmnxChassisNotifyObsoleteGroup": tmnxChassisNotifyObsoleteGroup,
@@ -30744,7 +40015,6 @@ mibBuilder.exportSymbols(
        "tmnxChassisNotificationV3v0Group": tmnxChassisNotificationV3v0Group,
        "tmnxChassisNotificationV6v0Group": tmnxChassisNotificationV6v0Group,
        "tmnx7710SETSRefSrcHwV6v0Group": tmnx7710SETSRefSrcHwV6v0Group,
-       "tmnxChassisHsmdaV6v0Group": tmnxChassisHsmdaV6v0Group,
        "tmnxMDAMcPathMgmtV6v0Group": tmnxMDAMcPathMgmtV6v0Group,
        "tmnxCardV6v0NamedPoolPlcyGroup": tmnxCardV6v0NamedPoolPlcyGroup,
        "tmnxChassisNotifyObjsV6v0Group": tmnxChassisNotifyObjsV6v0Group,
@@ -30778,7 +40048,6 @@ mibBuilder.exportSymbols(
        "tmnxSyncIfTimingV9v0Group": tmnxSyncIfTimingV9v0Group,
        "tmnxSyncIfTimingNotifyV9v0Group": tmnxSyncIfTimingNotifyV9v0Group,
        "tmnxChassisNotifyObjsV9v0Group": tmnxChassisNotifyObjsV9v0Group,
-       "tmnxMDAV9v0Group": tmnxMDAV9v0Group,
        "tmnxCardPchipV8v0Group": tmnxCardPchipV8v0Group,
        "tmnxChassisNotifyObjsV8v0Group": tmnxChassisNotifyObjsV8v0Group,
        "tmnxFPQGrpGroup": tmnxFPQGrpGroup,
@@ -30788,9 +40057,7 @@ mibBuilder.exportSymbols(
        "tmnxChassisNotificationV9v0Group": tmnxChassisNotificationV9v0Group,
        "tmnxFPQGrpV10v0R4Group": tmnxFPQGrpV10v0R4Group,
        "tmnxMdaV10v0Group": tmnxMdaV10v0Group,
-       "tmnxMdaObsoletedV10v0Group": tmnxMdaObsoletedV10v0Group,
        "tmnxChassisNotifyV10v0Group": tmnxChassisNotifyV10v0Group,
-       "tmnxMdaHsmdaPoolV10v0Group": tmnxMdaHsmdaPoolV10v0Group,
        "tmnxChassisV11v0Groups": tmnxChassisV11v0Groups,
        "tmnxFPDCpuProtV11v0R0Group": tmnxFPDCpuProtV11v0R0Group,
        "tmnxFPDcpNotifyObjsV11v0Group": tmnxFPDcpNotifyObjsV11v0Group,
@@ -30895,6 +40162,7 @@ mibBuilder.exportSymbols(
        "tmnxChassisFanObsoleteGroupV16v0": tmnxChassisFanObsoleteGroupV16v0,
        "tmnxPhysChassisPMGroupV16v0": tmnxPhysChassisPMGroupV16v0,
        "tmnxChassisGnssGroup": tmnxChassisGnssGroup,
+       "tmnxMdaFlexGroupV16v0": tmnxMdaFlexGroupV16v0,
        "tmnxChassisGnssNotifGroup": tmnxChassisGnssNotifGroup,
        "tmnxPhysChassisPMNotifGroupV16v0": tmnxPhysChassisPMNotifGroupV16v0,
        "tmnxNearFullNotifGroupV16v0": tmnxNearFullNotifGroupV16v0,
@@ -30903,6 +40171,8 @@ mibBuilder.exportSymbols(
        "tmnxCardEncapGrpV16v5Group": tmnxCardEncapGrpV16v5Group,
        "tmnxMDAIsaTnlStatsV16v0Group": tmnxMDAIsaTnlStatsV16v0Group,
        "tmnxCardPowerSaveGroupV16v0": tmnxCardPowerSaveGroupV16v0,
+       "tmnxChassPSStateGroupV22v0": tmnxChassPSStateGroupV22v0,
+       "tmnxCpmSecureBootGroupV22v0": tmnxCpmSecureBootGroupV22v0,
        "tmnxChassisV15v1Groups": tmnxChassisV15v1Groups,
        "tmnxBluetoothGroupV15v1": tmnxBluetoothGroupV15v1,
        "tmnxOverloadNotifGroupV15v1": tmnxOverloadNotifGroupV15v1,
@@ -30957,13 +40227,13 @@ mibBuilder.exportSymbols(
        "tmnxFPNotificationV20Group": tmnxFPNotificationV20Group,
        "tmnxChassisIxrXFanV20v0Group": tmnxChassisIxrXFanV20v0Group,
        "tmnxChassisV21Groups": tmnxChassisV21Groups,
+       "tmnxIpsecV21Group": tmnxIpsecV21Group,
        "tmnxMdaXConnectGroupV21": tmnxMdaXConnectGroupV21,
        "tmnxCoreDdctdPolicerResGroupV21": tmnxCoreDdctdPolicerResGroupV21,
        "tmnxFPToFPStatGroupV21": tmnxFPToFPStatGroupV21,
        "tmnxCcagObsoleteGroupV21": tmnxCcagObsoleteGroupV21,
        "tmnxMDAV21v0Group": tmnxMDAV21v0Group,
        "tmnxChassisResourceV21v0Group": tmnxChassisResourceV21v0Group,
-       "tmnxHsmdaObsoleteV21v0Group": tmnxHsmdaObsoleteV21v0Group,
        "tFPResEgrHwAggShaperV21v0Group": tFPResEgrHwAggShaperV21v0Group,
        "tmnxHwObsoleteV21v0Group": tmnxHwObsoleteV21v0Group,
        "tmnxIssuObsoleteV21v0Group": tmnxIssuObsoleteV21v0Group,
@@ -30983,8 +40253,101 @@ mibBuilder.exportSymbols(
        "tmnxChassisPwrMgmtV21v0Group": tmnxChassisPwrMgmtV21v0Group,
        "tmnxChassisResMacCamBnkV21v0Grp": tmnxChassisResMacCamBnkV21v0Grp,
        "tmnxChassisV22v0Groups": tmnxChassisV22v0Groups,
+       "tmnxMinFpGenerationV22v0Group": tmnxMinFpGenerationV22v0Group,
        "tmnxHwAggShpNotifyObjsV22v0Grp": tmnxHwAggShpNotifyObjsV22v0Grp,
        "tmnxHwAggShpNotifGroupV22v0": tmnxHwAggShpNotifGroupV22v0,
+       "tmnxEsa400gGroupV22v0": tmnxEsa400gGroupV22v0,
+       "tmnxEsaHwStatusMonGroupV22v0": tmnxEsaHwStatusMonGroupV22v0,
+       "tmnxChassisGnssGroupV22v0": tmnxChassisGnssGroupV22v0,
+       "tmnxChassisResPortFwdIdGrpV22v0": tmnxChassisResPortFwdIdGrpV22v0,
+       "tmnxChassisResShardPlcrGrpV22v0": tmnxChassisResShardPlcrGrpV22v0,
+       "tmnxFPCoreResUsgStatsGroupV22v0": tmnxFPCoreResUsgStatsGroupV22v0,
+       "tmnxHwTempGroupV22v0": tmnxHwTempGroupV22v0,
+       "tmnxCamOverloadGroupV22v0": tmnxCamOverloadGroupV22v0,
+       "tmnxSyncIfTimingGroupV22v0": tmnxSyncIfTimingGroupV22v0,
+       "tChassisResShardPlcrStatGrpV22v0": tChassisResShardPlcrStatGrpV22v0,
+       "tmnxIomRsrcNotifyObjsV22v0Grp": tmnxIomRsrcNotifyObjsV22v0Grp,
+       "tmnxIomRsrcNotifyV22v0Grp": tmnxIomRsrcNotifyV22v0Grp,
+       "tmnxIsaGrpESPSeqNumGroupV22v0": tmnxIsaGrpESPSeqNumGroupV22v0,
+       "tFPResOversubGroupV22v0": tFPResOversubGroupV22v0,
+       "tmnxFPResOversubNotifGroupV22v0": tmnxFPResOversubNotifGroupV22v0,
+       "tmnxEsaHwStatusMonNotifGrpV22v0": tmnxEsaHwStatusMonNotifGrpV22v0,
+       "tFPResEgrHwAggShaperV22v0Group": tFPResEgrHwAggShaperV22v0Group,
+       "tmnxIsaGrpESPSeqNumGroupV23v0": tmnxIsaGrpESPSeqNumGroupV23v0,
+       "tmnxIsaMemberPoolV23v0Group": tmnxIsaMemberPoolV23v0Group,
+       "tmnxEsaStallNotifV22v0Grp": tmnxEsaStallNotifV22v0Grp,
+       "tmnxChassisV23v0Groups": tmnxChassisV23v0Groups,
+       "tmnxXiomGroupV23v0": tmnxXiomGroupV23v0,
+       "tmnxCoreDdctdPolicerResGroupV23": tmnxCoreDdctdPolicerResGroupV23,
+       "tmnxChassisRebootReqdGroupV23v0": tmnxChassisRebootReqdGroupV23v0,
+       "tmnxChassisAtmObsoleteGroupV23v0": tmnxChassisAtmObsoleteGroupV23v0,
+       "tmnxChassisIxrResourceGroup": tmnxChassisIxrResourceGroup,
+       "tmnxIomRsrcObjObsoleteGrpV23v0": tmnxIomRsrcObjObsoleteGrpV23v0,
+       "tmnxIomRsrcNotifyObjsV23v0Grp": tmnxIomRsrcNotifyObjsV23v0Grp,
+       "tmnxIomRsrcNotifyV23v0Grp": tmnxIomRsrcNotifyV23v0Grp,
+       "tmnxSapResourceUsageV23v0Group": tmnxSapResourceUsageV23v0Group,
+       "tmnxSapResUsageObsoletedGroup": tmnxSapResUsageObsoletedGroup,
+       "tmnxFPCoreResUsgStatsGroupV23v0": tmnxFPCoreResUsgStatsGroupV23v0,
+       "tmnxEsa100g2GroupV23v0": tmnxEsa100g2GroupV23v0,
+       "tmnxChassisResIOCapacityV23v0Grp": tmnxChassisResIOCapacityV23v0Grp,
+       "tFPResSharedPolicersV23v0Group": tFPResSharedPolicersV23v0Group,
+       "tmnxChassisResourceV23v0Group": tmnxChassisResourceV23v0Group,
+       "tmnxChassisResObsoletedGroup": tmnxChassisResObsoletedGroup,
+       "tmnxChassisPwrMgmtV23v0Group": tmnxChassisPwrMgmtV23v0Group,
+       "tmnxChassisPwrMgmtNotifsV23v0Grp": tmnxChassisPwrMgmtNotifsV23v0Grp,
+       "tmnxIxrRsrcNotifyObjsGroup": tmnxIxrRsrcNotifyObjsGroup,
+       "tmnxIxrRsrcNotifsGroup": tmnxIxrRsrcNotifsGroup,
+       "tnmxCardEqNotifsV23v0Grp": tnmxCardEqNotifsV23v0Grp,
+       "tFPResSrv6TunnelTermV23v0Group": tFPResSrv6TunnelTermV23v0Group,
+       "tFPResEgrHwAggShaperV23v0Group": tFPResEgrHwAggShaperV23v0Group,
+       "tmnxChassisIxrResourceJ2Group": tmnxChassisIxrResourceJ2Group,
+       "tmnxIxrRsrcObsoletedGroup": tmnxIxrRsrcObsoletedGroup,
+       "tChassisIxrResDynEcmpAllocGroup": tChassisIxrResDynEcmpAllocGroup,
+       "tmnxChassisResMtuProfileV23v0Grp": tmnxChassisResMtuProfileV23v0Grp,
+       "tmnxChassisResEprirSrV23v0Grp": tmnxChassisResEprirSrV23v0Grp,
+       "tmnxChassisResEprirIxrV23v0Grp": tmnxChassisResEprirIxrV23v0Grp,
+       "tmnxChassisResEprirSrIxrV23v0Grp": tmnxChassisResEprirSrIxrV23v0Grp,
+       "tmnxChassisResEprirNotSrV23v0Grp": tmnxChassisResEprirNotSrV23v0Grp,
+       "tmnxChassisIxrResourceV24v0Group": tmnxChassisIxrResourceV24v0Group,
+       "tmnxVlanQosScalingModeGroup": tmnxVlanQosScalingModeGroup,
+       "tmnxChassisV24v0Groups": tmnxChassisV24v0Groups,
+       "tmnxChassisMDAV24v0ObsoletedGrp": tmnxChassisMDAV24v0ObsoletedGrp,
+       "tmnxChassisCemMDAV24v0Group": tmnxChassisCemMDAV24v0Group,
+       "tFPResEgrHwAggSV24v0ObsoletedGrp": tFPResEgrHwAggSV24v0ObsoletedGrp,
+       "tFPResEgrHwAggShaperV24v0Group": tFPResEgrHwAggShaperV24v0Group,
+       "tmnxFlashV24v0Group": tmnxFlashV24v0Group,
+       "tmnxEsaHwStatusPwrLoadV24v0Grp": tmnxEsaHwStatusPwrLoadV24v0Grp,
+       "tmnxEsaHwStatusTempV24v0Grp": tmnxEsaHwStatusTempV24v0Grp,
+       "tmnxVirtualSchedAdjV24v0Grp": tmnxVirtualSchedAdjV24v0Grp,
+       "tmnxEsaHostPortStatsV24v0Grp": tmnxEsaHostPortStatsV24v0Grp,
+       "tmnxIpsecLoadBalV24Group": tmnxIpsecLoadBalV24Group,
+       "tmnxChassisPwrMgmtV24v0Grp": tmnxChassisPwrMgmtV24v0Grp,
+       "tFPResV24v0Group": tFPResV24v0Group,
+       "tmnxMdaFlexEV24v0Grp": tmnxMdaFlexEV24v0Grp,
+       "tmnxEsaHostPortCrcMonV24v0Group": tmnxEsaHostPortCrcMonV24v0Group,
+       "tmnxChassisFpIxrResV24v0Group": tmnxChassisFpIxrResV24v0Group,
+       "tmnxEsaHostPortNotifV24v0Group": tmnxEsaHostPortNotifV24v0Group,
+       "tmnxChassisOsSecV24v0Group": tmnxChassisOsSecV24v0Group,
+       "tmnxEsaFirmUpgNotifV24v0Group": tmnxEsaFirmUpgNotifV24v0Group,
+       "tmnxChassisIxrResOwnV24v0Group": tmnxChassisIxrResOwnV24v0Group,
+       "tmnxChassisIxrResScaleV24v0Grp": tmnxChassisIxrResScaleV24v0Grp,
+       "tmnxCardIxrResourcesV24v0Group": tmnxCardIxrResourcesV24v0Group,
+       "tmnxChassisOsSecV24v0NotifGrp": tmnxChassisOsSecV24v0NotifGrp,
+       "tmnxCardIxrPpmcResourcesGroup": tmnxCardIxrPpmcResourcesGroup,
+       "tmnxCardIxrPpmcResourcesGroup2": tmnxCardIxrPpmcResourcesGroup2,
+       "tmnxChassisV25v0Groups": tmnxChassisV25v0Groups,
+       "tFPResV25v0Group": tFPResV25v0Group,
+       "tmnxChassisPwrMgmtLowPwrV25v0Grp": tmnxChassisPwrMgmtLowPwrV25v0Grp,
+       "tmnxLowPowerSwFabV25v0NotifGrp": tmnxLowPowerSwFabV25v0NotifGrp,
+       "tmnxChGoldenStatusV25v0Group": tmnxChGoldenStatusV25v0Group,
+       "tmnxSyncFreqOffsetInPpbGroup": tmnxSyncFreqOffsetInPpbGroup,
+       "tmnxMDAMacModeV25v0Grp": tmnxMDAMacModeV25v0Grp,
+       "tmnxFltrSharedPlcrV25v0Grp": tmnxFltrSharedPlcrV25v0Grp,
+       "tmnxSchedulerFlowsV25v0Grp": tmnxSchedulerFlowsV25v0Grp,
+       "tmnxCpmCardOsSecurityV25v0Grp": tmnxCpmCardOsSecurityV25v0Grp,
+       "tmnxSecEraseNotifyObjsV25v0Grp": tmnxSecEraseNotifyObjsV25v0Grp,
+       "tmnxSecEraseNotificationGrpV25v0": tmnxSecEraseNotificationGrpV25v0,
+       "tmnxVirtualFlowsV25v0Grp": tmnxVirtualFlowsV25v0Grp,
        "tmnxChassisDCCompliances": tmnxChassisDCCompliances,
        "tmnxChassisDCGroups": tmnxChassisDCGroups,
        "tmnxHwObjs": tmnxHwObjs,
@@ -31032,6 +40395,11 @@ mibBuilder.exportSymbols(
        "tmnxChassisNumPhysicalPorts": tmnxChassisNumPhysicalPorts,
        "tmnxChassisFPGenerationVFP": tmnxChassisFPGenerationVFP,
        "tmnxChassisSystemProfile": tmnxChassisSystemProfile,
+       "tmnxChassisFPGenerationFP5": tmnxChassisFPGenerationFP5,
+       "tmnxChassisRebootReqd": tmnxChassisRebootReqd,
+       "tmnxChassisRebootReqdReason": tmnxChassisRebootReqdReason,
+       "tmnxChassisOsSecPasswd": tmnxChassisOsSecPasswd,
+       "tmnxChassisAntiTheftLocked": tmnxChassisAntiTheftLocked,
        "tmnxChassisFanTable": tmnxChassisFanTable,
        "tmnxChassisFanEntry": tmnxChassisFanEntry,
        "tmnxChassisFanIndex": tmnxChassisFanIndex,
@@ -31099,6 +40467,7 @@ mibBuilder.exportSymbols(
        "tmnxHwFirmwareCodeVersion": tmnxHwFirmwareCodeVersion,
        "tmnxHwPowerZone": tmnxHwPowerZone,
        "tmnxHwFirmwareRevisionStatus": tmnxHwFirmwareRevisionStatus,
+       "tmnxHwOverTempStatus": tmnxHwOverTempStatus,
        "tmnxHwContainsTable": tmnxHwContainsTable,
        "tmnxHwContainsEntry": tmnxHwContainsEntry,
        "tmnxHwContainedIndex": tmnxHwContainedIndex,
@@ -31159,6 +40528,8 @@ mibBuilder.exportSymbols(
        "tmnxChassisPwrMgmtMode": tmnxChassisPwrMgmtMode,
        "tmnxChassisPwrMgmtSafetyLevel": tmnxChassisPwrMgmtSafetyLevel,
        "tmnxChassisPwrMgmtSafetyAlert": tmnxChassisPwrMgmtSafetyAlert,
+       "tChassisPwrMgmtLowPwrFabAdmState": tChassisPwrMgmtLowPwrFabAdmState,
+       "tChassisPwrMgmtLowPwrFabCapacity": tChassisPwrMgmtLowPwrFabCapacity,
        "tChassisResTable": tChassisResTable,
        "tChassisResEntry": tChassisResEntry,
        "tChassisResSapIngQosPolTotal": tChassisResSapIngQosPolTotal,
@@ -31231,6 +40602,22 @@ mibBuilder.exportSymbols(
        "tChassisResPool2LagBundleIdAlloc": tChassisResPool2LagBundleIdAlloc,
        "tChassisResSystemBundleNumTotal": tChassisResSystemBundleNumTotal,
        "tChassisResSystemBundleNumAlloc": tChassisResSystemBundleNumAlloc,
+       "tChassisResIOCapacityTotal": tChassisResIOCapacityTotal,
+       "tChassisResIOCapacityAlloc": tChassisResIOCapacityAlloc,
+       "tChassisResMtuProfileTotal": tChassisResMtuProfileTotal,
+       "tChassisResMtuProfileAlloc": tChassisResMtuProfileAlloc,
+       "tChassisResEprirTotal": tChassisResEprirTotal,
+       "tChassisResEprirAlloc": tChassisResEprirAlloc,
+       "tChassisResEprirMirrorAlloc": tChassisResEprirMirrorAlloc,
+       "tChassisResEprirRadiusAlloc": tChassisResEprirRadiusAlloc,
+       "tChassisResEprirSatTrafGenTotal": tChassisResEprirSatTrafGenTotal,
+       "tChassisResEprirSatTrafGenAlloc": tChassisResEprirSatTrafGenAlloc,
+       "tChassisResEprirReservedAlloc": tChassisResEprirReservedAlloc,
+       "tChassisResEprirFilterAlloc": tChassisResEprirFilterAlloc,
+       "tChassisResEgrStat4QVVoQTotal": tChassisResEgrStat4QVVoQTotal,
+       "tChassisResEgrStat4QVVoQAlloc": tChassisResEgrStat4QVVoQAlloc,
+       "tChassisResEgrNoStat4QVVoQTotal": tChassisResEgrNoStat4QVVoQTotal,
+       "tChassisResEgrNoStat4QVVoQAlloc": tChassisResEgrNoStat4QVVoQAlloc,
        "tmnxPhysChassisTable": tmnxPhysChassisTable,
        "tmnxPhysChassisEntry": tmnxPhysChassisEntry,
        "tmnxPhysChassisClass": tmnxPhysChassisClass,
@@ -31295,6 +40682,9 @@ mibBuilder.exportSymbols(
        "tmnxPhysChassPowerSupPemACRect": tmnxPhysChassPowerSupPemACRect,
        "tmnxPhysChassPowerSupInFeedDown": tmnxPhysChassPowerSupInFeedDown,
        "tmnxPhysChassPowerSupFanDir": tmnxPhysChassPowerSupFanDir,
+       "tmnxPhysChassPSFeedAInVolt": tmnxPhysChassPSFeedAInVolt,
+       "tmnxPhysChassPSFeedBInVolt": tmnxPhysChassPSFeedBInVolt,
+       "tmnxPhysChassPSFanOperStatus": tmnxPhysChassPSFanOperStatus,
        "tmnxPhysChassisPEQTableLastChg": tmnxPhysChassisPEQTableLastChg,
        "tmnxPhysChassisPEQTable": tmnxPhysChassisPEQTable,
        "tmnxPhysChassisPEQEntry": tmnxPhysChassisPEQEntry,
@@ -31329,6 +40719,8 @@ mibBuilder.exportSymbols(
        "tmnxPhysChassisPMAvailableWatt": tmnxPhysChassisPMAvailableWatt,
        "tmnxPhysChassisPMOutputStatus": tmnxPhysChassisPMOutputStatus,
        "tmnxPhysChassisPMInputFeedDown": tmnxPhysChassisPMInputFeedDown,
+       "tmnxPhysChassisPMFeedAInVolt": tmnxPhysChassisPMFeedAInVolt,
+       "tmnxPhysChassisPMFeedBInVolt": tmnxPhysChassisPMFeedBInVolt,
        "tmnxBluetoothTableLastChange": tmnxBluetoothTableLastChange,
        "tmnxBluetoothTable": tmnxBluetoothTable,
        "tmnxBluetoothPasskey": tmnxBluetoothPasskey,
@@ -31359,6 +40751,97 @@ mibBuilder.exportSymbols(
        "tmnxChassisPwrMgmtOperSafetyLvl": tmnxChassisPwrMgmtOperSafetyLvl,
        "tmnxChassisPwrMgmtOperSafetyAlrt": tmnxChassisPwrMgmtOperSafetyAlrt,
        "tmnxChassisPwrMgmtActiveConds": tmnxChassisPwrMgmtActiveConds,
+       "tmnxChassisPwrMgmtTotalWattage": tmnxChassisPwrMgmtTotalWattage,
+       "tChassisPwrMgmtLowPwrFabOprState": tChassisPwrMgmtLowPwrFabOprState,
+       "tChassisPwrMgmtLowPwrFabLstChgd": tChassisPwrMgmtLowPwrFabLstChgd,
+       "tChassisIxrResourceTable": tChassisIxrResourceTable,
+       "tChassisIxrResourceEntry": tChassisIxrResourceEntry,
+       "tChassisIxrResCommonLifTotal": tChassisIxrResCommonLifTotal,
+       "tChassisIxrResCommonLifAlloc": tChassisIxrResCommonLifAlloc,
+       "tChassisIxrResCommonLifFree": tChassisIxrResCommonLifFree,
+       "tChassisIxrResArpLifTotal": tChassisIxrResArpLifTotal,
+       "tChassisIxrResArpLifAlloc": tChassisIxrResArpLifAlloc,
+       "tChassisIxrResArpLifFree": tChassisIxrResArpLifFree,
+       "tChassisIxrResMplsLifTotal": tChassisIxrResMplsLifTotal,
+       "tChassisIxrResMplsLifAlloc": tChassisIxrResMplsLifAlloc,
+       "tChassisIxrResMplsLifFree": tChassisIxrResMplsLifFree,
+       "tChassisIxrResL3VsiRifTotal": tChassisIxrResL3VsiRifTotal,
+       "tChassisIxrResL3VsiRifAlloc": tChassisIxrResL3VsiRifAlloc,
+       "tChassisIxrResL3VsiRifFree": tChassisIxrResL3VsiRifFree,
+       "tChassisIxrResFecUnpairedTotal": tChassisIxrResFecUnpairedTotal,
+       "tChassisIxrResFecUnpairedAlloc": tChassisIxrResFecUnpairedAlloc,
+       "tChassisIxrResFecUnpairedFree": tChassisIxrResFecUnpairedFree,
+       "tChassisIxrResFecPairedTotal": tChassisIxrResFecPairedTotal,
+       "tChassisIxrResFecPairedAlloc": tChassisIxrResFecPairedAlloc,
+       "tChassisIxrResFecPairedFree": tChassisIxrResFecPairedFree,
+       "tChassisIxrResOamLmCtrTotal": tChassisIxrResOamLmCtrTotal,
+       "tChassisIxrResOamLmCtrAlloc": tChassisIxrResOamLmCtrAlloc,
+       "tChassisIxrResOamLmCtrFree": tChassisIxrResOamLmCtrFree,
+       "tChassisIxrResAcLifTotal": tChassisIxrResAcLifTotal,
+       "tChassisIxrResAcLifAlloc": tChassisIxrResAcLifAlloc,
+       "tChassisIxrResAcLifFree": tChassisIxrResAcLifFree,
+       "tChassisIxrResMplsNhlfeLifTotal": tChassisIxrResMplsNhlfeLifTotal,
+       "tChassisIxrResMplsNhlfeLifAlloc": tChassisIxrResMplsNhlfeLifAlloc,
+       "tChassisIxrResMplsNhlfeLifFree": tChassisIxrResMplsNhlfeLifFree,
+       "tChassisIxrResBgpLblRtLifTotal": tChassisIxrResBgpLblRtLifTotal,
+       "tChassisIxrResBgpLblRtLifAlloc": tChassisIxrResBgpLblRtLifAlloc,
+       "tChassisIxrResBgpLblRtLifFree": tChassisIxrResBgpLblRtLifFree,
+       "tChassisIxrResSdpBndMplsLifTotal": tChassisIxrResSdpBndMplsLifTotal,
+       "tChassisIxrResSdpBndMplsLifAlloc": tChassisIxrResSdpBndMplsLifAlloc,
+       "tChassisIxrResSdpBndMplsLifFree": tChassisIxrResSdpBndMplsLifFree,
+       "tChassisIxrResSdpBndGreLifTotal": tChassisIxrResSdpBndGreLifTotal,
+       "tChassisIxrResSdpBndGreLifAlloc": tChassisIxrResSdpBndGreLifAlloc,
+       "tChassisIxrResSdpBndGreLifFree": tChassisIxrResSdpBndGreLifFree,
+       "tChassisIxrResSsidLifTotal": tChassisIxrResSsidLifTotal,
+       "tChassisIxrResSsidLifAlloc": tChassisIxrResSsidLifAlloc,
+       "tChassisIxrResSsidLifFree": tChassisIxrResSsidLifFree,
+       "tChassisIxrResSrv6TunnelLifTotal": tChassisIxrResSrv6TunnelLifTotal,
+       "tChassisIxrResSrv6TunnelLifAlloc": tChassisIxrResSrv6TunnelLifAlloc,
+       "tChassisIxrResSrv6TunnelLifFree": tChassisIxrResSrv6TunnelLifFree,
+       "tChassisIxrResL2ServiceTotal": tChassisIxrResL2ServiceTotal,
+       "tChassisIxrResL2ServiceAlloc": tChassisIxrResL2ServiceAlloc,
+       "tChassisIxrResL2ServiceFree": tChassisIxrResL2ServiceFree,
+       "tChassisIxrResStationIdTotal": tChassisIxrResStationIdTotal,
+       "tChassisIxrResStationIdAlloc": tChassisIxrResStationIdAlloc,
+       "tChassisIxrResStationIdFree": tChassisIxrResStationIdFree,
+       "tChassisIxrResVxlanLifTotal": tChassisIxrResVxlanLifTotal,
+       "tChassisIxrResVxlanLifAlloc": tChassisIxrResVxlanLifAlloc,
+       "tChassisIxrResVxlanLifFree": tChassisIxrResVxlanLifFree,
+       "tChassisIxrResourceOwnerTable": tChassisIxrResourceOwnerTable,
+       "tChassisIxrResourceOwnerEntry": tChassisIxrResourceOwnerEntry,
+       "tmnxChassisIxrResourceOwner": tmnxChassisIxrResourceOwner,
+       "tChassisIxrResOwnCommonLifTotal": tChassisIxrResOwnCommonLifTotal,
+       "tChassisIxrResOwnCommonLifAlloc": tChassisIxrResOwnCommonLifAlloc,
+       "tChassisIxrResOwnCommonLifFree": tChassisIxrResOwnCommonLifFree,
+       "tChassisIxrResOwnArpLifAlloc": tChassisIxrResOwnArpLifAlloc,
+       "tChassisIxrResOwnMplsLifAlloc": tChassisIxrResOwnMplsLifAlloc,
+       "tChassisIxrResOwnL3VsiRifAlloc": tChassisIxrResOwnL3VsiRifAlloc,
+       "tChassisIxrResOwnFecUnpairAlloc": tChassisIxrResOwnFecUnpairAlloc,
+       "tChassisIxrResOwnFecPairedAlloc": tChassisIxrResOwnFecPairedAlloc,
+       "tChassisIxrResOwnOamLmCtrAlloc": tChassisIxrResOwnOamLmCtrAlloc,
+       "tChasIxrResOwnAcLifAlloc": tChasIxrResOwnAcLifAlloc,
+       "tChasIxrResOwnMplsNhlfeLifAlloc": tChasIxrResOwnMplsNhlfeLifAlloc,
+       "tChasIxrResOwnBgpLblRtLifTotal": tChasIxrResOwnBgpLblRtLifTotal,
+       "tChasIxrResOwnBgpLblRtLifAlloc": tChasIxrResOwnBgpLblRtLifAlloc,
+       "tChasIxrResOwnBgpLblRtLifFree": tChasIxrResOwnBgpLblRtLifFree,
+       "tChasIxrResOwnSdpBndMplsLifAlloc": tChasIxrResOwnSdpBndMplsLifAlloc,
+       "tChasIxrResOwnSdpBndGreLifAlloc": tChasIxrResOwnSdpBndGreLifAlloc,
+       "tChasIxrResOwnSsidLifAlloc": tChasIxrResOwnSsidLifAlloc,
+       "tChasIxrResOwnSrv6TunnelLifAlloc": tChasIxrResOwnSrv6TunnelLifAlloc,
+       "tChasIxrResOwnL2ServiceAlloc": tChasIxrResOwnL2ServiceAlloc,
+       "tChasIxrResOwnStationIdAlloc": tChasIxrResOwnStationIdAlloc,
+       "tChasIxrResOwnVxlanLifAlloc": tChasIxrResOwnVxlanLifAlloc,
+       "tChasIxrResOwnAcLifTotal": tChasIxrResOwnAcLifTotal,
+       "tChasIxrResOwnAcLifFree": tChasIxrResOwnAcLifFree,
+       "tmnxFlashTable": tmnxFlashTable,
+       "tmnxFlashEntry": tmnxFlashEntry,
+       "tmnxFlashOperStatus": tmnxFlashOperStatus,
+       "tmnxFlashSerialNumber": tmnxFlashSerialNumber,
+       "tmnxFlashFirmwareRevision": tmnxFlashFirmwareRevision,
+       "tmnxFlashModelNumber": tmnxFlashModelNumber,
+       "tmnxFlashCapacity": tmnxFlashCapacity,
+       "tmnxFlashUsed": tmnxFlashUsed,
+       "tmnxFlashPercentageUsed": tmnxFlashPercentageUsed,
        "tmnxSlotObjs": tmnxSlotObjs,
        "tmnxCardObjs": tmnxCardObjs,
        "tmnxCardLastChange": tmnxCardLastChange,
@@ -31490,6 +40973,8 @@ mibBuilder.exportSymbols(
        "tmnxCpmCardVmHypervisor": tmnxCpmCardVmHypervisor,
        "tmnxCpmCardVmCpu": tmnxCpmCardVmCpu,
        "tmnxCpmCardVmNumCores": tmnxCpmCardVmNumCores,
+       "tmnxCpmCardAntiTheft": tmnxCpmCardAntiTheft,
+       "tmnxCpmCardPwdPendingActivation": tmnxCpmCardPwdPendingActivation,
        "tmnxFabricLastChange": tmnxFabricLastChange,
        "tmnxFabricTable": tmnxFabricTable,
        "tmnxFabricEntry": tmnxFabricEntry,
@@ -31536,7 +41021,6 @@ mibBuilder.exportSymbols(
        "tmnxMDAHiBwMcastGroup": tmnxMDAHiBwMcastGroup,
        "tmnxMDAClockMode": tmnxMDAClockMode,
        "tmnxMDADiffTimestampFreq": tmnxMDADiffTimestampFreq,
-       "tmnxMDAIngHsmdaSchedPolicy": tmnxMDAIngHsmdaSchedPolicy,
        "tmnxMDAMcPathMgmtBwPlcyName": tmnxMDAMcPathMgmtBwPlcyName,
        "tmnxMDAMcPathMgmtPriPathLimit": tmnxMDAMcPathMgmtPriPathLimit,
        "tmnxMDAMcPathMgmtSecPathLimit": tmnxMDAMcPathMgmtSecPathLimit,
@@ -31544,8 +41028,6 @@ mibBuilder.exportSymbols(
        "tmnxMDAMcPathMgmtAdminState": tmnxMDAMcPathMgmtAdminState,
        "tmnxMDAIngNamedPoolPolicy": tmnxMDAIngNamedPoolPolicy,
        "tmnxMDAEgrNamedPoolPolicy": tmnxMDAEgrNamedPoolPolicy,
-       "tmnxMDAIngHsmdaPoolPolicy": tmnxMDAIngHsmdaPoolPolicy,
-       "tmnxMDAEgrHsmdaPoolPolicy": tmnxMDAEgrHsmdaPoolPolicy,
        "tmnxMDAMcPathMgmtPriInUseBw": tmnxMDAMcPathMgmtPriInUseBw,
        "tmnxMDAMcPathMgmtSecInUseBw": tmnxMDAMcPathMgmtSecInUseBw,
        "tmnxMDAMcPathMgmtAncInUseBw": tmnxMDAMcPathMgmtAncInUseBw,
@@ -31554,8 +41036,6 @@ mibBuilder.exportSymbols(
        "tmnxMDAXplErrorTime": tmnxMDAXplErrorTime,
        "tmnxMDAXplFailedCount": tmnxMDAXplFailedCount,
        "tmnxMDAAtmMode": tmnxMDAAtmMode,
-       "tmnxMDAEgrHsmdaThrshLoBrstMult": tmnxMDAEgrHsmdaThrshLoBrstMult,
-       "tmnxMDAEgrHsmdaThrshHiBrstInc": tmnxMDAEgrHsmdaThrshHiBrstInc,
        "tmnxMDAIsaTunnelGroup": tmnxMDAIsaTunnelGroup,
        "tmnxMDAIsaTunnelGroupInUse": tmnxMDAIsaTunnelGroupInUse,
        "tmnxMDAHwPowerPriority": tmnxMDAHwPowerPriority,
@@ -31569,6 +41049,9 @@ mibBuilder.exportSymbols(
        "tmnxMDAEquippedLevel": tmnxMDAEquippedLevel,
        "tmnxMDALicensedLevel": tmnxMDALicensedLevel,
        "tmnxMDALicensedBandwidth": tmnxMDALicensedBandwidth,
+       "tmnxMDAIsaMemberPoolAssoc": tmnxMDAIsaMemberPoolAssoc,
+       "tmnxMDAIsaTunnelActiveInGrp": tmnxMDAIsaTunnelActiveInGrp,
+       "tmnxMDAMacMode": tmnxMDAMacMode,
        "tmnxCardTypeTable": tmnxCardTypeTable,
        "tmnxCardTypeEntry": tmnxCardTypeEntry,
        "tmnxCardTypeIndex": tmnxCardTypeIndex,
@@ -31676,6 +41159,8 @@ mibBuilder.exportSymbols(
        "tmnxSyncIfTimingGnss2Alarm": tmnxSyncIfTimingGnss2Alarm,
        "tmnxSyncIfTimingGnss2RxQltyLevel": tmnxSyncIfTimingGnss2RxQltyLevel,
        "tmnxSyncIfTimingGnss2State": tmnxSyncIfTimingGnss2State,
+       "tmnxSyncIfTimingRefOrder6": tmnxSyncIfTimingRefOrder6,
+       "tmnxSyncIfTimingFreqOffsetPpb": tmnxSyncIfTimingFreqOffsetPpb,
        "tmnxCcagTable": tmnxCcagTable,
        "tmnxCcagEntry": tmnxCcagEntry,
        "tmnxCcagId": tmnxCcagId,
@@ -31746,30 +41231,10 @@ mibBuilder.exportSymbols(
        "tmnxIPsecIsaGrpIsaScaleMode": tmnxIPsecIsaGrpIsaScaleMode,
        "tmnxIPsecIsaGrpDpCpuUsageCollEn": tmnxIPsecIsaGrpDpCpuUsageCollEn,
        "tmnxIPsecIsaGrpTrafficFwdCollEn": tmnxIPsecIsaGrpTrafficFwdCollEn,
-       "tmnxHsmdaMdaSchOvrTblLastChangd": tmnxHsmdaMdaSchOvrTblLastChangd,
-       "tmnxHsmdaMdaSchOvrTable": tmnxHsmdaMdaSchOvrTable,
-       "tmnxHsmdaMdaSchOvrEntry": tmnxHsmdaMdaSchOvrEntry,
-       "tmnxHsmdaMdaSchOvrRowStatus": tmnxHsmdaMdaSchOvrRowStatus,
-       "tmnxHsmdaMdaSchOvrLastChanged": tmnxHsmdaMdaSchOvrLastChanged,
-       "tmnxHsmdaMdaSchOvrMaxRate": tmnxHsmdaMdaSchOvrMaxRate,
-       "tmnxHsmdaMdaSchOvrGrp1Rate": tmnxHsmdaMdaSchOvrGrp1Rate,
-       "tmnxHsmdaMdaSchOvrGrp2Rate": tmnxHsmdaMdaSchOvrGrp2Rate,
-       "tmnxHsmdaMdaSchOvrClass1Rate": tmnxHsmdaMdaSchOvrClass1Rate,
-       "tmnxHsmdaMdaSchOvrClass1WtInGrp": tmnxHsmdaMdaSchOvrClass1WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass2Rate": tmnxHsmdaMdaSchOvrClass2Rate,
-       "tmnxHsmdaMdaSchOvrClass2WtInGrp": tmnxHsmdaMdaSchOvrClass2WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass3Rate": tmnxHsmdaMdaSchOvrClass3Rate,
-       "tmnxHsmdaMdaSchOvrClass3WtInGrp": tmnxHsmdaMdaSchOvrClass3WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass4Rate": tmnxHsmdaMdaSchOvrClass4Rate,
-       "tmnxHsmdaMdaSchOvrClass4WtInGrp": tmnxHsmdaMdaSchOvrClass4WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass5Rate": tmnxHsmdaMdaSchOvrClass5Rate,
-       "tmnxHsmdaMdaSchOvrClass5WtInGrp": tmnxHsmdaMdaSchOvrClass5WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass6Rate": tmnxHsmdaMdaSchOvrClass6Rate,
-       "tmnxHsmdaMdaSchOvrClass6WtInGrp": tmnxHsmdaMdaSchOvrClass6WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass7Rate": tmnxHsmdaMdaSchOvrClass7Rate,
-       "tmnxHsmdaMdaSchOvrClass7WtInGrp": tmnxHsmdaMdaSchOvrClass7WtInGrp,
-       "tmnxHsmdaMdaSchOvrClass8Rate": tmnxHsmdaMdaSchOvrClass8Rate,
-       "tmnxHsmdaMdaSchOvrClass8WtInGrp": tmnxHsmdaMdaSchOvrClass8WtInGrp,
+       "tmnxIPsecIsaGrpMemberPool": tmnxIPsecIsaGrpMemberPool,
+       "tmnxIPsecIsaGrpESPSeqNumOrder": tmnxIPsecIsaGrpESPSeqNumOrder,
+       "tmnxIPsecIsaGrpESPSeqNumOrderOpr": tmnxIPsecIsaGrpESPSeqNumOrderOpr,
+       "tmnxIPsecIsaGrpSpiRangeIndex": tmnxIPsecIsaGrpSpiRangeIndex,
        "tmnxFPTable": tmnxFPTable,
        "tmnxFPEntry": tmnxFPEntry,
        "tmnxFPNum": tmnxFPNum,
@@ -31961,6 +41426,7 @@ mibBuilder.exportSymbols(
        "tmnxCardTaskScheduling": tmnxCardTaskScheduling,
        "tmnxCardSlowQueueThresh": tmnxCardSlowQueueThresh,
        "tmnxCardInternalSchedWghtMode": tmnxCardInternalSchedWghtMode,
+       "tmnxCardManualCntrlAdminState": tmnxCardManualCntrlAdminState,
        "tmnxFpDcpDynEnfrcPlcrStatTable": tmnxFpDcpDynEnfrcPlcrStatTable,
        "tmnxFpDcpDynEnfrcPlcrStatEntry": tmnxFpDcpDynEnfrcPlcrStatEntry,
        "tmnxFpDcpDynPlcrHiWtrMrkHitCnt": tmnxFpDcpDynPlcrHiWtrMrkHitCnt,
@@ -32013,8 +41479,6 @@ mibBuilder.exportSymbols(
        "tCardResQosIntSchedsAlloc": tCardResQosIntSchedsAlloc,
        "tCardResSubSPIQosOvrTotal": tCardResSubSPIQosOvrTotal,
        "tCardResSubSPIQosOvrAlloc": tCardResSubSPIQosOvrAlloc,
-       "tCardResHsmdaQOvrTotal": tCardResHsmdaQOvrTotal,
-       "tCardResHsmdaQOvrAlloc": tCardResHsmdaQOvrAlloc,
        "tCardResPortAccEgrQGrpInstTotal": tCardResPortAccEgrQGrpInstTotal,
        "tCardResPortAccEgrQGrpInstAlloc": tCardResPortAccEgrQGrpInstAlloc,
        "tCardResPortNetEgrQGrpInstTotal": tCardResPortNetEgrQGrpInstTotal,
@@ -32246,14 +41710,50 @@ mibBuilder.exportSymbols(
        "tFPResMacIPv4CamBanksAlloc": tFPResMacIPv4CamBanksAlloc,
        "tFPResIPv6CamBanksTotal": tFPResIPv6CamBanksTotal,
        "tFPResIPv6CamBanksAlloc": tFPResIPv6CamBanksAlloc,
+       "tFPResPortForwardingIdTotal": tFPResPortForwardingIdTotal,
+       "tFPResPortForwardingIdAlloc": tFPResPortForwardingIdAlloc,
+       "tFPResIngIPv4AclEntryIUBAcl": tFPResIngIPv4AclEntryIUBAcl,
+       "tFPResIngIPv4AclEntryIUBDcpu": tFPResIngIPv4AclEntryIUBDcpu,
+       "tFPResIngIPv4MacCamOverLoad": tFPResIngIPv4MacCamOverLoad,
+       "tFPResIngIPv6CamOverLoad": tFPResIngIPv6CamOverLoad,
+       "tFPResEgrIPv4MacCamOverLoad": tFPResEgrIPv4MacCamOverLoad,
+       "tFPResEgrIPv6CamOverLoad": tFPResEgrIPv6CamOverLoad,
+       "tFPResOversub": tFPResOversub,
+       "tFPResEgrHwAggShapQSetSizeTotal": tFPResEgrHwAggShapQSetSizeTotal,
+       "tFPResEgrHwAggShapQSetSizeAlloc": tFPResEgrHwAggShapQSetSizeAlloc,
+       "tFPResEgrHwAggShpDefSapQSetSz": tFPResEgrHwAggShpDefSapQSetSz,
+       "tFPResEgrHwAggShpDefSubQSetSz": tFPResEgrHwAggShpDefSubQSetSz,
+       "tFPResEgrHwAggShpDefQGrpQSetSz": tFPResEgrHwAggShpDefQGrpQSetSz,
+       "tFPResCamBanksIUBSharedPlcrs": tFPResCamBanksIUBSharedPlcrs,
+       "tFPResSharedPlcrCamBanksTotal": tFPResSharedPlcrCamBanksTotal,
+       "tFPResSharedPlcrCamBanksAlloc": tFPResSharedPlcrCamBanksAlloc,
+       "tFPResSharedPlcrCamEntryTotal": tFPResSharedPlcrCamEntryTotal,
+       "tFPResSharedPlcrCamEntryAlloc": tFPResSharedPlcrCamEntryAlloc,
+       "tFPResCamBanksIUBSrv6TunnelTerm": tFPResCamBanksIUBSrv6TunnelTerm,
+       "tFPResEgrHwAggShapQSetSize1Total": tFPResEgrHwAggShapQSetSize1Total,
+       "tFPResEgrHwAggShapQSetSize1Alloc": tFPResEgrHwAggShapQSetSize1Alloc,
+       "tFPResEgrHwAggShapQSetSize2Total": tFPResEgrHwAggShapQSetSize2Total,
+       "tFPResEgrHwAggShapQSetSize2Alloc": tFPResEgrHwAggShapQSetSize2Alloc,
+       "tFPResEgrHwAggShapQSetSize3Total": tFPResEgrHwAggShapQSetSize3Total,
+       "tFPResEgrHwAggShapQSetSize3Alloc": tFPResEgrHwAggShapQSetSize3Alloc,
+       "tFPResEgrHwAggShapQSetSize4Total": tFPResEgrHwAggShapQSetSize4Total,
+       "tFPResEgrHwAggShapQSetSize4Alloc": tFPResEgrHwAggShapQSetSize4Alloc,
+       "tFPResEgrHwAggShapQSetSize5Total": tFPResEgrHwAggShapQSetSize5Total,
+       "tFPResEgrHwAggShapQSetSize5Alloc": tFPResEgrHwAggShapQSetSize5Alloc,
+       "tFPResEgrHwAggShapQSetSize6Total": tFPResEgrHwAggShapQSetSize6Total,
+       "tFPResEgrHwAggShapQSetSize6Alloc": tFPResEgrHwAggShapQSetSize6Alloc,
+       "tFPResEgrHwAggShapQSetSize7Total": tFPResEgrHwAggShapQSetSize7Total,
+       "tFPResEgrHwAggShapQSetSize7Alloc": tFPResEgrHwAggShapQSetSize7Alloc,
+       "tFPResDCpuProtCamEntryTotal": tFPResDCpuProtCamEntryTotal,
+       "tFPResDCpuProtCamEntryAlloc": tFPResDCpuProtCamEntryAlloc,
+       "tFPResSapIngAggPolicerTotal": tFPResSapIngAggPolicerTotal,
+       "tFPResSapIngAggPolicerAlloc": tFPResSapIngAggPolicerAlloc,
        "tMDAResTable": tMDAResTable,
        "tMDAResEntry": tMDAResEntry,
-       "tMDAResEgrHsmdaQGrpTotal": tMDAResEgrHsmdaQGrpTotal,
-       "tMDAResEgrHsmdaQGrpAlloc": tMDAResEgrHsmdaQGrpAlloc,
-       "tMDAResEgrHsmdaSecShaperTotal": tMDAResEgrHsmdaSecShaperTotal,
-       "tMDAResEgrHsmdaSecShaperAlloc": tMDAResEgrHsmdaSecShaperAlloc,
        "tMDAResSapInstanceTotal": tMDAResSapInstanceTotal,
        "tMDAResSapInstanceAlloc": tMDAResSapInstanceAlloc,
+       "tMDAResPortForwardingIdTotal": tMDAResPortForwardingIdTotal,
+       "tMDAResPortForwardingIdAlloc": tMDAResPortForwardingIdAlloc,
        "tFPEgressFwdEngDRStatsTable": tFPEgressFwdEngDRStatsTable,
        "tFPEgressFwdEngDRStatsEntry": tFPEgressFwdEngDRStatsEntry,
        "tFwdEngDREgrEncapExceeded": tFwdEngDREgrEncapExceeded,
@@ -32314,6 +41814,7 @@ mibBuilder.exportSymbols(
        "tmnxGnssNmeaAdminState": tmnxGnssNmeaAdminState,
        "tmnxGnssNmeaSentenceTypes": tmnxGnssNmeaSentenceTypes,
        "tmnxGnssNmeaSentenceInterval": tmnxGnssNmeaSentenceInterval,
+       "tmnxGnssSyncSysTime": tmnxGnssSyncSysTime,
        "tmnxGnssOperTable": tmnxGnssOperTable,
        "tmnxGnssOperEntry": tmnxGnssOperEntry,
        "tmnxGnssOperState": tmnxGnssOperState,
@@ -32331,6 +41832,53 @@ mibBuilder.exportSymbols(
        "tmnxGnssSatelliteElevation": tmnxGnssSatelliteElevation,
        "tmnxGnssSatelliteAzimuth": tmnxGnssSatelliteAzimuth,
        "tmnxGnssSatelliteSnr": tmnxGnssSatelliteSnr,
+       "tmnxMdaFlexObjs": tmnxMdaFlexObjs,
+       "tmnxMdaFlexTimestamps": tmnxMdaFlexTimestamps,
+       "tmnxMdaFlexGroupTableLastChanged": tmnxMdaFlexGroupTableLastChanged,
+       "tmnxMdaFlexMemberTableLastChngd": tmnxMdaFlexMemberTableLastChngd,
+       "tmnxMdaFlexClientTableLastChngd": tmnxMdaFlexClientTableLastChngd,
+       "tmnxMdaFlexGroupTable": tmnxMdaFlexGroupTable,
+       "tmnxMdaFlexGroupEntry": tmnxMdaFlexGroupEntry,
+       "tmnxMdaFlexGroupId": tmnxMdaFlexGroupId,
+       "tmnxMdaFlexGroupRowStatus": tmnxMdaFlexGroupRowStatus,
+       "tmnxMdaFlexGroupEntryLastChanged": tmnxMdaFlexGroupEntryLastChanged,
+       "tmnxMdaFlexGroupAdminState": tmnxMdaFlexGroupAdminState,
+       "tmnxMdaFlexGroupOperState": tmnxMdaFlexGroupOperState,
+       "tmnxMdaFlexGroupDescription": tmnxMdaFlexGroupDescription,
+       "tmnxMdaFlexGroupNumber": tmnxMdaFlexGroupNumber,
+       "tmnxMdaFlexGroupCurrentAlarm": tmnxMdaFlexGroupCurrentAlarm,
+       "tmnxMdaFlexGroupMaxBandwidth": tmnxMdaFlexGroupMaxBandwidth,
+       "tmnxMdaFlexGroupReportAlarm": tmnxMdaFlexGroupReportAlarm,
+       "tmnxMdaFlexGroupReportedAlarm": tmnxMdaFlexGroupReportedAlarm,
+       "tmnxMdaFlexMemberTable": tmnxMdaFlexMemberTable,
+       "tmnxMdaFlexMemberEntry": tmnxMdaFlexMemberEntry,
+       "tmnxMdaFlexMemberPortId": tmnxMdaFlexMemberPortId,
+       "tmnxMdaFlexMemberRowStatus": tmnxMdaFlexMemberRowStatus,
+       "tmnxMdaFlexMemberEntryLastChngd": tmnxMdaFlexMemberEntryLastChngd,
+       "tmnxMdaFlexMemberPhyNumber": tmnxMdaFlexMemberPhyNumber,
+       "tmnxMdaFlexMemberReportAlarm": tmnxMdaFlexMemberReportAlarm,
+       "tmnxMdaFlexMemberCurrentAlarm": tmnxMdaFlexMemberCurrentAlarm,
+       "tmnxMdaFlexMemberReportedAlarm": tmnxMdaFlexMemberReportedAlarm,
+       "tmnxMdaFlexMemberPhyReportAlarm": tmnxMdaFlexMemberPhyReportAlarm,
+       "tmnxMdaFlexClientTable": tmnxMdaFlexClientTable,
+       "tmnxMdaFlexClientEntry": tmnxMdaFlexClientEntry,
+       "tmnxMdaFlexClientIndex": tmnxMdaFlexClientIndex,
+       "tmnxMdaFlexClientRowStatus": tmnxMdaFlexClientRowStatus,
+       "tmnxMdaFlexClientEntryLastChngd": tmnxMdaFlexClientEntryLastChngd,
+       "tMdaFlexMbrInstOperTable": tMdaFlexMbrInstOperTable,
+       "tMdaFlexMbrInstOperEntry": tMdaFlexMbrInstOperEntry,
+       "tmnxMdaFlexMbrInstIndex": tmnxMdaFlexMbrInstIndex,
+       "tMdaFlexMbrInstOperInstNum": tMdaFlexMbrInstOperInstNum,
+       "tMdaFlexMbrInstOperCurrentAlarm": tMdaFlexMbrInstOperCurrentAlarm,
+       "tMdaFlexMbrInstOperReportedAlm": tMdaFlexMbrInstOperReportedAlm,
+       "tMdaFlexMbrInstOperDeskewDepth": tMdaFlexMbrInstOperDeskewDepth,
+       "tMdaFlexMbrInstOperInfoValid": tMdaFlexMbrInstOperInfoValid,
+       "tMdaFlexMbrInstOperCalInUse": tMdaFlexMbrInstOperCalInUse,
+       "tMdaFlexMbrInstOperFlexEMap": tMdaFlexMbrInstOperFlexEMap,
+       "tMdaFlexMbrInstOperCalASlots": tMdaFlexMbrInstOperCalASlots,
+       "tMdaFlexMbrInstOperCalBSlots": tMdaFlexMbrInstOperCalBSlots,
+       "tMdaFlexMbrInstOperRcvdGrpNum": tMdaFlexMbrInstOperRcvdGrpNum,
+       "tMdaFlexMbrInstOperRcvdInstNum": tMdaFlexMbrInstOperRcvdInstNum,
        "tmnxVmCardTable": tmnxVmCardTable,
        "tmnxVmCardEntry": tmnxVmCardEntry,
        "tmnxVmCardHypervisor": tmnxVmCardHypervisor,
@@ -32379,6 +41927,11 @@ mibBuilder.exportSymbols(
        "tmnxEsaHostPortEntry": tmnxEsaHostPortEntry,
        "tmnxEsaHostPortId": tmnxEsaHostPortId,
        "tmnxEsaHostPortRowStatus": tmnxEsaHostPortRowStatus,
+       "tmnxEsaHostPortCrcMonSdThreshold": tmnxEsaHostPortCrcMonSdThreshold,
+       "tmnxEsaHostPortCrcMonSdTMltplier": tmnxEsaHostPortCrcMonSdTMltplier,
+       "tmnxEsaHostPortCrcMonSfThreshold": tmnxEsaHostPortCrcMonSfThreshold,
+       "tmnxEsaHostPortCrcMonSfTMltplier": tmnxEsaHostPortCrcMonSfTMltplier,
+       "tmnxEsaHostPortCrcMonWindowSize": tmnxEsaHostPortCrcMonWindowSize,
        "tmnxEsaVmTable": tmnxEsaVmTable,
        "tmnxEsaVmEntry": tmnxEsaVmEntry,
        "tmnxEsaVmId": tmnxEsaVmId,
@@ -32397,6 +41950,10 @@ mibBuilder.exportSymbols(
        "tmnxTunnelGrpEsaVmLastChgd": tmnxTunnelGrpEsaVmLastChgd,
        "tmnxTunnelGrpEsaVmGroupAssoc": tmnxTunnelGrpEsaVmGroupAssoc,
        "tmnxTunnelGrpEsaVmActive": tmnxTunnelGrpEsaVmActive,
+       "tmnxTunnelGrpEsaVmPoolAssoc": tmnxTunnelGrpEsaVmPoolAssoc,
+       "tmnxTunnelGrpEsaVmActiveInGrp": tmnxTunnelGrpEsaVmActiveInGrp,
+       "tmnxTunnelGrpEsaVmWeight": tmnxTunnelGrpEsaVmWeight,
+       "tmnxTunnelGrpEsaVmAllocHashSlots": tmnxTunnelGrpEsaVmAllocHashSlots,
        "tmnxEsaStatsTable": tmnxEsaStatsTable,
        "tmnxEsaStatsEntry": tmnxEsaStatsEntry,
        "tmnxEsaStatsOperState": tmnxEsaStatsOperState,
@@ -32412,6 +41969,31 @@ mibBuilder.exportSymbols(
        "tmnxEsaStatsSystemSerialNumber": tmnxEsaStatsSystemSerialNumber,
        "tmnxEsaStatsPerformanceEnabled": tmnxEsaStatsPerformanceEnabled,
        "tmnxEsaStatsExportRestricted": tmnxEsaStatsExportRestricted,
+       "tmnxEsaStatsHardwareStatus": tmnxEsaStatsHardwareStatus,
+       "tmnxEsaStatsPowerSupply1Status": tmnxEsaStatsPowerSupply1Status,
+       "tmnxEsaStatsPowerSupply2Status": tmnxEsaStatsPowerSupply2Status,
+       "tmnxEsaStatsPowerSupply1Temp": tmnxEsaStatsPowerSupply1Temp,
+       "tmnxEsaStatsPowerSupply2Temp": tmnxEsaStatsPowerSupply2Temp,
+       "tmnxEsaStatsFanRedundancy": tmnxEsaStatsFanRedundancy,
+       "tmnxEsaStatsFanStatus": tmnxEsaStatsFanStatus,
+       "tmnxEsaStatsPwrSupMismatchStatus": tmnxEsaStatsPwrSupMismatchStatus,
+       "tmnxEsaStatsPwrSupRedundancy": tmnxEsaStatsPwrSupRedundancy,
+       "tmnxEsaStatsTemperatureStatus": tmnxEsaStatsTemperatureStatus,
+       "tmnxEsaStatsCpu1Temperature": tmnxEsaStatsCpu1Temperature,
+       "tmnxEsaStatsCpu2Temperature": tmnxEsaStatsCpu2Temperature,
+       "tmnxEsaStatsSystemPartNumber": tmnxEsaStatsSystemPartNumber,
+       "tmnxEsaStatsPowerSupply1Voltage": tmnxEsaStatsPowerSupply1Voltage,
+       "tmnxEsaStatsPowerSupply2Voltage": tmnxEsaStatsPowerSupply2Voltage,
+       "tmnxEsaStatsPowerSupply1OutPwr": tmnxEsaStatsPowerSupply1OutPwr,
+       "tmnxEsaStatsPowerSupply2OutPwr": tmnxEsaStatsPowerSupply2OutPwr,
+       "tmnxEsaStatsPowerSupply1MaxPwr": tmnxEsaStatsPowerSupply1MaxPwr,
+       "tmnxEsaStatsPowerSupply2MaxPwr": tmnxEsaStatsPowerSupply2MaxPwr,
+       "tmnxEsaStatsCpu1TempThreshold": tmnxEsaStatsCpu1TempThreshold,
+       "tmnxEsaStatsCpu2TempThreshold": tmnxEsaStatsCpu2TempThreshold,
+       "tmnxEsaStatsNic1Temperature": tmnxEsaStatsNic1Temperature,
+       "tmnxEsaStatsNic2Temperature": tmnxEsaStatsNic2Temperature,
+       "tmnxEsaStatsNic1TempThreshold": tmnxEsaStatsNic1TempThreshold,
+       "tmnxEsaStatsNic2TempThreshold": tmnxEsaStatsNic2TempThreshold,
        "tmnxEsaVmStatsTable": tmnxEsaVmStatsTable,
        "tmnxEsaVmStatsEntry": tmnxEsaVmStatsEntry,
        "tmnxEsaVmStatsOperState": tmnxEsaVmStatsOperState,
@@ -32435,6 +42017,29 @@ mibBuilder.exportSymbols(
        "tCoreResSapTotal": tCoreResSapTotal,
        "tCoreResSapAlloc": tCoreResSapAlloc,
        "tCoreResIngFloatPlcrStatIUBACL": tCoreResIngFloatPlcrStatIUBACL,
+       "tCoreResSharedPolicerTotal": tCoreResSharedPolicerTotal,
+       "tCoreResSharedPolicerAlloc": tCoreResSharedPolicerAlloc,
+       "tCoreResIngFloatPlcrStatIUBSP": tCoreResIngFloatPlcrStatIUBSP,
+       "tCoreResSharedPolicerStatsTotal": tCoreResSharedPolicerStatsTotal,
+       "tCoreResSharedPolicerStatsAlloc": tCoreResSharedPolicerStatsAlloc,
+       "tCoreRes4QVlanVoqTotal": tCoreRes4QVlanVoqTotal,
+       "tCoreRes4QVlanVoqAlloc": tCoreRes4QVlanVoqAlloc,
+       "tCoreResFltrSharedPlcrTotal": tCoreResFltrSharedPlcrTotal,
+       "tCoreResFltrSharedPlcrAlloc": tCoreResFltrSharedPlcrAlloc,
+       "tCoreResFltrSharedPlcrStatsTotal": tCoreResFltrSharedPlcrStatsTotal,
+       "tCoreResFltrSharedPlcrStatsAlloc": tCoreResFltrSharedPlcrStatsAlloc,
+       "tCoreResSchedulerFlowTotal": tCoreResSchedulerFlowTotal,
+       "tCoreResSchedulerFlowAlloc": tCoreResSchedulerFlowAlloc,
+       "tCoreResSchedulerInterfacesTotal": tCoreResSchedulerInterfacesTotal,
+       "tCoreResSchedulerInterfacesAlloc": tCoreResSchedulerInterfacesAlloc,
+       "tCoreRes8QSchedulerFlowTotal": tCoreRes8QSchedulerFlowTotal,
+       "tCoreRes8QSchedulerFlowAlloc": tCoreRes8QSchedulerFlowAlloc,
+       "tCoreRes4QSchedulerFlowTotal": tCoreRes4QSchedulerFlowTotal,
+       "tCoreRes4QSchedulerFlowAlloc": tCoreRes4QSchedulerFlowAlloc,
+       "tCoreRes8QVirtualFlowTotal": tCoreRes8QVirtualFlowTotal,
+       "tCoreRes8QVirtualFlowAlloc": tCoreRes8QVirtualFlowAlloc,
+       "tCoreRes4QVirtualFlowTotal": tCoreRes4QVirtualFlowTotal,
+       "tCoreRes4QVirtualFlowAlloc": tCoreRes4QVirtualFlowAlloc,
        "tmnxXiomConfigTableLastChanged": tmnxXiomConfigTableLastChanged,
        "tmnxXiomConfigTable": tmnxXiomConfigTable,
        "tmnxXiomConfigEntry": tmnxXiomConfigEntry,
@@ -32453,6 +42058,7 @@ mibBuilder.exportSymbols(
        "tmnxXiomAvailableMdaSlots": tmnxXiomAvailableMdaSlots,
        "tmnxXiomNumEquippedMdas": tmnxXiomNumEquippedMdas,
        "tmnxXiomHwIndex": tmnxXiomHwIndex,
+       "tmnxXiomSupportedTypes": tmnxXiomSupportedTypes,
        "tmnxXiomTypeTable": tmnxXiomTypeTable,
        "tmnxXiomTypeEntry": tmnxXiomTypeEntry,
        "tmnxXiomTypeIndex": tmnxXiomTypeIndex,
@@ -32485,6 +42091,14 @@ mibBuilder.exportSymbols(
        "tmnxEsaVmVirtCoreCurUtilization": tmnxEsaVmVirtCoreCurUtilization,
        "tmnxEsaVmVirtCoreAvgUtilization": tmnxEsaVmVirtCoreAvgUtilization,
        "tmnxEsaVmVirtCorePeakUtilization": tmnxEsaVmVirtCorePeakUtilization,
+       "tmnxIPsecIsaMemberPoolTable": tmnxIPsecIsaMemberPoolTable,
+       "tmnxIPsecIsaMemberPoolEntry": tmnxIPsecIsaMemberPoolEntry,
+       "tmnxIPsecIsaMemberPoolName": tmnxIPsecIsaMemberPoolName,
+       "tmnxIPsecIsaMemberPoolRowStatus": tmnxIPsecIsaMemberPoolRowStatus,
+       "tmnxIPsecIsaMemberPoolLastChgd": tmnxIPsecIsaMemberPoolLastChgd,
+       "tmnxIPsecIsaMemberPoolDesc": tmnxIPsecIsaMemberPoolDesc,
+       "tmnxIPsecIsaMemberPoolHighAvail": tmnxIPsecIsaMemberPoolHighAvail,
+       "tmnxIPsecIsaMemberPoolTblLstChgd": tmnxIPsecIsaMemberPoolTblLstChgd,
        "tmnxMdaXConMacTableLastChanged": tmnxMdaXConMacTableLastChanged,
        "tmnxMdaXConMacTable": tmnxMdaXConMacTable,
        "tmnxMdaXConMacEntry": tmnxMdaXConMacEntry,
@@ -32505,6 +42119,8 @@ mibBuilder.exportSymbols(
        "tCoreDdctdPolicerPartition": tCoreDdctdPolicerPartition,
        "tCoreDdctdPolicersTotal": tCoreDdctdPolicersTotal,
        "tCoreDdctdPolicersAlloc": tCoreDdctdPolicersAlloc,
+       "tCoreDdctdPolicerStatsTotal": tCoreDdctdPolicerStatsTotal,
+       "tCoreDdctdPolicerStatsAlloc": tCoreDdctdPolicerStatsAlloc,
        "tmnxFPtoFPStatTable": tmnxFPtoFPStatTable,
        "tmnxFPtoFPStatEntry": tmnxFPtoFPStatEntry,
        "tmnxSrcChassisIndex": tmnxSrcChassisIndex,
@@ -32519,6 +42135,287 @@ mibBuilder.exportSymbols(
        "tmnxBestEffortFptoFpOcts": tmnxBestEffortFptoFpOcts,
        "tmnxExpeditedFptoFpPkts": tmnxExpeditedFptoFpPkts,
        "tmnxExpeditedFptoFpOcts": tmnxExpeditedFptoFpOcts,
+       "tmnxEsaCellTopoTable": tmnxEsaCellTopoTable,
+       "tmnxEsaCellTopoEntry": tmnxEsaCellTopoEntry,
+       "tmnxEsaCellId": tmnxEsaCellId,
+       "tmnxEsaCellTopoSocket": tmnxEsaCellTopoSocket,
+       "tmnxEsaCellTopoCoresAvailable": tmnxEsaCellTopoCoresAvailable,
+       "tmnxEsaCellTopoCoresAllocated": tmnxEsaCellTopoCoresAllocated,
+       "tmnxEsaCellTopoMemoryAvailable": tmnxEsaCellTopoMemoryAvailable,
+       "tmnxEsaCellTopoMemoryAllocated": tmnxEsaCellTopoMemoryAllocated,
+       "tmnxEsaHostPortStatsTable": tmnxEsaHostPortStatsTable,
+       "tmnxEsaHostPortStatsEntry": tmnxEsaHostPortStatsEntry,
+       "tmnxEsaHostPortSocketId": tmnxEsaHostPortSocketId,
+       "tmnxEsaHostPortNicIfName": tmnxEsaHostPortNicIfName,
+       "tmnxEsaHostPortNicXceiverType": tmnxEsaHostPortNicXceiverType,
+       "tmnxEsaHostPortNicXceiverMN": tmnxEsaHostPortNicXceiverMN,
+       "tmnxEsaHostPortNicXceiverLWL": tmnxEsaHostPortNicXceiverLWL,
+       "tmnxEsaHostPortNicSFPNumLanes": tmnxEsaHostPortNicSFPNumLanes,
+       "tmnxEsaHostPortNictSFPConCode": tmnxEsaHostPortNictSFPConCode,
+       "tmnxEsaHostPortNicSFPVendorOUI": tmnxEsaHostPortNicSFPVendorOUI,
+       "tmnxEsaHostPortNicSFPVendorMfg": tmnxEsaHostPortNicSFPVendorMfg,
+       "tmnxEsaHostPortNicSFPMedia": tmnxEsaHostPortNicSFPMedia,
+       "tmnxEsaHostPortNicSFPVendorSN": tmnxEsaHostPortNicSFPVendorSN,
+       "tmnxEsaHostPortNicSFPVendorPN": tmnxEsaHostPortNicSFPVendorPN,
+       "tmnxEsaHostPortNicOptCompliance": tmnxEsaHostPortNicOptCompliance,
+       "tmnxEsaHostPortNicOptCCExtension": tmnxEsaHostPortNicOptCCExtension,
+       "tmnxEsaHostPortNicLinkLenInfo": tmnxEsaHostPortNicLinkLenInfo,
+       "tmnxEsaHostPortNicDDMTemp": tmnxEsaHostPortNicDDMTemp,
+       "tmnxEsaHostPortNicDDMTempLowWarn": tmnxEsaHostPortNicDDMTempLowWarn,
+       "tmnxEsaHostPortNicDDMTempLwAlarm": tmnxEsaHostPortNicDDMTempLwAlarm,
+       "tmnxEsaHostPortNicDDMTempHiWarn": tmnxEsaHostPortNicDDMTempHiWarn,
+       "tmnxEsaHostPortNicDDMTempHiAlarm": tmnxEsaHostPortNicDDMTempHiAlarm,
+       "tmnxEsaHostPortNicDDMSupVoltage": tmnxEsaHostPortNicDDMSupVoltage,
+       "tmnxEsaHostPortNicDDMSVLowWarn": tmnxEsaHostPortNicDDMSVLowWarn,
+       "tmnxEsaHostPortNicDDMSVLowAlarm": tmnxEsaHostPortNicDDMSVLowAlarm,
+       "tmnxEsaHostPortNicDDMSVHiWarn": tmnxEsaHostPortNicDDMSVHiWarn,
+       "tmnxEsaHostPortNicDDMSVHiAlarm": tmnxEsaHostPortNicDDMSVHiAlarm,
+       "tmnxEsaHostPortNicDDMTxBCLwWarn": tmnxEsaHostPortNicDDMTxBCLwWarn,
+       "tmnxEsaHostPortNicDDMTxBCLwAlarm": tmnxEsaHostPortNicDDMTxBCLwAlarm,
+       "tmnxEsaHostPortNicDDMTxBCHiWarn": tmnxEsaHostPortNicDDMTxBCHiWarn,
+       "tmnxEsaHostPortNicDDMTxBCHiAlarm": tmnxEsaHostPortNicDDMTxBCHiAlarm,
+       "tmnxEsaHostPortNicDDMTxOPLwWarn": tmnxEsaHostPortNicDDMTxOPLwWarn,
+       "tmnxEsaHostPortNicDDMTxOPLwAlarm": tmnxEsaHostPortNicDDMTxOPLwAlarm,
+       "tmnxEsaHostPortNicDDMTxOPHiWarn": tmnxEsaHostPortNicDDMTxOPHiWarn,
+       "tmnxEsaHostPortNicDDMTxOPHiAlarm": tmnxEsaHostPortNicDDMTxOPHiAlarm,
+       "tmnxEsaHostPortNicDDMRxOpPLwWarn": tmnxEsaHostPortNicDDMRxOpPLwWarn,
+       "tmnxEsaHostPortNicDDMRxOpPLwAlrm": tmnxEsaHostPortNicDDMRxOpPLwAlrm,
+       "tmnxEsaHostPortNicDDMRxOpPHiWarn": tmnxEsaHostPortNicDDMRxOpPHiWarn,
+       "tmnxEsaHostPortNicDDMRxOpPHiAlrm": tmnxEsaHostPortNicDDMRxOpPHiAlrm,
+       "tmnxEsaHostPortOperStatus": tmnxEsaHostPortOperStatus,
+       "tmnxEsaHostPortFwdStatus": tmnxEsaHostPortFwdStatus,
+       "tmnxEsaHostPortRxTotalPkts": tmnxEsaHostPortRxTotalPkts,
+       "tmnxEsaHostPortTxTotalPkts": tmnxEsaHostPortTxTotalPkts,
+       "tmnxEsaHostPortRxDiscards": tmnxEsaHostPortRxDiscards,
+       "tmnxEsaHostPortRxCrcErrors": tmnxEsaHostPortRxCrcErrors,
+       "tmnxEsaHostPortRxSymErrors": tmnxEsaHostPortRxSymErrors,
+       "tmnxFPCoreResUsgStatsTable": tmnxFPCoreResUsgStatsTable,
+       "tmnxFPCoreResUsgStatsEntry": tmnxFPCoreResUsgStatsEntry,
+       "tmnxFPCoreFreeDramBdb": tmnxFPCoreFreeDramBdb,
+       "tmnxFPCoreMinFreeDramBdb": tmnxFPCoreMinFreeDramBdb,
+       "tmnxFPCoreLowFreeDramBdb": tmnxFPCoreLowFreeDramBdb,
+       "tmnxFPCoreTotalDramBdb": tmnxFPCoreTotalDramBdb,
+       "tmnxFPCoreFreeSramBuf": tmnxFPCoreFreeSramBuf,
+       "tmnxFPCoreMinFreeSramBuf": tmnxFPCoreMinFreeSramBuf,
+       "tmnxFPCoreLowFreeSramBuf": tmnxFPCoreLowFreeSramBuf,
+       "tmnxFPCoreTotalSramBuf": tmnxFPCoreTotalSramBuf,
+       "tmnxFPCoreFreeSramPdb": tmnxFPCoreFreeSramPdb,
+       "tmnxFPCoreMinFreeSramPdb": tmnxFPCoreMinFreeSramPdb,
+       "tmnxFPCoreLowFreeSramPdb": tmnxFPCoreLowFreeSramPdb,
+       "tmnxFPCoreTotalSramPdb": tmnxFPCoreTotalSramPdb,
+       "tmnxFPCoreDramBwMaxCnscPollBlk": tmnxFPCoreDramBwMaxCnscPollBlk,
+       "tmnxFPCoreDramBwPktRejLastPoll": tmnxFPCoreDramBwPktRejLastPoll,
+       "tmnxFPCoreDramBwTotalPktRejects": tmnxFPCoreDramBwTotalPktRejects,
+       "tmnxFPCorePcsPipeNifPrdDrpLstPol": tmnxFPCorePcsPipeNifPrdDrpLstPol,
+       "tmnxFPCorePcsPipeTotNifPrdDrops": tmnxFPCorePcsPipeTotNifPrdDrops,
+       "tmnxFPCorePcsPipeMxCnvPlNifPrdDp": tmnxFPCorePcsPipeMxCnvPlNifPrdDp,
+       "tmnxFPCoreMeshFabBwAsrtCngstFP1": tmnxFPCoreMeshFabBwAsrtCngstFP1,
+       "tmnxFPCoreMeshFabBwAsrtCngstFP2": tmnxFPCoreMeshFabBwAsrtCngstFP2,
+       "tmnxFPCoreMeshFabBwAsrtCngstFP3": tmnxFPCoreMeshFabBwAsrtCngstFP3,
+       "tmnxFPCoreL0PolicerProfilesInUse": tmnxFPCoreL0PolicerProfilesInUse,
+       "tmnxFPCoreL1PolicerProfilesInUse": tmnxFPCoreL1PolicerProfilesInUse,
+       "tmnxCpmSecureBootStatsTable": tmnxCpmSecureBootStatsTable,
+       "tmnxCpmSecureBootStatsEntry": tmnxCpmSecureBootStatsEntry,
+       "tmnxCpmSecureBootEnabled": tmnxCpmSecureBootEnabled,
+       "tmnxCpmSBUefiVarsStatus": tmnxCpmSBUefiVarsStatus,
+       "tmnxFPResOversubStatsTable": tmnxFPResOversubStatsTable,
+       "tmnxFPResOversubStatsEntry": tmnxFPResOversubStatsEntry,
+       "tmnxFPOversubResource": tmnxFPOversubResource,
+       "tmnxFPResOversubDetected": tmnxFPResOversubDetected,
+       "tCardIxrResourceTable": tCardIxrResourceTable,
+       "tCardIxrResourceEntry": tCardIxrResourceEntry,
+       "tCardIxrResMplsEcmpGroupsTotal": tCardIxrResMplsEcmpGroupsTotal,
+       "tCardIxrResMplsEcmpGroupsAlloc": tCardIxrResMplsEcmpGroupsAlloc,
+       "tCardIxrResMplsEcmpGroupsFree": tCardIxrResMplsEcmpGroupsFree,
+       "tCardIxrResIpEcmpGroupsTotal": tCardIxrResIpEcmpGroupsTotal,
+       "tCardIxrResIpEcmpGroupsAlloc": tCardIxrResIpEcmpGroupsAlloc,
+       "tCardIxrResIpEcmpGroupsFree": tCardIxrResIpEcmpGroupsFree,
+       "tCardIxrResFecBanksTotal": tCardIxrResFecBanksTotal,
+       "tCardIxrResFecBanksAlloc": tCardIxrResFecBanksAlloc,
+       "tCardIxrResFecBanksFree": tCardIxrResFecBanksFree,
+       "tCardIxrResFecLevel1BanksAlloc": tCardIxrResFecLevel1BanksAlloc,
+       "tCardIxrResFecLevel2BanksAlloc": tCardIxrResFecLevel2BanksAlloc,
+       "tCardIxrResFecsTotal": tCardIxrResFecsTotal,
+       "tCardIxrResFecsAlloc": tCardIxrResFecsAlloc,
+       "tCardIxrResFecsFree": tCardIxrResFecsFree,
+       "tCardIxrResFecLevel1Total": tCardIxrResFecLevel1Total,
+       "tCardIxrResFecLevel1Alloc": tCardIxrResFecLevel1Alloc,
+       "tCardIxrResFecLevel1Free": tCardIxrResFecLevel1Free,
+       "tCardIxrResFecLevel2Total": tCardIxrResFecLevel2Total,
+       "tCardIxrResFecLevel2Alloc": tCardIxrResFecLevel2Alloc,
+       "tCardIxrResFecLevel2Free": tCardIxrResFecLevel2Free,
+       "tCardIxrResGrpFecsTotal": tCardIxrResGrpFecsTotal,
+       "tCardIxrResGrpFecsAlloc": tCardIxrResGrpFecsAlloc,
+       "tCardIxrResGrpFecsFree": tCardIxrResGrpFecsFree,
+       "tCardIxrResGrpFecBanksTotal": tCardIxrResGrpFecBanksTotal,
+       "tCardIxrResGrpFecBanksAlloc": tCardIxrResGrpFecBanksAlloc,
+       "tCardIxrResGrpFecBanksFree": tCardIxrResGrpFecBanksFree,
+       "tCardIxrResGrpFecLvl1BanksAlloc": tCardIxrResGrpFecLvl1BanksAlloc,
+       "tCardIxrResGrpFecLvl2BanksAlloc": tCardIxrResGrpFecLvl2BanksAlloc,
+       "tCardIxrResGrpFecLevel1Total": tCardIxrResGrpFecLevel1Total,
+       "tCardIxrResGrpFecLevel1Alloc": tCardIxrResGrpFecLevel1Alloc,
+       "tCardIxrResGrpFecLevel1Free": tCardIxrResGrpFecLevel1Free,
+       "tCardIxrResGrpFecLevel2Total": tCardIxrResGrpFecLevel2Total,
+       "tCardIxrResGrpFecLevel2Alloc": tCardIxrResGrpFecLevel2Alloc,
+       "tCardIxrResGrpFecLevel2Free": tCardIxrResGrpFecLevel2Free,
+       "tCardIxrResIlmSwapTotal": tCardIxrResIlmSwapTotal,
+       "tCardIxrResIlmSwapAlloc": tCardIxrResIlmSwapAlloc,
+       "tCardIxrResIlmSwapFree": tCardIxrResIlmSwapFree,
+       "tCardIxrResFecLevel3Total": tCardIxrResFecLevel3Total,
+       "tCardIxrResFecLevel3Alloc": tCardIxrResFecLevel3Alloc,
+       "tCardIxrResFecLevel3Free": tCardIxrResFecLevel3Free,
+       "tCardIxrResGrpFecLvl3BanksAlloc": tCardIxrResGrpFecLvl3BanksAlloc,
+       "tCardIxrResGrpFecLevel3Total": tCardIxrResGrpFecLevel3Total,
+       "tCardIxrResGrpFecLevel3Alloc": tCardIxrResGrpFecLevel3Alloc,
+       "tCardIxrResGrpFecLevel3Free": tCardIxrResGrpFecLevel3Free,
+       "tCardIxrResPpmcBestCaseEstTotal": tCardIxrResPpmcBestCaseEstTotal,
+       "tCardIxrResPpmcWrstCaseEstTotal": tCardIxrResPpmcWrstCaseEstTotal,
+       "tCardIxrResPpmcSingleLevelAlloc": tCardIxrResPpmcSingleLevelAlloc,
+       "tCardIxrResPpmcMultiLevelAlloc": tCardIxrResPpmcMultiLevelAlloc,
+       "tCardIxrResPpmcExhausted": tCardIxrResPpmcExhausted,
+       "tCardIxrResourceOwnerTable": tCardIxrResourceOwnerTable,
+       "tCardIxrResourceOwnerEntry": tCardIxrResourceOwnerEntry,
+       "tCardIxrResourceOwner": tCardIxrResourceOwner,
+       "tCardIxrResOwnFecLevel1Alloc": tCardIxrResOwnFecLevel1Alloc,
+       "tCardIxrResOwnFecLevel2Alloc": tCardIxrResOwnFecLevel2Alloc,
+       "tCardIxrResOwnGrpFecAlloc": tCardIxrResOwnGrpFecAlloc,
+       "tCardIxrResOwnGrpFecLevel1Alloc": tCardIxrResOwnGrpFecLevel1Alloc,
+       "tCardIxrResOwnGrpFecLevel2Alloc": tCardIxrResOwnGrpFecLevel2Alloc,
+       "tCardIxrResOwnFecLevel3Alloc": tCardIxrResOwnFecLevel3Alloc,
+       "tCardIxrResOwnGrpFecLevel3Alloc": tCardIxrResOwnGrpFecLevel3Alloc,
+       "tCardIxrResOwnPpmcSingleLvlAlloc": tCardIxrResOwnPpmcSingleLvlAlloc,
+       "tCardIxrResOwnPpmcMultiLvlAlloc": tCardIxrResOwnPpmcMultiLvlAlloc,
+       "tFpIxrResourceTable": tFpIxrResourceTable,
+       "tFpIxrResourceEntry": tFpIxrResourceEntry,
+       "tFPIxrResFPNum": tFPIxrResFPNum,
+       "tFpIxrResEgrGlobalLifMapTotal": tFpIxrResEgrGlobalLifMapTotal,
+       "tFpIxrResEgrGlobalLifMapAlloc": tFpIxrResEgrGlobalLifMapAlloc,
+       "tFpIxrResEgrGlobalLifMapFree": tFpIxrResEgrGlobalLifMapFree,
+       "tFpIxrResIngTerminationATotal": tFpIxrResIngTerminationATotal,
+       "tFpIxrResIngTerminationAAlloc": tFpIxrResIngTerminationAAlloc,
+       "tFpIxrResIngTerminationAFree": tFpIxrResIngTerminationAFree,
+       "tFpIxrResIngTerminationBTotal": tFpIxrResIngTerminationBTotal,
+       "tFpIxrResIngTerminationBAlloc": tFpIxrResIngTerminationBAlloc,
+       "tFpIxrResIngTerminationBFree": tFpIxrResIngTerminationBFree,
+       "tFpIxrResIngEndpoint1Total": tFpIxrResIngEndpoint1Total,
+       "tFpIxrResIngEndpoint1Alloc": tFpIxrResIngEndpoint1Alloc,
+       "tFpIxrResIngEndpoint1Free": tFpIxrResIngEndpoint1Free,
+       "tFpIxrResIngEndpoint2Total": tFpIxrResIngEndpoint2Total,
+       "tFpIxrResIngEndpoint2Alloc": tFpIxrResIngEndpoint2Alloc,
+       "tFpIxrResIngEndpoint2Free": tFpIxrResIngEndpoint2Free,
+       "tFpIxrResIngEndpoint3Total": tFpIxrResIngEndpoint3Total,
+       "tFpIxrResIngEndpoint3Alloc": tFpIxrResIngEndpoint3Alloc,
+       "tFpIxrResIngEndpoint3Free": tFpIxrResIngEndpoint3Free,
+       "tFpIxrResEgrEncapBanksTotal": tFpIxrResEgrEncapBanksTotal,
+       "tFpIxrResEgrEncapBanksAlloc": tFpIxrResEgrEncapBanksAlloc,
+       "tFpIxrResEgrEncapBanksFree": tFpIxrResEgrEncapBanksFree,
+       "tFpIxrResEgrEncapEntriesTotal": tFpIxrResEgrEncapEntriesTotal,
+       "tFpIxrResEgrEncapEntriesAlloc": tFpIxrResEgrEncapEntriesAlloc,
+       "tFpIxrResEgrEncapEntriesFree": tFpIxrResEgrEncapEntriesFree,
+       "tFpIxrResEgrRoutedBanks": tFpIxrResEgrRoutedBanks,
+       "tFpIxrResEgrRoutedTotal": tFpIxrResEgrRoutedTotal,
+       "tFpIxrResEgrRoutedAlloc": tFpIxrResEgrRoutedAlloc,
+       "tFpIxrResEgrRoutedFree": tFpIxrResEgrRoutedFree,
+       "tFpIxrResEgrTdmBanks": tFpIxrResEgrTdmBanks,
+       "tFpIxrResEgrTdmTotal": tFpIxrResEgrTdmTotal,
+       "tFpIxrResEgrTdmAlloc": tFpIxrResEgrTdmAlloc,
+       "tFpIxrResEgrTdmFree": tFpIxrResEgrTdmFree,
+       "tFpIxrResEgrPortVlanXlatBanks": tFpIxrResEgrPortVlanXlatBanks,
+       "tFpIxrResEgrPortVlanXlatTotal": tFpIxrResEgrPortVlanXlatTotal,
+       "tFpIxrResEgrPortVlanXlatAlloc": tFpIxrResEgrPortVlanXlatAlloc,
+       "tFpIxrResEgrPortVlanXlatFree": tFpIxrResEgrPortVlanXlatFree,
+       "tFpIxrResEgrArpBanks": tFpIxrResEgrArpBanks,
+       "tFpIxrResEgrArpTotal": tFpIxrResEgrArpTotal,
+       "tFpIxrResEgrArpAlloc": tFpIxrResEgrArpAlloc,
+       "tFpIxrResEgrArpFree": tFpIxrResEgrArpFree,
+       "tFpIxrResEgrLabelPushBanks": tFpIxrResEgrLabelPushBanks,
+       "tFpIxrResEgrLabelPushTotal": tFpIxrResEgrLabelPushTotal,
+       "tFpIxrResEgrLabelPushAlloc": tFpIxrResEgrLabelPushAlloc,
+       "tFpIxrResEgrLabelPushFree": tFpIxrResEgrLabelPushFree,
+       "tFpIxrResEgrLabelSwapPushBanks": tFpIxrResEgrLabelSwapPushBanks,
+       "tFpIxrResEgrLabelSwapPushTotal": tFpIxrResEgrLabelSwapPushTotal,
+       "tFpIxrResEgrLabelSwapPushAlloc": tFpIxrResEgrLabelSwapPushAlloc,
+       "tFpIxrResEgrLabelSwapPushFree": tFpIxrResEgrLabelSwapPushFree,
+       "tFpIxrResEgrPortVlanXltExtBanks": tFpIxrResEgrPortVlanXltExtBanks,
+       "tFpIxrResEgrPortVlanXltExtTotal": tFpIxrResEgrPortVlanXltExtTotal,
+       "tFpIxrResEgrPortVlanXltExtAlloc": tFpIxrResEgrPortVlanXltExtAlloc,
+       "tFpIxrResEgrPortVlanXltExtFree": tFpIxrResEgrPortVlanXltExtFree,
+       "tFpIxrResEgrArpExtBanks": tFpIxrResEgrArpExtBanks,
+       "tFpIxrResEgrArpExtTotal": tFpIxrResEgrArpExtTotal,
+       "tFpIxrResEgrArpExtAlloc": tFpIxrResEgrArpExtAlloc,
+       "tFpIxrResEgrArpExtFree": tFpIxrResEgrArpExtFree,
+       "tFpIxrResEgrLabelPushExtBanks": tFpIxrResEgrLabelPushExtBanks,
+       "tFpIxrResEgrLabelPushExtTotal": tFpIxrResEgrLabelPushExtTotal,
+       "tFpIxrResEgrLabelPushExtAlloc": tFpIxrResEgrLabelPushExtAlloc,
+       "tFpIxrResEgrLabelPushExtFree": tFpIxrResEgrLabelPushExtFree,
+       "tFpIxrResEgrLabelSwapPshExBanks": tFpIxrResEgrLabelSwapPshExBanks,
+       "tFpIxrResEgrLabelSwapPshExTotal": tFpIxrResEgrLabelSwapPshExTotal,
+       "tFpIxrResEgrLabelSwapPshExAlloc": tFpIxrResEgrLabelSwapPshExAlloc,
+       "tFpIxrResEgrLabelSwapPshExFree": tFpIxrResEgrLabelSwapPshExFree,
+       "tFpIxrResEgrEncapExtBanksTotal": tFpIxrResEgrEncapExtBanksTotal,
+       "tFpIxrResEgrEncapExtBanksAlloc": tFpIxrResEgrEncapExtBanksAlloc,
+       "tFpIxrResEgrEncapExtBanksFree": tFpIxrResEgrEncapExtBanksFree,
+       "tFpIxrResEgrEncapExtEntriesTotal": tFpIxrResEgrEncapExtEntriesTotal,
+       "tFpIxrResEgrEncapExtEntriesAlloc": tFpIxrResEgrEncapExtEntriesAlloc,
+       "tFpIxrResEgrEncapExtEntriesFree": tFpIxrResEgrEncapExtEntriesFree,
+       "tFpIxrResEgrExPortVlanXlatBanks": tFpIxrResEgrExPortVlanXlatBanks,
+       "tFpIxrResEgrExPortVlanXlatTotal": tFpIxrResEgrExPortVlanXlatTotal,
+       "tFpIxrResEgrExPortVlanXlatAlloc": tFpIxrResEgrExPortVlanXlatAlloc,
+       "tFpIxrResEgrExPortVlanXlatFree": tFpIxrResEgrExPortVlanXlatFree,
+       "tFpIxrResEgrExArpBanks": tFpIxrResEgrExArpBanks,
+       "tFpIxrResEgrExArpTotal": tFpIxrResEgrExArpTotal,
+       "tFpIxrResEgrExArpAlloc": tFpIxrResEgrExArpAlloc,
+       "tFpIxrResEgrExArpFree": tFpIxrResEgrExArpFree,
+       "tFpIxrResEgrExLabelPushBanks": tFpIxrResEgrExLabelPushBanks,
+       "tFpIxrResEgrExLabelPushTotal": tFpIxrResEgrExLabelPushTotal,
+       "tFpIxrResEgrExLabelPushAlloc": tFpIxrResEgrExLabelPushAlloc,
+       "tFpIxrResEgrExLabelPushFree": tFpIxrResEgrExLabelPushFree,
+       "tFpIxrResEgrExLabelSwapPshBanks": tFpIxrResEgrExLabelSwapPshBanks,
+       "tFpIxrResEgrExLabelSwapPshTotal": tFpIxrResEgrExLabelSwapPshTotal,
+       "tFpIxrResEgrExLabelSwapPshAlloc": tFpIxrResEgrExLabelSwapPshAlloc,
+       "tFpIxrResEgrExLabelSwapPshFree": tFpIxrResEgrExLabelSwapPshFree,
+       "tFpIxrResLargeExactMatchTotal": tFpIxrResLargeExactMatchTotal,
+       "tFpIxrResLargeExactMatchAlloc": tFpIxrResLargeExactMatchAlloc,
+       "tFpIxrResLargeExactMatchFree": tFpIxrResLargeExactMatchFree,
+       "tFpIxrResourceEgressTable": tFpIxrResourceEgressTable,
+       "tFpIxrResourceEgressEntry": tFpIxrResourceEgressEntry,
+       "tFpIxrResourceEgressFpNum": tFpIxrResourceEgressFpNum,
+       "tFpIxrResourceEgressType": tFpIxrResourceEgressType,
+       "tFpIxrResourceEgressSet": tFpIxrResourceEgressSet,
+       "tFpIxrResourceEgressBanksTotal": tFpIxrResourceEgressBanksTotal,
+       "tFpIxrResourceEgressBanksAlloc": tFpIxrResourceEgressBanksAlloc,
+       "tFpIxrResourceEgressBanksFree": tFpIxrResourceEgressBanksFree,
+       "tFpIxrResourceEgressPhases": tFpIxrResourceEgressPhases,
+       "tFpIxrResourceEgressPhaseTable": tFpIxrResourceEgressPhaseTable,
+       "tFpIxrResourceEgressPhaseEntry": tFpIxrResourceEgressPhaseEntry,
+       "tFpIxrRsEgPhFpNum": tFpIxrRsEgPhFpNum,
+       "tFpIxrRsEgPhType": tFpIxrRsEgPhType,
+       "tFpIxrRsEgPhSet": tFpIxrRsEgPhSet,
+       "tFpIxrRsEgPhPhase": tFpIxrRsEgPhPhase,
+       "tFpIxrRsEgPhLinkedDataBanks": tFpIxrRsEgPhLinkedDataBanks,
+       "tFpIxrRsEgPhLinkedDataTotal": tFpIxrRsEgPhLinkedDataTotal,
+       "tFpIxrRsEgPhLinkedDataAlloc": tFpIxrRsEgPhLinkedDataAlloc,
+       "tFpIxrRsEgPhLinkedDataFree": tFpIxrRsEgPhLinkedDataFree,
+       "tFpIxrRsEgPhNonLinkedDataBanks": tFpIxrRsEgPhNonLinkedDataBanks,
+       "tFpIxrRsEgPhNonLinkedDataTotal": tFpIxrRsEgPhNonLinkedDataTotal,
+       "tFpIxrRsEgPhNonLinkedDataAlloc": tFpIxrRsEgPhNonLinkedDataAlloc,
+       "tFpIxrRsEgPhNonLinkedDataFree": tFpIxrRsEgPhNonLinkedDataFree,
+       "tFpIxrRsEgPhLinkedListBanks": tFpIxrRsEgPhLinkedListBanks,
+       "tFpIxrRsEgPhLinkedListTotal": tFpIxrRsEgPhLinkedListTotal,
+       "tFpIxrRsEgPhLinkedListAlloc": tFpIxrRsEgPhLinkedListAlloc,
+       "tFpIxrRsEgPhLinkedListFree": tFpIxrRsEgPhLinkedListFree,
+       "tmnxVirSchAdjWrkManulCntrlTable": tmnxVirSchAdjWrkManulCntrlTable,
+       "tmnxVirSchAdjWrkManulCntrlEntry": tmnxVirSchAdjWrkManulCntrlEntry,
+       "tmnxCardManualCntrlParameterName": tmnxCardManualCntrlParameterName,
+       "tmnxCardManulCntrlParamRowStatus": tmnxCardManulCntrlParamRowStatus,
+       "tmnxCardManulCntrlParamLastChngd": tmnxCardManulCntrlParamLastChngd,
+       "tmnxCardManualCntrlParamPrcnt": tmnxCardManualCntrlParamPrcnt,
+       "tmnxEsaHostPortDDMLaneTable": tmnxEsaHostPortDDMLaneTable,
+       "tmnxEsaHostPortDDMLaneEntry": tmnxEsaHostPortDDMLaneEntry,
+       "tmnxEsaHostPortNicLaneId": tmnxEsaHostPortNicLaneId,
+       "tmnxEsaHostPortNicDDMTxBiasCurr": tmnxEsaHostPortNicDDMTxBiasCurr,
+       "tmnxEsaHostPortNicDDMTxOutPower": tmnxEsaHostPortNicDDMTxOutPower,
+       "tmnxEsaHostPortNicDDMRxOpPower": tmnxEsaHostPortNicDDMRxOpPower,
        "tmnxChassisNotificationObjects": tmnxChassisNotificationObjects,
        "tmnxEqNotificationRow": tmnxEqNotificationRow,
        "tmnxEqTypeNotificationRow": tmnxEqTypeNotificationRow,
@@ -32567,6 +42464,15 @@ mibBuilder.exportSymbols(
        "tmnxIomRsrcMissingNotifCount": tmnxIomRsrcMissingNotifCount,
        "tmnxHwAggShpTimeEventOccured": tmnxHwAggShpTimeEventOccured,
        "tmnxHwAggShpMissingNotifCount": tmnxHwAggShpMissingNotifCount,
+       "tmnxIomRsrcOwnerType": tmnxIomRsrcOwnerType,
+       "tmnxNotifIxrResourceOwner": tmnxNotifIxrResourceOwner,
+       "tmnxNotifIxrResource": tmnxNotifIxrResource,
+       "tmnxNotifIxrRsrcUtilPercentage": tmnxNotifIxrRsrcUtilPercentage,
+       "tmnxEsaPortNotifyPortId": tmnxEsaPortNotifyPortId,
+       "tmnxEsaHostPortNotifCrcThreshold": tmnxEsaHostPortNotifCrcThreshold,
+       "tmnxEsaHostPortNotifCrcMltiplier": tmnxEsaHostPortNotifCrcMltiplier,
+       "tmnxEsaHostPortNotifCrcAlrmValue": tmnxEsaHostPortNotifCrcAlrmValue,
+       "tmnxChassisNotifyDiskFormatType": tmnxChassisNotifyDiskFormatType,
        "tmnxChassisAdminObjects": tmnxChassisAdminObjects,
        "tmnxChassisAdminCtrlObjs": tmnxChassisAdminCtrlObjs,
        "tmnxChassisAdminOwner": tmnxChassisAdminOwner,
@@ -32614,6 +42520,7 @@ mibBuilder.exportSymbols(
        "tSyncIfTimingAdmRefOrder5": tSyncIfTimingAdmRefOrder5,
        "tSyncIfTimingAdmGnssCfgQltyLevel": tSyncIfTimingAdmGnssCfgQltyLevel,
        "tSyncIfTimingAdmGnssAdminStatus": tSyncIfTimingAdmGnssAdminStatus,
+       "tSyncIfTimingAdmRefOrder6": tSyncIfTimingAdmRefOrder6,
        "tmnxHwNotification": tmnxHwNotification,
        "tmnxChassisNotifyPrefix": tmnxChassisNotifyPrefix,
        "tmnxChassisNotification": tmnxChassisNotification,
@@ -32855,5 +42762,62 @@ mibBuilder.exportSymbols(
        "tmnxIomRsrcEventOverflow": tmnxIomRsrcEventOverflow,
        "tmnxIomRsrcEventOverflowClr": tmnxIomRsrcEventOverflowClr,
        "tmnxHwAggShpSchedEventOvrflwClr": tmnxHwAggShpSchedEventOvrflwClr,
-       "tmnxHwAggShpSchedEventOvrflw": tmnxHwAggShpSchedEventOvrflw}
+       "tmnxHwAggShpSchedEventOvrflw": tmnxHwAggShpSchedEventOvrflw,
+       "tmnxIomRsrcOwnerOversubscribed": tmnxIomRsrcOwnerOversubscribed,
+       "tmnxIomRsrcOwnerOversubscrbdClr": tmnxIomRsrcOwnerOversubscrbdClr,
+       "tmnxFPResOversubscribed": tmnxFPResOversubscribed,
+       "tmnxFPResOversubscribedCleared": tmnxFPResOversubscribedCleared,
+       "tmnxEsaHwStatusDegraded": tmnxEsaHwStatusDegraded,
+       "tmnxEsaHwStatusDegradedClr": tmnxEsaHwStatusDegradedClr,
+       "tmnxEsaHwStatusCritical": tmnxEsaHwStatusCritical,
+       "tmnxEsaHwStatusCriticalClr": tmnxEsaHwStatusCriticalClr,
+       "tmnxEsaHwPwrSup1Degraded": tmnxEsaHwPwrSup1Degraded,
+       "tmnxEsaHwPwrSup1DegradedClr": tmnxEsaHwPwrSup1DegradedClr,
+       "tmnxEsaHwPwrSup1Failed": tmnxEsaHwPwrSup1Failed,
+       "tmnxEsaHwPwrSup1FailedClr": tmnxEsaHwPwrSup1FailedClr,
+       "tmnxEsaHwPwrSup2Degraded": tmnxEsaHwPwrSup2Degraded,
+       "tmnxEsaHwPwrSup2DegradedClr": tmnxEsaHwPwrSup2DegradedClr,
+       "tmnxEsaHwPwrSup2Failed": tmnxEsaHwPwrSup2Failed,
+       "tmnxEsaHwPwrSup2FailedClr": tmnxEsaHwPwrSup2FailedClr,
+       "tmnxEsaHwFanBankNonRedun": tmnxEsaHwFanBankNonRedun,
+       "tmnxEsaHwFanBankNonRedunClr": tmnxEsaHwFanBankNonRedunClr,
+       "tmnxEsaHwFanBankFailRedun": tmnxEsaHwFanBankFailRedun,
+       "tmnxEsaHwFanBankFailRedunClr": tmnxEsaHwFanBankFailRedunClr,
+       "tmnxEsaHwFanStatusDegraded": tmnxEsaHwFanStatusDegraded,
+       "tmnxEsaHwFanStatusDegradedClr": tmnxEsaHwFanStatusDegradedClr,
+       "tmnxEsaHwFanStatusFailed": tmnxEsaHwFanStatusFailed,
+       "tmnxEsaHwFanStatusFailedClr": tmnxEsaHwFanStatusFailedClr,
+       "tmnxEsaHwPwrSupMismatch": tmnxEsaHwPwrSupMismatch,
+       "tmnxEsaHwPwrSupMismatchClr": tmnxEsaHwPwrSupMismatchClr,
+       "tmnxEsaHwPwrSupBankNonRedun": tmnxEsaHwPwrSupBankNonRedun,
+       "tmnxEsaHwPwrSupBankNonRedunClr": tmnxEsaHwPwrSupBankNonRedunClr,
+       "tmnxEsaHwPwrSupBankFailRedun": tmnxEsaHwPwrSupBankFailRedun,
+       "tmnxEsaHwPwrSupBankFailRedunClr": tmnxEsaHwPwrSupBankFailRedunClr,
+       "tmnxEsaHwTemperatureDegraded": tmnxEsaHwTemperatureDegraded,
+       "tmnxEsaHwTemperatureDegradedClr": tmnxEsaHwTemperatureDegradedClr,
+       "tmnxEsaHwTemperatureFailed": tmnxEsaHwTemperatureFailed,
+       "tmnxEsaHwTemperatureFailedClr": tmnxEsaHwTemperatureFailedClr,
+       "tmnxPowerSupplyFanFailed": tmnxPowerSupplyFanFailed,
+       "tmnxPowerSupplyFanFailedClear": tmnxPowerSupplyFanFailedClear,
+       "tmnxIxrResourceHighUsage": tmnxIxrResourceHighUsage,
+       "tmnxIxrResourceExhausted": tmnxIxrResourceExhausted,
+       "tmnxIxrResourceRecovered": tmnxIxrResourceRecovered,
+       "tmnxIxrResourceHighUsageByOwner": tmnxIxrResourceHighUsageByOwner,
+       "tmnxIxrResourceExhaustedByOwner": tmnxIxrResourceExhaustedByOwner,
+       "tmnxIxrResourceRecoveredByOwner": tmnxIxrResourceRecoveredByOwner,
+       "tmnxEqCardMissing": tmnxEqCardMissing,
+       "tmnxEqCardMissingClear": tmnxEqCardMissingClear,
+       "tmnxEsaStolenTimeDetected": tmnxEsaStolenTimeDetected,
+       "tmnxEqEsaHostPortCrcAlarm": tmnxEqEsaHostPortCrcAlarm,
+       "tmnxEqEsaHostPortCrcAlarmClear": tmnxEqEsaHostPortCrcAlarmClear,
+       "tmnxEsaFirmwareUpgradeInProgress": tmnxEsaFirmwareUpgradeInProgress,
+       "tmnxEsaFirmwareUpgradeDone": tmnxEsaFirmwareUpgradeDone,
+       "tmnxEsaFirmwareUpgradeFailed": tmnxEsaFirmwareUpgradeFailed,
+       "tmnxChassisAntiTheftModeBoot": tmnxChassisAntiTheftModeBoot,
+       "tmnxChassisAntiTheftUnlocked": tmnxChassisAntiTheftUnlocked,
+       "tmnxEqLowPowerSwFabModeEnabled": tmnxEqLowPowerSwFabModeEnabled,
+       "tmnxEqLowPowerSwFabModeDisabled": tmnxEqLowPowerSwFabModeDisabled,
+       "tmnxChassisGoldenStatusEvent": tmnxChassisGoldenStatusEvent,
+       "tmnxEqFlashDiskFormatStart": tmnxEqFlashDiskFormatStart,
+       "tmnxEqFlashDiskFormatFinish": tmnxEqFlashDiskFormatFinish}
 )

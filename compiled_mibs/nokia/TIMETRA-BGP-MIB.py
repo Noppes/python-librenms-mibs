@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-BGP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:16:55 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -52,6 +49,10 @@ if 'mibBuilder' not in globals():
     "bgp4PathAttrIpAddrPrefix",
     "bgp4PathAttrIpAddrPrefixLen",
     "bgp4PathAttrPeer")
+
+(InterfaceIndex,) = mibBuilder.importSymbols(
+    "IF-MIB",
+    "InterfaceIndex")
 
 (InetAddress,
  InetAddressPrefixLength,
@@ -139,6 +140,8 @@ if 'mibBuilder' not in globals():
 
 (BgpConnectRetryTime,
  BgpHoldTime,
+ TBgpSrv6UpaTriggerNextHop,
+ TBgpUntaggedRouteType,
  TLNamedItemOrEmpty,
  TLPolicyNameOrExpOrEmpty,
  TLPolicyStatementNameOrEmpty,
@@ -146,6 +149,7 @@ if 'mibBuilder' not in globals():
  TNamedItemOrEmpty,
  TPolicyStatementNameOrEmpty,
  TResolveStatus,
+ TSrv6RouteResolution,
  TXLPolicyNameOrExpOrEmpty,
  TmnxAdminState,
  TmnxAdminStateTruthValue,
@@ -159,11 +163,14 @@ if 'mibBuilder' not in globals():
  TmnxHigh32,
  TmnxLow32,
  TmnxOperState,
+ TmnxPrefixSidFullRange,
  TmnxVPNRouteDistinguisher,
  TmnxVRtrID) = mibBuilder.importSymbols(
     "TIMETRA-TC-MIB",
     "BgpConnectRetryTime",
     "BgpHoldTime",
+    "TBgpSrv6UpaTriggerNextHop",
+    "TBgpUntaggedRouteType",
     "TLNamedItemOrEmpty",
     "TLPolicyNameOrExpOrEmpty",
     "TLPolicyStatementNameOrEmpty",
@@ -171,6 +178,7 @@ if 'mibBuilder' not in globals():
     "TNamedItemOrEmpty",
     "TPolicyStatementNameOrEmpty",
     "TResolveStatus",
+    "TSrv6RouteResolution",
     "TXLPolicyNameOrExpOrEmpty",
     "TmnxAdminState",
     "TmnxAdminStateTruthValue",
@@ -184,6 +192,7 @@ if 'mibBuilder' not in globals():
     "TmnxHigh32",
     "TmnxLow32",
     "TmnxOperState",
+    "TmnxPrefixSidFullRange",
     "TmnxVPNRouteDistinguisher",
     "TmnxVRtrID")
 
@@ -199,7 +208,8 @@ timetraBgpMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     timetraBgpMIBModule.setRevisions(
-        ("2017-01-01 00:00",
+        ("2023-02-15 00:00",
+         "2017-01-01 00:00",
          "2016-01-01 00:00",
          "2015-01-01 00:00",
          "2014-01-01 00:00",
@@ -501,8 +511,8 @@ class TmnxIpFamily(TextualConvention, Bits):
           ("mcastVpnIpv6", 20),
           ("srplcyIpv4", 21),
           ("srplcyIpv6", 22),
-          ("reserved23", 23),
-          ("reserved24", 24))
+          ("flowVpnIpv4", 23),
+          ("flowVpnIpv6", 24))
     )
 
 
@@ -514,7 +524,8 @@ class TmnxVpnCapability(TextualConvention, Bits):
           ("orfExtendCommSend", 2),
           ("orfExtendCommRecv", 3),
           ("asn4Byte", 4),
-          ("extNHEncoding", 5))
+          ("extNHEncoding", 5),
+          ("bfdStrictMode", 6))
     )
 
 
@@ -568,7 +579,8 @@ class TmnxBgpFlowRouteExtCommAction(TextualConvention, Integer32):
               5,
               6,
               7,
-              8)
+              8,
+              9)
         )
     )
     namedValues = NamedValues(
@@ -580,7 +592,8 @@ class TmnxBgpFlowRouteExtCommAction(TextualConvention, Integer32):
           ("markDscp", 5),
           ("redirectToIp", 6),
           ("redirectToIf", 7),
-          ("redirectToLsp", 8))
+          ("redirectToLsp", 8),
+          ("flowspecSet", 9))
     )
 
 
@@ -652,10 +665,34 @@ class TmnxIpFamilyIdentifier(TextualConvention, Integer32):
           ("mcastVpnIpv6", 20),
           ("srplcyIpv4", 21),
           ("srplcyIpv6", 22),
-          ("reserved23", 23),
-          ("reserved24", 24))
+          ("flowVpnIpv4", 23),
+          ("flowVpnIpv6", 24))
     )
 
+
+
+class TBgpNHResolutionTunnelType(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("ldp", 0),
+          ("srIsis", 1),
+          ("srOspfV2", 2),
+          ("srOspfV3", 3),
+          ("srPolicyColored", 4),
+          ("srPolicyUncolored", 5),
+          ("vxlan", 6),
+          ("bgp", 7))
+    )
+
+
+class TBgpSendCommType(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("standard", 1),
+          ("extended", 2),
+          ("large", 3))
+    )
 
 
 # MIB Managed Objects in the order of their OIDs
@@ -2058,9 +2095,6 @@ if mibBuilder.loadTexts:
 _TBgpInstanceParamsEntry_Object = MibTableRow
 tBgpInstanceParamsEntry = _TBgpInstanceParamsEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 6, 1)
-)
-tBgpInstanceParamsEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
 )
 if mibBuilder.loadTexts:
     tBgpInstanceParamsEntry.setStatus("current")
@@ -4105,6 +4139,22 @@ tBgpShortcutTunnelFlexAlgoFb = _TBgpShortcutTunnelFlexAlgoFb_Object(
 tBgpShortcutTunnelFlexAlgoFb.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpShortcutTunnelFlexAlgoFb.setStatus("current")
+
+
+class _TBgpShortcutTunnelEnforceUntagRt_Type(TBgpUntaggedRouteType):
+    """Custom type tBgpShortcutTunnelEnforceUntagRt based on TBgpUntaggedRouteType"""
+    defaultValue = 0
+
+
+_TBgpShortcutTunnelEnforceUntagRt_Type.__name__ = "TBgpUntaggedRouteType"
+_TBgpShortcutTunnelEnforceUntagRt_Object = MibTableColumn
+tBgpShortcutTunnelEnforceUntagRt = _TBgpShortcutTunnelEnforceUntagRt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 11, 1, 17),
+    _TBgpShortcutTunnelEnforceUntagRt_Type()
+)
+tBgpShortcutTunnelEnforceUntagRt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpShortcutTunnelEnforceUntagRt.setStatus("current")
 _TBgpLabelRtTunnelTblLstCh_Type = TimeStamp
 _TBgpLabelRtTunnelTblLstCh_Object = MibScalar
 tBgpLabelRtTunnelTblLstCh = _TBgpLabelRtTunnelTblLstCh_Object(
@@ -4372,6 +4422,43 @@ tBgpLabelRtTunnelFlexAlgoFb = _TBgpLabelRtTunnelFlexAlgoFb_Object(
 tBgpLabelRtTunnelFlexAlgoFb.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpLabelRtTunnelFlexAlgoFb.setStatus("current")
+
+
+class _TBgpLabelRtTunnelEnforceUntagRt_Type(TBgpUntaggedRouteType):
+    """Custom type tBgpLabelRtTunnelEnforceUntagRt based on TBgpUntaggedRouteType"""
+    defaultValue = 0
+
+
+_TBgpLabelRtTunnelEnforceUntagRt_Type.__name__ = "TBgpUntaggedRouteType"
+_TBgpLabelRtTunnelEnforceUntagRt_Object = MibTableColumn
+tBgpLabelRtTunnelEnforceUntagRt = _TBgpLabelRtTunnelEnforceUntagRt_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 13, 1, 17),
+    _TBgpLabelRtTunnelEnforceUntagRt_Type()
+)
+tBgpLabelRtTunnelEnforceUntagRt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpLabelRtTunnelEnforceUntagRt.setStatus("current")
+
+
+class _TBgpLabelRtTunnelMaxEcmpRoutes_Type(Unsigned32):
+    """Custom type tBgpLabelRtTunnelMaxEcmpRoutes based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 32),
+    )
+
+
+_TBgpLabelRtTunnelMaxEcmpRoutes_Type.__name__ = "Unsigned32"
+_TBgpLabelRtTunnelMaxEcmpRoutes_Object = MibTableColumn
+tBgpLabelRtTunnelMaxEcmpRoutes = _TBgpLabelRtTunnelMaxEcmpRoutes_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 13, 1, 18),
+    _TBgpLabelRtTunnelMaxEcmpRoutes_Type()
+)
+tBgpLabelRtTunnelMaxEcmpRoutes.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpLabelRtTunnelMaxEcmpRoutes.setStatus("current")
 _TBgpInstanceMultiPathTable_Object = MibTable
 tBgpInstanceMultiPathTable = _TBgpInstanceMultiPathTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 14)
@@ -4893,9 +4980,6 @@ _TBgpInstanceAddPathEntry_Object = MibTableRow
 tBgpInstanceAddPathEntry = _TBgpInstanceAddPathEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 22, 1)
 )
-tBgpInstanceAddPathEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
-)
 if mibBuilder.loadTexts:
     tBgpInstanceAddPathEntry.setStatus("current")
 
@@ -5144,9 +5228,6 @@ if mibBuilder.loadTexts:
 _TBgpInstanceParamsExtEntry_Object = MibTableRow
 tBgpInstanceParamsExtEntry = _TBgpInstanceParamsExtEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1)
-)
-tBgpInstanceParamsExtEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
 )
 if mibBuilder.loadTexts:
     tBgpInstanceParamsExtEntry.setStatus("current")
@@ -5682,17 +5763,12 @@ if mibBuilder.loadTexts:
     tBgpPrefixSidRangeType.setStatus("current")
 
 
-class _TBgpPrefixSidRangeStartLabel_Type(Unsigned32):
-    """Custom type tBgpPrefixSidRangeStartLabel based on Unsigned32"""
+class _TBgpPrefixSidRangeStartLabel_Type(TmnxPrefixSidFullRange):
+    """Custom type tBgpPrefixSidRangeStartLabel based on TmnxPrefixSidFullRange"""
     defaultValue = 0
 
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 524287),
-    )
 
-
-_TBgpPrefixSidRangeStartLabel_Type.__name__ = "Unsigned32"
+_TBgpPrefixSidRangeStartLabel_Type.__name__ = "TmnxPrefixSidFullRange"
 _TBgpPrefixSidRangeStartLabel_Object = MibTableColumn
 tBgpPrefixSidRangeStartLabel = _TBgpPrefixSidRangeStartLabel_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 30),
@@ -5703,17 +5779,12 @@ if mibBuilder.loadTexts:
     tBgpPrefixSidRangeStartLabel.setStatus("current")
 
 
-class _TBgpPrefixSidRangeMaxIdx_Type(Unsigned32):
-    """Custom type tBgpPrefixSidRangeMaxIdx based on Unsigned32"""
+class _TBgpPrefixSidRangeMaxIdx_Type(TmnxPrefixSidFullRange):
+    """Custom type tBgpPrefixSidRangeMaxIdx based on TmnxPrefixSidFullRange"""
     defaultValue = 1
 
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 524287),
-    )
 
-
-_TBgpPrefixSidRangeMaxIdx_Type.__name__ = "Unsigned32"
+_TBgpPrefixSidRangeMaxIdx_Type.__name__ = "TmnxPrefixSidFullRange"
 _TBgpPrefixSidRangeMaxIdx_Object = MibTableColumn
 tBgpPrefixSidRangeMaxIdx = _TBgpPrefixSidRangeMaxIdx_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 31),
@@ -6004,7 +6075,7 @@ tBgpInstanceDomainId = _TBgpInstanceDomainId_Object(
 )
 tBgpInstanceDomainId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
-    tBgpInstanceDomainId.setStatus("current")
+    tBgpInstanceDomainId.setStatus("obsolete")
 
 
 class _TBgpInstanceDpathLgthIgnr_Type(TruthValue):
@@ -6037,6 +6108,137 @@ tBgpInstanceNHPreferTransportFrr = _TBgpInstanceNHPreferTransportFrr_Object(
 tBgpInstanceNHPreferTransportFrr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpInstanceNHPreferTransportFrr.setStatus("current")
+
+
+class _TBgpInstBgpTunnelMetricPrefMed_Type(TruthValue):
+    """Custom type tBgpInstBgpTunnelMetricPrefMed based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpInstBgpTunnelMetricPrefMed_Type.__name__ = "TruthValue"
+_TBgpInstBgpTunnelMetricPrefMed_Object = MibTableColumn
+tBgpInstBgpTunnelMetricPrefMed = _TBgpInstBgpTunnelMetricPrefMed_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 52),
+    _TBgpInstBgpTunnelMetricPrefMed_Type()
+)
+tBgpInstBgpTunnelMetricPrefMed.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstBgpTunnelMetricPrefMed.setStatus("current")
+
+
+class _TBgpInstanceSelLabelIp_Type(Integer32):
+    """Custom type tBgpInstanceSelLabelIp based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("no-install", 1),
+          ("route-table-install-only", 2))
+    )
+
+
+_TBgpInstanceSelLabelIp_Type.__name__ = "Integer32"
+_TBgpInstanceSelLabelIp_Object = MibTableColumn
+tBgpInstanceSelLabelIp = _TBgpInstanceSelLabelIp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 53),
+    _TBgpInstanceSelLabelIp_Type()
+)
+tBgpInstanceSelLabelIp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstanceSelLabelIp.setStatus("current")
+
+
+class _TBgpInstanceBfdStrictAdvertise_Type(TruthValue):
+    """Custom type tBgpInstanceBfdStrictAdvertise based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpInstanceBfdStrictAdvertise_Type.__name__ = "TruthValue"
+_TBgpInstanceBfdStrictAdvertise_Object = MibTableColumn
+tBgpInstanceBfdStrictAdvertise = _TBgpInstanceBfdStrictAdvertise_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 54),
+    _TBgpInstanceBfdStrictAdvertise_Type()
+)
+tBgpInstanceBfdStrictAdvertise.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstanceBfdStrictAdvertise.setStatus("current")
+
+
+class _TBgpInstanceBfdStrictNhReach_Type(TruthValue):
+    """Custom type tBgpInstanceBfdStrictNhReach based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpInstanceBfdStrictNhReach_Type.__name__ = "TruthValue"
+_TBgpInstanceBfdStrictNhReach_Object = MibTableColumn
+tBgpInstanceBfdStrictNhReach = _TBgpInstanceBfdStrictNhReach_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 55),
+    _TBgpInstanceBfdStrictNhReach_Type()
+)
+tBgpInstanceBfdStrictNhReach.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstanceBfdStrictNhReach.setStatus("current")
+
+
+class _TBgpInstanceBfdStrictHoldTime_Type(Unsigned32):
+    """Custom type tBgpInstanceBfdStrictHoldTime based on Unsigned32"""
+    defaultValue = 30
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_TBgpInstanceBfdStrictHoldTime_Type.__name__ = "Unsigned32"
+_TBgpInstanceBfdStrictHoldTime_Object = MibTableColumn
+tBgpInstanceBfdStrictHoldTime = _TBgpInstanceBfdStrictHoldTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 56),
+    _TBgpInstanceBfdStrictHoldTime_Type()
+)
+tBgpInstanceBfdStrictHoldTime.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstanceBfdStrictHoldTime.setStatus("current")
+
+
+class _TBgpInstanceAttrSetRemove_Type(TruthValue):
+    """Custom type tBgpInstanceAttrSetRemove based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpInstanceAttrSetRemove_Type.__name__ = "TruthValue"
+_TBgpInstanceAttrSetRemove_Object = MibTableColumn
+tBgpInstanceAttrSetRemove = _TBgpInstanceAttrSetRemove_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 62),
+    _TBgpInstanceAttrSetRemove_Type()
+)
+tBgpInstanceAttrSetRemove.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstanceAttrSetRemove.setStatus("current")
+
+
+class _TBgpInstLegacyFaultTolerance_Type(TruthValue):
+    """Custom type tBgpInstLegacyFaultTolerance based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpInstLegacyFaultTolerance_Type.__name__ = "TruthValue"
+_TBgpInstLegacyFaultTolerance_Object = MibTableColumn
+tBgpInstLegacyFaultTolerance = _TBgpInstLegacyFaultTolerance_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 24, 1, 63),
+    _TBgpInstLegacyFaultTolerance_Type()
+)
+tBgpInstLegacyFaultTolerance.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpInstLegacyFaultTolerance.setStatus("current")
 _TBgpInstanceLLGRFamilyTblLstCh_Type = TimeStamp
 _TBgpInstanceLLGRFamilyTblLstCh_Object = MibScalar
 tBgpInstanceLLGRFamilyTblLstCh = _TBgpInstanceLLGRFamilyTblLstCh_Object(
@@ -6756,6 +6958,168 @@ tBgpSrv6IgRecvTlv = _TBgpSrv6IgRecvTlv_Object(
 tBgpSrv6IgRecvTlv.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpSrv6IgRecvTlv.setStatus("current")
+
+
+class _TBgpSrv6Resolution_Type(TSrv6RouteResolution):
+    """Custom type tBgpSrv6Resolution based on TSrv6RouteResolution"""
+    defaultValue = 0
+
+
+_TBgpSrv6Resolution_Type.__name__ = "TSrv6RouteResolution"
+_TBgpSrv6Resolution_Object = MibTableColumn
+tBgpSrv6Resolution = _TBgpSrv6Resolution_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 33, 1, 7),
+    _TBgpSrv6Resolution_Type()
+)
+tBgpSrv6Resolution.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpSrv6Resolution.setStatus("current")
+
+
+class _TBgpSrv6MSLocatorName_Type(TLNamedItemOrEmpty):
+    """Custom type tBgpSrv6MSLocatorName based on TLNamedItemOrEmpty"""
+    defaultHexValue = ""
+
+
+_TBgpSrv6MSLocatorName_Type.__name__ = "TLNamedItemOrEmpty"
+_TBgpSrv6MSLocatorName_Object = MibTableColumn
+tBgpSrv6MSLocatorName = _TBgpSrv6MSLocatorName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 33, 1, 8),
+    _TBgpSrv6MSLocatorName_Type()
+)
+tBgpSrv6MSLocatorName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpSrv6MSLocatorName.setStatus("current")
+
+
+class _TBgpSrv6UpaTriggerNextHop_Type(TBgpSrv6UpaTriggerNextHop):
+    """Custom type tBgpSrv6UpaTriggerNextHop based on TBgpSrv6UpaTriggerNextHop"""
+    defaultValue = 0
+
+
+_TBgpSrv6UpaTriggerNextHop_Type.__name__ = "TBgpSrv6UpaTriggerNextHop"
+_TBgpSrv6UpaTriggerNextHop_Object = MibTableColumn
+tBgpSrv6UpaTriggerNextHop = _TBgpSrv6UpaTriggerNextHop_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 33, 1, 9),
+    _TBgpSrv6UpaTriggerNextHop_Type()
+)
+tBgpSrv6UpaTriggerNextHop.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpSrv6UpaTriggerNextHop.setStatus("current")
+_TBgpUseLeakedRoutesTblLstCh_Type = TimeStamp
+_TBgpUseLeakedRoutesTblLstCh_Object = MibScalar
+tBgpUseLeakedRoutesTblLstCh = _TBgpUseLeakedRoutesTblLstCh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 34),
+    _TBgpUseLeakedRoutesTblLstCh_Type()
+)
+tBgpUseLeakedRoutesTblLstCh.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpUseLeakedRoutesTblLstCh.setStatus("current")
+_TBgpUseLeakedRoutesTable_Object = MibTable
+tBgpUseLeakedRoutesTable = _TBgpUseLeakedRoutesTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 35)
+)
+if mibBuilder.loadTexts:
+    tBgpUseLeakedRoutesTable.setStatus("current")
+_TBgpUseLeakedRoutesEntry_Object = MibTableRow
+tBgpUseLeakedRoutesEntry = _TBgpUseLeakedRoutesEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 35, 1)
+)
+if mibBuilder.loadTexts:
+    tBgpUseLeakedRoutesEntry.setStatus("current")
+
+
+class _TBgpUseLeakedRoutesStatic_Type(TruthValue):
+    """Custom type tBgpUseLeakedRoutesStatic based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpUseLeakedRoutesStatic_Type.__name__ = "TruthValue"
+_TBgpUseLeakedRoutesStatic_Object = MibTableColumn
+tBgpUseLeakedRoutesStatic = _TBgpUseLeakedRoutesStatic_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 35, 1, 1),
+    _TBgpUseLeakedRoutesStatic_Type()
+)
+tBgpUseLeakedRoutesStatic.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpUseLeakedRoutesStatic.setStatus("current")
+_TBgpInstanceParamsExt2TblLstCh_Type = TimeStamp
+_TBgpInstanceParamsExt2TblLstCh_Object = MibScalar
+tBgpInstanceParamsExt2TblLstCh = _TBgpInstanceParamsExt2TblLstCh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 38),
+    _TBgpInstanceParamsExt2TblLstCh_Type()
+)
+tBgpInstanceParamsExt2TblLstCh.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpInstanceParamsExt2TblLstCh.setStatus("current")
+_TBgpInstanceParamsExt2Table_Object = MibTable
+tBgpInstanceParamsExt2Table = _TBgpInstanceParamsExt2Table_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 39)
+)
+if mibBuilder.loadTexts:
+    tBgpInstanceParamsExt2Table.setStatus("current")
+_TBgpInstanceParamsExt2Entry_Object = MibTableRow
+tBgpInstanceParamsExt2Entry = _TBgpInstanceParamsExt2Entry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 39, 1)
+)
+if mibBuilder.loadTexts:
+    tBgpInstanceParamsExt2Entry.setStatus("current")
+
+
+class _TBgpInstanceLblAllocVpnIpv4Mode_Type(Integer32):
+    """Custom type tBgpInstanceLblAllocVpnIpv4Mode based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("nextHop", 0),
+          ("perPrefix", 1))
+    )
+
+
+_TBgpInstanceLblAllocVpnIpv4Mode_Type.__name__ = "Integer32"
+_TBgpInstanceLblAllocVpnIpv4Mode_Object = MibTableColumn
+tBgpInstanceLblAllocVpnIpv4Mode = _TBgpInstanceLblAllocVpnIpv4Mode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 39, 1, 6),
+    _TBgpInstanceLblAllocVpnIpv4Mode_Type()
+)
+tBgpInstanceLblAllocVpnIpv4Mode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tBgpInstanceLblAllocVpnIpv4Mode.setStatus("current")
+
+
+class _TBgpInstanceLblAllocVpnIpv6Mode_Type(Integer32):
+    """Custom type tBgpInstanceLblAllocVpnIpv6Mode based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("nextHop", 0),
+          ("perPrefix", 1))
+    )
+
+
+_TBgpInstanceLblAllocVpnIpv6Mode_Type.__name__ = "Integer32"
+_TBgpInstanceLblAllocVpnIpv6Mode_Object = MibTableColumn
+tBgpInstanceLblAllocVpnIpv6Mode = _TBgpInstanceLblAllocVpnIpv6Mode_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 2, 39, 1, 7),
+    _TBgpInstanceLblAllocVpnIpv6Mode_Type()
+)
+tBgpInstanceLblAllocVpnIpv6Mode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tBgpInstanceLblAllocVpnIpv6Mode.setStatus("current")
 _TBgpPeerGroupObjects_ObjectIdentity = ObjectIdentity
 tBgpPeerGroupObjects = _TBgpPeerGroupObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3)
@@ -7925,10 +8289,6 @@ if mibBuilder.loadTexts:
 _TBgpPeerGroupParamsEntry_Object = MibTableRow
 tBgpPeerGroupParamsEntry = _TBgpPeerGroupParamsEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 5, 1)
-)
-tBgpPeerGroupParamsEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerGroupName"),
 )
 if mibBuilder.loadTexts:
     tBgpPeerGroupParamsEntry.setStatus("current")
@@ -9702,6 +10062,30 @@ tBgpPeerGroupPfxLmtPostImport = _TBgpPeerGroupPfxLmtPostImport_Object(
 tBgpPeerGroupPfxLmtPostImport.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPeerGroupPfxLmtPostImport.setStatus("current")
+
+
+class _TBgpPeerGroupPfxLmtHoldExcess_Type(Integer32):
+    """Custom type tBgpPeerGroupPfxLmtHoldExcess based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_TBgpPeerGroupPfxLmtHoldExcess_Type.__name__ = "Integer32"
+_TBgpPeerGroupPfxLmtHoldExcess_Object = MibTableColumn
+tBgpPeerGroupPfxLmtHoldExcess = _TBgpPeerGroupPfxLmtHoldExcess_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 8, 1, 11),
+    _TBgpPeerGroupPfxLmtHoldExcess_Type()
+)
+tBgpPeerGroupPfxLmtHoldExcess.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPeerGroupPfxLmtHoldExcess.setStatus("current")
+if mibBuilder.loadTexts:
+    tBgpPeerGroupPfxLmtHoldExcess.setUnits("percent")
 _TBgpPGDynamicPeerPfxTableLstChgd_Type = TimeStamp
 _TBgpPGDynamicPeerPfxTableLstChgd_Object = MibScalar
 tBgpPGDynamicPeerPfxTableLstChgd = _TBgpPGDynamicPeerPfxTableLstChgd_Object(
@@ -9918,10 +10302,6 @@ if mibBuilder.loadTexts:
 _TBgpPeerGroupParamsExtEntry_Object = MibTableRow
 tBgpPeerGroupParamsExtEntry = _TBgpPeerGroupParamsExtEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 14, 1)
-)
-tBgpPeerGroupParamsExtEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerGroupName"),
 )
 if mibBuilder.loadTexts:
     tBgpPeerGroupParamsExtEntry.setStatus("current")
@@ -10359,6 +10739,81 @@ tBgpPGEgressPeerEngLabelUnicast = _TBgpPGEgressPeerEngLabelUnicast_Object(
 tBgpPGEgressPeerEngLabelUnicast.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPGEgressPeerEngLabelUnicast.setStatus("current")
+
+
+class _TBgpPGEvpnLinkBWAddToRcvdBgp_Type(Integer32):
+    """Custom type tBgpPGEvpnLinkBWAddToRcvdBgp based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_TBgpPGEvpnLinkBWAddToRcvdBgp_Type.__name__ = "Integer32"
+_TBgpPGEvpnLinkBWAddToRcvdBgp_Object = MibTableColumn
+tBgpPGEvpnLinkBWAddToRcvdBgp = _TBgpPGEvpnLinkBWAddToRcvdBgp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 14, 1, 27),
+    _TBgpPGEvpnLinkBWAddToRcvdBgp_Type()
+)
+tBgpPGEvpnLinkBWAddToRcvdBgp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGEvpnLinkBWAddToRcvdBgp.setStatus("current")
+
+
+class _TBgpPGBfdStrictAdvertise_Type(TruthValue):
+    """Custom type tBgpPGBfdStrictAdvertise based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPGBfdStrictAdvertise_Type.__name__ = "TruthValue"
+_TBgpPGBfdStrictAdvertise_Object = MibTableColumn
+tBgpPGBfdStrictAdvertise = _TBgpPGBfdStrictAdvertise_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 14, 1, 28),
+    _TBgpPGBfdStrictAdvertise_Type()
+)
+tBgpPGBfdStrictAdvertise.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGBfdStrictAdvertise.setStatus("current")
+
+
+class _TBgpPGBfdStrictNhReach_Type(TruthValue):
+    """Custom type tBgpPGBfdStrictNhReach based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPGBfdStrictNhReach_Type.__name__ = "TruthValue"
+_TBgpPGBfdStrictNhReach_Object = MibTableColumn
+tBgpPGBfdStrictNhReach = _TBgpPGBfdStrictNhReach_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 14, 1, 29),
+    _TBgpPGBfdStrictNhReach_Type()
+)
+tBgpPGBfdStrictNhReach.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGBfdStrictNhReach.setStatus("current")
+
+
+class _TBgpPGBfdStrictHoldTime_Type(Unsigned32):
+    """Custom type tBgpPGBfdStrictHoldTime based on Unsigned32"""
+    defaultValue = 30
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_TBgpPGBfdStrictHoldTime_Type.__name__ = "Unsigned32"
+_TBgpPGBfdStrictHoldTime_Object = MibTableColumn
+tBgpPGBfdStrictHoldTime = _TBgpPGBfdStrictHoldTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 14, 1, 30),
+    _TBgpPGBfdStrictHoldTime_Type()
+)
+tBgpPGBfdStrictHoldTime.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGBfdStrictHoldTime.setStatus("current")
 _TBgpPeerGrpDynNbrAsRngTblLstChg_Type = TimeStamp
 _TBgpPeerGrpDynNbrAsRngTblLstChg_Object = MibScalar
 tBgpPeerGrpDynNbrAsRngTblLstChg = _TBgpPeerGrpDynNbrAsRngTblLstChg_Object(
@@ -10787,6 +11242,174 @@ tBgpPGAddPathEvpnLimit = _TBgpPGAddPathEvpnLimit_Object(
 tBgpPGAddPathEvpnLimit.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPGAddPathEvpnLimit.setStatus("current")
+_TBgpPGDynNbrIfTableLstChgd_Type = TimeStamp
+_TBgpPGDynNbrIfTableLstChgd_Object = MibScalar
+tBgpPGDynNbrIfTableLstChgd = _TBgpPGDynNbrIfTableLstChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 33),
+    _TBgpPGDynNbrIfTableLstChgd_Type()
+)
+tBgpPGDynNbrIfTableLstChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfTableLstChgd.setStatus("current")
+_TBgpPGDynNbrInterfaceTable_Object = MibTable
+tBgpPGDynNbrInterfaceTable = _TBgpPGDynNbrInterfaceTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34)
+)
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrInterfaceTable.setStatus("current")
+_TBgpPGDynNbrInterfaceEntry_Object = MibTableRow
+tBgpPGDynNbrInterfaceEntry = _TBgpPGDynNbrInterfaceEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34, 1)
+)
+tBgpPGDynNbrInterfaceEntry.setIndexNames(
+    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPGDynNbrInterfaceIndex"),
+)
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrInterfaceEntry.setStatus("current")
+_TBgpPGDynNbrInterfaceIndex_Type = InterfaceIndex
+_TBgpPGDynNbrInterfaceIndex_Object = MibTableColumn
+tBgpPGDynNbrInterfaceIndex = _TBgpPGDynNbrInterfaceIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34, 1, 1),
+    _TBgpPGDynNbrInterfaceIndex_Type()
+)
+tBgpPGDynNbrInterfaceIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrInterfaceIndex.setStatus("current")
+_TBgpPGDynNbrIfLastChanged_Type = TimeStamp
+_TBgpPGDynNbrIfLastChanged_Object = MibTableColumn
+tBgpPGDynNbrIfLastChanged = _TBgpPGDynNbrIfLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34, 1, 2),
+    _TBgpPGDynNbrIfLastChanged_Type()
+)
+tBgpPGDynNbrIfLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfLastChanged.setStatus("current")
+_TBgpPGDynNbrIfRowStatus_Type = RowStatus
+_TBgpPGDynNbrIfRowStatus_Object = MibTableColumn
+tBgpPGDynNbrIfRowStatus = _TBgpPGDynNbrIfRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34, 1, 3),
+    _TBgpPGDynNbrIfRowStatus_Type()
+)
+tBgpPGDynNbrIfRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfRowStatus.setStatus("current")
+_TBgpPGDynNbrIfGroupName_Type = BgpPeerGroupName
+_TBgpPGDynNbrIfGroupName_Object = MibTableColumn
+tBgpPGDynNbrIfGroupName = _TBgpPGDynNbrIfGroupName_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34, 1, 4),
+    _TBgpPGDynNbrIfGroupName_Type()
+)
+tBgpPGDynNbrIfGroupName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfGroupName.setStatus("current")
+
+
+class _TBgpPGDynNbrIfMaxSessions_Type(Unsigned32):
+    """Custom type tBgpPGDynNbrIfMaxSessions based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 255),
+    )
+
+
+_TBgpPGDynNbrIfMaxSessions_Type.__name__ = "Unsigned32"
+_TBgpPGDynNbrIfMaxSessions_Object = MibTableColumn
+tBgpPGDynNbrIfMaxSessions = _TBgpPGDynNbrIfMaxSessions_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 34, 1, 5),
+    _TBgpPGDynNbrIfMaxSessions_Type()
+)
+tBgpPGDynNbrIfMaxSessions.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfMaxSessions.setStatus("current")
+_TBgpPGDynNbrIfAsRgTblLstChg_Type = TimeStamp
+_TBgpPGDynNbrIfAsRgTblLstChg_Object = MibScalar
+tBgpPGDynNbrIfAsRgTblLstChg = _TBgpPGDynNbrIfAsRgTblLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 35),
+    _TBgpPGDynNbrIfAsRgTblLstChg_Type()
+)
+tBgpPGDynNbrIfAsRgTblLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRgTblLstChg.setStatus("current")
+_TBgpPGDynNbrIfAsRangeTable_Object = MibTable
+tBgpPGDynNbrIfAsRangeTable = _TBgpPGDynNbrIfAsRangeTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 36)
+)
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRangeTable.setStatus("current")
+_TBgpPGDynNbrIfAsRangeEntry_Object = MibTableRow
+tBgpPGDynNbrIfAsRangeEntry = _TBgpPGDynNbrIfAsRangeEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 36, 1)
+)
+tBgpPGDynNbrIfAsRangeEntry.setIndexNames(
+    (0, "TIMETRA-BGP-MIB", "tBgpInstanceIndex"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPGDynNbrInterfaceIndex"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPGDynNbrIfAsRangeIndex"),
+)
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRangeEntry.setStatus("current")
+
+
+class _TBgpPGDynNbrIfAsRangeIndex_Type(Integer32):
+    """Custom type tBgpPGDynNbrIfAsRangeIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 32),
+    )
+
+
+_TBgpPGDynNbrIfAsRangeIndex_Type.__name__ = "Integer32"
+_TBgpPGDynNbrIfAsRangeIndex_Object = MibTableColumn
+tBgpPGDynNbrIfAsRangeIndex = _TBgpPGDynNbrIfAsRangeIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 36, 1, 1),
+    _TBgpPGDynNbrIfAsRangeIndex_Type()
+)
+tBgpPGDynNbrIfAsRangeIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRangeIndex.setStatus("current")
+_TBgpPGDynNbrIfAsRangeLstChg_Type = TimeStamp
+_TBgpPGDynNbrIfAsRangeLstChg_Object = MibTableColumn
+tBgpPGDynNbrIfAsRangeLstChg = _TBgpPGDynNbrIfAsRangeLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 36, 1, 2),
+    _TBgpPGDynNbrIfAsRangeLstChg_Type()
+)
+tBgpPGDynNbrIfAsRangeLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRangeLstChg.setStatus("current")
+
+
+class _TBgpPGDynNbrIfAsRangeMin_Type(Unsigned32):
+    """Custom type tBgpPGDynNbrIfAsRangeMin based on Unsigned32"""
+    defaultValue = 0
+
+
+_TBgpPGDynNbrIfAsRangeMin_Type.__name__ = "Unsigned32"
+_TBgpPGDynNbrIfAsRangeMin_Object = MibTableColumn
+tBgpPGDynNbrIfAsRangeMin = _TBgpPGDynNbrIfAsRangeMin_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 36, 1, 3),
+    _TBgpPGDynNbrIfAsRangeMin_Type()
+)
+tBgpPGDynNbrIfAsRangeMin.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRangeMin.setStatus("current")
+
+
+class _TBgpPGDynNbrIfAsRangeMax_Type(Unsigned32):
+    """Custom type tBgpPGDynNbrIfAsRangeMax based on Unsigned32"""
+    defaultValue = 0
+
+
+_TBgpPGDynNbrIfAsRangeMax_Type.__name__ = "Unsigned32"
+_TBgpPGDynNbrIfAsRangeMax_Object = MibTableColumn
+tBgpPGDynNbrIfAsRangeMax = _TBgpPGDynNbrIfAsRangeMax_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 3, 36, 1, 4),
+    _TBgpPGDynNbrIfAsRangeMax_Type()
+)
+tBgpPGDynNbrIfAsRangeMax.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfAsRangeMax.setStatus("current")
 _TBgpPeerObjects_ObjectIdentity = ObjectIdentity
 tBgpPeerObjects = _TBgpPeerObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4)
@@ -13522,12 +14145,16 @@ class _TBgpPeerNgCreationType_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(1,
-              2)
+              2,
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("static", 1),
-          ("dynamic", 2))
+          ("dynamic", 2),
+          ("dynamicIfRemote", 3),
+          ("dynamicIfLocal", 4))
     )
 
 
@@ -15085,6 +15712,66 @@ tBgpPeerOperSrplcyV6RejPfxs = _TBgpPeerOperSrplcyV6RejPfxs_Object(
 tBgpPeerOperSrplcyV6RejPfxs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tBgpPeerOperSrplcyV6RejPfxs.setStatus("current")
+_TBgpPeerOperLocalAddressType_Type = InetAddressType
+_TBgpPeerOperLocalAddressType_Object = MibTableColumn
+tBgpPeerOperLocalAddressType = _TBgpPeerOperLocalAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 161),
+    _TBgpPeerOperLocalAddressType_Type()
+)
+tBgpPeerOperLocalAddressType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerOperLocalAddressType.setStatus("current")
+
+
+class _TBgpPeerOperLocalAddress_Type(InetAddress):
+    """Custom type tBgpPeerOperLocalAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TBgpPeerOperLocalAddress_Type.__name__ = "InetAddress"
+_TBgpPeerOperLocalAddress_Object = MibTableColumn
+tBgpPeerOperLocalAddress = _TBgpPeerOperLocalAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 162),
+    _TBgpPeerOperLocalAddress_Type()
+)
+tBgpPeerOperLocalAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerOperLocalAddress.setStatus("current")
+_TBgpPeerOperRemoteAddressType_Type = InetAddressType
+_TBgpPeerOperRemoteAddressType_Object = MibTableColumn
+tBgpPeerOperRemoteAddressType = _TBgpPeerOperRemoteAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 163),
+    _TBgpPeerOperRemoteAddressType_Type()
+)
+tBgpPeerOperRemoteAddressType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerOperRemoteAddressType.setStatus("current")
+
+
+class _TBgpPeerOperRemoteAddress_Type(InetAddress):
+    """Custom type tBgpPeerOperRemoteAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_TBgpPeerOperRemoteAddress_Type.__name__ = "InetAddress"
+_TBgpPeerOperRemoteAddress_Object = MibTableColumn
+tBgpPeerOperRemoteAddress = _TBgpPeerOperRemoteAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 164),
+    _TBgpPeerOperRemoteAddress_Type()
+)
+tBgpPeerOperRemoteAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerOperRemoteAddress.setStatus("current")
 _TBgpPeerOperTcpMss_Type = Unsigned32
 _TBgpPeerOperTcpMss_Object = MibTableColumn
 tBgpPeerOperTcpMss = _TBgpPeerOperTcpMss_Object(
@@ -15103,6 +15790,237 @@ tBgpPeerOperTcpRcvdMss = _TBgpPeerOperTcpRcvdMss_Object(
 tBgpPeerOperTcpRcvdMss.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tBgpPeerOperTcpRcvdMss.setStatus("current")
+_TBgpPeerNgOperFVIpv4SupPfxDamp_Type = Counter32
+_TBgpPeerNgOperFVIpv4SupPfxDamp_Object = MibTableColumn
+tBgpPeerNgOperFVIpv4SupPfxDamp = _TBgpPeerNgOperFVIpv4SupPfxDamp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 167),
+    _TBgpPeerNgOperFVIpv4SupPfxDamp_Type()
+)
+tBgpPeerNgOperFVIpv4SupPfxDamp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv4SupPfxDamp.setStatus("current")
+_TBgpPeerNgOperFVIpv4RecvPfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv4RecvPfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv4RecvPfxs = _TBgpPeerNgOperFVIpv4RecvPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 168),
+    _TBgpPeerNgOperFVIpv4RecvPfxs_Type()
+)
+tBgpPeerNgOperFVIpv4RecvPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv4RecvPfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv4SentPfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv4SentPfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv4SentPfxs = _TBgpPeerNgOperFVIpv4SentPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 169),
+    _TBgpPeerNgOperFVIpv4SentPfxs_Type()
+)
+tBgpPeerNgOperFVIpv4SentPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv4SentPfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv4ActivePfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv4ActivePfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv4ActivePfxs = _TBgpPeerNgOperFVIpv4ActivePfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 170),
+    _TBgpPeerNgOperFVIpv4ActivePfxs_Type()
+)
+tBgpPeerNgOperFVIpv4ActivePfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv4ActivePfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv4RejPfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv4RejPfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv4RejPfxs = _TBgpPeerNgOperFVIpv4RejPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 171),
+    _TBgpPeerNgOperFVIpv4RejPfxs_Type()
+)
+tBgpPeerNgOperFVIpv4RejPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv4RejPfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv6SupPfxDamp_Type = Counter32
+_TBgpPeerNgOperFVIpv6SupPfxDamp_Object = MibTableColumn
+tBgpPeerNgOperFVIpv6SupPfxDamp = _TBgpPeerNgOperFVIpv6SupPfxDamp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 172),
+    _TBgpPeerNgOperFVIpv6SupPfxDamp_Type()
+)
+tBgpPeerNgOperFVIpv6SupPfxDamp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv6SupPfxDamp.setStatus("current")
+_TBgpPeerNgOperFVIpv6RecvPfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv6RecvPfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv6RecvPfxs = _TBgpPeerNgOperFVIpv6RecvPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 173),
+    _TBgpPeerNgOperFVIpv6RecvPfxs_Type()
+)
+tBgpPeerNgOperFVIpv6RecvPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv6RecvPfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv6SentPfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv6SentPfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv6SentPfxs = _TBgpPeerNgOperFVIpv6SentPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 174),
+    _TBgpPeerNgOperFVIpv6SentPfxs_Type()
+)
+tBgpPeerNgOperFVIpv6SentPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv6SentPfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv6ActivePfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv6ActivePfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv6ActivePfxs = _TBgpPeerNgOperFVIpv6ActivePfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 175),
+    _TBgpPeerNgOperFVIpv6ActivePfxs_Type()
+)
+tBgpPeerNgOperFVIpv6ActivePfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv6ActivePfxs.setStatus("current")
+_TBgpPeerNgOperFVIpv6RejPfxs_Type = Counter32
+_TBgpPeerNgOperFVIpv6RejPfxs_Object = MibTableColumn
+tBgpPeerNgOperFVIpv6RejPfxs = _TBgpPeerNgOperFVIpv6RejPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 176),
+    _TBgpPeerNgOperFVIpv6RejPfxs_Type()
+)
+tBgpPeerNgOperFVIpv6RejPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperFVIpv6RejPfxs.setStatus("current")
+_TBgpPeerFsmEstablishedTime_Type = Gauge32
+_TBgpPeerFsmEstablishedTime_Object = MibTableColumn
+tBgpPeerFsmEstablishedTime = _TBgpPeerFsmEstablishedTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 177),
+    _TBgpPeerFsmEstablishedTime_Type()
+)
+tBgpPeerFsmEstablishedTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerFsmEstablishedTime.setStatus("current")
+if mibBuilder.loadTexts:
+    tBgpPeerFsmEstablishedTime.setUnits("seconds")
+
+
+class _TBgpPeerNgOperLastError_Type(OctetString):
+    """Custom type tBgpPeerNgOperLastError based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(2, 2),
+    )
+    fixed_length = 2
+
+
+_TBgpPeerNgOperLastError_Type.__name__ = "OctetString"
+_TBgpPeerNgOperLastError_Object = MibTableColumn
+tBgpPeerNgOperLastError = _TBgpPeerNgOperLastError_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 178),
+    _TBgpPeerNgOperLastError_Type()
+)
+tBgpPeerNgOperLastError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperLastError.setStatus("current")
+
+
+class _TBgpPeerNgOperLocalPort_Type(Unsigned32):
+    """Custom type tBgpPeerNgOperLocalPort based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_TBgpPeerNgOperLocalPort_Type.__name__ = "Unsigned32"
+_TBgpPeerNgOperLocalPort_Object = MibTableColumn
+tBgpPeerNgOperLocalPort = _TBgpPeerNgOperLocalPort_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 179),
+    _TBgpPeerNgOperLocalPort_Type()
+)
+tBgpPeerNgOperLocalPort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperLocalPort.setStatus("current")
+
+
+class _TBgpPeerNgOperRemotePort_Type(Unsigned32):
+    """Custom type tBgpPeerNgOperRemotePort based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_TBgpPeerNgOperRemotePort_Type.__name__ = "Unsigned32"
+_TBgpPeerNgOperRemotePort_Object = MibTableColumn
+tBgpPeerNgOperRemotePort = _TBgpPeerNgOperRemotePort_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 180),
+    _TBgpPeerNgOperRemotePort_Type()
+)
+tBgpPeerNgOperRemotePort.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperRemotePort.setStatus("current")
+_TBgpPeerNgOperIdentifier_Type = IpAddress
+_TBgpPeerNgOperIdentifier_Object = MibTableColumn
+tBgpPeerNgOperIdentifier = _TBgpPeerNgOperIdentifier_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 181),
+    _TBgpPeerNgOperIdentifier_Type()
+)
+tBgpPeerNgOperIdentifier.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperIdentifier.setStatus("current")
+_TBgpPeerNgOperInUpdates_Type = Counter32
+_TBgpPeerNgOperInUpdates_Object = MibTableColumn
+tBgpPeerNgOperInUpdates = _TBgpPeerNgOperInUpdates_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 182),
+    _TBgpPeerNgOperInUpdates_Type()
+)
+tBgpPeerNgOperInUpdates.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperInUpdates.setStatus("current")
+_TBgpPeerNgOperOutUpdates_Type = Counter32
+_TBgpPeerNgOperOutUpdates_Object = MibTableColumn
+tBgpPeerNgOperOutUpdates = _TBgpPeerNgOperOutUpdates_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 183),
+    _TBgpPeerNgOperOutUpdates_Type()
+)
+tBgpPeerNgOperOutUpdates.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperOutUpdates.setStatus("current")
+_TBgpPeerNgOperInTotalMessages_Type = Counter32
+_TBgpPeerNgOperInTotalMessages_Object = MibTableColumn
+tBgpPeerNgOperInTotalMessages = _TBgpPeerNgOperInTotalMessages_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 184),
+    _TBgpPeerNgOperInTotalMessages_Type()
+)
+tBgpPeerNgOperInTotalMessages.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperInTotalMessages.setStatus("current")
+_TBgpPeerNgOperOutTotalMessages_Type = Counter32
+_TBgpPeerNgOperOutTotalMessages_Object = MibTableColumn
+tBgpPeerNgOperOutTotalMessages = _TBgpPeerNgOperOutTotalMessages_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 185),
+    _TBgpPeerNgOperOutTotalMessages_Type()
+)
+tBgpPeerNgOperOutTotalMessages.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperOutTotalMessages.setStatus("current")
+_TBgpPeerNgOperInNotifications_Type = Counter32
+_TBgpPeerNgOperInNotifications_Object = MibTableColumn
+tBgpPeerNgOperInNotifications = _TBgpPeerNgOperInNotifications_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 186),
+    _TBgpPeerNgOperInNotifications_Type()
+)
+tBgpPeerNgOperInNotifications.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperInNotifications.setStatus("current")
+_TBgpPeerNgOperOutNotifications_Type = Counter32
+_TBgpPeerNgOperOutNotifications_Object = MibTableColumn
+tBgpPeerNgOperOutNotifications = _TBgpPeerNgOperOutNotifications_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 187),
+    _TBgpPeerNgOperOutNotifications_Type()
+)
+tBgpPeerNgOperOutNotifications.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperOutNotifications.setStatus("current")
+_TBgpPeerNgOperInUpdElapsedTime_Type = Gauge32
+_TBgpPeerNgOperInUpdElapsedTime_Object = MibTableColumn
+tBgpPeerNgOperInUpdElapsedTime = _TBgpPeerNgOperInUpdElapsedTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 8, 1, 188),
+    _TBgpPeerNgOperInUpdElapsedTime_Type()
+)
+tBgpPeerNgOperInUpdElapsedTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerNgOperInUpdElapsedTime.setStatus("current")
 _TBgpPeerNgSendOrfRouteTargetTable_Object = MibTable
 tBgpPeerNgSendOrfRouteTargetTable = _TBgpPeerNgSendOrfRouteTargetTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 9)
@@ -15148,11 +16066,6 @@ if mibBuilder.loadTexts:
 _TBgpPeerNgParamsEntry_Object = MibTableRow
 tBgpPeerNgParamsEntry = _TBgpPeerNgParamsEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 10, 1)
-)
-tBgpPeerNgParamsEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgInstanceIndex"),
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgAddressType"),
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgAddress"),
 )
 if mibBuilder.loadTexts:
     tBgpPeerNgParamsEntry.setStatus("current")
@@ -16926,6 +17839,30 @@ tBgpPeerNgPfxLmtInheritance = _TBgpPeerNgPfxLmtInheritance_Object(
 tBgpPeerNgPfxLmtInheritance.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tBgpPeerNgPfxLmtInheritance.setStatus("current")
+
+
+class _TBgpPeerNgPfxLmtHoldExcess_Type(Integer32):
+    """Custom type tBgpPeerNgPfxLmtHoldExcess based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_TBgpPeerNgPfxLmtHoldExcess_Type.__name__ = "Integer32"
+_TBgpPeerNgPfxLmtHoldExcess_Object = MibTableColumn
+tBgpPeerNgPfxLmtHoldExcess = _TBgpPeerNgPfxLmtHoldExcess_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 13, 1, 12),
+    _TBgpPeerNgPfxLmtHoldExcess_Type()
+)
+tBgpPeerNgPfxLmtHoldExcess.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPeerNgPfxLmtHoldExcess.setStatus("current")
+if mibBuilder.loadTexts:
+    tBgpPeerNgPfxLmtHoldExcess.setUnits("percent")
 _TBgpPeerLLGRFamilyTblLstCh_Type = TimeStamp
 _TBgpPeerLLGRFamilyTblLstCh_Object = MibScalar
 tBgpPeerLLGRFamilyTblLstCh = _TBgpPeerLLGRFamilyTblLstCh_Object(
@@ -17102,11 +18039,6 @@ if mibBuilder.loadTexts:
 _TBgpPeerNgParamsExtEntry_Object = MibTableRow
 tBgpPeerNgParamsExtEntry = _TBgpPeerNgParamsExtEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 17, 1)
-)
-tBgpPeerNgParamsExtEntry.setIndexNames(
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgInstanceIndex"),
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgAddressType"),
-    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgAddress"),
 )
 if mibBuilder.loadTexts:
     tBgpPeerNgParamsExtEntry.setStatus("current")
@@ -17560,6 +18492,81 @@ tBgpPeerNgEgrPeerEngLabelUnicast = _TBgpPeerNgEgrPeerEngLabelUnicast_Object(
 tBgpPeerNgEgrPeerEngLabelUnicast.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPeerNgEgrPeerEngLabelUnicast.setStatus("current")
+
+
+class _TBgpPeerNgEvpnLinkBWAddToRcvdBgp_Type(Integer32):
+    """Custom type tBgpPeerNgEvpnLinkBWAddToRcvdBgp based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, -1),
+        ValueRangeConstraint(1, 128),
+    )
+
+
+_TBgpPeerNgEvpnLinkBWAddToRcvdBgp_Type.__name__ = "Integer32"
+_TBgpPeerNgEvpnLinkBWAddToRcvdBgp_Object = MibTableColumn
+tBgpPeerNgEvpnLinkBWAddToRcvdBgp = _TBgpPeerNgEvpnLinkBWAddToRcvdBgp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 17, 1, 28),
+    _TBgpPeerNgEvpnLinkBWAddToRcvdBgp_Type()
+)
+tBgpPeerNgEvpnLinkBWAddToRcvdBgp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPeerNgEvpnLinkBWAddToRcvdBgp.setStatus("current")
+
+
+class _TBgpPeerNgBfdStrictAdvertise_Type(TruthValue):
+    """Custom type tBgpPeerNgBfdStrictAdvertise based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPeerNgBfdStrictAdvertise_Type.__name__ = "TruthValue"
+_TBgpPeerNgBfdStrictAdvertise_Object = MibTableColumn
+tBgpPeerNgBfdStrictAdvertise = _TBgpPeerNgBfdStrictAdvertise_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 17, 1, 29),
+    _TBgpPeerNgBfdStrictAdvertise_Type()
+)
+tBgpPeerNgBfdStrictAdvertise.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPeerNgBfdStrictAdvertise.setStatus("current")
+
+
+class _TBgpPeerNgBfdStrictNhReach_Type(TruthValue):
+    """Custom type tBgpPeerNgBfdStrictNhReach based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPeerNgBfdStrictNhReach_Type.__name__ = "TruthValue"
+_TBgpPeerNgBfdStrictNhReach_Object = MibTableColumn
+tBgpPeerNgBfdStrictNhReach = _TBgpPeerNgBfdStrictNhReach_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 17, 1, 30),
+    _TBgpPeerNgBfdStrictNhReach_Type()
+)
+tBgpPeerNgBfdStrictNhReach.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPeerNgBfdStrictNhReach.setStatus("current")
+
+
+class _TBgpPeerNgBfdStrictHoldTime_Type(Unsigned32):
+    """Custom type tBgpPeerNgBfdStrictHoldTime based on Unsigned32"""
+    defaultValue = 30
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_TBgpPeerNgBfdStrictHoldTime_Type.__name__ = "Unsigned32"
+_TBgpPeerNgBfdStrictHoldTime_Object = MibTableColumn
+tBgpPeerNgBfdStrictHoldTime = _TBgpPeerNgBfdStrictHoldTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 17, 1, 31),
+    _TBgpPeerNgBfdStrictHoldTime_Type()
+)
+tBgpPeerNgBfdStrictHoldTime.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPeerNgBfdStrictHoldTime.setStatus("current")
 _TBgpPeerNgEpeIngrStatsTable_Object = MibTable
 tBgpPeerNgEpeIngrStatsTable = _TBgpPeerNgEpeIngrStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 18)
@@ -18810,6 +19817,42 @@ tBgpPeerNgAddPathEvpnLimit = _TBgpPeerNgAddPathEvpnLimit_Object(
 tBgpPeerNgAddPathEvpnLimit.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPeerNgAddPathEvpnLimit.setStatus("current")
+_TBgpPeerAFStatsTable_Object = MibTable
+tBgpPeerAFStatsTable = _TBgpPeerAFStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 23)
+)
+if mibBuilder.loadTexts:
+    tBgpPeerAFStatsTable.setStatus("current")
+_TBgpPeerAFStatsEntry_Object = MibTableRow
+tBgpPeerAFStatsEntry = _TBgpPeerAFStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 23, 1)
+)
+tBgpPeerAFStatsEntry.setIndexNames(
+    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgInstanceIndex"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgAddressType"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPeerNgAddress"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPeerAFStatsFamily"),
+)
+if mibBuilder.loadTexts:
+    tBgpPeerAFStatsEntry.setStatus("current")
+_TBgpPeerAFStatsFamily_Type = TmnxIpFamilyIdentifier
+_TBgpPeerAFStatsFamily_Object = MibTableColumn
+tBgpPeerAFStatsFamily = _TBgpPeerAFStatsFamily_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 23, 1, 1),
+    _TBgpPeerAFStatsFamily_Type()
+)
+tBgpPeerAFStatsFamily.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tBgpPeerAFStatsFamily.setStatus("current")
+_TBgpPeerAFStatsHeldExcessPfxs_Type = Counter32
+_TBgpPeerAFStatsHeldExcessPfxs_Object = MibTableColumn
+tBgpPeerAFStatsHeldExcessPfxs = _TBgpPeerAFStatsHeldExcessPfxs_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 4, 23, 1, 2),
+    _TBgpPeerAFStatsHeldExcessPfxs_Type()
+)
+tBgpPeerAFStatsHeldExcessPfxs.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPeerAFStatsHeldExcessPfxs.setStatus("current")
 _TBgpInstanceConfederationObjects_ObjectIdentity = ObjectIdentity
 tBgpInstanceConfederationObjects = _TBgpInstanceConfederationObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 5)
@@ -19831,6 +20874,38 @@ tBgpPrngPlcyBfdEnable = _TBgpPrngPlcyBfdEnable_Object(
 tBgpPrngPlcyBfdEnable.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPrngPlcyBfdEnable.setStatus("current")
+
+
+class _TBgpPrngPlcyFamilyIpv4_Type(TruthValue):
+    """Custom type tBgpPrngPlcyFamilyIpv4 based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPrngPlcyFamilyIpv4_Type.__name__ = "TruthValue"
+_TBgpPrngPlcyFamilyIpv4_Object = MibTableColumn
+tBgpPrngPlcyFamilyIpv4 = _TBgpPrngPlcyFamilyIpv4_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 2, 1, 55),
+    _TBgpPrngPlcyFamilyIpv4_Type()
+)
+tBgpPrngPlcyFamilyIpv4.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyFamilyIpv4.setStatus("current")
+
+
+class _TBgpPrngPlcyFamilyIpv6_Type(TruthValue):
+    """Custom type tBgpPrngPlcyFamilyIpv6 based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPrngPlcyFamilyIpv6_Type.__name__ = "TruthValue"
+_TBgpPrngPlcyFamilyIpv6_Object = MibTableColumn
+tBgpPrngPlcyFamilyIpv6 = _TBgpPrngPlcyFamilyIpv6_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 2, 1, 56),
+    _TBgpPrngPlcyFamilyIpv6_Type()
+)
+tBgpPrngPlcyFamilyIpv6.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyFamilyIpv6.setStatus("current")
 _TBgpPeeringPlcyTable_Object = MibTable
 tBgpPeeringPlcyTable = _TBgpPeeringPlcyTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 3)
@@ -20323,6 +21398,162 @@ tBgpPeeringPlcyExportPolicy15 = _TBgpPeeringPlcyExportPolicy15_Object(
 tBgpPeeringPlcyExportPolicy15.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     tBgpPeeringPlcyExportPolicy15.setStatus("current")
+_TBgpPrngPlcyPfxLmtTableLastChngd_Type = TimeStamp
+_TBgpPrngPlcyPfxLmtTableLastChngd_Object = MibScalar
+tBgpPrngPlcyPfxLmtTableLastChngd = _TBgpPrngPlcyPfxLmtTableLastChngd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 4),
+    _TBgpPrngPlcyPfxLmtTableLastChngd_Type()
+)
+tBgpPrngPlcyPfxLmtTableLastChngd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtTableLastChngd.setStatus("current")
+_TBgpPrngPlcyPfxLmtTable_Object = MibTable
+tBgpPrngPlcyPfxLmtTable = _TBgpPrngPlcyPfxLmtTable_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5)
+)
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtTable.setStatus("current")
+_TBgpPrngPlcyPfxLmtEntry_Object = MibTableRow
+tBgpPrngPlcyPfxLmtEntry = _TBgpPrngPlcyPfxLmtEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1)
+)
+tBgpPrngPlcyPfxLmtEntry.setIndexNames(
+    (0, "TIMETRA-BGP-MIB", "tBgpPeeringPolicyName"),
+    (0, "TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtFamily"),
+)
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtEntry.setStatus("current")
+
+
+class _TBgpPrngPlcyPfxLmtFamily_Type(Integer32):
+    """Custom type tBgpPrngPlcyPfxLmtFamily based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ipv4", 1),
+          ("ipv6", 2))
+    )
+
+
+_TBgpPrngPlcyPfxLmtFamily_Type.__name__ = "Integer32"
+_TBgpPrngPlcyPfxLmtFamily_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtFamily = _TBgpPrngPlcyPfxLmtFamily_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 1),
+    _TBgpPrngPlcyPfxLmtFamily_Type()
+)
+tBgpPrngPlcyPfxLmtFamily.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtFamily.setStatus("current")
+_TBgpPrngPlcyPfxLmtLastChanged_Type = TimeStamp
+_TBgpPrngPlcyPfxLmtLastChanged_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtLastChanged = _TBgpPrngPlcyPfxLmtLastChanged_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 2),
+    _TBgpPrngPlcyPfxLmtLastChanged_Type()
+)
+tBgpPrngPlcyPfxLmtLastChanged.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtLastChanged.setStatus("current")
+_TBgpPrngPlcyPfxLmtRowStatus_Type = RowStatus
+_TBgpPrngPlcyPfxLmtRowStatus_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtRowStatus = _TBgpPrngPlcyPfxLmtRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 3),
+    _TBgpPrngPlcyPfxLmtRowStatus_Type()
+)
+tBgpPrngPlcyPfxLmtRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtRowStatus.setStatus("current")
+_TBgpPrngPlcyPfxLmtMaxPrefix_Type = BgpPrefixLimit
+_TBgpPrngPlcyPfxLmtMaxPrefix_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtMaxPrefix = _TBgpPrngPlcyPfxLmtMaxPrefix_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 4),
+    _TBgpPrngPlcyPfxLmtMaxPrefix_Type()
+)
+tBgpPrngPlcyPfxLmtMaxPrefix.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtMaxPrefix.setStatus("current")
+
+
+class _TBgpPrngPlcyPfxLmtLogOnly_Type(TruthValue):
+    """Custom type tBgpPrngPlcyPfxLmtLogOnly based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPrngPlcyPfxLmtLogOnly_Type.__name__ = "TruthValue"
+_TBgpPrngPlcyPfxLmtLogOnly_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtLogOnly = _TBgpPrngPlcyPfxLmtLogOnly_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 5),
+    _TBgpPrngPlcyPfxLmtLogOnly_Type()
+)
+tBgpPrngPlcyPfxLmtLogOnly.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtLogOnly.setStatus("current")
+
+
+class _TBgpPrngPlcyPfxLmtThreshold_Type(Unsigned32):
+    """Custom type tBgpPrngPlcyPfxLmtThreshold based on Unsigned32"""
+    defaultValue = 90
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_TBgpPrngPlcyPfxLmtThreshold_Type.__name__ = "Unsigned32"
+_TBgpPrngPlcyPfxLmtThreshold_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtThreshold = _TBgpPrngPlcyPfxLmtThreshold_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 6),
+    _TBgpPrngPlcyPfxLmtThreshold_Type()
+)
+tBgpPrngPlcyPfxLmtThreshold.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtThreshold.setStatus("current")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtThreshold.setUnits("percent")
+
+
+class _TBgpPrngPlcyPfxLmtIdleTimeOut_Type(Integer32):
+    """Custom type tBgpPrngPlcyPfxLmtIdleTimeOut based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_TBgpPrngPlcyPfxLmtIdleTimeOut_Type.__name__ = "Integer32"
+_TBgpPrngPlcyPfxLmtIdleTimeOut_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtIdleTimeOut = _TBgpPrngPlcyPfxLmtIdleTimeOut_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 7),
+    _TBgpPrngPlcyPfxLmtIdleTimeOut_Type()
+)
+tBgpPrngPlcyPfxLmtIdleTimeOut.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtIdleTimeOut.setStatus("current")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtIdleTimeOut.setUnits("minutes")
+
+
+class _TBgpPrngPlcyPfxLmtPostImport_Type(TruthValue):
+    """Custom type tBgpPrngPlcyPfxLmtPostImport based on TruthValue"""
+    defaultValue = 2
+
+
+_TBgpPrngPlcyPfxLmtPostImport_Type.__name__ = "TruthValue"
+_TBgpPrngPlcyPfxLmtPostImport_Object = MibTableColumn
+tBgpPrngPlcyPfxLmtPostImport = _TBgpPrngPlcyPfxLmtPostImport_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 6, 5, 1, 8),
+    _TBgpPrngPlcyPfxLmtPostImport_Type()
+)
+tBgpPrngPlcyPfxLmtPostImport.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    tBgpPrngPlcyPfxLmtPostImport.setStatus("current")
 _TBgpNotificationObjs_ObjectIdentity = ObjectIdentity
 tBgpNotificationObjs = _TBgpNotificationObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 14, 7)
@@ -20695,6 +21926,11 @@ tBgpNotifications = _TBgpNotifications_ObjectIdentity(
 )
 tBgpInstanceEntry.registerAugmentions(
     ("TIMETRA-BGP-MIB",
+     "tBgpInstanceParamsEntry")
+)
+tBgpInstanceParamsEntry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
+tBgpInstanceEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
      "tBgpInstancePlcyEntry")
 )
 tBgpInstancePlcyEntry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
@@ -20703,11 +21939,41 @@ tBgpInstanceEntry.registerAugmentions(
      "tBgpInstanceMultiPathEntry")
 )
 tBgpInstanceMultiPathEntry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
+tBgpInstanceEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpInstanceAddPathEntry")
+)
+tBgpInstanceAddPathEntry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
+tBgpInstanceEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpInstanceParamsExtEntry")
+)
+tBgpInstanceParamsExtEntry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
+tBgpInstanceEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpUseLeakedRoutesEntry")
+)
+tBgpUseLeakedRoutesEntry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
+tBgpInstanceEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpInstanceParamsExt2Entry")
+)
+tBgpInstanceParamsExt2Entry.setIndexNames(*tBgpInstanceEntry.getIndexNames())
+tBgpPeerGroupEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpPeerGroupParamsEntry")
+)
+tBgpPeerGroupParamsEntry.setIndexNames(*tBgpPeerGroupEntry.getIndexNames())
 tBgpPeerGroupEntry.registerAugmentions(
     ("TIMETRA-BGP-MIB",
      "tBgpPeerGroupPlcyEntry")
 )
 tBgpPeerGroupPlcyEntry.setIndexNames(*tBgpPeerGroupEntry.getIndexNames())
+tBgpPeerGroupEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpPeerGroupParamsExtEntry")
+)
+tBgpPeerGroupParamsExtEntry.setIndexNames(*tBgpPeerGroupEntry.getIndexNames())
 tBgpPeerEntry.registerAugmentions(
     ("TIMETRA-BGP-MIB",
      "tBgpPeerOperEntry")
@@ -20720,9 +21986,19 @@ tBgpPeerNgEntry.registerAugmentions(
 tBgpPeerNgOperEntry.setIndexNames(*tBgpPeerNgEntry.getIndexNames())
 tBgpPeerNgEntry.registerAugmentions(
     ("TIMETRA-BGP-MIB",
+     "tBgpPeerNgParamsEntry")
+)
+tBgpPeerNgParamsEntry.setIndexNames(*tBgpPeerNgEntry.getIndexNames())
+tBgpPeerNgEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
      "tBgpPeerPlcyEntry")
 )
 tBgpPeerPlcyEntry.setIndexNames(*tBgpPeerNgEntry.getIndexNames())
+tBgpPeerNgEntry.registerAugmentions(
+    ("TIMETRA-BGP-MIB",
+     "tBgpPeerNgParamsExtEntry")
+)
+tBgpPeerNgParamsExtEntry.setIndexNames(*tBgpPeerNgEntry.getIndexNames())
 tBgpPeeringPolicyEntry.registerAugmentions(
     ("TIMETRA-BGP-MIB",
      "tBgpPeeringPlcyEntry")
@@ -24669,6 +25945,18 @@ tmnxBgpNHV20v0Group.setObjects(
 if mibBuilder.loadTexts:
     tmnxBgpNHV20v0Group.setStatus("current")
 
+tmnxBgpLRV20v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 170)
+)
+tmnxBgpLRV20v0Group.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPeerOperLocalAddress"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerOperRemoteAddressType"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerOperLocalAddressType"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerOperRemoteAddress"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpLRV20v0Group.setStatus("current")
+
 tmnxBgpTunnelFlexAlgoFb = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 171)
 )
@@ -24804,7 +26092,7 @@ tmnxBgpDpath.setObjects(
         ("TIMETRA-BGP-MIB", "tBgpInstanceDpathLgthIgnr"))
 )
 if mibBuilder.loadTexts:
-    tmnxBgpDpath.setStatus("current")
+    tmnxBgpDpath.setStatus("obsolete")
 
 tmnxBgpNHPreferTransportFRR = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 183)
@@ -24814,6 +26102,24 @@ tmnxBgpNHPreferTransportFRR.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBgpNHPreferTransportFRR.setStatus("current")
+
+tmnxBgpFlowSpecVpn = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 184)
+)
+tmnxBgpFlowSpecVpn.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv4SupPfxDamp"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv4RecvPfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv4SentPfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv4ActivePfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv4RejPfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv6SupPfxDamp"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv6RecvPfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv6SentPfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv6ActivePfxs"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperFVIpv6RejPfxs"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpFlowSpecVpn.setStatus("current")
 
 tmnxBgpAddPathV22v2Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 185)
@@ -24898,6 +26204,228 @@ tmnxBgpObjectsV22v2ObsoleteGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBgpObjectsV22v2ObsoleteGroup.setStatus("current")
+
+tmnxBgpTunnelMetricPrefMed = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 190)
+)
+tmnxBgpTunnelMetricPrefMed.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpInstBgpTunnelMetricPrefMed")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpTunnelMetricPrefMed.setStatus("current")
+
+tmnxBgpPGDynNbrIfGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 191)
+)
+tmnxBgpPGDynNbrIfGroup.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfTableLstChgd"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfLastChanged"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfRowStatus"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfGroupName"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfMaxSessions"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfAsRgTblLstChg"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfAsRangeLstChg"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfAsRangeMin"),
+        ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfAsRangeMax"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpPGDynNbrIfGroup.setStatus("current")
+
+tmnxBgpSrv6PolicyGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 192)
+)
+tmnxBgpSrv6PolicyGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpSrv6Resolution")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpSrv6PolicyGroup.setStatus("current")
+
+tmnxBgpEvpnLinkBWGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 194)
+)
+tmnxBgpEvpnLinkBWGroup.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPGEvpnLinkBWAddToRcvdBgp"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgEvpnLinkBWAddToRcvdBgp"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpEvpnLinkBWGroup.setStatus("current")
+
+tmnxBgpPeerFsmTimeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 195)
+)
+tmnxBgpPeerFsmTimeGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpPeerFsmEstablishedTime")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpPeerFsmTimeGroup.setStatus("current")
+
+tmnxBgpSrv6MicroSegmentGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 197)
+)
+tmnxBgpSrv6MicroSegmentGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpSrv6MSLocatorName")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpSrv6MicroSegmentGroup.setStatus("current")
+
+tmnxBgpSelLabelIpInstallGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 198)
+)
+tmnxBgpSelLabelIpInstallGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpInstanceSelLabelIp")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpSelLabelIpInstallGroup.setStatus("current")
+
+tmnxBgpBfdStrictMode = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 199)
+)
+tmnxBgpBfdStrictMode.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpInstanceBfdStrictAdvertise"),
+        ("TIMETRA-BGP-MIB", "tBgpInstanceBfdStrictNhReach"),
+        ("TIMETRA-BGP-MIB", "tBgpInstanceBfdStrictHoldTime"),
+        ("TIMETRA-BGP-MIB", "tBgpPGBfdStrictAdvertise"),
+        ("TIMETRA-BGP-MIB", "tBgpPGBfdStrictNhReach"),
+        ("TIMETRA-BGP-MIB", "tBgpPGBfdStrictHoldTime"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgBfdStrictAdvertise"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgBfdStrictNhReach"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgBfdStrictHoldTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpBfdStrictMode.setStatus("current")
+
+tmnxBgpGlobalV23v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 200)
+)
+tmnxBgpGlobalV23v0Group.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPrngPlcyFamilyIpv4"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyFamilyIpv6"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtTableLastChngd"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtLastChanged"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtRowStatus"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtMaxPrefix"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtLogOnly"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtThreshold"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtIdleTimeOut"),
+        ("TIMETRA-BGP-MIB", "tBgpPrngPlcyPfxLmtPostImport"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpGlobalV23v0Group.setStatus("current")
+
+tmnxBgpLeakedRoutesStaticGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 202)
+)
+tmnxBgpLeakedRoutesStaticGroup.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpUseLeakedRoutesTblLstCh"),
+        ("TIMETRA-BGP-MIB", "tBgpUseLeakedRoutesStatic"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpLeakedRoutesStaticGroup.setStatus("current")
+
+tmnxBgpPfxLmtHoldExcessGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 203)
+)
+tmnxBgpPfxLmtHoldExcessGroup.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPeerGroupPfxLmtHoldExcess"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgPfxLmtHoldExcess"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerAFStatsHeldExcessPfxs"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpPfxLmtHoldExcessGroup.setStatus("current")
+
+tmnxBgpAttrSetGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 207)
+)
+tmnxBgpAttrSetGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpInstanceAttrSetRemove")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpAttrSetGroup.setStatus("current")
+
+tmnxBgpEnforceUntagRtGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 208)
+)
+tmnxBgpEnforceUntagRtGroup.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpShortcutTunnelEnforceUntagRt"),
+        ("TIMETRA-BGP-MIB", "tBgpLabelRtTunnelEnforceUntagRt"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpEnforceUntagRtGroup.setStatus("current")
+
+tmnxBgpLegacyFaultToleranceGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 209)
+)
+tmnxBgpLegacyFaultToleranceGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpInstLegacyFaultTolerance")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpLegacyFaultToleranceGroup.setStatus("current")
+
+tBgpSrv6UpaTriggerNextHopGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 210)
+)
+tBgpSrv6UpaTriggerNextHopGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpSrv6UpaTriggerNextHop")
+)
+if mibBuilder.loadTexts:
+    tBgpSrv6UpaTriggerNextHopGroup.setStatus("current")
+
+tmnxBgpLUEcmpGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 216)
+)
+tmnxBgpLUEcmpGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpLabelRtTunnelMaxEcmpRoutes")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpLUEcmpGroup.setStatus("current")
+
+tmnxBgpPeerNgOperSRLGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 217)
+)
+tmnxBgpPeerNgOperSRLGroup.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpPeerNgOperLastError"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperLocalPort"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperRemotePort"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperIdentifier"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperInUpdates"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperOutUpdates"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperInTotalMessages"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperOutTotalMessages"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperInNotifications"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperOutNotifications"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerNgOperInUpdElapsedTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpPeerNgOperSRLGroup.setStatus("current")
+
+tmnxBgpInstLblAllocVpnIpModeGrp = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 222)
+)
+tmnxBgpInstLblAllocVpnIpModeGrp.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpInstanceParamsExt2TblLstCh"),
+        ("TIMETRA-BGP-MIB", "tBgpInstanceLblAllocVpnIpv4Mode"),
+        ("TIMETRA-BGP-MIB", "tBgpInstanceLblAllocVpnIpv6Mode"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpInstLblAllocVpnIpModeGrp.setStatus("current")
+
+tmnxBgpDpath25v0 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 223)
+)
+tmnxBgpDpath25v0.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpInstanceDpathLgthIgnr")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpDpath25v0.setStatus("current")
+
+tmnxBgpDpathObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 224)
+)
+tmnxBgpDpathObsoleteGroup.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpInstanceDomainId")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpDpathObsoleteGroup.setStatus("current")
 
 
 # Notification objects
@@ -25237,6 +26765,17 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tBgpPGDynNbrIfMaxSessLmtReachd = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 14, 0, 26)
+)
+tBgpPGDynNbrIfMaxSessLmtReachd.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfMaxSessions")
+)
+if mibBuilder.loadTexts:
+    tBgpPGDynNbrIfMaxSessLmtReachd.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -25438,6 +26977,17 @@ tmnxBgpNotificationV19v0Group.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBgpNotificationV19v0Group.setStatus(
+        "current"
+    )
+
+tmnxBgpPGDynNbrIfMaxSessNtfnGrp = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 2, 193)
+)
+tmnxBgpPGDynNbrIfMaxSessNtfnGrp.setObjects(
+    ("TIMETRA-BGP-MIB", "tBgpPGDynNbrIfMaxSessLmtReachd")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpPGDynNbrIfMaxSessNtfnGrp.setStatus(
         "current"
     )
 
@@ -26007,7 +27557,7 @@ tmnxBgpV16v0Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBgpV16v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxBgpV19v0Compliance = ModuleCompliance(
@@ -26030,7 +27580,7 @@ tmnxBgpV19v0Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBgpV19v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxBgpSegRoutingV19Compliance = ModuleCompliance(
@@ -26041,7 +27591,7 @@ tmnxBgpSegRoutingV19Compliance.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxBgpSegRoutingV19Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxBgpV20v0Compliance = ModuleCompliance(
@@ -26052,12 +27602,13 @@ tmnxBgpV20v0Compliance.setObjects(
         ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMetric"),
         ("TIMETRA-BGP-MIB", "tmnxBgpEngressEng"),
         ("TIMETRA-BGP-MIB", "tmnxBgpNHV20v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLRV20v0Group"),
         ("TIMETRA-BGP-MIB", "tmnxBgpTunnelFlexAlgoFb"),
         ("TIMETRA-BGP-MIB", "tmnxBgpLUStats"))
 )
 if mibBuilder.loadTexts:
     tmnxBgpV20v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxBgpV21v0Compliance = ModuleCompliance(
@@ -26073,11 +27624,12 @@ tmnxBgpV21v0Compliance.setObjects(
         ("TIMETRA-BGP-MIB", "tmnxBgpEvpnAddPaths"),
         ("TIMETRA-BGP-MIB", "tmnxBgpSrv6Tlv"),
         ("TIMETRA-BGP-MIB", "tmnxBgpDpath"),
-        ("TIMETRA-BGP-MIB", "tmnxBgpNHPreferTransportFRR"))
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHPreferTransportFRR"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpFlowSpecVpn"))
 )
 if mibBuilder.loadTexts:
     tmnxBgpV21v0Compliance.setStatus(
-        "current"
+        "obsolete"
     )
 
 tmnxBgpV22v0Compliance = ModuleCompliance(
@@ -26086,10 +27638,337 @@ tmnxBgpV22v0Compliance = ModuleCompliance(
 tmnxBgpV22v0Compliance.setObjects(
       *(("TIMETRA-BGP-MIB", "tmnxBgpAddPathV22v2Group"),
         ("TIMETRA-BGP-MIB", "tmnxBgpEPEBgpLUV22v0Group"),
-        ("TIMETRA-BGP-MIB", "tmnxBgpObjectsV22v2ObsoleteGroup"))
+        ("TIMETRA-BGP-MIB", "tmnxBgpObjectsV22v2ObsoleteGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMetricPrefMed"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPGDynNbrIfGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6PolicyGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPGDynNbrIfMaxSessNtfnGrp"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEvpnLinkBWGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerFsmTimeGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6MicroSegmentGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSelLabelIpInstallGroup"))
 )
 if mibBuilder.loadTexts:
     tmnxBgpV22v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxBgpV23v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 1, 22)
+)
+tmnxBgpV23v0Compliance.setObjects(
+      *(("TIMETRA-BGP-MIB", "tmnxBgpMultiPathV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRtTunnelV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpShortcutTunnelV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEntropyLabelV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRibRouteImportV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV14v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLinkBandwidthExtCommGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRibLeakImportV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpShortcutTunnelV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRtTunnelV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDynamicPeerLmtV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupV13v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV13v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV13v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoletedNtfnV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV5v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupParamsV5v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgp4PathAttrGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV6v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupParamsV6v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerParamsV6v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeeringPolicyV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgp4ByteASNV7v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupV11v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV7v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV7v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceV8v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerV8v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerV9v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDisableCapNegoV9v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV10v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeeringPlcyV10v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRTConstraintV10v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalDCGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDPOscilationV11v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpMvpnVrfImportGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHUnchangedGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpMcastIpv6Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPrefixOriginValidGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpResolveLabelRoutesGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpThirdPartyNHGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteV12v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV12v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV12v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgDynamicV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgEvpnMplsV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDynPeerLmtNtfnV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV14v4Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupParamsV14v4Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerParamsGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRtTunnelV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpORRV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpWeightedEcmpGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObjectsV15v0ObsoleteGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteNotifyV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteNfyObjsV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAddPathV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLblRibSeparateV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEnforceFirstASGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsExtGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLLGRV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLocalAddressV15v4Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpIpv6NhAdvAndResV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpBypassMRAITimerV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAdminTagsV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLargeCommsV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHResFilterV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelSecurityGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRibApiGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMplsFwdPlcyGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLinkBandwidthGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpORRV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelSrOspf3"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLoopDetectThreshold"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrTePolicyIpv6Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHResGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpConvergenceGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV19v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceV19v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDefaultOriginate"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerGrpDynNbrAsGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPreferenceGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEBGPRejectWithoutPolicy"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRemovePrivateReplace"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpBlockPrefixSIDGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV19v5Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV19v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTcpMss"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSegRoutingV19Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelIpv6V20Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMetric"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEngressEng"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHV20v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLRV20v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelFlexAlgoFb"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLUStats"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelPreference"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRoutesUseBgpRoutes"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV21v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSubconfVpnFwding"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSelLblIpPri"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEvpnAddPaths"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6Tlv"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDpath"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHPreferTransportFRR"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpFlowSpecVpn"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAddPathV22v2Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEPEBgpLUV22v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObjectsV22v2ObsoleteGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMetricPrefMed"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPGDynNbrIfGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6PolicyGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPGDynNbrIfMaxSessNtfnGrp"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEvpnLinkBWGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerFsmTimeGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6MicroSegmentGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSelLabelIpInstallGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpBfdStrictMode"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV23v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLeakedRoutesStaticGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPfxLmtHoldExcessGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAttrSetGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEnforceUntagRtGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpV23v0Compliance.setStatus(
+        "obsolete"
+    )
+
+tmnxBgpV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 1, 23)
+)
+tmnxBgpV24v0Compliance.setObjects(
+      *(("TIMETRA-BGP-MIB", "tBgpSrv6UpaTriggerNextHopGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLegacyFaultToleranceGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLUEcmpGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxBgpSRLV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 1, 24)
+)
+tmnxBgpSRLV24v0Compliance.setObjects(
+    ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgOperSRLGroup")
+)
+if mibBuilder.loadTexts:
+    tmnxBgpSRLV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxBgpV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 14, 1, 25)
+)
+tmnxBgpV25v0Compliance.setObjects(
+      *(("TIMETRA-BGP-MIB", "tmnxBgpMultiPathV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRtTunnelV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpShortcutTunnelV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEntropyLabelV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRibRouteImportV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV14v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLinkBandwidthExtCommGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRibLeakImportV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpShortcutTunnelV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRtTunnelV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDynamicPeerLmtV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupV13v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV13v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV13v1Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoletedNtfnV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV5v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupParamsV5v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgp4PathAttrGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV6v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupParamsV6v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerParamsV6v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeeringPolicyV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgp4ByteASNV7v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupV11v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV7v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV7v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceV8v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerV8v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerV9v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDisableCapNegoV9v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV10v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeeringPlcyV10v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRTConstraintV10v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalDCGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDPOscilationV11v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpMvpnVrfImportGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHUnchangedGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpMcastIpv6Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPrefixOriginValidGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpResolveLabelRoutesGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpThirdPartyNHGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteV12v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV12v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV12v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgDynamicV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerNgEvpnMplsV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDynPeerLmtNtfnV13v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV14v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV14v4Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerGroupParamsV14v4Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerParamsGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRtTunnelV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpORRV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpWeightedEcmpGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObjectsV15v0ObsoleteGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteNotifyV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObsoleteNfyObjsV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAddPathV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLblRibSeparateV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEnforceFirstASGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceParamsExtGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLLGRV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV15v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLocalAddressV15v4Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpIpv6NhAdvAndResV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpBypassMRAITimerV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAdminTagsV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLargeCommsV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHResFilterV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelSecurityGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRibApiGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMplsFwdPlcyGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLinkBandwidthGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpORRV16v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelSrOspf3"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLoopDetectThreshold"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrTePolicyIpv6Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHResGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpConvergenceGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotificationV19v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstanceV19v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDefaultOriginate"),
+        ("TIMETRA-BGP-MIB", "tBgpPeerGrpDynNbrAsGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPreferenceGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEBGPRejectWithoutPolicy"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpRemovePrivateReplace"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpBlockPrefixSIDGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxPeerNgV19v5Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNotifyObjsV19v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTcpMss"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSegRoutingV19Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelIpv6V20Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMetric"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEngressEng"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHV20v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLRV20v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelFlexAlgoFb"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLUStats"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelPreference"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLabelRoutesUseBgpRoutes"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV21v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSubconfVpnFwding"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSelLblIpPri"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEvpnAddPaths"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6Tlv"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpNHPreferTransportFRR"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpFlowSpecVpn"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAddPathV22v2Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEPEBgpLUV22v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpObjectsV22v2ObsoleteGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpTunnelMetricPrefMed"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPGDynNbrIfGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6PolicyGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPGDynNbrIfMaxSessNtfnGrp"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEvpnLinkBWGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPeerFsmTimeGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSrv6MicroSegmentGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpSelLabelIpInstallGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpBfdStrictMode"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpGlobalV23v0Group"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpLeakedRoutesStaticGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpPfxLmtHoldExcessGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpAttrSetGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpEnforceUntagRtGroup"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpInstLblAllocVpnIpModeGrp"),
+        ("TIMETRA-BGP-MIB", "tmnxBgpDpath25v0"))
+)
+if mibBuilder.loadTexts:
+    tmnxBgpV25v0Compliance.setStatus(
         "current"
     )
 
@@ -26121,6 +28000,8 @@ mibBuilder.exportSymbols(
        "TmnxBgpFlowRouteExtCommAction": TmnxBgpFlowRouteExtCommAction,
        "TmnxIpNhChgFamily": TmnxIpNhChgFamily,
        "TmnxIpFamilyIdentifier": TmnxIpFamilyIdentifier,
+       "TBgpNHResolutionTunnelType": TBgpNHResolutionTunnelType,
+       "TBgpSendCommType": TBgpSendCommType,
        "timetraBgpMIBModule": timetraBgpMIBModule,
        "tmnxBgpConformance": tmnxBgpConformance,
        "tmnxBgpCompliances": tmnxBgpCompliances,
@@ -26142,6 +28023,10 @@ mibBuilder.exportSymbols(
        "tmnxBgpV20v0Compliance": tmnxBgpV20v0Compliance,
        "tmnxBgpV21v0Compliance": tmnxBgpV21v0Compliance,
        "tmnxBgpV22v0Compliance": tmnxBgpV22v0Compliance,
+       "tmnxBgpV23v0Compliance": tmnxBgpV23v0Compliance,
+       "tmnxBgpV24v0Compliance": tmnxBgpV24v0Compliance,
+       "tmnxBgpSRLV24v0Compliance": tmnxBgpSRLV24v0Compliance,
+       "tmnxBgpV25v0Compliance": tmnxBgpV25v0Compliance,
        "tmnxBgpGroups": tmnxBgpGroups,
        "tmnxBgpConfederationGroup": tmnxBgpConfederationGroup,
        "tmnxBgp4PathAttrGroup": tmnxBgp4PathAttrGroup,
@@ -26295,6 +28180,7 @@ mibBuilder.exportSymbols(
        "tmnxBgpTunnelMetric": tmnxBgpTunnelMetric,
        "tmnxBgpEngressEng": tmnxBgpEngressEng,
        "tmnxBgpNHV20v0Group": tmnxBgpNHV20v0Group,
+       "tmnxBgpLRV20v0Group": tmnxBgpLRV20v0Group,
        "tmnxBgpTunnelFlexAlgoFb": tmnxBgpTunnelFlexAlgoFb,
        "tmnxBgpLUStats": tmnxBgpLUStats,
        "tmnxBgpTunnelPreference": tmnxBgpTunnelPreference,
@@ -26307,9 +28193,31 @@ mibBuilder.exportSymbols(
        "tmnxBgpSrv6Tlv": tmnxBgpSrv6Tlv,
        "tmnxBgpDpath": tmnxBgpDpath,
        "tmnxBgpNHPreferTransportFRR": tmnxBgpNHPreferTransportFRR,
+       "tmnxBgpFlowSpecVpn": tmnxBgpFlowSpecVpn,
        "tmnxBgpAddPathV22v2Group": tmnxBgpAddPathV22v2Group,
        "tmnxBgpEPEBgpLUV22v0Group": tmnxBgpEPEBgpLUV22v0Group,
        "tmnxBgpObjectsV22v2ObsoleteGroup": tmnxBgpObjectsV22v2ObsoleteGroup,
+       "tmnxBgpTunnelMetricPrefMed": tmnxBgpTunnelMetricPrefMed,
+       "tmnxBgpPGDynNbrIfGroup": tmnxBgpPGDynNbrIfGroup,
+       "tmnxBgpSrv6PolicyGroup": tmnxBgpSrv6PolicyGroup,
+       "tmnxBgpPGDynNbrIfMaxSessNtfnGrp": tmnxBgpPGDynNbrIfMaxSessNtfnGrp,
+       "tmnxBgpEvpnLinkBWGroup": tmnxBgpEvpnLinkBWGroup,
+       "tmnxBgpPeerFsmTimeGroup": tmnxBgpPeerFsmTimeGroup,
+       "tmnxBgpSrv6MicroSegmentGroup": tmnxBgpSrv6MicroSegmentGroup,
+       "tmnxBgpSelLabelIpInstallGroup": tmnxBgpSelLabelIpInstallGroup,
+       "tmnxBgpBfdStrictMode": tmnxBgpBfdStrictMode,
+       "tmnxBgpGlobalV23v0Group": tmnxBgpGlobalV23v0Group,
+       "tmnxBgpLeakedRoutesStaticGroup": tmnxBgpLeakedRoutesStaticGroup,
+       "tmnxBgpPfxLmtHoldExcessGroup": tmnxBgpPfxLmtHoldExcessGroup,
+       "tmnxBgpAttrSetGroup": tmnxBgpAttrSetGroup,
+       "tmnxBgpEnforceUntagRtGroup": tmnxBgpEnforceUntagRtGroup,
+       "tmnxBgpLegacyFaultToleranceGroup": tmnxBgpLegacyFaultToleranceGroup,
+       "tBgpSrv6UpaTriggerNextHopGroup": tBgpSrv6UpaTriggerNextHopGroup,
+       "tmnxBgpLUEcmpGroup": tmnxBgpLUEcmpGroup,
+       "tmnxBgpPeerNgOperSRLGroup": tmnxBgpPeerNgOperSRLGroup,
+       "tmnxBgpInstLblAllocVpnIpModeGrp": tmnxBgpInstLblAllocVpnIpModeGrp,
+       "tmnxBgpDpath25v0": tmnxBgpDpath25v0,
+       "tmnxBgpDpathObsoleteGroup": tmnxBgpDpathObsoleteGroup,
        "tBgpObjects": tBgpObjects,
        "tBgpGlobalObjects": tBgpGlobalObjects,
        "tBgpInstanceObjects": tBgpInstanceObjects,
@@ -26536,6 +28444,7 @@ mibBuilder.exportSymbols(
        "tBgpShortcutTunnelMplsFwdPlcy": tBgpShortcutTunnelMplsFwdPlcy,
        "tBgpShortcutTunnelSrOspf3": tBgpShortcutTunnelSrOspf3,
        "tBgpShortcutTunnelFlexAlgoFb": tBgpShortcutTunnelFlexAlgoFb,
+       "tBgpShortcutTunnelEnforceUntagRt": tBgpShortcutTunnelEnforceUntagRt,
        "tBgpLabelRtTunnelTblLstCh": tBgpLabelRtTunnelTblLstCh,
        "tBgpLabelRtTunnelTable": tBgpLabelRtTunnelTable,
        "tBgpLabelRtTunnelEntry": tBgpLabelRtTunnelEntry,
@@ -26555,6 +28464,8 @@ mibBuilder.exportSymbols(
        "tBgpLabelRtTunnelMplsFwdPlcy": tBgpLabelRtTunnelMplsFwdPlcy,
        "tBgpLabelRtTunnelSrOspf3": tBgpLabelRtTunnelSrOspf3,
        "tBgpLabelRtTunnelFlexAlgoFb": tBgpLabelRtTunnelFlexAlgoFb,
+       "tBgpLabelRtTunnelEnforceUntagRt": tBgpLabelRtTunnelEnforceUntagRt,
+       "tBgpLabelRtTunnelMaxEcmpRoutes": tBgpLabelRtTunnelMaxEcmpRoutes,
        "tBgpInstanceMultiPathTable": tBgpInstanceMultiPathTable,
        "tBgpInstanceMultiPathEntry": tBgpInstanceMultiPathEntry,
        "tBgpInstanceMultipathBgp": tBgpInstanceMultipathBgp,
@@ -26660,6 +28571,13 @@ mibBuilder.exportSymbols(
        "tBgpInstanceDomainId": tBgpInstanceDomainId,
        "tBgpInstanceDpathLgthIgnr": tBgpInstanceDpathLgthIgnr,
        "tBgpInstanceNHPreferTransportFrr": tBgpInstanceNHPreferTransportFrr,
+       "tBgpInstBgpTunnelMetricPrefMed": tBgpInstBgpTunnelMetricPrefMed,
+       "tBgpInstanceSelLabelIp": tBgpInstanceSelLabelIp,
+       "tBgpInstanceBfdStrictAdvertise": tBgpInstanceBfdStrictAdvertise,
+       "tBgpInstanceBfdStrictNhReach": tBgpInstanceBfdStrictNhReach,
+       "tBgpInstanceBfdStrictHoldTime": tBgpInstanceBfdStrictHoldTime,
+       "tBgpInstanceAttrSetRemove": tBgpInstanceAttrSetRemove,
+       "tBgpInstLegacyFaultTolerance": tBgpInstLegacyFaultTolerance,
        "tBgpInstanceLLGRFamilyTblLstCh": tBgpInstanceLLGRFamilyTblLstCh,
        "tBgpInstanceLLGRFamilyTable": tBgpInstanceLLGRFamilyTable,
        "tBgpInstanceLLGRFamilyEntry": tBgpInstanceLLGRFamilyEntry,
@@ -26719,6 +28637,18 @@ mibBuilder.exportSymbols(
        "tBgpSrv6AddTlv": tBgpSrv6AddTlv,
        "tBgpSrv6LocatorName": tBgpSrv6LocatorName,
        "tBgpSrv6IgRecvTlv": tBgpSrv6IgRecvTlv,
+       "tBgpSrv6Resolution": tBgpSrv6Resolution,
+       "tBgpSrv6MSLocatorName": tBgpSrv6MSLocatorName,
+       "tBgpSrv6UpaTriggerNextHop": tBgpSrv6UpaTriggerNextHop,
+       "tBgpUseLeakedRoutesTblLstCh": tBgpUseLeakedRoutesTblLstCh,
+       "tBgpUseLeakedRoutesTable": tBgpUseLeakedRoutesTable,
+       "tBgpUseLeakedRoutesEntry": tBgpUseLeakedRoutesEntry,
+       "tBgpUseLeakedRoutesStatic": tBgpUseLeakedRoutesStatic,
+       "tBgpInstanceParamsExt2TblLstCh": tBgpInstanceParamsExt2TblLstCh,
+       "tBgpInstanceParamsExt2Table": tBgpInstanceParamsExt2Table,
+       "tBgpInstanceParamsExt2Entry": tBgpInstanceParamsExt2Entry,
+       "tBgpInstanceLblAllocVpnIpv4Mode": tBgpInstanceLblAllocVpnIpv4Mode,
+       "tBgpInstanceLblAllocVpnIpv6Mode": tBgpInstanceLblAllocVpnIpv6Mode,
        "tBgpPeerGroupObjects": tBgpPeerGroupObjects,
        "tBgpPeerGroupTableLastChanged": tBgpPeerGroupTableLastChanged,
        "tBgpPeerGroupTableSpinlock": tBgpPeerGroupTableSpinlock,
@@ -26905,6 +28835,7 @@ mibBuilder.exportSymbols(
        "tBgpPeerGroupPfxLmtThreshold": tBgpPeerGroupPfxLmtThreshold,
        "tBgpPeerGroupPfxLmtIdleTimeOut": tBgpPeerGroupPfxLmtIdleTimeOut,
        "tBgpPeerGroupPfxLmtPostImport": tBgpPeerGroupPfxLmtPostImport,
+       "tBgpPeerGroupPfxLmtHoldExcess": tBgpPeerGroupPfxLmtHoldExcess,
        "tBgpPGDynamicPeerPfxTableLstChgd": tBgpPGDynamicPeerPfxTableLstChgd,
        "tBgpPeerGroupDynamicPeerPfxTable": tBgpPeerGroupDynamicPeerPfxTable,
        "tBgpPeerGroupDynamicPeerPfxEntry": tBgpPeerGroupDynamicPeerPfxEntry,
@@ -26950,6 +28881,10 @@ mibBuilder.exportSymbols(
        "tBgpPGSrv6RouteAdvertisement": tBgpPGSrv6RouteAdvertisement,
        "tBgpPGSrv6DropRoutes": tBgpPGSrv6DropRoutes,
        "tBgpPGEgressPeerEngLabelUnicast": tBgpPGEgressPeerEngLabelUnicast,
+       "tBgpPGEvpnLinkBWAddToRcvdBgp": tBgpPGEvpnLinkBWAddToRcvdBgp,
+       "tBgpPGBfdStrictAdvertise": tBgpPGBfdStrictAdvertise,
+       "tBgpPGBfdStrictNhReach": tBgpPGBfdStrictNhReach,
+       "tBgpPGBfdStrictHoldTime": tBgpPGBfdStrictHoldTime,
        "tBgpPeerGrpDynNbrAsRngTblLstChg": tBgpPeerGrpDynNbrAsRngTblLstChg,
        "tBgpPeerGroupDynNbrAsRangeTable": tBgpPeerGroupDynNbrAsRangeTable,
        "tBgpPeerGroupDynNbrAsRangeEntry": tBgpPeerGroupDynNbrAsRangeEntry,
@@ -26982,6 +28917,21 @@ mibBuilder.exportSymbols(
        "tBgpPGAddPathMcastVpnV4Limit": tBgpPGAddPathMcastVpnV4Limit,
        "tBgpPGAddPathMcastVpnV6Limit": tBgpPGAddPathMcastVpnV6Limit,
        "tBgpPGAddPathEvpnLimit": tBgpPGAddPathEvpnLimit,
+       "tBgpPGDynNbrIfTableLstChgd": tBgpPGDynNbrIfTableLstChgd,
+       "tBgpPGDynNbrInterfaceTable": tBgpPGDynNbrInterfaceTable,
+       "tBgpPGDynNbrInterfaceEntry": tBgpPGDynNbrInterfaceEntry,
+       "tBgpPGDynNbrInterfaceIndex": tBgpPGDynNbrInterfaceIndex,
+       "tBgpPGDynNbrIfLastChanged": tBgpPGDynNbrIfLastChanged,
+       "tBgpPGDynNbrIfRowStatus": tBgpPGDynNbrIfRowStatus,
+       "tBgpPGDynNbrIfGroupName": tBgpPGDynNbrIfGroupName,
+       "tBgpPGDynNbrIfMaxSessions": tBgpPGDynNbrIfMaxSessions,
+       "tBgpPGDynNbrIfAsRgTblLstChg": tBgpPGDynNbrIfAsRgTblLstChg,
+       "tBgpPGDynNbrIfAsRangeTable": tBgpPGDynNbrIfAsRangeTable,
+       "tBgpPGDynNbrIfAsRangeEntry": tBgpPGDynNbrIfAsRangeEntry,
+       "tBgpPGDynNbrIfAsRangeIndex": tBgpPGDynNbrIfAsRangeIndex,
+       "tBgpPGDynNbrIfAsRangeLstChg": tBgpPGDynNbrIfAsRangeLstChg,
+       "tBgpPGDynNbrIfAsRangeMin": tBgpPGDynNbrIfAsRangeMin,
+       "tBgpPGDynNbrIfAsRangeMax": tBgpPGDynNbrIfAsRangeMax,
        "tBgpPeerObjects": tBgpPeerObjects,
        "tBgpPeerTableLastChanged": tBgpPeerTableLastChanged,
        "tBgpPeerTableSpinlock": tBgpPeerTableSpinlock,
@@ -27332,8 +29282,34 @@ mibBuilder.exportSymbols(
        "tBgpPeerOperSrplcyV6SentPfxs": tBgpPeerOperSrplcyV6SentPfxs,
        "tBgpPeerOperSrplcyV6ActivePfxs": tBgpPeerOperSrplcyV6ActivePfxs,
        "tBgpPeerOperSrplcyV6RejPfxs": tBgpPeerOperSrplcyV6RejPfxs,
+       "tBgpPeerOperLocalAddressType": tBgpPeerOperLocalAddressType,
+       "tBgpPeerOperLocalAddress": tBgpPeerOperLocalAddress,
+       "tBgpPeerOperRemoteAddressType": tBgpPeerOperRemoteAddressType,
+       "tBgpPeerOperRemoteAddress": tBgpPeerOperRemoteAddress,
        "tBgpPeerOperTcpMss": tBgpPeerOperTcpMss,
        "tBgpPeerOperTcpRcvdMss": tBgpPeerOperTcpRcvdMss,
+       "tBgpPeerNgOperFVIpv4SupPfxDamp": tBgpPeerNgOperFVIpv4SupPfxDamp,
+       "tBgpPeerNgOperFVIpv4RecvPfxs": tBgpPeerNgOperFVIpv4RecvPfxs,
+       "tBgpPeerNgOperFVIpv4SentPfxs": tBgpPeerNgOperFVIpv4SentPfxs,
+       "tBgpPeerNgOperFVIpv4ActivePfxs": tBgpPeerNgOperFVIpv4ActivePfxs,
+       "tBgpPeerNgOperFVIpv4RejPfxs": tBgpPeerNgOperFVIpv4RejPfxs,
+       "tBgpPeerNgOperFVIpv6SupPfxDamp": tBgpPeerNgOperFVIpv6SupPfxDamp,
+       "tBgpPeerNgOperFVIpv6RecvPfxs": tBgpPeerNgOperFVIpv6RecvPfxs,
+       "tBgpPeerNgOperFVIpv6SentPfxs": tBgpPeerNgOperFVIpv6SentPfxs,
+       "tBgpPeerNgOperFVIpv6ActivePfxs": tBgpPeerNgOperFVIpv6ActivePfxs,
+       "tBgpPeerNgOperFVIpv6RejPfxs": tBgpPeerNgOperFVIpv6RejPfxs,
+       "tBgpPeerFsmEstablishedTime": tBgpPeerFsmEstablishedTime,
+       "tBgpPeerNgOperLastError": tBgpPeerNgOperLastError,
+       "tBgpPeerNgOperLocalPort": tBgpPeerNgOperLocalPort,
+       "tBgpPeerNgOperRemotePort": tBgpPeerNgOperRemotePort,
+       "tBgpPeerNgOperIdentifier": tBgpPeerNgOperIdentifier,
+       "tBgpPeerNgOperInUpdates": tBgpPeerNgOperInUpdates,
+       "tBgpPeerNgOperOutUpdates": tBgpPeerNgOperOutUpdates,
+       "tBgpPeerNgOperInTotalMessages": tBgpPeerNgOperInTotalMessages,
+       "tBgpPeerNgOperOutTotalMessages": tBgpPeerNgOperOutTotalMessages,
+       "tBgpPeerNgOperInNotifications": tBgpPeerNgOperInNotifications,
+       "tBgpPeerNgOperOutNotifications": tBgpPeerNgOperOutNotifications,
+       "tBgpPeerNgOperInUpdElapsedTime": tBgpPeerNgOperInUpdElapsedTime,
        "tBgpPeerNgSendOrfRouteTargetTable": tBgpPeerNgSendOrfRouteTargetTable,
        "tBgpPeerNgSendOrfRouteTargetEntry": tBgpPeerNgSendOrfRouteTargetEntry,
        "tBgpPeerNgSendOrfRouteTarget": tBgpPeerNgSendOrfRouteTarget,
@@ -27448,6 +29424,7 @@ mibBuilder.exportSymbols(
        "tBgpPeerNgPfxLmtIdleTimeOut": tBgpPeerNgPfxLmtIdleTimeOut,
        "tBgpPeerNgPfxLmtPostImport": tBgpPeerNgPfxLmtPostImport,
        "tBgpPeerNgPfxLmtInheritance": tBgpPeerNgPfxLmtInheritance,
+       "tBgpPeerNgPfxLmtHoldExcess": tBgpPeerNgPfxLmtHoldExcess,
        "tBgpPeerLLGRFamilyTblLstCh": tBgpPeerLLGRFamilyTblLstCh,
        "tBgpPeerLLGRFamilyTable": tBgpPeerLLGRFamilyTable,
        "tBgpPeerLLGRFamilyEntry": tBgpPeerLLGRFamilyEntry,
@@ -27489,6 +29466,10 @@ mibBuilder.exportSymbols(
        "tBgpPeerNgSrv6RouteAdvertisement": tBgpPeerNgSrv6RouteAdvertisement,
        "tBgpPeerNgSrv6DropRoutes": tBgpPeerNgSrv6DropRoutes,
        "tBgpPeerNgEgrPeerEngLabelUnicast": tBgpPeerNgEgrPeerEngLabelUnicast,
+       "tBgpPeerNgEvpnLinkBWAddToRcvdBgp": tBgpPeerNgEvpnLinkBWAddToRcvdBgp,
+       "tBgpPeerNgBfdStrictAdvertise": tBgpPeerNgBfdStrictAdvertise,
+       "tBgpPeerNgBfdStrictNhReach": tBgpPeerNgBfdStrictNhReach,
+       "tBgpPeerNgBfdStrictHoldTime": tBgpPeerNgBfdStrictHoldTime,
        "tBgpPeerNgEpeIngrStatsTable": tBgpPeerNgEpeIngrStatsTable,
        "tBgpPeerNgEpeIngrStatsEntry": tBgpPeerNgEpeIngrStatsEntry,
        "tBgpPeerNgNodeSid": tBgpPeerNgNodeSid,
@@ -27615,6 +29596,10 @@ mibBuilder.exportSymbols(
        "tBgpPeerNgAddPathMcastVpnV4Limit": tBgpPeerNgAddPathMcastVpnV4Limit,
        "tBgpPeerNgAddPathMcastVpnV6Limit": tBgpPeerNgAddPathMcastVpnV6Limit,
        "tBgpPeerNgAddPathEvpnLimit": tBgpPeerNgAddPathEvpnLimit,
+       "tBgpPeerAFStatsTable": tBgpPeerAFStatsTable,
+       "tBgpPeerAFStatsEntry": tBgpPeerAFStatsEntry,
+       "tBgpPeerAFStatsFamily": tBgpPeerAFStatsFamily,
+       "tBgpPeerAFStatsHeldExcessPfxs": tBgpPeerAFStatsHeldExcessPfxs,
        "tBgpInstanceConfederationObjects": tBgpInstanceConfederationObjects,
        "tBgpConfederationTableLastChanged": tBgpConfederationTableLastChanged,
        "tBgpConfederationTable": tBgpConfederationTable,
@@ -27686,6 +29671,8 @@ mibBuilder.exportSymbols(
        "tBgpPrngPlcyMaxPrefixLogOnly": tBgpPrngPlcyMaxPrefixLogOnly,
        "tBgpPrngPlcyMaxPrefixThreshold": tBgpPrngPlcyMaxPrefixThreshold,
        "tBgpPrngPlcyBfdEnable": tBgpPrngPlcyBfdEnable,
+       "tBgpPrngPlcyFamilyIpv4": tBgpPrngPlcyFamilyIpv4,
+       "tBgpPrngPlcyFamilyIpv6": tBgpPrngPlcyFamilyIpv6,
        "tBgpPeeringPlcyTable": tBgpPeeringPlcyTable,
        "tBgpPeeringPlcyEntry": tBgpPeeringPlcyEntry,
        "tBgpPeeringPlcyImportPolicy1": tBgpPeeringPlcyImportPolicy1,
@@ -27718,6 +29705,17 @@ mibBuilder.exportSymbols(
        "tBgpPeeringPlcyExportPolicy13": tBgpPeeringPlcyExportPolicy13,
        "tBgpPeeringPlcyExportPolicy14": tBgpPeeringPlcyExportPolicy14,
        "tBgpPeeringPlcyExportPolicy15": tBgpPeeringPlcyExportPolicy15,
+       "tBgpPrngPlcyPfxLmtTableLastChngd": tBgpPrngPlcyPfxLmtTableLastChngd,
+       "tBgpPrngPlcyPfxLmtTable": tBgpPrngPlcyPfxLmtTable,
+       "tBgpPrngPlcyPfxLmtEntry": tBgpPrngPlcyPfxLmtEntry,
+       "tBgpPrngPlcyPfxLmtFamily": tBgpPrngPlcyPfxLmtFamily,
+       "tBgpPrngPlcyPfxLmtLastChanged": tBgpPrngPlcyPfxLmtLastChanged,
+       "tBgpPrngPlcyPfxLmtRowStatus": tBgpPrngPlcyPfxLmtRowStatus,
+       "tBgpPrngPlcyPfxLmtMaxPrefix": tBgpPrngPlcyPfxLmtMaxPrefix,
+       "tBgpPrngPlcyPfxLmtLogOnly": tBgpPrngPlcyPfxLmtLogOnly,
+       "tBgpPrngPlcyPfxLmtThreshold": tBgpPrngPlcyPfxLmtThreshold,
+       "tBgpPrngPlcyPfxLmtIdleTimeOut": tBgpPrngPlcyPfxLmtIdleTimeOut,
+       "tBgpPrngPlcyPfxLmtPostImport": tBgpPrngPlcyPfxLmtPostImport,
        "tBgpNotificationObjs": tBgpNotificationObjs,
        "tBgpPeerNgAddrType": tBgpPeerNgAddrType,
        "tBgpPeerNgAddr": tBgpPeerNgAddr,
@@ -27769,5 +29767,6 @@ mibBuilder.exportSymbols(
        "tBgpInstanceDynamicPeerLmtReachd": tBgpInstanceDynamicPeerLmtReachd,
        "tBgpPGDynamicPeerLmtReached": tBgpPGDynamicPeerLmtReached,
        "tBgp4PathAttrDiscarded": tBgp4PathAttrDiscarded,
-       "tBgpInstConvStateTransition": tBgpInstConvStateTransition}
+       "tBgpInstConvStateTransition": tBgpInstConvStateTransition,
+       "tBgpPGDynNbrIfMaxSessLmtReachd": tBgpPGDynNbrIfMaxSessLmtReachd}
 )

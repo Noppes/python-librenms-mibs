@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-LWAPP-RF-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:26:55 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -127,7 +124,13 @@ ciscoLwappRFMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoLwappRFMIB.setRevisions(
-        ("2018-11-15 00:00",
+        ("2023-08-04 00:00",
+         "2021-04-16 00:00",
+         "2021-01-12 00:00",
+         "2020-09-02 00:00",
+         "2020-08-07 00:00",
+         "2020-06-03 00:00",
+         "2018-11-15 00:00",
          "2017-07-07 00:00",
          "2012-04-27 00:00",
          "2012-01-27 00:00",
@@ -1241,6 +1244,233 @@ cLRFProfileRxSopThresholdCustom = _CLRFProfileRxSopThresholdCustom_Object(
 cLRFProfileRxSopThresholdCustom.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     cLRFProfileRxSopThresholdCustom.setStatus("current")
+
+
+class _CLRFProfile11axObssPdEnable_Type(TruthValue):
+    """Custom type cLRFProfile11axObssPdEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLRFProfile11axObssPdEnable_Type.__name__ = "TruthValue"
+_CLRFProfile11axObssPdEnable_Object = MibTableColumn
+cLRFProfile11axObssPdEnable = _CLRFProfile11axObssPdEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 56),
+    _CLRFProfile11axObssPdEnable_Type()
+)
+cLRFProfile11axObssPdEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11axObssPdEnable.setStatus("current")
+
+
+class _CLRFProfile11axNonSrgObssPdMax_Type(Integer32):
+    """Custom type cLRFProfile11axNonSrgObssPdMax based on Integer32"""
+    defaultValue = -62
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-82, -62),
+    )
+
+
+_CLRFProfile11axNonSrgObssPdMax_Type.__name__ = "Integer32"
+_CLRFProfile11axNonSrgObssPdMax_Object = MibTableColumn
+cLRFProfile11axNonSrgObssPdMax = _CLRFProfile11axNonSrgObssPdMax_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 57),
+    _CLRFProfile11axNonSrgObssPdMax_Type()
+)
+cLRFProfile11axNonSrgObssPdMax.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11axNonSrgObssPdMax.setStatus("current")
+
+
+class _CLRFProfileNdpMode_Type(Integer32):
+    """Custom type cLRFProfileNdpMode based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("auto", 0),
+          ("offChannel", 1))
+    )
+
+
+_CLRFProfileNdpMode_Type.__name__ = "Integer32"
+_CLRFProfileNdpMode_Object = MibTableColumn
+cLRFProfileNdpMode = _CLRFProfileNdpMode_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 58),
+    _CLRFProfileNdpMode_Type()
+)
+cLRFProfileNdpMode.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLRFProfileNdpMode.setStatus("current")
+
+
+class _CLRFProfile11ax6GHzFeature_Type(Integer32):
+    """Custom type cLRFProfile11ax6GHzFeature based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("bcast_probe_response", 1),
+          ("fils_discovery", 2))
+    )
+
+
+_CLRFProfile11ax6GHzFeature_Type.__name__ = "Integer32"
+_CLRFProfile11ax6GHzFeature_Object = MibTableColumn
+cLRFProfile11ax6GHzFeature = _CLRFProfile11ax6GHzFeature_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 59),
+    _CLRFProfile11ax6GHzFeature_Type()
+)
+cLRFProfile11ax6GHzFeature.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11ax6GHzFeature.setStatus("current")
+
+
+class _CLRFProfile11axBcastProbeRespInterval_Type(Unsigned32):
+    """Custom type cLRFProfile11axBcastProbeRespInterval based on Unsigned32"""
+    defaultValue = 20
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(5, 25),
+    )
+
+
+_CLRFProfile11axBcastProbeRespInterval_Type.__name__ = "Unsigned32"
+_CLRFProfile11axBcastProbeRespInterval_Object = MibTableColumn
+cLRFProfile11axBcastProbeRespInterval = _CLRFProfile11axBcastProbeRespInterval_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 60),
+    _CLRFProfile11axBcastProbeRespInterval_Type()
+)
+cLRFProfile11axBcastProbeRespInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11axBcastProbeRespInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    cLRFProfile11axBcastProbeRespInterval.setUnits("milliseconds")
+
+
+class _CLRFProfileMultiBssidProfile_Type(SnmpAdminString):
+    """Custom type cLRFProfileMultiBssidProfile based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 64),
+    )
+
+
+_CLRFProfileMultiBssidProfile_Type.__name__ = "SnmpAdminString"
+_CLRFProfileMultiBssidProfile_Object = MibTableColumn
+cLRFProfileMultiBssidProfile = _CLRFProfileMultiBssidProfile_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 62),
+    _CLRFProfileMultiBssidProfile_Type()
+)
+cLRFProfileMultiBssidProfile.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfileMultiBssidProfile.setStatus("current")
+
+
+class _CLRFProfilePSCBias_Type(TruthValue):
+    """Custom type cLRFProfilePSCBias based on TruthValue"""
+    defaultValue = 2
+
+
+_CLRFProfilePSCBias_Type.__name__ = "TruthValue"
+_CLRFProfilePSCBias_Object = MibTableColumn
+cLRFProfilePSCBias = _CLRFProfilePSCBias_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 63),
+    _CLRFProfilePSCBias_Type()
+)
+cLRFProfilePSCBias.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfilePSCBias.setStatus("current")
+
+
+class _CLRFProfile11axSrgObssPdEnable_Type(TruthValue):
+    """Custom type cLRFProfile11axSrgObssPdEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_CLRFProfile11axSrgObssPdEnable_Type.__name__ = "TruthValue"
+_CLRFProfile11axSrgObssPdEnable_Object = MibTableColumn
+cLRFProfile11axSrgObssPdEnable = _CLRFProfile11axSrgObssPdEnable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 64),
+    _CLRFProfile11axSrgObssPdEnable_Type()
+)
+cLRFProfile11axSrgObssPdEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11axSrgObssPdEnable.setStatus("current")
+
+
+class _CLRFProfile11axSrgObssPdMin_Type(Integer32):
+    """Custom type cLRFProfile11axSrgObssPdMin based on Integer32"""
+    defaultValue = -82
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-82, -62),
+    )
+
+
+_CLRFProfile11axSrgObssPdMin_Type.__name__ = "Integer32"
+_CLRFProfile11axSrgObssPdMin_Object = MibTableColumn
+cLRFProfile11axSrgObssPdMin = _CLRFProfile11axSrgObssPdMin_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 65),
+    _CLRFProfile11axSrgObssPdMin_Type()
+)
+cLRFProfile11axSrgObssPdMin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11axSrgObssPdMin.setStatus("current")
+
+
+class _CLRFProfile11axSrgObssPdMax_Type(Integer32):
+    """Custom type cLRFProfile11axSrgObssPdMax based on Integer32"""
+    defaultValue = -62
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-82, -62),
+    )
+
+
+_CLRFProfile11axSrgObssPdMax_Type.__name__ = "Integer32"
+_CLRFProfile11axSrgObssPdMax_Object = MibTableColumn
+cLRFProfile11axSrgObssPdMax = _CLRFProfile11axSrgObssPdMax_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 66),
+    _CLRFProfile11axSrgObssPdMax_Type()
+)
+cLRFProfile11axSrgObssPdMax.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfile11axSrgObssPdMax.setStatus("current")
+
+
+class _CLRFProfilePreamblePuncture_Type(TruthValue):
+    """Custom type cLRFProfilePreamblePuncture based on TruthValue"""
+    defaultValue = 2
+
+
+_CLRFProfilePreamblePuncture_Type.__name__ = "TruthValue"
+_CLRFProfilePreamblePuncture_Object = MibTableColumn
+cLRFProfilePreamblePuncture = _CLRFProfilePreamblePuncture_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 2, 1, 67),
+    _CLRFProfilePreamblePuncture_Type()
+)
+cLRFProfilePreamblePuncture.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cLRFProfilePreamblePuncture.setStatus("current")
 _CLRFProfileMcsDataRateTable_Object = MibTable
 cLRFProfileMcsDataRateTable = _CLRFProfileMcsDataRateTable_Object(
     (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 3)
@@ -1499,6 +1729,244 @@ cLRFProfileAddChannelRowStatus = _CLRFProfileAddChannelRowStatus_Object(
 cLRFProfileAddChannelRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     cLRFProfileAddChannelRowStatus.setStatus("current")
+_CLMultiBSSIDProfileTable_Object = MibTable
+cLMultiBSSIDProfileTable = _CLMultiBSSIDProfileTable_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7)
+)
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfileTable.setStatus("current")
+_CLMultiBSSIDProfileEntry_Object = MibTableRow
+cLMultiBSSIDProfileEntry = _CLMultiBSSIDProfileEntry_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1)
+)
+cLMultiBSSIDProfileEntry.setIndexNames(
+    (0, "CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfileName"),
+)
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfileEntry.setStatus("current")
+
+
+class _CLMultiBSSIDProfileName_Type(SnmpAdminString):
+    """Custom type cLMultiBSSIDProfileName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 64),
+    )
+
+
+_CLMultiBSSIDProfileName_Type.__name__ = "SnmpAdminString"
+_CLMultiBSSIDProfileName_Object = MibTableColumn
+cLMultiBSSIDProfileName = _CLMultiBSSIDProfileName_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 1),
+    _CLMultiBSSIDProfileName_Type()
+)
+cLMultiBSSIDProfileName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfileName.setStatus("current")
+
+
+class _CLMultiBSSIDProfileDescr_Type(SnmpAdminString):
+    """Custom type cLMultiBSSIDProfileDescr based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 64),
+    )
+
+
+_CLMultiBSSIDProfileDescr_Type.__name__ = "SnmpAdminString"
+_CLMultiBSSIDProfileDescr_Object = MibTableColumn
+cLMultiBSSIDProfileDescr = _CLMultiBSSIDProfileDescr_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 2),
+    _CLMultiBSSIDProfileDescr_Type()
+)
+cLMultiBSSIDProfileDescr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfileDescr.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11axOfdmaDownLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11axOfdmaDownLink based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11axOfdmaDownLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11axOfdmaDownLink_Object = MibTableColumn
+cLMultiBSSIDProfile11axOfdmaDownLink = _CLMultiBSSIDProfile11axOfdmaDownLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 3),
+    _CLMultiBSSIDProfile11axOfdmaDownLink_Type()
+)
+cLMultiBSSIDProfile11axOfdmaDownLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11axOfdmaDownLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11axOfdmaUpLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11axOfdmaUpLink based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11axOfdmaUpLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11axOfdmaUpLink_Object = MibTableColumn
+cLMultiBSSIDProfile11axOfdmaUpLink = _CLMultiBSSIDProfile11axOfdmaUpLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 4),
+    _CLMultiBSSIDProfile11axOfdmaUpLink_Type()
+)
+cLMultiBSSIDProfile11axOfdmaUpLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11axOfdmaUpLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11axMuMIMODownLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11axMuMIMODownLink based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11axMuMIMODownLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11axMuMIMODownLink_Object = MibTableColumn
+cLMultiBSSIDProfile11axMuMIMODownLink = _CLMultiBSSIDProfile11axMuMIMODownLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 5),
+    _CLMultiBSSIDProfile11axMuMIMODownLink_Type()
+)
+cLMultiBSSIDProfile11axMuMIMODownLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11axMuMIMODownLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11axMuMIMOUpLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11axMuMIMOUpLink based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11axMuMIMOUpLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11axMuMIMOUpLink_Object = MibTableColumn
+cLMultiBSSIDProfile11axMuMIMOUpLink = _CLMultiBSSIDProfile11axMuMIMOUpLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 6),
+    _CLMultiBSSIDProfile11axMuMIMOUpLink_Type()
+)
+cLMultiBSSIDProfile11axMuMIMOUpLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11axMuMIMOUpLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11axTwt_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11axTwt based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11axTwt_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11axTwt_Object = MibTableColumn
+cLMultiBSSIDProfile11axTwt = _CLMultiBSSIDProfile11axTwt_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 7),
+    _CLMultiBSSIDProfile11axTwt_Type()
+)
+cLMultiBSSIDProfile11axTwt.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11axTwt.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11axTwtBroadcast_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11axTwtBroadcast based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11axTwtBroadcast_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11axTwtBroadcast_Object = MibTableColumn
+cLMultiBSSIDProfile11axTwtBroadcast = _CLMultiBSSIDProfile11axTwtBroadcast_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 8),
+    _CLMultiBSSIDProfile11axTwtBroadcast_Type()
+)
+cLMultiBSSIDProfile11axTwtBroadcast.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11axTwtBroadcast.setStatus("current")
+_CLMultiBSSIDProfileRowStatus_Type = RowStatus
+_CLMultiBSSIDProfileRowStatus_Object = MibTableColumn
+cLMultiBSSIDProfileRowStatus = _CLMultiBSSIDProfileRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 9),
+    _CLMultiBSSIDProfileRowStatus_Type()
+)
+cLMultiBSSIDProfileRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfileRowStatus.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11beOfdmaDownLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11beOfdmaDownLink based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11beOfdmaDownLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11beOfdmaDownLink_Object = MibTableColumn
+cLMultiBSSIDProfile11beOfdmaDownLink = _CLMultiBSSIDProfile11beOfdmaDownLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 10),
+    _CLMultiBSSIDProfile11beOfdmaDownLink_Type()
+)
+cLMultiBSSIDProfile11beOfdmaDownLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11beOfdmaDownLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11beOfdmaUpLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11beOfdmaUpLink based on TruthValue"""
+    defaultValue = 1
+
+
+_CLMultiBSSIDProfile11beOfdmaUpLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11beOfdmaUpLink_Object = MibTableColumn
+cLMultiBSSIDProfile11beOfdmaUpLink = _CLMultiBSSIDProfile11beOfdmaUpLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 11),
+    _CLMultiBSSIDProfile11beOfdmaUpLink_Type()
+)
+cLMultiBSSIDProfile11beOfdmaUpLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11beOfdmaUpLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11beMuMIMODownLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11beMuMIMODownLink based on TruthValue"""
+    defaultValue = 2
+
+
+_CLMultiBSSIDProfile11beMuMIMODownLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11beMuMIMODownLink_Object = MibTableColumn
+cLMultiBSSIDProfile11beMuMIMODownLink = _CLMultiBSSIDProfile11beMuMIMODownLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 12),
+    _CLMultiBSSIDProfile11beMuMIMODownLink_Type()
+)
+cLMultiBSSIDProfile11beMuMIMODownLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11beMuMIMODownLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11beMuMIMOUpLink_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11beMuMIMOUpLink based on TruthValue"""
+    defaultValue = 2
+
+
+_CLMultiBSSIDProfile11beMuMIMOUpLink_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11beMuMIMOUpLink_Object = MibTableColumn
+cLMultiBSSIDProfile11beMuMIMOUpLink = _CLMultiBSSIDProfile11beMuMIMOUpLink_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 13),
+    _CLMultiBSSIDProfile11beMuMIMOUpLink_Type()
+)
+cLMultiBSSIDProfile11beMuMIMOUpLink.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11beMuMIMOUpLink.setStatus("current")
+
+
+class _CLMultiBSSIDProfile11beOfdmaMultiRU_Type(TruthValue):
+    """Custom type cLMultiBSSIDProfile11beOfdmaMultiRU based on TruthValue"""
+    defaultValue = 2
+
+
+_CLMultiBSSIDProfile11beOfdmaMultiRU_Type.__name__ = "TruthValue"
+_CLMultiBSSIDProfile11beOfdmaMultiRU_Object = MibTableColumn
+cLMultiBSSIDProfile11beOfdmaMultiRU = _CLMultiBSSIDProfile11beOfdmaMultiRU_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 1, 7, 1, 14),
+    _CLMultiBSSIDProfile11beOfdmaMultiRU_Type()
+)
+cLMultiBSSIDProfile11beOfdmaMultiRU.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    cLMultiBSSIDProfile11beOfdmaMultiRU.setStatus("current")
 _CiscoLwappRFGlobalObjects_ObjectIdentity = ObjectIdentity
 ciscoLwappRFGlobalObjects = _CiscoLwappRFGlobalObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 9, 9, 778, 1, 2)
@@ -1730,6 +2198,55 @@ ciscoLwappRFConfigGroup7.setObjects(
 if mibBuilder.loadTexts:
     ciscoLwappRFConfigGroup7.setStatus("current")
 
+ciscoLwappRFConfigGroup8 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 2, 2, 14)
+)
+ciscoLwappRFConfigGroup8.setObjects(
+      *(("CISCO-LWAPP-RF-MIB", "cLRFProfile11axObssPdEnable"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfile11axNonSrgObssPdMax"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfile11axSrgObssPdEnable"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfile11axSrgObssPdMin"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfile11axSrgObssPdMax"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfilePreamblePuncture"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappRFConfigGroup8.setStatus("current")
+
+ciscoLwappRFConfigGroup9 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 2, 2, 15)
+)
+ciscoLwappRFConfigGroup9.setObjects(
+    ("CISCO-LWAPP-RF-MIB", "cLRFProfileNdpMode")
+)
+if mibBuilder.loadTexts:
+    ciscoLwappRFConfigGroup9.setStatus("current")
+
+ciscoLwappRFConfigGroup10 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 2, 2, 16)
+)
+ciscoLwappRFConfigGroup10.setObjects(
+      *(("CISCO-LWAPP-RF-MIB", "cLRFProfile11ax6GHzFeature"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfile11axBcastProbeRespInterval"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfileMultiBssidProfile"),
+        ("CISCO-LWAPP-RF-MIB", "cLRFProfilePSCBias"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfileName"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfileDescr"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11axOfdmaDownLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11axOfdmaUpLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11axMuMIMODownLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11axMuMIMOUpLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11axTwt"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11axTwtBroadcast"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfileRowStatus"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11beOfdmaDownLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11beOfdmaUpLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11beMuMIMODownLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11beMuMIMOUpLink"),
+        ("CISCO-LWAPP-RF-MIB", "cLMultiBSSIDProfile11beOfdmaMultiRU"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappRFConfigGroup10.setStatus("current")
+
 
 # Notification objects
 
@@ -1817,6 +2334,75 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+ciscoLwappRFMIBComplianceRev5 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 2, 1, 6)
+)
+ciscoLwappRFMIBComplianceRev5.setObjects(
+      *(("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroupVer1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup3"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup4"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGroupTrapThresholdConfig"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGroupChannelConfig"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGlobalConfigGroup"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroupExtension1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup5"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup6"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup7"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup8"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappRFMIBComplianceRev5.setStatus(
+        "current"
+    )
+
+ciscoLwappRFMIBComplianceRev6 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 2, 1, 7)
+)
+ciscoLwappRFMIBComplianceRev6.setObjects(
+      *(("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroupVer1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup3"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup4"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGroupTrapThresholdConfig"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGroupChannelConfig"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGlobalConfigGroup"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroupExtension1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup5"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup6"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup7"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup8"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup9"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappRFMIBComplianceRev6.setStatus(
+        "current"
+    )
+
+ciscoLwappRFMIBComplianceRev7 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 9, 9, 778, 2, 1, 8)
+)
+ciscoLwappRFMIBComplianceRev7.setObjects(
+      *(("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroupVer1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup3"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup4"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGroupTrapThresholdConfig"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGroupChannelConfig"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFGlobalConfigGroup"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroupExtension1"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup5"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup6"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup7"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup8"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup9"),
+        ("CISCO-LWAPP-RF-MIB", "ciscoLwappRFConfigGroup10"))
+)
+if mibBuilder.loadTexts:
+    ciscoLwappRFMIBComplianceRev7.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -1888,6 +2474,17 @@ mibBuilder.exportSymbols(
        "cLRFProfileBridgeClientAccess": cLRFProfileBridgeClientAccess,
        "cLRFProfileAirTimeAllocation": cLRFProfileAirTimeAllocation,
        "cLRFProfileRxSopThresholdCustom": cLRFProfileRxSopThresholdCustom,
+       "cLRFProfile11axObssPdEnable": cLRFProfile11axObssPdEnable,
+       "cLRFProfile11axNonSrgObssPdMax": cLRFProfile11axNonSrgObssPdMax,
+       "cLRFProfileNdpMode": cLRFProfileNdpMode,
+       "cLRFProfile11ax6GHzFeature": cLRFProfile11ax6GHzFeature,
+       "cLRFProfile11axBcastProbeRespInterval": cLRFProfile11axBcastProbeRespInterval,
+       "cLRFProfileMultiBssidProfile": cLRFProfileMultiBssidProfile,
+       "cLRFProfilePSCBias": cLRFProfilePSCBias,
+       "cLRFProfile11axSrgObssPdEnable": cLRFProfile11axSrgObssPdEnable,
+       "cLRFProfile11axSrgObssPdMin": cLRFProfile11axSrgObssPdMin,
+       "cLRFProfile11axSrgObssPdMax": cLRFProfile11axSrgObssPdMax,
+       "cLRFProfilePreamblePuncture": cLRFProfilePreamblePuncture,
        "cLRFProfileMcsDataRateTable": cLRFProfileMcsDataRateTable,
        "cLRFProfileMcsDataRateEntry": cLRFProfileMcsDataRateEntry,
        "cLRFProfileMcsName": cLRFProfileMcsName,
@@ -1910,6 +2507,22 @@ mibBuilder.exportSymbols(
        "cLRFProfileAddChannelNum": cLRFProfileAddChannelNum,
        "cLRFProfileAddedChannelDcaState": cLRFProfileAddedChannelDcaState,
        "cLRFProfileAddChannelRowStatus": cLRFProfileAddChannelRowStatus,
+       "cLMultiBSSIDProfileTable": cLMultiBSSIDProfileTable,
+       "cLMultiBSSIDProfileEntry": cLMultiBSSIDProfileEntry,
+       "cLMultiBSSIDProfileName": cLMultiBSSIDProfileName,
+       "cLMultiBSSIDProfileDescr": cLMultiBSSIDProfileDescr,
+       "cLMultiBSSIDProfile11axOfdmaDownLink": cLMultiBSSIDProfile11axOfdmaDownLink,
+       "cLMultiBSSIDProfile11axOfdmaUpLink": cLMultiBSSIDProfile11axOfdmaUpLink,
+       "cLMultiBSSIDProfile11axMuMIMODownLink": cLMultiBSSIDProfile11axMuMIMODownLink,
+       "cLMultiBSSIDProfile11axMuMIMOUpLink": cLMultiBSSIDProfile11axMuMIMOUpLink,
+       "cLMultiBSSIDProfile11axTwt": cLMultiBSSIDProfile11axTwt,
+       "cLMultiBSSIDProfile11axTwtBroadcast": cLMultiBSSIDProfile11axTwtBroadcast,
+       "cLMultiBSSIDProfileRowStatus": cLMultiBSSIDProfileRowStatus,
+       "cLMultiBSSIDProfile11beOfdmaDownLink": cLMultiBSSIDProfile11beOfdmaDownLink,
+       "cLMultiBSSIDProfile11beOfdmaUpLink": cLMultiBSSIDProfile11beOfdmaUpLink,
+       "cLMultiBSSIDProfile11beMuMIMODownLink": cLMultiBSSIDProfile11beMuMIMODownLink,
+       "cLMultiBSSIDProfile11beMuMIMOUpLink": cLMultiBSSIDProfile11beMuMIMOUpLink,
+       "cLMultiBSSIDProfile11beOfdmaMultiRU": cLMultiBSSIDProfile11beOfdmaMultiRU,
        "ciscoLwappRFGlobalObjects": ciscoLwappRFGlobalObjects,
        "cLRFProfileOutOfBoxAPConfig": cLRFProfileOutOfBoxAPConfig,
        "cLRFProfileOutOfBoxAPPersistenceConfig": cLRFProfileOutOfBoxAPPersistenceConfig,
@@ -1920,6 +2533,9 @@ mibBuilder.exportSymbols(
        "ciscoLwappRFMIBComplianceVer2": ciscoLwappRFMIBComplianceVer2,
        "ciscoLwappRFMIBComplianceRev3": ciscoLwappRFMIBComplianceRev3,
        "ciscoLwappRFMIBComplianceRev4": ciscoLwappRFMIBComplianceRev4,
+       "ciscoLwappRFMIBComplianceRev5": ciscoLwappRFMIBComplianceRev5,
+       "ciscoLwappRFMIBComplianceRev6": ciscoLwappRFMIBComplianceRev6,
+       "ciscoLwappRFMIBComplianceRev7": ciscoLwappRFMIBComplianceRev7,
        "ciscoLwappRFMIBGroups": ciscoLwappRFMIBGroups,
        "ciscoLwappRFConfigGroup": ciscoLwappRFConfigGroup,
        "ciscoLwappRFConfigGroupVer1": ciscoLwappRFConfigGroupVer1,
@@ -1933,5 +2549,8 @@ mibBuilder.exportSymbols(
        "ciscoLwappRFConfigGroupExtension1": ciscoLwappRFConfigGroupExtension1,
        "ciscoLwappRFConfigGroup5": ciscoLwappRFConfigGroup5,
        "ciscoLwappRFConfigGroup6": ciscoLwappRFConfigGroup6,
-       "ciscoLwappRFConfigGroup7": ciscoLwappRFConfigGroup7}
+       "ciscoLwappRFConfigGroup7": ciscoLwappRFConfigGroup7,
+       "ciscoLwappRFConfigGroup8": ciscoLwappRFConfigGroup8,
+       "ciscoLwappRFConfigGroup9": ciscoLwappRFConfigGroup9,
+       "ciscoLwappRFConfigGroup10": ciscoLwappRFConfigGroup10}
 )

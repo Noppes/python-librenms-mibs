@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\adtran\ADTRAN-AOSUNIT
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:32 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -121,7 +118,8 @@ adGenAOSUnitMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     adGenAOSUnitMib.setRevisions(
-        ("2004-09-28 00:00",
+        ("2017-10-24 00:00",
+         "2004-09-28 00:00",
          "2005-05-12 00:00",
          "2008-07-30 00:00",
          "2010-04-09 00:00")
@@ -150,6 +148,10 @@ class Utf8String(TextualConvention, OctetString):
 _AdGenAOSUnit_ObjectIdentity = ObjectIdentity
 adGenAOSUnit = _AdGenAOSUnit_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 1)
+)
+_AdAOSUnitTraps_ObjectIdentity = ObjectIdentity
+adAOSUnitTraps = _AdAOSUnitTraps_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 1, 0)
 )
 
 
@@ -615,6 +617,30 @@ if mibBuilder.loadTexts:
 
 # Notification objects
 
+adAOSUnitUserLogin = NotificationType(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 1, 0, 1)
+)
+if mibBuilder.loadTexts:
+    adAOSUnitUserLogin.setStatus(
+        "current"
+    )
+
+adAOSUnitUserLogout = NotificationType(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 1, 0, 2)
+)
+if mibBuilder.loadTexts:
+    adAOSUnitUserLogout.setStatus(
+        "current"
+    )
+
+adAOSUnitNTPFailure = NotificationType(
+    (1, 3, 6, 1, 4, 1, 664, 5, 53, 1, 1, 0, 3)
+)
+if mibBuilder.loadTexts:
+    adAOSUnitNTPFailure.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -642,6 +668,10 @@ mibBuilder.exportSymbols(
     "ADTRAN-AOSUNIT",
     **{"Utf8String": Utf8String,
        "adGenAOSUnit": adGenAOSUnit,
+       "adAOSUnitTraps": adAOSUnitTraps,
+       "adAOSUnitUserLogin": adAOSUnitUserLogin,
+       "adAOSUnitUserLogout": adAOSUnitUserLogout,
+       "adAOSUnitNTPFailure": adAOSUnitNTPFailure,
        "adAOSBootRevision": adAOSBootRevision,
        "adAOSCurrentImage": adAOSCurrentImage,
        "adAOSRunConfigChecksum": adAOSRunConfigChecksum,

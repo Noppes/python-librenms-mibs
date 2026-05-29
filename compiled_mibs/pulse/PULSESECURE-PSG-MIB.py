@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\pulse\PULSESECURE-PSG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:21:35 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,7 @@ pulsesecure_gateway = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     pulsesecure_gateway.setRevisions(
-        ("2016-07-07 16:10",)
+        ("2022-05-09 16:33",)
     )
 
 
@@ -189,16 +186,7 @@ fileName = _FileName_Object(
 )
 fileName.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
-    fileName.setStatus("current")
-_MeetingUserCount_Type = Gauge32
-_MeetingUserCount_Object = MibScalar
-meetingUserCount = _MeetingUserCount_Object(
-    (1, 3, 6, 1, 4, 1, 12532, 9),
-    _MeetingUserCount_Type()
-)
-meetingUserCount.setMaxAccess("accessible-for-notify")
-if mibBuilder.loadTexts:
-    meetingUserCount.setStatus("current")
+    fileName.setStatus("deprecated")
 _IveCpuUtil_Type = Gauge32
 _IveCpuUtil_Object = MibScalar
 iveCpuUtil = _IveCpuUtil_Object(
@@ -298,24 +286,6 @@ iveNCHits = _IveNCHits_Object(
 iveNCHits.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     iveNCHits.setStatus("current")
-_MeetingHits_Type = Counter64
-_MeetingHits_Object = MibScalar
-meetingHits = _MeetingHits_Object(
-    (1, 3, 6, 1, 4, 1, 12532, 21),
-    _MeetingHits_Type()
-)
-meetingHits.setMaxAccess("read-only")
-if mibBuilder.loadTexts:
-    meetingHits.setStatus("current")
-_MeetingCount_Type = Gauge32
-_MeetingCount_Object = MibScalar
-meetingCount = _MeetingCount_Object(
-    (1, 3, 6, 1, 4, 1, 12532, 22),
-    _MeetingCount_Type()
-)
-meetingCount.setMaxAccess("accessible-for-notify")
-if mibBuilder.loadTexts:
-    meetingCount.setStatus("current")
 _LogName_Type = OctetString
 _LogName_Object = MibScalar
 logName = _LogName_Object(
@@ -403,15 +373,6 @@ logDescription = _LogDescription_Object(
 logDescription.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     logDescription.setStatus("current")
-_IvsName_Type = OctetString
-_IvsName_Object = MibScalar
-ivsName = _IvsName_Object(
-    (1, 3, 6, 1, 4, 1, 12532, 30),
-    _IvsName_Type()
-)
-ivsName.setMaxAccess("accessible-for-notify")
-if mibBuilder.loadTexts:
-    ivsName.setStatus("deprecated")
 _OcspResponderURL_Type = OctetString
 _OcspResponderURL_Object = MibScalar
 ocspResponderURL = _OcspResponderURL_Object(
@@ -427,7 +388,7 @@ fanDescription = _FanDescription_Object(
     (1, 3, 6, 1, 4, 1, 12532, 32),
     _FanDescription_Type()
 )
-fanDescription.setMaxAccess("accessible-for-notify")
+fanDescription.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     fanDescription.setStatus("current")
 _PsDescription_Type = OctetString
@@ -436,7 +397,7 @@ psDescription = _PsDescription_Object(
     (1, 3, 6, 1, 4, 1, 12532, 33),
     _PsDescription_Type()
 )
-psDescription.setMaxAccess("accessible-for-notify")
+psDescription.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     psDescription.setStatus("current")
 _RaidDescription_Type = OctetString
@@ -508,7 +469,7 @@ nodeName = _NodeName_Object(
     (1, 3, 6, 1, 4, 1, 12532, 41),
     _NodeName_Type()
 )
-nodeName.setMaxAccess("accessible-for-notify")
+nodeName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     nodeName.setStatus("current")
 _IveTemperature_Type = Gauge32
@@ -574,13 +535,13 @@ iveTotalSignedInUsers = _IveTotalSignedInUsers_Object(
 iveTotalSignedInUsers.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     iveTotalSignedInUsers.setStatus("current")
-_VpnACLSPercentage_Type = Gauge32
+_VpnACLSPercentage_Type = OctetString
 _VpnACLSPercentage_Object = MibScalar
 vpnACLSPercentage = _VpnACLSPercentage_Object(
     (1, 3, 6, 1, 4, 1, 12532, 49),
     _VpnACLSPercentage_Type()
 )
-vpnACLSPercentage.setMaxAccess("accessible-for-notify")
+vpnACLSPercentage.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vpnACLSPercentage.setStatus("current")
 _VpnACLSCount_Type = Gauge32
@@ -589,7 +550,7 @@ vpnACLSCount = _VpnACLSCount_Object(
     (1, 3, 6, 1, 4, 1, 12532, 50),
     _VpnACLSCount_Type()
 )
-vpnACLSCount.setMaxAccess("accessible-for-notify")
+vpnACLSCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vpnACLSCount.setStatus("current")
 _BlockedIPv6_Type = OctetString
@@ -601,6 +562,42 @@ blockedIPv6 = _BlockedIPv6_Object(
 blockedIPv6.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     blockedIPv6.setStatus("current")
+_IveNamedUsers_Type = Gauge32
+_IveNamedUsers_Object = MibScalar
+iveNamedUsers = _IveNamedUsers_Object(
+    (1, 3, 6, 1, 4, 1, 12532, 52),
+    _IveNamedUsers_Type()
+)
+iveNamedUsers.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    iveNamedUsers.setStatus("current")
+_NamedUserStorePercent_Type = Gauge32
+_NamedUserStorePercent_Object = MibScalar
+namedUserStorePercent = _NamedUserStorePercent_Object(
+    (1, 3, 6, 1, 4, 1, 12532, 53),
+    _NamedUserStorePercent_Type()
+)
+namedUserStorePercent.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    namedUserStorePercent.setStatus("current")
+_PclsRemainingGracePeriod_Type = Gauge32
+_PclsRemainingGracePeriod_Object = MibScalar
+pclsRemainingGracePeriod = _PclsRemainingGracePeriod_Object(
+    (1, 3, 6, 1, 4, 1, 12532, 54),
+    _PclsRemainingGracePeriod_Type()
+)
+pclsRemainingGracePeriod.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    pclsRemainingGracePeriod.setStatus("current")
+_IveMaxConcurrentUsersLicenseCapacity_Type = Gauge32
+_IveMaxConcurrentUsersLicenseCapacity_Object = MibScalar
+iveMaxConcurrentUsersLicenseCapacity = _IveMaxConcurrentUsersLicenseCapacity_Object(
+    (1, 3, 6, 1, 4, 1, 12532, 55),
+    _IveMaxConcurrentUsersLicenseCapacity_Type()
+)
+iveMaxConcurrentUsersLicenseCapacity.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    iveMaxConcurrentUsersLicenseCapacity.setStatus("current")
 _IveTraps_ObjectIdentity = ObjectIdentity
 iveTraps = _IveTraps_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12532, 251)
@@ -609,9 +606,117 @@ _IveSAProduct_ObjectIdentity = ObjectIdentity
 iveSAProduct = _IveSAProduct_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12532, 252)
 )
+_IveProductSA700_ObjectIdentity = ObjectIdentity
+iveProductSA700 = _IveProductSA700_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 1)
+)
+_IveSA700_ObjectIdentity = ObjectIdentity
+iveSA700 = _IveSA700_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 1, 1)
+)
+_IveProductSA2000_ObjectIdentity = ObjectIdentity
+iveProductSA2000 = _IveProductSA2000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 2)
+)
+_IveSA2000_ObjectIdentity = ObjectIdentity
+iveSA2000 = _IveSA2000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 2, 1)
+)
+_IveProductSA2500_ObjectIdentity = ObjectIdentity
+iveProductSA2500 = _IveProductSA2500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 3)
+)
+_IveSA2500_ObjectIdentity = ObjectIdentity
+iveSA2500 = _IveSA2500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 3, 1)
+)
+_IveProductSA4000_ObjectIdentity = ObjectIdentity
+iveProductSA4000 = _IveProductSA4000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 4)
+)
+_IveSA4000_ObjectIdentity = ObjectIdentity
+iveSA4000 = _IveSA4000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 4, 1)
+)
+_IveSA4000FIPS_ObjectIdentity = ObjectIdentity
+iveSA4000FIPS = _IveSA4000FIPS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 4, 2)
+)
+_IveProductSA4500_ObjectIdentity = ObjectIdentity
+iveProductSA4500 = _IveProductSA4500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 5)
+)
+_IveSA4500_ObjectIdentity = ObjectIdentity
+iveSA4500 = _IveSA4500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 5, 1)
+)
+_IveSA4500FIPS_ObjectIdentity = ObjectIdentity
+iveSA4500FIPS = _IveSA4500FIPS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 5, 2)
+)
+_IveProductSA6000_ObjectIdentity = ObjectIdentity
+iveProductSA6000 = _IveProductSA6000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 6)
+)
+_IveSA6000_ObjectIdentity = ObjectIdentity
+iveSA6000 = _IveSA6000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 6, 1)
+)
+_IveSA6000FIPS_ObjectIdentity = ObjectIdentity
+iveSA6000FIPS = _IveSA6000FIPS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 6, 2)
+)
+_IveProductSA6500_ObjectIdentity = ObjectIdentity
+iveProductSA6500 = _IveProductSA6500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 7)
+)
+_IveSA6500_ObjectIdentity = ObjectIdentity
+iveSA6500 = _IveSA6500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 7, 1)
+)
+_IveSA6500FIPS_ObjectIdentity = ObjectIdentity
+iveSA6500FIPS = _IveSA6500FIPS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 252, 7, 2)
+)
 _IveICProduct_ObjectIdentity = ObjectIdentity
 iveICProduct = _IveICProduct_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12532, 253)
+)
+_IveProductIC4000_ObjectIdentity = ObjectIdentity
+iveProductIC4000 = _IveProductIC4000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 1)
+)
+_IveIC4000_ObjectIdentity = ObjectIdentity
+iveIC4000 = _IveIC4000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 1, 1)
+)
+_IveProductIC4500_ObjectIdentity = ObjectIdentity
+iveProductIC4500 = _IveProductIC4500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 2)
+)
+_IveIC4500_ObjectIdentity = ObjectIdentity
+iveIC4500 = _IveIC4500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 2, 1)
+)
+_IveProductIC6000_ObjectIdentity = ObjectIdentity
+iveProductIC6000 = _IveProductIC6000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 3)
+)
+_IveIC6000_ObjectIdentity = ObjectIdentity
+iveIC6000 = _IveIC6000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 3, 1)
+)
+_IveIC6000FIPS_ObjectIdentity = ObjectIdentity
+iveIC6000FIPS = _IveIC6000FIPS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 3, 2)
+)
+_IveProductIC6500_ObjectIdentity = ObjectIdentity
+iveProductIC6500 = _IveProductIC6500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 4)
+)
+_IveIC6500_ObjectIdentity = ObjectIdentity
+iveIC6500 = _IveIC6500_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 253, 4, 1)
 )
 _IveMAGProduct_ObjectIdentity = ObjectIdentity
 iveMAGProduct = _IveMAGProduct_ObjectIdentity(
@@ -697,20 +802,20 @@ _IvePSA5000_ObjectIdentity = ObjectIdentity
 ivePSA5000 = _IvePSA5000_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12532, 256, 3, 1)
 )
-_IveProductPSA7000f_ObjectIdentity = ObjectIdentity
-iveProductPSA7000f = _IveProductPSA7000f_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 12532, 256, 4)
-)
-_IvePSA7000f_ObjectIdentity = ObjectIdentity
-ivePSA7000f = _IvePSA7000f_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 12532, 256, 4, 1)
-)
 _IveProductPSA7000c_ObjectIdentity = ObjectIdentity
 iveProductPSA7000c = _IveProductPSA7000c_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 12532, 256, 5)
+    (1, 3, 6, 1, 4, 1, 12532, 256, 4)
 )
 _IvePSA7000c_ObjectIdentity = ObjectIdentity
 ivePSA7000c = _IvePSA7000c_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 256, 4, 1)
+)
+_IveProductPSA7000f_ObjectIdentity = ObjectIdentity
+iveProductPSA7000f = _IveProductPSA7000f_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 256, 5)
+)
+_IvePSA7000f_ObjectIdentity = ObjectIdentity
+ivePSA7000f = _IvePSA7000f_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12532, 256, 5, 1)
 )
 _IveProductPSA10000_ObjectIdentity = ObjectIdentity
@@ -720,6 +825,34 @@ iveProductPSA10000 = _IveProductPSA10000_ObjectIdentity(
 _IvePSA10000_ObjectIdentity = ObjectIdentity
 ivePSA10000 = _IvePSA10000_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 12532, 256, 6, 1)
+)
+_IveISAProduct_ObjectIdentity = ObjectIdentity
+iveISAProduct = _IveISAProduct_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257)
+)
+_IveProductISA6000_ObjectIdentity = ObjectIdentity
+iveProductISA6000 = _IveProductISA6000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257, 1)
+)
+_IveISA6000_ObjectIdentity = ObjectIdentity
+iveISA6000 = _IveISA6000_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257, 1, 1)
+)
+_IveProductISA8000c_ObjectIdentity = ObjectIdentity
+iveProductISA8000c = _IveProductISA8000c_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257, 2)
+)
+_IveISA8000c_ObjectIdentity = ObjectIdentity
+iveISA8000c = _IveISA8000c_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257, 2, 1)
+)
+_IveProductISA8000f_ObjectIdentity = ObjectIdentity
+iveProductISA8000f = _IveProductISA8000f_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257, 3)
+)
+_IveISA8000f_ObjectIdentity = ObjectIdentity
+iveISA8000f = _IveISA8000f_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 12532, 257, 3, 1)
 )
 
 # Managed Objects groups
@@ -834,33 +967,11 @@ if mibBuilder.loadTexts:
         "current"
     )
 
-meetingUserLimit = NotificationType(
-    (1, 3, 6, 1, 4, 1, 12532, 251, 15)
-)
-meetingUserLimit.setObjects(
-    ("PULSESECURE-PSG-MIB", "meetingUserCount")
-)
-if mibBuilder.loadTexts:
-    meetingUserLimit.setStatus(
-        "current"
-    )
-
 iveRestart = NotificationType(
     (1, 3, 6, 1, 4, 1, 12532, 251, 16)
 )
 if mibBuilder.loadTexts:
     iveRestart.setStatus(
-        "current"
-    )
-
-meetingLimit = NotificationType(
-    (1, 3, 6, 1, 4, 1, 12532, 251, 17)
-)
-meetingLimit.setObjects(
-    ("PULSESECURE-PSG-MIB", "meetingCount")
-)
-if mibBuilder.loadTexts:
-    meetingLimit.setStatus(
         "current"
     )
 
@@ -927,17 +1038,6 @@ swapUtilNotify.setObjects(
 if mibBuilder.loadTexts:
     swapUtilNotify.setStatus(
         "current"
-    )
-
-iveMaxConcurrentUsersVirtualSystem = NotificationType(
-    (1, 3, 6, 1, 4, 1, 12532, 251, 24)
-)
-iveMaxConcurrentUsersVirtualSystem.setObjects(
-    ("PULSESECURE-PSG-MIB", "ivsName")
-)
-if mibBuilder.loadTexts:
-    iveMaxConcurrentUsersVirtualSystem.setStatus(
-        "deprecated"
     )
 
 ocspResponderConnectionFailed = NotificationType(
@@ -1131,6 +1231,28 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+iveMaxNamedUsersSignedIn = NotificationType(
+    (1, 3, 6, 1, 4, 1, 12532, 251, 42)
+)
+iveMaxNamedUsersSignedIn.setObjects(
+    ("PULSESECURE-PSG-MIB", "iveNamedUsers")
+)
+if mibBuilder.loadTexts:
+    iveMaxNamedUsersSignedIn.setStatus(
+        "current"
+    )
+
+iveNamedUsersStoreNearlyFull = NotificationType(
+    (1, 3, 6, 1, 4, 1, 12532, 251, 43)
+)
+iveNamedUsersStoreNearlyFull.setObjects(
+    ("PULSESECURE-PSG-MIB", "namedUserStorePercent")
+)
+if mibBuilder.loadTexts:
+    iveNamedUsersStoreNearlyFull.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -1154,7 +1276,6 @@ mibBuilder.exportSymbols(
        "productName": productName,
        "productVersion": productVersion,
        "fileName": fileName,
-       "meetingUserCount": meetingUserCount,
        "iveCpuUtil": iveCpuUtil,
        "iveMemoryUtil": iveMemoryUtil,
        "iveConcurrentUsers": iveConcurrentUsers,
@@ -1166,8 +1287,6 @@ mibBuilder.exportSymbols(
        "ivetermHits": ivetermHits,
        "iveSAMHits": iveSAMHits,
        "iveNCHits": iveNCHits,
-       "meetingHits": meetingHits,
-       "meetingCount": meetingCount,
        "logName": logName,
        "iveSwapUtil": iveSwapUtil,
        "diskFullPercent": diskFullPercent,
@@ -1178,7 +1297,6 @@ mibBuilder.exportSymbols(
        "logID": logID,
        "logType": logType,
        "logDescription": logDescription,
-       "ivsName": ivsName,
        "ocspResponderURL": ocspResponderURL,
        "fanDescription": fanDescription,
        "psDescription": psDescription,
@@ -1200,6 +1318,10 @@ mibBuilder.exportSymbols(
        "vpnACLSPercentage": vpnACLSPercentage,
        "vpnACLSCount": vpnACLSCount,
        "blockedIPv6": blockedIPv6,
+       "iveNamedUsers": iveNamedUsers,
+       "namedUserStorePercent": namedUserStorePercent,
+       "pclsRemainingGracePeriod": pclsRemainingGracePeriod,
+       "iveMaxConcurrentUsersLicenseCapacity": iveMaxConcurrentUsersLicenseCapacity,
        "iveTraps": iveTraps,
        "iveLogNearlyFull": iveLogNearlyFull,
        "iveLogFull": iveLogFull,
@@ -1212,16 +1334,13 @@ mibBuilder.exportSymbols(
        "archiveServerUnreachable": archiveServerUnreachable,
        "archiveServerLoginFailed": archiveServerLoginFailed,
        "archiveFileTransferFailed": archiveFileTransferFailed,
-       "meetingUserLimit": meetingUserLimit,
        "iveRestart": iveRestart,
-       "meetingLimit": meetingLimit,
        "iveDiskNearlyFull": iveDiskNearlyFull,
        "iveDiskFull": iveDiskFull,
        "logMessageTrap": logMessageTrap,
        "memUtilNotify": memUtilNotify,
        "cpuUtilNotify": cpuUtilNotify,
        "swapUtilNotify": swapUtilNotify,
-       "iveMaxConcurrentUsersVirtualSystem": iveMaxConcurrentUsersVirtualSystem,
        "ocspResponderConnectionFailed": ocspResponderConnectionFailed,
        "iveFanNotify": iveFanNotify,
        "ivePowerSupplyNotify": ivePowerSupplyNotify,
@@ -1239,8 +1358,37 @@ mibBuilder.exportSymbols(
        "iveACLsNearMaxLimit": iveACLsNearMaxLimit,
        "iveACLsCrossedMaxLimit": iveACLsCrossedMaxLimit,
        "iveTooManyFailedLoginAttemptsIPv6": iveTooManyFailedLoginAttemptsIPv6,
+       "iveMaxNamedUsersSignedIn": iveMaxNamedUsersSignedIn,
+       "iveNamedUsersStoreNearlyFull": iveNamedUsersStoreNearlyFull,
        "iveSAProduct": iveSAProduct,
+       "iveProductSA700": iveProductSA700,
+       "iveSA700": iveSA700,
+       "iveProductSA2000": iveProductSA2000,
+       "iveSA2000": iveSA2000,
+       "iveProductSA2500": iveProductSA2500,
+       "iveSA2500": iveSA2500,
+       "iveProductSA4000": iveProductSA4000,
+       "iveSA4000": iveSA4000,
+       "iveSA4000FIPS": iveSA4000FIPS,
+       "iveProductSA4500": iveProductSA4500,
+       "iveSA4500": iveSA4500,
+       "iveSA4500FIPS": iveSA4500FIPS,
+       "iveProductSA6000": iveProductSA6000,
+       "iveSA6000": iveSA6000,
+       "iveSA6000FIPS": iveSA6000FIPS,
+       "iveProductSA6500": iveProductSA6500,
+       "iveSA6500": iveSA6500,
+       "iveSA6500FIPS": iveSA6500FIPS,
        "iveICProduct": iveICProduct,
+       "iveProductIC4000": iveProductIC4000,
+       "iveIC4000": iveIC4000,
+       "iveProductIC4500": iveProductIC4500,
+       "iveIC4500": iveIC4500,
+       "iveProductIC6000": iveProductIC6000,
+       "iveIC6000": iveIC6000,
+       "iveIC6000FIPS": iveIC6000FIPS,
+       "iveProductIC6500": iveProductIC6500,
+       "iveIC6500": iveIC6500,
        "iveMAGProduct": iveMAGProduct,
        "iveProductMAG2600": iveProductMAG2600,
        "iveMAG2600": iveMAG2600,
@@ -1262,10 +1410,17 @@ mibBuilder.exportSymbols(
        "ivePSA3000": ivePSA3000,
        "iveProductPSA5000": iveProductPSA5000,
        "ivePSA5000": ivePSA5000,
-       "iveProductPSA7000f": iveProductPSA7000f,
-       "ivePSA7000f": ivePSA7000f,
        "iveProductPSA7000c": iveProductPSA7000c,
        "ivePSA7000c": ivePSA7000c,
+       "iveProductPSA7000f": iveProductPSA7000f,
+       "ivePSA7000f": ivePSA7000f,
        "iveProductPSA10000": iveProductPSA10000,
-       "ivePSA10000": ivePSA10000}
+       "ivePSA10000": ivePSA10000,
+       "iveISAProduct": iveISAProduct,
+       "iveProductISA6000": iveProductISA6000,
+       "iveISA6000": iveISA6000,
+       "iveProductISA8000c": iveProductISA8000c,
+       "iveISA8000c": iveISA8000c,
+       "iveProductISA8000f": iveProductISA8000f,
+       "iveISA8000f": iveISA8000f}
 )

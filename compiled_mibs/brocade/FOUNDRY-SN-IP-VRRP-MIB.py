@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\FOUNDRY-SN-IP-VRRP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:22:11 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,8 +108,8 @@ snVrrp = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snVrrp.setRevisions(
-        ("2010-06-02 00:00",
-         "2009-09-30 00:00")
+        ("2009-09-30 00:00",
+         "2017-08-07 00:00")
     )
 
 
@@ -125,6 +122,7 @@ if mibBuilder.loadTexts:
 
 class MacAddress(TextualConvention, OctetString):
     status = "current"
+    displayHint = "1x:"
     subtypeSpec = OctetString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(6, 6),

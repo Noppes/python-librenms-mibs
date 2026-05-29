@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\sensatronics\SENSATRONICS-ITTM
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:26:25 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,7 @@ productITTM = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     productITTM.setRevisions(
-        ("2004-02-23 09:00",)
+        ("2005-02-23 09:00",)
     )
 
 
@@ -504,9 +501,48 @@ sensor1DataInt = _Sensor1DataInt_Object(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 1, 3),
     _Sensor1DataInt_Type()
 )
-sensor1DataInt.setMaxAccess("read-write")
+sensor1DataInt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sensor1DataInt.setStatus("current")
+
+
+class _Sensor1SwitchInt_Type(Integer32):
+    """Custom type sensor1SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor1SwitchInt_Type.__name__ = "Integer32"
+_Sensor1SwitchInt_Object = MibScalar
+sensor1SwitchInt = _Sensor1SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 1, 4),
+    _Sensor1SwitchInt_Type()
+)
+sensor1SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor1SwitchInt.setStatus("current")
+
+
+class _Sensor1SwitchStr_Type(DisplayString):
+    """Custom type sensor1SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor1SwitchStr_Type.__name__ = "DisplayString"
+_Sensor1SwitchStr_Object = MibScalar
+sensor1SwitchStr = _Sensor1SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 1, 5),
+    _Sensor1SwitchStr_Type()
+)
+sensor1SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor1SwitchStr.setStatus("current")
 _Sensor2_ObjectIdentity = ObjectIdentity
 sensor2 = _Sensor2_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 2)
@@ -570,6 +606,45 @@ sensor2DataInt = _Sensor2DataInt_Object(
 sensor2DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor2DataInt.setStatus("current")
+
+
+class _Sensor2SwitchInt_Type(Integer32):
+    """Custom type sensor2SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor2SwitchInt_Type.__name__ = "Integer32"
+_Sensor2SwitchInt_Object = MibScalar
+sensor2SwitchInt = _Sensor2SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 2, 4),
+    _Sensor2SwitchInt_Type()
+)
+sensor2SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor2SwitchInt.setStatus("current")
+
+
+class _Sensor2SwitchStr_Type(DisplayString):
+    """Custom type sensor2SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor2SwitchStr_Type.__name__ = "DisplayString"
+_Sensor2SwitchStr_Object = MibScalar
+sensor2SwitchStr = _Sensor2SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 2, 5),
+    _Sensor2SwitchStr_Type()
+)
+sensor2SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor2SwitchStr.setStatus("current")
 _Sensor3_ObjectIdentity = ObjectIdentity
 sensor3 = _Sensor3_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 3)
@@ -633,6 +708,45 @@ sensor3DataInt = _Sensor3DataInt_Object(
 sensor3DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor3DataInt.setStatus("current")
+
+
+class _Sensor3SwitchInt_Type(Integer32):
+    """Custom type sensor3SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor3SwitchInt_Type.__name__ = "Integer32"
+_Sensor3SwitchInt_Object = MibScalar
+sensor3SwitchInt = _Sensor3SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 3, 4),
+    _Sensor3SwitchInt_Type()
+)
+sensor3SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor3SwitchInt.setStatus("current")
+
+
+class _Sensor3SwitchStr_Type(DisplayString):
+    """Custom type sensor3SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor3SwitchStr_Type.__name__ = "DisplayString"
+_Sensor3SwitchStr_Object = MibScalar
+sensor3SwitchStr = _Sensor3SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 3, 5),
+    _Sensor3SwitchStr_Type()
+)
+sensor3SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor3SwitchStr.setStatus("current")
 _Sensor4_ObjectIdentity = ObjectIdentity
 sensor4 = _Sensor4_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 4)
@@ -696,6 +810,45 @@ sensor4DataInt = _Sensor4DataInt_Object(
 sensor4DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor4DataInt.setStatus("current")
+
+
+class _Sensor4SwitchInt_Type(Integer32):
+    """Custom type sensor4SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor4SwitchInt_Type.__name__ = "Integer32"
+_Sensor4SwitchInt_Object = MibScalar
+sensor4SwitchInt = _Sensor4SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 4, 4),
+    _Sensor4SwitchInt_Type()
+)
+sensor4SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor4SwitchInt.setStatus("current")
+
+
+class _Sensor4SwitchStr_Type(DisplayString):
+    """Custom type sensor4SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor4SwitchStr_Type.__name__ = "DisplayString"
+_Sensor4SwitchStr_Object = MibScalar
+sensor4SwitchStr = _Sensor4SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 4, 5),
+    _Sensor4SwitchStr_Type()
+)
+sensor4SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor4SwitchStr.setStatus("current")
 _Sensor5_ObjectIdentity = ObjectIdentity
 sensor5 = _Sensor5_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 5)
@@ -759,6 +912,45 @@ sensor5DataInt = _Sensor5DataInt_Object(
 sensor5DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor5DataInt.setStatus("current")
+
+
+class _Sensor5SwitchInt_Type(Integer32):
+    """Custom type sensor5SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor5SwitchInt_Type.__name__ = "Integer32"
+_Sensor5SwitchInt_Object = MibScalar
+sensor5SwitchInt = _Sensor5SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 5, 4),
+    _Sensor5SwitchInt_Type()
+)
+sensor5SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor5SwitchInt.setStatus("current")
+
+
+class _Sensor5SwitchStr_Type(DisplayString):
+    """Custom type sensor5SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor5SwitchStr_Type.__name__ = "DisplayString"
+_Sensor5SwitchStr_Object = MibScalar
+sensor5SwitchStr = _Sensor5SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 5, 5),
+    _Sensor5SwitchStr_Type()
+)
+sensor5SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor5SwitchStr.setStatus("current")
 _Sensor6_ObjectIdentity = ObjectIdentity
 sensor6 = _Sensor6_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 6)
@@ -822,6 +1014,45 @@ sensor6DataInt = _Sensor6DataInt_Object(
 sensor6DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor6DataInt.setStatus("current")
+
+
+class _Sensor6SwitchInt_Type(Integer32):
+    """Custom type sensor6SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor6SwitchInt_Type.__name__ = "Integer32"
+_Sensor6SwitchInt_Object = MibScalar
+sensor6SwitchInt = _Sensor6SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 6, 4),
+    _Sensor6SwitchInt_Type()
+)
+sensor6SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor6SwitchInt.setStatus("current")
+
+
+class _Sensor6SwitchStr_Type(DisplayString):
+    """Custom type sensor6SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor6SwitchStr_Type.__name__ = "DisplayString"
+_Sensor6SwitchStr_Object = MibScalar
+sensor6SwitchStr = _Sensor6SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 6, 5),
+    _Sensor6SwitchStr_Type()
+)
+sensor6SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor6SwitchStr.setStatus("current")
 _Sensor7_ObjectIdentity = ObjectIdentity
 sensor7 = _Sensor7_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 7)
@@ -885,6 +1116,45 @@ sensor7DataInt = _Sensor7DataInt_Object(
 sensor7DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor7DataInt.setStatus("current")
+
+
+class _Sensor7SwitchInt_Type(Integer32):
+    """Custom type sensor7SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor7SwitchInt_Type.__name__ = "Integer32"
+_Sensor7SwitchInt_Object = MibScalar
+sensor7SwitchInt = _Sensor7SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 7, 4),
+    _Sensor7SwitchInt_Type()
+)
+sensor7SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor7SwitchInt.setStatus("current")
+
+
+class _Sensor7SwitchStr_Type(DisplayString):
+    """Custom type sensor7SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor7SwitchStr_Type.__name__ = "DisplayString"
+_Sensor7SwitchStr_Object = MibScalar
+sensor7SwitchStr = _Sensor7SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 7, 5),
+    _Sensor7SwitchStr_Type()
+)
+sensor7SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor7SwitchStr.setStatus("current")
 _Sensor8_ObjectIdentity = ObjectIdentity
 sensor8 = _Sensor8_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 8)
@@ -948,6 +1218,45 @@ sensor8DataInt = _Sensor8DataInt_Object(
 sensor8DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor8DataInt.setStatus("current")
+
+
+class _Sensor8SwitchInt_Type(Integer32):
+    """Custom type sensor8SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor8SwitchInt_Type.__name__ = "Integer32"
+_Sensor8SwitchInt_Object = MibScalar
+sensor8SwitchInt = _Sensor8SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 8, 4),
+    _Sensor8SwitchInt_Type()
+)
+sensor8SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor8SwitchInt.setStatus("current")
+
+
+class _Sensor8SwitchStr_Type(DisplayString):
+    """Custom type sensor8SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor8SwitchStr_Type.__name__ = "DisplayString"
+_Sensor8SwitchStr_Object = MibScalar
+sensor8SwitchStr = _Sensor8SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 8, 5),
+    _Sensor8SwitchStr_Type()
+)
+sensor8SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor8SwitchStr.setStatus("current")
 _Sensor9_ObjectIdentity = ObjectIdentity
 sensor9 = _Sensor9_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 9)
@@ -1011,6 +1320,45 @@ sensor9DataInt = _Sensor9DataInt_Object(
 sensor9DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor9DataInt.setStatus("current")
+
+
+class _Sensor9SwitchInt_Type(Integer32):
+    """Custom type sensor9SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor9SwitchInt_Type.__name__ = "Integer32"
+_Sensor9SwitchInt_Object = MibScalar
+sensor9SwitchInt = _Sensor9SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 9, 4),
+    _Sensor9SwitchInt_Type()
+)
+sensor9SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor9SwitchInt.setStatus("current")
+
+
+class _Sensor9SwitchStr_Type(DisplayString):
+    """Custom type sensor9SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor9SwitchStr_Type.__name__ = "DisplayString"
+_Sensor9SwitchStr_Object = MibScalar
+sensor9SwitchStr = _Sensor9SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 9, 5),
+    _Sensor9SwitchStr_Type()
+)
+sensor9SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor9SwitchStr.setStatus("current")
 _Sensor10_ObjectIdentity = ObjectIdentity
 sensor10 = _Sensor10_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 10)
@@ -1074,6 +1422,45 @@ sensor10DataInt = _Sensor10DataInt_Object(
 sensor10DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor10DataInt.setStatus("current")
+
+
+class _Sensor10SwitchInt_Type(Integer32):
+    """Custom type sensor10SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor10SwitchInt_Type.__name__ = "Integer32"
+_Sensor10SwitchInt_Object = MibScalar
+sensor10SwitchInt = _Sensor10SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 10, 4),
+    _Sensor10SwitchInt_Type()
+)
+sensor10SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor10SwitchInt.setStatus("current")
+
+
+class _Sensor10SwitchStr_Type(DisplayString):
+    """Custom type sensor10SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor10SwitchStr_Type.__name__ = "DisplayString"
+_Sensor10SwitchStr_Object = MibScalar
+sensor10SwitchStr = _Sensor10SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 10, 5),
+    _Sensor10SwitchStr_Type()
+)
+sensor10SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor10SwitchStr.setStatus("current")
 _Sensor11_ObjectIdentity = ObjectIdentity
 sensor11 = _Sensor11_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 11)
@@ -1137,6 +1524,45 @@ sensor11DataInt = _Sensor11DataInt_Object(
 sensor11DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor11DataInt.setStatus("current")
+
+
+class _Sensor11SwitchInt_Type(Integer32):
+    """Custom type sensor11SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor11SwitchInt_Type.__name__ = "Integer32"
+_Sensor11SwitchInt_Object = MibScalar
+sensor11SwitchInt = _Sensor11SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 11, 4),
+    _Sensor11SwitchInt_Type()
+)
+sensor11SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor11SwitchInt.setStatus("current")
+
+
+class _Sensor11SwitchStr_Type(DisplayString):
+    """Custom type sensor11SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor11SwitchStr_Type.__name__ = "DisplayString"
+_Sensor11SwitchStr_Object = MibScalar
+sensor11SwitchStr = _Sensor11SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 11, 5),
+    _Sensor11SwitchStr_Type()
+)
+sensor11SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor11SwitchStr.setStatus("current")
 _Sensor12_ObjectIdentity = ObjectIdentity
 sensor12 = _Sensor12_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 12)
@@ -1200,6 +1626,45 @@ sensor12DataInt = _Sensor12DataInt_Object(
 sensor12DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor12DataInt.setStatus("current")
+
+
+class _Sensor12SwitchInt_Type(Integer32):
+    """Custom type sensor12SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor12SwitchInt_Type.__name__ = "Integer32"
+_Sensor12SwitchInt_Object = MibScalar
+sensor12SwitchInt = _Sensor12SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 12, 4),
+    _Sensor12SwitchInt_Type()
+)
+sensor12SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor12SwitchInt.setStatus("current")
+
+
+class _Sensor12SwitchStr_Type(DisplayString):
+    """Custom type sensor12SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor12SwitchStr_Type.__name__ = "DisplayString"
+_Sensor12SwitchStr_Object = MibScalar
+sensor12SwitchStr = _Sensor12SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 12, 5),
+    _Sensor12SwitchStr_Type()
+)
+sensor12SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor12SwitchStr.setStatus("current")
 _Sensor13_ObjectIdentity = ObjectIdentity
 sensor13 = _Sensor13_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 13)
@@ -1263,6 +1728,45 @@ sensor13DataInt = _Sensor13DataInt_Object(
 sensor13DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor13DataInt.setStatus("current")
+
+
+class _Sensor13SwitchInt_Type(Integer32):
+    """Custom type sensor13SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor13SwitchInt_Type.__name__ = "Integer32"
+_Sensor13SwitchInt_Object = MibScalar
+sensor13SwitchInt = _Sensor13SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 13, 4),
+    _Sensor13SwitchInt_Type()
+)
+sensor13SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor13SwitchInt.setStatus("current")
+
+
+class _Sensor13SwitchStr_Type(DisplayString):
+    """Custom type sensor13SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor13SwitchStr_Type.__name__ = "DisplayString"
+_Sensor13SwitchStr_Object = MibScalar
+sensor13SwitchStr = _Sensor13SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 13, 5),
+    _Sensor13SwitchStr_Type()
+)
+sensor13SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor13SwitchStr.setStatus("current")
 _Sensor14_ObjectIdentity = ObjectIdentity
 sensor14 = _Sensor14_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 14)
@@ -1326,6 +1830,45 @@ sensor14DataInt = _Sensor14DataInt_Object(
 sensor14DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor14DataInt.setStatus("current")
+
+
+class _Sensor14SwitchInt_Type(Integer32):
+    """Custom type sensor14SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor14SwitchInt_Type.__name__ = "Integer32"
+_Sensor14SwitchInt_Object = MibScalar
+sensor14SwitchInt = _Sensor14SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 14, 4),
+    _Sensor14SwitchInt_Type()
+)
+sensor14SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor14SwitchInt.setStatus("current")
+
+
+class _Sensor14SwitchStr_Type(DisplayString):
+    """Custom type sensor14SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor14SwitchStr_Type.__name__ = "DisplayString"
+_Sensor14SwitchStr_Object = MibScalar
+sensor14SwitchStr = _Sensor14SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 14, 5),
+    _Sensor14SwitchStr_Type()
+)
+sensor14SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor14SwitchStr.setStatus("current")
 _Sensor15_ObjectIdentity = ObjectIdentity
 sensor15 = _Sensor15_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 15)
@@ -1389,6 +1932,45 @@ sensor15DataInt = _Sensor15DataInt_Object(
 sensor15DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor15DataInt.setStatus("current")
+
+
+class _Sensor15SwitchInt_Type(Integer32):
+    """Custom type sensor15SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor15SwitchInt_Type.__name__ = "Integer32"
+_Sensor15SwitchInt_Object = MibScalar
+sensor15SwitchInt = _Sensor15SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 15, 4),
+    _Sensor15SwitchInt_Type()
+)
+sensor15SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor15SwitchInt.setStatus("current")
+
+
+class _Sensor15SwitchStr_Type(DisplayString):
+    """Custom type sensor15SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor15SwitchStr_Type.__name__ = "DisplayString"
+_Sensor15SwitchStr_Object = MibScalar
+sensor15SwitchStr = _Sensor15SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 15, 5),
+    _Sensor15SwitchStr_Type()
+)
+sensor15SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor15SwitchStr.setStatus("current")
 _Sensor16_ObjectIdentity = ObjectIdentity
 sensor16 = _Sensor16_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 16)
@@ -1453,6 +2035,45 @@ sensor16DataInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     sensor16DataInt.setStatus("current")
 
+
+class _Sensor16SwitchInt_Type(Integer32):
+    """Custom type sensor16SwitchInt based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1),
+    )
+
+
+_Sensor16SwitchInt_Type.__name__ = "Integer32"
+_Sensor16SwitchInt_Object = MibScalar
+sensor16SwitchInt = _Sensor16SwitchInt_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 16, 4),
+    _Sensor16SwitchInt_Type()
+)
+sensor16SwitchInt.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor16SwitchInt.setStatus("current")
+
+
+class _Sensor16SwitchStr_Type(DisplayString):
+    """Custom type sensor16SwitchStr based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(6, 6),
+    )
+    fixed_length = 6
+
+
+_Sensor16SwitchStr_Type.__name__ = "DisplayString"
+_Sensor16SwitchStr_Object = MibScalar
+sensor16SwitchStr = _Sensor16SwitchStr_Object(
+    (1, 3, 6, 1, 4, 1, 16174, 1, 1, 1, 3, 16, 5),
+    _Sensor16SwitchStr_Type()
+)
+sensor16SwitchStr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sensor16SwitchStr.setStatus("current")
+
 # Managed Objects groups
 
 
@@ -1499,64 +2120,96 @@ mibBuilder.exportSymbols(
        "sensor1Name": sensor1Name,
        "sensor1DataStr": sensor1DataStr,
        "sensor1DataInt": sensor1DataInt,
+       "sensor1SwitchInt": sensor1SwitchInt,
+       "sensor1SwitchStr": sensor1SwitchStr,
        "sensor2": sensor2,
        "sensor2Name": sensor2Name,
        "sensor2DataStr": sensor2DataStr,
        "sensor2DataInt": sensor2DataInt,
+       "sensor2SwitchInt": sensor2SwitchInt,
+       "sensor2SwitchStr": sensor2SwitchStr,
        "sensor3": sensor3,
        "sensor3Name": sensor3Name,
        "sensor3DataStr": sensor3DataStr,
        "sensor3DataInt": sensor3DataInt,
+       "sensor3SwitchInt": sensor3SwitchInt,
+       "sensor3SwitchStr": sensor3SwitchStr,
        "sensor4": sensor4,
        "sensor4Name": sensor4Name,
        "sensor4DataStr": sensor4DataStr,
        "sensor4DataInt": sensor4DataInt,
+       "sensor4SwitchInt": sensor4SwitchInt,
+       "sensor4SwitchStr": sensor4SwitchStr,
        "sensor5": sensor5,
        "sensor5Name": sensor5Name,
        "sensor5DataStr": sensor5DataStr,
        "sensor5DataInt": sensor5DataInt,
+       "sensor5SwitchInt": sensor5SwitchInt,
+       "sensor5SwitchStr": sensor5SwitchStr,
        "sensor6": sensor6,
        "sensor6Name": sensor6Name,
        "sensor6DataStr": sensor6DataStr,
        "sensor6DataInt": sensor6DataInt,
+       "sensor6SwitchInt": sensor6SwitchInt,
+       "sensor6SwitchStr": sensor6SwitchStr,
        "sensor7": sensor7,
        "sensor7Name": sensor7Name,
        "sensor7DataStr": sensor7DataStr,
        "sensor7DataInt": sensor7DataInt,
+       "sensor7SwitchInt": sensor7SwitchInt,
+       "sensor7SwitchStr": sensor7SwitchStr,
        "sensor8": sensor8,
        "sensor8Name": sensor8Name,
        "sensor8DataStr": sensor8DataStr,
        "sensor8DataInt": sensor8DataInt,
+       "sensor8SwitchInt": sensor8SwitchInt,
+       "sensor8SwitchStr": sensor8SwitchStr,
        "sensor9": sensor9,
        "sensor9Name": sensor9Name,
        "sensor9DataStr": sensor9DataStr,
        "sensor9DataInt": sensor9DataInt,
+       "sensor9SwitchInt": sensor9SwitchInt,
+       "sensor9SwitchStr": sensor9SwitchStr,
        "sensor10": sensor10,
        "sensor10Name": sensor10Name,
        "sensor10DataStr": sensor10DataStr,
        "sensor10DataInt": sensor10DataInt,
+       "sensor10SwitchInt": sensor10SwitchInt,
+       "sensor10SwitchStr": sensor10SwitchStr,
        "sensor11": sensor11,
        "sensor11Name": sensor11Name,
        "sensor11DataStr": sensor11DataStr,
        "sensor11DataInt": sensor11DataInt,
+       "sensor11SwitchInt": sensor11SwitchInt,
+       "sensor11SwitchStr": sensor11SwitchStr,
        "sensor12": sensor12,
        "sensor12Name": sensor12Name,
        "sensor12DataStr": sensor12DataStr,
        "sensor12DataInt": sensor12DataInt,
+       "sensor12SwitchInt": sensor12SwitchInt,
+       "sensor12SwitchStr": sensor12SwitchStr,
        "sensor13": sensor13,
        "sensor13Name": sensor13Name,
        "sensor13DataStr": sensor13DataStr,
        "sensor13DataInt": sensor13DataInt,
+       "sensor13SwitchInt": sensor13SwitchInt,
+       "sensor13SwitchStr": sensor13SwitchStr,
        "sensor14": sensor14,
        "sensor14Name": sensor14Name,
        "sensor14DataStr": sensor14DataStr,
        "sensor14DataInt": sensor14DataInt,
+       "sensor14SwitchInt": sensor14SwitchInt,
+       "sensor14SwitchStr": sensor14SwitchStr,
        "sensor15": sensor15,
        "sensor15Name": sensor15Name,
        "sensor15DataStr": sensor15DataStr,
        "sensor15DataInt": sensor15DataInt,
+       "sensor15SwitchInt": sensor15SwitchInt,
+       "sensor15SwitchStr": sensor15SwitchStr,
        "sensor16": sensor16,
        "sensor16Name": sensor16Name,
        "sensor16DataStr": sensor16DataStr,
-       "sensor16DataInt": sensor16DataInt}
+       "sensor16DataInt": sensor16DataInt,
+       "sensor16SwitchInt": sensor16SwitchInt,
+       "sensor16SwitchStr": sensor16SwitchStr}
 )

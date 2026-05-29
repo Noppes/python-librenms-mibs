@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\riverbed\STEELHEAD-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:23:32 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -109,7 +106,10 @@ steelhead = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     steelhead.setRevisions(
-        ("2012-02-03 00:00",)
+        ("2014-01-07 00:00",
+         "2013-01-25 00:00",
+         "2012-10-17 00:00",
+         "2012-02-03 00:00")
     )
 
 
@@ -2291,6 +2291,54 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+clusterIpv6IncompatiblePeerError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 74)
+)
+if mibBuilder.loadTexts:
+    clusterIpv6IncompatiblePeerError.setStatus(
+        "current"
+    )
+
+flashProtectionFailed = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 75)
+)
+if mibBuilder.loadTexts:
+    flashProtectionFailed.setStatus(
+        "current"
+    )
+
+datastoreNeedClean = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 76)
+)
+if mibBuilder.loadTexts:
+    datastoreNeedClean.setStatus(
+        "current"
+    )
+
+pathSelectionPathDown = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 77)
+)
+if mibBuilder.loadTexts:
+    pathSelectionPathDown.setStatus(
+        "current"
+    )
+
+clusterNeighborIncompatibleError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 80)
+)
+if mibBuilder.loadTexts:
+    clusterNeighborIncompatibleError.setStatus(
+        "current"
+    )
+
+pathSelectionPathProbingError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 81)
+)
+if mibBuilder.loadTexts:
+    pathSelectionPathProbingError.setStatus(
+        "current"
+    )
+
 cpuUtilClear = NotificationType(
     (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 1003)
 )
@@ -2707,6 +2755,38 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+clusterIpv6IncompatiblePeerClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 1074)
+)
+if mibBuilder.loadTexts:
+    clusterIpv6IncompatiblePeerClear.setStatus(
+        "current"
+    )
+
+pathSelectionPathDownClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 1077)
+)
+if mibBuilder.loadTexts:
+    pathSelectionPathDownClear.setStatus(
+        "current"
+    )
+
+clusterNeighborIncompatibleClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 1080)
+)
+if mibBuilder.loadTexts:
+    clusterNeighborIncompatibleClear.setStatus(
+        "current"
+    )
+
+pathSelectionPathProbingErrorClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 1081)
+)
+if mibBuilder.loadTexts:
+    pathSelectionPathProbingErrorClear.setStatus(
+        "current"
+    )
+
 rspGeneralError = NotificationType(
     (1, 3, 6, 1, 4, 1, 17163, 1, 1, 4, 0, 20001)
 )
@@ -2928,6 +3008,12 @@ mibBuilder.exportSymbols(
        "linkDuplex": linkDuplex,
        "linkIoErrors": linkIoErrors,
        "storageProfSwitchFailed": storageProfSwitchFailed,
+       "clusterIpv6IncompatiblePeerError": clusterIpv6IncompatiblePeerError,
+       "flashProtectionFailed": flashProtectionFailed,
+       "datastoreNeedClean": datastoreNeedClean,
+       "pathSelectionPathDown": pathSelectionPathDown,
+       "clusterNeighborIncompatibleError": clusterNeighborIncompatibleError,
+       "pathSelectionPathProbingError": pathSelectionPathProbingError,
        "cpuUtilClear": cpuUtilClear,
        "pagingActivityClear": pagingActivityClear,
        "peerVersionMismatchClear": peerVersionMismatchClear,
@@ -2977,6 +3063,10 @@ mibBuilder.exportSymbols(
        "smbAlertClear": smbAlertClear,
        "linkDuplexClear": linkDuplexClear,
        "linkIoErrorsClear": linkIoErrorsClear,
+       "clusterIpv6IncompatiblePeerClear": clusterIpv6IncompatiblePeerClear,
+       "pathSelectionPathDownClear": pathSelectionPathDownClear,
+       "clusterNeighborIncompatibleClear": clusterNeighborIncompatibleClear,
+       "pathSelectionPathProbingErrorClear": pathSelectionPathProbingErrorClear,
        "rspGeneralError": rspGeneralError,
        "rspServiceError": rspServiceError,
        "rspGeneralClear": rspGeneralClear,

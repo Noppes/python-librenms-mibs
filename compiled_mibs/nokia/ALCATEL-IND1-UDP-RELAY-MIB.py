@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-UDP-RELAY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:23 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-UDP-RELAY-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -51,9 +48,21 @@ if 'mibBuilder' not in globals():
     "alaDhcpClientTraps",
     "routingIND1UdpRelay")
 
+(VlanBitmap,) = mibBuilder.importSymbols(
+    "ALCATEL-IND1-VLAN-STP-MIB",
+    "VlanBitmap")
+
 (InterfaceIndex,) = mibBuilder.importSymbols(
     "IF-MIB",
     "InterfaceIndex")
+
+(InetAddressIPv6,) = mibBuilder.importSymbols(
+    "INET-ADDRESS-MIB",
+    "InetAddressIPv6")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -119,7 +128,7 @@ alcatelIND1UDPRelayMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1UDPRelayMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -151,22 +160,7 @@ class IphelperServIndex(TextualConvention, Integer32):
               14,
               15,
               16,
-              17,
-              18,
-              19,
-              20,
-              21,
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              29,
-              30,
-              31,
-              32)
+              17)
         )
     )
     namedValues = NamedValues(
@@ -186,22 +180,7 @@ class IphelperServIndex(TextualConvention, Integer32):
           ("iphelperOther7", 14),
           ("iphelperOther8", 15),
           ("iphelperOther9", 16),
-          ("iphelperOther10", 17),
-          ("iphelperOther11", 18),
-          ("iphelperOther12", 19),
-          ("iphelperOther13", 20),
-          ("iphelperOther14", 21),
-          ("iphelperOther15", 22),
-          ("iphelperOther16", 23),
-          ("iphelperOther17", 24),
-          ("iphelperOther18", 25),
-          ("iphelperOther19", 26),
-          ("iphelperOther20", 27),
-          ("iphelperOther21", 28),
-          ("iphelperOther22", 29),
-          ("iphelperOther23", 30),
-          ("iphelperOther24", 31),
-          ("iphelperOther25", 32))
+          ("iphelperOther10", 17))
     )
 
 
@@ -217,7 +196,9 @@ class IphelpereOption82ASCIIFieldType(TextualConvention, Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
@@ -227,7 +208,25 @@ class IphelpereOption82ASCIIFieldType(TextualConvention, Integer32):
           ("userString", 3),
           ("interfaceAlias", 4),
           ("vlan", 5),
-          ("interface", 6))
+          ("interface", 6),
+          ("cvlan", 7),
+          ("portAlias", 8))
+    )
+
+
+
+class IphelperOption82CircuitOrRemoteId(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("circuitid", 1),
+          ("remoteid", 2))
     )
 
 
@@ -619,7 +618,7 @@ iphelperxServicePortAssociationStatus = _IphelperxServicePortAssociationStatus_O
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 8, 1, 4),
     _IphelperxServicePortAssociationStatus_Type()
 )
-iphelperxServicePortAssociationStatus.setMaxAccess("read-write")
+iphelperxServicePortAssociationStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperxServicePortAssociationStatus.setStatus("current")
 _IphelperxPortServiceAssociationTable_Object = MibTable
@@ -671,7 +670,7 @@ iphelperxPortServiceAssociationName = _IphelperxPortServiceAssociationName_Objec
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 9, 1, 3),
     _IphelperxPortServiceAssociationName_Type()
 )
-iphelperxPortServiceAssociationName.setMaxAccess("read-write")
+iphelperxPortServiceAssociationName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperxPortServiceAssociationName.setStatus("current")
 _IphelperxPortServiceAssociationStatus_Type = RowStatus
@@ -680,7 +679,7 @@ iphelperxPortServiceAssociationStatus = _IphelperxPortServiceAssociationStatus_O
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 9, 1, 4),
     _IphelperxPortServiceAssociationStatus_Type()
 )
-iphelperxPortServiceAssociationStatus.setMaxAccess("read-write")
+iphelperxPortServiceAssociationStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperxPortServiceAssociationStatus.setStatus("current")
 _IphelperxPropertiesTable_Object = MibTable
@@ -948,7 +947,7 @@ iphelperDhcpSnoopingVlanOpt82DataInsertionStatus = _IphelperDhcpSnoopingVlanOpt8
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 14, 1, 2),
     _IphelperDhcpSnoopingVlanOpt82DataInsertionStatus_Type()
 )
-iphelperDhcpSnoopingVlanOpt82DataInsertionStatus.setMaxAccess("read-write")
+iphelperDhcpSnoopingVlanOpt82DataInsertionStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingVlanOpt82DataInsertionStatus.setStatus("current")
 
@@ -976,7 +975,7 @@ iphelperDhcpSnoopingVlanMacAddrVerificationStatus = _IphelperDhcpSnoopingVlanMac
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 14, 1, 3),
     _IphelperDhcpSnoopingVlanMacAddrVerificationStatus_Type()
 )
-iphelperDhcpSnoopingVlanMacAddrVerificationStatus.setMaxAccess("read-write")
+iphelperDhcpSnoopingVlanMacAddrVerificationStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingVlanMacAddrVerificationStatus.setStatus("current")
 
@@ -1004,7 +1003,7 @@ iphelperDhcpSnoopingVlanTrafficSuppressionStatus = _IphelperDhcpSnoopingVlanTraf
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 14, 1, 4),
     _IphelperDhcpSnoopingVlanTrafficSuppressionStatus_Type()
 )
-iphelperDhcpSnoopingVlanTrafficSuppressionStatus.setMaxAccess("read-write")
+iphelperDhcpSnoopingVlanTrafficSuppressionStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingVlanTrafficSuppressionStatus.setStatus("current")
 _IphelperDhcpSnoopingVlanStatus_Type = RowStatus
@@ -1013,7 +1012,7 @@ iphelperDhcpSnoopingVlanStatus = _IphelperDhcpSnoopingVlanStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 14, 1, 5),
     _IphelperDhcpSnoopingVlanStatus_Type()
 )
-iphelperDhcpSnoopingVlanStatus.setMaxAccess("read-write")
+iphelperDhcpSnoopingVlanStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingVlanStatus.setStatus("current")
 _IphelperDhcpSnoopingPortTable_Object = MibTable
@@ -1211,7 +1210,7 @@ iphelperDhcpSnoopingBindingIpAddress = _IphelperDhcpSnoopingBindingIpAddress_Obj
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 16, 1, 3),
     _IphelperDhcpSnoopingBindingIpAddress_Type()
 )
-iphelperDhcpSnoopingBindingIpAddress.setMaxAccess("read-write")
+iphelperDhcpSnoopingBindingIpAddress.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingBindingIpAddress.setStatus("current")
 _IphelperDhcpSnoopingBindingVlan_Type = Unsigned32
@@ -1220,7 +1219,7 @@ iphelperDhcpSnoopingBindingVlan = _IphelperDhcpSnoopingBindingVlan_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 16, 1, 4),
     _IphelperDhcpSnoopingBindingVlan_Type()
 )
-iphelperDhcpSnoopingBindingVlan.setMaxAccess("read-write")
+iphelperDhcpSnoopingBindingVlan.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingBindingVlan.setStatus("current")
 _IphelperDhcpSnoopingBindingLeaseTime_Type = Unsigned32
@@ -1257,7 +1256,7 @@ iphelperDhcpSnoopingBindingType = _IphelperDhcpSnoopingBindingType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 16, 1, 6),
     _IphelperDhcpSnoopingBindingType_Type()
 )
-iphelperDhcpSnoopingBindingType.setMaxAccess("read-write")
+iphelperDhcpSnoopingBindingType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingBindingType.setStatus("current")
 _IphelperDhcpSnoopingBindingRowStatus_Type = RowStatus
@@ -1266,9 +1265,37 @@ iphelperDhcpSnoopingBindingRowStatus = _IphelperDhcpSnoopingBindingRowStatus_Obj
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 16, 1, 7),
     _IphelperDhcpSnoopingBindingRowStatus_Type()
 )
-iphelperDhcpSnoopingBindingRowStatus.setMaxAccess("read-write")
+iphelperDhcpSnoopingBindingRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     iphelperDhcpSnoopingBindingRowStatus.setStatus("current")
+
+
+class _IphelperDhcpSnoopingBindingRemoteFlag_Type(Integer32):
+    """Custom type iphelperDhcpSnoopingBindingRemoteFlag based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("remote", 1),
+          ("local", 2))
+    )
+
+
+_IphelperDhcpSnoopingBindingRemoteFlag_Type.__name__ = "Integer32"
+_IphelperDhcpSnoopingBindingRemoteFlag_Object = MibTableColumn
+iphelperDhcpSnoopingBindingRemoteFlag = _IphelperDhcpSnoopingBindingRemoteFlag_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 16, 1, 8),
+    _IphelperDhcpSnoopingBindingRemoteFlag_Type()
+)
+iphelperDhcpSnoopingBindingRemoteFlag.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingBindingRemoteFlag.setStatus("current")
 
 
 class _IphelperDhcpSnooping_Type(Integer32):
@@ -1537,7 +1564,8 @@ class _IphelperDhcpOption82FormatType_Type(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -1546,7 +1574,8 @@ class _IphelperDhcpOption82FormatType_Type(Integer32):
           ("userString", 3),
           ("interfaceAlias", 4),
           ("autoInterfaceAlias", 5),
-          ("ascii", 6))
+          ("ascii", 6),
+          ("portAlias", 7))
     )
 
 
@@ -1649,7 +1678,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField1 = _IphelperDhcpSnoopingOption82For
 )
 iphelperDhcpSnoopingOption82FormatASCIIField1.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField1.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField1.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField1StringValue_Type(DisplayString):
@@ -1668,7 +1697,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField1StringValue = _IphelperDhcpSnooping
 )
 iphelperDhcpSnoopingOption82FormatASCIIField1StringValue.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField1StringValue.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField1StringValue.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField2_Type(IphelpereOption82ASCIIFieldType):
@@ -1684,7 +1713,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField2 = _IphelperDhcpSnoopingOption82For
 )
 iphelperDhcpSnoopingOption82FormatASCIIField2.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField2.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField2.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField2StringValue_Type(DisplayString):
@@ -1703,7 +1732,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField2StringValue = _IphelperDhcpSnooping
 )
 iphelperDhcpSnoopingOption82FormatASCIIField2StringValue.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField2StringValue.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField2StringValue.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField3_Type(IphelpereOption82ASCIIFieldType):
@@ -1719,7 +1748,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField3 = _IphelperDhcpSnoopingOption82For
 )
 iphelperDhcpSnoopingOption82FormatASCIIField3.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField3.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField3.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField3StringValue_Type(DisplayString):
@@ -1738,7 +1767,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField3StringValue = _IphelperDhcpSnooping
 )
 iphelperDhcpSnoopingOption82FormatASCIIField3StringValue.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField3StringValue.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField3StringValue.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField4_Type(IphelpereOption82ASCIIFieldType):
@@ -1754,7 +1783,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField4 = _IphelperDhcpSnoopingOption82For
 )
 iphelperDhcpSnoopingOption82FormatASCIIField4.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField4.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField4.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField4StringValue_Type(DisplayString):
@@ -1773,7 +1802,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField4StringValue = _IphelperDhcpSnooping
 )
 iphelperDhcpSnoopingOption82FormatASCIIField4StringValue.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField4StringValue.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField4StringValue.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField5_Type(IphelpereOption82ASCIIFieldType):
@@ -1789,7 +1818,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField5 = _IphelperDhcpSnoopingOption82For
 )
 iphelperDhcpSnoopingOption82FormatASCIIField5.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField5.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField5.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIField5StringValue_Type(DisplayString):
@@ -1808,7 +1837,7 @@ iphelperDhcpSnoopingOption82FormatASCIIField5StringValue = _IphelperDhcpSnooping
 )
 iphelperDhcpSnoopingOption82FormatASCIIField5StringValue.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIField5StringValue.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIField5StringValue.setStatus("deprecated")
 
 
 class _IphelperDhcpSnoopingOption82FormatASCIIDelimiter_Type(DisplayString):
@@ -1827,7 +1856,1299 @@ iphelperDhcpSnoopingOption82FormatASCIIDelimiter = _IphelperDhcpSnoopingOption82
 )
 iphelperDhcpSnoopingOption82FormatASCIIDelimiter.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    iphelperDhcpSnoopingOption82FormatASCIIDelimiter.setStatus("current")
+    iphelperDhcpSnoopingOption82FormatASCIIDelimiter.setStatus("deprecated")
+_IphelperDhcpSourceFilterVlanTable_Object = MibTable
+iphelperDhcpSourceFilterVlanTable = _IphelperDhcpSourceFilterVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 42)
+)
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterVlanTable.setStatus("current")
+_IphelperDhcpSourceFilterVlanEntry_Object = MibTableRow
+iphelperDhcpSourceFilterVlanEntry = _IphelperDhcpSourceFilterVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 42, 1)
+)
+iphelperDhcpSourceFilterVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSourceFilterVlanNumber"),
+)
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterVlanEntry.setStatus("current")
+
+
+class _IphelperDhcpSourceFilterVlanNumber_Type(Integer32):
+    """Custom type iphelperDhcpSourceFilterVlanNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_IphelperDhcpSourceFilterVlanNumber_Type.__name__ = "Integer32"
+_IphelperDhcpSourceFilterVlanNumber_Object = MibTableColumn
+iphelperDhcpSourceFilterVlanNumber = _IphelperDhcpSourceFilterVlanNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 42, 1, 1),
+    _IphelperDhcpSourceFilterVlanNumber_Type()
+)
+iphelperDhcpSourceFilterVlanNumber.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterVlanNumber.setStatus("current")
+
+
+class _IphelperDhcpSourceFilterVlanFilteringStatus_Type(Integer32):
+    """Custom type iphelperDhcpSourceFilterVlanFilteringStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_IphelperDhcpSourceFilterVlanFilteringStatus_Type.__name__ = "Integer32"
+_IphelperDhcpSourceFilterVlanFilteringStatus_Object = MibTableColumn
+iphelperDhcpSourceFilterVlanFilteringStatus = _IphelperDhcpSourceFilterVlanFilteringStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 42, 1, 2),
+    _IphelperDhcpSourceFilterVlanFilteringStatus_Type()
+)
+iphelperDhcpSourceFilterVlanFilteringStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterVlanFilteringStatus.setStatus("current")
+
+
+class _IphelperOption82Policy_Type(Integer32):
+    """Custom type iphelperOption82Policy based on Integer32"""
+    defaultValue = 3
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("drop", 1),
+          ("keep", 2),
+          ("replace", 3))
+    )
+
+
+_IphelperOption82Policy_Type.__name__ = "Integer32"
+_IphelperOption82Policy_Object = MibScalar
+iphelperOption82Policy = _IphelperOption82Policy_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 43),
+    _IphelperOption82Policy_Type()
+)
+iphelperOption82Policy.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperOption82Policy.setStatus("current")
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableTable_Object = MibTable
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableTable = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44)
+)
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableTable.setStatus("current")
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry_Object = MibTableRow
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1)
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex"),
+)
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry.setStatus("current")
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex_Type = IphelperOption82CircuitOrRemoteId
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 1),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex.setStatus("current")
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1_Type = IphelpereOption82ASCIIFieldType
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1 = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 2),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal_Type(SnmpAdminString):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal based on SnmpAdminString"""
+    defaultValue = OctetString(" - ")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal_Type.__name__ = "SnmpAdminString"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 3),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2_Type(IphelpereOption82ASCIIFieldType):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2 based on IphelpereOption82ASCIIFieldType"""
+    defaultValue = 0
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2_Type.__name__ = "IphelpereOption82ASCIIFieldType"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2 = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 4),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal_Type(SnmpAdminString):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal based on SnmpAdminString"""
+    defaultValue = OctetString(" - ")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal_Type.__name__ = "SnmpAdminString"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 5),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3_Type(IphelpereOption82ASCIIFieldType):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3 based on IphelpereOption82ASCIIFieldType"""
+    defaultValue = 0
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3_Type.__name__ = "IphelpereOption82ASCIIFieldType"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3 = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 6),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal_Type(SnmpAdminString):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal based on SnmpAdminString"""
+    defaultValue = OctetString(" - ")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal_Type.__name__ = "SnmpAdminString"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 7),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4_Type(IphelpereOption82ASCIIFieldType):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4 based on IphelpereOption82ASCIIFieldType"""
+    defaultValue = 0
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4_Type.__name__ = "IphelpereOption82ASCIIFieldType"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4 = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 8),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal_Type(SnmpAdminString):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal based on SnmpAdminString"""
+    defaultValue = OctetString(" - ")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal_Type.__name__ = "SnmpAdminString"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 9),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5_Type(IphelpereOption82ASCIIFieldType):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5 based on IphelpereOption82ASCIIFieldType"""
+    defaultValue = 0
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5_Type.__name__ = "IphelpereOption82ASCIIFieldType"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5 = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 10),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal_Type(SnmpAdminString):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal based on SnmpAdminString"""
+    defaultValue = OctetString(" - ")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal_Type.__name__ = "SnmpAdminString"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 11),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal.setStatus("current")
+
+
+class _IphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter_Type(SnmpAdminString):
+    """Custom type iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter based on SnmpAdminString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter_Type.__name__ = "SnmpAdminString"
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 12),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter.setStatus("current")
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus_Type = RowStatus
+_IphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus_Object = MibTableColumn
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus = _IphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 44, 1, 13),
+    _IphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus_Type()
+)
+iphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus.setStatus("current")
+_AlaMdnsGreTunnelName_Type = DisplayString
+_AlaMdnsGreTunnelName_Object = MibScalar
+alaMdnsGreTunnelName = _AlaMdnsGreTunnelName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 45),
+    _AlaMdnsGreTunnelName_Type()
+)
+alaMdnsGreTunnelName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaMdnsGreTunnelName.setStatus("current")
+
+
+class _AlaMdnsAdminStatus_Type(Integer32):
+    """Custom type alaMdnsAdminStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_AlaMdnsAdminStatus_Type.__name__ = "Integer32"
+_AlaMdnsAdminStatus_Object = MibScalar
+alaMdnsAdminStatus = _AlaMdnsAdminStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 46),
+    _AlaMdnsAdminStatus_Type()
+)
+alaMdnsAdminStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaMdnsAdminStatus.setStatus("current")
+_AlaMdnsFloodVlans_Type = VlanBitmap
+_AlaMdnsFloodVlans_Object = MibScalar
+alaMdnsFloodVlans = _AlaMdnsFloodVlans_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 47),
+    _AlaMdnsFloodVlans_Type()
+)
+alaMdnsFloodVlans.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaMdnsFloodVlans.setStatus("current")
+_IphelperDhcpSourceFilterAllowSubnetTable_Object = MibTable
+iphelperDhcpSourceFilterAllowSubnetTable = _IphelperDhcpSourceFilterAllowSubnetTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 48)
+)
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterAllowSubnetTable.setStatus("current")
+_IphelperDhcpSourceFilterAllowIpEntry_Object = MibTableRow
+iphelperDhcpSourceFilterAllowIpEntry = _IphelperDhcpSourceFilterAllowIpEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 48, 1)
+)
+iphelperDhcpSourceFilterAllowIpEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSourceFilterExpIpAddress"),
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSourceFilterExpIpMask"),
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSourceFilterVlan"),
+)
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterAllowIpEntry.setStatus("current")
+_IphelperDhcpSourceFilterExpIpAddress_Type = IpAddress
+_IphelperDhcpSourceFilterExpIpAddress_Object = MibTableColumn
+iphelperDhcpSourceFilterExpIpAddress = _IphelperDhcpSourceFilterExpIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 48, 1, 1),
+    _IphelperDhcpSourceFilterExpIpAddress_Type()
+)
+iphelperDhcpSourceFilterExpIpAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterExpIpAddress.setStatus("current")
+_IphelperDhcpSourceFilterExpIpMask_Type = IpAddress
+_IphelperDhcpSourceFilterExpIpMask_Object = MibTableColumn
+iphelperDhcpSourceFilterExpIpMask = _IphelperDhcpSourceFilterExpIpMask_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 48, 1, 2),
+    _IphelperDhcpSourceFilterExpIpMask_Type()
+)
+iphelperDhcpSourceFilterExpIpMask.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterExpIpMask.setStatus("current")
+
+
+class _IphelperDhcpSourceFilterVlan_Type(Integer32):
+    """Custom type iphelperDhcpSourceFilterVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_IphelperDhcpSourceFilterVlan_Type.__name__ = "Integer32"
+_IphelperDhcpSourceFilterVlan_Object = MibTableColumn
+iphelperDhcpSourceFilterVlan = _IphelperDhcpSourceFilterVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 48, 1, 3),
+    _IphelperDhcpSourceFilterVlan_Type()
+)
+iphelperDhcpSourceFilterVlan.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterVlan.setStatus("current")
+
+
+class _IphelperDhcpSourceFilterExpIpStatus_Type(Integer32):
+    """Custom type iphelperDhcpSourceFilterExpIpStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_IphelperDhcpSourceFilterExpIpStatus_Type.__name__ = "Integer32"
+_IphelperDhcpSourceFilterExpIpStatus_Object = MibTableColumn
+iphelperDhcpSourceFilterExpIpStatus = _IphelperDhcpSourceFilterExpIpStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 48, 1, 4),
+    _IphelperDhcpSourceFilterExpIpStatus_Type()
+)
+iphelperDhcpSourceFilterExpIpStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSourceFilterExpIpStatus.setStatus("current")
+
+
+class _IphelperDhcpSnoopingTrapStatus_Type(Integer32):
+    """Custom type iphelperDhcpSnoopingTrapStatus based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("reverse-enable", 1),
+          ("hardware", 2),
+          ("software", 3))
+    )
+
+
+_IphelperDhcpSnoopingTrapStatus_Type.__name__ = "Integer32"
+_IphelperDhcpSnoopingTrapStatus_Object = MibScalar
+iphelperDhcpSnoopingTrapStatus = _IphelperDhcpSnoopingTrapStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 49),
+    _IphelperDhcpSnoopingTrapStatus_Type()
+)
+iphelperDhcpSnoopingTrapStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingTrapStatus.setStatus("current")
+
+
+class _IphelperDhcpSnoopingArpAllowStatus_Type(Integer32):
+    """Custom type iphelperDhcpSnoopingArpAllowStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_IphelperDhcpSnoopingArpAllowStatus_Type.__name__ = "Integer32"
+_IphelperDhcpSnoopingArpAllowStatus_Object = MibScalar
+iphelperDhcpSnoopingArpAllowStatus = _IphelperDhcpSnoopingArpAllowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 1, 50),
+    _IphelperDhcpSnoopingArpAllowStatus_Type()
+)
+iphelperDhcpSnoopingArpAllowStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    iphelperDhcpSnoopingArpAllowStatus.setStatus("current")
+_Ipv6helperMIB_ObjectIdentity = ObjectIdentity
+ipv6helperMIB = _Ipv6helperMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2)
+)
+_Ipv6helperTable_Object = MibTable
+ipv6helperTable = _Ipv6helperTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 1)
+)
+if mibBuilder.loadTexts:
+    ipv6helperTable.setStatus("current")
+_Ipv6helperEntry_Object = MibTableRow
+ipv6helperEntry = _Ipv6helperEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 1, 1)
+)
+ipv6helperEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperForwAddr"),
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperVlan"),
+)
+if mibBuilder.loadTexts:
+    ipv6helperEntry.setStatus("current")
+_Ipv6helperForwAddr_Type = InetAddressIPv6
+_Ipv6helperForwAddr_Object = MibTableColumn
+ipv6helperForwAddr = _Ipv6helperForwAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 1, 1, 1),
+    _Ipv6helperForwAddr_Type()
+)
+ipv6helperForwAddr.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ipv6helperForwAddr.setStatus("current")
+
+
+class _Ipv6helperVlan_Type(Integer32):
+    """Custom type ipv6helperVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 4094),
+    )
+
+
+_Ipv6helperVlan_Type.__name__ = "Integer32"
+_Ipv6helperVlan_Object = MibTableColumn
+ipv6helperVlan = _Ipv6helperVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 1, 1, 2),
+    _Ipv6helperVlan_Type()
+)
+ipv6helperVlan.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ipv6helperVlan.setStatus("current")
+_Ipv6helperStatus_Type = RowStatus
+_Ipv6helperStatus_Object = MibTableColumn
+ipv6helperStatus = _Ipv6helperStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 1, 1, 3),
+    _Ipv6helperStatus_Type()
+)
+ipv6helperStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ipv6helperStatus.setStatus("current")
+
+
+class _Ipv6helperForwardOption_Type(Integer32):
+    """Custom type ipv6helperForwardOption based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("standard", 1),
+          ("perVlanOnly", 2))
+    )
+
+
+_Ipv6helperForwardOption_Type.__name__ = "Integer32"
+_Ipv6helperForwardOption_Object = MibScalar
+ipv6helperForwardOption = _Ipv6helperForwardOption_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 2),
+    _Ipv6helperForwardOption_Type()
+)
+ipv6helperForwardOption.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperForwardOption.setStatus("current")
+
+
+class _Ipv6helperMaxHops_Type(Unsigned32):
+    """Custom type ipv6helperMaxHops based on Unsigned32"""
+    defaultValue = 32
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 32),
+    )
+
+
+_Ipv6helperMaxHops_Type.__name__ = "Unsigned32"
+_Ipv6helperMaxHops_Object = MibScalar
+ipv6helperMaxHops = _Ipv6helperMaxHops_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 3),
+    _Ipv6helperMaxHops_Type()
+)
+ipv6helperMaxHops.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperMaxHops.setStatus("current")
+
+
+class _Ipv6helperDhcpSnooping_Type(Integer32):
+    """Custom type ipv6helperDhcpSnooping based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("switchLevel", 1),
+          ("disabled", 2),
+          ("vlanLevel", 3))
+    )
+
+
+_Ipv6helperDhcpSnooping_Type.__name__ = "Integer32"
+_Ipv6helperDhcpSnooping_Object = MibScalar
+ipv6helperDhcpSnooping = _Ipv6helperDhcpSnooping_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 4),
+    _Ipv6helperDhcpSnooping_Type()
+)
+ipv6helperDhcpSnooping.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnooping.setStatus("current")
+_Ipv6helperDhcpSnoopingVlanTable_Object = MibTable
+ipv6helperDhcpSnoopingVlanTable = _Ipv6helperDhcpSnoopingVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 5)
+)
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingVlanTable.setStatus("current")
+_Ipv6helperDhcpSnoopingVlanEntry_Object = MibTableRow
+ipv6helperDhcpSnoopingVlanEntry = _Ipv6helperDhcpSnoopingVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 5, 1)
+)
+ipv6helperDhcpSnoopingVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingVlanNumber"),
+)
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingVlanEntry.setStatus("current")
+
+
+class _Ipv6helperDhcpSnoopingVlanNumber_Type(Integer32):
+    """Custom type ipv6helperDhcpSnoopingVlanNumber based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_Ipv6helperDhcpSnoopingVlanNumber_Type.__name__ = "Integer32"
+_Ipv6helperDhcpSnoopingVlanNumber_Object = MibTableColumn
+ipv6helperDhcpSnoopingVlanNumber = _Ipv6helperDhcpSnoopingVlanNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 5, 1, 1),
+    _Ipv6helperDhcpSnoopingVlanNumber_Type()
+)
+ipv6helperDhcpSnoopingVlanNumber.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingVlanNumber.setStatus("current")
+_Ipv6helperDhcpSnoopingVlanStatus_Type = RowStatus
+_Ipv6helperDhcpSnoopingVlanStatus_Object = MibTableColumn
+ipv6helperDhcpSnoopingVlanStatus = _Ipv6helperDhcpSnoopingVlanStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 5, 1, 2),
+    _Ipv6helperDhcpSnoopingVlanStatus_Type()
+)
+ipv6helperDhcpSnoopingVlanStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingVlanStatus.setStatus("current")
+_Ipv6helperDhcpSnoopingPortTable_Object = MibTable
+ipv6helperDhcpSnoopingPortTable = _Ipv6helperDhcpSnoopingPortTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6)
+)
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingPortTable.setStatus("current")
+_Ipv6helperDhcpSnoopingPortEntry_Object = MibTableRow
+ipv6helperDhcpSnoopingPortEntry = _Ipv6helperDhcpSnoopingPortEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1)
+)
+ipv6helperDhcpSnoopingPortEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingPortIfIndex"),
+)
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingPortEntry.setStatus("current")
+_Ipv6helperDhcpSnoopingPortIfIndex_Type = InterfaceIndex
+_Ipv6helperDhcpSnoopingPortIfIndex_Object = MibTableColumn
+ipv6helperDhcpSnoopingPortIfIndex = _Ipv6helperDhcpSnoopingPortIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 1),
+    _Ipv6helperDhcpSnoopingPortIfIndex_Type()
+)
+ipv6helperDhcpSnoopingPortIfIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingPortIfIndex.setStatus("current")
+
+
+class _Ipv6helperDhcpSnoopingPortTrustMode_Type(Integer32):
+    """Custom type ipv6helperDhcpSnoopingPortTrustMode based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("blocked", 1),
+          ("clientOnlyUntrusted", 2),
+          ("clientOnlyTrusted", 3),
+          ("trusted", 4))
+    )
+
+
+_Ipv6helperDhcpSnoopingPortTrustMode_Type.__name__ = "Integer32"
+_Ipv6helperDhcpSnoopingPortTrustMode_Object = MibTableColumn
+ipv6helperDhcpSnoopingPortTrustMode = _Ipv6helperDhcpSnoopingPortTrustMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 2),
+    _Ipv6helperDhcpSnoopingPortTrustMode_Type()
+)
+ipv6helperDhcpSnoopingPortTrustMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingPortTrustMode.setStatus("current")
+_Ipv6helperSnoopingClientViolation_Type = Counter32
+_Ipv6helperSnoopingClientViolation_Object = MibTableColumn
+ipv6helperSnoopingClientViolation = _Ipv6helperSnoopingClientViolation_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 3),
+    _Ipv6helperSnoopingClientViolation_Type()
+)
+ipv6helperSnoopingClientViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperSnoopingClientViolation.setStatus("current")
+_Ipv6helperSnoopingServerViolation_Type = Counter32
+_Ipv6helperSnoopingServerViolation_Object = MibTableColumn
+ipv6helperSnoopingServerViolation = _Ipv6helperSnoopingServerViolation_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 4),
+    _Ipv6helperSnoopingServerViolation_Type()
+)
+ipv6helperSnoopingServerViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperSnoopingServerViolation.setStatus("current")
+_Ipv6helperSnoopingBindingViolation_Type = Counter32
+_Ipv6helperSnoopingBindingViolation_Object = MibTableColumn
+ipv6helperSnoopingBindingViolation = _Ipv6helperSnoopingBindingViolation_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 5),
+    _Ipv6helperSnoopingBindingViolation_Type()
+)
+ipv6helperSnoopingBindingViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperSnoopingBindingViolation.setStatus("current")
+_Ipv6helperSnoopingInterfaceidViolation_Type = Counter32
+_Ipv6helperSnoopingInterfaceidViolation_Object = MibTableColumn
+ipv6helperSnoopingInterfaceidViolation = _Ipv6helperSnoopingInterfaceidViolation_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 6),
+    _Ipv6helperSnoopingInterfaceidViolation_Type()
+)
+ipv6helperSnoopingInterfaceidViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperSnoopingInterfaceidViolation.setStatus("current")
+
+
+class _Ipv6helperSnoopingPortSourceFilterStatus_Type(Integer32):
+    """Custom type ipv6helperSnoopingPortSourceFilterStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_Ipv6helperSnoopingPortSourceFilterStatus_Type.__name__ = "Integer32"
+_Ipv6helperSnoopingPortSourceFilterStatus_Object = MibTableColumn
+ipv6helperSnoopingPortSourceFilterStatus = _Ipv6helperSnoopingPortSourceFilterStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 6, 1, 7),
+    _Ipv6helperSnoopingPortSourceFilterStatus_Type()
+)
+ipv6helperSnoopingPortSourceFilterStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperSnoopingPortSourceFilterStatus.setStatus("current")
+
+
+class _Ipv6helperDhcpSnoopingBindingStatus_Type(Integer32):
+    """Custom type ipv6helperDhcpSnoopingBindingStatus based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_Ipv6helperDhcpSnoopingBindingStatus_Type.__name__ = "Integer32"
+_Ipv6helperDhcpSnoopingBindingStatus_Object = MibScalar
+ipv6helperDhcpSnoopingBindingStatus = _Ipv6helperDhcpSnoopingBindingStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 7),
+    _Ipv6helperDhcpSnoopingBindingStatus_Type()
+)
+ipv6helperDhcpSnoopingBindingStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingStatus.setStatus("current")
+_Ipv6helperDhcpSnoopingBindingTable_Object = MibTable
+ipv6helperDhcpSnoopingBindingTable = _Ipv6helperDhcpSnoopingBindingTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8)
+)
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingTable.setStatus("current")
+_Ipv6helperDhcpSnoopingBindingEntry_Object = MibTableRow
+ipv6helperDhcpSnoopingBindingEntry = _Ipv6helperDhcpSnoopingBindingEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1)
+)
+ipv6helperDhcpSnoopingBindingEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingLinkLocalAddress"),
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingVlan"),
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingIfIndex"),
+)
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingEntry.setStatus("current")
+_Ipv6helperBindingLinkLocalAddress_Type = InetAddressIPv6
+_Ipv6helperBindingLinkLocalAddress_Object = MibTableColumn
+ipv6helperBindingLinkLocalAddress = _Ipv6helperBindingLinkLocalAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1, 1),
+    _Ipv6helperBindingLinkLocalAddress_Type()
+)
+ipv6helperBindingLinkLocalAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperBindingLinkLocalAddress.setStatus("current")
+
+
+class _Ipv6helperBindingVlan_Type(Integer32):
+    """Custom type ipv6helperBindingVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_Ipv6helperBindingVlan_Type.__name__ = "Integer32"
+_Ipv6helperBindingVlan_Object = MibTableColumn
+ipv6helperBindingVlan = _Ipv6helperBindingVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1, 2),
+    _Ipv6helperBindingVlan_Type()
+)
+ipv6helperBindingVlan.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperBindingVlan.setStatus("current")
+_Ipv6helperBindingIfIndex_Type = InterfaceIndex
+_Ipv6helperBindingIfIndex_Object = MibTableColumn
+ipv6helperBindingIfIndex = _Ipv6helperBindingIfIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1, 3),
+    _Ipv6helperBindingIfIndex_Type()
+)
+ipv6helperBindingIfIndex.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperBindingIfIndex.setStatus("current")
+_Ipv6helperBindingGlobalIpv6Address_Type = InetAddressIPv6
+_Ipv6helperBindingGlobalIpv6Address_Object = MibTableColumn
+ipv6helperBindingGlobalIpv6Address = _Ipv6helperBindingGlobalIpv6Address_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1, 4),
+    _Ipv6helperBindingGlobalIpv6Address_Type()
+)
+ipv6helperBindingGlobalIpv6Address.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ipv6helperBindingGlobalIpv6Address.setStatus("current")
+_Ipv6helperBindingLeaseTime_Type = Unsigned32
+_Ipv6helperBindingLeaseTime_Object = MibTableColumn
+ipv6helperBindingLeaseTime = _Ipv6helperBindingLeaseTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1, 5),
+    _Ipv6helperBindingLeaseTime_Type()
+)
+ipv6helperBindingLeaseTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperBindingLeaseTime.setStatus("current")
+_Ipv6helperBindingRowStatus_Type = RowStatus
+_Ipv6helperBindingRowStatus_Object = MibTableColumn
+ipv6helperBindingRowStatus = _Ipv6helperBindingRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 8, 1, 6),
+    _Ipv6helperBindingRowStatus_Type()
+)
+ipv6helperBindingRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    ipv6helperBindingRowStatus.setStatus("current")
+
+
+class _Ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout_Type(Unsigned32):
+    """Custom type ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout based on Unsigned32"""
+    defaultValue = 300
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(180, 600),
+    )
+
+
+_Ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout_Type.__name__ = "Unsigned32"
+_Ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout_Object = MibScalar
+ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout = _Ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 9),
+    _Ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout_Type()
+)
+ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout.setStatus("current")
+_Ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime_Type = DisplayString
+_Ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime_Object = MibScalar
+ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime = _Ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 10),
+    _Ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime_Type()
+)
+ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime.setStatus("current")
+
+
+class _Ipv6helperDhcpSnoopingBindingDatabaseAction_Type(Integer32):
+    """Custom type ipv6helperDhcpSnoopingBindingDatabaseAction based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("noaction", 0),
+          ("purge", 1),
+          ("renew", 2))
+    )
+
+
+_Ipv6helperDhcpSnoopingBindingDatabaseAction_Type.__name__ = "Integer32"
+_Ipv6helperDhcpSnoopingBindingDatabaseAction_Object = MibScalar
+ipv6helperDhcpSnoopingBindingDatabaseAction = _Ipv6helperDhcpSnoopingBindingDatabaseAction_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 11),
+    _Ipv6helperDhcpSnoopingBindingDatabaseAction_Type()
+)
+ipv6helperDhcpSnoopingBindingDatabaseAction.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingDatabaseAction.setStatus("current")
+
+
+class _Ipv6helperDhcpSnoopingBindingPersistencyStatus_Type(Integer32):
+    """Custom type ipv6helperDhcpSnoopingBindingPersistencyStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_Ipv6helperDhcpSnoopingBindingPersistencyStatus_Type.__name__ = "Integer32"
+_Ipv6helperDhcpSnoopingBindingPersistencyStatus_Object = MibScalar
+ipv6helperDhcpSnoopingBindingPersistencyStatus = _Ipv6helperDhcpSnoopingBindingPersistencyStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 12),
+    _Ipv6helperDhcpSnoopingBindingPersistencyStatus_Type()
+)
+ipv6helperDhcpSnoopingBindingPersistencyStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperDhcpSnoopingBindingPersistencyStatus.setStatus("current")
+_Ipv6helperStatTable_Object = MibTable
+ipv6helperStatTable = _Ipv6helperStatTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 13)
+)
+if mibBuilder.loadTexts:
+    ipv6helperStatTable.setStatus("current")
+_Ipv6helperStatEntry_Object = MibTableRow
+ipv6helperStatEntry = _Ipv6helperStatEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 13, 1)
+)
+ipv6helperStatEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperStatsServerAddress"),
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperStatsVlan"),
+)
+if mibBuilder.loadTexts:
+    ipv6helperStatEntry.setStatus("current")
+_Ipv6helperStatsServerAddress_Type = InetAddressIPv6
+_Ipv6helperStatsServerAddress_Object = MibTableColumn
+ipv6helperStatsServerAddress = _Ipv6helperStatsServerAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 13, 1, 1),
+    _Ipv6helperStatsServerAddress_Type()
+)
+ipv6helperStatsServerAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperStatsServerAddress.setStatus("current")
+
+
+class _Ipv6helperStatsVlan_Type(Integer32):
+    """Custom type ipv6helperStatsVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_Ipv6helperStatsVlan_Type.__name__ = "Integer32"
+_Ipv6helperStatsVlan_Object = MibTableColumn
+ipv6helperStatsVlan = _Ipv6helperStatsVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 13, 1, 2),
+    _Ipv6helperStatsVlan_Type()
+)
+ipv6helperStatsVlan.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperStatsVlan.setStatus("current")
+
+
+class _Ipv6helperTxToServer_Type(Unsigned32):
+    """Custom type ipv6helperTxToServer based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_Ipv6helperTxToServer_Type.__name__ = "Unsigned32"
+_Ipv6helperTxToServer_Object = MibTableColumn
+ipv6helperTxToServer = _Ipv6helperTxToServer_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 13, 1, 3),
+    _Ipv6helperTxToServer_Type()
+)
+ipv6helperTxToServer.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperTxToServer.setStatus("current")
+
+
+class _Ipv6helperInterfaceIdPrefixValue_Type(DisplayString):
+    """Custom type ipv6helperInterfaceIdPrefixValue based on DisplayString"""
+    defaultValue = OctetString("")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 246),
+    )
+
+
+_Ipv6helperInterfaceIdPrefixValue_Type.__name__ = "DisplayString"
+_Ipv6helperInterfaceIdPrefixValue_Object = MibScalar
+ipv6helperInterfaceIdPrefixValue = _Ipv6helperInterfaceIdPrefixValue_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 14),
+    _Ipv6helperInterfaceIdPrefixValue_Type()
+)
+ipv6helperInterfaceIdPrefixValue.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperInterfaceIdPrefixValue.setStatus("current")
+
+
+class _Ipv6helperRemoteIdEnterpriseNumber_Type(Unsigned32):
+    """Custom type ipv6helperRemoteIdEnterpriseNumber based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4294967295),
+    )
+
+
+_Ipv6helperRemoteIdEnterpriseNumber_Type.__name__ = "Unsigned32"
+_Ipv6helperRemoteIdEnterpriseNumber_Object = MibScalar
+ipv6helperRemoteIdEnterpriseNumber = _Ipv6helperRemoteIdEnterpriseNumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 15),
+    _Ipv6helperRemoteIdEnterpriseNumber_Type()
+)
+ipv6helperRemoteIdEnterpriseNumber.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperRemoteIdEnterpriseNumber.setStatus("current")
+
+
+class _Ipv6helperRemoteIdUserStringValue_Type(DisplayString):
+    """Custom type ipv6helperRemoteIdUserStringValue based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 63),
+    )
+
+
+_Ipv6helperRemoteIdUserStringValue_Type.__name__ = "DisplayString"
+_Ipv6helperRemoteIdUserStringValue_Object = MibScalar
+ipv6helperRemoteIdUserStringValue = _Ipv6helperRemoteIdUserStringValue_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 16),
+    _Ipv6helperRemoteIdUserStringValue_Type()
+)
+ipv6helperRemoteIdUserStringValue.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperRemoteIdUserStringValue.setStatus("current")
+
+
+class _Ipv6helperRemoteIdFormatType_Type(Integer32):
+    """Custom type ipv6helperRemoteIdFormatType based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("disabled", 1),
+          ("baseMacAddress", 2),
+          ("systemName", 3),
+          ("vlan", 4),
+          ("userString", 5),
+          ("interfaceAlias", 6),
+          ("autoInterfaceAlias", 7))
+    )
+
+
+_Ipv6helperRemoteIdFormatType_Type.__name__ = "Integer32"
+_Ipv6helperRemoteIdFormatType_Object = MibScalar
+ipv6helperRemoteIdFormatType = _Ipv6helperRemoteIdFormatType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 17),
+    _Ipv6helperRemoteIdFormatType_Type()
+)
+ipv6helperRemoteIdFormatType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperRemoteIdFormatType.setStatus("current")
+
+
+class _Ipv6helperRxFromClient_Type(Unsigned32):
+    """Custom type ipv6helperRxFromClient based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_Ipv6helperRxFromClient_Type.__name__ = "Unsigned32"
+_Ipv6helperRxFromClient_Object = MibScalar
+ipv6helperRxFromClient = _Ipv6helperRxFromClient_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 18),
+    _Ipv6helperRxFromClient_Type()
+)
+ipv6helperRxFromClient.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperRxFromClient.setStatus("current")
+
+
+class _Ipv6helperMaxHopsViolation_Type(Unsigned32):
+    """Custom type ipv6helperMaxHopsViolation based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_Ipv6helperMaxHopsViolation_Type.__name__ = "Unsigned32"
+_Ipv6helperMaxHopsViolation_Object = MibScalar
+ipv6helperMaxHopsViolation = _Ipv6helperMaxHopsViolation_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 19),
+    _Ipv6helperMaxHopsViolation_Type()
+)
+ipv6helperMaxHopsViolation.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    ipv6helperMaxHopsViolation.setStatus("current")
+
+
+class _Ipv6helperResetAll_Type(Integer32):
+    """Custom type ipv6helperResetAll based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_Ipv6helperResetAll_Type.__name__ = "Integer32"
+_Ipv6helperResetAll_Object = MibScalar
+ipv6helperResetAll = _Ipv6helperResetAll_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 20),
+    _Ipv6helperResetAll_Type()
+)
+ipv6helperResetAll.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperResetAll.setStatus("current")
+_Ipv6helperSourceFilterVlanTable_Object = MibTable
+ipv6helperSourceFilterVlanTable = _Ipv6helperSourceFilterVlanTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 21)
+)
+if mibBuilder.loadTexts:
+    ipv6helperSourceFilterVlanTable.setStatus("current")
+_Ipv6helperSourceFilterVlanEntry_Object = MibTableRow
+ipv6helperSourceFilterVlanEntry = _Ipv6helperSourceFilterVlanEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 21, 1)
+)
+ipv6helperSourceFilterVlanEntry.setIndexNames(
+    (0, "ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSourceFilterVlan"),
+)
+if mibBuilder.loadTexts:
+    ipv6helperSourceFilterVlanEntry.setStatus("current")
+
+
+class _Ipv6helperSourceFilterVlan_Type(Integer32):
+    """Custom type ipv6helperSourceFilterVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4094),
+    )
+
+
+_Ipv6helperSourceFilterVlan_Type.__name__ = "Integer32"
+_Ipv6helperSourceFilterVlan_Object = MibTableColumn
+ipv6helperSourceFilterVlan = _Ipv6helperSourceFilterVlan_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 21, 1, 1),
+    _Ipv6helperSourceFilterVlan_Type()
+)
+ipv6helperSourceFilterVlan.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperSourceFilterVlan.setStatus("current")
+
+
+class _Ipv6helperSourceFilterVlanStatus_Type(Integer32):
+    """Custom type ipv6helperSourceFilterVlanStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2))
+    )
+
+
+_Ipv6helperSourceFilterVlanStatus_Type.__name__ = "Integer32"
+_Ipv6helperSourceFilterVlanStatus_Object = MibTableColumn
+ipv6helperSourceFilterVlanStatus = _Ipv6helperSourceFilterVlanStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 1, 2, 21, 1, 2),
+    _Ipv6helperSourceFilterVlanStatus_Type()
+)
+ipv6helperSourceFilterVlanStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    ipv6helperSourceFilterVlanStatus.setStatus("current")
 _AlcatelIND1UDPRelayMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1UDPRelayMIBConformance = _AlcatelIND1UDPRelayMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2)
@@ -1872,6 +3193,42 @@ alaDhcpClientNewAddress = _AlaDhcpClientNewAddress_Object(
 alaDhcpClientNewAddress.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaDhcpClientNewAddress.setStatus("current")
+_AlaDhcpIsfDropIntervalStartTimeStamp_Type = OctetString
+_AlaDhcpIsfDropIntervalStartTimeStamp_Object = MibScalar
+alaDhcpIsfDropIntervalStartTimeStamp = _AlaDhcpIsfDropIntervalStartTimeStamp_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 2, 3),
+    _AlaDhcpIsfDropIntervalStartTimeStamp_Type()
+)
+alaDhcpIsfDropIntervalStartTimeStamp.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDhcpIsfDropIntervalStartTimeStamp.setStatus("current")
+_AlaDhcpIsfDropIntervalStopTimeStamp_Type = OctetString
+_AlaDhcpIsfDropIntervalStopTimeStamp_Object = MibScalar
+alaDhcpIsfDropIntervalStopTimeStamp = _AlaDhcpIsfDropIntervalStopTimeStamp_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 2, 4),
+    _AlaDhcpIsfDropIntervalStopTimeStamp_Type()
+)
+alaDhcpIsfDropIntervalStopTimeStamp.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDhcpIsfDropIntervalStopTimeStamp.setStatus("current")
+_AlaDhcpIsfDropCount_Type = Integer32
+_AlaDhcpIsfDropCount_Object = MibScalar
+alaDhcpIsfDropCount = _AlaDhcpIsfDropCount_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 2, 5),
+    _AlaDhcpIsfDropCount_Type()
+)
+alaDhcpIsfDropCount.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDhcpIsfDropCount.setStatus("current")
+_AlaDhcpTcamFailMsg_Type = OctetString
+_AlaDhcpTcamFailMsg_Object = MibScalar
+alaDhcpTcamFailMsg = _AlaDhcpTcamFailMsg_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 2, 6),
+    _AlaDhcpTcamFailMsg_Type()
+)
+alaDhcpTcamFailMsg.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaDhcpTcamFailMsg.setStatus("current")
 
 # Managed Objects groups
 
@@ -1880,7 +3237,17 @@ iphelperGroup = ObjectGroup(
 )
 iphelperGroup.setObjects(
       *(("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperForwAddr"),
-        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperStatus"))
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperAgentInformation"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperAgentInformationPolicy"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpOption82FormatType"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpOption82StringValue"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperOption82Policy"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperPXESupport"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperService"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperTrafficSuppressionStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperVlan"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingTrapStatus"))
 )
 if mibBuilder.loadTexts:
     iphelperGroup.setStatus("current")
@@ -1921,10 +3288,154 @@ iphelperMiscGroup.setObjects(
         ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIField4StringValue"),
         ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIField5"),
         ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIField5StringValue"),
-        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIDelimiter"))
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIDelimiter"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnooping"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOpt82DataInsertionStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingMacAddrVerificationStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingTrafficSuppressionStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingDatabaseSyncTimeout"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingDatabaseLastSyncTime"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingDatabaseAction"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBypassOpt82CheckStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingPersistencyStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaMdnsGreTunnelName"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaMdnsAdminStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaMdnsFloodVlans"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingArpAllowStatus"))
 )
 if mibBuilder.loadTexts:
     iphelperMiscGroup.setStatus("current")
+
+iphelperSourceGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 5)
+)
+iphelperSourceGroup.setObjects(
+    ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSourceFilterVlanFilteringStatus")
+)
+if mibBuilder.loadTexts:
+    iphelperSourceGroup.setStatus("current")
+
+iphelperOption82FormatASCIIConfigurableGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 6)
+)
+iphelperOption82FormatASCIIConfigurableGroup.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus"))
+)
+if mibBuilder.loadTexts:
+    iphelperOption82FormatASCIIConfigurableGroup.setStatus("current")
+
+alaDhcpClientTrapObjectsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 7)
+)
+alaDhcpClientTrapObjectsGroup.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientAddress"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientNewAddress"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDropIntervalStartTimeStamp"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDropIntervalStopTimeStamp"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDropCount"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpTcamFailMsg"))
+)
+if mibBuilder.loadTexts:
+    alaDhcpClientTrapObjectsGroup.setStatus("current")
+
+iphelperxGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 8)
+)
+iphelperxGroup.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPortServiceAssociationName"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPortServiceAssociationPort"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPortServiceAssociationService"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPortServiceAssociationStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxServicePortAssociationName"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxServicePortAssociationPort"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxServicePortAssociationService"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxServicePortAssociationStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxStatReset"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxStatRxFromClient"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxStatServerAddress"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxStatService"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxStatTxToServer"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxStatVlan"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPropertiesName"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPropertiesPort"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxPropertiesService"))
+)
+if mibBuilder.loadTexts:
+    iphelperxGroup.setStatus("current")
+
+ipv6helperGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 9)
+)
+ipv6helperGroup.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperForwAddr"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperVlan"))
+)
+if mibBuilder.loadTexts:
+    ipv6helperGroup.setStatus("current")
+
+ipv6helperMiscGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 10)
+)
+ipv6helperMiscGroup.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperMaxHops"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperForwardOption"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnooping"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingBindingStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingBindingDatabaseAction"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingBindingPersistencyStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingVlanNumber"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingVlanStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingPortIfIndex"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperDhcpSnoopingPortTrustMode"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSnoopingClientViolation"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSnoopingServerViolation"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSnoopingBindingViolation"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSnoopingInterfaceidViolation"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSnoopingPortSourceFilterStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingLinkLocalAddress"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingIfIndex"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingGlobalIpv6Address"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingVlan"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingLeaseTime"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperBindingRowStatus"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperStatsServerAddress"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperStatsVlan"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperRxFromClient"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperTxToServer"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperMaxHopsViolation"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperResetAll"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperInterfaceIdPrefixValue"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperRemoteIdFormatType"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperRemoteIdEnterpriseNumber"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperRemoteIdUserStringValue"))
+)
+if mibBuilder.loadTexts:
+    ipv6helperMiscGroup.setStatus("current")
+
+ipv6helperSourceFilterGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 9, 1, 2, 1, 11)
+)
+ipv6helperSourceFilterGroup.setObjects(
+    ("ALCATEL-IND1-UDP-RELAY-MIB", "ipv6helperSourceFilterVlanStatus")
+)
+if mibBuilder.loadTexts:
+    ipv6helperSourceFilterGroup.setStatus("current")
 
 
 # Notification objects
@@ -1963,6 +3474,44 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+alaDhcpBindingDuplicateEntry = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 1, 0, 4)
+)
+alaDhcpBindingDuplicateEntry.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingMacAddress"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingVlan"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingIfIndex"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperDhcpSnoopingBindingIfIndex"))
+)
+if mibBuilder.loadTexts:
+    alaDhcpBindingDuplicateEntry.setStatus(
+        "current"
+    )
+
+alaDhcpBindingTcamFail = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 1, 0, 5)
+)
+alaDhcpBindingTcamFail.setObjects(
+    ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpTcamFailMsg")
+)
+if mibBuilder.loadTexts:
+    alaDhcpBindingTcamFail.setStatus(
+        "current"
+    )
+
+alaDhcpIsfDrop = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 3, 2, 23, 1, 0, 6)
+)
+alaDhcpIsfDrop.setObjects(
+      *(("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDropIntervalStartTimeStamp"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDropIntervalStopTimeStamp"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDropCount"))
+)
+if mibBuilder.loadTexts:
+    alaDhcpIsfDrop.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -1972,7 +3521,10 @@ alaDhcpClientTrapsGroup = NotificationGroup(
 alaDhcpClientTrapsGroup.setObjects(
       *(("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientAddressAddTrap"),
         ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientAddressExpiryTrap"),
-        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientAddressModifyTrap"))
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientAddressModifyTrap"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpBindingDuplicateEntry"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpBindingTcamFail"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpIsfDrop"))
 )
 if mibBuilder.loadTexts:
     alaDhcpClientTrapsGroup.setStatus(
@@ -1992,7 +3544,11 @@ alcatelIND1UDPRelayMIBCompliance.setObjects(
       *(("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperGroup"),
         ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperStatGroup"),
         ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperMiscGroup"),
-        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientTrapsGroup"))
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientTrapsGroup"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperSourceGroup"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperOption82FormatASCIIConfigurableGroup"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "alaDhcpClientTrapObjectsGroup"),
+        ("ALCATEL-IND1-UDP-RELAY-MIB", "iphelperxGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1UDPRelayMIBCompliance.setStatus(
@@ -2006,6 +3562,7 @@ mibBuilder.exportSymbols(
     "ALCATEL-IND1-UDP-RELAY-MIB",
     **{"IphelperServIndex": IphelperServIndex,
        "IphelpereOption82ASCIIFieldType": IphelpereOption82ASCIIFieldType,
+       "IphelperOption82CircuitOrRemoteId": IphelperOption82CircuitOrRemoteId,
        "alcatelIND1UDPRelayMIB": alcatelIND1UDPRelayMIB,
        "alcatelIND1UDPRelayMIBObjects": alcatelIND1UDPRelayMIBObjects,
        "iphelperMIB": iphelperMIB,
@@ -2085,6 +3642,7 @@ mibBuilder.exportSymbols(
        "iphelperDhcpSnoopingBindingLeaseTime": iphelperDhcpSnoopingBindingLeaseTime,
        "iphelperDhcpSnoopingBindingType": iphelperDhcpSnoopingBindingType,
        "iphelperDhcpSnoopingBindingRowStatus": iphelperDhcpSnoopingBindingRowStatus,
+       "iphelperDhcpSnoopingBindingRemoteFlag": iphelperDhcpSnoopingBindingRemoteFlag,
        "iphelperDhcpSnooping": iphelperDhcpSnooping,
        "iphelperDhcpSnoopingOpt82DataInsertionStatus": iphelperDhcpSnoopingOpt82DataInsertionStatus,
        "iphelperDhcpSnoopingMacAddrVerificationStatus": iphelperDhcpSnoopingMacAddrVerificationStatus,
@@ -2110,19 +3668,115 @@ mibBuilder.exportSymbols(
        "iphelperDhcpSnoopingOption82FormatASCIIField5": iphelperDhcpSnoopingOption82FormatASCIIField5,
        "iphelperDhcpSnoopingOption82FormatASCIIField5StringValue": iphelperDhcpSnoopingOption82FormatASCIIField5StringValue,
        "iphelperDhcpSnoopingOption82FormatASCIIDelimiter": iphelperDhcpSnoopingOption82FormatASCIIDelimiter,
+       "iphelperDhcpSourceFilterVlanTable": iphelperDhcpSourceFilterVlanTable,
+       "iphelperDhcpSourceFilterVlanEntry": iphelperDhcpSourceFilterVlanEntry,
+       "iphelperDhcpSourceFilterVlanNumber": iphelperDhcpSourceFilterVlanNumber,
+       "iphelperDhcpSourceFilterVlanFilteringStatus": iphelperDhcpSourceFilterVlanFilteringStatus,
+       "iphelperOption82Policy": iphelperOption82Policy,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableTable": iphelperDhcpSnoopingOption82FormatASCIIConfigurableTable,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry": iphelperDhcpSnoopingOption82FormatASCIIConfigurableEntry,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex": iphelperDhcpSnoopingOption82FormatASCIIConfigurableIndex,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField1StrVal,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField2StrVal,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField3StrVal,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField4StrVal,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal": iphelperDhcpSnoopingOption82FormatASCIIConfigurableField5StrVal,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter": iphelperDhcpSnoopingOption82FormatASCIIConfigurableDelimiter,
+       "iphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus": iphelperDhcpSnoopingOption82FormatASCIIConfigurableStatus,
+       "alaMdnsGreTunnelName": alaMdnsGreTunnelName,
+       "alaMdnsAdminStatus": alaMdnsAdminStatus,
+       "alaMdnsFloodVlans": alaMdnsFloodVlans,
+       "iphelperDhcpSourceFilterAllowSubnetTable": iphelperDhcpSourceFilterAllowSubnetTable,
+       "iphelperDhcpSourceFilterAllowIpEntry": iphelperDhcpSourceFilterAllowIpEntry,
+       "iphelperDhcpSourceFilterExpIpAddress": iphelperDhcpSourceFilterExpIpAddress,
+       "iphelperDhcpSourceFilterExpIpMask": iphelperDhcpSourceFilterExpIpMask,
+       "iphelperDhcpSourceFilterVlan": iphelperDhcpSourceFilterVlan,
+       "iphelperDhcpSourceFilterExpIpStatus": iphelperDhcpSourceFilterExpIpStatus,
+       "iphelperDhcpSnoopingTrapStatus": iphelperDhcpSnoopingTrapStatus,
+       "iphelperDhcpSnoopingArpAllowStatus": iphelperDhcpSnoopingArpAllowStatus,
+       "ipv6helperMIB": ipv6helperMIB,
+       "ipv6helperTable": ipv6helperTable,
+       "ipv6helperEntry": ipv6helperEntry,
+       "ipv6helperForwAddr": ipv6helperForwAddr,
+       "ipv6helperVlan": ipv6helperVlan,
+       "ipv6helperStatus": ipv6helperStatus,
+       "ipv6helperForwardOption": ipv6helperForwardOption,
+       "ipv6helperMaxHops": ipv6helperMaxHops,
+       "ipv6helperDhcpSnooping": ipv6helperDhcpSnooping,
+       "ipv6helperDhcpSnoopingVlanTable": ipv6helperDhcpSnoopingVlanTable,
+       "ipv6helperDhcpSnoopingVlanEntry": ipv6helperDhcpSnoopingVlanEntry,
+       "ipv6helperDhcpSnoopingVlanNumber": ipv6helperDhcpSnoopingVlanNumber,
+       "ipv6helperDhcpSnoopingVlanStatus": ipv6helperDhcpSnoopingVlanStatus,
+       "ipv6helperDhcpSnoopingPortTable": ipv6helperDhcpSnoopingPortTable,
+       "ipv6helperDhcpSnoopingPortEntry": ipv6helperDhcpSnoopingPortEntry,
+       "ipv6helperDhcpSnoopingPortIfIndex": ipv6helperDhcpSnoopingPortIfIndex,
+       "ipv6helperDhcpSnoopingPortTrustMode": ipv6helperDhcpSnoopingPortTrustMode,
+       "ipv6helperSnoopingClientViolation": ipv6helperSnoopingClientViolation,
+       "ipv6helperSnoopingServerViolation": ipv6helperSnoopingServerViolation,
+       "ipv6helperSnoopingBindingViolation": ipv6helperSnoopingBindingViolation,
+       "ipv6helperSnoopingInterfaceidViolation": ipv6helperSnoopingInterfaceidViolation,
+       "ipv6helperSnoopingPortSourceFilterStatus": ipv6helperSnoopingPortSourceFilterStatus,
+       "ipv6helperDhcpSnoopingBindingStatus": ipv6helperDhcpSnoopingBindingStatus,
+       "ipv6helperDhcpSnoopingBindingTable": ipv6helperDhcpSnoopingBindingTable,
+       "ipv6helperDhcpSnoopingBindingEntry": ipv6helperDhcpSnoopingBindingEntry,
+       "ipv6helperBindingLinkLocalAddress": ipv6helperBindingLinkLocalAddress,
+       "ipv6helperBindingVlan": ipv6helperBindingVlan,
+       "ipv6helperBindingIfIndex": ipv6helperBindingIfIndex,
+       "ipv6helperBindingGlobalIpv6Address": ipv6helperBindingGlobalIpv6Address,
+       "ipv6helperBindingLeaseTime": ipv6helperBindingLeaseTime,
+       "ipv6helperBindingRowStatus": ipv6helperBindingRowStatus,
+       "ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout": ipv6helperDhcpSnoopingBindingDatabaseSyncTimeout,
+       "ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime": ipv6helperDhcpSnoopingBindingDatabaseLastSyncTime,
+       "ipv6helperDhcpSnoopingBindingDatabaseAction": ipv6helperDhcpSnoopingBindingDatabaseAction,
+       "ipv6helperDhcpSnoopingBindingPersistencyStatus": ipv6helperDhcpSnoopingBindingPersistencyStatus,
+       "ipv6helperStatTable": ipv6helperStatTable,
+       "ipv6helperStatEntry": ipv6helperStatEntry,
+       "ipv6helperStatsServerAddress": ipv6helperStatsServerAddress,
+       "ipv6helperStatsVlan": ipv6helperStatsVlan,
+       "ipv6helperTxToServer": ipv6helperTxToServer,
+       "ipv6helperInterfaceIdPrefixValue": ipv6helperInterfaceIdPrefixValue,
+       "ipv6helperRemoteIdEnterpriseNumber": ipv6helperRemoteIdEnterpriseNumber,
+       "ipv6helperRemoteIdUserStringValue": ipv6helperRemoteIdUserStringValue,
+       "ipv6helperRemoteIdFormatType": ipv6helperRemoteIdFormatType,
+       "ipv6helperRxFromClient": ipv6helperRxFromClient,
+       "ipv6helperMaxHopsViolation": ipv6helperMaxHopsViolation,
+       "ipv6helperResetAll": ipv6helperResetAll,
+       "ipv6helperSourceFilterVlanTable": ipv6helperSourceFilterVlanTable,
+       "ipv6helperSourceFilterVlanEntry": ipv6helperSourceFilterVlanEntry,
+       "ipv6helperSourceFilterVlan": ipv6helperSourceFilterVlan,
+       "ipv6helperSourceFilterVlanStatus": ipv6helperSourceFilterVlanStatus,
        "alcatelIND1UDPRelayMIBConformance": alcatelIND1UDPRelayMIBConformance,
        "alcatelIND1UDPRelayMIBGroups": alcatelIND1UDPRelayMIBGroups,
        "iphelperGroup": iphelperGroup,
        "iphelperStatGroup": iphelperStatGroup,
        "iphelperMiscGroup": iphelperMiscGroup,
        "alaDhcpClientTrapsGroup": alaDhcpClientTrapsGroup,
+       "iphelperSourceGroup": iphelperSourceGroup,
+       "iphelperOption82FormatASCIIConfigurableGroup": iphelperOption82FormatASCIIConfigurableGroup,
+       "alaDhcpClientTrapObjectsGroup": alaDhcpClientTrapObjectsGroup,
+       "iphelperxGroup": iphelperxGroup,
+       "ipv6helperGroup": ipv6helperGroup,
+       "ipv6helperMiscGroup": ipv6helperMiscGroup,
+       "ipv6helperSourceFilterGroup": ipv6helperSourceFilterGroup,
        "alcatelIND1UDPRelayMIBCompliances": alcatelIND1UDPRelayMIBCompliances,
        "alcatelIND1UDPRelayMIBCompliance": alcatelIND1UDPRelayMIBCompliance,
        "alaDhcpClientTrapsDesc": alaDhcpClientTrapsDesc,
        "alaDhcpClientAddressAddTrap": alaDhcpClientAddressAddTrap,
        "alaDhcpClientAddressExpiryTrap": alaDhcpClientAddressExpiryTrap,
        "alaDhcpClientAddressModifyTrap": alaDhcpClientAddressModifyTrap,
+       "alaDhcpBindingDuplicateEntry": alaDhcpBindingDuplicateEntry,
+       "alaDhcpBindingTcamFail": alaDhcpBindingTcamFail,
+       "alaDhcpIsfDrop": alaDhcpIsfDrop,
        "alaDhcpClientTrapsObj": alaDhcpClientTrapsObj,
        "alaDhcpClientAddress": alaDhcpClientAddress,
-       "alaDhcpClientNewAddress": alaDhcpClientNewAddress}
+       "alaDhcpClientNewAddress": alaDhcpClientNewAddress,
+       "alaDhcpIsfDropIntervalStartTimeStamp": alaDhcpIsfDropIntervalStartTimeStamp,
+       "alaDhcpIsfDropIntervalStopTimeStamp": alaDhcpIsfDropIntervalStopTimeStamp,
+       "alaDhcpIsfDropCount": alaDhcpIsfDropCount,
+       "alaDhcpTcamFailMsg": alaDhcpTcamFailMsg}
 )

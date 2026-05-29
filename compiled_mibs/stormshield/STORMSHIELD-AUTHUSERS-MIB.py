@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\stormshield\STORMSHIELD-AUTHUSERS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:29:01 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -185,6 +182,42 @@ snsAuthUsersDomain = _SnsAuthUsersDomain_Object(
 snsAuthUsersDomain.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     snsAuthUsersDomain.setStatus("current")
+_SnsAuthUsersAuthMethod_Type = DisplayString
+_SnsAuthUsersAuthMethod_Object = MibTableColumn
+snsAuthUsersAuthMethod = _SnsAuthUsersAuthMethod_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 2, 1, 1, 5),
+    _SnsAuthUsersAuthMethod_Type()
+)
+snsAuthUsersAuthMethod.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsAuthUsersAuthMethod.setStatus("current")
+_SnsAuthUsersPorts_Type = DisplayString
+_SnsAuthUsersPorts_Object = MibTableColumn
+snsAuthUsersPorts = _SnsAuthUsersPorts_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 2, 1, 1, 6),
+    _SnsAuthUsersPorts_Type()
+)
+snsAuthUsersPorts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsAuthUsersPorts.setStatus("current")
+_SnsAuthUsersHostChecking_Type = DisplayString
+_SnsAuthUsersHostChecking_Object = MibTableColumn
+snsAuthUsersHostChecking = _SnsAuthUsersHostChecking_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 2, 1, 1, 7),
+    _SnsAuthUsersHostChecking_Type()
+)
+snsAuthUsersHostChecking.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsAuthUsersHostChecking.setStatus("current")
+_SnsAuthUsersOsType_Type = DisplayString
+_SnsAuthUsersOsType_Object = MibTableColumn
+snsAuthUsersOsType = _SnsAuthUsersOsType_Object(
+    (1, 3, 6, 1, 4, 1, 11256, 1, 2, 1, 1, 8),
+    _SnsAuthUsersOsType_Type()
+)
+snsAuthUsersOsType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    snsAuthUsersOsType.setStatus("current")
 
 # Managed Objects groups
 
@@ -211,5 +244,9 @@ mibBuilder.exportSymbols(
        "snsAuthUsersIPAddr": snsAuthUsersIPAddr,
        "snsAuthUsersTimeOut": snsAuthUsersTimeOut,
        "snsAuthUsersName": snsAuthUsersName,
-       "snsAuthUsersDomain": snsAuthUsersDomain}
+       "snsAuthUsersDomain": snsAuthUsersDomain,
+       "snsAuthUsersAuthMethod": snsAuthUsersAuthMethod,
+       "snsAuthUsersPorts": snsAuthUsersPorts,
+       "snsAuthUsersHostChecking": snsAuthUsersHostChecking,
+       "snsAuthUsersOsType": snsAuthUsersOsType}
 )

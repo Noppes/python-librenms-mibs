@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-BGP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:08 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-BGP-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,6 +110,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1BGPMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1BGPMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -1140,7 +1141,7 @@ alaBgpPeerAS = _AlaBgpPeerAS_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 2),
     _AlaBgpPeerAS_Type()
 )
-alaBgpPeerAS.setMaxAccess("read-write")
+alaBgpPeerAS.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerAS.setStatus("current")
 
@@ -1168,7 +1169,7 @@ alaBgpPeerPassive = _AlaBgpPeerPassive_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 3),
     _AlaBgpPeerPassive_Type()
 )
-alaBgpPeerPassive.setMaxAccess("read-write")
+alaBgpPeerPassive.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerPassive.setStatus("current")
 
@@ -1189,7 +1190,7 @@ alaBgpPeerName = _AlaBgpPeerName_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 4),
     _AlaBgpPeerName_Type()
 )
-alaBgpPeerName.setMaxAccess("read-write")
+alaBgpPeerName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerName.setStatus("current")
 
@@ -1217,7 +1218,7 @@ alaBgpPeerMultiHop = _AlaBgpPeerMultiHop_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 5),
     _AlaBgpPeerMultiHop_Type()
 )
-alaBgpPeerMultiHop.setMaxAccess("read-write")
+alaBgpPeerMultiHop.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerMultiHop.setStatus("current")
 
@@ -1238,7 +1239,7 @@ alaBgpPeerMaxPrefix = _AlaBgpPeerMaxPrefix_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 6),
     _AlaBgpPeerMaxPrefix_Type()
 )
-alaBgpPeerMaxPrefix.setMaxAccess("read-write")
+alaBgpPeerMaxPrefix.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerMaxPrefix.setStatus("current")
 
@@ -1266,7 +1267,7 @@ alaBgpPeerMaxPrefixWarnOnly = _AlaBgpPeerMaxPrefixWarnOnly_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 7),
     _AlaBgpPeerMaxPrefixWarnOnly_Type()
 )
-alaBgpPeerMaxPrefixWarnOnly.setMaxAccess("read-write")
+alaBgpPeerMaxPrefixWarnOnly.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerMaxPrefixWarnOnly.setStatus("current")
 
@@ -1294,7 +1295,7 @@ alaBgpPeerNextHopSelf = _AlaBgpPeerNextHopSelf_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 8),
     _AlaBgpPeerNextHopSelf_Type()
 )
-alaBgpPeerNextHopSelf.setMaxAccess("read-write")
+alaBgpPeerNextHopSelf.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerNextHopSelf.setStatus("current")
 
@@ -1322,7 +1323,7 @@ alaBgpPeerSoftReconfig = _AlaBgpPeerSoftReconfig_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 9),
     _AlaBgpPeerSoftReconfig_Type()
 )
-alaBgpPeerSoftReconfig.setMaxAccess("read-write")
+alaBgpPeerSoftReconfig.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerSoftReconfig.setStatus("current")
 
@@ -1445,7 +1446,7 @@ alaBgpPeerRouteMapOut = _AlaBgpPeerRouteMapOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 15),
     _AlaBgpPeerRouteMapOut_Type()
 )
-alaBgpPeerRouteMapOut.setMaxAccess("read-write")
+alaBgpPeerRouteMapOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerRouteMapOut.setStatus("current")
 
@@ -1466,7 +1467,7 @@ alaBgpPeerRouteMapIn = _AlaBgpPeerRouteMapIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 16),
     _AlaBgpPeerRouteMapIn_Type()
 )
-alaBgpPeerRouteMapIn.setMaxAccess("read-write")
+alaBgpPeerRouteMapIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerRouteMapIn.setStatus("current")
 
@@ -1482,7 +1483,7 @@ alaBgpPeerLocalAddr = _AlaBgpPeerLocalAddr_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 17),
     _AlaBgpPeerLocalAddr_Type()
 )
-alaBgpPeerLocalAddr.setMaxAccess("read-write")
+alaBgpPeerLocalAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerLocalAddr.setStatus("current")
 
@@ -1800,7 +1801,7 @@ alaBgpPeerClearCounter = _AlaBgpPeerClearCounter_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 28),
     _AlaBgpPeerClearCounter_Type()
 )
-alaBgpPeerClearCounter.setMaxAccess("read-write")
+alaBgpPeerClearCounter.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerClearCounter.setStatus("current")
 
@@ -1828,7 +1829,7 @@ alaBgpPeerAutoReStart = _AlaBgpPeerAutoReStart_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 29),
     _AlaBgpPeerAutoReStart_Type()
 )
-alaBgpPeerAutoReStart.setMaxAccess("read-write")
+alaBgpPeerAutoReStart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerAutoReStart.setStatus("current")
 
@@ -1856,7 +1857,7 @@ alaBgpPeerClientStatus = _AlaBgpPeerClientStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 30),
     _AlaBgpPeerClientStatus_Type()
 )
-alaBgpPeerClientStatus.setMaxAccess("read-write")
+alaBgpPeerClientStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerClientStatus.setStatus("current")
 
@@ -1884,7 +1885,7 @@ alaBgpPeerConfedStatus = _AlaBgpPeerConfedStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 31),
     _AlaBgpPeerConfedStatus_Type()
 )
-alaBgpPeerConfedStatus.setMaxAccess("read-write")
+alaBgpPeerConfedStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerConfedStatus.setStatus("current")
 
@@ -1912,7 +1913,7 @@ alaBgpPeerRemovePrivateAs = _AlaBgpPeerRemovePrivateAs_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 32),
     _AlaBgpPeerRemovePrivateAs_Type()
 )
-alaBgpPeerRemovePrivateAs.setMaxAccess("read-write")
+alaBgpPeerRemovePrivateAs.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerRemovePrivateAs.setStatus("current")
 
@@ -1933,7 +1934,7 @@ alaBgpPeerTTL = _AlaBgpPeerTTL_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 33),
     _AlaBgpPeerTTL_Type()
 )
-alaBgpPeerTTL.setMaxAccess("read-write")
+alaBgpPeerTTL.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerTTL.setStatus("current")
 
@@ -1954,7 +1955,7 @@ alaBgpPeerAspathListOut = _AlaBgpPeerAspathListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 34),
     _AlaBgpPeerAspathListOut_Type()
 )
-alaBgpPeerAspathListOut.setMaxAccess("read-write")
+alaBgpPeerAspathListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerAspathListOut.setStatus("current")
 
@@ -1975,7 +1976,7 @@ alaBgpPeerAspathListIn = _AlaBgpPeerAspathListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 35),
     _AlaBgpPeerAspathListIn_Type()
 )
-alaBgpPeerAspathListIn.setMaxAccess("read-write")
+alaBgpPeerAspathListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerAspathListIn.setStatus("current")
 
@@ -1996,7 +1997,7 @@ alaBgpPeerPrefixListOut = _AlaBgpPeerPrefixListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 36),
     _AlaBgpPeerPrefixListOut_Type()
 )
-alaBgpPeerPrefixListOut.setMaxAccess("read-write")
+alaBgpPeerPrefixListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerPrefixListOut.setStatus("current")
 
@@ -2017,7 +2018,7 @@ alaBgpPeerPrefixListIn = _AlaBgpPeerPrefixListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 37),
     _AlaBgpPeerPrefixListIn_Type()
 )
-alaBgpPeerPrefixListIn.setMaxAccess("read-write")
+alaBgpPeerPrefixListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerPrefixListIn.setStatus("current")
 
@@ -2038,7 +2039,7 @@ alaBgpPeerCommunityListOut = _AlaBgpPeerCommunityListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 38),
     _AlaBgpPeerCommunityListOut_Type()
 )
-alaBgpPeerCommunityListOut.setMaxAccess("read-write")
+alaBgpPeerCommunityListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerCommunityListOut.setStatus("current")
 
@@ -2059,7 +2060,7 @@ alaBgpPeerCommunityListIn = _AlaBgpPeerCommunityListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 39),
     _AlaBgpPeerCommunityListIn_Type()
 )
-alaBgpPeerCommunityListIn.setMaxAccess("read-write")
+alaBgpPeerCommunityListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerCommunityListIn.setStatus("current")
 
@@ -2085,7 +2086,7 @@ alaBgpPeerRestart = _AlaBgpPeerRestart_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 40),
     _AlaBgpPeerRestart_Type()
 )
-alaBgpPeerRestart.setMaxAccess("read-write")
+alaBgpPeerRestart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerRestart.setStatus("current")
 
@@ -2113,7 +2114,7 @@ alaBgpPeerDefaultOriginate = _AlaBgpPeerDefaultOriginate_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 41),
     _AlaBgpPeerDefaultOriginate_Type()
 )
-alaBgpPeerDefaultOriginate.setMaxAccess("read-write")
+alaBgpPeerDefaultOriginate.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerDefaultOriginate.setStatus("current")
 
@@ -2139,7 +2140,7 @@ alaBgpPeerReconfigureInBound = _AlaBgpPeerReconfigureInBound_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 42),
     _AlaBgpPeerReconfigureInBound_Type()
 )
-alaBgpPeerReconfigureInBound.setMaxAccess("read-write")
+alaBgpPeerReconfigureInBound.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerReconfigureInBound.setStatus("current")
 
@@ -2165,7 +2166,7 @@ alaBgpPeerReconfigureOutBound = _AlaBgpPeerReconfigureOutBound_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 43),
     _AlaBgpPeerReconfigureOutBound_Type()
 )
-alaBgpPeerReconfigureOutBound.setMaxAccess("read-write")
+alaBgpPeerReconfigureOutBound.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerReconfigureOutBound.setStatus("current")
 
@@ -2186,7 +2187,7 @@ alaBgpPeerMD5Key = _AlaBgpPeerMD5Key_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 44),
     _AlaBgpPeerMD5Key_Type()
 )
-alaBgpPeerMD5Key.setMaxAccess("read-write")
+alaBgpPeerMD5Key.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerMD5Key.setStatus("current")
 
@@ -2223,7 +2224,7 @@ alaBgpPeerRowStatus = _AlaBgpPeerRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 46),
     _AlaBgpPeerRowStatus_Type()
 )
-alaBgpPeerRowStatus.setMaxAccess("read-write")
+alaBgpPeerRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerRowStatus.setStatus("current")
 _AlaBgpPeerUpTransitions_Type = Counter32
@@ -2421,7 +2422,7 @@ alaBgpPeerIpv6NextHop = _AlaBgpPeerIpv6NextHop_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 61),
     _AlaBgpPeerIpv6NextHop_Type()
 )
-alaBgpPeerIpv6NextHop.setMaxAccess("read-write")
+alaBgpPeerIpv6NextHop.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerIpv6NextHop.setStatus("current")
 
@@ -2487,7 +2488,7 @@ alaBgpPeerActivateIpv6 = _AlaBgpPeerActivateIpv6_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 64),
     _AlaBgpPeerActivateIpv6_Type()
 )
-alaBgpPeerActivateIpv6.setMaxAccess("read-write")
+alaBgpPeerActivateIpv6.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerActivateIpv6.setStatus("current")
 
@@ -2534,7 +2535,7 @@ alaBgpPeerPrefix6ListOut = _AlaBgpPeerPrefix6ListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 66),
     _AlaBgpPeerPrefix6ListOut_Type()
 )
-alaBgpPeerPrefix6ListOut.setMaxAccess("read-write")
+alaBgpPeerPrefix6ListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerPrefix6ListOut.setStatus("current")
 
@@ -2555,7 +2556,7 @@ alaBgpPeerPrefix6ListIn = _AlaBgpPeerPrefix6ListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 2, 1, 67),
     _AlaBgpPeerPrefix6ListIn_Type()
 )
-alaBgpPeerPrefix6ListIn.setMaxAccess("read-write")
+alaBgpPeerPrefix6ListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeerPrefix6ListIn.setStatus("current")
 _AlaBgpAggrTable_Object = MibTable
@@ -2617,7 +2618,7 @@ alaBgpAggrSummarize = _AlaBgpAggrSummarize_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 3, 1, 3),
     _AlaBgpAggrSummarize_Type()
 )
-alaBgpAggrSummarize.setMaxAccess("read-write")
+alaBgpAggrSummarize.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAggrSummarize.setStatus("current")
 
@@ -2645,7 +2646,7 @@ alaBgpAggrSet = _AlaBgpAggrSet_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 3, 1, 4),
     _AlaBgpAggrSet_Type()
 )
-alaBgpAggrSet.setMaxAccess("read-write")
+alaBgpAggrSet.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAggrSet.setStatus("current")
 
@@ -2692,7 +2693,7 @@ alaBgpAggrMetric = _AlaBgpAggrMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 3, 1, 6),
     _AlaBgpAggrMetric_Type()
 )
-alaBgpAggrMetric.setMaxAccess("read-write")
+alaBgpAggrMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAggrMetric.setStatus("current")
 
@@ -2713,7 +2714,7 @@ alaBgpAggrLocalPref = _AlaBgpAggrLocalPref_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 3, 1, 7),
     _AlaBgpAggrLocalPref_Type()
 )
-alaBgpAggrLocalPref.setMaxAccess("read-write")
+alaBgpAggrLocalPref.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAggrLocalPref.setStatus("current")
 
@@ -2734,7 +2735,7 @@ alaBgpAggrCommunity = _AlaBgpAggrCommunity_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 3, 1, 8),
     _AlaBgpAggrCommunity_Type()
 )
-alaBgpAggrCommunity.setMaxAccess("read-write")
+alaBgpAggrCommunity.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAggrCommunity.setStatus("current")
 
@@ -2750,7 +2751,7 @@ alaBgpAggrRowStatus = _AlaBgpAggrRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 3, 1, 9),
     _AlaBgpAggrRowStatus_Type()
 )
-alaBgpAggrRowStatus.setMaxAccess("read-write")
+alaBgpAggrRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAggrRowStatus.setStatus("current")
 _AlaBgpNetworkTable_Object = MibTable
@@ -2831,7 +2832,7 @@ alaBgpNetworkMetric = _AlaBgpNetworkMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 4, 1, 4),
     _AlaBgpNetworkMetric_Type()
 )
-alaBgpNetworkMetric.setMaxAccess("read-write")
+alaBgpNetworkMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetworkMetric.setStatus("current")
 
@@ -2852,7 +2853,7 @@ alaBgpNetworkLocalPref = _AlaBgpNetworkLocalPref_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 4, 1, 5),
     _AlaBgpNetworkLocalPref_Type()
 )
-alaBgpNetworkLocalPref.setMaxAccess("read-write")
+alaBgpNetworkLocalPref.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetworkLocalPref.setStatus("current")
 
@@ -2873,7 +2874,7 @@ alaBgpNetworkCommunity = _AlaBgpNetworkCommunity_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 4, 1, 6),
     _AlaBgpNetworkCommunity_Type()
 )
-alaBgpNetworkCommunity.setMaxAccess("read-write")
+alaBgpNetworkCommunity.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetworkCommunity.setStatus("current")
 
@@ -2889,7 +2890,7 @@ alaBgpNetworkRowStatus = _AlaBgpNetworkRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 4, 1, 7),
     _AlaBgpNetworkRowStatus_Type()
 )
-alaBgpNetworkRowStatus.setMaxAccess("read-write")
+alaBgpNetworkRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetworkRowStatus.setStatus("current")
 _AlaBgpRouteTable_Object = MibTable
@@ -3912,7 +3913,7 @@ alaBgpRouteMapAsPathMatchListId = _AlaBgpRouteMapAsPathMatchListId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 3),
     _AlaBgpRouteMapAsPathMatchListId_Type()
 )
-alaBgpRouteMapAsPathMatchListId.setMaxAccess("read-write")
+alaBgpRouteMapAsPathMatchListId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapAsPathMatchListId.setStatus("current")
 
@@ -3933,7 +3934,7 @@ alaBgpRouteMapPrefixMatchListId = _AlaBgpRouteMapPrefixMatchListId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 4),
     _AlaBgpRouteMapPrefixMatchListId_Type()
 )
-alaBgpRouteMapPrefixMatchListId.setMaxAccess("read-write")
+alaBgpRouteMapPrefixMatchListId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapPrefixMatchListId.setStatus("current")
 
@@ -3954,7 +3955,7 @@ alaBgpRouteMapCommunityMatchListId = _AlaBgpRouteMapCommunityMatchListId_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 5),
     _AlaBgpRouteMapCommunityMatchListId_Type()
 )
-alaBgpRouteMapCommunityMatchListId.setMaxAccess("read-write")
+alaBgpRouteMapCommunityMatchListId.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapCommunityMatchListId.setStatus("current")
 
@@ -3986,7 +3987,7 @@ alaBgpRouteMapOrigin = _AlaBgpRouteMapOrigin_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 6),
     _AlaBgpRouteMapOrigin_Type()
 )
-alaBgpRouteMapOrigin.setMaxAccess("read-write")
+alaBgpRouteMapOrigin.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapOrigin.setStatus("current")
 
@@ -4007,7 +4008,7 @@ alaBgpRouteMapLocalPref = _AlaBgpRouteMapLocalPref_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 7),
     _AlaBgpRouteMapLocalPref_Type()
 )
-alaBgpRouteMapLocalPref.setMaxAccess("read-write")
+alaBgpRouteMapLocalPref.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapLocalPref.setStatus("current")
 
@@ -4039,7 +4040,7 @@ alaBgpRouteMapLocalPrefMode = _AlaBgpRouteMapLocalPrefMode_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 8),
     _AlaBgpRouteMapLocalPrefMode_Type()
 )
-alaBgpRouteMapLocalPrefMode.setMaxAccess("read-write")
+alaBgpRouteMapLocalPrefMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapLocalPrefMode.setStatus("current")
 
@@ -4060,7 +4061,7 @@ alaBgpRouteMapMed = _AlaBgpRouteMapMed_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 9),
     _AlaBgpRouteMapMed_Type()
 )
-alaBgpRouteMapMed.setMaxAccess("read-write")
+alaBgpRouteMapMed.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapMed.setStatus("current")
 
@@ -4092,7 +4093,7 @@ alaBgpRouteMapMedMode = _AlaBgpRouteMapMedMode_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 10),
     _AlaBgpRouteMapMedMode_Type()
 )
-alaBgpRouteMapMedMode.setMaxAccess("read-write")
+alaBgpRouteMapMedMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapMedMode.setStatus("current")
 
@@ -4113,7 +4114,7 @@ alaBgpRouteMapAsPrepend = _AlaBgpRouteMapAsPrepend_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 11),
     _AlaBgpRouteMapAsPrepend_Type()
 )
-alaBgpRouteMapAsPrepend.setMaxAccess("read-write")
+alaBgpRouteMapAsPrepend.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapAsPrepend.setStatus("current")
 
@@ -4141,7 +4142,7 @@ alaBgpRouteMapSetCommunityMode = _AlaBgpRouteMapSetCommunityMode_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 12),
     _AlaBgpRouteMapSetCommunityMode_Type()
 )
-alaBgpRouteMapSetCommunityMode.setMaxAccess("read-write")
+alaBgpRouteMapSetCommunityMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapSetCommunityMode.setStatus("current")
 
@@ -4162,7 +4163,7 @@ alaBgpRouteMapCommunity = _AlaBgpRouteMapCommunity_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 13),
     _AlaBgpRouteMapCommunity_Type()
 )
-alaBgpRouteMapCommunity.setMaxAccess("read-write")
+alaBgpRouteMapCommunity.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapCommunity.setStatus("current")
 
@@ -4183,31 +4184,47 @@ alaBgpRouteMapMatchAsRegExp = _AlaBgpRouteMapMatchAsRegExp_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 14),
     _AlaBgpRouteMapMatchAsRegExp_Type()
 )
-alaBgpRouteMapMatchAsRegExp.setMaxAccess("read-write")
+alaBgpRouteMapMatchAsRegExp.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapMatchAsRegExp.setStatus("current")
-_AlaBgpRouteMapMatchPrefix_Type = IpAddress
+
+
+class _AlaBgpRouteMapMatchPrefix_Type(IpAddress):
+    """Custom type alaBgpRouteMapMatchPrefix based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaBgpRouteMapMatchPrefix_Type.__name__ = "IpAddress"
 _AlaBgpRouteMapMatchPrefix_Object = MibTableColumn
 alaBgpRouteMapMatchPrefix = _AlaBgpRouteMapMatchPrefix_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 15),
     _AlaBgpRouteMapMatchPrefix_Type()
 )
-alaBgpRouteMapMatchPrefix.setMaxAccess("read-write")
+alaBgpRouteMapMatchPrefix.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapMatchPrefix.setStatus("current")
-_AlaBgpRouteMapMatchMask_Type = IpAddress
+
+
+class _AlaBgpRouteMapMatchMask_Type(IpAddress):
+    """Custom type alaBgpRouteMapMatchMask based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaBgpRouteMapMatchMask_Type.__name__ = "IpAddress"
 _AlaBgpRouteMapMatchMask_Object = MibTableColumn
 alaBgpRouteMapMatchMask = _AlaBgpRouteMapMatchMask_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 16),
     _AlaBgpRouteMapMatchMask_Type()
 )
-alaBgpRouteMapMatchMask.setMaxAccess("read-write")
+alaBgpRouteMapMatchMask.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapMatchMask.setStatus("current")
 
 
 class _AlaBgpRouteMapMatchCommunity_Type(DisplayString):
     """Custom type alaBgpRouteMapMatchCommunity based on DisplayString"""
+    defaultValue = OctetString(" ")
+
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(1, 70),
@@ -4220,7 +4237,7 @@ alaBgpRouteMapMatchCommunity = _AlaBgpRouteMapMatchCommunity_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 17),
     _AlaBgpRouteMapMatchCommunity_Type()
 )
-alaBgpRouteMapMatchCommunity.setMaxAccess("read-write")
+alaBgpRouteMapMatchCommunity.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapMatchCommunity.setStatus("current")
 
@@ -4241,7 +4258,7 @@ alaBgpRouteMapWeight = _AlaBgpRouteMapWeight_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 18),
     _AlaBgpRouteMapWeight_Type()
 )
-alaBgpRouteMapWeight.setMaxAccess("read-write")
+alaBgpRouteMapWeight.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapWeight.setStatus("current")
 
@@ -4269,7 +4286,7 @@ alaBgpRouteMapAction = _AlaBgpRouteMapAction_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 19),
     _AlaBgpRouteMapAction_Type()
 )
-alaBgpRouteMapAction.setMaxAccess("read-write")
+alaBgpRouteMapAction.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapAction.setStatus("current")
 
@@ -4285,7 +4302,7 @@ alaBgpRouteMapRowStatus = _AlaBgpRouteMapRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 1, 1, 20),
     _AlaBgpRouteMapRowStatus_Type()
 )
-alaBgpRouteMapRowStatus.setMaxAccess("read-write")
+alaBgpRouteMapRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRouteMapRowStatus.setStatus("current")
 _AlaBgpAspathMatchListTable_Object = MibTable
@@ -4360,7 +4377,7 @@ alaBgpAspathMatchListPriority = _AlaBgpAspathMatchListPriority_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 2, 1, 3),
     _AlaBgpAspathMatchListPriority_Type()
 )
-alaBgpAspathMatchListPriority.setMaxAccess("read-write")
+alaBgpAspathMatchListPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAspathMatchListPriority.setStatus("current")
 
@@ -4388,7 +4405,7 @@ alaBgpAspathMatchListAction = _AlaBgpAspathMatchListAction_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 2, 1, 4),
     _AlaBgpAspathMatchListAction_Type()
 )
-alaBgpAspathMatchListAction.setMaxAccess("read-write")
+alaBgpAspathMatchListAction.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAspathMatchListAction.setStatus("current")
 
@@ -4404,7 +4421,7 @@ alaBgpAspathMatchListRowStatus = _AlaBgpAspathMatchListRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 2, 1, 5),
     _AlaBgpAspathMatchListRowStatus_Type()
 )
-alaBgpAspathMatchListRowStatus.setMaxAccess("read-write")
+alaBgpAspathMatchListRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpAspathMatchListRowStatus.setStatus("current")
 
@@ -4498,7 +4515,7 @@ alaBgpPrefixMatchListGE = _AlaBgpPrefixMatchListGE_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 3, 1, 4),
     _AlaBgpPrefixMatchListGE_Type()
 )
-alaBgpPrefixMatchListGE.setMaxAccess("read-write")
+alaBgpPrefixMatchListGE.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPrefixMatchListGE.setStatus("current")
 
@@ -4519,7 +4536,7 @@ alaBgpPrefixMatchListLE = _AlaBgpPrefixMatchListLE_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 3, 1, 5),
     _AlaBgpPrefixMatchListLE_Type()
 )
-alaBgpPrefixMatchListLE.setMaxAccess("read-write")
+alaBgpPrefixMatchListLE.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPrefixMatchListLE.setStatus("current")
 
@@ -4547,7 +4564,7 @@ alaBgpPrefixMatchListAction = _AlaBgpPrefixMatchListAction_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 3, 1, 6),
     _AlaBgpPrefixMatchListAction_Type()
 )
-alaBgpPrefixMatchListAction.setMaxAccess("read-write")
+alaBgpPrefixMatchListAction.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPrefixMatchListAction.setStatus("current")
 
@@ -4563,7 +4580,7 @@ alaBgpPrefixMatchListRowStatus = _AlaBgpPrefixMatchListRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 3, 1, 7),
     _AlaBgpPrefixMatchListRowStatus_Type()
 )
-alaBgpPrefixMatchListRowStatus.setMaxAccess("read-write")
+alaBgpPrefixMatchListRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPrefixMatchListRowStatus.setStatus("current")
 _AlaBgpCommunityMatchListTable_Object = MibTable
@@ -4638,7 +4655,7 @@ alaBgpCommunityMatchListPriority = _AlaBgpCommunityMatchListPriority_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 4, 1, 3),
     _AlaBgpCommunityMatchListPriority_Type()
 )
-alaBgpCommunityMatchListPriority.setMaxAccess("read-write")
+alaBgpCommunityMatchListPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpCommunityMatchListPriority.setStatus("current")
 
@@ -4666,7 +4683,7 @@ alaBgpCommunityMatchListType = _AlaBgpCommunityMatchListType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 4, 1, 4),
     _AlaBgpCommunityMatchListType_Type()
 )
-alaBgpCommunityMatchListType.setMaxAccess("read-write")
+alaBgpCommunityMatchListType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpCommunityMatchListType.setStatus("current")
 
@@ -4694,7 +4711,7 @@ alaBgpCommunityMatchListAction = _AlaBgpCommunityMatchListAction_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 4, 1, 5),
     _AlaBgpCommunityMatchListAction_Type()
 )
-alaBgpCommunityMatchListAction.setMaxAccess("read-write")
+alaBgpCommunityMatchListAction.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpCommunityMatchListAction.setStatus("current")
 
@@ -4710,7 +4727,7 @@ alaBgpCommunityMatchListRowStatus = _AlaBgpCommunityMatchListRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 8, 4, 1, 6),
     _AlaBgpCommunityMatchListRowStatus_Type()
 )
-alaBgpCommunityMatchListRowStatus.setMaxAccess("read-write")
+alaBgpCommunityMatchListRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpCommunityMatchListRowStatus.setStatus("current")
 
@@ -5261,7 +5278,7 @@ alaBgpRedistRouteMetric = _AlaBgpRedistRouteMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 9, 1, 4),
     _AlaBgpRedistRouteMetric_Type()
 )
-alaBgpRedistRouteMetric.setMaxAccess("read-write")
+alaBgpRedistRouteMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRedistRouteMetric.setStatus("deprecated")
 
@@ -5282,7 +5299,7 @@ alaBgpRedistRouteLocalPref = _AlaBgpRedistRouteLocalPref_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 9, 1, 5),
     _AlaBgpRedistRouteLocalPref_Type()
 )
-alaBgpRedistRouteLocalPref.setMaxAccess("read-write")
+alaBgpRedistRouteLocalPref.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRedistRouteLocalPref.setStatus("deprecated")
 
@@ -5303,7 +5320,7 @@ alaBgpRedistRouteCommunity = _AlaBgpRedistRouteCommunity_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 9, 1, 6),
     _AlaBgpRedistRouteCommunity_Type()
 )
-alaBgpRedistRouteCommunity.setMaxAccess("read-write")
+alaBgpRedistRouteCommunity.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRedistRouteCommunity.setStatus("deprecated")
 
@@ -5331,7 +5348,7 @@ alaBgpRedistRouteSubnetMatch = _AlaBgpRedistRouteSubnetMatch_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 9, 1, 7),
     _AlaBgpRedistRouteSubnetMatch_Type()
 )
-alaBgpRedistRouteSubnetMatch.setMaxAccess("read-write")
+alaBgpRedistRouteSubnetMatch.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRedistRouteSubnetMatch.setStatus("deprecated")
 
@@ -5359,7 +5376,7 @@ alaBgpRedistRouteEffect = _AlaBgpRedistRouteEffect_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 9, 1, 8),
     _AlaBgpRedistRouteEffect_Type()
 )
-alaBgpRedistRouteEffect.setMaxAccess("read-write")
+alaBgpRedistRouteEffect.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRedistRouteEffect.setStatus("deprecated")
 
@@ -5375,7 +5392,7 @@ alaBgpRedistRouteRowStatus = _AlaBgpRedistRouteRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 9, 1, 9),
     _AlaBgpRedistRouteRowStatus_Type()
 )
-alaBgpRedistRouteRowStatus.setMaxAccess("read-write")
+alaBgpRedistRouteRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpRedistRouteRowStatus.setStatus("deprecated")
 _AlaBgpDebugTable_Object = MibTable
@@ -5605,7 +5622,7 @@ alaBgpNetwork6Metric = _AlaBgpNetwork6Metric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 11, 1, 4),
     _AlaBgpNetwork6Metric_Type()
 )
-alaBgpNetwork6Metric.setMaxAccess("read-write")
+alaBgpNetwork6Metric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetwork6Metric.setStatus("current")
 
@@ -5626,7 +5643,7 @@ alaBgpNetwork6LocalPref = _AlaBgpNetwork6LocalPref_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 11, 1, 5),
     _AlaBgpNetwork6LocalPref_Type()
 )
-alaBgpNetwork6LocalPref.setMaxAccess("read-write")
+alaBgpNetwork6LocalPref.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetwork6LocalPref.setStatus("current")
 
@@ -5647,7 +5664,7 @@ alaBgpNetwork6Community = _AlaBgpNetwork6Community_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 11, 1, 6),
     _AlaBgpNetwork6Community_Type()
 )
-alaBgpNetwork6Community.setMaxAccess("read-write")
+alaBgpNetwork6Community.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetwork6Community.setStatus("current")
 
@@ -5663,7 +5680,7 @@ alaBgpNetwork6RowStatus = _AlaBgpNetwork6RowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 11, 1, 7),
     _AlaBgpNetwork6RowStatus_Type()
 )
-alaBgpNetwork6RowStatus.setMaxAccess("read-write")
+alaBgpNetwork6RowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpNetwork6RowStatus.setStatus("current")
 _AlaBgpRoute6Table_Object = MibTable
@@ -6519,7 +6536,7 @@ alaBgpPeer6AS = _AlaBgpPeer6AS_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 2),
     _AlaBgpPeer6AS_Type()
 )
-alaBgpPeer6AS.setMaxAccess("read-write")
+alaBgpPeer6AS.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6AS.setStatus("current")
 
@@ -6547,7 +6564,7 @@ alaBgpPeer6Passive = _AlaBgpPeer6Passive_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 3),
     _AlaBgpPeer6Passive_Type()
 )
-alaBgpPeer6Passive.setMaxAccess("read-write")
+alaBgpPeer6Passive.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Passive.setStatus("current")
 
@@ -6568,7 +6585,7 @@ alaBgpPeer6Name = _AlaBgpPeer6Name_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 4),
     _AlaBgpPeer6Name_Type()
 )
-alaBgpPeer6Name.setMaxAccess("read-write")
+alaBgpPeer6Name.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Name.setStatus("current")
 
@@ -6596,7 +6613,7 @@ alaBgpPeer6MultiHop = _AlaBgpPeer6MultiHop_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 5),
     _AlaBgpPeer6MultiHop_Type()
 )
-alaBgpPeer6MultiHop.setMaxAccess("read-write")
+alaBgpPeer6MultiHop.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6MultiHop.setStatus("current")
 
@@ -6617,7 +6634,7 @@ alaBgpPeer6MaxPrefix = _AlaBgpPeer6MaxPrefix_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 6),
     _AlaBgpPeer6MaxPrefix_Type()
 )
-alaBgpPeer6MaxPrefix.setMaxAccess("read-write")
+alaBgpPeer6MaxPrefix.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6MaxPrefix.setStatus("current")
 
@@ -6645,7 +6662,7 @@ alaBgpPeer6MaxPrefixWarnOnly = _AlaBgpPeer6MaxPrefixWarnOnly_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 7),
     _AlaBgpPeer6MaxPrefixWarnOnly_Type()
 )
-alaBgpPeer6MaxPrefixWarnOnly.setMaxAccess("read-write")
+alaBgpPeer6MaxPrefixWarnOnly.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6MaxPrefixWarnOnly.setStatus("current")
 
@@ -6673,7 +6690,7 @@ alaBgpPeer6NextHopSelf = _AlaBgpPeer6NextHopSelf_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 8),
     _AlaBgpPeer6NextHopSelf_Type()
 )
-alaBgpPeer6NextHopSelf.setMaxAccess("read-write")
+alaBgpPeer6NextHopSelf.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6NextHopSelf.setStatus("current")
 
@@ -6701,7 +6718,7 @@ alaBgpPeer6SoftReconfig = _AlaBgpPeer6SoftReconfig_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 9),
     _AlaBgpPeer6SoftReconfig_Type()
 )
-alaBgpPeer6SoftReconfig.setMaxAccess("read-write")
+alaBgpPeer6SoftReconfig.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6SoftReconfig.setStatus("current")
 
@@ -6824,7 +6841,7 @@ alaBgpPeer6RouteMapOut = _AlaBgpPeer6RouteMapOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 15),
     _AlaBgpPeer6RouteMapOut_Type()
 )
-alaBgpPeer6RouteMapOut.setMaxAccess("read-write")
+alaBgpPeer6RouteMapOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6RouteMapOut.setStatus("current")
 
@@ -6845,7 +6862,7 @@ alaBgpPeer6RouteMapIn = _AlaBgpPeer6RouteMapIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 16),
     _AlaBgpPeer6RouteMapIn_Type()
 )
-alaBgpPeer6RouteMapIn.setMaxAccess("read-write")
+alaBgpPeer6RouteMapIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6RouteMapIn.setStatus("current")
 _AlaBgpPeer6LocalAddr_Type = Ipv6Address
@@ -6854,7 +6871,7 @@ alaBgpPeer6LocalAddr = _AlaBgpPeer6LocalAddr_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 17),
     _AlaBgpPeer6LocalAddr_Type()
 )
-alaBgpPeer6LocalAddr.setMaxAccess("read-write")
+alaBgpPeer6LocalAddr.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6LocalAddr.setStatus("current")
 
@@ -7172,7 +7189,7 @@ alaBgpPeer6ClearCounter = _AlaBgpPeer6ClearCounter_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 28),
     _AlaBgpPeer6ClearCounter_Type()
 )
-alaBgpPeer6ClearCounter.setMaxAccess("read-write")
+alaBgpPeer6ClearCounter.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ClearCounter.setStatus("current")
 
@@ -7200,7 +7217,7 @@ alaBgpPeer6AutoReStart = _AlaBgpPeer6AutoReStart_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 29),
     _AlaBgpPeer6AutoReStart_Type()
 )
-alaBgpPeer6AutoReStart.setMaxAccess("read-write")
+alaBgpPeer6AutoReStart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6AutoReStart.setStatus("current")
 
@@ -7228,7 +7245,7 @@ alaBgpPeer6ClientStatus = _AlaBgpPeer6ClientStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 30),
     _AlaBgpPeer6ClientStatus_Type()
 )
-alaBgpPeer6ClientStatus.setMaxAccess("read-write")
+alaBgpPeer6ClientStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ClientStatus.setStatus("current")
 
@@ -7256,7 +7273,7 @@ alaBgpPeer6ConfedStatus = _AlaBgpPeer6ConfedStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 31),
     _AlaBgpPeer6ConfedStatus_Type()
 )
-alaBgpPeer6ConfedStatus.setMaxAccess("read-write")
+alaBgpPeer6ConfedStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ConfedStatus.setStatus("current")
 
@@ -7284,7 +7301,7 @@ alaBgpPeer6RemovePrivateAs = _AlaBgpPeer6RemovePrivateAs_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 32),
     _AlaBgpPeer6RemovePrivateAs_Type()
 )
-alaBgpPeer6RemovePrivateAs.setMaxAccess("read-write")
+alaBgpPeer6RemovePrivateAs.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6RemovePrivateAs.setStatus("current")
 
@@ -7305,7 +7322,7 @@ alaBgpPeer6TTL = _AlaBgpPeer6TTL_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 33),
     _AlaBgpPeer6TTL_Type()
 )
-alaBgpPeer6TTL.setMaxAccess("read-write")
+alaBgpPeer6TTL.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6TTL.setStatus("current")
 
@@ -7326,7 +7343,7 @@ alaBgpPeer6AspathListOut = _AlaBgpPeer6AspathListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 34),
     _AlaBgpPeer6AspathListOut_Type()
 )
-alaBgpPeer6AspathListOut.setMaxAccess("read-write")
+alaBgpPeer6AspathListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6AspathListOut.setStatus("current")
 
@@ -7347,7 +7364,7 @@ alaBgpPeer6AspathListIn = _AlaBgpPeer6AspathListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 35),
     _AlaBgpPeer6AspathListIn_Type()
 )
-alaBgpPeer6AspathListIn.setMaxAccess("read-write")
+alaBgpPeer6AspathListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6AspathListIn.setStatus("current")
 
@@ -7368,7 +7385,7 @@ alaBgpPeer6PrefixListOut = _AlaBgpPeer6PrefixListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 36),
     _AlaBgpPeer6PrefixListOut_Type()
 )
-alaBgpPeer6PrefixListOut.setMaxAccess("read-write")
+alaBgpPeer6PrefixListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6PrefixListOut.setStatus("current")
 
@@ -7389,7 +7406,7 @@ alaBgpPeer6PrefixListIn = _AlaBgpPeer6PrefixListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 37),
     _AlaBgpPeer6PrefixListIn_Type()
 )
-alaBgpPeer6PrefixListIn.setMaxAccess("read-write")
+alaBgpPeer6PrefixListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6PrefixListIn.setStatus("current")
 
@@ -7410,7 +7427,7 @@ alaBgpPeer6CommunityListOut = _AlaBgpPeer6CommunityListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 38),
     _AlaBgpPeer6CommunityListOut_Type()
 )
-alaBgpPeer6CommunityListOut.setMaxAccess("read-write")
+alaBgpPeer6CommunityListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6CommunityListOut.setStatus("current")
 
@@ -7431,7 +7448,7 @@ alaBgpPeer6CommunityListIn = _AlaBgpPeer6CommunityListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 39),
     _AlaBgpPeer6CommunityListIn_Type()
 )
-alaBgpPeer6CommunityListIn.setMaxAccess("read-write")
+alaBgpPeer6CommunityListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6CommunityListIn.setStatus("current")
 
@@ -7457,7 +7474,7 @@ alaBgpPeer6Restart = _AlaBgpPeer6Restart_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 40),
     _AlaBgpPeer6Restart_Type()
 )
-alaBgpPeer6Restart.setMaxAccess("read-write")
+alaBgpPeer6Restart.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Restart.setStatus("current")
 
@@ -7485,7 +7502,7 @@ alaBgpPeer6DefaultOriginate = _AlaBgpPeer6DefaultOriginate_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 41),
     _AlaBgpPeer6DefaultOriginate_Type()
 )
-alaBgpPeer6DefaultOriginate.setMaxAccess("read-write")
+alaBgpPeer6DefaultOriginate.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6DefaultOriginate.setStatus("current")
 
@@ -7511,7 +7528,7 @@ alaBgpPeer6ReconfigureInBound = _AlaBgpPeer6ReconfigureInBound_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 42),
     _AlaBgpPeer6ReconfigureInBound_Type()
 )
-alaBgpPeer6ReconfigureInBound.setMaxAccess("read-write")
+alaBgpPeer6ReconfigureInBound.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ReconfigureInBound.setStatus("current")
 
@@ -7537,7 +7554,7 @@ alaBgpPeer6ReconfigureOutBound = _AlaBgpPeer6ReconfigureOutBound_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 43),
     _AlaBgpPeer6ReconfigureOutBound_Type()
 )
-alaBgpPeer6ReconfigureOutBound.setMaxAccess("read-write")
+alaBgpPeer6ReconfigureOutBound.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ReconfigureOutBound.setStatus("current")
 
@@ -7558,7 +7575,7 @@ alaBgpPeer6MD5Key = _AlaBgpPeer6MD5Key_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 44),
     _AlaBgpPeer6MD5Key_Type()
 )
-alaBgpPeer6MD5Key.setMaxAccess("read-write")
+alaBgpPeer6MD5Key.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6MD5Key.setStatus("current")
 
@@ -7595,7 +7612,7 @@ alaBgpPeer6RowStatus = _AlaBgpPeer6RowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 46),
     _AlaBgpPeer6RowStatus_Type()
 )
-alaBgpPeer6RowStatus.setMaxAccess("read-write")
+alaBgpPeer6RowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6RowStatus.setStatus("current")
 _AlaBgpPeer6UpTransitions_Type = Counter32
@@ -7695,7 +7712,7 @@ alaBgpPeer6LocalIntfName = _AlaBgpPeer6LocalIntfName_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 56),
     _AlaBgpPeer6LocalIntfName_Type()
 )
-alaBgpPeer6LocalIntfName.setMaxAccess("read-write")
+alaBgpPeer6LocalIntfName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6LocalIntfName.setStatus("current")
 
@@ -7853,7 +7870,7 @@ alaBgpPeer6ConnRetryInterval = _AlaBgpPeer6ConnRetryInterval_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 63),
     _AlaBgpPeer6ConnRetryInterval_Type()
 )
-alaBgpPeer6ConnRetryInterval.setMaxAccess("read-write")
+alaBgpPeer6ConnRetryInterval.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ConnRetryInterval.setStatus("current")
 
@@ -7873,7 +7890,7 @@ alaBgpPeer6HoldTimeConfigured = _AlaBgpPeer6HoldTimeConfigured_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 64),
     _AlaBgpPeer6HoldTimeConfigured_Type()
 )
-alaBgpPeer6HoldTimeConfigured.setMaxAccess("read-write")
+alaBgpPeer6HoldTimeConfigured.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6HoldTimeConfigured.setStatus("current")
 
@@ -7893,7 +7910,7 @@ alaBgpPeer6KeepAliveConfigured = _AlaBgpPeer6KeepAliveConfigured_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 65),
     _AlaBgpPeer6KeepAliveConfigured_Type()
 )
-alaBgpPeer6KeepAliveConfigured.setMaxAccess("read-write")
+alaBgpPeer6KeepAliveConfigured.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6KeepAliveConfigured.setStatus("current")
 _AlaBgpPeer6Ipv4NextHop_Type = IpAddress
@@ -7902,7 +7919,7 @@ alaBgpPeer6Ipv4NextHop = _AlaBgpPeer6Ipv4NextHop_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 66),
     _AlaBgpPeer6Ipv4NextHop_Type()
 )
-alaBgpPeer6Ipv4NextHop.setMaxAccess("read-write")
+alaBgpPeer6Ipv4NextHop.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Ipv4NextHop.setStatus("current")
 _AlaBgpPeer6Ipv6NextHop_Type = Ipv6Address
@@ -7911,7 +7928,7 @@ alaBgpPeer6Ipv6NextHop = _AlaBgpPeer6Ipv6NextHop_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 67),
     _AlaBgpPeer6Ipv6NextHop_Type()
 )
-alaBgpPeer6Ipv6NextHop.setMaxAccess("read-write")
+alaBgpPeer6Ipv6NextHop.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Ipv6NextHop.setStatus("current")
 
@@ -7937,7 +7954,7 @@ alaBgpPeer6AdminStatus = _AlaBgpPeer6AdminStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 68),
     _AlaBgpPeer6AdminStatus_Type()
 )
-alaBgpPeer6AdminStatus.setMaxAccess("read-write")
+alaBgpPeer6AdminStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6AdminStatus.setStatus("current")
 
@@ -8037,7 +8054,7 @@ alaBgpPeer6ActivateIpv6 = _AlaBgpPeer6ActivateIpv6_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 72),
     _AlaBgpPeer6ActivateIpv6_Type()
 )
-alaBgpPeer6ActivateIpv6.setMaxAccess("read-write")
+alaBgpPeer6ActivateIpv6.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6ActivateIpv6.setStatus("current")
 
@@ -8058,7 +8075,7 @@ alaBgpPeer6MinRouteAdvertisementInterval = _AlaBgpPeer6MinRouteAdvertisementInte
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 73),
     _AlaBgpPeer6MinRouteAdvertisementInterval_Type()
 )
-alaBgpPeer6MinRouteAdvertisementInterval.setMaxAccess("read-write")
+alaBgpPeer6MinRouteAdvertisementInterval.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6MinRouteAdvertisementInterval.setStatus("current")
 
@@ -8079,7 +8096,7 @@ alaBgpPeer6Prefix6ListOut = _AlaBgpPeer6Prefix6ListOut_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 74),
     _AlaBgpPeer6Prefix6ListOut_Type()
 )
-alaBgpPeer6Prefix6ListOut.setMaxAccess("read-write")
+alaBgpPeer6Prefix6ListOut.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Prefix6ListOut.setStatus("current")
 
@@ -8100,7 +8117,7 @@ alaBgpPeer6Prefix6ListIn = _AlaBgpPeer6Prefix6ListIn_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 5, 1, 1, 14, 1, 75),
     _AlaBgpPeer6Prefix6ListIn_Type()
 )
-alaBgpPeer6Prefix6ListIn.setMaxAccess("read-write")
+alaBgpPeer6Prefix6ListIn.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaBgpPeer6Prefix6ListIn.setStatus("current")
 _AlcatelIND1BGPMIBConformance_ObjectIdentity = ObjectIdentity
@@ -8167,7 +8184,10 @@ alabgpMIBGlobalsGroup.setObjects(
         ("ALCATEL-IND1-BGP-MIB", "alaBgpMultiProtocolIpv4"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpMultiProtocolIpv6"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpBfdStatus"),
-        ("ALCATEL-IND1-BGP-MIB", "alaBgpBfdAllNeighborStatus"))
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpBfdAllNeighborStatus"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpGracefulRestart"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpRestartInterval"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpRestartStatus"))
 )
 if mibBuilder.loadTexts:
     alabgpMIBGlobalsGroup.setStatus("current")
@@ -8235,7 +8255,13 @@ alabgpMIBPeerGroup.setObjects(
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerActivateIpv6"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerBfdStatus"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerPrefix6ListOut"),
-        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerPrefix6ListIn"))
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerPrefix6ListIn"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerLastTransitionTime"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerLastUpTime"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerLocalIntfName"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerRestartFwdState"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerRestartState"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerRestartTime"))
 )
 if mibBuilder.loadTexts:
     alabgpMIBPeerGroup.setStatus("current")
@@ -8381,7 +8407,8 @@ alabgpMIBAspathListGroup.setObjects(
         ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathMatchListRegExp"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathMatchListPriority"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathMatchListAction"),
-        ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathMatchListRowStatus"))
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathMatchListRowStatus"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathMatchListSubIndex"))
 )
 if mibBuilder.loadTexts:
     alabgpMIBAspathListGroup.setStatus("current")
@@ -8396,7 +8423,11 @@ alabgpMIBPrefixListGroup.setObjects(
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefixMatchListGE"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefixMatchListLE"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefixMatchListAction"),
-        ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefixMatchListRowStatus"))
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefixMatchListRowStatus"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefix6MatchListAction"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefix6MatchListGE"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefix6MatchListLE"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPrefix6MatchListRowStatus"))
 )
 if mibBuilder.loadTexts:
     alabgpMIBPrefixListGroup.setStatus("current")
@@ -8424,7 +8455,8 @@ alabgpMIBAspathPriListGroup.setObjects(
         ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathPriMatchListIntIdx"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathPriMatchListRegExp"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathPriMatchListAction"),
-        ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathPriMatchListRowStatus"))
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpAspathPriMatchListRowStatus"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpCommunityMatchListSubIndex"))
 )
 if mibBuilder.loadTexts:
     alabgpMIBAspathPriListGroup.setStatus("current")
@@ -8613,7 +8645,15 @@ alabgpMIBPeer6Group.setObjects(
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6ActivateIpv6"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6MinRouteAdvertisementInterval"),
         ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6Prefix6ListOut"),
-        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6Prefix6ListIn"))
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6Prefix6ListIn"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6BgpId"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6LastUpTime"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6LocalIntfName"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6RestartFwdState"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6RestartState"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6RestartTime"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeer6LastTransitionTime"),
+        ("ALCATEL-IND1-BGP-MIB", "alaBgpPeerBgpId"))
 )
 if mibBuilder.loadTexts:
     alabgpMIBPeer6Group.setStatus("current")

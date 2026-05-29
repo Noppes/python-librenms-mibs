@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arris\DOCS-SUBMGT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:18:40 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -289,6 +286,36 @@ docsSubMgtCpeIpLearned = _DocsSubMgtCpeIpLearned_Object(
 docsSubMgtCpeIpLearned.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     docsSubMgtCpeIpLearned.setStatus("current")
+
+
+class _DocsSubMgtCpeType_Type(Integer32):
+    """Custom type docsSubMgtCpeType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("cpe", 1),
+          ("ps", 2),
+          ("mta", 3),
+          ("stb", 4))
+    )
+
+
+_DocsSubMgtCpeType_Type.__name__ = "Integer32"
+_DocsSubMgtCpeType_Object = MibTableColumn
+docsSubMgtCpeType = _DocsSubMgtCpeType_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 5, 1, 4),
+    _DocsSubMgtCpeType_Type()
+)
+docsSubMgtCpeType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    docsSubMgtCpeType.setStatus("current")
 _DocsSubMgtPktFilterTable_Object = MibTable
 docsSubMgtPktFilterTable = _DocsSubMgtPktFilterTable_Object(
     (1, 3, 6, 1, 3, 83, 4, 1, 6)
@@ -723,6 +750,120 @@ if mibBuilder.loadTexts:
     docsSubMgtCmFilterUpstream.setStatus("current")
 
 
+class _DocsSubMgtPsFilterDownstream_Type(Integer32):
+    """Custom type docsSubMgtPsFilterDownstream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtPsFilterDownstream_Type.__name__ = "Integer32"
+_DocsSubMgtPsFilterDownstream_Object = MibTableColumn
+docsSubMgtPsFilterDownstream = _DocsSubMgtPsFilterDownstream_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 8, 1, 5),
+    _DocsSubMgtPsFilterDownstream_Type()
+)
+docsSubMgtPsFilterDownstream.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtPsFilterDownstream.setStatus("current")
+
+
+class _DocsSubMgtPsFilterUpstream_Type(Integer32):
+    """Custom type docsSubMgtPsFilterUpstream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtPsFilterUpstream_Type.__name__ = "Integer32"
+_DocsSubMgtPsFilterUpstream_Object = MibTableColumn
+docsSubMgtPsFilterUpstream = _DocsSubMgtPsFilterUpstream_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 8, 1, 6),
+    _DocsSubMgtPsFilterUpstream_Type()
+)
+docsSubMgtPsFilterUpstream.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtPsFilterUpstream.setStatus("current")
+
+
+class _DocsSubMgtMtaFilterDownstream_Type(Integer32):
+    """Custom type docsSubMgtMtaFilterDownstream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtMtaFilterDownstream_Type.__name__ = "Integer32"
+_DocsSubMgtMtaFilterDownstream_Object = MibTableColumn
+docsSubMgtMtaFilterDownstream = _DocsSubMgtMtaFilterDownstream_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 8, 1, 7),
+    _DocsSubMgtMtaFilterDownstream_Type()
+)
+docsSubMgtMtaFilterDownstream.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtMtaFilterDownstream.setStatus("current")
+
+
+class _DocsSubMgtMtaFilterUpstream_Type(Integer32):
+    """Custom type docsSubMgtMtaFilterUpstream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtMtaFilterUpstream_Type.__name__ = "Integer32"
+_DocsSubMgtMtaFilterUpstream_Object = MibTableColumn
+docsSubMgtMtaFilterUpstream = _DocsSubMgtMtaFilterUpstream_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 8, 1, 8),
+    _DocsSubMgtMtaFilterUpstream_Type()
+)
+docsSubMgtMtaFilterUpstream.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtMtaFilterUpstream.setStatus("current")
+
+
+class _DocsSubMgtStbFilterDownstream_Type(Integer32):
+    """Custom type docsSubMgtStbFilterDownstream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtStbFilterDownstream_Type.__name__ = "Integer32"
+_DocsSubMgtStbFilterDownstream_Object = MibTableColumn
+docsSubMgtStbFilterDownstream = _DocsSubMgtStbFilterDownstream_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 8, 1, 9),
+    _DocsSubMgtStbFilterDownstream_Type()
+)
+docsSubMgtStbFilterDownstream.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtStbFilterDownstream.setStatus("current")
+
+
+class _DocsSubMgtStbFilterUpstream_Type(Integer32):
+    """Custom type docsSubMgtStbFilterUpstream based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtStbFilterUpstream_Type.__name__ = "Integer32"
+_DocsSubMgtStbFilterUpstream_Object = MibTableColumn
+docsSubMgtStbFilterUpstream = _DocsSubMgtStbFilterUpstream_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 8, 1, 10),
+    _DocsSubMgtStbFilterUpstream_Type()
+)
+docsSubMgtStbFilterUpstream.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtStbFilterUpstream.setStatus("current")
+
+
 class _DocsSubMgtSubFilterDownDefault_Type(Integer32):
     """Custom type docsSubMgtSubFilterDownDefault based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
@@ -797,6 +938,120 @@ docsSubMgtCmFilterUpDefault = _DocsSubMgtCmFilterUpDefault_Object(
 docsSubMgtCmFilterUpDefault.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     docsSubMgtCmFilterUpDefault.setStatus("current")
+
+
+class _DocsSubMgtPsFilterDownDefault_Type(Integer32):
+    """Custom type docsSubMgtPsFilterDownDefault based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtPsFilterDownDefault_Type.__name__ = "Integer32"
+_DocsSubMgtPsFilterDownDefault_Object = MibScalar
+docsSubMgtPsFilterDownDefault = _DocsSubMgtPsFilterDownDefault_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 13),
+    _DocsSubMgtPsFilterDownDefault_Type()
+)
+docsSubMgtPsFilterDownDefault.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtPsFilterDownDefault.setStatus("current")
+
+
+class _DocsSubMgtPsFilterUpDefault_Type(Integer32):
+    """Custom type docsSubMgtPsFilterUpDefault based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtPsFilterUpDefault_Type.__name__ = "Integer32"
+_DocsSubMgtPsFilterUpDefault_Object = MibScalar
+docsSubMgtPsFilterUpDefault = _DocsSubMgtPsFilterUpDefault_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 14),
+    _DocsSubMgtPsFilterUpDefault_Type()
+)
+docsSubMgtPsFilterUpDefault.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtPsFilterUpDefault.setStatus("current")
+
+
+class _DocsSubMgtMtaFilterDownDefault_Type(Integer32):
+    """Custom type docsSubMgtMtaFilterDownDefault based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtMtaFilterDownDefault_Type.__name__ = "Integer32"
+_DocsSubMgtMtaFilterDownDefault_Object = MibScalar
+docsSubMgtMtaFilterDownDefault = _DocsSubMgtMtaFilterDownDefault_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 15),
+    _DocsSubMgtMtaFilterDownDefault_Type()
+)
+docsSubMgtMtaFilterDownDefault.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtMtaFilterDownDefault.setStatus("current")
+
+
+class _DocsSubMgtMtaFilterUpDefault_Type(Integer32):
+    """Custom type docsSubMgtMtaFilterUpDefault based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtMtaFilterUpDefault_Type.__name__ = "Integer32"
+_DocsSubMgtMtaFilterUpDefault_Object = MibScalar
+docsSubMgtMtaFilterUpDefault = _DocsSubMgtMtaFilterUpDefault_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 16),
+    _DocsSubMgtMtaFilterUpDefault_Type()
+)
+docsSubMgtMtaFilterUpDefault.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtMtaFilterUpDefault.setStatus("current")
+
+
+class _DocsSubMgtStbFilterDownDefault_Type(Integer32):
+    """Custom type docsSubMgtStbFilterDownDefault based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtStbFilterDownDefault_Type.__name__ = "Integer32"
+_DocsSubMgtStbFilterDownDefault_Object = MibScalar
+docsSubMgtStbFilterDownDefault = _DocsSubMgtStbFilterDownDefault_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 17),
+    _DocsSubMgtStbFilterDownDefault_Type()
+)
+docsSubMgtStbFilterDownDefault.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtStbFilterDownDefault.setStatus("current")
+
+
+class _DocsSubMgtStbFilterUpDefault_Type(Integer32):
+    """Custom type docsSubMgtStbFilterUpDefault based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1024),
+    )
+
+
+_DocsSubMgtStbFilterUpDefault_Type.__name__ = "Integer32"
+_DocsSubMgtStbFilterUpDefault_Object = MibScalar
+docsSubMgtStbFilterUpDefault = _DocsSubMgtStbFilterUpDefault_Object(
+    (1, 3, 6, 1, 3, 83, 4, 1, 18),
+    _DocsSubMgtStbFilterUpDefault_Type()
+)
+docsSubMgtStbFilterUpDefault.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    docsSubMgtStbFilterUpDefault.setStatus("current")
 _DocsSubMgtNotification_ObjectIdentity = ObjectIdentity
 docsSubMgtNotification = _DocsSubMgtNotification_ObjectIdentity(
     (1, 3, 6, 1, 3, 83, 4, 2)
@@ -839,6 +1094,7 @@ docsSubMgtGroup.setObjects(
         ("DOCS-SUBMGT-MIB", "docsSubMgtCpeLearnableDefault"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtCpeIpAddr"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtCpeIpLearned"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtCpeType"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtPktFilterSrcAddr"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtPktFilterSrcMask"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtPktFilterDstAddr"),
@@ -858,10 +1114,22 @@ docsSubMgtGroup.setObjects(
         ("DOCS-SUBMGT-MIB", "docsSubMgtSubFilterUpstream"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtCmFilterDownstream"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtCmFilterUpstream"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtPsFilterDownstream"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtPsFilterUpstream"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtMtaFilterDownstream"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtMtaFilterUpstream"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtStbFilterDownstream"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtStbFilterUpstream"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtSubFilterDownDefault"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtSubFilterUpDefault"),
         ("DOCS-SUBMGT-MIB", "docsSubMgtCmFilterDownDefault"),
-        ("DOCS-SUBMGT-MIB", "docsSubMgtCmFilterUpDefault"))
+        ("DOCS-SUBMGT-MIB", "docsSubMgtCmFilterUpDefault"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtPsFilterDownDefault"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtPsFilterUpDefault"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtMtaFilterDownDefault"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtMtaFilterUpDefault"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtStbFilterDownDefault"),
+        ("DOCS-SUBMGT-MIB", "docsSubMgtStbFilterUpDefault"))
 )
 if mibBuilder.loadTexts:
     docsSubMgtGroup.setStatus("current")
@@ -911,6 +1179,7 @@ mibBuilder.exportSymbols(
        "docsSubMgtCpeIpIndex": docsSubMgtCpeIpIndex,
        "docsSubMgtCpeIpAddr": docsSubMgtCpeIpAddr,
        "docsSubMgtCpeIpLearned": docsSubMgtCpeIpLearned,
+       "docsSubMgtCpeType": docsSubMgtCpeType,
        "docsSubMgtPktFilterTable": docsSubMgtPktFilterTable,
        "docsSubMgtPktFilterEntry": docsSubMgtPktFilterEntry,
        "docsSubMgtPktFilterGroup": docsSubMgtPktFilterGroup,
@@ -938,10 +1207,22 @@ mibBuilder.exportSymbols(
        "docsSubMgtSubFilterUpstream": docsSubMgtSubFilterUpstream,
        "docsSubMgtCmFilterDownstream": docsSubMgtCmFilterDownstream,
        "docsSubMgtCmFilterUpstream": docsSubMgtCmFilterUpstream,
+       "docsSubMgtPsFilterDownstream": docsSubMgtPsFilterDownstream,
+       "docsSubMgtPsFilterUpstream": docsSubMgtPsFilterUpstream,
+       "docsSubMgtMtaFilterDownstream": docsSubMgtMtaFilterDownstream,
+       "docsSubMgtMtaFilterUpstream": docsSubMgtMtaFilterUpstream,
+       "docsSubMgtStbFilterDownstream": docsSubMgtStbFilterDownstream,
+       "docsSubMgtStbFilterUpstream": docsSubMgtStbFilterUpstream,
        "docsSubMgtSubFilterDownDefault": docsSubMgtSubFilterDownDefault,
        "docsSubMgtSubFilterUpDefault": docsSubMgtSubFilterUpDefault,
        "docsSubMgtCmFilterDownDefault": docsSubMgtCmFilterDownDefault,
        "docsSubMgtCmFilterUpDefault": docsSubMgtCmFilterUpDefault,
+       "docsSubMgtPsFilterDownDefault": docsSubMgtPsFilterDownDefault,
+       "docsSubMgtPsFilterUpDefault": docsSubMgtPsFilterUpDefault,
+       "docsSubMgtMtaFilterDownDefault": docsSubMgtMtaFilterDownDefault,
+       "docsSubMgtMtaFilterUpDefault": docsSubMgtMtaFilterUpDefault,
+       "docsSubMgtStbFilterDownDefault": docsSubMgtStbFilterDownDefault,
+       "docsSubMgtStbFilterUpDefault": docsSubMgtStbFilterUpDefault,
        "docsSubMgtNotification": docsSubMgtNotification,
        "docsSubMgtConformance": docsSubMgtConformance,
        "docsSubMgtCompliances": docsSubMgtCompliances,

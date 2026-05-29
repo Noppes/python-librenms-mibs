@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-DHCP-SRV-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:11 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-DHCP-SRV-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -119,7 +116,8 @@ alcatelIND1DhcpSrvMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1DhcpSrvMIB.setRevisions(
-        ("2009-10-26 00:00",)
+        ("2009-10-26 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -372,6 +370,50 @@ alaDhcpSrvSubnetDescriptor = _AlaDhcpSrvSubnetDescriptor_Object(
 alaDhcpSrvSubnetDescriptor.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaDhcpSrvSubnetDescriptor.setStatus("current")
+
+
+class _AlaDhcpSrvGlobalLeaseDeleteAll_Type(Integer32):
+    """Custom type alaDhcpSrvGlobalLeaseDeleteAll based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 0),
+          ("deleteall", 1))
+    )
+
+
+_AlaDhcpSrvGlobalLeaseDeleteAll_Type.__name__ = "Integer32"
+_AlaDhcpSrvGlobalLeaseDeleteAll_Object = MibScalar
+alaDhcpSrvGlobalLeaseDeleteAll = _AlaDhcpSrvGlobalLeaseDeleteAll_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 59, 1, 1, 6),
+    _AlaDhcpSrvGlobalLeaseDeleteAll_Type()
+)
+alaDhcpSrvGlobalLeaseDeleteAll.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDhcpSrvGlobalLeaseDeleteAll.setStatus("current")
+
+
+class _AlaDhcpSrvGlobalLeaseDelete_Type(IpAddress):
+    """Custom type alaDhcpSrvGlobalLeaseDelete based on IpAddress"""
+    defaultHexValue = "00000000"
+
+
+_AlaDhcpSrvGlobalLeaseDelete_Type.__name__ = "IpAddress"
+_AlaDhcpSrvGlobalLeaseDelete_Object = MibScalar
+alaDhcpSrvGlobalLeaseDelete = _AlaDhcpSrvGlobalLeaseDelete_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 59, 1, 1, 7),
+    _AlaDhcpSrvGlobalLeaseDelete_Type()
+)
+alaDhcpSrvGlobalLeaseDelete.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaDhcpSrvGlobalLeaseDelete.setStatus("current")
 _AlcatelIND1DhcpSrvMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1DhcpSrvMIBConformance = _AlcatelIND1DhcpSrvMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 59, 1, 2)
@@ -416,6 +458,16 @@ alaDhcpSrvLeaseGroup.setObjects(
 if mibBuilder.loadTexts:
     alaDhcpSrvLeaseGroup.setStatus("current")
 
+alaDhcpSrvLeaseUtilizationThresholdGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 59, 1, 2, 1, 4)
+)
+alaDhcpSrvLeaseUtilizationThresholdGroup.setObjects(
+      *(("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvLeaseThresholdStatus"),
+        ("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvSubnetDescriptor"))
+)
+if mibBuilder.loadTexts:
+    alaDhcpSrvLeaseUtilizationThresholdGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -457,7 +509,8 @@ alcatelIND1DhcpSrvMIBCompliance = ModuleCompliance(
 alcatelIND1DhcpSrvMIBCompliance.setObjects(
       *(("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvGlobalConfigGroup"),
         ("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvLeaseGroup"),
-        ("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvNotificationGroup"))
+        ("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvNotificationGroup"),
+        ("ALCATEL-IND1-DHCP-SRV-MIB", "alaDhcpSrvLeaseUtilizationThresholdGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1DhcpSrvMIBCompliance.setStatus(
@@ -488,11 +541,14 @@ mibBuilder.exportSymbols(
        "alaDhcpSrvTrapsObj": alaDhcpSrvTrapsObj,
        "alaDhcpSrvLeaseThresholdStatus": alaDhcpSrvLeaseThresholdStatus,
        "alaDhcpSrvSubnetDescriptor": alaDhcpSrvSubnetDescriptor,
+       "alaDhcpSrvGlobalLeaseDeleteAll": alaDhcpSrvGlobalLeaseDeleteAll,
+       "alaDhcpSrvGlobalLeaseDelete": alaDhcpSrvGlobalLeaseDelete,
        "alcatelIND1DhcpSrvMIBConformance": alcatelIND1DhcpSrvMIBConformance,
        "alcatelIND1DhcpSrvMIBGroups": alcatelIND1DhcpSrvMIBGroups,
        "alaDhcpSrvGlobalConfigGroup": alaDhcpSrvGlobalConfigGroup,
        "alaDhcpSrvLeaseGroup": alaDhcpSrvLeaseGroup,
        "alaDhcpSrvNotificationGroup": alaDhcpSrvNotificationGroup,
+       "alaDhcpSrvLeaseUtilizationThresholdGroup": alaDhcpSrvLeaseUtilizationThresholdGroup,
        "alcatelIND1DhcpSrvMIBCompliances": alcatelIND1DhcpSrvMIBCompliances,
        "alcatelIND1DhcpSrvMIBCompliance": alcatelIND1DhcpSrvMIBCompliance}
 )

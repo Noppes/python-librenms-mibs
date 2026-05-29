@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\packetflux\PACKETFLUX-STANDBYPOWER
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:19:39 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -45,9 +42,9 @@ if 'mibBuilder' not in globals():
 
 # Import SMI symbols from the MIBs this MIB depends on
 
-(packetfluxMgmt,) = mibBuilder.importSymbols(
+(packetfluxProductSpecific,) = mibBuilder.importSymbols(
     "PACKETFLUX-SMI",
-    "packetfluxMgmt")
+    "packetfluxProductSpecific")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -111,7 +108,8 @@ standbypower = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     standbypower.setRevisions(
-        ("2013-06-04 16:49",)
+        ("2018-07-07 13:00",
+         "2013-06-04 16:49")
     )
 
 

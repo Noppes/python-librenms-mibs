@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-CELLULAR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:16:58 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -231,11 +228,6 @@ class TmnxCellularPdnId(TextualConvention, Unsigned32):
 
 class TmnxCellularChannelNumber(TextualConvention, Unsigned32):
     status = "current"
-    subtypeSpec = Unsigned32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 262143),
-    )
-
 
 
 class TmnxCellularBearerRate(TextualConvention, Unsigned32):
@@ -245,6 +237,530 @@ class TmnxCellularBearerRate(TextualConvention, Unsigned32):
         ValueRangeConstraint(0, 100000),
     )
 
+
+
+class TmnxCellularBands(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("b1", 0),
+          ("b2", 1),
+          ("b3", 2),
+          ("b4", 3),
+          ("b5", 4),
+          ("b6", 5),
+          ("b7", 6),
+          ("b8", 7),
+          ("b9", 8),
+          ("b10", 9),
+          ("b11", 10),
+          ("b12", 11),
+          ("b13", 12),
+          ("b14", 13),
+          ("b15", 14),
+          ("b16", 15),
+          ("b17", 16),
+          ("b18", 17),
+          ("b19", 18),
+          ("b20", 19),
+          ("b21", 20),
+          ("b22", 21),
+          ("b23", 22),
+          ("b24", 23),
+          ("b25", 24),
+          ("b26", 25),
+          ("b27", 26),
+          ("b28", 27),
+          ("b29", 28),
+          ("b30", 29),
+          ("b31", 30),
+          ("b32", 31),
+          ("b33", 32),
+          ("b34", 33),
+          ("b35", 34),
+          ("b36", 35),
+          ("b37", 36),
+          ("b38", 37),
+          ("b39", 38),
+          ("b40", 39),
+          ("b41", 40),
+          ("b42", 41),
+          ("b43", 42),
+          ("b44", 43),
+          ("b45", 44),
+          ("b46", 45),
+          ("b47", 46),
+          ("b48", 47),
+          ("b49", 48),
+          ("b50", 49),
+          ("b51", 50),
+          ("b52", 51),
+          ("b53", 52),
+          ("b54", 53),
+          ("b55", 54),
+          ("b56", 55),
+          ("b57", 56),
+          ("b58", 57),
+          ("b59", 58),
+          ("b60", 59),
+          ("b61", 60),
+          ("b62", 61),
+          ("b63", 62),
+          ("b64", 63),
+          ("b65", 64),
+          ("b66", 65),
+          ("b67", 66),
+          ("b68", 67),
+          ("b69", 68),
+          ("b70", 69),
+          ("b71", 70),
+          ("b72", 71),
+          ("b73", 72),
+          ("b74", 73),
+          ("b75", 74),
+          ("b76", 75),
+          ("b77", 76),
+          ("b78", 77),
+          ("b79", 78),
+          ("b80", 79),
+          ("b81", 80),
+          ("b82", 81),
+          ("b83", 82),
+          ("b84", 83),
+          ("b85", 84),
+          ("b86", 85),
+          ("b87", 86),
+          ("b88", 87),
+          ("b89", 88),
+          ("b90", 89),
+          ("b91", 90),
+          ("b92", 91),
+          ("b93", 92),
+          ("b94", 93),
+          ("b95", 94),
+          ("b96", 95),
+          ("b97", 96),
+          ("b98", 97),
+          ("b99", 98),
+          ("b100", 99),
+          ("b101", 100),
+          ("b102", 101),
+          ("b103", 102),
+          ("b104", 103),
+          ("b105", 104),
+          ("b106", 105),
+          ("b107", 106),
+          ("b108", 107),
+          ("b109", 108),
+          ("b110", 109),
+          ("b111", 110),
+          ("b112", 111),
+          ("b113", 112),
+          ("b114", 113),
+          ("b115", 114),
+          ("b116", 115),
+          ("b117", 116),
+          ("b118", 117),
+          ("b119", 118),
+          ("b120", 119),
+          ("b121", 120),
+          ("b122", 121),
+          ("b123", 122),
+          ("b124", 123),
+          ("b125", 124),
+          ("b126", 125),
+          ("b127", 126),
+          ("b128", 127),
+          ("b129", 128),
+          ("b130", 129),
+          ("b131", 130),
+          ("b132", 131),
+          ("b133", 132),
+          ("b134", 133),
+          ("b135", 134),
+          ("b136", 135),
+          ("b137", 136),
+          ("b138", 137),
+          ("b139", 138),
+          ("b140", 139),
+          ("b141", 140),
+          ("b142", 141),
+          ("b143", 142),
+          ("b144", 143),
+          ("b145", 144),
+          ("b146", 145),
+          ("b147", 146),
+          ("b148", 147),
+          ("b149", 148),
+          ("b150", 149),
+          ("b151", 150),
+          ("b152", 151),
+          ("b153", 152),
+          ("b154", 153),
+          ("b155", 154),
+          ("b156", 155),
+          ("b157", 156),
+          ("b158", 157),
+          ("b159", 158),
+          ("b160", 159),
+          ("b161", 160),
+          ("b162", 161),
+          ("b163", 162),
+          ("b164", 163),
+          ("b165", 164),
+          ("b166", 165),
+          ("b167", 166),
+          ("b168", 167),
+          ("b169", 168),
+          ("b170", 169),
+          ("b171", 170),
+          ("b172", 171),
+          ("b173", 172),
+          ("b174", 173),
+          ("b175", 174),
+          ("b176", 175),
+          ("b177", 176),
+          ("b178", 177),
+          ("b179", 178),
+          ("b180", 179),
+          ("b181", 180),
+          ("b182", 181),
+          ("b183", 182),
+          ("b184", 183),
+          ("b185", 184),
+          ("b186", 185),
+          ("b187", 186),
+          ("b188", 187),
+          ("b189", 188),
+          ("b190", 189),
+          ("b191", 190),
+          ("b192", 191),
+          ("b193", 192),
+          ("b194", 193),
+          ("b195", 194),
+          ("b196", 195),
+          ("b197", 196),
+          ("b198", 197),
+          ("b199", 198),
+          ("b200", 199),
+          ("b201", 200),
+          ("b202", 201),
+          ("b203", 202),
+          ("b204", 203),
+          ("b205", 204),
+          ("b206", 205),
+          ("b207", 206),
+          ("b208", 207),
+          ("b209", 208),
+          ("b210", 209),
+          ("b211", 210),
+          ("b212", 211),
+          ("b213", 212),
+          ("b214", 213),
+          ("b215", 214),
+          ("b216", 215),
+          ("b217", 216),
+          ("b218", 217),
+          ("b219", 218),
+          ("b220", 219),
+          ("b221", 220),
+          ("b222", 221),
+          ("b223", 222),
+          ("b224", 223),
+          ("b225", 224),
+          ("b226", 225),
+          ("b227", 226),
+          ("b228", 227),
+          ("b229", 228),
+          ("b230", 229),
+          ("b231", 230),
+          ("b232", 231),
+          ("b233", 232),
+          ("b234", 233),
+          ("b235", 234),
+          ("b236", 235),
+          ("b237", 236),
+          ("b238", 237),
+          ("b239", 238),
+          ("b240", 239),
+          ("b241", 240),
+          ("b242", 241),
+          ("b243", 242),
+          ("b244", 243),
+          ("b245", 244),
+          ("b246", 245),
+          ("b247", 246),
+          ("b248", 247),
+          ("b249", 248),
+          ("b250", 249),
+          ("b251", 250),
+          ("b252", 251),
+          ("b253", 252),
+          ("b254", 253),
+          ("b255", 254),
+          ("b256", 255))
+    )
+
+
+class TmnxCellularBands5g(TextualConvention, Bits):
+    status = "current"
+    namedValues = NamedValues(
+        *(("n1", 0),
+          ("n2", 1),
+          ("n3", 2),
+          ("n4", 3),
+          ("n5", 4),
+          ("n6", 5),
+          ("n7", 6),
+          ("n8", 7),
+          ("n9", 8),
+          ("n10", 9),
+          ("n11", 10),
+          ("n12", 11),
+          ("n13", 12),
+          ("n14", 13),
+          ("n15", 14),
+          ("n16", 15),
+          ("n17", 16),
+          ("n18", 17),
+          ("n19", 18),
+          ("n20", 19),
+          ("n21", 20),
+          ("n22", 21),
+          ("n23", 22),
+          ("n24", 23),
+          ("n25", 24),
+          ("n26", 25),
+          ("n27", 26),
+          ("n28", 27),
+          ("n29", 28),
+          ("n30", 29),
+          ("n31", 30),
+          ("n32", 31),
+          ("n33", 32),
+          ("n34", 33),
+          ("n35", 34),
+          ("n36", 35),
+          ("n37", 36),
+          ("n38", 37),
+          ("n39", 38),
+          ("n40", 39),
+          ("n41", 40),
+          ("n42", 41),
+          ("n43", 42),
+          ("n44", 43),
+          ("n45", 44),
+          ("n46", 45),
+          ("n47", 46),
+          ("n48", 47),
+          ("n49", 48),
+          ("n50", 49),
+          ("n51", 50),
+          ("n52", 51),
+          ("n53", 52),
+          ("n54", 53),
+          ("n55", 54),
+          ("n56", 55),
+          ("n57", 56),
+          ("n58", 57),
+          ("n59", 58),
+          ("n60", 59),
+          ("n61", 60),
+          ("n62", 61),
+          ("n63", 62),
+          ("n64", 63),
+          ("n65", 64),
+          ("n66", 65),
+          ("n67", 66),
+          ("n68", 67),
+          ("n69", 68),
+          ("n70", 69),
+          ("n71", 70),
+          ("n72", 71),
+          ("n73", 72),
+          ("n74", 73),
+          ("n75", 74),
+          ("n76", 75),
+          ("n77", 76),
+          ("n78", 77),
+          ("n79", 78),
+          ("n80", 79),
+          ("n81", 80),
+          ("n82", 81),
+          ("n83", 82),
+          ("n84", 83),
+          ("n85", 84),
+          ("n86", 85),
+          ("n87", 86),
+          ("n88", 87),
+          ("n89", 88),
+          ("n90", 89),
+          ("n91", 90),
+          ("n92", 91),
+          ("n93", 92),
+          ("n94", 93),
+          ("n95", 94),
+          ("n96", 95),
+          ("n97", 96),
+          ("n98", 97),
+          ("n99", 98),
+          ("n100", 99),
+          ("n101", 100),
+          ("n102", 101),
+          ("n103", 102),
+          ("n104", 103),
+          ("n105", 104),
+          ("n106", 105),
+          ("n107", 106),
+          ("n108", 107),
+          ("n109", 108),
+          ("n110", 109),
+          ("n111", 110),
+          ("n112", 111),
+          ("n113", 112),
+          ("n114", 113),
+          ("n115", 114),
+          ("n116", 115),
+          ("n117", 116),
+          ("n118", 117),
+          ("n119", 118),
+          ("n120", 119),
+          ("n121", 120),
+          ("n122", 121),
+          ("n123", 122),
+          ("n124", 123),
+          ("n125", 124),
+          ("n126", 125),
+          ("n127", 126),
+          ("n128", 127),
+          ("n129", 128),
+          ("n130", 129),
+          ("n131", 130),
+          ("n132", 131),
+          ("n133", 132),
+          ("n134", 133),
+          ("n135", 134),
+          ("n136", 135),
+          ("n137", 136),
+          ("n138", 137),
+          ("n139", 138),
+          ("n140", 139),
+          ("n141", 140),
+          ("n142", 141),
+          ("n143", 142),
+          ("n144", 143),
+          ("n145", 144),
+          ("n146", 145),
+          ("n147", 146),
+          ("n148", 147),
+          ("n149", 148),
+          ("n150", 149),
+          ("n151", 150),
+          ("n152", 151),
+          ("n153", 152),
+          ("n154", 153),
+          ("n155", 154),
+          ("n156", 155),
+          ("n157", 156),
+          ("n158", 157),
+          ("n159", 158),
+          ("n160", 159),
+          ("n161", 160),
+          ("n162", 161),
+          ("n163", 162),
+          ("n164", 163),
+          ("n165", 164),
+          ("n166", 165),
+          ("n167", 166),
+          ("n168", 167),
+          ("n169", 168),
+          ("n170", 169),
+          ("n171", 170),
+          ("n172", 171),
+          ("n173", 172),
+          ("n174", 173),
+          ("n175", 174),
+          ("n176", 175),
+          ("n177", 176),
+          ("n178", 177),
+          ("n179", 178),
+          ("n180", 179),
+          ("n181", 180),
+          ("n182", 181),
+          ("n183", 182),
+          ("n184", 183),
+          ("n185", 184),
+          ("n186", 185),
+          ("n187", 186),
+          ("n188", 187),
+          ("n189", 188),
+          ("n190", 189),
+          ("n191", 190),
+          ("n192", 191),
+          ("n193", 192),
+          ("n194", 193),
+          ("n195", 194),
+          ("n196", 195),
+          ("n197", 196),
+          ("n198", 197),
+          ("n199", 198),
+          ("n200", 199),
+          ("n201", 200),
+          ("n202", 201),
+          ("n203", 202),
+          ("n204", 203),
+          ("n205", 204),
+          ("n206", 205),
+          ("n207", 206),
+          ("n208", 207),
+          ("n209", 208),
+          ("n210", 209),
+          ("n211", 210),
+          ("n212", 211),
+          ("n213", 212),
+          ("n214", 213),
+          ("n215", 214),
+          ("n216", 215),
+          ("n217", 216),
+          ("n218", 217),
+          ("n219", 218),
+          ("n220", 219),
+          ("n221", 220),
+          ("n222", 221),
+          ("n223", 222),
+          ("n224", 223),
+          ("n225", 224),
+          ("n226", 225),
+          ("n227", 226),
+          ("n228", 227),
+          ("n229", 228),
+          ("n230", 229),
+          ("n231", 230),
+          ("n232", 231),
+          ("n233", 232),
+          ("n234", 233),
+          ("n235", 234),
+          ("n236", 235),
+          ("n237", 236),
+          ("n238", 237),
+          ("n239", 238),
+          ("n240", 239),
+          ("n241", 240),
+          ("n242", 241),
+          ("n243", 242),
+          ("n244", 243),
+          ("n245", 244),
+          ("n246", 245),
+          ("n247", 246),
+          ("n248", 247),
+          ("n249", 248),
+          ("n250", 249),
+          ("n251", 250),
+          ("n252", 251),
+          ("n253", 252),
+          ("n254", 253),
+          ("n255", 254),
+          ("n256", 255))
+    )
 
 
 # MIB Managed Objects in the order of their OIDs
@@ -280,6 +796,18 @@ tmnxCellularV20Groups = _TmnxCellularV20Groups_ObjectIdentity(
 _TmnxCellularV21Groups_ObjectIdentity = ObjectIdentity
 tmnxCellularV21Groups = _TmnxCellularV21Groups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 5)
+)
+_TmnxCellularV22Groups_ObjectIdentity = ObjectIdentity
+tmnxCellularV22Groups = _TmnxCellularV22Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 6)
+)
+_TmnxCellularV23Groups_ObjectIdentity = ObjectIdentity
+tmnxCellularV23Groups = _TmnxCellularV23Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 7)
+)
+_TmnxCellularV25Groups_ObjectIdentity = ObjectIdentity
+tmnxCellularV25Groups = _TmnxCellularV25Groups_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 8)
 )
 _TmnxCellularObjs_ObjectIdentity = ObjectIdentity
 tmnxCellularObjs = _TmnxCellularObjs_ObjectIdentity(
@@ -642,6 +1170,101 @@ tmnxCellSimCardBgpStateSwitch = _TmnxCellSimCardBgpStateSwitch_Object(
 tmnxCellSimCardBgpStateSwitch.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     tmnxCellSimCardBgpStateSwitch.setStatus("current")
+
+
+class _TmnxCellSimCardBandsConfig_Type(TmnxCellularBands):
+    """Custom type tmnxCellSimCardBandsConfig based on TmnxCellularBands"""
+    defaultBinValue = "0"
+
+
+_TmnxCellSimCardBandsConfig_Type.__name__ = "TmnxCellularBands"
+_TmnxCellSimCardBandsConfig_Object = MibTableColumn
+tmnxCellSimCardBandsConfig = _TmnxCellSimCardBandsConfig_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 1, 1, 8),
+    _TmnxCellSimCardBandsConfig_Type()
+)
+tmnxCellSimCardBandsConfig.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardBandsConfig.setStatus("current")
+
+
+class _TmnxCellSimCardBandsUse3g_Type(TruthValue):
+    """Custom type tmnxCellSimCardBandsUse3g based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxCellSimCardBandsUse3g_Type.__name__ = "TruthValue"
+_TmnxCellSimCardBandsUse3g_Object = MibTableColumn
+tmnxCellSimCardBandsUse3g = _TmnxCellSimCardBandsUse3g_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 1, 1, 9),
+    _TmnxCellSimCardBandsUse3g_Type()
+)
+tmnxCellSimCardBandsUse3g.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardBandsUse3g.setStatus("current")
+
+
+class _TmnxCellSimCardRssiThresh_Type(Integer32):
+    """Custom type tmnxCellSimCardRssiThresh based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-113, -51),
+        ValueRangeConstraint(0, 0),
+    )
+
+
+_TmnxCellSimCardRssiThresh_Type.__name__ = "Integer32"
+_TmnxCellSimCardRssiThresh_Object = MibTableColumn
+tmnxCellSimCardRssiThresh = _TmnxCellSimCardRssiThresh_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 1, 1, 10),
+    _TmnxCellSimCardRssiThresh_Type()
+)
+tmnxCellSimCardRssiThresh.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardRssiThresh.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardRssiThresh.setUnits("decibel-milliwatts")
+
+
+class _TmnxCellSimCardRssiAlarmTime_Type(Unsigned32):
+    """Custom type tmnxCellSimCardRssiAlarmTime based on Unsigned32"""
+    defaultValue = 60
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 300),
+    )
+
+
+_TmnxCellSimCardRssiAlarmTime_Type.__name__ = "Unsigned32"
+_TmnxCellSimCardRssiAlarmTime_Object = MibTableColumn
+tmnxCellSimCardRssiAlarmTime = _TmnxCellSimCardRssiAlarmTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 1, 1, 11),
+    _TmnxCellSimCardRssiAlarmTime_Type()
+)
+tmnxCellSimCardRssiAlarmTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardRssiAlarmTime.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardRssiAlarmTime.setUnits("seconds")
+
+
+class _TmnxCellSimCardRssiThreshSwitch_Type(TruthValue):
+    """Custom type tmnxCellSimCardRssiThreshSwitch based on TruthValue"""
+    defaultValue = 2
+
+
+_TmnxCellSimCardRssiThreshSwitch_Type.__name__ = "TruthValue"
+_TmnxCellSimCardRssiThreshSwitch_Object = MibTableColumn
+tmnxCellSimCardRssiThreshSwitch = _TmnxCellSimCardRssiThreshSwitch_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 1, 1, 12),
+    _TmnxCellSimCardRssiThreshSwitch_Type()
+)
+tmnxCellSimCardRssiThreshSwitch.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    tmnxCellSimCardRssiThreshSwitch.setStatus("current")
 _TmnxCellularPdnTable_Object = MibTable
 tmnxCellularPdnTable = _TmnxCellularPdnTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 2)
@@ -965,7 +1588,8 @@ class _TmnxCellMdaSimLastSwitchReason_Type(Integer32):
               1,
               2,
               3,
-              4)
+              4,
+              5)
         )
     )
     namedValues = NamedValues(
@@ -973,7 +1597,8 @@ class _TmnxCellMdaSimLastSwitchReason_Type(Integer32):
           ("manual-configuration", 1),
           ("forced-switch", 2),
           ("cellular-port-down", 3),
-          ("no-bgp-neighbor", 4))
+          ("no-bgp-neighbor", 4),
+          ("rssi-threshold", 5))
     )
 
 
@@ -1018,6 +1643,43 @@ if mibBuilder.loadTexts:
     tmnxCellMdaMaxTxPower.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxCellMdaMaxTxPower.setUnits("decibel-milliwatts")
+_TmnxCellMdaBandsSupported_Type = DisplayString
+_TmnxCellMdaBandsSupported_Object = MibTableColumn
+tmnxCellMdaBandsSupported = _TmnxCellMdaBandsSupported_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 4, 1, 15),
+    _TmnxCellMdaBandsSupported_Type()
+)
+tmnxCellMdaBandsSupported.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCellMdaBandsSupported.setStatus("current")
+_TmnxCellMdaBandsFirmwareEnabled_Type = DisplayString
+_TmnxCellMdaBandsFirmwareEnabled_Object = MibTableColumn
+tmnxCellMdaBandsFirmwareEnabled = _TmnxCellMdaBandsFirmwareEnabled_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 4, 1, 16),
+    _TmnxCellMdaBandsFirmwareEnabled_Type()
+)
+tmnxCellMdaBandsFirmwareEnabled.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCellMdaBandsFirmwareEnabled.setStatus("current")
+
+
+class _TmnxCellMdaBandsInUse_Type(DisplayString):
+    """Custom type tmnxCellMdaBandsInUse based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 200),
+    )
+
+
+_TmnxCellMdaBandsInUse_Type.__name__ = "DisplayString"
+_TmnxCellMdaBandsInUse_Object = MibTableColumn
+tmnxCellMdaBandsInUse = _TmnxCellMdaBandsInUse_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 4, 1, 17),
+    _TmnxCellMdaBandsInUse_Type()
+)
+tmnxCellMdaBandsInUse.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCellMdaBandsInUse.setStatus("current")
 _TmnxCellPortCbsdAuthCfgTable_Object = MibTable
 tmnxCellPortCbsdAuthCfgTable = _TmnxCellPortCbsdAuthCfgTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 2, 3, 5)
@@ -1084,7 +1746,7 @@ class _TmnxCellPortCbsdAuthAntennaGain_Type(Unsigned32):
 
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 14),
+        ValueRangeConstraint(0, 24),
     )
 
 
@@ -1261,14 +1923,16 @@ class _TmnxCellPortWirelessTechnology_Type(Integer32):
             *(0,
               1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("none", 0),
           ("lte", 1),
           ("wcdma", 2),
-          ("gsm", 3))
+          ("gsm", 3),
+          ("nrSa", 4))
     )
 
 
@@ -1447,6 +2111,34 @@ if mibBuilder.loadTexts:
     tmnxCellPortSinr.setStatus("current")
 if mibBuilder.loadTexts:
     tmnxCellPortSinr.setUnits("0.1 decibel")
+_TmnxCellPortSyncSysDateAndTime_Type = DateAndTime
+_TmnxCellPortSyncSysDateAndTime_Object = MibTableColumn
+tmnxCellPortSyncSysDateAndTime = _TmnxCellPortSyncSysDateAndTime_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 3, 1, 1, 1, 13),
+    _TmnxCellPortSyncSysDateAndTime_Type()
+)
+tmnxCellPortSyncSysDateAndTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCellPortSyncSysDateAndTime.setStatus("current")
+
+
+class _TmnxCellPortPhysCellIdentity_Type(DisplayString):
+    """Custom type tmnxCellPortPhysCellIdentity based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 4),
+    )
+
+
+_TmnxCellPortPhysCellIdentity_Type.__name__ = "DisplayString"
+_TmnxCellPortPhysCellIdentity_Object = MibTableColumn
+tmnxCellPortPhysCellIdentity = _TmnxCellPortPhysCellIdentity_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 3, 1, 1, 1, 14),
+    _TmnxCellPortPhysCellIdentity_Type()
+)
+tmnxCellPortPhysCellIdentity.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCellPortPhysCellIdentity.setStatus("current")
 _TmnxCellularSimCardStatusTable_Object = MibTable
 tmnxCellularSimCardStatusTable = _TmnxCellularSimCardStatusTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 3, 1, 3)
@@ -2235,6 +2927,27 @@ tmnxCellPortCbsdAuthHrtbtRspFail = _TmnxCellPortCbsdAuthHrtbtRspFail_Object(
 tmnxCellPortCbsdAuthHrtbtRspFail.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     tmnxCellPortCbsdAuthHrtbtRspFail.setStatus("current")
+
+
+class _TmnxCellPortCbsdAuthMaxEirp_Type(Integer32):
+    """Custom type tmnxCellPortCbsdAuthMaxEirp based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-137, 37),
+    )
+
+
+_TmnxCellPortCbsdAuthMaxEirp_Type.__name__ = "Integer32"
+_TmnxCellPortCbsdAuthMaxEirp_Object = MibTableColumn
+tmnxCellPortCbsdAuthMaxEirp = _TmnxCellPortCbsdAuthMaxEirp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 3, 1, 7, 1, 23),
+    _TmnxCellPortCbsdAuthMaxEirp_Type()
+)
+tmnxCellPortCbsdAuthMaxEirp.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    tmnxCellPortCbsdAuthMaxEirp.setStatus("current")
+if mibBuilder.loadTexts:
+    tmnxCellPortCbsdAuthMaxEirp.setUnits("decibel-milliwatts per megahertz")
 _TmnxCellularNotifyObjects_ObjectIdentity = ObjectIdentity
 tmnxCellularNotifyObjects = _TmnxCellularNotifyObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 109, 4)
@@ -2603,6 +3316,57 @@ tmnxCellularConfigGroupV21.setObjects(
 if mibBuilder.loadTexts:
     tmnxCellularConfigGroupV21.setStatus("current")
 
+tmnxCellularConfigGroupV22 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 6, 1)
+)
+tmnxCellularConfigGroupV22.setObjects(
+      *(("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardBandsConfig"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardBandsUse3g"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiThresh"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiAlarmTime"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiThreshSwitch"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellularConfigGroupV22.setStatus("current")
+
+tmnxCellularStateGroupV22 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 6, 2)
+)
+tmnxCellularStateGroupV22.setObjects(
+      *(("TIMETRA-CELLULAR-MIB", "tmnxCellMdaBandsSupported"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellMdaBandsFirmwareEnabled"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellMdaBandsInUse"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellularStateGroupV22.setStatus("current")
+
+tmnxCellPortCbsdAuthGroupV23 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 7, 1)
+)
+tmnxCellPortCbsdAuthGroupV23.setObjects(
+    ("TIMETRA-CELLULAR-MIB", "tmnxCellPortCbsdAuthMaxEirp")
+)
+if mibBuilder.loadTexts:
+    tmnxCellPortCbsdAuthGroupV23.setStatus("current")
+
+tmnxCellularStatusGroupV23 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 7, 2)
+)
+tmnxCellularStatusGroupV23.setObjects(
+    ("TIMETRA-CELLULAR-MIB", "tmnxCellPortSyncSysDateAndTime")
+)
+if mibBuilder.loadTexts:
+    tmnxCellularStatusGroupV23.setStatus("current")
+
+tmnxCellPortPhysCellIdenGroupV25 = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 8, 2)
+)
+tmnxCellPortPhysCellIdenGroupV25.setObjects(
+    ("TIMETRA-CELLULAR-MIB", "tmnxCellPortPhysCellIdentity")
+)
+if mibBuilder.loadTexts:
+    tmnxCellPortPhysCellIdenGroupV25.setStatus("current")
+
 
 # Notification objects
 
@@ -2737,6 +3501,32 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxCellularRssiAlarm = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 109, 0, 11)
+)
+tmnxCellularRssiAlarm.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiThresh"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiAlarmTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellularRssiAlarm.setStatus(
+        "current"
+    )
+
+tmnxCellularRssiAlarmClear = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 3, 109, 0, 12)
+)
+tmnxCellularRssiAlarmClear.setObjects(
+      *(("TIMETRA-PORT-MIB", "tmnxPortNotifyPortId"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiThresh"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellSimCardRssiAlarmTime"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellularRssiAlarmClear.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -2767,6 +3557,18 @@ tmnxCellNotificationGroupV21.setObjects(
 )
 if mibBuilder.loadTexts:
     tmnxCellNotificationGroupV21.setStatus(
+        "current"
+    )
+
+tmnxCellNotificationGroupV22 = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 2, 6, 3)
+)
+tmnxCellNotificationGroupV22.setObjects(
+      *(("TIMETRA-CELLULAR-MIB", "tmnxCellularRssiAlarm"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellularRssiAlarmClear"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellNotificationGroupV22.setStatus(
         "current"
     )
 
@@ -2838,6 +3640,42 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxCellularComplianceV22 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 1, 6)
+)
+tmnxCellularComplianceV22.setObjects(
+      *(("TIMETRA-CELLULAR-MIB", "tmnxCellularConfigGroupV22"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellularStateGroupV22"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellNotificationGroupV22"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellularComplianceV22.setStatus(
+        "current"
+    )
+
+tmnxCellularComplianceV23 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 1, 7)
+)
+tmnxCellularComplianceV23.setObjects(
+      *(("TIMETRA-CELLULAR-MIB", "tmnxCellPortCbsdAuthGroupV23"),
+        ("TIMETRA-CELLULAR-MIB", "tmnxCellularStatusGroupV23"))
+)
+if mibBuilder.loadTexts:
+    tmnxCellularComplianceV23.setStatus(
+        "current"
+    )
+
+tmnxCellularComplianceV25 = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 109, 1, 8)
+)
+tmnxCellularComplianceV25.setObjects(
+    ("TIMETRA-CELLULAR-MIB", "tmnxCellPortPhysCellIdenGroupV25")
+)
+if mibBuilder.loadTexts:
+    tmnxCellularComplianceV25.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -2852,6 +3690,8 @@ mibBuilder.exportSymbols(
        "TmnxCellularPdnId": TmnxCellularPdnId,
        "TmnxCellularChannelNumber": TmnxCellularChannelNumber,
        "TmnxCellularBearerRate": TmnxCellularBearerRate,
+       "TmnxCellularBands": TmnxCellularBands,
+       "TmnxCellularBands5g": TmnxCellularBands5g,
        "timetraCellularMIBModule": timetraCellularMIBModule,
        "tmnxCellularConformance": tmnxCellularConformance,
        "tmnxCellularCompliances": tmnxCellularCompliances,
@@ -2860,6 +3700,9 @@ mibBuilder.exportSymbols(
        "tmnxCellularComplianceV19": tmnxCellularComplianceV19,
        "tmnxCellularComplianceV20": tmnxCellularComplianceV20,
        "tmnxCellularComplianceV21": tmnxCellularComplianceV21,
+       "tmnxCellularComplianceV22": tmnxCellularComplianceV22,
+       "tmnxCellularComplianceV23": tmnxCellularComplianceV23,
+       "tmnxCellularComplianceV25": tmnxCellularComplianceV25,
        "tmnxCellularGroups": tmnxCellularGroups,
        "tmnxCellularV15v0Groups": tmnxCellularV15v0Groups,
        "tmnxCellularConfigGroup": tmnxCellularConfigGroup,
@@ -2879,6 +3722,15 @@ mibBuilder.exportSymbols(
        "tmnxCellNotificationGroupV21": tmnxCellNotificationGroupV21,
        "tmnxCellularStatusGroupV21": tmnxCellularStatusGroupV21,
        "tmnxCellularConfigGroupV21": tmnxCellularConfigGroupV21,
+       "tmnxCellularV22Groups": tmnxCellularV22Groups,
+       "tmnxCellularConfigGroupV22": tmnxCellularConfigGroupV22,
+       "tmnxCellularStateGroupV22": tmnxCellularStateGroupV22,
+       "tmnxCellNotificationGroupV22": tmnxCellNotificationGroupV22,
+       "tmnxCellularV23Groups": tmnxCellularV23Groups,
+       "tmnxCellPortCbsdAuthGroupV23": tmnxCellPortCbsdAuthGroupV23,
+       "tmnxCellularStatusGroupV23": tmnxCellularStatusGroupV23,
+       "tmnxCellularV25Groups": tmnxCellularV25Groups,
+       "tmnxCellPortPhysCellIdenGroupV25": tmnxCellPortPhysCellIdenGroupV25,
        "tmnxCellularObjs": tmnxCellularObjs,
        "tmnxCellularConfigObjs": tmnxCellularConfigObjs,
        "tmnxCellularConfigTimestamps": tmnxCellularConfigTimestamps,
@@ -2909,6 +3761,11 @@ mibBuilder.exportSymbols(
        "tmnxCellSimCardFailureDuration": tmnxCellSimCardFailureDuration,
        "tmnxCellSimCardPortStateSwitch": tmnxCellSimCardPortStateSwitch,
        "tmnxCellSimCardBgpStateSwitch": tmnxCellSimCardBgpStateSwitch,
+       "tmnxCellSimCardBandsConfig": tmnxCellSimCardBandsConfig,
+       "tmnxCellSimCardBandsUse3g": tmnxCellSimCardBandsUse3g,
+       "tmnxCellSimCardRssiThresh": tmnxCellSimCardRssiThresh,
+       "tmnxCellSimCardRssiAlarmTime": tmnxCellSimCardRssiAlarmTime,
+       "tmnxCellSimCardRssiThreshSwitch": tmnxCellSimCardRssiThreshSwitch,
        "tmnxCellularPdnTable": tmnxCellularPdnTable,
        "tmnxCellularPdnEntry": tmnxCellularPdnEntry,
        "tmnxCellPdnId": tmnxCellPdnId,
@@ -2936,6 +3793,9 @@ mibBuilder.exportSymbols(
        "tmnxCellMdaSimLastSwitchReason": tmnxCellMdaSimLastSwitchReason,
        "tmnxCellMdaSpecFirmwareVersion": tmnxCellMdaSpecFirmwareVersion,
        "tmnxCellMdaMaxTxPower": tmnxCellMdaMaxTxPower,
+       "tmnxCellMdaBandsSupported": tmnxCellMdaBandsSupported,
+       "tmnxCellMdaBandsFirmwareEnabled": tmnxCellMdaBandsFirmwareEnabled,
+       "tmnxCellMdaBandsInUse": tmnxCellMdaBandsInUse,
        "tmnxCellPortCbsdAuthCfgTable": tmnxCellPortCbsdAuthCfgTable,
        "tmnxCellPortCbsdAuthCfgEntry": tmnxCellPortCbsdAuthCfgEntry,
        "tmnxCellPortCbsdAuthCfgLstChange": tmnxCellPortCbsdAuthCfgLstChange,
@@ -2962,6 +3822,8 @@ mibBuilder.exportSymbols(
        "tmnxCellPortRscp": tmnxCellPortRscp,
        "tmnxCellPortRsrq": tmnxCellPortRsrq,
        "tmnxCellPortSinr": tmnxCellPortSinr,
+       "tmnxCellPortSyncSysDateAndTime": tmnxCellPortSyncSysDateAndTime,
+       "tmnxCellPortPhysCellIdentity": tmnxCellPortPhysCellIdentity,
        "tmnxCellularSimCardStatusTable": tmnxCellularSimCardStatusTable,
        "tmnxCellularSimCardStatusEntry": tmnxCellularSimCardStatusEntry,
        "tmnxCellSimCardEquipped": tmnxCellSimCardEquipped,
@@ -3023,6 +3885,7 @@ mibBuilder.exportSymbols(
        "tmnxCellPortCbsdAuthHrtbtRequest": tmnxCellPortCbsdAuthHrtbtRequest,
        "tmnxCellPortCbsdAuthHrtbtRspSuc": tmnxCellPortCbsdAuthHrtbtRspSuc,
        "tmnxCellPortCbsdAuthHrtbtRspFail": tmnxCellPortCbsdAuthHrtbtRspFail,
+       "tmnxCellPortCbsdAuthMaxEirp": tmnxCellPortCbsdAuthMaxEirp,
        "tmnxCellularNotifyObjects": tmnxCellularNotifyObjects,
        "tmnxCellularNotifyPdnId": tmnxCellularNotifyPdnId,
        "tmnxCellMdaNoServiceResetReason": tmnxCellMdaNoServiceResetReason,
@@ -3041,5 +3904,7 @@ mibBuilder.exportSymbols(
        "tmnxCellPortCbsdUnregistered": tmnxCellPortCbsdUnregistered,
        "tmnxCellPortCbsdGranted": tmnxCellPortCbsdGranted,
        "tmnxCellPortCbsdAuthorized": tmnxCellPortCbsdAuthorized,
-       "tmnxCellPortCbsdTransDown": tmnxCellPortCbsdTransDown}
+       "tmnxCellPortCbsdTransDown": tmnxCellPortCbsdTransDown,
+       "tmnxCellularRssiAlarm": tmnxCellularRssiAlarm,
+       "tmnxCellularRssiAlarmClear": tmnxCellularRssiAlarmClear}
 )

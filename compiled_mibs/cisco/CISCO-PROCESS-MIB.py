@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\cisco\CISCO-PROCESS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:27:11 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -131,7 +128,8 @@ ciscoProcessMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ciscoProcessMIB.setRevisions(
-        ("2011-06-23 00:00",
+        ("2020-04-21 00:00",
+         "2011-06-23 00:00",
          "2010-05-06 00:00",
          "2009-10-12 00:00",
          "2009-01-23 00:00",
@@ -754,6 +752,44 @@ cpmProcessName = _CpmProcessName_Object(
 cpmProcessName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cpmProcessName.setStatus("current")
+
+
+class _CpmProcessState_Type(Integer32):
+    """Custom type cpmProcessState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("down", 0),
+          ("running", 1),
+          ("started", 2),
+          ("waiting", 3),
+          ("disabled", 4),
+          ("userdisabled", 5),
+          ("locked", 6),
+          ("other", 7))
+    )
+
+
+_CpmProcessState_Type.__name__ = "Integer32"
+_CpmProcessState_Object = MibTableColumn
+cpmProcessState = _CpmProcessState_Object(
+    (1, 3, 6, 1, 4, 1, 9, 9, 109, 1, 2, 1, 1, 3),
+    _CpmProcessState_Type()
+)
+cpmProcessState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    cpmProcessState.setStatus("current")
 _CpmProcessuSecs_Type = Unsigned32
 _CpmProcessuSecs_Object = MibTableColumn
 cpmProcessuSecs = _CpmProcessuSecs_Object(
@@ -2465,6 +2501,19 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+cpmProcessStateTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 9, 9, 109, 2, 0, 3)
+)
+cpmProcessStateTrap.setObjects(
+      *(("CISCO-PROCESS-MIB", "cpmProcessPID"),
+        ("CISCO-PROCESS-MIB", "cpmProcessName"),
+        ("CISCO-PROCESS-MIB", "cpmProcessState"))
+)
+if mibBuilder.loadTexts:
+    cpmProcessStateTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -2689,6 +2738,7 @@ mibBuilder.exportSymbols(
        "cpmProcessEntry": cpmProcessEntry,
        "cpmProcessPID": cpmProcessPID,
        "cpmProcessName": cpmProcessName,
+       "cpmProcessState": cpmProcessState,
        "cpmProcessuSecs": cpmProcessuSecs,
        "cpmProcessTimeCreated": cpmProcessTimeCreated,
        "cpmProcessAverageUSecs": cpmProcessAverageUSecs,
@@ -2791,6 +2841,7 @@ mibBuilder.exportSymbols(
        "ciscoProcessMIBNotifs": ciscoProcessMIBNotifs,
        "cpmCPURisingThreshold": cpmCPURisingThreshold,
        "cpmCPUFallingThreshold": cpmCPUFallingThreshold,
+       "cpmProcessStateTrap": cpmProcessStateTrap,
        "ciscoProcessMIBConformance": ciscoProcessMIBConformance,
        "cpmCompliances": cpmCompliances,
        "cProcessMIBCompliance": cProcessMIBCompliance,

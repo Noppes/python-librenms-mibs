@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\arris\CADANT-PRODUCTS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:18:14 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,13 +102,15 @@ cadant = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cadant.setRevisions(
-        ("2000-11-18 00:00",
-         "2002-02-01 00:00",
-         "2002-05-07 00:00",
-         "2002-06-26 00:00",
-         "2002-12-10 00:00",
+        ("2014-06-25 00:00",
+         "2010-04-06 00:00",
+         "2007-06-04 00:00",
          "2003-06-30 00:00",
-         "2007-06-04 00:00")
+         "2002-12-10 00:00",
+         "2002-06-26 00:00",
+         "2002-05-07 00:00",
+         "2002-02-01 00:00",
+         "2000-11-18 00:00")
     )
 
 
@@ -196,6 +195,18 @@ _CadL2vpn_ObjectIdentity = ObjectIdentity
 cadL2vpn = _CadL2vpn_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 4998, 1, 1, 120)
 )
+_CadCmtsIpVideo_ObjectIdentity = ObjectIdentity
+cadCmtsIpVideo = _CadCmtsIpVideo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 4998, 1, 1, 125)
+)
+_CadMpls_ObjectIdentity = ObjectIdentity
+cadMpls = _CadMpls_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 4998, 1, 1, 130)
+)
+_CadLicense_ObjectIdentity = ObjectIdentity
+cadLicense = _CadLicense_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 4998, 1, 1, 135)
+)
 _CadNms_ObjectIdentity = ObjectIdentity
 cadNms = _CadNms_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 4998, 1, 2)
@@ -255,6 +266,9 @@ mibBuilder.exportSymbols(
        "cadTopology": cadTopology,
        "cadCmtsIf3": cadCmtsIf3,
        "cadL2vpn": cadL2vpn,
+       "cadCmtsIpVideo": cadCmtsIpVideo,
+       "cadMpls": cadMpls,
+       "cadLicense": cadLicense,
        "cadNms": cadNms,
        "cadProducts": cadProducts,
        "c4cmts": c4cmts,

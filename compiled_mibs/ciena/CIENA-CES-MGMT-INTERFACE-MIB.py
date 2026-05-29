@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\ciena\CIENA-CES-MGMT-INTERFACE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:24:40 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -127,10 +124,13 @@ cienaCesMgmtInterfaceMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cienaCesMgmtInterfaceMIB.setRevisions(
-        ("2015-05-15 00:00",
+        ("2017-06-07 00:00",
+         "2017-01-23 00:00",
+         "2015-05-15 00:00",
          "2015-04-23 00:00",
          "2015-04-06 00:00",
          "2014-11-18 00:00",
+         "2014-11-05 00:00",
          "2014-10-07 00:00",
          "2013-06-17 00:00",
          "2012-04-04 00:00")
@@ -141,6 +141,22 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class PreferredSourceAddress(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("default", 1),
+          ("loopback", 2))
+    )
 
 
 
@@ -697,6 +713,29 @@ cienaCesInetMgmtPortInterface = _CienaCesInetMgmtPortInterface_Object(
 cienaCesInetMgmtPortInterface.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     cienaCesInetMgmtPortInterface.setStatus("current")
+_CienaCesServerModule_ObjectIdentity = ObjectIdentity
+cienaCesServerModule = _CienaCesServerModule_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 27, 1, 2)
+)
+
+
+class _CienaCesServerModuleMgmtVlan_Type(Integer32):
+    """Custom type cienaCesServerModuleMgmtVlan based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 24576),
+    )
+
+
+_CienaCesServerModuleMgmtVlan_Type.__name__ = "Integer32"
+_CienaCesServerModuleMgmtVlan_Object = MibScalar
+cienaCesServerModuleMgmtVlan = _CienaCesServerModuleMgmtVlan_Object(
+    (1, 3, 6, 1, 4, 1, 1271, 2, 1, 27, 1, 2, 1),
+    _CienaCesServerModuleMgmtVlan_Type()
+)
+cienaCesServerModuleMgmtVlan.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    cienaCesServerModuleMgmtVlan.setStatus("current")
 _CienaCesMgmtInterfaceMIBConformance_ObjectIdentity = ObjectIdentity
 cienaCesMgmtInterfaceMIBConformance = _CienaCesMgmtInterfaceMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1271, 2, 1, 27, 3)
@@ -830,7 +869,8 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "CIENA-CES-MGMT-INTERFACE-MIB",
-    **{"cienaCesMgmtInterfaceMIB": cienaCesMgmtInterfaceMIB,
+    **{"PreferredSourceAddress": PreferredSourceAddress,
+       "cienaCesMgmtInterfaceMIB": cienaCesMgmtInterfaceMIB,
        "cienaCesMgmtInterfaceMIBObjects": cienaCesMgmtInterfaceMIBObjects,
        "cienaCesMgmtInterface": cienaCesMgmtInterface,
        "cienaCesInetMgmtInterfaceTable": cienaCesInetMgmtInterfaceTable,
@@ -871,6 +911,8 @@ mibBuilder.exportSymbols(
        "cienaCesInetTcpTimestamps": cienaCesInetTcpTimestamps,
        "cienaCesInetMgmtPort": cienaCesInetMgmtPort,
        "cienaCesInetMgmtPortInterface": cienaCesInetMgmtPortInterface,
+       "cienaCesServerModule": cienaCesServerModule,
+       "cienaCesServerModuleMgmtVlan": cienaCesServerModuleMgmtVlan,
        "cienaCesMgmtInterfaceMIBConformance": cienaCesMgmtInterfaceMIBConformance,
        "cienaCesMgmtInterfaceMIBCompliances": cienaCesMgmtInterfaceMIBCompliances,
        "cienaCesMgmtInterfaceMIBGroups": cienaCesMgmtInterfaceMIBGroups,

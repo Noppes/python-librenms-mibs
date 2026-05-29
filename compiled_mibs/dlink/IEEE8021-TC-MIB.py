@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\IEEE8021-TC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:37:54 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,9 @@ ieee8021TcMib = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     ieee8021TcMib.setRevisions(
-        ("2012-02-15 00:00",
+        ("2018-06-21 00:00",
+         "2014-12-15 00:00",
+         "2012-02-15 00:00",
          "2011-08-23 00:00",
          "2011-04-06 00:00",
          "2011-02-27 00:00",
@@ -286,14 +285,20 @@ class IEEE8021ServiceSelectorType(TextualConvention, Integer32):
             *(1,
               2,
               3,
-              4)
+              4,
+              5,
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
         *(("vlanId", 1),
           ("isid", 2),
           ("tesid", 3),
-          ("segid", 4))
+          ("segid", 4),
+          ("path-tesid", 5),
+          ("group-isid", 6),
+          ("ieeeReserved", 7))
     )
 
 

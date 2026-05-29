@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\saf\SAF-ENTERPRISE
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:24:38 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,7 +102,8 @@ saf = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     saf.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2015-11-12 00:00",
+         "2007-04-03 00:00")
     )
 
 
@@ -136,6 +134,14 @@ _Microwave_ObjectIdentity = ObjectIdentity
 microwave = _Microwave_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 7571, 100, 2)
 )
+_Aranet_ObjectIdentity = ObjectIdentity
+aranet = _Aranet_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 3)
+)
+_ControlDevice_ObjectIdentity = ObjectIdentity
+controlDevice = _ControlDevice_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 64)
+)
 
 # Managed Objects groups
 
@@ -160,5 +166,7 @@ mibBuilder.exportSymbols(
        "tehnika": tehnika,
        "microwaveRadio": microwaveRadio,
        "pointToPoint": pointToPoint,
-       "microwave": microwave}
+       "microwave": microwave,
+       "aranet": aranet,
+       "controlDevice": controlDevice}
 )

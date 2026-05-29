@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\TIMETRA-SDP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -893,6 +890,24 @@ svcL2BgpVplsRteStatus = _SvcL2BgpVplsRteStatus_Object(
 svcL2BgpVplsRteStatus.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svcL2BgpVplsRteStatus.setStatus("current")
+_SvcL2BgpVplsRteSendFlowLabel_Type = Unsigned32
+_SvcL2BgpVplsRteSendFlowLabel_Object = MibTableColumn
+svcL2BgpVplsRteSendFlowLabel = _SvcL2BgpVplsRteSendFlowLabel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 2, 84, 1, 15),
+    _SvcL2BgpVplsRteSendFlowLabel_Type()
+)
+svcL2BgpVplsRteSendFlowLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    svcL2BgpVplsRteSendFlowLabel.setStatus("current")
+_SvcL2BgpVplsRteReceiveFlowLabel_Type = Unsigned32
+_SvcL2BgpVplsRteReceiveFlowLabel_Object = MibTableColumn
+svcL2BgpVplsRteReceiveFlowLabel = _SvcL2BgpVplsRteReceiveFlowLabel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 2, 84, 1, 16),
+    _SvcL2BgpVplsRteReceiveFlowLabel_Type()
+)
+svcL2BgpVplsRteReceiveFlowLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    svcL2BgpVplsRteReceiveFlowLabel.setStatus("current")
 _SvcVllBgpADPWTempBindTblLC_Type = TimeStamp
 _SvcVllBgpADPWTempBindTblLC_Object = MibScalar
 svcVllBgpADPWTempBindTblLC = _SvcVllBgpADPWTempBindTblLC_Object(
@@ -1272,6 +1287,24 @@ svcL2BgpVpwsRtePreference = _SvcL2BgpVpwsRtePreference_Object(
 svcL2BgpVpwsRtePreference.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     svcL2BgpVpwsRtePreference.setStatus("current")
+_SvcL2BgpVpwsRteSendFlowLabel_Type = Unsigned32
+_SvcL2BgpVpwsRteSendFlowLabel_Object = MibTableColumn
+svcL2BgpVpwsRteSendFlowLabel = _SvcL2BgpVpwsRteSendFlowLabel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 2, 147, 1, 17),
+    _SvcL2BgpVpwsRteSendFlowLabel_Type()
+)
+svcL2BgpVpwsRteSendFlowLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    svcL2BgpVpwsRteSendFlowLabel.setStatus("current")
+_SvcL2BgpVpwsRteReceiveFlowLabel_Type = Unsigned32
+_SvcL2BgpVpwsRteReceiveFlowLabel_Object = MibTableColumn
+svcL2BgpVpwsRteReceiveFlowLabel = _SvcL2BgpVpwsRteReceiveFlowLabel_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 2, 147, 1, 18),
+    _SvcL2BgpVpwsRteReceiveFlowLabel_Type()
+)
+svcL2BgpVpwsRteReceiveFlowLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    svcL2BgpVpwsRteReceiveFlowLabel.setStatus("current")
 _TmnxSdpObjs_ObjectIdentity = ObjectIdentity
 tmnxSdpObjs = _TmnxSdpObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4)
@@ -2518,6 +2551,50 @@ sdpOperTunnelFarEndInetAddr = _SdpOperTunnelFarEndInetAddr_Object(
 sdpOperTunnelFarEndInetAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sdpOperTunnelFarEndInetAddr.setStatus("current")
+_SdpOperBandwidthHi_Type = Unsigned32
+_SdpOperBandwidthHi_Object = MibTableColumn
+sdpOperBandwidthHi = _SdpOperBandwidthHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 3, 1, 74),
+    _SdpOperBandwidthHi_Type()
+)
+sdpOperBandwidthHi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpOperBandwidthHi.setStatus("current")
+if mibBuilder.loadTexts:
+    sdpOperBandwidthHi.setUnits("kilobps")
+_SdpAvailableBandwidthHi_Type = Unsigned32
+_SdpAvailableBandwidthHi_Object = MibTableColumn
+sdpAvailableBandwidthHi = _SdpAvailableBandwidthHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 3, 1, 75),
+    _SdpAvailableBandwidthHi_Type()
+)
+sdpAvailableBandwidthHi.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpAvailableBandwidthHi.setStatus("current")
+if mibBuilder.loadTexts:
+    sdpAvailableBandwidthHi.setUnits("kilobps")
+_SdpMaxBookableBandwidthHi_Type = Unsigned32
+_SdpMaxBookableBandwidthHi_Object = MibTableColumn
+sdpMaxBookableBandwidthHi = _SdpMaxBookableBandwidthHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 3, 1, 76),
+    _SdpMaxBookableBandwidthHi_Type()
+)
+sdpMaxBookableBandwidthHi.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    sdpMaxBookableBandwidthHi.setStatus("current")
+if mibBuilder.loadTexts:
+    sdpMaxBookableBandwidthHi.setUnits("kilobps")
+_SdpBookedBandwidthHi_Type = Unsigned32
+_SdpBookedBandwidthHi_Object = MibTableColumn
+sdpBookedBandwidthHi = _SdpBookedBandwidthHi_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 3, 1, 77),
+    _SdpBookedBandwidthHi_Type()
+)
+sdpBookedBandwidthHi.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    sdpBookedBandwidthHi.setStatus("current")
+if mibBuilder.loadTexts:
+    sdpBookedBandwidthHi.setUnits("kilobps")
 _SdpBindTable_Object = MibTable
 sdpBindTable = _SdpBindTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 4)
@@ -2901,7 +2978,8 @@ class _SdpBindOperFlags_Type(Bits):
           ("evpnP2mpConflict", 30),
           ("labelStackLimitExceeded", 31),
           ("vccvBfdDown", 32),
-          ("stitchingSvcPwFault", 33))
+          ("stitchingSvcPwFault", 33),
+          ("outOfAnySecResource", 34))
     )
 
 _SdpBindOperFlags_Type.__name__ = "Bits"
@@ -4827,6 +4905,129 @@ sdpBindTlsLastMgmtChange = _SdpBindTlsLastMgmtChange_Object(
 sdpBindTlsLastMgmtChange.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sdpBindTlsLastMgmtChange.setStatus("current")
+_SdpBindTlsDataMtSourceAddrType_Type = InetAddressType
+_SdpBindTlsDataMtSourceAddrType_Object = MibTableColumn
+sdpBindTlsDataMtSourceAddrType = _SdpBindTlsDataMtSourceAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 60),
+    _SdpBindTlsDataMtSourceAddrType_Type()
+)
+sdpBindTlsDataMtSourceAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsDataMtSourceAddrType.setStatus("current")
+
+
+class _SdpBindTlsDataMtSourceAddress_Type(InetAddress):
+    """Custom type sdpBindTlsDataMtSourceAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_SdpBindTlsDataMtSourceAddress_Type.__name__ = "InetAddress"
+_SdpBindTlsDataMtSourceAddress_Object = MibTableColumn
+sdpBindTlsDataMtSourceAddress = _SdpBindTlsDataMtSourceAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 61),
+    _SdpBindTlsDataMtSourceAddress_Type()
+)
+sdpBindTlsDataMtSourceAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsDataMtSourceAddress.setStatus("current")
+_SdpBindTlsDataMtGroupAddrType_Type = InetAddressType
+_SdpBindTlsDataMtGroupAddrType_Object = MibTableColumn
+sdpBindTlsDataMtGroupAddrType = _SdpBindTlsDataMtGroupAddrType_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 62),
+    _SdpBindTlsDataMtGroupAddrType_Type()
+)
+sdpBindTlsDataMtGroupAddrType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsDataMtGroupAddrType.setStatus("current")
+
+
+class _SdpBindTlsDataMtGroupAddress_Type(InetAddress):
+    """Custom type sdpBindTlsDataMtGroupAddress based on InetAddress"""
+    subtypeSpec = InetAddress.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 0),
+        ValueSizeConstraint(4, 4),
+        ValueSizeConstraint(16, 16),
+    )
+
+
+_SdpBindTlsDataMtGroupAddress_Type.__name__ = "InetAddress"
+_SdpBindTlsDataMtGroupAddress_Object = MibTableColumn
+sdpBindTlsDataMtGroupAddress = _SdpBindTlsDataMtGroupAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 63),
+    _SdpBindTlsDataMtGroupAddress_Type()
+)
+sdpBindTlsDataMtGroupAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsDataMtGroupAddress.setStatus("current")
+_SdpBindTlsProtMacAddressReceived_Type = MacAddress
+_SdpBindTlsProtMacAddressReceived_Object = MibTableColumn
+sdpBindTlsProtMacAddressReceived = _SdpBindTlsProtMacAddressReceived_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 64),
+    _SdpBindTlsProtMacAddressReceived_Type()
+)
+sdpBindTlsProtMacAddressReceived.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsProtMacAddressReceived.setStatus("current")
+_SdpBindTlsProtMacAddrRecLastChgd_Type = TimeStamp
+_SdpBindTlsProtMacAddrRecLastChgd_Object = MibTableColumn
+sdpBindTlsProtMacAddrRecLastChgd = _SdpBindTlsProtMacAddrRecLastChgd_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 65),
+    _SdpBindTlsProtMacAddrRecLastChgd_Type()
+)
+sdpBindTlsProtMacAddrRecLastChgd.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsProtMacAddrRecLastChgd.setStatus("current")
+_SdpBindTlsPbbProtectedMacAddrRec_Type = MacAddress
+_SdpBindTlsPbbProtectedMacAddrRec_Object = MibTableColumn
+sdpBindTlsPbbProtectedMacAddrRec = _SdpBindTlsPbbProtectedMacAddrRec_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 66),
+    _SdpBindTlsPbbProtectedMacAddrRec_Type()
+)
+sdpBindTlsPbbProtectedMacAddrRec.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsPbbProtectedMacAddrRec.setStatus("current")
+_SdpBindTlsPbbProtMacAddRecLstChg_Type = TimeStamp
+_SdpBindTlsPbbProtMacAddRecLstChg_Object = MibTableColumn
+sdpBindTlsPbbProtMacAddRecLstChg = _SdpBindTlsPbbProtMacAddRecLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 67),
+    _SdpBindTlsPbbProtMacAddRecLstChg_Type()
+)
+sdpBindTlsPbbProtMacAddRecLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsPbbProtMacAddRecLstChg.setStatus("current")
+_SdpBindTlsTableHighUtilization_Type = TruthValue
+_SdpBindTlsTableHighUtilization_Object = MibTableColumn
+sdpBindTlsTableHighUtilization = _SdpBindTlsTableHighUtilization_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 68),
+    _SdpBindTlsTableHighUtilization_Type()
+)
+sdpBindTlsTableHighUtilization.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsTableHighUtilization.setStatus("current")
+_SdpBindTlsNonBlockMvRateXMacAddr_Type = MacAddress
+_SdpBindTlsNonBlockMvRateXMacAddr_Object = MibTableColumn
+sdpBindTlsNonBlockMvRateXMacAddr = _SdpBindTlsNonBlockMvRateXMacAddr_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 69),
+    _SdpBindTlsNonBlockMvRateXMacAddr_Type()
+)
+sdpBindTlsNonBlockMvRateXMacAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindTlsNonBlockMvRateXMacAddr.setStatus("current")
+_SdpBndTlsNoBlckMvRtXMacAddLstChg_Type = TimeStamp
+_SdpBndTlsNoBlckMvRtXMacAddLstChg_Object = MibTableColumn
+sdpBndTlsNoBlckMvRtXMacAddLstChg = _SdpBndTlsNoBlckMvRtXMacAddLstChg_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 6, 1, 70),
+    _SdpBndTlsNoBlckMvRtXMacAddLstChg_Type()
+)
+sdpBndTlsNoBlckMvRtXMacAddLstChg.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBndTlsNoBlckMvRtXMacAddLstChg.setStatus("current")
 _SdpBindMeshTlsTable_Object = MibTable
 sdpBindMeshTlsTable = _SdpBindMeshTlsTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 7)
@@ -5035,7 +5236,7 @@ sdpBindApipeTable = _SdpBindApipeTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 8)
 )
 if mibBuilder.loadTexts:
-    sdpBindApipeTable.setStatus("current")
+    sdpBindApipeTable.setStatus("obsolete")
 _SdpBindApipeEntry_Object = MibTableRow
 sdpBindApipeEntry = _SdpBindApipeEntry_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 8, 1)
@@ -5045,7 +5246,7 @@ sdpBindApipeEntry.setIndexNames(
     (0, "TIMETRA-SDP-MIB", "sdpBindId"),
 )
 if mibBuilder.loadTexts:
-    sdpBindApipeEntry.setStatus("current")
+    sdpBindApipeEntry.setStatus("obsolete")
 
 
 class _SdpBindApipeAdminConcatCellCount_Type(Integer32):
@@ -5066,7 +5267,7 @@ sdpBindApipeAdminConcatCellCount = _SdpBindApipeAdminConcatCellCount_Object(
 )
 sdpBindApipeAdminConcatCellCount.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sdpBindApipeAdminConcatCellCount.setStatus("current")
+    sdpBindApipeAdminConcatCellCount.setStatus("obsolete")
 
 
 class _SdpBindApipeSigConcatCellCount_Type(Integer32):
@@ -5085,7 +5286,7 @@ sdpBindApipeSigConcatCellCount = _SdpBindApipeSigConcatCellCount_Object(
 )
 sdpBindApipeSigConcatCellCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sdpBindApipeSigConcatCellCount.setStatus("current")
+    sdpBindApipeSigConcatCellCount.setStatus("obsolete")
 
 
 class _SdpBindApipeOperConcatCellCount_Type(Integer32):
@@ -5104,7 +5305,7 @@ sdpBindApipeOperConcatCellCount = _SdpBindApipeOperConcatCellCount_Object(
 )
 sdpBindApipeOperConcatCellCount.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    sdpBindApipeOperConcatCellCount.setStatus("current")
+    sdpBindApipeOperConcatCellCount.setStatus("obsolete")
 
 
 class _SdpBindApipeConcatMaxDelay_Type(Integer32):
@@ -5125,7 +5326,7 @@ sdpBindApipeConcatMaxDelay = _SdpBindApipeConcatMaxDelay_Object(
 )
 sdpBindApipeConcatMaxDelay.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sdpBindApipeConcatMaxDelay.setStatus("current")
+    sdpBindApipeConcatMaxDelay.setStatus("obsolete")
 if mibBuilder.loadTexts:
     sdpBindApipeConcatMaxDelay.setUnits("hundreds of microseconds")
 
@@ -5143,7 +5344,7 @@ sdpBindApipeConcatCellClp = _SdpBindApipeConcatCellClp_Object(
 )
 sdpBindApipeConcatCellClp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sdpBindApipeConcatCellClp.setStatus("current")
+    sdpBindApipeConcatCellClp.setStatus("obsolete")
 
 
 class _SdpBindApipeConcatCellAal5Fr_Type(TruthValue):
@@ -5159,7 +5360,7 @@ sdpBindApipeConcatCellAal5Fr = _SdpBindApipeConcatCellAal5Fr_Object(
 )
 sdpBindApipeConcatCellAal5Fr.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    sdpBindApipeConcatCellAal5Fr.setStatus("current")
+    sdpBindApipeConcatCellAal5Fr.setStatus("obsolete")
 _SdpBindDhcpInfoTable_Object = MibTable
 sdpBindDhcpInfoTable = _SdpBindDhcpInfoTable_Object(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 9)
@@ -7327,6 +7528,28 @@ pwTemplateForceQinqVcFwding = _PwTemplateForceQinqVcFwding_Object(
 pwTemplateForceQinqVcFwding.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     pwTemplateForceQinqVcFwding.setStatus("current")
+
+
+class _PwTemplatePathMtu_Type(Integer32):
+    """Custom type pwTemplatePathMtu based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(576, 9782),
+    )
+
+
+_PwTemplatePathMtu_Type.__name__ = "Integer32"
+_PwTemplatePathMtu_Object = MibTableColumn
+pwTemplatePathMtu = _PwTemplatePathMtu_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 18, 1, 78),
+    _PwTemplatePathMtu_Type()
+)
+pwTemplatePathMtu.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    pwTemplatePathMtu.setStatus("current")
 _PwTemplateIgmpSnpgGrpSrcTblLC_Type = TimeStamp
 _PwTemplateIgmpSnpgGrpSrcTblLC_Object = MibScalar
 pwTemplateIgmpSnpgGrpSrcTblLC = _PwTemplateIgmpSnpgGrpSrcTblLC_Object(
@@ -10375,6 +10598,50 @@ sdpBindExtBfdUpTimeRemain = _SdpBindExtBfdUpTimeRemain_Object(
 sdpBindExtBfdUpTimeRemain.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     sdpBindExtBfdUpTimeRemain.setStatus("current")
+
+
+class _SdpBindExtAnySecEncGrp_Type(TNamedItemOrEmpty):
+    """Custom type sdpBindExtAnySecEncGrp based on TNamedItemOrEmpty"""
+    defaultValue = OctetString("")
+
+
+_SdpBindExtAnySecEncGrp_Type.__name__ = "TNamedItemOrEmpty"
+_SdpBindExtAnySecEncGrp_Object = MibTableColumn
+sdpBindExtAnySecEncGrp = _SdpBindExtAnySecEncGrp_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 69, 1, 7),
+    _SdpBindExtAnySecEncGrp_Type()
+)
+sdpBindExtAnySecEncGrp.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    sdpBindExtAnySecEncGrp.setStatus("current")
+
+
+class _SdpBindExtAnySecEncGrpId_Type(Unsigned32):
+    """Custom type sdpBindExtAnySecEncGrpId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 65535),
+    )
+
+
+_SdpBindExtAnySecEncGrpId_Type.__name__ = "Unsigned32"
+_SdpBindExtAnySecEncGrpId_Object = MibTableColumn
+sdpBindExtAnySecEncGrpId = _SdpBindExtAnySecEncGrpId_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 69, 1, 8),
+    _SdpBindExtAnySecEncGrpId_Type()
+)
+sdpBindExtAnySecEncGrpId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindExtAnySecEncGrpId.setStatus("current")
+_SdpBindExtAnySecEgrVcIndex_Type = Unsigned32
+_SdpBindExtAnySecEgrVcIndex_Object = MibTableColumn
+sdpBindExtAnySecEgrVcIndex = _SdpBindExtAnySecEgrVcIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 2, 4, 4, 69, 1, 9),
+    _SdpBindExtAnySecEgrVcIndex_Type()
+)
+sdpBindExtAnySecEgrVcIndex.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    sdpBindExtAnySecEgrVcIndex.setStatus("current")
 _SdpSegRouteTeLspTableLastChgd_Type = TimeStamp
 _SdpSegRouteTeLspTableLastChgd_Object = MibScalar
 sdpSegRouteTeLspTableLastChgd = _SdpSegRouteTeLspTableLastChgd_Object(
@@ -10882,7 +11149,7 @@ tmnxSdpApipeV6v0Group.setObjects(
         ("TIMETRA-SDP-MIB", "sdpBindApipeConcatCellAal5Fr"))
 )
 if mibBuilder.loadTexts:
-    tmnxSdpApipeV6v0Group.setStatus("current")
+    tmnxSdpApipeV6v0Group.setStatus("obsolete")
 
 tmnxSdpBindDhcpV6v0Group = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 105)
@@ -12592,6 +12859,107 @@ sdpPwPortSvcMtuV21v0Group.setObjects(
 if mibBuilder.loadTexts:
     sdpPwPortSvcMtuV21v0Group.setStatus("current")
 
+sdpDataMtV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 577)
+)
+sdpDataMtV22v0Group.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpBindTlsDataMtSourceAddrType"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsDataMtSourceAddress"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsDataMtGroupAddrType"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsDataMtGroupAddress"))
+)
+if mibBuilder.loadTexts:
+    sdpDataMtV22v0Group.setStatus("current")
+
+tmnxSdpBgpVplsV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 578)
+)
+tmnxSdpBgpVplsV22v0Group.setObjects(
+      *(("TIMETRA-SDP-MIB", "svcL2BgpVplsRteSendFlowLabel"),
+        ("TIMETRA-SDP-MIB", "svcL2BgpVplsRteReceiveFlowLabel"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpBgpVplsV22v0Group.setStatus("current")
+
+tmnxSdpBgpVpwsV22v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 579)
+)
+tmnxSdpBgpVpwsV22v0Group.setObjects(
+      *(("TIMETRA-SDP-MIB", "svcL2BgpVpwsRteSendFlowLabel"),
+        ("TIMETRA-SDP-MIB", "svcL2BgpVpwsRteReceiveFlowLabel"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpBgpVpwsV22v0Group.setStatus("current")
+
+tmnxSdpApipeObsoleteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 581)
+)
+tmnxSdpApipeObsoleteGroup.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpBindApipeAdminConcatCellCount"),
+        ("TIMETRA-SDP-MIB", "sdpBindApipeSigConcatCellCount"),
+        ("TIMETRA-SDP-MIB", "sdpBindApipeOperConcatCellCount"),
+        ("TIMETRA-SDP-MIB", "sdpBindApipeConcatMaxDelay"),
+        ("TIMETRA-SDP-MIB", "sdpBindApipeConcatCellClp"),
+        ("TIMETRA-SDP-MIB", "sdpBindApipeConcatCellAal5Fr"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpApipeObsoleteGroup.setStatus("current")
+
+tmnxPwTemplateV24v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 582)
+)
+tmnxPwTemplateV24v0Group.setObjects(
+    ("TIMETRA-SDP-MIB", "pwTemplatePathMtu")
+)
+if mibBuilder.loadTexts:
+    tmnxPwTemplateV24v0Group.setStatus("current")
+
+tmnxSdpBwGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 583)
+)
+tmnxSdpBwGroup.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpOperBandwidthHi"),
+        ("TIMETRA-SDP-MIB", "sdpAvailableBandwidthHi"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpBwGroup.setStatus("current")
+
+tmnxSdpBwNotifyObjsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 584)
+)
+tmnxSdpBwNotifyObjsGroup.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpMaxBookableBandwidthHi"),
+        ("TIMETRA-SDP-MIB", "sdpBookedBandwidthHi"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpBwNotifyObjsGroup.setStatus("current")
+
+tmnxSdpBindAnySecGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 585)
+)
+tmnxSdpBindAnySecGroup.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpBindExtAnySecEncGrp"),
+        ("TIMETRA-SDP-MIB", "sdpBindExtAnySecEncGrpId"),
+        ("TIMETRA-SDP-MIB", "sdpBindExtAnySecEgrVcIndex"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpBindAnySecGroup.setStatus("current")
+
+tmnxSdpBindTlsMacAddrV25v0Group = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 2, 586)
+)
+tmnxSdpBindTlsMacAddrV25v0Group.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpBindTlsProtMacAddressReceived"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsProtMacAddrRecLastChgd"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsPbbProtectedMacAddrRec"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsPbbProtMacAddRecLstChg"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsTableHighUtilization"),
+        ("TIMETRA-SDP-MIB", "sdpBindTlsNonBlockMvRateXMacAddr"),
+        ("TIMETRA-SDP-MIB", "sdpBndTlsNoBlckMvRtXMacAddLstChg"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpBindTlsMacAddrV25v0Group.setStatus("current")
+
 
 # Notification objects
 
@@ -12913,7 +13281,9 @@ sdpBandwidthOverbooked = NotificationType(
 sdpBandwidthOverbooked.setObjects(
       *(("TIMETRA-SDP-MIB", "sdpId"),
         ("TIMETRA-SDP-MIB", "sdpMaxBookableBandwidth"),
-        ("TIMETRA-SDP-MIB", "sdpBookedBandwidth"))
+        ("TIMETRA-SDP-MIB", "sdpBookedBandwidth"),
+        ("TIMETRA-SDP-MIB", "sdpMaxBookableBandwidthHi"),
+        ("TIMETRA-SDP-MIB", "sdpBookedBandwidthHi"))
 )
 if mibBuilder.loadTexts:
     sdpBandwidthOverbooked.setStatus(
@@ -14432,7 +14802,6 @@ tmnxSdp7750V15v0Compliance.setObjects(
         ("TIMETRA-SDP-MIB", "tmnxSdpBindTlsV6v0Group"),
         ("TIMETRA-SDP-MIB", "tmnxSdpBindTlsV8v0Group"),
         ("TIMETRA-SDP-MIB", "tmnxSdpBindMeshV6v0Group"),
-        ("TIMETRA-SDP-MIB", "tmnxSdpApipeV6v0Group"),
         ("TIMETRA-SDP-MIB", "tmnxSdpBindDhcpV6v0Group"),
         ("TIMETRA-SDP-MIB", "tmnxSdpBindDhcpV11v0Group"),
         ("TIMETRA-SDP-MIB", "tmnxSdpBindTlsL2ptV6v0Group"),
@@ -14673,6 +15042,44 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+tmnxSdpV22v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 1, 35)
+)
+tmnxSdpV22v0Compliance.setObjects(
+      *(("TIMETRA-SDP-MIB", "sdpDataMtV22v0Group"),
+        ("TIMETRA-SDP-MIB", "tmnxSdpBgpVplsV22v0Group"),
+        ("TIMETRA-SDP-MIB", "tmnxSdpBgpVpwsV22v0Group"),
+        ("TIMETRA-SDP-MIB", "tmnxSdpBwGroup"),
+        ("TIMETRA-SDP-MIB", "tmnxSdpBwNotifyObjsGroup"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpV22v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxSdpV24v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 1, 36)
+)
+tmnxSdpV24v0Compliance.setObjects(
+    ("TIMETRA-SDP-MIB", "tmnxPwTemplateV24v0Group")
+)
+if mibBuilder.loadTexts:
+    tmnxSdpV24v0Compliance.setStatus(
+        "current"
+    )
+
+tmnxSdpV25v0Compliance = ModuleCompliance(
+    (1, 3, 6, 1, 4, 1, 6527, 3, 1, 1, 4, 4, 1, 37)
+)
+tmnxSdpV25v0Compliance.setObjects(
+      *(("TIMETRA-SDP-MIB", "tmnxSdpBindAnySecGroup"),
+        ("TIMETRA-SDP-MIB", "tmnxSdpBindTlsMacAddrV25v0Group"))
+)
+if mibBuilder.loadTexts:
+    tmnxSdpV25v0Compliance.setStatus(
+        "current"
+    )
+
 
 # Export all MIB objects to the MIB builder
 
@@ -14706,6 +15113,9 @@ mibBuilder.exportSymbols(
        "tmnxSdpV19v0Compliance": tmnxSdpV19v0Compliance,
        "tmnxSdpV20v0Compliance": tmnxSdpV20v0Compliance,
        "tmnxSdpV21v0Compliance": tmnxSdpV21v0Compliance,
+       "tmnxSdpV22v0Compliance": tmnxSdpV22v0Compliance,
+       "tmnxSdpV24v0Compliance": tmnxSdpV24v0Compliance,
+       "tmnxSdpV25v0Compliance": tmnxSdpV25v0Compliance,
        "tmnxSdpGroups": tmnxSdpGroups,
        "tmnxSdpV6v0Group": tmnxSdpV6v0Group,
        "tmnxSdpBindV6v0Group": tmnxSdpBindV6v0Group,
@@ -14838,6 +15248,15 @@ mibBuilder.exportSymbols(
        "sdpPwPortEntropyGroup": sdpPwPortEntropyGroup,
        "sdpLastChangeV21v0Group": sdpLastChangeV21v0Group,
        "sdpPwPortSvcMtuV21v0Group": sdpPwPortSvcMtuV21v0Group,
+       "sdpDataMtV22v0Group": sdpDataMtV22v0Group,
+       "tmnxSdpBgpVplsV22v0Group": tmnxSdpBgpVplsV22v0Group,
+       "tmnxSdpBgpVpwsV22v0Group": tmnxSdpBgpVpwsV22v0Group,
+       "tmnxSdpApipeObsoleteGroup": tmnxSdpApipeObsoleteGroup,
+       "tmnxPwTemplateV24v0Group": tmnxPwTemplateV24v0Group,
+       "tmnxSdpBwGroup": tmnxSdpBwGroup,
+       "tmnxSdpBwNotifyObjsGroup": tmnxSdpBwNotifyObjsGroup,
+       "tmnxSdpBindAnySecGroup": tmnxSdpBindAnySecGroup,
+       "tmnxSdpBindTlsMacAddrV25v0Group": tmnxSdpBindTlsMacAddrV25v0Group,
        "svcTlsBgpADPWTempBindTblLC": svcTlsBgpADPWTempBindTblLC,
        "svcTlsBgpADPWTempBindTable": svcTlsBgpADPWTempBindTable,
        "svcTlsBgpADPWTempBindEntry": svcTlsBgpADPWTempBindEntry,
@@ -14883,6 +15302,8 @@ mibBuilder.exportSymbols(
        "svcL2BgpVplsRteSeqDelivery": svcL2BgpVplsRteSeqDelivery,
        "svcL2BgpVplsRteDF": svcL2BgpVplsRteDF,
        "svcL2BgpVplsRteStatus": svcL2BgpVplsRteStatus,
+       "svcL2BgpVplsRteSendFlowLabel": svcL2BgpVplsRteSendFlowLabel,
+       "svcL2BgpVplsRteReceiveFlowLabel": svcL2BgpVplsRteReceiveFlowLabel,
        "svcVllBgpADPWTempBindTblLC": svcVllBgpADPWTempBindTblLC,
        "svcVllBgpADPWTempBindTable": svcVllBgpADPWTempBindTable,
        "svcVllBgpADPWTempBindEntry": svcVllBgpADPWTempBindEntry,
@@ -14915,6 +15336,8 @@ mibBuilder.exportSymbols(
        "svcL2BgpVpwsRteCsv": svcL2BgpVpwsRteCsv,
        "svcL2BgpVpwsRteTxStatus": svcL2BgpVpwsRteTxStatus,
        "svcL2BgpVpwsRtePreference": svcL2BgpVpwsRtePreference,
+       "svcL2BgpVpwsRteSendFlowLabel": svcL2BgpVpwsRteSendFlowLabel,
+       "svcL2BgpVpwsRteReceiveFlowLabel": svcL2BgpVpwsRteReceiveFlowLabel,
        "tmnxSdpObjs": tmnxSdpObjs,
        "sdpNumEntries": sdpNumEntries,
        "sdpNextFreeId": sdpNextFreeId,
@@ -14993,6 +15416,10 @@ mibBuilder.exportSymbols(
        "sdpWeightedEcmpEnabled": sdpWeightedEcmpEnabled,
        "sdpOperTunnelFarEndInetAddrType": sdpOperTunnelFarEndInetAddrType,
        "sdpOperTunnelFarEndInetAddr": sdpOperTunnelFarEndInetAddr,
+       "sdpOperBandwidthHi": sdpOperBandwidthHi,
+       "sdpAvailableBandwidthHi": sdpAvailableBandwidthHi,
+       "sdpMaxBookableBandwidthHi": sdpMaxBookableBandwidthHi,
+       "sdpBookedBandwidthHi": sdpBookedBandwidthHi,
        "sdpBindTable": sdpBindTable,
        "sdpBindEntry": sdpBindEntry,
        "sdpBindId": sdpBindId,
@@ -15148,6 +15575,17 @@ mibBuilder.exportSymbols(
        "sdpBindTlsRestProtSrcMacOperAct": sdpBindTlsRestProtSrcMacOperAct,
        "sdpBindTlsAutoLrnMacPrtExcList": sdpBindTlsAutoLrnMacPrtExcList,
        "sdpBindTlsLastMgmtChange": sdpBindTlsLastMgmtChange,
+       "sdpBindTlsDataMtSourceAddrType": sdpBindTlsDataMtSourceAddrType,
+       "sdpBindTlsDataMtSourceAddress": sdpBindTlsDataMtSourceAddress,
+       "sdpBindTlsDataMtGroupAddrType": sdpBindTlsDataMtGroupAddrType,
+       "sdpBindTlsDataMtGroupAddress": sdpBindTlsDataMtGroupAddress,
+       "sdpBindTlsProtMacAddressReceived": sdpBindTlsProtMacAddressReceived,
+       "sdpBindTlsProtMacAddrRecLastChgd": sdpBindTlsProtMacAddrRecLastChgd,
+       "sdpBindTlsPbbProtectedMacAddrRec": sdpBindTlsPbbProtectedMacAddrRec,
+       "sdpBindTlsPbbProtMacAddRecLstChg": sdpBindTlsPbbProtMacAddRecLstChg,
+       "sdpBindTlsTableHighUtilization": sdpBindTlsTableHighUtilization,
+       "sdpBindTlsNonBlockMvRateXMacAddr": sdpBindTlsNonBlockMvRateXMacAddr,
+       "sdpBndTlsNoBlckMvRtXMacAddLstChg": sdpBndTlsNoBlckMvRtXMacAddLstChg,
        "sdpBindMeshTlsTable": sdpBindMeshTlsTable,
        "sdpBindMeshTlsEntry": sdpBindMeshTlsEntry,
        "sdpBindMeshTlsPortState": sdpBindMeshTlsPortState,
@@ -15341,6 +15779,7 @@ mibBuilder.exportSymbols(
        "pwTemplateEgressIpv6FilterName": pwTemplateEgressIpv6FilterName,
        "pwTemplateEgressMacFilterName": pwTemplateEgressMacFilterName,
        "pwTemplateForceQinqVcFwding": pwTemplateForceQinqVcFwding,
+       "pwTemplatePathMtu": pwTemplatePathMtu,
        "pwTemplateIgmpSnpgGrpSrcTblLC": pwTemplateIgmpSnpgGrpSrcTblLC,
        "pwTemplateIgmpSnpgGrpSrcTable": pwTemplateIgmpSnpgGrpSrcTable,
        "pwTemplateIgmpSnpgGrpSrcEntry": pwTemplateIgmpSnpgGrpSrcEntry,
@@ -15594,6 +16033,9 @@ mibBuilder.exportSymbols(
        "sdpBindExtBfdSessStatOperState": sdpBindExtBfdSessStatOperState,
        "sdpBindExtBfdWaitForUpTimer": sdpBindExtBfdWaitForUpTimer,
        "sdpBindExtBfdUpTimeRemain": sdpBindExtBfdUpTimeRemain,
+       "sdpBindExtAnySecEncGrp": sdpBindExtAnySecEncGrp,
+       "sdpBindExtAnySecEncGrpId": sdpBindExtAnySecEncGrpId,
+       "sdpBindExtAnySecEgrVcIndex": sdpBindExtAnySecEgrVcIndex,
        "sdpSegRouteTeLspTableLastChgd": sdpSegRouteTeLspTableLastChgd,
        "sdpSegRouteTeLspTable": sdpSegRouteTeLspTable,
        "sdpSegRouteTeLspEntry": sdpSegRouteTeLspEntry,

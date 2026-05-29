@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-LICENSE-MANAGER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:39 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-LICENSE-MANAGER-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -100,13 +97,11 @@ if 'mibBuilder' not in globals():
 (DisplayString,
  MacAddress,
  PhysAddress,
- RowStatus,
  TextualConvention) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "MacAddress",
     "PhysAddress",
-    "RowStatus",
     "TextualConvention")
 
 
@@ -117,7 +112,9 @@ aluLicenseManagerMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerMIB.setRevisions(
-        ("2009-03-23 00:00",)
+        ("2009-03-23 00:00",
+         "2011-07-14 00:00",
+         "2019-10-07 00:00")
     )
 
 
@@ -170,6 +167,27 @@ aluLicenseManagerApplyLicense = _AluLicenseManagerApplyLicense_Object(
 aluLicenseManagerApplyLicense.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     aluLicenseManagerApplyLicense.setStatus("current")
+
+
+class _AluLicensedFileName_Type(DisplayString):
+    """Custom type aluLicensedFileName based on DisplayString"""
+    defaultValue = OctetString("lmlicense.dat")
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AluLicensedFileName_Type.__name__ = "DisplayString"
+_AluLicensedFileName_Object = MibScalar
+aluLicensedFileName = _AluLicensedFileName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 1, 2),
+    _AluLicensedFileName_Type()
+)
+aluLicensedFileName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aluLicensedFileName.setStatus("current")
 _AluLicenseManagerInfoTable_Object = MibTable
 aluLicenseManagerInfoTable = _AluLicenseManagerInfoTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 2)
@@ -283,7 +301,17 @@ aluLicenseManagerFileInfoEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerFileInfoEntry.setStatus("current")
-_AluLicenseFileIndex_Type = Counter32
+
+
+class _AluLicenseFileIndex_Type(Unsigned32):
+    """Custom type aluLicenseFileIndex based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4294967295),
+    )
+
+
+_AluLicenseFileIndex_Type.__name__ = "Unsigned32"
 _AluLicenseFileIndex_Object = MibTableColumn
 aluLicenseFileIndex = _AluLicenseFileIndex_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 3, 1, 1),
@@ -320,6 +348,316 @@ aluLicensedFileApplication = _AluLicensedFileApplication_Object(
 aluLicensedFileApplication.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     aluLicensedFileApplication.setStatus("current")
+
+
+class _AluLicensedFileLocal_Type(Integer32):
+    """Custom type aluLicensedFileLocal based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("local", 1),
+          ("other", 2))
+    )
+
+
+_AluLicensedFileLocal_Type.__name__ = "Integer32"
+_AluLicensedFileLocal_Object = MibTableColumn
+aluLicensedFileLocal = _AluLicensedFileLocal_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 3, 1, 4),
+    _AluLicensedFileLocal_Type()
+)
+aluLicensedFileLocal.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aluLicensedFileLocal.setStatus("current")
+_AluLicenseManagerRemoveTable_Object = MibTable
+aluLicenseManagerRemoveTable = _AluLicenseManagerRemoveTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 4)
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerRemoveTable.setStatus("current")
+_AluLicenseManagerRemoveEntry_Object = MibTableRow
+aluLicenseManagerRemoveEntry = _AluLicenseManagerRemoveEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 4, 1)
+)
+aluLicenseManagerRemoveEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseRemoveIndex"),
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerRemoveEntry.setStatus("current")
+
+
+class _AluLicenseRemoveIndex_Type(Integer32):
+    """Custom type aluLicenseRemoveIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_AluLicenseRemoveIndex_Type.__name__ = "Integer32"
+_AluLicenseRemoveIndex_Object = MibTableColumn
+aluLicenseRemoveIndex = _AluLicenseRemoveIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 4, 1, 1),
+    _AluLicenseRemoveIndex_Type()
+)
+aluLicenseRemoveIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aluLicenseRemoveIndex.setStatus("current")
+
+
+class _AluLicenseRemoveFeatureID_Type(Integer32):
+    """Custom type aluLicenseRemoveFeatureID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("metro", 1),
+          ("oneGig", 2),
+          ("tenGig", 3))
+    )
+
+
+_AluLicenseRemoveFeatureID_Type.__name__ = "Integer32"
+_AluLicenseRemoveFeatureID_Object = MibTableColumn
+aluLicenseRemoveFeatureID = _AluLicenseRemoveFeatureID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 4, 1, 2),
+    _AluLicenseRemoveFeatureID_Type()
+)
+aluLicenseRemoveFeatureID.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aluLicenseRemoveFeatureID.setStatus("current")
+
+
+class _AluLicenseRemoveSlotID_Type(Integer32):
+    """Custom type aluLicenseRemoveSlotID based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1008),
+    )
+
+
+_AluLicenseRemoveSlotID_Type.__name__ = "Integer32"
+_AluLicenseRemoveSlotID_Object = MibTableColumn
+aluLicenseRemoveSlotID = _AluLicenseRemoveSlotID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 4, 1, 3),
+    _AluLicenseRemoveSlotID_Type()
+)
+aluLicenseRemoveSlotID.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aluLicenseRemoveSlotID.setStatus("current")
+_AluLicenseManagerDemoLicenseTable_Object = MibTable
+aluLicenseManagerDemoLicenseTable = _AluLicenseManagerDemoLicenseTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 5)
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerDemoLicenseTable.setStatus("current")
+_AluLicenseManagerDemoLicenseEntry_Object = MibTableRow
+aluLicenseManagerDemoLicenseEntry = _AluLicenseManagerDemoLicenseEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 5, 1)
+)
+aluLicenseManagerDemoLicenseEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseDemoIndex"),
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerDemoLicenseEntry.setStatus("current")
+
+
+class _AluLicenseDemoIndex_Type(Integer32):
+    """Custom type aluLicenseDemoIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 1),
+    )
+
+
+_AluLicenseDemoIndex_Type.__name__ = "Integer32"
+_AluLicenseDemoIndex_Object = MibTableColumn
+aluLicenseDemoIndex = _AluLicenseDemoIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 5, 1, 1),
+    _AluLicenseDemoIndex_Type()
+)
+aluLicenseDemoIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aluLicenseDemoIndex.setStatus("current")
+
+
+class _AluLicenseDemoFeatureID_Type(Integer32):
+    """Custom type aluLicenseDemoFeatureID based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("metro", 1),
+          ("oneGig", 2),
+          ("tenGig", 3))
+    )
+
+
+_AluLicenseDemoFeatureID_Type.__name__ = "Integer32"
+_AluLicenseDemoFeatureID_Object = MibTableColumn
+aluLicenseDemoFeatureID = _AluLicenseDemoFeatureID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 5, 1, 2),
+    _AluLicenseDemoFeatureID_Type()
+)
+aluLicenseDemoFeatureID.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aluLicenseDemoFeatureID.setStatus("current")
+
+
+class _AluLicenseDemoSlotID_Type(Integer32):
+    """Custom type aluLicenseDemoSlotID based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1008),
+    )
+
+
+_AluLicenseDemoSlotID_Type.__name__ = "Integer32"
+_AluLicenseDemoSlotID_Object = MibTableColumn
+aluLicenseDemoSlotID = _AluLicenseDemoSlotID_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 5, 1, 3),
+    _AluLicenseDemoSlotID_Type()
+)
+aluLicenseDemoSlotID.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    aluLicenseDemoSlotID.setStatus("current")
+_AluLicenseManagerLicenseInfoTable_Object = MibTable
+aluLicenseManagerLicenseInfoTable = _AluLicenseManagerLicenseInfoTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6)
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerLicenseInfoTable.setStatus("current")
+_AluLicenseManagerLicenseInfoEntry_Object = MibTableRow
+aluLicenseManagerLicenseInfoEntry = _AluLicenseManagerLicenseInfoEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6, 1)
+)
+aluLicenseManagerLicenseInfoEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseInfoSlotId"),
+    (0, "ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicensedInfoApplication"),
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerLicenseInfoEntry.setStatus("current")
+
+
+class _AluLicenseInfoSlotId_Type(Unsigned32):
+    """Custom type aluLicenseInfoSlotId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1008),
+    )
+
+
+_AluLicenseInfoSlotId_Type.__name__ = "Unsigned32"
+_AluLicenseInfoSlotId_Object = MibTableColumn
+aluLicenseInfoSlotId = _AluLicenseInfoSlotId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6, 1, 1),
+    _AluLicenseInfoSlotId_Type()
+)
+aluLicenseInfoSlotId.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aluLicenseInfoSlotId.setStatus("current")
+
+
+class _AluLicensedInfoApplication_Type(DisplayString):
+    """Custom type aluLicensedInfoApplication based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AluLicensedInfoApplication_Type.__name__ = "DisplayString"
+_AluLicensedInfoApplication_Object = MibTableColumn
+aluLicensedInfoApplication = _AluLicensedInfoApplication_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6, 1, 2),
+    _AluLicensedInfoApplication_Type()
+)
+aluLicensedInfoApplication.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    aluLicensedInfoApplication.setStatus("current")
+
+
+class _AluLicenseInfoType_Type(Integer32):
+    """Custom type aluLicenseInfoType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("demo", 1),
+          ("permanent", 2))
+    )
+
+
+_AluLicenseInfoType_Type.__name__ = "Integer32"
+_AluLicenseInfoType_Object = MibTableColumn
+aluLicenseInfoType = _AluLicenseInfoType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6, 1, 3),
+    _AluLicenseInfoType_Type()
+)
+aluLicenseInfoType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aluLicenseInfoType.setStatus("current")
+
+
+class _AluLicenseInfoTimeRemaining_Type(Integer32):
+    """Custom type aluLicenseInfoTimeRemaining based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 60),
+    )
+
+
+_AluLicenseInfoTimeRemaining_Type.__name__ = "Integer32"
+_AluLicenseInfoTimeRemaining_Object = MibTableColumn
+aluLicenseInfoTimeRemaining = _AluLicenseInfoTimeRemaining_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6, 1, 4),
+    _AluLicenseInfoTimeRemaining_Type()
+)
+aluLicenseInfoTimeRemaining.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aluLicenseInfoTimeRemaining.setStatus("current")
+
+
+class _AluLicenseInfoCustomerInfo_Type(DisplayString):
+    """Custom type aluLicenseInfoCustomerInfo based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 40),
+    )
+
+
+_AluLicenseInfoCustomerInfo_Type.__name__ = "DisplayString"
+_AluLicenseInfoCustomerInfo_Object = MibTableColumn
+aluLicenseInfoCustomerInfo = _AluLicenseInfoCustomerInfo_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 1, 6, 1, 5),
+    _AluLicenseInfoCustomerInfo_Type()
+)
+aluLicenseInfoCustomerInfo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aluLicenseInfoCustomerInfo.setStatus("current")
 _AluLicenseManagerMIBConformance_ObjectIdentity = ObjectIdentity
 aluLicenseManagerMIBConformance = _AluLicenseManagerMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 2)
@@ -338,6 +676,48 @@ aluLicenseManagerMIBCompliances = _AluLicenseManagerMIBCompliances_ObjectIdentit
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerMIBCompliances.setStatus("current")
+_AluLicenseManagerMIBTrapObjects_ObjectIdentity = ObjectIdentity
+aluLicenseManagerMIBTrapObjects = _AluLicenseManagerMIBTrapObjects_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 3)
+)
+
+
+class _AluLicensedInfoSlot_Type(Integer32):
+    """Custom type aluLicensedInfoSlot based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 1008),
+    )
+
+
+_AluLicensedInfoSlot_Type.__name__ = "Integer32"
+_AluLicensedInfoSlot_Object = MibScalar
+aluLicensedInfoSlot = _AluLicensedInfoSlot_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 3, 1),
+    _AluLicensedInfoSlot_Type()
+)
+aluLicensedInfoSlot.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aluLicensedInfoSlot.setStatus("current")
+
+
+class _AluLicenseInfoFeature_Type(DisplayString):
+    """Custom type aluLicenseInfoFeature based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_AluLicenseInfoFeature_Type.__name__ = "DisplayString"
+_AluLicenseInfoFeature_Object = MibScalar
+aluLicenseInfoFeature = _AluLicenseInfoFeature_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 3, 2),
+    _AluLicenseInfoFeature_Type()
+)
+aluLicenseInfoFeature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    aluLicenseInfoFeature.setStatus("current")
 
 # Managed Objects groups
 
@@ -345,7 +725,8 @@ aluLicenseManagerConfigGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 2, 1, 1)
 )
 aluLicenseManagerConfigGroup.setObjects(
-    ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerApplyLicense")
+      *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerApplyLicense"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicensedFileName"))
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerConfigGroup.setStatus("current")
@@ -366,10 +747,42 @@ aluLicenseManagerFileInfoGroup = ObjectGroup(
 )
 aluLicenseManagerFileInfoGroup.setObjects(
       *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluSwitchMacAddress"),
-        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicensedFileApplication"))
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicensedFileApplication"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicensedFileLocal"))
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerFileInfoGroup.setStatus("current")
+
+aluLicenseManagerRemoveInfoGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 2, 1, 5)
+)
+aluLicenseManagerRemoveInfoGroup.setObjects(
+      *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseRemoveFeatureID"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseRemoveSlotID"))
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerRemoveInfoGroup.setStatus("current")
+
+aluLicenseManagerDemoInfoGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 2, 1, 6)
+)
+aluLicenseManagerDemoInfoGroup.setObjects(
+      *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseDemoFeatureID"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseDemoSlotID"))
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerDemoInfoGroup.setStatus("current")
+
+aluLicenseManagerLicenseInfoGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 2, 1, 7)
+)
+aluLicenseManagerLicenseInfoGroup.setObjects(
+      *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseInfoType"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseInfoTimeRemaining"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseInfoCustomerInfo"))
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerLicenseInfoGroup.setStatus("current")
 
 
 # Notification objects
@@ -386,6 +799,19 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+aluLicenseManagerLicenseExpiry = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 0, 0, 2)
+)
+aluLicenseManagerLicenseExpiry.setObjects(
+      *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseInfoFeature"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseInfoTimeRemaining"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicensedInfoSlot"))
+)
+if mibBuilder.loadTexts:
+    aluLicenseManagerLicenseExpiry.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -393,7 +819,8 @@ aluLicenseManagerNotificationsGroup = NotificationGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 54, 1, 2, 1, 3)
 )
 aluLicenseManagerNotificationsGroup.setObjects(
-    ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerLicenseExpired")
+      *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerLicenseExpired"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerLicenseExpiry"))
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerNotificationsGroup.setStatus(
@@ -411,8 +838,12 @@ aluLicenseManagerMIBCompliance = ModuleCompliance(
 )
 aluLicenseManagerMIBCompliance.setObjects(
       *(("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerConfigGroup"),
-        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerInfoGroup"),
-        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerFileInfoGroup"))
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerLicenseInfoGroup"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerNotificationsGroup"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerFileInfoGroup"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerRemoveInfoGroup"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerDemoInfoGroup"),
+        ("ALCATEL-IND1-LICENSE-MANAGER-MIB", "aluLicenseManagerInfoGroup"))
 )
 if mibBuilder.loadTexts:
     aluLicenseManagerMIBCompliance.setStatus(
@@ -427,9 +858,11 @@ mibBuilder.exportSymbols(
     **{"aluLicenseManagerMIB": aluLicenseManagerMIB,
        "aluLicenseManagerMIBNotifications": aluLicenseManagerMIBNotifications,
        "aluLicenseManagerLicenseExpired": aluLicenseManagerLicenseExpired,
+       "aluLicenseManagerLicenseExpiry": aluLicenseManagerLicenseExpiry,
        "aluLicenseManagerMIBObjects": aluLicenseManagerMIBObjects,
        "aluLicenseManagerConfig": aluLicenseManagerConfig,
        "aluLicenseManagerApplyLicense": aluLicenseManagerApplyLicense,
+       "aluLicensedFileName": aluLicensedFileName,
        "aluLicenseManagerInfoTable": aluLicenseManagerInfoTable,
        "aluLicenseManagerInfoEntry": aluLicenseManagerInfoEntry,
        "aluLicenseId": aluLicenseId,
@@ -441,12 +874,36 @@ mibBuilder.exportSymbols(
        "aluLicenseFileIndex": aluLicenseFileIndex,
        "aluSwitchMacAddress": aluSwitchMacAddress,
        "aluLicensedFileApplication": aluLicensedFileApplication,
+       "aluLicensedFileLocal": aluLicensedFileLocal,
+       "aluLicenseManagerRemoveTable": aluLicenseManagerRemoveTable,
+       "aluLicenseManagerRemoveEntry": aluLicenseManagerRemoveEntry,
+       "aluLicenseRemoveIndex": aluLicenseRemoveIndex,
+       "aluLicenseRemoveFeatureID": aluLicenseRemoveFeatureID,
+       "aluLicenseRemoveSlotID": aluLicenseRemoveSlotID,
+       "aluLicenseManagerDemoLicenseTable": aluLicenseManagerDemoLicenseTable,
+       "aluLicenseManagerDemoLicenseEntry": aluLicenseManagerDemoLicenseEntry,
+       "aluLicenseDemoIndex": aluLicenseDemoIndex,
+       "aluLicenseDemoFeatureID": aluLicenseDemoFeatureID,
+       "aluLicenseDemoSlotID": aluLicenseDemoSlotID,
+       "aluLicenseManagerLicenseInfoTable": aluLicenseManagerLicenseInfoTable,
+       "aluLicenseManagerLicenseInfoEntry": aluLicenseManagerLicenseInfoEntry,
+       "aluLicenseInfoSlotId": aluLicenseInfoSlotId,
+       "aluLicensedInfoApplication": aluLicensedInfoApplication,
+       "aluLicenseInfoType": aluLicenseInfoType,
+       "aluLicenseInfoTimeRemaining": aluLicenseInfoTimeRemaining,
+       "aluLicenseInfoCustomerInfo": aluLicenseInfoCustomerInfo,
        "aluLicenseManagerMIBConformance": aluLicenseManagerMIBConformance,
        "aluLicenseManagerMIBGroups": aluLicenseManagerMIBGroups,
        "aluLicenseManagerConfigGroup": aluLicenseManagerConfigGroup,
        "aluLicenseManagerInfoGroup": aluLicenseManagerInfoGroup,
        "aluLicenseManagerNotificationsGroup": aluLicenseManagerNotificationsGroup,
        "aluLicenseManagerFileInfoGroup": aluLicenseManagerFileInfoGroup,
+       "aluLicenseManagerRemoveInfoGroup": aluLicenseManagerRemoveInfoGroup,
+       "aluLicenseManagerDemoInfoGroup": aluLicenseManagerDemoInfoGroup,
+       "aluLicenseManagerLicenseInfoGroup": aluLicenseManagerLicenseInfoGroup,
        "aluLicenseManagerMIBCompliances": aluLicenseManagerMIBCompliances,
-       "aluLicenseManagerMIBCompliance": aluLicenseManagerMIBCompliance}
+       "aluLicenseManagerMIBCompliance": aluLicenseManagerMIBCompliance,
+       "aluLicenseManagerMIBTrapObjects": aluLicenseManagerMIBTrapObjects,
+       "aluLicensedInfoSlot": aluLicensedInfoSlot,
+       "aluLicenseInfoFeature": aluLicenseInfoFeature}
 )

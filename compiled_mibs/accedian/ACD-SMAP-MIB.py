@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-SMAP-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:10 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,8 @@ acdSmap = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdSmap.setRevisions(
-        ("2008-10-01 01:00",
+        ("2013-05-11 01:00",
+         "2008-10-01 01:00",
          "2008-06-15 01:00")
     )
 
@@ -503,6 +501,148 @@ acdSmapRegSetCodePointRegulatorEnable = _AcdSmapRegSetCodePointRegulatorEnable_O
 acdSmapRegSetCodePointRegulatorEnable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdSmapRegSetCodePointRegulatorEnable.setStatus("current")
+_AcdSmapPortCoSEncodeDeiTable_Object = MibTable
+acdSmapPortCoSEncodeDeiTable = _AcdSmapPortCoSEncodeDeiTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 5)
+)
+if mibBuilder.loadTexts:
+    acdSmapPortCoSEncodeDeiTable.setStatus("current")
+_AcdSmapPortCoSEncodeDeiEntry_Object = MibTableRow
+acdSmapPortCoSEncodeDeiEntry = _AcdSmapPortCoSEncodeDeiEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 5, 1)
+)
+acdSmapPortCoSEncodeDeiEntry.setIndexNames(
+    (0, "ACD-SMAP-MIB", "acdSmapPortCoSPortID"),
+)
+if mibBuilder.loadTexts:
+    acdSmapPortCoSEncodeDeiEntry.setStatus("current")
+_AcdSmapPortCoSPortID_Type = Unsigned32
+_AcdSmapPortCoSPortID_Object = MibTableColumn
+acdSmapPortCoSPortID = _AcdSmapPortCoSPortID_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 5, 1, 1),
+    _AcdSmapPortCoSPortID_Type()
+)
+acdSmapPortCoSPortID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    acdSmapPortCoSPortID.setStatus("current")
+
+
+class _AcdSmapPortCoSEncodeDeiEnable_Type(Integer32):
+    """Custom type acdSmapPortCoSEncodeDeiEnable based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 0),
+          ("disable", 1))
+    )
+
+
+_AcdSmapPortCoSEncodeDeiEnable_Type.__name__ = "Integer32"
+_AcdSmapPortCoSEncodeDeiEnable_Object = MibTableColumn
+acdSmapPortCoSEncodeDeiEnable = _AcdSmapPortCoSEncodeDeiEnable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 5, 1, 2),
+    _AcdSmapPortCoSEncodeDeiEnable_Type()
+)
+acdSmapPortCoSEncodeDeiEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdSmapPortCoSEncodeDeiEnable.setStatus("current")
+_AcdSmapPortCoSMapTable_Object = MibTable
+acdSmapPortCoSMapTable = _AcdSmapPortCoSMapTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 6)
+)
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapTable.setStatus("current")
+_AcdSmapPortCoSMapEntry_Object = MibTableRow
+acdSmapPortCoSMapEntry = _AcdSmapPortCoSMapEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 6, 1)
+)
+acdSmapPortCoSMapEntry.setIndexNames(
+    (0, "ACD-SMAP-MIB", "acdSmapPortCoSPortID"),
+    (0, "ACD-SMAP-MIB", "acdSmapPortCoSMapID"),
+)
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapEntry.setStatus("current")
+
+
+class _AcdSmapPortCoSMapID_Type(Unsigned32):
+    """Custom type acdSmapPortCoSMapID based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8),
+    )
+
+
+_AcdSmapPortCoSMapID_Type.__name__ = "Unsigned32"
+_AcdSmapPortCoSMapID_Object = MibTableColumn
+acdSmapPortCoSMapID = _AcdSmapPortCoSMapID_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 6, 1, 1),
+    _AcdSmapPortCoSMapID_Type()
+)
+acdSmapPortCoSMapID.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapID.setStatus("current")
+
+
+class _AcdSmapPortCoSMapCosIn_Type(Unsigned32):
+    """Custom type acdSmapPortCoSMapCosIn based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdSmapPortCoSMapCosIn_Type.__name__ = "Unsigned32"
+_AcdSmapPortCoSMapCosIn_Object = MibTableColumn
+acdSmapPortCoSMapCosIn = _AcdSmapPortCoSMapCosIn_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 6, 1, 2),
+    _AcdSmapPortCoSMapCosIn_Type()
+)
+acdSmapPortCoSMapCosIn.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapCosIn.setStatus("current")
+
+
+class _AcdSmapPortCoSMapGreenOut_Type(Unsigned32):
+    """Custom type acdSmapPortCoSMapGreenOut based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdSmapPortCoSMapGreenOut_Type.__name__ = "Unsigned32"
+_AcdSmapPortCoSMapGreenOut_Object = MibTableColumn
+acdSmapPortCoSMapGreenOut = _AcdSmapPortCoSMapGreenOut_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 6, 1, 3),
+    _AcdSmapPortCoSMapGreenOut_Type()
+)
+acdSmapPortCoSMapGreenOut.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapGreenOut.setStatus("current")
+
+
+class _AcdSmapPortCoSMapYellowOut_Type(Unsigned32):
+    """Custom type acdSmapPortCoSMapYellowOut based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdSmapPortCoSMapYellowOut_Type.__name__ = "Unsigned32"
+_AcdSmapPortCoSMapYellowOut_Object = MibTableColumn
+acdSmapPortCoSMapYellowOut = _AcdSmapPortCoSMapYellowOut_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 1, 1, 6, 1, 4),
+    _AcdSmapPortCoSMapYellowOut_Type()
+)
+acdSmapPortCoSMapYellowOut.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapYellowOut.setStatus("current")
 _AcdSmapConformance_ObjectIdentity = ObjectIdentity
 acdSmapConformance = _AcdSmapConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 8, 2)
@@ -563,6 +703,26 @@ acdSmapRegSetCodePointGroup.setObjects(
 if mibBuilder.loadTexts:
     acdSmapRegSetCodePointGroup.setStatus("current")
 
+acdSmapPortCoSEncodeDeiGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 2, 2, 5)
+)
+acdSmapPortCoSEncodeDeiGroup.setObjects(
+    ("ACD-SMAP-MIB", "acdSmapPortCoSEncodeDeiEnable")
+)
+if mibBuilder.loadTexts:
+    acdSmapPortCoSEncodeDeiGroup.setStatus("current")
+
+acdSmapPortCoSMapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 8, 2, 2, 6)
+)
+acdSmapPortCoSMapGroup.setObjects(
+      *(("ACD-SMAP-MIB", "acdSmapPortCoSMapCosIn"),
+        ("ACD-SMAP-MIB", "acdSmapPortCoSMapGreenOut"),
+        ("ACD-SMAP-MIB", "acdSmapPortCoSMapYellowOut"))
+)
+if mibBuilder.loadTexts:
+    acdSmapPortCoSMapGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -582,7 +742,9 @@ acdSmapCompliance.setObjects(
       *(("ACD-SMAP-MIB", "acdSmapCoSProfGroup"),
         ("ACD-SMAP-MIB", "acdSmapCoSProfCodePointGroup"),
         ("ACD-SMAP-MIB", "acdSmapRegSetGroup"),
-        ("ACD-SMAP-MIB", "acdSmapRegSetCodePointGroup"))
+        ("ACD-SMAP-MIB", "acdSmapRegSetCodePointGroup"),
+        ("ACD-SMAP-MIB", "acdSmapPortCoSEncodeDeiGroup"),
+        ("ACD-SMAP-MIB", "acdSmapPortCoSMapGroup"))
 )
 if mibBuilder.loadTexts:
     acdSmapCompliance.setStatus(
@@ -623,6 +785,16 @@ mibBuilder.exportSymbols(
        "acdSmapRegSetCodePointID": acdSmapRegSetCodePointID,
        "acdSmapRegSetCodePointRegulatorID": acdSmapRegSetCodePointRegulatorID,
        "acdSmapRegSetCodePointRegulatorEnable": acdSmapRegSetCodePointRegulatorEnable,
+       "acdSmapPortCoSEncodeDeiTable": acdSmapPortCoSEncodeDeiTable,
+       "acdSmapPortCoSEncodeDeiEntry": acdSmapPortCoSEncodeDeiEntry,
+       "acdSmapPortCoSPortID": acdSmapPortCoSPortID,
+       "acdSmapPortCoSEncodeDeiEnable": acdSmapPortCoSEncodeDeiEnable,
+       "acdSmapPortCoSMapTable": acdSmapPortCoSMapTable,
+       "acdSmapPortCoSMapEntry": acdSmapPortCoSMapEntry,
+       "acdSmapPortCoSMapID": acdSmapPortCoSMapID,
+       "acdSmapPortCoSMapCosIn": acdSmapPortCoSMapCosIn,
+       "acdSmapPortCoSMapGreenOut": acdSmapPortCoSMapGreenOut,
+       "acdSmapPortCoSMapYellowOut": acdSmapPortCoSMapYellowOut,
        "acdSmapConformance": acdSmapConformance,
        "acdSmapCompliances": acdSmapCompliances,
        "acdSmapCompliance": acdSmapCompliance,
@@ -630,5 +802,7 @@ mibBuilder.exportSymbols(
        "acdSmapCoSProfGroup": acdSmapCoSProfGroup,
        "acdSmapCoSProfCodePointGroup": acdSmapCoSProfCodePointGroup,
        "acdSmapRegSetGroup": acdSmapRegSetGroup,
-       "acdSmapRegSetCodePointGroup": acdSmapRegSetCodePointGroup}
+       "acdSmapRegSetCodePointGroup": acdSmapRegSetCodePointGroup,
+       "acdSmapPortCoSEncodeDeiGroup": acdSmapPortCoSEncodeDeiGroup,
+       "acdSmapPortCoSMapGroup": acdSmapPortCoSMapGroup}
 )

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\SNMP-COMMUNITY-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:29:51 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -123,8 +120,8 @@ snmpCommunityMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     snmpCommunityMIB.setRevisions(
-        ("2000-03-06 00:00",
-         "1999-05-13 00:00")
+        ("2003-08-06 00:00",
+         "2000-03-06 00:00")
     )
 
 
@@ -360,10 +357,10 @@ snmpTargetAddrExtEntry.setIndexNames(*snmpTargetAddrEntry.getIndexNames())
 
 # Managed Objects groups
 
-snmpCommunityGroup = ObjectGroup(
+snmpCommunityTableGroup = ObjectGroup(
     (1, 3, 6, 1, 6, 3, 18, 2, 2, 1)
 )
-snmpCommunityGroup.setObjects(
+snmpCommunityTableGroup.setObjects(
       *(("SNMP-COMMUNITY-MIB", "snmpCommunityName"),
         ("SNMP-COMMUNITY-MIB", "snmpCommunitySecurityName"),
         ("SNMP-COMMUNITY-MIB", "snmpCommunityContextEngineID"),
@@ -375,7 +372,7 @@ snmpCommunityGroup.setObjects(
         ("SNMP-COMMUNITY-MIB", "snmpTargetAddrMMS"))
 )
 if mibBuilder.loadTexts:
-    snmpCommunityGroup.setStatus("current")
+    snmpCommunityTableGroup.setStatus("current")
 
 snmpProxyTrapForwardGroup = ObjectGroup(
     (1, 3, 6, 1, 6, 3, 18, 2, 2, 3)
@@ -403,7 +400,7 @@ snmpCommunityMIBCompliance = ModuleCompliance(
     (1, 3, 6, 1, 6, 3, 18, 2, 1, 1)
 )
 snmpCommunityMIBCompliance.setObjects(
-    ("SNMP-COMMUNITY-MIB", "snmpCommunityGroup")
+    ("SNMP-COMMUNITY-MIB", "snmpCommunityTableGroup")
 )
 if mibBuilder.loadTexts:
     snmpCommunityMIBCompliance.setStatus(
@@ -418,6 +415,17 @@ snmpProxyTrapForwardCompliance.setObjects(
 )
 if mibBuilder.loadTexts:
     snmpProxyTrapForwardCompliance.setStatus(
+        "current"
+    )
+
+snmpCommunityMIBFullCompliance = ModuleCompliance(
+    (1, 3, 6, 1, 6, 3, 18, 2, 1, 3)
+)
+snmpCommunityMIBFullCompliance.setObjects(
+    ("SNMP-COMMUNITY-MIB", "snmpCommunityTableGroup")
+)
+if mibBuilder.loadTexts:
+    snmpCommunityMIBFullCompliance.setStatus(
         "current"
     )
 
@@ -448,7 +456,8 @@ mibBuilder.exportSymbols(
        "snmpCommunityMIBCompliances": snmpCommunityMIBCompliances,
        "snmpCommunityMIBCompliance": snmpCommunityMIBCompliance,
        "snmpProxyTrapForwardCompliance": snmpProxyTrapForwardCompliance,
+       "snmpCommunityMIBFullCompliance": snmpCommunityMIBFullCompliance,
        "snmpCommunityMIBGroups": snmpCommunityMIBGroups,
-       "snmpCommunityGroup": snmpCommunityGroup,
+       "snmpCommunityTableGroup": snmpCommunityTableGroup,
        "snmpProxyTrapForwardGroup": snmpProxyTrapForwardGroup}
 )

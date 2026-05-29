@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\radlan\RADLAN-QOS-SERV
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:22:30 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -57,12 +54,6 @@ if 'mibBuilder' not in globals():
     "RADLAN-MIB",
     "rnd")
 
-(RowStatus,
- TruthValue) = mibBuilder.importSymbols(
-    "RADLAN-SNMPv2",
-    "RowStatus",
-    "TruthValue")
-
 (ModuleCompliance,
  NotificationGroup) = mibBuilder.importSymbols(
     "SNMPv2-CONF",
@@ -108,12 +99,16 @@ if 'mibBuilder' not in globals():
 (DisplayString,
  MacAddress,
  PhysAddress,
- TextualConvention) = mibBuilder.importSymbols(
+ RowStatus,
+ TextualConvention,
+ TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "MacAddress",
     "PhysAddress",
-    "TextualConvention")
+    "RowStatus",
+    "TextualConvention",
+    "TruthValue")
 
 
 # MODULE-IDENTITY
@@ -123,7 +118,8 @@ rlQosServ = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     rlQosServ.setRevisions(
-        ("2003-10-28 00:24",)
+        ("2006-02-12 00:00",
+         "2003-10-28 00:24")
     )
 
 

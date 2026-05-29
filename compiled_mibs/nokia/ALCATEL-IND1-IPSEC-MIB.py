@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IPSEC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:34 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IPSEC-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -119,7 +116,7 @@ alcatelIND1IPsecMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1IPsecMIB.setRevisions(
-        ("2007-07-02 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -130,10 +127,10 @@ if mibBuilder.loadTexts:
 
 
 
-class IPsecName(TextualConvention, OctetString):
+class IPsecName(DisplayString):
     status = "current"
-    displayHint = "20a"
-    subtypeSpec = OctetString.subtypeSpec
+    displayHint = "255a"
+    subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
         ValueSizeConstraint(1, 20),
     )
@@ -763,13 +760,11 @@ class _AlaIPsecSecurityPolicyAction_Type(Integer32):
     subtypeSpec += ConstraintsUnion(
         SingleValueConstraint(
             *(0,
-              1,
               2)
         )
     )
     namedValues = NamedValues(
         *(("discard", 0),
-          ("none", 1),
           ("ipsec", 2))
     )
 

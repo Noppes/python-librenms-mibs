@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-05-29T09:50:11.346598",
+  "stats": {
+    "total": 1,
+    "compiled": 0,
+    "failed": 1,
+    "skipped": 0,
+    "errors": [
+      {
+        "mib": "IMP-HF528-MIB",
+        "error": "failed"
+      }
+    ]
+  },
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
+}

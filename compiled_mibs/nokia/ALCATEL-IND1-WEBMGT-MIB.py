@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-WEBMGT-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:31 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-WEBMGT-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,6 +114,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1WebMgtMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1WebMgtMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -230,7 +231,7 @@ alaIND1WebMgtRFSIPServerName = _AlaIND1WebMgtRFSIPServerName_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 3, 1, 3),
     _AlaIND1WebMgtRFSIPServerName_Type()
 )
-alaIND1WebMgtRFSIPServerName.setMaxAccess("read-write")
+alaIND1WebMgtRFSIPServerName.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSIPServerName.setStatus("current")
 _AlaIND1WebMgtRFSServerLogin_Type = DisplayString
@@ -239,7 +240,7 @@ alaIND1WebMgtRFSServerLogin = _AlaIND1WebMgtRFSServerLogin_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 3, 1, 4),
     _AlaIND1WebMgtRFSServerLogin_Type()
 )
-alaIND1WebMgtRFSServerLogin.setMaxAccess("read-write")
+alaIND1WebMgtRFSServerLogin.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSServerLogin.setStatus("current")
 _AlaIND1WebMgtRFSServerPassword_Type = DisplayString
@@ -248,7 +249,7 @@ alaIND1WebMgtRFSServerPassword = _AlaIND1WebMgtRFSServerPassword_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 3, 1, 5),
     _AlaIND1WebMgtRFSServerPassword_Type()
 )
-alaIND1WebMgtRFSServerPassword.setMaxAccess("read-write")
+alaIND1WebMgtRFSServerPassword.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSServerPassword.setStatus("current")
 
@@ -274,7 +275,7 @@ alaIND1WebMgtRFSPrefServer = _AlaIND1WebMgtRFSPrefServer_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 3, 1, 6),
     _AlaIND1WebMgtRFSPrefServer_Type()
 )
-alaIND1WebMgtRFSPrefServer.setMaxAccess("read-write")
+alaIND1WebMgtRFSPrefServer.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSPrefServer.setStatus("current")
 _AlaIND1WebMgtRFSPath_Type = DisplayString
@@ -283,7 +284,7 @@ alaIND1WebMgtRFSPath = _AlaIND1WebMgtRFSPath_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 3, 1, 7),
     _AlaIND1WebMgtRFSPath_Type()
 )
-alaIND1WebMgtRFSPath.setMaxAccess("read-write")
+alaIND1WebMgtRFSPath.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSPath.setStatus("current")
 _AlaIND1WebMgtRFSRowStatus_Type = RowStatus
@@ -292,7 +293,7 @@ alaIND1WebMgtRFSRowStatus = _AlaIND1WebMgtRFSRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 3, 1, 8),
     _AlaIND1WebMgtRFSRowStatus_Type()
 )
-alaIND1WebMgtRFSRowStatus.setMaxAccess("read-write")
+alaIND1WebMgtRFSRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSRowStatus.setStatus("current")
 
@@ -365,6 +366,79 @@ alaIND1WebMgtHttpsPort = _AlaIND1WebMgtHttpsPort_Object(
 alaIND1WebMgtHttpsPort.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIND1WebMgtHttpsPort.setStatus("current")
+_AlaIND1WebMgtHanIp_Type = IpAddress
+_AlaIND1WebMgtHanIp_Object = MibScalar
+alaIND1WebMgtHanIp = _AlaIND1WebMgtHanIp_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 7),
+    _AlaIND1WebMgtHanIp_Type()
+)
+alaIND1WebMgtHanIp.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIND1WebMgtHanIp.setStatus("current")
+
+
+class _AlaIND1WebMgtWlanIpPrecedence_Type(Integer32):
+    """Custom type alaIND1WebMgtWlanIpPrecedence based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("lldp", 1),
+          ("configured", 2))
+    )
+
+
+_AlaIND1WebMgtWlanIpPrecedence_Type.__name__ = "Integer32"
+_AlaIND1WebMgtWlanIpPrecedence_Object = MibScalar
+alaIND1WebMgtWlanIpPrecedence = _AlaIND1WebMgtWlanIpPrecedence_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 8),
+    _AlaIND1WebMgtWlanIpPrecedence_Type()
+)
+alaIND1WebMgtWlanIpPrecedence.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIND1WebMgtWlanIpPrecedence.setStatus("current")
+_AlaIND1WebMgtWlanConfiguredIpAddressType_Type = InetAddressType
+_AlaIND1WebMgtWlanConfiguredIpAddressType_Object = MibScalar
+alaIND1WebMgtWlanConfiguredIpAddressType = _AlaIND1WebMgtWlanConfiguredIpAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 9),
+    _AlaIND1WebMgtWlanConfiguredIpAddressType_Type()
+)
+alaIND1WebMgtWlanConfiguredIpAddressType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIND1WebMgtWlanConfiguredIpAddressType.setStatus("current")
+_AlaIND1WebMgtWlanConfiguredIpAddress_Type = InetAddress
+_AlaIND1WebMgtWlanConfiguredIpAddress_Object = MibScalar
+alaIND1WebMgtWlanConfiguredIpAddress = _AlaIND1WebMgtWlanConfiguredIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 10),
+    _AlaIND1WebMgtWlanConfiguredIpAddress_Type()
+)
+alaIND1WebMgtWlanConfiguredIpAddress.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIND1WebMgtWlanConfiguredIpAddress.setStatus("current")
+_AlaIND1WebMgtWlanLldpIpAddressType_Type = InetAddressType
+_AlaIND1WebMgtWlanLldpIpAddressType_Object = MibScalar
+alaIND1WebMgtWlanLldpIpAddressType = _AlaIND1WebMgtWlanLldpIpAddressType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 11),
+    _AlaIND1WebMgtWlanLldpIpAddressType_Type()
+)
+alaIND1WebMgtWlanLldpIpAddressType.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIND1WebMgtWlanLldpIpAddressType.setStatus("current")
+_AlaIND1WebMgtWlanLldpIpAddress_Type = InetAddress
+_AlaIND1WebMgtWlanLldpIpAddress_Object = MibScalar
+alaIND1WebMgtWlanLldpIpAddress = _AlaIND1WebMgtWlanLldpIpAddress_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 1, 12),
+    _AlaIND1WebMgtWlanLldpIpAddress_Type()
+)
+alaIND1WebMgtWlanLldpIpAddress.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaIND1WebMgtWlanLldpIpAddress.setStatus("current")
 _AlcatelIND1WebMgtMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1WebMgtMIBConformance = _AlcatelIND1WebMgtMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 2)
@@ -428,7 +502,13 @@ alaIND1WebMgtConfigMIBGroup.setObjects(
       *(("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtAdminStatus"),
         ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtSSL"),
         ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtHttpPort"),
-        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtHttpsPort"))
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtHttpsPort"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtDigestAuth"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtWlanIpPrecedence"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtWlanConfiguredIpAddressType"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtWlanConfiguredIpAddress"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtWlanLldpIpAddressType"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "alaIND1WebMgtWlanLldpIpAddress"))
 )
 if mibBuilder.loadTexts:
     alaIND1WebMgtConfigMIBGroup.setStatus("current")
@@ -449,6 +529,17 @@ alaIND1WebMgtRFSMIBGroup.setObjects(
 if mibBuilder.loadTexts:
     alaIND1WebMgtRFSMIBGroup.setStatus("current")
 
+webMgtTrapsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 2, 1, 3)
+)
+webMgtTrapsGroup.setObjects(
+      *(("ALCATEL-IND1-WEBMGT-MIB", "httpConnectionStats"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "httpsConnectionStats"),
+        ("ALCATEL-IND1-WEBMGT-MIB", "httpServerDoSAttackSrcIp"))
+)
+if mibBuilder.loadTexts:
+    webMgtTrapsGroup.setStatus("current")
+
 
 # Notification objects
 
@@ -467,6 +558,17 @@ if mibBuilder.loadTexts:
 
 
 # Notifications groups
+
+webMgtTrapsDescGroup = NotificationGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 17, 1, 2, 1, 4)
+)
+webMgtTrapsDescGroup.setObjects(
+    ("ALCATEL-IND1-WEBMGT-MIB", "httpServerDoSAttackTrap")
+)
+if mibBuilder.loadTexts:
+    webMgtTrapsDescGroup.setStatus(
+        "current"
+    )
 
 
 # Agent capabilities
@@ -496,10 +598,18 @@ mibBuilder.exportSymbols(
        "alaIND1WebMgtDigestAuth": alaIND1WebMgtDigestAuth,
        "alaIND1WebMgtHttpPort": alaIND1WebMgtHttpPort,
        "alaIND1WebMgtHttpsPort": alaIND1WebMgtHttpsPort,
+       "alaIND1WebMgtHanIp": alaIND1WebMgtHanIp,
+       "alaIND1WebMgtWlanIpPrecedence": alaIND1WebMgtWlanIpPrecedence,
+       "alaIND1WebMgtWlanConfiguredIpAddressType": alaIND1WebMgtWlanConfiguredIpAddressType,
+       "alaIND1WebMgtWlanConfiguredIpAddress": alaIND1WebMgtWlanConfiguredIpAddress,
+       "alaIND1WebMgtWlanLldpIpAddressType": alaIND1WebMgtWlanLldpIpAddressType,
+       "alaIND1WebMgtWlanLldpIpAddress": alaIND1WebMgtWlanLldpIpAddress,
        "alcatelIND1WebMgtMIBConformance": alcatelIND1WebMgtMIBConformance,
        "alcatelIND1WebMgtMIBGroups": alcatelIND1WebMgtMIBGroups,
        "alaIND1WebMgtConfigMIBGroup": alaIND1WebMgtConfigMIBGroup,
        "alaIND1WebMgtRFSMIBGroup": alaIND1WebMgtRFSMIBGroup,
+       "webMgtTrapsGroup": webMgtTrapsGroup,
+       "webMgtTrapsDescGroup": webMgtTrapsDescGroup,
        "alcatelIND1WebMgtMIBCompliances": alcatelIND1WebMgtMIBCompliances,
        "webMgtTrapsDesc": webMgtTrapsDesc,
        "httpServerDoSAttackTrap": httpServerDoSAttackTrap,

@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-02T11:30:33.371517",
+  "timestamp": "2026-05-29T09:23:06.153574",
   "stats": {
-    "total": 270,
-    "compiled": 218,
-    "failed": 18,
-    "skipped": 34,
+    "total": 277,
+    "compiled": 222,
+    "failed": 20,
+    "skipped": 35,
     "errors": [
       {
         "mib": "CISCO-CLASS-BASED-QOS-MIB",
@@ -28,6 +28,14 @@
       },
       {
         "mib": "CISCO-LWAPP-DOT11-CLIENT-MIB",
+        "error": "unprocessed"
+      },
+      {
+        "mib": "CISCO-LWAPP-DOT11-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "CISCO-LWAPP-MOBILITY-EXT-MIB",
         "error": "unprocessed"
       },
       {
@@ -80,5 +88,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

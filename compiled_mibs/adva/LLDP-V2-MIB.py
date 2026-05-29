@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\LLDP-V2-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:15:04 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -153,7 +150,9 @@ lldpV2MIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     lldpV2MIB.setRevisions(
-        ("2009-06-08 00:00",)
+        ("2016-03-11 00:00",
+         "2015-02-16 00:00",
+         "2009-06-08 00:00")
     )
 
 
@@ -344,7 +343,7 @@ lldpV2PortConfigTable = _LldpV2PortConfigTable_Object(
     (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 8)
 )
 if mibBuilder.loadTexts:
-    lldpV2PortConfigTable.setStatus("current")
+    lldpV2PortConfigTable.setStatus("deprecated")
 _LldpV2PortConfigEntry_Object = MibTableRow
 lldpV2PortConfigEntry = _LldpV2PortConfigEntry_Object(
     (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 8, 1)
@@ -354,7 +353,7 @@ lldpV2PortConfigEntry.setIndexNames(
     (0, "LLDP-V2-MIB", "lldpV2PortConfigDestAddressIndex"),
 )
 if mibBuilder.loadTexts:
-    lldpV2PortConfigEntry.setStatus("current")
+    lldpV2PortConfigEntry.setStatus("deprecated")
 _LldpV2PortConfigIfIndex_Type = InterfaceIndex
 _LldpV2PortConfigIfIndex_Object = MibTableColumn
 lldpV2PortConfigIfIndex = _LldpV2PortConfigIfIndex_Object(
@@ -363,7 +362,7 @@ lldpV2PortConfigIfIndex = _LldpV2PortConfigIfIndex_Object(
 )
 lldpV2PortConfigIfIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    lldpV2PortConfigIfIndex.setStatus("current")
+    lldpV2PortConfigIfIndex.setStatus("deprecated")
 _LldpV2PortConfigDestAddressIndex_Type = LldpV2DestAddressTableIndex
 _LldpV2PortConfigDestAddressIndex_Object = MibTableColumn
 lldpV2PortConfigDestAddressIndex = _LldpV2PortConfigDestAddressIndex_Object(
@@ -372,7 +371,7 @@ lldpV2PortConfigDestAddressIndex = _LldpV2PortConfigDestAddressIndex_Object(
 )
 lldpV2PortConfigDestAddressIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
-    lldpV2PortConfigDestAddressIndex.setStatus("current")
+    lldpV2PortConfigDestAddressIndex.setStatus("deprecated")
 
 
 class _LldpV2PortConfigAdminStatus_Type(Integer32):
@@ -404,7 +403,7 @@ lldpV2PortConfigAdminStatus = _LldpV2PortConfigAdminStatus_Object(
 )
 lldpV2PortConfigAdminStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    lldpV2PortConfigAdminStatus.setStatus("current")
+    lldpV2PortConfigAdminStatus.setStatus("deprecated")
 
 
 class _LldpV2PortConfigNotificationEnable_Type(TruthValue):
@@ -420,7 +419,7 @@ lldpV2PortConfigNotificationEnable = _LldpV2PortConfigNotificationEnable_Object(
 )
 lldpV2PortConfigNotificationEnable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    lldpV2PortConfigNotificationEnable.setStatus("current")
+    lldpV2PortConfigNotificationEnable.setStatus("deprecated")
 
 
 class _LldpV2PortConfigTLVsTxEnable_Type(Bits):
@@ -442,7 +441,7 @@ lldpV2PortConfigTLVsTxEnable = _LldpV2PortConfigTLVsTxEnable_Object(
 )
 lldpV2PortConfigTLVsTxEnable.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    lldpV2PortConfigTLVsTxEnable.setStatus("current")
+    lldpV2PortConfigTLVsTxEnable.setStatus("deprecated")
 _LldpV2DestAddressTable_Object = MibTable
 lldpV2DestAddressTable = _LldpV2DestAddressTable_Object(
     (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 9)
@@ -555,6 +554,267 @@ lldpV2ManAddrConfigRowStatus = _LldpV2ManAddrConfigRowStatus_Object(
 lldpV2ManAddrConfigRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     lldpV2ManAddrConfigRowStatus.setStatus("current")
+_LldpV2PortConfigTableV2_Object = MibTable
+lldpV2PortConfigTableV2 = _LldpV2PortConfigTableV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11)
+)
+if mibBuilder.loadTexts:
+    lldpV2PortConfigTableV2.setStatus("current")
+_LldpV2PortConfigEntryV2_Object = MibTableRow
+lldpV2PortConfigEntryV2 = _LldpV2PortConfigEntryV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1)
+)
+lldpV2PortConfigEntryV2.setIndexNames(
+    (0, "LLDP-V2-MIB", "lldpV2PortConfigIfIndexV2"),
+    (0, "LLDP-V2-MIB", "lldpV2PortConfigDestAddressIndexV2"),
+)
+if mibBuilder.loadTexts:
+    lldpV2PortConfigEntryV2.setStatus("current")
+_LldpV2PortConfigIfIndexV2_Type = InterfaceIndex
+_LldpV2PortConfigIfIndexV2_Object = MibTableColumn
+lldpV2PortConfigIfIndexV2 = _LldpV2PortConfigIfIndexV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 1),
+    _LldpV2PortConfigIfIndexV2_Type()
+)
+lldpV2PortConfigIfIndexV2.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    lldpV2PortConfigIfIndexV2.setStatus("current")
+_LldpV2PortConfigDestAddressIndexV2_Type = LldpV2DestAddressTableIndex
+_LldpV2PortConfigDestAddressIndexV2_Object = MibTableColumn
+lldpV2PortConfigDestAddressIndexV2 = _LldpV2PortConfigDestAddressIndexV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 2),
+    _LldpV2PortConfigDestAddressIndexV2_Type()
+)
+lldpV2PortConfigDestAddressIndexV2.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    lldpV2PortConfigDestAddressIndexV2.setStatus("current")
+
+
+class _LldpV2PortConfigAdminStatusV2_Type(Integer32):
+    """Custom type lldpV2PortConfigAdminStatusV2 based on Integer32"""
+    defaultValue = 3
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("txOnly", 1),
+          ("rxOnly", 2),
+          ("txAndRx", 3),
+          ("disabled", 4))
+    )
+
+
+_LldpV2PortConfigAdminStatusV2_Type.__name__ = "Integer32"
+_LldpV2PortConfigAdminStatusV2_Object = MibTableColumn
+lldpV2PortConfigAdminStatusV2 = _LldpV2PortConfigAdminStatusV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 3),
+    _LldpV2PortConfigAdminStatusV2_Type()
+)
+lldpV2PortConfigAdminStatusV2.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortConfigAdminStatusV2.setStatus("current")
+
+
+class _LldpV2PortMessageTxInterval_Type(Unsigned32):
+    """Custom type lldpV2PortMessageTxInterval based on Unsigned32"""
+    defaultValue = 30
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(5, 32768),
+    )
+
+
+_LldpV2PortMessageTxInterval_Type.__name__ = "Unsigned32"
+_LldpV2PortMessageTxInterval_Object = MibTableColumn
+lldpV2PortMessageTxInterval = _LldpV2PortMessageTxInterval_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 4),
+    _LldpV2PortMessageTxInterval_Type()
+)
+lldpV2PortMessageTxInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortMessageTxInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    lldpV2PortMessageTxInterval.setUnits("seconds")
+
+
+class _LldpV2PortMessageTxHoldMultiplier_Type(Unsigned32):
+    """Custom type lldpV2PortMessageTxHoldMultiplier based on Unsigned32"""
+    defaultValue = 4
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2, 10),
+    )
+
+
+_LldpV2PortMessageTxHoldMultiplier_Type.__name__ = "Unsigned32"
+_LldpV2PortMessageTxHoldMultiplier_Object = MibTableColumn
+lldpV2PortMessageTxHoldMultiplier = _LldpV2PortMessageTxHoldMultiplier_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 5),
+    _LldpV2PortMessageTxHoldMultiplier_Type()
+)
+lldpV2PortMessageTxHoldMultiplier.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortMessageTxHoldMultiplier.setStatus("current")
+
+
+class _LldpV2PortReinitDelay_Type(Unsigned32):
+    """Custom type lldpV2PortReinitDelay based on Unsigned32"""
+    defaultValue = 2
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 10),
+    )
+
+
+_LldpV2PortReinitDelay_Type.__name__ = "Unsigned32"
+_LldpV2PortReinitDelay_Object = MibTableColumn
+lldpV2PortReinitDelay = _LldpV2PortReinitDelay_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 6),
+    _LldpV2PortReinitDelay_Type()
+)
+lldpV2PortReinitDelay.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortReinitDelay.setStatus("current")
+if mibBuilder.loadTexts:
+    lldpV2PortReinitDelay.setUnits("seconds")
+
+
+class _LldpV2PortNotificationInterval_Type(Unsigned32):
+    """Custom type lldpV2PortNotificationInterval based on Unsigned32"""
+    defaultValue = 30
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(5, 3600),
+    )
+
+
+_LldpV2PortNotificationInterval_Type.__name__ = "Unsigned32"
+_LldpV2PortNotificationInterval_Object = MibTableColumn
+lldpV2PortNotificationInterval = _LldpV2PortNotificationInterval_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 7),
+    _LldpV2PortNotificationInterval_Type()
+)
+lldpV2PortNotificationInterval.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortNotificationInterval.setStatus("current")
+if mibBuilder.loadTexts:
+    lldpV2PortNotificationInterval.setUnits("seconds")
+
+
+class _LldpV2PortTxCreditMax_Type(Unsigned32):
+    """Custom type lldpV2PortTxCreditMax based on Unsigned32"""
+    defaultValue = 5
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 100),
+    )
+
+
+_LldpV2PortTxCreditMax_Type.__name__ = "Unsigned32"
+_LldpV2PortTxCreditMax_Object = MibTableColumn
+lldpV2PortTxCreditMax = _LldpV2PortTxCreditMax_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 8),
+    _LldpV2PortTxCreditMax_Type()
+)
+lldpV2PortTxCreditMax.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortTxCreditMax.setStatus("current")
+if mibBuilder.loadTexts:
+    lldpV2PortTxCreditMax.setUnits("PDUs")
+
+
+class _LldpV2PortMessageFastTx_Type(Unsigned32):
+    """Custom type lldpV2PortMessageFastTx based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 3600),
+    )
+
+
+_LldpV2PortMessageFastTx_Type.__name__ = "Unsigned32"
+_LldpV2PortMessageFastTx_Object = MibTableColumn
+lldpV2PortMessageFastTx = _LldpV2PortMessageFastTx_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 9),
+    _LldpV2PortMessageFastTx_Type()
+)
+lldpV2PortMessageFastTx.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortMessageFastTx.setStatus("current")
+if mibBuilder.loadTexts:
+    lldpV2PortMessageFastTx.setUnits("seconds")
+
+
+class _LldpV2PortTxFastInit_Type(Unsigned32):
+    """Custom type lldpV2PortTxFastInit based on Unsigned32"""
+    defaultValue = 4
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8),
+    )
+
+
+_LldpV2PortTxFastInit_Type.__name__ = "Unsigned32"
+_LldpV2PortTxFastInit_Object = MibTableColumn
+lldpV2PortTxFastInit = _LldpV2PortTxFastInit_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 10),
+    _LldpV2PortTxFastInit_Type()
+)
+lldpV2PortTxFastInit.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortTxFastInit.setStatus("current")
+
+
+class _LldpV2PortConfigNotificationEnableV2_Type(TruthValue):
+    """Custom type lldpV2PortConfigNotificationEnableV2 based on TruthValue"""
+    defaultValue = 2
+
+
+_LldpV2PortConfigNotificationEnableV2_Type.__name__ = "TruthValue"
+_LldpV2PortConfigNotificationEnableV2_Object = MibTableColumn
+lldpV2PortConfigNotificationEnableV2 = _LldpV2PortConfigNotificationEnableV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 11),
+    _LldpV2PortConfigNotificationEnableV2_Type()
+)
+lldpV2PortConfigNotificationEnableV2.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortConfigNotificationEnableV2.setStatus("current")
+
+
+class _LldpV2PortConfigTLVsTxEnableV2_Type(Bits):
+    """Custom type lldpV2PortConfigTLVsTxEnableV2 based on Bits"""
+    defaultBinValue = "0"
+
+    namedValues = NamedValues(
+        *(("portDesc", 0),
+          ("sysName", 1),
+          ("sysDesc", 2),
+          ("sysCap", 3))
+    )
+
+_LldpV2PortConfigTLVsTxEnableV2_Type.__name__ = "Bits"
+_LldpV2PortConfigTLVsTxEnableV2_Object = MibTableColumn
+lldpV2PortConfigTLVsTxEnableV2 = _LldpV2PortConfigTLVsTxEnableV2_Object(
+    (1, 3, 111, 2, 802, 1, 1, 13, 1, 1, 11, 1, 12),
+    _LldpV2PortConfigTLVsTxEnableV2_Type()
+)
+lldpV2PortConfigTLVsTxEnableV2.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    lldpV2PortConfigTLVsTxEnableV2.setStatus("current")
 _LldpV2Statistics_ObjectIdentity = ObjectIdentity
 lldpV2Statistics = _LldpV2Statistics_ObjectIdentity(
     (1, 3, 111, 2, 802, 1, 1, 13, 1, 2)
@@ -1415,7 +1675,7 @@ lldpV2ConfigGroup = ObjectGroup(
     (1, 3, 111, 2, 802, 1, 1, 13, 2, 2, 1)
 )
 lldpV2ConfigGroup.setObjects(
-    ("LLDP-V2-MIB", "lldpV2PortConfigAdminStatus")
+    ("LLDP-V2-MIB", "lldpV2PortConfigAdminStatusV2")
 )
 if mibBuilder.loadTexts:
     lldpV2ConfigGroup.setStatus("current")
@@ -1425,7 +1685,7 @@ lldpV2ConfigRxGroup = ObjectGroup(
 )
 lldpV2ConfigRxGroup.setObjects(
       *(("LLDP-V2-MIB", "lldpV2NotificationInterval"),
-        ("LLDP-V2-MIB", "lldpV2PortConfigNotificationEnable"))
+        ("LLDP-V2-MIB", "lldpV2PortConfigNotificationEnableV2"))
 )
 if mibBuilder.loadTexts:
     lldpV2ConfigRxGroup.setStatus("current")
@@ -1437,13 +1697,20 @@ lldpV2ConfigTxGroup.setObjects(
       *(("LLDP-V2-MIB", "lldpV2MessageTxInterval"),
         ("LLDP-V2-MIB", "lldpV2MessageTxHoldMultiplier"),
         ("LLDP-V2-MIB", "lldpV2ReinitDelay"),
-        ("LLDP-V2-MIB", "lldpV2PortConfigTLVsTxEnable"),
+        ("LLDP-V2-MIB", "lldpV2PortConfigTLVsTxEnableV2"),
         ("LLDP-V2-MIB", "lldpV2ManAddrConfigTxEnable"),
         ("LLDP-V2-MIB", "lldpV2ManAddrConfigRowStatus"),
         ("LLDP-V2-MIB", "lldpV2TxCreditMax"),
         ("LLDP-V2-MIB", "lldpV2MessageFastTx"),
         ("LLDP-V2-MIB", "lldpV2TxFastInit"),
-        ("LLDP-V2-MIB", "lldpV2DestMacAddress"))
+        ("LLDP-V2-MIB", "lldpV2DestMacAddress"),
+        ("LLDP-V2-MIB", "lldpV2PortMessageTxInterval"),
+        ("LLDP-V2-MIB", "lldpV2PortMessageTxHoldMultiplier"),
+        ("LLDP-V2-MIB", "lldpV2PortReinitDelay"),
+        ("LLDP-V2-MIB", "lldpV2PortNotificationInterval"),
+        ("LLDP-V2-MIB", "lldpV2PortTxCreditMax"),
+        ("LLDP-V2-MIB", "lldpV2PortMessageFastTx"),
+        ("LLDP-V2-MIB", "lldpV2PortTxFastInit"))
 )
 if mibBuilder.loadTexts:
     lldpV2ConfigTxGroup.setStatus("current")
@@ -1635,6 +1902,20 @@ mibBuilder.exportSymbols(
        "lldpV2ManAddrConfigLocManAddr": lldpV2ManAddrConfigLocManAddr,
        "lldpV2ManAddrConfigTxEnable": lldpV2ManAddrConfigTxEnable,
        "lldpV2ManAddrConfigRowStatus": lldpV2ManAddrConfigRowStatus,
+       "lldpV2PortConfigTableV2": lldpV2PortConfigTableV2,
+       "lldpV2PortConfigEntryV2": lldpV2PortConfigEntryV2,
+       "lldpV2PortConfigIfIndexV2": lldpV2PortConfigIfIndexV2,
+       "lldpV2PortConfigDestAddressIndexV2": lldpV2PortConfigDestAddressIndexV2,
+       "lldpV2PortConfigAdminStatusV2": lldpV2PortConfigAdminStatusV2,
+       "lldpV2PortMessageTxInterval": lldpV2PortMessageTxInterval,
+       "lldpV2PortMessageTxHoldMultiplier": lldpV2PortMessageTxHoldMultiplier,
+       "lldpV2PortReinitDelay": lldpV2PortReinitDelay,
+       "lldpV2PortNotificationInterval": lldpV2PortNotificationInterval,
+       "lldpV2PortTxCreditMax": lldpV2PortTxCreditMax,
+       "lldpV2PortMessageFastTx": lldpV2PortMessageFastTx,
+       "lldpV2PortTxFastInit": lldpV2PortTxFastInit,
+       "lldpV2PortConfigNotificationEnableV2": lldpV2PortConfigNotificationEnableV2,
+       "lldpV2PortConfigTLVsTxEnableV2": lldpV2PortConfigTLVsTxEnableV2,
        "lldpV2Statistics": lldpV2Statistics,
        "lldpV2StatsRemTablesLastChangeTime": lldpV2StatsRemTablesLastChangeTime,
        "lldpV2StatsRemTablesInserts": lldpV2StatsRemTablesInserts,

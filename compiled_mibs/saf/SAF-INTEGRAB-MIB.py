@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\saf\SAF-INTEGRAB-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:24:42 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -119,7 +116,10 @@ integraB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     integraB.setRevisions(
-        ("2015-09-17 00:00",
+        ("2019-04-23 00:00",
+         "2018-06-28 00:00",
+         "2016-05-11 00:00",
+         "2015-09-17 00:00",
          "2015-09-15 00:00",
          "2015-08-12 00:00",
          "2015-07-20 00:00",
@@ -419,6 +419,36 @@ integraBradioPLL = _IntegraBradioPLL_Object(
 integraBradioPLL.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     integraBradioPLL.setStatus("current")
+
+
+class _IntegraBradioRxLevelState_Type(Integer32):
+    """Custom type integraBradioRxLevelState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4)
+        )
+    )
+    namedValues = NamedValues(
+        *(("ok", 1),
+          ("low", 2),
+          ("high", 3),
+          ("error", 4))
+    )
+
+
+_IntegraBradioRxLevelState_Type.__name__ = "Integer32"
+_IntegraBradioRxLevelState_Object = MibScalar
+integraBradioRxLevelState = _IntegraBradioRxLevelState_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 2, 12),
+    _IntegraBradioRxLevelState_Type()
+)
+integraBradioRxLevelState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBradioRxLevelState.setStatus("current")
 _IntegraBmodem_ObjectIdentity = ObjectIdentity
 integraBmodem = _IntegraBmodem_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3)
@@ -615,6 +645,115 @@ if mibBuilder.loadTexts:
     integraBmodemCarrierOffset.setStatus("current")
 if mibBuilder.loadTexts:
     integraBmodemCarrierOffset.setUnits("Hz")
+_IntegraBmodemCountTime_Type = Counter64
+_IntegraBmodemCountTime_Object = MibScalar
+integraBmodemCountTime = _IntegraBmodemCountTime_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 14),
+    _IntegraBmodemCountTime_Type()
+)
+integraBmodemCountTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemCountTime.setStatus("current")
+if mibBuilder.loadTexts:
+    integraBmodemCountTime.setUnits("s")
+_IntegraBmodemErroredBlock_Type = Counter64
+_IntegraBmodemErroredBlock_Object = MibScalar
+integraBmodemErroredBlock = _IntegraBmodemErroredBlock_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 15),
+    _IntegraBmodemErroredBlock_Type()
+)
+integraBmodemErroredBlock.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemErroredBlock.setStatus("current")
+_IntegraBmodemErroredSecond_Type = Counter64
+_IntegraBmodemErroredSecond_Object = MibScalar
+integraBmodemErroredSecond = _IntegraBmodemErroredSecond_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 16),
+    _IntegraBmodemErroredSecond_Type()
+)
+integraBmodemErroredSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemErroredSecond.setStatus("current")
+if mibBuilder.loadTexts:
+    integraBmodemErroredSecond.setUnits("s")
+_IntegraBmodemSeverelyErroredSecond_Type = Counter64
+_IntegraBmodemSeverelyErroredSecond_Object = MibScalar
+integraBmodemSeverelyErroredSecond = _IntegraBmodemSeverelyErroredSecond_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 17),
+    _IntegraBmodemSeverelyErroredSecond_Type()
+)
+integraBmodemSeverelyErroredSecond.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemSeverelyErroredSecond.setStatus("current")
+if mibBuilder.loadTexts:
+    integraBmodemSeverelyErroredSecond.setUnits("s")
+_IntegraBmodemBackgroundBlockError_Type = Counter64
+_IntegraBmodemBackgroundBlockError_Object = MibScalar
+integraBmodemBackgroundBlockError = _IntegraBmodemBackgroundBlockError_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 18),
+    _IntegraBmodemBackgroundBlockError_Type()
+)
+integraBmodemBackgroundBlockError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemBackgroundBlockError.setStatus("current")
+_IntegraBmodemTotalBlockNumber_Type = Counter64
+_IntegraBmodemTotalBlockNumber_Object = MibScalar
+integraBmodemTotalBlockNumber = _IntegraBmodemTotalBlockNumber_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 19),
+    _IntegraBmodemTotalBlockNumber_Type()
+)
+integraBmodemTotalBlockNumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemTotalBlockNumber.setStatus("current")
+_IntegraBmodemErroredSecondRatio_Type = DisplayString
+_IntegraBmodemErroredSecondRatio_Object = MibScalar
+integraBmodemErroredSecondRatio = _IntegraBmodemErroredSecondRatio_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 20),
+    _IntegraBmodemErroredSecondRatio_Type()
+)
+integraBmodemErroredSecondRatio.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemErroredSecondRatio.setStatus("current")
+_IntegraBmodemSeverelyErroredSecondRatio_Type = DisplayString
+_IntegraBmodemSeverelyErroredSecondRatio_Object = MibScalar
+integraBmodemSeverelyErroredSecondRatio = _IntegraBmodemSeverelyErroredSecondRatio_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 21),
+    _IntegraBmodemSeverelyErroredSecondRatio_Type()
+)
+integraBmodemSeverelyErroredSecondRatio.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemSeverelyErroredSecondRatio.setStatus("current")
+_IntegraBmodemBackgroundBlockErrorRatio_Type = DisplayString
+_IntegraBmodemBackgroundBlockErrorRatio_Object = MibScalar
+integraBmodemBackgroundBlockErrorRatio = _IntegraBmodemBackgroundBlockErrorRatio_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 22),
+    _IntegraBmodemBackgroundBlockErrorRatio_Type()
+)
+integraBmodemBackgroundBlockErrorRatio.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemBackgroundBlockErrorRatio.setStatus("current")
+_IntegraBmodemUptime_Type = Counter64
+_IntegraBmodemUptime_Object = MibScalar
+integraBmodemUptime = _IntegraBmodemUptime_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 23),
+    _IntegraBmodemUptime_Type()
+)
+integraBmodemUptime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemUptime.setStatus("current")
+if mibBuilder.loadTexts:
+    integraBmodemUptime.setUnits("s")
+_IntegraBmodemUnavailtime_Type = Counter64
+_IntegraBmodemUnavailtime_Object = MibScalar
+integraBmodemUnavailtime = _IntegraBmodemUnavailtime_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 3, 24),
+    _IntegraBmodemUnavailtime_Type()
+)
+integraBmodemUnavailtime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBmodemUnavailtime.setStatus("current")
+if mibBuilder.loadTexts:
+    integraBmodemUnavailtime.setUnits("s")
 _IntegraBsystem_ObjectIdentity = ObjectIdentity
 integraBsystem = _IntegraBsystem_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 4)
@@ -737,6 +876,33 @@ if mibBuilder.loadTexts:
     integraBsysCPUidle.setStatus("current")
 if mibBuilder.loadTexts:
     integraBsysCPUidle.setUnits("%")
+_IntegraBsysDeviceType_Type = DisplayString
+_IntegraBsysDeviceType_Object = MibScalar
+integraBsysDeviceType = _IntegraBsysDeviceType_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 4, 11),
+    _IntegraBsysDeviceType_Type()
+)
+integraBsysDeviceType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBsysDeviceType.setStatus("current")
+_IntegraBsysDeviceSerial_Type = DisplayString
+_IntegraBsysDeviceSerial_Object = MibScalar
+integraBsysDeviceSerial = _IntegraBsysDeviceSerial_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 4, 12),
+    _IntegraBsysDeviceSerial_Type()
+)
+integraBsysDeviceSerial.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBsysDeviceSerial.setStatus("current")
+_IntegraBsysDeviceProductModel_Type = DisplayString
+_IntegraBsysDeviceProductModel_Object = MibScalar
+integraBsysDeviceProductModel = _IntegraBsysDeviceProductModel_Object(
+    (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 4, 13),
+    _IntegraBsysDeviceProductModel_Type()
+)
+integraBsysDeviceProductModel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    integraBsysDeviceProductModel.setStatus("current")
 _IntegraBethernet_ObjectIdentity = ObjectIdentity
 integraBethernet = _IntegraBethernet_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 7571, 100, 1, 1, 7, 1, 5)
@@ -2696,7 +2862,8 @@ integraBRadioGroup.setObjects(
         ("SAF-INTEGRAB-MIB", "integraBradioRangeDescr"),
         ("SAF-INTEGRAB-MIB", "integraBradioRangeTxPower"),
         ("SAF-INTEGRAB-MIB", "integraBradioRangeTxFrequency"),
-        ("SAF-INTEGRAB-MIB", "integraBradioPLL"))
+        ("SAF-INTEGRAB-MIB", "integraBradioPLL"),
+        ("SAF-INTEGRAB-MIB", "integraBradioRxLevelState"))
 )
 if mibBuilder.loadTexts:
     integraBRadioGroup.setStatus("current")
@@ -2717,7 +2884,18 @@ integraBModemGroup.setObjects(
         ("SAF-INTEGRAB-MIB", "integraBmodemRxCapacity"),
         ("SAF-INTEGRAB-MIB", "integraBmodemTxCapacity"),
         ("SAF-INTEGRAB-MIB", "integraBmodemACMengine"),
-        ("SAF-INTEGRAB-MIB", "integraBmodemCarrierOffset"))
+        ("SAF-INTEGRAB-MIB", "integraBmodemCarrierOffset"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemCountTime"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemErroredBlock"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemErroredSecond"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemSeverelyErroredSecond"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemBackgroundBlockError"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemTotalBlockNumber"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemErroredSecondRatio"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemSeverelyErroredSecondRatio"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemBackgroundBlockErrorRatio"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemUptime"),
+        ("SAF-INTEGRAB-MIB", "integraBmodemUnavailtime"))
 )
 if mibBuilder.loadTexts:
     integraBModemGroup.setStatus("current")
@@ -2735,6 +2913,9 @@ integraBSystemGroup.setObjects(
         ("SAF-INTEGRAB-MIB", "integraBsysBoardTemperature"),
         ("SAF-INTEGRAB-MIB", "integraBsysFreeMemory"),
         ("SAF-INTEGRAB-MIB", "integraBsysCPUidle"),
+        ("SAF-INTEGRAB-MIB", "integraBsysDeviceType"),
+        ("SAF-INTEGRAB-MIB", "integraBsysDeviceSerial"),
+        ("SAF-INTEGRAB-MIB", "integraBsysDeviceProductModel"),
         ("SAF-INTEGRAB-MIB", "integraBexecuteConfig"),
         ("SAF-INTEGRAB-MIB", "integraBneedStore"),
         ("SAF-INTEGRAB-MIB", "integraBstoreConfig"))
@@ -2970,6 +3151,7 @@ mibBuilder.exportSymbols(
        "integraBradioRangeTxPower": integraBradioRangeTxPower,
        "integraBradioRangeTxFrequency": integraBradioRangeTxFrequency,
        "integraBradioPLL": integraBradioPLL,
+       "integraBradioRxLevelState": integraBradioRxLevelState,
        "integraBmodem": integraBmodem,
        "integraBmodemAcquireStatus": integraBmodemAcquireStatus,
        "integraBmodemRadialMse": integraBmodemRadialMse,
@@ -2984,6 +3166,17 @@ mibBuilder.exportSymbols(
        "integraBmodemTxCapacity": integraBmodemTxCapacity,
        "integraBmodemACMengine": integraBmodemACMengine,
        "integraBmodemCarrierOffset": integraBmodemCarrierOffset,
+       "integraBmodemCountTime": integraBmodemCountTime,
+       "integraBmodemErroredBlock": integraBmodemErroredBlock,
+       "integraBmodemErroredSecond": integraBmodemErroredSecond,
+       "integraBmodemSeverelyErroredSecond": integraBmodemSeverelyErroredSecond,
+       "integraBmodemBackgroundBlockError": integraBmodemBackgroundBlockError,
+       "integraBmodemTotalBlockNumber": integraBmodemTotalBlockNumber,
+       "integraBmodemErroredSecondRatio": integraBmodemErroredSecondRatio,
+       "integraBmodemSeverelyErroredSecondRatio": integraBmodemSeverelyErroredSecondRatio,
+       "integraBmodemBackgroundBlockErrorRatio": integraBmodemBackgroundBlockErrorRatio,
+       "integraBmodemUptime": integraBmodemUptime,
+       "integraBmodemUnavailtime": integraBmodemUnavailtime,
        "integraBsystem": integraBsystem,
        "integraBsysCPUtemperature": integraBsysCPUtemperature,
        "integraBsysLicenseExpire": integraBsysLicenseExpire,
@@ -2994,6 +3187,9 @@ mibBuilder.exportSymbols(
        "integraBsysBoardTemperature": integraBsysBoardTemperature,
        "integraBsysFreeMemory": integraBsysFreeMemory,
        "integraBsysCPUidle": integraBsysCPUidle,
+       "integraBsysDeviceType": integraBsysDeviceType,
+       "integraBsysDeviceSerial": integraBsysDeviceSerial,
+       "integraBsysDeviceProductModel": integraBsysDeviceProductModel,
        "integraBethernet": integraBethernet,
        "integraBifStatusTable": integraBifStatusTable,
        "integraBifPortEntry": integraBifPortEntry,

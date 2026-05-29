@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\meinberg\MBG-SNMP-LTNG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:10:29 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -58,6 +55,12 @@ if 'mibBuilder' not in globals():
     "ModuleCompliance",
     "NotificationGroup",
     "ObjectGroup")
+
+(snmpTrapEnterprise,
+ sysName) = mibBuilder.importSymbols(
+    "SNMPv2-MIB",
+    "snmpTrapEnterprise",
+    "sysName")
 
 (Bits,
  Counter32,
@@ -111,7 +114,15 @@ mbgLantimeNG = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     mbgLantimeNG.setRevisions(
-        ("2016-05-18 05:17",
+        ("2022-12-08 10:00",
+         "2022-08-25 10:00",
+         "2022-01-18 15:00",
+         "2022-01-03 16:00",
+         "2022-01-03 14:00",
+         "2021-11-15 14:13",
+         "2018-11-21 07:50",
+         "2017-10-10 06:33",
+         "2016-05-18 05:17",
          "2015-08-27 08:44",
          "2015-04-17 06:32",
          "2014-11-25 07:24",
@@ -198,14 +209,7 @@ mbgLtNgSerialNumber = _MbgLtNgSerialNumber_Object(
 mbgLtNgSerialNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgSerialNumber.setStatus("current")
-
-
-class _MbgLtNgSubagentTimeticks_Type(Counter64):
-    """Custom type mbgLtNgSubagentTimeticks based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgSubagentTimeticks_Type.__name__ = "Counter64"
+_MbgLtNgSubagentTimeticks_Type = Counter64
 _MbgLtNgSubagentTimeticks_Object = MibScalar
 mbgLtNgSubagentTimeticks = _MbgLtNgSubagentTimeticks_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 0, 4),
@@ -361,7 +365,77 @@ class _MbgLtNgRefclockType_Type(Integer32):
               58,
               59,
               60,
-              61)
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131)
         )
     )
     namedValues = NamedValues(
@@ -426,7 +500,77 @@ class _MbgLtNgRefclockType_Type(Integer32):
           ("fdm180", 58),
           ("spt", 59),
           ("pzf180", 60),
-          ("rel1000", 61))
+          ("rel1000", 61),
+          ("hps100", 62),
+          ("vsg180", 63),
+          ("msf180", 64),
+          ("wwvb180", 65),
+          ("cpc180", 66),
+          ("ctc100", 67),
+          ("tcr180", 68),
+          ("lue180", 69),
+          ("cpc01", 70),
+          ("tsu01", 71),
+          ("cmc01", 72),
+          ("scu01", 73),
+          ("fcu01", 74),
+          ("mssb100", 75),
+          ("lne180sfp", 76),
+          ("gts180", 77),
+          ("gps180csm", 78),
+          ("grc181", 79),
+          ("n2x180", 80),
+          ("gns180pex", 81),
+          ("mdu180", 82),
+          ("mdu312", 83),
+          ("gps165", 84),
+          ("gns181uc", 85),
+          ("psx4GE", 86),
+          ("rsc180rdu", 87),
+          ("cpc200", 88),
+          ("fdm180m", 89),
+          ("lsg180", 90),
+          ("gps190", 91),
+          ("gns181", 92),
+          ("pio180", 93),
+          ("fcm180", 94),
+          ("tcr180usb", 95),
+          ("ssp100", 96),
+          ("gns165", 97),
+          ("rsc180rdmp", 98),
+          ("gps16x", 99),
+          ("mshps100", 100),
+          ("bpestm", 101),
+          ("vsi180", 102),
+          ("gnm181", 103),
+          ("rscrduttl", 104),
+          ("rsc2000", 105),
+          ("fcu200", 106),
+          ("rel1000rc", 107),
+          ("wsiug2864", 108),
+          ("vsg181", 109),
+          ("bps2xxx", 110),
+          ("bpe2352", 111),
+          ("bpe8XXX", 112),
+          ("bpe6042", 113),
+          ("gns190", 114),
+          ("gps180msbc", 115),
+          ("gns181msbc", 116),
+          ("gns181ucmsbc", 117),
+          ("prs181", 118),
+          ("ecm180", 119),
+          ("mro181", 120),
+          ("vsg181msbc", 121),
+          ("scg181", 122),
+          ("nimbra100", 123),
+          ("rsc180scu", 124),
+          ("pmu190", 125),
+          ("gns190uc", 126),
+          ("vmx180", 127),
+          ("rcg181", 128),
+          ("gns191", 129),
+          ("vsg181h", 130),
+          ("gps182", 131))
     )
 
 
@@ -523,6 +667,7 @@ class _MbgLtNgRefclockSubstate_Type(Integer32):
               52,
               100,
               101,
+              149,
               150,
               151,
               152,
@@ -557,6 +702,7 @@ class _MbgLtNgRefclockSubstate_Type(Integer32):
           ("lwSync", 52),
           ("tcrNotSync", 100),
           ("tcrSync", 101),
+          ("mrsIntOscSync", 149),
           ("mrsGpsSync", 150),
           ("mrs10MhzSync", 151),
           ("mrsPpsInSync", 152),
@@ -574,7 +720,7 @@ class _MbgLtNgRefclockSubstate_Type(Integer32):
           ("mrsGlonassGpsSync", 164),
           ("mrsHavequickSync", 165),
           ("mrsExtOscSync", 166),
-          ("mrsIntOscSync", 167))
+          ("mrsSyncE", 167))
     )
 
 
@@ -856,7 +1002,7 @@ mbgLtNgRefclockTimeDiff.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgRefclockTimeDiff.setStatus("current")
 if mibBuilder.loadTexts:
-    mbgLtNgRefclockTimeDiff.setUnits("ms")
+    mbgLtNgRefclockTimeDiff.setUnits("ns")
 
 
 class _MbgLtNgRefclockGpsPos_Type(DisplayString):
@@ -873,6 +1019,120 @@ mbgLtNgRefclockGpsPos = _MbgLtNgRefclockGpsPos_Object(
 mbgLtNgRefclockGpsPos.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgRefclockGpsPos.setStatus("current")
+_MbgLtNgRefclockMrsInfo_Object = MibTable
+mbgLtNgRefclockMrsInfo = _MbgLtNgRefclockMrsInfo_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6)
+)
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockMrsInfo.setStatus("current")
+_MbgLtNgRefclockMrsTableEntry_Object = MibTableRow
+mbgLtNgRefclockMrsTableEntry = _MbgLtNgRefclockMrsTableEntry_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1)
+)
+mbgLtNgRefclockMrsTableEntry.setIndexNames(
+    (0, "MBG-SNMP-LTNG-MIB", "mbgLtNgRefclockMrsIndex"),
+)
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockMrsTableEntry.setStatus("current")
+_MbgLtNgRefclockXmrSyncTo_Type = DisplayString
+_MbgLtNgRefclockXmrSyncTo_Object = MibTableColumn
+mbgLtNgRefclockXmrSyncTo = _MbgLtNgRefclockXmrSyncTo_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 1),
+    _MbgLtNgRefclockXmrSyncTo_Type()
+)
+mbgLtNgRefclockXmrSyncTo.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrSyncTo.setStatus("current")
+_MbgLtNgRefclockXmrPriority1_Type = DisplayString
+_MbgLtNgRefclockXmrPriority1_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority1 = _MbgLtNgRefclockXmrPriority1_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 2),
+    _MbgLtNgRefclockXmrPriority1_Type()
+)
+mbgLtNgRefclockXmrPriority1.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority1.setStatus("current")
+_MbgLtNgRefclockXmrPriority2_Type = DisplayString
+_MbgLtNgRefclockXmrPriority2_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority2 = _MbgLtNgRefclockXmrPriority2_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 3),
+    _MbgLtNgRefclockXmrPriority2_Type()
+)
+mbgLtNgRefclockXmrPriority2.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority2.setStatus("current")
+_MbgLtNgRefclockXmrPriority3_Type = DisplayString
+_MbgLtNgRefclockXmrPriority3_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority3 = _MbgLtNgRefclockXmrPriority3_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 4),
+    _MbgLtNgRefclockXmrPriority3_Type()
+)
+mbgLtNgRefclockXmrPriority3.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority3.setStatus("current")
+_MbgLtNgRefclockXmrPriority4_Type = DisplayString
+_MbgLtNgRefclockXmrPriority4_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority4 = _MbgLtNgRefclockXmrPriority4_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 5),
+    _MbgLtNgRefclockXmrPriority4_Type()
+)
+mbgLtNgRefclockXmrPriority4.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority4.setStatus("current")
+_MbgLtNgRefclockXmrPriority5_Type = DisplayString
+_MbgLtNgRefclockXmrPriority5_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority5 = _MbgLtNgRefclockXmrPriority5_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 6),
+    _MbgLtNgRefclockXmrPriority5_Type()
+)
+mbgLtNgRefclockXmrPriority5.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority5.setStatus("current")
+_MbgLtNgRefclockXmrPriority6_Type = DisplayString
+_MbgLtNgRefclockXmrPriority6_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority6 = _MbgLtNgRefclockXmrPriority6_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 7),
+    _MbgLtNgRefclockXmrPriority6_Type()
+)
+mbgLtNgRefclockXmrPriority6.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority6.setStatus("current")
+_MbgLtNgRefclockXmrPriority7_Type = DisplayString
+_MbgLtNgRefclockXmrPriority7_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority7 = _MbgLtNgRefclockXmrPriority7_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 8),
+    _MbgLtNgRefclockXmrPriority7_Type()
+)
+mbgLtNgRefclockXmrPriority7.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority7.setStatus("current")
+_MbgLtNgRefclockXmrPriority8_Type = DisplayString
+_MbgLtNgRefclockXmrPriority8_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority8 = _MbgLtNgRefclockXmrPriority8_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 9),
+    _MbgLtNgRefclockXmrPriority8_Type()
+)
+mbgLtNgRefclockXmrPriority8.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority8.setStatus("current")
+_MbgLtNgRefclockXmrPriority9_Type = DisplayString
+_MbgLtNgRefclockXmrPriority9_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority9 = _MbgLtNgRefclockXmrPriority9_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 10),
+    _MbgLtNgRefclockXmrPriority9_Type()
+)
+mbgLtNgRefclockXmrPriority9.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority9.setStatus("current")
+_MbgLtNgRefclockXmrPriority10_Type = DisplayString
+_MbgLtNgRefclockXmrPriority10_Object = MibTableColumn
+mbgLtNgRefclockXmrPriority10 = _MbgLtNgRefclockXmrPriority10_Object(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 0, 1, 6, 1, 11),
+    _MbgLtNgRefclockXmrPriority10_Type()
+)
+mbgLtNgRefclockXmrPriority10.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    mbgLtNgRefclockXmrPriority10.setStatus("current")
 _MbgLtNgNtp_ObjectIdentity = ObjectIdentity
 mbgLtNgNtp = _MbgLtNgNtp_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2)
@@ -982,14 +1242,7 @@ _MbgLtNgNtpClientCounter_ObjectIdentity = ObjectIdentity
 mbgLtNgNtpClientCounter = _MbgLtNgNtpClientCounter_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2, 8)
 )
-
-
-class _MbgLtNgNtpCCStartedAt_Type(Counter64):
-    """Custom type mbgLtNgNtpCCStartedAt based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgNtpCCStartedAt_Type.__name__ = "Counter64"
+_MbgLtNgNtpCCStartedAt_Type = Counter64
 _MbgLtNgNtpCCStartedAt_Object = MibScalar
 mbgLtNgNtpCCStartedAt = _MbgLtNgNtpCCStartedAt_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2, 8, 1),
@@ -1032,14 +1285,7 @@ mbgLtNgNtpCCNumberOfClients = _MbgLtNgNtpCCNumberOfClients_Object(
 mbgLtNgNtpCCNumberOfClients.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgNtpCCNumberOfClients.setStatus("current")
-
-
-class _MbgLtNgNtpCCTotalRequests_Type(Counter64):
-    """Custom type mbgLtNgNtpCCTotalRequests based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgNtpCCTotalRequests_Type.__name__ = "Counter64"
+_MbgLtNgNtpCCTotalRequests_Type = Counter64
 _MbgLtNgNtpCCTotalRequests_Object = MibScalar
 mbgLtNgNtpCCTotalRequests = _MbgLtNgNtpCCTotalRequests_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2, 8, 4),
@@ -1047,15 +1293,8 @@ mbgLtNgNtpCCTotalRequests = _MbgLtNgNtpCCTotalRequests_Object(
 )
 mbgLtNgNtpCCTotalRequests.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    mbgLtNgNtpCCTotalRequests.setStatus("current")
-
-
-class _MbgLtNgNtpCCTotalRequestsCurrentDay_Type(Counter64):
-    """Custom type mbgLtNgNtpCCTotalRequestsCurrentDay based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgNtpCCTotalRequestsCurrentDay_Type.__name__ = "Counter64"
+    mbgLtNgNtpCCTotalRequests.setStatus("obsolete")
+_MbgLtNgNtpCCTotalRequestsCurrentDay_Type = Counter64
 _MbgLtNgNtpCCTotalRequestsCurrentDay_Object = MibScalar
 mbgLtNgNtpCCTotalRequestsCurrentDay = _MbgLtNgNtpCCTotalRequestsCurrentDay_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2, 8, 5),
@@ -1064,14 +1303,7 @@ mbgLtNgNtpCCTotalRequestsCurrentDay = _MbgLtNgNtpCCTotalRequestsCurrentDay_Objec
 mbgLtNgNtpCCTotalRequestsCurrentDay.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgNtpCCTotalRequestsCurrentDay.setStatus("current")
-
-
-class _MbgLtNgNtpCCTotalRequestsLastHour_Type(Counter64):
-    """Custom type mbgLtNgNtpCCTotalRequestsLastHour based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgNtpCCTotalRequestsLastHour_Type.__name__ = "Counter64"
+_MbgLtNgNtpCCTotalRequestsLastHour_Type = Counter64
 _MbgLtNgNtpCCTotalRequestsLastHour_Object = MibScalar
 mbgLtNgNtpCCTotalRequestsLastHour = _MbgLtNgNtpCCTotalRequestsLastHour_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2, 8, 6),
@@ -1080,14 +1312,7 @@ mbgLtNgNtpCCTotalRequestsLastHour = _MbgLtNgNtpCCTotalRequestsLastHour_Object(
 mbgLtNgNtpCCTotalRequestsLastHour.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgNtpCCTotalRequestsLastHour.setStatus("current")
-
-
-class _MbgLtNgNtpCCTotalRequestsLastMinute_Type(Counter64):
-    """Custom type mbgLtNgNtpCCTotalRequestsLastMinute based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgNtpCCTotalRequestsLastMinute_Type.__name__ = "Counter64"
+_MbgLtNgNtpCCTotalRequestsLastMinute_Type = Counter64
 _MbgLtNgNtpCCTotalRequestsLastMinute_Object = MibScalar
 mbgLtNgNtpCCTotalRequestsLastMinute = _MbgLtNgNtpCCTotalRequestsLastMinute_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 2, 8, 7),
@@ -1433,14 +1658,7 @@ if mibBuilder.loadTexts:
     mbgLtNgPtpUtcOffset.setStatus("current")
 if mibBuilder.loadTexts:
     mbgLtNgPtpUtcOffset.setUnits("seconds")
-
-
-class _MbgLtNgPtpTimeSeconds_Type(Counter64):
-    """Custom type mbgLtNgPtpTimeSeconds based on Counter64"""
-    defaultValue = 0
-
-
-_MbgLtNgPtpTimeSeconds_Type.__name__ = "Counter64"
+_MbgLtNgPtpTimeSeconds_Type = Counter64
 _MbgLtNgPtpTimeSeconds_Object = MibTableColumn
 mbgLtNgPtpTimeSeconds = _MbgLtNgPtpTimeSeconds_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 0, 3, 2, 1, 9),
@@ -3599,26 +3817,12 @@ if mibBuilder.loadTexts:
     mbgLtNgCfgSnmpV3Context.setStatus("current")
 
 
-class _MbgLtNgCfgSnmpV3SecurityLevel_Type(Integer32):
-    """Custom type mbgLtNgCfgSnmpV3SecurityLevel based on Integer32"""
-    defaultValue = 0
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1,
-              2)
-        )
-    )
-    namedValues = NamedValues(
-        *(("noAuthNoPriv", 0),
-          ("authNoPriv", 1),
-          ("authPriv", 2))
-    )
+class _MbgLtNgCfgSnmpV3SecurityLevel_Type(DisplayString):
+    """Custom type mbgLtNgCfgSnmpV3SecurityLevel based on DisplayString"""
+    defaultValue = OctetString("n/a")
 
 
-_MbgLtNgCfgSnmpV3SecurityLevel_Type.__name__ = "Integer32"
+_MbgLtNgCfgSnmpV3SecurityLevel_Type.__name__ = "DisplayString"
 _MbgLtNgCfgSnmpV3SecurityLevel_Object = MibScalar
 mbgLtNgCfgSnmpV3SecurityLevel = _MbgLtNgCfgSnmpV3SecurityLevel_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 1, 3, 9),
@@ -3629,24 +3833,12 @@ if mibBuilder.loadTexts:
     mbgLtNgCfgSnmpV3SecurityLevel.setStatus("current")
 
 
-class _MbgLtNgCfgSnmpV3AuthProtocol_Type(Integer32):
-    """Custom type mbgLtNgCfgSnmpV3AuthProtocol based on Integer32"""
-    defaultValue = 0
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1)
-        )
-    )
-    namedValues = NamedValues(
-        *(("md5", 0),
-          ("sha", 1))
-    )
+class _MbgLtNgCfgSnmpV3AuthProtocol_Type(DisplayString):
+    """Custom type mbgLtNgCfgSnmpV3AuthProtocol based on DisplayString"""
+    defaultValue = OctetString("n/a")
 
 
-_MbgLtNgCfgSnmpV3AuthProtocol_Type.__name__ = "Integer32"
+_MbgLtNgCfgSnmpV3AuthProtocol_Type.__name__ = "DisplayString"
 _MbgLtNgCfgSnmpV3AuthProtocol_Object = MibScalar
 mbgLtNgCfgSnmpV3AuthProtocol = _MbgLtNgCfgSnmpV3AuthProtocol_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 1, 3, 10),
@@ -3673,24 +3865,12 @@ if mibBuilder.loadTexts:
     mbgLtNgCfgSnmpV3AuthPassphrase.setStatus("current")
 
 
-class _MbgLtNgCfgSnmpV3PrivProtocol_Type(Integer32):
-    """Custom type mbgLtNgCfgSnmpV3PrivProtocol based on Integer32"""
-    defaultValue = 0
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1)
-        )
-    )
-    namedValues = NamedValues(
-        *(("des", 0),
-          ("aes", 1))
-    )
+class _MbgLtNgCfgSnmpV3PrivProtocol_Type(DisplayString):
+    """Custom type mbgLtNgCfgSnmpV3PrivProtocol based on DisplayString"""
+    defaultValue = OctetString("n/a")
 
 
-_MbgLtNgCfgSnmpV3PrivProtocol_Type.__name__ = "Integer32"
+_MbgLtNgCfgSnmpV3PrivProtocol_Type.__name__ = "DisplayString"
 _MbgLtNgCfgSnmpV3PrivProtocol_Object = MibScalar
 mbgLtNgCfgSnmpV3PrivProtocol = _MbgLtNgCfgSnmpV3PrivProtocol_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 1, 3, 12),
@@ -5257,7 +5437,7 @@ mbgLtNgCfgPtpHostname = _MbgLtNgCfgPtpHostname_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 2),
     _MbgLtNgCfgPtpHostname_Type()
 )
-mbgLtNgCfgPtpHostname.setMaxAccess("read-write")
+mbgLtNgCfgPtpHostname.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpHostname.setStatus("current")
 
@@ -5273,7 +5453,7 @@ mbgLtNgCfgPtpDomainname = _MbgLtNgCfgPtpDomainname_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 3),
     _MbgLtNgCfgPtpDomainname_Type()
 )
-mbgLtNgCfgPtpDomainname.setMaxAccess("read-write")
+mbgLtNgCfgPtpDomainname.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDomainname.setStatus("current")
 
@@ -5289,7 +5469,7 @@ mbgLtNgCfgPtpNameserver1 = _MbgLtNgCfgPtpNameserver1_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 4),
     _MbgLtNgCfgPtpNameserver1_Type()
 )
-mbgLtNgCfgPtpNameserver1.setMaxAccess("read-write")
+mbgLtNgCfgPtpNameserver1.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpNameserver1.setStatus("current")
 
@@ -5305,7 +5485,7 @@ mbgLtNgCfgPtpNameserver2 = _MbgLtNgCfgPtpNameserver2_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 5),
     _MbgLtNgCfgPtpNameserver2_Type()
 )
-mbgLtNgCfgPtpNameserver2.setMaxAccess("read-write")
+mbgLtNgCfgPtpNameserver2.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpNameserver2.setStatus("current")
 
@@ -5321,7 +5501,7 @@ mbgLtNgCfgPtpIpv4 = _MbgLtNgCfgPtpIpv4_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 6),
     _MbgLtNgCfgPtpIpv4_Type()
 )
-mbgLtNgCfgPtpIpv4.setMaxAccess("read-write")
+mbgLtNgCfgPtpIpv4.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpIpv4.setStatus("current")
 
@@ -5337,7 +5517,7 @@ mbgLtNgCfgPtpNetmask = _MbgLtNgCfgPtpNetmask_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 7),
     _MbgLtNgCfgPtpNetmask_Type()
 )
-mbgLtNgCfgPtpNetmask.setMaxAccess("read-write")
+mbgLtNgCfgPtpNetmask.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpNetmask.setStatus("current")
 
@@ -5353,7 +5533,7 @@ mbgLtNgCfgPtpGateway = _MbgLtNgCfgPtpGateway_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 8),
     _MbgLtNgCfgPtpGateway_Type()
 )
-mbgLtNgCfgPtpGateway.setMaxAccess("read-write")
+mbgLtNgCfgPtpGateway.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpGateway.setStatus("current")
 
@@ -5369,7 +5549,7 @@ mbgLtNgCfgPtpEnableVlan = _MbgLtNgCfgPtpEnableVlan_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 9),
     _MbgLtNgCfgPtpEnableVlan_Type()
 )
-mbgLtNgCfgPtpEnableVlan.setMaxAccess("read-write")
+mbgLtNgCfgPtpEnableVlan.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpEnableVlan.setStatus("current")
 
@@ -5390,7 +5570,7 @@ mbgLtNgCfgPtpVlanId = _MbgLtNgCfgPtpVlanId_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 10),
     _MbgLtNgCfgPtpVlanId_Type()
 )
-mbgLtNgCfgPtpVlanId.setMaxAccess("read-write")
+mbgLtNgCfgPtpVlanId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpVlanId.setStatus("current")
 
@@ -5411,7 +5591,7 @@ mbgLtNgCfgPtpVlanPriority = _MbgLtNgCfgPtpVlanPriority_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 11),
     _MbgLtNgCfgPtpVlanPriority_Type()
 )
-mbgLtNgCfgPtpVlanPriority.setMaxAccess("read-write")
+mbgLtNgCfgPtpVlanPriority.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpVlanPriority.setStatus("current")
 
@@ -5427,7 +5607,7 @@ mbgLtNgCfgPtpEnableDhcp = _MbgLtNgCfgPtpEnableDhcp_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 12),
     _MbgLtNgCfgPtpEnableDhcp_Type()
 )
-mbgLtNgCfgPtpEnableDhcp.setMaxAccess("read-write")
+mbgLtNgCfgPtpEnableDhcp.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpEnableDhcp.setStatus("current")
 
@@ -5467,7 +5647,7 @@ mbgLtNgCfgPtpMode = _MbgLtNgCfgPtpMode_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 13),
     _MbgLtNgCfgPtpMode_Type()
 )
-mbgLtNgCfgPtpMode.setMaxAccess("read-write")
+mbgLtNgCfgPtpMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpMode.setStatus("current")
 
@@ -5495,7 +5675,7 @@ mbgLtNgCfgPtpDelayMechanism = _MbgLtNgCfgPtpDelayMechanism_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 14),
     _MbgLtNgCfgPtpDelayMechanism_Type()
 )
-mbgLtNgCfgPtpDelayMechanism.setMaxAccess("read-write")
+mbgLtNgCfgPtpDelayMechanism.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDelayMechanism.setStatus("current")
 
@@ -5527,7 +5707,7 @@ mbgLtNgCfgPtpNetworkProtocol = _MbgLtNgCfgPtpNetworkProtocol_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 15),
     _MbgLtNgCfgPtpNetworkProtocol_Type()
 )
-mbgLtNgCfgPtpNetworkProtocol.setMaxAccess("read-write")
+mbgLtNgCfgPtpNetworkProtocol.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpNetworkProtocol.setStatus("current")
 
@@ -5548,7 +5728,7 @@ mbgLtNgCfgPtpDomainNumber = _MbgLtNgCfgPtpDomainNumber_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 16),
     _MbgLtNgCfgPtpDomainNumber_Type()
 )
-mbgLtNgCfgPtpDomainNumber.setMaxAccess("read-write")
+mbgLtNgCfgPtpDomainNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDomainNumber.setStatus("current")
 
@@ -5569,7 +5749,7 @@ mbgLtNgCfgPtpPriority1 = _MbgLtNgCfgPtpPriority1_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 17),
     _MbgLtNgCfgPtpPriority1_Type()
 )
-mbgLtNgCfgPtpPriority1.setMaxAccess("read-write")
+mbgLtNgCfgPtpPriority1.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpPriority1.setStatus("current")
 
@@ -5590,7 +5770,7 @@ mbgLtNgCfgPtpPriority2 = _MbgLtNgCfgPtpPriority2_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 18),
     _MbgLtNgCfgPtpPriority2_Type()
 )
-mbgLtNgCfgPtpPriority2.setMaxAccess("read-write")
+mbgLtNgCfgPtpPriority2.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpPriority2.setStatus("current")
 
@@ -5611,7 +5791,7 @@ mbgLtNgCfgPtpSyncInterval = _MbgLtNgCfgPtpSyncInterval_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 19),
     _MbgLtNgCfgPtpSyncInterval_Type()
 )
-mbgLtNgCfgPtpSyncInterval.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncInterval.setStatus("current")
 
@@ -5632,7 +5812,7 @@ mbgLtNgCfgPtpAnnounceInterval = _MbgLtNgCfgPtpAnnounceInterval_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 20),
     _MbgLtNgCfgPtpAnnounceInterval_Type()
 )
-mbgLtNgCfgPtpAnnounceInterval.setMaxAccess("read-write")
+mbgLtNgCfgPtpAnnounceInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpAnnounceInterval.setStatus("current")
 
@@ -5653,7 +5833,7 @@ mbgLtNgCfgPtpDelayReqInterval = _MbgLtNgCfgPtpDelayReqInterval_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 21),
     _MbgLtNgCfgPtpDelayReqInterval_Type()
 )
-mbgLtNgCfgPtpDelayReqInterval.setMaxAccess("read-write")
+mbgLtNgCfgPtpDelayReqInterval.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDelayReqInterval.setStatus("current")
 
@@ -5681,7 +5861,7 @@ mbgLtNgCfgPtpTimescale = _MbgLtNgCfgPtpTimescale_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 22),
     _MbgLtNgCfgPtpTimescale_Type()
 )
-mbgLtNgCfgPtpTimescale.setMaxAccess("read-write")
+mbgLtNgCfgPtpTimescale.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpTimescale.setStatus("current")
 
@@ -5739,7 +5919,7 @@ mbgLtNgCfgPtpIpv6Mode = _MbgLtNgCfgPtpIpv6Mode_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 24),
     _MbgLtNgCfgPtpIpv6Mode_Type()
 )
-mbgLtNgCfgPtpIpv6Mode.setMaxAccess("read-write")
+mbgLtNgCfgPtpIpv6Mode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpIpv6Mode.setStatus("current")
 
@@ -5755,7 +5935,7 @@ mbgLtNgCfgPtpIpv6Address = _MbgLtNgCfgPtpIpv6Address_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 25),
     _MbgLtNgCfgPtpIpv6Address_Type()
 )
-mbgLtNgCfgPtpIpv6Address.setMaxAccess("read-write")
+mbgLtNgCfgPtpIpv6Address.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpIpv6Address.setStatus("current")
 
@@ -5793,7 +5973,7 @@ mbgLtNgCfgPtpIpv6McastScope = _MbgLtNgCfgPtpIpv6McastScope_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 26),
     _MbgLtNgCfgPtpIpv6McastScope_Type()
 )
-mbgLtNgCfgPtpIpv6McastScope.setMaxAccess("read-write")
+mbgLtNgCfgPtpIpv6McastScope.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpIpv6McastScope.setStatus("current")
 
@@ -5809,7 +5989,7 @@ mbgLtNgCfgPtpDisableSsh = _MbgLtNgCfgPtpDisableSsh_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 27),
     _MbgLtNgCfgPtpDisableSsh_Type()
 )
-mbgLtNgCfgPtpDisableSsh.setMaxAccess("read-write")
+mbgLtNgCfgPtpDisableSsh.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDisableSsh.setStatus("current")
 
@@ -5830,7 +6010,7 @@ mbgLtNgCfgPtpDscpClass = _MbgLtNgCfgPtpDscpClass_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 28),
     _MbgLtNgCfgPtpDscpClass_Type()
 )
-mbgLtNgCfgPtpDscpClass.setMaxAccess("read-write")
+mbgLtNgCfgPtpDscpClass.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDscpClass.setStatus("current")
 
@@ -5851,7 +6031,7 @@ mbgLtNgCfgPtpMcastTtl = _MbgLtNgCfgPtpMcastTtl_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 29),
     _MbgLtNgCfgPtpMcastTtl_Type()
 )
-mbgLtNgCfgPtpMcastTtl.setMaxAccess("read-write")
+mbgLtNgCfgPtpMcastTtl.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpMcastTtl.setStatus("current")
 
@@ -5879,7 +6059,7 @@ mbgLtNgCfgPtpOpMode = _MbgLtNgCfgPtpOpMode_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 30),
     _MbgLtNgCfgPtpOpMode_Type()
 )
-mbgLtNgCfgPtpOpMode.setMaxAccess("read-write")
+mbgLtNgCfgPtpOpMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpOpMode.setStatus("current")
 
@@ -5933,7 +6113,7 @@ mbgLtNgCfgPtpHybridMode = _MbgLtNgCfgPtpHybridMode_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 32),
     _MbgLtNgCfgPtpHybridMode_Type()
 )
-mbgLtNgCfgPtpHybridMode.setMaxAccess("read-write")
+mbgLtNgCfgPtpHybridMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpHybridMode.setStatus("current")
 
@@ -5949,7 +6129,7 @@ mbgLtNgCfgPtpUcastMstAddr = _MbgLtNgCfgPtpUcastMstAddr_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 33),
     _MbgLtNgCfgPtpUcastMstAddr_Type()
 )
-mbgLtNgCfgPtpUcastMstAddr.setMaxAccess("read-write")
+mbgLtNgCfgPtpUcastMstAddr.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpUcastMstAddr.setStatus("current")
 
@@ -5970,7 +6150,7 @@ mbgLtNgCfgPtpAnnRcptTmout = _MbgLtNgCfgPtpAnnRcptTmout_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 34),
     _MbgLtNgCfgPtpAnnRcptTmout_Type()
 )
-mbgLtNgCfgPtpAnnRcptTmout.setMaxAccess("read-write")
+mbgLtNgCfgPtpAnnRcptTmout.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpAnnRcptTmout.setStatus("current")
 
@@ -5991,7 +6171,7 @@ mbgLtNgCfgPtpMessageDuration = _MbgLtNgCfgPtpMessageDuration_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 35),
     _MbgLtNgCfgPtpMessageDuration_Type()
 )
-mbgLtNgCfgPtpMessageDuration.setMaxAccess("read-write")
+mbgLtNgCfgPtpMessageDuration.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpMessageDuration.setStatus("current")
 
@@ -6023,7 +6203,7 @@ mbgLtNgCfgPtpSyncEEnabled = _MbgLtNgCfgPtpSyncEEnabled_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 37),
     _MbgLtNgCfgPtpSyncEEnabled_Type()
 )
-mbgLtNgCfgPtpSyncEEnabled.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncEEnabled.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncEEnabled.setStatus("current")
 
@@ -6039,7 +6219,7 @@ mbgLtNgCfgPtpSyncEQltLvlSelEnable = _MbgLtNgCfgPtpSyncEQltLvlSelEnable_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 38),
     _MbgLtNgCfgPtpSyncEQltLvlSelEnable_Type()
 )
-mbgLtNgCfgPtpSyncEQltLvlSelEnable.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncEQltLvlSelEnable.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncEQltLvlSelEnable.setStatus("current")
 
@@ -6067,7 +6247,7 @@ mbgLtNgCfgPtpSyncESdhNwOption = _MbgLtNgCfgPtpSyncESdhNwOption_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 39),
     _MbgLtNgCfgPtpSyncESdhNwOption_Type()
 )
-mbgLtNgCfgPtpSyncESdhNwOption.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncESdhNwOption.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncESdhNwOption.setStatus("current")
 
@@ -6123,7 +6303,7 @@ mbgLtNgCfgPtpSyncEInputSsm = _MbgLtNgCfgPtpSyncEInputSsm_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 40),
     _MbgLtNgCfgPtpSyncEInputSsm_Type()
 )
-mbgLtNgCfgPtpSyncEInputSsm.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncEInputSsm.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncEInputSsm.setStatus("current")
 
@@ -6179,7 +6359,7 @@ mbgLtNgCfgPtpSyncEOutputSsm = _MbgLtNgCfgPtpSyncEOutputSsm_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 41),
     _MbgLtNgCfgPtpSyncEOutputSsm_Type()
 )
-mbgLtNgCfgPtpSyncEOutputSsm.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncEOutputSsm.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncEOutputSsm.setStatus("current")
 
@@ -6215,7 +6395,7 @@ mbgLtNgCfgPtpSyncEGbitCopperMode = _MbgLtNgCfgPtpSyncEGbitCopperMode_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 42),
     _MbgLtNgCfgPtpSyncEGbitCopperMode_Type()
 )
-mbgLtNgCfgPtpSyncEGbitCopperMode.setMaxAccess("read-write")
+mbgLtNgCfgPtpSyncEGbitCopperMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpSyncEGbitCopperMode.setStatus("current")
 
@@ -6231,7 +6411,7 @@ mbgLtNgCfgPtpMiscEnable1Step = _MbgLtNgCfgPtpMiscEnable1Step_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 43),
     _MbgLtNgCfgPtpMiscEnable1Step_Type()
 )
-mbgLtNgCfgPtpMiscEnable1Step.setMaxAccess("read-write")
+mbgLtNgCfgPtpMiscEnable1Step.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpMiscEnable1Step.setStatus("current")
 
@@ -6247,7 +6427,7 @@ mbgLtNgCfgPtpDisableMgmtMsgs = _MbgLtNgCfgPtpDisableMgmtMsgs_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 44),
     _MbgLtNgCfgPtpDisableMgmtMsgs_Type()
 )
-mbgLtNgCfgPtpDisableMgmtMsgs.setMaxAccess("read-write")
+mbgLtNgCfgPtpDisableMgmtMsgs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpDisableMgmtMsgs.setStatus("current")
 
@@ -6283,7 +6463,7 @@ mbgLtNgCfgPtpOutput1 = _MbgLtNgCfgPtpOutput1_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 45),
     _MbgLtNgCfgPtpOutput1_Type()
 )
-mbgLtNgCfgPtpOutput1.setMaxAccess("read-write")
+mbgLtNgCfgPtpOutput1.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpOutput1.setStatus("current")
 
@@ -6319,41 +6499,9 @@ mbgLtNgCfgPtpOutput2 = _MbgLtNgCfgPtpOutput2_Object(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 1, 1, 46),
     _MbgLtNgCfgPtpOutput2_Type()
 )
-mbgLtNgCfgPtpOutput2.setMaxAccess("read-write")
+mbgLtNgCfgPtpOutput2.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     mbgLtNgCfgPtpOutput2.setStatus("current")
-
-
-class _MbgLtNgCfgPtpCmd_Type(Integer32):
-    """Custom type mbgLtNgCfgPtpCmd based on Integer32"""
-    defaultValue = 0
-
-    subtypeSpec = Integer32.subtypeSpec
-    subtypeSpec += ConstraintsUnion(
-        SingleValueConstraint(
-            *(0,
-              1,
-              2,
-              3)
-        )
-    )
-    namedValues = NamedValues(
-        *(("none", 0),
-          ("configure", 1),
-          ("reset", 2),
-          ("apply", 3))
-    )
-
-
-_MbgLtNgCfgPtpCmd_Type.__name__ = "Integer32"
-_MbgLtNgCfgPtpCmd_Object = MibScalar
-mbgLtNgCfgPtpCmd = _MbgLtNgCfgPtpCmd_Object(
-    (1, 3, 6, 1, 4, 1, 5597, 30, 1, 4, 2),
-    _MbgLtNgCfgPtpCmd_Type()
-)
-mbgLtNgCfgPtpCmd.setMaxAccess("read-write")
-if mibBuilder.loadTexts:
-    mbgLtNgCfgPtpCmd.setStatus("current")
 _MbgLtNgCfgSystem_ObjectIdentity = ObjectIdentity
 mbgLtNgCfgSystem = _MbgLtNgCfgSystem_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 5597, 30, 1, 5)
@@ -6378,7 +6526,7 @@ class _MbgLtNgCfgWebLanguage_Type(Integer32):
     )
     namedValues = NamedValues(
         *(("notAvailable", 0),
-          ("englisch", 1),
+          ("english", 1),
           ("german", 2))
     )
 
@@ -6642,7 +6790,6 @@ mbgLtNgObjectsGroup.setObjects(
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpTimescale"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpAnnRcptTmout"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpMessageDuration"),
-        ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpCmd"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpSyncEAvail"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpSyncEEnabled"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgCfgPtpSyncEQltLvlSelEnable"),
@@ -6826,6 +6973,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapNTPNotSync = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 1)
 )
+mbgLtNgTrapNTPNotSync.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapNTPNotSync.setStatus(
         "current"
@@ -6833,6 +6985,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapNTPStopped = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 2)
+)
+mbgLtNgTrapNTPStopped.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapNTPStopped.setStatus(
@@ -6842,6 +6999,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapServerBoot = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 3)
 )
+mbgLtNgTrapServerBoot.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapServerBoot.setStatus(
         "current"
@@ -6849,6 +7011,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapReceiverNotResponding = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 4)
+)
+mbgLtNgTrapReceiverNotResponding.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapReceiverNotResponding.setStatus(
@@ -6858,6 +7025,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapReceiverNotSync = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 5)
 )
+mbgLtNgTrapReceiverNotSync.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapReceiverNotSync.setStatus(
         "current"
@@ -6865,6 +7037,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapAntennaFaulty = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 6)
+)
+mbgLtNgTrapAntennaFaulty.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapAntennaFaulty.setStatus(
@@ -6874,6 +7051,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapAntennaReconnect = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 7)
 )
+mbgLtNgTrapAntennaReconnect.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapAntennaReconnect.setStatus(
         "current"
@@ -6881,6 +7063,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapConfigChanged = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 8)
+)
+mbgLtNgTrapConfigChanged.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapConfigChanged.setStatus(
@@ -6890,6 +7077,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapLeapSecondAnnounced = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 9)
 )
+mbgLtNgTrapLeapSecondAnnounced.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapLeapSecondAnnounced.setStatus(
         "current"
@@ -6897,6 +7089,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapSHSTimeLimitError = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 10)
+)
+mbgLtNgTrapSHSTimeLimitError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapSHSTimeLimitError.setStatus(
@@ -6906,6 +7103,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapSecondaryRecNotSync = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 11)
 )
+mbgLtNgTrapSecondaryRecNotSync.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapSecondaryRecNotSync.setStatus(
         "current"
@@ -6913,6 +7115,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapPowerSupplyFailure = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 12)
+)
+mbgLtNgTrapPowerSupplyFailure.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapPowerSupplyFailure.setStatus(
@@ -6922,6 +7129,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapAntennaShortCircuit = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 13)
 )
+mbgLtNgTrapAntennaShortCircuit.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapAntennaShortCircuit.setStatus(
         "current"
@@ -6929,6 +7141,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapReceiverSync = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 14)
+)
+mbgLtNgTrapReceiverSync.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapReceiverSync.setStatus(
@@ -6938,6 +7155,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapNTPClientAlarm = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 15)
 )
+mbgLtNgTrapNTPClientAlarm.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapNTPClientAlarm.setStatus(
         "current"
@@ -6945,6 +7167,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapPowerSupplyUp = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 16)
+)
+mbgLtNgTrapPowerSupplyUp.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapPowerSupplyUp.setStatus(
@@ -6954,6 +7181,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapNetworkDown = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 17)
 )
+mbgLtNgTrapNetworkDown.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapNetworkDown.setStatus(
         "current"
@@ -6961,6 +7193,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapNetworkUp = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 18)
+)
+mbgLtNgTrapNetworkUp.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapNetworkUp.setStatus(
@@ -6970,6 +7207,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapSecondaryRecNotResp = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 19)
 )
+mbgLtNgTrapSecondaryRecNotResp.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapSecondaryRecNotResp.setStatus(
         "current"
@@ -6977,6 +7219,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapXmrLimitExceeded = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 30)
+)
+mbgLtNgTrapXmrLimitExceeded.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapXmrLimitExceeded.setStatus(
@@ -6986,6 +7233,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapXmrRefDisconnect = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 31)
 )
+mbgLtNgTrapXmrRefDisconnect.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapXmrRefDisconnect.setStatus(
         "current"
@@ -6993,6 +7245,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapXmrRefReconnect = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 32)
+)
+mbgLtNgTrapXmrRefReconnect.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapXmrRefReconnect.setStatus(
@@ -7002,6 +7259,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapFdmError = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 33)
 )
+mbgLtNgTrapFdmError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapFdmError.setStatus(
         "current"
@@ -7009,6 +7271,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapSHSTimeLimitWarning = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 34)
+)
+mbgLtNgTrapSHSTimeLimitWarning.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapSHSTimeLimitWarning.setStatus(
@@ -7018,6 +7285,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapSecondaryRecSync = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 35)
 )
+mbgLtNgTrapSecondaryRecSync.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapSecondaryRecSync.setStatus(
         "current"
@@ -7025,6 +7297,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapNTPSync = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 36)
+)
+mbgLtNgTrapNTPSync.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapNTPSync.setStatus(
@@ -7034,6 +7311,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapPtpPortDisconnected = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 37)
 )
+mbgLtNgTrapPtpPortDisconnected.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapPtpPortDisconnected.setStatus(
         "current"
@@ -7041,6 +7323,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapPtpPortConnected = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 38)
+)
+mbgLtNgTrapPtpPortConnected.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapPtpPortConnected.setStatus(
@@ -7050,6 +7337,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapPtpStateChanged = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 39)
 )
+mbgLtNgTrapPtpStateChanged.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapPtpStateChanged.setStatus(
         "current"
@@ -7057,6 +7349,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapPtpError = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 40)
+)
+mbgLtNgTrapPtpError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapPtpError.setStatus(
@@ -7066,6 +7363,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapLowSystemResources = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 41)
 )
+mbgLtNgTrapLowSystemResources.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapLowSystemResources.setStatus(
         "current"
@@ -7073,6 +7375,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapFanDown = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 45)
+)
+mbgLtNgTrapFanDown.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapFanDown.setStatus(
@@ -7082,6 +7389,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapFanUp = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 46)
 )
+mbgLtNgTrapFanUp.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapFanUp.setStatus(
         "current"
@@ -7089,6 +7401,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapCertificateExpired = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 47)
+)
+mbgLtNgTrapCertificateExpired.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapCertificateExpired.setStatus(
@@ -7098,6 +7415,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapSufficientSystemResources = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 48)
 )
+mbgLtNgTrapSufficientSystemResources.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapSufficientSystemResources.setStatus(
         "current"
@@ -7105,6 +7427,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapOscillatorWarmedUp = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 49)
+)
+mbgLtNgTrapOscillatorWarmedUp.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapOscillatorWarmedUp.setStatus(
@@ -7114,6 +7441,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapOscillatorNotWarmedUp = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 50)
 )
+mbgLtNgTrapOscillatorNotWarmedUp.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapOscillatorNotWarmedUp.setStatus(
         "current"
@@ -7121,6 +7453,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapXmrRefChanged = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 51)
+)
+mbgLtNgTrapXmrRefChanged.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapXmrRefChanged.setStatus(
@@ -7130,6 +7467,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapClusterMasterChanged = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 52)
 )
+mbgLtNgTrapClusterMasterChanged.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapClusterMasterChanged.setStatus(
         "current"
@@ -7137,6 +7479,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapClusterFalsetickerDetected = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 53)
+)
+mbgLtNgTrapClusterFalsetickerDetected.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapClusterFalsetickerDetected.setStatus(
@@ -7146,6 +7493,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapClusterFalsetickerCleared = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 54)
 )
+mbgLtNgTrapClusterFalsetickerCleared.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapClusterFalsetickerCleared.setStatus(
         "current"
@@ -7153,6 +7505,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapSHSTimeLimitOk = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 55)
+)
+mbgLtNgTrapSHSTimeLimitOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapSHSTimeLimitOk.setStatus(
@@ -7162,6 +7519,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapIMSError = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 56)
 )
+mbgLtNgTrapIMSError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapIMSError.setStatus(
         "current"
@@ -7169,6 +7531,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapIMSOk = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 57)
+)
+mbgLtNgTrapIMSOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapIMSOk.setStatus(
@@ -7178,6 +7545,11 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapFDMOk = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 58)
 )
+mbgLtNgTrapFDMOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapFDMOk.setStatus(
         "current"
@@ -7185,6 +7557,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapNTPOffsetLimitExceeded = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 59)
+)
+mbgLtNgTrapNTPOffsetLimitExceeded.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapNTPOffsetLimitExceeded.setStatus(
@@ -7194,21 +7571,257 @@ if mibBuilder.loadTexts:
 mbgLtNgTrapNTPOffsetLimitOk = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 60)
 )
+mbgLtNgTrapNTPOffsetLimitOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapNTPOffsetLimitOk.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapXheRubOk = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 61)
+)
+mbgLtNgTrapXheRubOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapXheRubOk.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapXheRubError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 62)
+)
+mbgLtNgTrapXheRubError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapXheRubError.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapPowerConsumptionExceeded = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 63)
+)
+mbgLtNgTrapPowerConsumptionExceeded.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapPowerConsumptionExceeded.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapPowerConsumptionOk = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 64)
+)
+mbgLtNgTrapPowerConsumptionOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapPowerConsumptionOk.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapPowerRedundancyNotAvail = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 65)
+)
+mbgLtNgTrapPowerRedundancyNotAvail.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapPowerRedundancyNotAvail.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapPowerRedundancyAvail = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 66)
+)
+mbgLtNgTrapPowerRedundancyAvail.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapPowerRedundancyAvail.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapTrustedSourceOk = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 67)
+)
+mbgLtNgTrapTrustedSourceOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapTrustedSourceOk.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapTrustedSourceError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 68)
+)
+mbgLtNgTrapTrustedSourceError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapTrustedSourceError.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapSynceInputQualityLevelChanged = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 69)
+)
+mbgLtNgTrapSynceInputQualityLevelChanged.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapSynceInputQualityLevelChanged.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapHttpsSelfSignedCertificateInUse = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 70)
+)
+mbgLtNgTrapHttpsSelfSignedCertificateInUse.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapHttpsSelfSignedCertificateInUse.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapEsiItuLimitsViolated = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 71)
+)
+mbgLtNgTrapEsiItuLimitsViolated.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapEsiItuLimitsViolated.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapEsiItuLimitsadhered = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 72)
+)
+mbgLtNgTrapEsiItuLimitsadhered.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapEsiItuLimitsadhered.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapImsPortError = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 73)
+)
+mbgLtNgTrapImsPortError.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapImsPortError.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapImsPortOk = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 74)
+)
+mbgLtNgTrapImsPortOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapImsPortOk.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapMrsSourceInvalid = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 75)
+)
+mbgLtNgTrapMrsSourceInvalid.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapMrsSourceInvalid.setStatus(
+        "current"
+    )
+
+mbgLtNgTrapMrsSourceOk = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 76)
+)
+mbgLtNgTrapMrsSourceOk.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapMrsSourceOk.setStatus(
         "current"
     )
 
 mbgLtNgTrapNormalOperation = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 77)
 )
+mbgLtNgTrapNormalOperation.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
 if mibBuilder.loadTexts:
     mbgLtNgTrapNormalOperation.setStatus(
         "current"
     )
 
+mbgLtNgTrapFailLockUserBanned = NotificationType(
+    (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 78)
+)
+mbgLtNgTrapFailLockUserBanned.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
+)
+if mibBuilder.loadTexts:
+    mbgLtNgTrapFailLockUserBanned.setStatus(
+        "current"
+    )
+
 mbgLtNgTrapHeartbeat = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 88)
+)
+mbgLtNgTrapHeartbeat.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapHeartbeat.setStatus(
@@ -7217,6 +7830,11 @@ if mibBuilder.loadTexts:
 
 mbgLtNgTrapTestNotification = NotificationType(
     (1, 3, 6, 1, 4, 1, 5597, 30, 3, 0, 99)
+)
+mbgLtNgTrapTestNotification.setObjects(
+      *(("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMessage"),
+        ("SNMPv2-MIB", "snmpTrapEnterprise"),
+        ("SNMPv2-MIB", "sysName"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapTestNotification.setStatus(
@@ -7256,18 +7874,15 @@ mbgLtNgTrapsGroup.setObjects(
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapSHSTimeLimitWarning"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapSecondaryRecSync"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapNTPSync"),
-        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapNormalOperation"),
-        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapHeartbeat"),
-        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapTestNotification"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPtpPortDisconnected"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPtpPortConnected"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPtpStateChanged"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPtpError"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapLowSystemResources"),
-        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapSufficientSystemResources"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapFanDown"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapFanUp"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapCertificateExpired"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapSufficientSystemResources"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapOscillatorWarmedUp"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapOscillatorNotWarmedUp"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapXmrRefChanged"),
@@ -7279,7 +7894,27 @@ mbgLtNgTrapsGroup.setObjects(
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapIMSOk"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapFDMOk"),
         ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapNTPOffsetLimitExceeded"),
-        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapNTPOffsetLimitOk"))
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapNTPOffsetLimitOk"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapXheRubOk"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapXheRubError"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPowerConsumptionExceeded"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPowerConsumptionOk"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPowerRedundancyNotAvail"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapPowerRedundancyAvail"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapTrustedSourceOk"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapTrustedSourceError"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapSynceInputQualityLevelChanged"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapHttpsSelfSignedCertificateInUse"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapEsiItuLimitsViolated"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapEsiItuLimitsadhered"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapImsPortError"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapImsPortOk"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMrsSourceInvalid"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapMrsSourceOk"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapNormalOperation"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapFailLockUserBanned"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapHeartbeat"),
+        ("MBG-SNMP-LTNG-MIB", "mbgLtNgTrapTestNotification"))
 )
 if mibBuilder.loadTexts:
     mbgLtNgTrapsGroup.setStatus(
@@ -7343,6 +7978,19 @@ mibBuilder.exportSymbols(
        "mbgLtNgRefclockGpsUtcOffset": mbgLtNgRefclockGpsUtcOffset,
        "mbgLtNgRefclockTimeDiff": mbgLtNgRefclockTimeDiff,
        "mbgLtNgRefclockGpsPos": mbgLtNgRefclockGpsPos,
+       "mbgLtNgRefclockMrsInfo": mbgLtNgRefclockMrsInfo,
+       "mbgLtNgRefclockMrsTableEntry": mbgLtNgRefclockMrsTableEntry,
+       "mbgLtNgRefclockXmrSyncTo": mbgLtNgRefclockXmrSyncTo,
+       "mbgLtNgRefclockXmrPriority1": mbgLtNgRefclockXmrPriority1,
+       "mbgLtNgRefclockXmrPriority2": mbgLtNgRefclockXmrPriority2,
+       "mbgLtNgRefclockXmrPriority3": mbgLtNgRefclockXmrPriority3,
+       "mbgLtNgRefclockXmrPriority4": mbgLtNgRefclockXmrPriority4,
+       "mbgLtNgRefclockXmrPriority5": mbgLtNgRefclockXmrPriority5,
+       "mbgLtNgRefclockXmrPriority6": mbgLtNgRefclockXmrPriority6,
+       "mbgLtNgRefclockXmrPriority7": mbgLtNgRefclockXmrPriority7,
+       "mbgLtNgRefclockXmrPriority8": mbgLtNgRefclockXmrPriority8,
+       "mbgLtNgRefclockXmrPriority9": mbgLtNgRefclockXmrPriority9,
+       "mbgLtNgRefclockXmrPriority10": mbgLtNgRefclockXmrPriority10,
        "mbgLtNgNtp": mbgLtNgNtp,
        "mbgLtNgNtpCurrentState": mbgLtNgNtpCurrentState,
        "mbgLtNgNtpStratum": mbgLtNgNtpStratum,
@@ -7657,7 +8305,6 @@ mibBuilder.exportSymbols(
        "mbgLtNgCfgPtpDisableMgmtMsgs": mbgLtNgCfgPtpDisableMgmtMsgs,
        "mbgLtNgCfgPtpOutput1": mbgLtNgCfgPtpOutput1,
        "mbgLtNgCfgPtpOutput2": mbgLtNgCfgPtpOutput2,
-       "mbgLtNgCfgPtpCmd": mbgLtNgCfgPtpCmd,
        "mbgLtNgCfgSystem": mbgLtNgCfgSystem,
        "mbgLtNgCfgGeneral": mbgLtNgCfgGeneral,
        "mbgLtNgCfgWebLanguage": mbgLtNgCfgWebLanguage,
@@ -7716,7 +8363,24 @@ mibBuilder.exportSymbols(
        "mbgLtNgTrapFDMOk": mbgLtNgTrapFDMOk,
        "mbgLtNgTrapNTPOffsetLimitExceeded": mbgLtNgTrapNTPOffsetLimitExceeded,
        "mbgLtNgTrapNTPOffsetLimitOk": mbgLtNgTrapNTPOffsetLimitOk,
+       "mbgLtNgTrapXheRubOk": mbgLtNgTrapXheRubOk,
+       "mbgLtNgTrapXheRubError": mbgLtNgTrapXheRubError,
+       "mbgLtNgTrapPowerConsumptionExceeded": mbgLtNgTrapPowerConsumptionExceeded,
+       "mbgLtNgTrapPowerConsumptionOk": mbgLtNgTrapPowerConsumptionOk,
+       "mbgLtNgTrapPowerRedundancyNotAvail": mbgLtNgTrapPowerRedundancyNotAvail,
+       "mbgLtNgTrapPowerRedundancyAvail": mbgLtNgTrapPowerRedundancyAvail,
+       "mbgLtNgTrapTrustedSourceOk": mbgLtNgTrapTrustedSourceOk,
+       "mbgLtNgTrapTrustedSourceError": mbgLtNgTrapTrustedSourceError,
+       "mbgLtNgTrapSynceInputQualityLevelChanged": mbgLtNgTrapSynceInputQualityLevelChanged,
+       "mbgLtNgTrapHttpsSelfSignedCertificateInUse": mbgLtNgTrapHttpsSelfSignedCertificateInUse,
+       "mbgLtNgTrapEsiItuLimitsViolated": mbgLtNgTrapEsiItuLimitsViolated,
+       "mbgLtNgTrapEsiItuLimitsadhered": mbgLtNgTrapEsiItuLimitsadhered,
+       "mbgLtNgTrapImsPortError": mbgLtNgTrapImsPortError,
+       "mbgLtNgTrapImsPortOk": mbgLtNgTrapImsPortOk,
+       "mbgLtNgTrapMrsSourceInvalid": mbgLtNgTrapMrsSourceInvalid,
+       "mbgLtNgTrapMrsSourceOk": mbgLtNgTrapMrsSourceOk,
        "mbgLtNgTrapNormalOperation": mbgLtNgTrapNormalOperation,
+       "mbgLtNgTrapFailLockUserBanned": mbgLtNgTrapFailLockUserBanned,
        "mbgLtNgTrapHeartbeat": mbgLtNgTrapHeartbeat,
        "mbgLtNgTrapTestNotification": mbgLtNgTrapTestNotification,
        "mbgLtNgTrapMessage": mbgLtNgTrapMessage,

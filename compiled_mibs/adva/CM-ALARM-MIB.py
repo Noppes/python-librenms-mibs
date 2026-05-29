@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\adva\CM-ALARM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:15:03 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -52,18 +49,10 @@ if 'mibBuilder' not in globals():
     "fsp150cm")
 
 (neIndex,
- shelfIndex,
- slotIndex) = mibBuilder.importSymbols(
+ shelfIndex) = mibBuilder.importSymbols(
     "CM-ENTITY-MIB",
     "neIndex",
-    "shelfIndex",
-    "slotIndex")
-
-(cmEthernetAccPortIndex,
- cmEthernetNetPortIndex) = mibBuilder.importSymbols(
-    "CM-FACILITY-MIB",
-    "cmEthernetAccPortIndex",
-    "cmEthernetNetPortIndex")
+    "shelfIndex")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -133,7 +122,7 @@ cmAlarmMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     cmAlarmMIB.setRevisions(
-        ("2020-03-01 00:00",)
+        ("2021-02-21 00:00",)
     )
 
 
@@ -637,7 +626,10 @@ class CmConditionType(TextualConvention, Integer32):
               419,
               420,
               421,
-              422)
+              422,
+              423,
+              424,
+              425)
         )
     )
     namedValues = NamedValues(
@@ -1063,7 +1055,10 @@ class CmConditionType(TextualConvention, Integer32):
           ("time-clock-degraded-system-time", 419),
           ("spoofing-pps", 420),
           ("spoofing-loc", 421),
-          ("invalid-syscfg", 422))
+          ("invalid-syscfg", 422),
+          ("incompatible-oscillator-type", 423),
+          ("fan-inactive", 424),
+          ("ps-inactive", 425))
     )
 
 
@@ -1309,7 +1304,18 @@ class CmAlarmEntityType(TextualConvention, Integer32):
               231,
               232,
               233,
-              234)
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245)
         )
     )
     namedValues = NamedValues(
@@ -1540,7 +1546,18 @@ class CmAlarmEntityType(TextualConvention, Integer32):
           ("eth-softsync-card", 231),
           ("mb-gnss-card", 232),
           ("composite-clock-card", 233),
-          ("l3ptpport", 234))
+          ("l3ptpport", 234),
+          ("ru1-osa5412-shelf", 235),
+          ("eth-osa5412-card", 236),
+          ("display-card", 237),
+          ("clk-x4-lpn-card", 238),
+          ("clk-x4-lpn-group", 239),
+          ("oneru-xg108-shelf", 240),
+          ("eth-xg-108-card", 241),
+          ("oneru-xg108-h-shelf", 242),
+          ("eth-xg-108-h-card", 243),
+          ("oneru-xg108-sh-shelf", 244),
+          ("eth-xg-108-sh-card", 245))
     )
 
 
@@ -1810,7 +1827,7 @@ cmSysCondIndex = _CmSysCondIndex_Object(
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 1, 3, 1, 1),
     _CmSysCondIndex_Type()
 )
-cmSysCondIndex.setMaxAccess("read-only")
+cmSysCondIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cmSysCondIndex.setStatus("current")
 _CmSysCondNotifCode_Type = TrapAlarmSeverity
@@ -2088,7 +2105,7 @@ cmNetworkElementCondIndex = _CmNetworkElementCondIndex_Object(
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 1, 5, 1, 1),
     _CmNetworkElementCondIndex_Type()
 )
-cmNetworkElementCondIndex.setMaxAccess("read-only")
+cmNetworkElementCondIndex.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cmNetworkElementCondIndex.setStatus("current")
 _CmNetworkElementCondNotifCode_Type = TrapAlarmSeverity
@@ -2232,7 +2249,7 @@ cmAlarmSeverityAssignmentEntityType = _CmAlarmSeverityAssignmentEntityType_Objec
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 1, 6, 1, 1),
     _CmAlarmSeverityAssignmentEntityType_Type()
 )
-cmAlarmSeverityAssignmentEntityType.setMaxAccess("read-only")
+cmAlarmSeverityAssignmentEntityType.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cmAlarmSeverityAssignmentEntityType.setStatus("current")
 _CmAlarmSeverityAssignmentCondType_Type = CmConditionType
@@ -2241,7 +2258,7 @@ cmAlarmSeverityAssignmentCondType = _CmAlarmSeverityAssignmentCondType_Object(
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 1, 6, 1, 2),
     _CmAlarmSeverityAssignmentCondType_Type()
 )
-cmAlarmSeverityAssignmentCondType.setMaxAccess("read-only")
+cmAlarmSeverityAssignmentCondType.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cmAlarmSeverityAssignmentCondType.setStatus("current")
 _CmAlarmSeverityAssignmentSrvEff_Type = CmServiceEffect
@@ -2250,7 +2267,7 @@ cmAlarmSeverityAssignmentSrvEff = _CmAlarmSeverityAssignmentSrvEff_Object(
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 1, 6, 1, 3),
     _CmAlarmSeverityAssignmentSrvEff_Type()
 )
-cmAlarmSeverityAssignmentSrvEff.setMaxAccess("read-only")
+cmAlarmSeverityAssignmentSrvEff.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     cmAlarmSeverityAssignmentSrvEff.setStatus("current")
 _CmAlarmSeverityAssignmentLocation_Type = CmLocation
@@ -2297,7 +2314,17 @@ f3EnvAlarmInputEntry.setIndexNames(
 )
 if mibBuilder.loadTexts:
     f3EnvAlarmInputEntry.setStatus("current")
-_F3EnvAlarmInputIndex_Type = Integer32
+
+
+class _F3EnvAlarmInputIndex_Type(Integer32):
+    """Custom type f3EnvAlarmInputIndex based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 2147483647),
+    )
+
+
+_F3EnvAlarmInputIndex_Type.__name__ = "Integer32"
 _F3EnvAlarmInputIndex_Object = MibTableColumn
 f3EnvAlarmInputIndex = _F3EnvAlarmInputIndex_Object(
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 1, 7, 1, 1),
@@ -2399,7 +2426,6 @@ cmAlmObjectGroup.setObjects(
         ("CM-ALARM-MIB", "cmSysAlmObjectName"),
         ("CM-ALARM-MIB", "cmSysAlmAdditionalInfoObject"),
         ("CM-ALARM-MIB", "cmSysAlmAdditionalInfoName"),
-        ("CM-ALARM-MIB", "cmSysCondIndex"),
         ("CM-ALARM-MIB", "cmSysCondNotifCode"),
         ("CM-ALARM-MIB", "cmSysCondType"),
         ("CM-ALARM-MIB", "cmSysCondSrvEff"),
@@ -2423,7 +2449,6 @@ cmAlmObjectGroup.setObjects(
         ("CM-ALARM-MIB", "cmNetworkElementAlmObjectName"),
         ("CM-ALARM-MIB", "cmNetworkElementAlmAdditionalInfoObject"),
         ("CM-ALARM-MIB", "cmNetworkElementAlmAdditionalInfoName"),
-        ("CM-ALARM-MIB", "cmNetworkElementCondIndex"),
         ("CM-ALARM-MIB", "cmNetworkElementCondNotifCode"),
         ("CM-ALARM-MIB", "cmNetworkElementCondType"),
         ("CM-ALARM-MIB", "cmNetworkElementCondSrvEff"),
@@ -2436,9 +2461,6 @@ cmAlmObjectGroup.setObjects(
         ("CM-ALARM-MIB", "cmNetworkElementCondEffType"),
         ("CM-ALARM-MIB", "cmNetworkElementCondAdditionalInfoObject"),
         ("CM-ALARM-MIB", "cmNetworkElementCondAdditionalInfoName"),
-        ("CM-ALARM-MIB", "cmAlarmSeverityAssignmentEntityType"),
-        ("CM-ALARM-MIB", "cmAlarmSeverityAssignmentCondType"),
-        ("CM-ALARM-MIB", "cmAlarmSeverityAssignmentSrvEff"),
         ("CM-ALARM-MIB", "cmAlarmSeverityAssignmentLocation"),
         ("CM-ALARM-MIB", "cmAlarmSeverityAssignmentNotifCode"),
         ("CM-ALARM-MIB", "cmAlarmSeverityAssignmentDirection"))
@@ -2450,8 +2472,7 @@ f3EnvAlarmInputGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 2544, 1, 12, 6, 3, 2, 3)
 )
 f3EnvAlarmInputGroup.setObjects(
-      *(("CM-ALARM-MIB", "f3EnvAlarmInputIndex"),
-        ("CM-ALARM-MIB", "f3EnvAlarmInputDescr"),
+      *(("CM-ALARM-MIB", "f3EnvAlarmInputDescr"),
         ("CM-ALARM-MIB", "f3EnvAlarmInputCondType"),
         ("CM-ALARM-MIB", "f3EnvAlarmInputNotifCode"),
         ("CM-ALARM-MIB", "f3EnvAlarmInputMode"),

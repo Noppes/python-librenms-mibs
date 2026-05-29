@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-VLAN-MGR-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:25 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-VLAN-MGR-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,7 @@ alcatelIND1VLANMgrMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1VLANMgrMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -189,7 +186,7 @@ vlanDescription = _VlanDescription_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 2),
     _VlanDescription_Type()
 )
-vlanDescription.setMaxAccess("read-write")
+vlanDescription.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanDescription.setStatus("current")
 
@@ -217,7 +214,7 @@ vlanAdmStatus = _VlanAdmStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 3),
     _VlanAdmStatus_Type()
 )
-vlanAdmStatus.setMaxAccess("read-write")
+vlanAdmStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanAdmStatus.setStatus("current")
 
@@ -252,7 +249,7 @@ vlanStatus = _VlanStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 5),
     _VlanStatus_Type()
 )
-vlanStatus.setMaxAccess("read-write")
+vlanStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanStatus.setStatus("current")
 
@@ -280,7 +277,7 @@ vlanStpStatus = _VlanStpStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 6),
     _VlanStpStatus_Type()
 )
-vlanStpStatus.setMaxAccess("read-write")
+vlanStpStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanStpStatus.setStatus("current")
 
@@ -308,7 +305,7 @@ vlanAuthentStatus = _VlanAuthentStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 7),
     _VlanAuthentStatus_Type()
 )
-vlanAuthentStatus.setMaxAccess("read-write")
+vlanAuthentStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanAuthentStatus.setStatus("current")
 
@@ -336,7 +333,7 @@ vlanVoiceStatus = _VlanVoiceStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 8),
     _VlanVoiceStatus_Type()
 )
-vlanVoiceStatus.setMaxAccess("read-write")
+vlanVoiceStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanVoiceStatus.setStatus("current")
 _VlanIpAddress_Type = IpAddress
@@ -345,7 +342,7 @@ vlanIpAddress = _VlanIpAddress_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 9),
     _VlanIpAddress_Type()
 )
-vlanIpAddress.setMaxAccess("read-write")
+vlanIpAddress.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpAddress.setStatus("current")
 _VlanIpMask_Type = IpAddress
@@ -354,7 +351,7 @@ vlanIpMask = _VlanIpMask_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 10),
     _VlanIpMask_Type()
 )
-vlanIpMask.setMaxAccess("read-write")
+vlanIpMask.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpMask.setStatus("current")
 
@@ -384,7 +381,7 @@ vlanIpEncap = _VlanIpEncap_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 11),
     _VlanIpEncap_Type()
 )
-vlanIpEncap.setMaxAccess("read-write")
+vlanIpEncap.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpEncap.setStatus("current")
 
@@ -414,7 +411,7 @@ vlanIpForward = _VlanIpForward_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 12),
     _VlanIpForward_Type()
 )
-vlanIpForward.setMaxAccess("read-write")
+vlanIpForward.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpForward.setStatus("current")
 
@@ -440,7 +437,7 @@ vlanIpStatus = _VlanIpStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 13),
     _VlanIpStatus_Type()
 )
-vlanIpStatus.setMaxAccess("read-write")
+vlanIpStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpStatus.setStatus("current")
 _VlanIpxNet_Type = IpxNetworkAddress
@@ -449,7 +446,7 @@ vlanIpxNet = _VlanIpxNet_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 14),
     _VlanIpxNet_Type()
 )
-vlanIpxNet.setMaxAccess("read-write")
+vlanIpxNet.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpxNet.setStatus("current")
 
@@ -483,7 +480,7 @@ vlanIpxEncap = _VlanIpxEncap_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 15),
     _VlanIpxEncap_Type()
 )
-vlanIpxEncap.setMaxAccess("read-write")
+vlanIpxEncap.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpxEncap.setStatus("current")
 
@@ -517,7 +514,7 @@ vlanIpxRipSapMode = _VlanIpxRipSapMode_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 16),
     _VlanIpxRipSapMode_Type()
 )
-vlanIpxRipSapMode.setMaxAccess("read-write")
+vlanIpxRipSapMode.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpxRipSapMode.setStatus("current")
 
@@ -538,7 +535,7 @@ vlanIpxDelayTicks = _VlanIpxDelayTicks_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 17),
     _VlanIpxDelayTicks_Type()
 )
-vlanIpxDelayTicks.setMaxAccess("read-write")
+vlanIpxDelayTicks.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpxDelayTicks.setStatus("current")
 
@@ -564,7 +561,7 @@ vlanIpxStatus = _VlanIpxStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 18),
     _VlanIpxStatus_Type()
 )
-vlanIpxStatus.setMaxAccess("read-write")
+vlanIpxStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanIpxStatus.setStatus("current")
 
@@ -590,7 +587,7 @@ vlanTagMobilePortStatus = _VlanTagMobilePortStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 19),
     _VlanTagMobilePortStatus_Type()
 )
-vlanTagMobilePortStatus.setMaxAccess("read-write")
+vlanTagMobilePortStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanTagMobilePortStatus.setStatus("current")
 
@@ -642,7 +639,7 @@ vlanLocalProxyArp = _VlanLocalProxyArp_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 21),
     _VlanLocalProxyArp_Type()
 )
-vlanLocalProxyArp.setMaxAccess("read-write")
+vlanLocalProxyArp.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanLocalProxyArp.setStatus("current")
 
@@ -661,7 +658,7 @@ vlanMtu = _VlanMtu_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 22),
     _VlanMtu_Type()
 )
-vlanMtu.setMaxAccess("read-write")
+vlanMtu.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanMtu.setStatus("current")
 
@@ -689,7 +686,7 @@ vlan1x1StpStatus = _Vlan1x1StpStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 23),
     _Vlan1x1StpStatus_Type()
 )
-vlan1x1StpStatus.setMaxAccess("read-write")
+vlan1x1StpStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlan1x1StpStatus.setStatus("current")
 
@@ -717,7 +714,7 @@ vlanflatStpStatus = _VlanflatStpStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 24),
     _VlanflatStpStatus_Type()
 )
-vlanflatStpStatus.setMaxAccess("read-write")
+vlanflatStpStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanflatStpStatus.setStatus("current")
 
@@ -736,7 +733,7 @@ vlanHABandwidth = _VlanHABandwidth_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 25),
     _VlanHABandwidth_Type()
 )
-vlanHABandwidth.setMaxAccess("read-write")
+vlanHABandwidth.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanHABandwidth.setStatus("current")
 
@@ -776,7 +773,7 @@ vlanSvlanTrafficType = _VlanSvlanTrafficType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 26),
     _VlanSvlanTrafficType_Type()
 )
-vlanSvlanTrafficType.setMaxAccess("read-write")
+vlanSvlanTrafficType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanSvlanTrafficType.setStatus("current")
 
@@ -797,7 +794,7 @@ vlanSvlanPriority = _VlanSvlanPriority_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 27),
     _VlanSvlanPriority_Type()
 )
-vlanSvlanPriority.setMaxAccess("read-write")
+vlanSvlanPriority.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanSvlanPriority.setStatus("current")
 
@@ -825,9 +822,37 @@ vlanMacLearningControlStatus = _VlanMacLearningControlStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 28),
     _VlanMacLearningControlStatus_Type()
 )
-vlanMacLearningControlStatus.setMaxAccess("read-write")
+vlanMacLearningControlStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanMacLearningControlStatus.setStatus("current")
+
+
+class _VlanSvlanMacTunnelStatus_Type(Integer32):
+    """Custom type vlanSvlanMacTunnelStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_VlanSvlanMacTunnelStatus_Type.__name__ = "Integer32"
+_VlanSvlanMacTunnelStatus_Object = MibTableColumn
+vlanSvlanMacTunnelStatus = _VlanSvlanMacTunnelStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 1, 1, 1, 29),
+    _VlanSvlanMacTunnelStatus_Type()
+)
+vlanSvlanMacTunnelStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vlanSvlanMacTunnelStatus.setStatus("current")
 _VlanMgrVpa_ObjectIdentity = ObjectIdentity
 vlanMgrVpa = _VlanMgrVpa_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 2)
@@ -956,7 +981,7 @@ vpaStatus = _VpaStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 2, 1, 1, 5),
     _VpaStatus_Type()
 )
-vpaStatus.setMaxAccess("read-write")
+vpaStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vpaStatus.setStatus("current")
 
@@ -984,7 +1009,7 @@ vpaPortMacType = _VpaPortMacType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 2, 1, 1, 6),
     _VpaPortMacType_Type()
 )
-vpaPortMacType.setMaxAccess("read-write")
+vpaPortMacType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vpaPortMacType.setStatus("current")
 _VlanMgrVlanSet_ObjectIdentity = ObjectIdentity
@@ -1176,7 +1201,7 @@ vlanHAPortRowStatus = _VlanHAPortRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 3, 1, 1, 4, 1, 1, 4),
     _VlanHAPortRowStatus_Type()
 )
-vlanHAPortRowStatus.setMaxAccess("read-write")
+vlanHAPortRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vlanHAPortRowStatus.setStatus("current")
 _AlcatelIND1VLANMgrMIBConformance_ObjectIdentity = ObjectIdentity
@@ -1223,7 +1248,8 @@ vlanMgrVlanGroup.setObjects(
         ("ALCATEL-IND1-VLAN-MGR-MIB", "vlanIpxEncap"),
         ("ALCATEL-IND1-VLAN-MGR-MIB", "vlanIpxRipSapMode"),
         ("ALCATEL-IND1-VLAN-MGR-MIB", "vlanIpxDelayTicks"),
-        ("ALCATEL-IND1-VLAN-MGR-MIB", "vlanIpxStatus"))
+        ("ALCATEL-IND1-VLAN-MGR-MIB", "vlanIpxStatus"),
+        ("ALCATEL-IND1-VLAN-MGR-MIB", "vlanSvlanMacTunnelStatus"))
 )
 if mibBuilder.loadTexts:
     vlanMgrVlanGroup.setStatus("current")
@@ -1318,6 +1344,7 @@ mibBuilder.exportSymbols(
        "vlanSvlanTrafficType": vlanSvlanTrafficType,
        "vlanSvlanPriority": vlanSvlanPriority,
        "vlanMacLearningControlStatus": vlanMacLearningControlStatus,
+       "vlanSvlanMacTunnelStatus": vlanSvlanMacTunnelStatus,
        "vlanMgrVpa": vlanMgrVpa,
        "vpaTable": vpaTable,
        "vpaEntry": vpaEntry,

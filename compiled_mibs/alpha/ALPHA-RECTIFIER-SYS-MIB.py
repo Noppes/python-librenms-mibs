@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\alpha\ALPHA-RECTIFIER-SYS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:17:42 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -111,7 +108,8 @@ rectifierSystem = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     rectifierSystem.setRevisions(
-        ("2017-04-06 00:00",
+        ("2019-12-12 00:00",
+         "2017-04-06 00:00",
          "2015-07-28 00:00",
          "2015-07-23 00:00",
          "2015-06-23 00:00")
@@ -406,6 +404,123 @@ rectSysEstimatedBatteryHealthPercent = _RectSysEstimatedBatteryHealthPercent_Obj
 rectSysEstimatedBatteryHealthPercent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     rectSysEstimatedBatteryHealthPercent.setStatus("current")
+_RectNumberOfAcquiredRectifiers_Type = ScaledNumber
+_RectNumberOfAcquiredRectifiers_Object = MibScalar
+rectNumberOfAcquiredRectifiers = _RectNumberOfAcquiredRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 33),
+    _RectNumberOfAcquiredRectifiers_Type()
+)
+rectNumberOfAcquiredRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfAcquiredRectifiers.setStatus("current")
+_RectNumberOfSourcingRectifiers_Type = ScaledNumber
+_RectNumberOfSourcingRectifiers_Object = MibScalar
+rectNumberOfSourcingRectifiers = _RectNumberOfSourcingRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 34),
+    _RectNumberOfSourcingRectifiers_Type()
+)
+rectNumberOfSourcingRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfSourcingRectifiers.setStatus("current")
+_RectNumberOfFailedRectifiers_Type = ScaledNumber
+_RectNumberOfFailedRectifiers_Object = MibScalar
+rectNumberOfFailedRectifiers = _RectNumberOfFailedRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 35),
+    _RectNumberOfFailedRectifiers_Type()
+)
+rectNumberOfFailedRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfFailedRectifiers.setStatus("current")
+_RectNumberOfMinorAlertRectifiers_Type = ScaledNumber
+_RectNumberOfMinorAlertRectifiers_Object = MibScalar
+rectNumberOfMinorAlertRectifiers = _RectNumberOfMinorAlertRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 36),
+    _RectNumberOfMinorAlertRectifiers_Type()
+)
+rectNumberOfMinorAlertRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfMinorAlertRectifiers.setStatus("current")
+_RectNumberOfCommsLostRectifiers_Type = ScaledNumber
+_RectNumberOfCommsLostRectifiers_Object = MibScalar
+rectNumberOfCommsLostRectifiers = _RectNumberOfCommsLostRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 37),
+    _RectNumberOfCommsLostRectifiers_Type()
+)
+rectNumberOfCommsLostRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfCommsLostRectifiers.setStatus("current")
+_RectNumberOfCommsNormalRectifiers_Type = ScaledNumber
+_RectNumberOfCommsNormalRectifiers_Object = MibScalar
+rectNumberOfCommsNormalRectifiers = _RectNumberOfCommsNormalRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 38),
+    _RectNumberOfCommsNormalRectifiers_Type()
+)
+rectNumberOfCommsNormalRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfCommsNormalRectifiers.setStatus("current")
+_RectNumberOfACFailedRectifiers_Type = ScaledNumber
+_RectNumberOfACFailedRectifiers_Object = MibScalar
+rectNumberOfACFailedRectifiers = _RectNumberOfACFailedRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 39),
+    _RectNumberOfACFailedRectifiers_Type()
+)
+rectNumberOfACFailedRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfACFailedRectifiers.setStatus("current")
+_RectNumberOfRectifiersWithConfigError_Type = ScaledNumber
+_RectNumberOfRectifiersWithConfigError_Object = MibScalar
+rectNumberOfRectifiersWithConfigError = _RectNumberOfRectifiersWithConfigError_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 40),
+    _RectNumberOfRectifiersWithConfigError_Type()
+)
+rectNumberOfRectifiersWithConfigError.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfRectifiersWithConfigError.setStatus("current")
+_RectNumberOfRectifiersInPowerLimit_Type = ScaledNumber
+_RectNumberOfRectifiersInPowerLimit_Object = MibScalar
+rectNumberOfRectifiersInPowerLimit = _RectNumberOfRectifiersInPowerLimit_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 41),
+    _RectNumberOfRectifiersInPowerLimit_Type()
+)
+rectNumberOfRectifiersInPowerLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfRectifiersInPowerLimit.setStatus("current")
+_RectNumberOfRectifiersInCurrentLimit_Type = ScaledNumber
+_RectNumberOfRectifiersInCurrentLimit_Object = MibScalar
+rectNumberOfRectifiersInCurrentLimit = _RectNumberOfRectifiersInCurrentLimit_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 42),
+    _RectNumberOfRectifiersInCurrentLimit_Type()
+)
+rectNumberOfRectifiersInCurrentLimit.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfRectifiersInCurrentLimit.setStatus("current")
+_RectNumberOfFanFailRectifiers_Type = ScaledNumber
+_RectNumberOfFanFailRectifiers_Object = MibScalar
+rectNumberOfFanFailRectifiers = _RectNumberOfFanFailRectifiers_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 43),
+    _RectNumberOfFanFailRectifiers_Type()
+)
+rectNumberOfFanFailRectifiers.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfFanFailRectifiers.setStatus("current")
+_RectNumberOfRectifiersInBootloader_Type = ScaledNumber
+_RectNumberOfRectifiersInBootloader_Object = MibScalar
+rectNumberOfRectifiersInBootloader = _RectNumberOfRectifiersInBootloader_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 44),
+    _RectNumberOfRectifiersInBootloader_Type()
+)
+rectNumberOfRectifiersInBootloader.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectNumberOfRectifiersInBootloader.setStatus("current")
+_RectMaxRectifierAmbientTemperature_Type = ScaledNumber
+_RectMaxRectifierAmbientTemperature_Object = MibScalar
+rectMaxRectifierAmbientTemperature = _RectMaxRectifierAmbientTemperature_Object(
+    (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 45),
+    _RectMaxRectifierAmbientTemperature_Type()
+)
+rectMaxRectifierAmbientTemperature.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    rectMaxRectifierAmbientTemperature.setStatus("current")
 _Conformance_ObjectIdentity = ObjectIdentity
 conformance = _Conformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 7309, 5, 3, 1, 100)
@@ -455,7 +570,20 @@ rectifierGroup.setObjects(
         ("ALPHA-RECTIFIER-SYS-MIB", "rectSysEstimatedCapacityRemainingPower"),
         ("ALPHA-RECTIFIER-SYS-MIB", "rectSysEstimatedSOCPercent"),
         ("ALPHA-RECTIFIER-SYS-MIB", "rectSysEstimatedBatteryRuntime"),
-        ("ALPHA-RECTIFIER-SYS-MIB", "rectSysEstimatedBatteryHealthPercent"))
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectSysEstimatedBatteryHealthPercent"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfAcquiredRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfSourcingRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfFailedRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfMinorAlertRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfCommsLostRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfCommsNormalRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfACFailedRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfRectifiersWithConfigError"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfRectifiersInPowerLimit"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfRectifiersInCurrentLimit"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfFanFailRectifiers"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectNumberOfRectifiersInBootloader"),
+        ("ALPHA-RECTIFIER-SYS-MIB", "rectMaxRectifierAmbientTemperature"))
 )
 if mibBuilder.loadTexts:
     rectifierGroup.setStatus("current")
@@ -520,6 +648,19 @@ mibBuilder.exportSymbols(
        "rectSysEstimatedSOCPercent": rectSysEstimatedSOCPercent,
        "rectSysEstimatedBatteryRuntime": rectSysEstimatedBatteryRuntime,
        "rectSysEstimatedBatteryHealthPercent": rectSysEstimatedBatteryHealthPercent,
+       "rectNumberOfAcquiredRectifiers": rectNumberOfAcquiredRectifiers,
+       "rectNumberOfSourcingRectifiers": rectNumberOfSourcingRectifiers,
+       "rectNumberOfFailedRectifiers": rectNumberOfFailedRectifiers,
+       "rectNumberOfMinorAlertRectifiers": rectNumberOfMinorAlertRectifiers,
+       "rectNumberOfCommsLostRectifiers": rectNumberOfCommsLostRectifiers,
+       "rectNumberOfCommsNormalRectifiers": rectNumberOfCommsNormalRectifiers,
+       "rectNumberOfACFailedRectifiers": rectNumberOfACFailedRectifiers,
+       "rectNumberOfRectifiersWithConfigError": rectNumberOfRectifiersWithConfigError,
+       "rectNumberOfRectifiersInPowerLimit": rectNumberOfRectifiersInPowerLimit,
+       "rectNumberOfRectifiersInCurrentLimit": rectNumberOfRectifiersInCurrentLimit,
+       "rectNumberOfFanFailRectifiers": rectNumberOfFanFailRectifiers,
+       "rectNumberOfRectifiersInBootloader": rectNumberOfRectifiersInBootloader,
+       "rectMaxRectifierAmbientTemperature": rectMaxRectifierAmbientTemperature,
        "conformance": conformance,
        "compliances": compliances,
        "compliance": compliance,

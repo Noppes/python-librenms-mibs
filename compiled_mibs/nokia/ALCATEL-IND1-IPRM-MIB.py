@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IPRM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:32 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IPRM-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -52,6 +49,10 @@ if 'mibBuilder' not in globals():
 (IANAipRouteProtocol,) = mibBuilder.importSymbols(
     "IANA-RTPROTO-MIB",
     "IANAipRouteProtocol")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -115,7 +116,7 @@ alcatelIND1IPRMMIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1IPRMMIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -155,7 +156,7 @@ class StaticRouteType(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("regular", 1),
           ("recursive", 2),
-          ("bfd-enabled", 3))
+          ("bfdEnabled", 3))
     )
 
 
@@ -311,7 +312,7 @@ alaIprmStaticRouteMetric = _AlaIprmStaticRouteMetric_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 2, 1, 4),
     _AlaIprmStaticRouteMetric_Type()
 )
-alaIprmStaticRouteMetric.setMaxAccess("read-write")
+alaIprmStaticRouteMetric.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIprmStaticRouteMetric.setStatus("current")
 _AlaIprmStaticRouteStatus_Type = RowStatus
@@ -320,7 +321,7 @@ alaIprmStaticRouteStatus = _AlaIprmStaticRouteStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 2, 1, 5),
     _AlaIprmStaticRouteStatus_Type()
 )
-alaIprmStaticRouteStatus.setMaxAccess("read-write")
+alaIprmStaticRouteStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIprmStaticRouteStatus.setStatus("current")
 _AlaIprmStaticRouteBfdStatus_Type = AdminStatus
@@ -329,7 +330,7 @@ alaIprmStaticRouteBfdStatus = _AlaIprmStaticRouteBfdStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 2, 1, 6),
     _AlaIprmStaticRouteBfdStatus_Type()
 )
-alaIprmStaticRouteBfdStatus.setMaxAccess("read-write")
+alaIprmStaticRouteBfdStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIprmStaticRouteBfdStatus.setStatus("current")
 _AlaIprmStaticRouteType_Type = StaticRouteType
@@ -338,9 +339,37 @@ alaIprmStaticRouteType = _AlaIprmStaticRouteType_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 2, 1, 7),
     _AlaIprmStaticRouteType_Type()
 )
-alaIprmStaticRouteType.setMaxAccess("read-write")
+alaIprmStaticRouteType.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIprmStaticRouteType.setStatus("current")
+_AlaIprmStaticRouteTag_Type = Unsigned32
+_AlaIprmStaticRouteTag_Object = MibTableColumn
+alaIprmStaticRouteTag = _AlaIprmStaticRouteTag_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 2, 1, 8),
+    _AlaIprmStaticRouteTag_Type()
+)
+alaIprmStaticRouteTag.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIprmStaticRouteTag.setStatus("current")
+
+
+class _AlaIprmStaticRouteName_Type(SnmpAdminString):
+    """Custom type alaIprmStaticRouteName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaIprmStaticRouteName_Type.__name__ = "SnmpAdminString"
+_AlaIprmStaticRouteName_Object = MibTableColumn
+alaIprmStaticRouteName = _AlaIprmStaticRouteName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 2, 1, 9),
+    _AlaIprmStaticRouteName_Type()
+)
+alaIprmStaticRouteName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIprmStaticRouteName.setStatus("current")
 
 
 class _AlaIprmRtPrefLocal_Type(Integer32):
@@ -546,6 +575,88 @@ alaIprmStaticAllBfd = _AlaIprmStaticAllBfd_Object(
 alaIprmStaticAllBfd.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     alaIprmStaticAllBfd.setStatus("current")
+
+
+class _AlaIprmRtPrefImport_Type(Integer32):
+    """Custom type alaIprmRtPrefImport based on Integer32"""
+    defaultValue = 210
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 255),
+    )
+
+
+_AlaIprmRtPrefImport_Type.__name__ = "Integer32"
+_AlaIprmRtPrefImport_Object = MibScalar
+alaIprmRtPrefImport = _AlaIprmRtPrefImport_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 13),
+    _AlaIprmRtPrefImport_Type()
+)
+alaIprmRtPrefImport.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIprmRtPrefImport.setStatus("current")
+_AlaIprmExportRouteMap_Type = Integer32
+_AlaIprmExportRouteMap_Object = MibScalar
+alaIprmExportRouteMap = _AlaIprmExportRouteMap_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 14),
+    _AlaIprmExportRouteMap_Type()
+)
+alaIprmExportRouteMap.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaIprmExportRouteMap.setStatus("current")
+_AlaIprmImportVrfTable_Object = MibTable
+alaIprmImportVrfTable = _AlaIprmImportVrfTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 15)
+)
+if mibBuilder.loadTexts:
+    alaIprmImportVrfTable.setStatus("current")
+_AlaIprmImportVrfEntry_Object = MibTableRow
+alaIprmImportVrfEntry = _AlaIprmImportVrfEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 15, 1)
+)
+alaIprmImportVrfEntry.setIndexNames(
+    (0, "ALCATEL-IND1-IPRM-MIB", "alaIprmImportVrfName"),
+)
+if mibBuilder.loadTexts:
+    alaIprmImportVrfEntry.setStatus("current")
+
+
+class _AlaIprmImportVrfName_Type(SnmpAdminString):
+    """Custom type alaIprmImportVrfName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 20),
+    )
+
+
+_AlaIprmImportVrfName_Type.__name__ = "SnmpAdminString"
+_AlaIprmImportVrfName_Object = MibTableColumn
+alaIprmImportVrfName = _AlaIprmImportVrfName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 15, 1, 1),
+    _AlaIprmImportVrfName_Type()
+)
+alaIprmImportVrfName.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaIprmImportVrfName.setStatus("current")
+_AlaIprmImportVrfRouteMap_Type = Integer32
+_AlaIprmImportVrfRouteMap_Object = MibTableColumn
+alaIprmImportVrfRouteMap = _AlaIprmImportVrfRouteMap_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 15, 1, 2),
+    _AlaIprmImportVrfRouteMap_Type()
+)
+alaIprmImportVrfRouteMap.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIprmImportVrfRouteMap.setStatus("current")
+_AlaIprmImportVrfRowStatus_Type = RowStatus
+_AlaIprmImportVrfRowStatus_Object = MibTableColumn
+alaIprmImportVrfRowStatus = _AlaIprmImportVrfRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 1, 1, 15, 1, 3),
+    _AlaIprmImportVrfRowStatus_Type()
+)
+alaIprmImportVrfRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIprmImportVrfRowStatus.setStatus("current")
 _AlcatelIND1IPRMMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1IPRMMIBConformance = _AlcatelIND1IPRMMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 1, 2)
@@ -577,8 +688,17 @@ alaIprmConfigMIBGroup.setObjects(
         ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefBgp"),
         ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefEbgp"),
         ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefIbgp"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefImport"),
         ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefIsisL1"),
-        ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefIsisL2"))
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmRtPrefIsisL2"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmStaticAllBfd"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmStaticRouteBfdStatus"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmStaticRouteType"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmExportRouteMap"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmImportVrfRouteMap"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmImportVrfRowStatus"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmStaticRouteTag"),
+        ("ALCATEL-IND1-IPRM-MIB", "alaIprmStaticRouteName"))
 )
 if mibBuilder.loadTexts:
     alaIprmConfigMIBGroup.setStatus("current")
@@ -634,6 +754,8 @@ mibBuilder.exportSymbols(
        "alaIprmStaticRouteStatus": alaIprmStaticRouteStatus,
        "alaIprmStaticRouteBfdStatus": alaIprmStaticRouteBfdStatus,
        "alaIprmStaticRouteType": alaIprmStaticRouteType,
+       "alaIprmStaticRouteTag": alaIprmStaticRouteTag,
+       "alaIprmStaticRouteName": alaIprmStaticRouteName,
        "alaIprmRtPrefLocal": alaIprmRtPrefLocal,
        "alaIprmRtPrefStatic": alaIprmRtPrefStatic,
        "alaIprmRtPrefOspf": alaIprmRtPrefOspf,
@@ -644,6 +766,13 @@ mibBuilder.exportSymbols(
        "alaIprmRtPrefIsisL1": alaIprmRtPrefIsisL1,
        "alaIprmRtPrefIsisL2": alaIprmRtPrefIsisL2,
        "alaIprmStaticAllBfd": alaIprmStaticAllBfd,
+       "alaIprmRtPrefImport": alaIprmRtPrefImport,
+       "alaIprmExportRouteMap": alaIprmExportRouteMap,
+       "alaIprmImportVrfTable": alaIprmImportVrfTable,
+       "alaIprmImportVrfEntry": alaIprmImportVrfEntry,
+       "alaIprmImportVrfName": alaIprmImportVrfName,
+       "alaIprmImportVrfRouteMap": alaIprmImportVrfRouteMap,
+       "alaIprmImportVrfRowStatus": alaIprmImportVrfRowStatus,
        "alcatelIND1IPRMMIBConformance": alcatelIND1IPRMMIBConformance,
        "alcatelIND1IPRMMIBCompliances": alcatelIND1IPRMMIBCompliances,
        "alaIprmCompliance": alaIprmCompliance,

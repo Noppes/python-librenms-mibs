@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\extreme\EXTREME-BASE-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:43:19 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -105,11 +102,34 @@ extremenetworks = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     extremenetworks.setRevisions(
-        ("2019-12-06 16:20",
+        ("2022-04-28 15:00",
+         "2022-04-27 15:00",
+         "2022-01-21 16:00",
+         "2022-01-14 16:00",
+         "2021-11-19 13:41",
+         "2021-11-17 17:00",
+         "2021-09-16 17:25",
+         "2021-07-07 15:40",
+         "2021-07-06 08:49",
+         "2021-06-29 08:27",
+         "2021-06-28 16:30",
+         "2021-05-31 08:40",
+         "2021-05-18 17:59",
+         "2021-04-27 12:26",
+         "2021-03-08 10:30",
+         "2021-02-26 12:20",
+         "2020-10-14 12:15",
+         "2020-10-08 19:15",
+         "2020-08-03 19:15",
+         "2020-06-15 17:18",
+         "2020-05-28 21:08",
+         "2020-04-03 13:06",
+         "2020-03-16 20:25",
+         "2020-03-10 13:00",
+         "2019-12-06 16:20",
+         "2019-09-18 14:00",
          "2019-09-04 21:20",
          "2019-08-05 10:31",
-         "2018-09-26 23:02",
-         "2019-09-18 14:00",
          "2019-05-06 15:07",
          "2019-05-03 09:00",
          "2019-04-01 17:53",
@@ -118,6 +138,7 @@ if mibBuilder.loadTexts:
          "2019-01-04 12:55",
          "2018-11-21 19:46",
          "2018-10-09 17:02",
+         "2018-09-26 23:02",
          "2018-09-17 12:20",
          "2018-09-14 15:31",
          "2018-07-25 11:45",
@@ -486,6 +507,10 @@ extremeBgp4V2 = _ExtremeBgp4V2_ObjectIdentity(
 _ExtremeBgp4V2TC_ObjectIdentity = ObjectIdentity
 extremeBgp4V2TC = _ExtremeBgp4V2TC_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 1, 52)
+)
+_ExtremeRemoteConnectionMIB_ObjectIdentity = ObjectIdentity
+extremeRemoteConnectionMIB = _ExtremeRemoteConnectionMIB_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 1, 53)
 )
 _ExtremeInternal_ObjectIdentity = ObjectIdentity
 extremeInternal = _ExtremeInternal_ObjectIdentity(
@@ -1355,6 +1380,18 @@ _Isw_8GP_G4_ObjectIdentity = ObjectIdentity
 isw_8GP_G4 = _Isw_8GP_G4_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 2, 243)
 )
+_X560_48mp_10GE4_100GE2_ObjectIdentity = ObjectIdentity
+x560_48mp_10GE4_100GE2 = _X560_48mp_10GE4_100GE2_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 244)
+)
+_X560_48mt_10GE4_100GE2_ObjectIdentity = ObjectIdentity
+x560_48mt_10GE4_100GE2 = _X560_48mt_10GE4_100GE2_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 245)
+)
+_X560_24mp_10GE4_100GE2_ObjectIdentity = ObjectIdentity
+x560_24mp_10GE4_100GE2 = _X560_24mp_10GE4_100GE2_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 246)
+)
 _X690_48t_4q_2c_ObjectIdentity = ObjectIdentity
 x690_48t_4q_2c = _X690_48t_4q_2c_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 2, 247)
@@ -1757,6 +1794,18 @@ extremeSnVirtualSensor250 = _ExtremeSnVirtualSensor250_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     extremeSnVirtualSensor250.setStatus("current")
+_Vsp4900x24P_ObjectIdentity = ObjectIdentity
+vsp4900x24P = _Vsp4900x24P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 323)
+)
+if mibBuilder.loadTexts:
+    vsp4900x24P.setStatus("current")
+_Vsp4900x48P_ObjectIdentity = ObjectIdentity
+vsp4900x48P = _Vsp4900x48P_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 324)
+)
+if mibBuilder.loadTexts:
+    vsp4900x48P.setStatus("current")
 _Vsp7400_48Y_8C_ObjectIdentity = ObjectIdentity
 vsp7400_48Y_8C = _Vsp7400_48Y_8C_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 2, 325)
@@ -1847,6 +1896,24 @@ extremeECAx6125 = _ExtremeECAx6125_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     extremeECAx6125.setStatus("current")
+_Vsp4900x24XE_ObjectIdentity = ObjectIdentity
+vsp4900x24XE = _Vsp4900x24XE_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 340)
+)
+if mibBuilder.loadTexts:
+    vsp4900x24XE.setStatus("current")
+_Vsp4900x12MXU12XE_ObjectIdentity = ObjectIdentity
+vsp4900x12MXU12XE = _Vsp4900x12MXU12XE_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 341)
+)
+if mibBuilder.loadTexts:
+    vsp4900x12MXU12XE.setStatus("current")
+_Vsp4900x24S_ObjectIdentity = ObjectIdentity
+vsp4900x24S = _Vsp4900x24S_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 342)
+)
+if mibBuilder.loadTexts:
+    vsp4900x24S.setStatus("current")
 _X435_24p_4s_ObjectIdentity = ObjectIdentity
 x435_24p_4s = _X435_24p_4s_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 2, 343)
@@ -1883,12 +1950,858 @@ x465i_48w = _X465i_48w_ObjectIdentity(
 )
 if mibBuilder.loadTexts:
     x465i_48w.setStatus("current")
+_Extreme552024TEXOS_ObjectIdentity = ObjectIdentity
+extreme552024TEXOS = _Extreme552024TEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 349)
+)
+if mibBuilder.loadTexts:
+    extreme552024TEXOS.setStatus("current")
+_Extreme552024WEXOS_ObjectIdentity = ObjectIdentity
+extreme552024WEXOS = _Extreme552024WEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 350)
+)
+if mibBuilder.loadTexts:
+    extreme552024WEXOS.setStatus("current")
+_Extreme552048TEXOS_ObjectIdentity = ObjectIdentity
+extreme552048TEXOS = _Extreme552048TEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 351)
+)
+if mibBuilder.loadTexts:
+    extreme552048TEXOS.setStatus("current")
+_Extreme552048WEXOS_ObjectIdentity = ObjectIdentity
+extreme552048WEXOS = _Extreme552048WEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 352)
+)
+if mibBuilder.loadTexts:
+    extreme552048WEXOS.setStatus("current")
+_Extreme552012MW36WEXOS_ObjectIdentity = ObjectIdentity
+extreme552012MW36WEXOS = _Extreme552012MW36WEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 353)
+)
+if mibBuilder.loadTexts:
+    extreme552012MW36WEXOS.setStatus("current")
+_Extreme552048SEEXOS_ObjectIdentity = ObjectIdentity
+extreme552048SEEXOS = _Extreme552048SEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 354)
+)
+if mibBuilder.loadTexts:
+    extreme552048SEEXOS.setStatus("current")
+_Extreme552024XEXOS_ObjectIdentity = ObjectIdentity
+extreme552024XEXOS = _Extreme552024XEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 355)
+)
+if mibBuilder.loadTexts:
+    extreme552024XEXOS.setStatus("current")
 _ExtremeECAx6120H_ObjectIdentity = ObjectIdentity
 extremeECAx6120H = _ExtremeECAx6120H_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 2, 356)
 )
 if mibBuilder.loadTexts:
     extremeECAx6120H.setStatus("current")
+_ExtremeECAx6125H_ObjectIdentity = ObjectIdentity
+extremeECAx6125H = _ExtremeECAx6125H_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 357)
+)
+if mibBuilder.loadTexts:
+    extremeECAx6125H.setStatus("current")
+_Extreme552024TVOSS_ObjectIdentity = ObjectIdentity
+extreme552024TVOSS = _Extreme552024TVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 358)
+)
+if mibBuilder.loadTexts:
+    extreme552024TVOSS.setStatus("current")
+_Extreme552024WVOSS_ObjectIdentity = ObjectIdentity
+extreme552024WVOSS = _Extreme552024WVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 359)
+)
+if mibBuilder.loadTexts:
+    extreme552024WVOSS.setStatus("current")
+_Extreme552048TVOSS_ObjectIdentity = ObjectIdentity
+extreme552048TVOSS = _Extreme552048TVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 360)
+)
+if mibBuilder.loadTexts:
+    extreme552048TVOSS.setStatus("current")
+_Extreme552048WVOSS_ObjectIdentity = ObjectIdentity
+extreme552048WVOSS = _Extreme552048WVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 361)
+)
+if mibBuilder.loadTexts:
+    extreme552048WVOSS.setStatus("current")
+_Extreme552012MW36WVOSS_ObjectIdentity = ObjectIdentity
+extreme552012MW36WVOSS = _Extreme552012MW36WVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 362)
+)
+if mibBuilder.loadTexts:
+    extreme552012MW36WVOSS.setStatus("current")
+_Extreme552048SEVOSS_ObjectIdentity = ObjectIdentity
+extreme552048SEVOSS = _Extreme552048SEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 363)
+)
+if mibBuilder.loadTexts:
+    extreme552048SEVOSS.setStatus("current")
+_Extreme552024XVOSS_ObjectIdentity = ObjectIdentity
+extreme552024XVOSS = _Extreme552024XVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 364)
+)
+if mibBuilder.loadTexts:
+    extreme552024XVOSS.setStatus("current")
+_Extreme5420F24P4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F24P4XEEXOS = _Extreme5420F24P4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 365)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24P4XEEXOS.setStatus("current")
+_Extreme5420F8W16P4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F8W16P4XEEXOS = _Extreme5420F8W16P4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 366)
+)
+if mibBuilder.loadTexts:
+    extreme5420F8W16P4XEEXOS.setStatus("current")
+_Extreme5420F24T4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F24T4XEEXOS = _Extreme5420F24T4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 367)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24T4XEEXOS.setStatus("current")
+_Extreme5420F48P4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XEEXOS = _Extreme5420F48P4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 368)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XEEXOS.setStatus("current")
+_Extreme5420F16W32P4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F16W32P4XEEXOS = _Extreme5420F16W32P4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 369)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16W32P4XEEXOS.setStatus("current")
+_Extreme5420F48T4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F48T4XEEXOS = _Extreme5420F48T4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 370)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48T4XEEXOS.setStatus("current")
+_Extreme5420F16MW32P4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F16MW32P4XEEXOS = _Extreme5420F16MW32P4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 371)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16MW32P4XEEXOS.setStatus("current")
+_Extreme5420F24S4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F24S4XEEXOS = _Extreme5420F24S4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 372)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24S4XEEXOS.setStatus("current")
+_Extreme5420F48P4XLEXOS_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XLEXOS = _Extreme5420F48P4XLEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 373)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XLEXOS.setStatus("current")
+_Extreme5420M24W4YEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420M24W4YEEXOS = _Extreme5420M24W4YEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 374)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24W4YEEXOS.setStatus("current")
+_Extreme5420M24T4YEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420M24T4YEEXOS = _Extreme5420M24T4YEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 375)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24T4YEEXOS.setStatus("current")
+_Extreme5420M48W4YEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420M48W4YEEXOS = _Extreme5420M48W4YEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 376)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48W4YEEXOS.setStatus("current")
+_Extreme5420M48T4YEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420M48T4YEEXOS = _Extreme5420M48T4YEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 377)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48T4YEEXOS.setStatus("current")
+_Extreme5420M16MW32P4YEEXOS_ObjectIdentity = ObjectIdentity
+extreme5420M16MW32P4YEEXOS = _Extreme5420M16MW32P4YEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 378)
+)
+if mibBuilder.loadTexts:
+    extreme5420M16MW32P4YEEXOS.setStatus("current")
+_ExtremeXCAxQ4120_ObjectIdentity = ObjectIdentity
+extremeXCAxQ4120 = _ExtremeXCAxQ4120_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 379)
+)
+if mibBuilder.loadTexts:
+    extremeXCAxQ4120.setStatus("current")
+_ExtremeXCAxVQ6120_ObjectIdentity = ObjectIdentity
+extremeXCAxVQ6120 = _ExtremeXCAxVQ6120_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 380)
+)
+if mibBuilder.loadTexts:
+    extremeXCAxVQ6120.setStatus("current")
+_ExtremeXCCx2122_ObjectIdentity = ObjectIdentity
+extremeXCCx2122 = _ExtremeXCCx2122_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 381)
+)
+if mibBuilder.loadTexts:
+    extremeXCCx2122.setStatus("current")
+_ExtremeXCCx6120K_ObjectIdentity = ObjectIdentity
+extremeXCCx6120K = _ExtremeXCCx6120K_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 382)
+)
+if mibBuilder.loadTexts:
+    extremeXCCx6120K.setStatus("current")
+_ExtremeXCCx6125K_ObjectIdentity = ObjectIdentity
+extremeXCCx6125K = _ExtremeXCCx6125K_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 383)
+)
+if mibBuilder.loadTexts:
+    extremeXCCx6125K.setStatus("current")
+_ExtremeArmStack_ObjectIdentity = ObjectIdentity
+extremeArmStack = _ExtremeArmStack_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 384)
+)
+if mibBuilder.loadTexts:
+    extremeArmStack.setStatus("current")
+_Extreme572024MWSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme572024MWSwitchEngine = _Extreme572024MWSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 385)
+)
+if mibBuilder.loadTexts:
+    extreme572024MWSwitchEngine.setStatus("current")
+_Extreme572048MWSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme572048MWSwitchEngine = _Extreme572048MWSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 386)
+)
+if mibBuilder.loadTexts:
+    extreme572048MWSwitchEngine.setStatus("current")
+_Extreme572024MXWSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme572024MXWSwitchEngine = _Extreme572024MXWSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 387)
+)
+if mibBuilder.loadTexts:
+    extreme572024MXWSwitchEngine.setStatus("current")
+_Extreme572048MXWSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme572048MXWSwitchEngine = _Extreme572048MXWSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 388)
+)
+if mibBuilder.loadTexts:
+    extreme572048MXWSwitchEngine.setStatus("current")
+_Extreme572024MWFabricEngine_ObjectIdentity = ObjectIdentity
+extreme572024MWFabricEngine = _Extreme572024MWFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 389)
+)
+if mibBuilder.loadTexts:
+    extreme572024MWFabricEngine.setStatus("current")
+_Extreme572048MWFabricEngine_ObjectIdentity = ObjectIdentity
+extreme572048MWFabricEngine = _Extreme572048MWFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 390)
+)
+if mibBuilder.loadTexts:
+    extreme572048MWFabricEngine.setStatus("current")
+_Extreme572024MXWFabricEngine_ObjectIdentity = ObjectIdentity
+extreme572024MXWFabricEngine = _Extreme572024MXWFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 391)
+)
+if mibBuilder.loadTexts:
+    extreme572024MXWFabricEngine.setStatus("current")
+_Extreme572048MXWFabricEngine_ObjectIdentity = ObjectIdentity
+extreme572048MXWFabricEngine = _Extreme572048MXWFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 392)
+)
+if mibBuilder.loadTexts:
+    extreme572048MXWFabricEngine.setStatus("current")
+_ExtremeSwitchEngineMixedStack_ObjectIdentity = ObjectIdentity
+extremeSwitchEngineMixedStack = _ExtremeSwitchEngineMixedStack_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 393)
+)
+if mibBuilder.loadTexts:
+    extremeSwitchEngineMixedStack.setStatus("current")
+_Extreme752048Y8CSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme752048Y8CSwitchEngine = _Extreme752048Y8CSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 394)
+)
+if mibBuilder.loadTexts:
+    extreme752048Y8CSwitchEngine.setStatus("current")
+_Extreme752048XT6CSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme752048XT6CSwitchEngine = _Extreme752048XT6CSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 395)
+)
+if mibBuilder.loadTexts:
+    extreme752048XT6CSwitchEngine.setStatus("current")
+_Extreme5420F24P4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F24P4XEVOSS = _Extreme5420F24P4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 396)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24P4XEVOSS.setStatus("current")
+_Extreme5420F8W16P4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F8W16P4XEVOSS = _Extreme5420F8W16P4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 397)
+)
+if mibBuilder.loadTexts:
+    extreme5420F8W16P4XEVOSS.setStatus("current")
+_Extreme5420F24T4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F24T4XEVOSS = _Extreme5420F24T4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 398)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24T4XEVOSS.setStatus("current")
+_Extreme5420F48P4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XEVOSS = _Extreme5420F48P4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 399)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XEVOSS.setStatus("current")
+_Extreme5420F16W32P4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F16W32P4XEVOSS = _Extreme5420F16W32P4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 400)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16W32P4XEVOSS.setStatus("current")
+_Extreme5420F48T4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F48T4XEVOSS = _Extreme5420F48T4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 401)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48T4XEVOSS.setStatus("current")
+_Extreme5420F16MW32P4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F16MW32P4XEVOSS = _Extreme5420F16MW32P4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 402)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16MW32P4XEVOSS.setStatus("current")
+_Extreme5420F24S4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F24S4XEVOSS = _Extreme5420F24S4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 403)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24S4XEVOSS.setStatus("current")
+_Extreme5420F48P4XLVOSS_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XLVOSS = _Extreme5420F48P4XLVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 404)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XLVOSS.setStatus("current")
+_Extreme5420M24W4YEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420M24W4YEVOSS = _Extreme5420M24W4YEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 405)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24W4YEVOSS.setStatus("current")
+_Extreme5420M24T4YEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420M24T4YEVOSS = _Extreme5420M24T4YEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 406)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24T4YEVOSS.setStatus("current")
+_Extreme5420M48W4YEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420M48W4YEVOSS = _Extreme5420M48W4YEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 407)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48W4YEVOSS.setStatus("current")
+_Extreme5420M48T4YEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420M48T4YEVOSS = _Extreme5420M48T4YEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 408)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48T4YEVOSS.setStatus("current")
+_Extreme5420M16MW32P4YEVOSS_ObjectIdentity = ObjectIdentity
+extreme5420M16MW32P4YEVOSS = _Extreme5420M16MW32P4YEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 409)
+)
+if mibBuilder.loadTexts:
+    extreme5420M16MW32P4YEVOSS.setStatus("current")
+_ExtremeNPB9920_ObjectIdentity = ObjectIdentity
+extremeNPB9920 = _ExtremeNPB9920_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 410)
+)
+if mibBuilder.loadTexts:
+    extremeNPB9920.setStatus("current")
+_Extreme532024P8XEEXOS_ObjectIdentity = ObjectIdentity
+extreme532024P8XEEXOS = _Extreme532024P8XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 411)
+)
+if mibBuilder.loadTexts:
+    extreme532024P8XEEXOS.setStatus("current")
+_Extreme532024T8XEEXOS_ObjectIdentity = ObjectIdentity
+extreme532024T8XEEXOS = _Extreme532024T8XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 412)
+)
+if mibBuilder.loadTexts:
+    extreme532024T8XEEXOS.setStatus("current")
+_Extreme532048P8XEEXOS_ObjectIdentity = ObjectIdentity
+extreme532048P8XEEXOS = _Extreme532048P8XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 413)
+)
+if mibBuilder.loadTexts:
+    extreme532048P8XEEXOS.setStatus("current")
+_Extreme532048T8XEEXOS_ObjectIdentity = ObjectIdentity
+extreme532048T8XEEXOS = _Extreme532048T8XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 414)
+)
+if mibBuilder.loadTexts:
+    extreme532048T8XEEXOS.setStatus("current")
+_Extreme532016P4XEEXOS_ObjectIdentity = ObjectIdentity
+extreme532016P4XEEXOS = _Extreme532016P4XEEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 415)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEEXOS.setStatus("current")
+_Extreme532016P4XEDCEXOS_ObjectIdentity = ObjectIdentity
+extreme532016P4XEDCEXOS = _Extreme532016P4XEDCEXOS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 416)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEDCEXOS.setStatus("current")
+_ExtremeNMSxGeneric_ObjectIdentity = ObjectIdentity
+extremeNMSxGeneric = _ExtremeNMSxGeneric_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 417)
+)
+if mibBuilder.loadTexts:
+    extremeNMSxGeneric.setStatus("current")
+_ExtremeIAxGeneric_ObjectIdentity = ObjectIdentity
+extremeIAxGeneric = _ExtremeIAxGeneric_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 418)
+)
+if mibBuilder.loadTexts:
+    extremeIAxGeneric.setStatus("current")
+_ExtremePVxGeneric_ObjectIdentity = ObjectIdentity
+extremePVxGeneric = _ExtremePVxGeneric_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 419)
+)
+if mibBuilder.loadTexts:
+    extremePVxGeneric.setStatus("current")
+_ExtremeAnalyticsApplianceV_ObjectIdentity = ObjectIdentity
+extremeAnalyticsApplianceV = _ExtremeAnalyticsApplianceV_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 420)
+)
+if mibBuilder.loadTexts:
+    extremeAnalyticsApplianceV.setStatus("current")
+_Extreme532024P8XEVOSS_ObjectIdentity = ObjectIdentity
+extreme532024P8XEVOSS = _Extreme532024P8XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 421)
+)
+if mibBuilder.loadTexts:
+    extreme532024P8XEVOSS.setStatus("current")
+_Extreme532024T8XEVOSS_ObjectIdentity = ObjectIdentity
+extreme532024T8XEVOSS = _Extreme532024T8XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 422)
+)
+if mibBuilder.loadTexts:
+    extreme532024T8XEVOSS.setStatus("current")
+_Extreme532048P8XEVOSS_ObjectIdentity = ObjectIdentity
+extreme532048P8XEVOSS = _Extreme532048P8XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 423)
+)
+if mibBuilder.loadTexts:
+    extreme532048P8XEVOSS.setStatus("current")
+_Extreme532048T8XEVOSS_ObjectIdentity = ObjectIdentity
+extreme532048T8XEVOSS = _Extreme532048T8XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 424)
+)
+if mibBuilder.loadTexts:
+    extreme532048T8XEVOSS.setStatus("current")
+_Extreme532016P4XEVOSS_ObjectIdentity = ObjectIdentity
+extreme532016P4XEVOSS = _Extreme532016P4XEVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 425)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEVOSS.setStatus("current")
+_Extreme532016P4XEDCVOSS_ObjectIdentity = ObjectIdentity
+extreme532016P4XEDCVOSS = _Extreme532016P4XEDCVOSS_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 426)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEDCVOSS.setStatus("current")
+_Vm386EXOSStack_ObjectIdentity = ObjectIdentity
+vm386EXOSStack = _Vm386EXOSStack_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 427)
+)
+if mibBuilder.loadTexts:
+    vm386EXOSStack.setStatus("current")
+_ExtremeAnalyticsAppliance_ObjectIdentity = ObjectIdentity
+extremeAnalyticsAppliance = _ExtremeAnalyticsAppliance_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 428)
+)
+if mibBuilder.loadTexts:
+    extremeAnalyticsAppliance.setStatus("current")
+_Extreme552024TSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552024TSwitchEngine = _Extreme552024TSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 430)
+)
+if mibBuilder.loadTexts:
+    extreme552024TSwitchEngine.setStatus("current")
+_Extreme552024WSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552024WSwitchEngine = _Extreme552024WSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 431)
+)
+if mibBuilder.loadTexts:
+    extreme552024WSwitchEngine.setStatus("current")
+_Extreme552048TSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552048TSwitchEngine = _Extreme552048TSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 432)
+)
+if mibBuilder.loadTexts:
+    extreme552048TSwitchEngine.setStatus("current")
+_Extreme552048WSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552048WSwitchEngine = _Extreme552048WSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 433)
+)
+if mibBuilder.loadTexts:
+    extreme552048WSwitchEngine.setStatus("current")
+_Extreme552012MW36WSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552012MW36WSwitchEngine = _Extreme552012MW36WSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 434)
+)
+if mibBuilder.loadTexts:
+    extreme552012MW36WSwitchEngine.setStatus("current")
+_Extreme552048SESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552048SESwitchEngine = _Extreme552048SESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 435)
+)
+if mibBuilder.loadTexts:
+    extreme552048SESwitchEngine.setStatus("current")
+_Extreme552024XSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme552024XSwitchEngine = _Extreme552024XSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 436)
+)
+if mibBuilder.loadTexts:
+    extreme552024XSwitchEngine.setStatus("current")
+_Extreme552024TFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552024TFabricEngine = _Extreme552024TFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 437)
+)
+if mibBuilder.loadTexts:
+    extreme552024TFabricEngine.setStatus("current")
+_Extreme552024WFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552024WFabricEngine = _Extreme552024WFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 438)
+)
+if mibBuilder.loadTexts:
+    extreme552024WFabricEngine.setStatus("current")
+_Extreme552048TFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552048TFabricEngine = _Extreme552048TFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 439)
+)
+if mibBuilder.loadTexts:
+    extreme552048TFabricEngine.setStatus("current")
+_Extreme552048WFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552048WFabricEngine = _Extreme552048WFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 440)
+)
+if mibBuilder.loadTexts:
+    extreme552048WFabricEngine.setStatus("current")
+_Extreme552012MW36WFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552012MW36WFabricEngine = _Extreme552012MW36WFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 441)
+)
+if mibBuilder.loadTexts:
+    extreme552012MW36WFabricEngine.setStatus("current")
+_Extreme552048SEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552048SEFabricEngine = _Extreme552048SEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 442)
+)
+if mibBuilder.loadTexts:
+    extreme552048SEFabricEngine.setStatus("current")
+_Extreme552024XFabricEngine_ObjectIdentity = ObjectIdentity
+extreme552024XFabricEngine = _Extreme552024XFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 443)
+)
+if mibBuilder.loadTexts:
+    extreme552024XFabricEngine.setStatus("current")
+_Extreme5420F24P4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F24P4XESwitchEngine = _Extreme5420F24P4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 444)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24P4XESwitchEngine.setStatus("current")
+_Extreme5420F8W16P4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F8W16P4XESwitchEngine = _Extreme5420F8W16P4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 445)
+)
+if mibBuilder.loadTexts:
+    extreme5420F8W16P4XESwitchEngine.setStatus("current")
+_Extreme5420F24T4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F24T4XESwitchEngine = _Extreme5420F24T4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 446)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24T4XESwitchEngine.setStatus("current")
+_Extreme5420F48P4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XESwitchEngine = _Extreme5420F48P4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 447)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XESwitchEngine.setStatus("current")
+_Extreme5420F16W32P4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F16W32P4XESwitchEngine = _Extreme5420F16W32P4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 448)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16W32P4XESwitchEngine.setStatus("current")
+_Extreme5420F48T4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F48T4XESwitchEngine = _Extreme5420F48T4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 449)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48T4XESwitchEngine.setStatus("current")
+_Extreme5420F16MW32P4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F16MW32P4XESwitchEngine = _Extreme5420F16MW32P4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 450)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16MW32P4XESwitchEngine.setStatus("current")
+_Extreme5420F24S4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F24S4XESwitchEngine = _Extreme5420F24S4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 451)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24S4XESwitchEngine.setStatus("current")
+_Extreme5420F48P4XLSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XLSwitchEngine = _Extreme5420F48P4XLSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 452)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XLSwitchEngine.setStatus("current")
+_Extreme5420M24W4YESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420M24W4YESwitchEngine = _Extreme5420M24W4YESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 453)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24W4YESwitchEngine.setStatus("current")
+_Extreme5420M24T4YESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420M24T4YESwitchEngine = _Extreme5420M24T4YESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 454)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24T4YESwitchEngine.setStatus("current")
+_Extreme5420M48W4YESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420M48W4YESwitchEngine = _Extreme5420M48W4YESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 455)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48W4YESwitchEngine.setStatus("current")
+_Extreme5420M48T4YESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420M48T4YESwitchEngine = _Extreme5420M48T4YESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 456)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48T4YESwitchEngine.setStatus("current")
+_Extreme5420M16MW32P4YESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme5420M16MW32P4YESwitchEngine = _Extreme5420M16MW32P4YESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 457)
+)
+if mibBuilder.loadTexts:
+    extreme5420M16MW32P4YESwitchEngine.setStatus("current")
+_Extreme5420F24P4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F24P4XEFabricEngine = _Extreme5420F24P4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 458)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24P4XEFabricEngine.setStatus("current")
+_Extreme5420F8W16P4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F8W16P4XEFabricEngine = _Extreme5420F8W16P4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 459)
+)
+if mibBuilder.loadTexts:
+    extreme5420F8W16P4XEFabricEngine.setStatus("current")
+_Extreme5420F24T4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F24T4XEFabricEngine = _Extreme5420F24T4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 460)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24T4XEFabricEngine.setStatus("current")
+_Extreme5420F48P4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XEFabricEngine = _Extreme5420F48P4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 461)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XEFabricEngine.setStatus("current")
+_Extreme5420F16W32P4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F16W32P4XEFabricEngine = _Extreme5420F16W32P4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 462)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16W32P4XEFabricEngine.setStatus("current")
+_Extreme5420F48T4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F48T4XEFabricEngine = _Extreme5420F48T4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 463)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48T4XEFabricEngine.setStatus("current")
+_Extreme5420F16MW32P4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F16MW32P4XEFabricEngine = _Extreme5420F16MW32P4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 464)
+)
+if mibBuilder.loadTexts:
+    extreme5420F16MW32P4XEFabricEngine.setStatus("current")
+_Extreme5420F24S4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F24S4XEFabricEngine = _Extreme5420F24S4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 465)
+)
+if mibBuilder.loadTexts:
+    extreme5420F24S4XEFabricEngine.setStatus("current")
+_Extreme5420F48P4XLFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420F48P4XLFabricEngine = _Extreme5420F48P4XLFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 466)
+)
+if mibBuilder.loadTexts:
+    extreme5420F48P4XLFabricEngine.setStatus("current")
+_Extreme5420M24W4YEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420M24W4YEFabricEngine = _Extreme5420M24W4YEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 467)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24W4YEFabricEngine.setStatus("current")
+_Extreme5420M24T4YEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420M24T4YEFabricEngine = _Extreme5420M24T4YEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 468)
+)
+if mibBuilder.loadTexts:
+    extreme5420M24T4YEFabricEngine.setStatus("current")
+_Extreme5420M48W4YEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420M48W4YEFabricEngine = _Extreme5420M48W4YEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 469)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48W4YEFabricEngine.setStatus("current")
+_Extreme5420M48T4YEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420M48T4YEFabricEngine = _Extreme5420M48T4YEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 470)
+)
+if mibBuilder.loadTexts:
+    extreme5420M48T4YEFabricEngine.setStatus("current")
+_Extreme5420M16MW32P4YEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme5420M16MW32P4YEFabricEngine = _Extreme5420M16MW32P4YEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 471)
+)
+if mibBuilder.loadTexts:
+    extreme5420M16MW32P4YEFabricEngine.setStatus("current")
+_ExtremeSwitchEngineARMStack_ObjectIdentity = ObjectIdentity
+extremeSwitchEngineARMStack = _ExtremeSwitchEngineARMStack_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 472)
+)
+if mibBuilder.loadTexts:
+    extremeSwitchEngineARMStack.setStatus("current")
+_Extreme752048Y8CFabricEngine_ObjectIdentity = ObjectIdentity
+extreme752048Y8CFabricEngine = _Extreme752048Y8CFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 473)
+)
+if mibBuilder.loadTexts:
+    extreme752048Y8CFabricEngine.setStatus("current")
+_Extreme752048XT6CFabricEngine_ObjectIdentity = ObjectIdentity
+extreme752048XT6CFabricEngine = _Extreme752048XT6CFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 474)
+)
+if mibBuilder.loadTexts:
+    extreme752048XT6CFabricEngine.setStatus("current")
+_Extreme772032CSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme772032CSwitchEngine = _Extreme772032CSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 475)
+)
+if mibBuilder.loadTexts:
+    extreme772032CSwitchEngine.setStatus("current")
+_Extreme772032CFabricEngine_ObjectIdentity = ObjectIdentity
+extreme772032CFabricEngine = _Extreme772032CFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 476)
+)
+if mibBuilder.loadTexts:
+    extreme772032CFabricEngine.setStatus("current")
+_Extreme532024P8XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme532024P8XESwitchEngine = _Extreme532024P8XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 477)
+)
+if mibBuilder.loadTexts:
+    extreme532024P8XESwitchEngine.setStatus("current")
+_Extreme532024T8XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme532024T8XESwitchEngine = _Extreme532024T8XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 478)
+)
+if mibBuilder.loadTexts:
+    extreme532024T8XESwitchEngine.setStatus("current")
+_Extreme532048P8XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme532048P8XESwitchEngine = _Extreme532048P8XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 479)
+)
+if mibBuilder.loadTexts:
+    extreme532048P8XESwitchEngine.setStatus("current")
+_Extreme532048T8XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme532048T8XESwitchEngine = _Extreme532048T8XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 480)
+)
+if mibBuilder.loadTexts:
+    extreme532048T8XESwitchEngine.setStatus("current")
+_Extreme532016P4XESwitchEngine_ObjectIdentity = ObjectIdentity
+extreme532016P4XESwitchEngine = _Extreme532016P4XESwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 481)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XESwitchEngine.setStatus("current")
+_Extreme532016P4XEDCSwitchEngine_ObjectIdentity = ObjectIdentity
+extreme532016P4XEDCSwitchEngine = _Extreme532016P4XEDCSwitchEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 482)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEDCSwitchEngine.setStatus("current")
+_Extreme532024P8XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme532024P8XEFabricEngine = _Extreme532024P8XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 483)
+)
+if mibBuilder.loadTexts:
+    extreme532024P8XEFabricEngine.setStatus("current")
+_Extreme532024T8XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme532024T8XEFabricEngine = _Extreme532024T8XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 484)
+)
+if mibBuilder.loadTexts:
+    extreme532024T8XEFabricEngine.setStatus("current")
+_Extreme532048P8XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme532048P8XEFabricEngine = _Extreme532048P8XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 485)
+)
+if mibBuilder.loadTexts:
+    extreme532048P8XEFabricEngine.setStatus("current")
+_Extreme532048T8XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme532048T8XEFabricEngine = _Extreme532048T8XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 486)
+)
+if mibBuilder.loadTexts:
+    extreme532048T8XEFabricEngine.setStatus("current")
+_Extreme532016P4XEFabricEngine_ObjectIdentity = ObjectIdentity
+extreme532016P4XEFabricEngine = _Extreme532016P4XEFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 487)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEFabricEngine.setStatus("current")
+_Extreme532016P4XEDCFabricEngine_ObjectIdentity = ObjectIdentity
+extreme532016P4XEDCFabricEngine = _Extreme532016P4XEDCFabricEngine_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 488)
+)
+if mibBuilder.loadTexts:
+    extreme532016P4XEDCFabricEngine.setStatus("current")
+_ExtremeISW4W4WS4X_ObjectIdentity = ObjectIdentity
+extremeISW4W4WS4X = _ExtremeISW4W4WS4X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 489)
+)
+if mibBuilder.loadTexts:
+    extremeISW4W4WS4X.setStatus("current")
+_ExtremeISW12W12P4X_ObjectIdentity = ObjectIdentity
+extremeISW12W12P4X = _ExtremeISW12W12P4X_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 490)
+)
+if mibBuilder.loadTexts:
+    extremeISW12W12P4X.setStatus("current")
+_ExtremeSwitchEngineOnieStack_ObjectIdentity = ObjectIdentity
+extremeSwitchEngineOnieStack = _ExtremeSwitchEngineOnieStack_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 2, 491)
+)
+if mibBuilder.loadTexts:
+    extremeSwitchEngineOnieStack.setStatus("current")
 _ExtremeMisc_ObjectIdentity = ObjectIdentity
 extremeMisc = _ExtremeMisc_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 3)
@@ -2049,6 +2962,18 @@ _ExtremeMauType10GBaseBX40D_ObjectIdentity = ObjectIdentity
 extremeMauType10GBaseBX40D = _ExtremeMauType10GBaseBX40D_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 3, 1, 1, 43)
 )
+_ExtremeMauType100GBase4WDM10KM_ObjectIdentity = ObjectIdentity
+extremeMauType100GBase4WDM10KM = _ExtremeMauType100GBase4WDM10KM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 3, 1, 1, 44)
+)
+_ExtremeMauType100GBase4WDM20KM_ObjectIdentity = ObjectIdentity
+extremeMauType100GBase4WDM20KM = _ExtremeMauType100GBase4WDM20KM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 3, 1, 1, 45)
+)
+_ExtremeMauType100GBase4WDM40KM_ObjectIdentity = ObjectIdentity
+extremeMauType100GBase4WDM40KM = _ExtremeMauType100GBase4WDM40KM_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 1916, 3, 1, 1, 46)
+)
 _ExtremeV2Traps_ObjectIdentity = ObjectIdentity
 extremeV2Traps = _ExtremeV2Traps_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1916, 4)
@@ -2137,6 +3062,7 @@ mibBuilder.exportSymbols(
        "extremeOspfv3MIB": extremeOspfv3MIB,
        "extremeBgp4V2": extremeBgp4V2,
        "extremeBgp4V2TC": extremeBgp4V2TC,
+       "extremeRemoteConnectionMIB": extremeRemoteConnectionMIB,
        "extremeInternal": extremeInternal,
        "extremeProduct": extremeProduct,
        "summit1": summit1,
@@ -2354,6 +3280,9 @@ mibBuilder.exportSymbols(
        "isw-8P-G4": isw_8P_G4,
        "isw-4GP-2G-G2": isw_4GP_2G_G2,
        "isw-8GP-G4": isw_8GP_G4,
+       "x560-48mp-10GE4-100GE2": x560_48mp_10GE4_100GE2,
+       "x560-48mt-10GE4-100GE2": x560_48mt_10GE4_100GE2,
+       "x560-24mp-10GE4-100GE2": x560_24mp_10GE4_100GE2,
        "x690-48t-4q-2c": x690_48t_4q_2c,
        "x690-48x-4q-2c": x690_48x_4q_2c,
        "extremeSNSxNSSxA": extremeSNSxNSSxA,
@@ -2423,6 +3352,8 @@ mibBuilder.exportSymbols(
        "x725-48y-8c": x725_48y_8c,
        "extremeSnVirtualSensor100": extremeSnVirtualSensor100,
        "extremeSnVirtualSensor250": extremeSnVirtualSensor250,
+       "vsp4900x24P": vsp4900x24P,
+       "vsp4900x48P": vsp4900x48P,
        "vsp7400-48Y-8C": vsp7400_48Y_8C,
        "extremeVirtualTAP": extremeVirtualTAP,
        "extremeVirtualPB": extremeVirtualPB,
@@ -2438,13 +3369,157 @@ mibBuilder.exportSymbols(
        "xa1440": xa1440,
        "xa1480": xa1480,
        "extremeECAx6125": extremeECAx6125,
+       "vsp4900x24XE": vsp4900x24XE,
+       "vsp4900x12MXU12XE": vsp4900x12MXU12XE,
+       "vsp4900x24S": vsp4900x24S,
        "x435-24p-4s": x435_24p_4s,
        "x435-24t-4s": x435_24t_4s,
        "x435-8p-4s": x435_8p_4s,
        "x435-8t-4s": x435_8t_4s,
        "x435-8p-2t-w": x435_8p_2t_w,
        "x465i-48w": x465i_48w,
+       "extreme552024TEXOS": extreme552024TEXOS,
+       "extreme552024WEXOS": extreme552024WEXOS,
+       "extreme552048TEXOS": extreme552048TEXOS,
+       "extreme552048WEXOS": extreme552048WEXOS,
+       "extreme552012MW36WEXOS": extreme552012MW36WEXOS,
+       "extreme552048SEEXOS": extreme552048SEEXOS,
+       "extreme552024XEXOS": extreme552024XEXOS,
        "extremeECAx6120H": extremeECAx6120H,
+       "extremeECAx6125H": extremeECAx6125H,
+       "extreme552024TVOSS": extreme552024TVOSS,
+       "extreme552024WVOSS": extreme552024WVOSS,
+       "extreme552048TVOSS": extreme552048TVOSS,
+       "extreme552048WVOSS": extreme552048WVOSS,
+       "extreme552012MW36WVOSS": extreme552012MW36WVOSS,
+       "extreme552048SEVOSS": extreme552048SEVOSS,
+       "extreme552024XVOSS": extreme552024XVOSS,
+       "extreme5420F24P4XEEXOS": extreme5420F24P4XEEXOS,
+       "extreme5420F8W16P4XEEXOS": extreme5420F8W16P4XEEXOS,
+       "extreme5420F24T4XEEXOS": extreme5420F24T4XEEXOS,
+       "extreme5420F48P4XEEXOS": extreme5420F48P4XEEXOS,
+       "extreme5420F16W32P4XEEXOS": extreme5420F16W32P4XEEXOS,
+       "extreme5420F48T4XEEXOS": extreme5420F48T4XEEXOS,
+       "extreme5420F16MW32P4XEEXOS": extreme5420F16MW32P4XEEXOS,
+       "extreme5420F24S4XEEXOS": extreme5420F24S4XEEXOS,
+       "extreme5420F48P4XLEXOS": extreme5420F48P4XLEXOS,
+       "extreme5420M24W4YEEXOS": extreme5420M24W4YEEXOS,
+       "extreme5420M24T4YEEXOS": extreme5420M24T4YEEXOS,
+       "extreme5420M48W4YEEXOS": extreme5420M48W4YEEXOS,
+       "extreme5420M48T4YEEXOS": extreme5420M48T4YEEXOS,
+       "extreme5420M16MW32P4YEEXOS": extreme5420M16MW32P4YEEXOS,
+       "extremeXCAxQ4120": extremeXCAxQ4120,
+       "extremeXCAxVQ6120": extremeXCAxVQ6120,
+       "extremeXCCx2122": extremeXCCx2122,
+       "extremeXCCx6120K": extremeXCCx6120K,
+       "extremeXCCx6125K": extremeXCCx6125K,
+       "extremeArmStack": extremeArmStack,
+       "extreme572024MWSwitchEngine": extreme572024MWSwitchEngine,
+       "extreme572048MWSwitchEngine": extreme572048MWSwitchEngine,
+       "extreme572024MXWSwitchEngine": extreme572024MXWSwitchEngine,
+       "extreme572048MXWSwitchEngine": extreme572048MXWSwitchEngine,
+       "extreme572024MWFabricEngine": extreme572024MWFabricEngine,
+       "extreme572048MWFabricEngine": extreme572048MWFabricEngine,
+       "extreme572024MXWFabricEngine": extreme572024MXWFabricEngine,
+       "extreme572048MXWFabricEngine": extreme572048MXWFabricEngine,
+       "extremeSwitchEngineMixedStack": extremeSwitchEngineMixedStack,
+       "extreme752048Y8CSwitchEngine": extreme752048Y8CSwitchEngine,
+       "extreme752048XT6CSwitchEngine": extreme752048XT6CSwitchEngine,
+       "extreme5420F24P4XEVOSS": extreme5420F24P4XEVOSS,
+       "extreme5420F8W16P4XEVOSS": extreme5420F8W16P4XEVOSS,
+       "extreme5420F24T4XEVOSS": extreme5420F24T4XEVOSS,
+       "extreme5420F48P4XEVOSS": extreme5420F48P4XEVOSS,
+       "extreme5420F16W32P4XEVOSS": extreme5420F16W32P4XEVOSS,
+       "extreme5420F48T4XEVOSS": extreme5420F48T4XEVOSS,
+       "extreme5420F16MW32P4XEVOSS": extreme5420F16MW32P4XEVOSS,
+       "extreme5420F24S4XEVOSS": extreme5420F24S4XEVOSS,
+       "extreme5420F48P4XLVOSS": extreme5420F48P4XLVOSS,
+       "extreme5420M24W4YEVOSS": extreme5420M24W4YEVOSS,
+       "extreme5420M24T4YEVOSS": extreme5420M24T4YEVOSS,
+       "extreme5420M48W4YEVOSS": extreme5420M48W4YEVOSS,
+       "extreme5420M48T4YEVOSS": extreme5420M48T4YEVOSS,
+       "extreme5420M16MW32P4YEVOSS": extreme5420M16MW32P4YEVOSS,
+       "extremeNPB9920": extremeNPB9920,
+       "extreme532024P8XEEXOS": extreme532024P8XEEXOS,
+       "extreme532024T8XEEXOS": extreme532024T8XEEXOS,
+       "extreme532048P8XEEXOS": extreme532048P8XEEXOS,
+       "extreme532048T8XEEXOS": extreme532048T8XEEXOS,
+       "extreme532016P4XEEXOS": extreme532016P4XEEXOS,
+       "extreme532016P4XEDCEXOS": extreme532016P4XEDCEXOS,
+       "extremeNMSxGeneric": extremeNMSxGeneric,
+       "extremeIAxGeneric": extremeIAxGeneric,
+       "extremePVxGeneric": extremePVxGeneric,
+       "extremeAnalyticsApplianceV": extremeAnalyticsApplianceV,
+       "extreme532024P8XEVOSS": extreme532024P8XEVOSS,
+       "extreme532024T8XEVOSS": extreme532024T8XEVOSS,
+       "extreme532048P8XEVOSS": extreme532048P8XEVOSS,
+       "extreme532048T8XEVOSS": extreme532048T8XEVOSS,
+       "extreme532016P4XEVOSS": extreme532016P4XEVOSS,
+       "extreme532016P4XEDCVOSS": extreme532016P4XEDCVOSS,
+       "vm386EXOSStack": vm386EXOSStack,
+       "extremeAnalyticsAppliance": extremeAnalyticsAppliance,
+       "extreme552024TSwitchEngine": extreme552024TSwitchEngine,
+       "extreme552024WSwitchEngine": extreme552024WSwitchEngine,
+       "extreme552048TSwitchEngine": extreme552048TSwitchEngine,
+       "extreme552048WSwitchEngine": extreme552048WSwitchEngine,
+       "extreme552012MW36WSwitchEngine": extreme552012MW36WSwitchEngine,
+       "extreme552048SESwitchEngine": extreme552048SESwitchEngine,
+       "extreme552024XSwitchEngine": extreme552024XSwitchEngine,
+       "extreme552024TFabricEngine": extreme552024TFabricEngine,
+       "extreme552024WFabricEngine": extreme552024WFabricEngine,
+       "extreme552048TFabricEngine": extreme552048TFabricEngine,
+       "extreme552048WFabricEngine": extreme552048WFabricEngine,
+       "extreme552012MW36WFabricEngine": extreme552012MW36WFabricEngine,
+       "extreme552048SEFabricEngine": extreme552048SEFabricEngine,
+       "extreme552024XFabricEngine": extreme552024XFabricEngine,
+       "extreme5420F24P4XESwitchEngine": extreme5420F24P4XESwitchEngine,
+       "extreme5420F8W16P4XESwitchEngine": extreme5420F8W16P4XESwitchEngine,
+       "extreme5420F24T4XESwitchEngine": extreme5420F24T4XESwitchEngine,
+       "extreme5420F48P4XESwitchEngine": extreme5420F48P4XESwitchEngine,
+       "extreme5420F16W32P4XESwitchEngine": extreme5420F16W32P4XESwitchEngine,
+       "extreme5420F48T4XESwitchEngine": extreme5420F48T4XESwitchEngine,
+       "extreme5420F16MW32P4XESwitchEngine": extreme5420F16MW32P4XESwitchEngine,
+       "extreme5420F24S4XESwitchEngine": extreme5420F24S4XESwitchEngine,
+       "extreme5420F48P4XLSwitchEngine": extreme5420F48P4XLSwitchEngine,
+       "extreme5420M24W4YESwitchEngine": extreme5420M24W4YESwitchEngine,
+       "extreme5420M24T4YESwitchEngine": extreme5420M24T4YESwitchEngine,
+       "extreme5420M48W4YESwitchEngine": extreme5420M48W4YESwitchEngine,
+       "extreme5420M48T4YESwitchEngine": extreme5420M48T4YESwitchEngine,
+       "extreme5420M16MW32P4YESwitchEngine": extreme5420M16MW32P4YESwitchEngine,
+       "extreme5420F24P4XEFabricEngine": extreme5420F24P4XEFabricEngine,
+       "extreme5420F8W16P4XEFabricEngine": extreme5420F8W16P4XEFabricEngine,
+       "extreme5420F24T4XEFabricEngine": extreme5420F24T4XEFabricEngine,
+       "extreme5420F48P4XEFabricEngine": extreme5420F48P4XEFabricEngine,
+       "extreme5420F16W32P4XEFabricEngine": extreme5420F16W32P4XEFabricEngine,
+       "extreme5420F48T4XEFabricEngine": extreme5420F48T4XEFabricEngine,
+       "extreme5420F16MW32P4XEFabricEngine": extreme5420F16MW32P4XEFabricEngine,
+       "extreme5420F24S4XEFabricEngine": extreme5420F24S4XEFabricEngine,
+       "extreme5420F48P4XLFabricEngine": extreme5420F48P4XLFabricEngine,
+       "extreme5420M24W4YEFabricEngine": extreme5420M24W4YEFabricEngine,
+       "extreme5420M24T4YEFabricEngine": extreme5420M24T4YEFabricEngine,
+       "extreme5420M48W4YEFabricEngine": extreme5420M48W4YEFabricEngine,
+       "extreme5420M48T4YEFabricEngine": extreme5420M48T4YEFabricEngine,
+       "extreme5420M16MW32P4YEFabricEngine": extreme5420M16MW32P4YEFabricEngine,
+       "extremeSwitchEngineARMStack": extremeSwitchEngineARMStack,
+       "extreme752048Y8CFabricEngine": extreme752048Y8CFabricEngine,
+       "extreme752048XT6CFabricEngine": extreme752048XT6CFabricEngine,
+       "extreme772032CSwitchEngine": extreme772032CSwitchEngine,
+       "extreme772032CFabricEngine": extreme772032CFabricEngine,
+       "extreme532024P8XESwitchEngine": extreme532024P8XESwitchEngine,
+       "extreme532024T8XESwitchEngine": extreme532024T8XESwitchEngine,
+       "extreme532048P8XESwitchEngine": extreme532048P8XESwitchEngine,
+       "extreme532048T8XESwitchEngine": extreme532048T8XESwitchEngine,
+       "extreme532016P4XESwitchEngine": extreme532016P4XESwitchEngine,
+       "extreme532016P4XEDCSwitchEngine": extreme532016P4XEDCSwitchEngine,
+       "extreme532024P8XEFabricEngine": extreme532024P8XEFabricEngine,
+       "extreme532024T8XEFabricEngine": extreme532024T8XEFabricEngine,
+       "extreme532048P8XEFabricEngine": extreme532048P8XEFabricEngine,
+       "extreme532048T8XEFabricEngine": extreme532048T8XEFabricEngine,
+       "extreme532016P4XEFabricEngine": extreme532016P4XEFabricEngine,
+       "extreme532016P4XEDCFabricEngine": extreme532016P4XEDCFabricEngine,
+       "extremeISW4W4WS4X": extremeISW4W4WS4X,
+       "extremeISW12W12P4X": extremeISW12W12P4X,
+       "extremeSwitchEngineOnieStack": extremeSwitchEngineOnieStack,
        "extremeMisc": extremeMisc,
        "extremeOids": extremeOids,
        "extremeMauType": extremeMauType,
@@ -2485,5 +3560,8 @@ mibBuilder.exportSymbols(
        "extremeMauType10GBaseBX10D": extremeMauType10GBaseBX10D,
        "extremeMauType10GBaseBX40U": extremeMauType10GBaseBX40U,
        "extremeMauType10GBaseBX40D": extremeMauType10GBaseBX40D,
+       "extremeMauType100GBase4WDM10KM": extremeMauType100GBase4WDM10KM,
+       "extremeMauType100GBase4WDM20KM": extremeMauType100GBase4WDM20KM,
+       "extremeMauType100GBase4WDM40KM": extremeMauType100GBase4WDM40KM,
        "extremeV2Traps": extremeV2Traps}
 )

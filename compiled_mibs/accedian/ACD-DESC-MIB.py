@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-DESC-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:04 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -117,7 +114,10 @@ acdDesc = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdDesc.setRevisions(
-        ("2010-11-10 01:00",
+        ("2015-12-25 01:00",
+         "2014-07-02 01:00",
+         "2013-08-10 01:00",
+         "2010-11-10 01:00",
          "2010-06-30 01:00",
          "2009-02-04 01:00",
          "2008-12-01 01:00",
@@ -192,6 +192,15 @@ acdDescSerialNumber = _AcdDescSerialNumber_Object(
 acdDescSerialNumber.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdDescSerialNumber.setStatus("current")
+_AcdDescHardwareOptions_Type = DisplayString
+_AcdDescHardwareOptions_Object = MibScalar
+acdDescHardwareOptions = _AcdDescHardwareOptions_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 1, 1, 7),
+    _AcdDescHardwareOptions_Type()
+)
+acdDescHardwareOptions.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdDescHardwareOptions.setStatus("current")
 _AcdDescConnectorTable_Object = MibTable
 acdDescConnectorTable = _AcdDescConnectorTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 1, 1, 10)
@@ -451,6 +460,25 @@ acdDescTsSecondThresPass = _AcdDescTsSecondThresPass_Object(
 acdDescTsSecondThresPass.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdDescTsSecondThresPass.setStatus("current")
+
+
+class _AcdDescTsLabel_Type(DisplayString):
+    """Custom type acdDescTsLabel based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 63),
+    )
+
+
+_AcdDescTsLabel_Type.__name__ = "DisplayString"
+_AcdDescTsLabel_Object = MibTableColumn
+acdDescTsLabel = _AcdDescTsLabel_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 1, 1, 12, 1, 7),
+    _AcdDescTsLabel_Type()
+)
+acdDescTsLabel.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdDescTsLabel.setStatus("current")
 _AcdDescMIBObjects_ObjectIdentity = ObjectIdentity
 acdDescMIBObjects = _AcdDescMIBObjects_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 1, 1, 15)
@@ -573,6 +601,25 @@ if mibBuilder.loadTexts:
 if mibBuilder.loadTexts:
     acdDescCpuUsageAverage900.setUnits("percent")
 
+
+class _AcdDescUptime_Type(Unsigned32):
+    """Custom type acdDescUptime based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 4294967295),
+    )
+
+
+_AcdDescUptime_Type.__name__ = "Unsigned32"
+_AcdDescUptime_Object = MibScalar
+acdDescUptime = _AcdDescUptime_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 1, 1, 25),
+    _AcdDescUptime_Type()
+)
+acdDescUptime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdDescUptime.setStatus("current")
+
 # Managed Objects groups
 
 acdDescGenGroup = ObjectGroup(
@@ -585,11 +632,13 @@ acdDescGenGroup.setObjects(
         ("ACD-DESC-MIB", "acdDescFirmwareVersion"),
         ("ACD-DESC-MIB", "acdDescHardwareVersion"),
         ("ACD-DESC-MIB", "acdDescSerialNumber"),
+        ("ACD-DESC-MIB", "acdDescHardwareOptions"),
         ("ACD-DESC-MIB", "acdDescCpuUsageCurrent"),
         ("ACD-DESC-MIB", "acdDescCpuUsageAverage15"),
         ("ACD-DESC-MIB", "acdDescCpuUsageAverage30"),
         ("ACD-DESC-MIB", "acdDescCpuUsageAverage60"),
-        ("ACD-DESC-MIB", "acdDescCpuUsageAverage900"))
+        ("ACD-DESC-MIB", "acdDescCpuUsageAverage900"),
+        ("ACD-DESC-MIB", "acdDescUptime"))
 )
 if mibBuilder.loadTexts:
     acdDescGenGroup.setStatus("current")
@@ -624,7 +673,8 @@ acdDescTsGroup.setObjects(
         ("ACD-DESC-MIB", "acdDescTsFirstThres"),
         ("ACD-DESC-MIB", "acdDescTsFisrtThresPass"),
         ("ACD-DESC-MIB", "acdDescTsSecondThres"),
-        ("ACD-DESC-MIB", "acdDescTsSecondThresPass"))
+        ("ACD-DESC-MIB", "acdDescTsSecondThresPass"),
+        ("ACD-DESC-MIB", "acdDescTsLabel"))
 )
 if mibBuilder.loadTexts:
     acdDescTsGroup.setStatus("current")
@@ -667,10 +717,10 @@ if mibBuilder.loadTexts:
 
 # Module compliance
 
-acdAlarmCompliance = ModuleCompliance(
+acdDescCompliance = ModuleCompliance(
     (1, 3, 6, 1, 4, 1, 22420, 1, 1, 15, 1, 1, 1)
 )
-acdAlarmCompliance.setObjects(
+acdDescCompliance.setObjects(
       *(("ACD-DESC-MIB", "acdDescGenGroup"),
         ("ACD-DESC-MIB", "acdDescConnectorGroup"),
         ("ACD-DESC-MIB", "acdDescPwrGroup"),
@@ -678,7 +728,7 @@ acdAlarmCompliance.setObjects(
         ("ACD-DESC-MIB", "acdDescNotificationsGroup"))
 )
 if mibBuilder.loadTexts:
-    acdAlarmCompliance.setStatus(
+    acdDescCompliance.setStatus(
         "current"
     )
 
@@ -696,6 +746,7 @@ mibBuilder.exportSymbols(
        "acdDescFirmwareVersion": acdDescFirmwareVersion,
        "acdDescHardwareVersion": acdDescHardwareVersion,
        "acdDescSerialNumber": acdDescSerialNumber,
+       "acdDescHardwareOptions": acdDescHardwareOptions,
        "acdDescConnectorTable": acdDescConnectorTable,
        "acdDescConnectorEntry": acdDescConnectorEntry,
        "acdDescConnectorID": acdDescConnectorID,
@@ -716,10 +767,11 @@ mibBuilder.exportSymbols(
        "acdDescTsFisrtThresPass": acdDescTsFisrtThresPass,
        "acdDescTsSecondThres": acdDescTsSecondThres,
        "acdDescTsSecondThresPass": acdDescTsSecondThresPass,
+       "acdDescTsLabel": acdDescTsLabel,
        "acdDescMIBObjects": acdDescMIBObjects,
        "acdDescConformance": acdDescConformance,
        "acdDescCompliances": acdDescCompliances,
-       "acdAlarmCompliance": acdAlarmCompliance,
+       "acdDescCompliance": acdDescCompliance,
        "acdDescGroups": acdDescGroups,
        "acdDescGenGroup": acdDescGenGroup,
        "acdDescConnectorGroup": acdDescConnectorGroup,
@@ -730,5 +782,6 @@ mibBuilder.exportSymbols(
        "acdDescCpuUsageAverage15": acdDescCpuUsageAverage15,
        "acdDescCpuUsageAverage30": acdDescCpuUsageAverage30,
        "acdDescCpuUsageAverage60": acdDescCpuUsageAverage60,
-       "acdDescCpuUsageAverage900": acdDescCpuUsageAverage900}
+       "acdDescCpuUsageAverage900": acdDescCpuUsageAverage900,
+       "acdDescUptime": acdDescUptime}
 )

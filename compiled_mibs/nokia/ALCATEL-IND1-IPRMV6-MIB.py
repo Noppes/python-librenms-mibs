@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-IPRMV6-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:33 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-IPRMV6-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -58,6 +55,10 @@ if 'mibBuilder' not in globals():
     "IPV6-TC",
     "Ipv6Address",
     "Ipv6IfIndex")
+
+(SnmpAdminString,) = mibBuilder.importSymbols(
+    "SNMP-FRAMEWORK-MIB",
+    "SnmpAdminString")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -123,7 +124,7 @@ alcatelIND1IPRMV6MIB = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     alcatelIND1IPRMV6MIB.setRevisions(
-        ("2007-04-03 00:00",)
+        ("2019-10-07 00:00",)
     )
 
 
@@ -327,6 +328,34 @@ alaIprmV6StaticRouteStatus = _AlaIprmV6StaticRouteStatus_Object(
 alaIprmV6StaticRouteStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaIprmV6StaticRouteStatus.setStatus("current")
+_AlaIprmV6StaticRouteTag_Type = Unsigned32
+_AlaIprmV6StaticRouteTag_Object = MibTableColumn
+alaIprmV6StaticRouteTag = _AlaIprmV6StaticRouteTag_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 2, 1, 1, 2, 1, 7),
+    _AlaIprmV6StaticRouteTag_Type()
+)
+alaIprmV6StaticRouteTag.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIprmV6StaticRouteTag.setStatus("current")
+
+
+class _AlaIprmV6StaticRouteName_Type(SnmpAdminString):
+    """Custom type alaIprmV6StaticRouteName based on SnmpAdminString"""
+    subtypeSpec = SnmpAdminString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AlaIprmV6StaticRouteName_Type.__name__ = "SnmpAdminString"
+_AlaIprmV6StaticRouteName_Object = MibTableColumn
+alaIprmV6StaticRouteName = _AlaIprmV6StaticRouteName_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 2, 2, 1, 1, 2, 1, 8),
+    _AlaIprmV6StaticRouteName_Type()
+)
+alaIprmV6StaticRouteName.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alaIprmV6StaticRouteName.setStatus("current")
 
 
 class _AlaIprmV6RtPrefLocal_Type(Integer32):
@@ -481,7 +510,9 @@ alaIprmV6ConfigMIBGroup.setObjects(
         ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6RtPrefOspf"),
         ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6RtPrefRip"),
         ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6RtPrefEbgp"),
-        ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6RtPrefIbgp"))
+        ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6RtPrefIbgp"),
+        ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6StaticRouteTag"),
+        ("ALCATEL-IND1-IPRMV6-MIB", "alaIprmV6StaticRouteName"))
 )
 if mibBuilder.loadTexts:
     alaIprmV6ConfigMIBGroup.setStatus("current")
@@ -534,6 +565,8 @@ mibBuilder.exportSymbols(
        "alaIprmV6StaticRouteIfIndex": alaIprmV6StaticRouteIfIndex,
        "alaIprmV6StaticRouteMetric": alaIprmV6StaticRouteMetric,
        "alaIprmV6StaticRouteStatus": alaIprmV6StaticRouteStatus,
+       "alaIprmV6StaticRouteTag": alaIprmV6StaticRouteTag,
+       "alaIprmV6StaticRouteName": alaIprmV6StaticRouteName,
        "alaIprmV6RtPrefLocal": alaIprmV6RtPrefLocal,
        "alaIprmV6RtPrefStatic": alaIprmV6RtPrefStatic,
        "alaIprmV6RtPrefOspf": alaIprmV6RtPrefOspf,

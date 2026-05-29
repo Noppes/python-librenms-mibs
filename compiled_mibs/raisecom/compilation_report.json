@@ -1,11 +1,15 @@
 {
-  "timestamp": "2025-10-02T12:23:10.160338",
+  "timestamp": "2026-05-29T09:47:50.733743",
   "stats": {
-    "total": 16,
-    "compiled": 10,
-    "failed": 4,
+    "total": 18,
+    "compiled": 11,
+    "failed": 5,
     "skipped": 2,
     "errors": [
+      {
+        "mib": "RAISECOM-COMMON-MANAGEMENT-MIB",
+        "error": "failed"
+      },
       {
         "mib": "RAISECOM-FANMONITOR-MIB",
         "error": "failed"
@@ -24,5 +28,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

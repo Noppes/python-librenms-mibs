@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nokia\aos7\ALCATEL-IND1-ISIS-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:15:12 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -147,7 +144,8 @@ timetraIsisMIBModule = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     timetraIsisMIBModule.setRevisions(
-        ("2007-07-02 00:00",
+        ("2019-11-27 00:00",
+         "2007-07-02 00:00",
          "1906-03-16 00:00",
          "1905-08-31 00:00",
          "1905-01-24 00:00",
@@ -388,13 +386,15 @@ class _VRtrIsisAuthType_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("none", 1),
           ("password", 2),
-          ("md5", 3))
+          ("md5", 3),
+          ("cryptoAuth", 4))
     )
 
 
@@ -951,6 +951,15 @@ vRtrIsisBfdAllVlanStatus = _VRtrIsisBfdAllVlanStatus_Object(
 vRtrIsisBfdAllVlanStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     vRtrIsisBfdAllVlanStatus.setStatus("current")
+_VRtrIsisAuthKeyChainId_Type = Unsigned32
+_VRtrIsisAuthKeyChainId_Object = MibTableColumn
+vRtrIsisAuthKeyChainId = _VRtrIsisAuthKeyChainId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 1, 1, 37),
+    _VRtrIsisAuthKeyChainId_Type()
+)
+vRtrIsisAuthKeyChainId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    vRtrIsisAuthKeyChainId.setStatus("current")
 _VRtrIsisLevelTable_Object = MibTable
 vRtrIsisLevelTable = _VRtrIsisLevelTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 2)
@@ -1026,14 +1035,16 @@ class _VRtrIsisLevelAuthType_Type(Integer32):
             *(0,
               1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("useGlobal", 0),
           ("none", 1),
           ("password", 2),
-          ("md5", 3))
+          ("md5", 3),
+          ("cryptoAuth", 4))
     )
 
 
@@ -1158,6 +1169,15 @@ vRtrIsisLevelPsnpAuthentication = _VRtrIsisLevelPsnpAuthentication_Object(
 vRtrIsisLevelPsnpAuthentication.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     vRtrIsisLevelPsnpAuthentication.setStatus("current")
+_VRtrIsisLevelAuthKeyChainId_Type = Unsigned32
+_VRtrIsisLevelAuthKeyChainId_Object = MibTableColumn
+vRtrIsisLevelAuthKeyChainId = _VRtrIsisLevelAuthKeyChainId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 2, 1, 11),
+    _VRtrIsisLevelAuthKeyChainId_Type()
+)
+vRtrIsisLevelAuthKeyChainId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    vRtrIsisLevelAuthKeyChainId.setStatus("current")
 _VRtrIsisStatsTable_Object = MibTable
 vRtrIsisStatsTable = _VRtrIsisStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 2, 3)
@@ -2370,13 +2390,15 @@ class _VRtrIsisIfHelloAuthType_Type(Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("none", 1),
           ("password", 2),
-          ("md5", 3))
+          ("md5", 3),
+          ("cryptoAuth", 4))
     )
 
 
@@ -2522,6 +2544,15 @@ vRtrIsisIfBfdStatus = _VRtrIsisIfBfdStatus_Object(
 vRtrIsisIfBfdStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     vRtrIsisIfBfdStatus.setStatus("current")
+_VRtrIsisIfHelloAuthKeyChainId_Type = Unsigned32
+_VRtrIsisIfHelloAuthKeyChainId_Object = MibTableColumn
+vRtrIsisIfHelloAuthKeyChainId = _VRtrIsisIfHelloAuthKeyChainId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 3, 1, 1, 15),
+    _VRtrIsisIfHelloAuthKeyChainId_Type()
+)
+vRtrIsisIfHelloAuthKeyChainId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIsisIfHelloAuthKeyChainId.setStatus("current")
 _VRtrIsisIfLevelTable_Object = MibTable
 vRtrIsisIfLevelTable = _VRtrIsisIfLevelTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 3, 2)
@@ -2607,14 +2638,16 @@ class _VRtrIsisIfLevelHelloAuthType_Type(Integer32):
             *(0,
               1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("useGlobal", 0),
           ("none", 1),
           ("password", 2),
-          ("md5", 3))
+          ("md5", 3),
+          ("cryptoAuth", 4))
     )
 
 
@@ -2751,6 +2784,15 @@ vRtrIsisIfLevelOperMetric = _VRtrIsisIfLevelOperMetric_Object(
 vRtrIsisIfLevelOperMetric.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     vRtrIsisIfLevelOperMetric.setStatus("current")
+_VRtrIsisIfLevelHelloAuthKeyChainId_Type = Unsigned32
+_VRtrIsisIfLevelHelloAuthKeyChainId_Object = MibTableColumn
+vRtrIsisIfLevelHelloAuthKeyChainId = _VRtrIsisIfLevelHelloAuthKeyChainId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 3, 2, 1, 12),
+    _VRtrIsisIfLevelHelloAuthKeyChainId_Type()
+)
+vRtrIsisIfLevelHelloAuthKeyChainId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    vRtrIsisIfLevelHelloAuthKeyChainId.setStatus("current")
 _VRtrIsisAdjObjs_ObjectIdentity = ObjectIdentity
 vRtrIsisAdjObjs = _VRtrIsisAdjObjs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 10, 14, 1, 10, 4)
@@ -3651,7 +3693,9 @@ vRtrIsisV4v0Group.setObjects(
         ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisActivateIPv4"),
         ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisActivateIPv6"),
         ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisBfdStatus"),
-        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisBfdAllVlanStatus"))
+        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisBfdAllVlanStatus"),
+        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisAuthKeyChainId"),
+        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisLevelAuthKeyChainId"))
 )
 if mibBuilder.loadTexts:
     vRtrIsisV4v0Group.setStatus("current")
@@ -3734,7 +3778,9 @@ vRtrIsisIfV4v0Group.setObjects(
         ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfLevelAdminMetric"),
         ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfLevelOperMetric"),
         ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfAddressFamily"),
-        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfBfdStatus"))
+        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfBfdStatus"),
+        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfHelloAuthKeyChainId"),
+        ("ALCATEL-IND1-ISIS-MIB", "vRtrIsisIfLevelHelloAuthKeyChainId"))
 )
 if mibBuilder.loadTexts:
     vRtrIsisIfV4v0Group.setStatus("current")
@@ -4204,6 +4250,7 @@ mibBuilder.exportSymbols(
        "vRtrIsisMTEnabled": vRtrIsisMTEnabled,
        "vRtrIsisBfdStatus": vRtrIsisBfdStatus,
        "vRtrIsisBfdAllVlanStatus": vRtrIsisBfdAllVlanStatus,
+       "vRtrIsisAuthKeyChainId": vRtrIsisAuthKeyChainId,
        "vRtrIsisLevelTable": vRtrIsisLevelTable,
        "vRtrIsisLevelEntry": vRtrIsisLevelEntry,
        "vRtrIsisLevel": vRtrIsisLevel,
@@ -4216,6 +4263,7 @@ mibBuilder.exportSymbols(
        "vRtrIsisLevelCsnpAuthentication": vRtrIsisLevelCsnpAuthentication,
        "vRtrIsisLevelHelloAuthentication": vRtrIsisLevelHelloAuthentication,
        "vRtrIsisLevelPsnpAuthentication": vRtrIsisLevelPsnpAuthentication,
+       "vRtrIsisLevelAuthKeyChainId": vRtrIsisLevelAuthKeyChainId,
        "vRtrIsisStatsTable": vRtrIsisStatsTable,
        "vRtrIsisStatsEntry": vRtrIsisStatsEntry,
        "vRtrIsisSpfRuns": vRtrIsisSpfRuns,
@@ -4333,6 +4381,7 @@ mibBuilder.exportSymbols(
        "vRtrIsisIfTypeDefault": vRtrIsisIfTypeDefault,
        "vRtrIsisIfAddressFamily": vRtrIsisIfAddressFamily,
        "vRtrIsisIfBfdStatus": vRtrIsisIfBfdStatus,
+       "vRtrIsisIfHelloAuthKeyChainId": vRtrIsisIfHelloAuthKeyChainId,
        "vRtrIsisIfLevelTable": vRtrIsisIfLevelTable,
        "vRtrIsisIfLevelEntry": vRtrIsisIfLevelEntry,
        "vRtrIsisIfLevel": vRtrIsisIfLevel,
@@ -4346,6 +4395,7 @@ mibBuilder.exportSymbols(
        "vRtrIsisIfLevelHelloTimer": vRtrIsisIfLevelHelloTimer,
        "vRtrIsisIfLevelAdminMetric": vRtrIsisIfLevelAdminMetric,
        "vRtrIsisIfLevelOperMetric": vRtrIsisIfLevelOperMetric,
+       "vRtrIsisIfLevelHelloAuthKeyChainId": vRtrIsisIfLevelHelloAuthKeyChainId,
        "vRtrIsisAdjObjs": vRtrIsisAdjObjs,
        "vRtrIsisISAdjTable": vRtrIsisISAdjTable,
        "vRtrIsisISAdjEntry": vRtrIsisISAdjEntry,

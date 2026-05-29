@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-LAG-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:13:38 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-LAG-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -129,6 +126,10 @@ if 'mibBuilder' not in globals():
 alcatelIND1LAGMIB = ModuleIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1)
 )
+if mibBuilder.loadTexts:
+    alcatelIND1LAGMIB.setRevisions(
+        ("2019-10-07 00:00",)
+    )
 
 
 # Types definitions
@@ -150,6 +151,22 @@ class LacpType(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("lacpOff", 0),
           ("lacpOn", 1))
+    )
+
+
+
+class McLagType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("mcLagOff", 0),
+          ("mcLagOn", 1))
     )
 
 
@@ -550,6 +567,57 @@ alclnkaggAggPreemptValue = _AlclnkaggAggPreemptValue_Object(
 alclnkaggAggPreemptValue.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alclnkaggAggPreemptValue.setStatus("current")
+
+
+class _AlclnkaggAggMinimumSize_Type(Integer32):
+    """Custom type alclnkaggAggMinimumSize based on Integer32"""
+    defaultValue = 1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 16),
+    )
+
+
+_AlclnkaggAggMinimumSize_Type.__name__ = "Integer32"
+_AlclnkaggAggMinimumSize_Object = MibTableColumn
+alclnkaggAggMinimumSize = _AlclnkaggAggMinimumSize_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 1, 1, 25),
+    _AlclnkaggAggMinimumSize_Type()
+)
+alclnkaggAggMinimumSize.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alclnkaggAggMinimumSize.setStatus("current")
+_AlclnkaggAggMcLagType_Type = McLagType
+_AlclnkaggAggMcLagType_Object = MibTableColumn
+alclnkaggAggMcLagType = _AlclnkaggAggMcLagType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 1, 1, 26),
+    _AlclnkaggAggMcLagType_Type()
+)
+alclnkaggAggMcLagType.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alclnkaggAggMcLagType.setStatus("current")
+
+
+class _AlclnkaggAggWTRTimer_Type(Integer32):
+    """Custom type alclnkaggAggWTRTimer based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 12),
+    )
+
+
+_AlclnkaggAggWTRTimer_Type.__name__ = "Integer32"
+_AlclnkaggAggWTRTimer_Object = MibTableColumn
+alclnkaggAggWTRTimer = _AlclnkaggAggWTRTimer_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 1, 1, 27),
+    _AlclnkaggAggWTRTimer_Type()
+)
+alclnkaggAggWTRTimer.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    alclnkaggAggWTRTimer.setStatus("current")
 _AlclnkaggAggPortListTable_Object = MibTable
 alclnkaggAggPortListTable = _AlclnkaggAggPortListTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 2)
@@ -739,6 +807,370 @@ alclnkaggAggId = _AlclnkaggAggId_Object(
 alclnkaggAggId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     alclnkaggAggId.setStatus("current")
+_AlclnkaggAggIdAccountTable_Object = MibTable
+alclnkaggAggIdAccountTable = _AlclnkaggAggIdAccountTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6)
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdAccountTable.setStatus("current")
+_AlclnkaggAggIdAccountEntry_Object = MibTableRow
+alclnkaggAggIdAccountEntry = _AlclnkaggAggIdAccountEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1)
+)
+alclnkaggAggIdAccountEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LAG-MIB", "alclnkaggAggIndex"),
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdAccountEntry.setStatus("current")
+_AlcRxUndersize_Type = Counter64
+_AlcRxUndersize_Object = MibTableColumn
+alcRxUndersize = _AlcRxUndersize_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 1),
+    _AlcRxUndersize_Type()
+)
+alcRxUndersize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxUndersize.setStatus("current")
+_AlcTxUndersize_Type = Counter64
+_AlcTxUndersize_Object = MibTableColumn
+alcTxUndersize = _AlcTxUndersize_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 2),
+    _AlcTxUndersize_Type()
+)
+alcTxUndersize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcTxUndersize.setStatus("current")
+_AlcRxOversize_Type = Counter64
+_AlcRxOversize_Object = MibTableColumn
+alcRxOversize = _AlcRxOversize_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 3),
+    _AlcRxOversize_Type()
+)
+alcRxOversize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxOversize.setStatus("current")
+_AlcTxOversize_Type = Counter64
+_AlcTxOversize_Object = MibTableColumn
+alcTxOversize = _AlcTxOversize_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 4),
+    _AlcTxOversize_Type()
+)
+alcTxOversize.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcTxOversize.setStatus("current")
+_AlcRxPackets64_Type = Counter64
+_AlcRxPackets64_Object = MibTableColumn
+alcRxPackets64 = _AlcRxPackets64_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 5),
+    _AlcRxPackets64_Type()
+)
+alcRxPackets64.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxPackets64.setStatus("current")
+_AlcRxPackets127_Type = Counter64
+_AlcRxPackets127_Object = MibTableColumn
+alcRxPackets127 = _AlcRxPackets127_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 6),
+    _AlcRxPackets127_Type()
+)
+alcRxPackets127.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxPackets127.setStatus("current")
+_AlcRxPackets255_Type = Counter64
+_AlcRxPackets255_Object = MibTableColumn
+alcRxPackets255 = _AlcRxPackets255_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 7),
+    _AlcRxPackets255_Type()
+)
+alcRxPackets255.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxPackets255.setStatus("current")
+_AlcRxPackets511_Type = Counter64
+_AlcRxPackets511_Object = MibTableColumn
+alcRxPackets511 = _AlcRxPackets511_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 8),
+    _AlcRxPackets511_Type()
+)
+alcRxPackets511.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxPackets511.setStatus("current")
+_AlcRxPackets1023_Type = Counter64
+_AlcRxPackets1023_Object = MibTableColumn
+alcRxPackets1023 = _AlcRxPackets1023_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 9),
+    _AlcRxPackets1023_Type()
+)
+alcRxPackets1023.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxPackets1023.setStatus("current")
+_AlcRxPacketsMax_Type = Counter64
+_AlcRxPacketsMax_Object = MibTableColumn
+alcRxPacketsMax = _AlcRxPacketsMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 10),
+    _AlcRxPacketsMax_Type()
+)
+alcRxPacketsMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxPacketsMax.setStatus("current")
+_AlcRxJabberFrames_Type = Counter64
+_AlcRxJabberFrames_Object = MibTableColumn
+alcRxJabberFrames = _AlcRxJabberFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 6, 1, 11),
+    _AlcRxJabberFrames_Type()
+)
+alcRxJabberFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcRxJabberFrames.setStatus("current")
+_AlclnkaggAggIdCounterTable_Object = MibTable
+alclnkaggAggIdCounterTable = _AlclnkaggAggIdCounterTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7)
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdCounterTable.setStatus("current")
+_AlclnkaggAggIdCounterEntry_Object = MibTableRow
+alclnkaggAggIdCounterEntry = _AlclnkaggAggIdCounterEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1)
+)
+alclnkaggAggIdCounterEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LAG-MIB", "alclnkaggAggIndex"),
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdCounterEntry.setStatus("current")
+_AlcInOctets_Type = Counter64
+_AlcInOctets_Object = MibTableColumn
+alcInOctets = _AlcInOctets_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 1),
+    _AlcInOctets_Type()
+)
+alcInOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInOctets.setStatus("current")
+_AlcOutOctets_Type = Counter64
+_AlcOutOctets_Object = MibTableColumn
+alcOutOctets = _AlcOutOctets_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 2),
+    _AlcOutOctets_Type()
+)
+alcOutOctets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutOctets.setStatus("current")
+_AlcInUcastPkts_Type = Counter64
+_AlcInUcastPkts_Object = MibTableColumn
+alcInUcastPkts = _AlcInUcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 3),
+    _AlcInUcastPkts_Type()
+)
+alcInUcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInUcastPkts.setStatus("current")
+_AlcOutUcastPkts_Type = Counter64
+_AlcOutUcastPkts_Object = MibTableColumn
+alcOutUcastPkts = _AlcOutUcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 4),
+    _AlcOutUcastPkts_Type()
+)
+alcOutUcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutUcastPkts.setStatus("current")
+_AlcInMcastPkts_Type = Counter64
+_AlcInMcastPkts_Object = MibTableColumn
+alcInMcastPkts = _AlcInMcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 5),
+    _AlcInMcastPkts_Type()
+)
+alcInMcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInMcastPkts.setStatus("current")
+_AlcOutMcastPkts_Type = Counter64
+_AlcOutMcastPkts_Object = MibTableColumn
+alcOutMcastPkts = _AlcOutMcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 6),
+    _AlcOutMcastPkts_Type()
+)
+alcOutMcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutMcastPkts.setStatus("current")
+_AlcInBcastPkts_Type = Counter64
+_AlcInBcastPkts_Object = MibTableColumn
+alcInBcastPkts = _AlcInBcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 7),
+    _AlcInBcastPkts_Type()
+)
+alcInBcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInBcastPkts.setStatus("current")
+_AlcOutBcastPkts_Type = Counter64
+_AlcOutBcastPkts_Object = MibTableColumn
+alcOutBcastPkts = _AlcOutBcastPkts_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 8),
+    _AlcOutBcastPkts_Type()
+)
+alcOutBcastPkts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutBcastPkts.setStatus("current")
+_AlcInPauseFrames_Type = Counter64
+_AlcInPauseFrames_Object = MibTableColumn
+alcInPauseFrames = _AlcInPauseFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 9),
+    _AlcInPauseFrames_Type()
+)
+alcInPauseFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInPauseFrames.setStatus("current")
+_AlcOutPauseFrames_Type = Counter64
+_AlcOutPauseFrames_Object = MibTableColumn
+alcOutPauseFrames = _AlcOutPauseFrames_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 7, 1, 10),
+    _AlcOutPauseFrames_Type()
+)
+alcOutPauseFrames.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutPauseFrames.setStatus("current")
+_AlclnkaggAggIdCounterErrTable_Object = MibTable
+alclnkaggAggIdCounterErrTable = _AlclnkaggAggIdCounterErrTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 8)
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdCounterErrTable.setStatus("current")
+_AlclnkaggAggIdCounterErrEntry_Object = MibTableRow
+alclnkaggAggIdCounterErrEntry = _AlclnkaggAggIdCounterErrEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 8, 1)
+)
+alclnkaggAggIdCounterErrEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LAG-MIB", "alclnkaggAggIndex"),
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdCounterErrEntry.setStatus("current")
+_AlcAlignmentsErrors_Type = Counter64
+_AlcAlignmentsErrors_Object = MibTableColumn
+alcAlignmentsErrors = _AlcAlignmentsErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 8, 1, 1),
+    _AlcAlignmentsErrors_Type()
+)
+alcAlignmentsErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcAlignmentsErrors.setStatus("current")
+_AlcFCSErrors_Type = Counter64
+_AlcFCSErrors_Object = MibTableColumn
+alcFCSErrors = _AlcFCSErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 8, 1, 2),
+    _AlcFCSErrors_Type()
+)
+alcFCSErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcFCSErrors.setStatus("current")
+_AlcIfInErrors_Type = Counter64
+_AlcIfInErrors_Object = MibTableColumn
+alcIfInErrors = _AlcIfInErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 8, 1, 3),
+    _AlcIfInErrors_Type()
+)
+alcIfInErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcIfInErrors.setStatus("current")
+_AlcIfOutErrors_Type = Counter64
+_AlcIfOutErrors_Object = MibTableColumn
+alcIfOutErrors = _AlcIfOutErrors_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 8, 1, 4),
+    _AlcIfOutErrors_Type()
+)
+alcIfOutErrors.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcIfOutErrors.setStatus("current")
+_AlclnkaggAggIdTrafficTable_Object = MibTable
+alclnkaggAggIdTrafficTable = _AlclnkaggAggIdTrafficTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 9)
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdTrafficTable.setStatus("current")
+_AlclnkaggAggIdTrafficEntry_Object = MibTableRow
+alclnkaggAggIdTrafficEntry = _AlclnkaggAggIdTrafficEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 9, 1)
+)
+alclnkaggAggIdTrafficEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LAG-MIB", "alclnkaggAggIndex"),
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdTrafficEntry.setStatus("current")
+_AlcInputPackets_Type = Counter64
+_AlcInputPackets_Object = MibTableColumn
+alcInputPackets = _AlcInputPackets_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 9, 1, 1),
+    _AlcInputPackets_Type()
+)
+alcInputPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInputPackets.setStatus("current")
+_AlcInputBytes_Type = Counter64
+_AlcInputBytes_Object = MibTableColumn
+alcInputBytes = _AlcInputBytes_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 9, 1, 2),
+    _AlcInputBytes_Type()
+)
+alcInputBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcInputBytes.setStatus("current")
+_AlcOutputPackets_Type = Counter64
+_AlcOutputPackets_Object = MibTableColumn
+alcOutputPackets = _AlcOutputPackets_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 9, 1, 3),
+    _AlcOutputPackets_Type()
+)
+alcOutputPackets.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutputPackets.setStatus("current")
+_AlcOutputBytes_Type = Counter64
+_AlcOutputBytes_Object = MibTableColumn
+alcOutputBytes = _AlcOutputBytes_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 9, 1, 4),
+    _AlcOutputBytes_Type()
+)
+alcOutputBytes.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alcOutputBytes.setStatus("current")
+_AlcLagStatsTable_Object = MibTable
+alcLagStatsTable = _AlcLagStatsTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 10)
+)
+if mibBuilder.loadTexts:
+    alcLagStatsTable.setStatus("current")
+_AlcLagStatsEntry_Object = MibTableRow
+alcLagStatsEntry = _AlcLagStatsEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 10, 1)
+)
+alcLagStatsEntry.setIndexNames(
+    (0, "ALCATEL-IND1-LAG-MIB", "alclnkaggAggIndex"),
+)
+if mibBuilder.loadTexts:
+    alcLagStatsEntry.setStatus("current")
+
+
+class _AlcLagClearStats_Type(Integer32):
+    """Custom type alcLagClearStats based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("reset", 1))
+    )
+
+
+_AlcLagClearStats_Type.__name__ = "Integer32"
+_AlcLagClearStats_Object = MibTableColumn
+alcLagClearStats = _AlcLagClearStats_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 1, 10, 1, 1),
+    _AlcLagClearStats_Type()
+)
+alcLagClearStats.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alcLagClearStats.setStatus("current")
 _AlclnkaggAggPort_ObjectIdentity = ObjectIdentity
 alclnkaggAggPort = _AlclnkaggAggPort_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 2)
@@ -1281,6 +1713,15 @@ alclnkaggAggPortStandbyState = _AlclnkaggAggPortStandbyState_Object(
 alclnkaggAggPortStandbyState.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alclnkaggAggPortStandbyState.setStatus("current")
+_AlclnkaggAggPortMcLagType_Type = McLagType
+_AlclnkaggAggPortMcLagType_Object = MibTableColumn
+alclnkaggAggPortMcLagType = _AlclnkaggAggPortMcLagType_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 2, 1, 1, 34),
+    _AlclnkaggAggPortMcLagType_Type()
+)
+alclnkaggAggPortMcLagType.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkaggAggPortMcLagType.setStatus("current")
 _AlclnkaggAggPortStatsTable_Object = MibTable
 alclnkaggAggPortStatsTable = _AlclnkaggAggPortStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 2, 2)
@@ -1592,6 +2033,290 @@ traplnkaggPortIfIndex = _TraplnkaggPortIfIndex_Object(
 traplnkaggPortIfIndex.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     traplnkaggPortIfIndex.setStatus("current")
+
+
+class _TraplnkaggLagDownReason_Type(Integer32):
+    """Custom type traplnkaggLagDownReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("adminDown", 1),
+          ("allPortsDown", 2),
+          ("minSize", 3))
+    )
+
+
+_TraplnkaggLagDownReason_Type.__name__ = "Integer32"
+_TraplnkaggLagDownReason_Object = MibScalar
+traplnkaggLagDownReason = _TraplnkaggLagDownReason_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 4, 3),
+    _TraplnkaggLagDownReason_Type()
+)
+traplnkaggLagDownReason.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    traplnkaggLagDownReason.setStatus("current")
+_AlclnkaggAggConfig_ObjectIdentity = ObjectIdentity
+alclnkaggAggConfig = _AlclnkaggAggConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5)
+)
+
+
+class _AlclnkAggLocalRangeOperMin_Type(Integer32):
+    """Custom type alclnkAggLocalRangeOperMin based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggLocalRangeOperMin_Type.__name__ = "Integer32"
+_AlclnkAggLocalRangeOperMin_Object = MibScalar
+alclnkAggLocalRangeOperMin = _AlclnkAggLocalRangeOperMin_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 1),
+    _AlclnkAggLocalRangeOperMin_Type()
+)
+alclnkAggLocalRangeOperMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkAggLocalRangeOperMin.setStatus("current")
+
+
+class _AlclnkAggLocalRangeOperMax_Type(Integer32):
+    """Custom type alclnkAggLocalRangeOperMax based on Integer32"""
+    defaultValue = 127
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggLocalRangeOperMax_Type.__name__ = "Integer32"
+_AlclnkAggLocalRangeOperMax_Object = MibScalar
+alclnkAggLocalRangeOperMax = _AlclnkAggLocalRangeOperMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 2),
+    _AlclnkAggLocalRangeOperMax_Type()
+)
+alclnkAggLocalRangeOperMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkAggLocalRangeOperMax.setStatus("current")
+
+
+class _AlclnkAggLocalRangeConfiguredMin_Type(Integer32):
+    """Custom type alclnkAggLocalRangeConfiguredMin based on Integer32"""
+    defaultValue = 0
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggLocalRangeConfiguredMin_Type.__name__ = "Integer32"
+_AlclnkAggLocalRangeConfiguredMin_Object = MibScalar
+alclnkAggLocalRangeConfiguredMin = _AlclnkAggLocalRangeConfiguredMin_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 3),
+    _AlclnkAggLocalRangeConfiguredMin_Type()
+)
+alclnkAggLocalRangeConfiguredMin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alclnkAggLocalRangeConfiguredMin.setStatus("current")
+
+
+class _AlclnkAggLocalRangeConfiguredMax_Type(Integer32):
+    """Custom type alclnkAggLocalRangeConfiguredMax based on Integer32"""
+    defaultValue = 127
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggLocalRangeConfiguredMax_Type.__name__ = "Integer32"
+_AlclnkAggLocalRangeConfiguredMax_Object = MibScalar
+alclnkAggLocalRangeConfiguredMax = _AlclnkAggLocalRangeConfiguredMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 4),
+    _AlclnkAggLocalRangeConfiguredMax_Type()
+)
+alclnkAggLocalRangeConfiguredMax.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alclnkAggLocalRangeConfiguredMax.setStatus("current")
+
+
+class _AlclnkAggPeerRangeOperMin_Type(Integer32):
+    """Custom type alclnkAggPeerRangeOperMin based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggPeerRangeOperMin_Type.__name__ = "Integer32"
+_AlclnkAggPeerRangeOperMin_Object = MibScalar
+alclnkAggPeerRangeOperMin = _AlclnkAggPeerRangeOperMin_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 5),
+    _AlclnkAggPeerRangeOperMin_Type()
+)
+alclnkAggPeerRangeOperMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkAggPeerRangeOperMin.setStatus("current")
+
+
+class _AlclnkAggPeerRangeOperMax_Type(Integer32):
+    """Custom type alclnkAggPeerRangeOperMax based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggPeerRangeOperMax_Type.__name__ = "Integer32"
+_AlclnkAggPeerRangeOperMax_Object = MibScalar
+alclnkAggPeerRangeOperMax = _AlclnkAggPeerRangeOperMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 6),
+    _AlclnkAggPeerRangeOperMax_Type()
+)
+alclnkAggPeerRangeOperMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkAggPeerRangeOperMax.setStatus("current")
+
+
+class _AlclnkAggPeerRangeConfiguredMin_Type(Integer32):
+    """Custom type alclnkAggPeerRangeConfiguredMin based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggPeerRangeConfiguredMin_Type.__name__ = "Integer32"
+_AlclnkAggPeerRangeConfiguredMin_Object = MibScalar
+alclnkAggPeerRangeConfiguredMin = _AlclnkAggPeerRangeConfiguredMin_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 7),
+    _AlclnkAggPeerRangeConfiguredMin_Type()
+)
+alclnkAggPeerRangeConfiguredMin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alclnkAggPeerRangeConfiguredMin.setStatus("current")
+
+
+class _AlclnkAggPeerRangeConfiguredMax_Type(Integer32):
+    """Custom type alclnkAggPeerRangeConfiguredMax based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggPeerRangeConfiguredMax_Type.__name__ = "Integer32"
+_AlclnkAggPeerRangeConfiguredMax_Object = MibScalar
+alclnkAggPeerRangeConfiguredMax = _AlclnkAggPeerRangeConfiguredMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 8),
+    _AlclnkAggPeerRangeConfiguredMax_Type()
+)
+alclnkAggPeerRangeConfiguredMax.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alclnkAggPeerRangeConfiguredMax.setStatus("current")
+
+
+class _AlclnkAggMcLagRangeOperMin_Type(Integer32):
+    """Custom type alclnkAggMcLagRangeOperMin based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggMcLagRangeOperMin_Type.__name__ = "Integer32"
+_AlclnkAggMcLagRangeOperMin_Object = MibScalar
+alclnkAggMcLagRangeOperMin = _AlclnkAggMcLagRangeOperMin_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 9),
+    _AlclnkAggMcLagRangeOperMin_Type()
+)
+alclnkAggMcLagRangeOperMin.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkAggMcLagRangeOperMin.setStatus("current")
+
+
+class _AlclnkAggMcLagRangeOperMax_Type(Integer32):
+    """Custom type alclnkAggMcLagRangeOperMax based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggMcLagRangeOperMax_Type.__name__ = "Integer32"
+_AlclnkAggMcLagRangeOperMax_Object = MibScalar
+alclnkAggMcLagRangeOperMax = _AlclnkAggMcLagRangeOperMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 10),
+    _AlclnkAggMcLagRangeOperMax_Type()
+)
+alclnkAggMcLagRangeOperMax.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alclnkAggMcLagRangeOperMax.setStatus("current")
+
+
+class _AlclnkAggMcLagRangeConfiguredMin_Type(Integer32):
+    """Custom type alclnkAggMcLagRangeConfiguredMin based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggMcLagRangeConfiguredMin_Type.__name__ = "Integer32"
+_AlclnkAggMcLagRangeConfiguredMin_Object = MibScalar
+alclnkAggMcLagRangeConfiguredMin = _AlclnkAggMcLagRangeConfiguredMin_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 11),
+    _AlclnkAggMcLagRangeConfiguredMin_Type()
+)
+alclnkAggMcLagRangeConfiguredMin.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alclnkAggMcLagRangeConfiguredMin.setStatus("current")
+
+
+class _AlclnkAggMcLagRangeConfiguredMax_Type(Integer32):
+    """Custom type alclnkAggMcLagRangeConfiguredMax based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 127),
+    )
+
+
+_AlclnkAggMcLagRangeConfiguredMax_Type.__name__ = "Integer32"
+_AlclnkAggMcLagRangeConfiguredMax_Object = MibScalar
+alclnkAggMcLagRangeConfiguredMax = _AlclnkAggMcLagRangeConfiguredMax_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 1, 5, 12),
+    _AlclnkAggMcLagRangeConfiguredMax_Type()
+)
+alclnkAggMcLagRangeConfiguredMax.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alclnkAggMcLagRangeConfiguredMax.setStatus("current")
 _AlcatelIND1LAGMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1LAGMIBConformance = _AlcatelIND1LAGMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2)
@@ -1625,6 +2350,9 @@ alclnkaggAggGroup.setObjects(
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPartnerSystemID"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPartnerSystemPriority"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPartnerOperKey"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggId"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggMinimumSize"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPartnerAdminKey"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggSize"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggNumber"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggDescr"),
@@ -1637,19 +2365,14 @@ alclnkaggAggGroup.setObjects(
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPrimaryPortIndex"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPrimaryPortPosition"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPreemptState"),
-        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPreemptValue"))
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPreemptValue"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggEniActivate"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggRowStatus"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggMcLagType"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggWTRTimer"))
 )
 if mibBuilder.loadTexts:
     alclnkaggAggGroup.setStatus("current")
-
-alclnkaggTablesLastChangedGroup = ObjectGroup(
-    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 1, 6)
-)
-alclnkaggTablesLastChangedGroup.setObjects(
-    ("ALCATEL-IND1-LAG-MIB", "alclnkaggTablesLastChanged")
-)
-if mibBuilder.loadTexts:
-    alclnkaggTablesLastChangedGroup.setStatus("current")
 
 alclnkaggAggPortListGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 2)
@@ -1694,7 +2417,9 @@ alclnkaggAggPortGroup.setObjects(
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortLinkState"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortPrimary"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortLacpType"),
-        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortStandbyState"))
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortStandbyState"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortRowStatus"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortMcLagType"))
 )
 if mibBuilder.loadTexts:
     alclnkaggAggPortGroup.setStatus("current")
@@ -1728,20 +2453,131 @@ alclnkaggAggPortDebugGroup.setObjects(
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugActorSyncTransitionCount"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugPartnerSyncTransitionCount"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugActorChangeCount"),
-        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugPartnerChangeCount"))
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugPartnerChangeCount"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugMuxReason"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugMuxState"))
 )
 if mibBuilder.loadTexts:
     alclnkaggAggPortDebugGroup.setStatus("current")
+
+alclnkaggTablesLastChangedGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 6)
+)
+alclnkaggTablesLastChangedGroup.setObjects(
+    ("ALCATEL-IND1-LAG-MIB", "alclnkaggTablesLastChanged")
+)
+if mibBuilder.loadTexts:
+    alclnkaggTablesLastChangedGroup.setStatus("current")
 
 lnkaggNotificationVarsGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 7)
 )
 lnkaggNotificationVarsGroup.setObjects(
       *(("ALCATEL-IND1-LAG-MIB", "traplnkaggAggId"),
-        ("ALCATEL-IND1-LAG-MIB", "traplnkaggPortIfIndex"))
+        ("ALCATEL-IND1-LAG-MIB", "traplnkaggPortIfIndex"),
+        ("ALCATEL-IND1-LAG-MIB", "traplnkaggLagDownReason"))
 )
 if mibBuilder.loadTexts:
     lnkaggNotificationVarsGroup.setStatus("current")
+
+alclnkaggSlotGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 9)
+)
+alclnkaggSlotGroup.setObjects(
+      *(("ALCATEL-IND1-LAG-MIB", "alclnkaggSlotStatus"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggMultipleAggPerSlot"))
+)
+if mibBuilder.loadTexts:
+    alclnkaggSlotGroup.setStatus("current")
+
+alclnkaggAggConfigGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 10)
+)
+alclnkaggAggConfigGroup.setObjects(
+      *(("ALCATEL-IND1-LAG-MIB", "alclnkAggLocalRangeOperMin"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggLocalRangeOperMax"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggLocalRangeConfiguredMin"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggLocalRangeConfiguredMax"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggPeerRangeOperMin"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggPeerRangeOperMax"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggPeerRangeConfiguredMin"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggPeerRangeConfiguredMax"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggMcLagRangeOperMin"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggMcLagRangeOperMax"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggMcLagRangeConfiguredMin"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkAggMcLagRangeConfiguredMax"))
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggConfigGroup.setStatus("current")
+
+alclnkaggAggIdAccountGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 11)
+)
+alclnkaggAggIdAccountGroup.setObjects(
+      *(("ALCATEL-IND1-LAG-MIB", "alcRxUndersize"),
+        ("ALCATEL-IND1-LAG-MIB", "alcTxUndersize"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxOversize"),
+        ("ALCATEL-IND1-LAG-MIB", "alcTxOversize"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxPackets64"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxPackets127"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxPackets255"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxPackets511"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxPackets1023"),
+        ("ALCATEL-IND1-LAG-MIB", "alcRxPacketsMax"))
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdAccountGroup.setStatus("current")
+
+alclnkaggAggIdCounterGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 12)
+)
+alclnkaggAggIdCounterGroup.setObjects(
+      *(("ALCATEL-IND1-LAG-MIB", "alcInOctets"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutOctets"),
+        ("ALCATEL-IND1-LAG-MIB", "alcInUcastPkts"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutUcastPkts"),
+        ("ALCATEL-IND1-LAG-MIB", "alcInMcastPkts"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutMcastPkts"),
+        ("ALCATEL-IND1-LAG-MIB", "alcInBcastPkts"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutBcastPkts"),
+        ("ALCATEL-IND1-LAG-MIB", "alcInPauseFrames"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutPauseFrames"))
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdCounterGroup.setStatus("current")
+
+alclnkaggAggIdCounterErrGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 13)
+)
+alclnkaggAggIdCounterErrGroup.setObjects(
+      *(("ALCATEL-IND1-LAG-MIB", "alcAlignmentsErrors"),
+        ("ALCATEL-IND1-LAG-MIB", "alcFCSErrors"),
+        ("ALCATEL-IND1-LAG-MIB", "alcIfInErrors"),
+        ("ALCATEL-IND1-LAG-MIB", "alcIfOutErrors"))
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdCounterErrGroup.setStatus("current")
+
+alclnkaggAggIdTrafficGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 14)
+)
+alclnkaggAggIdTrafficGroup.setObjects(
+      *(("ALCATEL-IND1-LAG-MIB", "alcInputPackets"),
+        ("ALCATEL-IND1-LAG-MIB", "alcInputBytes"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutputPackets"),
+        ("ALCATEL-IND1-LAG-MIB", "alcOutputBytes"))
+)
+if mibBuilder.loadTexts:
+    alclnkaggAggIdTrafficGroup.setStatus("current")
+
+alcLagStatsMIBGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 13, 1, 2, 1, 15)
+)
+alcLagStatsMIBGroup.setObjects(
+    ("ALCATEL-IND1-LAG-MIB", "alcLagClearStats")
+)
+if mibBuilder.loadTexts:
+    alcLagStatsMIBGroup.setStatus("current")
 
 
 # Notification objects
@@ -1763,7 +2599,8 @@ lnkaggAggDown = NotificationType(
 )
 lnkaggAggDown.setObjects(
       *(("ALCATEL-IND1-LAG-MIB", "traplnkaggAggId"),
-        ("ALCATEL-IND1-LAG-MIB", "traplnkaggPortIfIndex"))
+        ("ALCATEL-IND1-LAG-MIB", "traplnkaggPortIfIndex"),
+        ("ALCATEL-IND1-LAG-MIB", "traplnkaggLagDownReason"))
 )
 if mibBuilder.loadTexts:
     lnkaggAggDown.setStatus(
@@ -1851,9 +2688,11 @@ alclnkaggAggCompliance.setObjects(
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortGroup"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggTablesLastChangedGroup"),
         ("ALCATEL-IND1-LAG-MIB", "lnkaggNotificationVarsGroup"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggSlotGroup"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortListGroup"),
         ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortStatsGroup"),
-        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugGroup"))
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggPortDebugGroup"),
+        ("ALCATEL-IND1-LAG-MIB", "alclnkaggAggConfigGroup"))
 )
 if mibBuilder.loadTexts:
     alclnkaggAggCompliance.setStatus(
@@ -1866,6 +2705,7 @@ if mibBuilder.loadTexts:
 mibBuilder.exportSymbols(
     "ALCATEL-IND1-LAG-MIB",
     **{"LacpType": LacpType,
+       "McLagType": McLagType,
        "alcatelIND1LAGMIB": alcatelIND1LAGMIB,
        "alcatelIND1LAGMIBObjects": alcatelIND1LAGMIBObjects,
        "alclnkaggAgg": alclnkaggAgg,
@@ -1895,6 +2735,9 @@ mibBuilder.exportSymbols(
        "alclnkaggAggRowStatus": alclnkaggAggRowStatus,
        "alclnkaggAggPreemptState": alclnkaggAggPreemptState,
        "alclnkaggAggPreemptValue": alclnkaggAggPreemptValue,
+       "alclnkaggAggMinimumSize": alclnkaggAggMinimumSize,
+       "alclnkaggAggMcLagType": alclnkaggAggMcLagType,
+       "alclnkaggAggWTRTimer": alclnkaggAggWTRTimer,
        "alclnkaggAggPortListTable": alclnkaggAggPortListTable,
        "alclnkaggAggPortListEntry": alclnkaggAggPortListEntry,
        "alclnkaggAggPortListPorts": alclnkaggAggPortListPorts,
@@ -1908,6 +2751,46 @@ mibBuilder.exportSymbols(
        "alclnkaggAggIdIfIndexEntry": alclnkaggAggIdIfIndexEntry,
        "alclnkaggIfIndex": alclnkaggIfIndex,
        "alclnkaggAggId": alclnkaggAggId,
+       "alclnkaggAggIdAccountTable": alclnkaggAggIdAccountTable,
+       "alclnkaggAggIdAccountEntry": alclnkaggAggIdAccountEntry,
+       "alcRxUndersize": alcRxUndersize,
+       "alcTxUndersize": alcTxUndersize,
+       "alcRxOversize": alcRxOversize,
+       "alcTxOversize": alcTxOversize,
+       "alcRxPackets64": alcRxPackets64,
+       "alcRxPackets127": alcRxPackets127,
+       "alcRxPackets255": alcRxPackets255,
+       "alcRxPackets511": alcRxPackets511,
+       "alcRxPackets1023": alcRxPackets1023,
+       "alcRxPacketsMax": alcRxPacketsMax,
+       "alcRxJabberFrames": alcRxJabberFrames,
+       "alclnkaggAggIdCounterTable": alclnkaggAggIdCounterTable,
+       "alclnkaggAggIdCounterEntry": alclnkaggAggIdCounterEntry,
+       "alcInOctets": alcInOctets,
+       "alcOutOctets": alcOutOctets,
+       "alcInUcastPkts": alcInUcastPkts,
+       "alcOutUcastPkts": alcOutUcastPkts,
+       "alcInMcastPkts": alcInMcastPkts,
+       "alcOutMcastPkts": alcOutMcastPkts,
+       "alcInBcastPkts": alcInBcastPkts,
+       "alcOutBcastPkts": alcOutBcastPkts,
+       "alcInPauseFrames": alcInPauseFrames,
+       "alcOutPauseFrames": alcOutPauseFrames,
+       "alclnkaggAggIdCounterErrTable": alclnkaggAggIdCounterErrTable,
+       "alclnkaggAggIdCounterErrEntry": alclnkaggAggIdCounterErrEntry,
+       "alcAlignmentsErrors": alcAlignmentsErrors,
+       "alcFCSErrors": alcFCSErrors,
+       "alcIfInErrors": alcIfInErrors,
+       "alcIfOutErrors": alcIfOutErrors,
+       "alclnkaggAggIdTrafficTable": alclnkaggAggIdTrafficTable,
+       "alclnkaggAggIdTrafficEntry": alclnkaggAggIdTrafficEntry,
+       "alcInputPackets": alcInputPackets,
+       "alcInputBytes": alcInputBytes,
+       "alcOutputPackets": alcOutputPackets,
+       "alcOutputBytes": alcOutputBytes,
+       "alcLagStatsTable": alcLagStatsTable,
+       "alcLagStatsEntry": alcLagStatsEntry,
+       "alcLagClearStats": alcLagClearStats,
        "alclnkaggAggPort": alclnkaggAggPort,
        "alclnkaggAggPortTable": alclnkaggAggPortTable,
        "alclnkaggAggPortEntry": alclnkaggAggPortEntry,
@@ -1944,6 +2827,7 @@ mibBuilder.exportSymbols(
        "alclnkaggAggPortLacpType": alclnkaggAggPortLacpType,
        "alclnkaggAggPortRowStatus": alclnkaggAggPortRowStatus,
        "alclnkaggAggPortStandbyState": alclnkaggAggPortStandbyState,
+       "alclnkaggAggPortMcLagType": alclnkaggAggPortMcLagType,
        "alclnkaggAggPortStatsTable": alclnkaggAggPortStatsTable,
        "alclnkaggAggPortStatsEntry": alclnkaggAggPortStatsEntry,
        "alclnkaggAggPortStatsLACPDUsRx": alclnkaggAggPortStatsLACPDUsRx,
@@ -1972,16 +2856,37 @@ mibBuilder.exportSymbols(
        "lnkaggNotificationVars": lnkaggNotificationVars,
        "traplnkaggAggId": traplnkaggAggId,
        "traplnkaggPortIfIndex": traplnkaggPortIfIndex,
+       "traplnkaggLagDownReason": traplnkaggLagDownReason,
+       "alclnkaggAggConfig": alclnkaggAggConfig,
+       "alclnkAggLocalRangeOperMin": alclnkAggLocalRangeOperMin,
+       "alclnkAggLocalRangeOperMax": alclnkAggLocalRangeOperMax,
+       "alclnkAggLocalRangeConfiguredMin": alclnkAggLocalRangeConfiguredMin,
+       "alclnkAggLocalRangeConfiguredMax": alclnkAggLocalRangeConfiguredMax,
+       "alclnkAggPeerRangeOperMin": alclnkAggPeerRangeOperMin,
+       "alclnkAggPeerRangeOperMax": alclnkAggPeerRangeOperMax,
+       "alclnkAggPeerRangeConfiguredMin": alclnkAggPeerRangeConfiguredMin,
+       "alclnkAggPeerRangeConfiguredMax": alclnkAggPeerRangeConfiguredMax,
+       "alclnkAggMcLagRangeOperMin": alclnkAggMcLagRangeOperMin,
+       "alclnkAggMcLagRangeOperMax": alclnkAggMcLagRangeOperMax,
+       "alclnkAggMcLagRangeConfiguredMin": alclnkAggMcLagRangeConfiguredMin,
+       "alclnkAggMcLagRangeConfiguredMax": alclnkAggMcLagRangeConfiguredMax,
        "alcatelIND1LAGMIBConformance": alcatelIND1LAGMIBConformance,
        "alcatelIND1LAGMIBGroups": alcatelIND1LAGMIBGroups,
        "alclnkaggAggGroup": alclnkaggAggGroup,
-       "alclnkaggTablesLastChangedGroup": alclnkaggTablesLastChangedGroup,
        "alclnkaggAggPortListGroup": alclnkaggAggPortListGroup,
        "alclnkaggAggPortGroup": alclnkaggAggPortGroup,
        "alclnkaggAggPortStatsGroup": alclnkaggAggPortStatsGroup,
        "alclnkaggAggPortDebugGroup": alclnkaggAggPortDebugGroup,
+       "alclnkaggTablesLastChangedGroup": alclnkaggTablesLastChangedGroup,
        "lnkaggNotificationVarsGroup": lnkaggNotificationVarsGroup,
        "lnkaggTrapsGroup": lnkaggTrapsGroup,
+       "alclnkaggSlotGroup": alclnkaggSlotGroup,
+       "alclnkaggAggConfigGroup": alclnkaggAggConfigGroup,
+       "alclnkaggAggIdAccountGroup": alclnkaggAggIdAccountGroup,
+       "alclnkaggAggIdCounterGroup": alclnkaggAggIdCounterGroup,
+       "alclnkaggAggIdCounterErrGroup": alclnkaggAggIdCounterErrGroup,
+       "alclnkaggAggIdTrafficGroup": alclnkaggAggIdTrafficGroup,
+       "alcLagStatsMIBGroup": alcLagStatsMIBGroup,
        "alcatelIND1LAGMIBCompliances": alcatelIND1LAGMIBCompliances,
        "alclnkaggAggCompliance": alclnkaggAggCompliance,
        "lnkaggAggUp": lnkaggAggUp,

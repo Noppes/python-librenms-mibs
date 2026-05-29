@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-SA-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:09 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -113,7 +110,10 @@ acdSa = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdSa.setRevisions(
-        ("2011-12-21 01:00",
+        ("2016-09-23 01:00",
+         "2016-06-16 01:00",
+         "2016-05-26 01:00",
+         "2011-12-21 01:00",
          "2011-03-15 01:00")
     )
 
@@ -168,13 +168,15 @@ class AcdSaValidFlag(TextualConvention, Integer32):
         SingleValueConstraint(
             *(1,
               2,
-              3)
+              3,
+              4)
         )
     )
     namedValues = NamedValues(
         *(("valid", 1),
           ("adjusted", 2),
-          ("pending", 3))
+          ("pending", 3),
+          ("invalid", 4))
     )
 
 
@@ -634,7 +636,7 @@ acdSaServiceHistCounterPeriodIndex = _AcdSaServiceHistCounterPeriodIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 12, 1, 2, 2, 1, 1),
     _AcdSaServiceHistCounterPeriodIndex_Type()
 )
-acdSaServiceHistCounterPeriodIndex.setMaxAccess("not-accessible")
+acdSaServiceHistCounterPeriodIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdSaServiceHistCounterPeriodIndex.setStatus("current")
 _AcdSaServiceHistCounterIntervalEnd_Type = DateAndTime
@@ -688,7 +690,7 @@ class _AcdSaServiceHistCounterAvailRatio_Type(Unsigned32):
     """Custom type acdSaServiceHistCounterAvailRatio based on Unsigned32"""
     subtypeSpec = Unsigned32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 100000000),
+        ValueRangeConstraint(0, 100),
     )
 
 
@@ -928,7 +930,7 @@ acdSaMetricHistCounterID = _AcdSaMetricHistCounterID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 12, 1, 2, 5, 1, 1),
     _AcdSaMetricHistCounterID_Type()
 )
-acdSaMetricHistCounterID.setMaxAccess("not-accessible")
+acdSaMetricHistCounterID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdSaMetricHistCounterID.setStatus("current")
 _AcdSaMetricHistCounterPeriodIndex_Type = Unsigned32
@@ -937,7 +939,7 @@ acdSaMetricHistCounterPeriodIndex = _AcdSaMetricHistCounterPeriodIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 12, 1, 2, 5, 1, 2),
     _AcdSaMetricHistCounterPeriodIndex_Type()
 )
-acdSaMetricHistCounterPeriodIndex.setMaxAccess("not-accessible")
+acdSaMetricHistCounterPeriodIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdSaMetricHistCounterPeriodIndex.setStatus("current")
 _AcdSaMetricHistCounterIntervalEnd_Type = DateAndTime
@@ -1179,7 +1181,8 @@ acdSaServiceHistCounterGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 12, 2, 2, 4)
 )
 acdSaServiceHistCounterGroup.setObjects(
-      *(("ACD-SA-MIB", "acdSaServiceHistCounterIntervalEnd"),
+      *(("ACD-SA-MIB", "acdSaServiceHistCounterPeriodIndex"),
+        ("ACD-SA-MIB", "acdSaServiceHistCounterIntervalEnd"),
         ("ACD-SA-MIB", "acdSaServiceHistCounterValidFlag"),
         ("ACD-SA-MIB", "acdSaServiceHistCounterUpTime"),
         ("ACD-SA-MIB", "acdSaServiceHistCounterUaTime"),
@@ -1225,7 +1228,9 @@ acdSaMetricHistCounterGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 12, 2, 2, 7)
 )
 acdSaMetricHistCounterGroup.setObjects(
-      *(("ACD-SA-MIB", "acdSaMetricHistCounterIntervalEnd"),
+      *(("ACD-SA-MIB", "acdSaMetricHistCounterID"),
+        ("ACD-SA-MIB", "acdSaMetricHistCounterPeriodIndex"),
+        ("ACD-SA-MIB", "acdSaMetricHistCounterIntervalEnd"),
         ("ACD-SA-MIB", "acdSaMetricHistCounterValidFlag"),
         ("ACD-SA-MIB", "acdSaMetricHistCounterUaTime"),
         ("ACD-SA-MIB", "acdSaMetricHistCounterChliTime"))

@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-05-29T09:40:10.951421",
+  "stats": {
+    "total": 9,
+    "compiled": 8,
+    "failed": 0,
+    "skipped": 1,
+    "errors": []
+  },
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
+}

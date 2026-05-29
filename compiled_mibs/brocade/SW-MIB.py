@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\brocade\SW-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:21:58 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -65,8 +62,10 @@ if 'mibBuilder' not in globals():
     "SwSensorIndex",
     "SwTrunkMaster")
 
-(connUnitPortStatEntry,) = mibBuilder.importSymbols(
+(connUnitPortEntry,
+ connUnitPortStatEntry) = mibBuilder.importSymbols(
     "FCMGMT-MIB",
+    "connUnitPortEntry",
     "connUnitPortStatEntry")
 
 (ModuleCompliance,
@@ -113,11 +112,13 @@ if 'mibBuilder' not in globals():
 
 (DisplayString,
  PhysAddress,
- TextualConvention) = mibBuilder.importSymbols(
+ TextualConvention,
+ TruthValue) = mibBuilder.importSymbols(
     "SNMPv2-TC",
     "DisplayString",
     "PhysAddress",
-    "TextualConvention")
+    "TextualConvention",
+    "TruthValue")
 
 
 # MODULE-IDENTITY
@@ -156,9 +157,56 @@ if mibBuilder.loadTexts:
          "2009-11-05 12:00",
          "2009-11-05 05:00",
          "2009-11-06 11:30",
-         "1909-11-30 10:30",
-         "1909-12-03 17:30",
-         "1910-01-30 17:30")
+         "2009-11-30 10:30",
+         "2009-12-03 17:30",
+         "2010-01-30 17:30",
+         "2010-07-08 11:30",
+         "2010-07-15 11:30",
+         "2010-07-21 11:30",
+         "2010-08-06 11:30",
+         "2010-08-20 10:30",
+         "2010-10-07 10:30",
+         "2010-10-09 10:30",
+         "2010-10-25 10:30",
+         "2010-11-01 06:00",
+         "2010-11-02 10:30",
+         "2010-12-02 10:30",
+         "2010-12-08 10:30",
+         "2010-12-20 10:00",
+         "2010-12-21 04:00",
+         "2010-12-22 10:00",
+         "2010-12-30 10:00",
+         "2011-01-06 10:30",
+         "2011-01-07 10:30",
+         "2011-02-18 06:00",
+         "2012-02-23 10:30",
+         "2012-03-05 03:33",
+         "2012-05-15 14:25",
+         "2012-06-04 17:20",
+         "2012-06-14 10:00",
+         "2012-06-29 15:20",
+         "2012-07-10 16:00",
+         "2012-09-26 14:00",
+         "2013-03-21 13:00",
+         "2013-04-04 17:48",
+         "2013-04-22 11:30",
+         "2013-04-25 18:03",
+         "2013-05-15 14:30",
+         "2013-06-05 16:00",
+         "2013-06-29 10:00",
+         "2013-09-12 10:00",
+         "2013-10-04 13:40",
+         "2014-01-16 16:37",
+         "2014-03-04 12:30",
+         "2014-03-31 17:30",
+         "2014-04-15 12:20",
+         "2014-05-09 11:13",
+         "2014-07-01 12:03",
+         "2014-08-21 14:47",
+         "2014-09-05 11:12",
+         "2014-10-04 13:10",
+         "2014-10-04 13:10",
+         "2014-12-09 17:00")
     )
 
 
@@ -432,7 +480,59 @@ class SwFwClassesAreas(Integer32):
               97,
               98,
               99,
-              100)
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152)
         )
     )
     namedValues = NamedValues(
@@ -535,7 +635,59 @@ class SwFwClassesAreas(Integer32):
           ("swFwEPortTrunkUtil", 97),
           ("swFwFCUPortTrunkUtil", 98),
           ("swFwFOPPortTrunkUtil", 99),
-          ("swFwCPUMemUsage", 100))
+          ("swFwCPUMemUsage", 100),
+          ("filterFmCfg1", 101),
+          ("filterFmCfg2", 102),
+          ("filterFmCfg3", 103),
+          ("filterFmCfg4", 104),
+          ("filterFmCfg5", 105),
+          ("filterFmCfg6", 106),
+          ("filterFmCfg7", 107),
+          ("filterFmCfg8", 108),
+          ("filterFmCfg9", 109),
+          ("filterFmCfg10", 110),
+          ("filterFmCfg11", 111),
+          ("filterFmCfg12", 112),
+          ("filterFmCfg13", 113),
+          ("filterFmCfg14", 114),
+          ("filterFmCfg15", 115),
+          ("filterFmCfg16", 116),
+          ("filterFmCfg17", 117),
+          ("filterFmCfg18", 118),
+          ("filterFmCfg19", 119),
+          ("filterFmCfg20", 120),
+          ("filterFmCfg21", 121),
+          ("filterFmCfg22", 122),
+          ("filterFmCfg23", 123),
+          ("filterFmCfg24", 124),
+          ("filterFmCfg25", 125),
+          ("filterFmCfg26", 126),
+          ("filterFmCfg27", 127),
+          ("filterFmCfg28", 128),
+          ("filterFmCfg29", 129),
+          ("filterFmCfg30", 130),
+          ("filterFmCfg31", 131),
+          ("filterFmCfg32", 132),
+          ("filterFmCfg33", 133),
+          ("filterFmCfg34", 134),
+          ("filterFmCfg35", 135),
+          ("filterFmCfg36", 136),
+          ("filterFmCfg37", 137),
+          ("filterFmCfg38", 138),
+          ("filterFmCfg39", 139),
+          ("filterFmCfg40", 140),
+          ("filterFmCfg41", 141),
+          ("filterFmCfg42", 142),
+          ("filterFmCfg43", 143),
+          ("filterFmCfg44", 144),
+          ("filterFmCfg45", 145),
+          ("filterFmCfg46", 146),
+          ("filterFmCfg47", 147),
+          ("filterFmCfg48", 148),
+          ("filterFmCfg49", 149),
+          ("filterFmCfg50", 150),
+          ("filterFmCfg51", 151),
+          ("swFwPowerOnHours", 152))
     )
 
 
@@ -612,7 +764,8 @@ class SwFwEvent(Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -621,7 +774,8 @@ class SwFwEvent(Integer32):
           ("exceeded", 3),
           ("below", 4),
           ("above", 5),
-          ("inBetween", 6))
+          ("inBetween", 6),
+          ("lowBufferCrsd", 7))
     )
 
 
@@ -795,7 +949,7 @@ swFWLastUpdated = _SwFWLastUpdated_Object(
 )
 swFWLastUpdated.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFWLastUpdated.setStatus("current")
+    swFWLastUpdated.setStatus("obsolete")
 
 
 class _SwFlashLastUpdated_Type(DisplayString):
@@ -942,7 +1096,7 @@ swTelnetShellAdmStatus = _SwTelnetShellAdmStatus_Object(
 )
 swTelnetShellAdmStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swTelnetShellAdmStatus.setStatus("current")
+    swTelnetShellAdmStatus.setStatus("deprecated")
 
 
 class _SwSsn_Type(DisplayString):
@@ -1315,7 +1469,7 @@ swTrackChangesInfo = _SwTrackChangesInfo_Object(
 )
 swTrackChangesInfo.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTrackChangesInfo.setStatus("current")
+    swTrackChangesInfo.setStatus("obsolete")
 _SwID_Type = Integer32
 _SwID_Object = MibScalar
 swID = _SwID_Object(
@@ -1447,6 +1601,127 @@ swTestString = _SwTestString_Object(
 swTestString.setMaxAccess("not-accessible")
 if mibBuilder.loadTexts:
     swTestString.setStatus("current")
+_SwPortList_Type = OctetString
+_SwPortList_Object = MibScalar
+swPortList = _SwPortList_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 1, 33),
+    _SwPortList_Type()
+)
+swPortList.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    swPortList.setStatus("current")
+_SwBrcdTrapBitMask_Type = Integer32
+_SwBrcdTrapBitMask_Object = MibScalar
+swBrcdTrapBitMask = _SwBrcdTrapBitMask_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 1, 34),
+    _SwBrcdTrapBitMask_Type()
+)
+swBrcdTrapBitMask.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    swBrcdTrapBitMask.setStatus("current")
+
+
+class _SwFCPortPrevType_Type(Integer32):
+    """Custom type swFCPortPrevType based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unknown", 1),
+          ("other", 2),
+          ("fl-port", 3),
+          ("f-port", 4),
+          ("e-port", 5),
+          ("g-port", 6),
+          ("ex-port", 7),
+          ("d-port", 8))
+    )
+
+
+_SwFCPortPrevType_Type.__name__ = "Integer32"
+_SwFCPortPrevType_Object = MibScalar
+swFCPortPrevType = _SwFCPortPrevType_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 1, 35),
+    _SwFCPortPrevType_Type()
+)
+swFCPortPrevType.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    swFCPortPrevType.setStatus("current")
+
+
+class _SwDeviceStatus_Type(Integer32):
+    """Custom type swDeviceStatus based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("login", 1),
+          ("logout", 2),
+          ("unknown", 3))
+    )
+
+
+_SwDeviceStatus_Type.__name__ = "Integer32"
+_SwDeviceStatus_Object = MibScalar
+swDeviceStatus = _SwDeviceStatus_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 1, 36),
+    _SwDeviceStatus_Type()
+)
+swDeviceStatus.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    swDeviceStatus.setStatus("current")
+_SwBrcdBitObjVal_Type = Integer32
+_SwBrcdBitObjVal_Object = MibScalar
+swBrcdBitObjVal = _SwBrcdBitObjVal_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 1, 37),
+    _SwBrcdBitObjVal_Type()
+)
+swBrcdBitObjVal.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    swBrcdBitObjVal.setStatus("current")
+
+
+class _SwIODState_Type(Integer32):
+    """Custom type swIODState based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enabled", 1),
+          ("disabled", 2),
+          ("unknown", 3))
+    )
+
+
+_SwIODState_Type.__name__ = "Integer32"
+_SwIODState_Object = MibScalar
+swIODState = _SwIODState_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 1, 38),
+    _SwIODState_Type()
+)
+swIODState.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swIODState.setStatus("current")
 _SwFabric_ObjectIdentity = ObjectIdentity
 swFabric = _SwFabric_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 2)
@@ -1573,7 +1848,8 @@ class _SwNbBaudRate_Type(Integer32):
               32,
               64,
               128,
-              256)
+              256,
+              512)
         )
     )
     namedValues = NamedValues(
@@ -1585,7 +1861,8 @@ class _SwNbBaudRate_Type(Integer32):
           ("double", 32),
           ("quadruple", 64),
           ("octuple", 128),
-          ("decuple", 256))
+          ("decuple", 256),
+          ("sexdecuple", 512))
     )
 
 
@@ -1905,6 +2182,15 @@ swVfId = _SwVfId_Object(
 swVfId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     swVfId.setStatus("current")
+_SwVfName_Type = DisplayString
+_SwVfName_Object = MibScalar
+swVfName = _SwVfName_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 2, 16),
+    _SwVfName_Type()
+)
+swVfName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swVfName.setStatus("current")
 _SwModule_ObjectIdentity = ObjectIdentity
 swModule = _SwModule_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 3)
@@ -1922,7 +2208,7 @@ swAgtCmtyTable = _SwAgtCmtyTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 4, 11)
 )
 if mibBuilder.loadTexts:
-    swAgtCmtyTable.setStatus("current")
+    swAgtCmtyTable.setStatus("deprecated")
 _SwAgtCmtyEntry_Object = MibTableRow
 swAgtCmtyEntry = _SwAgtCmtyEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 4, 11, 1)
@@ -1931,7 +2217,7 @@ swAgtCmtyEntry.setIndexNames(
     (0, "SW-MIB", "swAgtCmtyIdx"),
 )
 if mibBuilder.loadTexts:
-    swAgtCmtyEntry.setStatus("current")
+    swAgtCmtyEntry.setStatus("deprecated")
 
 
 class _SwAgtCmtyIdx_Type(Integer32):
@@ -1950,7 +2236,7 @@ swAgtCmtyIdx = _SwAgtCmtyIdx_Object(
 )
 swAgtCmtyIdx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swAgtCmtyIdx.setStatus("current")
+    swAgtCmtyIdx.setStatus("deprecated")
 
 
 class _SwAgtCmtyStr_Type(DisplayString):
@@ -1969,7 +2255,7 @@ swAgtCmtyStr = _SwAgtCmtyStr_Object(
 )
 swAgtCmtyStr.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swAgtCmtyStr.setStatus("current")
+    swAgtCmtyStr.setStatus("deprecated")
 _SwAgtTrapRcp_Type = IpAddress
 _SwAgtTrapRcp_Object = MibTableColumn
 swAgtTrapRcp = _SwAgtTrapRcp_Object(
@@ -1978,7 +2264,7 @@ swAgtTrapRcp = _SwAgtTrapRcp_Object(
 )
 swAgtTrapRcp.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swAgtTrapRcp.setStatus("current")
+    swAgtTrapRcp.setStatus("deprecated")
 _SwAgtTrapSeverityLevel_Type = SwSevType
 _SwAgtTrapSeverityLevel_Object = MibTableColumn
 swAgtTrapSeverityLevel = _SwAgtTrapSeverityLevel_Object(
@@ -1987,7 +2273,45 @@ swAgtTrapSeverityLevel = _SwAgtTrapSeverityLevel_Object(
 )
 swAgtTrapSeverityLevel.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swAgtTrapSeverityLevel.setStatus("current")
+    swAgtTrapSeverityLevel.setStatus("deprecated")
+
+
+class _SwauthProtocolPassword_Type(OctetString):
+    """Custom type swauthProtocolPassword based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_SwauthProtocolPassword_Type.__name__ = "OctetString"
+_SwauthProtocolPassword_Object = MibScalar
+swauthProtocolPassword = _SwauthProtocolPassword_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 4, 12),
+    _SwauthProtocolPassword_Type()
+)
+swauthProtocolPassword.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    swauthProtocolPassword.setStatus("current")
+
+
+class _SwprivProtocolPassword_Type(OctetString):
+    """Custom type swprivProtocolPassword based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(1, 32),
+    )
+
+
+_SwprivProtocolPassword_Type.__name__ = "OctetString"
+_SwprivProtocolPassword_Object = MibScalar
+swprivProtocolPassword = _SwprivProtocolPassword_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 4, 13),
+    _SwprivProtocolPassword_Type()
+)
+swprivProtocolPassword.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    swprivProtocolPassword.setStatus("current")
 _SwFCport_ObjectIdentity = ObjectIdentity
 swFCport = _SwFCport_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 6)
@@ -2093,6 +2417,7 @@ class _SwFCPortPhyState_Type(Integer32):
               9,
               10,
               11,
+              14,
               255)
         )
     )
@@ -2108,6 +2433,7 @@ class _SwFCPortPhyState_Type(Integer32):
           ("lockRef", 9),
           ("validating", 10),
           ("invalidModule", 11),
+          ("noSigDet", 14),
           ("unknown", 255))
     )
 
@@ -2494,7 +2820,8 @@ class _SwFCPortSpeed_Type(Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
@@ -2504,7 +2831,8 @@ class _SwFCPortSpeed_Type(Integer32):
           ("four-GB", 4),
           ("eight-GB", 5),
           ("ten-GB", 6),
-          ("unknown", 7))
+          ("unknown", 7),
+          ("sixteen-GB", 8))
     )
 
 
@@ -2516,14 +2844,14 @@ swFCPortSpeed = _SwFCPortSpeed_Object(
 )
 swFCPortSpeed.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFCPortSpeed.setStatus("current")
+    swFCPortSpeed.setStatus("obsolete")
 
 
 class _SwFCPortName_Type(DisplayString):
     """Custom type swFCPortName based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 32),
+        ValueSizeConstraint(0, 255),
     )
 
 
@@ -2567,7 +2895,8 @@ class _SwFCPortBrcdType_Type(Integer32):
               4,
               5,
               6,
-              7)
+              7,
+              8)
         )
     )
     namedValues = NamedValues(
@@ -2577,7 +2906,8 @@ class _SwFCPortBrcdType_Type(Integer32):
           ("f-port", 4),
           ("e-port", 5),
           ("g-port", 6),
-          ("ex-port", 7))
+          ("ex-port", 7),
+          ("d-port", 8))
     )
 
 
@@ -2590,6 +2920,488 @@ swFCPortBrcdType = _SwFCPortBrcdType_Object(
 swFCPortBrcdType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     swFCPortBrcdType.setStatus("current")
+
+
+class _SwFCPortDisableReason_Type(Integer32):
+    """Custom type swFCPortDisableReason based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230)
+        )
+    )
+    namedValues = NamedValues(
+        *(("r-recover-fail", 1),
+          ("r-invalid-reason", 2),
+          ("r-forced", 3),
+          ("r-sw-disabled", 4),
+          ("r-bl-disabled", 5),
+          ("r-slot-off", 6),
+          ("r-sw-enabled", 7),
+          ("r-bl-enabled", 8),
+          ("r-slot-on", 9),
+          ("r-persistid", 10),
+          ("r-sw-violation", 11),
+          ("r-prv-dev-violation", 12),
+          ("r-pub-dev-violation", 13),
+          ("r-port-data-fail", 14),
+          ("r-online-incomplete", 15),
+          ("r-online-route-fail", 16),
+          ("r-inconsistent", 17),
+          ("r-set-vcc-fail", 18),
+          ("r-ecp-in-testing", 19),
+          ("r-elp-in-testing", 20),
+          ("r-ecp-retries-exceeded", 21),
+          ("r-invalid-ecp-state", 22),
+          ("r-bad-ecp-rcvd", 23),
+          ("r-send-rtmark-fail", 24),
+          ("r-send-ecp-fail", 25),
+          ("r-save-link-rtt-fail", 26),
+          ("r-em-incnst", 27),
+          ("r-pci-attach-fail", 28),
+          ("r-buf-starv", 29),
+          ("r-elp-fctl-mismatch", 30),
+          ("r-eport-disabled", 31),
+          ("r-trunk-with-vcxlt", 32),
+          ("r-sw-fl-port-not-ready", 33),
+          ("r-link-reinit", 34),
+          ("r-domain-id-change", 35),
+          ("r-auth-rejected", 36),
+          ("r-auth-timeout", 37),
+          ("r-auth-fail-retry", 38),
+          ("r-fcr-conf-mismatch1", 39),
+          ("r-fcr-conf-mismatch2", 40),
+          ("r-fcr-port-ld-mode-mismatch", 41),
+          ("r-fcr-ld-credit-mismatch", 42),
+          ("r-fcr-set-vcc-failed", 43),
+          ("r-fcr-set-rtc-failed", 44),
+          ("r-fcr-elp-ver-inconsis", 45),
+          ("r-fcr-elp-fctl-mismatch", 46),
+          ("r-fcr-pid-mismatch", 47),
+          ("r-fcr-tov-mismatch", 48),
+          ("r-fcr-ld-incompat", 49),
+          ("r-fcr-isolated", 50),
+          ("r-elp-retries-exceeded", 51),
+          ("r-fcr-exports-exceeded", 52),
+          ("r-fcr-license", 53),
+          ("r-fcr-conf-ex", 54),
+          ("r-fcr-ftag-over", 55),
+          ("r-fcr-ftag-conflict", 56),
+          ("r-fcr-fowner-conflict", 57),
+          ("r-fcr-zone-resource", 58),
+          ("r-fcr-port-state-to", 59),
+          ("r-fcr-authn-reject", 60),
+          ("r-fcr-sec-fcs-list", 61),
+          ("r-fcr-sec-failure", 62),
+          ("r-fcr-incompatible-mode", 63),
+          ("r-fcr-sec-scc-list", 64),
+          ("r-fcr-generic", 65),
+          ("r-sw-ex-port-not-ready", 66),
+          ("r-fcr-class-f-incompat", 67),
+          ("r-fcr-class-n-incompat", 68),
+          ("r-fcr-invalid-flow-rcvd", 69),
+          ("r-fcr-state-disabled", 70),
+          ("r-fdd-strict-exist", 71),
+          ("r-last-port-disable-msg", 72),
+          ("r-sw-l-port-not-support", 73),
+          ("r-peer-port-in-di-zone", 74),
+          ("r-zone-incompat", 75),
+          ("r-sw-config-l-port-not-support", 76),
+          ("r-sw-port-mirror-configured", 77),
+          ("r-nportlogin-inprogress", 78),
+          ("r-nonpiv", 79),
+          ("r-nomapping", 80),
+          ("r-unknowntype", 81),
+          ("r-nportoffline", 82),
+          ("r-flogifailed", 83),
+          ("r-nportbusy", 84),
+          ("r-noflogi", 85),
+          ("r-noflogiresp", 86),
+          ("r-flogidupalpa", 87),
+          ("r-loopcfg", 88),
+          ("r-noenclicense", 89),
+          ("r-nofiportmapping", 90),
+          ("r-brcdfabconn", 91),
+          ("r-port-reset", 92),
+          ("r-floginport", 93),
+          ("r-fdd-strict-conflict", 94),
+          ("r-fdd-cfg-conflict", 95),
+          ("r-fdd-cfg-conflict-na-neigh", 96),
+          ("r-fcr-insistent-front-did-mismatch", 97),
+          ("r-fcr-fabric-binding-failure", 98),
+          ("r-fcr-non-standard-domain-offset", 99),
+          ("r-area-in-use", 100),
+          ("r-mstr-diff-pg", 101),
+          ("r-mstr-diff-area", 102),
+          ("r-ta-not-supported", 103),
+          ("r-eport-not-supported", 104),
+          ("r-fport-not-supported", 105),
+          ("r-cfg-not-supported", 106),
+          ("r-port-ll-th-exceeded", 107),
+          ("r-port-synl-th-exceeded", 108),
+          ("r-port-pe-th-exceeded", 109),
+          ("f-port-disable-no-trk-lic", 110),
+          ("r-port-inw-th-exceeded", 111),
+          ("r-port-crc-th-exceeded", 112),
+          ("f-port-tr-disable-speed-not-ok", 113),
+          ("r-port-auto-disable", 114),
+          ("r-fcr-export-in-non-base-sw", 115),
+          ("r-base-switch-supports-no-device", 116),
+          ("r-port-trunk-proto-error", 117),
+          ("r-no-area-avail", 118),
+          ("r-cannot-unbind-existing-area", 119),
+          ("r-cannot-use-10bit-area", 120),
+          ("r-authentication-required", 121),
+          ("r-port-lr-th-exceeded", 122),
+          ("r-fcr-export-lf-conflict", 123),
+          ("r-incompat", 124),
+          ("r-did-overlap", 125),
+          ("r-zone-conflict", 126),
+          ("r-eport-seg", 127),
+          ("r-no-license", 128),
+          ("r-platform-db", 129),
+          ("r-sec-incompat", 130),
+          ("r-sec-violation", 131),
+          ("r-ecp-longdist", 132),
+          ("r-dup-wwn", 133),
+          ("r-eport-isolated", 134),
+          ("r-ad", 135),
+          ("r-esc-did-offset", 136),
+          ("r-esc-etiz", 137),
+          ("r-esc-fid", 138),
+          ("r-safe-zone", 139),
+          ("r-vf", 140),
+          ("r-vf-bs-incompat", 141),
+          ("r-pers-pid-on-lport", 142),
+          ("r-pers-pid-portaddr-collision", 143),
+          ("r-pers-pid-port-on-same-area", 144),
+          ("r-pers-pid-port-addr-bnd", 145),
+          ("r-msfr", 146),
+          ("r-sw-halfbw-lic", 147),
+          ("r-1g-mode-incompat", 148),
+          ("r-10g-mode-incompat", 149),
+          ("r-dual-mode-incompat", 150),
+          ("r-implict-plt-service-block", 151),
+          ("r-port-st-th-exceeded", 152),
+          ("r-port-c3txto-th-exceeded", 153),
+          ("r-eport-not-supported-def-sw", 154),
+          ("r-eport-ll-th-exceeded", 155),
+          ("r-eport-synl-th-exceeded", 156),
+          ("r-eport-pe-th-exceeded", 157),
+          ("r-eport-inw-th-exceeded", 158),
+          ("r-eport-crc-th-exceeded", 159),
+          ("r-eport-lr-th-exceeded", 160),
+          ("r-eport-st-th-exceeded", 161),
+          ("r-eport-c3txto-th-exceeded", 162),
+          ("r-fopport-ll-th-exceeded", 163),
+          ("r-fopport-synl-th-exceeded", 164),
+          ("r-fopport-pe-th-exceeded", 165),
+          ("r-fopport-inw-th-exceeded", 166),
+          ("r-fopport-crc-th-exceeded", 167),
+          ("r-fopport-lr-th-exceeded", 168),
+          ("r-fopport-st-th-exceeded", 169),
+          ("r-fopport-c3txto-th-exceeded", 170),
+          ("r-fcuport-ll-th-exceeded", 171),
+          ("r-fcuport-synl-th-exceeded", 172),
+          ("r-fcuport-pe-th-exceeded", 173),
+          ("r-fcuport-inw-th-exceeded", 174),
+          ("r-fcuport-crc-th-exceeded", 175),
+          ("r-fcuport-lr-th-exceeded", 176),
+          ("r-fcuport-st-th-exceeded", 177),
+          ("r-fcuport-c3txto-th-exceeded", 178),
+          ("r-port-no-area-avail-pers-disable", 179),
+          ("r-eport-locked", 180),
+          ("r-enh-tizone", 181),
+          ("r-sw-port-swap-not-supported", 182),
+          ("r-fport-slow-drain-condition", 183),
+          ("r-esc-vlanid", 184),
+          ("r-port-recov-state", 185),
+          ("r-port-auto-disable-losn", 186),
+          ("r-port-auto-disable-losg", 187),
+          ("r-port-auto-disable-ols", 188),
+          ("r-port-auto-disable-nos", 189),
+          ("r-port-auto-disable-lip", 190),
+          ("r-port-compression", 191),
+          ("r-port-encryption", 192),
+          ("r-port-enccomp-res", 193),
+          ("r-port-decommissioned", 194),
+          ("r-port-dportmode", 195),
+          ("r-port-dport-incompat", 196),
+          ("r-port-enc-comp-mismatch", 197),
+          ("r-non-rcs-rem-dom", 198),
+          ("r-port-fips-comp-mismatch", 199),
+          ("r-port-non-fips-comp-mismatch", 200),
+          ("r-port-enc-auth-disabled", 201),
+          ("r-port-disable-on-zeroize", 202),
+          ("r-cfgspeed-not-supported", 203),
+          ("r-fcr-ex-port-not-allowed", 204),
+          ("r-port-duplicate-pwwn", 205),
+          ("r-fcr-trunk-master-sfid-not-set", 206),
+          ("r-nportistrunkmem", 207),
+          ("r-policynotsupported", 208),
+          ("r-no-icl-license", 209),
+          ("r-no-ten-gig-license", 210),
+          ("r-fdd-strict-scc-conflict", 211),
+          ("r-fdd-strict-dcc-conflict", 212),
+          ("r-fdd-strict-fcs-conflict", 213),
+          ("r-fdd-strict-fabwide-conflict", 214),
+          ("r-fdd-strict-pwd-conflict", 215),
+          ("r-fcr-interop-conf", 216),
+          ("r-port-enc-interop-conflict", 217),
+          ("r-port-comp-interop-conflict", 218),
+          ("r-no-port-open-rsp", 219),
+          ("r-no-eicl-license", 220),
+          ("r-eicl-license-limited", 221),
+          ("r-esc-base-sw", 222),
+          ("r-sw-cpu-overload", 223),
+          ("r-no-icl-pod2-license", 224),
+          ("r-port-area-mismatch-pers-disable", 225),
+          ("r-unauthorized-device", 226),
+          ("r-max-flogi-reached", 227),
+          ("r-auth-not-supported-in-switch", 228),
+          ("r-icl-ex-on-non-vf", 229),
+          ("r-user-disabled-reason", 230))
+    )
+
+
+_SwFCPortDisableReason_Type.__name__ = "Integer32"
+_SwFCPortDisableReason_Object = MibTableColumn
+swFCPortDisableReason = _SwFCPortDisableReason_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 6, 2, 1, 40),
+    _SwFCPortDisableReason_Type()
+)
+swFCPortDisableReason.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    swFCPortDisableReason.setStatus("current")
 _SwNs_ObjectIdentity = ObjectIdentity
 swNs = _SwNs_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 7)
@@ -3119,7 +3931,7 @@ swFwSystem = _SwFwSystem_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 10)
 )
 if mibBuilder.loadTexts:
-    swFwSystem.setStatus("current")
+    swFwSystem.setStatus("obsolete")
 _SwFwFabricWatchLicense_Type = SwFwLicense
 _SwFwFabricWatchLicense_Object = MibScalar
 swFwFabricWatchLicense = _SwFwFabricWatchLicense_Object(
@@ -3128,13 +3940,13 @@ swFwFabricWatchLicense = _SwFwFabricWatchLicense_Object(
 )
 swFwFabricWatchLicense.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwFabricWatchLicense.setStatus("current")
+    swFwFabricWatchLicense.setStatus("obsolete")
 _SwFwClassAreaTable_Object = MibTable
 swFwClassAreaTable = _SwFwClassAreaTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 10, 2)
 )
 if mibBuilder.loadTexts:
-    swFwClassAreaTable.setStatus("current")
+    swFwClassAreaTable.setStatus("obsolete")
 _SwFwClassAreaEntry_Object = MibTableRow
 swFwClassAreaEntry = _SwFwClassAreaEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 10, 2, 1)
@@ -3143,7 +3955,7 @@ swFwClassAreaEntry.setIndexNames(
     (0, "SW-MIB", "swFwClassAreaIndex"),
 )
 if mibBuilder.loadTexts:
-    swFwClassAreaEntry.setStatus("current")
+    swFwClassAreaEntry.setStatus("obsolete")
 _SwFwClassAreaIndex_Type = SwFwClassesAreas
 _SwFwClassAreaIndex_Object = MibTableColumn
 swFwClassAreaIndex = _SwFwClassAreaIndex_Object(
@@ -3152,7 +3964,7 @@ swFwClassAreaIndex = _SwFwClassAreaIndex_Object(
 )
 swFwClassAreaIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwClassAreaIndex.setStatus("current")
+    swFwClassAreaIndex.setStatus("obsolete")
 _SwFwWriteThVals_Type = SwFwWriteVals
 _SwFwWriteThVals_Object = MibTableColumn
 swFwWriteThVals = _SwFwWriteThVals_Object(
@@ -3161,7 +3973,7 @@ swFwWriteThVals = _SwFwWriteThVals_Object(
 )
 swFwWriteThVals.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwWriteThVals.setStatus("current")
+    swFwWriteThVals.setStatus("obsolete")
 _SwFwDefaultUnit_Type = DisplayString
 _SwFwDefaultUnit_Object = MibTableColumn
 swFwDefaultUnit = _SwFwDefaultUnit_Object(
@@ -3170,7 +3982,7 @@ swFwDefaultUnit = _SwFwDefaultUnit_Object(
 )
 swFwDefaultUnit.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultUnit.setStatus("current")
+    swFwDefaultUnit.setStatus("obsolete")
 _SwFwDefaultTimebase_Type = SwFwTimebase
 _SwFwDefaultTimebase_Object = MibTableColumn
 swFwDefaultTimebase = _SwFwDefaultTimebase_Object(
@@ -3179,7 +3991,7 @@ swFwDefaultTimebase = _SwFwDefaultTimebase_Object(
 )
 swFwDefaultTimebase.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultTimebase.setStatus("current")
+    swFwDefaultTimebase.setStatus("obsolete")
 
 
 class _SwFwDefaultLow_Type(Integer32):
@@ -3198,7 +4010,7 @@ swFwDefaultLow = _SwFwDefaultLow_Object(
 )
 swFwDefaultLow.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultLow.setStatus("current")
+    swFwDefaultLow.setStatus("obsolete")
 
 
 class _SwFwDefaultHigh_Type(Integer32):
@@ -3217,7 +4029,7 @@ swFwDefaultHigh = _SwFwDefaultHigh_Object(
 )
 swFwDefaultHigh.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultHigh.setStatus("current")
+    swFwDefaultHigh.setStatus("obsolete")
 
 
 class _SwFwDefaultBufSize_Type(Integer32):
@@ -3236,7 +4048,7 @@ swFwDefaultBufSize = _SwFwDefaultBufSize_Object(
 )
 swFwDefaultBufSize.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultBufSize.setStatus("current")
+    swFwDefaultBufSize.setStatus("obsolete")
 _SwFwCustUnit_Type = DisplayString
 _SwFwCustUnit_Object = MibTableColumn
 swFwCustUnit = _SwFwCustUnit_Object(
@@ -3245,7 +4057,7 @@ swFwCustUnit = _SwFwCustUnit_Object(
 )
 swFwCustUnit.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwCustUnit.setStatus("current")
+    swFwCustUnit.setStatus("obsolete")
 _SwFwCustTimebase_Type = SwFwTimebase
 _SwFwCustTimebase_Object = MibTableColumn
 swFwCustTimebase = _SwFwCustTimebase_Object(
@@ -3254,7 +4066,7 @@ swFwCustTimebase = _SwFwCustTimebase_Object(
 )
 swFwCustTimebase.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustTimebase.setStatus("current")
+    swFwCustTimebase.setStatus("obsolete")
 
 
 class _SwFwCustLow_Type(Integer32):
@@ -3273,7 +4085,7 @@ swFwCustLow = _SwFwCustLow_Object(
 )
 swFwCustLow.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustLow.setStatus("current")
+    swFwCustLow.setStatus("obsolete")
 
 
 class _SwFwCustHigh_Type(Integer32):
@@ -3292,7 +4104,7 @@ swFwCustHigh = _SwFwCustHigh_Object(
 )
 swFwCustHigh.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustHigh.setStatus("current")
+    swFwCustHigh.setStatus("obsolete")
 
 
 class _SwFwCustBufSize_Type(Integer32):
@@ -3311,7 +4123,7 @@ swFwCustBufSize = _SwFwCustBufSize_Object(
 )
 swFwCustBufSize.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustBufSize.setStatus("current")
+    swFwCustBufSize.setStatus("obsolete")
 _SwFwThLevel_Type = SwFwLevels
 _SwFwThLevel_Object = MibTableColumn
 swFwThLevel = _SwFwThLevel_Object(
@@ -3320,7 +4132,7 @@ swFwThLevel = _SwFwThLevel_Object(
 )
 swFwThLevel.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwThLevel.setStatus("current")
+    swFwThLevel.setStatus("obsolete")
 _SwFwWriteActVals_Type = SwFwWriteVals
 _SwFwWriteActVals_Object = MibTableColumn
 swFwWriteActVals = _SwFwWriteActVals_Object(
@@ -3329,7 +4141,7 @@ swFwWriteActVals = _SwFwWriteActVals_Object(
 )
 swFwWriteActVals.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwWriteActVals.setStatus("current")
+    swFwWriteActVals.setStatus("obsolete")
 _SwFwDefaultChangedActs_Type = SwFwActs
 _SwFwDefaultChangedActs_Object = MibTableColumn
 swFwDefaultChangedActs = _SwFwDefaultChangedActs_Object(
@@ -3338,7 +4150,7 @@ swFwDefaultChangedActs = _SwFwDefaultChangedActs_Object(
 )
 swFwDefaultChangedActs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultChangedActs.setStatus("current")
+    swFwDefaultChangedActs.setStatus("obsolete")
 _SwFwDefaultExceededActs_Type = SwFwActs
 _SwFwDefaultExceededActs_Object = MibTableColumn
 swFwDefaultExceededActs = _SwFwDefaultExceededActs_Object(
@@ -3347,7 +4159,7 @@ swFwDefaultExceededActs = _SwFwDefaultExceededActs_Object(
 )
 swFwDefaultExceededActs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultExceededActs.setStatus("current")
+    swFwDefaultExceededActs.setStatus("obsolete")
 _SwFwDefaultBelowActs_Type = SwFwActs
 _SwFwDefaultBelowActs_Object = MibTableColumn
 swFwDefaultBelowActs = _SwFwDefaultBelowActs_Object(
@@ -3356,7 +4168,7 @@ swFwDefaultBelowActs = _SwFwDefaultBelowActs_Object(
 )
 swFwDefaultBelowActs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultBelowActs.setStatus("current")
+    swFwDefaultBelowActs.setStatus("obsolete")
 _SwFwDefaultAboveActs_Type = SwFwActs
 _SwFwDefaultAboveActs_Object = MibTableColumn
 swFwDefaultAboveActs = _SwFwDefaultAboveActs_Object(
@@ -3365,7 +4177,7 @@ swFwDefaultAboveActs = _SwFwDefaultAboveActs_Object(
 )
 swFwDefaultAboveActs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultAboveActs.setStatus("current")
+    swFwDefaultAboveActs.setStatus("obsolete")
 _SwFwDefaultInBetweenActs_Type = SwFwActs
 _SwFwDefaultInBetweenActs_Object = MibTableColumn
 swFwDefaultInBetweenActs = _SwFwDefaultInBetweenActs_Object(
@@ -3374,7 +4186,7 @@ swFwDefaultInBetweenActs = _SwFwDefaultInBetweenActs_Object(
 )
 swFwDefaultInBetweenActs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwDefaultInBetweenActs.setStatus("current")
+    swFwDefaultInBetweenActs.setStatus("obsolete")
 _SwFwCustChangedActs_Type = SwFwActs
 _SwFwCustChangedActs_Object = MibTableColumn
 swFwCustChangedActs = _SwFwCustChangedActs_Object(
@@ -3383,7 +4195,7 @@ swFwCustChangedActs = _SwFwCustChangedActs_Object(
 )
 swFwCustChangedActs.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustChangedActs.setStatus("current")
+    swFwCustChangedActs.setStatus("obsolete")
 _SwFwCustExceededActs_Type = SwFwActs
 _SwFwCustExceededActs_Object = MibTableColumn
 swFwCustExceededActs = _SwFwCustExceededActs_Object(
@@ -3392,7 +4204,7 @@ swFwCustExceededActs = _SwFwCustExceededActs_Object(
 )
 swFwCustExceededActs.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustExceededActs.setStatus("current")
+    swFwCustExceededActs.setStatus("obsolete")
 _SwFwCustBelowActs_Type = SwFwActs
 _SwFwCustBelowActs_Object = MibTableColumn
 swFwCustBelowActs = _SwFwCustBelowActs_Object(
@@ -3401,7 +4213,7 @@ swFwCustBelowActs = _SwFwCustBelowActs_Object(
 )
 swFwCustBelowActs.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustBelowActs.setStatus("current")
+    swFwCustBelowActs.setStatus("obsolete")
 _SwFwCustAboveActs_Type = SwFwActs
 _SwFwCustAboveActs_Object = MibTableColumn
 swFwCustAboveActs = _SwFwCustAboveActs_Object(
@@ -3410,7 +4222,7 @@ swFwCustAboveActs = _SwFwCustAboveActs_Object(
 )
 swFwCustAboveActs.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustAboveActs.setStatus("current")
+    swFwCustAboveActs.setStatus("obsolete")
 _SwFwCustInBetweenActs_Type = SwFwActs
 _SwFwCustInBetweenActs_Object = MibTableColumn
 swFwCustInBetweenActs = _SwFwCustInBetweenActs_Object(
@@ -3419,7 +4231,7 @@ swFwCustInBetweenActs = _SwFwCustInBetweenActs_Object(
 )
 swFwCustInBetweenActs.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwCustInBetweenActs.setStatus("current")
+    swFwCustInBetweenActs.setStatus("obsolete")
 _SwFwValidActs_Type = SwFwActs
 _SwFwValidActs_Object = MibTableColumn
 swFwValidActs = _SwFwValidActs_Object(
@@ -3428,7 +4240,7 @@ swFwValidActs = _SwFwValidActs_Object(
 )
 swFwValidActs.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwValidActs.setStatus("current")
+    swFwValidActs.setStatus("obsolete")
 _SwFwActLevel_Type = SwFwLevels
 _SwFwActLevel_Object = MibTableColumn
 swFwActLevel = _SwFwActLevel_Object(
@@ -3437,13 +4249,13 @@ swFwActLevel = _SwFwActLevel_Object(
 )
 swFwActLevel.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwActLevel.setStatus("current")
+    swFwActLevel.setStatus("obsolete")
 _SwFwThresholdTable_Object = MibTable
 swFwThresholdTable = _SwFwThresholdTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 10, 3)
 )
 if mibBuilder.loadTexts:
-    swFwThresholdTable.setStatus("current")
+    swFwThresholdTable.setStatus("obsolete")
 _SwFwThresholdEntry_Object = MibTableRow
 swFwThresholdEntry = _SwFwThresholdEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 10, 3, 1)
@@ -3453,7 +4265,7 @@ swFwThresholdEntry.setIndexNames(
     (0, "SW-MIB", "swFwThresholdIndex"),
 )
 if mibBuilder.loadTexts:
-    swFwThresholdEntry.setStatus("current")
+    swFwThresholdEntry.setStatus("obsolete")
 
 
 class _SwFwThresholdIndex_Type(Integer32):
@@ -3472,7 +4284,7 @@ swFwThresholdIndex = _SwFwThresholdIndex_Object(
 )
 swFwThresholdIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwThresholdIndex.setStatus("current")
+    swFwThresholdIndex.setStatus("obsolete")
 _SwFwStatus_Type = SwFwStatus
 _SwFwStatus_Object = MibTableColumn
 swFwStatus = _SwFwStatus_Object(
@@ -3481,7 +4293,7 @@ swFwStatus = _SwFwStatus_Object(
 )
 swFwStatus.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwStatus.setStatus("current")
+    swFwStatus.setStatus("obsolete")
 
 
 class _SwFwName_Type(DisplayString):
@@ -3500,7 +4312,7 @@ swFwName = _SwFwName_Object(
 )
 swFwName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwName.setStatus("current")
+    swFwName.setStatus("obsolete")
 
 
 class _SwFwLabel_Type(DisplayString):
@@ -3519,7 +4331,7 @@ swFwLabel = _SwFwLabel_Object(
 )
 swFwLabel.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwLabel.setStatus("current")
+    swFwLabel.setStatus("obsolete")
 
 
 class _SwFwCurVal_Type(Integer32):
@@ -3538,7 +4350,7 @@ swFwCurVal = _SwFwCurVal_Object(
 )
 swFwCurVal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwCurVal.setStatus("current")
+    swFwCurVal.setStatus("obsolete")
 _SwFwLastEvent_Type = SwFwEvent
 _SwFwLastEvent_Object = MibTableColumn
 swFwLastEvent = _SwFwLastEvent_Object(
@@ -3547,7 +4359,7 @@ swFwLastEvent = _SwFwLastEvent_Object(
 )
 swFwLastEvent.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwLastEvent.setStatus("current")
+    swFwLastEvent.setStatus("obsolete")
 
 
 class _SwFwLastEventVal_Type(Integer32):
@@ -3566,7 +4378,7 @@ swFwLastEventVal = _SwFwLastEventVal_Object(
 )
 swFwLastEventVal.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwLastEventVal.setStatus("current")
+    swFwLastEventVal.setStatus("obsolete")
 
 
 class _SwFwLastEventTime_Type(DisplayString):
@@ -3585,7 +4397,7 @@ swFwLastEventTime = _SwFwLastEventTime_Object(
 )
 swFwLastEventTime.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwLastEventTime.setStatus("current")
+    swFwLastEventTime.setStatus("obsolete")
 _SwFwLastState_Type = SwFwState
 _SwFwLastState_Object = MibTableColumn
 swFwLastState = _SwFwLastState_Object(
@@ -3594,7 +4406,7 @@ swFwLastState = _SwFwLastState_Object(
 )
 swFwLastState.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwLastState.setStatus("current")
+    swFwLastState.setStatus("obsolete")
 _SwFwBehaviorType_Type = SwFwBehavior
 _SwFwBehaviorType_Object = MibTableColumn
 swFwBehaviorType = _SwFwBehaviorType_Object(
@@ -3603,7 +4415,7 @@ swFwBehaviorType = _SwFwBehaviorType_Object(
 )
 swFwBehaviorType.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwBehaviorType.setStatus("current")
+    swFwBehaviorType.setStatus("obsolete")
 
 
 class _SwFwBehaviorInt_Type(Integer32):
@@ -3622,7 +4434,7 @@ swFwBehaviorInt = _SwFwBehaviorInt_Object(
 )
 swFwBehaviorInt.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
-    swFwBehaviorInt.setStatus("current")
+    swFwBehaviorInt.setStatus("obsolete")
 _SwFwLastSeverityLevel_Type = SwSevType
 _SwFwLastSeverityLevel_Object = MibTableColumn
 swFwLastSeverityLevel = _SwFwLastSeverityLevel_Object(
@@ -3631,7 +4443,7 @@ swFwLastSeverityLevel = _SwFwLastSeverityLevel_Object(
 )
 swFwLastSeverityLevel.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swFwLastSeverityLevel.setStatus("current")
+    swFwLastSeverityLevel.setStatus("obsolete")
 _SwEndDevice_ObjectIdentity = ObjectIdentity
 swEndDevice = _SwEndDevice_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 21)
@@ -3771,13 +4583,13 @@ swGroup = _SwGroup_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 22)
 )
 if mibBuilder.loadTexts:
-    swGroup.setStatus("current")
+    swGroup.setStatus("obsolete")
 _SwGroupTable_Object = MibTable
 swGroupTable = _SwGroupTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 22, 1)
 )
 if mibBuilder.loadTexts:
-    swGroupTable.setStatus("current")
+    swGroupTable.setStatus("obsolete")
 _SwGroupEntry_Object = MibTableRow
 swGroupEntry = _SwGroupEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 22, 1, 1)
@@ -3786,7 +4598,7 @@ swGroupEntry.setIndexNames(
     (0, "SW-MIB", "swGroupIndex"),
 )
 if mibBuilder.loadTexts:
-    swGroupEntry.setStatus("current")
+    swGroupEntry.setStatus("obsolete")
 
 
 class _SwGroupIndex_Type(Integer32):
@@ -3805,7 +4617,7 @@ swGroupIndex = _SwGroupIndex_Object(
 )
 swGroupIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swGroupIndex.setStatus("current")
+    swGroupIndex.setStatus("obsolete")
 
 
 class _SwGroupName_Type(OctetString):
@@ -3824,7 +4636,7 @@ swGroupName = _SwGroupName_Object(
 )
 swGroupName.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swGroupName.setStatus("current")
+    swGroupName.setStatus("obsolete")
 
 
 class _SwGroupType_Type(OctetString):
@@ -3843,13 +4655,13 @@ swGroupType = _SwGroupType_Object(
 )
 swGroupType.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swGroupType.setStatus("current")
+    swGroupType.setStatus("obsolete")
 _SwGroupMemTable_Object = MibTable
 swGroupMemTable = _SwGroupMemTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 22, 2)
 )
 if mibBuilder.loadTexts:
-    swGroupMemTable.setStatus("current")
+    swGroupMemTable.setStatus("obsolete")
 _SwGroupMemEntry_Object = MibTableRow
 swGroupMemEntry = _SwGroupMemEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 22, 2, 1)
@@ -3859,7 +4671,7 @@ swGroupMemEntry.setIndexNames(
     (0, "SW-MIB", "swGroupMemWwn"),
 )
 if mibBuilder.loadTexts:
-    swGroupMemEntry.setStatus("current")
+    swGroupMemEntry.setStatus("obsolete")
 
 
 class _SwGroupId_Type(Integer32):
@@ -3878,7 +4690,7 @@ swGroupId = _SwGroupId_Object(
 )
 swGroupId.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swGroupId.setStatus("current")
+    swGroupId.setStatus("obsolete")
 _SwGroupMemWwn_Type = FcWwn
 _SwGroupMemWwn_Object = MibTableColumn
 swGroupMemWwn = _SwGroupMemWwn_Object(
@@ -3887,7 +4699,7 @@ swGroupMemWwn = _SwGroupMemWwn_Object(
 )
 swGroupMemWwn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swGroupMemWwn.setStatus("current")
+    swGroupMemWwn.setStatus("obsolete")
 
 
 class _SwGroupMemPos_Type(Integer32):
@@ -3906,19 +4718,19 @@ swGroupMemPos = _SwGroupMemPos_Object(
 )
 swGroupMemPos.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swGroupMemPos.setStatus("current")
+    swGroupMemPos.setStatus("obsolete")
 _SwBlmPerfMnt_ObjectIdentity = ObjectIdentity
 swBlmPerfMnt = _SwBlmPerfMnt_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23)
 )
 if mibBuilder.loadTexts:
-    swBlmPerfMnt.setStatus("current")
+    swBlmPerfMnt.setStatus("obsolete")
 _SwBlmPerfALPAMntTable_Object = MibTable
 swBlmPerfALPAMntTable = _SwBlmPerfALPAMntTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23, 1)
 )
 if mibBuilder.loadTexts:
-    swBlmPerfALPAMntTable.setStatus("current")
+    swBlmPerfALPAMntTable.setStatus("obsolete")
 _SwBlmPerfALPAMntEntry_Object = MibTableRow
 swBlmPerfALPAMntEntry = _SwBlmPerfALPAMntEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23, 1, 1)
@@ -3928,7 +4740,7 @@ swBlmPerfALPAMntEntry.setIndexNames(
     (0, "SW-MIB", "swBlmPerfAlpaIndx"),
 )
 if mibBuilder.loadTexts:
-    swBlmPerfALPAMntEntry.setStatus("current")
+    swBlmPerfALPAMntEntry.setStatus("obsolete")
 _SwBlmPerfAlpaPort_Type = SwPortIndex
 _SwBlmPerfAlpaPort_Object = MibTableColumn
 swBlmPerfAlpaPort = _SwBlmPerfAlpaPort_Object(
@@ -3937,7 +4749,7 @@ swBlmPerfAlpaPort = _SwBlmPerfAlpaPort_Object(
 )
 swBlmPerfAlpaPort.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfAlpaPort.setStatus("current")
+    swBlmPerfAlpaPort.setStatus("obsolete")
 
 
 class _SwBlmPerfAlpaIndx_Type(Integer32):
@@ -3956,7 +4768,7 @@ swBlmPerfAlpaIndx = _SwBlmPerfAlpaIndx_Object(
 )
 swBlmPerfAlpaIndx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfAlpaIndx.setStatus("current")
+    swBlmPerfAlpaIndx.setStatus("obsolete")
 
 
 class _SwBlmPerfAlpa_Type(Integer32):
@@ -3975,7 +4787,7 @@ swBlmPerfAlpa = _SwBlmPerfAlpa_Object(
 )
 swBlmPerfAlpa.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfAlpa.setStatus("current")
+    swBlmPerfAlpa.setStatus("obsolete")
 
 
 class _SwBlmPerfAlpaCRCCnt_Type(OctetString):
@@ -3995,13 +4807,13 @@ swBlmPerfAlpaCRCCnt = _SwBlmPerfAlpaCRCCnt_Object(
 )
 swBlmPerfAlpaCRCCnt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfAlpaCRCCnt.setStatus("current")
+    swBlmPerfAlpaCRCCnt.setStatus("obsolete")
 _SwBlmPerfEEMntTable_Object = MibTable
 swBlmPerfEEMntTable = _SwBlmPerfEEMntTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23, 2)
 )
 if mibBuilder.loadTexts:
-    swBlmPerfEEMntTable.setStatus("current")
+    swBlmPerfEEMntTable.setStatus("obsolete")
 _SwBlmPerfEEMntEntry_Object = MibTableRow
 swBlmPerfEEMntEntry = _SwBlmPerfEEMntEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23, 2, 1)
@@ -4011,7 +4823,7 @@ swBlmPerfEEMntEntry.setIndexNames(
     (0, "SW-MIB", "swBlmPerfEERefKey"),
 )
 if mibBuilder.loadTexts:
-    swBlmPerfEEMntEntry.setStatus("current")
+    swBlmPerfEEMntEntry.setStatus("obsolete")
 _SwBlmPerfEEPort_Type = SwPortIndex
 _SwBlmPerfEEPort_Object = MibTableColumn
 swBlmPerfEEPort = _SwBlmPerfEEPort_Object(
@@ -4020,7 +4832,7 @@ swBlmPerfEEPort = _SwBlmPerfEEPort_Object(
 )
 swBlmPerfEEPort.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEEPort.setStatus("current")
+    swBlmPerfEEPort.setStatus("obsolete")
 
 
 class _SwBlmPerfEERefKey_Type(Integer32):
@@ -4039,7 +4851,7 @@ swBlmPerfEERefKey = _SwBlmPerfEERefKey_Object(
 )
 swBlmPerfEERefKey.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEERefKey.setStatus("current")
+    swBlmPerfEERefKey.setStatus("obsolete")
 
 
 class _SwBlmPerfEECRC_Type(OctetString):
@@ -4059,7 +4871,7 @@ swBlmPerfEECRC = _SwBlmPerfEECRC_Object(
 )
 swBlmPerfEECRC.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEECRC.setStatus("current")
+    swBlmPerfEECRC.setStatus("obsolete")
 
 
 class _SwBlmPerfEEFCWRx_Type(OctetString):
@@ -4079,7 +4891,7 @@ swBlmPerfEEFCWRx = _SwBlmPerfEEFCWRx_Object(
 )
 swBlmPerfEEFCWRx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEEFCWRx.setStatus("current")
+    swBlmPerfEEFCWRx.setStatus("obsolete")
 
 
 class _SwBlmPerfEEFCWTx_Type(OctetString):
@@ -4099,7 +4911,7 @@ swBlmPerfEEFCWTx = _SwBlmPerfEEFCWTx_Object(
 )
 swBlmPerfEEFCWTx.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEEFCWTx.setStatus("current")
+    swBlmPerfEEFCWTx.setStatus("obsolete")
 
 
 class _SwBlmPerfEESid_Type(Integer32):
@@ -4118,7 +4930,7 @@ swBlmPerfEESid = _SwBlmPerfEESid_Object(
 )
 swBlmPerfEESid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEESid.setStatus("current")
+    swBlmPerfEESid.setStatus("obsolete")
 
 
 class _SwBlmPerfEEDid_Type(Integer32):
@@ -4137,13 +4949,13 @@ swBlmPerfEEDid = _SwBlmPerfEEDid_Object(
 )
 swBlmPerfEEDid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfEEDid.setStatus("current")
+    swBlmPerfEEDid.setStatus("obsolete")
 _SwBlmPerfFltMntTable_Object = MibTable
 swBlmPerfFltMntTable = _SwBlmPerfFltMntTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23, 3)
 )
 if mibBuilder.loadTexts:
-    swBlmPerfFltMntTable.setStatus("current")
+    swBlmPerfFltMntTable.setStatus("obsolete")
 _SwBlmPerfFltMntEntry_Object = MibTableRow
 swBlmPerfFltMntEntry = _SwBlmPerfFltMntEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 23, 3, 1)
@@ -4153,7 +4965,7 @@ swBlmPerfFltMntEntry.setIndexNames(
     (0, "SW-MIB", "swBlmPerfFltRefkey"),
 )
 if mibBuilder.loadTexts:
-    swBlmPerfFltMntEntry.setStatus("current")
+    swBlmPerfFltMntEntry.setStatus("obsolete")
 _SwBlmPerfFltPort_Type = SwPortIndex
 _SwBlmPerfFltPort_Object = MibTableColumn
 swBlmPerfFltPort = _SwBlmPerfFltPort_Object(
@@ -4162,7 +4974,7 @@ swBlmPerfFltPort = _SwBlmPerfFltPort_Object(
 )
 swBlmPerfFltPort.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfFltPort.setStatus("current")
+    swBlmPerfFltPort.setStatus("obsolete")
 
 
 class _SwBlmPerfFltRefkey_Type(Integer32):
@@ -4181,7 +4993,7 @@ swBlmPerfFltRefkey = _SwBlmPerfFltRefkey_Object(
 )
 swBlmPerfFltRefkey.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfFltRefkey.setStatus("current")
+    swBlmPerfFltRefkey.setStatus("obsolete")
 
 
 class _SwBlmPerfFltCnt_Type(OctetString):
@@ -4201,7 +5013,7 @@ swBlmPerfFltCnt = _SwBlmPerfFltCnt_Object(
 )
 swBlmPerfFltCnt.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfFltCnt.setStatus("current")
+    swBlmPerfFltCnt.setStatus("obsolete")
 
 
 class _SwBlmPerfFltAlias_Type(DisplayString):
@@ -4220,7 +5032,7 @@ swBlmPerfFltAlias = _SwBlmPerfFltAlias_Object(
 )
 swBlmPerfFltAlias.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swBlmPerfFltAlias.setStatus("current")
+    swBlmPerfFltAlias.setStatus("obsolete")
 _SwTrunk_ObjectIdentity = ObjectIdentity
 swTrunk = _SwTrunk_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 24)
@@ -4419,7 +5231,7 @@ swTopTalker = _SwTopTalker_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 25)
 )
 if mibBuilder.loadTexts:
-    swTopTalker.setStatus("current")
+    swTopTalker.setStatus("obsolete")
 
 
 class _SwTopTalkerMntMode_Type(Integer32):
@@ -4433,7 +5245,7 @@ class _SwTopTalkerMntMode_Type(Integer32):
     )
     namedValues = NamedValues(
         *(("fabricmode", 1),
-          ("fportmode", 2))
+          ("portmode", 2))
     )
 
 
@@ -4445,7 +5257,7 @@ swTopTalkerMntMode = _SwTopTalkerMntMode_Object(
 )
 swTopTalkerMntMode.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntMode.setStatus("current")
+    swTopTalkerMntMode.setStatus("obsolete")
 
 
 class _SwTopTalkerMntNumEntries_Type(Integer32):
@@ -4464,13 +5276,13 @@ swTopTalkerMntNumEntries = _SwTopTalkerMntNumEntries_Object(
 )
 swTopTalkerMntNumEntries.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntNumEntries.setStatus("current")
+    swTopTalkerMntNumEntries.setStatus("obsolete")
 _SwTopTalkerMntTable_Object = MibTable
 swTopTalkerMntTable = _SwTopTalkerMntTable_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 25, 3)
 )
 if mibBuilder.loadTexts:
-    swTopTalkerMntTable.setStatus("current")
+    swTopTalkerMntTable.setStatus("obsolete")
 _SwTopTalkerMntEntry_Object = MibTableRow
 swTopTalkerMntEntry = _SwTopTalkerMntEntry_Object(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 25, 3, 1)
@@ -4479,7 +5291,7 @@ swTopTalkerMntEntry.setIndexNames(
     (0, "SW-MIB", "swTopTalkerMntIndex"),
 )
 if mibBuilder.loadTexts:
-    swTopTalkerMntEntry.setStatus("current")
+    swTopTalkerMntEntry.setStatus("obsolete")
 
 
 class _SwTopTalkerMntIndex_Type(Integer32):
@@ -4498,7 +5310,7 @@ swTopTalkerMntIndex = _SwTopTalkerMntIndex_Object(
 )
 swTopTalkerMntIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntIndex.setStatus("current")
+    swTopTalkerMntIndex.setStatus("obsolete")
 
 
 class _SwTopTalkerMntPort_Type(Integer32):
@@ -4517,7 +5329,7 @@ swTopTalkerMntPort = _SwTopTalkerMntPort_Object(
 )
 swTopTalkerMntPort.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntPort.setStatus("current")
+    swTopTalkerMntPort.setStatus("obsolete")
 
 
 class _SwTopTalkerMntSpid_Type(Integer32):
@@ -4536,7 +5348,7 @@ swTopTalkerMntSpid = _SwTopTalkerMntSpid_Object(
 )
 swTopTalkerMntSpid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntSpid.setStatus("current")
+    swTopTalkerMntSpid.setStatus("obsolete")
 
 
 class _SwTopTalkerMntDpid_Type(Integer32):
@@ -4555,7 +5367,7 @@ swTopTalkerMntDpid = _SwTopTalkerMntDpid_Object(
 )
 swTopTalkerMntDpid.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntDpid.setStatus("current")
+    swTopTalkerMntDpid.setStatus("obsolete")
 
 
 class _SwTopTalkerMntflow_Type(Integer32):
@@ -4574,7 +5386,7 @@ swTopTalkerMntflow = _SwTopTalkerMntflow_Object(
 )
 swTopTalkerMntflow.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntflow.setStatus("current")
+    swTopTalkerMntflow.setStatus("obsolete")
 _SwTopTalkerMntSwwn_Type = FcWwn
 _SwTopTalkerMntSwwn_Object = MibTableColumn
 swTopTalkerMntSwwn = _SwTopTalkerMntSwwn_Object(
@@ -4583,7 +5395,7 @@ swTopTalkerMntSwwn = _SwTopTalkerMntSwwn_Object(
 )
 swTopTalkerMntSwwn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntSwwn.setStatus("current")
+    swTopTalkerMntSwwn.setStatus("obsolete")
 _SwTopTalkerMntDwwn_Type = FcWwn
 _SwTopTalkerMntDwwn_Object = MibTableColumn
 swTopTalkerMntDwwn = _SwTopTalkerMntDwwn_Object(
@@ -4592,7 +5404,7 @@ swTopTalkerMntDwwn = _SwTopTalkerMntDwwn_Object(
 )
 swTopTalkerMntDwwn.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
-    swTopTalkerMntDwwn.setStatus("current")
+    swTopTalkerMntDwwn.setStatus("obsolete")
 _SwCpuOrMemoryUsage_ObjectIdentity = ObjectIdentity
 swCpuOrMemoryUsage = _SwCpuOrMemoryUsage_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 26)
@@ -4683,7 +5495,18 @@ class _SwCpuAction_Type(Integer32):
     """Custom type swCpuAction based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 3),
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("raslog", 1),
+          ("snmp", 2),
+          ("raslogandSnmp", 3))
     )
 
 
@@ -4696,8 +5519,6 @@ swCpuAction = _SwCpuAction_Object(
 swCpuAction.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     swCpuAction.setStatus("current")
-if mibBuilder.loadTexts:
-    swCpuAction.setUnits("seconds")
 _SwMemUsage_Type = Integer32
 _SwMemUsage_Object = MibScalar
 swMemUsage = _SwMemUsage_Object(
@@ -4752,7 +5573,18 @@ class _SwMemAction_Type(Integer32):
     """Custom type swMemAction based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueRangeConstraint(0, 3),
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("raslog", 1),
+          ("snmp", 2),
+          ("raslogandSnmp", 3))
     )
 
 
@@ -4765,8 +5597,6 @@ swMemAction = _SwMemAction_Object(
 swMemAction.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     swMemAction.setStatus("current")
-if mibBuilder.loadTexts:
-    swMemAction.setUnits("seconds")
 _SwMemUsageLimit1_Type = Integer32
 _SwMemUsageLimit1_Object = MibScalar
 swMemUsageLimit1 = _SwMemUsageLimit1_Object(
@@ -5157,6 +5987,286 @@ swConnUnitLli = _SwConnUnitLli_Object(
 swConnUnitLli.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     swConnUnitLli.setStatus("current")
+
+
+class _SwConnUnitInterrupts_Type(OctetString):
+    """Custom type swConnUnitInterrupts based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitInterrupts_Type.__name__ = "OctetString"
+_SwConnUnitInterrupts_Object = MibTableColumn
+swConnUnitInterrupts = _SwConnUnitInterrupts_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 19),
+    _SwConnUnitInterrupts_Type()
+)
+swConnUnitInterrupts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitInterrupts.setStatus("current")
+
+
+class _SwConnUnitUnknownInterrupts_Type(OctetString):
+    """Custom type swConnUnitUnknownInterrupts based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitUnknownInterrupts_Type.__name__ = "OctetString"
+_SwConnUnitUnknownInterrupts_Object = MibTableColumn
+swConnUnitUnknownInterrupts = _SwConnUnitUnknownInterrupts_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 20),
+    _SwConnUnitUnknownInterrupts_Type()
+)
+swConnUnitUnknownInterrupts.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitUnknownInterrupts.setStatus("current")
+
+
+class _SwConnUnitTimedOut_Type(OctetString):
+    """Custom type swConnUnitTimedOut based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitTimedOut_Type.__name__ = "OctetString"
+_SwConnUnitTimedOut_Object = MibTableColumn
+swConnUnitTimedOut = _SwConnUnitTimedOut_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 21),
+    _SwConnUnitTimedOut_Type()
+)
+swConnUnitTimedOut.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitTimedOut.setStatus("current")
+
+
+class _SwConnUnitProcRequired_Type(OctetString):
+    """Custom type swConnUnitProcRequired based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitProcRequired_Type.__name__ = "OctetString"
+_SwConnUnitProcRequired_Object = MibTableColumn
+swConnUnitProcRequired = _SwConnUnitProcRequired_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 22),
+    _SwConnUnitProcRequired_Type()
+)
+swConnUnitProcRequired.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitProcRequired.setStatus("current")
+
+
+class _SwConnUnitTxBufferUnavailable_Type(OctetString):
+    """Custom type swConnUnitTxBufferUnavailable based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitTxBufferUnavailable_Type.__name__ = "OctetString"
+_SwConnUnitTxBufferUnavailable_Object = MibTableColumn
+swConnUnitTxBufferUnavailable = _SwConnUnitTxBufferUnavailable_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 23),
+    _SwConnUnitTxBufferUnavailable_Type()
+)
+swConnUnitTxBufferUnavailable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitTxBufferUnavailable.setStatus("current")
+
+
+class _SwConnUnitStateChange_Type(OctetString):
+    """Custom type swConnUnitStateChange based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitStateChange_Type.__name__ = "OctetString"
+_SwConnUnitStateChange_Object = MibTableColumn
+swConnUnitStateChange = _SwConnUnitStateChange_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 24),
+    _SwConnUnitStateChange_Type()
+)
+swConnUnitStateChange.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitStateChange.setStatus("current")
+
+
+class _SwConnUnitC3DiscardDueToRXTimeout_Type(OctetString):
+    """Custom type swConnUnitC3DiscardDueToRXTimeout based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitC3DiscardDueToRXTimeout_Type.__name__ = "OctetString"
+_SwConnUnitC3DiscardDueToRXTimeout_Object = MibTableColumn
+swConnUnitC3DiscardDueToRXTimeout = _SwConnUnitC3DiscardDueToRXTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 25),
+    _SwConnUnitC3DiscardDueToRXTimeout_Type()
+)
+swConnUnitC3DiscardDueToRXTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitC3DiscardDueToRXTimeout.setStatus("current")
+
+
+class _SwConnUnitC3DiscardDueToDestUnreachable_Type(OctetString):
+    """Custom type swConnUnitC3DiscardDueToDestUnreachable based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitC3DiscardDueToDestUnreachable_Type.__name__ = "OctetString"
+_SwConnUnitC3DiscardDueToDestUnreachable_Object = MibTableColumn
+swConnUnitC3DiscardDueToDestUnreachable = _SwConnUnitC3DiscardDueToDestUnreachable_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 26),
+    _SwConnUnitC3DiscardDueToDestUnreachable_Type()
+)
+swConnUnitC3DiscardDueToDestUnreachable.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitC3DiscardDueToDestUnreachable.setStatus("current")
+
+
+class _SwConnUnitC3DiscardDueToTXTimeout_Type(OctetString):
+    """Custom type swConnUnitC3DiscardDueToTXTimeout based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitC3DiscardDueToTXTimeout_Type.__name__ = "OctetString"
+_SwConnUnitC3DiscardDueToTXTimeout_Object = MibTableColumn
+swConnUnitC3DiscardDueToTXTimeout = _SwConnUnitC3DiscardDueToTXTimeout_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 27),
+    _SwConnUnitC3DiscardDueToTXTimeout_Type()
+)
+swConnUnitC3DiscardDueToTXTimeout.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitC3DiscardDueToTXTimeout.setStatus("current")
+
+
+class _SwConnUnitC3DiscardOther_Type(OctetString):
+    """Custom type swConnUnitC3DiscardOther based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitC3DiscardOther_Type.__name__ = "OctetString"
+_SwConnUnitC3DiscardOther_Object = MibTableColumn
+swConnUnitC3DiscardOther = _SwConnUnitC3DiscardOther_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 28),
+    _SwConnUnitC3DiscardOther_Type()
+)
+swConnUnitC3DiscardOther.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitC3DiscardOther.setStatus("current")
+
+
+class _SwConnUnitPCSErrorCounter_Type(OctetString):
+    """Custom type swConnUnitPCSErrorCounter based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitPCSErrorCounter_Type.__name__ = "OctetString"
+_SwConnUnitPCSErrorCounter_Object = MibTableColumn
+swConnUnitPCSErrorCounter = _SwConnUnitPCSErrorCounter_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 29),
+    _SwConnUnitPCSErrorCounter_Type()
+)
+swConnUnitPCSErrorCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitPCSErrorCounter.setStatus("current")
+
+
+class _SwConnUnitUnroutableFrameCounter_Type(OctetString):
+    """Custom type swConnUnitUnroutableFrameCounter based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(8, 8),
+    )
+    fixed_length = 8
+
+
+_SwConnUnitUnroutableFrameCounter_Type.__name__ = "OctetString"
+_SwConnUnitUnroutableFrameCounter_Object = MibTableColumn
+swConnUnitUnroutableFrameCounter = _SwConnUnitUnroutableFrameCounter_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 30),
+    _SwConnUnitUnroutableFrameCounter_Type()
+)
+swConnUnitUnroutableFrameCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitUnroutableFrameCounter.setStatus("current")
+
+
+class _SwConnUnitFECCorrectedCounter_Type(OctetString):
+    """Custom type swConnUnitFECCorrectedCounter based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(64, 64),
+    )
+    fixed_length = 64
+
+
+_SwConnUnitFECCorrectedCounter_Type.__name__ = "OctetString"
+_SwConnUnitFECCorrectedCounter_Object = MibTableColumn
+swConnUnitFECCorrectedCounter = _SwConnUnitFECCorrectedCounter_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 31),
+    _SwConnUnitFECCorrectedCounter_Type()
+)
+swConnUnitFECCorrectedCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitFECCorrectedCounter.setStatus("current")
+
+
+class _SwConnUnitFECUnCorrectedCounter_Type(OctetString):
+    """Custom type swConnUnitFECUnCorrectedCounter based on OctetString"""
+    subtypeSpec = OctetString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(64, 64),
+    )
+    fixed_length = 64
+
+
+_SwConnUnitFECUnCorrectedCounter_Type.__name__ = "OctetString"
+_SwConnUnitFECUnCorrectedCounter_Object = MibTableColumn
+swConnUnitFECUnCorrectedCounter = _SwConnUnitFECUnCorrectedCounter_Object(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 27, 1, 32),
+    _SwConnUnitFECUnCorrectedCounter_Type()
+)
+swConnUnitFECUnCorrectedCounter.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    swConnUnitFECUnCorrectedCounter.setStatus("current")
 _Sw28k_ObjectIdentity = ObjectIdentity
 sw28k = _Sw28k_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 2)
@@ -5191,10 +6301,7 @@ swFault = NotificationType(
 )
 swFault.setObjects(
       *(("SW-MIB", "swDiagResult"),
-        ("SW-MIB", "swSsn"),
-        ("SW-MIB", "swGroupName"),
-        ("SW-MIB", "swGroupType"),
-        ("SW-MIB", "swGroupMemPos"))
+        ("SW-MIB", "swSsn"))
 )
 if mibBuilder.loadTexts:
     swFault.setStatus(
@@ -5210,10 +6317,7 @@ swSensorScn.setObjects(
         ("SW-MIB", "swSensorType"),
         ("SW-MIB", "swSensorValue"),
         ("SW-MIB", "swSensorInfo"),
-        ("SW-MIB", "swSsn"),
-        ("SW-MIB", "swGroupName"),
-        ("SW-MIB", "swGroupType"),
-        ("SW-MIB", "swGroupMemPos"))
+        ("SW-MIB", "swSsn"))
 )
 if mibBuilder.loadTexts:
     swSensorScn.setStatus(
@@ -5227,11 +6331,12 @@ swFCPortScn.setObjects(
       *(("SW-MIB", "swFCPortOpStatus"),
         ("SW-MIB", "swFCPortIndex"),
         ("SW-MIB", "swFCPortName"),
+        ("SW-MIB", "swFCPortWwn"),
+        ("SW-MIB", "swFCPortPrevType"),
+        ("SW-MIB", "swFCPortBrcdType"),
         ("SW-MIB", "swSsn"),
         ("SW-MIB", "swFCPortFlag"),
-        ("SW-MIB", "swGroupName"),
-        ("SW-MIB", "swGroupType"),
-        ("SW-MIB", "swGroupMemPos"),
+        ("SW-MIB", "swFCPortDisableReason"),
         ("SW-MIB", "swVfId"))
 )
 if mibBuilder.loadTexts:
@@ -5249,9 +6354,6 @@ swEventTrap.setObjects(
         ("SW-MIB", "swEventRepeatCount"),
         ("SW-MIB", "swEventDescr"),
         ("SW-MIB", "swSsn"),
-        ("SW-MIB", "swGroupName"),
-        ("SW-MIB", "swGroupType"),
-        ("SW-MIB", "swGroupMemPos"),
         ("SW-MIB", "swVfId"))
 )
 if mibBuilder.loadTexts:
@@ -5273,14 +6375,11 @@ swFabricWatchTrap.setObjects(
         ("SW-MIB", "swFwLastState"),
         ("SW-MIB", "swFwLastSeverityLevel"),
         ("SW-MIB", "swSsn"),
-        ("SW-MIB", "swGroupName"),
-        ("SW-MIB", "swGroupType"),
-        ("SW-MIB", "swGroupMemPos"),
         ("SW-MIB", "swVfId"))
 )
 if mibBuilder.loadTexts:
     swFabricWatchTrap.setStatus(
-        "current"
+        "obsolete"
     )
 
 swTrackChangesTrap = NotificationType(
@@ -5289,14 +6388,11 @@ swTrackChangesTrap = NotificationType(
 swTrackChangesTrap.setObjects(
       *(("SW-MIB", "swTrackChangesInfo"),
         ("SW-MIB", "swSsn"),
-        ("SW-MIB", "swGroupName"),
-        ("SW-MIB", "swGroupType"),
-        ("SW-MIB", "swGroupMemPos"),
         ("SW-MIB", "swVfId"))
 )
 if mibBuilder.loadTexts:
     swTrackChangesTrap.setStatus(
-        "current"
+        "obsolete"
     )
 
 swIPv6ChangeTrap = NotificationType(
@@ -5360,6 +6456,68 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+swStateChangeTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 0, 12)
+)
+swStateChangeTrap.setObjects(
+      *(("SW-MIB", "swOperStatus"),
+        ("SW-MIB", "swVfId"))
+)
+if mibBuilder.loadTexts:
+    swStateChangeTrap.setStatus(
+        "current"
+    )
+
+swPortMoveTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 0, 13)
+)
+swPortMoveTrap.setObjects(
+      *(("SW-MIB", "swPortList"),
+        ("SW-MIB", "swVfId"))
+)
+if mibBuilder.loadTexts:
+    swPortMoveTrap.setStatus(
+        "current"
+    )
+
+swBrcdGenericTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 0, 14)
+)
+swBrcdGenericTrap.setObjects(
+      *(("SW-MIB", "swBrcdTrapBitMask"),
+        ("SW-MIB", "swBrcdBitObjVal"),
+        ("SW-MIB", "swVfId"))
+)
+if mibBuilder.loadTexts:
+    swBrcdGenericTrap.setStatus(
+        "current"
+    )
+
+swDeviceStatusTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 0, 15)
+)
+swDeviceStatusTrap.setObjects(
+      *(("SW-MIB", "swFCPortSpecifier"),
+        ("SW-MIB", "swDeviceStatus"),
+        ("SW-MIB", "swEndDevicePortID"),
+        ("SW-MIB", "swNsNodeName"))
+)
+if mibBuilder.loadTexts:
+    swDeviceStatusTrap.setStatus(
+        "current"
+    )
+
+swZoneConfigChangeTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 1588, 2, 1, 1, 1, 0, 16)
+)
+swZoneConfigChangeTrap.setObjects(
+    ("SW-MIB", "swVfId")
+)
+if mibBuilder.loadTexts:
+    swZoneConfigChangeTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -5399,6 +6557,11 @@ mibBuilder.exportSymbols(
        "swFabricReconfigTrap": swFabricReconfigTrap,
        "swFabricSegmentTrap": swFabricSegmentTrap,
        "swExtTrap": swExtTrap,
+       "swStateChangeTrap": swStateChangeTrap,
+       "swPortMoveTrap": swPortMoveTrap,
+       "swBrcdGenericTrap": swBrcdGenericTrap,
+       "swDeviceStatusTrap": swDeviceStatusTrap,
+       "swZoneConfigChangeTrap": swZoneConfigChangeTrap,
        "swSystem": swSystem,
        "swCurrentDate": swCurrentDate,
        "swBootDate": swBootDate,
@@ -5437,6 +6600,12 @@ mibBuilder.exportSymbols(
        "swIPv6Status": swIPv6Status,
        "swModel": swModel,
        "swTestString": swTestString,
+       "swPortList": swPortList,
+       "swBrcdTrapBitMask": swBrcdTrapBitMask,
+       "swFCPortPrevType": swFCPortPrevType,
+       "swDeviceStatus": swDeviceStatus,
+       "swBrcdBitObjVal": swBrcdBitObjVal,
+       "swIODState": swIODState,
        "swFabric": swFabric,
        "swDomainID": swDomainID,
        "swPrincipalSwitch": swPrincipalSwitch,
@@ -5466,6 +6635,7 @@ mibBuilder.exportSymbols(
        "swPmgrEventTime": swPmgrEventTime,
        "swPmgrEventDescr": swPmgrEventDescr,
        "swVfId": swVfId,
+       "swVfName": swVfName,
        "swModule": swModule,
        "swAgtCfg": swAgtCfg,
        "swAgtCmtyTable": swAgtCmtyTable,
@@ -5474,6 +6644,8 @@ mibBuilder.exportSymbols(
        "swAgtCmtyStr": swAgtCmtyStr,
        "swAgtTrapRcp": swAgtTrapRcp,
        "swAgtTrapSeverityLevel": swAgtTrapSeverityLevel,
+       "swauthProtocolPassword": swauthProtocolPassword,
+       "swprivProtocolPassword": swprivProtocolPassword,
        "swFCport": swFCport,
        "swFCPortCapacity": swFCPortCapacity,
        "swFCPortTable": swFCPortTable,
@@ -5514,6 +6686,7 @@ mibBuilder.exportSymbols(
        "swFCPortSpecifier": swFCPortSpecifier,
        "swFCPortFlag": swFCPortFlag,
        "swFCPortBrcdType": swFCPortBrcdType,
+       "swFCPortDisableReason": swFCPortDisableReason,
        "swNs": swNs,
        "swNsLocalNumEntry": swNsLocalNumEntry,
        "swNsLocalTable": swNsLocalTable,
@@ -5691,6 +6864,20 @@ mibBuilder.exportSymbols(
        "swConnUnitLCRX": swConnUnitLCRX,
        "swConnUnitRDYPriority": swConnUnitRDYPriority,
        "swConnUnitLli": swConnUnitLli,
+       "swConnUnitInterrupts": swConnUnitInterrupts,
+       "swConnUnitUnknownInterrupts": swConnUnitUnknownInterrupts,
+       "swConnUnitTimedOut": swConnUnitTimedOut,
+       "swConnUnitProcRequired": swConnUnitProcRequired,
+       "swConnUnitTxBufferUnavailable": swConnUnitTxBufferUnavailable,
+       "swConnUnitStateChange": swConnUnitStateChange,
+       "swConnUnitC3DiscardDueToRXTimeout": swConnUnitC3DiscardDueToRXTimeout,
+       "swConnUnitC3DiscardDueToDestUnreachable": swConnUnitC3DiscardDueToDestUnreachable,
+       "swConnUnitC3DiscardDueToTXTimeout": swConnUnitC3DiscardDueToTXTimeout,
+       "swConnUnitC3DiscardOther": swConnUnitC3DiscardOther,
+       "swConnUnitPCSErrorCounter": swConnUnitPCSErrorCounter,
+       "swConnUnitUnroutableFrameCounter": swConnUnitUnroutableFrameCounter,
+       "swConnUnitFECCorrectedCounter": swConnUnitFECCorrectedCounter,
+       "swConnUnitFECUnCorrectedCounter": swConnUnitFECUnCorrectedCounter,
        "sw28k": sw28k,
        "sw21kN24k": sw21kN24k,
        "sw20x0": sw20x0,

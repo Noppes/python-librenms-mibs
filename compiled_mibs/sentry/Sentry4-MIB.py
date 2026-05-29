@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\sentry\Sentry4-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:26:28 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -107,7 +104,11 @@ sentry4 = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     sentry4.setRevisions(
-        ("2017-06-15 18:30",
+        ("2023-03-10 11:00",
+         "2021-04-12 15:35",
+         "2020-07-02 19:00",
+         "2017-08-25 15:30",
+         "2017-06-15 18:30",
          "2016-11-18 23:40",
          "2016-09-21 23:00",
          "2016-04-25 21:40",
@@ -248,7 +249,7 @@ class _St4SystemLocation_Type(DisplayString):
     """Custom type st4SystemLocation based on DisplayString"""
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(0, 63),
+        ValueSizeConstraint(0, 80),
     )
 
 
@@ -363,6 +364,25 @@ st4SystemProductSeries = _St4SystemProductSeries_Object(
 st4SystemProductSeries.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     st4SystemProductSeries.setStatus("current")
+
+
+class _St4SystemUptime_Type(DisplayString):
+    """Custom type st4SystemUptime based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 48),
+    )
+
+
+_St4SystemUptime_Type.__name__ = "DisplayString"
+_St4SystemUptime_Object = MibScalar
+st4SystemUptime = _St4SystemUptime_Object(
+    (1, 3, 6, 1, 4, 1, 1718, 4, 1, 1, 1, 8),
+    _St4SystemUptime_Type()
+)
+st4SystemUptime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    st4SystemUptime.setStatus("current")
 
 
 class _St4SystemFeatures_Type(Bits):
@@ -591,8 +611,8 @@ class _St4UnitType_Type(Integer32):
         )
     )
     namedValues = NamedValues(
-        *(("masterPdu", 0),
-          ("linkPdu", 1),
+        *(("primary", 0),
+          ("link", 1),
           ("controller", 2),
           ("emcu", 3))
     )
@@ -3648,6 +3668,34 @@ if mibBuilder.loadTexts:
     st4OutletPowerCapacity.setUnits("Volt-Amps")
 
 
+class _St4OutletSocketAdapter_Type(Integer32):
+    """Custom type st4OutletSocketAdapter based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("c13", 1),
+          ("c19", 2))
+    )
+
+
+_St4OutletSocketAdapter_Type.__name__ = "Integer32"
+_St4OutletSocketAdapter_Object = MibTableColumn
+st4OutletSocketAdapter = _St4OutletSocketAdapter_Object(
+    (1, 3, 6, 1, 4, 1, 1718, 4, 1, 8, 2, 1, 9),
+    _St4OutletSocketAdapter_Type()
+)
+st4OutletSocketAdapter.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    st4OutletSocketAdapter.setStatus("current")
+
+
 class _St4OutletWakeupState_Type(Integer32):
     """Custom type st4OutletWakeupState based on Integer32"""
     subtypeSpec = Integer32.subtypeSpec
@@ -5829,6 +5877,7 @@ st4SystemObjectsGroup.setObjects(
         ("Sentry4-MIB", "st4SystemNICSerialNumber"),
         ("Sentry4-MIB", "st4SystemNICHardwareInfo"),
         ("Sentry4-MIB", "st4SystemProductSeries"),
+        ("Sentry4-MIB", "st4SystemUptime"),
         ("Sentry4-MIB", "st4SystemFeatures"),
         ("Sentry4-MIB", "st4SystemFeatureKey"),
         ("Sentry4-MIB", "st4SystemConfigModifiedCount"),
@@ -6033,6 +6082,7 @@ st4OutletObjectsGroup.setObjects(
         ("Sentry4-MIB", "st4OutletSocketType"),
         ("Sentry4-MIB", "st4OutletCurrentCapacity"),
         ("Sentry4-MIB", "st4OutletPowerCapacity"),
+        ("Sentry4-MIB", "st4OutletSocketAdapter"),
         ("Sentry4-MIB", "st4OutletWakeupState"),
         ("Sentry4-MIB", "st4OutletPostOnDelay"),
         ("Sentry4-MIB", "st4OutletPhaseID"),
@@ -6696,6 +6746,7 @@ mibBuilder.exportSymbols(
        "st4SystemNICSerialNumber": st4SystemNICSerialNumber,
        "st4SystemNICHardwareInfo": st4SystemNICHardwareInfo,
        "st4SystemProductSeries": st4SystemProductSeries,
+       "st4SystemUptime": st4SystemUptime,
        "st4SystemFeatures": st4SystemFeatures,
        "st4SystemFeatureKey": st4SystemFeatureKey,
        "st4SystemConfigModifiedCount": st4SystemConfigModifiedCount,
@@ -6903,6 +6954,7 @@ mibBuilder.exportSymbols(
        "st4OutletSocketType": st4OutletSocketType,
        "st4OutletCurrentCapacity": st4OutletCurrentCapacity,
        "st4OutletPowerCapacity": st4OutletPowerCapacity,
+       "st4OutletSocketAdapter": st4OutletSocketAdapter,
        "st4OutletWakeupState": st4OutletWakeupState,
        "st4OutletPostOnDelay": st4OutletPostOnDelay,
        "st4OutletPhaseID": st4OutletPhaseID,

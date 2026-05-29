@@ -7,10 +7,7 @@
 #
 # Notes
 # -----
-# ASN.1 source file://mibs\nokia\ALCATEL-IND1-STACK-MANAGER-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:14:19 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
+# ASN.1 source file://mibs\nokia\aos6\ALCATEL-IND1-STACK-MANAGER-MIB
 
 if 'mibBuilder' not in globals():
     import sys
@@ -116,6 +113,7 @@ alcatelIND1StackMgrMIB = ModuleIdentity(
 if mibBuilder.loadTexts:
     alcatelIND1StackMgrMIB.setRevisions(
         ("2009-02-06 00:00",
+         "2009-02-06 00:00",
          "2007-04-03 00:00",
          "2005-07-15 00:00",
          "2004-07-01 00:00",
@@ -124,7 +122,7 @@ if mibBuilder.loadTexts:
          "2004-04-04 00:00",
          "2004-03-22 00:00",
          "2004-03-08 00:00",
-         "2001-08-27 00:00")
+         "2019-10-07 00:00")
     )
 
 
@@ -142,6 +140,8 @@ class AlaStackMgrLinkNumber(TextualConvention, Integer32):
         SingleValueConstraint(
             *(1,
               2,
+              11,
+              12,
               25,
               26,
               27,
@@ -157,6 +157,8 @@ class AlaStackMgrLinkNumber(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("linkA", 1),
           ("linkB", 2),
+          ("linkA11", 11),
+          ("linkB12", 12),
           ("linkA25", 25),
           ("linkB26", 26),
           ("linkA27", 27),
@@ -246,7 +248,8 @@ class AlaStackMgrSlotState(TextualConvention, Integer32):
               3,
               4,
               5,
-              6)
+              6,
+              7)
         )
     )
     namedValues = NamedValues(
@@ -255,7 +258,8 @@ class AlaStackMgrSlotState(TextualConvention, Integer32):
           ("clearedSlot", 3),
           ("outOfSlots", 4),
           ("outOfTokens", 5),
-          ("badMix", 6))
+          ("badMix", 6),
+          ("inc-Lic", 7))
     )
 
 
@@ -320,6 +324,70 @@ class AlaStackMgrStackingMode(TextualConvention, Integer32):
     namedValues = NamedValues(
         *(("stackable", 1),
           ("standalone", 2))
+    )
+
+
+
+class AlaStackMgrStackMode(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("os6850", 1),
+          ("os6850e", 2))
+    )
+
+
+
+class AlaStackMgrLicenseType(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1)
+        )
+    )
+    namedValues = NamedValues(
+        *(("notSignificant", 0),
+          ("metro", 1))
+    )
+
+
+
+class AlaSSPTableSlotNINumber(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 0),
+        ValueRangeConstraint(1, 8),
+        ValueRangeConstraint(255, 255),
+        ValueRangeConstraint(1001, 1008),
+    )
+
+
+
+class AlaSSPTableSspOpStatus(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(0,
+              1,
+              2,
+              3)
+        )
+    )
+    namedValues = NamedValues(
+        *(("none", 0),
+          ("active", 1),
+          ("protection", 2),
+          ("notinstack", 3))
     )
 
 
@@ -684,7 +752,7 @@ alaStackMgrStaticRoutePort = _AlaStackMgrStaticRoutePort_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 6, 1, 5),
     _AlaStackMgrStaticRoutePort_Type()
 )
-alaStackMgrStaticRoutePort.setMaxAccess("read-write")
+alaStackMgrStaticRoutePort.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaStackMgrStaticRoutePort.setStatus("current")
 _AlaStackMgrStaticRoutePortState_Type = AlaStackMgrLinkStatus
@@ -721,7 +789,7 @@ alaStackMgrStaticRouteStatus = _AlaStackMgrStaticRouteStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 6, 1, 7),
     _AlaStackMgrStaticRouteStatus_Type()
 )
-alaStackMgrStaticRouteStatus.setMaxAccess("read-write")
+alaStackMgrStaticRouteStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaStackMgrStaticRouteStatus.setStatus("current")
 _AlaStackMgrStaticRouteRowStatus_Type = RowStatus
@@ -730,9 +798,202 @@ alaStackMgrStaticRouteRowStatus = _AlaStackMgrStaticRouteRowStatus_Object(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 6, 1, 8),
     _AlaStackMgrStaticRouteRowStatus_Type()
 )
-alaStackMgrStaticRouteRowStatus.setMaxAccess("read-write")
+alaStackMgrStaticRouteRowStatus.setMaxAccess("read-create")
 if mibBuilder.loadTexts:
     alaStackMgrStaticRouteRowStatus.setStatus("current")
+_AlaStackMgrStackModeTable_Object = MibTable
+alaStackMgrStackModeTable = _AlaStackMgrStackModeTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 7)
+)
+if mibBuilder.loadTexts:
+    alaStackMgrStackModeTable.setStatus("current")
+_AlaStackMgrStackModeEntry_Object = MibTableRow
+alaStackMgrStackModeEntry = _AlaStackMgrStackModeEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 7, 1)
+)
+alaStackMgrStackModeEntry.setIndexNames(
+    (0, "ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStackModeIndex"),
+)
+if mibBuilder.loadTexts:
+    alaStackMgrStackModeEntry.setStatus("current")
+_AlaStackMgrStackModeIndex_Type = AlaStackMgrNINumber
+_AlaStackMgrStackModeIndex_Object = MibTableColumn
+alaStackMgrStackModeIndex = _AlaStackMgrStackModeIndex_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 7, 1, 1),
+    _AlaStackMgrStackModeIndex_Type()
+)
+alaStackMgrStackModeIndex.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    alaStackMgrStackModeIndex.setStatus("current")
+_AlaStackMgrAdminStackMode_Type = AlaStackMgrStackMode
+_AlaStackMgrAdminStackMode_Object = MibTableColumn
+alaStackMgrAdminStackMode = _AlaStackMgrAdminStackMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 7, 1, 2),
+    _AlaStackMgrAdminStackMode_Type()
+)
+alaStackMgrAdminStackMode.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaStackMgrAdminStackMode.setStatus("current")
+_AlaStackMgrOperStackMode_Type = AlaStackMgrStackMode
+_AlaStackMgrOperStackMode_Object = MibTableColumn
+alaStackMgrOperStackMode = _AlaStackMgrOperStackMode_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 7, 1, 3),
+    _AlaStackMgrOperStackMode_Type()
+)
+alaStackMgrOperStackMode.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaStackMgrOperStackMode.setStatus("current")
+
+
+class _AlaStackMgrCmdAction_Type(Integer32):
+    """Custom type alaStackMgrCmdAction based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            3
+        )
+    )
+    namedValues = NamedValues(
+        ("reloadAny", 3)
+    )
+
+
+_AlaStackMgrCmdAction_Type.__name__ = "Integer32"
+_AlaStackMgrCmdAction_Object = MibTableColumn
+alaStackMgrCmdAction = _AlaStackMgrCmdAction_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 7, 1, 4),
+    _AlaStackMgrCmdAction_Type()
+)
+alaStackMgrCmdAction.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaStackMgrCmdAction.setStatus("current")
+_AlaSSPStateTable_Object = MibTable
+alaSSPStateTable = _AlaSSPStateTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 8)
+)
+if mibBuilder.loadTexts:
+    alaSSPStateTable.setStatus("current")
+_AlaSSPStateEntry_Object = MibTableRow
+alaSSPStateEntry = _AlaSSPStateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 8, 1)
+)
+alaSSPStateEntry.setIndexNames(
+    (0, "ALCATEL-IND1-STACK-MANAGER-MIB", "alaSSPTableSlotNINumber"),
+)
+if mibBuilder.loadTexts:
+    alaSSPStateEntry.setStatus("current")
+_AlaSSPTableSlotNINumber_Type = AlaSSPTableSlotNINumber
+_AlaSSPTableSlotNINumber_Object = MibTableColumn
+alaSSPTableSlotNINumber = _AlaSSPTableSlotNINumber_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 8, 1, 1),
+    _AlaSSPTableSlotNINumber_Type()
+)
+alaSSPTableSlotNINumber.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSSPTableSlotNINumber.setStatus("current")
+_AlaSSPTableSspOpStatus_Type = AlaSSPTableSspOpStatus
+_AlaSSPTableSspOpStatus_Object = MibTableColumn
+alaSSPTableSspOpStatus = _AlaSSPTableSspOpStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 8, 1, 2),
+    _AlaSSPTableSspOpStatus_Type()
+)
+alaSSPTableSspOpStatus.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSSPTableSspOpStatus.setStatus("current")
+_AlaSSPHelperGlobalConfig_ObjectIdentity = ObjectIdentity
+alaSSPHelperGlobalConfig = _AlaSSPHelperGlobalConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 9)
+)
+
+
+class _AlaSspHelperStatus_Type(Integer32):
+    """Custom type alaSspHelperStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaSspHelperStatus_Type.__name__ = "Integer32"
+_AlaSspHelperStatus_Object = MibScalar
+alaSspHelperStatus = _AlaSspHelperStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 9, 1),
+    _AlaSspHelperStatus_Type()
+)
+alaSspHelperStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSspHelperStatus.setStatus("current")
+_AlaSspHelperqAggregateTable_Object = MibTable
+alaSspHelperqAggregateTable = _AlaSspHelperqAggregateTable_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 10)
+)
+if mibBuilder.loadTexts:
+    alaSspHelperqAggregateTable.setStatus("current")
+_AlaSspHelperqAggregateEntry_Object = MibTableRow
+alaSspHelperqAggregateEntry = _AlaSspHelperqAggregateEntry_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 10, 1)
+)
+alaSspHelperqAggregateEntry.setIndexNames(
+    (0, "ALCATEL-IND1-STACK-MANAGER-MIB", "alaSspHelperAggregateId"),
+)
+if mibBuilder.loadTexts:
+    alaSspHelperqAggregateEntry.setStatus("current")
+
+
+class _AlaSspHelperAggregateId_Type(Integer32):
+    """Custom type alaSspHelperAggregateId based on Integer32"""
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 31),
+    )
+
+
+_AlaSspHelperAggregateId_Type.__name__ = "Integer32"
+_AlaSspHelperAggregateId_Object = MibTableColumn
+alaSspHelperAggregateId = _AlaSspHelperAggregateId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 10, 1, 1),
+    _AlaSspHelperAggregateId_Type()
+)
+alaSspHelperAggregateId.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSspHelperAggregateId.setStatus("current")
+
+
+class _AlaSspHelperAggregateStatus_Type(Integer32):
+    """Custom type alaSspHelperAggregateStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaSspHelperAggregateStatus_Type.__name__ = "Integer32"
+_AlaSspHelperAggregateStatus_Object = MibTableColumn
+alaSspHelperAggregateStatus = _AlaSspHelperAggregateStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 1, 10, 1, 2),
+    _AlaSspHelperAggregateStatus_Type()
+)
+alaSspHelperAggregateStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSspHelperAggregateStatus.setStatus("current")
 _AlcatelIND1StackMgrMIBConformance_ObjectIdentity = ObjectIdentity
 alcatelIND1StackMgrMIBConformance = _AlcatelIND1StackMgrMIBConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2)
@@ -741,6 +1002,98 @@ _AlcatelIND1StackMgrMIBGroups_ObjectIdentity = ObjectIdentity
 alcatelIND1StackMgrMIBGroups = _AlcatelIND1StackMgrMIBGroups_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1)
 )
+_AlaSSPConfigInfo_ObjectIdentity = ObjectIdentity
+alaSSPConfigInfo = _AlaSSPConfigInfo_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 8)
+)
+
+
+class _AlaSspConfigStatus_Type(Integer32):
+    """Custom type alaSspConfigStatus based on Integer32"""
+    defaultValue = 2
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("enable", 1),
+          ("disable", 2))
+    )
+
+
+_AlaSspConfigStatus_Type.__name__ = "Integer32"
+_AlaSspConfigStatus_Object = MibScalar
+alaSspConfigStatus = _AlaSspConfigStatus_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 8, 1),
+    _AlaSspConfigStatus_Type()
+)
+alaSspConfigStatus.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSspConfigStatus.setStatus("current")
+
+
+class _AlaSspLinkaggId_Type(Integer32):
+    """Custom type alaSspLinkaggId based on Integer32"""
+    defaultValue = -1
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(-1, 31),
+    )
+
+
+_AlaSspLinkaggId_Type.__name__ = "Integer32"
+_AlaSspLinkaggId_Object = MibScalar
+alaSspLinkaggId = _AlaSspLinkaggId_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 8, 2),
+    _AlaSspLinkaggId_Type()
+)
+alaSspLinkaggId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSspLinkaggId.setStatus("current")
+
+
+class _AlaSspGuardTimer_Type(Integer32):
+    """Custom type alaSspGuardTimer based on Integer32"""
+    defaultValue = 30
+
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(30, 100),
+    )
+
+
+_AlaSspGuardTimer_Type.__name__ = "Integer32"
+_AlaSspGuardTimer_Object = MibScalar
+alaSspGuardTimer = _AlaSspGuardTimer_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 8, 3),
+    _AlaSspGuardTimer_Type()
+)
+alaSspGuardTimer.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    alaSspGuardTimer.setStatus("current")
+_AlaSspUpTime_Type = TimeTicks
+_AlaSspUpTime_Object = MibScalar
+alaSspUpTime = _AlaSspUpTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 8, 4),
+    _AlaSspUpTime_Type()
+)
+alaSspUpTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSspUpTime.setStatus("current")
+_AlaSspStateUpTime_Type = TimeTicks
+_AlaSspStateUpTime_Object = MibScalar
+alaSspStateUpTime = _AlaSspStateUpTime_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 8, 5),
+    _AlaSspStateUpTime_Type()
+)
+alaSspStateUpTime.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    alaSspStateUpTime.setStatus("current")
 _AlcatelIND1StackMgrMIBCompliances_ObjectIdentity = ObjectIdentity
 alcatelIND1StackMgrMIBCompliances = _AlcatelIND1StackMgrMIBCompliances_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 2)
@@ -776,6 +1129,15 @@ alaStackMgrSecondary = _AlaStackMgrSecondary_Object(
 alaStackMgrSecondary.setMaxAccess("accessible-for-notify")
 if mibBuilder.loadTexts:
     alaStackMgrSecondary.setStatus("current")
+_AlaStackMgrPrimaryLicense_Type = AlaStackMgrLicenseType
+_AlaStackMgrPrimaryLicense_Object = MibScalar
+alaStackMgrPrimaryLicense = _AlaStackMgrPrimaryLicense_Object(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 3, 4),
+    _AlaStackMgrPrimaryLicense_Type()
+)
+alaStackMgrPrimaryLicense.setMaxAccess("accessible-for-notify")
+if mibBuilder.loadTexts:
+    alaStackMgrPrimaryLicense.setStatus("current")
 _AlaStackMgrTraps_ObjectIdentity = ObjectIdentity
 alaStackMgrTraps = _AlaStackMgrTraps_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 4)
@@ -805,6 +1167,75 @@ alaStackMgrCfgMgrGroup.setObjects(
 )
 if mibBuilder.loadTexts:
     alaStackMgrCfgMgrGroup.setStatus("current")
+
+alaStackMgrStackModeGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 3)
+)
+alaStackMgrStackModeGroup.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrAdminStackMode"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrOperStackMode"))
+)
+if mibBuilder.loadTexts:
+    alaStackMgrStackModeGroup.setStatus("current")
+
+alaStackMgrTrapGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 4)
+)
+alaStackMgrTrapGroup.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrPrimary"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrSecondary"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStackStatus"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrTrapLinkNumber"))
+)
+if mibBuilder.loadTexts:
+    alaStackMgrTrapGroup.setStatus("current")
+
+alaStackMgrStatGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 5)
+)
+alaStackMgrStatGroup.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatLinkNumber"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatPktsRx"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatPktsTx"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatErrorsRx"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatErrorsTx"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatDelayFromLastMsg"))
+)
+if mibBuilder.loadTexts:
+    alaStackMgrStatGroup.setStatus("current")
+
+alaStackMgrStaticRouteGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 6)
+)
+alaStackMgrStaticRouteGroup.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStaticRoutePort"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStaticRoutePortState"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStaticRouteStatus"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStaticRouteRowStatus"))
+)
+if mibBuilder.loadTexts:
+    alaStackMgrStaticRouteGroup.setStatus("current")
+
+alaStackMgrMIBObjectsGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 7)
+)
+alaStackMgrMIBObjectsGroup.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrTokensAvailable"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrTokensUsed"))
+)
+if mibBuilder.loadTexts:
+    alaStackMgrMIBObjectsGroup.setStatus("current")
+
+alaStackSplitProtectionGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 2, 1, 9)
+)
+alaStackSplitProtectionGroup.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaSspHelperStatus"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaSspHelperAggregateId"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaSspHelperAggregateStatus"))
+)
+if mibBuilder.loadTexts:
+    alaStackSplitProtectionGroup.setStatus("current")
 
 
 # Notification objects
@@ -906,6 +1337,40 @@ if mibBuilder.loadTexts:
         "current"
     )
 
+alaStackMgrIncompatibleLicenseTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 4, 0, 10)
+)
+alaStackMgrIncompatibleLicenseTrap.setObjects(
+      *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrSlotNINumber"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrPrimaryLicense"))
+)
+if mibBuilder.loadTexts:
+    alaStackMgrIncompatibleLicenseTrap.setStatus(
+        "current"
+    )
+
+alaStackSplitProtectionTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 4, 0, 11)
+)
+alaStackSplitProtectionTrap.setObjects(
+    ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrSlotNINumber")
+)
+if mibBuilder.loadTexts:
+    alaStackSplitProtectionTrap.setStatus(
+        "current"
+    )
+
+alaStackSplitRecoveryTrap = NotificationType(
+    (1, 3, 6, 1, 4, 1, 6486, 800, 1, 2, 1, 24, 1, 4, 0, 12)
+)
+alaStackSplitRecoveryTrap.setObjects(
+    ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrSlotNINumber")
+)
+if mibBuilder.loadTexts:
+    alaStackSplitRecoveryTrap.setStatus(
+        "current"
+    )
+
 
 # Notifications groups
 
@@ -921,7 +1386,10 @@ alaStackMgrNotificationGroup.setObjects(
         ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrOutOfSlotsTrap"),
         ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrOutOfTokensTrap"),
         ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrOutOfPassThruSlotsTrap"),
-        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrBadMixTrap"))
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrBadMixTrap"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrIncompatibleLicenseTrap"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackSplitProtectionTrap"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackSplitRecoveryTrap"))
 )
 if mibBuilder.loadTexts:
     alaStackMgrNotificationGroup.setStatus(
@@ -939,7 +1407,14 @@ alcatelIND1StackMgrMIBCompliance = ModuleCompliance(
 )
 alcatelIND1StackMgrMIBCompliance.setObjects(
       *(("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrCfgMgrGroup"),
-        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrNotificationGroup"))
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrNotificationGroup"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStackModeGroup"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrTrapGroup"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStatGroup"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrStaticRouteGroup"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackMgrMIBObjectsGroup"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaSSPConfigInfo"),
+        ("ALCATEL-IND1-STACK-MANAGER-MIB", "alaStackSplitProtectionGroup"))
 )
 if mibBuilder.loadTexts:
     alcatelIND1StackMgrMIBCompliance.setStatus(
@@ -960,6 +1435,10 @@ mibBuilder.exportSymbols(
        "AlaStackMgrCommandAction": AlaStackMgrCommandAction,
        "AlaStackMgrCommandStatus": AlaStackMgrCommandStatus,
        "AlaStackMgrStackingMode": AlaStackMgrStackingMode,
+       "AlaStackMgrStackMode": AlaStackMgrStackMode,
+       "AlaStackMgrLicenseType": AlaStackMgrLicenseType,
+       "AlaSSPTableSlotNINumber": AlaSSPTableSlotNINumber,
+       "AlaSSPTableSspOpStatus": AlaSSPTableSspOpStatus,
        "alcatelIND1StackMgrMIB": alcatelIND1StackMgrMIB,
        "alcatelIND1StackMgrMIBObjects": alcatelIND1StackMgrMIBObjects,
        "alaStackMgrChassisTable": alaStackMgrChassisTable,
@@ -1000,16 +1479,45 @@ mibBuilder.exportSymbols(
        "alaStackMgrStaticRoutePortState": alaStackMgrStaticRoutePortState,
        "alaStackMgrStaticRouteStatus": alaStackMgrStaticRouteStatus,
        "alaStackMgrStaticRouteRowStatus": alaStackMgrStaticRouteRowStatus,
+       "alaStackMgrStackModeTable": alaStackMgrStackModeTable,
+       "alaStackMgrStackModeEntry": alaStackMgrStackModeEntry,
+       "alaStackMgrStackModeIndex": alaStackMgrStackModeIndex,
+       "alaStackMgrAdminStackMode": alaStackMgrAdminStackMode,
+       "alaStackMgrOperStackMode": alaStackMgrOperStackMode,
+       "alaStackMgrCmdAction": alaStackMgrCmdAction,
+       "alaSSPStateTable": alaSSPStateTable,
+       "alaSSPStateEntry": alaSSPStateEntry,
+       "alaSSPTableSlotNINumber": alaSSPTableSlotNINumber,
+       "alaSSPTableSspOpStatus": alaSSPTableSspOpStatus,
+       "alaSSPHelperGlobalConfig": alaSSPHelperGlobalConfig,
+       "alaSspHelperStatus": alaSspHelperStatus,
+       "alaSspHelperqAggregateTable": alaSspHelperqAggregateTable,
+       "alaSspHelperqAggregateEntry": alaSspHelperqAggregateEntry,
+       "alaSspHelperAggregateId": alaSspHelperAggregateId,
+       "alaSspHelperAggregateStatus": alaSspHelperAggregateStatus,
        "alcatelIND1StackMgrMIBConformance": alcatelIND1StackMgrMIBConformance,
        "alcatelIND1StackMgrMIBGroups": alcatelIND1StackMgrMIBGroups,
        "alaStackMgrCfgMgrGroup": alaStackMgrCfgMgrGroup,
        "alaStackMgrNotificationGroup": alaStackMgrNotificationGroup,
+       "alaStackMgrStackModeGroup": alaStackMgrStackModeGroup,
+       "alaStackMgrTrapGroup": alaStackMgrTrapGroup,
+       "alaStackMgrStatGroup": alaStackMgrStatGroup,
+       "alaStackMgrStaticRouteGroup": alaStackMgrStaticRouteGroup,
+       "alaStackMgrMIBObjectsGroup": alaStackMgrMIBObjectsGroup,
+       "alaSSPConfigInfo": alaSSPConfigInfo,
+       "alaSspConfigStatus": alaSspConfigStatus,
+       "alaSspLinkaggId": alaSspLinkaggId,
+       "alaSspGuardTimer": alaSspGuardTimer,
+       "alaSspUpTime": alaSspUpTime,
+       "alaSspStateUpTime": alaSspStateUpTime,
+       "alaStackSplitProtectionGroup": alaStackSplitProtectionGroup,
        "alcatelIND1StackMgrMIBCompliances": alcatelIND1StackMgrMIBCompliances,
        "alcatelIND1StackMgrMIBCompliance": alcatelIND1StackMgrMIBCompliance,
        "alcatelIND1StackMgrTrapObjects": alcatelIND1StackMgrTrapObjects,
        "alaStackMgrTrapLinkNumber": alaStackMgrTrapLinkNumber,
        "alaStackMgrPrimary": alaStackMgrPrimary,
        "alaStackMgrSecondary": alaStackMgrSecondary,
+       "alaStackMgrPrimaryLicense": alaStackMgrPrimaryLicense,
        "alaStackMgrTraps": alaStackMgrTraps,
        "alaStackMgrDuplicateSlotTrap": alaStackMgrDuplicateSlotTrap,
        "alaStackMgrNeighborChangeTrap": alaStackMgrNeighborChangeTrap,
@@ -1019,5 +1527,8 @@ mibBuilder.exportSymbols(
        "alaStackMgrOutOfSlotsTrap": alaStackMgrOutOfSlotsTrap,
        "alaStackMgrOutOfTokensTrap": alaStackMgrOutOfTokensTrap,
        "alaStackMgrOutOfPassThruSlotsTrap": alaStackMgrOutOfPassThruSlotsTrap,
-       "alaStackMgrBadMixTrap": alaStackMgrBadMixTrap}
+       "alaStackMgrBadMixTrap": alaStackMgrBadMixTrap,
+       "alaStackMgrIncompatibleLicenseTrap": alaStackMgrIncompatibleLicenseTrap,
+       "alaStackSplitProtectionTrap": alaStackSplitProtectionTrap,
+       "alaStackSplitRecoveryTrap": alaStackSplitRecoveryTrap}
 )

@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\nortel\NORTEL-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 12:18:05 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -114,14 +111,6 @@ nortel = ModuleIdentity(
 
 # MIB Managed Objects in the order of their OIDs
 
-_NortelGenericMIBs_ObjectIdentity = ObjectIdentity
-nortelGenericMIBs = _NortelGenericMIBs_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 562, 29)
-)
-_Opterametro_ObjectIdentity = ObjectIdentity
-opterametro = _Opterametro_ObjectIdentity(
-    (1, 3, 6, 1, 4, 1, 562, 68)
-)
 
 # Managed Objects groups
 
@@ -142,7 +131,5 @@ opterametro = _Opterametro_ObjectIdentity(
 
 mibBuilder.exportSymbols(
     "NORTEL-MIB",
-    **{"nortel": nortel,
-       "nortelGenericMIBs": nortelGenericMIBs,
-       "opterametro": opterametro}
+    **{"nortel": nortel}
 )

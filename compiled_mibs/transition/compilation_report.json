@@ -1,14 +1,14 @@
 {
-  "timestamp": "2025-10-02T12:32:42.275655",
+  "timestamp": "2026-05-29T09:52:57.441322",
   "stats": {
-    "total": 71,
-    "compiled": 58,
+    "total": 72,
+    "compiled": 59,
     "failed": 8,
     "skipped": 5,
     "errors": [
       {
         "mib": "TN-ACCESS-MGMT-MIB",
-        "error": "missing"
+        "error": "failed"
       },
       {
         "mib": "TN-MRP-MIB",
@@ -19,15 +19,15 @@
         "error": "'int' object has no attribute 'replace'"
       },
       {
-        "mib": "TN-PRIVATE-VLAN-MIB",
-        "error": "missing"
-      },
-      {
         "mib": "TN-RFC2544-MIB",
         "error": "failed"
       },
       {
         "mib": "TN-SA-MIB",
+        "error": "failed"
+      },
+      {
+        "mib": "TN-SIP-MIB",
         "error": "failed"
       },
       {
@@ -40,5 +40,5 @@
       }
     ]
   },
-  "output_dir": "C:\\Users\\speterman\\PycharmProjects\\lnmpcomp\\compiled_mibs"
+  "output_dir": "C:\\vscode\\python-librenms-mibs\\compiled_mibs\\.build"
 }

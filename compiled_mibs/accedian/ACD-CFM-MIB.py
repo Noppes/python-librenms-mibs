@@ -8,9 +8,6 @@
 # Notes
 # -----
 # ASN.1 source file://mibs\accedian\ACD-CFM-MIB
-# Produced by pysmi-1.6.2 at Thu Oct  2 11:14:04 2025
-# On host DESKTOP-ORUUBP9 platform Windows version 11 by user speterman
-# Using Python version 3.12.8 (tags/v3.12.8:2dc476b, Dec  3 2024, 19:30:04) [MSC v.1942 64 bit (AMD64)]
 
 if 'mibBuilder' not in globals():
     import sys
@@ -48,6 +45,10 @@ if 'mibBuilder' not in globals():
 (acdMibs,) = mibBuilder.importSymbols(
     "ACCEDIAN-SMI",
     "acdMibs")
+
+(VlanIdOrNone,) = mibBuilder.importSymbols(
+    "Q-BRIDGE-MIB",
+    "VlanIdOrNone")
 
 (ModuleCompliance,
  NotificationGroup,
@@ -95,6 +96,7 @@ if 'mibBuilder' not in globals():
 
 (DateAndTime,
  DisplayString,
+ MacAddress,
  PhysAddress,
  RowStatus,
  TextualConvention,
@@ -102,6 +104,7 @@ if 'mibBuilder' not in globals():
     "SNMPv2-TC",
     "DateAndTime",
     "DisplayString",
+    "MacAddress",
     "PhysAddress",
     "RowStatus",
     "TextualConvention",
@@ -115,7 +118,15 @@ acdCfm = ModuleIdentity(
 )
 if mibBuilder.loadTexts:
     acdCfm.setRevisions(
-        ("2011-12-21 01:00",
+        ("2016-09-23 01:00",
+         "2016-07-05 01:00",
+         "2016-05-26 01:00",
+         "2014-07-04 01:00",
+         "2013-01-07 01:00",
+         "2012-04-10 01:00",
+         "2012-01-18 01:00",
+         "2012-01-09 01:00",
+         "2011-12-21 01:00",
          "2011-12-20 01:00",
          "2011-09-21 01:00",
          "2011-03-30 01:00",
@@ -129,6 +140,64 @@ if mibBuilder.loadTexts:
 
 
 # TEXTUAL-CONVENTIONS
+
+
+
+class AcdCfmMepDirection(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("down", 1),
+          ("up", 2))
+    )
+
+
+
+class AcdCfmMepLowestAlarmPri(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7)
+        )
+    )
+    namedValues = NamedValues(
+        *(("soamAll", 1),
+          ("soamMacRemErrXcon", 2),
+          ("soamRemErrXcon", 3),
+          ("soamErrXcon", 4),
+          ("soamXcon", 5),
+          ("soamAis", 6),
+          ("soamNone", 7))
+    )
+
+
+
+class AcdCfmInterfaceAssign(TextualConvention, Integer32):
+    status = "current"
+    subtypeSpec = Integer32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        SingleValueConstraint(
+            *(1,
+              2)
+        )
+    )
+    namedValues = NamedValues(
+        *(("unassigned", 1),
+          ("assigned", 2))
+    )
 
 
 
@@ -548,6 +617,25 @@ acdCfmDmCfgTwoWayAvgDvThresh = _AcdCfmDmCfgTwoWayAvgDvThresh_Object(
 acdCfmDmCfgTwoWayAvgDvThresh.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdCfmDmCfgTwoWayAvgDvThresh.setStatus("current")
+
+
+class _AcdCfmDmCfgName_Type(DisplayString):
+    """Custom type acdCfmDmCfgName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmDmCfgName_Type.__name__ = "DisplayString"
+_AcdCfmDmCfgName_Object = MibTableColumn
+acdCfmDmCfgName = _AcdCfmDmCfgName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 1, 1, 25),
+    _AcdCfmDmCfgName_Type()
+)
+acdCfmDmCfgName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmDmCfgName.setStatus("current")
 _AcdCfmResultOneWayDelayTable_Object = MibTable
 acdCfmResultOneWayDelayTable = _AcdCfmResultOneWayDelayTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 2)
@@ -679,6 +767,25 @@ if mibBuilder.loadTexts:
     acdCfmResultOneWayDelayInstValue.setStatus("current")
 if mibBuilder.loadTexts:
     acdCfmResultOneWayDelayInstValue.setUnits("microseconds")
+
+
+class _AcdCfmResultOneWayDelayName_Type(DisplayString):
+    """Custom type acdCfmResultOneWayDelayName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmResultOneWayDelayName_Type.__name__ = "DisplayString"
+_AcdCfmResultOneWayDelayName_Object = MibTableColumn
+acdCfmResultOneWayDelayName = _AcdCfmResultOneWayDelayName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 2, 1, 13),
+    _AcdCfmResultOneWayDelayName_Type()
+)
+acdCfmResultOneWayDelayName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmResultOneWayDelayName.setStatus("current")
 _AcdCfmResultOneWayDvTable_Object = MibTable
 acdCfmResultOneWayDvTable = _AcdCfmResultOneWayDvTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 3)
@@ -810,6 +917,25 @@ if mibBuilder.loadTexts:
     acdCfmResultOneWayDvInstValue.setStatus("current")
 if mibBuilder.loadTexts:
     acdCfmResultOneWayDvInstValue.setUnits("microseconds")
+
+
+class _AcdCfmResultOneWayDvName_Type(DisplayString):
+    """Custom type acdCfmResultOneWayDvName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmResultOneWayDvName_Type.__name__ = "DisplayString"
+_AcdCfmResultOneWayDvName_Object = MibTableColumn
+acdCfmResultOneWayDvName = _AcdCfmResultOneWayDvName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 3, 1, 13),
+    _AcdCfmResultOneWayDvName_Type()
+)
+acdCfmResultOneWayDvName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmResultOneWayDvName.setStatus("current")
 _AcdCfmResultTwoWayDelayTable_Object = MibTable
 acdCfmResultTwoWayDelayTable = _AcdCfmResultTwoWayDelayTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 4)
@@ -941,6 +1067,25 @@ if mibBuilder.loadTexts:
     acdCfmResultTwoWayDelayInstValue.setStatus("current")
 if mibBuilder.loadTexts:
     acdCfmResultTwoWayDelayInstValue.setUnits("microseconds")
+
+
+class _AcdCfmResultTwoWayDelayName_Type(DisplayString):
+    """Custom type acdCfmResultTwoWayDelayName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmResultTwoWayDelayName_Type.__name__ = "DisplayString"
+_AcdCfmResultTwoWayDelayName_Object = MibTableColumn
+acdCfmResultTwoWayDelayName = _AcdCfmResultTwoWayDelayName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 4, 1, 13),
+    _AcdCfmResultTwoWayDelayName_Type()
+)
+acdCfmResultTwoWayDelayName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmResultTwoWayDelayName.setStatus("current")
 _AcdCfmResultTwoWayDvTable_Object = MibTable
 acdCfmResultTwoWayDvTable = _AcdCfmResultTwoWayDvTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 5)
@@ -1072,6 +1217,25 @@ if mibBuilder.loadTexts:
     acdCfmResultTwoWayDvInstValue.setStatus("current")
 if mibBuilder.loadTexts:
     acdCfmResultTwoWayDvInstValue.setUnits("microseconds")
+
+
+class _AcdCfmResultTwoWayDvName_Type(DisplayString):
+    """Custom type acdCfmResultTwoWayDvName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmResultTwoWayDvName_Type.__name__ = "DisplayString"
+_AcdCfmResultTwoWayDvName_Object = MibTableColumn
+acdCfmResultTwoWayDvName = _AcdCfmResultTwoWayDvName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 5, 1, 13),
+    _AcdCfmResultTwoWayDvName_Type()
+)
+acdCfmResultTwoWayDvName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmResultTwoWayDvName.setStatus("current")
 _AcdCfmHistResultOneWayDelayTable_Object = MibTable
 acdCfmHistResultOneWayDelayTable = _AcdCfmHistResultOneWayDelayTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 6)
@@ -1094,7 +1258,7 @@ acdCfmHistResultOneWayDelayID = _AcdCfmHistResultOneWayDelayID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 6, 1, 1),
     _AcdCfmHistResultOneWayDelayID_Type()
 )
-acdCfmHistResultOneWayDelayID.setMaxAccess("not-accessible")
+acdCfmHistResultOneWayDelayID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDelayID.setStatus("current")
 _AcdCfmHistResultOneWayDelaySampleIndex_Type = Unsigned32
@@ -1103,7 +1267,7 @@ acdCfmHistResultOneWayDelaySampleIndex = _AcdCfmHistResultOneWayDelaySampleIndex
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 6, 1, 2),
     _AcdCfmHistResultOneWayDelaySampleIndex_Type()
 )
-acdCfmHistResultOneWayDelaySampleIndex.setMaxAccess("not-accessible")
+acdCfmHistResultOneWayDelaySampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDelaySampleIndex.setStatus("current")
 
@@ -1201,6 +1365,25 @@ acdCfmHistResultOneWayDelayThreshExc = _AcdCfmHistResultOneWayDelayThreshExc_Obj
 acdCfmHistResultOneWayDelayThreshExc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDelayThreshExc.setStatus("current")
+
+
+class _AcdCfmHistResultOneWayDelayName_Type(DisplayString):
+    """Custom type acdCfmHistResultOneWayDelayName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmHistResultOneWayDelayName_Type.__name__ = "DisplayString"
+_AcdCfmHistResultOneWayDelayName_Object = MibTableColumn
+acdCfmHistResultOneWayDelayName = _AcdCfmHistResultOneWayDelayName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 6, 1, 11),
+    _AcdCfmHistResultOneWayDelayName_Type()
+)
+acdCfmHistResultOneWayDelayName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmHistResultOneWayDelayName.setStatus("current")
 _AcdCfmHistResultOneWayDvTable_Object = MibTable
 acdCfmHistResultOneWayDvTable = _AcdCfmHistResultOneWayDvTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 7)
@@ -1223,7 +1406,7 @@ acdCfmHistResultOneWayDvID = _AcdCfmHistResultOneWayDvID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 7, 1, 1),
     _AcdCfmHistResultOneWayDvID_Type()
 )
-acdCfmHistResultOneWayDvID.setMaxAccess("not-accessible")
+acdCfmHistResultOneWayDvID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDvID.setStatus("current")
 _AcdCfmHistResultOneWayDvSampleIndex_Type = Unsigned32
@@ -1232,7 +1415,7 @@ acdCfmHistResultOneWayDvSampleIndex = _AcdCfmHistResultOneWayDvSampleIndex_Objec
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 7, 1, 2),
     _AcdCfmHistResultOneWayDvSampleIndex_Type()
 )
-acdCfmHistResultOneWayDvSampleIndex.setMaxAccess("not-accessible")
+acdCfmHistResultOneWayDvSampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDvSampleIndex.setStatus("current")
 
@@ -1330,6 +1513,25 @@ acdCfmHistResultOneWayDvThreshExc = _AcdCfmHistResultOneWayDvThreshExc_Object(
 acdCfmHistResultOneWayDvThreshExc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDvThreshExc.setStatus("current")
+
+
+class _AcdCfmHistResultOneWayDvName_Type(DisplayString):
+    """Custom type acdCfmHistResultOneWayDvName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmHistResultOneWayDvName_Type.__name__ = "DisplayString"
+_AcdCfmHistResultOneWayDvName_Object = MibTableColumn
+acdCfmHistResultOneWayDvName = _AcdCfmHistResultOneWayDvName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 7, 1, 11),
+    _AcdCfmHistResultOneWayDvName_Type()
+)
+acdCfmHistResultOneWayDvName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmHistResultOneWayDvName.setStatus("current")
 _AcdCfmHistResultTwoWayDelayTable_Object = MibTable
 acdCfmHistResultTwoWayDelayTable = _AcdCfmHistResultTwoWayDelayTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 8)
@@ -1352,7 +1554,7 @@ acdCfmHistResultTwoWayDelayID = _AcdCfmHistResultTwoWayDelayID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 8, 1, 1),
     _AcdCfmHistResultTwoWayDelayID_Type()
 )
-acdCfmHistResultTwoWayDelayID.setMaxAccess("not-accessible")
+acdCfmHistResultTwoWayDelayID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDelayID.setStatus("current")
 _AcdCfmHistResultTwoWayDelaySampleIndex_Type = Unsigned32
@@ -1361,7 +1563,7 @@ acdCfmHistResultTwoWayDelaySampleIndex = _AcdCfmHistResultTwoWayDelaySampleIndex
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 8, 1, 2),
     _AcdCfmHistResultTwoWayDelaySampleIndex_Type()
 )
-acdCfmHistResultTwoWayDelaySampleIndex.setMaxAccess("not-accessible")
+acdCfmHistResultTwoWayDelaySampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDelaySampleIndex.setStatus("current")
 
@@ -1459,6 +1661,25 @@ acdCfmHistResultTwoWayDelayThreshExc = _AcdCfmHistResultTwoWayDelayThreshExc_Obj
 acdCfmHistResultTwoWayDelayThreshExc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDelayThreshExc.setStatus("current")
+
+
+class _AcdCfmHistResultTwoWayDelayName_Type(DisplayString):
+    """Custom type acdCfmHistResultTwoWayDelayName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmHistResultTwoWayDelayName_Type.__name__ = "DisplayString"
+_AcdCfmHistResultTwoWayDelayName_Object = MibTableColumn
+acdCfmHistResultTwoWayDelayName = _AcdCfmHistResultTwoWayDelayName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 8, 1, 11),
+    _AcdCfmHistResultTwoWayDelayName_Type()
+)
+acdCfmHistResultTwoWayDelayName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmHistResultTwoWayDelayName.setStatus("current")
 _AcdCfmHistResultTwoWayDvTable_Object = MibTable
 acdCfmHistResultTwoWayDvTable = _AcdCfmHistResultTwoWayDvTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 9)
@@ -1481,7 +1702,7 @@ acdCfmHistResultTwoWayDvID = _AcdCfmHistResultTwoWayDvID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 9, 1, 1),
     _AcdCfmHistResultTwoWayDvID_Type()
 )
-acdCfmHistResultTwoWayDvID.setMaxAccess("not-accessible")
+acdCfmHistResultTwoWayDvID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDvID.setStatus("current")
 _AcdCfmHistResultTwoWayDvSampleIndex_Type = Unsigned32
@@ -1490,7 +1711,7 @@ acdCfmHistResultTwoWayDvSampleIndex = _AcdCfmHistResultTwoWayDvSampleIndex_Objec
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 9, 1, 2),
     _AcdCfmHistResultTwoWayDvSampleIndex_Type()
 )
-acdCfmHistResultTwoWayDvSampleIndex.setMaxAccess("not-accessible")
+acdCfmHistResultTwoWayDvSampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDvSampleIndex.setStatus("current")
 
@@ -1588,6 +1809,25 @@ acdCfmHistResultTwoWayDvThreshExc = _AcdCfmHistResultTwoWayDvThreshExc_Object(
 acdCfmHistResultTwoWayDvThreshExc.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDvThreshExc.setStatus("current")
+
+
+class _AcdCfmHistResultTwoWayDvName_Type(DisplayString):
+    """Custom type acdCfmHistResultTwoWayDvName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmHistResultTwoWayDvName_Type.__name__ = "DisplayString"
+_AcdCfmHistResultTwoWayDvName_Object = MibTableColumn
+acdCfmHistResultTwoWayDvName = _AcdCfmHistResultTwoWayDvName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 1, 9, 1, 11),
+    _AcdCfmHistResultTwoWayDvName_Type()
+)
+acdCfmHistResultTwoWayDvName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmHistResultTwoWayDvName.setStatus("current")
 _AcdCfmPacketLoss_ObjectIdentity = ObjectIdentity
 acdCfmPacketLoss = _AcdCfmPacketLoss_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2)
@@ -1773,6 +2013,27 @@ acdCfmPktLossCfgRatioThresh = _AcdCfmPktLossCfgRatioThresh_Object(
 acdCfmPktLossCfgRatioThresh.setMaxAccess("read-write")
 if mibBuilder.loadTexts:
     acdCfmPktLossCfgRatioThresh.setStatus("current")
+
+
+class _AcdCfmPktLossCfgName_Type(DisplayString):
+    """Custom type acdCfmPktLossCfgName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmPktLossCfgName_Type.__name__ = "DisplayString"
+_AcdCfmPktLossCfgName_Object = MibTableColumn
+acdCfmPktLossCfgName = _AcdCfmPktLossCfgName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 1, 1, 11),
+    _AcdCfmPktLossCfgName_Type()
+)
+acdCfmPktLossCfgName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmPktLossCfgName.setStatus("current")
 _AcdCfmResultPktLossTable_Object = MibTable
 acdCfmResultPktLossTable = _AcdCfmResultPktLossTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 2)
@@ -1960,6 +2221,25 @@ acdCfmResultPktLossRatio = _AcdCfmResultPktLossRatio_Object(
 acdCfmResultPktLossRatio.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmResultPktLossRatio.setStatus("current")
+
+
+class _AcdCfmResultPktLossName_Type(DisplayString):
+    """Custom type acdCfmResultPktLossName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmResultPktLossName_Type.__name__ = "DisplayString"
+_AcdCfmResultPktLossName_Object = MibTableColumn
+acdCfmResultPktLossName = _AcdCfmResultPktLossName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 2, 1, 19),
+    _AcdCfmResultPktLossName_Type()
+)
+acdCfmResultPktLossName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmResultPktLossName.setStatus("current")
 _AcdCfmHistResultPktLossTable_Object = MibTable
 acdCfmHistResultPktLossTable = _AcdCfmHistResultPktLossTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 3)
@@ -1982,7 +2262,7 @@ acdCfmHistResultPktLossID = _AcdCfmHistResultPktLossID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 3, 1, 1),
     _AcdCfmHistResultPktLossID_Type()
 )
-acdCfmHistResultPktLossID.setMaxAccess("not-accessible")
+acdCfmHistResultPktLossID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultPktLossID.setStatus("current")
 _AcdCfmHistResultPktLossSampleIndex_Type = Unsigned32
@@ -1991,7 +2271,7 @@ acdCfmHistResultPktLossSampleIndex = _AcdCfmHistResultPktLossSampleIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 3, 1, 2),
     _AcdCfmHistResultPktLossSampleIndex_Type()
 )
-acdCfmHistResultPktLossSampleIndex.setMaxAccess("not-accessible")
+acdCfmHistResultPktLossSampleIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultPktLossSampleIndex.setStatus("current")
 
@@ -2165,6 +2445,25 @@ acdCfmHistResultPktLossRatio = _AcdCfmHistResultPktLossRatio_Object(
 acdCfmHistResultPktLossRatio.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmHistResultPktLossRatio.setStatus("current")
+
+
+class _AcdCfmHistResultPktLossName_Type(DisplayString):
+    """Custom type acdCfmHistResultPktLossName based on DisplayString"""
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmHistResultPktLossName_Type.__name__ = "DisplayString"
+_AcdCfmHistResultPktLossName_Object = MibTableColumn
+acdCfmHistResultPktLossName = _AcdCfmHistResultPktLossName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 2, 3, 1, 19),
+    _AcdCfmHistResultPktLossName_Type()
+)
+acdCfmHistResultPktLossName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmHistResultPktLossName.setStatus("current")
 _AcdCfmMep_ObjectIdentity = ObjectIdentity
 acdCfmMep = _AcdCfmMep_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3)
@@ -2400,6 +2699,27 @@ acdCfmMepStatsTxSlrPdu = _AcdCfmMepStatsTxSlrPdu_Object(
 acdCfmMepStatsTxSlrPdu.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmMepStatsTxSlrPdu.setStatus("current")
+
+
+class _AcdCfmMepStatsTxName_Type(DisplayString):
+    """Custom type acdCfmMepStatsTxName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmMepStatsTxName_Type.__name__ = "DisplayString"
+_AcdCfmMepStatsTxName_Object = MibTableColumn
+acdCfmMepStatsTxName = _AcdCfmMepStatsTxName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 2, 1, 25),
+    _AcdCfmMepStatsTxName_Type()
+)
+acdCfmMepStatsTxName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmMepStatsTxName.setStatus("current")
 _AcdCfmMepStatsRxTable_Object = MibTable
 acdCfmMepStatsRxTable = _AcdCfmMepStatsRxTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 3)
@@ -2685,6 +3005,36 @@ acdCfmMepStatsRxSlrPdu = _AcdCfmMepStatsRxSlrPdu_Object(
 acdCfmMepStatsRxSlrPdu.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmMepStatsRxSlrPdu.setStatus("current")
+_AcdCfmMepStatsRxCsfInvalidFlags_Type = Counter64
+_AcdCfmMepStatsRxCsfInvalidFlags_Object = MibTableColumn
+acdCfmMepStatsRxCsfInvalidFlags = _AcdCfmMepStatsRxCsfInvalidFlags_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 3, 1, 31),
+    _AcdCfmMepStatsRxCsfInvalidFlags_Type()
+)
+acdCfmMepStatsRxCsfInvalidFlags.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmMepStatsRxCsfInvalidFlags.setStatus("current")
+
+
+class _AcdCfmMepStatsRxName_Type(DisplayString):
+    """Custom type acdCfmMepStatsRxName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmMepStatsRxName_Type.__name__ = "DisplayString"
+_AcdCfmMepStatsRxName_Object = MibTableColumn
+acdCfmMepStatsRxName = _AcdCfmMepStatsRxName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 3, 1, 32),
+    _AcdCfmMepStatsRxName_Type()
+)
+acdCfmMepStatsRxName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmMepStatsRxName.setStatus("current")
 _AcdCfmMepDmStatsTable_Object = MibTable
 acdCfmMepDmStatsTable = _AcdCfmMepDmStatsTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 4)
@@ -2755,6 +3105,375 @@ acdCfmMepDmStatsRxDmrPdu = _AcdCfmMepDmStatsRxDmrPdu_Object(
 acdCfmMepDmStatsRxDmrPdu.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmMepDmStatsRxDmrPdu.setStatus("current")
+
+
+class _AcdCfmMepDmStatsName_Type(DisplayString):
+    """Custom type acdCfmMepDmStatsName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmMepDmStatsName_Type.__name__ = "DisplayString"
+_AcdCfmMepDmStatsName_Object = MibTableColumn
+acdCfmMepDmStatsName = _AcdCfmMepDmStatsName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 4, 1, 7),
+    _AcdCfmMepDmStatsName_Type()
+)
+acdCfmMepDmStatsName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmMepDmStatsName.setStatus("current")
+_AcdCfmMepCfgTable_Object = MibTable
+acdCfmMepCfgTable = _AcdCfmMepCfgTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5)
+)
+if mibBuilder.loadTexts:
+    acdCfmMepCfgTable.setStatus("current")
+_AcdCfmMepCfgEntry_Object = MibTableRow
+acdCfmMepCfgEntry = _AcdCfmMepCfgEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1)
+)
+acdCfmMepCfgEntry.setIndexNames(
+    (0, "ACD-CFM-MIB", "acdCfmMepCfgIdx"),
+)
+if mibBuilder.loadTexts:
+    acdCfmMepCfgEntry.setStatus("current")
+_AcdCfmMepCfgIdx_Type = Unsigned32
+_AcdCfmMepCfgIdx_Object = MibTableColumn
+acdCfmMepCfgIdx = _AcdCfmMepCfgIdx_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 1),
+    _AcdCfmMepCfgIdx_Type()
+)
+acdCfmMepCfgIdx.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgIdx.setStatus("current")
+_AcdCfmMepCfgRowStatus_Type = RowStatus
+_AcdCfmMepCfgRowStatus_Object = MibTableColumn
+acdCfmMepCfgRowStatus = _AcdCfmMepCfgRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 2),
+    _AcdCfmMepCfgRowStatus_Type()
+)
+acdCfmMepCfgRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgRowStatus.setStatus("current")
+_AcdCfmMepCfgMdIdx_Type = Unsigned32
+_AcdCfmMepCfgMdIdx_Object = MibTableColumn
+acdCfmMepCfgMdIdx = _AcdCfmMepCfgMdIdx_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 3),
+    _AcdCfmMepCfgMdIdx_Type()
+)
+acdCfmMepCfgMdIdx.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgMdIdx.setStatus("current")
+
+
+class _AcdCfmMepCfgMaIdx_Type(Unsigned32):
+    """Custom type acdCfmMepCfgMaIdx based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8191),
+    )
+
+
+_AcdCfmMepCfgMaIdx_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgMaIdx_Object = MibTableColumn
+acdCfmMepCfgMaIdx = _AcdCfmMepCfgMaIdx_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 4),
+    _AcdCfmMepCfgMaIdx_Type()
+)
+acdCfmMepCfgMaIdx.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgMaIdx.setStatus("current")
+
+
+class _AcdCfmMepCfgMepId_Type(Unsigned32):
+    """Custom type acdCfmMepCfgMepId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 8191),
+    )
+
+
+_AcdCfmMepCfgMepId_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgMepId_Object = MibTableColumn
+acdCfmMepCfgMepId = _AcdCfmMepCfgMepId_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 5),
+    _AcdCfmMepCfgMepId_Type()
+)
+acdCfmMepCfgMepId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgMepId.setStatus("current")
+
+
+class _AcdCfmMepCfgName_Type(DisplayString):
+    """Custom type acdCfmMepCfgName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmMepCfgName_Type.__name__ = "DisplayString"
+_AcdCfmMepCfgName_Object = MibTableColumn
+acdCfmMepCfgName = _AcdCfmMepCfgName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 6),
+    _AcdCfmMepCfgName_Type()
+)
+acdCfmMepCfgName.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgName.setStatus("current")
+
+
+class _AcdCfmMepCfgPortId_Type(Unsigned32):
+    """Custom type acdCfmMepCfgPortId based on Unsigned32"""
+    defaultValue = 1
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AcdCfmMepCfgPortId_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgPortId_Object = MibTableColumn
+acdCfmMepCfgPortId = _AcdCfmMepCfgPortId_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 7),
+    _AcdCfmMepCfgPortId_Type()
+)
+acdCfmMepCfgPortId.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgPortId.setStatus("current")
+_AcdCfmMepCfgPortIdMacAddr_Type = MacAddress
+_AcdCfmMepCfgPortIdMacAddr_Object = MibTableColumn
+acdCfmMepCfgPortIdMacAddr = _AcdCfmMepCfgPortIdMacAddr_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 8),
+    _AcdCfmMepCfgPortIdMacAddr_Type()
+)
+acdCfmMepCfgPortIdMacAddr.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgPortIdMacAddr.setStatus("current")
+
+
+class _AcdCfmMepCfgDirection_Type(AcdCfmMepDirection):
+    """Custom type acdCfmMepCfgDirection based on AcdCfmMepDirection"""
+    defaultValue = 1
+
+
+_AcdCfmMepCfgDirection_Type.__name__ = "AcdCfmMepDirection"
+_AcdCfmMepCfgDirection_Object = MibTableColumn
+acdCfmMepCfgDirection = _AcdCfmMepCfgDirection_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 9),
+    _AcdCfmMepCfgDirection_Type()
+)
+acdCfmMepCfgDirection.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgDirection.setStatus("current")
+
+
+class _AcdCfmMepCfgPrimaryVid_Type(VlanIdOrNone):
+    """Custom type acdCfmMepCfgPrimaryVid based on VlanIdOrNone"""
+    defaultValue = 0
+
+
+_AcdCfmMepCfgPrimaryVid_Type.__name__ = "VlanIdOrNone"
+_AcdCfmMepCfgPrimaryVid_Object = MibTableColumn
+acdCfmMepCfgPrimaryVid = _AcdCfmMepCfgPrimaryVid_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 10),
+    _AcdCfmMepCfgPrimaryVid_Type()
+)
+acdCfmMepCfgPrimaryVid.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgPrimaryVid.setStatus("current")
+
+
+class _AcdCfmMepCfgActive_Type(TruthValue):
+    """Custom type acdCfmMepCfgActive based on TruthValue"""
+    defaultValue = 2
+
+
+_AcdCfmMepCfgActive_Type.__name__ = "TruthValue"
+_AcdCfmMepCfgActive_Object = MibTableColumn
+acdCfmMepCfgActive = _AcdCfmMepCfgActive_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 11),
+    _AcdCfmMepCfgActive_Type()
+)
+acdCfmMepCfgActive.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgActive.setStatus("current")
+
+
+class _AcdCfmMepCfgCciEnable_Type(TruthValue):
+    """Custom type acdCfmMepCfgCciEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_AcdCfmMepCfgCciEnable_Type.__name__ = "TruthValue"
+_AcdCfmMepCfgCciEnable_Object = MibTableColumn
+acdCfmMepCfgCciEnable = _AcdCfmMepCfgCciEnable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 12),
+    _AcdCfmMepCfgCciEnable_Type()
+)
+acdCfmMepCfgCciEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgCciEnable.setStatus("current")
+
+
+class _AcdCfmMepCfgCcmSeqEnable_Type(TruthValue):
+    """Custom type acdCfmMepCfgCcmSeqEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_AcdCfmMepCfgCcmSeqEnable_Type.__name__ = "TruthValue"
+_AcdCfmMepCfgCcmSeqEnable_Object = MibTableColumn
+acdCfmMepCfgCcmSeqEnable = _AcdCfmMepCfgCcmSeqEnable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 13),
+    _AcdCfmMepCfgCcmSeqEnable_Type()
+)
+acdCfmMepCfgCcmSeqEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgCcmSeqEnable.setStatus("current")
+
+
+class _AcdCfmMepCfgPriority_Type(Unsigned32):
+    """Custom type acdCfmMepCfgPriority based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 7),
+    )
+
+
+_AcdCfmMepCfgPriority_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgPriority_Object = MibTableColumn
+acdCfmMepCfgPriority = _AcdCfmMepCfgPriority_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 14),
+    _AcdCfmMepCfgPriority_Type()
+)
+acdCfmMepCfgPriority.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgPriority.setStatus("current")
+_AcdCfmMepCfgAlarmPri_Type = AcdCfmMepLowestAlarmPri
+_AcdCfmMepCfgAlarmPri_Object = MibTableColumn
+acdCfmMepCfgAlarmPri = _AcdCfmMepCfgAlarmPri_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 15),
+    _AcdCfmMepCfgAlarmPri_Type()
+)
+acdCfmMepCfgAlarmPri.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgAlarmPri.setStatus("current")
+
+
+class _AcdCfmMepCfgFngAlarmTime_Type(Unsigned32):
+    """Custom type acdCfmMepCfgFngAlarmTime based on Unsigned32"""
+    defaultValue = 2500
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2500, 10000),
+    )
+
+
+_AcdCfmMepCfgFngAlarmTime_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgFngAlarmTime_Object = MibTableColumn
+acdCfmMepCfgFngAlarmTime = _AcdCfmMepCfgFngAlarmTime_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 16),
+    _AcdCfmMepCfgFngAlarmTime_Type()
+)
+acdCfmMepCfgFngAlarmTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgFngAlarmTime.setStatus("current")
+
+
+class _AcdCfmMepCfgFngResetTime_Type(Unsigned32):
+    """Custom type acdCfmMepCfgFngResetTime based on Unsigned32"""
+    defaultValue = 10000
+
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(2500, 10000),
+    )
+
+
+_AcdCfmMepCfgFngResetTime_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgFngResetTime_Object = MibTableColumn
+acdCfmMepCfgFngResetTime = _AcdCfmMepCfgFngResetTime_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 17),
+    _AcdCfmMepCfgFngResetTime_Type()
+)
+acdCfmMepCfgFngResetTime.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgFngResetTime.setStatus("current")
+
+
+class _AcdCfmMepCfgFpEnable_Type(TruthValue):
+    """Custom type acdCfmMepCfgFpEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_AcdCfmMepCfgFpEnable_Type.__name__ = "TruthValue"
+_AcdCfmMepCfgFpEnable_Object = MibTableColumn
+acdCfmMepCfgFpEnable = _AcdCfmMepCfgFpEnable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 18),
+    _AcdCfmMepCfgFpEnable_Type()
+)
+acdCfmMepCfgFpEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgFpEnable.setStatus("current")
+
+
+class _AcdCfmMepCfgFpPortId_Type(Unsigned32):
+    """Custom type acdCfmMepCfgFpPortId based on Unsigned32"""
+    subtypeSpec = Unsigned32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(1, 65535),
+    )
+
+
+_AcdCfmMepCfgFpPortId_Type.__name__ = "Unsigned32"
+_AcdCfmMepCfgFpPortId_Object = MibTableColumn
+acdCfmMepCfgFpPortId = _AcdCfmMepCfgFpPortId_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 19),
+    _AcdCfmMepCfgFpPortId_Type()
+)
+acdCfmMepCfgFpPortId.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgFpPortId.setStatus("current")
+
+
+class _AcdCfmMepCfgCsfEnable_Type(TruthValue):
+    """Custom type acdCfmMepCfgCsfEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_AcdCfmMepCfgCsfEnable_Type.__name__ = "TruthValue"
+_AcdCfmMepCfgCsfEnable_Object = MibTableColumn
+acdCfmMepCfgCsfEnable = _AcdCfmMepCfgCsfEnable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 20),
+    _AcdCfmMepCfgCsfEnable_Type()
+)
+acdCfmMepCfgCsfEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgCsfEnable.setStatus("current")
+
+
+class _AcdCfmMepCfgInterfaceStatusTLVEnable_Type(TruthValue):
+    """Custom type acdCfmMepCfgInterfaceStatusTLVEnable based on TruthValue"""
+    defaultValue = 2
+
+
+_AcdCfmMepCfgInterfaceStatusTLVEnable_Type.__name__ = "TruthValue"
+_AcdCfmMepCfgInterfaceStatusTLVEnable_Object = MibTableColumn
+acdCfmMepCfgInterfaceStatusTLVEnable = _AcdCfmMepCfgInterfaceStatusTLVEnable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 3, 5, 1, 21),
+    _AcdCfmMepCfgInterfaceStatusTLVEnable_Type()
+)
+acdCfmMepCfgInterfaceStatusTLVEnable.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmMepCfgInterfaceStatusTLVEnable.setStatus("current")
 _AcdCfmStack_ObjectIdentity = ObjectIdentity
 acdCfmStack = _AcdCfmStack_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 4)
@@ -3020,7 +3739,7 @@ class _AcdCfmSlmCfgName_Type(DisplayString):
 
     subtypeSpec = DisplayString.subtypeSpec
     subtypeSpec += ConstraintsUnion(
-        ValueSizeConstraint(1, 31),
+        ValueSizeConstraint(1, 32),
     )
 
 
@@ -3147,7 +3866,17 @@ acdCfmSlmResultFarEndNbrLoss = _AcdCfmSlmResultFarEndNbrLoss_Object(
 acdCfmSlmResultFarEndNbrLoss.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmResultFarEndNbrLoss.setStatus("current")
-_AcdCfmSlmResultNearEndRatio_Type = Gauge32
+
+
+class _AcdCfmSlmResultNearEndRatio_Type(Gauge32):
+    """Custom type acdCfmSlmResultNearEndRatio based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100000000),
+    )
+
+
+_AcdCfmSlmResultNearEndRatio_Type.__name__ = "Gauge32"
 _AcdCfmSlmResultNearEndRatio_Object = MibTableColumn
 acdCfmSlmResultNearEndRatio = _AcdCfmSlmResultNearEndRatio_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 2, 1, 12),
@@ -3156,7 +3885,17 @@ acdCfmSlmResultNearEndRatio = _AcdCfmSlmResultNearEndRatio_Object(
 acdCfmSlmResultNearEndRatio.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmResultNearEndRatio.setStatus("current")
-_AcdCfmSlmResultFarEndRatio_Type = Gauge32
+
+
+class _AcdCfmSlmResultFarEndRatio_Type(Gauge32):
+    """Custom type acdCfmSlmResultFarEndRatio based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100000000),
+    )
+
+
+_AcdCfmSlmResultFarEndRatio_Type.__name__ = "Gauge32"
 _AcdCfmSlmResultFarEndRatio_Object = MibTableColumn
 acdCfmSlmResultFarEndRatio = _AcdCfmSlmResultFarEndRatio_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 2, 1, 13),
@@ -3183,6 +3922,27 @@ acdCfmSlmResultLargestGap = _AcdCfmSlmResultLargestGap_Object(
 acdCfmSlmResultLargestGap.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmResultLargestGap.setStatus("current")
+
+
+class _AcdCfmSlmResultName_Type(DisplayString):
+    """Custom type acdCfmSlmResultName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmSlmResultName_Type.__name__ = "DisplayString"
+_AcdCfmSlmResultName_Object = MibTableColumn
+acdCfmSlmResultName = _AcdCfmSlmResultName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 2, 1, 16),
+    _AcdCfmSlmResultName_Type()
+)
+acdCfmSlmResultName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmSlmResultName.setStatus("current")
 _AcdCfmSlmHistResultTable_Object = MibTable
 acdCfmSlmHistResultTable = _AcdCfmSlmHistResultTable_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3)
@@ -3194,8 +3954,8 @@ acdCfmSlmHistResultEntry = _AcdCfmSlmHistResultEntry_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3, 1)
 )
 acdCfmSlmHistResultEntry.setIndexNames(
-    (0, "ACD-CFM-MIB", "acdCfmSlmHistResultInstanceIndex"),
     (0, "ACD-CFM-MIB", "acdCfmSlmHistResultID"),
+    (0, "ACD-CFM-MIB", "acdCfmSlmHistResultPeriodIndex"),
 )
 if mibBuilder.loadTexts:
     acdCfmSlmHistResultEntry.setStatus("current")
@@ -3205,7 +3965,7 @@ acdCfmSlmHistResultID = _AcdCfmSlmHistResultID_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3, 1, 1),
     _AcdCfmSlmHistResultID_Type()
 )
-acdCfmSlmHistResultID.setMaxAccess("not-accessible")
+acdCfmSlmHistResultID.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmHistResultID.setStatus("current")
 _AcdCfmSlmHistResultPeriodIndex_Type = Unsigned32
@@ -3253,7 +4013,17 @@ acdCfmSlmHistResultRemoteRxSlm = _AcdCfmSlmHistResultRemoteRxSlm_Object(
 acdCfmSlmHistResultRemoteRxSlm.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmHistResultRemoteRxSlm.setStatus("current")
-_AcdCfmSlmHistResultNearEndRatio_Type = Gauge32
+
+
+class _AcdCfmSlmHistResultNearEndRatio_Type(Gauge32):
+    """Custom type acdCfmSlmHistResultNearEndRatio based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100000000),
+    )
+
+
+_AcdCfmSlmHistResultNearEndRatio_Type.__name__ = "Gauge32"
 _AcdCfmSlmHistResultNearEndRatio_Object = MibTableColumn
 acdCfmSlmHistResultNearEndRatio = _AcdCfmSlmHistResultNearEndRatio_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3, 1, 7),
@@ -3262,7 +4032,17 @@ acdCfmSlmHistResultNearEndRatio = _AcdCfmSlmHistResultNearEndRatio_Object(
 acdCfmSlmHistResultNearEndRatio.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmHistResultNearEndRatio.setStatus("current")
-_AcdCfmSlmHistResultFarEndRatio_Type = Gauge32
+
+
+class _AcdCfmSlmHistResultFarEndRatio_Type(Gauge32):
+    """Custom type acdCfmSlmHistResultFarEndRatio based on Gauge32"""
+    subtypeSpec = Gauge32.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueRangeConstraint(0, 100000000),
+    )
+
+
+_AcdCfmSlmHistResultFarEndRatio_Type.__name__ = "Gauge32"
 _AcdCfmSlmHistResultFarEndRatio_Object = MibTableColumn
 acdCfmSlmHistResultFarEndRatio = _AcdCfmSlmHistResultFarEndRatio_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3, 1, 8),
@@ -3295,9 +4075,92 @@ acdCfmSlmHistResultInstanceIndex = _AcdCfmSlmHistResultInstanceIndex_Object(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3, 1, 11),
     _AcdCfmSlmHistResultInstanceIndex_Type()
 )
-acdCfmSlmHistResultInstanceIndex.setMaxAccess("not-accessible")
+acdCfmSlmHistResultInstanceIndex.setMaxAccess("read-only")
 if mibBuilder.loadTexts:
     acdCfmSlmHistResultInstanceIndex.setStatus("current")
+
+
+class _AcdCfmSlmHistResultName_Type(DisplayString):
+    """Custom type acdCfmSlmHistResultName based on DisplayString"""
+    defaultHexValue = ""
+
+    subtypeSpec = DisplayString.subtypeSpec
+    subtypeSpec += ConstraintsUnion(
+        ValueSizeConstraint(0, 32),
+    )
+
+
+_AcdCfmSlmHistResultName_Type.__name__ = "DisplayString"
+_AcdCfmSlmHistResultName_Object = MibTableColumn
+acdCfmSlmHistResultName = _AcdCfmSlmHistResultName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 5, 3, 1, 12),
+    _AcdCfmSlmHistResultName_Type()
+)
+acdCfmSlmHistResultName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmSlmHistResultName.setStatus("current")
+_AcdCfmConfig_ObjectIdentity = ObjectIdentity
+acdCfmConfig = _AcdCfmConfig_ObjectIdentity(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6)
+)
+_AcdCfmCfgIfAssignTable_Object = MibTable
+acdCfmCfgIfAssignTable = _AcdCfmCfgIfAssignTable_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6, 1)
+)
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignTable.setStatus("current")
+_AcdCfmCfgIfAssignEntry_Object = MibTableRow
+acdCfmCfgIfAssignEntry = _AcdCfmCfgIfAssignEntry_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6, 1, 1)
+)
+acdCfmCfgIfAssignEntry.setIndexNames(
+    (0, "ACD-CFM-MIB", "acdCfmCfgIfAssignInstIdx"),
+)
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignEntry.setStatus("current")
+_AcdCfmCfgIfAssignRowStatus_Type = RowStatus
+_AcdCfmCfgIfAssignRowStatus_Object = MibTableColumn
+acdCfmCfgIfAssignRowStatus = _AcdCfmCfgIfAssignRowStatus_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6, 1, 1, 1),
+    _AcdCfmCfgIfAssignRowStatus_Type()
+)
+acdCfmCfgIfAssignRowStatus.setMaxAccess("read-create")
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignRowStatus.setStatus("current")
+_AcdCfmCfgIfAssignInstIdx_Type = Unsigned32
+_AcdCfmCfgIfAssignInstIdx_Object = MibTableColumn
+acdCfmCfgIfAssignInstIdx = _AcdCfmCfgIfAssignInstIdx_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6, 1, 1, 2),
+    _AcdCfmCfgIfAssignInstIdx_Type()
+)
+acdCfmCfgIfAssignInstIdx.setMaxAccess("not-accessible")
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignInstIdx.setStatus("current")
+_AcdCfmCfgIfAssignIfName_Type = DisplayString
+_AcdCfmCfgIfAssignIfName_Object = MibTableColumn
+acdCfmCfgIfAssignIfName = _AcdCfmCfgIfAssignIfName_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6, 1, 1, 3),
+    _AcdCfmCfgIfAssignIfName_Type()
+)
+acdCfmCfgIfAssignIfName.setMaxAccess("read-only")
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignIfName.setStatus("current")
+
+
+class _AcdCfmCfgIfAssignLockAssign_Type(AcdCfmInterfaceAssign):
+    """Custom type acdCfmCfgIfAssignLockAssign based on AcdCfmInterfaceAssign"""
+    defaultValue = 1
+
+
+_AcdCfmCfgIfAssignLockAssign_Type.__name__ = "AcdCfmInterfaceAssign"
+_AcdCfmCfgIfAssignLockAssign_Object = MibTableColumn
+acdCfmCfgIfAssignLockAssign = _AcdCfmCfgIfAssignLockAssign_Object(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 1, 6, 1, 1, 4),
+    _AcdCfmCfgIfAssignLockAssign_Type()
+)
+acdCfmCfgIfAssignLockAssign.setMaxAccess("read-write")
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignLockAssign.setStatus("current")
 _AcdCfmConformance_ObjectIdentity = ObjectIdentity
 acdCfmConformance = _AcdCfmConformance_ObjectIdentity(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2)
@@ -3339,7 +4202,8 @@ acdCfmDmCfgGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmDmCfgTwoWayDvEnable"),
         ("ACD-CFM-MIB", "acdCfmDmCfgTwoWayDvMax"),
         ("ACD-CFM-MIB", "acdCfmDmCfgTwoWayDvThresh"),
-        ("ACD-CFM-MIB", "acdCfmDmCfgTwoWayAvgDvThresh"))
+        ("ACD-CFM-MIB", "acdCfmDmCfgTwoWayAvgDvThresh"),
+        ("ACD-CFM-MIB", "acdCfmDmCfgName"))
 )
 if mibBuilder.loadTexts:
     acdCfmDmCfgGroup.setStatus("current")
@@ -3358,7 +4222,8 @@ acdCfmResultOneWayDelayGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmResultOneWayDelayMaxValue"),
         ("ACD-CFM-MIB", "acdCfmResultOneWayDelayAvgValue"),
         ("ACD-CFM-MIB", "acdCfmResultOneWayDelayThreshExc"),
-        ("ACD-CFM-MIB", "acdCfmResultOneWayDelayInstValue"))
+        ("ACD-CFM-MIB", "acdCfmResultOneWayDelayInstValue"),
+        ("ACD-CFM-MIB", "acdCfmResultOneWayDelayName"))
 )
 if mibBuilder.loadTexts:
     acdCfmResultOneWayDelayGroup.setStatus("current")
@@ -3377,7 +4242,8 @@ acdCfmResultOneWayDvGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmResultOneWayDvMaxValue"),
         ("ACD-CFM-MIB", "acdCfmResultOneWayDvAvgValue"),
         ("ACD-CFM-MIB", "acdCfmResultOneWayDvThreshExc"),
-        ("ACD-CFM-MIB", "acdCfmResultOneWayDvInstValue"))
+        ("ACD-CFM-MIB", "acdCfmResultOneWayDvInstValue"),
+        ("ACD-CFM-MIB", "acdCfmResultOneWayDvName"))
 )
 if mibBuilder.loadTexts:
     acdCfmResultOneWayDvGroup.setStatus("current")
@@ -3396,7 +4262,8 @@ acdCfmResultTwoWayDelayGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmResultTwoWayDelayMaxValue"),
         ("ACD-CFM-MIB", "acdCfmResultTwoWayDelayAvgValue"),
         ("ACD-CFM-MIB", "acdCfmResultTwoWayDelayThreshExc"),
-        ("ACD-CFM-MIB", "acdCfmResultTwoWayDelayInstValue"))
+        ("ACD-CFM-MIB", "acdCfmResultTwoWayDelayInstValue"),
+        ("ACD-CFM-MIB", "acdCfmResultTwoWayDelayName"))
 )
 if mibBuilder.loadTexts:
     acdCfmResultTwoWayDelayGroup.setStatus("current")
@@ -3415,7 +4282,8 @@ acdCfmResultTwoWayDvGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmResultTwoWayDvMaxValue"),
         ("ACD-CFM-MIB", "acdCfmResultTwoWayDvAvgValue"),
         ("ACD-CFM-MIB", "acdCfmResultTwoWayDvThreshExc"),
-        ("ACD-CFM-MIB", "acdCfmResultTwoWayDvInstValue"))
+        ("ACD-CFM-MIB", "acdCfmResultTwoWayDvInstValue"),
+        ("ACD-CFM-MIB", "acdCfmResultTwoWayDvName"))
 )
 if mibBuilder.loadTexts:
     acdCfmResultTwoWayDvGroup.setStatus("current")
@@ -3424,14 +4292,17 @@ acdCfmHistResultOneWayDelayGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 6)
 )
 acdCfmHistResultOneWayDelayGroup.setObjects(
-      *(("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayStatus"),
+      *(("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayID"),
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelaySampleIndex"),
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayStatus"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayDuration"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayIntervalEnd"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelaySamples"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayMinValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayMaxValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayAvgValue"),
-        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayThreshExc"))
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayThreshExc"),
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDelayName"))
 )
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDelayGroup.setStatus("current")
@@ -3440,14 +4311,17 @@ acdCfmHistResultOneWayDvGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 7)
 )
 acdCfmHistResultOneWayDvGroup.setObjects(
-      *(("ACD-CFM-MIB", "acdCfmHistResultOneWayDvStatus"),
+      *(("ACD-CFM-MIB", "acdCfmHistResultOneWayDvID"),
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvSampleIndex"),
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvStatus"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvDuration"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvIntervalEnd"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvSamples"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvMinValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvMaxValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvAvgValue"),
-        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvThreshExc"))
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvThreshExc"),
+        ("ACD-CFM-MIB", "acdCfmHistResultOneWayDvName"))
 )
 if mibBuilder.loadTexts:
     acdCfmHistResultOneWayDvGroup.setStatus("current")
@@ -3456,14 +4330,17 @@ acdCfmHistResultTwoWayDelayGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 8)
 )
 acdCfmHistResultTwoWayDelayGroup.setObjects(
-      *(("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayStatus"),
+      *(("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayID"),
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelaySampleIndex"),
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayStatus"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayDuration"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayIntervalEnd"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelaySamples"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayMinValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayMaxValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayAvgValue"),
-        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayThreshExc"))
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayThreshExc"),
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDelayName"))
 )
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDelayGroup.setStatus("current")
@@ -3472,14 +4349,17 @@ acdCfmHistResultTwoWayDvGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 9)
 )
 acdCfmHistResultTwoWayDvGroup.setObjects(
-      *(("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvStatus"),
+      *(("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvID"),
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvSampleIndex"),
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvStatus"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvDuration"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvIntervalEnd"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvSamples"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvMinValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvMaxValue"),
         ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvAvgValue"),
-        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvThreshExc"))
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvThreshExc"),
+        ("ACD-CFM-MIB", "acdCfmHistResultTwoWayDvName"))
 )
 if mibBuilder.loadTexts:
     acdCfmHistResultTwoWayDvGroup.setStatus("current")
@@ -3496,7 +4376,8 @@ acdCfmPktLossCfgGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmPktLossCfgInterval"),
         ("ACD-CFM-MIB", "acdCfmPktLossCfgRefPeriod"),
         ("ACD-CFM-MIB", "acdCfmPktLossCfgThresh"),
-        ("ACD-CFM-MIB", "acdCfmPktLossCfgRatioThresh"))
+        ("ACD-CFM-MIB", "acdCfmPktLossCfgRatioThresh"),
+        ("ACD-CFM-MIB", "acdCfmPktLossCfgName"))
 )
 if mibBuilder.loadTexts:
     acdCfmPktLossCfgGroup.setStatus("current")
@@ -3521,7 +4402,8 @@ acdCfmResultPktLossGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmResultPktLossLargestGap"),
         ("ACD-CFM-MIB", "acdCfmResultPktLossOverflowLargestGap"),
         ("ACD-CFM-MIB", "acdCfmResultPktLossHCLargestGap"),
-        ("ACD-CFM-MIB", "acdCfmResultPktLossRatio"))
+        ("ACD-CFM-MIB", "acdCfmResultPktLossRatio"),
+        ("ACD-CFM-MIB", "acdCfmResultPktLossName"))
 )
 if mibBuilder.loadTexts:
     acdCfmResultPktLossGroup.setStatus("current")
@@ -3530,7 +4412,9 @@ acdCfmHistResultPktLossGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 12)
 )
 acdCfmHistResultPktLossGroup.setObjects(
-      *(("ACD-CFM-MIB", "acdCfmHistResultPktLossStatus"),
+      *(("ACD-CFM-MIB", "acdCfmHistResultPktLossID"),
+        ("ACD-CFM-MIB", "acdCfmHistResultPktLossSampleIndex"),
+        ("ACD-CFM-MIB", "acdCfmHistResultPktLossStatus"),
         ("ACD-CFM-MIB", "acdCfmHistResultPktLossDuration"),
         ("ACD-CFM-MIB", "acdCfmHistResultPktLossIntervalEnd"),
         ("ACD-CFM-MIB", "acdCfmHistResultPktLossSamples"),
@@ -3545,7 +4429,8 @@ acdCfmHistResultPktLossGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmHistResultPktLossLargestGap"),
         ("ACD-CFM-MIB", "acdCfmHistResultPktLossOverflowLargestGap"),
         ("ACD-CFM-MIB", "acdCfmHistResultPktLossHCLargestGap"),
-        ("ACD-CFM-MIB", "acdCfmHistResultPktLossRatio"))
+        ("ACD-CFM-MIB", "acdCfmHistResultPktLossRatio"),
+        ("ACD-CFM-MIB", "acdCfmHistResultPktLossName"))
 )
 if mibBuilder.loadTexts:
     acdCfmHistResultPktLossGroup.setStatus("current")
@@ -3576,7 +4461,8 @@ acdCfmMepStatsTxGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmMepStatsTxVsrPdu"),
         ("ACD-CFM-MIB", "acdCfmMepStatsTxCsfPdu"),
         ("ACD-CFM-MIB", "acdCfmMepStatsTxSlmPdu"),
-        ("ACD-CFM-MIB", "acdCfmMepStatsTxSlrPdu"))
+        ("ACD-CFM-MIB", "acdCfmMepStatsTxSlrPdu"),
+        ("ACD-CFM-MIB", "acdCfmMepStatsTxName"))
 )
 if mibBuilder.loadTexts:
     acdCfmMepStatsTxGroup.setStatus("current")
@@ -3612,7 +4498,9 @@ acdCfmMepStatsRxGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmMepStatsRxLbrUnexpectedPdu"),
         ("ACD-CFM-MIB", "acdCfmMepStatsRxLbrDataErrors"),
         ("ACD-CFM-MIB", "acdCfmMepStatsRxCsfPdu"),
-        ("ACD-CFM-MIB", "acdCfmMepStatsRxSlrPdu"))
+        ("ACD-CFM-MIB", "acdCfmMepStatsRxSlrPdu"),
+        ("ACD-CFM-MIB", "acdCfmMepStatsRxCsfInvalidFlags"),
+        ("ACD-CFM-MIB", "acdCfmMepStatsRxName"))
 )
 if mibBuilder.loadTexts:
     acdCfmMepStatsRxGroup.setStatus("current")
@@ -3624,7 +4512,8 @@ acdCfmMepDmStatsGroup.setObjects(
       *(("ACD-CFM-MIB", "acdCfmMepDmStatsTxDmmPdu"),
         ("ACD-CFM-MIB", "acdCfmMepDmStatsRxDmmPdu"),
         ("ACD-CFM-MIB", "acdCfmMepDmStatsTxDmrPdu"),
-        ("ACD-CFM-MIB", "acdCfmMepDmStatsRxDmrPdu"))
+        ("ACD-CFM-MIB", "acdCfmMepDmStatsRxDmrPdu"),
+        ("ACD-CFM-MIB", "acdCfmMepDmStatsName"))
 )
 if mibBuilder.loadTexts:
     acdCfmMepDmStatsGroup.setStatus("current")
@@ -3685,7 +4574,8 @@ acdCfmSlmResultGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmSlmResultNearEndRatio"),
         ("ACD-CFM-MIB", "acdCfmSlmResultFarEndRatio"),
         ("ACD-CFM-MIB", "acdCfmSlmResultNbrGaps"),
-        ("ACD-CFM-MIB", "acdCfmSlmResultLargestGap"))
+        ("ACD-CFM-MIB", "acdCfmSlmResultLargestGap"),
+        ("ACD-CFM-MIB", "acdCfmSlmResultName"))
 )
 if mibBuilder.loadTexts:
     acdCfmSlmResultGroup.setStatus("current")
@@ -3694,7 +4584,8 @@ acdCfmSlmHistResultGroup = ObjectGroup(
     (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 20)
 )
 acdCfmSlmHistResultGroup.setObjects(
-      *(("ACD-CFM-MIB", "acdCfmSlmHistResultPeriodIndex"),
+      *(("ACD-CFM-MIB", "acdCfmSlmHistResultID"),
+        ("ACD-CFM-MIB", "acdCfmSlmHistResultPeriodIndex"),
         ("ACD-CFM-MIB", "acdCfmSlmHistResultIntervalEnd"),
         ("ACD-CFM-MIB", "acdCfmSlmHistResultTxSlm"),
         ("ACD-CFM-MIB", "acdCfmSlmHistResultRxSlr"),
@@ -3702,10 +4593,51 @@ acdCfmSlmHistResultGroup.setObjects(
         ("ACD-CFM-MIB", "acdCfmSlmHistResultNearEndRatio"),
         ("ACD-CFM-MIB", "acdCfmSlmHistResultFarEndRatio"),
         ("ACD-CFM-MIB", "acdCfmSlmHistResultNbrGaps"),
-        ("ACD-CFM-MIB", "acdCfmSlmHistResultLargestGap"))
+        ("ACD-CFM-MIB", "acdCfmSlmHistResultLargestGap"),
+        ("ACD-CFM-MIB", "acdCfmSlmHistResultInstanceIndex"),
+        ("ACD-CFM-MIB", "acdCfmSlmHistResultName"))
 )
 if mibBuilder.loadTexts:
     acdCfmSlmHistResultGroup.setStatus("current")
+
+acdCfmMepCfgGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 21)
+)
+acdCfmMepCfgGroup.setObjects(
+      *(("ACD-CFM-MIB", "acdCfmMepCfgRowStatus"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgMdIdx"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgMaIdx"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgMepId"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgName"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgPortId"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgPortIdMacAddr"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgDirection"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgPrimaryVid"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgActive"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgCciEnable"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgCcmSeqEnable"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgPriority"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgAlarmPri"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgFngAlarmTime"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgFngResetTime"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgFpEnable"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgFpPortId"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgCsfEnable"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgInterfaceStatusTLVEnable"))
+)
+if mibBuilder.loadTexts:
+    acdCfmMepCfgGroup.setStatus("current")
+
+acdCfmCfgIfAssignGroup = ObjectGroup(
+    (1, 3, 6, 1, 4, 1, 22420, 2, 7, 2, 2, 22)
+)
+acdCfmCfgIfAssignGroup.setObjects(
+      *(("ACD-CFM-MIB", "acdCfmCfgIfAssignRowStatus"),
+        ("ACD-CFM-MIB", "acdCfmCfgIfAssignIfName"),
+        ("ACD-CFM-MIB", "acdCfmCfgIfAssignLockAssign"))
+)
+if mibBuilder.loadTexts:
+    acdCfmCfgIfAssignGroup.setStatus("current")
 
 
 # Notification objects
@@ -3742,7 +4674,9 @@ acdCfmCompliance.setObjects(
         ("ACD-CFM-MIB", "acdCfmMepSlmStatsGroup"),
         ("ACD-CFM-MIB", "acdCfmSlmCfgGroup"),
         ("ACD-CFM-MIB", "acdCfmSlmResultGroup"),
-        ("ACD-CFM-MIB", "acdCfmSlmHistResultGroup"))
+        ("ACD-CFM-MIB", "acdCfmSlmHistResultGroup"),
+        ("ACD-CFM-MIB", "acdCfmMepCfgGroup"),
+        ("ACD-CFM-MIB", "acdCfmCfgIfAssignGroup"))
 )
 if mibBuilder.loadTexts:
     acdCfmCompliance.setStatus(
@@ -3754,7 +4688,10 @@ if mibBuilder.loadTexts:
 
 mibBuilder.exportSymbols(
     "ACD-CFM-MIB",
-    **{"acdCfm": acdCfm,
+    **{"AcdCfmMepDirection": AcdCfmMepDirection,
+       "AcdCfmMepLowestAlarmPri": AcdCfmMepLowestAlarmPri,
+       "AcdCfmInterfaceAssign": AcdCfmInterfaceAssign,
+       "acdCfm": acdCfm,
        "acdCfmNotifications": acdCfmNotifications,
        "acdCfmMIBObjects": acdCfmMIBObjects,
        "acdCfmDelayMeasurement": acdCfmDelayMeasurement,
@@ -3784,6 +4721,7 @@ mibBuilder.exportSymbols(
        "acdCfmDmCfgTwoWayDvMax": acdCfmDmCfgTwoWayDvMax,
        "acdCfmDmCfgTwoWayDvThresh": acdCfmDmCfgTwoWayDvThresh,
        "acdCfmDmCfgTwoWayAvgDvThresh": acdCfmDmCfgTwoWayAvgDvThresh,
+       "acdCfmDmCfgName": acdCfmDmCfgName,
        "acdCfmResultOneWayDelayTable": acdCfmResultOneWayDelayTable,
        "acdCfmResultOneWayDelayEntry": acdCfmResultOneWayDelayEntry,
        "acdCfmResultOneWayDelayID": acdCfmResultOneWayDelayID,
@@ -3798,6 +4736,7 @@ mibBuilder.exportSymbols(
        "acdCfmResultOneWayDelayAvgValue": acdCfmResultOneWayDelayAvgValue,
        "acdCfmResultOneWayDelayThreshExc": acdCfmResultOneWayDelayThreshExc,
        "acdCfmResultOneWayDelayInstValue": acdCfmResultOneWayDelayInstValue,
+       "acdCfmResultOneWayDelayName": acdCfmResultOneWayDelayName,
        "acdCfmResultOneWayDvTable": acdCfmResultOneWayDvTable,
        "acdCfmResultOneWayDvEntry": acdCfmResultOneWayDvEntry,
        "acdCfmResultOneWayDvID": acdCfmResultOneWayDvID,
@@ -3812,6 +4751,7 @@ mibBuilder.exportSymbols(
        "acdCfmResultOneWayDvAvgValue": acdCfmResultOneWayDvAvgValue,
        "acdCfmResultOneWayDvThreshExc": acdCfmResultOneWayDvThreshExc,
        "acdCfmResultOneWayDvInstValue": acdCfmResultOneWayDvInstValue,
+       "acdCfmResultOneWayDvName": acdCfmResultOneWayDvName,
        "acdCfmResultTwoWayDelayTable": acdCfmResultTwoWayDelayTable,
        "acdCfmResultTwoWayDelayEntry": acdCfmResultTwoWayDelayEntry,
        "acdCfmResultTwoWayDelayID": acdCfmResultTwoWayDelayID,
@@ -3826,6 +4766,7 @@ mibBuilder.exportSymbols(
        "acdCfmResultTwoWayDelayAvgValue": acdCfmResultTwoWayDelayAvgValue,
        "acdCfmResultTwoWayDelayThreshExc": acdCfmResultTwoWayDelayThreshExc,
        "acdCfmResultTwoWayDelayInstValue": acdCfmResultTwoWayDelayInstValue,
+       "acdCfmResultTwoWayDelayName": acdCfmResultTwoWayDelayName,
        "acdCfmResultTwoWayDvTable": acdCfmResultTwoWayDvTable,
        "acdCfmResultTwoWayDvEntry": acdCfmResultTwoWayDvEntry,
        "acdCfmResultTwoWayDvID": acdCfmResultTwoWayDvID,
@@ -3840,6 +4781,7 @@ mibBuilder.exportSymbols(
        "acdCfmResultTwoWayDvAvgValue": acdCfmResultTwoWayDvAvgValue,
        "acdCfmResultTwoWayDvThreshExc": acdCfmResultTwoWayDvThreshExc,
        "acdCfmResultTwoWayDvInstValue": acdCfmResultTwoWayDvInstValue,
+       "acdCfmResultTwoWayDvName": acdCfmResultTwoWayDvName,
        "acdCfmHistResultOneWayDelayTable": acdCfmHistResultOneWayDelayTable,
        "acdCfmHistResultOneWayDelayEntry": acdCfmHistResultOneWayDelayEntry,
        "acdCfmHistResultOneWayDelayID": acdCfmHistResultOneWayDelayID,
@@ -3852,6 +4794,7 @@ mibBuilder.exportSymbols(
        "acdCfmHistResultOneWayDelayMaxValue": acdCfmHistResultOneWayDelayMaxValue,
        "acdCfmHistResultOneWayDelayAvgValue": acdCfmHistResultOneWayDelayAvgValue,
        "acdCfmHistResultOneWayDelayThreshExc": acdCfmHistResultOneWayDelayThreshExc,
+       "acdCfmHistResultOneWayDelayName": acdCfmHistResultOneWayDelayName,
        "acdCfmHistResultOneWayDvTable": acdCfmHistResultOneWayDvTable,
        "acdCfmHistResultOneWayDvEntry": acdCfmHistResultOneWayDvEntry,
        "acdCfmHistResultOneWayDvID": acdCfmHistResultOneWayDvID,
@@ -3864,6 +4807,7 @@ mibBuilder.exportSymbols(
        "acdCfmHistResultOneWayDvMaxValue": acdCfmHistResultOneWayDvMaxValue,
        "acdCfmHistResultOneWayDvAvgValue": acdCfmHistResultOneWayDvAvgValue,
        "acdCfmHistResultOneWayDvThreshExc": acdCfmHistResultOneWayDvThreshExc,
+       "acdCfmHistResultOneWayDvName": acdCfmHistResultOneWayDvName,
        "acdCfmHistResultTwoWayDelayTable": acdCfmHistResultTwoWayDelayTable,
        "acdCfmHistResultTwoWayDelayEntry": acdCfmHistResultTwoWayDelayEntry,
        "acdCfmHistResultTwoWayDelayID": acdCfmHistResultTwoWayDelayID,
@@ -3876,6 +4820,7 @@ mibBuilder.exportSymbols(
        "acdCfmHistResultTwoWayDelayMaxValue": acdCfmHistResultTwoWayDelayMaxValue,
        "acdCfmHistResultTwoWayDelayAvgValue": acdCfmHistResultTwoWayDelayAvgValue,
        "acdCfmHistResultTwoWayDelayThreshExc": acdCfmHistResultTwoWayDelayThreshExc,
+       "acdCfmHistResultTwoWayDelayName": acdCfmHistResultTwoWayDelayName,
        "acdCfmHistResultTwoWayDvTable": acdCfmHistResultTwoWayDvTable,
        "acdCfmHistResultTwoWayDvEntry": acdCfmHistResultTwoWayDvEntry,
        "acdCfmHistResultTwoWayDvID": acdCfmHistResultTwoWayDvID,
@@ -3888,6 +4833,7 @@ mibBuilder.exportSymbols(
        "acdCfmHistResultTwoWayDvMaxValue": acdCfmHistResultTwoWayDvMaxValue,
        "acdCfmHistResultTwoWayDvAvgValue": acdCfmHistResultTwoWayDvAvgValue,
        "acdCfmHistResultTwoWayDvThreshExc": acdCfmHistResultTwoWayDvThreshExc,
+       "acdCfmHistResultTwoWayDvName": acdCfmHistResultTwoWayDvName,
        "acdCfmPacketLoss": acdCfmPacketLoss,
        "acdCfmPktLossCfgTable": acdCfmPktLossCfgTable,
        "acdCfmPktLossCfgEntry": acdCfmPktLossCfgEntry,
@@ -3901,6 +4847,7 @@ mibBuilder.exportSymbols(
        "acdCfmPktLossCfgRefPeriod": acdCfmPktLossCfgRefPeriod,
        "acdCfmPktLossCfgThresh": acdCfmPktLossCfgThresh,
        "acdCfmPktLossCfgRatioThresh": acdCfmPktLossCfgRatioThresh,
+       "acdCfmPktLossCfgName": acdCfmPktLossCfgName,
        "acdCfmResultPktLossTable": acdCfmResultPktLossTable,
        "acdCfmResultPktLossEntry": acdCfmResultPktLossEntry,
        "acdCfmResultPktLossID": acdCfmResultPktLossID,
@@ -3921,6 +4868,7 @@ mibBuilder.exportSymbols(
        "acdCfmResultPktLossOverflowLargestGap": acdCfmResultPktLossOverflowLargestGap,
        "acdCfmResultPktLossHCLargestGap": acdCfmResultPktLossHCLargestGap,
        "acdCfmResultPktLossRatio": acdCfmResultPktLossRatio,
+       "acdCfmResultPktLossName": acdCfmResultPktLossName,
        "acdCfmHistResultPktLossTable": acdCfmHistResultPktLossTable,
        "acdCfmHistResultPktLossEntry": acdCfmHistResultPktLossEntry,
        "acdCfmHistResultPktLossID": acdCfmHistResultPktLossID,
@@ -3941,6 +4889,7 @@ mibBuilder.exportSymbols(
        "acdCfmHistResultPktLossOverflowLargestGap": acdCfmHistResultPktLossOverflowLargestGap,
        "acdCfmHistResultPktLossHCLargestGap": acdCfmHistResultPktLossHCLargestGap,
        "acdCfmHistResultPktLossRatio": acdCfmHistResultPktLossRatio,
+       "acdCfmHistResultPktLossName": acdCfmHistResultPktLossName,
        "acdCfmMep": acdCfmMep,
        "acdCfmMepStatsTxTable": acdCfmMepStatsTxTable,
        "acdCfmMepStatsTxEntry": acdCfmMepStatsTxEntry,
@@ -3968,6 +4917,7 @@ mibBuilder.exportSymbols(
        "acdCfmMepStatsTxCsfPdu": acdCfmMepStatsTxCsfPdu,
        "acdCfmMepStatsTxSlmPdu": acdCfmMepStatsTxSlmPdu,
        "acdCfmMepStatsTxSlrPdu": acdCfmMepStatsTxSlrPdu,
+       "acdCfmMepStatsTxName": acdCfmMepStatsTxName,
        "acdCfmMepStatsRxTable": acdCfmMepStatsRxTable,
        "acdCfmMepStatsRxEntry": acdCfmMepStatsRxEntry,
        "acdCfmMepStatsRxID": acdCfmMepStatsRxID,
@@ -4000,6 +4950,8 @@ mibBuilder.exportSymbols(
        "acdCfmMepStatsRxCsfPdu": acdCfmMepStatsRxCsfPdu,
        "acdCfmMepStatsRxSlmPdu": acdCfmMepStatsRxSlmPdu,
        "acdCfmMepStatsRxSlrPdu": acdCfmMepStatsRxSlrPdu,
+       "acdCfmMepStatsRxCsfInvalidFlags": acdCfmMepStatsRxCsfInvalidFlags,
+       "acdCfmMepStatsRxName": acdCfmMepStatsRxName,
        "acdCfmMepDmStatsTable": acdCfmMepDmStatsTable,
        "acdCfmMepDmStatsEntry": acdCfmMepDmStatsEntry,
        "acdCfmMepDmStatsID": acdCfmMepDmStatsID,
@@ -4008,6 +4960,30 @@ mibBuilder.exportSymbols(
        "acdCfmMepDmStatsRxDmmPdu": acdCfmMepDmStatsRxDmmPdu,
        "acdCfmMepDmStatsTxDmrPdu": acdCfmMepDmStatsTxDmrPdu,
        "acdCfmMepDmStatsRxDmrPdu": acdCfmMepDmStatsRxDmrPdu,
+       "acdCfmMepDmStatsName": acdCfmMepDmStatsName,
+       "acdCfmMepCfgTable": acdCfmMepCfgTable,
+       "acdCfmMepCfgEntry": acdCfmMepCfgEntry,
+       "acdCfmMepCfgIdx": acdCfmMepCfgIdx,
+       "acdCfmMepCfgRowStatus": acdCfmMepCfgRowStatus,
+       "acdCfmMepCfgMdIdx": acdCfmMepCfgMdIdx,
+       "acdCfmMepCfgMaIdx": acdCfmMepCfgMaIdx,
+       "acdCfmMepCfgMepId": acdCfmMepCfgMepId,
+       "acdCfmMepCfgName": acdCfmMepCfgName,
+       "acdCfmMepCfgPortId": acdCfmMepCfgPortId,
+       "acdCfmMepCfgPortIdMacAddr": acdCfmMepCfgPortIdMacAddr,
+       "acdCfmMepCfgDirection": acdCfmMepCfgDirection,
+       "acdCfmMepCfgPrimaryVid": acdCfmMepCfgPrimaryVid,
+       "acdCfmMepCfgActive": acdCfmMepCfgActive,
+       "acdCfmMepCfgCciEnable": acdCfmMepCfgCciEnable,
+       "acdCfmMepCfgCcmSeqEnable": acdCfmMepCfgCcmSeqEnable,
+       "acdCfmMepCfgPriority": acdCfmMepCfgPriority,
+       "acdCfmMepCfgAlarmPri": acdCfmMepCfgAlarmPri,
+       "acdCfmMepCfgFngAlarmTime": acdCfmMepCfgFngAlarmTime,
+       "acdCfmMepCfgFngResetTime": acdCfmMepCfgFngResetTime,
+       "acdCfmMepCfgFpEnable": acdCfmMepCfgFpEnable,
+       "acdCfmMepCfgFpPortId": acdCfmMepCfgFpPortId,
+       "acdCfmMepCfgCsfEnable": acdCfmMepCfgCsfEnable,
+       "acdCfmMepCfgInterfaceStatusTLVEnable": acdCfmMepCfgInterfaceStatusTLVEnable,
        "acdCfmStack": acdCfmStack,
        "acdCfmStackTable": acdCfmStackTable,
        "acdCfmStackEntry": acdCfmStackEntry,
@@ -4046,6 +5022,7 @@ mibBuilder.exportSymbols(
        "acdCfmSlmResultFarEndRatio": acdCfmSlmResultFarEndRatio,
        "acdCfmSlmResultNbrGaps": acdCfmSlmResultNbrGaps,
        "acdCfmSlmResultLargestGap": acdCfmSlmResultLargestGap,
+       "acdCfmSlmResultName": acdCfmSlmResultName,
        "acdCfmSlmHistResultTable": acdCfmSlmHistResultTable,
        "acdCfmSlmHistResultEntry": acdCfmSlmHistResultEntry,
        "acdCfmSlmHistResultID": acdCfmSlmHistResultID,
@@ -4059,6 +5036,14 @@ mibBuilder.exportSymbols(
        "acdCfmSlmHistResultNbrGaps": acdCfmSlmHistResultNbrGaps,
        "acdCfmSlmHistResultLargestGap": acdCfmSlmHistResultLargestGap,
        "acdCfmSlmHistResultInstanceIndex": acdCfmSlmHistResultInstanceIndex,
+       "acdCfmSlmHistResultName": acdCfmSlmHistResultName,
+       "acdCfmConfig": acdCfmConfig,
+       "acdCfmCfgIfAssignTable": acdCfmCfgIfAssignTable,
+       "acdCfmCfgIfAssignEntry": acdCfmCfgIfAssignEntry,
+       "acdCfmCfgIfAssignRowStatus": acdCfmCfgIfAssignRowStatus,
+       "acdCfmCfgIfAssignInstIdx": acdCfmCfgIfAssignInstIdx,
+       "acdCfmCfgIfAssignIfName": acdCfmCfgIfAssignIfName,
+       "acdCfmCfgIfAssignLockAssign": acdCfmCfgIfAssignLockAssign,
        "acdCfmConformance": acdCfmConformance,
        "acdCfmCompliances": acdCfmCompliances,
        "acdCfmCompliance": acdCfmCompliance,
@@ -4082,5 +5067,7 @@ mibBuilder.exportSymbols(
        "acdCfmMepSlmStatsGroup": acdCfmMepSlmStatsGroup,
        "acdCfmSlmCfgGroup": acdCfmSlmCfgGroup,
        "acdCfmSlmResultGroup": acdCfmSlmResultGroup,
-       "acdCfmSlmHistResultGroup": acdCfmSlmHistResultGroup}
+       "acdCfmSlmHistResultGroup": acdCfmSlmHistResultGroup,
+       "acdCfmMepCfgGroup": acdCfmMepCfgGroup,
+       "acdCfmCfgIfAssignGroup": acdCfmCfgIfAssignGroup}
 )
